@@ -12,7 +12,8 @@
 #import "TagPeer.h"
 #import "GroupPeer.h"
 
-@interface StudySetViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface StudySetViewController : UITableViewController <UISearchBarDelegate>
+{
   Group *group;
   NSMutableArray *tagArray;
   NSMutableArray *subgroupArray;
@@ -21,10 +22,7 @@
   NSInteger selectedTagId;
   NSInteger groupId;
   UIActivityIndicatorView *activityIndicator;
-
-  IBOutlet UITableView *studySetTable;
- 	IBOutlet UISearchBar *searchBar;
-
+	UISearchBar *searchBar;
   UIButton *searchOverlayBtn;
   UIView *searchOverlay;
 	BOOL searching;
@@ -43,7 +41,7 @@
 @property (nonatomic, retain) UIAlertView *statusMsgBox;
 @property (nonatomic, retain) NSMutableArray *tagArray;
 @property (nonatomic, retain) NSMutableArray *subgroupArray;
-@property (nonatomic, retain) IBOutlet UITableView *studySetTable;
+@property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 
 @end

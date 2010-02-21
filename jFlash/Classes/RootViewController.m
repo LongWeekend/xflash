@@ -6,37 +6,138 @@
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
+#import "ApplicationSettings.h"
 #import "RootViewController.h"
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "HelpViewController.h"
+#import "PDColoredProgressView.h"
+#import "SplashView.h"
+#import "Appirater.h"
+#import "Constants.h"
 
+#define PROFILE_SQL_STATEMENTS 0
+#if (PROFILE_SQL_STATEMENTS)
+#import "LWESQLDebug.h"
+#endif
 
 @implementation RootViewController
 
 @synthesize delegate;
 @synthesize loadingView;
 @synthesize i;
+@synthesize tabBarController;
+
+
+- (id)init
+{
+  LWE_LOG(@"Entering Init");
+  if (self = [super init])
+  {
+    i = 0;
+    // Register listener to switch the tab bar controller when the user selects a new set
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
+  }
+	return self;
+}
 
 
 - (void) loadView
 {
-  UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	contentView.backgroundColor = [UIColor darkGrayColor];
-	self.view = contentView;
-	[contentView release];
+  LWE_LOG(@"Entering Load View");
+  UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  [appSettings initializeSettings];
   
-	UITabBarController *tabBarController;
-	tabBarController = [[UITabBarController alloc] init];
+  if (appSettings.isFirstLoad || ![appSettings databaseFileExists])
+  {
+    // Is first load, copy database splash screen
+    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
+    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
+    [tmpStr release];
+    self.view = view;
+    [view release];
+    [self performSelector:@selector(showProgressView) withObject:nil afterDelay:0.1];
+  }
+  else if ([appSettings splashIsOn])
+  {
+    // Not first load, splash screen
+    // TODO: investigate using this code instead of SplashView
+    /*
+    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
+    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
+    [tmpStr release];
+    self.view = view;
+    [view release];
+     */
+    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
+    SplashView *mySplash = [[SplashView alloc] initWithImage:[UIImage imageNamed:tmpStr]];
+    [tmpStr release];
+    mySplash.animation = SplashViewAnimationFade;
+    mySplash.delay = 3;
+    mySplash.touchAllowed = YES;
+    mySplash.delegate = nil;
+    [mySplash startSplash];
+    [mySplash release];
+    self.view = view;
+    [view release];
+    [self performSelector:@selector(doAppInit) withObject:nil afterDelay:0.1];
+  }
+  else
+  {
+    // Not first load, no splash screen
+    view.backgroundColor = [UIColor blackColor];
+    self.view = view;
+    [view release];
+    [self performSelector:@selector(doAppInit) withObject:nil afterDelay:0.1];
+  }
+}
+
+- (void) doAppInit
+{
+  LWE_LOG(@"Starting app init");
+  
+  // Get app settings singleton
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];  
+  if ([appSettings openedDatabase])
+  {
+      // We are OK to go
+#if (PROFILE_SQL_STATEMENTS)
+      NSArray* statements = [[NSArray alloc] initWithObjects:
+                             [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
+                             [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
+                             [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
+                             [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
+                             nil
+                             ];
+      [LWESQLDebug profileSQLStatements:statements];
+#endif
+  }
+  [self loadTabBar];
+}
+
+- (void) loadTabBar
+{
+  LWE_LOG(@"START Tab bar");
+//  [self.view removeFromSuperview];
+  
+	self.tabBarController = [[UITabBarController alloc] init];
+  
+  // Make room for the status bar
+  CGRect tabBarFrame;
+  tabBarFrame = CGRectMake(0, 0, 320, 460);
+	self.tabBarController.view.frame = tabBarFrame;
 
   UINavigationController *localNavigationController;
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
-  // How should we init this?
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
+  // Set the first card
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [studyViewController setBootCardId:[settings integerForKey:@"card_id"]];
   [localControllersArray addObject:studyViewController];
   [studyViewController release];
   
@@ -58,161 +159,144 @@
   [settingsViewController release];
   [localNavigationController release];
   
+  HelpViewController *helpViewController = [[HelpViewController alloc] init];
+  [localControllersArray addObject:helpViewController];
+  [helpViewController release];
   
-  /*
-
-   
-   // create the nav controller and add the root view controller as its first view
-   UINavigationController *localNavigationController;
-   localNavigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
-	
-	// add the new nav controller (with the root view controller inside it)
-	// to the array of controllers
-	[localControllersArray addObject:localNavigationController];
-	
-	// release since we are done with this for now
-	[localNavigationController release];
-	[firstViewController release];
-	
-	// setup the second view controller just like the first
-	SecondViewController *secondViewController;
-	secondViewController = [[SecondViewController alloc] initWithTabBar];
-	localNavigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
-	[localControllersArray addObject:localNavigationController];
-	[localNavigationController release];
-	[secondViewController release];
-	
-	// load up our tab bar controller with the view controllers
-	tabBarController.viewControllers = localControllersArray;
+  tabBarController.viewControllers = localControllersArray;
 	[localControllersArray release];
-	
-	// give the tabBarController view a tag so we can retrieve it later.
-	tabBarController.view.tag = 1996;
-	[self.view addSubview:tabBarController.view];
-	
-	// create the view to show without the tab bar.  For this example just assume it is the 
-	// secondViewController (the "Edit" view).  We could also do this without a nav controller
-	UINavigationController *secondNavController;
-	SecondViewController *newViewController;
-	// notice we use initWithStyle here instead of initWithTabBar
-	newViewController = [[SecondViewController alloc] initWithStyle:UITableViewStylePlain];
-	secondNavController = [[UINavigationController alloc] initWithRootViewController:newViewController];
-	secondNavController.view.tag = 1997;
-	// make the frame size the same as the one we are replacing (with the tab bar)
-	CGRect navControllerFrame;
-	navControllerFrame = CGRectMake(0, 260, 320, 200);
-	secondNavController.view.frame = navControllerFrame;
-	// hide this view initially
-	[secondNavController.view setHidden:YES];
-	// make the tab bar red - you can comment this line out if you don't like it
-	secondNavController.navigationBar.tintColor = [UIColor redColor];
-	[self.view addSubview:secondNavController.view];
-	[newViewController release];
-	
-	NSArray *arrayOfSubViews;
-	arrayOfSubViews = [self.view subviews];
-	
-	NSLog(@"There are %d subviews", [arrayOfSubViews count]);
-*/  
+
+  //[self presentModalViewController:tabBarController animated:NO];
+//  		self.view = tabBarController.view;
   
+  [self.view addSubview:tabBarController.view];
+  LWE_LOG(@"END Tab bar");
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  //launch the please rate us
+  [Appirater appLaunched];
+
 }
 
-- (id)init
+// On first load when copying the database
+- (void) showProgressView
 {
-  if (self = [super init])
-  {
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
-    [tmpStr release];
-    i = 0;
-  }
-  
-  // Get the notification for dismissing this view
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissView) name:@"databaseOpened" object:nil];
-    
-	return self;
-}
-
-- (void)startView
-{
-  // Set up the window
-	[[[[UIApplication sharedApplication] windows] objectAtIndex:0] addSubview:self.view];
-
   loadingView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-  [loadingView setTintColor:[UIColor yellowColor]]; //or any other color you like
-
+  [loadingView setTintColor:[UIColor yellowColor]];
   CGRect viewFrame = loadingView.frame;
   viewFrame.origin.x = 81;
   viewFrame.origin.y = 412;
   loadingView.frame = viewFrame;
-	[self.view addSubview:loadingView];
-  
-  // Copy the database
+
+  [self.view addSubview:loadingView];
+  [self startDatabaseCopy];
+} 
+
+- (void) startDatabaseCopy
+{
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
   [appSettings performSelectorInBackground:@selector(openedDatabase) withObject:nil];
-//  [appSettings openedDatabase];
-  [self checkIfDoneYet];
-  
+  [self continueDatabaseCopy];
 }
 
-- (void) checkIfDoneYet
+- (void) continueDatabaseCopy
 {
-  if (i < 15)
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  if (!appSettings.databaseOpenFinished)
   {
-    float k = ((float)i/15.0f);
+    float k = ((float)i/150.0f);
     LWE_LOG(@"float val : %f %d",k,i);
     [[self loadingView] setProgress:k];
     i++;
-    [self performSelector:@selector(checkIfDoneYet) withObject:nil afterDelay:0.25];
+    [self performSelector:@selector(continueDatabaseCopy) withObject:nil afterDelay:0.25];
   }
   else
   {
-    [self dismissView];
+    [[self loadingView] setProgress:1.0f];
+    [self performSelector:@selector(finishDatabaseCopy) withObject:nil afterDelay:0.1];
   }
 }
 
-- (void)dismissView
+- (void) finishDatabaseCopy
 {
-	if (loadingView) {
+	if (loadingView)
+  {
 		[loadingView removeFromSuperview];
-		[self.view removeFromSuperview];
 		[loadingView release];
 	}		
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(appInitDidComplete)])
   {
 		[delegate appInitDidComplete];
 	}
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
+  [self loadTabBar];
+  // TODO: is this necessary/important?
+//  [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
+}
+
+# pragma mark Convenience Methods for Notifications
+
+// Switches active view to study view
+- (void) switchToStudyView
+{
+  [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+}
+
+# pragma mark Delegate Methods
+
+-(void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[tabBarController viewWillAppear:animated];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	[tabBarController viewWillDisappear:animated];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[tabBarController viewDidAppear:animated];
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[tabBarController viewDidDisappear:animated];
+}
+
+# pragma mark Housekeeping
+
+- (void) applicationWillTerminate
+{
+  // Get current card from StudyViewController
+  StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+  
+  // Save current card, user, and set, update cache
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
+  [settings setInteger:appSettings.activeSet.tagId forKey:@"tag_id"];
+  [settings setInteger:appSettings.activeSet.currentIndex forKey:@"current_index"];
+  [settings setInteger:0 forKey:@"first_load"];
+  [settings setInteger:0 forKey:@"app_running"];
+  [settings synchronize];
+  
+  [[appSettings activeSet] saveCardCountCache];
 }
 
 - (void)dealloc
 {
+  // Clear the application settings singleton
+  ApplicationSettings* appSettings = [ApplicationSettings sharedApplicationSettings];
+  [[appSettings dao] release];
+  [appSettings release];
+
   [super dealloc];
 }
 

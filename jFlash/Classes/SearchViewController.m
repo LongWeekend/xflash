@@ -13,9 +13,26 @@
 @implementation SearchViewController
 @synthesize searchBar, searchArray, activityIndicator;
 
+- (id) init
+{
+  if (self = [super initWithStyle:UITableViewStylePlain])
+  {
+    // Set the tab bar controller image png to the targets
+    self.navigationItem.title = @"Word Search";
+    self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
+    self.title = @"Search";
+  }
+  return self;
+}
+
+
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  self.searchBar.delegate = self;
+  [[self tableView] setTableHeaderView:searchBar];
+  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }  
 
@@ -67,9 +84,9 @@
   _searchRan = YES;
   self.searchArray = [CardPeer searchCardsForKeyword:searchBar.text doSlowSearch:runSlowSearch];
   [activityIndicator stopAnimating];
-  [tableView reloadData];
+  [[self tableView] reloadData];
   // reset the user to the top of the tableview for new searches
-  [tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+  [[self tableView] setContentOffset:CGPointMake(0, 0) animated:NO];
 }
 
 #pragma mark Table view methods

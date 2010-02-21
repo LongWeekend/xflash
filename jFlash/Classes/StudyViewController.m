@@ -23,6 +23,17 @@
 @synthesize cardReadingLabelScrollContainerYPosInXib, cardHeadwordLabelHeightInXib, toggleReadingBtnYPosInXib, cardHeadwordLabelYPosInXib;
 
 
+- (id) init
+{
+  if (self = [super init])
+  {
+    // Set the tab bar controller image png to the targets
+    self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
+    self.title = @"Practice";
+  }
+  return self;
+}
+
 
 - (void) viewDidLoad
 {
@@ -244,7 +255,7 @@
     [self doTogglePercentCorrectBtn];
   }
   // TODO - this relies on data before that data may be ready
-  [self drawProgressBar];
+//  [self drawProgressBar];
   [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
@@ -437,7 +448,7 @@
   modalViewController.currentCard = currentCard;
 	UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
   modalNavControl.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
-  [appDelegate.tabBarController presentModalViewController:modalNavControl animated:YES];
+  [[[appDelegate rootViewController] tabBarController] presentModalViewController:modalNavControl animated:YES];
 
 	[modalNavControl release];
 	[doneBtn release];
@@ -646,7 +657,7 @@
 - (NSMutableArray*) getLevelDetails
 {
   // This is a convenience method that alloc's and sets to autorelease!
-  NSMutableArray* levelDetails = [NSMutableArray arrayWithCapacity: 6];
+  NSMutableArray* levelDetails = nil;
   NSNumber *countObject;
   int i;
   float seencount;
@@ -654,6 +665,7 @@
   // Crash protection in case we don't have the card level counts yet
   if ([[currentCardSet cardLevelCounts] count] == 6)
   {
+    levelDetails = [NSMutableArray arrayWithCapacity: 6];
     for (i = 0; i < 6; i++)
     {
       countObject =[[currentCardSet cardLevelCounts] objectAtIndex:i];
@@ -661,9 +673,9 @@
       if(i > 0)
         seencount = seencount + [[levelDetails objectAtIndex:i] floatValue];
     }
+    [levelDetails addObject:[NSNumber numberWithInt:[currentCardSet cardCount]]];  
+    [levelDetails addObject:[NSNumber numberWithFloat:seencount]];
   }
-  [levelDetails addObject:[NSNumber numberWithInt:[currentCardSet cardCount]]];  
-  [levelDetails addObject:[NSNumber numberWithFloat:seencount]];  
   return levelDetails;
 }
 
@@ -676,12 +688,15 @@
   }
 
   NSMutableArray* levelDetails = [self getLevelDetails];
-  [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];  
-  [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
-  [cardSetProgressLabel2 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:2]intValue]]];  
-  [cardSetProgressLabel3 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:3]intValue]]];  
-  [cardSetProgressLabel4 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:4]intValue]]];  
-  [cardSetProgressLabel5 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:5]intValue]]];    
+  if (levelDetails)
+  {
+    [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];  
+    [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
+    [cardSetProgressLabel2 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:2]intValue]]];  
+    [cardSetProgressLabel3 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:3]intValue]]];  
+    [cardSetProgressLabel4 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:4]intValue]]];  
+    [cardSetProgressLabel5 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:5]intValue]]];
+  }
 
   NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
   int i;
