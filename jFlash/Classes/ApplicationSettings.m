@@ -10,7 +10,7 @@
 
 
 @implementation ApplicationSettings
-@synthesize activeSet,isFirstLoad,dao;
+@synthesize activeSet,isFirstLoad,dao,databaseOpenFinished;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
 
@@ -62,6 +62,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
 
 - (BOOL) openedDatabase
 {
+  self.databaseOpenFinished = NO;
   BOOL success = NO;
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -80,19 +81,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
     LWE_LOG(@"FAIL - Could not open DB.");
   }
   [pool release];
+  // So other threads can query whether we are done or not
+  self.databaseOpenFinished = YES;
   return success;
 }
 
+
+- (void) loadActiveTag
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  int currentIndex = [settings integerForKey:@"current_index"];
+  [self setActiveSet:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
+  [[self activeSet] setCurrentIndex:currentIndex];
+}
+
+- (BOOL) splashIsOn
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if ([[settings objectForKey:APP_SPLASH] isEqualToString:SET_SPLASH_ON])
+    return YES;
+  else
+    return NO;
+}
 
 - (void) initializeSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int firstLoad = 1;
-  int cardId = [settings integerForKey:@"card_id"];
-  int currentIndex = [settings integerForKey:@"current_index"];
   if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
   int appRunning = [settings integerForKey:@"app_running"];
-
+  
   // Now tell if first load or not
   if (firstLoad)
   {
@@ -112,7 +130,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
   {
     [self setIsFirstLoad:NO];
   }
-
+  
   // Did we crash?
   if (appRunning)
   {
@@ -121,11 +139,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
   }
   else
   {
-    // Set the app to be running in the DB
+    // Set the app to be running 
     [settings setInteger:1 forKey:@"app_running"];
   }
-  [self setActiveSet:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
-  [[self activeSet] setCurrentIndex:currentIndex];
 }
 
 @end
