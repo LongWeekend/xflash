@@ -12,13 +12,27 @@
 #import "CustomCellBackgroundView.h"
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,statusMsgBox,selectedTagId,group,groupId,studySetTable,activityIndicator;
+@synthesize subgroupArray,tagArray,statusMsgBox,selectedTagId,group,groupId,activityIndicator,searchBar;
 
-- (void)loadView
+- (id) init
+{
+  if (self = [super initWithStyle:UITableViewStyleGrouped])
+  {
+    // Set the tab bar controller image png to the targets
+    self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
+    self.title = @"Study Sets";
+    self.navigationItem.title = @"Study Sets";
+  }
+  return self;
+}
+
+- (void) loadView
 {
   [super loadView];
-  //Add the search bar
-  self.studySetTable.tableHeaderView = searchBar;
+  // Add the search bar
+  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  self.searchBar.delegate = self;
+  [[self tableView] setTableHeaderView:searchBar];
   searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	searching = NO;
 }
@@ -70,13 +84,13 @@
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle: group.groupName];
+  [self setTitle: [group groupName]];
   self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   searchBar.tintColor = [ApplicationSettings getThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   searchBar.placeholder = @"Search Sets By Name";
   [self hideSearchBar];
-  [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
+  [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
 
 - (void) reloadSubgroupData
@@ -98,12 +112,12 @@
   else{
     [self setTagArray: [group getTags]];
   }
-  [studySetTable reloadData];
+  [[self tableView] reloadData];
 }
 
 - (void) hideSearchBar
 {
-  self.studySetTable.contentOffset = CGPointMake(0, searchBar.frame.size.height);
+  [[self tableView] setContentOffset:CGPointMake(0, searchBar.frame.size.height)];
 }
 
 - (void) popToRoot
@@ -139,7 +153,7 @@
   // Stop the animator
   [activityIndicator stopAnimating];
   selectedTagId = -1;
-  [[self studySetTable] reloadData];
+  [[self tableView] reloadData];
 }
 
 
@@ -158,7 +172,7 @@
 - (void)setEditing:(BOOL) editing animated:(BOOL)animated
 {
 	[super setEditing:editing animated:animated];
-	[studySetTable setEditing:editing animated:YES];
+	[[self tableView] setEditing:editing animated:YES];
 }
 
 #pragma mark UITableView methods
@@ -344,7 +358,7 @@
   else
   {
     // If they selected a group
-    StudySetViewController *subgroupController = [[[StudySetViewController alloc] initWithNibName:@"StudySetView" bundle:nil] autorelease];;
+    StudySetViewController *subgroupController = [[[StudySetViewController alloc] init] autorelease];
     subgroupController.groupId = [[[self subgroupArray] objectAtIndex:indexPath.row] groupId];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -356,7 +370,7 @@
   // This is the OK button
   if (buttonIndex == 1)
   {
-    [[self studySetTable] reloadData];
+    [[self tableView] reloadData];
     [activityIndicator startAnimating];
     [self performSelector:@selector(changeStudySet) withObject:nil afterDelay:0];
     return;
@@ -369,10 +383,10 @@
   {
     // TODO why does this crash
     self.selectedTagId = indexPath.row;
-    StudySetWordsViewController *wordsController = [[[StudySetWordsViewController alloc] initWithNibName:@"StudySetWordsView" bundle:nil] autorelease];
-    wordsController.tag = [[self tagArray] objectAtIndex:(NSInteger)indexPath.row];
-    wordsController.title = [wordsController.tag tagName];
+    StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTitle:[[[self tagArray] objectAtIndex:indexPath.row] tagName]]; 
+    [wordsController setTag:[[self tagArray] objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:wordsController animated:YES];
+    [wordsController release];
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   }
 }
@@ -394,10 +408,11 @@
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
 	
 	//When the user clicks back from teh detail view
-	if(searching) return;
+	if (searching) return;
 	
   //Add the overlay view.
-  if(searchOverlay == nil) {
+  if (searchOverlay == nil)
+  {
     searchOverlay = [[UIView alloc] init];
     searchOverlayBtn = [[UIButton alloc] init];
     [searchOverlay insertSubview:searchOverlayBtn atIndex:0];
@@ -413,17 +428,19 @@
   searchOverlayBtn.frame = frame;
 	searchOverlay.backgroundColor = [UIColor grayColor];
 	searchOverlay.alpha = 0.5;
-	[self.studySetTable insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
+	[[self tableView] insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
 	
 	searching = YES;
   [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
-	self.studySetTable.scrollEnabled = NO;
+  [[self tableView] setScrollEnabled:NO];
 	
 	//Add the done button.
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doDoneSearching:)] autorelease];
 }
 
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText
+{
   
 	// Remove all objects first.
   [tagArray removeAllObjects];
@@ -431,27 +448,30 @@
 	if([searchText length] > 0) {
     [searchOverlay removeFromSuperview];
 		searching = YES;
-		self.studySetTable.scrollEnabled = YES;
+    [[self tableView] setScrollEnabled:YES];
     [self reloadTableData];
 	}
 	else {
-		[self.studySetTable insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
+		[[self tableView] insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
 		searching = NO;
-		self.studySetTable.scrollEnabled = NO;
-    [self.studySetTable reloadData];
+    [[self tableView] setScrollEnabled:NO];
     [self reloadTableData];
 	}
 }
 
-- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
+{
   [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
 }
 
-- (void) doDoneSearching:(id)sender {
+
+- (void) doDoneSearching:(id)sender
+{
 	searchBar.text = @"";
 	[searchBar resignFirstResponder];
 	searching = NO;
-	self.studySetTable.scrollEnabled = YES;
+  [[self tableView] setScrollEnabled:YES];
 	self.navigationItem.rightBarButtonItem = nil;
   [self hideSearchBar];
   [self reloadTableData];
@@ -462,6 +482,7 @@
 	searchOverlay = nil;
 }
 
+
 - (void)dealloc
 {
   [activityIndicator release];
@@ -469,7 +490,6 @@
   [tagArray release];
   [subgroupArray release];
   [group release];
-  [studySetTable release];
   [searchBar release];
   [super dealloc];
 }

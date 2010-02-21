@@ -7,19 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SplashView.h"
-#import "Appirater.h"
 
 // Tell the compiler about user-defined classes
-@class Tag, Card, CardPeer, User, FMDatabase, RootViewController;
+@class RootViewController;
 
-@interface jFlashAppDelegate : NSObject <UIApplicationDelegate, SplashViewDelegate>
+@interface jFlashAppDelegate : NSObject <UIApplicationDelegate>
 {
 	UIWindow *window;
 	RootViewController *rootViewController;
 }
 
-- (void) switchToStudyView;
-
 @property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) RootViewController *rootViewController;
+
 @end

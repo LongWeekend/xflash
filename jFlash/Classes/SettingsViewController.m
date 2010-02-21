@@ -12,11 +12,16 @@
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
 
+
 - (SettingsViewController*) init
 {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
+    // Set the tab bar controller image png to the targets
+    self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
+    
     self.title = @"Settings";
+    self.navigationItem.title = @"Settings";
 
     // The following dictionaries contain all the mappings from actual settings to how they display on the phone
     NSArray *modeObjects = [NSArray arrayWithObjects:@"Off", @"On", nil];
@@ -73,7 +78,6 @@
 
 - (void)loadView
 {
-  self = [self init];
   [super loadView];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
 }
@@ -116,20 +120,6 @@
 - (void)reloadTableData
 {
   [[self tableView] reloadData];
-}
-
-//--------------------------------------------------------------------------
-// UITableViewCell reuseCellForIdentifier:id onTable:table usingStyle:style
-// Helper function to reduce the complexity of cellForRowAtIndexPath
-//--------------------------------------------------------------------------
-- (UITableViewCell*) reuseCellForIdentifier: (NSString*) identifier onTable:(UITableView*) lclTableView usingStyle:(UITableViewCellStyle)style
-{
-  UITableViewCell* cell = [lclTableView dequeueReusableCellWithIdentifier:identifier];
-  if (cell == nil)
-  {
-    cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:identifier] autorelease];
-  }
-  return cell;
 }
 
 
@@ -206,19 +196,19 @@
   // Handle special cases first
   if (key == APP_USER)
   {
-    cell = [self reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWE_Util_Table reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[User getUser:[settings integerForKey:APP_USER]] userNickname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == @"about")
   {
     // About section
-    cell = [self reuseCellForIdentifier:@"other" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWE_Util_Table reuseCellForIdentifier:@"other" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
   else
   {
     // Anything else
-    cell = [self reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWE_Util_Table reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[[self settingsDict] objectForKey:key] objectForKey:[settings objectForKey:key]];        
   }
   
@@ -287,7 +277,7 @@
   return [thisSectionArray objectAtIndex:2];
 }
 
-# pragma mark - End UI Table View methods
+# pragma mark - Housekeeping
 
 - (void)dealloc
 {

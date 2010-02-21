@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-  IBOutlet UITableView *tableView;
-  IBOutlet UISearchBar *searchBar;
+@interface SearchViewController : UITableViewController <UISearchBarDelegate>
+{
+  UISearchBar *searchBar;
   NSMutableArray *searchArray;
-  BOOL _searchRan;
   UIActivityIndicatorView *activityIndicator;
+  BOOL _searchRan;
 }
 
 - (void) runSearch:(BOOL) runSlowSearch;
@@ -22,7 +22,7 @@
 // convenience method for performSelecterInBackground
 - (void) runSlowSearch;
 
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) NSMutableArray *searchArray;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 

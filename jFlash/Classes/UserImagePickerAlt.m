@@ -17,7 +17,7 @@
 	if (!(self = [super init])) return self;
 	if ([UIImagePickerController isSourceTypeAvailable:SOURCETYPE])	self.sourceType = SOURCETYPE;
 	self.delegate = self;
-  self.allowsEditing = YES;
+//  self.allowsEditing = YES;
 	return self;
 }
 

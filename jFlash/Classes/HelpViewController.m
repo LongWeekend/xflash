@@ -11,8 +11,14 @@
 @implementation HelpViewController
 @synthesize baseView, htmlView;
 
-- (HelpViewController*) init {
-	self = [super init];
+- (HelpViewController*) init
+{
+  if (self = [super init])
+  {
+    // Set the tab bar controller image png to the targets
+    self.tabBarItem.image = [UIImage imageNamed:@"90-lifebuoy.png"];
+    self.title = @"Help";
+  }
   return self;
 }
 

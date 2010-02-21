@@ -14,10 +14,12 @@
 {
   Tag *activeSet;
   BOOL isFirstLoad;
+  BOOL databaseOpenFinished;
   FMDatabase *dao;
 }
 
 @property BOOL isFirstLoad;
+@property BOOL databaseOpenFinished;
 @property (nonatomic,retain) Tag *activeSet;
 @property (nonatomic, retain) FMDatabase *dao;
 
@@ -28,5 +30,7 @@
 - (BOOL) openedDatabase;
 - (BOOL) databaseFileExists;
 - (void) initializeSettings;
+- (void) loadActiveTag;
+- (BOOL) splashIsOn;
 
 @end

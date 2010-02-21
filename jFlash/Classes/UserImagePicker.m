@@ -103,7 +103,7 @@ UIImage *rotateImage(UIImage *image) {
 {
 	if (!(self = [super init])) return self;
 	if ([UIImagePickerController isSourceTypeAvailable:SOURCETYPE])	self.sourceType = SOURCETYPE;
-	self.allowsEditing = YES;
+//	self.allowsEditing = YES;
 	self.delegate = self;
 	
 	return self;
