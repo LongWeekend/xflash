@@ -86,13 +86,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
   return success;
 }
 
-
 - (void) loadActiveTag
 {
+  LWE_LOG(@"START load active tag");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int currentIndex = [settings integerForKey:@"current_index"];
   [self setActiveSet:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
   [[self activeSet] setCurrentIndex:currentIndex];
+  LWE_LOG(@"END load active tag");
 }
 
 - (BOOL) splashIsOn
