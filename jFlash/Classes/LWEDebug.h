@@ -16,5 +16,6 @@
 #if defined(APP_STORE_FINAL)
   #define LWE_LOG(format, ...)
 #else
-  #define LWE_LOG(format, ...) NSLog([NSString stringWithFormat: format, ## __VA_ARGS__]);
+  #define LWE_LOG(format, ...) NSLog(format, ## __VA_ARGS__);
+//  #define LWE_LOG(format, ...) NSLog([NSString stringWithFormat: format, ## __VA_ARGS__]);
 #endif
