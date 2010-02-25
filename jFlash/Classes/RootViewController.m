@@ -46,7 +46,7 @@
 
 - (void) loadView
 {
-  LWE_LOG(@"Entering Load View");
+  LWE_LOG(@"START Load View");
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
@@ -60,19 +60,11 @@
     [tmpStr release];
     self.view = view;
     [view release];
-    [self performSelector:@selector(showProgressView) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(showFirstLoadProgressView) withObject:nil afterDelay:0.1];
   }
   else if ([appSettings splashIsOn])
   {
     // Not first load, splash screen
-    // TODO: investigate using this code instead of SplashView
-    /*
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
-    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
-    [tmpStr release];
-    self.view = view;
-    [view release];
-     */
     NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
     SplashView *mySplash = [[SplashView alloc] initWithImage:[UIImage imageNamed:tmpStr]];
     [tmpStr release];
@@ -94,11 +86,12 @@
     [view release];
     [self performSelector:@selector(doAppInit) withObject:nil afterDelay:0.1];
   }
+  LWE_LOG(@"END Loading Splash");
 }
 
 - (void) doAppInit
 {
-  LWE_LOG(@"Starting app init");
+  LWE_LOG(@"START app init");
   
   // Get app settings singleton
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];  
@@ -107,12 +100,12 @@
       // We are OK to go
 #if (PROFILE_SQL_STATEMENTS)
       NSArray* statements = [[NSArray alloc] initWithObjects:
-                             [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
-                             [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
-                             [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
-                             [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
-                             nil
-                             ];
+           [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
+           [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
+           [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
+           [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
+           nil
+      ];
       [LWESQLDebug profileSQLStatements:statements];
 #endif
   }
@@ -122,7 +115,6 @@
 - (void) loadTabBar
 {
   LWE_LOG(@"START Tab bar");
-//  [self.view removeFromSuperview];
   
 	self.tabBarController = [[UITabBarController alloc] init];
   
@@ -133,6 +125,10 @@
 
   UINavigationController *localNavigationController;
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
+
+  // Get app settings singleton
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];  
+  [appSettings loadActiveTag];
 
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
   // Set the first card
@@ -166,10 +162,9 @@
   tabBarController.viewControllers = localControllersArray;
 	[localControllersArray release];
 
-  //[self presentModalViewController:tabBarController animated:NO];
-//  		self.view = tabBarController.view;
-  
-  [self.view addSubview:tabBarController.view];
+  // Replace active view with tabBarController's view
+  self.view = tabBarController.view;
+
   LWE_LOG(@"END Tab bar");
   
   //launch the please rate us
@@ -178,7 +173,7 @@
 }
 
 // On first load when copying the database
-- (void) showProgressView
+- (void) showFirstLoadProgressView
 {
   loadingView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
   [loadingView setTintColor:[UIColor yellowColor]];

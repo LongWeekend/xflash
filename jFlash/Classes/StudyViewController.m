@@ -37,6 +37,7 @@
 
 - (void) viewDidLoad
 {
+  LWE_LOG(@"START Study View");
   [super viewDidLoad];
   // This is called before drawing the view
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
@@ -68,7 +69,9 @@
   cardHeadwordLabelYPosInXib = tmpFrame.origin.y;
 
   // Reset child views
+  LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
 	[self resetStudySet];
+  LWE_LOG(@"END Study View");
 }
 
 #pragma mark Convenience methods
@@ -79,6 +82,7 @@
   currentCard = [CardPeer retrieveCardByPK:currentCard.cardId];
   // TODO: this will probably leak.  But if I don't do this the currentCard is unset by the time we get back here
   [currentCard retain];
+  LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetHeadword");
   [self resetKeepingCurrentCard];
 }
 
@@ -97,6 +101,7 @@
     
   [self updateTheme];
   [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]]; // TODO: This doesn't need to be called EVERY time!!
+  LWE_LOG(@"Calling prepareViewForCard FROM resetKeepingCurrentCard");
 	[self prepareViewForCard:currentCard];
 }
 
@@ -132,6 +137,7 @@
       }
    }
   [self setCurrentCard: card];
+  LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
   [self resetKeepingCurrentCard];
   
   //tells the progress bar to redraw
@@ -142,6 +148,7 @@
 // Prepare the view for the current card
 - (void) prepareViewForCard:(Card*)card 
 {
+  LWE_LOG(@"START prepareViewForCard");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   // Update data displayed by the card
   meaningRevealed = NO;
@@ -254,9 +261,11 @@
   if(!percentCorrectVisible && !self.isBrowseMode){
     [self doTogglePercentCorrectBtn];
   }
+
   // TODO - this relies on data before that data may be ready
-//  [self drawProgressBar];
+  [self drawProgressBar];
   [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
+  LWE_LOG(@"END prepareViewForCard");
 }
 
 
@@ -292,6 +301,7 @@
 {
   if (card != nil)
   {
+    LWE_LOG(@"Calling prepareViewForCard FROM doChangeCard");
     [self prepareViewForCard:card];
     [self doCardTransition:(NSString *)kCATransitionPush direction:(NSString*)direction];
   }

@@ -33,7 +33,7 @@
 - (void) continueDatabaseCopy;
 - (void) startDatabaseCopy;
 - (void) finishDatabaseCopy;
-- (void) showProgressView;
+- (void) showFirstLoadProgressView;
 - (void) loadTabBar;
 
 @end
