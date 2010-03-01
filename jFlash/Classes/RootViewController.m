@@ -126,10 +126,6 @@
   UINavigationController *localNavigationController;
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
-  // Get app settings singleton
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];  
-  [appSettings loadActiveTag];
-
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
   // Set the first card
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -276,13 +272,13 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-  [settings setInteger:appSettings.activeSet.tagId forKey:@"tag_id"];
-  [settings setInteger:appSettings.activeSet.currentIndex forKey:@"current_index"];
+  [settings setInteger:appSettings.activeTag.tagId forKey:@"tag_id"];
+  [settings setInteger:appSettings.activeTag.currentIndex forKey:@"current_index"];
   [settings setInteger:0 forKey:@"first_load"];
   [settings setInteger:0 forKey:@"app_running"];
   [settings synchronize];
   
-  [[appSettings activeSet] saveCardCountCache];
+  [[appSettings activeTag] saveCardCountCache];
 }
 
 - (void)dealloc

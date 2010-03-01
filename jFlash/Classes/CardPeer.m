@@ -264,18 +264,15 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
   NSMutableArray *cardIdList = [[[NSMutableArray alloc] init] autorelease];
-  // Original
+  for(int i = 0; i < 6; i++)
+  {
+    [cardIdList addObject:[[[NSMutableArray alloc] init] autorelease]];
+  }
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
-  // Variants
-//  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE l.tag_id = '%d' AND u.user_id = '%d' AND u.card_id = l.card_id",tagId,[settings integerForKey:@"user_id"]];
   FMResultSet *rs = [[appSettings dao] executeQuery:sql];
   while ([rs next])
   {
-    Card* tmpCard = [[Card alloc] init];
-    [tmpCard setCardId:[rs intForColumn:@"card_id"]];
-    [tmpCard setLevelId:[rs intForColumn:@"card_level"]];
-    [cardIdList addObject: tmpCard];
-    [tmpCard release];
+    [[cardIdList objectAtIndex:[rs intForColumn:@"card_level"]] addObject:[NSNumber numberWithInt:[rs intForColumn:@"card_level"]]];
   }
   [rs close];
   [sql release];

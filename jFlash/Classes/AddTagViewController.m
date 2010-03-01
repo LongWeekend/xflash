@@ -241,11 +241,11 @@ enum EntrySectionRows
   {
     BOOL remove = YES;
     // We have special things to check if we are modifying the existing active set
-    if (tmpTag.tagId == [[appSettings activeSet] tagId])
+    if (tmpTag.tagId == [[appSettings activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
       // Is it the last tag in this set?
-      int tmpInt = [[appSettings activeSet] cardCount];
+      int tmpInt = [[appSettings activeTag] cardCount];
       LWE_LOG(@"Num cards: %d",tmpInt);
       if (tmpInt <= 1)
       {
@@ -255,7 +255,7 @@ enum EntrySectionRows
         remove = NO;
       }
       // Success - but update counts
-      if (remove) [[appSettings activeSet] setCardCount:([[appSettings activeSet] cardCount]-1)];
+      if (remove) [[appSettings activeTag] setCardCount:([[appSettings activeTag] cardCount]-1)];
     }
     // Remove tag
     if (remove)
@@ -266,10 +266,10 @@ enum EntrySectionRows
   }
   else
   {
-    if (tmpTag.tagId == [[appSettings activeSet] tagId])
+    if (tmpTag.tagId == [[appSettings activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
-      [[appSettings activeSet] setCardCount:([[appSettings activeSet] cardCount]+1)];
+      [[appSettings activeTag] setCardCount:([[appSettings activeTag] cardCount]+1)];
     }
     [TagPeer subscribe:cardId tagId:tmpTag.tagId];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
