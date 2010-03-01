@@ -104,7 +104,7 @@
   //sql2 = [[NSString alloc] initWithFormat: @"INSERT OR REPLACE INTO tag_user_card_levels SET card_level_%@_count = %@", oldLevel, oldLevelCount, nextLevel, nextLevelCount];
   [appSettings.dao executeUpdate:sql];
   [sql release];
-  [[appSettings activeSet] updateLevelCounts:card nextLevel:nextLevel];
+  [[appSettings activeTag] updateLevelCounts:card nextLevel:nextLevel];
 }
 
 

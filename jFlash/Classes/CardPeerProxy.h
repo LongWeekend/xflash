@@ -24,7 +24,6 @@
 - (Card*) retrieveCardForLevelNull: (NSInteger) randomOffset;
 - (Card*) getRandomCard;
 - (NSInteger) calculateNextCardLevel;
-- (void) cacheCardLevelCounts;
 - (NSMutableArray*) cacheCardLevelCountsWithCards:(NSMutableArray*) cards;
 - (void) replenishUnseenCache;
 - (void) replenishCardCacheForLevel: (NSNumber*) levelId;

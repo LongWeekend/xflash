@@ -10,7 +10,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, cards, currentIndex, cardPeerProxy;
+@synthesize tagId, tagName, tagEditable, tagDescription, cards, currentIndex, cardPeerProxy, cardIds;
 
 - (id) init
 {
@@ -34,7 +34,7 @@
 
 - (void) cacheCardLevelCounts
 {
-  [[self cardPeerProxy] cacheCardLevelCountsWithCards:cards];
+  
 }
 
 
@@ -42,11 +42,26 @@
 // void populateCards
 // sets all of the cards for a tag to this tag's cards array
 //--------------------------------------------------------------------------
+// TODO remove me
 - (void) populateCards
 {
   LWE_LOG(@"Began populating cards");
   [self setCards:[CardPeer retrieveCardSetIds:[self tagId]]];
   LWE_LOG(@"Done populating cards");
+}
+
+- (void) populateCardIds
+{
+  LWE_LOG(@"Began populating card ids and setting counts");
+  NSNumber *count;
+  [self setCardIds:[CardPeer retrieveCardSetIds:self.tagId]];
+	for (int i = 0; i < 6; i++)
+   {
+     count = [[NSNumber alloc] initWithInt:[[[self cardIds] objectAtIndex:i] count]];
+     [[self cardLevelCounts] addObject:count];
+     [count release];
+   }  
+  LWE_LOG(@"End populating card ids and setting counts");
 }
 
 
@@ -184,6 +199,7 @@
   [self setTagEditable:     [rs intForColumn:@"editable"]];
   [[self cardPeerProxy] setCardCount: [rs intForColumn:@"count"]];
   [[self cardPeerProxy] setTagId: [rs intForColumn:@"tag_id"]];
+  
 }
 //--------------------------------------------------------------------------
 

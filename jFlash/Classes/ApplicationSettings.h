@@ -12,7 +12,8 @@
 
 @interface ApplicationSettings : NSObject
 {
-  Tag *activeSet;
+  Tag *activeTag;
+  Tag *_activeTag;
   BOOL isFirstLoad;
   BOOL databaseOpenFinished;
   FMDatabase *dao;
@@ -20,7 +21,6 @@
 
 @property BOOL isFirstLoad;
 @property BOOL databaseOpenFinished;
-@property (nonatomic,retain) Tag *activeSet;
 @property (nonatomic, retain) FMDatabase *dao;
 
 + (ApplicationSettings *)sharedApplicationSettings;
@@ -32,5 +32,9 @@
 - (void) initializeSettings;
 - (void) loadActiveTag;
 - (BOOL) splashIsOn;
+// getter for active tag.  Loads the NSUserDefault tag from the db if not loaded yet.
+- (Tag *) activeTag;
+// setter for active tag.  Sets the NSUserDefault for the tag id.
+- (void) setActiveTag: (Tag*) tag;
 
 @end

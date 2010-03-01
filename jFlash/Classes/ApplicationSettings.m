@@ -10,9 +10,40 @@
 
 
 @implementation ApplicationSettings
-@synthesize activeSet,isFirstLoad,dao,databaseOpenFinished;
+@synthesize isFirstLoad,dao,databaseOpenFinished;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
+
+- (void) setActiveTag: (Tag*) tag
+{
+  [tag retain];
+  [_activeTag release];
+  _activeTag = tag;
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:tag.tagId forKey:@"tag_id"];
+  
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_QUIZ])
+  {
+     // Get new card count cache
+     [_activeTag populateCardIds];
+     // Get a cache of unseen cards
+     [_activeTag replenishUnseenCache];
+  }
+}
+
+- (Tag *) activeTag
+{
+  if(_activeTag == nil)
+  {
+     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+     [self setActiveTag:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
+  }
+  
+  id tag;
+  tag = [[_activeTag retain] autorelease];
+  return tag;
+}
 
 + (UIColor*) getThemeTintColor
 {
@@ -91,8 +122,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
   LWE_LOG(@"START load active tag");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int currentIndex = [settings integerForKey:@"current_index"];
-  [self setActiveSet:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
-  [[self activeSet] setCurrentIndex:currentIndex];
+  [self setActiveTag:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
+  [[self activeTag] setCurrentIndex:currentIndex];
   LWE_LOG(@"END load active tag");
 }
 

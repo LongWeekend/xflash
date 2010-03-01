@@ -16,12 +16,14 @@
   NSInteger tagEditable;
 	NSString *tagDescription;
 	NSMutableArray *cards;
+  NSMutableArray *cardIds;
 	NSInteger currentIndex;
   CardPeerProxy *cardPeerProxy;
 }
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) populateCards;
+- (void) populateCardIds;
 - (Card*) getRandomCard;
 - (Card*) getNextCard;
 - (Card*) getPrevCard;
@@ -37,6 +39,7 @@
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
 @property (nonatomic, retain) NSMutableArray *cards;
+@property (nonatomic, retain) NSMutableArray *cardIds;
 @property (nonatomic, retain) CardPeerProxy *cardPeerProxy;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;

@@ -109,7 +109,7 @@
 {
   // Get active set/tag
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  currentCardSet = [appSettings activeSet];
+  currentCardSet = [appSettings activeTag];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
   numRight = 0;
@@ -118,7 +118,6 @@
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   
   Card* card;
-  [currentCardSet populateCards];
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
    {
      card = [[currentCardSet cards] objectAtIndex:[currentCardSet currentIndex]];

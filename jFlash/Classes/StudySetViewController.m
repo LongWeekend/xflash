@@ -127,28 +127,8 @@
 
 - (void) changeStudySet
 {
-  // Save the cache for the current set
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  [[appSettings activeSet] saveCardCountCache];
-  
-        // MARK // THIS IS NOT NEEDED IF WE CALL loadActiveTag methinks
-        // MARK // [appSettings setActiveSet:[[self tagArray] objectAtIndex:self.selectedTagId]];
-
-        // MARK // Reset settings for the active set
-        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        [settings setInteger:self.selectedTagId forKey:@"tag_id"];
-
-        // Reload active tag
-        [appSettings loadActiveTag];
-
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_QUIZ])
-  {
-    // Get new card count cache
-    [[appSettings activeSet] cacheCardLevelCounts];
-    
-    // Get a cache of unseen cards
-    [[appSettings activeSet] replenishUnseenCache];
-  }
+  [appSettings setActiveTag:[[self tagArray] objectAtIndex:self.selectedTagId]];
   
   // Post notification to switch active tab
   [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
