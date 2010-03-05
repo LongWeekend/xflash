@@ -34,6 +34,7 @@
   self.searchBar.delegate = self;
   [[self tableView] setTableHeaderView:searchBar];
   searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	searching = NO;
 }
 
