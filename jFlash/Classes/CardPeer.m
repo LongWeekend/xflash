@@ -14,9 +14,29 @@
   FMResultSet *rs;
 
   if (!slowSearch){
-    // Do the search using SQLite FTS
-    sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.content MATCH '%@' ORDER BY csc.ptag DESC, c.headword LIMIT 200",keyword];
-        //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.content MATCH '%@' AND csc.ptag = 1 LIMIT 150",keyword];
+    int queryLimit = 100;
+    int queryLimit2;
+
+    // Do the search using SQLite FTS (PTAG results)
+    //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 1 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit];
+    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) ORDER BY headword", keyword, queryLimit];
+    rs = [appSettings.dao executeQuery:sql];
+    int cardListCount = 0;
+    while ([rs next]) {
+      cardListCount++;
+      Card* tmpCard = [[[Card alloc] init] autorelease];
+      [tmpCard hydrate:rs];
+      [cardList addObject: tmpCard];
+    }
+
+    if(cardListCount < queryLimit)
+      queryLimit2 = (queryLimit-cardListCount)+queryLimit;
+    else
+      queryLimit2 = queryLimit;
+      
+    // Do the search using SQLite FTS (NON-PTAG results)
+    //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 0 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit2];
+    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) ORDER BY headword", keyword, queryLimit2];
     rs = [appSettings.dao executeQuery:sql];
     while ([rs next]) {
       Card* tmpCard = [[[Card alloc] init] autorelease];

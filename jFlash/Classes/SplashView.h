@@ -47,7 +47,7 @@ typedef enum {
 @property BOOL isFinishing;
 
 - (id)initWithImage:(UIImage *)screenImage;
-- (void)startSplash;
+- (void)startSplash:(BOOL)withDelay;
 - (void)dismissSplash;
 - (void)dismissSplashFinish;
 

@@ -34,12 +34,13 @@
 	return self;
 }
 
-- (void)startSplash {
+- (void)startSplash:(BOOL)withDelay {
 
 	[[[[UIApplication sharedApplication] windows] objectAtIndex:0] addSubview:self];
 	splashImage = [[UIImageView alloc] initWithImage:self.image];
 	[self addSubview:splashImage];
-	[self performSelector:@selector(dismissSplash) withObject:self afterDelay:self.delay];
+  if(withDelay)
+    [self performSelector:@selector(dismissSplash) withObject:self afterDelay:self.delay];
 }
 
 - (void)dismissSplash {

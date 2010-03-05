@@ -72,7 +72,7 @@
     mySplash.delay = 3;
     mySplash.touchAllowed = YES;
     mySplash.delegate = nil;
-    [mySplash startSplash];
+    [mySplash startSplash:YES];
     [mySplash release];
     self.view = view;
     [view release];
