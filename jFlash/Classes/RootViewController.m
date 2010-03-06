@@ -122,13 +122,11 @@
   CGRect tabBarFrame;
   tabBarFrame = CGRectMake(0, 0, 320, 460);
 	self.tabBarController.view.frame = tabBarFrame;
-
   UINavigationController *localNavigationController;
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
-  // Set the first card
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; // Set the first card
   [studyViewController setBootCardId:[settings integerForKey:@"card_id"]];
   [localControllersArray addObject:studyViewController];
   [studyViewController release];

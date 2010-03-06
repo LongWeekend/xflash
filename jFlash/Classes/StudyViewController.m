@@ -35,6 +35,19 @@
 }
 
 
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+
+  // Show a UIAlert if this is the first time the user has launched the app.
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  if (appSettings.isFirstLoad) {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];    
+  }
+}
+
 - (void) viewDidLoad
 {
   LWE_LOG(@"START Study View");

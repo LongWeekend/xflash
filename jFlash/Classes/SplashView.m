@@ -21,8 +21,8 @@
 @synthesize isFinishing;
 @synthesize animationDelay;
 
-- (id)initWithImage:(UIImage *)screenImage {
-
+- (id)initWithImage:(UIImage *)screenImage 
+{
 	if (self = [super initWithFrame:[[UIScreen mainScreen] applicationFrame]]) {
 		self.image = screenImage;
 		self.delay = 2;
@@ -34,8 +34,8 @@
 	return self;
 }
 
-- (void)startSplash:(BOOL)withDelay {
-
+- (void)startSplash:(BOOL)withDelay 
+{
 	[[[[UIApplication sharedApplication] windows] objectAtIndex:0] addSubview:self];
 	splashImage = [[UIImageView alloc] initWithImage:self.image];
 	[self addSubview:splashImage];
@@ -43,8 +43,8 @@
     [self performSelector:@selector(dismissSplash) withObject:self afterDelay:self.delay];
 }
 
-- (void)dismissSplash {
-
+- (void)dismissSplash
+{
 	if (self.isFinishing || self.animation == SplashViewAnimationNone) {
 		[self dismissSplashFinish];
 	} else if (self.animation == SplashViewAnimationSlideLeft) {
@@ -52,9 +52,7 @@
 		animSplash.duration = self.animationDelay;
 		animSplash.removedOnCompletion = NO;
 		animSplash.fillMode = kCAFillModeForwards;
-		animSplash.toValue = [NSValue valueWithCATransform3D:
-							  CATransform3DMakeAffineTransform
-							  (CGAffineTransformMakeTranslation(-320, 0))];
+		animSplash.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeAffineTransform (CGAffineTransformMakeTranslation(-320, 0))];
 		animSplash.delegate = self;
 		[self.layer addAnimation:animSplash forKey:@"animateTransform"];
 	} else if (self.animation == SplashViewAnimationFade) {
@@ -69,13 +67,13 @@
 	self.isFinishing = YES;
 }
 
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
 	[self dismissSplashFinish];
 }
 
-- (void)dismissSplashFinish {
-
+- (void)dismissSplashFinish
+{
 	if (splashImage) {
 		[splashImage removeFromSuperview];
 		[self removeFromSuperview];
@@ -84,28 +82,18 @@
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(splashIsDone)]) {
 		[delegate splashIsDone];
 	}
-  
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  // Show a UIAlert if this is the first time the user has launched the app.
-  if (appSettings.isFirstLoad) {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];    
-  }
-  appSettings.isFirstLoad = NO;
-	
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
+{
 	if (self.touchAllowed) {
 		[self dismissSplash];
 	}
 }
 
-- (void)dealloc {
-    [super dealloc];
+- (void)dealloc 
+{
+  [super dealloc];
 }
-
 
 @end
