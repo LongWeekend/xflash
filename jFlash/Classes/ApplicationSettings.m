@@ -157,6 +157,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
     // these are integers so we can't use the array loop above
     [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
     [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
+    
+    // disable first load messsage if we get this far
+    [settings setInteger:0 forKey:@"first_load"];
   }
   else
   {
