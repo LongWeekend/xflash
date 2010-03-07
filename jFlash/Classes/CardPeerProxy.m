@@ -269,13 +269,13 @@
 {
   if ([cardLevelCounts count] == 0) return;
   NSString *sql = nil;
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	int j = 0;
   for (int i = 0; i < 6; i++)
   {
     j = [[cardLevelCounts objectAtIndex:i] intValue];
     sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO tag_level_count_cache (tag_id,user_id,card_level,count) VALUES ('%d','%d','%d','%d')",tagId,userId,i,j];
-    [[appSettings dao] executeUpdate:sql];
+    [[db dao] executeUpdate:sql];
     [sql release];
   }  
 }

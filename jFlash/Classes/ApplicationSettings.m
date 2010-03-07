@@ -10,7 +10,7 @@
 
 
 @implementation ApplicationSettings
-@synthesize isFirstLoad,dao,databaseOpenFinished;
+@synthesize isFirstLoad;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
 
@@ -76,47 +76,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
 }
 
 
-- (BOOL) databaseFileExists
-{
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [paths objectAtIndex:0];
-  NSString *path = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];	
-  if(![fileManager fileExistsAtPath:path])
-  {
-    // This means it is a fresh install
-    LWE_LOG(@"No database located at normal location, must be fresh install.");
-    return NO;
-  }
-  return YES;
-}
-
-- (BOOL) openedDatabase
-{
-  self.databaseOpenFinished = NO;
-  BOOL success = NO;
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [paths objectAtIndex:0];
-  NSString *path = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];	
-  self.dao = [FMDatabase databaseWithPath:path];
-  self.dao.logsErrors = YES;
-  self.dao.traceExecution = YES;
-  if ([self.dao open])
-  {
-    success = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"databaseIsOpen" object:self];
-  }
-  else
-  {
-    LWE_LOG(@"FAIL - Could not open DB.");
-  }
-  [pool release];
-  // So other threads can query whether we are done or not
-  self.databaseOpenFinished = YES;
-  return success;
-}
-
 - (void) loadActiveTag
 {
   LWE_LOG(@"START load active tag");
@@ -170,7 +129,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
   if (appRunning)
   {
     LWE_LOG(@"Appear to be recovering from a crash, we should rebuild indexes for caches here");
-    //[[appSettings dao] executeUpdate:@"DELETE FROM tag_level_count_cache"];
+    //[[db dao] executeUpdate:@"DELETE FROM tag_level_count_cache"];
   }
   else
   {

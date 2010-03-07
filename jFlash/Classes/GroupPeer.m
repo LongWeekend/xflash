@@ -12,9 +12,9 @@
 
 + (Group*) retrieveGroupById: (NSInteger)groupId
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE group_id = %d LIMIT 1",groupId];
-	FMResultSet *rs = [[appSettings dao] executeQuery:sql];
+	FMResultSet *rs = [[db dao] executeQuery:sql];
   Group* tmpGroup = [[[Group alloc] init] autorelease];
 	while ([rs next]) {
 		[tmpGroup hydrate:rs];
@@ -26,10 +26,10 @@
 
 +(NSMutableArray*) retrieveGroupsByOwner: (NSInteger)ownerId
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSMutableArray* groups = [[[NSMutableArray alloc] init] autorelease];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE owner_id = '%d' ORDER BY group_name ASC",ownerId];
-	FMResultSet *rs = [[appSettings dao] executeQuery:sql];
+	FMResultSet *rs = [[db dao] executeQuery:sql];
 	while ([rs next]) {
 		Group* tmpGroup = [[[Group alloc] init] autorelease];
 		[tmpGroup hydrate:rs];

@@ -15,20 +15,14 @@
   Tag *activeTag;
   Tag *_activeTag;
   BOOL isFirstLoad;
-  BOOL databaseOpenFinished;
-  FMDatabase *dao;
 }
 
 @property BOOL isFirstLoad;
-@property BOOL databaseOpenFinished;
-@property (nonatomic, retain) FMDatabase *dao;
 
 + (ApplicationSettings *)sharedApplicationSettings;
 
 + (UIColor*) getThemeTintColor;
 + (NSString*) getThemeName;
-- (BOOL) openedDatabase;
-- (BOOL) databaseFileExists;
 - (void) initializeSettings;
 - (void) loadActiveTag;
 - (BOOL) splashIsOn;
