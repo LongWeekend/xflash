@@ -84,7 +84,7 @@
 
 - (void)viewWillAppear: (BOOL)animated
 {
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Rate Us" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
@@ -96,7 +96,7 @@
 // Only re-load the set if settings were changed, otherwise there is no need to do anything
 - (void) viewWillDisappear: (BOOL)animated
 {
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   if (settingsChanged)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"settingsWereChanged" object:self];

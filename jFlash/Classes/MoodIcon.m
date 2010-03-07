@@ -24,7 +24,7 @@
   int loopCount = 0;
   //  bool shouldAnimate = NO;
   //NSArray* transitionHHAnimationArray;
-  NSString* themeName = [ApplicationSettings getThemeName];
+  NSString* themeName = [CurrentState getThemeName];
   
   // TODO : setting the labels doesn't fit in the text sbubble.
   [percentCorrectLabel setText:[NSString stringWithFormat:@"%.0f%%",tmpRatio]];

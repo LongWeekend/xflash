@@ -1,18 +1,18 @@
 //
-//  ApplicationSettings.m
+//  CurrentState.m
 //  jFlash
 //
 //  Created by Mark Makdad on 7/12/09.
 //  Copyright 2009 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "ApplicationSettings.h"
+#import "CurrentState.h"
 
 
-@implementation ApplicationSettings
+@implementation CurrentState
 @synthesize isFirstLoad;
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationSettings);
+SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 - (void) setActiveTag: (Tag*) tag
 {

@@ -39,7 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setSeparatorColor:[UIColor lightGrayColor]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
@@ -91,7 +91,7 @@
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[usersArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
-    [bgView setFillColor:[ApplicationSettings getThemeTintColor]];
+    [bgView setFillColor:[CurrentState getThemeTintColor]];
     cell.textLabel.backgroundColor = [ UIColor clearColor ];
     cell.textLabel.textColor = [ UIColor whiteColor ];
     cell.backgroundView = bgView;

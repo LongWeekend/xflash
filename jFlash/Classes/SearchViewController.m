@@ -42,8 +42,8 @@
 {
   [super viewWillAppear:animated];
   _searchRan = NO;
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
-  searchBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  searchBar.tintColor = [CurrentState getThemeTintColor];
   // Show keyboard if no results TODO
   if (searchArray == nil || [searchArray count] == 0)
   {

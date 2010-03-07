@@ -40,8 +40,9 @@
   [super viewWillAppear:animated];
 
   // Show a UIAlert if this is the first time the user has launched the app.
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  if (appSettings.isFirstLoad) {
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  if (appSettings.isFirstLoad)
+  {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     [alertView release];    
@@ -121,7 +122,7 @@
 - (void) resetStudySet
 {
   // Get active set/tag
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   currentCardSet = [appSettings activeTag];
   
   numRight = 0;
@@ -452,7 +453,7 @@
 	modalViewController.navigationItem.title = @"Add Word To Sets";
   modalViewController.currentCard = currentCard;
 	UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-  modalNavControl.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  modalNavControl.navigationBar.tintColor = [CurrentState getThemeTintColor];
   [[[appDelegate rootViewController] tabBarController] presentModalViewController:modalNavControl animated:YES];
 
 	[modalNavControl release];
@@ -648,7 +649,7 @@
 
 - (void) updateTheme
 {
-  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[ApplicationSettings getThemeName]];
+  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[CurrentState getThemeName]];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]]];
   float tmpRatio;
   if(numViewed == 0)

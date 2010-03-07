@@ -42,7 +42,7 @@ enum EntrySectionRows
 {
   [super viewWillAppear:animated];
   self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [studySetTable setBackgroundColor: [UIColor clearColor]];
 }
@@ -227,7 +227,7 @@ enum EntrySectionRows
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if(indexPath.section == kEntrySection) return; // do nothing for the entry section
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   Tag* tmpTag;
   if (indexPath.section == kMyTagsSection)
   {

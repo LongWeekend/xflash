@@ -41,7 +41,7 @@
 - (void)viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   setNameTextfield.backgroundColor = [UIColor whiteColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }

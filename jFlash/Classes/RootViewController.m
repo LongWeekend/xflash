@@ -6,7 +6,7 @@
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "ApplicationSettings.h"
+#import "CurrentState.h"
 #import "RootViewController.h"
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
@@ -49,14 +49,14 @@
   LWE_LOG(@"START Load View");
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [appSettings initializeSettings];
   
   if (appSettings.isFirstLoad || ![db databaseFileExists])
   {
     // Is first load, copy database splash screen
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
+    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
     view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
     [tmpStr release];
     self.view = view;
@@ -66,7 +66,7 @@
   else if ([appSettings splashIsOn])
   {
     // Not first load, splash screen
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
+    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
     SplashView *mySplash = [[SplashView alloc] initWithImage:[UIImage imageNamed:tmpStr]];
     [tmpStr release];
     mySplash.animation = SplashViewAnimationFade;
@@ -119,7 +119,7 @@
   
 	self.tabBarController = [[UITabBarController alloc] init];
   
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings loadActiveTag];
   
   // Make room for the status bar
@@ -268,7 +268,7 @@
   StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
   
   // Save current card, user, and set, update cache
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
@@ -284,7 +284,7 @@
 - (void)dealloc
 {
   // Clear the application settings singleton
-  ApplicationSettings* appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState* appSettings = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db release];
   [appSettings release];
