@@ -8,7 +8,7 @@
 //--------------------------------------------------------------------------
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   NSString* sql;
   FMResultSet *rs;
@@ -20,7 +20,7 @@
     // Do the search using SQLite FTS (PTAG results)
     //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 1 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit];
     sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) ORDER BY headword", keyword, queryLimit];
-    rs = [appSettings.dao executeQuery:sql];
+    rs = [[db dao] executeQuery:sql];
     int cardListCount = 0;
     while ([rs next]) {
       cardListCount++;
@@ -37,7 +37,7 @@
     // Do the search using SQLite FTS (NON-PTAG results)
     //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 0 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit2];
     sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) ORDER BY headword", keyword, queryLimit2];
-    rs = [appSettings.dao executeQuery:sql];
+    rs = [[db dao] executeQuery:sql];
     while ([rs next]) {
       Card* tmpCard = [[[Card alloc] init] autorelease];
       [tmpCard hydrate:rs];
@@ -49,7 +49,7 @@
   {
     // Do slow substring match (w/ LIKE)
     sql = [NSString stringWithFormat:@"SELECT card_id,headword,reading,meaning,romaji,0 as card_level,0 as user_id FROM cards WHERE headword LIKE '%%%@%%' OR headword_en LIKE '%%%@%%' OR reading LIKE '%%%@%%' ORDER BY headword LIMIT 100",keyword,keyword,keyword];
-    rs = [appSettings.dao executeQuery:sql];
+    rs = [[db dao] executeQuery:sql];
     while ([rs next])
     {
       Card* tmpCard = [[[Card alloc] init] autorelease];
@@ -69,9 +69,9 @@
 //--------------------------------------------------------------------------
 + (NSString*) retrieveCsvCardIdsForTag: (NSInteger)setId
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",setId];
-	FMResultSet *rs = [appSettings.dao executeQuery:sql];
+	FMResultSet *rs = [[db dao] executeQuery:sql];
 	NSString *outputStr = [[[NSString alloc] init] autorelease];
   int cardId;
   BOOL firstTime = YES;
@@ -100,14 +100,14 @@
 + (Card*) retrieveCardWithSQL: (NSString*) sql
 {
   int i = 0;
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  while (appSettings.dao.inUse && i < 5)
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  while ([db dao].inUse && i < 5)
   {
     NSLog(@"Database is busy %d",i);
     usleep(100);
     i++;
   }
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   Card* tmpCard = [[[Card alloc] init] autorelease];
   while ([rs next])
   {
@@ -138,10 +138,10 @@
 //--------------------------------------------------------------------------
 + (Card*) hydrateCardByPK: (Card*) card
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, user_history u WHERE c.card_id = u.card_id AND u.user_id = '%d' AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
     [card setHeadword:[rs stringForColumn:@"headword"]];
@@ -162,7 +162,7 @@
 //--------------------------------------------------------------------------
 + (Card*) retrieveCardByLevel: (NSInteger)levelId setId: (NSInteger)setId withRandom: (NSInteger) randomNum
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   Card *tmpCard;
 	NSString *sql, *sql2;
@@ -171,7 +171,7 @@
   int cardLevel = 0;
   int wrongCount = 0;
   int rightCount = 0;
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
     cardId     = [rs intForColumn:@"card_id"];
@@ -181,7 +181,7 @@
   }
   [rs close];
   sql2 =  [[NSString alloc] initWithFormat:@"SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
-  FMResultSet *rs2 = [appSettings.dao executeQuery:sql2];
+  FMResultSet *rs2 = [[db dao] executeQuery:sql2];
   tmpCard = [[[Card alloc] init] autorelease];
   while ([rs2 next])
   {
@@ -199,7 +199,7 @@
 //--------------------------------------------------------------------------
 + (NSInteger) retrieveCardCountByLevel: (NSInteger)setId levelId:(NSInteger)levelId
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   // Variable decs
   int i = -1;
@@ -208,7 +208,7 @@
 
   // Check the cache table
   sql = [[NSString alloc] initWithFormat:@"SELECT count FROM tag_level_count_cache WHERE tag_id = '%d' AND user_id = '%d' AND card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-  rs = [[appSettings dao] executeQuery:sql];
+  rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
     i = [rs intForColumn:@"count"];
@@ -222,7 +222,7 @@
     
     NSLog(@"START NORMAL ----------------------------------------");
     sql = [[NSString alloc] initWithFormat:@"SELECT COUNT(l.card_id) as card_count FROM card_tag_link l, user_history u WHERE l.card_id = u.card_id AND l.tag_id = '%d' AND u.user_id = '%d' AND u.card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-    rs = [[appSettings dao] executeQuery:sql];
+    rs = [[db dao] executeQuery:sql];
     while ([rs next])
     {
       i = [rs intForColumn:@"card_count"];
@@ -233,7 +233,7 @@
     /*
     NSLog(@"START SUBSELECT ----------------------------------------");
     sql = [[NSString alloc] initWithFormat:@"SELECT COUNT(card_id) as card_count FROM user_history WHERE card_id IN (SELECT card_id from card_tag_link WHERE tag_id = '%d') AND user_id = '%d' AND card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-    rs = [[appSettings dao] executeQuery:sql];
+    rs = [[db dao] executeQuery:sql];
     while ([rs next])
      {
        i = [rs intForColumn:@"card_count"];
@@ -245,7 +245,7 @@
     
     // Finally, cache the result
     sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO tag_level_count_cache (tag_id,user_id,card_level,count) VALUES ('%d','%d','%d','%d')",setId,[settings integerForKey:@"user_id"],levelId,i];
-    [[appSettings dao] executeUpdate:sql];
+    [[db dao] executeUpdate:sql];
     [sql release];
   }
   return i;    
@@ -258,8 +258,8 @@
 //--------------------------------------------------------------------------
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   int i = 0;
   while ([rs next])
@@ -282,14 +282,14 @@
 + (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardIdList = [[[NSMutableArray alloc] init] autorelease];
   for(int i = 0; i < 6; i++)
   {
     [cardIdList addObject:[[[NSMutableArray alloc] init] autorelease]];
   }
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
-  FMResultSet *rs = [[appSettings dao] executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
     [[cardIdList objectAtIndex:[rs intForColumn:@"card_level"]] addObject:[NSNumber numberWithInt:[rs intForColumn:@"card_level"]]];

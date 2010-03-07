@@ -50,9 +50,10 @@
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [appSettings initializeSettings];
   
-  if (appSettings.isFirstLoad || ![appSettings databaseFileExists])
+  if (appSettings.isFirstLoad || ![db databaseFileExists])
   {
     // Is first load, copy database splash screen
     NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[ApplicationSettings getThemeName]];
@@ -94,8 +95,8 @@
   LWE_LOG(@"START app init");
   
   // Get app settings singleton
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];  
-  if ([appSettings openedDatabase])
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];  
+  if ([db openedDatabase])
   {
       // We are OK to go
 #if (PROFILE_SQL_STATEMENTS)
@@ -117,6 +118,9 @@
   LWE_LOG(@"START Tab bar");
   
 	self.tabBarController = [[UITabBarController alloc] init];
+  
+  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  [appSettings loadActiveTag];
   
   // Make room for the status bar
   CGRect tabBarFrame;
@@ -180,15 +184,15 @@
 
 - (void) startDatabaseCopy
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  [appSettings performSelectorInBackground:@selector(openedDatabase) withObject:nil];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  [db performSelectorInBackground:@selector(openedDatabase) withObject:nil];
   [self continueDatabaseCopy];
 }
 
 - (void) continueDatabaseCopy
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  if (!appSettings.databaseOpenFinished)
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  if (!db.databaseOpenFinished)
   {
     float k = ((float)i/150.0f);
     LWE_LOG(@"float val : %f %d",k,i);
@@ -281,7 +285,8 @@
 {
   // Clear the application settings singleton
   ApplicationSettings* appSettings = [ApplicationSettings sharedApplicationSettings];
-  [[appSettings dao] release];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  [db release];
   [appSettings release];
 
   [super dealloc];

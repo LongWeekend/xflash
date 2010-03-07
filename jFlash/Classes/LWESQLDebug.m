@@ -20,9 +20,10 @@
 
 + (void) runSQL: (NSString*) sql
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   LWE_LOG(@"************************** BEGIN executeQuery ****************************");
-  FMResultSet *rs = [[appSettings dao] executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   LWE_LOG(@"************************** FINISH executeQuery ***************************");
   while ([rs next])
    {
@@ -32,14 +33,14 @@
   [rs close];
   
   LWE_LOG(@"************************** BEGIN executeQuery WITH TRANSACTIONS ****************************");
-  [[appSettings dao] executeUpdate:@"BEGIN TRANSACTION;"];
-  rs = [[appSettings dao] executeQuery:sql];
+  [[db dao] executeUpdate:@"BEGIN TRANSACTION;"];
+  rs = [[db dao] executeQuery:sql];
   LWE_LOG(@"************************** FINISH executeQuery ***************************");
   while ([rs next])
    {
      //just iterate the rs like we would
    }
-  [[appSettings dao] executeUpdate:@"END TRANSACTION;"];
+  [[db dao] executeUpdate:@"END TRANSACTION;"];
   LWE_LOG(@"************************** FINISH rs iteration WITH TRANSACTIONS ***************************");  
   [rs close];
   return;

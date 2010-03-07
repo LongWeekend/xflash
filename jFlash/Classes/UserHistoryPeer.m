@@ -16,12 +16,12 @@
 //--------------------------------------------------------------------------
 + (NSArray*) getRightWrongTotalsBySet: (NSInteger)tagId
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql  = [[NSString alloc] initWithFormat:@"SELECT sum(right_count) FROM user_history WHERE user_id = %d AND tag_id = %d", [settings integerForKey:@"user_id"], tagId];
   NSString *sql2 = [[NSString alloc] initWithFormat:@"SELECT sum(wrong_count) as TotalWrong FROM user_history WHERE user_id = %d AND tag_id = %d", [settings integerForKey:@"user_id"], tagId];
-  int right = [[appSettings dao] intForQuery:sql];
-  int wrong = [[appSettings dao] intForQuery:sql2];
+  int right = [[db dao] intForQuery:sql];
+  int wrong = [[db dao] intForQuery:sql2];
   NSNumber *rightCount = [[NSNumber alloc] initWithInt:right];
   NSNumber *wrongCount = [[NSNumber alloc] initWithInt:wrong];
   NSArray* results = [NSArray arrayWithObjects: rightCount, wrongCount, nil];
@@ -68,8 +68,10 @@
 
 + (void) recordResult: (Card*)card gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
 {
-  // Get database singleton
+  // Get database singleton & settings singleton
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 
   NSString *sql;
@@ -102,7 +104,7 @@
     sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES ('%d',current_timestamp,current_timestamp,'%d','%d','%d','%d')",card.cardId,[settings integerForKey:@"user_id"],card.rightCount,(card.wrongCount+1),nextLevel];      
   }
   //sql2 = [[NSString alloc] initWithFormat: @"INSERT OR REPLACE INTO tag_user_card_levels SET card_level_%@_count = %@", oldLevel, oldLevelCount, nextLevel, nextLevelCount];
-  [appSettings.dao executeUpdate:sql];
+  [[db dao] executeUpdate:sql];
   [sql release];
   [[appSettings activeTag] updateLevelCounts:card nextLevel:nextLevel];
 }

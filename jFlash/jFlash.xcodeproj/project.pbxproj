@@ -30,6 +30,7 @@
 		499E5AF50FF4D42A006926A2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEE0FF4D429006926A2 /* DisplayCell.m */; };
 		499E5AF60FF4D42A006926A2 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AF00FF4D429006926A2 /* EditableTableViewCell.m */; };
 		499E5AF70FF4D42A006926A2 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AF20FF4D42A006926A2 /* SourceCell.m */; };
+		49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5D34611438A730063EC4C /* LWEDatabase.m */; };
 		49EC5E8D10369BF300BC6D44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
 		49FD2361101C12260081F883 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD2360101C12260081F883 /* Icon-Small.png */; };
@@ -168,6 +169,8 @@
 		499E5AF00FF4D429006926A2 /* EditableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableViewCell.m; sourceTree = "<group>"; };
 		499E5AF10FF4D429006926A2 /* SourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCell.h; sourceTree = "<group>"; };
 		499E5AF20FF4D42A006926A2 /* SourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCell.m; sourceTree = "<group>"; };
+		49B5D34511438A730063EC4C /* LWEDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDatabase.h; sourceTree = "<group>"; };
+		49B5D34611438A730063EC4C /* LWEDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEDatabase.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -421,6 +424,8 @@
 				D370E66610DFBA5F00BE6835 /* sqlite3.h */,
 				D370E66710DFBA5F00BE6835 /* sqlite3ext.h */,
 				4973B0F21009E4DB00D0B1F2 /* SynthesizeSingleton.h */,
+				49B5D34511438A730063EC4C /* LWEDatabase.h */,
+				49B5D34611438A730063EC4C /* LWEDatabase.m */,
 				492976E9113178230074B866 /* LWE_Util_Table.h */,
 				492976EA113178230074B866 /* LWE_Util_Table.m */,
 				492976EB113178230074B866 /* LWEDebug.h */,
@@ -815,6 +820,7 @@
 				492976E7113177EE0074B866 /* RootViewController.m in Sources */,
 				492976E8113177EE0074B866 /* SearchViewController.m in Sources */,
 				492976EC113178230074B866 /* LWE_Util_Table.m in Sources */,
+				49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

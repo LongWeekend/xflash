@@ -20,8 +20,8 @@
 + (NSMutableArray*) getUsers
 {
   int i = 0;
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  while (appSettings.dao.inUse && i < 5)
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  while ([db dao].inUse && i < 5)
   {
     NSLog(@"Database is busy %d",i);
     usleep(100);
@@ -30,7 +30,7 @@
 
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER BY upper(nickname) ASC"];
 
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   NSMutableArray* userList = [[[NSMutableArray alloc] init] autorelease];
 	while ([rs next]) {
 		User* tmpUser = [[[User alloc] init] autorelease];
@@ -50,9 +50,9 @@
   tmpUser.userNickname = name;
   tmpUser.avatarImagePath = path;
 
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [[NSString alloc] initWithFormat:@"INSERT INTO users (nickname, avatar_image_path, date_created) VALUES ('%@','%@',NOW())", name, path];
-  [appSettings.dao executeUpdate:sql];
+  [[db dao] executeUpdate:sql];
   [sql release];
   return tmpUser;  
 }
@@ -60,8 +60,8 @@
 + (User*) getUser: (NSInteger)userId
 {
   int i = 0;
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
-  while (appSettings.dao.inUse && i < 5)
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  while ([db dao].inUse && i < 5)
   {
     NSLog(@"Database is busy %d",i);
     usleep(100);
@@ -69,7 +69,7 @@
   }
 
   NSString *sql = [NSString stringWithFormat:@"SELECT * FROM users WHERE user_id = %d", userId];
-  FMResultSet *rs = [appSettings.dao executeQuery:sql];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
   User* tmpUser = [[[User alloc] init] autorelease];
   while ([rs next])
   {
@@ -92,14 +92,14 @@
 
 - (void) save
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql;
   if(self.userId > 0){
     sql = [NSString stringWithFormat:@"UPDATE users SET nickname ='%@', avatar_image_path='%@' WHERE user_id = %d", userNickname, avatarImagePath, userId];
   } else {
     sql = [NSString stringWithFormat:@"INSERT INTO users (nickname, avatar_image_path) VALUES ('%@','%@')", userNickname, avatarImagePath];
   }
-  [appSettings.dao executeUpdate:sql];
+  [[db dao] executeUpdate:sql];
 }
 
 - (void) deleteUser
@@ -110,9 +110,9 @@
     [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
   }
   
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [NSString stringWithFormat:@"DELETE FROM users WHERE user_id = %d", userId];
-  [appSettings.dao executeUpdate:sql];
+  [[db dao] executeUpdate:sql];
 }
 
 - (void) activateUser{
