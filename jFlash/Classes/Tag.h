@@ -25,6 +25,7 @@
 - (void) populateCards;
 - (void) populateCardIds;
 - (Card*) getRandomCard;
+- (Card*) getFirstCard;
 - (Card*) getNextCard;
 - (Card*) getPrevCard;
 - (NSInteger) cardCount;

@@ -126,8 +126,6 @@
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; // Set the first card
-  [studyViewController setBootCardId:[settings integerForKey:@"card_id"]];
   [localControllersArray addObject:studyViewController];
   [studyViewController release];
   
