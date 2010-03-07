@@ -134,30 +134,51 @@
   [cardPeerProxy setCardCount:count];
 }
 
+- (Card*) getFirstCard
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  Card* card;
+  if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
+  {
+    NSNumber* cardId = [[[self cardIds] objectAtIndex:0] objectAtIndex: [self currentIndex]];
+    card = [CardPeer retrieveCardByPK:[cardId intValue]];
+  }
+  else
+  {
+    if ([settings integerForKey:@"card_id"] != 0)
+    {
+      card = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
+      [settings setInteger:0 forKey:@"card_id"];
+    }
+    else
+    {
+      card = [self getRandomCard];
+    }
+  }
+  return card;
+}
+
 
 //--------------------------------------------------------------------------
 // Card getNextCard
-// Returns the next card in the list, or nil if at end of list
+// Returns the next card in the list, resets index if at the end of the list
 //--------------------------------------------------------------------------
 - (Card*) getNextCard
 {
 	int currIdx = [self currentIndex];
-	int total = [cards count]-1;
-	if(currIdx < total)
+	int total = [cards count];
+	if(currIdx >= total)
   {
-		currIdx++;
-		Card* nextCard = [[self cards] objectAtIndex:currIdx];
-    if ([nextCard cardId] > 0 && [nextCard headword] == nil)
-    {
-      nextCard = [CardPeer hydrateCardByPK:nextCard];
-    }
-    [self setCurrentIndex:currIdx];
-		return nextCard;
-	}
-	else
-  {
-		return nil;
+    currIdx = 0;
   }
+  else 
+  {
+    currIdx++;
+  }
+  // TODO: figure out how to flatten the card levels into total card ids for this kind of thing
+  Card* nextCard = [CardPeer retrieveCardByPK:[[[self cardIds] objectAtIndex:currIdx] intValue]];
+  [self setCurrentIndex:currIdx];
+  return nextCard;
 }
 //--------------------------------------------------------------------------
 

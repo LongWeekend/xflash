@@ -66,7 +66,6 @@
   NSMutableArray *stats;
   Tag *currentCardSet;
   Card *currentCard;
-  NSInteger bootCardId;
 
   BOOL readingVisible;
   BOOL percentCorrectVisible;
@@ -173,7 +172,6 @@
 @property BOOL isBrowseMode;
 @property BOOL meaningRevealed;
 
-@property NSInteger bootCardId;
 @property NSInteger numRight;
 @property NSInteger numWrong;
 @property NSInteger numViewed;

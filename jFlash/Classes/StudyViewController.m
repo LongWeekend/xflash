@@ -10,7 +10,7 @@
 @implementation StudyViewController
 
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
-@synthesize currentCard, currentCardSet, cardHeadwordLabel, cardReadingLabel, bootCardId, meaningWebView;
+@synthesize currentCard, currentCardSet, cardHeadwordLabel, cardReadingLabel, meaningWebView;
 
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, readingVisible, percentCorrectVisible, meaningMoreIconVisible, readingMoreIconVisible;
 @synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, toggleReadingBtn, showProgressModalBtn, progressModalBtn;
@@ -123,7 +123,6 @@
   // Get active set/tag
   ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
   currentCardSet = [appSettings activeTag];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
   numRight = 0;
   numWrong = 0;
@@ -131,23 +130,7 @@
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   
   Card* card;
-  if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
-   {
-     card = [[currentCardSet cards] objectAtIndex:[currentCardSet currentIndex]];
-   }
-  else
-   {
-     [currentCardSet cacheCardLevelCounts];
-     if (bootCardId != 0)
-      {
-        card = [CardPeer retrieveCardByPK:bootCardId];
-        bootCardId = 0;
-      }
-     else
-      {
-        card = [currentCardSet getRandomCard];
-      }
-   }
+  card = [[appSettings activeTag] getFirstCard];
   [self setCurrentCard: card];
   LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
   [self resetKeepingCurrentCard];
@@ -274,7 +257,7 @@
     [self doTogglePercentCorrectBtn];
   }
 
-  // TODO - this relies on data before that data may be ready
+  // TODO - this relies on data before that data may not be ready
   [self drawProgressBar];
   [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
   LWE_LOG(@"END prepareViewForCard");
