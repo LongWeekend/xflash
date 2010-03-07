@@ -1,5 +1,5 @@
 //
-//  ApplicationSettings.h
+//  CurrentState.h
 //  jFlash
 //
 //  Created by Mark Makdad on 7/12/09.
@@ -10,7 +10,7 @@
 #import "SynthesizeSingleton.h"
 #import "Tag.h"
 
-@interface ApplicationSettings : NSObject
+@interface CurrentState : NSObject
 {
   Tag *activeTag;
   Tag *_activeTag;
@@ -19,7 +19,7 @@
 
 @property BOOL isFirstLoad;
 
-+ (ApplicationSettings *)sharedApplicationSettings;
++ (CurrentState *)sharedCurrentState;
 
 + (UIColor*) getThemeTintColor;
 + (NSString*) getThemeName;

@@ -70,7 +70,7 @@
 {
   // Get database singleton & settings singleton
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 

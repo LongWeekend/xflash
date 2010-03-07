@@ -10,7 +10,7 @@
   #import "FMResultSet.h"
   #import "FMDatabase.h"
   #import "FMDatabaseAdditions.h"
-  #import "ApplicationSettings.h"
+  #import "CurrentState.h"
   #import "LWEDatabase.h"
   #import "Card.h"
   #import "Tag.h"

@@ -24,7 +24,7 @@
 		494BB1D7101DDF6000D2AD73 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D6101DDF6000D2AD73 /* CFNetwork.framework */; };
 		494BB1D9101DDF7300D2AD73 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
-		4973B1001009E5D500D0B1F2 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4973B0FF1009E5D500D0B1F2 /* ApplicationSettings.m */; };
+		4973B1001009E5D500D0B1F2 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4973B0FF1009E5D500D0B1F2 /* CurrentState.m */; };
 		499E5AF30FF4D42A006926A2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AE90FF4D429006926A2 /* CellTextField.m */; };
 		499E5AF40FF4D42A006926A2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEB0FF4D429006926A2 /* CellTextView.m */; };
 		499E5AF50FF4D42A006926A2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEE0FF4D429006926A2 /* DisplayCell.m */; };
@@ -156,8 +156,8 @@
 		494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4973B0F21009E4DB00D0B1F2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		4973B0FE1009E5D500D0B1F2 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
-		4973B0FF1009E5D500D0B1F2 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
+		4973B0FE1009E5D500D0B1F2 /* CurrentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentState.h; sourceTree = "<group>"; };
+		4973B0FF1009E5D500D0B1F2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentState.m; sourceTree = "<group>"; };
 		499E5AE80FF4D429006926A2 /* CellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextField.h; sourceTree = "<group>"; };
 		499E5AE90FF4D429006926A2 /* CellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextField.m; sourceTree = "<group>"; };
 		499E5AEA0FF4D429006926A2 /* CellTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextView.h; sourceTree = "<group>"; };
@@ -416,8 +416,8 @@
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				918091FE10EB97B600440E8E /* Appirater.h */,
 				918091FF10EB97B600440E8E /* Appirater.m */,
-				4973B0FE1009E5D500D0B1F2 /* ApplicationSettings.h */,
-				4973B0FF1009E5D500D0B1F2 /* ApplicationSettings.m */,
+				4973B0FE1009E5D500D0B1F2 /* CurrentState.h */,
+				4973B0FF1009E5D500D0B1F2 /* CurrentState.m */,
 				499E5AEC0FF4D429006926A2 /* Constants.h */,
 				91948BED112657F200D35591 /* Constants.m */,
 				D370E66510DFBA5F00BE6835 /* sqlite3.c */,
@@ -793,7 +793,7 @@
 				49FE1E660FF78FF100BDE55B /* AddTagViewController.m in Sources */,
 				49FE1F120FF79CDB00BDE55B /* StudySetWordsViewController.m in Sources */,
 				916D3D040FFCDFBC00B8E215 /* AddStudySetInputViewController.m in Sources */,
-				4973B1001009E5D500D0B1F2 /* ApplicationSettings.m in Sources */,
+				4973B1001009E5D500D0B1F2 /* CurrentState.m in Sources */,
 				4911989B10808A5100599CCF /* User.m in Sources */,
 				4911989F10808C7800599CCF /* GroupPeer.m in Sources */,
 				911DA686108B531700E3D928 /* drawing.m in Sources */,

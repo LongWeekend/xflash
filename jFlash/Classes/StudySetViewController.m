@@ -86,9 +86,9 @@
 {
   [super viewWillAppear:animated];
   [self setTitle: [group groupName]];
-  self.navigationController.navigationBar.tintColor = [ApplicationSettings getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  searchBar.tintColor = [ApplicationSettings getThemeTintColor];
+  searchBar.tintColor = [CurrentState getThemeTintColor];
   searchBar.placeholder = @"Search Sets By Name";
   [self hideSearchBar];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
@@ -128,7 +128,7 @@
 
 - (void) changeStudySet
 {
-  ApplicationSettings *appSettings = [ApplicationSettings sharedApplicationSettings];
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:[[self tagArray] objectAtIndex:self.selectedTagId]];
   
   // Post notification to switch active tab
@@ -212,8 +212,8 @@
   NSString *ResultCellIdentifier = [[NSString alloc] initWithString:@"ResultCell"];
   
   // Themed cell icons
-  NSString* tagIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/tag-icon.png",[ApplicationSettings getThemeName]];
-  NSString* folderIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/folder-icon.png",[ApplicationSettings getThemeName]];
+  NSString* tagIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/tag-icon.png",[CurrentState getThemeName]];
+  NSString* folderIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/folder-icon.png",[CurrentState getThemeName]];
 
   // Study Set Cells (ie. a tag)
   if (indexPath.section == 1 || searching)
@@ -282,7 +282,7 @@
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[subgroupArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
-    [bgView setFillColor:[ApplicationSettings getThemeTintColor]];
+    [bgView setFillColor:[CurrentState getThemeTintColor]];
     cell.selectedBackgroundView = bgView;
     [bgView release];
     
