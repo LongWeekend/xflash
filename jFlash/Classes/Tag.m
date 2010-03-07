@@ -10,7 +10,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, cards, currentIndex, cardPeerProxy, cardIds;
+@synthesize tagId, tagName, tagEditable, tagDescription, cards, currentIndex, cardPeerProxy, cardIds, cardLevelCounts;
 
 - (id) init
 {
@@ -19,6 +19,7 @@
   {
     [self setCurrentIndex:0];
     [self setCards:[[NSMutableArray alloc] init]];
+    [self setCardLevelCounts:[[NSMutableArray alloc] init]];
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     CardPeerProxy *tmpProxy = [[CardPeerProxy alloc] init];
     [tmpProxy setUserId:[settings integerForKey:@"user_id"]];
@@ -34,7 +35,13 @@
 
 - (void) cacheCardLevelCounts
 {
-  
+  NSNumber *count;
+  for (int i = 0; i < 6; i++)
+  {
+     count = [NSNumber numberWithInt:[[[self cardIds] objectAtIndex:i] count]];
+     [[self cardLevelCounts] addObject:count];
+  }
+  [cardPeerProxy setCardLevelCounts:[self cardLevelCounts]];
 }
 
 
@@ -53,14 +60,10 @@
 - (void) populateCardIds
 {
   LWE_LOG(@"Began populating card ids and setting counts");
-  NSNumber *count;
   [self setCardIds:[CardPeer retrieveCardSetIds:self.tagId]];
-	for (int i = 0; i < 6; i++)
-   {
-     count = [[NSNumber alloc] initWithInt:[[[self cardIds] objectAtIndex:i] count]];
-     [[self cardLevelCounts] addObject:count];
-     [count release];
-   }  
+  
+  // populate the card level counts
+	[self cacheCardLevelCounts];
   LWE_LOG(@"End populating card ids and setting counts");
 }
 
@@ -72,16 +75,6 @@
 - (Card*) getRandomCard
 {
   return [[self cardPeerProxy] getRandomCard];
-}
-
-
-//--------------------------------------------------------------------------
-// NSMutableArray cardLevelCounts
-// Returns number of cards at each level
-//--------------------------------------------------------------------------
-- (NSMutableArray*) cardLevelCounts
-{
-  return [[self cardPeerProxy] cardLevelCounts];
 }
 
 
