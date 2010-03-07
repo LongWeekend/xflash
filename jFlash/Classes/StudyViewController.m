@@ -123,7 +123,7 @@
 {
   // Get active set/tag
   CurrentState *appSettings = [CurrentState sharedCurrentState];
-  currentCardSet = [appSettings activeTag];
+  [self setCurrentCardSet: [appSettings activeTag]];
   
   numRight = 0;
   numWrong = 0;

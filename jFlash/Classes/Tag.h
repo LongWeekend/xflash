@@ -17,6 +17,7 @@
 	NSString *tagDescription;
 	NSMutableArray *cards;
   NSMutableArray *cardIds;
+  NSMutableArray *cardLevelCounts;
 	NSInteger currentIndex;
   CardPeerProxy *cardPeerProxy;
 }
@@ -30,7 +31,6 @@
 - (Card*) getPrevCard;
 - (NSInteger) cardCount;
 - (void) setCardCount: (NSInteger) count;
-- (NSMutableArray*) cardLevelCounts;
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel;
 - (void) saveCardCountCache;
 - (void) cacheCardLevelCounts;
@@ -42,6 +42,7 @@
 @property (nonatomic, retain) NSMutableArray *cards;
 @property (nonatomic, retain) NSMutableArray *cardIds;
 @property (nonatomic, retain) CardPeerProxy *cardPeerProxy;
+@property (nonatomic, retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
 
