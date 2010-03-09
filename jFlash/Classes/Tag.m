@@ -72,9 +72,30 @@
 // Card getRandomCard
 // Returns a Card object from the database randomly
 //--------------------------------------------------------------------------
-- (Card*) getRandomCard
+- (Card*) getRandomCard:(int) currentCardId
 {
-  return [[self cardPeerProxy] getRandomCard];
+  // determine the next level
+  int next_level = [cardPeerProxy calculateNextCardLevel];
+  while([[[self cardIds] objectAtIndex:next_level] count] == 0)
+  {
+    next_level = [cardPeerProxy calculateNextCardLevel];
+  }
+  
+  // Get a random card offset
+  int randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+
+  NSNumber* cardId;
+  
+  NSMutableArray* cardIdArray = [[self cardIds] objectAtIndex:next_level];
+  cardId = [cardIdArray objectAtIndex:randomOffset];
+
+// TODO: prevent getting the same card twice.
+//  if([cardId intValue] == currentCardId)
+//  {
+//    [self getRandomCard:currentCardId];
+//  }
+  
+  return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
 
@@ -94,7 +115,12 @@
 //--------------------------------------------------------------------------
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
-  return [[self cardPeerProxy] updateLevelCounts:card nextLevel:nextLevel];
+  // update the cardIds
+  NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
+  [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
+  [[[self cardIds] objectAtIndex:nextLevel] removeObject:cardId];
+  
+  [[self cardPeerProxy] updateLevelCounts:card nextLevel:nextLevel];
 }
 
 
@@ -145,7 +171,7 @@
     }
     else
     {
-      card = [self getRandomCard];
+      card = [self getRandomCard:0];
     }
   }
   return card;

@@ -201,7 +201,7 @@
   // TODO constant-ify
   if (cardCount < 100)
   {
-    NSLog(@"Small set no caching");
+    LWE_LOG(@"Small set no caching");
     return [CardPeer retrieveCardByLevel:levelId setId:[self tagId] withRandom:randomOffset];
   }
     
@@ -218,14 +218,14 @@
     {
       while (returnCard == nil && i < 5)
       {
-        NSLog(@"DECIDED TO RETRIEVE SINGLE CARD - NO CACHING");
+        LWE_LOG(@"DECIDED TO RETRIEVE SINGLE CARD - NO CACHING");
         returnCard = [CardPeer retrieveCardByLevel:levelId setId:[self tagId] withRandom:randomOffset];
         i++;
       }
     }
     else
     {
-      NSLog(@"TAKING CACHED CARD FOR LEVEL %d",levelId);
+      LWE_LOG(@"TAKING CACHED CARD FOR LEVEL %d",levelId);
       returnCard = [[self cardCache] objectAtIndex:levelId];
     }
     // Now fire off a thread to get that guy going
