@@ -25,7 +25,7 @@
 - (void) hydrate: (FMResultSet*)rs;
 - (void) populateCards;
 - (void) populateCardIds;
-- (Card*) getRandomCard;
+- (Card*) getRandomCard:(int) currentCardId;
 - (Card*) getFirstCard;
 - (Card*) getNextCard;
 - (Card*) getPrevCard;

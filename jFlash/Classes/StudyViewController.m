@@ -359,7 +359,7 @@
       
     // Quiz mode options
     case SKIP_BTN:
-      [self doChangeCard: [currentCardSet getRandomCard] direction:kCATransitionFromRight];
+      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;
 
     case BURY_BTN:
@@ -371,7 +371,7 @@
       currentRightStreak++;
       currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      [self doChangeCard: [currentCardSet getRandomCard] direction:kCATransitionFromRight];
+      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;
       
     case WRONG_BTN:
@@ -380,7 +380,7 @@
       currentWrongStreak++;
       currentRightStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      [self doChangeCard: [currentCardSet getRandomCard] direction:kCATransitionFromRight];
+      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;      
   }
 
