@@ -27,8 +27,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   {
      // Get new card count cache
      [_activeTag populateCardIds];
-     // Get a cache of unseen cards
-     [_activeTag replenishUnseenCache];
   }
 }
 
