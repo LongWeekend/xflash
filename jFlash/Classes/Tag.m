@@ -63,19 +63,6 @@
   LWE_LOG(@"Finished plist freezing");
 }
 
-
-//--------------------------------------------------------------------------
-// void populateCards
-// sets all of the cards for a tag to this tag's cards array
-//--------------------------------------------------------------------------
-// TODO remove me
-- (void) populateCards
-{
-  LWE_LOG(@"Began populating cards");
-  [self setCards:[CardPeer retrieveCardSetIds:[self tagId]]];
-  LWE_LOG(@"Done populating cards");
-}
-
 - (void) populateCardIds
 {
   LWE_LOG(@"Began populating card ids and setting counts");
@@ -202,15 +189,29 @@
 }
 
 
+- (NSMutableArray *) getCombinedCardIds {
+  NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
+  NSMutableArray* cardIdsInLevel;
+  for (cardIdsInLevel in [self cardIds]) 
+  {
+    [allCardIds addObjectsFromArray:cardIdsInLevel];
+  }
+  [allCardIds sortUsingSelector:@selector(compare:)];
+  return allCardIds;
+}
+
 //--------------------------------------------------------------------------
 // Card getNextCard
 // Returns the next card in the list, resets index if at the end of the list
 //--------------------------------------------------------------------------
 - (Card*) getNextCard
 {
+  NSMutableArray *allCardIds;
+  allCardIds = [self getCombinedCardIds];
+  
 	int currIdx = [self currentIndex];
-	int total = [cards count];
-	if(currIdx >= total)
+	int total = [allCardIds count];
+	if(currIdx >= total - 1)
   {
     currIdx = 0;
   }
@@ -218,38 +219,36 @@
   {
     currIdx++;
   }
-  // TODO: figure out how to flatten the card levels into total card ids for this kind of thing
-  Card* nextCard = [CardPeer retrieveCardByPK:[[[self cardIds] objectAtIndex:currIdx] intValue]];
+
   [self setCurrentIndex:currIdx];
-  return nextCard;
+  return [CardPeer retrieveCardByPK:[[allCardIds objectAtIndex:currIdx] intValue]];
 }
-//--------------------------------------------------------------------------
 
 
-//--------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 // Card getPrevCard
-// Returns the previous card in the list, or nil if at start of list
-//--------------------------------------------------------------------------
+// Returns the previous card in the list, resets index to top last card if at 0
+//-----------------------------------------------------------------------------
 - (Card*) getPrevCard
 {
+  NSMutableArray *allCardIds;
+  allCardIds = [self getCombinedCardIds];
 	int currIdx = [self currentIndex];
-	if(currIdx > 0)
+
+	int total = [allCardIds count];
+	if(currIdx == 0)
   {
-		currIdx--;
-		Card* prevCard = [[self cards] objectAtIndex:currIdx];
-    if ([prevCard cardId] > 0 && [prevCard headword] == nil)
-    {
-      prevCard = [CardPeer hydrateCardByPK:prevCard];
-    }
-    [self setCurrentIndex:currIdx];
-		return prevCard;
-	}
-	else
-  {
-		return nil;    
+    currIdx = total-1;
   }
+  else
+  {
+    currIdx--;
+  }
+  
+  [self setCurrentIndex:currIdx];
+  int tmp = [[allCardIds objectAtIndex:currIdx] intValue];
+  return [CardPeer retrieveCardByPK:tmp];
 }
-//--------------------------------------------------------------------------
 
 
 //--------------------------------------------------------------------------
