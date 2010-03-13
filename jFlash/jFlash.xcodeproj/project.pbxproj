@@ -26,6 +26,7 @@
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		4973B1001009E5D500D0B1F2 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4973B0FF1009E5D500D0B1F2 /* CurrentState.m */; };
 		498A8E83114B531C006241A8 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498A8E82114B531C006241A8 /* StudySetView.xib */; };
+		498A8EE5114B5BBD006241A8 /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 498A8EE4114B5BBD006241A8 /* LWEFile.m */; };
 		499E5AF30FF4D42A006926A2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AE90FF4D429006926A2 /* CellTextField.m */; };
 		499E5AF40FF4D42A006926A2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEB0FF4D429006926A2 /* CellTextView.m */; };
 		499E5AF50FF4D42A006926A2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEE0FF4D429006926A2 /* DisplayCell.m */; };
@@ -160,6 +161,8 @@
 		4973B0FE1009E5D500D0B1F2 /* CurrentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentState.h; sourceTree = "<group>"; };
 		4973B0FF1009E5D500D0B1F2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentState.m; sourceTree = "<group>"; };
 		498A8E82114B531C006241A8 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudySetView.xib; sourceTree = "<group>"; };
+		498A8EE3114B5BBD006241A8 /* LWEFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFile.h; sourceTree = "<group>"; };
+		498A8EE4114B5BBD006241A8 /* LWEFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFile.m; sourceTree = "<group>"; };
 		499E5AE80FF4D429006926A2 /* CellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextField.h; sourceTree = "<group>"; };
 		499E5AE90FF4D429006926A2 /* CellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextField.m; sourceTree = "<group>"; };
 		499E5AEA0FF4D429006926A2 /* CellTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextView.h; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 				492976EB113178230074B866 /* LWEDebug.h */,
 				91948FEC11269EF000D35591 /* LWE_Util_Labels.h */,
 				91948FED11269EF000D35591 /* LWE_Util_Labels.m */,
+				498A8EE3114B5BBD006241A8 /* LWEFile.h */,
+				498A8EE4114B5BBD006241A8 /* LWEFile.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -825,6 +830,7 @@
 				492976E8113177EE0074B866 /* SearchViewController.m in Sources */,
 				492976EC113178230074B866 /* LWE_Util_Table.m in Sources */,
 				49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */,
+				498A8EE5114B5BBD006241A8 /* LWEFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
