@@ -25,6 +25,7 @@
 		494BB1D9101DDF7300D2AD73 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		4973B1001009E5D500D0B1F2 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4973B0FF1009E5D500D0B1F2 /* CurrentState.m */; };
+		498A8E83114B531C006241A8 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498A8E82114B531C006241A8 /* StudySetView.xib */; };
 		499E5AF30FF4D42A006926A2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AE90FF4D429006926A2 /* CellTextField.m */; };
 		499E5AF40FF4D42A006926A2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEB0FF4D429006926A2 /* CellTextView.m */; };
 		499E5AF50FF4D42A006926A2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AEE0FF4D429006926A2 /* DisplayCell.m */; };
@@ -158,6 +159,7 @@
 		4973B0F21009E4DB00D0B1F2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		4973B0FE1009E5D500D0B1F2 /* CurrentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentState.h; sourceTree = "<group>"; };
 		4973B0FF1009E5D500D0B1F2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentState.m; sourceTree = "<group>"; };
+		498A8E82114B531C006241A8 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudySetView.xib; sourceTree = "<group>"; };
 		499E5AE80FF4D429006926A2 /* CellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextField.h; sourceTree = "<group>"; };
 		499E5AE90FF4D429006926A2 /* CellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextField.m; sourceTree = "<group>"; };
 		499E5AEA0FF4D429006926A2 /* CellTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextView.h; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 		DA8B6A430FB111A200DE105C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				498A8E82114B531C006241A8 /* StudySetView.xib */,
 				D39DB31411186BA600E2101C /* ProgressView.xib */,
 				918090A510E8D6E200440E8E /* HelpScrollView.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
@@ -738,6 +741,7 @@
 				D36CE185111AA1BE0073D809 /* table-background.png in Resources */,
 				D3B59409111F928100AE4CEE /* Default.png in Resources */,
 				D3309B0F1123C7D800B73E8E /* help in Resources */,
+				498A8E83114B531C006241A8 /* StudySetView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +865,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
