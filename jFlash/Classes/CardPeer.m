@@ -256,7 +256,7 @@
 // NSMutableArray* retrieveCardSet: setId
 // Returns an array of Cards for a given tag
 //--------------------------------------------------------------------------
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [[db dao] executeQuery:sql];
@@ -266,7 +266,14 @@
   {
     i++;
     Card* tmpCard = [[Card alloc] init];
-    [tmpCard hydrate:rs];
+    if (hydrate)
+    {
+      [tmpCard hydrate:rs];
+    }
+    else
+    {
+      [tmpCard setCardId:[rs intForColumn:@"card_id"]];
+    }
     [cardList addObject: tmpCard];
     [tmpCard release];
   }
@@ -299,6 +306,18 @@
   return cardIdList;
 }
 
+//--------------------------------------------------------------------------
+// NSMutableArray* retrieveCardIdsForTagId: tagId
+// Returns an array of Cards ids for a given set
+//--------------------------------------------------------------------------
++ (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId
+{
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
+  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:NO];
+	[sql release];
+	return cardList;
+}
+
 
 //--------------------------------------------------------------------------
 // NSMutableArray* retrieveCardSet: setId
@@ -309,7 +328,7 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, card_tag_link l, user_history u WHERE c.card_id = u.card_id AND c.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
 //  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT u.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE l.card_id = u.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
-  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql];
+  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
   [sql release];
 	return cardList;
 }
@@ -323,9 +342,10 @@
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.c ard_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, card_tag_link l, user_history u WHERE c.card_id = u.card_id AND c.card_id = l.card_id AND u.user_id = '%d' AND l.tag_id = '%d' AND u.card_level = '%d'",[settings integerForKey:@"user_id"],setId,levelId];
-  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql];
+  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
 	[sql release];
 	return cardList;
 }
+
 
 @end
