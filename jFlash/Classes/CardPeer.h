@@ -15,9 +15,11 @@
 + (Card*) hydrateCardByPK: (Card*) card;
 
 // Array of cards methods
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate;
 + (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
+// TODO determine how these next 2 methods are really different?
 + (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId;
-+ (NSMutableArray*) retrieveUnseenCards:(NSInteger)numCards setId:(NSInteger)setId;
++ (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch;
 @end

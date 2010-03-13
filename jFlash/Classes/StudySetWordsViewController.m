@@ -27,8 +27,7 @@
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [tag populateCards];
-  cards = [tag cards];
+  [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
@@ -73,7 +72,7 @@
   {
     cell = [LWE_Util_Table reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
     cell.selectionStyle = 0;
-    Card* tmpCard = [cards objectAtIndex:indexPath.row];
+    Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
     if ([tmpCard headword] == nil)
     {
       tmpCard = [CardPeer hydrateCardByPK:tmpCard];
