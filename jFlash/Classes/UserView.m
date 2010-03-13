@@ -7,7 +7,7 @@
 //
 
 #import "UserView.h"
-#import "UserDetailsView.h"
+#import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
 
 @implementation UserView
@@ -143,12 +143,12 @@
     [self doActivateUser];
 }
 
-- (void)tableView:(UITableView *)lcalTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  [lcalTableView deselectRowAtIndexPath:indexPath animated:NO];
-  UserDetailsView *userDetailsView = [[UserDetailsView alloc] init];
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   User* currUser = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
-  [userDetailsView setUser:currUser];
+  [UserDetailsView setUser:currUser];
   [userDetailsView setTitle: [currUser userNickname]];
   [userDetailsView setMode: kUserViewModeEdit];
   [self.navigationController pushViewController:userDetailsView animated:YES];
