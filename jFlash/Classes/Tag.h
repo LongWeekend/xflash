@@ -8,6 +8,7 @@
 
 #import "Card.h"
 #import "CardPeerProxy.h"
+#import "LWEFile.h"
 
 @interface Tag : NSObject
 {
@@ -35,6 +36,8 @@
 - (void) saveCardCountCache;
 - (void) cacheCardLevelCounts;
 - (void) replenishUnseenCache;
+- (void) freezeCardIds;
+- (NSMutableArray*) thawCardIds;
 
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;

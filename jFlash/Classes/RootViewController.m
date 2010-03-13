@@ -279,6 +279,7 @@
   [settings synchronize];
   
   [[appSettings activeTag] saveCardCountCache];
+  [[appSettings activeTag] freezeCardIds];
 }
 
 - (void)dealloc

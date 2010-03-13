@@ -45,6 +45,23 @@
 }
 
 
+- (NSMutableArray*) thawCardIds
+{
+  NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+  LWE_LOG(@"Beginning plist reading: %@",path);
+  NSMutableArray* tmpCardIds = [[NSMutableArray alloc] initWithContentsOfFile:path];
+  LWE_LOG(@"Finished plist reading");
+  return tmpCardIds;
+}
+
+
+- (void) freezeCardIds
+{
+  NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+  LWE_LOG(@"Beginning plist freezing: %@",path);
+  [[self cardIds] writeToFile:path atomically:YES];
+  LWE_LOG(@"Finished plist freezing");
+}
 
 
 //--------------------------------------------------------------------------
@@ -62,8 +79,21 @@
 - (void) populateCardIds
 {
   LWE_LOG(@"Began populating card ids and setting counts");
-  [self setCardIds:[CardPeer retrieveCardSetIds:self.tagId]];
+  NSMutableArray* tmpArray = [self thawCardIds];
+  if (tmpArray == nil)
+  {
+    LWE_LOG(@"No plist, load from database");
+    tmpArray = [CardPeer retrieveCardSetIds:self.tagId];
+  }
+  else
+  {
+    LWE_LOG(@"Found plist, no need to load from database");
+  }
   
+  // Now set it
+  [self setCardIds:tmpArray];
+  [tmpArray release];
+
   // populate the card level counts
 	[self cacheCardLevelCounts];
   LWE_LOG(@"End populating card ids and setting counts");
