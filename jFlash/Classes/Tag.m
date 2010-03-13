@@ -87,7 +87,10 @@
   }
   else
   {
-    LWE_LOG(@"Found plist, no need to load from database");
+    LWE_LOG(@"Found plist, deleting plist");
+    NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:path error:NULL];
   }
   
   // Now set it
@@ -95,6 +98,7 @@
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
+  
   LWE_LOG(@"End populating card ids and setting counts");
 }
 
