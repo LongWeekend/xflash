@@ -45,7 +45,8 @@
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
-    [alertView release];    
+    [alertView release];
+    appSettings.isFirstLoad = NO;
   }
 }
 
