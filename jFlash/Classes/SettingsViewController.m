@@ -58,9 +58,15 @@
     NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_USER,nil];
     NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,@"",nil];
     
-    NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",@"Welcome Screen",nil];
+    // We no longer allow users to turn off the splash screen - MMA 3/14/2010
+/*    NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",@"Welcome Screen",nil];
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_SPLASH,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
+*/
+    NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",nil];
+    NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
+    NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
+     
     
     NSArray *aboutNames = [NSArray arrayWithObjects:@"jFlash was conceived and originally created by three friends on a Long Weekend over a few steaks and a few more Coronas.  Special thanks to Teja for helping us write and simulate the frequency algorithm.  This application uses the EDICT and KANJIDIC dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license.  Some icons by Joseph Wain / glyphish.com",nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
