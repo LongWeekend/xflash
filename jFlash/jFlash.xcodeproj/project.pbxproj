@@ -87,7 +87,7 @@
 		D35B07871116456D00DB5E02 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */; };
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
-		D35B0873111659A400DB5E02 /* UserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D35B0872111659A400DB5E02 /* UserDetailsView.m */; };
+		D35B0873111659A400DB5E02 /* UserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35B0872111659A400DB5E02 /* UserDetailsViewController.m */; };
 		D35B08F6111669C300DB5E02 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35B08F5111669C300DB5E02 /* UserDetailsView.xib */; };
 		D36CE027111A67980073D809 /* UserImagePickerAlt.m in Sources */ = {isa = PBXBuildFile; fileRef = D36CE026111A67980073D809 /* UserImagePickerAlt.m */; };
 		D36CE0C3111A79540073D809 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D36CE0C2111A79540073D809 /* CustomCellBackgroundView.m */; };
@@ -102,7 +102,7 @@
 		D39DB31A11186BC600E2101C /* UserImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D39DB31911186BC600E2101C /* UserImagePicker.m */; };
 		D3A3796F0FF4BC97004256D0 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A3796E0FF4BC97004256D0 /* StudySetViewController.m */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
-		D3B8A2161113BFAA00AF0961 /* UserView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8A2151113BFAA00AF0961 /* UserView.m */; };
+		D3B8A2161113BFAA00AF0961 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B8A2151113BFAA00AF0961 /* UserViewController.m */; };
 		D3D7ADC51111655C005B0B0E /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D7ADC41111655C005B0B0E /* Group.m */; };
 		DA6BDB500FB066AD003FBF52 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = DA6BDB4F0FB066AD003FBF52 /* jFlash.db */; };
 		DA8B6F250FB183D500DE105C /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8B6F240FB183D500DE105C /* Tag.m */; };
@@ -252,8 +252,8 @@
 		D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
-		D35B0871111659A400DB5E02 /* UserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailsView.h; sourceTree = "<group>"; };
-		D35B0872111659A400DB5E02 /* UserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailsView.m; sourceTree = "<group>"; };
+		D35B0871111659A400DB5E02 /* UserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailsViewController.h; sourceTree = "<group>"; };
+		D35B0872111659A400DB5E02 /* UserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailsViewController.m; sourceTree = "<group>"; };
 		D35B08F5111669C300DB5E02 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsView.xib; sourceTree = "<group>"; };
 		D36CE025111A67980073D809 /* UserImagePickerAlt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImagePickerAlt.h; sourceTree = "<group>"; };
 		D36CE026111A67980073D809 /* UserImagePickerAlt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImagePickerAlt.m; sourceTree = "<group>"; };
@@ -274,8 +274,8 @@
 		D3A3796D0FF4BC97004256D0 /* StudySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudySetViewController.h; sourceTree = "<group>"; };
 		D3A3796E0FF4BC97004256D0 /* StudySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudySetViewController.m; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D3B8A2141113BFAA00AF0961 /* UserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserView.h; sourceTree = "<group>"; };
-		D3B8A2151113BFAA00AF0961 /* UserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserView.m; sourceTree = "<group>"; };
+		D3B8A2141113BFAA00AF0961 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		D3B8A2151113BFAA00AF0961 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		D3D7ADC31111655C005B0B0E /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		D3D7ADC41111655C005B0B0E /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		DA6BDB4F0FB066AD003FBF52 /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = text; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
@@ -561,32 +561,32 @@
 				49FE1E650FF78FF100BDE55B /* AddTagViewController.m */,
 				9148D9BC10DDFD18009558DE /* HelpViewController.h */,
 				9148D9BD10DDFD18009558DE /* HelpViewController.m */,
-				D374023110C1684300BB4B1C /* progressBarView.h */,
-				D374023210C1684300BB4B1C /* progressBarView.m */,
-				919FC6FC10C2617D005A5E23 /* ProgressView.h */,
-				919FC6FD10C2617D005A5E23 /* ProgressView.m */,
 				4921F4BB0FF75DB8008B9202 /* SettingsViewController.h */,
 				4921F5020FF76016008B9202 /* SettingsViewController.m */,
-				D30ABCC110BBB93D0013756B /* SplashView.h */,
-				D30ABCC010BBB93D0013756B /* SplashView.m */,
 				49FE1F100FF79CDB00BDE55B /* StudySetWordsViewController.h */,
 				49FE1F110FF79CDB00BDE55B /* StudySetWordsViewController.m */,
 				D3A3796D0FF4BC97004256D0 /* StudySetViewController.h */,
 				D3A3796E0FF4BC97004256D0 /* StudySetViewController.m */,
 				28216C950DB411BC00E5133A /* StudyViewController.h */,
 				28216C960DB411BC00E5133A /* StudyViewController.m */,
+				D3B8A2141113BFAA00AF0961 /* UserViewController.h */,
+				D3B8A2151113BFAA00AF0961 /* UserViewController.m */,
+				D35B0871111659A400DB5E02 /* UserDetailsViewController.h */,
+				D35B0872111659A400DB5E02 /* UserDetailsViewController.m */,
 				913D6F1B1126A31F0020A7B1 /* MoodIcon.h */,
 				913D6F1C1126A31F0020A7B1 /* MoodIcon.m */,
 				9148D9BE10DDFD18009558DE /* SwipeView.h */,
 				9148D9BF10DDFD18009558DE /* SwipeView.m */,
+				D30ABCC110BBB93D0013756B /* SplashView.h */,
+				D30ABCC010BBB93D0013756B /* SplashView.m */,
+				D374023110C1684300BB4B1C /* progressBarView.h */,
+				D374023210C1684300BB4B1C /* progressBarView.m */,
+				919FC6FC10C2617D005A5E23 /* ProgressView.h */,
+				919FC6FD10C2617D005A5E23 /* ProgressView.m */,
 				D39DB31811186BC600E2101C /* UserImagePicker.h */,
 				D39DB31911186BC600E2101C /* UserImagePicker.m */,
 				D36CE025111A67980073D809 /* UserImagePickerAlt.h */,
 				D36CE026111A67980073D809 /* UserImagePickerAlt.m */,
-				D35B0871111659A400DB5E02 /* UserDetailsView.h */,
-				D35B0872111659A400DB5E02 /* UserDetailsView.m */,
-				D3B8A2141113BFAA00AF0961 /* UserView.h */,
-				D3B8A2151113BFAA00AF0961 /* UserView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -814,8 +814,8 @@
 				9148D9C110DDFD18009558DE /* SwipeView.m in Sources */,
 				9180920010EB97B600440E8E /* Appirater.m in Sources */,
 				D3D7ADC51111655C005B0B0E /* Group.m in Sources */,
-				D3B8A2161113BFAA00AF0961 /* UserView.m in Sources */,
-				D35B0873111659A400DB5E02 /* UserDetailsView.m in Sources */,
+				D3B8A2161113BFAA00AF0961 /* UserViewController.m in Sources */,
+				D35B0873111659A400DB5E02 /* UserDetailsViewController.m in Sources */,
 				D39DB31A11186BC600E2101C /* UserImagePicker.m in Sources */,
 				D36CE027111A67980073D809 /* UserImagePickerAlt.m in Sources */,
 				D36CE0C3111A79540073D809 /* CustomCellBackgroundView.m in Sources */,

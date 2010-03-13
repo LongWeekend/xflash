@@ -7,7 +7,7 @@
 //
 
 #import "UserDetailsViewController.h"
-#import "UserView.h"
+#import "UserViewController.h"
 
 @implementation UserDetailsViewController
 @synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, userImagePickerView, selectedUserImage;

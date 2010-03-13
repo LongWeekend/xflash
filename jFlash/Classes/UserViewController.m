@@ -13,7 +13,7 @@
 @implementation UserViewController
 @synthesize usersArray, statusMsgBox, selectedUserInArray;
 
-- (UserView*) init {
+- (UserViewController*) init {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
     self.title = @"Choose User";
@@ -148,7 +148,7 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   User* currUser = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
-  [UserDetailsView setUser:currUser];
+  [userDetailsView setUser:currUser];
   [userDetailsView setTitle: [currUser userNickname]];
   [userDetailsView setMode: kUserViewModeEdit];
   [self.navigationController pushViewController:userDetailsView animated:YES];
@@ -200,7 +200,7 @@
 }
 
 - (void)addUser:sender {
-  UserDetailsView *userDetailsView = [[UserDetailsView alloc] init];
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   userDetailsView.title = @"Add User";
   userDetailsView.mode = kUserViewModeAdd;
   [self.navigationController pushViewController:userDetailsView animated:YES];
