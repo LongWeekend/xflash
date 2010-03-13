@@ -366,7 +366,7 @@
 
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == 1)
+  if (indexPath.section == 1 || searching)
   {
     // TODO why does this crash
     self.selectedTagId = indexPath.row;
