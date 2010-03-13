@@ -92,7 +92,6 @@
   
   // Now set it
   [self setCardIds:tmpArray];
-  [tmpArray release];
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
