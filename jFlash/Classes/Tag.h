@@ -35,7 +35,6 @@
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel;
 - (void) saveCardCountCache;
 - (void) cacheCardLevelCounts;
-- (void) replenishUnseenCache;
 - (void) freezeCardIds;
 - (NSMutableArray*) thawCardIds;
 

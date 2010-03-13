@@ -119,20 +119,6 @@
 
 
 //--------------------------------------------------------------------------
-// void replenishUnseenCache
-// Caches the next 40 unseen cards
-//--------------------------------------------------------------------------
-- (void) replenishUnseenCache
-{
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];    
-  locked = YES;
-  [self setUnseenCache:[CardPeer retrieveUnseenCards:40 setId:[self tagId]]];
-  locked = NO;
-  [pool release];
-}
-
-
-//--------------------------------------------------------------------------
 // void replenishCardCacheForLevel
 // Caches the next card at each level
 //--------------------------------------------------------------------------

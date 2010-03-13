@@ -129,17 +129,6 @@
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
-
-//--------------------------------------------------------------------------
-// replenishUnseenCache
-// Gets unseen card cache
-//--------------------------------------------------------------------------
-- (void) replenishUnseenCache
-{
-  return [[self cardPeerProxy] replenishUnseenCache];
-}
-
-
 //--------------------------------------------------------------------------
 // updateLevelCounts
 // Update level counts
