@@ -7,7 +7,7 @@
 //
 
 #import "SettingsViewController.h"
-#import "UserView.h"
+#import "UserViewController.h"
 
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
@@ -251,9 +251,9 @@
   // Handle special cases first
   if (key == APP_USER)
   {
-    UserView *userView = [[UserView alloc] init];
+    UserViewController *userView = [[UserViewController alloc] init];
     [self.navigationController pushViewController:userView animated:YES];
-    [userView release];    
+    [userView release];
   }
   else if (key == @"about")
   {
