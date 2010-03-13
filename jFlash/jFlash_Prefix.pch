@@ -23,5 +23,6 @@
   #import "TagPeer.h"
   #import "LWE_Util_Labels.h"
   #import "LWE_Util_Table.h"
+  #import "LWEFile.h"
 
 #endif

@@ -8,7 +8,6 @@
 
 #import "Card.h"
 #import "CardPeerProxy.h"
-#import "LWEFile.h"
 
 @interface Tag : NSObject
 {
