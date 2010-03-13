@@ -316,21 +316,6 @@
 
 
 //--------------------------------------------------------------------------
-// NSMutableArray* retrieveUnseenCards: numCards setId: setId
-// Returns an array of unseen Cards for a given set
-//--------------------------------------------------------------------------
-+ (NSMutableArray*) retrieveUnseenCards:(NSInteger)numCards setId:(NSInteger)setId
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  // TODO -- make this work like altered -- 2 stage SQL queries
-  NSString* sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, card_tag_link l, user_history u WHERE c.card_id = u.card_id AND c.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d' AND u.card_level = '0' LIMIT %d",setId,[settings integerForKey:@"user_id"],numCards];
-  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql];
-  [sql release];
-	return cardList;  
-}
-
-
-//--------------------------------------------------------------------------
 // NSMutableArray* retrieveCardSetByLevel: setId levelId: levelId
 // Returns an array of Cards for a given set and level
 //--------------------------------------------------------------------------

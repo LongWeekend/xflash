@@ -15,7 +15,6 @@
 + (Card*) hydrateCardByPK: (Card*) card;
 
 // Array of cards methods
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql;
 + (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
 + (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId;
 + (NSMutableArray*) retrieveUnseenCards:(NSInteger)numCards setId:(NSInteger)setId;
