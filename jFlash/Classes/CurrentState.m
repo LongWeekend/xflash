@@ -23,11 +23,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:tag.tagId forKey:@"tag_id"];
   
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_QUIZ])
-  {
-     // Get new card count cache
-     [_activeTag populateCardIds];
-  }
+  [_activeTag populateCardIds];
 }
 
 - (Tag *) activeTag
