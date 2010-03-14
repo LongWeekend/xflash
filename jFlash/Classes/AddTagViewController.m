@@ -255,7 +255,7 @@ enum EntrySectionRows
         remove = NO;
       }
       // Success - but update counts
-      if (remove) [[appSettings activeTag] setCardCount:([[appSettings activeTag] cardCount]-1)];
+      if (remove) [[appSettings activeTag] removeCardFromActiveSet:currentCard];
     }
     // Remove tag
     if (remove)

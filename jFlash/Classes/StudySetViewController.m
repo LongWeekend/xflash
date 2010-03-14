@@ -249,7 +249,7 @@
       Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
       cell.textLabel.text = [tmpTag tagName];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      NSString* tmpDetailText = [NSString stringWithFormat:@"%d Words", tmpTag.cardCount];
+      NSString* tmpDetailText = [NSString stringWithFormat:@"%d Words", [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
       if(tmpTag.cardCount == 0)

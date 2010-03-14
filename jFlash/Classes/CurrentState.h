@@ -26,6 +26,7 @@
 - (void) initializeSettings;
 - (void) loadActiveTag;
 - (BOOL) splashIsOn;
+- (void) resetActiveTag;
 // getter for active tag.  Loads the NSUserDefault tag from the db if not loaded yet.
 - (Tag *) activeTag;
 // setter for active tag.  Sets the NSUserDefault for the tag id.

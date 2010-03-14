@@ -20,14 +20,7 @@
   NSInteger tagId;
 }
 
-- (Card*) retrieveCardForLevel: (NSInteger)levelId;
-- (Card*) retrieveCardForLevelNull: (NSInteger) randomOffset;
-- (Card*) getRandomCard;
 - (NSInteger) calculateNextCardLevel;
-- (NSMutableArray*) cacheCardLevelCountsWithCards:(NSMutableArray*) cards;
-- (void) replenishCardCacheForLevel: (NSNumber*) levelId;
-- (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger)nextLevel;
-- (void) saveCardCountCache;
 
 @property (nonatomic,retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic) NSInteger cardCount;

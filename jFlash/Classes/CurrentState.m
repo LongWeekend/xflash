@@ -69,6 +69,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return theName;
 }
 
+- (void) resetActiveTag
+{
+  [self setActiveTag:[self activeTag]];
+}
+
 
 - (void) loadActiveTag
 {

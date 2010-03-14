@@ -119,6 +119,9 @@
   // User activation code here 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:userId forKey:@"user_id"];
+  
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [currentStateSingleton resetActiveTag];
 }
 
 - (NSString *)saveAvatarImage:(UIImage*) userImage

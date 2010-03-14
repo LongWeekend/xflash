@@ -10,7 +10,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, cards, currentIndex, cardPeerProxy, cardIds, cardLevelCounts;
+@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardPeerProxy, cardIds, cardLevelCounts;
 
 - (id) init
 {
@@ -18,16 +18,12 @@
   if (self)
   {
     [self setCurrentIndex:0];
-    [self setCards:[[NSMutableArray alloc] init]];
-    [self setCardLevelCounts:[[NSMutableArray alloc] init]];
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     CardPeerProxy *tmpProxy = [[CardPeerProxy alloc] init];
     [tmpProxy setUserId:[settings integerForKey:@"user_id"]];
     [tmpProxy setTagId:[self tagId]];
     [self setCardPeerProxy:tmpProxy];
     [tmpProxy release];
-    // Register listener to reload data if user changes study direction
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initCache) name:@"studyDirectionWasChanged" object:nil];    
   }
 	return self;
 }
@@ -36,11 +32,16 @@
 - (void) cacheCardLevelCounts
 {
   NSNumber *count;
+  int totalCount = 0;
+  NSMutableArray* cardLevelCountsTmp = [[[NSMutableArray alloc] init] autorelease];
   for (int i = 0; i < 6; i++)
   {
-     count = [NSNumber numberWithInt:[[[self cardIds] objectAtIndex:i] count]];
-     [[self cardLevelCounts] addObject:count];
+    count = [NSNumber numberWithInt:[[[self cardIds] objectAtIndex:i] count]];
+    [cardLevelCountsTmp addObject:count];
+    totalCount = totalCount + [count intValue];
   }
+  [self setCardLevelCounts:cardLevelCountsTmp];
+  [self setCardCount:totalCount];
   [cardPeerProxy setCardLevelCounts:[self cardLevelCounts]];
 }
 
@@ -129,19 +130,9 @@
   // update the cardIds
   NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
   [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
-  [[[self cardIds] objectAtIndex:nextLevel] removeObject:cardId];
+  [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
   
-  [[self cardPeerProxy] updateLevelCounts:card nextLevel:nextLevel];
-}
-
-
-//--------------------------------------------------------------------------
-// saveCardCountCache
-// Save level counts
-//--------------------------------------------------------------------------
-- (void) saveCardCountCache
-{ 
-  return [cardPeerProxy saveCardCountCache];
+  [self cacheCardLevelCounts];
 }
 
 
@@ -151,17 +142,27 @@
 //--------------------------------------------------------------------------
 - (NSInteger) cardCount
 { 
-  return [cardPeerProxy cardCount];
+  return cardCount;
 }
 
+- (void) setCardCount: (int) count
+{
+  // do nothing if its the same
+  if(cardCount == count) return;
+  
+  // set the variable to the new count
+  cardCount = count;  
+  
+  // update the count in the database
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
+  [[db dao] executeUpdate:sql];
+}
 
-//--------------------------------------------------------------------------
-// void setCardCount
-// Sets how many cards are in this tag
-//--------------------------------------------------------------------------
-- (void) setCardCount: (NSInteger) count
-{ 
-  [cardPeerProxy setCardCount:count];
+- (void) removeCardFromActiveSet:(Card *)card
+{
+  NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
+  [cardLevel removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
 }
 
 - (Card*) getFirstCard
@@ -260,9 +261,8 @@
   [self setTagDescription:  [rs stringForColumn:@"description"]];
   [self setTagName:         [rs stringForColumn:@"tag_name"]];
   [self setTagEditable:     [rs intForColumn:@"editable"]];
-  [[self cardPeerProxy] setCardCount: [rs intForColumn:@"count"]];
   [[self cardPeerProxy] setTagId: [rs intForColumn:@"tag_id"]];
-  
+  [self setCardCount:       [rs intForColumn:@"count"]];
 }
 //--------------------------------------------------------------------------
 
@@ -272,7 +272,7 @@
   [cardPeerProxy release];
   [tagName release];
   [tagDescription release];
-  [cards release];
+  [cardIds release];
 	[super dealloc];
 }
 
