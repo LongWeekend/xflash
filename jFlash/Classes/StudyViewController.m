@@ -56,9 +56,9 @@
   [super viewDidLoad];
   // This is called before drawing the view
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   
   // Create a default mood icon object
   [self setMoodIcon:[[MoodIcon alloc] init]];
@@ -123,8 +123,8 @@
 - (void) resetStudySet
 {
   // Get active set/tag
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [self setCurrentCardSet: [appSettings activeTag]];
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [self setCurrentCardSet: [currentStateSingleton activeTag]];
   
   numRight = 0;
   numWrong = 0;
@@ -132,7 +132,7 @@
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   
   Card* card;
-  card = [[appSettings activeTag] getFirstCard];
+  card = [[currentStateSingleton activeTag] getFirstCard];
   [self setCurrentCard: card];
   LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
   [self resetKeepingCurrentCard];
@@ -697,7 +697,7 @@
   NSMutableArray* levelDetails = [self getLevelDetails];
   if (levelDetails)
   {
-    [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];  
+    [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];
     [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
     [cardSetProgressLabel2 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:2]intValue]]];  
     [cardSetProgressLabel3 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:3]intValue]]];  

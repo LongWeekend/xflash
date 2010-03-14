@@ -219,8 +219,6 @@
 		[delegate appInitDidComplete];
 	}
   [self loadTabBar];
-  // TODO: is this necessary/important?
-//  [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
 }
 
 # pragma mark Convenience Methods for Notifications
@@ -278,7 +276,6 @@
   [settings setInteger:0 forKey:@"app_running"];
   [settings synchronize];
   
-  [[appSettings activeTag] saveCardCountCache];
   [[appSettings activeTag] freezeCardIds];
 }
 

@@ -14,8 +14,8 @@
 	NSInteger tagId;
 	NSString *tagName;
   NSInteger tagEditable;
+  NSInteger cardCount;
 	NSString *tagDescription;
-	NSMutableArray *cards;
   NSMutableArray *cardIds;
   NSMutableArray *cardLevelCounts;
 	NSInteger currentIndex;
@@ -23,24 +23,22 @@
 }
 
 - (void) hydrate: (FMResultSet*)rs;
-- (void) populateCards;
 - (void) populateCardIds;
 - (Card*) getRandomCard:(int) currentCardId;
 - (Card*) getFirstCard;
 - (Card*) getNextCard;
 - (Card*) getPrevCard;
 - (NSInteger) cardCount;
-- (void) setCardCount: (NSInteger) count;
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel;
-- (void) saveCardCountCache;
 - (void) cacheCardLevelCounts;
 - (void) freezeCardIds;
 - (NSMutableArray*) thawCardIds;
+- (void) removeCardFromActiveSet:(Card *)card;
+- (void) setCardCount:(int) count;
 
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
-@property (nonatomic, retain) NSMutableArray *cards;
 @property (nonatomic, retain) NSMutableArray *cardIds;
 @property (nonatomic, retain) CardPeerProxy *cardPeerProxy;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
