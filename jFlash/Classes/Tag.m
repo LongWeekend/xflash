@@ -17,6 +17,7 @@
 	self = [super init];
   if (self)
   {
+    cardCount = -1;
     [self setCurrentIndex:0];
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     CardPeerProxy *tmpProxy = [[CardPeerProxy alloc] init];
@@ -150,13 +151,16 @@
   // do nothing if its the same
   if(cardCount == count) return;
   
+  // update the count in the database if not first load (e.g. cardCount = -1)
+  if (cardCount >= 0)
+  {
+    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+    NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
+    [[db dao] executeUpdate:sql];
+  }
+
   // set the variable to the new count
-  cardCount = count;  
-  
-  // update the count in the database
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
-  [[db dao] executeUpdate:sql];
+  cardCount = count; 
 }
 
 - (void) removeCardFromActiveSet:(Card *)card
