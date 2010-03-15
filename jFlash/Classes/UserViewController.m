@@ -7,11 +7,12 @@
 //
 
 #import "UserViewController.h"
+#import "LoadingView.h"
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
 
 @implementation UserViewController
-@synthesize usersArray, statusMsgBox, selectedUserInArray;
+@synthesize usersArray, statusMsgBox, selectedUserInArray, loadingView;
 
 - (UserViewController*) init {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
@@ -140,7 +141,11 @@
 {
   // user activation confirmed 
   if (buttonIndex == 1)
-    [self doActivateUser];
+  {
+    // Load modal spinner
+    loadingView = [LoadingView loadingViewInView:[self view]];
+    [self performSelector:@selector(doActivateUser) withObject:nil afterDelay:0.1];
+  }
 }
 
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -196,6 +201,7 @@
   // Activate, post notification and dismiss view
   [[self selectedUserInArray] activateUser];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"userWasChanged" object:self];
+  [self.loadingView removeView];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -213,7 +219,8 @@
   [userDetailsView release];*/
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
   [usersArray release];
   [statusMsgBox release];
   [super dealloc];
