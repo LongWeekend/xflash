@@ -7,7 +7,6 @@
 //
 
 #import "Card.h"
-#import "CardPeerProxy.h"
 
 @interface Tag : NSObject
 {
@@ -19,11 +18,11 @@
   NSMutableArray *cardIds;
   NSMutableArray *cardLevelCounts;
 	NSInteger currentIndex;
-  CardPeerProxy *cardPeerProxy;
 }
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) populateCardIds;
+- (NSInteger) calculateNextCardLevel;
 - (Card*) getRandomCard:(int) currentCardId;
 - (Card*) getFirstCard;
 - (Card*) getNextCard;
@@ -40,7 +39,6 @@
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
 @property (nonatomic, retain) NSMutableArray *cardIds;
-@property (nonatomic, retain) CardPeerProxy *cardPeerProxy;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
