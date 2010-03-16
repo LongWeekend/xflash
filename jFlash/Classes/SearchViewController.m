@@ -129,7 +129,7 @@
   {
     cell.textLabel.text = @"No Results Found";
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.text = @"Click to do a slower, \"deep\" search.";
+    cell.detailTextLabel.text = @"Tap here to do a DEEP search.";
     cell.accessoryView = activityIndicator;
   }
   else

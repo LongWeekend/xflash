@@ -47,8 +47,10 @@
   }
   else
   {
-    // Do slow substring match (w/ LIKE)
-    sql = [NSString stringWithFormat:@"SELECT card_id,headword,reading,meaning,romaji,0 as card_level,0 as user_id FROM cards WHERE headword LIKE '%%%@%%' OR headword_en LIKE '%%%@%%' OR reading LIKE '%%%@%%' ORDER BY headword LIMIT 100",keyword,keyword,keyword];
+    // Do slow substring match (w/ ASTERISK)
+    NSString* wildcardKeyword = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
+    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@*' AND ptag = 0 LIMIT 200) ORDER BY headword", wildcardKeyword];
+    //sql = [NSString stringWithFormat:@"SELECT card_id,headword,reading,meaning,romaji,0 as card_level,0 as user_id FROM cards WHERE headword LIKE '%%%@%%' OR headword_en LIKE '%%%@%%' OR reading LIKE '%%%@%%' ORDER BY headword LIMIT 100",keyword,keyword,keyword];
     rs = [[db dao] executeQuery:sql];
     while ([rs next])
     {
