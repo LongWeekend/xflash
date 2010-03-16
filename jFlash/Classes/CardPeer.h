@@ -6,7 +6,6 @@
 }
 
 + (NSString*) retrieveCsvCardIdsForTag: (NSInteger)setId;
-+ (NSInteger) retrieveCardCountByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
 
 // Card methods
 + (Card*) retrieveCardWithSQL: (NSString*) sql;

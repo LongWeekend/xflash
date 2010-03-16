@@ -36,25 +36,6 @@
   return self;
 }
 
-
-//--------------------------------------------------------------------------
-// void cacheCardLevelCounts
-// Caches the number of cards in each level
-//--------------------------------------------------------------------------
-- (void) cacheCardLevelCounts
-{
-  int j;
-  NSNumber *count;
-	for (int i = 0; i < 6; i++)
-  {
-    j = [CardPeer retrieveCardCountByLevel:tagId levelId:i];
-	  count = [[NSNumber alloc] initWithInt:j];
-	  [[self cardLevelCounts] addObject:count];
-	  [count release];
-  }
-}
-
-
 //--------------------------------------------------------------------------
 // NSInteger calculateNextCardLevel
 // Returns next card level
