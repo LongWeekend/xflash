@@ -10,7 +10,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardPeerProxy, cardIds, cardLevelCounts;
+@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts;
 
 - (id) init
 {
@@ -19,14 +19,82 @@
   {
     cardCount = -1;
     [self setCurrentIndex:0];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    CardPeerProxy *tmpProxy = [[CardPeerProxy alloc] init];
-    [tmpProxy setUserId:[settings integerForKey:@"user_id"]];
-    [tmpProxy setTagId:[self tagId]];
-    [self setCardPeerProxy:tmpProxy];
-    [tmpProxy release];
   }
 	return self;
+}
+
+
+//--------------------------------------------------------------------------
+// NSInteger calculateNextCardLevel
+// Returns next card level
+//--------------------------------------------------------------------------
+- (NSInteger) calculateNextCardLevel
+{
+  // Total number of cards in this set
+  int levelOneTotal;
+  int totalCards = [self cardCount];
+  if (totalCards < 1) return 0;
+  
+  // Get m cards in n bins, figure out total percentages
+  // Calculate different of weights and percentages and adjust accordingly
+  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardTotal = 0, numeratorTotal = 0;
+  int numLevels = 5;
+  float p = 0,mean = 0, p_unseen = 0, pTotal = 0;
+  
+  NSMutableArray* tmpTotalArray = [[NSMutableArray alloc] init];
+  
+  for (i = 1; i <= numLevels; i++)
+  {
+    // Get denominator values from cache/database
+    tmpTotal = [[cardLevelCounts objectAtIndex:i] intValue];
+    //    tmpTotal = [CardPeer retrieveCardCountByLevel:[self tagId] levelId:i force:NO];    
+    if (i == 1) levelOneTotal = tmpTotal;
+    [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
+    cardTotal = cardTotal + tmpTotal;
+    denominatorTotal = denominatorTotal + (tmpTotal * (numLevels - i + 1)); 
+    numeratorTotal = numeratorTotal + (tmpTotal * i);
+  }
+  
+  // Quick check to make sure we are not at the "start of a set". 
+  if (cardTotal == totalCards)
+  {
+    p_unseen = 0;
+  }
+  else if (cardTotal > totalCards)
+  {
+    // This should not happen, it is likely that we need to re-cache TotalCards
+    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardTotal, totalCards);
+    p_unseen = 0;
+  }
+  else
+  {
+    // Get the "new card" p
+    mean = (float)numeratorTotal / (float)cardTotal;
+    p_unseen = (mean - (float)1);
+    p_unseen = pow((p_unseen / (float) 4),2);
+    if (levelOneTotal < 30 && (totalCards - cardTotal) > 0)
+    {
+      p_unseen = p_unseen + (1-p_unseen)*(pow((30-cardTotal),.25)/pow(30,.25));
+    }
+  }
+	
+  float randomNum = ((float)rand() / (float)RAND_MAX);
+  
+  for (i = 1; i <= numLevels; i++)
+  {
+    tmpTotal = [[tmpTotalArray objectAtIndex:(i-1)] intValue];
+    weightedTotal = (tmpTotal * (numLevels - i + 1));
+    p = ((float)weightedTotal / (float)denominatorTotal);
+    p = (1-p_unseen)*p;
+    pTotal = pTotal + p;
+	  if (pTotal > randomNum)
+    {
+		  [tmpTotalArray release];
+		  return i;
+	  }
+  }
+  [tmpTotalArray release];
+  return 0;
 }
 
 
@@ -43,8 +111,6 @@
   }
   [self setCardLevelCounts:cardLevelCountsTmp];
   [self setCardCount:totalCount];
-  [cardPeerProxy setCardLevelCounts:[self cardLevelCounts]];
-  [cardPeerProxy setCardCount:totalCount];
 }
 
 
@@ -100,11 +166,7 @@
 - (Card*) getRandomCard:(int) currentCardId
 {
   // determine the next level
-  int next_level = [cardPeerProxy calculateNextCardLevel];
-//  while([[[self cardIds] objectAtIndex:next_level] count] == 0)
-//  {
-//    next_level = [cardPeerProxy calculateNextCardLevel];
-//  }
+  int next_level = [self calculateNextCardLevel];
   
   // Get a random card offset
   int randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];  
@@ -266,7 +328,6 @@
   [self setTagDescription:  [rs stringForColumn:@"description"]];
   [self setTagName:         [rs stringForColumn:@"tag_name"]];
   [self setTagEditable:     [rs intForColumn:@"editable"]];
-  [[self cardPeerProxy] setTagId: [rs intForColumn:@"tag_id"]];
   [self setCardCount:       [rs intForColumn:@"count"]];
 }
 //--------------------------------------------------------------------------
@@ -274,7 +335,6 @@
 
 - (void) dealloc
 {
-  [cardPeerProxy release];
   [tagName release];
   [tagDescription release];
   [cardIds release];
