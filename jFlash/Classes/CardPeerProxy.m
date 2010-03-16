@@ -37,77 +37,22 @@
 }
 
 //--------------------------------------------------------------------------
-// NSInteger calculateNextCardLevel
-// Returns next card level
+// void cacheCardLevelCounts
+// Caches the number of cards in each level
 //--------------------------------------------------------------------------
-- (NSInteger) calculateNextCardLevel
+- (void) cacheCardLevelCounts
 {
-  // Total number of cards in this set
-  int levelOneTotal;
-  int totalCards = [self cardCount];
-  if (totalCards < 1) return 0;
-  
-  // Get m cards in n bins, figure out total percentages
-  // Calculate different of weights and percentages and adjust accordingly
-  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardTotal = 0, numeratorTotal = 0;
-  int numLevels = 5;
-  float p = 0,mean = 0, p_unseen = 0, pTotal = 0;
-  
-  NSMutableArray* tmpTotalArray = [[NSMutableArray alloc] init];
-  
-  for (i = 1; i <= numLevels; i++)
+  int j;
+  NSNumber *count;
+	for (int i = 0; i < 6; i++)
   {
-    // Get denominator values from cache/database
-    tmpTotal = [[cardLevelCounts objectAtIndex:i] intValue];
-//    tmpTotal = [CardPeer retrieveCardCountByLevel:[self tagId] levelId:i force:NO];    
-    if (i == 1) levelOneTotal = tmpTotal;
-    [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
-    cardTotal = cardTotal + tmpTotal;
-    denominatorTotal = denominatorTotal + (tmpTotal * (numLevels - i + 1)); 
-    numeratorTotal = numeratorTotal + (tmpTotal * i);
+    j = [CardPeer retrieveCardCountByLevel:tagId levelId:i];
+	  count = [[NSNumber alloc] initWithInt:j];
+	  [[self cardLevelCounts] addObject:count];
+	  [count release];
   }
-  
-  // Quick check to make sure we are not at the "start of a set". 
-  if (cardTotal == totalCards)
-  {
-    p_unseen = 0;
-  }
-  else if (cardTotal > totalCards)
-  {
-    // This should not happen, it is likely that we need to re-cache TotalCards
-    NSLog(@"CardTotal became more than totalCards... (%d, %d)", cardTotal, totalCards);
-    p_unseen = 0;
-  }
-  else
-  {
-    // Get the "new card" p
-    mean = (float)numeratorTotal / (float)cardTotal;
-    p_unseen = (mean - (float)1);
-    p_unseen = pow((p_unseen / (float) 4),2);
-    if (levelOneTotal < 30 && (totalCards - cardTotal) > 0)
-    {
-      p_unseen = p_unseen + (1-p_unseen)*(pow((30-cardTotal),.25)/pow(30,.25));
-    }
-  }
-	
-  float randomNum = ((float)rand() / (float)RAND_MAX);
-  
-  for (i = 1; i <= numLevels; i++)
-  {
-    tmpTotal = [[tmpTotalArray objectAtIndex:(i-1)] intValue];
-    weightedTotal = (tmpTotal * (numLevels - i + 1));
-    p = ((float)weightedTotal / (float)denominatorTotal);
-    p = (1-p_unseen)*p;
-    pTotal = pTotal + p;
-	  if (pTotal > randomNum)
-    {
-		  [tmpTotalArray release];
-		  return i;
-	  }
-  }
-  [tmpTotalArray release];
-  return 0;
 }
+
 
 
 - (void) dealloc 
