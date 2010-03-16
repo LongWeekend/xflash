@@ -103,7 +103,7 @@
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   while ([db dao].inUse && i < 5)
   {
-    NSLog(@"Database is busy %d",i);
+    LWE_LOG(@"Database is busy %d",i);
     usleep(100);
     i++;
   }
@@ -125,7 +125,7 @@
 + (Card*) retrieveCardByPK: (NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c LEFT OUTER JOIN user_history u ON c.card_id = u.card_id WHERE (u.user_id = '%d' or u.user_id IS NULL) AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' WHERE c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
   Card* tmpCard = [CardPeer retrieveCardWithSQL:sql];
 	[sql release];
 	return tmpCard;
