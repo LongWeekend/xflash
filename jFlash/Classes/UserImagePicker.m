@@ -156,8 +156,8 @@ UIImage *rotateImage(UIImage *image) {
 	
 	CGSize origImageSize = origImage.size;
 
-  NSLog(@"origImageSize.width %d", origImageSize.width);
-  NSLog(@"origImageSize.height %d", origImageSize.height);
+  LWE_LOG(@"origImageSize.width %d", origImageSize.width);
+  LWE_LOG(@"origImageSize.height %d", origImageSize.height);
 	
 	CGFloat xBase = 640.0f;
 	CGFloat yBase = 640.0f;
@@ -166,16 +166,16 @@ UIImage *rotateImage(UIImage *image) {
 		yBase = origImageSize.height;
 	}
 
-  NSLog(@"yBase %d", yBase);
-  NSLog(@"yBase %d", yBase);
+  LWE_LOG(@"yBase %d", yBase);
+  LWE_LOG(@"yBase %d", yBase);
 	
 	CGFloat scaleX = origImageSize.width/xBase;	
 	CGFloat scaleY = origImageSize.height/yBase;
 	CGFloat scale = (scaleX > scaleY)?scaleX:scaleY; // decide dimension's scale is widest
 
-  NSLog(@"scaleX %d", scaleX);
-  NSLog(@"scaleY %d", scaleY);
-  NSLog(@"scale %d",  scale);
+  LWE_LOG(@"scaleX %d", scaleX);
+  LWE_LOG(@"scaleY %d", scaleY);
+  LWE_LOG(@"scale %d",  scale);
 
 	if (origRect.size.width >= 640.0f || origRect.size.width > origImageSize.width){ // reset scale if cropping rect is bigger
 		scale = origImageSize.width / origRect.size.width;
@@ -186,8 +186,8 @@ UIImage *rotateImage(UIImage *image) {
 	newRect.size.width = origRect.size.width * scale;
 	newRect.size.height = origRect.size.height * scale;
   
-  NSLog(@"origRect.origin ",  origRect.origin);
-  NSLog(@"newRect.origin ",  newRect.origin);
+  LWE_LOG(@"origRect.origin ",  origRect.origin);
+  LWE_LOG(@"newRect.origin ",  newRect.origin);
 
 	// Make the crop rectangle cover the whole screen rather than a virtual 320x320 square in the center
 	CGFloat virtualScale = newRect.size.width / 320.0f;

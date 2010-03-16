@@ -33,7 +33,7 @@
   else
   {
     // We should fail here.
-    NSLog(@"Unable to insert tag name: %@",tagName);
+    LWE_LOG(@"Unable to insert tag name: %@",tagName);
     lastTagId = 0;
   }
   return lastTagId;
@@ -56,7 +56,7 @@
 	[sql2 release];
   if ([dao hadError])
   {
-    NSLog(@"Err %d: %@", [dao lastErrorCode], [dao lastErrorMessage]);
+    LWE_LOG(@"Err %d: %@", [dao lastErrorCode], [dao lastErrorMessage]);
   }
 }
 
@@ -116,7 +116,7 @@
 	[sql2 release];
   if ([[db dao] hadError])
   {
-    NSLog(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
+    LWE_LOG(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
   }
 }
 
@@ -229,7 +229,7 @@
 	[sql3 release];
   if ([[db dao] hadError])
   {
-    NSLog(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
+    LWE_LOG(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
     return NO;
   }
   return YES;
