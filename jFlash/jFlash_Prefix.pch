@@ -16,7 +16,6 @@
   #import "Tag.h"
   #import "Group.h"
   #import "User.h"
-  #import "CardPeerProxy.h"
   #import "CardPeer.h"
   #import "GroupPeer.h"
   #import "UserHistoryPeer.h"
