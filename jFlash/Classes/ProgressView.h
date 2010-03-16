@@ -29,6 +29,7 @@
   IBOutlet UILabel *cardSetProgressLabel3;
   IBOutlet UILabel *cardSetProgressLabel4;
   IBOutlet UILabel *cardSetProgressLabel5;  
+  IBOutlet UILabel *progressViewTitle;  
   
   NSMutableArray* levelDetails;
   NSInteger wrongStreak;
@@ -59,5 +60,6 @@
 @property (nonatomic, retain) UILabel *cardSetProgressLabel3;
 @property (nonatomic, retain) UILabel *cardSetProgressLabel4;
 @property (nonatomic, retain) UILabel *cardSetProgressLabel5;
+@property (nonatomic, retain) UILabel *progressViewTitle;
 
 @end

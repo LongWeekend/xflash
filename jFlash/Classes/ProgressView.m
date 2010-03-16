@@ -19,6 +19,10 @@
   [self drawProgressBars];
   [self setStreakLabel];
   [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  User* user = [User getUser:[settings integerForKey:@"user_id"]];
+  [progressViewTitle setText:[NSString stringWithFormat:@"%@'s Progress", [user userNickname]]];
 }
 
 - (void)setStreakLabel{
