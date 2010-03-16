@@ -58,10 +58,8 @@
 		9180920010EB97B600440E8E /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 918091FF10EB97B600440E8E /* Appirater.m */; };
 		91948BEE112657F200D35591 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 91948BED112657F200D35591 /* Constants.m */; };
 		91948FEE11269EF000D35591 /* LWE_Util_Labels.m in Sources */ = {isa = PBXBuildFile; fileRef = 91948FED11269EF000D35591 /* LWE_Util_Labels.m */; };
-		919C8077111E95BD00C8FE90 /* CardPeerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE65111E87B9006B72E6 /* CardPeerProxy.m */; };
 		919FC6FE10C2617D005A5E23 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 919FC6FD10C2617D005A5E23 /* ProgressView.m */; };
 		91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE31111E56B6006B72E6 /* CardTest.m */; };
-		91C9EE66111E87B9006B72E6 /* CardPeerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE65111E87B9006B72E6 /* CardPeerProxy.m */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
 		D30ABCC210BBB93D0013756B /* SplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = D30ABCC010BBB93D0013756B /* SplashView.m */; };
 		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -226,8 +224,6 @@
 		919FC6FD10C2617D005A5E23 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
-		91C9EE64111E87B9006B72E6 /* CardPeerProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardPeerProxy.h; sourceTree = "<group>"; };
-		91C9EE65111E87B9006B72E6 /* CardPeerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardPeerProxy.m; sourceTree = "<group>"; };
 		91EA2F4B104135E200AB848E /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		D30ABCC010BBB93D0013756B /* SplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashView.m; sourceTree = "<group>"; };
 		D30ABCC110BBB93D0013756B /* SplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashView.h; sourceTree = "<group>"; };
@@ -328,10 +324,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DA8B6A560FB1121000DE105C /* Models */,
 				49075BD6114E641500EDAABB /* Views */,
 				DA8B6A4B0FB111D600DE105C /* Controllers */,
 				499E5AE70FF4D3ED006926A2 /* Helpers */,
-				DA8B6A560FB1121000DE105C /* Models */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -609,8 +605,6 @@
 			children = (
 				DAAC1D380FAF18F000B537DD /* Card.h */,
 				DAAC1D390FAF18F000B537DD /* Card.m */,
-				91C9EE64111E87B9006B72E6 /* CardPeerProxy.h */,
-				91C9EE65111E87B9006B72E6 /* CardPeerProxy.m */,
 				DAAC1D3A0FAF18F000B537DD /* CardPeer.h */,
 				DAAC1D3B0FAF18F000B537DD /* CardPeer.m */,
 				D3D7ADC31111655C005B0B0E /* Group.h */,
@@ -793,7 +787,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				919C8077111E95BD00C8FE90 /* CardPeerProxy.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* jFlashAppDelegate.m in Sources */,
 				28216C970DB411BC00E5133A /* StudyViewController.m in Sources */,
@@ -853,7 +846,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */,
-				91C9EE66111E87B9006B72E6 /* CardPeerProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
