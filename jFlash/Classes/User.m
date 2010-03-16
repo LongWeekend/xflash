@@ -21,12 +21,6 @@
 {
   int i = 0;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  while ([db dao].inUse && i < 5)
-  {
-    NSLog(@"Database is busy %d",i);
-    usleep(100);
-    i++;
-  }
 
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER BY upper(nickname) ASC"];
 
@@ -35,7 +29,7 @@
 	while ([rs next]) {
 		User* tmpUser = [[[User alloc] init] autorelease];
 		[tmpUser hydrate:rs];
-    NSLog(@"User loaded: %@", [tmpUser userNickname]);
+    LWE_LOG(@"User loaded: %@", [tmpUser userNickname]);
 		[userList addObject: tmpUser];
   }
 	
@@ -61,12 +55,6 @@
 {
   int i = 0;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  while ([db dao].inUse && i < 5)
-  {
-    NSLog(@"Database is busy %d",i);
-    usleep(100);
-    i++;
-  }
 
   NSString *sql = [NSString stringWithFormat:@"SELECT * FROM users WHERE user_id = %d", userId];
   FMResultSet *rs = [[db dao] executeQuery:sql];

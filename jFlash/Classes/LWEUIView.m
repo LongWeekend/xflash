@@ -15,7 +15,7 @@
 {
   UITouch *touch = [touches anyObject];
   UIView *touchedView = [touch view];
-  NSLog([NSString stringWithFormat:@"%d",touchedView.tag]);
+  LWE_LOG([NSString stringWithFormat:@"%d",touchedView.tag]);
 }
  */
 

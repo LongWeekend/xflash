@@ -69,7 +69,7 @@
   if (lastTagId > 0 && defaultCardId > 0)
   {
     [TagPeer subscribe:defaultCardId tagId:lastTagId];
-    NSLog(@"last row: %d",lastTagId);
+    LWE_LOG(@"last row: %d",lastTagId);
   }
   
   [[self parentViewController] dismissModalViewControllerAnimated:YES];

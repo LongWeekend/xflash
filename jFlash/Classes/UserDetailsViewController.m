@@ -48,7 +48,7 @@
   [super viewWillAppear:animated];
   userNicknameTextField.returnKeyType = UIReturnKeyDone;
   userNicknameTextField.placeholder = @"Type your name here";
-  NSLog(@"img path: %@",[selectedUser avatarImagePath]);
+  LWE_LOG(@"img path: %@",[selectedUser avatarImagePath]);
   [userAvatarPreviewBtn setBackgroundImage:[selectedUser getUserThumbnailLarge] forState:UIControlStateNormal];
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
