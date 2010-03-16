@@ -295,7 +295,7 @@
   {
     [cardIdList addObject:[[[NSMutableArray alloc] init] autorelease]];
   }
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id WHERE l.tag_id = '%d' AND (u.user_id = '%d' OR u.user_id is null)",tagId,[settings integerForKey:@"user_id"]];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id AND u.user_id = '%d' WHERE l.tag_id = '%d'",[settings integerForKey:@"user_id"],tagId];
   FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
