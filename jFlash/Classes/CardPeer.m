@@ -194,65 +194,6 @@
 
 
 //--------------------------------------------------------------------------
-// int retrieveCardCountByLevel: setId levelId: levelId
-// Returns the number of cards in each level by set
-//--------------------------------------------------------------------------
-+ (NSInteger) retrieveCardCountByLevel: (NSInteger)setId levelId:(NSInteger)levelId
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  // Variable decs
-  int i = -1;
-  NSString *sql = nil;
-  FMResultSet *rs = nil;
-
-  // Check the cache table
-  sql = [[NSString alloc] initWithFormat:@"SELECT count FROM tag_level_count_cache WHERE tag_id = '%d' AND user_id = '%d' AND card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-  rs = [[db dao] executeQuery:sql];
-  while ([rs next])
-  {
-    i = [rs intForColumn:@"count"];
-  }
-  [rs close]; 
-  [sql release];
-  // If cache does not exist
-  if (i < 0)
-  {
-    LWE_LOG(@"Cache does not exist, must create from database");
-    
-    NSLog(@"START NORMAL ----------------------------------------");
-    sql = [[NSString alloc] initWithFormat:@"SELECT COUNT(l.card_id) as card_count FROM card_tag_link l, user_history u WHERE l.card_id = u.card_id AND l.tag_id = '%d' AND u.user_id = '%d' AND u.card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-    rs = [[db dao] executeQuery:sql];
-    while ([rs next])
-    {
-      i = [rs intForColumn:@"card_count"];
-    }
-    [rs close]; 
-    [sql release];
-    
-    /*
-    NSLog(@"START SUBSELECT ----------------------------------------");
-    sql = [[NSString alloc] initWithFormat:@"SELECT COUNT(card_id) as card_count FROM user_history WHERE card_id IN (SELECT card_id from card_tag_link WHERE tag_id = '%d') AND user_id = '%d' AND card_level = '%d'",setId,[settings integerForKey:@"user_id"],levelId];
-    rs = [[db dao] executeQuery:sql];
-    while ([rs next])
-     {
-       i = [rs intForColumn:@"card_count"];
-     }
-    [rs close]; 
-    [sql release];    
-    NSLog(@"END SUBSELECT ----------------------------------------");
-     */
-    
-    // Finally, cache the result
-    sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO tag_level_count_cache (tag_id,user_id,card_level,count) VALUES ('%d','%d','%d','%d')",setId,[settings integerForKey:@"user_id"],levelId,i];
-    [[db dao] executeUpdate:sql];
-    [sql release];
-  }
-  return i;    
-}
-
-
-//--------------------------------------------------------------------------
 // NSMutableArray* retrieveCardSet: setId
 // Returns an array of Cards for a given tag
 //--------------------------------------------------------------------------

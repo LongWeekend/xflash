@@ -44,6 +44,7 @@
   [self setCardLevelCounts:cardLevelCountsTmp];
   [self setCardCount:totalCount];
   [cardPeerProxy setCardLevelCounts:[self cardLevelCounts]];
+  [cardPeerProxy setCardCount:totalCount];
 }
 
 
@@ -100,13 +101,13 @@
 {
   // determine the next level
   int next_level = [cardPeerProxy calculateNextCardLevel];
-  while([[[self cardIds] objectAtIndex:next_level] count] == 0)
-  {
-    next_level = [cardPeerProxy calculateNextCardLevel];
-  }
+//  while([[[self cardIds] objectAtIndex:next_level] count] == 0)
+//  {
+//    next_level = [cardPeerProxy calculateNextCardLevel];
+//  }
   
   // Get a random card offset
-  int randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+  int randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];  
 
   NSNumber* cardId;
   
