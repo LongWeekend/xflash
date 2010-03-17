@@ -697,7 +697,15 @@
   NSMutableArray* levelDetails = [self getLevelDetails];
   if (levelDetails)
   {
-    [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];
+    // set the x / total to the current index in browse mode
+    if(isBrowseMode)
+    {
+      [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
+    }
+    else
+    {
+      [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];
+    }
     [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
     [cardSetProgressLabel2 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:2]intValue]]];  
     [cardSetProgressLabel3 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:3]intValue]]];  
