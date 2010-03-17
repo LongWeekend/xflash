@@ -26,19 +26,18 @@ NSString * const APP_THEME           = @"theme";
 NSString * const APP_SPLASH          = @"splash";
 NSString * const APP_USER            = @"user_id";
 
-
 // Study View Controllers
 NSString * const HTML_FOOTER = @"</div></body></html>";
 
 NSString * const HTML_HEADER = @""
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><style>"
-"body{background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:18px; font-family:Helvetica,sanserif;} "
+"body{background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-family:Helvetica,sanserif;} "
 "dfn{ position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
 "#container{width:245px; display:table-cell; vertical-align:middle;} "
-"ol{text-align:left; width:235px; margin:0px; margin-left:27px; padding-left:10px;} "
+"ol{text-align:left; width:235px; margin:0px; margin-left:24px; padding-left:10px;} "
 "li{margin:0px; margin-bottom:7px; line-height:17px;} "
-"span.jpn{font-size:28px;line-height:32px;} "
+"span.jpn{font-size:28px;padding-left:16px; line-height:32px;} "
 "##THEMECSS##</style></head>"
 "<body><div id='container'>";
 
