@@ -83,7 +83,7 @@
   }
   else
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
+    cell = [LWE_Util_Table reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     if (indexPath.row == kWordSetOptionsStart)
     {
