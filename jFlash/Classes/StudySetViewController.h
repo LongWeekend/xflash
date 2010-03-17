@@ -28,7 +28,7 @@
 	BOOL searching;
 }
 
-- (void) changeStudySet;
+- (void) changeStudySet: (Tag*) tag;
 - (void) reloadTableData;
 - (void) reloadSubgroupData;
 - (void) doDoneSearching:(id)sender;
