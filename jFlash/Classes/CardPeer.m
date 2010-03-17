@@ -12,14 +12,18 @@
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   NSString* sql;
   FMResultSet *rs;
-
+  NSString* keywordWildcard;
+  
   if (!slowSearch){
     int queryLimit = 100;
     int queryLimit2;
+    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
 
     // Do the search using SQLite FTS (PTAG results)
-    //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 1 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit];
-    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) ORDER BY headword", keyword, queryLimit];
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, queryLimit];
     rs = [[db dao] executeQuery:sql];
     int cardListCount = 0;
     while ([rs next]) {
@@ -35,8 +39,10 @@
       queryLimit2 = queryLimit;
       
     // Do the search using SQLite FTS (NON-PTAG results)
-    //sql = [NSString stringWithFormat:@"SELECT c.*, 0 as card_level, 0 as user_id FROM cards_search_content csc INNER JOIN cards c ON csc.card_id = c.card_id WHERE csc.patg = 0 AND csc.content MATCH '%@' ORDER BY c.headword LIMIT %d", keyword, queryLimit2];
-    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) ORDER BY headword", keyword, queryLimit2];
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, queryLimit2];
     rs = [[db dao] executeQuery:sql];
     while ([rs next]) {
       Card* tmpCard = [[[Card alloc] init] autorelease];
@@ -48,9 +54,11 @@
   else
   {
     // Do slow substring match (w/ ASTERISK)
-    NSString* wildcardKeyword = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
-    sql = [NSString stringWithFormat:@"SELECT *, 0 as card_level, 0 as user_id FROM cards WHERE card_id in (SELECT card_id FROM cards_search_content  WHERE content MATCH '%@*' AND ptag = 0 LIMIT 200) ORDER BY headword", wildcardKeyword];
-    //sql = [NSString stringWithFormat:@"SELECT card_id,headword,reading,meaning,romaji,0 as card_level,0 as user_id FROM cards WHERE headword LIKE '%%%@%%' OR headword_en LIKE '%%%@%%' OR reading LIKE '%%%@%%' ORDER BY headword LIMIT 100",keyword,keyword,keyword];
+    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, 200];
     rs = [[db dao] executeQuery:sql];
     while ([rs next])
     {
@@ -127,7 +135,10 @@
 + (Card*) retrieveCardByPK: (NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' WHERE c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
+  NSString *sql = [[NSString alloc] initWithFormat:@""
+      "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+      "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
+      "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
   Card* tmpCard = [CardPeer retrieveCardWithSQL:sql];
 	[sql release];
 	return tmpCard;
@@ -142,7 +153,10 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, user_history u WHERE c.card_id = u.card_id AND u.user_id = '%d' AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
+  NSString *sql = [[NSString alloc] initWithFormat:@""
+    "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+    "FROM cards_html ch, cards c, user_history u WHERE ch.card_id = c.card_id AND c.card_id = u.card_id AND "
+    "u.user_id = '%d' AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
   FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
@@ -168,7 +182,10 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   Card *tmpCard;
 	NSString *sql, *sql2;
-  sql = [[NSString alloc] initWithFormat:@"SELECT card_level,u.card_id AS card_id,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d' AND u.card_level = '%d' LIMIT 1 OFFSET %d",setId,[settings integerForKey:@"user_id"],levelId,randomNum];
+  sql = [[NSString alloc] initWithFormat:@""
+      "SELECT card_level,u.card_id AS card_id,u.wrong_count as wrong_count,u.right_count as right_count "
+      "FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d' "
+      "AND u.card_level = '%d' LIMIT 1 OFFSET %d",setId,[settings integerForKey:@"user_id"],levelId,randomNum];
   int cardId = 0;
   int cardLevel = 0;
   int wrongCount = 0;
@@ -182,7 +199,9 @@
     rightCount = [rs intForColumn:@"right_count"];
   }
   [rs close];
-  sql2 =  [[NSString alloc] initWithFormat:@"SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
+  sql2 =  [[NSString alloc] initWithFormat:@""
+    "SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * "
+    "FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
   FMResultSet *rs2 = [[db dao] executeQuery:sql2];
   tmpCard = [[[Card alloc] init] autorelease];
   while ([rs2 next])
@@ -238,7 +257,8 @@
   {
     [cardIdList addObject:[[[NSMutableArray alloc] init] autorelease]];
   }
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id AND u.user_id = '%d' WHERE l.tag_id = '%d'",[settings integerForKey:@"user_id"],tagId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level "
+"FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id AND u.user_id = '%d' WHERE l.tag_id = '%d'",[settings integerForKey:@"user_id"],tagId];
   FMResultSet *rs = [[db dao] executeQuery:sql];
   while ([rs next])
   {
@@ -269,8 +289,10 @@
 + (NSMutableArray*) retrieveCardSet: (NSInteger) tagId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, card_tag_link l, user_history u WHERE c.card_id = u.card_id AND c.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
-//  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT u.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE l.card_id = u.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
+  NSString *sql = [[NSString alloc] initWithFormat:@""
+        "SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+        "FROM cards c, cards_html ch, card_tag_link l, user_history u WHERE c.card_id = ch.card_id AND c.card_id = u.card_id AND "
+        "c.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
   NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
   [sql release];
 	return cardList;
@@ -284,7 +306,10 @@
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.c ard_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,headword,headword_en,reading,meaning,romaji FROM cards c, card_tag_link l, user_history u WHERE c.card_id = u.card_id AND c.card_id = l.card_id AND u.user_id = '%d' AND l.tag_id = '%d' AND u.card_level = '%d'",[settings integerForKey:@"user_id"],setId,levelId];
+  NSString *sql = [[NSString alloc] initWithFormat:@""
+        "SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+        "FROM cards c, cards_html ch, card_tag_link l, user_history u WHERE c.card_id = ch.card_id AND c.card_id = u.card_id "
+        "AND c.card_id = l.card_id AND u.user_id = '%d' AND l.tag_id = '%d' AND u.card_level = '%d'",[settings integerForKey:@"user_id"],setId,levelId];
   NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
 	[sql release];
 	return cardList;
