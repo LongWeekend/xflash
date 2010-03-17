@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "LoadingView.h"
 
 @protocol InitializationDelegate <NSObject>
 @optional
@@ -18,22 +19,22 @@
 @interface RootViewController : UIViewController
 {
 	id<InitializationDelegate> delegate;
-	PDColoredProgressView *loadingView;
+//	PDColoredProgressView *loadingView;
+  LoadingView *loadingView;
   NSInteger i;
   UITabBarController *tabBarController;
 }
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
 @property (retain) id<InitializationDelegate> delegate;
-@property (retain,nonatomic) PDColoredProgressView *loadingView;
+@property (retain,nonatomic) LoadingView *loadingView;
 @property NSInteger i;
 
 - (void) switchToStudyView;
 - (void) applicationWillTerminate;
-- (void) continueDatabaseCopy;
-- (void) startDatabaseCopy;
-- (void) finishDatabaseCopy;
 - (void) showFirstLoadProgressView;
+- (void) continueDatabaseCopy;
+- (void) finishDatabaseCopy;
 - (void) loadTabBar;
 
 @end

@@ -171,39 +171,22 @@
 // On first load when copying the database
 - (void) showFirstLoadProgressView
 {
-  loadingView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-  [loadingView setTintColor:[UIColor yellowColor]];
-  CGRect viewFrame = loadingView.frame;
-  viewFrame.origin.x = 81;
-  viewFrame.origin.y = 412;
-  loadingView.frame = viewFrame;
-
-  [self.view addSubview:loadingView];
-  [self startDatabaseCopy];
-} 
-
-- (void) startDatabaseCopy
-{
+  loadingView = [LoadingView loadingViewInView:self.view withText:@"Initializing Database..."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db performSelectorInBackground:@selector(openedDatabase) withObject:nil];
   [self continueDatabaseCopy];
-}
+} 
 
 - (void) continueDatabaseCopy
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   if (!db.databaseOpenFinished)
   {
-    float k = ((float)i/150.0f);
-    LWE_LOG(@"float val : %f %d",k,i);
-    [[self loadingView] setProgress:k];
-    i++;
     [self performSelector:@selector(continueDatabaseCopy) withObject:nil afterDelay:0.25];
   }
   else
   {
-    [[self loadingView] setProgress:1.0f];
-    [self performSelector:@selector(finishDatabaseCopy) withObject:nil afterDelay:0.1];
+    [self finishDatabaseCopy];
   }
 }
 
@@ -211,8 +194,7 @@
 {
 	if (loadingView)
   {
-		[loadingView removeFromSuperview];
-		[loadingView release];
+    [loadingView removeView];
 	}		
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(appInitDidComplete)])
   {

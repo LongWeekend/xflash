@@ -19,7 +19,7 @@
 
 }
 
-+ (id)loadingViewInView:(UIView *)aSuperview;
++ (id)loadingViewInView:(UIView *)aSuperview withText:(NSString *)text;
 - (void)removeView;
 
 @end
