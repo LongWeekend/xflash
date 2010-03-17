@@ -373,13 +373,12 @@
 {
   if (indexPath.section == 1 || searching)
   {
-    // TODO why does this crash
+    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     self.selectedTagId = indexPath.row;
     StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTitle:[[[self tagArray] objectAtIndex:indexPath.row] tagName]]; 
     [wordsController setTag:[[self tagArray] objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:wordsController animated:YES];
     [wordsController release];
-    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   }
 }
 
