@@ -143,7 +143,7 @@
   if (buttonIndex == 1)
   {
     // Load modal spinner
-    loadingView = [LoadingView loadingViewInView:[self view]];
+    loadingView = [LoadingView loadingViewInView:[self view] withText:@"Switching User..."];
     [self performSelector:@selector(doActivateUser) withObject:nil afterDelay:0.1];
   }
 }
