@@ -108,7 +108,7 @@
     if (indexPath.row == kWordSetOptionsStart)
     {
       // Fire set change notification
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self];
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
     }
     // TODO: implement this well later
     /* else if (indexPath.row == kWordSetOptionsPublish) {

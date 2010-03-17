@@ -59,7 +59,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
   
   // Register listener in case user starts set from word list
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySet) name:@"setWasChangedFromWordsList" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
   
   // Register listener in case theme was changed (to ensure back button changes color)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToRoot) name:@"themeWasChanged" object:nil];
@@ -126,10 +126,15 @@
   [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
-- (void) changeStudySet
+- (void) changeStudySetFromWordList:(NSNotification*)dict
+{
+  [self changeStudySet:[[dict userInfo] objectForKey:@"tag"]];
+}
+
+- (void) changeStudySet:(Tag*) tag
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [appSettings setActiveTag:[[self tagArray] objectAtIndex:self.selectedTagId]];
+  [appSettings setActiveTag:tag];
   
   // Post notification to switch active tab
   [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
@@ -359,7 +364,7 @@
   {
     [[self tableView] reloadData];
     [activityIndicator startAnimating];
-    [self performSelector:@selector(changeStudySet) withObject:nil afterDelay:0];
+    [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
     return;
   }
 }
