@@ -222,12 +222,13 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [[db dao] executeQuery:sql];
+  Card* tmpCard;
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   int i = 0;
   while ([rs next])
   {
     i++;
-    Card* tmpCard = [[Card alloc] init];
+    tmpCard = [[Card alloc] init];
     if (hydrate)
     {
       [tmpCard hydrate:rs];
@@ -277,8 +278,8 @@
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
   NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:NO];
-	[sql release];
-	return cardList;
+  [sql release];
+  return cardList;
 }
 
 

@@ -375,8 +375,8 @@
   {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     self.selectedTagId = indexPath.row;
-    StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTitle:[[[self tagArray] objectAtIndex:indexPath.row] tagName]]; 
-    [wordsController setTag:[[self tagArray] objectAtIndex:indexPath.row]];
+    Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
+    StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTag:tmpTag]; 
     [self.navigationController pushViewController:wordsController animated:YES];
     [wordsController release];
   }
