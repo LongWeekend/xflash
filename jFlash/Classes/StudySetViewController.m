@@ -374,7 +374,6 @@
   if (indexPath.section == 1 || searching)
   {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-    self.selectedTagId = indexPath.row;
     Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
     StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTag:tmpTag]; 
     [self.navigationController pushViewController:wordsController animated:YES];
