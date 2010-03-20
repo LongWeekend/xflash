@@ -240,7 +240,13 @@
   Card* card;
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
-    NSNumber* cardId = [[[self cardIds] objectAtIndex:0] objectAtIndex: [self currentIndex]];
+    // TODO: in some cases the currentIndex can be beyond the range.  We should figure out why, but for the time being I'll reset it to 0 instead of breaking
+    NSMutableArray* tmpCardIds = [[self cardIds] objectAtIndex:0];
+    if([self currentIndex] >= [tmpCardIds count])
+    {
+      [self setCurrentIndex:0];
+    }
+    NSNumber* cardId = [tmpCardIds objectAtIndex: [self currentIndex]];
     card = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
