@@ -9,17 +9,21 @@
 #import "StudySetWordsViewController.h"
 
 @implementation StudySetWordsViewController
-@synthesize tag, cards;
+@synthesize tag, cards, activityIndicator;
 // TODO: next version
 // @synthesize queue, statusMsgBox;
 
 
-- (id) initWithTitle:(NSString*) title
+- (id) initWithTag:(Tag*)initTag
 {
   if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
-    self.navigationItem.title = title;
+    [self setTag:initTag];
+    self.navigationItem.title = [initTag tagName];
   }
+  [self setCards:nil];
+  [self setActivityIndicator:[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+  [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];
   return self;
 }
 
@@ -27,13 +31,20 @@
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
 
 #pragma mark Table view methods
+
+- (void) loadWordListInBackground
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
+  [self.tableView reloadData];
+  [pool release];
+}
 
 - (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
 {
@@ -48,18 +59,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return settingsSectionsLength;
+  return wordsSectionsLength;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if (section == kWordSetListSections) return ([cards count]);
-  else return 1;
-  // We are hiding publish button in first release
-  //  else return 2;
+  int returnCount = 0;
+  if (section == kWordSetListSections)
+  {
+    if ([self cards] == nil)
+    {
+      // Show loading
+      returnCount = 1;
+    }
+    else
+    {
+      // Show cards & stop the animator
+      [activityIndicator stopAnimating];
+      returnCount = [cards count];
+    }
+  }
+  else
+  {
+    // Show one top button
+    returnCount = 1;
+    // We are hiding publish button in first release
+    //  else return 2;
+  }
+  return returnCount;
 }
-
 
 
 // Customize the appearance of table view cells.
@@ -70,16 +99,26 @@
   UITableViewCell *cell;
   if (indexPath.section == kWordSetListSections)
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
-    cell.selectionStyle = 0;
-    Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
-    if ([tmpCard headword] == nil)
+    if ([self cards] == nil)
     {
-      tmpCard = [CardPeer hydrateCardByPK:tmpCard];
-      [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+      cell = [LWE_Util_Table reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
+      cell.textLabel.text = @"Loading words...";
+      cell.accessoryView = activityIndicator;
+      [activityIndicator startAnimating];
     }
-    cell.detailTextLabel.text = [tmpCard headword];
-    cell.textLabel.text = [[cards objectAtIndex:indexPath.row] meaningWithoutMarkup];
+    else
+    {
+      cell = [LWE_Util_Table reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
+      cell.selectionStyle = 0;
+      Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
+      if ([tmpCard headword] == nil)
+      {
+        tmpCard = [CardPeer hydrateCardByPK:tmpCard];
+        [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+      }
+      cell.detailTextLabel.text = [tmpCard headword];
+      cell.textLabel.text = [tmpCard meaningWithoutMarkup];
+    }
   }
   else
   {
@@ -207,6 +246,7 @@
   [tag release]; 
 //  [queue release];
   [cards release];
+  [activityIndicator release];
 //  [statusMsgBox release];
   [super dealloc];
 }

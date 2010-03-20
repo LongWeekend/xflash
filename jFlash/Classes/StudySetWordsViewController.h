@@ -14,35 +14,40 @@
 //#import "Util.h"
 //#import "ASIFormDataRequest.h"
 
-enum settingsRows {
+
+enum settingsRows
+{
   kWordSetOptionsStart = 0,
   kWordSetOptionsPublish = 1,
   settingsRowsLenght
 };
 
-enum settingsSections {
+
+enum wordsSections
+{
   kWordSetOptionsSection = 0,
   kWordSetListSections = 1,
-  settingsSectionsLength
+  wordsSectionsLength
 };
 
 @interface StudySetWordsViewController : UITableViewController 
 {
 	Tag* tag;
 	NSMutableArray* cards;
-
   //TODO: next version
   // UIAlertView* statusMsgBox;
   //  NSOperationQueue* queue;
+  UIActivityIndicatorView *activityIndicator;
 }
 
 
-- (id) initWithTitle:(NSString*) title;
+- (id) initWithTag:(Tag*) initTag;
 
 //TODO: next version
 //- (void) uploadThisSet;
 //- (void) postDataToURL:(NSString*)csvData;
 
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) Tag *tag;
 //@property (nonatomic, retain) UIAlertView *statusMsgBox;
 @property (retain) NSMutableArray *cards;
