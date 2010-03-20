@@ -64,7 +64,7 @@
     newFont = [newFont fontWithSize:i];
     CGSize constraintSize = theLabel.frame.size;
     constraintSize.width = constraintSize.width-5;
-    constraintSize.height = MAXFLOAT;
+    constraintSize.height = 6000.0f;
     
     // WARNING: this uses "word wrap" (not good for very long JPN strings!)
     expectedLabelSize = [theLabel.text sizeWithFont:newFont constrainedToSize:constraintSize lineBreakMode:theLabel.lineBreakMode];

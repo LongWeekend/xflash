@@ -572,6 +572,7 @@
   CGRect headwordFrame = cardHeadwordLabelScrollContainer.frame;
   CGRect readingBtnFrame = toggleReadingBtn.frame;
   CGRect readingScrollMoreFrame = cardReadingLabelScrollMoreIcon.frame;
+  CGRect headwordScrollMoreFrame = cardHeadwordLabelScrollMoreIcon.frame;
   
   // Y-Positions for E_TO_J Mode
   if([studyDirection isEqualToString: SET_E_TO_J])
@@ -607,6 +608,10 @@
   // Move cardHeadwordLabelScrollContainer
   headwordFrame.origin.y = headwordY;
   cardHeadwordLabelScrollContainer.frame = headwordFrame;
+  
+  // Move the headword Scroll More Icon
+  headwordScrollMoreFrame.origin.y = headwordY+(headwordFrame.size.height/3);
+  cardHeadwordLabelScrollMoreIcon.frame = headwordScrollMoreFrame;
     
   // Move cardReadingLabelScrollMoreIcon
   readingScrollMoreFrame.origin.y = readingBtnY+(CARDCONTENT_PADDING*3);
