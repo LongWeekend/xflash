@@ -42,6 +42,8 @@
 {
   [super viewWillAppear:animated];
   _searchRan = NO;
+  _deepSearchRan = NO;
+  
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   searchBar.tintColor = [CurrentState getThemeTintColor];
   // Show keyboard if no results TODO
@@ -67,6 +69,7 @@
 - (void) searchBarSearchButtonClicked:(UISearchBar *)lclSearchBar
 {
   [self runSearch:NO];
+  _deepSearchRan = NO;
   [lclSearchBar resignFirstResponder];
 }
 
@@ -78,6 +81,7 @@
 // convenience method for performSelecterInBackground
 - (void) runSlowSearch
 {
+  _deepSearchRan = YES;
   [self runSearch:YES];
 }
 
@@ -112,7 +116,10 @@
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSString *CellIdentifier = @"Cell";
-  if([searchArray count] == 0 && _searchRan){
+  if([searchArray count] == 0 && _searchRan && _deepSearchRan){
+    CellIdentifier = @"deepSearchNoResultCell";
+  }
+  else if([searchArray count] == 0 && _searchRan){
     CellIdentifier = @"noResultCell";
   }
   
@@ -125,7 +132,15 @@
   cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
   
-  if([searchArray count] == 0 && _searchRan)
+  if([searchArray count] == 0 && _searchRan && _deepSearchRan)
+  {
+    cell.textLabel.text = @"No Results Found";
+    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.detailTextLabel.text = @"";
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  }
+  else if([searchArray count] == 0 && _searchRan)
   {
     cell.textLabel.text = @"No Results Found";
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -151,7 +166,12 @@
 
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if([searchArray count] == 0)
+  // if we already did a deep search we can't help them
+  if([searchArray count] == 0 && _deepSearchRan)
+  {
+    return;
+  }
+  else if([searchArray count] == 0)
   {
     [activityIndicator startAnimating];
     // bizaar have to do to make the activityIndicator show.  Apparently without this 0 delay the ui won't be updated until the program loop finishes

@@ -15,6 +15,7 @@
   NSMutableArray *searchArray;
   UIActivityIndicatorView *activityIndicator;
   BOOL _searchRan;
+  BOOL _deepSearchRan;
 }
 
 - (void) runSearch:(BOOL) runSlowSearch;
