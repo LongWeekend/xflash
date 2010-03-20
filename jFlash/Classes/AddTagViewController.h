@@ -11,7 +11,7 @@
 #import "TagPeer.h"
 
 #define FONT_SIZE 14.0f
-#define CELL_CONTENT_WIDTH 320.0f
+#define CELL_CONTENT_WIDTH 300.0f
 #define CELL_CONTENT_MARGIN 10.0f
 
 @interface AddTagViewController : UIViewController {
