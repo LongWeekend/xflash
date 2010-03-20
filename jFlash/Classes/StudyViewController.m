@@ -240,7 +240,7 @@
     [cardReadingLabel setHidden:YES];
     readingVisible = NO;
   }
-  else if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E])
+  else if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E] || [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J] && isBrowseMode == YES)
   {
     [toggleReadingBtn setHidden:NO];
     if(self.showReadingBtnHiddenByUser == YES){
