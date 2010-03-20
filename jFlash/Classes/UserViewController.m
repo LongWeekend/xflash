@@ -112,8 +112,8 @@
   }
 
   // Set up the avatar image
-  UIImageView *tmpView = cell.imageView;
-  tmpView.image = [[usersArray objectAtIndex:indexPath.row] getUserThumbnail];
+//  UIImageView *tmpView = cell.imageView;
+//  tmpView.image = [[usersArray objectAtIndex:indexPath.row] getUserThumbnail];
   
   cell.textLabel.text = tmpStr;
   cell.accessoryType  = UITableViewCellAccessoryDetailDisclosureButton;

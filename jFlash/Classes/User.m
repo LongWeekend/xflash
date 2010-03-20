@@ -91,7 +91,8 @@
 - (void) deleteUser
 {
   // Delete the avatar image
-  if(![[avatarImagePath substringToIndex:1] isEqualToString:@"/"]){
+  if(![[avatarImagePath substringToIndex:1] isEqualToString:@"/"])
+  {
     NSString* filePath = [NSString stringWithFormat:@"%@/%@", DOCSFOLDER, [self avatarImagePath]];
     [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
   }
@@ -134,8 +135,10 @@
 
 # pragma mark Thumbnail Functions
 
-- (UIImage *) getImageFromPath{
-  if([[avatarImagePath substringToIndex:1] isEqualToString:@"/"]){
+- (UIImage *) getImageFromPath
+{
+  if([[avatarImagePath substringToIndex:1] isEqualToString:@"/"])
+  {
     // Default avatar icon path relative to app bundle root
     return [UIImage imageNamed:avatarImagePath];
   }
@@ -147,17 +150,20 @@
   }
 }
 
-- (UIImage *) getUserThumbnailLarge{
+- (UIImage *) getUserThumbnailLarge
+{
   UIImage *cellImage = [self getImageFromPath];
   return [self makeUserThumbnail:cellImage atRatio:(CGFloat)80.0];
 }
 
-- (UIImage *) getUserThumbnail{
+- (UIImage *) getUserThumbnail
+{
   UIImage *cellImage = [self getImageFromPath];
   return [self makeUserThumbnail:cellImage atRatio:(CGFloat)30.0];
 }
 
-- (UIImage *) makeUserThumbnail:(UIImage *)image atRatio:(CGFloat)imgRatio{
+- (UIImage *) makeUserThumbnail:(UIImage *)image atRatio:(CGFloat)imgRatio
+{
   // Create a thumbnail version of the image for the event object.
   CGSize size = image.size;
   CGSize croppedSize;
@@ -168,10 +174,13 @@
   
   // check the size of the image, we want to make it
   // a square with sides the size of the smallest dimension
-  if (size.width && size.height) {
+  if (size.width && size.height)
+  {
     offsetX = (size.height - size.width) / 2;
     croppedSize = CGSizeMake(size.height, size.height);
-  } else {
+  }
+  else
+  {
     offsetY = (size.width - size.height) / 2;
     croppedSize = CGSizeMake(size.width, size.width);
   }
