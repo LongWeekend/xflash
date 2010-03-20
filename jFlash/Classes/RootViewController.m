@@ -171,7 +171,7 @@
 // On first load when copying the database
 - (void) showFirstLoadProgressView
 {
-  loadingView = [LoadingView loadingViewInView:self.view withText:@"Initializing Database..."];
+  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash..."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db performSelectorInBackground:@selector(openedDatabase) withObject:nil];
   [self continueDatabaseCopy];
