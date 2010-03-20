@@ -7,7 +7,7 @@
 #define BURY_BTN 6
 
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX 0
-#define DEFAULT_TAG_ID 19
+#define DEFAULT_TAG_ID 124
 #define DEFAULT_USER_ID 1
 
 // Settings (actual values defined in Constants.m)
