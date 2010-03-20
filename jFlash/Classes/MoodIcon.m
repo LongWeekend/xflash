@@ -60,11 +60,13 @@
   // default when no animtions
   
   if(a == 0){
+    [tmpStr release];
     tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/mood-icons/%@",themeName, [hotHeadsArray objectAtIndex:0]];
   }
   while(a >= 0)
   {
     if(tmpRatio <= a && tmpRatio > a - 10) {
+      [tmpStr release];
       tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/mood-icons/%@",themeName, [hotHeadsArray objectAtIndex:loopCount]];
       break;
     }

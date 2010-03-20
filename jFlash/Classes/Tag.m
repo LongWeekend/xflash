@@ -102,14 +102,16 @@
 {
   NSNumber *count;
   int totalCount = 0;
-  NSMutableArray* cardLevelCountsTmp = [[[NSMutableArray alloc] init] autorelease];
+  NSMutableArray* cardLevelCountsTmp = [[NSMutableArray alloc] init];
   for (int i = 0; i < 6; i++)
   {
-    count = [NSNumber numberWithInt:[[[self cardIds] objectAtIndex:i] count]];
+    count = [[NSNumber alloc] initWithInt:[[[self cardIds] objectAtIndex:i] count]];
     [cardLevelCountsTmp addObject:count];
     totalCount = totalCount + [count intValue];
+    [count release];
   }
   [self setCardLevelCounts:cardLevelCountsTmp];
+  [cardLevelCountsTmp release];
   [self setCardCount:totalCount];
 }
 
@@ -118,7 +120,7 @@
 {
   NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
   LWE_LOG(@"Beginning plist reading: %@",path);
-  NSMutableArray* tmpCardIds = [[NSMutableArray alloc] initWithContentsOfFile:path];
+  NSMutableArray* tmpCardIds = [[[NSMutableArray alloc] initWithContentsOfFile:path] autorelease];
   LWE_LOG(@"Finished plist reading");
   return tmpCardIds;
 }
