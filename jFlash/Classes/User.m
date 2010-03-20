@@ -19,7 +19,6 @@
 
 + (NSMutableArray*) getUsers
 {
-  int i = 0;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER BY upper(nickname) ASC"];
@@ -53,7 +52,6 @@
 
 + (User*) getUser: (NSInteger)userId
 {
-  int i = 0;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   NSString *sql = [NSString stringWithFormat:@"SELECT * FROM users WHERE user_id = %d", userId];

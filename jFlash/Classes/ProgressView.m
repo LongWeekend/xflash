@@ -11,7 +11,7 @@
 @implementation ProgressView
 @synthesize closeBtn, currentStudySet, motivationLabel, levelDetails, streakLabel, rightStreak, wrongStreak;
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
-@synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, cardsWrongAllTime, cardsRightAllTime;
+@synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, cardsWrongAllTime, cardsRightAllTime, progressViewTitle;
 
 - (void)viewDidLoad {
   [super viewDidLoad];

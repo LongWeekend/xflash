@@ -199,6 +199,7 @@ enum EntrySectionRows
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.detailTextLabel.numberOfLines = 0;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
+    [cell.detailTextLabel sizeToFit];
   }
   // the cells for either tag type look the same
   else
