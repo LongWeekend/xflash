@@ -1,138 +1,226 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<style>body{ height:95px; display:table; margin:0px; padding:0px; line-height:19px; font-size:16px; text-align:center; background-color: transparent; font-family:Helvetica,sanserif;}
+<html><head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<style type="text/css" media="screen">@import "jqtouch/jqtouch.min.css";</style>
+<style type="text/css" media="screen">@import "jqtouch/themes/jqt/theme.min.css";</style>
+<script src="jqtouch/jquery.1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="jqtouch/jqtouch.min.js" type="application/x-javascript" charset="utf-8"></script>
+<script src="jqtouch/jqt.autotitles.js" type="application/x-javascript" charset="utf-8"></script>
+<style>body{ margin:0px; padding:0px; line-height:19px; font-size:16px; text-align:left; background-color: transparent; font-family:Helvetica,sanserif;}
 img {display:block; clear:both; margin:auto;} 
-.title{ margin-top:12px;margin-bottom:3px; }
-.screenshot { border:1px solid black;}
+img.screenshot { margin-top:8px; margin-bottom:12px; margin:auto; }
+img.title{ margin-bottom:9px; margin:auto; }
+.screenshot { border:1px solid black; }
 a, a:visited { color:#834320; font-weight:bold;}
+div.info {min-height:350px; text-align:left;}
+p { margin:9px 0 9px 0;}
 </style>
+<script type="text/javascript" charset="utf-8">
+    var jQT = new $.jQTouch({
+        icon: 'jqtouch.png',
+        addGlossToIcon: false,
+        startupScreen: 'jqt_startup.png',
+        statusBar: 'plastic'
+    });
+</script>
 </head>
-<body style="background-color:transparent;padding-top:5px;">
-<div style="width:290px;padding:9px 3px 9px 10px;text-align:left;">
+<body style="background-color:transparent;">
 
-<div align="center" style="padding-bottom:7px">
-  <!--img src="hothead.png" border="0"/-->
-  <img src="welcome.png" border="0" title="Welcome to J Flash" class="title"/>
-  <p>Thank you for choosing <strong>Japanese Flash</strong>. You are truly awesome!</p>
+ <div id="page1">
+  <div class="toolbar">
+      <h1>Help Topics</h1>
+  </div>
+  <ul class="edgetoedge">
+      <li><a href="#welcome">Welcome</a></li>
+      <li><a href="#study-sets">Study Sets</a></li>
+      <li><a href="#practice">Practice</a></li>
+      <li><a href="#browse-cards">Browse</a></li>
+      <li><a href="#word-search">Word Search</a></li>
+      <li><a href="#share">Sharing</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+  </ul>
 </div>
 
-<p>As fellow language students, we wanted to create the most useful &amp; usable flash card
-program for studying words and phrases in Japanese &amp; English.</p>
+<div id="welcome">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+    <img src="welcome.png" border="0" title="Welcome to J Flash" class="title"/>
+    <p>Thank you for choosing <strong>Japanese Flash</strong>.<br/><strong>You are truly awesome!</strong></p>
 
-<p>JFlash has over 100 sets of bilingual data, an intelligent card selection algorithm 
-that works beautifully with all set sizes, a dictionary searchable in English, Romaji
-or Japanese, and a slick interface driven by a fast data engine!</p>
+    <p>As fellow language students, we wanted to create the most useful &amp; usable flash card
+    program for studying words and phrases in Japanese &amp; English.</p>
 
-<p>This is just version 1.0, and we have a lot planned. We hope you enjoy the <strong>free upgrades</strong>!</p>
+    <p>JFlash has over 100 sets of bilingual data, an intelligent card selection algorithm 
+    that works beautifully with all set sizes, a dictionary searchable in English, Romaji
+    or Japanese, and a slick interface driven by a fast data engine!</p>
 
-<img src="choosing-a-set.png" border="0" title="Choosing A Set" class="title"/>
-<p>Click on the 'Study Sets' tab and choose a set by touching its name.
-Sets are organized into folders and are also <strong>searchable</strong>.</p>
+    <p>This is just version 1.0, and we have a lot planned. We hope you enjoy the <strong>free upgrades</strong>!</p>
 
-<img src="screenshot-study-sets.png" border="0" class="screenshot"/>
+  	<div align="center" style="margin-bottom:7px;">
+  	  <a href="http://twitter.com/long_weekend" target="_blank">Follow us on Twitter!</a> 
+  	</div>
 
-<p>To search, slide your finger down the screen to reveal a search bar.
-Search results are updated in real time, and they are fast!</p>
-
-
-<img src="practice.png" border="0" title="Practice" class="title"/>
-
-<p>
-Once a set is chosen, you can either <a href="#browse">browse cards</a>
-or test yourself in practice mode. Card meanings are hidden until you touch
-the card area. Once revealed, you can mark a card as 'Right', 'Wrong',
-or 'Know It'. You can also add it to other sets with the 'Add To Set' button.
-</p>
-
-<img src="screenshot-card-buttons.png" border="0" class="screenshot"/>
-
-<p>
-The first time you get a card right, it moves from 'Studying' to 'Right 1x'.
-Each time you get it right, it will be promoted to a higher level.
-</p>
-<img src="screenshot-progress-bar.png" border="0" class="screenshot"/>
-<p>
-  Get it right five times and it will be marked as 'Learned'. The progress pop-up
-  shows detailed results for the current set. Tap the progress bar to display it.
-</p>
-<img src="screenshot-progress-popup.png" border="0"/>
-
-<div align="center">
-  <p><strong>Your goal is to get each card right 5 times. Good luck!</strong></p>
+  </div>
 </div>
 
-<a name="browse"><img src="browse.png" border="0" title="Browse Cards" class="title"/></a>
-<p>
-If you feel like some mental warm-ups before practicing, tap the 'Settings' tab 
-and flick the 'Browse Mode' on/off switch. Now you are in browse mode, so you can 
-move backwards &amp; forwards through the set by <em>swiping</em> or <em>tapping next/last</em>.
-</p>
+<div id="study-sets">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+    <img src="choosing-a-set.png" border="0" title="Choosing A Set" class="title"/>
+    <p>Click on the 'Study Sets' tab and choose a set by touching its name.
+    Sets are organized into folders and are also <strong>searchable</strong>.</p>
 
-<a name="wordsearch"><img src="word-search.png" border="0" title="Word Search" class="title"/></a>
+    <img src="screenshot-study-sets.png" border="0" class="screenshot"/>
 
-<p>
-JFlash has well over 145,000 words separated into more than 100 sets. Word search can return
-over 200 results in under 1 second using <u>English</u>, <u>Romaji</u> or <u>Japanese</u> keywords.
-</p>
+    <p>To search, slide your finger down the screen to reveal a search bar.
+    Search results are updated in real time, and they are fast!</p>
 
-<img src="screenshot-word-search.png" border="0" class="screenshot"/>
+  	<img src="create-a-set.png" border="0" title="Creating Sets" class="title"/>
+  	<p>
+  	Tap on the 'Study Sets' tab and press '+' to add a set. You can add words to the set using
+  	the <strong>Word Search</strong>. You can also add cards to a set whilst in 
+  	practice mode using the 'Add To Set' button.
+  	</p>
+  	<p>
+  	  We believe an iPhone is a great way to practice, but not great for creating flash cards.
+  	  So in version one, this functionality is limited.
+  	</p>
+  	<p>
+  	  You'll be pleased to hear that our roadmap includes some pretty special solutions to this problem. 
+  	</p>
 
-<p>
-Search works best if you look for <strong>whole words</strong> and use the plain or infinitive
-form for verbs.
-</p>
+  </div>
+</div>
+  
 
-<img src="create-a-set.png" border="0" title="Creating Sets" class="title"/>
-<p>
-Tap on the 'Study Sets' tab and press '+' to add a set. You can add words to the set using
-the <a href="#wordsearch">Word Search</a>. You can also add cards to a set whilst in 
-practice mode using the 'Add To Set' button.
-</p>
-<p>
-  We believe an iPhone is a great way to practice, but not great for creating flash cards.
-  So in version one, this functionality is limited.
-</p>
-<p>
-  You'll be pleased to hear that our roadmap includes some pretty special solutions to this problem. 
-</p>
-<div align="center" style="margin-bottom:7px;">
-  <a href="http://twitter.com/long_weekend" target="_blank">Follow us on Twitter!</a> 
+<div id="practice">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+	<img src="practice.png" border="0" title="Practice" class="title"/>
+	<p>
+	Once a set is chosen, you can either <strong>browse cards</strong>
+	or test yourself in practice mode. Card meanings are hidden until you touch
+	the card area. Once revealed, you can mark a card as 'Right', 'Wrong',
+	or 'Know It'. You can also add it to other sets with the 'Add To Set' button.
+	</p>
+
+	<img src="screenshot-card-buttons.png" border="0" class="screenshot"/>
+	<p>
+	The first time you get a card right, it moves from 'Studying' to 'Right 1x'.
+	Each time you get it right, it will be promoted to a higher level.
+	</p>
+	<img src="screenshot-progress-bar.png" border="0" class="screenshot"/>
+	<p>
+	  Get it right five times and it will be marked as 'Learned'. The progress pop-up
+	  shows detailed results for the current set. Tap the progress bar to display it.
+	</p>
+	<img src="screenshot-progress-popup.png" border="0"/>
+
+	<div align="center">
+	  <p><strong>Your goal is to get each card right 5 times.<br/>Good luck!</strong></p>
+	</div>
+
+  </div>
 </div>
 
-<img src="share.png" border="0" title="Sharing The App" class="title"/>
-<p>
-During beta, we noticed how many people would "borrow" our iPhones to use JFlash!
-Problem was, all our progress data was mixed up! So we added multiple users.
-</p>
+<div id="browse-cards">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
 
-<img src="screenshot-users.png" border="0" class="screenshot"/>
+	<a name="browse"><img src="browse.png" border="0" title="Browse Cards" class="title"/></a>
+	<p>
+	If you feel like some mental warm-ups before practicing, tap the 'Settings' tab 
+	and flick the 'Browse Mode' on/off switch. Now you are in browse mode, so you can 
+	move backwards &amp; forwards through the set by <em>swiping</em> or <em>tapping next/last</em>.
+	</p>
 
-<p>
-From the 'Settings' tab press 'Users'. You can select a user by tapping the name.
-You can add new ones using the '+' button, and you can even select an avatar picture
-from the iPhone photo gallery for each user. We've added some users to get you started!
-</p>
-
-<img src="rate-us.png" border="0" title="Like It? Rate Us?" class="title"/>
-
-<p>
-The more successful the app is, the more time we can devote to making it everything it should be.
-Tell your friends! Make them watch you demonstrate it, just like when we first got an iPhone! *lol*
-</p>
-
-<div align="center"><a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APP_ID&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"><img src="rate-us-btn.png" border="0" title="Like It? Rate Us?"></a></div>
-
-<p>
-We think too many app developers don't listen to their users. <strong>Talk to us directly via GetSatisfaction.com.</strong> We endeavor to respond to ALL feedback and will do our best to please.
-</p>
-
-<div align="center"><a href="http://getsatisfaction.com/longweekend"><img src="feedback-btn.png" border="0" title="Like It? Rate Us?"></a></div>
-
-<p>
-<img src="tikiguy.png" border="0" style="margin-bottom:7px;float:right;"/>
-<br/><em>The Dev Team<br/>Long Weekend LLC</em>
-</p>
-
+  </div>
 </div>
+
+<div id="word-search">
+  <div class="toolbar">
+     <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+
+	<a name="wordsearch"><img src="word-search.png" border="0" title="Word Search" class="title"/></a>
+
+	<p>
+	JFlash has well over 145,000 words separated into more than 100 sets. Word search can return
+	over 200 results in under 1 second using <u>English</u>, <u>Romaji</u> or <u>Japanese</u> keywords.
+	</p>
+
+	<p>
+	Search works best if you look for <strong>whole words</strong> and use the plain or infinitive
+	form for verbs. You can also use multiple search terms at once in either language.
+	</p>
+	
+	<p>Try using a <strong>question mark</strong> at the end of a word as a 'wild card'. So searching for <strong>'japan?'</strong>
+	   would also return results like Japan, Japanese, Japanofile, Japanasaurus Rex, etc...</p>
+	<img src="screenshot-word-search.png" border="0" class="screenshot"/>
+
+  </div>
+</div>
+
+<div id="share">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+
+	<img src="share.png" border="0" title="Sharing The App" class="title"/>
+	<p>
+	During beta, we noticed how many people would "borrow" our iPhones to use JFlash!
+	Problem was, all our progress data was mixed up! So we added multiple users.
+	</p>
+
+	<img src="screenshot-users.png" border="0" class="screenshot"/>
+	
+	<p>
+	From the 'Settings' tab press 'Users'. You can select a user by tapping the name.
+	You can add new ones using the '+' button, and you can even select an avatar picture
+	from the iPhone photo gallery for each user. We've added some users to get you started!
+	</p>
+
+  </div>
+</div>
+
+<div id="feedback">
+  <div class="toolbar">
+    <a href="#" class="back">back</a>
+  </div>
+  <div class="info">
+
+	<img src="rate-us.png" border="0" title="Like It? Rate Us?" class="title"/>
+	<p>
+	The more successful the app is, the more time we can devote to making it everything it should be.
+	Tell your friends! Make them watch you demonstrate it, just like when we first got an iPhone! *lol*
+	</p>
+
+  <a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APP_ID&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"><img src="rate-us-btn.png" border="0" title="Like It? Rate Us?" style="display:block;margin:auto;"></a>
+
+	<p>
+	We think too many app developers don't listen to their users. <strong>Talk to us directly via GetSatisfaction.com.</strong> We endeavor to respond to ALL feedback and will do our best to please.
+	</p>
+
+  <a href="http://getsatisfaction.com/longweekend"><img src="feedback-btn.png" border="0" title="Like It? Rate Us?" style="display:block;margin:auto;"></a>
+  
+	<p>
+	<img src="tikiguy.png" border="0" style="margin-bottom:7px;float:right;"/>
+	<br/><em>The Dev Team<br/>Long Weekend LLC</em>
+	</p>
+	<br style="clear:both;"/>
+
+  </div>
+</div>
+
 </body>
 </html>
