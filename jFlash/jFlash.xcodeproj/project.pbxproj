@@ -42,6 +42,7 @@
 		911DA686108B531700E3D928 /* drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 911DA683108B531700E3D928 /* drawing.m */; };
 		911DA687108B531700E3D928 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 911DA685108B531700E3D928 /* PDColoredProgressView.m */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
+		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
 		91302AD60FB1BEB100AF8593 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91302AD40FB1BEB100AF8593 /* UserHistoryPeer.m */; };
 		913D6F1D1126A31F0020A7B1 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D6F1C1126A31F0020A7B1 /* MoodIcon.m */; };
 		914848EA112FEBFD0081AFB4 /* LWESQLDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 914848E9112FEBFD0081AFB4 /* LWESQLDebug.m */; };
@@ -191,6 +192,7 @@
 		911DA684108B531700E3D928 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDColoredProgressView.h; sourceTree = SOURCE_ROOT; };
 		911DA685108B531700E3D928 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDColoredProgressView.m; sourceTree = SOURCE_ROOT; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		91302AD30FB1BEB100AF8593 /* UserHistoryPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHistoryPeer.h; sourceTree = "<group>"; };
 		91302AD40FB1BEB100AF8593 /* UserHistoryPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHistoryPeer.m; sourceTree = "<group>"; };
 		913D6F1B1126A31F0020A7B1 /* MoodIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoodIcon.h; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD2360101C12260081F883 /* Icon-Small.png */,
 				49FD235E101C121D0081F883 /* icon.png */,
@@ -754,6 +757,7 @@
 				D3B59409111F928100AE4CEE /* Default.png in Resources */,
 				D3309B0F1123C7D800B73E8E /* help in Resources */,
 				498A8E83114B531C006241A8 /* StudySetView.xib in Resources */,
+				9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
