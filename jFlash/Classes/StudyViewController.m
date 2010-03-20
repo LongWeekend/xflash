@@ -262,6 +262,7 @@
   // TODO - this relies on data before that data may not be ready
   [self drawProgressBar];
   [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer];
   LWE_LOG(@"END prepareViewForCard");
 }
 
