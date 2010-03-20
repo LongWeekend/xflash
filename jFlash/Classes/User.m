@@ -21,7 +21,7 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER BY upper(nickname) ASC"];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER by user_id ASC"];
 
   FMResultSet *rs = [[db dao] executeQuery:sql];
   NSMutableArray* userList = [[[NSMutableArray alloc] init] autorelease];
