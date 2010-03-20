@@ -233,7 +233,7 @@
 	}
 
   // Show Reading Btn Pressed By User
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J] && isBrowseMode == NO)
   {
     [toggleReadingBtn setHidden:YES];
     [cardReadingLabelScrollContainer setHidden:YES];
