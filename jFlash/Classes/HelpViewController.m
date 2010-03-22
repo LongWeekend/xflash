@@ -42,7 +42,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self loadWebView];
   htmlView.opaque = NO;
   htmlView.backgroundColor = [UIColor clearColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
