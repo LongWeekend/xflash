@@ -145,7 +145,7 @@ enum EntrySectionRows
   }
   else
   {
-    return @"Current Entry";
+    return currentCard.headword;
   }
 }
 
@@ -158,7 +158,7 @@ enum EntrySectionRows
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height;
 
-    return height + (CELL_CONTENT_MARGIN * 2) + 40.0f;
+    return height + (CELL_CONTENT_MARGIN * 2) + 20.0f;
   }
   else 
   {
@@ -194,12 +194,20 @@ enum EntrySectionRows
   // setup the cell for the full entry
   if(indexPath.section == kEntrySection)
   {
+    NSString* text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    [label setLineBreakMode:UILineBreakModeWordWrap];
+    [label setMinimumFontSize:FONT_SIZE];
+    [label setNumberOfLines:0];
+    [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
+    [label setText:text];
+    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    [label setFrame:CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), MAX(size.height, 44.0f))];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = currentCard.headword;
-    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.numberOfLines = 0;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
-    [cell.detailTextLabel sizeToFit];
+    [[cell contentView] addSubview:label];
+    [label release];
   }
   // the cells for either tag type look the same
   else
