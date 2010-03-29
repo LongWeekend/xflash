@@ -153,12 +153,12 @@ enum EntrySectionRows
 {
   if(indexPath.section == kEntrySection)
   {
-    NSString *text = [currentCard meaningWithoutMarkup];
+    NSString* text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
     CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height;
 
-    return height + (CELL_CONTENT_MARGIN * 2) + 20.0f;
+    return height + (CELL_CONTENT_MARGIN * 2);
   }
   else 
   {
