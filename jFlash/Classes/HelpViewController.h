@@ -15,6 +15,7 @@
 }
 
 - (void)loadWebView;
+- (void)updateHTMlViewTheme;
 
 @property (nonatomic, retain) UIView *baseView;
 @property (nonatomic, retain) UIWebView *htmlView;
