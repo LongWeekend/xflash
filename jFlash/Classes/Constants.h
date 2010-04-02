@@ -64,11 +64,13 @@ extern NSString * const BLUE_THEME_CSS;
 #define THEME_FIRE_NAV_TINT_R 0.753
 #define THEME_FIRE_NAV_TINT_G 0.105
 #define THEME_FIRE_NAV_TINT_B 0.0
+#define THEME_FIRE_WEB_SELECTED @"cd4833"
 
 // WATER
 #define THEME_WATER_NAV_TINT_R 0.075
 #define THEME_WATER_NAV_TINT_G 0.337
 #define THEME_WATER_NAV_TINT_B 0.655
+#define THEME_WATER_WEB_SELECTED @"4278b9"
 
 // these are the various screen placement constants used across all the UIViewControllers
  
