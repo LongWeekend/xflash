@@ -182,27 +182,21 @@
   if([cardId intValue] == currentCardId)
   {
     LWE_LOG(@"Got the same card as last time");
-    // If there is only one card left (this card) in the level
+    // If there is only one card left (this card) in the level, let's get a different level
     if (numCardsAtLevel == 1)
     {
       LWE_LOG(@"Only one card left in this level, getting a new level");
-      // Try five times to get a different level
+      // Try up five times to get a different level
       int lastNextLevel = next_level;
       for (int j = 0; j < 5; j++)
       {
         next_level = [self calculateNextCardLevel];
         if (next_level != lastNextLevel) break;
       }
-      randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
-      cardId = [cardIdArray objectAtIndex:randomOffset];      
     }
-    else
-    {
-      LWE_LOG(@"Getting a different card out of the level");
-      randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
-      cardId = [cardIdArray objectAtIndex:randomOffset];      
-    }
-    [self getRandomCard:currentCardId];
+    // now get a different card randomly
+    randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+    cardId = [cardIdArray objectAtIndex:randomOffset];      
   }
   
   return [CardPeer retrieveCardByPK:[cardId intValue]];
