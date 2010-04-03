@@ -198,7 +198,6 @@
     randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
     cardId = [cardIdArray objectAtIndex:randomOffset];      
   }
-  
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
@@ -208,11 +207,19 @@
 //--------------------------------------------------------------------------
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
-  // update the cardIds
-  NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
-  [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
-  [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
-  [self cacheCardLevelCounts];
+  // update the cardIds if necessary
+  if (nextLevel != card.levelId)
+  { 
+    LWE_LOG(@"Moving card Id %d From level %d to level %d",card.cardId,card.levelId,nextLevel);
+    NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
+    LWE_LOG(@"Items in index to be removed: %d",[[[self cardIds] objectAtIndex:card.levelId] count]);
+    LWE_LOG(@"Items in index to be added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
+    [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
+    [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
+    LWE_LOG(@"Items in removed: %d",[[[self cardIds] objectAtIndex:card.levelId] count]);
+    LWE_LOG(@"Items in added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
+    [self cacheCardLevelCounts];
+  }
 }
 
 
