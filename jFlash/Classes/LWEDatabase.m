@@ -40,7 +40,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   NSString *path = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];	
   self.dao = [FMDatabase databaseWithPath:path];
   self.dao.logsErrors = YES;
-  self.dao.traceExecution = YES;
+  self.dao.traceExecution = NO;
   if ([self.dao open])
   {
     success = YES;
