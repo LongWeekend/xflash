@@ -171,18 +171,39 @@
   int next_level = [self calculateNextCardLevel];
   
   // Get a random card offset
-  int randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];  
-
+  int numCardsAtLevel = [[[self cardIds] objectAtIndex:next_level] count];
+  int randomOffset = arc4random() % numCardsAtLevel;
   NSNumber* cardId;
   
   NSMutableArray* cardIdArray = [[self cardIds] objectAtIndex:next_level];
   cardId = [cardIdArray objectAtIndex:randomOffset];
 
-// TODO: prevent getting the same card twice.
-//  if([cardId intValue] == currentCardId)
-//  {
-//    [self getRandomCard:currentCardId];
-//  }
+  // prevent getting the same card twice.
+  if([cardId intValue] == currentCardId)
+  {
+    LWE_LOG(@"Got the same card as last time");
+    // If there is only one card left (this card) in the level
+    if (numCardsAtLevel == 1)
+    {
+      LWE_LOG(@"Only one card left in this level, getting a new level");
+      // Try five times to get a different level
+      int lastNextLevel = next_level;
+      for (int j = 0; j < 5; j++)
+      {
+        next_level = [self calculateNextCardLevel];
+        if (next_level != lastNextLevel) break;
+      }
+      randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+      cardId = [cardIdArray objectAtIndex:randomOffset];      
+    }
+    else
+    {
+      LWE_LOG(@"Getting a different card out of the level");
+      randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+      cardId = [cardIdArray objectAtIndex:randomOffset];      
+    }
+    [self getRandomCard:currentCardId];
+  }
   
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
@@ -197,7 +218,6 @@
   NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
   [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
   [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
-  
   [self cacheCardLevelCounts];
 }
 
@@ -228,11 +248,13 @@
   cardCount = count; 
 }
 
+
 - (void) removeCardFromActiveSet:(Card *)card
 {
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
 }
+
 
 - (Card*) getFirstCard
 {
@@ -265,7 +287,8 @@
 }
 
 
-- (NSMutableArray *) getCombinedCardIds {
+- (NSMutableArray *) getCombinedCardIds
+{
   NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
   NSMutableArray* cardIdsInLevel;
   for (cardIdsInLevel in [self cardIds]) 
