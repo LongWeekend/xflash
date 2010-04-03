@@ -48,6 +48,8 @@
 	self.reading  =    [rs stringForColumn:@"reading"];
 	self.romaji  =     [rs stringForColumn:@"romaji"];
 	self.meaning  =    [rs stringForColumn:@"meaning"];
+  self.rightCount =  [rs stringForColumn:@"right_count"];
+  self.wrongCount =  [rs stringForColumn:@"wrong_count"];
 }
 
 
