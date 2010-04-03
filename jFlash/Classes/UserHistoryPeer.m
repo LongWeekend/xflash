@@ -76,20 +76,14 @@
 
   NSString *sql;
   int nextLevel = 0;
-//UNUSED  int oldLevel = card.levelId;
-  
-  // Get the card_level counter cache
-  // int oldLevelCount = ;
-  // int nextLevelCount = ;
 
-  // Get the next level
   if (knewIt)
   {
     nextLevel = 5;
   }
   else
   {
-    nextLevel = [self getNextAfterLevel:card.levelId gotItRight:gotItRight];
+    nextLevel = [UserHistoryPeer getNextAfterLevel:card.levelId gotItRight:gotItRight];
   }
 
   // Did we get it right?
@@ -103,6 +97,7 @@
     // int
     sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES ('%d',current_timestamp,current_timestamp,'%d','%d','%d','%d')",card.cardId,[settings integerForKey:@"user_id"],card.rightCount,(card.wrongCount+1),nextLevel];      
   }
+  LWE_LOG(@"%@",sql);
   //sql2 = [[NSString alloc] initWithFormat: @"INSERT OR REPLACE INTO tag_user_card_levels SET card_level_%@_count = %@", oldLevel, oldLevelCount, nextLevel, nextLevelCount];
   [[db dao] executeUpdate:sql];
   [sql release];

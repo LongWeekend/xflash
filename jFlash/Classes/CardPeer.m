@@ -21,7 +21,7 @@
 
     // Do the search using SQLite FTS (PTAG results)
     sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit];
     rs = [[db dao] executeQuery:sql];
@@ -40,7 +40,7 @@
       
     // Do the search using SQLite FTS (NON-PTAG results)
     sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit2];
     rs = [[db dao] executeQuery:sql];
@@ -56,7 +56,7 @@
     // Do slow substring match (w/ ASTERISK)
     keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
     sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id FROM cards c, cards_html ch "
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, 200];
     rs = [[db dao] executeQuery:sql];
