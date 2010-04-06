@@ -16,6 +16,7 @@
   NSInteger cardCount;
 	NSString *tagDescription;
   NSMutableArray *cardIds;
+  NSMutableArray *combinedCardIdsForBrowseMode;
   NSMutableArray *cardLevelCounts;
 	NSInteger currentIndex;
 }
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
 @property (nonatomic, retain) NSMutableArray *cardIds;
+@property (nonatomic, retain) NSMutableArray *combinedCardIdsForBrowseMode;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
