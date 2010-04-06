@@ -257,6 +257,8 @@
 {
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
+  [[self combinedCardIdsForBrowseMode] removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
+  [self cacheCardLevelCounts];
 }
 
 

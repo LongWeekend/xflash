@@ -35,6 +35,7 @@
 - (NSMutableArray*) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) setCardCount:(int) count;
+- (NSMutableArray *) combineCardIds;
 
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;
