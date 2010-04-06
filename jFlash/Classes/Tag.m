@@ -198,6 +198,7 @@
       }
     }
     // now get a different card randomly
+    cardIdArray = [[self cardIds] objectAtIndex:next_level];
     randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
     cardId = [cardIdArray objectAtIndex:randomOffset];      
   }
