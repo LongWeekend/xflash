@@ -10,7 +10,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts;
+@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode;
 
 - (id) init
 {
@@ -153,6 +153,9 @@
   
   // Now set it
   [self setCardIds:tmpArray];
+  
+  // Also set the combined card ids
+  [self setCombinedCardIdsForBrowseMode:[self combineCardIds]];
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
@@ -264,12 +267,11 @@
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     // TODO: in some cases the currentIndex can be beyond the range.  We should figure out why, but for the time being I'll reset it to 0 instead of breaking
-    NSMutableArray* tmpCardIds = [[self cardIds] objectAtIndex:0];
-    if([self currentIndex] >= [tmpCardIds count])
+    if([self currentIndex] >= [[self combinedCardIdsForBrowseMode] count])
     {
       [self setCurrentIndex:0];
     }
-    NSNumber* cardId = [tmpCardIds objectAtIndex: [self currentIndex]];
+    NSNumber* cardId = [[self combinedCardIdsForBrowseMode] objectAtIndex: [self currentIndex]];
     card = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
@@ -288,7 +290,7 @@
 }
 
 
-- (NSMutableArray *) getCombinedCardIds
+- (NSMutableArray *) combineCardIds
 {
   NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
   NSMutableArray* cardIdsInLevel;
@@ -307,7 +309,7 @@
 - (Card*) getNextCard
 {
   NSMutableArray *allCardIds;
-  allCardIds = [self getCombinedCardIds];
+  allCardIds = [self combinedCardIdsForBrowseMode];
   
 	int currIdx = [self currentIndex];
 	int total = [allCardIds count];
@@ -332,7 +334,7 @@
 - (Card*) getPrevCard
 {
   NSMutableArray *allCardIds;
-  allCardIds = [self getCombinedCardIds];
+  allCardIds = [self combinedCardIdsForBrowseMode];
 	int currIdx = [self currentIndex];
 
 	int total = [allCardIds count];
