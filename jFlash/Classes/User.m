@@ -20,16 +20,18 @@
 + (NSMutableArray*) getUsers
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER by user_id ASC"];
-
   FMResultSet *rs = [[db dao] executeQuery:sql];
+  
+  User *tmpUser = nil;
   NSMutableArray* userList = [[[NSMutableArray alloc] init] autorelease];
-	while ([rs next]) {
-		User* tmpUser = [[[User alloc] init] autorelease];
+	while ([rs next])
+  {
+		tmpUser = [[User alloc] init];
 		[tmpUser hydrate:rs];
     LWE_LOG(@"User loaded: %@", [tmpUser userNickname]);
-		[userList addObject: tmpUser];
+		[userList addObject:tmpUser];
+    [tmpUser release];
   }
 	
   [rs close];
