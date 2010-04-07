@@ -247,6 +247,7 @@
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
     [[db dao] executeUpdate:sql];
+    [sql release];
   }
 
   // set the variable to the new count
