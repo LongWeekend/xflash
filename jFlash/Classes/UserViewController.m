@@ -14,13 +14,13 @@
 @implementation UserViewController
 @synthesize usersArray, statusMsgBox, selectedUserInArray, loadingView;
 
-- (UserViewController*) init {
+- (UserViewController*) init
+{
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
     self.title = @"Choose User";
     self.tableView.delegate = self;
-    self.usersArray = [User getUsers];
-    [usersArray retain];
+    [self setUsersArray:[User getUsers]];
   }
   return self;
 }
@@ -33,12 +33,14 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
 }
 
-- (void)reloadTableData{
-  self.usersArray = [User getUsers];
+- (void)reloadTableData
+{
+  [self setUsersArray:[User getUsers]];
   [[self tableView] reloadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
@@ -47,47 +49,40 @@
   [[self tableView] reloadData];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-  return YES;
-}
-
 #pragma mark Table view methods
 
 // return how many sections (1!!)
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
   return 1;
 }
 
 // Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)lclTableView numberOfRowsInSection:(NSInteger)section {
-  return [usersArray count];
+- (NSInteger)tableView:(UITableView *)lclTableView numberOfRowsInSection:(NSInteger)section
+{
+  return [[self usersArray] count];
 }
 
-- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation{
-  for (NSIndexPath *indexPath in indexPaths) {
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation
+{
+  for (NSIndexPath *indexPath in indexPaths)
+  {
     [self tableView:[self tableView] cellForRowAtIndexPath:indexPath];
   }
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString* tmpStr = [[usersArray objectAtIndex:indexPath.row] userNickname];
-  
-  NSString *CellIdentifier;
   UITableViewCell *cell;
 
   // Selected cells are highlighted
-  if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId]){
-
-    CellIdentifier = @"CellHighlighted";
-    cell = [lclTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) 
-    {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+  if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId])
+  {
+    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[usersArray count]];
@@ -101,11 +96,8 @@
   // Unselected cells are white
   else 
   {
-    CellIdentifier = @"CellWhite";
-    cell = [lclTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+
     cell.textLabel.backgroundColor = [ UIColor clearColor ];
     cell.textLabel.textColor = [ UIColor blackColor ];
     cell.backgroundColor = [ UIColor whiteColor ];
