@@ -159,7 +159,24 @@
     cell.textLabel.text = [[searchArray objectAtIndex:(NSInteger)indexPath.row] headword];
     cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
     NSString *meaningStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] meaningWithoutMarkup];
-    NSString *readingStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] reading];
+
+    NSString *readingStr;
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+    {
+      // KANA READING
+      readingStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] reading];
+    } 
+    else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+    {
+      // ROMAJI READING
+      readingStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] romaji];
+    }
+    else
+    {
+      // BOTH READINGS
+      readingStr = [NSString stringWithFormat:@"%@ / %@", [[searchArray objectAtIndex:(NSInteger)indexPath.row] reading], [[searchArray objectAtIndex:(NSInteger)indexPath.row] romaji] ];
+    }
     
     if (readingStr.length > 0)
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];

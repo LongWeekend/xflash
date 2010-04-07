@@ -153,7 +153,7 @@ enum EntrySectionRows
 {
   if(indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
+    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [self getReadingString], [currentCard meaningWithoutMarkup]];
     CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height;
@@ -187,7 +187,7 @@ enum EntrySectionRows
   // setup the cell for the full entry
   if(indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n %@", currentCard.reading, [currentCard meaningWithoutMarkup]];
+    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [self getReadingString], [currentCard meaningWithoutMarkup]];
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
     [label setLineBreakMode:UILineBreakModeWordWrap];
     [label setMinimumFontSize:FONT_SIZE];
@@ -280,6 +280,28 @@ enum EntrySectionRows
   [tableView reloadData];
   // Tell study set controller to reload its set data stats
   [[NSNotificationCenter defaultCenter] postNotificationName:@"cardAddedToTag" object:self];
+}
+
+-(NSString*) getReadingString
+{
+  NSString *readingStr;
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+  {
+    // KANA READING
+    readingStr = [NSString stringWithFormat:@"%@", currentCard.reading];
+  } 
+  else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+  {
+    // ROMAJI READING
+    readingStr = [NSString stringWithFormat:@"%@", currentCard.romaji];
+  }
+  else
+  {
+    // BOTH READINGS
+    readingStr = [NSString stringWithFormat:@"%@ / %@", currentCard.reading, currentCard.romaji ];
+  }
+  return readingStr;
 }
 
 - (void)dealloc

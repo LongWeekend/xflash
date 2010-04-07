@@ -116,8 +116,8 @@
         tmpCard = [CardPeer hydrateCardByPK:tmpCard];
         [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
-      cell.detailTextLabel.text = [tmpCard headword];
-      cell.textLabel.text = [tmpCard meaningWithoutMarkup];
+      cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
+      cell.textLabel.text = [tmpCard headword];
     }
   }
   else
