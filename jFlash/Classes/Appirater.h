@@ -74,7 +74,7 @@ extern NSString *const kAppiraterDeclinedToRate;
 /*
  Text of button that will send user to feedback page
  */
-#define APPIRATER_FEEDBACK_BUTTON @"Tell Us What To Fix"
+#define APPIRATER_FEEDBACK_BUTTON @"Tell Us What To Fix?"
 
 /*
  Text for button to remind the user to review later.
