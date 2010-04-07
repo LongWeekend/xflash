@@ -52,7 +52,7 @@ extern NSString *const kAppiraterDeclinedToRate;
  This is the message your users will see once they've passed the day+launches
  threshold.
  */
-#define APPIRATER_MESSAGE [NSString stringWithFormat:@"Please take a minute to rate %@, or you can contact us directly on GetSastisfaction.com. Thank you, you're awesome!", APPIRATER_APP_NAME]
+#define APPIRATER_MESSAGE [NSString stringWithFormat:@"Please take a minute to rate %@, or you can contact us directly on our support site. Thank you, you're awesome!", APPIRATER_APP_NAME]
 
 /*
  This is the title of the message alert that users will see.
@@ -74,12 +74,12 @@ extern NSString *const kAppiraterDeclinedToRate;
 /*
  Text of button that will send user to feedback page
  */
-#define APPIRATER_FEEDBACK_BUTTON @"GetSatisfaction.com"
+#define APPIRATER_FEEDBACK_BUTTON @"Tell Us What To Fix"
 
 /*
  Text for button to remind the user to review later.
  */
-#define APPIRATER_RATE_LATER @"Remind me later"
+#define APPIRATER_RATE_LATER @"Remind Me Later"
 
 /*
  Users will need to have the same version of your app installed for this many
