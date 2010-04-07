@@ -28,6 +28,7 @@
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId;
 - (void) reloadTableData;
 - (void) addStudySet:sender;
+- (NSString*) getReadingString;
 
 @property (nonatomic,retain) NSMutableArray *myTagArray;
 @property (nonatomic,retain) NSMutableArray *sysTagArray;
