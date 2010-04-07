@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AddStudySetInputViewController : UIViewController {
+@interface AddStudySetInputViewController : UIViewController
+{
   IBOutlet UITextField *setNameTextfield;
   NSInteger defaultCardId;
   NSInteger ownerId;
