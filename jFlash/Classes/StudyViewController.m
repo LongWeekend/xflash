@@ -449,7 +449,7 @@
 	jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[[UIApplication sharedApplication] delegate];
 
   UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:[self parentViewController] action:@selector(dismissModalViewControllerAnimated:)];
-	AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"StudySetView" bundle:nil] autorelease];
+	AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
 	modalViewController.cardId = currentCard.cardId;
 	modalViewController.navigationItem.leftBarButtonItem = doneBtn;
 	modalViewController.navigationItem.title = @"Add Word To Sets";
