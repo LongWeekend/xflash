@@ -185,7 +185,7 @@
     [self performSelector:@selector(runSlowSearch) withObject:nil afterDelay:0];
     return;
   }
-	AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"StudySetView" bundle:nil];
+	AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil];
 	tagController.cardId = [[searchArray objectAtIndex:(NSInteger)indexPath.row] cardId];
 	tagController.title = @"Add Word To Set";
   tagController.currentCard = [searchArray objectAtIndex:(NSInteger)indexPath.row];
