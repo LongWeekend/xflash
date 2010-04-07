@@ -885,7 +885,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -900,8 +900,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
@@ -910,8 +910,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "D0232C62-8285-40B6-B5C6-6473E00EB77B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D0232C62-8285-40B6-B5C6-6473E00EB77B";
 			};
 			name = Release;
 		};
@@ -1082,8 +1080,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1098,8 +1096,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -1154,6 +1152,79 @@
 			};
 			name = "Beta Distribution";
 		};
+		D39D1AB71151D233002445AB /* DebugPaul */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_THUMB_SUPPORT = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphonesimulator3.0;
+			};
+			name = DebugPaul;
+		};
+		D39D1AB81151D233002445AB /* DebugPaul */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = jFlash;
+			};
+			name = DebugPaul;
+		};
+		D39D1AB91151D233002445AB /* DebugPaul */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "jFlash Unit Testing-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "jFlash Unit Testing";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = DebugPaul;
+		};
+		D39D1ABA1151D233002445AB /* DebugPaul */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = sqlite;
+				ZERO_LINK = NO;
+			};
+			name = DebugPaul;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1163,6 +1234,7 @@
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				91EA2F601041365600AB848E /* Beta */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				D39D1AB81151D233002445AB /* DebugPaul */,
 				91EA2F78104151A800AB848E /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1174,6 +1246,7 @@
 				49CD03330FFF1F4200F515A3 /* Debug */,
 				91EA2F611041365600AB848E /* Beta */,
 				49CD03340FFF1F4200F515A3 /* Release */,
+				D39D1AB91151D233002445AB /* DebugPaul */,
 				91EA2F79104151A800AB848E /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1185,6 +1258,7 @@
 				C01FCF4F08A954540054247B /* Debug */,
 				91EA2F5F1041365600AB848E /* Beta */,
 				C01FCF5008A954540054247B /* Release */,
+				D39D1AB71151D233002445AB /* DebugPaul */,
 				91EA2F77104151A800AB848E /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1196,6 +1270,7 @@
 				D370E66010DFB9D200BE6835 /* Debug */,
 				D370E66110DFB9D200BE6835 /* Beta */,
 				D370E66210DFB9D200BE6835 /* Release */,
+				D39D1ABA1151D233002445AB /* DebugPaul */,
 				D370E66310DFB9D200BE6835 /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
