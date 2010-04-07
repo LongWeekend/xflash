@@ -22,13 +22,13 @@ enum EntrySectionRows
 };
 
 @implementation AddTagViewController
-@synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard;
+@synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
 
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.myTagArray = [TagPeer retrieveMyTagList];
-  self.sysTagArray = [TagPeer retrieveSysTagList];
+  [self setMyTagArray:[TagPeer retrieveMyTagList]];
+  [self setSysTagArray:[TagPeer retrieveSysTagList]];
   
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = addButton;
@@ -44,7 +44,7 @@ enum EntrySectionRows
   self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [studySetTable setBackgroundColor: [UIColor clearColor]];
+  [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
 }
 
 
@@ -69,9 +69,9 @@ enum EntrySectionRows
 
 - (void) reloadTableData
 {
-  self.myTagArray = [TagPeer retrieveMyTagList];
-  self.membershipCacheArray = [TagPeer membershipListForCardId:self.cardId];
-  [studySetTable reloadData];
+  [self setMyTagArray:[TagPeer retrieveMyTagList]];
+  [self setMembershipCacheArray:[TagPeer membershipListForCardId:[self cardId]]];
+  [[self studySetTable] reloadData];
 }
 
 

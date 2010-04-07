@@ -14,9 +14,9 @@
 #define CELL_CONTENT_WIDTH 300.0f
 #define CELL_CONTENT_MARGIN 10.0f
 
-@interface AddTagViewController : UIViewController {
+@interface AddTagViewController : UIViewController
+{
   IBOutlet UITableView *studySetTable;
-  IBOutlet UISearchBar *searchBar;
   NSMutableArray *myTagArray;
   NSMutableArray *sysTagArray;
   NSMutableArray *membershipCacheArray;
@@ -34,5 +34,6 @@
 @property (nonatomic,retain) NSMutableArray *membershipCacheArray;
 @property (nonatomic,retain) Card *currentCard;
 @property (nonatomic) NSInteger cardId;
+@property (nonatomic,retain) UITableView *studySetTable;
 
 @end
