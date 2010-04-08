@@ -58,7 +58,7 @@ extern NSString *const kAppiraterDeclinedToRate;
  This is the title of the message alert that users will see.
  */
 //#define APPIRATER_MESSAGE_TITLE [NSString stringWithFormat:@"Rate Us", APPIRATER_APP_NAME]
-#define APPIRATER_MESSAGE_TITLE @"Rate Us"
+#define APPIRATER_MESSAGE_TITLE @"Feedback"
 
 
 /*

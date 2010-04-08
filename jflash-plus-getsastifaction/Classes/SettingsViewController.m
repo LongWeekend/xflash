@@ -91,11 +91,14 @@
 {
   self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Rate Us" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
+  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Feedback" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   [[self tableView] reloadData];
   [rateUsBtn release];
+
+  // Ensure status color bar is correct (Get Satisfaction Drop In can change it and not set it back!)
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
 }
 
 // Only re-load the set if settings were changed, otherwise there is no need to do anything

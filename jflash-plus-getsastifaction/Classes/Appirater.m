@@ -207,8 +207,12 @@ NSString *feedbackURL = @"http://getsatisfaction.com/longweekend";
     case 2:
     {
       if(manualMode){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackURL]];
-        [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
+        // Open Get Satisfaction Drop In
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"launchSatisfactionRemote" object:self];
+
+        // Open feedbackURL in browser instead
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedbackURL]];
+        //[userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
       }
       else {
         // will remind them later

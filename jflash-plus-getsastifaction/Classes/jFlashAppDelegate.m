@@ -9,10 +9,20 @@
 
 @implementation jFlashAppDelegate
 
-@synthesize window, rootViewController;
+@synthesize window, rootViewController, launchTimeURL;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {  
+/*
+  // Use this loop to debug when app is launched from a URL
+  // App starts from URL click > Attach Xcode debugger to app's process ID > Change value of 'more' to NO > Continue to Debug
+  // DANGER! This is an inifinite loop for break-in debugging
+    BOOL more = YES;
+    while (more) {
+      [NSThread sleepForTimeInterval:1.0]; // Set break point on this line
+    }
+*/
+
   // Seed random generator
   srandomdev();
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -21,8 +31,15 @@
   self.rootViewController = [[RootViewController alloc] init];
 	[window addSubview:rootViewController.view];
   [window makeKeyAndVisible];
-  
+
   [pool release];
+}
+
+// Save URL app is launched from
+// This is called AFTER all the rootViewCon handlers!
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+  [self setLaunchTimeURL:url];
+	return YES;
 }
 
 // Pass termination to rootViewController
@@ -35,6 +52,7 @@
 {
 	[rootViewController release];
 	[window release];
+  [launchTimeURL release];
 	[super dealloc];
 }
 
