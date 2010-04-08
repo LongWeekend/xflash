@@ -6,15 +6,21 @@
 
 #import "jFlashAppDelegate.h"
 #import "RootViewController.h"
+#import "FlurryAPI.h"
 
 @implementation jFlashAppDelegate
 
 @synthesize window, rootViewController;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{  
+{   
+  // add analytics
+  NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+  [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
+
   // Seed random generator
   srandomdev();
+  
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
   // Load root controller to handle initialization process
@@ -23,6 +29,10 @@
   [window makeKeyAndVisible];
   
   [pool release];
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+  [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
 // Pass termination to rootViewController

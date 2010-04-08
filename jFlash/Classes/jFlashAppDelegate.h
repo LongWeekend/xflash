@@ -17,6 +17,8 @@
 	RootViewController *rootViewController;
 }
 
+void uncaughtExceptionHandler(NSException *exception);
+
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) RootViewController *rootViewController;
 
