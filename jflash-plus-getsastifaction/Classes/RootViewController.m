@@ -30,7 +30,7 @@
 - (id)init
 {
   LWE_LOG(@"Entering Init");
-  if (self = [super init])
+  if ((self = [super init]))
   {
     i = 0;
     [self setGetSatisfactionDisplayedOnLaunch:NO];
@@ -270,7 +270,7 @@
 
   if([self getSatisfactionDisplayedOnLaunch] == NO && urlString != NULL)
   {
-    NSRange textRange = [urlString rangeOfString:@"jflash://satisfactionRemoteLogin"];
+    NSRange textRange = [urlString rangeOfString:@"jflash://satisfactionremotelogin"];
     if(textRange.location != NSNotFound)
     {
       DCSatisfactionRemoteViewController * remoteViewController = [self getSatisfactionViewController];
