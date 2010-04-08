@@ -453,6 +453,7 @@
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
   [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
+  [searchBar resignFirstResponder];
 }
 
 
