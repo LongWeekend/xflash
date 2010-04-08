@@ -17,6 +17,7 @@
 #import "SplashView.h"
 #import "Appirater.h"
 #import "Constants.h"
+#import "jFlashAppDelegate.h"
 
 #define PROFILE_SQL_STATEMENTS 0
 #if (PROFILE_SQL_STATEMENTS)
@@ -24,12 +25,7 @@
 #endif
 
 @implementation RootViewController
-
-@synthesize delegate;
-@synthesize loadingView;
-@synthesize i;
-@synthesize tabBarController;
-
+@synthesize tabBarController, delegate, loadingView, i, getSatisfactionDisplayedOnLaunch;
 
 - (id)init
 {
@@ -37,8 +33,11 @@
   if (self = [super init])
   {
     i = 0;
+    [self setGetSatisfactionDisplayedOnLaunch:NO];
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchSatisfactionRemote) name:@"launchSatisfactionRemote" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldLaunchSatisfactionRemote) name:@"shouldLaunchSatisfactionRemote" object:nil];
   }
 	return self;
 }
@@ -219,26 +218,78 @@
 	[tabBarController viewWillAppear:animated];
 }
 
-
 -(void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
 	[tabBarController viewWillDisappear:animated];
 }
 
-
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	[tabBarController viewDidAppear:animated];
-}
 
+  // Launch GetSastifaction Plugin?
+  // Launch with delay to allow the passed-in URL to be set in AppDelegate
+  // This seems bad, but I can't find another way that works!
+  [self performSelector:@selector(shouldLaunchSatisfactionRemote) withObject:nil afterDelay:2];
+}
 
 -(void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
 	[tabBarController viewDidDisappear:animated];
 }
+
+# pragma mark Get Satisfaction Plugin Component
+
+//-----------------------------------------------------------------------------
+// Get Satisfaction Plugin Component
+// Returns a satisfactionViewController object
+//-----------------------------------------------------------------------------
+- (DCSatisfactionRemoteViewController *) getSatisfactionViewController
+{
+  DCSatisfactionRemoteViewController *remoteViewController = [[DCSatisfactionRemoteViewController alloc] 
+                                                              initWithGetSatisfactionOAuthKey:@"ionxdxja4t67"
+                                                              getSatisfactionOAuthSecret:@"r490poqyzzg6h9ob4zu68kneh0kzz9o9"
+                                                              companyKey:@"longweekend"];
+	remoteViewController.companyName = @"Long Weekend LLC";
+	remoteViewController.productId = 55889;
+	remoteViewController.productName = @"Japanese Flash";
+  return remoteViewController;
+}
+
+//-----------------------------------------------------------------------------
+// shouldLaunchSatisfactionRemote - Responds to Safari post HTTP backs
+//-----------------------------------------------------------------------------
+- (void)shouldLaunchSatisfactionRemote {
+
+  // Unavoidably (perhaps?) uses jFlashAppDelegate to launch a modal view (for adding to set)
+	jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[[UIApplication sharedApplication] delegate];
+  NSString* urlString = [[appDelegate launchTimeURL] absoluteString];
+
+  if([self getSatisfactionDisplayedOnLaunch] == NO && urlString != NULL)
+  {
+    NSRange textRange = [urlString rangeOfString:@"jflash://satisfactionRemoteLogin"];
+    if(textRange.location != NSNotFound)
+    {
+      DCSatisfactionRemoteViewController * remoteViewController = [self getSatisfactionViewController];
+      remoteViewController.didReturnFromSafari = YES; // is this a OAuth postback from Safari?
+      [[self tabBarController] presentModalViewController:remoteViewController animated:YES];
+      [remoteViewController release];
+      [self setGetSatisfactionDisplayedOnLaunch:YES];
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+// launchSatisfactionRemoteComponent - Call plugin manually from w/in jFlash
+//-----------------------------------------------------------------------------
+- (void)launchSatisfactionRemote {
+	DCSatisfactionRemoteViewController * remoteViewController = [self getSatisfactionViewController];
+  [[self tabBarController] presentModalViewController:remoteViewController animated:YES];
+}
+
 
 # pragma mark Housekeeping
 

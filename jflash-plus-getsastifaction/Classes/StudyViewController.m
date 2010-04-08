@@ -48,6 +48,9 @@
     [alertView release];
     appSettings.isFirstLoad = NO;
   }
+
+  // Ensure status color bar is correct (Get Satisfaction Drop In can change it and not set it back!)
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
 }
 
 - (void) viewDidLoad

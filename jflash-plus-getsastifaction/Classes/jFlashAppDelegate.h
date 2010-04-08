@@ -15,8 +15,10 @@
 {
 	UIWindow *window;
 	RootViewController *rootViewController;
+  NSURL *launchTimeURL;
 }
 
+@property (nonatomic, retain) NSURL *launchTimeURL;
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) RootViewController *rootViewController;
 
