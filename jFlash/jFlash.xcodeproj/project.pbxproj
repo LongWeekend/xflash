@@ -52,7 +52,6 @@
 		9158C12C0FB6D9610083223F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9158C1270FB6D9610083223F /* FMDatabase.m */; };
 		9158C12D0FB6D9610083223F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9158C1290FB6D9610083223F /* FMDatabaseAdditions.m */; };
 		9158C12E0FB6D9610083223F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9158C12B0FB6D9610083223F /* FMResultSet.m */; };
-		9165ECD7116DFE2A004D0454 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9165ECD6116DFE2A004D0454 /* libFlurry.a */; };
 		916D3D040FFCDFBC00B8E215 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 916D3D020FFCDFBC00B8E215 /* AddStudySetInputViewController.m */; };
 		916D3D070FFCF64100B8E215 /* ModalInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 916D3D060FFCF64100B8E215 /* ModalInputView.xib */; };
 		916D9AEF11253487002FF875 /* DebugUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 916D9AEE11253487002FF875 /* DebugUIView.m */; };
@@ -65,7 +64,6 @@
 		91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE31111E56B6006B72E6 /* CardTest.m */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
 		D30ABCC210BBB93D0013756B /* SplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = D30ABCC010BBB93D0013756B /* SplashView.m */; };
-<<<<<<< .mine
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D32DCA48116DEE4C005D3852 /* DCComposeCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32DC99B116DEE4C005D3852 /* DCComposeCommentView.xib */; };
 		D32DCA49116DEE4C005D3852 /* DCComposeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D32DC99D116DEE4C005D3852 /* DCComposeCommentViewController.m */; };
@@ -179,9 +177,6 @@
 		D32DCAB5116DEE4C005D3852 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D32DCA43116DEE4C005D3852 /* CJSONDeserializer.m */; };
 		D32DCAB6116DEE4C005D3852 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D32DCA45116DEE4C005D3852 /* CJSONScanner.m */; };
 		D32DCAB7116DEE4C005D3852 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = D32DCA47116DEE4C005D3852 /* CJSONSerializer.m */; };
-=======
-		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
->>>>>>> .r713
 		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		D35B07731116456D00DB5E02 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07081116456D00DB5E02 /* 13-target.png */; };
 		D35B07741116456D00DB5E02 /* 15-tags.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07091116456D00DB5E02 /* 15-tags.png */; };
@@ -329,8 +324,6 @@
 		9158C1290FB6D9610083223F /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = SOURCE_ROOT; };
 		9158C12A0FB6D9610083223F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = SOURCE_ROOT; };
 		9158C12B0FB6D9610083223F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = SOURCE_ROOT; };
-		9165ECD5116DFE2A004D0454 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
-		9165ECD6116DFE2A004D0454 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		916D3D010FFCDFBC00B8E215 /* AddStudySetInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddStudySetInputViewController.h; sourceTree = "<group>"; };
 		916D3D020FFCDFBC00B8E215 /* AddStudySetInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddStudySetInputViewController.m; sourceTree = "<group>"; };
 		916D3D060FFCF64100B8E215 /* ModalInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalInputView.xib; sourceTree = "<group>"; };
@@ -351,7 +344,6 @@
 		91EA2F4B104135E200AB848E /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		D30ABCC010BBB93D0013756B /* SplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashView.m; sourceTree = "<group>"; };
 		D30ABCC110BBB93D0013756B /* SplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashView.h; sourceTree = "<group>"; };
-<<<<<<< .mine
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D32DC99B116DEE4C005D3852 /* DCComposeCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCComposeCommentView.xib; sourceTree = "<group>"; };
 		D32DC99C116DEE4C005D3852 /* DCComposeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCComposeCommentViewController.h; sourceTree = "<group>"; };
@@ -509,9 +501,6 @@
 		D32DCA45116DEE4C005D3852 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
 		D32DCA46116DEE4C005D3852 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		D32DCA47116DEE4C005D3852 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-=======
-		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
->>>>>>> .r713
 		D3309B031123C7D800B73E8E /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
 		D35B07081116456D00DB5E02 /* 13-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "13-target.png"; path = "Assets/13-target.png"; sourceTree = "<group>"; };
 		D35B07091116456D00DB5E02 /* 15-tags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "15-tags.png"; path = "Assets/15-tags.png"; sourceTree = "<group>"; };
@@ -586,12 +575,7 @@
 				494BB1D9101DDF7300D2AD73 /* libz.1.2.3.dylib in Frameworks */,
 				49EC5E8D10369BF300BC6D44 /* SystemConfiguration.framework in Frameworks */,
 				D370E67110DFBAA400BE6835 /* libsqlite.a in Frameworks */,
-<<<<<<< .mine
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
-=======
-				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
-				9165ECD7116DFE2A004D0454 /* libFlurry.a in Frameworks */,
->>>>>>> .r713
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +711,6 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9165ECD4116DFE2A004D0454 /* FlurryLib */,
 				916D9AEC1125345B002FF875 /* Debugging */,
 				9158C0020FB6C2320083223F /* FMDb */,
 				490F2B5910BA611400F791A0 /* TableCells */,
@@ -776,15 +759,6 @@
 			);
 			name = FMDb;
 			sourceTree = "<group>";
-		};
-		9165ECD4116DFE2A004D0454 /* FlurryLib */ = {
-			isa = PBXGroup;
-			children = (
-				9165ECD5116DFE2A004D0454 /* FlurryAPI.h */,
-				9165ECD6116DFE2A004D0454 /* libFlurry.a */,
-			);
-			path = FlurryLib;
-			sourceTree = SOURCE_ROOT;
 		};
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
@@ -1610,10 +1584,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FlurryLib\"",
-				);
 				PRODUCT_NAME = jFlash;
 			};
 			name = Debug;
@@ -1631,10 +1601,6 @@
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FlurryLib\"",
-				);
 				PRODUCT_NAME = jFlash;
 			};
 			name = Release;
@@ -1717,10 +1683,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FlurryLib\"",
-				);
 				PRODUCT_NAME = jFlash;
 				SDKROOT = iphoneos3.0;
 			};
@@ -1777,10 +1739,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FlurryLib\"",
-				);
 				PRODUCT_NAME = jFlash;
 			};
 			name = "Beta Distribution";
@@ -1917,10 +1875,6 @@
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/FlurryLib\"",
-				);
 				PRODUCT_NAME = jFlash;
 			};
 			name = DebugPaul;
