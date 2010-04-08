@@ -22,7 +22,6 @@
       [NSThread sleepForTimeInterval:1.0]; // Set break point on this line
     }
 */
-
   // Seed random generator
   srandomdev();
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
