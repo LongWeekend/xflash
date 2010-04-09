@@ -22,6 +22,7 @@
 + (CurrentState *)sharedCurrentState;
 
 + (UIColor*) getThemeTintColor;
++ (UIColor*) getSpecialTintColor;
 + (NSString*) getThemeName;
 - (void) initializeSettings;
 - (void) loadActiveTag;

@@ -219,6 +219,7 @@
   // Themed cell icons
   NSString* tagIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/tag-icon.png",[CurrentState getThemeName]];
   NSString* folderIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/folder-icon.png",[CurrentState getThemeName]];
+  NSString* specialFolderIconPathStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/special-folder-icon.png",[CurrentState getThemeName]];
 
   // Study Set Cells (ie. a tag)
   if (indexPath.section == 1 || searching)
@@ -291,10 +292,6 @@
     cell.selectedBackgroundView = bgView;
     [bgView release];
     
-    // Set up the image
-    UIImageView* tmpView = (UIImageView*)cell.imageView;
-    tmpView.image = [UIImage imageNamed:folderIconPathStr];
-
     // This is for groups?
     Group* tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = tmpGroup.groupName;
@@ -305,6 +302,14 @@
       tmpDetailText = [NSString stringWithFormat:@"%d Groups; ",[tmpGroup getChildGroupCount]]; 
     }
     tmpDetailText = [NSString stringWithFormat:@"%@%d Sets",tmpDetailText,tmpGroup.tagCount];
+
+    // Set up the image
+    UIImageView* tmpView = (UIImageView*)cell.imageView;
+    if(tmpGroup.recommended)
+      tmpView.image = [UIImage imageNamed:specialFolderIconPathStr];
+    else
+      tmpView.image = [UIImage imageNamed:folderIconPathStr];
+    
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     cell.detailTextLabel.text = tmpDetailText;
@@ -315,6 +320,7 @@
   [CatCellIdentifier release];
   [tagIconPathStr release];
   [folderIconPathStr release];
+  [specialFolderIconPathStr release];
   
   return cell;
 }

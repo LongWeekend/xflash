@@ -12,6 +12,7 @@
 	NSInteger groupId;
 	NSInteger ownerId;
 	NSInteger tagCount;
+	NSInteger recommended;
   NSInteger childGroupCount;
 	NSString *groupName;
 }
@@ -25,6 +26,7 @@
 @property NSInteger groupId;
 @property NSInteger ownerId;
 @property NSInteger tagCount;
+@property NSInteger recommended;
 @property NSInteger childGroupCount;
 
 @end
