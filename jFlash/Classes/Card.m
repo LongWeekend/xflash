@@ -33,6 +33,7 @@
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"</li>" withString:@"; "];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"<ol>" withString:@""];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"</ol>" withString:@""];
+  txtStr = [txtStr stringByReplacingOccurrencesOfString:@" ; " withString:@"; "];
   return txtStr;
 }
 

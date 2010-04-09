@@ -9,7 +9,7 @@
 #import "Group.h"
 
 @implementation Group
-@synthesize groupId, groupName, ownerId, tagCount, childGroupCount;
+@synthesize groupId, groupName, ownerId, tagCount, childGroupCount, recommended;
 
 
 - (id) init
@@ -19,16 +19,18 @@
   [self setChildGroupCount:-1];
   [self setGroupId:0];
   [self setGroupName:nil];
+  [self setRecommended:0];
   return self;
 }
 
 //takes a sqlite result set and populates the properties of tag
 - (void) hydrate: (FMResultSet*) rs
 {
-	[self setGroupId:   [rs intForColumn:@"group_id"]];
-  [self setGroupName: [rs stringForColumn:@"group_name"]];
-  [self setOwnerId:   [rs intForColumn:@"owner_id"]];
-  [self setTagCount:  [rs intForColumn:@"tag_count"]];
+	[self setGroupId:    [rs intForColumn:@"group_id"]];
+  [self setGroupName:  [rs stringForColumn:@"group_name"]];
+  [self setOwnerId:    [rs intForColumn:@"owner_id"]];
+  [self setTagCount:   [rs intForColumn:@"tag_count"]];
+  [self setRecommended:[rs intForColumn:@"recommended"]];
 }
 
 // Retrieves out a list of tags based on this group ID (direct children)

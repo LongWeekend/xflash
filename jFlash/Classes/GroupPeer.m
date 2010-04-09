@@ -28,7 +28,7 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSMutableArray* groups = [[[NSMutableArray alloc] init] autorelease];
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE owner_id = '%d' ORDER BY group_name ASC",ownerId];
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE owner_id = '%d' ORDER BY recommended DESC, group_name ASC",ownerId];
 	FMResultSet *rs = [[db dao] executeQuery:sql];
 	while ([rs next]) {
 		Group* tmpGroup = [[[Group alloc] init] autorelease];
