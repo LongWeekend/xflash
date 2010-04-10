@@ -402,9 +402,11 @@
 
 - (void) dealloc
 {
-  [tagName release];
-  [tagDescription release];
-  [cardIds release];
+  [self setTagName:nil];
+  [self setTagDescription:nil];
+  [self setCombinedCardIdsForBrowseMode:nil];
+  [self setCardLevelCounts:nil];
+  [self setCardIds:nil];
 	[super dealloc];
 }
 

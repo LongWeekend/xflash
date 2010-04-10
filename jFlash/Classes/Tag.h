@@ -11,14 +11,14 @@
 @interface Tag : NSObject
 {
 	NSInteger tagId;
-	NSString *tagName;
   NSInteger tagEditable;
   NSInteger cardCount;
+	NSInteger currentIndex;
+	NSString *tagName;
 	NSString *tagDescription;
   NSMutableArray *cardIds;
   NSMutableArray *combinedCardIdsForBrowseMode;
   NSMutableArray *cardLevelCounts;
-	NSInteger currentIndex;
 }
 
 - (void) hydrate: (FMResultSet*)rs;
