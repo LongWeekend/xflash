@@ -131,9 +131,8 @@
   numViewed = 0;
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   
-  Card* card;
-  card = [[currentStateSingleton activeTag] getFirstCard];
-  [self setCurrentCard: card];
+  Card* card = [[currentStateSingleton activeTag] getFirstCard];
+  [self setCurrentCard:card];
   LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
   [self resetKeepingCurrentCard];
   
