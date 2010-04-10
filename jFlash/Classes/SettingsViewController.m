@@ -67,7 +67,7 @@
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
     
-    NSArray *aboutNames = [NSArray arrayWithObjects:@"jFlash was created on a Long Weekend over a few steaks and a few more Coronas.  Let's have a special thanks for Teja for helping us write and simulate the frequency algorithm.  Also, this application uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license.  Some icons by Joseph Wain / glyphish.com",nil];
+    NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
     
@@ -231,7 +231,7 @@
   // Special case for about section
   if ([[thisSectionArray objectAtIndex:1] objectAtIndex:0] == @"about")
   {
-    size = 310.0f;    
+    size = 435.0f;    
   }
   else
   {
