@@ -239,6 +239,7 @@ enum EntrySectionRows
   {
     tmpTag = [sysTagArray objectAtIndex:indexPath.row];
   }
+  // Check whether or not we are ADDING or REMOVING from the selected tag
   if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
   {
     BOOL remove = YES;
@@ -271,7 +272,7 @@ enum EntrySectionRows
     if (tmpTag.tagId == [[appSettings activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
-      [[appSettings activeTag] setCardCount:([[appSettings activeTag] cardCount]+1)];
+      [[appSettings activeTag] addCardToActiveSet:currentCard];
     }
     [TagPeer subscribe:cardId tagId:tmpTag.tagId];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
