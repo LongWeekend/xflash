@@ -100,8 +100,12 @@
   }
   
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [NSString stringWithFormat:@"DELETE FROM users WHERE user_id = %d", userId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"DELETE FROM users WHERE user_id = %d", userId];
   [[db dao] executeUpdate:sql];
+  [sql release];
+  sql = [[NSString alloc] initWithFormat:@"DELETE FROM user_history WHERE user_id = %d", userId];
+  [[db dao] executeUpdate:sql];
+  [sql release];
 }
 
 - (void) activateUser{
