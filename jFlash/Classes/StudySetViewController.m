@@ -373,6 +373,10 @@
     [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
     return;
   }
+  else 
+  {
+    selectedTagId = -1;
+  }
 }
 
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
