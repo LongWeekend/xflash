@@ -216,11 +216,21 @@
   { 
     LWE_LOG(@"Moving card Id %d From level %d to level %d",card.cardId,card.levelId,nextLevel);
     NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
-    LWE_LOG(@"Items in index to be removed: %d",[[[self cardIds] objectAtIndex:card.levelId] count]);
+
+    // First do the remove
+    int countBeforeRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
+    LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
     LWE_LOG(@"Items in index to be added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
     [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
-    [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
-    LWE_LOG(@"Items in removed: %d",[[[self cardIds] objectAtIndex:card.levelId] count]);
+    int countAfterRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
+
+    // Only do the add if remove was successful
+    if (countBeforeRemove == (countAfterRemove + 1))
+    {
+      [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
+    }
+    
+    LWE_LOG(@"Items in removed: %d",countAfterRemove);
     LWE_LOG(@"Items in added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
     [self cacheCardLevelCounts];
   }
@@ -255,11 +265,30 @@
 }
 
 
+//--------------------------------------------------------------------------
+// removeCardFromActiveSet: card
+// Removes card from tag's memory arrays so they are out of the set
+//--------------------------------------------------------------------------
 - (void) removeCardFromActiveSet:(Card *)card
 {
+  NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
-  [cardLevel removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
-  [[self combinedCardIdsForBrowseMode] removeObjectIdenticalTo:[NSNumber numberWithInt:[card cardId]]];
+  [cardLevel removeObject:tmpNum];
+  [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
+  [self cacheCardLevelCounts];
+}
+
+
+//--------------------------------------------------------------------------
+// addCardToActiveSet: card
+// Add card to tag's memory arrays
+//--------------------------------------------------------------------------
+- (void) addCardToActiveSet:(Card *)card
+{
+  NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
+  NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
+  [cardLevel addObject:tmpNum];
+  [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 

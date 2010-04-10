@@ -34,6 +34,7 @@
 - (void) freezeCardIds;
 - (NSMutableArray*) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
+- (void) addCardToActiveSet:(Card *)card;
 - (void) setCardCount:(int) count;
 - (NSMutableArray *) combineCardIds;
 
