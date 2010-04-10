@@ -37,7 +37,6 @@
 		49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5D34611438A730063EC4C /* LWEDatabase.m */; };
 		49EC5E8D10369BF300BC6D44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
-		49FD2361101C12260081F883 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD2360101C12260081F883 /* Icon-Small.png */; };
 		49FE1E660FF78FF100BDE55B /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FE1E650FF78FF100BDE55B /* AddTagViewController.m */; };
 		49FE1F120FF79CDB00BDE55B /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FE1F110FF79CDB00BDE55B /* StudySetWordsViewController.m */; };
 		911DA686108B531700E3D928 /* drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 911DA683108B531700E3D928 /* drawing.m */; };
@@ -186,7 +185,6 @@
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		49FD2360101C12260081F883 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		49FE1E640FF78FF100BDE55B /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
 		49FE1E650FF78FF100BDE55B /* AddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagViewController.m; sourceTree = "<group>"; };
 		49FE1F100FF79CDB00BDE55B /* StudySetWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudySetWordsViewController.h; sourceTree = "<group>"; };
@@ -383,7 +381,6 @@
 			children = (
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
-				49FD2360101C12260081F883 /* Icon-Small.png */,
 				49FD235E101C121D0081F883 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				DA6BDB4F0FB066AD003FBF52 /* jFlash.db */,
@@ -746,7 +743,6 @@
 				DA6BDB500FB066AD003FBF52 /* jFlash.db in Resources */,
 				916D3D070FFCF64100B8E215 /* ModalInputView.xib in Resources */,
 				49FD235F101C121D0081F883 /* icon.png in Resources */,
-				49FD2361101C12260081F883 /* Icon-Small.png in Resources */,
 				91EA2F4C104135E200AB848E /* dist.plist in Resources */,
 				912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */,
 				918090A710E8D6E200440E8E /* HelpScrollView.xib in Resources */,
