@@ -65,10 +65,10 @@
 {
   if (
       // URL to launch itunes app store on phone
-      [[[request URL] absoluteString] isEqual:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=APP_ID&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"]
+      [[[request URL] absoluteString] isEqual:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=367216357&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"]
   || 
       // URL to get satisfaction page
-      [[[request URL] absoluteString] isEqual:@"http://getsatisfaction.com/longweekend"] 
+      [[[request URL] absoluteString] isEqual:@"http://support.longweekendmobile.com/"]
   ||
       // URL to our twitter page
       [[[request URL] absoluteString] isEqual:@"http://twitter.com/long_weekend"] 
