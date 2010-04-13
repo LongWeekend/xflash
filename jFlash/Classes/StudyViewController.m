@@ -31,6 +31,9 @@
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = @"Practice";
   }
+  else{
+    LWE_LOG(@"Didn't pass super init for StudyViewController");
+  }
   return self;
 }
 
@@ -321,12 +324,8 @@
 	}
   // tells the progress bar to redraw
   [progressBarView setNeedsDisplay];
-	UIView *currentView = self.view;
-	UIView *theWindow = [currentView superview];
-	UIView *newView = self.view;
+	UIView *theWindow = [self.view superview];
 	[UIView beginAnimations:nil context:NULL];
-	[currentView removeFromSuperview];
-	[theWindow addSubview:newView];
 
 	// set up an animation for the transition between the views
 	CATransition *animation = [CATransition animation];
@@ -334,8 +333,7 @@
 	[animation setDuration:0.15];
 	[animation setType:transition];
 	[animation setSubtype:direction];
-	//CALayer *layer = self.layer;
-	[[newView layer] addAnimation:animation forKey:kAnimationKey];
+  [[theWindow layer] addAnimation:animation forKey:kAnimationKey];
 	[UIView commitAnimations];
 }
 
