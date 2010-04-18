@@ -30,8 +30,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   if(_activeTag == nil)
   {
-     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-     [self setActiveTag:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    int storedTagId = [settings integerForKey:@"tag_id"];
+    // error handling in case we somehow set the tag id to 0
+    if(storedTagId == 0) storedTagId = DEFAULT_TAG_ID;
+    [self setActiveTag:[TagPeer retrieveTagById:storedTagId]];
   }
   
   id tag;
@@ -80,7 +83,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   LWE_LOG(@"START load active tag");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int currentIndex = [settings integerForKey:@"current_index"];
-  [self setActiveTag:[TagPeer retrieveTagById:[settings integerForKey:@"tag_id"]]];
   [[self activeTag] setCurrentIndex:currentIndex];
   LWE_LOG(@"END load active tag");
 }
@@ -118,6 +120,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     
     // disable first load messsage if we get this far
     [settings setInteger:0 forKey:@"first_load"];
+    [settings setBool:NO forKey:@"db_did_finish_copying"];
   }
   else
   {
