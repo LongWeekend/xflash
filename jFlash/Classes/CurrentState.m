@@ -28,7 +28,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 - (Tag *) activeTag
 {
-  if(_activeTag == nil)
+  if(_activeTag == nil || [[_activeTag combineCardIds] count] == 0)
   {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     int storedTagId = [settings integerForKey:@"tag_id"];
