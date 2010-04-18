@@ -733,7 +733,17 @@
     {
       thisCount -= [[levelDetails objectAtIndex: i-1] floatValue]; 
     }
-    progressView.progress = thisCount / [[levelDetails objectAtIndex: 7] floatValue];
+    float seencount = [[levelDetails objectAtIndex: 7] floatValue];
+    float progress;
+    if(seencount == 0)
+    {
+      progress = 0;
+    }
+    else
+    {
+      progress = thisCount / seencount;
+    }
+    progressView.progress = progress;
     CGRect frame = progressView.frame;
     frame.size.width = 57;
     frame.size.height = 14;

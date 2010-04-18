@@ -18,7 +18,7 @@
 #import "Appirater.h"
 #import "Constants.h"
 
-#define PROFILE_SQL_STATEMENTS 0
+#define PROFILE_SQL_STATEMENTS 0  
 #if (PROFILE_SQL_STATEMENTS)
 #import "LWESQLDebug.h"
 #endif
@@ -49,11 +49,12 @@
   LWE_LOG(@"START Load View");
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [appSettings initializeSettings];
-  
-  if (appSettings.isFirstLoad || ![db databaseFileExists])
+  bool dbDidFinishCopying = [settings boolForKey:@"db_did_finish_copying"];
+  if (appSettings.isFirstLoad || ![db databaseFileExists] || !dbDidFinishCopying)
   {
     // Is first load, copy database splash screen
     NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
@@ -171,7 +172,7 @@
 // On first load when copying the database
 - (void) showFirstLoadProgressView
 {
-  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash..."];
+  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db performSelectorInBackground:@selector(openedDatabase) withObject:nil];
   [self continueDatabaseCopy];

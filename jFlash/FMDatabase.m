@@ -63,21 +63,30 @@ static NSLock *dbLock;
 
 - (void)createEditableCopyOfDatabaseIfNeeded
 {
-	// First, test for existence.
-	BOOL success;
+	// First, test for existence.  
+	BOOL fileExists;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSError *error;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];
-	success = [fileManager fileExistsAtPath:writableDBPath];
-	if (success) return;
+	fileExists = [fileManager fileExistsAtPath:writableDBPath];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	if (fileExists && [settings boolForKey:@"db_did_finish_copying"]) return;
 	// The writable database does not exist, so copy the default to the appropriate location.
 	NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
-	success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-	if (!success) {
+  if(fileExists)
+  {
+    LWE_LOG(@"Removing an incomplete copy of the DB.");
+    [fileManager removeItemAtPath:writableDBPath error:&error];
+  }
+	fileExists = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+	if (!fileExists) {
 		NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
 	}
+  else{
+    [settings setBool:YES forKey:@"db_did_finish_copying"];
+  }
 }
 
 - (void) close {
