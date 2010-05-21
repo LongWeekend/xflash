@@ -7,58 +7,74 @@
 //
 
 #import "HelpViewController.h"
+#import "HelpWebViewController.h"
 
 @implementation HelpViewController
-@synthesize baseView, htmlView;
+@synthesize sectionTitles, htmlFilenames;
 
 - (HelpViewController*) init
 {
-  if (self = [super init])
+	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"90-lifebuoy.png"];
     self.title = @"Help";
+    self.navigationItem.title = @"Help";
+    
+    NSArray *names = [NSArray arrayWithObjects:@"Welcome",@"Study Sets",@"Practice",@"Browse Mode",@"Word Search",@"Sharing",@"Feedback"];
+    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"share",@"feedback"];
+    [self setSectionTitles:names];
+    [self setHtmlFilenames:htmls];    
   }
-  return self;
+	return self;
 }
 
-- (void)loadView
+
+- (void)viewWillAppear: (BOOL)animated
 {
-  [super loadView];
-	// Load an application image and set it as the primary view
-	baseView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-  htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 420.0f)];
-  [baseView addSubview:htmlView];
-	self.view = baseView;
+  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
 
-- (void)viewDidLoad
+# pragma mark UI Table View Methods
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-  [super viewDidLoad];
-  [self loadWebView];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHTMlViewTheme) name:@"themeWasChanged" object:nil];
-  self.htmlView.delegate = self;
+  return 1;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
 {
-  [super viewWillAppear:animated];
-  htmlView.opaque = NO;
-  htmlView.backgroundColor = [UIColor clearColor];
+  NSInteger i = [[self sectionTitles] count];
+  return i;
+}
+
+- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = nil;
+  NSInteger row = [indexPath row];
   
-  UIScrollView *scrollView = [htmlView.subviews objectAtIndex:0];
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
-  
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  cell = [LWE_Util_Table reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.textLabel.text = [[self sectionTitles] objectAtIndex:row];
+  return cell;  
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {  
-  [self updateHTMlViewTheme];
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSInteger row = indexPath.row;
+  HelpWebViewController *webViewController = [[HelpWebViewController alloc] initWithFilename:[[self htmlFilenames] objectAtIndex:row] usingTitle:[[self sectionTitles] objectAtIndex:row]];
+  [[self navigationController] pushViewController:webViewController animated:YES];
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];  
 }
+
+
+
+/*
+
 
 // Quits the app opens in safari.app
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -84,42 +100,12 @@
   }
 }
 
-// uses jQuery to update the fake nav controller theme colors in JQTouch
-// This relies upon assets that have been hand-matched to the original UIKit components
-// If you change any colors, these assets need to be changed too!
-- (void)updateHTMlViewTheme
-{
-  NSString *themeName = [CurrentState getThemeName];
-  NSString *selectColor;
-  if([themeName isEqual:@"red"]) {
-    selectColor = THEME_FIRE_WEB_SELECTED;
-  } else {
-    selectColor = THEME_WATER_WEB_SELECTED;
-  }
-  NSString *mystr = [NSString stringWithFormat:@""
-   "$(document).ready(function(){ "
-     "$('.toolbar').css('background', 'url(jqtouch/themes/jqt/img/toolbar-jflash-%@.png) #000000 repeat-x');"
-     "$('.button, .back, .cancel, .add').css('-webkit-border-image', 'url(jqtouch/themes/jqt/img/button-jflash-%@.png) 0 5 0 5');"
-     "$('.back').css('-webkit-border-image','url(jqtouch/themes/jqt/img/back_button-jflash-%@.png) 0 8 0 14');"
-     "$('.back.active').css('-webkit-border-image','url(jqtouch/themes/jqt/img/back_button_clicked-jflash-%@.png) 0 8 0 14');"
-     "$('ul li a.active').css('background-color','#%@');"
-     "$('ul li a.active').css('color','#ffffff');"
-   "});", themeName, themeName, themeName, themeName, selectColor];
- [htmlView stringByEvaluatingJavaScriptFromString:mystr];
-}
+*/
 
-- (void) loadWebView
+- (void)dealloc
 {
-  NSString *urlAddress = [[NSBundle mainBundle] pathForResource:@"help" ofType:@"html" inDirectory:@"help"];
-  NSURL *url = [NSURL fileURLWithPath:urlAddress];
-  NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  [htmlView loadRequest:requestObj];
-}
-
-- (void)dealloc {
-  [baseView release];
-  htmlView.delegate = nil;
-  [htmlView release];
+  [self setSectionTitles:nil];
+  [self setHtmlFilenames:nil];
   [super dealloc];
 }
 

@@ -35,6 +35,8 @@
 		499E5AF60FF4D42A006926A2 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AF00FF4D429006926A2 /* EditableTableViewCell.m */; };
 		499E5AF70FF4D42A006926A2 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E5AF20FF4D42A006926A2 /* SourceCell.m */; };
 		49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5D34611438A730063EC4C /* LWEDatabase.m */; };
+		49EB4B451170563500309E9B /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49EB4B441170563500309E9B /* HelpView.xib */; };
+		49EB4B6811705E5700309E9B /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EB4B6711705E5700309E9B /* HelpWebViewController.m */; };
 		49EC5E8D10369BF300BC6D44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
 		49FE1E660FF78FF100BDE55B /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FE1E650FF78FF100BDE55B /* AddTagViewController.m */; };
@@ -183,6 +185,9 @@
 		49B5D34611438A730063EC4C /* LWEDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEDatabase.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
+		49EB4B441170563500309E9B /* HelpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpView.xib; sourceTree = "<group>"; };
+		49EB4B6611705E5700309E9B /* HelpWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpWebViewController.h; sourceTree = "<group>"; };
+		49EB4B6711705E5700309E9B /* HelpWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpWebViewController.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		49FE1E640FF78FF100BDE55B /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
@@ -580,6 +585,7 @@
 				282CCBFD0DB6C98000C4EA27 /* StudyView.xib */,
 				D35B08F5111669C300DB5E02 /* UserDetailsView.xib */,
 				49014754116CBCE9007C84AF /* AddTagView.xib */,
+				49EB4B441170563500309E9B /* HelpView.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -600,6 +606,8 @@
 				49FE1E650FF78FF100BDE55B /* AddTagViewController.m */,
 				9148D9BC10DDFD18009558DE /* HelpViewController.h */,
 				9148D9BD10DDFD18009558DE /* HelpViewController.m */,
+				49EB4B6611705E5700309E9B /* HelpWebViewController.h */,
+				49EB4B6711705E5700309E9B /* HelpWebViewController.m */,
 				4921F4BB0FF75DB8008B9202 /* SettingsViewController.h */,
 				4921F5020FF76016008B9202 /* SettingsViewController.m */,
 				49FE1F100FF79CDB00BDE55B /* StudySetWordsViewController.h */,
@@ -777,6 +785,7 @@
 				498A8E83114B531C006241A8 /* StudySetView.xib in Resources */,
 				9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */,
 				49014755116CBCE9007C84AF /* AddTagView.xib in Resources */,
+				49EB4B451170563500309E9B /* HelpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +870,7 @@
 				49B5D34711438A730063EC4C /* LWEDatabase.m in Sources */,
 				498A8EE5114B5BBD006241A8 /* LWEFile.m in Sources */,
 				49075BC1114E63F900EDAABB /* LoadingView.m in Sources */,
+				49EB4B6811705E5700309E9B /* HelpWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -146,8 +146,14 @@
   {
     if (indexPath.row == kWordSetOptionsStart)
     {
-      // Fire set change notification
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
+      // one final check to make sure they do not empty out the set prior to running it
+      Tag *tmpTag = [TagPeer retrieveTagById:[[self tag] tagId]];
+      if (tmpTag.cardCount > 0)
+      {
+        // Fire set change notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
+      }
+      [tmpTag release];
     }
     // TODO: implement this well later
     /* else if (indexPath.row == kWordSetOptionsPublish) {
