@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface HelpViewController : UIViewController <UIWebViewDelegate> {
-  UIView *baseView;
-  UIWebView *htmlView;
+@interface HelpViewController : UITableViewController <UITableViewDelegate>
+{
+  NSArray *sectionTitles;
+  NSArray *htmlFilenames;
 }
 
-- (void)loadWebView;
-- (void)updateHTMlViewTheme;
+@property (nonatomic, retain) NSArray *sectionTitles;
+@property (nonatomic, retain) NSArray *htmlFilenames;
 
-@property (nonatomic, retain) UIView *baseView;
-@property (nonatomic, retain) UIWebView *htmlView;
 @end

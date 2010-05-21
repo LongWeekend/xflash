@@ -153,8 +153,10 @@
   [localNavigationController release];
   
   HelpViewController *helpViewController = [[HelpViewController alloc] init];
-  [localControllersArray addObject:helpViewController];
+  localNavigationController = [[UINavigationController alloc] initWithRootViewController:helpViewController];
+  [localControllersArray addObject:localNavigationController];
   [helpViewController release];
+  [localNavigationController release];
   
   tabBarController.viewControllers = localControllersArray;
 	[localControllersArray release];
