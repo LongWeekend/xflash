@@ -14,9 +14,11 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {   
-  // add analytics
+  // add analytics if this is live
+#if defined(APP_STORE_FINAL)
   NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
   [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
+#endif
 
   // Seed random generator
   srandomdev();
