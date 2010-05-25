@@ -29,13 +29,24 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-  self.searchBar.delegate = self;
-  [[self tableView] setTableHeaderView:searchBar];
-  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  if([db doesTableExist:@""])
+  {
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+    self.searchBar.delegate = self;
+    [[self tableView] setTableHeaderView:searchBar];
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
-  activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  }
+  else
+  {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Dictionary Loaded" message:@"In order to use the dictionary, you must first download the dictionary file.  Would you like to do this now?" delegate:self  cancelButtonTitle:@"Later" otherButtonTitles:nil];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert show];
+  }
 }  
 
 - (void) viewWillAppear: (BOOL)animated
@@ -209,6 +220,12 @@
 	[self.navigationController pushViewController:tagController animated:YES];
 	[tagController release];
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 1) {     // they clicked OK.
+    
+  }
 }
 
 - (void)dealloc

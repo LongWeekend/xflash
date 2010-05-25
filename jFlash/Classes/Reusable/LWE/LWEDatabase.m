@@ -56,6 +56,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   return success;
 }
 
-
+- (BOOL) doesTableExist:(NSString *) tableName
+{
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
+  FMResultSet *rs = [[self dao] executeQuery:sql];
+  while ([rs next]) {
+    return true;
+  }
+  return false;
+}
 
 @end

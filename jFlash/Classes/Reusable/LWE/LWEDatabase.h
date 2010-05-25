@@ -21,5 +21,6 @@
 + (LWEDatabase *)sharedLWEDatabase;
 - (BOOL) openedDatabase;
 - (BOOL) databaseFileExists;
+- (BOOL) doesTableExist:(NSString *) tableName;
 
 @end
