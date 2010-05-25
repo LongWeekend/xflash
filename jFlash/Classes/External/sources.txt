@@ -1,0 +1,1 @@
+asi-http-request: http://github.com/pokeb/asi-http-request.git
