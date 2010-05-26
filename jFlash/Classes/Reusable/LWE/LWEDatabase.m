@@ -60,6 +60,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
   FMResultSet *rs = [[self dao] executeQuery:sql];
+  [sql release];
   while ([rs next]) {
     return true;
   }

@@ -15,9 +15,11 @@
   Tag *activeTag;
   Tag *_activeTag;
   BOOL isFirstLoad;
+  BOOL dbHasFTS;
 }
 
 @property BOOL isFirstLoad;
+@property BOOL dbHasFTS;
 
 + (CurrentState *)sharedCurrentState;
 

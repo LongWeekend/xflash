@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* jFlashAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		491E538911AB9DA8002D327B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E538811AB9DA8002D327B /* CFNetwork.framework */; };
+		491E538B11AB9DA8002D327B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E538A11AB9DA8002D327B /* CoreGraphics.framework */; };
+		491E538D11AB9DA8002D327B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E538C11AB9DA8002D327B /* Foundation.framework */; };
+		491E538F11AB9DA8002D327B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E538E11AB9DA8002D327B /* MobileCoreServices.framework */; };
+		491E539111AB9DA8002D327B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E539011AB9DA8002D327B /* libz.1.2.3.dylib */; };
+		491E539B11AB9DC5002D327B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E539A11AB9DC5002D327B /* UIKit.framework */; };
+		491E53BE11AB9E2E002D327B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 491E53BD11AB9E2E002D327B /* SystemConfiguration.framework */; };
+		496E281011AD395C00063419 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496E280F11AD395C00063419 /* DownloaderView.xib */; };
+		496E281511AD39C100063419 /* DownloaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496E281211AD39C100063419 /* DownloaderViewController.m */; };
+		496E281611AD39C100063419 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 496E281411AD39C100063419 /* jFlashAppDelegate.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
+		49D0FB7611AD002A0094BA1F /* DownloaderViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D0FB7511AD002A0094BA1F /* DownloaderViewControllerTest.m */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
@@ -92,11 +99,6 @@
 		917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
 		917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CAE11AB85B400016BD2 /* DebugUIView.m */; };
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
-		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
-		917A5D0C11AB8A0A00016BD2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D6101DDF6000D2AD73 /* CFNetwork.framework */; };
-		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
-		917A5D1111AB8A2800016BD2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */; };
-		91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE31111E56B6006B72E6 /* CardTest.m */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -146,20 +148,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* jFlashAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlashAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* jFlashAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jFlashAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		494BB1D6101DDF6000D2AD73 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		491E538811AB9DA8002D327B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		491E538A11AB9DA8002D327B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		491E538C11AB9DA8002D327B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		491E538E11AB9DA8002D327B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		491E539011AB9DA8002D327B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		491E539A11AB9DC5002D327B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		491E53BD11AB9E2E002D327B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		496E280F11AD395C00063419 /* DownloaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DownloaderView.xib; path = XIBs/DownloaderView.xib; sourceTree = "<group>"; };
+		496E281111AD39C100063419 /* DownloaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloaderViewController.h; path = AppSpecific/DownloaderViewController.h; sourceTree = "<group>"; };
+		496E281211AD39C100063419 /* DownloaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloaderViewController.m; path = AppSpecific/DownloaderViewController.m; sourceTree = "<group>"; };
+		496E281311AD39C100063419 /* jFlashAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlashAppDelegate.h; path = AppSpecific/jFlashAppDelegate.h; sourceTree = "<group>"; };
+		496E281411AD39C100063419 /* jFlashAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlashAppDelegate.m; path = AppSpecific/jFlashAppDelegate.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
-		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
+		49D0FB7411AD002A0094BA1F /* DownloaderViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloaderViewControllerTest.h; path = Tests/Controllers/DownloaderViewControllerTest.h; sourceTree = "<group>"; };
+		49D0FB7511AD002A0094BA1F /* DownloaderViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloaderViewControllerTest.m; path = Tests/Controllers/DownloaderViewControllerTest.m; sourceTree = "<group>"; };
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
@@ -312,10 +320,6 @@
 		917A5CB111AB85E200016BD2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "External/asi-http-request/External/Reachability2.0/Reachability.h"; sourceTree = "<group>"; };
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5CBF11AB87BF00016BD2 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
-		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
 		91EA2F4B104135E200AB848E /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D3309B031123C7D800B73E8E /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
@@ -352,16 +356,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
 				496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
 				917A5C0E11AB807800016BD2 /* libFlurry.a in Frameworks */,
-				917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */,
-				917A5D0C11AB8A0A00016BD2 /* CFNetwork.framework in Frameworks */,
-				917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */,
-				917A5D1111AB8A2800016BD2 /* libz.1.2.3.dylib in Frameworks */,
+				491E538911AB9DA8002D327B /* CFNetwork.framework in Frameworks */,
+				491E538B11AB9DA8002D327B /* CoreGraphics.framework in Frameworks */,
+				491E538D11AB9DA8002D327B /* Foundation.framework in Frameworks */,
+				491E538F11AB9DA8002D327B /* MobileCoreServices.framework in Frameworks */,
+				491E539111AB9DA8002D327B /* libz.1.2.3.dylib in Frameworks */,
+				491E539B11AB9DC5002D327B /* UIKit.framework in Frameworks */,
+				491E53BE11AB9E2E002D327B /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,8 +420,6 @@
 				91C9EE2D111E568D006B72E6 /* Tests */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
 				91EA2F4B104135E200AB848E /* dist.plist */,
-				917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */,
-				917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */,
 			);
 			name = jFlash;
 			sourceTree = "<group>";
@@ -446,14 +448,15 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */,
-				494BB1D6101DDF6000D2AD73 /* CFNetwork.framework */,
-				49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */,
 				496E656E0FCD76450062CF09 /* QuartzCore.framework */,
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				288765070DF74369002DB57D /* CoreGraphics.framework */,
 				D32DC3CF116D82C9005D3852 /* Security.framework */,
+				491E538811AB9DA8002D327B /* CFNetwork.framework */,
+				491E538A11AB9DA8002D327B /* CoreGraphics.framework */,
+				491E538C11AB9DA8002D327B /* Foundation.framework */,
+				491E538E11AB9DA8002D327B /* MobileCoreServices.framework */,
+				491E539011AB9DA8002D327B /* libz.1.2.3.dylib */,
+				491E539A11AB9DC5002D327B /* UIKit.framework */,
+				491E53BD11AB9E2E002D327B /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -493,6 +496,15 @@
 				9158C0020FB6C2320083223F /* FMDb */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		49D0FB7311ACFFE20094BA1F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				49D0FB7411AD002A0094BA1F /* DownloaderViewControllerTest.h */,
+				49D0FB7511AD002A0094BA1F /* DownloaderViewControllerTest.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		911DA682108B52F500E3D928 /* PDColoredProgressView */ = {
@@ -695,8 +707,7 @@
 		91C9EE2D111E568D006B72E6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				91C9EE30111E56B6006B72E6 /* CardTest.h */,
-				91C9EE31111E56B6006B72E6 /* CardTest.m */,
+				49D0FB7311ACFFE20094BA1F /* Controllers */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -715,6 +726,7 @@
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				496E280F11AD395C00063419 /* DownloaderView.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				917A5C6711AB844300016BD2 /* HelpScrollView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
@@ -733,8 +745,10 @@
 		DA8B6A4B0FB111D600DE105C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* jFlashAppDelegate.h */,
-				1D3623250D0F684500981E51 /* jFlashAppDelegate.m */,
+				496E281111AD39C100063419 /* DownloaderViewController.h */,
+				496E281211AD39C100063419 /* DownloaderViewController.m */,
+				496E281311AD39C100063419 /* jFlashAppDelegate.h */,
+				496E281411AD39C100063419 /* jFlashAppDelegate.m */,
 				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
@@ -931,6 +945,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496E281011AD395C00063419 /* DownloaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,7 +973,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* jFlashAppDelegate.m in Sources */,
 				917A5B8D11AB7ADB00016BD2 /* ASIAuthenticationDialog.m in Sources */,
 				917A5B8E11AB7ADB00016BD2 /* ASIFormDataRequest.m in Sources */,
 				917A5B8F11AB7ADB00016BD2 /* ASIHTTPRequest.m in Sources */,
@@ -1031,7 +1045,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */,
+				49D0FB7611AD002A0094BA1F /* DownloaderViewControllerTest.m in Sources */,
+				496E281511AD39C100063419 /* DownloaderViewController.m in Sources */,
+				496E281611AD39C100063419 /* jFlashAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,13 +1078,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/FlurryLib\"",
@@ -1166,7 +1183,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Beta;
 		};
@@ -1231,7 +1248,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = "Beta Distribution";
 		};
@@ -1282,15 +1299,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Debug;
 		};
@@ -1310,7 +1328,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Release;
 		};
@@ -1371,7 +1389,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = DebugPaul;
 		};
