@@ -65,8 +65,7 @@
 		917A5C3B11AB826000016BD2 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		917A5C3C11AB826000016BD2 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		917A5C4711AB829000016BD2 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3E11AB829000016BD2 /* LoadingView.m */; };
-		917A5C4811AB829000016BD2 /* progressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4011AB829000016BD2 /* progressBarView.m */; };
-		917A5C4911AB829000016BD2 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressView.m */; };
+		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		917A5C4A11AB829000016BD2 /* SplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4411AB829000016BD2 /* SplashView.m */; };
 		917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4611AB829000016BD2 /* SwipeView.m */; };
 		917A5C5711AB835400016BD2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
@@ -96,7 +95,11 @@
 		917A5D0C11AB8A0A00016BD2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D6101DDF6000D2AD73 /* CFNetwork.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		917A5D1111AB8A2800016BD2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BB1D8101DDF7300D2AD73 /* libz.1.2.3.dylib */; };
+		917A5D5311ABAABB00016BD2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5D5111ABAABB00016BD2 /* CardView.m */; };
+		917A5D5411ABAABB00016BD2 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5D5211ABAABB00016BD2 /* CardView.xib */; };
 		91C9EE32111E56B6006B72E6 /* CardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C9EE31111E56B6006B72E6 /* CardTest.m */; };
+		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
+		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -266,10 +269,8 @@
 		917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientCustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/GradientCustomCellBackgroundView.m; sourceTree = "<group>"; };
 		917A5C3D11AB829000016BD2 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingView.h; path = AppSpecific/LoadingView.h; sourceTree = "<group>"; };
 		917A5C3E11AB829000016BD2 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingView.m; path = AppSpecific/LoadingView.m; sourceTree = "<group>"; };
-		917A5C3F11AB829000016BD2 /* progressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = progressBarView.h; path = AppSpecific/progressBarView.h; sourceTree = "<group>"; };
-		917A5C4011AB829000016BD2 /* progressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = progressBarView.m; path = AppSpecific/progressBarView.m; sourceTree = "<group>"; };
-		917A5C4111AB829000016BD2 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressView.h; path = AppSpecific/ProgressView.h; sourceTree = "<group>"; };
-		917A5C4211AB829000016BD2 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressView.m; path = AppSpecific/ProgressView.m; sourceTree = "<group>"; };
+		917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressDetailsViewController.h; path = AppSpecific/ProgressDetailsViewController.h; sourceTree = "<group>"; };
+		917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressDetailsViewController.m; path = AppSpecific/ProgressDetailsViewController.m; sourceTree = "<group>"; };
 		917A5C4311AB829000016BD2 /* SplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashView.h; path = AppSpecific/SplashView.h; sourceTree = "<group>"; };
 		917A5C4411AB829000016BD2 /* SplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashView.m; path = AppSpecific/SplashView.m; sourceTree = "<group>"; };
 		917A5C4511AB829000016BD2 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeView.h; path = AppSpecific/SwipeView.h; sourceTree = "<group>"; };
@@ -314,8 +315,14 @@
 		917A5CBF11AB87BF00016BD2 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		917A5D5011ABAABB00016BD2 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		917A5D5111ABAABB00016BD2 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		917A5D5211ABAABB00016BD2 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = Classes/CardView.xib; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
+		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
+		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
+		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
 		91EA2F4B104135E200AB848E /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D3309B031123C7D800B73E8E /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
@@ -462,14 +469,12 @@
 			isa = PBXGroup;
 			children = (
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
-				DA8B6A430FB111A200DE105C /* XIBs */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
+				DA8B6A430FB111A200DE105C /* XIBs */,
+				917A5D5011ABAABB00016BD2 /* CardView.h */,
+				917A5D5111ABAABB00016BD2 /* CardView.m */,
 				917A5C3D11AB829000016BD2 /* LoadingView.h */,
 				917A5C3E11AB829000016BD2 /* LoadingView.m */,
-				917A5C3F11AB829000016BD2 /* progressBarView.h */,
-				917A5C4011AB829000016BD2 /* progressBarView.m */,
-				917A5C4111AB829000016BD2 /* ProgressView.h */,
-				917A5C4211AB829000016BD2 /* ProgressView.m */,
 				917A5C4311AB829000016BD2 /* SplashView.h */,
 				917A5C4411AB829000016BD2 /* SplashView.m */,
 				917A5C4511AB829000016BD2 /* SwipeView.h */,
@@ -715,6 +720,7 @@
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				917A5D5211ABAABB00016BD2 /* CardView.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				917A5C6711AB844300016BD2 /* HelpScrollView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
@@ -725,6 +731,7 @@
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
+				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -745,6 +752,10 @@
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
 				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
+				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
+				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
+				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
+				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
@@ -924,6 +935,8 @@
 				917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */,
 				917A5C7811AB844300016BD2 /* StudyView.xib in Resources */,
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
+				917A5D5411ABAABB00016BD2 /* CardView.xib in Resources */,
+				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,8 +1020,7 @@
 				917A5C3B11AB826000016BD2 /* CustomCellBackgroundView.m in Sources */,
 				917A5C3C11AB826000016BD2 /* GradientCustomCellBackgroundView.m in Sources */,
 				917A5C4711AB829000016BD2 /* LoadingView.m in Sources */,
-				917A5C4811AB829000016BD2 /* progressBarView.m in Sources */,
-				917A5C4911AB829000016BD2 /* ProgressView.m in Sources */,
+				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
 				917A5C4A11AB829000016BD2 /* SplashView.m in Sources */,
 				917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */,
 				917A5C5711AB835400016BD2 /* CellTextField.m in Sources */,
@@ -1024,6 +1036,8 @@
 				917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */,
 				917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */,
 				917A5CB311AB85E200016BD2 /* Reachability.m in Sources */,
+				917A5D5311ABAABB00016BD2 /* CardView.m in Sources */,
+				91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
