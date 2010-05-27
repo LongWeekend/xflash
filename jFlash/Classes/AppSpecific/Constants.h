@@ -3,7 +3,6 @@
 #define PREV_BTN 2
 #define RIGHT_BTN 3
 #define WRONG_BTN 4
-#define SKIP_BTN 5
 #define BURY_BTN 6
 
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX 0

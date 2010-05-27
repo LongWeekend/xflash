@@ -11,7 +11,8 @@
 #import "AddTagViewController.h"
 #import "Constants.h"
 #import "PDColoredProgressView.h"
-#import "ProgressView.h"
+#import "ProgressDetailsViewController.h"
+#import "ProgressBarViewController.h"
 #import "MoodIcon.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -19,12 +20,7 @@
   MoodIcon *moodIcon;
   
   IBOutlet UILabel *cardSetLabel;
-  IBOutlet UILabel *cardSetProgressLabel0;
-  IBOutlet UILabel *cardSetProgressLabel1;
-  IBOutlet UILabel *cardSetProgressLabel2;
-  IBOutlet UILabel *cardSetProgressLabel3;
-  IBOutlet UILabel *cardSetProgressLabel4;
-  IBOutlet UILabel *cardSetProgressLabel5;
+
   IBOutlet UILabel *cardHeadwordLabel;
   IBOutlet UILabel *cardReadingLabel;
   IBOutlet UILabel *totalWordsLabel;
@@ -42,6 +38,7 @@
   IBOutlet UIButton *showProgressModalBtn;
   IBOutlet UIView *practiceBgImage;
   IBOutlet UIView *progressBarView;
+  ProgressBarViewController *progressBarViewController;
   IBOutlet UIView *cardMeaningBtnHint;
   IBOutlet UIView *cardMeaningBtnHintMini;
   IBOutlet UIScrollView *cardReadingLabelScrollContainer;
@@ -53,12 +50,10 @@
 
   // Progress modal overlay
   IBOutlet UIView *progressModalView;
-  IBOutlet UIView *progressModalBorder;
   IBOutlet UIView *progressModalBtn;
   IBOutlet UIButton *progressModalCloseBtn;
-  IBOutlet UILabel *progressModalCurrentStudySetLabel;
-  IBOutlet UILabel *progressModalMotivationLabel;
   
+  IBOutlet UILabel *remainingCardsLabel;
   IBOutlet UIWebView *meaningWebView;
   
   NSString *sql;
@@ -104,6 +99,7 @@
 - (IBAction)doDismissProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
 
+- (void)refreshProgressBarView;
 - (void)doCardBtn: (int)action;
 - (void)doChangeCard: (Card*) card direction:(NSString*)direction;
 - (void)doCardTransition:(NSString *)transition direction:(NSString *)direction;
@@ -115,23 +111,18 @@
 - (void)updateTheme;
 - (void)resetStudySet;
 - (void)resetKeepingCurrentCard;
-- (void)drawProgressBar;
 - (void)hideShowReadingBtn;
 - (void)displayShowReadingBtn;
 - (NSMutableArray*) getLevelDetails;
 
 @property (nonatomic, retain) MoodIcon *moodIcon;
+@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 @property (nonatomic, retain) UILabel *cardSetLabel;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel0;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel1;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel2;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel3;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel4;
-@property (nonatomic, retain) UILabel *cardSetProgressLabel5;
 @property (nonatomic, retain) UILabel *cardHeadwordLabel;
 @property (nonatomic, retain) UILabel *cardReadingLabel;
 @property (nonatomic, retain) UILabel *percentCorrectLabel;
 @property (nonatomic, retain) UILabel *totalWordsLabel;
+@property (nonatomic, retain) UILabel *remainingCardsLabel;
 
 @property (nonatomic, retain) UIButton *addBtn;
 @property (nonatomic, retain) UIButton *buryCardBtn;
@@ -141,7 +132,6 @@
 @property (nonatomic, retain) UIButton *wrongBtn;
 @property (nonatomic, retain) UIButton *cardMeaningBtn;
 @property (nonatomic, retain) UIButton *toggleReadingBtn;
-@property (nonatomic, retain) UIButton *showProgressModalBtn;
 @property (nonatomic, retain) UIView *practiceBgImage;
 @property (nonatomic, retain) UIView *progressBarView;
 @property (nonatomic, retain) UIView *cardMeaningBtnHint;
@@ -153,12 +143,7 @@
 @property (nonatomic, retain) UIWebView *meaningWebView;
 
 @property (nonatomic, retain) UIView *progressModalView;
-@property (nonatomic, retain) UIView *progressModalBorder;
 @property (nonatomic, retain) UIView *progressModalBtn;
-
-@property (nonatomic, retain) IBOutlet UIButton *progressModalCloseBtn;
-@property (nonatomic, retain) IBOutlet UILabel *progressModalCurrentStudySetLabel; 
-@property (nonatomic, retain) IBOutlet UILabel *progressModalMotivationLabel;
 
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
