@@ -10,10 +10,13 @@
 
 
 @implementation CurrentState
-@synthesize isFirstLoad;
+@synthesize isFirstLoad, dbHasFTS;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
+/**
+ * Sets the current active study set/tag - also loads cardIds for the tag
+ */
 - (void) setActiveTag: (Tag*) tag
 {
   [tag retain];
@@ -26,6 +29,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [_activeTag populateCardIds];
 }
 
+
+/**
+ * Returns the current active study set/tag
+ */
 - (Tag *) activeTag
 {
   if(_activeTag == nil || [_activeTag cardCount] == 0)
@@ -42,6 +49,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return tag;
 }
 
+
+/**
+ * Returns the current theme's tint color
+ */
 + (UIColor*) getThemeTintColor
 {
   UIColor *theColor;
@@ -57,6 +68,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return theColor;
 }
 
+
+/**
+ * Returns the current theme's name
+ */
 + (NSString*) getThemeName
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -72,6 +87,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return theName;
 }
 
+
+/**
+ * Reloads cardIds for active set
+ */
 - (void) resetActiveTag
 {
   [self setActiveTag:[self activeTag]];
@@ -101,7 +120,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int firstLoad = 1;
   if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
-  int appRunning = [settings integerForKey:@"app_running"];
+
+  // DEBUG just to figure out the downloader
+  [self setDbHasFTS:NO];  
   
   // Now tell if first load or not
   if (firstLoad)
@@ -127,17 +148,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [self setIsFirstLoad:NO];
   }
   
-  // Did we crash?
-  if (appRunning)
-  {
-    LWE_LOG(@"Appear to be recovering from a crash, we should rebuild indexes for caches here");
-    //[[db dao] executeUpdate:@"DELETE FROM tag_level_count_cache"];
-  }
-  else
-  {
-    // Set the app to be running 
-    [settings setInteger:1 forKey:@"app_running"];
-  }
+  // Set the app to be running 
+  [settings setInteger:1 forKey:@"app_running"];
 }
 
 @end

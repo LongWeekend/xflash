@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "CardPeer.h"
 #import "AddTagViewController.h"
+#import "DownloaderViewController.h"
 
 @implementation SearchViewController
 @synthesize searchBar, searchArray, activityIndicator;
@@ -29,25 +30,32 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  self.searchBar.delegate = self;
+  [[self tableView] setTableHeaderView:searchBar];
+  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if([db doesTableExist:@""])
+  CurrentState *appState = [CurrentState sharedCurrentState];
+  if (appState.dbHasFTS == YES)
   {
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-    self.searchBar.delegate = self;
-    [[self tableView] setTableHeaderView:searchBar];
-    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   }
   else
   {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Dictionary Loaded" message:@"In order to use the dictionary, you must first download the dictionary file.  Would you like to do this now?" delegate:self  cancelButtonTitle:@"Later" otherButtonTitles:nil];
+    // Create a download button in case the person dismisses the alert
+    UIBarButtonItem *downloadBtn = [[UIBarButtonItem alloc] initWithTitle:@"Download Index" style:UIBarButtonItemStyleBordered target:self action:@selector(launchDownloader)];
+    self.navigationItem.rightBarButtonItem = downloadBtn;
+
+    // Alert the user that they don't have the full DB index
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download the Dictionary Index" message:@"To make the dictionary very fast, we highly recommend you to download the index file.  Would you like to do this now?" delegate:self  cancelButtonTitle:@"Later" otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Yes"];
     [alert show];
+    [alert release];
   }
-}  
+}
+
+
 
 - (void) viewWillAppear: (BOOL)animated
 {
@@ -63,6 +71,37 @@
     [searchBar becomeFirstResponder];
   }
 }
+
+
+/**
+ * launchDownloader
+ * Creates a modal nav controller and loads the DownloaderControllerView into it
+ */
+- (void) launchDownloader
+{
+  DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
+  dlViewController.title = @"Download Dictionary Indexes";
+  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
+  [[self navigationController] presentModalViewController:modalNavController animated:YES];
+  [modalNavController release];
+  [dlViewController release];
+}
+
+
+#pragma mark UIAlert Delegates
+
+/**
+ * alertView delegate - decides what to do when the user presses "OK" or "Cancel" for the index download alert
+ */
+- (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  // This is the OK button
+  if (buttonIndex == 1)
+  {
+    [self launchDownloader];
+  }
+}
+
 
 #pragma mark searchBar methods
 
