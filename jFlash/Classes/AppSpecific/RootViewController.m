@@ -8,11 +8,6 @@
 
 #import "RootViewController.h"
 
-#define PROFILE_SQL_STATEMENTS 0  
-#if (PROFILE_SQL_STATEMENTS)
-#import "LWESQLDebug.h"
-#endif
-
 @implementation RootViewController
 
 @synthesize delegate;
@@ -33,12 +28,30 @@
 	return self;
 }
 
-
+/**
+ * Loads the jFlash logo splash screen and calls the database loader when finished
+ */
 - (void) loadView
 {
-  LWE_LOG(@"START Load View");
+  // Splash screen
+  NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+  view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
+  [tmpStr release];
+  self.view = view;
+  [view release];
   
+  // Database work next, but put delay so we can update the UIKIT with the splash screen
+  [self performSelector:@selector(loadDatabase) withObject:nil afterDelay:0.1];
+}  
+
+
+/**
+ * Loads & opens the database (including if it doesn't exist), calls loadTabBar when finished
+ */
+- (void) loadDatabase
+{
+  // Determine if the database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -47,65 +60,21 @@
   bool dbDidFinishCopying = [settings boolForKey:@"db_did_finish_copying"];
   if (appSettings.isFirstLoad || ![db databaseFileExists:pathToDatabase] || !dbDidFinishCopying)
   {
-    // Is first load, copy database splash screen
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
-    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
-    [tmpStr release];
-    self.view = view;
-    [view release];
-    [self performSelector:@selector(showFirstLoadProgressView) withObject:nil afterDelay:0.1];
-  }
-  else if ([appSettings splashIsOn])
-  {
-    // Not first load, splash screen
-    NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
-    SplashView *mySplash = [[SplashView alloc] initWithImage:[UIImage imageNamed:tmpStr]];
-    [tmpStr release];
-    mySplash.animation = SplashViewAnimationFade;
-    mySplash.delay = 3;
-    mySplash.touchAllowed = YES;
-    mySplash.delegate = nil;
-    [mySplash startSplash:YES];
-    [mySplash release];
-    self.view = view;
-    [view release];
-    [self performSelector:@selector(doAppInit) withObject:nil afterDelay:0.1];
+    // Load the "waiting" view for the new database copy
+    [self showFirstLoadProgressView];
   }
   else
   {
-    // Not first load, no splash screen
-    view.backgroundColor = [UIColor blackColor];
-    self.view = view;
-    [view release];
-    [self performSelector:@selector(doAppInit) withObject:nil afterDelay:0.1];
+    // Open the database - it already exists & is properly copied
+    [db openedDatabase:pathToDatabase];
+    [self performSelector:@selector(loadTabBar) withObject:nil afterDelay:0.0];
   }
-  LWE_LOG(@"END Loading Splash");
 }
 
-- (void) doAppInit
-{
-  LWE_LOG(@"START app init");
-  
-  // Get app settings singleton
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
-  if ([db openedDatabase:pathToDatabase])
-  {
-      // We are OK to go
-#if (PROFILE_SQL_STATEMENTS)
-      NSArray* statements = [[NSArray alloc] initWithObjects:
-           [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
-           [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",199],
-           [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
-           [NSString stringWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level FROM card_tag_link l, user_history u WHERE u.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",199,1],
-           nil
-      ];
-      [LWESQLDebug profileSQLStatements:statements];
-#endif
-  }
-  [self loadTabBar];
-}
 
+/**
+ * Programmatically creates a TabBarController and adds nav/view controllers for each tab item
+ */
 - (void) loadTabBar
 {
   LWE_LOG(@"START Tab bar");
@@ -160,33 +129,45 @@
   
   //launch the please rate us
   [Appirater appLaunched];
-
 }
 
-// On first load when copying the database
+
+/**
+ * On first load - this shows the "setting up for first time" dialog, starts DB copy, and calls continueDatabaseCopy when finished
+ */
 - (void) showFirstLoadProgressView
 {
   loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *pathToDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
   [db performSelectorInBackground:@selector(openedDatabase:) withObject:pathToDatabase];
-  [self continueDatabaseCopy];
+  [self _continueDatabaseCopy];
 } 
 
-- (void) continueDatabaseCopy
+
+/**
+ * Called continously by itself until DB copy is finished
+ */
+- (void) _continueDatabaseCopy
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   if (!db.databaseOpenFinished)
   {
-    [self performSelector:@selector(continueDatabaseCopy) withObject:nil afterDelay:0.25];
+    // Checks every 250 milliseconds to see if we are done
+    [self performSelector:@selector(_continueDatabaseCopy) withObject:nil afterDelay:0.25];
   }
   else
   {
-    [self finishDatabaseCopy];
+    [self _finishDatabaseCopy];
   }
 }
 
-- (void) finishDatabaseCopy
+
+/**
+ * Cleanup once database is finished copying, removes "setup" dialog
+ * If RootViewController has a delegate, it will call appInitDidComplete
+ */
+- (void) _finishDatabaseCopy
 {
 	if (loadingView)
   {
@@ -198,6 +179,7 @@
 	}
   [self loadTabBar];
 }
+
 
 # pragma mark Convenience Methods for Notifications
 
@@ -238,7 +220,7 @@
 
 # pragma mark Housekeeping
 
-- (void) applicationWillTerminate
+- (void) applicationWillTerminate:(UIApplication*)application
 {
   // Get current card from StudyViewController
   StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
@@ -254,8 +236,10 @@
   [settings setInteger:0 forKey:@"app_running"];
   [settings synchronize];
   
-  [[appSettings activeTag] freezeCardIds];
+  // Only freeze if we have a database
+  if ([[LWEDatabase sharedLWEDatabase] dao]) [[appSettings activeTag] freezeCardIds];
 }
+
 
 - (void)dealloc
 {

@@ -119,9 +119,8 @@
 - (NSMutableArray*) thawCardIds
 {
   NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
-  LWE_LOG(@"Beginning plist reading: %@",path);
   NSMutableArray* tmpCardIds = [[[NSMutableArray alloc] initWithContentsOfFile:path] autorelease];
-  LWE_LOG(@"Finished plist reading");
+  LWE_LOG(@"Tried unarchiving plist file at path: %@",path);
   return tmpCardIds;
 }
 
@@ -131,7 +130,7 @@
   NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
   LWE_LOG(@"Beginning plist freezing: %@",path);
   [[self cardIds] writeToFile:path atomically:YES];
-  LWE_LOG(@"Finished plist freezing");
+  LWE_LOG(@"Finished plist freeze");
 }
 
 - (void) populateCardIds
@@ -164,10 +163,10 @@
 }
 
 
-//--------------------------------------------------------------------------
-// Card getRandomCard
-// Returns a Card object from the database randomly
-//--------------------------------------------------------------------------
+/**
+ * Returns a Card object from the database randomly
+ * Accepts current cardId in an attempt to not return the last card again
+ */
 - (Card*) getRandomCard:(int) currentCardId
 {
   // determine the next level
@@ -205,10 +204,10 @@
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
-//--------------------------------------------------------------------------
-// updateLevelCounts
-// Update level counts
-//--------------------------------------------------------------------------
+
+/**
+ * Update level counts cache - (kept in memory how many cards are in each level)
+ */
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
   // update the cardIds if necessary

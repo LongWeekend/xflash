@@ -42,10 +42,10 @@
 @property NSInteger i;
 
 - (void) switchToStudyView;
-- (void) applicationWillTerminate;
+- (void) applicationWillTerminate:(UIApplication*) application;
 - (void) showFirstLoadProgressView;
-- (void) continueDatabaseCopy;
-- (void) finishDatabaseCopy;
+- (void) _continueDatabaseCopy;
+- (void) _finishDatabaseCopy;
 - (void) loadTabBar;
 
 @end

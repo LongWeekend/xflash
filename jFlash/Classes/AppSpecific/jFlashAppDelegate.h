@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define PROFILE_SQL_STATEMENTS 1
+
 // Tell the compiler about user-defined classes
 @class RootViewController;
 
