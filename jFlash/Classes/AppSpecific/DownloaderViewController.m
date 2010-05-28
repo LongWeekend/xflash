@@ -26,7 +26,7 @@
   [self setProgress:0.0f];
   
   // Instantiate downloader with jFlash download URL
-  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/foobar"];
+  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/jFlashFTS.db"];
   [self setDlHandler:tmpDlHandler];
   
   // Register notification listener to handle downloader events

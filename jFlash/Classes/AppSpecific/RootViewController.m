@@ -65,8 +65,13 @@
   }
   else
   {
-    // Open the database - it already exists & is properly copied
+    // Open the database - it already exists & is properly copied - then add FTS database if possible
     [db openedDatabase:pathToDatabase];
+    
+    // TODO: This is the FTS database - somehow change this later
+    NSString *pathToFTSDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlashFTS.db"];
+    [db attachDatabase:pathToFTSDatabase withName:@"fts"];
+
     [self performSelector:@selector(loadTabBar) withObject:nil afterDelay:0.0];
   }
 }

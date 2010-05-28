@@ -45,9 +45,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   self.dao = [FMDatabase databaseWithPath:pathToDatabase];
   self.dao.logsErrors = YES;
-#if (PROFILE_SQL_STATEMENTS)
   self.dao.traceExecution = YES;
-#endif
   if ([self.dao open])
   {
     success = YES;
@@ -72,13 +70,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   BOOL returnVal = NO;
   if ([self _databaseIsOpen])
   {
-    NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE '%@' AS '%@'",pathToDatabase,name];
-    FMResultSet *rs = [[self dao] executeQuery:sql];
+    NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE \"%@\" AS %@;",pathToDatabase,name];
+    LWE_LOG(@"%@",sql);
+    [[self dao] executeUpdate:sql];
     if (![[self dao] hadError])
     {
       returnVal = YES;
     }
-    [rs close];
+    [sql release];
   }
   else
   {
@@ -98,7 +97,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   BOOL returnVal = NO;
   if ([self _databaseIsOpen])
   {
-    NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
+    NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE type='table' AND name='%@'", tableName];
+//    NSString *foo = "SELECT name FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type='table' ORDER BY name";    
     FMResultSet *rs = [[self dao] executeQuery:sql];
     if ([rs next]) returnVal = YES;
     [rs close];
