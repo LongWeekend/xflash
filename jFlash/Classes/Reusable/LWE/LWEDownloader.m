@@ -140,11 +140,18 @@
 
 /**
  * Delegate method for ASIHTTPRequest which is called when the response headers come back
+ * We extract "content length" to determine the number of bytes to be downloaded
  */
 - (void)requestReceivedResponseHeaders:(ASIHTTPRequest *)request
 {
-  NSString *poweredBy = [[request responseHeaders] objectForKey:@"Content-Length"];
+  NSString *contentLength = [[request responseHeaders] objectForKey:@"Content-Length"];
+  if (contentLength)
+  {
+    requestSize = [contentLength intValue];
+    [contentLength release];
+  }
 }
+
 
 /**
  * Delegate method for ASIHTTPRequest which handles successful completion of a request

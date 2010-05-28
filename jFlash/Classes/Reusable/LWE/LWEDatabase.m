@@ -15,30 +15,35 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
-- (BOOL) databaseFileExists
+/** 
+ * Returns true if the database file specified by 'pathToDatabase' exists
+ */
+- (BOOL) databaseFileExists:(NSString*)pathToDatabase
 {
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [paths objectAtIndex:0];
-  NSString *path = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];	
-  if(![fileManager fileExistsAtPath:path])
+  if([fileManager fileExistsAtPath:pathToDatabase])
   {
-    // This means it is a fresh install
-    LWE_LOG(@"No database located at normal location, must be fresh install.");
+    LWE_LOG(@"Database file found at specified location: %@",pathToDatabase);
+    return YES;
+  }
+  else
+  {
+    LWE_LOG(@"No database file located at specified location: %@",pathToDatabase);
     return NO;
   }
-  return YES;
 }
 
-- (BOOL) openedDatabase
+
+/** 
+ * Returns true if the database file specified by 'pathToDatabase' was successfully opened
+ * Also posts a 'databaseIsOpen' notification on success
+ */
+- (BOOL) openedDatabase:(NSString*)pathToDatabase
 {
   self.databaseOpenFinished = NO;
   BOOL success = NO;
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *documentsDirectory = [paths objectAtIndex:0];
-  NSString *path = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];	
-  self.dao = [FMDatabase databaseWithPath:path];
+  self.dao = [FMDatabase databaseWithPath:pathToDatabase];
   self.dao.logsErrors = YES;
   self.dao.traceExecution = NO;
   if ([self.dao open])
@@ -56,13 +61,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   return success;
 }
 
+
+/**
+ * Checks for the existence of a table name in the sqlite_master table
+ * If database is not open, throws an exception
+ */
 - (BOOL) doesTableExist:(NSString *) tableName
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
-  FMResultSet *rs = [[self dao] executeQuery:sql];
-  [sql release];
-  while ([rs next]) {
-    return true;
+  if ([[self dao] isKindOfClass:[FMDatabase class]])
+  {
+    NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
+    FMResultSet *rs = [[self dao] executeQuery:sql];
+    [sql release];
+    if ([rs next])
+      return true;
+    else
+      return false;
+  }
+  else
+  {
+    // When called with no DB, throw exception
+    [NSException raise:@"Invalid database object in 'dao'" format:@"dao object is: %@",[self dao]];
   }
   return false;
 }

@@ -11,6 +11,9 @@
 
 @implementation LWEFile
 
+/**
+ * Takes a single filename and returns a full path pointing at that filename in the current app's document directory
+ */
 + (NSString*) createDocumentPathWithFilename:(NSString*)filename
 {
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

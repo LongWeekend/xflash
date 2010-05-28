@@ -14,7 +14,6 @@
 
 }
 
-+ (NSString*) createDocumentPathWithFilename:(NSString*)filename;
-
++ (NSString*) createDocumentPathWithFilename:(NSString*) filename;
 
 @end

@@ -2,6 +2,9 @@
 #import "sqlite3.h"
 #import "FMResultSet.h"
 
+// ADDED BY MMA TO MAKE "COPYDATABASE" METHOD WORK BETTER - 5/28/2010
+#import "LWEFile.h"
+
 @interface FMDatabase : NSObject 
 {
 	sqlite3*    db;

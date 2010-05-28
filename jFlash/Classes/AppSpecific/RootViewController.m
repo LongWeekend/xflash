@@ -6,17 +6,7 @@
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "CurrentState.h"
 #import "RootViewController.h"
-#import "StudyViewController.h"
-#import "StudySetViewController.h"
-#import "SearchViewController.h"
-#import "SettingsViewController.h"
-#import "HelpViewController.h"
-#import "PDColoredProgressView.h"
-#import "SplashView.h"
-#import "Appirater.h"
-#import "Constants.h"
 
 #define PROFILE_SQL_STATEMENTS 0  
 #if (PROFILE_SQL_STATEMENTS)
@@ -52,9 +42,10 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
   [appSettings initializeSettings];
   bool dbDidFinishCopying = [settings boolForKey:@"db_did_finish_copying"];
-  if (appSettings.isFirstLoad || ![db databaseFileExists] || !dbDidFinishCopying)
+  if (appSettings.isFirstLoad || ![db databaseFileExists:pathToDatabase] || !dbDidFinishCopying)
   {
     // Is first load, copy database splash screen
     NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[CurrentState getThemeName]];
@@ -96,8 +87,9 @@
   LWE_LOG(@"START app init");
   
   // Get app settings singleton
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];  
-  if ([db openedDatabase])
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
+  if ([db openedDatabase:pathToDatabase])
   {
       // We are OK to go
 #if (PROFILE_SQL_STATEMENTS)
@@ -176,7 +168,8 @@
 {
   loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db performSelectorInBackground:@selector(openedDatabase) withObject:nil];
+  NSString *pathToDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
+  [db performSelectorInBackground:@selector(openedDatabase:) withObject:pathToDatabase];
   [self continueDatabaseCopy];
 } 
 

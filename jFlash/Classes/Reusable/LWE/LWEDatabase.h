@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "LWEFile.h"
 
 @interface LWEDatabase : NSObject
 {
@@ -19,8 +19,8 @@
 @property (nonatomic, retain) FMDatabase *dao;
 
 + (LWEDatabase *)sharedLWEDatabase;
-- (BOOL) openedDatabase;
-- (BOOL) databaseFileExists;
+- (BOOL) openedDatabase:(NSString*) pathToDatabase;
+- (BOOL) databaseFileExists:(NSString*) pathToDatabase;
 - (BOOL) doesTableExist:(NSString *) tableName;
 
 @end

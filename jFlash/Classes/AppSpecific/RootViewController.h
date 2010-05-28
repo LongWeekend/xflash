@@ -8,6 +8,17 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "LoadingView.h"
+#import "CurrentState.h"
+#import "StudyViewController.h"
+#import "StudySetViewController.h"
+#import "SearchViewController.h"
+#import "SettingsViewController.h"
+#import "HelpViewController.h"
+#import "PDColoredProgressView.h"
+#import "SplashView.h"
+#import "Appirater.h"
+#import "Constants.h"
+#import "LWEFile.h"
 
 @protocol InitializationDelegate <NSObject>
 @optional

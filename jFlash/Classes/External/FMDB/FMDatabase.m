@@ -3,9 +3,6 @@
 
 @implementation FMDatabase
 
-// LOCKING CODE FOR THREAD-SAFE ADDED BY MMA
-static NSLock *dbLock;
-
 + (id)databaseWithPath:(NSString*)aPath {
     return [[[FMDatabase alloc] initWithPath:aPath] autorelease];
 }
@@ -65,13 +62,11 @@ static NSLock *dbLock;
 {
 	// First, test for existence.  
 	BOOL fileExists;
-	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSError *error;
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"jFlash.db"];
-	fileExists = [fileManager fileExistsAtPath:writableDBPath];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *writableDBPath = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	fileExists = [fileManager fileExistsAtPath:writableDBPath];
 	if (fileExists && [settings boolForKey:@"db_did_finish_copying"]) return;
 	// The writable database does not exist, so copy the default to the appropriate location.
 	NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
@@ -386,17 +381,13 @@ static NSLock *dbLock;
 - (id) executeQuery:(NSString*)sql, ... {
     va_list args;
     va_start(args, sql);
-  // LOCKING CODE ADDED BY MMA TO PREVENT THREADING PROBLEMS
-  [dbLock lock];
     id result = [self executeQuery:sql arguments:args];
-  [dbLock unlock];
     va_end(args);
     return result;
 }
 
 
 - (BOOL) executeUpdate:(NSString*)sql arguments:(va_list)args {
-    [dbLock lock];
     
     if (inUse) {
         [self compainAboutInUse];
@@ -557,10 +548,7 @@ static NSLock *dbLock;
 - (BOOL) executeUpdate:(NSString*)sql, ... {
     va_list args;
     va_start(args, sql);
-  // LOCKING CODE ADDED BY MMA TO PREVENT THREADING PROBLEMS
-  [dbLock lock];
     BOOL result = [self executeUpdate:sql arguments:args];
-  [dbLock unlock];
     
     va_end(args);
     return result;
