@@ -8,18 +8,16 @@
 #import "StudyViewController.h"
 
 @implementation StudyViewController
-
-@synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
-@synthesize currentCard, currentCardSet, cardHeadwordLabel, cardReadingLabel, meaningWebView;
+@synthesize currentCard, currentCardSet, cardHeadwordLabel, cardReadingLabel, meaningWebView, remainingCardsLabel;
 
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, readingVisible, percentCorrectVisible, meaningMoreIconVisible, readingMoreIconVisible;
-@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, toggleReadingBtn, showProgressModalBtn, progressModalBtn;
+@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, toggleReadingBtn;
 @synthesize showReadingBtnHiddenByUser, cardMeaningBtn, cardMeaningBtnHint, cardMeaningBtnHintMini;
 
-@synthesize progressModalView, progressModalBorder, progressModalCloseBtn, progressModalCurrentStudySetLabel, progressModalMotivationLabel;
+@synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, stats, meaningRevealed, hhAnimationView;
 
-@synthesize startTouchPosition, practiceBgImage, progressBarView, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon;
+@synthesize startTouchPosition, practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon;
 @synthesize cardReadingLabelScrollContainerYPosInXib, cardHeadwordLabelHeightInXib, toggleReadingBtnYPosInXib, cardHeadwordLabelYPosInXib;
 
 
@@ -85,6 +83,9 @@
   toggleReadingBtnYPosInXib = tmpFrame.origin.y;
   tmpFrame = cardHeadwordLabelScrollContainer.frame;
   cardHeadwordLabelYPosInXib = tmpFrame.origin.y;
+  
+  // Initialize the progressBarView
+  [self setProgressBarViewController:[[ProgressBarViewController alloc] init]];
 
   // Reset child views
   LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
@@ -140,7 +141,7 @@
   [self resetKeepingCurrentCard];
   
   //tells the progress bar to redraw
-  [progressBarView setNeedsDisplay];
+  [self refreshProgressBarView];
 }
 
 
@@ -260,14 +261,35 @@
   if(!percentCorrectVisible && !self.isBrowseMode){
     [self doTogglePercentCorrectBtn];
   }
-
-  // TODO - this relies on data before that data may not be ready
-  [self drawProgressBar];
+  
+  // update the remaining cards label
+  if(isBrowseMode)
+  {
+    [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
+  }
+  else	
+  {
+    [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
+  }
+  
   [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
   [self toggleMoreIconForLabel:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer];
+  
+  [self refreshProgressBarView];
   LWE_LOG(@"END prepareViewForCard");
 }
 
+- (void) refreshProgressBarView
+{
+  for (UIView *view in self.progressBarView.subviews)
+  {
+    [view removeFromSuperview];
+  }
+  
+  [progressBarViewController setLevelDetails: [self getLevelDetails]];
+  [[self progressBarViewController] drawProgressBar];
+  [[self progressBarView] addSubview:progressBarViewController.view];
+}
 
 - (void) updateCardReading
 {
@@ -322,8 +344,7 @@
     [wrongBtn setEnabled: NO];
     [buryCardBtn setEnabled: NO];
 	}
-  // tells the progress bar to redraw
-  [progressBarView setNeedsDisplay];
+  
 	UIView *theWindow = [self.view superview];
 	[UIView beginAnimations:nil context:NULL];
 
@@ -349,16 +370,11 @@
 	switch (action)
   {
     // Browse Mode options
-    case NEXT_BTN:
+    case NEXT_BTN: 
       [self doChangeCard: [currentCardSet getNextCard] direction:kCATransitionFromRight];
       break;
     case PREV_BTN:
       [self doChangeCard: [currentCardSet getPrevCard] direction:kCATransitionFromLeft];
-      break;
-      
-    // Quiz mode options
-    case SKIP_BTN:
-      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;
 
     case BURY_BTN:
@@ -393,18 +409,12 @@
 
 - (IBAction) doNextCardBtn
 {
-  if (self.isBrowseMode) 
-    [self doCardBtn:NEXT_BTN];
-  else
-    [self doCardBtn:SKIP_BTN];
+  [self doCardBtn:NEXT_BTN];
 }
 
 - (IBAction) doPrevCardBtn
 {
-  if (self.isBrowseMode) 
-    [self doCardBtn:PREV_BTN];
-  else
-    [self doCardBtn:SKIP_BTN];
+  [self doCardBtn:PREV_BTN];
 }
 
 - (IBAction) doBuryCardBtn
@@ -516,7 +526,7 @@
 - (IBAction) doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
-	ProgressView *progressView = [[ProgressView alloc] init];
+	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
   progressView.rightStreak = currentRightStreak;
   progressView.wrongStreak = currentWrongStreak;
   NSMutableArray* levelDetails = [self getLevelDetails];
@@ -650,7 +660,6 @@
   
 }
 
-
 - (void) updateTheme
 {
   NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[CurrentState getThemeName]];
@@ -662,7 +671,6 @@
     tmpRatio = 100*((float)numRight / (float)numViewed);
   [moodIcon updateMoodIcon:tmpRatio];
 }
-
 
 - (NSMutableArray*) getLevelDetails
 {
@@ -688,77 +696,6 @@
   }
   return levelDetails;
 }
-
-// draws the progress bar
-- (void) drawProgressBar
-{
-  for (UIView *view in progressBarView.subviews)
-  {
-    [view removeFromSuperview];
-  }
-
-  NSMutableArray* levelDetails = [self getLevelDetails];
-  if (levelDetails)
-  {
-    // set the x / total to the current index in browse mode
-    if(isBrowseMode)
-    {
-      [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
-    }
-    else
-    {
-      [cardSetProgressLabel0 setText:[NSString stringWithFormat:@"%d / %d",[[levelDetails objectAtIndex:0]intValue], [currentCardSet cardCount]]];
-    }
-    [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
-    [cardSetProgressLabel2 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:2]intValue]]];  
-    [cardSetProgressLabel3 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:3]intValue]]];  
-    [cardSetProgressLabel4 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:4]intValue]]];  
-    [cardSetProgressLabel5 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:5]intValue]]];
-  }
-
-  NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  int i;
-  int pbOrigin = 7;
-  float thisCount;
-
-  for (i = 1; i < 6; i++)
-  {
-    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-    [progressView setTintColor:[lineColors objectAtIndex: i]];
-    if(i == 1)
-    {
-      thisCount = [[levelDetails objectAtIndex: 7] floatValue];
-    }
-    else
-    {
-      thisCount -= [[levelDetails objectAtIndex: i-1] floatValue]; 
-    }
-    float seencount = [[levelDetails objectAtIndex: 7] floatValue];
-    float progress;
-    if(seencount == 0)
-    {
-      progress = 0;
-    }
-    else
-    {
-      progress = thisCount / seencount;
-    }
-    progressView.progress = progress;
-    CGRect frame = progressView.frame;
-    frame.size.width = 57;
-    frame.size.height = 14;
-    frame.origin.x = pbOrigin;
-    frame.origin.y = 19;
-
-    progressView.frame = frame;
-    [progressBarView addSubview:progressView];
-    [progressView release];
-    
-    //move the origin of the next progress bar over
-    pbOrigin += frame.size.width + 5;
-  }
-}
-
 
 #pragma mark Touch interface methods
 
@@ -804,12 +741,6 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [cardSetLabel release];
-  [cardSetProgressLabel0 release];
-  [cardSetProgressLabel1 release];
-  [cardSetProgressLabel2 release];
-  [cardSetProgressLabel3 release];
-  [cardSetProgressLabel4 release];
-  [cardSetProgressLabel5 release];
   [cardHeadwordLabel release];
   [cardReadingLabel release];
   [percentCorrectLabel release];
@@ -823,19 +754,15 @@
   [wrongBtn release];
   [cardMeaningBtn release];
   [toggleReadingBtn release];
-  [showProgressModalBtn release];
   [practiceBgImage release];
   [progressBarView release];
+  [progressBarViewController release];
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
   [hhAnimationView release];
   
   [progressModalView release];
-  [progressModalBorder release];
   [progressModalBtn release];
-  [progressModalCloseBtn release];
-  [progressModalCurrentStudySetLabel release]; 
-  [progressModalMotivationLabel release];
   [meaningWebView release];
   
   [currentCardSet release];
