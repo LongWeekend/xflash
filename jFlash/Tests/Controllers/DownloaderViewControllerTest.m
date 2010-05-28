@@ -38,10 +38,9 @@
 - (void) testDownloaderViewControllerLoad
 {
   [self setUp];
-/*  STAssertEqualObjects([[self vc] statusMessage],    @"", @"statusMsgLabel was not initialized to '' blank");
+  STAssertEqualObjects([[self vc] statusMessage],    @"", @"statusMsgLabel was not initialized to '' blank");
   STAssertEqualObjects([vc taskMessage],      @"", @"taskMsgLabel was not initialized to '' blank");
   STAssertEquals([vc progress],         0.0f, @"progressIndicator was not initialized to 0% done");
- */
   [self tearDown];
 }
 

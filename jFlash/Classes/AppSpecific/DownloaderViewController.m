@@ -8,10 +8,10 @@
 
 #import "DownloaderViewController.h"
 
-
 @implementation DownloaderViewController
 
 @synthesize statusMsgLabel, taskMsgLabel, progressIndicator;
+@synthesize dlHandler;
 
 /** 
  * viewDidLoad - Initialize UI elements in the view - progress indicator & labels
@@ -21,15 +21,27 @@
   [super viewDidLoad];
 
   // Reset all variables to default
-  [self setStatusMessage:@""];
+  [self setStatusMessage:@"Press the button to initiate the download"];
   [self setTaskMessage:@""];
-  [self setProgress:0.35f];
+  [self setProgress:0.0f];
+  
+  // Instantiate downloader with jFlash download URL
+  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/foobar"];
+  [self setDlHandler:tmpDlHandler];
+  
+  // Register notification listener to handle downloader events
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloaderDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloaderDisplay) name:@"LWEDownloaderProgressUpdated" object:nil];
 }
 
 
+/**
+ * Delegate method before view appears; sets title bar tint according to theme
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  // TODO: Theme the status bar here
 }
 
 
@@ -121,6 +133,41 @@
   return [[self progressIndicator] progress];
 }
 
+
+/**
+ * Starts a new download using the LWEDownloader instance held by DownloaderViewController  
+ */
+- (IBAction) startDownloadProcess
+{
+  [[self dlHandler] startDownload];
+}
+
+
+/**
+ * Cancels an ongoing LWEDownloader instance and dismisses the DownloaderViewController  
+ */
+- (IBAction) cancelDownloadProcess
+{
+  [[self dlHandler] cancelDownload];
+  [[self parentViewController] dismissModalViewControllerAnimated:YES];
+}
+
+
+/**
+ * Retrieves current status from LWEDownloader and updates view
+ */
+- (void) updateDownloaderDisplay
+{
+  [self setTaskMessage:[[self dlHandler] taskMessage]];
+  [self setStatusMessage:[[self dlHandler] statusMessage]];
+  [self setProgress:[[self dlHandler] progress]];
+  
+  // See if we are done
+  if ([[self dlHandler] stateIsFinal])
+  {
+    //[[self parentViewController] dismissModalViewControllerAnimated:YES];
+  }
+}
 
 
 - (void)didReceiveMemoryWarning 
