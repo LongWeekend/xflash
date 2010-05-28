@@ -21,8 +21,8 @@
     self.title = @"Help";
     self.navigationItem.title = @"Help";
     
-    NSArray *names = [NSArray arrayWithObjects:@"Welcome",@"Study Sets",@"Practice",@"Browse Mode",@"Word Search",@"Sharing",@"Feedback"];
-    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"share",@"feedback"];
+    NSArray *names = [NSArray arrayWithObjects:@"Welcome",@"Study Sets",@"Practice",@"Browse Mode",@"Word Search",@"Sharing",@"Feedback",nil];
+    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"share",@"feedback",nil];
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];    
   }
