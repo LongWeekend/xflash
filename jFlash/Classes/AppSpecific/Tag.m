@@ -24,10 +24,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSInteger calculateNextCardLevel
-// Returns next card level
-//--------------------------------------------------------------------------
+/**
+ * Calculates next card level based on current performance & Tag progress
+ */
 - (NSInteger) calculateNextCardLevel
 {
   // Total number of cards in this set
@@ -98,6 +97,7 @@
 }
 
 
+//! Create a cache of the number of Card objects in each level
 - (void) cacheCardLevelCounts
 {
   NSNumber *count;
@@ -116,6 +116,7 @@
 }
 
 
+//! Unarchive plist file containing the user's last session data
 - (NSMutableArray*) thawCardIds
 {
   NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
@@ -125,6 +126,7 @@
 }
 
 
+//! Archive current session data to a plist so we can re-start at same place in next session
 - (void) freezeCardIds
 {
   NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
@@ -133,6 +135,8 @@
   LWE_LOG(@"Finished plist freeze");
 }
 
+// TODO: possibly rename, examine if this should be refactored?  Maybe method should be renamed
+//! Executed when loading a new set on app load
 - (void) populateCardIds
 {
   LWE_LOG(@"Began populating card ids and setting counts");
@@ -236,15 +240,16 @@
 }
 
 
-//--------------------------------------------------------------------------
-// int cardCount
-// Get how many cards are in this tag
-//--------------------------------------------------------------------------
+/**
+ * Return how many Card objects are in this Tag
+ */
 - (NSInteger) cardCount
 { 
   return cardCount;
 }
 
+
+//! Setter for cardCount; updates the database cache automatically
 - (void) setCardCount: (int) count
 {
   // do nothing if its the same
@@ -264,10 +269,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// removeCardFromActiveSet: card
-// Removes card from tag's memory arrays so they are out of the set
-//--------------------------------------------------------------------------
+/**
+ * Removes card from tag's memory arrays so they are out of the set
+ */
 - (void) removeCardFromActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
@@ -278,10 +282,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// addCardToActiveSet: card
-// Add card to tag's memory arrays
-//--------------------------------------------------------------------------
+/**
+ * Add card to tag's memory arrays
+ */
 - (void) addCardToActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
@@ -292,6 +295,8 @@
 }
 
 
+// TODO: why does Tag care what mode we are in?  Seems fishy to me.
+//! Gets first card in browse mode
 - (Card*) getFirstCard
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -322,6 +327,7 @@
 }
 
 
+//! Concatenate cardId arrays for browse mode
 - (NSMutableArray *) combineCardIds
 {
   NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
@@ -334,10 +340,9 @@
   return allCardIds;
 }
 
-//--------------------------------------------------------------------------
-// Card getNextCard
-// Returns the next card in the list, resets index if at the end of the list
-//--------------------------------------------------------------------------
+/**
+ * Returns the next card in the list, resets index if at the end of the list
+ */
 - (Card*) getNextCard
 {
   NSMutableArray *allCardIds;
@@ -359,10 +364,9 @@
 }
 
 
-//----------------------------------------------------------------------------
-// Card getPrevCard
-// Returns the previous card in the list, resets index to top last card if at 0
-//-----------------------------------------------------------------------------
+/**
+ * Returns the previous card in the list, resets index to top last card if at 0
+ */
 - (Card*) getPrevCard
 {
   NSMutableArray *allCardIds;
@@ -385,9 +389,7 @@
 }
 
 
-//--------------------------------------------------------------------------
-//takes a sqlite result set and populates the properties of tag
-//--------------------------------------------------------------------------
+//! takes a sqlite result set and populates the properties of Tag
 - (void) hydrate: (FMResultSet*) rs
 {
 	[self setTagId:           [rs intForColumn:@"tag_id"]];
@@ -396,8 +398,6 @@
   [self setTagEditable:     [rs intForColumn:@"editable"]];
   [self setCardCount:       [rs intForColumn:@"count"]];
 }
-//--------------------------------------------------------------------------
-
 
 - (void) dealloc
 {

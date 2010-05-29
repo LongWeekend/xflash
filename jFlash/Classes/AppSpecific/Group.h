@@ -10,11 +10,11 @@
 @interface Group : NSObject
 {
 	NSInteger groupId;
-	NSInteger ownerId;
-	NSInteger tagCount;
-	NSInteger recommended;
-  NSInteger childGroupCount;
-	NSString *groupName;
+	NSInteger ownerId;            //! groupId of the parent Group
+	NSInteger tagCount;           //! cached number of Tag items in the Group
+	NSInteger recommended;        //! Is a recommended Group?
+  NSInteger childGroupCount;    //! cached number of children Group objects
+	NSString *groupName;          //! Display name
 }
 
 - (void) hydrate:(FMResultSet*)rs;

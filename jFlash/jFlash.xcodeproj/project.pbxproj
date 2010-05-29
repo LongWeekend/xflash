@@ -441,6 +441,7 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
+				91C9EE2D111E568D006B72E6 /* Application Tests */,
 				49F96B7911AFD11E00DFC3C9 /* Logic Tests */,
 				916A89CA101C681800D7917D /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -448,7 +449,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				91C9EE2D111E568D006B72E6 /* Application Tests */,
 			);
 			name = jFlash;
 			sourceTree = "<group>";

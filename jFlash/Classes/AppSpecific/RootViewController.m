@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 
+//! Takes control from appDelegate and loads tab bar controller programmatically - top level view controller in the app
 @implementation RootViewController
 
 @synthesize delegate;
@@ -188,7 +189,7 @@
 
 # pragma mark Convenience Methods for Notifications
 
-// Switches active view to study view
+//! Switches active view to study view, convenience method for notification
 - (void) switchToStudyView
 {
   [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
@@ -225,6 +226,7 @@
 
 # pragma mark Housekeeping
 
+//! Delegate method of UIApplication (via AppDelegate); called on shutdown
 - (void) applicationWillTerminate:(UIApplication*)application
 {
   // Get current card from StudyViewController

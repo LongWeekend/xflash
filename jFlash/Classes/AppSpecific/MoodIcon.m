@@ -8,7 +8,7 @@
 
 #import "MoodIcon.h"
 
-
+//! Handles "hot head" mood icons
 @implementation MoodIcon
 
 @synthesize percentCorrectLabel,moodIconBtn;

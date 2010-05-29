@@ -8,8 +8,11 @@
 
 #import "GroupPeer.h"
 
+//! Handles retrieval of Group objects from the database
 @implementation GroupPeer
 
+
+//! Returns a Group object hydrated based on groupId parameter
 + (Group*) retrieveGroupById: (NSInteger)groupId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -24,6 +27,8 @@
 	return tmpGroup;  
 }
 
+
+//! Returns an array of Group objects all owned by the id passed on ownerId parameter
 +(NSMutableArray*) retrieveGroupsByOwner: (NSInteger)ownerId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];

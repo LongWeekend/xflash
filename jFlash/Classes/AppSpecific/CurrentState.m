@@ -8,7 +8,7 @@
 
 #import "CurrentState.h"
 
-
+//! Maintains the current state of the application (active set, etc).  Is a singleton.
 @implementation CurrentState
 @synthesize isFirstLoad, dbHasFTS;
 
@@ -96,7 +96,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [self setActiveTag:[self activeTag]];
 }
 
-
+// TODO: this is called loadActiveTag, but seems to only touch "current_index".  Any ideas?   (MMA 5/29/2010)
 - (void) loadActiveTag
 {
   LWE_LOG(@"START load active tag");
@@ -106,22 +106,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   LWE_LOG(@"END load active tag");
 }
 
-- (BOOL) splashIsOn
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_SPLASH] isEqualToString:SET_SPLASH_ON])
-    return YES;
-  else
-    return NO;
-}
 
+/**
+ * Retrieve & initialize settings from NSUserDefaults to CurrentState object
+ */
 - (void) initializeSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int firstLoad = 1;
   if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
 
-  // DEBUG just to figure out the downloader
+  // TODO: DEBUG just to figure out the downloader
   [self setDbHasFTS:NO];  
   
   // Now tell if first load or not
