@@ -82,7 +82,7 @@
   // Selected cells are highlighted
   if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId])
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[usersArray count]];
@@ -96,7 +96,7 @@
   // Unselected cells are white
   else 
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
 
     cell.textLabel.backgroundColor = [ UIColor clearColor ];
     cell.textLabel.textColor = [ UIColor blackColor ];

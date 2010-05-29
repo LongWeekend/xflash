@@ -201,19 +201,19 @@
   // Handle special cases first
   if (key == APP_USER)
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[User getUser:[settings integerForKey:APP_USER]] userNickname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == @"about")
   {
     // About section
-    cell = [LWE_Util_Table reuseCellForIdentifier:@"other" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"other" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
   else
   {
     // Anything else
-    cell = [LWE_Util_Table reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[[self settingsDict] objectForKey:key] objectForKey:[settings objectForKey:key]];        
   }
   

@@ -12,6 +12,10 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
+		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
+		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
+		49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
+		49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
@@ -64,12 +68,9 @@
 		917A5C0611AB7D8500016BD2 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0311AB7D8500016BD2 /* FMDatabase.m */; };
 		917A5C0711AB7D8500016BD2 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */; };
 		917A5C0A11AB7DA800016BD2 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0911AB7DA800016BD2 /* FMResultSet.m */; };
-		917A5C1C11AB80F700016BD2 /* LWE_Util_Labels.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1011AB80F700016BD2 /* LWE_Util_Labels.m */; };
-		917A5C1D11AB80F700016BD2 /* LWE_Util_Table.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1211AB80F700016BD2 /* LWE_Util_Table.m */; };
 		917A5C1E11AB80F700016BD2 /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1411AB80F700016BD2 /* LWEDatabase.m */; };
 		917A5C1F11AB80F700016BD2 /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1711AB80F700016BD2 /* LWEFile.m */; };
 		917A5C2011AB80F700016BD2 /* LWESQLDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1911AB80F700016BD2 /* LWESQLDebug.m */; };
-		917A5C2111AB80F700016BD2 /* LWEUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1B11AB80F700016BD2 /* LWEUIView.m */; };
 		917A5C2511AB814B00016BD2 /* drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2211AB814B00016BD2 /* drawing.m */; };
 		917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
@@ -167,6 +168,10 @@
 		494D6C6F11AE1BB1006DADF1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
+		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
+		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
+		49B53E3511B105CF00A1119A /* LWEUITableUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUITableUtils.m; path = Reusable/LWE/LWEUITableUtils.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -260,10 +265,6 @@
 		917A5C0811AB7DA800016BD2 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = External/FMDB/FMResultSet.h; sourceTree = "<group>"; };
 		917A5C0911AB7DA800016BD2 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		917A5C0C11AB807800016BD2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
-		917A5C0F11AB80F700016BD2 /* LWE_Util_Labels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWE_Util_Labels.h; path = Reusable/LWE/LWE_Util_Labels.h; sourceTree = "<group>"; };
-		917A5C1011AB80F700016BD2 /* LWE_Util_Labels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWE_Util_Labels.m; path = Reusable/LWE/LWE_Util_Labels.m; sourceTree = "<group>"; };
-		917A5C1111AB80F700016BD2 /* LWE_Util_Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWE_Util_Table.h; path = Reusable/LWE/LWE_Util_Table.h; sourceTree = "<group>"; };
-		917A5C1211AB80F700016BD2 /* LWE_Util_Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWE_Util_Table.m; path = Reusable/LWE/LWE_Util_Table.m; sourceTree = "<group>"; };
 		917A5C1311AB80F700016BD2 /* LWEDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEDatabase.h; path = Reusable/LWE/LWEDatabase.h; sourceTree = "<group>"; };
 		917A5C1411AB80F700016BD2 /* LWEDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEDatabase.m; path = Reusable/LWE/LWEDatabase.m; sourceTree = "<group>"; };
 		917A5C1511AB80F700016BD2 /* LWEDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEDebug.h; path = Reusable/LWE/LWEDebug.h; sourceTree = "<group>"; };
@@ -271,8 +272,6 @@
 		917A5C1711AB80F700016BD2 /* LWEFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEFile.m; path = Reusable/LWE/LWEFile.m; sourceTree = "<group>"; };
 		917A5C1811AB80F700016BD2 /* LWESQLDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWESQLDebug.h; path = Reusable/LWE/LWESQLDebug.h; sourceTree = "<group>"; };
 		917A5C1911AB80F700016BD2 /* LWESQLDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWESQLDebug.m; path = Reusable/LWE/LWESQLDebug.m; sourceTree = "<group>"; };
-		917A5C1A11AB80F700016BD2 /* LWEUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUIView.h; path = Reusable/LWE/LWEUIView.h; sourceTree = "<group>"; };
-		917A5C1B11AB80F700016BD2 /* LWEUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUIView.m; path = Reusable/LWE/LWEUIView.m; sourceTree = "<group>"; };
 		917A5C2211AB814B00016BD2 /* drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = drawing.m; path = Reusable/PDColoredProgressView/drawing.m; sourceTree = "<group>"; };
 		917A5C2311AB814B00016BD2 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = Reusable/PDColoredProgressView/PDColoredProgressView.h; sourceTree = "<group>"; };
 		917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = Reusable/PDColoredProgressView/PDColoredProgressView.m; sourceTree = "<group>"; };
@@ -605,10 +604,6 @@
 			children = (
 				49F968F811AF652D00DFC3C9 /* LWEDownloader.h */,
 				49F968F911AF652D00DFC3C9 /* LWEDownloader.m */,
-				917A5C0F11AB80F700016BD2 /* LWE_Util_Labels.h */,
-				917A5C1011AB80F700016BD2 /* LWE_Util_Labels.m */,
-				917A5C1111AB80F700016BD2 /* LWE_Util_Table.h */,
-				917A5C1211AB80F700016BD2 /* LWE_Util_Table.m */,
 				917A5C1311AB80F700016BD2 /* LWEDatabase.h */,
 				917A5C1411AB80F700016BD2 /* LWEDatabase.m */,
 				917A5C1511AB80F700016BD2 /* LWEDebug.h */,
@@ -616,8 +611,10 @@
 				917A5C1711AB80F700016BD2 /* LWEFile.m */,
 				917A5C1811AB80F700016BD2 /* LWESQLDebug.h */,
 				917A5C1911AB80F700016BD2 /* LWESQLDebug.m */,
-				917A5C1A11AB80F700016BD2 /* LWEUIView.h */,
-				917A5C1B11AB80F700016BD2 /* LWEUIView.m */,
+				49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */,
+				49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */,
+				49B53E3411B105CF00A1119A /* LWEUITableUtils.h */,
+				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
 				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
@@ -1100,12 +1097,9 @@
 				917A5C0611AB7D8500016BD2 /* FMDatabase.m in Sources */,
 				917A5C0711AB7D8500016BD2 /* FMDatabaseAdditions.m in Sources */,
 				917A5C0A11AB7DA800016BD2 /* FMResultSet.m in Sources */,
-				917A5C1C11AB80F700016BD2 /* LWE_Util_Labels.m in Sources */,
-				917A5C1D11AB80F700016BD2 /* LWE_Util_Table.m in Sources */,
 				917A5C1E11AB80F700016BD2 /* LWEDatabase.m in Sources */,
 				917A5C1F11AB80F700016BD2 /* LWEFile.m in Sources */,
 				917A5C2011AB80F700016BD2 /* LWESQLDebug.m in Sources */,
-				917A5C2111AB80F700016BD2 /* LWEUIView.m in Sources */,
 				917A5C2511AB814B00016BD2 /* drawing.m in Sources */,
 				917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */,
 				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
@@ -1132,6 +1126,8 @@
 				49F968E911AF650C00DFC3C9 /* DownloaderViewController.m in Sources */,
 				49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
 				49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
+				49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
+				49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1149,6 +1145,8 @@
 				49F968EA11AF650C00DFC3C9 /* DownloaderViewController.m in Sources */,
 				49F968FB11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
 				49F9692811AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
+				49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
+				49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

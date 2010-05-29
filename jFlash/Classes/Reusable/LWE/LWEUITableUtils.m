@@ -1,20 +1,17 @@
 //
-//  LWE_Util_Table.m
+//  LWEUITableUtils.m
 //  jFlash
 //
 //  Created by Mark Makdad on 2/21/10.
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "LWE_Util_Table.h"
+#import "LWEUITableUtils.h"
 
+//! Helper class containing static methods to help manage UITableViews
+@implementation LWEUITableUtils
 
-@implementation LWE_Util_Table
-
-//--------------------------------------------------------------------------
-// UITableViewCell reuseCellForIdentifier:id onTable:table usingStyle:style
-// Helper function to reduce the complexity of cellForRowAtIndexPath
-//--------------------------------------------------------------------------
+//! Returns a new UITableViewCell - automatically determines whether new or off the queue
 + (UITableViewCell*) reuseCellForIdentifier: (NSString*) identifier onTable:(UITableView*) lclTableView usingStyle:(UITableViewCellStyle)style
 {
   UITableViewCell* cell = [lclTableView dequeueReusableCellWithIdentifier:identifier];

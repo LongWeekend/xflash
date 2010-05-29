@@ -101,14 +101,14 @@
   {
     if ([self cards] == nil)
     {
-      cell = [LWE_Util_Table reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
+      cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = @"Loading words...";
       cell.accessoryView = activityIndicator;
       [activityIndicator startAnimating];
     }
     else
     {
-      cell = [LWE_Util_Table reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUILabelUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = 0;
       Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
       if ([tmpCard headword] == nil)
@@ -122,7 +122,7 @@
   }
   else
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     if (indexPath.row == kWordSetOptionsStart)
     {

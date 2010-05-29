@@ -201,8 +201,8 @@
   // Only layout card content after setting the card's data
   
   // Resize text within bounds
-  [LWE_Util_Labels autosizeLabelText:cardReadingLabel forScrollView:cardReadingLabelScrollContainer withText:[currentCard reading] minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
-  [LWE_Util_Labels autosizeLabelText:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer withText:[currentCard headword] minFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
+  [LWEUILabelUtils autosizeLabelText:cardReadingLabel forScrollView:cardReadingLabelScrollContainer withText:[currentCard reading] minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
+  [LWEUILabelUtils autosizeLabelText:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer withText:[currentCard headword] minFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
   
  	[cardSetLabel setText:[NSString stringWithFormat:@"Set: %@",currentCardSet.tagName]];
   
@@ -311,7 +311,7 @@
     combined_reading = [[NSString alloc] initWithFormat:@"%@\n%@", [currentCard reading], [currentCard romaji]];
   }
   [cardReadingLabel setText:combined_reading];
-  [LWE_Util_Labels resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
+  [LWEUILabelUtils resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
   [combined_reading release];
 }
 
