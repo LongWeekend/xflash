@@ -61,10 +61,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   {
     theColor = [UIColor colorWithRed:THEME_FIRE_NAV_TINT_R green:THEME_FIRE_NAV_TINT_G blue:THEME_FIRE_NAV_TINT_B alpha:0.8f];
   }
-  else
+  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
   {
     theColor = [UIColor colorWithRed:THEME_WATER_NAV_TINT_R green:THEME_WATER_NAV_TINT_G blue:THEME_WATER_NAV_TINT_B alpha:0.8f];
   }
+  else
+  {
+    theColor = [UIColor colorWithRed:THEME_TAME_NAV_TINT_R green:THEME_TAME_NAV_TINT_G blue:THEME_TAME_NAV_TINT_B alpha:0.8f];
+  }
+
   return theColor;
 }
 
@@ -80,10 +85,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   {
     theName = [[[NSString alloc] initWithString:@"red"] autorelease];
   }
-  else
+  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
   {
     theName = [[[NSString alloc] initWithString:@"blue"] autorelease];
   }
+  else
+  {
+    theName = [[[NSString alloc] initWithString:@"tame"] autorelease];
+  }
+
   return theName;
 }
 

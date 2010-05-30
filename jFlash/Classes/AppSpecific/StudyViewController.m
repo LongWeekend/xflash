@@ -166,16 +166,22 @@
   }
   [self updateCardReading];
 
+  // TODO: refactor this themage out to somewhere else
   // Modify the inline CSS for current theme
   NSString *htmlHeader;
   if([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_FIRE])
   {
     htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:RED_THEME_CSS];    
   }
-  else
+  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
   {
     htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:BLUE_THEME_CSS];    
   }
+  else
+  {
+    htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:TAME_THEME_CSS];    
+  }
+
   
   // Show Card Meaning
   NSString *html;

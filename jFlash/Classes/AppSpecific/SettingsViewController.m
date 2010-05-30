@@ -32,8 +32,8 @@
     NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
     NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
     
-    NSArray *themeObjects = [NSArray arrayWithObjects:@"Fire",@"Water",nil];
-    NSArray *themeKeys = [NSArray arrayWithObjects:SET_THEME_FIRE,SET_THEME_WATER,nil];
+    NSArray *themeObjects = [NSArray arrayWithObjects:@"Fire",@"Water",@"Tame",nil];
+    NSArray *themeKeys = [NSArray arrayWithObjects:SET_THEME_FIRE,SET_THEME_WATER,SET_THEME_TAME,nil];
     NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:themeObjects forKeys:themeKeys];
     
     NSArray *readingObjects = [NSArray arrayWithObjects:@"Kana",@"Romaji",@"Both",nil];
@@ -119,18 +119,14 @@
 }
 
 
-//--------------------------------------------------------------------------
-// reloadTableData - convenience method for reloading
-//--------------------------------------------------------------------------
+//! reloadTableData - convenience method for reloading
 - (void)reloadTableData
 {
   [[self tableView] reloadData];
 }
 
 
-//--------------------------------------------------------------------------
-// launchAppirater - convenience method for appirater
-//--------------------------------------------------------------------------
+//! launchAppirater - convenience method for appirater
 - (void) launchAppirater
 {
   appirater = [[Appirater alloc] init];
@@ -138,10 +134,7 @@
 }
 
 
-//--------------------------------------------------------------------------
-// iterateSetting: setting 
-// Makes "setting" move to its next state
-//--------------------------------------------------------------------------
+//! Makes "setting" move to its next state
 - (void) iterateSetting: (NSString*) setting
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];

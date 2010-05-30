@@ -15,7 +15,6 @@
 #import "SettingsViewController.h"
 #import "HelpViewController.h"
 #import "PDColoredProgressView.h"
-#import "SplashView.h"
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"

@@ -16,6 +16,7 @@ extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
 extern NSString * const SET_THEME_FIRE;
 extern NSString * const SET_THEME_WATER;
+extern NSString * const SET_THEME_TAME;
 extern NSString * const SET_READING_KANA;
 extern NSString * const SET_READING_ROMAJI;
 extern NSString * const SET_READING_BOTH;
@@ -46,6 +47,7 @@ extern NSString * const HTML_HEADER;
 extern NSString * const HTML_FOOTER;
 extern NSString * const RED_THEME_CSS;
 extern NSString * const BLUE_THEME_CSS;
+extern NSString * const TAME_THEME_CSS;
 
 
 // Some layout consts
@@ -70,6 +72,12 @@ extern NSString * const BLUE_THEME_CSS;
 #define THEME_WATER_NAV_TINT_G 0.337
 #define THEME_WATER_NAV_TINT_B 0.655
 #define THEME_WATER_WEB_SELECTED @"4278b9"
+
+// TAME
+#define THEME_TAME_NAV_TINT_R 0.5
+#define THEME_TAME_NAV_TINT_G 0.5
+#define THEME_TAME_NAV_TINT_B 0.5
+#define THEME_TAME_WEB_SELECTED @"aaaaaa"
 
 // these are the various screen placement constants used across all the UIViewControllers
  
