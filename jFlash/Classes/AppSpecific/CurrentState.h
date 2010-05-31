@@ -23,8 +23,6 @@
 
 + (CurrentState *)sharedCurrentState;
 
-+ (UIColor*) getThemeTintColor;
-+ (NSString*) getThemeName;
 - (void) initializeSettings;
 - (void) loadActiveTag;
 - (void) resetActiveTag;

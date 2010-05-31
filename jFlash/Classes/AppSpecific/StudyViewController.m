@@ -166,22 +166,8 @@
   }
   [self updateCardReading];
 
-  // TODO: refactor this themage out to somewhere else
   // Modify the inline CSS for current theme
-  NSString *htmlHeader;
-  if([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_FIRE])
-  {
-    htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:RED_THEME_CSS];    
-  }
-  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
-  {
-    htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:BLUE_THEME_CSS];    
-  }
-  else
-  {
-    htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:TAME_THEME_CSS];    
-  }
-
+  NSString *htmlHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   
   // Show Card Meaning
   NSString *html;
@@ -468,7 +454,7 @@
 	modalViewController.navigationItem.title = @"Add Word To Sets";
   modalViewController.currentCard = currentCard;
 	UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-  modalNavControl.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   [[[appDelegate rootViewController] tabBarController] presentModalViewController:modalNavControl animated:YES];
 
 	[modalNavControl release];
@@ -668,7 +654,7 @@
 
 - (void) updateTheme
 {
-  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[CurrentState getThemeName]];
+  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[[ThemeManager sharedThemeManager] currentThemeFileName]];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]]];
   float tmpRatio;
   if(numViewed == 0)

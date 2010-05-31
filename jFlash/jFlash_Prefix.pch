@@ -11,6 +11,7 @@
   #import "FMDatabase.h"
   #import "FMDatabaseAdditions.h"
   #import "CurrentState.h"
+  #import "ThemeManager.h"
   #import "LWEDatabase.h"
   #import "Card.h"
   #import "Tag.h"

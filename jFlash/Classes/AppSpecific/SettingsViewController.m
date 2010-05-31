@@ -32,21 +32,17 @@
     NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
     NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
     
-    NSArray *themeObjects = [NSArray arrayWithObjects:@"Fire",@"Water",@"Tame",nil];
-    NSArray *themeKeys = [NSArray arrayWithObjects:SET_THEME_FIRE,SET_THEME_WATER,SET_THEME_TAME,nil];
-    NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:themeObjects forKeys:themeKeys];
+    // Source theme information from the ThemeManager
+    ThemeManager *tm = [ThemeManager sharedThemeManager];
+    NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
     
     NSArray *readingObjects = [NSArray arrayWithObjects:@"Kana",@"Romaji",@"Both",nil];
     NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
     NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
     
-    NSArray *splashObjects = [NSArray arrayWithObjects:@"Off",@"On",nil];
-    NSArray *splashKeys = [NSArray arrayWithObjects:SET_SPLASH_OFF,SET_SPLASH_ON,nil];
-    NSDictionary* splashDict = [NSDictionary dictionaryWithObjects:splashObjects forKeys:splashKeys];
-    
     // Create a complete dictionary of all settings display names & their setting constants
-    NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,splashDict,modeDict,nil];
-    NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_SPLASH,APP_MODE,nil];
+    NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];
+    NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,nil];
     self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
     // These are the keys and display names of each row
@@ -58,11 +54,6 @@
     NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_USER,nil];
     NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,@"",nil];
     
-    // We no longer allow users to turn off the splash screen - MMA 3/14/2010
-/*    NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",@"Welcome Screen",nil];
-    NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_SPLASH,nil];
-    NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
-*/
     NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",nil];
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
@@ -89,7 +80,7 @@
 
 - (void)viewWillAppear: (BOOL)animated
 {
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Rate Us" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
@@ -101,7 +92,7 @@
 // Only re-load the set if settings were changed, otherwise there is no need to do anything
 - (void) viewWillDisappear: (BOOL)animated
 {
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   if (settingsChanged)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"settingsWereChanged" object:self];

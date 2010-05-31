@@ -51,54 +51,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 
 /**
- * Returns the current theme's tint color
- */
-+ (UIColor*) getThemeTintColor
-{
-  UIColor *theColor;
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_FIRE])
-  {
-    theColor = [UIColor colorWithRed:THEME_FIRE_NAV_TINT_R green:THEME_FIRE_NAV_TINT_G blue:THEME_FIRE_NAV_TINT_B alpha:0.8f];
-  }
-  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
-  {
-    theColor = [UIColor colorWithRed:THEME_WATER_NAV_TINT_R green:THEME_WATER_NAV_TINT_G blue:THEME_WATER_NAV_TINT_B alpha:0.8f];
-  }
-  else
-  {
-    theColor = [UIColor colorWithRed:THEME_TAME_NAV_TINT_R green:THEME_TAME_NAV_TINT_G blue:THEME_TAME_NAV_TINT_B alpha:0.8f];
-  }
-
-  return theColor;
-}
-
-
-/**
- * Returns the current theme's name
- */
-+ (NSString*) getThemeName
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *theName;
-  if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_FIRE])
-  {
-    theName = [[[NSString alloc] initWithString:@"red"] autorelease];
-  }
-  else if ([[settings objectForKey:APP_THEME] isEqualToString:SET_THEME_WATER])
-  {
-    theName = [[[NSString alloc] initWithString:@"blue"] autorelease];
-  }
-  else
-  {
-    theName = [[[NSString alloc] initWithString:@"tame"] autorelease];
-  }
-
-  return theName;
-}
-
-
-/**
  * Reloads cardIds for active set
  */
 - (void) resetActiveTag

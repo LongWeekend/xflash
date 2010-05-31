@@ -63,8 +63,8 @@
   _searchRan = NO;
   _deepSearchRan = NO;
   
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
-  searchBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // Show keyboard if no results TODO
   if (searchArray == nil || [searchArray count] == 0)
   {
