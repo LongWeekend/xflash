@@ -209,7 +209,7 @@
 // updateLevelCounts
 // Update level counts
 //--------------------------------------------------------------------------
-- (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
+- (void) updateLevelCounts:(Card*)card nextLevel:(NSInteger) nextLevel
 {
   // update the cardIds if necessary
   if (nextLevel != card.levelId)
@@ -225,6 +225,7 @@
     int countAfterRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
 
     // Only do the add if remove was successful
+    //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
     if (countBeforeRemove == (countAfterRemove + 1))
     {
       [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
