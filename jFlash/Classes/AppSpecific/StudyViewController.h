@@ -17,7 +17,12 @@
 #import "PracticeModeCardViewDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface StudyViewController : UIViewController {
+@interface StudyViewController : UIViewController <UIScrollViewDelegate> {
+  
+  // scroll view
+  IBOutlet UIScrollView* scrollView;
+  IBOutlet UIPageControl* pageControl;
+ 
   MoodIcon *moodIcon;
   
   IBOutlet CardViewController *cardViewController;
@@ -64,6 +69,8 @@
 
   BOOL percentCorrectVisible;
   BOOL isBrowseMode;
+  
+  BOOL pageControlIsChangingPage;
 
   // For statistics
   NSInteger numViewed;
@@ -99,6 +106,16 @@
 
 // Private
 - (void) _resetActionMenu;
+
+/* for pageControl */
+- (IBAction)changePage:(id)sender;
+
+/* internal */
+- (void)setupScrollView;
+
+// scroll view
+@property (nonatomic, retain) UIView *scrollView;
+@property (nonatomic, retain) UIPageControl* pageControl;
 
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
