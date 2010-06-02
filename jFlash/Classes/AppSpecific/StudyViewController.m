@@ -16,6 +16,7 @@
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
 @synthesize startTouchPosition, practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardMeaningBtn, cardViewController, cardView;
+@synthesize scrollView, pageControl;
 
 - (id) init
 {
@@ -123,6 +124,8 @@
   LWE_LOG(@"END Study View");
   
   [self _resetActionMenu];
+  
+  [self setupScrollView];
 }
 
 #pragma mark Convenience methods
@@ -448,6 +451,77 @@
   }
 }
 
+#pragma mark ScrollView setup stuff
+- (void)setupScrollView
+{
+	scrollView.delegate = self;
+  
+	[scrollView setCanCancelContentTouches:NO];
+	
+	scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+	scrollView.clipsToBounds = YES;
+	scrollView.scrollEnabled = YES;
+	scrollView.pagingEnabled = YES;
+  
+	NSUInteger views = 2;
+	CGFloat cx = scrollView.frame.size.width;
+  
+  // TODO: make this the right view for example sentences
+  CardViewController *cfv = [[CardViewController alloc] init];
+  [cfv setCurrentCard:[self currentCard]];
+  UIView *sentencesView = cfv.view;
+			
+	CGRect rect = sentencesView.frame;
+	rect.origin.x = ((scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
+	rect.origin.y = ((scrollView.frame.size.height - sentencesView.frame.size.height) / 2);
+	sentencesView.frame = rect;
+  
+  // add the new view as a subview for the scroll view to handle
+	[scrollView addSubview:sentencesView];
+	
+	self.pageControl.numberOfPages = views;
+	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate stuff
+- (void)scrollViewDidScroll:(UIScrollView *)_scrollView
+{
+  if (pageControlIsChangingPage) 
+  {
+    return;
+  }
+  
+	/*
+	 *	We switch page at 50% across
+	 */
+  CGFloat pageWidth = _scrollView.frame.size.width;
+  int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+  pageControl.currentPage = page;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
+{
+  pageControlIsChangingPage = NO;
+}
+
+#pragma mark PageControl stuff
+- (IBAction)changePage:(id)sender 
+{
+	/*
+	 *	Change the scroll view
+	 */
+  CGRect frame = scrollView.frame;
+  frame.origin.x = frame.size.width * pageControl.currentPage;
+  frame.origin.y = 0;
+	
+  [scrollView scrollRectToVisible:frame animated:YES];
+  
+	/*
+	 *	When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
+	 */
+  pageControlIsChangingPage = YES;
+}
 
 #pragma mark Class plumbing
 
@@ -495,6 +569,10 @@
   //state
   [currentCardSet release];
   [currentCard release];
+  
+  //scrollView
+  [scrollView release];
+  [pageControl release];
   
 	[super dealloc];
 }
