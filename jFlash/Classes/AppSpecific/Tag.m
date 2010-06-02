@@ -208,7 +208,6 @@
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
-
 /**
  * Update level counts cache - (kept in memory how many cards are in each level)
  */
@@ -228,6 +227,7 @@
     int countAfterRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
 
     // Only do the add if remove was successful
+    //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
     if (countBeforeRemove == (countAfterRemove + 1))
     {
       [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];

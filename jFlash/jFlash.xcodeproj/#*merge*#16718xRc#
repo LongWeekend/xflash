@@ -18,14 +18,6 @@
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
-		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
-		49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
-		49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
-		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
-		49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
-		49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
-		49CDD4A111B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */; };
-		49CDD4A211B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */; };
 		49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
@@ -37,14 +29,9 @@
 		49F968FB11AF652D00DFC3C9 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
 		49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */; };
 		49F9692811AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */; };
-		49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49F96A0C11AF996600DFC3C9 /* jFlash.db */; };
-		49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49F96A0C11AF996600DFC3C9 /* jFlash.db */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
-		49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
-		49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
-		91214F4911B601490091AFEF /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
 		917A5B8D11AB7ADB00016BD2 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
@@ -118,6 +105,8 @@
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		917A5D5311ABAABB00016BD2 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5D5111ABAABB00016BD2 /* CardViewController.m */; };
+		917A5D5411ABAABB00016BD2 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5D5211ABAABB00016BD2 /* CardView.xib */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
@@ -186,14 +175,8 @@
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
 		49B53E3511B105CF00A1119A /* LWEUITableUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUITableUtils.m; path = Reusable/LWE/LWEUITableUtils.m; sourceTree = "<group>"; };
-		49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEViewAnimationUtils.h; path = Reusable/LWE/LWEViewAnimationUtils.h; sourceTree = "<group>"; };
-		49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEViewAnimationUtils.m; path = Reusable/LWE/LWEViewAnimationUtils.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
-		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
-		49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportBadDataViewController.m; path = AppSpecific/ReportBadDataViewController.m; sourceTree = "<group>"; };
-		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
-		49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEActionSheetPicker.xib; path = XIBs/LWEActionSheetPicker.xib; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49F9686811AF604900DFC3C9 /* DownloaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DownloaderView.xib; path = XIBs/DownloaderView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -204,7 +187,6 @@
 		49F968F911AF652D00DFC3C9 /* LWEDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEDownloader.m; path = Reusable/LWE/LWEDownloader.m; sourceTree = "<group>"; };
 		49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlashAppDelegate.h; path = AppSpecific/jFlashAppDelegate.h; sourceTree = "<group>"; };
 		49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlashAppDelegate.m; path = AppSpecific/jFlashAppDelegate.m; sourceTree = "<group>"; };
-		49F96A0C11AF996600DFC3C9 /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tametheme-cookie-cutters"; path = "Assets/tametheme-cookie-cutters"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -212,9 +194,6 @@
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PracticeModeCardViewDelegate.m; path = AppSpecific/PracticeModeCardViewDelegate.m; sourceTree = "<group>"; };
-		91214F4711B601490091AFEF /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = AppSpecific/CardViewController.h; sourceTree = "<group>"; };
-		91214F4811B601490091AFEF /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = AppSpecific/CardViewController.m; sourceTree = "<group>"; };
-		91214F4A11B601BE0091AFEF /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		917A5B7E11AB7ADB00016BD2 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
@@ -353,6 +332,9 @@
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		917A5D5011ABAABB00016BD2 /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		917A5D5111ABAABB00016BD2 /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		917A5D5211ABAABB00016BD2 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = Classes/CardView.xib; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
@@ -488,10 +470,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
-				91EA2F4B104135E200AB848E /* dist.plist */,
-				494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */,
-				49F96A0C11AF996600DFC3C9 /* jFlash.db */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD235E101C121D0081F883 /* icon.png */,
@@ -637,8 +615,6 @@
 				49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */,
 				49B53E3411B105CF00A1119A /* LWEUITableUtils.h */,
 				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
-				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
-				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
@@ -780,8 +756,8 @@
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				91214F4A11B601BE0091AFEF /* CardView.xib */,
 				49F9686811AF604900DFC3C9 /* DownloaderView.xib */,
+				917A5D5211ABAABB00016BD2 /* CardView.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				917A5C6711AB844300016BD2 /* HelpScrollView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
@@ -793,8 +769,6 @@
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
-				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
-				49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -809,8 +783,8 @@
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
 				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
-				91214F4711B601490091AFEF /* CardViewController.h */,
-				91214F4811B601490091AFEF /* CardViewController.m */,
+				917A5D5011ABAABB00016BD2 /* CardViewController.h */,
+				917A5D5111ABAABB00016BD2 /* CardViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
@@ -819,8 +793,6 @@
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
 				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
-				49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */,
-				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
@@ -1041,12 +1013,9 @@
 				917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */,
 				917A5C7811AB844300016BD2 /* StudyView.xib in Resources */,
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
+				917A5D5411ABAABB00016BD2 /* CardView.xib in Resources */,
 				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
 				49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */,
-				49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */,
-				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
-				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
-				49CDD4A211B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,10 +1031,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */,
-				49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */,
-				49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
-				49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
-				49CDD4A111B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,18 +1124,13 @@
 				917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */,
 				917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */,
 				917A5CB311AB85E200016BD2 /* Reachability.m in Sources */,
+				917A5D5311ABAABB00016BD2 /* CardViewController.m in Sources */,
 				91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */,
 				49F968E911AF650C00DFC3C9 /* DownloaderViewController.m in Sources */,
 				49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
 				49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
 				91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */,
 				91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */,
-				49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
-				49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */,
-				4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */,
-				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
-				49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
-				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,8 +1151,6 @@
 				49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
 				49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */,
 				4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */,
-				49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
-				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1481,8 +1439,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
@@ -1783,8 +1741,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -1801,8 +1759,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: „Éù„Éº„É´ „ÉÅ„É£„ÉÉ„Éó„Éû„É≥ (B34A9QV639)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: í•›í°ºí•Î í•¡í•„í•√í•◊í•ﬁí•Û (B34A9QV639)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
