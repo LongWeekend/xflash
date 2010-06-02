@@ -8,7 +8,7 @@
 
 #import "MoodIcon.h"
 
-
+//! Handles "hot head" mood icons
 @implementation MoodIcon
 
 @synthesize percentCorrectLabel,moodIconBtn;
@@ -24,7 +24,7 @@
   int loopCount = 0;
   //  bool shouldAnimate = NO;
   //NSArray* transitionHHAnimationArray;
-  NSString* themeName = [CurrentState getThemeName];
+  NSString* themeName = [[ThemeManager sharedThemeManager] currentThemeFileName];
   
   // TODO : setting the labels doesn't fit in the text sbubble.
   [percentCorrectLabel setText:[NSString stringWithFormat:@"%.0f%%",tmpRatio]];

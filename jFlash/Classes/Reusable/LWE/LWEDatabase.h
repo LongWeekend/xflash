@@ -19,8 +19,12 @@
 @property (nonatomic, retain) FMDatabase *dao;
 
 + (LWEDatabase *)sharedLWEDatabase;
-- (BOOL) openedDatabase:(NSString*) pathToDatabase;
 - (BOOL) databaseFileExists:(NSString*) pathToDatabase;
-- (BOOL) doesTableExist:(NSString *) tableName;
+- (BOOL) openedDatabase:(NSString*) pathToDatabase;
+- (BOOL) attachDatabase:(NSString*) pathToDatabase withName:(NSString*) name;
+- (BOOL) doesTableExist:(NSString*) tableName;
+
+// Semiprivate method
+- (BOOL) _databaseIsOpen;
 
 @end

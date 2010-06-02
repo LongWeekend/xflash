@@ -13,8 +13,7 @@ NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";
 NSString * const SET_J_TO_E          = @"JPN";
 NSString * const SET_E_TO_J          = @"ENG";
-NSString * const SET_THEME_FIRE      = @"FIRE";
-NSString * const SET_THEME_WATER     = @"WATER";
+
 NSString * const SET_READING_KANA    = @"KANA";
 NSString * const SET_READING_ROMAJI  = @"ROMAJI";
 NSString * const SET_READING_BOTH    = @"BOTH";
@@ -41,5 +40,3 @@ NSString * const HTML_HEADER = @""
 "##THEMECSS##</style></head>"
 "<body><div id='container'>";
 
-NSString * const RED_THEME_CSS = @"dfn{ background-color:orange; border-color:yellow; }";
-NSString * const BLUE_THEME_CSS = @"dfn{ background-color:lightsteelblue; border-color:white; }";

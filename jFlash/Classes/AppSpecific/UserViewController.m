@@ -42,7 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setSeparatorColor:[UIColor lightGrayColor]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
@@ -82,12 +82,12 @@
   // Selected cells are highlighted
   if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId])
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[usersArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
-    [bgView setFillColor:[CurrentState getThemeTintColor]];
+    [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.textLabel.backgroundColor = [ UIColor clearColor ];
     cell.textLabel.textColor = [ UIColor whiteColor ];
     cell.backgroundView = bgView;
@@ -96,7 +96,7 @@
   // Unselected cells are white
   else 
   {
-    cell = [LWE_Util_Table reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
 
     cell.textLabel.backgroundColor = [ UIColor clearColor ];
     cell.textLabel.textColor = [ UIColor blackColor ];

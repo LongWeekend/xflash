@@ -11,6 +11,7 @@
   #import "FMDatabase.h"
   #import "FMDatabaseAdditions.h"
   #import "CurrentState.h"
+  #import "ThemeManager.h"
   #import "LWEDatabase.h"
   #import "Card.h"
   #import "Tag.h"
@@ -20,8 +21,8 @@
   #import "GroupPeer.h"
   #import "UserHistoryPeer.h"
   #import "TagPeer.h"
-  #import "LWE_Util_Labels.h"
-  #import "LWE_Util_Table.h"
+  #import "LWEUILabelUtils.h"
+  #import "LWEUITableUtils.h"
   #import "LWEFile.h"
 
 #endif

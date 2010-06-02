@@ -2,10 +2,9 @@
 
 @implementation CardPeer
 
-//--------------------------------------------------------------------------
-// NSMutableArray searchCardsForKeyword
-// Returns an array of Cards for a given search string
-//--------------------------------------------------------------------------
+/**
+ * Returns an array of Card objects after searching keyword
+ */
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -73,10 +72,7 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSString retrieveCsvCardIdsForTag
-// Returns a CSV string of card Ids for a given tag
-//--------------------------------------------------------------------------
+//! Returns a CSV string of card Ids for a given tag
 + (NSString*) retrieveCsvCardIdsForTag: (NSInteger)setId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -103,20 +99,12 @@
 }
 
 
-//--------------------------------------------------------------------------
-// Card* retrieveCardWithSQL: sql
-// Returns single card with SQL - assumes 1 record, if multiple, will take last record
-//--------------------------------------------------------------------------
+/**
+ * Returns single card from SQL result - assumes 1 record, if multiple, will take last record
+ */ 
 + (Card*) retrieveCardWithSQL: (NSString*) sql
 {
-  int i = 0;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  while ([db dao].inUse && i < 5)
-  {
-    LWE_LOG(@"Database is busy %d",i);
-    usleep(100);
-    i++;
-  }
   FMResultSet *rs = [[db dao] executeQuery:sql];
   Card* tmpCard = [[[Card alloc] init] autorelease];
   while ([rs next])
@@ -128,15 +116,15 @@
 }
 
 
-//--------------------------------------------------------------------------
-// Card* retrieveCardByPK: cardId
-// Returns single card by PK
-//--------------------------------------------------------------------------
+/**
+ * Takes a cardId and returns a hydrated Card from the database
+ */
 + (Card*) retrieveCardByPK: (NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
-      "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+      "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
+             "u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
       "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
       "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
   Card* tmpCard = [CardPeer retrieveCardWithSQL:sql];
@@ -145,16 +133,16 @@
 }
 
 
-//--------------------------------------------------------------------------
-// Card* hydrateCardByPK: card
-// Hydrates a card
-//--------------------------------------------------------------------------
+/**
+ * Takes a Card object with cardId set, returns a hydrated Card
+ */
 + (Card*) hydrateCardByPK: (Card*) card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
-                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count, "
+                          "c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
                    "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
                    "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
   FMResultSet *rs = [[db dao] executeQuery:sql];
@@ -172,10 +160,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// Card* retrieveCardByLevel: levelId setId: setId
-// Returns single card from a set by a level
-//--------------------------------------------------------------------------
+/**
+ * Returns single Card from a Tag by a specified level
+ */
 + (Card*) retrieveCardByLevel: (NSInteger)levelId setId: (NSInteger)setId withRandom: (NSInteger) randomNum
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -214,10 +201,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSMutableArray* retrieveCardSet: setId
-// Returns an array of Cards for a given tag
-//--------------------------------------------------------------------------
+/**
+ * Returns an array of Card objects based on SQL result
+ */
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -245,12 +231,12 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSMutableArray* retrieveCardSetIds: setId
-// Returns an array of Card Ids for a given tag
-//--------------------------------------------------------------------------
+/**
+ * Returns an array of Card ids for a given tagId
+ */
 + (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId
 {
+  // TODO: how is this different than the method below?  Do we have more dead code?
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardIdList = [[[NSMutableArray alloc] init] autorelease];
@@ -270,10 +256,10 @@
   return cardIdList;
 }
 
-//--------------------------------------------------------------------------
-// NSMutableArray* retrieveCardIdsForTagId: tagId
-// Returns an array of Cards ids for a given set
-//--------------------------------------------------------------------------
+
+/**
+ * Returns an array containing cardId integers contained in by the Tag tagId
+ */
 + (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
@@ -283,10 +269,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSMutableArray* retrieveCardSet: setId
-// Returns an array of Cards for a given tag
-//--------------------------------------------------------------------------
+/**
+ * Returns an array of Card objects in the Tag given by tagId
+ */
 + (NSMutableArray*) retrieveCardSet: (NSInteger) tagId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -300,10 +285,9 @@
 }
 
 
-//--------------------------------------------------------------------------
-// NSMutableArray* retrieveCardSetByLevel: setId levelId: levelId
-// Returns an array of Cards for a given set and level
-//--------------------------------------------------------------------------
+/**
+ * Returns an array of Card objects matching a given tagId and levelId
+ */
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];

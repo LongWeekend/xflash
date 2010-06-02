@@ -8,6 +8,7 @@
 
 #import "Group.h"
 
+//! Group contains Tag objects for display to the user in categorical hierarchies
 @implementation Group
 @synthesize groupId, groupName, ownerId, tagCount, childGroupCount, recommended;
 
@@ -23,7 +24,7 @@
   return self;
 }
 
-//takes a sqlite result set and populates the properties of tag
+//!takes a sqlite result set and populates the properties of tag
 - (void) hydrate: (FMResultSet*) rs
 {
 	[self setGroupId:    [rs intForColumn:@"group_id"]];
@@ -33,7 +34,7 @@
   [self setRecommended:[rs intForColumn:@"recommended"]];
 }
 
-// Retrieves out a list of tags based on this group ID (direct children)
+//! Retrieves out a list of Tag objects based on this Group ID (direct children)
 - (NSMutableArray*) getTags
 {
   NSMutableArray* tags = nil;
@@ -44,7 +45,7 @@
   return tags;
 }
 
-// Gets a number of children groups
+//! Gets a number of children group objects
 - (NSInteger) getChildGroupCount
 {
   int returnVal = 0;
@@ -61,7 +62,7 @@
   return returnVal;
 }
 
-// Get number of children tags
+//! Get number of children tags
 - (NSInteger) getChildTagCount
 {
   return [self tagCount];

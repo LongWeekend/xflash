@@ -37,10 +37,12 @@ void uncaughtExceptionHandler(NSException *exception) {
   [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 
-// Pass termination to rootViewController
+/**
+ * Delegate method from UIApplication - re-delegated to RootViewController
+ */ 
 - (void) applicationWillTerminate:(UIApplication *)application
 {
-  [rootViewController applicationWillTerminate];
+  [rootViewController applicationWillTerminate:application];
 }
 
 - (void)dealloc

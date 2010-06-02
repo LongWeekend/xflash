@@ -10,10 +10,7 @@
 
 @implementation UserHistoryPeer
 
-//--------------------------------------------------------------------------
-// (NSArray*) getSetRightWrongTotals: (int)cardId
-// Returns the right and wrong totals
-//--------------------------------------------------------------------------
+//! Returns the right and wrong totals
 + (NSArray*) getRightWrongTotalsBySet: (NSInteger)tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -32,10 +29,7 @@
   return results;
 }
 
-//--------------------------------------------------------------------------
-// + (int) getNextAfterLevel:(int) level gotItRight: (BOOL)gotItRight
-// Returns what the next level should be based on the user's answer
-//--------------------------------------------------------------------------
+//! Returns what the next level should be based on the user's answer
 + (int) getNextAfterLevel:(int)level gotItRight: (BOOL)gotItRight
 {
   if (gotItRight)
@@ -61,11 +55,7 @@
 }
 
 
-//--------------------------------------------------------------------------
-// (void) recordResult: (Card*)card withTagId:(int)tagId gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
-// Updates the database based on the user's answer
-//--------------------------------------------------------------------------
-
+//! Updates the database based on the user's answer
 + (void) recordResult: (Card*)card gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
 {
   // Get database singleton & settings singleton

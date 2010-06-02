@@ -45,7 +45,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   self.dao = [FMDatabase databaseWithPath:pathToDatabase];
   self.dao.logsErrors = YES;
-  self.dao.traceExecution = NO;
+  self.dao.traceExecution = YES;
   if ([self.dao open])
   {
     success = YES;
@@ -53,7 +53,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   }
   else
   {
-    LWE_LOG(@"FAIL - Could not open DB.");
+    LWE_LOG(@"FAIL - Could not open DB - error code: %d",[[self dao] lastErrorCode]);
   }
   [pool release];
   // So other threads can query whether we are done or not
@@ -63,27 +63,66 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
 
 /**
- * Checks for the existence of a table name in the sqlite_master table
- * If database is not open, throws an exception
+ * Attaches another database onto the existing open connection
  */
-- (BOOL) doesTableExist:(NSString *) tableName
+- (BOOL) attachDatabase:(NSString*) pathToDatabase withName:(NSString*) name
 {
-  if ([[self dao] isKindOfClass:[FMDatabase class]])
+  BOOL returnVal = NO;
+  if ([self _databaseIsOpen])
   {
-    NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE name=%@", tableName];
-    FMResultSet *rs = [[self dao] executeQuery:sql];
+    NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE \"%@\" AS %@;",pathToDatabase,name];
+    LWE_LOG(@"%@",sql);
+    [[self dao] executeUpdate:sql];
+    if (![[self dao] hadError])
+    {
+      returnVal = YES;
+    }
     [sql release];
-    if ([rs next])
-      return true;
-    else
-      return false;
   }
   else
   {
     // When called with no DB, throw exception
     [NSException raise:@"Invalid database object in 'dao'" format:@"dao object is: %@",[self dao]];
   }
-  return false;
+  return returnVal;
+}
+
+
+/**
+ * Checks for the existence of a table name in the sqlite_master table
+ * If database is not open, throws an exception
+ */
+- (BOOL) doesTableExist:(NSString *) tableName
+{
+  BOOL returnVal = NO;
+  if ([self _databaseIsOpen])
+  {
+    NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE type='table' AND name='%@'", tableName];
+//    NSString *foo = "SELECT name FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type='table' ORDER BY name";    
+    FMResultSet *rs = [[self dao] executeQuery:sql];
+    if ([rs next]) returnVal = YES;
+    [rs close];
+    [sql release];
+  }
+  else
+  {
+    // When called with no DB, throw exception
+    [NSException raise:@"Invalid database object in 'dao'" format:@"dao object is: %@",[self dao]];
+  }
+  return returnVal;
+}
+
+
+/**
+ * Helper method to determine if database is open
+ * This method is private and other method calls in this class rely on it
+ */
+- (BOOL) _databaseIsOpen
+{
+  if ([[self dao] isKindOfClass:[FMDatabase class]])
+    return YES;
+  else
+    return NO;
 }
 
 @end

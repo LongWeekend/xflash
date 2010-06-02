@@ -310,7 +310,7 @@
 	modalViewController.navigationItem.title = @"Add Word To Sets";
   modalViewController.currentCard = currentCard;
 	UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-  modalNavControl.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   [[[appDelegate rootViewController] tabBarController] presentModalViewController:modalNavControl animated:YES];
 
 	[modalNavControl release];
@@ -391,7 +391,7 @@
 
 - (void) updateTheme
 {
-  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[CurrentState getThemeName]];
+  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[[ThemeManager sharedThemeManager] currentThemeFileName]];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]]];
   float tmpRatio;
   if(numViewed == 0)

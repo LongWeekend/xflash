@@ -32,7 +32,7 @@
 
 - (void)viewWillAppear: (BOOL)animated
 {
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
@@ -55,7 +55,7 @@
   UITableViewCell *cell = nil;
   NSInteger row = [indexPath row];
   
-  cell = [LWE_Util_Table reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+  cell = [LWEUITableUtils reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.textLabel.text = [[self sectionTitles] objectAtIndex:row];
   return cell;  
@@ -71,36 +71,6 @@
   [tableView deselectRowAtIndexPath:indexPath animated:NO];  
 }
 
-
-
-/*
-
-
-// Quits the app opens in safari.app
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-  if (
-      // URL to launch itunes app store on phone
-      [[[request URL] absoluteString] isEqual:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=367216357&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"]
-  || 
-      // URL to get satisfaction page
-      [[[request URL] absoluteString] isEqual:@"http://support.longweekendmobile.com/"]
-  ||
-      // URL to our twitter page
-      [[[request URL] absoluteString] isEqual:@"http://twitter.com/long_weekend"] 
-  )
-  {
-    // Open links in safari.app
-    [[UIApplication sharedApplication] openURL:[request URL]];
-    return NO;
-  }
-  else 
-  {
-    return YES;
-  }
-}
-
-*/
 
 - (void)dealloc
 {

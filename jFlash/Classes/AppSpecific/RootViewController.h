@@ -15,7 +15,6 @@
 #import "SettingsViewController.h"
 #import "HelpViewController.h"
 #import "PDColoredProgressView.h"
-#import "SplashView.h"
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"
@@ -42,10 +41,10 @@
 @property NSInteger i;
 
 - (void) switchToStudyView;
-- (void) applicationWillTerminate;
+- (void) applicationWillTerminate:(UIApplication*) application;
 - (void) showFirstLoadProgressView;
-- (void) continueDatabaseCopy;
-- (void) finishDatabaseCopy;
+- (void) _continueDatabaseCopy;
+- (void) _finishDatabaseCopy;
 - (void) loadTabBar;
 
 @end

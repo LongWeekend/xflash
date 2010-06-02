@@ -1,4 +1,3 @@
-// Class header for an individual card's data
 
 // Card types, added for import support for now, to be implemented in model later!
 #define CARD_TYPE_WORD 0
@@ -7,6 +6,7 @@
 #define CARD_TYPE_DICTIONARY 3
 #define CARD_TYPE_SENTENCE 4
 
+//! Class for an individual card's data
 @interface Card : NSObject
 {
 	NSInteger userId;

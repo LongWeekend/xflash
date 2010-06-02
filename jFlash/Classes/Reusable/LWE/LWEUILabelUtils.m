@@ -1,29 +1,29 @@
 //
-//  LWE_Util_Labels.m
+//  LWEUILabelUtils.m
 //  jFlash
 //
 //  Created by シャロット ロス on 2/13/10.
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "LWE_Util_Labels.h"
+#import "LWEUILabelUtils.h"
 
+//! Contains static convenience methods for dealing with UILabels
+@implementation LWEUILabelUtils
 
-@implementation LWE_Util_Labels
-
-// Shorter Convenience Method: Resize without parentViewSize option
+//! Shorter Convenience Method: Resize without parentViewSize option
 + (void) resizeLabelWithConstraints: (UILabel *)theLabel minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize  {
-  [LWE_Util_Labels resizeLabelWithConstraints:theLabel minFontSize:minFontSize maxFontSize:maxFontSize forParentViewSize:CGSizeMake(0, 0)];
+  [LWEUILabelUtils resizeLabelWithConstraints:theLabel minFontSize:minFontSize maxFontSize:maxFontSize forParentViewSize:CGSizeMake(0, 0)];
 }
 
-// Resize UIScrollView.contentSize based on expected label size and reset scroll pos!
+//! Resize UIScrollView.contentSize based on expected label size and reset scroll pos!
 + (void) autosizeLabelText: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer withText:(NSString *)theText minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize {
   
   // Scroll to 0,0
   [scrollViewContainer setContentOffset:CGPointMake(0, 0) animated: YES];
   
   // Use our snazzy font resizer (works with multiple lines!)
-  [LWE_Util_Labels resizeLabelWithConstraints:theLabel minFontSize:minFontSize maxFontSize:maxFontSize forParentViewSize:scrollViewContainer.frame.size];
+  [LWEUILabelUtils resizeLabelWithConstraints:theLabel minFontSize:minFontSize maxFontSize:maxFontSize forParentViewSize:scrollViewContainer.frame.size];
   CGSize expectedLabelSize = theLabel.frame.size;
   
   // Resize label according to expected label text size
@@ -46,12 +46,12 @@
   
 }
 
-// Shorter Convenience Method: AutoSize without specifying font sizes!
+//! Shorter Convenience Method: AutoSize without specifying font sizes!
 + (void) autosizeLabelText: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer withText:(NSString *)theText  {
-  [LWE_Util_Labels autosizeLabelText:theLabel forScrollView:scrollViewContainer withText:theText minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
+  [LWEUILabelUtils autosizeLabelText:theLabel forScrollView:scrollViewContainer withText:theText minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
 }
 
-// Resize font within constraints, works with multi-line labels.
+//! Resize font within constraints, works with multi-line labels.
 + (void) resizeLabelWithConstraints: (UILabel *)theLabel minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize forParentViewSize:(CGSize)parentViewSize {
   UIFont *newFont = theLabel.font;
   CGRect newFrame = theLabel.frame;

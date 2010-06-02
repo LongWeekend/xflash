@@ -11,8 +11,8 @@
 @interface Tag : NSObject
 {
 	NSInteger tagId;
-  NSInteger tagEditable;
-  NSInteger cardCount;
+  NSInteger tagEditable;                            //! Is the tag deletable by the user?
+  NSInteger cardCount;                              //! Current count of Card objects in the Tag
 	NSInteger currentIndex;
 	NSString *tagName;
 	NSString *tagDescription;

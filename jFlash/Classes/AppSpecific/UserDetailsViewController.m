@@ -50,7 +50,7 @@
   userNicknameTextField.placeholder = @"Type your name here";
   LWE_LOG(@"img path: %@",[selectedUser avatarImagePath]);
   [userAvatarPreviewBtn setBackgroundImage:[selectedUser getUserThumbnailLarge] forState:UIControlStateNormal];
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   userNicknameTextField.backgroundColor = [UIColor whiteColor];
 }

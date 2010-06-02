@@ -14,14 +14,13 @@ extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
-extern NSString * const SET_THEME_FIRE;
-extern NSString * const SET_THEME_WATER;
 extern NSString * const SET_READING_KANA;
 extern NSString * const SET_READING_ROMAJI;
 extern NSString * const SET_READING_BOTH;
 extern NSString * const SET_SPLASH_ON;
 extern NSString * const SET_SPLASH_OFF;
 
+// Different setting types
 extern NSString * const APP_MODE;
 extern NSString * const APP_HEADWORD;
 extern NSString * const APP_READING;
@@ -44,9 +43,6 @@ extern NSString * const APP_USER;
 
 extern NSString * const HTML_HEADER;
 extern NSString * const HTML_FOOTER;
-extern NSString * const RED_THEME_CSS;
-extern NSString * const BLUE_THEME_CSS;
-
 
 // Some layout consts
 #define LAYOUT_CARD_REVEALED_Y_OFFSET 20
@@ -58,18 +54,7 @@ extern NSString * const BLUE_THEME_CSS;
 #define FONT_SIZE_CARD_E_MEANING 14
 #define FONT_SIZE_CARD_J_MEANING 14
 
-// Theme stuff - colors
-// FIRE
-#define THEME_FIRE_NAV_TINT_R 0.753
-#define THEME_FIRE_NAV_TINT_G 0.105
-#define THEME_FIRE_NAV_TINT_B 0.0
-#define THEME_FIRE_WEB_SELECTED @"cd4833"
 
-// WATER
-#define THEME_WATER_NAV_TINT_R 0.075
-#define THEME_WATER_NAV_TINT_G 0.337
-#define THEME_WATER_NAV_TINT_B 0.655
-#define THEME_WATER_WEB_SELECTED @"4278b9"
 
 // these are the various screen placement constants used across all the UIViewControllers
  

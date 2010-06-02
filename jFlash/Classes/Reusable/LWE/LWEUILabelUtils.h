@@ -1,5 +1,5 @@
 //
-//  LWE_Util_Labels.h
+//  LWEUILabelUtils.h
 //  jFlash
 //
 //  Created by シャロット ロス on 2/13/10.
@@ -16,7 +16,7 @@
 #define HEADWORD_MAX_FONTSIZE 38.0
 #define HEADWORD_DEF_FONTSIZE 14.0
 
-@interface LWE_Util_Labels : NSObject {
+@interface LWEUILabelUtils : NSObject {
 
 }
 

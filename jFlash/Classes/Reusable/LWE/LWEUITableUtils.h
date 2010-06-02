@@ -1,5 +1,5 @@
 //
-//  LWE_Util_Table.h
+//  LWEUITableUtils.h
 //  jFlash
 //
 //  Created by Mark Makdad on 2/21/10.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LWE_Util_Table : NSObject {
+@interface LWEUITableUtils : NSObject {
 
 }
 

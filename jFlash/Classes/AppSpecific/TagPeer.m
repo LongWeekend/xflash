@@ -8,10 +8,10 @@
 
 #import "TagPeer.h"
 
+//! Handles retrieval, creation, deletion, and updating of Tag objects in database
 @implementation TagPeer
 
-// void createTag
-// adds a new tag to the database
+//! adds a new tag to the database, returns the tagId of the created tag, 0 in case of error
 + (int) createTag: (NSString*) tagName withOwner: (NSInteger) ownerId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -32,7 +32,7 @@
   }
   else
   {
-    // We should fail here.
+    //TODO: We should fail here.
     LWE_LOG(@"Unable to insert tag name: %@",tagName);
     lastTagId = 0;
   }
@@ -40,8 +40,7 @@
 }
 
 
-// void cancelMembership
-// Checks if a passed tagId/cardId are matched
+//! Removes cardId from Tag indicated by parameter tagId
 + (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -61,8 +60,7 @@
 }
 
 
-// void checkMembership
-// Checks if a passed tagId/cardId are matched
+//! Checks if a passed tagId/cardId are matched
 + (BOOL) checkMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -80,7 +78,7 @@
 }
 
 
-// Returns an array of tag Ids this card is a member of
+//! Returns an array of tag Ids this card is a member of
 + (NSMutableArray*) membershipListForCardId:(NSInteger)cardId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -101,8 +99,7 @@
 
 
 
-// void subscribe: cardId tagId: tagId
-// Subscribes a card to a given tag
+//! Subscribes a Card to a given Tag based on parameter IDs
 + (void) subscribe: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -121,8 +118,7 @@
 }
 
 
-// NSMutableArray retrieveTagListWithSQL: sql
-// Gets tags based on the SQL you give us
+//! Gets Tag array based on the SQL you give us
 + (NSMutableArray*) retrieveTagListWithSQL: (NSString*) sql
 {
 	NSMutableArray* tags = [[[NSMutableArray alloc] init] autorelease];
@@ -139,8 +135,7 @@
 }
 
 
-// NSMutableArray retrieveMyTagList
-// Gets my tags (ones created by the user)
+//! Gets my Tag objects (ones created by the user) as array
 + (NSMutableArray*) retrieveMyTagList
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 ORDER BY utag_name ASC"];
@@ -150,8 +145,7 @@
 }
 
 
-// NSMutableArray retrieveSysTagList
-// Gets my tags (ones created by the system)
+//! Gets system Tag objects as array
 + (NSMutableArray*) retrieveSysTagList
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 0 ORDER BY utag_name ASC"];
@@ -161,8 +155,7 @@
 }
 
 
-// NSMutableArray retrieveTagListByGroupId
-// Gets my tags (ones created by the system)
+//! Returns array of Tag objects based on Group membership
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM tags t, group_tag_link l WHERE t.tag_id = l.tag_id AND l.group_id = %d ORDER BY t.tag_name ASC",groupId];
@@ -171,8 +164,8 @@
 	return tmpTags;
 }
 
-// Tag retrieveTagListLike: tagId
-// Gets a tag with a title LIKE '%string%'
+
+//! Returns a Tag array containing any Tag with a title LIKE '%string%'
 + (NSMutableArray*) retrieveTagListLike: (NSString*)string
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM tags WHERE tag_name LIKE '%%%@%%' ORDER BY tag_name ASC",string];
@@ -182,8 +175,7 @@
 }
 
 
-// Tag retrieveTagById: tagId
-// Gets a tag by its id (PK)
+//! Gets a Tag by its id (PK)
 + (Tag*) retrieveTagById: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -200,8 +192,7 @@
 }
 
 
-// BOOL deleteTag: tagId
-// Deletes a tag and all word links
+//! Deletes a tag and all Card links
 + (BOOL) deleteTag:(NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];

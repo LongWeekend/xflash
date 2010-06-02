@@ -13,13 +13,13 @@
 // State machine for the downloader
 typedef enum _downloaderStates
 {
-  kDownloaderInactive,                // Downloader inactive
-  kDownloaderRetrievingMetaData,      // Retrieving data about to-be-downloaded package
-  kDownloaderRetrievingData,          // Retrieving actual data
-  kDownloaderNetworkFail,             // Network lost/timeout (no data within certain time period)
-  kDownloaderDownloadComplete,        // Download complete (no more data)
-  kDownloaderVerifyFail,              // Downloaded, but verify failed (need to delete download file bf trying again)
-  kDownloaderSuccess                  // Downloaded & verified
+  kDownloaderInactive,                //! Downloader inactive
+  kDownloaderRetrievingMetaData,      //! Retrieving data about to-be-downloaded package
+  kDownloaderRetrievingData,          //! Retrieving actual data
+  kDownloaderNetworkFail,             //! Network lost/timeout (no data within certain time period)
+  kDownloaderDownloadComplete,        //! Download complete (no more data)
+  kDownloaderVerifyFail,              //! Downloaded, but verify failed (need to delete download file bf trying again)
+  kDownloaderSuccess                  //! Downloaded & verified
 } downloaderStates;
 
 @interface LWEDownloader : NSObject <ASIHTTPRequestDelegate>

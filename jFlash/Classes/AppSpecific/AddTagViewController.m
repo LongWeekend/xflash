@@ -42,7 +42,7 @@ enum EntrySectionRows
 {
   [super viewWillAppear:animated];
   self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
-  self.navigationController.navigationBar.tintColor = [CurrentState getThemeTintColor];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
 }
