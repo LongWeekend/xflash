@@ -18,6 +18,14 @@
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
+		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
+		49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
+		49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
+		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
+		49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
+		49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
+		49CDD4A111B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */; };
+		49CDD4A211B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */; };
 		49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
 		49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
@@ -178,8 +186,14 @@
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
 		49B53E3511B105CF00A1119A /* LWEUITableUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUITableUtils.m; path = Reusable/LWE/LWEUITableUtils.m; sourceTree = "<group>"; };
+		49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEViewAnimationUtils.h; path = Reusable/LWE/LWEViewAnimationUtils.h; sourceTree = "<group>"; };
+		49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEViewAnimationUtils.m; path = Reusable/LWE/LWEViewAnimationUtils.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
+		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
+		49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportBadDataViewController.m; path = AppSpecific/ReportBadDataViewController.m; sourceTree = "<group>"; };
+		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
+		49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEActionSheetPicker.xib; path = XIBs/LWEActionSheetPicker.xib; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49F9686811AF604900DFC3C9 /* DownloaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DownloaderView.xib; path = XIBs/DownloaderView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -623,6 +637,8 @@
 				49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */,
 				49B53E3411B105CF00A1119A /* LWEUITableUtils.h */,
 				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
+				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
+				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
@@ -777,6 +793,8 @@
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
+				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
+				49CDD4A011B4DA8300C9F1A4 /* LWEActionSheetPicker.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -801,6 +819,8 @@
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
 				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
+				49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */,
+				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
@@ -1022,6 +1042,8 @@
 				49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */,
 				49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
+				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
+				49CDD4A211B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1061,8 @@
 				49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */,
 				49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
+				49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
+				49CDD4A111B4DA8300C9F1A4 /* LWEActionSheetPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1165,8 @@
 				49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
 				49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */,
 				4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */,
+				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
+				49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,6 +1187,8 @@
 				49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
 				49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */,
 				4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */,
+				49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
+				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
