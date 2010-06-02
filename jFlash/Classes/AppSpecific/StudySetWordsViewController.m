@@ -108,7 +108,7 @@
     }
     else
     {
-      cell = [LWEUILabelUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = 0;
       Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
       if ([tmpCard headword] == nil)

@@ -50,31 +50,54 @@
 
 
 /**
- * Loads & opens the database (including if it doesn't exist), calls loadTabBar when finished
+ * Loads & opens the databases (including if it doesn't exist), calls loadTabBar when finished
  */
 - (void) loadDatabase
 {
-  // Determine if the database exists or not
+  // Get singleton objects - settings, current state, database
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  CurrentState *state = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  
+  // This call loads/initializes settings and if we don't call this here, shit WILL break.
+  [state initializeSettings];
+  
+  // Determine if the MAIN database exists or not
   NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
-  [appSettings initializeSettings];
   bool dbDidFinishCopying = [settings boolForKey:@"db_did_finish_copying"];
-  if (appSettings.isFirstLoad || ![db databaseFileExists:pathToDatabase] || !dbDidFinishCopying)
+  if (state.isFirstLoad || ![db databaseFileExists:pathToDatabase] || !dbDidFinishCopying)
   {
     // Load the "waiting" view for the new database copy
     [self showFirstLoadProgressView];
   }
   else
   {
-    // Open the database - it already exists & is properly copied - then add FTS database if possible
-    [db openedDatabase:pathToDatabase];
-    
-    // TODO: This is the FTS database - somehow change this later
-    NSString *pathToFTSDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlashFTS.db"];
-    [db attachDatabase:pathToFTSDatabase withName:@"fts"];
-
+    // Open the database - it already exists & is properly copied
+    if ([db openedDatabase:pathToDatabase])
+    {
+      // Add each plugin database if it exists
+      // This code is NOT robust, it assumes that if settings knows of a plugin DB, it is OK
+      // Therefore Downloader code must be very careful to have database integrity
+      NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
+      NSEnumerator *keyEnumerator = [plugins keyEnumerator];
+      NSString *key;
+      while (key = [keyEnumerator nextObject])
+      {
+        NSString* filename = [plugins objectForKey:key];
+        if (![filename isEqualToString:@""])
+        {
+          if ([db attachDatabase:[LWEFile createDocumentPathWithFilename:filename] withName:key])
+          {
+            [[state plugins] setObject:[NSNumber numberWithBool:YES] forKey:key];
+          }
+          else
+          {
+            // TODO: We have a big problem here
+          }
+        }
+      }
+      
+    }
     [self performSelector:@selector(loadTabBar) withObject:nil afterDelay:0.0];
   }
 }
@@ -89,8 +112,8 @@
   
 	self.tabBarController = [[UITabBarController alloc] init];
   
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  [appSettings loadActiveTag];
+  CurrentState *state = [CurrentState sharedCurrentState];
+  [state loadActiveTag];
   
   // Make room for the status bar
   CGRect tabBarFrame;
@@ -109,7 +132,18 @@
   [studySetViewController release];
   [localNavigationController release];
   
-  SearchViewController *searchViewController = [[SearchViewController alloc] init];
+  UIViewController *searchViewController;
+  // Depending on whether user has search FTS installed or not, we use different controller for search
+  if ([[state plugins] objectForKey:FTS_DB_KEY])
+  {
+    LWE_LOG(@"User HAS FTS database plugin installed");
+    searchViewController = [[SearchViewController alloc] init];
+  }
+  else
+  {
+    LWE_LOG(@"User DOES NOT have FTS database plugin installed");
+    searchViewController = [[SearchUnavailableViewController alloc] init];
+  }
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
   [localControllersArray addObject:localNavigationController];
   [searchViewController release];
@@ -235,28 +269,28 @@
   StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
   
   // Save current card, user, and set, update cache
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  CurrentState *state = [CurrentState sharedCurrentState];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-  [settings setInteger:appSettings.activeTag.tagId forKey:@"tag_id"];
-  [settings setInteger:appSettings.activeTag.currentIndex forKey:@"current_index"];
+  [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
+  [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
   [settings setInteger:0 forKey:@"first_load"];
   [settings setInteger:0 forKey:@"app_running"];
   [settings synchronize];
   
   // Only freeze if we have a database
-  if ([[LWEDatabase sharedLWEDatabase] dao]) [[appSettings activeTag] freezeCardIds];
+  if ([[LWEDatabase sharedLWEDatabase] dao]) [[state activeTag] freezeCardIds];
 }
 
 
 - (void)dealloc
 {
   // Clear the application settings singleton
-  CurrentState* appSettings = [CurrentState sharedCurrentState];
+  CurrentState* state = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db release];
-  [appSettings release];
+  [state release];
 
   [super dealloc];
 }

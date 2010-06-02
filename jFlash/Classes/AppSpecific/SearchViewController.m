@@ -9,7 +9,6 @@
 #import "SearchViewController.h"
 #import "CardPeer.h"
 #import "AddTagViewController.h"
-#import "DownloaderViewController.h"
 
 @implementation SearchViewController
 @synthesize searchBar, searchArray, activityIndicator;
@@ -19,6 +18,7 @@
   if (self = [super initWithStyle:UITableViewStylePlain])
   {
     // Set the tab bar controller image png to the targets
+    //TODO: I have a suspicision that the following line means nothing!   MMA 6/2/2010
     self.navigationItem.title = @"Word Search";
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     self.title = @"Search";
@@ -36,23 +36,6 @@
   searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
   activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-  
-  CurrentState *appState = [CurrentState sharedCurrentState];
-  if (appState.dbHasFTS == YES)
-  {
-  }
-  else
-  {
-    // Create a download button in case the person dismisses the alert
-    UIBarButtonItem *downloadBtn = [[UIBarButtonItem alloc] initWithTitle:@"Download Index" style:UIBarButtonItemStyleBordered target:self action:@selector(launchDownloader)];
-    self.navigationItem.rightBarButtonItem = downloadBtn;
-
-    // Alert the user that they don't have the full DB index
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Download the Dictionary Index" message:@"To make the dictionary very fast, we highly recommend you to download the index file.  Would you like to do this now?" delegate:self  cancelButtonTitle:@"Later" otherButtonTitles:nil];
-    [alert addButtonWithTitle:@"Yes"];
-    [alert show];
-    [alert release];
-  }
 }
 
 
@@ -69,36 +52,6 @@
   if (searchArray == nil || [searchArray count] == 0)
   {
     [searchBar becomeFirstResponder];
-  }
-}
-
-
-/**
- * launchDownloader
- * Creates a modal nav controller and loads the DownloaderControllerView into it
- */
-- (void) launchDownloader
-{
-  DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
-  dlViewController.title = @"Download Dictionary Indexes";
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
-  [[self navigationController] presentModalViewController:modalNavController animated:YES];
-  [modalNavController release];
-  [dlViewController release];
-}
-
-
-#pragma mark UIAlert Delegates
-
-/**
- * alertView delegate - decides what to do when the user presses "OK" or "Cancel" for the index download alert
- */
-- (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  // This is the OK button
-  if (buttonIndex == 1)
-  {
-    [self launchDownloader];
   }
 }
 

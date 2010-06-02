@@ -10,16 +10,19 @@
 #import "SynthesizeSingleton.h"
 #import "Tag.h"
 
+extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
+extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
+
 @interface CurrentState : NSObject
 {
   Tag *activeTag;
   Tag *_activeTag;
   BOOL isFirstLoad;
-  BOOL dbHasFTS;
+  NSMutableDictionary *plugins;
 }
 
 @property BOOL isFirstLoad;
-@property BOOL dbHasFTS;
+@property (nonatomic, retain) NSMutableDictionary *plugins;
 
 + (CurrentState *)sharedCurrentState;
 

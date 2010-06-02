@@ -629,15 +629,6 @@
 					<int key="connectionID">223</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">doAddToSetBtn</string>
-						<reference key="source" ref="316887227"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">226</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">practiceBgImage</string>
 						<reference key="source" ref="372490531"/>
@@ -742,6 +733,15 @@
 						<int key="IBEventType">13</int>
 					</object>
 					<int key="connectionID">292</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showCardActionSheet</string>
+						<reference key="source" ref="316887227"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">293</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1023,7 +1023,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">292</int>
+			<int key="maxID">293</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1077,7 +1077,6 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePage:</string>
-							<string>doAddToSetBtn</string>
 							<string>doBuryCardBtn</string>
 							<string>doNextCardBtn</string>
 							<string>doPrevCardBtn</string>
@@ -1086,6 +1085,7 @@
 							<string>doShowProgressModalBtn</string>
 							<string>doTogglePercentCorrectBtn</string>
 							<string>doWrongBtn</string>
+							<string>showCardActionSheet</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>

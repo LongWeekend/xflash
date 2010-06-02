@@ -8,9 +8,12 @@
 
 #import "CurrentState.h"
 
+NSString *const FTS_DB_KEY = @"FTS_DB";
+NSString *const EXAMPLE_DB_KEY = @"EX_DB";
+
 //! Maintains the current state of the application (active set, etc).  Is a singleton.
 @implementation CurrentState
-@synthesize isFirstLoad, dbHasFTS;
+@synthesize isFirstLoad, plugins;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -78,16 +81,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   int firstLoad = 1;
   if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
 
-  // TODO: DEBUG just to figure out the downloader
-  [self setDbHasFTS:NO];  
-  
   // Now tell if first load or not
   if (firstLoad)
   {
-    [self setIsFirstLoad:YES];
     // Initialize all settings & defaults
-    NSArray *keys = [NSArray arrayWithObjects:@"theme", @"headword", @"reading", @"mode", @"splash", nil];
-    NSArray *objects = [NSArray arrayWithObjects:SET_THEME_FIRE,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,SET_SPLASH_ON,nil];
+    [self setIsFirstLoad:YES];
+    NSMutableDictionary *availablePlugins = [NSDictionary dictionaryWithObjectsAndKeys:@"",FTS_DB_KEY,@"",EXAMPLE_DB_KEY,nil];
+    NSArray *keys = [NSArray arrayWithObjects:@"theme", @"headword", @"reading", @"mode", @"splash", @"plugins", nil];
+    NSArray *objects = [NSArray arrayWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,SET_SPLASH_ON,availablePlugins,nil];
     for(int i=0; i < [keys count]; i++)
     {
       [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
@@ -105,8 +106,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [self setIsFirstLoad:NO];
   }
   
-  // Set the app to be running 
+  // We initialize the plugins dictionary to NOTHING and add to here as we are successful attaching them
+  [self setPlugins:[[NSMutableDictionary alloc] init]];
+
+   // Set the app to be running 
   [settings setInteger:1 forKey:@"app_running"];
 }
-
+   
+- (void) dealloc
+{
+  [super dealloc];
+  [self setPlugins:nil];
+}
+   
 @end

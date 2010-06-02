@@ -49,8 +49,6 @@ enum wordsSections
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) Tag *tag;
-//@property (nonatomic, retain) UIAlertView *statusMsgBox;
 @property (retain) NSMutableArray *cards;
-//@property (retain) NSOperationQueue *queue;
 
 @end

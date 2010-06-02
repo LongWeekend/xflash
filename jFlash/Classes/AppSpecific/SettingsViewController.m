@@ -9,6 +9,9 @@
 #import "SettingsViewController.h"
 #import "UserViewController.h"
 
+//TODO: this is only for debug
+#import "ReportBadDataViewController.h"
+
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
 
