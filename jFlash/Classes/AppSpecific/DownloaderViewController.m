@@ -35,19 +35,23 @@
 }
 
 
-/**
- * Delegate method before view appears; sets title bar tint according to theme
- */
+//! UIView Delegate method - sets nav title bar tint according to theme
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  // TODO: Theme the status bar here
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 }
 
 
-/**
- * Sets the status message of the Downloader View
- */
+//! UIView Delegate method - starts the download!
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self startDownloadProcess];
+}
+
+
+//! Sets the status message of the Downloader View
 -(void) setStatusMessage: (NSString*) newString
 {
   // Check that nil was not passed
@@ -71,18 +75,15 @@
   }
 }
 
-/**
- * Gets the current status message of the Downloader View
- */
+
+//! Gets the current status message of the Downloader View
 -(NSString*) statusMessage
 {
   return [[self statusMsgLabel] text];
 }
 
 
-/**
- * Sets the current task message of the Downloader View
- */
+//! Sets the current task message of the Downloader View
 -(void) setTaskMessage: (NSString*) newString
 {
   // Check that nil was not passed
@@ -107,45 +108,35 @@
 }
 
 
-/**
- * Gets the current task message of the Downloader View
- */
+//! Gets the current task message of the Downloader View
 -(NSString*) taskMessage
 {
   return [[self taskMsgLabel] text];
 }
 
 
-/**
- * Sets the current progress % complete of the UIProgressView on the Downloader View
- */
+//! Sets the current progress % complete of the UIProgressView on the Downloader View
 -(void) setProgress: (float) newVal
 {
   [[self progressIndicator] setProgress:newVal];
 }
 
 
-/**
- * Gets the current progress % complete of the UIProgressView on the Downloader View
- */
+//! Gets the current progress % complete of the UIProgressView on the Downloader View
 -(float) progress
 {
   return [[self progressIndicator] progress];
 }
 
 
-/**
- * Starts a new download using the LWEDownloader instance held by DownloaderViewController  
- */
+//! Starts a new download using the LWEDownloader instance held by DownloaderViewController  
 - (IBAction) startDownloadProcess
 {
   [[self dlHandler] startDownload];
 }
 
 
-/**
- * Cancels an ongoing LWEDownloader instance and dismisses the DownloaderViewController  
- */
+//! Cancels an ongoing LWEDownloader instance and dismisses the DownloaderViewController  
 - (IBAction) cancelDownloadProcess
 {
   [[self dlHandler] cancelDownload];
@@ -153,9 +144,7 @@
 }
 
 
-/**
- * Retrieves current status from LWEDownloader and updates view
- */
+//! Retrieves current status from LWEDownloader and updates view
 - (void) updateDownloaderDisplay
 {
   [self setTaskMessage:[[self dlHandler] taskMessage]];
@@ -170,13 +159,7 @@
 }
 
 
-- (void)didReceiveMemoryWarning 
-{
-  // Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-  // Release any cached data, images, etc that aren't in use.
-}
-
+//! standard dealloc
 - (void)dealloc
 {
   [super dealloc];

@@ -11,6 +11,7 @@
 #import "CurrentState.h"
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
+#import "SearchUnavailableViewController.h"
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "HelpViewController.h"

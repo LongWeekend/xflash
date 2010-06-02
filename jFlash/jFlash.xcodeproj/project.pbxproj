@@ -15,6 +15,10 @@
 		4951E0FE11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
+		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
+		4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
+		4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
+		4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
@@ -183,6 +187,9 @@
 		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
+		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
+		4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchUnavailableViewController.h; path = AppSpecific/SearchUnavailableViewController.h; sourceTree = "<group>"; };
+		4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchUnavailableViewController.m; path = AppSpecific/SearchUnavailableViewController.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
@@ -797,6 +804,7 @@
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
 				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
+				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -827,6 +835,8 @@
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
 				917A5BD011AB7C4600016BD2 /* SearchViewController.m */,
+				4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */,
+				4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */,
 				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
 				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
@@ -1050,6 +1060,7 @@
 				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
 				4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */,
 				4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
+				4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,6 +1081,7 @@
 				49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
 				4951E0FE11B61F7D00FCE21E /* CardView.xib in Resources */,
 				4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
+				4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,6 +1187,7 @@
 				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
+				4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,6 +1210,7 @@
 				4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */,
 				49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
+				4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
