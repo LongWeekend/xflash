@@ -10,11 +10,11 @@
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 
-@synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, percentCorrectVisible, meaningMoreIconVisible, readingMoreIconVisible;
+@synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, percentCorrectVisible;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
-@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, stats, hhAnimationView;
+@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
 @synthesize startTouchPosition, practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardMeaningBtn, cardViewController, cardView;
 
 - (id) init
@@ -44,8 +44,6 @@
     [alertView release];
     appSettings.isFirstLoad = NO;
   }
-  
- [self _resetActionMenu];
   
  // redraw the progress bar
  [self refreshProgressBarView];
@@ -109,8 +107,6 @@
   // Set view default states
   // TODO: refactor to delegate of cardView
   [self setPercentCorrectVisible: YES];
-  [self setMeaningMoreIconVisible: NO];
-  [self setReadingMoreIconVisible: YES];
 
   // Initialize the progressBarView
   [self setProgressBarViewController:[[ProgressBarViewController alloc] init]];
@@ -125,6 +121,8 @@
   LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
 	[self resetStudySet];
   LWE_LOG(@"END Study View");
+  
+  [self _resetActionMenu];
 }
 
 #pragma mark Convenience methods
@@ -363,8 +361,7 @@
 	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
   progressView.rightStreak = currentRightStreak;
   progressView.wrongStreak = currentWrongStreak;
-  NSMutableArray* levelDetails = [self getLevelDetails];
-  progressView.levelDetails = levelDetails;
+  progressView.levelDetails = [self getLevelDetails];
   
   [self.navigationController pushViewController:progressView animated:NO];
   [self.view addSubview:progressView.view];
@@ -379,12 +376,6 @@
   int wrongCount = [[records objectAtIndex:1] intValue];
   progressView.cardsRightAllTime.text = [NSString stringWithFormat:@"%i", rightCount];
   progressView.cardsWrongAllTime.text = [NSString stringWithFormat:@"%i", wrongCount];
-}
-
-- (IBAction) doDismissProgressModalBtn
-{
-  // Bring up the modal dialog for progress view
-  [progressModalView setHidden:YES];
 }
 
 #pragma mark UI updater convenience methods
@@ -494,7 +485,6 @@
   [progressBarViewController release];
   [progressModalView release];
   [progressModalBtn release];
-  [stats release];
   
   //card view stuff
   [cardMeaningBtnHint release];
