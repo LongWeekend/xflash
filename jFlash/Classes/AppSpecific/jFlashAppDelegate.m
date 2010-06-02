@@ -14,12 +14,12 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {   
-  // add analytics if this is live
 #if defined(APP_STORE_FINAL)
+  // add analytics if this is live
   NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
   [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
 #endif
-
+  
   // Seed random generator
   srandomdev();
   
@@ -33,6 +33,7 @@
   [pool release];
 }
 
+//! Flurry exception handler (only installed in final app store version)
 void uncaughtExceptionHandler(NSException *exception) {
   [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
 }

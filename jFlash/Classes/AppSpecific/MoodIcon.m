@@ -98,4 +98,13 @@
 }
 
 
+//! Returns an image view with a happy HH based on the current theme
++ (UIImageView*) makeHappyMoodIconView
+{
+  NSString* themeName = [[ThemeManager sharedThemeManager] currentThemeFileName];
+  NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/mood-icons/positive/hh-happy.png",themeName];
+  UIImageView* tmpImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:tmpStr]] autorelease];
+  return tmpImgView;
+}
+
 @end

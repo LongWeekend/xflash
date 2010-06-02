@@ -11,6 +11,7 @@
 NSString * const SET_THEME_FIRE      = @"FIRE";
 NSString * const SET_THEME_WATER     = @"WATER";
 NSString * const SET_THEME_TAME      = @"TAME";
+NSString * const DEFAULT_THEME       = @"FIRE";
 
 //! Manages themes and returns values depending on current user theme
 @implementation ThemeManager
@@ -72,7 +73,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 - (NSDictionary*) _currentTheme
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  return [[self themes] objectForKey:[settings objectForKey:APP_THEME]];  
+  if ([settings objectForKey:APP_THEME] != nil)
+  {
+    // We have theme no problem
+    return [[self themes] objectForKey:[settings objectForKey:APP_THEME]];
+  }
+  else
+  {
+    // No default set, first load?
+    return [[self themes] objectForKey:DEFAULT_THEME];
+  }
+
 }
 
 

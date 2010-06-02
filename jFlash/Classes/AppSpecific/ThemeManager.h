@@ -8,6 +8,7 @@
 extern NSString * const SET_THEME_FIRE;
 extern NSString * const SET_THEME_WATER;
 extern NSString * const SET_THEME_TAME;
+extern NSString * const DEFAULT_THEME;
 
 @interface ThemeManager : NSObject
 {
