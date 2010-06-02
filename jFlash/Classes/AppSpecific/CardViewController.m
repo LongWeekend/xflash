@@ -237,21 +237,21 @@
   if(theLabel == cardReadingLabel){
     if(theLabelSize.height > theParentSize.height){
       if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J] && meaningRevealed){
-        [cardReadingLabelScrollMoreIcon setHidden:NO];
+        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
       }else if(!meaningRevealed){
-        [cardReadingLabelScrollMoreIcon setHidden:YES];
+        [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
       } else {
-        [cardReadingLabelScrollMoreIcon setHidden:NO];
+        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
       }
     } else {
-      [cardReadingLabelScrollMoreIcon setHidden:YES];
+      [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
     }
   }
   else if(theLabel == cardHeadwordLabel){
     if(theLabelSize.height > theParentSize.height){
-      [cardHeadwordLabelScrollMoreIcon setHidden:NO];
+      [[self cardHeadwordLabelScrollMoreIcon] setHidden:NO];
     } else {
-      [cardHeadwordLabelScrollMoreIcon setHidden:YES];
+      [[self cardHeadwordLabelScrollMoreIcon] setHidden:YES];
     }
   }
 }

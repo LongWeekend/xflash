@@ -8,10 +8,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "jFlashAppDelegate.h"
-#import "UserHistoryPeer.h"
 #import "AddTagViewController.h"
 #import "Constants.h"
-#import "PDColoredProgressView.h"
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 #import "CardViewController.h"
@@ -37,6 +35,7 @@
   IBOutlet UIImageView *percentCorrectTalkBubble;
   IBOutlet UILabel *percentCorrectLabel;
   
+  // TODO: move to action bar
   IBOutlet UIButton *nextCardBtn;
   IBOutlet UIButton *prevCardBtn;
   IBOutlet UIButton *rightBtn;
@@ -65,16 +64,11 @@
   IBOutlet UIButton *progressModalCloseBtn;
   
   IBOutlet UILabel *remainingCardsLabel;
-  
-  NSString *sql;
 
-  NSMutableArray *stats;
   Tag *currentCardSet;
   Card *currentCard;
 
   BOOL percentCorrectVisible;
-  BOOL meaningMoreIconVisible;
-  BOOL readingMoreIconVisible;
   BOOL isBrowseMode;
 
   // For statistics
@@ -95,7 +89,6 @@
 - (IBAction)doWrongBtn;
 - (IBAction)doBuryCardBtn;
 - (IBAction)doShowProgressModalBtn;
-- (IBAction)doDismissProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction) showCardActionSheet;
 
@@ -135,19 +128,16 @@
 @property (nonatomic, retain) UIView *cardMeaningBtnHintMini;
 @property (nonatomic, retain) UIImageView *hhAnimationView;
 
-
 @property (nonatomic, retain) UIView *progressModalView;
 @property (nonatomic, retain) UIView *progressModalBtn;
 
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
-@property (nonatomic, retain) NSMutableArray *stats;
 
 @property BOOL percentCorrectVisible;
-@property BOOL meaningMoreIconVisible;
-@property BOOL readingMoreIconVisible;
 @property BOOL isBrowseMode;
 
+// stats for progress modal
 @property NSInteger numRight;
 @property NSInteger numWrong;
 @property NSInteger numViewed;
