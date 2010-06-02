@@ -1,4 +1,4 @@
-    //
+//
 //  ReportBadDataViewController.m
 //  jFlash
 //
@@ -7,6 +7,7 @@
 //
 #import "ReportBadDataViewController.h"
 
+NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex: \"Change the first kanji to X\"";
 
 //! Allows user to report bad data in the cards to LWE via Flurry event handling
 @implementation ReportBadDataViewController
@@ -20,6 +21,8 @@
   {
     // Set internal variables
     _badCard = card;
+    _pickerCurrentlyVisible = NO;
+    _keyboardCurrentlyVisible = NO;
     
     // Current tag is?
     Tag *tmpTag = [[CurrentState sharedCurrentState] activeTag];
@@ -29,11 +32,11 @@
     // Initialize issue type array
     _userSelectedIssueType = 1;
     _issueTypeArray = [[NSArray alloc] initWithObjects:
-                      @"Kanji is wrong",
                       @"Reading or romaji is wrong",
-                      @"This is a dead word",
-                      @"It's not relevant for this set",
-                      @"This card is a duplicate",
+                      @"Kanji is wrong",
+                      @"Card is a duplicate",
+                      @"Not relevant for this set",
+                      @"Antiquated or dead word",
                       @"Something else",
                       nil];
   }
@@ -45,20 +48,24 @@
 - (void) viewDidLoad
 {
   // Now set up other NIB file
-  [[NSBundle mainBundle] loadNibNamed:@"LWEActionSheetPicker" owner:self options:nil];
+  [[NSBundle mainBundle] loadNibNamed:@"LWEToolbarPicker" owner:self options:nil];
 
   [super viewDidLoad];
   //TODO: Ross and I decided this is a hack and should be fixed w/ a category?
   _cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = _cancelButton;
-  self.navigationItem.title = @"Bad Card?";
+  self.navigationItem.title = @"What's Wrong?";
+  
+  // Set UITextView to custom initialized text & "placeholder color"
+  self.userMsgInputBox.text = RBDVC_USER_TEXT_BOX_DEFAULT;
+  self.userMsgInputBox.textColor = [UIColor lightGrayColor];
   
   // Set up stuff for UIPicker animation - moves the picker to just off the screen
   [LWEViewAnimationUtils translateView:self.pickerView byPoint:CGPointMake(0,480) withInterval:1.0];
   
   // Make HH guy and set him up
   [self setHotheadImg:[MoodIcon makeHappyMoodIconView]];
-//  self.hotheadImg
+  self.hotheadImg.frame = CGRectMake(250,270,self.hotheadImg.image.size.width,self.hotheadImg.image.size.height);
   [self.view addSubview:self.hotheadImg];
 }
 
@@ -84,20 +91,23 @@
   
   // Move the card to an NSDictionary so we can make it portable
   NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
                            [_badCard headword],@"headword",
                            [_badCard meaning],@"meaning",
                            [_badCard reading],@"reading",
                            [_badCard romaji],@"romaji",nil];
 
   // Generate dictionary of user data to send to Flurry
+  NSMutableArray *membership = [TagPeer membershipListForCardId:_badCard.cardId];
+  NSString *issue = [_issueTypeArray objectAtIndex:_userSelectedIssueType];
   NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithInt:_badCard.cardId],@"card_id",
                               tmpCard,@"card",
-                              [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],"jflash_version",
-                              [_issueTypeArray objectAtIndex:_userSelectedIssueType],@"issue_type",
+                              [NSNumber numberWithInt:_activeTagId],@"active_tag_id",
+                              _activeTagName,@"active_tag_name",
+                              issue,@"issue_type",
                               [[self userMsgInputBox] text],@"user_message",
                               [[self userEmailBox] text],@"user_email",
-                              [TagPeer membershipListForCardId:_badCard.cardId],@"tag_membership",nil];
+                              membership,@"tag_membership",nil];
 #if defined(APP_STORE_FINAL)
   [FlurryAPI logEvent:@"userBadDataReport" withParameters:dataToSend];
 #endif
@@ -109,18 +119,23 @@
 -(IBAction) _hidePickerView
 {
   [LWEViewAnimationUtils translateView:self.pickerView byPoint:CGPointMake(0,480) withInterval:0.5f];
+  _pickerCurrentlyVisible = NO;
 }
 
 
 //! Shows picker by bringing it in from off the screen
 -(IBAction) _showPickerView
 {	
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.5];
-	CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 180);
-	pickerView.transform = transform;
-	[self.view addSubview:pickerView];
-	[UIView commitAnimations];	
+  if (_keyboardCurrentlyVisible == NO)
+  {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 180);
+    pickerView.transform = transform;
+    [self.view addSubview:pickerView];
+    [UIView commitAnimations];
+    _pickerCurrentlyVisible = YES;
+  }
 }
 
 
@@ -130,7 +145,16 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
   if (textField == [self userEmailBox]) return YES;
-  else return NO;
+  else
+  {
+    // If the user is editing the text user message, and they tap here, get them out
+    if (_keyboardCurrentlyVisible)
+    {
+      [self _resignTextViewKeyboard];
+      [self _showPickerView];
+    }
+    return NO;
+  }
 }
 
 
@@ -143,6 +167,8 @@
     self.navigationItem.leftBarButtonItem = nil;
     // Move the view up so the keyboard doesn't block the input
     [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-130) withInterval:0.5f];
+    // Let everyone know the keyboard is showing
+    _keyboardCurrentlyVisible = YES;
   }
 }
 
@@ -157,6 +183,7 @@
     self.navigationItem.leftBarButtonItem = _cancelButton;
     // Now translate the view back
     [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
+    _keyboardCurrentlyVisible = NO;
   }
   return YES;
 }
@@ -175,6 +202,20 @@
 }
 
 
+//! Delegate for text view - stops the user from editing when picker is showing
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+  if (_pickerCurrentlyVisible || _keyboardCurrentlyVisible)
+  {
+    return NO;
+  }
+  else
+  {
+    return YES;
+  }
+}
+
+
 //! Delegate for text view - installs a cancel button to cancel the keyboard in the title nav bar
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -182,7 +223,16 @@
   self.navigationItem.rightBarButtonItem = doneButton;
   // Get rid of the cancel button, you can't dismiss the whole view w/ the keyboard still up!
   self.navigationItem.leftBarButtonItem = nil;
-  textView.text = @"";
+
+  // Mimic placeholder behavior
+  if ([textView.text isEqualToString:RBDVC_USER_TEXT_BOX_DEFAULT])
+  {
+    textView.text = @"";
+    textView.textColor = [UIColor blackColor];
+  }
+  
+  // Stop you from showing the picker
+  _keyboardCurrentlyVisible = YES;
 }
 
 
@@ -193,6 +243,15 @@
   self.navigationItem.rightBarButtonItem = nil;
   // Bring back the cancel button since we killed it
   self.navigationItem.leftBarButtonItem = _cancelButton;
+
+  // Also, mimic placeholder behavior in case text is empty
+  if ([self.userMsgInputBox.text isEqualToString:@""])
+  {
+    self.userMsgInputBox.text = RBDVC_USER_TEXT_BOX_DEFAULT;
+    self.userMsgInputBox.textColor = [UIColor lightGrayColor];
+  }
+  // Allow you to use the picker again
+  _keyboardCurrentlyVisible = NO;
 }
 
 

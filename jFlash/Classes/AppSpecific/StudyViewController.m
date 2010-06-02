@@ -298,24 +298,6 @@
   [self doCardBtn:WRONG_BTN];
 }
 
-- (IBAction) doAddToSetBtn
-{
-  // Unavoidably (perhaps?) uses jFlashAppDelegate to launch a modal view (for adding to set)
-	jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-  UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:[self parentViewController] action:@selector(dismissModalViewControllerAnimated:)];
-	AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
-	modalViewController.cardId = currentCard.cardId;
-	modalViewController.navigationItem.leftBarButtonItem = doneBtn;
-	modalViewController.navigationItem.title = @"Add Word To Sets";
-  modalViewController.currentCard = currentCard;
-	UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-  modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  [[[appDelegate rootViewController] tabBarController] presentModalViewController:modalNavControl animated:YES];
-
-	[modalNavControl release];
-	[doneBtn release];
-}
 
 //! Hides the "Tap Here For Answer" overlays and reveals the actionBar
 - (IBAction) doRevealMeaningBtn
@@ -354,6 +336,46 @@
     percentCorrectVisible = NO;
   }
 }
+
+//! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
+- (IBAction) showCardActionSheet
+{
+  UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Card Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Help Us Fix This Card",@"Add Card to Study Set",nil];
+  [as showInView:[self view]];
+  [as release];
+}
+
+#pragma mark UIActionSheetDelegate methods - for "add to set" or "report bad data" action sheet
+
+//! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
+  {
+     ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[self currentCard]];
+     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:rbdvc];
+     [[self parentViewController] presentModalViewController:modalNavController animated:YES];
+     [modalNavController release];
+     [rbdvc release];
+  }
+  else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
+  {
+    // TODO: shouldn't this be inside of the AddTagViewController?  Or is it out here because we don't have a nav controller?  MMA 6/2/2010
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:[self parentViewController] action:@selector(dismissModalViewControllerAnimated:)];
+    AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
+    modalViewController.cardId = currentCard.cardId;
+    modalViewController.navigationItem.leftBarButtonItem = doneBtn;
+    modalViewController.navigationItem.title = @"Add Word To Sets";
+    modalViewController.currentCard = currentCard;
+    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
+    modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+    [[self parentViewController] presentModalViewController:modalNavControl animated:YES];
+    [modalNavControl release];
+    [doneBtn release];    
+  }
+  // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
+}
+
 
 #pragma mark progressModal
 

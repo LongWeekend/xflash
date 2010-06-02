@@ -6,6 +6,7 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "jFlashAppDelegate.h"
 #import "UserHistoryPeer.h"
 #import "AddTagViewController.h"
@@ -17,9 +18,14 @@
 #import "MoodIcon.h"
 #import "BrowseModeCardViewDelegate.h"
 #import "PracticeModeCardViewDelegate.h"
-#import <QuartzCore/QuartzCore.h>
+#import "ReportBadDataViewController.h"
 
-@interface StudyViewController : UIViewController {
+#define SVC_ACTION_REPORT_BUTTON 0
+#define SVC_ACTION_ADDTOSET_BUTTON 1
+
+
+@interface StudyViewController : UIViewController <UIActionSheetDelegate>
+{
   MoodIcon *moodIcon;
   
   IBOutlet CardViewController *cardViewController;
@@ -87,11 +93,11 @@
 - (IBAction)doPrevCardBtn;
 - (IBAction)doRightBtn;
 - (IBAction)doWrongBtn;
-- (IBAction)doAddToSetBtn;
 - (IBAction)doBuryCardBtn;
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doDismissProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
+- (IBAction) showCardActionSheet;
 
 - (void)refreshProgressBarView;
 
