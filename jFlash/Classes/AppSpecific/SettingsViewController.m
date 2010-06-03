@@ -9,8 +9,20 @@
 #import "SettingsViewController.h"
 #import "UserViewController.h"
 
-//TODO: this is only for debug
-#import "ReportBadDataViewController.h"
+NSString * const SET_MODE_QUIZ       = @"QUIZ";
+NSString * const SET_MODE_BROWSE     = @"BROWSE";
+NSString * const SET_J_TO_E          = @"JPN";
+NSString * const SET_E_TO_J          = @"ENG";
+
+NSString * const SET_READING_KANA    = @"KANA";
+NSString * const SET_READING_ROMAJI  = @"ROMAJI";
+NSString * const SET_READING_BOTH    = @"BOTH";
+
+NSString * const APP_MODE            = @"mode";
+NSString * const APP_HEADWORD        = @"headword";
+NSString * const APP_READING         = @"reading";
+NSString * const APP_THEME           = @"theme";
+NSString * const APP_USER            = @"user_id";
 
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
@@ -60,6 +72,10 @@
     NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",nil];
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
+
+    NSArray *pluginNames = [NSArray arrayWithObjects:@"Install Plugins",nil];
+    NSArray *pluginKeys = [NSArray arrayWithObjects:APP_PLUGIN,nil];
+    NSArray *pluginArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
 
     // Source plugin information from PluginManager
     PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];

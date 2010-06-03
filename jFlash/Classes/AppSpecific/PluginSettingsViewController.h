@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface PluginSettingsViewController : UIViewController {
+@interface PluginSettingsViewController : UITableViewController
+{
 
 }
 

@@ -9,22 +9,6 @@
 #define DEFAULT_TAG_ID 124
 #define DEFAULT_USER_ID 1
 
-// Settings (actual values defined in Constants.m)
-extern NSString * const SET_MODE_QUIZ;
-extern NSString * const SET_MODE_BROWSE;
-extern NSString * const SET_J_TO_E;
-extern NSString * const SET_E_TO_J;
-extern NSString * const SET_READING_KANA;
-extern NSString * const SET_READING_ROMAJI;
-extern NSString * const SET_READING_BOTH;
-
-// Different setting types
-extern NSString * const APP_MODE;
-extern NSString * const APP_HEADWORD;
-extern NSString * const APP_READING;
-extern NSString * const APP_THEME;
-extern NSString * const APP_SPLASH;
-extern NSString * const APP_USER;
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
