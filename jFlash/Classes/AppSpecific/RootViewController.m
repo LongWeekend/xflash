@@ -245,6 +245,7 @@
 }
 
 
+//TODO: this is not the best implementation MMA 6/3/2010
 //! Changes the middle tab bar to searchViewController
 - (void) shouldSwapSearchViewController
 {

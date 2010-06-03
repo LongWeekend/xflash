@@ -11,6 +11,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
+		4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4950C25411B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
@@ -184,6 +186,8 @@
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
+		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		494D6C6411AE1AF1006DADF1 /* jFlashApplicationTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlashApplicationTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -831,12 +835,20 @@
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
 				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
+				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
+				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214F4711B601490091AFEF /* CardViewController.h */,
 				91214F4811B601490091AFEF /* CardViewController.m */,
+				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
+				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
 				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
+				4908209711B794A500150499 /* PluginSettingsViewController.h */,
+				4908209811B794A500150499 /* PluginSettingsViewController.m */,
+				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
+				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
 				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
@@ -865,12 +877,6 @@
 				917A5C6111AB83F900016BD2 /* UserImagePicker.m */,
 				917A5C6211AB83F900016BD2 /* UserImagePickerAlt.h */,
 				917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */,
-				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
-				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
-				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
-				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
-				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
-				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
 				9121517711B755550091AFEF /* WordCardViewController.h */,
 				9121517811B755550091AFEF /* WordCardViewController.m */,
 			);
@@ -1205,6 +1211,7 @@
 				4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
+				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1229,6 +1236,7 @@
 				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 				4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25411B764B200B70EE9 /* PluginManager.m in Sources */,
+				4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
