@@ -8,12 +8,9 @@
 
 #import "CurrentState.h"
 
-NSString *const FTS_DB_KEY = @"FTS_DB";
-NSString *const EXAMPLE_DB_KEY = @"EX_DB";
-
 //! Maintains the current state of the application (active set, etc).  Is a singleton.
 @implementation CurrentState
-@synthesize isFirstLoad, plugins;
+@synthesize isFirstLoad, pluginMgr;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -81,18 +78,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   int firstLoad = 1;
   if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
 
+  // We initialize the plugins manager
+  [self setPluginMgr:[[PluginManager alloc] init]];
+  
   // Now tell if first load or not
   if (firstLoad)
   {
     // Initialize all settings & defaults
     [self setIsFirstLoad:YES];
-    NSMutableDictionary *availablePlugins = [NSDictionary dictionaryWithObjectsAndKeys:@"",FTS_DB_KEY,@"",EXAMPLE_DB_KEY,nil];
-    NSArray *keys = [NSArray arrayWithObjects:@"theme", @"headword", @"reading", @"mode", @"splash", @"plugins", nil];
-    NSArray *objects = [NSArray arrayWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,SET_SPLASH_ON,availablePlugins,nil];
+    NSMutableDictionary *availablePlugins = [[NSMutableDictionary alloc] init];
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"theme", @"headword", @"reading", @"mode", @"plugins", nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,availablePlugins,nil];
     for(int i=0; i < [keys count]; i++)
     {
       [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
     }
+
+    [availablePlugins release];
+    [keys release];
+    [objects release];
+
     // these are integers so we can't use the array loop above
     [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
     [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
@@ -106,9 +111,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [self setIsFirstLoad:NO];
   }
   
-  // We initialize the plugins dictionary to NOTHING and add to here as we are successful attaching them
-  [self setPlugins:[[NSMutableDictionary alloc] init]];
-
    // Set the app to be running 
   [settings setInteger:1 forKey:@"app_running"];
 }
@@ -116,7 +118,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 - (void) dealloc
 {
   [super dealloc];
-  [self setPlugins:nil];
+  [self setPluginMgr:nil];
 }
    
 @end

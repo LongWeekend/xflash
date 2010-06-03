@@ -17,8 +17,6 @@ extern NSString * const SET_E_TO_J;
 extern NSString * const SET_READING_KANA;
 extern NSString * const SET_READING_ROMAJI;
 extern NSString * const SET_READING_BOTH;
-extern NSString * const SET_SPLASH_ON;
-extern NSString * const SET_SPLASH_OFF;
 
 // Different setting types
 extern NSString * const APP_MODE;

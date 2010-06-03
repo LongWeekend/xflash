@@ -1,4 +1,3 @@
-    //
 //  DownloaderViewController.m
 //  jFlash
 //
@@ -8,14 +7,13 @@
 
 #import "DownloaderViewController.h"
 
+//! Controls view & program flow during plugin/file downloads
 @implementation DownloaderViewController
 
-@synthesize statusMsgLabel, taskMsgLabel, progressIndicator;
+@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, cancelButton;
 @synthesize dlHandler;
 
-/** 
- * viewDidLoad - Initialize UI elements in the view - progress indicator & labels
- */
+//! UIView delegate - Initialize UI elements in the view - progress indicator & labels
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -25,8 +23,11 @@
   [self setTaskMessage:@""];
   [self setProgress:0.0f];
   
-  // Instantiate downloader with jFlash download URL
-  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/jFlashFTS.db"];
+  // Instantiate downloader with jFlash download URL & destination filename
+  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz"
+                                                       targetFilename:[LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"]];
+  // Set the installer delegate to the PluginManager class
+  [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
   [self setDlHandler:tmpDlHandler];
   
   // Register notification listener to handle downloader events
@@ -140,7 +141,7 @@
 - (IBAction) cancelDownloadProcess
 {
   [[self dlHandler] cancelDownload];
-  [[self parentViewController] dismissModalViewControllerAnimated:YES];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
 }
 
 
@@ -151,10 +152,20 @@
   [self setStatusMessage:[[self dlHandler] statusMessage]];
   [self setProgress:[[self dlHandler] progress]];
   
-  // See if we are done
-  if ([[self dlHandler] stateIsFinal])
+  if ([[self dlHandler] isFailureState])
   {
-    //[[self parentViewController] dismissModalViewControllerAnimated:YES];
+    // Yikes, we have to handle that
+    LWE_LOG(@"DownloaderVC got failure state, shit what do I do now");
+    
+  }
+  else if ([[self dlHandler] isSuccessState])
+  {
+    // Disable the cancel button
+    [[self cancelButton] setEnabled:NO];
+    
+    // Tell someone about this!  Let someone else handle this noise
+    LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
   }
 }
 

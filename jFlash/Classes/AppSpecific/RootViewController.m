@@ -25,6 +25,9 @@
     i = 0;
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
+    // Register listener to pop up downloader modal for search FTS download
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldShowDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldHideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
   }
 	return self;
 }
@@ -73,30 +76,20 @@
   else
   {
     // Open the database - it already exists & is properly copied
-    if ([db openedDatabase:pathToDatabase])
+    if ([db openDatabase:pathToDatabase])
     {
       // Add each plugin database if it exists
-      // This code is NOT robust, it assumes that if settings knows of a plugin DB, it is OK
-      // Therefore Downloader code must be very careful to have database integrity
       NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
       NSEnumerator *keyEnumerator = [plugins keyEnumerator];
       NSString *key;
       while (key = [keyEnumerator nextObject])
       {
-        NSString* filename = [plugins objectForKey:key];
-        if (![filename isEqualToString:@""])
+        NSString* filename = [LWEFile createDocumentPathWithFilename:[plugins objectForKey:key]];
+        if ([[state pluginMgr] loadPluginFromFile:filename] == nil)
         {
-          if ([db attachDatabase:[LWEFile createDocumentPathWithFilename:filename] withName:key])
-          {
-            [[state plugins] setObject:[NSNumber numberWithBool:YES] forKey:key];
-          }
-          else
-          {
-            // TODO: We have a big problem here
-          }
+          LWE_LOG(@"FAILED to load plugin: %@",filename);
         }
       }
-      
     }
     [self performSelector:@selector(loadTabBar) withObject:nil afterDelay:0.0];
   }
@@ -134,7 +127,7 @@
   
   UIViewController *searchViewController;
   // Depending on whether user has search FTS installed or not, we use different controller for search
-  if ([[state plugins] objectForKey:FTS_DB_KEY])
+  if ([[state pluginMgr] pluginIsLoaded:FTS_DB_KEY])
   {
     LWE_LOG(@"User HAS FTS database plugin installed");
     searchViewController = [[SearchViewController alloc] init];
@@ -182,7 +175,7 @@
   loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *pathToDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
-  [db performSelectorInBackground:@selector(openedDatabase:) withObject:pathToDatabase];
+  [db performSelectorInBackground:@selector(openDatabase:) withObject:pathToDatabase];
   [self _continueDatabaseCopy];
 } 
 
@@ -229,6 +222,40 @@
 - (void) switchToStudyView
 {
   [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+}
+
+
+//! Pops up a modal over the screen when the user needs to download something
+- (void) shouldShowDownloaderModal:(NSNotification*)aNotification
+{
+  DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
+  dlViewController.title = @"Download Dictionary Plugin";
+  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
+  [[self tabBarController] presentModalViewController:modalNavController animated:YES];
+  [modalNavController release];
+  [dlViewController release];
+}
+
+
+//! Hides the downloader
+- (void) shouldHideDownloaderModal:(NSNotification*)aNotification
+{
+  [[self tabBarController] dismissModalViewControllerAnimated:YES];
+  [self shouldSwapSearchViewController];
+}
+
+
+//! Changes the middle tab bar to searchViewController
+- (void) shouldSwapSearchViewController
+{
+  NSArray* vcs = [[self tabBarController] viewControllers];
+  NSMutableArray *tmpVcs = [NSMutableArray arrayWithArray:vcs];
+  SearchViewController *svc = [[SearchViewController alloc] init];
+  UINavigationController *localNavigationController = [[UINavigationController alloc] initWithRootViewController:svc];
+  [tmpVcs replaceObjectAtIndex:2 withObject:localNavigationController];
+  [svc release];
+  [localNavigationController release];
+  [[self tabBarController] setViewControllers:tmpVcs animated:NO];
 }
 
 # pragma mark Delegate Methods

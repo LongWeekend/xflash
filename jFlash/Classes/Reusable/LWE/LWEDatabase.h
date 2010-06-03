@@ -9,22 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "LWEFile.h"
 
+//! LWE Database singleton, maintains active connections
 @interface LWEDatabase : NSObject
 {
   BOOL databaseOpenFinished;
+  NSMutableDictionary *attachedDatabases;
   FMDatabase *dao;
 }
 
-@property BOOL databaseOpenFinished;
-@property (nonatomic, retain) FMDatabase *dao;
-
 + (LWEDatabase *)sharedLWEDatabase;
 - (BOOL) databaseFileExists:(NSString*) pathToDatabase;
-- (BOOL) openedDatabase:(NSString*) pathToDatabase;
+- (BOOL) openDatabase:(NSString*) pathToDatabase;
 - (BOOL) attachDatabase:(NSString*) pathToDatabase withName:(NSString*) name;
+- (BOOL) detachDatabase:(NSString*) name;
 - (BOOL) doesTableExist:(NSString*) tableName;
 
 // Semiprivate method
 - (BOOL) _databaseIsOpen;
+
+@property BOOL databaseOpenFinished;
+@property (nonatomic, retain) FMDatabase *dao;
+@property (nonatomic, retain) NSMutableDictionary *attachedDatabases;
 
 @end

@@ -7,8 +7,6 @@
 //
 
 // Settings (also defined in header Constants.h)
-NSString * const SET_SPLASH_ON       = @"ON";
-NSString * const SET_SPLASH_OFF      = @"OFF";
 NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";
 NSString * const SET_J_TO_E          = @"JPN";

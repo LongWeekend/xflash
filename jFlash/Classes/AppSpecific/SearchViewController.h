@@ -18,8 +18,6 @@
   BOOL _deepSearchRan;
 }
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-- (void) launchDownloader;
 - (void) runSearch:(BOOL) runSlowSearch;
 
 // convenience method for performSelecterInBackground

@@ -60,13 +60,17 @@
     NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",nil];
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
+
+    // Source plugin information from PluginManager
+    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+    NSArray *pluginArray = [NSArray arrayWithObjects:[pm loadedPluginsByName],[pm loadedPluginsByKey],@"Installed Plugins",nil];
     
     NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
     
     // Make the order
-    self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,appSettingArray,aboutArray,nil];
+    self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,appSettingArray,pluginArray,aboutArray,nil];
     
     settingsChanged = NO;
     headwordChanged = NO;
