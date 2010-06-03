@@ -27,7 +27,7 @@
 
 @class PDColoredProgressView;
 
-@interface RootViewController : UIViewController
+@interface RootViewController : UIViewController 
 {
 	id<InitializationDelegate> delegate;
 //	PDColoredProgressView *loadingView;
@@ -48,4 +48,7 @@
 - (void) _finishDatabaseCopy;
 - (void) loadTabBar;
 
+- (void) shouldSwapSearchViewController;
+- (void) shouldHideDownloaderModal:(NSNotification*)aNotification;
+- (void) shouldShowDownloaderModal:(NSNotification*)aNotification;
 @end

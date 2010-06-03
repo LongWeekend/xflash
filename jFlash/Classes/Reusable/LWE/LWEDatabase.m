@@ -11,7 +11,7 @@
 
 @implementation LWEDatabase
 
-@synthesize dao,databaseOpenFinished;
+@synthesize dao,databaseOpenFinished, attachedDatabases;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
@@ -38,7 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
  * Returns true if the database file specified by 'pathToDatabase' was successfully opened
  * Also posts a 'databaseIsOpen' notification on success
  */
-- (BOOL) openedDatabase:(NSString*)pathToDatabase
+- (BOOL) openDatabase:(NSString*)pathToDatabase
 {
   self.databaseOpenFinished = NO;
   BOOL success = NO;
@@ -71,6 +71,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   if ([self _databaseIsOpen])
   {
     NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE \"%@\" AS %@;",pathToDatabase,name];
+    LWE_LOG(@"%@",sql);
+    [[self dao] executeUpdate:sql];
+    if (![[self dao] hadError])
+    {
+      returnVal = YES;
+    }
+    [sql release];
+  }
+  else
+  {
+    // When called with no DB, throw exception
+    [NSException raise:@"Invalid database object in 'dao'" format:@"dao object is: %@",[self dao]];
+  }
+  return returnVal;
+}
+
+
+/**
+ * detaches a database on the open connection with "name"
+ */
+- (BOOL) detachDatabase:(NSString*) name
+{
+  BOOL returnVal = NO;
+  if ([self _databaseIsOpen])
+  {
+    NSString *sql = [[NSString alloc] initWithFormat:@"DETACH DATABASE \"%@\";",name];
     LWE_LOG(@"%@",sql);
     [[self dao] executeUpdate:sql];
     if (![[self dao] hadError])
