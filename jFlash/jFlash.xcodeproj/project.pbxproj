@@ -53,6 +53,8 @@
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
 		91214F4911B601490091AFEF /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
+		9121517A11B755550091AFEF /* WordCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9121517811B755550091AFEF /* WordCardViewController.m */; };
+		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
 		917A5B8D11AB7ADB00016BD2 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
@@ -228,6 +230,9 @@
 		91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PracticeModeCardViewDelegate.m; path = AppSpecific/PracticeModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214F4711B601490091AFEF /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = AppSpecific/CardViewController.h; sourceTree = "<group>"; };
 		91214F4811B601490091AFEF /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = AppSpecific/CardViewController.m; sourceTree = "<group>"; };
+		9121517711B755550091AFEF /* WordCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordCardViewController.h; path = AppSpecific/WordCardViewController.h; sourceTree = "<group>"; };
+		9121517811B755550091AFEF /* WordCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordCardViewController.m; path = AppSpecific/WordCardViewController.m; sourceTree = "<group>"; };
+		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		917A5B7E11AB7ADB00016BD2 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
@@ -811,6 +816,7 @@
 				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
+				9121517911B755550091AFEF /* WordCardViewController.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -825,18 +831,12 @@
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
 				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
-				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
-				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214F4711B601490091AFEF /* CardViewController.h */,
 				91214F4811B601490091AFEF /* CardViewController.m */,
-				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
-				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
 				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
-				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
-				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
 				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
@@ -865,6 +865,14 @@
 				917A5C6111AB83F900016BD2 /* UserImagePicker.m */,
 				917A5C6211AB83F900016BD2 /* UserImagePickerAlt.h */,
 				917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */,
+				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
+				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
+				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
+				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
+				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
+				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
+				9121517711B755550091AFEF /* WordCardViewController.h */,
+				9121517811B755550091AFEF /* WordCardViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1067,6 +1075,7 @@
 				4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */,
 				4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
 				4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
+				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,6 +1204,7 @@
 				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
 				4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
+				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

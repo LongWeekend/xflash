@@ -21,9 +21,12 @@
 #define SVC_ACTION_REPORT_BUTTON 0
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 
-
-@interface StudyViewController : UIViewController <UIActionSheetDelegate>
-{
+@interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate> {
+  
+  // scroll view
+  IBOutlet UIScrollView* scrollView;
+  IBOutlet UIPageControl* pageControl;
+ 
   MoodIcon *moodIcon;
   
   IBOutlet CardViewController *cardViewController;
@@ -70,6 +73,9 @@
 
   BOOL percentCorrectVisible;
   BOOL isBrowseMode;
+  
+  // page control state
+  BOOL pageControlIsChangingPage;
 
   // For statistics
   NSInteger numViewed;
@@ -77,9 +83,6 @@
   NSInteger numWrong;
   NSInteger currentRightStreak;
   NSInteger currentWrongStreak;
-
-  //For swipes
-  CGPoint startTouchPosition;
 }
 
 - (IBAction)doRevealMeaningBtn;
@@ -90,7 +93,7 @@
 - (IBAction)doBuryCardBtn;
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
-- (IBAction) showCardActionSheet;
+- (IBAction)showCardActionSheet;
 
 - (void)refreshProgressBarView;
 
@@ -103,8 +106,15 @@
 - (void)resetKeepingCurrentCard;
 - (NSMutableArray*) getLevelDetails;
 
-// Private
-- (void) _resetActionMenu;
+/* for pageControl */
+- (IBAction)changePage:(id)sender;
+
+/* internal */
+- (void)setupScrollView;
+
+// scroll view
+@property (nonatomic, retain) UIView *scrollView;
+@property (nonatomic, retain) UIPageControl* pageControl;
 
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
@@ -143,7 +153,5 @@
 @property NSInteger numViewed;
 @property NSInteger currentRightStreak;
 @property NSInteger currentWrongStreak;
-
-@property (nonatomic) CGPoint startTouchPosition;
 
 @end

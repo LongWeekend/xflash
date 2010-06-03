@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CardViewController.h"
+#import "WordCardViewController.h"
 
 @interface PracticeModeCardViewDelegate : NSObject {
-  BOOL meaningRevealed;
+  id cardViewController;
 }
 
-@property BOOL meaningRevealed;
+@property (nonatomic, retain) id cardViewController;
 
 @end
