@@ -52,7 +52,9 @@ extern NSString *const kAppiraterDeclinedToRate;
  This is the message your users will see once they've passed the day+launches
  threshold.
  */
-#define APPIRATER_MESSAGE [NSString stringWithFormat:@"Please take a minute to rate %@, or you can contact us directly on our support site. Thank you, you're awesome!", APPIRATER_APP_NAME]
+#define APPIRATER_MESSAGE [NSString stringWithFormat:@"If you are enjoying %@, please take a minute to rate us. Thank you, you're awesome!", APPIRATER_APP_NAME]
+
+#define APPIRATER_MESSAGE_MANUAL [NSString stringWithFormat:@"Please take a minute to rate %@, or you can contact us directly on our support site. Thank you, you're awesome!", APPIRATER_APP_NAME]
 
 /*
  This is the title of the message alert that users will see.
@@ -85,23 +87,22 @@ extern NSString *const kAppiraterDeclinedToRate;
  Users will need to have the same version of your app installed for this many
  days before they will be prompted to rate it.
  */
-#define DAYS_UNTIL_PROMPT 30 // double
+#define DAYS_UNTIL_PROMPT 21 // double
 
 /*
  Users will need to launch the same version of the app this many times before
  they will be prompted to rate it.
  */
-#define LAUNCHES_UNTIL_PROMPT 15 // integer
+#define LAUNCHES_UNTIL_PROMPT 10 // integer
 
 /*
  'YES' will show the Appirater alert everytime. Useful for testing how your message
  looks and making sure the link to your app's review page works.
  */
-#define APPIRATER_DEBUG NO
+#define APPIRATER_DEBUG YES
 
 @interface Appirater : NSObject <UIAlertViewDelegate> {
   BOOL manualMode;
-;
 }
 
 + (void)appLaunched;

@@ -170,7 +170,7 @@ NSString *feedbackURL = @"http://getsatisfaction.com/longweekend";
 - (void)showPromptManually {
   manualMode = YES;
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:APPIRATER_MESSAGE_TITLE
-                                                      message:APPIRATER_MESSAGE
+                                                      message:APPIRATER_MESSAGE_MANUAL
                                                      delegate:self
                                             cancelButtonTitle:@"Not Right Now"
                                             otherButtonTitles:APPIRATER_RATE_BUTTON, APPIRATER_FEEDBACK_BUTTON, nil];
@@ -193,8 +193,15 @@ NSString *feedbackURL = @"http://getsatisfaction.com/longweekend";
   switch (buttonIndex) {
     case 0:
     {
-      // they don't want to rate it
-      [userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
+      if(manualMode)
+      {
+        //they'll rate it later
+      }
+      else
+      {
+        // they don't want to rate it
+        [userDefaults setBool:YES forKey:kAppiraterDeclinedToRate];
+      }
       break;
     }
     case 1:
