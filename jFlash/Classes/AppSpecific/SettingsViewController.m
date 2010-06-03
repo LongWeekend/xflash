@@ -7,22 +7,8 @@
 //
 
 #import "SettingsViewController.h"
+#import "PluginSettingsViewController.h"
 #import "UserViewController.h"
-
-NSString * const SET_MODE_QUIZ       = @"QUIZ";
-NSString * const SET_MODE_BROWSE     = @"BROWSE";
-NSString * const SET_J_TO_E          = @"JPN";
-NSString * const SET_E_TO_J          = @"ENG";
-
-NSString * const SET_READING_KANA    = @"KANA";
-NSString * const SET_READING_ROMAJI  = @"ROMAJI";
-NSString * const SET_READING_BOTH    = @"BOTH";
-
-NSString * const APP_MODE            = @"mode";
-NSString * const APP_HEADWORD        = @"headword";
-NSString * const APP_READING         = @"reading";
-NSString * const APP_THEME           = @"theme";
-NSString * const APP_USER            = @"user_id";
 
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
@@ -75,12 +61,8 @@ NSString * const APP_USER            = @"user_id";
 
     NSArray *pluginNames = [NSArray arrayWithObjects:@"Install Plugins",nil];
     NSArray *pluginKeys = [NSArray arrayWithObjects:APP_PLUGIN,nil];
-    NSArray *pluginArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
+    NSArray *pluginArray = [NSArray arrayWithObjects:pluginNames,pluginKeys,@"",nil];
 
-    // Source plugin information from PluginManager
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    NSArray *pluginArray = [NSArray arrayWithObjects:[pm loadedPluginsByName],[pm loadedPluginsByKey],@"Installed Plugins",nil];
-    
     NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
@@ -212,6 +194,12 @@ NSString * const APP_USER            = @"user_id";
     cell.detailTextLabel.text = [[User getUser:[settings integerForKey:APP_USER]] userNickname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
+  else if (key == APP_PLUGIN)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.detailTextLabel.text = @"2 active";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
   else if (key == @"about")
   {
     // About section
@@ -261,6 +249,12 @@ NSString * const APP_USER            = @"user_id";
     UserViewController *userView = [[UserViewController alloc] init];
     [self.navigationController pushViewController:userView animated:YES];
     [userView release];
+  }
+  else if (key == APP_PLUGIN)
+  {
+    PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
+    [self.navigationController pushViewController:psvc animated:YES];
+    [psvc release];
   }
   else if (key == @"about")
   {

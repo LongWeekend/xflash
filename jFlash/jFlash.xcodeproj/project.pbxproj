@@ -121,7 +121,6 @@
 		917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6911AB844300016BD2 /* MainWindow.xib */; };
 		917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6A11AB844300016BD2 /* ModalInputView.xib */; };
 		917A5C7511AB844300016BD2 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6B11AB844300016BD2 /* ProgressView.xib */; };
-		917A5C7611AB844300016BD2 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6C11AB844300016BD2 /* SettingsView.xib */; };
 		917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6D11AB844300016BD2 /* StudySetView.xib */; };
 		917A5C7811AB844300016BD2 /* StudyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6E11AB844300016BD2 /* StudyView.xib */; };
 		917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
@@ -361,7 +360,6 @@
 		917A5C6911AB844300016BD2 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = XIBs/MainWindow.xib; sourceTree = "<group>"; };
 		917A5C6A11AB844300016BD2 /* ModalInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalInputView.xib; path = XIBs/ModalInputView.xib; sourceTree = "<group>"; };
 		917A5C6B11AB844300016BD2 /* ProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressView.xib; path = XIBs/ProgressView.xib; sourceTree = "<group>"; };
-		917A5C6C11AB844300016BD2 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingsView.xib; path = XIBs/SettingsView.xib; sourceTree = "<group>"; };
 		917A5C6D11AB844300016BD2 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudySetView.xib; path = XIBs/StudySetView.xib; sourceTree = "<group>"; };
 		917A5C6E11AB844300016BD2 /* StudyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyView.xib; path = XIBs/StudyView.xib; sourceTree = "<group>"; };
 		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
@@ -815,7 +813,6 @@
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
 				917A5C6A11AB844300016BD2 /* ModalInputView.xib */,
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
-				917A5C6C11AB844300016BD2 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
@@ -1073,7 +1070,6 @@
 				917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */,
 				917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */,
 				917A5C7511AB844300016BD2 /* ProgressView.xib in Resources */,
-				917A5C7611AB844300016BD2 /* SettingsView.xib in Resources */,
 				917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */,
 				917A5C7811AB844300016BD2 /* StudyView.xib in Resources */,
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
