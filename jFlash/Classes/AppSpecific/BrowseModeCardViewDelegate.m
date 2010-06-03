@@ -9,19 +9,23 @@
 #import "BrowseModeCardViewDelegate.h"
 #import "CardViewController.h"
 
-
 @implementation BrowseModeCardViewDelegate
+@synthesize cardViewController;
 
 //! Delegate messages
-- (BOOL)meaningWebView:(id)meaningWebView shouldHide:(BOOL)displayMeaning
-{
-  // always show the meaningWebView in Browse Mode
-  return NO;
-}
-
 - (void)cardViewWillSetup:(NSNotification *)aNotification
 {
-  [[aNotification object] setupReadingVisibility];
+  if([self cardViewController] == nil)
+  {
+    WordCardViewController *cvc = [[WordCardViewController alloc] init];
+    [self setCardViewController:cvc];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [[self cardViewController] layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
+    [[aNotification object] setView:[[self cardViewController] view]];
+  }
+  
+  [[self cardViewController] prepareView:[[aNotification object] currentCard]];
+  [[self cardViewController] setupReadingVisibility];
 }
 
 @end

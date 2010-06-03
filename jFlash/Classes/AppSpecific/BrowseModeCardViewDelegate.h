@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "WordCardViewController.h"
 
 @interface BrowseModeCardViewDelegate : NSObject 
 {
+  id cardViewController;
 }
+
+@property (nonatomic, retain) id cardViewController;
 
 @end

@@ -74,6 +74,7 @@
   BOOL percentCorrectVisible;
   BOOL isBrowseMode;
   
+  // page control state
   BOOL pageControlIsChangingPage;
 
   // For statistics
@@ -82,9 +83,6 @@
   NSInteger numWrong;
   NSInteger currentRightStreak;
   NSInteger currentWrongStreak;
-
-  //For swipes
-  CGPoint startTouchPosition;
 }
 
 - (IBAction)doRevealMeaningBtn;
@@ -95,7 +93,7 @@
 - (IBAction)doBuryCardBtn;
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
-- (IBAction) showCardActionSheet;
+- (IBAction)showCardActionSheet;
 
 - (void)refreshProgressBarView;
 
@@ -107,9 +105,6 @@
 - (void)resetStudySet;
 - (void)resetKeepingCurrentCard;
 - (NSMutableArray*) getLevelDetails;
-
-// Private
-- (void) _resetActionMenu;
 
 /* for pageControl */
 - (IBAction)changePage:(id)sender;
@@ -158,7 +153,5 @@
 @property NSInteger numViewed;
 @property NSInteger currentRightStreak;
 @property NSInteger currentWrongStreak;
-
-@property (nonatomic) CGPoint startTouchPosition;
 
 @end

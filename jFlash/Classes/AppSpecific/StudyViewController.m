@@ -7,15 +7,19 @@
 //
 #import "StudyViewController.h"
 
+// declare private methods here
+@interface StudyViewController()
+- (void)_resetActionMenu;
+- (void)_jumpToPage:(int)page;
+@end
+
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
-
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, percentCorrectVisible;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
-
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
-@synthesize startTouchPosition, practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardMeaningBtn, cardViewController, cardView;
+@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardMeaningBtn, cardViewController, cardView;
 @synthesize scrollView, pageControl;
 
 - (id) init
@@ -43,12 +47,52 @@
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     [alertView release];
+    // RSH Jun 3 2010 - why are we doing this in study view controller?  This shouldn't know about the program state
     appSettings.isFirstLoad = NO;
   }
   
  // redraw the progress bar
  [self refreshProgressBarView];
 }
+
+- (void) viewDidLoad
+{
+  LWE_LOG(@"START Study View");
+  [super viewDidLoad];
+  // This is called before drawing the view
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
+  
+  // Create a default mood icon object
+  [self setMoodIcon:[[MoodIcon alloc] init]];
+  [[self moodIcon] setMoodIconBtn:moodIconBtn];
+  [[self moodIcon] setPercentCorrectLabel:percentCorrectLabel];
+  
+  // Set view default states
+  [self setPercentCorrectVisible: YES];
+
+  // Initialize the progressBarView
+  [self setProgressBarViewController:[[ProgressBarViewController alloc] init]];
+  [[self progressBarView] addSubview:progressBarViewController.view];
+  
+  // Add the CardView to the View
+  [self setCardViewController:[[CardViewController alloc] init]];
+  [[self cardViewController] setCurrentCard:[self currentCard]];
+  [[self cardView] addSubview: [[self cardViewController] view]];  
+
+  // Reset child views
+  LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
+	[self resetStudySet];
+  LWE_LOG(@"END Study View");
+  
+  [self _resetActionMenu];
+  
+  [self setupScrollView];
+}
+
+#pragma mark Convenience methods
 
 - (void) _resetActionMenu
 {
@@ -90,45 +134,6 @@
   }
 }
 
-- (void) viewDidLoad
-{
-  LWE_LOG(@"START Study View");
-  [super viewDidLoad];
-  // This is called before drawing the view
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
-  
-  // Create a default mood icon object
-  [self setMoodIcon:[[MoodIcon alloc] init]];
-  [[self moodIcon] setMoodIconBtn:moodIconBtn];
-  [[self moodIcon] setPercentCorrectLabel:percentCorrectLabel];
-  
-  // Set view default states
-  // TODO: refactor to delegate of cardView
-  [self setPercentCorrectVisible: YES];
-
-  // Initialize the progressBarView
-  [self setProgressBarViewController:[[ProgressBarViewController alloc] init]];
-  [[self progressBarView] addSubview:progressBarViewController.view];
-  
-  // Add the CardView to the View
-  [self setCardViewController:[[CardViewController alloc] init]];
-  [[self cardViewController] setCurrentCard:[self currentCard]];
-  [[self cardView] addSubview: [[self cardViewController] view]];  
-
-  // Reset child views
-  LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
-	[self resetStudySet];
-  LWE_LOG(@"END Study View");
-  
-  [self _resetActionMenu];
-  
-  [self setupScrollView];
-}
-
-#pragma mark Convenience methods
 
 // a little overly complicated but needed to make the headword switch seemless for the user
 - (void) resetHeadword
@@ -157,9 +162,9 @@
     
   [self updateTheme];
   LWE_LOG(@"Calling prepareView on cardView FROM resetKeepingCurrentCard");
-  [[self cardViewController] layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
   [[self cardViewController] setCurrentCard:[self currentCard]];
-	[[self cardViewController] prepareView];
+	[[self cardViewController] setup];
+  [self _resetActionMenu];
 }
 
 - (void) resetStudySet
@@ -201,10 +206,11 @@
     [self setCurrentCard:card];
     [[self cardViewController] setCurrentCard:[self currentCard]];
     LWE_LOG(@"Calling prepareView FROM doChangeCard");
-    [[self cardViewController] prepareView];
+    [[self cardViewController] setup];
     [self _resetActionMenu];
     [self doCardTransition:(NSString *)kCATransitionPush direction:(NSString*)direction];
     [self refreshProgressBarView];
+    [self _jumpToPage:0];
   }
 }
 
@@ -303,7 +309,8 @@
 //! Hides the "Tap Here For Answer" overlays and reveals the actionBar
 - (IBAction) doRevealMeaningBtn
 {
-	[cardMeaningBtn setHidden:YES];
+  //TODO: refactor to action menu
+  [cardMeaningBtn setHidden:YES];
 	[cardMeaningBtnHint setHidden:YES];
 	[cardMeaningBtnHintMini setHidden:YES];
   
@@ -316,9 +323,10 @@
 	[wrongBtn setEnabled: YES];	
   [buryCardBtn setEnabled:YES];
   [addBtn setEnabled:YES];
-
-  [[[self cardViewController] delegate] setMeaningRevealed:YES];
-  [[self cardViewController] displayMeaningWebView];
+  
+  // this should also take and nothing else
+  // [actionMenuController reveal];
+  [cardViewController reveal];
 }
 
 - (IBAction) doTogglePercentCorrectBtn
@@ -442,45 +450,15 @@
   return levelDetails;
 }
 
-#pragma mark Touch interface methods
+#pragma mark -
+#pragma mark ScrollView
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  UITouch *touch = [touches anyObject];
-  startTouchPosition = [touch locationInView:self.view]; 
-}
-
-// TODO: make this a delegate method so we know what to do with a swipe
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  UITouch *touch = [touches anyObject];
-  CGPoint currentTouchPosition = [touch locationInView:self.view];
-    
-  // If the swipe tracks correctly.
-  if ((fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN &&
-      fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX) &&
-      self.isBrowseMode)
-      {
-      // It appears to be a swipe.
-      if (startTouchPosition.x < currentTouchPosition.x)
-        [self doPrevCardBtn];
-      else 
-        [self doNextCardBtn];
-  }
-  else
-  {
-    // Process a non-swipe event.
-  }
-}
-
-#pragma mark ScrollView setup stuff
 - (void)setupScrollView
 {
 	scrollView.delegate = self;
   
 	[scrollView setCanCancelContentTouches:NO];
 	
-	scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
 	scrollView.clipsToBounds = YES;
 	scrollView.scrollEnabled = YES;
 	scrollView.pagingEnabled = YES;
@@ -505,8 +483,8 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
-#pragma mark -
 #pragma mark UIScrollViewDelegate stuff
+
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
   if (pageControlIsChangingPage) 
@@ -527,7 +505,9 @@
   pageControlIsChangingPage = NO;
 }
 
+#pragma mark -
 #pragma mark PageControl stuff
+
 - (IBAction)changePage:(id)sender 
 {
 	/*
@@ -545,6 +525,13 @@
   pageControlIsChangingPage = YES;
 }
 
+-(void) _jumpToPage:(int)page
+{
+  [pageControl setCurrentPage: page];
+  [self changePage:pageControl];
+}
+
+#pragma mark -
 #pragma mark Class plumbing
 
 - (void)didReceiveMemoryWarning
