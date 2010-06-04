@@ -137,6 +137,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 }
 
 
+/**
+ * Depending on element type, returns stylized code (this is one stage of a two stage refactor)
+ */
+- (NSString*) elementWithCurrentTheme:(NSString*)element
+{
+  return [NSString stringWithFormat:@"/%@theme-cookie-cutters/%@",[self currentThemeFileName],element];
+}
+
+
+
 //! Provide list of names for all available themes
 - (NSArray*) themeNameList
 {
