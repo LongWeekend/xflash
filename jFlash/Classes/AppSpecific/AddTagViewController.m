@@ -168,21 +168,15 @@ enum EntrySectionRows
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *CellIdentifier;
+  UITableViewCell *cell = nil;
   if(indexPath.section == kEntrySection)
   {
-    CellIdentifier = @"EntryCell";
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"entry" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
   else 
   {
-    CellIdentifier = @"Cell";
-  }
-  
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil)
-  {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-  }  
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+  } 
 
   // setup the cell for the full entry
   if(indexPath.section == kEntrySection)
@@ -307,6 +301,8 @@ enum EntrySectionRows
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

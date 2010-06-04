@@ -19,6 +19,7 @@
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"
+#import "LWEDownloader.h"
 
 @protocol InitializationDelegate <NSObject>
 @optional

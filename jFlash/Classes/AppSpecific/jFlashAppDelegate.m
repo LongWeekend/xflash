@@ -14,6 +14,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {   
+  
 #if defined(APP_STORE_FINAL)
   // add analytics if this is live
   NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -31,6 +32,7 @@
   [window makeKeyAndVisible];
   
   [pool release];
+  
 }
 
 //! Flurry exception handler (only installed in final app store version)

@@ -21,7 +21,7 @@
   {
     // Default values for URL & metadata dictionary
     [self setTargetURL:nil];
-    downloaderState = kDownloaderInactive;
+    downloaderState = kDownloaderReady;
     _unzipShouldCancel = NO;
     _remoteFileIsGzipCompressed = NO;
     _compressedFilename = nil;
@@ -33,7 +33,7 @@
 /**
  * Default initializer - sets URL download target
  */
-- (id) initWithTargetURL: (NSString *) target targetFilename:(NSString*)tmpTargetFilename
+- (id) initWithTargetURL: (NSString *) target targetPath:(NSString*)tmpTargetFilename
 {
   if (self = [self init])
   {
@@ -120,15 +120,18 @@
   LWE_LOG(@"Unzip for file: %@",_compressedFilename);
   LWE_LOG(@"Target filename: %@",[self targetFilename]);
   
+  // TODO: enforce this Do disk size sanity check
+  LWE_LOG(@"Free disk space %d",[LWEFile getTotalDiskSpaceInBytes]);
+  
   gzFile file = gzopen([_compressedFilename UTF8String], "rb");
   FILE *dest = fopen([[self targetFilename] UTF8String], "w");
   unsigned char buffer[CHUNK];
   int uncompressedLength;
   int totalUncompressed = 0;
   // TODO: this is a hack but I am NO C programmer
-  int guessedFilesize = (requestSize * 2.3);
+  int guessedFilesize = (requestSize * 2.2);
   float decompressionProgress = 0.0f;
-  
+
   while (uncompressedLength = gzread(file, buffer, CHUNK))
   {
     // Update progress bar
@@ -160,17 +163,8 @@
   [self setProgress:1.0];
   
   // Delete the temporary download file
-  LWE_LOG(@"Deleting zip file");
-  NSError *error;
-  NSFileManager *fm = [NSFileManager defaultManager];
-  if (![fm removeItemAtPath:_compressedFilename error:&error])
-  {
-    // TODO: do we want to do something about this?
-    LWE_LOG(@"Unable to delete interim file!!");
-  }
+  [LWEFile deleteFile:_compressedFilename];
   
-  LWE_LOG(@"Finished unzipping database");
-
   // Get our main thread involved again on the next step
   [self performSelectorOnMainThread:@selector(_verifyDownload) withObject:nil waitUntilDone:NO];
   [pool release];
@@ -254,7 +248,7 @@
 - (void) startDownload
 {
   // Only download if we have a URL to get
-  if ([self targetURL] != nil)
+  if ([self targetURL] && (downloaderState == kDownloaderReady))
   {
     // Set up request
     _request = [ASIHTTPRequest requestWithURL:[self targetURL]];
@@ -263,14 +257,21 @@
     [_request setShowAccurateProgress:YES];
 
     // Handle file differently depending on processing requirements after the fact (unzip)
-    if (_remoteFileIsGzipCompressed)
+    if (_remoteFileIsGzipCompressed && _compressedFilename)
     {
       [_request setDownloadDestinationPath:_compressedFilename];
     }
-    else
+    else if ([self targetFilename])
     {
       [_request setDownloadDestinationPath:[self targetFilename]];      
     }
+    else
+    {
+      // Should throw exception.  We have no file to download to
+      [NSException raise:@"Invalid target filename passed to LWEDownloader" format:@"Was passed object: %@",[self targetFilename]];
+      return;
+    }
+
 
     // Update internal class status
     [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading...")];
@@ -303,6 +304,44 @@
   }
 }
 
+
+/**
+ * Tells the caller WHY we failed; if called in non-failure returns 0
+ */
+- (int) getFailureState
+{
+  if ([self isFailureState])
+  {
+    return downloaderState;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+
+/**
+ * Resets the downloader failed status, ready to try again
+ */
+- (void) resetDownload
+{
+  if ([self isFailureState])
+  {
+    // Delete all files
+    if ([LWEFile fileExists:_compressedFilename])
+    {
+      [LWEFile deleteFile:_compressedFilename];
+    }
+    if ([LWEFile fileExists:[self targetFilename]])
+    {
+      [LWEFile deleteFile:[self targetFilename]];
+    }
+    
+    // Reset state
+    [self _updateInternalState:kDownloaderReady withTaskMessage:NSLocalizedString(@"Downloader.reset",@"Downloader ready for retry")];
+  }
+}
 
 # pragma mark ASIHTTPRequest Delegate methods
 
@@ -354,11 +393,11 @@
   switch ([error code])
   {
     ASIConnectionFailureErrorType:
-      [self _updateInternalState:kDownloaderNetworkFail];
+      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Network Unavailable")];
       statusCode = ASIConnectionFailureErrorType;
       break;
     default:
-      [self _updateInternalState:kDownloaderNetworkFail];
+      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Network Unavailable")];
       statusCode = ASIConnectionFailureErrorType;
       break;
   }

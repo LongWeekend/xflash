@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "LWEDownloader.h"
+#import "PDColoredProgressView.h"
 
 @interface DownloaderViewController : UIViewController
 {
   // IBOutlet properties
   IBOutlet UILabel *statusMsgLabel;
   IBOutlet UILabel *taskMsgLabel;
-  IBOutlet UIProgressView *progressIndicator;
+  IBOutlet PDColoredProgressView *progressIndicator;
   IBOutlet UIButton *cancelButton;
+  IBOutlet UIButton *retryButton;
   
   // Downloader & Updater objects
   LWEDownloader *dlHandler;
@@ -32,11 +34,13 @@
 // IBActions
 - (IBAction) startDownloadProcess;
 - (IBAction) cancelDownloadProcess;
+- (IBAction) retryDownloadProcess;
 
 @property (nonatomic, retain) IBOutlet UILabel *statusMsgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *taskMsgLabel;
-@property (nonatomic, retain) IBOutlet UIProgressView *progressIndicator;
+@property (nonatomic, retain) IBOutlet PDColoredProgressView *progressIndicator;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
+@property (nonatomic, retain) IBOutlet UIButton *retryButton;
 
 @property (nonatomic, retain) LWEDownloader *dlHandler;
 

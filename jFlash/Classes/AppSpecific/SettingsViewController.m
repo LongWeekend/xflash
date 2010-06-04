@@ -59,7 +59,8 @@
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
 
-    NSArray *pluginNames = [NSArray arrayWithObjects:@"Install Plugins",nil];
+    // Plugins (extra dictionaries)
+    NSArray *pluginNames = [NSArray arrayWithObjects:@"Downloaded Plugins",nil];
     NSArray *pluginKeys = [NSArray arrayWithObjects:APP_PLUGIN,nil];
     NSArray *pluginArray = [NSArray arrayWithObjects:pluginNames,pluginKeys,@"",nil];
 
@@ -85,6 +86,7 @@
 
 - (void)viewWillAppear: (BOOL)animated
 {
+  [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Rate Us" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
@@ -97,6 +99,7 @@
 // Only re-load the set if settings were changed, otherwise there is no need to do anything
 - (void) viewWillDisappear: (BOOL)animated
 {
+  [super viewWillDisappear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   if (settingsChanged)
   {
@@ -197,7 +200,8 @@
   else if (key == APP_PLUGIN)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
-    cell.detailTextLabel.text = @"2 active";
+    int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == @"about")
@@ -287,6 +291,8 @@
 
 - (void)dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [settingsDict release];
   [sectionArray release];
   [appirater release];

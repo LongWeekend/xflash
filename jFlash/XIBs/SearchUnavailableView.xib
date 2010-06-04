@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">768</int>
-		<string key="IBDocument.SystemVersion">10A432</string>
+		<string key="IBDocument.SystemVersion">10D578</string>
 		<string key="IBDocument.InterfaceBuilderVersion">759</string>
-		<string key="IBDocument.AppKitVersion">1038</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">79</string>
@@ -45,14 +45,19 @@
 					<object class="IBUILabel" id="120286244">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{53, 66}, {227, 89}}</string>
+						<string key="NSFrame">{{10, 3}, {300, 257}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">You don't have FTS - it rules</string>
+						<string type="base64-UTF8" key="IBUIText">SmFwYW5lc2UgRmxhc2ggaGFzIGFuCkF3ZXNvbWVseSBGYXN0IGRpY3Rpb25hcnkuClRvIGtlZXAgdGhl
+IGNvbnRlbnQgdXAtdG8tZGF0ZSBhbmQKZnJlc2gsIHdlIGFzayB5b3UgdG8gZG93bmxvYWQKdGhlIGRp
+Y3Rpb25hcnkgcGx1Z2luIGhlcmUsIHdpdGhpbgpKYXBhbmVzZSBGbGFzaCAob2YgY291cnNlIGl0J3Mg
+ZnJlZSkuCgpUaGUgcGx1Z2luIGlzIGFwcHJveGltYXRlbHkgMjBNQiwKc28geW91IG1heSB3aXNoIHRv
+IGRvd25sb2FkIGl0Cm92ZXIgV2lGaSBpbnN0ZWFkIG9mIDNHIGlmIHlvdXIKY2FycmllciBjaGFyZ2Vz
+IHBlciB1bml0IG9mIGJhbmR3aWR0aC4</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -60,15 +65,18 @@
 						<nil key="IBUIHighlightedColor"/>
 						<object class="NSColor" key="IBUIShadowColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44OTE1NTgzMDk4IDAuODcwMTY5NzY0OCAwLjg5Mjg1NzE0MjkAA</bytes>
+							<bytes key="NSRGB">MC44OTE1NTgzMDk4IDAuODcwMTY5NzY0OCAwLjg5Mjg1NzE0MjkgMAA</bytes>
 						</object>
-						<int key="IBUIBaselineAdjustment">1</int>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUINumberOfLines">19</int>
+						<int key="IBUITextAlignment">1</int>
+						<int key="IBUILineBreakMode">0</int>
 					</object>
 					<object class="IBUIButton" id="440617603">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{54, 223}, {202, 37}}</string>
+						<string key="NSFrame">{{59, 297}, {202, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -80,7 +88,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Download that Shit NOW</string>
+						<string key="IBUINormalTitle">Start Download Now</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -95,7 +103,7 @@
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 436}</string>
+				<string key="NSFrameSize">{320, 367}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -104,9 +112,11 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
+				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</object>
@@ -188,7 +198,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SearchUnavailableViewController</string>
 					<string>UIResponder</string>
-					<string>{{354, 412}, {320, 480}}</string>
+					<string>{{354, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

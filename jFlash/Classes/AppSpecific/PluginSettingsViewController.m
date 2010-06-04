@@ -13,35 +13,30 @@
 
 @implementation PluginSettingsViewController
 
-@synthesize tableView;
+@synthesize tableView, availablePlugins, installedPlugins;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
+//! UIView delegate - sets tint color et al of the nav bar
+- (void)viewWillAppear: (BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  [[self tableView] setBackgroundColor:[UIColor clearColor]];
 }
-*/
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-  
-  
-  // Source plugin information from PluginManager
-  
+//! UIView delegate - sets title & creates plugin arrays
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  [self setTitle:@"Plugins"];
+
+  // Get plugin data
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  NSArray *pluginArray = [NSArray arrayWithObjects:[pm loadedPluginsByName],[pm loadedPluginsByKey],@"Installed Plugins",nil];  
-  
+  [self setInstalledPlugins:[pm loadedPlugins]];
+  [self setAvailablePlugins:[pm availablePlugins]];
 }
+
 
 # pragma mark UITableView delegate methods
 
@@ -58,40 +53,50 @@
 {
   if (section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
-    return 1;
+    return [[self installedPlugins] count];
   }
   else
   {
     // section == PLUGIN_SETTINGS_AVAILABLE_SECTION
-    return 1;
+    return [[self availablePlugins] count];
   }
 }
 
 //! Makes the table cells
-- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+- (UITableViewCell *)tableView: (UITableView *)lclTableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:tableView usingStyle:UITableViewCellStyleValue1];
+  UITableViewCell *cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
   if (indexPath.section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    cell.detailTextLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
+    cell.textLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
-  cell.detailTextLabel.text = @"Text about plugin";
-  cell.textLabel.text = @"plugin name"; //displayName;
+  else
+  {
+    cell.detailTextLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
+    cell.textLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
+  }
+
   return cell;  
 }
 
 //! what to do if selected
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == PLUGIN_SETTINGS_AVAILABLE_SECTION)
   {
-    LWE_LOG(@"INSTALL A PLUGIN");
+    [lclTableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    // Fire off a notification to bring up the downloader
+    NSDictionary *dict = [[self availablePlugins] objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
   }
 }
 
 //! Get the titles
-- (NSString *) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *) tableView: (UITableView*) lclTableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {

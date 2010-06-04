@@ -17,20 +17,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
 /** 
  * Returns true if the database file specified by 'pathToDatabase' exists
+ * TODO: refactor this method out, just use LWEFile, that's what it's there for
  */
 - (BOOL) databaseFileExists:(NSString*)pathToDatabase
 {
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  if([fileManager fileExistsAtPath:pathToDatabase])
-  {
-    LWE_LOG(@"Database file found at specified location: %@",pathToDatabase);
-    return YES;
-  }
-  else
-  {
-    LWE_LOG(@"No database file located at specified location: %@",pathToDatabase);
-    return NO;
-  }
+  return [LWEFile fileExists:pathToDatabase];
 }
 
 

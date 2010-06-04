@@ -25,7 +25,7 @@
   return self;
 }
 
-- (void)loadView
+- (void) loadView
 {
   [super loadView];
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser:)];
@@ -213,6 +213,8 @@
 
 - (void)dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
+  
   [usersArray release];
   [statusMsgBox release];
   [super dealloc];

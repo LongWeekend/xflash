@@ -17,7 +17,7 @@
 //! State machine for the downloader
 typedef enum _downloaderStates
 {
-  kDownloaderInactive,                //! Downloader inactive
+  kDownloaderReady,                   //! Downloader ready to go
   kDownloaderCancelled,               //! Downloader cancelled
   kDownloaderRetrievingMetaData,      //! Retrieving data about to-be-downloaded package
   kDownloaderRetrievingData,          //! Retrieving actual data
@@ -73,10 +73,12 @@ typedef enum _downloaderStates
 
 
 // Class methods
-- (id) initWithTargetURL: (NSString *) target targetFilename:(NSString*)targetFilename;
+- (id) initWithTargetURL: (NSString *) target targetPath:(NSString*)targetFilename;
 - (void) startDownload;
 - (void) cancelDownload;
+- (void) resetDownload;
 - (BOOL) isFailureState;
+- (int) getFailureState;
 - (BOOL) isSuccessState;
 
 //! Unzip file we have just downloaded - designed for background thread
