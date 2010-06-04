@@ -7,10 +7,8 @@
 //
 
 #import "SettingsViewController.h"
+#import "PluginSettingsViewController.h"
 #import "UserViewController.h"
-
-//TODO: this is only for debug
-#import "ReportBadDataViewController.h"
 
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
@@ -61,10 +59,10 @@
     NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
     NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
 
-    // Source plugin information from PluginManager
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    NSArray *pluginArray = [NSArray arrayWithObjects:[pm loadedPluginsByName],[pm loadedPluginsByKey],@"Installed Plugins",nil];
-    
+    NSArray *pluginNames = [NSArray arrayWithObjects:@"Install Plugins",nil];
+    NSArray *pluginKeys = [NSArray arrayWithObjects:APP_PLUGIN,nil];
+    NSArray *pluginArray = [NSArray arrayWithObjects:pluginNames,pluginKeys,@"",nil];
+
     NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
@@ -196,6 +194,12 @@
     cell.detailTextLabel.text = [[User getUser:[settings integerForKey:APP_USER]] userNickname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
+  else if (key == APP_PLUGIN)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.detailTextLabel.text = @"2 active";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
   else if (key == @"about")
   {
     // About section
@@ -245,6 +249,12 @@
     UserViewController *userView = [[UserViewController alloc] init];
     [self.navigationController pushViewController:userView animated:YES];
     [userView release];
+  }
+  else if (key == APP_PLUGIN)
+  {
+    PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
+    [self.navigationController pushViewController:psvc animated:YES];
+    [psvc release];
   }
   else if (key == @"about")
   {

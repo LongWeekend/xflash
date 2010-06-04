@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "Appirater.h"
 
+
 @interface SettingsViewController : UITableViewController
 {
   NSMutableArray *sectionArray;

@@ -13,6 +13,8 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
+		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
+		490820A611B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4950C25411B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
@@ -118,7 +120,6 @@
 		917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6911AB844300016BD2 /* MainWindow.xib */; };
 		917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6A11AB844300016BD2 /* ModalInputView.xib */; };
 		917A5C7511AB844300016BD2 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6B11AB844300016BD2 /* ProgressView.xib */; };
-		917A5C7611AB844300016BD2 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6C11AB844300016BD2 /* SettingsView.xib */; };
 		917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6D11AB844300016BD2 /* StudySetView.xib */; };
 		917A5C7811AB844300016BD2 /* StudyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6E11AB844300016BD2 /* StudyView.xib */; };
 		917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
@@ -189,6 +190,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
+		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		494D6C6411AE1AF1006DADF1 /* jFlashApplicationTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlashApplicationTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,7 +360,6 @@
 		917A5C6911AB844300016BD2 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = XIBs/MainWindow.xib; sourceTree = "<group>"; };
 		917A5C6A11AB844300016BD2 /* ModalInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalInputView.xib; path = XIBs/ModalInputView.xib; sourceTree = "<group>"; };
 		917A5C6B11AB844300016BD2 /* ProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressView.xib; path = XIBs/ProgressView.xib; sourceTree = "<group>"; };
-		917A5C6C11AB844300016BD2 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingsView.xib; path = XIBs/SettingsView.xib; sourceTree = "<group>"; };
 		917A5C6D11AB844300016BD2 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudySetView.xib; path = XIBs/StudySetView.xib; sourceTree = "<group>"; };
 		917A5C6E11AB844300016BD2 /* StudyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyView.xib; path = XIBs/StudyView.xib; sourceTree = "<group>"; };
 		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
@@ -824,6 +825,7 @@
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				9121517911B755550091AFEF /* WordCardViewController.xib */,
+				490820A411B7959500150499 /* PluginSettingsView.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -1073,7 +1075,6 @@
 				917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */,
 				917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */,
 				917A5C7511AB844300016BD2 /* ProgressView.xib in Resources */,
-				917A5C7611AB844300016BD2 /* SettingsView.xib in Resources */,
 				917A5C7711AB844300016BD2 /* StudySetView.xib in Resources */,
 				917A5C7811AB844300016BD2 /* StudyView.xib in Resources */,
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
@@ -1087,6 +1088,7 @@
 				4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
 				91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */,
+				490820A511B7959500150499 /* PluginSettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1110,7 @@
 				4951E0FE11B61F7D00FCE21E /* CardView.xib in Resources */,
 				4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
 				4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
+				490820A611B7959500150499 /* PluginSettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
