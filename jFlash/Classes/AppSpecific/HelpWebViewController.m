@@ -37,7 +37,7 @@
   // Set up the views
   UIView *baseView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
   UIWebView *htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
-  [htmlView setBackgroundColor:[UIColor clearColor]];
+  [htmlView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]]];
   [htmlView loadRequest:requestObj];
   [baseView addSubview:htmlView];
   baseView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
