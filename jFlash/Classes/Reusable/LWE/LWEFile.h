@@ -15,5 +15,7 @@
 }
 
 + (NSString*) createDocumentPathWithFilename:(NSString*) filename;
-
++ (BOOL) deleteFile:(NSString*)filename;
++ (BOOL) fileExists:(NSString*)filename;
++ (NSInteger) getTotalDiskSpaceInBytes;
 @end
