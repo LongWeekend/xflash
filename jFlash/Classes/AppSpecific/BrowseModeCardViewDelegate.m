@@ -8,6 +8,7 @@
 
 #import "BrowseModeCardViewDelegate.h"
 #import "CardViewController.h"
+#import "ActionBarViewController.h"
 
 @implementation BrowseModeCardViewDelegate
 @synthesize cardViewController;
@@ -26,6 +27,28 @@
   
   [[self cardViewController] prepareView:[[aNotification object] currentCard]];
   [[self cardViewController] setupReadingVisibility];
+}
+
+- (void)actionBarWillSetup:(NSNotification *)aNotification
+{
+  [[[aNotification object] cardMeaningBtn] setHidden:YES];
+  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
+  [[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
+  [[[aNotification object] prevCardBtn] setHidden:NO];
+  [[[aNotification object] nextCardBtn] setHidden:NO];
+  
+  // tell the practice mode to piss off
+  [[[aNotification object] rightBtn] setHidden:YES];
+  [[[aNotification object] wrongBtn] setHidden:YES];
+  [[[aNotification object] buryCardBtn] setHidden:YES];
+  [[[aNotification object] addBtn] setHidden:YES];
+  [[[aNotification object] cardMeaningBtn] setHidden:YES];
+  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
+  [[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
+
+  // kana....?
+  // TODO: this needs to be called on studyviewcontroller
+  //[[[aNotification object] superview] doTogglePercentCorrectBtn];
 }
 
 @end

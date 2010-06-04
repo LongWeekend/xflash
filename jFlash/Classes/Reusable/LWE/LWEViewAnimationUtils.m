@@ -22,4 +22,20 @@
   [UIView commitAnimations];
 }
 
+// Transition between cards after a button has been pressed
++ (void) doViewTransition:(NSString *)transition direction:(NSString *)direction duration:(float)duration objectToTransition:(UIViewController *)controllerToTransition
+{
+	UIView *theWindow = [controllerToTransition.view superview];
+	[UIView beginAnimations:nil context:NULL];
+  
+	// set up an animation for the transition between the views
+	CATransition *animation = [CATransition animation];
+	[animation setDelegate:controllerToTransition];
+	[animation setDuration:duration];
+	[animation setType:transition];
+	[animation setSubtype:direction];
+  [[theWindow layer] addAnimation:animation forKey:kAnimationKey];
+	[UIView commitAnimations];
+}
+
 @end

@@ -11,16 +11,16 @@
 @interface StudyViewController()
 - (void)_resetActionMenu;
 - (void)_jumpToPage:(int)page;
+- (void)_updateCardViewDelegates;
 @end
 
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
-@synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn, percentCorrectVisible;
-@synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
-@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
-@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardMeaningBtn, cardViewController, cardView;
+@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, percentCorrectVisible, isBrowseMode, hhAnimationView;
+@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
 @synthesize scrollView, pageControl;
+@synthesize actionBarController, actionbarView;
 
 - (id) init
 {
@@ -64,6 +64,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(revealCard) name:@"actionBarDidRevealNotification" object:nil];
   
   // Create a default mood icon object
   [self setMoodIcon:[[MoodIcon alloc] init]];
@@ -81,6 +83,11 @@
   [self setCardViewController:[[CardViewController alloc] init]];
   [[self cardViewController] setCurrentCard:[self currentCard]];
   [[self cardView] addSubview: [[self cardViewController] view]];  
+  
+  // Add the Action Bar to the View
+  [self setActionBarController:[[ActionBarViewController alloc] init]];
+  [[self actionBarController] setControllee: self];
+  [[self actionbarView] addSubview: [[self actionBarController] view]];
 
   // Reset child views
   LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
@@ -96,28 +103,8 @@
 
 - (void) _resetActionMenu
 {
-  [rightBtn setHidden:YES];
-  [wrongBtn setHidden:YES];
-  [buryCardBtn setHidden:YES];
-  [addBtn setHidden:YES];
-  
-	if(isBrowseMode == YES)
-  {
-    [cardMeaningBtn setHidden:YES];
-    [cardMeaningBtnHint setHidden:YES];
-    [cardMeaningBtnHintMini setHidden:YES];
-    [prevCardBtn setHidden:NO];
-    [nextCardBtn setHidden:NO];
-    [self doTogglePercentCorrectBtn];
-	}
-	else
-  {
-    [cardMeaningBtn setHidden:NO];
-    [cardMeaningBtnHint setHidden:NO];
-    [cardMeaningBtnHintMini setHidden:NO];
-    [prevCardBtn setHidden:YES];
-    [nextCardBtn setHidden:YES];
-	}
+  [actionBarController setup];
+  [[self view] bringSubviewToFront:[self actionbarView]];
   
   if(!percentCorrectVisible && !self.isBrowseMode){
     [self doTogglePercentCorrectBtn];
@@ -134,7 +121,6 @@
   }
 }
 
-
 // a little overly complicated but needed to make the headword switch seemless for the user
 - (void) resetHeadword
 {
@@ -143,27 +129,34 @@
   [self resetKeepingCurrentCard];
 }
 
-// Almost the same as resetStudySet, but keeps the same session, and visible card
-- (void) resetKeepingCurrentCard
-{
+- (void) _updateCardViewDelegates {
+  id cardViewControllerDelegate;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;
-    BrowseModeCardViewDelegate *cardViewControllerDelegate = [[BrowseModeCardViewDelegate alloc] init];
-    [cardViewController setDelegate:cardViewControllerDelegate];
+    cardViewControllerDelegate = [[BrowseModeCardViewDelegate alloc] init];
   }
   else
   {
     self.isBrowseMode = NO;
-    PracticeModeCardViewDelegate *cardViewControllerDelegate = [[PracticeModeCardViewDelegate alloc] init];
-    [cardViewController setDelegate:cardViewControllerDelegate];
+    cardViewControllerDelegate = [[PracticeModeCardViewDelegate alloc] init];
   }
+  [cardViewController setDelegate:cardViewControllerDelegate];
+  [actionBarController setDelegate:cardViewControllerDelegate];
+}
+
+//! Resets the study view without getting a new card
+- (void) resetKeepingCurrentCard
+{
+  [self _updateCardViewDelegates];
     
   [self updateTheme];
+  
   LWE_LOG(@"Calling prepareView on cardView FROM resetKeepingCurrentCard");
   [[self cardViewController] setCurrentCard:[self currentCard]];
 	[[self cardViewController] setup];
+  
   [self _resetActionMenu];
 }
 
@@ -177,11 +170,13 @@
   numWrong = 0;
   numViewed = 0;
   [percentCorrectLabel setText:percentCorrectLabelStartText];
+  [moodIcon updateMoodIcon:100.0f];
   
   [cardSetLabel setText:[NSString stringWithFormat:@"Set: %@",currentCardSet.tagName]];
   
   Card* card = [[currentStateSingleton activeTag] getFirstCard];
   [self setCurrentCard:card];
+  
   LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
   [self resetKeepingCurrentCard];
   
@@ -196,7 +191,13 @@
   [[self progressBarViewController] drawProgressBar];
 }
 
-#pragma mark Generic Transition Methods
+- (void) revealCard
+{
+  [[self view] sendSubviewToBack:[self actionbarView]];
+  [cardViewController reveal];
+}
+
+#pragma mark Transition Methods
 
 //! Basic method to change cards
 - (void) doChangeCard: (Card*) card direction:(NSString*)direction
@@ -207,40 +208,30 @@
     [[self cardViewController] setCurrentCard:[self currentCard]];
     LWE_LOG(@"Calling prepareView FROM doChangeCard");
     [[self cardViewController] setup];
+    
     [self _resetActionMenu];
-    [self doCardTransition:(NSString *)kCATransitionPush direction:(NSString*)direction];
+    
+    [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)direction duration:(float)0.15f objectToTransition:(UIViewController *)self];
+    
     [self refreshProgressBarView];
+    
+    //move the scroll view back to the card
     [self _jumpToPage:0];
   }
 }
 
-// Transition between cards after a button has been pressed
-- (void) doCardTransition:(NSString *)transition direction:(NSString *)direction
-{
-	UIView *theWindow = [self.view superview];
-	[UIView beginAnimations:nil context:NULL];
-  
-	// set up an animation for the transition between the views
-	CATransition *animation = [CATransition animation];
-	[animation setDelegate:self];
-	[animation setDuration:0.15];
-	[animation setType:transition];
-	[animation setSubtype:direction];
-  [[theWindow layer] addAnimation:animation forKey:kAnimationKey];
-	[UIView commitAnimations];
-}
-
 # pragma mark IBOutlet Button Actions
 
-- (void) doCardBtn: (int)action
+- (void) doCardBtn: (NSNotification *)aNotification
 {
+  int action = [[aNotification object] intValue];
+  
   // Hold on to the last card
   Card* lastCard = nil;
   lastCard = [self currentCard];
   [lastCard retain];
 
   BOOL knewIt = NO;
-  numViewed++;
   
 	switch (action)
   {
@@ -257,6 +248,7 @@
     
     case RIGHT_BTN:
       numRight++;
+      numViewed++;
       currentRightStreak++;
       currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
@@ -265,6 +257,7 @@
       
     case WRONG_BTN:
       numWrong++;
+      numViewed++;
       currentWrongStreak++;
       currentRightStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
@@ -278,55 +271,6 @@
 
   // Releases
   [lastCard release];
-}
-
-- (IBAction) doNextCardBtn
-{
-  [self doCardBtn:NEXT_BTN];
-}
-
-- (IBAction) doPrevCardBtn
-{
-  [self doCardBtn:PREV_BTN];
-}
-
-- (IBAction) doBuryCardBtn
-{
-  [self doCardBtn:BURY_BTN];
-}
-
-- (IBAction) doRightBtn
-{
-  [self doCardBtn:RIGHT_BTN];
-}
-
-- (IBAction) doWrongBtn
-{
-  [self doCardBtn:WRONG_BTN];
-}
-
-
-//! Hides the "Tap Here For Answer" overlays and reveals the actionBar
-- (IBAction) doRevealMeaningBtn
-{
-  //TODO: refactor to action menu
-  [cardMeaningBtn setHidden:YES];
-	[cardMeaningBtnHint setHidden:YES];
-	[cardMeaningBtnHintMini setHidden:YES];
-  
-	[rightBtn setHidden:NO];
-	[wrongBtn setHidden:NO];
-  [addBtn setHidden:NO];
-  [buryCardBtn setHidden:NO];
-  
-  [rightBtn setEnabled: YES];
-	[wrongBtn setEnabled: YES];	
-  [buryCardBtn setEnabled:YES];
-  [addBtn setEnabled:YES];
-  
-  // this should also take and nothing else
-  // [actionMenuController reveal];
-  [cardViewController reveal];
 }
 
 - (IBAction) doTogglePercentCorrectBtn
@@ -346,46 +290,7 @@
   }
 }
 
-//! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
-- (IBAction) showCardActionSheet
-{
-  UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Card Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Help Us Fix This Card",@"Add Card to Study Set",nil];
-  [as showInView:[self view]];
-  [as release];
-}
-
-#pragma mark UIActionSheetDelegate methods - for "add to set" or "report bad data" action sheet
-
-//! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
-  {
-     ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[self currentCard]];
-     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:rbdvc];
-     [[self parentViewController] presentModalViewController:modalNavController animated:YES];
-     [modalNavController release];
-     [rbdvc release];
-  }
-  else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
-  {
-    // TODO: shouldn't this be inside of the AddTagViewController?  Or is it out here because we don't have a nav controller?  MMA 6/2/2010
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:[self parentViewController] action:@selector(dismissModalViewControllerAnimated:)];
-    AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
-    modalViewController.cardId = currentCard.cardId;
-    modalViewController.navigationItem.leftBarButtonItem = doneBtn;
-    modalViewController.navigationItem.title = @"Add Word To Sets";
-    modalViewController.currentCard = currentCard;
-    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-    modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-    [[self parentViewController] presentModalViewController:modalNavControl animated:YES];
-    [modalNavControl release];
-    [doneBtn release];    
-  }
-  // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
-}
-
-
+#pragma mark -
 #pragma mark progressModal
 
 - (IBAction) doShowProgressModalBtn
@@ -417,12 +322,6 @@
 {
   NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[[ThemeManager sharedThemeManager] currentThemeFileName]];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]]];
-  float tmpRatio;
-  if(numViewed == 0)
-    tmpRatio = 100.0f;
-  else
-    tmpRatio = 100*((float)numRight / (float)numViewed);
-  [moodIcon updateMoodIcon:tmpRatio];
 }
 
 - (NSMutableArray*) getLevelDetails
@@ -555,14 +454,6 @@
   [hhAnimationView release];
   [moodIcon release];
   
-  // refactor out of here - actionMenu
-  [addBtn release];
-  [buryCardBtn release];
-  [nextCardBtn release];
-  [prevCardBtn release];
-  [rightBtn release];
-  [wrongBtn release];
-  
   //progress stuff
   [progressBarView release];
   [progressBarViewController release];
@@ -570,10 +461,11 @@
   [progressModalBtn release];
   
   //card view stuff
-  [cardMeaningBtnHint release];
-  [cardMeaningBtnHintMini release];
   [cardViewController release];
   [cardView release];
+  
+  //action bar
+  [actionBarController release];
   
   //state
   [currentCardSet release];

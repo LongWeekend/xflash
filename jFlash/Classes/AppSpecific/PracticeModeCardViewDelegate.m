@@ -61,6 +61,42 @@
   [[self cardViewController] setReadingVisible:userSetReadingVisible];
 }
 
+#pragma mark -
+#pragma mark Action Bar Delegate Methods
+
+-(void) actionBarWillSetup:(NSNotification *)aNotification
+{
+  [[[aNotification object] rightBtn] setHidden:YES];
+  [[[aNotification object] wrongBtn] setHidden:YES];
+  [[[aNotification object] buryCardBtn] setHidden:YES];
+  [[[aNotification object] addBtn] setHidden:YES];
+  [[[aNotification object] cardMeaningBtn] setHidden:NO];
+  [[[aNotification object] cardMeaningBtnHint] setHidden:NO];
+  [[[aNotification object] cardMeaningBtnHintMini] setHidden:NO];
+  [[[aNotification object] prevCardBtn] setHidden:YES];
+  [[[aNotification object] nextCardBtn] setHidden:YES];
+}
+
+-(void) actionBarWillReveal:(NSNotification *)aNotification
+{
+  [[[aNotification object] cardMeaningBtn] setHidden:YES];
+	[[[aNotification object] cardMeaningBtnHint] setHidden:YES];
+	[[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
+  
+	[[[aNotification object] rightBtn] setHidden:NO];
+	[[[aNotification object] wrongBtn] setHidden:NO];
+  [[[aNotification object] addBtn] setHidden:NO];
+  [[[aNotification object] buryCardBtn] setHidden:NO];
+  
+  [[[aNotification object] rightBtn] setEnabled: YES];
+	[[[aNotification object] wrongBtn] setEnabled: YES];	
+  [[[aNotification object] buryCardBtn] setEnabled:YES];
+  [[[aNotification object] addBtn] setEnabled:YES];
+}
+
+#pragma mark -
+#pragma mark Clas Plumbing
+
 - (void)dealloc 
 {
   [cardViewController release];  

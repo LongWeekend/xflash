@@ -114,7 +114,6 @@
 		917A5C6411AB83F900016BD2 /* UserImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C6111AB83F900016BD2 /* UserImagePicker.m */; };
 		917A5C6511AB83F900016BD2 /* UserImagePickerAlt.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */; };
 		917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
-		917A5C7111AB844300016BD2 /* HelpScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6711AB844300016BD2 /* HelpScrollView.xib */; };
 		917A5C7211AB844300016BD2 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6811AB844300016BD2 /* HelpView.xib */; };
 		917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6911AB844300016BD2 /* MainWindow.xib */; };
 		917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6A11AB844300016BD2 /* ModalInputView.xib */; };
@@ -130,6 +129,8 @@
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
+		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
@@ -353,7 +354,6 @@
 		917A5C6211AB83F900016BD2 /* UserImagePickerAlt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserImagePickerAlt.h; path = AppSpecific/UserImagePickerAlt.h; sourceTree = "<group>"; };
 		917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserImagePickerAlt.m; path = AppSpecific/UserImagePickerAlt.m; sourceTree = "<group>"; };
 		917A5C6611AB844300016BD2 /* AddTagView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddTagView.xib; path = XIBs/AddTagView.xib; sourceTree = "<group>"; };
-		917A5C6711AB844300016BD2 /* HelpScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpScrollView.xib; path = XIBs/HelpScrollView.xib; sourceTree = "<group>"; };
 		917A5C6811AB844300016BD2 /* HelpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpView.xib; path = XIBs/HelpView.xib; sourceTree = "<group>"; };
 		917A5C6911AB844300016BD2 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = XIBs/MainWindow.xib; sourceTree = "<group>"; };
 		917A5C6A11AB844300016BD2 /* ModalInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalInputView.xib; path = XIBs/ModalInputView.xib; sourceTree = "<group>"; };
@@ -375,6 +375,9 @@
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
+		91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionBarViewController.m; sourceTree = "<group>"; };
+		91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = Classes/ActionBarViewController.xib; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
@@ -804,22 +807,22 @@
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */,
+				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				4951E0FC11B61F7D00FCE21E /* CardView.xib */,
 				49F9686811AF604900DFC3C9 /* DownloaderView.xib */,
-				917A5C6611AB844300016BD2 /* AddTagView.xib */,
-				917A5C6711AB844300016BD2 /* HelpScrollView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
+				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
 				917A5C6A11AB844300016BD2 /* ModalInputView.xib */,
+				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
+				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
+				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
 				917A5C6C11AB844300016BD2 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
-				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
-				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
-				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
-				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
 				9121517911B755550091AFEF /* WordCardViewController.xib */,
 			);
 			name = XIBs;
@@ -831,6 +834,8 @@
 			children = (
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
+				91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */,
+				91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */,
 				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
@@ -1064,7 +1069,6 @@
 				D3309B0F1123C7D800B73E8E /* help in Resources */,
 				9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */,
 				917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */,
-				917A5C7111AB844300016BD2 /* HelpScrollView.xib in Resources */,
 				917A5C7211AB844300016BD2 /* HelpView.xib in Resources */,
 				917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */,
 				917A5C7411AB844300016BD2 /* ModalInputView.xib in Resources */,
@@ -1082,6 +1086,7 @@
 				4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
 				4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
+				91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1212,6 +1217,7 @@
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
+				91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

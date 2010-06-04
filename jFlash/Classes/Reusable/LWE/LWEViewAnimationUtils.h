@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface LWEViewAnimationUtils : NSObject {
@@ -14,6 +15,7 @@
 }
 
 + (void) translateView:(UIView*)view byPoint:(CGPoint)point withInterval:(float)delay;
++ (void) doViewTransition:(NSString *)transition direction:(NSString *)direction duration:(float)duration objectToTransition:(UIViewController *)controllerToTransition;
 
 
 @end

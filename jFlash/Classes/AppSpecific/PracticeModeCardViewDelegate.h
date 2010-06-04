@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CardViewController.h"
 #import "WordCardViewController.h"
+#import "ActionBarViewController.h"
 
 @interface PracticeModeCardViewDelegate : NSObject {
   id cardViewController;
