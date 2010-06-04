@@ -153,6 +153,8 @@
 
 - (void)dealloc 
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"newImagePicked" object:nil];
+
   [originalUserNickname release];
   [selectedUser release];
   [userNicknameTextField release];

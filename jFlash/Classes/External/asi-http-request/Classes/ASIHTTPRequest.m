@@ -3596,7 +3596,6 @@ static BOOL isiPhoneOS2;
 
 + (void)unsubscribeFromNetworkReachabilityNotifications
 {
-
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNetworkReachabilityChangedNotification" object:nil];
 }
 

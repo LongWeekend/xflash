@@ -26,6 +26,8 @@
 		4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
+		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
+		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
@@ -102,8 +104,6 @@
 		917A5C2511AB814B00016BD2 /* drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2211AB814B00016BD2 /* drawing.m */; };
 		917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
-		917A5C3B11AB826000016BD2 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
-		917A5C3C11AB826000016BD2 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		917A5C4711AB829000016BD2 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3E11AB829000016BD2 /* LoadingView.m */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4611AB829000016BD2 /* SwipeView.m */; };
@@ -1180,8 +1180,6 @@
 				917A5C2511AB814B00016BD2 /* drawing.m in Sources */,
 				917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */,
 				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
-				917A5C3B11AB826000016BD2 /* CustomCellBackgroundView.m in Sources */,
-				917A5C3C11AB826000016BD2 /* GradientCustomCellBackgroundView.m in Sources */,
 				917A5C4711AB829000016BD2 /* LoadingView.m in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
 				917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */,
@@ -1214,6 +1212,8 @@
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
+				497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */,
+				497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,7 +1276,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1632,7 +1632,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Beta;
 		};
@@ -1698,7 +1698,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = "Beta Distribution";
 		};
@@ -1758,7 +1758,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Debug;
 		};
@@ -1778,7 +1778,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Release;
 		};
@@ -1839,7 +1839,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = DebugPaul;
 		};

@@ -8,7 +8,7 @@
 
 #import "SearchUnavailableViewController.h"
 
-
+//! View controller that tells the user that they have to download the FTS plugin first
 @implementation SearchUnavailableViewController
 
 //! Customized initializer setting title bar
@@ -32,8 +32,10 @@
 //! Executed when the user presses "download" on the search unavailable page
 - (IBAction) doDownloadButton
 {
-  // Tell the Root View Controller to pop up a modal
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self];
+  // Fire off a notification to bring up the downloader
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
 }
 
 

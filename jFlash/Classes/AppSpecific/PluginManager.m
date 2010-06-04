@@ -19,6 +19,21 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   if (self = [super init])
   {
     _loadedPlugins = [[NSMutableDictionary alloc] init];
+    _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
+                           // FTS
+                           [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"Very Fast Dictionary (Really.)",@"plugin_name",
+                            @"Enables fast searching on full dictionary",@"plugin_detail",
+                            @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"],@"target_filename",nil],FTS_DB_KEY,
+                           
+                           // Example sentences
+                           [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"Example Sentences",@"plugin_name",
+                            @"Added example sentences to practice modes",@"plugin_detail",
+                            @"http://mini.local:8080/hudson/jFlash-EX-v1.1.db.gz",@"target_url",
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_filename",nil],EXAMPLE_DB_KEY,
+                           nil];
   }
   return self;
 }
@@ -98,8 +113,7 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
       // Reattach with proper name and register
       if ([db attachDatabase:filename withName:pluginKey])
       {
-        NSDictionary *pluginPair = [NSDictionary dictionaryWithObjectsAndKeys:filename,@"filename",pluginName,@"name",nil];
-        [_loadedPlugins setObject:pluginPair forKey:pluginKey];
+        [_loadedPlugins setObject:[_availablePlugins objectForKey:pluginKey] forKey:pluginKey];
         return pluginKey;
       }
       else
@@ -141,6 +155,13 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
       NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
       [tmpDict setObject:[filename lastPathComponent] forKey:pluginKey];
       [settings setValue:tmpDict forKey:@"plugins"];
+      
+      // Tell the root view controller to do some stuff if we are FTS_DB_KEY
+      if ([pluginKey isEqualToString:FTS_DB_KEY])
+      {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldSwapSearchViewController" object:self];
+      }
+      
       return YES;
     }
     else
@@ -153,7 +174,7 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 }
 
 
-//! Gets array of plugins loaded by key
+//! Gets array of NSString keys of plugins
 - (NSArray*) loadedPluginsByKey;
 {
   NSEnumerator *keyEnumerator = [_loadedPlugins keyEnumerator];
@@ -170,7 +191,7 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 }
 
 
-//! Gets array of plugins loaded by name
+//! Gets array of NSString names of plugins
 - (NSArray*) loadedPluginsByName
 {
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
@@ -187,6 +208,42 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   return returnArray;
 }
 
+
+// Internal helper class that does the heavy lifting for loadedPlugins
+- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary
+{
+  NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
+  NSString *key;
+  NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+  while (key = [keyEnumerator nextObject])
+  {
+    [tmpArray addObject:[_pluginDictionary objectForKey:key]];
+  }
+  // Make immutable copy
+  NSArray *returnArray = [NSArray arrayWithArray:tmpArray];
+  [tmpArray release];
+  return returnArray;
+}
+
+
+//! Gets array of dictionaries with all info about loaded plugins
+- (NSArray*) loadedPlugins
+{
+  return [self _plugins:_loadedPlugins];
+}
+
+
+//! Gets array of dictionaries with all info about available plugins
+- (NSArray*) availablePlugins
+{
+  return [self _plugins:_availablePlugins];
+}
+
+//! Gets all available plugins as a dictionary
+- (NSDictionary*) availablePluginsDictionary
+{
+  return [NSDictionary dictionaryWithDictionary:_availablePlugins];
+}
 
 - (void) dealloc
 {

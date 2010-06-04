@@ -10,8 +10,18 @@
 //! Controls view & program flow during plugin/file downloads
 @implementation DownloaderViewController
 
-@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, cancelButton;
+@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, cancelButton, retryButton;
 @synthesize dlHandler;
+
+//! Initialization
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+  {
+    [self setDlHandler:nil];
+  }
+  return self;
+}
 
 //! UIView delegate - Initialize UI elements in the view - progress indicator & labels
 - (void)viewDidLoad
@@ -19,17 +29,12 @@
   [super viewDidLoad];
 
   // Reset all variables to default
+  [self setTitle:@"Download Plugin"];
   [self setStatusMessage:@"Press the button to initiate the download"];
   [self setTaskMessage:@""];
   [self setProgress:0.0f];
-  
-  // Instantiate downloader with jFlash download URL & destination filename
-  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:@"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz"
-                                                       targetFilename:[LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"]];
-  // Set the installer delegate to the PluginManager class
-  [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
-  [self setDlHandler:tmpDlHandler];
-  
+  [[self progressIndicator] setTintColor:[UIColor redColor]];
+
   // Register notification listener to handle downloader events
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloaderDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloaderDisplay) name:@"LWEDownloaderProgressUpdated" object:nil];
@@ -140,8 +145,23 @@
 //! Cancels an ongoing LWEDownloader instance and dismisses the DownloaderViewController  
 - (IBAction) cancelDownloadProcess
 {
-  [[self dlHandler] cancelDownload];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
+  if ([self dlHandler])
+  {
+    [[self dlHandler] cancelDownload];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
+  }
+}
+
+
+//! Retries an existingLWEDownloader instance download  
+- (IBAction) retryDownloadProcess
+{
+  if ([[self dlHandler] isFailureState])
+  {
+    [[self retryButton] setEnabled:NO];
+    [[self dlHandler] resetDownload];
+    [self startDownloadProcess];
+  }
 }
 
 
@@ -154,9 +174,11 @@
   
   if ([[self dlHandler] isFailureState])
   {
-    // Yikes, we have to handle that
-    LWE_LOG(@"DownloaderVC got failure state, shit what do I do now");
-    
+    if ([[self dlHandler] getFailureState] == kDownloaderNetworkFail)
+    {
+      // Network failed, show retry button?
+      [[self retryButton] setEnabled:YES];
+    }
   }
   else if ([[self dlHandler] isSuccessState])
   {
@@ -174,6 +196,7 @@
 - (void)dealloc
 {
   [super dealloc];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

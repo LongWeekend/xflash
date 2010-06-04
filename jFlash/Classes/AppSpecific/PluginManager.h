@@ -16,6 +16,7 @@ extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
 {
   NSMutableDictionary *_loadedPlugins;    //! Maintains in memory a list of loaded plugins
+  NSDictionary *_availablePlugins;        //! Maintains in memory a list of available plugins to this software version
 }
 
 - (BOOL) pluginIsLoaded:(NSString*)name;
@@ -23,5 +24,9 @@ extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example
 - (NSString*) loadPluginFromFile:(NSString*)pathname;
 - (NSArray*) loadedPluginsByKey;
 - (NSArray*) loadedPluginsByName;
+- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
+- (NSArray*) loadedPlugins;
+- (NSArray*) availablePlugins;
+- (NSDictionary*) availablePluginsDictionary;
 
 @end

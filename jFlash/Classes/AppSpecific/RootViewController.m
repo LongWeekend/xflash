@@ -25,9 +25,10 @@
     i = 0;
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
-    // Register listener to pop up downloader modal for search FTS download
+    // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldShowDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldHideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldSwapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
   }
 	return self;
 }
@@ -229,11 +230,21 @@
 - (void) shouldShowDownloaderModal:(NSNotification*)aNotification
 {
   DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
-  dlViewController.title = @"Download Dictionary Plugin";
+
+  // Instantiate downloader with jFlash download URL & destination filename
+  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
+  NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
+  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
+   
+  // Set the installer delegate to the PluginManager class
+  [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
+  [dlViewController setDlHandler:tmpDlHandler];
+  
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
+  [dlViewController release];
+
   [[self tabBarController] presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
-  [dlViewController release];
 }
 
 
@@ -241,7 +252,6 @@
 - (void) shouldHideDownloaderModal:(NSNotification*)aNotification
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
-  [self shouldSwapSearchViewController];
 }
 
 
@@ -314,6 +324,9 @@
 
 - (void)dealloc
 {
+  // Unobserve notifications
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
   // Clear the application settings singleton
   CurrentState* state = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
