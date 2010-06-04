@@ -15,16 +15,6 @@
 
 @synthesize tableView, availablePlugins, installedPlugins;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
 //! UIView delegate - sets tint color et al of the nav bar
 - (void)viewWillAppear: (BOOL)animated
 {
