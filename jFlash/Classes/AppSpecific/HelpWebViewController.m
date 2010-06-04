@@ -36,7 +36,7 @@
   
   // Set up the views
   UIView *baseView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-  UIWebView *htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 420.0f)];
+  UIWebView *htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
   [htmlView setBackgroundColor:[UIColor clearColor]];
   [htmlView loadRequest:requestObj];
   [baseView addSubview:htmlView];
