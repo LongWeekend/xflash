@@ -20,7 +20,7 @@
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, percentCorrectVisible, isBrowseMode, hhAnimationView;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
 @synthesize scrollView, pageControl;
-@synthesize actionBarController, actionbarView;
+@synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 
 - (id) init
 {
@@ -65,7 +65,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(revealCard) name:@"actionBarDidRevealNotification" object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(revealCard) name:@"actionBarDidRevealNotification" object:nil];
   
   // Create a default mood icon object
   [self setMoodIcon:[[MoodIcon alloc] init]];
@@ -87,7 +87,7 @@
   // Add the Action Bar to the View
   [self setActionBarController:[[ActionBarViewController alloc] init]];
   [[self actionBarController] setControllee: self];
-  [[self actionbarView] addSubview: [[self actionBarController] view]];
+  [[self actionbarView] addSubview:[[self actionBarController] view]];
 
   // Reset child views
   LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
@@ -104,20 +104,24 @@
 - (void) _resetActionMenu
 {
   [actionBarController setup];
-  [[self view] bringSubviewToFront:[self actionbarView]];
-  
-  if(!percentCorrectVisible && !self.isBrowseMode){
-    [self doTogglePercentCorrectBtn];
-  }
   
   // update the remaining cards label
   if(isBrowseMode)
   {
+    if(percentCorrectVisible) [self doTogglePercentCorrectBtn];
+    [[self tapForAnswerImage] setHidden:YES];
+    [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
   }
   else	
   {
+    [[self tapForAnswerImage] setHidden:NO];
+    [[self revealCardBtn] setHidden:NO];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
+    if(!percentCorrectVisible)
+    {
+      [self doTogglePercentCorrectBtn];
+    }
   }
 }
 
@@ -193,8 +197,10 @@
 
 - (void) revealCard
 {
-  [[self view] sendSubviewToBack:[self actionbarView]];
+  [[self revealCardBtn] setHidden:YES];
+  [[self tapForAnswerImage] setHidden:YES];
   [cardViewController reveal];
+  [actionBarController reveal];
 }
 
 #pragma mark Transition Methods
@@ -466,6 +472,9 @@
   
   //action bar
   [actionBarController release];
+  [actionbarView release];
+  [revealCardBtn release];
+  [tapForAnswerImage release];
   
   //state
   [currentCardSet release];

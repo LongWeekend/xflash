@@ -21,7 +21,6 @@
   // The overtop buttons for quiz mode
   IBOutlet UIView *cardMeaningBtnHint;
   IBOutlet UIView *cardMeaningBtnHintMini;
-  IBOutlet UIButton *cardMeaningBtn;
   
   IBOutlet UIButton *nextCardBtn;
   IBOutlet UIButton *prevCardBtn;
@@ -32,7 +31,6 @@
 }
 
 // interface actions
-- (IBAction)doRevealMeaningBtn;
 - (IBAction)doNextCardBtn;
 - (IBAction)doPrevCardBtn;
 - (IBAction)doRightBtn;
@@ -57,7 +55,6 @@
 @property (nonatomic, retain) UIButton *rightBtn;
 @property (nonatomic, retain) UIButton *wrongBtn;
 
-@property (nonatomic, retain) UIButton *cardMeaningBtn;
 @property (nonatomic, retain) UIView *cardMeaningBtnHint;
 @property (nonatomic, retain) UIView *cardMeaningBtnHintMini;
 

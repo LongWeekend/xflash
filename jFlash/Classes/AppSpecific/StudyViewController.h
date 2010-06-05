@@ -35,6 +35,9 @@
   IBOutlet UIImageView *percentCorrectTalkBubble;
   IBOutlet UILabel *percentCorrectLabel;
   
+  IBOutlet UIButton *revealCardBtn;
+  IBOutlet UIImageView *tapForAnswerImage;
+  
   // The progress bar
   IBOutlet UIButton *showProgressModalBtn;
   IBOutlet UIView *practiceBgImage;
@@ -71,6 +74,7 @@
 
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
+- (IBAction)revealCard;
 
 - (void)refreshProgressBarView;
 - (void)doCardBtn: (NSNotification *)aNotification;
@@ -89,6 +93,8 @@
 // scroll view
 @property (nonatomic, retain) UIView *scrollView;
 @property (nonatomic, retain) UIPageControl* pageControl;
+@property (nonatomic, retain) UIButton *revealCardBtn;
+@property (nonatomic, retain) UIImageView *tapForAnswerImage;
 
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 

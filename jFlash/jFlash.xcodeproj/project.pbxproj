@@ -820,7 +820,6 @@
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
 				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
-				917A5C6C11AB844300016BD2 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,

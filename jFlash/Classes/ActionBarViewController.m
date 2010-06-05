@@ -25,7 +25,7 @@
 @implementation ActionBarViewController
 @synthesize delegate, controllee;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
-@synthesize cardMeaningBtnHint, cardMeaningBtnHintMini, cardMeaningBtn;
+@synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
 #pragma mark -
 #pragma mark Delegate Methods
