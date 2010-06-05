@@ -86,7 +86,7 @@
   
   // Add the Action Bar to the View
   [self setActionBarController:[[ActionBarViewController alloc] init]];
-  [[self actionBarController] setControllee: self];
+  [[self actionBarController] setCurrentCard:[self currentCard]];
   [[self actionbarView] addSubview:[[self actionBarController] view]];
 
   // Reset child views
@@ -103,6 +103,7 @@
 
 - (void) _resetActionMenu
 {
+  [[self actionBarController] setCurrentCard:[self currentCard]];
   [actionBarController setup];
   
   // update the remaining cards label

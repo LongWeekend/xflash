@@ -23,7 +23,7 @@
 @end
 
 @implementation ActionBarViewController
-@synthesize delegate, controllee;
+@synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
@@ -153,7 +153,7 @@
 - (IBAction) showCardActionSheet
 {
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Card Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Help Us Fix This Card",@"Add Card to Study Set",nil];
-  [as showInView:[self view]];
+  [as showInView:[[[self view] superview] superview]];
   [as release];
 }
 
@@ -162,28 +162,26 @@
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+  // we present on the appDelegates root view controller to make sure it covers everything
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
-    ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[delegate currentCard]];
+    ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[self currentCard]];
     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:rbdvc];
-    [[self parentViewController] presentModalViewController:modalNavController animated:YES];
+    [appDelegate.rootViewController presentModalViewController:modalNavController animated:YES];
     [modalNavController release];
     [rbdvc release];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
-    // TODO: shouldn't this be inside of the AddTagViewController?  Or is it out here because we don't have a nav controller?  MMA 6/2/2010
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:[self parentViewController] action:@selector(dismissModalViewControllerAnimated:)];
     AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
-    modalViewController.cardId = [[delegate currentCard] cardId];
-    modalViewController.navigationItem.leftBarButtonItem = doneBtn;
-    modalViewController.navigationItem.title = @"Add Word To Sets";
-    modalViewController.currentCard = [delegate currentCard];
+    modalViewController.cardId = [[self currentCard] cardId];
+    modalViewController.currentCard = [self currentCard];
     UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
     modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-    [[self parentViewController] presentModalViewController:modalNavControl animated:YES];
+    [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
     [modalNavControl release];
-    [doneBtn release];    
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }

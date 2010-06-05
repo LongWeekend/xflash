@@ -10,13 +10,15 @@
 #import "AddTagViewController.h"
 #import "Constants.h"
 #import "ReportBadDataViewController.h"
+#import "jFlashAppDelegate.h"
 
 #define SVC_ACTION_REPORT_BUTTON 0
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate> {
   IBOutlet id delegate;  
-  IBOutlet id controllee;
+  
+  Card *currentCard;
   
   // The overtop buttons for quiz mode
   IBOutlet UIView *cardMeaningBtnHint;
@@ -46,7 +48,8 @@
 
 //we don't retain delegates
 @property (assign, nonatomic, readwrite) IBOutlet id delegate;
-@property (assign, nonatomic, readwrite) IBOutlet id controllee;
+
+@property (nonatomic, retain) Card *currentCard;
 
 @property (nonatomic, retain) UIButton *addBtn;
 @property (nonatomic, retain) UIButton *buryCardBtn;

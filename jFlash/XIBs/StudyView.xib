@@ -197,7 +197,7 @@
 						<bool key="IBUIHidesForSinglePage">YES</bool>
 						<int key="IBUINumberOfPages">2</int>
 					</object>
-					<object class="IBUIButton" id="999745356">
+					<object class="IBUIButton" id="484151742">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">269</int>
 						<string key="NSFrame">{{0, 131}, {320, 300}}</string>
@@ -214,7 +214,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1058310146"/>
 					</object>
-					<object class="IBUIImageView" id="990358534">
+					<object class="IBUIImageView" id="192576891">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 169}, {320, 36}}</string>
@@ -470,14 +470,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">revealCardBtn</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="999745356"/>
+						<reference key="destination" ref="484151742"/>
 					</object>
 					<int key="connectionID">299</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">revealCard</string>
-						<reference key="source" ref="999745356"/>
+						<reference key="source" ref="484151742"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -487,7 +487,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">tapForAnswerImage</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="990358534"/>
+						<reference key="destination" ref="192576891"/>
 					</object>
 					<int key="connectionID">303</int>
 				</object>
@@ -516,8 +516,8 @@
 							<reference ref="401192379"/>
 							<reference ref="593534517"/>
 							<reference ref="132615970"/>
-							<reference ref="999745356"/>
-							<reference ref="990358534"/>
+							<reference ref="484151742"/>
+							<reference ref="192576891"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">studyView</string>
@@ -618,7 +618,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">298</int>
-						<reference key="object" ref="999745356"/>
+						<reference key="object" ref="484151742"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">revealButton</string>
 					</object>
@@ -636,7 +636,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">302</int>
-						<reference key="object" ref="990358534"/>
+						<reference key="object" ref="192576891"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">cardMeaningBtnHint</string>
 					</object>
@@ -748,7 +748,6 @@
 							<string>buryCardBtn</string>
 							<string>cardMeaningBtnHint</string>
 							<string>cardMeaningBtnHintMini</string>
-							<string>controllee</string>
 							<string>delegate</string>
 							<string>nextCardBtn</string>
 							<string>prevCardBtn</string>
@@ -761,7 +760,6 @@
 							<string>UIButton</string>
 							<string>UIView</string>
 							<string>UIView</string>
-							<string>id</string>
 							<string>id</string>
 							<string>UIButton</string>
 							<string>UIButton</string>

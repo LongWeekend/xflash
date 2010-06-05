@@ -29,10 +29,16 @@ enum EntrySectionRows
   [super viewDidLoad];
   [self setMyTagArray:[TagPeer retrieveMyTagList]];
   [self setSysTagArray:[TagPeer retrieveSysTagList]];
-  
+ 
+  UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(dismissModalViewControllerAnimated:)];
+  self.navigationItem.leftBarButtonItem = doneBtn;
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = addButton;
   
+  self.navigationItem.title = @"Add Word To Sets";
+  
+  [doneBtn release];
+  [addButton release];
   // Register listener to reload data if modal added a set
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
 }
