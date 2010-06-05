@@ -22,15 +22,15 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
     _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
                            // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"Very Fast Dictionary (Really.)",@"plugin_name",
-                            @"Enables fast searching on full dictionary",@"plugin_detail",
+                            @"Awesomely Fast Search",@"plugin_name",
+                            @"Adds sub-second full dictionary search (~16MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"],@"target_filename",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"Example Sentences",@"plugin_name",
-                            @"Added example sentences to practice modes",@"plugin_detail",
+                            @"50,000+ Example Sentences",@"plugin_name",
+                            @"Adds sentences to practice modes (~25MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-EX-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_filename",nil],EXAMPLE_DB_KEY,
                            nil];

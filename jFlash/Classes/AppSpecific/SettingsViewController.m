@@ -192,7 +192,11 @@ NSString * const APP_FACEBOOK = @"facebook";
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
     int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
+    if (numInstalled > 0)
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
+    else
+      cell.detailTextLabel.text = @"None";
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == APP_ABOUT)
