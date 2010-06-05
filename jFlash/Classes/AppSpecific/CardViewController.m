@@ -90,14 +90,14 @@
 }
 
 //Give the delegate a chance to not reveal the card
-- (BOOL)_cardViewShouldReveal:(BOOL)reveal
+- (BOOL)_cardViewShouldReveal:(BOOL)shouldReveal
 {
   if([[self delegate] respondsToSelector:@selector(cardViewShouldReveal:shouldReveal:)])
   {
-    reveal = [[self delegate] cardViewShouldReveal:self shouldReveal:reveal];
+    shouldReveal = [[self delegate] cardViewShouldReveal:self shouldReveal:shouldReveal];
   }
   
-  return reveal;
+  return shouldReveal;
 }
 
 #pragma mark Flow Methods

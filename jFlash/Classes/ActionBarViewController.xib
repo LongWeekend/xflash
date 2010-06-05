@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="139092634">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{0, 197}, {320, 99}}</string>
+						<string key="NSFrameSize">{320, 99}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -50,19 +50,14 @@
 							<string key="NSResourceName">practice-btns-bg.png</string>
 						</object>
 					</object>
-					<object class="IBUIButton" id="737452399">
+					<object class="IBUIButton" id="969879741">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">306</int>
-						<string key="NSFrame">{{1, 0}, {318, 298}}</string>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{9, -10}, {68, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEgMAA</bytes>
-						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">6</int>
-						<bool key="IBUIHighlighted">YES</bool>
+						<int key="IBUIContentMode">4</int>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<object class="NSFont" key="IBUIFont" id="61741767">
@@ -70,37 +65,18 @@
 							<double key="NSSize">1.500000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="970423676">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
 						</object>
 						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">2</int>
-							<bytes key="NSRGB">MC45NjQ3MDU5NDQxIDAuOTQ1MDk4MTAyMSAwLjg2Mjc0NTE2NTgAA</bytes>
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="464726653">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-					</object>
-					<object class="IBUIButton" id="969879741">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{10, 190}, {68, 80}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">4</int>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="61741767"/>
-						<reference key="IBUIHighlightedTitleColor" ref="970423676"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="464726653"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">practice-btn-addtoset.png</string>
@@ -109,7 +85,7 @@
 					<object class="IBUIButton" id="521069082">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{89, 190}, {64, 80}}</string>
+						<string key="NSFrame">{{88, -10}, {64, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -131,7 +107,7 @@
 					<object class="IBUIButton" id="859194653">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{169, 190}, {64, 80}}</string>
+						<string key="NSFrame">{{168, -10}, {64, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -153,7 +129,7 @@
 					<object class="IBUIButton" id="167257808">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{245, 190}, {68, 80}}</string>
+						<string key="NSFrame">{{244, -10}, {68, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -175,7 +151,7 @@
 					<object class="IBUIButton" id="562302759">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{8, 178}, {100, 100}}</string>
+						<string key="NSFrame">{{7, -22}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -196,7 +172,7 @@
 					<object class="IBUIButton" id="56002037">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{208, 178}, {100, 100}}</string>
+						<string key="NSFrame">{{207, -22}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -217,7 +193,7 @@
 					<object class="IBUIImageView" id="460514245">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{1, 214}, {320, 36}}</string>
+						<string key="NSFrame">{{0, 14}, {320, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -228,22 +204,8 @@
 							<string key="NSResourceName">practice-btn-unrevealed.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="1069478856">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{1, 55}, {320, 36}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">practice-btn-unrevealed-mini.png</string>
-						</object>
-					</object>
 				</object>
-				<string key="NSFrameSize">{320, 296}</string>
+				<string key="NSFrameSize">{320, 99}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -264,31 +226,6 @@
 						<reference key="destination" ref="191373211"/>
 					</object>
 					<int key="connectionID">3</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardMeaningBtnHintMini</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1069478856"/>
-					</object>
-					<int key="connectionID">27</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardMeaningBtn</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="737452399"/>
-					</object>
-					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">doRevealMeaningBtn</string>
-						<reference key="source" ref="737452399"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">29</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -416,13 +353,11 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="139092634"/>
-							<reference ref="737452399"/>
 							<reference ref="969879741"/>
 							<reference ref="521069082"/>
 							<reference ref="859194653"/>
 							<reference ref="167257808"/>
 							<reference ref="460514245"/>
-							<reference ref="1069478856"/>
 							<reference ref="562302759"/>
 							<reference ref="56002037"/>
 						</object>
@@ -444,12 +379,6 @@
 						<reference key="object" ref="139092634"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">btnBarBg</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="737452399"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">cardMeaningButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
@@ -493,12 +422,6 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">cardMeaningBtnHint</string>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="1069478856"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">cardMeaningBtnHintMini</string>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -515,18 +438,14 @@
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
-					<string>16.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
-					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ActionBarViewController</string>
 					<string>UIResponder</string>
-					<string>{{432, 407}, {320, 296}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{179, 596}, {320, 99}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -554,7 +473,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">42</int>
+			<int key="maxID">45</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -569,14 +488,12 @@
 							<string>doBuryCardBtn</string>
 							<string>doNextCardBtn</string>
 							<string>doPrevCardBtn</string>
-							<string>doRevealMeaningBtn</string>
 							<string>doRightBtn</string>
 							<string>doWrongBtn</string>
 							<string>showCardActionSheet</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -591,7 +508,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addBtn</string>
 							<string>buryCardBtn</string>
-							<string>cardMeaningBtn</string>
 							<string>cardMeaningBtnHint</string>
 							<string>cardMeaningBtnHintMini</string>
 							<string>controllee</string>
@@ -603,7 +519,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIView</string>

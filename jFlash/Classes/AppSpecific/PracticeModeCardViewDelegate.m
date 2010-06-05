@@ -70,18 +70,14 @@
   [[[aNotification object] wrongBtn] setHidden:YES];
   [[[aNotification object] buryCardBtn] setHidden:YES];
   [[[aNotification object] addBtn] setHidden:YES];
-  [[[aNotification object] cardMeaningBtn] setHidden:NO];
   [[[aNotification object] cardMeaningBtnHint] setHidden:NO];
-  [[[aNotification object] cardMeaningBtnHintMini] setHidden:NO];
   [[[aNotification object] prevCardBtn] setHidden:YES];
   [[[aNotification object] nextCardBtn] setHidden:YES];
 }
 
 -(void) actionBarWillReveal:(NSNotification *)aNotification
 {
-  [[[aNotification object] cardMeaningBtn] setHidden:YES];
 	[[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-	[[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
   
 	[[[aNotification object] rightBtn] setHidden:NO];
 	[[[aNotification object] wrongBtn] setHidden:NO];
