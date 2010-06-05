@@ -15,6 +15,10 @@
 		4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		490820A611B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
+		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
+		491FE3AF11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
+		491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
+		491FE3E011BA0EAF00A54F51 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4950C25411B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
@@ -191,6 +195,8 @@
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
+		491FE3AB11BA0B5700A54F51 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "Assets/twitter-icon.png"; sourceTree = "<group>"; };
+		491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "Assets/facebook-icon.png"; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		494D6C6411AE1AF1006DADF1 /* jFlashApplicationTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlashApplicationTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -631,6 +637,8 @@
 				D35B07461116456D00DB5E02 /* practice-btn-wrong.png */,
 				D35B07471116456D00DB5E02 /* practice-btns-bg.png */,
 				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
+				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
+				491FE3AB11BA0B5700A54F51 /* twitter-icon.png */,
 				D35B07711116456D00DB5E02 /* scroll-more.png */,
 				D36CE184111AA1BE0073D809 /* table-background.png */,
 				D35B07721116456D00DB5E02 /* talkbubble-ft.png */,
@@ -820,7 +828,6 @@
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
 				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
-				917A5C6C11AB844300016BD2 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
@@ -1089,6 +1096,8 @@
 				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
 				91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */,
 				490820A511B7959500150499 /* PluginSettingsView.xib in Resources */,
+				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
+				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1111,6 +1120,8 @@
 				4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */,
 				4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 				490820A611B7959500150499 /* PluginSettingsView.xib in Resources */,
+				491FE3AF11BA0B5700A54F51 /* twitter-icon.png in Resources */,
+				491FE3E011BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

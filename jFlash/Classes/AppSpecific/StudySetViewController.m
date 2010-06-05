@@ -300,6 +300,8 @@
   return cell;
 }
 
+
+//! UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group)
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == 1 || searching)
@@ -338,6 +340,7 @@
   }
 }
 
+//! Alert view delegate - initiates the "study set change" if they pressed OK
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   // This is the OK button

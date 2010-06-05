@@ -24,7 +24,6 @@
   return self;
 }
 
-
 - (void)loadView
 {
   [super loadView];
@@ -36,11 +35,21 @@
   
   // Set up the views
   UIView *baseView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+  baseView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+
   UIWebView *htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
-  [htmlView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]]];
+  htmlView.opaque = NO;
+
+  UIScrollView *scrollView = [htmlView.subviews objectAtIndex:0];
+  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
+  if([scrollView respondsToSelector:aSelector])
+  {
+    [scrollView performSelector:aSelector withObject:NO];
+  }
+
+  [htmlView setBackgroundColor:[UIColor clearColor]];
   [htmlView loadRequest:requestObj];
   [baseView addSubview:htmlView];
-  baseView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.view = baseView;
 }
 

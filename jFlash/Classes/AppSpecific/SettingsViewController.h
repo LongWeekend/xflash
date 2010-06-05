@@ -10,8 +10,11 @@
 #import "Constants.h"
 #import "Appirater.h"
 
+extern NSString * const APP_ABOUT;
+extern NSString * const APP_TWITTER;
+extern NSString * const APP_FACEBOOK;
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsViewController : UITableViewController <UIWebViewDelegate>
 {
   NSMutableArray *sectionArray;
   NSDictionary *settingsDict;
@@ -22,7 +25,6 @@
 }
 
 - (void) launchAppirater;
-- (void) reloadTableData;
 - (void) iterateSetting: (NSString*) setting;
 
 @property BOOL settingsChanged;
