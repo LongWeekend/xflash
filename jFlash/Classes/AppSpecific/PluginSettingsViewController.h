@@ -16,6 +16,8 @@
   NSArray *availablePlugins;
 }
 
+- (void) reloadTableData;
+
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property (nonatomic, retain) NSArray *availablePlugins;
 @property (nonatomic, retain) NSArray *installedPlugins;

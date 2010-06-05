@@ -27,6 +27,7 @@ extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (NSArray*) loadedPlugins;
 - (NSArray*) availablePlugins;
+- (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
 
 @end
