@@ -22,6 +22,11 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor:[UIColor clearColor]];
+
+  // Refresh plugin data
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  [self setInstalledPlugins:[pm loadedPlugins]];
+  [self setAvailablePlugins:[pm availablePlugins]];  
 }
 
 
@@ -30,11 +35,6 @@
 {
   [super viewDidLoad];
   [self setTitle:@"Plugins"];
-
-  // Get plugin data
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  [self setInstalledPlugins:[pm loadedPlugins]];
-  [self setAvailablePlugins:[pm availablePlugins]];
 }
 
 
@@ -65,16 +65,18 @@
 //! Makes the table cells
 - (UITableViewCell *)tableView: (UITableView *)lclTableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+  UITableViewCell *cell;
   if (indexPath.section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    cell.detailTextLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
     cell.textLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
   else
   {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
     cell.detailTextLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
     cell.textLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
@@ -98,13 +100,17 @@
 //! Get the titles
 - (NSString *) tableView: (UITableView*) lclTableView titleForHeaderInSection:(NSInteger)section
 {
-  if (section == PLUGIN_SETTINGS_INSTALLED_SECTION)
+  if (section == PLUGIN_SETTINGS_INSTALLED_SECTION && [[self installedPlugins] count])
   {
-    return @"Installed Plugins";
+    return @"Installed";
+  }
+  else if (section == PLUGIN_SETTINGS_AVAILABLE_SECTION && [[self availablePlugins] count])
+  {
+    return @"Available (Tap to Download)";
   }
   else
   {
-    return @"Available Plugins";
+    return @"";
   }
 }
 

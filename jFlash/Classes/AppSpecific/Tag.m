@@ -46,7 +46,6 @@
   {
     // Get denominator values from cache/database
     tmpTotal = [[cardLevelCounts objectAtIndex:i] intValue];
-    //    tmpTotal = [CardPeer retrieveCardCountByLevel:[self tagId] levelId:i force:NO];    
     if (i == 1) levelOneTotal = tmpTotal;
     [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
     cardTotal = cardTotal + tmpTotal;

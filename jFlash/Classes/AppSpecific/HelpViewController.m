@@ -29,7 +29,6 @@
 	return self;
 }
 
-
 - (void)viewWillAppear: (BOOL)animated
 {
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];

@@ -13,6 +13,9 @@
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
 
+NSString * const APP_ABOUT = @"about";
+NSString * const APP_TWITTER = @"twitter";
+NSString * const APP_FACEBOOK = @"facebook";
 
 - (SettingsViewController*) init
 {
@@ -49,27 +52,22 @@
     // These are the keys and display names of each row
     NSArray *cardSettingNames = [NSArray arrayWithObjects:@"Browse Mode",@"Headword",@"Reading Display As",nil];
     NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,nil];
-    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,@"",nil]; // Puts single section together, 3rd index is header name
+    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,@"Studying",nil]; // Puts single section together, 3rd index is header name
 
-    NSArray *userSettingNames = [NSArray arrayWithObjects:@"Active User",nil];
-    NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_USER,nil];
-    NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,@"",nil];
+    NSArray *userSettingNames = [NSArray arrayWithObjects:@"Theme",@"Active User",@"Plugins",nil];
+    NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
+    NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,@"Application",nil];
     
-    NSArray *appSettingNames = [NSArray arrayWithObjects:@"Theme",nil];
-    NSArray *appSettingKeys = [NSArray arrayWithObjects:APP_THEME,nil];
-    NSArray *appSettingArray = [NSArray arrayWithObjects:appSettingNames,appSettingKeys,@"",nil];
-
-    // Plugins (extra dictionaries)
-    NSArray *pluginNames = [NSArray arrayWithObjects:@"Downloaded Plugins",nil];
-    NSArray *pluginKeys = [NSArray arrayWithObjects:APP_PLUGIN,nil];
-    NSArray *pluginArray = [NSArray arrayWithObjects:pluginNames,pluginKeys,@"",nil];
+    NSArray *socialNames = [NSArray arrayWithObjects:@"Follow us on Twitter",@"See us on Facebook",nil];
+    NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
+    NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,@"Follow Us",nil];
 
     NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
-    NSArray *aboutKeys = [NSArray arrayWithObjects:@"about",nil];
+    NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
     
     // Make the order
-    self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,appSettingArray,pluginArray,aboutArray,nil];
+    self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
     
     settingsChanged = NO;
     headwordChanged = NO;
@@ -81,7 +79,7 @@
 - (void)loadView
 {
   [super loadView];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
 }
 
 - (void)viewWillAppear: (BOOL)animated
@@ -115,13 +113,6 @@
   }
   headwordChanged = NO;
   settingsChanged = NO;
-}
-
-
-//! reloadTableData - convenience method for reloading
-- (void)reloadTableData
-{
-  [[self tableView] reloadData];
 }
 
 
@@ -201,13 +192,28 @@
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
     int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
+    if (numInstalled > 0)
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
+    else
+      cell.detailTextLabel.text = @"None";
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
-  else if (key == @"about")
+  else if (key == APP_ABOUT)
   {
     // About section
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"other" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ABOUT onTable:tableView usingStyle:UITableViewCellStyleDefault];
+  }
+  else if (key == APP_FACEBOOK || key == APP_TWITTER)
+  {
+    // Set up the image
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UIImageView* tmpView = cell.imageView;
+    if(key == APP_TWITTER)
+      tmpView.image = [UIImage imageNamed:@"twitter-icon.png"];
+    else
+      tmpView.image = [UIImage imageNamed:@"facebook-icon.png"];
   }
   else
   {
@@ -226,9 +232,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   CGFloat size;
-  NSArray* thisSectionArray = [[self sectionArray] objectAtIndex:indexPath.section];
-  // Special case for about section
-  if ([[thisSectionArray objectAtIndex:1] objectAtIndex:0] == @"about")
+  // Special case for about section - TODO: this is hardcoded
+  if (indexPath.section == 3)
   {
     size = 435.0f;    
   }
@@ -239,6 +244,8 @@
   return size;
 }
 
+
+//! Make selection for a table cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSInteger section = indexPath.section;
@@ -247,7 +254,6 @@
   NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
   NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:row];
 
-  // Handle special cases first
   if (key == APP_USER)
   {
     UserViewController *userView = [[UserViewController alloc] init];
@@ -260,16 +266,38 @@
     [self.navigationController pushViewController:psvc animated:YES];
     [psvc release];
   }
-  else if (key == @"about")
+  else if (key == APP_ABOUT)
   {
     // Do nothing, about section
+  }
+  else if (key == APP_TWITTER || key == APP_FACEBOOK)
+  {
+    // Load a UIWebView to show
+    UIViewController *webVC = [[UIViewController alloc] init];
+    UIWebView *webView = [[UIWebView alloc] init];
+    webVC.title = @"Follow Us";
+    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reload" style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
+
+    NSURL *url = nil;
+    if (key == APP_FACEBOOK)
+      url = [NSURL URLWithString:@"http://m.facebook.com/pages/Japanese-Flash/111141367918"];
+    else
+      url = [NSURL URLWithString:@"http://twitter.com/long_weekend/"];
+      
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+    webView.delegate = self;
+    webVC.view = webView;
+
+    [self.navigationController pushViewController:webVC animated:YES];
+    [webVC release];
   }
   else
   {
     // Everything else
     settingsChanged = YES;
     [self iterateSetting:key];
-    [self reloadTableData];
+    [[self tableView] reloadData];
     if (key == APP_HEADWORD)
     {
       headwordChanged = YES;
@@ -287,11 +315,21 @@
   return [thisSectionArray objectAtIndex:2];
 }
 
+# pragma mark - UIWebView delegate methods
+
+//! UIWebView delegate method - called if request fialed
+- (void) webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
+{
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Connect" message:@"Please check your network connection and try again." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+  [alertView show];
+  [alertView release];
+}
+
 # pragma mark - Housekeeping
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
   
   [settingsDict release];
   [sectionArray release];
