@@ -14,6 +14,7 @@
 #import "MoodIcon.h"
 #import "BrowseModeCardViewDelegate.h"
 #import "PracticeModeCardViewDelegate.h"
+#import "ExampleSentencesViewController.h"
 
 @interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate> {
   

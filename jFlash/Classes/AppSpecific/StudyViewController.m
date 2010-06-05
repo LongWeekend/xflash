@@ -373,8 +373,7 @@
 	CGFloat cx = scrollView.frame.size.width;
   
   // TODO: make this the right view for example sentences
-  CardViewController *cfv = [[CardViewController alloc] init];
-  [cfv setCurrentCard:[self currentCard]];
+  ExampleSentencesViewController *cfv = [[ExampleSentencesViewController alloc] init];
   UIView *sentencesView = cfv.view;
 			
 	CGRect rect = sentencesView.frame;
