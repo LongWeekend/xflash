@@ -71,8 +71,6 @@
   {
     [scrollView performSelector:aSelector withObject:NO];
   }
-  
-  [self setup];
 }
 
 #pragma mark -
@@ -88,6 +86,9 @@
   {
     NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
     [[self headwordLabel] setText: mungedHeadWordWithReading];
+    
+    // TODO : test code for the example sentences model
+    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentecesByCardId:1];
   }
   [self _exampleSentencesViewDidSetup];
 }

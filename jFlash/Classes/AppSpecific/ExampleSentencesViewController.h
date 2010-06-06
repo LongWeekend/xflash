@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExampleSentencePeer.h"
 
 @interface ExampleSentencesViewController : UIViewController {
   IBOutlet id delegate;
