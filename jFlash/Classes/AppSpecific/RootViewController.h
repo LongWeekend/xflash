@@ -23,27 +23,18 @@
 // TODO: may not need to do this
 #import "PluginManager.h"
 
-@class PDColoredProgressView;
-
 @interface RootViewController : UIViewController 
 {
-//	PDColoredProgressView *loadingView;
   LoadingView *loadingView;
-  NSInteger i;
   UITabBarController *tabBarController;
 }
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
 @property (retain,nonatomic) LoadingView *loadingView;
-@property NSInteger i;
 
 - (void) switchToStudyView;
 - (void) applicationWillTerminate:(UIApplication*) application;
-
-// Semiprivate methods
-- (void) _prepareDatabase;
-- (void) _openDatabase;
-- (void) _loadTabBar;
+- (void) loadTabBar;
 
 // Notification methods
 - (void) shouldSwapSearchViewController;

@@ -21,6 +21,9 @@
 
 void uncaughtExceptionHandler(NSException *exception);
 
+- (void) _prepareDatabase;
+- (void) _openDatabaseWithPlugins;
+
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) RootViewController *rootViewController;
 

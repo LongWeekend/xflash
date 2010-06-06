@@ -8,33 +8,32 @@
 
 #import "RootViewController.h"
 
-//! Takes control from appDelegate and loads tab bar controller programmatically - top level view controller in the app
+/**
+ * Takes control from appDelegate and loads tab bar controller programmatically - top level view controller in the app
+ */
 @implementation RootViewController
 
 @synthesize loadingView;
-@synthesize i;
 @synthesize tabBarController;
 
-
+/**
+ * Custom initializer - adds observers for notifications
+ */
 - (id)init
 {
-  LWE_LOG(@"Entering Init");
   if (self = [super init])
   {
-    i = 0;
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
+
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldShowDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldHideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldSwapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
-    
-    // This call loads/initializes settings and if we don't call this here, shit WILL break.
-    CurrentState *state = [CurrentState sharedCurrentState];
-    [state initializeSettings];
   }
 	return self;
 }
+
 
 /**
  * Loads the jFlash logo splash screen and calls the database loader when finished
@@ -47,71 +46,31 @@
   view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
   self.view = view;
   [view release];
-  
-  // Database work next, but put delay so we can update the UIKIT with the splash screen
-  [self performSelector:@selector(_prepareDatabase) withObject:nil afterDelay:0.0];
 }  
 
 
-/**
- * Checks whether or not to install the main database from the bundle
- */
-- (void) _prepareDatabase
+//! Shows the "database loading" view on top of the splash screen
+- (void) showDatabaseLoadingView
 {
-  // Determine if the MAIN database exists or not
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
-  if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
-  {
-    // Register a notification to wait here for the success, then do the DB copy
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openDatabase) name:@"DatabaseCopyFinished" object:nil];
-    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:@"jFlash.db"];
-
-    // Show the "database loading" view
-    loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
-  }
-  else
-  {
-    // Finished copying, and we have the database file - just open it
-    [self _openDatabase];
-  }
+  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
 }
 
 
-/**
- * Loads & opens the databases (including if it doesn't exist), calls loadTabBar when finished
- */
-- (void) _openDatabase
+//! Hides the "database loading" view
+- (void) hideDatabaseLoadingView
 {
-  // Remove observer if we had one for first copy, also get rid of the loading page if we had one
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DatabaseCopyFinished" object:nil];
 	if (loadingView)
   {
     [loadingView removeView];
 	}
-  
-  // Open the database - it already exists & is properly copied
-  if ([[LWEDatabase sharedLWEDatabase] openDatabase:[LWEFile createDocumentPathWithFilename:@"jFlash.db"]])
-  {
-    // Then load plugins
-    [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];
-  }
-  else
-  {
-    // Could not open database!
-  }
-  [self _loadTabBar];
 }
 
 
 /**
  * Programmatically creates a TabBarController and adds nav/view controllers for each tab item
  */
-- (void) _loadTabBar
+- (void) loadTabBar
 {
-  LWE_LOG(@"START Tab bar");
-  
 	self.tabBarController = [[UITabBarController alloc] init];
   
   CurrentState *state = [CurrentState sharedCurrentState];
@@ -296,13 +255,6 @@
 {
   // Unobserve notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
-  // Clear the application settings singleton
-  CurrentState* state = [CurrentState sharedCurrentState];
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db release];
-  [state release];
-
   [super dealloc];
 }
 

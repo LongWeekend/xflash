@@ -135,7 +135,7 @@
   }
 }
 
-// a little overly complicated but needed to make the headword switch seemless for the user
+/** a little overly complicated but needed to make the headword switch seemless for the user */
 - (void) resetHeadword
 {
   [self setCurrentCard:[CardPeer retrieveCardByPK:currentCard.cardId]];
@@ -174,6 +174,8 @@
   [self _resetStudyView];
 }
 
+
+/** Changes to a new study set */
 - (void) resetStudySet
 {
   // Get active set/tag
@@ -198,13 +200,20 @@
   [self refreshProgressBarView];
 }
 
-//! redraws the progress bar with new level details
+
+/**
+ * redraws the progress bar with new level details
+ */
 - (void) refreshProgressBarView
 {
   [progressBarViewController setLevelDetails: [self getLevelDetails]];
   [[self progressBarViewController] drawProgressBar];
 }
 
+
+/**
+ * Shows the meaning/reading
+ */
 - (void) revealCard
 {
   [[self revealCardBtn] setHidden:YES];
@@ -215,7 +224,7 @@
 
 #pragma mark Transition Methods
 
-//! Basic method to change cards
+/** Basic method to change cards */
 - (void) doChangeCard: (Card*) card direction:(NSString*)direction
 {
   if (card != nil)
@@ -289,6 +298,7 @@
   [lastCard release];
 }
 
+//! Turns the % correct button on and off, in case it is in the way
 - (IBAction) doTogglePercentCorrectBtn
 {
   // Hide the percentage talk bubble on click
@@ -334,11 +344,13 @@
 
 #pragma mark UI updater convenience methods
 
+//! Changes the background image based on the theme
 - (void) updateTheme
 {
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
 }
+
 
 - (NSMutableArray*) getLevelDetails
 {
@@ -455,12 +467,6 @@
 
 #pragma mark -
 #pragma mark Class plumbing
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release anything that's not essential, such as cached data
-}
 
 - (void) dealloc
 {
