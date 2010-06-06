@@ -137,8 +137,6 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<int key="IBUIDataDetectorTypes">1</int>
-						<bool key="IBUIDetectsPhoneNumbers">YES</bool>
 					</object>
 					<object class="IBUIButton" id="124502176">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -435,7 +433,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>WordCardViewController</string>
 					<string>UIResponder</string>
-					<string>{{340, 203}, {320, 280}}</string>
+					<string>{{340, 168}, {320, 280}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

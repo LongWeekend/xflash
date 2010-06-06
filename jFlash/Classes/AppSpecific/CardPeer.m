@@ -210,10 +210,8 @@
   FMResultSet *rs = [[db dao] executeQuery:sql];
   Card* tmpCard;
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
-  int i = 0;
   while ([rs next])
   {
-    i++;
     tmpCard = [[Card alloc] init];
     if (hydrate)
     {

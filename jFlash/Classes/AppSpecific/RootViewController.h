@@ -20,6 +20,8 @@
 #import "Constants.h"
 #import "LWEFile.h"
 #import "LWEDownloader.h"
+// TODO: may not need to do this
+#import "PluginManager.h"
 
 @protocol InitializationDelegate <NSObject>
 @optional

@@ -136,8 +136,10 @@
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
-		91DBF6AD11BA332A005BA3C3 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DBF6AB11BA332A005BA3C3 /* ExampleSentencesViewController.m */; };
-		91DBF6AE11BA332A005BA3C3 /* ExampleSentencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DBF6AC11BA332A005BA3C3 /* ExampleSentencesViewController.xib */; };
+		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
+		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
+		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
+		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
@@ -389,9 +391,13 @@
 		91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = Classes/ActionBarViewController.xib; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
-		91DBF6AA11BA332A005BA3C3 /* ExampleSentencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSentencesViewController.h; sourceTree = "<group>"; };
-		91DBF6AB11BA332A005BA3C3 /* ExampleSentencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSentencesViewController.m; sourceTree = "<group>"; };
-		91DBF6AC11BA332A005BA3C3 /* ExampleSentencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesViewController.xib; path = Classes/ExampleSentencesViewController.xib; sourceTree = "<group>"; };
+		91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesView.xib; path = XIBs/ExampleSentencesView.xib; sourceTree = "<group>"; };
+		91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencesViewController.h; path = AppSpecific/ExampleSentencesViewController.h; sourceTree = "<group>"; };
+		91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencesViewController.m; path = AppSpecific/ExampleSentencesViewController.m; sourceTree = "<group>"; };
+		91CBA6BD11BB6AC0004BD0D0 /* ExampleSentence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentence.h; path = AppSpecific/ExampleSentence.h; sourceTree = "<group>"; };
+		91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentence.m; path = AppSpecific/ExampleSentence.m; sourceTree = "<group>"; };
+		91CBA6E811BB787A004BD0D0 /* ExampleSentencePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencePeer.h; path = AppSpecific/ExampleSentencePeer.h; sourceTree = "<group>"; };
+		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
 		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
@@ -825,7 +831,7 @@
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				4951E0FC11B61F7D00FCE21E /* CardView.xib */,
 				49F9686811AF604900DFC3C9 /* DownloaderView.xib */,
-				91DBF6AC11BA332A005BA3C3 /* ExampleSentencesViewController.xib */,
+				91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
@@ -861,6 +867,8 @@
 				91214F4811B601490091AFEF /* CardViewController.m */,
 				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
 				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
+				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
+				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
@@ -899,8 +907,6 @@
 				917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */,
 				9121517711B755550091AFEF /* WordCardViewController.h */,
 				9121517811B755550091AFEF /* WordCardViewController.m */,
-				91DBF6AA11BA332A005BA3C3 /* ExampleSentencesViewController.h */,
-				91DBF6AB11BA332A005BA3C3 /* ExampleSentencesViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -924,6 +930,10 @@
 				917A5BF711AB7CD700016BD2 /* User.m */,
 				917A5BF811AB7CD700016BD2 /* UserHistoryPeer.h */,
 				917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */,
+				91CBA6BD11BB6AC0004BD0D0 /* ExampleSentence.h */,
+				91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */,
+				91CBA6E811BB787A004BD0D0 /* ExampleSentencePeer.h */,
+				91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1106,7 +1116,7 @@
 				490820A511B7959500150499 /* PluginSettingsView.xib in Resources */,
 				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
-				91DBF6AE11BA332A005BA3C3 /* ExampleSentencesViewController.xib in Resources */,
+				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,7 +1251,9 @@
 				91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */,
 				497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */,
 				497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */,
-				91DBF6AD11BA332A005BA3C3 /* ExampleSentencesViewController.m in Sources */,
+				91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */,
+				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
+				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

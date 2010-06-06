@@ -37,6 +37,37 @@
   return txtStr;
 }
 
+- (NSString*) combinedReadingForSettings
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *combined_reading;
+  
+  // Mux the readings according to user preference
+  if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+  {
+    combined_reading = [NSString stringWithFormat:@"%@", [self reading]];
+  } 
+  else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+  {
+    combined_reading = [NSString stringWithFormat:@"%@", [self romaji]];
+  }
+  else
+  {
+    // Both together
+    combined_reading = [NSString stringWithFormat:@"%@\n%@", [self reading], [self romaji]];
+  }
+  
+  return combined_reading;
+}
+
+// TODO : make this actually implemented
+- (BOOL) hasExampleSentences
+{
+  int r = rand() % 2;
+  if(r == 1) return YES;
+  return NO;
+}
+
 
 // Takes a sqlite result set and populates the properties of card
 - (void) hydrate: (FMResultSet*) rs

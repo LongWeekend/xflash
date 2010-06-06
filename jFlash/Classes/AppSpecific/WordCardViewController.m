@@ -137,26 +137,8 @@
 
 - (void) updateCardReading:(Card*) card
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *combined_reading;
-  
-  // Mux the readings according to user preference
-  if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
-  {
-    combined_reading = [[NSString alloc] initWithFormat:@"%@", [card reading]];
-  } 
-  else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
-  {
-    combined_reading = [[NSString alloc] initWithFormat:@"%@", [card romaji]];
-  }
-  else
-  {
-    // Both together
-    combined_reading = [[NSString alloc] initWithFormat:@"%@\n%@", [card reading], [card romaji]];
-  }
-  [cardReadingLabel setText:combined_reading];
+  [cardReadingLabel setText:[card combinedReadingForSettings]];
   [LWEUILabelUtils resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
-  [combined_reading release];
 }
 
 - (void) hideMeaningWebView:(BOOL)hideMeaningWebView

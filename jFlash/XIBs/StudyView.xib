@@ -166,6 +166,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<bool key="IBUIBounces">NO</bool>
 						<bool key="IBUIPagingEnabled">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
@@ -174,7 +175,7 @@
 					<object class="IBUIView" id="132615970">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 310}, {320, 101}}</string>
+						<string key="NSFrame">{{0, 311}, {320, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -197,7 +198,7 @@
 						<bool key="IBUIHidesForSinglePage">YES</bool>
 						<int key="IBUINumberOfPages">2</int>
 					</object>
-					<object class="IBUIImageView" id="806135242">
+					<object class="IBUIImageView" id="881465520">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 169}, {320, 36}}</string>
@@ -262,7 +263,7 @@
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUIButton" id="490865467">
+					<object class="IBUIButton" id="551950292">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">269</int>
 						<string key="NSFrame">{{1, 129}, {320, 282}}</string>
@@ -471,14 +472,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">revealCardBtn</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="490865467"/>
+						<reference key="destination" ref="551950292"/>
 					</object>
 					<int key="connectionID">299</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">revealCard</string>
-						<reference key="source" ref="490865467"/>
+						<reference key="source" ref="551950292"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -488,7 +489,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">tapForAnswerImage</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="806135242"/>
+						<reference key="destination" ref="881465520"/>
 					</object>
 					<int key="connectionID">303</int>
 				</object>
@@ -517,8 +518,8 @@
 							<reference ref="401192379"/>
 							<reference ref="593534517"/>
 							<reference ref="132615970"/>
-							<reference ref="806135242"/>
-							<reference ref="490865467"/>
+							<reference ref="881465520"/>
+							<reference ref="551950292"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">studyView</string>
@@ -601,13 +602,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">302</int>
-						<reference key="object" ref="806135242"/>
+						<reference key="object" ref="881465520"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">cardMeaningBtnHint</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">298</int>
-						<reference key="object" ref="490865467"/>
+						<reference key="object" ref="551950292"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">revealButton</string>
 					</object>

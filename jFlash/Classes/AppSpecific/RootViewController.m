@@ -76,9 +76,13 @@
   }
   else
   {
-    // Open the database - it already exists & is properly copied
     if ([db openDatabase:pathToDatabase])
     {
+      // Open the database - it already exists & is properly copied
+      // TODO: pull this out
+      PluginManager* pm = [[PluginManager alloc] init];
+      BOOL success = [pm installPluginWithPath:[LWEFile createDocumentPathWithFilename:@"jFlash1_1_example_sentences.sqlite"]];
+      
       // Add each plugin database if it exists
       NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
       NSEnumerator *keyEnumerator = [plugins keyEnumerator];
