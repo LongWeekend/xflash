@@ -44,18 +44,17 @@
 + (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMDatabase *dao = [db dao];
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
   NSString *sql2 = [[NSString alloc] initWithFormat:@"UPDATE tags SET count=(count-1) WHERE tag_id = '%d'",tagId];
-  [dao beginTransaction];
-  [dao executeUpdate:sql];
-  [dao executeUpdate:sql2];
-  [dao commit];
+  [db.dao beginTransaction];
+  [db.dao executeUpdate:sql];
+  [db.dao executeUpdate:sql2];
+  [db.dao commit];
 	[sql release];
 	[sql2 release];
-  if ([dao hadError])
+  if ([db.dao hadError])
   {
-    LWE_LOG(@"Err %d: %@", [dao lastErrorCode], [dao lastErrorMessage]);
+    LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
   }
 }
 
@@ -64,9 +63,8 @@
 + (BOOL) checkMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMDatabase *dao = [db dao];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
-	FMResultSet *rs = [dao executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:sql];
   [sql release];
 	while ([rs next])
   {
@@ -82,11 +80,10 @@
 + (NSMutableArray*) membershipListForCardId:(NSInteger)cardId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMDatabase *dao = [db dao];
   NSMutableArray *membershipListArray = [[[NSMutableArray alloc] init] autorelease];
   int tmpTagId = 0;
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = '%d'",cardId];
-	FMResultSet *rs = [dao executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:sql];
   [sql release];
 	while ([rs next])
   {

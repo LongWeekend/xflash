@@ -6,7 +6,12 @@
 //  Copyright 2009 LONG WEEKEND INC. All rights reserved.
 //
 
+#import "Constants.h"
 #import "Card.h"
+#import "CardPeer.h"
+#import "FMResultSet.h"
+#import "LWEFile.h"
+#import "LWEDatabase.h"
 
 @interface Tag : NSObject
 {

@@ -9,6 +9,8 @@
 #define DEFAULT_USER_AVATAR_PATH @"/avatars/default00.png"
 #define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
+#import "FMResultSet.h"
+
 @interface User : NSObject
 {
 	NSInteger userId;

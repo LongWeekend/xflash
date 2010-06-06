@@ -5,6 +5,7 @@
 //  Created by シャロット ロス on 2/13/10.
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
+#import "Constants.h"
 
 // Settings (also defined in header Constants.h)
 NSString * const SET_MODE_QUIZ       = @"QUIZ";

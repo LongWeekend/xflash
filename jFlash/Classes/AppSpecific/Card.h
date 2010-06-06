@@ -6,6 +6,8 @@
 #define CARD_TYPE_DICTIONARY 3
 #define CARD_TYPE_SENTENCE 4
 
+#import "FMResultSet.h"
+
 //! Class for an individual card's data
 @interface Card : NSObject
 {

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
 #import "LWEFile.h"
 
 //! LWE Database singleton, maintains active connections

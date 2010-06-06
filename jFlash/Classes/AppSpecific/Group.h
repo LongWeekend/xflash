@@ -6,7 +6,7 @@
 //  Copyright 2009 LONG WEEKEND INC.. All rights reserved.
 //
 
-
+#import "FMResultSet.h"
 @interface Group : NSObject
 {
 	NSInteger groupId;

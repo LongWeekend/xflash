@@ -7,9 +7,6 @@
   #import <UIKit/UIKit.h>
   #import <sqlite3.h>
   #import "Constants.h"
-  #import "FMResultSet.h"
-  #import "FMDatabase.h"
-  #import "FMDatabaseAdditions.h"
   #import "CurrentState.h"
   #import "ThemeManager.h"
   #import "Card.h"
@@ -23,6 +20,5 @@
   #import "LWEDatabase.h"
   #import "LWEUILabelUtils.h"
   #import "LWEUITableUtils.h"
-  #import "LWEFile.h"
   #import "LWEViewAnimationUtils.h"
 #endif

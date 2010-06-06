@@ -8,7 +8,7 @@
 
 
 #import "Group.h"
-
+#import "FMResultSet.h"
 
 @interface GroupPeer : NSObject {
 }

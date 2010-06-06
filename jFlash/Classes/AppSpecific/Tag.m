@@ -49,7 +49,7 @@
     if (i == 1) levelOneTotal = tmpTotal;
     [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
     cardTotal = cardTotal + tmpTotal;
-    denominatorTotal = denominatorTotal + (tmpTotal * (numLevels - i + 1)); 
+    denominatorTotal = denominatorTotal + (tmpTotal * 2 * (numLevels - i + 1)); 
     numeratorTotal = numeratorTotal + (tmpTotal * i);
   }
   
@@ -81,7 +81,7 @@
   for (i = 1; i <= numLevels; i++)
   {
     tmpTotal = [[tmpTotalArray objectAtIndex:(i-1)] intValue];
-    weightedTotal = (tmpTotal * (numLevels - i + 1));
+    weightedTotal = (tmpTotal * 2 * (numLevels - i + 1));
     p = ((float)weightedTotal / (float)denominatorTotal);
     p = (1-p_unseen)*p;
     pTotal = pTotal + p;

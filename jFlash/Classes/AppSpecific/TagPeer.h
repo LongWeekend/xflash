@@ -7,6 +7,7 @@
 //
 
 #import "Tag.h"
+#import "FMResultSet.h"
 
 @interface TagPeer : NSObject {
 }
