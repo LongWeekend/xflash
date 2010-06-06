@@ -25,14 +25,14 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
                             @"Awesomely Fast Search",@"plugin_name",
                             @"Adds sub-second full dictionary search (~16MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"],@"target_filename",nil],FTS_DB_KEY,
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             @"50,000+ Example Sentences",@"plugin_name",
                             @"Adds sentences to practice modes (~25MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-EX-v1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_filename",nil],EXAMPLE_DB_KEY,
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,
                            nil];
   }
   return self;
@@ -234,16 +234,39 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 
 
 //! Gets array of dictionaries with all info about available plugins
-- (NSArray*) availablePlugins
+- (NSArray*) allAvailablePlugins
 {
   return [self _plugins:_availablePlugins];
 }
+
+
+//! Gets array of dictionaries with available plugins that are not loaded
+- (NSArray*) availablePlugins
+{
+  NSEnumerator *keyEnumerator = [_availablePlugins keyEnumerator];
+  NSString *key;
+  NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+  while (key = [keyEnumerator nextObject])
+  {
+    // If NOT in loaded, then add it
+    if (![_loadedPlugins objectForKey:key])
+    {
+      [tmpArray addObject:[_availablePlugins objectForKey:key]];
+    }
+  }
+  // Make immutable copy
+  NSArray *returnArray = [NSArray arrayWithArray:tmpArray];
+  [tmpArray release];
+  return returnArray;
+}
+
 
 //! Gets all available plugins as a dictionary
 - (NSDictionary*) availablePluginsDictionary
 {
   return [NSDictionary dictionaryWithDictionary:_availablePlugins];
 }
+
 
 - (void) dealloc
 {

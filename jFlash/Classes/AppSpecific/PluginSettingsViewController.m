@@ -23,10 +23,6 @@
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor:[UIColor clearColor]];
 
-  // Refresh plugin data
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  [self setInstalledPlugins:[pm loadedPlugins]];
-  [self setAvailablePlugins:[pm availablePlugins]];  
 }
 
 
@@ -35,6 +31,20 @@
 {
   [super viewDidLoad];
   [self setTitle:@"Plugins"];
+  [self reloadTableData];
+  
+  // Register a reload when they hide the modal
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"shouldHideDownloaderModal" object:nil];
+}
+
+//! Helper method for notification
+- (void) reloadTableData
+{
+  // Refresh plugin data
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  [self setInstalledPlugins:[pm loadedPlugins]];
+  [self setAvailablePlugins:[pm availablePlugins]];
+  [[self tableView] reloadData];
 }
 
 
@@ -68,14 +78,14 @@
   UITableViewCell *cell;
   if (indexPath.section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"installed" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     cell.textLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
   else
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"pluginsTable" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"available" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
     cell.detailTextLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
     cell.textLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
@@ -117,7 +127,10 @@
 
 - (void)dealloc
 {
-    [super dealloc];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self setAvailablePlugins:nil];
+  [self setInstalledPlugins:nil];
+  [super dealloc];
 }
 
 @end

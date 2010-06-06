@@ -174,7 +174,8 @@
   
   if ([[self dlHandler] isFailureState])
   {
-    if ([[self dlHandler] getFailureState] == kDownloaderNetworkFail)
+    // If network or install error (install error should never happen, but)
+    if ([[self dlHandler] getFailureState] == kDownloaderNetworkFail || [[self dlHandler] getFailureState] == kDownloaderInstallFail)
     {
       // Network failed, show retry button?
       [[self retryButton] setEnabled:YES];

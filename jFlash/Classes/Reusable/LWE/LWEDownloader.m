@@ -48,12 +48,24 @@
         LWE_LOG(@"Will save compressed file to: %@",_compressedFilename);
       }
     }
+    else
+    {
+      // Should throw exception.  We have no file to download to
+      [NSException raise:@"Invalid target URL passed to LWEDownloader" format:@"Was passed object: %@",target];
+    }
+
 
     if ([tmpTargetFilename isKindOfClass:[NSString class]])
     {
       [self setTargetFilename:tmpTargetFilename];
       LWE_LOG(@"Will save uncompressed downloaded file to: %@",tmpTargetFilename);
-    }    
+    } 
+    else
+    {
+      // Should throw exception.  We have no file to download to
+      [NSException raise:@"Invalid target filename passed to LWEDownloader" format:@"Was passed object: %@",tmpTargetFilename];
+    }
+
   }
   return self;
 }
@@ -257,7 +269,7 @@
     [_request setShowAccurateProgress:YES];
 
     // Handle file differently depending on processing requirements after the fact (unzip)
-    if (_remoteFileIsGzipCompressed && _compressedFilename)
+    if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
     {
       [_request setDownloadDestinationPath:_compressedFilename];
     }
@@ -355,7 +367,6 @@
   if (contentLength)
   {
     requestSize = [contentLength intValue];
-    [contentLength release];
   }
 }
 
