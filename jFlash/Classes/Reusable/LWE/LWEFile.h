@@ -14,8 +14,10 @@
 
 }
 
++ (NSString*) createBundlePathWithFilename:(NSString*) filename;
 + (NSString*) createDocumentPathWithFilename:(NSString*) filename;
 + (BOOL) deleteFile:(NSString*)filename;
 + (BOOL) fileExists:(NSString*)filename;
++ (BOOL) copyFromMainBundleToDocuments:(NSString*)filename shouldOverwrite:(BOOL)overwrite;
 + (NSInteger) getTotalDiskSpaceInBytes;
 @end

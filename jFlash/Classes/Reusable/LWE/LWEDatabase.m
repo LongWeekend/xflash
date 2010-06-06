@@ -11,17 +11,35 @@
 
 @implementation LWEDatabase
 
-@synthesize dao,databaseOpenFinished, attachedDatabases;
+@synthesize dao,databaseOpenFinished;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
-/** 
- * Returns true if the database file specified by 'pathToDatabase' exists
- * TODO: refactor this method out, just use LWEFile, that's what it's there for
+
+/**
+ * Returns true if file was able to be copied from the bundle - overwrites
+ * Intended to be run in the background
  */
-- (BOOL) databaseFileExists:(NSString*)pathToDatabase
+- (BOOL) copyDatabaseFromBundle:(NSString*)filename
 {
-  return [LWEFile fileExists:pathToDatabase];
+  BOOL returnVal;
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  if (![LWEFile copyFromMainBundleToDocuments:filename shouldOverwrite:YES])
+  {
+    LWE_LOG(@"Unable to copy database from bundle: %@",filename);
+    returnVal = NO;
+  }
+  else
+  {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setBool:YES forKey:@"db_did_finish_copying"];
+    returnVal = YES;
+    
+    NSNotification *aNotification = [NSNotification notificationWithName:@"DatabaseCopyFinished" object:self];
+    [self performSelectorOnMainThread:@selector(_postNotification:) withObject:aNotification waitUntilDone:NO];
+  }
+  [pool release];
+  return returnVal;
 }
 
 
@@ -31,24 +49,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
  */
 - (BOOL) openDatabase:(NSString*)pathToDatabase
 {
-  self.databaseOpenFinished = NO;
   BOOL success = NO;
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  self.dao = [FMDatabase databaseWithPath:pathToDatabase];
-  self.dao.logsErrors = YES;
-  self.dao.traceExecution = YES;
-  if ([self.dao open])
+  BOOL fileExists = [LWEFile fileExists:pathToDatabase];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if (fileExists && [settings boolForKey:@"db_did_finish_copying"])
   {
-    success = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"databaseIsOpen" object:self];
+    self.databaseOpenFinished = NO;
+    self.dao = [FMDatabase databaseWithPath:pathToDatabase];
+    self.dao.logsErrors = YES;
+    self.dao.traceExecution = YES;
+    if ([self.dao open])
+    {
+      success = YES;
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"databaseIsOpen" object:self];
+    }
+    else
+    {
+      LWE_LOG(@"FAIL - Could not open DB - error code: %d",[[self dao] lastErrorCode]);
+    }
+
+    // So other threads can query whether we are done or not
+    self.databaseOpenFinished = YES;
   }
-  else
-  {
-    LWE_LOG(@"FAIL - Could not open DB - error code: %d",[[self dao] lastErrorCode]);
-  }
-  [pool release];
-  // So other threads can query whether we are done or not
-  self.databaseOpenFinished = YES;
   return success;
 }
 
@@ -106,17 +128,34 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
 
 /**
+ * Passthru for dao - executeQuery
+ */
+- (FMResultSet*) executeQuery:(NSString*)sql
+{
+  return [[self dao] executeQuery:sql];
+}
+
+
+/**
+ * Passthru for dao - executeUpdate
+ */
+- (BOOL) executeUpdate:(NSString*)sql
+{
+  return [[self dao] executeUpdate:sql];
+}
+
+
+/**
  * Checks for the existence of a table name in the sqlite_master table
  * If database is not open, throws an exception
  */
-- (BOOL) doesTableExist:(NSString *) tableName
+- (BOOL) tableExists:(NSString *) tableName
 {
   BOOL returnVal = NO;
   if ([self _databaseIsOpen])
   {
     NSString *sql = [[NSString alloc] initWithFormat:@"SELECT name FROM sqlite_master WHERE type='table' AND name='%@'", tableName];
-//    NSString *foo = "SELECT name FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type='table' ORDER BY name";    
-    FMResultSet *rs = [[self dao] executeQuery:sql];
+    FMResultSet *rs = [self executeQuery:sql];
     if ([rs next]) returnVal = YES;
     [rs close];
     [sql release];
@@ -140,6 +179,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
     return YES;
   else
     return NO;
+}
+
+
+//! Helper method for threading - posts a notification
+- (void) _postNotification:(NSNotification *)aNotification
+{
+  [[NSNotificationCenter defaultCenter] postNotification:aNotification];
 }
 
 @end

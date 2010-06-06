@@ -22,6 +22,7 @@ extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example
 
 - (BOOL) pluginIsLoaded:(NSString*)name;
 - (BOOL) disablePlugin:(NSString*)name;
+- (BOOL) loadInstalledPlugins;
 - (NSString*) loadPluginFromFile:(NSString*)pathname;
 - (NSArray*) loadedPluginsByKey;
 - (NSArray*) loadedPluginsByName;

@@ -12,6 +12,16 @@
 @implementation LWEFile
 
 /**
+ * Takes a single filename and returns a full path pointing at that filename in the main bundle
+ */
++ (NSString*) createBundlePathWithFilename:(NSString*)filename
+{
+  NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
+  return bundlePath;
+}
+
+
+/**
  * Takes a single filename and returns a full path pointing at that filename in the current app's document directory
  */
 + (NSString*) createDocumentPathWithFilename:(NSString*)filename
@@ -21,6 +31,7 @@
   NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
   return path;
 }
+
 
 /**
  * Just delete the damn thing.
@@ -64,6 +75,36 @@
     LWE_LOG(@"File not found at specified location: %@",filename);
     return NO;
   }
+}
+
+
+/**
+ * Helper function to copy files from the main bundle to the docs directory
+ */
++ (BOOL) copyFromMainBundleToDocuments:(NSString*)filename shouldOverwrite:(BOOL)overwrite
+{
+  NSString *destPath = [LWEFile createDocumentPathWithFilename:filename];
+  if ([LWEFile fileExists:destPath])
+  {
+    if (overwrite)
+    {
+      if (![LWEFile deleteFile:destPath])
+      {
+        LWE_LOG(@"Could not delete file in overwrite mode on copy: %@",destPath);
+        return NO;
+      }
+    }
+    else
+    {
+      LWE_LOG(@"Not overwriting file: %@",destPath);
+      return NO;  
+    }
+  }
+  
+  // Now do the actual copy
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
+	return [fileManager copyItemAtPath:bundlePath toPath:destPath error:NULL];
 }
 
 

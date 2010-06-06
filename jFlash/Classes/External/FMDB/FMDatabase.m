@@ -43,7 +43,6 @@
 }
 
 - (BOOL) open {
-	[self createEditableCopyOfDatabaseIfNeeded];
 	int err = sqlite3_open( [databasePath fileSystemRepresentation], &db );
 	if(err != SQLITE_OK) {
         NSLog(@"error opening!: %d", err);
@@ -58,31 +57,6 @@
 	return YES;
 }
 
-- (void)createEditableCopyOfDatabaseIfNeeded
-{
-	// First, test for existence.  
-	BOOL fileExists;
-	NSError *error;
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *writableDBPath = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	fileExists = [fileManager fileExistsAtPath:writableDBPath];
-	if (fileExists && [settings boolForKey:@"db_did_finish_copying"]) return;
-	// The writable database does not exist, so copy the default to the appropriate location.
-	NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
-  if(fileExists)
-  {
-    LWE_LOG(@"Removing an incomplete copy of the DB.");
-    [fileManager removeItemAtPath:writableDBPath error:&error];
-  }
-	fileExists = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-	if (!fileExists) {
-		NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
-	}
-  else{
-    [settings setBool:YES forKey:@"db_did_finish_copying"];
-  }
-}
 
 - (void) close {
     

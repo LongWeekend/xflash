@@ -9,28 +9,32 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+#import "FMResultSet.h"
 #import "LWEFile.h"
 
 //! LWE Database singleton, maintains active connections
 @interface LWEDatabase : NSObject
 {
   BOOL databaseOpenFinished;
-  NSMutableDictionary *attachedDatabases;
   FMDatabase *dao;
 }
 
 + (LWEDatabase *)sharedLWEDatabase;
-- (BOOL) databaseFileExists:(NSString*) pathToDatabase;
+- (BOOL) copyDatabaseFromBundle:(NSString*)filename;
 - (BOOL) openDatabase:(NSString*) pathToDatabase;
 - (BOOL) attachDatabase:(NSString*) pathToDatabase withName:(NSString*) name;
 - (BOOL) detachDatabase:(NSString*) name;
-- (BOOL) doesTableExist:(NSString*) tableName;
+- (BOOL) tableExists:(NSString*) tableName;
+
+// For passthru to FMDatabase object
+- (FMResultSet*) executeQuery:(NSString*)sql;
+- (BOOL) executeUpdate:(NSString*)sql;
 
 // Semiprivate method
 - (BOOL) _databaseIsOpen;
+- (void) _postNotification:(NSNotification *)aNotification;
 
 @property BOOL databaseOpenFinished;
 @property (nonatomic, retain) FMDatabase *dao;
-@property (nonatomic, retain) NSMutableDictionary *attachedDatabases;
 
 @end

@@ -75,46 +75,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 - (void) initializeSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int firstLoad = 1;
-  if([settings objectForKey:@"first_load"] != nil) firstLoad = [settings integerForKey:@"first_load"];
+  [settings setInteger:1 forKey:@"app_running"];    // Set the app to be running (TODO: is this used?)
 
-  // We initialize the plugins manager
-  [self setPluginMgr:[[PluginManager alloc] init]];
-  
-  // Now tell if first load or not
-  if (firstLoad)
-  {
-    // Initialize all settings & defaults
-    [self setIsFirstLoad:YES];
-    NSMutableDictionary *availablePlugins = [[NSMutableDictionary alloc] init];
-    NSArray *keys = [[NSArray alloc] initWithObjects:@"theme", @"headword", @"reading", @"mode", @"plugins", nil];
-    NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,availablePlugins,nil];
-    for(int i=0; i < [keys count]; i++)
-    {
-      [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
-    }
-
-    [availablePlugins release];
-    [keys release];
-    [objects release];
-
-    // these are integers so we can't use the array loop above
-    [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
-    [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
-    
-    // disable first load messsage if we get this far
-    [settings setInteger:0 forKey:@"first_load"];
-    [settings setBool:NO forKey:@"db_did_finish_copying"];
-  }
-  else
+  // If there is no key telling us otherwise, assume it is first load
+  if ([settings objectForKey:@"settings_already_created"])
   {
     [self setIsFirstLoad:NO];
   }
-  
-   // Set the app to be running 
-  [settings setInteger:1 forKey:@"app_running"];
+  else
+  {
+    [self setIsFirstLoad:YES];
+    [self createDefaultSettings];
+  }
+
+  // We initialize the plugins manager
+  //TODO: this is not the best place for this?
+  [self setPluginMgr:[[PluginManager alloc] init]];
 }
-   
+
+
+//! Create & store default settings to NSUserDefaults
+- (void) createDefaultSettings
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+
+  NSMutableDictionary *availablePlugins = [[NSMutableDictionary alloc] init];
+  NSArray *keys = [[NSArray alloc] initWithObjects:@"theme", @"headword", @"reading", @"mode", @"plugins", nil];
+  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,availablePlugins,nil];
+  for(int i=0; i < [keys count]; i++)
+  {
+    [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
+  }  
+  [availablePlugins release];
+  [keys release];
+  [objects release];
+  // these are integers so we can't use the array loop above
+  [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
+  [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
+  // disable first load messsage if we get this far
+  [settings setBool:YES forKey:@"settings_already_created"];
+  [settings setBool:NO forKey:@"db_did_finish_copying"];
+}
+
 - (void) dealloc
 {
   [super dealloc];

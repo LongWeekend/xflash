@@ -11,7 +11,6 @@
 //! Takes control from appDelegate and loads tab bar controller programmatically - top level view controller in the app
 @implementation RootViewController
 
-@synthesize delegate;
 @synthesize loadingView;
 @synthesize i;
 @synthesize tabBarController;
@@ -29,6 +28,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldShowDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldHideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldSwapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
+    
+    // This call loads/initializes settings and if we don't call this here, shit WILL break.
+    CurrentState *state = [CurrentState sharedCurrentState];
+    [state initializeSettings];
   }
 	return self;
 }
@@ -38,66 +41,74 @@
  */
 - (void) loadView
 {
-  // Splash screen
-  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
+  // Make the main view the themed splash screen
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
   view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
   self.view = view;
   [view release];
   
   // Database work next, but put delay so we can update the UIKIT with the splash screen
-  [self performSelector:@selector(loadDatabase) withObject:nil afterDelay:0.1];
+  [self performSelector:@selector(_prepareDatabase) withObject:nil afterDelay:0.0];
 }  
+
+
+/**
+ * Checks whether or not to install the main database from the bundle
+ */
+- (void) _prepareDatabase
+{
+  // Determine if the MAIN database exists or not
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
+  if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
+  {
+    // Register a notification to wait here for the success, then do the DB copy
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openDatabase) name:@"DatabaseCopyFinished" object:nil];
+    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:@"jFlash.db"];
+
+    // Show the "database loading" view
+    loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
+  }
+  else
+  {
+    // Finished copying, and we have the database file - just open it
+    [self _openDatabase];
+  }
+}
 
 
 /**
  * Loads & opens the databases (including if it doesn't exist), calls loadTabBar when finished
  */
-- (void) loadDatabase
+- (void) _openDatabase
 {
-  // Get singleton objects - settings, current state, database
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  CurrentState *state = [CurrentState sharedCurrentState];
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  
-  // This call loads/initializes settings and if we don't call this here, shit WILL break.
-  [state initializeSettings];
-  
-  // Determine if the MAIN database exists or not
-  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
-  bool dbDidFinishCopying = [settings boolForKey:@"db_did_finish_copying"];
-  if (state.isFirstLoad || ![db databaseFileExists:pathToDatabase] || !dbDidFinishCopying)
+  // Remove observer if we had one for first copy, also get rid of the loading page if we had one
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DatabaseCopyFinished" object:nil];
+	if (loadingView)
   {
-    // Load the "waiting" view for the new database copy
-    [self showFirstLoadProgressView];
+    [loadingView removeView];
+	}
+  
+  // Open the database - it already exists & is properly copied
+  if ([[LWEDatabase sharedLWEDatabase] openDatabase:[LWEFile createDocumentPathWithFilename:@"jFlash.db"]])
+  {
+    // Then load plugins
+    [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];
   }
   else
   {
-    // Open the database - it already exists & is properly copied
-    if ([db openDatabase:pathToDatabase])
-    {
-      // Add each plugin database if it exists
-      NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
-      NSEnumerator *keyEnumerator = [plugins keyEnumerator];
-      NSString *key;
-      while (key = [keyEnumerator nextObject])
-      {
-        NSString* filename = [LWEFile createDocumentPathWithFilename:[plugins objectForKey:key]];
-        if ([[state pluginMgr] loadPluginFromFile:filename] == nil)
-        {
-          LWE_LOG(@"FAILED to load plugin: %@",filename);
-        }
-      }
-    }
-    [self performSelector:@selector(loadTabBar) withObject:nil afterDelay:0.0];
+    // Could not open database!
   }
+  [self _loadTabBar];
 }
 
 
 /**
  * Programmatically creates a TabBarController and adds nav/view controllers for each tab item
  */
-- (void) loadTabBar
+- (void) _loadTabBar
 {
   LWE_LOG(@"START Tab bar");
   
@@ -158,59 +169,21 @@
   // Replace active view with tabBarController's view
   self.view = tabBarController.view;
 
+  // Show a UIAlert if this is the first time the user has launched the app.
+  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  if (appSettings.isFirstLoad)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
+    // RSH Jun 3 2010 - why are we doing this in study view controller?  This shouldn't know about the program state
+    appSettings.isFirstLoad = NO;
+  }
+  
   LWE_LOG(@"END Tab bar");
   
   //launch the please rate us
   [Appirater appLaunched];
-}
-
-
-/**
- * On first load - this shows the "setting up for first time" dialog, starts DB copy, and calls continueDatabaseCopy when finished
- */
-- (void) showFirstLoadProgressView
-{
-  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *pathToDatabase = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"jFlash.db"];
-  [db performSelectorInBackground:@selector(openDatabase:) withObject:pathToDatabase];
-  [self _continueDatabaseCopy];
-} 
-
-
-/**
- * Called continously by itself until DB copy is finished
- */
-- (void) _continueDatabaseCopy
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if (!db.databaseOpenFinished)
-  {
-    // Checks every 250 milliseconds to see if we are done
-    [self performSelector:@selector(_continueDatabaseCopy) withObject:nil afterDelay:0.25];
-  }
-  else
-  {
-    [self _finishDatabaseCopy];
-  }
-}
-
-
-/**
- * Cleanup once database is finished copying, removes "setup" dialog
- * If RootViewController has a delegate, it will call appInitDidComplete
- */
-- (void) _finishDatabaseCopy
-{
-	if (loadingView)
-  {
-    [loadingView removeView];
-	}		
-	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(appInitDidComplete)])
-  {
-		[delegate appInitDidComplete];
-	}
-  [self loadTabBar];
 }
 
 

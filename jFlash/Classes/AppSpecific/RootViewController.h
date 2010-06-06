@@ -21,16 +21,10 @@
 #import "LWEFile.h"
 #import "LWEDownloader.h"
 
-@protocol InitializationDelegate <NSObject>
-@optional
-- (void)appInitDidComplete;
-@end
-
 @class PDColoredProgressView;
 
 @interface RootViewController : UIViewController 
 {
-	id<InitializationDelegate> delegate;
 //	PDColoredProgressView *loadingView;
   LoadingView *loadingView;
   NSInteger i;
@@ -38,17 +32,18 @@
 }
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
-@property (retain) id<InitializationDelegate> delegate;
 @property (retain,nonatomic) LoadingView *loadingView;
 @property NSInteger i;
 
 - (void) switchToStudyView;
 - (void) applicationWillTerminate:(UIApplication*) application;
-- (void) showFirstLoadProgressView;
-- (void) _continueDatabaseCopy;
-- (void) _finishDatabaseCopy;
-- (void) loadTabBar;
 
+// Semiprivate methods
+- (void) _prepareDatabase;
+- (void) _openDatabase;
+- (void) _loadTabBar;
+
+// Notification methods
 - (void) shouldSwapSearchViewController;
 - (void) shouldHideDownloaderModal:(NSNotification*)aNotification;
 - (void) shouldShowDownloaderModal:(NSNotification*)aNotification;

@@ -75,6 +75,30 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 
 
 /**
+ * Load all plugins from settings file
+ */
+- (BOOL) loadInstalledPlugins
+{
+  BOOL success = YES;
+  // Add each plugin database if it exists
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
+  NSEnumerator *keyEnumerator = [plugins keyEnumerator];
+  NSString *key;
+  while (key = [keyEnumerator nextObject])
+  {
+    NSString* filename = [LWEFile createDocumentPathWithFilename:[plugins objectForKey:key]];
+    if ([self loadPluginFromFile:filename] == nil)
+    {
+      LWE_LOG(@"FAILED to load plugin: %@",filename);
+      success = NO;
+    }
+  }
+  return success;
+}
+
+
+/**
  * Loads a plugin from a file, returns plugin key name
  */
 - (NSString*) loadPluginFromFile:(NSString*)filename
@@ -83,7 +107,7 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // Make sure we can find the file!
-  if (![db databaseFileExists:filename]) return NO;
+  if (![LWEFile fileExists:filename]) return NO;
   
   // Test drive the attachment to verify it matches
   if ([db attachDatabase:filename withName:@"LWEDATABASETMP"])

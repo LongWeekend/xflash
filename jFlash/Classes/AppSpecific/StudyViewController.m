@@ -39,17 +39,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-
-  // Show a UIAlert if this is the first time the user has launched the app.
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  if (appSettings.isFirstLoad)
-  {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
-    // RSH Jun 3 2010 - why are we doing this in study view controller?  This shouldn't know about the program state
-    appSettings.isFirstLoad = NO;
-  }
   
  // redraw the progress bar
  [self refreshProgressBarView];

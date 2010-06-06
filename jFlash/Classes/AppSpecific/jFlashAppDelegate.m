@@ -32,7 +32,6 @@
   [window makeKeyAndVisible];
   
   [pool release];
-  
 }
 
 //! Flurry exception handler (only installed in final app store version)
