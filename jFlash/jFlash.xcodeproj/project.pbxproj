@@ -32,6 +32,7 @@
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
+		4997D21611BB642600016A15 /* VersionMigrater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionMigrater.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
@@ -218,6 +219,8 @@
 		4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchUnavailableViewController.h; path = AppSpecific/SearchUnavailableViewController.h; sourceTree = "<group>"; };
 		4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchUnavailableViewController.m; path = AppSpecific/SearchUnavailableViewController.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		4997D21411BB642600016A15 /* VersionMigrater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionMigrater.h; path = AppSpecific/VersionMigrater.h; sourceTree = "<group>"; };
+		4997D21511BB642600016A15 /* VersionMigrater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionMigrater.m; path = AppSpecific/VersionMigrater.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
@@ -792,6 +795,8 @@
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
 				4950C25111B764B200B70EE9 /* PluginManager.h */,
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
+				4997D21411BB642600016A15 /* VersionMigrater.h */,
+				4997D21511BB642600016A15 /* VersionMigrater.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -1259,6 +1264,7 @@
 				49CF2F1511BA4E0A0066923F /* LWEFile.m in Sources */,
 				49CF2F1A11BA4E180066923F /* Card.m in Sources */,
 				49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */,
+				4997D21611BB642600016A15 /* VersionMigrater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

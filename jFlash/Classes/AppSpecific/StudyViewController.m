@@ -327,8 +327,8 @@
 
 - (void) updateTheme
 {
-  NSString* tmpStr = [NSString stringWithFormat:@"/%@theme-cookie-cutters/practice-bg.png",[[ThemeManager sharedThemeManager] currentThemeFileName]];
-  [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]]];
+  NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
+  [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
 }
 
 - (NSMutableArray*) getLevelDetails

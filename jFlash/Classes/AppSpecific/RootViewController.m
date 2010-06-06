@@ -39,12 +39,9 @@
 - (void) loadView
 {
   // Splash screen
-  //TODO: make this work w/o a default on first load
-  //TODO: get rid of these path names all over this code
-  NSString* tmpStr = [[NSString alloc] initWithFormat:@"/%@theme-cookie-cutters/Default.png",[[ThemeManager sharedThemeManager] currentThemeFileName]];
+  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-  view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:tmpStr]];
-  [tmpStr release];
+  view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
   self.view = view;
   [view release];
   
