@@ -119,7 +119,6 @@
 		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		917A5C4711AB829000016BD2 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3E11AB829000016BD2 /* LoadingView.m */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
-		917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4611AB829000016BD2 /* SwipeView.m */; };
 		917A5C5711AB835400016BD2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
 		917A5C5811AB835400016BD2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5011AB835400016BD2 /* CellTextView.m */; };
 		917A5C5911AB835400016BD2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5211AB835400016BD2 /* DisplayCell.m */; };
@@ -213,7 +212,7 @@
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		494D6C6411AE1AF1006DADF1 /* jFlashApplicationTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlashApplicationTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		494D6C6F11AE1BB1006DADF1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		494D6C6F11AE1BB1006DADF1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = /Users/phooze/Documents/iPhone/jFlashBare/jFlash/Classes/External/FlurryLib/libFlurry.a; sourceTree = "<absolute>"; };
 		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
@@ -360,8 +359,6 @@
 		917A5C3E11AB829000016BD2 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingView.m; path = AppSpecific/LoadingView.m; sourceTree = "<group>"; };
 		917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressDetailsViewController.h; path = AppSpecific/ProgressDetailsViewController.h; sourceTree = "<group>"; };
 		917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressDetailsViewController.m; path = AppSpecific/ProgressDetailsViewController.m; sourceTree = "<group>"; };
-		917A5C4511AB829000016BD2 /* SwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeView.h; path = AppSpecific/SwipeView.h; sourceTree = "<group>"; };
-		917A5C4611AB829000016BD2 /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeView.m; path = AppSpecific/SwipeView.m; sourceTree = "<group>"; };
 		917A5C4D11AB835400016BD2 /* CellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextField.h; sourceTree = "<group>"; };
 		917A5C4E11AB835400016BD2 /* CellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextField.m; sourceTree = "<group>"; };
 		917A5C4F11AB835400016BD2 /* CellTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextView.h; sourceTree = "<group>"; };
@@ -581,8 +578,6 @@
 				DA8B6A430FB111A200DE105C /* XIBs */,
 				917A5C3D11AB829000016BD2 /* LoadingView.h */,
 				917A5C3E11AB829000016BD2 /* LoadingView.m */,
-				917A5C4511AB829000016BD2 /* SwipeView.h */,
-				917A5C4611AB829000016BD2 /* SwipeView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1235,7 +1230,6 @@
 				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
 				917A5C4711AB829000016BD2 /* LoadingView.m in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
-				917A5C4B11AB829000016BD2 /* SwipeView.m in Sources */,
 				917A5C5711AB835400016BD2 /* CellTextField.m in Sources */,
 				917A5C5811AB835400016BD2 /* CellTextView.m in Sources */,
 				917A5C5911AB835400016BD2 /* DisplayCell.m in Sources */,

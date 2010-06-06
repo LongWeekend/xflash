@@ -37,7 +37,7 @@
 - (void) loadTabBar;
 
 // Notification methods
-- (void) shouldSwapSearchViewController;
-- (void) shouldHideDownloaderModal:(NSNotification*)aNotification;
-- (void) shouldShowDownloaderModal:(NSNotification*)aNotification;
+- (void) swapSearchViewController;
+- (void) hideDownloaderModal:(NSNotification*)aNotification;
+- (void) showDownloaderModal:(NSNotification*)aNotification;
 @end

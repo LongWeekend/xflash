@@ -85,7 +85,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   else
   {
     [self setIsFirstLoad:YES];
-    [self createDefaultSettings];
+    [self _createDefaultSettings];
   }
 
   // We initialize the plugins manager
@@ -95,7 +95,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 
 //! Create & store default settings to NSUserDefaults
-- (void) createDefaultSettings
+- (void) _createDefaultSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 

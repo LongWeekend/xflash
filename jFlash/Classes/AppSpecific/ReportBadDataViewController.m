@@ -9,12 +9,16 @@
 
 NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex: \"Change the first kanji to X\"";
 
-//! Allows user to report bad data in the cards to LWE via Flurry event handling
+/**
+ * Allows user to report bad data in the cards to LWE via Flurry event handling
+ */
 @implementation ReportBadDataViewController
 
 @synthesize issueTypeBox, userMsgInputBox, userEmailBox, pickerView, hotheadImg;
 
-//! Customized initializer to set the card on init
+/**
+ * Customized initializer to set the card on init
+ */
 - (id) initWithNibName:(NSString*)nibName forBadCard:(Card*)card
 {
   if (self = [super initWithNibName:nibName bundle:nil])
@@ -44,7 +48,9 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! UIView delegate - View did load, so time time to set up picker, the title nav bar & HH Icon
+/**
+ * UIView delegate - View did load, so time time to set up picker, the title nav bar & HH Icon
+ */
 - (void) viewDidLoad
 {
   // Now set up other NIB file
@@ -142,7 +148,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 
 # pragma mark Delegate methods for UITextField
 
-//! Should edit - if it's the email, say yes, if it's the reason, say no
+/** Should edit - if it's the email, say yes, if it's the reason, say no */
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
   if (textField == [self userEmailBox]) return YES;
@@ -159,7 +165,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! Did edit - if it's the email, scroll the view so we can see the box
+/** Did edit - if it's the email, scroll the view so we can see the box */
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
   if (textField == [self userEmailBox])
@@ -174,7 +180,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! Should return - hides the keyboard for email
+/** Should return - hides the keyboard for email */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
   if (textField == [self userEmailBox])
@@ -191,7 +197,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 
 #pragma mark UITextViewDelegate methods
 
-//! Detects a touch outside of the UITextView to resign the keyboard
+/** Detects a touch outside of the UITextView to resign the keyboard */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {  
   UITouch *touch = [[event allTouches] anyObject];
@@ -203,7 +209,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! Delegate for text view - stops the user from editing when picker is showing
+/** Delegate for text view - stops the user from editing when picker is showing */
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
   if (_pickerCurrentlyVisible || _keyboardCurrentlyVisible)
@@ -217,7 +223,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! Delegate for text view - installs a cancel button to cancel the keyboard in the title nav bar
+/** Delegate for text view - installs a cancel button to cancel the keyboard in the title nav bar */
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(_resignTextViewKeyboard)];
@@ -237,7 +243,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! Hides text editing keyboard and kills "done" button from title
+/** Hides text editing keyboard and kills "done" button from title */
 - (void) _resignTextViewKeyboard
 {
   [userMsgInputBox resignFirstResponder];
@@ -258,14 +264,14 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 
 #pragma mark UIPickerViewDataSource
 
-//! UIPickerView delegate - gets the title of each row from _issueTypeArray
+/** UIPickerView delegate - gets the title of each row from _issueTypeArray */
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
   return [_issueTypeArray objectAtIndex:row];
 }
 
 
-//! UIPickerView delegate - called when the user chooses one item
+/** UIPickerView delegate - called when the user chooses one item */
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
   _userSelectedIssueType = row;
@@ -273,28 +279,28 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
-//! UIPickerView delegate - number of pickers - hardcoded to return 1 (issue type)
+/** UIPickerView delegate - number of pickers - hardcoded to return 1 (issue type) */
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
 	return 1;
 }
 
 
-//! UIPickerView delegate - what is the width of the picker - hardcoded to 300px
+/** UIPickerView delegate - what is the width of the picker - hardcoded to 300px */
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
   return 300.0f;
 }
 
 
-//! UIPickerView delegate - what is the height of each row - hardcoded to 40px
+/** UIPickerView delegate - what is the height of each row - hardcoded to 40px */
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
 	return 40.0;
 }
 
 
-//! UIPickerView delegate - how many rows are in the picker (sourced from _issueTypeArray)
+/** UIPickerView delegate - how many rows are in the picker (sourced from _issueTypeArray) */
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
   return [_issueTypeArray count];

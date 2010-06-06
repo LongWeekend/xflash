@@ -9,7 +9,9 @@
 #import "RootViewController.h"
 
 /**
- * Takes control from appDelegate and loads tab bar controller programmatically - top level view controller in the app
+ * Takes UI hierarchy control from appDelegate and 
+ * loads tab bar controller programmatically when loadTabBar is called
+ * This is the top level view controller in the app
  */
 @implementation RootViewController
 
@@ -27,9 +29,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
 
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldShowDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldHideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldSwapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
   }
 	return self;
 }
@@ -135,11 +137,8 @@
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     [alertView release];
-    // RSH Jun 3 2010 - why are we doing this in study view controller?  This shouldn't know about the program state
     appSettings.isFirstLoad = NO;
   }
-  
-  LWE_LOG(@"END Tab bar");
   
   //launch the please rate us
   [Appirater appLaunched];
@@ -156,7 +155,7 @@
 
 
 //! Pops up a modal over the screen when the user needs to download something
-- (void) shouldShowDownloaderModal:(NSNotification*)aNotification
+- (void) showDownloaderModal:(NSNotification*)aNotification
 {
   DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
 
@@ -178,15 +177,14 @@
 
 
 //! Hides the downloader
-- (void) shouldHideDownloaderModal:(NSNotification*)aNotification
+- (void) hideDownloaderModal:(NSNotification*)aNotification
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
 }
 
 
-//TODO: this is not the best implementation MMA 6/3/2010
 //! Changes the middle tab bar to searchViewController
-- (void) shouldSwapSearchViewController
+- (void) swapSearchViewController
 {
   NSArray* vcs = [[self tabBarController] viewControllers];
   NSMutableArray *tmpVcs = [NSMutableArray arrayWithArray:vcs];
@@ -229,7 +227,10 @@
 
 # pragma mark Housekeeping
 
-//! Delegate method of UIApplication (via AppDelegate); called on shutdown
+/**
+ * Delegate method of UIApplication (via AppDelegate); called on shutdown
+ * TODO: review why this happens here? MMA 6/5/2010
+ */
 - (void) applicationWillTerminate:(UIApplication*)application
 {
   // Get current card from StudyViewController
