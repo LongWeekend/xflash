@@ -179,9 +179,13 @@
     modalViewController.cardId = [[self currentCard] cardId];
     modalViewController.currentCard = [self currentCard];
     UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(dismissModalViewControllerAnimated:)];
+    modalNavControl
+    .navigationItem.leftBarButtonItem = doneBtn;
     modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
     [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
     [modalNavControl release];
+    [doneBtn release];
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }

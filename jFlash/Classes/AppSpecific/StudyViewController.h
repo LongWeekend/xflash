@@ -14,6 +14,7 @@
 #import "MoodIcon.h"
 #import "BrowseModeCardViewDelegate.h"
 #import "PracticeModeCardViewDelegate.h"
+#import "ExampleSentencesViewController.h"
 
 @interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate> {
   
@@ -28,6 +29,8 @@
   
   IBOutlet ActionBarViewController *actionBarController;
   IBOutlet UIView *actionbarView;
+  
+  ExampleSentencesViewController *exampleSentencesViewController;
   
   IBOutlet UILabel *cardSetLabel;
   IBOutlet UILabel *totalWordsLabel;
@@ -100,6 +103,8 @@
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 @property (nonatomic, retain) CardViewController *cardViewController; 
 @property (nonatomic, retain) UIView *cardView;
+
+@property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 
 @property (nonatomic, retain) ActionBarViewController *actionBarController;
 @property (nonatomic, retain) UIView *actionbarView;

@@ -25,6 +25,8 @@
 
 - (void) hydrate: (FMResultSet*) rs;
 - (NSString*) meaningWithoutMarkup;
+- (NSString*) combinedReadingForSettings;
+- (BOOL) hasExampleSentences;
 //- (void) setLevel: (FMResultSet*) rs;
 
 @property (nonatomic) NSInteger cardId;

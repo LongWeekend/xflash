@@ -9,9 +9,10 @@
 
 // declare private methods here
 @interface StudyViewController()
-- (void)_resetActionMenu;
+- (void)_resetStudyView;
 - (void)_jumpToPage:(int)page;
 - (void)_updateCardViewDelegates;
+- (void)_resetExampleSentencesView;
 @end
 
 @implementation StudyViewController
@@ -19,7 +20,7 @@
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, percentCorrectVisible, isBrowseMode, hhAnimationView;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
-@synthesize scrollView, pageControl;
+@synthesize scrollView, pageControl, exampleSentencesViewController;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 
 - (id) init
@@ -83,17 +84,36 @@
 	[self resetStudySet];
   LWE_LOG(@"END Study View");
   
-  [self _resetActionMenu];
-  
   [self setupScrollView];
+  
+  [self _resetStudyView];
 }
 
 #pragma mark Convenience methods
 
-- (void) _resetActionMenu
+- (void) _resetExampleSentencesView
+{
+  if([[self currentCard] hasExampleSentences])
+  {
+    [[self pageControl] setHidden:NO];
+    scrollView.pagingEnabled = YES;
+    scrollView.scrollEnabled = YES;
+  }
+  else
+  {
+    [[self pageControl] setHidden:YES];
+    scrollView.pagingEnabled = NO;
+    scrollView.scrollEnabled = NO;
+  }
+  [[self exampleSentencesViewController] setup];
+}
+
+- (void) _resetStudyView
 {
   [[self actionBarController] setCurrentCard:[self currentCard]];
   [actionBarController setup];
+  
+  [self _resetExampleSentencesView];
   
   // update the remaining cards label
   if(isBrowseMode)
@@ -151,7 +171,7 @@
   [[self cardViewController] setCurrentCard:[self currentCard]];
 	[[self cardViewController] setup];
   
-  [self _resetActionMenu];
+  [self _resetStudyView];
 }
 
 - (void) resetStudySet
@@ -205,7 +225,7 @@
     LWE_LOG(@"Calling prepareView FROM doChangeCard");
     [[self cardViewController] setup];
     
-    [self _resetActionMenu];
+    [self _resetStudyView];
     
     [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)direction duration:(float)0.15f objectToTransition:(UIViewController *)self];
     
@@ -362,9 +382,9 @@
 	CGFloat cx = scrollView.frame.size.width;
   
   // TODO: make this the right view for example sentences
-  CardViewController *cfv = [[CardViewController alloc] init];
-  [cfv setCurrentCard:[self currentCard]];
-  UIView *sentencesView = cfv.view;
+  [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
+  [[self exampleSentencesViewController] setDatasource:self];
+  UIView *sentencesView = [[self exampleSentencesViewController] view];
 			
 	CGRect rect = sentencesView.frame;
 	rect.origin.x = ((scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
@@ -403,16 +423,16 @@
 #pragma mark -
 #pragma mark PageControl stuff
 
-- (IBAction)changePage:(id)sender 
+- (IBAction)changePage:(id)sender animated:(BOOL) animated
 {
 	/*
-	 *	Change the scroll view
-	 */
+	*	Change the scroll view
+	*/  
   CGRect frame = scrollView.frame;
   frame.origin.x = frame.size.width * pageControl.currentPage;
   frame.origin.y = 0;
 	
-  [scrollView scrollRectToVisible:frame animated:YES];
+  [scrollView scrollRectToVisible:frame animated:animated];
   
 	/*
 	 *	When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
@@ -420,10 +440,17 @@
   pageControlIsChangingPage = YES;
 }
 
--(void) _jumpToPage:(int)page
+//* convenience method for have the animated bool defalut to yes for Interface Builder
+- (IBAction)changePage:(id)sender
+{
+  [self changePage:sender animated:YES];
+}
+
+//* programatically jump the scrollview to a page, does not animate the scroll
+- (void) _jumpToPage:(int)page
 {
   [pageControl setCurrentPage: page];
-  [self changePage:pageControl];
+  [self changePage:pageControl animated:NO];
 }
 
 #pragma mark -
@@ -473,6 +500,7 @@
   //scrollView
   [scrollView release];
   [pageControl release];
+  [exampleSentencesViewController release];
   
 	[super dealloc];
 }

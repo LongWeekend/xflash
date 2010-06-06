@@ -71,7 +71,7 @@
 								<int key="IBUITextAlignment">1</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{20, 33}, {280, 42}}</string>
+						<string key="NSFrame">{{20, 14}, {280, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
@@ -118,7 +118,7 @@
 								<int key="IBUILineBreakMode">0</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{21, 79}, {280, 55}}</string>
+						<string key="NSFrame">{{21, 60}, {280, 55}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
@@ -128,7 +128,7 @@
 					<object class="IBUIWebView" id="806681086">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{21, 135}, {280, 120}}</string>
+						<string key="NSFrame">{{21, 116}, {280, 120}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -137,13 +137,11 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<int key="IBUIDataDetectorTypes">1</int>
-						<bool key="IBUIDetectsPhoneNumbers">YES</bool>
 					</object>
 					<object class="IBUIButton" id="124502176">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">288</int>
-						<string key="NSFrame">{{108, 36}, {110, 37}}</string>
+						<string key="NSFrame">{{108, 17}, {110, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -179,7 +177,7 @@
 					<object class="IBUIImageView" id="901262833">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 52}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 33}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -193,7 +191,7 @@
 					<object class="IBUIImageView" id="283233690">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 103}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 84}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -202,7 +200,7 @@
 						<reference key="IBUIImage" ref="87227298"/>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 298}</string>
+				<string key="NSFrameSize">{320, 280}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -435,7 +433,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>WordCardViewController</string>
 					<string>UIResponder</string>
-					<string>{{340, 185}, {320, 298}}</string>
+					<string>{{340, 168}, {320, 280}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
