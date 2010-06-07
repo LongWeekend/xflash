@@ -20,6 +20,11 @@ if (!is_numeric($numToGenerate) && $numToGenerate > 0)
 	die("incorrect input");
 }
 
+if ($numToGenerate > 10000)
+{
+	die("I can't do more than 10000, otherwise you are going to hang me");
+}
+
 $fh = fopen($outputFilename,"w");
 if (!$fh)
 {
@@ -28,10 +33,16 @@ if (!$fh)
 
 // Get to it
 $user_history = array();
+$used_ids = array();
 for ($i = 0; $i < $numToGenerate; $i++)
 {
 	$levelId = rand(1,5);
 	$cardId = rand(0,147000);
+	while (in_array($cardId,$used_ids))
+	{
+		$cardId = rand(0,147000);
+	}
+	$used_ids[] = $cardId;
 	$wrongCount = rand(0,10);
 	$rightCount = rand(0,10);
 	$user_history[]  = "INSERT INTO user_history (card_id, timestamp, user_id, right_count, wrong_count, created_on, card_level) VALUES ('$cardId',current_timestamp,'1','$rightCount','$wrongCount',current_timestamp,'$levelId');";
