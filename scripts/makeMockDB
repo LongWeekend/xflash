@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# First create the test data
+echo "Creating test data database w/ 3000 user history records and 50,000 card_id updates"
+php makeTestUpdateSQL.php -n 50000 -o ../jFlash/test_update_10_to_11_sql.txt
+php makeTestUserDataSQL.php -n 3000 -o tmp_user_data.sql
+
+# Make a fresh database
+cp jFlash-1.0.db jFlash.tmp.db
+sqlite3 jFlash.tmp.db < tmp_user_data.sql
+rm tmp_user_data.sql
+
+# Move the database into location
+if [ -f ../jFlash/sql/jFlash.db ]
+then
+  mv ../jFlash/sql/jFlash.db ../jFlash/sql/jFlash.db.old
+fi
+mv jFlash.tmp.db ../jFlash/sql/jFlash.db
+echo "DONE - new database located in sql directory of xcode project"
