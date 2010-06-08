@@ -51,13 +51,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                            nil];
     
     // Defines the (Joseph) Tame theme tint values & CSS
+    // TODO: Paul - change the tame theme here!
     NSDictionary *tame = [NSDictionary dictionaryWithObjectsAndKeys:
                           SET_THEME_TAME,@"key",
                           @"Tame",@"name",
                           @"tame",@"filename",
-                          [NSNumber numberWithFloat:0.500],@"R",
-                          [NSNumber numberWithFloat:0.500],@"G",
-                          [NSNumber numberWithFloat:0.500],@"B",
+                          [NSNumber numberWithFloat:0.000],@"R",
+                          [NSNumber numberWithFloat:0.000],@"G",
+                          [NSNumber numberWithFloat:0.000],@"B",
                           @"aaaaaa",@"WEB_SELECTED",
                           @"dfn{ background-color:white; border-color:gray; }",@"CSS",
                           nil];
