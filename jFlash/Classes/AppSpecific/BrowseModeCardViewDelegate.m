@@ -20,8 +20,6 @@
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setCardViewController:cvc];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [[self cardViewController] layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
     [[aNotification object] setView:[[self cardViewController] view]];
   }
   
