@@ -27,6 +27,10 @@
   toggleReadingBtnYPosInXib = tmpFrame.origin.y;
   tmpFrame = cardHeadwordLabelScrollContainer.frame;
   cardHeadwordLabelYPosInXib = tmpFrame.origin.y;  
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
+  [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
+  
 }
 
 #pragma mark layout methods

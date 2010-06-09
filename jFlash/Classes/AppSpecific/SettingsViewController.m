@@ -295,16 +295,19 @@ NSString * const APP_FACEBOOK = @"facebook";
   else
   {
     // Everything else
-    settingsChanged = YES;
     [self iterateSetting:key];
     [[self tableView] reloadData];
-    if (key == APP_HEADWORD)
+    if (key == APP_HEADWORD) // we don't want the current card to change for just a headword switch
     {
       headwordChanged = YES;
     }
     else if (key == APP_THEME)
     {
       themeChanged = YES;
+    }
+    else
+    {
+      settingsChanged = YES;
     }
   }
 }
