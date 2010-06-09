@@ -8,6 +8,8 @@
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX 0
 #define DEFAULT_TAG_ID 124
 #define DEFAULT_USER_ID 1
+#define DEFAULT_FREQUENCY_MULTIPLIER 1
+#define DEFAULT_MAX_STRUDYING 30
 
 // Database version constants
 #define JFLASH_DATA_1_0 1
@@ -39,6 +41,8 @@ extern NSString * const APP_READING;
 extern NSString * const APP_THEME;
 extern NSString * const APP_USER;
 extern NSString * const APP_PLUGIN;
+extern NSString * const APP_FREQUENCY_MULTIPLIER;
+extern NSString * const APP_MAX_STUDYING;
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
@@ -56,6 +60,12 @@ extern NSString * const APP_PLUGIN;
 extern NSString * const HTML_HEADER;
 extern NSString * const HTML_FOOTER;
 
+// algorithm controls
+#define MAX_MAX_STUDYING 50
+#define MIN_MAX_STUDYING 5
+#define MAX_FREQUENCY_MULTIPLIER 4
+#define MIN_FREQUENCY_MULTIPLIER 1
+
 // Some layout consts
 #define LAYOUT_CARD_REVEALED_Y_OFFSET 20
 #define LAYOUT_CARD_HIDDEN_Y_OFFSET -20
@@ -65,8 +75,6 @@ extern NSString * const HTML_FOOTER;
 
 #define FONT_SIZE_CARD_E_MEANING 14
 #define FONT_SIZE_CARD_J_MEANING 14
-
-
 
 // these are the various screen placement constants used across all the UIViewControllers
  

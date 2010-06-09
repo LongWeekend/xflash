@@ -16,6 +16,7 @@
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
+NSString * const APP_ALGORITHM = @"algorithm";
 
 - (SettingsViewController*) init
 {
@@ -53,8 +54,9 @@ NSString * const APP_FACEBOOK = @"facebook";
     // These are the keys and display names of each row
     NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Browse Mode",@"SettingsViewController.SettingNames_BrowseMode"),
                                                           NSLocalizedString(@"Headword",@"SettingsViewController.SettingNames_HeadwordLanguage"),
-                                                          NSLocalizedString(@"Reading Display As",@"SettingsViewController.SettingNames_DisplayReading"),nil];
-    NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,nil];
+                                                          NSLocalizedString(@"Reading Display As",@"SettingsViewController.SettingNames_DisplayReading"),
+                                                          NSLocalizedString(@"Study Algorithm",@"SettingsViewController.SettingNames_StudyAlgo"),nil];
+    NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
     NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
 
     NSArray *userSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
@@ -127,6 +129,7 @@ NSString * const APP_FACEBOOK = @"facebook";
 {
   appirater = [[Appirater alloc] init];
   [appirater showPromptManually];
+  [appirater release];
 }
 
 
@@ -221,6 +224,11 @@ NSString * const APP_FACEBOOK = @"facebook";
     else
       tmpView.image = [UIImage imageNamed:@"facebook-icon.png"];
   }
+  else if (key == STUDY_ALGORITHM)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:STUDY_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
   else
   {
     // Anything else
@@ -298,6 +306,12 @@ NSString * const APP_FACEBOOK = @"facebook";
     [self.navigationController pushViewController:webVC animated:YES];
     [webVC release];
   }
+  else if (key == STUDY_ALGORITHM)
+  {
+    AlgorithmSettingsViewController *avc = [[AlgorithmSettingsViewController alloc] init];
+    [self.navigationController pushViewController:avc animated:YES];
+    [avc release];
+  }
   else
   {
     // Everything else
@@ -307,7 +321,7 @@ NSString * const APP_FACEBOOK = @"facebook";
     {
       headwordChanged = YES;
     }
-    else if (key == APP_THEME)
+    else if (key == APP_THEME || APP_READING)
     {
       themeChanged = YES;
     }

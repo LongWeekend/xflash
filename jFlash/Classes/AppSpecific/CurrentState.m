@@ -129,6 +129,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // these are integers so we can't use the array loop above
   [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
   [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
+  [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
+  [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
   // disable first load messsage if we get this far
   [settings setBool:YES forKey:@"settings_already_created"];
   [settings setBool:NO forKey:@"db_did_finish_copying"];
