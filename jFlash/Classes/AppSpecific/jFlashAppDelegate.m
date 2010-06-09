@@ -62,6 +62,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     // Register a notification to wait here for the success, then do the DB copy
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:@"DatabaseCopyFinished" object:nil];
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+    [[self rootViewController] showDatabaseLoadingView];
     [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:JFLASH_CURRENT_USER_DATABASE];
   }
   else

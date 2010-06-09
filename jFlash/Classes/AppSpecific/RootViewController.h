@@ -38,6 +38,8 @@
 - (void) switchToStudyView;
 - (void) applicationWillTerminate:(UIApplication*) application;
 - (void) loadTabBar;
+- (void) showDatabaseLoadingView;
+- (void) hideDatabaseLoadingView;
 
 // Notification methods
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
