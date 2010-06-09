@@ -76,6 +76,50 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
 
 /**
+ * Closes an active database connection
+ * At the moment it returns YES no matter what
+ */
+- (BOOL) closeDatabase
+{
+  // First check that the database is indeed open
+  if ([self _databaseIsOpen])
+  {
+    [[self dao] close];
+    self.databaseOpenFinished = NO;
+  }
+  return YES;
+}
+
+
+/**
+ * Gets open database's version - proprietary to LWE databases (uses version table)
+ */
+- (NSString*) databaseVersion
+{
+  // If no version, return version 1.0
+  NSString *version = [[NSString alloc] initWithString:JFLASH_VERSION_1_0];
+  if ([self _databaseIsOpen])
+  {
+    NSString* sql = [[NSString alloc] initWithFormat:@"SELECT * FROM main.version LIMIT 1"];
+    FMResultSet *rs = [self executeQuery:sql];
+    while ([rs next])
+    {
+      // Get rid of the old one and replace w/ the current version
+      [version release];
+      version = [rs stringForColumn:@"version"];
+    }
+    [rs close];
+  }
+  else
+  {
+    // When called with no DB, throw exception
+    [NSException raise:@"Invalid database object in 'dao'" format:@"dao object is: %@",[self dao]];
+  }
+  return version;
+}
+
+
+/**
  * Attaches another database onto the existing open connection
  */
 - (BOOL) attachDatabase:(NSString*) pathToDatabase withName:(NSString*) name
@@ -85,7 +129,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   {
     NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE \"%@\" AS %@;",pathToDatabase,name];
     LWE_LOG(@"%@",sql);
-    [[self dao] executeUpdate:sql];
+    [self executeUpdate:sql];
     if (![[self dao] hadError])
     {
       returnVal = YES;
@@ -111,7 +155,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   {
     NSString *sql = [[NSString alloc] initWithFormat:@"DETACH DATABASE \"%@\";",name];
     LWE_LOG(@"%@",sql);
-    [[self dao] executeUpdate:sql];
+    [self executeUpdate:sql];
     if (![[self dao] hadError])
     {
       returnVal = YES;
@@ -175,7 +219,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
  */
 - (BOOL) _databaseIsOpen
 {
-  if ([[self dao] isKindOfClass:[FMDatabase class]])
+  if ([[self dao] isKindOfClass:[FMDatabase class]] && [[self dao] goodConnection])
     return YES;
   else
     return NO;

@@ -10,17 +10,19 @@
 #import <zlib.h>
 #import "LWEFile.h"
 #import "ASIHTTPRequest.h"
+#import "ModalTaskViewController.h"
 
 // For ZIP extension
 #define CHUNK 16384
 
-//! State machine for the downloader
+/** State machine for the downloader */
 typedef enum _downloaderStates
 {
   kDownloaderReady,                   //! Downloader ready to go
   kDownloaderCancelled,               //! Downloader cancelled
-  kDownloaderRetrievingMetaData,      //! Retrieving data about to-be-downloaded package
+  kDownloaderRetrievingMetaData,      //! Retrieving data about to-be-downloaded package (headers)
   kDownloaderRetrievingData,          //! Retrieving actual data
+  kDownloaderPaused,                  //! Data retrieval paused
   kDownloaderNetworkFail,             //! Network lost/timeout (no data within certain time period)
   kDownloaderDownloadComplete,        //! Download complete (no more data)
   kDownloaderDecompressing,           //! Unzipping downloaded file
@@ -29,15 +31,20 @@ typedef enum _downloaderStates
   kDownloaderSuccess                  //! Downloaded & verified
 } downloaderStates;
 
+/**
+ * Strict protocol - if the installer delegate does not implement installPluginWithPath: , this should fail
+ */
 @protocol LWEDownloaderInstallerDelegate <NSObject>
 @required
-//! Returns YES if install was successful, NO on failure
+/** Returns YES if install was successful, NO on failure */
 - (BOOL)installPluginWithPath:(NSString *)filename;
 // TODO: add failure reason
 @end
 
-//! Generalized downloader that retrieves files via HTTP asynchronously and optionally unzips them
-@interface LWEDownloader : NSObject <ASIHTTPRequestDelegate>
+/**
+ * Generalized downloader that retrieves files via HTTP asynchronously and optionally unzips them
+ */
+@interface LWEDownloader : NSObject <ASIHTTPRequestDelegate, ModalTaskViewDelegate>
 
 {
   NSURL *targetURL;                   //! HTTP address of the file to get
@@ -71,20 +78,20 @@ typedef enum _downloaderStates
 - (void) setProgress:(float)progress;
 - (void) setProgressFromBackgroundThread:(NSNumber*)tmpNum;
 
-
-// Class methods
 - (id) initWithTargetURL: (NSString *) target targetPath:(NSString*)targetFilename;
-- (void) startDownload;
-- (void) cancelDownload;
-- (void) resetDownload;
+
+// Delegate methods for the ModalTaskViewController
 - (BOOL) isFailureState;
 - (int) getFailureState;
 - (BOOL) isSuccessState;
+- (void) startTask;
+- (void) cancelTask;
+- (void) resetTask;
 
-//! Unzip file we have just downloaded - designed for background thread
+// Unzip file we have just downloaded - designed for background thread
 - (BOOL) _unzipDownloadedFile;
 
-//! Internal method to kick off delegate
+// Internal method to kick off delegate
 - (void) _verifyDownload;
 
 //! Method that can (and should) be delegated via  LWEDownloaderInstallerDelegate protocol

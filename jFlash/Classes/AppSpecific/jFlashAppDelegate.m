@@ -11,6 +11,7 @@
 #import "LWEFile.h"
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
+#import "VersionManager.h"
 
 @implementation jFlashAppDelegate
 
@@ -29,17 +30,17 @@
   // Seed random generator
   srandomdev();
   
-  // This call initializes app settings in NSUserDefaults if not already done.  Important!
+  // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
 
-  // Load root controller to handle initialization process
+  // Load root controller to show splash screen
   self.rootViewController = [[RootViewController alloc] init];
 	[window addSubview:rootViewController.view];
   [window makeKeyAndVisible];
   
   // Add a delay here so that the UI has time to update
-  [self performSelector:@selector(_prepareDatabase) withObject:nil afterDelay:0.0f];
+  [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
 }
 
 //! Flurry exception handler (only installed in final app store version)
@@ -51,22 +52,22 @@ void uncaughtExceptionHandler(NSException *exception) {
 /**
  * Checks whether or not to install the main database from the bundle
  */
-- (void) _prepareDatabase
+- (void) _prepareUserDatabase
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:@"jFlash.db"];
+  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_DATABASE];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
     // Register a notification to wait here for the success, then do the DB copy
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openDatabaseWithPlugins) name:@"DatabaseCopyFinished" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:@"DatabaseCopyFinished" object:nil];
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:@"jFlash.db"];
+    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:JFLASH_CURRENT_USER_DATABASE];
   }
   else
   {
     // Finished copying, and we have the database file - just open it
-    [self _openDatabaseWithPlugins];
+    [self _openUserDatabaseWithPlugins];
   }
 }
 
@@ -75,14 +76,14 @@ void uncaughtExceptionHandler(NSException *exception) {
  * Loads & opens the databases and plugins, calls
  * RootViewController loadTabBar when finished
  */
-- (void) _openDatabaseWithPlugins
+- (void) _openUserDatabaseWithPlugins
 {
   // Remove observer if we had one for first copy, also get rid of the loading page if we had one
   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DatabaseCopyFinished" object:nil];
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if ([db openDatabase:[LWEFile createDocumentPathWithFilename:@"jFlash.db"]])
+  if ([db openDatabase:[LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_DATABASE]])
   {
     // Then load plugins
     [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];

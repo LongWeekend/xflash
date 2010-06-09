@@ -70,6 +70,8 @@
   return self;
 }
 
+#pragma mark -
+#pragma mark Getters & Setters
 
 /**
  * Sets progress complete (delegate from ASIHTTPRequest)
@@ -120,6 +122,257 @@
 {
   [self setTaskMessage:taskMsg];
   return [self _updateInternalState:nextState];
+}
+
+
+#pragma mark -
+#pragma mark View delegates - tells view controller if OK to do certain actions
+
+/**
+ * Allows us to hide/show buttons in the view based on the current state
+ * Delegated from ModalTaskViewController
+ */
+- (void) willUpdateButtonsInView:(id)sender
+{
+  // If not ready, don't show start button
+  if (downloaderState != kDownloaderReady)
+  {
+    [[sender startButton] setHidden:YES];
+  }
+  else
+  {
+    [[sender startButton] setHidden:NO];
+  }
+  
+  // If not failed, don't show retry button (don't count cancellation)
+  if (![self isFailureState] && downloaderState != kDownloaderCancelled)
+  {
+    [[sender retryButton] setHidden:YES];
+  }
+  else
+  {
+    [[sender retryButton] setHidden:NO];
+  }
+  
+  // If not active, don't show Pause button (or, if paused)
+  if (downloaderState != kDownloaderRetrievingData && downloaderState != kDownloaderDecompressing && downloaderState != kDownloaderPaused)
+  {
+    [[sender pauseButton] setHidden:YES];
+  }
+  else
+  {
+    [[sender pauseButton] setHidden:NO];
+  }
+}
+
+
+/**
+ * ModalTask delegate - Returns YES if the downloader is actively retrieving data, otherwise returns NO
+ */
+- (BOOL) canPauseTask
+{
+  if (downloaderState == kDownloaderRetrievingData || downloaderState == kDownloaderPaused)
+    return YES;
+  else
+    return NO;
+}
+
+
+/**
+ * You can cancel at any time! (sign up now!)
+ */
+- (BOOL) canCancelTask
+{
+  return YES;
+}
+
+
+/**
+ * ModalTask delegate - returns YES if we are in failed state, otherwise NO
+ */
+- (BOOL) canRetryTask
+{
+  return [self isFailureState];
+}
+
+
+/**
+ * Returns YES if the downloader is ready otherwise NO
+ */
+- (BOOL) canStartTask
+{
+  if (downloaderState == kDownloaderReady)
+    return YES;
+  else
+    return NO;
+}
+
+
+#pragma mark -
+#pragma mark Actual task delegate methods
+
+
+/**
+ * Starts download process based on target URL
+ */
+- (void) startTask
+{
+  // Only download if we have a URL to get
+  if ([self targetURL] && (downloaderState == kDownloaderReady))
+  {
+    // Set up request
+    _request = [ASIHTTPRequest requestWithURL:[self targetURL]];
+    [_request setDelegate:self];
+    [_request setDownloadProgressDelegate:self];
+    [_request setShowAccurateProgress:YES];
+    [_request setAllowResumeForFileDownloads:YES];
+    
+    // Handle file differently depending on processing requirements after the fact (unzip)
+    if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
+    {
+      [_request setDownloadDestinationPath:_compressedFilename];
+    }
+    else if ([self targetFilename])
+    {
+      [_request setDownloadDestinationPath:[self targetFilename]];      
+    }
+    else
+    {
+      // Should throw exception.  We have no file to download to
+      [NSException raise:@"Invalid target filename passed to LWEDownloader" format:@"Was passed object: %@",[self targetFilename]];
+      return;
+    }
+        
+    // Update internal class status
+    [self _updateInternalState:kDownloaderRetrievingMetaData withTaskMessage:NSLocalizedString(@"Downloader.connecting",@"Connecting...")];
+    
+    // Download in the background
+    [_request startAsynchronous];
+  }
+}
+
+
+/**
+ * Cancels an ongoing process (if we are in one)
+ */
+- (void) cancelTask
+{
+  switch (downloaderState)
+  {
+    case kDownloaderRetrievingData:
+      [_request cancel];
+      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Downloader.downloadCancelled",@"Download Cancelled.")];
+      break;
+      
+    case kDownloaderDecompressing:
+      // Don't update state here because we don't know when it will cancel, allow thread to do that
+      _unzipShouldCancel = YES;
+      break;
+      
+    default:
+      break;
+  }
+}
+
+
+/**
+ * Resets the downloader failed status, ready to try again
+ */
+- (void) resetTask
+{
+  if ([self isFailureState])
+  {
+    // Delete all files
+    if ([LWEFile fileExists:_compressedFilename])
+    {
+      [LWEFile deleteFile:_compressedFilename];
+    }
+    if ([LWEFile fileExists:[self targetFilename]])
+    {
+      [LWEFile deleteFile:[self targetFilename]];
+    }
+    
+    // Reset state
+    [self _updateInternalState:kDownloaderReady withTaskMessage:NSLocalizedString(@"Downloader.reset",@"Downloader ready for retry")];
+  }
+}
+
+
+/**
+ * Pauses the current download and re-sets the internal state to paused on success
+ */
+-(void) pauseTask
+{
+  if (downloaderState == kDownloaderRetrievingData)
+  {
+    [_request cancel];
+    [self _updateInternalState:kDownloaderPaused withTaskMessage:NSLocalizedString(@"Downloader.paused",@"Paused...")];
+  }
+}
+
+
+/**
+ * Resumes the current download (only if they are paused)
+ */
+- (void) resumeTask
+{
+  if (downloaderState == kDownloaderPaused)
+  {
+    [_request startAsynchronous];
+    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading...")];
+  }
+}
+
+
+
+/**
+ * Determines whether or not we are in a terminal failure state
+ */
+- (BOOL) isFailureState
+{
+  BOOL returnVal = NO;
+  switch (downloaderState)
+  {
+    case kDownloaderCancelled:
+    case kDownloaderNetworkFail:
+    case kDownloaderDecompressFail:
+    case kDownloaderInstallFail:
+      returnVal = YES;
+      break;
+  }
+  return returnVal;
+}
+
+
+/**
+ * Determines whether or not we are in a terminal success state
+ */
+- (BOOL) isSuccessState
+{
+  if (downloaderState == kDownloaderSuccess)
+  {
+    return YES;
+  }
+  else 
+  {
+    return NO;
+  }
+}
+
+
+/**
+ * Tells the caller WHY we failed; if called in non-failure returns 0
+ */
+- (int) getFailureState
+{
+  if ([self isFailureState])
+  {
+    return downloaderState;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 
@@ -185,6 +438,25 @@
 
 
 /**
+ * Verify by installing plugin
+ */ 
+- (void) _verifyDownload
+{
+  if ([self installPluginWithPath:[self targetFilename]])
+  {
+    [self _updateInternalState:kDownloaderSuccess withTaskMessage:NSLocalizedString(@"Downloader.downloadSuccess",@"Download Successful")];
+  }
+  else
+  {
+    // Fail and update state
+    [self _updateInternalState:kDownloaderInstallFail withTaskMessage:NSLocalizedString(@"Downloader.installFailed",@"Installation Failed")];
+  }
+}
+
+
+#pragma mark Calls Delegate Method
+
+/**
  * Delegate install plugin bit to delegates if necessary
  */
 - (BOOL) installPluginWithPath:(NSString *)filename
@@ -202,159 +474,6 @@
 }
 
 
-/**
- * Verify by installing plugin
- */ 
-- (void) _verifyDownload
-{
-  if ([self installPluginWithPath:[self targetFilename]])
-  {
-    [self _updateInternalState:kDownloaderSuccess withTaskMessage:NSLocalizedString(@"Downloader.downloadSuccess",@"Download Successful")];
-  }
-  else
-  {
-    // Fail and update state
-    [self _updateInternalState:kDownloaderInstallFail withTaskMessage:NSLocalizedString(@"Downloader.installFailed",@"Installation Failed")];
-  }
-}
-
-
-/**
- * Determines whether or not we are in a terminal failure state
- */
-- (BOOL) isFailureState
-{
-  BOOL returnVal = NO;
-  switch (downloaderState)
-  {
-    case kDownloaderCancelled:
-    case kDownloaderNetworkFail:
-    case kDownloaderDecompressFail:
-    case kDownloaderInstallFail:
-      returnVal = YES;
-      break;
-  }
-  return returnVal;
-}
-
-
-/**
- * Determines whether or not we are in a terminal success state
- */
-- (BOOL) isSuccessState
-{
-  if (downloaderState == kDownloaderSuccess)
-  {
-    return YES;
-  }
-  else 
-  {
-    return NO;
-  }
-}
-
-
-/**
- * Starts download process based on target URL
- */
-- (void) startDownload
-{
-  // Only download if we have a URL to get
-  if ([self targetURL] && (downloaderState == kDownloaderReady))
-  {
-    // Set up request
-    _request = [ASIHTTPRequest requestWithURL:[self targetURL]];
-    [_request setDelegate:self];
-    [_request setDownloadProgressDelegate:self];
-    [_request setShowAccurateProgress:YES];
-
-    // Handle file differently depending on processing requirements after the fact (unzip)
-    if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
-    {
-      [_request setDownloadDestinationPath:_compressedFilename];
-    }
-    else if ([self targetFilename])
-    {
-      [_request setDownloadDestinationPath:[self targetFilename]];      
-    }
-    else
-    {
-      // Should throw exception.  We have no file to download to
-      [NSException raise:@"Invalid target filename passed to LWEDownloader" format:@"Was passed object: %@",[self targetFilename]];
-      return;
-    }
-
-
-    // Update internal class status
-    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading...")];
-
-    // Download in the background
-    [_request startAsynchronous];
-  }
-}
-
-
-/**
- * Cancels an ongoing process (if we are in one)
- */
-- (void) cancelDownload
-{
-  switch (downloaderState)
-  {
-    case kDownloaderRetrievingData:
-      [_request cancel];
-      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Downloader.downloadCancelled",@"Download Cancelled.")];
-      break;
-
-    case kDownloaderDecompressing:
-      // Don't update state here because we don't know when it will cancel, allow thread to do that
-      _unzipShouldCancel = YES;
-      break;
-      
-    default:
-      break;
-  }
-}
-
-
-/**
- * Tells the caller WHY we failed; if called in non-failure returns 0
- */
-- (int) getFailureState
-{
-  if ([self isFailureState])
-  {
-    return downloaderState;
-  }
-  else
-  {
-    return 0;
-  }
-}
-
-
-/**
- * Resets the downloader failed status, ready to try again
- */
-- (void) resetDownload
-{
-  if ([self isFailureState])
-  {
-    // Delete all files
-    if ([LWEFile fileExists:_compressedFilename])
-    {
-      [LWEFile deleteFile:_compressedFilename];
-    }
-    if ([LWEFile fileExists:[self targetFilename]])
-    {
-      [LWEFile deleteFile:[self targetFilename]];
-    }
-    
-    // Reset state
-    [self _updateInternalState:kDownloaderReady withTaskMessage:NSLocalizedString(@"Downloader.reset",@"Downloader ready for retry")];
-  }
-}
-
 # pragma mark ASIHTTPRequest Delegate methods
 
 /**
@@ -367,7 +486,13 @@
   if (contentLength)
   {
     requestSize = [contentLength intValue];
+    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading data...")];
   }
+  else
+  {
+    [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Could not connect")];
+  }
+
 }
 
 

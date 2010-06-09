@@ -11,6 +11,20 @@
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
 #define DEFAULT_MAX_STRUDYING 30
 
+// Database version constants
+#define JFLASH_DATA_1_0 1
+#define JFLASH_DATA_1_1 2
+NSString * const JFLASH_VERSION_1_0;
+NSString * const JFLASH_VERSION_1_1;
+NSString * const JFLASH_CURRENT_VERSION;
+NSString * const JFLASH_CURRENT_CARD_DATABASE;
+NSString * const JFLASH_CURRENT_USER_DATABASE;
+NSString * const JFLASH_10_DATABASE;
+NSString * const JFLASH_11_CARD_DATABASE;
+NSString * const JFLASH_11_USER_DATABASE;
+
+NSString * const JFLASH_10_TO_11_SQL_FILENAME;
+
 // Settings
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;

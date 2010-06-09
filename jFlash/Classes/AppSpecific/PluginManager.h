@@ -10,6 +10,7 @@
 #import "LWEDownloader.h"
 #import "FMResultSet.h"
 
+extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
 extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
 extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
 
@@ -31,5 +32,6 @@ extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example
 - (NSArray*) availablePlugins;
 - (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
+- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
 
 @end

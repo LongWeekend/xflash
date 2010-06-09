@@ -7,10 +7,14 @@
 //
 
 #import "CurrentState.h"
+#import "VersionManager.h"
 
-//! Maintains the current state of the application (active set, etc).  Is a singleton.
+/**
+ * Maintains the current state of the application (active set, etc).  Is a singleton.
+ * Owns the theme manager and the version manager (to be debated whether that is the best design or not)
+ */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr;
+@synthesize isFirstLoad, pluginMgr, isUpdatable, isFirstLoadAfterNewVersion;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -74,23 +78,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) initializeSettings
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setInteger:1 forKey:@"app_running"];    // Set the app to be running (TODO: is this used?)
+  // We initialize the plugins manager & version manager
+  //TODO: this is not the best place for this?
+  [self setPluginMgr:[[PluginManager alloc] init]];
 
-  // If there is no key telling us otherwise, assume it is first load
-  if ([settings objectForKey:@"settings_already_created"])
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+
+  // Check for first load (MUST keep "first load" in there, that's what it was in JFlash 1.0)
+  // We deprecated it in favor of "settings_already_created", which is must more descriptive...
+  if ([settings objectForKey:@"settings_already_created"] || [settings objectForKey:@"first_load"])
   {
+    // If we don't have a key for the current version of JFlash, we can assume it is first load after update
+    if (![settings objectForKey:JFLASH_CURRENT_VERSION])
+    {
+      [settings setValue:[NSNumber numberWithBool:YES] forKey:JFLASH_CURRENT_VERSION];
+      [self setIsFirstLoadAfterNewVersion:YES];
+    }
+    else
+    {
+      [self setIsFirstLoadAfterNewVersion:NO];
+    }
     [self setIsFirstLoad:NO];
+    [self setIsUpdatable:[VersionManager databaseIsUpdatable]];
   }
   else
   {
     [self setIsFirstLoad:YES];
+    [self setIsFirstLoadAfterNewVersion:NO];
+    [self setIsUpdatable:NO];
     [self _createDefaultSettings];
   }
-
-  // We initialize the plugins manager
-  //TODO: this is not the best place for this?
-  [self setPluginMgr:[[PluginManager alloc] init]];
 }
 
 
@@ -99,16 +116,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 
-  NSMutableDictionary *availablePlugins = [[NSMutableDictionary alloc] init];
-  NSArray *keys = [[NSArray alloc] initWithObjects:@"theme", @"headword", @"reading", @"mode", @"plugins", nil];
-  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,availablePlugins,nil];
+  NSDictionary *availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:[LWEFile createBundlePathWithFilename:JFLASH_CURRENT_CARD_DATABASE],CARD_DB_KEY,nil];
+  NSArray *keys = [[NSArray alloc] initWithObjects:@"theme", @"headword", @"reading", @"mode", @"plugins",@"data_version",nil];
+  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,availablePlugins,JFLASH_CURRENT_VERSION,nil];
   for(int i=0; i < [keys count]; i++)
   {
     [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
   }  
-  [availablePlugins release];
   [keys release];
   [objects release];
+  [availablePlugins release];
   // these are integers so we can't use the array loop above
   [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
   [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
