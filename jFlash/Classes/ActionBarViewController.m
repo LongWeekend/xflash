@@ -179,9 +179,8 @@
     modalViewController.cardId = [[self currentCard] cardId];
     modalViewController.currentCard = [self currentCard];
     UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(dismissModalViewControllerAnimated:)];
-    modalNavControl
-    .navigationItem.leftBarButtonItem = doneBtn;
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
+    modalViewController.navigationItem.leftBarButtonItem = doneBtn;
     modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
     [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
     [modalNavControl release];
