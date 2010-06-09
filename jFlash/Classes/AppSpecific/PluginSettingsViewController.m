@@ -112,11 +112,11 @@
 {
   if (section == PLUGIN_SETTINGS_INSTALLED_SECTION && [[self installedPlugins] count])
   {
-    return @"Installed";
+    return NSLocalizedString(@"Installed",@"PluginSettingsViewController.TableHeader_Installed");
   }
   else if (section == PLUGIN_SETTINGS_AVAILABLE_SECTION && [[self availablePlugins] count])
   {
-    return @"Available (Tap to Download)";
+    return NSLocalizedString(@"Available (Tap to Download)",@"PluginSettingsViewController.TableHeader_Available");
   }
   else
   {

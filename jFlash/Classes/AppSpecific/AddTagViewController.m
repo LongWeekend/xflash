@@ -32,8 +32,7 @@ enum EntrySectionRows
  
   UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = addButton;
-  
-  self.navigationItem.title = @"Add Word To Sets";
+  self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
   [addButton release];
   // Register listener to reload data if modal added a set
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
@@ -61,7 +60,7 @@ enum EntrySectionRows
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
   addStudySetInputViewController.ownerId = 0;
   addStudySetInputViewController.defaultCardId = self.cardId;
-  addStudySetInputViewController.title = @"Create Study Set";
+  addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
   [[self navigationController] presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
@@ -139,11 +138,11 @@ enum EntrySectionRows
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section{
   if (section == kMyTagsSection)
   {
-    return @"My Sets";
+    return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
   }
   else if(section == kSystemTagsSection)
   {
-    return @"All Sets";
+    return NSLocalizedString(@"All Sets",@"AddTagViewController.TableHeader_AllSets");
   }
   else
   {
@@ -249,7 +248,9 @@ enum EntrySectionRows
       if (tmpInt <= 1)
       {
         LWE_LOG(@"Last card in set");
-        UIAlertView* statusMsgBox = [[UIAlertView alloc] initWithTitle:@"Last Card in Set" message:@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+        UIAlertView* statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
+                                                         message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")
+                                                         delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
         [statusMsgBox show];
         remove = NO;
       }

@@ -11,27 +11,32 @@
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
 
+/**
+ * Grouped Table View where the user can select which user they will study as
+ */
 @implementation UserViewController
 @synthesize usersArray, statusMsgBox, selectedUserInArray, loadingView;
 
-- (UserViewController*) init
+- (id) init
 {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
-    self.title = @"Choose User";
+    self.title = NSLocalizedString(@"Choose User",@"UserViewController.NavBarTitle");
     self.tableView.delegate = self;
     [self setUsersArray:[User getUsers]];
   }
   return self;
 }
 
+
+/** UIView delegate - sets up add user button and reload observer */
 - (void) loadView
 {
   [super loadView];
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser:)];
-  self.navigationItem.rightBarButtonItem = addButton;
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser:)];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
 }
+
 
 - (void)reloadTableData
 {
@@ -98,9 +103,9 @@
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"CellWhite" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
 
-    cell.textLabel.backgroundColor = [ UIColor clearColor ];
-    cell.textLabel.textColor = [ UIColor blackColor ];
-    cell.backgroundColor = [ UIColor whiteColor ];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor whiteColor];
   }
 
   // Set up the avatar image
@@ -119,15 +124,21 @@
 {
   selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([selectedUserInArray userId] == [settings integerForKey:@"user_id"]){
+  if ([selectedUserInArray userId] == [settings integerForKey:@"user_id"])
+  {
     return; 
   }
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
-  NSString* message = [NSString stringWithFormat:@"Set the active user to %@?", [selectedUserInArray userNickname]];
-  self.statusMsgBox = [[UIAlertView alloc] initWithTitle:@"Activate User" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+  NSString* message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
+  self.statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle")
+                                           message:message
+                                           delegate:self
+                                           cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
+                                           otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
   [statusMsgBox show];
 }
+
 
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -135,10 +146,11 @@
   if (buttonIndex == 1)
   {
     // Load modal spinner
-    loadingView = [LoadingView loadingViewInView:[self view] withText:@"Switching User..."];
+    loadingView = [LoadingView loadingViewInView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
     [self performSelector:@selector(doActivateUser) withObject:nil afterDelay:0.1];
   }
 }
+
 
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -152,16 +164,21 @@
   [userDetailsView release];
 }
 
-// Delete row from table
+//! Delete row from table
 - (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Cancel deletion if the user is ID=1
     NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
-    if(selectedUserId == DEFAULT_USER_ID){
-      NSString* message = [NSString stringWithFormat:@"The default user can be edited but not deleted"];
-      self.statusMsgBox = [[UIAlertView alloc] initWithTitle:@"Cannot Delete User" message:message delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+    if (selectedUserId == DEFAULT_USER_ID)
+    {
+      NSString* message = [NSString stringWithFormat:NSLocalizedString(@"The default user can be edited but not deleted",@"UserViewController.CannotDelete_AlertViewMessage")];
+      self.statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
+                                               message:message
+                                               delegate:self
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
       [statusMsgBox show];
       return;
     }
@@ -199,7 +216,7 @@
 
 - (void)addUser:sender {
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
-  userDetailsView.title = @"Add User";
+  userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
   userDetailsView.mode = kUserViewModeAdd;
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];

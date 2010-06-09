@@ -29,7 +29,7 @@
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
-    self.title = @"Practice";
+    self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
   }
   else{
     LWE_LOG(@"Didn't pass super init for StudyViewController");
@@ -188,7 +188,7 @@
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   [moodIcon updateMoodIcon:100.0f];
   
-  [cardSetLabel setText:[NSString stringWithFormat:@"Set: %@",currentCardSet.tagName]];
+  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Set: %@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
   
   Card* card = [[currentStateSingleton activeTag] getFirstCard];
   [self setCurrentCard:card];

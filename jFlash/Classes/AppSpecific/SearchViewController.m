@@ -19,9 +19,9 @@
   {
     // Set the tab bar controller image png to the targets
     //TODO: I have a suspicision that the following line means nothing!   MMA 6/2/2010
-    self.navigationItem.title = @"Word Search";
+//    self.navigationItem.title = NSLocalizedString(@"Word Search",@"SearchViewController.NavBarTitle");
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
-    self.title = @"Search";
+    self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
   }
   return self;
 }
@@ -144,7 +144,7 @@
   
   if([searchArray count] == 0 && _searchRan && _deepSearchRan)
   {
-    cell.textLabel.text = @"No Results Found";
+    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.detailTextLabel.text = @"";
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -152,9 +152,9 @@
   }
   else if([searchArray count] == 0 && _searchRan)
   {
-    cell.textLabel.text = @"No Results Found";
+    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
     cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.text = @"Tap here to do a DEEP search.";
+    cell.detailTextLabel.text = NSLocalizedString(@"Tap here to do a DEEP search.",@"SearchViewController.DoDeepSearch");
     cell.accessoryView = activityIndicator;
   }
   else
@@ -207,7 +207,7 @@
   }
 	AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil];
 	tagController.cardId = [[searchArray objectAtIndex:(NSInteger)indexPath.row] cardId];
-	tagController.title = @"Add Word To Set";
+	tagController.title = NSLocalizedString(@"Add Word To Set",@"AddTagViewController.NavBarTitle");
   tagController.currentCard = [searchArray objectAtIndex:(NSInteger)indexPath.row];
 	[self.navigationController pushViewController:tagController animated:YES];
 	[tagController release];

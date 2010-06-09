@@ -17,7 +17,7 @@
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
   {
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
-    self.title = @"Search";
+    self.title = NSLocalizedString(@"Search",@"SearchUnavailableViewController.NavBarTitle");
   }
   return self;
 }

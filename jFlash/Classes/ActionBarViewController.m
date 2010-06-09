@@ -152,7 +152,10 @@
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
 {
-  UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Card Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Help Us Fix This Card",@"Add Card to Study Set",nil];
+  UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
+                                             cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
+                                             otherButtonTitles:NSLocalizedString(@"Help Us Fix This Card",@"ActionBarViewController.ActionSheetReportBadData"),
+                                                               NSLocalizedString(@"Add Card to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),nil];
   [as showInView:[[[self view] superview] superview]];
   [as release];
 }
@@ -179,7 +182,7 @@
     modalViewController.cardId = [[self currentCard] cardId];
     modalViewController.currentCard = [self currentCard];
     UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
     modalViewController.navigationItem.leftBarButtonItem = doneBtn;
     modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
     [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];

@@ -7,6 +7,7 @@
 //
 #import "ReportBadDataViewController.h"
 
+// TODO: localize this
 NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex: \"Change the first kanji to X\"";
 
 /**
@@ -36,13 +37,12 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     // Initialize issue type array
     _userSelectedIssueType = 1;
     _issueTypeArray = [[NSArray alloc] initWithObjects:
-                      @"Reading or romaji is wrong",
-                      @"Kanji is wrong",
-                      @"Card is a duplicate",
-                      @"Not relevant for this set",
-                      @"Antiquated or dead word",
-                      @"Something else",
-                      nil];
+                      NSLocalizedString(@"Reading or romaji is wrong",@"ReportBadDataViewController.Reasons_WrongReadingOrRomaji"),
+                      NSLocalizedString(@"Kanji is wrong",@"ReportBadDataViewController.Reasons_WrongKanji"),
+                      NSLocalizedString(@"Card is a duplicate",@"ReportBadDataViewController.Reasons_Duplicate"),
+                      NSLocalizedString(@"Not relevant for this set",@"ReportBadDataViewController.Reasons_NotRelevant"),
+                      NSLocalizedString(@"Antiquated or dead word",@"ReportBadDataViewController.Reasons_DeadWord"),
+                      NSLocalizedString(@"Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
   }
   return self;
 }
@@ -58,9 +58,9 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 
   [super viewDidLoad];
   //TODO: Ross and I decided this is a hack and should be fixed w/ a category?
-  _cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
+  _cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel") style:UIBarButtonItemStylePlain target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = _cancelButton;
-  self.navigationItem.title = @"What's Wrong?";
+  self.navigationItem.title = NSLocalizedString(@"What's Wrong?",@"ReportBadDataViewController.NavBarTitle");
   
   // Set UITextView to custom initialized text & "placeholder color"
   self.userMsgInputBox.text = RBDVC_USER_TEXT_BOX_DEFAULT;
@@ -226,7 +226,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 /** Delegate for text view - installs a cancel button to cancel the keyboard in the title nav bar */
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(_resignTextViewKeyboard)];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"Global.Done") style:UIBarButtonItemStyleDone target:self action:@selector(_resignTextViewKeyboard)];
   self.navigationItem.rightBarButtonItem = doneButton;
   // Get rid of the cancel button, you can't dismiss the whole view w/ the keyboard still up!
   self.navigationItem.leftBarButtonItem = nil;

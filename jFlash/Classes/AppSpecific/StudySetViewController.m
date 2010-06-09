@@ -20,8 +20,7 @@
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
-    self.title = @"Study Sets";
-    self.navigationItem.title = @"Study Sets";
+    self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
   }
   return self;
 }
@@ -89,7 +88,7 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  searchBar.placeholder = @"Search Sets By Name";
+  searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   [self hideSearchBar];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
@@ -153,7 +152,7 @@
 {
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
   addStudySetInputViewController.ownerId = self.groupId;
-  addStudySetInputViewController.title = @"Create Study Set";
+  addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
   [[self navigationController] presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
@@ -241,7 +240,7 @@
       Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
       cell.textLabel.text = [tmpTag tagName];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      NSString* tmpDetailText = [NSString stringWithFormat:@"%d Words", [tmpTag cardCount]];
+      NSString* tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
       if(tmpTag.cardCount == 0)
@@ -257,7 +256,7 @@
       if (selectedTagId == indexPath.row)
       {
         cell.accessoryView = activityIndicator;
-        cell.detailTextLabel.text = @"Loading cards...";
+        cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
       }
     }
   }
@@ -282,9 +281,9 @@
     if ([tmpGroup getChildGroupCount] > 0)
     {
       //Prefix the line below with code if we have groups
-      tmpDetailText = [NSString stringWithFormat:@"%d Groups; ",[tmpGroup getChildGroupCount]]; 
+      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup getChildGroupCount]]; 
     }
-    tmpDetailText = [NSString stringWithFormat:@"%@%d Sets",tmpDetailText,tmpGroup.tagCount];
+    tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
 
     // Set up the image
     UIImageView* tmpView = (UIImageView*)cell.imageView;
@@ -313,13 +312,19 @@
       {
         self.selectedTagId = indexPath.row;
         NSString *tag = [[self.tagArray objectAtIndex:indexPath.row] tagName];
-        self.statusMsgBox = [[UIAlertView alloc] initWithTitle:tag message:@"Do you want to start this set?  Progress on your last set will be saved." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        self.statusMsgBox = [[UIAlertView alloc] initWithTitle:tag message:NSLocalizedString(@"Do you want to start this set?  Progress on your last set will be saved.",@"StudySetViewController.StartStudy_AlertViewMessage")
+                                                 delegate:self
+                                                 cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
+                                                 otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
         [statusMsgBox show];
         [tag release];
       }
       else
       {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"No Words In Set" message:@"To add words to this set, you can use Search." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Words In Set",@"StudySetViewController.NoWords_AlertViewTitle"),
+                                                      message:NSLocalizedString(@"To add words to this set, you can use Search.",@"StudySetViewController.NoWords_AlertViewMessage")
+                                                      delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
         [alertView show];
         [alertView release];
       }

@@ -103,8 +103,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 		[[[UILabel alloc]
 			initWithFrame:labelFrame]
 		autorelease];
-	loadingLabel.text = NSLocalizedString(text, nil);
-	loadingLabel.textColor = [UIColor whiteColor];
+	loadingLabel.text = text;
+  loadingLabel.textColor = [UIColor whiteColor];
 	loadingLabel.backgroundColor = [UIColor clearColor];
 	loadingLabel.textAlignment = UITextAlignmentCenter;
 	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];

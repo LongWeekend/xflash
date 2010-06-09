@@ -18,10 +18,16 @@
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"90-lifebuoy.png"];
-    self.title = @"Help";
-    self.navigationItem.title = @"Help";
+    self.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
+    self.navigationItem.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
     
-    NSArray *names = [NSArray arrayWithObjects:@"Welcome",@"Study Sets",@"Practice",@"Browse Mode",@"Word Search",@"Sharing",@"Feedback",nil];
+    NSArray *names = [NSArray arrayWithObjects:NSLocalizedString(@"Welcome",@"HelpViewController.Table_Welcome"),
+                                               NSLocalizedString(@"Study Sets",@"HelpViewController.Table_StudySets"),
+                                               NSLocalizedString(@"Practice",@"HelpViewController.Table_Practice"),
+                                               NSLocalizedString(@"Browse Mode",@"HelpViewController.Table_BrowseMode"),
+                                               NSLocalizedString(@"Word Search",@"HelpViewController.Table_WordSearch"),
+                                               NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),
+                                               NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),nil];
     NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"share",@"feedback",nil];
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];    

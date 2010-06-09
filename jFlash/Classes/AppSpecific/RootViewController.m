@@ -58,7 +58,7 @@
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  loadingView = [LoadingView loadingViewInView:self.view withText:@"Setting up jFlash for first time use. This might take a minute."];
+  loadingView = [LoadingView loadingViewInView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
 }
 
 
@@ -141,14 +141,21 @@
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   if (appSettings.isFirstLoad && _showWelcomeSplash)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"RootViewController.WelcomeAlertViewTitle")
+                                                  message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                  delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
     [alertView show];
     [alertView release];
     _showWelcomeSplash = NO;
   }
   else if (appSettings.isFirstLoadAfterNewVersion)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"The New Japanese Flash!" message:@"Time to install the new database!  This will take 3 minutes, and requires network access." delegate:self cancelButtonTitle:@"Update Later" otherButtonTitles:@"Update Now",@"What's Changed?",nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
+                                                  message:NSLocalizedString(@"Time to install the new database!  This will take 3 minutes, and requires network access.",@"RootViewController.UpdateAlertViewMessage")
+                                                  delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                                  otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),NSLocalizedString(@"What's Changed?",@"RootViewController.UpdateAlertViewButton_ReleaseNotes"),nil];
     [alertView show];
     [alertView release];
   }

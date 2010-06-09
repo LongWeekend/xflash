@@ -244,7 +244,7 @@
     }
         
     // Update internal class status
-    [self _updateInternalState:kDownloaderRetrievingMetaData withTaskMessage:NSLocalizedString(@"Downloader.connecting",@"Connecting...")];
+    [self _updateInternalState:kDownloaderRetrievingMetaData withTaskMessage:NSLocalizedString(@"Connecting to server",@"LWEDownloader.connecting")];
     
     // Download in the background
     [_request startAsynchronous];
@@ -261,7 +261,7 @@
   {
     case kDownloaderRetrievingData:
       [_request cancel];
-      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Downloader.downloadCancelled",@"Download Cancelled.")];
+      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];
       break;
       
     case kDownloaderDecompressing:
@@ -293,7 +293,7 @@
     }
     
     // Reset state
-    [self _updateInternalState:kDownloaderReady withTaskMessage:NSLocalizedString(@"Downloader.reset",@"Downloader ready for retry")];
+    [self _updateInternalState:kDownloaderReady withTaskMessage:NSLocalizedString(@"Ready to try again",@"LWEDownloader.reset")];
   }
 }
 
@@ -306,7 +306,7 @@
   if (downloaderState == kDownloaderRetrievingData)
   {
     [_request cancel];
-    [self _updateInternalState:kDownloaderPaused withTaskMessage:NSLocalizedString(@"Downloader.paused",@"Paused...")];
+    [self _updateInternalState:kDownloaderPaused withTaskMessage:NSLocalizedString(@"Download Paused",@"LWEDownloader.paused")];
   }
 }
 
@@ -319,7 +319,7 @@
   if (downloaderState == kDownloaderPaused)
   {
     [_request startAsynchronous];
-    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading...")];
+    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
   }
 }
 
@@ -408,7 +408,7 @@
     if (_unzipShouldCancel)
     {
       LWE_LOG(@"Cancelling unzip");
-      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Downloader.downloadCancelled",@"Download Cancelled.")];
+      [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];
       [pool release];
       // TODO: fire a failure method
       return NO;
@@ -416,7 +416,7 @@
     if (fwrite(buffer, 1, uncompressedLength, dest) != uncompressedLength || ferror(dest))
     {
       LWE_LOG(@"error writing data");
-      [self _updateInternalState:kDownloaderDecompressFail withTaskMessage:NSLocalizedString(@"Downloader.decompressFail",@"File Unzip Failed.")];
+      [self _updateInternalState:kDownloaderDecompressFail withTaskMessage:NSLocalizedString(@"Failed to decompress file",@"LWEDownloader.decompressFail")];
       [pool release];
       // TODO: fire a failure method
       return NO;
@@ -444,12 +444,12 @@
 {
   if ([self installPluginWithPath:[self targetFilename]])
   {
-    [self _updateInternalState:kDownloaderSuccess withTaskMessage:NSLocalizedString(@"Downloader.downloadSuccess",@"Download Successful")];
+    [self _updateInternalState:kDownloaderSuccess withTaskMessage:NSLocalizedString(@"Download complete",@"LWEDownloader.downloadSuccess")];
   }
   else
   {
     // Fail and update state
-    [self _updateInternalState:kDownloaderInstallFail withTaskMessage:NSLocalizedString(@"Downloader.installFailed",@"Installation Failed")];
+    [self _updateInternalState:kDownloaderInstallFail withTaskMessage:NSLocalizedString(@"Installation failed",@"LWEDownloader.installFailed")];
   }
 }
 
@@ -486,11 +486,11 @@
   if (contentLength)
   {
     requestSize = [contentLength intValue];
-    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloader.downloading",@"Downloading data...")];
+    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
   }
   else
   {
-    [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Could not connect")];
+    [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
   }
 
 }
@@ -502,12 +502,12 @@
 - (void)requestFinished:(ASIHTTPRequest *) request
 {
   // We are done!
-  [self _updateInternalState:kDownloaderDownloadComplete withTaskMessage:NSLocalizedString(@"Downloader.downloadFinished",@"Verifying.")];
+  [self _updateInternalState:kDownloaderDownloadComplete withTaskMessage:NSLocalizedString(@"Verifying downloaded file",@"LWEDownloader.downloadFinished")];
   
   // Unzip it in the background
   if (_remoteFileIsGzipCompressed)
   {
-    [self _updateInternalState:kDownloaderDecompressing withTaskMessage:NSLocalizedString(@"Downloader.downloadDecompressing",@"Unzipping file.")];
+    [self _updateInternalState:kDownloaderDecompressing withTaskMessage:NSLocalizedString(@"Decompressing downloaded file",@"LWEDownloader.downloadDecompressing")];
     // Repurpose progress bar for unzipping action
     [self setProgress:0.0f];
     [self performSelectorInBackground:@selector(_unzipDownloadedFile) withObject:nil];
@@ -529,11 +529,12 @@
   switch ([error code])
   {
     ASIConnectionFailureErrorType:
-      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Network Unavailable")];
+      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
       statusCode = ASIConnectionFailureErrorType;
       break;
+      //TODO: add more here?
     default:
-      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Downloader.networkFailure",@"Network Unavailable")];
+      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
       statusCode = ASIConnectionFailureErrorType;
       break;
   }

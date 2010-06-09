@@ -29,7 +29,7 @@
   [super viewDidLoad];
   [setNameTextfield becomeFirstResponder];
   setNameTextfield.returnKeyType = UIReturnKeyDone;
-  setNameTextfield.placeholder = @"Type set name here";
+  setNameTextfield.placeholder = NSLocalizedString(@"Type set name here",@"AddStudySetInputViewController.TypeNewSetName");
   setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
   
   UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
@@ -51,12 +51,15 @@
 {
   if([theTextField.text length] == 0)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Enter Set Name" message:@"Please enter a new set name or click Cancel." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Set Name",@"AddStudySetInputViewController.AlertViewTitle")
+                                                  message:NSLocalizedString(@"Please enter a new set name or click 'Cancel'.",@"AddStudySetInputViewController.AlertViewMessage")
+                                                  delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
     [alertView show];
     [alertView release];
     return NO;
   }
   
+  // TODO: parameter binding?
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
   NSMutableString* newTag = [[NSMutableString alloc] initWithString:theTextField.text];
   [newTag replaceOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, [newTag length])];

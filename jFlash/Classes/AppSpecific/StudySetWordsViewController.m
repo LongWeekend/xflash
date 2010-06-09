@@ -8,6 +8,12 @@
 
 #import "StudySetWordsViewController.h"
 
+/**
+ * Grouped UITableViewController subclass - shows all words in a given set
+ * Some sets may be large, so this controller will not lock the interface
+ * by loading all cards into memory at first.  It will load first and then
+ * put the cards onto the screen when loaded.
+ */
 @implementation StudySetWordsViewController
 @synthesize tag, cards, activityIndicator;
 // TODO: next version
@@ -102,7 +108,7 @@
     if ([self cards] == nil)
     {
       cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
-      cell.textLabel.text = @"Loading words...";
+      cell.textLabel.text = NSLocalizedString(@"Loading words...",@"StudySetWordsViewController.LoadingWords");
       cell.accessoryView = activityIndicator;
       [activityIndicator startAnimating];
     }
@@ -126,7 +132,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     if (indexPath.row == kWordSetOptionsStart)
     {
-      cell.textLabel.text = @"Begin Studying These";
+      cell.textLabel.text = NSLocalizedString(@"Begin Studying These",@"StudySetWordsViewController.BeginStudyingThese");
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 // TODO: Disabled in this release

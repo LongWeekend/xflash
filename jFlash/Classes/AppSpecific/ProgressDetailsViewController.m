@@ -22,18 +22,18 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   User* user = [User getUser:[settings integerForKey:@"user_id"]];
-  [progressViewTitle setText:[NSString stringWithFormat:@"%@'s Progress", [user userNickname]]];
+  [progressViewTitle setText:[NSString stringWithFormat:NSLocalizedString(@"%@'s Progress",@"ProgressDetailsViewController.Title"), [user userNickname]]];
 }
 
 - (void)setStreakLabel{
   NSString* streakText;
   if(wrongStreak > 0)
   {
-    streakText = [[NSString alloc] initWithFormat:@"%i Wrong", wrongStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i Wrong",@"ProgressDetailsViewController.NumWrongStreak"), wrongStreak];
   }
   else
   {
-    streakText = [[NSString alloc] initWithFormat:@"%i Right", rightStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i Right",@"ProgressDetailsViewController.NumRightStreak"), rightStreak];
   }
   streakLabel.text = streakText;
   [streakText release];

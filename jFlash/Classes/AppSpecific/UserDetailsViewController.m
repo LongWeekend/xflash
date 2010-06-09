@@ -12,26 +12,29 @@
 @implementation UserDetailsViewController
 @synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, userImagePickerView, selectedUserImage;
 
-- (id)init {
-  self = [super init];
-  if(self){
-    mode = kUserViewModeAdd;
-    avatarUpdated = false;
-    if(mode == kUserViewModeAdd) {
+- (id)init
+{
+  if (self = [super init])
+  {
+    [self setMode:kUserViewModeAdd];
+    _avatarUpdated = false;
+    if ([self mode] == kUserViewModeAdd)
+    {
       self.selectedUser = [[[User alloc] init] autorelease];      
     }
   }
   return self;
 }
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
   [super viewDidLoad];
   [userNicknameTextField becomeFirstResponder]; // makes keyboard cancellable
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveAvatarImage) name:@"newImagePicked" object:nil];
   [userNicknameTextField addTarget:self action:@selector(doUpdateUserNickname:) forControlEvents:UIControlEventEditingChanged];
 
-  if(mode == kUserViewModeAdd){
+  if ([self mode] == kUserViewModeAdd)
+  {
     [commitChangesBtn setHidden:YES];
     [activateUserBtn setHidden:YES];
   }
@@ -62,7 +65,7 @@
   [selectedUser setUserNickname:[userNicknameTextField text]];
   if(mode == kUserViewModeEdit)
   {
-    if([[userNicknameTextField text] isEqualToString:originalUserNickname] && !avatarUpdated)
+    if([[userNicknameTextField text] isEqualToString:originalUserNickname] && !_avatarUpdated)
       [commitChangesBtn setHidden:YES];
     else if([userNicknameTextField.text length] == 0)
       [commitChangesBtn setHidden:YES];
@@ -89,7 +92,7 @@
 
 - (IBAction) doCommitChanges
 {
-  if(avatarUpdated){
+  if(_avatarUpdated){
     [selectedUser saveAvatarImage:selectedUserImage];
   }
   // Save user details
@@ -137,7 +140,7 @@
   [commitChangesBtn setHidden:NO];
 
   // Update on screen image only
-  avatarUpdated = true;
+  _avatarUpdated = true;
   [userAvatarPreviewBtn setBackgroundImage:[userImagePickerView selectedImage] forState:UIControlStateNormal];
 
   // Save image in object so it doesn't go out of scope when it closes

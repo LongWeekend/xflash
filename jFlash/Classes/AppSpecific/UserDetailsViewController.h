@@ -25,7 +25,7 @@ enum userViewMode {
   IBOutlet UIButton *userAvatarPreviewBtn;
   IBOutlet UIButton *commitChangesBtn;
   IBOutlet UIButton *activateUserBtn;
-  BOOL avatarUpdated;
+  BOOL _avatarUpdated;
   NSString* originalUserNickname;
   NSInteger mode;
 }

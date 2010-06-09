@@ -23,16 +23,15 @@ NSString * const APP_FACEBOOK = @"facebook";
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
-    
-    self.title = @"Settings";
-    self.navigationItem.title = @"Settings";
+    self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
 
     // The following dictionaries contain all the mappings from actual settings to how they display on the phone
-    NSArray *modeObjects = [NSArray arrayWithObjects:@"Off", @"On", nil];
+    NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Off",@"Global.Off"), NSLocalizedString(@"On",@"Global.On"), nil];
     NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
     NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
         
-    NSArray *headwordObjects = [NSArray arrayWithObjects:@"Japanese", @"English", nil];
+    NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
+                                                         NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
     NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
     NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
     
@@ -40,7 +39,9 @@ NSString * const APP_FACEBOOK = @"facebook";
     ThemeManager *tm = [ThemeManager sharedThemeManager];
     NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
     
-    NSArray *readingObjects = [NSArray arrayWithObjects:@"Kana",@"Romaji",@"Both",nil];
+    NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
+                                                        NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
+                                                        NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
     NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
     NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
     
@@ -50,21 +51,26 @@ NSString * const APP_FACEBOOK = @"facebook";
     self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
     // These are the keys and display names of each row
-    NSArray *cardSettingNames = [NSArray arrayWithObjects:@"Browse Mode",@"Headword",@"Reading Display As",nil];
+    NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Browse Mode",@"SettingsViewController.SettingNames_BrowseMode"),
+                                                          NSLocalizedString(@"Headword",@"SettingsViewController.SettingNames_HeadwordLanguage"),
+                                                          NSLocalizedString(@"Reading Display As",@"SettingsViewController.SettingNames_DisplayReading"),nil];
     NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,nil];
-    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,@"Studying",nil]; // Puts single section together, 3rd index is header name
+    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
 
-    NSArray *userSettingNames = [NSArray arrayWithObjects:@"Theme",@"Active User",@"Plugins",nil];
+    NSArray *userSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
+                                                          NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
+                                                          NSLocalizedString(@"Plugins",@"SettingsViewController.SettingNames_Plugins"),nil];
     NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
-    NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,@"Application",nil];
+    NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
     
-    NSArray *socialNames = [NSArray arrayWithObjects:@"Follow us on Twitter",@"See us on Facebook",nil];
+    NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
+                                                     NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
     NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
-    NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,@"Follow Us",nil];
+    NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
 
-    NSArray *aboutNames = [NSArray arrayWithObjects:@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",nil];
+    NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
-    NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,@"Acknowledgements",nil];
+    NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
     
     // Make the order
     self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
@@ -87,7 +93,7 @@ NSString * const APP_FACEBOOK = @"facebook";
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:@"Rate Us" style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
+  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   [[self tableView] reloadData];
@@ -193,9 +199,9 @@ NSString * const APP_FACEBOOK = @"facebook";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
     int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
     if (numInstalled > 0)
-      cell.detailTextLabel.text = [NSString stringWithFormat:@"%d installed",numInstalled];
+      cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
     else
-      cell.detailTextLabel.text = @"None";
+      cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
@@ -275,8 +281,8 @@ NSString * const APP_FACEBOOK = @"facebook";
     // Load a UIWebView to show
     UIViewController *webVC = [[UIViewController alloc] init];
     UIWebView *webView = [[UIWebView alloc] init];
-    webVC.title = @"Follow Us";
-    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reload" style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
+    webVC.title = NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs")
+    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload") style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
 
     NSURL *url = nil;
     if (key == APP_FACEBOOK)
@@ -323,7 +329,11 @@ NSString * const APP_FACEBOOK = @"facebook";
 //! UIWebView delegate method - called if request fialed
 - (void) webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
 {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Unable to Connect" message:@"Please check your network connection and try again." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Connect",@"Network.UnableToConnect_AlertViewTitle")
+                                                message:NSLocalizedString(@"Please check your network connection and try again.",@"Network.UnableToConnect_AlertViewMessage")
+                                                delegate:self
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
   [alertView show];
   [alertView release];
 }
