@@ -8,6 +8,7 @@
 
 #import "PluginManager.h"
 
+NSString *const CARD_DB_KEY = @"CARD_DB";
 NSString *const FTS_DB_KEY = @"FTS_DB";
 NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 
@@ -20,12 +21,20 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   {
     _loadedPlugins = [[NSMutableDictionary alloc] init];
     _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
-                           // FTS
+                          // Cards
+                          [NSDictionary dictionaryWithObjectsAndKeys:
+                           @"Japanese Flash Basic Cards",@"plugin_name",
+                           @"Core cards",@"plugin_details",
+                           @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
+                           [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",nil],CARD_DB_KEY,
+                         
+                         // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             @"Awesomely Fast Search",@"plugin_name",
                             @"Adds sub-second full dictionary search (~16MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-CORE-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
+//                            @"http://localhost/~phooze/jFlash-FTS-v1.1.db.gz",@"target_url",
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
@@ -87,7 +96,7 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   NSString *key;
   while (key = [keyEnumerator nextObject])
   {
-    NSString* filename = [LWEFile createDocumentPathWithFilename:[plugins objectForKey:key]];
+    NSString* filename = [plugins objectForKey:key];
     if ([self loadPluginFromFile:filename] == nil)
     {
       LWE_LOG(@"FAILED to load plugin: %@",filename);
@@ -169,32 +178,43 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
   NSString* pluginKey;
   if (pluginKey = [self loadPluginFromFile:filename])
   {
-    // Update the settings so we maintain this on startup
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    NSDictionary *pluginSettings = [settings objectForKey:@"plugins"];
-    if (pluginSettings)
-    {
-      // This means we already have a settings database (e.g. not first load)
-      LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,[filename lastPathComponent]);
-      NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
-      [tmpDict setObject:[filename lastPathComponent] forKey:pluginKey];
-      [settings setValue:tmpDict forKey:@"plugins"];
-      
-      // Tell the root view controller to do some stuff if we are FTS_DB_KEY
-      if ([pluginKey isEqualToString:FTS_DB_KEY])
-      {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldSwapSearchViewController" object:self];
-      }
-      
-      return YES;
-    }
-    else
-    {
-      // This should NOT happen
-      [NSException raise:@"Plugin installer method executed without default settings" format:@"Was passed filename: %@",filename];
-    }
+    [self _registerPlugin:pluginKey withFilename:filename];
   }
-  return NO;
+  else
+  {
+    return NO;
+  }
+
+  // Tell the root view controller to do some stuff if we are FTS_DB_KEY
+  if ([pluginKey isEqualToString:FTS_DB_KEY])
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldSwapSearchViewController" object:self];
+  }
+  return YES;
+}
+
+
+/**
+ * Register plugin filename with NSUserDefaults
+ */
+- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename
+{
+  // Update the settings so we maintain this on startup
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSDictionary *pluginSettings = [settings objectForKey:@"plugins"];
+  if (pluginSettings)
+  {
+    // This means we already have a settings database (e.g. not first load)
+    LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,filename);
+    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
+    [tmpDict setObject:filename forKey:pluginKey];
+    [settings setValue:tmpDict forKey:@"plugins"];
+  }
+  else
+  {
+    // This should NOT happen
+    [NSException raise:@"Plugin register method executed without default settings" format:@"Was passed filename: %@",filename];
+  }  
 }
 
 

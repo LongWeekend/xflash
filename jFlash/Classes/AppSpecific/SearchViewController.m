@@ -201,7 +201,7 @@
   else if([searchArray count] == 0)
   {
     [activityIndicator startAnimating];
-    // bizaar have to do to make the activityIndicator show.  Apparently without this 0 delay the ui won't be updated until the program loop finishes
+    // Run selector after delay to allow UIVIew to update on run loop
     [self performSelector:@selector(runSlowSearch) withObject:nil afterDelay:0];
     return;
   }
@@ -214,6 +214,8 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+
+// TODO: what function does this function function with?  MMA 6/8/2010
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
   if (buttonIndex == 1) {     // they clicked OK.
     

@@ -27,25 +27,33 @@ if (!$fh)
 }
 
 $beginStatements = array();
-$beginStatements[] = "ALTER TABLE main.user_history ADD COLUMN updated BOOL DEFAULT NULL;";
-$beginStatements[] = "ALTER TABLE main.card_tag_link ADD COLUMN updated BOOL DEFAULT NULL;";
+$beginStatements[] = "ALTER TABLE user_history ADD COLUMN updated BOOL DEFAULT 0;";
+$beginStatements[] = "ALTER TABLE card_tag_link ADD COLUMN updated BOOL DEFAULT 0;";
+
 // Get to it
+$oldCardIdArray = array();
+$newCardIdArray = array();
 $user_history = array();
 $card_tag_link = array();
 for ($i = 0; $i < $numToGenerate; $i++)
 {
-	$oldCardId = rand(0,147000); 
-	$newCardId = rand(0,147000);
-	$user_history[]  = "UPDATE user_history SET card_id = '$newCardId', updated = '1' WHERE updated IS NULL AND card_id = '$oldCardId';";
-	$card_tag_link[] = "UPDATE card_tag_link SET card_id = '$newCardId', updated = '1' WHERE updated IS NULL AND card_id = '$oldCardId';";
+	$oldCardId = rand(1,147000); 
+	$newCardId = rand(1,147000);
+	while (in_array($newCardId,$newCardIdArray))
+	{
+		$newCardId = rand(1,147000);
+	}
+	$newCardIdArray[] = $newCardId;
+	$user_history[]  = "UPDATE user_history SET card_id = '$newCardId', updated = '1' WHERE updated = '0' AND card_id = '$oldCardId';";
+	$card_tag_link[] = "UPDATE card_tag_link SET card_id = '$newCardId', updated = '1' WHERE updated = '0' AND card_id = '$oldCardId';";
 }
 
 $endingStatements = array();
-//$endingStatements[] = "UPDATE user_history SET updated = NULL;";
-//$endingStatements[] = "UPDATE card_tag_link SET updated = NULL;";
+$endingStatements[] = "UPDATE user_history SET updated = NULL;";
+$endingStatements[] = "UPDATE card_tag_link SET updated = NULL;";
 $endingStatements[] = "ALTER TABLE main.cards_html RENAME TO old_cards_html;";
 $endingStatements[] = "ALTER TABLE main.cards RENAME TO old_cards;";
-$endingStatements[] = "ALTER TABLE main.cards_search_content RENAME TO old_cards_search_content;";
+//$endingStatements[] = "ALTER TABLE main.cards_search_content RENAME TO old_cards_search_content;";
 $endingStatements[] = "ANALYZE;";
 
 foreach($beginStatements as $sql)

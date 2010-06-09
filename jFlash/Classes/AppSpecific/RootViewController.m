@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "VersionManager.h"
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -25,6 +26,9 @@
 {
   if (self = [super init])
   {
+    // Should show "welcome to JFlash alert view if first load?
+    _showWelcomeSplash = NO;
+    
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
 
@@ -130,53 +134,125 @@
   // Replace active view with tabBarController's view
   self.view = tabBarController.view;
 
+  //launch the please rate us
+  [Appirater appLaunched];
+
   // Show a UIAlert if this is the first time the user has launched the app.
   CurrentState *appSettings = [CurrentState sharedCurrentState];
-  if (appSettings.isFirstLoad)
+  if (appSettings.isFirstLoad && _showWelcomeSplash)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to Japanese Flash!" message:@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     [alertView release];
-    appSettings.isFirstLoad = NO;
+    _showWelcomeSplash = NO;
   }
-  
-  //launch the please rate us
-  [Appirater appLaunched];
+  else if (appSettings.isFirstLoadAfterNewVersion)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"The New Japanese Flash!" message:@"Time to install the new database!  This will take 3 minutes, and requires network access." delegate:self cancelButtonTitle:@"Update Later" otherButtonTitles:@"Update Now",@"What's Changed?",nil];
+    [alertView show];
+    [alertView release];
+  }
+}
+
+
+#pragma mark UIAlertView delegate methods
+
+/** UIAlertView delegate - takes action based on which button was pressed */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  switch (buttonIndex)
+  {
+    // Show release notes
+    case UPDATE_ALERT_RELEASE_NOTES_BUTTON:
+      [self showUpdaterModal:YES];
+      break;
+    // Start the update
+    case UPDATE_ALERT_UPDATE_NOW_BUTTON:
+      [self showUpdaterModal:NO];
+      break;
+    // Do nothing
+    case UPDATE_ALERT_CANCEL_BUTTON:
+      break;
+  }
 }
 
 
 # pragma mark Convenience Methods for Notifications
 
-//! Switches active view to study view, convenience method for notification
+/** Switches active view to study view, convenience method for notification */
 - (void) switchToStudyView
 {
   [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
 
-//! Pops up a modal over the screen when the user needs to download something
+/**
+ * Private method that actually does the dirty work of displaying any modal
+ */
+- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController
+{
+  if (useNavController)
+  {
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[self tabBarController] presentModalViewController:controller animated:YES];
+    [controller release];
+  }
+  else
+  {
+    [[self tabBarController] presentModalViewController:vc animated:YES];    
+  }
+}
+
+
+/**
+ * Pops up a modal over the screen when the user is updating versions
+ * Can be used to view release notes only
+ */
+- (void) showUpdaterModal:(BOOL)releaseNotesOnly
+{
+  ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
+  [updateVC setTitle:@"Update"];
+  [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
+  if (releaseNotesOnly)
+  {
+    [updateVC setShowDetailedViewOnAppear:YES];
+    [updateVC setStartTaskOnAppear:NO];
+  }
+  VersionManager *tmpVm = [[VersionManager alloc] init];
+  [updateVC setTaskHandler:tmpVm];
+  [tmpVm release];
+  [self _showModalWithViewController:updateVC useNavController:YES];
+  [updateVC release];
+}
+
+
+/**
+ * Pops up a modal over the screen when the user needs to download something
+ * Relies on _showModalWithViewController:useNavController:
+ */
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
-  DownloaderViewController* dlViewController = [[DownloaderViewController alloc] initWithNibName:@"DownloaderView" bundle:nil];
-
   // Instantiate downloader with jFlash download URL & destination filename
+  ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
+  [dlViewController setTitle:@"Plugin Download"];
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
    
   // Set the installer delegate to the PluginManager class
   [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
-  [dlViewController setDlHandler:tmpDlHandler];
+  [dlViewController setTaskHandler:tmpDlHandler];
   
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
+  // Register notification listener to handle downloader events
+	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderProgressUpdated" object:nil];
+  
+  [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
-
-  [[self tabBarController] presentModalViewController:modalNavController animated:YES];
-  [modalNavController release];
 }
 
 
-//! Hides the downloader
+/** Hides the downloader */
 - (void) hideDownloaderModal:(NSNotification*)aNotification
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
@@ -243,8 +319,6 @@
   [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
   [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
   [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
-  [settings setInteger:0 forKey:@"first_load"];
-  [settings setInteger:0 forKey:@"app_running"];
   [settings synchronize];
   
   // Only freeze if we have a database

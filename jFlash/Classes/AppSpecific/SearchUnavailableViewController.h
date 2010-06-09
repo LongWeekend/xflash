@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DownloaderViewController.h"
+#import "ModalTaskViewController.h"
 
 @interface SearchUnavailableViewController : UIViewController
 {

@@ -20,11 +20,14 @@
 #import "Constants.h"
 #import "LWEFile.h"
 #import "LWEDownloader.h"
-// TODO: may not need to do this
-#import "PluginManager.h"
 
-@interface RootViewController : UIViewController 
+#define UPDATE_ALERT_CANCEL_BUTTON 0
+#define UPDATE_ALERT_UPDATE_NOW_BUTTON 1
+#define UPDATE_ALERT_RELEASE_NOTES_BUTTON 2
+
+@interface RootViewController : UIViewController <UIAlertViewDelegate>
 {
+  BOOL _showWelcomeSplash;
   LoadingView *loadingView;
   UITabBarController *tabBarController;
 }
@@ -37,6 +40,8 @@
 - (void) loadTabBar;
 
 // Notification methods
+- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
+- (void) showUpdaterModal:(BOOL)releaseNotesOnly;
 - (void) swapSearchViewController;
 - (void) hideDownloaderModal:(NSNotification*)aNotification;
 - (void) showDownloaderModal:(NSNotification*)aNotification;
