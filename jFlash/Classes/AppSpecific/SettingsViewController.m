@@ -16,6 +16,7 @@
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
+NSString * const STUDY_ALGORITHM = @"algorithm";
 
 - (SettingsViewController*) init
 {
@@ -50,9 +51,9 @@ NSString * const APP_FACEBOOK = @"facebook";
     self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
     // These are the keys and display names of each row
-    NSArray *cardSettingNames = [NSArray arrayWithObjects:@"Browse Mode",@"Headword",@"Reading Display As",nil];
-    NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,nil];
-    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,@"Studying",nil]; // Puts single section together, 3rd index is header name
+    NSArray *cardSettingNames = [NSArray arrayWithObjects:@"Browse Mode",@"Headword",@"Reading Display As",@"Study Algorithm",nil];
+    NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,STUDY_ALGORITHM,nil];
+    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,@"Studying",STUDY_ALGORITHM, nil]; // Puts single section together, 3rd index is header name
 
     NSArray *userSettingNames = [NSArray arrayWithObjects:@"Theme",@"Active User",@"Plugins",nil];
     NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
@@ -121,6 +122,7 @@ NSString * const APP_FACEBOOK = @"facebook";
 {
   appirater = [[Appirater alloc] init];
   [appirater showPromptManually];
+  [appirater release];
 }
 
 
@@ -215,6 +217,11 @@ NSString * const APP_FACEBOOK = @"facebook";
     else
       tmpView.image = [UIImage imageNamed:@"facebook-icon.png"];
   }
+  else if (key == STUDY_ALGORITHM)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:STUDY_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  }
   else
   {
     // Anything else
@@ -292,6 +299,12 @@ NSString * const APP_FACEBOOK = @"facebook";
     [self.navigationController pushViewController:webVC animated:YES];
     [webVC release];
   }
+  else if (key == STUDY_ALGORITHM)
+  {
+    AlgorithmSettingsViewController *avc = [[AlgorithmSettingsViewController alloc] init];
+    [self.navigationController pushViewController:avc animated:YES];
+    [avc release];
+  }
   else
   {
     // Everything else
@@ -301,7 +314,7 @@ NSString * const APP_FACEBOOK = @"facebook";
     {
       headwordChanged = YES;
     }
-    else if (key == APP_THEME)
+    else if (key == APP_THEME || APP_READING)
     {
       themeChanged = YES;
     }

@@ -17,12 +17,14 @@ NSString * const SET_READING_KANA    = @"KANA";
 NSString * const SET_READING_ROMAJI  = @"ROMAJI";
 NSString * const SET_READING_BOTH    = @"BOTH";
 
-NSString * const APP_MODE            = @"mode";
-NSString * const APP_HEADWORD        = @"headword";
-NSString * const APP_READING         = @"reading";
-NSString * const APP_THEME           = @"theme";
-NSString * const APP_USER            = @"user_id";
-NSString * const APP_PLUGIN          = @"plugin";
+NSString * const APP_MODE                 = @"mode";
+NSString * const APP_HEADWORD             = @"headword";
+NSString * const APP_READING              = @"reading";
+NSString * const APP_THEME                = @"theme";
+NSString * const APP_USER                 = @"user_id";
+NSString * const APP_PLUGIN               = @"plugin";
+NSString * const APP_MAX_STUDYING         = @"difficulty";
+NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
 
 // Study View Controllers
 NSString * const HTML_FOOTER = @"</div></body></html>";

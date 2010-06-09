@@ -69,6 +69,7 @@
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
 		49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
+		91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */; };
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
 		91214F4911B601490091AFEF /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
@@ -253,6 +254,8 @@
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tametheme-cookie-cutters"; path = "Assets/tametheme-cookie-cutters"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91170DB211BF896F00D4A680 /* AlgorithmSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlgorithmSettingsViewController.h; path = AppSpecific/AlgorithmSettingsViewController.h; sourceTree = "<group>"; };
+		91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlgorithmSettingsViewController.m; path = AppSpecific/AlgorithmSettingsViewController.m; sourceTree = "<group>"; };
 		91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowseModeCardViewDelegate.h; path = AppSpecific/BrowseModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
@@ -873,6 +876,8 @@
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
 				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
+				91170DB211BF896F00D4A680 /* AlgorithmSettingsViewController.h */,
+				91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */,
 				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
 				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214F4711B601490091AFEF /* CardViewController.h */,
@@ -1265,6 +1270,7 @@
 				91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */,
 				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
 				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
+				91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

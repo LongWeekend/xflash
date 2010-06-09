@@ -29,50 +29,56 @@
  */
 - (NSInteger) calculateNextCardLevel
 {
+  // control variables
+  // controls how many words to show from new before preferring seen words
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  int wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
+  int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  
   // Total number of cards in this set
   int levelOneTotal;
-  int totalCards = [self cardCount];
-  if (totalCards < 1) return 0;
+  int totalCardsInSet = [self cardCount];
+  if (totalCardsInSet < 1) return 0;
   
   // Get m cards in n bins, figure out total percentages
   // Calculate different of weights and percentages and adjust accordingly
-  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardTotal = 0, numeratorTotal = 0;
-  int numLevels = 5;
+  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
   float p = 0,mean = 0, p_unseen = 0, pTotal = 0;
+  int numLevels = 5;
   
+  // the guts
   NSMutableArray* tmpTotalArray = [[NSMutableArray alloc] init];
-  
   for (i = 1; i <= numLevels; i++)
   {
     // Get denominator values from cache/database
     tmpTotal = [[cardLevelCounts objectAtIndex:i] intValue];
     if (i == 1) levelOneTotal = tmpTotal;
     [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
-    cardTotal = cardTotal + tmpTotal;
-    denominatorTotal = denominatorTotal + (tmpTotal * 2 * (numLevels - i + 1)); 
+    cardsSeenTotal = cardsSeenTotal + tmpTotal;
+    denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - i + 1)); 
     numeratorTotal = numeratorTotal + (tmpTotal * i);
   }
   
   // Quick check to make sure we are not at the "start of a set". 
-  if (cardTotal == totalCards)
+  if (cardsSeenTotal == totalCardsInSet)
   {
     p_unseen = 0;
   }
-  else if (cardTotal > totalCards)
+  else if (cardsSeenTotal > totalCardsInSet) // error check
   {
     // This should not happen, it is likely that we need to re-cache TotalCards
-    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardTotal, totalCards);
+    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardsSeenTotal, totalCardsInSet);
     p_unseen = 0;
   }
   else
   {
-    // Get the "new card" p
-    mean = (float)numeratorTotal / (float)cardTotal;
+    // Get the "new card" p -- RSH - what is "p"??
+    mean = (float)numeratorTotal / (float)cardsSeenTotal;
     p_unseen = (mean - (float)1);
-    p_unseen = pow((p_unseen / (float) 4),2);
-    if (levelOneTotal < 30 && (totalCards - cardTotal) > 0)
+    p_unseen = pow((p_unseen / (float) 4),weightingFactor);
+    if (levelOneTotal < wordsInStudyingBeforeTakingNewCard && (totalCardsInSet - cardsSeenTotal) > 0)
     {
-      p_unseen = p_unseen + (1-p_unseen)*(pow((30-cardTotal),.25)/pow(30,.25));
+      p_unseen = p_unseen + (1-p_unseen)*(pow((wordsInStudyingBeforeTakingNewCard - cardsSeenTotal),.25)/pow(wordsInStudyingBeforeTakingNewCard,.25));
     }
   }
 	
@@ -81,7 +87,7 @@
   for (i = 1; i <= numLevels; i++)
   {
     tmpTotal = [[tmpTotalArray objectAtIndex:(i-1)] intValue];
-    weightedTotal = (tmpTotal * 2 * (numLevels - i + 1));
+    weightedTotal = (tmpTotal * weightingFactor * (numLevels - i + 1));
     p = ((float)weightedTotal / (float)denominatorTotal);
     p = (1-p_unseen)*p;
     pTotal = pTotal + p;
