@@ -15,6 +15,7 @@
 		4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		490820A611B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
+		491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */; };
 		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		491FE3AF11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
@@ -29,12 +30,14 @@
 		4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
+		495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
-		4997D21611BB642600016A15 /* VersionMigrater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionMigrater.m */; };
+		4997D21611BB642600016A15 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
+		49A8232211BE382E00395E62 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
@@ -53,13 +56,14 @@
 		49CF2F1511BA4E0A0066923F /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1711AB80F700016BD2 /* LWEFile.m */; };
 		49CF2F1A11BA4E180066923F /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEB11AB7CD700016BD2 /* Card.m */; };
 		49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
-		49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
-		49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* DownloaderView.xib */; };
+		49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
+		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
+		49F9686A11AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
-		49F968E911AF650C00DFC3C9 /* DownloaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */; };
-		49F968EA11AF650C00DFC3C9 /* DownloaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */; };
+		49F968E911AF650C00DFC3C9 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968E811AF650C00DFC3C9 /* ModalTaskViewController.m */; };
+		49F968EA11AF650C00DFC3C9 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968E811AF650C00DFC3C9 /* ModalTaskViewController.m */; };
 		49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
 		49F968FB11AF652D00DFC3C9 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
 		49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */; };
@@ -207,6 +211,7 @@
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
+		491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_update_10_to_11_sql.txt; sourceTree = "<group>"; };
 		491FE3AB11BA0B5700A54F51 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "Assets/twitter-icon.png"; sourceTree = "<group>"; };
 		491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "Assets/facebook-icon.png"; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,11 +226,13 @@
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
 		4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchUnavailableViewController.h; path = AppSpecific/SearchUnavailableViewController.h; sourceTree = "<group>"; };
 		4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchUnavailableViewController.m; path = AppSpecific/SearchUnavailableViewController.m; sourceTree = "<group>"; };
+		495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
-		4997D21411BB642600016A15 /* VersionMigrater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionMigrater.h; path = AppSpecific/VersionMigrater.h; sourceTree = "<group>"; };
-		4997D21511BB642600016A15 /* VersionMigrater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionMigrater.m; path = AppSpecific/VersionMigrater.m; sourceTree = "<group>"; };
+		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
+		4997D21511BB642600016A15 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionManager.m; path = AppSpecific/VersionManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
+		49A8232111BE382E00395E62 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "release-notes.html"; path = "Assets/release-notes.html"; sourceTree = "<group>"; };
 		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
@@ -240,11 +247,11 @@
 		49CF2E6211BA46AA0066923F /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = "<group>"; };
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
-		49F9686811AF604900DFC3C9 /* DownloaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DownloaderView.xib; path = XIBs/DownloaderView.xib; sourceTree = "<group>"; };
+		49F9686811AF604900DFC3C9 /* ModalTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalTaskView.xib; path = XIBs/ModalTaskView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		49F968E111AF64D400DFC3C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloaderViewController.h; path = AppSpecific/DownloaderViewController.h; sourceTree = "<group>"; };
-		49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloaderViewController.m; path = AppSpecific/DownloaderViewController.m; sourceTree = "<group>"; };
+		49F968E711AF650C00DFC3C9 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
+		49F968E811AF650C00DFC3C9 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		49F968F811AF652D00DFC3C9 /* LWEDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEDownloader.h; path = Reusable/LWE/LWEDownloader.h; sourceTree = "<group>"; };
 		49F968F911AF652D00DFC3C9 /* LWEDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEDownloader.m; path = Reusable/LWE/LWEDownloader.m; sourceTree = "<group>"; };
 		49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlashAppDelegate.h; path = AppSpecific/jFlashAppDelegate.h; sourceTree = "<group>"; };
@@ -544,7 +551,9 @@
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
 				91EA2F4B104135E200AB848E /* dist.plist */,
 				494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */,
+				495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */,
 				49F96A0C11AF996600DFC3C9 /* jFlash.db */,
+				491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD235E101C121D0081F883 /* icon.png */,
@@ -634,6 +643,7 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				49A8232111BE382E00395E62 /* release-notes.html */,
 				D35B070D1116456D00DB5E02 /* avatars */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				D3309B031123C7D800B73E8E /* help */,
@@ -797,12 +807,12 @@
 				917A5C8411AB851100016BD2 /* MoodIcon.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
-				4999672811B3E45F00898A0C /* ThemeManager.h */,
-				4999672911B3E45F00898A0C /* ThemeManager.m */,
 				4950C25111B764B200B70EE9 /* PluginManager.h */,
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
-				4997D21411BB642600016A15 /* VersionMigrater.h */,
-				4997D21511BB642600016A15 /* VersionMigrater.m */,
+				4999672811B3E45F00898A0C /* ThemeManager.h */,
+				4999672911B3E45F00898A0C /* ThemeManager.m */,
+				4997D21411BB642600016A15 /* VersionManager.h */,
+				4997D21511BB642600016A15 /* VersionManager.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -842,7 +852,7 @@
 				91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				4951E0FC11B61F7D00FCE21E /* CardView.xib */,
-				49F9686811AF604900DFC3C9 /* DownloaderView.xib */,
+				49F9686811AF604900DFC3C9 /* ModalTaskView.xib */,
 				91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
@@ -877,8 +887,8 @@
 				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214F4711B601490091AFEF /* CardViewController.h */,
 				91214F4811B601490091AFEF /* CardViewController.m */,
-				49F968E711AF650C00DFC3C9 /* DownloaderViewController.h */,
-				49F968E811AF650C00DFC3C9 /* DownloaderViewController.m */,
+				49F968E711AF650C00DFC3C9 /* ModalTaskViewController.h */,
+				49F968E811AF650C00DFC3C9 /* ModalTaskViewController.m */,
 				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
 				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
@@ -1116,7 +1126,7 @@
 				917A5C7811AB844300016BD2 /* StudyView.xib in Resources */,
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
 				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
-				49F9686911AF604900DFC3C9 /* DownloaderView.xib in Resources */,
+				49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
 				49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
 				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
@@ -1129,6 +1139,9 @@
 				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
+				491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */,
+				49A8232211BE382E00395E62 /* release-notes.html in Resources */,
+				495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,7 +1156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49F9686A11AF604900DFC3C9 /* DownloaderView.xib in Resources */,
+				49F9686A11AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
 				49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
 				49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
@@ -1244,7 +1257,7 @@
 				917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */,
 				917A5CB311AB85E200016BD2 /* Reachability.m in Sources */,
 				91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */,
-				49F968E911AF650C00DFC3C9 /* DownloaderViewController.m in Sources */,
+				49F968E911AF650C00DFC3C9 /* ModalTaskViewController.m in Sources */,
 				49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
 				49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
 				91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */,
@@ -1265,6 +1278,7 @@
 				91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */,
 				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
 				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
+				49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,7 +1294,7 @@
 				49CF2F1511BA4E0A0066923F /* LWEFile.m in Sources */,
 				49CF2F1A11BA4E180066923F /* Card.m in Sources */,
 				49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */,
-				4997D21611BB642600016A15 /* VersionMigrater.m in Sources */,
+				4997D21611BB642600016A15 /* VersionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,7 +1302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49F968EA11AF650C00DFC3C9 /* DownloaderViewController.m in Sources */,
+				49F968EA11AF650C00DFC3C9 /* ModalTaskViewController.m in Sources */,
 				49F968FB11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
 				49F9692811AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
 				49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */,
@@ -1336,7 +1350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
