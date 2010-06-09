@@ -224,9 +224,9 @@ NSString * const APP_ALGORITHM = @"algorithm";
     else
       tmpView.image = [UIImage imageNamed:@"facebook-icon.png"];
   }
-  else if (key == STUDY_ALGORITHM)
+  else if (key == APP_ALGORITHM)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:STUDY_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else
@@ -289,8 +289,9 @@ NSString * const APP_ALGORITHM = @"algorithm";
     // Load a UIWebView to show
     UIViewController *webVC = [[UIViewController alloc] init];
     UIWebView *webView = [[UIWebView alloc] init];
-    webVC.title = NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs")
-    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload") style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
+    webVC.title = NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs");
+    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload")
+                                                                       style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
 
     NSURL *url = nil;
     if (key == APP_FACEBOOK)
@@ -306,7 +307,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     [self.navigationController pushViewController:webVC animated:YES];
     [webVC release];
   }
-  else if (key == STUDY_ALGORITHM)
+  else if (key == APP_ALGORITHM)
   {
     AlgorithmSettingsViewController *avc = [[AlgorithmSettingsViewController alloc] init];
     [self.navigationController pushViewController:avc animated:YES];
