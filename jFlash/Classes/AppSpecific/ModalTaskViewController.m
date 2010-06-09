@@ -13,7 +13,7 @@
 @implementation ModalTaskViewController
 
 @synthesize statusMsgLabel, taskMsgLabel, progressIndicator, cancelButton, retryButton, startButton, pauseButton;
-@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
+@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear, webViewContentFile;
 
 //! Initialization
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +34,7 @@
   [self setStatusMessage:@""];
   [self setTaskMessage:@""];
   [self setProgress:0.0f];
+  [self setWebViewContentFile:@""];
 
   // Sets the disabled/enabled state of start button
   [[self startButton] setEnabled:![self startTaskOnAppear]];
@@ -311,18 +312,7 @@
   // Call delegate & update the UI buttons
   [self updateButtons];
   
-  // Determine what to do with buttons based on state
-  if ([[self taskHandler] isFailureState])
-  {
-    // TODO: THIS is where you use a delegate.
-    // If network or install error (install error should never happen, but)
-//    if ([[self taskHandler] getFailureState] == kDownloaderNetworkFail || [[self taskHandler] getFailureState] == kDownloaderInstallFail)
-//    {
-      // Network failed, show retry button?
-      [[self retryButton] setEnabled:YES];
-//    }
-  }
-  else if ([[self taskHandler] isSuccessState])
+  if ([[self taskHandler] isSuccessState])
   {
     // Tell someone about this!  Let someone else handle this noise
     LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
@@ -342,7 +332,7 @@
   webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   webView.opaque = NO;
   
-  NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:@"release-notes.html"]];
+  NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:[self webViewContentFile]]];
   NSURLRequest *request = [NSURLRequest requestWithURL:url];
   [webView loadRequest:request];
   [self.view addSubview:webView];

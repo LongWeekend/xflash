@@ -152,10 +152,10 @@
   else if (appSettings.isFirstLoadAfterNewVersion)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
-                                                  message:NSLocalizedString(@"Time to install the new database!  This will take 3 minutes, and requires network access.",@"RootViewController.UpdateAlertViewMessage")
+                                                  message:NSLocalizedString(@"JFlash has grown up!  In this latest version, we've improved our database quality and added great features.  We need about 3 minutes of your time and a network connection to upgrade your database so you don't lose any study history.  Do you want to do this now?",@"RootViewController.UpdateAlertViewMessage")
                                                   delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                                  otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),NSLocalizedString(@"What's Changed?",@"RootViewController.UpdateAlertViewButton_ReleaseNotes"),nil];
+                                                  otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
     [alertView show];
     [alertView release];
   }
@@ -169,13 +169,8 @@
 {
   switch (buttonIndex)
   {
-    // Show release notes
-    case UPDATE_ALERT_RELEASE_NOTES_BUTTON:
-      [self showUpdaterModal:YES];
-      break;
-    // Start the update
     case UPDATE_ALERT_UPDATE_NOW_BUTTON:
-      [self showUpdaterModal:NO];
+      [self showUpdaterModal];
       break;
     // Do nothing
     case UPDATE_ALERT_CANCEL_BUTTON:
@@ -215,15 +210,17 @@
  * Pops up a modal over the screen when the user is updating versions
  * Can be used to view release notes only
  */
-- (void) showUpdaterModal:(BOOL)releaseNotesOnly
+- (void) showUpdaterModal
 {
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [updateVC setTitle:@"Update"];
+  [updateVC setTitle:NSLocalizedString(@"Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
   if (releaseNotesOnly)
   {
+    // Set task parameters
     [updateVC setShowDetailedViewOnAppear:YES];
     [updateVC setStartTaskOnAppear:NO];
+    [updateVC setWebViewContentFile:@"release-notes.html"];
   }
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
@@ -241,7 +238,10 @@
 {
   // Instantiate downloader with jFlash download URL & destination filename
   ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [dlViewController setTitle:@"Plugin Download"];
+  [dlViewController setTitle:NSLocalizedString(@"Plugin Download",@"ModalTaskViewController_Plugin.NavBarTitle")];
+  [dlViewController setShowDetailedViewOnAppear:YES];
+  [dlViewController setStartTaskOnAppear:NO];
+  [dlViewController setWebViewContentFile:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
