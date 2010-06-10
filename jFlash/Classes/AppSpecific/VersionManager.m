@@ -203,7 +203,7 @@
     // Delegate call
     return [[self dlHandler] canCancelTask];
   }
-  else if (_migraterState == kMigraterUpdateSQL)
+  else if (_migraterState == kMigraterUpdateSQL || _migraterState == kMigraterReady)
   {
     return YES;
   }
@@ -273,6 +273,7 @@
   if (_migraterState == kMigraterDownloadPlugins && [[self dlHandler] canCancelTask])
   {
     [[self dlHandler] cancelTask];
+    [self _updateInternalState:kMigraterCancelled withTaskMessage:@"Cancelled"];
   }
   else if (_migraterState == kMigraterUpdateSQL)
   {

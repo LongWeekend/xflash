@@ -43,7 +43,7 @@
 
 // Notification methods
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
-- (void) showUpdaterModal:(BOOL)releaseNotesOnly;
+- (void) showUpdaterModal;
 - (void) swapSearchViewController;
 - (void) hideDownloaderModal:(NSNotification*)aNotification;
 - (void) showDownloaderModal:(NSNotification*)aNotification;

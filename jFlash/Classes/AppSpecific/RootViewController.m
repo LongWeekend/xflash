@@ -149,10 +149,10 @@
     [alertView release];
     _showWelcomeSplash = NO;
   }
-  else if (appSettings.isFirstLoadAfterNewVersion)
+  else if (appSettings.isFirstLoadAfterNewVersion || 1)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
-                                                  message:NSLocalizedString(@"JFlash has grown up!  In this latest version, we've improved our database quality and added great features.  We need about 3 minutes of your time and a network connection to upgrade your database so you don't lose any study history.  Do you want to do this now?",@"RootViewController.UpdateAlertViewMessage")
+                                                  message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
                                                   delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
                                                   otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
@@ -213,15 +213,12 @@
 - (void) showUpdaterModal
 {
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [updateVC setTitle:NSLocalizedString(@"Update",@"ModalTaskViewController_Update.NavBarTitle")];
+  [updateVC setTitle:NSLocalizedString(@"Update Dictionary",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
-  if (releaseNotesOnly)
-  {
-    // Set task parameters
-    [updateVC setShowDetailedViewOnAppear:YES];
-    [updateVC setStartTaskOnAppear:NO];
-    [updateVC setWebViewContentFile:@"release-notes.html"];
-  }
+  // Set task parameters
+  [updateVC setShowDetailedViewOnAppear:YES];
+  [updateVC setStartTaskOnAppear:NO];
+  [updateVC setWebViewContentFile:@"release-notes"];
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];
@@ -238,10 +235,11 @@
 {
   // Instantiate downloader with jFlash download URL & destination filename
   ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [dlViewController setTitle:NSLocalizedString(@"Plugin Download",@"ModalTaskViewController_Plugin.NavBarTitle")];
+  [dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
   [dlViewController setWebViewContentFile:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
+  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFile]);
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];

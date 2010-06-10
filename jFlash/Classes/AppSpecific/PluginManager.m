@@ -29,19 +29,19 @@ NSString *const EXAMPLE_DB_KEY = @"EX_DB";
                            @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
                            [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",nil],CARD_DB_KEY,
                          
-                         // FTS
+                           // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             @"Awesomely Fast Search",@"plugin_name",
+                            @"full-text-search",@"plugin_notes_file",
                             @"Adds sub-second full dictionary search (~16MB)",@"plugin_details",
-                            @"full-text-search.html",@"plugin_notes_file",
-                            @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
-//                            @"http://localhost/~phooze/jFlash-FTS-v1.1.db.gz",@"target_url",
+//                            @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
+                            @"http://localhost/~phooze/jFlash-FTS-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             @"50,000+ Example Sentences",@"plugin_name",
-                            @"example-sentences.html",@"plugin_notes_file",
+                            @"example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (~25MB)",@"plugin_details",
                             @"http://mini.local:8080/hudson/jFlash-EX-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,

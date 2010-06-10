@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "PluginSettingsViewController.h"
 #import "UserViewController.h"
+#import "VersionManager.h"
 
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
@@ -97,9 +98,18 @@ NSString * const APP_ALGORITHM = @"algorithm";
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
+  [rateUsBtn release];
+  
+  // Do we need to show a button on the other side?
+  if ([VersionManager databaseIsUpdatable])
+  {
+    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleDone target:self.parentViewController action:@selector(showUpdaterModal)];
+    self.navigationItem.rightBarButtonItem = updateBtn;
+    [updateBtn release];
+  }
+  
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   [[self tableView] reloadData];
-  [rateUsBtn release];
 }
 
 // Only re-load the set if settings were changed, otherwise there is no need to do anything

@@ -21,6 +21,7 @@
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
   {
     [self setTaskHandler:nil];
+    [self setWebViewContentFile:nil];
   }
   return self;
 }
@@ -29,12 +30,12 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 
   // Reset all variables to default
   [self setStatusMessage:@""];
   [self setTaskMessage:@""];
   [self setProgress:0.0f];
-  [self setWebViewContentFile:@""];
 
   // Sets the disabled/enabled state of start button
   [[self startButton] setEnabled:![self startTaskOnAppear]];
@@ -328,13 +329,16 @@
 - (IBAction) showDetailedView
 {
   // Load a UIWebView to show
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(20, 20, 280, 350)];
-  webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+  webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   
-  NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:[self webViewContentFile]]];
-  NSURLRequest *request = [NSURLRequest requestWithURL:url];
-  [webView loadRequest:request];
+  NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFile] ofType:@"html"];
+  LWE_LOG(@"Filename is: %@",filename);
+  NSURL *url = [NSURL fileURLWithPath:filename];
+  LWE_LOG(@"URL is: %@",url);
+
+  [webView loadRequest:[NSURLRequest requestWithURL:url]];
   [self.view addSubview:webView];
   [webView release];
 }
