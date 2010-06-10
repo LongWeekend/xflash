@@ -10,6 +10,7 @@
 #define DEFAULT_USER_ID 1
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
 #define DEFAULT_MAX_STRUDYING 30
+#define DEFAULT_DIFFICULTY 1
 
 // Database version constants
 #define JFLASH_DATA_1_0 1
@@ -43,6 +44,7 @@ extern NSString * const APP_USER;
 extern NSString * const APP_PLUGIN;
 extern NSString * const APP_FREQUENCY_MULTIPLIER;
 extern NSString * const APP_MAX_STUDYING;
+extern NSString * const APP_DIFFICULTY;
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"

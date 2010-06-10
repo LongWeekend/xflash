@@ -38,8 +38,9 @@ NSString * const APP_READING              = @"reading";
 NSString * const APP_THEME                = @"theme";
 NSString * const APP_USER                 = @"user_id";
 NSString * const APP_PLUGIN               = @"plugin";
-NSString * const APP_MAX_STUDYING         = @"difficulty";
+NSString * const APP_MAX_STUDYING         = @"maxStudying";
 NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
+NSString * const APP_DIFFICULTY           = @"app_difficulty";
 
 // Study View Controllers
 NSString * const HTML_FOOTER = @"</div></body></html>";

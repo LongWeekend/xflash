@@ -139,7 +139,6 @@ NSString * const APP_ALGORITHM = @"algorithm";
 {
   appirater = [[Appirater alloc] init];
   [appirater showPromptManually];
-  [appirater release];
 }
 
 
