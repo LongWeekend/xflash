@@ -131,6 +131,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_USER_ID forKey:@"user_id"];
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
+  [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
   // disable first load messsage if we get this far
   [settings setBool:YES forKey:@"settings_already_created"];
   [settings setBool:NO forKey:@"db_did_finish_copying"];

@@ -11,7 +11,11 @@
 #import "Constants.h"
 
 @interface AlgorithmSettingsViewController : UITableViewController {
-
+  UISlider *maxCardsUISlider;
+  UISlider *frequencyUISlider;
 }
+
+@property (nonatomic, retain) UISlider *maxCardsUISlider;
+@property (nonatomic, retain) UISlider *frequencyUISlider;
 
 @end
