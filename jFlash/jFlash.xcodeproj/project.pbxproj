@@ -81,6 +81,10 @@
 		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
+		9177285911C0BB6100A90071 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
+		9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
+		9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
+		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
 		917A5B8D11AB7ADB00016BD2 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
 		917A5B8E11AB7ADB00016BD2 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8111AB7ADB00016BD2 /* ASIFormDataRequest.m */; };
 		917A5B8F11AB7ADB00016BD2 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8311AB7ADB00016BD2 /* ASIHTTPRequest.m */; };
@@ -274,6 +278,10 @@
 		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "send-to-long-weekend-btn.png"; path = "Assets/send-to-long-weekend-btn.png"; sourceTree = "<group>"; };
+		9177287711C0BF0B00A90071 /* save-changes-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn.png"; path = "Assets/save-changes-btn.png"; sourceTree = "<group>"; };
+		9177287811C0BF0B00A90071 /* select-user-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn.png"; path = "Assets/select-user-btn.png"; sourceTree = "<group>"; };
+		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
 		917A5B7E11AB7ADB00016BD2 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
 		917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = "<group>"; };
 		917A5B8011AB7ADB00016BD2 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIFormDataRequest.h; path = "External/asi-http-request/Classes/ASIFormDataRequest.h"; sourceTree = "<group>"; };
@@ -646,6 +654,9 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				917728E011C0CA9600A90071 /* dropped-text-box.png */,
+				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
+				9177287811C0BF0B00A90071 /* select-user-btn.png */,
 				49A8232111BE382E00395E62 /* release-notes.html */,
 				D35B070D1116456D00DB5E02 /* avatars */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
@@ -659,6 +670,7 @@
 				D35B070B1116456D00DB5E02 /* 44-shoebox.png */,
 				D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */,
 				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
+				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
 				D35B073E1116456D00DB5E02 /* practice-btn-addtoset.png */,
 				D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */,
@@ -1147,6 +1159,10 @@
 				491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */,
 				49A8232211BE382E00395E62 /* release-notes.html in Resources */,
 				495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */,
+				9177285911C0BB6100A90071 /* send-to-long-weekend-btn.png in Resources */,
+				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
+				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
+				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
