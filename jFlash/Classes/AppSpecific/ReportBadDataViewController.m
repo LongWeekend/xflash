@@ -57,7 +57,6 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   [[NSBundle mainBundle] loadNibNamed:@"LWEToolbarPicker" owner:self options:nil];
 
   [super viewDidLoad];
-  //TODO: Ross and I decided this is a hack and should be fixed w/ a category?
   _cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel") style:UIBarButtonItemStylePlain target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = _cancelButton;
   self.navigationItem.title = NSLocalizedString(@"What's Wrong?",@"ReportBadDataViewController.NavBarTitle");

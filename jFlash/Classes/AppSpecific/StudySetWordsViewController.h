@@ -10,16 +10,13 @@
 #import "TagPeer.h"
 #import "Tag.h"
 #import "CardPeer.h"
-//TODO: later do this
-//#import "Util.h"
-//#import "ASIFormDataRequest.h"
 
-
+// TODO: pretty well sure these two enums are no longer used in active code
 enum settingsRows
 {
   kWordSetOptionsStart = 0,
   kWordSetOptionsPublish = 1,
-  settingsRowsLenght
+  settingsRowsLength
 };
 
 

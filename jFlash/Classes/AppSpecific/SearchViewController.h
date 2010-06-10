@@ -18,7 +18,7 @@
   BOOL _deepSearchRan;
 }
 
-- (void) runSearch:(BOOL) runSlowSearch;
+- (void) runSearchForString:(NSString*)text isSlowSearch:(BOOL)runSlowSearch;
 
 // convenience method for performSelecterInBackground
 - (void) runSlowSearch;

@@ -10,10 +10,6 @@
 #import "LWEDownloader.h"
 #import "FMResultSet.h"
 
-extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
-extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
-extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
-
 //! Handles downloaded plugins' installation and versioning
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
 {

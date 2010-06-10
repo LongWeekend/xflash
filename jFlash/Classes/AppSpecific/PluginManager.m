@@ -8,10 +8,6 @@
 
 #import "PluginManager.h"
 
-NSString *const CARD_DB_KEY = @"CARD_DB";
-NSString *const FTS_DB_KEY = @"FTS_DB";
-NSString *const EXAMPLE_DB_KEY = @"EX_DB";
-
 @implementation PluginManager
 
 //! Customized initializer

@@ -93,19 +93,28 @@
 
 - (void) _resetExampleSentencesView
 {
-  if([[self currentCard] hasExampleSentences])
+  // TODO: MMA is this the right place to have the "is exmaple sentence plugin loaded?" code?
+  // First, check if they have the plugin installed
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    [[self pageControl] setHidden:NO];
-    scrollView.pagingEnabled = YES;
-    scrollView.scrollEnabled = YES;
-  }
+    if([[self currentCard] hasExampleSentences])
+    {
+      [[self pageControl] setHidden:NO];
+      scrollView.pagingEnabled = YES;
+      scrollView.scrollEnabled = YES;
+    }
+    else
+    {
+      [[self pageControl] setHidden:YES];
+      scrollView.pagingEnabled = NO;
+      scrollView.scrollEnabled = NO;
+    }
+    [[self exampleSentencesViewController] setup];
+  } 
   else
   {
-    [[self pageControl] setHidden:YES];
-    scrollView.pagingEnabled = NO;
-    scrollView.scrollEnabled = NO;
-  }
-  [[self exampleSentencesViewController] setup];
+    // No example sentences installed
+  }       
 }
 
 - (void) _resetStudyView
@@ -143,7 +152,8 @@
   [self resetKeepingCurrentCard];
 }
 
-- (void) _updateCardViewDelegates {
+- (void) _updateCardViewDelegates
+{
   id cardViewControllerDelegate;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
@@ -160,7 +170,7 @@
   [actionBarController setDelegate:cardViewControllerDelegate];
 }
 
-//! Resets the study view without getting a new card
+/** Resets the study view without getting a new Card */
 - (void) resetKeepingCurrentCard
 {
   [self _updateCardViewDelegates];
@@ -201,9 +211,7 @@
 }
 
 
-/**
- * redraws the progress bar with new level details
- */
+/** redraws the progress bar with new level details */
 - (void) refreshProgressBarView
 {
   [progressBarViewController setLevelDetails: [self getLevelDetails]];
@@ -211,9 +219,7 @@
 }
 
 
-/**
- * Shows the meaning/reading
- */
+/** Shows the meaning/reading */
 - (void) revealCard
 {
   [[self revealCardBtn] setHidden:YES];
@@ -394,6 +400,7 @@
 	CGFloat cx = scrollView.frame.size.width;
   
   // TODO: make this the right view for example sentences
+  // TODO: what to load if they haven't installed Example Sentences yet?  MMA 6/10/2010
   [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
   [[self exampleSentencesViewController] setDatasource:self];
   UIView *sentencesView = [[self exampleSentencesViewController] view];

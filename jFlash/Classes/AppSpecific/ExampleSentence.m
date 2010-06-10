@@ -8,13 +8,19 @@
 
 #import "ExampleSentence.h"
 
+/*!
+    @class ExampleSentence
+    @abstract Represents a single example sentence in both English and Japanese
+    @discussion Also has the "checked" flag to indicate whether or not the sentence
+    has been checked by a human after submission to the corpus.
+*/
 @implementation ExampleSentence
 @synthesize sentenceId, sentenceJa, sentenceEn, checked;
 
 #pragma mark -
 #pragma mark Core Methods
 
-//! Takes a sqlite result set and populates the properties of example sentence
+/** Takes a sqlite result set \param rs and populates the properties of example sentence */
 - (void) hydrate: (FMResultSet*) rs
 {
   [self setSentenceId: [rs intForColumn:@"sentence_id"]];

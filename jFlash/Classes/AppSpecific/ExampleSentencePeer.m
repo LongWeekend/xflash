@@ -8,9 +8,14 @@
 
 #import "ExampleSentencePeer.h"
 
-
+/*!
+    @class ExampleSentencePeer
+    @abstract    Handles getting ExampleSentence objects from LWEDatabase
+ */
 @implementation ExampleSentencePeer
 
+
+/** Returns a mutable array of ExampleSentence objects based on the SQL passed via the \param sql */
 + (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -35,7 +40,8 @@
   return sentenceList;
 }
 
-//! returns a hydrated ExampleSentence object by its id
+
+/** returns a single hydrated ExampleSentence object using \param sentenceId */
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM example_sentences WHERE sentence_id = '%d'", sentenceId];
@@ -44,7 +50,9 @@
 	return [tmpSentences objectAtIndex:0];
 }
 
-+ (NSMutableArray*) getExampleSentecesByCardId: (NSInteger)cardId
+
+/** Returns all ExampleSentence objects that are linked to \param cardId */
++ (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM example_sentences s, example_card_link l WHERE l.card_id = '%d' AND s.sentence_id = l.example_sentence_id", cardId];
   NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];

@@ -15,7 +15,7 @@
 
 @end
 
-//* datasource informal protocol.  Officially you don't have to provide a datasource but the view will be empty if you don't
+/** datasource informal protocol.  Officially you don't have to provide a datasource but the view will be empty if you don't */
 @interface NSObject (ExampleSentencesDatasourceSupport)
 - (Card*) currentCard;
 @end
@@ -60,7 +60,8 @@
 #pragma mark UIView subclass methods
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
 
   sentencesWebView.backgroundColor = [UIColor clearColor];
@@ -82,13 +83,14 @@
 {
   [self _exampleSentencesViewWillSetup];
   // the datasource must implement currentcard or we don't set any data
+  //TODO: what's wrong with @selector(currentCard) -- MMA 6/10/2010  -- is it because of warnings?
   if([datasource respondsToSelector: NSSelectorFromString(@"currentCard")])
   {
     NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
     [[self headwordLabel] setText: mungedHeadWordWithReading];
     
     // TODO : test code for the example sentences model
-    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentecesByCardId:1];
+    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:1];
   }
   [self _exampleSentencesViewDidSetup];
 }

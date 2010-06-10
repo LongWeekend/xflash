@@ -18,8 +18,6 @@
   if (self = [super initWithStyle:UITableViewStylePlain])
   {
     // Set the tab bar controller image png to the targets
-    //TODO: I have a suspicision that the following line means nothing!   MMA 6/2/2010
-//    self.navigationItem.title = NSLocalizedString(@"Word Search",@"SearchViewController.NavBarTitle");
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
   }
@@ -58,40 +56,44 @@
 
 #pragma mark searchBar methods
 
-// only show the cancel button when the keyboard is displayed
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)lclSearchBar {  
+/** Only show the cancel button when the keyboard is displayed */
+- (void) searchBarDidBeginEditing:(UISearchBar*) lclSearchBar
+{
   lclSearchBar.showsCancelButton = YES;
-  return YES;
 }
 
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)lclSearchBar {  
+/** Hide the cancel button when user finishes */
+- (void) searchBarDidEndEditing:(UISearchBar *)lclSearchBar
+{  
   lclSearchBar.showsCancelButton = NO;
-  return YES;
 }
 
+/** Run the search and resign the keyboard */
 - (void) searchBarSearchButtonClicked:(UISearchBar *)lclSearchBar
 {
-  [self runSearch:NO];
   _deepSearchRan = NO;
+  [self runSearchForString:searchBar.text isSlowSearch:NO];
   [lclSearchBar resignFirstResponder];
 }
 
+/** Cancel the keyboard only */
 - (void) searchBarCancelButtonClicked:(UISearchBar*)lclSearchBar
 {
   [lclSearchBar resignFirstResponder];
 }
 
-// convenience method for performSelecterInBackground
+/** convenience method for performSelectorInBackground */
 - (void) runSlowSearch
 {
   _deepSearchRan = YES;
-  [self runSearch:YES];
+  [self runSearchForString:searchBar.text isSlowSearch:YES];
 }
 
-- (void) runSearch:(BOOL) runSlowSearch
+/** Execute actual search with \param text. Designed to be called in background thread */
+- (void) runSearchForString:(NSString*)text isSlowSearch:(BOOL)runSlowSearch
 {
   _searchRan = YES;
-  self.searchArray = [CardPeer searchCardsForKeyword:searchBar.text doSlowSearch:runSlowSearch];
+  self.searchArray = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
   [activityIndicator stopAnimating];
   [[self tableView] reloadData];
   // reset the user to the top of the tableview for new searches
@@ -100,10 +102,13 @@
 
 #pragma mark Table view methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+/** Hardcoded to 1 **/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
   return 1;
 }
 
+/** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   if([searchArray count] == 0 && _searchRan)
@@ -116,69 +121,67 @@
   }
 }
 
+/** Delegate for table, returns cells */
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *CellIdentifier = @"Cell";
-  if([searchArray count] == 0 && _searchRan && _deepSearchRan){
-    CellIdentifier = @"deepSearchNoResultCell";
+  UITableViewCell *cell;
+  if([searchArray count] == 0 && _searchRan && _deepSearchRan)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
   }
-  else if([searchArray count] == 0 && _searchRan){
-    CellIdentifier = @"noResultCell";
+  else
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"SearchRecord" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
   }
   
-  UITableViewCell *cell = [lclTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    if([searchArray count] == 0 && _searchRan && _deepSearchRan)
+  // Determine what kind of cell it is to set the properties
+  if([searchArray count] == 0 && _searchRan)
+  {
+    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
+
+    // Depending on what kind of search, do things slightly differently
+    if (_deepSearchRan)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+      cell.detailTextLabel.text = NSLocalizedString(@"Tap here to do a DEEP search.",@"SearchViewController.DoDeepSearch");
+      cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+      cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+      cell.selectionStyle = UITableViewCellSelectionStyleGray;
+      cell.accessoryView = activityIndicator;
     }
-  }
-  
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
-  cell.selectionStyle = UITableViewCellSelectionStyleGray;
-  
-  if([searchArray count] == 0 && _searchRan && _deepSearchRan)
-  {
-    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
-    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.text = @"";
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-  }
-  else if([searchArray count] == 0 && _searchRan)
-  {
-    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
-    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.detailTextLabel.text = NSLocalizedString(@"Tap here to do a DEEP search.",@"SearchViewController.DoDeepSearch");
-    cell.accessoryView = activityIndicator;
   }
   else
   {     
-    cell.textLabel.text = [[searchArray objectAtIndex:(NSInteger)indexPath.row] headword];
+    // Is a search result record
+    Card* searchResult = [searchArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [searchResult headword];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    NSString *meaningStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] meaningWithoutMarkup];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+    NSString *meaningStr = [searchResult meaningWithoutMarkup];
 
     NSString *readingStr;
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
     {
       // KANA READING
-      readingStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] reading];
+      readingStr = [searchResult reading];
     } 
-    else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+    else if ([[settings objectForKey:APP_READING] isEqualToString:SET_READING_ROMAJI])
     {
       // ROMAJI READING
-      readingStr = [[searchArray objectAtIndex:(NSInteger)indexPath.row] romaji];
+      readingStr = [searchResult romaji];
     }
     else
     {
       // BOTH READINGS
-      readingStr = [NSString stringWithFormat:@"%@ / %@", [[searchArray objectAtIndex:(NSInteger)indexPath.row] reading], [[searchArray objectAtIndex:(NSInteger)indexPath.row] romaji] ];
+      readingStr = [NSString stringWithFormat:@"%@ / %@", [searchResult reading], [searchResult romaji]];
     }
     
     if (readingStr.length > 0)
@@ -190,27 +193,32 @@
   return cell;
 }
 
-
+/** Take action when the user selects a cell */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // if we already did a deep search we can't help them
-  if([searchArray count] == 0 && _deepSearchRan)
+  if ([searchArray count] == 0 && _deepSearchRan)
   {
     return;
   }
-  else if([searchArray count] == 0)
+  else if ([searchArray count] == 0)
   {
     [activityIndicator startAnimating];
     // Run selector after delay to allow UIVIew to update on run loop
     [self performSelector:@selector(runSlowSearch) withObject:nil afterDelay:0];
     return;
   }
-	AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil];
-	tagController.cardId = [[searchArray objectAtIndex:(NSInteger)indexPath.row] cardId];
-	tagController.title = NSLocalizedString(@"Add Word To Set",@"AddTagViewController.NavBarTitle");
-  tagController.currentCard = [searchArray objectAtIndex:(NSInteger)indexPath.row];
-	[self.navigationController pushViewController:tagController animated:YES];
-	[tagController release];
+  else
+  {
+    AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil];
+    tagController.cardId = [[searchArray objectAtIndex:indexPath.row] cardId];
+    tagController.title = NSLocalizedString(@"Add Word To Set",@"AddTagViewController.NavBarTitle");
+    tagController.currentCard = [searchArray objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:tagController animated:YES];
+    [tagController release];
+  }
+  
+  // Make sure to deselect
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

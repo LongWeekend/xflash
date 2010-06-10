@@ -15,16 +15,20 @@
 // Database version constants
 #define JFLASH_DATA_1_0 1
 #define JFLASH_DATA_1_1 2
-NSString * const JFLASH_VERSION_1_0;
-NSString * const JFLASH_VERSION_1_1;
-NSString * const JFLASH_CURRENT_VERSION;
-NSString * const JFLASH_CURRENT_CARD_DATABASE;
-NSString * const JFLASH_CURRENT_USER_DATABASE;
-NSString * const JFLASH_10_DATABASE;
-NSString * const JFLASH_11_CARD_DATABASE;
-NSString * const JFLASH_11_USER_DATABASE;
+// Talk to MMA about these
+extern NSString * const JFLASH_VERSION_1_0;
+extern NSString * const JFLASH_VERSION_1_1;
+extern NSString * const JFLASH_CURRENT_VERSION;
+extern NSString * const JFLASH_CURRENT_CARD_DATABASE;
+extern NSString * const JFLASH_CURRENT_USER_DATABASE;
+extern NSString * const JFLASH_10_DATABASE;
+extern NSString * const JFLASH_11_CARD_DATABASE;
+extern NSString * const JFLASH_11_USER_DATABASE;
+extern NSString * const JFLASH_10_TO_11_SQL_FILENAME;
 
-NSString * const JFLASH_10_TO_11_SQL_FILENAME;
+extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
+extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
+extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
 
 // Settings
 extern NSString * const SET_MODE_QUIZ;

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ExampleSentencePeer.h"
 
-@interface ExampleSentencesViewController : UIViewController {
+@interface ExampleSentencesViewController : UIViewController
+{
   IBOutlet id delegate;
   IBOutlet id datasource;
   

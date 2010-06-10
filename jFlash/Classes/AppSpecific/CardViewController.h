@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 
-@interface CardViewController : UIViewController {
+@interface CardViewController : UIViewController
+{
   IBOutlet id delegate;  
   Card *currentCard;
 }

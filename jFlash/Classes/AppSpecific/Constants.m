@@ -20,7 +20,10 @@ NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"test_update_10_to_11_sql.txt";
 NSString * const JFLASH_11_CARD_DATABASE      = @"jFlash-CARDS-1.1.db";
 NSString * const JFLASH_11_USER_DATABASE      = @"jFlash.db";
 
-
+// Plugin keys
+NSString *const CARD_DB_KEY = @"CARD_DB";
+NSString *const FTS_DB_KEY = @"FTS_DB";
+NSString *const EXAMPLE_DB_KEY = @"EX_DB";
 
 // Settings (also defined in header Constants.h)
 NSString * const SET_MODE_QUIZ       = @"QUIZ";

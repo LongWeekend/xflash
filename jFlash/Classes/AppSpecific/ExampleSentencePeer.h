@@ -10,12 +10,12 @@
 #import "ExampleSentence.h"
 
 
-@interface ExampleSentencePeer : NSObject {
-
+@interface ExampleSentencePeer : NSObject
+{
 }
 
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 + (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate;
-+ (NSMutableArray*) getExampleSentecesByCardId: (NSInteger)cardId;
++ (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId;
 
 @end
