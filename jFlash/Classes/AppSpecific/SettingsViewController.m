@@ -56,7 +56,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Browse Mode",@"SettingsViewController.SettingNames_BrowseMode"),
                                                           NSLocalizedString(@"Headword",@"SettingsViewController.SettingNames_HeadwordLanguage"),
                                                           NSLocalizedString(@"Reading Display As",@"SettingsViewController.SettingNames_DisplayReading"),
-                                                          NSLocalizedString(@"Study Algorithm",@"SettingsViewController.SettingNames_StudyAlgo"),nil];
+                                                          NSLocalizedString(@"Study Difficulty",@"SettingsViewController.SettingNames_StudyAlgo"),nil];
     NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
     NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
 

@@ -10,12 +10,11 @@
 
 
 @implementation AlgorithmSettingsViewController
-@synthesize maxCardsUISlider, frequencyUISlider;
+@synthesize maxCardsUISlider, frequencyUISlider, difficultySegmentControl, tableView;
 
 enum Sections {
-  kDifficultySection = 0,
-  kControlsSection = 1,
-  kFrequencyMultiplierSection = 2,
+  kControlsSection = 0,
+  kFrequencyMultiplierSection = 1,
   NUM_SECTIONS
 };
 
@@ -25,14 +24,6 @@ enum ControlSectionRows
   NUM_CONTROL_SECTION_ROWS
 };
 
-- (id) init
-{
-	if (self = [super initWithStyle:UITableViewStyleGrouped])
-  {
-  }  
-  return self;
-}
-
 
 - (void)viewDidLoad 
 {
@@ -40,7 +31,8 @@ enum ControlSectionRows
    self.navigationItem.title = @"Study Difficulty";
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated 
+{
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
@@ -48,47 +40,31 @@ enum ControlSectionRows
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
 
-
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated 
+{
   [super viewDidAppear:animated];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([settings integerForKey:APP_DIFFICULTY] != 3)
-  {    
-    [maxCardsUISlider setEnabled:NO];
-    [frequencyUISlider setEnabled:NO];
-  }
+  NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
+  difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
 }
-
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
 
 #pragma mark -
 #pragma mark Table view methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
     return NUM_SECTIONS;
 }
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section{
-  if (section == kDifficultySection)
+-(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+{
+  if (section == kControlsSection)
   {
-    return @"Studying Difficulty";
-  }
-  else if (section == kControlsSection)
-  {
-    return @"Max Words in \"Studying\" level";
+    return @"Study Card Pool Size";
   }
   else if(section == kFrequencyMultiplierSection)
   {
-    return @"New Cards Appear:";
+    return @"New Cards Appear";
   }
   return @"";
 }
@@ -100,50 +76,36 @@ enum ControlSectionRows
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)lcltableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = nil;
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if(indexPath.section == kDifficultySection)
+  if(indexPath.section == kControlsSection)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"difficulty" onTable:tableView usingStyle:UITableViewCellStyleValue1];
-    
-    NSArray *itemArray = [[NSArray alloc] initWithObjects: @"Easy", @"Medium", @"Hard", @"Custom", nil];
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
-    [itemArray release];
-    
-    NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
-    
-    segmentedControl.frame = CGRectMake(15, 8, 290, 30);
-    segmentedControl.segmentedControlStyle = UISegmentedControlStylePlain;
-    segmentedControl.selectedSegmentIndex = [segmentedIndex intValue];   
-    
-    [segmentedControl addTarget:self action:@selector(setDifficulty:) forControlEvents:UIControlEventValueChanged];
-    
-    [cell addSubview: segmentedControl];    
-    [segmentedIndex release];
-  }
-  else if(indexPath.section == kControlsSection)
-  {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:tableView usingStyle:UITableViewCellStyleValue1];
-    [self setMaxCardsUISlider:[[UISlider alloc] initWithFrame: CGRectMake(20, 0, 280, 50)]];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    [self setMaxCardsUISlider:[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 225, 48)]];
     
     NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_MAX_STUDYING]];
-    
     maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
     maxCardsUISlider.maximumValue = MAX_MAX_STUDYING;
     maxCardsUISlider.value = [sliderValue floatValue];
     maxCardsUISlider.tag = kMaxCardsRow;
     maxCardsUISlider.continuous = NO;
     [maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+    cell.textLabel.text = [NSString stringWithFormat:@"%d", MIN_MAX_STUDYING];
     [cell addSubview: maxCardsUISlider];
+    UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(280, 5, 20, 35)];
+    rightLabel.font = [UIFont boldSystemFontOfSize:17];
+    rightLabel.text = [NSString stringWithFormat:@"%d", MAX_MAX_STUDYING];
+    [cell addSubview:rightLabel];
+    [rightLabel release];
   }
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
     [self setFrequencyUISlider: [[UISlider alloc] initWithFrame: CGRectMake(120, 0, 180, 50)]];
-    NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
     
+    NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
     frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
     frequencyUISlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
     frequencyUISlider.value = [sliderValue floatValue];
@@ -155,9 +117,10 @@ enum ControlSectionRows
   }
   else 
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
   }
   
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   return cell;  
 }
 
@@ -171,7 +134,13 @@ enum ControlSectionRows
 #pragma mark -
 #pragma mark Segmented Control
 
-- (void) setDifficulty:(UISegmentedControl*)sender
+/*!
+    @function
+    @abstract   Sets the ui sliders values based on the segmented value selected by the user
+    @param      UISegmentedControl* sender
+    @result     Void
+*/
+- (IBAction) setDifficulty:(UISegmentedControl*)sender
 {
   int value = [sender selectedSegmentIndex];
   
@@ -196,7 +165,7 @@ enum ControlSectionRows
   }
   else if(value == 2)
   {
-    [maxCardsUISlider setValue:50];
+    [maxCardsUISlider setValue:40];
     [frequencyUISlider setValue:3];
   }
   else if (value == 3)
@@ -244,6 +213,8 @@ enum ControlSectionRows
 - (void)dealloc {
   [maxCardsUISlider release];
   [frequencyUISlider release];
+  [difficultySegmentControl release];
+  [tableView release];
   [super dealloc];
 }
 
