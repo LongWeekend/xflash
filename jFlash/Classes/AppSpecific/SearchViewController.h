@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchViewController : UITableViewController <UISearchBarDelegate, UIAlertViewDelegate>
+@interface SearchViewController : UITableViewController <UISearchBarDelegate>
 {
   UISearchBar *searchBar;
   NSMutableArray *searchArray;

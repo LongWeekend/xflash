@@ -25,19 +25,22 @@
 }
 
 
+/** Programmatically create a UISearchBar */
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-  self.searchBar.delegate = self;
-  [[self tableView] setTableHeaderView:searchBar];
-  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  tmpSearchBar.delegate = self;
+  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  [self setSearchBar:tmpSearchBar];
+  [tmpSearchBar release];
+  [[self tableView] setTableHeaderView:[self searchBar]];
   activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }
 
 
-
+/** Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct */
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -45,11 +48,11 @@
   _deepSearchRan = NO;
   
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // Show keyboard if no results TODO
-  if (searchArray == nil || [searchArray count] == 0)
+  if (self.searchArray == nil || [self.searchArray count] == 0)
   {
-    [searchBar becomeFirstResponder];
+    [[self searchBar] becomeFirstResponder];
   }
 }
 
@@ -72,7 +75,7 @@
 - (void) searchBarSearchButtonClicked:(UISearchBar *)lclSearchBar
 {
   _deepSearchRan = NO;
-  [self runSearchForString:searchBar.text isSlowSearch:NO];
+  [self runSearchForString:self.searchBar.text isSlowSearch:NO];
   [lclSearchBar resignFirstResponder];
 }
 
@@ -86,7 +89,7 @@
 - (void) runSlowSearch
 {
   _deepSearchRan = YES;
-  [self runSearchForString:searchBar.text isSlowSearch:YES];
+  [self runSearchForString:self.searchBar.text isSlowSearch:YES];
 }
 
 /** Execute actual search with \param text. Designed to be called in background thread */
@@ -111,13 +114,13 @@
 /** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if([searchArray count] == 0 && _searchRan)
+  if([self.searchArray count] == 0 && _searchRan)
   {
     return 1;  // one row to say there are no results
   }
   else
   {
-    return [searchArray count];
+    return [self.searchArray count];
   }
 }
 
@@ -125,7 +128,7 @@
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell;
-  if([searchArray count] == 0 && _searchRan && _deepSearchRan)
+  if([self.searchArray count] == 0 && _searchRan && _deepSearchRan)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
   }
@@ -135,7 +138,7 @@
   }
   
   // Determine what kind of cell it is to set the properties
-  if([searchArray count] == 0 && _searchRan)
+  if([self.searchArray count] == 0 && _searchRan)
   {
     cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
 
@@ -197,11 +200,11 @@
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // if we already did a deep search we can't help them
-  if ([searchArray count] == 0 && _deepSearchRan)
+  if ([self.searchArray count] == 0 && _deepSearchRan)
   {
     return;
   }
-  else if ([searchArray count] == 0)
+  else if ([self.searchArray count] == 0)
   {
     [activityIndicator startAnimating];
     // Run selector after delay to allow UIVIew to update on run loop
@@ -223,17 +226,10 @@
 }
 
 
-// TODO: what function does this function function with?  MMA 6/8/2010
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == 1) {     // they clicked OK.
-    
-  }
-}
-
 - (void)dealloc
 {
-  [searchBar release];
-  [searchArray release];
+  [self setSearchBar:nil];
+  [self setSearchArray:nil];
   [activityIndicator release];
   [super dealloc];
 }
