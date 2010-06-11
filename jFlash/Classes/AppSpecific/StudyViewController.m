@@ -93,29 +93,25 @@
 
 - (void) _resetExampleSentencesView
 {
-  // TODO: MMA is this the right place to have the "is exmaple sentence plugin loaded?" code?
+  // Default behavior
+  [[self pageControl] setHidden:NO];
+  scrollView.pagingEnabled = YES;
+  scrollView.scrollEnabled = YES;
+
   // First, check if they have the plugin installed
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    if([[self currentCard] hasExampleSentences])
-    {
-      [[self pageControl] setHidden:NO];
-      scrollView.pagingEnabled = YES;
-      scrollView.scrollEnabled = YES;
-    }
-    else
+    // Plugin is installed, check if there are no example sentences on this card (hides page control & locks scrolling)
+    if(![[self currentCard] hasExampleSentences])
     {
       [[self pageControl] setHidden:YES];
       scrollView.pagingEnabled = NO;
       scrollView.scrollEnabled = NO;
     }
     [[self exampleSentencesViewController] setup];
-  } 
-  else
-  {
-    // No example sentences installed
-  }       
+  }
 }
+
 
 - (void) _resetStudyView
 {
@@ -144,6 +140,7 @@
   }
 }
 
+
 /** a little overly complicated but needed to make the headword switch seemless for the user */
 - (void) resetHeadword
 {
@@ -169,6 +166,7 @@
   [cardViewController setDelegate:cardViewControllerDelegate];
   [actionBarController setDelegate:cardViewControllerDelegate];
 }
+
 
 /** Resets the study view without getting a new Card */
 - (void) resetKeepingCurrentCard
@@ -322,6 +320,19 @@
   }
 }
 
+
+/**
+ * Connects the "Download Example Sentences" button to actually launch the installer
+ * Kind of just a convenience method
+ */
+- (IBAction) launchExampleInstaller
+{
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:EXAMPLE_DB_KEY];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+}
+
+
 #pragma mark -
 #pragma mark progressModal
 
@@ -350,7 +361,7 @@
 
 #pragma mark UI updater convenience methods
 
-//! Changes the background image based on the theme
+/** Changes the background image based on the theme */
 - (void) updateTheme
 {
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
@@ -358,6 +369,10 @@
 }
 
 
+/**
+ * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,
+ * the sixth element is the total number of seen cards (levels 1-5)
+ */
 - (NSMutableArray*) getLevelDetails
 {
   // This is a convenience method that alloc's and sets to autorelease!
@@ -369,7 +384,7 @@
   // Crash protection in case we don't have the card level counts yet
   if ([[currentCardSet cardLevelCounts] count] == 6)
   {
-    levelDetails = [NSMutableArray arrayWithCapacity: 6];
+    levelDetails = [NSMutableArray arrayWithCapacity:7];
     for (i = 0; i < 6; i++)
     {
       countObject =[[currentCardSet cardLevelCounts] objectAtIndex:i];
@@ -399,12 +414,18 @@
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
   
-  // TODO: make this the right view for example sentences
-  // TODO: what to load if they haven't installed Example Sentences yet?  MMA 6/10/2010
-  [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
-  [[self exampleSentencesViewController] setDatasource:self];
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  {
+    [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
+    [[self exampleSentencesViewController] setDatasource:self];
+  }
+  else
+  {
+    // No example sentence plugin loaded, so show "please download me" view instead
+    [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
+  }
+  			
   UIView *sentencesView = [[self exampleSentencesViewController] view];
-			
 	CGRect rect = sentencesView.frame;
 	rect.origin.x = ((scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
 	rect.origin.y = ((scrollView.frame.size.height - sentencesView.frame.size.height) / 2);

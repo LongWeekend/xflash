@@ -88,7 +88,8 @@
 - (NSMutableArray*) getLevelDetails;
 
 /* for pageControl */
-- (IBAction)changePage:(id)sender;
+- (IBAction) changePage:(id)sender;
+- (IBAction) launchExampleInstaller;
 
 /* internal */
 - (void)setupScrollView;
