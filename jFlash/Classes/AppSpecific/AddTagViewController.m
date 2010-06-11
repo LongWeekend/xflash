@@ -24,13 +24,28 @@ enum EntrySectionRows
 @implementation AddTagViewController
 @synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
 
+
+/**
+ * Initializer - automatically loads AddTagView XIB file
+ * attaches the Card parameter to the object
+ */
+- (id) initWithCard:(Card*) card
+{
+  if (self = [super initWithNibName:@"AddTagView" bundle:nil])
+  {
+    self.cardId = [card cardId];
+    self.currentCard = card;
+  }
+  return self;
+}
+
 - (void) viewDidLoad
 {
   [super viewDidLoad];
   [self setMyTagArray:[TagPeer retrieveMyTagList]];
   [self setSysTagArray:[TagPeer retrieveSysTagList]];
  
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
+  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
   self.navigationItem.rightBarButtonItem = addButton;
   self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
   [addButton release];
@@ -39,32 +54,35 @@ enum EntrySectionRows
 }
 
 
+/** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
 - (void)viewWillAppear:(BOOL)animated
 {
+  // View related stuff
   [super viewWillAppear:animated];
-  self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
+  
+  // Cache the tag's membership list
+  self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
 }
 
 
+//! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return NUM_SECTIONS;
 }
 
 
-- (void)addStudySet:sender
+/** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
+- (void)addStudySet
 {
-  AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
-  addStudySetInputViewController.ownerId = 0;
-  addStudySetInputViewController.defaultCardId = self.cardId;
-  addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
+  AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithDefaultCardId:[self cardId] groupOwnerId:0];
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
+	[addStudySetInputViewController release];
   [[self navigationController] presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
-	[addStudySetInputViewController release];
 }
 
 
@@ -76,7 +94,7 @@ enum EntrySectionRows
 }
 
 
-// Checks the membership cache to see if we are in
+/** Checks the membership cache to see if we are in */
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId
 {
   BOOL returnVal = NO;
@@ -100,7 +118,8 @@ enum EntrySectionRows
   return returnVal;
 }
 
-// Remove a card from the membership cache
+
+/** Remove a card from the membership cache */
 - (void) removeFromMembershipCache: (NSInteger) tagId
 {
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
@@ -135,7 +154,8 @@ enum EntrySectionRows
   return i;
 }
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section{
+-(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+{
   if (section == kMyTagsSection)
   {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");

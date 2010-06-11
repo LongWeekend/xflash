@@ -24,10 +24,11 @@
   Card* currentCard;
 }
 
+- (id) initWithCard:(Card*) card;
 - (void) removeFromMembershipCache: (NSInteger) tagId;
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId;
 - (void) reloadTableData;
-- (void) addStudySet:sender;
+- (void) addStudySet;
 - (NSString*) getReadingString;
 
 @property (nonatomic,retain) NSMutableArray *myTagArray;

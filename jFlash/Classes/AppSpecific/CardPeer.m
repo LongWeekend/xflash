@@ -13,7 +13,8 @@
   FMResultSet *rs;
   NSString* keywordWildcard;
   
-  if (!slowSearch){
+  if (!slowSearch)
+  {
     int queryLimit = 100;
     int queryLimit2;
     keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
@@ -25,7 +26,8 @@
            "ORDER BY c.headword", keywordWildcard, queryLimit];
     rs = [[db dao] executeQuery:sql];
     int cardListCount = 0;
-    while ([rs next]) {
+    while ([rs next])
+    {
       cardListCount++;
       Card* tmpCard = [[[Card alloc] init] autorelease];
       [tmpCard hydrate:rs];

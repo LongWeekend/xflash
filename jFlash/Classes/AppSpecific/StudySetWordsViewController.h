@@ -11,7 +11,6 @@
 #import "Tag.h"
 #import "CardPeer.h"
 
-// TODO: pretty well sure these two enums are no longer used in active code
 enum settingsRows
 {
   kWordSetOptionsStart = 0,
@@ -31,18 +30,12 @@ enum wordsSections
 {
 	Tag* tag;
 	NSMutableArray* cards;
-  //TODO: next version
-  // UIAlertView* statusMsgBox;
-  //  NSOperationQueue* queue;
   UIActivityIndicatorView *activityIndicator;
 }
 
 
 - (id) initWithTag:(Tag*) initTag;
 
-//TODO: next version
-//- (void) uploadThisSet;
-//- (void) postDataToURL:(NSString*)csvData;
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) Tag *tag;

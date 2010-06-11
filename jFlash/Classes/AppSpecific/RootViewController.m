@@ -35,7 +35,7 @@
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapSearchViewController:) name:@"pluginDidInstall" object:nil];
   }
 	return self;
 }
@@ -149,7 +149,7 @@
     [alertView release];
     _showWelcomeSplash = NO;
   }
-  else if (appSettings.isFirstLoadAfterNewVersion || 1)
+  else if (appSettings.isFirstLoadAfterNewVersion)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
                                                   message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
@@ -265,16 +265,21 @@
 
 
 //! Changes the middle tab bar to searchViewController
-- (void) swapSearchViewController
+- (void) swapSearchViewController:(NSNotification*)aNotification
 {
-  NSArray* vcs = [[self tabBarController] viewControllers];
-  NSMutableArray *tmpVcs = [NSMutableArray arrayWithArray:vcs];
-  SearchViewController *svc = [[SearchViewController alloc] init];
-  UINavigationController *localNavigationController = [[UINavigationController alloc] initWithRootViewController:svc];
-  [tmpVcs replaceObjectAtIndex:2 withObject:localNavigationController];
-  [svc release];
-  [localNavigationController release];
-  [[self tabBarController] setViewControllers:tmpVcs animated:NO];
+  NSDictionary *dict = [aNotification userInfo];
+  // Only swap if it's the FTS that was installed
+  if ([[dict objectForKey:@"plugin_key"] isEqualToString:FTS_DB_KEY])
+  {
+    NSArray* vcs = [[self tabBarController] viewControllers];
+    NSMutableArray *tmpVcs = [NSMutableArray arrayWithArray:vcs];
+    SearchViewController *svc = [[SearchViewController alloc] init];
+    UINavigationController *localNavigationController = [[UINavigationController alloc] initWithRootViewController:svc];
+    [tmpVcs replaceObjectAtIndex:2 withObject:localNavigationController];
+    [svc release];
+    [localNavigationController release];
+    [[self tabBarController] setViewControllers:tmpVcs animated:NO];
+  }
 }
 
 # pragma mark Delegate Methods

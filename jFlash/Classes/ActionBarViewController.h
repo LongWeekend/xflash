@@ -15,7 +15,8 @@
 #define SVC_ACTION_REPORT_BUTTON 0
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate> {
+@interface ActionBarViewController : UIViewController <UIActionSheetDelegate>
+{
   IBOutlet id delegate;  
   
   Card *currentCard;

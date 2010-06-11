@@ -56,6 +56,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"themeWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
   
   // Create a default mood icon object
   [self setMoodIcon:[[MoodIcon alloc] init]];
@@ -320,6 +321,8 @@
   }
 }
 
+#pragma mark -
+#pragma mark Plugin-Related
 
 /**
  * Connects the "Download Example Sentences" button to actually launch the installer
@@ -331,6 +334,20 @@
   NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:EXAMPLE_DB_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
 }
+
+
+/** Called by notification when a plugin is installed - if it is Example sentences, handle that */
+- (void)pluginDidInstall:(NSNotification *)aNotification
+{
+  NSDictionary *dict = [aNotification userInfo];
+  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  {
+    // Get rid of our "please download me" view
+    [[[scrollView subviews] objectAtIndex:1] removeFromSuperview];
+    [self setupScrollView];
+  }
+}
+
 
 
 #pragma mark -
@@ -366,6 +383,10 @@
 {
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
+
+  // Make sure our little friend is OK
+  float tmpRatio = 100*((float)numRight / (float)numViewed);
+  [moodIcon updateMoodIcon:tmpRatio];
 }
 
 

@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 
 
-@interface HelpWebViewController : UIViewController
+@interface HelpWebViewController : UIViewController <UIWebViewDelegate>
 {
   NSString *filename;
+  UIWebView *_webView;
 }
 
 - (id) initWithFilename:(NSString *)filename usingTitle:(NSString*) title;
+- (void) loadPageWithBundleFilename:(NSString*)fn usingTitle:(NSString*) title;
+- (void) _loadPageWithBundleFilename:(NSString*)fname;
+
 
 @property (nonatomic, retain) NSString *filename;
 

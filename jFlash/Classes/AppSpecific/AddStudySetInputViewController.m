@@ -13,24 +13,32 @@
 
 @synthesize ownerId, defaultCardId, setNameTextfield;
 
-- (id) init
+/**
+ * Custom initializer for AddStudySet modal
+ * \param cardId If not 0, this cardId will be added to the membership of the newly-created Tag
+ * \param groupOwnerId Specifies which group this Tag will belong to.  For top-level, this is zero.
+ */
+- (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId
 {
-  self = [super init];
-  if (self) 
+  if (self = [super initWithNibName:@"ModalInputView" bundle:nil])
   {
-    self.defaultCardId = 0;
+    self.defaultCardId = cardId;
+    self.ownerId = groupOwnerId;
   }
   return self;
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
+
   [setNameTextfield becomeFirstResponder];
   setNameTextfield.returnKeyType = UIReturnKeyDone;
   setNameTextfield.placeholder = NSLocalizedString(@"Type set name here",@"AddStudySetInputViewController.TypeNewSetName");
   setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
+  setNameTextfield.backgroundColor = [UIColor whiteColor];
   
   UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = cancelButton;
@@ -42,7 +50,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  setNameTextfield.backgroundColor = [UIColor whiteColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 

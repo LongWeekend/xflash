@@ -10,7 +10,8 @@
 #import "ThemeManager.h"
 #import "Constants.h"
 
-@interface AlgorithmSettingsViewController : UITableViewController {
+@interface AlgorithmSettingsViewController : UITableViewController
+{
   UISlider *maxCardsUISlider;
   UISlider *frequencyUISlider;
 }
