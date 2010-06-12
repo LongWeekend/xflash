@@ -121,7 +121,7 @@
 }
 
 
-//! Unarchive plist file containing the user's last session data
+/** Unarchive plist file containing the user's last session data */
 - (NSMutableArray*) thawCardIds
 {
   NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
@@ -131,7 +131,7 @@
 }
 
 
-//! Archive current session data to a plist so we can re-start at same place in next session
+/** Archive current session data to a plist so we can re-start at same place in next session */
 - (void) freezeCardIds
 {
   NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
@@ -140,8 +140,8 @@
   LWE_LOG(@"Finished plist freeze");
 }
 
-// TODO: possibly rename, examine if this should be refactored?  Maybe method should be renamed
-//! Executed when loading a new set on app load
+
+/** Executed when loading a new set on app load */
 - (void) populateCardIds
 {
   LWE_LOG(@"Began populating card ids and setting counts");
@@ -149,14 +149,12 @@
   if (tmpArray == nil)
   {
     LWE_LOG(@"No plist, load from database");
-    tmpArray = [CardPeer retrieveCardSetIds:self.tagId];
+    tmpArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
   }
   else
   {
     LWE_LOG(@"Found plist, deleting plist");
-    NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:path error:NULL];
+    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
   }
   
   // Now set it
@@ -301,7 +299,7 @@
 
 
 // TODO: why does Tag care what mode we are in?  Seems fishy to me.
-//! Gets first card in browse mode
+/** Gets first card in browse mode */
 - (Card*) getFirstCard
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];

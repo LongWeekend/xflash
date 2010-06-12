@@ -7,6 +7,7 @@
 //
 
 #import "LWEDownloader.h"
+#import "FlurryAPI.h"
 
 @implementation LWEDownloader
 
@@ -80,7 +81,11 @@
 {
   // Set and then fire a notification so we know we've updated
   progress = tmpProgress;
-  // TODO: incorporate info into the userInfo as opposed to relying on the PULL from the observer?
+  if (downloaderState == kDownloaderRetrievingData)
+  {
+    int _kbDownloaded = (([_request totalBytesRead]*1.0f)/ (1024 * 1.0f));
+    [self setTaskMessage:[NSString stringWithFormat:NSLocalizedString(@"Downloading (%d KB)",@"LWEDownloader.DownloadingWithKB"),_kbDownloaded]];
+  }
   [[NSNotificationCenter defaultCenter] postNotificationName:@"LWEDownloaderProgressUpdated" object:self];
 }
 
@@ -108,7 +113,6 @@
  */
 - (BOOL) _updateInternalState:(NSInteger)nextState
 {
-  // TODO: turn this into a proper state machine instead of relying on caller code
   downloaderState = nextState;
   [[NSNotificationCenter defaultCenter] postNotificationName:@"LWEDownloaderStateUpdated" object:self];
   return YES;
@@ -226,6 +230,9 @@
     [_request setDownloadProgressDelegate:self];
     [_request setShowAccurateProgress:YES];
     [_request setAllowResumeForFileDownloads:YES];
+
+    // Use 3G throttling
+    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
     
     // Handle file differently depending on processing requirements after the fact (unzip)
     if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
@@ -386,14 +393,17 @@
   LWE_LOG(@"Target filename: %@",[self targetFilename]);
   
   // TODO: enforce this Do disk size sanity check
-  LWE_LOG(@"Free disk space %d",[LWEFile getTotalDiskSpaceInBytes]);
+  int freeDiskSpace = [LWEFile getTotalDiskSpaceInBytes];
+  LWE_LOG(@"Free disk space %d",freeDiskSpace);
   
   gzFile file = gzopen([_compressedFilename UTF8String], "rb");
   FILE *dest = fopen([[self targetFilename] UTF8String], "w");
   unsigned char buffer[CHUNK];
   int uncompressedLength;
   int totalUncompressed = 0;
-  // TODO: this is a hack but I am NO C programmer
+
+  // This is a hack but I am NO C programmer.  I Cannot figure out the uncompressed size of a zip file to save my life
+  // Despite googling it... apparently the last four bytes of the file contain the answer but good luck getting that to work
   int guessedFilesize = (requestSize * 2.2);
   float decompressionProgress = 0.0f;
 
@@ -410,20 +420,23 @@
       LWE_LOG(@"Cancelling unzip");
       [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];
       [pool release];
-      // TODO: fire a failure method
       return NO;
     }
     if (fwrite(buffer, 1, uncompressedLength, dest) != uncompressedLength || ferror(dest))
     {
       LWE_LOG(@"error writing data");
-      [self _updateInternalState:kDownloaderDecompressFail withTaskMessage:NSLocalizedString(@"Failed to decompress file",@"LWEDownloader.decompressFail")];
+      [self _updateInternalState:kDownloaderDecompressFail withTaskMessage:NSLocalizedString(@"Failed to decompress",@"LWEDownloader.decompressFail")];
       [pool release];
-      // TODO: fire a failure method
+
+      // Adding Flurry event here, hope to never see this
+      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[self targetFilename],@"filename",[NSNumber numberWithInt:requestSize],@"request_size",[NSNumber numberWithInt:freeDiskSpace],@"disk_space",nil];
+      [FlurryAPI logEvent:@"pluginUnzipFailed" withParameters:dataToSend];
       return NO;
     }
   }
   fclose(dest);
   gzclose(file);
+
   // TODO: just in case our hack above didn't work
   [self setProgress:1.0];
   
@@ -532,17 +545,16 @@
       [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
       statusCode = ASIConnectionFailureErrorType;
       break;
-      //TODO: add more here?
     default:
       [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
       statusCode = ASIConnectionFailureErrorType;
       break;
   }
   [self setStatusMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
-  
-  
 }
 
+
+//! Standard dealloc
 -(void) dealloc
 {
   [super dealloc];

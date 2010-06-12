@@ -48,8 +48,6 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
-  
-  // TODO: check that they didn't take the card out of the current set
 }
 
 /** Run in background on init to load the word list */
@@ -171,13 +169,13 @@
         // Fire set change notification
         [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
       }
-      [tmpTag release];
     }
   }
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
     AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self cards] objectAtIndex:indexPath.row]];
+    [tagController restrictMembershipChangeForTagId:self.tag.tagId];
     [self.navigationController pushViewController:tagController animated:YES];
     [tagController release];
   }

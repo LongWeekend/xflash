@@ -91,7 +91,6 @@
  */
 - (BOOL) _updateInternalState:(NSInteger)nextState
 {
-  // TODO: turn this into a proper state machine instead of relying on caller code
   _migraterState = nextState;
   LWE_LOG(@"State updated to %d",nextState);
   NSNotification *aNotification = [NSNotification notificationWithName:@"MigraterStateUpdated" object:nil];
@@ -294,7 +293,8 @@
   
   _migraterState = kMigraterReady;
   
-  // TODO: Put something here to delete FTS file if exists?
+  // Reset the downloader
+  [[self dlHandler] resetTask];
 }
 
 

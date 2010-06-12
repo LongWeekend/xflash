@@ -63,19 +63,17 @@
   // Register listener in case theme was changed (to ensure back button changes color)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToRoot) name:@"themeWasChanged" object:nil];
 
-  addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
-  self.navigationItem.rightBarButtonItem = addButton;
+  _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
+  self.navigationItem.rightBarButtonItem = _addButton;
 
   // Get this group
-  group = [GroupPeer retrieveGroupById:self.groupId];
-  [group retain];
+  [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
 
   // Get subgroups
   [self reloadSubgroupData];
 
   // Get tags
   self.tagArray = [group getTags];
-  [addButton release];
 
   // Activity indicator
   activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -148,7 +146,7 @@
 }
 
 
-- (void)addStudySet:sender
+- (void)addStudySet
 {
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
   addStudySetInputViewController.ownerId = self.groupId;
@@ -386,56 +384,66 @@
   else return NO;
 }
 
-#pragma mark Search Bar
+#pragma mark -
+#pragma mark Search Bar delegate methods
 
-- (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
-	
+/**
+ * Sets up the controller for searching mode
+ * Creates an 50% alpha overlay to hide the study sets when nothing is entered in the 
+ * search box
+ */
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar
+{	
 	//When the user clicks back from teh detail view
 	if (searching) return;
 	
   //Add the overlay view.
-  if (searchOverlay == nil)
+  if (_searchOverlay == nil)
   {
-    searchOverlay = [[UIView alloc] init];
+    _searchOverlay = [[UIView alloc] init];
     searchOverlayBtn = [[UIButton alloc] init];
-    [searchOverlay insertSubview:searchOverlayBtn atIndex:0];
-    [searchOverlayBtn addTarget:self action:@selector(doDoneSearching:) forControlEvents:UIControlEventTouchDown];
+    [_searchOverlay insertSubview:searchOverlayBtn atIndex:0];
+    [searchOverlayBtn addTarget:self action:@selector(doDoneSearching) forControlEvents:UIControlEventTouchDown];
   }
 
-  searchOverlay.userInteractionEnabled = YES;
+  _searchOverlay.userInteractionEnabled = YES;
 	CGFloat yaxis = self.navigationController.navigationBar.frame.size.height;
 	CGFloat width = self.view.frame.size.width;
 	CGFloat height = self.view.frame.size.height;
   CGRect frame = CGRectMake(0, yaxis, width, height);
-	searchOverlay.frame = frame;	
+	_searchOverlay.frame = frame;	
   searchOverlayBtn.frame = frame;
-	searchOverlay.backgroundColor = [UIColor grayColor];
-	searchOverlay.alpha = 0.5;
-	[[self tableView] insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
+	_searchOverlay.backgroundColor = [UIColor grayColor];
+	_searchOverlay.alpha = 0.5;
+	[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 	
 	searching = YES;
   [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
   [[self tableView] setScrollEnabled:NO];
 	
 	//Add the done button.
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doDoneSearching:)] autorelease];
+	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doDoneSearching)] autorelease];
 }
 
 
+/**
+ * Run search if the user typed something into the search bar
+ */
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText
 {
-  
 	// Remove all objects first.
   [tagArray removeAllObjects];
 	
-	if([searchText length] > 0) {
-    [searchOverlay removeFromSuperview];
+	if([searchText length] > 0)
+  {
+    [_searchOverlay removeFromSuperview];
 		searching = YES;
     [[self tableView] setScrollEnabled:YES];
     [self reloadTableData];
 	}
-	else {
-		[[self tableView] insertSubview:searchOverlay aboveSubview:self.parentViewController.view];
+	else
+  {
+		[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 		searching = NO;
     [[self tableView] setScrollEnabled:NO];
     [self reloadTableData];
@@ -443,6 +451,7 @@
 }
 
 
+// TODO: MMA 6_12_2010 - does this ever get called?
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
   [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
@@ -450,20 +459,21 @@
 }
 
 
-- (void) doDoneSearching:(id)sender
+- (void) doDoneSearching
 {
 	searchBar.text = @"";
 	[searchBar resignFirstResponder];
 	searching = NO;
   [[self tableView] setScrollEnabled:YES];
-	self.navigationItem.rightBarButtonItem = nil;
+  // Replace the done button w/ the add button again
+	self.navigationItem.rightBarButtonItem = _addButton;
   [self hideSearchBar];
   [self reloadTableData];
   
   // Kill search overlay
-  [searchOverlay removeFromSuperview];
-	[searchOverlay release];
-	searchOverlay = nil;
+  [_searchOverlay removeFromSuperview];
+	[_searchOverlay release];
+	_searchOverlay = nil;
 }
 
 
@@ -471,6 +481,7 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [activityIndicator release];
+  [_addButton release];
   [statusMsgBox release];
   [tagArray release];
   [subgroupArray release];

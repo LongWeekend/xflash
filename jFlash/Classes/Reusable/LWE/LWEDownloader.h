@@ -38,7 +38,6 @@ typedef enum _downloaderStates
 @required
 /** Returns YES if install was successful, NO on failure */
 - (BOOL)installPluginWithPath:(NSString *)filename;
-// TODO: add failure reason
 @end
 
 /**

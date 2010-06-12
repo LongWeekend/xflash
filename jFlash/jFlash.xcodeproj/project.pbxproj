@@ -30,8 +30,6 @@
 		4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
-		4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
-		4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */; };
 		495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
 		495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
@@ -241,8 +239,6 @@
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
-		4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchUnavailableViewController.h; path = AppSpecific/SearchUnavailableViewController.h; sourceTree = "<group>"; };
-		4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchUnavailableViewController.m; path = AppSpecific/SearchUnavailableViewController.m; sourceTree = "<group>"; };
 		495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
 		495C5A0611BFB9370006DD01 /* example-sentences.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "example-sentences.html"; path = "Assets/example-sentences.html"; sourceTree = "<group>"; };
 		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
@@ -963,8 +959,6 @@
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
 				917A5BD011AB7C4600016BD2 /* SearchViewController.m */,
-				4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */,
-				4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */,
 				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
 				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
@@ -1335,7 +1329,6 @@
 				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
-				4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
@@ -1378,7 +1371,6 @@
 				4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */,
 				49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
-				4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25411B764B200B70EE9 /* PluginManager.m in Sources */,
 				4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */,
 			);
