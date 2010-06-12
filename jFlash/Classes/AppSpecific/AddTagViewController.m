@@ -93,6 +93,15 @@ enum EntrySectionRows
   [[self studySetTable] reloadData];
 }
 
+/**
+ * If set, stops the user from changing membership for a given set.  Useful for restricting the
+ * user against pulling the active card out of the active set, etc.
+ */
+- (void) restrictMembershipChangeForTagId:(NSInteger) tagId
+{
+  _restrictedTagId = tagId;
+}
+
 
 /** Checks the membership cache to see if we are in */
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId
@@ -240,7 +249,11 @@ enum EntrySectionRows
   return cell;
 }
 
-// Subscribe or cancel membership!
+/**
+ * Called when the user selects one of the table rows containing a tag name
+ * Calls subscribe or cancel set membership accordingly, also checks 
+ * _restrictedTagId to make sure it is allowed to remove/add the card to the set
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if(indexPath.section == kEntrySection) return; // do nothing for the entry section
@@ -254,10 +267,21 @@ enum EntrySectionRows
   {
     tmpTag = [sysTagArray objectAtIndex:indexPath.row];
   }
+
+  // First, determine if we are restricted
+  if (_restrictedTagId == tmpTag.tagId)
+  {
+    UIAlertView *msgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Apologies",@"AddTagViewController.Restricted_AlertViewTitle")
+                                               message:NSLocalizedString(@"To remove this card from this set, navigate back to the previous screen.  Swipe from left to right on any entry to remove it.",@"AddTagViewController.Restricted_AlertViewMessage")
+                                               delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
+    [msgBox show];
+    [msgBox release];
+    return;
+  }
+  
   // Check whether or not we are ADDING or REMOVING from the selected tag
   if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
   {
-    BOOL remove = YES;
     // We have special things to check if we are modifying the existing active set
     if (tmpTag.tagId == [[appSettings activeTag] tagId])
     {
@@ -272,17 +296,15 @@ enum EntrySectionRows
                                                          message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")
                                                          delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
         [statusMsgBox show];
-        remove = NO;
+        [statusMsgBox release];
+        return;
       }
       // Success - but update counts
-      if (remove) [[appSettings activeTag] removeCardFromActiveSet:currentCard];
+      [[appSettings activeTag] removeCardFromActiveSet:currentCard];
     }
     // Remove tag
-    if (remove)
-    {
-      [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
-      [self removeFromMembershipCache:tmpTag.tagId];
-    }
+    [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
+    [self removeFromMembershipCache:tmpTag.tagId];
   }
   else
   {
@@ -294,12 +316,13 @@ enum EntrySectionRows
     [TagPeer subscribe:cardId tagId:tmpTag.tagId];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
   }
-  // TODO Instead of reloading the whole table we should only reload this row
   [tableView reloadData];
   // Tell study set controller to reload its set data stats
   [[NSNotificationCenter defaultCenter] postNotificationName:@"cardAddedToTag" object:self];
 }
 
+
+/** Return a string of the card's reading, depending on user settings (romaji, kana, etc) */
 -(NSString*) getReadingString
 {
   NSString *readingStr;
@@ -322,6 +345,7 @@ enum EntrySectionRows
   return readingStr;
 }
 
+//! Standard dealloc
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
