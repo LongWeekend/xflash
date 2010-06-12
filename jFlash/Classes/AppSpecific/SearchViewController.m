@@ -71,6 +71,41 @@
   [self set_activityIndicator:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
 }
 
+
+/** 
+ * Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct 
+ * If search is not installed, will call shouldShowDownloaderModal notification to stop user from using this screen
+ */
+- (void) viewWillAppear: (BOOL)animated
+{
+  // View related
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self._searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  
+  _searchRan = NO;
+  _deepSearchRan = NO;
+  
+  // Fire off a notification to bring up the downloader?
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if (![pm pluginIsLoaded:FTS_DB_KEY])
+  {
+    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    self._searchBar.placeholder = NSLocalizedString(@"Tap here to install search",@"SearchViewController.SearchBarPlaceholder_InstallPlugin"); 
+  }
+  else
+  {
+    self._searchBar.placeholder = NSLocalizedString(@"Enter search keyword",@"SearchViewController.SearchBarPlaceholder_douzo");
+    // Show keyboard if no results
+    if ([self _searchArray] == nil || [[self _searchArray] count] == 0)
+    {
+      [[self _searchBar] becomeFirstResponder];
+    }
+  }
+}
+
+
 /** 
  * This should be called by something else - maybe a notification-
  * after example sentences have been installed
@@ -99,25 +134,6 @@
 }
 
 
-/** Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct */
-- (void) viewWillAppear: (BOOL)animated
-{
-  // View related
-  [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self._searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-
-  _searchRan = NO;
-  _deepSearchRan = NO;
-  
-  // Show keyboard if no results
-  if ([self _searchArray] == nil || [[self _searchArray] count] == 0)
-  {
-    [[self _searchBar] becomeFirstResponder];
-  }
-}
-
-
 /**
  * Reads the value of the "pill" chooser and sets _searchTarget appropriately
  * In the off case that the caller is not a UISegmentControl, defaults to WORD search
@@ -136,6 +152,23 @@
 
 
 #pragma mark searchBar delegate methods
+
+/** Is the plugin installed? */
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY])
+  {
+    return YES;
+  }
+  else
+  {
+    // And show them the modal again for good measure
+    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    return NO;
+  }
+}
 
 /** Only show the cancel button when the keyboard is displayed */
 - (void) searchBarDidBeginEditing:(UISearchBar*) lclSearchBar
