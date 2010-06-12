@@ -13,7 +13,8 @@
   FMResultSet *rs;
   NSString* keywordWildcard;
   
-  if (!slowSearch){
+  if (!slowSearch)
+  {
     int queryLimit = 100;
     int queryLimit2;
     keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
@@ -25,7 +26,8 @@
            "ORDER BY c.headword", keywordWildcard, queryLimit];
     rs = [[db dao] executeQuery:sql];
     int cardListCount = 0;
-    while ([rs next]) {
+    while ([rs next])
+    {
       cardListCount++;
       Card* tmpCard = [[[Card alloc] init] autorelease];
       [tmpCard hydrate:rs];
@@ -69,33 +71,6 @@
   }
   
 	return cardList;
-}
-
-
-//! Returns a CSV string of card Ids for a given tag
-+ (NSString*) retrieveCsvCardIdsForTag: (NSInteger)setId
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",setId];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-	NSString *outputStr = [[[NSString alloc] init] autorelease];
-  int cardId;
-  BOOL firstTime = YES;
-	while ([rs next])
-  {
-    cardId = [rs intForColumn:@"card_id"];
-    if (firstTime == YES)
-    {
-      outputStr = [outputStr stringByAppendingFormat:@"%d",cardId];
-      firstTime = NO;
-    }
-    else {
-      outputStr = [outputStr stringByAppendingFormat:@",%d",cardId];
-    }
-  }
-	[rs close];
-  [sql release];
-	return outputStr;
 }
 
 
@@ -232,9 +207,8 @@
 /**
  * Returns an array of Card ids for a given tagId
  */
-+ (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId
++ (NSMutableArray*) retrieveCardIdsSortedByLevel: (NSInteger) tagId
 {
-  // TODO: how is this different than the method below?  Do we have more dead code?
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardIdList = [[[NSMutableArray alloc] init] autorelease];

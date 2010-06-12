@@ -87,8 +87,13 @@
 - (void)resetKeepingCurrentCard;
 - (NSMutableArray*) getLevelDetails;
 
+//! Gets notification from plugin manager
+- (void)pluginDidInstall: (NSNotification *)aNotification;
+- (void)doCardBtn: (NSNotification *)aNotification;
+
 /* for pageControl */
-- (IBAction)changePage:(id)sender;
+- (IBAction) changePage:(id)sender;
+- (IBAction) launchExampleInstaller;
 
 /* internal */
 - (void)setupScrollView;

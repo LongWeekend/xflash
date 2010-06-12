@@ -10,7 +10,9 @@
 
 @implementation PluginManager
 
-//! Customized initializer
+/**
+ * Customized initializer - the available plugin dictionary is defined in this method
+ */
 - (id) init
 {
   if (self = [super init])
@@ -19,27 +21,29 @@
     _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
                           // Cards
                           [NSDictionary dictionaryWithObjectsAndKeys:
-                           @"Japanese Flash Basic Cards",@"plugin_name",
+                           CARD_DB_KEY,@"plugin_key",
+                           @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
                            @"",@"plugin_notes_file",
-                           @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
+                           @"http://localhost/~phooze/jFlash-CARDS-v1.1.db.gz",@"target_url",
                            [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",nil],CARD_DB_KEY,
                          
                            // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
+                            FTS_DB_KEY,@"plugin_key",
                             @"Awesomely Fast Search",@"plugin_name",
                             @"full-text-search",@"plugin_notes_file",
-                            @"Adds sub-second full dictionary search (~16MB)",@"plugin_details",
-//                            @"http://mini.local:8080/hudson/jFlash-CORE-v1.1.db.gz",@"target_url",
+                            @"Adds sub-second full dictionary search (13MB)",@"plugin_details",
                             @"http://localhost/~phooze/jFlash-FTS-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
+                            EXAMPLE_DB_KEY,@"plugin_key",
                             @"50,000+ Example Sentences",@"plugin_name",
                             @"example-sentences",@"plugin_notes_file",
-                            @"Adds sentences to practice modes (~25MB)",@"plugin_details",
-                            @"http://mini.local:8080/hudson/jFlash-EX-v1.1.db.gz",@"target_url",
+                            @"Adds sentences to practice modes (20MB)",@"plugin_details",
+                            @"http://localhost/~phooze/jFlash-EX-v1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,
                            nil];
   }
@@ -184,11 +188,8 @@
     return NO;
   }
 
-  // Tell the root view controller to do some stuff if we are FTS_DB_KEY
-  if ([pluginKey isEqualToString:FTS_DB_KEY])
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldSwapSearchViewController" object:self];
-  }
+  // Tell anyone who cares that we've just successfully installed a plugin
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"pluginDidInstall" object:self userInfo:[_availablePlugins objectForKey:pluginKey]];
   return YES;
 }
 

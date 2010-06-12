@@ -12,7 +12,10 @@
 {
   NSArray *sectionTitles;
   NSArray *htmlFilenames;
+  NSInteger currentIndex;
 }
+
+- (void) navigateToNextHelpPage;
 
 @property (nonatomic, retain) NSArray *sectionTitles;
 @property (nonatomic, retain) NSArray *htmlFilenames;

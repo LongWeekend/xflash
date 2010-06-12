@@ -22,13 +22,17 @@
   NSMutableArray *membershipCacheArray;
   NSInteger cardId;
   Card* currentCard;
+  NSInteger _restrictedTagId;
 }
 
+- (id) initWithCard:(Card*) card;
 - (void) removeFromMembershipCache: (NSInteger) tagId;
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId;
 - (void) reloadTableData;
-- (void) addStudySet:sender;
+- (void) addStudySet;
 - (NSString*) getReadingString;
+- (void) restrictMembershipChangeForTagId:(NSInteger) tagId;
+
 
 @property (nonatomic,retain) NSMutableArray *myTagArray;
 @property (nonatomic,retain) NSMutableArray *sysTagArray;

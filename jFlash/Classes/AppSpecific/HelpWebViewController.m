@@ -8,12 +8,15 @@
 
 #import "HelpWebViewController.h"
 
-
 @implementation HelpWebViewController
 
 @synthesize filename;
 
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+/**
+ * Initializes the class and sets HTML filename to use and the title of the nav bar.
+ * \param filename String containing the filename only (no path) of the HTML to load
+ * \param title String to appear in the navigation bar
+ */
 - (id)initWithFilename:(NSString *)fn usingTitle:(NSString*) title
 {
   if (self = [super init])
@@ -24,39 +27,54 @@
   return self;
 }
 
+
+/** Calls _loadPageWithBundleFilename and re-sets title */
+- (void) loadPageWithBundleFilename:(NSString*)fn usingTitle:(NSString*) title
+{
+  [self setFilename:fn];
+  [self setTitle:title];
+  [self _loadPageWithBundleFilename:[self filename]];
+}
+ 
+
+/** Creates the UIWebView programmatically */
 - (void)loadView
 {
   [super loadView];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   
-  // Prepare the URL
-  NSString *urlAddress = [[NSBundle mainBundle] pathForResource:[self filename] ofType:@"html" inDirectory:@"help"];
-  NSURL *url = [NSURL fileURLWithPath:urlAddress];
-  NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  
-  // Set up the views
-  UIView *baseView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-  baseView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
+  _webView.delegate = self;
+  _webView.opaque = NO;
+  _webView.backgroundColor = [UIColor clearColor];
 
-  UIWebView *htmlView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 375.0f)];
-  htmlView.opaque = NO;
-
-  UIScrollView *scrollView = [htmlView.subviews objectAtIndex:0];
+  UIScrollView *scrollView = [_webView.subviews objectAtIndex:0];
   SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
   if([scrollView respondsToSelector:aSelector])
   {
     [scrollView performSelector:aSelector withObject:NO];
   }
-
-  [htmlView setBackgroundColor:[UIColor clearColor]];
-  [htmlView loadRequest:requestObj];
-  [baseView addSubview:htmlView];
-  self.view = baseView;
+  [self _loadPageWithBundleFilename:[self filename]];
+  [[self view] addSubview:_webView];
 }
 
 
+/** Loads the filename into the _webView UIWebView - there should be no extension on the filename (but the actual file should be .html) */
+- (void) _loadPageWithBundleFilename:(NSString*)fname
+{
+  // Prepare the URL
+  NSString *urlAddress = [[NSBundle mainBundle] pathForResource:fname ofType:@"html" inDirectory:@"help"];
+  NSURL *url = [NSURL fileURLWithPath:urlAddress];
+  NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+  [_webView loadRequest:requestObj];
+}
+ 
+         
+//! Standard dealloc
 - (void)dealloc
 {
   [super dealloc];
+  [_webView release];
 }
 
 

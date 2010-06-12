@@ -35,7 +35,6 @@
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapSearchViewController) name:@"shouldSwapSearchViewController" object:nil];
   }
 	return self;
 }
@@ -79,9 +78,6 @@
 {
 	self.tabBarController = [[UITabBarController alloc] init];
   
-  CurrentState *state = [CurrentState sharedCurrentState];
-  [state loadActiveTag];
-  
   // Make room for the status bar
   CGRect tabBarFrame;
   tabBarFrame = CGRectMake(0, 0, 320, 460);
@@ -99,18 +95,7 @@
   [studySetViewController release];
   [localNavigationController release];
   
-  UIViewController *searchViewController;
-  // Depending on whether user has search FTS installed or not, we use different controller for search
-  if ([[state pluginMgr] pluginIsLoaded:FTS_DB_KEY])
-  {
-    LWE_LOG(@"User HAS FTS database plugin installed");
-    searchViewController = [[SearchViewController alloc] init];
-  }
-  else
-  {
-    LWE_LOG(@"User DOES NOT have FTS database plugin installed");
-    searchViewController = [[SearchUnavailableViewController alloc] init];
-  }
+  SearchViewController *searchViewController = [[SearchViewController alloc] init];
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:searchViewController];
   [localControllersArray addObject:localNavigationController];
   [searchViewController release];
@@ -137,9 +122,9 @@
   //launch the please rate us
   [Appirater appLaunched];
 
-  // Show a UIAlert if this is the first time the user has launched the app.
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  if (appSettings.isFirstLoad && _showWelcomeSplash)
+  // Show a UIAlert if this is the first time the user has launched the app.  
+  CurrentState *state = [CurrentState sharedCurrentState];
+  if (state.isFirstLoad && _showWelcomeSplash)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"RootViewController.WelcomeAlertViewTitle")
                                                   message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
@@ -149,7 +134,7 @@
     [alertView release];
     _showWelcomeSplash = NO;
   }
-  else if (appSettings.isFirstLoadAfterNewVersion || 1)
+  else if (state.isFirstLoadAfterNewVersion)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
                                                   message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
@@ -263,19 +248,6 @@
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
 }
 
-
-//! Changes the middle tab bar to searchViewController
-- (void) swapSearchViewController
-{
-  NSArray* vcs = [[self tabBarController] viewControllers];
-  NSMutableArray *tmpVcs = [NSMutableArray arrayWithArray:vcs];
-  SearchViewController *svc = [[SearchViewController alloc] init];
-  UINavigationController *localNavigationController = [[UINavigationController alloc] initWithRootViewController:svc];
-  [tmpVcs replaceObjectAtIndex:2 withObject:localNavigationController];
-  [svc release];
-  [localNavigationController release];
-  [[self tabBarController] setViewControllers:tmpVcs animated:NO];
-}
 
 # pragma mark Delegate Methods
 

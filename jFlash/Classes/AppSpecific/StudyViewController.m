@@ -23,6 +23,7 @@
 @synthesize scrollView, pageControl, exampleSentencesViewController;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 
+/** Custom initializer */
 - (id) init
 {
   if (self = [super init])
@@ -37,6 +38,7 @@
   return self;
 }
 
+/** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -56,6 +58,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"themeWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
   
   // Create a default mood icon object
   [self setMoodIcon:[[MoodIcon alloc] init]];
@@ -93,29 +96,25 @@
 
 - (void) _resetExampleSentencesView
 {
-  // TODO: MMA is this the right place to have the "is exmaple sentence plugin loaded?" code?
+  // Default behavior
+  [[self pageControl] setHidden:NO];
+  scrollView.pagingEnabled = YES;
+  scrollView.scrollEnabled = YES;
+
   // First, check if they have the plugin installed
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    if([[self currentCard] hasExampleSentences])
-    {
-      [[self pageControl] setHidden:NO];
-      scrollView.pagingEnabled = YES;
-      scrollView.scrollEnabled = YES;
-    }
-    else
+    // Plugin is installed, check if there are no example sentences on this card (hides page control & locks scrolling)
+    if(![[self currentCard] hasExampleSentences])
     {
       [[self pageControl] setHidden:YES];
       scrollView.pagingEnabled = NO;
       scrollView.scrollEnabled = NO;
     }
     [[self exampleSentencesViewController] setup];
-  } 
-  else
-  {
-    // No example sentences installed
-  }       
+  }
 }
+
 
 - (void) _resetStudyView
 {
@@ -144,6 +143,7 @@
   }
 }
 
+
 /** a little overly complicated but needed to make the headword switch seemless for the user */
 - (void) resetHeadword
 {
@@ -169,6 +169,7 @@
   [cardViewController setDelegate:cardViewControllerDelegate];
   [actionBarController setDelegate:cardViewControllerDelegate];
 }
+
 
 /** Resets the study view without getting a new Card */
 - (void) resetKeepingCurrentCard
@@ -323,6 +324,35 @@
 }
 
 #pragma mark -
+#pragma mark Plugin-Related
+
+/**
+ * Connects the "Download Example Sentences" button to actually launch the installer
+ * Kind of just a convenience method
+ */
+- (IBAction) launchExampleInstaller
+{
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:EXAMPLE_DB_KEY];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+}
+
+
+/** Called by notification when a plugin is installed - if it is Example sentences, handle that */
+- (void)pluginDidInstall:(NSNotification *)aNotification
+{
+  NSDictionary *dict = [aNotification userInfo];
+  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  {
+    // Get rid of our "please download me" view
+    [[[scrollView subviews] objectAtIndex:1] removeFromSuperview];
+    [self setupScrollView];
+  }
+}
+
+
+
+#pragma mark -
 #pragma mark progressModal
 
 - (IBAction) doShowProgressModalBtn
@@ -350,14 +380,30 @@
 
 #pragma mark UI updater convenience methods
 
-//! Changes the background image based on the theme
+/** Changes the background image based on the theme */
 - (void) updateTheme
 {
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
+
+  // Make sure our little friend is OK
+  float tmpRatio;
+  if (numViewed > 0)
+  {
+    tmpRatio = 100*((float)numRight / (float)numViewed);
+  }
+  else
+  {
+    tmpRatio = 100;
+  }
+  [moodIcon updateMoodIcon:tmpRatio];
 }
 
 
+/**
+ * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,
+ * the sixth element is the total number of seen cards (levels 1-5)
+ */
 - (NSMutableArray*) getLevelDetails
 {
   // This is a convenience method that alloc's and sets to autorelease!
@@ -369,7 +415,7 @@
   // Crash protection in case we don't have the card level counts yet
   if ([[currentCardSet cardLevelCounts] count] == 6)
   {
-    levelDetails = [NSMutableArray arrayWithCapacity: 6];
+    levelDetails = [NSMutableArray arrayWithCapacity:7];
     for (i = 0; i < 6; i++)
     {
       countObject =[[currentCardSet cardLevelCounts] objectAtIndex:i];
@@ -399,12 +445,18 @@
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
   
-  // TODO: make this the right view for example sentences
-  // TODO: what to load if they haven't installed Example Sentences yet?  MMA 6/10/2010
-  [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
-  [[self exampleSentencesViewController] setDatasource:self];
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  {
+    [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
+    [[self exampleSentencesViewController] setDatasource:self];
+  }
+  else
+  {
+    // No example sentence plugin loaded, so show "please download me" view instead
+    [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
+  }
+  			
   UIView *sentencesView = [[self exampleSentencesViewController] view];
-			
 	CGRect rect = sentencesView.frame;
 	rect.origin.x = ((scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
 	rect.origin.y = ((scrollView.frame.size.height - sentencesView.frame.size.height) / 2);

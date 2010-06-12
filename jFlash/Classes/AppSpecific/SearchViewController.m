@@ -11,8 +11,10 @@
 #import "AddTagViewController.h"
 
 @implementation SearchViewController
-@synthesize searchBar, searchArray, activityIndicator;
+@synthesize _searchBar, _targetChooser, _searchArray, _activityIndicator;
 
+
+/** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
 - (id) init
 {
   if (self = [super initWithStyle:UITableViewStylePlain])
@@ -20,41 +22,153 @@
     // Set the tab bar controller image png to the targets
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
+    self._searchArray = nil;
+    
+    // Is the plugin loaded for example sentences?
+    _showSearchTargetControl = [[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY];
+    _searchTarget = SEARCH_TARGET_WORDS;
+    
+    // Register an observer for the example sentences
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
   }
   return self;
 }
 
 
+/** Programmatically create a UISearchBar & UISegmentedControl for search */
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-  self.searchBar.delegate = self;
-  [[self tableView] setTableHeaderView:searchBar];
-  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+  // Programmatically make UISearchBar
+  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  tmpSearchBar.delegate = self;
+  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  [self set_searchBar:tmpSearchBar];
+  [tmpSearchBar release];
+  // Set the Nav Bar title view to be the search bar itself
+  self.navigationItem.titleView = [self _searchBar];
+
+  // Programmatically create "pill" chooser - searches between words & example sentences - default is words
+  // Do not add it to the view in this method - we split that out so it can be called separately when the 
+  // user installs example sentences
+  UISegmentedControl *tmpChooser;
+  tmpChooser = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"Words",@"SearchViewController.Search_Words"),
+                                                                                   NSLocalizedString(@"Example Sentences",@"SearchViewController.Search_Sentences"),nil]];
+  tmpChooser.segmentedControlStyle = UISegmentedControlStyleBar;
+  tmpChooser.selectedSegmentIndex = _searchTarget;
+  tmpChooser.frame = CGRectMake(10,5,300,25);
+  tmpChooser.tintColor = [UIColor lightGrayColor];
+  [tmpChooser addTarget:self action:@selector(changeSearchTarget:) forControlEvents:UIControlEventValueChanged];
+  [self set_targetChooser:tmpChooser];
+  [tmpChooser release];
+  
+  // If we have the Example sentence database...
+  if (_showSearchTargetControl) [self _addSearchControlToHeader];
+
+  // Make the spinner
+  [self set_activityIndicator:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
 }
 
 
-
+/** 
+ * Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct 
+ * If search is not installed, will call shouldShowDownloaderModal notification to stop user from using this screen
+ */
 - (void) viewWillAppear: (BOOL)animated
 {
+  // View related
   [super viewWillAppear:animated];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self._searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  
   _searchRan = NO;
   _deepSearchRan = NO;
   
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  // Show keyboard if no results TODO
-  if (searchArray == nil || [searchArray count] == 0)
+  // Fire off a notification to bring up the downloader?
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if (![pm pluginIsLoaded:FTS_DB_KEY])
   {
-    [searchBar becomeFirstResponder];
+    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    self._searchBar.placeholder = NSLocalizedString(@"Tap here to install search",@"SearchViewController.SearchBarPlaceholder_InstallPlugin"); 
+  }
+  else
+  {
+    self._searchBar.placeholder = NSLocalizedString(@"Enter search keyword",@"SearchViewController.SearchBarPlaceholder_douzo");
+    // Show keyboard if no results
+    if ([self _searchArray] == nil || [[self _searchArray] count] == 0)
+    {
+      [[self _searchBar] becomeFirstResponder];
+    }
   }
 }
 
 
-#pragma mark searchBar methods
+/** 
+ * This should be called by something else - maybe a notification-
+ * after example sentences have been installed
+ */
+- (void) pluginDidInstall:(NSNotification*)aNotification
+{
+  NSDictionary *dict = [aNotification userInfo];
+  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  {
+    _showSearchTargetControl = YES;
+    [self _addSearchControlToHeader];
+  }
+}
+
+
+/**
+ * Adds the search target control into the search view
+ */
+- (void) _addSearchControlToHeader
+{
+  UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
+  tableHeaderView.backgroundColor = [UIColor lightGrayColor];
+  [tableHeaderView addSubview:[self _targetChooser]];
+  [[self tableView] setTableHeaderView:tableHeaderView];
+  [tableHeaderView release];
+}
+
+
+/**
+ * Reads the value of the "pill" chooser and sets _searchTarget appropriately
+ * In the off case that the caller is not a UISegmentControl, defaults to WORD search
+ */
+- (void) changeSearchTarget:(id)sender
+{
+  if ([sender respondsToSelector:@selector(selectedSegmentIndex)])
+  {
+    _searchTarget = [sender selectedSegmentIndex];
+  }
+  else
+  {
+    _searchTarget = SEARCH_TARGET_WORDS;
+  }
+}
+
+
+#pragma mark searchBar delegate methods
+
+/** Is the plugin installed? */
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY])
+  {
+    return YES;
+  }
+  else
+  {
+    // And show them the modal again for good measure
+    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    return NO;
+  }
+}
 
 /** Only show the cancel button when the keyboard is displayed */
 - (void) searchBarDidBeginEditing:(UISearchBar*) lclSearchBar
@@ -72,7 +186,7 @@
 - (void) searchBarSearchButtonClicked:(UISearchBar *)lclSearchBar
 {
   _deepSearchRan = NO;
-  [self runSearchForString:searchBar.text isSlowSearch:NO];
+  [self runSearchForString:[[self _searchBar] text] isSlowSearch:NO];
   [lclSearchBar resignFirstResponder];
 }
 
@@ -86,15 +200,23 @@
 - (void) runSlowSearch
 {
   _deepSearchRan = YES;
-  [self runSearchForString:searchBar.text isSlowSearch:YES];
+  [self runSearchForString:[[self _searchBar] text] isSlowSearch:YES];
 }
 
 /** Execute actual search with \param text. Designed to be called in background thread */
 - (void) runSearchForString:(NSString*)text isSlowSearch:(BOOL)runSlowSearch
 {
   _searchRan = YES;
-  self.searchArray = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
-  [activityIndicator stopAnimating];
+  if (_searchTarget == SEARCH_TARGET_WORDS)
+  {
+    [self set_searchArray:[CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch]];
+  }
+  else
+  {
+//    self.searchArray = [ExampleSentencePeer ]
+  }
+
+  [[self _activityIndicator] stopAnimating];
   [[self tableView] reloadData];
   // reset the user to the top of the tableview for new searches
   [[self tableView] setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -108,24 +230,40 @@
   return 1;
 }
 
+
+/** Returns 75px if _showSearchTargetControl is YES, otherwise returns UITableView standard 0 (no headers) */
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  if (_showSearchTargetControl)
+  {
+    return 75.0f;
+  }
+  else
+  {
+    return 0.0f;
+  }
+}
+
+
 /** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if([searchArray count] == 0 && _searchRan)
+  if([[self _searchArray] count] == 0 && _searchRan)
   {
     return 1;  // one row to say there are no results
   }
   else
   {
-    return [searchArray count];
+    return [[self _searchArray] count];
   }
 }
+
 
 /** Delegate for table, returns cells */
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell;
-  if([searchArray count] == 0 && _searchRan && _deepSearchRan)
+  if([[self _searchArray] count] == 0 && _searchRan && _deepSearchRan)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
   }
@@ -135,7 +273,7 @@
   }
   
   // Determine what kind of cell it is to set the properties
-  if([searchArray count] == 0 && _searchRan)
+  if([[self _searchArray] count] == 0 && _searchRan)
   {
     cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
 
@@ -151,13 +289,13 @@
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      cell.accessoryView = activityIndicator;
+      cell.accessoryView = [self _activityIndicator];
     }
   }
   else
   {     
     // Is a search result record
-    Card* searchResult = [searchArray objectAtIndex:indexPath.row];
+    Card* searchResult = [[self _searchArray] objectAtIndex:indexPath.row];
     cell.textLabel.text = [searchResult headword];
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
     cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
@@ -193,28 +331,31 @@
   return cell;
 }
 
-/** Take action when the user selects a cell */
+
+/**
+ * Depending on view controller state, does different things (refactor?)
+ * IF there are no search results & the user ran a DEEP search, just return - there's nothing to do
+ * IF there are no search results, but the user has not yet run a deep search, run it.
+ * IF there are search results and the user pressed one, push an AddTagViewController onto the view stack
+ */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // if we already did a deep search we can't help them
-  if ([searchArray count] == 0 && _deepSearchRan)
+  if ([[self _searchArray] count] == 0 && _deepSearchRan)
   {
     return;
   }
-  else if ([searchArray count] == 0)
+  else if ([[self _searchArray] count] == 0)
   {
-    [activityIndicator startAnimating];
+    [[self _activityIndicator] startAnimating];
     // Run selector after delay to allow UIVIew to update on run loop
     [self performSelector:@selector(runSlowSearch) withObject:nil afterDelay:0];
     return;
   }
   else
   {
-    AddTagViewController *tagController = [[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil];
-    tagController.cardId = [[searchArray objectAtIndex:indexPath.row] cardId];
-    tagController.title = NSLocalizedString(@"Add Word To Set",@"AddTagViewController.NavBarTitle");
-    tagController.currentCard = [searchArray objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:tagController animated:YES];
+    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self _searchArray] objectAtIndex:indexPath.row]];
+    [[self navigationController] pushViewController:tagController animated:YES];
     [tagController release];
   }
   
@@ -223,18 +364,11 @@
 }
 
 
-// TODO: what function does this function function with?  MMA 6/8/2010
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == 1) {     // they clicked OK.
-    
-  }
-}
-
 - (void)dealloc
 {
-  [searchBar release];
-  [searchArray release];
-  [activityIndicator release];
+  [self set_searchBar:nil];
+  [self set_searchArray:nil];
+  [self set_activityIndicator:nil];
   [super dealloc];
 }
 

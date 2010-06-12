@@ -30,8 +30,6 @@
 		4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
-		4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
-		4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */; };
 		495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */; };
 		495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
 		495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
@@ -42,6 +40,13 @@
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49A8232211BE382E00395E62 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
+		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
+		49B4ABEA11C1DCD100CFC308 /* download-example-plugin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */; };
+		49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
+		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
+		49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
+		49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
+		49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49B53E3811B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
@@ -235,8 +240,6 @@
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
-		4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchUnavailableViewController.h; path = AppSpecific/SearchUnavailableViewController.h; sourceTree = "<group>"; };
-		4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchUnavailableViewController.m; path = AppSpecific/SearchUnavailableViewController.m; sourceTree = "<group>"; };
 		495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
 		495C5A0611BFB9370006DD01 /* example-sentences.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "example-sentences.html"; path = "Assets/example-sentences.html"; sourceTree = "<group>"; };
 		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
@@ -246,6 +249,13 @@
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		49A8232111BE382E00395E62 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "release-notes.html"; path = "Assets/release-notes.html"; sourceTree = "<group>"; };
+		49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExamplesUnavailable.xib; path = XIBs/ExamplesUnavailable.xib; sourceTree = "<group>"; };
+		49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-example-plugin-button.png"; path = "Assets/download-example-plugin-button.png"; sourceTree = "<group>"; };
+		49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-cancel-button.png"; path = "Assets/task-cancel-button.png"; sourceTree = "<group>"; };
+		49B4ABE711C1DCD100CFC308 /* task-pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-pause-button.png"; path = "Assets/task-pause-button.png"; sourceTree = "<group>"; };
+		49B4ABE811C1DCD100CFC308 /* task-retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-retry-button.png"; path = "Assets/task-retry-button.png"; sourceTree = "<group>"; };
+		49B4ABE911C1DCD100CFC308 /* task-start-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-start-button.png"; path = "Assets/task-start-button.png"; sourceTree = "<group>"; };
+		49B4AE8D11C2439200CFC308 /* tag_glossary.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tag_glossary.html; path = Assets/help/tag_glossary.html; sourceTree = "<group>"; };
 		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
@@ -626,6 +636,21 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */ = {
+			isa = PBXGroup;
+			children = (
+				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
+				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
+				9177287811C0BF0B00A90071 /* select-user-btn.png */,
+				49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */,
+				49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */,
+				49B4ABE711C1DCD100CFC308 /* task-pause-button.png */,
+				49B4ABE811C1DCD100CFC308 /* task-retry-button.png */,
+				49B4ABE911C1DCD100CFC308 /* task-start-button.png */,
+			);
+			name = "Glass Button Images";
+			sourceTree = "<group>";
+		};
 		49F96B7911AFD11E00DFC3C9 /* Logic Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,16 +686,16 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */,
 				4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */,
+				917728E011C0CA9600A90071 /* dropped-text-box.png */,
 				495C5A0811BFB9410006DD01 /* full-text-search.html */,
 				495C5A0611BFB9370006DD01 /* example-sentences.html */,
-				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
-				9177287811C0BF0B00A90071 /* select-user-btn.png */,
 				49A8232111BE382E00395E62 /* release-notes.html */,
 				D35B070D1116456D00DB5E02 /* avatars */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				D3309B031123C7D800B73E8E /* help */,
+				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
 				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
 				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				D3B59408111F928100AE4CEE /* Default.png */,
@@ -680,7 +705,6 @@
 				D35B070B1116456D00DB5E02 /* 44-shoebox.png */,
 				D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */,
 				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
-				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
 				D35B073E1116456D00DB5E02 /* practice-btn-addtoset.png */,
 				D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */,
@@ -925,6 +949,7 @@
 				4951E0FC11B61F7D00FCE21E /* CardView.xib */,
 				49F9686811AF604900DFC3C9 /* ModalTaskView.xib */,
 				91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */,
+				49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
@@ -967,8 +992,8 @@
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
 				917A5BD011AB7C4600016BD2 /* SearchViewController.m */,
-				4951E1F011B64A6E00FCE21E /* SearchUnavailableViewController.h */,
-				4951E1F111B64A6E00FCE21E /* SearchUnavailableViewController.m */,
+				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
+				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
 				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
 				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
@@ -1194,6 +1219,13 @@
 				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
 				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
 				91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */,
+				49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */,
+				49B4ABEA11C1DCD100CFC308 /* download-example-plugin-button.png in Resources */,
+				49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */,
+				49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */,
+				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
+				49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */,
+				49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,7 +1351,6 @@
 				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
-				4951E1F211B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
@@ -1362,7 +1393,6 @@
 				4999672B11B3E45F00898A0C /* ThemeManager.m in Sources */,
 				49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
-				4951E1F311B64A6E00FCE21E /* SearchUnavailableViewController.m in Sources */,
 				4950C25411B764B200B70EE9 /* PluginManager.m in Sources */,
 				4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */,
 			);

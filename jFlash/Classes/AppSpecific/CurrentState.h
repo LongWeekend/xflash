@@ -29,7 +29,6 @@
 
 - (void) initializeSettings;
 - (void) _createDefaultSettings;
-- (void) loadActiveTag;
 - (void) resetActiveTag;
 //! getter for active tag.  Loads the NSUserDefault tag from the db if not loaded yet.
 - (Tag *) activeTag;

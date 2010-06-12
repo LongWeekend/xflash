@@ -17,21 +17,21 @@
   Group *group;
   NSMutableArray *tagArray;
   NSMutableArray *subgroupArray;
-  UIBarButtonItem *addButton;
+  UIBarButtonItem *_addButton;
   UIAlertView *statusMsgBox;
   NSInteger selectedTagId;
   NSInteger groupId;
   UIActivityIndicatorView *activityIndicator;
 	UISearchBar *searchBar;
   UIButton *searchOverlayBtn;
-  UIView *searchOverlay;
+  UIView *_searchOverlay;
 	BOOL searching;
 }
 
 - (void) changeStudySet: (Tag*) tag;
 - (void) reloadTableData;
 - (void) reloadSubgroupData;
-- (void) doDoneSearching:(id)sender;
+- (void) doDoneSearching;
 - (void) hideSearchBar;
 - (void) popToRoot;
 

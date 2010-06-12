@@ -46,6 +46,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     // error handling in case we somehow set the tag id to 0
     if(storedTagId == 0) storedTagId = DEFAULT_TAG_ID;
     [self setActiveTag:[TagPeer retrieveTagById:storedTagId]];
+    int currentIndex = [settings integerForKey:@"current_index"];
+    [[self activeTag] setCurrentIndex:currentIndex];
   }
   
   id tag;
@@ -60,16 +62,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 - (void) resetActiveTag
 {
   [self setActiveTag:[self activeTag]];
-}
-
-// TODO: this is called loadActiveTag, but seems to only touch "current_index".  Any ideas?   (MMA 5/29/2010)
-- (void) loadActiveTag
-{
-  LWE_LOG(@"START load active tag");
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int currentIndex = [settings integerForKey:@"current_index"];
-  [[self activeTag] setCurrentIndex:currentIndex];
-  LWE_LOG(@"END load active tag");
 }
 
 

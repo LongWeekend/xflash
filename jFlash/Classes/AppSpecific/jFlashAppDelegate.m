@@ -43,6 +43,7 @@
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
 }
 
+
 //! Flurry exception handler (only installed in final app store version)
 void uncaughtExceptionHandler(NSException *exception) {
   [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];

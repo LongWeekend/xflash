@@ -15,7 +15,11 @@
 @implementation ExampleSentencePeer
 
 
-/** Returns a mutable array of ExampleSentence objects based on the SQL passed via the \param sql */
+/**
+ * Returns a mutable array of ExampleSentence objects based on custom SQL
+ * \param sql SQL string used to return the ExampleSentence objects
+ * \param hydrate If YES, the -hydrate:rs method will be called on each ExampleSentence
+ */
 + (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -41,7 +45,10 @@
 }
 
 
-/** returns a single hydrated ExampleSentence object using \param sentenceId */
+/**
+ * Returns a single hydrated ExampleSentence object
+ * \param sentenceId primary key of the Sentence to be retrieved from the DB
+ */
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM example_sentences WHERE sentence_id = '%d'", sentenceId];
@@ -51,7 +58,10 @@
 }
 
 
-/** Returns all ExampleSentence objects that are linked to \param cardId */
+/**
+ * Returns all linked ExampleSentence objects for a given card
+ * \param cardId Primary key of the Card object for which to retrieve ExampleSentences
+ */
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM example_sentences s, example_card_link l WHERE l.card_id = '%d' AND s.sentence_id = l.example_sentence_id", cardId];
@@ -59,5 +69,79 @@
 	[sql release];
 	return tmpSentences;
 }
+
+
+/**TODO
+ * Returns an array of Sentence objects after searching keyword - for search
+ */
+/*+ (NSArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+  NSString* sql;
+  FMResultSet *rs;
+  NSString* keywordWildcard;
+  
+  if (!slowSearch)
+  {
+    int queryLimit = 100;
+    int queryLimit2;
+    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
+    
+    // Do the search using SQLite FTS (PTAG results)
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, queryLimit];
+    rs = [[db dao] executeQuery:sql];
+    int cardListCount = 0;
+    while ([rs next])
+    {
+      cardListCount++;
+      Card* tmpCard = [[[Card alloc] init] autorelease];
+      [tmpCard hydrate:rs];
+      [cardList addObject: tmpCard];
+    }
+    
+    if(cardListCount < queryLimit)
+      queryLimit2 = (queryLimit-cardListCount)+queryLimit;
+    else
+      queryLimit2 = queryLimit;
+    
+    // Do the search using SQLite FTS (NON-PTAG results)
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, queryLimit2];
+    rs = [[db dao] executeQuery:sql];
+    while ([rs next]) {
+      Card* tmpCard = [[[Card alloc] init] autorelease];
+      [tmpCard hydrate:rs];
+      [cardList addObject: tmpCard];
+    }
+    [rs close];
+  }
+  else
+  {
+    // Do slow substring match (w/ ASTERISK)
+    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
+           "ORDER BY c.headword", keywordWildcard, 200];
+    rs = [[db dao] executeQuery:sql];
+    while ([rs next])
+    {
+      Card* tmpCard = [[[Card alloc] init] autorelease];
+      [tmpCard hydrate:rs];
+      [cardList addObject: tmpCard];
+    }
+    [rs close];
+  }
+  
+	return cardList;
+}
+
+*/
 
 @end

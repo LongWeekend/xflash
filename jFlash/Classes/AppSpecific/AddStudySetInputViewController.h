@@ -16,6 +16,8 @@
   NSInteger ownerId;
 }
 
+- (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId;
+
 @property NSInteger ownerId;
 @property NSInteger defaultCardId;
 @property (nonatomic,retain) UITextField *setNameTextfield;

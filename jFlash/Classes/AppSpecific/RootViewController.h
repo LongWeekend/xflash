@@ -11,7 +11,6 @@
 #import "CurrentState.h"
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
-#import "SearchUnavailableViewController.h"
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "HelpViewController.h"
@@ -44,7 +43,6 @@
 // Notification methods
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
 - (void) showUpdaterModal;
-- (void) swapSearchViewController;
 - (void) hideDownloaderModal:(NSNotification*)aNotification;
 - (void) showDownloaderModal:(NSNotification*)aNotification;
 @end
