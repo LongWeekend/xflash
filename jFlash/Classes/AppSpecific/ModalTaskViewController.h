@@ -16,14 +16,23 @@
  * - isFailureState
  * .. so that the task view controller knows what to do
  */
-//TODO; this isn't a protocol - this is an interface.  We should be subclassing some abstract class for VersionManager and LWEDownloader
 @protocol ModalTaskViewDelegate <NSObject>
 @required
+/** called when the user requests to cancel */
 - (void) cancelTask;
+
+/** called when the user requests to start */
 - (void) startTask;
+
+/** should return YES when the task is successful */
 - (BOOL) isSuccessState;
+
+/** should return YES when the task has terminated in failure */
 - (BOOL) isFailureState;
+
+/** Brief description of the active state of the task */
 - (NSString*) taskMessage;
+
 - (NSString*) statusMessage;
 @optional
 - (void) willUpdateButtonsInView:(id)sender;

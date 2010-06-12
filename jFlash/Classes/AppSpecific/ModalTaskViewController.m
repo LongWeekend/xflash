@@ -39,9 +39,8 @@
 
   // Sets the disabled/enabled state of start button
   [[self startButton] setEnabled:![self startTaskOnAppear]];
-  
-  //TODO: customize me
-  [[self progressIndicator] setTintColor:[UIColor yellowColor]];
+
+  [[self progressIndicator] setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
 
 
@@ -293,7 +292,6 @@
 - (void) updateButtons
 {
   [self willUpdateButtonsInView:self];
-  // TODO: push this out to the delegates as well?
   [[self retryButton] setEnabled:[self canRetryTask]];
   [[self pauseButton] setEnabled:[self canPauseTask]];
   [[self startButton] setEnabled:[self canStartTask]];
