@@ -23,6 +23,7 @@
 @synthesize scrollView, pageControl, exampleSentencesViewController;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 
+/** Custom initializer */
 - (id) init
 {
   if (self = [super init])
@@ -37,6 +38,7 @@
   return self;
 }
 
+/** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -385,7 +387,15 @@
   [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
 
   // Make sure our little friend is OK
-  float tmpRatio = 100*((float)numRight / (float)numViewed);
+  float tmpRatio;
+  if (numViewed > 0)
+  {
+    tmpRatio = 100*((float)numRight / (float)numViewed);
+  }
+  else
+  {
+    tmpRatio = 100;
+  }
   [moodIcon updateMoodIcon:tmpRatio];
 }
 
