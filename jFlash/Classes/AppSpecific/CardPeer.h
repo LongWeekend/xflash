@@ -3,12 +3,10 @@
 #import "LWEDatabase.h"
 #import "FMResultSet.h"
 
-//! Peer object to retrieve & handle Card objects
-@interface CardPeer : NSObject {
+/** Peer object to retrieve & handle Card objects */
+@interface CardPeer : NSObject
+{
 }
-
-// TODO: is this still used?  I think we can ditch it -- maybe usable for "bad data" reporting?
-+ (NSString*) retrieveCsvCardIdsForTag: (NSInteger)setId;
 
 //! Card methods
 + (Card*) retrieveCardWithSQL: (NSString*) sql;
@@ -19,8 +17,7 @@
 //! Array of cards methods
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate;
 + (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
-// TODO: determine how these next 2 methods are really different?
-+ (NSMutableArray*) retrieveCardSetIds: (NSInteger) tagId;
++ (NSMutableArray*) retrieveCardIdsSortedByLevel: (NSInteger) tagId;
 + (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch;
