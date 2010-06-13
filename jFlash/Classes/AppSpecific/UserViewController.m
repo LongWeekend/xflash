@@ -10,12 +10,13 @@
 #import "LoadingView.h"
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
+#import "UserPeer.h"
 
 /**
  * Grouped Table View where the user can select which user they will study as
  */
 @implementation UserViewController
-@synthesize usersArray, statusMsgBox, selectedUserInArray, loadingView;
+@synthesize usersArray, selectedUserInArray, loadingView;
 
 - (id) init
 {
@@ -23,7 +24,7 @@
   {
     self.title = NSLocalizedString(@"Choose User",@"UserViewController.NavBarTitle");
     self.tableView.delegate = self;
-    [self setUsersArray:[User getUsers]];
+    [self setUsersArray:[UserPeer getUsers]];
   }
   return self;
 }
@@ -33,17 +34,19 @@
 - (void) loadView
 {
   [super loadView];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addUser:)];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetailedView)];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
 }
 
 
+/** Fetch user data and then call a table reload */
 - (void)reloadTableData
 {
-  [self setUsersArray:[User getUsers]];
+  [self setUsersArray:[UserPeer getUsers]];
   [[self tableView] reloadData];
 }
 
+/** Update the view if any theme info changed */
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -51,23 +54,25 @@
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setSeparatorColor:[UIColor lightGrayColor]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  // MMA not sure if this is necessary
   [[self tableView] reloadData];
 }
 
 #pragma mark Table view methods
 
-// return how many sections (1!!)
+//! Hardcoded to return 1
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return 1;
 }
 
-// Customize the number of rows in the table view.
+//! Returns the number of users in the usersArray
 - (NSInteger)tableView:(UITableView *)lclTableView numberOfRowsInSection:(NSInteger)section
 {
   return [[self usersArray] count];
 }
 
+//! Reloads specific cells
 - (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation
 {
   for (NSIndexPath *indexPath in indexPaths)
@@ -76,12 +81,11 @@
   }
 }
 
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* tmpStr = [[usersArray objectAtIndex:indexPath.row] userNickname];
+  NSString* tmpNickname = [[usersArray objectAtIndex:indexPath.row] userNickname];
   UITableViewCell *cell;
 
   // Selected cells are highlighted
@@ -90,11 +94,11 @@
     cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[usersArray count]];
+    [bgView setCellIndexPath:indexPath tableLength:[usersArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
-    cell.textLabel.backgroundColor = [ UIColor clearColor ];
-    cell.textLabel.textColor = [ UIColor whiteColor ];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundView = bgView;
     [bgView release];
   }
@@ -112,11 +116,11 @@
 //  UIImageView *tmpView = cell.imageView;
 //  tmpView.image = [[usersArray objectAtIndex:indexPath.row] getUserThumbnail];
   
-  cell.textLabel.text = tmpStr;
+  cell.textLabel.text = tmpNickname;
   cell.accessoryType  = UITableViewCellAccessoryDetailDisclosureButton;
   cell.accessoryView = nil;
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+  
   return cell;
 }
 
@@ -131,12 +135,13 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
   NSString* message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
-  self.statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle")
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle")
                                            message:message
                                            delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
                                            otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-  [statusMsgBox show];
+  [alert show];
+  [alert release];
 }
 
 
@@ -145,18 +150,20 @@
   // user activation confirmed 
   if (buttonIndex == 1)
   {
-    // Load modal spinner
-    loadingView = [LoadingView loadingViewInView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
-    [self performSelector:@selector(doActivateUser) withObject:nil afterDelay:0.1];
+    [self activateUserWithModal:[self selectedUserInArray]];
   }
 }
 
 
+/**
+ * Load UserDetailsViewController onto the navigation controller stack
+ * Allows user to edit user info 
+ */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
-  User* currUser = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
+  User* currUser = [[self usersArray] objectAtIndex:indexPath.row];
   [userDetailsView setUser:currUser];
   [userDetailsView setTitle: [currUser userNickname]];
   [userDetailsView setMode: kUserViewModeEdit];
@@ -173,13 +180,14 @@
     NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
     {
-      NSString* message = [NSString stringWithFormat:NSLocalizedString(@"The default user can be edited but not deleted",@"UserViewController.CannotDelete_AlertViewMessage")];
-      self.statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
+      NSString* message = [NSString stringWithFormat:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
                                                message:message
                                                delegate:self
                                                cancelButtonTitle:nil
                                                otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-      [statusMsgBox show];
+      [alert show];
+      [alert release];
       return;
     }
 
@@ -192,9 +200,11 @@
 
     // If we just deleted the active user, change to iPhone Owner
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    if(selectedUserId == [settings integerForKey:@"user_id"])
-      [[User getUser:DEFAULT_USER_ID] activateUser];
-
+    if (selectedUserId == [settings integerForKey:@"user_id"])
+    {
+      [self activateUserWithModal:[UserPeer getUserByPK:DEFAULT_USER_ID]];
+    }
+    
     // Delete from table
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
 
@@ -205,16 +215,35 @@
 
 # pragma mark UI Responders
 
-- (void) doActivateUser
+/** Takes a user objects and activates it, calling notifications appropriately */
+- (void) activateUserWithModal:(User*) user
+{
+  // First, show the loading modal, then call selector after delay to allow it to appear
+  self.loadingView = [LoadingView loadingViewInView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+
+  // Now do it
+  [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
+}
+
+
+/**
+ * Called exclusively by activateUserWithModal
+ * Completes the activation and dismisses the modal set up by
+ * activateUserWithModal
+ */
+- (void) _activateUser:(User*) user 
 {
   // Activate, post notification and dismiss view
-  [[self selectedUserInArray] activateUser];
+  [user activateUser];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"userWasChanged" object:self];
   [self.loadingView removeView];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)addUser:sender {
+
+/** Pushs the user details view controller onto the nav controller stack */
+- (void) showUserDetailsView
+{
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
   userDetailsView.mode = kUserViewModeAdd;
@@ -228,12 +257,11 @@
   [userDetailsView release];*/
 }
 
+
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
-  
-  [usersArray release];
-  [statusMsgBox release];
+  [self setUsersArray:nil];
   [super dealloc];
 }
 

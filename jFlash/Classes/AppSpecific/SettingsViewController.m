@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "PluginSettingsViewController.h"
 #import "UserViewController.h"
+#import "UserPeer.h"
 #import "VersionManager.h"
 
 @implementation SettingsViewController
@@ -96,14 +97,14 @@ NSString * const APP_ALGORITHM = @"algorithm";
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(launchAppirater)];
+  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
   
   // Do we need to show a button on the other side?
   if ([VersionManager databaseIsUpdatable])
   {
-    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleDone target:self.parentViewController action:@selector(showUpdaterModal)];
+    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleDone target:self action:@selector(_showUpdaterModal)];
     self.navigationItem.rightBarButtonItem = updateBtn;
     [updateBtn release];
   }
@@ -133,9 +134,15 @@ NSString * const APP_ALGORITHM = @"algorithm";
   settingsChanged = NO;
 }
 
+//! showUpdaterModal - convenience method for updater
+- (void) _showUpdaterModal
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self];
+}
+
 
 //! launchAppirater - convenience method for appirater
-- (void) launchAppirater
+- (void) _launchAppirater
 {
   appirater = [[Appirater alloc] init];
   [appirater showPromptManually];
@@ -203,7 +210,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   if (key == APP_USER)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
-    cell.detailTextLabel.text = [[User getUser:[settings integerForKey:APP_USER]] userNickname];
+    cell.detailTextLabel.text = [[UserPeer getUserByPK:[settings integerForKey:APP_USER]] userNickname];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == APP_PLUGIN)

@@ -19,9 +19,6 @@
   NSString * dateCreated;
 }
 
-+ (User*)createUserWithNickname:(NSString*)name avatarImagePath:(NSString*)path;
-+ (User*)getUser: (NSInteger)userId;
-+ (NSMutableArray*)getUsers;
 - (void)hydrate: (FMResultSet*) rs;
 - (void)save;
 - (void)deleteUser;

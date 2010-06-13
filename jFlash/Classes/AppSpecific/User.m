@@ -17,57 +17,6 @@
 @implementation User
 @synthesize userId, userNickname, avatarImagePath, dateCreated;
 
-+ (NSMutableArray*) getUsers
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM users ORDER by user_id ASC"];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
-  
-  User *tmpUser = nil;
-  NSMutableArray* userList = [[[NSMutableArray alloc] init] autorelease];
-	while ([rs next])
-  {
-		tmpUser = [[User alloc] init];
-		[tmpUser hydrate:rs];
-    LWE_LOG(@"User loaded: %@", [tmpUser userNickname]);
-		[userList addObject:tmpUser];
-    [tmpUser release];
-  }
-	
-  [rs close];
-	[sql release];
-  return userList;
-}
-
-+ (User*)createUserWithNickname:(NSString*)name avatarImagePath:(NSString*)path{
-
-  User* tmpUser = [[[User alloc] init] autorelease];
-  tmpUser.userNickname = name;
-  tmpUser.avatarImagePath = path;
-
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [[NSString alloc] initWithFormat:@"INSERT INTO users (nickname, avatar_image_path, date_created) VALUES ('%@','%@',NOW())", name, path];
-  [[db dao] executeUpdate:sql];
-  [sql release];
-  return tmpUser;  
-}
-
-+ (User*) getUser: (NSInteger)userId
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-
-  NSString *sql = [NSString stringWithFormat:@"SELECT * FROM users WHERE user_id = %d", userId];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
-  User* tmpUser = [[[User alloc] init] autorelease];
-  while ([rs next])
-  {
-    [tmpUser hydrate:rs];
-  }
-	
-  [rs close];
-  return tmpUser;
-}
-
 // Takes a sqlite result set and populates the properties of user
 - (void) hydrate: (FMResultSet*) rs
 {
@@ -108,7 +57,8 @@
   [sql release];
 }
 
-- (void) activateUser{
+- (void) activateUser
+{
   // User activation code here 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:userId forKey:@"user_id"];

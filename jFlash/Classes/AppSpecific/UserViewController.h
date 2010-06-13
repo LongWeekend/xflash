@@ -10,19 +10,22 @@
 #import "User.h"
 #import "LoadingView.h"
 
-@interface UserViewController : UITableViewController {
-	NSMutableArray* usersArray;
-  UIAlertView* statusMsgBox;
-  User* selectedUserInArray; // Ptr to the selected user in usersArray
-  LoadingView *loadingView;
+/**
+ * Shows a table of jFlash users, allows editing/deletion of users,
+ * creation of new users
+ */
+@interface UserViewController : UITableViewController
+{
+	NSMutableArray* usersArray;     //! Holds an array of all users
+  User* selectedUserInArray;      //! Holds the User object of the currently selected user
+  LoadingView *loadingView;       //! Loading modal when switching users on large sets
 }
 
-- (void)addUser:sender;
-- (void)doActivateUser;
+- (void) showUserDetailsView;
+- (void) activateUserWithModal:(User*) user;
 
 @property (nonatomic, retain) LoadingView *loadingView;
 @property (nonatomic, retain) NSMutableArray *usersArray;
-@property (nonatomic, retain) UIAlertView *statusMsgBox;
 @property (nonatomic, retain) User* selectedUserInArray;
 
 @end

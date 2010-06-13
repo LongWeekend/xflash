@@ -8,6 +8,7 @@
 
 #import "UserDetailsViewController.h"
 #import "UserViewController.h"
+#import "UserPeer.h"
 
 @implementation UserDetailsViewController
 @synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, userImagePickerView, selectedUserImage;
@@ -149,7 +150,7 @@
 
 - (void) setUser:(User *)sourceUser{
   // Make local copy or user
-  self.selectedUser = [User getUser:[sourceUser userId]];
+  self.selectedUser = [UserPeer getUserByPK:[sourceUser userId]];
   originalUserNickname = [selectedUser userNickname];
   [originalUserNickname retain];
 }

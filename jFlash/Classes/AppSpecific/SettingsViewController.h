@@ -25,7 +25,6 @@ extern NSString * const APP_FACEBOOK;
   Appirater *appirater;
 }
 
-- (void) launchAppirater;
 - (void) iterateSetting: (NSString*) setting;
 
 @property BOOL settingsChanged;
