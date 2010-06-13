@@ -104,6 +104,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 			initWithFrame:labelFrame]
 		autorelease];
 	loadingLabel.text = text;
+  loadingLabel.numberOfLines = 3;
   loadingLabel.textColor = [UIColor whiteColor];
 	loadingLabel.backgroundColor = [UIColor clearColor];
 	loadingLabel.textAlignment = UITextAlignmentCenter;
