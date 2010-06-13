@@ -10,13 +10,18 @@
 #import "ThemeManager.h"
 #import "Constants.h"
 
-@interface AlgorithmSettingsViewController : UITableViewController
-{
+@interface AlgorithmSettingsViewController : UIViewController {
   UISlider *maxCardsUISlider;
   UISlider *frequencyUISlider;
+  IBOutlet UISegmentedControl *difficultySegmentControl;
+  IBOutlet UITableView *tableView;
 }
+
+- (IBAction) setDifficulty:(UISegmentedControl*)sender;
 
 @property (nonatomic, retain) UISlider *maxCardsUISlider;
 @property (nonatomic, retain) UISlider *frequencyUISlider;
+@property (nonatomic, retain) UISegmentedControl *difficultySegmentControl;
+@property (nonatomic, retain) UITableView *tableView;
 
 @end

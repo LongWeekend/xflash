@@ -171,6 +171,7 @@
 		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
 		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
+		91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
 		91EA2F4C104135E200AB848E /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91EA2F4B104135E200AB848E /* dist.plist */; };
@@ -453,6 +454,7 @@
 		91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentence.m; path = AppSpecific/ExampleSentence.m; sourceTree = "<group>"; };
 		91CBA6E811BB787A004BD0D0 /* ExampleSentencePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencePeer.h; path = AppSpecific/ExampleSentencePeer.h; sourceTree = "<group>"; };
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
+		91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmSettingsView.xib; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
 		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
@@ -894,6 +896,52 @@
 			name = "Application Tests";
 			sourceTree = "<group>";
 		};
+		91DDB0A811C1F57700E8B962 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				91170DB211BF896F00D4A680 /* AlgorithmSettingsViewController.h */,
+				91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */,
+				4908209711B794A500150499 /* PluginSettingsViewController.h */,
+				4908209811B794A500150499 /* PluginSettingsViewController.m */,
+				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
+				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
+				917A5C6011AB83F900016BD2 /* UserImagePicker.h */,
+				917A5C6111AB83F900016BD2 /* UserImagePicker.m */,
+				917A5C6211AB83F900016BD2 /* UserImagePickerAlt.h */,
+				917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */,
+				917A5BD911AB7C4600016BD2 /* UserDetailsViewController.h */,
+				917A5BDA11AB7C4600016BD2 /* UserDetailsViewController.m */,
+				917A5BDB11AB7C4600016BD2 /* UserViewController.h */,
+				917A5BDC11AB7C4600016BD2 /* UserViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		91DDB0A911C1F5CB00E8B962 /* Study View */ = {
+			isa = PBXGroup;
+			children = (
+				91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */,
+				91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */,
+				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
+				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
+				91214F4711B601490091AFEF /* CardViewController.h */,
+				91214F4811B601490091AFEF /* CardViewController.m */,
+				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
+				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
+				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
+				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
+				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
+				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
+				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
+				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
+				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
+				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
+				9121517711B755550091AFEF /* WordCardViewController.h */,
+				9121517811B755550091AFEF /* WordCardViewController.m */,
+			);
+			name = "Study View";
+			sourceTree = "<group>";
+		};
 		D36CE144111A9A050073D809 /* CustomCellBackgroundView */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,6 +976,7 @@
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				9121517911B755550091AFEF /* WordCardViewController.xib */,
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
+				91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -936,38 +985,20 @@
 		DA8B6A4B0FB111D600DE105C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				91DDB0A911C1F5CB00E8B962 /* Study View */,
+				91DDB0A811C1F57700E8B962 /* Settings */,
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
-				91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */,
-				91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */,
 				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
 				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
-				91170DB211BF896F00D4A680 /* AlgorithmSettingsViewController.h */,
-				91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */,
-				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
-				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
-				91214F4711B601490091AFEF /* CardViewController.h */,
-				91214F4811B601490091AFEF /* CardViewController.m */,
-				491D7D0111C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.h */,
-				491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */,
-				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
-				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
 				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
 				4925735211C12619006FA4E1 /* ModalTaskViewController.m */,
-				4908209711B794A500150499 /* PluginSettingsViewController.h */,
-				4908209811B794A500150499 /* PluginSettingsViewController.m */,
-				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
-				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
-				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
-				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
-				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
-				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
 				49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */,
 				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
@@ -980,18 +1011,6 @@
 				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
 				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
 				917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */,
-				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
-				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
-				917A5BD911AB7C4600016BD2 /* UserDetailsViewController.h */,
-				917A5BDA11AB7C4600016BD2 /* UserDetailsViewController.m */,
-				917A5BDB11AB7C4600016BD2 /* UserViewController.h */,
-				917A5BDC11AB7C4600016BD2 /* UserViewController.m */,
-				917A5C6011AB83F900016BD2 /* UserImagePicker.h */,
-				917A5C6111AB83F900016BD2 /* UserImagePicker.m */,
-				917A5C6211AB83F900016BD2 /* UserImagePickerAlt.h */,
-				917A5C6311AB83F900016BD2 /* UserImagePickerAlt.m */,
-				9121517711B755550091AFEF /* WordCardViewController.h */,
-				9121517811B755550091AFEF /* WordCardViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1212,6 +1231,7 @@
 				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
 				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
 				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
+				91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */,
 				49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */,
 				49B4ABEA11C1DCD100CFC308 /* download-example-plugin-button.png in Resources */,
 				49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */,
