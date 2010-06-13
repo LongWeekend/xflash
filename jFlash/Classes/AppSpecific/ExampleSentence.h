@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ExampleSentence : NSObject {
+@interface ExampleSentence : NSObject
+{
   NSInteger sentenceId;
   NSString *sentenceJa;
   NSString *sentenceEn;

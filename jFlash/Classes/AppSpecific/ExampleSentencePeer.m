@@ -7,6 +7,7 @@
 //
 
 #import "ExampleSentencePeer.h"
+#import "CardPeer.h"
 
 /*!
     @class ExampleSentencePeer
@@ -51,7 +52,7 @@
  */
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM example_sentences WHERE sentence_id = '%d'", sentenceId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM sentences WHERE sentence_id = '%d'", sentenceId];
   NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
 	[sql release];
 	return [tmpSentences objectAtIndex:0];
@@ -64,18 +65,42 @@
  */
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM example_sentences s, example_card_link l WHERE l.card_id = '%d' AND s.sentence_id = l.example_sentence_id", cardId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = '%d' AND s.sentence_id = l.sentence_id", cardId];
   NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
 	[sql release];
 	return tmpSentences;
 }
 
 
-/**TODO
+/**
  * Returns an array of Sentence objects after searching keyword - for search
  */
-/*+ (NSArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
++ (NSMutableArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
 {
+  NSMutableArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
+  
+  // Do a clever IN SQL statement!  Aha!
+  NSString *inStatement;
+  Card* card = nil;
+  for (int i = 0; i < [cardList count]; i++)
+  {
+    card = [cardList objectAtIndex:i];
+    if (i == 0)
+    {
+      inStatement = [NSString stringWithFormat:@"%d",[card cardId]];
+    }
+    else if (i > 0)
+    {
+      inStatement = [NSString stringWithFormat:@"%@,%d",inStatement,[card cardId]];      
+    }
+  }
+  
+  LWE_LOG(@"In Statement: %@",inStatement);
+  
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
+  return [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
+/*  
+  
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   NSString* sql;
@@ -139,9 +164,7 @@
     [rs close];
   }
   
-	return cardList;
+	return cardList;*/
 }
-
-*/
 
 @end
