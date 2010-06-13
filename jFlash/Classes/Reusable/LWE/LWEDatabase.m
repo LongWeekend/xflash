@@ -15,10 +15,11 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
-
 /**
- * Returns true if file was able to be copied from the bundle - overwrites
+ * Returns YES if file was able to be copied from the bundle - overwrites file!
  * Intended to be run in the background
+ * TODO: as Ross pointed out, this should be separated out into a category
+ * or a subclass due to its linkage to NSUserDefaults
  */
 - (BOOL) copyDatabaseFromBundle:(NSString*)filename
 {
@@ -40,6 +41,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   }
   [pool release];
   return returnVal;
+}
+
+
+/** 
+ * Returns the name of the active USER database
+ * TODO: as Ross pointed out, this is JFlash-specific and should
+ * not be in LWEDatabase, but a subclass or a category
+ */
++ (NSString*) userDatabaseFilename
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *version = [settings objectForKey:APP_DATA_VERSION];
+  if ([version isEqualToString:JFLASH_VERSION_1_0])
+  {
+    // Return the JFlash 1.0 dictionary name
+    return JFLASH_10_USER_DATABASE;
+  }
+  else
+  {
+    // Return the latest version
+    return JFLASH_CURRENT_USER_DATABASE;
+  }
 }
 
 
@@ -93,6 +116,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 
 /**
  * Gets open database's version - proprietary to LWE databases (uses version table)
+ * TODO: as Ross mentioned, move this to a subclass or a category
  */
 - (NSString*) databaseVersion
 {
@@ -128,7 +152,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
   if ([self _databaseIsOpen])
   {
     NSString *sql = [[NSString alloc] initWithFormat:@"ATTACH DATABASE \"%@\" AS %@;",pathToDatabase,name];
-    LWE_LOG(@"%@",sql);
     [self executeUpdate:sql];
     if (![[self dao] hadError])
     {

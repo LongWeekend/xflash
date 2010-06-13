@@ -46,6 +46,14 @@
   
 }
 
+//! Makes a frame for a text based on provided width, margin, and font size
++ (CGRect) makeFrameForText:(NSString*)text fontSize:(NSInteger)fontSize cellWidth:(NSInteger)width cellMargin:(NSInteger)margin
+{
+  CGSize constraint = CGSizeMake(width - (margin * 2), 20000.0f);
+  CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+  return CGRectMake(margin, margin, width - (margin * 2), MAX(size.height, 44.0f));
+}
+
 //! Shorter Convenience Method: AutoSize without specifying font sizes!
 + (void) autosizeLabelText: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer withText:(NSString *)theText  {
   [LWEUILabelUtils autosizeLabelText:theLabel forScrollView:scrollViewContainer withText:theText minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];

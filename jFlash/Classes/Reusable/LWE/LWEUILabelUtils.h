@@ -16,10 +16,10 @@
 #define HEADWORD_MAX_FONTSIZE 38.0
 #define HEADWORD_DEF_FONTSIZE 14.0
 
-@interface LWEUILabelUtils : NSObject {
-
+@interface LWEUILabelUtils : NSObject
+{
 }
-
++ (CGRect) makeFrameForText:(NSString*)text fontSize:(NSInteger)fontSize cellWidth:(NSInteger)width cellMargin:(NSInteger)margin;
 + (void)resizeLabelWithConstraints: (UILabel *)theLabel minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize forParentViewSize:(CGSize)parentViewSize;
 + (void)resizeLabelWithConstraints: (UILabel *)theLabel minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize;
 + (void)autosizeLabelText: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer withText:(NSString *)theText minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize;
