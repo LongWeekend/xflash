@@ -242,6 +242,19 @@
 
 
 /**
+ * Returns an array containng cardId integers that are linked to the sentence
+ * \param sentenceId Primary key of the sentence to look up cards for
+ */
++ (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId
+{
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_sentence_link WHERE sentence_id = '%d'", sentenceId];
+  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
+  [sql release];
+  return cardList;  
+}
+
+
+/**
  * Returns an array of Card objects in the Tag given by tagId
  */
 + (NSMutableArray*) retrieveCardSet: (NSInteger) tagId

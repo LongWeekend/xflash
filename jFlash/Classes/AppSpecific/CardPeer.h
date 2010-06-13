@@ -19,6 +19,7 @@
 + (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
 + (NSMutableArray*) retrieveCardIdsSortedByLevel: (NSInteger) tagId;
 + (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;
++ (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId;
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch;
 @end
