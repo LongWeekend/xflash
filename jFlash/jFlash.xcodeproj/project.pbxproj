@@ -23,8 +23,6 @@
 		491D7C4911C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */; };
 		491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
 		491D7C4C11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
-		491D7D0311C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */; };
-		491D7D0411C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */; };
 		491D7D0711C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
@@ -62,6 +60,8 @@
 		49B53E3911B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
 		49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
+		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
+		49C5BC2211C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49CDD32C11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
 		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
 		49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
@@ -237,8 +237,6 @@
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
 		491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-USER-1.1.db"; path = "sql/jFlash-USER-1.1.db"; sourceTree = "<group>"; };
-		491D7D0111C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
-		491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		491FE3AB11BA0B5700A54F51 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "Assets/twitter-icon.png"; sourceTree = "<group>"; };
 		491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "Assets/facebook-icon.png"; sourceTree = "<group>"; };
@@ -275,6 +273,8 @@
 		49B53E3511B105CF00A1119A /* LWEUITableUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUITableUtils.m; path = Reusable/LWE/LWEUITableUtils.m; sourceTree = "<group>"; };
 		49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEViewAnimationUtils.h; path = Reusable/LWE/LWEViewAnimationUtils.h; sourceTree = "<group>"; };
 		49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEViewAnimationUtils.m; path = Reusable/LWE/LWEViewAnimationUtils.m; sourceTree = "<group>"; };
+		49C5BC1F11C51B0D00A595D6 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
+		49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
 		49CD03310FFF1F4100F515A3 /* jFlash Unit Testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlash Unit Testing.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlash Unit Testing-Info.plist"; sourceTree = "<group>"; };
 		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
@@ -663,6 +663,19 @@
 			name = "Glass Button Images";
 			sourceTree = "<group>";
 		};
+		49C5BC1E11C51AE300A595D6 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
+				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
+				49C5BC1F11C51B0D00A595D6 /* DisplaySearchedSentenceViewController.h */,
+				49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */,
+				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
+				917A5BD011AB7C4600016BD2 /* SearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		49F96B7911AFD11E00DFC3C9 /* Logic Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,14 +998,13 @@
 		DA8B6A4B0FB111D600DE105C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				49C5BC1E11C51AE300A595D6 /* Search */,
 				91DDB0A911C1F5CB00E8B962 /* Study View */,
 				91DDB0A811C1F57700E8B962 /* Settings */,
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
 				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
-				917A5BC511AB7C4600016BD2 /* AddTagViewController.h */,
-				917A5BC611AB7C4600016BD2 /* AddTagViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
 				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
 				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
@@ -1003,8 +1015,6 @@
 				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
-				917A5BCF11AB7C4600016BD2 /* SearchViewController.h */,
-				917A5BD011AB7C4600016BD2 /* SearchViewController.m */,
 				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
 				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
@@ -1382,7 +1392,7 @@
 				49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */,
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
-				491D7D0311C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */,
+				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,7 +1426,7 @@
 				4950C25411B764B200B70EE9 /* PluginManager.m in Sources */,
 				4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */,
 				491D7B2A11C4776C00BF8323 /* UserPeer.m in Sources */,
-				491D7D0411C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */,
+				49C5BC2211C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
