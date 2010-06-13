@@ -1,9 +1,11 @@
 #import "Card.h"
+#import "ExampleSentencePeer.h"
 
 @implementation Card 
 
 @synthesize cardId, userId, levelId, headword, headword_en, reading, romaji, meaning, wrongCount, rightCount;
 
+/** Customized initializer setting all variables to zero or nil */
 - (id) init
 {
   self = [super init];
@@ -23,7 +25,10 @@
   return self;
 }
 
-- (NSString*) meaningWithoutMarkup {
+
+/** Returns the meaning field w/o any HTML markup */
+- (NSString*) meaningWithoutMarkup
+{
   //Remove HTML from cards.meaning field ... messy!
   NSString* txtStr;
   txtStr = [self.meaning stringByReplacingOccurrencesOfString:@"</dfn><dfn>" withString:@","];
@@ -37,6 +42,8 @@
   return txtStr;
 }
 
+
+/** depending on APP_READING value in settings, will return a combined headword */
 - (NSString*) combinedReadingForSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -60,16 +67,23 @@
   return combined_reading;
 }
 
-// TODO : make this actually implemented
+
+/** Returns YES if a card has example sentences attached to it */
 - (BOOL) hasExampleSentences
 {
-  int r = rand() % 2;
-  if(r == 1) return YES;
-  return NO;
+  NSMutableArray *tmpExampleSentences = [ExampleSentencePeer getExampleSentencesByCardId:[self cardId]];
+  if ([tmpExampleSentences count] > 0)
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
 }
 
 
-// Takes a sqlite result set and populates the properties of card
+/** Takes a sqlite result set and populates the properties of card */
 - (void) hydrate: (FMResultSet*) rs
 {
   self.levelId  =    [rs intForColumn:@"card_level"];
@@ -85,6 +99,7 @@
 }
 
 
+//! Standard dealloc
 - (void) dealloc
 {
 	[romaji release];
