@@ -7,11 +7,10 @@
 //
 
 #import "SearchViewController.h"
-#import "CardPeer.h"
-#import "AddTagViewController.h"
+
 
 @implementation SearchViewController
-@synthesize _searchBar, _targetChooser, _searchArray, _activityIndicator;
+@synthesize _searchBar, _targetChooser, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
 
 
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
@@ -22,7 +21,8 @@
     // Set the tab bar controller image png to the targets
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
     self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
-    self._searchArray = nil;
+    [self set_cardSearchArray:nil];
+    [self set_sentenceSearchArray:nil];
     
     // Is the plugin loaded for example sentences?
     _showSearchTargetControl = [[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY];
@@ -49,6 +49,7 @@
   [tmpSearchBar release];
   // Set the Nav Bar title view to be the search bar itself
   self.navigationItem.titleView = [self _searchBar];
+  [[self _searchBar] sizeToFit];
 
   // Programmatically create "pill" chooser - searches between words & example sentences - default is words
   // Do not add it to the view in this method - we split that out so it can be called separately when the 
@@ -98,7 +99,7 @@
   {
     self._searchBar.placeholder = NSLocalizedString(@"Enter search keyword",@"SearchViewController.SearchBarPlaceholder_douzo");
     // Show keyboard if no results
-    if ([self _searchArray] == nil || [[self _searchArray] count] == 0)
+    if ([self _cardSearchArray] == nil || [[self _cardSearchArray] count] == 0)
     {
       [[self _searchBar] becomeFirstResponder];
     }
@@ -112,8 +113,9 @@
  */
 - (void) pluginDidInstall:(NSNotification*)aNotification
 {
-  NSDictionary *dict = [aNotification userInfo];
-  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  // Only show control if both FTS AND EX are installed
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     _showSearchTargetControl = YES;
     [self _addSearchControlToHeader];
@@ -142,7 +144,9 @@
 {
   if ([sender respondsToSelector:@selector(selectedSegmentIndex)])
   {
+    // Reload the table
     _searchTarget = [sender selectedSegmentIndex];
+    [[self tableView] reloadData];
   }
   else
   {
@@ -153,7 +157,10 @@
 
 #pragma mark searchBar delegate methods
 
-/** Is the plugin installed? */
+/**
+ * Check if the plugin installed, returns NO if not, and launches modal via notification
+ * If plugin is loaded always returns YES
+ */
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -171,13 +178,13 @@
 }
 
 /** Only show the cancel button when the keyboard is displayed */
-- (void) searchBarDidBeginEditing:(UISearchBar*) lclSearchBar
+- (void) searchBarTextDidBeginEditing:(UISearchBar*) lclSearchBar
 {
   lclSearchBar.showsCancelButton = YES;
 }
 
 /** Hide the cancel button when user finishes */
-- (void) searchBarDidEndEditing:(UISearchBar *)lclSearchBar
+- (void) searchBarTextDidEndEditing:(UISearchBar *)lclSearchBar
 {  
   lclSearchBar.showsCancelButton = NO;
 }
@@ -208,13 +215,9 @@
 {
   _searchRan = YES;
   if (_searchTarget == SEARCH_TARGET_WORDS)
-  {
-    [self set_searchArray:[CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch]];
-  }
-  else
-  {
-//    self.searchArray = [ExampleSentencePeer ]
-  }
+    [self set_cardSearchArray:[CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch]];
+  else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
+    [self set_sentenceSearchArray:[ExampleSentencePeer searchSentencesForKeyword:text doSlowSearch:runSlowSearch]];
 
   [[self _activityIndicator] stopAnimating];
   [[self tableView] reloadData];
@@ -235,27 +238,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
   if (_showSearchTargetControl)
-  {
     return 75.0f;
-  }
   else
-  {
     return 0.0f;
-  }
 }
 
 
 /** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if([[self _searchArray] count] == 0 && _searchRan)
-  {
+  if([[self _cardSearchArray] count] == 0 && _searchRan)
     return 1;  // one row to say there are no results
-  }
   else
-  {
-    return [[self _searchArray] count];
-  }
+    return [[self _cardSearchArray] count];
 }
 
 
@@ -263,17 +258,13 @@
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell;
-  if([[self _searchArray] count] == 0 && _searchRan && _deepSearchRan)
-  {
+  if([[self _cardSearchArray] count] == 0 && _searchRan && _deepSearchRan)
     cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
-  }
   else
-  {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"SearchRecord" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-  }
   
   // Determine what kind of cell it is to set the properties
-  if([[self _searchArray] count] == 0 && _searchRan)
+  if([[self _cardSearchArray] count] == 0 && _searchRan)
   {
     cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
 
@@ -293,41 +284,54 @@
     }
   }
   else
-  {     
-    // Is a search result record
-    Card* searchResult = [[self _searchArray] objectAtIndex:indexPath.row];
-    cell.textLabel.text = [searchResult headword];
-    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
-    cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-
-    NSString *meaningStr = [searchResult meaningWithoutMarkup];
-
-    NSString *readingStr;
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+  {
+    if (_searchTarget == SEARCH_TARGET_WORDS)
     {
-      // KANA READING
-      readingStr = [searchResult reading];
-    } 
-    else if ([[settings objectForKey:APP_READING] isEqualToString:SET_READING_ROMAJI])
-    {
-      // ROMAJI READING
-      readingStr = [searchResult romaji];
+      Card* searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+      cell = [self setupTableCell:cell forCard:searchResult];
     }
     else
     {
-      // BOTH READINGS
-      readingStr = [NSString stringWithFormat:@"%@ / %@", [searchResult reading], [searchResult romaji]];
+      ExampleSentence *searchResult = [[self _sentenceSearchArray] objectAtIndex:indexPath.row];
+      cell = [self setupTableCell:cell forSentence:searchResult];
     }
-    
-    if (readingStr.length > 0)
-      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];
-    else
-      cell.detailTextLabel.text = meaningStr;
   }
+  return cell;
+}
+
+
+/** Helper method - makes a cell for cellForIndexPath for a Card */
+- (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
+{
+  // Is a search result record
+  cell.textLabel.text = [card headword];
+  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
   
+  NSString *meaningStr = [card meaningWithoutMarkup];
+  NSString *readingStr = [card combinedReadingForSettings];
+
+  if (readingStr.length > 0)
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];
+  else
+    cell.detailTextLabel.text = meaningStr;
+  return cell;
+}
+
+
+/** Helper method - makes a cell for cellForIndexPath for an ExampleSentence */
+- (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forSentence:(ExampleSentence*) sentence
+{
+  // Is a search result record
+  cell.textLabel.text = [sentence sentenceJa];
+  cell.textLabel.font = [UIFont systemFontOfSize:14];
+  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+  cell.detailTextLabel.text = [sentence sentenceEn];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
   return cell;
 }
 
@@ -336,16 +340,28 @@
  * Depending on view controller state, does different things (refactor?)
  * IF there are no search results & the user ran a DEEP search, just return - there's nothing to do
  * IF there are no search results, but the user has not yet run a deep search, run it.
- * IF there are search results and the user pressed one, push an AddTagViewController onto the view stack
+ * IF there are search results and the user pressed one, push an appropriate view controller onto the view stack
+ * (AddTagViewController = card search)
  */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  // First, get the appropriate result array
+  NSMutableArray *tmpResultArray = nil;
+  if (_searchTarget == SEARCH_TARGET_WORDS)
+  {
+    tmpResultArray = [self _cardSearchArray];
+  }
+  else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
+  {
+    tmpResultArray = [self _sentenceSearchArray];
+  }
+
   // if we already did a deep search we can't help them
-  if ([[self _searchArray] count] == 0 && _deepSearchRan)
+  if ([tmpResultArray count] == 0 && _deepSearchRan)
   {
     return;
   }
-  else if ([[self _searchArray] count] == 0)
+  else if ([tmpResultArray count] == 0)
   {
     [[self _activityIndicator] startAnimating];
     // Run selector after delay to allow UIVIew to update on run loop
@@ -354,20 +370,29 @@
   }
   else
   {
-    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self _searchArray] objectAtIndex:indexPath.row]];
-    [[self navigationController] pushViewController:tagController animated:YES];
-    [tagController release];
+    if (_searchTarget == SEARCH_TARGET_WORDS)
+    {
+      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[tmpResultArray objectAtIndex:indexPath.row]];
+      [[self navigationController] pushViewController:tagController animated:YES];
+      [tagController release];
+    }
+    else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
+    {
+      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[tmpResultArray objectAtIndex:indexPath.row]];
+      [[self navigationController] pushViewController:tmpVC animated:YES];
+      [tmpVC release];
+    }
   }
   
   // Make sure to deselect
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-
+//! Standard dealloc
 - (void)dealloc
 {
   [self set_searchBar:nil];
-  [self set_searchArray:nil];
+  [self set_cardSearchArray:nil];
   [self set_activityIndicator:nil];
   [super dealloc];
 }
