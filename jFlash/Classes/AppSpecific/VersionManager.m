@@ -41,24 +41,19 @@
 {
   // Get the active database name from settings, compare to the current version.
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *dataVersion = [settings objectForKey:@"data_version"];
+  NSString *dataVersion = [settings objectForKey:APP_DATA_VERSION];
   if (dataVersion == nil)
   {
-    // If we don't have this key, assume it is JFlash 1.0 which did not have this setting
-    // Yet, this code was not in 1.0, so this MUST be yes
-    return YES;
+    // If dataVersion doesn't exist, this is a fresh install first load
+    return NO;
   }
   else
   {
     // Is the active database the current one?
-    if (![dataVersion isEqualToString:JFLASH_CURRENT_VERSION])
-    {
-      return YES;
-    }
-    else
-    {
+    if ([dataVersion isEqualToString:JFLASH_CURRENT_VERSION])
       return NO;
-    }
+    else
+      return YES;
   }
 }
 
@@ -240,7 +235,7 @@
   if (_migraterState == kMigraterReady)
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:@"Opening previous database (1/4)"];
-    [self performSelectorInBackground:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_DATABASE]];
+    [self performSelectorInBackground:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE]];
   }
 }
 

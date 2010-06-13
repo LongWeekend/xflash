@@ -15,13 +15,13 @@
 // Database version constants
 #define JFLASH_DATA_1_0 1
 #define JFLASH_DATA_1_1 2
-// Talk to MMA about these
+// Talk to MMA about these - do NOT edit them
 extern NSString * const JFLASH_VERSION_1_0;
 extern NSString * const JFLASH_VERSION_1_1;
 extern NSString * const JFLASH_CURRENT_VERSION;
 extern NSString * const JFLASH_CURRENT_CARD_DATABASE;
 extern NSString * const JFLASH_CURRENT_USER_DATABASE;
-extern NSString * const JFLASH_10_DATABASE;
+extern NSString * const JFLASH_10_USER_DATABASE;
 extern NSString * const JFLASH_11_CARD_DATABASE;
 extern NSString * const JFLASH_11_USER_DATABASE;
 extern NSString * const JFLASH_10_TO_11_SQL_FILENAME;
@@ -30,7 +30,7 @@ extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main ca
 extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
 extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
 
-// Settings
+// Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
 extern NSString * const SET_J_TO_E;
@@ -40,6 +40,7 @@ extern NSString * const SET_READING_ROMAJI;
 extern NSString * const SET_READING_BOTH;
 
 // Different setting types
+// DO NOT edit these
 extern NSString * const APP_MODE;
 extern NSString * const APP_HEADWORD;
 extern NSString * const APP_READING;
@@ -49,6 +50,8 @@ extern NSString * const APP_PLUGIN;
 extern NSString * const APP_FREQUENCY_MULTIPLIER;
 extern NSString * const APP_MAX_STUDYING;
 extern NSString * const APP_DIFFICULTY;
+extern NSString * const APP_DATA_VERSION;
+extern NSString * const APP_SETTINGS_VERSION;
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"

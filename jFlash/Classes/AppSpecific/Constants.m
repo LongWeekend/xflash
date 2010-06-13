@@ -10,17 +10,17 @@
 // Version numbers & migration constants - DO NOT CHANGE unless you know what you're doing
 NSString * const JFLASH_CURRENT_VERSION       = @"1.1";
 NSString * const JFLASH_CURRENT_CARD_DATABASE = @"jFlash-CARDS-1.1.db";
-NSString * const JFLASH_CURRENT_USER_DATABASE = @"jFlash.db";
+NSString * const JFLASH_CURRENT_USER_DATABASE = @"jFlash-USER-1.1.db";
 
 NSString * const JFLASH_VERSION_1_0           = @"1.0";
 NSString * const JFLASH_VERSION_1_1           = @"1.1";
-NSString * const JFLASH_10_DATABASE           = @"jFlash.db";
+NSString * const JFLASH_10_USER_DATABASE      = @"jFlash.db";
 NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"test_update_10_to_11_sql.txt";
 
 NSString * const JFLASH_11_CARD_DATABASE      = @"jFlash-CARDS-1.1.db";
-NSString * const JFLASH_11_USER_DATABASE      = @"jFlash.db";
+NSString * const JFLASH_11_USER_DATABASE      = @"jFlash-USER-1.1.db";
 
-// Plugin keys
+// Plugin keys - DO NOT change
 NSString *const CARD_DB_KEY = @"CARD_DB";
 NSString *const FTS_DB_KEY = @"FTS_DB";
 NSString *const EXAMPLE_DB_KEY = @"EX_DB";
@@ -35,6 +35,8 @@ NSString * const SET_READING_KANA    = @"KANA";
 NSString * const SET_READING_ROMAJI  = @"ROMAJI";
 NSString * const SET_READING_BOTH    = @"BOTH";
 
+// IF YOU CHANGE THESE VALUES, DEMONS WILL FLY OUT OF YOUR CD-ROM DRIVE AND EAT YOUR SOUL.  INSTANTLY.
+// It will COMPLETELY mess up the ability of our users to upgrade versions.
 NSString * const APP_MODE                 = @"mode";
 NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_READING              = @"reading";
@@ -44,6 +46,12 @@ NSString * const APP_PLUGIN               = @"plugin";
 NSString * const APP_MAX_STUDYING         = @"maxStudying";
 NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
 NSString * const APP_DIFFICULTY           = @"app_difficulty";
+NSString * const APP_DATA_VERSION         = @"data_version";
+NSString * const APP_SETTINGS_VERSION     = @"settings_version";
+
+//------------------------------------------------------------
+// Everything after here can easily be changed across versions
+//------------------------------------------------------------
 
 // Study View Controllers
 NSString * const HTML_FOOTER = @"</div></body></html>";
