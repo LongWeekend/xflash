@@ -59,6 +59,14 @@
 }
 
 
+/** Sets the nav bar tint to the current theme and sets the background to our standard */
+- (void)viewWillAppear: (BOOL)animated
+{
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+}
+
+
 /** Loads the filename into the _webView UIWebView - there should be no extension on the filename (but the actual file should be .html) */
 - (void) _loadPageWithBundleFilename:(NSString*)fname
 {
