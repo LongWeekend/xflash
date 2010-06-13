@@ -14,6 +14,10 @@
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,statusMsgBox,selectedTagId,group,groupId,activityIndicator,searchBar;
 
+/** 
+ * Customized initializer - returns UITableView group as self.view
+ * Also creates tab bar image and sets nav bar title
+ */
 - (id) init
 {
   if (self = [super initWithStyle:UITableViewStyleGrouped])
@@ -21,72 +25,66 @@
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
     self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
+    searching = NO;
+    selectedTagId = -1;
   }
   return self;
 }
 
+/**
+ * Loads view
+ * Programmatically adds search bar into table header view
+ * Registers observers to reload data in case of external changes
+ * Sets up group & tag information
+ * Programmatically creates activity indicator
+ */
 - (void) loadView
 {
   [super loadView];
+  
   // Add the search bar
-  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-  self.searchBar.delegate = self;
-  [[self tableView] setTableHeaderView:searchBar];
-  searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	searching = NO;
-}
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  selectedTagId = -1;
+  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  tmpSearchBar.delegate = self;
+  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  [self setSearchBar:tmpSearchBar];
+  [tmpSearchBar release];
+  [[self tableView] setTableHeaderView:[self searchBar]];
+  
+  // Add add button to nav bar
+  _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
+  self.navigationItem.rightBarButtonItem = _addButton;
   
   // Set this to the master set (main) if no set
   if (self.groupId <= 0) self.groupId = 0;
 
-  // Register listener to reload data if modal added a set
+  // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
-
-  // Register listener to reload data if settings were changed
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
-
-  // Register listener to reload data if a user adds a word to a set from AddTag
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"cardAddedToTag" object:nil];
-
-  // Register listener to reload data if a user deletes a tag from a group
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
-  
-  // Register listener in case user starts set from word list
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
-  
-  // Register listener in case theme was changed (to ensure back button changes color)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToRoot) name:@"themeWasChanged" object:nil];
-
-  _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
-  self.navigationItem.rightBarButtonItem = _addButton;
-
-  // Get this group
+  
+  // Get this group & subgroup data, and finally tags
   [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
-
-  // Get subgroups
   [self reloadSubgroupData];
-
-  // Get tags
-  self.tagArray = [group getTags];
-
+  [self setTagArray:[group getTags]];
+  
   // Activity indicator
-  activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  [self setActivityIndicator:tmpIndicator];
+  [tmpIndicator release];
 }
 
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle: [group groupName]];
+  [self setTitle:[group groupName]];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
+  self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   [self hideSearchBar];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
@@ -105,7 +103,7 @@
 {
 	if (searching)
   {
-    [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
+    [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
   }
   else{
     [self setTagArray: [group getTags]];
@@ -113,21 +111,30 @@
   [[self tableView] reloadData];
 }
 
+/**
+ * Slides the search bar off of the visible space by setting the content offset of the table view
+ */
 - (void) hideSearchBar
 {
-  [[self tableView] setContentOffset:CGPointMake(0, searchBar.frame.size.height)];
+  [[self tableView] setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
 }
 
+/** Shows the root view of StudySetViewController's navigation controller */
 - (void) popToRoot
 {
   [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+/** Convenience method to change set using notification from another place */
 - (void) changeStudySetFromWordList:(NSNotification*)dict
 {
   [self changeStudySet:[[dict userInfo] objectForKey:@"tag"]];
 }
 
+/**
+ * Changes the user's active study set
+ * \param tag Is a Tag object pointing to the tag to begin studying
+ */
 - (void) changeStudySet:(Tag*) tag
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
@@ -140,12 +147,12 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
   
   // Stop the animator
-  [activityIndicator stopAnimating];
+  [[self activityIndicator] stopAnimating];
   selectedTagId = -1;
   [[self tableView] reloadData];
 }
 
-
+/** Pops up AddStudySetInputViewController modal to create a new set */
 - (void)addStudySet
 {
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
@@ -158,15 +165,21 @@
 }
 
 
+
+#pragma mark UITableView methods
+
+/** Goes into editing mode **/
 - (void)setEditing:(BOOL) editing animated:(BOOL)animated
 {
 	[super setEditing:editing animated:animated];
 	[[self tableView] setEditing:editing animated:YES];
 }
 
-#pragma mark UITableView methods
 
-// Override to support editing the table view.
+/**
+ * Allows user to delete the selected tag
+ * Note that this does not accept responsibility for IF the tag SHOULD be deleted
+ */ 
 - (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
@@ -180,6 +193,11 @@
   }
 }
 
+
+/**
+ * If we are searching, there is only one section (returns 1)
+ * If we are not searching, there are groups & tags (returns 2)
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)lclTableView
 {
 	if (searching)
@@ -189,23 +207,32 @@
 }
 
 
+/**
+ * If searching, returns the number of search results.  If no results, returns 1 (no results cell)
+ * If not searching, returns number of tags or groups, depending on section
+ */
 - (NSInteger)tableView:(UITableView *)lclTableView numberOfRowsInSection:(NSInteger)section
 {
 	if (searching)
   {
-    if([[self tagArray] count] > 0)
+    if ([[self tagArray] count] > 0)
       return [[self tagArray] count];
     else
       return 1; // show no results message
   }
-  else{
-    if (section == 1)
+  else
+  {
+    if (section == SECTION_TAG)
       return [[self tagArray] count];
     else
       return [[self subgroupArray] count];
   }
 }
 
+
+/**
+ * Generates cells for table view depending on section & whether or not we are searching
+ */
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
@@ -213,7 +240,7 @@
   ThemeManager *tm = [ThemeManager sharedThemeManager];
 
   // Study Set Cells (ie. a tag)
-  if (indexPath.section == 1 || searching)
+  if (indexPath.section == SECTION_TAG || searching)
   {
     
     // No search results msg
@@ -223,7 +250,7 @@
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      cell.textLabel.text = @"No Results Found";
+      cell.textLabel.text = NSLocalizedString(@"No Results Found",@"StudySetViewController.SearchedButNoResults");
       cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     }
     // Normal cell display
@@ -253,7 +280,7 @@
       }
       if (selectedTagId == indexPath.row)
       {
-        cell.accessoryView = activityIndicator;
+        cell.accessoryView = [self activityIndicator];
         cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
       }
     }
@@ -298,10 +325,10 @@
 }
 
 
-//! UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group)
+/** UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group) */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == 1 || searching)
+  if (indexPath.section == SECTION_TAG || searching)
   {
     if([tagArray count] > 0)
     {
@@ -343,14 +370,14 @@
   }
 }
 
-//! Alert view delegate - initiates the "study set change" if they pressed OK
+/** Alert view delegate - initiates the "study set change" if they pressed OK */
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   // This is the OK button
   if (buttonIndex == 1)
   {
     [[self tableView] reloadData];
-    [activityIndicator startAnimating];
+    [[self activityIndicator] startAnimating];
     [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
     return;
   }
@@ -360,9 +387,14 @@
   }
 }
 
+
+/**
+ * If tag section OR in searching mode (where it becomes another section)
+ * Show the study set words view controller for that tag
+ */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == 1 || searching)
+  if (indexPath.section == SECTION_TAG || searching)
   {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
@@ -372,16 +404,25 @@
   }
 }
 
+
+/**
+ * If the tag's "tagEditable" flag is set to 1, return YES
+ * Returns NO in any case if the tag is the active tag
+ * Always returns NO for groups
+ */
 - (BOOL)tableView:(UITableView *)lclTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // Only can edit tags, and user tags at that
-  if (indexPath.section == 1)
+  if (indexPath.section == SECTION_TAG)
   {
+    CurrentState *state = [CurrentState sharedCurrentState];
     Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];
-    if (tmpTag.tagEditable == 1) return YES;
-    else return NO;
+    if ([tmpTag tagEditable] && ([[state activeTag] tagId] != [tmpTag tagId]))
+    {
+      return YES;
+    }
   }
-  else return NO;
+  return NO;
 }
 
 #pragma mark -
@@ -418,7 +459,7 @@
 	[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 	
 	searching = YES;
-  [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
+  [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
   [[self tableView] setScrollEnabled:NO];
 	
 	//Add the done button.
@@ -454,14 +495,17 @@
 // TODO: MMA 6_12_2010 - does this ever get called?
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
-  [self setTagArray: [TagPeer retrieveTagListLike:searchBar.text]];
+  [self setTagArray:[TagPeer retrieveTagListLike:self.searchBar.text]];
   [searchBar resignFirstResponder];
 }
 
-
+/** 
+ * Cleanup after searching finished
+ * Hides keyboard, nulls out searchBar text, and re-adds add button to nav bar
+ */
 - (void) doDoneSearching
 {
-	searchBar.text = @"";
+	self.searchBar.text = @"";
 	[searchBar resignFirstResponder];
 	searching = NO;
   [[self tableView] setScrollEnabled:YES];
@@ -476,17 +520,17 @@
 	_searchOverlay = nil;
 }
 
-
+//! Standard dealloc, removes observers
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  [activityIndicator release];
   [_addButton release];
   [statusMsgBox release];
   [tagArray release];
   [subgroupArray release];
   [group release];
-  [searchBar release];
+  [self setActivityIndicator:nil];
+  [self setSearchBar:nil];
   [super dealloc];
 }
 

@@ -12,6 +12,9 @@
 #import "TagPeer.h"
 #import "GroupPeer.h"
 
+#define SECTION_TAG 1
+#define SECTION_GROUP 0
+
 @interface StudySetViewController : UITableViewController <UISearchBarDelegate>
 {
   Group *group;
