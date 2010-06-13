@@ -25,7 +25,7 @@
                            @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
                            @"",@"plugin_notes_file",
-                           @"http://localhost/~phooze/jFlash-CARDS-v1.1.db.gz",@"target_url",
+                           @"http://marks-apple.local/~phooze/jFlash-CARDS-1.1.db.gz",@"target_url",
                            [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",nil],CARD_DB_KEY,
                          
                            // FTS
@@ -34,8 +34,8 @@
                             @"Awesomely Fast Search",@"plugin_name",
                             @"full-text-search",@"plugin_notes_file",
                             @"Adds sub-second full dictionary search (13MB)",@"plugin_details",
-                            @"http://localhost/~phooze/jFlash-FTS-v1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-v1.1.db"],@"target_path",nil],FTS_DB_KEY,
+                            @"http://marks-apple.local/~phooze/jFlash-FTS-1.1.db.gz",@"target_url",
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
@@ -43,11 +43,20 @@
                             @"50,000+ Example Sentences",@"plugin_name",
                             @"example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (20MB)",@"plugin_details",
-                            @"http://localhost/~phooze/jFlash-EX-v1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-v1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,
+                            @"http://marks-apple.local/~phooze/jFlash-EX-1.1.db.gz",@"target_url",
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,
                            nil];
   }
   return self;
+}
+
+
+/**
+ * Returns a dictionary with KEY => plugin filename of preinstalled plugins
+ */
++ (NSDictionary*) preinstalledPlugins;
+{
+  return [NSDictionary dictionaryWithObjectsAndKeys:[LWEFile createBundlePathWithFilename:JFLASH_CURRENT_CARD_DATABASE],CARD_DB_KEY,nil];
 }
 
 
@@ -94,7 +103,7 @@
   BOOL success = YES;
   // Add each plugin database if it exists
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSMutableDictionary *plugins = [settings objectForKey:@"plugins"];
+  NSMutableDictionary *plugins = [settings objectForKey:APP_PLUGIN];
   NSEnumerator *keyEnumerator = [plugins keyEnumerator];
   NSString *key;
   while (key = [keyEnumerator nextObject])
@@ -201,14 +210,14 @@
 {
   // Update the settings so we maintain this on startup
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSDictionary *pluginSettings = [settings objectForKey:@"plugins"];
+  NSDictionary *pluginSettings = [settings objectForKey:APP_PLUGIN];
   if (pluginSettings)
   {
     // This means we already have a settings database (e.g. not first load)
     LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,filename);
     NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
     [tmpDict setObject:filename forKey:pluginKey];
-    [settings setValue:tmpDict forKey:@"plugins"];
+    [settings setValue:tmpDict forKey:APP_PLUGIN];
   }
   else
   {

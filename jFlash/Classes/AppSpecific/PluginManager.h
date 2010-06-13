@@ -17,6 +17,7 @@
   NSDictionary *_availablePlugins;        //! Maintains in memory a list of available plugins to this software version
 }
 
++ (NSDictionary*) preinstalledPlugins;
 - (BOOL) pluginIsLoaded:(NSString*)name;
 - (BOOL) disablePlugin:(NSString*)name;
 - (BOOL) loadInstalledPlugins;
