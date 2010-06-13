@@ -15,7 +15,7 @@
 #define SECTION_TAG 1
 #define SECTION_GROUP 0
 
-@interface StudySetViewController : UITableViewController <UISearchBarDelegate>
+@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate>
 {
   Group *group;
   NSMutableArray *tagArray;

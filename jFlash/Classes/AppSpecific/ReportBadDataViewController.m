@@ -113,6 +113,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                               [[self userMsgInputBox] text],@"user_message",
                               [[self userEmailBox] text],@"user_email",
                               membership,@"tag_membership",nil];
+  LWE_DICT_DUMP(dataToSend);
   LWE_LOG(@"Generated data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
 #if defined(APP_STORE_FINAL)
   [FlurryAPI logEvent:@"userBadDataReport" withParameters:dataToSend];

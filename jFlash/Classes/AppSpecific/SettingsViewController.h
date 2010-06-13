@@ -15,7 +15,7 @@ extern NSString * const APP_ABOUT;
 extern NSString * const APP_TWITTER;
 extern NSString * const APP_FACEBOOK;
 
-@interface SettingsViewController : UITableViewController <UIWebViewDelegate>
+@interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
 {
   NSMutableArray *sectionArray;
   NSDictionary *settingsDict;

@@ -498,7 +498,10 @@
   NSString *contentLength = [[request responseHeaders] objectForKey:@"Content-Length"];
   if (contentLength)
   {
+    // TODO: if status is anything other than 2xx, freak out!
+    LWE_DICT_DUMP([request responseHeaders]);
     requestSize = [contentLength intValue];
+    LWE_LOG(@"Request size: %d",requestSize);
     [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
   }
   else

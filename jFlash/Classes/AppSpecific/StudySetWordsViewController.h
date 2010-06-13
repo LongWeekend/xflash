@@ -26,7 +26,7 @@ enum wordsSections
   wordsSectionsLength
 };
 
-@interface StudySetWordsViewController : UITableViewController 
+@interface StudySetWordsViewController : UITableViewController <UITableViewDelegate>
 {
 	Tag* tag;
 	NSMutableArray* cards;

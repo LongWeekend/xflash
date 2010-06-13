@@ -10,7 +10,8 @@
 
 #define SOURCETYPE UIImagePickerControllerSourceTypePhotoLibrary
 
-@interface UserImagePicker : UIImagePickerController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface UserImagePicker : UIImagePickerController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
   UIImage* selectedImage;
 }
 

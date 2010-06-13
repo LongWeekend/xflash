@@ -208,7 +208,7 @@ enum EntrySectionRows
   // setup the cell for the full entry
   if(indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [self getReadingString], [currentCard meaningWithoutMarkup]];
+    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard combinedReadingForSettings], [currentCard meaningWithoutMarkup]];
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
     [label setLineBreakMode:UILineBreakModeWordWrap];
     [label setMinimumFontSize:FONT_SIZE];

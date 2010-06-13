@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PluginManager.h"
 
-@interface PluginSettingsViewController : UITableViewController
+@interface PluginSettingsViewController : UITableViewController <UITableViewDelegate>
 {
   IBOutlet UITableView* tableView;
   NSArray *installedPlugins;
