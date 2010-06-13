@@ -17,6 +17,16 @@
 		490820A611B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		4912678311C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */; };
 		491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */; };
+		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
+		491D7B2A11C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
+		491D7C4811C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */; };
+		491D7C4911C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */; };
+		491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
+		491D7C4C11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
+		491D7D0311C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */; };
+		491D7D0411C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */; };
+		491D7D0711C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
+		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		491FE3AF11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
@@ -30,7 +40,6 @@
 		4951E15F11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4951E1ED11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
-		495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */; };
 		495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
 		495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
@@ -75,8 +84,6 @@
 		49F968FB11AF652D00DFC3C9 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
 		49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */; };
 		49F9692811AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */; };
-		49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49F96A0C11AF996600DFC3C9 /* jFlash.db */; };
-		49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49F96A0C11AF996600DFC3C9 /* jFlash.db */; };
 		49FD235F101C121D0081F883 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 49FD235E101C121D0081F883 /* icon.png */; };
 		49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
@@ -225,6 +232,13 @@
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
 		4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "jflash-1.1-features-actionsheet.png"; path = "Assets/jflash-1.1-features-actionsheet.png"; sourceTree = "<group>"; };
 		491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_update_10_to_11_sql.txt; sourceTree = "<group>"; };
+		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
+		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
+		491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
+		491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-USER-1.1.db"; path = "sql/jFlash-USER-1.1.db"; sourceTree = "<group>"; };
+		491D7D0111C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
+		491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
+		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		491FE3AB11BA0B5700A54F51 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "Assets/twitter-icon.png"; sourceTree = "<group>"; };
 		491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "Assets/facebook-icon.png"; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
@@ -239,7 +253,6 @@
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
-		495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
 		495C5A0611BFB9370006DD01 /* example-sentences.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "example-sentences.html"; path = "Assets/example-sentences.html"; sourceTree = "<group>"; };
 		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
@@ -276,7 +289,6 @@
 		49F968F911AF652D00DFC3C9 /* LWEDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEDownloader.m; path = Reusable/LWE/LWEDownloader.m; sourceTree = "<group>"; };
 		49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlashAppDelegate.h; path = AppSpecific/jFlashAppDelegate.h; sourceTree = "<group>"; };
 		49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlashAppDelegate.m; path = AppSpecific/jFlashAppDelegate.m; sourceTree = "<group>"; };
-		49F96A0C11AF996600DFC3C9 /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		49FD235E101C121D0081F883 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "tametheme-cookie-cutters"; path = "Assets/tametheme-cookie-cutters"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -526,9 +538,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				49075BD6114E641500EDAABB /* Views */,
 				917A5C8611AB851E00016BD2 /* Objects */,
 				DA8B6A560FB1121000DE105C /* Models */,
-				49075BD6114E641500EDAABB /* Views */,
 				DA8B6A4B0FB111D600DE105C /* Controllers */,
 				499E5AE70FF4D3ED006926A2 /* Helpers */,
 			);
@@ -574,11 +586,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */,
+				491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
 				91EA2F4B104135E200AB848E /* dist.plist */,
 				494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */,
-				495C58F611BF55350006DD01 /* jFlash-CARDS-1.1.db */,
-				49F96A0C11AF996600DFC3C9 /* jFlash.db */,
 				491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
@@ -910,6 +922,7 @@
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
 				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
+				491D7D0611C4EFFE00BF8323 /* SentenceView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
@@ -937,6 +950,8 @@
 				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214F4711B601490091AFEF /* CardViewController.h */,
 				91214F4811B601490091AFEF /* CardViewController.m */,
+				491D7D0111C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.h */,
+				491D7D0211C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m */,
 				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
 				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
 				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
@@ -998,6 +1013,8 @@
 				917A5BF511AB7CD700016BD2 /* TagPeer.m */,
 				917A5BF611AB7CD700016BD2 /* User.h */,
 				917A5BF711AB7CD700016BD2 /* User.m */,
+				491D7B2711C4776C00BF8323 /* UserPeer.h */,
+				491D7B2811C4776C00BF8323 /* UserPeer.m */,
 				917A5BF811AB7CD700016BD2 /* UserHistoryPeer.h */,
 				917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */,
 				91CBA6BD11BB6AC0004BD0D0 /* ExampleSentence.h */,
@@ -1175,7 +1192,6 @@
 				917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */,
 				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
 				49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
-				49F96A0D11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
 				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
 				4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */,
@@ -1189,7 +1205,6 @@
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
 				491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */,
 				49A8232211BE382E00395E62 /* release-notes.html in Resources */,
-				495C58F711BF55350006DD01 /* jFlash-CARDS-1.1.db in Resources */,
 				495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */,
 				495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */,
 				4912678311C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png in Resources */,
@@ -1204,6 +1219,9 @@
 				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
 				49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */,
 				49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */,
+				491D7C4811C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */,
+				491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */,
+				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,7 +1237,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49F9686A11AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
-				49F96A0E11AF996600DFC3C9 /* jFlash.db in Resources */,
 				49FE152D11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
 				49CDD32F11B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
 				4951E0FE11B61F7D00FCE21E /* CardView.xib in Resources */,
@@ -1228,6 +1245,9 @@
 				490820A611B7959500150499 /* PluginSettingsView.xib in Resources */,
 				491FE3AF11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3E011BA0EAF00A54F51 /* facebook-icon.png in Resources */,
+				491D7C4911C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */,
+				491D7C4C11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */,
+				491D7D0711C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1341,6 +1361,8 @@
 				91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */,
 				49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */,
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
+				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
+				491D7D0311C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,6 +1395,8 @@
 				49BE199211B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */,
 				4950C25411B764B200B70EE9 /* PluginManager.m in Sources */,
 				4908209A11B794A500150499 /* PluginSettingsViewController.m in Sources */,
+				491D7B2A11C4776C00BF8323 /* UserPeer.m in Sources */,
+				491D7D0411C4EDAA00BF8323 /* DisplaySearchedSentenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
