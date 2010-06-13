@@ -31,11 +31,13 @@
   srandomdev();
   
   // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
+  // Seriously.  If you don't call this before ANY jFlash user code, you run this risk of making jFlash's 
+  // upgrade path ABSOLUTELY unstable.  Capiche?
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
 
   // Load root controller to show splash screen
-  self.rootViewController = [[RootViewController alloc] init];
+  [self setRootViewController:[[RootViewController alloc] init]];
 	[window addSubview:rootViewController.view];
   [window makeKeyAndVisible];
   
@@ -57,13 +59,15 @@ void uncaughtExceptionHandler(NSException *exception) {
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* pathToDatabase = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_DATABASE];
+  NSString *filename = [LWEDatabase userDatabaseFilename];
+  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
     // Register a notification to wait here for the success, then do the DB copy
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:@"DatabaseCopyFinished" object:nil];
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [[self rootViewController] showDatabaseLoadingView];
+    // Only ever copy the latest user database
     [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:JFLASH_CURRENT_USER_DATABASE];
   }
   else
@@ -85,7 +89,8 @@ void uncaughtExceptionHandler(NSException *exception) {
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if ([db openDatabase:[LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_DATABASE]])
+  NSString *filename = [LWEDatabase userDatabaseFilename];
+  if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Then load plugins
     [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];
@@ -93,6 +98,7 @@ void uncaughtExceptionHandler(NSException *exception) {
   else
   {
     // Could not open database!
+    [NSException raise:@"DatabaseFileNotFound" format:@"Looked for file: %@",[LWEFile createDocumentPathWithFilename:filename]];
   }
   [self.rootViewController loadTabBar];
 }
@@ -109,9 +115,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 //! Standard dealloc
 - (void)dealloc
 {
-	[rootViewController release];
-	[window release];
-	[super dealloc];
+	[self setRootViewController:nil];
+	[self setWindow:nil];
+  [super dealloc];
   
   // Handle all singletons
   CurrentState* state = [CurrentState sharedCurrentState];

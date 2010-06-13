@@ -242,14 +242,8 @@
 //! toggles the readingVisible bool and calls setupReadingVisibility
 - (IBAction) doToggleReadingBtn
 {
-  if ([self readingVisible])
-  {
-    [self setReadingVisible: NO];
-  }
-  else
-  {
-    [self setReadingVisible: YES];
-  }
+  // Toggle
+  [self setReadingVisible:(![self readingVisible])];
   [self setupReadingVisibility];
 }
 

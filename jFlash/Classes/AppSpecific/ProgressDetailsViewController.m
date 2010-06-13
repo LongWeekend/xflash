@@ -7,13 +7,15 @@
 //
 
 #import "ProgressDetailsViewController.h"
+#import "UserPeer.h"
 
 @implementation ProgressDetailsViewController
 @synthesize closeBtn, currentStudySet, motivationLabel, levelDetails, streakLabel, rightStreak, wrongStreak;
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, cardsWrongAllTime, cardsRightAllTime, progressViewTitle;
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
   self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7 ];
   [self drawProgressBars];
@@ -21,11 +23,12 @@
   [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  User* user = [User getUser:[settings integerForKey:@"user_id"]];
+  User* user = [UserPeer getUserByPK:[settings integerForKey:@"user_id"]];
   [progressViewTitle setText:[NSString stringWithFormat:NSLocalizedString(@"%@'s Progress",@"ProgressDetailsViewController.Title"), [user userNickname]]];
 }
 
-- (void)setStreakLabel{
+- (void)setStreakLabel
+{
   NSString* streakText;
   if(wrongStreak > 0)
   {
@@ -81,19 +84,22 @@
 }
 
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
 
-- (IBAction) dismiss {
+- (IBAction) dismiss
+{
   [self.view removeFromSuperview];
   [self release];
 }
 
 
-- (void)dealloc {
+- (void)dealloc
+{
   [levelDetails release];
   [cardSetProgressLabel0 release];
   [cardSetProgressLabel1 release];

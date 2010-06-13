@@ -332,9 +332,7 @@
   webView.opaque = NO;
   
   NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFile] ofType:@"html"];
-  LWE_LOG(@"Filename is: %@",filename);
   NSURL *url = [NSURL fileURLWithPath:filename];
-  LWE_LOG(@"URL is: %@",url);
 
   [webView loadRequest:[NSURLRequest requestWithURL:url]];
   [self.view addSubview:webView];
