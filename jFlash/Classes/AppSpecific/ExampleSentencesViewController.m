@@ -83,14 +83,13 @@
 {
   [self _exampleSentencesViewWillSetup];
   // the datasource must implement currentcard or we don't set any data
-  //TODO: what's wrong with @selector(currentCard) -- MMA 6/10/2010  -- is it because of warnings?
-  if([datasource respondsToSelector: NSSelectorFromString(@"currentCard")])
+  if([datasource respondsToSelector:@selector(currentCard)])
   {
     NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
     [[self headwordLabel] setText: mungedHeadWordWithReading];
     
-    // TODO : test code for the example sentences model
-    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:1];
+    // Get all sentences out
+    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
   }
   [self _exampleSentencesViewDidSetup];
 }
