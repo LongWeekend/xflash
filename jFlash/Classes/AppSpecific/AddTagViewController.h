@@ -10,9 +10,7 @@
 #import "AddStudySetInputViewController.h"
 #import "TagPeer.h"
 
-#define FONT_SIZE 14.0f
-#define CELL_CONTENT_WIDTH 300.0f
-#define CELL_CONTENT_MARGIN 10.0f
+#define FONT_SIZE 14
 
 @interface AddTagViewController : UIViewController
 {
@@ -30,7 +28,6 @@
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId;
 - (void) reloadTableData;
 - (void) addStudySet;
-- (NSString*) getReadingString;
 - (void) restrictMembershipChangeForTagId:(NSInteger) tagId;
 
 

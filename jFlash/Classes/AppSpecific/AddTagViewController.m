@@ -28,31 +28,33 @@ enum EntrySectionRows
 /**
  * Initializer - automatically loads AddTagView XIB file
  * attaches the Card parameter to the object
+ * Also sets up nav bar properties
  */
 - (id) initWithCard:(Card*) card
 {
   if (self = [super initWithNibName:@"AddTagView" bundle:nil])
   {
-    self.cardId = [card cardId];
-    self.currentCard = card;
+    [self setCardId:[card cardId]];
+    [self setCurrentCard:card];
+    [self setMyTagArray:[TagPeer retrieveMyTagList]];
+    [self setSysTagArray:[TagPeer retrieveSysTagList]];
+
+    // Add "add" button to nav bar
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    [addButton release];
+
+    // Set nav bar title
+    self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
+
+    // Register listener to reload data if modal added a set
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
   }
   return self;
 }
 
-- (void) viewDidLoad
-{
-  [super viewDidLoad];
-  [self setMyTagArray:[TagPeer retrieveMyTagList]];
-  [self setSysTagArray:[TagPeer retrieveSysTagList]];
- 
-  UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
-  self.navigationItem.rightBarButtonItem = addButton;
-  self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
-  [addButton release];
-  // Register listener to reload data if modal added a set
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
-}
-
+#pragma mark -
+#pragma mark UIViewDelegate methods
 
 /** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
 - (void)viewWillAppear:(BOOL)animated
@@ -67,13 +69,8 @@ enum EntrySectionRows
   self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
 }
 
-
-//! Returns the total number of enum values in "Sections" enum
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return NUM_SECTIONS;
-}
-
+#pragma mark -
+#pragma mark Class Methods
 
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
 - (void)addStudySet
@@ -86,12 +83,14 @@ enum EntrySectionRows
 }
 
 
+/** Recreates tag membership caches and reloads table view */
 - (void) reloadTableData
 {
   [self setMyTagArray:[TagPeer retrieveMyTagList]];
   [self setMembershipCacheArray:[TagPeer membershipListForCardId:[self cardId]]];
   [[self studySetTable] reloadData];
 }
+
 
 /**
  * If set, stops the user from changing membership for a given set.  Useful for restricting the
@@ -144,6 +143,14 @@ enum EntrySectionRows
   }
 }
 
+#pragma mark -
+#pragma mark UITableViewDelegate methods
+
+//! Returns the total number of enum values in "Sections" enum
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return NUM_SECTIONS;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -166,29 +173,19 @@ enum EntrySectionRows
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == kMyTagsSection)
-  {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
-  }
-  else if(section == kSystemTagsSection)
-  {
+  else if (section == kSystemTagsSection)
     return NSLocalizedString(@"All Sets",@"AddTagViewController.TableHeader_AllSets");
-  }
   else
-  {
     return currentCard.headword;
-  }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  if(indexPath.section == kEntrySection)
+  if (indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [self getReadingString], [currentCard meaningWithoutMarkup]];
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height;
-
-    return height + (CELL_CONTENT_MARGIN * 2);
+    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard combinedReadingForSettings], [currentCard meaningWithoutMarkup]];
+    return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
   else 
   {
@@ -218,9 +215,9 @@ enum EntrySectionRows
     [label setNumberOfLines:0];
     [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
     [label setText:text];
-    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    [label setFrame:CGRectMake(CELL_CONTENT_MARGIN, CELL_CONTENT_MARGIN, CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), MAX(size.height, 44.0f))];
+
+    CGRect rect = [LWEUILabelUtils makeFrameForText:text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
+    [label setFrame:rect];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [[cell contentView] addSubview:label];
@@ -322,28 +319,8 @@ enum EntrySectionRows
 }
 
 
-/** Return a string of the card's reading, depending on user settings (romaji, kana, etc) */
--(NSString*) getReadingString
-{
-  NSString *readingStr;
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
-  {
-    // KANA READING
-    readingStr = [NSString stringWithFormat:@"%@", currentCard.reading];
-  } 
-  else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
-  {
-    // ROMAJI READING
-    readingStr = [NSString stringWithFormat:@"%@", currentCard.romaji];
-  }
-  else
-  {
-    // BOTH READINGS
-    readingStr = [NSString stringWithFormat:@"%@ / %@", currentCard.reading, currentCard.romaji ];
-  }
-  return readingStr;
-}
+#pragma mark -
+#pragma mark Class plumbing
 
 //! Standard dealloc
 - (void)dealloc
