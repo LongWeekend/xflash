@@ -293,6 +293,9 @@
   {
     // Default to the same behavior if we have NO search results as well as having them
     case kSearchNoSearch:
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoSearch" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+      break;
+      
     case kSearchHasResults:
       cell = [LWEUITableUtils reuseCellForIdentifier:[NSString stringWithFormat:@"Record-%d",_searchTarget] onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       if (_searchTarget == SEARCH_TARGET_WORDS)

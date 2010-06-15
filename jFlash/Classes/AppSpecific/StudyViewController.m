@@ -133,6 +133,7 @@
   }
   else	
   {
+    [scrollView setScrollEnabled:NO];
     [[self tapForAnswerImage] setHidden:NO];
     [[self revealCardBtn] setHidden:NO];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
@@ -225,6 +226,7 @@
 {
   [[self revealCardBtn] setHidden:YES];
   [[self tapForAnswerImage] setHidden:YES];
+  [scrollView setScrollEnabled:YES];
   [cardViewController reveal];
   [actionBarController reveal];
 }
@@ -439,8 +441,10 @@
 	[scrollView setCanCancelContentTouches:NO];
 	
 	scrollView.clipsToBounds = YES;
-	scrollView.scrollEnabled = YES;
 	scrollView.pagingEnabled = YES;
+
+	// This stays NO until "reveal" sets it to yes.  Then setupViewForCard will set it to NO again.
+  scrollView.scrollEnabled = NO;
   
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
