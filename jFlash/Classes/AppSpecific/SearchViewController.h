@@ -14,6 +14,15 @@
 #define SEARCH_TARGET_WORDS 0
 #define SEARCH_TARGET_EXAMPLE_SENTENCES 1
 
+//! State machine for searching
+typedef enum searchStates
+{
+  kSearchNoSearch,              //! Default state when not searching
+  kSearchHasResults,            //! Any search returned results 
+  kSearchHasNoResults,          //! Regular search returned nothing
+  kSearchDeepHasNoResults,      //! Deep search returned nothing
+} _searchStates;
+
 /**
  * Handles dictionary-like search functions inside JFlash
  */
@@ -26,12 +35,11 @@
   UISearchBar *_searchBar;                        //! Holds the instance to the UISearchBar
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
   BOOL _showSearchTargetControl;                  //! If NO, the "pill" control will not be shown
-  BOOL _searchRan;                                //! YES if the user ran a search (reset when they change the text to NO)
-  BOOL _deepSearchRan;                            //! YES if the user ran a deep search (reset when they change the text to NO)
+  NSInteger _searchState;                         //! Holds the "state" of the search
+  NSMutableArray *_currentResultArray;            //! Holds the current results (switched when the user switches the pill control)
 }
 
-- (void) runSlowSearch;
-- (void) runSearchForString:(NSString*)text isSlowSearch:(BOOL)runSlowSearch;
+- (void) runSearchForString:(NSString*)text;
 - (void) changeSearchTarget:(id)sender;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
 - (void) _addSearchControlToHeader;

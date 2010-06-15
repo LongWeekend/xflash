@@ -14,8 +14,11 @@
 + (Card*) retrieveCardByLevel: (NSInteger)levelId setId:(NSInteger)setId withRandom: (NSInteger) randomNum;
 + (Card*) hydrateCardByPK: (Card*) card;
 
-//! Array of cards methods
+// TODO: deprecate/get rid of this method in favor of the one below it
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate;
+
+//! Array of cards methods
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
 + (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
 + (NSMutableArray*) retrieveCardIdsSortedByLevel: (NSInteger) tagId;
 + (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;

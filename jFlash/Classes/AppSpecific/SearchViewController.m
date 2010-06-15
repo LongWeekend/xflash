@@ -28,6 +28,10 @@
     _showSearchTargetControl = [[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY];
     _searchTarget = SEARCH_TARGET_WORDS;
     
+    // Default state
+    _searchState = kSearchNoSearch;
+    _currentResultArray = nil;
+    
     // Register an observer for the example sentences
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
   }
@@ -84,9 +88,6 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self._searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
-  _searchRan = NO;
-  _deepSearchRan = NO;
-  
   // Fire off a notification to bring up the downloader?
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if (![pm pluginIsLoaded:FTS_DB_KEY])
@@ -98,9 +99,9 @@
   else
   {
     self._searchBar.placeholder = NSLocalizedString(@"Enter search keyword",@"SearchViewController.SearchBarPlaceholder_douzo");
-    // Show keyboard if no results
-    if ([self _cardSearchArray] == nil || [[self _cardSearchArray] count] == 0)
+    if (_searchState == kSearchNoSearch)
     {
+      // Show keyboard if no results
       [[self _searchBar] becomeFirstResponder];
     }
   }
@@ -144,8 +145,10 @@
 {
   if ([sender respondsToSelector:@selector(selectedSegmentIndex)])
   {
-    // Reload the table
     _searchTarget = [sender selectedSegmentIndex];
+    _currentResultArray = nil;
+    _searchState = kSearchNoSearch;
+    [[self _searchBar] becomeFirstResponder];
     [[self tableView] reloadData];
   }
   else
@@ -192,8 +195,9 @@
 /** Run the search and resign the keyboard */
 - (void) searchBarSearchButtonClicked:(UISearchBar *)lclSearchBar
 {
-  _deepSearchRan = NO;
-  [self runSearchForString:[[self _searchBar] text] isSlowSearch:NO];
+  // Reset the state machine
+  _searchState = kSearchNoSearch;
+  [self runSearchForString:[[self _searchBar] text]];
   [lclSearchBar resignFirstResponder];
 }
 
@@ -203,21 +207,34 @@
   [lclSearchBar resignFirstResponder];
 }
 
-/** convenience method for performSelectorInBackground */
-- (void) runSlowSearch
-{
-  _deepSearchRan = YES;
-  [self runSearchForString:[[self _searchBar] text] isSlowSearch:YES];
-}
-
 /** Execute actual search with \param text. Designed to be called in background thread */
-- (void) runSearchForString:(NSString*)text isSlowSearch:(BOOL)runSlowSearch
+- (void) runSearchForString:(NSString*) text
 {
-  _searchRan = YES;
+  // Do we want a slow search?
+  BOOL runSlowSearch = NO;
+  if (_searchState == kSearchHasNoResults) runSlowSearch = YES;
+  
+  NSMutableArray *tmpResults = nil;
   if (_searchTarget == SEARCH_TARGET_WORDS)
-    [self set_cardSearchArray:[CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch]];
+  {
+    tmpResults = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
+    [self set_cardSearchArray:tmpResults];
+    _currentResultArray = [self _cardSearchArray];
+  }
   else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
-    [self set_sentenceSearchArray:[ExampleSentencePeer searchSentencesForKeyword:text doSlowSearch:runSlowSearch]];
+  {
+    tmpResults = [ExampleSentencePeer searchSentencesForKeyword:text doSlowSearch:runSlowSearch];
+    [self set_sentenceSearchArray:tmpResults];
+    _currentResultArray = [self _sentenceSearchArray];
+  }
+  
+  // Change state based on results (move us through state diagram --> has results -> no results -> no deep results)
+  if ([tmpResults count] > 0)
+    _searchState = kSearchHasResults;
+  else if (_searchState == kSearchHasNoResults)
+    _searchState = kSearchDeepHasNoResults;
+  else
+    _searchState = kSearchHasNoResults;
 
   [[self _activityIndicator] stopAnimating];
   [[self tableView] reloadData];
@@ -247,54 +264,67 @@
 /** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if([[self _cardSearchArray] count] == 0 && _searchRan)
-    return 1;  // one row to say there are no results
-  else
-    return [[self _cardSearchArray] count];
+  if (_searchState == kSearchHasNoResults || _searchState == kSearchDeepHasNoResults)
+  {
+    return 1;
+  }
+  else 
+  {
+    if (_currentResultArray)
+    {
+      // Some results
+      return [_currentResultArray count];
+    }
+    else
+    {
+      // Nothing searched for
+      return 0;
+    }
+  }
 }
 
 
 /** Delegate for table, returns cells */
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  // Get different kinds of cells depending on the state
   UITableViewCell *cell;
-  if([[self _cardSearchArray] count] == 0 && _searchRan && _deepSearchRan)
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
-  else
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"SearchRecord" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-  
-  // Determine what kind of cell it is to set the properties
-  if([[self _cardSearchArray] count] == 0 && _searchRan)
+  switch (_searchState)
   {
-    cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
-
-    // Depending on what kind of search, do things slightly differently
-    if (_deepSearchRan)
-    {
-      cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    else
-    {
+    // Default to the same behavior if we have NO search results as well as having them
+    case kSearchNoSearch:
+    case kSearchHasResults:
+      cell = [LWEUITableUtils reuseCellForIdentifier:[NSString stringWithFormat:@"Record-%d",_searchTarget] onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+      if (_searchTarget == SEARCH_TARGET_WORDS)
+      {
+        Card* searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+        cell = [self setupTableCell:cell forCard:searchResult];
+      }
+      else
+      {
+        ExampleSentence *searchResult = [[self _sentenceSearchArray] objectAtIndex:indexPath.row];
+        cell = [self setupTableCell:cell forSentence:searchResult];
+      }
+      break;
+      
+    // Regular search had no results
+    case kSearchHasNoResults:
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+      cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
       cell.detailTextLabel.text = NSLocalizedString(@"Tap here to do a DEEP search.",@"SearchViewController.DoDeepSearch");
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
       cell.accessoryView = [self _activityIndicator];
-    }
-  }
-  else
-  {
-    if (_searchTarget == SEARCH_TARGET_WORDS)
-    {
-      Card* searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
-      cell = [self setupTableCell:cell forCard:searchResult];
-    }
-    else
-    {
-      ExampleSentence *searchResult = [[self _sentenceSearchArray] objectAtIndex:indexPath.row];
-      cell = [self setupTableCell:cell forSentence:searchResult];
-    }
+      break;
+
+    // Ran deep search, still nothing
+    case kSearchDeepHasNoResults:
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults-DEEP" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+      cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      break;
   }
   return cell;
 }
@@ -345,46 +375,31 @@
  */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  // First, get the appropriate result array
-  NSMutableArray *tmpResultArray = nil;
-  if (_searchTarget == SEARCH_TARGET_WORDS)
+  if (_searchState == kSearchHasNoResults)
   {
-    tmpResultArray = [self _cardSearchArray];
-  }
-  else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
-  {
-    tmpResultArray = [self _sentenceSearchArray];
-  }
-
-  // if we already did a deep search we can't help them
-  if ([tmpResultArray count] == 0 && _deepSearchRan)
-  {
-    return;
-  }
-  else if ([tmpResultArray count] == 0)
-  {
+    // Do deep search
     [[self _activityIndicator] startAnimating];
     // Run selector after delay to allow UIVIew to update on run loop
-    [self performSelector:@selector(runSlowSearch) withObject:nil afterDelay:0];
+    [self performSelector:@selector(runSearchForString:) withObject:[[self _searchBar] text] afterDelay:0];
     return;
   }
-  else
+  else if (_searchState == kSearchHasResults)
   {
+    // Load child controller onto nav stack
     if (_searchTarget == SEARCH_TARGET_WORDS)
     {
-      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[tmpResultArray objectAtIndex:indexPath.row]];
+      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self _cardSearchArray] objectAtIndex:indexPath.row]];
       [[self navigationController] pushViewController:tagController animated:YES];
       [tagController release];
     }
     else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
     {
-      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[tmpResultArray objectAtIndex:indexPath.row]];
+      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[[self _sentenceSearchArray] objectAtIndex:indexPath.row]];
       [[self navigationController] pushViewController:tmpVC animated:YES];
       [tmpVC release];
     }
   }
   
-  // Make sure to deselect
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

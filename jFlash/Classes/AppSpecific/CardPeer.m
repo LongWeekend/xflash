@@ -177,9 +177,20 @@
 
 
 /**
+ * Calls retrieveCardSetWithSQL:hydrate:isBasicCard where basic card is set to NO
+ * This is here for legacy reasons only, could be refactored out later
+ * TODO
+ */
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate 
+{
+  return [CardPeer retrieveCardSetWithSQL:sql hydrate:hydrate isBasicCard:NO];
+}
+
+
+/**
  * Returns an array of Card objects based on SQL result
  */
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [[db dao] executeQuery:sql];
@@ -187,7 +198,17 @@
   NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
   while ([rs next])
   {
-    tmpCard = [[Card alloc] init];
+    // Full card?
+    if (basicCard)
+    {
+      tmpCard = [[Card alloc] initAsBasicCard];
+    }
+    else
+    {
+      tmpCard = [[Card alloc] init];
+    }
+    
+    // Hydrate?
     if (hydrate)
     {
       [tmpCard hydrate:rs];
@@ -247,8 +268,8 @@
  */
 + (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_sentence_link WHERE sentence_id = '%d'", sentenceId];
-  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.*, h.* FROM card_sentence_link l, cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId];
+  NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES isBasicCard:YES];
   [sql release];
   return cardList;  
 }

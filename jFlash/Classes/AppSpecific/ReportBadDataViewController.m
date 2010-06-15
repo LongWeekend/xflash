@@ -310,6 +310,8 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 //! standard dealloc
 - (void)dealloc
 {
+  [self setPickerView:nil];
+  [self setHotheadImg:nil];
   [super dealloc];
 }
 

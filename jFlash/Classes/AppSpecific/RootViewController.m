@@ -308,6 +308,8 @@
 {
   // Unobserve notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self setTabBarController:nil];
+  [self setLoadingView:nil];
   [super dealloc];
 }
 

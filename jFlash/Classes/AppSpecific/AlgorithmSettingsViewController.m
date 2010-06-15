@@ -155,6 +155,7 @@ enum ControlSectionRows
   
   if(value == 0)
   {
+    // TODO: Refactor - pull these numbers out into constants?
     [maxCardsUISlider setValue:10];
     [frequencyUISlider setValue:1];
   }

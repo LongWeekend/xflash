@@ -37,8 +37,9 @@
 {
   // View related stuff
   [super viewWillAppear:animated];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark -
@@ -157,9 +158,9 @@
 //! Standard dealloc
 - (void)dealloc
 {
-  [super dealloc];
   [self setSentence:nil];
   [self setCards:nil];
+  [super dealloc];
 }
 
 

@@ -343,8 +343,10 @@
 //! standard dealloc
 - (void)dealloc
 {
-  [super dealloc];
+  [self setTaskHandler:nil];
+  [self setWebViewContentFile:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super dealloc];
 }
 
 

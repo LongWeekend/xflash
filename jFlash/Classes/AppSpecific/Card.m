@@ -3,7 +3,7 @@
 
 @implementation Card 
 
-@synthesize cardId, userId, levelId, headword, headword_en, reading, romaji, meaning, wrongCount, rightCount;
+@synthesize cardId, userId, levelId, headword, headword_en, reading, romaji, meaning, wrongCount, rightCount, isBasicCard;
 
 /** Customized initializer setting all variables to zero or nil */
 - (id) init
@@ -21,6 +21,19 @@
     self.reading = nil;
     self.romaji = nil;
     self.meaning = nil;
+    self.isBasicCard = NO;
+  }
+  return self;
+}
+
+
+/** Initializes this card as a card that does not have user history info */
+- (id) initAsBasicCard
+{
+  self = [self init];
+  if (self)
+  {
+    self.isBasicCard = YES;
   }
   return self;
 }
@@ -73,29 +86,30 @@
 {
   NSMutableArray *tmpExampleSentences = [ExampleSentencePeer getExampleSentencesByCardId:[self cardId]];
   if ([tmpExampleSentences count] > 0)
-  {
     return YES;
-  }
   else
-  {
     return NO;
-  }
 }
 
 
 /** Takes a sqlite result set and populates the properties of card */
 - (void) hydrate: (FMResultSet*) rs
 {
-  self.levelId  =    [rs intForColumn:@"card_level"];
-	self.userId   =    [rs intForColumn:@"user_id"];
 	self.cardId   =    [rs intForColumn:@"card_id"];
 	self.headword =    [rs stringForColumn:@"headword"];
 	self.headword_en = [rs stringForColumn:@"headword_en"];
 	self.reading  =    [rs stringForColumn:@"reading"];
 	self.romaji  =     [rs stringForColumn:@"romaji"];
 	self.meaning  =    [rs stringForColumn:@"meaning"];
-  self.rightCount =  [rs intForColumn:@"right_count"];
-  self.wrongCount =  [rs intForColumn:@"wrong_count"];
+  
+  // Get additional stuff if we're going to have it
+  if (self.isBasicCard == NO)
+  {
+    self.levelId  =    [rs intForColumn:@"card_level"];
+    self.userId   =    [rs intForColumn:@"user_id"];
+    self.rightCount =  [rs intForColumn:@"right_count"];
+    self.wrongCount =  [rs intForColumn:@"wrong_count"];
+  }
 }
 
 

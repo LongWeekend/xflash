@@ -8,27 +8,33 @@
 
 #import "FMResultSet.h"
 
-//! Class for an individual card's data
+//! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @interface Card : NSObject
 {
-	NSInteger userId;
-	NSInteger cardId;
-	NSInteger levelId;
-  NSInteger wrongCount;
-  NSInteger rightCount;
-	NSString* headword;
-	NSString* headword_en;
-	NSString* reading;
-	NSString* romaji;
-	NSString* meaning;
+  // Intrinsic card stuff
+	NSInteger cardId;               //! PK of the card
+	NSString* headword;             //! Japanese headword of a card 
+	NSString* headword_en;          //! English headword of a card
+	NSString* reading;              //! Japanese kana reading
+	NSString* romaji;               //! Romanized reading
+	NSString* meaning;              //! Actual English meaning
+  
+  BOOL isBasicCard;               //! If no, none of the properties below are set
+  
+	// User history attributes specific to Card
+  NSInteger userId;               //! User id associated with the level and counts
+	NSInteger levelId;              //! What level this card is in for user userId
+  NSInteger wrongCount;           //! How many times this card has been tapped "wrong" by this userId
+  NSInteger rightCount;           //! How many times this card has been tapped "right" by this userId
 }
 
+- (id) initAsBasicCard;
 - (void) hydrate: (FMResultSet*) rs;
 - (NSString*) meaningWithoutMarkup;
 - (NSString*) combinedReadingForSettings;
 - (BOOL) hasExampleSentences;
-//- (void) setLevel: (FMResultSet*) rs;
 
+@property (nonatomic) BOOL isBasicCard;
 @property (nonatomic) NSInteger cardId;
 @property (nonatomic) NSInteger userId;
 @property (nonatomic) NSInteger levelId;
