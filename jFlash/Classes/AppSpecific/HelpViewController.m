@@ -103,6 +103,7 @@
   UITableViewCell *cell = nil;
   cell = [LWEUITableUtils reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
   cell.textLabel.text = [[self sectionTitles] objectAtIndex:indexPath.row];
   return cell;  
 }
@@ -111,6 +112,8 @@
 /** Loads the HelpWebViewController with the selected row's HTML file */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
   NSInteger row = indexPath.row;
   currentIndex = row;
   HelpWebViewController *webViewController = [[HelpWebViewController alloc] initWithFilename:[[self htmlFilenames] objectAtIndex:row] usingTitle:[[self sectionTitles] objectAtIndex:row]];
@@ -123,7 +126,6 @@
   }
   [[self navigationController] pushViewController:webViewController animated:YES];
   [webViewController release];
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 

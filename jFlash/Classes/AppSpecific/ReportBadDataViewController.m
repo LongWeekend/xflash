@@ -35,7 +35,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     _activeTagId = tmpTag.tagId;
     
     // Initialize issue type array
-    _userSelectedIssueType = 1;
+    _userSelectedIssueType = -1;
     _issueTypeArray = [[NSArray alloc] initWithObjects:
                       NSLocalizedString(@"Reading or romaji is wrong",@"ReportBadDataViewController.Reasons_WrongReadingOrRomaji"),
                       NSLocalizedString(@"Kanji is wrong",@"ReportBadDataViewController.Reasons_WrongKanji"),
@@ -93,6 +93,18 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     [self.parentViewController dismissModalViewControllerAnimated:YES];
     return;
   }
+ 
+  // Do we have a bad, bad user?
+  if (_userSelectedIssueType == -1)
+  {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Issue Type Selected",@"ReportBadDataViewController.NoIssueSelected_AlertViewTitle")
+                                              message:NSLocalizedString(@"We need to know what's wrong before we can fix it!  Please tap the box on the top of this page to select an issue type.",@"ReportBadDataViewController.NoIssueSelected_AlertViewMessage")
+                                              delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK")
+                                              otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+    return;
+  }
   
   // Move the card to an NSDictionary so we can make it portable
   NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -122,11 +134,31 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
+//! Customized setter for issue type
+- (void) set_userSelectedIssueType:(NSInteger)typeId
+{
+  _userSelectedIssueType = typeId;
+  if (typeId <= [_issueTypeArray count])
+  {
+    self.issueTypeBox.text = [_issueTypeArray objectAtIndex:typeId];
+  }
+  else
+  {
+    [NSException raise:@"You eegiot, out of bounds teabag exception on userSelectedIssueType" format:@"Data was: %d",typeId];
+  }
+}
+
 //! Hides picker by moving it off the screen
 -(IBAction) _hidePickerView
 {
   [LWEViewAnimationUtils translateView:self.pickerView byPoint:CGPointMake(0,480) withInterval:0.5f];
   _pickerCurrentlyVisible = NO;
+  
+  // User didn't select anything?  TOO BAD!
+  if (_userSelectedIssueType == -1)
+  {
+    [self set_userSelectedIssueType:0];
+  }
 }
 
 
@@ -274,8 +306,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 /** UIPickerView delegate - called when the user chooses one item */
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-  _userSelectedIssueType = row;
-  self.issueTypeBox.text = [_issueTypeArray objectAtIndex:row];
+  [self set_userSelectedIssueType:row];
 }
 
 

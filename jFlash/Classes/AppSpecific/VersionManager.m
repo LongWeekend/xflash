@@ -158,7 +158,7 @@
   }
   
   // If not active, don't show Pause button
-  if (_migraterState != kMigraterDownloadPlugins && _migraterState != kMigraterUpdateSQL)
+/*  if (_migraterState != kMigraterDownloadPlugins && _migraterState != kMigraterUpdateSQL)
   {
     sender.pauseButton.hidden = YES;
   }
@@ -166,6 +166,9 @@
   {
     sender.pauseButton.hidden = NO;
   }
+*/
+  // Not in this version
+  sender.pauseButton.hidden = YES;
 }
 
 

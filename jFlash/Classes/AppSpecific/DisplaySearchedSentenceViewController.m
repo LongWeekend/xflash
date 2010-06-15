@@ -68,7 +68,7 @@
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == SECTION_CARDS)
-    return NSLocalizedString(@"Cards in this Sentence",@"DisplaySearchedSentenceViewController.TableHeader_LinkedCards");
+    return NSLocalizedString(@"Related Cards",@"DisplaySearchedSentenceViewController.TableHeader_RelatedCards");
   else
     return @"";
 }

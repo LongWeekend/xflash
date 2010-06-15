@@ -211,6 +211,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[UserPeer getUserByPK:[settings integerForKey:APP_USER]] userNickname];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == APP_PLUGIN)
@@ -221,19 +222,21 @@ NSString * const APP_ALGORITHM = @"algorithm";
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
     else
       cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
-
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
   }
   else if (key == APP_ABOUT)
   {
     // About section
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_ABOUT onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   else if (key == APP_FACEBOOK || key == APP_TWITTER)
   {
     // Set up the image
     cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     UIImageView* tmpView = cell.imageView;
     if(key == APP_TWITTER)
       tmpView.image = [UIImage imageNamed:@"twitter-icon.png"];
@@ -244,15 +247,16 @@ NSString * const APP_ALGORITHM = @"algorithm";
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
   }
   else
   {
     // Anything else
     cell = [LWEUITableUtils reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailTextLabel.text = [[[self settingsDict] objectForKey:key] objectForKey:[settings objectForKey:key]];        
   }
   
-  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
   cell.textLabel.numberOfLines = 0;
   cell.textLabel.text = displayName;
@@ -278,6 +282,8 @@ NSString * const APP_ALGORITHM = @"algorithm";
 //! Make selection for a table cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  
   NSInteger section = indexPath.section;
   NSInteger row = indexPath.row;
 

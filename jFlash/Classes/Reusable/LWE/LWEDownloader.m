@@ -159,7 +159,7 @@
   }
   
   // If not active, don't show Pause button (or, if paused)
-  if (downloaderState != kDownloaderRetrievingData && downloaderState != kDownloaderDecompressing && downloaderState != kDownloaderPaused)
+/*  if (downloaderState != kDownloaderRetrievingData && downloaderState != kDownloaderDecompressing && downloaderState != kDownloaderPaused)
   {
     [[sender pauseButton] setHidden:YES];
   }
@@ -167,6 +167,9 @@
   {
     [[sender pauseButton] setHidden:NO];
   }
+*/
+  // Not ready for this version
+  [[sender pauseButton] setHidden:YES];
 }
 
 
@@ -222,7 +225,7 @@
 - (void) startTask
 {
   // Only download if we have a URL to get
-  if ([self targetURL] && (downloaderState == kDownloaderReady))
+  if ([self targetURL] && (downloaderState == kDownloaderReady || downloaderState == kDownloaderPaused))
   {
     // Set up request
     _request = [ASIHTTPRequest requestWithURL:[self targetURL]];
@@ -315,21 +318,13 @@
     [_request cancel];
     [self _updateInternalState:kDownloaderPaused withTaskMessage:NSLocalizedString(@"Download Paused",@"LWEDownloader.paused")];
   }
-}
-
-
-/**
- * Resumes the current download (only if they are paused)
- */
-- (void) resumeTask
-{
-  if (downloaderState == kDownloaderPaused)
+  else if (downloaderState == kDownloaderPaused)
   {
-    [_request startAsynchronous];
-    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
+    // Get rid of the old request!
+    _request = nil;
+    [self startTask];
   }
 }
-
 
 
 /**
