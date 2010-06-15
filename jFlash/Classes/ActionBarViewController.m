@@ -178,16 +178,17 @@
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
-    AddTagViewController *modalViewController = [[[AddTagViewController alloc] initWithNibName:@"AddTagView" bundle:nil] autorelease];
-    modalViewController.cardId = [[self currentCard] cardId];
-    modalViewController.currentCard = [self currentCard];
-    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:modalViewController];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self currentCard]];
+    
+    // Set up DONE button
     UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
-    modalViewController.navigationItem.leftBarButtonItem = doneBtn;
-    modalNavControl.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-    [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
-    [modalNavControl release];
+    tmpVC.navigationItem.leftBarButtonItem = doneBtn;
     [doneBtn release];
+    
+    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:tmpVC];
+    [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
+    [tmpVC release];
+    [modalNavControl release];
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }
