@@ -458,7 +458,6 @@
 		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4986F8B811C715F600947486 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4986F8BA11C715F600947486 /* Info copy 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy 2.plist"; sourceTree = "<group>"; };
 		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
 		4997D21511BB642600016A15 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionManager.m; path = AppSpecific/VersionManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
@@ -486,7 +485,6 @@
 		49CF2E6211BA46AA0066923F /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = "<group>"; };
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
-		49EEA4F511C5B6DE00BD749D /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
 		49F9686811AF604900DFC3C9 /* ModalTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalTaskView.xib; path = XIBs/ModalTaskView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		49F968E111AF64D400DFC3C9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -804,8 +802,6 @@
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD235E101C121D0081F883 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				49EEA4F511C5B6DE00BD749D /* Info copy.plist */,
-				4986F8BA11C715F600947486 /* Info copy 2.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
