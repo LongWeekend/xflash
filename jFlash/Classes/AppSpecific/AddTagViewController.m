@@ -253,6 +253,8 @@ enum EntrySectionRows
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  
   if(indexPath.section == kEntrySection) return; // do nothing for the entry section
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   Tag* tmpTag;

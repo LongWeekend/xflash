@@ -85,7 +85,7 @@
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
-  [self hideSearchBar];
+  if (!searching) [self hideSearchBar];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
 }
 

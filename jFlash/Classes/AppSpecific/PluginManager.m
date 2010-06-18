@@ -17,6 +17,8 @@
 {
   if (self = [super init])
   {
+    
+    // TODO - put real plugin path in
     _loadedPlugins = [[NSMutableDictionary alloc] init];
     _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
                           // Cards
