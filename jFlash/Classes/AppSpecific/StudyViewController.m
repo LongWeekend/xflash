@@ -26,14 +26,12 @@
 /** Custom initializer */
 - (id) init
 {
-  if (self = [super init])
+  self = [super init];
+  if (self != nil)
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
-  }
-  else{
-    LWE_LOG(@"Didn't pass super init for StudyViewController");
   }
   return self;
 }
