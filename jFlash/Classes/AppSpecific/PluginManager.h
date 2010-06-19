@@ -21,7 +21,7 @@
 - (BOOL) pluginIsLoaded:(NSString*)name;
 - (BOOL) disablePlugin:(NSString*)name;
 - (BOOL) loadInstalledPlugins;
-- (NSString*) loadPluginFromFile:(NSString*)pathname;
+- (NSString*) loadPluginFromFile:(NSString*)filename;
 - (NSArray*) loadedPluginsByKey;
 - (NSArray*) loadedPluginsByName;
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
@@ -30,5 +30,8 @@
 - (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
 - (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
+
+// this is generic, should refactor to reusable class
+- (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 
 @end

@@ -28,7 +28,9 @@
                            @"Core cards",@"plugin_details",
                            @"",@"plugin_notes_file",
                            @"http://marks-apple.local/~phooze/jFlash-CARDS-1.1.db.gz",@"target_url",
-                           [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",nil],CARD_DB_KEY,
+                           [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",
+                           @"jFlash-CARDS-1.1.db",@"file_name",
+                           nil],CARD_DB_KEY,
                          
                            // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
@@ -37,7 +39,9 @@
                             @"full-text-search",@"plugin_notes_file",
                             @"Adds sub-second full dictionary search (13MB)",@"plugin_details",
                             @"http://marks-apple.local/~phooze/jFlash-FTS-1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",nil],FTS_DB_KEY,
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",
+                            @"jFlash-FTS-1.1.db",@"file_name",
+                            nil],FTS_DB_KEY,
                            
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
@@ -46,7 +50,9 @@
                             @"example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (20MB)",@"plugin_details",
                             @"http://marks-apple.local/~phooze/jFlash-EX-1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",nil],EXAMPLE_DB_KEY,
+                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",
+                            @"jFlash-EX-1.1.db",@"file_name",
+                            nil],EXAMPLE_DB_KEY,
                            nil];
   }
   return self;
@@ -58,7 +64,7 @@
  */
 + (NSDictionary*) preinstalledPlugins;
 {
-  return [NSDictionary dictionaryWithObjectsAndKeys:[LWEFile createBundlePathWithFilename:JFLASH_CURRENT_CARD_DATABASE],CARD_DB_KEY,nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:JFLASH_CURRENT_CARD_DATABASE,CARD_DB_KEY,nil];
 }
 
 
@@ -126,14 +132,18 @@
  */
 - (NSString*) loadPluginFromFile:(NSString*)filename
 {
+  NSDictionary* dictionaryForFilename = [self findDictionaryContainingObject:filename forKey:@"file_name" inDictionary:_availablePlugins];
+  NSString* filePath = [dictionaryForFilename objectForKey:@"target_path"];
+  LWE_LOG(@"Loading file: %@ in loadPluginFromFile", filename);
+  
   // First, get database instance
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // Make sure we can find the file!
-  if (![LWEFile fileExists:filename]) return NO;
+  if (![LWEFile fileExists:filePath]) return NO;
   
   // Test drive the attachment to verify it matches
-  if ([db attachDatabase:filename withName:@"LWEDATABASETMP"])
+  if ([db attachDatabase:filePath withName:@"LWEDATABASETMP"])
   {
     NSString* version = nil;
     NSString* pluginKey = nil;
@@ -158,7 +168,7 @@
       LWE_LOG(@"Found version table, plugin file is OK");
       
       // Reattach with proper name and register
-      if ([db attachDatabase:filename withName:pluginKey])
+      if ([db attachDatabase:filePath withName:pluginKey])
       {
         [_loadedPlugins setObject:[_availablePlugins objectForKey:pluginKey] forKey:pluginKey];
         return pluginKey;
@@ -187,11 +197,15 @@
 /**
  * LWEDownloader delegate method - installs a plugin database
  */
-- (BOOL) installPluginWithPath:(NSString *) filename
+- (BOOL) installPluginWithPath:(NSString *)path
 {
   NSString* pluginKey;
+  // Downloader gives us absolute paths, but we need to work with relative from this point on
+  // so get the filename and go from there
+  NSString* filename = [path lastPathComponent];
   if (pluginKey = [self loadPluginFromFile:filename])
   {
+    LWE_LOG(@"Registering plugin %@ with filename: %@", pluginKey, filename);
     [self _registerPlugin:pluginKey withFilename:filename];
   }
   else
@@ -203,31 +217,6 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:@"pluginDidInstall" object:self userInfo:[_availablePlugins objectForKey:pluginKey]];
   return YES;
 }
-
-
-/**
- * Register plugin filename with NSUserDefaults
- */
-- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename
-{
-  // Update the settings so we maintain this on startup
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSDictionary *pluginSettings = [settings objectForKey:APP_PLUGIN];
-  if (pluginSettings)
-  {
-    // This means we already have a settings database (e.g. not first load)
-    LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,filename);
-    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
-    [tmpDict setObject:filename forKey:pluginKey];
-    [settings setValue:tmpDict forKey:APP_PLUGIN];
-  }
-  else
-  {
-    // This should NOT happen
-    [NSException raise:@"Plugin register method executed without default settings" format:@"Was passed filename: %@",filename];
-  }  
-}
-
 
 //! Gets array of NSString keys of plugins
 - (NSArray*) loadedPluginsByKey;
@@ -263,24 +252,6 @@
   return returnArray;
 }
 
-
-// Internal helper class that does the heavy lifting for loadedPlugins
-- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary
-{
-  NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
-  NSString *key;
-  NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while (key = [keyEnumerator nextObject])
-  {
-    [tmpArray addObject:[_pluginDictionary objectForKey:key]];
-  }
-  // Make immutable copy
-  NSArray *returnArray = [NSArray arrayWithArray:tmpArray];
-  [tmpArray release];
-  return returnArray;
-}
-
-
 //! Gets array of dictionaries with all info about loaded plugins
 - (NSArray*) loadedPlugins
 {
@@ -315,6 +286,22 @@
   return returnArray;
 }
 
+/*!
+    @method     
+    @abstract   Returns the dictionary containing a given object for a given key.
+    @discussion naive implementation.  Assumes the dictionary is one deep and the objects are strings
+*/
+- (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary
+{
+  for (id key in dictionary) 
+  {    
+    if([[[dictionary objectForKey:key] objectForKey:theKey] isEqualToString: object])
+    {
+      return [dictionary objectForKey:key];
+    }    
+  }
+  return nil;
+}
 
 //! Gets all available plugins as a dictionary
 - (NSDictionary*) availablePluginsDictionary
@@ -327,6 +314,48 @@
 {
   [super dealloc];
   _loadedPlugins = nil;
+}
+
+#pragma mark -
+#pragma mark Privates
+
+/**
+ * Register plugin filename with NSUserDefaults
+ */
+- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename
+{
+  // Update the settings so we maintain this on startup
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSDictionary *pluginSettings = [settings objectForKey:APP_PLUGIN];
+  if (pluginSettings)
+  {
+    // This means we already have a settings database (e.g. not first load)
+    LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,filename);
+    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
+    [tmpDict setObject:filename forKey:pluginKey];
+    [settings setValue:tmpDict forKey:APP_PLUGIN];
+  }
+  else
+  {
+    // This should NOT happen
+    [NSException raise:@"Plugin register method executed without default settings" format:@"Was passed filename: %@",filename];
+  }  
+}
+
+// Internal helper class that does the heavy lifting for loadedPlugins
+- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary
+{
+  NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
+  NSString *key;
+  NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+  while (key = [keyEnumerator nextObject])
+  {
+    [tmpArray addObject:[_pluginDictionary objectForKey:key]];
+  }
+  // Make immutable copy
+  NSArray *returnArray = [NSArray arrayWithArray:tmpArray];
+  [tmpArray release];
+  return returnArray;
 }
 
 @end
