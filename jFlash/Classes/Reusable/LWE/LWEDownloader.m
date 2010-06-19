@@ -448,6 +448,8 @@
 /**
  * Verify by installing plugin
  */ 
+// REVIEW: to decouple this completely, I don't the downloader should rely on having a delegate to verify.
+// The downloaders verify method should do checksums or something it can do independently instead.
 - (void) _verifyDownload
 {
   if ([self installPluginWithPath:[self targetFilename]])
@@ -467,6 +469,8 @@
 /**
  * Delegate install plugin bit to delegates if necessary
  */
+// REVIEW : this makes the downloader aware of what it's delegate does which is against the pattern.
+// instead something like didFinishDownloadingFile could be sent to the delegate which does whatever it wants
 - (BOOL) installPluginWithPath:(NSString *)filename
 {
   // send the selector to the delegate if it responds
