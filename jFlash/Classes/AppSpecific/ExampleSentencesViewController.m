@@ -77,20 +77,47 @@
 #pragma mark -
 #pragma mark Core Methods
 
+- (void) setupSentencesWebView:(NSString *)sentencesHTML {  
+  // Modify the inline CSS for current theme
+  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+  
+  NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
+  
+  // shut off rubber banding if we can
+  UIScrollView *scrollView = [self.sentencesWebView.subviews objectAtIndex:0];
+  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
+  if([scrollView respondsToSelector:aSelector])
+  {
+    [scrollView performSelector:aSelector withObject:NO];
+  }
+  
+  [self.sentencesWebView loadHTMLString:html baseURL:nil];
+}
+
 //* setup the example sentences view with information from the datasource
-// TODO : Paul, paint here
 - (void) setup
 {
   [self _exampleSentencesViewWillSetup];
+  
   // the datasource must implement currentcard or we don't set any data
   if([datasource respondsToSelector:@selector(currentCard)])
   {
     NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
     [[self headwordLabel] setText: mungedHeadWordWithReading];
     
-    // Get all sentences out
+    // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
+    NSString* html = @"<ul>";
+    for (ExampleSentence* sentence in sentences) 
+    {
+      html = [html stringByAppendingFormat:@"<li>%@</li>", [sentence sentenceJa]];
+      html = [html stringByAppendingFormat:@"<li>%@</li>", [sentence sentenceEn]];
+    }
+    html = [html stringByAppendingString:@"</ul>"];
+    [self setupSentencesWebView:html];
   }
+  
   [self _exampleSentencesViewDidSetup];
 }
 

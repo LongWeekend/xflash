@@ -84,11 +84,7 @@
 /** Returns YES if a card has example sentences attached to it */
 - (BOOL) hasExampleSentences
 {
-  NSMutableArray *tmpExampleSentences = [ExampleSentencePeer getExampleSentencesByCardId:[self cardId]];
-  if ([tmpExampleSentences count] > 0)
-    return YES;
-  else
-    return NO;
+  return [ExampleSentencePeer sentencesExistForCardId:[self cardId]];
 }
 
 

@@ -65,10 +65,24 @@
  */
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = '%d' AND s.sentence_id = l.sentence_id", cardId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id", cardId];
   NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
 	[sql release];
 	return tmpSentences;
+}
+
+/**
+ * Returns a boolean YES if example sentences exist for a given card id. NO if none exist/
+ */
++ (BOOL) sentencesExistForCardId: (NSInteger)cardId
+{
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d LIMIT 1", cardId];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [[db dao] executeQuery:sql];
+  if ([rs next]) {
+    return YES;
+  }
+  return NO;
 }
 
 
