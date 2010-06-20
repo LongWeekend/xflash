@@ -8,6 +8,7 @@
 
 #import "LWEDownloader.h"
 #import "FlurryAPI.h"
+#import "Reachability.h"
 
 @implementation LWEDownloader
 
@@ -149,7 +150,7 @@
   }
   
   // If not failed, don't show retry button (don't count cancellation)
-  if (![self isFailureState] && downloaderState != kDownloaderCancelled)
+  if (![self isFailureState] || downloaderState == kDownloaderCancelled)
   {
     [[sender retryButton] setHidden:YES];
   }
@@ -158,16 +159,6 @@
     [[sender retryButton] setHidden:NO];
   }
   
-  // If not active, don't show Pause button (or, if paused)
-/*  if (downloaderState != kDownloaderRetrievingData && downloaderState != kDownloaderDecompressing && downloaderState != kDownloaderPaused)
-  {
-    [[sender pauseButton] setHidden:YES];
-  }
-  else
-  {
-    [[sender pauseButton] setHidden:NO];
-  }
-*/
   // Not ready for this version
   [[sender pauseButton] setHidden:YES];
 }
@@ -227,6 +218,16 @@
   // Only download if we have a URL to get
   if ([self targetURL] && (downloaderState == kDownloaderReady || downloaderState == kDownloaderPaused))
   {
+    
+    // Check reachability once
+    Reachability *reachability = [Reachability reachabilityWithHostName:[[self targetURL] host]];
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    if (status == NotReachable)
+    {
+      [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network Unavailable",@"LWEDownloader.network unavailable")];
+      return;
+    }
+    
     // Set up request
     _request = [ASIHTTPRequest requestWithURL:[self targetURL]];
     [_request setDelegate:self];
@@ -335,6 +336,7 @@
   BOOL returnVal = NO;
   switch (downloaderState)
   {
+    case kDownloaderInsufficientSpace:
     case kDownloaderCancelled:
     case kDownloaderNetworkFail:
     case kDownloaderDecompressFail:
@@ -387,10 +389,6 @@
   LWE_LOG(@"Unzip for file: %@",_compressedFilename);
   LWE_LOG(@"Target filename: %@",[self targetFilename]);
   
-  // TODO: enforce this Do disk size sanity check
-  int freeDiskSpace = [LWEFile getTotalDiskSpaceInBytes];
-  LWE_LOG(@"Free disk space %d",freeDiskSpace);
-  
   gzFile file = gzopen([_compressedFilename UTF8String], "rb");
   FILE *dest = fopen([[self targetFilename] UTF8String], "w");
   unsigned char buffer[CHUNK];
@@ -399,7 +397,7 @@
 
   // This is a hack but I am NO C programmer.  I Cannot figure out the uncompressed size of a zip file to save my life
   // Despite googling it... apparently the last four bytes of the file contain the answer but good luck getting that to work
-  int guessedFilesize = (requestSize * 2.2);
+  int guessedFilesize = (requestSize * 2.4);
   float decompressionProgress = 0.0f;
 
   while (uncompressedLength = gzread(file, buffer, CHUNK))
@@ -424,7 +422,7 @@
       [pool release];
 
       // Adding Flurry event here, hope to never see this
-      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[self targetFilename],@"filename",[NSNumber numberWithInt:requestSize],@"request_size",[NSNumber numberWithInt:freeDiskSpace],@"disk_space",nil];
+      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[self targetFilename],@"filename",[NSNumber numberWithInt:requestSize],@"request_size",nil];
       [FlurryAPI logEvent:@"pluginUnzipFailed" withParameters:dataToSend];
       return NO;
     }
@@ -494,18 +492,30 @@
  */
 - (void)requestReceivedResponseHeaders:(ASIHTTPRequest *)request
 {
+  int httpStatusCode = [request responseStatusCode];
   NSString *contentLength = [[request responseHeaders] objectForKey:@"Content-Length"];
-  if (contentLength)
+
+  if (contentLength && httpStatusCode == HTTP_CODE_200_FOUND)
   {
-    // TODO: if status is anything other than 2xx, freak out!
-    LWE_DICT_DUMP([request responseHeaders]);
     requestSize = [contentLength intValue];
+    int freeDiskSpace = [LWEFile getTotalDiskSpaceInBytes];
+    // 2.5 is a fudge factor of how big the gzip file will uncompress to
+    int totalSpaceRequired = requestSize + (requestSize * 2.5);
     LWE_LOG(@"Request size: %d",requestSize);
-    [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
+    LWE_LOG(@"Total required space: %d bytes",totalSpaceRequired);
+    LWE_LOG(@"Free disk space %d",freeDiskSpace);
+    if (freeDiskSpace < totalSpaceRequired)
+    {
+      [self _updateInternalState:kDownloaderInsufficientSpace withTaskMessage:NSLocalizedString(@"Insufficient Disk Space",@"LWEDownloader.insufficientSpace")];
+    }    
+    else
+    {
+      [self _updateInternalState:kDownloaderRetrievingData withTaskMessage:NSLocalizedString(@"Downloading",@"LWEDownloader.downloading")];
+    }
   }
   else
   {
-    [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Network connection failed",@"LWEDownloader.networkFailure")];
+    [self _updateInternalState:kDownloaderNetworkFail withTaskMessage:NSLocalizedString(@"Could not connect to server",@"LWEDownloader.networkFailure")];
   }
 
 }

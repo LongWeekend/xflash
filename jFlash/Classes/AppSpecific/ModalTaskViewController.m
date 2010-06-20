@@ -327,7 +327,7 @@
 - (IBAction) showDetailedView
 {
   // Load a UIWebView to show
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 317)];
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   

@@ -115,6 +115,7 @@
   NSError *error = nil;
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+  LWE_LOG(@"Last object was: %@",[paths lastObject]);
   if (dictionary)
   {
     NSNumber *fileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemSize];
@@ -125,6 +126,4 @@
     LWE_LOG(@"Error Obtaining File System Info: Domain = %@, Code = %@", [error domain], [error code]);
   }
   return totalSpace;
-}  
-
-@end
+}
