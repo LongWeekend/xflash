@@ -247,6 +247,8 @@
 - (void) hideDownloaderModal:(NSNotification*)aNotification
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
+  // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:nil];
 }
 
 
