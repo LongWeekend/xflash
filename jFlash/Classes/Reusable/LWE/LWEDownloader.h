@@ -15,11 +15,14 @@
 // For ZIP extension
 #define CHUNK 16384
 
+#define HTTP_CODE_200_FOUND 200
+
 /** State machine for the downloader */
 typedef enum _downloaderStates
 {
   kDownloaderReady,                   //! Downloader ready to go
   kDownloaderCancelled,               //! Downloader cancelled
+  kDownloaderInsufficientSpace,       //! Insufficient space on disk to store file
   kDownloaderRetrievingMetaData,      //! Retrieving data about to-be-downloaded package (headers)
   kDownloaderRetrievingData,          //! Retrieving actual data
   kDownloaderPaused,                  //! Data retrieval paused

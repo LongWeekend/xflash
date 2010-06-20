@@ -157,17 +157,7 @@
     sender.retryButton.hidden = NO;
   }
   
-  // If not active, don't show Pause button
-/*  if (_migraterState != kMigraterDownloadPlugins && _migraterState != kMigraterUpdateSQL)
-  {
-    sender.pauseButton.hidden = YES;
-  }
-  else
-  {
-    sender.pauseButton.hidden = NO;
-  }
-*/
-  // Not in this version
+  // Do not allow pause during the update at all
   sender.pauseButton.hidden = YES;
 }
 
@@ -237,7 +227,7 @@
 {
   if (_migraterState == kMigraterReady)
   {
-    [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:@"Opening previous database (1/4)"];
+    [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Preparing database",@"VersionManager.PreparingDatabaseMsg")];
     [self performSelectorInBackground:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE]];
   }
 }
@@ -270,7 +260,7 @@
   if (_migraterState == kMigraterDownloadPlugins && [[self dlHandler] canCancelTask])
   {
     [[self dlHandler] cancelTask];
-    [self _updateInternalState:kMigraterCancelled withTaskMessage:@"Cancelled"];
+    [self _updateInternalState:kMigraterCancelled withTaskMessage:NSLocalizedString(@"Update Cancelled",@"VersionManager.UpdateCancelledMsg")];
   }
   else if (_migraterState == kMigraterUpdateSQL)
   {
@@ -326,7 +316,7 @@
   {
     [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
   }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:@"Downloading updated dictionary (2/4)"];
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
   [self _downloadFTSPlugin];
   [_backgroundThreadPool release];
   return;  
@@ -370,12 +360,13 @@
   if ([self dlHandler])
   {
     [self setProgress:[[self dlHandler] progress]];
+    [self setTaskMessage:[[self dlHandler] taskMessage]];
 
     // Determine what to do with buttons based on state
     if ([[self dlHandler] isFailureState])
     {
       LWE_LOG(@"Download failed, oh no, what are we doing to do now");
-      NSString *tmpTaskMsg = [NSString stringWithFormat:NSLocalizedString(@"Download Failed: %@",@"VersionMigrater.DownloadFailed"),[[self dlHandler] taskMessage]];
+      NSString *tmpTaskMsg = [NSString stringWithFormat:[[self dlHandler] taskMessage]];
       [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
     }
     else if ([[self dlHandler] isSuccessState])
@@ -409,7 +400,7 @@
   
   if (isFTSLoaded && isCardDBLoaded)
   {
-    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:@"Merging new dictionary entries (3/4)"];
+    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging new dictionary",@"VersionManager.MergingDBMsg")];
     [self _updateUserDatabase];
   }
   else
@@ -484,7 +475,7 @@
   
   if (success)
   {
-    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Finalizing database merge (4/4)"];
+    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Finalizing dictionary"];
     LWE_LOG(@"STARTING COMMIT");
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
@@ -492,12 +483,12 @@
     // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setValue:JFLASH_VERSION_1_1 forKey:@"data_version"];
-    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed database merge"];
+    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
   }
   else
   {
     [db.dao rollback];
-    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Database merge error, rolling back changes"];
+    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error.  Aborting update."];
   }
 }
 
