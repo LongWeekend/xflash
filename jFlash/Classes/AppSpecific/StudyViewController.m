@@ -450,9 +450,11 @@
 {
 	scrollView.delegate = self;
 	
-	scrollView.clipsToBounds = YES;
+//	scrollView.clipsToBounds = YES;
 	scrollView.pagingEnabled = YES;
   scrollView.delaysContentTouches = NO;
+  scrollView.directionalLockEnabled = YES;
+  scrollView.canCancelContentTouches = YES;
 
 	// This stays NO until "reveal" sets it to yes.  Then setupViewForCard will set it to NO again.
   scrollView.scrollEnabled = NO;
@@ -484,7 +486,7 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
-#pragma mark UIScrollViewDelegate stuff
+#pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
