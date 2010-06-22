@@ -140,12 +140,6 @@
 		4986F85911C715F600947486 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8711AB7ADB00016BD2 /* ASIInputStream.m */; };
 		4986F85A11C715F600947486 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8911AB7ADB00016BD2 /* ASINetworkQueue.m */; };
 		4986F85B11C715F600947486 /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8B11AB7ADB00016BD2 /* ASINSStringAdditions.m */; };
-		4986F85C11C715F600947486 /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9511AB7AFE00016BD2 /* ASIS3Bucket.m */; };
-		4986F85D11C715F600947486 /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9711AB7AFE00016BD2 /* ASIS3BucketObject.m */; };
-		4986F85E11C715F600947486 /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9911AB7AFE00016BD2 /* ASIS3BucketRequest.m */; };
-		4986F85F11C715F600947486 /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9B11AB7AFE00016BD2 /* ASIS3ObjectRequest.m */; };
-		4986F86011C715F600947486 /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9D11AB7AFE00016BD2 /* ASIS3Request.m */; };
-		4986F86111C715F600947486 /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9F11AB7AFE00016BD2 /* ASIS3ServiceRequest.m */; };
 		4986F86211C715F600947486 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */; };
 		4986F86311C715F600947486 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC611AB7C4600016BD2 /* AddTagViewController.m */; };
 		4986F86411C715F600947486 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
@@ -216,7 +210,6 @@
 		4986F8A511C715F600947486 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		4986F8A611C715F600947486 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		4986F8A811C715F600947486 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
-		4986F8A911C715F600947486 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
 		4986F8AA11C715F600947486 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		4986F8AB11C715F600947486 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4986F8AC11C715F600947486 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
@@ -251,7 +244,6 @@
 		49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
 		49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
 		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
-		49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494D6C6F11AE1BB1006DADF1 /* libFlurry.a */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
@@ -276,12 +268,6 @@
 		917A5B9011AB7ADB00016BD2 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8711AB7ADB00016BD2 /* ASIInputStream.m */; };
 		917A5B9111AB7ADB00016BD2 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8911AB7ADB00016BD2 /* ASINetworkQueue.m */; };
 		917A5B9211AB7ADB00016BD2 /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8B11AB7ADB00016BD2 /* ASINSStringAdditions.m */; };
-		917A5BA011AB7AFE00016BD2 /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9511AB7AFE00016BD2 /* ASIS3Bucket.m */; };
-		917A5BA111AB7AFE00016BD2 /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9711AB7AFE00016BD2 /* ASIS3BucketObject.m */; };
-		917A5BA211AB7AFE00016BD2 /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9911AB7AFE00016BD2 /* ASIS3BucketRequest.m */; };
-		917A5BA311AB7AFE00016BD2 /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9B11AB7AFE00016BD2 /* ASIS3ObjectRequest.m */; };
-		917A5BA411AB7AFE00016BD2 /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9D11AB7AFE00016BD2 /* ASIS3Request.m */; };
-		917A5BA511AB7AFE00016BD2 /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B9F11AB7AFE00016BD2 /* ASIS3ServiceRequest.m */; };
 		917A5BDD11AB7C4600016BD2 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */; };
 		917A5BDE11AB7C4600016BD2 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC611AB7C4600016BD2 /* AddTagViewController.m */; };
 		917A5BE011AB7C4600016BD2 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
@@ -342,6 +328,7 @@
 		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
 		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
+		91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
@@ -447,7 +434,6 @@
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
-		494D6C6F11AE1BB1006DADF1 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = /Users/phooze/Documents/iPhone/jFlashBare/jFlash/Classes/External/FlurryLib/libFlurry.a; sourceTree = "<absolute>"; };
 		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
@@ -527,18 +513,6 @@
 		917A5B8A11AB7ADB00016BD2 /* ASINSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASINSStringAdditions.h; path = "External/asi-http-request/Classes/ASINSStringAdditions.h"; sourceTree = "<group>"; };
 		917A5B8B11AB7ADB00016BD2 /* ASINSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASINSStringAdditions.m; path = "External/asi-http-request/Classes/ASINSStringAdditions.m"; sourceTree = "<group>"; };
 		917A5B8C11AB7ADB00016BD2 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = "External/asi-http-request/Classes/ASIProgressDelegate.h"; sourceTree = "<group>"; };
-		917A5B9411AB7AFE00016BD2 /* ASIS3Bucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3Bucket.h; path = "External/asi-http-request/Classes/S3/ASIS3Bucket.h"; sourceTree = "<group>"; };
-		917A5B9511AB7AFE00016BD2 /* ASIS3Bucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3Bucket.m; path = "External/asi-http-request/Classes/S3/ASIS3Bucket.m"; sourceTree = "<group>"; };
-		917A5B9611AB7AFE00016BD2 /* ASIS3BucketObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3BucketObject.h; path = "External/asi-http-request/Classes/S3/ASIS3BucketObject.h"; sourceTree = "<group>"; };
-		917A5B9711AB7AFE00016BD2 /* ASIS3BucketObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3BucketObject.m; path = "External/asi-http-request/Classes/S3/ASIS3BucketObject.m"; sourceTree = "<group>"; };
-		917A5B9811AB7AFE00016BD2 /* ASIS3BucketRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3BucketRequest.h; path = "External/asi-http-request/Classes/S3/ASIS3BucketRequest.h"; sourceTree = "<group>"; };
-		917A5B9911AB7AFE00016BD2 /* ASIS3BucketRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3BucketRequest.m; path = "External/asi-http-request/Classes/S3/ASIS3BucketRequest.m"; sourceTree = "<group>"; };
-		917A5B9A11AB7AFE00016BD2 /* ASIS3ObjectRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3ObjectRequest.h; path = "External/asi-http-request/Classes/S3/ASIS3ObjectRequest.h"; sourceTree = "<group>"; };
-		917A5B9B11AB7AFE00016BD2 /* ASIS3ObjectRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3ObjectRequest.m; path = "External/asi-http-request/Classes/S3/ASIS3ObjectRequest.m"; sourceTree = "<group>"; };
-		917A5B9C11AB7AFE00016BD2 /* ASIS3Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3Request.h; path = "External/asi-http-request/Classes/S3/ASIS3Request.h"; sourceTree = "<group>"; };
-		917A5B9D11AB7AFE00016BD2 /* ASIS3Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3Request.m; path = "External/asi-http-request/Classes/S3/ASIS3Request.m"; sourceTree = "<group>"; };
-		917A5B9E11AB7AFE00016BD2 /* ASIS3ServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3ServiceRequest.h; path = "External/asi-http-request/Classes/S3/ASIS3ServiceRequest.h"; sourceTree = "<group>"; };
-		917A5B9F11AB7AFE00016BD2 /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3ServiceRequest.m; path = "External/asi-http-request/Classes/S3/ASIS3ServiceRequest.m"; sourceTree = "<group>"; };
 		917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStudySetInputViewController.h; path = AppSpecific/AddStudySetInputViewController.h; sourceTree = "<group>"; };
 		917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStudySetInputViewController.m; path = AppSpecific/AddStudySetInputViewController.m; sourceTree = "<group>"; };
 		917A5BC511AB7C4600016BD2 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddTagViewController.h; path = AppSpecific/AddTagViewController.h; sourceTree = "<group>"; };
@@ -656,6 +630,7 @@
 		91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentence.m; path = AppSpecific/ExampleSentence.m; sourceTree = "<group>"; };
 		91CBA6E811BB787A004BD0D0 /* ExampleSentencePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencePeer.h; path = AppSpecific/ExampleSentencePeer.h; sourceTree = "<group>"; };
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
+		91D3CD2C11D08C71008565F8 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmSettingsView.xib; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
@@ -696,7 +671,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
-				49F9689411AF642800DFC3C9 /* libFlurry.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -705,6 +679,7 @@
 				917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */,
 				49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */,
 				49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */,
+				91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +695,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4986F8A811C715F600947486 /* Security.framework in Frameworks */,
-				4986F8A911C715F600947486 /* libFlurry.a in Frameworks */,
 				4986F8AA11C715F600947486 /* Foundation.framework in Frameworks */,
 				4986F8AB11C715F600947486 /* UIKit.framework in Frameworks */,
 				4986F8AC11C715F600947486 /* CoreGraphics.framework in Frameworks */,
@@ -1072,7 +1046,6 @@
 			isa = PBXGroup;
 			children = (
 				917A5CB011AB85CA00016BD2 /* Reachability */,
-				917A5B9311AB7AE200016BD2 /* S3 */,
 				917A5B7E11AB7ADB00016BD2 /* ASIAuthenticationDialog.h */,
 				917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */,
 				917A5B8011AB7ADB00016BD2 /* ASIFormDataRequest.h */,
@@ -1092,25 +1065,6 @@
 			name = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
-		917A5B9311AB7AE200016BD2 /* S3 */ = {
-			isa = PBXGroup;
-			children = (
-				917A5B9411AB7AFE00016BD2 /* ASIS3Bucket.h */,
-				917A5B9511AB7AFE00016BD2 /* ASIS3Bucket.m */,
-				917A5B9611AB7AFE00016BD2 /* ASIS3BucketObject.h */,
-				917A5B9711AB7AFE00016BD2 /* ASIS3BucketObject.m */,
-				917A5B9811AB7AFE00016BD2 /* ASIS3BucketRequest.h */,
-				917A5B9911AB7AFE00016BD2 /* ASIS3BucketRequest.m */,
-				917A5B9A11AB7AFE00016BD2 /* ASIS3ObjectRequest.h */,
-				917A5B9B11AB7AFE00016BD2 /* ASIS3ObjectRequest.m */,
-				917A5B9C11AB7AFE00016BD2 /* ASIS3Request.h */,
-				917A5B9D11AB7AFE00016BD2 /* ASIS3Request.m */,
-				917A5B9E11AB7AFE00016BD2 /* ASIS3ServiceRequest.h */,
-				917A5B9F11AB7AFE00016BD2 /* ASIS3ServiceRequest.m */,
-			);
-			name = S3;
-			sourceTree = "<group>";
-		};
 		917A5BA611AB7B1C00016BD2 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,7 +1078,7 @@
 		917A5C0B11AB807800016BD2 /* FlurryLib */ = {
 			isa = PBXGroup;
 			children = (
-				494D6C6F11AE1BB1006DADF1 /* libFlurry.a */,
+				91D3CD2C11D08C71008565F8 /* libFlurry.a */,
 				917A5C0C11AB807800016BD2 /* FlurryAPI.h */,
 			);
 			name = FlurryLib;
@@ -1666,12 +1620,6 @@
 				917A5B9011AB7ADB00016BD2 /* ASIInputStream.m in Sources */,
 				917A5B9111AB7ADB00016BD2 /* ASINetworkQueue.m in Sources */,
 				917A5B9211AB7ADB00016BD2 /* ASINSStringAdditions.m in Sources */,
-				917A5BA011AB7AFE00016BD2 /* ASIS3Bucket.m in Sources */,
-				917A5BA111AB7AFE00016BD2 /* ASIS3BucketObject.m in Sources */,
-				917A5BA211AB7AFE00016BD2 /* ASIS3BucketRequest.m in Sources */,
-				917A5BA311AB7AFE00016BD2 /* ASIS3ObjectRequest.m in Sources */,
-				917A5BA411AB7AFE00016BD2 /* ASIS3Request.m in Sources */,
-				917A5BA511AB7AFE00016BD2 /* ASIS3ServiceRequest.m in Sources */,
 				917A5BDD11AB7C4600016BD2 /* AddStudySetInputViewController.m in Sources */,
 				917A5BDE11AB7C4600016BD2 /* AddTagViewController.m in Sources */,
 				917A5BE011AB7C4600016BD2 /* HelpViewController.m in Sources */,
@@ -1771,12 +1719,6 @@
 				4986F85911C715F600947486 /* ASIInputStream.m in Sources */,
 				4986F85A11C715F600947486 /* ASINetworkQueue.m in Sources */,
 				4986F85B11C715F600947486 /* ASINSStringAdditions.m in Sources */,
-				4986F85C11C715F600947486 /* ASIS3Bucket.m in Sources */,
-				4986F85D11C715F600947486 /* ASIS3BucketObject.m in Sources */,
-				4986F85E11C715F600947486 /* ASIS3BucketRequest.m in Sources */,
-				4986F85F11C715F600947486 /* ASIS3ObjectRequest.m in Sources */,
-				4986F86011C715F600947486 /* ASIS3Request.m in Sources */,
-				4986F86111C715F600947486 /* ASIS3ServiceRequest.m in Sources */,
 				4986F86211C715F600947486 /* AddStudySetInputViewController.m in Sources */,
 				4986F86311C715F600947486 /* AddTagViewController.m in Sources */,
 				4986F86411C715F600947486 /* HelpViewController.m in Sources */,
@@ -2243,7 +2185,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.1.2;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
