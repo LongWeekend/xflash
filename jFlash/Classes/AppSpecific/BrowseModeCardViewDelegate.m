@@ -37,9 +37,14 @@
   [[[aNotification object] rightBtn] setHidden:YES];
   [[[aNotification object] wrongBtn] setHidden:YES];
   [[[aNotification object] buryCardBtn] setHidden:YES];
-  [[[aNotification object] addBtn] setHidden:YES];
+  [[[aNotification object] addBtn] setHidden:NO];
   [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
   [[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
+  
+  // move the action button to the middle
+  CGRect frame = [[[aNotification object] addBtn] frame];
+  frame.origin.x = 128;
+  [[[aNotification object] addBtn] setFrame:frame];
 
   // kana....?
   // TODO: this needs to be called on studyviewcontroller

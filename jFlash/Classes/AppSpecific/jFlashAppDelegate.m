@@ -19,13 +19,12 @@
 
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{   
-  
-#if defined(APP_STORE_FINAL)
-  // add analytics if this is live
-  NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-  [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
-#endif
+{     
+  #if defined(APP_STORE_FINAL)
+    // add analytics if this is live
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
+  #endif
   
   // Seed random generator
   srandomdev();

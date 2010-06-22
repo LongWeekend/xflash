@@ -156,7 +156,9 @@
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
                                              otherButtonTitles:NSLocalizedString(@"Help Us Fix This Card",@"ActionBarViewController.ActionSheetReportBadData"),
                                                                NSLocalizedString(@"Add Card to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),nil];
-  [as showInView:[[[self view] superview] superview]];
+
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  [as showInView:[[appDelegate rootViewController]view]]; 
   [as release];
 }
 
