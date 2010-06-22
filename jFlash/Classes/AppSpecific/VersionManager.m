@@ -147,14 +147,13 @@
     sender.startButton.hidden = NO;
   }
   
+  // TODO: make button retry
   // If not failed, don't show retry button
   if (![self isFailureState])
   {
-    sender.retryButton.hidden = YES;
   }
   else
   {
-    sender.retryButton.hidden = NO;
   }
   
   // Do not allow pause during the update at all
@@ -366,7 +365,7 @@
     if ([[self dlHandler] isFailureState])
     {
       LWE_LOG(@"Download failed, oh no, what are we doing to do now");
-      NSString *tmpTaskMsg = [NSString stringWithFormat:[[self dlHandler] taskMessage]];
+      NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
       [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
     }
     else if ([[self dlHandler] isSuccessState])

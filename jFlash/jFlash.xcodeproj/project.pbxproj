@@ -322,6 +322,12 @@
 		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
 		91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
+		91D3CF5E11D0F291008565F8 /* form-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5D11D0F291008565F8 /* form-background.png */; };
+		91D3CF6011D0F2E1008565F8 /* download-moodicon-astounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */; };
+		91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
+		91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
+		91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
+		91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
 		91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
@@ -618,6 +624,12 @@
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91D3CD2C11D08C71008565F8 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
+		91D3CF5D11D0F291008565F8 /* form-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "form-background.png"; path = "Assets/form-background.png"; sourceTree = "<group>"; };
+		91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-moodicon-astounded.png"; path = "Assets/download-moodicon-astounded.png"; sourceTree = "<group>"; };
+		91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow.png"; path = "Assets/candy-btn-yellow.png"; sourceTree = "<group>"; };
+		91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-textarea-bg.png"; path = "Assets/what-to-fix-textarea-bg.png"; sourceTree = "<group>"; };
+		91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-moodicon-quizzical.png"; path = "Assets/what-to-fix-moodicon-quizzical.png"; sourceTree = "<group>"; };
+		91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-green.png"; path = "Assets/candy-btn-green.png"; sourceTree = "<group>"; };
 		91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmSettingsView.xib; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
@@ -954,6 +966,12 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
+				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
+				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
+				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
+				91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */,
+				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
 				49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */,
 				4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */,
@@ -1449,6 +1467,12 @@
 				491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
+				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
+				91D3CF6011D0F2E1008565F8 /* download-moodicon-astounded.png in Resources */,
+				91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */,
+				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
+				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
+				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2153,6 +2177,7 @@
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.0;
@@ -2172,6 +2197,7 @@
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.0;
 			};

@@ -141,6 +141,7 @@
     [[self tapForAnswerImage] setHidden:YES];
     [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
+    [scrollView setScrollEnabled:YES];
   }
   else	
   {
