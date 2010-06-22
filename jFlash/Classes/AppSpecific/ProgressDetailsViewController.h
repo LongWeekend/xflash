@@ -10,6 +10,9 @@
 #import "PDColoredProgressView.h"
 
 @interface ProgressDetailsViewController : UIViewController {
+  IBOutlet UILabel *currentNumberOfWords;
+  IBOutlet UILabel *totalNumberOfWords;
+  
   IBOutlet UIButton *closeBtn;
   IBOutlet UILabel *currentStudySet;
   IBOutlet UILabel *motivationLabel;
@@ -40,6 +43,8 @@
 - (void) setStreakLabel;
 
 @property (nonatomic, retain) NSMutableArray *levelDetails;
+@property (nonatomic,retain) IBOutlet UILabel *currentNumberOfWords;
+@property (nonatomic,retain) IBOutlet UILabel *totalNumberOfWords;
 @property (nonatomic,retain) IBOutlet UIButton *closeBtn;
 @property (nonatomic,retain) IBOutlet UILabel *currentStudySet; 
 @property (nonatomic,retain) IBOutlet UILabel *motivationLabel;

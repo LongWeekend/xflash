@@ -35,6 +35,7 @@
 @property (retain,nonatomic) LoadingView *loadingView;
 
 - (void) switchToStudyView;
+- (IBAction) switchToSettings;
 - (void) applicationWillTerminate:(UIApplication*) application;
 - (void) loadTabBar;
 - (void) showDatabaseLoadingView;

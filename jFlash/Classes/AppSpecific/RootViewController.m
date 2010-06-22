@@ -173,6 +173,11 @@
   [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
+- (IBAction) switchToSettings
+{
+  [tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
+}
+
 
 /**
  * Private method that actually does the dirty work of displaying any modal
