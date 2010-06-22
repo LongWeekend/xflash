@@ -104,6 +104,7 @@
   // Now do the actual copy
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
+  LWE_LOG(@"Copying file from :%@",bundlePath);
 	return [fileManager copyItemAtPath:bundlePath toPath:destPath error:NULL];
 }
 

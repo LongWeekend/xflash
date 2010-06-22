@@ -42,6 +42,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                       NSLocalizedString(@"Card is a duplicate",@"ReportBadDataViewController.Reasons_Duplicate"),
                       NSLocalizedString(@"Not relevant for this set",@"ReportBadDataViewController.Reasons_NotRelevant"),
                       NSLocalizedString(@"Antiquated or dead word",@"ReportBadDataViewController.Reasons_DeadWord"),
+                      NSLocalizedString(@"Example sentence is odd",@"ReportBadDataViewController.Reasons_ExSentence"),
                       NSLocalizedString(@"Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
   }
   return self;
@@ -178,6 +179,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
+#pragma mark -
 # pragma mark Delegate methods for UITextField
 
 /** Should edit - if it's the email, say yes, if it's the reason, say no */
@@ -227,6 +229,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   return YES;
 }
 
+#pragma mark -
 #pragma mark UITextViewDelegate methods
 
 /** Detects a touch outside of the UITextView to resign the keyboard */
@@ -294,6 +297,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 }
 
 
+#pragma mark -
 #pragma mark UIPickerViewDataSource
 
 /** UIPickerView delegate - gets the title of each row from _issueTypeArray */
@@ -337,6 +341,9 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   return [_issueTypeArray count];
 }
 
+
+#pragma mark -
+#pragma mark class plumbing
 
 //! standard dealloc
 - (void)dealloc
