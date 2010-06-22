@@ -34,7 +34,7 @@
 
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
   }
 	return self;
@@ -248,7 +248,7 @@
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
   // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:nil];
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
 }
 
 
