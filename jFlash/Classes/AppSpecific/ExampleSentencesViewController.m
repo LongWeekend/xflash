@@ -80,7 +80,7 @@
 - (void) setupSentencesWebView:(NSString *)sentencesHTML {  
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+  NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
   
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
   
@@ -108,13 +108,13 @@
     
     // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
-    NSString* html = @"<ul>";
+    NSString* html = @"<ol>";
     for (ExampleSentence* sentence in sentences) 
     {
-      html = [html stringByAppendingFormat:@"<li>%@</li>", [sentence sentenceJa]];
-      html = [html stringByAppendingFormat:@"<li>%@</li>", [sentence sentenceEn]];
+      html = [html stringByAppendingFormat:@"<li>%@<br/>", [sentence sentenceJa]];
+      html = [html stringByAppendingFormat:@"%@</li>", [sentence sentenceEn]];
     }
-    html = [html stringByAppendingString:@"</ul>"];
+    html = [html stringByAppendingString:@"</ol>"];
     [self setupSentencesWebView:html];
   }
   

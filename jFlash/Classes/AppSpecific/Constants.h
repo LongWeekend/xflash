@@ -67,6 +67,7 @@ extern NSString * const APP_SETTINGS_VERSION;
 #define CARDCONTENT_MEANING_MAX_HEIGHT    99.0
 
 extern NSString * const HTML_HEADER;
+extern NSString * const SENTENCES_HTML_HEADER;
 extern NSString * const HTML_FOOTER;
 
 // algorithm controls

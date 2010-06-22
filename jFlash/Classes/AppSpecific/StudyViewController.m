@@ -13,6 +13,7 @@
 - (void)_jumpToPage:(int)page;
 - (void)_updateCardViewDelegates;
 - (void)_resetExampleSentencesView;
+- (void)_setScrollViewsScrollibility;
 @end
 
 @implementation StudyViewController
@@ -91,24 +92,32 @@
 }
 
 #pragma mark Convenience methods
-
-- (void) _resetExampleSentencesView
+//! Checks if there are no example sentences on this card (hides page control & locks scrolling)
+- (void) _setScrollViewsScrollibility 
 {
   // Default behavior
   [[self pageControl] setHidden:NO];
   scrollView.pagingEnabled = YES;
   scrollView.scrollEnabled = YES;
-
-  // First, check if they have the plugin installed
+  
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    // Plugin is installed, check if there are no example sentences on this card (hides page control & locks scrolling)
     if(![[self currentCard] hasExampleSentences])
     {
       [[self pageControl] setHidden:YES];
       scrollView.pagingEnabled = NO;
       scrollView.scrollEnabled = NO;
     }
+  }
+}
+
+- (void) _resetExampleSentencesView
+{
+  // First, check if they have the plugin installed
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  {
+    // Plugin is installed, set up the scroll view
+    [self _setScrollViewsScrollibility];
     [[self exampleSentencesViewController] setup];
   }
 }
@@ -116,11 +125,15 @@
 
 - (void) _resetStudyView
 {
+  //reset to the first page just in case
+  [self _jumpToPage:0];
+  
   [[self actionBarController] setCurrentCard:[self currentCard]];
   [actionBarController setup];
   
   [self _resetExampleSentencesView];
   
+  // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
   if(isBrowseMode)
   {
@@ -198,7 +211,7 @@
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   [moodIcon updateMoodIcon:100.0f];
   
-  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"Set: %@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
+  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
   
   Card* card = [[currentStateSingleton activeTag] getFirstCard];
   [self setCurrentCard:card];
@@ -224,7 +237,7 @@
 {
   [[self revealCardBtn] setHidden:YES];
   [[self tapForAnswerImage] setHidden:YES];
-  [scrollView setScrollEnabled:YES];
+  [self _setScrollViewsScrollibility];
   [cardViewController reveal];
   [actionBarController reveal];
 }
@@ -347,6 +360,7 @@
     // Get rid of our "please download me" view
     [[[scrollView subviews] objectAtIndex:1] removeFromSuperview];
     [self setupScrollView];
+    [self resetHeadword];
   }
 }
 
@@ -435,11 +449,12 @@
 - (void)setupScrollView
 {
 	scrollView.delegate = self;
-  
-	[scrollView setCanCancelContentTouches:NO];
 	
-	scrollView.clipsToBounds = YES;
+//	scrollView.clipsToBounds = YES;
 	scrollView.pagingEnabled = YES;
+  scrollView.delaysContentTouches = NO;
+  scrollView.directionalLockEnabled = YES;
+  scrollView.canCancelContentTouches = YES;
 
 	// This stays NO until "reveal" sets it to yes.  Then setupViewForCard will set it to NO again.
   scrollView.scrollEnabled = NO;
@@ -471,7 +486,7 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
-#pragma mark UIScrollViewDelegate stuff
+#pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
