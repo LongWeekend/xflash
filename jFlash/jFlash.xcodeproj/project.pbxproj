@@ -13,7 +13,6 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
-		4912678311C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
@@ -54,8 +53,6 @@
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
-		495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
-		495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
@@ -108,17 +105,12 @@
 		4986F83D11C715F600947486 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		4986F83E11C715F600947486 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
 		4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
-		4986F84111C715F600947486 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
-		4986F84211C715F600947486 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
-		4986F84311C715F600947486 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
-		4986F84411C715F600947486 /* jflash-1.1-features-actionsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */; };
 		4986F84511C715F600947486 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
 		4986F84611C715F600947486 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		4986F84711C715F600947486 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		4986F84811C715F600947486 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
 		4986F84911C715F600947486 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */; };
 		4986F84A11C715F600947486 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
-		4986F84B11C715F600947486 /* download-example-plugin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */; };
 		4986F84C11C715F600947486 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
 		4986F84D11C715F600947486 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		4986F84E11C715F600947486 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
@@ -209,9 +201,7 @@
 		4986F8B111C715F600947486 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		4997D21611BB642600016A15 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
-		49A8232211BE382E00395E62 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
-		49B4ABEA11C1DCD100CFC308 /* download-example-plugin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */; };
 		49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
 		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
@@ -319,7 +309,6 @@
 		91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		91D3CF5E11D0F291008565F8 /* form-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5D11D0F291008565F8 /* form-background.png */; };
-		91D3CF6011D0F2E1008565F8 /* download-moodicon-astounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */; };
 		91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
 		91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
 		91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
@@ -353,6 +342,7 @@
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
+		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,7 +365,6 @@
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
-		4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "jflash-1.1-features-actionsheet.png"; path = "Assets/jflash-1.1-features-actionsheet.png"; sourceTree = "<group>"; };
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
@@ -430,17 +419,13 @@
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
-		495C5A0611BFB9370006DD01 /* example-sentences.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "example-sentences.html"; path = "Assets/example-sentences.html"; sourceTree = "<group>"; };
-		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4986F8B811C715F600947486 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
 		4997D21511BB642600016A15 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionManager.m; path = AppSpecific/VersionManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
-		49A8232111BE382E00395E62 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "release-notes.html"; path = "Assets/release-notes.html"; sourceTree = "<group>"; };
 		49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExamplesUnavailable.xib; path = XIBs/ExamplesUnavailable.xib; sourceTree = "<group>"; };
-		49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-example-plugin-button.png"; path = "Assets/download-example-plugin-button.png"; sourceTree = "<group>"; };
 		49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-cancel-button.png"; path = "Assets/task-cancel-button.png"; sourceTree = "<group>"; };
 		49B4ABE711C1DCD100CFC308 /* task-pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-pause-button.png"; path = "Assets/task-pause-button.png"; sourceTree = "<group>"; };
 		49B4ABE811C1DCD100CFC308 /* task-retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-retry-button.png"; path = "Assets/task-retry-button.png"; sourceTree = "<group>"; };
@@ -620,7 +605,6 @@
 		91D3CD2C11D08C71008565F8 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
 		91D3CF5D11D0F291008565F8 /* form-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "form-background.png"; path = "Assets/form-background.png"; sourceTree = "<group>"; };
-		91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "download-moodicon-astounded.png"; path = "Assets/download-moodicon-astounded.png"; sourceTree = "<group>"; };
 		91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow.png"; path = "Assets/candy-btn-yellow.png"; sourceTree = "<group>"; };
 		91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-textarea-bg.png"; path = "Assets/what-to-fix-textarea-bg.png"; sourceTree = "<group>"; };
 		91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-moodicon-quizzical.png"; path = "Assets/what-to-fix-moodicon-quizzical.png"; sourceTree = "<group>"; };
@@ -655,6 +639,7 @@
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -902,7 +887,6 @@
 				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
 				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
 				9177287811C0BF0B00A90071 /* select-user-btn.png */,
-				49B4ABE511C1DCD100CFC308 /* download-example-plugin-button.png */,
 				49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */,
 				49B4ABE711C1DCD100CFC308 /* task-pause-button.png */,
 				49B4ABE811C1DCD100CFC308 /* task-retry-button.png */,
@@ -960,19 +944,15 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D3EFCF7211D21C0B0014C8B4 /* plugin-resources */,
 				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
 				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
-				91D3CF5F11D0F2E1008565F8 /* download-moodicon-astounded.png */,
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
 				49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */,
-				4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				495C5A0811BFB9410006DD01 /* full-text-search.html */,
-				495C5A0611BFB9370006DD01 /* example-sentences.html */,
-				49A8232111BE382E00395E62 /* release-notes.html */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				D3309B031123C7D800B73E8E /* help */,
 				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
@@ -1440,17 +1420,12 @@
 				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
-				49A8232211BE382E00395E62 /* release-notes.html in Resources */,
-				495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */,
-				495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */,
-				4912678311C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png in Resources */,
 				9177285911C0BB6100A90071 /* send-to-long-weekend-btn.png in Resources */,
 				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
 				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
 				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
 				91DDB00B11C1D70600E8B962 /* AlgorithmSettingsView.xib in Resources */,
 				49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */,
-				49B4ABEA11C1DCD100CFC308 /* download-example-plugin-button.png in Resources */,
 				49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */,
 				49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */,
 				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
@@ -1459,13 +1434,13 @@
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
-				91D3CF6011D0F2E1008565F8 /* download-moodicon-astounded.png in Resources */,
 				91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */,
 				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 				91992E2911D1A2F600CFCACD /* jFlash.db in Resources */,
 				91992E3411D1A31B00CFCACD /* jFlash-CARD-1.1.db in Resources */,
+				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1529,17 +1504,12 @@
 				4986F83D11C715F600947486 /* twitter-icon.png in Resources */,
 				4986F83E11C715F600947486 /* facebook-icon.png in Resources */,
 				4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */,
-				4986F84111C715F600947486 /* release-notes.html in Resources */,
-				4986F84211C715F600947486 /* example-sentences.html in Resources */,
-				4986F84311C715F600947486 /* full-text-search.html in Resources */,
-				4986F84411C715F600947486 /* jflash-1.1-features-actionsheet.png in Resources */,
 				4986F84511C715F600947486 /* send-to-long-weekend-btn.png in Resources */,
 				4986F84611C715F600947486 /* save-changes-btn.png in Resources */,
 				4986F84711C715F600947486 /* select-user-btn.png in Resources */,
 				4986F84811C715F600947486 /* dropped-text-box.png in Resources */,
 				4986F84911C715F600947486 /* AlgorithmSettingsView.xib in Resources */,
 				4986F84A11C715F600947486 /* ExamplesUnavailable.xib in Resources */,
-				4986F84B11C715F600947486 /* download-example-plugin-button.png in Resources */,
 				4986F84C11C715F600947486 /* task-cancel-button.png in Resources */,
 				4986F84D11C715F600947486 /* task-pause-button.png in Resources */,
 				4986F84E11C715F600947486 /* task-retry-button.png in Resources */,
