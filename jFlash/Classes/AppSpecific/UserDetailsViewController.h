@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
-#import "UserImagePicker.h"
 
 enum userViewMode {
   kUserViewModeAdd = 0,
@@ -19,7 +18,6 @@ enum userViewMode {
 @interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
 {
   User* selectedUser;
-  UserImagePicker *userImagePickerView;
   UIImage *selectedUserImage;
   IBOutlet UITextField *userNicknameTextField;
   IBOutlet UIButton *userAvatarPreviewBtn;
@@ -35,7 +33,6 @@ enum userViewMode {
 - (IBAction) doActivateUser;
 - (IBAction) doUpdateUserNickname:(id)sender;
 
-- (void) saveAvatarImage;
 - (void) setUser:(User *)sourceUser;
 
 @property (nonatomic) NSInteger mode;
@@ -44,7 +41,6 @@ enum userViewMode {
 @property (nonatomic,retain) UIButton *userAvatarPreviewBtn;
 @property (nonatomic,retain) UIButton *commitChangesBtn;
 @property (nonatomic,retain) UIButton *activateUserBtn;
-@property (nonatomic,retain) UserImagePicker* userImagePickerView;
 @property (nonatomic,retain) UIImage *selectedUserImage;
 @property (nonatomic,retain) NSString* originalUserNickname;
 

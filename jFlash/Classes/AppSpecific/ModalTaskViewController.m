@@ -13,7 +13,7 @@
  */
 @implementation ModalTaskViewController
 
-@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, cancelButton, retryButton, startButton, pauseButton;
+@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton, pauseButton;
 @synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear, webViewContentFile;
 
 //! Initialization
@@ -293,10 +293,21 @@
 - (void) updateButtons
 {
   [self willUpdateButtonsInView:self];
-  [[self retryButton] setEnabled:[self canRetryTask]];
-  [[self pauseButton] setEnabled:[self canPauseTask]];
-  [[self startButton] setEnabled:[self canStartTask]];
-  [[self cancelButton] setEnabled:[self canCancelTask]];
+  if ([self canStartTask]) 
+  {
+    self.startButton.titleLabel.text = NSLocalizedString(@"Start Download", @"ModalTaskViewController.start");
+  }
+  else if ([self canRetryTask]) 
+  {
+    self.startButton.titleLabel.text = NSLocalizedString(@"Restart Download", @"ModalTaskViewController.retry");
+  }
+       
+  if([self canCancelTask])
+  {
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTask:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
+  }
 }
 
 

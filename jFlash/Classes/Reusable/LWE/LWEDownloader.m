@@ -149,14 +149,15 @@
     [[sender startButton] setHidden:NO];
   }
   
+  // TODO: change this
   // If not failed, don't show retry button (don't count cancellation)
   if (![self isFailureState] || downloaderState == kDownloaderCancelled)
   {
-    [[sender retryButton] setHidden:YES];
+  
   }
   else
   {
-    [[sender retryButton] setHidden:NO];
+  
   }
   
   // Not ready for this version

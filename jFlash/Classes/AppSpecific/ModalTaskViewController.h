@@ -51,8 +51,6 @@
   IBOutlet UILabel *statusMsgLabel;
   IBOutlet UILabel *taskMsgLabel;
   IBOutlet PDColoredProgressView *progressIndicator;
-  IBOutlet UIButton *cancelButton;
-  IBOutlet UIButton *retryButton;
   IBOutlet UIButton *pauseButton;
   IBOutlet UIButton *startButton;
   
@@ -94,8 +92,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *statusMsgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *taskMsgLabel;
 @property (nonatomic, retain) IBOutlet PDColoredProgressView *progressIndicator;
-@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
-@property (nonatomic, retain) IBOutlet UIButton *retryButton;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
 @property (nonatomic, retain) IBOutlet UIButton *pauseButton;
 

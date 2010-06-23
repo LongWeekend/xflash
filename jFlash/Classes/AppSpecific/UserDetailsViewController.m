@@ -11,7 +11,7 @@
 #import "UserPeer.h"
 
 @implementation UserDetailsViewController
-@synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, userImagePickerView, selectedUserImage;
+@synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, selectedUserImage;
 
 - (id)init
 {
@@ -110,16 +110,6 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-  userImagePickerView = [[UserImagePicker alloc] init];
-  if(buttonIndex == 0){
-		userImagePickerView.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-  } else{
-		userImagePickerView.sourceType = UIImagePickerControllerSourceTypeCamera;
-  }
-  [self.navigationController presentModalViewController:userImagePickerView animated:YES];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 
 {
   if([theTextField.text length] == 0)
@@ -134,19 +124,6 @@
 }
 
 # pragma mark Other functions
-
-- (void) saveAvatarImage
-{
-  // Show button to save changes
-  [commitChangesBtn setHidden:NO];
-
-  // Update on screen image only
-  _avatarUpdated = true;
-  [userAvatarPreviewBtn setBackgroundImage:[userImagePickerView selectedImage] forState:UIControlStateNormal];
-
-  // Save image in object so it doesn't go out of scope when it closes
-  selectedUserImage = [userImagePickerView selectedImage]; // autoreleases!
-}
 
 - (void) setUser:(User *)sourceUser{
   // Make local copy or user

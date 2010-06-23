@@ -34,7 +34,7 @@
 - (void) loadView
 {
   [super loadView];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetailedView)];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
 }
 
@@ -180,7 +180,7 @@
     NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
     {
-      NSString* message = [NSString stringWithFormat:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
+      NSString* message = [NSString stringWithString:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
                                                message:message
                                                delegate:self

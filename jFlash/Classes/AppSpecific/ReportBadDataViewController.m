@@ -273,6 +273,9 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     textView.textColor = [UIColor blackColor];
   }
   
+  // Move the view up so the keyboard doesn't block the input
+  [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-90) withInterval:0.5f];
+  
   // Stop you from showing the picker
   _keyboardCurrentlyVisible = YES;
 }
@@ -285,6 +288,9 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   self.navigationItem.rightBarButtonItem = nil;
   // Bring back the cancel button since we killed it
   self.navigationItem.leftBarButtonItem = _cancelButton;
+  
+  // Move the view up so the keyboard doesn't block the input
+  [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 
   // Also, mimic placeholder behavior in case text is empty
   if ([self.userMsgInputBox.text isEqualToString:@""])
@@ -292,6 +298,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     self.userMsgInputBox.text = RBDVC_USER_TEXT_BOX_DEFAULT;
     self.userMsgInputBox.textColor = [UIColor lightGrayColor];
   }
+  
   // Allow you to use the picker again
   _keyboardCurrentlyVisible = NO;
 }

@@ -71,6 +71,10 @@
   [[[aNotification object] cardMeaningBtnHint] setHidden:NO];
   [[[aNotification object] prevCardBtn] setHidden:YES];
   [[[aNotification object] nextCardBtn] setHidden:YES];
+  
+  CGRect frame = [[[aNotification object] addBtn] frame];
+  frame.origin.x = 9;
+  [[[aNotification object] addBtn] setFrame:frame];
 }
 
 -(void) actionBarWillReveal:(NSNotification *)aNotification

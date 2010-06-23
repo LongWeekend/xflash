@@ -13,6 +13,7 @@
 @synthesize closeBtn, currentStudySet, motivationLabel, levelDetails, streakLabel, rightStreak, wrongStreak;
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, cardsWrongAllTime, cardsRightAllTime, progressViewTitle;
+@synthesize currentNumberOfWords, totalNumberOfWords;
 
 - (void)viewDidLoad
 {
@@ -23,8 +24,8 @@
   [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  User* user = [UserPeer getUserByPK:[settings integerForKey:@"user_id"]];
-  [progressViewTitle setText:[NSString stringWithFormat:NSLocalizedString(@"%@'s Progress",@"ProgressDetailsViewController.Title"), [user userNickname]]];
+  [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d*", [settings integerForKey:APP_MAX_STUDYING]]];
+  [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d", [[levelDetails objectAtIndex:6] intValue]]];
 }
 
 - (void)setStreakLabel
@@ -32,11 +33,11 @@
   NSString* streakText;
   if(wrongStreak > 0)
   {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i Wrong",@"ProgressDetailsViewController.NumWrongStreak"), wrongStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i wrong",@"ProgressDetailsViewController.NumWrongStreak"), wrongStreak];
   }
   else
   {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i Right",@"ProgressDetailsViewController.NumRightStreak"), rightStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i right",@"ProgressDetailsViewController.NumRightStreak"), rightStreak];
   }
   streakLabel.text = streakText;
   [streakText release];
@@ -101,6 +102,8 @@
 - (void)dealloc
 {
   [levelDetails release];
+  [currentNumberOfWords release];
+  [totalNumberOfWords release];
   [cardSetProgressLabel0 release];
   [cardSetProgressLabel1 release];
   [cardSetProgressLabel2 release];
