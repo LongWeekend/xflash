@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self setTitle:@"Plugins"];
+  [self setTitle:NSLocalizedString(@"Get Updates",@"PluginSettingsViewController.NavBarTitle")];
   [self reloadTableData];
   
   // Register a reload when they hide the modal

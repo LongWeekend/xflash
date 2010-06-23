@@ -56,9 +56,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           SET_THEME_TAME,@"key",
                           @"Tame",@"name",
                           @"tame",@"filename",
-                          [NSNumber numberWithFloat:0.000],@"R",
-                          [NSNumber numberWithFloat:0.000],@"G",
-                          [NSNumber numberWithFloat:0.000],@"B",
+                          [NSNumber numberWithFloat:0.529],@"R",
+                          [NSNumber numberWithFloat:0.529],@"G",
+                          [NSNumber numberWithFloat:0.529],@"B",
                           @"aaaaaa",@"WEB_SELECTED",
                           @"dfn{ background-color:white; border-color:gray; }",@"CSS",
                           nil];
@@ -145,7 +145,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 {
   return [NSString stringWithFormat:@"/%@theme-cookie-cutters/%@",[self currentThemeFileName],element];
 }
-
 
 
 //! Provide list of names for all available themes

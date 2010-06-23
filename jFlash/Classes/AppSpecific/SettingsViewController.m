@@ -13,7 +13,7 @@
 #import "VersionManager.h"
 
 @implementation SettingsViewController
-@synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, appirater, settingsDict;
+@synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, readingChanged, appirater, settingsDict;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -54,16 +54,16 @@ NSString * const APP_ALGORITHM = @"algorithm";
     self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
 
     // These are the keys and display names of each row
-    NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Browse Mode",@"SettingsViewController.SettingNames_BrowseMode"),
-                                                          NSLocalizedString(@"Headword",@"SettingsViewController.SettingNames_HeadwordLanguage"),
-                                                          NSLocalizedString(@"Reading Display As",@"SettingsViewController.SettingNames_DisplayReading"),
-                                                          NSLocalizedString(@"Study Difficulty",@"SettingsViewController.SettingNames_StudyAlgo"),nil];
+    NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
+                                                          NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
+                                                          NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
+                                                          NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
     NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
     NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
 
     NSArray *userSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
                                                           NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
-                                                          NSLocalizedString(@"Plugins",@"SettingsViewController.SettingNames_Plugins"),nil];
+                                                          NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
     NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
     NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
     
@@ -72,7 +72,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
     NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
 
-    NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses the EDICT dictionary files. These files are the property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
+    NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
     NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
     
@@ -82,6 +82,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     settingsChanged = NO;
     headwordChanged = NO;
     themeChanged = NO;
+    readingChanged = NO;
   }
 	return self;
 }
@@ -129,6 +130,10 @@ NSString * const APP_ALGORITHM = @"algorithm";
   if (themeChanged)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"themeWasChanged" object:self];
+  }
+  if (readingChanged)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"readingWasChanged" object:self];
   }
   headwordChanged = NO;
   settingsChanged = NO;
@@ -344,9 +349,15 @@ NSString * const APP_ALGORITHM = @"algorithm";
     {
       headwordChanged = YES;
     }
-    else if (key == APP_THEME || APP_READING)
+    else if (key == APP_THEME)
     {
       themeChanged = YES;
+      // Also reload the nav bar for this page
+      self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+    }
+    else if (key == APP_READING)
+    {
+      readingChanged = YES; 
     }
     else
     {

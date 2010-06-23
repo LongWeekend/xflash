@@ -43,7 +43,7 @@
   
   // The progress bar
   IBOutlet UIButton *showProgressModalBtn;
-  IBOutlet UIView *practiceBgImage;
+  IBOutlet UIImageView *practiceBgImage;
   IBOutlet UIView *progressBarView;
   ProgressBarViewController *progressBarViewController;
   
@@ -119,7 +119,7 @@
 @property (nonatomic, retain) UILabel *totalWordsLabel;
 @property (nonatomic, retain) UILabel *remainingCardsLabel;
 
-@property (nonatomic, retain) UIView *practiceBgImage;
+@property (nonatomic, retain) UIImageView *practiceBgImage;
 @property (nonatomic, retain) UIView *progressBarView;
 @property (nonatomic, retain) UIImageView *hhAnimationView;
 

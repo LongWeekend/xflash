@@ -22,6 +22,7 @@ extern NSString * const APP_FACEBOOK;
   BOOL settingsChanged;
   BOOL headwordChanged;
   BOOL themeChanged;
+  BOOL readingChanged;
   Appirater *appirater;
 }
 
@@ -30,6 +31,7 @@ extern NSString * const APP_FACEBOOK;
 @property BOOL settingsChanged;
 @property BOOL headwordChanged;
 @property BOOL themeChanged;
+@property BOOL readingChanged;
 @property (retain, nonatomic) NSDictionary *settingsDict;
 @property (retain, nonatomic) NSMutableArray *sectionArray;
 @property (retain, nonatomic) Appirater *appirater;

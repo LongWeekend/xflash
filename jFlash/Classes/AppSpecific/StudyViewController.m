@@ -53,8 +53,12 @@
   // This is called before drawing the view
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
+  
+  // REFACTOR? Responders to only change what is needed, instead of calling the same function for 3 notfications!
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"themeWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"readingWasChanged" object:nil];
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
@@ -399,7 +403,7 @@
 - (void) updateTheme
 {
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
-  [practiceBgImage setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:pathToBGImage]]];
+  [practiceBgImage setImage:[UIImage imageNamed:pathToBGImage]];
 
   // Make sure our little friend is OK
   float tmpRatio;

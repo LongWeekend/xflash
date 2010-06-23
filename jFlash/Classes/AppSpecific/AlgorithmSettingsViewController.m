@@ -24,11 +24,10 @@ enum ControlSectionRows
   NUM_CONTROL_SECTION_ROWS
 };
 
-
 - (void)viewDidLoad 
 {
   [super viewDidLoad];  
-   self.navigationItem.title = @"Study Difficulty";
+   self.navigationItem.title = NSLocalizedString(@"Study Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -38,11 +37,8 @@ enum ControlSectionRows
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
-}
+  difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 
-- (void)viewDidAppear:(BOOL)animated 
-{
-  [super viewDidAppear:animated];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
   difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
