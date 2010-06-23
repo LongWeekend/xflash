@@ -309,7 +309,7 @@
 {
   [self willUpdateButtonsInView:self];
        
-  if([self canCancelTask])
+  if ([self canCancelTask])
   {
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
     self.navigationItem.leftBarButtonItem = cancelButton;
