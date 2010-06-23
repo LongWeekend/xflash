@@ -56,11 +56,11 @@ enum ControlSectionRows
 {
   if (section == kControlsSection)
   {
-    return @"Study Card Pool Size";
+    return @"Number of Cards in Study Pool";
   }
   else if(section == kFrequencyMultiplierSection)
   {
-    return @"New Cards Appear";
+    return @"Frequency of New Cards";
   }
   return @"";
 }
@@ -79,7 +79,7 @@ enum ControlSectionRows
   if(indexPath.section == kControlsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    [self setMaxCardsUISlider:[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 225, 48)]];
+    [self setMaxCardsUISlider:[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)]];
     
     NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_MAX_STUDYING]];
     maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
@@ -99,7 +99,7 @@ enum ControlSectionRows
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    [self setFrequencyUISlider: [[UISlider alloc] initWithFrame: CGRectMake(120, 0, 180, 50)]];
+    [self setFrequencyUISlider: [[UISlider alloc] initWithFrame: CGRectMake(20, 0, 180, 50)]];
     
     NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
     frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
@@ -109,7 +109,11 @@ enum ControlSectionRows
     frequencyUISlider.continuous = NO;
     [frequencyUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
     [cell addSubview: frequencyUISlider];
-    cell.textLabel.text = @"Less Often";
+    UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 95, 35)];
+    rightLabel.font = [UIFont boldSystemFontOfSize:17];
+    rightLabel.text = [NSString stringWithFormat:@"More Often"];
+    [cell addSubview:rightLabel];
+    [rightLabel release];
   }
   else 
   {

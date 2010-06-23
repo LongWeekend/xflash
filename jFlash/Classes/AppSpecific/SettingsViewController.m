@@ -29,7 +29,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
 
     // The following dictionaries contain all the mappings from actual settings to how they display on the phone
-    NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Off",@"Global.Off"), NSLocalizedString(@"On",@"Global.On"), nil];
+    NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
     NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
     NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
         

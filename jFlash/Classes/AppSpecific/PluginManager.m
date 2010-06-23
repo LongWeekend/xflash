@@ -26,7 +26,7 @@
                            CARD_DB_KEY,@"plugin_key",
                            @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
-                           @"",@"plugin_notes_file",
+                           @"plugin-resources/foo",@"plugin_notes_file",
                            @"http://makbook.local/~phooze/jFlash-CARD-1.1.db.gz",@"target_url",
                            [LWEFile createBundlePathWithFilename:@"jFlash-CARD-1.1.db"],@"target_path",
                            @"jFlash-CARD-1.1.db",@"file_name",
@@ -36,7 +36,7 @@
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             FTS_DB_KEY,@"plugin_key",
                             @"Awesomely Fast Search",@"plugin_name",
-                            @"full-text-search",@"plugin_notes_file",
+                            @"plugin-resources/full-text-search",@"plugin_notes_file",
                             @"Adds sub-second full dictionary search (13MB)",@"plugin_details",
                             @"http://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",
@@ -47,7 +47,7 @@
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             EXAMPLE_DB_KEY,@"plugin_key",
                             @"50,000+ Example Sentences",@"plugin_name",
-                            @"example-sentences",@"plugin_notes_file",
+                            @"plugin-resources/example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (20MB)",@"plugin_details",
                             @"http://d3580k8bnen6up.cloudfront.net/jFlash-EX-1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",

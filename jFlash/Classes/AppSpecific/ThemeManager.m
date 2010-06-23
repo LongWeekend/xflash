@@ -56,10 +56,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           SET_THEME_TAME,@"key",
                           @"Tame",@"name",
                           @"tame",@"filename",
-                          [NSNumber numberWithFloat:0.529],@"R",
-                          [NSNumber numberWithFloat:0.529],@"G",
-                          [NSNumber numberWithFloat:0.529],@"B",
-                          @"aaaaaa",@"WEB_SELECTED",
+                          [NSNumber numberWithFloat:0.427],@"R",
+                          [NSNumber numberWithFloat:0.518],@"G",
+                          [NSNumber numberWithFloat:0.635],@"B",
+                          @"cbd6eb",@"WEB_SELECTED",
                           @"dfn{ background-color:white; border-color:gray; }",@"CSS",
                           nil];
     
