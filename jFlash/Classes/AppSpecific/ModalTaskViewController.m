@@ -161,6 +161,7 @@
   {
     [[self taskHandler] startTask];
     self.progressIndicator.hidden = NO;
+    [self updateButtons];
   }
 }
 
