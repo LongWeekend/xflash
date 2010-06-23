@@ -34,7 +34,7 @@
   [self reloadTableData];
   
   // Register a reload when they hide the modal
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"shouldHideDownloaderModal" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
 //! Helper method for notification

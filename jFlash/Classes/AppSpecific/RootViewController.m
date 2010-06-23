@@ -34,7 +34,7 @@
 
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"shouldHideDownloaderModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
   }
 	return self;
@@ -253,7 +253,7 @@
 {
   [[self tabBarController] dismissModalViewControllerAnimated:YES];
   // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:nil];
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
 }
 
 
@@ -297,17 +297,18 @@
   // Get current card from StudyViewController
   StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
   
-  // Save current card, user, and set, update cache
-  CurrentState *state = [CurrentState sharedCurrentState];
-  
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-  [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
-  [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
-  [settings synchronize];
-  
   // Only freeze if we have a database
-  if ([[LWEDatabase sharedLWEDatabase] dao]) [[state activeTag] freezeCardIds];
+  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
+  {
+    // Save current card, user, and set, update cache
+    CurrentState *state = [CurrentState sharedCurrentState];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
+    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
+    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
+    [settings synchronize];
+    [[state activeTag] freezeCardIds];
+  }
 }
 
 

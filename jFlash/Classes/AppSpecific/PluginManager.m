@@ -27,9 +27,9 @@
                            @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
                            @"",@"plugin_notes_file",
-                           @"http://makbook.local/~phooze/jFlash-CARDS-1.1.db.gz",@"target_url",
-                           [LWEFile createBundlePathWithFilename:@"jFlash-CARDS-1.1.db"],@"target_path",
-                           @"jFlash-CARDS-1.1.db",@"file_name",
+                           @"http://makbook.local/~phooze/jFlash-CARD-1.1.db.gz",@"target_url",
+                           [LWEFile createBundlePathWithFilename:@"jFlash-CARD-1.1.db"],@"target_path",
+                           @"jFlash-CARD-1.1.db",@"file_name",
                            nil],CARD_DB_KEY,
                          
                            // FTS

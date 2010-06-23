@@ -14,10 +14,7 @@
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		4912678311C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */; };
-		491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
-		491D7C4811C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */; };
-		491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
@@ -111,7 +108,6 @@
 		4986F83D11C715F600947486 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		4986F83E11C715F600947486 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
 		4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
-		4986F84011C715F600947486 /* test_update_10_to_11_sql.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */; };
 		4986F84111C715F600947486 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
 		4986F84211C715F600947486 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0611BFB9370006DD01 /* example-sentences.html */; };
 		4986F84311C715F600947486 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 495C5A0811BFB9410006DD01 /* full-text-search.html */; };
@@ -128,8 +124,6 @@
 		4986F84E11C715F600947486 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
 		4986F84F11C715F600947486 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
 		4986F85011C715F600947486 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
-		4986F85111C715F600947486 /* jFlash-CARDS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */; };
-		4986F85211C715F600947486 /* jFlash-USER-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */; };
 		4986F85311C715F600947486 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4986F85511C715F600947486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		4986F85611C715F600947486 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
@@ -314,6 +308,8 @@
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		91992E2911D1A2F600CFCACD /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
+		91992E3411D1A31B00CFCACD /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -380,11 +376,8 @@
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
 		4912678211C0D2F100CBFEE3 /* jflash-1.1-features-actionsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "jflash-1.1-features-actionsheet.png"; path = "Assets/jflash-1.1-features-actionsheet.png"; sourceTree = "<group>"; };
-		491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_update_10_to_11_sql.txt; sourceTree = "<group>"; };
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
-		491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARDS-1.1.db"; path = "sql/jFlash-CARDS-1.1.db"; sourceTree = "<group>"; };
-		491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-USER-1.1.db"; path = "sql/jFlash-USER-1.1.db"; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		491FE3AB11BA0B5700A54F51 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "Assets/twitter-icon.png"; sourceTree = "<group>"; };
 		491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "Assets/facebook-icon.png"; sourceTree = "<group>"; };
@@ -610,6 +603,8 @@
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
+		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
 		91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionBarViewController.m; sourceTree = "<group>"; };
 		91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = Classes/ActionBarViewController.xib; sourceTree = "<group>"; };
@@ -763,12 +758,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				491D7C4A11C4C84900BF8323 /* jFlash-USER-1.1.db */,
-				491D7C4711C4C84000BF8323 /* jFlash-CARDS-1.1.db */,
+				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
+				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
 				91EA2F4B104135E200AB848E /* dist.plist */,
 				494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */,
-				491CDFE611BD435200E2C4A2 /* test_update_10_to_11_sql.txt */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD235E101C121D0081F883 /* icon.png */,
@@ -1446,7 +1440,6 @@
 				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
-				491CDFE711BD435200E2C4A2 /* test_update_10_to_11_sql.txt in Resources */,
 				49A8232211BE382E00395E62 /* release-notes.html in Resources */,
 				495C5A0711BFB9370006DD01 /* example-sentences.html in Resources */,
 				495C5A0911BFB9410006DD01 /* full-text-search.html in Resources */,
@@ -1463,8 +1456,6 @@
 				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
 				49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */,
 				49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */,
-				491D7C4811C4C84000BF8323 /* jFlash-CARDS-1.1.db in Resources */,
-				491D7C4B11C4C84900BF8323 /* jFlash-USER-1.1.db in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
@@ -1473,6 +1464,8 @@
 				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
+				91992E2911D1A2F600CFCACD /* jFlash.db in Resources */,
+				91992E3411D1A31B00CFCACD /* jFlash-CARD-1.1.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1536,7 +1529,6 @@
 				4986F83D11C715F600947486 /* twitter-icon.png in Resources */,
 				4986F83E11C715F600947486 /* facebook-icon.png in Resources */,
 				4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */,
-				4986F84011C715F600947486 /* test_update_10_to_11_sql.txt in Resources */,
 				4986F84111C715F600947486 /* release-notes.html in Resources */,
 				4986F84211C715F600947486 /* example-sentences.html in Resources */,
 				4986F84311C715F600947486 /* full-text-search.html in Resources */,
@@ -1553,8 +1545,6 @@
 				4986F84E11C715F600947486 /* task-retry-button.png in Resources */,
 				4986F84F11C715F600947486 /* task-start-button.png in Resources */,
 				4986F85011C715F600947486 /* tag_glossary.html in Resources */,
-				4986F85111C715F600947486 /* jFlash-CARDS-1.1.db in Resources */,
-				4986F85211C715F600947486 /* jFlash-USER-1.1.db in Resources */,
 				4986F85311C715F600947486 /* SentenceView.xib in Resources */,
 				492568E611C7831F0058675B /* FMCommandEditViewController.xib in Resources */,
 				492568E711C7831F0058675B /* FMConsoleController.xib in Resources */,

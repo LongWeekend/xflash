@@ -9,16 +9,16 @@
 
 // Version numbers & migration constants - DO NOT CHANGE unless you know what you're doing
 NSString * const JFLASH_CURRENT_VERSION       = @"1.1";
-NSString * const JFLASH_CURRENT_CARD_DATABASE = @"jFlash-CARDS-1.1.db";
-NSString * const JFLASH_CURRENT_USER_DATABASE = @"jFlash-USER-1.1.db";
+NSString * const JFLASH_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
+NSString * const JFLASH_CURRENT_USER_DATABASE = @"jFlash.db";
 
 NSString * const JFLASH_VERSION_1_0           = @"1.0";
 NSString * const JFLASH_VERSION_1_1           = @"1.1";
 NSString * const JFLASH_10_USER_DATABASE      = @"jFlash.db";
-NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"test_update_10_to_11_sql.txt";
+NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"jflash_10_to_11.sql";
 
-NSString * const JFLASH_11_CARD_DATABASE      = @"jFlash-CARDS-1.1.db";
-NSString * const JFLASH_11_USER_DATABASE      = @"jFlash-USER-1.1.db";
+NSString * const JFLASH_11_CARD_DATABASE      = @"jFlash-CARD-1.1.db";
+NSString * const JFLASH_11_USER_DATABASE      = @"jFlash.db";
 
 // Plugin keys - DO NOT change
 NSString *const CARD_DB_KEY = @"CARD_DB";

@@ -6,6 +6,7 @@
 //
 
 #import "ModalTaskViewController.h"
+#import "WebGradientView.h"
 
 /**
  * Controls view & program flow during plugin/file downloads, database upgrades
@@ -203,14 +204,14 @@
  * Cancels an ongoing task process
  * If delegate does not implement canCancelTask, assume that it is possible
  * to cancel and sends cancelTask message to taskHandler.
- * Also sends a shouldHideDownloaderModal notification on the current thread if cancel msg sent to delegate
+ * Also sends a taskDidCompleteSuccessfully notification on the current thread if cancel msg sent to delegate
  */
 - (IBAction) cancelProcess
 {
   if ([self canCancelTask])
   {
     [[self taskHandler] cancelTask];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
   }
 }
 
@@ -326,7 +327,7 @@
   {
     // Tell someone about this!  Let someone else handle this noise
     LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldHideDownloaderModal" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
   }
 }
 
@@ -344,8 +345,10 @@
   
   NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFile] ofType:@"html"];
   NSURL *url = [NSURL fileURLWithPath:filename];
-
   [webView loadRequest:[NSURLRequest requestWithURL:url]];
+
+//  WebGradientView *subview = [[WebGradientView alloc] initWithFrame:CGRectMake(0,0,320,317) subview:webView];
+
   [self.view addSubview:webView];
   [webView release];
 }

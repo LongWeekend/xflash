@@ -13,6 +13,7 @@
 //! Holds default text for the userMsgInputBox
 extern NSString * const RBDVC_USER_TEXT_BOX_DEFAULT;
 
+//! Allows users to report bad card data to us by sending a Flurry event
 @interface ReportBadDataViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 {
   IBOutlet UITextView *userMsgInputBox;   //! Where the user types details about the issue
