@@ -48,7 +48,6 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   return self;
 }
 
-
 /**
  * UIView delegate - View did load, so time time to set up picker, the title nav bar & HH Icon
  */

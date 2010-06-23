@@ -36,6 +36,7 @@
 - (NSString*) statusMessage;
 @optional
 - (void) willUpdateButtonsInView:(id)sender;
+- (void) didUpdateButtonsInView:(id)sender;
 - (BOOL) canCancelTask;
 - (BOOL) canRetryTask;
 - (BOOL) canStartTask;

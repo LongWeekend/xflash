@@ -73,7 +73,7 @@
 					<object class="IBUIImageView" id="292977728">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 318}</string>
+						<string key="NSFrameSize">{320, 323}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -673,7 +673,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>StudyViewController</string>
 					<string>UIResponder</string>
-					<string>{{648, 526}, {320, 480}}</string>
+					<string>{{404, 432}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<boolean value="NO"/>
 					<boolean value="NO"/>

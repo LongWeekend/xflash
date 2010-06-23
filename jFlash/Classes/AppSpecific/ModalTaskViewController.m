@@ -39,7 +39,7 @@
   [self setProgress:0.0f];
 
   // Sets the disabled/enabled state of start button
-  [[self startButton] setEnabled:![self startTaskOnAppear]];
+//  [[self startButton] setEnabled:![self startTaskOnAppear]];
 
   [[self progressIndicator] setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
@@ -161,6 +161,8 @@
   {
     [[self taskHandler] startTask];
     self.progressIndicator.hidden = NO;
+    self.startButton.hidden = YES;
+    [self updateButtons];
   }
 }
 
@@ -290,6 +292,14 @@
   }
 }
 
+- (void) didUpdateButtonsInView:(id)sender
+{
+  if ([[self taskHandler] respondsToSelector:@selector(didUpdateButtonsInView:)])
+  {
+    [[self taskHandler] didUpdateButtonsInView:sender];
+  }
+}
+
 
 /**
  * Update the enabled / disabled state of the buttons
@@ -298,14 +308,6 @@
 - (void) updateButtons
 {
   [self willUpdateButtonsInView:self];
-  if ([self canStartTask]) 
-  {
-    self.startButton.titleLabel.text = NSLocalizedString(@"Start Download", @"ModalTaskViewController.start");
-  }
-  else if ([self canRetryTask]) 
-  {
-    self.startButton.titleLabel.text = NSLocalizedString(@"Restart Download", @"ModalTaskViewController.retry");
-  }
        
   if([self canCancelTask])
   {
@@ -313,6 +315,8 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     [cancelButton release];
   }
+  
+  [self didUpdateButtonsInView:self];
 }
 
 
@@ -324,9 +328,6 @@
   [self setTaskMessage:[[self taskHandler] taskMessage]];
   [self setStatusMessage:[[self taskHandler] statusMessage]];
   [self setProgress:[[self taskHandler] progress]];
-
-  // Call delegate & update the UI buttons
-  [self updateButtons];
   
   if ([[self taskHandler] isSuccessState])
   {
@@ -334,6 +335,14 @@
     LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
   }
+  else if ([[self taskHandler] isFailureState])
+  {
+    // Tell someone about this!  Let someone else handle this noise
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidFail" object:self];
+  }
+  
+  // Call delegate & update the UI buttons
+  [self updateButtons];
 }
 
 

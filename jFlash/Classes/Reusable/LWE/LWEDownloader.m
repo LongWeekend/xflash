@@ -140,25 +140,23 @@
 - (void) willUpdateButtonsInView:(id)sender
 {
   // If not ready, don't show start button
-  if (downloaderState != kDownloaderReady)
+  if ([self isFailureState] || downloaderState == kDownloaderCancelled || downloaderState == kDownloaderNetworkFail)
+  {
+    [[sender startButton] setHidden:NO];
+    [[[sender startButton] titleLabel] setText: NSLocalizedString(@"Restart", @"ModalTaskViewController.retry")];
+    [[sender progressIndicator] setHidden:YES];
+  }
+  else if (downloaderState != kDownloaderReady)
   {
     [[sender startButton] setHidden:YES];
   }
   else
   {
     [[sender startButton] setHidden:NO];
+    [[[sender startButton] titleLabel] setText: NSLocalizedString(@"Start Download", @"ModalTaskViewController.start")];
   }
   
-  // TODO: change this
   // If not failed, don't show retry button (don't count cancellation)
-  if (![self isFailureState] || downloaderState == kDownloaderCancelled)
-  {
-  
-  }
-  else
-  {
-  
-  }
   
   // Not ready for this version
   [[sender pauseButton] setHidden:YES];
