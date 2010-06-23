@@ -6,7 +6,7 @@
 //
 
 #import "ModalTaskViewController.h"
-#import "WebGradientView.h"
+//#import "WebGradientView.h"
 
 /**
  * Controls view & program flow during plugin/file downloads, database upgrades
@@ -157,7 +157,11 @@
  */ 
 - (IBAction) startProcess
 {
-  if ([self canStartTask]) [[self taskHandler] startTask];
+  if ([self canStartTask])
+  {
+    [[self taskHandler] startTask];
+    self.progressIndicator.hidden = NO;
+  }
 }
 
 
@@ -212,6 +216,7 @@
   {
     [[self taskHandler] cancelTask];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
+    self.progressIndicator.hidden = YES;
   }
 }
 
@@ -304,7 +309,7 @@
        
   if([self canCancelTask])
   {
-    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelTask:)];
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     [cancelButton release];
   }

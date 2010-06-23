@@ -207,10 +207,6 @@
 		4986F8AF11C715F600947486 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		4986F8B011C715F600947486 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		4986F8B111C715F600947486 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
-		498AB93411D0FAFB00C372A5 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 498AB93311D0FAFB00C372A5 /* jFlash-CARD-1.1.db */; };
-		498AB93611D0FB1100C372A5 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 498AB93511D0FB1100C372A5 /* jFlash.db */; };
-		498AB96D11D0FFDE00C372A5 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 498AB93511D0FB1100C372A5 /* jFlash.db */; };
-		498AB96E11D0FFDF00C372A5 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 498AB93311D0FAFB00C372A5 /* jFlash-CARD-1.1.db */; };
 		4997D21611BB642600016A15 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49A8232211BE382E00395E62 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 49A8232111BE382E00395E62 /* release-notes.html */; };
@@ -312,6 +308,8 @@
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		91992E2911D1A2F600CFCACD /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
+		91992E3411D1A31B00CFCACD /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -436,8 +434,6 @@
 		495C5A0811BFB9410006DD01 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "full-text-search.html"; path = "Assets/full-text-search.html"; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4986F8B811C715F600947486 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		498AB93311D0FAFB00C372A5 /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
-		498AB93511D0FB1100C372A5 /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
 		4997D21511BB642600016A15 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionManager.m; path = AppSpecific/VersionManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
@@ -607,6 +603,8 @@
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
+		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
 		91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionBarViewController.m; sourceTree = "<group>"; };
 		91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = Classes/ActionBarViewController.xib; sourceTree = "<group>"; };
@@ -760,8 +758,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				498AB93511D0FB1100C372A5 /* jFlash.db */,
-				498AB93311D0FAFB00C372A5 /* jFlash-CARD-1.1.db */,
+				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
+				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
 				91EA2F4B104135E200AB848E /* dist.plist */,
 				494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */,
@@ -1579,8 +1577,6 @@
 				4925690211C7831F0058675B /* Verify.png in Resources */,
 				4925690311C7831F0058675B /* VScroll.png in Resources */,
 				4925690411C7831F0058675B /* WaitFor.png in Resources */,
-				498AB93411D0FAFB00C372A5 /* jFlash-CARD-1.1.db in Resources */,
-				498AB93611D0FB1100C372A5 /* jFlash.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

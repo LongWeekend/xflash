@@ -56,8 +56,8 @@
 					</object>
 					<object class="IBUIProgressView" id="866318114">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 360}, {285, 9}}</string>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{15, 371}, {285, 9}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -66,7 +66,7 @@
 					<object class="IBUILabel" id="110539451">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 312}, {300, 24}}</string>
+						<string key="NSFrame">{{10, 336}, {300, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -348,10 +348,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelButton</string>
 							<string>pauseButton</string>
 							<string>progressIndicator</string>
-							<string>retryButton</string>
 							<string>startButton</string>
 							<string>statusMsgLabel</string>
 							<string>taskHandler</string>
@@ -360,9 +358,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
-							<string>UIButton</string>
 							<string>PDColoredProgressView</string>
-							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>id</string>
@@ -373,10 +369,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelButton</string>
 							<string>pauseButton</string>
 							<string>progressIndicator</string>
-							<string>retryButton</string>
 							<string>startButton</string>
 							<string>statusMsgLabel</string>
 							<string>taskHandler</string>
@@ -385,20 +379,12 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">cancelButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">pauseButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressIndicator</string>
 								<string key="candidateClassName">PDColoredProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">retryButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">startButton</string>
