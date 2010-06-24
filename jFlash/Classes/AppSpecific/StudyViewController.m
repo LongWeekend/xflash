@@ -33,9 +33,56 @@
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
+    _alreadyShowedAlertView = NO;
   }
   return self;
 }
+
+- (void) viewDidAppear:(BOOL)animated
+{
+  // Show a UIAlert if this is the first time the user has launched the app.  
+  CurrentState *state = [CurrentState sharedCurrentState];
+  if (state.isFirstLoad && !_alreadyShowedAlertView)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
+                                                        message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
+    _alreadyShowedAlertView = YES;
+  }
+  else if (state.isUpdatable && !_alreadyShowedAlertView)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"StudyViewController.UpdateAlertViewTitle")
+                                                        message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                              otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
+    [alertView show];
+    [alertView release];
+    _alreadyShowedAlertView = YES;
+  }
+}
+
+#pragma mark UIAlertView delegate methods
+
+/** UIAlertView delegate - takes action based on which button was pressed */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  switch (buttonIndex)
+  {
+    case UPDATE_ALERT_UPDATE_NOW_BUTTON:
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
+      break;
+      // Do nothing
+    case UPDATE_ALERT_CANCEL_BUTTON:
+      break;
+  }
+}
+
+
+
 
 /** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
