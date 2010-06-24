@@ -160,13 +160,13 @@
 - (void) showUpdaterModal
 {
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [updateVC setTitle:NSLocalizedString(@"Update Dictionary",@"ModalTaskViewController_Update.NavBarTitle")];
+  [updateVC setTitle:NSLocalizedString(@"Dictionary Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
   [updateVC setWebViewContentDirectory:@"plugin-resources"];
-  [updateVC setWebViewContentFileName:@"release-notes"];
+  [updateVC setWebViewContentFileName:@"release-notes-1.1"];
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];

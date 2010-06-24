@@ -24,6 +24,7 @@
                           // Cards
                           [NSDictionary dictionaryWithObjectsAndKeys:
                            CARD_DB_KEY,@"plugin_key",
+                           @"1.1",@"plugin_version",
                            @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
                            @"plugin-resources",@"plugin_notes_dir",
@@ -36,6 +37,7 @@
                            // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             FTS_DB_KEY,@"plugin_key",
+                            @"1.1",@"plugin_version",
                             @"Awesomely Fast Search v1.1",@"plugin_name",
                             @"plugin-resources",@"plugin_notes_dir",
                             @"full-text-search",@"plugin_notes_file",
@@ -48,7 +50,8 @@
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             EXAMPLE_DB_KEY,@"plugin_key",
-                            @"50,000+ Example Sentences v1.1",@"plugin_name",
+                            @"1.1",@"plugin_version",
+                            @"Fifty Thousand Examples v1.1",@"plugin_name",
                             @"plugin-resources",@"plugin_notes_dir",
                             @"example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (7.5MB)",@"plugin_details",
