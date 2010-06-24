@@ -131,7 +131,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 
   // DEBUG: this simulates being a JFlash 1.0 upgrade user
-  [self _createDefaultSettingsFor10:settings];
+  //[self _createDefaultSettingsFor10:settings];
   
   // STEP 1 - check for settings updates
   // If we are JFlash 1.0 settings, update to 1.1
