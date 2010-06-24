@@ -23,7 +23,7 @@
 
 @implementation ExampleSentencesViewController
 @synthesize delegate, datasource;
-@synthesize sentencesWebView, headwordLabel;
+@synthesize sentencesWebView, headwordLabel, readingLabel;
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -91,6 +91,7 @@
   if([datasource respondsToSelector:@selector(currentCard)])
   {
 //    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
+    [[self readingLabel] setText: [[datasource currentCard] combinedReadingForSettings]];
     [[self headwordLabel] setText: [[datasource currentCard] headword]];
     
     // Get all sentences out - extract this
@@ -99,7 +100,7 @@
     for (ExampleSentence* sentence in sentences) 
     {
       html = [html stringByAppendingFormat:@"<li>%@<br/>", [sentence sentenceJa]];
-      html = [html stringByAppendingFormat:@"%@</li>", [sentence sentenceEn]];
+      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn]];
     }
     html = [html stringByAppendingString:@"</ol>"];
     [self setupSentencesWebView:html];
@@ -127,6 +128,7 @@
 - (void)dealloc {
     [sentencesWebView release];
     [headwordLabel release];
+    [readingLabel release];
     // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
     [super dealloc];
 }

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LWEDownloader.h"
 #import "PDColoredProgressView.h"
+#import "UIWebView+LWENoBounces.h"
 
 /**
  * Any delegate of this class needs to implement the following methods

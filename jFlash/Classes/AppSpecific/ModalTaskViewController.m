@@ -355,6 +355,7 @@
 {
   // Load a UIWebView to show
   UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 317)];
+  [webView shutOffBouncing];
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   
