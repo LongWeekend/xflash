@@ -10,6 +10,7 @@
 // Theme configuration names
 NSString * const SET_THEME_FIRE      = @"FIRE";
 NSString * const SET_THEME_WATER     = @"WATER";
+NSString * const SET_THEME_FOREST    = @"FOREST";
 NSString * const SET_THEME_TAME      = @"TAME";
 NSString * const DEFAULT_THEME       = @"FIRE";
 
@@ -26,7 +27,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 {
   if (self = [super init])
   {
-    // Defines the Fire theme tint values & CSS
+    // Defines the Fire Red theme tint values & CSS
     NSDictionary *fire = [NSDictionary dictionaryWithObjectsAndKeys:
                           SET_THEME_FIRE,@"key",
                           @"Fire",@"name",
@@ -38,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           @"dfn{ background-color:orange; border-color:yellow; }",@"CSS",
                           nil];
     
-    // Defines the Water theme tint values & CSS
+    // Defines the Blue Water theme tint values & CSS
     NSDictionary *water = [NSDictionary dictionaryWithObjectsAndKeys:
                            SET_THEME_WATER,@"key",
                            @"Water",@"name",
@@ -50,8 +51,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                            @"dfn{ background-color:lightsteelblue; border-color:white; }",@"CSS",
                            nil];
     
+    
+    // Defines the Forest Green theme tint values & CSS
+    NSDictionary *forest = [NSDictionary dictionaryWithObjectsAndKeys:
+                            SET_THEME_FOREST,@"key",
+                            @"Forest",@"name",
+                            @"green",@"filename",
+                            [NSNumber numberWithFloat:74.0f/255.0f],@"R",
+                            [NSNumber numberWithFloat:170/255.0f],@"G",
+                            [NSNumber numberWithFloat:15/255.0f],@"B",
+                            @"6BBA70",@"WEB_SELECTED",
+                            @"dfn{ background-color:white; border-color:gray; }",@"CSS",
+                            nil];
+
     // Defines the (Joseph) Tame theme tint values & CSS
-    // TODO: Paul - change the tame theme here!
     NSDictionary *tame = [NSDictionary dictionaryWithObjectsAndKeys:
                           SET_THEME_TAME,@"key",
                           @"Tame",@"name",
@@ -60,11 +73,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           [NSNumber numberWithFloat:0.518],@"G",
                           [NSNumber numberWithFloat:0.635],@"B",
                           @"cbd6eb",@"WEB_SELECTED",
-                          @"dfn{ background-color:white; border-color:gray; }",@"CSS",
+                          @"dfn{ background-color:silver; border-color:darkslategray; }",@"CSS",
                           nil];
-    
+
+
     // Compiles theme dictionaries into a single dictionary keyed on the theme name
-    [self setThemes:[NSDictionary dictionaryWithObjectsAndKeys:fire,SET_THEME_FIRE,water,SET_THEME_WATER,tame,SET_THEME_TAME,nil]];
+    [self setThemes:[NSDictionary dictionaryWithObjectsAndKeys:fire,SET_THEME_FIRE,water,SET_THEME_WATER,forest,SET_THEME_FOREST,tame,SET_THEME_TAME,nil]];
   }
   return self;  
 }
@@ -93,8 +107,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (UIColor*) currentThemeTintColor
 {
+  // Calling currentThemeTintColor:(float)customAlpha
+  return [self currentThemeTintColor:0.8f];
+}
+
+/**
+ * Returns the current theme's tint color as a UIColor
+ */
+- (UIColor*) currentThemeTintColor:(float)customAlpha
+{
   NSDictionary* tm = [self _currentTheme];
-  return [UIColor colorWithRed:[[tm objectForKey:@"R"] floatValue] green:[[tm objectForKey:@"G"] floatValue] blue:[[tm objectForKey:@"B"] floatValue] alpha:0.8f];
+  return [UIColor colorWithRed:[[tm objectForKey:@"R"] floatValue] green:[[tm objectForKey:@"G"] floatValue] blue:[[tm objectForKey:@"B"] floatValue] alpha:customAlpha];
 }  
 
 

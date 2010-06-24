@@ -27,7 +27,7 @@ enum ControlSectionRows
 - (void)viewDidLoad 
 {
   [super viewDidLoad];  
-   self.navigationItem.title = NSLocalizedString(@"Study Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
+   self.navigationItem.title = NSLocalizedString(@"Change Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
 }
 
 - (void)viewWillAppear:(BOOL)animated 

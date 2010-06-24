@@ -103,8 +103,8 @@
   // the datasource must implement currentcard or we don't set any data
   if([datasource respondsToSelector:@selector(currentCard)])
   {
-    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
-    [[self headwordLabel] setText: mungedHeadWordWithReading];
+//    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
+    [[self headwordLabel] setText: [[datasource currentCard] headword]];
     
     // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
