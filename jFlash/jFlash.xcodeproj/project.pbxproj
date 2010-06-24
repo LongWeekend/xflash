@@ -299,6 +299,15 @@
 		91818DB611D2F83B00746B09 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91818DB511D2F83B00746B09 /* SearchView.xib */; };
 		91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		918191DE11D3568300746B09 /* download-example-plugin-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 918191D511D3568300746B09 /* download-example-plugin-button.png */; };
+		918191DF11D3568300746B09 /* download-moodicon-astounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 918191D611D3568300746B09 /* download-moodicon-astounded.png */; };
+		918191E111D3568300746B09 /* example-sentences.png in Resources */ = {isa = PBXBuildFile; fileRef = 918191D811D3568300746B09 /* example-sentences.png */; };
+		918191E211D3568300746B09 /* fast-search.png in Resources */ = {isa = PBXBuildFile; fileRef = 918191D911D3568300746B09 /* fast-search.png */; };
+		918191E311D3568300746B09 /* full-text-search.html in Resources */ = {isa = PBXBuildFile; fileRef = 918191DA11D3568300746B09 /* full-text-search.html */; };
+		918191E411D3568300746B09 /* jflash-1.1-features-actionsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 918191DB11D3568300746B09 /* jflash-1.1-features-actionsheet.png */; };
+		918191E511D3568300746B09 /* release-notes-1.1.html in Resources */ = {isa = PBXBuildFile; fileRef = 918191DC11D3568300746B09 /* release-notes-1.1.html */; };
+		918191E611D3568300746B09 /* release-notes.html in Resources */ = {isa = PBXBuildFile; fileRef = 918191DD11D3568300746B09 /* release-notes.html */; };
+		9181920311D3572600746B09 /* example-sentences.html in Resources */ = {isa = PBXBuildFile; fileRef = 9181920211D3572600746B09 /* example-sentences.html */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -343,7 +352,6 @@
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
-		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -592,6 +600,15 @@
 		91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		918191D511D3568300746B09 /* download-example-plugin-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-example-plugin-button.png"; sourceTree = "<group>"; };
+		918191D611D3568300746B09 /* download-moodicon-astounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-moodicon-astounded.png"; sourceTree = "<group>"; };
+		918191D811D3568300746B09 /* example-sentences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "example-sentences.png"; sourceTree = "<group>"; };
+		918191D911D3568300746B09 /* fast-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fast-search.png"; sourceTree = "<group>"; };
+		918191DA11D3568300746B09 /* full-text-search.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "full-text-search.html"; sourceTree = "<group>"; };
+		918191DB11D3568300746B09 /* jflash-1.1-features-actionsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jflash-1.1-features-actionsheet.png"; sourceTree = "<group>"; };
+		918191DC11D3568300746B09 /* release-notes-1.1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "release-notes-1.1.html"; sourceTree = "<group>"; };
+		918191DD11D3568300746B09 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "release-notes.html"; sourceTree = "<group>"; };
+		9181920211D3572600746B09 /* example-sentences.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "example-sentences.html"; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
@@ -643,7 +660,6 @@
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -949,12 +965,12 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				918191D411D3568300746B09 /* plugin-resources */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
 				D3309B031123C7D800B73E8E /* help */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
 				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
-				D3EFCF7211D21C0B0014C8B4 /* plugin-resources */,
 				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
 				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
@@ -1119,6 +1135,23 @@
 				917A5CB211AB85E200016BD2 /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		918191D411D3568300746B09 /* plugin-resources */ = {
+			isa = PBXGroup;
+			children = (
+				9181920211D3572600746B09 /* example-sentences.html */,
+				918191D511D3568300746B09 /* download-example-plugin-button.png */,
+				918191D611D3568300746B09 /* download-moodicon-astounded.png */,
+				918191D811D3568300746B09 /* example-sentences.png */,
+				918191D911D3568300746B09 /* fast-search.png */,
+				918191DA11D3568300746B09 /* full-text-search.html */,
+				918191DB11D3568300746B09 /* jflash-1.1-features-actionsheet.png */,
+				918191DC11D3568300746B09 /* release-notes-1.1.html */,
+				918191DD11D3568300746B09 /* release-notes.html */,
+			);
+			name = "plugin-resources";
+			path = "Assets/plugin-resources";
 			sourceTree = "<group>";
 		};
 		91C9EE2D111E568D006B72E6 /* Application Tests */ = {
@@ -1443,11 +1476,19 @@
 				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
-				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
 				4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */,
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				91818DB611D2F83B00746B09 /* SearchView.xib in Resources */,
+				918191DE11D3568300746B09 /* download-example-plugin-button.png in Resources */,
+				918191DF11D3568300746B09 /* download-moodicon-astounded.png in Resources */,
+				918191E111D3568300746B09 /* example-sentences.png in Resources */,
+				918191E211D3568300746B09 /* fast-search.png in Resources */,
+				918191E311D3568300746B09 /* full-text-search.html in Resources */,
+				918191E411D3568300746B09 /* jflash-1.1-features-actionsheet.png in Resources */,
+				918191E511D3568300746B09 /* release-notes-1.1.html in Resources */,
+				918191E611D3568300746B09 /* release-notes.html in Resources */,
+				9181920311D3572600746B09 /* example-sentences.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1774,7 +1815,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2138,8 +2179,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2148,6 +2190,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.0;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
