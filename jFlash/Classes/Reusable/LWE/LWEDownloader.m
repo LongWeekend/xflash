@@ -405,7 +405,12 @@
     // Update progress bar
     totalUncompressed = totalUncompressed + CHUNK;
     if (requestSize > 0) decompressionProgress = ((float)totalUncompressed / (float)guessedFilesize);
-    [self performSelectorOnMainThread:@selector(setProgressFromBackgroundThread:) withObject:[NSNumber numberWithFloat:decompressionProgress] waitUntilDone:NO];
+    
+    // Don't do this EVERY time
+    if ((totalUncompressed % (CHUNK * 10)) == 0)
+    {
+      [self performSelectorOnMainThread:@selector(setProgressFromBackgroundThread:) withObject:[NSNumber numberWithFloat:decompressionProgress] waitUntilDone:NO];
+    }
     
     // Check for cancellation
     if (_unzipShouldCancel)
