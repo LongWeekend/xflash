@@ -235,7 +235,7 @@
     [_request setAllowResumeForFileDownloads:YES];
 
     // Use 3G throttling
-    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
+//    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
     
     // Handle file differently depending on processing requirements after the fact (unzip)
     if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
@@ -257,6 +257,7 @@
     [self _updateInternalState:kDownloaderRetrievingMetaData withTaskMessage:NSLocalizedString(@"Connecting to server",@"LWEDownloader.connecting")];
     
     // Download in the background
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [_request startAsynchronous];
   }
 }
@@ -532,6 +533,7 @@
 - (void)requestFinished:(ASIHTTPRequest *) request
 {
   // We are done!
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
   [self _updateInternalState:kDownloaderDownloadComplete withTaskMessage:NSLocalizedString(@"Verifying downloaded file",@"LWEDownloader.downloadFinished")];
   
   // Unzip it in the background
@@ -555,6 +557,7 @@
 - (void)requestFailed:(ASIHTTPRequest *) request
 {
   // TODO: add more error handling here
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
   NSError *error = [request error];
   switch ([error code])
   {

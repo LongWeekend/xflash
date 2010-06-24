@@ -1,4 +1,3 @@
-CREATE INDEX card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)
 DELETE FROM card_tag_link WHERE card_id = 764
 DELETE FROM user_history WHERE card_id = 764
 DELETE FROM card_tag_link WHERE card_id = 1216
@@ -13959,7 +13958,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149478,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149593,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,643)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (58249,644)
 INSERT INTO tags (tag_id, tag_name, description, editable, count) VALUES (643,"Pronouns","Pronouns",0,126)
 UPDATE tags SET count = count +37  WHERE tag_id =4
 UPDATE tags SET count = count -212  WHERE tag_id = 5

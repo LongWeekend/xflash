@@ -20,6 +20,7 @@ typedef enum _migraterStates
   kMigraterDownloadPlugins,         //! Download plugins
   kMigraterDownloadPaused,          //! Download is paused
   kMigraterDownloadFail,            //! Failed to download
+  kMigraterPrepareSQL,              //! Prepare DB by adding an index
   kMigraterUpdateSQL,               //! Updating SQL
   kMigraterUpdateSQLFail,           //! Failed to update SQL
   kMigraterUnknownFail,             //! God help us lest we get here
@@ -39,6 +40,7 @@ typedef enum _migraterStates
 + (BOOL) databaseIsUpdatable;
 - (float) progress;
 - (void) setProgress:(float)progress;
+- (void) _loadPlugins;
 
 @property (nonatomic, retain) LWEDownloader *dlHandler;
 @property (nonatomic, retain) NSString *taskMessage;
