@@ -7,6 +7,8 @@
 //
 
 #import "VersionManager.h"
+#import "FlurryAPI.h"
+#import "TagPeer.h"
 
 /**
  * Migrates the databases and et cetera between versions of JFlash
@@ -145,14 +147,15 @@
   {
     sender.startButton.hidden = NO;
   }
-  
-  // TODO: make button retry
-  // If not failed, don't show retry button
-  if (![self isFailureState])
+
+  // Hide the progress indicator if we are making the index
+  if (_migraterState == kMigraterPrepareSQL)
   {
+    sender.progressIndicator.hidden = YES;
   }
-  else
+  else if (_migraterState == kMigraterUpdateSQL)
   {
+    sender.progressIndicator.hidden = NO;
   }
   
   // Do not allow pause during the update at all
@@ -188,13 +191,9 @@
     // Delegate call
     return [[self dlHandler] canCancelTask];
   }
-  else if (_migraterState == kMigraterUpdateSQL || _migraterState == kMigraterReady)
-  {
-    return YES;
-  }
   else
   {
-    return NO;
+    return YES;
   }
 }
 
@@ -225,8 +224,11 @@
 {
   if (_migraterState == kMigraterReady)
   {
-    [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Preparing database",@"VersionManager.PreparingDatabaseMsg")];
+    [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
     [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
+#if defined(APP_STORE_FINAL)
+    [FlurryAPI logEvent:@"mergeAttempted" ];
+#endif
   }
 }
 
@@ -265,7 +267,6 @@
     // On a background thread, so do not tell it directly, use a semaphore
     _cancelRequest = YES;
   }
-  // TODO: turn database back on!!
 }
 
 
@@ -274,10 +275,6 @@
  */
 - (void) retryTask
 {
-  // Close DB
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db closeDatabase];
-  
   _migraterState = kMigraterReady;
   
   // Reset the downloader
@@ -332,8 +329,18 @@
   {
     [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
   }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
-  [self _downloadFTSPlugin];
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
+  
+  // Determine the next step - do they already have FTS?
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY])
+  {
+    [self _loadPlugins];
+  }
+  else
+  {
+    [self _downloadFTSPlugin];
+  }
   return;  
 }
 
@@ -354,9 +361,8 @@
   isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
   isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
   
-  if (isFTSLoaded && isCardDBLoaded)
+  if (isFTSLoaded && isCardDBLoaded || 1)
   {
-    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging new dictionary",@"VersionManager.MergingDBMsg")];
     [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
   }
   else
@@ -394,7 +400,6 @@
 }
 
 
-
 /**
  * Migration - STEP 4
  * Reads SQL from the bundle SQL file and enters a tight C loop to
@@ -421,6 +426,13 @@
   // Run all the statements
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];  
   db.dao.traceExecution = NO;
+  
+  // Do the INDEX!!
+  [self _updateInternalState:kMigraterPrepareSQL withTaskMessage:NSLocalizedString(@"Preparing new data (~75 seconds)",@"VersionManager.PreparingDBMsg")];
+  [db executeUpdate:@"CREATE INDEX IF NOT EXISTS card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)"];
+  
+  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.PreparingDBMsg")];
+
   LWE_LOG(@"Starting transaction");
   [db.dao beginTransaction];
   
@@ -446,35 +458,45 @@
     if (![db executeUpdate:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]])
     {
       success = NO;
-      LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);      
+      LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
+#if defined(APP_STORE_FINAL)
+      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
+      [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
+#endif
     }
   }
   
   // Close the file
   fclose(fh);
-  
+
   if (success)
   {
-    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Finalizing dictionary"];
-
-/*    LWE_LOG(@"Making indexes");
-    [db executeUpdate:@"CREATE INDEX card_tag_link_card_id ON card_tag_link (card_id ASC)"];
-    [db executeUpdate:@"CREATE INDEX card_tag_link_tag_id ON card_tag_link (tag_id ASC)"];
- */   LWE_LOG(@"STARTING COMMIT");
-     
-    
+    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:@"Finalizing (~10 seconds)"];
+    LWE_LOG(@"STARTING COMMIT");
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
     
     // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setValue:JFLASH_VERSION_1_1 forKey:@"data_version"];
+#if defined(APP_STORE_FINAL)
+    [FlurryAPI logEvent:@"mergeSuccess" withParameters:dataToSend];
+#endif
+
+    // TODO: refactor out a "on success method"
+    // This is kind of a hack to put here?
+    [TagPeer recacheCountsForUserTags];
+    
+    // Tells whoever cares (in our case settings) that version updated
+    NSNotification *aNotification = [NSNotification notificationWithName:@"versionDidUpdate" object:self userInfo:nil];
+    [self postMainThreadNotification:aNotification];
+
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
   }
   else
   {
     [db.dao rollback];
-    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error.  Aborting update."];
+    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
   }
   [pool release];
 }
