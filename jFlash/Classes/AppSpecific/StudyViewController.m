@@ -46,7 +46,7 @@
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                                        message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example.   To study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started. If you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
     [alertView show];

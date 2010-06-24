@@ -7,3 +7,4 @@ a, a:visited { color:#834320; font-weight:bold;}
 div.info {min-height:350px; text-align:left;}
 p { margin:9px 0 9px 0;}
 #tags_definitions { font-size:13px; border:1px solid darkslategray; cell-collapse:true; border-spacing: 2px 2px;}
+small { font-size:11px; color:darkslategray;}

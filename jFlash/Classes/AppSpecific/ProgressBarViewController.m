@@ -33,9 +33,6 @@
 // draws the progress bar
 - (void) drawProgressBar
 {
-  //TODO figure out how to use this here or move back to StudyViewController
-  
-  
   if ([self levelDetails])
   {
     [cardSetProgressLabel1 setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:1]intValue]]];  
@@ -93,6 +90,8 @@
   [self.view bringSubviewToFront:cardSetProgressLabel3];
   [self.view bringSubviewToFront:cardSetProgressLabel4];
   [self.view bringSubviewToFront:cardSetProgressLabel5];
+  
+  [self.view setNeedsLayout];
 }
 
 - (void)viewDidUnload {
