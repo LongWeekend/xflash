@@ -75,6 +75,38 @@
   return NO;
 }
 
+/** Recaches card counts for user tags */
++ (void) recacheCountsForUserTags
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	NSString *sql = [[NSString alloc] initWithString:@"SELECT tag_id FROM tags WHERE editable = 1"];
+  FMResultSet *rs = [db executeQuery:sql];
+  [sql release];
+  int numCards;
+  int tmpTagId;
+  while ([rs next])
+  {
+    tmpTagId = [rs intForColumn:@"tag_id"];
+    // Get the number of cards
+    sql = [[NSString alloc] initWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = %d",tmpTagId];
+    FMResultSet *rs2 = [db executeQuery:sql];
+    [sql release];
+    numCards = 0;
+    while ([rs2 next])
+    {
+      numCards = numCards + 1;
+    }
+    LWE_LOG(@"tag id %d has %d cards",tmpTagId,numCards);
+    [rs2 close];
+    
+    // Now do the update
+    sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = %d WHERE tag_id = %d",numCards,tmpTagId];
+    [db executeUpdate:sql];
+    [sql release];
+  }
+  [rs close];
+}
+
 
 //! Returns an array of tag Ids this card is a member of
 + (NSMutableArray*) membershipListForCardId:(NSInteger)cardId

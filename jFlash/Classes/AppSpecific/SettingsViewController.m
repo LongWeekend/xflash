@@ -20,6 +20,7 @@ NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
 NSString * const APP_ALGORITHM = @"algorithm";
 
+/** Customized initializer with UITableViewStyleGrouped */
 - (SettingsViewController*) init
 {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
@@ -28,67 +29,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
 
-    // The following dictionaries contain all the mappings from actual settings to how they display on the phone
-    NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
-    NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
-    NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
-        
-    NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
-                                                         NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
-    NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
-    NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
-    
-    // Source theme information from the ThemeManager
-    ThemeManager *tm = [ThemeManager sharedThemeManager];
-    NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
-    
-    NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
-                                                        NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
-                                                        NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
-    NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
-    NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
-    
-    // Create a complete dictionary of all settings display names & their setting constants
-    NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];
-    NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,nil];
-    self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
-
-    // These are the keys and display names of each row
-    NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
-                                                          NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
-                                                          NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
-                                                          NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-    NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
-    NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
-
-    NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
-                                        NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
-                                        NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
-    NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
-
-    // Can we upgrade at all?  If so, hide the plugins
-    if ([VersionManager databaseIsUpdatable])
-    {
-      [userSettingNames removeLastObject];
-      [userSettingKeys removeLastObject];
-    }
-    
-    NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
-    
-    NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
-                                                     NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
-    NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
-    NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
-
-    NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
-    NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
-    NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
-    
-    // Make the order
-  
-
-    self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
-    
+    [self setSectionArray:[self settingsTableDataSource]];
     settingsChanged = NO;
     headwordChanged = NO;
     themeChanged = NO;
@@ -97,11 +38,24 @@ NSString * const APP_ALGORITHM = @"algorithm";
 	return self;
 }
 
+
+/** Customized to add support for observers/notifications */
 - (void)loadView
 {
   [super loadView];
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"versionDidUpdate" object:nil];
 }
+
+
+/**
+ * Makes the settings show the plugins when required (e.g. after the user updates their version to JFlash 1.1)
+ */
+- (void) _addPluginMenuItem
+{
+  [self setSectionArray:[self settingsTableDataSource]];
+}
+
 
 - (void)viewWillAppear: (BOOL)animated
 {
@@ -124,7 +78,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   [[self tableView] reloadData];
 }
 
-// Only re-load the set if settings were changed, otherwise there is no need to do anything
+//! Only re-load the set if settings were changed, otherwise there is no need to do anything
 - (void) viewWillDisappear: (BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -399,6 +353,72 @@ NSString * const APP_ALGORITHM = @"algorithm";
   [alertView show];
   [alertView release];
 }
+
+
+
+/** Returns all the arrays to configure the settings table */
+- (NSMutableArray*) settingsTableDataSource
+{
+  // The following dictionaries contain all the mappings from actual settings to how they display on the phone
+  NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
+  NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
+  NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
+  
+  NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
+                              NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
+  NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
+  NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
+  
+  // Source theme information from the ThemeManager
+  ThemeManager *tm = [ThemeManager sharedThemeManager];
+  NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
+  
+  NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
+                             NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
+                             NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
+  NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
+  NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
+  
+  // Create a complete dictionary of all settings display names & their setting constants
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,nil];
+  self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
+  
+  // These are the keys and display names of each row
+  NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
+                               NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
+                               NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
+                               NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
+  NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
+  
+  NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
+                                      NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
+                                      NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
+  NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
+  
+  // Can we upgrade at all?  If so, hide the plugins
+  if ([VersionManager databaseIsUpdatable])
+  {
+    [userSettingNames removeLastObject];
+    [userSettingKeys removeLastObject];
+  }
+  
+  NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
+  
+  NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
+                          NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
+  NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
+  NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
+  
+  NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
+  NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
+  NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
+  
+  // Make the order
+  return [NSMutableArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
+}
+
 
 # pragma mark - Housekeeping
 
