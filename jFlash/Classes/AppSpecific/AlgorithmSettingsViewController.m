@@ -47,6 +47,7 @@ enum ControlSectionRows
   NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
   difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
   [segmentedIndex release];
+  [self setDifficulty:difficultySegmentControl];
 }
 
 #pragma mark -
