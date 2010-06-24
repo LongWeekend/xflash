@@ -46,7 +46,7 @@
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                                        message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                        message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example.   To study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
     [alertView show];
@@ -55,8 +55,8 @@
   }
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"StudyViewController.UpdateAlertViewTitle")
-                                                        message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash",@"StudyViewController.UpdateAlertViewTitle")
+                                                        message:NSLocalizedString(@"We're all grown up!  In this new version we improved the database and added great new features.  We'd really appreciate about 3 minutes of your time to update your data. We promise you won't lose your progress!  Care to upgrade now? A wifi or 3G connection is needed.",@"RootViewController.UpdateAlertViewMessage")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
                                               otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
@@ -447,7 +447,6 @@
   progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
   progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
   progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
-  [progressView release];
 }
 
 #pragma mark UI updater convenience methods

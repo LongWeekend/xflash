@@ -12,7 +12,7 @@
 @implementation ProgressDetailsViewController
 @synthesize closeBtn, currentStudySet, motivationLabel, levelDetails, streakLabel, rightStreak, wrongStreak;
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
-@synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, cardsWrongAllTime, cardsRightAllTime, progressViewTitle;
+@synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
 
 - (void)viewDidLoad
@@ -112,9 +112,7 @@
   [cardSetProgressLabel5 release];
   [cardsViewedAllTime release];
   [cardsWrongNow release];
-  [cardsWrongAllTime release];
   [cardsRightNow release];
-  [cardsRightAllTime release];
   [super dealloc];
 }
 

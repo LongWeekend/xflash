@@ -33,7 +33,7 @@
                                                NSLocalizedString(@"Practice",@"HelpViewController.Table_Practice"),
                                                NSLocalizedString(@"Browse Mode",@"HelpViewController.Table_BrowseMode"),
                                                NSLocalizedString(@"Search",@"HelpViewController.Table_WordSearch"),
-                                               NSLocalizedString(@"Correcting Data",@"HelpViewController.Table_CorrectingData"),
+                                               NSLocalizedString(@"Corrections",@"HelpViewController.Table_Corrections"),
                                                NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
                                                NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
                                                NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),

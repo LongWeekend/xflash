@@ -21,9 +21,7 @@
   IBOutlet UILabel *cardsViewedNow;
   IBOutlet UILabel *cardsViewedAllTime;
   IBOutlet UILabel *cardsRightNow;
-  IBOutlet UILabel *cardsRightAllTime;
   IBOutlet UILabel *cardsWrongNow;
-  IBOutlet UILabel *cardsWrongAllTime;
   
   IBOutlet UILabel *cardSetProgressLabel0;
   IBOutlet UILabel *cardSetProgressLabel1;
@@ -52,9 +50,7 @@
 @property (nonatomic,retain) IBOutlet UILabel *cardsViewedNow;
 @property (nonatomic,retain) IBOutlet UILabel *cardsViewedAllTime;
 @property (nonatomic,retain) IBOutlet UILabel *cardsRightNow;
-@property (nonatomic,retain) IBOutlet UILabel *cardsRightAllTime;
 @property (nonatomic,retain) IBOutlet UILabel *cardsWrongNow;
-@property (nonatomic,retain) IBOutlet UILabel *cardsWrongAllTime;
 @property NSInteger wrongStreak;
 @property NSInteger rightStreak;
 
