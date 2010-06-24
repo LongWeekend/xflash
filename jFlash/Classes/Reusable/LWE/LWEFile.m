@@ -121,6 +121,7 @@
   {
     NSNumber *fileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemSize];
     totalSpace = [fileSystemSizeInBytes intValue];
+    LWE_LOG(@"File system size: %d",[fileSystemSizeInBytes intValue])
   }
   else
   {

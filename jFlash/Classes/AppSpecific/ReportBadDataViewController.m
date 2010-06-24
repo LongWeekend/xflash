@@ -43,7 +43,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                       NSLocalizedString(@"Not relevant for this set",@"ReportBadDataViewController.Reasons_NotRelevant"),
                       NSLocalizedString(@"Antiquated or dead word",@"ReportBadDataViewController.Reasons_DeadWord"),
                       NSLocalizedString(@"Example sentence is odd",@"ReportBadDataViewController.Reasons_ExSentence"),
-                      NSLocalizedString(@"It's Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
+                      NSLocalizedString(@"Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
   }
   return self;
 }

@@ -138,7 +138,7 @@
 					<object class="IBUIWebView" id="806681086">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 109}, {301, 140}}</string>
+						<string key="NSFrame">{{11, 109}, {301, 151}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -451,7 +451,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>WordCardViewController</string>
 					<string>UIResponder</string>
-					<string>{{647, 407}, {320, 280}}</string>
+					<string>{{401, 498}, {320, 280}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
