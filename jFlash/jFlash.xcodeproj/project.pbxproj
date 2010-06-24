@@ -345,7 +345,6 @@
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */; };
-		D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
@@ -650,7 +649,6 @@
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "greentheme-cookie-cutters"; path = "Assets/greentheme-cookie-cutters"; sourceTree = "<group>"; };
-		D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = sql/jflash_10_to_11.sql; sourceTree = "<group>"; };
 		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1458,7 +1456,6 @@
 				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
 				4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */,
 				D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */,
-				D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */,
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				91818DB611D2F83B00746B09 /* SearchView.xib in Resources */,

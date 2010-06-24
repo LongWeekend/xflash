@@ -46,6 +46,9 @@
  */
 - (void) viewDidAppear:(BOOL)animated
 {
+  [super viewDidAppear:animated];
+  [tabBarController viewDidAppear:animated];
+
   // Show a UIAlert if this is the first time the user has launched the app.  
   CurrentState *state = [CurrentState sharedCurrentState];
   if (state.isFirstLoad && _showWelcomeSplash)
@@ -277,13 +280,6 @@
 {
 	[super viewWillDisappear:animated];
 	[tabBarController viewWillDisappear:animated];
-}
-
-
--(void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-	[tabBarController viewDidAppear:animated];
 }
 
 

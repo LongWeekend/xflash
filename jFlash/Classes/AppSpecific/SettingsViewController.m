@@ -222,13 +222,23 @@ NSString * const APP_ALGORITHM = @"algorithm";
   else if (key == APP_PLUGIN)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
-    int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
-    if (numInstalled > 0)
-      cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
-    else
-      cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+    // Can we upgrade at all?
+    if ([VersionManager databaseIsUpdatable])
+    {
+      cell.detailTextLabel.text = NSLocalizedString(@"Update Required",@"SettingsViewController.Plugins_NeedUpdateFirst");
+      cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    else
+    {
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
+      if (numInstalled > 0)
+        cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
+      else
+        cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
+    }
   }
   else if (key == APP_ABOUT)
   {
@@ -303,9 +313,16 @@ NSString * const APP_ALGORITHM = @"algorithm";
   }
   else if (key == APP_PLUGIN)
   {
-    PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
-    [self.navigationController pushViewController:psvc animated:YES];
-    [psvc release];
+    if (![VersionManager databaseIsUpdatable])
+    {
+      PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
+      [self.navigationController pushViewController:psvc animated:YES];
+      [psvc release];
+    }
+    else
+    {
+      [self _showUpdaterModal];
+    }
   }
   else if (key == APP_ABOUT)
   {
