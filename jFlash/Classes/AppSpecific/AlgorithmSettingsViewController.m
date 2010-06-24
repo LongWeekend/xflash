@@ -42,6 +42,7 @@ enum ControlSectionRows
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
   difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
+  [segmentedIndex release];
 }
 
 #pragma mark -
@@ -79,7 +80,9 @@ enum ControlSectionRows
   if(indexPath.section == kControlsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    [self setMaxCardsUISlider:[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)]];
+    UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)];
+    [self setMaxCardsUISlider:tmpSlider];
+    [tmpSlider release];
     
     NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_MAX_STUDYING]];
     maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
@@ -99,7 +102,9 @@ enum ControlSectionRows
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    [self setFrequencyUISlider: [[UISlider alloc] initWithFrame: CGRectMake(20, 0, 180, 50)]];
+    UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(20, 0, 180, 50)];
+    [self setFrequencyUISlider:tmpSlider];
+    [tmpSlider release];
     
     NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
     frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
@@ -114,6 +119,7 @@ enum ControlSectionRows
     rightLabel.text = [NSString stringWithFormat:@"More Often"];
     [cell addSubview:rightLabel];
     [rightLabel release];
+    [sliderValue release];
   }
   else 
   {

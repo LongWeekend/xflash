@@ -165,6 +165,7 @@
     "SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * "
     "FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
   FMResultSet *rs2 = [[db dao] executeQuery:sql2];
+  [sql2 release];
   tmpCard = [[[Card alloc] init] autorelease];
   while ([rs2 next])
   {

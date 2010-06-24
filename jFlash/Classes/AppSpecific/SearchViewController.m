@@ -295,7 +295,7 @@ const NSInteger KSegmentedTableHeader = 100;
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // Get different kinds of cells depending on the state
-  UITableViewCell *cell;
+  UITableViewCell *cell = nil;
   switch (_searchState)
   {
     // Default to the same behavior if we have NO search results as well as having them

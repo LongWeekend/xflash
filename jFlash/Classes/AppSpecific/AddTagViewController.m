@@ -154,7 +154,7 @@ enum EntrySectionRows
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSUInteger i;
+  NSUInteger i = 0;
   if (section == kMyTagsSection)
   {
     i = [myTagArray count];
@@ -227,7 +227,7 @@ enum EntrySectionRows
   else
   {        
     // Get the tag arrays
-    Tag* tmpTag;
+    Tag* tmpTag = nil;
     if (indexPath.section == kMyTagsSection)
       tmpTag = [myTagArray objectAtIndex:indexPath.row];
     else if (indexPath.section == kSystemTagsSection)
