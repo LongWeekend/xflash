@@ -447,7 +447,6 @@
   progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
   progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
   progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
-  [progressView release];
 }
 
 #pragma mark UI updater convenience methods
