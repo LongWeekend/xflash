@@ -14,7 +14,7 @@
 @implementation ModalTaskViewController
 
 @synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton, pauseButton;
-@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear, webViewContentFile;
+@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear, webViewContentDirectory, webViewContentFileName;
 
 //! Initialization
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -22,7 +22,8 @@
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
   {
     [self setTaskHandler:nil];
-    [self setWebViewContentFile:nil];
+    [self setWebViewContentDirectory:nil];
+    [self setWebViewContentFileName:nil];
   }
   return self;
 }
@@ -357,7 +358,7 @@
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   
-  NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFile] ofType:@"html"];
+  NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFileName] ofType:@"html" inDirectory:[self webViewContentDirectory]];
   NSURL *url = [NSURL fileURLWithPath:filename];
   [webView loadRequest:[NSURLRequest requestWithURL:url]];
 
@@ -373,7 +374,8 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setTaskHandler:nil];
-  [self setWebViewContentFile:nil];
+  [self setWebViewContentDirectory:nil];
+  [self setWebViewContentFileName:nil];
   [super dealloc];
 }
 

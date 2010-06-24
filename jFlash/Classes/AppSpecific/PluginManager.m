@@ -26,7 +26,8 @@
                            CARD_DB_KEY,@"plugin_key",
                            @"Japanese Flash Cards",@"plugin_name",
                            @"Core cards",@"plugin_details",
-                           @"plugin-resources/foo",@"plugin_notes_file",
+                           @"plugin-resources",@"plugin_notes_dir",
+                           @"foo",@"plugin_notes_file",
                            @"http://makbook.local/~phooze/jFlash-CARD-1.1.db.gz",@"target_url",
                            [LWEFile createBundlePathWithFilename:@"jFlash-CARD-1.1.db"],@"target_path",
                            @"jFlash-CARD-1.1.db",@"file_name",
@@ -35,8 +36,9 @@
                            // FTS
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             FTS_DB_KEY,@"plugin_key",
-                            @"Awesomely Fast Search",@"plugin_name",
-                            @"plugin-resources/full-text-search",@"plugin_notes_file",
+                            @"Awesomely Fast Search v1.1",@"plugin_name",
+                            @"plugin-resources",@"plugin_notes_dir",
+                            @"full-text-search",@"plugin_notes_file",
                             @"Adds sub-second full dictionary search (12MB)",@"plugin_details",
                             @"https://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",
@@ -46,8 +48,9 @@
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             EXAMPLE_DB_KEY,@"plugin_key",
-                            @"50,000+ Example Sentences",@"plugin_name",
-                            @"plugin-resources/example-sentences",@"plugin_notes_file",
+                            @"50,000+ Example Sentences v1.1",@"plugin_name",
+                            @"plugin-resources",@"plugin_notes_dir",
+                            @"example-sentences",@"plugin_notes_file",
                             @"Adds sentences to practice modes (7.5MB)",@"plugin_details",
                             @"https://d3580k8bnen6up.cloudfront.net/jFlash-EX-1.1.db.gz",@"target_url",
                             [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",
