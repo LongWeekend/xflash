@@ -65,13 +65,7 @@
   [super viewDidLoad];
 
   sentencesWebView.backgroundColor = [UIColor clearColor];
-  UIScrollView *scrollView = [sentencesWebView.subviews objectAtIndex:0];
-  
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
+  [self.sentencesWebView shutOffBouncing];
 }
 
 #pragma mark -
@@ -83,14 +77,6 @@
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
   
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
-  
-  // shut off rubber banding if we can
-  UIScrollView *scrollView = [self.sentencesWebView.subviews objectAtIndex:0];
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
   
   [self.sentencesWebView loadHTMLString:html baseURL:nil];
 }

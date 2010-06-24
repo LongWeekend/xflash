@@ -299,6 +299,7 @@
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		91818DB611D2F83B00746B09 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91818DB511D2F83B00746B09 /* SearchView.xib */; };
+		91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -588,6 +589,8 @@
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		91818DB511D2F83B00746B09 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
+		91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
+		91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
@@ -1013,6 +1016,8 @@
 				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				916D9AEC1125345B002FF875 /* Debugging */,
+				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
+				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
@@ -1646,6 +1651,7 @@
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
+				91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

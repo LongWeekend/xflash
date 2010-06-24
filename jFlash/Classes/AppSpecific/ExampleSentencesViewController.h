@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ExampleSentencePeer.h"
+#import "UIWebView+LWENoBounces.h"
 
 @interface ExampleSentencesViewController : UIViewController
 {
