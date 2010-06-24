@@ -117,7 +117,6 @@
 		4986F84D11C715F600947486 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		4986F84E11C715F600947486 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
 		4986F84F11C715F600947486 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
-		4986F85011C715F600947486 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
 		4986F85311C715F600947486 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4986F85511C715F600947486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		4986F85611C715F600947486 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
@@ -132,7 +131,6 @@
 		4986F86511C715F600947486 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		4986F86611C715F600947486 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		4986F86711C715F600947486 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		4986F86811C715F600947486 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		4986F86911C715F600947486 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		4986F86B11C715F600947486 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -208,7 +206,6 @@
 		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
 		49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
-		49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
@@ -255,7 +252,6 @@
 		917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -302,6 +298,7 @@
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		91818DB611D2F83B00746B09 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91818DB511D2F83B00746B09 /* SearchView.xib */; };
 		91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */; };
+		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -436,7 +433,6 @@
 		49B4ABE711C1DCD100CFC308 /* task-pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-pause-button.png"; path = "Assets/task-pause-button.png"; sourceTree = "<group>"; };
 		49B4ABE811C1DCD100CFC308 /* task-retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-retry-button.png"; path = "Assets/task-retry-button.png"; sourceTree = "<group>"; };
 		49B4ABE911C1DCD100CFC308 /* task-start-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-start-button.png"; path = "Assets/task-start-button.png"; sourceTree = "<group>"; };
-		49B4AE8D11C2439200CFC308 /* tag_glossary.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tag_glossary.html; path = Assets/help/tag_glossary.html; sourceTree = "<group>"; };
 		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
@@ -506,8 +502,6 @@
 		917A5BCE11AB7C4600016BD2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = AppSpecific/RootViewController.m; sourceTree = "<group>"; };
 		917A5BCF11AB7C4600016BD2 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = AppSpecific/SearchViewController.h; sourceTree = "<group>"; };
 		917A5BD011AB7C4600016BD2 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = AppSpecific/SearchViewController.m; sourceTree = "<group>"; };
-		917A5BD111AB7C4600016BD2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
-		917A5BD211AB7C4600016BD2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		917A5BD311AB7C4600016BD2 /* StudySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetViewController.h; path = AppSpecific/StudySetViewController.h; sourceTree = "<group>"; };
 		917A5BD411AB7C4600016BD2 /* StudySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StudySetViewController.m; path = AppSpecific/StudySetViewController.m; sourceTree = "<group>"; };
 		917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetWordsViewController.h; path = AppSpecific/StudySetWordsViewController.h; sourceTree = "<group>"; };
@@ -597,6 +591,8 @@
 		91818DB511D2F83B00746B09 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
 		91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
+		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
+		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
@@ -969,7 +965,6 @@
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
 				D3B59408111F928100AE4CEE /* Default.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
 				D35B07091116456D00DB5E02 /* 15-tags.png */,
@@ -1009,6 +1004,7 @@
 		917A5B7A11AB7A8700016BD2 /* LWE Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				916D9AEC1125345B002FF875 /* Debugging */,
 				49F968F811AF652D00DFC3C9 /* LWEDownloader.h */,
 				49F968F911AF652D00DFC3C9 /* LWEDownloader.m */,
 				917A5C1311AB80F700016BD2 /* LWEDatabase.h */,
@@ -1143,8 +1139,8 @@
 				91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */,
 				4908209711B794A500150499 /* PluginSettingsViewController.h */,
 				4908209811B794A500150499 /* PluginSettingsViewController.m */,
-				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
-				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
+				9181901611D3392300746B09 /* SettingsViewController.h */,
+				9181901711D3392300746B09 /* SettingsViewController.m */,
 				917A5BD911AB7C4600016BD2 /* UserDetailsViewController.h */,
 				917A5BDA11AB7C4600016BD2 /* UserDetailsViewController.m */,
 				917A5BDB11AB7C4600016BD2 /* UserViewController.h */,
@@ -1239,8 +1235,6 @@
 				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
-				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
-				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
 				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
 				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
@@ -1445,7 +1439,6 @@
 				49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */,
 				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
 				49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */,
-				49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
@@ -1532,7 +1525,6 @@
 				4986F84D11C715F600947486 /* task-pause-button.png in Resources */,
 				4986F84E11C715F600947486 /* task-retry-button.png in Resources */,
 				4986F84F11C715F600947486 /* task-start-button.png in Resources */,
-				4986F85011C715F600947486 /* tag_glossary.html in Resources */,
 				4986F85311C715F600947486 /* SentenceView.xib in Resources */,
 				492568E611C7831F0058675B /* FMCommandEditViewController.xib in Resources */,
 				492568E711C7831F0058675B /* FMConsoleController.xib in Resources */,
@@ -1605,7 +1597,6 @@
 				917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */,
 				917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */,
 				917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */,
-				917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */,
 				917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */,
 				917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */,
 				917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */,
@@ -1666,6 +1657,7 @@
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
 				91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */,
+				9181901811D3392300746B09 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,7 +1694,6 @@
 				4986F86511C715F600947486 /* HelpWebViewController.m in Sources */,
 				4986F86611C715F600947486 /* RootViewController.m in Sources */,
 				4986F86711C715F600947486 /* SearchViewController.m in Sources */,
-				4986F86811C715F600947486 /* SettingsViewController.m in Sources */,
 				4986F86911C715F600947486 /* StudySetViewController.m in Sources */,
 				4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */,
 				4986F86B11C715F600947486 /* StudyViewController.m in Sources */,

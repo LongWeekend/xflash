@@ -154,7 +154,6 @@ const NSInteger KSegmentedTableHeader = 100;
     _currentResultArray = nil;
     _searchState = kSearchNoSearch;
     [[self _searchBar] becomeFirstResponder];
-    [[self tableView] reloadData];
   }
   else
   {

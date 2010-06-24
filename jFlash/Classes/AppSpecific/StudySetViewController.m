@@ -61,11 +61,9 @@
   // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"themeWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"cardAddedToTag" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToRoot) name:@"themeWasChanged" object:nil];
   
   // Get this group & subgroup data, and finally tags
   [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
@@ -88,6 +86,7 @@
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   if (!searching) [self hideSearchBar];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  [self reloadTableData];
 }
 
 - (void) reloadSubgroupData
@@ -102,11 +101,16 @@
 
 - (void) reloadTableData
 {
+  if([self tableView] == nil)
+  {
+    return;
+  }
 	if (searching)
   {
     [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
   }
-  else{
+  else
+  {
     [self setTagArray: [group getTags]];
   }
   [[self tableView] reloadData];
@@ -118,12 +122,6 @@
 - (void) hideSearchBar
 {
   [[self tableView] setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
-}
-
-/** Shows the root view of StudySetViewController's navigation controller */
-- (void) popToRoot
-{
-  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 /** Convenience method to change set using notification from another place */
@@ -181,7 +179,7 @@
  * Allows user to delete the selected tag
  * Note that this does not accept responsibility for IF the tag SHOULD be deleted
  */ 
-- (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
@@ -189,7 +187,7 @@
     Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
     [TagPeer deleteTag:tmpTag.tagId];
     [tagArray removeObjectAtIndex:[indexPath row]];
-    [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
   }
 }
@@ -234,7 +232,7 @@
 /**
  * Generates cells for table view depending on section & whether or not we are searching
  */
-- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
   // Get theme manager so we can get elements from it
@@ -247,7 +245,7 @@
     // No search results msg
     if(searching && [tagArray count] == 0)
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -257,7 +255,7 @@
     // Normal cell display
     else
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
 
       // Set up the image
       UIImageView* tmpView = cell.imageView;
@@ -289,12 +287,12 @@
   // Group Cells
   else
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
     
     // Folders should display the theme color when pressed!
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
     [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[subgroupArray count]];
-    [bgView setBorderColor:[lclTableView separatorColor]];
+    [bgView setBorderColor:[[self tableView] separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.selectedBackgroundView = bgView;
     [bgView release];
@@ -520,6 +518,12 @@
 	_searchOverlay = nil;
 }
 
+- (void)viewDidUnload
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];  
+  [super viewDidUnload];
+}
+
 //! Standard dealloc, removes observers
 - (void)dealloc
 {
@@ -529,6 +533,7 @@
   [tagArray release];
   [subgroupArray release];
   [group release];
+//  self.tableView = nil;
   [self setActivityIndicator:nil];
   [self setSearchBar:nil];
   [super dealloc];

@@ -28,16 +28,17 @@
     self.tabBarItem.image = [UIImage imageNamed:@"90-lifebuoy.png"];
     self.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
     self.navigationItem.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
-    
     NSArray *names = [NSArray arrayWithObjects:NSLocalizedString(@"Welcome",@"HelpViewController.Table_Welcome"),
                                                NSLocalizedString(@"Study Sets",@"HelpViewController.Table_StudySets"),
                                                NSLocalizedString(@"Practice",@"HelpViewController.Table_Practice"),
                                                NSLocalizedString(@"Browse Mode",@"HelpViewController.Table_BrowseMode"),
-                                               NSLocalizedString(@"Word Search",@"HelpViewController.Table_WordSearch"),
+                                               NSLocalizedString(@"Search",@"HelpViewController.Table_WordSearch"),
+                                               NSLocalizedString(@"Correcting Data",@"HelpViewController.Table_CorrectingData"),
+                                               NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
                                                NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
                                                NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),
                                                NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),nil];
-    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"tag_glossary",@"share",@"feedback",nil];
+    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"corrections",@"algorithm",@"tags",@"share",@"feedback",nil];
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];
     currentIndex = 0;
