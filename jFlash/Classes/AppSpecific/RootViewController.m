@@ -165,7 +165,7 @@
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
-  [updateVC setWebViewContentFile:@"release-notes"];
+  [updateVC setWebViewContentFile:@"plugin-resources/release-notes"];
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];

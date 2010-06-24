@@ -33,15 +33,10 @@ typedef enum _migraterStates
   NSString *taskMessage;
   NSString *statusMessage;
   NSInteger _migraterState;
-  NSAutoreleasePool *_backgroundThreadPool;
   BOOL _cancelRequest;
 }
 
 + (BOOL) databaseIsUpdatable;
-- (void) _downloadFTSPlugin;
-- (void) _updateUserDatabase;
-- (void) _loadPlugins;
-- (void) _openDatabase:(NSString*)filename;
 - (float) progress;
 - (void) setProgress:(float)progress;
 

@@ -56,20 +56,6 @@ const NSInteger KSegmentedTableHeader = 100;
   self.navigationItem.titleView = [self _searchBar];
   [[self _searchBar] sizeToFit];
 
-  // Programmatically create "pill" chooser - searches between words & example sentences - default is words
-  // Do not add it to the view in this method - we split that out so it can be called separately when the 
-  // user installs example sentences
-  UISegmentedControl *tmpChooser;
-  tmpChooser = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"Words",@"SearchViewController.Search_Words"),
-                                                                                   NSLocalizedString(@"Example Sentences",@"SearchViewController.Search_Sentences"),nil]];
-  tmpChooser.segmentedControlStyle = UISegmentedControlStyleBar;
-  tmpChooser.selectedSegmentIndex = _searchTarget;
-  tmpChooser.frame = CGRectMake(10,5,300,25);
-  tmpChooser.tintColor = [UIColor lightGrayColor];
-  [tmpChooser addTarget:self action:@selector(changeSearchTarget:) forControlEvents:UIControlEventValueChanged];
-  [self set_wordsOrSentencesSegment:tmpChooser];
-  [tmpChooser release];
-  
   // If we have the Example sentence database...
   if (_showSearchTargetControl) [self _addSearchControlToHeader];
 
@@ -132,6 +118,18 @@ const NSInteger KSegmentedTableHeader = 100;
  */
 - (void) _addSearchControlToHeader
 {
+  // Programmatically create "pill" chooser - searches between words & example sentences - default is words
+  UISegmentedControl *tmpChooser;
+  tmpChooser = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"Words",@"SearchViewController.Search_Words"),
+                                                          NSLocalizedString(@"Example Sentences",@"SearchViewController.Search_Sentences"),nil]];
+  tmpChooser.segmentedControlStyle = UISegmentedControlStyleBar;
+  tmpChooser.selectedSegmentIndex = _searchTarget;
+  tmpChooser.frame = CGRectMake(10,5,300,25);
+  tmpChooser.tintColor = [UIColor lightGrayColor];
+  [tmpChooser addTarget:self action:@selector(changeSearchTarget:) forControlEvents:UIControlEventValueChanged];
+  [self set_wordsOrSentencesSegment:tmpChooser];
+  [tmpChooser release];  
+  
   UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
   tableHeaderView.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   [tableHeaderView addSubview:[self _wordsOrSentencesSegment]];
@@ -294,7 +292,7 @@ const NSInteger KSegmentedTableHeader = 100;
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // Get different kinds of cells depending on the state
-  UITableViewCell *cell;
+  UITableViewCell *cell = nil;
   switch (_searchState)
   {
     // Default to the same behavior if we have NO search results as well as having them

@@ -23,6 +23,7 @@
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
+@synthesize cardViewControllerDelegate;
 
 /** Custom initializer */
 - (id) init
@@ -228,20 +229,20 @@
 
 - (void) _updateCardViewDelegates
 {
-  id cardViewControllerDelegate;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;
-    cardViewControllerDelegate = [[BrowseModeCardViewDelegate alloc] init];
+    [self setCardViewControllerDelegate:[[BrowseModeCardViewDelegate alloc] init]];
   }
   else
   {
     self.isBrowseMode = NO;
-    cardViewControllerDelegate = [[PracticeModeCardViewDelegate alloc] init];
+    [self setCardViewControllerDelegate:[[PracticeModeCardViewDelegate alloc] init]];
   }
-  [cardViewController setDelegate:cardViewControllerDelegate];
-  [actionBarController setDelegate:cardViewControllerDelegate];
+  [cardViewController setDelegate:[self cardViewControllerDelegate]];
+  [actionBarController setDelegate:[self cardViewControllerDelegate]];
 }
 
 
@@ -452,6 +453,7 @@
   int wrongCount = [[records objectAtIndex:1] intValue];
   progressView.cardsRightAllTime.text = [NSString stringWithFormat:@"%i", rightCount];
   progressView.cardsWrongAllTime.text = [NSString stringWithFormat:@"%i", wrongCount];
+  [progressView release];
 }
 
 #pragma mark UI updater convenience methods
@@ -486,7 +488,7 @@
   NSMutableArray* levelDetails = nil;
   NSNumber *countObject;
   int i;
-  float seencount;
+  float seencount = 0;
 
   // Crash protection in case we don't have the card level counts yet
   if ([[currentCardSet cardLevelCounts] count] == 6)
@@ -646,6 +648,9 @@
   [scrollView release];
   [pageControl release];
   [exampleSentencesViewController release];
+  
+  // Get rid of cardviewcontroller delegate
+  [self setCardViewControllerDelegate:nil];
   
 	[super dealloc];
 }

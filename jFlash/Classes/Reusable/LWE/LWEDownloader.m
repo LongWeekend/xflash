@@ -269,6 +269,7 @@
 {
   switch (downloaderState)
   {
+    case kDownloaderRetrievingMetaData:
     case kDownloaderRetrievingData:
       [_request cancel];
       [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];
@@ -404,7 +405,12 @@
     // Update progress bar
     totalUncompressed = totalUncompressed + CHUNK;
     if (requestSize > 0) decompressionProgress = ((float)totalUncompressed / (float)guessedFilesize);
-    [self performSelectorOnMainThread:@selector(setProgressFromBackgroundThread:) withObject:[NSNumber numberWithFloat:decompressionProgress] waitUntilDone:NO];
+    
+    // Don't do this EVERY time
+    if ((totalUncompressed % (CHUNK * 10)) == 0)
+    {
+      [self performSelectorOnMainThread:@selector(setProgressFromBackgroundThread:) withObject:[NSNumber numberWithFloat:decompressionProgress] waitUntilDone:NO];
+    }
     
     // Check for cancellation
     if (_unzipShouldCancel)

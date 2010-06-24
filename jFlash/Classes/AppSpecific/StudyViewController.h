@@ -25,6 +25,8 @@
 {
   BOOL _alreadyShowedAlertView;
   
+  id cardViewControllerDelegate;
+  
   // scroll view
   IBOutlet UIScrollView* scrollView;
   IBOutlet UIPageControl* pageControl;
@@ -135,6 +137,8 @@
 
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
+
+@property (nonatomic, retain) id cardViewControllerDelegate;
 
 @property BOOL percentCorrectVisible;
 @property BOOL isBrowseMode;

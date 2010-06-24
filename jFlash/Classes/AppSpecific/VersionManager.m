@@ -27,7 +27,6 @@
     _progress = 0.0f;
     _cancelRequest = NO;
     _migraterState = kMigraterReady;
-    _backgroundThreadPool = nil;
   }
   return self;
 }
@@ -227,7 +226,7 @@
   if (_migraterState == kMigraterReady)
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Preparing database",@"VersionManager.PreparingDatabaseMsg")];
-    [self performSelectorInBackground:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE]];
+    [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
   }
 }
 
@@ -286,42 +285,6 @@
 }
 
 
-//! Helper method to instantiate
-- (void) _initAutorelease
-{
-  if (_backgroundThreadPool == nil)
-  {
-    _backgroundThreadPool = [[NSAutoreleasePool alloc] init];
-  }
-}
-
-
-/** 
- * Migration - STEP 1
- * Opens the old version database as the main database
- * Calls _loadFTSPlugin on finish
- */
-- (void) _openDatabase:(NSString*)filename
-{
-  [self _initAutorelease];
-  
-  // Get the database open and ready
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if (db.databaseOpenFinished)
-  {
-    // Already open, so close it once to detach any databases and get JUST the USER database
-    [db closeDatabase];
-  }
-  if (![db openDatabase:filename])
-  {
-    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
-  }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
-  [self _downloadFTSPlugin];
-  [_backgroundThreadPool release];
-  return;  
-}
-
 
 /**
  * Migration - STEP 2
@@ -351,33 +314,28 @@
 }
 
 
-/**
- * Class internal method to get the updated status from LWEDownloader and figure out the overall progress
- * Called via the LWEDownloaderProgressUpdated notification
+/** 
+ * Migration - STEP 1
+ * Opens the old version database as the main database
+ * Calls _loadFTSPlugin on finish
  */
-- (void) _updateDownloadStatus
+- (void) _openDatabase:(NSString*)filename
 {
-  if ([self dlHandler])
+  // Get the database open and ready
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  if (db.databaseOpenFinished)
   {
-    [self setProgress:[[self dlHandler] progress]];
-    [self setTaskMessage:[[self dlHandler] taskMessage]];
-
-    // Determine what to do with buttons based on state
-    if ([[self dlHandler] isFailureState])
-    {
-      LWE_LOG(@"Download failed, oh no, what are we doing to do now");
-      NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
-      [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
-    }
-    else if ([[self dlHandler] isSuccessState])
-    {
-      LWE_LOG(@"Download succeeded, now it's time to keep going");
-      [[NSNotificationCenter defaultCenter] removeObserver:self];
-      [self performSelectorInBackground:@selector(_loadPlugins) withObject:nil];
-    }
+    // Already open, so close it once to detach any databases and get JUST the USER database
+    [db closeDatabase];
   }
+  if (![db openDatabase:filename])
+  {
+    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
+  }
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
+  [self _downloadFTSPlugin];
+  return;  
 }
-
 
 
 /**
@@ -389,11 +347,9 @@
  */
 - (void) _loadPlugins
 {
-  _backgroundThreadPool = [[NSAutoreleasePool alloc] init];
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
 
   // Load FTS plugin
-  [pm loadInstalledPlugins];
   BOOL isFTSLoaded, isCardDBLoaded;
   isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
   isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
@@ -401,14 +357,42 @@
   if (isFTSLoaded && isCardDBLoaded)
   {
     [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging new dictionary",@"VersionManager.MergingDBMsg")];
-    [self _updateUserDatabase];
+    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
   }
   else
   {
     // TODO: put something here to pick up on
   }
-  [_backgroundThreadPool release];
 }
+
+
+/**
+ * Class internal method to get the updated status from LWEDownloader and figure out the overall progress
+ * Called via the LWEDownloaderProgressUpdated notification
+ */
+- (void) _updateDownloadStatus
+{
+  if ([self dlHandler])
+  {
+    [self setProgress:[[self dlHandler] progress]];
+    [self setTaskMessage:[[self dlHandler] taskMessage]];
+    
+    // Determine what to do with buttons based on state
+    if ([[self dlHandler] isFailureState] && _migraterState != kMigraterCancelled)
+    {
+      LWE_LOG(@"Download failed, oh no, what are we doing to do now");
+      NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
+      [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
+    }
+    else if ([[self dlHandler] isSuccessState])
+    {
+      LWE_LOG(@"Download succeeded, now it's time to keep going");
+      [[NSNotificationCenter defaultCenter] removeObserver:self];
+      [self _loadPlugins];
+    }
+  }
+}
+
 
 
 /**
@@ -418,11 +402,12 @@
  */
 - (void) _updateUserDatabase
 {
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   // Init variables
   BOOL success = YES;
   FILE *fh = NULL;
   float lclProgress = 0.0f;
-  int numRecords = 100000;
+  int numRecords = 12768;
   int i = 0;
   char str_buf[256];
 
@@ -442,11 +427,6 @@
   LWE_LOG(@"Starting loop");
   while (!feof(fh))
   {
-    if (i < 10)
-    {
-      LWE_LOG(@"%@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
-    }
-    
     if (_cancelRequest)
     {
       success = NO;
@@ -456,7 +436,7 @@
     fgets(str_buf,256,fh);
 
     i++;
-    if ((i % 500) == 0)
+    if ((i % 50) == 0)
     {
       lclProgress = ((float)i / (float)numRecords);
       [self setProgress:lclProgress];
@@ -476,7 +456,13 @@
   if (success)
   {
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Finalizing dictionary"];
-    LWE_LOG(@"STARTING COMMIT");
+
+/*    LWE_LOG(@"Making indexes");
+    [db executeUpdate:@"CREATE INDEX card_tag_link_card_id ON card_tag_link (card_id ASC)"];
+    [db executeUpdate:@"CREATE INDEX card_tag_link_tag_id ON card_tag_link (tag_id ASC)"];
+ */   LWE_LOG(@"STARTING COMMIT");
+     
+    
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
     
@@ -490,10 +476,12 @@
     [db.dao rollback];
     [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error.  Aborting update."];
   }
+  [pool release];
 }
 
 -(void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
 }
 
