@@ -231,6 +231,11 @@
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
+  if ([self cardViewControllerDelegate] != nil)
+  {
+    [self.cardViewControllerDelegate release];
+  }
+  
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;

@@ -103,6 +103,7 @@ enum ControlSectionRows
     rightLabel.text = [NSString stringWithFormat:@"%d", MAX_MAX_STUDYING];
     [cell addSubview:rightLabel];
     [rightLabel release];
+    [sliderValue release];
   }
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
