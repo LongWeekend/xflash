@@ -29,7 +29,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
 
-    [self setSectionArray:[self settingsTableDataSource]];
+    [self setSectionArray:[self _settingsTableDataSource]];
     settingsChanged = NO;
     headwordChanged = NO;
     themeChanged = NO;
