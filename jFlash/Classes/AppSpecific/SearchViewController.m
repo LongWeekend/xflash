@@ -7,16 +7,17 @@
 //
 
 #import "SearchViewController.h"
-
+const NSInteger KSegmentedTableHeader = 100;
 
 @implementation SearchViewController
-@synthesize _searchBar, _targetChooser, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
+@synthesize _searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
+@synthesize tableView;
 
 
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
 - (id) init
 {
-  if (self = [super initWithStyle:UITableViewStylePlain])
+  if (self = [super init])
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
@@ -66,7 +67,7 @@
   tmpChooser.frame = CGRectMake(10,5,300,25);
   tmpChooser.tintColor = [UIColor lightGrayColor];
   [tmpChooser addTarget:self action:@selector(changeSearchTarget:) forControlEvents:UIControlEventValueChanged];
-  [self set_targetChooser:tmpChooser];
+  [self set_wordsOrSentencesSegment:tmpChooser];
   [tmpChooser release];
   
   // If we have the Example sentence database...
@@ -87,6 +88,8 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self._searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  [[[self view] viewWithTag:KSegmentedTableHeader] setBackgroundColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+  self._wordsOrSentencesSegment.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
   // Fire off a notification to bring up the downloader?
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -130,9 +133,11 @@
 - (void) _addSearchControlToHeader
 {
   UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
-  tableHeaderView.backgroundColor = [UIColor lightGrayColor];
-  [tableHeaderView addSubview:[self _targetChooser]];
-  [[self tableView] setTableHeaderView:tableHeaderView];
+  tableHeaderView.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  [tableHeaderView addSubview:[self _wordsOrSentencesSegment]];
+  [tableHeaderView setTag: KSegmentedTableHeader];
+  [[self view] addSubview:tableHeaderView];
+  [tableHeaderView setHidden:YES];
   [tableHeaderView release];
 }
 
@@ -184,12 +189,14 @@
 - (void) searchBarTextDidBeginEditing:(UISearchBar*) lclSearchBar
 {
   lclSearchBar.showsCancelButton = YES;
+  [[self.view viewWithTag:KSegmentedTableHeader] setHidden:NO];
 }
 
 /** Hide the cancel button when user finishes */
 - (void) searchBarTextDidEndEditing:(UISearchBar *)lclSearchBar
 {  
   lclSearchBar.showsCancelButton = NO;
+  [[self.view viewWithTag:KSegmentedTableHeader] setHidden:YES];
 }
 
 /** Run the search and resign the keyboard */
@@ -412,6 +419,7 @@
   [self set_searchBar:nil];
   [self set_cardSearchArray:nil];
   [self set_activityIndicator:nil];
+  [self set_wordsOrSentencesSegment:nil];
   [super dealloc];
 }
 
