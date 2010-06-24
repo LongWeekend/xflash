@@ -12,6 +12,5 @@
 
 + (void) recordResult: (Card*)card gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt;
 + (NSInteger) getNextAfterLevel:(NSInteger) level gotItRight: (BOOL)gotItRight;
-+ (NSArray*) getRightWrongTotalsBySet: (int)tagId;
 
 @end

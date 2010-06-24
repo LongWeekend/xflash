@@ -10,25 +10,6 @@
 
 @implementation UserHistoryPeer
 
-//! Returns the right and wrong totals
-+ (NSArray*) getRightWrongTotalsBySet: (NSInteger)tagId
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql  = [[NSString alloc] initWithFormat:@"SELECT sum(right_count) FROM user_history WHERE user_id = %d AND tag_id = %d", [settings integerForKey:@"user_id"], tagId];
-  NSString *sql2 = [[NSString alloc] initWithFormat:@"SELECT sum(wrong_count) as TotalWrong FROM user_history WHERE user_id = %d AND tag_id = %d", [settings integerForKey:@"user_id"], tagId];
-  int right = [[db dao] intForQuery:sql];
-  int wrong = [[db dao] intForQuery:sql2];
-  NSNumber *rightCount = [[NSNumber alloc] initWithInt:right];
-  NSNumber *wrongCount = [[NSNumber alloc] initWithInt:wrong];
-  NSArray* results = [NSArray arrayWithObjects: rightCount, wrongCount, nil];
-  [rightCount release];
-  [wrongCount release];
-  [sql release];
-  [sql2 release];
-  return results;
-}
-
 //! Returns what the next level should be based on the user's answer
 + (int) getNextAfterLevel:(int)level gotItRight: (BOOL)gotItRight
 {

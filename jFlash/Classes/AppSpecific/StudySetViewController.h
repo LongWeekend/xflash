@@ -36,7 +36,6 @@
 - (void) reloadSubgroupData;
 - (void) doDoneSearching;
 - (void) hideSearchBar;
-- (void) popToRoot;
 
 @property NSInteger selectedTagId;
 @property NSInteger groupId;
