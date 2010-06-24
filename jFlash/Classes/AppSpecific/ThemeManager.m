@@ -52,17 +52,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                            nil];
     
     
-    // Defines the Forest Green theme tint values & CSS
-    NSDictionary *forest = [NSDictionary dictionaryWithObjectsAndKeys:
-                            SET_THEME_FOREST,@"key",
-                            @"Forest",@"name",
-                            @"green",@"filename",
-                            [NSNumber numberWithFloat:74.0f/255.0f],@"R",
-                            [NSNumber numberWithFloat:170/255.0f],@"G",
-                            [NSNumber numberWithFloat:15/255.0f],@"B",
-                            @"6BBA70",@"WEB_SELECTED",
-                            @"dfn{ background-color:white; border-color:gray; }",@"CSS",
-                            nil];
+//    // Defines the Forest Green theme tint values & CSS
+//    NSDictionary *forest = [NSDictionary dictionaryWithObjectsAndKeys:
+//                            SET_THEME_FOREST,@"key",
+//                            @"Forest",@"name",
+//                            @"green",@"filename",
+//                            [NSNumber numberWithFloat:74.0f/255.0f],@"R",
+//                            [NSNumber numberWithFloat:170/255.0f],@"G",
+//                            [NSNumber numberWithFloat:15/255.0f],@"B",
+//                            @"6BBA70",@"WEB_SELECTED",
+//                            @"dfn{ background-color:white; border-color:gray; }",@"CSS",
+//                            nil];
 
     // Defines the (Joseph) Tame theme tint values & CSS
     NSDictionary *tame = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -78,7 +78,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 
 
     // Compiles theme dictionaries into a single dictionary keyed on the theme name
-    [self setThemes:[NSDictionary dictionaryWithObjectsAndKeys:fire,SET_THEME_FIRE,water,SET_THEME_WATER,forest,SET_THEME_FOREST,tame,SET_THEME_TAME,nil]];
+    [self setThemes:[NSDictionary dictionaryWithObjectsAndKeys:fire,SET_THEME_FIRE,water,SET_THEME_WATER,tame,SET_THEME_TAME,nil]];
   }
   return self;  
 }
