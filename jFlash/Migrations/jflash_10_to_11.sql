@@ -1,3 +1,4 @@
+CREATE INDEX card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)
 DELETE FROM card_tag_link WHERE card_id = 764
 DELETE FROM user_history WHERE card_id = 764
 DELETE FROM card_tag_link WHERE card_id = 1216
@@ -1282,7 +1283,6 @@ DELETE FROM card_tag_link WHERE card_id = 147022
 DELETE FROM user_history WHERE card_id = 147022
 DELETE FROM card_tag_link WHERE card_id = 147024
 DELETE FROM user_history WHERE card_id = 147024
-CREATE INDEX tmp_ctl ON card_tag_link(card_id,tag_id)
 DELETE FROM card_tag_link WHERE card_id = 34678 AND tag_id = 622
 DELETE FROM card_tag_link WHERE card_id = 34749 AND tag_id = 622
 DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 622
@@ -13960,5 +13960,109 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149593,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (58249,644)
-DROP INDEX tmp_ctl
 INSERT INTO tags (tag_id, tag_name, description, editable, count) VALUES (643,"Pronouns","Pronouns",0,126)
+UPDATE tags SET count = count +37  WHERE tag_id =4
+UPDATE tags SET count = count -212  WHERE tag_id = 5
+UPDATE tags SET count = count + 2  WHERE tag_id = 6
+UPDATE tags SET count = count -41  WHERE tag_id = 7
+UPDATE tags SET count = count -282  WHERE tag_id = 8
+UPDATE tags SET count = count -69  WHERE tag_id = 9
+UPDATE tags SET count = count -2  WHERE tag_id = 12
+UPDATE tags SET count = count + 58  WHERE tag_id = 15
+UPDATE tags SET count = count -5  WHERE tag_id = 17
+UPDATE tags SET count = count -6  WHERE tag_id = 18
+UPDATE tags SET count = count -22  WHERE tag_id = 19
+UPDATE tags SET count = count -2  WHERE tag_id = 20
+UPDATE tags SET count = count -1  WHERE tag_id = 22
+UPDATE tags SET count = count + 1  WHERE tag_id = 23
+UPDATE tags SET count = count + 11  WHERE tag_id = 26
+UPDATE tags SET count = count -9  WHERE tag_id = 27
+UPDATE tags SET count = count + 6  WHERE tag_id = 32
+UPDATE tags SET count = count -2  WHERE tag_id = 35
+UPDATE tags SET count = count -4  WHERE tag_id = 36
+UPDATE tags SET count = count + 23  WHERE tag_id = 38
+UPDATE tags SET count = count -3  WHERE tag_id = 44
+UPDATE tags SET count = count -34  WHERE tag_id = 47
+UPDATE tags SET count = count -25  WHERE tag_id = 49
+UPDATE tags SET count = count + 3  WHERE tag_id = 51
+UPDATE tags SET count = count -3  WHERE tag_id = 52
+UPDATE tags SET count = count -9  WHERE tag_id = 53
+UPDATE tags SET count = count + 1  WHERE tag_id = 54
+UPDATE tags SET count = count -1  WHERE tag_id = 57
+UPDATE tags SET count = count -1  WHERE tag_id = 58
+UPDATE tags SET count = count + 2  WHERE tag_id = 59
+UPDATE tags SET count = count + 1  WHERE tag_id = 62
+UPDATE tags SET count = count -1  WHERE tag_id = 63
+UPDATE tags SET count = count -1  WHERE tag_id = 64
+UPDATE tags SET count = count -1  WHERE tag_id = 65
+UPDATE tags SET count = count -14  WHERE tag_id = 66
+UPDATE tags SET count = count -2  WHERE tag_id = 68
+UPDATE tags SET count = count -7  WHERE tag_id = 70
+UPDATE tags SET count = count -1  WHERE tag_id = 71
+UPDATE tags SET count = count -2  WHERE tag_id = 76
+UPDATE tags SET count = count -6  WHERE tag_id = 79
+UPDATE tags SET count = count + 4  WHERE tag_id = 80
+UPDATE tags SET count = count -59  WHERE tag_id = 83
+UPDATE tags SET count = count -3  WHERE tag_id = 84
+UPDATE tags SET count = count -2  WHERE tag_id = 85
+UPDATE tags SET count = count -1  WHERE tag_id = 86
+UPDATE tags SET count = count -17  WHERE tag_id = 87
+UPDATE tags SET count = count -1  WHERE tag_id = 90
+UPDATE tags SET count = count -2  WHERE tag_id = 91
+UPDATE tags SET count = count + 38  WHERE tag_id = 92
+UPDATE tags SET count = count + 21  WHERE tag_id = 93
+UPDATE tags SET count = count + 16  WHERE tag_id = 94
+UPDATE tags SET count = count + 8  WHERE tag_id = 95
+UPDATE tags SET count = count -4  WHERE tag_id = 97
+UPDATE tags SET count = count -4  WHERE tag_id = 104
+UPDATE tags SET count = count -17  WHERE tag_id = 105
+UPDATE tags SET count = count -1  WHERE tag_id = 108
+UPDATE tags SET count = count -4  WHERE tag_id = 109
+UPDATE tags SET count = count + 1  WHERE tag_id = 110
+UPDATE tags SET count = count -1  WHERE tag_id = 111
+UPDATE tags SET count = count -12  WHERE tag_id = 113
+UPDATE tags SET count = count -2  WHERE tag_id = 114
+UPDATE tags SET count = count + 12  WHERE tag_id = 115
+UPDATE tags SET count = count -10  WHERE tag_id = 116
+UPDATE tags SET count = count + 5  WHERE tag_id = 117
+UPDATE tags SET count = count -7  WHERE tag_id = 121
+UPDATE tags SET count = count + 10  WHERE tag_id = 123
+UPDATE tags SET count = count -2  WHERE tag_id = 126
+UPDATE tags SET count = count + 2  WHERE tag_id = 128
+UPDATE tags SET count = count + 40  WHERE tag_id = 129
+UPDATE tags SET count = count + 2  WHERE tag_id = 130
+UPDATE tags SET count = count -36  WHERE tag_id = 132
+UPDATE tags SET count = count -2  WHERE tag_id = 134
+UPDATE tags SET count = count + 21  WHERE tag_id = 135
+UPDATE tags SET count = count + 3  WHERE tag_id = 136
+UPDATE tags SET count = count -3  WHERE tag_id = 137
+UPDATE tags SET count = count + 5  WHERE tag_id = 138
+UPDATE tags SET count = count -6  WHERE tag_id = 139
+UPDATE tags SET count = count -30  WHERE tag_id = 140
+UPDATE tags SET count = count -2  WHERE tag_id = 141
+UPDATE tags SET count = count -1  WHERE tag_id = 142
+UPDATE tags SET count = count + 68  WHERE tag_id = 147
+UPDATE tags SET count = count + 3  WHERE tag_id = 148
+UPDATE tags SET count = count -4  WHERE tag_id = 151
+UPDATE tags SET count = count -1  WHERE tag_id = 152
+UPDATE tags SET count = count -3  WHERE tag_id = 153
+UPDATE tags SET count = count + 1  WHERE tag_id = 154
+UPDATE tags SET count = count -9  WHERE tag_id = 156
+UPDATE tags SET count = count -14  WHERE tag_id = 157
+UPDATE tags SET count = count -30  WHERE tag_id = 158
+UPDATE tags SET count = count + 2  WHERE tag_id = 161
+UPDATE tags SET count = count -1  WHERE tag_id = 162
+UPDATE tags SET count = count -1  WHERE tag_id = 165
+UPDATE tags SET count = count + 2  WHERE tag_id = 168
+UPDATE tags SET count = count -1  WHERE tag_id = 169
+UPDATE tags SET count = count + 16  WHERE tag_id = 170
+UPDATE tags SET count = count -1  WHERE tag_id = 172
+UPDATE tags SET count = count -51  WHERE tag_id = 173
+UPDATE tags SET count = count -21  WHERE tag_id = 182
+UPDATE tags SET count = count -1  WHERE tag_id = 184
+UPDATE tags SET count = count + 19  WHERE tag_id = 190
+UPDATE tags SET count = count -28  WHERE tag_id = 195
+UPDATE tags SET count = count + 4  WHERE tag_id = 197
+UPDATE tags SET count = count -125  WHERE tag_id = 198
+UPDATE tags SET count = count -8  WHERE tag_id = 199
+UPDATE tags SET count = count + 1  WHERE tag_id = 219
