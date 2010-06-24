@@ -165,7 +165,8 @@
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
-  [updateVC setWebViewContentFile:@"plugin-resources/release-notes"];
+  [updateVC setWebViewContentDirectory:@"plugin-resources"];
+  [updateVC setWebViewContentFileName:@"release-notes"];
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];
@@ -185,8 +186,10 @@
   [dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
-  [dlViewController setWebViewContentFile:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
-  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFile]);
+  [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
+  [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
+  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
+  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];

@@ -59,7 +59,8 @@
   BOOL startTaskOnAppear;                             //! If YES, -startProcess will be called on viewDidAppear
   BOOL showDetailedViewOnAppear;                      //! If YES, -showDetailedView will be called on viewDidAppear
   
-  NSString *webViewContentFile;                       //! Sets the filename of the content to load into the details web view
+  NSString *webViewContentDirectory;                   //! Sets the sub directory of the content to load into the details web view
+  NSString *webViewContentFileName;                   //! Sets the filename of the content to load into the details web view
   
   // Downloader & Updater objects
   id<ModalTaskViewDelegate> taskHandler;         //! Task delegate, must conform to TaskViewControllerDelegate protocol
@@ -99,7 +100,8 @@
 // User-set properties
 @property BOOL startTaskOnAppear;
 @property BOOL showDetailedViewOnAppear;
-@property (nonatomic, retain) NSString *webViewContentFile;
+@property (nonatomic, retain) NSString *webViewContentDirectory;
+@property (nonatomic, retain) NSString *webViewContentFileName;
 @property (nonatomic, retain) id taskHandler;
 
 @end
