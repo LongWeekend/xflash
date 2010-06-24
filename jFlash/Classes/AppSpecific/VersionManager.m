@@ -489,7 +489,8 @@
     
     // Tells whoever cares (in our case settings) that version updated
     NSNotification *aNotification = [NSNotification notificationWithName:@"versionDidUpdate" object:self userInfo:nil];
-    [self postMainThreadNotification:aNotification];
+    [self performSelectorOnMainThread:@selector(postMainThreadNotification:) withObject:aNotification waitUntilDone:NO];
+
 
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
   }
