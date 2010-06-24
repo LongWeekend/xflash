@@ -225,7 +225,8 @@
     // First do the remove
     int countBeforeRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
     LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
-    LWE_LOG(@"Items in index to be added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
+    int countBeforeAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
+    LWE_LOG(@"Items in index to be added: %d", countBeforeAdd);
     [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
     int countAfterRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
 
@@ -235,9 +236,13 @@
     {
       [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
     }
+    int countAfterAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
     
+    // Consistency checks
+    LWE_ASSERT((countAfterRemove+1) == countBeforeRemove);
+    LWE_ASSERT((countAfterAdd-1) == countBeforeAdd);
     LWE_LOG(@"Items in removed: %d",countAfterRemove);
-    LWE_LOG(@"Items in added: %d",[[[self cardIds] objectAtIndex:nextLevel] count]);
+    LWE_LOG(@"Items in added: %d",countAfterAdd);
     [self cacheCardLevelCounts];
   }
 }
