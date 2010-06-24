@@ -20,13 +20,9 @@
 #import "LWEFile.h"
 #import "LWEDownloader.h"
 
-#define UPDATE_ALERT_CANCEL_BUTTON 0
-#define UPDATE_ALERT_UPDATE_NOW_BUTTON 1
-#define UPDATE_ALERT_RELEASE_NOTES_BUTTON 2
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {
-  BOOL _showWelcomeSplash;
   LoadingView *loadingView;
   UITabBarController *tabBarController;
 }
