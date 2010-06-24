@@ -1,23 +1,5557 @@
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150040,1)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150041,1)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150042,1)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150043,1)
+DELETE FROM card_tag_link WHERE card_id = 764
+DELETE FROM user_history WHERE card_id = 764
+DELETE FROM card_tag_link WHERE card_id = 1216
+DELETE FROM user_history WHERE card_id = 1216
+DELETE FROM card_tag_link WHERE card_id = 1241
+DELETE FROM user_history WHERE card_id = 1241
+DELETE FROM card_tag_link WHERE card_id = 4093
+DELETE FROM user_history WHERE card_id = 4093
+DELETE FROM card_tag_link WHERE card_id = 6303
+DELETE FROM user_history WHERE card_id = 6303
+DELETE FROM card_tag_link WHERE card_id = 8548
+DELETE FROM user_history WHERE card_id = 8548
+DELETE FROM card_tag_link WHERE card_id = 8905
+DELETE FROM user_history WHERE card_id = 8905
+DELETE FROM card_tag_link WHERE card_id = 9335
+DELETE FROM user_history WHERE card_id = 9335
+DELETE FROM card_tag_link WHERE card_id = 10486
+DELETE FROM user_history WHERE card_id = 10486
+DELETE FROM card_tag_link WHERE card_id = 15189
+DELETE FROM user_history WHERE card_id = 15189
+DELETE FROM card_tag_link WHERE card_id = 15813
+DELETE FROM user_history WHERE card_id = 15813
+DELETE FROM card_tag_link WHERE card_id = 16315
+DELETE FROM user_history WHERE card_id = 16315
+DELETE FROM card_tag_link WHERE card_id = 19738
+DELETE FROM user_history WHERE card_id = 19738
+DELETE FROM card_tag_link WHERE card_id = 20164
+DELETE FROM user_history WHERE card_id = 20164
+DELETE FROM card_tag_link WHERE card_id = 20699
+DELETE FROM user_history WHERE card_id = 20699
+DELETE FROM card_tag_link WHERE card_id = 21019
+DELETE FROM user_history WHERE card_id = 21019
+DELETE FROM card_tag_link WHERE card_id = 22330
+DELETE FROM user_history WHERE card_id = 22330
+DELETE FROM card_tag_link WHERE card_id = 24483
+DELETE FROM user_history WHERE card_id = 24483
+DELETE FROM card_tag_link WHERE card_id = 24618
+DELETE FROM user_history WHERE card_id = 24618
+DELETE FROM card_tag_link WHERE card_id = 26686
+DELETE FROM user_history WHERE card_id = 26686
+DELETE FROM card_tag_link WHERE card_id = 32644
+DELETE FROM user_history WHERE card_id = 32644
+DELETE FROM card_tag_link WHERE card_id = 34290
+DELETE FROM user_history WHERE card_id = 34290
+DELETE FROM card_tag_link WHERE card_id = 34395
+DELETE FROM user_history WHERE card_id = 34395
+DELETE FROM card_tag_link WHERE card_id = 34810
+DELETE FROM user_history WHERE card_id = 34810
+DELETE FROM card_tag_link WHERE card_id = 34837
+DELETE FROM user_history WHERE card_id = 34837
+DELETE FROM card_tag_link WHERE card_id = 36141
+DELETE FROM user_history WHERE card_id = 36141
+DELETE FROM card_tag_link WHERE card_id = 36876
+DELETE FROM user_history WHERE card_id = 36876
+DELETE FROM card_tag_link WHERE card_id = 37296
+DELETE FROM user_history WHERE card_id = 37296
+DELETE FROM card_tag_link WHERE card_id = 38865
+DELETE FROM user_history WHERE card_id = 38865
+DELETE FROM card_tag_link WHERE card_id = 40208
+DELETE FROM user_history WHERE card_id = 40208
+DELETE FROM card_tag_link WHERE card_id = 40535
+DELETE FROM user_history WHERE card_id = 40535
+DELETE FROM card_tag_link WHERE card_id = 41990
+DELETE FROM user_history WHERE card_id = 41990
+DELETE FROM card_tag_link WHERE card_id = 44208
+DELETE FROM user_history WHERE card_id = 44208
+DELETE FROM card_tag_link WHERE card_id = 45801
+DELETE FROM user_history WHERE card_id = 45801
+DELETE FROM card_tag_link WHERE card_id = 49087
+DELETE FROM user_history WHERE card_id = 49087
+DELETE FROM card_tag_link WHERE card_id = 51601
+DELETE FROM user_history WHERE card_id = 51601
+DELETE FROM card_tag_link WHERE card_id = 51901
+DELETE FROM user_history WHERE card_id = 51901
+DELETE FROM card_tag_link WHERE card_id = 53341
+DELETE FROM user_history WHERE card_id = 53341
+DELETE FROM card_tag_link WHERE card_id = 57185
+DELETE FROM user_history WHERE card_id = 57185
+DELETE FROM card_tag_link WHERE card_id = 59738
+DELETE FROM user_history WHERE card_id = 59738
+DELETE FROM card_tag_link WHERE card_id = 62076
+DELETE FROM user_history WHERE card_id = 62076
+DELETE FROM card_tag_link WHERE card_id = 67769
+DELETE FROM user_history WHERE card_id = 67769
+DELETE FROM card_tag_link WHERE card_id = 68622
+DELETE FROM user_history WHERE card_id = 68622
+DELETE FROM card_tag_link WHERE card_id = 69030
+DELETE FROM user_history WHERE card_id = 69030
+DELETE FROM card_tag_link WHERE card_id = 69164
+DELETE FROM user_history WHERE card_id = 69164
+DELETE FROM card_tag_link WHERE card_id = 69782
+DELETE FROM user_history WHERE card_id = 69782
+DELETE FROM card_tag_link WHERE card_id = 70782
+DELETE FROM user_history WHERE card_id = 70782
+DELETE FROM card_tag_link WHERE card_id = 70851
+DELETE FROM user_history WHERE card_id = 70851
+DELETE FROM card_tag_link WHERE card_id = 74748
+DELETE FROM user_history WHERE card_id = 74748
+DELETE FROM card_tag_link WHERE card_id = 83556
+DELETE FROM user_history WHERE card_id = 83556
+DELETE FROM card_tag_link WHERE card_id = 87783
+DELETE FROM user_history WHERE card_id = 87783
+DELETE FROM card_tag_link WHERE card_id = 88010
+DELETE FROM user_history WHERE card_id = 88010
+DELETE FROM card_tag_link WHERE card_id = 88784
+DELETE FROM user_history WHERE card_id = 88784
+DELETE FROM card_tag_link WHERE card_id = 89061
+DELETE FROM user_history WHERE card_id = 89061
+DELETE FROM card_tag_link WHERE card_id = 90222
+DELETE FROM user_history WHERE card_id = 90222
+DELETE FROM card_tag_link WHERE card_id = 90660
+DELETE FROM user_history WHERE card_id = 90660
+DELETE FROM card_tag_link WHERE card_id = 91072
+DELETE FROM user_history WHERE card_id = 91072
+DELETE FROM card_tag_link WHERE card_id = 92987
+DELETE FROM user_history WHERE card_id = 92987
+DELETE FROM card_tag_link WHERE card_id = 101562
+DELETE FROM user_history WHERE card_id = 101562
+DELETE FROM card_tag_link WHERE card_id = 105807
+DELETE FROM user_history WHERE card_id = 105807
+DELETE FROM card_tag_link WHERE card_id = 105828
+DELETE FROM user_history WHERE card_id = 105828
+DELETE FROM card_tag_link WHERE card_id = 105919
+DELETE FROM user_history WHERE card_id = 105919
+DELETE FROM card_tag_link WHERE card_id = 107732
+DELETE FROM user_history WHERE card_id = 107732
+DELETE FROM card_tag_link WHERE card_id = 109907
+DELETE FROM user_history WHERE card_id = 109907
+DELETE FROM card_tag_link WHERE card_id = 110596
+DELETE FROM user_history WHERE card_id = 110596
+DELETE FROM card_tag_link WHERE card_id = 110685
+DELETE FROM user_history WHERE card_id = 110685
+DELETE FROM card_tag_link WHERE card_id = 112642
+DELETE FROM user_history WHERE card_id = 112642
+DELETE FROM card_tag_link WHERE card_id = 119902
+DELETE FROM user_history WHERE card_id = 119902
+DELETE FROM card_tag_link WHERE card_id = 120353
+DELETE FROM user_history WHERE card_id = 120353
+DELETE FROM card_tag_link WHERE card_id = 120766
+DELETE FROM user_history WHERE card_id = 120766
+DELETE FROM card_tag_link WHERE card_id = 120804
+DELETE FROM user_history WHERE card_id = 120804
+DELETE FROM card_tag_link WHERE card_id = 122004
+DELETE FROM user_history WHERE card_id = 122004
+DELETE FROM card_tag_link WHERE card_id = 123103
+DELETE FROM user_history WHERE card_id = 123103
+DELETE FROM card_tag_link WHERE card_id = 123232
+DELETE FROM user_history WHERE card_id = 123232
+DELETE FROM card_tag_link WHERE card_id = 123663
+DELETE FROM user_history WHERE card_id = 123663
+DELETE FROM card_tag_link WHERE card_id = 125350
+DELETE FROM user_history WHERE card_id = 125350
+DELETE FROM card_tag_link WHERE card_id = 128420
+DELETE FROM user_history WHERE card_id = 128420
+DELETE FROM card_tag_link WHERE card_id = 129485
+DELETE FROM user_history WHERE card_id = 129485
+DELETE FROM card_tag_link WHERE card_id = 130259
+DELETE FROM user_history WHERE card_id = 130259
+DELETE FROM card_tag_link WHERE card_id = 130300
+DELETE FROM user_history WHERE card_id = 130300
+DELETE FROM card_tag_link WHERE card_id = 131314
+DELETE FROM user_history WHERE card_id = 131314
+DELETE FROM card_tag_link WHERE card_id = 133347
+DELETE FROM user_history WHERE card_id = 133347
+DELETE FROM card_tag_link WHERE card_id = 134103
+DELETE FROM user_history WHERE card_id = 134103
+DELETE FROM card_tag_link WHERE card_id = 135638
+DELETE FROM user_history WHERE card_id = 135638
+DELETE FROM card_tag_link WHERE card_id = 136955
+DELETE FROM user_history WHERE card_id = 136955
+DELETE FROM card_tag_link WHERE card_id = 139740
+DELETE FROM user_history WHERE card_id = 139740
+DELETE FROM card_tag_link WHERE card_id = 139894
+DELETE FROM user_history WHERE card_id = 139894
+DELETE FROM card_tag_link WHERE card_id = 141667
+DELETE FROM user_history WHERE card_id = 141667
+DELETE FROM card_tag_link WHERE card_id = 142914
+DELETE FROM user_history WHERE card_id = 142914
+DELETE FROM card_tag_link WHERE card_id = 143299
+DELETE FROM user_history WHERE card_id = 143299
+DELETE FROM card_tag_link WHERE card_id = 143552
+DELETE FROM user_history WHERE card_id = 143552
+DELETE FROM card_tag_link WHERE card_id = 144878
+DELETE FROM user_history WHERE card_id = 144878
+DELETE FROM card_tag_link WHERE card_id = 145406
+DELETE FROM user_history WHERE card_id = 145406
+DELETE FROM card_tag_link WHERE card_id = 145412
+DELETE FROM user_history WHERE card_id = 145412
+DELETE FROM card_tag_link WHERE card_id = 145423
+DELETE FROM user_history WHERE card_id = 145423
+DELETE FROM card_tag_link WHERE card_id = 145427
+DELETE FROM user_history WHERE card_id = 145427
+DELETE FROM card_tag_link WHERE card_id = 145451
+DELETE FROM user_history WHERE card_id = 145451
+DELETE FROM card_tag_link WHERE card_id = 145458
+DELETE FROM user_history WHERE card_id = 145458
+DELETE FROM card_tag_link WHERE card_id = 145461
+DELETE FROM user_history WHERE card_id = 145461
+DELETE FROM card_tag_link WHERE card_id = 145483
+DELETE FROM user_history WHERE card_id = 145483
+DELETE FROM card_tag_link WHERE card_id = 145497
+DELETE FROM user_history WHERE card_id = 145497
+DELETE FROM card_tag_link WHERE card_id = 145531
+DELETE FROM user_history WHERE card_id = 145531
+DELETE FROM card_tag_link WHERE card_id = 145556
+DELETE FROM user_history WHERE card_id = 145556
+DELETE FROM card_tag_link WHERE card_id = 145604
+DELETE FROM user_history WHERE card_id = 145604
+DELETE FROM card_tag_link WHERE card_id = 145605
+DELETE FROM user_history WHERE card_id = 145605
+DELETE FROM card_tag_link WHERE card_id = 145607
+DELETE FROM user_history WHERE card_id = 145607
+DELETE FROM card_tag_link WHERE card_id = 145611
+DELETE FROM user_history WHERE card_id = 145611
+DELETE FROM card_tag_link WHERE card_id = 145612
+DELETE FROM user_history WHERE card_id = 145612
+DELETE FROM card_tag_link WHERE card_id = 145619
+DELETE FROM user_history WHERE card_id = 145619
+DELETE FROM card_tag_link WHERE card_id = 145621
+DELETE FROM user_history WHERE card_id = 145621
+DELETE FROM card_tag_link WHERE card_id = 145625
+DELETE FROM user_history WHERE card_id = 145625
+DELETE FROM card_tag_link WHERE card_id = 145628
+DELETE FROM user_history WHERE card_id = 145628
+DELETE FROM card_tag_link WHERE card_id = 145629
+DELETE FROM user_history WHERE card_id = 145629
+DELETE FROM card_tag_link WHERE card_id = 145640
+DELETE FROM user_history WHERE card_id = 145640
+DELETE FROM card_tag_link WHERE card_id = 145659
+DELETE FROM user_history WHERE card_id = 145659
+DELETE FROM card_tag_link WHERE card_id = 145677
+DELETE FROM user_history WHERE card_id = 145677
+DELETE FROM card_tag_link WHERE card_id = 145686
+DELETE FROM user_history WHERE card_id = 145686
+DELETE FROM card_tag_link WHERE card_id = 145693
+DELETE FROM user_history WHERE card_id = 145693
+DELETE FROM card_tag_link WHERE card_id = 145703
+DELETE FROM user_history WHERE card_id = 145703
+DELETE FROM card_tag_link WHERE card_id = 145711
+DELETE FROM user_history WHERE card_id = 145711
+DELETE FROM card_tag_link WHERE card_id = 145716
+DELETE FROM user_history WHERE card_id = 145716
+DELETE FROM card_tag_link WHERE card_id = 145737
+DELETE FROM user_history WHERE card_id = 145737
+DELETE FROM card_tag_link WHERE card_id = 145741
+DELETE FROM user_history WHERE card_id = 145741
+DELETE FROM card_tag_link WHERE card_id = 145746
+DELETE FROM user_history WHERE card_id = 145746
+DELETE FROM card_tag_link WHERE card_id = 145767
+DELETE FROM user_history WHERE card_id = 145767
+DELETE FROM card_tag_link WHERE card_id = 145787
+DELETE FROM user_history WHERE card_id = 145787
+DELETE FROM card_tag_link WHERE card_id = 145790
+DELETE FROM user_history WHERE card_id = 145790
+DELETE FROM card_tag_link WHERE card_id = 145816
+DELETE FROM user_history WHERE card_id = 145816
+DELETE FROM card_tag_link WHERE card_id = 145818
+DELETE FROM user_history WHERE card_id = 145818
+DELETE FROM card_tag_link WHERE card_id = 145819
+DELETE FROM user_history WHERE card_id = 145819
+DELETE FROM card_tag_link WHERE card_id = 145821
+DELETE FROM user_history WHERE card_id = 145821
+DELETE FROM card_tag_link WHERE card_id = 145823
+DELETE FROM user_history WHERE card_id = 145823
+DELETE FROM card_tag_link WHERE card_id = 145824
+DELETE FROM user_history WHERE card_id = 145824
+DELETE FROM card_tag_link WHERE card_id = 145827
+DELETE FROM user_history WHERE card_id = 145827
+DELETE FROM card_tag_link WHERE card_id = 145835
+DELETE FROM user_history WHERE card_id = 145835
+DELETE FROM card_tag_link WHERE card_id = 145855
+DELETE FROM user_history WHERE card_id = 145855
+DELETE FROM card_tag_link WHERE card_id = 145859
+DELETE FROM user_history WHERE card_id = 145859
+DELETE FROM card_tag_link WHERE card_id = 145867
+DELETE FROM user_history WHERE card_id = 145867
+DELETE FROM card_tag_link WHERE card_id = 145871
+DELETE FROM user_history WHERE card_id = 145871
+DELETE FROM card_tag_link WHERE card_id = 145882
+DELETE FROM user_history WHERE card_id = 145882
+DELETE FROM card_tag_link WHERE card_id = 145902
+DELETE FROM user_history WHERE card_id = 145902
+DELETE FROM card_tag_link WHERE card_id = 145905
+DELETE FROM user_history WHERE card_id = 145905
+DELETE FROM card_tag_link WHERE card_id = 145913
+DELETE FROM user_history WHERE card_id = 145913
+DELETE FROM card_tag_link WHERE card_id = 146128
+DELETE FROM user_history WHERE card_id = 146128
+DELETE FROM card_tag_link WHERE card_id = 146130
+DELETE FROM user_history WHERE card_id = 146130
+DELETE FROM card_tag_link WHERE card_id = 146132
+DELETE FROM user_history WHERE card_id = 146132
+DELETE FROM card_tag_link WHERE card_id = 146133
+DELETE FROM user_history WHERE card_id = 146133
+DELETE FROM card_tag_link WHERE card_id = 146134
+DELETE FROM user_history WHERE card_id = 146134
+DELETE FROM card_tag_link WHERE card_id = 146135
+DELETE FROM user_history WHERE card_id = 146135
+DELETE FROM card_tag_link WHERE card_id = 146136
+DELETE FROM user_history WHERE card_id = 146136
+DELETE FROM card_tag_link WHERE card_id = 146137
+DELETE FROM user_history WHERE card_id = 146137
+DELETE FROM card_tag_link WHERE card_id = 146138
+DELETE FROM user_history WHERE card_id = 146138
+DELETE FROM card_tag_link WHERE card_id = 146140
+DELETE FROM user_history WHERE card_id = 146140
+DELETE FROM card_tag_link WHERE card_id = 146141
+DELETE FROM user_history WHERE card_id = 146141
+DELETE FROM card_tag_link WHERE card_id = 146142
+DELETE FROM user_history WHERE card_id = 146142
+DELETE FROM card_tag_link WHERE card_id = 146144
+DELETE FROM user_history WHERE card_id = 146144
+DELETE FROM card_tag_link WHERE card_id = 146145
+DELETE FROM user_history WHERE card_id = 146145
+DELETE FROM card_tag_link WHERE card_id = 146146
+DELETE FROM user_history WHERE card_id = 146146
+DELETE FROM card_tag_link WHERE card_id = 146149
+DELETE FROM user_history WHERE card_id = 146149
+DELETE FROM card_tag_link WHERE card_id = 146152
+DELETE FROM user_history WHERE card_id = 146152
+DELETE FROM card_tag_link WHERE card_id = 146153
+DELETE FROM user_history WHERE card_id = 146153
+DELETE FROM card_tag_link WHERE card_id = 146154
+DELETE FROM user_history WHERE card_id = 146154
+DELETE FROM card_tag_link WHERE card_id = 146155
+DELETE FROM user_history WHERE card_id = 146155
+DELETE FROM card_tag_link WHERE card_id = 146156
+DELETE FROM user_history WHERE card_id = 146156
+DELETE FROM card_tag_link WHERE card_id = 146157
+DELETE FROM user_history WHERE card_id = 146157
+DELETE FROM card_tag_link WHERE card_id = 146159
+DELETE FROM user_history WHERE card_id = 146159
+DELETE FROM card_tag_link WHERE card_id = 146160
+DELETE FROM user_history WHERE card_id = 146160
+DELETE FROM card_tag_link WHERE card_id = 146161
+DELETE FROM user_history WHERE card_id = 146161
+DELETE FROM card_tag_link WHERE card_id = 146167
+DELETE FROM user_history WHERE card_id = 146167
+DELETE FROM card_tag_link WHERE card_id = 146169
+DELETE FROM user_history WHERE card_id = 146169
+DELETE FROM card_tag_link WHERE card_id = 146170
+DELETE FROM user_history WHERE card_id = 146170
+DELETE FROM card_tag_link WHERE card_id = 146171
+DELETE FROM user_history WHERE card_id = 146171
+DELETE FROM card_tag_link WHERE card_id = 146172
+DELETE FROM user_history WHERE card_id = 146172
+DELETE FROM card_tag_link WHERE card_id = 146173
+DELETE FROM user_history WHERE card_id = 146173
+DELETE FROM card_tag_link WHERE card_id = 146174
+DELETE FROM user_history WHERE card_id = 146174
+DELETE FROM card_tag_link WHERE card_id = 146176
+DELETE FROM user_history WHERE card_id = 146176
+DELETE FROM card_tag_link WHERE card_id = 146177
+DELETE FROM user_history WHERE card_id = 146177
+DELETE FROM card_tag_link WHERE card_id = 146178
+DELETE FROM user_history WHERE card_id = 146178
+DELETE FROM card_tag_link WHERE card_id = 146180
+DELETE FROM user_history WHERE card_id = 146180
+DELETE FROM card_tag_link WHERE card_id = 146181
+DELETE FROM user_history WHERE card_id = 146181
+DELETE FROM card_tag_link WHERE card_id = 146182
+DELETE FROM user_history WHERE card_id = 146182
+DELETE FROM card_tag_link WHERE card_id = 146183
+DELETE FROM user_history WHERE card_id = 146183
+DELETE FROM card_tag_link WHERE card_id = 146184
+DELETE FROM user_history WHERE card_id = 146184
+DELETE FROM card_tag_link WHERE card_id = 146186
+DELETE FROM user_history WHERE card_id = 146186
+DELETE FROM card_tag_link WHERE card_id = 146187
+DELETE FROM user_history WHERE card_id = 146187
+DELETE FROM card_tag_link WHERE card_id = 146188
+DELETE FROM user_history WHERE card_id = 146188
+DELETE FROM card_tag_link WHERE card_id = 146189
+DELETE FROM user_history WHERE card_id = 146189
+DELETE FROM card_tag_link WHERE card_id = 146190
+DELETE FROM user_history WHERE card_id = 146190
+DELETE FROM card_tag_link WHERE card_id = 146195
+DELETE FROM user_history WHERE card_id = 146195
+DELETE FROM card_tag_link WHERE card_id = 146197
+DELETE FROM user_history WHERE card_id = 146197
+DELETE FROM card_tag_link WHERE card_id = 146199
+DELETE FROM user_history WHERE card_id = 146199
+DELETE FROM card_tag_link WHERE card_id = 146201
+DELETE FROM user_history WHERE card_id = 146201
+DELETE FROM card_tag_link WHERE card_id = 146203
+DELETE FROM user_history WHERE card_id = 146203
+DELETE FROM card_tag_link WHERE card_id = 146205
+DELETE FROM user_history WHERE card_id = 146205
+DELETE FROM card_tag_link WHERE card_id = 146206
+DELETE FROM user_history WHERE card_id = 146206
+DELETE FROM card_tag_link WHERE card_id = 146207
+DELETE FROM user_history WHERE card_id = 146207
+DELETE FROM card_tag_link WHERE card_id = 146208
+DELETE FROM user_history WHERE card_id = 146208
+DELETE FROM card_tag_link WHERE card_id = 146209
+DELETE FROM user_history WHERE card_id = 146209
+DELETE FROM card_tag_link WHERE card_id = 146214
+DELETE FROM user_history WHERE card_id = 146214
+DELETE FROM card_tag_link WHERE card_id = 146217
+DELETE FROM user_history WHERE card_id = 146217
+DELETE FROM card_tag_link WHERE card_id = 146218
+DELETE FROM user_history WHERE card_id = 146218
+DELETE FROM card_tag_link WHERE card_id = 146220
+DELETE FROM user_history WHERE card_id = 146220
+DELETE FROM card_tag_link WHERE card_id = 146221
+DELETE FROM user_history WHERE card_id = 146221
+DELETE FROM card_tag_link WHERE card_id = 146222
+DELETE FROM user_history WHERE card_id = 146222
+DELETE FROM card_tag_link WHERE card_id = 146223
+DELETE FROM user_history WHERE card_id = 146223
+DELETE FROM card_tag_link WHERE card_id = 146224
+DELETE FROM user_history WHERE card_id = 146224
+DELETE FROM card_tag_link WHERE card_id = 146226
+DELETE FROM user_history WHERE card_id = 146226
+DELETE FROM card_tag_link WHERE card_id = 146229
+DELETE FROM user_history WHERE card_id = 146229
+DELETE FROM card_tag_link WHERE card_id = 146231
+DELETE FROM user_history WHERE card_id = 146231
+DELETE FROM card_tag_link WHERE card_id = 146233
+DELETE FROM user_history WHERE card_id = 146233
+DELETE FROM card_tag_link WHERE card_id = 146235
+DELETE FROM user_history WHERE card_id = 146235
+DELETE FROM card_tag_link WHERE card_id = 146236
+DELETE FROM user_history WHERE card_id = 146236
+DELETE FROM card_tag_link WHERE card_id = 146237
+DELETE FROM user_history WHERE card_id = 146237
+DELETE FROM card_tag_link WHERE card_id = 146244
+DELETE FROM user_history WHERE card_id = 146244
+DELETE FROM card_tag_link WHERE card_id = 146245
+DELETE FROM user_history WHERE card_id = 146245
+DELETE FROM card_tag_link WHERE card_id = 146247
+DELETE FROM user_history WHERE card_id = 146247
+DELETE FROM card_tag_link WHERE card_id = 146248
+DELETE FROM user_history WHERE card_id = 146248
+DELETE FROM card_tag_link WHERE card_id = 146249
+DELETE FROM user_history WHERE card_id = 146249
+DELETE FROM card_tag_link WHERE card_id = 146250
+DELETE FROM user_history WHERE card_id = 146250
+DELETE FROM card_tag_link WHERE card_id = 146251
+DELETE FROM user_history WHERE card_id = 146251
+DELETE FROM card_tag_link WHERE card_id = 146253
+DELETE FROM user_history WHERE card_id = 146253
+DELETE FROM card_tag_link WHERE card_id = 146254
+DELETE FROM user_history WHERE card_id = 146254
+DELETE FROM card_tag_link WHERE card_id = 146257
+DELETE FROM user_history WHERE card_id = 146257
+DELETE FROM card_tag_link WHERE card_id = 146258
+DELETE FROM user_history WHERE card_id = 146258
+DELETE FROM card_tag_link WHERE card_id = 146259
+DELETE FROM user_history WHERE card_id = 146259
+DELETE FROM card_tag_link WHERE card_id = 146260
+DELETE FROM user_history WHERE card_id = 146260
+DELETE FROM card_tag_link WHERE card_id = 146262
+DELETE FROM user_history WHERE card_id = 146262
+DELETE FROM card_tag_link WHERE card_id = 146263
+DELETE FROM user_history WHERE card_id = 146263
+DELETE FROM card_tag_link WHERE card_id = 146264
+DELETE FROM user_history WHERE card_id = 146264
+DELETE FROM card_tag_link WHERE card_id = 146265
+DELETE FROM user_history WHERE card_id = 146265
+DELETE FROM card_tag_link WHERE card_id = 146269
+DELETE FROM user_history WHERE card_id = 146269
+DELETE FROM card_tag_link WHERE card_id = 146270
+DELETE FROM user_history WHERE card_id = 146270
+DELETE FROM card_tag_link WHERE card_id = 146273
+DELETE FROM user_history WHERE card_id = 146273
+DELETE FROM card_tag_link WHERE card_id = 146275
+DELETE FROM user_history WHERE card_id = 146275
+DELETE FROM card_tag_link WHERE card_id = 146277
+DELETE FROM user_history WHERE card_id = 146277
+DELETE FROM card_tag_link WHERE card_id = 146278
+DELETE FROM user_history WHERE card_id = 146278
+DELETE FROM card_tag_link WHERE card_id = 146280
+DELETE FROM user_history WHERE card_id = 146280
+DELETE FROM card_tag_link WHERE card_id = 146282
+DELETE FROM user_history WHERE card_id = 146282
+DELETE FROM card_tag_link WHERE card_id = 146284
+DELETE FROM user_history WHERE card_id = 146284
+DELETE FROM card_tag_link WHERE card_id = 146287
+DELETE FROM user_history WHERE card_id = 146287
+DELETE FROM card_tag_link WHERE card_id = 146289
+DELETE FROM user_history WHERE card_id = 146289
+DELETE FROM card_tag_link WHERE card_id = 146290
+DELETE FROM user_history WHERE card_id = 146290
+DELETE FROM card_tag_link WHERE card_id = 146292
+DELETE FROM user_history WHERE card_id = 146292
+DELETE FROM card_tag_link WHERE card_id = 146293
+DELETE FROM user_history WHERE card_id = 146293
+DELETE FROM card_tag_link WHERE card_id = 146294
+DELETE FROM user_history WHERE card_id = 146294
+DELETE FROM card_tag_link WHERE card_id = 146297
+DELETE FROM user_history WHERE card_id = 146297
+DELETE FROM card_tag_link WHERE card_id = 146298
+DELETE FROM user_history WHERE card_id = 146298
+DELETE FROM card_tag_link WHERE card_id = 146300
+DELETE FROM user_history WHERE card_id = 146300
+DELETE FROM card_tag_link WHERE card_id = 146301
+DELETE FROM user_history WHERE card_id = 146301
+DELETE FROM card_tag_link WHERE card_id = 146302
+DELETE FROM user_history WHERE card_id = 146302
+DELETE FROM card_tag_link WHERE card_id = 146303
+DELETE FROM user_history WHERE card_id = 146303
+DELETE FROM card_tag_link WHERE card_id = 146304
+DELETE FROM user_history WHERE card_id = 146304
+DELETE FROM card_tag_link WHERE card_id = 146305
+DELETE FROM user_history WHERE card_id = 146305
+DELETE FROM card_tag_link WHERE card_id = 146306
+DELETE FROM user_history WHERE card_id = 146306
+DELETE FROM card_tag_link WHERE card_id = 146309
+DELETE FROM user_history WHERE card_id = 146309
+DELETE FROM card_tag_link WHERE card_id = 146311
+DELETE FROM user_history WHERE card_id = 146311
+DELETE FROM card_tag_link WHERE card_id = 146312
+DELETE FROM user_history WHERE card_id = 146312
+DELETE FROM card_tag_link WHERE card_id = 146313
+DELETE FROM user_history WHERE card_id = 146313
+DELETE FROM card_tag_link WHERE card_id = 146314
+DELETE FROM user_history WHERE card_id = 146314
+DELETE FROM card_tag_link WHERE card_id = 146315
+DELETE FROM user_history WHERE card_id = 146315
+DELETE FROM card_tag_link WHERE card_id = 146317
+DELETE FROM user_history WHERE card_id = 146317
+DELETE FROM card_tag_link WHERE card_id = 146319
+DELETE FROM user_history WHERE card_id = 146319
+DELETE FROM card_tag_link WHERE card_id = 146321
+DELETE FROM user_history WHERE card_id = 146321
+DELETE FROM card_tag_link WHERE card_id = 146323
+DELETE FROM user_history WHERE card_id = 146323
+DELETE FROM card_tag_link WHERE card_id = 146326
+DELETE FROM user_history WHERE card_id = 146326
+DELETE FROM card_tag_link WHERE card_id = 146327
+DELETE FROM user_history WHERE card_id = 146327
+DELETE FROM card_tag_link WHERE card_id = 146329
+DELETE FROM user_history WHERE card_id = 146329
+DELETE FROM card_tag_link WHERE card_id = 146333
+DELETE FROM user_history WHERE card_id = 146333
+DELETE FROM card_tag_link WHERE card_id = 146334
+DELETE FROM user_history WHERE card_id = 146334
+DELETE FROM card_tag_link WHERE card_id = 146337
+DELETE FROM user_history WHERE card_id = 146337
+DELETE FROM card_tag_link WHERE card_id = 146340
+DELETE FROM user_history WHERE card_id = 146340
+DELETE FROM card_tag_link WHERE card_id = 146341
+DELETE FROM user_history WHERE card_id = 146341
+DELETE FROM card_tag_link WHERE card_id = 146342
+DELETE FROM user_history WHERE card_id = 146342
+DELETE FROM card_tag_link WHERE card_id = 146346
+DELETE FROM user_history WHERE card_id = 146346
+DELETE FROM card_tag_link WHERE card_id = 146347
+DELETE FROM user_history WHERE card_id = 146347
+DELETE FROM card_tag_link WHERE card_id = 146349
+DELETE FROM user_history WHERE card_id = 146349
+DELETE FROM card_tag_link WHERE card_id = 146350
+DELETE FROM user_history WHERE card_id = 146350
+DELETE FROM card_tag_link WHERE card_id = 146351
+DELETE FROM user_history WHERE card_id = 146351
+DELETE FROM card_tag_link WHERE card_id = 146355
+DELETE FROM user_history WHERE card_id = 146355
+DELETE FROM card_tag_link WHERE card_id = 146356
+DELETE FROM user_history WHERE card_id = 146356
+DELETE FROM card_tag_link WHERE card_id = 146357
+DELETE FROM user_history WHERE card_id = 146357
+DELETE FROM card_tag_link WHERE card_id = 146359
+DELETE FROM user_history WHERE card_id = 146359
+DELETE FROM card_tag_link WHERE card_id = 146360
+DELETE FROM user_history WHERE card_id = 146360
+DELETE FROM card_tag_link WHERE card_id = 146361
+DELETE FROM user_history WHERE card_id = 146361
+DELETE FROM card_tag_link WHERE card_id = 146363
+DELETE FROM user_history WHERE card_id = 146363
+DELETE FROM card_tag_link WHERE card_id = 146364
+DELETE FROM user_history WHERE card_id = 146364
+DELETE FROM card_tag_link WHERE card_id = 146365
+DELETE FROM user_history WHERE card_id = 146365
+DELETE FROM card_tag_link WHERE card_id = 146366
+DELETE FROM user_history WHERE card_id = 146366
+DELETE FROM card_tag_link WHERE card_id = 146368
+DELETE FROM user_history WHERE card_id = 146368
+DELETE FROM card_tag_link WHERE card_id = 146371
+DELETE FROM user_history WHERE card_id = 146371
+DELETE FROM card_tag_link WHERE card_id = 146372
+DELETE FROM user_history WHERE card_id = 146372
+DELETE FROM card_tag_link WHERE card_id = 146373
+DELETE FROM user_history WHERE card_id = 146373
+DELETE FROM card_tag_link WHERE card_id = 146375
+DELETE FROM user_history WHERE card_id = 146375
+DELETE FROM card_tag_link WHERE card_id = 146379
+DELETE FROM user_history WHERE card_id = 146379
+DELETE FROM card_tag_link WHERE card_id = 146380
+DELETE FROM user_history WHERE card_id = 146380
+DELETE FROM card_tag_link WHERE card_id = 146382
+DELETE FROM user_history WHERE card_id = 146382
+DELETE FROM card_tag_link WHERE card_id = 146383
+DELETE FROM user_history WHERE card_id = 146383
+DELETE FROM card_tag_link WHERE card_id = 146384
+DELETE FROM user_history WHERE card_id = 146384
+DELETE FROM card_tag_link WHERE card_id = 146385
+DELETE FROM user_history WHERE card_id = 146385
+DELETE FROM card_tag_link WHERE card_id = 146386
+DELETE FROM user_history WHERE card_id = 146386
+DELETE FROM card_tag_link WHERE card_id = 146387
+DELETE FROM user_history WHERE card_id = 146387
+DELETE FROM card_tag_link WHERE card_id = 146388
+DELETE FROM user_history WHERE card_id = 146388
+DELETE FROM card_tag_link WHERE card_id = 146392
+DELETE FROM user_history WHERE card_id = 146392
+DELETE FROM card_tag_link WHERE card_id = 146393
+DELETE FROM user_history WHERE card_id = 146393
+DELETE FROM card_tag_link WHERE card_id = 146398
+DELETE FROM user_history WHERE card_id = 146398
+DELETE FROM card_tag_link WHERE card_id = 146399
+DELETE FROM user_history WHERE card_id = 146399
+DELETE FROM card_tag_link WHERE card_id = 146401
+DELETE FROM user_history WHERE card_id = 146401
+DELETE FROM card_tag_link WHERE card_id = 146402
+DELETE FROM user_history WHERE card_id = 146402
+DELETE FROM card_tag_link WHERE card_id = 146403
+DELETE FROM user_history WHERE card_id = 146403
+DELETE FROM card_tag_link WHERE card_id = 146406
+DELETE FROM user_history WHERE card_id = 146406
+DELETE FROM card_tag_link WHERE card_id = 146407
+DELETE FROM user_history WHERE card_id = 146407
+DELETE FROM card_tag_link WHERE card_id = 146408
+DELETE FROM user_history WHERE card_id = 146408
+DELETE FROM card_tag_link WHERE card_id = 146411
+DELETE FROM user_history WHERE card_id = 146411
+DELETE FROM card_tag_link WHERE card_id = 146413
+DELETE FROM user_history WHERE card_id = 146413
+DELETE FROM card_tag_link WHERE card_id = 146414
+DELETE FROM user_history WHERE card_id = 146414
+DELETE FROM card_tag_link WHERE card_id = 146416
+DELETE FROM user_history WHERE card_id = 146416
+DELETE FROM card_tag_link WHERE card_id = 146417
+DELETE FROM user_history WHERE card_id = 146417
+DELETE FROM card_tag_link WHERE card_id = 146418
+DELETE FROM user_history WHERE card_id = 146418
+DELETE FROM card_tag_link WHERE card_id = 146419
+DELETE FROM user_history WHERE card_id = 146419
+DELETE FROM card_tag_link WHERE card_id = 146421
+DELETE FROM user_history WHERE card_id = 146421
+DELETE FROM card_tag_link WHERE card_id = 146422
+DELETE FROM user_history WHERE card_id = 146422
+DELETE FROM card_tag_link WHERE card_id = 146425
+DELETE FROM user_history WHERE card_id = 146425
+DELETE FROM card_tag_link WHERE card_id = 146426
+DELETE FROM user_history WHERE card_id = 146426
+DELETE FROM card_tag_link WHERE card_id = 146428
+DELETE FROM user_history WHERE card_id = 146428
+DELETE FROM card_tag_link WHERE card_id = 146430
+DELETE FROM user_history WHERE card_id = 146430
+DELETE FROM card_tag_link WHERE card_id = 146431
+DELETE FROM user_history WHERE card_id = 146431
+DELETE FROM card_tag_link WHERE card_id = 146433
+DELETE FROM user_history WHERE card_id = 146433
+DELETE FROM card_tag_link WHERE card_id = 146434
+DELETE FROM user_history WHERE card_id = 146434
+DELETE FROM card_tag_link WHERE card_id = 146438
+DELETE FROM user_history WHERE card_id = 146438
+DELETE FROM card_tag_link WHERE card_id = 146441
+DELETE FROM user_history WHERE card_id = 146441
+DELETE FROM card_tag_link WHERE card_id = 146444
+DELETE FROM user_history WHERE card_id = 146444
+DELETE FROM card_tag_link WHERE card_id = 146447
+DELETE FROM user_history WHERE card_id = 146447
+DELETE FROM card_tag_link WHERE card_id = 146450
+DELETE FROM user_history WHERE card_id = 146450
+DELETE FROM card_tag_link WHERE card_id = 146458
+DELETE FROM user_history WHERE card_id = 146458
+DELETE FROM card_tag_link WHERE card_id = 146459
+DELETE FROM user_history WHERE card_id = 146459
+DELETE FROM card_tag_link WHERE card_id = 146461
+DELETE FROM user_history WHERE card_id = 146461
+DELETE FROM card_tag_link WHERE card_id = 146462
+DELETE FROM user_history WHERE card_id = 146462
+DELETE FROM card_tag_link WHERE card_id = 146463
+DELETE FROM user_history WHERE card_id = 146463
+DELETE FROM card_tag_link WHERE card_id = 146465
+DELETE FROM user_history WHERE card_id = 146465
+DELETE FROM card_tag_link WHERE card_id = 146466
+DELETE FROM user_history WHERE card_id = 146466
+DELETE FROM card_tag_link WHERE card_id = 146468
+DELETE FROM user_history WHERE card_id = 146468
+DELETE FROM card_tag_link WHERE card_id = 146472
+DELETE FROM user_history WHERE card_id = 146472
+DELETE FROM card_tag_link WHERE card_id = 146474
+DELETE FROM user_history WHERE card_id = 146474
+DELETE FROM card_tag_link WHERE card_id = 146476
+DELETE FROM user_history WHERE card_id = 146476
+DELETE FROM card_tag_link WHERE card_id = 146479
+DELETE FROM user_history WHERE card_id = 146479
+DELETE FROM card_tag_link WHERE card_id = 146480
+DELETE FROM user_history WHERE card_id = 146480
+DELETE FROM card_tag_link WHERE card_id = 146482
+DELETE FROM user_history WHERE card_id = 146482
+DELETE FROM card_tag_link WHERE card_id = 146483
+DELETE FROM user_history WHERE card_id = 146483
+DELETE FROM card_tag_link WHERE card_id = 146489
+DELETE FROM user_history WHERE card_id = 146489
+DELETE FROM card_tag_link WHERE card_id = 146490
+DELETE FROM user_history WHERE card_id = 146490
+DELETE FROM card_tag_link WHERE card_id = 146491
+DELETE FROM user_history WHERE card_id = 146491
+DELETE FROM card_tag_link WHERE card_id = 146493
+DELETE FROM user_history WHERE card_id = 146493
+DELETE FROM card_tag_link WHERE card_id = 146494
+DELETE FROM user_history WHERE card_id = 146494
+DELETE FROM card_tag_link WHERE card_id = 146496
+DELETE FROM user_history WHERE card_id = 146496
+DELETE FROM card_tag_link WHERE card_id = 146497
+DELETE FROM user_history WHERE card_id = 146497
+DELETE FROM card_tag_link WHERE card_id = 146498
+DELETE FROM user_history WHERE card_id = 146498
+DELETE FROM card_tag_link WHERE card_id = 146500
+DELETE FROM user_history WHERE card_id = 146500
+DELETE FROM card_tag_link WHERE card_id = 146501
+DELETE FROM user_history WHERE card_id = 146501
+DELETE FROM card_tag_link WHERE card_id = 146502
+DELETE FROM user_history WHERE card_id = 146502
+DELETE FROM card_tag_link WHERE card_id = 146504
+DELETE FROM user_history WHERE card_id = 146504
+DELETE FROM card_tag_link WHERE card_id = 146505
+DELETE FROM user_history WHERE card_id = 146505
+DELETE FROM card_tag_link WHERE card_id = 146506
+DELETE FROM user_history WHERE card_id = 146506
+DELETE FROM card_tag_link WHERE card_id = 146507
+DELETE FROM user_history WHERE card_id = 146507
+DELETE FROM card_tag_link WHERE card_id = 146510
+DELETE FROM user_history WHERE card_id = 146510
+DELETE FROM card_tag_link WHERE card_id = 146512
+DELETE FROM user_history WHERE card_id = 146512
+DELETE FROM card_tag_link WHERE card_id = 146513
+DELETE FROM user_history WHERE card_id = 146513
+DELETE FROM card_tag_link WHERE card_id = 146514
+DELETE FROM user_history WHERE card_id = 146514
+DELETE FROM card_tag_link WHERE card_id = 146516
+DELETE FROM user_history WHERE card_id = 146516
+DELETE FROM card_tag_link WHERE card_id = 146518
+DELETE FROM user_history WHERE card_id = 146518
+DELETE FROM card_tag_link WHERE card_id = 146520
+DELETE FROM user_history WHERE card_id = 146520
+DELETE FROM card_tag_link WHERE card_id = 146521
+DELETE FROM user_history WHERE card_id = 146521
+DELETE FROM card_tag_link WHERE card_id = 146524
+DELETE FROM user_history WHERE card_id = 146524
+DELETE FROM card_tag_link WHERE card_id = 146527
+DELETE FROM user_history WHERE card_id = 146527
+DELETE FROM card_tag_link WHERE card_id = 146528
+DELETE FROM user_history WHERE card_id = 146528
+DELETE FROM card_tag_link WHERE card_id = 146529
+DELETE FROM user_history WHERE card_id = 146529
+DELETE FROM card_tag_link WHERE card_id = 146530
+DELETE FROM user_history WHERE card_id = 146530
+DELETE FROM card_tag_link WHERE card_id = 146531
+DELETE FROM user_history WHERE card_id = 146531
+DELETE FROM card_tag_link WHERE card_id = 146533
+DELETE FROM user_history WHERE card_id = 146533
+DELETE FROM card_tag_link WHERE card_id = 146535
+DELETE FROM user_history WHERE card_id = 146535
+DELETE FROM card_tag_link WHERE card_id = 146536
+DELETE FROM user_history WHERE card_id = 146536
+DELETE FROM card_tag_link WHERE card_id = 146538
+DELETE FROM user_history WHERE card_id = 146538
+DELETE FROM card_tag_link WHERE card_id = 146539
+DELETE FROM user_history WHERE card_id = 146539
+DELETE FROM card_tag_link WHERE card_id = 146541
+DELETE FROM user_history WHERE card_id = 146541
+DELETE FROM card_tag_link WHERE card_id = 146546
+DELETE FROM user_history WHERE card_id = 146546
+DELETE FROM card_tag_link WHERE card_id = 146547
+DELETE FROM user_history WHERE card_id = 146547
+DELETE FROM card_tag_link WHERE card_id = 146549
+DELETE FROM user_history WHERE card_id = 146549
+DELETE FROM card_tag_link WHERE card_id = 146552
+DELETE FROM user_history WHERE card_id = 146552
+DELETE FROM card_tag_link WHERE card_id = 146554
+DELETE FROM user_history WHERE card_id = 146554
+DELETE FROM card_tag_link WHERE card_id = 146555
+DELETE FROM user_history WHERE card_id = 146555
+DELETE FROM card_tag_link WHERE card_id = 146556
+DELETE FROM user_history WHERE card_id = 146556
+DELETE FROM card_tag_link WHERE card_id = 146557
+DELETE FROM user_history WHERE card_id = 146557
+DELETE FROM card_tag_link WHERE card_id = 146558
+DELETE FROM user_history WHERE card_id = 146558
+DELETE FROM card_tag_link WHERE card_id = 146560
+DELETE FROM user_history WHERE card_id = 146560
+DELETE FROM card_tag_link WHERE card_id = 146561
+DELETE FROM user_history WHERE card_id = 146561
+DELETE FROM card_tag_link WHERE card_id = 146562
+DELETE FROM user_history WHERE card_id = 146562
+DELETE FROM card_tag_link WHERE card_id = 146565
+DELETE FROM user_history WHERE card_id = 146565
+DELETE FROM card_tag_link WHERE card_id = 146566
+DELETE FROM user_history WHERE card_id = 146566
+DELETE FROM card_tag_link WHERE card_id = 146569
+DELETE FROM user_history WHERE card_id = 146569
+DELETE FROM card_tag_link WHERE card_id = 146571
+DELETE FROM user_history WHERE card_id = 146571
+DELETE FROM card_tag_link WHERE card_id = 146572
+DELETE FROM user_history WHERE card_id = 146572
+DELETE FROM card_tag_link WHERE card_id = 146573
+DELETE FROM user_history WHERE card_id = 146573
+DELETE FROM card_tag_link WHERE card_id = 146574
+DELETE FROM user_history WHERE card_id = 146574
+DELETE FROM card_tag_link WHERE card_id = 146575
+DELETE FROM user_history WHERE card_id = 146575
+DELETE FROM card_tag_link WHERE card_id = 146576
+DELETE FROM user_history WHERE card_id = 146576
+DELETE FROM card_tag_link WHERE card_id = 146577
+DELETE FROM user_history WHERE card_id = 146577
+DELETE FROM card_tag_link WHERE card_id = 146578
+DELETE FROM user_history WHERE card_id = 146578
+DELETE FROM card_tag_link WHERE card_id = 146580
+DELETE FROM user_history WHERE card_id = 146580
+DELETE FROM card_tag_link WHERE card_id = 146581
+DELETE FROM user_history WHERE card_id = 146581
+DELETE FROM card_tag_link WHERE card_id = 146582
+DELETE FROM user_history WHERE card_id = 146582
+DELETE FROM card_tag_link WHERE card_id = 146583
+DELETE FROM user_history WHERE card_id = 146583
+DELETE FROM card_tag_link WHERE card_id = 146584
+DELETE FROM user_history WHERE card_id = 146584
+DELETE FROM card_tag_link WHERE card_id = 146587
+DELETE FROM user_history WHERE card_id = 146587
+DELETE FROM card_tag_link WHERE card_id = 146589
+DELETE FROM user_history WHERE card_id = 146589
+DELETE FROM card_tag_link WHERE card_id = 146594
+DELETE FROM user_history WHERE card_id = 146594
+DELETE FROM card_tag_link WHERE card_id = 146596
+DELETE FROM user_history WHERE card_id = 146596
+DELETE FROM card_tag_link WHERE card_id = 146598
+DELETE FROM user_history WHERE card_id = 146598
+DELETE FROM card_tag_link WHERE card_id = 146600
+DELETE FROM user_history WHERE card_id = 146600
+DELETE FROM card_tag_link WHERE card_id = 146607
+DELETE FROM user_history WHERE card_id = 146607
+DELETE FROM card_tag_link WHERE card_id = 146609
+DELETE FROM user_history WHERE card_id = 146609
+DELETE FROM card_tag_link WHERE card_id = 146610
+DELETE FROM user_history WHERE card_id = 146610
+DELETE FROM card_tag_link WHERE card_id = 146612
+DELETE FROM user_history WHERE card_id = 146612
+DELETE FROM card_tag_link WHERE card_id = 146613
+DELETE FROM user_history WHERE card_id = 146613
+DELETE FROM card_tag_link WHERE card_id = 146618
+DELETE FROM user_history WHERE card_id = 146618
+DELETE FROM card_tag_link WHERE card_id = 146620
+DELETE FROM user_history WHERE card_id = 146620
+DELETE FROM card_tag_link WHERE card_id = 146626
+DELETE FROM user_history WHERE card_id = 146626
+DELETE FROM card_tag_link WHERE card_id = 146629
+DELETE FROM user_history WHERE card_id = 146629
+DELETE FROM card_tag_link WHERE card_id = 146630
+DELETE FROM user_history WHERE card_id = 146630
+DELETE FROM card_tag_link WHERE card_id = 146633
+DELETE FROM user_history WHERE card_id = 146633
+DELETE FROM card_tag_link WHERE card_id = 146635
+DELETE FROM user_history WHERE card_id = 146635
+DELETE FROM card_tag_link WHERE card_id = 146636
+DELETE FROM user_history WHERE card_id = 146636
+DELETE FROM card_tag_link WHERE card_id = 146637
+DELETE FROM user_history WHERE card_id = 146637
+DELETE FROM card_tag_link WHERE card_id = 146638
+DELETE FROM user_history WHERE card_id = 146638
+DELETE FROM card_tag_link WHERE card_id = 146641
+DELETE FROM user_history WHERE card_id = 146641
+DELETE FROM card_tag_link WHERE card_id = 146642
+DELETE FROM user_history WHERE card_id = 146642
+DELETE FROM card_tag_link WHERE card_id = 146643
+DELETE FROM user_history WHERE card_id = 146643
+DELETE FROM card_tag_link WHERE card_id = 146644
+DELETE FROM user_history WHERE card_id = 146644
+DELETE FROM card_tag_link WHERE card_id = 146645
+DELETE FROM user_history WHERE card_id = 146645
+DELETE FROM card_tag_link WHERE card_id = 146648
+DELETE FROM user_history WHERE card_id = 146648
+DELETE FROM card_tag_link WHERE card_id = 146650
+DELETE FROM user_history WHERE card_id = 146650
+DELETE FROM card_tag_link WHERE card_id = 146652
+DELETE FROM user_history WHERE card_id = 146652
+DELETE FROM card_tag_link WHERE card_id = 146654
+DELETE FROM user_history WHERE card_id = 146654
+DELETE FROM card_tag_link WHERE card_id = 146657
+DELETE FROM user_history WHERE card_id = 146657
+DELETE FROM card_tag_link WHERE card_id = 146658
+DELETE FROM user_history WHERE card_id = 146658
+DELETE FROM card_tag_link WHERE card_id = 146659
+DELETE FROM user_history WHERE card_id = 146659
+DELETE FROM card_tag_link WHERE card_id = 146660
+DELETE FROM user_history WHERE card_id = 146660
+DELETE FROM card_tag_link WHERE card_id = 146661
+DELETE FROM user_history WHERE card_id = 146661
+DELETE FROM card_tag_link WHERE card_id = 146662
+DELETE FROM user_history WHERE card_id = 146662
+DELETE FROM card_tag_link WHERE card_id = 146663
+DELETE FROM user_history WHERE card_id = 146663
+DELETE FROM card_tag_link WHERE card_id = 146665
+DELETE FROM user_history WHERE card_id = 146665
+DELETE FROM card_tag_link WHERE card_id = 146667
+DELETE FROM user_history WHERE card_id = 146667
+DELETE FROM card_tag_link WHERE card_id = 146669
+DELETE FROM user_history WHERE card_id = 146669
+DELETE FROM card_tag_link WHERE card_id = 146675
+DELETE FROM user_history WHERE card_id = 146675
+DELETE FROM card_tag_link WHERE card_id = 146676
+DELETE FROM user_history WHERE card_id = 146676
+DELETE FROM card_tag_link WHERE card_id = 146679
+DELETE FROM user_history WHERE card_id = 146679
+DELETE FROM card_tag_link WHERE card_id = 146680
+DELETE FROM user_history WHERE card_id = 146680
+DELETE FROM card_tag_link WHERE card_id = 146684
+DELETE FROM user_history WHERE card_id = 146684
+DELETE FROM card_tag_link WHERE card_id = 146685
+DELETE FROM user_history WHERE card_id = 146685
+DELETE FROM card_tag_link WHERE card_id = 146686
+DELETE FROM user_history WHERE card_id = 146686
+DELETE FROM card_tag_link WHERE card_id = 146689
+DELETE FROM user_history WHERE card_id = 146689
+DELETE FROM card_tag_link WHERE card_id = 146690
+DELETE FROM user_history WHERE card_id = 146690
+DELETE FROM card_tag_link WHERE card_id = 146691
+DELETE FROM user_history WHERE card_id = 146691
+DELETE FROM card_tag_link WHERE card_id = 146692
+DELETE FROM user_history WHERE card_id = 146692
+DELETE FROM card_tag_link WHERE card_id = 146693
+DELETE FROM user_history WHERE card_id = 146693
+DELETE FROM card_tag_link WHERE card_id = 146695
+DELETE FROM user_history WHERE card_id = 146695
+DELETE FROM card_tag_link WHERE card_id = 146698
+DELETE FROM user_history WHERE card_id = 146698
+DELETE FROM card_tag_link WHERE card_id = 146700
+DELETE FROM user_history WHERE card_id = 146700
+DELETE FROM card_tag_link WHERE card_id = 146701
+DELETE FROM user_history WHERE card_id = 146701
+DELETE FROM card_tag_link WHERE card_id = 146702
+DELETE FROM user_history WHERE card_id = 146702
+DELETE FROM card_tag_link WHERE card_id = 146703
+DELETE FROM user_history WHERE card_id = 146703
+DELETE FROM card_tag_link WHERE card_id = 146705
+DELETE FROM user_history WHERE card_id = 146705
+DELETE FROM card_tag_link WHERE card_id = 146706
+DELETE FROM user_history WHERE card_id = 146706
+DELETE FROM card_tag_link WHERE card_id = 146707
+DELETE FROM user_history WHERE card_id = 146707
+DELETE FROM card_tag_link WHERE card_id = 146708
+DELETE FROM user_history WHERE card_id = 146708
+DELETE FROM card_tag_link WHERE card_id = 146709
+DELETE FROM user_history WHERE card_id = 146709
+DELETE FROM card_tag_link WHERE card_id = 146710
+DELETE FROM user_history WHERE card_id = 146710
+DELETE FROM card_tag_link WHERE card_id = 146712
+DELETE FROM user_history WHERE card_id = 146712
+DELETE FROM card_tag_link WHERE card_id = 146715
+DELETE FROM user_history WHERE card_id = 146715
+DELETE FROM card_tag_link WHERE card_id = 146716
+DELETE FROM user_history WHERE card_id = 146716
+DELETE FROM card_tag_link WHERE card_id = 146717
+DELETE FROM user_history WHERE card_id = 146717
+DELETE FROM card_tag_link WHERE card_id = 146718
+DELETE FROM user_history WHERE card_id = 146718
+DELETE FROM card_tag_link WHERE card_id = 146721
+DELETE FROM user_history WHERE card_id = 146721
+DELETE FROM card_tag_link WHERE card_id = 146722
+DELETE FROM user_history WHERE card_id = 146722
+DELETE FROM card_tag_link WHERE card_id = 146723
+DELETE FROM user_history WHERE card_id = 146723
+DELETE FROM card_tag_link WHERE card_id = 146726
+DELETE FROM user_history WHERE card_id = 146726
+DELETE FROM card_tag_link WHERE card_id = 146727
+DELETE FROM user_history WHERE card_id = 146727
+DELETE FROM card_tag_link WHERE card_id = 146730
+DELETE FROM user_history WHERE card_id = 146730
+DELETE FROM card_tag_link WHERE card_id = 146731
+DELETE FROM user_history WHERE card_id = 146731
+DELETE FROM card_tag_link WHERE card_id = 146732
+DELETE FROM user_history WHERE card_id = 146732
+DELETE FROM card_tag_link WHERE card_id = 146734
+DELETE FROM user_history WHERE card_id = 146734
+DELETE FROM card_tag_link WHERE card_id = 146739
+DELETE FROM user_history WHERE card_id = 146739
+DELETE FROM card_tag_link WHERE card_id = 146740
+DELETE FROM user_history WHERE card_id = 146740
+DELETE FROM card_tag_link WHERE card_id = 146749
+DELETE FROM user_history WHERE card_id = 146749
+DELETE FROM card_tag_link WHERE card_id = 146750
+DELETE FROM user_history WHERE card_id = 146750
+DELETE FROM card_tag_link WHERE card_id = 146751
+DELETE FROM user_history WHERE card_id = 146751
+DELETE FROM card_tag_link WHERE card_id = 146754
+DELETE FROM user_history WHERE card_id = 146754
+DELETE FROM card_tag_link WHERE card_id = 146755
+DELETE FROM user_history WHERE card_id = 146755
+DELETE FROM card_tag_link WHERE card_id = 146758
+DELETE FROM user_history WHERE card_id = 146758
+DELETE FROM card_tag_link WHERE card_id = 146759
+DELETE FROM user_history WHERE card_id = 146759
+DELETE FROM card_tag_link WHERE card_id = 146761
+DELETE FROM user_history WHERE card_id = 146761
+DELETE FROM card_tag_link WHERE card_id = 146764
+DELETE FROM user_history WHERE card_id = 146764
+DELETE FROM card_tag_link WHERE card_id = 146769
+DELETE FROM user_history WHERE card_id = 146769
+DELETE FROM card_tag_link WHERE card_id = 146770
+DELETE FROM user_history WHERE card_id = 146770
+DELETE FROM card_tag_link WHERE card_id = 146773
+DELETE FROM user_history WHERE card_id = 146773
+DELETE FROM card_tag_link WHERE card_id = 146774
+DELETE FROM user_history WHERE card_id = 146774
+DELETE FROM card_tag_link WHERE card_id = 146776
+DELETE FROM user_history WHERE card_id = 146776
+DELETE FROM card_tag_link WHERE card_id = 146781
+DELETE FROM user_history WHERE card_id = 146781
+DELETE FROM card_tag_link WHERE card_id = 146782
+DELETE FROM user_history WHERE card_id = 146782
+DELETE FROM card_tag_link WHERE card_id = 146783
+DELETE FROM user_history WHERE card_id = 146783
+DELETE FROM card_tag_link WHERE card_id = 146784
+DELETE FROM user_history WHERE card_id = 146784
+DELETE FROM card_tag_link WHERE card_id = 146787
+DELETE FROM user_history WHERE card_id = 146787
+DELETE FROM card_tag_link WHERE card_id = 146788
+DELETE FROM user_history WHERE card_id = 146788
+DELETE FROM card_tag_link WHERE card_id = 146792
+DELETE FROM user_history WHERE card_id = 146792
+DELETE FROM card_tag_link WHERE card_id = 146793
+DELETE FROM user_history WHERE card_id = 146793
+DELETE FROM card_tag_link WHERE card_id = 146794
+DELETE FROM user_history WHERE card_id = 146794
+DELETE FROM card_tag_link WHERE card_id = 146797
+DELETE FROM user_history WHERE card_id = 146797
+DELETE FROM card_tag_link WHERE card_id = 146798
+DELETE FROM user_history WHERE card_id = 146798
+DELETE FROM card_tag_link WHERE card_id = 146800
+DELETE FROM user_history WHERE card_id = 146800
+DELETE FROM card_tag_link WHERE card_id = 146802
+DELETE FROM user_history WHERE card_id = 146802
+DELETE FROM card_tag_link WHERE card_id = 146809
+DELETE FROM user_history WHERE card_id = 146809
+DELETE FROM card_tag_link WHERE card_id = 146813
+DELETE FROM user_history WHERE card_id = 146813
+DELETE FROM card_tag_link WHERE card_id = 146814
+DELETE FROM user_history WHERE card_id = 146814
+DELETE FROM card_tag_link WHERE card_id = 146816
+DELETE FROM user_history WHERE card_id = 146816
+DELETE FROM card_tag_link WHERE card_id = 146819
+DELETE FROM user_history WHERE card_id = 146819
+DELETE FROM card_tag_link WHERE card_id = 146822
+DELETE FROM user_history WHERE card_id = 146822
+DELETE FROM card_tag_link WHERE card_id = 146823
+DELETE FROM user_history WHERE card_id = 146823
+DELETE FROM card_tag_link WHERE card_id = 146824
+DELETE FROM user_history WHERE card_id = 146824
+DELETE FROM card_tag_link WHERE card_id = 146825
+DELETE FROM user_history WHERE card_id = 146825
+DELETE FROM card_tag_link WHERE card_id = 146828
+DELETE FROM user_history WHERE card_id = 146828
+DELETE FROM card_tag_link WHERE card_id = 146834
+DELETE FROM user_history WHERE card_id = 146834
+DELETE FROM card_tag_link WHERE card_id = 146835
+DELETE FROM user_history WHERE card_id = 146835
+DELETE FROM card_tag_link WHERE card_id = 146836
+DELETE FROM user_history WHERE card_id = 146836
+DELETE FROM card_tag_link WHERE card_id = 146838
+DELETE FROM user_history WHERE card_id = 146838
+DELETE FROM card_tag_link WHERE card_id = 146841
+DELETE FROM user_history WHERE card_id = 146841
+DELETE FROM card_tag_link WHERE card_id = 146843
+DELETE FROM user_history WHERE card_id = 146843
+DELETE FROM card_tag_link WHERE card_id = 146844
+DELETE FROM user_history WHERE card_id = 146844
+DELETE FROM card_tag_link WHERE card_id = 146846
+DELETE FROM user_history WHERE card_id = 146846
+DELETE FROM card_tag_link WHERE card_id = 146847
+DELETE FROM user_history WHERE card_id = 146847
+DELETE FROM card_tag_link WHERE card_id = 146848
+DELETE FROM user_history WHERE card_id = 146848
+DELETE FROM card_tag_link WHERE card_id = 146849
+DELETE FROM user_history WHERE card_id = 146849
+DELETE FROM card_tag_link WHERE card_id = 146850
+DELETE FROM user_history WHERE card_id = 146850
+DELETE FROM card_tag_link WHERE card_id = 146853
+DELETE FROM user_history WHERE card_id = 146853
+DELETE FROM card_tag_link WHERE card_id = 146855
+DELETE FROM user_history WHERE card_id = 146855
+DELETE FROM card_tag_link WHERE card_id = 146858
+DELETE FROM user_history WHERE card_id = 146858
+DELETE FROM card_tag_link WHERE card_id = 146860
+DELETE FROM user_history WHERE card_id = 146860
+DELETE FROM card_tag_link WHERE card_id = 146861
+DELETE FROM user_history WHERE card_id = 146861
+DELETE FROM card_tag_link WHERE card_id = 146862
+DELETE FROM user_history WHERE card_id = 146862
+DELETE FROM card_tag_link WHERE card_id = 146863
+DELETE FROM user_history WHERE card_id = 146863
+DELETE FROM card_tag_link WHERE card_id = 146864
+DELETE FROM user_history WHERE card_id = 146864
+DELETE FROM card_tag_link WHERE card_id = 146865
+DELETE FROM user_history WHERE card_id = 146865
+DELETE FROM card_tag_link WHERE card_id = 146866
+DELETE FROM user_history WHERE card_id = 146866
+DELETE FROM card_tag_link WHERE card_id = 146867
+DELETE FROM user_history WHERE card_id = 146867
+DELETE FROM card_tag_link WHERE card_id = 146869
+DELETE FROM user_history WHERE card_id = 146869
+DELETE FROM card_tag_link WHERE card_id = 146871
+DELETE FROM user_history WHERE card_id = 146871
+DELETE FROM card_tag_link WHERE card_id = 146873
+DELETE FROM user_history WHERE card_id = 146873
+DELETE FROM card_tag_link WHERE card_id = 146874
+DELETE FROM user_history WHERE card_id = 146874
+DELETE FROM card_tag_link WHERE card_id = 146877
+DELETE FROM user_history WHERE card_id = 146877
+DELETE FROM card_tag_link WHERE card_id = 146878
+DELETE FROM user_history WHERE card_id = 146878
+DELETE FROM card_tag_link WHERE card_id = 146882
+DELETE FROM user_history WHERE card_id = 146882
+DELETE FROM card_tag_link WHERE card_id = 146887
+DELETE FROM user_history WHERE card_id = 146887
+DELETE FROM card_tag_link WHERE card_id = 146891
+DELETE FROM user_history WHERE card_id = 146891
+DELETE FROM card_tag_link WHERE card_id = 146892
+DELETE FROM user_history WHERE card_id = 146892
+DELETE FROM card_tag_link WHERE card_id = 146893
+DELETE FROM user_history WHERE card_id = 146893
+DELETE FROM card_tag_link WHERE card_id = 146895
+DELETE FROM user_history WHERE card_id = 146895
+DELETE FROM card_tag_link WHERE card_id = 146898
+DELETE FROM user_history WHERE card_id = 146898
+DELETE FROM card_tag_link WHERE card_id = 146899
+DELETE FROM user_history WHERE card_id = 146899
+DELETE FROM card_tag_link WHERE card_id = 146901
+DELETE FROM user_history WHERE card_id = 146901
+DELETE FROM card_tag_link WHERE card_id = 146903
+DELETE FROM user_history WHERE card_id = 146903
+DELETE FROM card_tag_link WHERE card_id = 146904
+DELETE FROM user_history WHERE card_id = 146904
+DELETE FROM card_tag_link WHERE card_id = 146905
+DELETE FROM user_history WHERE card_id = 146905
+DELETE FROM card_tag_link WHERE card_id = 146907
+DELETE FROM user_history WHERE card_id = 146907
+DELETE FROM card_tag_link WHERE card_id = 146909
+DELETE FROM user_history WHERE card_id = 146909
+DELETE FROM card_tag_link WHERE card_id = 146910
+DELETE FROM user_history WHERE card_id = 146910
+DELETE FROM card_tag_link WHERE card_id = 146912
+DELETE FROM user_history WHERE card_id = 146912
+DELETE FROM card_tag_link WHERE card_id = 146914
+DELETE FROM user_history WHERE card_id = 146914
+DELETE FROM card_tag_link WHERE card_id = 146915
+DELETE FROM user_history WHERE card_id = 146915
+DELETE FROM card_tag_link WHERE card_id = 146916
+DELETE FROM user_history WHERE card_id = 146916
+DELETE FROM card_tag_link WHERE card_id = 146917
+DELETE FROM user_history WHERE card_id = 146917
+DELETE FROM card_tag_link WHERE card_id = 146919
+DELETE FROM user_history WHERE card_id = 146919
+DELETE FROM card_tag_link WHERE card_id = 146922
+DELETE FROM user_history WHERE card_id = 146922
+DELETE FROM card_tag_link WHERE card_id = 146923
+DELETE FROM user_history WHERE card_id = 146923
+DELETE FROM card_tag_link WHERE card_id = 146925
+DELETE FROM user_history WHERE card_id = 146925
+DELETE FROM card_tag_link WHERE card_id = 146926
+DELETE FROM user_history WHERE card_id = 146926
+DELETE FROM card_tag_link WHERE card_id = 146927
+DELETE FROM user_history WHERE card_id = 146927
+DELETE FROM card_tag_link WHERE card_id = 146928
+DELETE FROM user_history WHERE card_id = 146928
+DELETE FROM card_tag_link WHERE card_id = 146929
+DELETE FROM user_history WHERE card_id = 146929
+DELETE FROM card_tag_link WHERE card_id = 146930
+DELETE FROM user_history WHERE card_id = 146930
+DELETE FROM card_tag_link WHERE card_id = 146935
+DELETE FROM user_history WHERE card_id = 146935
+DELETE FROM card_tag_link WHERE card_id = 146936
+DELETE FROM user_history WHERE card_id = 146936
+DELETE FROM card_tag_link WHERE card_id = 146937
+DELETE FROM user_history WHERE card_id = 146937
+DELETE FROM card_tag_link WHERE card_id = 146938
+DELETE FROM user_history WHERE card_id = 146938
+DELETE FROM card_tag_link WHERE card_id = 146939
+DELETE FROM user_history WHERE card_id = 146939
+DELETE FROM card_tag_link WHERE card_id = 146941
+DELETE FROM user_history WHERE card_id = 146941
+DELETE FROM card_tag_link WHERE card_id = 146942
+DELETE FROM user_history WHERE card_id = 146942
+DELETE FROM card_tag_link WHERE card_id = 146943
+DELETE FROM user_history WHERE card_id = 146943
+DELETE FROM card_tag_link WHERE card_id = 146944
+DELETE FROM user_history WHERE card_id = 146944
+DELETE FROM card_tag_link WHERE card_id = 146945
+DELETE FROM user_history WHERE card_id = 146945
+DELETE FROM card_tag_link WHERE card_id = 146946
+DELETE FROM user_history WHERE card_id = 146946
+DELETE FROM card_tag_link WHERE card_id = 146947
+DELETE FROM user_history WHERE card_id = 146947
+DELETE FROM card_tag_link WHERE card_id = 146948
+DELETE FROM user_history WHERE card_id = 146948
+DELETE FROM card_tag_link WHERE card_id = 146949
+DELETE FROM user_history WHERE card_id = 146949
+DELETE FROM card_tag_link WHERE card_id = 146951
+DELETE FROM user_history WHERE card_id = 146951
+DELETE FROM card_tag_link WHERE card_id = 146952
+DELETE FROM user_history WHERE card_id = 146952
+DELETE FROM card_tag_link WHERE card_id = 146955
+DELETE FROM user_history WHERE card_id = 146955
+DELETE FROM card_tag_link WHERE card_id = 146957
+DELETE FROM user_history WHERE card_id = 146957
+DELETE FROM card_tag_link WHERE card_id = 146959
+DELETE FROM user_history WHERE card_id = 146959
+DELETE FROM card_tag_link WHERE card_id = 146960
+DELETE FROM user_history WHERE card_id = 146960
+DELETE FROM card_tag_link WHERE card_id = 146961
+DELETE FROM user_history WHERE card_id = 146961
+DELETE FROM card_tag_link WHERE card_id = 146964
+DELETE FROM user_history WHERE card_id = 146964
+DELETE FROM card_tag_link WHERE card_id = 146965
+DELETE FROM user_history WHERE card_id = 146965
+DELETE FROM card_tag_link WHERE card_id = 146966
+DELETE FROM user_history WHERE card_id = 146966
+DELETE FROM card_tag_link WHERE card_id = 146967
+DELETE FROM user_history WHERE card_id = 146967
+DELETE FROM card_tag_link WHERE card_id = 146968
+DELETE FROM user_history WHERE card_id = 146968
+DELETE FROM card_tag_link WHERE card_id = 146969
+DELETE FROM user_history WHERE card_id = 146969
+DELETE FROM card_tag_link WHERE card_id = 146970
+DELETE FROM user_history WHERE card_id = 146970
+DELETE FROM card_tag_link WHERE card_id = 146973
+DELETE FROM user_history WHERE card_id = 146973
+DELETE FROM card_tag_link WHERE card_id = 146974
+DELETE FROM user_history WHERE card_id = 146974
+DELETE FROM card_tag_link WHERE card_id = 146975
+DELETE FROM user_history WHERE card_id = 146975
+DELETE FROM card_tag_link WHERE card_id = 146976
+DELETE FROM user_history WHERE card_id = 146976
+DELETE FROM card_tag_link WHERE card_id = 146978
+DELETE FROM user_history WHERE card_id = 146978
+DELETE FROM card_tag_link WHERE card_id = 146980
+DELETE FROM user_history WHERE card_id = 146980
+DELETE FROM card_tag_link WHERE card_id = 146981
+DELETE FROM user_history WHERE card_id = 146981
+DELETE FROM card_tag_link WHERE card_id = 146982
+DELETE FROM user_history WHERE card_id = 146982
+DELETE FROM card_tag_link WHERE card_id = 146983
+DELETE FROM user_history WHERE card_id = 146983
+DELETE FROM card_tag_link WHERE card_id = 146987
+DELETE FROM user_history WHERE card_id = 146987
+DELETE FROM card_tag_link WHERE card_id = 146989
+DELETE FROM user_history WHERE card_id = 146989
+DELETE FROM card_tag_link WHERE card_id = 146992
+DELETE FROM user_history WHERE card_id = 146992
+DELETE FROM card_tag_link WHERE card_id = 146993
+DELETE FROM user_history WHERE card_id = 146993
+DELETE FROM card_tag_link WHERE card_id = 146994
+DELETE FROM user_history WHERE card_id = 146994
+DELETE FROM card_tag_link WHERE card_id = 146998
+DELETE FROM user_history WHERE card_id = 146998
+DELETE FROM card_tag_link WHERE card_id = 146999
+DELETE FROM user_history WHERE card_id = 146999
+DELETE FROM card_tag_link WHERE card_id = 147000
+DELETE FROM user_history WHERE card_id = 147000
+DELETE FROM card_tag_link WHERE card_id = 147001
+DELETE FROM user_history WHERE card_id = 147001
+DELETE FROM card_tag_link WHERE card_id = 147008
+DELETE FROM user_history WHERE card_id = 147008
+DELETE FROM card_tag_link WHERE card_id = 147010
+DELETE FROM user_history WHERE card_id = 147010
+DELETE FROM card_tag_link WHERE card_id = 147012
+DELETE FROM user_history WHERE card_id = 147012
+DELETE FROM card_tag_link WHERE card_id = 147013
+DELETE FROM user_history WHERE card_id = 147013
+DELETE FROM card_tag_link WHERE card_id = 147014
+DELETE FROM user_history WHERE card_id = 147014
+DELETE FROM card_tag_link WHERE card_id = 147017
+DELETE FROM user_history WHERE card_id = 147017
+DELETE FROM card_tag_link WHERE card_id = 147018
+DELETE FROM user_history WHERE card_id = 147018
+DELETE FROM card_tag_link WHERE card_id = 147021
+DELETE FROM user_history WHERE card_id = 147021
+DELETE FROM card_tag_link WHERE card_id = 147022
+DELETE FROM user_history WHERE card_id = 147022
+DELETE FROM card_tag_link WHERE card_id = 147024
+DELETE FROM user_history WHERE card_id = 147024
+DELETE FROM card_tag_link WHERE card_id = 34678 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 34749 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 34810 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 34992 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 35004 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 35144 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 35730 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 35786 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36100 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36137 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36141 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36152 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36231 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36253 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36622 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36661 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36738 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36786 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36865 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 36876 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37059 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37237 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37296 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37402 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37419 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37443 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37496 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37512 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37649 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37672 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37705 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 37934 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38022 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38147 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38316 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38466 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38541 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 38699 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39057 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39095 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39378 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39467 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39494 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39508 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 39893 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40134 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40144 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40208 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40535 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40912 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 40930 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41097 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41281 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41290 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41601 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41757 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41868 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 41888 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42106 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42231 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42359 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42723 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42779 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42854 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42892 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 42939 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43142 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43181 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43315 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43324 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43345 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43346 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43370 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43421 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43510 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43544 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43798 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 43918 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44208 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44249 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44490 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44713 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44778 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44931 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44966 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 44985 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45162 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45192 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45204 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45303 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45414 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45420 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45620 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45624 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45652 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45663 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45801 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 45864 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 46022 AND tag_id = 622
+DELETE FROM card_tag_link WHERE card_id = 81090 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81102 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81271 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 11644 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 139740 AND tag_id = 619
+DELETE FROM card_tag_link WHERE card_id = 46281 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 46323 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 46458 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 46589 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 46855 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 46970 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 47051 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 47053 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 47261 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 47670 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 47751 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 48014 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 48096 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 48446 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 48699 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49087 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49106 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49528 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49891 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49892 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49936 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 49960 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50121 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50269 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50302 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50510 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50575 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 50983 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51142 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51153 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51297 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51315 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51475 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51601 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51686 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51697 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51768 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51791 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51893 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51901 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 51939 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52124 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52265 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52313 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52361 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52372 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52417 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52496 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52577 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52605 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52698 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52909 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 52964 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53025 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53100 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53112 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53274 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53284 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53290 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53341 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53443 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53574 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53589 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53758 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54092 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54284 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54321 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54334 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54473 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54535 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54839 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55006 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55032 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55135 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55267 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55333 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55465 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55483 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55591 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55771 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55808 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 55829 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56286 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56404 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56556 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56625 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56667 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56706 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56716 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 56917 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57043 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57106 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57116 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57185 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57238 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 57401 AND tag_id = 623
+DELETE FROM card_tag_link WHERE card_id = 11684 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 134
+DELETE FROM card_tag_link WHERE card_id = 132949 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 133659 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 133751 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 133842 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 133936 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 134620 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 134659 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 135055 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 135622 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 135680 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 136342 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 136357 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 136402 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 137284 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 137593 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 138033 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 138138 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 140477 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 142198 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 142310 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 143812 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 143914 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 144078 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145096 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145423 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145427 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145451 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145461 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145497 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 131299 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 132410 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 134701 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 134790 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 134850 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 134866 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 135149 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 139146 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 139918 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 140182 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 140526 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 141302 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 141528 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 142471 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 143390 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 143580 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 145257 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146162 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146429 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146439 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146725 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146826 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 616
+DELETE FROM card_tag_link WHERE card_id = 65992 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 66068 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 66762 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 67440 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 67564 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 67943 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 68190 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 69494 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 69812 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 69845 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 71985 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 72124 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 72197 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 72908 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 73410 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 73651 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 74418 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 74576 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 74640 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 75205 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 78018 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 79257 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 79550 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 79767 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 79772 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 81981 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 82256 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 82519 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 82860 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 83306 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 83959 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 84382 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 84695 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 84742 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 84817 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 84992 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 85492 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 85673 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 85969 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 86259 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 87137 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 87338 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 88469 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 88784 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 89605 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 91561 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 92386 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 93199 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 94976 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 95029 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 95313 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 97068 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 97710 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 99200 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 99249 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 100509 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 101342 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 102545 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 104409 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 104657 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 104799 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 104988 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 105803 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 106619 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 106998 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 109304 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 109950 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 110678 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 111890 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 111916 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 111927 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 112642 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 114284 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 115607 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 116347 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 118443 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 119166 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 120309 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 120842 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 121817 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 123006 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 123245 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 124193 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 125373 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 125422 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 126176 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 126292 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 128108 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 128537 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 129485 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 129753 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 129911 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 130898 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 131418 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 131500 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 131582 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 131602 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 132525 AND tag_id = 617
+DELETE FROM card_tag_link WHERE card_id = 145531 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145556 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145604 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145605 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145607 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145611 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145612 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145619 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145621 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145629 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145640 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145659 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145677 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145686 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145693 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145703 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145711 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145746 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145752 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145767 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145787 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145790 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145816 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145821 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145823 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145824 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145827 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145835 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145855 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145859 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145867 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145871 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145902 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145905 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146132 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146148 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146153 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146163 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146167 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146179 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146187 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146190 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146216 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146237 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146247 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146251 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146262 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146263 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146269 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146283 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146287 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146312 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146314 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146319 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146321 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146360 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146410 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 1608 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 1615 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 5390 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 5412 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 14885 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 14906 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 17261 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 21106 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 21724 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 22513 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 24106 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 24143 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 26735 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 29298 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 36108 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 36121 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 38121 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 45733 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 45745 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 45766 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 45775 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 53172 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 54777 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 54931 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 54944 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 55168 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 61968 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 64349 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 64378 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 66747 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 69348 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 72800 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 78813 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 82668 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 93060 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 106970 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 106977 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 112575 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 112584 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 113179 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 122358 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 122367 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 128006 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 141645 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 143642 AND tag_id = 208
+DELETE FROM card_tag_link WHERE card_id = 7475 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 17331 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 36108 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 62922 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 78505 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 92357 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 95289 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 106983 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 109529 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 133218 AND tag_id = 210
+DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 211
+DELETE FROM card_tag_link WHERE card_id = 43118 AND tag_id = 211
+DELETE FROM card_tag_link WHERE card_id = 81211 AND tag_id = 211
+DELETE FROM card_tag_link WHERE card_id = 61757 AND tag_id = 212
+DELETE FROM card_tag_link WHERE card_id = 62135 AND tag_id = 212
+DELETE FROM card_tag_link WHERE card_id = 65044 AND tag_id = 212
+DELETE FROM card_tag_link WHERE card_id = 102994 AND tag_id = 212
+DELETE FROM card_tag_link WHERE card_id = 14091 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 43556 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 46573 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 58319 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 60797 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 67956 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 84555 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 104048 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 114007 AND tag_id = 213
+DELETE FROM card_tag_link WHERE card_id = 131843 AND tag_id = 214
+DELETE FROM card_tag_link WHERE card_id = 52937 AND tag_id = 217
+DELETE FROM card_tag_link WHERE card_id = 68084 AND tag_id = 215
+DELETE FROM card_tag_link WHERE card_id = 70984 AND tag_id = 215
+DELETE FROM card_tag_link WHERE card_id = 109018 AND tag_id = 215
+DELETE FROM card_tag_link WHERE card_id = 15538 AND tag_id = 216
+DELETE FROM card_tag_link WHERE card_id = 119526 AND tag_id = 216
+DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 216
+DELETE FROM card_tag_link WHERE card_id = 11517 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 13151 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 13958 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 20984 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 23349 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 37681 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 57498 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 67303 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 111482 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 112745 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 123523 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 128265 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 141688 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 144951 AND tag_id = 218
+DELETE FROM card_tag_link WHERE card_id = 37113 AND tag_id = 219
+DELETE FROM card_tag_link WHERE card_id = 37464 AND tag_id = 219
+DELETE FROM card_tag_link WHERE card_id = 40437 AND tag_id = 219
+DELETE FROM card_tag_link WHERE card_id = 61985 AND tag_id = 219
+DELETE FROM card_tag_link WHERE card_id = 78585 AND tag_id = 219
+DELETE FROM card_tag_link WHERE card_id = 14177 AND tag_id = 220
+DELETE FROM card_tag_link WHERE card_id = 17069 AND tag_id = 220
+DELETE FROM card_tag_link WHERE card_id = 55377 AND tag_id = 220
+DELETE FROM card_tag_link WHERE card_id = 122774 AND tag_id = 216
+DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146711 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146766 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146815 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 618
+DELETE FROM card_tag_link WHERE card_id = 134649 AND tag_id = 134
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 134
+DELETE FROM card_tag_link WHERE card_id = 2113 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 8764 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 14750 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 15321 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 16364 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 17432 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 17622 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 17879 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 20624 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 23508 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 26822 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 33414 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 34797 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 36117 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 36253 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 39098 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 39344 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 41275 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 47435 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 50077 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 50799 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 56034 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 56397 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 58295 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 59808 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 66008 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 66066 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 67481 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 67525 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 69474 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 74360 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 78018 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 10107 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 17622 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 21276 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 31940 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 35038 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 60447 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 66377 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 78563 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 79390 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 83477 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 91043 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 110098 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 114111 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 118568 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 124310 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 136712 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 137255 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 140477 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 146542 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 190
+DELETE FROM card_tag_link WHERE card_id = 79257 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 79767 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 80474 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 80951 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 81001 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 81023 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 81414 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 83593 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 85102 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 85588 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 88010 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 91043 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 96147 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 98976 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 99200 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 100177 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 101423 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 102838 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 104122 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 111927 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 112882 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 120309 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 120455 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 120919 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 121209 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 121889 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 128423 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 131314 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 132840 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 132949 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 136920 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 140279 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 140463 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 142198 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 143552 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145662 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146250 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146347 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146350 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 195
+DELETE FROM card_tag_link WHERE card_id = 7534 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 10341 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 11591 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 13211 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 30932 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 36352 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 46206 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 53405 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 74846 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 101943 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 103079 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 114890 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 115864 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 116671 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 125418 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 143184 AND tag_id = 197
+DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 3067 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 3566 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 4266 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 7766 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 8225 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 11766 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 23576 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 24244 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 24555 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 24735 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 25699 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 26043 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 27746 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 28141 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 30152 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 30999 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 31957 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 33084 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 33414 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 33437 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 34368 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 34797 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 39508 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 40144 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 44249 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 46065 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 47830 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 49179 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 50668 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 52352 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 53758 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 53960 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 58235 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 66875 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 68615 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 69237 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 69509 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 69789 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 70828 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 71858 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 71897 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 74031 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 76499 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 78298 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 78609 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 81509 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 84002 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 88747 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 90392 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 93893 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 97297 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 101133 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 102253 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 103272 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 103617 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 108772 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 109080 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 109604 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 110744 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 111586 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 113788 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 114360 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 117875 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 118584 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 120190 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 121510 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 124223 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 124591 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 125650 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 127757 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 133114 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 135469 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 138054 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 139067 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 141094 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 143334 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 199
+DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 123
+DELETE FROM card_tag_link WHERE card_id = 278 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 1299 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 14299 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 27504 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 55179 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 65080 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 65243 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 69845 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 71636 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 72755 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 101629 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 104170 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 105775 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 109080 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 111662 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 134927 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 140530 AND tag_id = 156
+DELETE FROM card_tag_link WHERE card_id = 2395 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 5420 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 5639 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 7839 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 19644 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 24122 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 26481 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 27279 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 27653 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 27660 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 33477 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 44490 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 52361 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 55771 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 58235 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 59910 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 64330 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 69598 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 76591 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 84407 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 91840 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 104170 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 105945 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 107743 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 111658 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 121209 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 124869 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 132761 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 134803 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 140566 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 140571 AND tag_id = 157
+DELETE FROM card_tag_link WHERE card_id = 2535 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 12064 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 14036 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 27112 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 29099 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 32374 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 32736 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 33386 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 34029 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 37660 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 38949 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 48616 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 52265 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 59236 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 67076 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 67146 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 72771 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 78608 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 79716 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 80188 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 81293 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 88927 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 89009 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 92053 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 94773 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 101603 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 104973 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 109065 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 109723 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 112253 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 114081 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 115316 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 118173 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 118182 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 120842 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 126115 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 127056 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 128748 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 129120 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 130540 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 131874 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 132484 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 137167 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 138768 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 144124 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 158
+DELETE FROM card_tag_link WHERE card_id = 435 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 3026 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 23508 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 83593 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 145427 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 145451 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 145461 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 145611 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 145640 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 145859 AND tag_id = 159
+DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 161
+DELETE FROM card_tag_link WHERE card_id = 146227 AND tag_id = 161
+DELETE FROM card_tag_link WHERE card_id = 93748 AND tag_id = 162
+DELETE FROM card_tag_link WHERE card_id = 145304 AND tag_id = 165
+DELETE FROM card_tag_link WHERE card_id = 145823 AND tag_id = 165
+DELETE FROM card_tag_link WHERE card_id = 145693 AND tag_id = 167
+DELETE FROM card_tag_link WHERE card_id = 145871 AND tag_id = 167
+DELETE FROM card_tag_link WHERE card_id = 145905 AND tag_id = 167
+DELETE FROM card_tag_link WHERE card_id = 36118 AND tag_id = 168
+DELETE FROM card_tag_link WHERE card_id = 74371 AND tag_id = 169
+DELETE FROM card_tag_link WHERE card_id = 97068 AND tag_id = 169
+DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 169
+DELETE FROM card_tag_link WHERE card_id = 110091 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 146369 AND tag_id = 170
+DELETE FROM card_tag_link WHERE card_id = 146310 AND tag_id = 172
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 172
+DELETE FROM card_tag_link WHERE card_id = 3028 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 5371 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 5420 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 6467 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 7502 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 9038 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 13776 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 14299 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 14888 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 15954 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 23025 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 27521 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 27592 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 29385 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 30152 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 34143 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 36259 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 37042 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 40113 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 43369 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 45762 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 46705 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 48073 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 51114 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 52313 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 52608 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 56930 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 57443 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 57859 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 58192 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 59209 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 60783 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 62720 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 63228 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 67273 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 67479 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 69326 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 72972 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 73892 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 74158 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 76495 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 76606 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 76706 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 83447 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 85965 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 96435 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 96729 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 97209 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 103079 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 103241 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 103617 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 104014 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 105942 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 106516 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 106998 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 114196 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 117150 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 118202 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 119822 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 120455 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 121665 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 121818 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 123407 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 127194 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 127550 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 130300 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 130968 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 137989 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 137996 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 138952 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 141380 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 141814 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 144233 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 146352 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 146753 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 173
+DELETE FROM card_tag_link WHERE card_id = 53503 AND tag_id = 174
+DELETE FROM card_tag_link WHERE card_id = 46516 AND tag_id = 177
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 180
+DELETE FROM card_tag_link WHERE card_id = 36621 AND tag_id = 181
+DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 27659 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 48412 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 57309 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 75814 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 84066 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 105803 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 107514 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 129485 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 139067 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 144233 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146377 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146537 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146711 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 182
+DELETE FROM card_tag_link WHERE card_id = 6429 AND tag_id = 184
+DELETE FROM card_tag_link WHERE card_id = 19831 AND tag_id = 186
+DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 186
+DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 186
+DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 186
+DELETE FROM card_tag_link WHERE card_id = 145827 AND tag_id = 189
+DELETE FROM card_tag_link WHERE card_id = 364 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 1408 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 1187 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 4112 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 11308 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 21409 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 23984 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 24149 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 39954 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 45475 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 45801 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 52371 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 53472 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 54110 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 73304 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 74011 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 75085 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 80474 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 93095 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 106321 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 124056 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 124503 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 125697 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 130805 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 133347 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 143354 AND tag_id = 135
+DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 136
+DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 136
+DELETE FROM card_tag_link WHERE card_id = 54211 AND tag_id = 137
+DELETE FROM card_tag_link WHERE card_id = 107064 AND tag_id = 137
+DELETE FROM card_tag_link WHERE card_id = 146671 AND tag_id = 137
+DELETE FROM card_tag_link WHERE card_id = 144878 AND tag_id = 138
+DELETE FROM card_tag_link WHERE card_id = 47202 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 130418 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 139
+DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 7502 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 13880 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 15396 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 20167 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 20171 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 23025 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 24477 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 34792 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 42892 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 46327 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 61527 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 70824 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76450 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76495 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76508 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76596 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 76623 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 85831 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 85841 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 85859 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 85905 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 112564 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 128380 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 136210 AND tag_id = 140
+DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 2683 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 3544 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 6857 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 7695 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 7990 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 8258 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 9936 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 9962 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 13368 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 14003 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 16340 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 16607 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 17277 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 18144 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 21944 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 23097 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 23667 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 24133 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 24244 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 25868 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 26669 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 27854 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 30013 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 31547 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 32124 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 34103 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 34571 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 36118 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 37164 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 37186 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 37296 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 38336 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 42681 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 42866 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 45162 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 45620 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 46281 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 48169 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 49960 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 50510 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 50633 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 51297 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 51768 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 53063 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 53112 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 53443 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 53488 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 55257 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 59512 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 61835 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 61865 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 63596 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 63754 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 65276 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 68961 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 73457 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 73998 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 74319 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 74462 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 74769 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 77887 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 81090 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 81206 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 82345 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 83275 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 83776 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 87334 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 88469 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 88747 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 89918 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 89944 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 90976 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 94356 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 97327 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 97343 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 97690 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 98529 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 98772 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 102503 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 103281 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 105768 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 107392 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 107498 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 108772 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 109004 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 109845 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 109907 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 110073 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 111873 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 112114 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 113432 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 115288 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 116656 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 117875 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 117922 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 118312 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 118435 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 119063 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 120030 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 120348 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 121033 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 122293 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 123232 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 124591 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 125227 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 125650 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 127962 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 130166 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 133114 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 133522 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 134649 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 134927 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 135418 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 135592 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 136694 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 136834 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 138274 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 139873 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 140463 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 143334 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146305 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146605 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146837 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 198
+DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 109380 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 126
+DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 128
+DELETE FROM card_tag_link WHERE card_id = 278 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 443 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 444 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 653 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 764 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 894 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 935 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 1241 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 1335 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 1351 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 1870 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2104 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2399 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2488 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2580 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2594 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2652 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 2739 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 3312 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 3316 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 3510 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 3544 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 3566 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4093 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4208 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4266 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4290 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4331 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4336 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4342 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4356 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4380 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4402 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4451 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 4903 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5109 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5156 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5194 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5321 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5329 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5424 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6116 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6209 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6226 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6228 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6303 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6310 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 6336 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7004 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7663 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7695 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7701 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 7903 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8093 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8225 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8258 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8277 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8282 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8295 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8364 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8410 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8465 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8548 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 9335 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 9450 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 9528 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 9561 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 9936 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10126 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10175 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10199 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10252 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10361 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 69379 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 69499 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 69591 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 69747 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 69782 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70360 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70404 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70816 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70827 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70828 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 70851 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71009 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71221 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71279 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71319 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71325 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71858 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71872 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71897 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71972 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 71985 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72160 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72197 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72300 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72311 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72394 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72574 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72755 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72771 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 72830 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73140 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73168 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73280 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73339 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73352 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73356 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73404 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73410 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73623 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73740 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 73865 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74004 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74031 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74039 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74056 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74313 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74748 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 74781 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 75863 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76095 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76140 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76151 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76155 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76232 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76313 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76361 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76604 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76705 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76836 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 76875 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77046 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77074 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77119 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77320 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77388 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77483 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77553 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77568 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77875 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77887 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 77981 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 78241 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 78439 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 78547 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 78752 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 78925 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79177 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79403 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79406 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79502 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79504 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79512 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79559 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79606 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79795 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79811 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79838 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 79988 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 80211 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 80258 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 80369 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 80466 AND tag_id = 625
+DELETE FROM card_tag_link WHERE card_id = 10486 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10488 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10521 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10641 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10683 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10722 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10782 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 10890 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11104 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11218 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11366 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11401 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11416 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11544 AND tag_id = 133
+DELETE FROM card_tag_link WHERE card_id = 11761 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12044 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12088 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12135 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12163 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12371 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12506 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 12761 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13028 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13040 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13134 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13148 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13368 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13382 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13387 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13429 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13568 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13588 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13668 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13736 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13788 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 13906 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14513 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14571 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14580 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14706 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14819 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14824 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14930 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 14960 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15037 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15161 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15189 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15428 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15813 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15897 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15951 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15960 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 15979 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 16315 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 16408 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 16654 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17206 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17339 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17417 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17857 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17871 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 17982 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18344 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18518 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18562 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18776 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18984 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 18999 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19052 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19353 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19504 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19529 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19644 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19834 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19843 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 19881 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20164 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20430 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20507 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20628 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20630 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20699 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 20760 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21498 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21556 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21565 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21581 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21609 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21692 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21737 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21743 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21805 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 21919 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22175 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22330 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22402 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22636 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22795 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 620
+DELETE FROM card_tag_link WHERE card_id = 23072 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23097 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23148 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23158 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23160 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23183 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23520 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23576 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23649 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23694 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23765 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23781 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 23961 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24009 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24019 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24133 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24190 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24216 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24314 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24406 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24555 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24799 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 24837 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25014 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25633 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25664 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25699 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25729 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25744 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25830 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25868 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 25981 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 26180 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 26291 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 26371 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 26465 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 26686 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27144 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27171 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27443 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27590 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27592 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27807 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27814 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27854 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 27916 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 28001 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 28112 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 29135 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 29398 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 29703 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30225 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30287 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30375 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30411 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30599 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30842 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 30990 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31045 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31048 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31322 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31547 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31748 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31797 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31954 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 31982 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32124 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32188 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32221 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32257 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32314 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32327 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32644 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32702 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32819 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32974 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 32993 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33084 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33256 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33437 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33450 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33576 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34022 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34194 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34290 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34341 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34395 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 34539 AND tag_id = 621
+DELETE FROM card_tag_link WHERE card_id = 81429 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81509 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81514 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81664 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81690 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81771 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81819 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81871 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 81918 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82073 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82256 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82290 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82387 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82442 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82454 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 82503 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83020 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83046 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83179 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83255 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83279 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83327 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83380 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83479 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83488 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83556 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83697 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83776 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 83904 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84002 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84105 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84492 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84518 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84669 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84783 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84872 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 84920 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85089 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85099 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85315 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85372 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85378 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85645 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85661 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85676 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85742 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85930 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 85951 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86326 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86662 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86681 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86760 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86803 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86820 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 86839 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87008 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87119 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87144 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87158 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87406 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87462 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87479 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87493 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87600 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87713 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87783 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 87985 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88010 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88145 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88291 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88398 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88533 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88678 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88761 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88784 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88927 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 88970 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89007 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89009 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89022 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89061 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89262 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89420 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89508 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89535 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89597 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89685 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 89944 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90222 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90261 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90392 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90426 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90445 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90663 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90714 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 90781 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91072 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91108 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91344 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91484 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91485 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 91703 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92066 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92068 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92154 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92204 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92365 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92386 AND tag_id = 626
+DELETE FROM card_tag_link WHERE card_id = 92496 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 92577 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 92865 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 92933 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 92987 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93139 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93158 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93233 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93291 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93385 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93639 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93658 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93869 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 93957 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94133 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94152 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94267 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94413 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94773 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95177 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95264 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95267 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95294 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95363 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95381 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 95574 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 96066 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 96775 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 96845 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97092 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97599 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97621 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97690 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97836 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 97847 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98044 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98426 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98475 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98529 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98610 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98700 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98773 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98824 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98885 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 98976 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99115 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99217 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99503 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99730 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99839 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99878 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 99913 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100353 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100476 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100479 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100731 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 100868 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101133 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101342 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101401 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101423 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101562 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 101790 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102155 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102373 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102503 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102539 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102579 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102619 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102621 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102646 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102670 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102706 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102721 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 102915 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103207 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103272 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103320 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103410 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103846 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103889 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 103899 AND tag_id = 627
+DELETE FROM card_tag_link WHERE card_id = 115657 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 115660 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 115705 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 115746 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116115 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116138 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116194 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116656 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116678 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116728 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 116987 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117017 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117038 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117059 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117200 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117205 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117277 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117322 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117393 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117450 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 117922 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118044 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118148 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118173 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118178 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118223 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118312 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118443 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118517 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118580 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118584 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118749 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 118844 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119053 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119063 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119124 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119329 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119405 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119544 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119626 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119629 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119762 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 119906 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120209 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120213 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120348 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120353 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120405 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120414 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120449 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120640 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120766 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120804 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120807 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 120949 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121033 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121125 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121136 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121190 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121279 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121613 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 121785 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122004 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122189 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122293 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122305 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122310 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122414 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122460 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122675 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 122859 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123103 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123164 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123232 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123371 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123432 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123513 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123632 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123663 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123703 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123706 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 123926 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124043 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124055 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124066 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124096 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124208 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124223 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124308 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124352 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124376 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124519 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124589 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124692 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124739 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124849 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 124869 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125023 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125193 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125227 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125324 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125350 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125476 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125591 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125654 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125876 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125885 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 125960 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126045 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126285 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126298 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126363 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126543 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126581 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126673 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126756 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126817 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 127194 AND tag_id = 629
+DELETE FROM card_tag_link WHERE card_id = 127309 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127373 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127430 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127464 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127720 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127727 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127808 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127833 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 127962 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 128065 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 128420 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 128758 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 128769 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 129041 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 129093 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 129369 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 129445 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 129523 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130126 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130166 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130259 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130301 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130473 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130598 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 130942 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131044 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131204 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131299 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131314 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131500 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131582 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131712 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131956 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 131995 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132410 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132415 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132543 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132619 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132657 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 132771 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 133347 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 133522 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 133623 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 133736 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134021 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134120 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134134 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134143 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134701 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134790 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134793 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134876 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134946 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 134962 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135022 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135062 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135102 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135143 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135228 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135418 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135469 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135592 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135638 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135755 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135789 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135825 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 135958 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 136163 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 136520 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 136694 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 136834 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 136955 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 137344 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 137978 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138054 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138183 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138320 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138600 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138691 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138736 AND tag_id = 630
+DELETE FROM card_tag_link WHERE card_id = 138920 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 1631 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 2572 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 4623 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 14221 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 17628 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 23211 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 29565 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 34837 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 39643 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 40113 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 40538 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 44666 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 58225 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 60151 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 61277 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 66708 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 74041 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 76728 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 82702 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 82746 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 83460 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 85757 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 96948 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 109304 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 116175 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 118210 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 119902 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 128177 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 131409 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 132003 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 132300 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 136809 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 138520 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 138803 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 146542 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 84
+DELETE FROM card_tag_link WHERE card_id = 28649 AND tag_id = 85
+DELETE FROM card_tag_link WHERE card_id = 72574 AND tag_id = 85
+DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 86
+DELETE FROM card_tag_link WHERE card_id = 11331 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 17432 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 20322 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 24882 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 32516 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 44609 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 48802 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 64137 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 64237 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 80473 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 94953 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 103276 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 112877 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 131383 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 136304 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 146615 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 87
+DELETE FROM card_tag_link WHERE card_id = 82580 AND tag_id = 90
+DELETE FROM card_tag_link WHERE card_id = 133510 AND tag_id = 90
+DELETE FROM card_tag_link WHERE card_id = 731 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 11509 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 12057 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 30875 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 32290 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 55052 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 57851 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 64171 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 69968 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 84588 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 86662 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 90130 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 90903 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 134066 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 137889 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 140521 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 140982 AND tag_id = 91
+DELETE FROM card_tag_link WHERE card_id = 2979 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 13992 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 38803 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 42149 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 53144 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 76849 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 93288 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 94116 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 97448 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 111034 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 125209 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 133589 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 143906 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146132 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146133 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146135 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146136 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146142 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146144 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146153 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146154 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146156 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146157 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146159 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146161 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146166 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146167 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146169 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146171 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146172 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146174 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146179 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146181 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146186 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146187 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146188 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146189 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146190 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146195 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146206 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146209 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146217 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146218 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146219 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146224 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146235 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146237 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146239 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146240 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146247 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146248 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146250 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146251 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146257 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146262 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146263 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146264 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146269 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146270 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146277 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146287 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146292 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146294 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146298 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146300 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146301 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146304 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146305 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146306 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146312 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146314 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146317 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146319 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146321 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146329 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146330 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146337 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146342 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146346 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146347 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146350 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146351 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146357 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146359 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146360 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146361 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146363 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146420 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146487 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146504 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146523 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146530 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146531 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146552 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146571 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146573 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146607 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146620 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146647 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146657 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146658 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146673 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146712 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146735 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146749 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146835 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146866 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146892 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146909 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146912 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146915 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 92
+DELETE FROM card_tag_link WHERE card_id = 2979 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 13992 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 29695 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 53144 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 93288 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 94116 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 97448 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 125209 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 133589 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 143906 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146420 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146475 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146487 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146504 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146523 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146530 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146531 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146552 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146571 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146573 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146607 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146620 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146625 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146647 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146657 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146658 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146673 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146712 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146735 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146749 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146835 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146866 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146892 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146909 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146912 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146915 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 93
+DELETE FROM card_tag_link WHERE card_id = 139142 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139146 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139183 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139334 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139484 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139604 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139740 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139847 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 139894 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140068 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140182 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140208 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140236 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140355 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140466 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140508 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140526 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140530 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140566 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140750 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 140848 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141032 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141094 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141099 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141378 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141380 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141488 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141524 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141614 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141667 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141709 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141776 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 141968 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142057 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142087 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142310 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142471 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142498 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142730 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 142931 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143299 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143424 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143552 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143580 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143719 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 143762 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144078 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144243 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144424 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144484 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144621 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144642 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144685 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144814 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144832 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145029 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145202 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145428 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145630 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145662 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145683 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145707 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146156 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146174 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146206 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146209 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146217 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146227 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146256 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146277 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146304 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146306 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146337 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146351 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146357 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146397 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146429 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146449 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146563 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146586 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146634 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146746 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146753 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146766 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146815 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146837 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146876 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146885 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147004 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 631
+DELETE FROM card_tag_link WHERE card_id = 339 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 17051 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 36259 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 67220 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 82416 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 97370 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 139685 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 38
+DELETE FROM card_tag_link WHERE card_id = 5641 AND tag_id = 39
+DELETE FROM card_tag_link WHERE card_id = 12976 AND tag_id = 40
+DELETE FROM card_tag_link WHERE card_id = 385 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 1216 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 1896 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2135 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2151 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2602 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2683 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2759 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 3026 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 3031 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 3575 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 4299 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5484 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5581 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5639 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 5815 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 7781 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 7903 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 9810 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 10758 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 13986 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 14223 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 14888 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 17206 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 17261 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 17879 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 18148 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 19458 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 19529 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 19831 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 19879 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 20073 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 20624 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 20660 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 21152 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 21276 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 21465 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 22481 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 23173 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 23349 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 25981 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 26136 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 27504 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 27644 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 27687 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 28141 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 28856 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 29135 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 29607 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 29689 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 30071 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 30073 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 30589 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31085 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31180 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31935 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31940 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 31957 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 32611 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 32702 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33495 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33542 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33605 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 33988 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 35038 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 36140 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 36340 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 36915 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 36960 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 39507 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 39758 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 40218 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 41253 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 41609 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 42794 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 42815 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 43030 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 43336 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 44777 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 44789 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 45166 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 45864 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 46379 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 46516 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 49168 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 49186 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 49812 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 51458 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 52352 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 52371 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 52734 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 54310 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55008 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55175 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55705 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55823 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 55935 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 56930 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 57284 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 57362 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 57642 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 58295 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 58459 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 59153 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 59317 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 59808 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 59890 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 59904 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 60065 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 61277 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 62704 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 63514 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 64077 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 64219 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 65249 AND tag_id = 42
+DELETE FROM card_tag_link WHERE card_id = 46145 AND tag_id = 44
+DELETE FROM card_tag_link WHERE card_id = 65945 AND tag_id = 44
+DELETE FROM card_tag_link WHERE card_id = 109548 AND tag_id = 44
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 44
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 44
+DELETE FROM card_tag_link WHERE card_id = 3883 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 5943 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 17538 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 105775 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 110789 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 45
+DELETE FROM card_tag_link WHERE card_id = 47071 AND tag_id = 46
+DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 46
+DELETE FROM card_tag_link WHERE card_id = 101343 AND tag_id = 46
+DELETE FROM card_tag_link WHERE card_id = 571 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 10758 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 19458 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 29082 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 37014 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 55219 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 57309 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 76508 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 101409 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 121662 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 126094 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 138192 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146144 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 47
+DELETE FROM card_tag_link WHERE card_id = 5607 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 6218 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 11476 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 20596 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 24314 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 27257 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 27521 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 27660 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 33598 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 36307 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 37042 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 41253 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 46562 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 50748 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 51458 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 57443 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 60783 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 62720 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 63228 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 63532 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 63914 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 64330 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 69326 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 72972 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 73892 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 80436 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 92397 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 93229 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 96551 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 96729 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 105922 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 106360 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 110678 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 111738 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 124607 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 133914 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 145022 AND tag_id = 49
+DELETE FROM card_tag_link WHERE card_id = 11761 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 27590 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 28112 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 38541 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 46242 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 65138 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 89452 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 109933 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 113541 AND tag_id = 50
+DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 72718 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 115235 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 51
+DELETE FROM card_tag_link WHERE card_id = 64077 AND tag_id = 52
+DELETE FROM card_tag_link WHERE card_id = 65992 AND tag_id = 52
+DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 52
+DELETE FROM card_tag_link WHERE card_id = 145556 AND tag_id = 52
+DELETE FROM card_tag_link WHERE card_id = 21424 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 22155 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 49528 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 55140 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 58702 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 71453 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 102100 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 140426 AND tag_id = 53
+DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 57
+DELETE FROM card_tag_link WHERE card_id = 30215 AND tag_id = 58
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 58
+DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 58
+DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 59
+DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 59
+DELETE FROM card_tag_link WHERE card_id = 78609 AND tag_id = 59
+DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 59
+DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 59
+DELETE FROM card_tag_link WHERE card_id = 145816 AND tag_id = 61
+DELETE FROM card_tag_link WHERE card_id = 145855 AND tag_id = 61
+DELETE FROM card_tag_link WHERE card_id = 109132 AND tag_id = 62
+DELETE FROM card_tag_link WHERE card_id = 140882 AND tag_id = 63
+DELETE FROM card_tag_link WHERE card_id = 145497 AND tag_id = 63
+DELETE FROM card_tag_link WHERE card_id = 145612 AND tag_id = 63
+DELETE FROM card_tag_link WHERE card_id = 145821 AND tag_id = 63
+DELETE FROM card_tag_link WHERE card_id = 16607 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 77629 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145531 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145605 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145677 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145763 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145767 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 145787 AND tag_id = 64
+DELETE FROM card_tag_link WHERE card_id = 60065 AND tag_id = 65
+DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 18101 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 45641 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 47670 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 66285 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 69376 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 78253 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 102045 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 102156 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 115366 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 117268 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 132699 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 133089 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 138184 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 142479 AND tag_id = 66
+DELETE FROM card_tag_link WHERE card_id = 89565 AND tag_id = 68
+DELETE FROM card_tag_link WHERE card_id = 116148 AND tag_id = 68
+DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 68
+DELETE FROM card_tag_link WHERE card_id = 15898 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 30791 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 77797 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 81676 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 86681 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 118309 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 134564 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 139512 AND tag_id = 70
+DELETE FROM card_tag_link WHERE card_id = 111444 AND tag_id = 71
+DELETE FROM card_tag_link WHERE card_id = 145686 AND tag_id = 73
+DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 73
+DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 73
+DELETE FROM card_tag_link WHERE card_id = 23729 AND tag_id = 76
+DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 76
+DELETE FROM card_tag_link WHERE card_id = 124714 AND tag_id = 76
+DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 76
 DELETE FROM card_tag_link WHERE card_id = 15183 AND tag_id = 1
 DELETE FROM card_tag_link WHERE card_id = 18079 AND tag_id = 1
 DELETE FROM card_tag_link WHERE card_id = 99249 AND tag_id = 1
 DELETE FROM card_tag_link WHERE card_id = 145752 AND tag_id = 1
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150044,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150045,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150046,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150047,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150048,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150049,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150050,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150051,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150052,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150053,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150054,2)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150055,2)
 DELETE FROM card_tag_link WHERE card_id = 15183 AND tag_id = 2
 DELETE FROM card_tag_link WHERE card_id = 18079 AND tag_id = 2
 DELETE FROM card_tag_link WHERE card_id = 99249 AND tag_id = 2
@@ -30,83 +5564,6 @@ DELETE FROM card_tag_link WHERE card_id = 145743 AND tag_id = 2
 DELETE FROM card_tag_link WHERE card_id = 145752 AND tag_id = 2
 DELETE FROM card_tag_link WHERE card_id = 145766 AND tag_id = 2
 DELETE FROM card_tag_link WHERE card_id = 145841 AND tag_id = 2
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (1096,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (7648,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12531,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (23653,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (23824,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35776,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38348,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (41406,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (44515,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (47405,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (58084,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (61803,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (65655,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (76596,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (83380,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (91205,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (92577,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (96004,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (96241,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (105291,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (118035,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (127551,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (133948,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (134732,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146570,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146711,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146737,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146766,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146889,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147040,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147042,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147293,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147890,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147924,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147932,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148113,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148142,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148229,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148242,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148317,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148414,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148445,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148464,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148515,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148641,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148699,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148708,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148741,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148798,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148800,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148842,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148857,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148858,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148907,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148962,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149079,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149088,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149179,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149197,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149226,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149230,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149410,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149431,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149436,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149446,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149509,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149701,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149744,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149797,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149837,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149870,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149878,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149914,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149922,4)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149932,4)
 DELETE FROM card_tag_link WHERE card_id = 364 AND tag_id = 4
 DELETE FROM card_tag_link WHERE card_id = 669 AND tag_id = 4
 DELETE FROM card_tag_link WHERE card_id = 764 AND tag_id = 4
@@ -359,27 +5816,11 @@ DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 5
 DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 5
 DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 5
 DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 5
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (99503,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148175,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148284,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148418,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148795,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149869,6)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149981,6)
 DELETE FROM card_tag_link WHERE card_id = 37296 AND tag_id = 6
 DELETE FROM card_tag_link WHERE card_id = 42842 AND tag_id = 6
 DELETE FROM card_tag_link WHERE card_id = 50668 AND tag_id = 6
 DELETE FROM card_tag_link WHERE card_id = 63266 AND tag_id = 6
 DELETE FROM card_tag_link WHERE card_id = 116347 AND tag_id = 6
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147070,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148002,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148011,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148483,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148520,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148673,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149484,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149739,7)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149740,7)
 DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 7
 DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 7
 DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 7
@@ -430,51 +5871,6 @@ DELETE FROM card_tag_link WHERE card_id = 146711 AND tag_id = 7
 DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 7
 DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 7
 DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 7
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (21919,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146429,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146747,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147063,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147083,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147101,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147116,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147118,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148002,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148016,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148020,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148033,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148093,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148121,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148145,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148284,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148322,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148361,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148383,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148959,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148985,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149149,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149157,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149158,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149333,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149334,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149335,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149338,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149345,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149455,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149504,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149552,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149584,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149618,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149636,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149794,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149838,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149883,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149957,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150184,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150190,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150195,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150196,8)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150205,8)
 DELETE FROM card_tag_link WHERE card_id = 1166 AND tag_id = 8
 DELETE FROM card_tag_link WHERE card_id = 1378 AND tag_id = 8
 DELETE FROM card_tag_link WHERE card_id = 1408 AND tag_id = 8
@@ -802,22 +6198,6 @@ DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 8
 DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 8
 DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 8
 DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 8
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147077,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147082,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147083,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147085,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147109,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147113,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147116,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147117,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148248,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148418,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148643,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148795,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148882,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149552,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149869,9)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149981,9)
 DELETE FROM card_tag_link WHERE card_id = 762 AND tag_id = 9
 DELETE FROM card_tag_link WHERE card_id = 5156 AND tag_id = 9
 DELETE FROM card_tag_link WHERE card_id = 7870 AND tag_id = 9
@@ -903,11 +6283,6 @@ DELETE FROM card_tag_link WHERE card_id = 135149 AND tag_id = 9
 DELETE FROM card_tag_link WHERE card_id = 139918 AND tag_id = 9
 DELETE FROM card_tag_link WHERE card_id = 141302 AND tag_id = 9
 DELETE FROM card_tag_link WHERE card_id = 145257 AND tag_id = 9
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (22239,12)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (40175,12)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (49668,12)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (111134,12)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (116535,12)
 DELETE FROM card_tag_link WHERE card_id = 30690 AND tag_id = 12
 DELETE FROM card_tag_link WHERE card_id = 145423 AND tag_id = 12
 DELETE FROM card_tag_link WHERE card_id = 145604 AND tag_id = 12
@@ -915,156 +6290,8 @@ DELETE FROM card_tag_link WHERE card_id = 145607 AND tag_id = 12
 DELETE FROM card_tag_link WHERE card_id = 145659 AND tag_id = 12
 DELETE FROM card_tag_link WHERE card_id = 145746 AND tag_id = 12
 DELETE FROM card_tag_link WHERE card_id = 145835 AND tag_id = 12
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (103555,13)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (108975,13)
 DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 13
 DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 13
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (17605,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18763,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (25448,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (120320,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (145853,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146147,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146308,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146381,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146405,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146548,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146673,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146780,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147002,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147088,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147094,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147970,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147986,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147987,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148030,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148050,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148055,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148065,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148066,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148176,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148177,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148245,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148248,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148280,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148283,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148288,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148315,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148347,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148358,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148427,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148456,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148457,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148478,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148511,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148523,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148524,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148532,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148534,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148545,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148555,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148572,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148586,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148590,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148614,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148615,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148616,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148644,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148652,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148669,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148680,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148700,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148708,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148721,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148722,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148749,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148763,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148797,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148800,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148841,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148842,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148891,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148907,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148910,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148971,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148976,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148982,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148989,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149043,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149065,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149081,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149091,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149107,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149121,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149154,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149175,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149189,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149199,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149200,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149214,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149301,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149312,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149322,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149334,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149336,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149356,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149368,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149390,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149412,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149419,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149420,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149423,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149428,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149429,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149431,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149448,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149456,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149463,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149474,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149475,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149476,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149478,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149486,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149488,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149501,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149518,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149538,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149572,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149614,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149624,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149661,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149702,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149715,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149750,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149755,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149772,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149794,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149824,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149833,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149835,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149884,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149911,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149920,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149921,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149938,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149940,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149949,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149952,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149960,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149962,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149968,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149969,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149970,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149986,15)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149989,15)
 DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 15
 DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 15
 DELETE FROM card_tag_link WHERE card_id = 11645 AND tag_id = 15
@@ -1153,14 +6380,12 @@ DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 15
 DELETE FROM card_tag_link WHERE card_id = 142050 AND tag_id = 15
 DELETE FROM card_tag_link WHERE card_id = 143079 AND tag_id = 15
 DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 15
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149004,17)
 DELETE FROM card_tag_link WHERE card_id = 10938 AND tag_id = 17
 DELETE FROM card_tag_link WHERE card_id = 44659 AND tag_id = 17
 DELETE FROM card_tag_link WHERE card_id = 103079 AND tag_id = 17
 DELETE FROM card_tag_link WHERE card_id = 110060 AND tag_id = 17
 DELETE FROM card_tag_link WHERE card_id = 120370 AND tag_id = 17
 DELETE FROM card_tag_link WHERE card_id = 142909 AND tag_id = 17
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148545,18)
 DELETE FROM card_tag_link WHERE card_id = 17565 AND tag_id = 18
 DELETE FROM card_tag_link WHERE card_id = 29082 AND tag_id = 18
 DELETE FROM card_tag_link WHERE card_id = 53034 AND tag_id = 18
@@ -1190,12 +6415,198 @@ DELETE FROM card_tag_link WHERE card_id = 106881 AND tag_id = 19
 DELETE FROM card_tag_link WHERE card_id = 125730 AND tag_id = 19
 DELETE FROM card_tag_link WHERE card_id = 138192 AND tag_id = 19
 DELETE FROM card_tag_link WHERE card_id = 146279 AND tag_id = 19
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149718,20)
+DELETE FROM card_tag_link WHERE card_id = 104187 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 104882 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105291 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105654 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105807 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105828 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105919 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 105942 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106214 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106273 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106305 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106448 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107101 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107231 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107320 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107366 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107498 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107501 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107508 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107528 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107646 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107694 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107732 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 107808 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 108129 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 108492 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 108825 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 108844 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 108927 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109014 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109065 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109118 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109128 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109201 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109460 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109476 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109493 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109604 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109683 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109723 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109904 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109907 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109917 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 109933 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110168 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110214 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110217 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110221 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110262 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110263 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110430 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110440 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110505 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110596 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110685 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110744 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110816 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 110858 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111141 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111193 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111317 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111547 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111586 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111719 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 111873 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112001 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112386 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112472 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112594 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112642 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112718 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 112958 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113264 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113333 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113432 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113541 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113559 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113700 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113788 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113905 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 113937 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114149 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114360 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114494 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114697 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114856 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 114878 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 115005 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 115234 AND tag_id = 628
+DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 628
 DELETE FROM card_tag_link WHERE card_id = 5158 AND tag_id = 20
 DELETE FROM card_tag_link WHERE card_id = 61951 AND tag_id = 20
 DELETE FROM card_tag_link WHERE card_id = 94661 AND tag_id = 20
 DELETE FROM card_tag_link WHERE card_id = 278 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 444 AND tag_id = 21
+DELETE FROM card_tag_link WHERE card_id = 1096 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 1484 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 1885 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 54628 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 93893 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 143191 AND tag_id = 129
+DELETE FROM card_tag_link WHERE card_id = 2093 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 5607 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 8285 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 14585 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 19241 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 20660 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 25830 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 29131 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 30461 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 31180 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 33598 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 33605 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 35959 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 38447 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 41987 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 43030 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 49168 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 52937 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 55710 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 56397 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 59317 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 62704 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 63266 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 63914 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 67448 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 67580 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 69498 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 73457 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 80436 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 86783 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 88635 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 93229 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 97922 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 103297 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 107743 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 107771 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 110091 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 111738 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 112092 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 114133 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 115391 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 117150 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 123549 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 124607 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 125978 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 127727 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 134803 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 134957 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 139318 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 145462 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146404 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146537 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146595 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146768 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 132
+DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 132
 DELETE FROM card_tag_link WHERE card_id = 894 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 1351 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 1408 AND tag_id = 21
@@ -1433,49 +6844,9 @@ DELETE FROM card_tag_link WHERE card_id = 128758 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 129093 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 129753 AND tag_id = 21
 DELETE FROM card_tag_link WHERE card_id = 130192 AND tag_id = 21
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149729,22)
 DELETE FROM card_tag_link WHERE card_id = 32502 AND tag_id = 22
 DELETE FROM card_tag_link WHERE card_id = 82171 AND tag_id = 22
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (19052,23)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (49421,23)
 DELETE FROM card_tag_link WHERE card_id = 91560 AND tag_id = 23
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (22231,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (26863,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (105068,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146475,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146845,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146889,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147976,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148077,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148117,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148137,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148393,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148410,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148561,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148672,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148674,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148710,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148735,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148757,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148827,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148836,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148965,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148968,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149005,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149010,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149073,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149094,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149152,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149238,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149377,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149454,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149634,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149670,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149744,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149745,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149871,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149941,26)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150016,26)
 DELETE FROM card_tag_link WHERE card_id = 364 AND tag_id = 26
 DELETE FROM card_tag_link WHERE card_id = 9064 AND tag_id = 26
 DELETE FROM card_tag_link WHERE card_id = 14585 AND tag_id = 26
@@ -1502,7 +6873,6 @@ DELETE FROM card_tag_link WHERE card_id = 136360 AND tag_id = 26
 DELETE FROM card_tag_link WHERE card_id = 140279 AND tag_id = 26
 DELETE FROM card_tag_link WHERE card_id = 140447 AND tag_id = 26
 DELETE FROM card_tag_link WHERE card_id = 143814 AND tag_id = 26
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150025,27)
 DELETE FROM card_tag_link WHERE card_id = 63458 AND tag_id = 27
 DELETE FROM card_tag_link WHERE card_id = 70963 AND tag_id = 27
 DELETE FROM card_tag_link WHERE card_id = 71501 AND tag_id = 27
@@ -1513,16 +6883,6 @@ DELETE FROM card_tag_link WHERE card_id = 120667 AND tag_id = 27
 DELETE FROM card_tag_link WHERE card_id = 130352 AND tag_id = 27
 DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 27
 DELETE FROM card_tag_link WHERE card_id = 142991 AND tag_id = 27
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150056,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150057,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150058,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150059,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150060,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150061,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150062,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150063,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150064,29)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150065,29)
 DELETE FROM card_tag_link WHERE card_id = 13946 AND tag_id = 29
 DELETE FROM card_tag_link WHERE card_id = 29528 AND tag_id = 29
 DELETE FROM card_tag_link WHERE card_id = 43370 AND tag_id = 29
@@ -1533,544 +6893,18 @@ DELETE FROM card_tag_link WHERE card_id = 86672 AND tag_id = 29
 DELETE FROM card_tag_link WHERE card_id = 103866 AND tag_id = 29
 DELETE FROM card_tag_link WHERE card_id = 113835 AND tag_id = 29
 DELETE FROM card_tag_link WHERE card_id = 127262 AND tag_id = 29
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (99623,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147307,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147785,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148282,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148498,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148766,32)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149550,35)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149609,35)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149700,35)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149801,35)
 DELETE FROM card_tag_link WHERE card_id = 49024 AND tag_id = 35
 DELETE FROM card_tag_link WHERE card_id = 70446 AND tag_id = 35
 DELETE FROM card_tag_link WHERE card_id = 74748 AND tag_id = 35
 DELETE FROM card_tag_link WHERE card_id = 93549 AND tag_id = 35
 DELETE FROM card_tag_link WHERE card_id = 133347 AND tag_id = 35
 DELETE FROM card_tag_link WHERE card_id = 133751 AND tag_id = 35
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,36)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150024,36)
 DELETE FROM card_tag_link WHERE card_id = 13093 AND tag_id = 36
 DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 36
 DELETE FROM card_tag_link WHERE card_id = 34480 AND tag_id = 36
 DELETE FROM card_tag_link WHERE card_id = 108141 AND tag_id = 36
 DELETE FROM card_tag_link WHERE card_id = 116053 AND tag_id = 36
 DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 36
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (3176,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11231,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12531,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18763,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (19972,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (37077,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (39828,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (54382,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (70833,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (77034,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (89826,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (109080,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (114089,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (115260,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (144266,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146227,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146550,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146737,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147050,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147062,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147063,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147092,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147112,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147379,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147962,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148370,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148408,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148455,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148734,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148792,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148883,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148938,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149142,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149352,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149436,38)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149491,38)
-DELETE FROM card_tag_link WHERE card_id = 339 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 17051 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 36259 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 67220 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 82416 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 97370 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 139685 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 38
-DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 38
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150026,39)
-DELETE FROM card_tag_link WHERE card_id = 5641 AND tag_id = 39
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149265,40)
-DELETE FROM card_tag_link WHERE card_id = 12976 AND tag_id = 40
-DELETE FROM card_tag_link WHERE card_id = 385 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 1216 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 1896 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2135 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2151 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2602 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2683 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2759 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 3026 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 3031 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 3575 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 4299 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5484 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5581 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5639 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 5815 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 7781 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 7903 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 9810 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 10758 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 13986 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 14223 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 14888 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 17206 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 17261 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 17879 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 18148 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 19458 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 19529 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 19831 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 19879 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 20073 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 20624 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 20660 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 21152 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 21276 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 21465 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 22481 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 23173 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 23349 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 25981 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 26136 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 27504 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 27644 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 27687 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 28141 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 28856 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 29135 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 29607 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 29689 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 30071 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 30073 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 30589 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31085 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31180 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31935 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31940 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 31957 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 32611 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 32702 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33495 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33542 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33605 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 33988 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 35038 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 36140 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 36340 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 36915 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 36960 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 39507 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 39758 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 40218 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 41253 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 41609 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 42794 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 42815 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 43030 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 43336 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 44777 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 44789 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 45166 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 45864 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 46379 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 46516 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 49168 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 49186 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 49812 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 51458 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 52352 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 52371 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 52734 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 54310 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55008 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55175 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55705 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55823 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 55935 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 56930 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 57284 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 57362 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 57642 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 58295 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 58459 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 59153 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 59317 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 59808 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 59890 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 59904 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 60065 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 61277 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 62704 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 63514 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 64077 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 64219 AND tag_id = 42
-DELETE FROM card_tag_link WHERE card_id = 65249 AND tag_id = 42
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (98838,44)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (113439,44)
-DELETE FROM card_tag_link WHERE card_id = 46145 AND tag_id = 44
-DELETE FROM card_tag_link WHERE card_id = 65945 AND tag_id = 44
-DELETE FROM card_tag_link WHERE card_id = 109548 AND tag_id = 44
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 44
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 44
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150029,45)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150030,45)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150031,45)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150032,45)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150033,45)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150034,45)
-DELETE FROM card_tag_link WHERE card_id = 3883 AND tag_id = 45
-DELETE FROM card_tag_link WHERE card_id = 5943 AND tag_id = 45
-DELETE FROM card_tag_link WHERE card_id = 17538 AND tag_id = 45
-DELETE FROM card_tag_link WHERE card_id = 105775 AND tag_id = 45
-DELETE FROM card_tag_link WHERE card_id = 110789 AND tag_id = 45
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 45
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (4392,46)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12588,46)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (19681,46)
-DELETE FROM card_tag_link WHERE card_id = 47071 AND tag_id = 46
-DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 46
-DELETE FROM card_tag_link WHERE card_id = 101343 AND tag_id = 46
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147095,47)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147105,47)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149155,47)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149957,47)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150195,47)
-DELETE FROM card_tag_link WHERE card_id = 571 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 10758 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 19458 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 29082 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 37014 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 55219 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 57309 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 76508 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 101409 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 121662 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 126094 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 138192 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146144 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 47
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 47
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146179,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146219,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146464,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146668,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148158,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148178,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148304,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148715,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148822,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148920,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148966,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149008,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149226,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149298,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149307,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149434,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149518,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149611,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149726,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149775,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149786,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,49)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149938,49)
-DELETE FROM card_tag_link WHERE card_id = 5607 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 6218 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 11476 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 20596 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 24314 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 27257 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 27521 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 27660 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 33598 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 36307 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 37042 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 41253 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 46562 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 50748 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 51458 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 57443 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 60783 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 62720 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 63228 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 63532 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 63914 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 64330 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 69326 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 72972 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 73892 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 80436 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 92397 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 93229 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 96551 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 96729 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 105922 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 106360 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 110678 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 111738 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 124607 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 133914 AND tag_id = 49
-DELETE FROM card_tag_link WHERE card_id = 145022 AND tag_id = 49
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150066,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150067,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150068,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150069,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150070,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150071,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150072,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150073,50)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150074,50)
-DELETE FROM card_tag_link WHERE card_id = 11761 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 27590 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 28112 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 38541 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 46242 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 65138 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 89452 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 109933 AND tag_id = 50
-DELETE FROM card_tag_link WHERE card_id = 113541 AND tag_id = 50
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146227,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147365,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148786,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149200,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,51)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149491,51)
-DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 51
-DELETE FROM card_tag_link WHERE card_id = 72718 AND tag_id = 51
-DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 51
-DELETE FROM card_tag_link WHERE card_id = 115235 AND tag_id = 51
-DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 51
-DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 51
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35304,52)
-DELETE FROM card_tag_link WHERE card_id = 64077 AND tag_id = 52
-DELETE FROM card_tag_link WHERE card_id = 65992 AND tag_id = 52
-DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 52
-DELETE FROM card_tag_link WHERE card_id = 145556 AND tag_id = 52
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149992,53)
-DELETE FROM card_tag_link WHERE card_id = 21424 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 22155 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 49528 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 55140 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 58702 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 71453 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 102100 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 53
-DELETE FROM card_tag_link WHERE card_id = 140426 AND tag_id = 53
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149222,54)
-DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 57
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (103555,58)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (108975,58)
-DELETE FROM card_tag_link WHERE card_id = 30215 AND tag_id = 58
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 58
-DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 58
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146358,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148433,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148434,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148706,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148797,59)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149474,59)
-DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 59
-DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 59
-DELETE FROM card_tag_link WHERE card_id = 78609 AND tag_id = 59
-DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 59
-DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 59
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (144312,61)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (145023,61)
-DELETE FROM card_tag_link WHERE card_id = 145816 AND tag_id = 61
-DELETE FROM card_tag_link WHERE card_id = 145855 AND tag_id = 61
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148030,62)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148734,62)
-DELETE FROM card_tag_link WHERE card_id = 109132 AND tag_id = 62
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (10988,63)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (20628,63)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150035,63)
-DELETE FROM card_tag_link WHERE card_id = 140882 AND tag_id = 63
-DELETE FROM card_tag_link WHERE card_id = 145497 AND tag_id = 63
-DELETE FROM card_tag_link WHERE card_id = 145612 AND tag_id = 63
-DELETE FROM card_tag_link WHERE card_id = 145821 AND tag_id = 63
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (7983,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (17310,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (29552,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35499,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (39779,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (82345,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (133904,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (139237,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150027,64)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150028,64)
-DELETE FROM card_tag_link WHERE card_id = 16607 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 77629 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145531 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145605 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145677 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145763 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145767 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 145787 AND tag_id = 64
-DELETE FROM card_tag_link WHERE card_id = 60065 AND tag_id = 65
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147041,66)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147551,66)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147552,66)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147733,66)
-DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 18101 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 45641 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 47670 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 66285 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 69376 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 78253 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 102045 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 102156 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 115366 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 117268 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 132699 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 133089 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 138184 AND tag_id = 66
-DELETE FROM card_tag_link WHERE card_id = 142479 AND tag_id = 66
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (5491,68)
-DELETE FROM card_tag_link WHERE card_id = 89565 AND tag_id = 68
-DELETE FROM card_tag_link WHERE card_id = 116148 AND tag_id = 68
-DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 68
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147595,70)
-DELETE FROM card_tag_link WHERE card_id = 15898 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 30791 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 77797 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 81676 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 86681 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 118309 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 134564 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 139512 AND tag_id = 70
-DELETE FROM card_tag_link WHERE card_id = 111444 AND tag_id = 71
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (56115,73)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (81156,73)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (84066,73)
-DELETE FROM card_tag_link WHERE card_id = 145686 AND tag_id = 73
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 73
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 73
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (24289,76)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150024,76)
-DELETE FROM card_tag_link WHERE card_id = 23729 AND tag_id = 76
-DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 76
-DELETE FROM card_tag_link WHERE card_id = 124714 AND tag_id = 76
-DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 76
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146678,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146815,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148031,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148309,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148342,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148358,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148529,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148531,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148534,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148535,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148854,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148943,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148958,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149091,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149236,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149238,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149476,77)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149786,77)
 DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 77
 DELETE FROM card_tag_link WHERE card_id = 14585 AND tag_id = 77
 DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 77
@@ -2090,14 +6924,7 @@ DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 77
 DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 77
 DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 77
 DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 77
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150036,78)
 DELETE FROM card_tag_link WHERE card_id = 137695 AND tag_id = 78
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148367,79)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148373,79)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,79)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,79)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149076,79)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,79)
 DELETE FROM card_tag_link WHERE card_id = 29046 AND tag_id = 79
 DELETE FROM card_tag_link WHERE card_id = 53281 AND tag_id = 79
 DELETE FROM card_tag_link WHERE card_id = 59904 AND tag_id = 79
@@ -2110,39 +6937,14 @@ DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 79
 DELETE FROM card_tag_link WHERE card_id = 143278 AND tag_id = 79
 DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 79
 DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 79
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147068,80)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147122,80)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148250,80)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149280,80)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149375,80)
 DELETE FROM card_tag_link WHERE card_id = 37427 AND tag_id = 80
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (29847,81)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (67046,81)
 DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 81
 DELETE FROM card_tag_link WHERE card_id = 145902 AND tag_id = 81
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (30182,82)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (50771,82)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (127053,82)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148576,82)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150037,82)
 DELETE FROM card_tag_link WHERE card_id = 74418 AND tag_id = 82
 DELETE FROM card_tag_link WHERE card_id = 145619 AND tag_id = 82
 DELETE FROM card_tag_link WHERE card_id = 145703 AND tag_id = 82
 DELETE FROM card_tag_link WHERE card_id = 145790 AND tag_id = 82
 DELETE FROM card_tag_link WHERE card_id = 145824 AND tag_id = 82
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (79754,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146405,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147121,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147127,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147135,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147188,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148016,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148120,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148275,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148987,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149154,83)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149159,83)
 DELETE FROM card_tag_link WHERE card_id = 1166 AND tag_id = 83
 DELETE FROM card_tag_link WHERE card_id = 17835 AND tag_id = 83
 DELETE FROM card_tag_link WHERE card_id = 17847 AND tag_id = 83
@@ -2215,6 +7017,1439 @@ DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 83
 DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 83
 DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 83
 DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 83
+DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 125703 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 139321 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146728 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 17053 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 35224 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 55219 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 87075 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 154
+DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 148
+DELETE FROM card_tag_link WHERE card_id = 24483 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 60279 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 66875 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 108750 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 108928 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 151
+DELETE FROM card_tag_link WHERE card_id = 112897 AND tag_id = 152
+DELETE FROM card_tag_link WHERE card_id = 53193 AND tag_id = 153
+DELETE FROM card_tag_link WHERE card_id = 88970 AND tag_id = 153
+DELETE FROM card_tag_link WHERE card_id = 124453 AND tag_id = 153
+DELETE FROM card_tag_link WHERE card_id = 135975 AND tag_id = 153
+DELETE FROM card_tag_link WHERE card_id = 30073 AND tag_id = 141
+DELETE FROM card_tag_link WHERE card_id = 87164 AND tag_id = 141
+DELETE FROM card_tag_link WHERE card_id = 94468 AND tag_id = 141
+DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 142
+DELETE FROM card_tag_link WHERE card_id = 145629 AND tag_id = 142
+DELETE FROM card_tag_link WHERE card_id = 145867 AND tag_id = 144
+DELETE FROM card_tag_link WHERE card_id = 1742 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 3518 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 5158 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 14857 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 17051 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 20350 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 24483 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 28111 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 29335 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 34777 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 38336 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 41990 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 42449 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 44177 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 45324 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 49699 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 57849 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 58975 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 61951 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 69385 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 70193 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 79538 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 84758 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 86337 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 86851 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 87228 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 87619 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 87804 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 90997 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 94661 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 95187 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 98824 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 100218 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 105171 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 106092 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 112150 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 115864 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 119425 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 120372 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 122287 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 128995 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 132484 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 136579 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 137052 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 140484 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 142484 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146135 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 147
+DELETE FROM card_tag_link WHERE card_id = 143473 AND tag_id = 153
+DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 57839 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58308 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58606 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58609 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58702 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58839 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 58922 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59051 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59236 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59258 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59436 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59450 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59573 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59672 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59710 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 59738 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60103 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60177 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60208 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60278 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60348 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60725 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 60994 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 61169 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 61698 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 61881 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 62076 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 62636 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 62885 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 62917 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63174 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63261 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63285 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63302 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63352 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63448 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63487 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63514 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63531 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63874 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 63996 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 64219 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 64426 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 64439 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 64769 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65007 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65020 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65021 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65080 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65138 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65276 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65413 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65588 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65654 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65668 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65875 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 65904 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66273 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66407 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66431 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66727 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66773 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66917 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 66968 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67050 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67207 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67248 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67440 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67594 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67709 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67728 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67769 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67793 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67902 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67934 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67962 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 67967 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 68030 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 68033 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 68115 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 68622 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 68856 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 69027 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 69030 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 69164 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 69177 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 69237 AND tag_id = 624
+DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 94
+DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 139321 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 95
+DELETE FROM card_tag_link WHERE card_id = 23183 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 29082 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 69030 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 97
+DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 98
+DELETE FROM card_tag_link WHERE card_id = 116749 AND tag_id = 100
+DELETE FROM card_tag_link WHERE card_id = 50077 AND tag_id = 101
+DELETE FROM card_tag_link WHERE card_id = 19872 AND tag_id = 104
+DELETE FROM card_tag_link WHERE card_id = 116148 AND tag_id = 104
+DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 104
+DELETE FROM card_tag_link WHERE card_id = 145304 AND tag_id = 104
+DELETE FROM card_tag_link WHERE card_id = 145607 AND tag_id = 104
+DELETE FROM card_tag_link WHERE card_id = 2572 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 17628 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 34837 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 66708 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 68193 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 82746 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 83477 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 109226 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 119902 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146154 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146171 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146189 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146224 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146292 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146361 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 105
+DELETE FROM card_tag_link WHERE card_id = 130330 AND tag_id = 108
+DELETE FROM card_tag_link WHERE card_id = 39643 AND tag_id = 109
+DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 109
+DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 109
+DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 109
+DELETE FROM card_tag_link WHERE card_id = 137052 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 111
+DELETE FROM card_tag_link WHERE card_id = 29385 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 44666 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 58225 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 60151 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 76728 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 132300 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146142 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 4623 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 141482 AND tag_id = 117
+DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146159 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 120
+DELETE FROM card_tag_link WHERE card_id = 23211 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 24618 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 24779 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 29046 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 35224 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 76509 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 79390 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 89157 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 90660 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 97209 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 114111 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 138520 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146169 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146195 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146218 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146235 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146248 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 121
+DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 113
+DELETE FROM card_tag_link WHERE card_id = 1216 AND tag_id = 114
+DELETE FROM card_tag_link WHERE card_id = 124697 AND tag_id = 114
+DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 114
+DELETE FROM card_tag_link WHERE card_id = 40538 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 50306 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 134616 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 137255 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146188 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146359 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 115
+DELETE FROM card_tag_link WHERE card_id = 13262 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 16007 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 66303 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 68236 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 97828 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 105301 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 119166 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 129870 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 140516 AND tag_id = 116
+DELETE FROM card_tag_link WHERE card_id = 141116 AND tag_id = 116
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (40144,97)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148721,97)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148722,98)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148064,100)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149892,101)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (77280,104)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (90997,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147060,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147086,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147090,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148038,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148075,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148090,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148091,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148188,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148218,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148289,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148330,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148662,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148697,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148714,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148723,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148852,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148854,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148918,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148936,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148937,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149205,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149206,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149225,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149311,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149528,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149694,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149703,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149944,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149953,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149955,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149956,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149990,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150188,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150189,105)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147091,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149863,110)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11099,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (32502,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (59970,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147120,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147132,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147970,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148047,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148051,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148180,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148184,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148186,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148187,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148268,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148427,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148654,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148696,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148850,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148940,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149038,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149195,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149214,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149389,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149644,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149663,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149664,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149773,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149857,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149864,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149940,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150181,115)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (105062,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147098,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148805,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148825,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149182,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150003,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150017,111)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (52748,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (62271,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147114,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147972,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148241,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148459,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149143,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149223,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149224,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149637,113)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149114,114)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148331,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149126,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149208,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149371,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149997,117)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148620,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148658,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149112,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149308,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149369,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149592,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149615,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149949,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150007,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150198,120)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (24662,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (98733,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (124619,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (125435,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146310,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147051,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147572,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147739,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147923,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147978,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147985,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148039,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148084,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148171,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148172,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148194,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148290,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148333,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148338,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148360,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148367,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148391,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148423,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148624,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148663,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148664,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148665,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148807,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148808,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148823,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148933,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149441,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149527,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149529,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149596,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149679,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149953,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149978,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150186,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150187,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150200,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150201,121)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (22231,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146148,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147634,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148099,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148307,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148497,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148541,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148781,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149116,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149340,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149915,123)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,126)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148433,126)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148812,126)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149076,126)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (20322,128)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146404,128)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148919,128)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (4392,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (21257,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (21851,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (27054,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (68947,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (72839,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (75888,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (103380,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (128025,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146162,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146523,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146570,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147337,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147491,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147952,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148221,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148298,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148349,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148350,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148488,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148507,129)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (3714,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (5061,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (5371,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (6228,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (6710,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12057,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (14253,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (15568,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (17593,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18101,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18505,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18808,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (25518,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (29892,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (33574,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (34480,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35224,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38265,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38575,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (39046,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (45303,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (45354,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (46316,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (46734,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (47381,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (52991,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149004,17)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149718,20)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (22239,12)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (40175,12)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (49668,12)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (111134,12)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (116535,12)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (103555,13)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (108975,13)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150040,1)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150041,1)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150042,1)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150043,1)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150044,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150045,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150046,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150047,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150048,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150049,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150050,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150051,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150052,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150053,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150054,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150055,2)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (1096,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (7648,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12531,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (23653,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (23824,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35776,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38348,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (41406,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (44515,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (47405,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (58084,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (61803,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (65655,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (76596,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (83380,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (91205,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (92577,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (96004,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (96241,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (105291,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (118035,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (127551,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (133948,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (134732,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146570,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146711,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146737,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146766,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146889,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147040,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147042,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147293,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147890,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147924,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147932,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148113,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148142,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148229,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148242,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148317,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148414,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148445,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148464,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148515,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148641,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148699,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148708,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148741,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148798,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148800,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148842,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148857,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148858,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148907,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148962,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149079,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149088,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149179,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149197,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149226,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149230,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149410,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149431,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149436,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149446,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149509,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149701,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149744,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149797,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149837,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149870,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149878,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149914,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149922,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149932,4)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (99503,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148175,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148284,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148418,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148795,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149869,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149981,6)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147070,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148002,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148011,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148483,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148520,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148673,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149484,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149739,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149740,7)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (21919,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146429,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146747,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147063,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147083,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147101,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147116,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147118,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148002,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148016,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148020,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148033,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148093,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148121,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148145,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148284,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148322,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148361,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148383,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148959,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148985,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149149,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149157,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149158,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149333,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149334,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149335,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149338,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149345,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149455,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149504,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149552,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149584,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149618,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149636,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149794,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149838,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149883,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149957,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150184,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150190,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150195,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150196,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150205,8)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147077,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147082,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147083,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147085,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147109,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147113,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147116,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147117,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148248,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148418,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148643,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148795,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148882,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149552,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149869,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149981,9)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (17605,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18763,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (25448,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (120320,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (145853,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146147,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146308,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146381,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146405,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146548,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146673,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146780,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147002,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147088,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147094,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147970,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147986,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147987,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148030,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148050,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148055,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148065,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148066,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148176,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148177,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148245,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148248,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148280,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148283,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148288,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148315,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148347,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148358,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148427,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148456,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148457,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148478,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148511,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148523,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148524,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148532,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148534,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148545,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148555,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148572,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148586,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148590,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148614,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148615,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148616,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148644,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148652,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148669,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148680,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148700,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148708,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148721,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148722,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148749,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148763,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148797,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148800,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148841,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148842,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148891,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148907,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148910,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148971,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148976,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148982,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148989,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149043,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149065,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149081,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149091,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149107,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149121,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149154,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149175,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149189,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149199,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149200,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149214,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149301,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149312,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149322,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149334,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149336,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149356,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149368,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149390,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149412,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149419,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149420,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149423,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149428,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149429,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149431,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149448,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149456,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149463,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149474,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149475,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149476,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149478,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149486,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149488,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149501,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149518,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149538,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149572,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149614,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149624,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149661,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149702,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149715,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149750,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149755,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149772,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149794,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149824,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149833,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149835,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149884,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149911,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149920,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149921,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149938,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149940,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149949,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149952,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149960,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149962,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149968,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149969,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149970,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149986,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149989,15)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149729,22)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (19052,23)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (49421,23)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (22231,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (26863,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (105068,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146475,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146845,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146889,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147976,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148077,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148117,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148137,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148393,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148410,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148561,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148672,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148674,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148710,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148735,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148757,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148827,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148836,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148965,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148968,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149005,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149010,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149073,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149094,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149152,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149238,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149377,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149454,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149634,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149670,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149744,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149745,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149871,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149941,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150016,26)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150025,27)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150056,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150057,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150058,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150059,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150060,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150061,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150062,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150063,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150064,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150065,29)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (99623,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147307,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147785,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148282,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148498,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148766,32)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149550,35)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149609,35)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149700,35)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149801,35)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,36)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150024,36)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (3176,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11231,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12531,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18763,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (19972,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (37077,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (39828,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (54382,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (70833,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (77034,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (89826,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (109080,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (114089,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (115260,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (144266,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146227,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146550,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146737,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147050,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147062,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147063,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147092,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147112,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147379,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147962,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148370,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148408,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148455,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148734,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148792,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148883,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148938,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149142,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149352,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149436,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149491,38)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150026,39)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149265,40)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35304,52)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149992,53)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149222,54)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (103555,58)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (108975,58)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146358,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148433,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148434,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148706,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148797,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149474,59)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (144312,61)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (145023,61)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148030,62)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148734,62)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (10988,63)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (20628,63)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150035,63)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (7983,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (17310,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (29552,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35499,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (39779,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (82345,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (133904,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (139237,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150027,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150028,64)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147041,66)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147551,66)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147552,66)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147733,66)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (5491,68)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147595,70)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (56115,73)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (81156,73)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (84066,73)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (24289,76)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150024,76)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (98838,44)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (113439,44)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150029,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150030,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150031,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150032,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150033,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150034,45)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (4392,46)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12588,46)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (19681,46)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147095,47)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147105,47)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149155,47)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149957,47)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150195,47)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146179,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146219,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146464,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146668,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148158,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148178,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148304,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148715,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148822,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148920,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148966,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149008,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149226,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149298,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149307,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149434,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149518,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149611,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149726,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149775,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149786,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149938,49)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150066,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150067,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150068,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150069,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150070,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150071,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150072,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150073,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150074,50)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146227,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147365,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148786,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149200,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149425,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149491,51)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146678,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146815,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148031,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148309,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148342,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148358,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148529,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148531,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148534,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148535,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148854,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148943,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148958,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149091,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149236,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149238,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149476,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149786,77)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150036,78)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148367,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148373,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148993,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149076,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,79)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147068,80)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147122,80)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148250,80)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149280,80)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149375,80)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (29847,81)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (67046,81)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (30182,82)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (50771,82)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (127053,82)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148576,82)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150037,82)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (79754,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146405,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147121,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147127,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147135,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147188,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148016,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148120,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148275,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148510,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148987,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149154,83)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149159,83)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (136302,84)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146196,84)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146279,84)
@@ -2255,72 +8490,7 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149679,84)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149944,84)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149955,84)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150007,84)
-DELETE FROM card_tag_link WHERE card_id = 1631 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 2572 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 4623 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 14221 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 17628 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 23211 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 29565 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 34837 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 39643 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 40113 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 40538 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 44666 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 58225 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 60151 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 61277 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 66708 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 74041 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 76728 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 82702 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 82746 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 83460 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 85757 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 96948 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 109304 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 116175 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 118210 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 119902 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 128177 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 131409 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 132003 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 132300 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 136809 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 138520 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 138803 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 146542 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 84
-DELETE FROM card_tag_link WHERE card_id = 28649 AND tag_id = 85
-DELETE FROM card_tag_link WHERE card_id = 72574 AND tag_id = 85
-DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 86
-DELETE FROM card_tag_link WHERE card_id = 11331 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 17432 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 20322 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 24882 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 32516 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 44609 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 48802 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 64137 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 64237 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 80473 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 94953 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 103276 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 112877 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 131383 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 136304 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 146615 AND tag_id = 87
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 87
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147724,90)
-DELETE FROM card_tag_link WHERE card_id = 82580 AND tag_id = 90
-DELETE FROM card_tag_link WHERE card_id = 133510 AND tag_id = 90
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147286,91)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147297,91)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147313,91)
@@ -2336,23 +8506,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147698,91)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147788,91)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147925,91)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147930,91)
-DELETE FROM card_tag_link WHERE card_id = 731 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 11509 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 12057 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 30875 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 32290 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 55052 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 57851 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 64171 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 69968 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 84588 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 86662 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 90130 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 90903 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 134066 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 137889 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 140521 AND tag_id = 91
-DELETE FROM card_tag_link WHERE card_id = 140982 AND tag_id = 91
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (364,92)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (368,92)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,92)
@@ -2955,570 +9108,68 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150206,92)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150207,92)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,92)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150209,92)
-DELETE FROM card_tag_link WHERE card_id = 2979 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 13992 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 38803 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 42149 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 53144 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 76849 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 93288 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 94116 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 97448 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 111034 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 125209 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 133589 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 143906 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146132 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146133 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146135 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146136 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146142 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146144 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146153 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146154 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146156 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146157 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146159 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146161 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146166 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146167 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146169 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146171 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146172 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146174 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146179 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146181 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146186 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146187 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146188 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146189 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146190 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146195 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146206 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146209 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146217 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146218 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146219 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146224 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146235 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146237 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146239 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146240 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146247 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146248 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146250 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146251 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146257 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146262 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146263 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146264 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146269 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146270 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146277 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146287 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146292 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146294 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146298 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146300 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146301 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146304 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146305 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146306 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146312 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146314 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146317 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146319 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146321 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146329 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146330 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146337 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146342 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146346 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146347 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146350 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146351 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146357 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146359 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146360 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146361 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146363 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146420 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146487 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146504 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146523 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146530 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146531 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146552 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146571 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146573 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146607 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146620 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146647 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146657 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146658 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146673 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146712 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146735 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146749 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146835 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146866 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146892 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146909 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146912 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146915 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 92
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 92
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (459,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (1516,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (2090,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (2611,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (3009,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (3714,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (5061,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (5371,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (6228,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (6710,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (7983,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (9421,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11341,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11608,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11730,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12057,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (13195,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (14253,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (15559,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (15568,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (17593,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18101,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18505,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18808,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (18986,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (19011,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (22568,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (25518,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (29051,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (29892,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (31572,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (32151,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (32516,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (32647,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (33574,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (34480,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35047,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35224,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (37568,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38265,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38575,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (39046,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (40528,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (41100,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (43109,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (45303,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (45354,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (46316,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (46734,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (47381,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (47581,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (47860,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (52937,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (52991,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (54213,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (54477,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (54778,94)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (55571,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (364,93)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,93)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (1325,93)
@@ -3955,483 +9606,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150206,93)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150207,93)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,93)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150209,93)
-DELETE FROM card_tag_link WHERE card_id = 2979 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 13992 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 29695 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 53144 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 93288 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 94116 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 97448 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 125209 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 133589 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 143906 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146420 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146475 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146487 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146504 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146523 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146530 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146531 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146552 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146571 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146573 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146607 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146620 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146625 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146647 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146657 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146658 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146673 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146712 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146735 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146749 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146769 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146835 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146866 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146892 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146909 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146912 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146915 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 93
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 93
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (459,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (1516,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (2090,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (2611,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (3009,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (3714,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (5061,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (5371,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (6228,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (6710,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (7983,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (9421,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11341,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11608,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11730,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12057,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (13195,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (14253,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (15559,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (15568,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (17593,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18101,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18505,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18808,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18986,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (19011,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (22568,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (25518,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (29051,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (29892,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (31572,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (32151,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (32516,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (32647,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (33574,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (34480,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35047,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35224,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (37568,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38265,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38575,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (39046,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (40528,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (41100,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (43109,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (45303,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (45354,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (46316,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (46734,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (47381,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (47581,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (47860,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (52937,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (52991,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (54213,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (54477,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (54778,94)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (55571,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (58192,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (59341,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (59968,94)
@@ -4545,195 +9719,7 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150199,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150200,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150204,94)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,94)
-DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 125703 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 139321 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 143811 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146512 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146722 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146728 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146832 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146905 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 94
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 94
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (399,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (3714,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (5061,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (5371,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (6228,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (6710,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12057,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (14253,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (15568,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (17593,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18101,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18505,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (18808,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (25518,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (27660,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (29892,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (33574,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (34480,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35224,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38265,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38575,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (39046,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (45303,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (45354,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (46316,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (46734,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (47381,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,95)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (52991,95)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148545,18)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (54213,95)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (58192,95)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (67273,95)
@@ -4789,472 +9775,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150199,95)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150200,95)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150204,95)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,95)
-DELETE FROM card_tag_link WHERE card_id = 26831 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 27216 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 27744 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 53715 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 95076 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 126473 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 139321 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 140258 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146421 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146498 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146602 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146813 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146998 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147002 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147022 AND tag_id = 95
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 95
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (40144,97)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148721,97)
-DELETE FROM card_tag_link WHERE card_id = 23183 AND tag_id = 97
-DELETE FROM card_tag_link WHERE card_id = 29082 AND tag_id = 97
-DELETE FROM card_tag_link WHERE card_id = 69030 AND tag_id = 97
-DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 97
-DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 97
-DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 97
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148722,98)
-DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 98
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148064,100)
-DELETE FROM card_tag_link WHERE card_id = 116749 AND tag_id = 100
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149892,101)
-DELETE FROM card_tag_link WHERE card_id = 50077 AND tag_id = 101
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (77280,104)
-DELETE FROM card_tag_link WHERE card_id = 19872 AND tag_id = 104
-DELETE FROM card_tag_link WHERE card_id = 116148 AND tag_id = 104
-DELETE FROM card_tag_link WHERE card_id = 124234 AND tag_id = 104
-DELETE FROM card_tag_link WHERE card_id = 145304 AND tag_id = 104
-DELETE FROM card_tag_link WHERE card_id = 145607 AND tag_id = 104
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (90997,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147060,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147086,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147090,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148038,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148075,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148090,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148091,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148188,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148218,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148289,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148330,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148662,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148697,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148714,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148723,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148852,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148854,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148918,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148936,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148937,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149205,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149206,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149225,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149311,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149528,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149694,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149703,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149944,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149953,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149955,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149956,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149990,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150188,105)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150189,105)
-DELETE FROM card_tag_link WHERE card_id = 2572 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 17628 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 34837 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 66708 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 68193 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 82746 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 83477 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 109226 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 119902 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146154 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146171 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146189 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146224 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146292 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146361 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146557 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146916 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146957 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146965 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 105
-DELETE FROM card_tag_link WHERE card_id = 130330 AND tag_id = 108
-DELETE FROM card_tag_link WHERE card_id = 39643 AND tag_id = 109
-DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 109
-DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 109
-DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 109
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149863,110)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11099,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (105062,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147098,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148805,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148825,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149182,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150003,111)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150017,111)
-DELETE FROM card_tag_link WHERE card_id = 137052 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 111
-DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 111
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (52748,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (62271,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147114,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147972,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148241,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148459,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149143,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149223,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149224,113)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149637,113)
-DELETE FROM card_tag_link WHERE card_id = 29385 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 44666 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 58225 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 60151 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 76728 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 132300 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146142 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146145 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146700 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 146981 AND tag_id = 113
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 113
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149114,114)
-DELETE FROM card_tag_link WHERE card_id = 1216 AND tag_id = 114
-DELETE FROM card_tag_link WHERE card_id = 124697 AND tag_id = 114
-DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 114
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (32502,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (59970,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147120,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147132,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147970,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148047,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148051,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148180,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148184,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148186,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148187,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148268,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148427,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148654,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148696,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148850,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148940,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149038,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149195,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149214,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149389,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149644,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149663,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149664,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149773,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149857,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149864,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149940,115)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150181,115)
-DELETE FROM card_tag_link WHERE card_id = 40538 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 50306 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 134616 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 137255 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146188 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146359 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146661 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 115
-DELETE FROM card_tag_link WHERE card_id = 13262 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 16007 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 66303 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 68236 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 97828 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 105301 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 119166 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 129870 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 140516 AND tag_id = 116
-DELETE FROM card_tag_link WHERE card_id = 141116 AND tag_id = 116
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147091,117)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148331,117)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149126,117)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149208,117)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149371,117)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149997,117)
-DELETE FROM card_tag_link WHERE card_id = 141482 AND tag_id = 117
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148620,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148658,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149112,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149308,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149369,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149592,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149615,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149949,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150007,120)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150198,120)
-DELETE FROM card_tag_link WHERE card_id = 21019 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146159 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 120
-DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 120
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (24662,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (98733,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (124619,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (125435,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146310,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147051,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147572,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147739,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147923,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147978,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147985,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148039,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148084,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148171,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148172,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148194,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148290,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148333,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148338,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148360,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148367,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148391,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148423,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148624,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148663,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148664,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148665,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148807,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148808,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148823,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148933,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149441,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149527,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149529,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149596,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149679,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149953,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149978,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150186,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150187,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150200,121)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150201,121)
-DELETE FROM card_tag_link WHERE card_id = 4623 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 23211 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 24618 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 24779 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 29046 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 35224 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 76509 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 79390 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 89157 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 90660 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 97209 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 114111 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 138520 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146169 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146195 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146218 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146235 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146248 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146654 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146800 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146824 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 121
-DELETE FROM card_tag_link WHERE card_id = 147017 AND tag_id = 121
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (22231,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146148,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147634,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148099,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148307,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148497,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148541,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148781,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149116,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149340,123)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149915,123)
-DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 123
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146753,126)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148433,126)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148812,126)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149076,126)
-DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 126
-DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 126
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 126
-DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 126
-DELETE FROM card_tag_link WHERE card_id = 109380 AND tag_id = 126
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 126
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (20322,128)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146404,128)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148919,128)
-DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 128
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (4392,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (21257,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (21851,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (27054,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (68947,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (72839,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (75888,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (103380,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (128025,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146162,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146523,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146570,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147337,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147491,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147952,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148221,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148298,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148349,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148350,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148488,129)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148507,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148590,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148596,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148750,129)
@@ -5280,12 +9800,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149841,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149845,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149905,129)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149917,129)
-DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 129
-DELETE FROM card_tag_link WHERE card_id = 54628 AND tag_id = 129
-DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 129
-DELETE FROM card_tag_link WHERE card_id = 93893 AND tag_id = 129
-DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 129
-DELETE FROM card_tag_link WHERE card_id = 143191 AND tag_id = 129
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148089,130)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148296,130)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (31687,132)
@@ -5340,94 +9854,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149902,132)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149921,132)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150005,132)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150193,132)
-DELETE FROM card_tag_link WHERE card_id = 1096 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 1484 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 1885 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 2093 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 5607 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 8285 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 14585 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 19241 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 20660 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 25830 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 29131 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 30461 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 31180 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 33598 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 33605 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 35959 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 38447 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 41987 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 43030 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 49168 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 52937 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 55250 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 55710 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 56397 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 59317 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 62704 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 63266 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 63914 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 67448 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 67580 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 69498 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 73457 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 80436 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 86783 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 88635 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 93229 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 97922 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 103297 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 107743 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 107771 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 110091 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 111738 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 112092 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 114133 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 115391 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 117150 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 123549 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 124607 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 125978 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 127727 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 134803 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 134957 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 139318 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 145462 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146404 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146464 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146537 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146595 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146768 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146821 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 132
-DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 132
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147780,133)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147781,133)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147782,133)
@@ -5522,104 +9948,7 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147870,133)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147871,133)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147872,133)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147873,133)
-DELETE FROM card_tag_link WHERE card_id = 278 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 443 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 444 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 653 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 764 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 894 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 935 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 1241 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 1335 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 1351 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 1870 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2104 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2399 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2488 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2580 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2594 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2652 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 2739 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 3312 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 3316 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 3510 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 3544 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 3566 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4093 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4208 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4266 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4290 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4331 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4336 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4342 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4356 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4380 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4402 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4451 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 4903 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5109 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5156 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5194 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5321 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5329 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5424 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 5593 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6116 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6209 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6226 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6228 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6303 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6310 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 6336 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7004 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7663 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7695 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7701 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 7903 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8093 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8225 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8258 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8277 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8282 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8295 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8364 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8410 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8465 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8548 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 9335 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 9450 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 9528 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 9561 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 9936 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10126 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10175 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10199 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10252 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10361 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10486 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10488 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10521 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10641 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10683 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10722 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10782 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 10890 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11104 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11218 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11366 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11401 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11416 AND tag_id = 133
-DELETE FROM card_tag_link WHERE card_id = 11544 AND tag_id = 133
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149876,134)
-DELETE FROM card_tag_link WHERE card_id = 5402 AND tag_id = 134
-DELETE FROM card_tag_link WHERE card_id = 134649 AND tag_id = 134
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 134
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (93403,135)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147725,135)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147880,135)
@@ -5666,97 +9995,22 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149977,135)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149995,135)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150007,135)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150018,135)
-DELETE FROM card_tag_link WHERE card_id = 1187 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 4112 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 11308 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 21409 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 23984 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 24149 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 39954 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 45475 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 45801 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 52371 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 53472 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 54110 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 73304 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 74011 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 75085 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 80474 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 93095 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 106321 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 124056 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 124503 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 125697 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 130805 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 133347 AND tag_id = 135
-DELETE FROM card_tag_link WHERE card_id = 143354 AND tag_id = 135
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150038,141)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (17261,136)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148519,136)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149051,136)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149946,136)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150009,136)
-DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 136
-DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 136
-DELETE FROM card_tag_link WHERE card_id = 54211 AND tag_id = 137
-DELETE FROM card_tag_link WHERE card_id = 107064 AND tag_id = 137
-DELETE FROM card_tag_link WHERE card_id = 146671 AND tag_id = 137
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147063,138)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147074,138)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147077,138)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147109,138)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147113,138)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147673,138)
-DELETE FROM card_tag_link WHERE card_id = 144878 AND tag_id = 138
-DELETE FROM card_tag_link WHERE card_id = 47202 AND tag_id = 139
-DELETE FROM card_tag_link WHERE card_id = 130418 AND tag_id = 139
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 139
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 139
-DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 139
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 139
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147064,140)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148370,140)
-DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 7502 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 13880 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 15396 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 20167 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 20171 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 23025 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 24477 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 34792 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 42892 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 46327 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 61527 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 70824 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76450 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76495 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76508 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76596 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 76623 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 85831 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 85841 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 85859 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 85905 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 112564 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 128380 AND tag_id = 140
-DELETE FROM card_tag_link WHERE card_id = 136210 AND tag_id = 140
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150038,141)
-DELETE FROM card_tag_link WHERE card_id = 30073 AND tag_id = 141
-DELETE FROM card_tag_link WHERE card_id = 87164 AND tag_id = 141
-DELETE FROM card_tag_link WHERE card_id = 94468 AND tag_id = 141
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (43232,142)
-DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 142
-DELETE FROM card_tag_link WHERE card_id = 145629 AND tag_id = 142
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (111921,144)
-DELETE FROM card_tag_link WHERE card_id = 145867 AND tag_id = 144
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (52582,147)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (53409,147)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146563,147)
@@ -5913,119 +10167,16 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149979,147)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149997,147)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150003,147)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150008,147)
-DELETE FROM card_tag_link WHERE card_id = 1742 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 3518 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 5158 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 14857 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 17051 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 20350 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 24483 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 28111 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 29335 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 34777 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 38336 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 41990 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 42449 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 44177 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 45324 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 49699 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 57849 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 58975 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 61951 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 69385 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 70193 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 79538 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 84758 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 86337 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 86851 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 87228 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 87619 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 87804 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 90997 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 94661 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 95187 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 98824 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 100218 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 105171 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 106092 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 112150 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 115864 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 119425 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 120372 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 122287 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 128995 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 132484 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 136579 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 137052 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 140484 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 142484 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146135 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146387 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146566 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146583 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146707 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146716 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146792 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146793 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146919 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 147
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 147
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (21851,148)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (72839,148)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (75888,148)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146148,148)
-DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 148
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148343,151)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148545,151)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148849,151)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149397,151)
-DELETE FROM card_tag_link WHERE card_id = 24483 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 60279 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 66875 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 108750 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 108928 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 151
-DELETE FROM card_tag_link WHERE card_id = 112897 AND tag_id = 152
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148901,153)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149992,153)
-DELETE FROM card_tag_link WHERE card_id = 53193 AND tag_id = 153
-DELETE FROM card_tag_link WHERE card_id = 88970 AND tag_id = 153
-DELETE FROM card_tag_link WHERE card_id = 124453 AND tag_id = 153
-DELETE FROM card_tag_link WHERE card_id = 135975 AND tag_id = 153
-DELETE FROM card_tag_link WHERE card_id = 143473 AND tag_id = 153
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147987,154)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148417,154)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148518,154)
@@ -6037,16 +10188,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149482,154)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149559,154)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149928,154)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150195,154)
-DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 17053 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 35224 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 55219 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 87075 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 154
-DELETE FROM card_tag_link WHERE card_id = 146935 AND tag_id = 154
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146737,156)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147986,156)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148328,156)
@@ -6060,28 +10201,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148907,156)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149428,156)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149578,156)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149837,156)
-DELETE FROM card_tag_link WHERE card_id = 1299 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 14299 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 27504 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 55179 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 65080 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 65243 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 69845 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 71636 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 72755 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 101629 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 104170 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 105775 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 109080 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 111662 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 134927 AND tag_id = 156
-DELETE FROM card_tag_link WHERE card_id = 140530 AND tag_id = 156
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146420,157)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146543,157)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147981,157)
@@ -6109,344 +10228,11 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149749,157)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149771,157)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149777,157)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149786,157)
-DELETE FROM card_tag_link WHERE card_id = 2395 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 5420 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 5639 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 6305 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 7839 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 19644 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 24122 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 26481 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 27279 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 27653 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 27660 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 33477 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 44490 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 52361 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 55771 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 58235 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 59910 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 64330 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 69598 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 76591 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 84407 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 91840 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 103142 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 104170 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 105945 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 107743 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 111658 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 121209 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 124869 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 132761 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 134803 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 140566 AND tag_id = 157
-DELETE FROM card_tag_link WHERE card_id = 140571 AND tag_id = 157
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (4342,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (129659,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (136216,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146271,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147122,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147360,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147745,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147914,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148122,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148310,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148773,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149165,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149176,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149263,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149297,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149427,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149570,158)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149861,158)
-DELETE FROM card_tag_link WHERE card_id = 2535 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 12064 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 14036 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 27112 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 29099 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 32374 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 32736 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 33386 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 34029 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 37660 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 38949 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 48616 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 52265 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 59236 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 67076 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 67146 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 72771 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 78608 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 79716 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 80188 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 81293 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 88927 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 89009 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 92053 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 94773 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 101603 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 104973 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 109065 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 109723 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 112253 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 114081 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 115316 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 118173 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 118182 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 120842 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 126115 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 127056 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 128748 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 129120 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 130540 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 131874 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 132484 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 137167 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 138768 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 144124 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 158
-DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 158
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,159)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,159)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (77772,159)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (98975,159)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (127299,159)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146888,159)
-DELETE FROM card_tag_link WHERE card_id = 145427 AND tag_id = 159
-DELETE FROM card_tag_link WHERE card_id = 145451 AND tag_id = 159
-DELETE FROM card_tag_link WHERE card_id = 145461 AND tag_id = 159
-DELETE FROM card_tag_link WHERE card_id = 145611 AND tag_id = 159
-DELETE FROM card_tag_link WHERE card_id = 145640 AND tag_id = 159
-DELETE FROM card_tag_link WHERE card_id = 145859 AND tag_id = 159
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (77034,161)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147985,161)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148812,161)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149477,161)
-DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 161
-DELETE FROM card_tag_link WHERE card_id = 146227 AND tag_id = 161
-DELETE FROM card_tag_link WHERE card_id = 93748 AND tag_id = 162
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150039,165)
-DELETE FROM card_tag_link WHERE card_id = 145304 AND tag_id = 165
-DELETE FROM card_tag_link WHERE card_id = 145823 AND tag_id = 165
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (32908,167)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (54183,167)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (142991,167)
-DELETE FROM card_tag_link WHERE card_id = 145693 AND tag_id = 167
-DELETE FROM card_tag_link WHERE card_id = 145871 AND tag_id = 167
-DELETE FROM card_tag_link WHERE card_id = 145905 AND tag_id = 167
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (120504,168)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147100,168)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149711,168)
-DELETE FROM card_tag_link WHERE card_id = 36118 AND tag_id = 168
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148445,169)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149129,169)
-DELETE FROM card_tag_link WHERE card_id = 74371 AND tag_id = 169
-DELETE FROM card_tag_link WHERE card_id = 97068 AND tag_id = 169
-DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 169
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (1096,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (7648,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (11231,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (23653,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (35776,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (38348,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (89826,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (127551,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146276,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147100,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147133,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147341,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147365,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147739,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147923,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148862,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148891,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149258,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149497,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149513,170)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149823,170)
-DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 170
-DELETE FROM card_tag_link WHERE card_id = 23508 AND tag_id = 170
-DELETE FROM card_tag_link WHERE card_id = 38600 AND tag_id = 170
-DELETE FROM card_tag_link WHERE card_id = 83593 AND tag_id = 170
-DELETE FROM card_tag_link WHERE card_id = 110091 AND tag_id = 170
-DELETE FROM card_tag_link WHERE card_id = 146369 AND tag_id = 170
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149555,172)
-DELETE FROM card_tag_link WHERE card_id = 146310 AND tag_id = 172
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 172
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146179,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146427,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146766,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146815,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (147069,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148045,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148140,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148141,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148247,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148260,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148303,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148308,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148318,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148327,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148329,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148373,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148437,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148476,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148550,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148562,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148563,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148651,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148684,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148880,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148897,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148957,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148971,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149007,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149174,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149271,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149298,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149307,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149317,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149319,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149321,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149397,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149434,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149437,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149611,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149637,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149638,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149640,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149707,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149708,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149715,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149738,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149775,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149804,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149855,173)
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,173)
-DELETE FROM card_tag_link WHERE card_id = 435 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 3026 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 3028 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 5371 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 5420 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 6467 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 7502 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 9038 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 11623 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 13776 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 14299 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 14888 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 15954 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 23025 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 26559 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 27521 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 27592 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 29385 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 30152 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 33330 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 34143 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 36259 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 37042 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 40113 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 43369 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 45762 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 46705 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 48073 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 50778 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 50794 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 51077 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 51114 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 52313 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 52608 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 55923 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 56930 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 57443 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 57859 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 58192 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 59209 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 60783 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 62720 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 63228 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 67273 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 67479 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 69326 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 72972 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 73892 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 74158 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 76495 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 76606 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 76706 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 83447 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 85965 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 85977 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 96435 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 96729 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 97209 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 103079 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 103241 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 103617 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 104014 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 105942 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 106516 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 106998 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 111682 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 114196 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 117150 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 118202 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 119822 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 120455 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 121665 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 121818 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 123407 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 127194 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 127550 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 130300 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 130968 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 137989 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 137996 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 138952 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 141380 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 141814 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 144233 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 146352 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 146568 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 146753 AND tag_id = 173
-DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 173
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150075,186)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149574,174)
-DELETE FROM card_tag_link WHERE card_id = 53503 AND tag_id = 174
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149914,177)
-DELETE FROM card_tag_link WHERE card_id = 46516 AND tag_id = 177
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (108975,180)
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 180
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148777,181)
-DELETE FROM card_tag_link WHERE card_id = 36621 AND tag_id = 181
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146397,182)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147040,182)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148002,182)
@@ -6454,45 +10240,10 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148322,182)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149293,182)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149562,182)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150206,182)
-DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 27659 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 48412 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 57309 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 75814 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 84066 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 105803 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 107514 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 129485 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 139067 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 144233 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146377 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146479 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146518 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146535 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146537 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146711 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 182
-DELETE FROM card_tag_link WHERE card_id = 6429 AND tag_id = 184
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150075,186)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150076,186)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150077,186)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150078,186)
-DELETE FROM card_tag_link WHERE card_id = 19831 AND tag_id = 186
-DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 186
-DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 186
-DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 186
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (4266,189)
-DELETE FROM card_tag_link WHERE card_id = 145827 AND tag_id = 189
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (83460,190)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (85757,190)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146150,190)
@@ -6543,37 +10294,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149596,190)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149703,190)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149953,190)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149956,190)
-DELETE FROM card_tag_link WHERE card_id = 10107 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 10260 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 17622 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 21276 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 31940 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 35038 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 55182 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 60224 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 60447 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 66377 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 78563 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 79390 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 83477 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 91043 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 110098 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 114111 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 118568 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 124310 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 131259 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 136712 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 137255 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 140477 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 146474 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 146542 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 190
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 190
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (4698,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (4740,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (14029,195)
@@ -6637,6 +10357,118 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148248,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148267,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148269,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148271,195)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (12580,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (48378,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (77772,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (98975,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (127299,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146888,159)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (4342,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (129659,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (136216,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146271,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147122,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147360,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147745,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147914,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148122,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148310,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148773,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149165,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149176,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149263,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149297,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149427,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149570,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149861,158)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (77034,161)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147985,161)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148812,161)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149477,161)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150039,165)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (32908,167)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (54183,167)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (142991,167)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (120504,168)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147100,168)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149711,168)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148445,169)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149129,169)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (1096,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (7648,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (11231,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (23653,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (35776,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (38348,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (89826,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (127551,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146276,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146768,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147100,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147133,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147341,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147365,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147739,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147923,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148862,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148891,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149258,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149497,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149513,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149823,170)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149555,172)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146179,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146427,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146766,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146815,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (147069,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148045,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148140,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148141,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148247,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148260,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148303,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148308,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148318,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148327,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148329,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148373,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148437,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148476,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148550,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148562,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148563,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148651,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148684,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148799,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148880,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148897,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148957,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148971,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (148975,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149007,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149174,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149271,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149298,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149307,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149317,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149319,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149321,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149397,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149434,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149437,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149611,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149637,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149638,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149640,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149707,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149708,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149715,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149738,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149775,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149804,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149855,173)
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (149859,173)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148272,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148274,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148289,195)
@@ -6741,201 +10573,7 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149988,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150001,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150008,195)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150014,195)
-DELETE FROM card_tag_link WHERE card_id = 2113 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 5404 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 8764 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 14750 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 15321 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 16364 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 17432 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 17622 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 17879 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 20624 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 23508 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 26822 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 32057 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 33414 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 34797 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 36117 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 36253 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 37579 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 38865 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 39098 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 39344 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 41275 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 47435 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 50077 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 50799 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 54622 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 56034 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 56397 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 58295 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 59808 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 66008 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 66066 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 67481 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 67525 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 69370 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 69474 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 74360 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 75276 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 78018 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 79257 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 79767 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 80474 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 80951 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 81001 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 81023 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 81414 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 83593 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 85102 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 85588 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 88010 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 91043 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 96147 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 98976 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 99200 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 100177 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 101423 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 102838 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 104122 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 111927 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 112882 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 120309 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 120455 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 120919 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 121209 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 121889 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 128423 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 131314 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 132840 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 132949 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 136203 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 136920 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 140279 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 140463 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 142198 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 143552 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145662 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146130 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146197 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146250 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146282 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146303 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146334 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146347 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146350 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146355 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146434 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146482 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146490 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146500 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146529 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146574 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146626 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146701 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146798 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 195
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 195
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (146467,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146448,197)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146646,197)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146842,197)
@@ -6958,25 +10596,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149939,197)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149947,197)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149976,197)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149979,197)
-DELETE FROM card_tag_link WHERE card_id = 7534 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 7576 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 10341 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 11591 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 13211 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 30932 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 36352 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 46206 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 53405 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 74846 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 101943 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 103079 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 114890 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 115864 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 116671 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 125418 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 197
-DELETE FROM card_tag_link WHERE card_id = 143184 AND tag_id = 197
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (146467,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146714,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146735,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146889,198)
@@ -7042,197 +10661,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149840,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149911,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149923,198)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149981,198)
-DELETE FROM card_tag_link WHERE card_id = 278 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 364 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 1408 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 2532 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 2683 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 3544 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 5654 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 6857 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 7695 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 7990 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 8258 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 9936 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 9962 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 13368 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 14003 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 14917 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 16340 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 16607 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 17277 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 18144 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 21944 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 23097 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 23667 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 24133 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 24244 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 25868 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 26669 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 27854 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 29584 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 30013 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 31547 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 32124 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 34103 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 34571 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 36118 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 37164 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 37186 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 37296 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 38336 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 42681 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 42866 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 45162 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 45620 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 46281 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 48169 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 49960 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 50510 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 50633 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 51297 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 51768 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 53063 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 53112 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 53443 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 53488 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 55257 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 59512 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 61835 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 61865 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 63596 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 63754 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 65276 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 66927 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 68961 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 73457 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 73998 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 74319 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 74462 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 74769 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 77887 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 81090 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 81206 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 82345 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 83275 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 83776 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 87334 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 88469 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 88747 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 89918 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 89944 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 90976 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 94356 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 97327 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 97343 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 97690 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 98529 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 98772 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 102503 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 103281 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 105768 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 107392 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 107498 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 108772 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 109004 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 109845 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 109907 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 110073 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 111873 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 112114 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 113432 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 115288 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 116656 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 117875 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 117922 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 118312 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 118435 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 119063 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 120030 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 120348 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 121033 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 122293 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 123232 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 124591 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 125227 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 125650 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 127962 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 130166 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 130398 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 132791 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 133114 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 133522 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 134649 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 134927 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 135418 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 135592 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 136694 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 136834 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 138274 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 139873 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 140463 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 143334 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146305 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146450 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146605 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146837 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 198
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 198
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (272,199)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (10703,199)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (16459,199)
@@ -7338,119 +10766,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149798,199)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149841,199)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149845,199)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149869,199)
-DELETE FROM card_tag_link WHERE card_id = 2831 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 3067 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 3566 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 4266 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 5422 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 7766 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 7811 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 8225 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 8807 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 11766 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 23576 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 24244 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 24555 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 24735 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 25699 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 26043 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 27746 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 28141 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 30152 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 30380 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 30999 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 31957 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 33084 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 33414 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 33437 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 34368 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 34797 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 36948 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 39508 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 40144 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 41224 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 44249 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 46065 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 46407 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 47830 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 49067 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 49179 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 50668 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 52352 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 53758 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 53960 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 54213 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 58235 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 64391 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 66875 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 68615 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 69237 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 69509 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 69789 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 70828 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 71858 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 71897 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 74031 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 76499 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 78298 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 78609 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 81509 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 84002 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 88747 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 90392 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 93893 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 97297 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 101133 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 102253 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 103272 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 103617 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 106768 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 108772 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 109080 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 109604 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 110744 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 111586 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 113788 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 114360 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 117110 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 117875 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 118584 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 120190 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 121510 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 124223 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 124591 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 125650 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 127757 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 133114 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 135469 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 138054 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 139067 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 141094 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 143334 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 199
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 199
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146719,208)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150137,208)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150138,208)
@@ -7496,51 +10811,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150177,208)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150178,208)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150179,208)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150180,208)
-DELETE FROM card_tag_link WHERE card_id = 1608 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 1615 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 5390 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 5412 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 14885 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 14906 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 17261 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 21106 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 21724 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 22513 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 24106 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 24143 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 26735 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 29298 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 36108 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 36121 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 38121 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 45733 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 45745 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 45766 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 45775 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 53172 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 54777 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 54931 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 54944 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 55168 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 61968 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 64349 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 64378 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 66747 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 69348 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 72800 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 78813 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 82668 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 93060 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 106970 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 106977 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 112575 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 112584 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 113179 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 122358 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 122367 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 128006 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 141645 AND tag_id = 208
-DELETE FROM card_tag_link WHERE card_id = 143642 AND tag_id = 208
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150079,210)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150080,210)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150081,210)
@@ -7551,30 +10821,14 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150085,210)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150086,210)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150087,210)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150088,210)
-DELETE FROM card_tag_link WHERE card_id = 7475 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 17331 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 36108 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 62922 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 78505 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 92357 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 95289 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 106983 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 109529 AND tag_id = 210
-DELETE FROM card_tag_link WHERE card_id = 133218 AND tag_id = 210
+INSERT INTO card_tag_link (card_id, tag_id) VALUES (150105,214)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150089,211)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150090,211)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150091,211)
-DELETE FROM card_tag_link WHERE card_id = 40106 AND tag_id = 211
-DELETE FROM card_tag_link WHERE card_id = 43118 AND tag_id = 211
-DELETE FROM card_tag_link WHERE card_id = 81211 AND tag_id = 211
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150092,212)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150093,212)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150094,212)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150095,212)
-DELETE FROM card_tag_link WHERE card_id = 61757 AND tag_id = 212
-DELETE FROM card_tag_link WHERE card_id = 62135 AND tag_id = 212
-DELETE FROM card_tag_link WHERE card_id = 65044 AND tag_id = 212
-DELETE FROM card_tag_link WHERE card_id = 102994 AND tag_id = 212
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150096,213)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150097,213)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150098,213)
@@ -7584,33 +10838,14 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150101,213)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150102,213)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150103,213)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150104,213)
-DELETE FROM card_tag_link WHERE card_id = 14091 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 43556 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 46573 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 58319 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 60797 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 67956 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 84555 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 104048 AND tag_id = 213
-DELETE FROM card_tag_link WHERE card_id = 114007 AND tag_id = 213
-INSERT INTO card_tag_link (card_id, tag_id) VALUES (150105,214)
-DELETE FROM card_tag_link WHERE card_id = 131843 AND tag_id = 214
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150106,215)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150107,215)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150108,215)
-DELETE FROM card_tag_link WHERE card_id = 68084 AND tag_id = 215
-DELETE FROM card_tag_link WHERE card_id = 70984 AND tag_id = 215
-DELETE FROM card_tag_link WHERE card_id = 109018 AND tag_id = 215
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150109,216)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150110,216)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150111,216)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150112,216)
-DELETE FROM card_tag_link WHERE card_id = 15538 AND tag_id = 216
-DELETE FROM card_tag_link WHERE card_id = 119526 AND tag_id = 216
-DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 216
-DELETE FROM card_tag_link WHERE card_id = 122774 AND tag_id = 216
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150113,217)
-DELETE FROM card_tag_link WHERE card_id = 52937 AND tag_id = 217
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150114,218)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150115,218)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150116,218)
@@ -7625,37 +10860,15 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150124,218)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150125,218)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150126,218)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150127,218)
-DELETE FROM card_tag_link WHERE card_id = 11517 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 13151 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 13958 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 20984 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 23349 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 37681 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 57498 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 67303 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 111482 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 112745 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 123523 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 128265 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 141688 AND tag_id = 218
-DELETE FROM card_tag_link WHERE card_id = 144951 AND tag_id = 218
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150128,219)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150129,219)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150130,219)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150131,219)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150132,219)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150133,219)
-DELETE FROM card_tag_link WHERE card_id = 37113 AND tag_id = 219
-DELETE FROM card_tag_link WHERE card_id = 37464 AND tag_id = 219
-DELETE FROM card_tag_link WHERE card_id = 40437 AND tag_id = 219
-DELETE FROM card_tag_link WHERE card_id = 61985 AND tag_id = 219
-DELETE FROM card_tag_link WHERE card_id = 78585 AND tag_id = 219
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150134,220)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150135,220)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150136,220)
-DELETE FROM card_tag_link WHERE card_id = 14177 AND tag_id = 220
-DELETE FROM card_tag_link WHERE card_id = 17069 AND tag_id = 220
-DELETE FROM card_tag_link WHERE card_id = 55377 AND tag_id = 220
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (26513,616)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (45758,616)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (100297,616)
@@ -7778,41 +10991,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149987,616)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149991,616)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149994,616)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150004,616)
-DELETE FROM card_tag_link WHERE card_id = 131299 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 132410 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 134701 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 134790 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 134850 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 134866 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 135149 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 139146 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 139918 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 140182 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 140526 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 141302 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 141528 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 142471 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 143390 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 143580 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 145257 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146162 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146429 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146439 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146725 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146826 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 616
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 616
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (53216,617)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (93941,617)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (14705,617)
@@ -7935,128 +11113,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (29847,617)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (77280,617)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (127053,617)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146804,617)
-DELETE FROM card_tag_link WHERE card_id = 65992 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 66068 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 66762 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 67440 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 67564 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 67943 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 68190 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 69494 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 69812 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 69845 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 70782 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 71985 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 72124 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 72193 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 72197 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 72908 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 72960 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 73410 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 73651 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 74418 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 74576 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 74640 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 75205 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 78018 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 78099 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 79257 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 79550 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 79767 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 79772 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 81981 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 82256 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 82519 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 82860 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 83306 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 83959 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 84382 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 84695 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 84742 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 84817 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 84992 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 85492 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 85673 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 85969 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 86259 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 87137 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 87338 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 88119 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 88469 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 88784 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 89605 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 91561 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 92386 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 93199 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 94976 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 95029 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 95082 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 95313 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 97068 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 97710 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 99200 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 99249 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 100022 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 100509 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 101342 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 102545 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 103055 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 104081 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 104409 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 104657 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 104799 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 104988 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 105803 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 106619 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 106763 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 106788 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 106998 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 109304 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 109950 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 110678 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 111890 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 111916 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 111927 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 112576 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 112642 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 114284 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 115607 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 116347 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 116933 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 118443 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 119166 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 120309 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 120842 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 121817 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 123006 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 123245 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 124193 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 125373 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 125422 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 125665 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 126176 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 126292 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 128108 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 128537 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 129485 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 129753 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 129911 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 130898 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 131396 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 131418 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 131500 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 131582 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 131602 AND tag_id = 617
-DELETE FROM card_tag_link WHERE card_id = 132525 AND tag_id = 617
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148811,618)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148815,618)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148824,618)
@@ -8244,437 +11300,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150206,618)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150207,618)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,618)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150209,618)
-DELETE FROM card_tag_link WHERE card_id = 132949 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 133659 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 133751 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 133842 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 133936 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 134620 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 134659 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 135055 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 135622 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 135680 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 136342 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 136357 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 136402 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 137284 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 137593 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 138033 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 138138 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 140477 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 142198 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 142310 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 142914 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 143812 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 143914 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 144078 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145096 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145406 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145412 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145423 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145427 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145449 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145451 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145458 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145461 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145497 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145531 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145556 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145604 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145605 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145607 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145611 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145612 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145619 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145621 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145629 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145640 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145659 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145677 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145686 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145693 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145703 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145711 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145737 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145746 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145752 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145767 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145787 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145790 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145816 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145818 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145821 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145823 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145824 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145827 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145835 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145855 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145859 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145867 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145871 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145882 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145902 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145905 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146128 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146132 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146137 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146141 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146148 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146149 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146153 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146155 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146160 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146163 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146167 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146173 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146176 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146179 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146180 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146187 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146190 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146205 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146214 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146216 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146220 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146221 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146222 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146223 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146229 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146231 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146233 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146237 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146247 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146249 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146251 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146253 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146254 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146258 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146260 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146262 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146263 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146269 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146273 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146275 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146278 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146280 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146283 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146284 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146287 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146302 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146309 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146311 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146312 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146313 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146314 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146315 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146319 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146321 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146323 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146326 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146333 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146340 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146349 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146360 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146366 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146368 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146371 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146379 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146380 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146381 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146382 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146383 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146384 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146385 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146386 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146388 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146402 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146403 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146406 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146410 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146414 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146416 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146418 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146419 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146422 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146425 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146428 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146431 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146438 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146444 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146447 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146459 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146465 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146472 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146476 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146480 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146483 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146489 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146494 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146496 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146497 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146501 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146505 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146507 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146510 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146513 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146516 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146520 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146524 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146533 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146538 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146539 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146541 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146547 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146549 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146554 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146555 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146561 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146562 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146572 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146575 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146576 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146577 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146578 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146580 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146581 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146582 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146584 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146587 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146589 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146594 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146601 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146610 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146613 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146618 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146636 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146637 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146641 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146643 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146645 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146650 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146662 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146667 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146669 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146675 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146676 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146684 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146685 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146686 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146689 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146692 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146693 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146705 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146709 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146711 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146717 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146718 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146721 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146723 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146727 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146730 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146740 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146750 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146751 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146755 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146759 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146766 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146773 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146776 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146783 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146784 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146787 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146788 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146794 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146797 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146802 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146814 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146815 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146816 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146822 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146823 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146825 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146828 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146834 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146836 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146838 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146841 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146843 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146844 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146846 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146847 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146853 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146861 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146862 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146863 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146864 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146874 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146878 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146882 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146887 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146889 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146901 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146903 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146904 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146907 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146910 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146914 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146917 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146922 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146925 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146926 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146927 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146928 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146930 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146936 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146937 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146939 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146941 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146942 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146943 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146945 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146947 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146951 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146955 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146960 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146966 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146967 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146968 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146969 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146970 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146975 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146992 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147000 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147012 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147021 AND tag_id = 618
-DELETE FROM card_tag_link WHERE card_id = 147024 AND tag_id = 618
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (21257,619)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (24165,619)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (31972,619)
@@ -8724,7 +11349,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147922,619)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148569,619)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149193,619)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149341,619)
-DELETE FROM card_tag_link WHERE card_id = 139740 AND tag_id = 619
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148106,620)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148107,620)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148108,620)
@@ -8816,190 +11440,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148220,620)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148221,620)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148222,620)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148223,620)
-DELETE FROM card_tag_link WHERE card_id = 11644 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 11684 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 11761 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12044 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12088 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12091 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12135 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12163 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12371 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12506 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 12761 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13028 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13040 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13134 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13148 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13368 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13382 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13387 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13429 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13568 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13588 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13668 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13736 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13788 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 13906 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14513 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14571 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14580 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14706 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14819 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14824 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14930 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14940 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 14960 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15037 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15161 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15189 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15428 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15813 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15897 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15951 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15960 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 15979 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 16315 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 16408 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 16654 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17206 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17339 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17417 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17857 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17871 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 17982 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18344 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18518 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18562 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18776 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18984 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 18999 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19052 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19083 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19353 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19504 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19529 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19644 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19834 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19843 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 19881 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20164 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20430 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20507 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20628 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20630 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20699 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 20760 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21498 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21556 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21565 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21581 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21609 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21692 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21737 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21743 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21805 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 21919 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22175 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22330 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22402 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22412 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22636 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22795 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 22967 AND tag_id = 620
-DELETE FROM card_tag_link WHERE card_id = 23072 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23097 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23148 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23158 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23160 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23183 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23520 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23576 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23649 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23694 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23765 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23781 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 23961 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24009 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24019 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24133 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24190 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24216 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24314 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24406 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24555 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24799 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 24837 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25014 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25633 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25664 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25699 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25729 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25744 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25830 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25868 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 25981 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 26180 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 26291 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 26371 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 26465 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 26686 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27144 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27171 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27443 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27501 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27590 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27592 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27807 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27814 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27854 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 27916 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 28001 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 28112 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 29135 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 29398 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 29703 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30225 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30287 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30375 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30411 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30599 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30842 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 30990 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31045 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31048 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31322 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31547 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31748 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31797 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31799 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31954 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 31982 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32124 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32188 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32221 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32257 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32314 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32317 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32327 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32644 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32702 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32726 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32819 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32974 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 32993 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33084 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33256 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33437 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33450 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33576 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 33688 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34022 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34194 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34290 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34341 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34395 AND tag_id = 621
-DELETE FROM card_tag_link WHERE card_id = 34539 AND tag_id = 621
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147025,622)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147026,622)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147027,622)
@@ -9101,107 +11541,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (145523,622)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146735,622)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (145573,622)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (146405,622)
-DELETE FROM card_tag_link WHERE card_id = 34678 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 34749 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 34810 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 34992 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 35004 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 35144 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 35730 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 35786 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 35840 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36100 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36137 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36141 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36152 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36231 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36253 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36622 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36661 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36738 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36786 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36865 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 36876 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37059 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37237 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37296 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37402 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37419 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37443 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37496 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37512 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37649 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37672 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37705 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 37934 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38022 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38147 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38316 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38466 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38541 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 38699 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39057 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39095 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39378 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39467 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39494 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39508 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 39893 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40134 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40144 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40208 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40535 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40912 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 40930 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41097 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41281 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41290 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41601 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41757 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41868 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 41888 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42106 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42231 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42359 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42723 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42779 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42854 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42892 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 42939 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43142 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43181 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43315 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43324 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43345 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43346 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43370 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43421 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43510 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43544 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43798 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 43918 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44208 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44249 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44490 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44713 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44778 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44931 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44966 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 44985 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45162 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45192 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45204 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45303 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45414 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45420 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45620 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45624 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45652 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45663 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45801 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 45864 AND tag_id = 622
-DELETE FROM card_tag_link WHERE card_id = 46022 AND tag_id = 622
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147180,623)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147181,623)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147182,623)
@@ -9302,106 +11641,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147281,623)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147282,623)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147283,623)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147284,623)
-DELETE FROM card_tag_link WHERE card_id = 46281 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 46323 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 46458 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 46589 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 46855 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 46970 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 47051 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 47053 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 47261 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 47670 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 47751 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 48014 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 48096 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 48446 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 48699 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49087 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49106 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49528 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49891 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49892 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49936 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 49960 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50121 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50269 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50302 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50510 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50522 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50575 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 50983 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51142 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51153 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51297 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51315 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51475 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51601 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51686 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51697 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51768 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51791 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51893 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51901 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 51939 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52124 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52265 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52313 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52361 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52372 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52417 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52496 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52577 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52605 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52698 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52909 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 52964 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53025 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53100 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53112 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53274 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53284 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53290 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53341 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53443 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53574 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53589 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53758 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 53791 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54092 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54284 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54321 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54334 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54473 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54535 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54813 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54839 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 54985 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55006 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55032 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55135 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55267 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55333 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55465 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55483 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55591 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55771 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55808 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 55829 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56286 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56404 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56556 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56625 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56667 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56706 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56716 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 56917 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57043 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57106 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57116 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57185 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57238 AND tag_id = 623
-DELETE FROM card_tag_link WHERE card_id = 57401 AND tag_id = 623
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147285,624)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147286,624)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147287,624)
@@ -9494,98 +11733,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147377,624)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147378,624)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147379,624)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147380,624)
-DELETE FROM card_tag_link WHERE card_id = 57839 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58249 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58308 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58606 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58609 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58702 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58839 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 58922 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59051 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59236 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59258 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59309 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59436 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59450 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59573 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59672 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59710 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 59738 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60103 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60177 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60208 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60278 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60325 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60348 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60652 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60725 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 60994 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 61169 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 61698 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 61881 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 62076 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 62636 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 62842 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 62885 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 62917 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63174 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63261 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63285 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63302 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63352 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63448 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63487 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63514 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63531 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63874 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 63996 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 64219 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 64426 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 64439 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 64769 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65007 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65020 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65021 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65080 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65138 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65276 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65413 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65588 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65654 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65668 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65875 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 65904 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66273 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66407 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66431 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66727 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66773 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66917 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 66968 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67050 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67207 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67248 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67440 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67594 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67709 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67728 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67769 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67793 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67902 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67934 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67962 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 67967 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 68030 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 68033 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 68115 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 68622 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 68856 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 69027 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 69030 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 69164 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 69177 AND tag_id = 624
-DELETE FROM card_tag_link WHERE card_id = 69237 AND tag_id = 624
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147381,625)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147382,625)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147383,625)
@@ -9684,104 +11831,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147475,625)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147476,625)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147477,625)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147478,625)
-DELETE FROM card_tag_link WHERE card_id = 69379 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 69499 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 69591 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 69747 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 69782 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70360 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70404 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70816 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70827 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70828 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 70851 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71009 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71221 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71279 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71319 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71325 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71858 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71872 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71897 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71972 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 71985 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72160 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72197 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72300 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72311 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72394 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72574 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72755 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72771 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 72830 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73140 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73168 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73280 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73339 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73352 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73356 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73404 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73410 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73623 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73740 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 73865 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74004 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74031 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74039 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74056 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74313 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74748 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 74781 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 75863 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76095 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76140 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76151 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76155 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76232 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76293 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76313 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76361 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76438 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76481 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76580 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76585 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76604 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76610 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76705 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76836 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 76875 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77046 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77074 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77119 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77320 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77388 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77483 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77553 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77568 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77875 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77887 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 77981 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 78241 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 78439 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 78547 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 78752 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 78925 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79177 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79403 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79406 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79502 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79504 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79512 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79559 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79606 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79795 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79811 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79838 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 79988 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 80211 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 80258 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 80369 AND tag_id = 625
-DELETE FROM card_tag_link WHERE card_id = 80466 AND tag_id = 625
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147479,626)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147480,626)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147481,626)
@@ -9893,117 +11942,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147590,626)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147591,626)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147592,626)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147593,626)
-DELETE FROM card_tag_link WHERE card_id = 81090 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81102 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81271 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81429 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81509 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81514 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81664 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81690 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81771 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81819 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81871 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 81918 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82073 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82256 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82290 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82387 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82442 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82454 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 82503 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83020 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83046 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83179 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83255 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83279 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83327 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83380 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83479 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83488 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83556 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83697 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83776 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 83904 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84002 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84105 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84492 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84518 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84669 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84783 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84872 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 84920 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85089 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85099 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85315 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85372 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85378 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85645 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85661 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85676 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85742 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85930 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 85951 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86326 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86662 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86681 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86760 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86803 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86820 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 86839 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87008 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87119 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87144 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87158 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87406 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87462 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87479 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87493 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87600 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87713 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87783 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 87985 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88010 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88145 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88291 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88398 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88533 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88678 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88761 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88784 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88927 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 88970 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89007 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89009 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89022 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89061 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89262 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89420 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89508 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89535 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89597 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89685 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 89944 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90222 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90261 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90392 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90426 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90445 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90663 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90714 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 90781 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91072 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91108 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91344 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91484 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91485 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 91703 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92066 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92068 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92154 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92204 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92365 AND tag_id = 626
-DELETE FROM card_tag_link WHERE card_id = 92386 AND tag_id = 626
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147594,627)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147595,627)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147596,627)
@@ -10091,93 +12029,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147678,627)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147679,627)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147680,627)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147681,627)
-DELETE FROM card_tag_link WHERE card_id = 92496 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 92577 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 92865 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 92933 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 92987 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93139 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93158 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93211 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93233 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93291 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93385 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93639 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93658 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93869 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 93957 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94133 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94152 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94267 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94413 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94773 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 94940 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95177 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95264 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95267 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95294 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95363 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95381 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 95574 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 96066 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 96775 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 96845 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97092 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97599 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97621 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97690 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97836 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 97847 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98044 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98426 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98475 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98529 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98610 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98700 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98773 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98824 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98885 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 98976 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99115 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99217 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99503 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99730 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99839 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99878 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 99913 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100353 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100476 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100479 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100573 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100731 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100805 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 100868 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101133 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101342 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101401 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101423 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101530 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101562 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 101790 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102155 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102373 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102503 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102539 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102579 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102619 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102621 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102646 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102670 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102706 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102721 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 102915 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103207 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103272 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103320 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103410 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103846 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103889 AND tag_id = 627
-DELETE FROM card_tag_link WHERE card_id = 103899 AND tag_id = 627
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147683,628)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147684,628)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147685,628)
@@ -10271,99 +12122,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (147776,628)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147777,628)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147778,628)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147779,628)
-DELETE FROM card_tag_link WHERE card_id = 104187 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 104882 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105291 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105654 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105807 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105828 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105844 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105919 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 105942 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106214 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106273 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106305 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106448 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106452 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 106975 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107101 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107231 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107320 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107366 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107498 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107501 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107508 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107528 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107646 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107694 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107732 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 107808 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 108129 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 108492 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 108825 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 108844 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 108927 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109014 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109065 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109118 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109128 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109201 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109460 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109476 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109493 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109604 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109683 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109723 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109904 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109907 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109917 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 109933 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110168 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110214 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110217 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110221 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110262 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110263 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110430 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110440 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110505 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110596 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110685 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110744 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110816 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 110858 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111141 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111193 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111317 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111547 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111586 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111719 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 111873 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112001 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112386 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112472 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112594 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112642 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112718 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 112958 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113264 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113333 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113432 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113541 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113559 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113700 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113788 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113905 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 113937 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114149 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114360 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114494 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114697 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114856 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 114878 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 115005 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 115234 AND tag_id = 628
-DELETE FROM card_tag_link WHERE card_id = 115397 AND tag_id = 628
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147874,629)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147875,629)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (147876,629)
@@ -10486,128 +12244,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148001,629)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148003,629)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148004,629)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148005,629)
-DELETE FROM card_tag_link WHERE card_id = 115657 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 115660 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 115705 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 115746 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116115 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116138 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116194 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116227 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116656 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116678 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116728 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 116987 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117017 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117038 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117059 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117200 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117205 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117277 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117322 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117393 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117450 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 117922 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118044 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118148 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118173 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118178 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118223 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118312 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118443 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118517 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118580 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118584 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118749 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 118844 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119053 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119063 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119124 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119329 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119405 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119544 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119626 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119629 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119762 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119858 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 119906 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120209 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120213 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120348 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120353 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120405 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120414 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120449 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120640 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120766 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120804 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120807 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 120949 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121033 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121125 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121136 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121190 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121279 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121613 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 121785 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122004 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122189 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122293 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122305 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122310 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122414 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122460 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122675 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 122859 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123103 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123164 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123232 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123371 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123432 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123513 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123632 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123663 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123703 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123706 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 123926 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124043 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124055 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124066 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124096 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124208 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124223 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124308 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124352 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124376 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124519 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124589 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124692 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124739 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124849 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 124869 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125023 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125193 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125227 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125324 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125350 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125476 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125591 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125654 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125876 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125885 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 125960 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126045 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126255 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126285 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126298 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126363 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126543 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126581 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126673 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126756 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126817 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 126820 AND tag_id = 629
-DELETE FROM card_tag_link WHERE card_id = 127194 AND tag_id = 629
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148006,630)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148008,630)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148009,630)
@@ -10693,91 +12329,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (148102,630)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148103,630)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148104,630)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148105,630)
-DELETE FROM card_tag_link WHERE card_id = 127309 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127373 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127430 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127464 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127720 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127727 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127808 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127833 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 127962 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 128065 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 128420 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 128758 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 128769 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 129041 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 129093 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 129369 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 129445 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 129523 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130126 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130166 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130259 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130301 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130473 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130598 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 130942 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131044 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131204 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131299 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131314 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131500 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131582 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131712 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131956 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 131995 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132410 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132415 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132543 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132619 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132657 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 132771 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 133347 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 133522 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 133623 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 133736 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 133788 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134021 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134103 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134120 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134134 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134143 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134701 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134790 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134793 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134876 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134946 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 134962 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135022 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135062 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135102 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135143 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135228 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135418 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135469 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135592 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135638 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135755 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135789 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135825 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 135958 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 136163 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 136520 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 136694 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 136834 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 136955 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 137131 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 137344 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 137978 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138054 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138086 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138183 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138320 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138600 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138685 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138691 AND tag_id = 630
-DELETE FROM card_tag_link WHERE card_id = 138736 AND tag_id = 630
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148225,631)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148226,631)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (148227,631)
@@ -12246,273 +13797,6 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (150205,631)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150207,631)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150208,631)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (150209,631)
-DELETE FROM card_tag_link WHERE card_id = 138920 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139142 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139146 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139183 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139334 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139484 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139604 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139740 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139847 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 139894 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140068 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140182 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140208 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140236 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140355 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140466 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140508 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140526 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140530 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140566 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140595 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140750 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 140848 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141032 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141094 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141099 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141378 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141380 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141488 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141524 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141614 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141667 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141709 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141776 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 141968 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142057 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142087 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142310 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142471 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142498 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142730 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 142931 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143299 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143424 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143552 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143580 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143719 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 143762 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144078 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144243 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144424 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144484 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144621 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144642 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144685 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144814 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144832 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144879 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 144989 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145029 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145179 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145202 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145398 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145428 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145483 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145625 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145628 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145630 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145662 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145683 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145707 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145716 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145723 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145741 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145819 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 145913 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146134 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146138 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146140 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146146 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146152 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146156 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146170 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146174 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146177 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146178 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146182 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146183 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146184 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146199 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146201 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146203 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146206 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146207 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146208 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146209 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146217 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146226 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146227 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146236 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146244 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146245 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146256 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146259 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146265 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146277 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146289 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146290 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146293 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146297 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146304 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146306 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146307 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146327 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146337 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146341 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146351 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146356 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146357 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146364 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146365 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146372 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146373 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146375 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146392 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146393 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146397 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146398 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146399 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146401 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146407 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146408 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146411 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146413 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146417 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146426 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146427 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146429 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146430 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146433 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146441 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146449 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146458 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146461 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146462 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146463 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146466 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146468 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146491 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146493 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146502 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146506 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146514 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146521 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146527 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146528 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146536 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146546 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146556 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146558 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146560 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146563 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146565 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146569 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146586 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146596 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146598 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146600 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146609 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146612 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146629 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146630 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146633 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146634 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146635 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146638 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146642 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146644 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146648 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146652 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146659 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146660 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146663 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146665 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146679 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146680 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146690 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146691 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146695 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146698 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146702 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146703 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146706 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146708 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146710 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146715 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146719 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146726 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146731 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146732 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146734 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146739 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146746 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146747 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146753 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146754 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146758 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146761 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146764 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146766 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146770 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146774 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146781 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146782 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146809 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146815 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146819 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146837 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146848 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146849 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146850 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146855 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146858 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146860 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146865 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146867 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146869 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146871 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146873 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146876 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146877 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146885 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146891 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146893 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146895 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146898 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146899 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146923 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146929 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146938 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146944 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146946 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146948 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146949 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146952 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146959 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146961 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146964 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146973 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146974 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146976 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146978 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146980 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146982 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146983 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146987 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146989 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146993 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146994 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 146999 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147001 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147004 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147008 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147010 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147013 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147014 AND tag_id = 631
-DELETE FROM card_tag_link WHERE card_id = 147018 AND tag_id = 631
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (3215,640)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (7097,640)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (8736,640)
@@ -12675,3 +13959,4 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149593,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (58249,644)
+INSERT INTO tags (tag_id, tag_name, description, editable, count) VALUES (643,"Pronouns","Pronouns",0,126)
