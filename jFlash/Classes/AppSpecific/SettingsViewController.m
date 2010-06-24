@@ -135,7 +135,11 @@ NSString * const APP_ALGORITHM = @"algorithm";
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"readingWasChanged" object:self];
   }
+  
+  // we've sent the notifications, so reset to unchanged
   headwordChanged = NO;
+  themeChanged = NO;
+  readingChanged = NO;
   settingsChanged = NO;
 }
 

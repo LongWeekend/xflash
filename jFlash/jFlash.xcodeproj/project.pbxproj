@@ -132,7 +132,6 @@
 		4986F86511C715F600947486 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		4986F86611C715F600947486 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		4986F86711C715F600947486 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		4986F86811C715F600947486 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		4986F86911C715F600947486 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		4986F86B11C715F600947486 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -255,7 +254,6 @@
 		917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -506,8 +504,8 @@
 		917A5BCE11AB7C4600016BD2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = AppSpecific/RootViewController.m; sourceTree = "<group>"; };
 		917A5BCF11AB7C4600016BD2 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = AppSpecific/SearchViewController.h; sourceTree = "<group>"; };
 		917A5BD011AB7C4600016BD2 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = AppSpecific/SearchViewController.m; sourceTree = "<group>"; };
-		917A5BD111AB7C4600016BD2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
-		917A5BD211AB7C4600016BD2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		917A5BD111AB7C4600016BD2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = /Users/Ross/iPhone/jFlashGit/jFlash/Classes/AppSpecific/SettingsViewController.h; sourceTree = "<absolute>"; };
+		917A5BD211AB7C4600016BD2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = /Users/Ross/iPhone/jFlashGit/jFlash/Classes/AppSpecific/SettingsViewController.m; sourceTree = "<absolute>"; };
 		917A5BD311AB7C4600016BD2 /* StudySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetViewController.h; path = AppSpecific/StudySetViewController.h; sourceTree = "<group>"; };
 		917A5BD411AB7C4600016BD2 /* StudySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StudySetViewController.m; path = AppSpecific/StudySetViewController.m; sourceTree = "<group>"; };
 		917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetWordsViewController.h; path = AppSpecific/StudySetWordsViewController.h; sourceTree = "<group>"; };
@@ -1239,8 +1237,6 @@
 				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
-				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
-				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
 				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
 				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
@@ -1605,7 +1601,6 @@
 				917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */,
 				917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */,
 				917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */,
-				917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */,
 				917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */,
 				917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */,
 				917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */,
@@ -1702,7 +1697,6 @@
 				4986F86511C715F600947486 /* HelpWebViewController.m in Sources */,
 				4986F86611C715F600947486 /* RootViewController.m in Sources */,
 				4986F86711C715F600947486 /* SearchViewController.m in Sources */,
-				4986F86811C715F600947486 /* SettingsViewController.m in Sources */,
 				4986F86911C715F600947486 /* StudySetViewController.m in Sources */,
 				4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */,
 				4986F86B11C715F600947486 /* StudyViewController.m in Sources */,

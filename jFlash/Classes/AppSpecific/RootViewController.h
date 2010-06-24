@@ -12,13 +12,13 @@
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
 #import "SearchViewController.h"
-#import "SettingsViewController.h"
 #import "HelpViewController.h"
 #import "PDColoredProgressView.h"
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"
 #import "LWEDownloader.h"
+#import "SettingsViewController.h"
 
 #define UPDATE_ALERT_CANCEL_BUTTON 0
 #define UPDATE_ALERT_UPDATE_NOW_BUTTON 1
