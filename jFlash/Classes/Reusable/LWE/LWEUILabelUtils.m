@@ -19,9 +19,6 @@
 //! Resize UIScrollView.contentSize based on expected label size and reset scroll pos!
 + (void) autosizeLabelText: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer withText:(NSString *)theText minFontSize:(NSInteger)minFontSize maxFontSize:(NSInteger)maxFontSize {
   
-  // Scroll to 0,0
-  [scrollViewContainer setContentOffset:CGPointMake(0, 0) animated: YES];
-  
   // Use our snazzy font resizer (works with multiple lines!)
   [LWEUILabelUtils resizeLabelWithConstraints:theLabel minFontSize:minFontSize maxFontSize:maxFontSize forParentViewSize:scrollViewContainer.frame.size];
   CGSize expectedLabelSize = theLabel.frame.size;
@@ -43,6 +40,9 @@
     labelFrame.origin.y = yOffset;
     theLabel.frame = labelFrame;
   }
+  
+  // Scroll to 0,0
+  [scrollViewContainer setContentOffset:CGPointMake(0, 0) animated: YES];
   
 }
 
@@ -76,6 +76,7 @@
     
     // WARNING: this uses "word wrap" (not good for very long JPN strings!)
     expectedLabelSize = [theLabel.text sizeWithFont:newFont constrainedToSize:constraintSize lineBreakMode:theLabel.lineBreakMode];
+    LWE_LOG(@"Label Size w:%d h: %d",expectedLabelSize.width,expectedLabelSize.height);
     
     // Break if this fontsize fits within the available scrollable height?
     if(parentViewSize.height != 0 && expectedLabelSize.height < parentViewSize.height)

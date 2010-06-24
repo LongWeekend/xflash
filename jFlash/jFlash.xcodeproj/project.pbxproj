@@ -115,7 +115,6 @@
 		4986F84D11C715F600947486 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		4986F84E11C715F600947486 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
 		4986F84F11C715F600947486 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
-		4986F85011C715F600947486 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
 		4986F85311C715F600947486 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4986F85511C715F600947486 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		4986F85611C715F600947486 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B7F11AB7ADB00016BD2 /* ASIAuthenticationDialog.m */; };
@@ -206,7 +205,6 @@
 		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
 		49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE811C1DCD100CFC308 /* task-retry-button.png */; };
 		49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
-		49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B4AE8D11C2439200CFC308 /* tag_glossary.html */; };
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
@@ -434,7 +432,6 @@
 		49B4ABE711C1DCD100CFC308 /* task-pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-pause-button.png"; path = "Assets/task-pause-button.png"; sourceTree = "<group>"; };
 		49B4ABE811C1DCD100CFC308 /* task-retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-retry-button.png"; path = "Assets/task-retry-button.png"; sourceTree = "<group>"; };
 		49B4ABE911C1DCD100CFC308 /* task-start-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-start-button.png"; path = "Assets/task-start-button.png"; sourceTree = "<group>"; };
-		49B4AE8D11C2439200CFC308 /* tag_glossary.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = tag_glossary.html; path = Assets/help/tag_glossary.html; sourceTree = "<group>"; };
 		49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUILabelUtils.h; path = Reusable/LWE/LWEUILabelUtils.h; sourceTree = "<group>"; };
 		49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUILabelUtils.m; path = Reusable/LWE/LWEUILabelUtils.m; sourceTree = "<group>"; };
 		49B53E3411B105CF00A1119A /* LWEUITableUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUITableUtils.h; path = Reusable/LWE/LWEUITableUtils.h; sourceTree = "<group>"; };
@@ -968,7 +965,6 @@
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
 				D3B59408111F928100AE4CEE /* Default.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
 				D35B07091116456D00DB5E02 /* 15-tags.png */,
@@ -1008,6 +1004,7 @@
 		917A5B7A11AB7A8700016BD2 /* LWE Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				916D9AEC1125345B002FF875 /* Debugging */,
 				49F968F811AF652D00DFC3C9 /* LWEDownloader.h */,
 				49F968F911AF652D00DFC3C9 /* LWEDownloader.m */,
 				917A5C1311AB80F700016BD2 /* LWEDatabase.h */,
@@ -1023,7 +1020,6 @@
 				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
 				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
-				916D9AEC1125345B002FF875 /* Debugging */,
 				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
 				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
 			);
@@ -1444,7 +1440,6 @@
 				49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */,
 				49B4ABED11C1DCD100CFC308 /* task-retry-button.png in Resources */,
 				49B4ABEE11C1DCD100CFC308 /* task-start-button.png in Resources */,
-				49B4AE8E11C2439200CFC308 /* tag_glossary.html in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
@@ -1531,7 +1526,6 @@
 				4986F84D11C715F600947486 /* task-pause-button.png in Resources */,
 				4986F84E11C715F600947486 /* task-retry-button.png in Resources */,
 				4986F84F11C715F600947486 /* task-start-button.png in Resources */,
-				4986F85011C715F600947486 /* tag_glossary.html in Resources */,
 				4986F85311C715F600947486 /* SentenceView.xib in Resources */,
 				492568E611C7831F0058675B /* FMCommandEditViewController.xib in Resources */,
 				492568E711C7831F0058675B /* FMConsoleController.xib in Resources */,
