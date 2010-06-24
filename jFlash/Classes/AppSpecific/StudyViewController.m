@@ -447,12 +447,6 @@
   progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
   progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
   progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
-  
-  NSArray* records = [UserHistoryPeer getRightWrongTotalsBySet:currentCardSet.tagId];
-  int rightCount = [[records objectAtIndex:0] intValue];
-  int wrongCount = [[records objectAtIndex:1] intValue];
-  progressView.cardsRightAllTime.text = [NSString stringWithFormat:@"%i", rightCount];
-  progressView.cardsWrongAllTime.text = [NSString stringWithFormat:@"%i", wrongCount];
   [progressView release];
 }
 
