@@ -29,7 +29,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
 
-    [self setSectionArray:[self settingsTableDataSource]];
+    [self setSectionArray:[self _settingsTableDataSource]];
     settingsChanged = NO;
     headwordChanged = NO;
     themeChanged = NO;
@@ -53,7 +53,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
  */
 - (void) _addPluginMenuItem
 {
-  [self setSectionArray:[self settingsTableDataSource]];
+  [self setSectionArray:[self _settingsTableDataSource]];
 }
 
 
@@ -295,6 +295,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
       url = [NSURL URLWithString:@"http://twitter.com/long_weekend/"];
       
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [webView loadRequest:request];
     webView.delegate = self;
     webVC.view = webView;
@@ -342,9 +343,10 @@ NSString * const APP_ALGORITHM = @"algorithm";
 
 # pragma mark - UIWebView delegate methods
 
-//! UIWebView delegate method - called if request fialed
+//! Turns off the network activity indicator & shows a "you are not connected" error
 - (void) webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
 {
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Connect",@"Network.UnableToConnect_AlertViewTitle")
                                                 message:NSLocalizedString(@"Please check your network connection and try again.",@"Network.UnableToConnect_AlertViewMessage")
                                                 delegate:self
@@ -354,10 +356,15 @@ NSString * const APP_ALGORITHM = @"algorithm";
   [alertView release];
 }
 
+//! Turns off the network activity indicator
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
 
 
 /** Returns all the arrays to configure the settings table */
-- (NSMutableArray*) settingsTableDataSource
+- (NSMutableArray*) _settingsTableDataSource
 {
   // The following dictionaries contain all the mappings from actual settings to how they display on the phone
   NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
@@ -425,7 +432,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
-  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [settingsDict release];
   [sectionArray release];
   [appirater release];
