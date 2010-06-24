@@ -266,6 +266,7 @@
     // On a background thread, so do not tell it directly, use a semaphore
     _cancelRequest = YES;
   }
+  // TODO: turn database back on!!
 }
 
 

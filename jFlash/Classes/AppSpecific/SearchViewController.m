@@ -91,9 +91,9 @@ const NSInteger KSegmentedTableHeader = 100;
   [[[self view] viewWithTag:KSegmentedTableHeader] setBackgroundColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
   self._wordsOrSentencesSegment.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
-  // Fire off a notification to bring up the downloader?
+  // Fire off a notification to bring up the downloader?  If we are on the old data version, let them use search!
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if (![pm pluginIsLoaded:FTS_DB_KEY])
+  if (![pm searchPluginIsLoaded])
   {
     NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
@@ -171,7 +171,7 @@ const NSInteger KSegmentedTableHeader = 100;
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([pm pluginIsLoaded:FTS_DB_KEY])
+  if ([pm searchPluginIsLoaded])
   {
     return YES;
   }

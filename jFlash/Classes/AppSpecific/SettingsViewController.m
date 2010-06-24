@@ -61,10 +61,18 @@ NSString * const APP_ALGORITHM = @"algorithm";
     NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
     NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
 
-    NSArray *userSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
-                                                          NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
-                                                          NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
-    NSArray *userSettingKeys = [NSArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
+    NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
+                                        NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
+                                        NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
+    NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
+
+    // Can we upgrade at all?  If so, hide the plugins
+    if ([VersionManager databaseIsUpdatable])
+    {
+      [userSettingNames removeLastObject];
+      [userSettingKeys removeLastObject];
+    }
+    
     NSArray *userSettingArray = [NSArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
     
     NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
@@ -77,6 +85,8 @@ NSString * const APP_ALGORITHM = @"algorithm";
     NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
     
     // Make the order
+  
+
     self.sectionArray = [NSArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
     
     settingsChanged = NO;
@@ -105,7 +115,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   // Do we need to show a button on the other side?
   if ([VersionManager databaseIsUpdatable])
   {
-    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleDone target:self action:@selector(_showUpdaterModal)];
+    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_showUpdaterModal)];
     self.navigationItem.rightBarButtonItem = updateBtn;
     [updateBtn release];
   }
@@ -135,7 +145,11 @@ NSString * const APP_ALGORITHM = @"algorithm";
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"readingWasChanged" object:self];
   }
+  
+  // we've sent the notifications, so reset to unchanged
   headwordChanged = NO;
+  themeChanged = NO;
+  readingChanged = NO;
   settingsChanged = NO;
 }
 
@@ -222,13 +236,13 @@ NSString * const APP_ALGORITHM = @"algorithm";
   else if (key == APP_PLUGIN)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPluginsByKey] count];
     if (numInstalled > 0)
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
     else
       cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
   }
   else if (key == APP_ABOUT)
   {

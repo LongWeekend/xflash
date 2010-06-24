@@ -53,6 +53,8 @@
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
+		4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
+		4958DF8711D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
@@ -129,7 +131,6 @@
 		4986F86511C715F600947486 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		4986F86611C715F600947486 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		4986F86711C715F600947486 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		4986F86811C715F600947486 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		4986F86911C715F600947486 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		4986F86B11C715F600947486 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -251,7 +252,6 @@
 		917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
-		917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD211AB7C4600016BD2 /* SettingsViewController.m */; };
 		917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
@@ -298,6 +298,7 @@
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		91818DB611D2F83B00746B09 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91818DB511D2F83B00746B09 /* SearchView.xib */; };
 		91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */; };
+		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -341,7 +342,6 @@
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */; };
-		D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
@@ -421,6 +421,7 @@
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
+		4958DF8511D322CA0037027C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = Migrations/jflash_10_to_11.sql; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		4986F8B811C715F600947486 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
@@ -501,8 +502,6 @@
 		917A5BCE11AB7C4600016BD2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = AppSpecific/RootViewController.m; sourceTree = "<group>"; };
 		917A5BCF11AB7C4600016BD2 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = AppSpecific/SearchViewController.h; sourceTree = "<group>"; };
 		917A5BD011AB7C4600016BD2 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = AppSpecific/SearchViewController.m; sourceTree = "<group>"; };
-		917A5BD111AB7C4600016BD2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
-		917A5BD211AB7C4600016BD2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		917A5BD311AB7C4600016BD2 /* StudySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetViewController.h; path = AppSpecific/StudySetViewController.h; sourceTree = "<group>"; };
 		917A5BD411AB7C4600016BD2 /* StudySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StudySetViewController.m; path = AppSpecific/StudySetViewController.m; sourceTree = "<group>"; };
 		917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetWordsViewController.h; path = AppSpecific/StudySetWordsViewController.h; sourceTree = "<group>"; };
@@ -592,6 +591,8 @@
 		91818DB511D2F83B00746B09 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
 		91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
+		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
+		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
@@ -644,7 +645,6 @@
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "greentheme-cookie-cutters"; path = "Assets/greentheme-cookie-cutters"; sourceTree = "<group>"; };
-		D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = sql/jflash_10_to_11.sql; sourceTree = "<group>"; };
 		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -749,7 +749,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */,
+				4958DF8511D322CA0037027C /* jflash_10_to_11.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
@@ -1022,6 +1022,7 @@
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
 				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
+				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
@@ -1138,8 +1139,8 @@
 				91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */,
 				4908209711B794A500150499 /* PluginSettingsViewController.h */,
 				4908209811B794A500150499 /* PluginSettingsViewController.m */,
-				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
-				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
+				9181901611D3392300746B09 /* SettingsViewController.h */,
+				9181901711D3392300746B09 /* SettingsViewController.m */,
 				917A5BD911AB7C4600016BD2 /* UserDetailsViewController.h */,
 				917A5BDA11AB7C4600016BD2 /* UserDetailsViewController.m */,
 				917A5BDB11AB7C4600016BD2 /* UserViewController.h */,
@@ -1234,8 +1235,6 @@
 				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
-				917A5BD111AB7C4600016BD2 /* SettingsViewController.h */,
-				917A5BD211AB7C4600016BD2 /* SettingsViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
 				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
 				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
@@ -1448,8 +1447,8 @@
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
+				4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */,
 				D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */,
-				D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */,
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				91818DB611D2F83B00746B09 /* SearchView.xib in Resources */,
@@ -1558,6 +1557,7 @@
 				4925690211C7831F0058675B /* Verify.png in Resources */,
 				4925690311C7831F0058675B /* VScroll.png in Resources */,
 				4925690411C7831F0058675B /* WaitFor.png in Resources */,
+				4958DF8711D322CA0037027C /* jflash_10_to_11.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1597,7 +1597,6 @@
 				917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */,
 				917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */,
 				917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */,
-				917A5BE411AB7C4600016BD2 /* SettingsViewController.m in Sources */,
 				917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */,
 				917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */,
 				917A5BE711AB7C4600016BD2 /* StudyViewController.m in Sources */,
@@ -1658,6 +1657,7 @@
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
 				91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */,
+				9181901811D3392300746B09 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1694,7 +1694,6 @@
 				4986F86511C715F600947486 /* HelpWebViewController.m in Sources */,
 				4986F86611C715F600947486 /* RootViewController.m in Sources */,
 				4986F86711C715F600947486 /* SearchViewController.m in Sources */,
-				4986F86811C715F600947486 /* SettingsViewController.m in Sources */,
 				4986F86911C715F600947486 /* StudySetViewController.m in Sources */,
 				4986F86A11C715F600947486 /* StudySetWordsViewController.m in Sources */,
 				4986F86B11C715F600947486 /* StudyViewController.m in Sources */,

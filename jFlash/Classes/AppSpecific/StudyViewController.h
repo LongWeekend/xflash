@@ -16,7 +16,14 @@
 #import "PracticeModeCardViewDelegate.h"
 #import "ExampleSentencesViewController.h"
 
-@interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate> {
+
+#define UPDATE_ALERT_CANCEL_BUTTON 0
+#define UPDATE_ALERT_UPDATE_NOW_BUTTON 1
+#define UPDATE_ALERT_RELEASE_NOTES_BUTTON 2
+
+@interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+{
+  BOOL _alreadyShowedAlertView;
   
   // scroll view
   IBOutlet UIScrollView* scrollView;

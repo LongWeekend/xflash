@@ -33,6 +33,7 @@
       [self setTag:initTag];
       [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];
     }
+    [[self tableView] retain];
     self.navigationItem.title = [initTag tagName];
     [self setCards:nil];
     [self setActivityIndicator:[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
@@ -196,6 +197,7 @@
   [tag release]; 
   [cards release];
   [activityIndicator release];
+  [self.tableView release];
   [super dealloc];
 }
 

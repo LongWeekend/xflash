@@ -46,5 +46,6 @@
 @property (nonatomic, retain) NSMutableArray *subgroupArray;
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+//@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end
