@@ -1,0 +1,12 @@
+body{ margin:10px; padding:0px; line-height:19px; font-size:16px; text-align:left; background-color: transparent; font-family:Helvetica,sanserif;}
+img {display:block; clear:both; margin:auto;} 
+img.screenshot { margin-top:8px; margin-bottom:12px; margin:auto; }
+img.title{ margin-bottom:9px; margin:auto; }
+.screenshot { border:1px solid black; }
+a, a:visited { color:#834320; font-weight:bold;}
+div.info {min-height:350px; text-align:left;}
+p { margin:9px 0 9px 0; padding:2px 0; line-height:17px; }
+h3, h2 { line-height:25px; padding-bottom:0px;  margin-bottom:0px; color:olive;}
+h3 { line-height:20px; }
+#release-notes {width:290px;padding-left:5px;font-size:14px;line-height:15px;}
+small { font-size:9px; color:darkslategray;}
