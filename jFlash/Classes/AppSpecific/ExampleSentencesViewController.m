@@ -77,7 +77,8 @@
 #pragma mark -
 #pragma mark Core Methods
 
-- (void) setupSentencesWebView:(NSString *)sentencesHTML {  
+- (void) setupSentencesWebView:(NSString *)sentencesHTML
+{  
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  

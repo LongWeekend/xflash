@@ -105,7 +105,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   // Do we need to show a button on the other side?
   if ([VersionManager databaseIsUpdatable])
   {
-    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleDone target:self action:@selector(_showUpdaterModal)];
+    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_showUpdaterModal)];
     self.navigationItem.rightBarButtonItem = updateBtn;
     [updateBtn release];
   }

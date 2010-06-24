@@ -31,6 +31,11 @@
 - (NSDictionary*) availablePluginsDictionary;
 - (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
 
+// Should be subclassed - TODO
+- (BOOL) examplesPluginIsLoaded;
+- (BOOL) searchPluginIsLoaded;
+
+
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 

@@ -83,6 +83,31 @@
   }
 }
 
+# pragma mark -
+# pragma mark Should be subclassed later
+
+/** 
+ * Convenience method to allow custom logic for versions
+ * TODO subclass
+ */
+- (BOOL) searchPluginIsLoaded
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  BOOL plugin = [self pluginIsLoaded:FTS_DB_KEY];
+  return (plugin || [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]);
+}
+
+
+/** 
+ * Convenience method to allow custom logic for versions
+ * TODO subclass
+ */
+- (BOOL) examplesPluginIsLoaded
+{
+  BOOL plugin = [self pluginIsLoaded:EXAMPLE_DB_KEY];  
+  return plugin;
+}
+
 
 /**
  * Takes the plugin out of active use

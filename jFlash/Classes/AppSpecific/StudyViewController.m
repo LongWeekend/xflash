@@ -104,6 +104,9 @@
   scrollView.pagingEnabled = YES;
   scrollView.scrollEnabled = YES;
   
+  // Get settings to determine what data versio we are on
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     if(![[self currentCard] hasExampleSentences])
@@ -112,6 +115,13 @@
       scrollView.pagingEnabled = NO;
       scrollView.scrollEnabled = NO;
     }
+  }
+  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0])
+  {
+    // TODO: this is repeated code and hack-ish, but necessary to get this out the door
+    [[self pageControl] setHidden:YES];
+    scrollView.pagingEnabled = NO;
+    scrollView.scrollEnabled = NO;
   }
 }
 
@@ -469,6 +479,7 @@
   
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
+    // We have EX db installed
     [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
     [[self exampleSentencesViewController] setDatasource:self];
   }

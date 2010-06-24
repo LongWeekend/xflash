@@ -133,18 +133,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // DEBUG: this simulates being a JFlash 1.0 upgrade user
   //[self _createDefaultSettingsFor10:settings];
   
-  // Dump the dictionary to make sure we have the right data
-  LWE_DICT_DUMP([settings dictionaryRepresentation]);
-  
   // STEP 1 - check for settings updates
   // If we are JFlash 1.0 settings, update to 1.1
   if ([self _needs10to11SettingsUpdate:settings])
   {
     [self _updateSettingsFrom10to11:settings];
-
-    //DEBUG: check that the settings are updated correctly
-    LWE_DICT_DUMP([settings dictionaryRepresentation]);
-
     [self setIsFirstLoadAfterNewVersion:YES];
   }
   else

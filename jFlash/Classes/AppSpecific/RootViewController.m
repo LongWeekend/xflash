@@ -42,6 +42,36 @@
 
 
 /**
+ *
+ */
+- (void) viewDidAppear:(BOOL)animated
+{
+  // Show a UIAlert if this is the first time the user has launched the app.  
+  CurrentState *state = [CurrentState sharedCurrentState];
+  if (state.isFirstLoad && _showWelcomeSplash)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"RootViewController.WelcomeAlertViewTitle")
+                                                        message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
+    _showWelcomeSplash = NO;
+  }
+  else if (state.isUpdatable)
+  {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
+                                                        message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                              otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
+    [alertView show];
+    [alertView release];
+  }
+}
+
+
+/**
  * Loads the jFlash logo splash screen and calls the database loader when finished
  */
 - (void) loadView
@@ -122,29 +152,6 @@
 
   //launch the please rate us
   [Appirater appLaunched];
-
-  // Show a UIAlert if this is the first time the user has launched the app.  
-  CurrentState *state = [CurrentState sharedCurrentState];
-  if (state.isFirstLoad && _showWelcomeSplash)
-  {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"RootViewController.WelcomeAlertViewTitle")
-                                                  message:NSLocalizedString(@"To get you started, we've loaded our favorite words as an example set.   To study other sets, tap the 'Study Sets' icon below.",@"RootViewController.WelcomeAlertViewMessage")
-                                                  delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
-    _showWelcomeSplash = NO;
-  }
-  else if (state.isFirstLoadAfterNewVersion)
-  {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash!",@"RootViewController.UpdateAlertViewTitle")
-                                                  message:NSLocalizedString(@"JFlash has grown up!  In this version, we've improved the database and added new, great features.  Sometime soon, we need about 3 minutes of your time and a network (Wifi or 3G) connection to update your data (you won't lose your progress).  Want to do it now?",@"RootViewController.UpdateAlertViewMessage")
-                                                  delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                                  otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
-    [alertView show];
-    [alertView release];
-  }
 }
 
 
