@@ -45,7 +45,7 @@
 					<object class="IBUILabel" id="249415911">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 13}, {272, 26}}</string>
+						<string key="NSFrame">{{20, 15}, {272, 26}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -57,7 +57,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">上 (うえ)</string>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
+							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -149,8 +149,8 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="249415911"/>
 							<reference ref="284989366"/>
+							<reference ref="249415911"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -192,7 +192,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ExampleSentencesViewController</string>
 					<string>UIResponder</string>
-					<string>{{299, 451}, {320, 270}}</string>
+					<string>{{241, 79}, {320, 270}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

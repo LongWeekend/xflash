@@ -342,6 +342,10 @@
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
+		D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */; };
+		D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */; };
+		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
+		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
 /* End PBXBuildFile section */
 
@@ -642,6 +646,8 @@
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "greentheme-cookie-cutters"; path = "Assets/greentheme-cookie-cutters"; sourceTree = "<group>"; };
+		D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = sql/jflash_10_to_11.sql; sourceTree = "<group>"; };
 		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -746,6 +752,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				49CD03320FFF1F4100F515A3 /* jFlash Unit Testing-Info.plist */,
@@ -884,7 +891,7 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
-		49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */ = {
+		49B4ABEF11C1DCDB00CFC308 /* glass-buttons */ = {
 			isa = PBXGroup;
 			children = (
 				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
@@ -895,7 +902,7 @@
 				49B4ABE811C1DCD100CFC308 /* task-retry-button.png */,
 				49B4ABE911C1DCD100CFC308 /* task-start-button.png */,
 			);
-			name = "Glass Button Images";
+			name = "glass-buttons";
 			sourceTree = "<group>";
 		};
 		49C5BC1E11C51AE300A595D6 /* Search */ = {
@@ -947,6 +954,12 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
+				D3309B031123C7D800B73E8E /* help */,
+				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
+				D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */,
+				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
+				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				D3EFCF7211D21C0B0014C8B4 /* plugin-resources */,
 				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
@@ -954,13 +967,8 @@
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
-				49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
-				D3309B031123C7D800B73E8E /* help */,
 				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
-				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
-				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				D3B59408111F928100AE4CEE /* Default.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
 				D35B07091116456D00DB5E02 /* 15-tags.png */,
@@ -1445,6 +1453,10 @@
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
+				D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */,
+				D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */,
+				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
+				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				91818DB611D2F83B00746B09 /* SearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

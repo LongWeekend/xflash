@@ -17,6 +17,7 @@ extern NSString * const DEFAULT_THEME;
 
 + (ThemeManager*) sharedThemeManager;
 - (UIColor*) currentThemeTintColor;
+- (UIColor*) currentThemeTintColor:(float)customAlpha;
 - (NSString*) currentThemeFileName;
 - (NSString*) currentThemeName;
 - (NSString*) currentThemeCSS;
