@@ -19,6 +19,7 @@
 }
 
 - (IBAction) setDifficulty:(UISegmentedControl*)sender;
+- (void)sliderAction:(UISlider*)sender;
 
 @property (nonatomic, retain) UISlider *maxCardsUISlider;
 @property (nonatomic, retain) UISlider *frequencyUISlider;

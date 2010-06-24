@@ -38,7 +38,11 @@ enum ControlSectionRows
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
   difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
@@ -180,6 +184,8 @@ enum ControlSectionRows
     [maxCardsUISlider setEnabled:YES];
     [frequencyUISlider setEnabled:YES];
   }
+  [self sliderAction:maxCardsUISlider];
+  [self sliderAction:frequencyUISlider];
 }
 
 #pragma mark -
@@ -225,6 +231,4 @@ enum ControlSectionRows
   [super dealloc];
 }
 
-
 @end
-
