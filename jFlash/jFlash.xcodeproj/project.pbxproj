@@ -1023,9 +1023,9 @@
 				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
 				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
-				916D9AEC1125345B002FF875 /* Debugging */,
 				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
 				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
+				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
