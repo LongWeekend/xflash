@@ -43,10 +43,6 @@
   int readingBtnY = toggleReadingBtnYPosInXib;
   int headwordY   = cardHeadwordLabelYPosInXib;
   
-  // Text format options for J_TO_E Mode
-  UIFont  *readingFont  = [UIFont boldSystemFontOfSize:READING_DEF_FONTSIZE];
-  UIColor *readingColor = [UIColor whiteColor];
-  
   CGRect readingFrame = cardReadingLabelScrollContainer.frame;
   CGRect headwordFrame = cardHeadwordLabelScrollContainer.frame;
   CGRect readingBtnFrame = toggleReadingBtn.frame;
@@ -63,9 +59,6 @@
     readingY = readingY + headwordFrame.size.height;//+ (cardReadingLabelScrollContainerYPosInXib -readingFrame.size.height);
     readingBtnY = readingY;
     
-    // Text format options for J_TO_E Mode
-    readingFont = [UIFont boldSystemFontOfSize:READING_DEF_FONTSIZE];
-    readingColor = [UIColor whiteColor];
   }
   
   // Set new linebreak modes
@@ -95,10 +88,6 @@
   // Move cardReadingLabelScrollMoreIcon
   readingScrollMoreFrame.origin.y = readingBtnY+(CARDCONTENT_PADDING*3);
   cardReadingLabelScrollMoreIcon.frame = readingScrollMoreFrame;
-  
-  // Adjust cardReaingLabel properties
-  cardReadingLabel.textColor = readingColor;
-  cardReadingLabel.font = readingFont;
 }
 
 

@@ -160,7 +160,8 @@
 - (void) showUpdaterModal
 {
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [updateVC setTitle:NSLocalizedString(@"Dictionary Update",@"ModalTaskViewController_Update.NavBarTitle")];
+  //[updateVC setTitle:NSLocalizedString(@"Dictionary Update",@"ModalTaskViewController_Update.NavBarTitle")];
+  [updateVC setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
@@ -183,7 +184,8 @@
 {
   // Instantiate downloader with jFlash download URL & destination filename
   ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
+  //[dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
+  [dlViewController setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
   [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
