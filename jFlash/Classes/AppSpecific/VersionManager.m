@@ -284,28 +284,6 @@
   [[self dlHandler] resetTask];
 }
 
-/** 
- * Migration - STEP 1
- * Opens the old version database as the main database
- * Calls _loadFTSPlugin on finish
- */
-- (void) _openDatabase:(NSString*)filename
-{
-  // Get the database open and ready
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if (db.databaseOpenFinished)
-  {
-    // Already open, so close it once to detach any databases and get JUST the USER database
-    [db closeDatabase];
-  }
-  if (![db openDatabase:filename])
-  {
-    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
-  }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
-  [self _downloadFTSPlugin];
-  return;  
-}
 
 
 /**
@@ -336,33 +314,28 @@
 }
 
 
-/**
- * Class internal method to get the updated status from LWEDownloader and figure out the overall progress
- * Called via the LWEDownloaderProgressUpdated notification
+/** 
+ * Migration - STEP 1
+ * Opens the old version database as the main database
+ * Calls _loadFTSPlugin on finish
  */
-- (void) _updateDownloadStatus
+- (void) _openDatabase:(NSString*)filename
 {
-  if ([self dlHandler])
+  // Get the database open and ready
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  if (db.databaseOpenFinished)
   {
-    [self setProgress:[[self dlHandler] progress]];
-    [self setTaskMessage:[[self dlHandler] taskMessage]];
-
-    // Determine what to do with buttons based on state
-    if ([[self dlHandler] isFailureState] && _migraterState != kMigraterCancelled)
-    {
-      LWE_LOG(@"Download failed, oh no, what are we doing to do now");
-      NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
-      [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
-    }
-    else if ([[self dlHandler] isSuccessState])
-    {
-      LWE_LOG(@"Download succeeded, now it's time to keep going");
-      [[NSNotificationCenter defaultCenter] removeObserver:self];
-      [self _loadPlugins];
-    }
+    // Already open, so close it once to detach any databases and get JUST the USER database
+    [db closeDatabase];
   }
+  if (![db openDatabase:filename])
+  {
+    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
+  }
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
+  [self _downloadFTSPlugin];
+  return;  
 }
-
 
 
 /**
@@ -391,6 +364,35 @@
     // TODO: put something here to pick up on
   }
 }
+
+
+/**
+ * Class internal method to get the updated status from LWEDownloader and figure out the overall progress
+ * Called via the LWEDownloaderProgressUpdated notification
+ */
+- (void) _updateDownloadStatus
+{
+  if ([self dlHandler])
+  {
+    [self setProgress:[[self dlHandler] progress]];
+    [self setTaskMessage:[[self dlHandler] taskMessage]];
+    
+    // Determine what to do with buttons based on state
+    if ([[self dlHandler] isFailureState] && _migraterState != kMigraterCancelled)
+    {
+      LWE_LOG(@"Download failed, oh no, what are we doing to do now");
+      NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
+      [self _updateInternalState:kMigraterDownloadFail withTaskMessage:tmpTaskMsg];
+    }
+    else if ([[self dlHandler] isSuccessState])
+    {
+      LWE_LOG(@"Download succeeded, now it's time to keep going");
+      [[NSNotificationCenter defaultCenter] removeObserver:self];
+      [self _loadPlugins];
+    }
+  }
+}
+
 
 
 /**
@@ -425,11 +427,6 @@
   LWE_LOG(@"Starting loop");
   while (!feof(fh))
   {
-    if (i < 10)
-    {
-      LWE_LOG(@"%@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
-    }
-    
     if (_cancelRequest)
     {
       success = NO;
@@ -459,7 +456,13 @@
   if (success)
   {
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Finalizing dictionary"];
-    LWE_LOG(@"STARTING COMMIT");
+
+/*    LWE_LOG(@"Making indexes");
+    [db executeUpdate:@"CREATE INDEX card_tag_link_card_id ON card_tag_link (card_id ASC)"];
+    [db executeUpdate:@"CREATE INDEX card_tag_link_tag_id ON card_tag_link (tag_id ASC)"];
+ */   LWE_LOG(@"STARTING COMMIT");
+     
+    
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
     

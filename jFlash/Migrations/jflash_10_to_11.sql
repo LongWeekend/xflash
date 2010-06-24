@@ -1282,6 +1282,7 @@ DELETE FROM card_tag_link WHERE card_id = 147022
 DELETE FROM user_history WHERE card_id = 147022
 DELETE FROM card_tag_link WHERE card_id = 147024
 DELETE FROM user_history WHERE card_id = 147024
+CREATE INDEX tmp_ctl ON card_tag_link(card_id,tag_id)
 DELETE FROM card_tag_link WHERE card_id = 34678 AND tag_id = 622
 DELETE FROM card_tag_link WHERE card_id = 34749 AND tag_id = 622
 DELETE FROM card_tag_link WHERE card_id = 34761 AND tag_id = 622
@@ -13959,4 +13960,5 @@ INSERT INTO card_tag_link (card_id, tag_id) VALUES (149593,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149752,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (149935,643)
 INSERT INTO card_tag_link (card_id, tag_id) VALUES (58249,644)
+DROP INDEX tmp_ctl
 INSERT INTO tags (tag_id, tag_name, description, editable, count) VALUES (643,"Pronouns","Pronouns",0,126)
