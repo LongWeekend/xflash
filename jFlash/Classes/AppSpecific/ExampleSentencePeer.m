@@ -79,7 +79,9 @@
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d LIMIT 1", cardId];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [[db dao] executeQuery:sql];
-  if ([rs next]) {
+  [sql release];
+  if ([rs next])
+  {
     return YES;
   }
   return NO;
@@ -94,7 +96,7 @@
   NSMutableArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
   
   // Do a clever IN SQL statement!  Aha!
-  NSString *inStatement;
+  NSString *inStatement = nil;
   Card* card = nil;
   for (int i = 0; i < [cardList count]; i++)
   {

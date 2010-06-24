@@ -217,8 +217,8 @@
   if ([self canCancelTask])
   {
     [[self taskHandler] cancelTask];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
     self.progressIndicator.hidden = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
   }
 }
 
@@ -371,9 +371,9 @@
 //! standard dealloc
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setTaskHandler:nil];
   [self setWebViewContentFile:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
 }
 

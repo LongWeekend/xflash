@@ -341,7 +341,6 @@
                                                  cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
                                                  otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
         [statusMsgBox show];
-        [tag release];
       }
       else
       {

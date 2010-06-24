@@ -121,7 +121,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
 - (NSString*) databaseVersion
 {
   // If no version, return version 1.0
-  NSString *version = [[NSString alloc] initWithString:JFLASH_VERSION_1_0];
+  NSString *version = [NSString stringWithString:JFLASH_VERSION_1_0];
   if ([self _databaseIsOpen])
   {
     NSString* sql = [[NSString alloc] initWithFormat:@"SELECT * FROM main.version LIMIT 1"];
@@ -129,7 +129,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
     while ([rs next])
     {
       // Get rid of the old one and replace w/ the current version
-      [version release];
       version = [rs stringForColumn:@"version"];
     }
     [rs close];

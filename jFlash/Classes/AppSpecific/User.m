@@ -155,6 +155,8 @@
   UIGraphicsEndImageContext();
   // Done Resizing
   
+  CGImageRelease(imageRef);
+  
   return thumbnail;
 }
 

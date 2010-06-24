@@ -269,6 +269,7 @@
 {
   switch (downloaderState)
   {
+    case kDownloaderRetrievingMetaData:
     case kDownloaderRetrievingData:
       [_request cancel];
       [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];

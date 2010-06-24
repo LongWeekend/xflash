@@ -27,7 +27,6 @@
     _progress = 0.0f;
     _cancelRequest = NO;
     _migraterState = kMigraterReady;
-    _backgroundThreadPool = nil;
   }
   return self;
 }
@@ -227,7 +226,7 @@
   if (_migraterState == kMigraterReady)
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Preparing database",@"VersionManager.PreparingDatabaseMsg")];
-    [self performSelectorInBackground:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE]];
+    [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
   }
 }
 
@@ -285,17 +284,6 @@
   [[self dlHandler] resetTask];
 }
 
-
-//! Helper method to instantiate
-- (void) _initAutorelease
-{
-  if (_backgroundThreadPool == nil)
-  {
-    _backgroundThreadPool = [[NSAutoreleasePool alloc] init];
-  }
-}
-
-
 /** 
  * Migration - STEP 1
  * Opens the old version database as the main database
@@ -303,8 +291,6 @@
  */
 - (void) _openDatabase:(NSString*)filename
 {
-  [self _initAutorelease];
-  
   // Get the database open and ready
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   if (db.databaseOpenFinished)
@@ -318,7 +304,6 @@
   }
   [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to LWE server",@"VersionManager.BeginningDownloadMsg")];
   [self _downloadFTSPlugin];
-  [_backgroundThreadPool release];
   return;  
 }
 
@@ -363,7 +348,7 @@
     [self setTaskMessage:[[self dlHandler] taskMessage]];
 
     // Determine what to do with buttons based on state
-    if ([[self dlHandler] isFailureState])
+    if ([[self dlHandler] isFailureState] && _migraterState != kMigraterCancelled)
     {
       LWE_LOG(@"Download failed, oh no, what are we doing to do now");
       NSString *tmpTaskMsg = [[self dlHandler] taskMessage];
@@ -373,7 +358,7 @@
     {
       LWE_LOG(@"Download succeeded, now it's time to keep going");
       [[NSNotificationCenter defaultCenter] removeObserver:self];
-      [self performSelectorInBackground:@selector(_loadPlugins) withObject:nil];
+      [self _loadPlugins];
     }
   }
 }
@@ -389,11 +374,9 @@
  */
 - (void) _loadPlugins
 {
-  _backgroundThreadPool = [[NSAutoreleasePool alloc] init];
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
 
   // Load FTS plugin
-  [pm loadInstalledPlugins];
   BOOL isFTSLoaded, isCardDBLoaded;
   isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
   isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
@@ -401,13 +384,12 @@
   if (isFTSLoaded && isCardDBLoaded)
   {
     [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging new dictionary",@"VersionManager.MergingDBMsg")];
-    [self _updateUserDatabase];
+    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
   }
   else
   {
     // TODO: put something here to pick up on
   }
-  [_backgroundThreadPool release];
 }
 
 
@@ -418,11 +400,12 @@
  */
 - (void) _updateUserDatabase
 {
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   // Init variables
   BOOL success = YES;
   FILE *fh = NULL;
   float lclProgress = 0.0f;
-  int numRecords = 100000;
+  int numRecords = 12768;
   int i = 0;
   char str_buf[256];
 
@@ -456,7 +439,7 @@
     fgets(str_buf,256,fh);
 
     i++;
-    if ((i % 500) == 0)
+    if ((i % 50) == 0)
     {
       lclProgress = ((float)i / (float)numRecords);
       [self setProgress:lclProgress];
@@ -490,10 +473,12 @@
     [db.dao rollback];
     [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error.  Aborting update."];
   }
+  [pool release];
 }
 
 -(void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
 }
 
