@@ -169,13 +169,8 @@
   }
   
   meaningWebView.backgroundColor = [UIColor clearColor];
-  UIScrollView *scrollView = [meaningWebView.subviews objectAtIndex:0];
+  [meaningWebView shutOffBouncing];
   
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
   [meaningWebView loadHTMLString:html baseURL:nil];
 }
 

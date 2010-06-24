@@ -26,17 +26,18 @@ typedef enum searchStates
 /**
  * Handles dictionary-like search functions inside JFlash
  */
-@interface SearchViewController : UITableViewController <UISearchBarDelegate>
+@interface SearchViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate>
 {
   NSMutableArray *_cardSearchArray;               //! Contains the returned search results (array of Card objects)
   NSMutableArray *_sentenceSearchArray;           //! Contains the returned search results (array of ExampleSentence objects)
-  UISegmentedControl *_targetChooser;             //! Holds the instance of the UISegmentedControl allowing us to choose our data target
+  UISegmentedControl *_wordsOrSentencesSegment;             //! Holds the instance of the UISegmentedControl allowing us to choose our data target
   UIActivityIndicatorView *_activityIndicator;    //! Holds the instance to the spinner
   UISearchBar *_searchBar;                        //! Holds the instance to the UISearchBar
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
   BOOL _showSearchTargetControl;                  //! If NO, the "pill" control will not be shown
   NSInteger _searchState;                         //! Holds the "state" of the search
   NSMutableArray *_currentResultArray;            //! Holds the current results (switched when the user switches the pill control)
+  UITableView *tableView;
 }
 
 - (void) runSearchForString:(NSString*)text;
@@ -50,8 +51,9 @@ typedef enum searchStates
 
 @property (nonatomic, retain) NSMutableArray *_cardSearchArray;
 @property (nonatomic, retain) NSMutableArray *_sentenceSearchArray;
-@property (nonatomic, retain) UISegmentedControl *_targetChooser;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;
 @property (nonatomic, retain) UIActivityIndicatorView *_activityIndicator;
 @property (nonatomic, retain) UISearchBar *_searchBar;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

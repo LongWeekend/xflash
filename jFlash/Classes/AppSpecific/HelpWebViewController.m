@@ -48,12 +48,7 @@
   _webView.opaque = NO;
   _webView.backgroundColor = [UIColor clearColor];
 
-  UIScrollView *scrollView = [_webView.subviews objectAtIndex:0];
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
+  [_webView shutOffBouncing];
   [self _loadPageWithBundleFilename:[self filename]];
   [[self view] addSubview:_webView];
 }

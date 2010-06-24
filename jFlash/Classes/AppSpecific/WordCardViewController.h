@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
+#import "UIWebView+LWENoBounces.h"
 
 @interface WordCardViewController : UIViewController 
 {

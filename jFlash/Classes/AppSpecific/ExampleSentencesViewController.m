@@ -65,13 +65,7 @@
   [super viewDidLoad];
 
   sentencesWebView.backgroundColor = [UIColor clearColor];
-  UIScrollView *scrollView = [sentencesWebView.subviews objectAtIndex:0];
-  
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
+  [self.sentencesWebView shutOffBouncing];
 }
 
 #pragma mark -
@@ -85,14 +79,6 @@
   
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
   
-  // shut off rubber banding if we can
-  UIScrollView *scrollView = [self.sentencesWebView.subviews objectAtIndex:0];
-  SEL aSelector = NSSelectorFromString(@"setAllowsRubberBanding:");
-  if([scrollView respondsToSelector:aSelector])
-  {
-    [scrollView performSelector:aSelector withObject:NO];
-  }
-  
   [self.sentencesWebView loadHTMLString:html baseURL:nil];
 }
 
@@ -104,8 +90,8 @@
   // the datasource must implement currentcard or we don't set any data
   if([datasource respondsToSelector:@selector(currentCard)])
   {
-    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
-    [[self headwordLabel] setText: mungedHeadWordWithReading];
+//    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
+    [[self headwordLabel] setText: [[datasource currentCard] headword]];
     
     // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];

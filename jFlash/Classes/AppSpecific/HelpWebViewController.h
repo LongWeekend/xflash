@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIWebView+LWENoBounces.h"
 
 @interface HelpWebViewController : UIViewController <UIWebViewDelegate>
 {

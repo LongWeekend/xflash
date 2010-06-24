@@ -300,6 +300,8 @@
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		91818DB611D2F83B00746B09 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91818DB511D2F83B00746B09 /* SearchView.xib */; };
+		91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */; };
 		91B5176511B8C6B5004ACE7B /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91B5176311B8C6B5004ACE7B /* ActionBarViewController.m */; };
 		91B5176611B8C6B5004ACE7B /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91B5176411B8C6B5004ACE7B /* ActionBarViewController.xib */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -342,6 +344,10 @@
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
+		D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */; };
+		D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */; };
+		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
+		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D3EFCF7211D21C0B0014C8B4 /* plugin-resources */; };
 /* End PBXBuildFile section */
 
@@ -589,6 +595,9 @@
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		91818DB511D2F83B00746B09 /* SearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
+		91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
+		91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B5176211B8C6B5004ACE7B /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBarViewController.h; sourceTree = "<group>"; };
@@ -640,6 +649,8 @@
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "greentheme-cookie-cutters"; path = "Assets/greentheme-cookie-cutters"; sourceTree = "<group>"; };
+		D3CD3D9411D3018600F7A62C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = sql/jflash_10_to_11.sql; sourceTree = "<group>"; };
 		D3EFCF7211D21C0B0014C8B4 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -883,7 +894,7 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
-		49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */ = {
+		49B4ABEF11C1DCDB00CFC308 /* glass-buttons */ = {
 			isa = PBXGroup;
 			children = (
 				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
@@ -894,7 +905,7 @@
 				49B4ABE811C1DCD100CFC308 /* task-retry-button.png */,
 				49B4ABE911C1DCD100CFC308 /* task-start-button.png */,
 			);
-			name = "Glass Button Images";
+			name = "glass-buttons";
 			sourceTree = "<group>";
 		};
 		49C5BC1E11C51AE300A595D6 /* Search */ = {
@@ -946,6 +957,12 @@
 		916A89CA101C681800D7917D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
+				D3309B031123C7D800B73E8E /* help */,
+				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
+				D3CD3CE111D2E9AD00F7A62C /* greentheme-cookie-cutters */,
+				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
+				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				D3EFCF7211D21C0B0014C8B4 /* plugin-resources */,
 				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
@@ -953,13 +970,8 @@
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
-				49B4ABEF11C1DCDB00CFC308 /* Glass Button Images */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
-				D3309B031123C7D800B73E8E /* help */,
 				49B4AE8D11C2439200CFC308 /* tag_glossary.html */,
-				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
-				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				D3B59408111F928100AE4CEE /* Default.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
 				D35B07091116456D00DB5E02 /* 15-tags.png */,
@@ -1014,6 +1026,8 @@
 				49B53E3511B105CF00A1119A /* LWEUITableUtils.m */,
 				49BE198F11B5E993007F4FC1 /* LWEViewAnimationUtils.h */,
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
+				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
+				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
 				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
@@ -1201,6 +1215,7 @@
 				9121517911B755550091AFEF /* WordCardViewController.xib */,
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
 				91DDB00A11C1D70600E8B962 /* AlgorithmSettingsView.xib */,
+				91818DB511D2F83B00746B09 /* SearchView.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -1442,6 +1457,11 @@
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 				D3EFCF7C11D21C0B0014C8B4 /* plugin-resources in Resources */,
 				4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */,
+				D3CD3D0611D2E9AD00F7A62C /* greentheme-cookie-cutters in Resources */,
+				D3CD3D9511D3018600F7A62C /* jflash_10_to_11.sql in Resources */,
+				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
+				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
+				91818DB611D2F83B00746B09 /* SearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1648,6 +1668,7 @@
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
+				91818E2311D31A5F00746B09 /* UIWebView+LWENoBounces.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

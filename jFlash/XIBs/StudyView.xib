@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="287"/>
+			<integer value="285"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -97,7 +97,7 @@
 									<object class="IBUILabel" id="1065009926">
 										<reference key="NSNextResponder" ref="72185285"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{2, 248}, {125, 27}}</string>
+										<string key="NSFrame">{{2, 248}, {135, 27}}</string>
 										<reference key="NSSuperview" ref="72185285"/>
 										<object class="NSColor" key="IBUIBackgroundColor">
 											<int key="NSColorSpace">2</int>
@@ -125,7 +125,7 @@
 									<object class="IBUILabel" id="377282217">
 										<reference key="NSNextResponder" ref="72185285"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{190, 251}, {150, 21}}</string>
+										<string key="NSFrame">{{185, 251}, {155, 21}}</string>
 										<reference key="NSSuperview" ref="72185285"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -613,12 +613,6 @@
 						<string key="objectName">cardMeaningBtnHint</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">298</int>
-						<reference key="object" ref="551950292"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">revealButton</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">285</int>
 						<reference key="object" ref="72185285"/>
 						<object class="NSMutableArray" key="children">
@@ -640,6 +634,12 @@
 						<reference key="object" ref="1065009926"/>
 						<reference key="parent" ref="72185285"/>
 						<string key="objectName">cardSetLabel</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">298</int>
+						<reference key="object" ref="551950292"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">revealButton</string>
 					</object>
 				</object>
 			</object>
@@ -977,7 +977,7 @@
 							<string>UIPageControl</string>
 							<string>UILabel</string>
 							<string>UIImageView</string>
-							<string>UIView</string>
+							<string>UIImageView</string>
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIButton</string>
@@ -1060,7 +1060,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">practiceBgImage</string>
-								<string key="candidateClassName">UIView</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressBarView</string>
