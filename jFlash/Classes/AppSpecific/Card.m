@@ -84,7 +84,21 @@
 /** Returns YES if a card has example sentences attached to it */
 - (BOOL) hasExampleSentences
 {
-  return [ExampleSentencePeer sentencesExistForCardId:[self cardId]];
+  // Get settings to determine what data versio we are on
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
+  if([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]) // version 1 doesn't understand this so say NO
+  {
+    return NO;
+  }
+  else if (![[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
+  {
+    return YES;
+  }
+  else 
+  {
+    return [ExampleSentencePeer sentencesExistForCardId:[self cardId]];
+  }
 }
 
 

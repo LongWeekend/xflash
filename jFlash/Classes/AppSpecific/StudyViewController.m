@@ -14,6 +14,7 @@
 - (void)_updateCardViewDelegates;
 - (void)_resetExampleSentencesView;
 - (void)_setScrollViewsScrollibility;
+- (void)_setPageControlVisibility;
 @end
 
 @implementation StudyViewController
@@ -138,26 +139,32 @@
   [self setupScrollView];
   
   [self _resetStudyView];
-  [self _setScrollViewsScrollibility];
+  [self _setPageControlVisibility];
 }
 
 #pragma mark -
 #pragma mark Convenience methods
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
+- (void) _setPageControlVisibility
+{
+  if ([[self currentCard] hasExampleSentences] == NO)
+  {
+    [[self pageControl] setHidden:YES];    
+  }
+  else 
+  {
+    [[self pageControl] setHidden:NO];    
+  }
+}
+
+//! Controls whether the scroll view should be allowed to scroll or not
 - (void) _setScrollViewsScrollibility 
 {
-  // Default behavior
-  [[self pageControl] setHidden:NO];
   scrollView.pagingEnabled = YES;
   scrollView.scrollEnabled = YES;
   
-  // Get settings to determine what data versio we are on
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-  BOOL hasExamples = [[self currentCard] hasExampleSentences];
-  if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0] || ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY] && hasExamples == NO))
+  if ([[self currentCard] hasExampleSentences] == NO)
   {
-    [[self pageControl] setHidden:YES];
     scrollView.pagingEnabled = NO;
     scrollView.scrollEnabled = NO;
   }
@@ -170,6 +177,7 @@
   {
     // Plugin is installed, set up the scroll view
     [self _setScrollViewsScrollibility];
+    [self _setPageControlVisibility];
     [[self exampleSentencesViewController] setup];
   }
 }
@@ -295,6 +303,7 @@
   [[self revealCardBtn] setHidden:YES];
   [[self tapForAnswerImage] setHidden:YES];
   [self _setScrollViewsScrollibility];
+  [self _setPageControlVisibility];
   [cardViewController reveal];
   [actionBarController reveal];
 }
