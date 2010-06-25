@@ -287,6 +287,26 @@
 }
 
 
+/** 
+ * Migration - STEP 1
+ */
+- (void) _checkPlugin
+{
+  // Determine the next step - do they already have FTS?
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:CARD_DB_KEY])
+  {
+    // SKIP to STEP 3
+    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
+  }
+  else
+  {
+    // STEP 2
+    [self _downloadFTSPlugin];
+  }
+  return;  
+}
+
 
 /**
  * Migration - STEP 2
@@ -297,7 +317,7 @@
 - (void) _downloadFTSPlugin
 {
   [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
-
+  
   // Download the FTS file - even if this is unsuccessful, it doesn't hurt the user
   // They can still access (and will access) the old FTS off their main table -- EVEN if this table is attached.
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -315,55 +335,6 @@
   
   // Now go
   [[self dlHandler] startTask];
-}
-
-
-/** 
- * Migration - STEP 1
- * Opens the old version database as the main database
- * Calls _loadFTSPlugin on finish
- */
-- (void) _checkPlugin
-{
-  // Determine the next step - do they already have FTS?
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([pm pluginIsLoaded:FTS_DB_KEY])
-  {
-    [self _loadPlugins];
-  }
-  else
-  {
-    [self _downloadFTSPlugin];
-  }
-  return;  
-}
-
-
-/**
- * Migration - STEP 3
- * Tries to load the FTS plugin
- * Will fail the first time around, so calls plugin download
- * On download complete, it will call this method again.
- * After FTS is successfully loaded, will call _updateUserDatabase
- */
-- (void) _loadPlugins
-{
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-
-  // Load FTS plugin
-  BOOL isFTSLoaded, isCardDBLoaded;
-  isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
-  isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
-  
-  if (isFTSLoaded && isCardDBLoaded)
-  {
-    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
-  }
-  else
-  {
-    // TODO: put something here to pick up on
-    [self _updateInternalState:kMigraterUnknownFail withTaskMessage:@"I've crashed!? Quit & try again?"];
-  }
 }
 
 
@@ -389,14 +360,15 @@
     {
       LWE_LOG(@"Download succeeded, now it's time to keep going");
       [[NSNotificationCenter defaultCenter] removeObserver:self];
-      [self _loadPlugins];
+      // STEP 3
+      [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
     }
   }
 }
 
 
 /**
- * Migration - STEP 4
+ * Migration - STEP 3
  * Reads SQL from the bundle SQL file and enters a tight C loop to
  * execute it on the open database.
  */
@@ -424,13 +396,16 @@
   // Do the INDEX!!
   [self _updateInternalState:kMigraterPrepareSQL withTaskMessage:NSLocalizedString(@"Preparing new data (~75 seconds)",@"VersionManager.PreparingDBMsg")];
   [db executeUpdate:@"CREATE INDEX IF NOT EXISTS card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)"];
-  
-  LWE_LOG(@"Did I already have an error: %d",[db.dao hadError]);
+
+  // Get rid of this so I can get an exclusive lock on the DB
+  [db detachDatabase:FTS_DB_KEY];
+  [db detachDatabase:CARD_DB_KEY];
   
   [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.MergingDBMsg")];
 
   LWE_LOG(@"Starting transaction");
   [db.dao beginTransaction];
+  db.dao.traceExecution = NO;
   
   LWE_LOG(@"Starting loop");
   while (!feof(fh))
@@ -498,6 +473,11 @@
     [db.dao rollback];
     [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
   }
+  
+  // Re-attach the cards & FTS database
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  [pm loadInstalledPlugins];
+  
   [pool release];
 }
 

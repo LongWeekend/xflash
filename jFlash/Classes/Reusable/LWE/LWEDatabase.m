@@ -80,7 +80,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEDatabase);
     self.databaseOpenFinished = NO;
     self.dao = [FMDatabase databaseWithPath:pathToDatabase];
     self.dao.logsErrors = YES;
+#if defined(APP_STORE_FINAL)
+    self.dao.traceExecution = NO;
+#else
     self.dao.traceExecution = YES;
+#endif
     if ([self.dao open])
     {
       success = YES;
