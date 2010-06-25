@@ -182,7 +182,6 @@
   }
 }
 
-
 - (void) _resetStudyView
 {
   //reset to the first page just in case
@@ -530,15 +529,10 @@
     [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
     [[self exampleSentencesViewController] setDatasource:self];
   }
-  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_1])
+  else
   {
     // No example sentence plugin loaded, so show "please download me" view instead
     [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
-  }
-  else
-  {
-    // Don't show for JFlash 1.0
-    [[self pageControl] setHidden:YES];
   }
   			
   UIView *sentencesView = [[self exampleSentencesViewController] view];
