@@ -538,6 +538,7 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
+#pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
@@ -591,6 +592,7 @@
 {
   [pageControl setCurrentPage: page];
   [self changePage:pageControl animated:NO];
+  pageControlIsChangingPage = NO;
 }
 
 #pragma mark -
