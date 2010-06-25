@@ -16,18 +16,13 @@
   IBOutlet id datasource;
   
   IBOutlet UIWebView *sentencesWebView;
-  IBOutlet UILabel *headwordLabel;
-  IBOutlet UILabel *readingLabel;
 }
 
 - (void) setup;
 
 @property (assign, nonatomic, readwrite) IBOutlet id delegate;
 @property (assign, nonatomic, readwrite) IBOutlet id datasource;
-
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
-@property (nonatomic, retain) IBOutlet UILabel *headwordLabel;
-@property (nonatomic, retain) IBOutlet UILabel *readingLabel;
 
 @end
 

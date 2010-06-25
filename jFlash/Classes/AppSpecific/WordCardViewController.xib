@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -152,7 +152,7 @@
 					<object class="IBUIButton" id="124502176">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">288</int>
-						<string key="NSFrame">{{108, 11}, {110, 37}}</string>
+						<string key="NSFrame">{{107, 11}, {110, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -355,9 +355,9 @@
 							<reference ref="613577973"/>
 							<reference ref="484137656"/>
 							<reference ref="806681086"/>
-							<reference ref="124502176"/>
 							<reference ref="901262833"/>
 							<reference ref="283233690"/>
+							<reference ref="124502176"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -399,12 +399,6 @@
 						<string key="objectName">meaningWebView</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="124502176"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">toggleReadingButton</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
 						<reference key="object" ref="901262833"/>
 						<reference key="parent" ref="191373211"/>
@@ -427,6 +421,12 @@
 						<reference key="object" ref="366380693"/>
 						<reference key="parent" ref="613577973"/>
 						<string key="objectName">cardReadingLabel</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">7</int>
+						<reference key="object" ref="124502176"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">toggleReadingButton</string>
 					</object>
 				</object>
 			</object>
