@@ -82,16 +82,13 @@
   }
 }
 
-
-
-
 /** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
- // redraw the progress bar
- [self refreshProgressBarView];
+  // redraw the progress bar
+  [self refreshProgressBarView];
 }
 
 - (void) viewDidLoad
@@ -143,6 +140,7 @@
   [self _resetStudyView];
 }
 
+#pragma mark -
 #pragma mark Convenience methods
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
 - (void) _setScrollViewsScrollibility 
@@ -155,18 +153,9 @@
   // Get settings to determine what data versio we are on
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  BOOL hasExamples = [[self currentCard] hasExampleSentences];
+  if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0] || ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY] && hasExamples == NO))
   {
-    if(![[self currentCard] hasExampleSentences])
-    {
-      [[self pageControl] setHidden:YES];
-      scrollView.pagingEnabled = NO;
-      scrollView.scrollEnabled = NO;
-    }
-  }
-  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0])
-  {
-    // TODO: this is repeated code and hack-ish, but necessary to get this out the door
     [[self pageControl] setHidden:YES];
     scrollView.pagingEnabled = NO;
     scrollView.scrollEnabled = NO;
@@ -203,7 +192,6 @@
     [[self tapForAnswerImage] setHidden:YES];
     [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
-    [scrollView setScrollEnabled:YES];
   }
   else	
   {
