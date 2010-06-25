@@ -219,7 +219,7 @@
   {
     [[self taskHandler] cancelTask];
     self.progressIndicator.hidden = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCancelSuccessfully" object:nil];
   }
 }
 
