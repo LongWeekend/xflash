@@ -191,6 +191,10 @@
     // Delegate call
     return [[self dlHandler] canCancelTask];
   }
+  else if (_migraterState == kMigraterPrepareSQL)
+  {
+    return NO;
+  }
   else
   {
     return YES;
@@ -225,7 +229,7 @@
   if ([self canStartTask])
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
-    [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
+    [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
 #if defined(APP_STORE_FINAL)
     [FlurryAPI logEvent:@"mergeAttempted"];
 #endif
@@ -292,6 +296,8 @@
  */
 - (void) _downloadFTSPlugin
 {
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
+
   // Download the FTS file - even if this is unsuccessful, it doesn't hurt the user
   // They can still access (and will access) the old FTS off their main table -- EVEN if this table is attached.
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -317,21 +323,8 @@
  * Opens the old version database as the main database
  * Calls _loadFTSPlugin on finish
  */
-- (void) _openDatabase:(NSString*)filename
+- (void) _checkPlugin
 {
-  // Get the database open and ready
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if (db.databaseOpenFinished)
-  {
-    // Already open, so close it once to detach any databases and get JUST the USER database
-    [db closeDatabase];
-  }
-  if (![db openDatabase:filename])
-  {
-    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
-  }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
-  
   // Determine the next step - do they already have FTS?
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if ([pm pluginIsLoaded:FTS_DB_KEY])
@@ -362,13 +355,14 @@
   isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
   isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
   
-  if (isFTSLoaded && isCardDBLoaded || 1)
+  if (isFTSLoaded && isCardDBLoaded)
   {
     [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
   }
   else
   {
     // TODO: put something here to pick up on
+    [self _updateInternalState:kMigraterUnknownFail withTaskMessage:@"I've crashed!? Quit & try again?"];
   }
 }
 
@@ -426,13 +420,14 @@
   
   // Run all the statements
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];  
-  db.dao.traceExecution = NO;
   
   // Do the INDEX!!
   [self _updateInternalState:kMigraterPrepareSQL withTaskMessage:NSLocalizedString(@"Preparing new data (~75 seconds)",@"VersionManager.PreparingDBMsg")];
   [db executeUpdate:@"CREATE INDEX IF NOT EXISTS card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)"];
   
-  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.PreparingDBMsg")];
+  LWE_LOG(@"Did I already have an error: %d",[db.dao hadError]);
+  
+  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.MergingDBMsg")];
 
   LWE_LOG(@"Starting transaction");
   [db.dao beginTransaction];
@@ -488,12 +483,15 @@
     // This is kind of a hack to put here?
     [TagPeer recacheCountsForUserTags];
     
+    CurrentState *state = [CurrentState sharedCurrentState];
+    [state resetActiveTag];
+    
+    // Update internal state
+    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
+
     // Tells whoever cares (in our case settings) that version updated
     NSNotification *aNotification = [NSNotification notificationWithName:@"versionDidUpdate" object:self userInfo:nil];
     [self performSelectorOnMainThread:@selector(postMainThreadNotification:) withObject:aNotification waitUntilDone:NO];
-
-
-    [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
   }
   else
   {

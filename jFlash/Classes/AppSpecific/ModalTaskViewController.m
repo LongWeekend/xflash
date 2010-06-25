@@ -316,6 +316,10 @@
     self.navigationItem.leftBarButtonItem = cancelButton;
     [cancelButton release];
   }
+  else
+  {
+    self.navigationItem.leftBarButtonItem = nil;
+  }
   
   [self didUpdateButtonsInView:self];
 }
