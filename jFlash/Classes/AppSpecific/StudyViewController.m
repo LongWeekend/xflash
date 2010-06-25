@@ -548,7 +548,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
-  LWE_LOG(@"Scroll??");
   if (pageControlIsChangingPage) 
   {
     return;
@@ -560,7 +559,6 @@
   CGFloat pageWidth = _scrollView.frame.size.width;
   int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
   pageControl.currentPage = page;
-  LWE_LOG(@"./././. scrolling now ... page is %d", page);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
