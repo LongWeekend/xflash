@@ -82,16 +82,13 @@
   }
 }
 
-
-
-
 /** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
- // redraw the progress bar
- [self refreshProgressBarView];
+  // redraw the progress bar
+  [self refreshProgressBarView];
 }
 
 - (void) viewDidLoad
@@ -141,8 +138,10 @@
   [self setupScrollView];
   
   [self _resetStudyView];
+  [self _setScrollViewsScrollibility];
 }
 
+#pragma mark -
 #pragma mark Convenience methods
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
 - (void) _setScrollViewsScrollibility 
@@ -155,18 +154,9 @@
   // Get settings to determine what data versio we are on
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  BOOL hasExamples = [[self currentCard] hasExampleSentences];
+  if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0] || ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY] && hasExamples == NO))
   {
-    if(![[self currentCard] hasExampleSentences])
-    {
-      [[self pageControl] setHidden:YES];
-      scrollView.pagingEnabled = NO;
-      scrollView.scrollEnabled = NO;
-    }
-  }
-  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0])
-  {
-    // TODO: this is repeated code and hack-ish, but necessary to get this out the door
     [[self pageControl] setHidden:YES];
     scrollView.pagingEnabled = NO;
     scrollView.scrollEnabled = NO;
@@ -203,7 +193,6 @@
     [[self tapForAnswerImage] setHidden:YES];
     [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
-    [scrollView setScrollEnabled:YES];
   }
   else	
   {
@@ -230,6 +219,11 @@
 - (void) _updateCardViewDelegates
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
+  if ([self cardViewControllerDelegate] != nil)
+  {
+    [self.cardViewControllerDelegate release];
+  }
   
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
@@ -551,10 +545,12 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
+#pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
+  LWE_LOG(@"Scroll??");
   if (pageControlIsChangingPage) 
   {
     return;
@@ -566,11 +562,22 @@
   CGFloat pageWidth = _scrollView.frame.size.width;
   int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
   pageControl.currentPage = page;
+  LWE_LOG(@"./././. scrolling now ... page is %d", page);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
 {
   pageControlIsChangingPage = NO;
+
+  // Toggle percent correct bubble to OFF when sentences display
+  if([pageControl currentPage] == 1 && percentCorrectVisible)
+  { 
+    [self doTogglePercentCorrectBtn]; // Turn off if on
+  }
+  else if([pageControl currentPage] == 0 && !percentCorrectVisible)
+  {
+    [self doTogglePercentCorrectBtn]; // Turn back on if off
+  }
 }
 
 #pragma mark -
@@ -604,6 +611,7 @@
 {
   [pageControl setCurrentPage: page];
   [self changePage:pageControl animated:NO];
+  pageControlIsChangingPage = NO;
 }
 
 #pragma mark -

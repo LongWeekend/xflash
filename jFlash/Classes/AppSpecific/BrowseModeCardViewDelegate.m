@@ -45,10 +45,6 @@
   CGRect frame = [[[aNotification object] addBtn] frame];
   frame.origin.x = 128;
   [[[aNotification object] addBtn] setFrame:frame];
-
-  // kana....?
-  // TODO: this needs to be called on studyviewcontroller
-  //[[[aNotification object] superview] doTogglePercentCorrectBtn];
 }
 
 @end

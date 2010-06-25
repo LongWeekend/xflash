@@ -12,6 +12,11 @@
 #import "UserPeer.h"
 #import "VersionManager.h"
 
+@interface SettingsViewController ()
+- (NSMutableArray*) _settingsTableDataSource;
+@end
+
+
 @implementation SettingsViewController
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, readingChanged, appirater, settingsDict;
 

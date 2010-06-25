@@ -460,10 +460,10 @@
     {
       success = NO;
       LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
-#if defined(APP_STORE_FINAL)
-      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
-      [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
-#endif
+      #if defined(APP_STORE_FINAL)
+        NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
+        [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
+      #endif
     }
   }
   
@@ -480,9 +480,9 @@
     // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setValue:JFLASH_VERSION_1_1 forKey:@"data_version"];
-#if defined(APP_STORE_FINAL)
-    [FlurryAPI logEvent:@"mergeSuccess" withParameters:dataToSend];
-#endif
+    #if defined(APP_STORE_FINAL)
+      [FlurryAPI logEvent:@"mergeSuccess" withParameters:nil];
+    #endif
 
     // TODO: refactor out a "on success method"
     // This is kind of a hack to put here?
