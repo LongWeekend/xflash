@@ -2074,7 +2074,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.1.2;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Beta;
 		};
