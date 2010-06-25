@@ -543,6 +543,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
+  LWE_LOG(@"Scroll??");
   if (pageControlIsChangingPage) 
   {
     return;
@@ -554,11 +555,22 @@
   CGFloat pageWidth = _scrollView.frame.size.width;
   int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
   pageControl.currentPage = page;
+  LWE_LOG(@"./././. scrolling now ... page is %d", page);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
 {
   pageControlIsChangingPage = NO;
+
+  // Toggle percent correct bubble to OFF when sentences display
+  if([pageControl currentPage] == 1 && percentCorrectVisible)
+  { 
+    [self doTogglePercentCorrectBtn]; // Turn off if on
+  }
+  else if([pageControl currentPage] == 0 && !percentCorrectVisible)
+  {
+    [self doTogglePercentCorrectBtn]; // Turn back on if off
+  }
 }
 
 #pragma mark -

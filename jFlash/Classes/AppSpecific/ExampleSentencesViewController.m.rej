@@ -1,0 +1,45 @@
+diff a/jFlash/Classes/AppSpecific/ExampleSentencesViewController.m b/jFlash/Classes/AppSpecific/ExampleSentencesViewController.m	(rejected hunks)
+@@ -23,7 +23,7 @@
+ 
+ @implementation ExampleSentencesViewController
+ @synthesize delegate, datasource;
+-@synthesize sentencesWebView, headwordLabel, readingLabel;
++@synthesize sentencesWebView;
+ 
+ #pragma mark -
+ #pragma mark Delegate Methods
+@@ -91,16 +91,20 @@
+   if([datasource respondsToSelector:@selector(currentCard)])
+   {
+ //    NSString* mungedHeadWordWithReading = [[NSString alloc] initWithFormat:@"%@ (%@)", [[datasource currentCard] headword], [[datasource currentCard] combinedReadingForSettings]];
+-    [[self readingLabel] setText: [[datasource currentCard] combinedReadingForSettings]];
+-    [[self headwordLabel] setText: [[datasource currentCard] headword]];
++//    [[self readingLabel] setText: [[datasource currentCard] combinedReadingForSettings]];
++//    [[self headwordLabel] setText: [[datasource currentCard] headword]];
+     
+     // Get all sentences out - extract this
+     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
+-    NSString* html = @"<ol>";
++    NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];
++                      
++    html = [html stringByAppendingFormat:@"<h2 class='headwordLabel'>%@</h2>", [[datasource currentCard] headword]];
++    html = [html stringByAppendingFormat:@"<ol>"];
++
+     for (ExampleSentence* sentence in sentences) 
+     {
+-      html = [html stringByAppendingFormat:@"<li>%@<br/>", [sentence sentenceJa]];
+-      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn]];
++      html = [html stringByAppendingFormat:@"<li>%@<br/>", [sentence sentenceJa] ];
++      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn] ];
+     }
+     html = [html stringByAppendingString:@"</ol>"];
+     [self setupSentencesWebView:html];
+@@ -127,8 +131,6 @@
+ 
+ - (void)dealloc {
+     [sentencesWebView release];
+-    [headwordLabel release];
+-    [readingLabel release];
+     // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
+     [super dealloc];
+ }
