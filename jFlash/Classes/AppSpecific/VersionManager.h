@@ -40,6 +40,7 @@ typedef enum _migraterStates
 + (BOOL) databaseIsUpdatable;
 - (float) progress;
 - (void) setProgress:(float)progress;
+- (void) _downloadFTSPlugin;
 
 @property (nonatomic, retain) LWEDownloader *dlHandler;
 @property (nonatomic, retain) NSString *taskMessage;
