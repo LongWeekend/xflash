@@ -454,10 +454,6 @@
       [FlurryAPI logEvent:@"mergeSuccess" withParameters:nil];
     #endif
 
-    // Re-attach the cards & FTS database
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    [pm loadInstalledPlugins];
-    
     // TODO: refactor out a "on success method"
     // This is kind of a hack to put here?
     [TagPeer recacheCountsForUserTags];
@@ -477,6 +473,11 @@
     [db.dao rollback];
     [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
   }
+  
+  // Re-attach the cards & FTS database
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  [pm loadInstalledPlugins];
+  
   [pool release];
 }
 
