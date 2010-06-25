@@ -138,6 +138,7 @@
   [self setupScrollView];
   
   [self _resetStudyView];
+  [self _setScrollViewsScrollibility];
 }
 
 #pragma mark -
