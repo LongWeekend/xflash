@@ -27,6 +27,7 @@ extern NSString * const APP_FACEBOOK;
 }
 
 - (void) iterateSetting: (NSString*) setting;
+- (NSMutableArray*) _settingsTableDataSource;
 
 @property BOOL settingsChanged;
 @property BOOL headwordChanged;

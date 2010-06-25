@@ -92,7 +92,7 @@ static NSLock *bandwidthThrottlingLock = nil;
 static unsigned long maxBandwidthPerSecond = 0;
 
 // A default figure for throttling bandwidth on mobile devices
-unsigned long const ASIWWANBandwidthThrottleAmount = 14800;
+unsigned long const ASIWWANBandwidthThrottleAmount = 16384;
 
 #if TARGET_OS_IPHONE
 // YES when bandwidth throttling is active

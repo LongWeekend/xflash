@@ -138,22 +138,22 @@
  */
 - (void) willUpdateButtonsInView:(ModalTaskViewController*)sender
 {
-  // If not ready, don't show start button
-  if (_migraterState != kMigraterReady)
-  {
-    sender.startButton.hidden = YES;
-  }
-  else
+  // Handle the start button
+  if (_migraterState == kMigraterReady || [self isFailureState])
   {
     sender.startButton.hidden = NO;
   }
+  else
+  {
+    sender.startButton.hidden = YES;
+  }
 
-  // Hide the progress indicator if we are making the index
-  if (_migraterState == kMigraterPrepareSQL)
+  // Hide the progress indicator if we are making the index or are failed
+  if (_migraterState == kMigraterPrepareSQL || _migraterState == kMigraterReady || [self isFailureState])
   {
     sender.progressIndicator.hidden = YES;
   }
-  else if (_migraterState == kMigraterUpdateSQL)
+  else
   {
     sender.progressIndicator.hidden = NO;
   }
@@ -212,7 +212,7 @@
  */
 - (BOOL) canStartTask
 {
-  if (_migraterState == kMigraterReady)
+  if (_migraterState == kMigraterReady || [self canRetryTask])
     return YES;
   else
     return NO;
@@ -222,12 +222,12 @@
 /** ModalTaskDelegate - startTask */
 - (void) startTask
 {
-  if (_migraterState == kMigraterReady)
+  if ([self canStartTask])
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
     [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
 #if defined(APP_STORE_FINAL)
-    [FlurryAPI logEvent:@"mergeAttempted" ];
+    [FlurryAPI logEvent:@"mergeAttempted"];
 #endif
   }
 }
@@ -257,6 +257,7 @@
  */ 
 - (void) cancelTask
 {
+  // TODO: this KNOWS too much about the downloader - maybe a call to [self canCancelTask]?¥
   if (_migraterState == kMigraterDownloadPlugins && [[self dlHandler] canCancelTask])
   {
     [[self dlHandler] cancelTask];

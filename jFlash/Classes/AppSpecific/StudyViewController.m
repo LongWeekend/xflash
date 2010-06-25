@@ -55,11 +55,11 @@
   }
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash",@"StudyViewController.UpdateAlertViewTitle")
-                                                        message:NSLocalizedString(@"We're all grown up!  In this new version we improved the database and added great new features.  We'd really appreciate about 3 minutes of your time to update your data. We promise you won't lose your progress!  Care to upgrade now? A wifi or 3G connection is needed.",@"RootViewController.UpdateAlertViewMessage")
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to JFlash 1.1!",@"StudyViewController.UpdateAlertViewTitle")
+                                                        message:NSLocalizedString(@"We need 3-5 minutes of your time to update your dictionary. Your study progress will be transferred to the new dictionary.\n\nYou'll also need a WiFi or 3G connection. Do this now?",@"RootViewController.UpdateAlertViewMessage")
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                              otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
+                                              cancelButtonTitle:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                              otherButtonTitles:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
     [alertView show];
     [alertView release];
     _alreadyShowedAlertView = YES;
@@ -519,16 +519,23 @@
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
   
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
     [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
     [[self exampleSentencesViewController] setDatasource:self];
   }
-  else
+  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_1])
   {
     // No example sentence plugin loaded, so show "please download me" view instead
     [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
+  }
+  else
+  {
+    // Don't show for JFlash 1.0
+    [[self pageControl] setHidden:YES];
   }
   			
   UIView *sentencesView = [[self exampleSentencesViewController] view];
