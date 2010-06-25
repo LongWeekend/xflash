@@ -56,7 +56,6 @@
   [userAvatarPreviewBtn setBackgroundImage:[selectedUser getUserThumbnailLarge] forState:UIControlStateNormal];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  userNicknameTextField.backgroundColor = [UIColor whiteColor];
 }
 
 # pragma mark UI Responders

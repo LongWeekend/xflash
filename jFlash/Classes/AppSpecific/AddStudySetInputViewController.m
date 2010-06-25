@@ -38,7 +38,8 @@
   setNameTextfield.returnKeyType = UIReturnKeyDone;
   setNameTextfield.placeholder = NSLocalizedString(@"Type set name here",@"AddStudySetInputViewController.TypeNewSetName");
   setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
-  setNameTextfield.backgroundColor = [UIColor whiteColor];
+  setNameTextfield.backgroundColor = [UIColor clearColor];
+  setNameTextfield.borderStyle = UITextBorderStyleRoundedRect;
   
   UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = cancelButton;
