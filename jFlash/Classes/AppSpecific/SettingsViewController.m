@@ -49,7 +49,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
 {
   [super loadView];
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"versionDidUpdate" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
 
@@ -59,6 +59,8 @@ NSString * const APP_ALGORITHM = @"algorithm";
 - (void) _addPluginMenuItem
 {
   [self setSectionArray:[self _settingsTableDataSource]];
+  self.navigationItem.rightBarButtonItem = nil;
+  [[self tableView] reloadData];
 }
 
 

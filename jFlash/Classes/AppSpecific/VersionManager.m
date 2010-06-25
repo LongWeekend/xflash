@@ -226,7 +226,7 @@
 /** ModalTaskDelegate - startTask */
 - (void) startTask
 {
-  if ([self canStartTask])
+  if ([self canStartTask] || [VersionManager databaseIsUpdatable])
   {
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
     [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
@@ -460,13 +460,9 @@
     
     CurrentState *state = [CurrentState sharedCurrentState];
     [state resetActiveTag];
-    
+
     // Update internal state
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
-
-    // Tells whoever cares (in our case settings) that version updated
-    NSNotification *aNotification = [NSNotification notificationWithName:@"versionDidUpdate" object:self userInfo:nil];
-    [self performSelectorOnMainThread:@selector(postMainThreadNotification:) withObject:aNotification waitUntilDone:NO];
   }
   else
   {
