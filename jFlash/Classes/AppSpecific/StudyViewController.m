@@ -521,7 +521,6 @@
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
   
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
