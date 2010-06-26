@@ -10,12 +10,16 @@
 // TODO: localize this
 NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex: \"Change the first kanji to X\"";
 
+@interface ReportBadDataViewController ()
+@property (nonatomic, retain) NSArray *_issueTypeArray;
+@end
+
 /**
  * Allows user to report bad data in the cards to LWE via Flurry event handling
  */
 @implementation ReportBadDataViewController
 
-@synthesize issueTypeBox, userMsgInputBox, userEmailBox, pickerView, hotheadImg;
+@synthesize issueTypeBox, userMsgInputBox, userEmailBox, pickerView, hotheadImg, _issueTypeArray;
 
 /**
  * Customized initializer to set the card on init
@@ -36,7 +40,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     
     // Initialize issue type array
     _userSelectedIssueType = -1;
-    _issueTypeArray = [[NSArray alloc] initWithObjects:
+    NSArray *tmpArray = [[NSArray alloc] initWithObjects:
                       NSLocalizedString(@"Reading or romaji is wrong",@"ReportBadDataViewController.Reasons_WrongReadingOrRomaji"),
                       NSLocalizedString(@"Kanji is wrong",@"ReportBadDataViewController.Reasons_WrongKanji"),
                       NSLocalizedString(@"Card is a duplicate",@"ReportBadDataViewController.Reasons_Duplicate"),
@@ -44,6 +48,8 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                       NSLocalizedString(@"Antiquated or dead word",@"ReportBadDataViewController.Reasons_DeadWord"),
                       NSLocalizedString(@"Example sentence is odd",@"ReportBadDataViewController.Reasons_ExSentence"),
                       NSLocalizedString(@"Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
+    [self set_issueTypeArray:tmpArray];
+    [tmpArray release];
   }
   return self;
 }
@@ -354,6 +360,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 //! standard dealloc
 - (void)dealloc
 {
+  [self set_issueTypeArray:nil];
   [self setPickerView:nil];
   [self setHotheadImg:nil];
   [super dealloc];

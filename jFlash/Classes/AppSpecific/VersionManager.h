@@ -23,6 +23,7 @@ typedef enum _migraterStates
   kMigraterPrepareSQL,              //! Prepare DB by adding an index
   kMigraterUpdateSQL,               //! Updating SQL
   kMigraterUpdateSQLFail,           //! Failed to update SQL
+  kMigraterFinalizeSQL,             //! Commit statement
   kMigraterUnknownFail,             //! God help us lest we get here
   kMigraterSuccess                  //! User has upgraded successfully
 } migraterStates;
@@ -40,7 +41,7 @@ typedef enum _migraterStates
 + (BOOL) databaseIsUpdatable;
 - (float) progress;
 - (void) setProgress:(float)progress;
-- (void) _loadPlugins;
+- (void) _downloadFTSPlugin;
 
 @property (nonatomic, retain) LWEDownloader *dlHandler;
 @property (nonatomic, retain) NSString *taskMessage;

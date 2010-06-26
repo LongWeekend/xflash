@@ -14064,3 +14064,5 @@ UPDATE tags SET count = count + 4  WHERE tag_id = 197
 UPDATE tags SET count = count -125  WHERE tag_id = 198
 UPDATE tags SET count = count -8  WHERE tag_id = 199
 UPDATE tags SET count = count + 1  WHERE tag_id = 219
+ALTER TABLE main.cards_html RENAME TO old_cards_html
+ALTER TABLE main.cards RENAME TO old_cards

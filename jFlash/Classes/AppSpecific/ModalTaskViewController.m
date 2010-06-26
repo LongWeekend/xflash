@@ -24,6 +24,7 @@
     [self setTaskHandler:nil];
     [self setWebViewContentDirectory:nil];
     [self setWebViewContentFileName:nil];
+    self.navigationItem.leftBarButtonItem = nil;
   }
   return self;
 }
@@ -219,7 +220,7 @@
   {
     [[self taskHandler] cancelTask];
     self.progressIndicator.hidden = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCancelSuccessfully" object:nil];
   }
 }
 
@@ -312,9 +313,16 @@
        
   if ([self canCancelTask])
   {
-    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
+    if (self.navigationItem.leftBarButtonItem == nil)
+    {
+      UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
+      self.navigationItem.leftBarButtonItem = cancelButton;
+      [cancelButton release];
+    }
+  }
+  else
+  {
+    self.navigationItem.leftBarButtonItem = nil;
   }
   
   [self didUpdateButtonsInView:self];

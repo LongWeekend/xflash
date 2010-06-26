@@ -14,6 +14,7 @@
 - (void)_updateCardViewDelegates;
 - (void)_resetExampleSentencesView;
 - (void)_setScrollViewsScrollibility;
+- (void)_setPageControlVisibility;
 @end
 
 @implementation StudyViewController
@@ -55,11 +56,11 @@
   }
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"The New Japanese Flash",@"StudyViewController.UpdateAlertViewTitle")
-                                                        message:NSLocalizedString(@"We're all grown up!  In this new version we improved the database and added great new features.  We'd really appreciate about 3 minutes of your time to update your data. We promise you won't lose your progress!  Care to upgrade now? A wifi or 3G connection is needed.",@"RootViewController.UpdateAlertViewMessage")
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to JFlash 1.1!",@"StudyViewController.UpdateAlertViewTitle")
+                                                        message:NSLocalizedString(@"We need 3-5 minutes of your time to update your dictionary. Your study progress will be transferred to the new dictionary.\n\nYou'll also need a WiFi or 3G connection. Do this now?",@"RootViewController.UpdateAlertViewMessage")
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Update Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                              otherButtonTitles:NSLocalizedString(@"Update Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
+                                              cancelButtonTitle:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                              otherButtonTitles:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
     [alertView show];
     [alertView release];
     _alreadyShowedAlertView = YES;
@@ -82,16 +83,13 @@
   }
 }
 
-
-
-
 /** Refresh progress bar when view appears */
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
- // redraw the progress bar
- [self refreshProgressBarView];
+  // redraw the progress bar
+  [self refreshProgressBarView];
 }
 
 - (void) viewDidLoad
@@ -141,33 +139,32 @@
   [self setupScrollView];
   
   [self _resetStudyView];
+  [self _setPageControlVisibility];
 }
 
+#pragma mark -
 #pragma mark Convenience methods
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
+- (void) _setPageControlVisibility
+{
+  if ([[self currentCard] hasExampleSentences] == NO)
+  {
+    [[self pageControl] setHidden:YES];    
+  }
+  else 
+  {
+    [[self pageControl] setHidden:NO];    
+  }
+}
+
+//! Controls whether the scroll view should be allowed to scroll or not
 - (void) _setScrollViewsScrollibility 
 {
-  // Default behavior
-  [[self pageControl] setHidden:NO];
   scrollView.pagingEnabled = YES;
   scrollView.scrollEnabled = YES;
   
-  // Get settings to determine what data versio we are on
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  if ([[self currentCard] hasExampleSentences] == NO)
   {
-    if(![[self currentCard] hasExampleSentences])
-    {
-      [[self pageControl] setHidden:YES];
-      scrollView.pagingEnabled = NO;
-      scrollView.scrollEnabled = NO;
-    }
-  }
-  else if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0])
-  {
-    // TODO: this is repeated code and hack-ish, but necessary to get this out the door
-    [[self pageControl] setHidden:YES];
     scrollView.pagingEnabled = NO;
     scrollView.scrollEnabled = NO;
   }
@@ -180,10 +177,10 @@
   {
     // Plugin is installed, set up the scroll view
     [self _setScrollViewsScrollibility];
+    [self _setPageControlVisibility];
     [[self exampleSentencesViewController] setup];
   }
 }
-
 
 - (void) _resetStudyView
 {
@@ -203,7 +200,6 @@
     [[self tapForAnswerImage] setHidden:YES];
     [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
-    [scrollView setScrollEnabled:YES];
   }
   else	
   {
@@ -230,6 +226,11 @@
 - (void) _updateCardViewDelegates
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
+  if ([self cardViewControllerDelegate] != nil)
+  {
+    [self.cardViewControllerDelegate release];
+  }
   
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
@@ -301,6 +302,7 @@
   [[self revealCardBtn] setHidden:YES];
   [[self tapForAnswerImage] setHidden:YES];
   [self _setScrollViewsScrollibility];
+  [self _setPageControlVisibility];
   [cardViewController reveal];
   [actionBarController reveal];
 }
@@ -519,7 +521,8 @@
 	NSUInteger views = 2;
 	CGFloat cx = scrollView.frame.size.width;
   
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
     [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
@@ -544,10 +547,12 @@
 	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
 }
 
+#pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
+  LWE_LOG(@"Scroll??");
   if (pageControlIsChangingPage) 
   {
     return;
@@ -559,6 +564,7 @@
   CGFloat pageWidth = _scrollView.frame.size.width;
   int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
   pageControl.currentPage = page;
+  LWE_LOG(@"./././. scrolling now ... page is %d", page);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
@@ -607,6 +613,7 @@
 {
   [pageControl setCurrentPage: page];
   [self changePage:pageControl animated:NO];
+  pageControlIsChangingPage = NO;
 }
 
 #pragma mark -

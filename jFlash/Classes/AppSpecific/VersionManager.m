@@ -29,6 +29,8 @@
     _progress = 0.0f;
     _cancelRequest = NO;
     _migraterState = kMigraterReady;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTask) name:UIApplicationWillTerminateNotification object:nil];
   }
   return self;
 }
@@ -138,22 +140,22 @@
  */
 - (void) willUpdateButtonsInView:(ModalTaskViewController*)sender
 {
-  // If not ready, don't show start button
-  if (_migraterState != kMigraterReady)
-  {
-    sender.startButton.hidden = YES;
-  }
-  else
+  // Handle the start button
+  if (_migraterState == kMigraterReady || [self isFailureState])
   {
     sender.startButton.hidden = NO;
   }
+  else
+  {
+    sender.startButton.hidden = YES;
+  }
 
-  // Hide the progress indicator if we are making the index
-  if (_migraterState == kMigraterPrepareSQL)
+  // Hide the progress indicator if we are making the index or are failed
+  if (_migraterState == kMigraterPrepareSQL || _migraterState == kMigraterReady || [self isFailureState])
   {
     sender.progressIndicator.hidden = YES;
   }
-  else if (_migraterState == kMigraterUpdateSQL)
+  else
   {
     sender.progressIndicator.hidden = NO;
   }
@@ -191,6 +193,10 @@
     // Delegate call
     return [[self dlHandler] canCancelTask];
   }
+  else if (_migraterState == kMigraterPrepareSQL || _migraterState == kMigraterFinalizeSQL)
+  {
+    return NO;
+  }
   else
   {
     return YES;
@@ -212,7 +218,7 @@
  */
 - (BOOL) canStartTask
 {
-  if (_migraterState == kMigraterReady)
+  if (_migraterState == kMigraterReady || [self canRetryTask])
     return YES;
   else
     return NO;
@@ -222,12 +228,13 @@
 /** ModalTaskDelegate - startTask */
 - (void) startTask
 {
-  if (_migraterState == kMigraterReady)
+  if ([self canStartTask] || [VersionManager databaseIsUpdatable])
   {
+    _cancelRequest = NO;
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
-    [self performSelector:@selector(_openDatabase:) withObject:[LWEFile createDocumentPathWithFilename:JFLASH_10_USER_DATABASE] afterDelay:0.1f];
+    [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
 #if defined(APP_STORE_FINAL)
-    [FlurryAPI logEvent:@"mergeAttempted" ];
+    [FlurryAPI logEvent:@"mergeAttempted"];
 #endif
   }
 }
@@ -257,6 +264,7 @@
  */ 
 - (void) cancelTask
 {
+  // TODO: this KNOWS too much about the downloader - maybe a call to [self canCancelTask]?
   if (_migraterState == kMigraterDownloadPlugins && [[self dlHandler] canCancelTask])
   {
     [[self dlHandler] cancelTask];
@@ -282,6 +290,26 @@
 }
 
 
+/** 
+ * Migration - STEP 1
+ */
+- (void) _checkPlugin
+{
+  // Determine the next step - do they already have FTS?
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:CARD_DB_KEY])
+  {
+    // SKIP to STEP 3
+    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
+  }
+  else
+  {
+    // STEP 2
+    [self _downloadFTSPlugin];
+  }
+  return;  
+}
+
 
 /**
  * Migration - STEP 2
@@ -291,6 +319,8 @@
  */
 - (void) _downloadFTSPlugin
 {
+  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
+  
   // Download the FTS file - even if this is unsuccessful, it doesn't hurt the user
   // They can still access (and will access) the old FTS off their main table -- EVEN if this table is attached.
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -308,67 +338,6 @@
   
   // Now go
   [[self dlHandler] startTask];
-}
-
-
-/** 
- * Migration - STEP 1
- * Opens the old version database as the main database
- * Calls _loadFTSPlugin on finish
- */
-- (void) _openDatabase:(NSString*)filename
-{
-  // Get the database open and ready
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  if (db.databaseOpenFinished)
-  {
-    // Already open, so close it once to detach any databases and get JUST the USER database
-    [db closeDatabase];
-  }
-  if (![db openDatabase:filename])
-  {
-    [NSException raise:@"OldDatabaseNotOpened" format:@"Unable to open existing database for 1.0"];
-  }
-  [self _updateInternalState:kMigraterDownloadPlugins withTaskMessage:NSLocalizedString(@"Connecting to our server",@"VersionManager.BeginningDownloadMsg")];
-  
-  // Determine the next step - do they already have FTS?
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([pm pluginIsLoaded:FTS_DB_KEY])
-  {
-    [self _loadPlugins];
-  }
-  else
-  {
-    [self _downloadFTSPlugin];
-  }
-  return;  
-}
-
-
-/**
- * Migration - STEP 3
- * Tries to load the FTS plugin
- * Will fail the first time around, so calls plugin download
- * On download complete, it will call this method again.
- * After FTS is successfully loaded, will call _updateUserDatabase
- */
-- (void) _loadPlugins
-{
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-
-  // Load FTS plugin
-  BOOL isFTSLoaded, isCardDBLoaded;
-  isFTSLoaded = [pm pluginIsLoaded:FTS_DB_KEY];
-  isCardDBLoaded = [pm pluginIsLoaded:CARD_DB_KEY];
-  
-  if (isFTSLoaded && isCardDBLoaded || 1)
-  {
-    [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
-  }
-  else
-  {
-    // TODO: put something here to pick up on
-  }
 }
 
 
@@ -394,14 +363,15 @@
     {
       LWE_LOG(@"Download succeeded, now it's time to keep going");
       [[NSNotificationCenter defaultCenter] removeObserver:self];
-      [self _loadPlugins];
+      // STEP 3
+      [self performSelectorInBackground:@selector(_updateUserDatabase) withObject:nil];
     }
   }
 }
 
 
 /**
- * Migration - STEP 4
+ * Migration - STEP 3
  * Reads SQL from the bundle SQL file and enters a tight C loop to
  * execute it on the open database.
  */
@@ -425,16 +395,21 @@
   
   // Run all the statements
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];  
-  db.dao.traceExecution = NO;
   
   // Do the INDEX!!
   [self _updateInternalState:kMigraterPrepareSQL withTaskMessage:NSLocalizedString(@"Preparing new data (~75 seconds)",@"VersionManager.PreparingDBMsg")];
   [db executeUpdate:@"CREATE INDEX IF NOT EXISTS card_tag_link_tag_card_index ON card_tag_link(card_id,tag_id)"];
+
+  // Get rid of this so I can get an exclusive lock on the DB
+  [db detachDatabase:FTS_DB_KEY];
+  [db detachDatabase:CARD_DB_KEY];
   
-  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.PreparingDBMsg")];
 
   LWE_LOG(@"Starting transaction");
   [db.dao beginTransaction];
+  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.MergingDBMsg")];
+
+  db.dao.traceExecution = NO;
   
   LWE_LOG(@"Starting loop");
   while (!feof(fh))
@@ -459,10 +434,11 @@
     {
       success = NO;
       LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
-#if defined(APP_STORE_FINAL)
-      NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
-      [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
-#endif
+      #if defined(APP_STORE_FINAL)
+        NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
+        [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
+      #endif
+      break;
     }
   }
   
@@ -471,7 +447,7 @@
 
   if (success)
   {
-    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:@"Finalizing (~10 seconds)"];
+    [self _updateInternalState:kMigraterFinalizeSQL withTaskMessage:@"Finalizing (~10 seconds)"];
     LWE_LOG(@"STARTING COMMIT");
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
@@ -479,28 +455,45 @@
     // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setValue:JFLASH_VERSION_1_1 forKey:@"data_version"];
-#if defined(APP_STORE_FINAL)
-    [FlurryAPI logEvent:@"mergeSuccess" withParameters:dataToSend];
-#endif
+    #if defined(APP_STORE_FINAL)
+      [FlurryAPI logEvent:@"mergeSuccess" withParameters:nil];
+    #endif
 
     // TODO: refactor out a "on success method"
     // This is kind of a hack to put here?
     [TagPeer recacheCountsForUserTags];
     
-    // Tells whoever cares (in our case settings) that version updated
-    NSNotification *aNotification = [NSNotification notificationWithName:@"versionDidUpdate" object:self userInfo:nil];
-    [self performSelectorOnMainThread:@selector(postMainThreadNotification:) withObject:aNotification waitUntilDone:NO];
+    CurrentState *state = [CurrentState sharedCurrentState];
+    [state resetActiveTag];
 
-
+    // Update internal state
     [self _updateInternalState:kMigraterSuccess withTaskMessage:@"Completed Successfully"];
   }
   else
   {
-    [db.dao rollback];
-    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
+    [self _rollback:db];
+    if (!_cancelRequest) 
+    {
+      [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
+    }
   }
+  
+  // Re-attach the cards & FTS database
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  [pm loadInstalledPlugins];
   [pool release];
 }
+
+
+//! Rolls back an ongoing transaction
+- (void) _rollback: (LWEDatabase*) db
+{
+  if ([db.dao inTransaction])
+  {
+    [db.dao rollback];
+  }
+}
+
 
 -(void) dealloc
 {

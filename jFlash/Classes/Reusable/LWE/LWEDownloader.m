@@ -27,6 +27,9 @@
     _unzipShouldCancel = NO;
     _remoteFileIsGzipCompressed = NO;
     _compressedFilename = nil;
+    
+    // Cancel any ongoing download if they terminate the app
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTask) name:UIApplicationWillTerminateNotification object:nil];
   }
   return self;
 }
@@ -143,7 +146,6 @@
   if ([self isFailureState] || downloaderState == kDownloaderCancelled || downloaderState == kDownloaderNetworkFail)
   {
     [[sender startButton] setHidden:NO];
-    [[[sender startButton] titleLabel] setText: NSLocalizedString(@"Restart", @"ModalTaskViewController.retry")];
     [[sender progressIndicator] setHidden:YES];
   }
   else if (downloaderState != kDownloaderReady)
@@ -153,7 +155,6 @@
   else
   {
     [[sender startButton] setHidden:NO];
-    [[[sender startButton] titleLabel] setText: NSLocalizedString(@"Start Download", @"ModalTaskViewController.start")];
   }
   
   // If not failed, don't show retry button (don't count cancellation)
@@ -198,7 +199,8 @@
  */
 - (BOOL) canStartTask
 {
-  if (downloaderState == kDownloaderReady)
+  // TODO: this is a hack, abstract this out to modal task and use RETRY
+  if (downloaderState == kDownloaderReady || [self isFailureState])
     return YES;
   else
     return NO;
@@ -214,6 +216,9 @@
  */
 - (void) startTask
 {
+  // TODO: this is a hack
+  if ([self isFailureState]) [self resetTask];
+  
   // Only download if we have a URL to get
   if ([self targetURL] && (downloaderState == kDownloaderReady || downloaderState == kDownloaderPaused))
   {
@@ -235,7 +240,7 @@
     [_request setAllowResumeForFileDownloads:YES];
 
     // Use 3G throttling
-//    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
+    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
     
     // Handle file differently depending on processing requirements after the fact (unzip)
     if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
@@ -272,6 +277,7 @@
   {
     case kDownloaderRetrievingMetaData:
     case kDownloaderRetrievingData:
+      LWE_LOG(@"Cancelling request!");
       [_request cancel];
       [self _updateInternalState:kDownloaderCancelled withTaskMessage:NSLocalizedString(@"Download cancelled",@"LWEDownloader.cancelled")];
       break;
@@ -577,8 +583,9 @@
 //! Standard dealloc
 -(void) dealloc
 {
-  [super dealloc];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [_compressedFilename release];
+  [super dealloc];
 }
 
 @end

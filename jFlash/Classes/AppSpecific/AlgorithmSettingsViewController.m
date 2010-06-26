@@ -96,13 +96,25 @@ enum ControlSectionRows
     maxCardsUISlider.tag = kMaxCardsRow;
     maxCardsUISlider.continuous = NO;
     [maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
-    cell.textLabel.text = [NSString stringWithFormat:@"%d", MIN_MAX_STUDYING];
+
+    // the label on the left of the cell
+    UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 20, 35)];
+    leftLabel.font = [UIFont boldSystemFontOfSize:17];
+    leftLabel.text = [NSString stringWithFormat:@"%d", MIN_MAX_STUDYING];
+    [cell addSubview:leftLabel];
+    [leftLabel release];
+    
+    // the slider
     [cell addSubview: maxCardsUISlider];
+    
+    // the label on the right
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(280, 5, 20, 35)];
     rightLabel.font = [UIFont boldSystemFontOfSize:17];
     rightLabel.text = [NSString stringWithFormat:@"%d", MAX_MAX_STUDYING];
     [cell addSubview:rightLabel];
+    
     [rightLabel release];
+    [sliderValue release];
   }
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
