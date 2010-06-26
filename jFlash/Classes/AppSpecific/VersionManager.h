@@ -23,6 +23,7 @@ typedef enum _migraterStates
   kMigraterPrepareSQL,              //! Prepare DB by adding an index
   kMigraterUpdateSQL,               //! Updating SQL
   kMigraterUpdateSQLFail,           //! Failed to update SQL
+  kMigraterFinalizeSQL,             //! Commit statement
   kMigraterUnknownFail,             //! God help us lest we get here
   kMigraterSuccess                  //! User has upgraded successfully
 } migraterStates;

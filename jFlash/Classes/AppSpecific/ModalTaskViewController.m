@@ -24,6 +24,7 @@
     [self setTaskHandler:nil];
     [self setWebViewContentDirectory:nil];
     [self setWebViewContentFileName:nil];
+    self.navigationItem.leftBarButtonItem = nil;
   }
   return self;
 }
@@ -312,9 +313,12 @@
        
   if ([self canCancelTask])
   {
-    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
+    if (self.navigationItem.leftBarButtonItem == nil)
+    {
+      UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
+      self.navigationItem.leftBarButtonItem = cancelButton;
+      [cancelButton release];
+    }
   }
   else
   {

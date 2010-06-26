@@ -40,7 +40,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     
     // Initialize issue type array
     _userSelectedIssueType = -1;
-    self._issueTypeArray = [[NSArray alloc] initWithObjects:
+    NSArray *tmpArray = [[NSArray alloc] initWithObjects:
                       NSLocalizedString(@"Reading or romaji is wrong",@"ReportBadDataViewController.Reasons_WrongReadingOrRomaji"),
                       NSLocalizedString(@"Kanji is wrong",@"ReportBadDataViewController.Reasons_WrongKanji"),
                       NSLocalizedString(@"Card is a duplicate",@"ReportBadDataViewController.Reasons_Duplicate"),
@@ -48,6 +48,8 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                       NSLocalizedString(@"Antiquated or dead word",@"ReportBadDataViewController.Reasons_DeadWord"),
                       NSLocalizedString(@"Example sentence is odd",@"ReportBadDataViewController.Reasons_ExSentence"),
                       NSLocalizedString(@"Something else",@"ReportBadDataViewController.Reasons_Other"),nil];
+    [self set_issueTypeArray:tmpArray];
+    [tmpArray release];
   }
   return self;
 }

@@ -29,6 +29,8 @@
     _progress = 0.0f;
     _cancelRequest = NO;
     _migraterState = kMigraterReady;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTask) name:UIApplicationWillTerminateNotification object:nil];
   }
   return self;
 }
@@ -191,7 +193,7 @@
     // Delegate call
     return [[self dlHandler] canCancelTask];
   }
-  else if (_migraterState == kMigraterPrepareSQL)
+  else if (_migraterState == kMigraterPrepareSQL || _migraterState == kMigraterFinalizeSQL)
   {
     return NO;
   }
@@ -228,6 +230,7 @@
 {
   if ([self canStartTask] || [VersionManager databaseIsUpdatable])
   {
+    _cancelRequest = NO;
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
     [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
 #if defined(APP_STORE_FINAL)
@@ -261,7 +264,7 @@
  */ 
 - (void) cancelTask
 {
-  // TODO: this KNOWS too much about the downloader - maybe a call to [self canCancelTask]?¥
+  // TODO: this KNOWS too much about the downloader - maybe a call to [self canCancelTask]?
   if (_migraterState == kMigraterDownloadPlugins && [[self dlHandler] canCancelTask])
   {
     [[self dlHandler] cancelTask];
@@ -401,10 +404,11 @@
   [db detachDatabase:FTS_DB_KEY];
   [db detachDatabase:CARD_DB_KEY];
   
-  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.MergingDBMsg")];
 
   LWE_LOG(@"Starting transaction");
   [db.dao beginTransaction];
+  [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:NSLocalizedString(@"Merging Data (~60 seconds)",@"VersionManager.MergingDBMsg")];
+
   db.dao.traceExecution = NO;
   
   LWE_LOG(@"Starting loop");
@@ -434,6 +438,7 @@
         NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
         [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
       #endif
+      break;
     }
   }
   
@@ -442,7 +447,7 @@
 
   if (success)
   {
-    [self _updateInternalState:kMigraterUpdateSQL withTaskMessage:@"Finalizing (~10 seconds)"];
+    [self _updateInternalState:kMigraterFinalizeSQL withTaskMessage:@"Finalizing (~10 seconds)"];
     LWE_LOG(@"STARTING COMMIT");
     [db.dao commit];
     LWE_LOG(@"Finished transaction");
@@ -466,16 +471,29 @@
   }
   else
   {
-    [db.dao rollback];
-    [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
+    [self _rollback:db];
+    if (!_cancelRequest) 
+    {
+      [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
+    }
   }
   
   // Re-attach the cards & FTS database
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   [pm loadInstalledPlugins];
-  
   [pool release];
 }
+
+
+//! Rolls back an ongoing transaction
+- (void) _rollback: (LWEDatabase*) db
+{
+  if ([db.dao inTransaction])
+  {
+    [db.dao rollback];
+  }
+}
+
 
 -(void) dealloc
 {
