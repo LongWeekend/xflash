@@ -240,7 +240,7 @@
     [_request setAllowResumeForFileDownloads:YES];
 
     // Use 3G throttling
-    //[ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
+    [ASIHTTPRequest setShouldThrottleBandwidthForWWAN:YES];
     
     // Handle file differently depending on processing requirements after the fact (unzip)
     if (_remoteFileIsGzipCompressed && _compressedFilename && [self targetFilename])
