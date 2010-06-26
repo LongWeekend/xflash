@@ -176,9 +176,9 @@
   // Test drive the attachment to verify it matches
   if ([db attachDatabase:filePath withName:@"LWEDATABASETMP"])
   {
-    NSString* version = nil;
+//    NSString* version = nil;
     NSString* pluginKey = nil;
-    NSString* pluginName = nil;
+//    NSString* pluginName = nil;
     BOOL foundVersionTable = NO;
     NSString* sql = [[NSString alloc] initWithFormat:@"SELECT version,plugin_key,plugin_name FROM LWEDATABASETMP.version LIMIT 1"];
     FMResultSet *rs = [db.dao executeQuery:sql];
@@ -186,9 +186,9 @@
     while ([rs next])
     {
       foundVersionTable = YES;
-      version = [rs stringForColumn:@"version"];
+//      version = [rs stringForColumn:@"version"];
       pluginKey = [rs stringForColumn:@"plugin_key"];
-      pluginName = [rs stringForColumn:@"plugin_name"];
+//      pluginName = [rs stringForColumn:@"plugin_name"];
     }
     
     // Now detach the database
