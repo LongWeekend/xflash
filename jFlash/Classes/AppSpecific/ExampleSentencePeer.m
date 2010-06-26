@@ -84,6 +84,7 @@
   {
     return YES;
   }
+  [rs close];
   return NO;
 }
 
