@@ -47,7 +47,7 @@
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started. If you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
+                                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
     [alertView show];
@@ -57,7 +57,7 @@
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to JFlash 1.1!",@"StudyViewController.UpdateAlertViewTitle")
-                                                        message:NSLocalizedString(@"We need 3-5 minutes of your time to update your dictionary. Your study progress will be transferred to the new dictionary.\n\nYou'll also need a WiFi or 3G connection. Do this now?",@"RootViewController.UpdateAlertViewMessage")
+                                                        message:NSLocalizedString(@"We need 3-5 minutes of your time to update the dictionary. Your study progress will also be transferred.\n\nA WiFi or 3G network connection is required. Do this now?",@"RootViewController.UpdateAlertViewMessage")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
                                               otherButtonTitles:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
