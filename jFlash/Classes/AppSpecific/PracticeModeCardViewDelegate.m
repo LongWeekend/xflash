@@ -19,6 +19,7 @@
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setCardViewController:cvc];
+    [cvc release];
     [[aNotification object] setView:[[self cardViewController] view]];
   }
   
@@ -97,7 +98,7 @@
 
 - (void)dealloc 
 {
-  [cardViewController release];  
+  [self setCardViewController:nil];  
   [super dealloc];
 }
 
