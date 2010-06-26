@@ -113,7 +113,7 @@
   
   LWE_LOG(@"In Statement: %@",inStatement);
   
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
   return [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
 /*  
   
