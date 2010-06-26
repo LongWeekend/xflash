@@ -26,7 +26,9 @@ const NSInteger KSegmentedTableHeader = 100;
     [self set_sentenceSearchArray:nil];
     
     // Is the plugin loaded for example sentences?
-    _showSearchTargetControl = [[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY];
+    _showSearchTargetControl = NO;
+    // Disabled for 1.1 release
+    //    _showSearchTargetControl = [[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY];
     _searchTarget = SEARCH_TARGET_WORDS;
     
     // Default state
@@ -107,8 +109,9 @@ const NSInteger KSegmentedTableHeader = 100;
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    _showSearchTargetControl = YES;
-    [self _addSearchControlToHeader];
+    // Disabled for JFlash 1.1 release
+//    _showSearchTargetControl = YES;
+//    [self _addSearchControlToHeader];
   }
 }
 
