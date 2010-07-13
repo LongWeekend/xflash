@@ -42,6 +42,7 @@ typedef enum _migraterStates
 - (float) progress;
 - (void) setProgress:(float)progress;
 - (void) _downloadFTSPlugin;
+- (void) _rollback: (LWEDatabase*) db;
 
 @property (nonatomic, retain) LWEDownloader *dlHandler;
 @property (nonatomic, retain) NSString *taskMessage;

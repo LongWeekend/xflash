@@ -232,6 +232,11 @@
   {
     _cancelRequest = NO;
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];
+
+    // Make the application NOT fall asleep during this process
+    UIApplication *app = [UIApplication sharedApplication];
+    app.idleTimerDisabled = YES;
+    
     [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
 #if defined(APP_STORE_FINAL)
     [FlurryAPI logEvent:@"mergeAttempted"];
@@ -269,6 +274,10 @@
   {
     [[self dlHandler] cancelTask];
     [self _updateInternalState:kMigraterCancelled withTaskMessage:NSLocalizedString(@"Update Cancelled",@"VersionManager.UpdateCancelledMsg")];
+#if defined(APP_STORE_FINAL)
+    [FlurryAPI logEvent:@"mergeCancelled"];
+#endif
+    [self _reenableSleepTimer];
   }
   else if (_migraterState == kMigraterUpdateSQL)
   {
@@ -477,6 +486,8 @@
       [self _updateInternalState:kMigraterUpdateSQLFail withTaskMessage:@"Merge error: LWE has been notified!"];
     }
   }
+  // Reenable
+  [self _reenableSleepTimer];
   
   // Re-attach the cards & FTS database
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -492,6 +503,15 @@
   {
     [db.dao rollback];
   }
+}
+
+//! Turns the sleep timer back on
+- (void) _reenableSleepTimer
+{
+  // Make the application fall asleep again 
+  UIApplication *app = [UIApplication sharedApplication];
+  app.idleTimerDisabled = NO;
+  return;
 }
 
 
