@@ -724,7 +724,6 @@
 			isa = PBXGroup;
 			children = (
 				91C9EE2D111E568D006B72E6 /* Application Tests */,
-				49F96B7911AFD11E00DFC3C9 /* Logic Tests */,
 				916A89CA101C681800D7917D /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -1124,6 +1123,7 @@
 		91C9EE2D111E568D006B72E6 /* Application Tests */ = {
 			isa = PBXGroup;
 			children = (
+				49F96B7911AFD11E00DFC3C9 /* Logic Tests */,
 				492568B811C7831F0058675B /* FoneMonkey */,
 			);
 			name = "Application Tests";
