@@ -102,12 +102,44 @@ void uncaughtExceptionHandler(NSException *exception) {
   [self.rootViewController loadTabBar];
 }
 
+#pragma mark -
+#pragma mark UIApplication Delegate methods
+
+/**
+ * Called on iOS4 when the app is put into the background
+ * We do not do anything special here.
+ */
+- (void) applicationDidEnterBackground:(UIApplication *) application
+{
+  LWE_LOG(@"Application did enter the background now");
+}
+
+
+/**
+ * Called on iOS4 when the app comes back to life from background
+ * We do not do anything special here.
+ */
+- (void) applicationWillEnterForeground:(UIApplication *)application
+{
+  LWE_LOG(@"Application will enter the foreground now");
+}
+
+/**
+ UIDevice* device = [UIDevice currentDevice];
+ 
+ BOOL backgroundSupported = NO;
+ 
+ if ([device respondsToSelector:@selector(isMultitaskingSupported)])
+ 
+ backgroundSupported = device.multitaskingSupported;
+ */
 
 /**
  * Delegate method from UIApplication - re-delegated to RootViewController
  */ 
 - (void) applicationWillTerminate:(UIApplication *)application
 {
+  LWE_LOG(@"Application will terminate");
   [rootViewController applicationWillTerminate:application];
 }
 
