@@ -154,8 +154,9 @@
 {
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                             otherButtonTitles:NSLocalizedString(@"Help Us Fix This Card",@"ActionBarViewController.ActionSheetReportBadData"),
-                                                               NSLocalizedString(@"Add Card to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),nil];
+                                             otherButtonTitles:NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
+                                                               NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),
+                                                               NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),nil];
 
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [as showInView:[[appDelegate rootViewController]view]]; 
@@ -191,6 +192,12 @@
     [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
     [tmpVC release];
     [modalNavControl release];
+  }
+  else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
+  {
+    // RENDE - DO THINGS HERE!!!!!!!!!!!
+    // THIS IS THE DATA 
+    NSString* tweet = [[NSString alloc] initWithFormat:@"%@", [self.currentCard headword]];
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }
