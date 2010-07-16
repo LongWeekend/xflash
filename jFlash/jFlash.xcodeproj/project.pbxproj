@@ -163,7 +163,6 @@
 		4986F88911C715F600947486 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7C11AB84EE00016BD2 /* Constants.m */; };
 		4986F88A11C715F600947486 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		4986F88B11C715F600947486 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
-		4986F88C11C715F600947486 /* DebugUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CAE11AB85B400016BD2 /* DebugUIView.m */; };
 		4986F88D11C715F600947486 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		4986F88E11C715F600947486 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		4986F88F11C715F600947486 /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F968F911AF652D00DFC3C9 /* LWEDownloader.m */; };
@@ -292,7 +291,6 @@
 		917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7C11AB84EE00016BD2 /* Constants.m */; };
 		917A5C8011AB84EE00016BD2 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
-		917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CAE11AB85B400016BD2 /* DebugUIView.m */; };
 		917A5CB311AB85E200016BD2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
@@ -581,8 +579,6 @@
 		917A5C7E11AB84EE00016BD2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentState.m; path = AppSpecific/CurrentState.m; sourceTree = "<group>"; };
 		917A5C8311AB851100016BD2 /* MoodIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoodIcon.h; path = AppSpecific/MoodIcon.h; sourceTree = "<group>"; };
 		917A5C8411AB851100016BD2 /* MoodIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoodIcon.m; path = AppSpecific/MoodIcon.m; sourceTree = "<group>"; };
-		917A5CAD11AB85B400016BD2 /* DebugUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugUIView.h; path = Reusable/LWE/DebugUIView.h; sourceTree = "<group>"; };
-		917A5CAE11AB85B400016BD2 /* DebugUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DebugUIView.m; path = Reusable/LWE/DebugUIView.m; sourceTree = "<group>"; };
 		917A5CB111AB85E200016BD2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "External/asi-http-request/External/Reachability2.0/Reachability.h"; sourceTree = "<group>"; };
 		917A5CB211AB85E200016BD2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "External/asi-http-request/External/Reachability2.0/Reachability.m"; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -724,7 +720,6 @@
 			isa = PBXGroup;
 			children = (
 				91C9EE2D111E568D006B72E6 /* Application Tests */,
-				49F96B7911AFD11E00DFC3C9 /* Logic Tests */,
 				916A89CA101C681800D7917D /* Images */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -989,19 +984,9 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		916D9AEC1125345B002FF875 /* Debugging */ = {
-			isa = PBXGroup;
-			children = (
-				917A5CAD11AB85B400016BD2 /* DebugUIView.h */,
-				917A5CAE11AB85B400016BD2 /* DebugUIView.m */,
-			);
-			name = Debugging;
-			sourceTree = "<group>";
-		};
 		917A5B7A11AB7A8700016BD2 /* LWE Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				916D9AEC1125345B002FF875 /* Debugging */,
 				49F968F811AF652D00DFC3C9 /* LWEDownloader.h */,
 				49F968F911AF652D00DFC3C9 /* LWEDownloader.m */,
 				917A5C1311AB80F700016BD2 /* LWEDatabase.h */,
@@ -1019,7 +1004,6 @@
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				91818E2111D31A5F00746B09 /* UIWebView+LWENoBounces.h */,
 				91818E2211D31A5F00746B09 /* UIWebView+LWENoBounces.m */,
-				916D9AEC1125345B002FF875 /* Debugging */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
@@ -1124,6 +1108,7 @@
 		91C9EE2D111E568D006B72E6 /* Application Tests */ = {
 			isa = PBXGroup;
 			children = (
+				49F96B7911AFD11E00DFC3C9 /* Logic Tests */,
 				492568B811C7831F0058675B /* FoneMonkey */,
 			);
 			name = "Application Tests";
@@ -1625,7 +1610,6 @@
 				917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */,
 				917A5C8011AB84EE00016BD2 /* CurrentState.m in Sources */,
 				917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */,
-				917A5CAF11AB85B400016BD2 /* DebugUIView.m in Sources */,
 				917A5CB311AB85E200016BD2 /* Reachability.m in Sources */,
 				91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */,
 				49F968FA11AF652D00DFC3C9 /* LWEDownloader.m in Sources */,
@@ -1722,7 +1706,6 @@
 				4986F88911C715F600947486 /* Constants.m in Sources */,
 				4986F88A11C715F600947486 /* CurrentState.m in Sources */,
 				4986F88B11C715F600947486 /* MoodIcon.m in Sources */,
-				4986F88C11C715F600947486 /* DebugUIView.m in Sources */,
 				4986F88D11C715F600947486 /* Reachability.m in Sources */,
 				4986F88E11C715F600947486 /* ProgressBarViewController.m in Sources */,
 				4986F88F11C715F600947486 /* LWEDownloader.m in Sources */,

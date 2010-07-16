@@ -1,0 +1,3 @@
+[submodule "jFlash/Classes/Reusable/LWE"]
+	path = jFlash/Classes/Reusable/LWE
+	url = git@unfuddle:crunchytoast/lwe-dev-tools.git

@@ -58,7 +58,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *filename = [LWEDatabase userDatabaseFilename];
+  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
   NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
@@ -88,7 +88,7 @@ void uncaughtExceptionHandler(NSException *exception) {
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *filename = [LWEDatabase userDatabaseFilename];
+  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Then load plugins
@@ -102,12 +102,44 @@ void uncaughtExceptionHandler(NSException *exception) {
   [self.rootViewController loadTabBar];
 }
 
+#pragma mark -
+#pragma mark UIApplication Delegate methods
+
+/**
+ * Called on iOS4 when the app is put into the background
+ * We do not do anything special here.
+ */
+- (void) applicationDidEnterBackground:(UIApplication *) application
+{
+  LWE_LOG(@"Application did enter the background now");
+}
+
+
+/**
+ * Called on iOS4 when the app comes back to life from background
+ * We do not do anything special here.
+ */
+- (void) applicationWillEnterForeground:(UIApplication *)application
+{
+  LWE_LOG(@"Application will enter the foreground now");
+}
+
+/**
+ UIDevice* device = [UIDevice currentDevice];
+ 
+ BOOL backgroundSupported = NO;
+ 
+ if ([device respondsToSelector:@selector(isMultitaskingSupported)])
+ 
+ backgroundSupported = device.multitaskingSupported;
+ */
 
 /**
  * Delegate method from UIApplication - re-delegated to RootViewController
  */ 
 - (void) applicationWillTerminate:(UIApplication *)application
 {
+  LWE_LOG(@"Application will terminate");
   [rootViewController applicationWillTerminate:application];
 }
 
