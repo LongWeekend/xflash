@@ -15,7 +15,7 @@
 
 @implementation jFlashAppDelegate
 
-@synthesize window, rootViewController;
+@synthesize window, rootViewController, backgroundSupported;
 
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
@@ -25,6 +25,17 @@
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
   #endif
+  
+  // Find out if we are a multitasking environment
+  UIDevice* device = [UIDevice currentDevice];
+  if ([device respondsToSelector:@selector(isMultitaskingSupported)])
+  {
+    self.backgroundSupported = device.multitaskingSupported;
+  }
+  else
+  {
+    self.backgroundSupported = NO;
+  }
   
   // Seed random generator
   srandomdev();
@@ -63,7 +74,7 @@ void uncaughtExceptionHandler(NSException *exception) {
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
     // Register a notification to wait here for the success, then do the DB copy
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:@"DatabaseCopyFinished" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [[self rootViewController] showDatabaseLoadingView];
     // Only ever copy the latest user database
@@ -84,7 +95,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) _openUserDatabaseWithPlugins
 {
   // Remove observer if we had one for first copy, also get rid of the loading page if we had one
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DatabaseCopyFinished" object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -124,15 +135,6 @@ void uncaughtExceptionHandler(NSException *exception) {
   LWE_LOG(@"Application will enter the foreground now");
 }
 
-/**
- UIDevice* device = [UIDevice currentDevice];
- 
- BOOL backgroundSupported = NO;
- 
- if ([device respondsToSelector:@selector(isMultitaskingSupported)])
- 
- backgroundSupported = device.multitaskingSupported;
- */
 
 /**
  * Delegate method from UIApplication - re-delegated to RootViewController

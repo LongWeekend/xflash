@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define PROFILE_SQL_STATEMENTS 1
-
 // Tell the compiler about user-defined classes
 @class RootViewController;
 
@@ -17,6 +15,7 @@
 {
 	UIWindow *window;
 	RootViewController *rootViewController;
+  BOOL backgroundSupported;                 //! YES if we are >=iOS4
 }
 
 void uncaughtExceptionHandler(NSException *exception);
@@ -26,5 +25,7 @@ void uncaughtExceptionHandler(NSException *exception);
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) RootViewController *rootViewController;
+
+@property BOOL backgroundSupported;
 
 @end
