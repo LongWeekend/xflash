@@ -18,6 +18,7 @@
   [super viewDidLoad];
   
   // Get values from XIB on first load
+  // TODO: iPad customization!
   CGRect tmpFrame;
   tmpFrame = cardReadingLabelScrollContainer.frame;
   cardReadingLabelScrollContainerYPosInXib = tmpFrame.origin.y;
@@ -43,6 +44,7 @@
   int readingBtnY = toggleReadingBtnYPosInXib;
   int headwordY   = cardHeadwordLabelYPosInXib;
   
+  // TODO: iPad customization!
   CGRect readingFrame = cardReadingLabelScrollContainer.frame;
   CGRect headwordFrame = cardHeadwordLabelScrollContainer.frame;
   CGRect readingBtnFrame = toggleReadingBtn.frame;
@@ -69,22 +71,27 @@
     cardHeadwordLabel.lineBreakMode = UILineBreakModeCharacterWrap;
   }
   
+  // TODO: iPad customization!
   // Move cardReadingLabel
   readingFrame.origin.y = readingY;
   cardReadingLabelScrollContainer.frame = readingFrame;
   
+  // TODO: iPad customization!
   // Move revealReadingBtn
   readingBtnFrame.origin.y = readingBtnY;
   toggleReadingBtn.frame = readingBtnFrame;
   
+  // TODO: iPad customization!
   // Move cardHeadwordLabelScrollContainer
   headwordFrame.origin.y = headwordY;
   cardHeadwordLabelScrollContainer.frame = headwordFrame;
   
+  // TODO: iPad customization!
   // Move the headword Scroll More Icon
   headwordScrollMoreFrame.origin.y = headwordY+(headwordFrame.size.height/3);
   cardHeadwordLabelScrollMoreIcon.frame = headwordScrollMoreFrame;
   
+  // TODO: iPad customization!
   // Move cardReadingLabelScrollMoreIcon
   readingScrollMoreFrame.origin.y = readingBtnY+(CARDCONTENT_PADDING*3);
   cardReadingLabelScrollMoreIcon.frame = readingScrollMoreFrame;
@@ -94,6 +101,7 @@
 // Toggle "more" icon to indicate the user can scroll meaning down
 - (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer {
   
+  // TODO: iPad customization!
   CGSize theLabelSize = theLabel.frame.size;
   CGSize theParentSize = scrollViewContainer.frame.size;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];

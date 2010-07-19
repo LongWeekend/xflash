@@ -61,6 +61,7 @@
     PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     progressView.progress = [[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue];
+    // TODO: iPad customization!
     CGRect frame = progressView.frame;
     frame.size.width = 80;
     frame.size.height = 14;

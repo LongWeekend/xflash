@@ -34,7 +34,9 @@ enum ControlSectionRows
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
@@ -85,6 +87,7 @@ enum ControlSectionRows
   if(indexPath.section == kControlsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    // TODO: iPad customization!
     UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)];
     [self setMaxCardsUISlider:tmpSlider];
     [tmpSlider release];
@@ -98,6 +101,7 @@ enum ControlSectionRows
     [maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
 
     // the label on the left of the cell
+    // TODO: iPad customization!
     UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 20, 35)];
     leftLabel.font = [UIFont boldSystemFontOfSize:17];
     leftLabel.text = [NSString stringWithFormat:@"%d", MIN_MAX_STUDYING];
@@ -108,7 +112,9 @@ enum ControlSectionRows
     [cell addSubview: maxCardsUISlider];
     
     // the label on the right
+    // TODO: iPad customization!
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(280, 5, 20, 35)];
+    // TODO: iPad customization!
     rightLabel.font = [UIFont boldSystemFontOfSize:17];
     rightLabel.text = [NSString stringWithFormat:@"%d", MAX_MAX_STUDYING];
     [cell addSubview:rightLabel];
@@ -119,6 +125,7 @@ enum ControlSectionRows
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    // TODO: iPad customization!
     UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(20, 0, 180, 50)];
     [self setFrequencyUISlider:tmpSlider];
     [tmpSlider release];
@@ -131,7 +138,9 @@ enum ControlSectionRows
     frequencyUISlider.continuous = NO;
     [frequencyUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
     [cell addSubview: frequencyUISlider];
+    // TODO: iPad customization!
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 95, 35)];
+    // TODO: iPad customization!
     rightLabel.font = [UIFont boldSystemFontOfSize:17];
     rightLabel.text = [NSString stringWithFormat:@"More Often"];
     [cell addSubview:rightLabel];

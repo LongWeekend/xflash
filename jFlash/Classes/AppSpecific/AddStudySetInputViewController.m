@@ -20,6 +20,7 @@
  */
 - (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId
 {
+  // TODO: iPad customization!
   if (self = [super initWithNibName:@"ModalInputView" bundle:nil])
   {
     self.defaultCardId = cardId;
@@ -51,6 +52,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 

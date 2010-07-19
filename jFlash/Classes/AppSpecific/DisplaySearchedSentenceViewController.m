@@ -22,6 +22,7 @@
  */
 - (id) initWithSentence:(ExampleSentence*) initSentence
 {
+  // TODO: iPad customization!
   if (self = [super initWithNibName:@"SentenceView" bundle:nil])
   {
     [self setSentence:initSentence];
@@ -37,6 +38,7 @@
 {
   // View related stuff
   [super viewWillAppear:animated];
+  // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.tableView.backgroundColor = [UIColor clearColor];

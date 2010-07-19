@@ -32,6 +32,7 @@ enum EntrySectionRows
  */
 - (id) initWithCard:(Card*) card
 {
+  // TODO: iPad customization!
   if (self = [super initWithNibName:@"AddTagView" bundle:nil])
   {
     [self setCardId:[card cardId]];
@@ -62,6 +63,7 @@ enum EntrySectionRows
   // View related stuff
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
   

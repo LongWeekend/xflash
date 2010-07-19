@@ -70,6 +70,7 @@
       progress = thisCount / seencount;
     }
     progressView.progress = progress;
+    // TODO: iPad customization!
     CGRect frame = progressView.frame;
     frame.size.width = 57;
     frame.size.height = 14;

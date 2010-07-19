@@ -33,6 +33,7 @@
   if (self != nil)
   {
     // Set the tab bar controller image png to the targets
+    // TODO: iPad customization?
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
     _alreadyShowedAlertView = NO;
@@ -437,6 +438,7 @@
 - (IBAction) doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
+  // TODO: iPad customization!
 	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
   progressView.rightStreak = currentRightStreak;
   progressView.wrongStreak = currentWrongStreak;
@@ -456,6 +458,7 @@
 /** Changes the background image based on the theme */
 - (void) updateTheme
 {
+  // TODO: iPad customization
   NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
   [practiceBgImage setImage:[UIImage imageNamed:pathToBGImage]];
 
@@ -531,6 +534,7 @@
   else
   {
     // No example sentence plugin loaded, so show "please download me" view instead
+    // TODO: iPad customization
     [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
   }
   			

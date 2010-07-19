@@ -68,6 +68,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
@@ -218,6 +219,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     UIImageView* tmpView = cell.imageView;
+    // TODO: iPad customization!
     if(key == APP_TWITTER)
       tmpView.image = [UIImage imageNamed:@"twitter-icon.png"];
     else
@@ -278,6 +280,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   }
   else if (key == APP_PLUGIN)
   {
+    // TODO: iPad customization!
     PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
     [self.navigationController pushViewController:psvc animated:YES];
     [psvc release];

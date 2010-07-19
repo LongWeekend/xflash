@@ -173,6 +173,7 @@
   
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
+    // TODO: iPad customization!
     ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[self currentCard]];
     UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:rbdvc];
     [appDelegate.rootViewController presentModalViewController:modalNavController animated:YES];

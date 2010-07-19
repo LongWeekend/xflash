@@ -18,7 +18,6 @@
   if (self = [super init])
   {
     [self setMode:kUserViewModeAdd];
-    _avatarUpdated = false;
     if ([self mode] == kUserViewModeAdd)
     {
       self.selectedUser = [[[User alloc] init] autorelease];      
@@ -31,7 +30,6 @@
 {
   [super viewDidLoad];
   [userNicknameTextField becomeFirstResponder]; // makes keyboard cancellable
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveAvatarImage) name:@"newImagePicked" object:nil];
   [userNicknameTextField addTarget:self action:@selector(doUpdateUserNickname:) forControlEvents:UIControlEventEditingChanged];
 
   if ([self mode] == kUserViewModeAdd)
@@ -55,6 +53,7 @@
   LWE_LOG(@"img path: %@",[selectedUser avatarImagePath]);
   [userAvatarPreviewBtn setBackgroundImage:[selectedUser getUserThumbnailLarge] forState:UIControlStateNormal];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 
@@ -65,7 +64,7 @@
   [selectedUser setUserNickname:[userNicknameTextField text]];
   if(mode == kUserViewModeEdit)
   {
-    if([[userNicknameTextField text] isEqualToString:originalUserNickname] && !_avatarUpdated)
+    if([[userNicknameTextField text] isEqualToString:originalUserNickname])
       [commitChangesBtn setHidden:YES];
     else if([userNicknameTextField.text length] == 0)
       [commitChangesBtn setHidden:YES];
@@ -92,9 +91,6 @@
 
 - (IBAction) doCommitChanges
 {
-  if(_avatarUpdated){
-    [selectedUser saveAvatarImage:selectedUserImage];
-  }
   // Save user details
 
   // Escape the string for SQLITE-style escapes (cannot use backslash!)

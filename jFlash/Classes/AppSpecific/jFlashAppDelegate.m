@@ -30,7 +30,7 @@
   UIDevice* device = [UIDevice currentDevice];
   if ([device respondsToSelector:@selector(isMultitaskingSupported)])
   {
-    self.backgroundSupported = device.multitaskingSupported;
+//    self.backgroundSupported = device.multitaskingSupported;
   }
   else
   {
