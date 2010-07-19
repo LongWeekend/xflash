@@ -19,7 +19,6 @@
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setCardViewController:cvc];
-    [cvc release];
     [[aNotification object] setView:[[self cardViewController] view]];
   }
   

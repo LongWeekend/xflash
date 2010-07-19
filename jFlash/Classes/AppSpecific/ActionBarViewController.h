@@ -12,8 +12,9 @@
 #import "ReportBadDataViewController.h"
 #import "jFlashAppDelegate.h"
 
-#define SVC_ACTION_REPORT_BUTTON 0
-#define SVC_ACTION_ADDTOSET_BUTTON 1
+#define SVC_ACTION_TWEET_BUTTON 0
+#define SVC_ACTION_REPORT_BUTTON 1
+#define SVC_ACTION_ADDTOSET_BUTTON 2
 
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate>
 {
