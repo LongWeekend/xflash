@@ -18,14 +18,15 @@
 @class LWETwitterEngine;
 @class LWETUser;
 
-@interface TweetWordViewController : UIViewController 
-<LWETRequestDelegate, UITextViewDelegate>
+//! RENDY: comment please
+@interface TweetWordViewController : UIViewController <LWETRequestDelegate, UITextViewDelegate>
 {
 	IBOutlet UITextView *tweetTxt;
 	IBOutlet UIButton *tweetBtn;
 	IBOutlet UILabel *counterLbl;
 	
 	UIBarButtonItem *_cancelBtn;
+  UIBarButtonItem *_signOutBtn;
 	LWETwitterEngine *_twitterEngine;
 	NSString *_tweetWord;
 }
@@ -35,6 +36,9 @@
 @property (nonatomic, retain) IBOutlet UILabel *counterLbl;
 
 - (IBAction)tweet;
+
+//! Signs the user out of Twitter so they can sign in as a different user.
+- (IBAction) signUserOutOfTwitter:(id)sender;
 
 - (void)_resignTextFieldKeyboard;
 

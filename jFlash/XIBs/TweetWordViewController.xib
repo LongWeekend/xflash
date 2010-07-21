@@ -57,17 +57,17 @@
 					<object class="IBUILabel" id="591811184">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 12}, {238, 55}}</string>
+						<string key="NSFrame">{{20, 12}, {280, 66}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Tell the others that you just learnt this out from jFlash</string>
+						<string key="IBUIText">Learned something new?  Tweet it to the world!</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">14</double>
+							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -78,7 +78,8 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUINumberOfLines">0</int>
+						<int key="IBUINumberOfLines">3</int>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIButton" id="1020999857">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -145,7 +146,7 @@
 					<object class="IBUILabel" id="775983036">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{275, 71}, {25, 21}}</string>
+						<string key="NSFrame">{{276, 71}, {25, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -170,14 +171,14 @@
 					<object class="IBUILabel" id="294316691">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{189, 71}, {78, 21}}</string>
+						<string key="NSFrame">{{156, 71}, {115, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Character left</string>
+						<string key="IBUIText">Characters remaining</string>
 						<reference key="IBUIFont" ref="730560879"/>
 						<reference key="IBUITextColor" ref="664159550"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -348,7 +349,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>TweetWordViewController</string>
 					<string>UIResponder</string>
-					<string>{{1342, 514}, {320, 480}}</string>
+					<string>{{815, 514}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -384,14 +385,14 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/External/JSON/NSObject+SBJSON.h</string>
+						<string key="minorKey">Classes/Reusable/LWE/External/json-framework/Classes/NSObject+SBJSON.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/External/JSON/SBJsonWriter.h</string>
+						<string key="minorKey">Classes/Reusable/LWE/External/json-framework/Classes/SBJsonWriter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -449,7 +450,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/TweetWordViewController.h</string>
+						<string key="minorKey">Classes/AppSpecific/TweetWordViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

@@ -18,9 +18,7 @@ enum userViewMode {
 @interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
 {
   User* selectedUser;
-  UIImage *selectedUserImage;
   IBOutlet UITextField *userNicknameTextField;
-  IBOutlet UIButton *userAvatarPreviewBtn;
   IBOutlet UIButton *commitChangesBtn;
   IBOutlet UIButton *activateUserBtn;
   NSString* originalUserNickname;
@@ -37,10 +35,8 @@ enum userViewMode {
 @property (nonatomic) NSInteger mode;
 @property (nonatomic,retain) User *selectedUser;
 @property (nonatomic,retain) UITextField *userNicknameTextField;
-@property (nonatomic,retain) UIButton *userAvatarPreviewBtn;
 @property (nonatomic,retain) UIButton *commitChangesBtn;
 @property (nonatomic,retain) UIButton *activateUserBtn;
-@property (nonatomic,retain) UIImage *selectedUserImage;
 @property (nonatomic,retain) NSString* originalUserNickname;
 
 @end

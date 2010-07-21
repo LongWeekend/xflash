@@ -11,7 +11,7 @@
 #import "UserPeer.h"
 
 @implementation UserDetailsViewController
-@synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, userAvatarPreviewBtn, commitChangesBtn, activateUserBtn, selectedUserImage;
+@synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, commitChangesBtn, activateUserBtn;
 
 - (id)init
 {
@@ -73,14 +73,6 @@
   }
 }
 
-- (IBAction) doShowImagePickerModalAction
-{
-  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose avatar image from?" 
-    delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Photo Library", @"Take Photo With Camera", nil];
-  [actionSheet showInView:self.parentViewController.tabBarController.view];
-  [actionSheet release];
-}
-
 - (IBAction) doActivateUser
 {
   // Activate, post notification and dismiss view
@@ -120,7 +112,8 @@
 
 # pragma mark Other functions
 
-- (void) setUser:(User *)sourceUser{
+- (void) setUser:(User *)sourceUser
+{
   // Make local copy or user
   self.selectedUser = [UserPeer getUserByPK:[sourceUser userId]];
   originalUserNickname = [selectedUser userNickname];
@@ -129,12 +122,9 @@
 
 - (void)dealloc 
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"newImagePicked" object:nil];
-
   [originalUserNickname release];
   [selectedUser release];
   [userNicknameTextField release];
-  [userAvatarPreviewBtn release];
   [commitChangesBtn release];
   [activateUserBtn release];
   [super dealloc];

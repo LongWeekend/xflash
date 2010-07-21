@@ -26,9 +26,11 @@
 	if ((![unameTxt.text isEqualToString:@""]) && 
 		  (textField == passwordTxt))
 	{
+    // RENDY: 0.5f is easier to read
 		[LWEViewAnimationUtils translateView:self.view 
 									 byPoint:CGPointMake(0,0) 
 								withInterval:.5f];
+    // After delay 0.0 also works!
 		[self performSelector:@selector(authenticateUser:)
 				   withObject:self 
 				   afterDelay:.1];
@@ -57,6 +59,7 @@
 #pragma mark -
 #pragma mark UIAlertViewDelegate
 
+// RENDY: this is actually harder to read for me!
 - (void) alertView:(UIAlertView *)alertView 
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -70,10 +73,10 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)didFailAuthentication:(NSError *)error
 {
 	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:@"Oops" 
-						  message:@"Username or password is incorrect" 
+						  initWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle") 
+						  message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.",@"TweetWordXAuthController.FailMsgMsg")
 						  delegate:self
-						  cancelButtonTitle:@"OK" 
+              cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
 						  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
@@ -131,17 +134,17 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     [super viewDidLoad];
 	
 	_cancelBtn = [[UIBarButtonItem alloc]
-				  initWithTitle:@"Cancel" 
+				  initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel") 
 				  style:UIBarButtonItemStylePlain 
 				  target:self 
 				  action:@selector(cancelBtnTouchedUp:)];
 	_doneBtn = [[UIBarButtonItem alloc]
-				  initWithTitle:@"Done" 
+				  initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
 				  style:UIBarButtonItemStyleDone
 				  target:self 
 				  action:@selector(doneBtnTouchedUp:)];
 	
-	self.title = @"Authentication";
+	self.title = NSLocalizedString(@"Twitter Login",@"TweetWordXAuthController.NavBarTitle");
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 }
 

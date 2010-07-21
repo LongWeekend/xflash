@@ -15,11 +15,13 @@
 @synthesize webView;
 @synthesize delegate;
 
+// RENDY:  Great code organization!
+
 #pragma mark -
 #pragma mark UIWebViewDelegate
 
-- (void) webView:(UIWebView *)webView 
-didFailLoadWithError:(NSError *)error
+// RENDY:  Should be //TODO: ?
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
 	LWE_LOG(@"ERROR");
 	LWE_LOG(@"%@", [error userInfo]);
@@ -34,7 +36,8 @@ didFailLoadWithError:(NSError *)error
 		
 		NSString *pin = [self.webView stringByEvaluatingJavaScriptFromString:script];
 		
-		if ([pin length] > 0) {
+		if ([pin length] > 0)
+    {
 			NSLog(@"pin %@", pin);
 			
 			if ([delegate respondsToSelector:@selector(didFinishAuthorizationWithPin:)])
@@ -42,6 +45,7 @@ didFailLoadWithError:(NSError *)error
 			
 			[self dismissModalViewControllerAnimated:NO];	
 		}		
+    // RENDY:  else?  What if the PIN is 0 characters?  Is it going to break?
 	}
 	else 
 	{
@@ -76,12 +80,12 @@ didFailLoadWithError:(NSError *)error
 	[super viewDidLoad];
 	
 	_cancelBtn = [[UIBarButtonItem alloc]
-				  initWithTitle:@"Cancel" 
+				  initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel") 
 				  style:UIBarButtonItemStylePlain 
 				  target:self 
 				  action:@selector(cancelBtnTouchedUp:)];
 	
-	self.title = @"Authentication";
+	self.title = NSLocalizedString(@"Twitter Sign-in",@"TweetWordAuthController.NavBarTitle");
 	self.navigationItem.leftBarButtonItem = _cancelBtn;	
 	_firstLoaded = YES;
 }
@@ -91,11 +95,13 @@ didFailLoadWithError:(NSError *)error
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager]
 														 currentThemeTintColor];
+  // IPAD customization?
 	self.view.backgroundColor = [UIColor colorWithPatternImage:
 								 [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 	
 }
 
+// RENDY:  IF no implementation, feel free to remove
 - (void)didReceiveMemoryWarning 
 {
     // Releases the view if it doesn't have a superview.

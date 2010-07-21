@@ -10,18 +10,19 @@
 
 #import "LWETAuthenticationViewProtocol.h"
 
-
-@interface TweetWordAuthController : UIViewController 
-<LWETAuthenticationViewProtocol, UIWebViewDelegate>
+// RENDY:  Comment should go here about what this class does
+@interface TweetWordAuthController : UIViewController <LWETAuthenticationViewProtocol, UIWebViewDelegate>
 {
 	id <LWETAuthenticationViewDelegate> delegate;
 	UIWebView *webView;
+  
+  // RENDY:  @private keyword is helpful
 	UIBarButtonItem *_cancelBtn;
 	BOOL _firstLoaded;
 }
 
-@property (nonatomic, retain) 
-id<LWETAuthenticationViewDelegate> delegate;
+// RENDY:  Don't worry about linebreak on 1. method signatures and 2. variable declarations
+@property (nonatomic, retain) id<LWETAuthenticationViewDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 
 @end

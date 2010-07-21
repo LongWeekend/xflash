@@ -20,14 +20,14 @@
 #pragma mark -
 #pragma mark Private Methods
 
+// RENDY: this is really good - comments are good, logic is good.
 - (void)_resignTextFieldKeyboard
 {
 	if ([tweetTxt isFirstResponder])
 	{
 		[tweetTxt resignFirstResponder];
-		//get rid of the done button for the keyboard
-		self.navigationItem.rightBarButtonItem = nil;
-		//set back the cancel button
+		//get rid of the done button for the keyboard, replace w/ sign out button; get rid of cancel btn
+		self.navigationItem.rightBarButtonItem = _signOutBtn;
 		self.navigationItem.leftBarButtonItem = _cancelBtn;
 		
 		// Move the view up so the keyboard doesn't block the input
@@ -41,8 +41,14 @@
 - (IBAction)tweet
 {
 	[self _resignTextFieldKeyboard];
-	NSString *string = [NSString stringWithFormat:@"%@ #jFlash", tweetTxt.text];
+	NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
 	[_twitterEngine tweet:string];
+}
+
+// RENDY: can you do this too?
+- (IBAction) signUserOutOfTwitter:(id)sender
+{
+  //TODO
 }
 
 #pragma mark -
@@ -56,8 +62,7 @@
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
 	UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]
-								initWithTitle:NSLocalizedString(@"Done", 
-																@"Global.Done") 
+								initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
 								style:UIBarButtonItemStyleDone 
 								target:self 
 								action:@selector(_resignTextFieldKeyboard)];
@@ -75,6 +80,7 @@
 {
 	NSUInteger c = [tweetTxt.text length];
 	NSInteger length = kMaxChars - c;
+  // RENDY: we prefer verbose { } statements unless it is REALLY one-liner
 	if (length >= 0)
 		counterLbl.text = [NSString stringWithFormat:@"%d", length];
 	else
@@ -87,18 +93,16 @@
 // The designated initializer.  Override if you 
 // create the controller programmatically and want to 
 // perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil 
-			   bundle:(NSBundle *)nibBundleOrNil 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 {
-	[NSException raise:NSGenericException 
-				format:@"Do not init without a twitter engine."];
+  // RENDY: THANKS!  I didn't know about NSGenericException
+	[NSException raise:NSGenericException format:@"Do not init without a twitter engine."];
 	return self;
 }
 
 - (id)init
 {
-	[NSException raise:NSGenericException 
-				format:@"Do not init without a twitter engine."];
+	[NSException raise:NSGenericException format:@"Do not init without a twitter engine."];
 	return self;
 }
 							  
@@ -108,6 +112,7 @@
 {
 	if (self = [super initWithNibName:nibName bundle:nil])
 	{
+    // RENDY: if you want to retain, you can just @synthesize?
 		_twitterEngine = [twitterEngine retain];
 		_tweetWord = [tweetWord retain];
 	}
@@ -117,17 +122,21 @@
 // Implement viewDidLoad to do additional setup after loading the view, 
 // typically from a nib.
 - (void)viewDidLoad 
-{		
-    [super viewDidLoad];
-	
+{
+  [super viewDidLoad];
+	_signOutBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout",@"TweetWordViewController.LogOutFromTwitterBtn")
+                                                style:UIBarButtonItemStyleBordered
+                                                target:self
+                                                action:@selector(signUserOutOfTwitter:)];
+  
 	_cancelBtn = [[UIBarButtonItem alloc]
 				  initWithTitle:NSLocalizedString(@"Cancel", @"Global.Cancel")
-				  style:UIBarButtonItemStylePlain 
+				  style:UIBarButtonItemStyleBordered 
 				  target:self.parentViewController 
 				  action:@selector(dismissModalViewControllerAnimated:)];
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
-	//TODO: CHANGE TO LOCALIZED STRING
-	self.navigationItem.title = @"Tweet Card";
+  self.navigationItem.rightBarButtonItem = _signOutBtn;
+	self.navigationItem.title = NSLocalizedString(@"Tweet this Card",@"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
 	self.counterLbl.text = [NSString stringWithFormat:@"%d", 
 							(kMaxChars-[_tweetWord length])];
@@ -136,20 +145,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] 
-														 currentThemeTintColor];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:
-								 [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+	self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning 
 {
@@ -176,6 +174,10 @@
 		[_tweetWord release];
 	if (_cancelBtn)
 		[_cancelBtn release];
+  if (_signOutBtn)
+  {
+    [_signOutBtn release];
+  }
 	[tweetTxt release];
 	[tweetBtn release];
 	[counterLbl release];

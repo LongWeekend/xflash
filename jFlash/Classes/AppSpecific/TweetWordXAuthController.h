@@ -10,8 +10,7 @@
 
 #import "LWETXAuthViewProtocol.h"
 
-@interface TweetWordXAuthController : UIViewController
-<LWETXAuthViewProtocol, UITextFieldDelegate, UIAlertViewDelegate>
+@interface TweetWordXAuthController : UIViewController <LWETXAuthViewProtocol, UITextFieldDelegate, UIAlertViewDelegate>
 {
 	LWETwitterOAuth *authEngine;
 	

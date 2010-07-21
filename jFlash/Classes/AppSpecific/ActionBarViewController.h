@@ -74,7 +74,7 @@
 @end
 
 //! Notification names
-extern NSString  *actionBarWillSetupNotification;
-extern NSString  *actionBarDidSetupNotification;
-extern NSString  *actionBarWillRevealNotification;
-extern NSString  *actionBarDidRevealNotification;
+extern NSString * const actionBarWillSetupNotification;
+extern NSString * const actionBarDidSetupNotification;
+extern NSString * const actionBarWillRevealNotification;
+extern NSString * const actionBarDidRevealNotification;

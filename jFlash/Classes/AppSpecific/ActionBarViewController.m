@@ -196,10 +196,11 @@
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
+    // RENDY: refactor "extract" to a different method?
+    
 	  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 	  NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
 	  LWE_LOG(@"Current User : %@", idCurrentUser);
-	  // TODO: RENDY - DO THINGS HERE!!!!!!!!!!!
 	  // Twitter Engine
 	  // TODO: Initialize all of the twitter engine
 	  TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
@@ -211,7 +212,7 @@
 							privateKey:JFLASH_TWITTER_PRIVATE_KEY
 							authenticationView:controller];
 	  else 
-		  LWE_LOG(@"TWITTER ENGINE NOT INITIALIZED");
+		  LWE_LOG(@"TWITTER ENGINE NOT INITIALIZED");  // RENDY: {} -- otherwise this will fail!! 
 	  
 	  UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
 	  _twitterEngine.parentForUserAuthenticationView = vc;
@@ -230,11 +231,9 @@
 														twitterEngine:_twitterEngine 
 														tweetWord:tweetWord];
 		  
-		  UINavigationController *modalNavController = [[UINavigationController alloc]
-														initWithRootViewController:twitterController];
-		  
-		  [appDelegate.rootViewController presentModalViewController:modalNavController
-															animated:YES];
+      // RENDY: Let's decouple this with an observer pattern in RootViewController.
+		  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:twitterController];
+      [appDelegate.rootViewController presentModalViewController:modalNavController	animated:YES];
 		  
 		  [twitterController release];
 		  [modalNavController release];
@@ -252,10 +251,10 @@
 	[appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
 	
 	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:@"Tweet Card" 
-						  message:@"Succeed" 
+						  initWithTitle:NSLocalizedString(@"Tweeted",@"ActionBarViewController.TweetSuccessAlertTitle")
+						  message:NSLocalizedString(@"Added to your Twitter feed successfully!",@"ActionBarViewController.TweetSuccessAlertMsg")
 						  delegate:self 
-						  cancelButtonTitle:@"Yatta!" 
+						  cancelButtonTitle:NSLocalizedString(@"やったー！",@"ActionBarViewController.TweetSuccessYattaButton")
 						  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
@@ -268,10 +267,10 @@
 	LWE_LOG(@"Error happens in the action bar controller when trying to tweet word");
 	
 	UIAlertView *alertView = [[UIAlertView alloc]
-							  initWithTitle:@"Oops" 
-							  message:@"Tweet error, most likely reason is duplicate status" 
+							  initWithTitle:NSLocalizedString(@"Unable to Tweet",@"ActionBarViewController.TweetFailureAlertTitle")
+							  message:NSLocalizedString(@"We were unable to tweet this - did you retweet the same thing twice in a row?",@"ActionBarViewController.TweetFailureAlertMsg")
 							  delegate:nil 
-							  cancelButtonTitle:@"OK" 
+							  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
 							  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release];
@@ -305,10 +304,10 @@
 	{
 		LWE_LOG(@"DID FAILED AUTH");
 		UIAlertView *alertView = [[UIAlertView alloc]
-								  initWithTitle:@"Oops" 
-								  message:@"Something wrong with the Twitter API Server" 
+                  initWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
+								  message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")
 								  delegate:nil 
-								  cancelButtonTitle:@"OK" 
+								  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
 								  otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];		
@@ -317,6 +316,8 @@
 	_twitterEngine = nil;
 }
 
+
+// RENDY: decouple
 -(void) presentModal:(UIViewController*)modalNavController
 {
 	LWE_LOG(@"PRESENT MODAL");
@@ -332,11 +333,13 @@
 {
 	NSMutableString *str = [[NSMutableString alloc] init];
 	
+  // RENDY: stringWithFormat is useful here
 	[str appendString:self.currentCard.headword];
 	[str appendString:@" ["];
 	[str appendString:self.currentCard.reading];
 	[str appendString:@"] "];
 	
+  // RENDY: is this code working?  We had a bug on card "得"
 	NSString *meaning = [self.currentCard meaningWithoutMarkup];
 	if (kMaxChars - [str length] - [meaning length] >= 0)
 		[str appendString:meaning];
@@ -349,19 +352,18 @@
 #pragma mark -
 #pragma mark Class Plumbing
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+- (void)viewDidUnload
+{
+  self.addBtn = nil;
+  self.buryCardBtn = nil;
+  self.nextCardBtn = nil;
+  self.prevCardBtn = nil;
+  self.rightBtn = nil;
+  self.wrongBtn = nil;
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-- (void)dealloc {
+- (void)dealloc
+{
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
   
@@ -376,7 +378,7 @@
 @end
 
 //! Notification names
-NSString  *actionBarWillSetupNotification = @"actionBarWillSetupNotification";
-NSString  *actionBarDidSetupNotification = @"actionBarDidSetupNotification";
-NSString  *actionBarWillRevealNotification = @"actionBarWillRevealNotification";
-NSString  *actionBarDidRevealNotification = @"actionBarDidRevealNotification";
+NSString * const actionBarWillSetupNotification = @"actionBarWillSetupNotification";
+NSString * const actionBarDidSetupNotification = @"actionBarDidSetupNotification";
+NSString * const actionBarWillRevealNotification = @"actionBarWillRevealNotification";
+NSString * const actionBarDidRevealNotification = @"actionBarDidRevealNotification";
