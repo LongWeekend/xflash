@@ -11,16 +11,22 @@
 #import "Constants.h"
 #import "ReportBadDataViewController.h"
 #import "jFlashAppDelegate.h"
+#import "TweetWordViewController.h"
+#import "LWETwitterEngine.h"
+#import "LWETUser.h"
+#import "LWETRequestDelegate.h"
+#import "TweetWordXAuthController.h"
 
-#define SVC_ACTION_TWEET_BUTTON 0
-#define SVC_ACTION_REPORT_BUTTON 1
-#define SVC_ACTION_ADDTOSET_BUTTON 2
+#define SVC_ACTION_TWEET_BUTTON 1
+#define SVC_ACTION_REPORT_BUTTON 2
+#define SVC_ACTION_ADDTOSET_BUTTON 0
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate>
+@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, LWETRequestDelegate>
 {
   IBOutlet id delegate;  
   
   Card *currentCard;
+	LWETwitterEngine *_twitterEngine;
   
   // The overtop buttons for quiz mode
   IBOutlet UIView *cardMeaningBtnHint;
@@ -33,6 +39,8 @@
   IBOutlet UIButton *addBtn;
   IBOutlet UIButton *buryCardBtn;
 }
+
+- (NSString *)getTweetWord;
 
 // interface actions
 - (IBAction)doNextCardBtn;

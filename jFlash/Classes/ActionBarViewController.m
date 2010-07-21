@@ -154,9 +154,9 @@
 {
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                             otherButtonTitles:NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
-                                                               NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),
-                                                               NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),nil];
+                                             otherButtonTitles:NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
+															   NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
+                                                               NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
 
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [as showInView:[[appDelegate rootViewController]view]]; 
@@ -195,11 +195,154 @@
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
-    // RENDE - DO THINGS HERE!!!!!!!!!!!
-    // THIS IS THE DATA 
-    NSString* tweet = [[NSString alloc] initWithFormat:@"%@", [self.currentCard headword]];
+	  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	  NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
+	  LWE_LOG(@"Current User : %@", idCurrentUser);
+	  // TODO: RENDY - DO THINGS HERE!!!!!!!!!!!
+	  // Twitter Engine
+	  // TODO: Initialize all of the twitter engine
+	  TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
+											 initWithNibName:@"TweetWordXAuthController" 
+											 bundle:nil];
+	  if ((!_twitterEngine) && (_twitterEngine == nil))
+		  _twitterEngine = [[LWETwitterEngine alloc] 
+							initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
+							privateKey:JFLASH_TWITTER_PRIVATE_KEY
+							authenticationView:controller];
+	  else 
+		  LWE_LOG(@"TWITTER ENGINE NOT INITIALIZED");
+	  
+	  UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
+	  _twitterEngine.parentForUserAuthenticationView = vc;
+	  [_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
+	  _twitterEngine.delegate = self;
+	  [controller release];
+	  
+	  if (_twitterEngine.loggedUser.isAuthenticated)
+	  {
+		  //Set all of the data 
+		  NSString *tweetWord = [self getTweetWord];
+		  LWE_LOG(@"TWEET THIS CARD : %@", tweetWord);
+
+		  TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
+														initWithNibName:@"TweetWordViewController"  
+														twitterEngine:_twitterEngine 
+														tweetWord:tweetWord];
+		  
+		  UINavigationController *modalNavController = [[UINavigationController alloc]
+														initWithRootViewController:twitterController];
+		  
+		  [appDelegate.rootViewController presentModalViewController:modalNavController
+															animated:YES];
+		  
+		  [twitterController release];
+		  [modalNavController release];
+	  }
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
+}
+
+#pragma mark -
+#pragma mark LWETRequestDelegate
+
+- (void)didFinishProcessWithData:(NSData *)data
+{
+	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	[appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
+	
+	UIAlertView *alert = [[UIAlertView alloc]
+						  initWithTitle:@"Tweet Card" 
+						  message:@"Succeed" 
+						  delegate:self 
+						  cancelButtonTitle:@"Yatta!" 
+						  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+	[_twitterEngine release];
+	_twitterEngine = nil;
+}
+
+- (void) didFailedWithError:(NSError *)error
+{
+	LWE_LOG(@"Error happens in the action bar controller when trying to tweet word");
+	
+	UIAlertView *alertView = [[UIAlertView alloc]
+							  initWithTitle:@"Oops" 
+							  message:@"Tweet error, most likely reason is duplicate status" 
+							  delegate:nil 
+							  cancelButtonTitle:@"OK" 
+							  otherButtonTitles:nil];
+	[alertView show];
+	[alertView release];
+	
+	[_twitterEngine release];
+	_twitterEngine = nil;
+}
+
+- (void)didFinishAuth
+{
+	NSString *tweetWord = [self getTweetWord];
+	TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
+												  initWithNibName:@"TweetWordViewController"  
+												  twitterEngine:_twitterEngine 
+												  tweetWord:tweetWord];
+	
+	UINavigationController *modalNavController = [[UINavigationController alloc]
+												  initWithRootViewController:twitterController];
+	
+	[self performSelector:@selector(presentModal:) 
+			   withObject:modalNavController 
+			   afterDelay:0];
+	
+	[twitterController release];
+	[modalNavController release];
+}
+
+- (void)didFailedAuth:(NSError *)error
+{
+	if (error)
+	{
+		LWE_LOG(@"DID FAILED AUTH");
+		UIAlertView *alertView = [[UIAlertView alloc]
+								  initWithTitle:@"Oops" 
+								  message:@"Something wrong with the Twitter API Server" 
+								  delegate:nil 
+								  cancelButtonTitle:@"OK" 
+								  otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];		
+	}
+	[_twitterEngine release];
+	_twitterEngine = nil;
+}
+
+-(void) presentModal:(UIViewController*)modalNavController
+{
+	LWE_LOG(@"PRESENT MODAL");
+	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+	[appDelegate.rootViewController presentModalViewController:modalNavController 
+													  animated:YES];
+}
+
+#pragma mark -
+#pragma mark TweetWordMethod
+
+- (NSString *)getTweetWord
+{
+	NSMutableString *str = [[NSMutableString alloc] init];
+	
+	[str appendString:self.currentCard.headword];
+	[str appendString:@" ["];
+	[str appendString:self.currentCard.reading];
+	[str appendString:@"] "];
+	
+	NSString *meaning = [self.currentCard meaningWithoutMarkup];
+	if (kMaxChars - [str length] - [meaning length] >= 0)
+		[str appendString:meaning];
+	
+	NSString *result = [NSString stringWithString:str];
+	[str release];
+	return result;
 }
 
 #pragma mark -
