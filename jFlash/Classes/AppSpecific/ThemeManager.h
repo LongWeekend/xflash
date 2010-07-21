@@ -24,6 +24,7 @@ extern NSString * const DEFAULT_THEME;
 - (NSString*) currentThemeWebSelectionColor;
 - (NSString*) elementWithCurrentTheme:(NSString*)element;
 - (NSDictionary*) _currentTheme;
+- (NSString*) _deviceType;
 - (NSArray*) _themeListWithKey:(NSString*)key;
 
 //! Provide list of names of all available themes

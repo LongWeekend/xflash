@@ -48,6 +48,7 @@ const NSInteger KSegmentedTableHeader = 100;
   [super viewDidLoad];
 
   // Programmatically make UISearchBar
+  // TODO: iPad customization!
   UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
   tmpSearchBar.delegate = self;
   tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -127,12 +128,14 @@ const NSInteger KSegmentedTableHeader = 100;
                                                           NSLocalizedString(@"Example Sentences",@"SearchViewController.Search_Sentences"),nil]];
   tmpChooser.segmentedControlStyle = UISegmentedControlStyleBar;
   tmpChooser.selectedSegmentIndex = _searchTarget;
+  // TODO: iPad customization!
   tmpChooser.frame = CGRectMake(10,5,300,25);
   tmpChooser.tintColor = [UIColor lightGrayColor];
   [tmpChooser addTarget:self action:@selector(changeSearchTarget:) forControlEvents:UIControlEventValueChanged];
   [self set_wordsOrSentencesSegment:tmpChooser];
   [tmpChooser release];  
   
+  // TODO: iPad customization!  
   UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
   tableHeaderView.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   [tableHeaderView addSubview:[self _wordsOrSentencesSegment]];

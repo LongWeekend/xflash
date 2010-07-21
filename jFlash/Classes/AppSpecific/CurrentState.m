@@ -129,7 +129,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [self setPluginMgr:[[PluginManager alloc] init]];
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-
+  
+  // ADD OBSERVER FOR DB COPY!
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerDatabaseCopied) name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
+   
   // DEBUG: this simulates being a JFlash 1.0 upgrade user
   //[self _createDefaultSettingsFor10:settings];
   
@@ -164,6 +167,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 }
 
 
+/** Registers the db_did_finish_copying BOOL value in NSUserDefaults when called */
+- (void) registerDatabaseCopied
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setBool:YES forKey:@"db_did_finish_copying"];
+}
+
+
 /** Create & store default settings to NSUserDefaults */
 - (void) _createDefaultSettings
 {
@@ -190,8 +201,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 //! Standard dealloc
 - (void) dealloc
 {
-  [super dealloc];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setPluginMgr:nil];
+  [super dealloc];
 }
    
 @end

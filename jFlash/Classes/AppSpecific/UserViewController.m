@@ -51,6 +51,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   [[self tableView] setSeparatorColor:[UIColor lightGrayColor]];
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
@@ -112,10 +113,6 @@
     cell.backgroundColor = [UIColor whiteColor];
   }
 
-  // Set up the avatar image
-//  UIImageView *tmpView = cell.imageView;
-//  tmpView.image = [[usersArray objectAtIndex:indexPath.row] getUserThumbnail];
-  
   cell.textLabel.text = tmpNickname;
   cell.accessoryType  = UITableViewCellAccessoryDetailDisclosureButton;
   cell.accessoryView = nil;
@@ -244,17 +241,13 @@
 /** Pushs the user details view controller onto the nav controller stack */
 - (void) showUserDetailsView
 {
+  // TODO: iPad customization!
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
   userDetailsView.mode = kUserViewModeAdd;
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
 
-/* // I would like to do this, but cannot load an actionSheet from a modal view
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:userDetailsView];
-  [[self navigationController] presentModalViewController:modalNavController animated:YES];
-  [modalNavController release];
-  [userDetailsView release];*/
 }
 
 

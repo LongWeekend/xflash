@@ -13,6 +13,10 @@
 #define DEFAULT_MAX_STRUDYING 30
 #define DEFAULT_DIFFICULTY 1
 
+
+// Profile SQL statements in console?
+#define PROFILE_SQL_STATEMENTS 1
+
 // Database version constants
 #define JFLASH_DATA_1_0 1
 #define JFLASH_DATA_1_1 2

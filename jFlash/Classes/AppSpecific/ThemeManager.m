@@ -84,6 +84,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 }
 
 
+//! Device type returns "IPAD" if iPad, "IPHONE 4" if iPhone 4, and "IPHONE" otherwise
+- (NSString*) _deviceType
+{
+  //TODO - actually build this function
+  // TODO: iPad customization!
+  return "IPHONE";
+}
+
 //! Returns the current theme - private method
 - (NSDictionary*) _currentTheme
 {
@@ -166,6 +174,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (NSString*) elementWithCurrentTheme:(NSString*)element
 {
+  // TODO: iPad customization!
   return [NSString stringWithFormat:@"/%@theme-cookie-cutters/%@",[self currentThemeFileName],element];
 }
 

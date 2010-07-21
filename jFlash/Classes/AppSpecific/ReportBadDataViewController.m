@@ -60,6 +60,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 - (void) viewDidLoad
 {
   // Now set up other NIB file
+  // TODO: iPad customization!
   [[NSBundle mainBundle] loadNibNamed:@"LWEToolbarPicker" owner:self options:nil];
 
   [super viewDidLoad];
@@ -72,6 +73,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   self.userMsgInputBox.textColor = [UIColor lightGrayColor];
   
   // Set up stuff for UIPicker animation - moves the picker to just off the screen
+  // TODO: iPad customization!
   [LWEViewAnimationUtils translateView:self.pickerView byPoint:CGPointMake(0,480) withInterval:1.0];
   
   // Make HH guy and set him up
@@ -86,6 +88,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 
@@ -113,6 +116,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   }
   
   // Move the card to an NSDictionary so we can make it portable
+#if defined(APP_STORE_FINAL)
   NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
                            [_badCard headword],@"headword",
@@ -121,6 +125,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                            [_badCard romaji],@"romaji",nil];
 
   // Generate dictionary of user data to send to Flurry
+  LWE_LOG(@"Generated data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
   NSMutableArray *membership = [TagPeer membershipListForCardId:_badCard.cardId];
   NSString *issue = [_issueTypeArray objectAtIndex:_userSelectedIssueType];
   NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -131,8 +136,6 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                               [[self userMsgInputBox] text],@"user_message",
                               [[self userEmailBox] text],@"user_email",
                               membership,@"tag_membership",nil];
-  LWE_LOG(@"Generated data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
-#if defined(APP_STORE_FINAL)
   [FlurryAPI logEvent:@"userBadDataReport" withParameters:dataToSend];
 #endif
   [self.parentViewController dismissModalViewControllerAnimated:YES];
@@ -156,6 +159,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 //! Hides picker by moving it off the screen
 -(IBAction) _hidePickerView
 {
+  // TODO: iPad customization!
   [LWEViewAnimationUtils translateView:self.pickerView byPoint:CGPointMake(0,480) withInterval:0.5f];
   _pickerCurrentlyVisible = NO;
   
@@ -174,6 +178,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
+    // TODO: iPad customization!
     CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 180);
     pickerView.transform = transform;
     [self.view addSubview:pickerView];
@@ -211,6 +216,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     // Hide the cancel button
     self.navigationItem.leftBarButtonItem = nil;
     // Move the view up so the keyboard doesn't block the input
+    // TODO: iPad customization!
     [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-130) withInterval:0.5f];
     // Let everyone know the keyboard is showing
     _keyboardCurrentlyVisible = YES;
@@ -227,6 +233,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     // Put the cancel button back
     self.navigationItem.leftBarButtonItem = _cancelButton;
     // Now translate the view back
+    // TODO: iPad customization!
     [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
     _keyboardCurrentlyVisible = NO;
   }
@@ -278,6 +285,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   }
   
   // Move the view up so the keyboard doesn't block the input
+  // TODO: iPad customization!
   [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-90) withInterval:0.5f];
   
   // Stop you from showing the picker
@@ -294,6 +302,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   self.navigationItem.leftBarButtonItem = _cancelButton;
   
   // Move the view up so the keyboard doesn't block the input
+  // TODO: iPad customization!
   [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 
   // Also, mimic placeholder behavior in case text is empty

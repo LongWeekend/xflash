@@ -45,6 +45,7 @@
 {
   // Make the main view the themed splash screen
   UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+  // TODO: iPad customization HERE?
   NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
   view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
   self.view = view;
@@ -78,7 +79,10 @@
   
   // Make room for the status bar
   CGRect tabBarFrame;
-  tabBarFrame = CGRectMake(0, 0, 320, 460);
+  tabBarFrame = [[UIScreen mainScreen] bounds];
+  tabBarFrame.size.height = tabBarFrame.size.height - 20;
+
+  //TODO: iPad customization here
 	self.tabBarController.view.frame = tabBarFrame;
   UINavigationController *localNavigationController;
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
@@ -160,8 +164,8 @@
  */
 - (void) showUpdaterModal
 {
+  //TODO: iPad customization here
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  //[updateVC setTitle:NSLocalizedString(@"Dictionary Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [updateVC setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
   // Set task parameters
@@ -184,6 +188,7 @@
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
   // Instantiate downloader with jFlash download URL & destination filename
+  //TODO: iPad customization here
   ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   //[dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
   [dlViewController setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];

@@ -15,6 +15,7 @@
 
 - (void) updateMoodIcon: (float)tmpRatio
 {
+  // TODO: iPad customization!
   NSArray* hotHeadsArray = [[NSArray alloc] initWithObjects: @"mood-icons/positive/hh-ecstatic.png", @"mood-icons/positive/hh-happy.png", @"mood-icons/positive/hh-jolly.png", @"mood-icons/neutral/hh-small-smile.png", @"mood-icons/neutral/hh-my-name-is-forest.png",
                             @"mood-icons/neutral/hh-uncommunicative.png", @"mood-icons/negative/hh-wounded.png", @"mood-icons/negative/hh-losin-it.png", @"mood-icons/negative/hh-pissed.png", @"mood-icons/negative/hh-sea-sick.png", @"mood-icons/negative/hh-wounded.png", nil];
   //  NSArray* transitionHHArray = [[NSArray alloc] initWithObjects: @"positive/hh-on-a-roll.png", @"positive/hh-smug.png", @"negative/hh-aggro.png", @"negative/hh-frustrated.png", nil]; 
@@ -101,6 +102,7 @@
 + (UIImageView*) makeHappyMoodIconView
 {
   ThemeManager *tm = [ThemeManager sharedThemeManager];
+  // TODO: iPad customization!
   NSString* tmpStr = [tm elementWithCurrentTheme:@"positive/hh-happy.png"];
   UIImageView* tmpImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:tmpStr]] autorelease];
   return tmpImgView;

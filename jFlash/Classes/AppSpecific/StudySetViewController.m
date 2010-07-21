@@ -81,6 +81,7 @@
   [super viewWillAppear:animated];
   [self setTitle:[group groupName]];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
@@ -154,6 +155,7 @@
 /** Pops up AddStudySetInputViewController modal to create a new set */
 - (void)addStudySet
 {
+  // TODO: iPad customization?
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
   addStudySetInputViewController.ownerId = self.groupId;
   addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
@@ -259,6 +261,7 @@
 
       // Set up the image
       UIImageView* tmpView = cell.imageView;
+      // TODO: iPad customization?
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
       
       Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
@@ -291,7 +294,7 @@
     
     // Folders should display the theme color when pressed!
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:(NSInteger)[subgroupArray count]];
+    [bgView setCellIndexPath:indexPath tableLength:[subgroupArray count]];
     [bgView setBorderColor:[[self tableView] separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.selectedBackgroundView = bgView;
@@ -311,6 +314,7 @@
 
     // Set up the image
     UIImageView* tmpView = (UIImageView*)cell.imageView;
+    // TODO: iPad customization?
     if(tmpGroup.recommended)
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"special-folder-icon.png"]];
     else
@@ -360,11 +364,13 @@
   }
   else
   {
+    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+
     // If they selected a group
-    StudySetViewController *subgroupController = [[[StudySetViewController alloc] init] autorelease];
+    StudySetViewController *subgroupController = [[StudySetViewController alloc] init];
     subgroupController.groupId = [[[self subgroupArray] objectAtIndex:indexPath.row] groupId];
     [self.navigationController pushViewController:subgroupController animated:YES];
-    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+    [subgroupController release];
   }
 }
 
