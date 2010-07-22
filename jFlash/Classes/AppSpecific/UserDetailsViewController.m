@@ -50,9 +50,7 @@
   [super viewWillAppear:animated];
   userNicknameTextField.returnKeyType = UIReturnKeyDone;
   userNicknameTextField.placeholder = @"Type your name here";
-  LWE_LOG(@"img path: %@",[selectedUser avatarImagePath]);
-  [userAvatarPreviewBtn setBackgroundImage:[selectedUser getUserThumbnailLarge] forState:UIControlStateNormal];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }

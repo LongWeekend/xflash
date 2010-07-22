@@ -16,11 +16,13 @@
 @synthesize tweetTxt;
 @synthesize tweetBtn;
 @synthesize counterLbl;
+@synthesize _tweetWord;
+@synthesize _twitterEngine;
 
 #pragma mark -
 #pragma mark Private Methods
 
-// RENDY: this is really good - comments are good, logic is good.
+//! Handy method to take care all of the text field keyboards.
 - (void)_resignTextFieldKeyboard
 {
 	if ([tweetTxt isFirstResponder])
@@ -38,6 +40,7 @@
 #pragma mark -
 #pragma mark IBAction
 
+//! Tweet the text in the text fields, and add the " #jflash" after.
 - (IBAction)tweet
 {
 	[self _resignTextFieldKeyboard];
@@ -45,46 +48,47 @@
 	[_twitterEngine tweet:string];
 }
 
-// RENDY: can you do this too?
+//! Sign out from the twitter engine.
 - (IBAction) signUserOutOfTwitter:(id)sender
 {
-  //TODO
+  //TODO: IMPLEMENTATION.
 }
 
 #pragma mark -
 #pragma mark UITextViewDelegate
 
+//! Its handy to resign all of the keyboard it the user touch the view.
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[self _resignTextFieldKeyboard];
 }
 
+//! When the text view begins edit, change the cancel button on top of the navigation bar with the done button.
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
-	UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]
-								initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
-								style:UIBarButtonItemStyleDone 
-								target:self 
-								action:@selector(_resignTextFieldKeyboard)];
 	self.navigationItem.leftBarButtonItem = nil;
-	self.navigationItem.rightBarButtonItem = doneBtn;	
+	self.navigationItem.rightBarButtonItem = _doneBtn;	
 	
-	// Move the view up so the keyboard doesn't block the input
+	//Move the view up so the keyboard doesn't block the input
 	//TODO: Calibrate the point after set everything up
 	[LWEViewAnimationUtils translateView:self.view 
 								 byPoint:CGPointMake(0,-70) 
 							withInterval:0.5f];
 }
 
+//! The characters left label will update based on this method.
 - (void) textViewDidChange:(UITextView *)textView
 {
 	NSUInteger c = [tweetTxt.text length];
 	NSInteger length = kMaxChars - c;
-  // RENDY: we prefer verbose { } statements unless it is REALLY one-liner
 	if (length >= 0)
+	{
 		counterLbl.text = [NSString stringWithFormat:@"%d", length];
+	}
 	else
+	{
 		textView.text = [textView.text substringToIndex:kMaxChars];
+	}
 }
 
 #pragma mark -
@@ -95,7 +99,6 @@
 // perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 {
-  // RENDY: THANKS!  I didn't know about NSGenericException
 	[NSException raise:NSGenericException format:@"Do not init without a twitter engine."];
 	return self;
 }
@@ -105,38 +108,44 @@
 	[NSException raise:NSGenericException format:@"Do not init without a twitter engine."];
 	return self;
 }
-							  
+
+//! This is the designated initialiser. 
 - (id)initWithNibName:(NSString *)nibName 
 		twitterEngine:(LWETwitterEngine *)twitterEngine 
 			tweetWord:(NSString *)tweetWord
 {
 	if (self = [super initWithNibName:nibName bundle:nil])
 	{
-    // RENDY: if you want to retain, you can just @synthesize?
-		_twitterEngine = [twitterEngine retain];
-		_tweetWord = [tweetWord retain];
+		self._twitterEngine = twitterEngine;
+		self._tweetWord = tweetWord;
 	}
 	return self;
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, 
-// typically from a nib.
+//! Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
-  [super viewDidLoad];
+	[super viewDidLoad];
 	_signOutBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout",@"TweetWordViewController.LogOutFromTwitterBtn")
                                                 style:UIBarButtonItemStyleBordered
                                                 target:self
                                                 action:@selector(signUserOutOfTwitter:)];
+	
+	 _doneBtn = [[UIBarButtonItem alloc]
+				 initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
+				 style:UIBarButtonItemStyleDone 
+				 target:self 
+				 action:@selector(_resignTextFieldKeyboard)];
   
 	_cancelBtn = [[UIBarButtonItem alloc]
 				  initWithTitle:NSLocalizedString(@"Cancel", @"Global.Cancel")
 				  style:UIBarButtonItemStyleBordered 
 				  target:self.parentViewController 
 				  action:@selector(dismissModalViewControllerAnimated:)];
+	
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
-  self.navigationItem.rightBarButtonItem = _signOutBtn;
-	self.navigationItem.title = NSLocalizedString(@"Tweet this Card",@"TweetWordViewController.TweetThisCard");
+	self.navigationItem.rightBarButtonItem = _signOutBtn;
+	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
 	self.counterLbl.text = [NSString stringWithFormat:@"%d", 
 							(kMaxChars-[_tweetWord length])];
@@ -147,14 +156,6 @@
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 	self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-}
-
-- (void)didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload 
@@ -170,14 +171,23 @@
 - (void)dealloc 
 {
 	[_twitterEngine release];
-	if (_tweetWord)
-		[_tweetWord release];
+	[_tweetWord release];
+		
 	if (_cancelBtn)
+	{
 		[_cancelBtn release];
-  if (_signOutBtn)
-  {
-    [_signOutBtn release];
-  }
+	}
+	
+	if (_signOutBtn)
+	{
+		[_signOutBtn release];
+	}
+	
+	if (_doneBtn)
+	{
+		[_doneBtn release];
+	}
+	
 	[tweetTxt release];
 	[tweetBtn release];
 	[counterLbl release];

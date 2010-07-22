@@ -10,18 +10,26 @@
 
 #import "LWETAuthenticationViewProtocol.h"
 
-// RENDY:  Comment should go here about what this class does
+/**
+ * This view controller is used for OAuth type of authentication, 
+ * please refer to TweetWordXAuth View controller, 
+ * because jFlash had been given the access to XAuth with twitter.
+ * Tweet Word Authentication Controller has to conform with LWETAuthenticationViewProtocol
+ * which forces the view controller to have delegate, and a web view.
+ * It is used for authenticating a user with the twitter website, the web view
+ * loads the website, and gives back the user PIN to be used for authenticating them in our
+ * application
+ */
 @interface TweetWordAuthController : UIViewController <LWETAuthenticationViewProtocol, UIWebViewDelegate>
 {
 	id <LWETAuthenticationViewDelegate> delegate;
 	UIWebView *webView;
   
-  // RENDY:  @private keyword is helpful
+@private
 	UIBarButtonItem *_cancelBtn;
 	BOOL _firstLoaded;
 }
 
-// RENDY:  Don't worry about linebreak on 1. method signatures and 2. variable declarations
 @property (nonatomic, retain) id<LWETAuthenticationViewDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 

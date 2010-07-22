@@ -18,15 +18,25 @@
 @class LWETwitterEngine;
 @class LWETUser;
 
-//! RENDY: comment please
+/**
+ * This View Controller acts like a model, for user to change and have a say of what they are going to
+ * tweet in the twitter. Once a model with a root view controller as this view controller shows, it
+ * means that the user should already been authenticated. If a user has not been authenticated,
+ * whoever calls this will have to go through authentication phase first.
+ *
+ * It also conforms to LWETRequestDelegate because after all the twitter related request 
+ * (Not the authentication phase request) has done (whether it fails, or success) it will report
+ * back to this view controller.
+ */
 @interface TweetWordViewController : UIViewController <LWETRequestDelegate, UITextViewDelegate>
 {
 	IBOutlet UITextView *tweetTxt;
 	IBOutlet UIButton *tweetBtn;
 	IBOutlet UILabel *counterLbl;
-	
+@private
 	UIBarButtonItem *_cancelBtn;
-  UIBarButtonItem *_signOutBtn;
+	UIBarButtonItem *_signOutBtn;
+	UIBarButtonItem *_doneBtn;
 	LWETwitterEngine *_twitterEngine;
 	NSString *_tweetWord;
 }
@@ -34,7 +44,13 @@
 @property (nonatomic, retain) IBOutlet UITextView *tweetTxt;
 @property (nonatomic, retain) IBOutlet UIButton *tweetBtn;
 @property (nonatomic, retain) IBOutlet UILabel *counterLbl;
+@property (nonatomic, retain) LWETwitterEngine *_twitterEngine;
+@property (nonatomic, retain) NSString *_tweetWord;
 
+/**
+ * Tweet method is an IBAction fired with the "authentication" button
+ * and this method will send a tweet request with the twitter engine.
+ */
 - (IBAction)tweet;
 
 //! Signs the user out of Twitter so they can sign in as a different user.
@@ -42,6 +58,10 @@
 
 - (void)_resignTextFieldKeyboard;
 
+/**
+ * This is the designated initializer, and it asks for nib name for the view, twiter engine that
+ * already has a logged on user (authenticated) and what is the initial word to be tweeted.
+ */
 - (id)initWithNibName:(NSString *)nibName 
 		twitterEngine:(LWETwitterEngine *)twitterEngine 
 			tweetWord:(NSString *)tweetWord;

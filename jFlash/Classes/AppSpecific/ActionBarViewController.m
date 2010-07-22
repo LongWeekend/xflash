@@ -206,13 +206,18 @@
 	  TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
 											 initWithNibName:@"TweetWordXAuthController" 
 											 bundle:nil];
+	  
 	  if ((!_twitterEngine) && (_twitterEngine == nil))
+	  {
 		  _twitterEngine = [[LWETwitterEngine alloc] 
 							initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
 							privateKey:JFLASH_TWITTER_PRIVATE_KEY
 							authenticationView:controller];
+	  }
 	  else 
-		  LWE_LOG(@"TWITTER ENGINE NOT INITIALIZED");  // RENDY: {} -- otherwise this will fail!! 
+	  {
+		  LWE_LOG(@"WARNING : Apparently, the engine has been initialized. Its not initialised again (avoid the memory leak)");
+	  }
 	  
 	  UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
 	  _twitterEngine.parentForUserAuthenticationView = vc;
@@ -224,19 +229,18 @@
 	  {
 		  //Set all of the data 
 		  NSString *tweetWord = [self getTweetWord];
-		  LWE_LOG(@"TWEET THIS CARD : %@", tweetWord);
+		  LWE_LOG(@"We are going to tweet this card : %@", tweetWord);
 
 		  TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
 														initWithNibName:@"TweetWordViewController"  
 														twitterEngine:_twitterEngine 
 														tweetWord:tweetWord];
 		  
-      // RENDY: Let's decouple this with an observer pattern in RootViewController.
-		  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:twitterController];
-      [appDelegate.rootViewController presentModalViewController:modalNavController	animated:YES];
-		  
-		  [twitterController release];
-		  [modalNavController release];
+		  NSDictionary *dict = [[NSDictionary alloc]
+								initWithObjectsAndKeys:twitterController, @"controller", nil];
+		  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
+		  [dict release];
+		  LWE_LOG(@"Done Sending the notification");
 	  }
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
@@ -247,14 +251,13 @@
 
 - (void)didFinishProcessWithData:(NSData *)data
 {
-	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	[appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissTwitterModal" object:self userInfo:nil];
 	
 	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:NSLocalizedString(@"Tweeted",@"ActionBarViewController.TweetSuccessAlertTitle")
-						  message:NSLocalizedString(@"Added to your Twitter feed successfully!",@"ActionBarViewController.TweetSuccessAlertMsg")
+						  initWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle")
+						  message:NSLocalizedString(@"Added to your Twitter feed successfully!", @"ActionBarViewController.TweetSuccessAlertMsg")
 						  delegate:self 
-						  cancelButtonTitle:NSLocalizedString(@"やったー！",@"ActionBarViewController.TweetSuccessYattaButton")
+						  cancelButtonTitle:NSLocalizedString(@"やったー！", @"ActionBarViewController.TweetSuccessYattaButton")
 						  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
@@ -267,10 +270,10 @@
 	LWE_LOG(@"Error happens in the action bar controller when trying to tweet word");
 	
 	UIAlertView *alertView = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Unable to Tweet",@"ActionBarViewController.TweetFailureAlertTitle")
-							  message:NSLocalizedString(@"We were unable to tweet this - did you retweet the same thing twice in a row?",@"ActionBarViewController.TweetFailureAlertMsg")
+							  initWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
+							  message:NSLocalizedString(@"We were unable to tweet this - did you retweet the same thing twice in a row?", @"ActionBarViewController.TweetFailureAlertMsg")
 							  delegate:nil 
-							  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
+							  cancelButtonTitle:NSLocalizedString(@"OK", @"Global.OK") 
 							  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release];
@@ -287,22 +290,18 @@
 												  twitterEngine:_twitterEngine 
 												  tweetWord:tweetWord];
 	
-	UINavigationController *modalNavController = [[UINavigationController alloc]
-												  initWithRootViewController:twitterController];
-	
 	[self performSelector:@selector(presentModal:) 
-			   withObject:modalNavController 
+			   withObject:twitterController 
 			   afterDelay:0];
 	
 	[twitterController release];
-	[modalNavController release];
 }
 
 - (void)didFailedAuth:(NSError *)error
 {
 	if (error)
 	{
-		LWE_LOG(@"DID FAILED AUTH");
+		LWE_LOG(@"Did failed auth.");
 		UIAlertView *alertView = [[UIAlertView alloc]
                   initWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
 								  message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")
@@ -317,13 +316,15 @@
 }
 
 
-// RENDY: decouple
 -(void) presentModal:(UIViewController*)modalNavController
 {
-	LWE_LOG(@"PRESENT MODAL");
-	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	[appDelegate.rootViewController presentModalViewController:modalNavController 
-													  animated:YES];
+	LWE_LOG(@"Presenting the modal");
+	NSDictionary *dict = [[NSDictionary alloc]
+						  initWithObjectsAndKeys:modalNavController, @"controller", nil];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
+	[dict release];
+	LWE_LOG(@"Done Sending the notification");
 }
 
 #pragma mark -
@@ -333,13 +334,9 @@
 {
 	NSMutableString *str = [[NSMutableString alloc] init];
 	
-  // RENDY: stringWithFormat is useful here
-	[str appendString:self.currentCard.headword];
-	[str appendString:@" ["];
-	[str appendString:self.currentCard.reading];
-	[str appendString:@"] "];
+	[str appendFormat:@"%@ [%@] ", self.currentCard.headword, self.currentCard.reading];
 	
-  // RENDY: is this code working?  We had a bug on card "得"
+	// RENDY: is this code working?  We had a bug on card "得"
 	NSString *meaning = [self.currentCard meaningWithoutMarkup];
 	if (kMaxChars - [str length] - [meaning length] >= 0)
 		[str appendString:meaning];

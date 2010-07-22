@@ -10,20 +10,29 @@
 
 #import "LWETXAuthViewProtocol.h"
 
+/**
+ * This view controller is used for authenticating a user, with their username and password. 
+ * This view controller is intended to use with the XAuth type of authentication, therefore it has to conform
+ * to the LWETXAuthViewProtocol forces the controller to have the LWETwitterOAuth as the authentication engine. 
+ * It also acts as the UITextFieldDelegate, and UIAlertViewDelegate. So every text fields in the XIB will have this 
+ * controller as their delegate. 
+ */
 @interface TweetWordXAuthController : UIViewController <LWETXAuthViewProtocol, UITextFieldDelegate, UIAlertViewDelegate>
 {
 	LWETwitterOAuth *authEngine;
 	
-	UIBarButtonItem *_cancelBtn;
-	UIBarButtonItem *_doneBtn;
 	IBOutlet UITextField *unameTxt;
 	IBOutlet UITextField *passwordTxt;
 	IBOutlet UIButton *authBtn;
+	
+@private
+	UIBarButtonItem *_cancelBtn;
+	UIBarButtonItem *_doneBtn;
 }
 
 - (IBAction)authenticateUser:(id)sender;
 
-- (void)textFieldResign; 
+- (void)_textFieldResign; 
 
 @property (nonatomic, assign) LWETwitterOAuth *authEngine;
 @property (nonatomic, retain) IBOutlet UITextField *unameTxt;

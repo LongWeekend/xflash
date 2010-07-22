@@ -34,6 +34,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
+	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTwitterModal:) name:@"shouldShowTwitterModal" object:nil];
+	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissTwitterModal:) name:@"shouldDismissTwitterModal" object:nil];
   }
 	return self;
 }
@@ -155,6 +157,23 @@
   {
     [[self tabBarController] presentModalViewController:vc animated:YES];    
   }
+}
+
+/**
+ *
+ */
+- (void)showTwitterModal:(NSNotification *)notification
+{
+	UIViewController *vc = (UIViewController *) [[notification userInfo] objectForKey:@"controller"];
+	[self _showModalWithViewController:vc useNavController:YES];
+}
+
+/**
+ *
+ */
+- (void)dismissTwitterModal:(NSNotification *)notification
+{
+	[[self tabBarController] dismissModalViewControllerAnimated:NO];
 }
 
 

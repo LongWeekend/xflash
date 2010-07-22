@@ -15,37 +15,40 @@
 @synthesize webView;
 @synthesize delegate;
 
-// RENDY:  Great code organization!
-
 #pragma mark -
 #pragma mark UIWebViewDelegate
 
-// RENDY:  Should be //TODO: ?
+//! Using the UIWebViewDelegate to get the report if the web view is loaded with some error
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-	LWE_LOG(@"ERROR");
-	LWE_LOG(@"%@", [error userInfo]);
+	//TODO: Deal with the error
+	//and if its fatal might as well get back to the delegate, or refreshing the web view?
+	LWE_LOG(@"Error: Web view authentication is loaded with this error : %@", [error userInfo]);
 }
 
+
+//! Using the UIWebViewDelegate to get the report if the web view finishes loading.
 - (void) webViewDidFinishLoad:(UIWebView *)aWebView
 {
 	if (!_firstLoaded)
 	{
 		NSString *script;
+		//Get the pin out of the pin div that are provided by the twitter website with help of javascript.
 		script = @"(function() { return document.getElementById(\"oauth_pin\").firstChild.textContent; } ())";
 		
 		NSString *pin = [self.webView stringByEvaluatingJavaScriptFromString:script];
 		
+		//if the user goes to the right page with the "pin div" it gives the pin back
+		//to the delegate, however, if the pin is not there. It will still keep going. 
 		if ([pin length] > 0)
-    {
+		{
 			NSLog(@"pin %@", pin);
 			
 			if ([delegate respondsToSelector:@selector(didFinishAuthorizationWithPin:)])
 				[delegate didFinishAuthorizationWithPin:pin];
 			
 			[self dismissModalViewControllerAnimated:NO];	
-		}		
-    // RENDY:  else?  What if the PIN is 0 characters?  Is it going to break?
+		}
 	}
 	else 
 	{
@@ -54,11 +57,6 @@
 		[aWebView stringByEvaluatingJavaScriptFromString:@"window.scrollTo(0,350);"];
 		_firstLoaded = NO;
 	}
-}
-
-- (void) webViewDidStartLoad:(UIWebView *)webView
-{
-	LWE_LOG(@"Start Load");
 }
 
 #pragma mark -
@@ -95,19 +93,10 @@
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager]
 														 currentThemeTintColor];
-  // IPAD customization?
+	//IPAD customization?
 	self.view.backgroundColor = [UIColor colorWithPatternImage:
 								 [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 	
-}
-
-// RENDY:  IF no implementation, feel free to remove
-- (void)didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload 
