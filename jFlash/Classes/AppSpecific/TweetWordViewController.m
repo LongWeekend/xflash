@@ -51,7 +51,8 @@
 //! Sign out from the twitter engine.
 - (IBAction) signUserOutOfTwitter:(id)sender
 {
-  //TODO: IMPLEMENTATION.
+	[_twitterEngine signOutForTheCurrentUser];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
