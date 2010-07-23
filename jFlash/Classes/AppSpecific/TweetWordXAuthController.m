@@ -52,9 +52,9 @@
 	self.navigationItem.leftBarButtonItem = _doneBtn;
 	//TODO: Calibrate this again
 	if (textField == passwordTxt)
-		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-80) withInterval:.5f];
+		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-80) withInterval:0.5f];
 	else if (textField == unameTxt)
-		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-30) withInterval:.5f];
+		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-30) withInterval:0.5f];
 	return YES;
 }
 
@@ -99,6 +99,8 @@
 {
 	[self.authEngine startXAuthProcessWithUsername:unameTxt.text 
 										  password:passwordTxt.text];
+	unameTxt.text = @"";
+	passwordTxt.text = @"";
 }
 
 //! IBAction for cancelling the authentication proccess, and report back to the auth engine that the authorization has just failed.

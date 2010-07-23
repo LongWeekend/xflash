@@ -269,6 +269,7 @@
  */
 + (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId
 {
+	//TODO: This is probably too slow
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.*, h.* FROM card_sentence_link l, cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId];
   NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES isBasicCard:YES];
   [sql release];

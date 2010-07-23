@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ExampleSentencePeer.h"
 #import "UIWebView+LWENoBounces.h"
+#import "NSURL+LWEUtilities.h"
 
-@interface ExampleSentencesViewController : UIViewController
+@interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {
   IBOutlet id delegate;
   IBOutlet id datasource;

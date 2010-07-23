@@ -92,21 +92,99 @@
   {    
     // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
-    NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];
-                      
+    
+	  
+	  NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];
+	  
+	  
+	  //html = [html stringByAppendingFormat:@"<script type='text/javascript'>function btnShowWord_Clicked() { alert('GG'); }</script>"];     
     html = [html stringByAppendingFormat:@"<h2 class='headwordLabel'>%@</h2>", [[datasource currentCard] headword]];
     html = [html stringByAppendingFormat:@"<ol>"];
 
     for (ExampleSentence* sentence in sentences) 
     {
-      html = [html stringByAppendingFormat:@"<li>%@<br/>", [sentence sentenceJa] ];
+		
+      html = [html stringByAppendingFormat:@"<span><li>%@<br/>", [sentence sentenceJa]];
       html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn] ];
+		//html = [html stringByAppendingFormat:@"<li>GG</li>"];
+		
+		html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
+		
+		html = [html stringByAppendingFormat:@"</span>"];
+		html = [html stringByAppendingFormat:@"<span>"];
+		/*html = [html stringByAppendingFormat:@"<form action='%d' method='post'>", [sentence sentenceId]];
+		html = [html stringByAppendingFormat:@"<input type='submit' value='show word' onclick='btnShowWord_Clicked()' />"];
+		html = [html stringByAppendingFormat:@"</form>"];*/
+		
+		html = [html stringByAppendingFormat:@"<a id='anchor%d' href='http://jflash.com?id=%d&open=0'>Show Word</a>", [sentence sentenceId], [sentence sentenceId]];
+		
+		html = [html stringByAppendingFormat:@"</span>"];
     }
     html = [html stringByAppendingString:@"</ol>"];
+	  //LWE_LOG(@"HTML : %@", html);
     [self setupSentencesWebView:html];
   }
   
   [self _exampleSentencesViewDidSetup];
+}
+
+#pragma mark -
+#pragma mark UIWebViewDelegate
+
+- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+	NSString *url = [[request URL] relativePath];
+	LWE_LOG(@"LOAD URL : %@", url);
+	//TODO: Make this better!!
+	if ((url == nil)||([url isEqualToString:@"about:blank"]))
+		return YES;
+	else
+	{
+		NSDictionary *dict = [[request URL] queryStrings];
+		
+		NSString *sentenceID = [dict objectForKey:@"id"];
+		NSString *open = [dict objectForKey:@"open"];
+		NSString *js;
+		if ([open isEqualToString:@"1"])
+		{
+			js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''", sentenceID];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+			
+			//close em
+			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').href = 'http://jflash.com?id=%@&open=0'", sentenceID, sentenceID];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+			
+			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').innerHTML = 'Show Word'", sentenceID];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+		}
+		else 
+		{
+			//open
+			NSMutableArray *arrayOfCards = [CardPeer retrieveCardSetForSentenceId:[sentenceID intValue]];
+			
+			NSString *cardHTML = @"<ul>";
+			for (Card *c in arrayOfCards)
+			{
+				LWE_LOG(@"English Head Word : %@, Head word : %@", [c headword_en], [c headword]);
+				cardHTML = [cardHTML stringByAppendingFormat:@"<li>%@ [%@]</li>", [c headword_en], [c headword]];
+			}
+			
+			cardHTML = [cardHTML stringByAppendingFormat:@"</ul>"];
+			js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = '%@'", sentenceID, cardHTML];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+			
+			
+			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').href = 'http://jflash.com?id=%@&open=1'", sentenceID, sentenceID];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+			
+			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').innerHTML = 'Hide Word'", sentenceID];
+			[webView stringByEvaluatingJavaScriptFromString:js];
+			
+						
+		}
+		
+		return NO;
+	}
 }
 
 #pragma mark -
