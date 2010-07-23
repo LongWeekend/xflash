@@ -185,7 +185,7 @@
     AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self currentCard]];
     
     // Set up DONE button
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
+    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
     tmpVC.navigationItem.leftBarButtonItem = doneBtn;
     [doneBtn release];
     
@@ -196,54 +196,62 @@
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
-    // RENDY: refactor "extract" to a different method?
-    
-	  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-	  NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
-	  LWE_LOG(@"Current User : %@", idCurrentUser);
-	  // Twitter Engine
-	  // TODO: Initialize all of the twitter engine
-	  TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
-											 initWithNibName:@"TweetWordXAuthController" 
-											 bundle:nil];
-	  
-	  if ((!_twitterEngine) && (_twitterEngine == nil))
-	  {
-		  _twitterEngine = [[LWETwitterEngine alloc] 
-							initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
-							privateKey:JFLASH_TWITTER_PRIVATE_KEY
-							authenticationView:controller];
-	  }
-	  else 
-	  {
-		  LWE_LOG(@"WARNING : Apparently, the engine has been initialized. Its not initialised again (avoid the memory leak)");
-	  }
-	  
-	  UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
-	  _twitterEngine.parentForUserAuthenticationView = vc;
-	  [_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
-	  _twitterEngine.delegate = self;
-	  [controller release];
-	  
-	  if (_twitterEngine.loggedUser.isAuthenticated)
-	  {
-		  //Set all of the data 
-		  NSString *tweetWord = [self getTweetWord];
-		  LWE_LOG(@"We are going to tweet this card : %@", tweetWord);
-
-		  TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
-														initWithNibName:@"TweetWordViewController"  
-														twitterEngine:_twitterEngine 
-														tweetWord:tweetWord];
-		  
-		  NSDictionary *dict = [[NSDictionary alloc]
-								initWithObjectsAndKeys:twitterController, @"controller", nil];
-		  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
-		  [dict release];
-		  LWE_LOG(@"Done Sending the notification");
-	  }
+	  [self tweet];
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
+}
+
+#pragma mark -
+#pragma mark Tweet Word Features
+
+- (void)tweet
+{
+	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
+	LWE_LOG(@"Current User : %@", idCurrentUser);
+	
+	// Twitter Engine
+	// TODO: Initialize all of the twitter engine
+	TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
+											initWithNibName:@"TweetWordXAuthController" 
+											bundle:nil];
+	
+	if ((!_twitterEngine) && (_twitterEngine == nil))
+	{
+		_twitterEngine = [[LWETwitterEngine alloc] 
+						  initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
+						  privateKey:JFLASH_TWITTER_PRIVATE_KEY
+						  authenticationView:controller];
+	}
+	else 
+	{
+		LWE_LOG(@"WARNING : Apparently, the engine has been initialized. Its not initialised again (avoid the memory leak)");
+	}
+	
+	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
+	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
+	_twitterEngine.parentForUserAuthenticationView = vc;
+	[_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
+	_twitterEngine.delegate = self;
+	[controller release];
+	
+	if (_twitterEngine.loggedUser.isAuthenticated)
+	{
+		//Set all of the data 
+		NSString *tweetWord = [self getTweetWord];
+		LWE_LOG(@"We are going to tweet this card : %@", tweetWord);
+		
+		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
+													  initWithNibName:@"TweetWordViewController"  
+													  twitterEngine:_twitterEngine 
+													  tweetWord:tweetWord];
+		
+		NSDictionary *dict = [[NSDictionary alloc]
+							  initWithObjectsAndKeys:twitterController, @"controller", nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
+		[dict release];
+		LWE_LOG(@"Done Sending the notification");
+	}
 }
 
 #pragma mark -
@@ -330,16 +338,33 @@
 #pragma mark -
 #pragma mark TweetWordMethod
 
+//! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
 - (NSString *)getTweetWord
 {
+	//Set up the tweet word, so that the str will have the following format
+	//Head Word [reading] meaning
 	NSMutableString *str = [[NSMutableString alloc] init];
-	
 	[str appendFormat:@"%@ [%@] ", self.currentCard.headword, self.currentCard.reading];
 	
-	// RENDY: is this code working?  We had a bug on card "得"
+	//but in some cases, the "meaning" length, can exceed the maximum length
+	//of the twitter update status lenght, so it looks for "/" and cut the meaning
+	//to fit in. 
 	NSString *meaning = [self.currentCard meaningWithoutMarkup];
-	if (kMaxChars - [str length] - [meaning length] >= 0)
-		[str appendString:meaning];
+	NSInteger charLeft = kMaxChars - [str length];
+	NSInteger charAfterMeaning = charLeft - [meaning length];
+	if (charAfterMeaning <= 0)
+	{
+		NSRange rangeToLookFor;
+		rangeToLookFor.length = charLeft;
+		rangeToLookFor.location = 0;
+		NSRange range = [meaning rangeOfString:@"/" 
+									   options:NSBackwardsSearch
+										 range:rangeToLookFor];
+		
+		meaning = [meaning substringToIndex:range.location];
+	}
+	LWE_LOG(@"LOG : This is the meaning : %@", meaning);
+	[str appendString:meaning];						  
 	
 	NSString *result = [NSString stringWithString:str];
 	[str release];

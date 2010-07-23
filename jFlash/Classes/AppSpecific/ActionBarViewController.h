@@ -53,6 +53,8 @@
 - (void) setup;
 - (void) reveal;
 
+- (void)tweet;
+
 // action sheet
 - (IBAction)showCardActionSheet;
 
