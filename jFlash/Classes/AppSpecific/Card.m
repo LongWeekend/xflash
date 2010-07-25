@@ -56,7 +56,7 @@
 }
 
 
-/** depending on APP_READING value in settings, will return a combined headword */
+/** depending on APP_READING value in settings, will return a combined reading */
 - (NSString*) combinedReadingForSettings
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -101,17 +101,32 @@
   }
 }
 
+/** Takes a sqlite result set and populates the properties of card WITHOUT the maning of the card */
+- (void) hydrateWithoutMeaning: (FMResultSet*) rs
+{
+	[self hydrate:rs includeMeaning:NO];
+}
 
-/** Takes a sqlite result set and populates the properties of card */
+/** Takes a sqlite result set and populates the properties of card icluding the maning of the card */
 - (void) hydrate: (FMResultSet*) rs
 {
-	self.cardId   =    [rs intForColumn:@"card_id"];
-	self.headword =    [rs stringForColumn:@"headword"];
+	[self hydrate:rs includeMeaning:YES];
+}
+
+
+/** Takes a sqlite result set and populates the properties of card. Gives the freedom of not including the meaning */
+- (void) hydrate: (FMResultSet*) rs includeMeaning:(BOOL)includeMeaning
+{
+	self.cardId      = [rs intForColumn:@"card_id"];
+	self.headword    = [rs stringForColumn:@"headword"];
 	self.headword_en = [rs stringForColumn:@"headword_en"];
-	self.reading  =    [rs stringForColumn:@"reading"];
-	self.romaji  =     [rs stringForColumn:@"romaji"];
-	self.meaning  =    [rs stringForColumn:@"meaning"];
-  
+	self.reading     = [rs stringForColumn:@"reading"];
+	self.romaji      = [rs stringForColumn:@"romaji"];
+	if (includeMeaning)
+	{
+		self.meaning  = [rs stringForColumn:@"meaning"];
+	}
+		
   // Get additional stuff if we're going to have it
   if (self.isBasicCard == NO)
   {

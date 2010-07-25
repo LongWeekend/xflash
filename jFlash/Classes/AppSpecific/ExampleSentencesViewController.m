@@ -75,7 +75,10 @@
 {  
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+	LWE_LOG(@"CSS : %@", cssHeader);
+  NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
+	
+	LWE_LOG(@"HTML HEADER : %@", htmlHeader);
   
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
   
@@ -104,24 +107,28 @@
     for (ExampleSentence* sentence in sentences) 
     {
 		
-      html = [html stringByAppendingFormat:@"<span><li>%@<br/>", [sentence sentenceJa]];
-      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn] ];
-		//html = [html stringByAppendingFormat:@"<li>GG</li>"];
+      html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
+		
+		html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
+				[sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
+		
+      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div>", [sentence sentenceEn] ];
 		
 		html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
 		
-		html = [html stringByAppendingFormat:@"</span>"];
-		html = [html stringByAppendingFormat:@"<span>"];
-		/*html = [html stringByAppendingFormat:@"<form action='%d' method='post'>", [sentence sentenceId]];
-		html = [html stringByAppendingFormat:@"<input type='submit' value='show word' onclick='btnShowWord_Clicked()' />"];
+		
+		
+		/*html = [html stringByAppendingFormat:@"<form method='GET' action='http://flash.com'>"];
+		html = [html stringByAppendingFormat:@"<input type='hidden' value='%d' id='id%d' name='id' />", [sentence sentenceId], [sentence sentenceId]];
+		html = [html stringByAppendingFormat:@"<input type='hidden' value='0' id='open%d' name='open' />", [sentence sentenceId]];
+		html = [html stringByAppendingFormat:@"<input type='submit' id='submit%d' value='Reading' />", [sentence sentenceId]];
 		html = [html stringByAppendingFormat:@"</form>"];*/
 		
-		html = [html stringByAppendingFormat:@"<a id='anchor%d' href='http://jflash.com?id=%d&open=0'>Show Word</a>", [sentence sentenceId], [sentence sentenceId]];
 		
-		html = [html stringByAppendingFormat:@"</span>"];
+		html = [html stringByAppendingFormat:@"</li>"];
     }
     html = [html stringByAppendingString:@"</ol>"];
-	  //LWE_LOG(@"HTML : %@", html);
+
     [self setupSentencesWebView:html];
   }
   
@@ -134,7 +141,7 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
 	NSString *url = [[request URL] relativePath];
-	LWE_LOG(@"LOAD URL : %@", url);
+	LWE_LOG(@"LOG : Load URL with relative path : %@", url);
 	//TODO: Make this better!!
 	if ((url == nil)||([url isEqualToString:@"about:blank"]))
 		return YES;
@@ -142,49 +149,85 @@
 	{
 		NSDictionary *dict = [[request URL] queryStrings];
 		
-		NSString *sentenceID = [dict objectForKey:@"id"];
-		NSString *open = [dict objectForKey:@"open"];
-		NSString *js;
-		if ([open isEqualToString:@"1"])
-		{
-			js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''", sentenceID];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-			
-			//close em
-			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').href = 'http://jflash.com?id=%@&open=0'", sentenceID, sentenceID];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-			
-			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').innerHTML = 'Show Word'", sentenceID];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-		}
-		else 
-		{
-			//open
-			NSMutableArray *arrayOfCards = [CardPeer retrieveCardSetForSentenceId:[sentenceID intValue]];
-			
-			NSString *cardHTML = @"<ul>";
-			for (Card *c in arrayOfCards)
-			{
-				LWE_LOG(@"English Head Word : %@, Head word : %@", [c headword_en], [c headword]);
-				cardHTML = [cardHTML stringByAppendingFormat:@"<li>%@ [%@]</li>", [c headword_en], [c headword]];
-			}
-			
-			cardHTML = [cardHTML stringByAppendingFormat:@"</ul>"];
-			js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = '%@'", sentenceID, cardHTML];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-			
-			
-			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').href = 'http://jflash.com?id=%@&open=1'", sentenceID, sentenceID];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-			
-			js = [NSString stringWithFormat:@"document.getElementById('anchor%@').innerHTML = 'Hide Word'", sentenceID];
-			[webView stringByEvaluatingJavaScriptFromString:js];
-			
-						
-		}
+		NSRange slashPosition = [url rangeOfString:@"/"];
+		if (slashPosition.location != NSNotFound)
+			url = [url substringFromIndex:slashPosition.location+1];
 		
+		switch ([url intValue]) 
+		{
+			case TOKENIZE_SAMPLE_SENTENCE:
+				[self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
+				break;
+			case ADD_CARD_TO_SET:
+				[self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
+				break;
+			default:
+				break;
+		}
 		return NO;
 	}
+}
+
+- (void)_showAddToSetWithCardID:(NSString *)cardID
+{
+	LWE_LOG(@"Add to set with card ID : %@", cardID);
+	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
+	
+	// Set up DONE button
+	UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") 
+																style:UIBarButtonItemStyleBordered 
+															   target:self 
+															   action:@selector(dismissAddToSetModal)];
+	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
+	[doneBtn release];
+	
+	NSDictionary *dict = [[NSDictionary alloc]
+						  initWithObjectsAndKeys:tmpVC, @"controller", @"YES", @"animated", nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowModal" object:self userInfo:dict];
+}
+
+- (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView
+{
+	NSString *js;
+	if ([open isEqualToString:@"1"])
+	{
+		//Close the expanded div. Return back the status of the expaned button
+		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Expand'; ", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ", 
+			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
+		[webView stringByEvaluatingJavaScriptFromString:js];
+	}
+	else 
+	{
+		//expand the sample sentence.
+		NSMutableArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
+		NSString *cardHTML = @"<ul>";
+		for (Card *c in arrayOfCards)
+		{
+			LWE_LOG(@"English Head Word : %@, Head word : %@", [c headword_en], [c headword]);
+			cardHTML = [cardHTML stringByAppendingFormat:@"<li>"];
+			cardHTML = [cardHTML stringByAppendingFormat:@"%@ [%@]", [c headword], [c combinedReadingForSettings]]; 
+			cardHTML = [cardHTML stringByAppendingFormat:@"<a href='%@/%d?id=%d'><dfn>Add to set</dfn></a></li>",  kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
+			cardHTML = [cardHTML stringByAppendingFormat:@"</li>"];
+		}
+		cardHTML = [cardHTML stringByAppendingFormat:@"</ul>"];
+		
+		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
+		//then tries to change the anchor value, and the href query string. 
+		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Close';", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=1';", 
+			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
+		
+		[webView stringByEvaluatingJavaScriptFromString:js];
+	}
+	
+}
+
+- (void)dismissAddToSetModal
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissModal" object:self userInfo:nil];
 }
 
 #pragma mark -
