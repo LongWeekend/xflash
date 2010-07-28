@@ -2014,7 +2014,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2034,8 +2035,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Long Weekend";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
@@ -2049,10 +2050,109 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
 				PRODUCT_NAME = jFlash;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7EF6B2FA-E924-4AD8-B18C-09A4AC1DB830";
 			};
 			name = Release;
+		};
+		2418B96811FC3EC300666EA4 /* DebugRendy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_THUMB_SUPPORT = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = DebugRendy;
+		};
+		2418B96911FC3EC300666EA4 /* DebugRendy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
+				);
+				PRODUCT_NAME = jFlash;
+			};
+			name = DebugRendy;
+		};
+		2418B96A11FC3EC300666EA4 /* DebugRendy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = sqlite;
+				ZERO_LINK = NO;
+			};
+			name = DebugRendy;
+		};
+		2418B96B11FC3EC300666EA4 /* DebugRendy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Logic Unit Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Logic Unit Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = DebugRendy;
+		};
+		2418B96C11FC3EC300666EA4 /* DebugRendy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Info copy 2.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Classes/External/FlurryLib\\\"",
+					"\"$(SRCROOT)/Tests/FoneMonkey/lib\"",
+				);
+				PRODUCT_NAME = jFlash;
+			};
+			name = DebugRendy;
 		};
 		494D6BB411AE184E006DADF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2307,8 +2407,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Makdad (4YF8B73ALW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2324,6 +2424,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2344,8 +2446,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = APP_STORE_FINAL;
 				GCC_THUMB_SUPPORT = YES;
@@ -2354,8 +2456,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2365,6 +2465,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
@@ -2382,8 +2484,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ross Sharrott (MC4LS62TF6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = YES;
@@ -2392,7 +2494,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator4.0;
+				SDKROOT = iphoneos4.0;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -2401,8 +2503,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Long Weekend";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -2412,8 +2514,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7EF6B2FA-E924-4AD8-B18C-09A4AC1DB830";
 				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
@@ -2465,8 +2565,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -2483,8 +2583,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ポール チャップマン (B34A9QV639)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ポール チャップマン (B34A9QV639)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rendy Pranata (Y78575LLFQ)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
@@ -2523,6 +2623,7 @@
 				91EA2F601041365600AB848E /* Beta */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				D39D1AB81151D233002445AB /* DebugPaul */,
+				2418B96911FC3EC300666EA4 /* DebugRendy */,
 				91EA2F78104151A800AB848E /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2535,6 +2636,7 @@
 				494D6BB511AE184E006DADF1 /* Beta */,
 				494D6BB611AE184E006DADF1 /* Release */,
 				494D6BB711AE184E006DADF1 /* DebugPaul */,
+				2418B96B11FC3EC300666EA4 /* DebugRendy */,
 				494D6BB811AE184E006DADF1 /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2547,6 +2649,7 @@
 				4986F8B411C715F600947486 /* Beta */,
 				4986F8B511C715F600947486 /* Release */,
 				4986F8B611C715F600947486 /* DebugPaul */,
+				2418B96C11FC3EC300666EA4 /* DebugRendy */,
 				4986F8B711C715F600947486 /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2559,6 +2662,7 @@
 				91EA2F5F1041365600AB848E /* Beta */,
 				C01FCF5008A954540054247B /* Release */,
 				D39D1AB71151D233002445AB /* DebugPaul */,
+				2418B96811FC3EC300666EA4 /* DebugRendy */,
 				91EA2F77104151A800AB848E /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2571,6 +2675,7 @@
 				D370E66110DFB9D200BE6835 /* Beta */,
 				D370E66210DFB9D200BE6835 /* Release */,
 				D39D1ABA1151D233002445AB /* DebugPaul */,
+				2418B96A11FC3EC300666EA4 /* DebugRendy */,
 				D370E66310DFB9D200BE6835 /* Beta Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;

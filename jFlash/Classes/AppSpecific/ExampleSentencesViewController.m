@@ -24,6 +24,7 @@
 @implementation ExampleSentencesViewController
 @synthesize delegate, datasource;
 @synthesize sentencesWebView;
+@synthesize sampleDecomposition;
 
 #pragma mark -
 #pragma mark Delegate Methods
@@ -95,28 +96,19 @@
   {    
     // Get all sentences out - extract this
     NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
-    
-	  
-	  NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];
-	  
-	  
-	  //html = [html stringByAppendingFormat:@"<script type='text/javascript'>function btnShowWord_Clicked() { alert('GG'); }</script>"];     
+	NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];    
     html = [html stringByAppendingFormat:@"<h2 class='headwordLabel'>%@</h2>", [[datasource currentCard] headword]];
     html = [html stringByAppendingFormat:@"<ol>"];
 
+	  int counter = 0;
     for (ExampleSentence* sentence in sentences) 
     {
-		
-      html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
-		
+		html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
 		html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
 				[sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
 		
-      html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div>", [sentence sentenceEn] ];
-		
+		html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div>", [sentence sentenceEn] ];
 		html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
-		
-		
 		
 		/*html = [html stringByAppendingFormat:@"<form method='GET' action='http://flash.com'>"];
 		html = [html stringByAppendingFormat:@"<input type='hidden' value='%d' id='id%d' name='id' />", [sentence sentenceId], [sentence sentenceId]];
@@ -126,9 +118,12 @@
 		
 		
 		html = [html stringByAppendingFormat:@"</li>"];
+		counter++;
     }
     html = [html stringByAppendingString:@"</ol>"];
 
+	  sampleDecomposition = [[NSMutableDictionary alloc] initWithCapacity:counter];
+	  
     [self setupSentencesWebView:html];
   }
   
@@ -179,11 +174,13 @@
 															   target:self 
 															   action:@selector(dismissAddToSetModal)];
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
-	[doneBtn release];
-	
 	NSDictionary *dict = [[NSDictionary alloc]
 						  initWithObjectsAndKeys:tmpVC, @"controller", @"YES", @"animated", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowModal" object:self userInfo:dict];
+	
+	[doneBtn release];
+	[tmpVC release];
+	[dict release];
 }
 
 - (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView
@@ -201,18 +198,31 @@
 	else 
 	{
 		//expand the sample sentence.
-		NSMutableArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
-		NSString *cardHTML = @"<ul>";
-		for (Card *c in arrayOfCards)
+		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
+		if (cardHTML == nil)
 		{
-			LWE_LOG(@"English Head Word : %@, Head word : %@", [c headword_en], [c headword]);
-			cardHTML = [cardHTML stringByAppendingFormat:@"<li>"];
-			cardHTML = [cardHTML stringByAppendingFormat:@"%@ [%@]", [c headword], [c combinedReadingForSettings]]; 
-			cardHTML = [cardHTML stringByAppendingFormat:@"<a href='%@/%d?id=%d'><dfn>Add to set</dfn></a></li>",  kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
-			cardHTML = [cardHTML stringByAppendingFormat:@"</li>"];
+			NSDate *start = [NSDate date];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
+			cardHTML = @"<ul>";
+			for (Card *c in arrayOfCards)
+			{
+				LWE_LOG(@"Head Word : %@", [c headword]);
+				cardHTML = [cardHTML stringByAppendingFormat:@"<li>"];
+				cardHTML = [cardHTML stringByAppendingFormat:@"%@ [%@] ", [c headword], [c readingBasedonSettingsForExpandedSampleSentences]]; 
+				cardHTML = [cardHTML stringByAppendingFormat:@"<a href='%@/%d?id=%d'><dfn>Add to set</dfn></a>",  kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
+				cardHTML = [cardHTML stringByAppendingFormat:@"</li>"];
+			}
+			cardHTML = [cardHTML stringByAppendingFormat:@"</ul>"];
+			
+			[self.sampleDecomposition setObject:cardHTML forKey:sentenceID];
+			
+			
+			double d = [[NSDate date] timeIntervalSince1970] - [start timeIntervalSince1970];
+			LWE_LOG(@"Time : %f", d);
 		}
-		cardHTML = [cardHTML stringByAppendingFormat:@"</ul>"];
 		
+		NSDate *start = [NSDate date];
+		//LWE_LOG(@"Card HTML : %@", cardHTML);
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
@@ -221,8 +231,10 @@
 			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
+		
+		double d = [[NSDate date] timeIntervalSince1970] - [start timeIntervalSince1970];
+		LWE_LOG(@"Time : %f", d);
 	}
-	
 }
 
 - (void)dismissAddToSetModal
@@ -248,6 +260,7 @@
 
 - (void)dealloc {
     [sentencesWebView release];
+	[sampleDecomposition release];
     // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
     [super dealloc];
 }

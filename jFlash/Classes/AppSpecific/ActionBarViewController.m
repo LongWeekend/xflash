@@ -250,6 +250,7 @@
 							  initWithObjectsAndKeys:twitterController, @"controller", nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
 		[dict release];
+		[twitterController release];
 		LWE_LOG(@"Done Sending the notification");
 	}
 }
@@ -263,6 +264,7 @@
 	NSDictionary *dict = [[NSDictionary alloc]
 						  initWithObjectsAndKeys:@"YES", @"animated", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissTwitterModal" object:self userInfo:dict];
+	[dict release];
 	
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle")

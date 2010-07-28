@@ -103,8 +103,8 @@
       "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
       "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
   Card* tmpCard = [CardPeer retrieveCardWithSQL:sql];
-	[sql release];
-	return tmpCard;
+  [sql release];
+  return tmpCard;
 }
 
 
@@ -130,8 +130,8 @@
     [card setMeaning:[rs stringForColumn:@"meaning"]];
   }
   [rs close];
-	[sql release];
-	return card;
+  [sql release];
+  return card;
 }
 
 
@@ -193,16 +193,6 @@
  */
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
 {
-	return [CardPeer retrieveCardSetWithSQL:sql hydrate:hydrate meaningIncluded:YES isBasicCard:basicCard];
-}
-
-+ (NSMutableArray*) retrieveCardSetHydrateWithoutMeaningWithSQL: (NSString*) sql isBasicCard:(BOOL)basicCard
-{
-	return [CardPeer retrieveCardSetWithSQL:sql hydrate:YES meaningIncluded:NO isBasicCard:basicCard];
-}
-
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate meaningIncluded:(BOOL)meaningIncluded isBasicCard:(BOOL)basicCard
-{
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	FMResultSet *rs = [[db dao] executeQuery:sql];
 	Card* tmpCard;
@@ -220,13 +210,9 @@
 		}
 		
 		// Hydrate?
-		if ((hydrate) && (meaningIncluded))
+		if (hydrate)
 		{
 			[tmpCard hydrate:rs];
-		}
-		else if ((hydrate) && (!meaningIncluded))
-		{
-			[tmpCard hydrateWithoutMeaning:rs];
 		}
 		else
 		{
@@ -300,10 +286,25 @@
  *
  */
 + (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
-{
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.headword_en, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId];
-	NSMutableArray *cardList = [CardPeer retrieveCardSetHydrateWithoutMeaningWithSQL:sql isBasicCard:YES];
+{	
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+	
+	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	
+	FMResultSet *rs = [[db dao] executeQuery:sql];
 	[sql release];
+	
+	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+	while ([rs next])
+	{
+		Card* tmpCard = [[Card alloc] initAsBasicCard];	
+		[tmpCard simpleHydrate:rs];
+		
+		[cardList addObject: tmpCard];
+		[tmpCard release];
+	}
+	[rs close];
+
 	return cardList; 
 }
 

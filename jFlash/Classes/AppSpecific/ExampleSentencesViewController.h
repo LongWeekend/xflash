@@ -27,6 +27,7 @@ typedef enum
   IBOutlet id datasource;
   
   IBOutlet UIWebView *sentencesWebView;
+  NSMutableDictionary *sampleDecomposition;
 }
 
 - (void) setup;
@@ -34,6 +35,7 @@ typedef enum
 @property (assign, nonatomic, readwrite) IBOutlet id delegate;
 @property (assign, nonatomic, readwrite) IBOutlet id datasource;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
+@property (nonatomic, retain) NSMutableDictionary *sampleDecomposition;
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
 

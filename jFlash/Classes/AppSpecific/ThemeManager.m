@@ -89,7 +89,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 {
   //TODO - actually build this function
   // TODO: iPad customization!
-  return "IPHONE";
+  return @"IPHONE";
 }
 
 //! Returns the current theme - private method

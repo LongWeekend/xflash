@@ -25,7 +25,8 @@ enum userViewMode {
   NSInteger mode;
 }
 
-- (IBAction) doShowImagePickerModalAction;
+//TODO: Is it really should be commented out?
+//- (IBAction) doShowImagePickerModalAction;
 - (IBAction) doCommitChanges;
 - (IBAction) doActivateUser;
 - (IBAction) doUpdateUserNickname:(id)sender;

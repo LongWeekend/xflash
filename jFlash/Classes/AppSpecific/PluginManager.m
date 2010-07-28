@@ -46,7 +46,7 @@
                             [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",
                             @"jFlash-FTS-1.1.db",@"file_name",
                             nil],FTS_DB_KEY,
-                           
+						 
                            // Example sentences
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             EXAMPLE_DB_KEY,@"plugin_key",
@@ -60,6 +60,19 @@
                             @"jFlash-EX-1.1.db",@"file_name",
                             nil],EXAMPLE_DB_KEY,
                            nil];
+						 
+						 /*[NSDictionary dictionaryWithObjectsAndKeys:
+						  EXAMPLE_DB_KEY,@"plugin_key",
+						  @"1.1",@"plugin_version",
+						  @"Fifty Thousand Examples v1.1",@"plugin_name",
+						  @"plugin-resources",@"plugin_notes_dir",
+						  @"example-sentences",@"plugin_notes_file",
+						  @"Adds sentences to practice modes (7.5MB)",@"plugin_details",
+						  @"http://dl.dropbox.com/u/3794086/jFlash-EX-1.1.db.gz",@"target_url",
+						  [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",
+						  @"jFlash-EX-1.1.db",@"file_name",
+						  nil],EXAMPLE_DB_KEY,
+						 nil];*/
   }
   return self;
 }
@@ -197,10 +210,19 @@
     if (foundVersionTable)
     {
       LWE_LOG(@"Found version table, plugin file is OK");
-      
+		
       // Reattach with proper name and register
       if ([db attachDatabase:filePath withName:pluginKey])
       {
+		  
+		  //TODO: REMOVE UPON PRODUCTION!!!!!
+		  if ([filePath rangeOfString:@"jFlash-EX-1.1.db"].location != NSNotFound)
+		  {
+			  LWE_LOG(@"ERROR: REMOVE THIS PLEASE...........................................");
+			  [[db dao] executeUpdate:[NSString stringWithFormat:@"CREATE INDEX \"%@\".\"card_sentence_link_sentence_id\" ON card_sentence_link (sentence_id ASC)", pluginKey]];
+			  
+		  }
+		  
         [_loadedPlugins setObject:[_availablePlugins objectForKey:pluginKey] forKey:pluginKey];
         return pluginKey;
       }

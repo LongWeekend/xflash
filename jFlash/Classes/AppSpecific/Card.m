@@ -80,6 +80,30 @@
   return combined_reading;
 }
 
+/** depending on APP_READING value in settings, will return a combined reading. This is used with the expand sample sentences functionality */
+- (NSString*) readingBasedonSettingsForExpandedSampleSentences
+{
+	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	NSString *combined_reading;
+	
+	// Mux the readings according to user preference
+	if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+	{
+		combined_reading = [NSString stringWithFormat:@"%@", [self reading]];
+	} 
+	else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+	{
+		combined_reading = [NSString stringWithFormat:@"%@", [self romaji]];
+	}
+	else
+	{
+		// Both together
+		combined_reading = [NSString stringWithFormat:@"%@ - %@", [self reading], [self romaji]];
+	}
+	
+	return combined_reading;
+}
+
 
 /** Returns YES if a card has example sentences attached to it */
 - (BOOL) hasExampleSentences
@@ -102,39 +126,39 @@
 }
 
 /** Takes a sqlite result set and populates the properties of card WITHOUT the maning of the card */
-- (void) hydrateWithoutMeaning: (FMResultSet*) rs
+- (void) simpleHydrate: (FMResultSet*) rs
 {
-	[self hydrate:rs includeMeaning:NO];
+	[self hydrate:rs simple:YES];
 }
 
 /** Takes a sqlite result set and populates the properties of card icluding the maning of the card */
 - (void) hydrate: (FMResultSet*) rs
 {
-	[self hydrate:rs includeMeaning:YES];
+	[self hydrate:rs simple:NO];
 }
 
 
 /** Takes a sqlite result set and populates the properties of card. Gives the freedom of not including the meaning */
-- (void) hydrate: (FMResultSet*) rs includeMeaning:(BOOL)includeMeaning
+- (void) hydrate: (FMResultSet*) rs simple:(BOOL)isSimple
 {
 	self.cardId      = [rs intForColumn:@"card_id"];
 	self.headword    = [rs stringForColumn:@"headword"];
-	self.headword_en = [rs stringForColumn:@"headword_en"];
 	self.reading     = [rs stringForColumn:@"reading"];
 	self.romaji      = [rs stringForColumn:@"romaji"];
-	if (includeMeaning)
+	if (!isSimple)
 	{
+		self.headword_en = [rs stringForColumn:@"headword_en"];
 		self.meaning  = [rs stringForColumn:@"meaning"];
 	}
 		
-  // Get additional stuff if we're going to have it
-  if (self.isBasicCard == NO)
-  {
-    self.levelId  =    [rs intForColumn:@"card_level"];
-    self.userId   =    [rs intForColumn:@"user_id"];
-    self.rightCount =  [rs intForColumn:@"right_count"];
-    self.wrongCount =  [rs intForColumn:@"wrong_count"];
-  }
+	// Get additional stuff if we're going to have it
+	if (self.isBasicCard == NO)
+	{
+		self.levelId  =    [rs intForColumn:@"card_level"];
+		self.userId   =    [rs intForColumn:@"user_id"];
+		self.rightCount =  [rs intForColumn:@"right_count"];
+		self.wrongCount =  [rs intForColumn:@"wrong_count"];
+	}
 }
 
 

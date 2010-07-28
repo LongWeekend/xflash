@@ -30,12 +30,13 @@
 
 - (id) initAsBasicCard;
 
-- (void) hydrateWithoutMeaning: (FMResultSet*) rs;
+- (void) simpleHydrate: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs;
-- (void) hydrate: (FMResultSet*) rs includeMeaning:(BOOL)includeMeaning;
+- (void) hydrate: (FMResultSet*) rs simple:(BOOL)includeMeaning;
 
 - (NSString*) meaningWithoutMarkup;
 - (NSString*) combinedReadingForSettings;
+- (NSString*) readingBasedonSettingsForExpandedSampleSentences;
 - (BOOL) hasExampleSentences;
 
 @property (nonatomic) BOOL isBasicCard;
