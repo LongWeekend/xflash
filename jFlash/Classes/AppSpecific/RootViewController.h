@@ -20,6 +20,7 @@
 #import "LWEDownloader.h"
 #import "SettingsViewController.h"
 
+extern NSString * const LWEShouldUpdateSettingsBadge;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {

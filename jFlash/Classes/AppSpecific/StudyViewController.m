@@ -7,6 +7,8 @@
 //
 #import "StudyViewController.h"
 
+#import "RootViewController.h"
+
 // declare private methods here
 @interface StudyViewController()
 - (void)_resetStudyView;
@@ -355,8 +357,11 @@
       break;
 
     case BURY_BTN:
+    {
+      NSDictionary *userDict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:3] forKey:@"badge_number"];
+      [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldUpdateSettingsBadge object:self userInfo:userDict];
       knewIt = YES;
-    
+    }
     case RIGHT_BTN:
       numRight++;
       numViewed++;

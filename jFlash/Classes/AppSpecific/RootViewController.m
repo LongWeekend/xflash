@@ -9,6 +9,8 @@
 #import "RootViewController.h"
 #import "VersionManager.h"
 
+NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
+
 /**
  * Takes UI hierarchy control from appDelegate and 
  * loads tab bar controller programmatically when loadTabBar is called
@@ -36,6 +38,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
 	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTwitterModal:) name:@"shouldShowTwitterModal" object:nil];
 	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissTwitterModal:) name:@"shouldDismissTwitterModal" object:nil];
+    
+	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
   }
 	return self;
 }
@@ -197,6 +201,18 @@
   [tmpVm release];
   [self _showModalWithViewController:updateVC useNavController:YES];
   [updateVC release];
+}
+
+/**
+ * Update the settings tab bar item with badge number
+ */
+-(void)changeSettingsBadge:(NSNotification*)aNotification
+{
+  NSNumber *badgeNumber = [[aNotification userInfo] objectForKey:@"badge_number"];
+  NSArray *tabBarItems = [[self.tabBarController tabBar] items];
+  // TODO: change this to a constant later
+  UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
+  [settingsTabBar setBadgeValue:[badgeNumber stringValue]];
 }
 
 
