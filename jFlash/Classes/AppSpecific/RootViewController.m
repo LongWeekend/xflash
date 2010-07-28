@@ -37,16 +37,14 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
 	
-	// Register listener to pop up and dismiss the twitter modal
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowTwitterModal" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissTwitterModal" object:nil];
-	
-	//Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowModal" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissModal" object:nil];
-	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTwitterModal:) name:@"shouldShowTwitterModal" object:nil];
-	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissTwitterModal:) name:@"shouldDismissTwitterModal" object:nil];
+    // Register listener to pop up and dismiss the twitter modal
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowTwitterModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissTwitterModal" object:nil];
     
+    //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissModal" object:nil];
+
 	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
   }
 	return self;
