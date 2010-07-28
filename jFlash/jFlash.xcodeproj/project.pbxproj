@@ -10,6 +10,12 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2418B2C811F938E800666EA4 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743211F83A13001A30D7 /* NSObject+SBJSON.m */; };
+		2418B2C911F938E900666EA4 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743411F83A13001A30D7 /* NSString+SBJSON.m */; };
+		2418B2CA11F938EA00666EA4 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743611F83A13001A30D7 /* SBJsonBase.m */; };
+		2418B2CB11F938EA00666EA4 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743811F83A13001A30D7 /* SBJsonParser.m */; };
+		2418B2CC11F938EB00666EA4 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743A11F83A13001A30D7 /* SBJsonWriter.m */; };
+		2418B4E911F978EF00666EA4 /* NSURL+LWEUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418B4E811F978EF00666EA4 /* NSURL+LWEUtilities.m */; };
 		2424111C11F6F46600D535D7 /* TweetWordAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111711F6F46600D535D7 /* TweetWordAuthController.m */; };
 		2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
 		2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
@@ -238,11 +244,6 @@
 		4986F8B111C715F600947486 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		4997D21611BB642600016A15 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
-		49B19A4C11F9314300E10290 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743211F83A13001A30D7 /* NSObject+SBJSON.m */; };
-		49B19A4D11F9314300E10290 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743411F83A13001A30D7 /* NSString+SBJSON.m */; };
-		49B19A4E11F9314400E10290 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743611F83A13001A30D7 /* SBJsonBase.m */; };
-		49B19A5011F9314600E10290 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743A11F83A13001A30D7 /* SBJsonWriter.m */; };
-		49B19A5111F9314700E10290 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743811F83A13001A30D7 /* SBJsonParser.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
 		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
@@ -398,6 +399,8 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2418B4E711F978EF00666EA4 /* NSURL+LWEUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+LWEUtilities.h"; path = "Reusable/LWE/NSURL+LWEUtilities.h"; sourceTree = "<group>"; };
+		2418B4E811F978EF00666EA4 /* NSURL+LWEUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+LWEUtilities.m"; path = "Reusable/LWE/NSURL+LWEUtilities.m"; sourceTree = "<group>"; };
 		241D4F5C11F6B8E8007B06F9 /* LWETXAuthViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWETXAuthViewProtocol.h; sourceTree = "<group>"; };
 		2424111611F6F46600D535D7 /* TweetWordAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetWordAuthController.h; path = AppSpecific/TweetWordAuthController.h; sourceTree = "<group>"; };
 		2424111711F6F46600D535D7 /* TweetWordAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordAuthController.m; path = AppSpecific/TweetWordAuthController.m; sourceTree = "<group>"; };
@@ -1213,6 +1216,8 @@
 				49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */,
 				496BE54711EC52E7003AB713 /* UIWebView+LWENoBounces.h */,
 				496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */,
+				2418B4E711F978EF00666EA4 /* NSURL+LWEUtilities.h */,
+				2418B4E811F978EF00666EA4 /* NSURL+LWEUtilities.m */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
@@ -1878,11 +1883,12 @@
 				2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */,
 				49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */,
 				49C6EA3E11F6F996004633FD /* UIWebView+LWENoBounces.m in Sources */,
-				49B19A4C11F9314300E10290 /* NSObject+SBJSON.m in Sources */,
-				49B19A4D11F9314300E10290 /* NSString+SBJSON.m in Sources */,
-				49B19A4E11F9314400E10290 /* SBJsonBase.m in Sources */,
-				49B19A5011F9314600E10290 /* SBJsonWriter.m in Sources */,
-				49B19A5111F9314700E10290 /* SBJsonParser.m in Sources */,
+				2418B2C811F938E800666EA4 /* NSObject+SBJSON.m in Sources */,
+				2418B2C911F938E900666EA4 /* NSString+SBJSON.m in Sources */,
+				2418B2CA11F938EA00666EA4 /* SBJsonBase.m in Sources */,
+				2418B2CB11F938EA00666EA4 /* SBJsonParser.m in Sources */,
+				2418B2CC11F938EB00666EA4 /* SBJsonWriter.m in Sources */,
+				2418B4E911F978EF00666EA4 /* NSURL+LWEUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

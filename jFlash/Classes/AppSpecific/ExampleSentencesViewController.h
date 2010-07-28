@@ -9,8 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "ExampleSentencePeer.h"
 #import "UIWebView+LWENoBounces.h"
+#import "NSURL+LWEUtilities.h"
+#import "AddTagViewController.h"
+#import "jFlashAppDelegate.h"
 
-@interface ExampleSentencesViewController : UIViewController
+#define kJFlashServer	@"http://jflash.com"
+
+typedef enum 
+{
+	TOKENIZE_SAMPLE_SENTENCE,
+	ADD_CARD_TO_SET
+} SampleSentenceMethods;
+
+@interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {
   IBOutlet id delegate;
   IBOutlet id datasource;
@@ -23,6 +34,10 @@
 @property (assign, nonatomic, readwrite) IBOutlet id delegate;
 @property (assign, nonatomic, readwrite) IBOutlet id datasource;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
+
+- (void)_showAddToSetWithCardID:(NSString *)cardID;
+
+- (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView;
 
 @end
 

@@ -193,36 +193,51 @@
  */
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
-  Card* tmpCard;
-  NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
-  while ([rs next])
-  {
-    // Full card?
-    if (basicCard)
-    {
-      tmpCard = [[Card alloc] initAsBasicCard];
-    }
-    else
-    {
-      tmpCard = [[Card alloc] init];
-    }
-    
-    // Hydrate?
-    if (hydrate)
-    {
-      [tmpCard hydrate:rs];
-    }
-    else
-    {
-      [tmpCard setCardId:[rs intForColumn:@"card_id"]];
-    }
-    [cardList addObject: tmpCard];
-    [tmpCard release];
-  }
-  [rs close];
-  return cardList;
+	return [CardPeer retrieveCardSetWithSQL:sql hydrate:hydrate meaningIncluded:YES isBasicCard:basicCard];
+}
+
++ (NSMutableArray*) retrieveCardSetHydrateWithoutMeaningWithSQL: (NSString*) sql isBasicCard:(BOOL)basicCard
+{
+	return [CardPeer retrieveCardSetWithSQL:sql hydrate:YES meaningIncluded:NO isBasicCard:basicCard];
+}
+
++ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate meaningIncluded:(BOOL)meaningIncluded isBasicCard:(BOOL)basicCard
+{
+	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [[db dao] executeQuery:sql];
+	Card* tmpCard;
+	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+	while ([rs next])
+	{
+		// Full card?
+		if (basicCard)
+		{
+			tmpCard = [[Card alloc] initAsBasicCard];
+		}
+		else
+		{
+			tmpCard = [[Card alloc] init];
+		}
+		
+		// Hydrate?
+		if ((hydrate) && (meaningIncluded))
+		{
+			[tmpCard hydrate:rs];
+		}
+		else if ((hydrate) && (!meaningIncluded))
+		{
+			[tmpCard hydrateWithoutMeaning:rs];
+		}
+		else
+		{
+			[tmpCard setCardId:[rs intForColumn:@"card_id"]];
+		}
+		
+		[cardList addObject: tmpCard];
+		[tmpCard release];
+	}
+	[rs close];
+	return cardList;
 }
 
 
@@ -269,10 +284,27 @@
  */
 + (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId
 {
+	//TODO: This is probably too slow
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.*, h.* FROM card_sentence_link l, cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId];
   NSMutableArray *cardList = [CardPeer retrieveCardSetWithSQL:sql hydrate:YES isBasicCard:YES];
   [sql release];
   return cardList;  
+}
+
+
+/**
+ * Returns an array containng cardId integers that are linked to the sentence
+ * \param sentenceId Primary key of the sentence to look up cards for
+ *
+ * The difference with the method above is the query performed. This should be faster since it only asks for the data required. 
+ *
+ */
++ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
+{
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.headword_en, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId];
+	NSMutableArray *cardList = [CardPeer retrieveCardSetHydrateWithoutMeaningWithSQL:sql isBasicCard:YES];
+	[sql release];
+	return cardList; 
 }
 
 

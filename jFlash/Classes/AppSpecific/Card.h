@@ -29,7 +29,11 @@
 }
 
 - (id) initAsBasicCard;
+
+- (void) hydrateWithoutMeaning: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs;
+- (void) hydrate: (FMResultSet*) rs includeMeaning:(BOOL)includeMeaning;
+
 - (NSString*) meaningWithoutMarkup;
 - (NSString*) combinedReadingForSettings;
 - (BOOL) hasExampleSentences;

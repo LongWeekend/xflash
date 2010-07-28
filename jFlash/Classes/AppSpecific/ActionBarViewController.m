@@ -259,7 +259,10 @@
 
 - (void)didFinishProcessWithData:(NSData *)data
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissTwitterModal" object:self userInfo:nil];
+	//TODO: Animated should be NO (last time I test, YES does not work). However, it works now (strange).
+	NSDictionary *dict = [[NSDictionary alloc]
+						  initWithObjectsAndKeys:@"YES", @"animated", nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissTwitterModal" object:self userInfo:dict];
 	
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle")

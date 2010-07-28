@@ -36,6 +36,14 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
+	
+	// Register listener to pop up and dismiss the twitter modal
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowTwitterModal" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissTwitterModal" object:nil];
+	
+	//Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowModal" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissModal" object:nil];
 	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTwitterModal:) name:@"shouldShowTwitterModal" object:nil];
 	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissTwitterModal:) name:@"shouldDismissTwitterModal" object:nil];
     
@@ -163,22 +171,41 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
   }
 }
 
+#pragma mark -
+#pragma mark Generic Modal Pop-ups and dismissal. 
+
 /**
- *
+ * Show Modal method that will call the show modal view controller private method. the notification user info will determine whether it will be animated, and what view controller to view. 
  */
-- (void)showTwitterModal:(NSNotification *)notification
+- (void)showModal:(NSNotification *)notification
 {
-	UIViewController *vc = (UIViewController *) [[notification userInfo] objectForKey:@"controller"];
-	[self _showModalWithViewController:vc useNavController:YES];
+	NSDictionary *dict = [notification userInfo];
+	//It will do anything if there is any information in regard to what view controller to be pop-ed up. 
+	if ((dict != nil) && ([dict count] > 0))
+	{
+		//The user info will likely to has these value. controller and animated. 
+		//The default animated is YES, so if its not specified, it will be animated. 
+		UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
+		BOOL animated = [[dict objectForKey:@"animated"] isEqualToString:@"NO"] ? NO : YES;
+		[self _showModalWithViewController:vc useNavController:animated];		
+	}
+	else 
+	{
+		LWE_LOG(@"Error : Show modal notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
+	}
 }
 
 /**
- *
+ * Dismiss the modal view controller. The default for animated key is YES.
  */
-- (void)dismissTwitterModal:(NSNotification *)notification
+- (void)dismissModal:(NSNotification *)notification
 {
-	[[self tabBarController] dismissModalViewControllerAnimated:NO];
+	//if the animated key is not specified in the user info, it will be animated. 
+	BOOL animated = [[[notification userInfo] objectForKey:@"animated"] isEqualToString:@"NO"] ? NO : YES;
+	[[self tabBarController] dismissModalViewControllerAnimated:animated];
 }
+
+#pragma mark -
 
 
 /**
