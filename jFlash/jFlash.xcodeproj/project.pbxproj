@@ -44,6 +44,11 @@
 		24E47F2D11F3E754007F6FB7 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F1D11F3E754007F6FB7 /* OAServiceTicket.m */; };
 		24E47F2E11F3E754007F6FB7 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F2011F3E754007F6FB7 /* OAToken.m */; };
 		24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
+		24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */; };
+		24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */; };
+		24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA10FD12015BF60081CBBA /* SmallLoadingView.m */; };
+		24EA112812015EA10081CBBA /* ViewUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 24EA112712015EA10081CBBA /* ViewUtility.c */; };
+		24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA131D1202AC480081CBBA /* downloadedPlugin.plist */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
@@ -455,6 +460,14 @@
 		24E47F2011F3E754007F6FB7 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToken.m; sourceTree = "<group>"; };
 		24E47F2111F3E754007F6FB7 /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		24E47F4611F3E780007F6FB7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = availablePluginForDownload.plist; sourceTree = "<group>"; };
+		24EA0D631200256B0081CBBA /* NSDate+LWEUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+LWEUtilities.h"; path = "Reusable/LWE/NSDate+LWEUtilities.h"; sourceTree = "<group>"; };
+		24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+LWEUtilities.m"; path = "Reusable/LWE/NSDate+LWEUtilities.m"; sourceTree = "<group>"; };
+		24EA10FC12015BF60081CBBA /* SmallLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallLoadingView.h; sourceTree = "<group>"; };
+		24EA10FD12015BF60081CBBA /* SmallLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallLoadingView.m; sourceTree = "<group>"; };
+		24EA112612015EA10081CBBA /* ViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtility.h; sourceTree = "<group>"; };
+		24EA112712015EA10081CBBA /* ViewUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ViewUtility.c; sourceTree = "<group>"; };
+		24EA131D1202AC480081CBBA /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = downloadedPlugin.plist; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -555,7 +568,7 @@
 		49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
 		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
 		49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportBadDataViewController.m; path = AppSpecific/ReportBadDataViewController.m; sourceTree = "<group>"; };
-		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
+		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = ../XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
 		49CF2E6211BA46AA0066923F /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = "<group>"; };
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -947,6 +960,8 @@
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49FD235E101C121D0081F883 /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */,
+				24EA131D1202AC480081CBBA /* downloadedPlugin.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -975,8 +990,13 @@
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
+				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				917A5C3D11AB829000016BD2 /* LoadingView.h */,
 				917A5C3E11AB829000016BD2 /* LoadingView.m */,
+				24EA10FC12015BF60081CBBA /* SmallLoadingView.h */,
+				24EA10FD12015BF60081CBBA /* SmallLoadingView.m */,
+				24EA112612015EA10081CBBA /* ViewUtility.h */,
+				24EA112712015EA10081CBBA /* ViewUtility.c */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1218,6 +1238,8 @@
 				496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */,
 				2418B4E711F978EF00666EA4 /* NSURL+LWEUtilities.h */,
 				2418B4E811F978EF00666EA4 /* NSURL+LWEUtilities.m */,
+				24EA0D631200256B0081CBBA /* NSDate+LWEUtilities.h */,
+				24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */,
 			);
 			name = "LWE Utilities";
 			sourceTree = "<group>";
@@ -1399,7 +1421,6 @@
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
-				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
 				491D7D0611C4EFFE00BF8323 /* SentenceView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
@@ -1655,6 +1676,8 @@
 				496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */,
 				496BE55311EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */,
 				496BE55411EC5320003AB713 /* SearchView.xib in Resources */,
+				24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */,
+				24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1889,6 +1912,9 @@
 				2418B2CB11F938EA00666EA4 /* SBJsonParser.m in Sources */,
 				2418B2CC11F938EB00666EA4 /* SBJsonWriter.m in Sources */,
 				2418B4E911F978EF00666EA4 /* NSURL+LWEUtilities.m in Sources */,
+				24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */,
+				24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */,
+				24EA112812015EA10081CBBA /* ViewUtility.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

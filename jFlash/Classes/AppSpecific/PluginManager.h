@@ -9,27 +9,47 @@
 #import <Foundation/Foundation.h>
 #import "LWEDownloader.h"
 #import "FMResultSet.h"
+#import "NSDate+LWEUtilities.h"
+#import "ASIHTTPRequest.h"
+
+#define LWE_PLUGIN_UPDATE_PERIOD		14
+#define LWE_PLUGIN_SERVER_LIST			@"http://dl.dropbox.com/u/3794086/propertyList.plist"
+#define LWE_AVAILABLE_PLUGIN_PLIST	@"availablePluginForDownload.plist"
+#define LWE_DOWNLOADED_PLUGIN_PLIST	@"downloadedPlugin.plist"
 
 //! Handles downloaded plugins' installation and versioning
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
 {
-  NSMutableDictionary *_loadedPlugins;    //! Maintains in memory a list of loaded plugins
-  NSDictionary *_availablePlugins;        //! Maintains in memory a list of available plugins to this software version
+  NSMutableDictionary *_loadedPlugins;				//! Maintains in memory a list of loaded plugins
+  NSDictionary *_downloadedPlugins;						//! Maintains in memory a list of the downloaded plugin in the user device
+	NSDictionary *_availableForDownloadPlugins;	//! Maintains in memory a list of availavle for download plugin.
 }
 
 + (NSDictionary*) preinstalledPlugins;
 - (BOOL) pluginIsLoaded:(NSString*)name;
 - (BOOL) disablePlugin:(NSString*)name;
 - (BOOL) loadInstalledPlugins;
-- (NSString*) loadPluginFromFile:(NSString*)filename;
+- (NSString*) loadPluginFromFile:(NSString*)filename afterDownload:(BOOL)afterDownload;
 - (NSArray*) loadedPluginsByKey;
 - (NSArray*) loadedPluginsByName;
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (NSArray*) loadedPlugins;
 - (NSArray*) availablePlugins;
-- (NSArray*) allAvailablePlugins;
+//TODO: Rendy commented this out, cause this is abit ambigous, and it seems this method is not used anywhere.
+//- (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
-- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
+
+- (BOOL)isTimeForCheckingUpdate;
+- (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify;
+- (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;
+- (void)_removeFromAvailableDownloadForPlugin:(NSString *)pluginKey;
+- (BOOL)_checkNetworkToURL:(NSURL *)url;
+- (NSString *)_checkWhetherAnUpdate:(NSString *)path;
+- (double)_versionInMainDb:(FMDatabase *)db forDbName:(NSString *)dbName;
+- (void)_registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
+- (void)_sendUpdateBadgeNotification:(NSNumber *)badgeNumber;
+- (void)_initAvailableForDownloadPluginsList;
+- (void)_initDownloadedPluginsList;
 
 // Should be subclassed - TODO
 - (BOOL) examplesPluginIsLoaded;
@@ -38,5 +58,7 @@
 
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
+
+@property (nonatomic, readonly) NSDictionary *availableForDownloadPlugins;
 
 @end

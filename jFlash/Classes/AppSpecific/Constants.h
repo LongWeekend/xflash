@@ -58,6 +58,9 @@ extern NSString * const APP_DIFFICULTY;
 extern NSString * const APP_DATA_VERSION;
 extern NSString * const APP_SETTINGS_VERSION;
 
+
+extern NSString * const PLUGIN_LAST_UPDATE;
+
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
 #define percentCorrectLabelStartText @"100%"

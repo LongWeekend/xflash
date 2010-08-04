@@ -9,7 +9,9 @@
 #import "RootViewController.h"
 #import "VersionManager.h"
 
-NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
+NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
+NSString * const LWEShoulShowModal				= @"LWEShouldShowModal";
+NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -42,10 +44,10 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissTwitterModal" object:nil];
     
     //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissModal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShoulShowModal object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:LWEShouldDismissModal object:nil];
 
-	  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
   }
 	return self;
 }
@@ -75,10 +77,10 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
 //! Hides the "database loading" view
 - (void) hideDatabaseLoadingView
 {
-	if (loadingView)
+  if (loadingView)
   {
     [loadingView removeView];
-	}
+  }
 }
 
 
@@ -237,7 +239,10 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
   NSArray *tabBarItems = [[self.tabBarController tabBar] items];
   // TODO: change this to a constant later
   UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
-  [settingsTabBar setBadgeValue:[badgeNumber stringValue]];
+	if ([badgeNumber intValue] != 0)
+		[settingsTabBar setBadgeValue:[badgeNumber stringValue]];
+	else 
+		[settingsTabBar setBadgeValue:nil];
 }
 
 
@@ -258,8 +263,8 @@ NSString * const LWEShouldUpdateSettingsBadge = @"LWEShouldUpdateSettingsBadge";
   [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
   LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
   LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
-  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"target_url"];
-  NSString *targetPath = [[aNotification userInfo] objectForKey:@"target_path"];
+  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
+  NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
    
   // Set the installer delegate to the PluginManager class

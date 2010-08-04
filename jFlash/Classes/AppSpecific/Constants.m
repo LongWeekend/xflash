@@ -49,6 +49,9 @@ NSString * const APP_DIFFICULTY           = @"app_difficulty";
 NSString * const APP_DATA_VERSION         = @"data_version";
 NSString * const APP_SETTINGS_VERSION     = @"settings_version";
 
+//Rendy did add this - For the plugin manager feature
+NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
+
 //------------------------------------------------------------
 // Everything after here can easily be changed across versions
 //------------------------------------------------------------

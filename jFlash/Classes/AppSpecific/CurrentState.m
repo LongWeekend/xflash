@@ -64,6 +64,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [self setActiveTag:[self activeTag]];
 }
 
+#pragma mark -
+#pragma mark DEBUG PURPOSES
 
 /** DEBUG ONLY method to simulate settings for JFlash 1.0 **/
 - (void) _createDefaultSettingsFor10:(NSUserDefaults*) settings
@@ -78,12 +80,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
 }
 
+/** DEBUG ONLY method to simulate settings for JFlash 1.1 **/
+- (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings
+{
+	LWE_LOG(@"Program runs, and creating the default settings");
+	NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
+	NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_CURRENT_VERSION,nil];
+	for (int i = 0; i < [keys count]; i++)
+	{
+		[settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
+	}  
+	[keys release];
+	[objects release];
+	
+	[settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
+	[settings setInteger:DEFAULT_USER_ID forKey:APP_USER];
+	[settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
+	[settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
+	[settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
+	
+	[settings setBool:NO forKey:@"db_did_finish_copying"];
+	[settings setBool:YES forKey:@"settings_already_created"];
+}
+
+#pragma mark -
+#pragma mark Update and Check Settings Region. 
+
+#pragma mark Version 1.1
 
 /** Updates NSUserDefaults to use 1.1 values instead of 1.0 values (adds new ones, removes old first_load) */
 - (void) _updateSettingsFrom10to11:(NSUserDefaults*) settings
 {
   // Definitely first-run after an upgrade.  Update their settings so we have the right stuff for 1.1
   // Update plugins so we have that we have that information
+	LWE_LOG(@"This is the updated setting from 1.0 to 1.1");
   [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
   [settings setValue:JFLASH_VERSION_1_0 forKey:APP_DATA_VERSION];     
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
@@ -116,6 +146,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return NO;
 }
 
+#pragma mark Version 1.2
+
+/** Updates NSUserDefaults to add 1.2 values*/
+- (void) _updateSettingsFrom11to12:(NSUserDefaults*) settings
+{
+	LWE_LOG(@"Update from 1.1 to 1.2 Yatta!");
+	[settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];                    
+	
+	//TODO: Is this should be updated as well?
+	//[settings setValue:JFLASH_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
+}
+
+
+/** Returns YES if the user needs to update settings from 1.1 to 1.2, otherwise returns NO */
+- (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults*) settings
+{
+	// First things first, do a check to make sure this is not a first run after an upgrade
+	// TODO: Check whether it needs to check [settings objectForKey:@"first_load"] as well
+	if (![settings objectForKey:PLUGIN_LAST_UPDATE])
+	{
+		return YES;
+	}
+	LWE_LOG(@"DEBUG : Plugin last update key apparently does exist, this is the value = %@", [settings objectForKey:PLUGIN_LAST_UPDATE]);
+	return NO;
+}
+
+#pragma mark -
+#pragma mark Initialization
+
 
 /**
  * Retrieve & initialize settings from NSUserDefaults to CurrentState object
@@ -146,7 +205,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   else
   {
     // Normal execution, this is NO
+		LWE_LOG(@"Not updated to 1.1");
     [self setIsFirstLoadAfterNewVersion:NO];
+  }
+	
+  //STEP 1.1 In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
+  //The plugin manager will have to look at the last time it gets updated, there is the list of the data
+  if ([self _needs11to12SettingsUpdate:settings])
+  {
+		LWE_LOG(@"Oops, we need update to 1.2 version");
+	  [self _updateSettingsFrom11to12:settings];
+	  [self setIsFirstLoadAfterNewVersion:YES];
+  }
+  else 
+  {
+		LWE_LOG(@"Not Updated to 1.2");
+		//TODO: Rendy, Figure what this is?
+		[self setIsFirstLoadAfterNewVersion:NO];
   }
   
   // STEP 2 - is the data update-able?
@@ -174,10 +249,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setBool:YES forKey:@"db_did_finish_copying"];
 }
 
+#pragma mark -
+#pragma mark Default - First time run.
 
 /** Create & store default settings to NSUserDefaults */
 - (void) _createDefaultSettings
 {
+  LWE_LOG(@"Program runs, and creating the default settings");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
   NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_CURRENT_VERSION,nil];
@@ -193,10 +271,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
+  [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
 
   [settings setBool:NO forKey:@"db_did_finish_copying"];
   [settings setBool:YES forKey:@"settings_already_created"];
 }
+
+#pragma mark -
 
 //! Standard dealloc
 - (void) dealloc

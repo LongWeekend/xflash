@@ -334,8 +334,8 @@
   // They can still access (and will access) the old FTS off their main table -- EVEN if this table is attached.
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
-  NSString *targetURL  = [dict objectForKey:@"target_url"];
-  NSString *targetPath = [dict objectForKey:@"target_path"];
+	NSString *targetURL  = [dict objectForKey:@"plugin_target_url"];
+  NSString *targetPath = [dict objectForKey:@"plugin_target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
   [tmpDlHandler setDelegate:pm];
   [self setDlHandler:tmpDlHandler];

@@ -7,74 +7,128 @@
 //
 
 #import "PluginManager.h"
+#import "RootViewController.h"
+#import "Reachability.h"
 
 @implementation PluginManager
 
+@synthesize availableForDownloadPlugins = _availableForDownloadPlugins;
+
 /**
  * Customized initializer - the available plugin dictionary is defined in this method
+ *
+ * In this intializer, it also loads the availableForDownload plist file (to persist the available plugin to download)
+ * and also downloaded plist file (to persist the list of downloaded plugin).
+ * If, both of the plist does not exist, we provide one with the bundle of the app. Load from there, and
+ * write it to the document immediately. That case only happens in the first time the program runs.
+ *
  */
 - (id) init
 {
   if (self = [super init])
   {
-    
-    // TODO - put real plugin path in
     _loadedPlugins = [[NSMutableDictionary alloc] init];
-    _availablePlugins = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          // Cards
-                          [NSDictionary dictionaryWithObjectsAndKeys:
-                           CARD_DB_KEY,@"plugin_key",
-                           @"1.1",@"plugin_version",
-                           @"Japanese Flash Cards",@"plugin_name",
-                           @"Core cards",@"plugin_details",
-                           @"plugin-resources",@"plugin_notes_dir",
-                           @"foo",@"plugin_notes_file",
-                           @"http://makbook.local/~phooze/jFlash-CARD-1.1.db.gz",@"target_url",
-                           [LWEFile createBundlePathWithFilename:@"jFlash-CARD-1.1.db"],@"target_path",
-                           @"jFlash-CARD-1.1.db",@"file_name",
-                           nil],CARD_DB_KEY,
-                         
-                           // FTS
-                           [NSDictionary dictionaryWithObjectsAndKeys:
-                            FTS_DB_KEY,@"plugin_key",
-                            @"1.1",@"plugin_version",
-                            @"Awesomely Fast Search v1.1",@"plugin_name",
-                            @"plugin-resources",@"plugin_notes_dir",
-                            @"full-text-search",@"plugin_notes_file",
-                            @"Adds sub-second full dictionary search (12MB)",@"plugin_details",
-                            @"https://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-FTS-1.1.db"],@"target_path",
-                            @"jFlash-FTS-1.1.db",@"file_name",
-                            nil],FTS_DB_KEY,
-						 
-                           // Example sentences
-                           [NSDictionary dictionaryWithObjectsAndKeys:
-                            EXAMPLE_DB_KEY,@"plugin_key",
-                            @"1.1",@"plugin_version",
-                            @"Fifty Thousand Examples v1.1",@"plugin_name",
-                            @"plugin-resources",@"plugin_notes_dir",
-                            @"example-sentences",@"plugin_notes_file",
-                            @"Adds sentences to practice modes (7.5MB)",@"plugin_details",
-                            @"https://d3580k8bnen6up.cloudfront.net/jFlash-EX-1.1.db.gz",@"target_url",
-                            [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",
-                            @"jFlash-EX-1.1.db",@"file_name",
-                            nil],EXAMPLE_DB_KEY,
-                           nil];
-						 
-						 /*[NSDictionary dictionaryWithObjectsAndKeys:
-						  EXAMPLE_DB_KEY,@"plugin_key",
-						  @"1.1",@"plugin_version",
-						  @"Fifty Thousand Examples v1.1",@"plugin_name",
-						  @"plugin-resources",@"plugin_notes_dir",
-						  @"example-sentences",@"plugin_notes_file",
-						  @"Adds sentences to practice modes (7.5MB)",@"plugin_details",
-						  @"http://dl.dropbox.com/u/3794086/jFlash-EX-1.1.db.gz",@"target_url",
-						  [LWEFile createDocumentPathWithFilename:@"jFlash-EX-1.1.db"],@"target_path",
-						  @"jFlash-EX-1.1.db",@"file_name",
-						  nil],EXAMPLE_DB_KEY,
-						 nil];*/
-  }
+		[self _initAvailableForDownloadPluginsList];
+		[self _initDownloadedPluginsList];
+	}
   return self;
+}
+
+- (void) _initAvailableForDownloadPluginsList
+{
+	_availableForDownloadPlugins = nil;
+	NSString *path = nil;
+	NSDictionary *dict = nil;
+	if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST]])
+	{
+		LWE_LOG(@"Available plugin plist found in the document path");
+		path = [LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
+		
+		if (path != nil)
+		{
+			dict = [[NSDictionary alloc]
+							initWithContentsOfFile:path];
+			[self _setAvailableForDownloadPlugins:dict];
+			[dict release];
+		}			
+	}
+	//TODO: Rendy, please review this again, it works, but is it really necessary? or is there any more ellegant way to do it?
+	else if ([LWEFile fileExists:[LWEFile createBundlePathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST]])
+	{
+		if (![self _checkNetworkToURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]])
+		{
+			LWE_LOG(@"Available plugin plist found in the bundle path");
+			path = [LWEFile createBundlePathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
+			NSMutableDictionary *md = [[NSMutableDictionary alloc] init];
+			
+			NSArray *array = [[NSMutableDictionary dictionaryWithContentsOfFile:path] objectForKey:@"Plugins"];
+			
+			for (NSDictionary *dct in array)
+			{
+				[dct setValue:[LWEFile createDocumentPathWithFilename:[dct objectForKey:@"plugin_target_path"]] forKey:@"plugin_target_path"];
+				[md setValue:dct forKey:[dct objectForKey:@"plugin_key"]];
+			}
+			
+			dict = [[NSDictionary alloc] 
+							initWithDictionary:md];
+			[self performSelector:@selector(_setAvailableForDownloadPlugins:) withObject:dict afterDelay:2];
+			[dict release];
+			[md release];
+		}
+	}
+	else 
+	{
+		LWE_LOG(@"Debug : File for saving the available for download plugin %@ does not exist", LWE_AVAILABLE_PLUGIN_PLIST);
+	}
+}
+
+- (void) _initDownloadedPluginsList
+{
+	NSString *pathForDownloadedPlugin = nil;
+	if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]])
+	{
+		LWE_LOG(@"Downloaded plugin plist found in the document path");
+		pathForDownloadedPlugin = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
+		_downloadedPlugins = [[NSDictionary alloc] 
+													initWithContentsOfFile:pathForDownloadedPlugin];
+		LWE_LOG(@"DOwnloaded plugin plist content : %@", _downloadedPlugins);
+	}
+	else if ([LWEFile fileExists:[LWEFile createBundlePathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]])
+	{
+		LWE_LOG(@"Downloaded plugin plist found in the bundle path");
+		pathForDownloadedPlugin = [LWEFile createBundlePathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
+		NSDictionary *_plugin = [[NSDictionary alloc] initWithContentsOfFile:pathForDownloadedPlugin];
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+		NSArray *values = [_plugin allValues];
+		NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+		for (NSDictionary *dict in values)
+		{
+			NSString *key = [dict objectForKey:@"plugin_key"];
+			if (([key isEqualToString:@"CARD_DB"]) || ([userSettingPlugin objectForKey:key]))
+			{
+				LWE_LOG(@"Added to the list of the downloaded list for key : %@", key);
+				NSMutableDictionary *md = [NSMutableDictionary dictionaryWithDictionary:dict];
+				NSString *path;
+				
+				//This is because the card db file will always be in the bundle file, while the other plugin
+				//will be in the document path. This is important so that when the PluginManager
+				//tries to load the plugin, it points to the right location.
+				if ([key isEqualToString:@"CARD_DB"])
+					path = [LWEFile createBundlePathWithFilename:[dict objectForKey:@"plugin_target_path"]];
+				else 
+					path = [LWEFile createDocumentPathWithFilename:[dict objectForKey:@"plugin_target_path"]];
+				
+				[md setValue:path forKey:@"plugin_target_path"];
+				[dictionary setValue:md forKey:key];
+			}
+		}
+		
+		_downloadedPlugins = [dictionary retain];
+		[_downloadedPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST] atomically:YES];
+		[dictionary release];
+		[_plugin release];
+	}
+	
 }
 
 
@@ -83,7 +137,7 @@
  */
 + (NSDictionary*) preinstalledPlugins;
 {
-  return [NSDictionary dictionaryWithObjectsAndKeys:JFLASH_CURRENT_CARD_DATABASE,CARD_DB_KEY,nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:JFLASH_CURRENT_CARD_DATABASE, CARD_DB_KEY,nil];
 }
 
 
@@ -127,6 +181,8 @@
   return plugin;
 }
 
+#pragma mark -
+#pragma mark Plugin mechanism, disable, loadPlugin, etc. 
 
 /**
  * Takes the plugin out of active use
@@ -148,7 +204,8 @@
 
 
 /**
- * Load all plugins from settings file
+ * Load all plugins from settings file, after loading all of the downloaded plugin.
+ * It also checks whether this is the right time for checking the new update. 
  */
 - (BOOL) loadInstalledPlugins
 {
@@ -156,17 +213,31 @@
   // Add each plugin database if it exists
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSMutableDictionary *plugins = [settings objectForKey:APP_PLUGIN];
+	LWE_LOG(@"This is the APP_PLUGIN in the NSUserDefaults : %@", plugins);
   NSEnumerator *keyEnumerator = [plugins keyEnumerator];
   NSString *key;
   while (key = [keyEnumerator nextObject])
   {
     NSString* filename = [plugins objectForKey:key];
-    if ([self loadPluginFromFile:filename] == nil)
+		LWE_LOG(@"LOG : Trying to load the installed plugins = %@, with filename = %@", key, filename);
+    if ([self loadPluginFromFile:filename afterDownload:NO] == nil)
     {
-      LWE_LOG(@"FAILED to load plugin: %@",filename);
+      LWE_LOG(@"FAILED to load plugin: %@", filename);
       success = NO;
     }
   }
+	
+	double start = [[NSDate date] timeIntervalSince1970];
+	LWE_LOG(@"LOG: Start Checking Update");
+	//Checks whether this is the time for update
+	if ([self isTimeForCheckingUpdate])
+	{
+		LWE_LOG(@"LOG : Today is the time for checking update");
+		[self checkNewPluginwithNotificationForFailNetwork:NO];
+	}
+	double end = [[NSDate date] timeIntervalSince1970];
+	LWE_LOG(@"LOG: Check new plugin is finished, it took %f time for downloading and checking", (end-start));
+	
   return success;
 }
 
@@ -174,56 +245,60 @@
 /**
  * Loads a plugin from a file, returns plugin key name
  */
-- (NSString*) loadPluginFromFile:(NSString*)filename
+- (NSString*) loadPluginFromFile:(NSString*)filename afterDownload:(BOOL)afterDownload
 {
-  NSDictionary* dictionaryForFilename = [self findDictionaryContainingObject:filename forKey:@"file_name" inDictionary:_availablePlugins];
-  NSString* filePath = [dictionaryForFilename objectForKey:@"target_path"];
+	NSDictionary* pluginForFilename = nil;
+	if (!afterDownload)
+		pluginForFilename = [self findDictionaryContainingObject:filename forKey:@"plugin_file_name" inDictionary:_downloadedPlugins];
+  else 
+		pluginForFilename = [self findDictionaryContainingObject:filename forKey:@"plugin_file_name" inDictionary:self.availableForDownloadPlugins];
+	
+	
+	NSString* filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
   LWE_LOG(@"Loading file: %@ in loadPluginFromFile", filename);
-  
-  // First, get database instance
+	// First, get database instance
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // Make sure we can find the file!
-  if (![LWEFile fileExists:filePath]) return NO;
+  if (![LWEFile fileExists:filePath]) 
+	{
+		return NO;
+		NSString *str = [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath];
+		LWE_LOG(@"%@", str);
+		//TODO: Remove upon production
+		UIAlertView *alert = [[UIAlertView alloc]
+													initWithTitle:@"Error" 
+													message:str 
+													delegate:nil 
+													cancelButtonTitle:@"OK" 
+													otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+	}
   
   // Test drive the attachment to verify it matches
   if ([db attachDatabase:filePath withName:@"LWEDATABASETMP"])
   {
-//    NSString* version = nil;
+		LWE_LOG(@"DEBUG : file %@ is now attached as LWEDATABASETMP to be checked out", filePath);
     NSString* pluginKey = nil;
-//    NSString* pluginName = nil;
-    BOOL foundVersionTable = NO;
-    NSString* sql = [[NSString alloc] initWithFormat:@"SELECT version,plugin_key,plugin_name FROM LWEDATABASETMP.version LIMIT 1"];
-    FMResultSet *rs = [db.dao executeQuery:sql];
-    [sql release];
-    while ([rs next])
-    {
-      foundVersionTable = YES;
-//      version = [rs stringForColumn:@"version"];
-      pluginKey = [rs stringForColumn:@"plugin_key"];
-//      pluginName = [rs stringForColumn:@"plugin_name"];
-    }
-    
+		double version = [self _versionInMainDb:[db dao] forDbName:@"LWEDATABASETMP"];
+		BOOL foundVersionTable = NO;
+		if (version != 0.0f)
+		{
+			//version table exists, and now extract the plugin key
+			pluginKey = [pluginForFilename objectForKey:@"plugin_key"];
+			foundVersionTable = YES;
+		}
     // Now detach the database
     [db detachDatabase:@"LWEDATABASETMP"];
     
     if (foundVersionTable)
     {
       LWE_LOG(@"Found version table, plugin file is OK");
-		
-      // Reattach with proper name and register
+			// Reattach with proper name and register
       if ([db attachDatabase:filePath withName:pluginKey])
-      {
-		  
-		  //TODO: REMOVE UPON PRODUCTION!!!!!
-		  if ([filePath rangeOfString:@"jFlash-EX-1.1.db"].location != NSNotFound)
-		  {
-			  LWE_LOG(@"ERROR: REMOVE THIS PLEASE...........................................");
-			  [[db dao] executeUpdate:[NSString stringWithFormat:@"CREATE INDEX \"%@\".\"card_sentence_link_sentence_id\" ON card_sentence_link (sentence_id ASC)", pluginKey]];
-			  
-		  }
-		  
-        [_loadedPlugins setObject:[_availablePlugins objectForKey:pluginKey] forKey:pluginKey];
+      {		  
+				[_loadedPlugins setObject:pluginForFilename forKey:pluginKey];
         return pluginKey;
       }
       else
@@ -246,6 +321,8 @@
   return nil;
 }
 
+#pragma mark -
+#pragma mark LWEDownloader delegate method
 
 /**
  * LWEDownloader delegate method - installs a plugin database
@@ -256,20 +333,63 @@
   // Downloader gives us absolute paths, but we need to work with relative from this point on
   // so get the filename and go from there
   NSString* filename = [path lastPathComponent];
-  if (pluginKey = [self loadPluginFromFile:filename])
+	
+	LWE_LOG(@"LOG : The download has just finished, now checking whther the download is an updated version, or a refresh plugin download");
+	NSString *updatedKey = [self _checkWhetherAnUpdate:path];
+	NSString *oldPluginPathFileName = nil;
+	if (updatedKey)
+	{
+		oldPluginPathFileName = [[_downloadedPlugins objectForKey:updatedKey] objectForKey:@"plugin_target_path"];
+		LWE_LOG(@"This is an update plugin, path of the old plugin file : %@", oldPluginPathFileName);
+		//Detach the old database
+		[[LWEDatabase sharedLWEDatabase] detachDatabase:updatedKey];
+	}
+	
+  if (pluginKey = [self loadPluginFromFile:filename afterDownload:YES])
   {
+		//If plugin key does exists, means it sucess load the new plugin (no matter its a fresh installed plugin, or the
+		//update plugin
     LWE_LOG(@"Registering plugin %@ with filename: %@", pluginKey, filename);
-    [self _registerPlugin:pluginKey withFilename:filename];
+		[self _registerPlugin:pluginKey withFilename:filename];
+		
+		//After it registered, make sure it deletes the data from the available for download plugin, and 
+		//do some cleaning.
+		//If it is an update, delete the old one after a successful update
+		if (updatedKey)
+		{
+			LWE_LOG(@"After a successful installation of the update, delete the old file of the plugin : %@", oldPluginPathFileName);
+			[LWEFile deleteFile:oldPluginPathFileName];
+		}
+		
+		//Now update the downloaded plugin file and variable, so that the next time the program runs, 
+		//it shows the downloaded plugin as "has been downloaded"
+		LWE_LOG(@"Write the just downloaded plugin : %@ to the file. This is the detail : %@", pluginKey, [self.availableForDownloadPlugins objectForKey:pluginKey]);
+		[_downloadedPlugins setValue:[self.availableForDownloadPlugins objectForKey:pluginKey] forKey:pluginKey];
+		[_downloadedPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST] atomically:YES];
+		LWE_LOG(@"This is the result of the _downloadedPlugins content after being modified, and overwrite : %@", _downloadedPlugins);
+		
+		[self _removeFromAvailableDownloadForPlugin:pluginKey];
   }
   else
   {
+		//Means install failed?
+		//Then how if its an update plugin, not a fresh installed plugin? NOOO....
+		//Return back the old detached database
+		if (updatedKey)
+		{
+			[[LWEDatabase sharedLWEDatabase] attachDatabase:oldPluginPathFileName withName:updatedKey];
+			LWE_LOG(@"Installed update has just failed. Attach the old database, with the old database path.(Backup plan)");
+		}
+
     return NO;
   }
 
   // Tell anyone who cares that we've just successfully installed a plugin
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"pluginDidInstall" object:self userInfo:[_availablePlugins objectForKey:pluginKey]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"pluginDidInstall" object:self userInfo:[_downloadedPlugins objectForKey:pluginKey]];
   return YES;
 }
+
+#pragma mark -
 
 //! Gets array of NSString keys of plugins
 - (NSArray*) loadedPluginsByKey;
@@ -313,30 +433,16 @@
 
 
 //! Gets array of dictionaries with all info about available plugins
-- (NSArray*) allAvailablePlugins
+/*- (NSArray*) allAvailablePlugins
 {
   return [self _plugins:_availablePlugins];
 }
-
+*/
 
 //! Gets array of dictionaries with available plugins that are not loaded
 - (NSArray*) availablePlugins
 {
-  NSEnumerator *keyEnumerator = [_availablePlugins keyEnumerator];
-  NSString *key;
-  NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while (key = [keyEnumerator nextObject])
-  {
-    // If NOT in loaded, then add it
-    if (![_loadedPlugins objectForKey:key])
-    {
-      [tmpArray addObject:[_availablePlugins objectForKey:key]];
-    }
-  }
-  // Make immutable copy
-  NSArray *returnArray = [NSArray arrayWithArray:tmpArray];
-  [tmpArray release];
-  return returnArray;
+	return [self.availableForDownloadPlugins allValues];
 }
 
 /*!
@@ -359,34 +465,248 @@
 //! Gets all available plugins as a dictionary
 - (NSDictionary*) availablePluginsDictionary
 {
-  return [NSDictionary dictionaryWithDictionary:_availablePlugins];
+  return [NSDictionary dictionaryWithDictionary:self.availableForDownloadPlugins];
 }
 
-
-- (void) dealloc
+- (BOOL)isTimeForCheckingUpdate
 {
-  [super dealloc];
-  _loadedPlugins = nil;
+	//Debug purposes, to bypass and try to update everyday. 
+	//return YES;
+	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	NSDate *date = [settings objectForKey:PLUGIN_LAST_UPDATE];
+	date = [date addDays:LWE_PLUGIN_UPDATE_PERIOD];
+	NSDate *now = [NSDate date];
+	
+	//date is earlier than now, means it is for update
+	if ([date compare:now] == NSOrderedAscending)
+		return YES;
+	else 
+		return NO;
+}
+
+//!Check the new plugin over the website, and looks whether it has a new stuff
+- (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify
+{	
+	if ([self _checkNetworkToURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]])
+	{
+		//Set up the variable to be the 
+		NSMutableDictionary *awaitsUpdatePlugins = nil;
+		if (_availableForDownloadPlugins != nil)
+			awaitsUpdatePlugins = [[NSMutableDictionary alloc] initWithDictionary:_availableForDownloadPlugins];
+		else
+			awaitsUpdatePlugins = [[NSMutableDictionary alloc] init];
+		
+		//Download the list of new plugin from the internet 
+		NSDictionary *dictionary = [[NSDictionary alloc]
+																initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
+		NSArray *plugins = [dictionary objectForKey:@"Plugins"];
+		
+		//This is how we get the information about the installed plugin on the device
+		//This gets the information from the user default, app plugin key.
+		NSDictionary *pluginSettings = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+		FMDatabase *db = [[LWEDatabase sharedLWEDatabase] dao];
+		
+		//wraps the checking version in the database with the transaction. 
+		[db beginTransaction];
+		for (NSDictionary *plugin in plugins)
+		{
+			NSString *pluginKey = [plugin objectForKey:@"plugin_key"];
+			NSString *installedPlugin = [pluginSettings objectForKey:pluginKey];
+			NSString *awaitsUpdate = [awaitsUpdatePlugins objectForKey:pluginKey];
+			BOOL needUpdate = NO;
+			
+			//The user already had the plugin on the user setting, and checks whether thats outdated
+			if ((installedPlugin) && (!awaitsUpdate))
+			{
+				double pluginVersion = [[plugin objectForKey:@"plugin_version"] doubleValue];
+				double installedVersion = [self _versionInMainDb:db forDbName:pluginKey];
+				
+				LWE_LOG(@"Debug : Installed version %f, plugin version %f, need upgrade? %@", installedVersion, pluginVersion, (pluginVersion > installedVersion) ? @"YES" : @"NO");
+				//Yap, its updated, need a new update
+				if (pluginVersion > installedVersion)
+				{
+					needUpdate = YES;
+				}
+			}
+			//The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 
+			//in that case, I chose to rewrite the list with the new one anyway. There are only 2 possibilities, it either the new one
+			//from the web is the newer version, or the same. It does not matter, we still want it to be on the user awaits update plugin
+			//list anyway. 
+			else
+			{
+				needUpdate = YES;
+			}
+			
+			//Needss update means it will add the plugin dictionary to the mutable dictionary initialized
+			//in the beginning of this method.
+			//Before doing that, it also tried to fix the plugin_target_path to be the document path of the device.
+			if (needUpdate)
+			{
+				NSString *plugin_path = [plugin objectForKey:@"plugin_target_path"];
+				[plugin setValue:[LWEFile createDocumentPathWithFilename:plugin_path] forKey:@"plugin_target_path"];
+				[awaitsUpdatePlugins setValue:plugin forKey:pluginKey];
+			}
+		}
+		[db commit];
+		[dictionary release];
+		
+		LWE_LOG(@"Call _setAvailableForDownloadPlugins from _checkNewPluginWithNotificationForFailNetwork");
+		[self _setAvailableForDownloadPlugins:awaitsUpdatePlugins];
+		[awaitsUpdatePlugins release];
+	}
+	else if (doesNeedNotify)
+	{
+		UIAlertView *alert = [[UIAlertView alloc]
+													initWithTitle:@"Network unavailable" 
+													message:@"Please check for your network" 
+													delegate:nil 
+													cancelButtonTitle:@"OK" 
+													otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+	}
 }
 
 #pragma mark -
 #pragma mark Privates
 
 /**
- * Register plugin filename with NSUserDefaults
+ * Convinient method to check whether the new update is the updated version. 
+ * Its going to return the key of the updated plugin, if the plugin downloaded is an update, not just a fresh install.
+ *
  */
-- (void) _registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename
+- (NSString *)_checkWhetherAnUpdate:(NSString *)path
+{
+  NSString *result = nil;
+	NSDictionary *dict = [self findDictionaryContainingObject:path forKey:@"plugin_target_path" inDictionary:self.availableForDownloadPlugins];
+	NSString *keyString = [dict objectForKey:@"plugin_key"];
+	//check whether they the user already had it in the user settings.
+	NSDictionary *installedPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+	NSDictionary *pluginBeingInstalled = [installedPlugin objectForKey:keyString];
+	//Means there are stuffs in the user default.
+	//Next thing is to check whether the plugin installed in the user device has the
+	//updated version, or the downloaded is the updated one. 
+	if (pluginBeingInstalled)
+	{
+		//Check the version on the installed version.
+		/*double versionInTheUserDevice = [self _versionInMainDb:[[LWEDatabase sharedLWEDatabase]dao] forDbName:keyString];
+		double downloadedVersion;
+		if (versionInTheUserDevice < downloadedVersion)
+			isUpdate = YES;*/
+		
+		//I dont think we need to check the version again, since If its already in the user settings.
+		//It should be an update. Nothing else
+		result = keyString;
+	}
+	return result;
+}
+
+/**
+ * This method is a wrapper method to check the reachability, whether the phone now is connnected to internet, before performing any internet request. 
+ */
+- (BOOL)_checkNetworkToURL:(NSURL *)url
+{
+	Reachability *reachability = [Reachability reachabilityWithHostName:[url host]];
+	NetworkStatus status = [reachability currentReachabilityStatus];
+	if (status == NotReachable)
+	{
+		return NO;
+	}
+	return YES;
+}
+
+/**
+ * This is the handy function to return the version of specific key of the attached database in the main
+ * database. It assumed that the database is already attached, and there is a version table. 
+ */
+- (double)_versionInMainDb:(FMDatabase *)db forDbName:(NSString *)dbName
+{
+	NSString *query = [[NSString alloc] initWithFormat:@"SELECT v.version FROM \"%@\".\"version\" v LIMIT 1", dbName];
+	FMResultSet *rs = [db executeQuery:query];
+	[query release];
+
+	double version = 0.0f;
+	while ([rs next])
+	{
+		version = [[rs stringForColumn:@"version"] doubleValue];
+	}
+	[rs close];
+	
+	return version;
+}
+
+/**
+ * This is the setter for available for download plugin. 
+ * However, unlike the usual setter, it also sets the badge number via notification to the RootViewController
+ * and it also persist that in the file. 
+ */
+- (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict
+{
+	//Release the previous available for download dictionary, if it happens to have memory allocated.
+	if (_availableForDownloadPlugins != nil)
+	{
+		[_availableForDownloadPlugins release];
+	}
+	
+	//persist the update to a file
+	_availableForDownloadPlugins = [dict retain];
+	[dict writeToFile:[LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST] atomically:YES];
+	
+	//Try to update the last update in the user setting
+	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	[settings setObject:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
+	
+	//Update the badge in the settings. 
+	LWE_LOG(@"Debug : New %d update(s)",[dict count]);
+	NSNumber *newUpdate = [NSNumber numberWithInt:[dict count]];
+	[self performSelector:@selector(_sendUpdateBadgeNotification:) withObject:newUpdate afterDelay:0.3f];
+}
+
+/**
+ * This method is going to be called to perform a badge number update, and send the notification to whoever cares about badge number update.
+ */
+- (void)_sendUpdateBadgeNotification:(NSNumber *)badgeNumber
+{
+	NSDictionary *userDict = [NSDictionary dictionaryWithObject:badgeNumber
+																											 forKey:@"badge_number"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldUpdateSettingsBadge object:self userInfo:userDict];
+}
+
+/**
+ * This is the handy method to delete the key from the available download for plugin dictionary
+ * enable the use to see the updated plugin, and the new number badge of the available download for plugin. 
+ */
+- (void)_removeFromAvailableDownloadForPlugin:(NSString *)pluginKey
+{
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc] 
+															 initWithDictionary:self.availableForDownloadPlugins];
+	[dict removeObjectForKey:pluginKey];
+	LWE_LOG(@"Called _setAvailableForDownloadPlugins from _removeFromAvailableDownloadForPlugin");
+	[self _setAvailableForDownloadPlugins:dict];
+}
+
+
+/**
+ * Register plugin filename with NSUserDefaults
+ *
+ * Returns NO means that the system user setting has already had the key, so this is a plugin update
+ * YES means this is a refresh plugin install.
+ *
+ */
+- (void)_registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename
 {
   // Update the settings so we maintain this on startup
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSDictionary *pluginSettings = [settings objectForKey:APP_PLUGIN];
   if (pluginSettings)
   {
-    // This means we already have a settings database (e.g. not first load)
-    LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults' plugin key",pluginKey,filename);
-    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
-    [tmpDict setObject:filename forKey:pluginKey];
-    [settings setValue:tmpDict forKey:APP_PLUGIN];
+		LWE_LOG(@"Added %@ key with filename '%@' to NSUserDefaults plugin key", pluginKey, filename);
+		NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:pluginSettings];
+		[tmpDict setObject:filename forKey:pluginKey];
+		[settings setValue:tmpDict forKey:APP_PLUGIN];
+		[settings synchronize];
+		
+		LWE_LOG(@"After updated the APP_PLUGIN key in the NSUserDefaults : %@", [settings objectForKey:APP_PLUGIN]);
   }
   else
   {
@@ -395,8 +715,9 @@
   }  
 }
 
+
 // Internal helper class that does the heavy lifting for loadedPlugins
-- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary
+- (NSArray*)_plugins:(NSDictionary*)_pluginDictionary
 {
   NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
   NSString *key;
@@ -410,5 +731,18 @@
   [tmpArray release];
   return returnArray;
 }
+
+#pragma mark -
+#pragma mark Memory Management
+
+- (void)dealloc
+{
+  [super dealloc];
+	if (_availableForDownloadPlugins)
+		[_availableForDownloadPlugins release];
+  _loadedPlugins = nil;
+}
+
+#pragma mark -
 
 @end

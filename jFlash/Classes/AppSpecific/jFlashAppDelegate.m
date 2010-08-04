@@ -20,6 +20,7 @@
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {     
+	LWE_LOG(@"In the start of the application did finish launching NSUserDefault %@", [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN]);
   #if defined(APP_STORE_FINAL)
     // add analytics if this is live
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -30,11 +31,11 @@
   UIDevice* device = [UIDevice currentDevice];
   if ([device respondsToSelector:@selector(isMultitaskingSupported)])
   {
-//    self.backgroundSupported = device.multitaskingSupported;
+	  //self.backgroundSupported = device.multitaskingSupported;
   }
   else
   {
-    self.backgroundSupported = NO;
+	  self.backgroundSupported = NO;
   }
   
   // Seed random generator
@@ -123,6 +124,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
   LWE_LOG(@"Application did enter the background now");
+	LWE_LOG(@"Value plugin in the user setting %@", [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN]);
+	//TODO: Review this please, whether this is really important? is this an expensive operation?
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

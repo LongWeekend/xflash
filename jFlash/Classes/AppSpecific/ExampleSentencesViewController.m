@@ -7,6 +7,7 @@
 //
 
 #import "ExampleSentencesViewController.h"
+#import "RootViewController.h"
 
 @interface NSObject (ExampleSentencesDelegateSupport)
 // setup
@@ -176,7 +177,7 @@
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
 	NSDictionary *dict = [[NSDictionary alloc]
 						  initWithObjectsAndKeys:tmpVC, @"controller", @"YES", @"animated", nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowModal" object:self userInfo:dict];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShoulShowModal object:self userInfo:dict];
 	
 	[doneBtn release];
 	[tmpVC release];
@@ -239,7 +240,7 @@
 
 - (void)dismissAddToSetModal
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissModal" object:self userInfo:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:nil];
 }
 
 #pragma mark -

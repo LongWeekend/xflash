@@ -26,7 +26,7 @@
   IBOutlet id delegate;  
   
   Card *currentCard;
-	LWETwitterEngine *_twitterEngine;
+  LWETwitterEngine *_twitterEngine;
   
   // The overtop buttons for quiz mode
   IBOutlet UIView *cardMeaningBtnHint;

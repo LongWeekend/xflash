@@ -33,6 +33,8 @@
       [self setTag:initTag];
       [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];
     }
+		
+		//TODO: Why is this retained? (potential leak?) -Rendy(3/8/2010)
     [[self tableView] retain];
     self.navigationItem.title = [initTag tagName];
     [self setCards:nil];
