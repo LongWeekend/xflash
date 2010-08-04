@@ -265,15 +265,6 @@
 		return NO;
 		NSString *str = [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath];
 		LWE_LOG(@"%@", str);
-		//TODO: Remove upon production
-		UIAlertView *alert = [[UIAlertView alloc]
-													initWithTitle:@"Error" 
-													message:str 
-													delegate:nil 
-													cancelButtonTitle:@"OK" 
-													otherButtonTitles:nil];
-		[alert show];
-		[alert release];
 	}
   
   // Test drive the attachment to verify it matches
