@@ -18,6 +18,7 @@
 
 
 @implementation SettingsViewController
+@synthesize tblView, btnNewUpdate;
 @synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, readingChanged, appirater, settingsDict;
 
 NSString * const APP_ABOUT = @"about";
@@ -25,14 +26,35 @@ NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
 NSString * const APP_ALGORITHM = @"algorithm";
 
+#pragma mark -
+#pragma mark Button New Update Clicked
+
+- (IBAction) btnNewUpdate_Clicked:(id) sender
+{
+	[self _openPluginSettingstVC];
+}
+
+#pragma mark -
+#pragma mark Privates
+
+- (void) _openPluginSettingstVC
+{
+	// TODO: iPad customization!
+	PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
+	[self.navigationController pushViewController:psvc animated:YES];
+	[psvc release];
+}
+
+#pragma mark -
+
 /** Customized initializer with UITableViewStyleGrouped */
 - (SettingsViewController*) init
 {
-	if (self = [super initWithStyle:UITableViewStyleGrouped])
+	if (self = [super initWithNibName:@"SettingsViewController" bundle:nil]) //initWithStyle:UITableViewStyleGrouped])
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
-    self.title = NSLocalizedString(@"Settings",@"SettingsViewController.NavBarTitle");
+    self.title = NSLocalizedString(@"Settings", @"SettingsViewController.NavBarTitle");
 
     [self setSectionArray:[self _settingsTableDataSource]];
     settingsChanged = NO;
@@ -48,7 +70,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
 - (void)loadView
 {
   [super loadView];
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self.tblView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
@@ -60,7 +82,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
 {
   [self setSectionArray:[self _settingsTableDataSource]];
   self.navigationItem.rightBarButtonItem = nil;
-  [[self tableView] reloadData];
+  [[self tblView] reloadData];
 }
 
 
@@ -82,8 +104,19 @@ NSString * const APP_ALGORITHM = @"algorithm";
     [updateBtn release];
   }
   
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
-  [[self tableView] reloadData];
+  [[self tblView] setBackgroundColor: [UIColor clearColor]];
+  [[self tblView] reloadData];
+
+	if ([[[[CurrentState sharedCurrentState] pluginMgr] availableForDownloadPlugins] count] > 0)
+	{
+		btnNewUpdate.hidden = NO;
+		tblView.frame = CGRectMake(0, 72, 320, 364);
+	}
+	else 
+	{
+		btnNewUpdate.hidden = YES;
+		tblView.frame = CGRectMake(0, 0, 320, 436);
+	}
 }
 
 //! Only re-load the set if settings were changed, otherwise there is no need to do anything
@@ -280,10 +313,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   }
   else if (key == APP_PLUGIN)
   {
-    // TODO: iPad customization!
-    PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
-    [self.navigationController pushViewController:psvc animated:YES];
-    [psvc release];
+		[self _openPluginSettingstVC];
   }
   else if (key == APP_ABOUT)
   {
@@ -323,7 +353,7 @@ NSString * const APP_ALGORITHM = @"algorithm";
   {
     // Everything else
     [self iterateSetting:key];
-    [[self tableView] reloadData];
+    [[self tblView] reloadData];
     if (key == APP_HEADWORD) // we don't want the current card to change for just a headword switch
     {
       headwordChanged = YES;
@@ -441,11 +471,13 @@ NSString * const APP_ALGORITHM = @"algorithm";
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tblView];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [settingsDict release];
   [sectionArray release];
   [appirater release];
+	[tblView release];
+	[btnNewUpdate release];
   [super dealloc];
 }
 

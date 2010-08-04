@@ -15,8 +15,10 @@ extern NSString * const APP_ABOUT;
 extern NSString * const APP_TWITTER;
 extern NSString * const APP_FACEBOOK;
 
-@interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UIWebViewDelegate>
 {
+	UITableView *tblView;
+	UIButton *btnNewUpdate;
   NSMutableArray *sectionArray;
   NSDictionary *settingsDict;
   BOOL settingsChanged;
@@ -28,6 +30,9 @@ extern NSString * const APP_FACEBOOK;
 
 - (void) iterateSetting: (NSString*) setting;
 - (NSMutableArray*) _settingsTableDataSource;
+- (void) _openPluginSettingstVC;
+
+- (IBAction) btnNewUpdate_Clicked:(id) sender;
 
 @property BOOL settingsChanged;
 @property BOOL headwordChanged;
@@ -36,4 +41,6 @@ extern NSString * const APP_FACEBOOK;
 @property (retain, nonatomic) NSDictionary *settingsDict;
 @property (retain, nonatomic) NSMutableArray *sectionArray;
 @property (retain, nonatomic) Appirater *appirater;
+@property (retain, nonatomic) IBOutlet UITableView *tblView;
+@property (retain, nonatomic) IBOutlet UIButton *btnNewUpdate;
 @end

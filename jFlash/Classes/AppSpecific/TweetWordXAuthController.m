@@ -70,7 +70,6 @@
 //! After the alert view is dismissed, clearing all the text fields.
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	unameTxt.text = @"";
 	passwordTxt.text = @"";
 }
 
@@ -99,8 +98,6 @@
 {
 	[self.authEngine startXAuthProcessWithUsername:unameTxt.text 
 										  password:passwordTxt.text];
-	unameTxt.text = @"";
-	passwordTxt.text = @"";
 }
 
 //! IBAction for cancelling the authentication proccess, and report back to the auth engine that the authorization has just failed.
@@ -173,6 +170,9 @@
 														 currentThemeTintColor];
 	self.view.backgroundColor = [UIColor 
 								 colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+	
+	unameTxt.text = @"";
+	passwordTxt.text = @"";
 }
 
 

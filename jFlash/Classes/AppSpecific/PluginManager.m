@@ -87,11 +87,10 @@
 	NSString *pathForDownloadedPlugin = nil;
 	if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]])
 	{
-		LWE_LOG(@"Downloaded plugin plist found in the document path");
 		pathForDownloadedPlugin = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
 		_downloadedPlugins = [[NSDictionary alloc] 
 													initWithContentsOfFile:pathForDownloadedPlugin];
-		LWE_LOG(@"DOwnloaded plugin plist content : %@", _downloadedPlugins);
+		LWE_LOG(@"Downloaded plugin plist content found in the document path : %@", _downloadedPlugins);
 	}
 	else if ([LWEFile fileExists:[LWEFile createBundlePathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]])
 	{
@@ -125,6 +124,7 @@
 		
 		_downloadedPlugins = [dictionary retain];
 		[_downloadedPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST] atomically:YES];
+		LWE_LOG(@"This is the list of what the user has downloaded in the previous version, and now its going to persist it in the flat file : %@", _downloadedPlugins);
 		[dictionary release];
 		[_plugin release];
 	}
@@ -507,7 +507,7 @@
 		FMDatabase *db = [[LWEDatabase sharedLWEDatabase] dao];
 		
 		//wraps the checking version in the database with the transaction. 
-		[db beginTransaction];
+		[db beginDeferredTransaction];
 		for (NSDictionary *plugin in plugins)
 		{
 			NSString *pluginKey = [plugin objectForKey:@"plugin_key"];
@@ -550,6 +550,7 @@
 		[db commit];
 		[dictionary release];
 		
+		//Set the available for download plugin dictionary, to be persisted in the flat file, and set the badge.
 		LWE_LOG(@"Call _setAvailableForDownloadPlugins from _checkNewPluginWithNotificationForFailNetwork");
 		[self _setAvailableForDownloadPlugins:awaitsUpdatePlugins];
 		[awaitsUpdatePlugins release];
