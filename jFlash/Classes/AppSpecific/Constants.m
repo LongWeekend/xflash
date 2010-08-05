@@ -82,5 +82,8 @@ NSString * const SENTENCES_HTML_HEADER = @""
 ".lowlight {display:inline-block; margin-top:3px;color:#181818;text-shadow:none;font-weight:normal;} "
 ".readingLabel {font-size:14px;font-weight:bold; margin:3px 0px 0px 4px;} "
 ".headwordLabel {font-size:19px; margin:0px 0px 9px 4px;color:yellow;text-shadow:black 0px 1px 0px;} "
+".ExpandedSentencesTable { width:100%; border:3px dashed; border-collapse:collapse; margin: 5px 0px 5px 0px; } "
+".AddToSetAnchor { float:right; } "
+".ExpandedSentencesTable td { border:1px solid #FFFFFF; padding: 3px 3px 3px 3px; } "
 "##THEMECSS##</style></head>"
 "<body><div id='container'>";

@@ -34,6 +34,16 @@
   return self;
 }
 
+/** 
+ * This is new in 1.2, because prior to this, the list dictionary of dictionary for plugin is hardcoded in the code, and now it is moved to the flat file.
+ * This method will try to load the available for download plugin list from the user document folder, if it is not there it means the program first launched (after upgrade, or after install).
+ * It has default bundle plist file which contains all of the "should be available for download" plugin list file, read from that, and check with the user settings, 
+ * if the user has not downloaded the plugin, it means that it should copy the one from the bundle, and populate the path to the plugin, and last step would be write the file back to the DOCUMENT folder.
+ * However, if its not the first run, the user should already has the file in the DOCUMENT folder, and just load it from there directly.
+ *
+ * UPDATE: After given some thought, it would be best to read from file only if the device not connected to the internet, if the device is connected, it should check for update
+ * right away.
+ */
 - (void) _initAvailableForDownloadPluginsList
 {
 	_availableForDownloadPlugins = nil;
@@ -57,7 +67,9 @@
 	{
 		if (![self _checkNetworkToURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]])
 		{
-			LWE_LOG(@"Available plugin plist found in the bundle path");
+			LWE_LOG(@"Available plugin plist found in the bundle path. Because, by the time of checking, the device is not connected to the internet.");
+			NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+			
 			path = [LWEFile createBundlePathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
 			NSMutableDictionary *md = [[NSMutableDictionary alloc] init];
 			
@@ -65,12 +77,20 @@
 			
 			for (NSDictionary *dct in array)
 			{
-				[dct setValue:[LWEFile createDocumentPathWithFilename:[dct objectForKey:@"plugin_target_path"]] forKey:@"plugin_target_path"];
-				[md setValue:dct forKey:[dct objectForKey:@"plugin_key"]];
+				//This is assumed that by the time this binary is released, if the user has a plugin, the plugin version is the same as 
+				//the version stated in the available for download plugin plist included in the bundle. 
+				//This case only happen in the ipod touch device, or devices that does not have internet connection by the time this version (1.2) launched at the very first time. 
+				//TODO: Do a version checking to remove the assumption stated above. 
+				if ([userSettingPlugin objectForKey:[dct objectForKey:@"plugin_key"]] == nil)
+				{
+					[dct setValue:[LWEFile createDocumentPathWithFilename:[dct objectForKey:@"plugin_target_path"]] forKey:@"plugin_target_path"];
+					[md setValue:dct forKey:[dct objectForKey:@"plugin_key"]];
+				}
 			}
 			
 			dict = [[NSDictionary alloc] 
 							initWithDictionary:md];
+			_availableForDownloadPlugins = dict;
 			[self performSelector:@selector(_setAvailableForDownloadPlugins:) withObject:dict afterDelay:2];
 			[dict release];
 			[md release];
@@ -82,6 +102,13 @@
 	}
 }
 
+
+/** This is new in 1.2, because prior to this, the list dictionary of dictionary for plugin is hardcoded in the code, and now it is moved to the flat file.
+ * This method will try to load the downloaded plugin list from the user document folder, if it is not there it means the program first launched (after upgrade, or after install).
+ * It has default bundle plist file which contains all of the "should be there" plugin list file, read from that, and check with the user settings, if the user has downloaded 
+ * the plugin, it means that it should copy the one from the bundle, and populate the path to the plugin, and last step would be write the file back to the DOCUMENT folder.
+ * However, if its not the first run, the user should already has the file in the DOCUMENT folder, and just load it from there directly.
+ */
 - (void) _initDownloadedPluginsList
 {
 	NSString *pathForDownloadedPlugin = nil;
@@ -108,6 +135,9 @@
 				LWE_LOG(@"Added to the list of the downloaded list for key : %@", key);
 				NSMutableDictionary *md = [NSMutableDictionary dictionaryWithDictionary:dict];
 				NSString *path;
+				
+				//just a though, cause there are some cases that the plugin suddenly cant be loaded because the number xxxx-xxxx-xxx is changed
+				//TODO: Think, is it better to put this when loading the data from the flat file too?
 				
 				//This is because the card db file will always be in the bundle file, while the other plugin
 				//will be in the document path. This is important so that when the PluginManager

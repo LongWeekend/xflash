@@ -46,7 +46,6 @@
 		24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
 		24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */; };
 		24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */; };
-		24EA0FDD1209453700037A69 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EA0FDC1209453700037A69 /* SettingsViewController.xib */; };
 		24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA10FD12015BF60081CBBA /* SmallLoadingView.m */; };
 		24EA112812015EA10081CBBA /* ViewUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 24EA112712015EA10081CBBA /* ViewUtility.c */; };
 		24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA131D1202AC480081CBBA /* downloadedPlugin.plist */; };
@@ -464,7 +463,6 @@
 		24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = availablePluginForDownload.plist; sourceTree = "<group>"; };
 		24EA0D631200256B0081CBBA /* NSDate+LWEUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+LWEUtilities.h"; path = "Reusable/LWE/NSDate+LWEUtilities.h"; sourceTree = "<group>"; };
 		24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+LWEUtilities.m"; path = "Reusable/LWE/NSDate+LWEUtilities.m"; sourceTree = "<group>"; };
-		24EA0FDC1209453700037A69 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = XIBs/SettingsViewController.xib; sourceTree = "<group>"; };
 		24EA10FC12015BF60081CBBA /* SmallLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmallLoadingView.h; path = AppSpecific/SmallLoadingView.h; sourceTree = "<group>"; };
 		24EA10FD12015BF60081CBBA /* SmallLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmallLoadingView.m; path = AppSpecific/SmallLoadingView.m; sourceTree = "<group>"; };
 		24EA112612015EA10081CBBA /* ViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewUtility.h; path = Reusable/ViewUtility.h; sourceTree = "<group>"; };
@@ -1408,7 +1406,6 @@
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				24EA0FDC1209453700037A69 /* SettingsViewController.xib */,
 				496BE54F11EC5320003AB713 /* ActionBarViewController.xib */,
 				496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */,
 				496BE55111EC5320003AB713 /* SearchView.xib */,
@@ -1681,7 +1678,6 @@
 				496BE55411EC5320003AB713 /* SearchView.xib in Resources */,
 				24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */,
 				24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */,
-				24EA0FDD1209453700037A69 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

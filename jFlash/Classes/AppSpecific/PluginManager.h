@@ -21,7 +21,7 @@
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
 {
   NSMutableDictionary *_loadedPlugins;				//! Maintains in memory a list of loaded plugins
-  NSDictionary *_downloadedPlugins;						//! Maintains in memory a list of the downloaded plugin in the user device
+  NSDictionary *_downloadedPlugins;						//! Maintains in memory a list of the downloaded plugin in the user device. This is used for loading the plugin back to the program when the program runs. 
 	NSDictionary *_availableForDownloadPlugins;	//! Maintains in memory a list of availavle for download plugin.
 }
 
