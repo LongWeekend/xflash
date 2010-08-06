@@ -35,6 +35,7 @@
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (NSArray*) loadedPlugins;
 - (NSArray*) availablePlugins;
+- (NSArray*) downloadedPlugins;
 //TODO: Rendy commented this out, cause this is abit ambigous, and it seems this method is not used anywhere.
 //- (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;

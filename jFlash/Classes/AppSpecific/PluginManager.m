@@ -319,7 +319,9 @@
 			// Reattach with proper name and register
       if ([db attachDatabase:filePath withName:pluginKey])
       {		  
-				[_loadedPlugins setObject:pluginForFilename forKey:pluginKey];
+				//TODO: Comment!
+				if (![_availableForDownloadPlugins objectForKey:pluginKey])
+					[_loadedPlugins setObject:pluginForFilename forKey:pluginKey];
         return pluginKey;
       }
       else
@@ -358,6 +360,7 @@
 	LWE_LOG(@"LOG : The download has just finished, now checking whther the download is an updated version, or a refresh plugin download");
 	NSString *updatedKey = [self _checkWhetherAnUpdate:path];
 	NSString *oldPluginPathFileName = nil;
+	
 	if (updatedKey)
 	{
 		oldPluginPathFileName = [[_downloadedPlugins objectForKey:updatedKey] objectForKey:@"plugin_target_path"];
@@ -450,6 +453,11 @@
 - (NSArray*) loadedPlugins
 {
   return [self _plugins:_loadedPlugins];
+}
+
+- (NSArray*) downloadedPlugins
+{
+	return [self _plugins:_downloadedPlugins];
 }
 
 
@@ -547,6 +555,8 @@
 				if (pluginVersion > installedVersion)
 				{
 					needUpdate = YES;
+					LWE_LOG(@"Detaching the old database plugin");
+					[_loadedPlugins removeObjectForKey:pluginKey];
 				}
 			}
 			//The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 

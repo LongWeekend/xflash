@@ -79,11 +79,7 @@
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
 	LWE_LOG(@"CSS : %@", cssHeader);
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
-	
-	LWE_LOG(@"HTML HEADER : %@", htmlHeader);
-  
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
-  
   [self.sentencesWebView loadHTMLString:html baseURL:nil];
 }
 
@@ -106,30 +102,18 @@
     for (ExampleSentence* sentence in sentences) 
     {
 			html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
+			//TODO: Change the Expand <dfn> tag to image?
 			html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
 				[sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
-
 			html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
 			html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div>", [sentence sentenceEn] ];
-			
-		
-			/*html = [html stringByAppendingFormat:@"<form method='GET' action='http://flash.com'>"];
-			 html = [html stringByAppendingFormat:@"<input type='hidden' value='%d' id='id%d' name='id' />", [sentence sentenceId], [sentence sentenceId]];
-			 html = [html stringByAppendingFormat:@"<input type='hidden' value='0' id='open%d' name='open' />", [sentence sentenceId]];
-			 html = [html stringByAppendingFormat:@"<input type='submit' id='submit%d' value='Reading' />", [sentence sentenceId]];
-			 html = [html stringByAppendingFormat:@"</form>"];*/
-		
-		
 			html = [html stringByAppendingFormat:@"</li>"];
 			counter++;
     }
     html = [html stringByAppendingString:@"</ol>"];
-
 	  sampleDecomposition = [[NSMutableDictionary alloc] initWithCapacity:counter];
-	  
     [self setupSentencesWebView:html];
   }
-  
   [self _exampleSentencesViewDidSetup];
 }
 
@@ -193,12 +177,14 @@
 	{
 		//Close the expanded div. Return back the status of the expaned button
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ", sentenceID];
+		//TODO: Change the Expand tag to image?
+		//js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.src = '%@'; ", sentenceID, [imagePath]];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Expand'; ", sentenceID];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ", 
 			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
-	else 
+	else
 	{
 		//expand the sample sentence.
 		//Try to look at the dictionary representative of the example decomposition in the memory, if its null, populate a new one,
@@ -208,16 +194,24 @@
 		{
 			NSDate *start = [NSDate date];
 			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
-			cardHTML = @"<table class='ExpandedSentencesTable'>";
+			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
+			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)
 			{
 				cardHTML = [cardHTML stringByAppendingFormat:@"<tr>"];
-				LWE_LOG(@"Head Word : %@", [c headword]);
-				
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td>%@</td>", [c headword]]; 
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td>[%@] <a href='%@/%d?id=%d' class='AddToSetAnchor'><dfn>Add to set</dfn></a></td>", [c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
-
-				
+				LWE_LOG(@"Head Word : %@", headWord);
+				if (![[c headword] isEqualToString:headWord])
+				{
+					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>", [c headword]]; 
+					headWord = [c headword];
+				}
+				else 
+				{
+					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
+				}
+				//TODO: Change the add <dfn> tag to image?
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>[%@] <a href='%@/%d?id=%d' class='AddToSetAnchor'><dfn>Add</dfn></a></td>", 
+										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}
 			
@@ -228,7 +222,7 @@
 			LWE_LOG(@"Time : %f", d);
 		}
 		
-		NSDate *start = [NSDate date];
+		//NSDate *start = [NSDate date];
 		LWE_LOG(@"Card HTML : %@", cardHTML);
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
@@ -239,8 +233,8 @@
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
 		
-		double d = [[NSDate date] timeIntervalSince1970] - [start timeIntervalSince1970];
-		LWE_LOG(@"Time : %f", d);
+		//double d = [[NSDate date] timeIntervalSince1970] - [start timeIntervalSince1970];
+		//LWE_LOG(@"Time : %f", d);
 	}
 }
 

@@ -287,8 +287,7 @@
  */
 + (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
 {	
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
-	
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = 1", sentenceId];
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	
 	FMResultSet *rs = [[db dao] executeQuery:sql];

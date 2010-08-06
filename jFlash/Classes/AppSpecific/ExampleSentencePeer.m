@@ -65,7 +65,7 @@
  */
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id limit 10", cardId];
+  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id AND l.should_show = 1 limit 10", cardId];
   NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
   [sql release];
   return tmpSentences;
