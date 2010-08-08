@@ -270,6 +270,8 @@
   CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
   [self setCurrentCardSet: [currentStateSingleton activeTag]];
   
+  currentRightStreak = 0;
+  currentWrongStreak = 0;
   numRight = 0;
   numWrong = 0;
   numViewed = 0;
