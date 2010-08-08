@@ -34,14 +34,15 @@ extern NSString * const LWEPluginDidInstall;
 - (NSString*) loadPluginFromFile:(NSString*)filename afterDownload:(BOOL)afterDownload;
 - (NSArray*) loadedPluginsByKey;
 - (NSArray*) loadedPluginsByName;
-- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (NSArray*) loadedPlugins;
+- (NSString*) versionForLoadedPlugin:(NSString*)key;
 - (NSArray*) availablePlugins;
 - (NSArray*) downloadedPlugins;
 //TODO: Rendy commented this out, cause this is abit ambigous, and it seems this method is not used anywhere.
 //- (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
 
+- (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (BOOL)isTimeForCheckingUpdate;
 - (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;

@@ -459,6 +459,22 @@
   return [self _plugins:_loadedPlugins];
 }
 
+/**
+ * Returns the version string of a plugin, or nil if the key is not a loaded plugin
+ */
+- (NSString*) versionForLoadedPlugin:(NSString*)key
+{
+  NSDictionary *dict = [_loadedPlugins objectForKey:key];
+  if (dict)
+  {
+    return [dict objectForKey:@"plugin_version"];
+  }
+  else
+  {
+    return nil;
+  }
+}
+
 - (NSArray*) downloadedPlugins
 {
 	return [self _plugins:_downloadedPlugins];
@@ -632,6 +648,7 @@
 
 /**
  * This method is a wrapper method to check the reachability, whether the phone now is connnected to internet, before performing any internet request. 
+ * REFACTOR: Don't we already have this in Network Utils?  (MMA 8/7/2010)
  */
 - (BOOL)_checkNetworkToURL:(NSURL *)url
 {
