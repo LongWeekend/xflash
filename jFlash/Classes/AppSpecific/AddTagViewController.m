@@ -258,7 +258,7 @@ enum EntrySectionRows
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
   
   if(indexPath.section == kEntrySection) return; // do nothing for the entry section
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
+  CurrentState *currentState = [CurrentState sharedCurrentState];
   Tag* tmpTag;
   if (indexPath.section == kMyTagsSection)
   {
@@ -284,11 +284,11 @@ enum EntrySectionRows
   if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
   {
     // We have special things to check if we are modifying the existing active set
-    if (tmpTag.tagId == [[appSettings activeTag] tagId])
+    if (tmpTag.tagId == [[currentState activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
       // Is it the last tag in this set?
-      int tmpInt = [[appSettings activeTag] cardCount];
+      int tmpInt = [[currentState activeTag] cardCount];
       LWE_LOG(@"Num cards: %d",tmpInt);
       if (tmpInt <= 1)
       {
@@ -301,7 +301,7 @@ enum EntrySectionRows
         return;
       }
       // Success - but update counts
-      [[appSettings activeTag] removeCardFromActiveSet:currentCard];
+      [[currentState activeTag] removeCardFromActiveSet:currentCard];
     }
     // Remove tag
     [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
@@ -309,10 +309,10 @@ enum EntrySectionRows
   }
   else
   {
-    if (tmpTag.tagId == [[appSettings activeTag] tagId])
+    if (tmpTag.tagId == [[currentState activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
-      [[appSettings activeTag] addCardToActiveSet:currentCard];
+      [[currentState activeTag] addCardToActiveSet:currentCard];
     }
     [TagPeer subscribe:cardId tagId:tmpTag.tagId];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
