@@ -201,7 +201,7 @@
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
 	NSDictionary *dict = [[NSDictionary alloc]
 						  initWithObjectsAndKeys:tmpVC, @"controller", @"YES", @"animated", nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShoulShowModal object:self userInfo:dict];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	
 	[doneBtn release];
 	[tmpVC release];
