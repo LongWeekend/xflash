@@ -10,7 +10,7 @@
 #import "VersionManager.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
-NSString * const LWEShoulShowModal				= @"LWEShouldShowModal";
+NSString * const LWEShouldShowModal				= @"LWEShouldShowModal";
 NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 
 /**
@@ -39,12 +39,8 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
 	
-    // Register listener to pop up and dismiss the twitter modal
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:@"shouldShowTwitterModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:@"shouldDismissTwitterModal" object:nil];
-    
     //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShoulShowModal object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:LWEShouldDismissModal object:nil];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];

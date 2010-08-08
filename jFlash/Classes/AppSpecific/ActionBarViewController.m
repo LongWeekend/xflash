@@ -7,6 +7,7 @@
 //
 
 #import "ActionBarViewController.h"
+#import "RootViewController.h"
 
 //! Informal protocol defined messages sent to delegate
 @interface NSObject (ActionBarDelegateSupport)
@@ -245,13 +246,13 @@
 													  initWithNibName:@"TweetWordViewController"  
 													  twitterEngine:_twitterEngine 
 													  tweetWord:tweetWord];
-		
-		NSDictionary *dict = [[NSDictionary alloc]
-							  initWithObjectsAndKeys:twitterController, @"controller", nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
-		[dict release];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:twitterController];
 		[twitterController release];
-		LWE_LOG(@"Done Sending the notification");
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:navController, @"controller", nil];
+    [navController release];
+		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
+		[dict release];
 	}
 }
 
@@ -263,7 +264,7 @@
 	//TODO: Animated should be NO (last time I test, YES does not work). However, it works now (strange).
 	NSDictionary *dict = [[NSDictionary alloc]
 						  initWithObjectsAndKeys:@"YES", @"animated", nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldDismissTwitterModal" object:self userInfo:dict];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:dict];
 	[dict release];
 	
 	UIAlertView *alert = [[UIAlertView alloc]

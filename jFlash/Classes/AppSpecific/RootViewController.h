@@ -21,7 +21,7 @@
 #import "SettingsViewController.h"
 
 extern NSString * const LWEShouldUpdateSettingsBadge;
-extern NSString * const LWEShoulShowModal;
+extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldDismissModal;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
