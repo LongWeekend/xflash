@@ -56,8 +56,7 @@
 		
 		if (path != nil)
 		{
-			dict = [[NSDictionary alloc]
-							initWithContentsOfFile:path];
+			dict = [[NSDictionary alloc] initWithContentsOfFile:path];
 			[self _setAvailableForDownloadPlugins:dict];
 			[dict release];
 		}			
@@ -191,7 +190,7 @@
 
 /** 
  * Convenience method to allow custom logic for versions
- * TODO subclass
+ * TODO subclass?
  */
 - (BOOL) searchPluginIsLoaded
 {
@@ -203,7 +202,7 @@
 
 /** 
  * Convenience method to allow custom logic for versions
- * TODO subclass
+ * TODO subclass?
  */
 - (BOOL) examplesPluginIsLoaded
 {
