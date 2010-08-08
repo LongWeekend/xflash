@@ -8,7 +8,7 @@
 #import "Constants.h"
 
 // Version numbers & migration constants - DO NOT CHANGE unless you know what you're doing
-NSString * const JFLASH_CURRENT_VERSION       = @"1.1";
+NSString * const JFLASH_CURRENT_VERSION       = @"1.2";
 NSString * const JFLASH_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
 NSString * const JFLASH_CURRENT_USER_DATABASE = @"jFlash.db";
 
