@@ -40,18 +40,16 @@
 }
 
 
-//! Removes cardId from Tag indicated by parameter tagId
+/**
+ * \brief Removes cardId from Tag indicated by parameter tagId
+ * Note that this method DOES NOT update the tag count cache on the tags table
+ */
 + (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
-  NSString *sql2 = [[NSString alloc] initWithFormat:@"UPDATE tags SET count=(count-1) WHERE tag_id = '%d'",tagId];
-  [db.dao beginTransaction];
-  [db.dao executeUpdate:sql];
-  [db.dao executeUpdate:sql2];
-  [db.dao commit];
+  [db executeUpdate:sql];
 	[sql release];
-	[sql2 release];
   if ([db.dao hadError])
   {
     LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
@@ -128,18 +126,16 @@
 
 
 
-//! Subscribes a Card to a given Tag based on parameter IDs
+/**
+ * Subscribes a Card to a given Tag based on parameter IDs
+ * Note that this method DOES NOT update the tag count cache on the tags table
+ */
 + (void) subscribe: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql  = [[NSString alloc] initWithFormat:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (%d,%d)",cardId,tagId];
-  NSString *sql2 = [[NSString alloc] initWithFormat:@"UPDATE tags SET count=(count+1) WHERE tag_id = %d",tagId];
-  [[db dao] beginTransaction];
-  [[db dao] executeUpdate:sql];
-  [[db dao] executeUpdate:sql2];
-  [[db dao] commit];
+  [db executeUpdate:sql];
 	[sql release];
-	[sql2 release];
   if ([[db dao] hadError])
   {
     LWE_LOG(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
