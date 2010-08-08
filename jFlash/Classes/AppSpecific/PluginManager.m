@@ -170,46 +170,6 @@
 }
 
 
-/**
- * Tells whether or not a plugin is in the dictionary as loaded
- */
-- (BOOL) pluginIsLoaded:(NSString*)name
-{
-  if ([_loadedPlugins objectForKey:name])
-  {
-    return YES;
-  }
-  else
-  {
-    return NO;
-  }
-}
-
-# pragma mark -
-# pragma mark Should be subclassed later
-
-/** 
- * Convenience method to allow custom logic for versions
- * TODO subclass?
- */
-- (BOOL) searchPluginIsLoaded
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  BOOL plugin = [self pluginIsLoaded:FTS_DB_KEY];
-  return (plugin || [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]);
-}
-
-
-/** 
- * Convenience method to allow custom logic for versions
- * TODO subclass?
- */
-- (BOOL) examplesPluginIsLoaded
-{
-  BOOL plugin = [self pluginIsLoaded:EXAMPLE_DB_KEY];  
-  return plugin;
-}
-
 #pragma mark -
 #pragma mark Plugin mechanism, disable, loadPlugin, etc. 
 
@@ -408,7 +368,7 @@
   }
 
   // Tell anyone who cares that we've just successfully installed a plugin
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"pluginDidInstall" object:self userInfo:[_downloadedPlugins objectForKey:pluginKey]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEPluginDidInstall object:self userInfo:[_downloadedPlugins objectForKey:pluginKey]];
   return YES;
 }
 
@@ -448,6 +408,50 @@
   return returnArray;
 }
 
+
+# pragma mark -
+# pragma mark Should be subclassed later?
+
+/**
+ * Tells whether or not a plugin is in the dictionary as loaded
+ */
+- (BOOL) pluginIsLoaded:(NSString*)name
+{
+  if ([_loadedPlugins objectForKey:name])
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
+}
+
+/** 
+ * Convenience method to allow custom logic for versions
+ * TODO subclass?
+ */
+- (BOOL) searchPluginIsLoaded
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  BOOL plugin = [self pluginIsLoaded:FTS_DB_KEY];
+  return (plugin || [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]);
+}
+
+
+/** 
+ * Convenience method to allow custom logic for versions
+ * TODO subclass?
+ */
+- (BOOL) examplesPluginIsLoaded
+{
+  BOOL plugin = [self pluginIsLoaded:EXAMPLE_DB_KEY];  
+  return plugin;
+}
+
+#pragma mark -
+
+
 //! Gets array of dictionaries with all info about loaded plugins
 - (NSArray*) loadedPlugins
 {
@@ -459,13 +463,6 @@
 	return [self _plugins:_downloadedPlugins];
 }
 
-
-//! Gets array of dictionaries with all info about available plugins
-/*- (NSArray*) allAvailablePlugins
-{
-  return [self _plugins:_availablePlugins];
-}
-*/
 
 //! Gets array of dictionaries with available plugins that are not loaded
 - (NSArray*) availablePlugins
@@ -775,5 +772,7 @@
 }
 
 #pragma mark -
+
+NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 
 @end

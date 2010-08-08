@@ -36,7 +36,7 @@ const NSInteger KSegmentedTableHeader = 100;
     _currentResultArray = nil;
     
     // Register an observer for the example sentences
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:@"pluginDidInstall" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   }
   return self;
 }

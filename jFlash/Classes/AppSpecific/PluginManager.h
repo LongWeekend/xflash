@@ -17,6 +17,8 @@
 #define LWE_AVAILABLE_PLUGIN_PLIST	@"availablePluginForDownload.plist"
 #define LWE_DOWNLOADED_PLUGIN_PLIST	@"downloadedPlugin.plist"
 
+extern NSString * const LWEPluginDidInstall;
+
 //! Handles downloaded plugins' installation and versioning
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
 {
