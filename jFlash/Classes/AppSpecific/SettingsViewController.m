@@ -392,7 +392,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 	
 	//TODO: Please put the Localized string in. Thanks
 	//This is to set up the very top row and section in the settings table view.
-	NSArray *newUpdateNames = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d New Update%@ Available", newAvailableUpdate, (newAvailableUpdate>1) ? @"s" : @""], nil];
+	NSArray *newUpdateNames = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d Update%@ Available", newAvailableUpdate, (newAvailableUpdate>1) ? @"s" : @""], nil];
   NSArray *newUpdateKeys = [NSArray arrayWithObjects:APP_NEW_UPDATE,nil];
   NSArray *newUpdateArray = [NSArray arrayWithObjects:newUpdateNames,newUpdateKeys, [NSString stringWithFormat:@"Available Update%@", (newAvailableUpdate>1) ? @"s" : @""], nil];
 	

@@ -175,7 +175,8 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 #pragma mark Generic Modal Pop-ups and dismissal. 
 
 /**
- * Show Modal method that will call the show modal view controller private method. the notification user info will determine whether it will be animated, and what view controller to view. 
+ * Show Modal method that will call the show modal view controller private method.
+ * the notification user info will determine whether it will be animated, and what view controller to view. 
  */
 - (void)showModal:(NSNotification *)notification
 {
@@ -186,7 +187,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 		//The user info will likely to has these value. controller and animated. 
 		//The default animated is YES, so if its not specified, it will be animated. 
 		UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
-		BOOL animated = [[dict objectForKey:@"animated"] isEqualToString:@"NO"] ? NO : YES;
+		BOOL animated = [[dict objectForKey:@"animated"] isEqualToString:@"NO"];
 		[self _showModalWithViewController:vc useNavController:animated];		
 	}
 	else 
@@ -201,7 +202,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void)dismissModal:(NSNotification *)notification
 {
 	//if the animated key is not specified in the user info, it will be animated. 
-	BOOL animated = [[[notification userInfo] objectForKey:@"animated"] isEqualToString:@"NO"] ? NO : YES;
+	BOOL animated = [[[notification userInfo] objectForKey:@"animated"] isEqualToString:@"NO"];
 	[[self tabBarController] dismissModalViewControllerAnimated:animated];
 }
 
