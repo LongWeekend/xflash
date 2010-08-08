@@ -24,8 +24,19 @@
   [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d*", [settings integerForKey:APP_MAX_STUDYING]]];
-  [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d", [[levelDetails objectAtIndex:6] intValue]]];
+  
+  NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
+  NSInteger totalWords = [[levelDetails objectAtIndex:6] intValue];
+  if (totalWords > maxStudying)
+  {
+    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d*",maxStudying]];
+    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+  }
+  else
+  {
+    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+  }    
 }
 
 - (void)setStreakLabel
@@ -57,7 +68,8 @@
   
   NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
   int pbOrigin = 203;
-  for (i = 0; i < 6; i++) {  
+  for (i = 0; i < 6; i++)
+  {  
     PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     progressView.progress = [[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue];
@@ -77,20 +89,6 @@
   }
 }
 
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-
-- (void)viewDidUnload
-{
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
 
 
 - (IBAction) dismiss

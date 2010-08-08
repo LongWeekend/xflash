@@ -275,6 +275,7 @@
   numRight = 0;
   numWrong = 0;
   numViewed = 0;
+  
   [percentCorrectLabel setText:percentCorrectLabelStartText];
   [moodIcon updateMoodIcon:100.0f];
   
@@ -442,17 +443,15 @@
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
 	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
+  progressView.levelDetails = [self getLevelDetails];
   progressView.rightStreak = currentRightStreak;
   progressView.wrongStreak = currentWrongStreak;
-  progressView.levelDetails = [self getLevelDetails];
-  
-  [self.navigationController pushViewController:progressView animated:NO];
-  [self.view addSubview:progressView.view];
-  
   progressView.currentStudySet.text = currentCardSet.tagName;
   progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
   progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
   progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
+  [self.navigationController pushViewController:progressView animated:NO];
+  [self.view addSubview:progressView.view];
 }
 
 #pragma mark UI updater convenience methods
