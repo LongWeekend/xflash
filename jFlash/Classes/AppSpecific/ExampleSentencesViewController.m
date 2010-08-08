@@ -65,10 +65,48 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
   sentencesWebView.backgroundColor = [UIColor clearColor];
   [self.sentencesWebView shutOffBouncing];
+  
+  // What version of the example sentence plugin are we using?  If 1.1, it's old.
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  NSString *version = [pm versionForLoadedPlugin:EXAMPLE_DB_KEY];
+  if ([version isEqualToString:@"1.1"])
+  {
+    useOldPluginMethods = YES;
+    // I want to know if someone updated their example sentence version
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+  }
+  else
+  {
+    useOldPluginMethods = NO;
+  }
 }
+
+
+#pragma mark -
+#pragma mark Private
+
+/**
+ * Callback for when a plugin is installed.  
+ * If it's the example sentence DB, update the version
+ * of this controller so we know which methods to use
+ * (1.1 or 1.2)
+ */
+- (void) _pluginDidInstall:(NSNotification*)aNotification
+{
+  NSDictionary *dict = [aNotification userInfo];
+  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  {
+    NSString *version = [dict objectForKey:@"plugin_version"];
+    if (![version isEqualToString:@"1.1"])
+    {
+      useOldPluginMethods = NO;
+      [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
+    }
+  }
+}
+
 
 #pragma mark -
 #pragma mark Core Methods
@@ -246,28 +284,17 @@
 #pragma mark -
 #pragma mark Class Plumbing
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-    [sentencesWebView release];
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
+  [sentencesWebView release];
 	[sampleDecomposition release];
-    // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
-    [super dealloc];
+  // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
+  [super dealloc];
 }
 
 
 @end
      
-NSString  *exampleSentencesViewWillSetupNotification = @"exampleSentencesViewWillSetupNotification";
-NSString  *exampleSentencesViewDidSetupNotification = @"exampleSentencesViewDidSetupNotification";
+NSString * const exampleSentencesViewWillSetupNotification = @"exampleSentencesViewWillSetupNotification";
+NSString * const exampleSentencesViewDidSetupNotification = @"exampleSentencesViewDidSetupNotification";

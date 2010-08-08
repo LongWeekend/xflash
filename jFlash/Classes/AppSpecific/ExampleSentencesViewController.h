@@ -28,6 +28,8 @@ typedef enum
   
   IBOutlet UIWebView *sentencesWebView;
   NSMutableDictionary *sampleDecomposition;
+  
+  BOOL useOldPluginMethods;
 }
 
 - (void) setup;
@@ -44,6 +46,6 @@ typedef enum
 @end
 
 //* Notification names
-extern NSString  *exampleSentencesViewWillSetupNotification;
-extern NSString  *exampleSentencesViewDidSetupNotification;
+extern NSString * const exampleSentencesViewWillSetupNotification;
+extern NSString * const exampleSentencesViewDidSetupNotification;
 
