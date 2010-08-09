@@ -183,6 +183,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 		//The user info will likely to has these value. controller and animated. 
 		//The default animated is YES, so if its not specified, it will be animated. 
 		UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
+		//TODO: Check THIS! SERIOUS PROBLEM????
 		BOOL animated = [[dict objectForKey:@"animated"] isEqualToString:@"NO"];
 		[self _showModalWithViewController:vc useNavController:animated];		
 	}

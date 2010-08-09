@@ -49,13 +49,17 @@
 //! Moves the view, so the keyboard is not on top of the text field
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-	self.navigationItem.leftBarButtonItem = _doneBtn;
 	//TODO: Calibrate this again
 	if (textField == passwordTxt)
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-80) withInterval:0.5f];
 	else if (textField == unameTxt)
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-30) withInterval:0.5f];
 	return YES;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+	self.navigationItem.leftBarButtonItem = _doneBtn;
 }
 
 //! Bring back the cancel button, after done editing the text box. (For cancelling authentication)
@@ -79,6 +83,11 @@
 //! This is the method called when authentication is failing. Either caused by the server, or the wrong username and password
 - (void)didFailAuthentication:(NSError *)error
 {
+	if (_lv != nil)
+	{
+		[_lv remove];
+		_lv = nil;
+	}
 	//Pop up an alert message for user, telling that the authentication is not successful.
 	UIAlertView *alert = [[UIAlertView alloc]
 						  initWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle") 
@@ -96,8 +105,17 @@
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
+	_lv = [SmallLoadingView loadingView:self.parentViewController.view 
+																							withText:@"Authenticating"];
+	[self performSelector:@selector(_performAuthentication) 
+						 withObject:nil
+						 afterDelay:0.0];
+}
+
+- (void)_performAuthentication
+{
 	[self.authEngine startXAuthProcessWithUsername:unameTxt.text 
-										  password:passwordTxt.text];
+																				password:passwordTxt.text];
 }
 
 //! IBAction for cancelling the authentication proccess, and report back to the auth engine that the authorization has just failed.

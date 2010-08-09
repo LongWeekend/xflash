@@ -334,9 +334,9 @@
 {
 	LWE_LOG(@"Presenting the modal");
 	NSDictionary *dict = [[NSDictionary alloc]
-						  initWithObjectsAndKeys:modalNavController, @"controller", nil];
+						  initWithObjectsAndKeys:modalNavController, @"controller", @"NO", @"animated", nil];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowTwitterModal" object:self userInfo:dict];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	[dict release];
 	LWE_LOG(@"Done Sending the notification");
 }

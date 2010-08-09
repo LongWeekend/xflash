@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "LWETXAuthViewProtocol.h"
+#import "SmallLoadingView.h"
 
 /**
  * This view controller is used for authenticating a user, with their username and password. 
@@ -27,12 +28,14 @@
 	
 @private
 	UIBarButtonItem *_cancelBtn;
+	SmallLoadingView *_lv;
 	UIBarButtonItem *_doneBtn;
 }
 
 - (IBAction)authenticateUser:(id)sender;
 
 - (void)_textFieldResign; 
+- (void)_performAuthentication;
 
 @property (nonatomic, assign) LWETwitterOAuth *authEngine;
 @property (nonatomic, retain) IBOutlet UITextField *unameTxt;
