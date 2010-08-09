@@ -196,10 +196,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] 
-														 currentThemeTintColor];
-	self.view.backgroundColor = [UIColor 
-								 colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 	
 	unameTxt.text = @"";
 	passwordTxt.text = @"";

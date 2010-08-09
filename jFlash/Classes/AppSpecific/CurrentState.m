@@ -184,10 +184,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) initializeSettings
 {
-  // We initialize the plugins manager
-  //TODO: this is not the best place for this?
-  [self setPluginMgr:[[PluginManager alloc] init]];
-
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
   // ADD OBSERVER FOR DB COPY!
@@ -224,6 +220,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   {
     [self setIsFirstLoad:NO];
   }
+  
+  // STEP 5
+  // We initialize the plugins manager
+  [self setPluginMgr:[[[PluginManager alloc] init] autorelease]];  
 }
 
 

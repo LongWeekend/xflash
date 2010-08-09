@@ -18,6 +18,11 @@
 #define LWE_DOWNLOADED_PLUGIN_PLIST	@"downloadedPlugin.plist"
 
 extern NSString * const LWEPluginDidInstall;
+extern NSString * const LWEPluginKeyKey;
+extern NSString * const LWEPluginNameKey;
+extern NSString * const LWEPluginVersionKey;
+extern NSString * const LWEPluginFilenameKey;
+extern NSString * const LWEPluginTargetPathKey;
 
 //! Handles downloaded plugins' installation and versioning
 @interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
@@ -38,30 +43,23 @@ extern NSString * const LWEPluginDidInstall;
 - (NSString*) versionForLoadedPlugin:(NSString*)key;
 - (NSArray*) availablePlugins;
 - (NSArray*) downloadedPlugins;
-//TODO: Rendy commented this out, cause this is abit ambigous, and it seems this method is not used anywhere.
-//- (NSArray*) allAvailablePlugins;
 - (NSDictionary*) availablePluginsDictionary;
 
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (BOOL)isTimeForCheckingUpdate;
-- (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify;
+- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;
 - (void)_removeFromAvailableDownloadForPlugin:(NSString *)pluginKey;
 - (NSString *)_checkWhetherAnUpdate:(NSString *)path;
-- (double)_versionInMainDb:(FMDatabase *)db forDbName:(NSString *)dbName;
 - (void)_registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;
 - (void)_sendUpdateBadgeNotification:(NSNumber *)badgeNumber;
 - (void)_initAvailableForDownloadPluginsList;
 - (void)_initDownloadedPluginsList;
 
-// Should be subclassed - TODO
-- (BOOL) examplesPluginIsLoaded;
-- (BOOL) searchPluginIsLoaded;
-
-
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 
 @property (nonatomic, readonly) NSDictionary *availableForDownloadPlugins;
+@property (nonatomic, readonly) NSMutableDictionary *loadedPlugins;
 
 @end
