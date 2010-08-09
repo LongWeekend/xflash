@@ -22,4 +22,5 @@
   #import "LWEUITableUtils.h"
   #import "LWEViewAnimationUtils.h"
   #import "LWENetworkUtils.h"
+  #import "LWEUIAlertView.h"
 #endif
