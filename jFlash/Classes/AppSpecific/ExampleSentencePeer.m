@@ -15,7 +15,6 @@
  */
 @implementation ExampleSentencePeer
 
-
 /**
  * Returns a mutable array of ExampleSentence objects based on custom SQL
  * \param sql SQL string used to return the ExampleSentence objects
@@ -73,12 +72,23 @@
 
 /**
  * Returns a boolean YES if example sentences exist for a given card id. NO if none exist/
+ * If a card_sentence_link table record's should_show value is 0, this will return NO even if there is a link
  */
-+ (BOOL) sentencesExistForCardId: (NSInteger)cardId
++ (BOOL) sentencesExistForCardId: (NSInteger)cardId showAll:(BOOL)showAll
 {
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d LIMIT 1", cardId];
+  NSString *sql = nil;
+  if (showAll)
+  {
+    // Version 1.2 example sentences DB
+    sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d AND should_show = '1' LIMIT 1", cardId];
+  }
+  else
+  {
+    // Version 1.1 example sentences DB
+    sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d LIMIT 1", cardId];
+  }
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
+  FMResultSet *rs = [db executeQuery:sql];
   [sql release];
   if ([rs next])
   {
@@ -118,72 +128,7 @@
   NSMutableArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
   [sql release];
   return exampleSentences;
-/*  
-  
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
-  NSString* sql;
-  FMResultSet *rs;
-  NSString* keywordWildcard;
-  
-  if (!slowSearch)
-  {
-    int queryLimit = 100;
-    int queryLimit2;
-    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
-    
-    // Do the search using SQLite FTS (PTAG results)
-    sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
-           "ORDER BY c.headword", keywordWildcard, queryLimit];
-    rs = [[db dao] executeQuery:sql];
-    int cardListCount = 0;
-    while ([rs next])
-    {
-      cardListCount++;
-      Card* tmpCard = [[[Card alloc] init] autorelease];
-      [tmpCard hydrate:rs];
-      [cardList addObject: tmpCard];
-    }
-    
-    if(cardListCount < queryLimit)
-      queryLimit2 = (queryLimit-cardListCount)+queryLimit;
-    else
-      queryLimit2 = queryLimit;
-    
-    // Do the search using SQLite FTS (NON-PTAG results)
-    sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
-           "ORDER BY c.headword", keywordWildcard, queryLimit2];
-    rs = [[db dao] executeQuery:sql];
-    while ([rs next]) {
-      Card* tmpCard = [[[Card alloc] init] autorelease];
-      [tmpCard hydrate:rs];
-      [cardList addObject: tmpCard];
-    }
-    [rs close];
-  }
-  else
-  {
-    // Do slow substring match (w/ ASTERISK)
-    keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
-    sql = [NSString stringWithFormat:@""
-           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
-           "ORDER BY c.headword", keywordWildcard, 200];
-    rs = [[db dao] executeQuery:sql];
-    while ([rs next])
-    {
-      Card* tmpCard = [[[Card alloc] init] autorelease];
-      [tmpCard hydrate:rs];
-      [cardList addObject: tmpCard];
-    }
-    [rs close];
-  }
-  
-	return cardList;*/
+
 }
 
 @end

@@ -17,7 +17,7 @@
 + (ExampleSentence*) retrieveExampleSentenceByPK: (NSInteger)sentenceId;
 + (NSMutableArray*) retrieveSentencesWithSQL:(NSString*)sql hydrate:(BOOL)hydrate;
 + (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId;
-+ (BOOL) sentencesExistForCardId: (NSInteger)cardId;
++ (BOOL) sentencesExistForCardId: (NSInteger)cardId showAll:(BOOL)showAll;
 + (NSMutableArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch;
 
 @end

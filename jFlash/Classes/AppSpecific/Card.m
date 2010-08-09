@@ -105,8 +105,11 @@
 }
 
 
-/** Returns YES if a card has example sentences attached to it */
-- (BOOL) hasExampleSentences
+/**
+ * Returns YES if a card has example sentences attached to it
+ * \param newVersion - If YES, uses 1.2 version Sql, if NO, uses 1.1 version
+ */
+- (BOOL) hasExampleSentences:(BOOL)newVersion
 {
   // Get settings to determine what data versio we are on
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -121,7 +124,7 @@
   }
   else 
   {
-    return [ExampleSentencePeer sentencesExistForCardId:[self cardId]];
+    return [ExampleSentencePeer sentencesExistForCardId:[self cardId] showAll:newVersion];
   }
 }
 

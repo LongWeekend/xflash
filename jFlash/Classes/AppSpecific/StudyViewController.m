@@ -148,7 +148,16 @@
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
 - (void) _setPageControlVisibility
 {
-  if ([[self currentCard] hasExampleSentences] == NO)
+  // Get plugin version
+  // TODO: make this less hack-y
+  BOOL isNewVersion = NO;
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
+  {
+    isNewVersion = YES;
+  }
+  
+  if ([[self currentCard] hasExampleSentences:isNewVersion] == NO)
   {
     [[self pageControl] setHidden:YES];    
   }
@@ -163,8 +172,17 @@
 {
   scrollView.pagingEnabled = YES;
   scrollView.scrollEnabled = YES;
+
+  // Get plugin version
+  // TODO: make this less hack-y
+  BOOL isNewVersion = NO;
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
+  {
+    isNewVersion = YES;
+  }  
   
-  if ([[self currentCard] hasExampleSentences] == NO)
+  if ([[self currentCard] hasExampleSentences:isNewVersion] == NO)
   {
     scrollView.pagingEnabled = NO;
     scrollView.scrollEnabled = NO;
