@@ -37,7 +37,7 @@
 - (NSString*) meaningWithoutMarkup;
 - (NSString*) combinedReadingForSettings;
 - (NSString*) readingBasedonSettingsForExpandedSampleSentences;
-- (BOOL) hasExampleSentences;
+- (BOOL) hasExampleSentences:(BOOL)newVersion;
 
 @property (nonatomic) BOOL isBasicCard;
 @property (nonatomic) NSInteger cardId;
