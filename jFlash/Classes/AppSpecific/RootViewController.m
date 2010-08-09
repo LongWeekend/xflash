@@ -66,7 +66,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  loadingView = [LoadingView loadingViewInView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
+  loadingView = [SmallLoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
 }
 
 
@@ -75,7 +75,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 {
   if (loadingView)
   {
-    [loadingView removeView];
+    [loadingView remove];
   }
 }
 
