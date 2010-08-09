@@ -246,7 +246,6 @@
 			for (Card *c in arrayOfCards)
 			{
 				cardHTML = [cardHTML stringByAppendingFormat:@"<tr>"];
-				LWE_LOG(@"Head Word : %@", headWord);
 				if (![[c headword] isEqualToString:headWord])
 				{
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>", [c headword]]; 
@@ -270,7 +269,6 @@
 		}
 		
 		//NSDate *start = [NSDate date];
-		LWE_LOG(@"Card HTML : %@", cardHTML);
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
@@ -287,7 +285,8 @@
 
 - (void)dismissAddToSetModal
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:nil];
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"YES" forKey:@"animated"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:userInfo];
 }
 
 #pragma mark -
