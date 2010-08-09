@@ -140,12 +140,11 @@
     for (ExampleSentence* sentence in sentences) 
     {
 			html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
-			//TODO: Change the Expand <dfn> tag to image?
       
       // Only put this stuff in HTML if we have example sentences 1.2
       if (!useOldPluginMethods)
       {
-        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
+        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>Readings</span></a><br/>", 
                 [sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
         html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
       }
@@ -224,9 +223,8 @@
 	{
 		//Close the expanded div. Return back the status of the expaned button
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ", sentenceID];
-		//TODO: Change the Expand tag to image?
 		//js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.src = '%@'; ", sentenceID, [imagePath]];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Expand'; ", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Readings'; ", sentenceID];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ", 
 			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
 		[webView stringByEvaluatingJavaScriptFromString:js];
@@ -256,7 +254,7 @@
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
 				}
 				//TODO: Change the add <dfn> tag to image?
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>[%@] <a href='%@/%d?id=%d' class='AddToSetAnchor'><dfn>Add</dfn></a></td>", 
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
 										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}

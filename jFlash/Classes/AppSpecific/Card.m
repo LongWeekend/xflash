@@ -74,7 +74,7 @@
   else
   {
     // Both together
-    combined_reading = [NSString stringWithFormat:@"%@\n%@", [self reading], [self romaji]];
+    combined_reading = [NSString stringWithFormat:@"%@ - %@", [self reading], [self romaji]];
   }
   
   return combined_reading;
