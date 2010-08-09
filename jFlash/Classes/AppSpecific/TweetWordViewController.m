@@ -71,10 +71,7 @@
 	self.navigationItem.rightBarButtonItem = _doneBtn;	
 	
 	//Move the view up so the keyboard doesn't block the input
-	//TODO: Calibrate the point after set everything up
-	[LWEViewAnimationUtils translateView:self.view 
-								 byPoint:CGPointMake(0,-70) 
-							withInterval:0.5f];
+	[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-105) withInterval:0.5f];
 }
 
 //! The characters left label will update based on this method.

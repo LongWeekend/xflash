@@ -25,6 +25,7 @@
 	IBOutlet UITextField *unameTxt;
 	IBOutlet UITextField *passwordTxt;
 	IBOutlet UIButton *authBtn;
+  IBOutlet UIButton *signupBtn;
 	
 @private
 	UIBarButtonItem *_cancelBtn;
@@ -33,6 +34,7 @@
 }
 
 - (IBAction)authenticateUser:(id)sender;
+- (IBAction) signupUser:(id)sender;
 
 - (void)_textFieldResign; 
 - (void)_performAuthentication;
@@ -41,5 +43,6 @@
 @property (nonatomic, retain) IBOutlet UITextField *unameTxt;
 @property (nonatomic, retain) IBOutlet UITextField *passwordTxt;
 @property (nonatomic, retain) IBOutlet UIButton *authBtn;
+@property (nonatomic, retain) IBOutlet UIButton *signupBtn;
 
 @end

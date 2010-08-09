@@ -16,6 +16,7 @@
 @synthesize unameTxt;
 @synthesize passwordTxt;
 @synthesize authBtn;
+@synthesize signupBtn;
 
 #pragma mark -
 #pragma mark UITextFieldDelegate
@@ -28,13 +29,9 @@
 	//the username text field is not empty, goes straight to the authentication.
 	//It makes the user not needed to click the authentication button.
 	//If its the username text field, move to password text field
-	if ((![unameTxt.text isEqualToString:@""]) && 
-		  (textField == passwordTxt))
+	if ((![unameTxt.text isEqualToString:@""]) && (textField == passwordTxt))
 	{
-		[LWEViewAnimationUtils translateView:self.view 
-									 byPoint:CGPointMake(0,0) 
-								withInterval:0.5f];
-
+		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 		[self performSelector:@selector(authenticateUser:)
 				   withObject:self 
 				   afterDelay:0.0];
@@ -51,9 +48,13 @@
 {
 	//TODO: Calibrate this again
 	if (textField == passwordTxt)
-		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-80) withInterval:0.5f];
+  {
+		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-75) withInterval:0.5f];
+  }
 	else if (textField == unameTxt)
-		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-30) withInterval:0.5f];
+  {
+		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-75) withInterval:0.5f];
+  }
 	return YES;
 }
 
@@ -105,17 +106,28 @@
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
-	_lv = [SmallLoadingView loadingView:self.parentViewController.view 
-																							withText:@"Authenticating"];
+	_lv = [SmallLoadingView loadingView:self.parentViewController.view withText:@"Logging In"];
 	[self performSelector:@selector(_performAuthentication) 
 						 withObject:nil
 						 afterDelay:0.0];
 }
 
+/**
+ * Jumps the user to the Twitter signup page
+ */
+- (IBAction) signupUser:(id)sender
+{
+  UIApplication *app = [UIApplication sharedApplication];
+  NSURL *url = [NSURL URLWithString:@"https://twitter.com/signup"];
+  [app openURL:url];
+}
+
+/**
+ * Does the actual authentication
+ */
 - (void)_performAuthentication
 {
-	[self.authEngine startXAuthProcessWithUsername:unameTxt.text 
-																				password:passwordTxt.text];
+	[self.authEngine startXAuthProcessWithUsername:unameTxt.text password:passwordTxt.text];
 }
 
 //! IBAction for cancelling the authentication proccess, and report back to the auth engine that the authorization has just failed.
@@ -176,7 +188,7 @@
 				  target:self 
 				  action:@selector(doneBtnTouchedUp:)];
 	
-	self.title = NSLocalizedString(@"Twitter Login", @"TweetWordXAuthController.NavBarTitle");
+	self.title = NSLocalizedString(@"Log In to Twitter", @"TweetWordXAuthController.NavBarTitle");
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 }
 
@@ -196,9 +208,7 @@
 
 - (void)viewDidUnload 
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
 	self.unameTxt = nil;
 	self.passwordTxt = nil;
 	self.authBtn = nil;
@@ -212,8 +222,7 @@
 	[authBtn release];
 	[_cancelBtn release];
 	[_doneBtn release];
-	
-    [super dealloc];
+  [super dealloc];
 }
 
 #pragma mark -
