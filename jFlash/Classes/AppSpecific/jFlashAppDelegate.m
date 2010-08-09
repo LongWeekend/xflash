@@ -124,9 +124,22 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
   LWE_LOG(@"Application did enter the background now");
-	LWE_LOG(@"Value plugin in the user setting %@", [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN]);
-	//TODO: Review this please, whether this is really important? is this an expensive operation?
-	[[NSUserDefaults standardUserDefaults] synchronize];
+  // Get current card from StudyViewController - this is REALLY BAD for coupling!
+  // TODO: put the current card into current state
+  StudyViewController* studyCtl = [rootViewController.tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+  
+  // Only freeze if we have a database
+  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
+  {
+    // Save current card, user, and set, update cache
+    CurrentState *state = [CurrentState sharedCurrentState];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
+    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
+    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
+    [settings synchronize];
+    [[state activeTag] freezeCardIds];
+  }
 }
 
 
@@ -145,8 +158,9 @@ void uncaughtExceptionHandler(NSException *exception) {
  */ 
 - (void) applicationWillTerminate:(UIApplication *)application
 {
+  // Just pass it on to the new iOS4 delegate
   LWE_LOG(@"Application will terminate");
-  [rootViewController applicationWillTerminate:application];
+  [self applicationDidEnterBackground:application];
 }
 
 //! Standard dealloc
