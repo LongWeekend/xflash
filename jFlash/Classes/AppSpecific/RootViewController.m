@@ -316,30 +316,6 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 
 # pragma mark Housekeeping
 
-/**
- * Delegate method of UIApplication (via AppDelegate); called on shutdown
- * TODO: review why this happens here? MMA 6/5/2010
- */
-- (void) applicationWillTerminate:(UIApplication*)application
-{
-  // Get current card from StudyViewController
-  StudyViewController* studyCtl = [tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
-  
-  // Only freeze if we have a database
-  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
-  {
-    // Save current card, user, and set, update cache
-    CurrentState *state = [CurrentState sharedCurrentState];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
-    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
-    [settings synchronize];
-    [[state activeTag] freezeCardIds];
-  }
-}
-
-
 - (void)dealloc
 {
   // Unobserve notifications
