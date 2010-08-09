@@ -470,6 +470,8 @@
   progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
   [self.navigationController pushViewController:progressView animated:NO];
   [self.view addSubview:progressView.view];
+  // No release here because the progressView releases itself later
+  // Not exactly sexy code but it is correct - should be refactored - MMA 8/9/2010
 }
 
 #pragma mark UI updater convenience methods

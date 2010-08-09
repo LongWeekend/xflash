@@ -93,6 +93,7 @@
 
 - (IBAction) dismiss
 {
+  // TODO: MMA 8/9/2010 - this is weird that we are releasing ourself
   [self.view removeFromSuperview];
   [self release];
 }
