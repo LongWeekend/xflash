@@ -44,10 +44,10 @@ extern NSString * const LWEPluginTargetPathKey;
 - (NSArray*) availablePlugins;
 - (NSArray*) downloadedPlugins;
 - (NSDictionary*) availablePluginsDictionary;
++ (BOOL)isTimeForCheckingUpdate;
+- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
-- (BOOL)isTimeForCheckingUpdate;
-- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;
 - (void)_removeFromAvailableDownloadForPlugin:(NSString *)pluginKey;
 - (NSString *)_checkWhetherAnUpdate:(NSString *)path;
@@ -60,6 +60,5 @@ extern NSString * const LWEPluginTargetPathKey;
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 
 @property (nonatomic, readonly) NSDictionary *availableForDownloadPlugins;
-@property (nonatomic, readonly) NSMutableDictionary *loadedPlugins;
 
 @end

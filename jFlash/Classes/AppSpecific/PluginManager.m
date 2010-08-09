@@ -13,7 +13,6 @@
 @implementation PluginManager
 
 @synthesize availableForDownloadPlugins = _availableForDownloadPlugins;
-@synthesize loadedPlugins = _loadedPlugins;
 
 /**
  * Customized initializer - the available plugin dictionary is defined in this method
@@ -84,10 +83,11 @@
 			}
 			
 			dict = [[NSDictionary alloc] initWithDictionary:md];
-			_availableForDownloadPlugins = dict;
-			[self performSelector:@selector(_setAvailableForDownloadPlugins:) withObject:dict afterDelay:2];
-			[dict release];
 			[md release];
+
+//			_availableForDownloadPlugins = dict;
+      [self _setAvailableForDownloadPlugins:dict];
+			[dict release];
 		}
 	}
 	else 
@@ -621,7 +621,7 @@
 	//Update the badge in the settings. 
 	LWE_LOG(@"Debug : New %d update(s)",[dict count]);
 	NSNumber *newUpdate = [NSNumber numberWithInt:[dict count]];
-	[self performSelector:@selector(_sendUpdateBadgeNotification:) withObject:newUpdate afterDelay:0.0f];
+	[self performSelector:@selector(_sendUpdateBadgeNotification:) withObject:newUpdate afterDelay:3.0f];
 }
 
 /**

@@ -130,7 +130,7 @@
   if([datasource respondsToSelector:@selector(currentCard)])
   {    
     // Get all sentences out - extract this
-    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId]];
+    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId] showAll:!useOldPluginMethods];
 		
 		NSString* html = [NSString stringWithFormat: @"<div class='readingLabel'>%@</div>", [[datasource currentCard] combinedReadingForSettings]];    
     html = [html stringByAppendingFormat:@"<h2 class='headwordLabel'>%@</h2>", [[datasource currentCard] headword]];
@@ -141,9 +141,15 @@
     {
 			html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
 			//TODO: Change the Expand <dfn> tag to image?
-			html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
-				[sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
-			html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
+      
+      // Only put this stuff in HTML if we have example sentences 1.2
+      if (!useOldPluginMethods)
+      {
+        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><dfn>Expand</dfn></a><br/>", 
+                [sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
+        html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
+      }
+      
 			html = [html stringByAppendingFormat:@"<div class='lowlight'>%@</div>", [sentence sentenceEn] ];
 			html = [html stringByAppendingFormat:@"</li>"];
 			counter++;
