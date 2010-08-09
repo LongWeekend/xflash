@@ -281,17 +281,25 @@
 /**
  * Returns an array containng cardId integers that are linked to the sentence
  * \param sentenceId Primary key of the sentence to look up cards for
+ * \param showAll Determines whether to get all links or just trimmed links
  *
  * The difference with the method above is the query performed. This should be faster since it only asks for the data required. 
  *
  */
-+ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
++ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId showAll:(BOOL)showAll
 {	
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = 1", sentenceId];
+	NSString *sql;
+  if (showAll)
+  {
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+  }
+  else
+  {
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
+  }
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-	[sql release];
+	FMResultSet *rs = [db executeQuery:sql];
+  [sql release];
 	
 	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
 	while ([rs next])
@@ -306,6 +314,9 @@
 
 	return cardList; 
 }
+
+
+
 
 
 /**

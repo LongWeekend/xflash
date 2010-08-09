@@ -192,6 +192,9 @@
 {
 	LWE_LOG(@"Add to set with card ID : %@", cardID);
 	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
+  
+  UINavigationController *tmpNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
+  [tmpVC release];
 	
 	// Set up DONE button
 	UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") 
@@ -200,11 +203,11 @@
 															   action:@selector(dismissAddToSetModal)];
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
 	NSDictionary *dict = [[NSDictionary alloc]
-						  initWithObjectsAndKeys:tmpVC, @"controller", @"YES", @"animated", nil];
+						  initWithObjectsAndKeys:tmpNavController, @"controller", @"YES", @"animated", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	
 	[doneBtn release];
-	[tmpVC release];
+	[tmpNavController release];
 	[dict release];
 }
 
@@ -231,7 +234,7 @@
 		if (cardHTML == nil)
 		{
 			NSDate *start = [NSDate date];
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue] showAll:!useOldPluginMethods];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
 			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)

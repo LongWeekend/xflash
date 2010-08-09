@@ -14,7 +14,7 @@
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr, isUpdatable, isFirstLoadAfterNewVersion;
+@synthesize isFirstLoad, pluginMgr, isUpdatable;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -85,7 +85,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
 	LWE_LOG(@"Program runs, and creating the default settings");
 	NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
-	NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_CURRENT_VERSION,nil];
+	NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_VERSION_1_1,nil];
 	for (int i = 0; i < [keys count]; i++)
 	{
 		[settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
@@ -115,7 +115,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // Update plugins so we have that we have that information
 	LWE_LOG(@"This is the updated setting from 1.0 to 1.1");
   [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
-  [settings setValue:JFLASH_VERSION_1_0 forKey:APP_DATA_VERSION];     
+  [settings setValue:JFLASH_VERSION_1_0 forKey:APP_DATA_VERSION];
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];    
@@ -154,8 +154,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 	LWE_LOG(@"Update from 1.1 to 1.2 Yatta!");
 	[settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];                    
 	
-	//TODO: Is this should be updated as well?
-	//[settings setValue:JFLASH_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
+  // Now change the app version and the data version
+	[settings setValue:JFLASH_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
+  [settings setValue:JFLASH_VERSION_1_2 forKey:APP_DATA_VERSION];
 }
 
 
@@ -200,36 +201,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   if ([self _needs10to11SettingsUpdate:settings])
   {
     [self _updateSettingsFrom10to11:settings];
-    [self setIsFirstLoadAfterNewVersion:YES];
-  }
-  else
-  {
-    // Normal execution, this is NO
-		LWE_LOG(@"Not updated to 1.1");
-    [self setIsFirstLoadAfterNewVersion:NO];
   }
 	
-  //STEP 1.1 In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
+  //STEP 2 In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
   //The plugin manager will have to look at the last time it gets updated, there is the list of the data
   if ([self _needs11to12SettingsUpdate:settings])
   {
 		LWE_LOG(@"Oops, we need update to 1.2 version");
 	  [self _updateSettingsFrom11to12:settings];
-	  [self setIsFirstLoadAfterNewVersion:YES];
-  }
-  else 
-  {
-		LWE_LOG(@"Not Updated to 1.2");
-		//TODO: Rendy, Figure what this is?
-		[self setIsFirstLoadAfterNewVersion:NO];
   }
   
-  // STEP 2 - is the data update-able?
-  // Let the version manager tell us if we are update-able
+  // STEP 3 - is the data update-able?  Let the version manager tell us
   [self setIsUpdatable:[VersionManager databaseIsUpdatable]];
 
-  // STEP 3 - is this first run after a fresh install?
-  // Do we need to freshly create settings?
+  // STEP 4 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];

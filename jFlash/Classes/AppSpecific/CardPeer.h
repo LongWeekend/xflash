@@ -24,7 +24,7 @@
 + (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
 + (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId;
-+ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceID;
++ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceID showAll:(BOOL)showAll;
 + (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch;
 @end

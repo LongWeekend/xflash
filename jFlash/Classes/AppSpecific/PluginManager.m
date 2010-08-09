@@ -126,6 +126,7 @@
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
 		NSArray *values = [_plugin allValues];
 		NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+    
 		for (NSDictionary *dict in values)
 		{
 			NSString *key = [dict objectForKey:@"plugin_key"];

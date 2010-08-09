@@ -45,6 +45,7 @@
   // Get the active database name from settings, compare to the current version.
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *dataVersion = [settings objectForKey:APP_DATA_VERSION];
+  LWE_LOG(@"Data version in settings plist is %@",dataVersion);
   if (dataVersion == nil)
   {
     // If dataVersion doesn't exist, this is a fresh install first load
