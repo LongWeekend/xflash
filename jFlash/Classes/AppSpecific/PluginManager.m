@@ -267,10 +267,7 @@
 			// Reattach with proper name and register
       if ([db attachDatabase:filePath withName:pluginKey])
       {		  
-				//RNEDY - New Comment : If the user still has version 1.1, and there is version 1.2 available for download, 
-				//the example view sentences SHOULD display the "Download" view, otherwise, display the sample sentences view.
-				if ( (![_availableForDownloadPlugins objectForKey:pluginKey]) || (afterDownload))
-					[_loadedPlugins setObject:pluginForFilename forKey:pluginKey];
+				[_loadedPlugins setObject:pluginForFilename forKey:pluginKey];
         return pluginKey;
       }
       else
@@ -536,8 +533,6 @@
 				if (pluginVersion > installedVersion)
 				{
 					needUpdate = YES;
-					LWE_LOG(@"Detaching the old database plugin");
-					[_loadedPlugins removeObjectForKey:pluginKey];
 				}
 			}
 			//The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 

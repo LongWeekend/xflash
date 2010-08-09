@@ -116,14 +116,17 @@
   
   if([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]) // version 1 doesn't understand this so say NO
   {
+		LWE_LOG(@"JFlash Version 1.0?"); 
     return NO;
   }
   else if (![[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
   {
+		LWE_LOG(@"Example Sentences plugin is loaded");
     return YES;
   }
   else 
   {
+		LWE_LOG(@"Example sentences show all?");
     return [ExampleSentencePeer sentencesExistForCardId:[self cardId] showAll:newVersion];
   }
 }
