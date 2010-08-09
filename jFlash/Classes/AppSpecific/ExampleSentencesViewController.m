@@ -255,7 +255,7 @@
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
 				}
 				//TODO: Change the add <dfn> tag to image?
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>[%@] <a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
 										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}
