@@ -47,7 +47,6 @@ extern NSString * const LWEPluginDidInstall;
 - (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;
 - (void)_removeFromAvailableDownloadForPlugin:(NSString *)pluginKey;
-- (BOOL)_checkNetworkToURL:(NSURL *)url;
 - (NSString *)_checkWhetherAnUpdate:(NSString *)path;
 - (double)_versionInMainDb:(FMDatabase *)db forDbName:(NSString *)dbName;
 - (void)_registerPlugin:(NSString*)pluginKey withFilename:(NSString*)filename;

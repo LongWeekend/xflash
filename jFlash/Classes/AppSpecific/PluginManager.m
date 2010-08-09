@@ -64,7 +64,7 @@
 	//TODO: Rendy, please review this again, it works, but is it really necessary? or is there any more ellegant way to do it?
 	else if ([LWEFile fileExists:[LWEFile createBundlePathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST]])
 	{
-		if (![self _checkNetworkToURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]])
+		if (![LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
 		{
 			LWE_LOG(@"Available plugin plist found in the bundle path. Because, by the time of checking, the device is not connected to the internet.");
 			NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
@@ -87,8 +87,7 @@
 				}
 			}
 			
-			dict = [[NSDictionary alloc] 
-							initWithDictionary:md];
+			dict = [[NSDictionary alloc] initWithDictionary:md];
 			_availableForDownloadPlugins = dict;
 			[self performSelector:@selector(_setAvailableForDownloadPlugins:) withObject:dict afterDelay:2];
 			[dict release];
@@ -530,7 +529,7 @@
 //!Check the new plugin over the website, and looks whether it has a new stuff
 - (void)checkNewPluginwithNotificationForFailNetwork:(BOOL)doesNeedNotify
 {	
-	if ([self _checkNetworkToURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]])
+	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
 	{
 		//Set up the variable to be the 
 		NSMutableDictionary *awaitsUpdatePlugins = nil;
@@ -647,20 +646,6 @@
 	return result;
 }
 
-/**
- * This method is a wrapper method to check the reachability, whether the phone now is connnected to internet, before performing any internet request. 
- * REFACTOR: Don't we already have this in Network Utils?  (MMA 8/7/2010)
- */
-- (BOOL)_checkNetworkToURL:(NSURL *)url
-{
-	Reachability *reachability = [Reachability reachabilityWithHostName:[url host]];
-	NetworkStatus status = [reachability currentReachabilityStatus];
-	if (status == NotReachable)
-	{
-		return NO;
-	}
-	return YES;
-}
 
 /**
  * This is the handy function to return the version of specific key of the attached database in the main
