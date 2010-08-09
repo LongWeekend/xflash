@@ -54,6 +54,8 @@
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */; };
 		490CFBB3120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */; };
+		490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */; };
+		490CFBF6120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */; };
 		4919744011F83A13001A30D7 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743211F83A13001A30D7 /* NSObject+SBJSON.m */; };
 		4919744111F83A13001A30D7 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743411F83A13001A30D7 /* NSString+SBJSON.m */; };
 		4919744211F83A13001A30D7 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4919743611F83A13001A30D7 /* SBJsonBase.m */; };
@@ -484,6 +486,8 @@
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
 		490CFBB0120FE8CB00C2BC4E /* LWENetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWENetworkUtils.h; path = Reusable/LWE/LWENetworkUtils.h; sourceTree = "<group>"; };
 		490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWENetworkUtils.m; path = Reusable/LWE/LWENetworkUtils.m; sourceTree = "<group>"; };
+		490CFBF3120FF5F100C2BC4E /* LWEUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUIAlertView.h; path = Reusable/LWE/LWEUIAlertView.h; sourceTree = "<group>"; };
+		490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEUIAlertView.m; path = Reusable/LWE/LWEUIAlertView.m; sourceTree = "<group>"; };
 		4919743011F83A13001A30D7 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = Classes/JSON.h; sourceTree = "<group>"; };
 		4919743111F83A13001A30D7 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "Classes/NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		4919743211F83A13001A30D7 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJSON.m"; path = "Classes/NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -1245,6 +1249,8 @@
 				490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */,
 				917A5C1811AB80F700016BD2 /* LWESQLDebug.h */,
 				917A5C1911AB80F700016BD2 /* LWESQLDebug.m */,
+				490CFBF3120FF5F100C2BC4E /* LWEUIAlertView.h */,
+				490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */,
 				49B53E3211B105CF00A1119A /* LWEUILabelUtils.h */,
 				49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */,
 				49B53E3411B105CF00A1119A /* LWEUITableUtils.h */,
@@ -1940,6 +1946,7 @@
 				24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */,
 				24EA112812015EA10081CBBA /* ViewUtility.c in Sources */,
 				490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
+				490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2041,6 +2048,7 @@
 				4919744311F83A13001A30D7 /* SBJsonParser.m in Sources */,
 				4919744411F83A13001A30D7 /* SBJsonWriter.m in Sources */,
 				490CFBB3120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
+				490CFBF6120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

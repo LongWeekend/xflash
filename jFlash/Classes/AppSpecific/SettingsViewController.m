@@ -369,13 +369,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 - (void) webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
 {
   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to Connect",@"Network.UnableToConnect_AlertViewTitle")
-                                                message:NSLocalizedString(@"Please check your network connection and try again.",@"Network.UnableToConnect_AlertViewMessage")
-                                                delegate:self
-                                                cancelButtonTitle:nil
-                                                otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-  [alertView show];
-  [alertView release];
+  [LWEUIAlertView noNetworkAlertWithDelegate:self];
 }
 
 //! Turns off the network activity indicator
