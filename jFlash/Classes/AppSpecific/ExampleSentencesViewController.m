@@ -196,23 +196,18 @@
 - (void)_showAddToSetWithCardID:(NSString *)cardID
 {
 	LWE_LOG(@"Add to set with card ID : %@", cardID);
-	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
-  
-  UINavigationController *tmpNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
-  [tmpVC release];
-	
 	// Set up DONE button
 	UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") 
 																style:UIBarButtonItemStyleBordered 
 															   target:self 
 															   action:@selector(dismissAddToSetModal)];
+
+	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
-	NSDictionary *dict = [[NSDictionary alloc]
-						  initWithObjectsAndKeys:tmpNavController, @"controller", @"YES", @"animated", nil];
+	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:tmpVC, @"controller", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	
 	[doneBtn release];
-	[tmpNavController release];
 	[dict release];
 }
 

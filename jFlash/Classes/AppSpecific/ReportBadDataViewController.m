@@ -106,12 +106,8 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   // Do we have a bad, bad user?
   if (_userSelectedIssueType == -1)
   {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Issue Type Selected",@"ReportBadDataViewController.NoIssueSelected_AlertViewTitle")
-                                              message:NSLocalizedString(@"We need to know what's wrong before we can fix it!  Please tap the box on the top of this page to select an issue type.",@"ReportBadDataViewController.NoIssueSelected_AlertViewMessage")
-                                              delegate:self cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK")
-                                              otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Issue Type Selected",@"ReportBadDataViewController.NoIssueSelected_AlertViewTitle")
+                                       message:NSLocalizedString(@"We need to know what's wrong before we can fix it!  Please tap the box on the top of this page to select an issue type.",@"ReportBadDataViewController.NoIssueSelected_AlertViewMessage")];
     return;
   }
   

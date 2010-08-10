@@ -272,11 +272,8 @@ enum EntrySectionRows
   // First, determine if we are restricted
   if (_restrictedTagId == tmpTag.tagId)
   {
-    UIAlertView *msgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Apologies",@"AddTagViewController.Restricted_AlertViewTitle")
-                                               message:NSLocalizedString(@"To remove this card from this set, navigate back to the previous screen.  Swipe from left to right on any entry to remove it.",@"AddTagViewController.Restricted_AlertViewMessage")
-                                               delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-    [msgBox show];
-    [msgBox release];
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Apologies",@"AddTagViewController.Restricted_AlertViewTitle")
+                                       message:NSLocalizedString(@"To remove this card from this set, navigate back to the previous screen.  Swipe from left to right on any entry to remove it.",@"AddTagViewController.Restricted_AlertViewMessage")];
     return;
   }
   
@@ -293,11 +290,8 @@ enum EntrySectionRows
       if (tmpInt <= 1)
       {
         LWE_LOG(@"Last card in set");
-        UIAlertView* statusMsgBox = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
-                                                         message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")
-                                                         delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-        [statusMsgBox show];
-        [statusMsgBox release];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
+                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
         return;
       }
       // Success - but update counts

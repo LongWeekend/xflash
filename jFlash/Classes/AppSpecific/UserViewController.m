@@ -132,20 +132,14 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
   NSString* message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle")
-                                           message:message
-                                           delegate:self
-                                           cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
-                                           otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-  [alert show];
-  [alert release];
+  [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle") message:message delegate:self];
 }
 
 
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   // user activation confirmed 
-  if (buttonIndex == 1)
+  if (buttonIndex == LWE_ALERT_OK_BTN)
   {
     [self activateUserWithModal:[self selectedUserInArray]];
   }
@@ -177,14 +171,8 @@
     NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
     {
-      NSString* message = [NSString stringWithString:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
-                                               message:message
-                                               delegate:self
-                                               cancelButtonTitle:nil
-                                               otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-      [alert show];
-      [alert release];
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
+                                         message:NSLocalizedString(@"The default user can be edited, but not deleted.",@"UserViewController.CannotDelete_AlertViewMessage")];
       return;
     }
 

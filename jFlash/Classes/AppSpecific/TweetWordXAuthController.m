@@ -90,14 +90,8 @@
 		_lv = nil;
 	}
 	//Pop up an alert message for user, telling that the authentication is not successful.
-	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle") 
-						  message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.", @"TweetWordXAuthController.FailMsgMsg")
-						  delegate:self
-						  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
-						  otherButtonTitles:nil];
-	[alert show];
-	[alert release];
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Log In",@"TweetWordXAuthController.FailMsgTitle")
+                                     message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.", @"TweetWordXAuthController.FailMsgMsg")];
 }
 
 #pragma mark -
