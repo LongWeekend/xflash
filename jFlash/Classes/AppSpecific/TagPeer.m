@@ -47,9 +47,15 @@
 + (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
   [db executeUpdate:sql];
 	[sql release];
+
+  sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = count - 1 WHERE tag_id = %d",tagId];
+  [db executeUpdate:sql];
+  [sql release];
+  
   if ([db.dao hadError])
   {
     LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
@@ -133,9 +139,16 @@
 + (void) subscribe: (NSInteger) cardId tagId: (NSInteger) tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  // Insert tag link
 	NSString *sql  = [[NSString alloc] initWithFormat:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (%d,%d)",cardId,tagId];
   [db executeUpdate:sql];
 	[sql release];
+
+  // Update tag count
+	sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = count + 1 WHERE tag_id = %d",tagId];
+  [db executeUpdate:sql];
+  [sql release];
+
   if ([[db dao] hadError])
   {
     LWE_LOG(@"Err %d: %@", [[db dao] lastErrorCode], [[db dao] lastErrorMessage]);
