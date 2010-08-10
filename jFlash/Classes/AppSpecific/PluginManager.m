@@ -85,7 +85,8 @@
 			dict = [[NSDictionary alloc] initWithDictionary:md];
 			[md release];
 
-//			_availableForDownloadPlugins = dict;
+			//TODO: Rendy added this, and he forgot why he did it?
+			//_availableForDownloadPlugins = dict;
       [self _setAvailableForDownloadPlugins:dict];
 			[dict release];
 		}
