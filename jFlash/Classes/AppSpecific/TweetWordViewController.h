@@ -57,7 +57,6 @@
 
 //! Signs the user out of Twitter so they can sign in as a different user.
 - (IBAction) signUserOutOfTwitter:(id)sender;
-
 - (void)_resignTextFieldKeyboard;
 
 /**

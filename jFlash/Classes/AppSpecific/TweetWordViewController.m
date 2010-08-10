@@ -116,7 +116,6 @@
 	{
     _loadingView = nil;
 		self._twitterEngine = twitterEngine;
-		//self._twitterEngine.delegate = self;
 		self._tweetWord = tweetWord;
 	}
 	return self;
@@ -137,10 +136,11 @@
 				 target:self 
 				 action:@selector(_resignTextFieldKeyboard)];
   
+	//TODO
 	_cancelBtn = [[UIBarButtonItem alloc]
 				  initWithTitle:NSLocalizedString(@"Cancel", @"Global.Cancel")
 				  style:UIBarButtonItemStyleBordered 
-				  target:self.parentViewController 
+				  target:self.parentViewController
 				  action:@selector(dismissModalViewControllerAnimated:)];
 	
 	self.navigationItem.leftBarButtonItem = _cancelBtn;

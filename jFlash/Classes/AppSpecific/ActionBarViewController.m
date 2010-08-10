@@ -197,6 +197,7 @@
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
+		//[self performSelector:@selector(tweet) withObject:nil afterDelay:0];
 	  [self tweet];
   }
   // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
@@ -249,6 +250,7 @@
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
 	_twitterEngine.parentForUserAuthenticationView = vc;
+	LWE_LOG(@"changed the user for twitter with user id %@", idCurrentUser);
 	[_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
 	_twitterEngine.delegate = self;
 }
@@ -260,8 +262,9 @@
 {
   [self initTwitterEngine];
 	
-	if (_twitterEngine.loggedUser.isAuthenticated)
+	if ((_twitterEngine.loggedUser != nil) && (_twitterEngine.loggedUser.isAuthenticated))
 	{
+		LWE_LOG(@"It tries to open up the tweet this words controller");
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
 		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
@@ -338,7 +341,7 @@
   
 	[self performSelector:@selector(presentModal:) 
 			   withObject:twitterController 
-			   afterDelay:0];
+			   afterDelay:0.1f];
 	
 	[twitterController release];
 }
