@@ -52,7 +52,7 @@
   [db executeUpdate:sql];
 	[sql release];
 
-  sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = count - 1 WHERE tag_id = %d",tagId];
+  sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tagId];
   [db executeUpdate:sql];
   [sql release];
   
@@ -145,7 +145,7 @@
 	[sql release];
 
   // Update tag count
-	sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = count + 1 WHERE tag_id = %d",tagId];
+	sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = (count + 1) WHERE tag_id = %d",tagId];
   [db executeUpdate:sql];
   [sql release];
 

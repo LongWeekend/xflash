@@ -222,27 +222,38 @@
     LWE_LOG(@"Moving card Id %d From level %d to level %d",card.cardId,card.levelId,nextLevel);
     NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
 
-    // First do the remove
-    int countBeforeRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
-    LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
-    int countBeforeAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
-    LWE_LOG(@"Items in index to be added: %d", countBeforeAdd);
-    [[[self cardIds] objectAtIndex:card.levelId] removeObject:cardId];
-    int countAfterRemove = [[[self cardIds] objectAtIndex:card.levelId] count];
-
-    // Only do the add if remove was successful
-    //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
-    if (countBeforeRemove == (countAfterRemove + 1))
-    {
-      [[[self cardIds] objectAtIndex:nextLevel] addObject:cardId];
-    }
-    int countAfterAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
+    NSMutableArray *thisLevelCards = [[self cardIds] objectAtIndex:card.levelId];
+    NSMutableArray *nextLevelCards = [[self cardIds] objectAtIndex:nextLevel];
     
-    // Consistency checks
-    LWE_ASSERT((countAfterRemove+1) == countBeforeRemove);
-    LWE_ASSERT((countAfterAdd-1) == countBeforeAdd);
-    LWE_LOG(@"Items in removed: %d",countAfterRemove);
-    LWE_LOG(@"Items in added: %d",countAfterAdd);
+    // First do the remove
+    int countBeforeRemove = [thisLevelCards count];
+    int countBeforeAdd = [nextLevelCards count];
+    LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
+    LWE_LOG(@"Items in index to be added: %d", countBeforeAdd);
+
+    // Now do the remove
+    if ([thisLevelCards containsObject:cardId])
+    {
+      [thisLevelCards removeObject:cardId];
+      int countAfterRemove = [thisLevelCards count];
+
+      // Only do the add if remove was successful
+      //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
+      if (countBeforeRemove == (countAfterRemove + 1))
+      {
+        [nextLevelCards addObject:cardId];
+      }
+      int countAfterAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
+      // Consistency checks
+      LWE_ASSERT((countAfterRemove+1) == countBeforeRemove);
+      LWE_ASSERT((countAfterAdd-1) == countBeforeAdd);
+      LWE_LOG(@"Items in removed: %d",countAfterRemove);
+      LWE_LOG(@"Items in added: %d",countAfterAdd);
+    }
+    else
+    {
+      LWE_LOG(@"Card ID %d was not contained in the current tag's level cache for level %d - this is OK if you removed this card from the set!",card.cardId,card.levelId);
+    }
     [self cacheCardLevelCounts];
   }
 }
@@ -286,11 +297,11 @@
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel removeObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
+  [self cacheCardLevelCounts];
+
   // This needs to be here to stop a double decrement!! (first decremented here, then in SQL in TagPeer)
   // SQL in TagPeer just uses Count=count-1, so it is "stupid" about what the actual count is
-  // By decrementing here, it stops Tag from messing with the DB
-  cardCount = cardCount - 1;
-  [self cacheCardLevelCounts];
+  [self setCardCount:cardCount+1];
 }
 
 
@@ -303,11 +314,11 @@
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel addObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
+  [self cacheCardLevelCounts];
+  
   // This needs to be here to stop a double increment!! (first incremented here, then in SQL in TagPeer)
   // SQL in TagPeer just uses Count=count+1, so it is "stupid" about what the actual count is
-  // By incrementing here, it stops Tag from messing with the DB
-  cardCount = cardCount + 1;
-  [self cacheCardLevelCounts];
+  [self setCardCount:cardCount-1];
 }
 
 
