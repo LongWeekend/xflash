@@ -47,7 +47,7 @@
 	NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
 	[_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
   
-  _loadingView = [SmallLoadingView loadingView:self.view withText:@"Tweeting..."];
+  _loadingView = [SmallLoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
 }
 
 //! Sign out from the twitter engine.
@@ -116,7 +116,7 @@
 	{
     _loadingView = nil;
 		self._twitterEngine = twitterEngine;
-//    self._twitterEngine.delegate = self;
+		//self._twitterEngine.delegate = self;
 		self._tweetWord = tweetWord;
 	}
 	return self;
