@@ -36,7 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           [NSNumber numberWithFloat:0.105],@"G",
                           [NSNumber numberWithFloat:0.000],@"B",
                           @"cd4833",@"WEB_SELECTED",
-                          @"dfn{ background-color:orange; border-color:yellow; }",@"CSS",
+                          @"dfn, button { background-color:orange; border-color:yellow; }",@"CSS",
                           nil];
     
     // Defines the Blue Water theme tint values & CSS
@@ -48,7 +48,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                            [NSNumber numberWithFloat:0.337],@"G",
                            [NSNumber numberWithFloat:0.655],@"B",
                            @"4278b9",@"WEB_SELECTED",
-                           @"dfn{ background-color:lightsteelblue; border-color:white; }",@"CSS",
+                           @"dfn { background-color:lightsteelblue; border-color:white; }",@"CSS",
                            nil];
     
     
@@ -73,7 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
                           [NSNumber numberWithFloat:0.518],@"G",
                           [NSNumber numberWithFloat:0.635],@"B",
                           @"cbd6eb",@"WEB_SELECTED",
-                          @"dfn{ background-color:silver; border-color:darkslategray; }",@"CSS",
+                          @"dfn { background-color:silver; border-color:darkslategray; }",@"CSS",
                           nil];
 
 

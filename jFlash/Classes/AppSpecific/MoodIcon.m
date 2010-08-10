@@ -97,6 +97,10 @@
   [moodIconBtn setHidden:NO];
 }
 
+- (void) disableHH
+{
+  [moodIconBtn setHidden:YES];
+}
 
 //! Returns an image view with a happy HH based on the current theme
 + (UIImageView*) makeHappyMoodIconView
