@@ -199,7 +199,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void)dismissModal:(NSNotification *)notification
 {
 	//if the animated key is not specified in the user info, it will be animated. 
-	BOOL animated = [[[notification userInfo] objectForKey:@"animated"] isEqualToString:@"NO"];
+	BOOL animated = [[[notification userInfo] objectForKey:@"animated"] isEqualToString:@"YES"];
 	[[self tabBarController] dismissModalViewControllerAnimated:animated];
 }
 

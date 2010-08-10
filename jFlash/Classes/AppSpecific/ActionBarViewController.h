@@ -21,7 +21,7 @@
 #define SVC_ACTION_REPORT_BUTTON 2
 #define SVC_ACTION_ADDTOSET_BUTTON 0
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, LWETRequestDelegate>
+@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate>
 {
   IBOutlet id delegate;  
   
@@ -57,6 +57,9 @@
 
 // action sheet
 - (IBAction)showCardActionSheet;
+
+- (void) setupTwitterEngine;
+
 
 //we don't retain delegates
 @property (assign, nonatomic, readwrite) IBOutlet id delegate;

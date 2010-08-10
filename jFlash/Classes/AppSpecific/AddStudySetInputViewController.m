@@ -37,7 +37,6 @@
 
   [setNameTextfield becomeFirstResponder];
   setNameTextfield.returnKeyType = UIReturnKeyDone;
-  setNameTextfield.placeholder = NSLocalizedString(@"Type set name here",@"AddStudySetInputViewController.TypeNewSetName");
   setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
   setNameTextfield.backgroundColor = [UIColor clearColor];
   setNameTextfield.borderStyle = UITextBorderStyleRoundedRect;

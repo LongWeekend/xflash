@@ -107,9 +107,7 @@
 - (IBAction)authenticateUser:(id)sender
 {
 	_lv = [SmallLoadingView loadingView:self.parentViewController.view withText:@"Logging In"];
-	[self performSelector:@selector(_performAuthentication) 
-						 withObject:nil
-						 afterDelay:0.0];
+	[self performSelector:@selector(_performAuthentication) withObject:nil afterDelay:0.0];
 }
 
 /**

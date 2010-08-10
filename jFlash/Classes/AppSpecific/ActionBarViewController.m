@@ -203,26 +203,39 @@
 }
 
 #pragma mark -
+#pragma mark UIAlertView delegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  // LWE's twitter account
+  NSString *lweTwitterAccount = @"65012024";
+  [self setupTwitterEngine];
+  LWE_LOG(@"Following long weekend");
+  [_twitterEngine follow:lweTwitterAccount];
+}
+
+
+#pragma mark -
 #pragma mark Tweet Word Features
 
-- (void)tweet
+- (void) setupTwitterEngine
 {
 	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
 	LWE_LOG(@"Current User : %@", idCurrentUser);
 	
 	// Twitter Engine
-	// TODO: Initialize all of the twitter engine
-	TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
-											initWithNibName:@"TweetWordXAuthController" 
-											bundle:nil];
-	
+	// TODO: Initialize all of the twitter engine	
 	if ((!_twitterEngine) && (_twitterEngine == nil))
 	{
+    TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
+                                            initWithNibName:@"TweetWordXAuthController" 
+                                            bundle:nil];
 		_twitterEngine = [[LWETwitterEngine alloc] 
 						  initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
 						  privateKey:JFLASH_TWITTER_PRIVATE_KEY
 						  authenticationView:controller];
+    [controller release];
 	}
 	else 
 	{
@@ -234,7 +247,11 @@
 	_twitterEngine.parentForUserAuthenticationView = vc;
 	[_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
 	_twitterEngine.delegate = self;
-	[controller release];
+}
+
+- (void)tweet
+{
+  [self setupTwitterEngine];
 	
 	if (_twitterEngine.loggedUser.isAuthenticated)
 	{
@@ -285,7 +302,7 @@
 	
 	UIAlertView *alertView = [[UIAlertView alloc]
 							  initWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
-							  message:NSLocalizedString(@"We were unable to tweet this - did you retweet the same thing twice in a row?", @"ActionBarViewController.TweetFailureAlertMsg")
+							  message:NSLocalizedString(@"We were unable to tweet this - did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")
 							  delegate:nil 
 							  cancelButtonTitle:NSLocalizedString(@"OK", @"Global.OK") 
 							  otherButtonTitles:nil];
@@ -296,6 +313,9 @@
 	_twitterEngine = nil;
 }
 
+/**
+ * Did successfully auth - now see if they are following long_weekend
+ */
 - (void)didFinishAuth
 {
 	NSString *tweetWord = [self getTweetWord];
@@ -304,6 +324,16 @@
 												  twitterEngine:_twitterEngine 
 												  tweetWord:tweetWord];
 	
+  // Show an alert view asking if they want to follow LWE
+  UIAlertView *alertView = [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
+                            message:NSLocalizedString(@"Cool, you're logged in.  Want to follow Long Weekend?  We tweet interesting stuff.",@"ActionBarViewController.FollowLWEAlertMsg")
+                            delegate:self
+                            cancelButtonTitle:NSLocalizedString(@"No Thanks",@"Global.OfferNo")
+                            otherButtonTitles:NSLocalizedString(@"Sure",@"Global.OfferSure"),nil];
+  [alertView show];
+  [alertView release];		
+  
 	[self performSelector:@selector(presentModal:) 
 			   withObject:twitterController 
 			   afterDelay:0];

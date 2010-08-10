@@ -244,7 +244,6 @@
 			for (Card *c in arrayOfCards)
 			{
 				cardHTML = [cardHTML stringByAppendingFormat:@"<tr>"];
-				LWE_LOG(@"Head Word : %@", headWord);
 				if (![[c headword] isEqualToString:headWord])
 				{
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>", [c headword]]; 
@@ -255,7 +254,7 @@
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
 				}
 				//TODO: Change the add <dfn> tag to image?
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>[%@] <a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
 										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}
@@ -268,7 +267,6 @@
 		}
 		
 		//NSDate *start = [NSDate date];
-		LWE_LOG(@"Card HTML : %@", cardHTML);
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
@@ -285,7 +283,8 @@
 
 - (void)dismissAddToSetModal
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:nil];
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"YES" forKey:@"animated"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:userInfo];
 }
 
 #pragma mark -
