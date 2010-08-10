@@ -215,15 +215,9 @@
   {
     LWE_LOG(@"Following long weekend (twitter ID 65012024)");
     [self initTwitterEngine];
-		[self performSelectorInBackground:@selector(_followLWE) withObject:nil];
+		[_twitterEngine performSelectorInBackground:@selector(follow:) withObject:@"65012024"];
   }
 }
-
-- (void)_followLWE
-{
-	 [_twitterEngine follow:@"65012024"];
-}
-
 
 #pragma mark -
 #pragma mark Tweet Word Features
@@ -286,6 +280,7 @@
  */
 - (void)didFinishProcessWithData:(NSData *)data
 {
+  LWE_LOG(@"Successfully tweeted");
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
 	
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle") 
