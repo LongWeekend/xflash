@@ -144,7 +144,7 @@
       // Only put this stuff in HTML if we have example sentences 1.2
       if (!useOldPluginMethods)
       {
-        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>Readings</span></a><br/>", 
+        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>Words</span></a><br />", 
                 [sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
         html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
       }

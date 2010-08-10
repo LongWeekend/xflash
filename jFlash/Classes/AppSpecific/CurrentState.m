@@ -240,7 +240,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 /** Create & store default settings to NSUserDefaults */
 - (void) _createDefaultSettings
 {
-  LWE_LOG(@"Program runs, and creating the default settings");
+  LWE_LOG(@"Creating the default settings");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
   NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_CURRENT_VERSION,nil];

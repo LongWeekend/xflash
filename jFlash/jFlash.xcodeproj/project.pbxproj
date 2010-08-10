@@ -97,6 +97,8 @@
 		4925690311C7831F0058675B /* VScroll.png in Resources */ = {isa = PBXBuildFile; fileRef = 492568E211C7831F0058675B /* VScroll.png */; };
 		4925690411C7831F0058675B /* WaitFor.png in Resources */ = {isa = PBXBuildFile; fileRef = 492568E311C7831F0058675B /* WaitFor.png */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		49451E641211341900657A2C /* LWERetinaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49451E631211341900657A2C /* LWERetinaUtils.m */; };
+		49451E651211341900657A2C /* LWERetinaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49451E631211341900657A2C /* LWERetinaUtils.m */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E15E11B6336000FCE21E /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */; };
@@ -545,6 +547,8 @@
 		492568E311C7831F0058675B /* WaitFor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaitFor.png; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
+		49451E621211341900657A2C /* LWERetinaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWERetinaUtils.h; path = Reusable/LWE/LWERetinaUtils.h; sourceTree = "<group>"; };
+		49451E631211341900657A2C /* LWERetinaUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWERetinaUtils.m; path = Reusable/LWE/LWERetinaUtils.m; sourceTree = "<group>"; };
 		494D6BB211AE184D006DADF1 /* Logic Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494D6BB311AE184D006DADF1 /* Logic Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Logic Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1245,6 +1249,8 @@
 				917A5C1511AB80F700016BD2 /* LWEDebug.h */,
 				917A5C1611AB80F700016BD2 /* LWEFile.h */,
 				917A5C1711AB80F700016BD2 /* LWEFile.m */,
+				49451E621211341900657A2C /* LWERetinaUtils.h */,
+				49451E631211341900657A2C /* LWERetinaUtils.m */,
 				490CFBB0120FE8CB00C2BC4E /* LWENetworkUtils.h */,
 				490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */,
 				917A5C1811AB80F700016BD2 /* LWESQLDebug.h */,
@@ -1947,6 +1953,7 @@
 				24EA112812015EA10081CBBA /* ViewUtility.c in Sources */,
 				490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
 				490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
+				49451E641211341900657A2C /* LWERetinaUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2049,6 +2056,7 @@
 				4919744411F83A13001A30D7 /* SBJsonWriter.m in Sources */,
 				490CFBB3120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
 				490CFBF6120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
+				49451E651211341900657A2C /* LWERetinaUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
