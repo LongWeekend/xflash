@@ -99,9 +99,8 @@
 {
   if([theTextField.text length] == 0)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Enter User Name" message:@"Please enter a user name or click the arrow to go back." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Enter a Name",@"UserDetailsViewController.EnterNameAlertTitle")
+                                       message:NSLocalizedString(@"Please enter a user name or click the arrow to go back.",@"UserDetailsViewController.EnterNameAlertMsg")];
     return NO;
   }
   [self doCommitChanges];

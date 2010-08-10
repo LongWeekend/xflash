@@ -58,7 +58,7 @@
 // action sheet
 - (IBAction)showCardActionSheet;
 
-- (void) setupTwitterEngine;
+- (void) initTwitterEngine;
 
 
 //we don't retain delegates

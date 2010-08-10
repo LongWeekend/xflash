@@ -21,7 +21,6 @@
   NSMutableArray *tagArray;
   NSMutableArray *subgroupArray;
   UIBarButtonItem *_addButton;
-  UIAlertView *statusMsgBox;
   NSInteger selectedTagId;
   NSInteger groupId;
   UIActivityIndicatorView *activityIndicator;
@@ -40,7 +39,6 @@
 @property NSInteger selectedTagId;
 @property NSInteger groupId;
 @property (nonatomic, retain) Group *group;
-@property (nonatomic, retain) UIAlertView *statusMsgBox;
 @property (nonatomic, retain) NSMutableArray *tagArray;
 @property (nonatomic, retain) NSMutableArray *subgroupArray;
 @property (nonatomic, retain) UISearchBar *searchBar;
