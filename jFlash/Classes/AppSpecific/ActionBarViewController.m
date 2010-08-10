@@ -214,8 +214,13 @@
   {
     LWE_LOG(@"Following long weekend (twitter ID 65012024)");
     [self initTwitterEngine];
-    [_twitterEngine follow:@"65012024"];
+		[self performSelectorInBackground:@selector(_followLWE) withObject:nil];
   }
+}
+
+- (void)_followLWE
+{
+	 [_twitterEngine follow:@"65012024"];
 }
 
 
@@ -259,7 +264,6 @@
 	{
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
-		
 		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
 													  initWithNibName:@"TweetWordViewController"  
 													  twitterEngine:_twitterEngine 
