@@ -330,9 +330,6 @@
 {
   if (card != nil)
   {
-    // Re-show the HH, if necessary
-    [[self moodIcon] reenableHH];
-    
     [self setCurrentCard:card];
     [[self cardViewController] setCurrentCard:[self currentCard]];
     [[self cardViewController] setup];
@@ -589,18 +586,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
 {
   pageControlIsChangingPage = NO;
-
-  // Toggle percent correct bubble to OFF when sentences display
-  if([pageControl currentPage] == 1 && percentCorrectVisible)
-  { 
-    [self doTogglePercentCorrectBtn]; // Turn off if on
-    [[self moodIcon] disableHH];
-  }
-  else if([pageControl currentPage] == 0 && !percentCorrectVisible)
-  {
-    [self doTogglePercentCorrectBtn]; // Turn back on if off
-    [[self moodIcon] reenableHH];
-  }
 }
 
 #pragma mark -
@@ -608,30 +593,14 @@
 
 - (IBAction)changePage:(id)sender animated:(BOOL) animated
 {
-	/*
-	*	Change the scroll view
-	*/  
+	//	Change the scroll view
   CGRect frame = scrollView.frame;
   frame.origin.x = frame.size.width * pageControl.currentPage;
   frame.origin.y = 0;
 	
   [scrollView scrollRectToVisible:frame animated:animated];
   
-  // Disable or enable HH
-  if (pageControl.currentPage == 1)
-  {
-    [self doTogglePercentCorrectBtn]; // Turn off if on
-    [[self moodIcon] disableHH];
-  }
-  else
-  {
-    [self doTogglePercentCorrectBtn]; // Turn off if on
-    [[self moodIcon] reenableHH];
-  }
-
-	/*
-	 *	When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
-	 */
+	// When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
   pageControlIsChangingPage = YES;
 }
 
