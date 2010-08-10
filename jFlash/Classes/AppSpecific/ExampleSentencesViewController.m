@@ -232,7 +232,6 @@
 		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
 		if (cardHTML == nil)
 		{
-			NSDate *start = [NSDate date];
 			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue] showAll:!useOldPluginMethods];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
 			NSString *headWord = @"";
@@ -256,9 +255,6 @@
 			
 			cardHTML = [cardHTML stringByAppendingFormat:@"</table>"];
 			[self.sampleDecomposition setObject:cardHTML forKey:sentenceID];
-			
-			double d = [[NSDate date] timeIntervalSince1970] - [start timeIntervalSince1970];
-			LWE_LOG(@"Time : %f", d);
 		}
 		
 		//NSDate *start = [NSDate date];

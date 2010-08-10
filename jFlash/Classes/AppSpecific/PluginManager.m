@@ -212,13 +212,10 @@
     }
   }
 	
-	double start = [[NSDate date] timeIntervalSince1970];
 	if ([PluginManager isTimeForCheckingUpdate])
 	{
 		[self checkNewPluginsNotifyOnNetworkFail:NO];
 	}
-	double end = [[NSDate date] timeIntervalSince1970];
-	LWE_LOG(@"LOG: Check new plugin is finished, it took %f time for downloading and checking", (end-start));
 	
   return success;
 }
