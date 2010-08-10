@@ -153,7 +153,7 @@
   
   if ([[self currentCard] hasExampleSentences:isNewVersion] == NO)
   {
-    [[self pageControl] setHidden:YES];    
+    [[self pageControl] setHidden:YES];
   }
   else 
   {
@@ -330,9 +330,11 @@
 {
   if (card != nil)
   {
+    // Re-show the HH, if necessary
+    [[self moodIcon] reenableHH];
+    
     [self setCurrentCard:card];
     [[self cardViewController] setCurrentCard:[self currentCard]];
-    LWE_LOG(@"Calling prepareView FROM doChangeCard");
     [[self cardViewController] setup];
     
     [self _resetStudyView];
@@ -592,10 +594,12 @@
   if([pageControl currentPage] == 1 && percentCorrectVisible)
   { 
     [self doTogglePercentCorrectBtn]; // Turn off if on
+    [[self moodIcon] disableHH];
   }
   else if([pageControl currentPage] == 0 && !percentCorrectVisible)
   {
     [self doTogglePercentCorrectBtn]; // Turn back on if off
+    [[self moodIcon] reenableHH];
   }
 }
 
@@ -613,6 +617,18 @@
 	
   [scrollView scrollRectToVisible:frame animated:animated];
   
+  // Disable or enable HH
+  if (pageControl.currentPage == 1)
+  {
+    [self doTogglePercentCorrectBtn]; // Turn off if on
+    [[self moodIcon] disableHH];
+  }
+  else
+  {
+    [self doTogglePercentCorrectBtn]; // Turn off if on
+    [[self moodIcon] reenableHH];
+  }
+
 	/*
 	 *	When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
 	 */

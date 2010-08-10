@@ -139,13 +139,19 @@
 	  int counter = 0;
     for (ExampleSentence* sentence in sentences) 
     {
-			html = [html stringByAppendingFormat:@"<li>%@", [sentence sentenceJa]];
+			html = [html stringByAppendingFormat:@"<li>"];
+
+      // Only put this stuff in HTML if we have example sentences 1.2
+      if (!useOldPluginMethods)
+      {
+        html = [html stringByAppendingFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>%@</span></a></div>", 
+                [sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId],SHOW_BUTTON_TITLE];
+      }
+      html = [html stringByAppendingFormat:@"%@<br />", [sentence sentenceJa]];
       
       // Only put this stuff in HTML if we have example sentences 1.2
       if (!useOldPluginMethods)
       {
-        html = [html stringByAppendingFormat:@"<a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>Words</span></a><br />", 
-                [sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId]];
         html = [html stringByAppendingFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
       }
       
@@ -166,31 +172,32 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
 	NSString *url = [[request URL] relativePath];
-	LWE_LOG(@"LOG : Load URL with relative path : %@", url);
 	//TODO: Make this better!!
 	if ((url == nil)||([url isEqualToString:@"about:blank"]))
+  {
 		return YES;
-	else
-	{
-		NSDictionary *dict = [[request URL] queryStrings];
-		
-		NSRange slashPosition = [url rangeOfString:@"/"];
-		if (slashPosition.location != NSNotFound)
-			url = [url substringFromIndex:slashPosition.location+1];
-		
-		switch ([url intValue]) 
-		{
-			case TOKENIZE_SAMPLE_SENTENCE:
-				[self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
-				break;
-			case ADD_CARD_TO_SET:
-				[self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
-				break;
-			default:
-				break;
-		}
-		return NO;
-	}
+  }
+
+  NSDictionary *dict = [[request URL] queryStrings];
+
+  NSRange slashPosition = [url rangeOfString:@"/"];
+  if (slashPosition.location != NSNotFound)
+  {
+    url = [url substringFromIndex:slashPosition.location+1];
+  }
+  
+  switch ([url intValue]) 
+  {
+    case TOKENIZE_SAMPLE_SENTENCE:
+      [self _showCardsForSentences:[dict objectForKey:@"id"] isOpen:[dict objectForKey:@"open"] webView:webView];
+      break;
+    case ADD_CARD_TO_SET:
+      [self _showAddToSetWithCardID:[dict objectForKey:@"id"]];
+      break;
+    default:
+      break;
+  }
+  return NO;
 }
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID
@@ -219,7 +226,7 @@
 		//Close the expanded div. Return back the status of the expaned button
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ", sentenceID];
 		//js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.src = '%@'; ", sentenceID, [imagePath]];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Readings'; ", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ", sentenceID, SHOW_BUTTON_TITLE];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ", 
 			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
 		[webView stringByEvaluatingJavaScriptFromString:js];
@@ -237,7 +244,7 @@
 			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)
 			{
-				cardHTML = [cardHTML stringByAppendingFormat:@"<tr>"];
+				cardHTML = [cardHTML stringByAppendingFormat:@"<tr class='HeadwordRow'>"];
 				if (![[c headword] isEqualToString:headWord])
 				{
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>", [c headword]]; 
@@ -248,8 +255,8 @@
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
 				}
 				//TODO: Change the add <dfn> tag to image?
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>Add</span></a></td>", 
-										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId]];
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>%@</span></a></td>", 
+										[c readingBasedonSettingsForExpandedSampleSentences], kJFlashServer, ADD_CARD_TO_SET, [c cardId], ADD_BUTTON_TITLE];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}
 			
@@ -261,7 +268,7 @@
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
 		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = 'Close';", sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@';", sentenceID,CLOSE_BUTTON_TITLE];
 		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=1';", 
 			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
 		

@@ -14,6 +14,9 @@
 #import "jFlashAppDelegate.h"
 
 #define kJFlashServer	@"http://jflash.com"
+#define SHOW_BUTTON_TITLE @"Read"
+#define CLOSE_BUTTON_TITLE @"Close"
+#define ADD_BUTTON_TITLE @"Add"
 
 typedef enum 
 {

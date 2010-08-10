@@ -18,6 +18,7 @@
 //! Update the mood icon depending on the current percentage correct
 - (void)updateMoodIcon: (float)tmpRatio;
 - (void)reenableHH;
+- (void) disableHH;
 + (UIImageView*) makeHappyMoodIconView;
 
 @property (retain,nonatomic) UIButton *moodIconBtn;
