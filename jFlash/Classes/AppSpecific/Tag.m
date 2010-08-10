@@ -286,6 +286,10 @@
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel removeObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
+  // This needs to be here to stop a double decrement!! (first decremented here, then in SQL in TagPeer)
+  // SQL in TagPeer just uses Count=count-1, so it is "stupid" about what the actual count is
+  // By decrementing here, it stops Tag from messing with the DB
+  cardCount = cardCount - 1;
   [self cacheCardLevelCounts];
 }
 
@@ -299,6 +303,10 @@
   NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
   [cardLevel addObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
+  // This needs to be here to stop a double increment!! (first incremented here, then in SQL in TagPeer)
+  // SQL in TagPeer just uses Count=count+1, so it is "stupid" about what the actual count is
+  // By incrementing here, it stops Tag from messing with the DB
+  cardCount = cardCount + 1;
   [self cacheCardLevelCounts];
 }
 

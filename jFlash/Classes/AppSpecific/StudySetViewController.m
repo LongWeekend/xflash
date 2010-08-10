@@ -12,7 +12,7 @@
 #import "CustomCellBackgroundView.h"
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,statusMsgBox,selectedTagId,group,groupId,activityIndicator,searchBar;
+@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar;
 
 /** 
  * Customized initializer - returns UITableView group as self.view
@@ -166,7 +166,7 @@
 }
 
 
-
+#pragma mark -
 #pragma mark UITableView methods
 
 /** Goes into editing mode **/
@@ -339,21 +339,15 @@
       if(numCards > 0)
       {
         self.selectedTagId = indexPath.row;
-        NSString *tag = [[self.tagArray objectAtIndex:indexPath.row] tagName];
-        self.statusMsgBox = [[UIAlertView alloc] initWithTitle:tag message:NSLocalizedString(@"Do you want to start this set?  Progress on your last set will be saved.",@"StudySetViewController.StartStudy_AlertViewMessage")
-                                                 delegate:self
-                                                 cancelButtonTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
-                                                 otherButtonTitles:NSLocalizedString(@"OK",@"Global.OK"),nil];
-        [statusMsgBox show];
+        NSString *tagName = [[self.tagArray objectAtIndex:indexPath.row] tagName];
+        [LWEUIAlertView confirmationAlertWithTitle:tagName
+                                           message:NSLocalizedString(@"Do you want to start this set?  Progress on your last set will be saved.",@"StudySetViewController.StartStudy_AlertViewMessage")
+                                          delegate:self];
       }
       else
       {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No Words In Set",@"StudySetViewController.NoWords_AlertViewTitle") 
-                                                      message:NSLocalizedString(@"To add words to this set, you can use Search.",@"StudySetViewController.NoWords_AlertViewMessage")
-                                                      delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Words In Set",@"StudySetViewController.NoWords_AlertViewTitle")
+                                           message:NSLocalizedString(@"To add words to this set, you can use Search.",@"StudySetViewController.NoWords_AlertViewMessage")];
       }
     }
     else
@@ -371,23 +365,6 @@
     subgroupController.groupId = [[[self subgroupArray] objectAtIndex:indexPath.row] groupId];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [subgroupController release];
-  }
-}
-
-/** Alert view delegate - initiates the "study set change" if they pressed OK */
-- (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  // This is the OK button
-  if (buttonIndex == 1)
-  {
-    [[self tableView] reloadData];
-    [[self activityIndicator] startAnimating];
-    [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
-    return;
-  }
-  else 
-  {
-    selectedTagId = -1;
   }
 }
 
@@ -428,6 +405,27 @@
   }
   return NO;
 }
+
+#pragma mark -
+#pragma mark Alert View Delegate
+
+/** Alert view delegate - initiates the "study set change" if they pressed OK */
+- (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  // This is the OK button
+  if (buttonIndex == LWE_ALERT_OK_BTN)
+  {
+    [[self tableView] reloadData];
+    [[self activityIndicator] startAnimating];
+    [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
+    return;
+  }
+  else 
+  {
+    selectedTagId = -1;
+  }
+}
+
 
 #pragma mark -
 #pragma mark Search Bar delegate methods
@@ -535,7 +533,6 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [_addButton release];
-  [statusMsgBox release];
   [tagArray release];
   [subgroupArray release];
   [group release];

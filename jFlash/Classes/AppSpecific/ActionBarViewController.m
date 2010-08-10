@@ -205,43 +205,47 @@
 #pragma mark -
 #pragma mark UIAlertView delegate methods
 
+/**
+ * If the user tapped OK, Follow Long WEekend on Twitter
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  // LWE's twitter account
-  NSString *lweTwitterAccount = @"65012024";
-  [self setupTwitterEngine];
-  LWE_LOG(@"Following long weekend");
-  [_twitterEngine follow:lweTwitterAccount];
+  if (buttonIndex == LWE_ALERT_OK_BTN)
+  {
+    LWE_LOG(@"Following long weekend (twitter ID 65012024)");
+    [self initTwitterEngine];
+		[self performSelectorInBackground:@selector(_followLWE) withObject:nil];
+  }
+}
+
+- (void)_followLWE
+{
+	 [_twitterEngine follow:@"65012024"];
 }
 
 
 #pragma mark -
 #pragma mark Tweet Word Features
 
-- (void) setupTwitterEngine
+/**
+ * Initialize the twitter engine class if not already done
+ * If called twice, this method is pretty much a NOOP
+ * However, tweet and any twitter "action" will nil out the Twitter Engine, so you have to call again
+ */
+- (void) initTwitterEngine
 {
 	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
-	LWE_LOG(@"Current User : %@", idCurrentUser);
-	
-	// Twitter Engine
-	// TODO: Initialize all of the twitter engine	
+  
+  // Init twitter engine if not already done
 	if ((!_twitterEngine) && (_twitterEngine == nil))
 	{
-    TweetWordXAuthController *controller = [[TweetWordXAuthController alloc]
-                                            initWithNibName:@"TweetWordXAuthController" 
-                                            bundle:nil];
-		_twitterEngine = [[LWETwitterEngine alloc] 
-						  initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY 
-						  privateKey:JFLASH_TWITTER_PRIVATE_KEY
-						  authenticationView:controller];
+    TweetWordXAuthController *controller = [[TweetWordXAuthController alloc] initWithNibName:@"TweetWordXAuthController" bundle:nil];
+		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY privateKey:JFLASH_TWITTER_PRIVATE_KEY authenticationView:controller];
     [controller release];
 	}
-	else 
-	{
-		LWE_LOG(@"WARNING : Apparently, the engine has been initialized. Its not initialised again (avoid the memory leak)");
-	}
 	
+  // TODO: fix this so it doesn't use App Delegate - use notifications instead
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
 	_twitterEngine.parentForUserAuthenticationView = vc;
@@ -249,25 +253,23 @@
 	_twitterEngine.delegate = self;
 }
 
+/**
+ * Tweets the current word.
+ */
 - (void)tweet
 {
-  [self setupTwitterEngine];
+  [self initTwitterEngine];
 	
 	if (_twitterEngine.loggedUser.isAuthenticated)
 	{
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
-		LWE_LOG(@"We are going to tweet this card : %@", tweetWord);
-		
 		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
 													  initWithNibName:@"TweetWordViewController"  
 													  twitterEngine:_twitterEngine 
 													  tweetWord:tweetWord];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:twitterController];
-		[twitterController release];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:navController, @"controller", nil];
-    [navController release];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:twitterController, @"controller", nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 		[dict release];
 	}
@@ -276,39 +278,42 @@
 #pragma mark -
 #pragma mark LWETRequestDelegate
 
+/**
+ * Callback - LWETRequestDelegate - processes result data
+ */
 - (void)didFinishProcessWithData:(NSData *)data
 {
-	//TODO: Animated should be NO (last time I test, YES does not work). However, it works now (strange).
-	NSDictionary *dict = [[NSDictionary alloc]
-						  initWithObjectsAndKeys:@"YES", @"animated", nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:dict];
-	[dict release];
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
 	
-	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle")
-						  message:NSLocalizedString(@"Added to your Twitter feed successfully!", @"ActionBarViewController.TweetSuccessAlertMsg")
-						  delegate:self 
-						  cancelButtonTitle:NSLocalizedString(@"やったー！", @"ActionBarViewController.TweetSuccessYattaButton")
-						  otherButtonTitles:nil];
-	[alert show];
-	[alert release];
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle") 
+                                     message:NSLocalizedString(@"Successfully added to your Twitter feed!", @"ActionBarViewController.TweetSuccessAlertMsg")];
+  
 	[_twitterEngine release];
 	_twitterEngine = nil;
 }
 
+/**
+ * Callback - LWETRequestDelegate - processes error data
+ */
 - (void) didFailedWithError:(NSError *)error
 {
-	LWE_LOG(@"Error happens in the action bar controller when trying to tweet word");
-	
-	UIAlertView *alertView = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
-							  message:NSLocalizedString(@"We were unable to tweet this - did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")
-							  delegate:nil 
-							  cancelButtonTitle:NSLocalizedString(@"OK", @"Global.OK") 
-							  otherButtonTitles:nil];
-	[alertView show];
-	[alertView release];
-	
+	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
+
+  NSInteger errorCode = [error code];
+  
+  //TODO - change these error codes to constants
+  // This is the error when the user tweets the same thing twice
+  if (errorCode == 1)
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
+                                       message:NSLocalizedString(@"Did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")];    
+  }
+  // CFNetwork error
+  else if (errorCode == -1009)
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+  
 	[_twitterEngine release];
 	_twitterEngine = nil;
 }
@@ -325,14 +330,11 @@
 												  tweetWord:tweetWord];
 	
   // Show an alert view asking if they want to follow LWE
-  UIAlertView *alertView = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
-                            message:NSLocalizedString(@"Cool, you're logged in.  Want to follow Long Weekend?  We tweet interesting stuff.",@"ActionBarViewController.FollowLWEAlertMsg")
-                            delegate:self
-                            cancelButtonTitle:NSLocalizedString(@"No Thanks",@"Global.OfferNo")
-                            otherButtonTitles:NSLocalizedString(@"Sure",@"Global.OfferSure"),nil];
-  [alertView show];
-  [alertView release];		
+  [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
+                                     message:NSLocalizedString(@"Great, you're logged in.  Want to follow us?  We tweet interesting stuff.",@"ActionBarViewController.FollowLWEAlertMsg")
+                                          ok:NSLocalizedString(@"Sure",@"Global.Sure")
+                                      cancel:NSLocalizedString(@"No Thanks",@"Global.NoThanks")
+                                    delegate:self];
   
 	[self performSelector:@selector(presentModal:) 
 			   withObject:twitterController 
@@ -346,14 +348,8 @@
 	if (error)
 	{
 		LWE_LOG(@"Did failed auth.");
-		UIAlertView *alertView = [[UIAlertView alloc]
-                  initWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
-								  message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")
-								  delegate:nil 
-								  cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") 
-								  otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];		
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
+                                       message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")];
 	}
 	[_twitterEngine release];
 	_twitterEngine = nil;
@@ -363,8 +359,7 @@
 -(void) presentModal:(UIViewController*)modalNavController
 {
 	LWE_LOG(@"Presenting the modal");
-	NSDictionary *dict = [[NSDictionary alloc]
-						  initWithObjectsAndKeys:modalNavController, @"controller", @"NO", @"animated", nil];
+	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:modalNavController, @"controller", nil];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	[dict release];

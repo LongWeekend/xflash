@@ -45,7 +45,9 @@
 {
 	[self _resignTextFieldKeyboard];
 	NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
-	[_twitterEngine tweet:string];
+	[_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
+  
+  _loadingView = [SmallLoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
 }
 
 //! Sign out from the twitter engine.
@@ -108,13 +110,13 @@
 }
 
 //! This is the designated initialiser. 
-- (id)initWithNibName:(NSString *)nibName 
-		twitterEngine:(LWETwitterEngine *)twitterEngine 
-			tweetWord:(NSString *)tweetWord
+- (id)initWithNibName:(NSString *)nibName twitterEngine:(LWETwitterEngine *)twitterEngine tweetWord:(NSString *)tweetWord
 {
 	if (self = [super initWithNibName:nibName bundle:nil])
 	{
+    _loadingView = nil;
 		self._twitterEngine = twitterEngine;
+		//self._twitterEngine.delegate = self;
 		self._tweetWord = tweetWord;
 	}
 	return self;

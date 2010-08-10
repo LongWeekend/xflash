@@ -50,15 +50,14 @@
 - (IBAction)doBuryCardBtn;
 
 // core methods
-- (void) setup;
-- (void) reveal;
-
+- (void)setup;
+- (void)reveal;
 - (void)tweet;
+- (void)_followLWE;
 
 // action sheet
 - (IBAction)showCardActionSheet;
-
-- (void) setupTwitterEngine;
+- (void) initTwitterEngine;
 
 
 //we don't retain delegates

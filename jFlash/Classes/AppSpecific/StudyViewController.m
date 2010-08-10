@@ -47,24 +47,18 @@
   CurrentState *state = [CurrentState sharedCurrentState];
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"OK",@"Global.OK") otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
     _alreadyShowedAlertView = YES;
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
+                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")];
   }
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome to JFlash 1.1!",@"StudyViewController.UpdateAlertViewTitle")
-                                                        message:NSLocalizedString(@"We need 3-5 minutes of your time to update the dictionary. Your study progress will also be transferred.\n\nA WiFi or 3G network connection is required. Do this now?",@"RootViewController.UpdateAlertViewMessage")
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                              otherButtonTitles:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow"),nil];
-    [alertView show];
-    [alertView release];
     _alreadyShowedAlertView = YES;
+    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to JFlash 1.1!",@"StudyViewController.UpdateAlertViewTitle")
+                                       message:NSLocalizedString(@"We need 3-5 minutes of your time to update the dictionary. Your study progress will also be transferred.\n\nA WiFi or 3G network connection is required. Do this now?",@"RootViewController.UpdateAlertViewMessage")
+                                            ok:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow")
+                                        cancel:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
+                                      delegate:self];
   }
 }
 
@@ -75,11 +69,11 @@
 {
   switch (buttonIndex)
   {
-    case UPDATE_ALERT_UPDATE_NOW_BUTTON:
+    case LWE_ALERT_OK_BTN:
       [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
       break;
       // Do nothing
-    case UPDATE_ALERT_CANCEL_BUTTON:
+    case LWE_ALERT_CANCEL_BTN:
       break;
   }
 }

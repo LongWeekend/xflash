@@ -85,7 +85,8 @@
 			dict = [[NSDictionary alloc] initWithDictionary:md];
 			[md release];
 
-//			_availableForDownloadPlugins = dict;
+			//TODO: Rendy added this, and he forgot why he did it?
+			//_availableForDownloadPlugins = dict;
       [self _setAvailableForDownloadPlugins:dict];
 			[dict release];
 		}
@@ -211,13 +212,10 @@
     }
   }
 	
-	double start = [[NSDate date] timeIntervalSince1970];
 	if ([PluginManager isTimeForCheckingUpdate])
 	{
 		[self checkNewPluginsNotifyOnNetworkFail:NO];
 	}
-	double end = [[NSDate date] timeIntervalSince1970];
-	LWE_LOG(@"LOG: Check new plugin is finished, it took %f time for downloading and checking", (end-start));
 	
   return success;
 }
