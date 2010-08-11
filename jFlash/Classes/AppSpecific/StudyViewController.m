@@ -191,7 +191,11 @@
     // Plugin is installed, set up the scroll view
     [self _setScrollViewsScrollibility];
     [self _setPageControlVisibility];
-    [[self exampleSentencesViewController] setup];
+    // TODO: remove the warning in 1.3
+    if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
+    {
+      [[self exampleSentencesViewController] setup];
+    }
   }
 }
 
@@ -437,8 +441,8 @@
   NSDictionary *dict = [aNotification userInfo];
   if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
   {
-    // Get rid of our "please download me" view
-    [[[scrollView subviews] objectAtIndex:1] removeFromSuperview];
+    // Get rid of the old example sentences guy
+    [[[self exampleSentencesViewController] view] removeFromSuperview];
     [self setupScrollView];
     [self resetHeadword];
   }
@@ -543,13 +547,18 @@
   {
     // We have EX db installed
     [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
-    [[self exampleSentencesViewController] setDatasource:self];
+    if ([[self exampleSentencesViewController] respondsToSelector:@selector(setDatasource:)])
+    {
+      [[self exampleSentencesViewController] setDatasource:self];
+    }
   }
   else
   {
     // No example sentence plugin loaded, so show "please download me" view instead
     // TODO: iPad customization
-    [self setExampleSentencesViewController:[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil]];
+    UIViewController *tmpVC = [[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil];
+    [self setExampleSentencesViewController:tmpVC];
+    [tmpVC release];
   }
   			
   UIView *sentencesView = [[self exampleSentencesViewController] view];

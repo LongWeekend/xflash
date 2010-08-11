@@ -73,6 +73,7 @@
   else
   {
     // Get the "new card" p -- RSH - what is "p"??
+    // MMA - p means probability in statistics :) and is usually defined between 0 (impossible) and 1 (definite)
     mean = (float)numeratorTotal / (float)cardsSeenTotal;
     p_unseen = (mean - (float)1);
     p_unseen = pow((p_unseen / (float) 4),weightingFactor);
@@ -181,7 +182,13 @@
   
   // Get a random card offset
   int numCardsAtLevel = [[[self cardIds] objectAtIndex:next_level] count];
-  int randomOffset = arc4random() % numCardsAtLevel;
+  int randomOffset = 0;
+  LWE_ASSERT (numCardsAtLevel > 0);
+  if (numCardsAtLevel > 0)
+  {
+    randomOffset = arc4random() % numCardsAtLevel;
+  }
+
   NSNumber* cardId;
   
   NSMutableArray* cardIdArray = [[self cardIds] objectAtIndex:next_level];
@@ -205,7 +212,12 @@
     }
     // now get a different card randomly
     cardIdArray = [[self cardIds] objectAtIndex:next_level];
-    randomOffset = arc4random() % [[[self cardIds] objectAtIndex:next_level] count];
+    int numCardsAtLevel2 = [[[self cardIds] objectAtIndex:next_level] count];
+    LWE_ASSERT(numCardsAtLevel2 > 0);
+    if (numCardsAtLevel2 > 0)
+    {
+      randomOffset = arc4random() % numCardsAtLevel2;
+    }
     cardId = [cardIdArray objectAtIndex:randomOffset];      
   }
   return [CardPeer retrieveCardByPK:[cardId intValue]];

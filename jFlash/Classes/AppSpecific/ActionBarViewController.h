@@ -53,7 +53,6 @@
 - (void)setup;
 - (void)reveal;
 - (void)tweet;
-- (void)_followLWE;
 
 // action sheet
 - (IBAction)showCardActionSheet;

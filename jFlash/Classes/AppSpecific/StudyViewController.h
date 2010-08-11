@@ -34,7 +34,7 @@
   IBOutlet ActionBarViewController *actionBarController;
   IBOutlet UIView *actionbarView;
   
-  ExampleSentencesViewController *exampleSentencesViewController;
+  UIViewController *exampleSentencesViewController;
   
   IBOutlet UILabel *cardSetLabel;
   IBOutlet UILabel *totalWordsLabel;
@@ -113,7 +113,7 @@
 @property (nonatomic, retain) CardViewController *cardViewController; 
 @property (nonatomic, retain) UIView *cardView;
 
-@property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
+@property (nonatomic, retain) UIViewController *exampleSentencesViewController;
 
 @property (nonatomic, retain) ActionBarViewController *actionBarController;
 @property (nonatomic, retain) UIView *actionbarView;

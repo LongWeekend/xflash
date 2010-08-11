@@ -52,6 +52,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 {
   [super loadView];
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
@@ -63,6 +64,15 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 {
   [self setSectionArray:[self _settingsTableDataSource]];
   self.navigationItem.rightBarButtonItem = nil;
+  [[self tableView] reloadData];
+}
+
+/**
+ * Called when plugin installed
+ */
+- (void) _updateTableDataAfterPluginInstall
+{
+  [self setSectionArray:[self _settingsTableDataSource]];
   [[self tableView] reloadData];
 }
 
