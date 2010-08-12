@@ -18,7 +18,7 @@
 
 
 @implementation SettingsViewController
-@synthesize sectionArray, settingsChanged, headwordChanged, themeChanged, readingChanged, appirater, settingsDict;
+@synthesize sectionArray, settingsChanged, directionChanged, themeChanged, readingChanged, appirater, settingsDict;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -26,10 +26,14 @@ NSString * const APP_FACEBOOK = @"facebook";
 NSString * const APP_ALGORITHM = @"algorithm";
 NSString * const APP_NEW_UPDATE = @"new_update";
 
+// Notification
+NSString * const LWECardSettingsChanged = @"LWECardSettingsChanged";
+NSString * const LWESettingsChanged = @"LWESettingsChanged";
+
 #pragma mark -
 
 /** Customized initializer with UITableViewStyleGrouped */
-- (SettingsViewController*) init
+- (id) init
 {
 	if (self = [super initWithStyle:UITableViewStyleGrouped])
   {
@@ -39,7 +43,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
     [self setSectionArray:[self _settingsTableDataSource]];
     settingsChanged = NO;
-    headwordChanged = NO;
+    directionChanged = NO;
     themeChanged = NO;
     readingChanged = NO;
   }
@@ -48,14 +52,13 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 
 /** Customized to add support for observers/notifications */
-- (void)loadView
-{ 
-  [super loadView];
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:@"settingsWereChanged" object:nil];
+- (void) viewDidLoad
+{
+  [super viewDidLoad];
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
-
 
 /**
  * Makes the settings show the plugins when required (e.g. after the user updates their version to JFlash 1.1)
@@ -106,23 +109,15 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   if (settingsChanged)
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingsWereChanged" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWESettingsChanged object:self];
   }
-  if (headwordChanged)
+  if (directionChanged || themeChanged || readingChanged)
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"directionWasChanged" object:self];
-  }
-  if (themeChanged)
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"themeWasChanged" object:self];
-  }
-  if (readingChanged)
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"readingWasChanged" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWECardSettingsChanged object:self];
   }
   
   // we've sent the notifications, so reset to unchanged
-  headwordChanged = NO;
+  directionChanged = NO;
   themeChanged = NO;
   readingChanged = NO;
   settingsChanged = NO;
@@ -348,7 +343,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
     [[self tableView] reloadData];
     if (key == APP_HEADWORD) // we don't want the current card to change for just a headword switch
     {
-      headwordChanged = YES;
+      directionChanged = YES;
     }
     else if (key == APP_THEME)
     {
