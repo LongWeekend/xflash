@@ -641,6 +641,7 @@
 	[dict removeObjectForKey:pluginKey];
 	LWE_LOG(@"Called _setAvailableForDownloadPlugins from _removeFromAvailableDownloadForPlugin");
 	[self _setAvailableForDownloadPlugins:dict];
+  [dict release];
 }
 
 
@@ -695,10 +696,9 @@
 
 - (void)dealloc
 {
-  [super dealloc];
-	if (_availableForDownloadPlugins)
-		[_availableForDownloadPlugins release];
+	if (_availableForDownloadPlugins) [_availableForDownloadPlugins release];
   _loadedPlugins = nil;
+  [super dealloc];
 }
 
 #pragma mark -
