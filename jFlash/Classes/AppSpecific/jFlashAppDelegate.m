@@ -157,6 +157,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     LWE_LOG(@"After entering foreground, found plist, deleting plist (we have cards in memory instead)");
     [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
   }
+  
+  // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:0 forKey:@"card_id"];
 }
 
 

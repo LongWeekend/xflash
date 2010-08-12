@@ -95,13 +95,13 @@
   // This is called before drawing the view
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   
   // REFACTOR? Responders to only change what is needed, instead of calling the same function for 3 notfications!
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"directionWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"themeWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"readingWasChanged" object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   
@@ -363,8 +363,12 @@
 
 #pragma mark Transition Methods
 
-/** Basic method to change cards */
-- (void) doChangeCard: (Card*) card direction:(NSString*)direction
+/**
+ * \brief Basic method to change cards
+ * \param card The Card object to move to
+ * \param directionOrNil If direction is a CATransition type, animate.  Otherwise 
+ */
+- (void) doChangeCard: (Card*) card direction:(NSString*)directionOrNil
 {
   if (card != nil)
   {
@@ -378,7 +382,11 @@
     // Save value for when we tap "Reveal".
     _cardShouldShowExampleViewCached = cardShouldShowExampleView;
     
-    [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)direction duration:(float)0.15f objectToTransition:(UIViewController *)self];
+    // If no direction, don't animate it
+    if (directionOrNil != nil)
+    {
+      [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)directionOrNil duration:(float)0.15f objectToTransition:(UIViewController *)self];
+    }
     
     [self refreshProgressBarView];
     
