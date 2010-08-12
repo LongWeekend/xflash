@@ -97,9 +97,9 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"settingsWereChanged" object:nil];
   
   // REFACTOR? Responders to only change what is needed, instead of calling the same function for 3 notfications!
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"directionWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"themeWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHeadword) name:@"readingWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"directionWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"themeWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:@"readingWasChanged" object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
@@ -128,9 +128,7 @@
   [[self actionbarView] addSubview:[[self actionBarController] view]];
 
   // Reset child views
-  LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
 	[self resetStudySet];
-  LWE_LOG(@"END Study View");
   
   [self setupScrollView];
   
@@ -145,58 +143,77 @@
 
 #pragma mark -
 #pragma mark Convenience methods
-//! Checks if there are no example sentences on this card (hides page control & locks scrolling)
-- (void) _setPageControlVisibility:(BOOL)cardShouldShowExampleView
-{
-  [[self pageControl] setHidden:!cardShouldShowExampleView];
-}
-
-//! Controls whether the scroll view should be allowed to scroll or not
-- (void) _setScrollViewsScrollibility:(BOOL)cardShouldShowExampleView
-{
-  scrollView.pagingEnabled = cardShouldShowExampleView;
-  scrollView.scrollEnabled = cardShouldShowExampleView;
-}
 
 
-/** 
- * Convenience method
- * Both page controller visibility setter and scroll view
- * enabler call this.  In the future, we don't want to 
- * hit the DB twice like we are now for the same card.
+/**
+ * \brief Changes to a new study set
+ * \details Gets the active Tag from the CurrentState singleton and
+ * re-initializes the entire StudyViewController to a fresh set.
+ * Responsible for getting the first card out of the set and
+ * refreshing the views accordingly.
  */
-- (BOOL) _cardShouldShowExampleView:(Card*)card
+- (void) resetStudySet
 {
-  BOOL cardShouldShowExampleView = YES;
+  // Get active set/tag
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [self setCurrentCardSet: [currentStateSingleton activeTag]];
   
-  // First, check if they have the plugin installed
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
-  {
-    // Get plugin version
-    BOOL isNewVersion = NO;
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-    {
-      isNewVersion = YES;
-    }
-    cardShouldShowExampleView = [card hasExampleSentences:isNewVersion];
-  }
+  currentRightStreak = 0;
+  currentWrongStreak = 0;
+  numRight = 0;
+  numWrong = 0;
+  numViewed = 0;
   
-  return cardShouldShowExampleView;
+  [percentCorrectLabel setText:percentCorrectLabelStartText];
+  [moodIcon updateMoodIcon:100.0f];
+  
+  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
+  
+  Card* card = [[currentStateSingleton activeTag] getFirstCard];
+
+  // Would start here with doChangeCard:
+  [self setCurrentCard:card];
+  
+  /* Code from doChangeCard:
+            [self setCurrentCard:card];
+          [[self cardViewController] setCurrentCard:[self currentCard]];
+          [[self cardViewController] setup];
+           [[self cardViewController] setCurrentCard:[self currentCard]];
+           [[self cardViewController] setup];
+  
+          BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:card];
+          [self _resetStudyView:cardShouldShowExampleView];
+           BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+           [self _resetStudyView:cardShouldShowExampleView];
+  
+  // Save value for when we tap "Reveal".
+  _cardShouldShowExampleViewCached = cardShouldShowExampleView;
+  
+          [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)direction duration:(float)0.15f objectToTransition:(UIViewController *)self];
+  
+          [self refreshProgressBarView];
+  */
+  
+  /* Refresh Card View 
+  [self _updateCardViewDelegates];
+  [self updateTheme];
+  
+  LWE_LOG(@"Calling prepareView on cardView FROM refreshCardView");
+  
+  */
+  
+  LWE_LOG(@"Calling refreshCardView FROM resetStudySet");
+  [self refreshCardView];
+  
+  //tells the progress bar to redraw
+  [self refreshProgressBarView];
 }
 
-- (void) _resetExampleSentencesView:(BOOL)cardShouldShowExampleView
-{
-  // This should always be no because scroll cannot be done when card is not revealed
-  [self _setScrollViewsScrollibility:NO];
-  [self _setPageControlVisibility:cardShouldShowExampleView];
-  // TODO: remove the warning in 1.3
-  if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
-  {
-    [[self exampleSentencesViewController] setup];
-  }
-}
-
+/**
+ * Sets up all of the delegates and sub-controllers of the study view controller.
+ * \param cardShouldShowExampleView YES if the scroll view should have 2 pages, and if the page control should be on.
+ *  Note that even if this is YES, you may not be able to scroll depending on whether or not the card has been revealed.
+ */
 - (void) _resetStudyView:(BOOL)cardShouldShowExampleView
 {
   //reset to the first page just in case
@@ -230,12 +247,59 @@
 }
 
 
-/** a little overly complicated but needed to make the headword switch seemless for the user */
-- (void) resetHeadword
+/** 
+ * Convenience method
+ * Both page controller visibility setter and scroll view
+ * enabler call this.  In the future, we don't want to 
+ * hit the DB twice like we are now for the same card.
+ */
+- (BOOL) _cardShouldShowExampleView:(Card*)card
 {
-  [self setCurrentCard:[CardPeer retrieveCardByPK:currentCard.cardId]];
-  LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetHeadword");
-  [self resetKeepingCurrentCard];
+  BOOL cardShouldShowExampleView = YES;
+  
+  // First, check if they have the plugin installed
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  {
+    // Get plugin version
+    BOOL isNewVersion = NO;
+    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+    if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
+    {
+      isNewVersion = YES;
+    }
+    cardShouldShowExampleView = [card hasExampleSentences:isNewVersion];
+  }
+  
+  return cardShouldShowExampleView;
+}
+
+//! Checks if there are no example sentences on this card (hides page control & locks scrolling)
+- (void) _setPageControlVisibility:(BOOL)cardShouldShowExampleView
+{
+  [[self pageControl] setHidden:!cardShouldShowExampleView];
+}
+
+//! Controls whether the scroll view should be allowed to scroll or not
+- (void) _setScrollViewsScrollibility:(BOOL)cardShouldShowExampleView
+{
+  scrollView.pagingEnabled = cardShouldShowExampleView;
+  scrollView.scrollEnabled = cardShouldShowExampleView;
+}
+
+/**
+ * Re-locks the scrolling to NO (before REVEAL) and calls setup on the ExampleSentencesViewController
+ * \param cardShouldShowExampleView if YES, the page control will be visible
+ */
+- (void) _resetExampleSentencesView:(BOOL)cardShouldShowExampleView
+{
+  // This should always be no because scroll cannot be done when card is not revealed
+  [self _setScrollViewsScrollibility:NO];
+  [self _setPageControlVisibility:cardShouldShowExampleView];
+  // TODO: remove the warning in 1.3
+  if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
+  {
+    [[self exampleSentencesViewController] setup];
+  }
 }
 
 - (void) _updateCardViewDelegates
@@ -263,13 +327,13 @@
 
 
 /** Resets the study view without getting a new Card */
-- (void) resetKeepingCurrentCard
+- (void) refreshCardView
 {
   [self _updateCardViewDelegates];
     
   [self updateTheme];
   
-  LWE_LOG(@"Calling prepareView on cardView FROM resetKeepingCurrentCard");
+  LWE_LOG(@"Calling prepareView on cardView FROM refreshCardView");
   [[self cardViewController] setCurrentCard:[self currentCard]];
 	[[self cardViewController] setup];
   
@@ -278,39 +342,10 @@
 }
 
 
-/** Changes to a new study set */
-- (void) resetStudySet
-{
-  // Get active set/tag
-  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
-  [self setCurrentCardSet: [currentStateSingleton activeTag]];
-  
-  currentRightStreak = 0;
-  currentWrongStreak = 0;
-  numRight = 0;
-  numWrong = 0;
-  numViewed = 0;
-  
-  [percentCorrectLabel setText:percentCorrectLabelStartText];
-  [moodIcon updateMoodIcon:100.0f];
-  
-  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
-  
-  Card* card = [[currentStateSingleton activeTag] getFirstCard];
-  [self setCurrentCard:card];
-  
-  LWE_LOG(@"Calling resetKeepingCurrentCard FROM resetStudySet");
-  [self resetKeepingCurrentCard];
-  
-  //tells the progress bar to redraw
-  [self refreshProgressBarView];
-}
-
-
 /** redraws the progress bar with new level details */
 - (void) refreshProgressBarView
 {
-  [progressBarViewController setLevelDetails: [self getLevelDetails]];
+  [progressBarViewController setLevelDetails:[self getLevelDetails]];
   [[self progressBarViewController] drawProgressBar];
 }
 
@@ -351,8 +386,6 @@
     [self _jumpToPage:0];
   }
 }
-
-# pragma mark IBOutlet Button Actions
 
 - (void) doCardBtn: (NSNotification *)aNotification
 {
@@ -449,7 +482,7 @@
     [self setupScrollView];
     
     // This will also reset the cache value for shouldShowExampleView
-    [self resetHeadword];
+    [self refreshCardView];
   }
 }
 

@@ -91,7 +91,7 @@
 - (void)doChangeCard: (Card*) card direction:(NSString*)direction;
 - (void)updateTheme;
 - (void)resetStudySet;
-- (void)resetKeepingCurrentCard;
+- (void)refreshCardView;
 - (NSMutableArray*) getLevelDetails;
 
 //! Gets notification from plugin manager
