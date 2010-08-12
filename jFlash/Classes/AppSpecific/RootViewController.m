@@ -322,12 +322,17 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 	[tabBarController viewDidDisappear:animated];
 }
 
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 # pragma mark Housekeeping
 
 - (void)dealloc
 {
   // Unobserve notifications
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setTabBarController:nil];
   [self setLoadingView:nil];
   [super dealloc];

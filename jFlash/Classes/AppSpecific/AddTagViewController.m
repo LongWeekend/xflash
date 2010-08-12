@@ -320,11 +320,15 @@ enum EntrySectionRows
 #pragma mark -
 #pragma mark Class plumbing
 
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 //! Standard dealloc
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

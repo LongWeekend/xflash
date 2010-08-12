@@ -531,7 +531,6 @@
 //! Standard dealloc, removes observers
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [_addButton release];
   [tagArray release];
   [subgroupArray release];

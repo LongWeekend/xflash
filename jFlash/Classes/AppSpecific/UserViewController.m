@@ -238,10 +238,14 @@
 
 }
 
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
+}
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
   [self setUsersArray:nil];
   [super dealloc];
 }

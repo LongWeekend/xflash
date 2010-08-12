@@ -377,11 +377,15 @@
   [webView release];
 }
 
+- (void) viewDidUnload
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super viewDidUnload];
+}
 
 //! standard dealloc
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setTaskHandler:nil];
   [self setWebViewContentDirectory:nil];
   [self setWebViewContentFileName:nil];

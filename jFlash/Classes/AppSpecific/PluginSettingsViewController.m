@@ -177,9 +177,14 @@
 }
 
 
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self setAvailablePlugins:nil];
   [self setInstalledPlugins:nil];
   [btnCheckUpdate release];
