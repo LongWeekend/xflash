@@ -121,7 +121,7 @@
   }
   else if (![[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
   {
-		LWE_LOG(@"Example Sentences plugin is loaded");
+		LWE_LOG(@"Example Sentences plugin is NOT loaded");
     return YES;
   }
   else 
