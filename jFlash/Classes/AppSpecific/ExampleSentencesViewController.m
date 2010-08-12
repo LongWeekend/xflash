@@ -229,6 +229,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
 	
 	[doneBtn release];
+	[tmpVC release];
 	[dict release];
 }
 

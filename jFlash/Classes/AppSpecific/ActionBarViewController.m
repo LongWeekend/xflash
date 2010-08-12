@@ -268,6 +268,7 @@
     
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:twitterController, @"controller", nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
+		[twitterController release];
 		[dict release];
 	}
 }
