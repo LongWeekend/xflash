@@ -21,6 +21,10 @@
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setCardViewController:cvc];
     [[aNotification object] setView:[[self cardViewController] view]];
+		
+		//TODO: Remove this if this is crash. Shouldn't the cvc be released cause the card view controller property is retain?, and it uses the setter method?
+		LWE_LOG(@"Rendy just added this, not sure, and please clarify");
+		[cvc release];
   }
   
   [[self cardViewController] prepareView:[[aNotification object] currentCard]];

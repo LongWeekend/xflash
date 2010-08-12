@@ -252,6 +252,7 @@
 
 - (void)viewDidUnload 
 {
+	[super viewDidUnload];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
@@ -259,6 +260,12 @@
 
 - (void)dealloc 
 {
+	//was added cause Rendy thought not everything is here, and shoulnt everyhing be here for deallocation?
+	[cardReadingLabelScrollContainer release];
+	[cardHeadwordLabelScrollContainer release];
+	[cardHeadwordLabelScrollMoreIcon release];
+	[cardReadingLabelScrollMoreIcon release];
+	
   [cardHeadwordLabel release];
   [cardReadingLabel release];
   [toggleReadingBtn release];

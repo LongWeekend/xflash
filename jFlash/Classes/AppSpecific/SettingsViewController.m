@@ -466,6 +466,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 - (void) viewDidUnload
 {
+	LWE_LOG(@"Settings View Controller get unload");
   [super viewDidUnload];
   [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
   [[NSNotificationCenter defaultCenter] removeObserver:self];

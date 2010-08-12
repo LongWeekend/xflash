@@ -106,26 +106,34 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   
   // Create a default mood icon object
-  [self setMoodIcon:[[MoodIcon alloc] init]];
+	MoodIcon *tmpMI = [[MoodIcon alloc] init];
+  [self setMoodIcon:tmpMI];
   [[self moodIcon] setMoodIconBtn:moodIconBtn];
   [[self moodIcon] setPercentCorrectLabel:percentCorrectLabel];
+	[tmpMI release];
   
   // Set view default states
   [self setPercentCorrectVisible: YES];
 
   // Initialize the progressBarView
-  [self setProgressBarViewController:[[ProgressBarViewController alloc] init]];
+	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
+  [self setProgressBarViewController:tmpPBVC];
   [[self progressBarView] addSubview:progressBarViewController.view];
+	[tmpPBVC release];
   
   // Add the CardView to the View
-  [self setCardViewController:[[CardViewController alloc] init]];
+	CardViewController *tmpCVC = [[CardViewController alloc] init];
+  [self setCardViewController:tmpCVC];
   [[self cardViewController] setCurrentCard:[self currentCard]];
   [[self cardView] addSubview: [[self cardViewController] view]];  
+	[tmpCVC release];
   
   // Add the Action Bar to the View
-  [self setActionBarController:[[ActionBarViewController alloc] init]];
+	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] init];
+  [self setActionBarController:tmpABVC];
   [[self actionBarController] setCurrentCard:[self currentCard]];
   [[self actionbarView] addSubview:[[self actionBarController] view]];
+	[tmpABVC release];
 
   // Reset child views
   LWE_LOG(@"CALLING resetStudySet from viewDidLoad");
@@ -356,6 +364,7 @@
 
 - (void) doCardBtn: (NSNotification *)aNotification
 {
+	//NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   int action = [[aNotification object] intValue];
   
   // Hold on to the last card
@@ -403,6 +412,7 @@
 
   // Releases
   [lastCard release];
+	//[pool release];
 }
 
 //! Turns the % correct button on and off, in case it is in the way
@@ -535,7 +545,7 @@
 {
 	scrollView.delegate = self;
 	
-//	scrollView.clipsToBounds = YES;
+  //scrollView.clipsToBounds = YES;
 	scrollView.pagingEnabled = YES;
   scrollView.delaysContentTouches = NO;
   scrollView.directionalLockEnabled = YES;
@@ -637,7 +647,36 @@
 
 - (void) viewDidUnload
 {
+	LWE_LOG(@"Study View Controller get Unload");
   [super viewDidUnload];
+  
+  // Create a default mood icon object
+	self.moodIcon = nil;
+	self.progressBarViewController = nil;
+	self.cardViewController = nil;
+	self.actionBarController = nil;
+	
+	self.scrollView = nil;
+	self.pageControl = nil;
+	self.cardView = nil;
+	self.actionbarView = nil;
+	self.exampleSentencesViewController = nil;
+	self.cardSetLabel = nil;
+	self.totalWordsLabel = nil;
+	//self.percentCorrectTalkBubble = nil;
+	self.percentCorrectLabel = nil;
+	self.revealCardBtn = nil;
+	self.tapForAnswerImage = nil;
+	//self.showProgressModalBtn = nil;
+	self.practiceBgImage = nil;
+	self.progressBarView = nil;
+	//self.moodIconBtn = nil;
+	self.hhAnimationView = nil;
+	self.progressModalView = nil;
+	self.progressModalBtn = nil;
+	//self.progressModalCloseBtn = nil;
+	self.remainingCardsLabel = nil;
+	
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
