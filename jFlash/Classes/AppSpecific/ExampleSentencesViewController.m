@@ -134,7 +134,6 @@
 //* setup the example sentences view with information from the datasource
 - (void) setup
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[self _exampleSentencesViewWillSetup];
   
   // the datasource must implement currentcard or we don't set any data
@@ -177,7 +176,6 @@
 		[html release];
   }
   [self _exampleSentencesViewDidSetup];
-	[pool release];
 }
 
 #pragma mark -
