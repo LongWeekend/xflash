@@ -33,9 +33,6 @@
       [self setTag:initTag];
       [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];
     }
-		
-		//TODO: Why is this retained? (potential leak?) -Rendy(3/8/2010)
-    [[self tableView] retain];
     self.navigationItem.title = [initTag tagName];
     [self setCards:nil];
     [self setActivityIndicator:[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
@@ -59,8 +56,14 @@
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
-  [self.tableView reloadData];
+  [self performSelectorOnMainThread:@selector(reloadTableDataOnMainThread) withObject:nil waitUntilDone:NO];
   [pool release];
+}
+
+//! Convenience method since we can't update data on background thread
+- (void) reloadTableDataOnMainThread
+{
+  [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -196,7 +199,6 @@
   [tag release]; 
   [cards release];
   [activityIndicator release];
-  [self.tableView release];
   [super dealloc];
 }
 
