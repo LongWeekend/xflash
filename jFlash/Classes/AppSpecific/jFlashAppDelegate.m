@@ -119,7 +119,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 /**
  * Called on iOS4 when the app is put into the background
- * We do not do anything special here.
+ * We ask Tag to freeze its current state to a plist so if the app is killed
+ * while in the background, we can get it back!
  */
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
@@ -145,11 +146,17 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 /**
  * Called on iOS4 when the app comes back to life from background
- * We do not do anything special here.
+ * Here, we delete the plist file created in the background
+ * because the cards should still be in memory.
  */
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
-  LWE_LOG(@"Application will enter the foreground now");
+  // the plist is only made in case we are terminated.  If not terminated, no need for this - it will mess stuff up in tag -> populateCardIds
+  if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:@"ids.plist"]])
+  {
+    LWE_LOG(@"After entering foreground, found plist, deleting plist (we have cards in memory instead)");
+    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
+  }
 }
 
 
