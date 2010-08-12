@@ -15,13 +15,15 @@ extern NSString * const APP_ABOUT;
 extern NSString * const APP_TWITTER;
 extern NSString * const APP_FACEBOOK;
 extern NSString * const APP_NEW_UPDATE;
+extern NSString * const LWECardSettingsChanged;
+extern NSString * const LWESettingsChanged;
 
 @interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
 {
   NSMutableArray *sectionArray;
   NSDictionary *settingsDict;
   BOOL settingsChanged;
-  BOOL headwordChanged;
+  BOOL directionChanged;
   BOOL themeChanged;
   BOOL readingChanged;
   Appirater *appirater;
@@ -31,7 +33,7 @@ extern NSString * const APP_NEW_UPDATE;
 - (NSMutableArray*) _settingsTableDataSource;
 
 @property BOOL settingsChanged;
-@property BOOL headwordChanged;
+@property BOOL directionChanged;
 @property BOOL themeChanged;
 @property BOOL readingChanged;
 @property (retain, nonatomic) NSDictionary *settingsDict;

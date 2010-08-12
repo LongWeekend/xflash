@@ -6,7 +6,6 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import <UIKit/UIKit.h>
-#import "jFlashAppDelegate.h"
 #import "Constants.h"
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
@@ -86,13 +85,10 @@
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
 
-- (void)refreshProgressBarView;
 - (void)doCardBtn: (NSNotification *)aNotification;
-- (void)doChangeCard: (Card*) card direction:(NSString*)direction;
-- (void)updateTheme;
+- (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
 - (void)resetStudySet;
-- (void)resetKeepingCurrentCard;
-- (NSMutableArray*) getLevelDetails;
+- (void)refreshCardView;
 
 //! Gets notification from plugin manager
 - (void)pluginDidInstall: (NSNotification *)aNotification;
@@ -101,9 +97,6 @@
 /* for pageControl */
 - (IBAction) changePage:(id)sender;
 - (IBAction) launchExampleInstaller;
-
-/* internal */
-- (void)setupScrollView;
 
 
 // scroll view

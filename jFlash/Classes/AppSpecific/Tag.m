@@ -355,6 +355,7 @@
     if ([settings integerForKey:@"card_id"] != 0)
     {
       card = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
+      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
       [settings setInteger:0 forKey:@"card_id"];
     }
     else
