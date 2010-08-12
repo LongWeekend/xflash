@@ -9,12 +9,13 @@
 
 // declare private methods here
 @interface StudyViewController()
-- (void)_resetStudyView;
+- (void)_resetStudyView:(BOOL)cardShouldShowExampleView;
+- (void)_resetExampleSentencesView:(BOOL)cardShouldShowExampleView;
+- (void)_setScrollViewsScrollibility:(BOOL)cardShouldShowExampleView;
+- (void)_setPageControlVisibility:(BOOL)cardShouldShowExampleView;
+- (BOOL) _cardShouldShowExampleView:(Card*)card;
 - (void)_jumpToPage:(int)page;
 - (void)_updateCardViewDelegates;
-- (void)_resetExampleSentencesView;
-- (void)_setScrollViewsScrollibility;
-- (void)_setPageControlVisibility;
 @end
 
 @implementation StudyViewController
@@ -133,73 +134,70 @@
   
   [self setupScrollView];
   
-  [self _resetStudyView];
-  [self _setPageControlVisibility];
+  BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+
+  // Save value for when we tap "Reveal".
+  _cardShouldShowExampleViewCached = cardShouldShowExampleView;
+
+  [self _resetStudyView:cardShouldShowExampleView];
+  [self _setPageControlVisibility:cardShouldShowExampleView];
 }
 
 #pragma mark -
 #pragma mark Convenience methods
 //! Checks if there are no example sentences on this card (hides page control & locks scrolling)
-- (void) _setPageControlVisibility
+- (void) _setPageControlVisibility:(BOOL)cardShouldShowExampleView
 {
-  // Get plugin version
-  // TODO: make this less hack-y
-  BOOL isNewVersion = NO;
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-  {
-    isNewVersion = YES;
-  }
-  
-  if ([[self currentCard] hasExampleSentences:isNewVersion] == NO)
-  {
-    [[self pageControl] setHidden:YES];
-  }
-  else 
-  {
-    [[self pageControl] setHidden:NO];    
-  }
+  [[self pageControl] setHidden:!cardShouldShowExampleView];
 }
 
 //! Controls whether the scroll view should be allowed to scroll or not
-- (void) _setScrollViewsScrollibility 
+- (void) _setScrollViewsScrollibility:(BOOL)cardShouldShowExampleView
 {
-  scrollView.pagingEnabled = YES;
-  scrollView.scrollEnabled = YES;
-
-  // Get plugin version
-  // TODO: make this less hack-y
-  BOOL isNewVersion = NO;
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-  {
-    isNewVersion = YES;
-  }  
-  
-  if ([[self currentCard] hasExampleSentences:isNewVersion] == NO)
-  {
-    scrollView.pagingEnabled = NO;
-    scrollView.scrollEnabled = NO;
-  }
+  scrollView.pagingEnabled = cardShouldShowExampleView;
+  scrollView.scrollEnabled = cardShouldShowExampleView;
 }
 
-- (void) _resetExampleSentencesView
+
+/** 
+ * Convenience method
+ * Both page controller visibility setter and scroll view
+ * enabler call this.  In the future, we don't want to 
+ * hit the DB twice like we are now for the same card.
+ */
+- (BOOL) _cardShouldShowExampleView:(Card*)card
 {
+  BOOL cardShouldShowExampleView = YES;
+  
   // First, check if they have the plugin installed
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    // Plugin is installed, set up the scroll view
-    [self _setScrollViewsScrollibility];
-    [self _setPageControlVisibility];
-    // TODO: remove the warning in 1.3
-    if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
+    // Get plugin version
+    BOOL isNewVersion = NO;
+    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+    if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
     {
-      [[self exampleSentencesViewController] setup];
+      isNewVersion = YES;
     }
+    cardShouldShowExampleView = [card hasExampleSentences:isNewVersion];
+  }
+  
+  return cardShouldShowExampleView;
+}
+
+- (void) _resetExampleSentencesView:(BOOL)cardShouldShowExampleView
+{
+  // This should always be no because scroll cannot be done when card is not revealed
+  [self _setScrollViewsScrollibility:NO];
+  [self _setPageControlVisibility:cardShouldShowExampleView];
+  // TODO: remove the warning in 1.3
+  if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
+  {
+    [[self exampleSentencesViewController] setup];
   }
 }
 
-- (void) _resetStudyView
+- (void) _resetStudyView:(BOOL)cardShouldShowExampleView
 {
   //reset to the first page just in case
   [self _jumpToPage:0];
@@ -207,7 +205,7 @@
   [[self actionBarController] setCurrentCard:[self currentCard]];
   [actionBarController setup];
   
-  [self _resetExampleSentencesView];
+  [self _resetExampleSentencesView:cardShouldShowExampleView];
   
   // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
@@ -275,7 +273,8 @@
   [[self cardViewController] setCurrentCard:[self currentCard]];
 	[[self cardViewController] setup];
   
-  [self _resetStudyView];
+  BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+  [self _resetStudyView:cardShouldShowExampleView];
 }
 
 
@@ -321,8 +320,8 @@
 {
   [[self revealCardBtn] setHidden:YES];
   [[self tapForAnswerImage] setHidden:YES];
-  [self _setScrollViewsScrollibility];
-  [self _setPageControlVisibility];
+  [self _setScrollViewsScrollibility:_cardShouldShowExampleViewCached];
+  [self _setPageControlVisibility:_cardShouldShowExampleViewCached];
   [cardViewController reveal];
   [actionBarController reveal];
 }
@@ -338,7 +337,11 @@
     [[self cardViewController] setCurrentCard:[self currentCard]];
     [[self cardViewController] setup];
     
-    [self _resetStudyView];
+    BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:card];
+    [self _resetStudyView:cardShouldShowExampleView];
+
+    // Save value for when we tap "Reveal".
+    _cardShouldShowExampleViewCached = cardShouldShowExampleView;
     
     [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)direction duration:(float)0.15f objectToTransition:(UIViewController *)self];
     
@@ -444,6 +447,8 @@
     // Get rid of the old example sentences guy
     [[[self exampleSentencesViewController] view] removeFromSuperview];
     [self setupScrollView];
+    
+    // This will also reset the cache value for shouldShowExampleView
     [self resetHeadword];
   }
 }
@@ -630,9 +635,14 @@
 #pragma mark -
 #pragma mark Class plumbing
 
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   //theme
   [practiceBgImage release];
   

@@ -19,6 +19,9 @@
 @interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 {
   BOOL _alreadyShowedAlertView;
+
+  //! This is set when card is loaded, and used when revealed
+  BOOL _cardShouldShowExampleViewCached;
   
   id cardViewControllerDelegate;
   
@@ -101,6 +104,7 @@
 
 /* internal */
 - (void)setupScrollView;
+
 
 // scroll view
 @property (nonatomic, retain) UIView *scrollView;
