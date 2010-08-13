@@ -297,6 +297,12 @@
 #pragma mark -
 #pragma mark Class Plumbing
 
+- (void)viewDidUnload
+{
+	//Rendy added this in regards on memory warning, and there has been an obeserver that is registered in the viewDidLoad (Avoid the observer registered twice)
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];

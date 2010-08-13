@@ -98,6 +98,30 @@
   [self release];
 }
 
+//This was added for safety reason? - Rendy 13/08/10
+- (void)viewDidUnload
+{
+	[super viewDidUnload];
+	
+	self.currentNumberOfWords = nil;
+	self.totalNumberOfWords = nil;
+	self.closeBtn = nil;
+	self.currentStudySet = nil;
+	self.motivationLabel = nil;
+	self.streakLabel = nil;
+	self.cardsViewedNow = nil;
+	self.cardsViewedAllTime = nil;
+	self.cardsRightNow = nil;
+	self.cardsWrongNow = nil;
+	self.cardSetProgressLabel0 = nil;
+	self.cardSetProgressLabel1 = nil;
+	self.cardSetProgressLabel2 = nil;
+	self.cardSetProgressLabel3 = nil;
+	self.cardSetProgressLabel4 = nil;
+	self.cardSetProgressLabel5 = nil;
+	self.progressViewTitle = nil;
+}
+
 
 - (void)dealloc
 {

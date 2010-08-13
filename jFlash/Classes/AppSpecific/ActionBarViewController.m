@@ -412,10 +412,15 @@
   self.prevCardBtn = nil;
   self.rightBtn = nil;
   self.wrongBtn = nil;
+	self.cardMeaningBtnHint = nil;
+	self.cardMeaningBtnHintMini = nil;
 }
 
 - (void)dealloc
 {
+	//TODO: Remove this if crashes
+	LWE_LOG(@"Rendy realised that the current card is assigned using setter, and the setter is 'retain', so shouldnt it be release? Please clarify");
+	[currentCard release];
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
   
