@@ -103,7 +103,10 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   
   // Create a default mood icon object
-  [self setMoodIcon:[[MoodIcon alloc] init]];
+  MoodIcon *moodIcon = [[MoodIcon alloc] init];
+  [self setMoodIcon:moodIcon];
+  [moodIcon release];
+  
   [[self moodIcon] setMoodIconBtn:moodIconBtn];
   [[self moodIcon] setPercentCorrectLabel:percentCorrectLabel];
   
