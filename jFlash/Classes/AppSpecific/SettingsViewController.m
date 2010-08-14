@@ -56,7 +56,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall) name:LWEPluginDidInstall object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
@@ -73,8 +73,9 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 /**
  * Called when plugin installed
  */
-- (void) _updateTableDataAfterPluginInstall
+- (void) _updateTableDataAfterPluginInstall:(NSNotification *)notification
 {
+	LWE_LOG(@"Update table data after plugin install is called");
   [self setSectionArray:[self _settingsTableDataSource]];
   [[self tableView] reloadData];
 }
