@@ -55,6 +55,9 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+	
+	//Added this in, so that it refreshes it self when the user is going to this Settings view, after the user changes something that is connected with the appearance of this Settings View Controller. 
+	[self setSectionArray:[self _settingsTableDataSource]];
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
