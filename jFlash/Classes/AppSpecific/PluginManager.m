@@ -500,8 +500,23 @@
     }
     return;
   }
-  
-  //Set up the variable to be the 
+	
+	[self performSelectorInBackground:@selector(_checkNewPluginInBackground) withObject:nil];
+}
+
+#pragma mark -
+#pragma mark Privates
+
+/**
+ *
+ * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
+ * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
+ * number, and all of the data if it has finished.
+ */
+- (void)_checkNewPluginInBackground
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	//Set up the variable to be the 
   NSMutableDictionary *downloadablePluginHash = nil;
   if (self.availableForDownloadPlugins != nil)
   {
@@ -513,22 +528,26 @@
   }
   
   // Download the list of new plugin from the internet
-  // TODO: check for nil here
   NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
-  NSArray *plugins = [dictionary objectForKey:@"Plugins"];
-  [dictionary release];
-
-  [self _checkPluginVersionAgainstDownloadedPlist:downloadablePluginHash plugins:plugins];
-  
-  //Set the available for download plugin dictionary, to be persisted in the flat file, and set the badge.
-  LWE_LOG(@"Call _setAvailableForDownloadPlugins from _checkNewPluginWithNotificationForFailNetwork");
-  [self _setAvailableForDownloadPlugins:downloadablePluginHash];
-  [downloadablePluginHash release];
+	if (dictionary)
+	{
+		NSArray *plugins = [dictionary objectForKey:@"Plugins"];
+		[self _checkPluginVersionAgainstDownloadedPlist:downloadablePluginHash plugins:plugins];
+		[dictionary release];
+		
+		//Set the available for download plugin dictionary, to be persisted in the flat file, and set the badge.
+		LWE_LOG(@"Call _setAvailableForDownloadPlugins from _checkNewPluginWithNotificationForFailNetwork");
+		[self performSelectorOnMainThread:@selector(_setAvailableForDownloadPlugins:) withObject:downloadablePluginHash waitUntilDone:YES];
+		[downloadablePluginHash release];		
+	}
+	[pool release];
 }
 
-#pragma mark -
-#pragma mark Privates
-
+/**
+ * This handy method will pass in the Dictionary<Dictionary> which each of the dictionary inside is the information about all the list of what the user needs to download,
+ * but the user has not downloaded it. The second parameter is the plugin information (up-to-date version) which came from the internet somewhere. 
+ *
+ */
 - (void) _checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins
 {
   // This is how we get the information about the installed plugin on the device
@@ -557,6 +576,7 @@
         needUpdate = YES;
       }
     }
+		
     //The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 
     //in that case, I chose to rewrite the list with the new one anyway. There are only 2 possibilities, it either the new one
     //from the web is the newer version, or the same. It does not matter, we still want it to be on the user awaits update plugin
@@ -625,7 +645,7 @@
 	//Update the badge in the settings. 
 	LWE_LOG(@"Debug : New %d update(s)",[dict count]);
 	NSNumber *newUpdate = [NSNumber numberWithInt:[dict count]];
-	[self performSelector:@selector(_sendUpdateBadgeNotification:) withObject:newUpdate afterDelay:3.0f];
+	[self performSelector:@selector(_sendUpdateBadgeNotification:) withObject:newUpdate afterDelay:1.0f];
 }
 
 /**
@@ -702,8 +722,8 @@
 
 - (void)dealloc
 {
-	if (_availableForDownloadPlugins) [_availableForDownloadPlugins release];
-  _loadedPlugins = nil;
+	if (availableForDownloadPlugins) [availableForDownloadPlugins release];
+  if (_loadedPlugins) [_loadedPlugins release];
   [super dealloc];
 }
 
