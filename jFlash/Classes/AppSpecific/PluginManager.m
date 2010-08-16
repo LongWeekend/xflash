@@ -214,7 +214,13 @@
 	
 	if ([PluginManager isTimeForCheckingUpdate])
 	{
-		[self checkNewPluginsNotifyOnNetworkFail:NO];
+		/**
+		 * This only runs when the program is launched. 
+		 * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
+		 * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
+		 * number, and all of the data if it has finished.
+		 */
+		[self performSelectorInBackground:@selector(checkNewPluginsNotifyOnNetworkFail:) withObject:NO];
 	}
 	
   return success;
@@ -501,21 +507,6 @@
     return;
   }
 	
-	[self performSelectorInBackground:@selector(_checkNewPluginInBackground) withObject:nil];
-}
-
-#pragma mark -
-#pragma mark Privates
-
-/**
- *
- * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
- * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
- * number, and all of the data if it has finished.
- */
-- (void)_checkNewPluginInBackground
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	//Set up the variable to be the 
   NSMutableDictionary *downloadablePluginHash = nil;
   if (self.availableForDownloadPlugins != nil)
@@ -540,8 +531,10 @@
 		[self performSelectorOnMainThread:@selector(_setAvailableForDownloadPlugins:) withObject:downloadablePluginHash waitUntilDone:YES];
 		[downloadablePluginHash release];		
 	}
-	[pool release];
 }
+
+#pragma mark -
+#pragma mark Privates
 
 /**
  * This handy method will pass in the Dictionary<Dictionary> which each of the dictionary inside is the information about all the list of what the user needs to download,

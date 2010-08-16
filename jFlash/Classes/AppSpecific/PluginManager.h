@@ -56,7 +56,6 @@ extern NSString * const LWEPluginTargetPathKey;
 - (void)_initAvailableForDownloadPluginsList;
 - (void)_initDownloadedPluginsList;
 - (void)_checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins;
-- (void)_checkNewPluginInBackground;
 
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
