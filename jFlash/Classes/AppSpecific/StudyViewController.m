@@ -503,12 +503,12 @@
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;
-    [self setCardViewControllerDelegate:[[BrowseModeCardViewDelegate alloc] init]];
+    [self setCardViewControllerDelegate:[[[BrowseModeCardViewDelegate alloc] init] autorelease]];
   }
   else
   {
     self.isBrowseMode = NO;
-    [self setCardViewControllerDelegate:[[PracticeModeCardViewDelegate alloc] init]];
+    [self setCardViewControllerDelegate:[[[PracticeModeCardViewDelegate alloc] init] autorelease]];
   }
   [cardViewController setDelegate:[self cardViewControllerDelegate]];
   [actionBarController setDelegate:[self cardViewControllerDelegate]];
