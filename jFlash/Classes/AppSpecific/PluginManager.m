@@ -220,7 +220,7 @@
 		 * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
 		 * number, and all of the data if it has finished.
 		 */
-		[self performSelectorInBackground:@selector(checkNewPluginsNotifyOnNetworkFail:) withObject:NO];
+    [self checkNewPluginsAsynchronous:YES notifyOnNetworkFail:NO];
 	}
 	
   return success;
@@ -493,21 +493,50 @@
 
 /**
  * Check the new plugin over the website, and looks whether it has a new stuff
+ * \param asynch If YES, the URL retrieve will happen on a background thread (the processing afterward will remain on the main thread)
  * \param notifyOnNetworkFail If YES, and network is not available, will prompt a LWEUIAlertView noNetwork alert
  */
-- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail
 {	
-  // Check if they have network first
-	if (![LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
+  // Check if they have network first, if so, start the background thread
+	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
 	{
-    if (notifyOnNetworkFail)
+    if (asynch)
     {
-      [LWEUIAlertView noNetworkAlert];
+      [self performSelectorInBackground:@selector(_retrievePlistFromServer) withObject:nil];
     }
-    return;
+    else
+    {
+      [self _retrievePlistFromServer];
+    }
+
   }
-	
-	//Set up the variable to be the 
+  else if (notifyOnNetworkFail)
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+}
+
+#pragma mark -
+#pragma mark Privates
+
+/**
+ * Intended to be run in the background so we don't lock the main thread
+ */
+- (void) _retrievePlistFromServer
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
+  [pool release];
+  [self performSelectorOnMainThread:@selector(_plistDidDownload:) withObject:dictionary waitUntilDone:NO];
+}
+
+/**
+ * Callback when server plist request is finished
+ */
+- (void) _plistDidDownload:(NSDictionary*)dictionary
+{
+  //Set up the variable to be the 
   NSMutableDictionary *downloadablePluginHash = nil;
   if (self.availableForDownloadPlugins != nil)
   {
@@ -517,24 +546,21 @@
   {
     downloadablePluginHash = [[NSMutableDictionary alloc] init];
   }
-  
-  // Download the list of new plugin from the internet
-  NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
+
+  // If downloaded plugin is something we can use?
 	if (dictionary)
 	{
 		NSArray *plugins = [dictionary objectForKey:@"Plugins"];
 		[self _checkPluginVersionAgainstDownloadedPlist:downloadablePluginHash plugins:plugins];
-		[dictionary release];
 		
 		//Set the available for download plugin dictionary, to be persisted in the flat file, and set the badge.
-		LWE_LOG(@"Call _setAvailableForDownloadPlugins from _checkNewPluginWithNotificationForFailNetwork");
-		[self performSelectorOnMainThread:@selector(_setAvailableForDownloadPlugins:) withObject:downloadablePluginHash waitUntilDone:YES];
-		[downloadablePluginHash release];		
+		[self _setAvailableForDownloadPlugins:downloadablePluginHash];
 	}
-}
+  [downloadablePluginHash release];
 
-#pragma mark -
-#pragma mark Privates
+	// This is a rare exception to "I didn't make it so I won't release it".  This is inter-thread, so keep this sucker here
+  [dictionary release];
+}
 
 /**
  * This handy method will pass in the Dictionary<Dictionary> which each of the dictionary inside is the information about all the list of what the user needs to download,
@@ -543,8 +569,6 @@
  */
 - (void) _checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins
 {
-  // This is how we get the information about the installed plugin on the device
-  // This gets the information from the user default, app plugin key.
   NSDictionary *pluginSettings = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
@@ -569,15 +593,15 @@
         needUpdate = YES;
       }
     }
-		
-    //The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 
-    //in that case, I chose to rewrite the list with the new one anyway. There are only 2 possibilities, it either the new one
-    //from the web is the newer version, or the same. It does not matter, we still want it to be on the user awaits update plugin
-    //list anyway. 
     else
     {
+      //The user has not had the update, BUT it might already been in the list of update pluggin awaits the user to update. 
+      //in that case, I chose to rewrite the list with the new one anyway. There are only 2 possibilities, it either the new one
+      //from the web is the newer version, or the same. It does not matter, we still want it to be on the user awaits update plugin
+      //list anyway. 
       needUpdate = YES;
     }
+		
     
     //Needss update means it will add the plugin dictionary to the mutable dictionary initialized
     //in the beginning of this method.

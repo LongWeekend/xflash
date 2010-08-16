@@ -45,7 +45,7 @@ extern NSString * const LWEPluginTargetPathKey;
 - (NSArray*) downloadedPlugins;
 - (NSDictionary*) availablePluginsDictionary;
 + (BOOL)isTimeForCheckingUpdate;
-- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;

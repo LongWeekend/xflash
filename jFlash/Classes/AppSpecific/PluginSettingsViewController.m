@@ -53,7 +53,7 @@
 	PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
 	
 	[self _changeLastUpdateLabel];
-	[pm checkNewPluginsNotifyOnNetworkFail:YES];
+  [pm checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self reloadTableData];
 	
 	[lv remove];
