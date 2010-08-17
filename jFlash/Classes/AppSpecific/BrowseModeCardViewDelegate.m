@@ -51,4 +51,10 @@
   [[[aNotification object] addBtn] setFrame:frame];
 }
 
+- (void)dealloc
+{
+	[cardViewController release];
+	[super dealloc];
+}
+
 @end

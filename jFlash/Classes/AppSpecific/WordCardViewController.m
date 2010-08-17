@@ -252,6 +252,7 @@
 
 - (void)viewDidUnload 
 {
+	LWE_LOG(@"Word card View Controller, view get unloaded.");
 	[super viewDidUnload];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
@@ -261,15 +262,32 @@
 - (void)dealloc 
 {
 	//was added cause Rendy thought not everything is here, and shoulnt everyhing be here for deallocation?
+	LWE_LOG(@"%d", [cardReadingLabelScrollContainer retainCount]);
 	[cardReadingLabelScrollContainer release];
+	LWE_LOG(@"%d", [cardReadingLabelScrollContainer retainCount]);
+	[cardReadingLabelScrollContainer release];
+	
 	[cardHeadwordLabelScrollContainer release];
+	[cardHeadwordLabelScrollContainer release];
+	
 	[cardHeadwordLabelScrollMoreIcon release];
+	[cardHeadwordLabelScrollMoreIcon release];
+	
+	[cardReadingLabelScrollMoreIcon release];
 	[cardReadingLabelScrollMoreIcon release];
 	
   [cardHeadwordLabel release];
+	//[cardHeadwordLabel release];
+	
   [cardReadingLabel release];
+	//[cardReadingLabel release];
+	
   [toggleReadingBtn release];
+	//[toggleReadingBtn release];
+	
   [meaningWebView release];  
+	[meaningWebView release];
+	
   [super dealloc];
 }
 

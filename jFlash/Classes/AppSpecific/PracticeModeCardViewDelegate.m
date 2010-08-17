@@ -20,8 +20,6 @@
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setCardViewController:cvc];
     [[aNotification object] setView:[[self cardViewController] view]];
-		//TODO: Remove if Crash
-		LWE_LOG(@"Rendy just added something here that he was not sure whether it should be there, please clarify");
 		[cvc release];
   }
   
@@ -100,7 +98,7 @@
 
 - (void)dealloc 
 {
-  [self setCardViewController:nil];  
+  [cardViewController release];  
   [super dealloc];
 }
 

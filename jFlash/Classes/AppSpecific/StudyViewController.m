@@ -223,7 +223,8 @@
   [moodIcon updateMoodIcon:tmpRatio];
   
   // Give the card view controller a chance to re-layout the page
-	[[self cardViewController] setup];
+	//TODO: COMMENT THIS OUT!
+	//[[self cardViewController] setup];
   
   // Maybe we need to check if our examples view should be different?
   BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
