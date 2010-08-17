@@ -35,7 +35,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 /** Customized initializer with UITableViewStyleGrouped */
 - (id) init
 {
-	if (self = [super initWithStyle:UITableViewStyleGrouped])
+	if ((self = [super initWithStyle:UITableViewStyleGrouped]))
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];

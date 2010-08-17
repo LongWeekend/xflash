@@ -28,7 +28,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
  */
 - (id)init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];

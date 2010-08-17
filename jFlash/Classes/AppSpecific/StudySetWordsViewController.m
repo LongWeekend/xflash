@@ -26,7 +26,7 @@
  */ 
 - (id) initWithTag:(Tag*)initTag
 {
-  if (self = [super initWithStyle:UITableViewStyleGrouped])
+  if ((self = [super initWithStyle:UITableViewStyleGrouped]))
   {
     if ([initTag isKindOfClass:[Tag class]] && [initTag tagId] > 0)
     {

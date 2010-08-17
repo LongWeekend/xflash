@@ -33,7 +33,7 @@ enum EntrySectionRows
 - (id) initWithCard:(Card*) card
 {
   // TODO: iPad customization!
-  if (self = [super initWithNibName:@"AddTagView" bundle:nil])
+  if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
     [self setCardId:[card cardId]];
     [self setCurrentCard:card];

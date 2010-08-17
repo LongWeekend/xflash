@@ -17,7 +17,7 @@ const NSInteger KSegmentedTableHeader = 100;
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
 - (id) init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];

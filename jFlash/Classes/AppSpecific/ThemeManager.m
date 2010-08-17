@@ -25,7 +25,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 //! Initialize theme manager (defines all themes as well)
 - (id) init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     // Defines the Fire Red theme tint values & CSS
     NSDictionary *fire = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -199,7 +199,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
   NSDictionary *tmpDict;
   NSEnumerator *themeEnumerator = [[self themes] objectEnumerator];
-  while (tmpDict = [themeEnumerator nextObject])
+  while ((tmpDict = [themeEnumerator nextObject]))
   {
     [tmpArray addObject:[tmpDict objectForKey:key]];
   }

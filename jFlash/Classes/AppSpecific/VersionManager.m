@@ -20,7 +20,7 @@
 /** Custom initializer that sets dlHandler to nil */
 - (id) init
 {
-  if (self = [super init])
+	if ((self = [super init]))
   {
     // Initialize to point at nothing
     self.dlHandler = nil;

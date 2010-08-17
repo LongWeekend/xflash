@@ -20,7 +20,7 @@
 
 - (id) init
 {
-	if (self = [super initWithStyle:UITableViewStyleGrouped])
+	if ((self = [super initWithStyle:UITableViewStyleGrouped]))
   {
     self.title = NSLocalizedString(@"Choose User",@"UserViewController.NavBarTitle");
     self.tableView.delegate = self;

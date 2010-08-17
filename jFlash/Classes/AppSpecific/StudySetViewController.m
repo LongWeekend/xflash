@@ -20,7 +20,7 @@
  */
 - (id) init
 {
-  if (self = [super initWithStyle:UITableViewStyleGrouped])
+  if ((self = [super initWithStyle:UITableViewStyleGrouped]))
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];

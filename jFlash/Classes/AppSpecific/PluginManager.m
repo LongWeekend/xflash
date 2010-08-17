@@ -25,7 +25,7 @@
  */
 - (id) init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     // Initialize instance variables
     _loadedPlugins = [[NSMutableDictionary alloc] init];
@@ -201,7 +201,7 @@
 	LWE_LOG(@"This is the APP_PLUGIN in the NSUserDefaults : %@", plugins);
   NSEnumerator *keyEnumerator = [plugins keyEnumerator];
   NSString *key;
-  while (key = [keyEnumerator nextObject])
+  while ((key = [keyEnumerator nextObject]))
   {
     NSString* filename = [plugins objectForKey:key];
 		LWE_LOG(@"LOG : Trying to load the installed plugins = %@, with filename = %@", key, filename);
@@ -242,8 +242,7 @@
   if (![LWEFile fileExists:filePath]) 
 	{
 		return NO;
-		NSString *str = [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath];
-		LWE_LOG(@"%@", str);
+		LWE_LOG(@"%@", [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath]);
 	}
   
   // Test drive the attachment to verify it matches
@@ -310,7 +309,7 @@
 		[[LWEDatabase sharedLWEDatabase] detachDatabase:updatedKey];
 	}
 	
-  if (pluginKey = [self loadPluginFromFile:filename afterDownload:YES])
+  if ((pluginKey = [self loadPluginFromFile:filename afterDownload:YES]))
   {
 		//If plugin key does exists, means it sucess load the new plugin (no matter its a fresh installed plugin, or the
 		//update plugin
@@ -400,7 +399,7 @@
   NSEnumerator *keyEnumerator = [_loadedPlugins keyEnumerator];
   NSString *key;
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while (key = [keyEnumerator nextObject])
+  while ((key = [keyEnumerator nextObject]))
   {
     [tmpArray addObject:key];
   }
@@ -418,7 +417,7 @@
   NSArray *keys = [self loadedPluginsByKey];
   NSEnumerator *enumerator = [keys objectEnumerator];
   NSDictionary *tmpDict;
-  while (tmpDict = [_loadedPlugins objectForKey:[enumerator nextObject]])
+  while ((tmpDict = [_loadedPlugins objectForKey:[enumerator nextObject]]))
   {
     [tmpArray addObject:[tmpDict objectForKey:@"name"]];
   }
@@ -681,7 +680,7 @@
   NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
   NSString *key;
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while (key = [keyEnumerator nextObject])
+  while ((key = [keyEnumerator nextObject]))
   {
     [tmpArray addObject:[_pluginDictionary objectForKey:key]];
   }
