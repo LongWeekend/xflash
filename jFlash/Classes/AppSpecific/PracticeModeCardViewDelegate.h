@@ -11,10 +11,11 @@
 #import "WordCardViewController.h"
 #import "ActionBarViewController.h"
 
-@interface PracticeModeCardViewDelegate : NSObject {
-  id cardViewController;
+@interface PracticeModeCardViewDelegate : NSObject 
+{
+  WordCardViewController* wordCardViewController;
 }
 
-@property (nonatomic, retain) id cardViewController;
+@property (nonatomic, retain) WordCardViewController* wordCardViewController;
 
 @end

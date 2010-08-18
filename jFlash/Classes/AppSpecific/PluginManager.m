@@ -521,7 +521,7 @@
 /**
  * Intended to be run in the background so we don't lock the main thread
  */
-- (void) _retrievePlistFromServer
+- (void)_retrievePlistFromServer
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
@@ -532,7 +532,7 @@
 /**
  * Callback when server plist request is finished
  */
-- (void) _plistDidDownload:(NSDictionary*)dictionary
+- (void)_plistDidDownload:(NSDictionary*)dictionary
 {
   //Set up the variable to be the 
   NSMutableDictionary *downloadablePluginHash = nil;

@@ -5,6 +5,7 @@
 //  Created by シャロット ロス on 5/4/09.
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 //
+
 #import "jFlashAppDelegate.h"
 #import "StudyViewController.h"
 #import "SettingsViewController.h"
@@ -20,6 +21,7 @@
 - (void)_refreshProgressBarView;
 - (NSMutableArray*) _getLevelDetails;
 - (void)_setupScrollView;
+- (void)_setupView;
 @end
 
 @implementation StudyViewController
@@ -97,7 +99,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:LWESettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCardView) name:LWECardSettingsChanged object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupView) name:LWECardSettingsChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
@@ -162,7 +164,6 @@
 #pragma mark -
 #pragma mark Public methods
 
-
 /**
  * \brief Changes to a new study set
  * \details Gets the active Tag from the CurrentState singleton and
@@ -172,6 +173,7 @@
  */
 - (void) resetStudySet
 {
+	LWE_LOG(@"In the reset study set");
   // Initialize all variables
   currentRightStreak = 0;
   currentWrongStreak = 0;
@@ -223,12 +225,16 @@
   [moodIcon updateMoodIcon:tmpRatio];
   
   // Give the card view controller a chance to re-layout the page
-	//TODO: COMMENT THIS OUT!
+	// TODO: Think this again!
+	// The refresh call view is called in the "Reset Study Set" method, and the Do Change Card method is called after that, 
+	// and this method is called under the doChangeCard as well, shouldnt it be only called once?
 	//[[self cardViewController] setup];
   
   // Maybe we need to check if our examples view should be different?
-  BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
-  [self _setupCardView:cardShouldShowExampleView];
+  //BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+	
+	//Why is this run twice? - Rendy 18/8/10
+  //[self _setupCardView:cardShouldShowExampleView];
 }
 
 
@@ -405,6 +411,22 @@
 #pragma mark Private methods to setup cards (called every transition)
 
 /**
+ * Sets up back the view after these condition, if the card settings has changed, or if plugin has installed. 
+ * This will set up the User Interface to the initial state, with the user preference theme. 
+ *
+ */
+- (void)_setupView
+{
+	// This will also reset the cache value for shouldShowExampleView
+	[self refreshCardView];
+	[[self cardViewController] setup];
+	
+	// Maybe we need to check if our examples view should be different?
+	BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+	[self _setupCardView:cardShouldShowExampleView];
+}
+
+/**
  * Sets up all of the delegates and sub-controllers of the study view controller.
  * \param cardShouldShowExampleView YES if the scroll view should have 2 pages, and if the page control should be on.
  *  Note that even if this is YES, you may not be able to scroll depending on whether or not the card has been revealed.
@@ -455,10 +477,10 @@
   // Page control?
   [[self pageControl] setHidden:!cardShouldShowExampleView];
 
-  // TODO: remove the warning in 1.3
   if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
   {
-    [[self exampleSentencesViewController] setup];
+		ExampleSentencesViewController * exControler = (ExampleSentencesViewController *) [self exampleSentencesViewController];
+    [exControler setup];
   }
 }
 
@@ -496,25 +518,25 @@
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  if ([self cardViewControllerDelegate] != nil)
-  {
-    [self.cardViewControllerDelegate release];
-  }
-  
+	//TODO: Cache this so that it does not alloc a new object everytime the user changes set
+	id cardViewDelegate = nil;
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;
-    // These are not retained because they are delegates - leaks once but works for now
-    [self setCardViewControllerDelegate:[[BrowseModeCardViewDelegate alloc] init]];
+		cardViewDelegate = [[BrowseModeCardViewDelegate alloc] init];
   }
   else
   {
     self.isBrowseMode = NO;
-    // These are not retained because they are delegates - leaks once but works for now
-    [self setCardViewControllerDelegate:[[PracticeModeCardViewDelegate alloc] init]];
+		cardViewDelegate = [[PracticeModeCardViewDelegate alloc] init];
   }
-  [cardViewController setDelegate:[self cardViewControllerDelegate]];
-  [actionBarController setDelegate:[self cardViewControllerDelegate]];
+	
+	//Not increasing retain count.
+	[cardViewController setDelegate:cardViewDelegate];
+  [actionBarController setDelegate:cardViewDelegate];
+	//Will increase the retain count.
+	[self setCardViewControllerDelegate:cardViewDelegate];
+	[cardViewDelegate release];
 }
 
 
@@ -581,9 +603,7 @@
     // Get rid of the old example sentences guy & re-setup the scroll view
     [[[self exampleSentencesViewController] view] removeFromSuperview];
     [self _setupScrollView];
-    
-    // This will also reset the cache value for shouldShowExampleView
-    [self refreshCardView];
+		[self _setupView];
   }
 }
 
@@ -614,11 +634,9 @@
   if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
-    [self setExampleSentencesViewController: [[ExampleSentencesViewController alloc] init]];
-    if ([[self exampleSentencesViewController] respondsToSelector:@selector(setDatasource:)])
-    {
-      [[self exampleSentencesViewController] setDatasource:self];
-    }
+		ExampleSentencesViewController *exController = [[ExampleSentencesViewController alloc] init];
+		[exController setDatasource:self];
+		[self setExampleSentencesViewController: exController];
   }
   else
   {
@@ -687,10 +705,12 @@
   
   // Create a default mood icon object
 	self.moodIcon = nil;
+	
 	self.progressBarViewController = nil;
 	self.cardViewController = nil;
 	self.actionBarController = nil;
 	
+	//RENDY: Is this really important?
 	self.scrollView = nil;
 	self.pageControl = nil;
 	self.cardView = nil;
@@ -698,19 +718,20 @@
 	self.exampleSentencesViewController = nil;
 	self.cardSetLabel = nil;
 	self.totalWordsLabel = nil;
-	//self.percentCorrectTalkBubble = nil;
 	self.percentCorrectLabel = nil;
 	self.revealCardBtn = nil;
 	self.tapForAnswerImage = nil;
-	//self.showProgressModalBtn = nil;
 	self.practiceBgImage = nil;
 	self.progressBarView = nil;
-	//self.moodIconBtn = nil;
 	self.hhAnimationView = nil;
 	self.progressModalView = nil;
 	self.progressModalBtn = nil;
-	//self.progressModalCloseBtn = nil;
 	self.remainingCardsLabel = nil;
+	self.cardViewControllerDelegate = nil;
+	//self.progressModalCloseBtn = nil;
+	//self.percentCorrectTalkBubble = nil;
+	//self.moodIconBtn = nil;
+	//self.showProgressModalBtn = nil;
 	
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

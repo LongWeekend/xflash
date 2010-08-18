@@ -14,7 +14,9 @@
 @synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible, meaningRevealed;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
+	LWE_LOG(@"Word card view controller get loaded");
   [super viewDidLoad];
   
   // Get values from XIB on first load
@@ -31,7 +33,6 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
   [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
-  
 }
 
 #pragma mark layout methods
@@ -67,7 +68,9 @@
   if([studyDirection isEqualToString: SET_E_TO_J])
   {
     cardHeadwordLabel.lineBreakMode = UILineBreakModeWordWrap;
-  } else {
+  } 
+	else 
+	{
     cardHeadwordLabel.lineBreakMode = UILineBreakModeCharacterWrap;
   }
   
@@ -99,8 +102,20 @@
 
 
 // Toggle "more" icon to indicate the user can scroll meaning down
-- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer {
-  
+- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer 
+{
+	LWE_LOG(@"toggleMoreIconForLabel");
+	LWE_LOG(@"================================================================================");
+	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
+	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
+	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
+	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
+	LWE_LOG(@"================================================================================");
+	
   // TODO: iPad customization!
   CGSize theLabelSize = theLabel.frame.size;
   CGSize theParentSize = scrollViewContainer.frame.size;
@@ -148,7 +163,8 @@
   [self toggleMoreIconForLabel:[self cardReadingLabel] forScrollView:cardReadingLabelScrollContainer];
 }
 
-- (void) setupMeaningWebView: (NSUserDefaults *) settings Card:(Card*)card {  
+- (void) setupMeaningWebView: (NSUserDefaults *) settings Card:(Card*)card 
+{  
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
@@ -175,6 +191,16 @@
 - (void) prepareView:(Card*)card
 {
   LWE_LOG(@"START prepareViewForCard");
+	LWE_LOG(@"================================================================================");
+	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
+	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
+	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
+	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
+	LWE_LOG(@"================================================================================");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
 	// Show Blank Card
@@ -242,51 +268,58 @@
 #pragma mark -
 #pragma mark Plumbing
 
-- (void)didReceiveMemoryWarning 
-{
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
 - (void)viewDidUnload 
 {
 	LWE_LOG(@"Word card View Controller, view get unloaded.");
+	LWE_LOG(@"================================================================================");
+	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
+	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
+	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
+	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
+	LWE_LOG(@"================================================================================");
 	[super viewDidUnload];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+	self.cardReadingLabelScrollContainer = nil;
+	self.cardHeadwordLabelScrollContainer = nil;
+	self.cardHeadwordLabelScrollMoreIcon = nil;
+	self.cardReadingLabelScrollMoreIcon = nil;
+
+	self.cardHeadwordLabel = nil;
+	self.cardReadingLabel = nil;
+	self.toggleReadingBtn = nil;
+	self.meaningWebView = nil;
 }
 
 
 - (void)dealloc 
 {
+	LWE_LOG(@"DEALLOC!!!!");
 	//was added cause Rendy thought not everything is here, and shoulnt everyhing be here for deallocation?
-	LWE_LOG(@"%d", [cardReadingLabelScrollContainer retainCount]);
+	LWE_LOG(@"================================================================================");
+	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
+	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
+	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
+	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
+	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
+	LWE_LOG(@"================================================================================");
+	
 	[cardReadingLabelScrollContainer release];
-	LWE_LOG(@"%d", [cardReadingLabelScrollContainer retainCount]);
-	[cardReadingLabelScrollContainer release];
-	
 	[cardHeadwordLabelScrollContainer release];
-	[cardHeadwordLabelScrollContainer release];
-	
 	[cardHeadwordLabelScrollMoreIcon release];
-	[cardHeadwordLabelScrollMoreIcon release];
-	
-	[cardReadingLabelScrollMoreIcon release];
 	[cardReadingLabelScrollMoreIcon release];
 	
   [cardHeadwordLabel release];
-	//[cardHeadwordLabel release];
-	
   [cardReadingLabel release];
-	//[cardReadingLabel release];
-	
   [toggleReadingBtn release];
-	//[toggleReadingBtn release];
-	
   [meaningWebView release];  
-	[meaningWebView release];
 	
   [super dealloc];
 }

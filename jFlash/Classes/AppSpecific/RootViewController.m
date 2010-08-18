@@ -98,7 +98,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
-  [localControllersArray addObject:studyViewController];
+  [localControllersArray addObject:studyViewController];   
   [studyViewController release];
   
   StudySetViewController *studySetViewController = [[StudySetViewController alloc] init];
