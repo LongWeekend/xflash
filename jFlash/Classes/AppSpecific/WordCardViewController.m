@@ -191,16 +191,6 @@
 - (void) prepareView:(Card*)card
 {
   LWE_LOG(@"START prepareViewForCard");
-	LWE_LOG(@"================================================================================");
-	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
-	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
-	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
-	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
-	LWE_LOG(@"================================================================================");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
 	// Show Blank Card

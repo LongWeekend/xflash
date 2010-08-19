@@ -11,24 +11,22 @@
 #import "ActionBarViewController.h"
 
 @implementation BrowseModeCardViewDelegate
-@synthesize cardViewController;
+@synthesize wordCardViewController;
 
 //! Delegate messages
 - (void)cardViewWillSetup:(NSNotification *)aNotification
 {
-  if([self cardViewController] == nil)
+	CardViewController *cardViewController = [aNotification object];
+  if([self wordCardViewController] == nil)
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    [self setCardViewController:cvc];
-    [[aNotification object] setView:[[self cardViewController] view]];
-		
-		//TODO: Remove this if this is crash. Shouldn't the cvc be released cause the card view controller property is retain?, and it uses the setter method?
-		LWE_LOG(@"Rendy just added this, not sure, and please clarify");
+    [self setWordCardViewController:cvc];
+    [cardViewController setView:[[self wordCardViewController] view]];
 		[cvc release];
   }
   
-  [[self cardViewController] prepareView:[[aNotification object] currentCard]];
-  [[self cardViewController] setupReadingVisibility];
+  [[self wordCardViewController] prepareView:[cardViewController currentCard]];
+  [[self wordCardViewController] setupReadingVisibility];
 }
 
 - (void)actionBarWillSetup:(NSNotification *)aNotification
@@ -53,7 +51,19 @@
 
 - (void)dealloc
 {
-	[cardViewController release];
+	if (wordCardViewController)
+	{
+		NSArray *views = [wordCardViewController.view subviews];
+		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
+		for (UIView *view in views)
+		{
+			LWE_LOG(@"Removing view %@", view);
+			[view removeFromSuperview];
+		}
+		
+		[wordCardViewController release];
+	}
+	
 	[super dealloc];
 }
 

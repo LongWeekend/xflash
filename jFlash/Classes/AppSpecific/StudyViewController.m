@@ -445,7 +445,7 @@
   // update the remaining cards label
   if(isBrowseMode)
   {
-    if(percentCorrectVisible) [self doTogglePercentCorrectBtn];
+		if(percentCorrectVisible) [self doTogglePercentCorrectBtn];
     [[self tapForAnswerImage] setHidden:YES];
     [[self revealCardBtn] setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
@@ -471,8 +471,17 @@
 - (void) _setupExampleSentencesView:(BOOL)cardShouldShowExampleView
 {
   // This should always be no because scroll cannot be done when card is not revealed
-  scrollView.pagingEnabled = NO;
-  scrollView.scrollEnabled = NO;
+	// However, if it is a browse mode, it should have all of the scroll view enabled? - Rendy 19/8/10
+	if(isBrowseMode)
+	{
+		scrollView.pagingEnabled = YES;
+		scrollView.scrollEnabled = YES;
+	}
+	else 
+	{
+		scrollView.pagingEnabled = NO;
+		scrollView.scrollEnabled = NO;
+	}
 
   // Page control?
   [[self pageControl] setHidden:!cardShouldShowExampleView];

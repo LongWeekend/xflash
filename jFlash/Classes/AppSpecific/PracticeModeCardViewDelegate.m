@@ -101,9 +101,10 @@
 	if (wordCardViewController)
 	{
 		NSArray *views = [wordCardViewController.view subviews];
-		LWE_LOG(@"There is %d view(s) in the card view controller's view");
+		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
 		for (UIView *view in views)
 		{
+			LWE_LOG(@"Removing view %@", view);
 			[view removeFromSuperview];
 		}
 		
