@@ -262,16 +262,8 @@
 {
 	LWE_LOG(@"Word card View Controller, view get unloaded.");
 	LWE_LOG(@"================================================================================");
-	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
-	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
-	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
-	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
-	LWE_LOG(@"================================================================================");
 	[super viewDidUnload];
+	
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.cardReadingLabelScrollContainer = nil;

@@ -268,13 +268,11 @@
     [[self cardViewController] setup];
     
     // Show we show example view here?
-    BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:card];
-    
-    // Save value for when we tap "Reveal".
-    _cardShouldShowExampleViewCached = cardShouldShowExampleView;
+		// Save value for when we tap "Reveal".
+    _cardShouldShowExampleViewCached = [self _cardShouldShowExampleView:card];
     
     // Now set up the card
-    [self _setupCardView:cardShouldShowExampleView];
+    [self _setupCardView:_cardShouldShowExampleViewCached];
     
     // If no direction, don't animate transition
     if (directionOrNil != nil)

@@ -2089,7 +2089,7 @@
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Debug;
 		};
