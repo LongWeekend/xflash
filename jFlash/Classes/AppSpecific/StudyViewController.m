@@ -277,11 +277,11 @@
     // If no direction, don't animate transition
     if (directionOrNil != nil)
     {
-      [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)directionOrNil duration:(float)0.15f objectToTransition:(UIViewController *)self];
+//      [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)directionOrNil duration:(float)0.15f objectToTransition:(UIViewController *)self];
     }
     
     // Finally, update the progress bar
-    [self _refreshProgressBarView];
+//    [self _refreshProgressBarView];
   }
 }
 

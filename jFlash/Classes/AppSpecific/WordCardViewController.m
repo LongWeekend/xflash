@@ -13,11 +13,16 @@
 @synthesize cardReadingLabelScrollContainerYPosInXib, cardHeadwordLabelHeightInXib, toggleReadingBtnYPosInXib, cardHeadwordLabelYPosInXib;
 @synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible, meaningRevealed;
 
+@synthesize _tmpJavascript;
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
 	LWE_LOG(@"Word card view controller get loaded");
   [super viewDidLoad];
+  
+  // Make sure this is nil before the web view starts loading
+  self._tmpJavascript = nil;
   
   // Get values from XIB on first load
   // TODO: iPad customization!
@@ -33,6 +38,15 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
   [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
+  
+  // Modify the inline CSS for current theme
+  // TODO: make this work when the user changes themes
+  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+  NSString *html = [NSString stringWithFormat:@"%@%@",htmlHeader,HTML_FOOTER];
+
+  // Initialize the web view
+  [self.meaningWebView loadHTMLString:html baseURL:nil];
 }
 
 #pragma mark layout methods
@@ -104,26 +118,15 @@
 // Toggle "more" icon to indicate the user can scroll meaning down
 - (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer 
 {
-	LWE_LOG(@"toggleMoreIconForLabel");
-	LWE_LOG(@"================================================================================");
-	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
-	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
-	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
-	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
-	LWE_LOG(@"================================================================================");
-	
   // TODO: iPad customization!
   CGSize theLabelSize = theLabel.frame.size;
   CGSize theParentSize = scrollViewContainer.frame.size;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  if(theLabel == cardReadingLabel)
+  if (theLabel == cardReadingLabel)
   {
-    if(theLabelSize.height > theParentSize.height){
+    if(theLabelSize.height > theParentSize.height)
+    {
       if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J] && meaningRevealed)
       {
         [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
@@ -142,10 +145,14 @@
       [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
     }
   }
-  else if(theLabel == cardHeadwordLabel){
-    if(theLabelSize.height > theParentSize.height){
+  else if (theLabel == cardHeadwordLabel)
+  {
+    if(theLabelSize.height > theParentSize.height)
+    {
       [[self cardHeadwordLabelScrollMoreIcon] setHidden:NO];
-    } else {
+    }
+    else
+    {
       [[self cardHeadwordLabelScrollMoreIcon] setHidden:YES];
     }
   }
@@ -159,32 +166,34 @@
 
 - (void) hideMeaningWebView:(BOOL)hideMeaningWebView
 {
-  [meaningWebView setHidden:hideMeaningWebView];
+  [self.meaningWebView setHidden:hideMeaningWebView];
   [self toggleMoreIconForLabel:[self cardReadingLabel] forScrollView:cardReadingLabelScrollContainer];
 }
 
 - (void) setupMeaningWebView: (NSUserDefaults *) settings Card:(Card*)card 
-{  
-  // Modify the inline CSS for current theme
-  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
-  
-  // Show Card Meaning
-  // TODO: refactor this
+{
   NSString *html;
   if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J])
   {
-    html = [NSString stringWithFormat:@"%@<span class='jpn'>%@</span>%@", htmlHeader, [card headword], HTML_FOOTER];    
+    html = [NSString stringWithFormat:@"<span class='jpn'>%@</span>", [card headword]];
   }
   else
   {
-    html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, [card meaning], HTML_FOOTER];    
+    html = [NSString stringWithFormat:@"<span>%@</span>", [card meaning]];    
   }
+
+  self.meaningWebView.backgroundColor = [UIColor clearColor];
+  [self.meaningWebView shutOffBouncing];
   
-  meaningWebView.backgroundColor = [UIColor clearColor];
-  [meaningWebView shutOffBouncing];
-  
-  [meaningWebView loadHTMLString:html baseURL:nil];
+  // Javascript
+  NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container');"
+  "if (textElement) { textElement.innerHTML = '%@'; } ",html];
+
+  // Save of copy of this in case the webview hasn't finished loading yet
+  self._tmpJavascript = js;
+    
+  // Not loading, do it as normal
+  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
 }
 
 // Prepare the view for the current card
@@ -256,21 +265,33 @@
 }
 
 #pragma mark -
+#pragma mark UIWebViewDelegate Support
+
+/**
+ * This callback should only be called once at the beginning of a study session
+ * When the webview doesn't load as fast as the view controllers (so far, always)
+ * the javascript call in "setupWebMeaning" or whatever will do nothing - so 
+ * it caches the result in _tmpHTML and waits for the delegate callback
+ */
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+  // Aha, we have some HTML on first load, so load that shit up
+  if (self._tmpJavascript)
+  {
+    [self.meaningWebView stringByEvaluatingJavaScriptFromString:self._tmpJavascript];
+  }
+}
+
+#pragma mark -
 #pragma mark Plumbing
 
 - (void)viewDidUnload 
 {
-	LWE_LOG(@"Word card View Controller, view get unloaded.");
-	LWE_LOG(@"================================================================================");
 	[super viewDidUnload];
-	
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 	self.cardReadingLabelScrollContainer = nil;
 	self.cardHeadwordLabelScrollContainer = nil;
 	self.cardHeadwordLabelScrollMoreIcon = nil;
 	self.cardReadingLabelScrollMoreIcon = nil;
-
 	self.cardHeadwordLabel = nil;
 	self.cardReadingLabel = nil;
 	self.toggleReadingBtn = nil;
@@ -280,19 +301,6 @@
 
 - (void)dealloc 
 {
-	LWE_LOG(@"DEALLOC!!!!");
-	//was added cause Rendy thought not everything is here, and shoulnt everyhing be here for deallocation?
-	LWE_LOG(@"================================================================================");
-	LWE_LOG(@"cardReadingLabelScrollContainer %d", [cardReadingLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardHeadwordLabelScrollContainer %d", [cardHeadwordLabelScrollContainer retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardReadingLabelScrollMoreIcon %d", [cardReadingLabelScrollMoreIcon retainCount]);
-	LWE_LOG(@"cardHeadwordLabel %d", [cardHeadwordLabel retainCount]);
-	LWE_LOG(@"cardReadingLabel %d", [cardReadingLabel retainCount]);
-	LWE_LOG(@"toggleReadingBtn %d", [toggleReadingBtn retainCount]);
-	LWE_LOG(@"meaningWebView %d", [meaningWebView retainCount]);
-	LWE_LOG(@"================================================================================");
-	
 	[cardReadingLabelScrollContainer release];
 	[cardHeadwordLabelScrollContainer release];
 	[cardHeadwordLabelScrollMoreIcon release];
@@ -301,7 +309,11 @@
   [cardHeadwordLabel release];
   [cardReadingLabel release];
   [toggleReadingBtn release];
-  [meaningWebView release];  
+  
+  // Apparently we're supposed to set this to nil, according to the docs
+  // I guess it's in case some other guy is holding a reference to this dude
+  self.meaningWebView.delegate = nil;
+  [meaningWebView release];
 	
   [super dealloc];
 }
