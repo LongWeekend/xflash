@@ -33,7 +33,15 @@
   
   for (i = 1; i < 6; i++)
   {
+    // Get the current progress view for this guy and remove him (we are going to re-add)
+    UIView *aView = [self.view viewWithTag:i];
+    if (aView)
+    {
+      [aView removeFromSuperview];
+    }
+    
     PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
+    progressView.tag = i;
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     if(i == 1)
     {
