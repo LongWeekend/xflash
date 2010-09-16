@@ -30,10 +30,11 @@
     if (!progressView)
     {
       progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-      progressView.tag = i;
+      progressView.tag = i+PROGRESS_BAR_TAG;
       [self.view addSubview:progressView];
       [progressView release];
     }
+
     
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     if(i == 1)
