@@ -150,6 +150,9 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 }
 
 
+#pragma mark -
+#pragma mark Generic Modal Pop-ups and dismissal. 
+
 /**
  * Private method that actually does the dirty work of displaying any modal
  */
@@ -166,9 +169,6 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
     [[self tabBarController] presentModalViewController:vc animated:YES];    
   }
 }
-
-#pragma mark -
-#pragma mark Generic Modal Pop-ups and dismissal. 
 
 /**
  * Show Modal method that will call the show modal view controller private method.
