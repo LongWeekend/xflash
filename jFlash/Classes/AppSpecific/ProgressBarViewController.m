@@ -34,7 +34,7 @@
       [self.view addSubview:progressView];
       [progressView release];
     }
-
+3
     
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     if(i == 1)

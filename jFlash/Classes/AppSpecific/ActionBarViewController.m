@@ -197,10 +197,8 @@
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
-		//[self performSelector:@selector(tweet) withObject:nil afterDelay:0];
 	  [self tweet];
   }
-  // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }
 
 #pragma mark -
@@ -239,7 +237,7 @@
 		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY privateKey:JFLASH_TWITTER_PRIVATE_KEY authenticationView:controller];
     [controller release];
 	}
-	
+
   // TODO: fix this so it doesn't use App Delegate - use notifications instead
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;

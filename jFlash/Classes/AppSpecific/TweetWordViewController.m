@@ -130,25 +130,14 @@
                                                 target:self
                                                 action:@selector(signUserOutOfTwitter:)];
 	
-	 _doneBtn = [[UIBarButtonItem alloc]
-				 initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
-				 style:UIBarButtonItemStyleDone 
-				 target:self 
-				 action:@selector(_resignTextFieldKeyboard)];
-  
-	//TODO
-	_cancelBtn = [[UIBarButtonItem alloc]
-				  initWithTitle:NSLocalizedString(@"Cancel", @"Global.Cancel")
-				  style:UIBarButtonItemStyleBordered 
-				  target:self.parentViewController
-				  action:@selector(dismissModalViewControllerAnimated:)];
+  _doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_resignTextFieldKeyboard)];
+	_cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
 	
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 	self.navigationItem.rightBarButtonItem = _signOutBtn;
 	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
-	self.counterLbl.text = [NSString stringWithFormat:@"%d", 
-							(kMaxChars-[_tweetWord length])];
+	self.counterLbl.text = [NSString stringWithFormat:@"%d",(kMaxChars-[_tweetWord length])];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -160,9 +149,7 @@
 
 - (void)viewDidUnload 
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
 	self.tweetTxt = nil;
 	self.tweetBtn = nil;
 	self.counterLbl = nil;
@@ -191,7 +178,7 @@
 	[tweetTxt release];
 	[tweetBtn release];
 	[counterLbl release];
-    [super dealloc];
+  [super dealloc];
 }
 
 
