@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "SmallLoadingView.h"
+#import "LWELoadingView.h"
 #import "CurrentState.h"
 #import "StudyViewController.h"
 #import "StudySetViewController.h"
@@ -26,12 +26,12 @@ extern NSString * const LWEShouldDismissModal;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {
-  SmallLoadingView *loadingView;
+  LWELoadingView *loadingView;
   UITabBarController *tabBarController;
 }
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
-@property (retain,nonatomic) SmallLoadingView *loadingView;
+@property (retain,nonatomic) LWELoadingView *loadingView;
 
 - (void) switchToStudyView;
 - (IBAction) switchToSettings;

@@ -86,7 +86,7 @@
 {
 	if (_lv != nil)
 	{
-		[_lv remove];
+		[_lv removeFromSuperview];
 		_lv = nil;
 	}
 	//Pop up an alert message for user, telling that the authentication is not successful.
@@ -100,7 +100,7 @@
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
-	_lv = [SmallLoadingView loadingView:self.parentViewController.view withText:@"Logging In"];
+	_lv = [LWELoadingView loadingView:self.parentViewController.view withText:@"Logging In"];
 	[self performSelector:@selector(_performAuthentication) withObject:nil afterDelay:0.0];
 }
 
