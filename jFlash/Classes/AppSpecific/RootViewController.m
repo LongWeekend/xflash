@@ -66,7 +66,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  loadingView = [SmallLoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
+  loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
 }
 
 
@@ -75,7 +75,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 {
   if (loadingView)
   {
-    [loadingView remove];
+    [loadingView removeFromSuperview];
   }
 }
 
@@ -98,7 +98,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 	NSMutableArray *localControllersArray = [[NSMutableArray alloc] initWithCapacity:5];
 
   StudyViewController *studyViewController = [[StudyViewController alloc] init];
-  [localControllersArray addObject:studyViewController];
+  [localControllersArray addObject:studyViewController];   
   [studyViewController release];
   
   StudySetViewController *studySetViewController = [[StudySetViewController alloc] init];

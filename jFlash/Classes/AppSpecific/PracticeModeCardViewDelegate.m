@@ -8,42 +8,40 @@
 
 #import "PracticeModeCardViewDelegate.h"
 
-
 @implementation PracticeModeCardViewDelegate
-@synthesize cardViewController;
+@synthesize wordCardViewController;
 
 //! Delegate messages
 - (void)cardViewWillSetup:(NSNotification *)aNotification
 {
-  if([self cardViewController] == nil)
+	CardViewController *cardViewController = (CardViewController *) [aNotification object];
+  if([self wordCardViewController] == nil)
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    [self setCardViewController:cvc];
-    [[aNotification object] setView:[[self cardViewController] view]];
-		//TODO: Remove if Crash
-		LWE_LOG(@"Rendy just added something here that he was not sure whether it should be there, please clarify");
+    [self setWordCardViewController:cvc];
 		[cvc release];
+		
+    [cardViewController setView:[[self wordCardViewController] view]];
   }
   
-  [[self cardViewController] prepareView:[[aNotification object] currentCard]];
-  
+  [[self wordCardViewController] prepareView:[cardViewController currentCard]];
   // always start with the meaning hidden
-  [[self cardViewController] setMeaningRevealed: NO];
-  [[self cardViewController] hideMeaningWebView:YES];
-  [[self cardViewController] setupReadingVisibility];
+  [[self wordCardViewController] setMeaningRevealed: NO];
+  [[self wordCardViewController] hideMeaningWebView:YES];
+  [[self wordCardViewController] setupReadingVisibility];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {
-    [[[self cardViewController] toggleReadingBtn] setHidden:YES];
-    [[[self cardViewController] cardReadingLabelScrollContainer] setHidden:YES];
-    [[[self cardViewController] cardReadingLabel] setHidden:YES];
-    [[self cardViewController] setReadingVisible: NO];
+    [[[self wordCardViewController] toggleReadingBtn] setHidden:YES];
+    [[[self wordCardViewController] cardReadingLabelScrollContainer] setHidden:YES];
+    [[[self wordCardViewController] cardReadingLabel] setHidden:YES];
+    [[self wordCardViewController] setReadingVisible: NO];
   }
   else
   {
     // set the toggleReadingBtn to not hidden for other modes, if this is not here the button can be missing in practice mode
-    [[[self cardViewController] toggleReadingBtn] setHidden:NO];
+    [[[self wordCardViewController] toggleReadingBtn] setHidden:NO];
   }
 }
 
@@ -54,12 +52,12 @@
 
 - (void)cardViewDidReveal:(NSNotification *)aNotification
 {
-  [[self cardViewController] hideMeaningWebView:NO];
-  BOOL userSetReadingVisible = [[self cardViewController] readingVisible];
-  [[self cardViewController] setReadingVisible: YES];
-  [[self cardViewController] setMeaningRevealed: YES];
-  [[self cardViewController] setupReadingVisibility];
-  [[self cardViewController] setReadingVisible:userSetReadingVisible];
+  [[self wordCardViewController] hideMeaningWebView:NO];
+  BOOL userSetReadingVisible = [[self wordCardViewController] readingVisible];
+  [[self wordCardViewController] setReadingVisible: YES];
+  [[self wordCardViewController] setMeaningRevealed: YES];
+  [[self wordCardViewController] setupReadingVisibility];
+  [[self wordCardViewController] setReadingVisible:userSetReadingVisible];
 }
 
 #pragma mark -
@@ -100,7 +98,20 @@
 
 - (void)dealloc 
 {
-  [self setCardViewController:nil];  
+	if (wordCardViewController)
+	{
+		NSArray *views = [wordCardViewController.view subviews];
+		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
+		for (UIView *view in views)
+		{
+			LWE_LOG(@"Removing view %@", view);
+			[view removeFromSuperview];
+		}
+		
+		LWE_LOG(@"Retain count of card view controller (being released) : %d", [wordCardViewController retainCount]);
+		[wordCardViewController release];
+	}
+
   [super dealloc];
 }
 

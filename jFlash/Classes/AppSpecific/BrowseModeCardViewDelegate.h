@@ -11,9 +11,9 @@
 
 @interface BrowseModeCardViewDelegate : NSObject 
 {
-  id cardViewController;
+  WordCardViewController *wordCardViewController;
 }
 
-@property (nonatomic, retain) id cardViewController;
+@property (nonatomic, retain) WordCardViewController *wordCardViewController;
 
 @end

@@ -404,8 +404,21 @@
 #pragma mark -
 #pragma mark Class Plumbing
 
+- (void)didReceiveMemoryWarning
+{
+	if (_twitterEngine != nil)
+	{
+		[_twitterEngine release];
+		_twitterEngine = nil;
+	}
+
+	[super didReceiveMemoryWarning];
+}
+
 - (void)viewDidUnload
 {
+	[super viewDidUnload];
+	
   self.addBtn = nil;
   self.buryCardBtn = nil;
   self.nextCardBtn = nil;
@@ -424,6 +437,12 @@
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
   
+	if (_twitterEngine != nil)
+	{
+		[_twitterEngine release];
+		_twitterEngine = nil;
+	}
+	
   [addBtn release];
   [buryCardBtn release];
   [nextCardBtn release];

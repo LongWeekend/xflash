@@ -36,8 +36,12 @@
 	//but its for the sake of it blocks all of the view underneath, so it
 	//avoids user clicks the other button while it still loading and
 	//perform the checking for update. 
-	SmallLoadingView *lv = [SmallLoadingView loadingView:self.parentViewController.parentViewController.view 
+	//SmallLoadingView *lv = [SmallLoadingView loadingView:self.parentViewController.parentViewController.view 
+	//																							withText:@"Please Wait"];
+	
+	LWELoadingView *lv = [LWELoadingView loadingView:self.parentViewController.parentViewController.view 
 																							withText:@"Please Wait"];
+	
 	[self performSelector:@selector(performCheckUpdateWithLoadingView:) 
 						 withObject:lv 
 						 afterDelay:0.1f];
@@ -48,15 +52,15 @@
  * plugin manager.
  *
  */
-- (void)performCheckUpdateWithLoadingView:(SmallLoadingView *)lv
+- (void)performCheckUpdateWithLoadingView:(LWELoadingView *)lv
 {
 	PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
 	
 	[self _changeLastUpdateLabel];
-	[pm checkNewPluginsNotifyOnNetworkFail:YES];
+  [pm checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self reloadTableData];
 	
-	[lv remove];
+	[lv removeFromSuperview];
 }
 
 #pragma mark -

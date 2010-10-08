@@ -29,7 +29,7 @@ extern NSString * const LWEPluginTargetPathKey;
 {
   NSMutableDictionary *_loadedPlugins;				//! Maintains in memory a list of loaded plugins
   NSDictionary *_downloadedPlugins;						//! Maintains in memory a list of the downloaded plugin in the user device. This is used for loading the plugin back to the program when the program runs. 
-	NSDictionary *_availableForDownloadPlugins;	//! Maintains in memory a list of availavle for download plugin.
+	NSDictionary *availableForDownloadPlugins;	//! Maintains in memory a list of availavle for download plugin.
 }
 
 + (NSDictionary*) preinstalledPlugins;
@@ -45,7 +45,7 @@ extern NSString * const LWEPluginTargetPathKey;
 - (NSArray*) downloadedPlugins;
 - (NSDictionary*) availablePluginsDictionary;
 + (BOOL)isTimeForCheckingUpdate;
-- (void)checkNewPluginsNotifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 
 - (NSArray*) _plugins:(NSDictionary*)_pluginDictionary;
 - (void)_setAvailableForDownloadPlugins:(NSDictionary *)dict;
@@ -55,10 +55,12 @@ extern NSString * const LWEPluginTargetPathKey;
 - (void)_sendUpdateBadgeNotification:(NSNumber *)badgeNumber;
 - (void)_initAvailableForDownloadPluginsList;
 - (void)_initDownloadedPluginsList;
+- (void)_checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins;
+- (void)_retrievePlistFromServer;
 
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 
-@property (nonatomic, readonly) NSDictionary *availableForDownloadPlugins;
+@property (nonatomic, retain) NSDictionary *availableForDownloadPlugins;
 
 @end
