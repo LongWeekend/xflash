@@ -32,9 +32,10 @@
       progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
       progressView.tag = i+PROGRESS_BAR_TAG;
       [self.view addSubview:progressView];
+      // TODO: i dont like the fact that this is manupulated by this method after being released... relying on view to retain.
       [progressView release];
     }
-3
+
     
     [progressView setTintColor:[lineColors objectAtIndex: i]];
     if(i == 1)

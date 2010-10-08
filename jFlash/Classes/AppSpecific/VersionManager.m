@@ -54,10 +54,10 @@
   else
   {
     // Is the active database the current one?
-    if ([dataVersion isEqualToString:JFLASH_CURRENT_VERSION])
-      return NO;
-    else
+    if ([dataVersion isEqualToString:JFLASH_VERSION_1_0])
       return YES;
+    else
+      return NO;
   }
 }
 

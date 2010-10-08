@@ -24,6 +24,7 @@
 extern NSString * const JFLASH_VERSION_1_0;
 extern NSString * const JFLASH_VERSION_1_1;
 extern NSString * const JFLASH_VERSION_1_2;
+extern NSString * const JFLASH_VERSION_1_3;
 
 extern NSString * const JFLASH_CURRENT_VERSION;
 extern NSString * const JFLASH_CURRENT_CARD_DATABASE;

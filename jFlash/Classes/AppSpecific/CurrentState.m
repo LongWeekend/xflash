@@ -173,6 +173,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 	return NO;
 }
 
+
+#pragma mark Version 1.3
+
+
+/** Updates NSUserDefaults to add 1.2 values*/
+- (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings
+{
+	LWE_LOG(@"Update from 1.2 to 1.3 Yatta!");
+  // Now change the app version
+	[settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
+  
+  // No need to change the data version because it hasn't changed at all between 1.2 and 1.3
+}
+
+
+/** Returns YES if the user needs to update settings from 1.1 to 1.2, otherwise returns NO */
+- (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
+{
+  // If the user was a fresh installer of 1.2, they had this condition where there was no setting for
+  // APP_SETTINGS_VERSION - it was our oversight.
+  
+  // If the user has an APP_DATA_VERSION of 1.2, but does not have the APP_SETTINGS flag, they need it.
+  if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
+      [settings objectForKey:APP_SETTINGS_VERSION] == nil)
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
+}
 #pragma mark -
 #pragma mark Initialization
 
@@ -192,6 +224,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // DEBUG: this simulates being a JFlash 1.0 upgrade user
   //[self _createDefaultSettingsFor10:settings];
   
+  // NOTE THAT THESE ARE MIGRATIONS!!!!  They should be in order of version.
+  
   // STEP 1 - check for settings updates
   // If we are JFlash 1.0 settings, update to 1.1
   if ([self _needs10to11SettingsUpdate:settings])
@@ -207,6 +241,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 	  [self _updateSettingsFrom11to12:settings];
   }
   
+  // In Jflash 1.3, not much has changed -- but unfortunately, we made a mistake in the 1.2 fresh installs -
+  // we forgot to set APP_SETTINGS_VERSION, so this will do it
+  if ([self _needs12to13SettingsUpdate:settings])
+  {
+		LWE_LOG(@"Oops, we need update to 1.3 version");
+	  [self _updateSettingsFrom12to13:settings];
+  }
+
   // STEP 3 - is the data update-able?  Let the version manager tell us
   [self setIsUpdatable:[VersionManager databaseIsUpdatable]];
 
@@ -242,8 +284,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   LWE_LOG(@"Creating the default settings");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
-  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_CURRENT_VERSION,nil];
+  NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,nil];
+  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],nil];
   for (int i = 0; i < [keys count]; i++)
   {
     [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
@@ -256,6 +298,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
+  [settings setValue:JFLASH_CURRENT_VERSION forKey:APP_DATA_VERSION];
+  [settings setValue:JFLASH_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
 
   [settings setBool:NO forKey:@"db_did_finish_copying"];
@@ -268,7 +312,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self setPluginMgr:nil];
+  [pluginMgr release];
   [super dealloc];
 }
    
