@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PluginManager.h"
-#import "SmallLoadingView.h"
+#import "LWELoadingView.h"
 
 @interface PluginSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {

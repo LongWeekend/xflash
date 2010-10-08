@@ -47,8 +47,18 @@
 		24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */; };
 		24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */; };
 		24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA10FD12015BF60081CBBA /* SmallLoadingView.m */; };
-		24EA112812015EA10081CBBA /* ViewUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 24EA112712015EA10081CBBA /* ViewUtility.c */; };
 		24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA131D1202AC480081CBBA /* downloadedPlugin.plist */; };
+		24F7DC1B125A9E46002638AA /* LWELineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DBFE125A9E46002638AA /* LWELineView.m */; };
+		24F7DC1C125A9E46002638AA /* LWELoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC00125A9E46002638AA /* LWELoadingView.m */; };
+		24F7DC1D125A9E46002638AA /* LWENotificationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC03125A9E46002638AA /* LWENotificationButton.m */; };
+		24F7DC1E125A9E46002638AA /* LWENotificationToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC05125A9E46002638AA /* LWENotificationToolbar.m */; };
+		24F7DC1F125A9E46002638AA /* LWEPickerComponentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */; };
+		24F7DC21125A9E46002638AA /* LWECalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC0D125A9E46002638AA /* LWECalloutView.m */; };
+		24F7DC22125A9E46002638AA /* LWERoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC0F125A9E46002638AA /* LWERoundedRectView.m */; };
+		24F7DC23125A9E46002638AA /* LWETooltipParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC12125A9E46002638AA /* LWETooltipParams.m */; };
+		24F7DC24125A9E46002638AA /* LWETooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC14125A9E46002638AA /* LWETooltipView.m */; };
+		24F7DC26125A9E46002638AA /* LWEViewUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC17125A9E46002638AA /* LWEViewUtility.c */; };
+		24F7DC27125A9E46002638AA /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F7DC1A125A9E46002638AA /* LWEToolbarPicker.xib */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
@@ -475,9 +485,30 @@
 		24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+LWEUtilities.m"; path = "Reusable/LWE/NSDate+LWEUtilities.m"; sourceTree = "<group>"; };
 		24EA10FC12015BF60081CBBA /* SmallLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmallLoadingView.h; path = AppSpecific/SmallLoadingView.h; sourceTree = "<group>"; };
 		24EA10FD12015BF60081CBBA /* SmallLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmallLoadingView.m; path = AppSpecific/SmallLoadingView.m; sourceTree = "<group>"; };
-		24EA112612015EA10081CBBA /* ViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewUtility.h; path = Reusable/ViewUtility.h; sourceTree = "<group>"; };
-		24EA112712015EA10081CBBA /* ViewUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ViewUtility.c; path = Reusable/ViewUtility.c; sourceTree = "<group>"; };
 		24EA131D1202AC480081CBBA /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = downloadedPlugin.plist; sourceTree = "<group>"; };
+		24F7DBFD125A9E46002638AA /* LWELineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELineView.h; sourceTree = "<group>"; };
+		24F7DBFE125A9E46002638AA /* LWELineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWELineView.m; sourceTree = "<group>"; };
+		24F7DBFF125A9E46002638AA /* LWELoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELoadingView.h; sourceTree = "<group>"; };
+		24F7DC00125A9E46002638AA /* LWELoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWELoadingView.m; sourceTree = "<group>"; };
+		24F7DC02125A9E46002638AA /* LWENotificationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationButton.h; sourceTree = "<group>"; };
+		24F7DC03125A9E46002638AA /* LWENotificationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWENotificationButton.m; sourceTree = "<group>"; };
+		24F7DC04125A9E46002638AA /* LWENotificationToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationToolbar.h; sourceTree = "<group>"; };
+		24F7DC05125A9E46002638AA /* LWENotificationToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWENotificationToolbar.m; sourceTree = "<group>"; };
+		24F7DC06125A9E46002638AA /* LWENotificationToolbarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationToolbarConstants.h; sourceTree = "<group>"; };
+		24F7DC07125A9E46002638AA /* LWEPickerComponentDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEPickerComponentDataSource.h; sourceTree = "<group>"; };
+		24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEPickerComponentDataSource.m; sourceTree = "<group>"; };
+		24F7DC0C125A9E46002638AA /* LWECalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECalloutView.h; sourceTree = "<group>"; };
+		24F7DC0D125A9E46002638AA /* LWECalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWECalloutView.m; sourceTree = "<group>"; };
+		24F7DC0E125A9E46002638AA /* LWERoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWERoundedRectView.h; sourceTree = "<group>"; };
+		24F7DC0F125A9E46002638AA /* LWERoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWERoundedRectView.m; sourceTree = "<group>"; };
+		24F7DC10125A9E46002638AA /* LWETooltipConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWETooltipConstants.h; sourceTree = "<group>"; };
+		24F7DC11125A9E46002638AA /* LWETooltipParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWETooltipParams.h; sourceTree = "<group>"; };
+		24F7DC12125A9E46002638AA /* LWETooltipParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWETooltipParams.m; sourceTree = "<group>"; };
+		24F7DC13125A9E46002638AA /* LWETooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWETooltipView.h; sourceTree = "<group>"; };
+		24F7DC14125A9E46002638AA /* LWETooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWETooltipView.m; sourceTree = "<group>"; };
+		24F7DC17125A9E46002638AA /* LWEViewUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LWEViewUtility.c; sourceTree = "<group>"; };
+		24F7DC18125A9E46002638AA /* LWEViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEViewUtility.h; sourceTree = "<group>"; };
+		24F7DC1A125A9E46002638AA /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -941,6 +972,61 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		24F7DBFC125A9E46002638AA /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				24F7DBFD125A9E46002638AA /* LWELineView.h */,
+				24F7DBFE125A9E46002638AA /* LWELineView.m */,
+				24F7DBFF125A9E46002638AA /* LWELoadingView.h */,
+				24F7DC00125A9E46002638AA /* LWELoadingView.m */,
+				24F7DC01125A9E46002638AA /* LWENotificationToolbar */,
+				24F7DC07125A9E46002638AA /* LWEPickerComponentDataSource.h */,
+				24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */,
+				24F7DC0B125A9E46002638AA /* LWETooltipView */,
+				24F7DC17125A9E46002638AA /* LWEViewUtility.c */,
+				24F7DC18125A9E46002638AA /* LWEViewUtility.h */,
+				24F7DC19125A9E46002638AA /* XIBs */,
+			);
+			name = UIKit;
+			path = Reusable/LWE/UIKit;
+			sourceTree = "<group>";
+		};
+		24F7DC01125A9E46002638AA /* LWENotificationToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				24F7DC02125A9E46002638AA /* LWENotificationButton.h */,
+				24F7DC03125A9E46002638AA /* LWENotificationButton.m */,
+				24F7DC04125A9E46002638AA /* LWENotificationToolbar.h */,
+				24F7DC05125A9E46002638AA /* LWENotificationToolbar.m */,
+				24F7DC06125A9E46002638AA /* LWENotificationToolbarConstants.h */,
+			);
+			path = LWENotificationToolbar;
+			sourceTree = "<group>";
+		};
+		24F7DC0B125A9E46002638AA /* LWETooltipView */ = {
+			isa = PBXGroup;
+			children = (
+				24F7DC0C125A9E46002638AA /* LWECalloutView.h */,
+				24F7DC0D125A9E46002638AA /* LWECalloutView.m */,
+				24F7DC0E125A9E46002638AA /* LWERoundedRectView.h */,
+				24F7DC0F125A9E46002638AA /* LWERoundedRectView.m */,
+				24F7DC10125A9E46002638AA /* LWETooltipConstants.h */,
+				24F7DC11125A9E46002638AA /* LWETooltipParams.h */,
+				24F7DC12125A9E46002638AA /* LWETooltipParams.m */,
+				24F7DC13125A9E46002638AA /* LWETooltipView.h */,
+				24F7DC14125A9E46002638AA /* LWETooltipView.m */,
+			);
+			path = LWETooltipView;
+			sourceTree = "<group>";
+		};
+		24F7DC19125A9E46002638AA /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				24F7DC1A125A9E46002638AA /* LWEToolbarPicker.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,8 +1097,6 @@
 				917A5C3E11AB829000016BD2 /* LoadingView.m */,
 				24EA10FC12015BF60081CBBA /* SmallLoadingView.h */,
 				24EA10FD12015BF60081CBBA /* SmallLoadingView.m */,
-				24EA112612015EA10081CBBA /* ViewUtility.h */,
-				24EA112712015EA10081CBBA /* ViewUtility.c */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1237,6 +1321,7 @@
 		917A5B7A11AB7A8700016BD2 /* LWE Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				24F7DBFC125A9E46002638AA /* UIKit */,
 				24E47EED11F3E59D007F6FB7 /* Twitter */,
 				49F968F811AF652D00DFC3C9 /* LWEDownloader.h */,
 				49F968F911AF652D00DFC3C9 /* LWEDownloader.m */,
@@ -1607,7 +1692,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "jFlash" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* jFlash */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1705,6 +1797,7 @@
 				499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */,
 				499006CA120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */,
 				499006D2120FC44600601CD2 /* speech_bubble.png in Resources */,
+				24F7DC27125A9E46002638AA /* LWEToolbarPicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1944,9 +2037,18 @@
 				2418B4E911F978EF00666EA4 /* NSURL+LWEUtilities.m in Sources */,
 				24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */,
 				24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */,
-				24EA112812015EA10081CBBA /* ViewUtility.c in Sources */,
 				490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
 				490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
+				24F7DC1B125A9E46002638AA /* LWELineView.m in Sources */,
+				24F7DC1C125A9E46002638AA /* LWELoadingView.m in Sources */,
+				24F7DC1D125A9E46002638AA /* LWENotificationButton.m in Sources */,
+				24F7DC1E125A9E46002638AA /* LWENotificationToolbar.m in Sources */,
+				24F7DC1F125A9E46002638AA /* LWEPickerComponentDataSource.m in Sources */,
+				24F7DC21125A9E46002638AA /* LWECalloutView.m in Sources */,
+				24F7DC22125A9E46002638AA /* LWERoundedRectView.m in Sources */,
+				24F7DC23125A9E46002638AA /* LWETooltipParams.m in Sources */,
+				24F7DC24125A9E46002638AA /* LWETooltipView.m in Sources */,
+				24F7DC26125A9E46002638AA /* LWEViewUtility.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2089,7 +2191,7 @@
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};

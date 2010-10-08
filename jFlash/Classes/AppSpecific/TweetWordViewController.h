@@ -10,7 +10,7 @@
 
 #import "LWETRequestDelegate.h"
 #import "LWETDelegates.h"
-#import "SmallLoadingView.h"
+#import "LWELoadingView.h"
 
 #define JFLASH_TWITTER_CONSUMER_KEY	@"BGDlaaZWdjPo3oPudnIUNA"
 #define JFLASH_TWITTER_PRIVATE_KEY	@"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU"
@@ -35,7 +35,7 @@
 	IBOutlet UIButton *tweetBtn;
 	IBOutlet UILabel *counterLbl;
 @private
-  SmallLoadingView *_loadingView;
+  LWELoadingView *_loadingView;
 	UIBarButtonItem *_cancelBtn;
 	UIBarButtonItem *_signOutBtn;
 	UIBarButtonItem *_doneBtn;

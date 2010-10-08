@@ -7,7 +7,7 @@
 //
 
 #import "SmallLoadingView.h"
-#import "ViewUtility.h"
+#import "LWEViewUtility.h"
 
 @implementation SmallLoadingView
 

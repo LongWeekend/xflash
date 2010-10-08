@@ -13,7 +13,7 @@
 //
 
 #import "LoadingView.h"
-#import "ViewUtility.h"
+#import "LWEViewUtility.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation LoadingView
