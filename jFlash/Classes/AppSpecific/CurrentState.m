@@ -183,27 +183,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 	LWE_LOG(@"Update from 1.2 to 1.3 Yatta!");
   // Now change the app version
 	[settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
-  
-  // No need to change the data version because it hasn't changed at all between 1.2 and 1.3
+  [settings setValue:JFLASH_VERSION_1_3 forKey:APP_DATA_VERSION];
 }
 
 
 /** Returns YES if the user needs to update settings from 1.1 to 1.2, otherwise returns NO */
 - (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
 {
-  // If the user was a fresh installer of 1.2, they had this condition where there was no setting for
-  // APP_SETTINGS_VERSION - it was our oversight.
-  
-  // If the user has an APP_DATA_VERSION of 1.2, but does not have the APP_SETTINGS flag, they need it.
-  if ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
-      [settings objectForKey:APP_SETTINGS_VERSION] == nil)
-  {
-    return YES;
-  }
-  else
-  {
-    return NO;
-  }
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2];
 }
 #pragma mark -
 #pragma mark Initialization
