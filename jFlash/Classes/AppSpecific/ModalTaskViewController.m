@@ -17,7 +17,7 @@
 @synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
 
 // For content/webview
-@synthesize webViewContent, webViewContentDirectory, webViewContentFileName;
+@synthesize webViewContent;
 
 //! Initialization
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,8 +26,6 @@
   {
     [self setTaskHandler:nil];
     [self setWebViewContent:nil];
-    [self setWebViewContentDirectory:nil];
-    [self setWebViewContentFileName:nil];
     self.navigationItem.leftBarButtonItem = nil;
   }
   return self;
@@ -371,20 +369,13 @@
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   
-  // MMA - transitional code - TODO: we prefer webViewContent to be set now, deprecate the other ones!
+  // Only show content if we have set this variable
   if (self.webViewContent)
   {
     NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:@"plugin-resources/index.html"]];
     [webView loadHTMLString:self.webViewContent baseURL:url];
   }
-  else
-  {
-    NSString *filename = [[NSBundle mainBundle] pathForResource:self.webViewContentFileName ofType:@"html" inDirectory:self.webViewContentDirectory];
-    NSURL *url = [NSURL fileURLWithPath:filename];
-    [webView loadRequest:[NSURLRequest requestWithURL:url]];
-  }
 
-  
 //  WebGradientView *subview = [[WebGradientView alloc] initWithFrame:CGRectMake(0,0,320,317) subview:webView];
 
   [self.view addSubview:webView];
@@ -400,9 +391,8 @@
 //! standard dealloc
 - (void)dealloc
 {
+  [webViewContent release];
   [self setTaskHandler:nil];
-  [self setWebViewContentDirectory:nil];
-  [self setWebViewContentFileName:nil];
   [super dealloc];
 }
 
