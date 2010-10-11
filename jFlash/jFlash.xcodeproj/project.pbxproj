@@ -200,7 +200,7 @@
 		496C7AF41263273D004B6B90 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		496C7AF51263273E004B6B90 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
-		496C7AF712632740004B6B90 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
+		496C7AF712632740004B6B90 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		496C7AF812632743004B6B90 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEB11AB7CD700016BD2 /* Card.m */; };
 		496C7AF912632744004B6B90 /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
 		496C7AFA12632745004B6B90 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
@@ -444,7 +444,7 @@
 		4986F8A011C715F600947486 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
 		4986F8A111C715F600947486 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
 		4986F8A211C715F600947486 /* AlgorithmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */; };
-		4986F8A311C715F600947486 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
+		4986F8A311C715F600947486 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		4986F8A411C715F600947486 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4986F8A511C715F600947486 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		4986F8A611C715F600947486 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
@@ -463,7 +463,7 @@
 		499006CB120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		499006D3120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
-		4997D21611BB642600016A15 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
+		4997D21611BB642600016A15 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
@@ -486,7 +486,7 @@
 		49CF2F1511BA4E0A0066923F /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1711AB80F700016BD2 /* LWEFile.m */; };
 		49CF2F1A11BA4E180066923F /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEB11AB7CD700016BD2 /* Card.m */; };
 		49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
-		49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* VersionManager.m */; };
+		49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
@@ -799,8 +799,8 @@
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64.png"; path = "Assets/twitter-bird-64x64.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
-		4997D21411BB642600016A15 /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VersionManager.h; path = AppSpecific/VersionManager.h; sourceTree = "<group>"; };
-		4997D21511BB642600016A15 /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VersionManager.m; path = AppSpecific/VersionManager.m; sourceTree = "<group>"; };
+		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
+		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExamplesUnavailable.xib; path = XIBs/ExamplesUnavailable.xib; sourceTree = "<group>"; };
@@ -1668,8 +1668,8 @@
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
-				4997D21411BB642600016A15 /* VersionManager.h */,
-				4997D21511BB642600016A15 /* VersionManager.m */,
+				4997D21411BB642600016A15 /* DatabaseUpdateManager.h */,
+				4997D21511BB642600016A15 /* DatabaseUpdateManager.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -2330,7 +2330,7 @@
 				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
 				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
 				91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */,
-				49D2D5E011BBDBB000CEE694 /* VersionManager.m in Sources */,
+				49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */,
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
@@ -2395,7 +2395,7 @@
 				49CF2F1511BA4E0A0066923F /* LWEFile.m in Sources */,
 				49CF2F1A11BA4E180066923F /* Card.m in Sources */,
 				49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */,
-				4997D21611BB642600016A15 /* VersionManager.m in Sources */,
+				4997D21611BB642600016A15 /* DatabaseUpdateManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2412,7 +2412,7 @@
 				496C7AF41263273D004B6B90 /* CurrentState.m in Sources */,
 				496C7AF51263273E004B6B90 /* PluginManager.m in Sources */,
 				496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */,
-				496C7AF712632740004B6B90 /* VersionManager.m in Sources */,
+				496C7AF712632740004B6B90 /* DatabaseUpdateManager.m in Sources */,
 				496C7AF812632743004B6B90 /* Card.m in Sources */,
 				496C7AF912632744004B6B90 /* CardPeer.m in Sources */,
 				496C7AFA12632745004B6B90 /* Group.m in Sources */,
@@ -2586,7 +2586,7 @@
 				4986F8A011C715F600947486 /* ExampleSentence.m in Sources */,
 				4986F8A111C715F600947486 /* ExampleSentencePeer.m in Sources */,
 				4986F8A211C715F600947486 /* AlgorithmSettingsViewController.m in Sources */,
-				4986F8A311C715F600947486 /* VersionManager.m in Sources */,
+				4986F8A311C715F600947486 /* DatabaseUpdateManager.m in Sources */,
 				4986F8A411C715F600947486 /* ModalTaskViewController.m in Sources */,
 				4986F8A511C715F600947486 /* UserPeer.m in Sources */,
 				4986F8A611C715F600947486 /* DisplaySearchedSentenceViewController.m in Sources */,

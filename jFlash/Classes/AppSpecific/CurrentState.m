@@ -7,7 +7,7 @@
 //
 
 #import "CurrentState.h"
-#import "VersionManager.h"
+#import "DatabaseUpdateManager.h"
 
 /**
  * Maintains the current state of the application (active set, etc).  Is a singleton.
@@ -238,7 +238,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   }
 
   // STEP 3 - is the data update-able?  Let the version manager tell us
-  [self setIsUpdatable:[VersionManager databaseIsUpdatable]];
+  [self setIsUpdatable:[DatabaseUpdateManager databaseIsUpdatable]];
 
   // STEP 4 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)

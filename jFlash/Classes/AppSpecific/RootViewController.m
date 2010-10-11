@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "VersionManager.h"
+#import "DatabaseUpdateManager.h"
 #import "FlurryAPI.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
@@ -236,7 +236,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
 
-  VersionManager *tmpVm = [[VersionManager alloc] init];
+  DatabaseUpdateManager *tmpVm = [[DatabaseUpdateManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];
   [self _showModalWithViewController:updateVC useNavController:YES];
