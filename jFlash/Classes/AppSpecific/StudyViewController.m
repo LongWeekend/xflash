@@ -73,6 +73,7 @@
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     _alreadyShowedAlertView = YES;
+    // CFLASH STRING CUSTOMIZATION
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")];
   }
@@ -109,8 +110,8 @@
   [self setMoodIcon:tmpMoodIcon];
   [tmpMoodIcon release];
   
-  [[self moodIcon] setMoodIconBtn:moodIconBtn];
-  [[self moodIcon] setPercentCorrectLabel:percentCorrectLabel];
+  [self.moodIcon setMoodIconBtn:moodIconBtn];
+  [self.moodIcon setPercentCorrectLabel:percentCorrectLabel];
   
   // Set view default states
   [self setPercentCorrectVisible: YES];
@@ -118,21 +119,21 @@
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
   [self setProgressBarViewController:tmpPBVC];
-  [[self progressBarView] addSubview:progressBarViewController.view];
+  [self.progressBarView addSubview:progressBarViewController.view];
 	[tmpPBVC release];
   
   // Add the CardView to the View
 	CardViewController *tmpCVC = [[CardViewController alloc] init];
+  [tmpCVC setCurrentCard:[self currentCard]];
+  [self.cardView addSubview: [tmpCVC view]];  
   [self setCardViewController:tmpCVC];
-  [[self cardViewController] setCurrentCard:[self currentCard]];
-  [[self cardView] addSubview: [[self cardViewController] view]];  
 	[tmpCVC release];
   
   // Add the Action Bar to the View
 	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] init];
+  [tmpABVC setCurrentCard:[self currentCard]];
+  [self.actionbarView addSubview:[tmpABVC view]];
   [self setActionBarController:tmpABVC];
-  [[self actionBarController] setCurrentCard:[self currentCard]];
-  [[self actionbarView] addSubview:[[self actionBarController] view]];
 	[tmpABVC release];
 
   // Initialize the scroll view
@@ -264,8 +265,8 @@
   {
     // Update current card here & on CardViewController
     [self setCurrentCard:card];
-    [[self cardViewController] setCurrentCard:[self currentCard]];
-    [[self cardViewController] setup];
+    [self.cardViewController setCurrentCard:self.currentCard];
+    [self.cardViewController setup];
     
     // Show we show example view here?
 		// Save value for when we tap "Reveal".
@@ -287,11 +288,10 @@
 
 - (void) doCardBtn: (NSNotification *)aNotification
 {
-	//NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  int action = [[aNotification object] intValue];
+  NSInteger action = [[aNotification object] intValue];
   
   // Hold on to the last card
-  Card* lastCard = nil;
+  Card *lastCard = nil;
   lastCard = [self currentCard];
   [lastCard retain];
   
@@ -299,7 +299,7 @@
   
 	switch (action)
   {
-      // Browse Mode options
+    // Browse Mode options
     case NEXT_BTN: 
       [self doChangeCard: [currentCardSet getNextCard] direction:kCATransitionFromRight];
       break;
@@ -335,7 +335,6 @@
   
   // Releases
   [lastCard release];
-	//[pool release];
 }
 
 /**
@@ -417,10 +416,10 @@
 {
 	// This will also reset the cache value for shouldShowExampleView
 	[self refreshCardView];
-	[[self cardViewController] setup];
+	[self.cardViewController setup];
 	
 	// Maybe we need to check if our examples view should be different?
-	BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
+	BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:self.currentCard];
 	[self _setupCardView:cardShouldShowExampleView];
 }
 
@@ -434,27 +433,30 @@
   //reset to the first page
   [self _jumpToPage:0];
   
-  [[self actionBarController] setCurrentCard:[self currentCard]];
+  [self.actionBarController setCurrentCard:[self currentCard]];
   [actionBarController setup];
   
   [self _setupExampleSentencesView:cardShouldShowExampleView];
   
   // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
-  if(isBrowseMode)
+  if (isBrowseMode)
   {
-		if(percentCorrectVisible) [self doTogglePercentCorrectBtn];
-    [[self tapForAnswerImage] setHidden:YES];
-    [[self revealCardBtn] setHidden:YES];
+		if (percentCorrectVisible)
+    {
+      [self doTogglePercentCorrectBtn];
+    }
+    [self.tapForAnswerImage setHidden:YES];
+    [self.revealCardBtn setHidden:YES];
     [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
   }
   else	
   {
-    [scrollView setScrollEnabled:NO];
-    [[self tapForAnswerImage] setHidden:NO];
-    [[self revealCardBtn] setHidden:NO];
-    [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
-    if(!percentCorrectVisible)
+    [self.scrollView setScrollEnabled:NO];
+    [self.tapForAnswerImage setHidden:NO];
+    [self.revealCardBtn setHidden:NO];
+    [self.remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
+    if (!percentCorrectVisible)
     {
       [self doTogglePercentCorrectBtn];
     }
@@ -470,7 +472,7 @@
 {
   // This should always be no because scroll cannot be done when card is not revealed
 	// However, if it is a browse mode, it should have all of the scroll view enabled? - Rendy 19/8/10
-	if(isBrowseMode)
+	if (isBrowseMode)
 	{
 		scrollView.pagingEnabled = YES;
 		scrollView.scrollEnabled = YES;
@@ -482,11 +484,11 @@
 	}
 
   // Page control?
-  [[self pageControl] setHidden:!cardShouldShowExampleView];
+  [self.pageControl setHidden:!cardShouldShowExampleView];
 
   if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
   {
-		ExampleSentencesViewController * exControler = (ExampleSentencesViewController *) [self exampleSentencesViewController];
+		ExampleSentencesViewController * exControler = (ExampleSentencesViewController *)self.exampleSentencesViewController;
     [exControler setup];
   }
 }
@@ -608,7 +610,7 @@
   if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
   {
     // Get rid of the old example sentences guy & re-setup the scroll view
-    [[[self exampleSentencesViewController] view] removeFromSuperview];
+    [[self.exampleSentencesViewController view] removeFromSuperview];
     [self _setupScrollView];
 		[self _setupView];
   }
@@ -654,24 +656,24 @@
     [tmpVC release];
   }
   			
-  UIView *sentencesView = [[self exampleSentencesViewController] view];
+  UIView *sentencesView = [self.exampleSentencesViewController view];
 	CGRect rect = sentencesView.frame;
-	rect.origin.x = ((scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
-	rect.origin.y = ((scrollView.frame.size.height - sentencesView.frame.size.height) / 2);
+	rect.origin.x = ((self.scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
+	rect.origin.y = ((self.scrollView.frame.size.height - sentencesView.frame.size.height) / 2);
 	sentencesView.frame = rect;
   
   // add the new view as a subview for the scroll view to handle
-	[scrollView addSubview:sentencesView];
+	[self.scrollView addSubview:sentencesView];
 	
 	self.pageControl.numberOfPages = views;
-	[scrollView setContentSize:CGSizeMake(cx*views, [scrollView bounds].size.height)];
+	[self.scrollView setContentSize:CGSizeMake(cx*views, [self.scrollView bounds].size.height)];
 }
 
 /** programatically jump the scrollview to a page, does not animate the scroll */
 - (void) _jumpToPage:(int)page
 {
-  [pageControl setCurrentPage: page];
-  [self changePage:pageControl animated:NO];
+  [self.pageControl setCurrentPage:page];
+  [self changePage:self.pageControl animated:NO];
   pageControlIsChangingPage = NO;
 }
 
@@ -690,8 +692,8 @@
   
   //	We switch page at 50% across
   CGFloat pageWidth = _scrollView.frame.size.width;
-  int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-  pageControl.currentPage = page;
+  NSInteger page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+  self.pageControl.currentPage = page;
 }
 
 /**

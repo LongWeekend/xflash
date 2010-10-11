@@ -54,28 +54,28 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void) loadView
 {
   // Make the main view the themed splash screen
-  UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+  UIView *aView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   // TODO: iPad customization HERE?
-  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
-  view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
-  self.view = view;
-  [view release];
+  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:APP_SPLASH_IMAGE];
+  aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
+  self.view = aView;
+  [aView release];
 }  
 
 
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
+  self.loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
 }
 
 
 //! Hides the "database loading" view
 - (void) hideDatabaseLoadingView
 {
-  if (loadingView)
+  if (self.loadingView)
   {
-    [loadingView removeFromSuperview];
+    [self.loadingView removeFromSuperview];
   }
 }
 
@@ -85,7 +85,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
  */
 - (void) loadTabBar
 {
-	self.tabBarController = [[UITabBarController alloc] init];
+	self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   
   // Make room for the status bar
   CGRect tabBarFrame;
@@ -125,11 +125,11 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [helpViewController release];
   [localNavigationController release];
   
-  tabBarController.viewControllers = localControllersArray;
+  self.tabBarController.viewControllers = localControllersArray;
 	[localControllersArray release];
 
   // Replace active view with tabBarController's view
-  self.view = tabBarController.view;
+  self.view = self.tabBarController.view;
 
   //launch the please rate us
   [Appirater appLaunched];
@@ -141,12 +141,12 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 /** Switches active view to study view, convenience method for notification */
 - (void) switchToStudyView
 {
-  [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+  [self.tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
 - (IBAction) switchToSettings
 {
-  [tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
+  [self.tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
 
@@ -161,12 +161,12 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   if (useNavController)
   {
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:vc];
-    [[self tabBarController] presentModalViewController:controller animated:YES];
+    [self.tabBarController presentModalViewController:controller animated:YES];
     [controller release];
   }
   else
   {
-    [[self tabBarController] presentModalViewController:vc animated:YES];    
+    [self.tabBarController presentModalViewController:vc animated:YES];    
   }
 }
 
@@ -208,7 +208,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   {
     animated = [[dict valueForKey:@"animated"] boolValue];
   }
-	[[self tabBarController] dismissModalViewControllerAnimated:animated];
+	[self.tabBarController dismissModalViewControllerAnimated:animated];
 }
 
 #pragma mark -
@@ -246,9 +246,13 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   // TODO: change this to a constant later
   UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
 	if ([badgeNumber intValue] != 0)
+  {
 		[settingsTabBar setBadgeValue:[badgeNumber stringValue]];
-	else 
+  }
+  else 
+  {
 		[settingsTabBar setBadgeValue:nil];
+  }
 }
 
 
@@ -283,13 +287,15 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
+  
+  // TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
 }
 
 
 /** Hides the downloader */
 - (void) hideDownloaderModal:(NSNotification*)aNotification
 {
-  [[self tabBarController] dismissModalViewControllerAnimated:YES];
+  [self.tabBarController dismissModalViewControllerAnimated:YES];
   // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
   //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
 }
@@ -300,26 +306,26 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[tabBarController viewWillAppear:animated];
+	[self.tabBarController viewWillAppear:animated];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [tabBarController viewDidAppear:animated];
+  [self.tabBarController viewDidAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-	[tabBarController viewWillDisappear:animated];
+	[self.tabBarController viewWillDisappear:animated];
 }
 
 
 -(void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-	[tabBarController viewDidDisappear:animated];
+	[self.tabBarController viewDidDisappear:animated];
 }
 
 - (void) viewDidUnload
@@ -333,7 +339,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void)dealloc
 {
   // Unobserve notifications
-  [self setTabBarController:nil];
+  [tabBarController release];
   [self setLoadingView:nil];
   [super dealloc];
 }
