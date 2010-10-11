@@ -35,13 +35,6 @@
 
 - (void) deleteUser
 {
-  // Delete the avatar image
-  if(![[avatarImagePath substringToIndex:1] isEqualToString:@"/"])
-  {
-    NSString* filePath = [NSString stringWithFormat:@"%@/%@", DOCSFOLDER, [self avatarImagePath]];
-    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-  }
-  
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [[NSString alloc] initWithFormat:@"DELETE FROM users WHERE user_id = %d", userId];
   [[db dao] executeUpdate:sql];

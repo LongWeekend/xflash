@@ -24,3 +24,5 @@ extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main ca
 extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
 extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
 
+// App splash image - different between the flashes
+extern NSString * const APP_SPLASH_IMAGE;

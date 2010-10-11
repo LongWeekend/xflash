@@ -7,6 +7,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Constants.h"
+#import "cFlash_Constants.h"
 #import "CurrentState.h"
 #import "ThemeManager.h"
 #import "Card.h"

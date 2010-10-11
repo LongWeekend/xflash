@@ -20,3 +20,6 @@ NSString * const CFLASH_CURRENT_USER_DATABASE = @"cFlash.db";
 NSString *const CARD_DB_KEY = @"CARD_DB";
 NSString *const FTS_DB_KEY = @"FTS_DB";
 NSString *const EXAMPLE_DB_KEY = @"EX_DB";
+
+// App splash image - different between the flashes
+NSString * const APP_SPLASH_IMAGE = @"Default.png";
