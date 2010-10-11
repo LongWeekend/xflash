@@ -11,7 +11,7 @@
 #import "LWEFile.h"
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
-#import "VersionManager.h"
+#import "DatabaseUpdateManager.h"
 
 @implementation jFlashAppDelegate
 
