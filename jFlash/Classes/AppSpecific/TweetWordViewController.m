@@ -83,7 +83,7 @@
 	NSInteger length = kMaxChars - c;
 	if (length >= 0)
 	{
-		counterLbl.text = [NSString stringWithFormat:@"%d", length];
+		self.counterLbl.text = [NSString stringWithFormat:@"%d", length];
 	}
 	else
 	{
