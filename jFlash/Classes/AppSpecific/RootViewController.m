@@ -225,11 +225,17 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   [updateVC setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
+
+  // Set the web content
+  NSString *filename = [LWEFile createBundlePathWithFilename:@"plugin-resources/release-notes-1.1.html"];
+  // Apparently according to the API docs this should be NULL not nil
+  NSString *webContent = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:NULL];
+  [updateVC setWebViewContent:webContent];
+
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
-  [updateVC setWebViewContentDirectory:@"plugin-resources"];
-  [updateVC setWebViewContentFileName:@"release-notes-1.1"];
+
   VersionManager *tmpVm = [[VersionManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];
@@ -278,9 +284,10 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   // Get path information
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
+  LWEDownloader *tmpDlHandler = nil;
   if (targetURL && targetPath)
   {
-    LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
+    tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
   }
   else
   {
