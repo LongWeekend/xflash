@@ -193,6 +193,17 @@
 }
 
 
+//! Gets system Tag objects that have card in them - as array
++ (NSMutableArray*) retrieveSysTagListContainingCard:(Card*)card
+{
+  NSInteger cardId = card.cardId;
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = %d AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",cardId];
+  NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL:sql];
+	[sql release];
+	return tmpTags;
+}
+
+
 //! Returns array of Tag objects based on Group membership
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId
 {

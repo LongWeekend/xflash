@@ -15,11 +15,6 @@
 @interface AddTagViewController : UIViewController
 {
   IBOutlet UITableView *studySetTable;
-  NSMutableArray *myTagArray;
-  NSMutableArray *sysTagArray;
-  NSMutableArray *membershipCacheArray;
-  NSInteger cardId;
-  Card* currentCard;
   NSInteger _restrictedTagId;
 }
 

@@ -8,7 +8,8 @@
 
 #import "AddTagViewController.h"
 
-enum Sections {
+enum Sections
+{
   kEntrySection = 0,
   kMyTagsSection = 1,
   kSystemTagsSection = 2,
@@ -24,7 +25,6 @@ enum EntrySectionRows
 @implementation AddTagViewController
 @synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
 
-
 /**
  * Initializer - automatically loads AddTagView XIB file
  * attaches the Card parameter to the object
@@ -38,7 +38,7 @@ enum EntrySectionRows
     [self setCardId:[card cardId]];
     [self setCurrentCard:card];
     [self setMyTagArray:[TagPeer retrieveMyTagList]];
-    [self setSysTagArray:[TagPeer retrieveSysTagList]];
+    [self setSysTagArray:[TagPeer retrieveSysTagListContainingCard:card]];
 
     // Add "add" button to nav bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
@@ -65,7 +65,7 @@ enum EntrySectionRows
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self studySetTable] setBackgroundColor: [UIColor clearColor]];
+  [self.studySetTable setBackgroundColor:[UIColor clearColor]];
   
   // Cache the tag's membership list
   self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
@@ -90,7 +90,7 @@ enum EntrySectionRows
 {
   [self setMyTagArray:[TagPeer retrieveMyTagList]];
   [self setMembershipCacheArray:[TagPeer membershipListForCardId:[self cardId]]];
-  [[self studySetTable] reloadData];
+  [self.studySetTable reloadData];
 }
 
 
@@ -175,11 +175,17 @@ enum EntrySectionRows
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == kMyTagsSection)
+  {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
+  }
   else if (section == kSystemTagsSection)
-    return NSLocalizedString(@"All Sets",@"AddTagViewController.TableHeader_AllSets");
+  {
+    return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
+  }
   else
+  {
     return currentCard.headword;
+  }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -208,7 +214,7 @@ enum EntrySectionRows
   } 
 
   // setup the cell for the full entry
-  if(indexPath.section == kEntrySection)
+  if (indexPath.section == kEntrySection)
   {
     NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard combinedReadingForSettings], [currentCard meaningWithoutMarkup]];
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -231,18 +237,27 @@ enum EntrySectionRows
     // Get the tag arrays
     Tag* tmpTag = nil;
     if (indexPath.section == kMyTagsSection)
+    {
       tmpTag = [myTagArray objectAtIndex:indexPath.row];
+      cell.selectionStyle = UITableViewCellSelectionStyleGray;
+      if ([self checkMembershipCacheForTagId:tmpTag.tagId])
+      {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+      }
+      else
+      {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+      }
+    }
     else if (indexPath.section == kSystemTagsSection)
+    {
       tmpTag = [sysTagArray objectAtIndex:indexPath.row];
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     // Set up the cell
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.textLabel.text = [tmpTag tagName];
-    
-    if ([self checkMembershipCacheForTagId:tmpTag.tagId])
-      cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    else
-      cell.accessoryType = UITableViewCellAccessoryNone;
   }
   
   return cell;
@@ -257,17 +272,14 @@ enum EntrySectionRows
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
   
-  if(indexPath.section == kEntrySection) return; // do nothing for the entry section
+  // do nothing for the entry section or system tags
+  if (indexPath.section == kEntrySection || indexPath.section == kSystemTagsSection)
+  {
+    return;
+  }
+
   CurrentState *currentState = [CurrentState sharedCurrentState];
-  Tag* tmpTag;
-  if (indexPath.section == kMyTagsSection)
-  {
-    tmpTag = [myTagArray objectAtIndex:indexPath.row];
-  }
-  else
-  {
-    tmpTag = [sysTagArray objectAtIndex:indexPath.row];
-  }
+  Tag* tmpTag = [myTagArray objectAtIndex:indexPath.row];
 
   // First, determine if we are restricted
   if (_restrictedTagId == tmpTag.tagId)
