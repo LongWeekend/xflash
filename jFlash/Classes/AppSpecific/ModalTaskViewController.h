@@ -101,8 +101,14 @@
 // User-set properties
 @property BOOL startTaskOnAppear;
 @property BOOL showDetailedViewOnAppear;
+
+// Eventually, these two should be phased out in favor of the property below (content)
 @property (nonatomic, retain) NSString *webViewContentDirectory;
 @property (nonatomic, retain) NSString *webViewContentFileName;
+
+// Use this one from now on (MMA 10.11.2010)
+@property (nonatomic, retain) NSString *webViewContent;
+
 @property (nonatomic, retain) id taskHandler;
 
 @end
