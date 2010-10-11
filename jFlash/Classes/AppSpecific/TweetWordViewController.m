@@ -43,11 +43,20 @@
 //! Tweet the text in the text fields, and add the " #jflash" after.
 - (IBAction)tweet
 {
-	[self _resignTextFieldKeyboard];
-	NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
-	[_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
-  
-  _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
+  // Make sure they have network!
+  if ([LWENetworkUtils networkAvailable])
+  {
+    [self _resignTextFieldKeyboard];
+    NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
+    [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
+    
+    _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
+  }
+  else
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+
 }
 
 //! Sign out from the twitter engine.
@@ -83,7 +92,7 @@
 	NSInteger length = kMaxChars - c;
 	if (length >= 0)
 	{
-		counterLbl.text = [NSString stringWithFormat:@"%d", length];
+		self.counterLbl.text = [NSString stringWithFormat:@"%d", length];
 	}
 	else
 	{

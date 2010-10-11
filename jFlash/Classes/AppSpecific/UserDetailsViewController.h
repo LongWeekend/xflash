@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 
-enum userViewMode {
+enum userViewMode
+{
   kUserViewModeAdd = 0,
   kUserViewModeEdit = 1,
   kUserViewModeLength
@@ -17,7 +18,7 @@ enum userViewMode {
 
 @interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
 {
-  User* selectedUser;
+  User *selectedUser;
   IBOutlet UITextField *userNicknameTextField;
   IBOutlet UIButton *commitChangesBtn;
   IBOutlet UIButton *activateUserBtn;
@@ -25,12 +26,9 @@ enum userViewMode {
   NSInteger mode;
 }
 
-//TODO: Is it really should be commented out?
-//- (IBAction) doShowImagePickerModalAction;
 - (IBAction) doCommitChanges;
 - (IBAction) doActivateUser;
 - (IBAction) doUpdateUserNickname:(id)sender;
-
 - (void) setUser:(User *)sourceUser;
 
 @property (nonatomic) NSInteger mode;

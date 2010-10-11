@@ -369,31 +369,76 @@
 //! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
 - (NSString *)getTweetWord
 {
+	NSMutableString *str = nil; 
+  
 	//Set up the tweet word, so that the str will have the following format
 	//Head Word [reading] meaning
-	NSMutableString *str = [[NSMutableString alloc] init];
-	[str appendFormat:@"%@ [%@] ", self.currentCard.headword, self.currentCard.reading];
-	
-	//but in some cases, the "meaning" length, can exceed the maximum length
-	//of the twitter update status lenght, so it looks for "/" and cut the meaning
-	//to fit in. 
-	NSString *meaning = [self.currentCard meaningWithoutMarkup];
-	NSInteger charLeft = kMaxChars - [str length];
-	NSInteger charAfterMeaning = charLeft - [meaning length];
-	if (charAfterMeaning <= 0)
-	{
-		NSRange rangeToLookFor;
-		rangeToLookFor.length = charLeft;
-		rangeToLookFor.location = 0;
-		NSRange range = [meaning rangeOfString:@"/" 
-									   options:NSBackwardsSearch
-										 range:rangeToLookFor];
-		
-		meaning = [meaning substringToIndex:range.location];
-	}
-	LWE_LOG(@"LOG : This is the meaning : %@", meaning);
-	[str appendString:meaning];						  
-	
+
+  // Get the lengths of everyone involved
+  NSInteger headwordLength = [self.currentCard.headword length];
+  NSInteger readingLength = [self.currentCard.reading length];
+  NSInteger meaningLength = [[self.currentCard meaningWithoutMarkup] length];
+  
+  // Now go from most conservative (headword exceeds kMaxChars) 
+  // to most liberal (the whole thing fits in kMaxChars)  
+  if (headwordLength > kMaxChars)
+  {
+    // Headword alone is longer than kMaxChars
+    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.currentCard.headword substringToIndex:kMaxChars]];
+  }
+  else
+  {
+    // Add four because we add brackets and spaces
+    if ((headwordLength + readingLength + 4) > kMaxChars)
+    {
+      // Headword + reading is too long, so just use headword.
+      str = [[NSMutableString alloc] initWithFormat:@"%@",self.currentCard.headword];
+    }
+    else
+    {
+      str = [[NSMutableString alloc] initWithFormat:@"%@ [%@] ",self.currentCard.headword,self.currentCard.reading];
+    }
+  }
+
+  // Now determine if we have any space left for a meaning.
+	NSInteger charLeftBeforeMeaning = kMaxChars - [str length];
+  
+  // If there are less than 5, just ignore - not worth it
+  if (charLeftBeforeMeaning > 5)
+  {
+    NSString *meaning = [self.currentCard meaningWithoutMarkup];
+    NSInteger charLeftAfterMeaning = charLeftBeforeMeaning - meaningLength;
+    //but in some cases, the "meaning" length, can exceed the maximum length
+    //of the twitter update status lenght, so it looks for "/" and cut the meaning
+    //to fit in. 
+    if (charLeftAfterMeaning < 0)
+    {
+      NSRange range = [meaning rangeOfString:@"/" options:NSBackwardsSearch];
+      if (range.location != NSNotFound && (range.location < charLeftBeforeMeaning))
+      {
+        // We got one, and it fits
+        // This is still a naive implementation, it should recursively chop off slashes until it fits...
+        // AT present it only does it once
+        [str appendString:[meaning substringToIndex:range.location]];
+      }
+      else
+      {
+        // Simple truncate
+        [str appendString:[meaning substringToIndex:charLeftBeforeMeaning]];
+      }
+    }
+    else
+    {
+      // Enough room for the whole meaning
+      [str appendString:meaning];
+    }
+  } 
+  
+  // Debug output
+  LWE_LOG(@"Tweet string: %@",str);
+  LWE_LOG(@"Tweet length: %d",[str length]);
+  
+  // Now make it immutable
 	NSString *result = [NSString stringWithString:str];
 	[str release];
 	return result;

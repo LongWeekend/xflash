@@ -81,6 +81,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
+						<string key="IBUIPlaceholder">Type your name here</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -94,6 +95,7 @@
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIAutocorrectionType">1</int>
+							<int key="IBUIReturnKeyType">9</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<int key="IBUIClearButtonMode">1</int>
@@ -314,7 +316,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UserDetailsViewController</string>
 					<string>UIResponder</string>
-					<string>{{556, 134}, {320, 480}}</string>
+					<string>{{506, 134}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -391,12 +393,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>doActivateUser</string>
 							<string>doCommitChanges</string>
-							<string>doShowImagePickerModalAction</string>
 							<string>doUpdateUserNickname:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -408,7 +408,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>doActivateUser</string>
 							<string>doCommitChanges</string>
-							<string>doShowImagePickerModalAction</string>
 							<string>doUpdateUserNickname:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -419,10 +418,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">doCommitChanges</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doShowImagePickerModalAction</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

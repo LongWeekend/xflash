@@ -91,7 +91,7 @@
 /** Returns the number of items in array sectionTitles */
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
 {
-  return [[self sectionTitles] count];
+  return [self.sectionTitles count];
 }
 
 
@@ -113,7 +113,7 @@
 /** Loads the HelpWebViewController with the selected row's HTML file */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 
   NSInteger row = indexPath.row;
   currentIndex = row;
@@ -125,7 +125,7 @@
     webViewController.navigationItem.rightBarButtonItem = btn;
     [btn release];
   }
-  [[self navigationController] pushViewController:webViewController animated:YES];
+  [self.navigationController pushViewController:webViewController animated:YES];
   [webViewController release];
 }
 

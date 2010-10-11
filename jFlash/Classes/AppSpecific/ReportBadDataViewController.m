@@ -176,8 +176,8 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     [UIView setAnimationDuration:0.5];
     // TODO: iPad customization!
     CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 180);
-    pickerView.transform = transform;
-    [self.view addSubview:pickerView];
+    self.pickerView.transform = transform;
+    [self.view addSubview:self.pickerView];
     [UIView commitAnimations];
     _pickerCurrentlyVisible = YES;
   }
@@ -190,7 +190,10 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 /** Should edit - if it's the email, say yes, if it's the reason, say no */
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-  if (textField == [self userEmailBox]) return YES;
+  if (textField == self.userEmailBox)
+  {
+    return YES;
+  }
   else
   {
     // If the user is editing the text user message, and they tap here, get them out
@@ -207,10 +210,13 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 /** Did edit - if it's the email, scroll the view so we can see the box */
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-  if (textField == [self userEmailBox])
+  if (textField == self.userEmailBox)
   {
-    // Hide the cancel button
+    // Hide the cancel button, show the done button
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"Global.Done") style:UIBarButtonItemStyleDone target:self action:@selector(_resignEmailKeyboard)];
+    self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = nil;
+    
     // Move the view up so the keyboard doesn't block the input
     // TODO: iPad customization!
     [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-130) withInterval:0.5f];
@@ -292,7 +298,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 /** Hides text editing keyboard and kills "done" button from title */
 - (void) _resignTextViewKeyboard
 {
-  [userMsgInputBox resignFirstResponder];
+  [self.userMsgInputBox resignFirstResponder];
   self.navigationItem.rightBarButtonItem = nil;
   // Bring back the cancel button since we killed it
   self.navigationItem.leftBarButtonItem = _cancelButton;
@@ -312,6 +318,20 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   _keyboardCurrentlyVisible = NO;
 }
 
+/** Hides email text editing keyboard and kills "done" button from title */
+- (void) _resignEmailKeyboard
+{
+  [self.userEmailBox resignFirstResponder];
+  self.navigationItem.rightBarButtonItem = nil;
+  self.navigationItem.leftBarButtonItem = _cancelButton;
+  
+  // Move the view up so the keyboard doesn't block the input
+  // TODO: iPad customization!
+  [LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
+  
+  // Allow you to use the picker again
+  _keyboardCurrentlyVisible = NO;
+}
 
 #pragma mark -
 #pragma mark UIPickerViewDataSource
