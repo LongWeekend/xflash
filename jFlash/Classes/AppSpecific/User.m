@@ -8,12 +8,6 @@
 
 #import "User.h"
 
-// Pseudo Private Functions (not in .h file)
-@interface User ()
-  - (UIImage *)makeUserThumbnail:(UIImage *)image atRatio:(CGFloat)imgRatio;
-@end
-
-
 @implementation User
 @synthesize userId, userNickname, avatarImagePath, dateCreated;
 
@@ -67,99 +61,8 @@
   [currentStateSingleton resetActiveTag];
 }
 
-- (NSString *)saveAvatarImage:(UIImage*) userImage
-{
-  NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-  [dateFormat setDateFormat: @"yyyyMMdd-HHmmss"];
-  NSString* dateString = [dateFormat stringFromDate: [NSDate date]];
-
-  // Store file relative to DOCSFOLDER in DB
-  NSString* fileName = [NSString stringWithFormat:@"user-avatar-%@.png", dateString];
-
-  NSString* absFilePath = [NSString stringWithFormat:@"%@/%@", DOCSFOLDER, fileName];
-  [UIImagePNGRepresentation(userImage) writeToFile:absFilePath atomically:YES];
-
-  //Delete old avatar file
-  if(![[avatarImagePath substringToIndex:1] isEqualToString:@"/"]){
-    NSString* oldFileName = [NSString stringWithFormat:@"%@/%@", DOCSFOLDER, [self avatarImagePath]];
-    [[NSFileManager defaultManager] removeItemAtPath:oldFileName error:nil];
-  }
-  [self setAvatarImagePath:fileName];
-  [dateFormat release];
-  return absFilePath;
-}
-
-# pragma mark Thumbnail Functions
-
-- (UIImage *) getImageFromPath
-{
-  if([[avatarImagePath substringToIndex:1] isEqualToString:@"/"])
-  {
-    // Default avatar icon path relative to app bundle root
-    return [UIImage imageNamed:avatarImagePath];
-  }
-  else 
-  {
-    // User saved icons are stored in DOCSFOLDER path
-    NSString* absFilePath = [NSString stringWithFormat:@"%@/%@", DOCSFOLDER, avatarImagePath];
-    return [UIImage imageWithContentsOfFile:absFilePath];
-  }
-}
-
-- (UIImage *) getUserThumbnailLarge
-{
-  UIImage *cellImage = [self getImageFromPath];
-  return [self makeUserThumbnail:cellImage atRatio:(CGFloat)80.0];
-}
-
-- (UIImage *) getUserThumbnail
-{
-  UIImage *cellImage = [self getImageFromPath];
-  return [self makeUserThumbnail:cellImage atRatio:(CGFloat)30.0];
-}
-
-- (UIImage *) makeUserThumbnail:(UIImage *)image atRatio:(CGFloat)imgRatio
-{
-  // Create a thumbnail version of the image for the event object.
-  CGSize size = image.size;
-  CGSize croppedSize;
-  //CGFloat ratio = 30.0;
-  CGFloat ratio = imgRatio;
-  CGFloat offsetX = 0.0;
-  CGFloat offsetY = 0.0;
-  
-  // check the size of the image, we want to make it
-  // a square with sides the size of the smallest dimension
-  if (size.width && size.height)
-  {
-    offsetX = (size.height - size.width) / 2;
-    croppedSize = CGSizeMake(size.height, size.height);
-  }
-  else
-  {
-    offsetY = (size.width - size.height) / 2;
-    croppedSize = CGSizeMake(size.width, size.width);
-  }
-  
-  // Crop the image before resize
-  CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
-  CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
-  // Done cropping
-  
-  // Resize the image
-  CGRect rect = CGRectMake(0.0, 0.0, ratio, ratio);
-  
-  UIGraphicsBeginImageContext(rect.size);
-  [[UIImage imageWithCGImage:imageRef] drawInRect:rect];
-  UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
-  // Done Resizing
-  
-  CGImageRelease(imageRef);
-  
-  return thumbnail;
-}
-
+#pragma mark -
+#pragma mark Class plumbing
 
 - (id) init
 {
