@@ -68,7 +68,7 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
-	FMResultSet *rs = [db.dao executeQuery:sql];
+	FMResultSet *rs = [db executeQuery:sql];
   [sql release];
 	while ([rs next])
   {
@@ -119,7 +119,7 @@
   NSMutableArray *membershipListArray = [[[NSMutableArray alloc] init] autorelease];
   int tmpTagId = 0;
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = '%d'",cardId];
-	FMResultSet *rs = [db.dao executeQuery:sql];
+	FMResultSet *rs = [db executeQuery:sql];
   [sql release];
 	while ([rs next])
   {
@@ -161,8 +161,9 @@
 {
 	NSMutableArray* tags = [[[NSMutableArray alloc] init] autorelease];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-	while ([rs next]) {
+	FMResultSet *rs = [db executeQuery:sql];
+	while ([rs next])
+  {
 		Tag* tmpTag = [[Tag alloc] init];
 		[tmpTag hydrate:rs];
 		[tags addObject:tmpTag];
@@ -187,7 +188,7 @@
 + (NSMutableArray*) retrieveSysTagList
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 0 ORDER BY utag_name ASC"];
-  NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL: sql];
+  NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL:sql];
 	[sql release];
 	return tmpTags;
 }
@@ -208,7 +209,7 @@
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId
 {
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM tags t, group_tag_link l WHERE t.tag_id = l.tag_id AND l.group_id = %d ORDER BY t.tag_name ASC",groupId];
-	NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL: sql];
+	NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL:sql];
 	[sql release];
 	return tmpTags;
 }
@@ -229,7 +230,7 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM tags WHERE tag_id = %d LIMIT 1",tagId];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
+	FMResultSet *rs = [db executeQuery:sql];
   Tag* tmpTag = [[[Tag alloc] init] autorelease];
 	while ([rs next])
   {
