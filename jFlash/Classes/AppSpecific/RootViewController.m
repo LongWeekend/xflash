@@ -8,10 +8,11 @@
 
 #import "RootViewController.h"
 #import "VersionManager.h"
+#import "FlurryAPI.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
-NSString * const LWEShouldShowModal				= @"LWEShouldShowModal";
-NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
+NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
+NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -270,23 +271,29 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
   
-  // Use HTML from PLIST if we have it
+  // Use HTML from PLIST
   NSString *htmlString = [[aNotification userInfo] objectForKey:@"plugin_html_content"];
-  if (htmlString)
+  [dlViewController setWebViewContent:htmlString];
+
+  // Get path information
+  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
+  NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
+  if (targetURL && targetPath)
   {
-    [dlViewController setWebViewContent:htmlString];
+    LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
   }
   else
   {
-    [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
-    [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
-    LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
-    LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
+    // This is a problem!  Why wouldn't we have stuff???
+#if APP_STORE_FINAL
+    [FlurryAPI logEvent:@"PLUGIN_URL_FAILURE" withParameters:[aNotification userInfo]];
+    // Notify the user..
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
+                                       message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
+#endif
+    return;
   }
-  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
-  NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
-  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
-   
+
   // Set the installer delegate to the PluginManager class
   [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
   [dlViewController setTaskHandler:tmpDlHandler];
