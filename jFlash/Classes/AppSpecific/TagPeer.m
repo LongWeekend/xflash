@@ -16,18 +16,18 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [[NSString alloc] initWithFormat:@"INSERT INTO tags (tag_name) VALUES ('%@')",tagName];
-  [[db dao] executeUpdate:sql];
+  [db executeUpdate:sql];
   [sql release];
   int lastTagId = (int)[db dao].lastInsertRowId;
   if ([db dao].hadError == NO)
   {
     // Link it
     sql = [[NSString alloc] initWithFormat:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES ('%d','%d')",lastTagId,ownerId];
-    [[db dao] executeUpdate:sql];
+    [db executeUpdate:sql];
     [sql release];
     // Update the cache
     sql = [[NSString alloc] initWithFormat:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = '%d'",ownerId];
-    [[db dao] executeUpdate:sql];
+    [db executeUpdate:sql];
     [sql release];
   }
   else
