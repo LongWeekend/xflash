@@ -47,7 +47,11 @@
   if ([LWENetworkUtils networkAvailable])
   {
     [self _resignTextFieldKeyboard];
+#if APP_TARGET == APP_TARGET_JFLASH
     NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
+#else
+    NSString *string = [NSString stringWithFormat:@"%@ #cflash", tweetTxt.text];
+#endif
     [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
     
     _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
