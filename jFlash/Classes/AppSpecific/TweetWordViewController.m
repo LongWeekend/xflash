@@ -25,9 +25,9 @@
 //! Handy method to take care all of the text field keyboards.
 - (void)_resignTextFieldKeyboard
 {
-	if ([tweetTxt isFirstResponder])
+	if ([self.tweetTxt isFirstResponder])
 	{
-		[tweetTxt resignFirstResponder];
+		[self.tweetTxt resignFirstResponder];
 		//get rid of the done button for the keyboard, replace w/ sign out button; get rid of cancel btn
 		self.navigationItem.rightBarButtonItem = _signOutBtn;
 		self.navigationItem.leftBarButtonItem = _cancelBtn;
@@ -48,7 +48,7 @@
   {
     [self _resignTextFieldKeyboard];
     NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
-    [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
+    [self._twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
     
     _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
   }
@@ -62,7 +62,7 @@
 //! Sign out from the twitter engine.
 - (IBAction) signUserOutOfTwitter:(id)sender
 {
-	[_twitterEngine signOutForTheCurrentUser];
+	[self._twitterEngine signOutForTheCurrentUser];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -88,7 +88,7 @@
 //! The characters left label will update based on this method.
 - (void) textViewDidChange:(UITextView *)textView
 {
-	NSUInteger c = [tweetTxt.text length];
+	NSUInteger c = [self.tweetTxt.text length];
 	NSInteger length = kMaxChars - c;
 	if (length >= 0)
 	{
