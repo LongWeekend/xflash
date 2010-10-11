@@ -155,9 +155,11 @@
 {
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                             otherButtonTitles:NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
-															   NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
-                                                               NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
+                                             otherButtonTitles:
+                       NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites"),
+                       NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
+											 NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
+                       NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
 
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [as showInView:[[appDelegate rootViewController]view]]; 
@@ -194,6 +196,11 @@
     [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
     [tmpVC release];
     [modalNavControl release];
+  }
+  else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
+  {
+    // Do something here
+    LWE_LOG(@"added to favorites");
   }
   else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {

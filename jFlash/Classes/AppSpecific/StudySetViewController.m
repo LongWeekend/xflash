@@ -188,7 +188,7 @@
     // Delete the row from the data source
     Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
     [TagPeer deleteTag:tmpTag.tagId];
-    [tagArray removeObjectAtIndex:[indexPath row]];
+    [tagArray removeObjectAtIndex:indexPath.row];
     [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
   }
@@ -202,9 +202,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)lclTableView
 {
 	if (searching)
+  {
 		return 1;
+  }
   else
+  {
     return 2;
+  }
 }
 
 
@@ -216,17 +220,25 @@
 {
 	if (searching)
   {
-    if ([[self tagArray] count] > 0)
-      return [[self tagArray] count];
+    if ([self.tagArray count] > 0)
+    {
+      return [self.tagArray count];
+    }
     else
+    {
       return 1; // show no results message
+    }
   }
   else
   {
     if (section == SECTION_TAG)
-      return [[self tagArray] count];
+    {
+      return [self.tagArray count];
+    }
     else
-      return [[self subgroupArray] count];
+    {
+      return [self.subgroupArray count];
+    }
   }
 }
 
@@ -245,7 +257,7 @@
   {
     
     // No search results msg
-    if(searching && [tagArray count] == 0)
+    if (searching && [tagArray count] == 0)
     {
       cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
       cell.accessoryType = UITableViewCellAccessoryNone;

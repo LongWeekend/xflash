@@ -17,9 +17,10 @@
 #import "LWETRequestDelegate.h"
 #import "TweetWordXAuthController.h"
 
-#define SVC_ACTION_TWEET_BUTTON 1
-#define SVC_ACTION_REPORT_BUTTON 2
-#define SVC_ACTION_ADDTOSET_BUTTON 0
+#define SVC_ACTION_ADDTOSET_BUTTON 1
+#define SVC_ACTION_ADDTOFAV_BUTTON 0
+#define SVC_ACTION_TWEET_BUTTON 2
+#define SVC_ACTION_REPORT_BUTTON 3
 
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate>
 {
