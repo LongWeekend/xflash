@@ -21,7 +21,7 @@
 - (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId
 {
   // TODO: iPad customization!
-  if (self = [super initWithNibName:@"ModalInputView" bundle:nil])
+  if ((self = [super initWithNibName:@"ModalInputView" bundle:nil]))
   {
     self.defaultCardId = cardId;
     self.ownerId = groupOwnerId;

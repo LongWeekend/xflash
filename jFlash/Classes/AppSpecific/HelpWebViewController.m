@@ -19,7 +19,7 @@
  */
 - (id)initWithFilename:(NSString *)fn usingTitle:(NSString*) title
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     [self setFilename:fn];
     [self setTitle:title];

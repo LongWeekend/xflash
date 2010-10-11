@@ -15,7 +15,7 @@
 
 - (id)init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     [self setMode:kUserViewModeAdd];
     if ([self mode] == kUserViewModeAdd)
