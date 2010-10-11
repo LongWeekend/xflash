@@ -269,10 +269,20 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [dlViewController setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
-  [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
-  [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
-  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
-  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
+  
+  // Use HTML from PLIST if we have it
+  NSString *htmlString = [[aNotification userInfo] objectForKey:@"plugin_html_content"];
+  if (htmlString)
+  {
+    [dlViewController setWebViewContent:htmlString];
+  }
+  else
+  {
+    [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
+    [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
+    LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
+    LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
+  }
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
   LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
