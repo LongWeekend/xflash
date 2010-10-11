@@ -7,6 +7,9 @@
 //
 #import "Constants.h"
 
+// Constants to determine what app version we are building
+#define APP_TARGET_JFLASH 0
+#define APP_TARGET_CFLASH 1
 
 // Settings (also defined in header Constants.h)
 NSString * const SET_MODE_QUIZ       = @"QUIZ";

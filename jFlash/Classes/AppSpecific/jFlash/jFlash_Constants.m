@@ -6,6 +6,9 @@
 //  Copyright 2010 Long Weekend Inc. All rights reserved.
 //
 
+// This tells the whole application that we want target JFLASH, not CFLASH.
+#define APP_TARGET 0
+
 // Version numbers & migration constants - DO NOT CHANGE unless you know what you're doing
 NSString * const JFLASH_CURRENT_VERSION       = @"1.3";
 NSString * const JFLASH_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
