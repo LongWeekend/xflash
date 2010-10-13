@@ -9,9 +9,11 @@
 #import "DatabaseUpdateManager.h"
 #import "FlurryAPI.h"
 #import "TagPeer.h"
+#import "UpdateManager.h"
 
 /**
- * Migrates the databases and et cetera between versions of JFlash
+ * Migrates the databases and et cetera between 1.0 and 1.1 versions of JFlash
+ * \detail For migrations for other versions, see UpdateManager.m
  */
 @implementation DatabaseUpdateManager
 
@@ -20,7 +22,7 @@
 /** Custom initializer that sets dlHandler to nil */
 - (id) init
 {
-  if (self = [super init])
+  if ((self = [super init]))
   {
     // Initialize to point at nothing
     self.dlHandler = nil;
@@ -33,32 +35,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelTask) name:UIApplicationWillTerminateNotification object:nil];
   }
   return self;
-}
-
-
-/**
- * Determine's if the user's database is lagging behind the current version
- * This is a static method as it only needs to access NSUserDefaults to return
- */
-+ (BOOL) databaseIsUpdatable
-{
-  // Get the active database name from settings, compare to the current version.
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *dataVersion = [settings objectForKey:APP_DATA_VERSION];
-  LWE_LOG(@"Data version in settings plist is %@",dataVersion);
-  if (dataVersion == nil)
-  {
-    // If dataVersion doesn't exist, this is a fresh install first load
-    return NO;
-  }
-  else
-  {
-    // Is the active database the current one?
-    if ([dataVersion isEqualToString:JFLASH_VERSION_1_0])
-      return YES;
-    else
-      return NO;
-  }
 }
 
 
@@ -229,7 +205,7 @@
 /** ModalTaskDelegate - startTask */
 - (void) startTask
 {
-  if ([self canStartTask] || [DatabaseUpdateManager databaseIsUpdatable])
+  if ([self canStartTask] || [UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
   {
     _cancelRequest = NO;
     [self _updateInternalState:kMigraterOpenDatabase withTaskMessage:NSLocalizedString(@"Opening Dictionary",@"VersionManager.PreparingDatabaseMsg")];

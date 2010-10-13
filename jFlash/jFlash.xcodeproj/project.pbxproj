@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -465,6 +465,11 @@
 		499006D3120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4997D21611BB642600016A15 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
+		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
+		49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
+		49A942661263AF4500086F4C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
+		49A942671263AF4500086F4C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
+		49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B4ABEB11C1DCD100CFC308 /* task-cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */; };
 		49B4ABEC11C1DCD100CFC308 /* task-pause-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE711C1DCD100CFC308 /* task-pause-button.png */; };
@@ -803,6 +808,13 @@
 		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
+		49A942601263AF4500086F4C /* star-deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected.png"; path = "Assets/star-deselected.png"; sourceTree = "<group>"; };
+		49A942611263AF4500086F4C /* star-deselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected@2x.png"; path = "Assets/star-deselected@2x.png"; sourceTree = "<group>"; };
+		49A942621263AF4500086F4C /* star-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-selected.png"; path = "Assets/star-selected.png"; sourceTree = "<group>"; };
+		49A942631263AF4500086F4C /* star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-selected@2x.png"; path = "Assets/star-selected@2x.png"; sourceTree = "<group>"; };
+		49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_12_to_13.sql; path = Migrations/jflash_12_to_13.sql; sourceTree = "<group>"; };
+		49AF3D331265EDCD00CEAA52 /* UpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateManager.h; path = AppSpecific/UpdateManager.h; sourceTree = "<group>"; };
+		49AF3D341265EDCD00CEAA52 /* UpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateManager.m; path = AppSpecific/UpdateManager.m; sourceTree = "<group>"; };
 		49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExamplesUnavailable.xib; path = XIBs/ExamplesUnavailable.xib; sourceTree = "<group>"; };
 		49B4ABE611C1DCD100CFC308 /* task-cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-cancel-button.png"; path = "Assets/task-cancel-button.png"; sourceTree = "<group>"; };
 		49B4ABE711C1DCD100CFC308 /* task-pause-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "task-pause-button.png"; path = "Assets/task-pause-button.png"; sourceTree = "<group>"; };
@@ -1277,6 +1289,7 @@
 			children = (
 				24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */,
 				4958DF8511D322CA0037027C /* jflash_10_to_11.sql */,
+				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
@@ -1507,6 +1520,10 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				49A942601263AF4500086F4C /* star-deselected.png */,
+				49A942611263AF4500086F4C /* star-deselected@2x.png */,
+				49A942621263AF4500086F4C /* star-selected.png */,
+				49A942631263AF4500086F4C /* star-selected@2x.png */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
@@ -1664,6 +1681,8 @@
 				917A5C8411AB851100016BD2 /* MoodIcon.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
+				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
+				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
 				4950C25111B764B200B70EE9 /* PluginManager.h */,
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
@@ -1941,8 +1960,12 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Long Weekend LLC";
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "jFlash" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2048,6 +2071,10 @@
 				499006CA120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */,
 				499006D2120FC44600601CD2 /* speech_bubble.png in Resources */,
 				24F7DC27125A9E46002638AA /* LWEToolbarPicker.xib in Resources */,
+				49A942641263AF4500086F4C /* star-deselected.png in Resources */,
+				49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */,
+				49A942661263AF4500086F4C /* star-selected.png in Resources */,
+				49A942671263AF4500086F4C /* star-selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2380,6 +2407,7 @@
 				24F7DC24125A9E46002638AA /* LWETooltipView.m in Sources */,
 				24F7DC26125A9E46002638AA /* LWEViewUtility.c in Sources */,
 				496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */,
+				49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2908,7 +2936,7 @@
 				INFOPLIST_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator4.1;
 			};
 			name = Beta;
 		};
@@ -2954,7 +2982,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator4.1;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -2979,7 +3007,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator4.1;
 			};
 			name = Release;
 		};

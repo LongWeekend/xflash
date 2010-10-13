@@ -10,7 +10,7 @@
 #import "LWEDownloader.h"
 #import "ModalTaskViewController.h"
 
-/** State machine for the migrater */
+/** State machine for the 1.0 to 1.1 migrater */
 typedef enum _migraterStates
 {
   kMigraterReady,                   //! Ready to go
@@ -38,7 +38,6 @@ typedef enum _migraterStates
   BOOL _cancelRequest;
 }
 
-+ (BOOL) databaseIsUpdatable;
 - (float) progress;
 - (void) setProgress:(float)progress;
 - (void) _downloadFTSPlugin;
