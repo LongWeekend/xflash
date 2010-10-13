@@ -134,9 +134,13 @@
     NSString *readingStr = [card combinedReadingForSettings];
     
     if (readingStr.length > 0)
+    {
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];
+    }
     else
+    {
       cell.detailTextLabel.text = meaningStr;
+    }
   }
   return cell;
 }
