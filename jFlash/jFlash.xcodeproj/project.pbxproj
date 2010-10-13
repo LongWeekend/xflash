@@ -1520,10 +1520,6 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				49A942601263AF4500086F4C /* star-deselected.png */,
-				49A942611263AF4500086F4C /* star-deselected@2x.png */,
-				49A942621263AF4500086F4C /* star-selected.png */,
-				49A942631263AF4500086F4C /* star-selected@2x.png */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
@@ -1556,8 +1552,12 @@
 				D35B07461116456D00DB5E02 /* practice-btn-wrong.png */,
 				D35B07471116456D00DB5E02 /* practice-btns-bg.png */,
 				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
-				499006D1120FC44600601CD2 /* speech_bubble.png */,
 				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
+				499006D1120FC44600601CD2 /* speech_bubble.png */,
+				49A942601263AF4500086F4C /* star-deselected.png */,
+				49A942611263AF4500086F4C /* star-deselected@2x.png */,
+				49A942621263AF4500086F4C /* star-selected.png */,
+				49A942631263AF4500086F4C /* star-selected@2x.png */,
 				491FE3AB11BA0B5700A54F51 /* twitter-icon.png */,
 				499006A8120FBBF400601CD2 /* twitter-bird.png */,
 				499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */,
