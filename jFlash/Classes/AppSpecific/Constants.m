@@ -35,8 +35,8 @@ NSString * const APP_SETTINGS_VERSION     = @"settings_version";
 //Rendy did add this - For the plugin manager feature
 NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
 
-// Tag for "favorites" - a negative number since no other sets can be negative
-const NSInteger FAVORITES_TAG_ID = -1;
+// Tag for "favorites" - zero, because it wasn't taken!
+const NSInteger FAVORITES_TAG_ID = 0;
 
 //------------------------------------------------------------
 // Everything after here can easily be changed across versions
