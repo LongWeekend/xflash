@@ -49,7 +49,7 @@
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
   [self setSearchBar:tmpSearchBar];
   [tmpSearchBar release];
-  [[self tableView] setTableHeaderView:[self searchBar]];
+  [self.tableView setTableHeaderView:self.searchBar];
   
   // Add add button to nav bar
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
@@ -79,13 +79,16 @@
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle:[group groupName]];
+  [self setTitle:group.groupName];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
-  if (!searching) [self hideSearchBar];
+  if (!searching)
+  {
+    [self hideSearchBar];
+  }
   [[self tableView] setBackgroundColor: [UIColor clearColor]];
   [self reloadTableData];
 }
@@ -94,16 +97,17 @@
 {
   // Get subgroups
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:group.groupId];
-  for (int i = 0; i < [[self subgroupArray] count]; i++)
+  for (int i = 0; i < [self.subgroupArray count]; i++)
   {
-    [[[self subgroupArray] objectAtIndex:i] getChildGroupCount];
+    [[self.subgroupArray objectAtIndex:i] getChildGroupCount];
   }
 }
 
 - (void) reloadTableData
 {
-  if([self tableView] == nil)
+  if(self.tableView == nil)
   {
+    // MMA - 13.10.2010 - does this ever happen??!  really?
     return;
   }
 	if (searching)
@@ -114,7 +118,7 @@
   {
     [self setTagArray: [group getTags]];
   }
-  [[self tableView] reloadData];
+  [self.tableView reloadData];
 }
 
 /**
@@ -153,7 +157,7 @@
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
-- (void)addStudySet
+- (void) addStudySet
 {
   // TODO: iPad customization?
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];

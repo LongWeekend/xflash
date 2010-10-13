@@ -18,9 +18,6 @@
 @interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate>
 {
   UIBarButtonItem *_addButton;
-  NSInteger selectedTagId;
-  NSInteger groupId;
-	UISearchBar *searchBar;
   UIButton *searchOverlayBtn;
   UIView *_searchOverlay;
 	BOOL searching;
