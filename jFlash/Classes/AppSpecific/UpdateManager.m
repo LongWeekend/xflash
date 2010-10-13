@@ -100,9 +100,13 @@
   {
     // Aha, this is a JFlash 1.0 install, now double check the data version
     if ([settings objectForKey:@"data_version"] == nil)
+    {
       return YES;
-    else 
+    }
+    else
+    {
       [NSException raise:@"first load exists, but data version does too!" format:@"data_version value was: %@",[settings objectForKey:@"data_version"]];
+    }
   }
   return NO;
 }
@@ -126,11 +130,10 @@
 {
 	// First things first, do a check to make sure this is not a first run after an upgrade
 	// TODO: Check whether it needs to check [settings objectForKey:@"first_load"] as well
-	if (![settings objectForKey:PLUGIN_LAST_UPDATE])
+	if (![settings objectForKey:PLUGIN_LAST_UPDATE] && [settings valueForKey:@"settings_already_created"])
 	{
 		return YES;
 	}
-	LWE_LOG(@"DEBUG : Plugin last update key apparently does exist, this is the value = %@", [settings objectForKey:PLUGIN_LAST_UPDATE]);
 	return NO;
 }
 
@@ -171,7 +174,8 @@
 + (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
 {
   // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
-  return [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2];
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
+          [settings valueForKey:@"settings_already_created"]);
 }
 
 #pragma mark -
@@ -214,7 +218,6 @@
 {
   // Get the active database name from settings, compare to the current version.
   NSString *dataVersion = [settings objectForKey:APP_DATA_VERSION];
-  LWE_LOG(@"Data version in settings plist is %@",dataVersion);
   if (dataVersion == nil)
   {
     // If dataVersion doesn't exist, this is a fresh install first load

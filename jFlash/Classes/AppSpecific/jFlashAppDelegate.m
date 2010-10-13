@@ -19,8 +19,7 @@
 
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{     
-	LWE_LOG(@"In the start of the application did finish launching NSUserDefault %@", [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN]);
+{
   #if defined(APP_STORE_FINAL)
     // add analytics if this is live
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -48,8 +47,8 @@
   [state initializeSettings];
 
   // Load root controller to show splash screen
-  [self setRootViewController:[[RootViewController alloc] init]];
-	[window addSubview:rootViewController.view];
+  [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
+	[window addSubview:self.rootViewController.view];
   [window makeKeyAndVisible];
   
   // Add a delay here so that the UI has time to update
@@ -58,7 +57,8 @@
 
 
 //! Flurry exception handler (only installed in final app store version)
-void uncaughtExceptionHandler(NSException *exception) {
+void uncaughtExceptionHandler(NSException *exception)
+{
   [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
 }
 

@@ -43,6 +43,9 @@ extern NSString * const APP_SETTINGS_VERSION;
 
 extern NSString * const PLUGIN_LAST_UPDATE;
 
+extern const NSInteger FAVORITES_TAG_ID;
+
+
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
 #define percentCorrectLabelStartText @"100%"
