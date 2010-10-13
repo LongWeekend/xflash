@@ -11,6 +11,7 @@
 #import "ExampleSentencePeer.h"
 #import "AddTagViewController.h"
 #import "DisplaySearchedSentenceViewController.h"
+
 #define SEARCH_TARGET_WORDS 0
 #define SEARCH_TARGET_EXAMPLE_SENTENCES 1
 

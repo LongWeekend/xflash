@@ -9,6 +9,12 @@
 #import "SearchViewController.h"
 const NSInteger KSegmentedTableHeader = 100;
 
+// Private method declarations
+@interface SearchViewController ()
+- (void) _toggleMembership:(id)sender event:(id)event;
+@end
+
+
 @implementation SearchViewController
 @synthesize _searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
 @synthesize tableView;
@@ -266,6 +272,10 @@ const NSInteger KSegmentedTableHeader = 100;
   return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)lclTableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  return 64.0f;
+}
 
 /** Returns 75px if _showSearchTargetControl is YES, otherwise returns UITableView standard 0 (no headers) */
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -352,20 +362,68 @@ const NSInteger KSegmentedTableHeader = 100;
 /** Helper method - makes a cell for cellForIndexPath for a Card */
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
 {
+  // Remove old label
+  [[cell viewWithTag:1] removeFromSuperview];
+  [[cell viewWithTag:2] removeFromSuperview];
+  [[cell viewWithTag:3] removeFromSuperview];
+  [[cell viewWithTag:4] removeFromSuperview];
+
+  // Make new one
+  UILabel *searchResult = [[UILabel alloc] initWithFrame:CGRectMake(44,4,240,25)];  
+  searchResult.font = [UIFont boldSystemFontOfSize:18];
+//  searchResult.backgroundColor = [UIColor grayColor];
+  searchResult.lineBreakMode = UILineBreakModeTailTruncation;
+  searchResult.text = [card headword];
+  searchResult.tag = 1;
+  [cell.contentView addSubview:searchResult];
+  [searchResult release];
+  
+  // Now make the button
+  UIButton *starButton = [[UIButton alloc] initWithFrame:CGRectMake(7,17,29,29)];
+  starButton.tag = 2;
+//  starButton.backgroundColor = [UIColor grayColor];
+  if ([TagPeer checkMembership:card.cardId tagId:FAVORITES_TAG_ID])
+  {
+    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+  }
+  else
+  {
+    [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
+  }
+
+  [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
+  [cell.contentView addSubview:starButton];
+  [starButton release];
+  
   // Is a search result record
-  cell.textLabel.text = [card headword];
-  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
-  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+//  cell.textLabel.text = [card headword];
+//  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
+//  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
   
-  NSString *meaningStr = [card meaningWithoutMarkup];
-  NSString *readingStr = [card combinedReadingForSettings];
-
-  if (readingStr.length > 0)
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];
-  else
-    cell.detailTextLabel.text = meaningStr;
+  // Set up the image
+//  UIImageView *theView = cell.imageView;
+//  UIImage *tmpImage = ;
+//  theView.image = tmpImage;
+  
+  // Get the meaning
+  UILabel *meaningLabel = [[UILabel alloc] initWithFrame:CGRectMake(44,40,250,20)];
+  meaningLabel.font = [UIFont systemFontOfSize:13];
+  meaningLabel.text = [card meaningWithoutMarkup];
+  meaningLabel.tag = 3;
+  [cell.contentView addSubview:meaningLabel];
+  [meaningLabel release];
+  
+  // And the reading
+  UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(44,27,250,16)];
+  readingLabel.font = [UIFont systemFontOfSize:13];
+  readingLabel.textColor = [UIColor grayColor];
+  readingLabel.text = [card combinedReadingForSettings];
+  readingLabel.tag = 4;
+  [cell.contentView addSubview:readingLabel];
+  [readingLabel release];
+  
   return cell;
 }
 
@@ -421,6 +479,41 @@ const NSInteger KSegmentedTableHeader = 100;
   
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
+#pragma mark -
+#pragma mark Private method
+
+/**
+ * Adds a card to a favorites tag, or removes it, depending on its current
+ */
+- (void) _toggleMembership:(id)sender event:(id)event
+{
+  // Get the card ID
+  LWE_LOG(@"Toggle");
+  NSSet *touches = [event allTouches];
+  UITouch *touch = [touches anyObject];
+  CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+  NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+  if (indexPath != nil)
+  {
+    NSInteger cardId = [[[self _cardSearchArray] objectAtIndex:indexPath.row] cardId];
+    BOOL isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+    if (isMember)
+    {
+      [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
+    }
+    else
+    {
+      [TagPeer cancelMembership:cardId tagId:FAVORITES_TAG_ID];
+    }
+
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+  }
+}
+
+#pragma mark -
+#pragma mark Class plumbing
 
 //! Standard dealloc
 - (void)dealloc
