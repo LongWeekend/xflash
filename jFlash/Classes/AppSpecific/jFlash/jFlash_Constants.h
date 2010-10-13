@@ -20,6 +20,9 @@ extern NSString * const JFLASH_CURRENT_USER_DATABASE;
 extern NSString * const JFLASH_10_USER_DATABASE;
 extern NSString * const JFLASH_10_TO_11_SQL_FILENAME;
 
+// For 1.2->1.3 migration
+extern NSString * const JFLASH_12_TO_13_SQL_FILENAME;
+
 extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
 extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
 extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
