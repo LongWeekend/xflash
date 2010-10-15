@@ -113,6 +113,7 @@
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
 		4958DF8711D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
+		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
 		496BE54A11EC52E7003AB713 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */; };
 		496BE54E11EC5303003AB713 /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
@@ -2075,6 +2076,7 @@
 				49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */,
 				49A942661263AF4500086F4C /* star-selected.png in Resources */,
 				49A942671263AF4500086F4C /* star-selected@2x.png in Resources */,
+				4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2667,7 +2669,7 @@
 				PRODUCT_NAME = jFlash;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator4.0;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Debug;
 		};
@@ -2936,7 +2938,7 @@
 				INFOPLIST_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Beta;
 		};
@@ -2982,7 +2984,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphoneos4.1;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -3007,7 +3009,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Release;
 		};

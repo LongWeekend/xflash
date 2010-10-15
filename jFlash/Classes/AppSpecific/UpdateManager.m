@@ -152,8 +152,8 @@
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Cool, we are open - run the SQL
-    NSString *commands = [NSString stringWithContentsOfFile:JFLASH_12_TO_13_SQL_FILENAME encoding:NSUTF8StringEncoding error:NULL];
-    if ([db executeUpdate:commands])
+    NSString *commands = [NSString stringWithContentsOfFile:[LWEFile createBundlePathWithFilename:JFLASH_12_TO_13_SQL_FILENAME] encoding:NSUTF8StringEncoding error:NULL];
+    if (commands && [db executeUpdate:commands])
     {
       // Now change the app version
       [settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
