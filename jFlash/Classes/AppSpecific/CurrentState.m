@@ -45,7 +45,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (Tag *) activeTag
 {
-  if(_activeTag == nil || [_activeTag cardCount] == 0)
+  if (_activeTag == nil || [_activeTag cardCount] == 0)
   {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     int storedTagId = [settings integerForKey:@"tag_id"];
@@ -53,7 +53,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     if(storedTagId == 0) storedTagId = DEFAULT_TAG_ID;
     [self setActiveTag:[TagPeer retrieveTagById:storedTagId]];
     int currentIndex = [settings integerForKey:@"current_index"];
-    [[self activeTag] setCurrentIndex:currentIndex];
+    // Do not use getter here - it may cause an infinite loop if the card count of the active tag is 0 (which should never hapen but)
+    [_activeTag setCurrentIndex:currentIndex];
   }
   
   id tag;
