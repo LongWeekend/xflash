@@ -70,7 +70,13 @@ void uncaughtExceptionHandler(NSException *exception)
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+
+#if APP_TARGET == APP_TARGET_JFLASH
   NSString *filename = JFLASH_CURRENT_USER_DATABASE;
+#else
+  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
+#endif
+  
   NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
@@ -79,7 +85,7 @@ void uncaughtExceptionHandler(NSException *exception)
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [[self rootViewController] showDatabaseLoadingView];
     // Only ever copy the latest user database
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:JFLASH_CURRENT_USER_DATABASE];
+    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:filename];
   }
   else
   {
@@ -100,7 +106,13 @@ void uncaughtExceptionHandler(NSException *exception)
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+
+#if APP_TARGET == APP_TARGET_JFLASH
   NSString *filename = JFLASH_CURRENT_USER_DATABASE;
+#else
+  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
+#endif
+
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Then load plugins

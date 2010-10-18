@@ -13,10 +13,6 @@
 #define DEFAULT_MAX_STRUDYING 30
 #define DEFAULT_DIFFICULTY 1
 
-
-// Profile SQL statements in console?
-#define PROFILE_SQL_STATEMENTS 1
-
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
@@ -117,9 +113,6 @@ extern NSString * const HTML_FOOTER;
 // table view cell content offsets
 #define kCellLeftOffset			8.0
 #define kCellTopOffset			12.0
-
-// image file storage root
-#define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 // default background image for UITableViews
 #define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.png"
