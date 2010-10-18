@@ -188,7 +188,7 @@
   [self setCurrentCardSet:[[CurrentState sharedCurrentState] activeTag]];
   
   // Set tag & card-specific stuff
-  [cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),currentCardSet.tagName]];
+  [self.cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),self.currentCardSet.tagName]];
   
   // Use this to set up delegates, etc
   [self refreshCardView];
