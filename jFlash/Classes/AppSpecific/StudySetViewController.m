@@ -270,7 +270,7 @@
 /**
  * Generates cells for table view depending on section & whether or not we are searching
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
   // Get theme manager so we can get elements from it
@@ -281,9 +281,9 @@
   {
     
     // No search results msg
-    if (searching && [tagArray count] == 0)
+    if (searching && [self.tagArray count] == 0)
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -293,20 +293,28 @@
     // Normal cell display
     else
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+
+      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
 
       // Set up the image
-      UIImageView* tmpView = cell.imageView;
       // TODO: iPad customization?
-      tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
+      UIImageView* tmpView = cell.imageView;
+      if (tmpTag.tagId == FAVORITES_TAG_ID)
+      {
+        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
+      }
+      else
+      {
+        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
+      }
       
-      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
-      cell.textLabel.text = [tmpTag tagName];
+      cell.textLabel.text = tmpTag.tagName;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       NSString* tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
-      if(tmpTag.cardCount == 0)
+      if (tmpTag.cardCount == 0)
       {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.accessoryView = nil;
@@ -318,7 +326,7 @@
       }
       if (selectedTagId == indexPath.row)
       {
-        cell.accessoryView = [self activityIndicator];
+        cell.accessoryView = self.activityIndicator;
         cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
       }
     }
@@ -326,12 +334,12 @@
   // Group Cells
   else
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
     
     // Folders should display the theme color when pressed!
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:[subgroupArray count]];
-    [bgView setBorderColor:[[self tableView] separatorColor]];
+    [bgView setCellIndexPath:indexPath tableLength:[self.subgroupArray count]];
+    [bgView setBorderColor:[self.tableView separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.selectedBackgroundView = bgView;
     [bgView release];
@@ -352,9 +360,13 @@
     UIImageView* tmpView = (UIImageView*)cell.imageView;
     // TODO: iPad customization?
     if(tmpGroup.recommended)
+    {
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"special-folder-icon.png"]];
+    }
     else
+    {
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"folder-icon.png"]];
+    }
     
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
