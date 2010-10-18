@@ -358,72 +358,68 @@ const NSInteger KSegmentedTableHeader = 100;
   return cell;
 }
 
-
 /** Helper method - makes a cell for cellForIndexPath for a Card */
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
 {
-  // Remove old label
-  [[cell viewWithTag:1] removeFromSuperview];
-  [[cell viewWithTag:2] removeFromSuperview];
-  [[cell viewWithTag:3] removeFromSuperview];
-  [[cell viewWithTag:4] removeFromSuperview];
-
-  // Make new one
-  UILabel *searchResult = [[UILabel alloc] initWithFrame:CGRectMake(44,4,240,25)];  
-  searchResult.font = [UIFont boldSystemFontOfSize:18];
-//  searchResult.backgroundColor = [UIColor grayColor];
-  searchResult.lineBreakMode = UILineBreakModeTailTruncation;
+  
+  // Get the headword (or make a new one)
+  UILabel *searchResult = (UILabel*)[cell viewWithTag:SEARCH_CELL_HEADWORD];
+  if (searchResult == nil) 
+  {
+    searchResult = [[[UILabel alloc] initWithFrame:CGRectMake(44,4,240,25)] autorelease];  
+    searchResult.tag = SEARCH_CELL_HEADWORD;
+    searchResult.font = [UIFont boldSystemFontOfSize:18];
+    searchResult.lineBreakMode = UILineBreakModeTailTruncation;
+    [cell.contentView addSubview:searchResult];
+  }
+  searchResult.backgroundColor = [UIColor whiteColor];
   searchResult.text = [card headword];
-  searchResult.tag = 1;
-  [cell.contentView addSubview:searchResult];
-  [searchResult release];
   
   // Now make the button
-  UIButton *starButton = [[UIButton alloc] initWithFrame:CGRectMake(7,17,29,29)];
-  starButton.tag = 2;
-//  starButton.backgroundColor = [UIColor grayColor];
-  if ([TagPeer checkMembership:card.cardId tagId:FAVORITES_TAG_ID])
+  UIButton *starButton = (UIButton*)[cell viewWithTag:SEARCH_CELL_BUTTON];
+  if (starButton == nil)
   {
-    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+    starButton = [[[UIButton alloc] initWithFrame:CGRectMake(7,17,29,29)] autorelease];
+    starButton.tag = SEARCH_CELL_BUTTON;
+    [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:starButton];
   }
-  else
+  // Now set its state
+  if ([TagPeer checkMembership:card.cardId tagId:FAVORITES_TAG_ID])
   {
     [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
   }
-
-  [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
-  [cell.contentView addSubview:starButton];
-  [starButton release];
-  
-  // Is a search result record
-//  cell.textLabel.text = [card headword];
-//  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
-//  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  cell.selectionStyle = UITableViewCellSelectionStyleGray;
-  
-  // Set up the image
-//  UIImageView *theView = cell.imageView;
-//  UIImage *tmpImage = ;
-//  theView.image = tmpImage;
+  else
+  {
+    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+  }
   
   // Get the meaning
-  UILabel *meaningLabel = [[UILabel alloc] initWithFrame:CGRectMake(44,40,250,20)];
-  meaningLabel.font = [UIFont systemFontOfSize:13];
+  UILabel *meaningLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_MEANING];
+  if (meaningLabel == nil) 
+  {
+    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,40,250,20)] autorelease];
+    meaningLabel.tag = SEARCH_CELL_MEANING;
+    meaningLabel.font = [UIFont systemFontOfSize:13];
+    [cell.contentView addSubview:meaningLabel];
+  }
   meaningLabel.text = [card meaningWithoutMarkup];
-  meaningLabel.tag = 3;
-  [cell.contentView addSubview:meaningLabel];
-  [meaningLabel release];
   
   // And the reading
-  UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(44,27,250,16)];
-  readingLabel.font = [UIFont systemFontOfSize:13];
-  readingLabel.textColor = [UIColor grayColor];
+  UILabel *readingLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_READING];
+  if (readingLabel == nil)
+  {
+    readingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,27,250,16)] autorelease];
+    readingLabel.font = [UIFont systemFontOfSize:13];
+    readingLabel.textColor = [UIColor grayColor];
+    readingLabel.tag = SEARCH_CELL_READING;
+    [cell.contentView addSubview:readingLabel];
+  }
   readingLabel.text = [card combinedReadingForSettings];
-  readingLabel.tag = 4;
-  [cell.contentView addSubview:readingLabel];
-  [readingLabel release];
-  
+
+  // Default cell properties
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
   return cell;
 }
 
@@ -498,7 +494,7 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     NSInteger cardId = [[[self _cardSearchArray] objectAtIndex:indexPath.row] cardId];
     BOOL isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
-    if (isMember)
+    if (!isMember)
     {
       [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
     }

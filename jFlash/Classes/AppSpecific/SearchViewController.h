@@ -15,6 +15,12 @@
 #define SEARCH_TARGET_WORDS 0
 #define SEARCH_TARGET_EXAMPLE_SENTENCES 1
 
+// View tags for the custom table view cells
+#define SEARCH_CELL_HEADWORD 200
+#define SEARCH_CELL_READING 201
+#define SEARCH_CELL_MEANING 202
+#define SEARCH_CELL_BUTTON 203
+
 //! State machine for searching
 typedef enum searchStates
 {
