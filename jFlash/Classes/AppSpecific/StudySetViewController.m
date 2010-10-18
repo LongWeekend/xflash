@@ -105,9 +105,10 @@
 
 - (void) reloadTableData
 {
-  if(self.tableView == nil)
+  if (self.tableView == nil)
   {
     // MMA - 13.10.2010 - does this ever happen??!  really?
+    // This was just defensive programming probably because reloadTableData was getting called when the tableview was nil because we forgot to de-observe something...?
     return;
   }
 	if (searching)
@@ -116,7 +117,26 @@
   }
   else
   {
-    self.tagArray = [group getTags];
+    self.tagArray = [self.group getTags];
+    
+    // Do something special for starred words - re-sort so starred shows up on top.
+    if (self.group.groupId == 0)
+    {
+      NSMutableArray *tmpTagArray = [NSMutableArray array];
+      for (Tag *tmpTag in self.tagArray)
+      {
+        if (tmpTag.tagId == FAVORITES_TAG_ID)
+        {
+          // Put it at the beginning
+          [tmpTagArray insertObject:tmpTag atIndex:0];
+        }
+        else
+        {
+          [tmpTagArray addObject:tmpTag];
+        }
+      }
+      self.tagArray = tmpTagArray;
+    }    
   }
   [self.tableView reloadData];
 }
