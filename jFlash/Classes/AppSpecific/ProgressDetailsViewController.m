@@ -37,6 +37,10 @@
     [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
     [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
   }    
+
+  // Set the tag name
+  NSString *setName = [[[CurrentState sharedCurrentState] activeTag] tagName];
+  [self.currentStudySet setText:setName];
 }
 
 - (void)setStreakLabel
