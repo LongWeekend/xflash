@@ -89,7 +89,7 @@
   {
     [self hideSearchBar];
   }
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  [self.tableView setBackgroundColor:[UIColor clearColor]];
   [self reloadTableData];
 }
 
@@ -112,11 +112,11 @@
   }
 	if (searching)
   {
-    [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
+    self.tagArray = [TagPeer retrieveTagListLike:self.searchBar.text];
   }
   else
   {
-    [self setTagArray: [group getTags]];
+    self.tagArray = [group getTags];
   }
   [self.tableView reloadData];
 }
@@ -126,7 +126,7 @@
  */
 - (void) hideSearchBar
 {
-  [[self tableView] setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
+  [self.tableView setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
 }
 
 /** Convenience method to change set using notification from another place */
@@ -151,9 +151,9 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
   
   // Stop the animator
-  [[self activityIndicator] stopAnimating];
   selectedTagId = -1;
-  [[self tableView] reloadData];
+  [self.activityIndicator stopAnimating];
+  [self.tableView reloadData];
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
@@ -164,7 +164,7 @@
   addStudySetInputViewController.ownerId = self.groupId;
   addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
-  [[self navigationController] presentModalViewController:modalNavController animated:YES];
+  [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 	[addStudySetInputViewController release];
 }
@@ -177,7 +177,7 @@
 - (void)setEditing:(BOOL) editing animated:(BOOL)animated
 {
 	[super setEditing:editing animated:animated];
-	[[self tableView] setEditing:editing animated:YES];
+	[self.tableView setEditing:editing animated:YES];
 }
 
 
@@ -193,7 +193,7 @@
     Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
     [TagPeer deleteTag:tmpTag.tagId];
     [tagArray removeObjectAtIndex:indexPath.row];
-    [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
   }
 }
