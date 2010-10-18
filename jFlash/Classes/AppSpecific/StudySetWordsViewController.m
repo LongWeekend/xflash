@@ -28,7 +28,7 @@
 {
   if ((self = [super initWithStyle:UITableViewStyleGrouped]))
   {
-    if ([initTag isKindOfClass:[Tag class]] && [initTag tagId] > 0)
+    if ([initTag isKindOfClass:[Tag class]] && [initTag tagId] >= 0)
     {
       [self setTag:initTag];
       [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];

@@ -104,7 +104,7 @@ enum EntrySectionRows
 }
 
 
-/** Checks the membership cache to see if we are in */
+/** Checks the membership cache to see if we are in - FYI similar methods are used by SearchViewController as well */
 - (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId
 {
   BOOL returnVal = NO;

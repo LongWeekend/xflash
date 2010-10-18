@@ -153,10 +153,21 @@
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
 {
+  // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
+  NSString *favoriteString = @"";
+  if ([[[CurrentState sharedCurrentState] activeTag] tagId] == FAVORITES_TAG_ID)
+  {
+    favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
+  }
+  else
+  {
+    favoriteString = NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites");
+  }
+
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
                                              otherButtonTitles:
-                       NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites"),
+                       favoriteString,
                        NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
 											 NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
                        NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
@@ -199,10 +210,19 @@
   }
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
   {
-    // Do something here
-    LWE_LOG(@"added to favorites");
+    // Do something here - subscribe or cancel, depending.
+    Tag *currentSet = [[CurrentState sharedCurrentState] activeTag];
+    if (currentSet.tagId != FAVORITES_TAG_ID)
+    {
+      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+    }
+    else
+    {
+      [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+    }
+
   }
-  else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
+  else if (buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
 	  [self tweet];
   }

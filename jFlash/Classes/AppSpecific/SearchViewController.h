@@ -56,6 +56,9 @@ typedef enum searchStates
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card;
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forSentence:(ExampleSentence*)sentence;
 
+//! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
+@property (nonatomic, retain) NSMutableArray *membershipCacheArray;
+
 @property (nonatomic, retain) NSMutableArray *_cardSearchArray;
 @property (nonatomic, retain) NSMutableArray *_sentenceSearchArray;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;

@@ -11,13 +11,16 @@ const NSInteger KSegmentedTableHeader = 100;
 
 // Private method declarations
 @interface SearchViewController ()
+- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId;
+- (void) _removeCardFromMembershipCache: (NSInteger)cardId;
 - (void) _toggleMembership:(id)sender event:(id)event;
 @end
-
 
 @implementation SearchViewController
 @synthesize _searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
 @synthesize tableView;
+
+@synthesize membershipCacheArray;
 
 
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
@@ -219,6 +222,10 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   // Reset the state machine
   _searchState = kSearchNoSearch;
+  
+  // Clear the cache of favorites
+  self.membershipCacheArray = nil;
+  
   [self runSearchForString:[[self _searchBar] text]];
   [lclSearchBar resignFirstResponder];
 }
@@ -366,7 +373,7 @@ const NSInteger KSegmentedTableHeader = 100;
   UILabel *searchResult = (UILabel*)[cell viewWithTag:SEARCH_CELL_HEADWORD];
   if (searchResult == nil) 
   {
-    searchResult = [[[UILabel alloc] initWithFrame:CGRectMake(44,4,240,25)] autorelease];  
+    searchResult = [[[UILabel alloc] initWithFrame:CGRectMake(43,3,240,25)] autorelease];  
     searchResult.tag = SEARCH_CELL_HEADWORD;
     searchResult.font = [UIFont boldSystemFontOfSize:18];
     searchResult.lineBreakMode = UILineBreakModeTailTruncation;
@@ -379,13 +386,13 @@ const NSInteger KSegmentedTableHeader = 100;
   UIButton *starButton = (UIButton*)[cell viewWithTag:SEARCH_CELL_BUTTON];
   if (starButton == nil)
   {
-    starButton = [[[UIButton alloc] initWithFrame:CGRectMake(7,17,29,29)] autorelease];
+    starButton = [[[UIButton alloc] initWithFrame:CGRectMake(7,12,29,39)] autorelease];
     starButton.tag = SEARCH_CELL_BUTTON;
     [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:starButton];
   }
   // Now set its state
-  if ([TagPeer checkMembership:card.cardId tagId:FAVORITES_TAG_ID])
+  if ([self _checkMembershipCacheForCardId:card.cardId])
   {
     [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
   }
@@ -398,7 +405,7 @@ const NSInteger KSegmentedTableHeader = 100;
   UILabel *meaningLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_MEANING];
   if (meaningLabel == nil) 
   {
-    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,40,250,20)] autorelease];
+    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,41,250,20)] autorelease];
     meaningLabel.tag = SEARCH_CELL_MEANING;
     meaningLabel.font = [UIFont systemFontOfSize:13];
     [cell.contentView addSubview:meaningLabel];
@@ -409,7 +416,7 @@ const NSInteger KSegmentedTableHeader = 100;
   UILabel *readingLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_READING];
   if (readingLabel == nil)
   {
-    readingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,27,250,16)] autorelease];
+    readingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(43,27,250,16)] autorelease];
     readingLabel.font = [UIFont systemFontOfSize:13];
     readingLabel.textColor = [UIColor grayColor];
     readingLabel.tag = SEARCH_CELL_READING;
@@ -479,6 +486,46 @@ const NSInteger KSegmentedTableHeader = 100;
 #pragma mark -
 #pragma mark Private method
 
+/** Checks the membership cache to see if we are in - FYI similar methods are used by AddTagViewController as well */
+- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId
+{
+  BOOL returnVal = NO;
+  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+  {
+    for (Card *cachedCard in self.membershipCacheArray)
+    {
+      if (cachedCard.cardId == cardId)
+      {
+        return YES;
+      }
+    }
+  }
+  else
+  {
+    // Rebuild cache and fail over to manual function
+    self.membershipCacheArray = [CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID];
+    returnVal = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+  }
+  return returnVal;
+}
+
+
+/** Remove a card from the membership cache */
+- (void) _removeCardFromMembershipCache: (NSInteger) cardId
+{
+  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+  {
+    for (int i = 0; i < [self.membershipCacheArray count]; i++)
+    {
+      if ([[self.membershipCacheArray objectAtIndex:i] cardId] == cardId)
+      {
+        [self.membershipCacheArray removeObjectAtIndex:i];
+        return;
+      }
+    }
+  }
+}
+
 /**
  * Adds a card to a favorites tag, or removes it, depending on its current
  */
@@ -493,14 +540,32 @@ const NSInteger KSegmentedTableHeader = 100;
   if (indexPath != nil)
   {
     NSInteger cardId = [[[self _cardSearchArray] objectAtIndex:indexPath.row] cardId];
-    BOOL isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+    
+    // Use cache for toggling status if we have it
+    BOOL isMember = NO;
+    if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+    {
+      isMember = [self _checkMembershipCacheForCardId:cardId];
+    }
+    else
+    {
+      isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+    }
+    
     if (!isMember)
     {
       [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
+
+      // Now add the new ID onto the end
+      Card *tmpCard = [[Card alloc] init];
+      tmpCard.cardId = cardId;
+      [self.membershipCacheArray addObject:tmpCard];
+      [tmpCard release];
     }
     else
     {
       [TagPeer cancelMembership:cardId tagId:FAVORITES_TAG_ID];
+      [self _removeCardFromMembershipCache:cardId];
     }
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
