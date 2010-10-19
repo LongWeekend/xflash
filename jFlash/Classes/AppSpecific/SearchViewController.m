@@ -539,7 +539,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
   if (indexPath != nil)
   {
-    NSInteger cardId = [[[self _cardSearchArray] objectAtIndex:indexPath.row] cardId];
+    Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+    NSInteger cardId = [theCard cardId];
     
     // Use cache for toggling status if we have it
     BOOL isMember = NO;
@@ -556,7 +557,14 @@ const NSInteger KSegmentedTableHeader = 100;
     {
       [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
 
-      // Now add the new ID onto the end
+      // If we are currently studying favorites, add it in there!
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      {
+        [currentTag addCardToActiveSet:theCard];
+      }
+      
+      // Now add the new ID onto the end of the search cache
       Card *tmpCard = [[Card alloc] init];
       tmpCard.cardId = cardId;
       [self.membershipCacheArray addObject:tmpCard];
@@ -565,6 +573,14 @@ const NSInteger KSegmentedTableHeader = 100;
     else
     {
       [TagPeer cancelMembership:cardId tagId:FAVORITES_TAG_ID];
+
+      // If we are currently studying favorites, remove it from there!
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      {
+        [currentTag removeCardFromActiveSet:theCard];
+      }
+      
       [self _removeCardFromMembershipCache:cardId];
     }
 

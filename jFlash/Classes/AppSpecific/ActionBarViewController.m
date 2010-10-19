@@ -155,7 +155,8 @@
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  if ([[[CurrentState sharedCurrentState] activeTag] tagId] == FAVORITES_TAG_ID)
+  NSInteger tagId = [[[CurrentState sharedCurrentState] activeTag] tagId];
+  if ([TagPeer checkMembership:self.currentCard.cardId tagId:tagId])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
@@ -211,14 +212,20 @@
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
   {
     // Do something here - subscribe or cancel, depending.
-    Tag *currentSet = [[CurrentState sharedCurrentState] activeTag];
-    if (currentSet.tagId != FAVORITES_TAG_ID)
+    if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
     {
-      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+      [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+
+      // If we are on starred, remove it from the cache too
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      {
+        [currentTag removeCardFromActiveSet:self.currentCard];
+      }
     }
     else
     {
-      [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
     }
 
   }
