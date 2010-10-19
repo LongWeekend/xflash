@@ -155,8 +155,7 @@
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  NSInteger tagId = [[[CurrentState sharedCurrentState] activeTag] tagId];
-  if ([TagPeer checkMembership:self.currentCard.cardId tagId:tagId])
+  if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
