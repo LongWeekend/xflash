@@ -24,6 +24,7 @@
 // JFLASH 1.2 -> 1.3
 + (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings;
 + (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings;
++ (BOOL) _updatePlistFrom12to13;
 @end
 
 @implementation UpdateManager
@@ -140,11 +141,61 @@
 
 #pragma mark Version 1.3
 
+/**
+ * Adds the plugin_html_content key to each downloadable plugin
+ * \return YES if successful, NO if not
+ */
++ (BOOL) _updatePlistFrom12to13
+{
+  BOOL returnVal = NO;
+  
+  // Add stuff to the PLIST for the plugin manager
+  NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
+  NSMutableDictionary *pluginSettingsPlist = [NSMutableDictionary dictionaryWithContentsOfFile:docPath];
+  if (pluginSettingsPlist)
+  {
+    // Set up the new dictionary
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+
+    // EXAMPLES
+    if ([pluginSettingsPlist valueForKey:EXAMPLE_DB_KEY])
+    {
+      NSMutableDictionary *newExamplePlugin = [NSMutableDictionary dictionaryWithDictionary:[pluginSettingsPlist valueForKey:EXAMPLE_DB_KEY]];
+      NSString *exampleString = [NSString stringWithContentsOfFile:[LWEFile createBundlePathWithFilename:@"plugin-resources/example-sentences.html"] encoding:NSUTF8StringEncoding error:NULL];
+      [newExamplePlugin setObject:exampleString forKey:@"plugin_html_content"];
+      [newDict setObject:newExamplePlugin forKey:EXAMPLE_DB_KEY];
+    }
+    
+    // FTS
+    if ([pluginSettingsPlist valueForKey:FTS_DB_KEY])
+    {
+      NSMutableDictionary *newSearchPlugin = [NSMutableDictionary dictionaryWithDictionary:[pluginSettingsPlist valueForKey:FTS_DB_KEY]];
+      NSString *searchString = [NSString stringWithContentsOfFile:[LWEFile createBundlePathWithFilename:@"plugin-resources/full-text-search.html"] encoding:NSUTF8StringEncoding error:NULL];
+      [newSearchPlugin setObject:searchString forKey:@"plugin_html_content"];
+      [newDict setObject:newSearchPlugin forKey:FTS_DB_KEY];
+    }
+    
+    // Now write it out
+    if ([newDict writeToFile:docPath atomically:YES])
+    {
+      returnVal = YES;
+    }
+    [newDict release];
+  }
+  else
+  {
+    LWE_LOG(@"Unable to load PLIST!");
+  }
+  return returnVal;
+}
 
 /** Updates NSUserDefaults to add 1.2 values*/
 + (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings
 {
 	LWE_LOG(@"Update from 1.2 to 1.3 - we need to make a tag for favorites!");
+
+  // Now do the PLIST as well
+  [UpdateManager _updatePlistFrom12to13];
 
   // Open the database!
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -156,8 +207,8 @@
     if (commands && [db executeUpdate:commands])
     {
       // Now change the app version
-      [settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
       [settings setValue:JFLASH_VERSION_1_3 forKey:APP_DATA_VERSION];
+      [settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
     }
     else
     {
@@ -167,6 +218,7 @@
     // In any case close the DB so that jFlash can open it
     [db closeDatabase];
   }
+  
 }
 
 

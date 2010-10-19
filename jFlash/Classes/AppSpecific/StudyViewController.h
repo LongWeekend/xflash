@@ -99,7 +99,7 @@
 
 
 // scroll view
-@property (nonatomic, retain) UIView *scrollView;
+@property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIPageControl* pageControl;
 @property (nonatomic, retain) UIButton *revealCardBtn;
 @property (nonatomic, retain) UIImageView *tapForAnswerImage;
