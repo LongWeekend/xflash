@@ -213,13 +213,25 @@
     // Do something here - subscribe or cancel, depending.
     if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
     {
-      [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
-
-      // If we are on starred, remove it from the cache too
       Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
-      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      
+      // Quick check to make sure it's not the last card
+      if (([currentTag tagId] == FAVORITES_TAG_ID) && ([currentTag cardCount] <= 1))
       {
-        [currentTag removeCardFromActiveSet:self.currentCard];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
+                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
+      }
+      else
+      {
+        // First of all, do it
+        [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+
+        // If we are on starred, remove it from the cache too
+        // Also double check that this is not the last card!
+        if ([currentTag tagId] == FAVORITES_TAG_ID)
+        {
+          [currentTag removeCardFromActiveSet:self.currentCard];
+        }
       }
     }
     else
