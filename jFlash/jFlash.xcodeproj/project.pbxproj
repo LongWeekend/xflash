@@ -121,6 +121,10 @@
 		4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
 		4965FD38126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */; };
+		4965FD81126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */; };
+		4965FD82126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */; };
+		4965FD84126F7002000AC280 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD83126F7002000AC280 /* redtheme-cookie-cutters */; };
+		4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD83126F7002000AC280 /* redtheme-cookie-cutters */; };
 		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
 		496BE54A11EC52E7003AB713 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */; };
 		496BE54E11EC5303003AB713 /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
@@ -130,7 +134,6 @@
 		496BE55511EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496BE55611EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496BE55711EC5320003AB713 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
-		496C7AA71263270B004B6B90 /* bluetheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */; };
 		496C7AA81263270B004B6B90 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
 		496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
@@ -140,7 +143,6 @@
 		496C7AAE1263270B004B6B90 /* task-start-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABE911C1DCD100CFC308 /* task-start-button.png */; };
 		496C7AAF1263270B004B6B90 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		496C7AB01263270B004B6B90 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
-		496C7AB11263270B004B6B90 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */; };
 		496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
 		496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
@@ -337,7 +339,6 @@
 		4986F81211C715F600947486 /* 20-gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070A1116456D00DB5E02 /* 20-gear2.png */; };
 		4986F81311C715F600947486 /* 44-shoebox.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070B1116456D00DB5E02 /* 44-shoebox.png */; };
 		4986F81411C715F600947486 /* 90-lifebuoy.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */; };
-		4986F81611C715F600947486 /* bluetheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */; };
 		4986F81711C715F600947486 /* overlay-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073C1116456D00DB5E02 /* overlay-bg.png */; };
 		4986F81811C715F600947486 /* overlay-btn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073D1116456D00DB5E02 /* overlay-btn-close.png */; };
 		4986F81A11C715F600947486 /* practice-btn-goaway.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */; };
@@ -350,7 +351,6 @@
 		4986F82111C715F600947486 /* practice-btn-wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07461116456D00DB5E02 /* practice-btn-wrong.png */; };
 		4986F82211C715F600947486 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
 		4986F82311C715F600947486 /* progressbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07481116456D00DB5E02 /* progressbar-bg.png */; };
-		4986F82411C715F600947486 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */; };
 		4986F82511C715F600947486 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		4986F82611C715F600947486 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		4986F82711C715F600947486 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
@@ -597,7 +597,6 @@
 		D35B07751116456D00DB5E02 /* 20-gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070A1116456D00DB5E02 /* 20-gear2.png */; };
 		D35B07761116456D00DB5E02 /* 44-shoebox.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070B1116456D00DB5E02 /* 44-shoebox.png */; };
 		D35B07771116456D00DB5E02 /* 90-lifebuoy.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */; };
-		D35B07791116456D00DB5E02 /* bluetheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */; };
 		D35B077A1116456D00DB5E02 /* overlay-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073C1116456D00DB5E02 /* overlay-bg.png */; };
 		D35B077B1116456D00DB5E02 /* overlay-btn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073D1116456D00DB5E02 /* overlay-btn-close.png */; };
 		D35B077D1116456D00DB5E02 /* practice-btn-goaway.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */; };
@@ -610,7 +609,6 @@
 		D35B07841116456D00DB5E02 /* practice-btn-wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07461116456D00DB5E02 /* practice-btn-wrong.png */; };
 		D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
 		D35B07861116456D00DB5E02 /* progressbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07481116456D00DB5E02 /* progressbar-bg.png */; };
-		D35B07871116456D00DB5E02 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */; };
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
@@ -798,6 +796,8 @@
 		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
 		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
 		4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong@2x.png"; path = "Assets/practice-btn-wrong@2x.png"; sourceTree = "<group>"; };
+		4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bluetheme-cookie-cutters"; path = "Assets/bluetheme-cookie-cutters"; sourceTree = "<group>"; };
+		4965FD83126F7002000AC280 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
 		496BE54711EC52E7003AB713 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+LWENoBounces.h"; path = "Reusable/LWE/UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
 		496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+LWENoBounces.m"; path = "Reusable/LWE/UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
@@ -1016,7 +1016,6 @@
 		D35B070A1116456D00DB5E02 /* 20-gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "20-gear2.png"; path = "Assets/20-gear2.png"; sourceTree = "<group>"; };
 		D35B070B1116456D00DB5E02 /* 44-shoebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "44-shoebox.png"; path = "Assets/44-shoebox.png"; sourceTree = "<group>"; };
 		D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "90-lifebuoy.png"; path = "Assets/90-lifebuoy.png"; sourceTree = "<group>"; };
-		D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bluetheme-cookie-cutters"; path = "Assets/bluetheme-cookie-cutters"; sourceTree = "<group>"; };
 		D35B073C1116456D00DB5E02 /* overlay-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "overlay-bg.png"; path = "Assets/overlay-bg.png"; sourceTree = "<group>"; };
 		D35B073D1116456D00DB5E02 /* overlay-btn-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "overlay-btn-close.png"; path = "Assets/overlay-btn-close.png"; sourceTree = "<group>"; };
 		D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway.png"; path = "Assets/practice-btn-goaway.png"; sourceTree = "<group>"; };
@@ -1029,7 +1028,6 @@
 		D35B07461116456D00DB5E02 /* practice-btn-wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong.png"; path = "Assets/practice-btn-wrong.png"; sourceTree = "<group>"; };
 		D35B07471116456D00DB5E02 /* practice-btns-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btns-bg.png"; path = "Assets/practice-btns-bg.png"; sourceTree = "<group>"; };
 		D35B07481116456D00DB5E02 /* progressbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "progressbar-bg.png"; path = "Assets/progressbar-bg.png"; sourceTree = "<group>"; };
-		D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
@@ -1554,13 +1552,13 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				4965FD39126F6422000AC280 /* Action Bar */,
-				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
-				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
+				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
+				4965FD39126F6422000AC280 /* Action Bar */,
 				D3309B031123C7D800B73E8E /* help */,
 				D322367A11D370B900B1AF15 /* plugin-resources */,
-				D35B07491116456D00DB5E02 /* redtheme-cookie-cutters */,
+				4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */,
+				4965FD83126F7002000AC280 /* redtheme-cookie-cutters */,
 				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
 				91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
@@ -2023,7 +2021,6 @@
 				D35B07751116456D00DB5E02 /* 20-gear2.png in Resources */,
 				D35B07761116456D00DB5E02 /* 44-shoebox.png in Resources */,
 				D35B07771116456D00DB5E02 /* 90-lifebuoy.png in Resources */,
-				D35B07791116456D00DB5E02 /* bluetheme-cookie-cutters in Resources */,
 				D35B077A1116456D00DB5E02 /* overlay-bg.png in Resources */,
 				D35B077B1116456D00DB5E02 /* overlay-btn-close.png in Resources */,
 				D35B077D1116456D00DB5E02 /* practice-btn-goaway.png in Resources */,
@@ -2036,7 +2033,6 @@
 				D35B07841116456D00DB5E02 /* practice-btn-wrong.png in Resources */,
 				D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */,
 				D35B07861116456D00DB5E02 /* progressbar-bg.png in Resources */,
-				D35B07871116456D00DB5E02 /* redtheme-cookie-cutters in Resources */,
 				D35B07881116456D00DB5E02 /* scroll-more.png in Resources */,
 				D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */,
 				D36CE185111AA1BE0073D809 /* table-background.png in Resources */,
@@ -2105,6 +2101,8 @@
 				4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
 				4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
 				4965FD34126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */,
+				4965FD81126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */,
+				4965FD84126F7002000AC280 /* redtheme-cookie-cutters in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2119,7 +2117,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				496C7AA71263270B004B6B90 /* bluetheme-cookie-cutters in Resources */,
 				496C7AA81263270B004B6B90 /* send-to-long-weekend-btn.png in Resources */,
 				496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */,
 				496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */,
@@ -2129,7 +2126,6 @@
 				496C7AAE1263270B004B6B90 /* task-start-button.png in Resources */,
 				496C7AAF1263270B004B6B90 /* help in Resources */,
 				496C7AB01263270B004B6B90 /* plugin-resources in Resources */,
-				496C7AB11263270B004B6B90 /* redtheme-cookie-cutters in Resources */,
 				496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */,
 				496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */,
 				496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */,
@@ -2197,6 +2193,8 @@
 				4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
 				4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
 				4965FD38126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */,
+				4965FD82126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */,
+				4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2211,7 +2209,6 @@
 				4986F81211C715F600947486 /* 20-gear2.png in Resources */,
 				4986F81311C715F600947486 /* 44-shoebox.png in Resources */,
 				4986F81411C715F600947486 /* 90-lifebuoy.png in Resources */,
-				4986F81611C715F600947486 /* bluetheme-cookie-cutters in Resources */,
 				4986F81711C715F600947486 /* overlay-bg.png in Resources */,
 				4986F81811C715F600947486 /* overlay-btn-close.png in Resources */,
 				4986F81A11C715F600947486 /* practice-btn-goaway.png in Resources */,
@@ -2224,7 +2221,6 @@
 				4986F82111C715F600947486 /* practice-btn-wrong.png in Resources */,
 				4986F82211C715F600947486 /* practice-btns-bg.png in Resources */,
 				4986F82311C715F600947486 /* progressbar-bg.png in Resources */,
-				4986F82411C715F600947486 /* redtheme-cookie-cutters in Resources */,
 				4986F82511C715F600947486 /* scroll-more.png in Resources */,
 				4986F82611C715F600947486 /* talkbubble-ft.png in Resources */,
 				4986F82711C715F600947486 /* table-background.png in Resources */,
