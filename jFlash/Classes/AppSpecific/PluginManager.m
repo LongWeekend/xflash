@@ -597,6 +597,7 @@
   
   [newDictionary writeToFile:docPath atomically:YES];
   [newDictionary release];
+  [pluginDictionary release];
 }
 
 /**

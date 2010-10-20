@@ -490,7 +490,7 @@ const NSInteger KSegmentedTableHeader = 100;
 - (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId
 {
   BOOL returnVal = NO;
-  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+  if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
   {
     for (Card *cachedCard in self.membershipCacheArray)
     {

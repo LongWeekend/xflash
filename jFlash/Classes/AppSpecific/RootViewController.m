@@ -298,6 +298,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
                                        message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
 #endif
+    [dlViewController release];
     return;
   }
 
