@@ -185,9 +185,12 @@
   self.meaningWebView.backgroundColor = [UIColor clearColor];
   [self.meaningWebView shutOffBouncing];
   
+  // The HTML will be encapsulated in Javascript, make sure to escape that noise
+  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
+  
   // Javascript
   NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container');"
-  "if (textElement) { textElement.innerHTML = '%@'; } ",html];
+  "if (textElement) { textElement.innerHTML = '%@'; } ",escapedHtml];
 
   // Save of copy of this in case the webview hasn't finished loading yet
   self._tmpJavascript = js;
