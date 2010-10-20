@@ -113,6 +113,14 @@
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		4958DF8611D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
 		4958DF8711D322CA0037027C /* jflash_10_to_11.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4958DF8511D322CA0037027C /* jflash_10_to_11.sql */; };
+		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
+		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
+		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
+		4965FD34126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */; };
+		4965FD35126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
+		4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
+		4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
+		4965FD38126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */; };
 		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
 		496BE54A11EC52E7003AB713 /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */; };
 		496BE54E11EC5303003AB713 /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
@@ -786,6 +794,10 @@
 		4951E15D11B6336000FCE21E /* LWEToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LWEToolbarPicker.xib; path = XIBs/LWEToolbarPicker.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
 		4958DF8511D322CA0037027C /* jflash_10_to_11.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_10_to_11.sql; path = Migrations/jflash_10_to_11.sql; sourceTree = "<group>"; };
+		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
+		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
+		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
+		4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong@2x.png"; path = "Assets/practice-btn-wrong@2x.png"; sourceTree = "<group>"; };
 		496BE54711EC52E7003AB713 /* UIWebView+LWENoBounces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+LWENoBounces.h"; path = "Reusable/LWE/UIWebView+LWENoBounces.h"; sourceTree = "<group>"; };
 		496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+LWENoBounces.m"; path = "Reusable/LWE/UIWebView+LWENoBounces.m"; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
@@ -1414,6 +1426,27 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		4965FD39126F6422000AC280 /* Action Bar */ = {
+			isa = PBXGroup;
+			children = (
+				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
+				4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */,
+				D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */,
+				4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */,
+				D35B07421116456D00DB5E02 /* practice-btn-right.png */,
+				4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */,
+				D35B07461116456D00DB5E02 /* practice-btn-wrong.png */,
+				4965FD30126F6417000AC280 /* practice-btn-wrong@2x.png */,
+				D35B07401116456D00DB5E02 /* practice-btn-last.png */,
+				D35B07411116456D00DB5E02 /* practice-btn-next.png */,
+				D35B07431116456D00DB5E02 /* practice-btn-showreading.png */,
+				D35B07441116456D00DB5E02 /* practice-btn-unrevealed-mini.png */,
+				D35B07451116456D00DB5E02 /* practice-btn-unrevealed.png */,
+				D35B07471116456D00DB5E02 /* practice-btns-bg.png */,
+			);
+			name = "Action Bar";
+			sourceTree = "<group>";
+		};
 		496C7BFE12633543004B6B90 /* Chinese Flash Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -1521,6 +1554,7 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4965FD39126F6422000AC280 /* Action Bar */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				D35B07141116456D00DB5E02 /* bluetheme-cookie-cutters */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
@@ -1533,7 +1567,6 @@
 				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
-				91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
 				D3B59408111F928100AE4CEE /* Default.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
@@ -1543,15 +1576,6 @@
 				D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */,
 				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
-				D35B073F1116456D00DB5E02 /* practice-btn-goaway.png */,
-				D35B07401116456D00DB5E02 /* practice-btn-last.png */,
-				D35B07411116456D00DB5E02 /* practice-btn-next.png */,
-				D35B07421116456D00DB5E02 /* practice-btn-right.png */,
-				D35B07431116456D00DB5E02 /* practice-btn-showreading.png */,
-				D35B07441116456D00DB5E02 /* practice-btn-unrevealed-mini.png */,
-				D35B07451116456D00DB5E02 /* practice-btn-unrevealed.png */,
-				D35B07461116456D00DB5E02 /* practice-btn-wrong.png */,
-				D35B07471116456D00DB5E02 /* practice-btns-bg.png */,
 				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
 				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
 				499006D1120FC44600601CD2 /* speech_bubble.png */,
@@ -2077,6 +2101,10 @@
 				49A942661263AF4500086F4C /* star-selected.png in Resources */,
 				49A942671263AF4500086F4C /* star-selected@2x.png in Resources */,
 				4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */,
+				4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */,
+				4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
+				4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
+				4965FD34126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2165,6 +2193,10 @@
 				496C7B4F12632803004B6B90 /* LWETDefaultAuthenticationViewController.xib in Resources */,
 				496C7B7012632838004B6B90 /* jFlash.db in Resources */,
 				496C7B7112632839004B6B90 /* jFlash-CARD-1.1.db in Resources */,
+				4965FD35126F6417000AC280 /* practice-btn-actions@2x.png in Resources */,
+				4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
+				4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
+				4965FD38126F6417000AC280 /* practice-btn-wrong@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
