@@ -1512,6 +1512,37 @@
 			name = "Japanese Flash Base Assets";
 			sourceTree = "<group>";
 		};
+		49D996D612705D5000D176D0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
+				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
+				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
+				91D3CF5D11D0F291008565F8 /* form-background.png */,
+				917728E011C0CA9600A90071 /* dropped-text-box.png */,
+				D35B07081116456D00DB5E02 /* 13-target.png */,
+				D35B07091116456D00DB5E02 /* 15-tags.png */,
+				D35B070A1116456D00DB5E02 /* 20-gear2.png */,
+				D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */,
+				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
+				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
+				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
+				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
+				499006D1120FC44600601CD2 /* speech_bubble.png */,
+				49A942601263AF4500086F4C /* star-deselected.png */,
+				49A942611263AF4500086F4C /* star-deselected@2x.png */,
+				49A942621263AF4500086F4C /* star-selected.png */,
+				49A942631263AF4500086F4C /* star-selected@2x.png */,
+				491FE3AB11BA0B5700A54F51 /* twitter-icon.png */,
+				499006A8120FBBF400601CD2 /* twitter-bird.png */,
+				499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */,
+				D35B07711116456D00DB5E02 /* scroll-more.png */,
+				D36CE184111AA1BE0073D809 /* table-background.png */,
+				D35B07721116456D00DB5E02 /* talkbubble-ft.png */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		49F96B7911AFD11E00DFC3C9 /* Logic Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1554,35 +1585,12 @@
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
 				4965FD39126F6422000AC280 /* Action Bar */,
+				49D996D612705D5000D176D0 /* Common */,
 				D3309B031123C7D800B73E8E /* help */,
 				D322367A11D370B900B1AF15 /* plugin-resources */,
 				4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */,
 				4965FD83126F7002000AC280 /* redtheme-cookie-cutters */,
 				49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */,
-				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
-				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
-				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
-				91D3CF5D11D0F291008565F8 /* form-background.png */,
-				917728E011C0CA9600A90071 /* dropped-text-box.png */,
-				D35B07081116456D00DB5E02 /* 13-target.png */,
-				D35B07091116456D00DB5E02 /* 15-tags.png */,
-				D35B070A1116456D00DB5E02 /* 20-gear2.png */,
-				D35B070C1116456D00DB5E02 /* 90-lifebuoy.png */,
-				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
-				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
-				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
-				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
-				499006D1120FC44600601CD2 /* speech_bubble.png */,
-				49A942601263AF4500086F4C /* star-deselected.png */,
-				49A942611263AF4500086F4C /* star-deselected@2x.png */,
-				49A942621263AF4500086F4C /* star-selected.png */,
-				49A942631263AF4500086F4C /* star-selected@2x.png */,
-				491FE3AB11BA0B5700A54F51 /* twitter-icon.png */,
-				499006A8120FBBF400601CD2 /* twitter-bird.png */,
-				499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */,
-				D35B07711116456D00DB5E02 /* scroll-more.png */,
-				D36CE184111AA1BE0073D809 /* table-background.png */,
-				D35B07721116456D00DB5E02 /* talkbubble-ft.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
