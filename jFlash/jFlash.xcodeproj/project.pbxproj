@@ -493,6 +493,8 @@
 		49D996C312705C8300D176D0 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C112705C8300D176D0 /* icon72.png */; };
 		49D996C412705C8300D176D0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* icon@2x.png */; };
 		49D996C512705C8300D176D0 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C112705C8300D176D0 /* icon72.png */; };
+		49D997711270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
+		49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
 		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
@@ -836,6 +838,7 @@
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
 		49D996C012705C8300D176D0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Assets/icon@2x.png"; sourceTree = "<group>"; };
 		49D996C112705C8300D176D0 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon72.png; path = Assets/icon72.png; sourceTree = "<group>"; };
+		49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow@2x.png"; path = "Assets/candy-btn-yellow@2x.png"; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49F9686811AF604900DFC3C9 /* ModalTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalTaskView.xib; path = XIBs/ModalTaskView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -1518,6 +1521,7 @@
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
 				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
+				49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */,
 				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
 				D35B07081116456D00DB5E02 /* 13-target.png */,
@@ -2104,6 +2108,7 @@
 				4965FEA7126F7793000AC280 /* candy-btn-green@2x.png in Resources */,
 				49D996C212705C8300D176D0 /* icon@2x.png in Resources */,
 				49D996C312705C8300D176D0 /* icon72.png in Resources */,
+				49D997711270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2194,6 +2199,7 @@
 				4965FEA8126F7793000AC280 /* candy-btn-green@2x.png in Resources */,
 				49D996C412705C8300D176D0 /* icon@2x.png in Resources */,
 				49D996C512705C8300D176D0 /* icon72.png in Resources */,
+				49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
