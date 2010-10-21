@@ -489,6 +489,10 @@
 		49CF2F1A11BA4E180066923F /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEB11AB7CD700016BD2 /* Card.m */; };
 		49CF2F1B11BA4E190066923F /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
 		49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
+		49D996C212705C8300D176D0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* icon@2x.png */; };
+		49D996C312705C8300D176D0 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C112705C8300D176D0 /* icon72.png */; };
+		49D996C412705C8300D176D0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* icon@2x.png */; };
+		49D996C512705C8300D176D0 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C112705C8300D176D0 /* icon72.png */; };
 		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
@@ -830,6 +834,8 @@
 		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
 		49CF2E6211BA46AA0066923F /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = "<group>"; };
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
+		49D996C012705C8300D176D0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Assets/icon@2x.png"; sourceTree = "<group>"; };
+		49D996C112705C8300D176D0 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon72.png; path = Assets/icon72.png; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49F9686811AF604900DFC3C9 /* ModalTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalTaskView.xib; path = XIBs/ModalTaskView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -1286,7 +1292,6 @@
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
-				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
@@ -1496,6 +1501,17 @@
 			name = Twitter;
 			sourceTree = "<group>";
 		};
+		49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */ = {
+			isa = PBXGroup;
+			children = (
+				49FD235E101C121D0081F883 /* icon.png */,
+				49D996C012705C8300D176D0 /* icon@2x.png */,
+				49D996C112705C8300D176D0 /* icon72.png */,
+				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
+			);
+			name = "Japanese Flash Base Assets";
+			sourceTree = "<group>";
+		};
 		49F96B7911AFD11E00DFC3C9 /* Logic Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1534,9 +1550,9 @@
 			isa = PBXGroup;
 			children = (
 				D3B59408111F928100AE4CEE /* Default.png */,
-				49FD235E101C121D0081F883 /* icon.png */,
-				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
+				49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
+				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
 				4965FD39126F6422000AC280 /* Action Bar */,
 				D3309B031123C7D800B73E8E /* help */,
 				D322367A11D370B900B1AF15 /* plugin-resources */,
@@ -2078,6 +2094,8 @@
 				4965FD81126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */,
 				4965FD84126F7002000AC280 /* redtheme-cookie-cutters in Resources */,
 				4965FEA7126F7793000AC280 /* candy-btn-green@2x.png in Resources */,
+				49D996C212705C8300D176D0 /* icon@2x.png in Resources */,
+				49D996C312705C8300D176D0 /* icon72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2166,6 +2184,8 @@
 				4965FD82126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */,
 				4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */,
 				4965FEA8126F7793000AC280 /* candy-btn-green@2x.png in Resources */,
+				49D996C412705C8300D176D0 /* icon@2x.png in Resources */,
+				49D996C512705C8300D176D0 /* icon72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
