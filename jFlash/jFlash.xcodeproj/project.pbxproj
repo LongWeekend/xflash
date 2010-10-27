@@ -62,6 +62,12 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
+		490B23411277BCE100CF3484 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233C1277BCE100CF3484 /* FMDatabase.m */; };
+		490B23421277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233E1277BCE100CF3484 /* FMDatabaseAdditions.m */; };
+		490B23431277BCE100CF3484 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B23401277BCE100CF3484 /* FMResultSet.m */; };
+		490B23441277BCE100CF3484 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233C1277BCE100CF3484 /* FMDatabase.m */; };
+		490B23451277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233E1277BCE100CF3484 /* FMDatabaseAdditions.m */; };
+		490B23461277BCE100CF3484 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B23401277BCE100CF3484 /* FMResultSet.m */; };
 		490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */; };
 		490CFBB3120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */; };
 		490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */; };
@@ -316,9 +322,6 @@
 		496C7B5E12632817004B6B90 /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		496C7B5F12632818004B6B90 /* LWESQLDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1911AB80F700016BD2 /* LWESQLDebug.m */; };
 		496C7B6012632819004B6B90 /* LWEUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 490CFBF4120FF5F100C2BC4E /* LWEUIAlertView.m */; };
-		496C7B611263281E004B6B90 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0911AB7DA800016BD2 /* FMResultSet.m */; };
-		496C7B621263281F004B6B90 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0311AB7D8500016BD2 /* FMDatabase.m */; };
-		496C7B631263281F004B6B90 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */; };
 		496C7B6F12632831004B6B90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		496C7B7012632838004B6B90 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		496C7B7112632839004B6B90 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
@@ -415,9 +418,6 @@
 		4986F87311C715F600947486 /* TagPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF511AB7CD700016BD2 /* TagPeer.m */; };
 		4986F87411C715F600947486 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		4986F87511C715F600947486 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
-		4986F87611C715F600947486 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0311AB7D8500016BD2 /* FMDatabase.m */; };
-		4986F87711C715F600947486 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */; };
-		4986F87811C715F600947486 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0911AB7DA800016BD2 /* FMResultSet.m */; };
 		4986F87911C715F600947486 /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1411AB80F700016BD2 /* LWEDatabase.m */; };
 		4986F87A11C715F600947486 /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1711AB80F700016BD2 /* LWEFile.m */; };
 		4986F87B11C715F600947486 /* LWESQLDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1911AB80F700016BD2 /* LWESQLDebug.m */; };
@@ -559,9 +559,6 @@
 		917A5BFF11AB7CD700016BD2 /* TagPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF511AB7CD700016BD2 /* TagPeer.m */; };
 		917A5C0011AB7CD700016BD2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
-		917A5C0611AB7D8500016BD2 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0311AB7D8500016BD2 /* FMDatabase.m */; };
-		917A5C0711AB7D8500016BD2 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */; };
-		917A5C0A11AB7DA800016BD2 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C0911AB7DA800016BD2 /* FMResultSet.m */; };
 		917A5C1E11AB80F700016BD2 /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1411AB80F700016BD2 /* LWEDatabase.m */; };
 		917A5C1F11AB80F700016BD2 /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1711AB80F700016BD2 /* LWEFile.m */; };
 		917A5C2011AB80F700016BD2 /* LWESQLDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C1911AB80F700016BD2 /* LWESQLDebug.m */; };
@@ -735,6 +732,12 @@
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
+		490B233B1277BCE100CF3484 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = External/FMDB/src/FMDatabase.h; sourceTree = "<group>"; };
+		490B233C1277BCE100CF3484 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = External/FMDB/src/FMDatabase.m; sourceTree = "<group>"; };
+		490B233D1277BCE100CF3484 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = External/FMDB/src/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		490B233E1277BCE100CF3484 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = External/FMDB/src/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		490B233F1277BCE100CF3484 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = External/FMDB/src/FMResultSet.h; sourceTree = "<group>"; };
+		490B23401277BCE100CF3484 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/src/FMResultSet.m; sourceTree = "<group>"; };
 		490CFBB0120FE8CB00C2BC4E /* LWENetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWENetworkUtils.h; path = Reusable/LWE/LWENetworkUtils.h; sourceTree = "<group>"; };
 		490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWENetworkUtils.m; path = Reusable/LWE/LWENetworkUtils.m; sourceTree = "<group>"; };
 		490CFBF3120FF5F100C2BC4E /* LWEUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEUIAlertView.h; path = Reusable/LWE/LWEUIAlertView.h; sourceTree = "<group>"; };
@@ -950,12 +953,6 @@
 		917A5BF711AB7CD700016BD2 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = AppSpecific/User.m; sourceTree = "<group>"; };
 		917A5BF811AB7CD700016BD2 /* UserHistoryPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserHistoryPeer.h; path = AppSpecific/UserHistoryPeer.h; sourceTree = "<group>"; };
 		917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserHistoryPeer.m; path = AppSpecific/UserHistoryPeer.m; sourceTree = "<group>"; };
-		917A5C0211AB7D8500016BD2 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = External/FMDB/FMDatabase.h; sourceTree = "<group>"; };
-		917A5C0311AB7D8500016BD2 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = External/FMDB/FMDatabase.m; sourceTree = "<group>"; };
-		917A5C0411AB7D8500016BD2 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = External/FMDB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = External/FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		917A5C0811AB7DA800016BD2 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = External/FMDB/FMResultSet.h; sourceTree = "<group>"; };
-		917A5C0911AB7DA800016BD2 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/FMResultSet.m; sourceTree = "<group>"; };
 		917A5C0C11AB807800016BD2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
 		917A5C1311AB80F700016BD2 /* LWEDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEDatabase.h; path = Reusable/LWE/LWEDatabase.h; sourceTree = "<group>"; };
 		917A5C1411AB80F700016BD2 /* LWEDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEDatabase.m; path = Reusable/LWE/LWEDatabase.m; sourceTree = "<group>"; };
@@ -1627,12 +1624,12 @@
 		9158C0020FB6C2320083223F /* FMDb */ = {
 			isa = PBXGroup;
 			children = (
-				917A5C0811AB7DA800016BD2 /* FMResultSet.h */,
-				917A5C0911AB7DA800016BD2 /* FMResultSet.m */,
-				917A5C0211AB7D8500016BD2 /* FMDatabase.h */,
-				917A5C0311AB7D8500016BD2 /* FMDatabase.m */,
-				917A5C0411AB7D8500016BD2 /* FMDatabaseAdditions.h */,
-				917A5C0511AB7D8500016BD2 /* FMDatabaseAdditions.m */,
+				490B233B1277BCE100CF3484 /* FMDatabase.h */,
+				490B233C1277BCE100CF3484 /* FMDatabase.m */,
+				490B233D1277BCE100CF3484 /* FMDatabaseAdditions.h */,
+				490B233E1277BCE100CF3484 /* FMDatabaseAdditions.m */,
+				490B233F1277BCE100CF3484 /* FMResultSet.h */,
+				490B23401277BCE100CF3484 /* FMResultSet.m */,
 			);
 			name = FMDb;
 			sourceTree = "<group>";
@@ -2423,9 +2420,6 @@
 				917A5BFF11AB7CD700016BD2 /* TagPeer.m in Sources */,
 				917A5C0011AB7CD700016BD2 /* User.m in Sources */,
 				917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */,
-				917A5C0611AB7D8500016BD2 /* FMDatabase.m in Sources */,
-				917A5C0711AB7D8500016BD2 /* FMDatabaseAdditions.m in Sources */,
-				917A5C0A11AB7DA800016BD2 /* FMResultSet.m in Sources */,
 				917A5C1E11AB80F700016BD2 /* LWEDatabase.m in Sources */,
 				917A5C1F11AB80F700016BD2 /* LWEFile.m in Sources */,
 				917A5C2011AB80F700016BD2 /* LWESQLDebug.m in Sources */,
@@ -2514,6 +2508,9 @@
 				24F7DC26125A9E46002638AA /* LWEViewUtility.c in Sources */,
 				496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */,
 				49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */,
+				490B23441277BCE100CF3484 /* FMDatabase.m in Sources */,
+				490B23451277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
+				490B23461277BCE100CF3484 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2641,12 +2638,12 @@
 				496C7B5E12632817004B6B90 /* LWEUILabelUtils.m in Sources */,
 				496C7B5F12632818004B6B90 /* LWESQLDebug.m in Sources */,
 				496C7B6012632819004B6B90 /* LWEUIAlertView.m in Sources */,
-				496C7B611263281E004B6B90 /* FMResultSet.m in Sources */,
-				496C7B621263281F004B6B90 /* FMDatabase.m in Sources */,
-				496C7B631263281F004B6B90 /* FMDatabaseAdditions.m in Sources */,
 				496C7B6F12632831004B6B90 /* main.m in Sources */,
 				496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */,
 				496C7C021263363E004B6B90 /* cFlash_Constants.m in Sources */,
+				490B23411277BCE100CF3484 /* FMDatabase.m in Sources */,
+				490B23421277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
+				490B23431277BCE100CF3484 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2680,9 +2677,6 @@
 				4986F87311C715F600947486 /* TagPeer.m in Sources */,
 				4986F87411C715F600947486 /* User.m in Sources */,
 				4986F87511C715F600947486 /* UserHistoryPeer.m in Sources */,
-				4986F87611C715F600947486 /* FMDatabase.m in Sources */,
-				4986F87711C715F600947486 /* FMDatabaseAdditions.m in Sources */,
-				4986F87811C715F600947486 /* FMResultSet.m in Sources */,
 				4986F87911C715F600947486 /* LWEDatabase.m in Sources */,
 				4986F87A11C715F600947486 /* LWEFile.m in Sources */,
 				4986F87B11C715F600947486 /* LWESQLDebug.m in Sources */,
