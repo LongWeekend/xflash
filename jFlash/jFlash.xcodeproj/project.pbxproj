@@ -152,7 +152,6 @@
 		496BE55511EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496BE55611EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496BE55711EC5320003AB713 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
-		496C7AA81263270B004B6B90 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
 		496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		496C7AAF1263270B004B6B90 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -383,7 +382,6 @@
 		4986F83D11C715F600947486 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		4986F83E11C715F600947486 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
 		4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
-		4986F84511C715F600947486 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
 		4986F84611C715F600947486 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		4986F84711C715F600947486 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		4986F84811C715F600947486 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -471,6 +469,18 @@
 		499006CB120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		499006D3120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
+		4993AF871278024800872875 /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF801278024800872875 /* facebook-icon@2x.png */; };
+		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
+		4993AF891278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
+		4993AF8B1278024800872875 /* twitter-bird-64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF841278024800872875 /* twitter-bird-64x64@2x.png */; };
+		4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
+		4993AF8D1278024800872875 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF861278024800872875 /* twitter-icon@2x.png */; };
+		4993AF8E1278024800872875 /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF801278024800872875 /* facebook-icon@2x.png */; };
+		4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
+		4993AF901278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
+		4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF841278024800872875 /* twitter-bird-64x64@2x.png */; };
+		4993AF931278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
+		4993AF941278024800872875 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF861278024800872875 /* twitter-icon@2x.png */; };
 		4997D21611BB642600016A15 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
@@ -530,7 +540,6 @@
 		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
-		9177285911C0BB6100A90071 /* send-to-long-weekend-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */; };
 		9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -839,6 +848,12 @@
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64.png"; path = "Assets/twitter-bird-64x64.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
+		4993AF801278024800872875 /* facebook-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon@2x.png"; path = "Assets/facebook-icon@2x.png"; sourceTree = "<group>"; };
+		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
+		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
+		4993AF841278024800872875 /* twitter-bird-64x64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64@2x.png"; path = "Assets/twitter-bird-64x64@2x.png"; sourceTree = "<group>"; };
+		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
+		4993AF861278024800872875 /* twitter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon@2x.png"; path = "Assets/twitter-icon@2x.png"; sourceTree = "<group>"; };
 		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
 		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
@@ -897,7 +912,6 @@
 		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "send-to-long-weekend-btn.png"; path = "Assets/send-to-long-weekend-btn.png"; sourceTree = "<group>"; };
 		9177287711C0BF0B00A90071 /* save-changes-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn.png"; path = "Assets/save-changes-btn.png"; sourceTree = "<group>"; };
 		9177287811C0BF0B00A90071 /* select-user-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn.png"; path = "Assets/select-user-btn.png"; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
@@ -1505,9 +1519,10 @@
 				4965FEA6126F7793000AC280 /* candy-btn-green@2x.png */,
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
 				49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */,
-				9177285811C0BB6100A90071 /* send-to-long-weekend-btn.png */,
 				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
+				4993AF811278024800872875 /* save-changes-btn@2x.png */,
 				9177287811C0BF0B00A90071 /* select-user-btn.png */,
+				4993AF821278024800872875 /* select-user-btn@2x.png */,
 			);
 			name = "glass-buttons";
 			sourceTree = "<group>";
@@ -1588,10 +1603,14 @@
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
 				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
 				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
+				4993AF801278024800872875 /* facebook-icon@2x.png */,
 				499006D1120FC44600601CD2 /* speech_bubble.png */,
 				491FE3AB11BA0B5700A54F51 /* twitter-icon.png */,
+				4993AF861278024800872875 /* twitter-icon@2x.png */,
 				499006A8120FBBF400601CD2 /* twitter-bird.png */,
+				4993AF851278024800872875 /* twitter-bird@2x.png */,
 				499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */,
+				4993AF841278024800872875 /* twitter-bird-64x64@2x.png */,
 				D35B07711116456D00DB5E02 /* scroll-more.png */,
 				D36CE184111AA1BE0073D809 /* table-background.png */,
 				D35B07721116456D00DB5E02 /* talkbubble-ft.png */,
@@ -2117,7 +2136,6 @@
 				491FE3AD11BA0B5700A54F51 /* twitter-icon.png in Resources */,
 				491FE3DF11BA0EAF00A54F51 /* facebook-icon.png in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
-				9177285911C0BB6100A90071 /* send-to-long-weekend-btn.png in Resources */,
 				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
 				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
 				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
@@ -2174,6 +2192,12 @@
 				490B23591277C05100CF3484 /* Icon-72.png in Resources */,
 				49DADB801277F36F00B8FD72 /* Default.png in Resources */,
 				49DADB811277F36F00B8FD72 /* Default@2x.png in Resources */,
+				4993AF871278024800872875 /* facebook-icon@2x.png in Resources */,
+				4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */,
+				4993AF891278024800872875 /* select-user-btn@2x.png in Resources */,
+				4993AF8B1278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
+				4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */,
+				4993AF8D1278024800872875 /* twitter-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2188,7 +2212,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				496C7AA81263270B004B6B90 /* send-to-long-weekend-btn.png in Resources */,
 				496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */,
 				496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */,
 				496C7AAF1263270B004B6B90 /* help in Resources */,
@@ -2275,6 +2298,12 @@
 				49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */,
 				49DADB821277F36F00B8FD72 /* Default.png in Resources */,
 				49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */,
+				4993AF8E1278024800872875 /* facebook-icon@2x.png in Resources */,
+				4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */,
+				4993AF901278024800872875 /* select-user-btn@2x.png in Resources */,
+				4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
+				4993AF931278024800872875 /* twitter-bird@2x.png in Resources */,
+				4993AF941278024800872875 /* twitter-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2324,7 +2353,6 @@
 				4986F83D11C715F600947486 /* twitter-icon.png in Resources */,
 				4986F83E11C715F600947486 /* facebook-icon.png in Resources */,
 				4986F83F11C715F600947486 /* ExampleSentencesView.xib in Resources */,
-				4986F84511C715F600947486 /* send-to-long-weekend-btn.png in Resources */,
 				4986F84611C715F600947486 /* save-changes-btn.png in Resources */,
 				4986F84711C715F600947486 /* select-user-btn.png in Resources */,
 				4986F84811C715F600947486 /* dropped-text-box.png in Resources */,
