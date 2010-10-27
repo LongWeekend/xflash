@@ -154,7 +154,6 @@
 		496BE55711EC5320003AB713 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
 		496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
-		496C7AAF1263270B004B6B90 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		496C7AB01263270B004B6B90 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
@@ -481,6 +480,9 @@
 		4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF841278024800872875 /* twitter-bird-64x64@2x.png */; };
 		4993AF931278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
 		4993AF941278024800872875 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF861278024800872875 /* twitter-icon@2x.png */; };
+		4993AFC3127810AE00872875 /* LWERetinaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4993AFC2127810AE00872875 /* LWERetinaUtils.m */; };
+		4993AFC4127810AE00872875 /* LWERetinaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4993AFC2127810AE00872875 /* LWERetinaUtils.m */; };
+		4993AFE21278120000872875 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		4997D21611BB642600016A15 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
@@ -854,6 +856,8 @@
 		4993AF841278024800872875 /* twitter-bird-64x64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64@2x.png"; path = "Assets/twitter-bird-64x64@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
 		4993AF861278024800872875 /* twitter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon@2x.png"; path = "Assets/twitter-icon@2x.png"; sourceTree = "<group>"; };
+		4993AFC1127810AE00872875 /* LWERetinaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWERetinaUtils.h; path = Reusable/LWE/LWERetinaUtils.h; sourceTree = "<group>"; };
+		4993AFC2127810AE00872875 /* LWERetinaUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWERetinaUtils.m; path = Reusable/LWE/LWERetinaUtils.m; sourceTree = "<group>"; };
 		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
 		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
@@ -1489,6 +1493,17 @@
 			name = "Chinese Flash Assets";
 			sourceTree = "<group>";
 		};
+		4993AFBF1278103E00872875 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
+				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
+				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
+				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1686,6 +1701,8 @@
 				917A5C1711AB80F700016BD2 /* LWEFile.m */,
 				490CFBB0120FE8CB00C2BC4E /* LWENetworkUtils.h */,
 				490CFBB1120FE8CB00C2BC4E /* LWENetworkUtils.m */,
+				4993AFC1127810AE00872875 /* LWERetinaUtils.h */,
+				4993AFC2127810AE00872875 /* LWERetinaUtils.m */,
 				917A5C1811AB80F700016BD2 /* LWESQLDebug.h */,
 				917A5C1911AB80F700016BD2 /* LWESQLDebug.m */,
 				490CFBF3120FF5F100C2BC4E /* LWEUIAlertView.h */,
@@ -1903,6 +1920,7 @@
 		DA8B6A4B0FB111D600DE105C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4993AFBF1278103E00872875 /* Help */,
 				49C6E9F311F6F7B5004633FD /* Twitter */,
 				49C5BC1E11C51AE300A595D6 /* Search */,
 				91DDB0A911C1F5CB00E8B962 /* Study View */,
@@ -1911,10 +1929,6 @@
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
 				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
-				917A5BC911AB7C4600016BD2 /* HelpViewController.h */,
-				917A5BCA11AB7C4600016BD2 /* HelpViewController.m */,
-				917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */,
-				917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
 				4925735211C12619006FA4E1 /* ModalTaskViewController.m */,
 				49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */,
@@ -2214,7 +2228,6 @@
 			files = (
 				496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */,
 				496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */,
-				496C7AAF1263270B004B6B90 /* help in Resources */,
 				496C7AB01263270B004B6B90 /* plugin-resources in Resources */,
 				496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */,
 				496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */,
@@ -2304,6 +2317,7 @@
 				4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
 				4993AF931278024800872875 /* twitter-bird@2x.png in Resources */,
 				4993AF941278024800872875 /* twitter-icon@2x.png in Resources */,
+				4993AFE21278120000872875 /* help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2539,6 +2553,7 @@
 				490B23441277BCE100CF3484 /* FMDatabase.m in Sources */,
 				490B23451277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
 				490B23461277BCE100CF3484 /* FMResultSet.m in Sources */,
+				4993AFC3127810AE00872875 /* LWERetinaUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2672,6 +2687,7 @@
 				490B23411277BCE100CF3484 /* FMDatabase.m in Sources */,
 				490B23421277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
 				490B23431277BCE100CF3484 /* FMResultSet.m in Sources */,
+				4993AFC4127810AE00872875 /* LWERetinaUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

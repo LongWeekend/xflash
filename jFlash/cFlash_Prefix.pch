@@ -21,6 +21,7 @@
 #import "LWEDatabase.h"
 #import "LWEUILabelUtils.h"
 #import "LWEUITableUtils.h"
+#import "LWERetinaUtils.h"
 #import "LWEViewAnimationUtils.h"
 #import "LWENetworkUtils.h"
 #import "LWEUIAlertView.h"

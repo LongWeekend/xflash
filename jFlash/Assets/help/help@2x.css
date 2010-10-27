@@ -1,0 +1,9 @@
+body{ margin:20pt; padding:10pt; line-height:38pt; font-size:24pt; text-align:left; background-color: transparent; font-family:Helvetica,sanserif; width:640pt;}
+/* img {display:block; clear:both; margin:auto; text-align:center; border:2pt solid black;} 
+img.screenshot { margin-top:16pt; margin-bottom:24pt; margin:auto; }
+img.title{ margin-bottom:18pt; margin:auto; }*/
+.screenshot { border:2pt solid black; }
+a, a:visited { color:#834320; font-weight:bold;}
+p { margin:18pt 0 18pt 0;}
+#tags_definitions { font-size:26pt; border:2pt solid darkslategray; cell-collapse:true; border-spacing: 4pt 4pt;}
+small { font-size:22pt; color:darkslategray;}

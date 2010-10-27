@@ -38,7 +38,7 @@
  
 
 /** Creates the UIWebView programmatically */
-- (void)loadView
+- (void) loadView
 {
   [super loadView];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
@@ -49,7 +49,7 @@
   _webView.backgroundColor = [UIColor clearColor];
 
   [_webView shutOffBouncing];
-  [self _loadPageWithBundleFilename:[self filename]];
+  [self _loadPageWithBundleFilename:self.filename];
   [[self view] addSubview:_webView];
 }
 
@@ -76,8 +76,8 @@
 //! Standard dealloc
 - (void)dealloc
 {
-  [super dealloc];
   [_webView release];
+  [super dealloc];
 }
 
 
