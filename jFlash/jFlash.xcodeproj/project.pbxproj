@@ -165,7 +165,6 @@
 		496C7AB71263270B004B6B90 /* form-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5D11D0F291008565F8 /* form-background.png */; };
 		496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
-		496C7ABA1263270B004B6B90 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		496C7ABB1263270B004B6B90 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07081116456D00DB5E02 /* 13-target.png */; };
 		496C7ABC1263270B004B6B90 /* 15-tags.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07091116456D00DB5E02 /* 15-tags.png */; };
 		496C7ABD1263270B004B6B90 /* 20-gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070A1116456D00DB5E02 /* 20-gear2.png */; };
@@ -362,7 +361,6 @@
 		4986F82511C715F600947486 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		4986F82611C715F600947486 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		4986F82711C715F600947486 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
-		4986F82811C715F600947486 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		4986F82911C715F600947486 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		4986F82A11C715F600947486 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
 		4986F82B11C715F600947486 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
@@ -514,6 +512,10 @@
 		49D996C412705C8300D176D0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* Icon@2x.png */; };
 		49D997711270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
 		49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
+		49DADB801277F36F00B8FD72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7E1277F36F00B8FD72 /* Default.png */; };
+		49DADB811277F36F00B8FD72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7F1277F36F00B8FD72 /* Default@2x.png */; };
+		49DADB821277F36F00B8FD72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7E1277F36F00B8FD72 /* Default.png */; };
+		49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7F1277F36F00B8FD72 /* Default@2x.png */; };
 		49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		49F968D811AF646000DFC3C9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		49F968E211AF64D400DFC3C9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
@@ -620,7 +622,6 @@
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
-		D3B59409111F928100AE4CEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B59408111F928100AE4CEE /* Default.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 /* End PBXBuildFile section */
@@ -871,6 +872,8 @@
 		49CF2E6311BA46AA0066923F /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = "<group>"; };
 		49D996C012705C8300D176D0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Assets/Icon@2x.png"; sourceTree = "<group>"; };
 		49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow@2x.png"; path = "Assets/candy-btn-yellow@2x.png"; sourceTree = "<group>"; };
+		49DADB7E1277F36F00B8FD72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
+		49DADB7F1277F36F00B8FD72 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Assets/Default@2x.png"; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49F9686811AF604900DFC3C9 /* ModalTaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ModalTaskView.xib; path = XIBs/ModalTaskView.xib; sourceTree = "<group>"; };
 		49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
@@ -1048,7 +1051,6 @@
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
-		D3B59408111F928100AE4CEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1635,7 +1637,8 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D3B59408111F928100AE4CEE /* Default.png */,
+				49DADB7E1277F36F00B8FD72 /* Default.png */,
+				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
 				49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
@@ -2092,7 +2095,6 @@
 				D35B07881116456D00DB5E02 /* scroll-more.png in Resources */,
 				D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */,
 				D36CE185111AA1BE0073D809 /* table-background.png in Resources */,
-				D3B59409111F928100AE4CEE /* Default.png in Resources */,
 				D3309B0F1123C7D800B73E8E /* help in Resources */,
 				9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */,
 				917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */,
@@ -2170,6 +2172,8 @@
 				49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */,
 				490B23571277BF4600CF3484 /* Icon.png in Resources */,
 				490B23591277C05100CF3484 /* Icon-72.png in Resources */,
+				49DADB801277F36F00B8FD72 /* Default.png in Resources */,
+				49DADB811277F36F00B8FD72 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2197,7 +2201,6 @@
 				496C7AB71263270B004B6B90 /* form-background.png in Resources */,
 				496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */,
 				496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */,
-				496C7ABA1263270B004B6B90 /* Default.png in Resources */,
 				496C7ABB1263270B004B6B90 /* 13-target.png in Resources */,
 				496C7ABC1263270B004B6B90 /* 15-tags.png in Resources */,
 				496C7ABD1263270B004B6B90 /* 20-gear2.png in Resources */,
@@ -2270,6 +2273,8 @@
 				49B527B5127680D500EE64D3 /* 90-lifebuoy@2x.png in Resources */,
 				49B528301276C97500EE64D3 /* practice-btn-showreading@2x.png in Resources */,
 				49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */,
+				49DADB821277F36F00B8FD72 /* Default.png in Resources */,
+				49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2297,7 +2302,6 @@
 				4986F82511C715F600947486 /* scroll-more.png in Resources */,
 				4986F82611C715F600947486 /* talkbubble-ft.png in Resources */,
 				4986F82711C715F600947486 /* table-background.png in Resources */,
-				4986F82811C715F600947486 /* Default.png in Resources */,
 				4986F82911C715F600947486 /* help in Resources */,
 				4986F82A11C715F600947486 /* iTunesArtwork in Resources */,
 				4986F82B11C715F600947486 /* AddTagView.xib in Resources */,
