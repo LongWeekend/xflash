@@ -1,9 +1,10 @@
-body{ margin:20pt; padding:10pt; line-height:38pt; font-size:24pt; text-align:left; background-color: transparent; font-family:Helvetica,sanserif; width:640pt;}
-/* img {display:block; clear:both; margin:auto; text-align:center; border:2pt solid black;} 
-img.screenshot { margin-top:16pt; margin-bottom:24pt; margin:auto; }
-img.title{ margin-bottom:18pt; margin:auto; }*/
-.screenshot { border:2pt solid black; }
+body{ margin:10px; padding:5px; line-height:19px; font-size:16px; text-align:left; background-color: transparent; font-family:Helvetica,sanserif;}
+img {display:block; clear:both; margin:auto;} 
+img.screenshot { margin-top:8px; margin-bottom:12px; margin:auto; }
+img.title{ margin-bottom:9px; margin:auto; }
+.screenshot { border:1px solid black; }
 a, a:visited { color:#834320; font-weight:bold;}
-p { margin:18pt 0 18pt 0;}
-#tags_definitions { font-size:26pt; border:2pt solid darkslategray; cell-collapse:true; border-spacing: 4pt 4pt;}
-small { font-size:22pt; color:darkslategray;}
+div.info {min-height:350px; text-align:left;}
+p { margin:9px 0 9px 0;}
+#tags_definitions { font-size:13px; border:1px solid darkslategray; cell-collapse:true; border-spacing: 2px 2px;}
+small { font-size:11px; color:darkslategray;}
