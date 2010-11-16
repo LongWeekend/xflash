@@ -59,7 +59,11 @@
 //! Flurry exception handler (only installed in final app store version)
 void uncaughtExceptionHandler(NSException *exception)
 {
-  [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  CurrentState *currentState = [CurrentState sharedCurrentState];
+  NSString *debugInfo = [NSString stringWithFormat:@"DEBUG - Data: %@, Settings: %@, Active Tag: %d, Browse: %@",[settings valueForKey:APP_DATA_VERSION],[settings valueForKey:APP_SETTINGS_VERSION],[[currentState activeTag] tagId],[settings valueForKey:APP_MODE]];
+  LWE_LOG(@"%@",debugInfo);
+  [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
 }
 
 

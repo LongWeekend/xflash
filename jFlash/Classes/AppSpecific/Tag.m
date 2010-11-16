@@ -18,7 +18,7 @@
   if (self)
   {
     cardCount = -1;
-    [self setCurrentIndex:0];
+    self.currentIndex = 0;
   }
 	return self;
 }
