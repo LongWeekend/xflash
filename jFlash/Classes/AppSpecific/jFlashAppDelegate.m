@@ -61,7 +61,15 @@ void uncaughtExceptionHandler(NSException *exception)
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   CurrentState *currentState = [CurrentState sharedCurrentState];
-  NSString *debugInfo = [NSString stringWithFormat:@"DEBUG - Data: %@, Settings: %@, Active Tag: %d, Browse: %@",[settings valueForKey:APP_DATA_VERSION],[settings valueForKey:APP_SETTINGS_VERSION],[[currentState activeTag] tagId],[settings valueForKey:APP_MODE]];
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  NSInteger tabIndex = appDelegate.rootViewController.tabBarController.selectedIndex;
+  NSString *debugInfo = [NSString stringWithFormat:
+                         @"DEBUG - Active Tab: %d, Data: %@, Settings: %@, Active Tag: %d, Browse: %@",
+                         tabIndex,
+                         [settings valueForKey:APP_DATA_VERSION],
+                         [settings valueForKey:APP_SETTINGS_VERSION],
+                         [[currentState activeTag] tagId],
+                         [settings valueForKey:APP_MODE]];
   LWE_LOG(@"%@",debugInfo);
   [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
 }
