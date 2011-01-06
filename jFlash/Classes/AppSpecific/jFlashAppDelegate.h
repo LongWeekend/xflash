@@ -13,9 +13,8 @@
 
 @interface jFlashAppDelegate : NSObject <UIApplicationDelegate>
 {
-	UIWindow *window;
-	RootViewController *rootViewController;
   BOOL backgroundSupported;                 //! YES if we are >=iOS4
+  NSString *_searchedTerm;
 }
 
 void uncaughtExceptionHandler(NSException *exception);

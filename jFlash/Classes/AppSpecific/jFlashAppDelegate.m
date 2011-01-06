@@ -17,13 +17,36 @@
 
 @synthesize window, rootViewController, backgroundSupported;
 
+#pragma mark -
+#pragma mark URL Handling
+
 // handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   NSString* searchTerm = [url absoluteString];
   searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
-  [self.rootViewController switchToSearchWithTerm:searchTerm];
+  if ([self.rootViewController isFinishedLoading])
+  {
+    [self.rootViewController switchToSearchWithTerm:searchTerm];
+  }
+  else
+  {
+    // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
+    // This is private among these two methods so we are manually managing memory here instead of synthesizers
+    [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
+    _searchedTerm = [searchTerm retain];
+  }
   return YES;
+}
+
+- (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context
+{
+  if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue])
+  {
+    // Now be done with it
+    [self.rootViewController switchToSearchWithTerm:_searchedTerm];
+    [_searchedTerm release];
+  }
 }
 
 //! For compatibility
@@ -33,8 +56,11 @@
   return YES;
 }
 
+#pragma mark -
+#pragma mark appDidFinishingLaunching
+
 /** App delegate method, point of entry for the app */
-- (void)applicationDidFinishLaunching:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
   #if defined(APP_STORE_FINAL)
     // add analytics if this is live
@@ -69,6 +95,8 @@
   
   // Add a delay here so that the UI has time to update
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
+  
+  return YES;
 }
 
 

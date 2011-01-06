@@ -23,6 +23,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 
 @synthesize loadingView;
 @synthesize tabBarController;
+@synthesize isFinishedLoading;
 
 /**
  * Custom initializer - adds observers for notifications
@@ -31,6 +32,8 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 {
   if ((self = [super init]))
   {
+    self.isFinishedLoading = NO;
+    
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
 
@@ -134,6 +137,9 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 
   //launch the please rate us
   [Appirater appLaunched];
+  
+  // We're done!
+  self.isFinishedLoading = YES;
 }
 
 
@@ -163,8 +169,17 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
     {
       [searchVC runSearchAndSetSearchBarForString:term];
     }
+    else
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search",@"Unable to load Search")
+                                         message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
+    }
   }
-  
+  else
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search Nav",@"Unable to load Search")
+                                       message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
+  }
 }
 
 #pragma mark -
@@ -308,7 +323,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   else
   {
     // This is a problem!  Why wouldn't we have stuff???
-#if APP_STORE_FINAL
+#if defined(APP_STORE_FINAL)
     [FlurryAPI logEvent:@"PLUGIN_URL_FAILURE" withParameters:[aNotification userInfo]];
     // Notify the user..
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")

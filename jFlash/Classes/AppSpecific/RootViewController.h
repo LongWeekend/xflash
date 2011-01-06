@@ -26,12 +26,12 @@ extern NSString * const LWEShouldDismissModal;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {
-  LWELoadingView *loadingView;
-  UITabBarController *tabBarController;
 }
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
 @property (retain,nonatomic) LWELoadingView *loadingView;
+
+@property BOOL isFinishedLoading;
 
 - (void) switchToStudyView;
 - (IBAction) switchToSettings;
