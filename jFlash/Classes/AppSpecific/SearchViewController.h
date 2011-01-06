@@ -56,5 +56,6 @@ typedef enum searchStates
 @property (nonatomic, retain) UIActivityIndicatorView *_activityIndicator;
 @property (nonatomic, retain) UISearchBar *_searchBar;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
 
 @end

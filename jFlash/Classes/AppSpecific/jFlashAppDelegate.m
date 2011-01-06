@@ -17,11 +17,19 @@
 
 @synthesize window, rootViewController, backgroundSupported;
 
+// handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   NSString* searchTerm = [url absoluteString];
   searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
   [self.rootViewController switchToSearchWithTerm:searchTerm];
+  return YES;
+}
+
+//! For compatibility
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+  [self application:application openURL:url sourceApplication:nil annotation:nil];
   return YES;
 }
 
