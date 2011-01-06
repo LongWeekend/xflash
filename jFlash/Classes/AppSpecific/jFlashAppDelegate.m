@@ -53,8 +53,7 @@
 //! For compatibility
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-  [self application:application openURL:url sourceApplication:nil annotation:nil];
-  return YES;
+  return [self application:application openURL:url sourceApplication:nil annotation:nil];
 }
 
 #pragma mark -
@@ -93,6 +92,20 @@
   [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
 	[window addSubview:self.rootViewController.view];
   [window makeKeyAndVisible];
+  
+  // Finally check to see if we launched via URL (this is for non iOS4)
+  // On iOS4, the delegate is called back directly
+  // See: http://stackoverflow.com/questions/3612460/lauching-app-with-url-via-uiapplicationdelegates-handleopenurl-working-under-i
+  NSURL *aUrl = [userInfo objectForKey:UIApplicationLaunchOptionsURLKey];
+  if (aUrl && [[[UIDevice currentDevice] systemVersion] hasPrefix:@"3"])
+  {
+    // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
+    // This is private among these two methods so we are manually managing memory here instead of synthesizers
+    NSString* searchTerm = [aUrl absoluteString];
+    searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+    [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
+    _searchedTerm = [searchTerm retain];
+  }
   
   // Add a delay here so that the UI has time to update
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
