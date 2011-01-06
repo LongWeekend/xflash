@@ -101,8 +101,10 @@
 // User-set properties
 @property BOOL startTaskOnAppear;
 @property BOOL showDetailedViewOnAppear;
-@property (nonatomic, retain) NSString *webViewContentDirectory;
-@property (nonatomic, retain) NSString *webViewContentFileName;
+
+// Content to be displayed in the web view
+@property (nonatomic, retain) NSString *webViewContent;
+
 @property (nonatomic, retain) id taskHandler;
 
 @end

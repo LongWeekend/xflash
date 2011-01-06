@@ -11,7 +11,7 @@
 #import "LWEFile.h"
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
-#import "VersionManager.h"
+#import "DatabaseUpdateManager.h"
 
 @implementation jFlashAppDelegate
 
@@ -35,8 +35,7 @@
 
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{     
-	LWE_LOG(@"In the start of the application did finish launching NSUserDefault %@", [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN]);
+{
   #if defined(APP_STORE_FINAL)
     // add analytics if this is live
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -64,8 +63,8 @@
   [state initializeSettings];
 
   // Load root controller to show splash screen
-  [self setRootViewController:[[RootViewController alloc] init]];
-	[window addSubview:rootViewController.view];
+  [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
+	[window addSubview:self.rootViewController.view];
   [window makeKeyAndVisible];
   
   // Add a delay here so that the UI has time to update
@@ -74,8 +73,21 @@
 
 
 //! Flurry exception handler (only installed in final app store version)
-void uncaughtExceptionHandler(NSException *exception) {
-  [FlurryAPI logError:@"Uncaught" message:@"Crash!" exception:exception];
+void uncaughtExceptionHandler(NSException *exception)
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  CurrentState *currentState = [CurrentState sharedCurrentState];
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  NSInteger tabIndex = appDelegate.rootViewController.tabBarController.selectedIndex;
+  NSString *debugInfo = [NSString stringWithFormat:
+                         @"DEBUG - Active Tab: %d, Data: %@, Settings: %@, Active Tag: %d, Browse: %@",
+                         tabIndex,
+                         [settings valueForKey:APP_DATA_VERSION],
+                         [settings valueForKey:APP_SETTINGS_VERSION],
+                         [[currentState activeTag] tagId],
+                         [settings valueForKey:APP_MODE]];
+  LWE_LOG(@"%@",debugInfo);
+  [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
 }
 
 
@@ -86,7 +98,13 @@ void uncaughtExceptionHandler(NSException *exception) {
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+
+#if APP_TARGET == APP_TARGET_JFLASH
   NSString *filename = JFLASH_CURRENT_USER_DATABASE;
+#else
+  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
+#endif
+  
   NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
   {
@@ -95,7 +113,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [[self rootViewController] showDatabaseLoadingView];
     // Only ever copy the latest user database
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:JFLASH_CURRENT_USER_DATABASE];
+    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:filename];
   }
   else
   {
@@ -116,7 +134,13 @@ void uncaughtExceptionHandler(NSException *exception) {
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+
+#if APP_TARGET == APP_TARGET_JFLASH
   NSString *filename = JFLASH_CURRENT_USER_DATABASE;
+#else
+  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
+#endif
+
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Then load plugins

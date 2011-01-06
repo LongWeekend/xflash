@@ -9,7 +9,8 @@
 #import "Tag.h"
 #import "FMResultSet.h"
 
-@interface TagPeer : NSObject {
+@interface TagPeer : NSObject
+{
 }
 
 + (int) createTag: (NSString*) tagName withOwner: (NSInteger) ownerId;
@@ -20,6 +21,7 @@
 + (NSMutableArray*) retrieveTagListWithSQL: (NSString*) sql;
 + (NSMutableArray*) retrieveMyTagList;
 + (NSMutableArray*) retrieveSysTagList;
++ (NSMutableArray*) retrieveSysTagListContainingCard:(Card*)card;
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId;
 + (NSMutableArray*) retrieveTagListLike: (NSString*)string;
 + (Tag*) retrieveTagById: (NSInteger) tagId;

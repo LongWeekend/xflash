@@ -7,11 +7,12 @@
 //
 
 #import "RootViewController.h"
-#import "VersionManager.h"
+#import "DatabaseUpdateManager.h"
+#import "FlurryAPI.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
-NSString * const LWEShouldShowModal				= @"LWEShouldShowModal";
-NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
+NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
+NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -54,28 +55,28 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void) loadView
 {
   // Make the main view the themed splash screen
-  UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+  UIView *aView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   // TODO: iPad customization HERE?
-  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"Default.png"];
-  view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
-  self.view = view;
-  [view release];
+  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:APP_SPLASH_IMAGE];
+  aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
+  self.view = aView;
+  [aView release];
 }  
 
 
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up jFlash for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
+  self.loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
 }
 
 
 //! Hides the "database loading" view
 - (void) hideDatabaseLoadingView
 {
-  if (loadingView)
+  if (self.loadingView)
   {
-    [loadingView removeFromSuperview];
+    [self.loadingView removeFromSuperview];
   }
 }
 
@@ -85,7 +86,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
  */
 - (void) loadTabBar
 {
-	self.tabBarController = [[UITabBarController alloc] init];
+	self.tabBarController = [[[UITabBarController alloc] init] autorelease];
   
   // Make room for the status bar
   CGRect tabBarFrame;
@@ -125,11 +126,11 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [helpViewController release];
   [localNavigationController release];
   
-  tabBarController.viewControllers = localControllersArray;
+  self.tabBarController.viewControllers = localControllersArray;
 	[localControllersArray release];
 
   // Replace active view with tabBarController's view
-  self.view = tabBarController.view;
+  self.view = self.tabBarController.view;
 
   //launch the please rate us
   [Appirater appLaunched];
@@ -141,12 +142,12 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 /** Switches active view to study view, convenience method for notification */
 - (void) switchToStudyView
 {
-  [tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+  [self.tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
 - (IBAction) switchToSettings
 {
-  [tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
+  [self.tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
 - (void) switchToSearchWithTerm:(NSString*)term
@@ -156,6 +157,9 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [[[tabBarController selectedViewController] topViewController] runSearchAndSetSearchBarForString:term];
 }
 
+#pragma mark -
+#pragma mark Generic Modal Pop-ups and dismissal. 
+
 /**
  * Private method that actually does the dirty work of displaying any modal
  */
@@ -164,17 +168,14 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   if (useNavController)
   {
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:vc];
-    [[self tabBarController] presentModalViewController:controller animated:YES];
+    [self.tabBarController presentModalViewController:controller animated:YES];
     [controller release];
   }
   else
   {
-    [[self tabBarController] presentModalViewController:vc animated:YES];    
+    [self.tabBarController presentModalViewController:vc animated:YES];    
   }
 }
-
-#pragma mark -
-#pragma mark Generic Modal Pop-ups and dismissal. 
 
 /**
  * Show Modal method that will call the show modal view controller private method.
@@ -214,7 +215,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   {
     animated = [[dict valueForKey:@"animated"] boolValue];
   }
-	[[self tabBarController] dismissModalViewControllerAnimated:animated];
+	[self.tabBarController dismissModalViewControllerAnimated:animated];
 }
 
 #pragma mark -
@@ -230,12 +231,18 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   [updateVC setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
+
+  // Set the web content
+  NSString *filename = [LWEFile createBundlePathWithFilename:@"plugin-resources/release-notes-1.1.html"];
+  // Apparently according to the API docs this should be NULL not nil
+  NSString *webContent = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:NULL];
+  [updateVC setWebViewContent:webContent];
+
   // Set task parameters
   [updateVC setShowDetailedViewOnAppear:YES];
   [updateVC setStartTaskOnAppear:NO];
-  [updateVC setWebViewContentDirectory:@"plugin-resources"];
-  [updateVC setWebViewContentFileName:@"release-notes-1.1"];
-  VersionManager *tmpVm = [[VersionManager alloc] init];
+
+  DatabaseUpdateManager *tmpVm = [[DatabaseUpdateManager alloc] init];
   [updateVC setTaskHandler:tmpVm];
   [tmpVm release];
   [self _showModalWithViewController:updateVC useNavController:YES];
@@ -252,9 +259,13 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   // TODO: change this to a constant later
   UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
 	if ([badgeNumber intValue] != 0)
+  {
 		[settingsTabBar setBadgeValue:[badgeNumber stringValue]];
-	else 
+  }
+  else 
+  {
 		[settingsTabBar setBadgeValue:nil];
+  }
 }
 
 
@@ -271,14 +282,32 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   [dlViewController setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
   [dlViewController setShowDetailedViewOnAppear:YES];
   [dlViewController setStartTaskOnAppear:NO];
-  [dlViewController setWebViewContentDirectory:[[aNotification userInfo] objectForKey:@"plugin_notes_dir"]];
-  [dlViewController setWebViewContentFileName:[[aNotification userInfo] objectForKey:@"plugin_notes_file"]];
-  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentDirectory]);
-  LWE_LOG(@"Loading web view w/ file: %@",[dlViewController webViewContentFileName]);
+  
+  // Use HTML from PLIST
+  NSString *htmlString = [[aNotification userInfo] objectForKey:@"plugin_html_content"];
+  [dlViewController setWebViewContent:htmlString];
+
+  // Get path information
   NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
   NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
-  LWEDownloader *tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
-   
+  LWEDownloader *tmpDlHandler = nil;
+  if (targetURL && targetPath)
+  {
+    tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
+  }
+  else
+  {
+    // This is a problem!  Why wouldn't we have stuff???
+#if APP_STORE_FINAL
+    [FlurryAPI logEvent:@"PLUGIN_URL_FAILURE" withParameters:[aNotification userInfo]];
+    // Notify the user..
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
+                                       message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
+#endif
+    [dlViewController release];
+    return;
+  }
+
   // Set the installer delegate to the PluginManager class
   [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
   [dlViewController setTaskHandler:tmpDlHandler];
@@ -289,13 +318,15 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
   
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
+  
+  // TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
 }
 
 
 /** Hides the downloader */
 - (void) hideDownloaderModal:(NSNotification*)aNotification
 {
-  [[self tabBarController] dismissModalViewControllerAnimated:YES];
+  [self.tabBarController dismissModalViewControllerAnimated:YES];
   // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
   //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
 }
@@ -306,26 +337,26 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 -(void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[tabBarController viewWillAppear:animated];
+	[self.tabBarController viewWillAppear:animated];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [tabBarController viewDidAppear:animated];
+  [self.tabBarController viewDidAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-	[tabBarController viewWillDisappear:animated];
+	[self.tabBarController viewWillDisappear:animated];
 }
 
 
 -(void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-	[tabBarController viewDidDisappear:animated];
+	[self.tabBarController viewDidDisappear:animated];
 }
 
 - (void) viewDidUnload
@@ -339,7 +370,7 @@ NSString * const LWEShouldDismissModal			= @"LWEShouldDismissModal";
 - (void)dealloc
 {
   // Unobserve notifications
-  [self setTabBarController:nil];
+  [tabBarController release];
   [self setLoadingView:nil];
   [super dealloc];
 }

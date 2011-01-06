@@ -14,7 +14,10 @@
 @implementation ModalTaskViewController
 
 @synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton, pauseButton;
-@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear, webViewContentDirectory, webViewContentFileName;
+@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
+
+// For content/webview
+@synthesize webViewContent;
 
 //! Initialization
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -22,8 +25,7 @@
   if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
   {
     [self setTaskHandler:nil];
-    [self setWebViewContentDirectory:nil];
-    [self setWebViewContentFileName:nil];
+    [self setWebViewContent:nil];
     self.navigationItem.leftBarButtonItem = nil;
   }
   return self;
@@ -116,7 +118,7 @@
     if ([newString isKindOfClass:[NSString class]])
     {
       // OK - we got a string
-      [[self taskMsgLabel] setText:newString];
+      [self.taskMsgLabel setText:newString];
     }
     else
     {
@@ -127,7 +129,7 @@
   else
   {
     // In nil case, set string to blank
-    [[self taskMsgLabel] setText:@""];
+    [self.taskMsgLabel setText:@""];
   }
 }
 
@@ -135,21 +137,21 @@
 /** Gets the current task message of the Downloader View */
 -(NSString*) taskMessage
 {
-  return [[self taskMsgLabel] text];
+  return [self.taskMsgLabel text];
 }
 
 
 /** Sets the current progress % complete of the UIProgressView on the Downloader View */
 -(void) setProgress: (float) newVal
 {
-  [[self progressIndicator] setProgress:newVal];
+  [self.progressIndicator setProgress:newVal];
 }
 
 
 /** Gets the current progress % complete of the UIProgressView on the Downloader View */
 -(float) progress
 {
-  return [[self progressIndicator] progress];
+  return [self.progressIndicator progress];
 }
 
 
@@ -161,7 +163,7 @@
 {
   if ([self canStartTask])
   {
-    [[self taskHandler] startTask];
+    [self.taskHandler startTask];
     self.progressIndicator.hidden = NO;
     self.startButton.hidden = YES;
     [self updateButtons];
@@ -176,8 +178,8 @@
  */
 - (BOOL) canStartTask
 {
-  if ([[self taskHandler] respondsToSelector:@selector(canStartTask)])
-    return [[self taskHandler] canStartTask];
+  if ([self.taskHandler respondsToSelector:@selector(canStartTask)])
+    return [self.taskHandler canStartTask];
   else
     return NO;
 }
@@ -188,9 +190,9 @@
  */
 - (IBAction) pauseProcess
 {
-  if ([self canPauseTask] && [[self taskHandler] respondsToSelector:@selector(pauseTask)])
+  if ([self canPauseTask] && [self.taskHandler respondsToSelector:@selector(pauseTask)])
   {
-    [[self taskHandler] pauseTask];
+    [self.taskHandler pauseTask];
   }
 }
 
@@ -201,8 +203,8 @@
 */
 - (BOOL) canPauseTask
 {
-  if ([[self taskHandler] respondsToSelector:@selector(canPauseTask)])
-    return [[self taskHandler] canPauseTask];
+  if ([self.taskHandler respondsToSelector:@selector(canPauseTask)])
+    return [self.taskHandler canPauseTask];
   else
     return NO;
 }
@@ -218,7 +220,7 @@
 {
   if ([self canCancelTask])
   {
-    [[self taskHandler] cancelTask];
+    [self.taskHandler cancelTask];
     self.progressIndicator.hidden = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCancelSuccessfully" object:nil];
   }
@@ -232,8 +234,8 @@
  */
 - (BOOL) canCancelTask
 {
-  if ([[self taskHandler] respondsToSelector:@selector(canCancelTask)])
-    return [[self taskHandler] canCancelTask];
+  if ([self.taskHandler respondsToSelector:@selector(canCancelTask)])
+    return [self.taskHandler canCancelTask];
   else
     return YES;  
 }
@@ -247,14 +249,14 @@
  */
 - (IBAction) retryProcess
 {
-  if ([[self taskHandler] isFailureState])
+  if ([self.taskHandler isFailureState])
   {
     if ([self canRetryTask])
     {
       // See if reset is possible
-      if ([[self taskHandler] respondsToSelector:@selector(resetTask)]) 
+      if ([self.taskHandler respondsToSelector:@selector(resetTask)]) 
       {
-        [[self taskHandler] resetTask];
+        [self.taskHandler resetTask];
       }
       
       // Finally, restart
@@ -270,9 +272,9 @@
  */
 - (BOOL) canRetryTask
 {
-  if ([[self taskHandler] respondsToSelector:@selector(canRetryTask)])
+  if ([self.taskHandler respondsToSelector:@selector(canRetryTask)])
   {
-    return [[self taskHandler] canRetryTask];
+    return [self.taskHandler canRetryTask];
   }
   else
   {
@@ -288,17 +290,17 @@
  */
 - (void) willUpdateButtonsInView:(id)sender
 {
-  if ([[self taskHandler] respondsToSelector:@selector(willUpdateButtonsInView:)])
+  if ([self.taskHandler respondsToSelector:@selector(willUpdateButtonsInView:)])
   {
-    [[self taskHandler] willUpdateButtonsInView:sender];
+    [self.taskHandler willUpdateButtonsInView:sender];
   }
 }
 
 - (void) didUpdateButtonsInView:(id)sender
 {
-  if ([[self taskHandler] respondsToSelector:@selector(didUpdateButtonsInView:)])
+  if ([self.taskHandler respondsToSelector:@selector(didUpdateButtonsInView:)])
   {
-    [[self taskHandler] didUpdateButtonsInView:sender];
+    [self.taskHandler didUpdateButtonsInView:sender];
   }
 }
 
@@ -334,17 +336,17 @@
  */
 - (void) updateDisplay
 {
-  [self setTaskMessage:[[self taskHandler] taskMessage]];
-  [self setStatusMessage:[[self taskHandler] statusMessage]];
-  [self setProgress:[[self taskHandler] progress]];
+  [self setTaskMessage:[self.taskHandler taskMessage]];
+  [self setStatusMessage:[self.taskHandler statusMessage]];
+  [self setProgress:[self.taskHandler progress]];
   
-  if ([[self taskHandler] isSuccessState])
+  if ([self.taskHandler isSuccessState])
   {
     // Tell someone about this!  Let someone else handle this noise
     LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
   }
-  else if ([[self taskHandler] isFailureState])
+  else if ([self.taskHandler isFailureState])
   {
     // Tell someone about this!  Let someone else handle this noise
     [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidFail" object:self];
@@ -367,10 +369,13 @@
   webView.backgroundColor = [UIColor clearColor];
   webView.opaque = NO;
   
-  NSString *filename = [[NSBundle mainBundle] pathForResource:[self webViewContentFileName] ofType:@"html" inDirectory:[self webViewContentDirectory]];
-  NSURL *url = [NSURL fileURLWithPath:filename];
-  [webView loadRequest:[NSURLRequest requestWithURL:url]];
-  
+  // Only show content if we have set this variable
+  if (self.webViewContent)
+  {
+    NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:@"plugin-resources/index.html"]];
+    [webView loadHTMLString:self.webViewContent baseURL:url];
+  }
+
 //  WebGradientView *subview = [[WebGradientView alloc] initWithFrame:CGRectMake(0,0,320,317) subview:webView];
 
   [self.view addSubview:webView];
@@ -386,9 +391,8 @@
 //! standard dealloc
 - (void)dealloc
 {
+  [webViewContent release];
   [self setTaskHandler:nil];
-  [self setWebViewContentDirectory:nil];
-  [self setWebViewContentFileName:nil];
   [super dealloc];
 }
 

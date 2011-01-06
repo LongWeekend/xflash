@@ -153,11 +153,24 @@
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
 {
+  // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
+  NSString *favoriteString = @"";
+  if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+  {
+    favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
+  }
+  else
+  {
+    favoriteString = NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites");
+  }
+
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
                                              cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                             otherButtonTitles:NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
-															   NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
-                                                               NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
+                                             otherButtonTitles:
+                       favoriteString,
+                       NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
+											 NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
+                       NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
 
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [as showInView:[[appDelegate rootViewController]view]]; 
@@ -195,12 +208,42 @@
     [tmpVC release];
     [modalNavControl release];
   }
-  else if(buttonIndex == SVC_ACTION_TWEET_BUTTON)
+  else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
   {
-		//[self performSelector:@selector(tweet) withObject:nil afterDelay:0];
+    // Do something here - subscribe or cancel, depending.
+    if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+    {
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      
+      // Quick check to make sure it's not the last card
+      if (([currentTag tagId] == FAVORITES_TAG_ID) && ([currentTag cardCount] <= 1))
+      {
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
+                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
+      }
+      else
+      {
+        // First of all, do it
+        [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+
+        // If we are on starred, remove it from the cache too
+        // Also double check that this is not the last card!
+        if ([currentTag tagId] == FAVORITES_TAG_ID)
+        {
+          [currentTag removeCardFromActiveSet:self.currentCard];
+        }
+      }
+    }
+    else
+    {
+      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+    }
+
+  }
+  else if (buttonIndex == SVC_ACTION_TWEET_BUTTON)
+  {
 	  [self tweet];
   }
-  // FYI - Receiver is automatically dismissed after this method called, no need for resignFirstResponder 
 }
 
 #pragma mark -
@@ -239,7 +282,7 @@
 		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY privateKey:JFLASH_TWITTER_PRIVATE_KEY authenticationView:controller];
     [controller release];
 	}
-	
+
   // TODO: fix this so it doesn't use App Delegate - use notifications instead
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
@@ -371,31 +414,76 @@
 //! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
 - (NSString *)getTweetWord
 {
+	NSMutableString *str = nil; 
+  
 	//Set up the tweet word, so that the str will have the following format
 	//Head Word [reading] meaning
-	NSMutableString *str = [[NSMutableString alloc] init];
-	[str appendFormat:@"%@ [%@] ", self.currentCard.headword, self.currentCard.reading];
-	
-	//but in some cases, the "meaning" length, can exceed the maximum length
-	//of the twitter update status lenght, so it looks for "/" and cut the meaning
-	//to fit in. 
-	NSString *meaning = [self.currentCard meaningWithoutMarkup];
-	NSInteger charLeft = kMaxChars - [str length];
-	NSInteger charAfterMeaning = charLeft - [meaning length];
-	if (charAfterMeaning <= 0)
-	{
-		NSRange rangeToLookFor;
-		rangeToLookFor.length = charLeft;
-		rangeToLookFor.location = 0;
-		NSRange range = [meaning rangeOfString:@"/" 
-									   options:NSBackwardsSearch
-										 range:rangeToLookFor];
-		
-		meaning = [meaning substringToIndex:range.location];
-	}
-	LWE_LOG(@"LOG : This is the meaning : %@", meaning);
-	[str appendString:meaning];						  
-	
+
+  // Get the lengths of everyone involved
+  NSInteger headwordLength = [self.currentCard.headword length];
+  NSInteger readingLength = [self.currentCard.reading length];
+  NSInteger meaningLength = [[self.currentCard meaningWithoutMarkup] length];
+  
+  // Now go from most conservative (headword exceeds kMaxChars) 
+  // to most liberal (the whole thing fits in kMaxChars)  
+  if (headwordLength > kMaxChars)
+  {
+    // Headword alone is longer than kMaxChars
+    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.currentCard.headword substringToIndex:kMaxChars]];
+  }
+  else
+  {
+    // Add four because we add brackets and spaces
+    if ((headwordLength + readingLength + 4) > kMaxChars)
+    {
+      // Headword + reading is too long, so just use headword.
+      str = [[NSMutableString alloc] initWithFormat:@"%@",self.currentCard.headword];
+    }
+    else
+    {
+      str = [[NSMutableString alloc] initWithFormat:@"%@ [%@] ",self.currentCard.headword,self.currentCard.reading];
+    }
+  }
+
+  // Now determine if we have any space left for a meaning.
+	NSInteger charLeftBeforeMeaning = kMaxChars - [str length];
+  
+  // If there are less than 5, just ignore - not worth it
+  if (charLeftBeforeMeaning > 5)
+  {
+    NSString *meaning = [self.currentCard meaningWithoutMarkup];
+    NSInteger charLeftAfterMeaning = charLeftBeforeMeaning - meaningLength;
+    //but in some cases, the "meaning" length, can exceed the maximum length
+    //of the twitter update status lenght, so it looks for "/" and cut the meaning
+    //to fit in. 
+    if (charLeftAfterMeaning < 0)
+    {
+      NSRange range = [meaning rangeOfString:@"/" options:NSBackwardsSearch];
+      if (range.location != NSNotFound && (range.location < charLeftBeforeMeaning))
+      {
+        // We got one, and it fits
+        // This is still a naive implementation, it should recursively chop off slashes until it fits...
+        // AT present it only does it once
+        [str appendString:[meaning substringToIndex:range.location]];
+      }
+      else
+      {
+        // Simple truncate
+        [str appendString:[meaning substringToIndex:charLeftBeforeMeaning]];
+      }
+    }
+    else
+    {
+      // Enough room for the whole meaning
+      [str appendString:meaning];
+    }
+  } 
+  
+  // Debug output
+  LWE_LOG(@"Tweet string: %@",str);
+  LWE_LOG(@"Tweet length: %d",[str length]);
+  
+  // Now make it immutable
 	NSString *result = [NSString stringWithString:str];
 	[str release];
 	return result;

@@ -14,11 +14,10 @@
 
 - (id) init
 {
-	self = [super init];
-  if (self)
+  if ((self = [super init]))
   {
     cardCount = -1;
-    [self setCurrentIndex:0];
+    self.currentIndex = 0;
   }
 	return self;
 }
@@ -29,6 +28,10 @@
  */
 - (NSInteger) calculateNextCardLevel
 {
+  //-----Internal array consistency-----
+  LWE_ASSERT(([self.cardLevelCounts count] == 6));
+  //------------------------------------
+  
   // control variables
   // controls how many words to show from new before preferring seen words
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -51,7 +54,7 @@
   for (i = 1; i <= numLevels; i++)
   {
     // Get denominator values from cache/database
-    tmpTotal = [[cardLevelCounts objectAtIndex:i] intValue];
+    tmpTotal = [[self.cardLevelCounts objectAtIndex:i] intValue];
     if (i == 1) levelOneTotal = tmpTotal;
     [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
     cardsSeenTotal = cardsSeenTotal + tmpTotal;
@@ -106,12 +109,16 @@
 //! Create a cache of the number of Card objects in each level
 - (void) cacheCardLevelCounts
 {
+  //-----Internal array consistency-----
+  LWE_ASSERT(([self.cardIds count] == 6));
+  //------------------------------------
+
   NSNumber *count;
-  int totalCount = 0;
+  NSInteger totalCount = 0;
   NSMutableArray* cardLevelCountsTmp = [[NSMutableArray alloc] init];
-  for (int i = 0; i < 6; i++)
+  for (NSInteger i = 0; i < 6; i++)
   {
-    count = [[NSNumber alloc] initWithInt:[[[self cardIds] objectAtIndex:i] count]];
+    count = [[NSNumber alloc] initWithInt:[[self.cardIds objectAtIndex:i] count]];
     [cardLevelCountsTmp addObject:count];
     totalCount = totalCount + [count intValue];
     [count release];
@@ -137,7 +144,7 @@
 {
   NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
   LWE_LOG(@"Beginning plist freezing: %@",path);
-  [[self cardIds] writeToFile:path atomically:YES];
+  [self.cardIds writeToFile:path atomically:YES];
   LWE_LOG(@"Finished plist freeze");
 }
 
@@ -175,14 +182,25 @@
  * Returns a Card object from the database randomly
  * Accepts current cardId in an attempt to not return the last card again
  */
-- (Card*) getRandomCard:(int) currentCardId
+- (Card*) getRandomCard:(NSInteger)currentCardId
 {
+  //-----Internal array consistency-----
+#if defined(APP_STORE_FINAL)
+  if ([self.cardIds count] != 6)
+  {
+    [FlurryAPI logError:@"getRandomCard" message:[NSString stringWithFormat:@"cardIds has %d indicies, not 6",[self.cardIds count]] error:nil];
+  }
+#else
+  LWE_ASSERT(([self.cardIds count] == 6));
+#endif
+  //------------------------------------  
+  
   // determine the next level
-  int next_level = [self calculateNextCardLevel];
+  NSInteger next_level = [self calculateNextCardLevel];
   
   // Get a random card offset
-  int numCardsAtLevel = [[[self cardIds] objectAtIndex:next_level] count];
-  int randomOffset = 0;
+  NSInteger numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
+  NSInteger randomOffset = 0;
   LWE_ASSERT (numCardsAtLevel > 0);
   if (numCardsAtLevel > 0)
   {
@@ -191,7 +209,7 @@
 
   NSNumber* cardId;
   
-  NSMutableArray* cardIdArray = [[self cardIds] objectAtIndex:next_level];
+  NSMutableArray* cardIdArray = [self.cardIds objectAtIndex:next_level];
   cardId = [cardIdArray objectAtIndex:randomOffset];
 
   // prevent getting the same card twice.
@@ -211,8 +229,8 @@
       }
     }
     // now get a different card randomly
-    cardIdArray = [[self cardIds] objectAtIndex:next_level];
-    int numCardsAtLevel2 = [[[self cardIds] objectAtIndex:next_level] count];
+    cardIdArray = [self.cardIds objectAtIndex:next_level];
+    int numCardsAtLevel2 = [[self.cardIds objectAtIndex:next_level] count];
     LWE_ASSERT(numCardsAtLevel2 > 0);
     if (numCardsAtLevel2 > 0)
     {
@@ -228,24 +246,35 @@
  */
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
+  //-----Internal array consistency-----
+#if defined(APP_STORE_FINAL)
+  if ([self.cardIds count] != 6)
+  {
+    [FlurryAPI logError:@"updateLevelCounts" message:@"currentCardId is nil" error:nil];
+  }
+#else
+  LWE_ASSERT(([self.cardIds count] == 6));
+#endif
+  //------------------------------------  
+  
   // update the cardIds if necessary
   if (nextLevel != card.levelId)
   {
     LWE_LOG(@"Moving card Id %d From level %d to level %d",card.cardId,card.levelId,nextLevel);
-    NSNumber* cardId = [NSNumber numberWithInt:card.cardId];
+    NSNumber *cardId = [NSNumber numberWithInt:card.cardId];
 
-    NSMutableArray *thisLevelCards = [[self cardIds] objectAtIndex:card.levelId];
-    NSMutableArray *nextLevelCards = [[self cardIds] objectAtIndex:nextLevel];
+    NSMutableArray *thisLevelCards = [self.cardIds objectAtIndex:card.levelId];
+    NSMutableArray *nextLevelCards = [self.cardIds objectAtIndex:nextLevel];
     
     // First do the remove
-    int countBeforeRemove = [thisLevelCards count];
-    int countBeforeAdd = [nextLevelCards count];
+    NSInteger countBeforeRemove = [thisLevelCards count];
+    NSInteger countBeforeAdd = [nextLevelCards count];
 
     // Now do the remove
     if ([thisLevelCards containsObject:cardId])
     {
       [thisLevelCards removeObject:cardId];
-      int countAfterRemove = [thisLevelCards count];
+      NSInteger countAfterRemove = [thisLevelCards count];
 
       // Only do the add if remove was successful
       //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
@@ -253,7 +282,7 @@
       {
         [nextLevelCards addObject:cardId];
       }
-      int countAfterAdd = [[[self cardIds] objectAtIndex:nextLevel] count];
+      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
       // Consistency checks
       LWE_ASSERT((countAfterRemove+1) == countBeforeRemove);
       LWE_ASSERT((countAfterAdd-1) == countBeforeAdd);
@@ -281,17 +310,17 @@
 
 
 //! Setter for cardCount; updates the database cache automatically
-- (void) setCardCount: (int) count
+- (void) setCardCount:(NSInteger)count
 {
   // do nothing if its the same
-  if(cardCount == count) return;
+  if (cardCount == count) return;
   
   // update the count in the database if not first load (e.g. cardCount = -1)
   if (cardCount >= 0)
   {
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
-    [[db dao] executeUpdate:sql];
+    [db.dao executeUpdate:sql];
     [sql release];
   }
 
@@ -305,8 +334,8 @@
  */
 - (void) removeCardFromActiveSet:(Card *)card
 {
-  NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
-  NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
+  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
+  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel removeObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
   [self cacheCardLevelCounts];
@@ -322,8 +351,8 @@
  */
 - (void) addCardToActiveSet:(Card *)card
 {
-  NSNumber *tmpNum = [NSNumber numberWithInt:[card cardId]];
-  NSMutableArray* cardLevel = [[self cardIds] objectAtIndex:[card levelId]];
+  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
+  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel addObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
   [self cacheCardLevelCounts];
@@ -339,15 +368,15 @@
 - (Card*) getFirstCard
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  Card* card;
-  if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
+  Card *card;
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
   {
     // TODO: in some cases the currentIndex can be beyond the range.  We should figure out why, but for the time being I'll reset it to 0 instead of breaking
-    if([self currentIndex] >= [[self combinedCardIdsForBrowseMode] count])
+    if ([self currentIndex] >= [[self combinedCardIdsForBrowseMode] count])
     {
       [self setCurrentIndex:0];
     }
-    NSNumber* cardId = [[self combinedCardIdsForBrowseMode] objectAtIndex: [self currentIndex]];
+    NSNumber *cardId = [[self combinedCardIdsForBrowseMode] objectAtIndex:self.currentIndex];
     card = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
@@ -372,7 +401,7 @@
 {
   NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
   NSMutableArray* cardIdsInLevel;
-  for (cardIdsInLevel in [self cardIds]) 
+  for (cardIdsInLevel in self.cardIds) 
   {
     [allCardIds addObjectsFromArray:cardIdsInLevel];
   }
@@ -385,12 +414,10 @@
  */
 - (Card*) getNextCard
 {
-  NSMutableArray *allCardIds;
-  allCardIds = [self combinedCardIdsForBrowseMode];
-  
-	int currIdx = [self currentIndex];
-	int total = [allCardIds count];
-	if(currIdx >= total - 1)
+  NSMutableArray *allCardIds = [self combinedCardIdsForBrowseMode];
+	NSInteger currIdx = self.currentIndex;
+	NSInteger total = [allCardIds count];
+	if (currIdx >= total - 1)
   {
     currIdx = 0;
   }
@@ -399,7 +426,7 @@
     currIdx++;
   }
 
-  [self setCurrentIndex:currIdx];
+  self.currentIndex = currIdx;
   return [CardPeer retrieveCardByPK:[[allCardIds objectAtIndex:currIdx] intValue]];
 }
 
@@ -409,12 +436,10 @@
  */
 - (Card*) getPrevCard
 {
-  NSMutableArray *allCardIds;
-  allCardIds = [self combinedCardIdsForBrowseMode];
-	int currIdx = [self currentIndex];
-
-	int total = [allCardIds count];
-	if(currIdx == 0)
+  NSMutableArray *allCardIds = [self combinedCardIdsForBrowseMode];
+	NSInteger currIdx = self.currentIndex;
+	NSInteger total = [allCardIds count];
+	if (currIdx == 0)
   {
     currIdx = total-1;
   }
@@ -423,8 +448,8 @@
     currIdx--;
   }
   
-  [self setCurrentIndex:currIdx];
-  int tmp = [[allCardIds objectAtIndex:currIdx] intValue];
+  self.currentIndex = currIdx;
+  NSInteger tmp = [[allCardIds objectAtIndex:currIdx] intValue];
   return [CardPeer retrieveCardByPK:tmp];
 }
 

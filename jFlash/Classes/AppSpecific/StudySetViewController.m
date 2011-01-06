@@ -49,7 +49,7 @@
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
   [self setSearchBar:tmpSearchBar];
   [tmpSearchBar release];
-  [[self tableView] setTableHeaderView:[self searchBar]];
+  [self.tableView setTableHeaderView:self.searchBar];
   
   // Add add button to nav bar
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
@@ -79,14 +79,17 @@
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle:[group groupName]];
+  [self setTitle:group.groupName];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
-  if (!searching) [self hideSearchBar];
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  if (!searching)
+  {
+    [self hideSearchBar];
+  }
+  [self.tableView setBackgroundColor:[UIColor clearColor]];
   [self reloadTableData];
 }
 
@@ -94,27 +97,48 @@
 {
   // Get subgroups
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:group.groupId];
-  for (int i = 0; i < [[self subgroupArray] count]; i++)
+  for (int i = 0; i < [self.subgroupArray count]; i++)
   {
-    [[[self subgroupArray] objectAtIndex:i] getChildGroupCount];
+    [[self.subgroupArray objectAtIndex:i] getChildGroupCount];
   }
 }
 
 - (void) reloadTableData
 {
-  if([self tableView] == nil)
+  if (self.tableView == nil)
   {
+    // MMA - 13.10.2010 - does this ever happen??!  really?
+    // This was just defensive programming probably because reloadTableData was getting called when the tableview was nil because we forgot to de-observe something...?
     return;
   }
 	if (searching)
   {
-    [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
+    self.tagArray = [TagPeer retrieveTagListLike:self.searchBar.text];
   }
   else
   {
-    [self setTagArray: [group getTags]];
+    self.tagArray = [self.group getTags];
+    
+    // Do something special for starred words - re-sort so starred shows up on top.
+    if (self.group.groupId == 0)
+    {
+      NSMutableArray *tmpTagArray = [NSMutableArray array];
+      for (Tag *tmpTag in self.tagArray)
+      {
+        if (tmpTag.tagId == FAVORITES_TAG_ID)
+        {
+          // Put it at the beginning
+          [tmpTagArray insertObject:tmpTag atIndex:0];
+        }
+        else
+        {
+          [tmpTagArray addObject:tmpTag];
+        }
+      }
+      self.tagArray = tmpTagArray;
+    }    
   }
-  [[self tableView] reloadData];
+  [self.tableView reloadData];
 }
 
 /**
@@ -122,7 +146,7 @@
  */
 - (void) hideSearchBar
 {
-  [[self tableView] setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
+  [self.tableView setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
 }
 
 /** Convenience method to change set using notification from another place */
@@ -147,20 +171,20 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
   
   // Stop the animator
-  [[self activityIndicator] stopAnimating];
   selectedTagId = -1;
-  [[self tableView] reloadData];
+  [self.activityIndicator stopAnimating];
+  [self.tableView reloadData];
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
-- (void)addStudySet
+- (void) addStudySet
 {
   // TODO: iPad customization?
   AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
   addStudySetInputViewController.ownerId = self.groupId;
   addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
-  [[self navigationController] presentModalViewController:modalNavController animated:YES];
+  [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 	[addStudySetInputViewController release];
 }
@@ -173,7 +197,7 @@
 - (void)setEditing:(BOOL) editing animated:(BOOL)animated
 {
 	[super setEditing:editing animated:animated];
-	[[self tableView] setEditing:editing animated:YES];
+	[self.tableView setEditing:editing animated:YES];
 }
 
 
@@ -188,8 +212,8 @@
     // Delete the row from the data source
     Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
     [TagPeer deleteTag:tmpTag.tagId];
-    [tagArray removeObjectAtIndex:[indexPath row]];
-    [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [tagArray removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
   }
 }
@@ -202,9 +226,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)lclTableView
 {
 	if (searching)
+  {
 		return 1;
+  }
   else
+  {
     return 2;
+  }
 }
 
 
@@ -216,17 +244,25 @@
 {
 	if (searching)
   {
-    if ([[self tagArray] count] > 0)
-      return [[self tagArray] count];
+    if ([self.tagArray count] > 0)
+    {
+      return [self.tagArray count];
+    }
     else
+    {
       return 1; // show no results message
+    }
   }
   else
   {
     if (section == SECTION_TAG)
-      return [[self tagArray] count];
+    {
+      return [self.tagArray count];
+    }
     else
-      return [[self subgroupArray] count];
+    {
+      return [self.subgroupArray count];
+    }
   }
 }
 
@@ -234,7 +270,7 @@
 /**
  * Generates cells for table view depending on section & whether or not we are searching
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
   // Get theme manager so we can get elements from it
@@ -245,9 +281,9 @@
   {
     
     // No search results msg
-    if(searching && [tagArray count] == 0)
+    if (searching && [self.tagArray count] == 0)
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"result" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       cell.accessoryType = UITableViewCellAccessoryNone;
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -257,20 +293,28 @@
     // Normal cell display
     else
     {
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+
+      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
 
       // Set up the image
-      UIImageView* tmpView = cell.imageView;
       // TODO: iPad customization?
-      tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
+      UIImageView* tmpView = cell.imageView;
+      if (tmpTag.tagId == FAVORITES_TAG_ID)
+      {
+        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
+      }
+      else
+      {
+        tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-icon.png"]];
+      }
       
-      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
-      cell.textLabel.text = [tmpTag tagName];
+      cell.textLabel.text = tmpTag.tagName;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       NSString* tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
-      if(tmpTag.cardCount == 0)
+      if (tmpTag.cardCount == 0)
       {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.accessoryView = nil;
@@ -282,7 +326,7 @@
       }
       if (selectedTagId == indexPath.row)
       {
-        cell.accessoryView = [self activityIndicator];
+        cell.accessoryView = self.activityIndicator;
         cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
       }
     }
@@ -290,12 +334,12 @@
   // Group Cells
   else
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:[self tableView] usingStyle:UITableViewCellStyleSubtitle];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"group" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
     
     // Folders should display the theme color when pressed!
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:[subgroupArray count]];
-    [bgView setBorderColor:[[self tableView] separatorColor]];
+    [bgView setCellIndexPath:indexPath tableLength:[self.subgroupArray count]];
+    [bgView setBorderColor:[self.tableView separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.selectedBackgroundView = bgView;
     [bgView release];
@@ -316,9 +360,13 @@
     UIImageView* tmpView = (UIImageView*)cell.imageView;
     // TODO: iPad customization?
     if(tmpGroup.recommended)
+    {
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"special-folder-icon.png"]];
+    }
     else
+    {
       tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"folder-icon.png"]];
+    }
     
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];

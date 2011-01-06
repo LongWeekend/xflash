@@ -33,6 +33,8 @@
   BOOL showReadingBtnHiddenByUser;
   BOOL readingVisible;
   BOOL meaningRevealed;
+  
+  NSString *_tmpJavascript;
 }
 
 - (IBAction) doToggleReadingBtn;
@@ -53,6 +55,9 @@
 @property (nonatomic, retain) UIWebView *meaningWebView;
 @property (nonatomic, retain) UIImageView *cardHeadwordLabelScrollMoreIcon;
 @property (nonatomic, retain) UIImageView *cardReadingLabelScrollMoreIcon;
+
+//! Holds a reference to the current meaning's string-replacement javascript
+@property (nonatomic, retain) NSString *_tmpJavascript;
 
 @property NSInteger cardReadingLabelScrollContainerYPosInXib;
 @property NSInteger cardHeadwordLabelHeightInXib;

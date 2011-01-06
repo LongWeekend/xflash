@@ -11,8 +11,15 @@
 #import "ExampleSentencePeer.h"
 #import "AddTagViewController.h"
 #import "DisplaySearchedSentenceViewController.h"
+
 #define SEARCH_TARGET_WORDS 0
 #define SEARCH_TARGET_EXAMPLE_SENTENCES 1
+
+// View tags for the custom table view cells
+#define SEARCH_CELL_HEADWORD 200
+#define SEARCH_CELL_READING 201
+#define SEARCH_CELL_MEANING 202
+#define SEARCH_CELL_BUTTON 203
 
 //! State machine for searching
 typedef enum searchStates
@@ -49,6 +56,9 @@ typedef enum searchStates
 // Helper functions for UITableView delegate methods
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card;
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forSentence:(ExampleSentence*)sentence;
+
+//! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
+@property (nonatomic, retain) NSMutableArray *membershipCacheArray;
 
 @property (nonatomic, retain) NSMutableArray *_cardSearchArray;
 @property (nonatomic, retain) NSMutableArray *_sentenceSearchArray;

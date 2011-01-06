@@ -14,30 +14,6 @@
 #define DEFAULT_MAX_STRUDYING 30
 #define DEFAULT_DIFFICULTY 1
 
-
-// Profile SQL statements in console?
-#define PROFILE_SQL_STATEMENTS 1
-
-// Database version constants
-#define JFLASH_DATA_1_0 1
-#define JFLASH_DATA_1_1 2
-// Talk to MMA about these - do NOT edit them
-extern NSString * const JFLASH_VERSION_1_0;
-extern NSString * const JFLASH_VERSION_1_1;
-extern NSString * const JFLASH_VERSION_1_2;
-
-extern NSString * const JFLASH_CURRENT_VERSION;
-extern NSString * const JFLASH_CURRENT_CARD_DATABASE;
-extern NSString * const JFLASH_CURRENT_USER_DATABASE;
-
-// Old stuff for 1.0
-extern NSString * const JFLASH_10_USER_DATABASE;
-extern NSString * const JFLASH_10_TO_11_SQL_FILENAME;
-
-extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
-extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
-extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
-
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
@@ -63,6 +39,9 @@ extern NSString * const APP_SETTINGS_VERSION;
 
 
 extern NSString * const PLUGIN_LAST_UPDATE;
+
+extern const NSInteger FAVORITES_TAG_ID;
+
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
@@ -135,9 +114,6 @@ extern NSString * const HTML_FOOTER;
 // table view cell content offsets
 #define kCellLeftOffset			8.0
 #define kCellTopOffset			12.0
-
-// image file storage root
-#define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 // default background image for UITableViews
 #define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.png"

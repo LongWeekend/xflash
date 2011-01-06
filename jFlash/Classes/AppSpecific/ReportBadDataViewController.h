@@ -38,6 +38,7 @@ extern NSString * const RBDVC_USER_TEXT_BOX_DEFAULT;
 
 //! Private method for getting rid of the keyboard for userMsgInputBox
 - (void) _resignTextViewKeyboard;
+- (void) _resignEmailKeyboard;
 //! IBAction - hides the UIView that has the picker & toolbar
 - (IBAction) _hidePickerView;
 //! IBAction - brings up the UIView that has the picker & toolbar

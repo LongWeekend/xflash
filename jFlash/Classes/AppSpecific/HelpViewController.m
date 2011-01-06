@@ -38,7 +38,16 @@
                                                NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
                                                NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),
                                                NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),nil];
-    NSArray *htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"corrections",@"algorithm",@"tags",@"share",@"feedback",nil];
+    NSArray *htmls = nil;
+    // UIWebView does not automatically handle Retina images, so we need to manually load one of 2 different HTML files (that reference the hires graphics)
+    if ([LWERetinaUtils isRetinaDisplay])
+    {
+      htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"tags@2x",@"share@2x",@"feedback@2x",nil];
+    }
+    else
+    {
+      htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"corrections",@"algorithm",@"tags",@"share",@"feedback",nil];
+    }
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];
     currentIndex = 0;
@@ -57,7 +66,7 @@
     UIViewController *tmpVC = [[self navigationController] topViewController];
     if ([tmpVC respondsToSelector:@selector(loadPageWithBundleFilename:usingTitle:)])
     {
-      [tmpVC performSelector:@selector(loadPageWithBundleFilename:usingTitle:) withObject:[[self htmlFilenames] objectAtIndex:newIndex] withObject:[[self sectionTitles] objectAtIndex:newIndex]];
+      [tmpVC performSelector:@selector(loadPageWithBundleFilename:usingTitle:) withObject:[self.htmlFilenames objectAtIndex:newIndex] withObject:[self.sectionTitles objectAtIndex:newIndex]];
       currentIndex = newIndex;
       
       // Also figure out if we need to kill the next button if we have gone to the last page
@@ -91,7 +100,7 @@
 /** Returns the number of items in array sectionTitles */
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
 {
-  return [[self sectionTitles] count];
+  return [self.sectionTitles count];
 }
 
 
@@ -113,7 +122,7 @@
 /** Loads the HelpWebViewController with the selected row's HTML file */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 
   NSInteger row = indexPath.row;
   currentIndex = row;
@@ -125,7 +134,7 @@
     webViewController.navigationItem.rightBarButtonItem = btn;
     [btn release];
   }
-  [[self navigationController] pushViewController:webViewController animated:YES];
+  [self.navigationController pushViewController:webViewController animated:YES];
   [webViewController release];
 }
 

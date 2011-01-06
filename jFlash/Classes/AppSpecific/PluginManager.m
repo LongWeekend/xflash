@@ -25,12 +25,15 @@
  */
 - (id) init
 {
-  if ((self = [super init]))
+  if (self = [super init])
   {
     // Initialize instance variables
     _loadedPlugins = [[NSMutableDictionary alloc] init];
 		_downloadedPlugins = nil;
     self.availableForDownloadPlugins = nil;
+    
+    // MAKE THIS INSTALL BUGGY (YES as a parameter makes it buggy)
+//    [self _updatePluginPaths:YES];
 
 		[self _initAvailableForDownloadPluginsList];
 		[self _initDownloadedPluginsList];
@@ -136,10 +139,14 @@
 				//will be in the document path. This is important so that when the PluginManager
 				//tries to load the plugin, it points to the right location.
 				if ([key isEqualToString:CARD_DB_KEY])
+        {
 					path = [LWEFile createBundlePathWithFilename:[dict objectForKey:LWEPluginTargetPathKey]];
+        }
 				else 
+        {
 					path = [LWEFile createDocumentPathWithFilename:[dict objectForKey:LWEPluginTargetPathKey]];
-				
+				}
+        
 				[md setValue:path forKey:LWEPluginTargetPathKey];
 				[dictionary setValue:md forKey:key];
 			}
@@ -199,7 +206,7 @@
 	LWE_LOG(@"This is the APP_PLUGIN in the NSUserDefaults : %@", plugins);
   NSEnumerator *keyEnumerator = [plugins keyEnumerator];
   NSString *key;
-  while ((key = [keyEnumerator nextObject]))
+  while (key = [keyEnumerator nextObject])
   {
     NSString* filename = [plugins objectForKey:key];
 		LWE_LOG(@"LOG : Trying to load the installed plugins = %@, with filename = %@", key, filename);
@@ -232,22 +239,39 @@
 {
 	NSDictionary* pluginForFilename = nil;
 	if (!afterDownload)
+  {
 		pluginForFilename = [self findDictionaryContainingObject:filename forKey:LWEPluginFilenameKey inDictionary:_downloadedPlugins];
-  else 
+  }
+  else
+  {
 		pluginForFilename = [self findDictionaryContainingObject:filename forKey:LWEPluginFilenameKey inDictionary:self.availableForDownloadPlugins];
-	
-	
-	NSString* filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
+	}
+  NSString *filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
+  
   LWE_LOG(@"Loading file: %@ in loadPluginFromFile", filename);
 	// First, get database instance
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
-  // Make sure we can find the file!
+  // Make sure we can find the file - if not, it's probably after the user did a restore.  Try to recover!
   if (![LWEFile fileExists:filePath]) 
 	{
-		return NO;
-		LWE_LOG(@"%@", [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath]);
-	}
+    // Now try the relative path????
+    [self _updatePluginPaths:NO];
+    [self _initDownloadedPluginsList];
+    
+    // And now re-call this, fix the variables so this method will continue to work
+    pluginForFilename = [self findDictionaryContainingObject:filename forKey:LWEPluginFilenameKey inDictionary:_downloadedPlugins];
+    filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
+    
+    // Finally try it one more time
+    if (![LWEFile fileExists:filePath])
+    {
+      // FAIL...
+      NSString *str = [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath];
+      LWE_LOG(@"%@", str);
+      return nil;
+    }
+  }
   
   // Test drive the attachment to verify it matches
   if ([db attachDatabase:filePath withName:LWEDatabaseTempAttachName])
@@ -313,7 +337,7 @@
 		[[LWEDatabase sharedLWEDatabase] detachDatabase:updatedKey];
 	}
 	
-  if ((pluginKey = [self loadPluginFromFile:filename afterDownload:YES]))
+  if (pluginKey = [self loadPluginFromFile:filename afterDownload:YES])
   {
 		//If plugin key does exists, means it sucess load the new plugin (no matter its a fresh installed plugin, or the
 		//update plugin
@@ -403,7 +427,7 @@
   NSEnumerator *keyEnumerator = [_loadedPlugins keyEnumerator];
   NSString *key;
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while ((key = [keyEnumerator nextObject]))
+  while (key = [keyEnumerator nextObject])
   {
     [tmpArray addObject:key];
   }
@@ -421,7 +445,7 @@
   NSArray *keys = [self loadedPluginsByKey];
   NSEnumerator *enumerator = [keys objectEnumerator];
   NSDictionary *tmpDict;
-  while ((tmpDict = [_loadedPlugins objectForKey:[enumerator nextObject]]))
+  while (tmpDict = [_loadedPlugins objectForKey:[enumerator nextObject]])
   {
     [tmpArray addObject:[tmpDict objectForKey:@"name"]];
   }
@@ -516,6 +540,65 @@
 
 #pragma mark -
 #pragma mark Privates
+
+/**
+ * Updates the plugin paths if necessary (for example if they changed after a restore)
+ * Passing a YES as a paramater to this method will MESS UP any installation - it is for debugging!
+ */
+- (void) _updatePluginPaths:(BOOL) debug
+{
+  NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
+  NSDictionary *pluginDictionary = [[NSDictionary alloc] initWithContentsOfFile:docPath];
+  LWE_LOG(@"Old dictionary: %@",pluginDictionary);
+
+  // Create a new dictionary for messing around
+  NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
+  
+  NSEnumerator *keyEnumerator = [pluginDictionary keyEnumerator];
+  NSString *key = nil;
+  NSDictionary *tmpDict = nil;
+  while (key = [keyEnumerator nextObject])
+  {
+    tmpDict = [pluginDictionary objectForKey:key];
+  
+    // Manipulate the plugin_target_path
+    NSString *currentPath = [tmpDict valueForKey:@"plugin_target_path"];
+    NSString *newPath = nil;
+    // If we are debugging, purposefully mess up the path, otherwise fix the sucker
+    if (debug)
+    {
+      newPath = [NSString stringWithFormat:@"/foo%@",currentPath];
+    }
+    else
+    {
+      // Cards DB is always in the bundle
+      if ([key isEqualToString:CARD_DB_KEY])
+      {
+        newPath = [LWEFile createBundlePathWithFilename:[tmpDict valueForKey:LWEPluginFilenameKey]];
+      }
+      else
+      {
+        newPath = [LWEFile createDocumentPathWithFilename:[tmpDict valueForKey:LWEPluginFilenameKey]];
+      }
+    }
+    
+    LWE_LOG(@"FULLPATH BUG: old path was: %@",currentPath);
+    LWE_LOG(@"FULLPATH BUG: new path is: %@",newPath);
+    
+    // Make a muddled dictionary
+    NSMutableDictionary *tmpMutableDict = [tmpDict mutableCopy];
+    [tmpMutableDict setValue:newPath forKey:@"plugin_target_path"];
+
+    // Copy everything over to the new dictionary
+    [newDictionary setValue:tmpMutableDict forKey:[tmpDict valueForKey:@"plugin_key"]];
+    [tmpMutableDict release];
+  }
+  LWE_LOG(@"New dictionary: %@",newDictionary);
+  
+  [newDictionary writeToFile:docPath atomically:YES];
+  [newDictionary release];
+  [pluginDictionary release];
+}
 
 /**
  * Intended to be run in the background so we don't lock the main thread
@@ -721,7 +804,7 @@
   NSEnumerator *keyEnumerator = [_pluginDictionary keyEnumerator];
   NSString *key;
   NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-  while ((key = [keyEnumerator nextObject]))
+  while (key = [keyEnumerator nextObject])
   {
     [tmpArray addObject:[_pluginDictionary objectForKey:key]];
   }

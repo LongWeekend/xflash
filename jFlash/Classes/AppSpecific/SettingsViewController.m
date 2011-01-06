@@ -10,7 +10,7 @@
 #import "PluginSettingsViewController.h"
 #import "UserViewController.h"
 #import "UserPeer.h"
-#import "VersionManager.h"
+#import "UpdateManager.h"
 
 @interface SettingsViewController ()
 - (NSMutableArray*) _settingsTableDataSource;
@@ -93,7 +93,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   [rateUsBtn release];
   
   // Do we need to show a button on the other side?
-  if ([VersionManager databaseIsUpdatable])
+  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
   {
     UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_showUpdaterModal)];
     self.navigationItem.rightBarButtonItem = updateBtn;
@@ -438,7 +438,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
   
   // Can we upgrade at all?  If so, hide the plugins
-  if ([VersionManager databaseIsUpdatable])
+  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
   {
     [userSettingNames removeLastObject];
     [userSettingKeys removeLastObject];

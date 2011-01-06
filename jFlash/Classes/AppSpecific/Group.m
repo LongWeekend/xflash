@@ -40,7 +40,7 @@
   NSMutableArray* tags = nil;
   if (groupId >= 0)
   {
-    tags = (NSMutableArray*)[TagPeer retrieveTagListByGroupId:groupId];
+    tags = [TagPeer retrieveTagListByGroupId:groupId];
   }
   return tags;
 }
@@ -55,7 +55,7 @@
   }
   else
   {
-    NSMutableArray* groups = (NSMutableArray*)[GroupPeer retrieveGroupsByOwner:self.groupId];
+    NSMutableArray* groups = [GroupPeer retrieveGroupsByOwner:self.groupId];
     [self setChildGroupCount:[groups count]];
     returnVal = [groups count];
   }

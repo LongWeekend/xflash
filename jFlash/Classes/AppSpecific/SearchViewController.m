@@ -9,9 +9,18 @@
 #import "SearchViewController.h"
 const NSInteger KSegmentedTableHeader = 100;
 
+// Private method declarations
+@interface SearchViewController ()
+- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId;
+- (void) _removeCardFromMembershipCache: (NSInteger)cardId;
+- (void) _toggleMembership:(id)sender event:(id)event;
+@end
+
 @implementation SearchViewController
 @synthesize _searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
 @synthesize tableView, searchTerm;
+
+@synthesize membershipCacheArray;
 
 
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
@@ -20,7 +29,7 @@ const NSInteger KSegmentedTableHeader = 100;
   if ((self = [super init]))
   {
     // Set the tab bar controller image png to the targets
-    self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0];
+    self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
     self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
     [self set_cardSearchArray:nil];
     [self set_sentenceSearchArray:nil];
@@ -216,6 +225,10 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   // Reset the state machine
   _searchState = kSearchNoSearch;
+  
+  // Clear the cache of favorites
+  self.membershipCacheArray = nil;
+  
   [self runSearchForString:[[self _searchBar] text]];
   [lclSearchBar resignFirstResponder];
 }
@@ -279,6 +292,10 @@ const NSInteger KSegmentedTableHeader = 100;
   return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)lclTableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  return 64.0f;
+}
 
 /** Returns 75px if _showSearchTargetControl is YES, otherwise returns UITableView standard 0 (no headers) */
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -361,24 +378,68 @@ const NSInteger KSegmentedTableHeader = 100;
   return cell;
 }
 
-
 /** Helper method - makes a cell for cellForIndexPath for a Card */
 - (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
 {
-  // Is a search result record
-  cell.textLabel.text = [card headword];
-  cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
-  cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+  
+  // Get the headword (or make a new one)
+  UILabel *searchResult = (UILabel*)[cell viewWithTag:SEARCH_CELL_HEADWORD];
+  if (searchResult == nil) 
+  {
+    searchResult = [[[UILabel alloc] initWithFrame:CGRectMake(43,3,240,25)] autorelease];  
+    searchResult.tag = SEARCH_CELL_HEADWORD;
+    searchResult.font = [UIFont boldSystemFontOfSize:18];
+    searchResult.lineBreakMode = UILineBreakModeTailTruncation;
+    [cell.contentView addSubview:searchResult];
+  }
+  searchResult.backgroundColor = [UIColor whiteColor];
+  searchResult.text = [card headword];
+  
+  // Now make the button
+  UIButton *starButton = (UIButton*)[cell viewWithTag:SEARCH_CELL_BUTTON];
+  if (starButton == nil)
+  {
+    starButton = [[[UIButton alloc] initWithFrame:CGRectMake(7,12,29,39)] autorelease];
+    starButton.tag = SEARCH_CELL_BUTTON;
+    [starButton addTarget:self action:@selector(_toggleMembership:event:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:starButton];
+  }
+  // Now set its state
+  if ([self _checkMembershipCacheForCardId:card.cardId])
+  {
+    [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
+  }
+  else
+  {
+    [starButton setImage:[UIImage imageNamed:@"star-deselected.png"] forState:UIControlStateNormal];
+  }
+  
+  // Get the meaning
+  UILabel *meaningLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_MEANING];
+  if (meaningLabel == nil) 
+  {
+    meaningLabel = [[[UILabel alloc] initWithFrame:CGRectMake(44,41,250,20)] autorelease];
+    meaningLabel.tag = SEARCH_CELL_MEANING;
+    meaningLabel.font = [UIFont systemFontOfSize:13];
+    [cell.contentView addSubview:meaningLabel];
+  }
+  meaningLabel.text = [card meaningWithoutMarkup];
+  
+  // And the reading
+  UILabel *readingLabel = (UILabel*)[cell viewWithTag:SEARCH_CELL_READING];
+  if (readingLabel == nil)
+  {
+    readingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(43,27,250,16)] autorelease];
+    readingLabel.font = [UIFont systemFontOfSize:13];
+    readingLabel.textColor = [UIColor grayColor];
+    readingLabel.tag = SEARCH_CELL_READING;
+    [cell.contentView addSubview:readingLabel];
+  }
+  readingLabel.text = [card combinedReadingForSettings];
+
+  // Default cell properties
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
-  
-  NSString *meaningStr = [card meaningWithoutMarkup];
-  NSString *readingStr = [card combinedReadingForSettings];
-
-  if (readingStr.length > 0)
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ [%@]", meaningStr, readingStr];
-  else
-    cell.detailTextLabel.text = meaningStr;
   return cell;
 }
 
@@ -434,6 +495,126 @@ const NSInteger KSegmentedTableHeader = 100;
   
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
+#pragma mark -
+#pragma mark Private method
+
+/** Checks the membership cache to see if we are in - FYI similar methods are used by AddTagViewController as well */
+- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId
+{
+  BOOL returnVal = NO;
+  if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
+  {
+    for (Card *cachedCard in self.membershipCacheArray)
+    {
+      if (cachedCard.cardId == cardId)
+      {
+        return YES;
+      }
+    }
+  }
+  else
+  {
+    // Rebuild cache and fail over to manual function
+    self.membershipCacheArray = [CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID];
+    returnVal = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+  }
+  return returnVal;
+}
+
+
+/** Remove a card from the membership cache */
+- (void) _removeCardFromMembershipCache: (NSInteger) cardId
+{
+  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+  {
+    for (int i = 0; i < [self.membershipCacheArray count]; i++)
+    {
+      if ([[self.membershipCacheArray objectAtIndex:i] cardId] == cardId)
+      {
+        [self.membershipCacheArray removeObjectAtIndex:i];
+        return;
+      }
+    }
+  }
+}
+
+/**
+ * Adds a card to a favorites tag, or removes it, depending on its current
+ */
+- (void) _toggleMembership:(id)sender event:(id)event
+{
+  // Get the card ID
+  LWE_LOG(@"Toggle");
+  NSSet *touches = [event allTouches];
+  UITouch *touch = [touches anyObject];
+  CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+  NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+  if (indexPath != nil)
+  {
+    Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+    NSInteger cardId = [theCard cardId];
+    
+    // Use cache for toggling status if we have it
+    BOOL isMember = NO;
+    if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+    {
+      isMember = [self _checkMembershipCacheForCardId:cardId];
+    }
+    else
+    {
+      isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+    }
+    
+    if (!isMember)
+    {
+      [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
+
+      // If we are currently studying favorites, add it in there!
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      {
+        [currentTag addCardToActiveSet:theCard];
+      }
+      
+      // Now add the new ID onto the end of the search cache
+      Card *tmpCard = [[Card alloc] init];
+      tmpCard.cardId = cardId;
+      [self.membershipCacheArray addObject:tmpCard];
+      [tmpCard release];
+    }
+    else
+    {
+      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+      
+      // Quick check to make sure it's not the last card
+      if (([currentTag tagId] == FAVORITES_TAG_ID) && ([currentTag cardCount] <= 1))
+      {
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
+                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
+      }
+      else
+      {
+        // First of all, do it
+        [TagPeer cancelMembership:theCard.cardId tagId:FAVORITES_TAG_ID];
+        
+        // If we are on starred, remove it from the cache too
+        // Also double check that this is not the last card!
+        if ([currentTag tagId] == FAVORITES_TAG_ID)
+        {
+          [currentTag removeCardFromActiveSet:theCard];
+        }
+      }
+      [self _removeCardFromMembershipCache:cardId];
+    }
+
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+  }
+}
+
+#pragma mark -
+#pragma mark Class plumbing
 
 //! Standard dealloc
 - (void)dealloc

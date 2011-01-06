@@ -58,6 +58,9 @@ extern NSString * const LWEPluginTargetPathKey;
 - (void)_checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins;
 - (void)_retrievePlistFromServer;
 
+// Used to fix the plugin paths after a restore/transfer to a different device
+- (void) _updatePluginPaths:(BOOL) debug;
+
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
 

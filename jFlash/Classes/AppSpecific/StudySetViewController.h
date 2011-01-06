@@ -17,14 +17,7 @@
 
 @interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate>
 {
-  Group *group;
-  NSMutableArray *tagArray;
-  NSMutableArray *subgroupArray;
   UIBarButtonItem *_addButton;
-  NSInteger selectedTagId;
-  NSInteger groupId;
-  UIActivityIndicatorView *activityIndicator;
-	UISearchBar *searchBar;
   UIButton *searchOverlayBtn;
   UIView *_searchOverlay;
 	BOOL searching;

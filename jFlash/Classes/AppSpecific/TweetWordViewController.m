@@ -25,9 +25,9 @@
 //! Handy method to take care all of the text field keyboards.
 - (void)_resignTextFieldKeyboard
 {
-	if ([tweetTxt isFirstResponder])
+	if ([self.tweetTxt isFirstResponder])
 	{
-		[tweetTxt resignFirstResponder];
+		[self.tweetTxt resignFirstResponder];
 		//get rid of the done button for the keyboard, replace w/ sign out button; get rid of cancel btn
 		self.navigationItem.rightBarButtonItem = _signOutBtn;
 		self.navigationItem.leftBarButtonItem = _cancelBtn;
@@ -43,17 +43,30 @@
 //! Tweet the text in the text fields, and add the " #jflash" after.
 - (IBAction)tweet
 {
-	[self _resignTextFieldKeyboard];
-	NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
-	[_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
-  
-  _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
+  // Make sure they have network!
+  if ([LWENetworkUtils networkAvailable])
+  {
+    [self _resignTextFieldKeyboard];
+#if APP_TARGET == APP_TARGET_JFLASH
+    NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
+#else
+    NSString *string = [NSString stringWithFormat:@"%@ #cflash", tweetTxt.text];
+#endif
+    [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
+    
+    _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
+  }
+  else
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+
 }
 
 //! Sign out from the twitter engine.
 - (IBAction) signUserOutOfTwitter:(id)sender
 {
-	[_twitterEngine signOutForTheCurrentUser];
+	[self._twitterEngine signOutForTheCurrentUser];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -79,11 +92,11 @@
 //! The characters left label will update based on this method.
 - (void) textViewDidChange:(UITextView *)textView
 {
-	NSUInteger c = [tweetTxt.text length];
+	NSUInteger c = [self.tweetTxt.text length];
 	NSInteger length = kMaxChars - c;
 	if (length >= 0)
 	{
-		counterLbl.text = [NSString stringWithFormat:@"%d", length];
+		self.counterLbl.text = [NSString stringWithFormat:@"%d", length];
 	}
 	else
 	{
@@ -130,25 +143,14 @@
                                                 target:self
                                                 action:@selector(signUserOutOfTwitter:)];
 	
-	 _doneBtn = [[UIBarButtonItem alloc]
-				 initWithTitle:NSLocalizedString(@"Done",@"Global.Done") 
-				 style:UIBarButtonItemStyleDone 
-				 target:self 
-				 action:@selector(_resignTextFieldKeyboard)];
-  
-	//TODO
-	_cancelBtn = [[UIBarButtonItem alloc]
-				  initWithTitle:NSLocalizedString(@"Cancel", @"Global.Cancel")
-				  style:UIBarButtonItemStyleBordered 
-				  target:self.parentViewController
-				  action:@selector(dismissModalViewControllerAnimated:)];
+  _doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_resignTextFieldKeyboard)];
+	_cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
 	
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 	self.navigationItem.rightBarButtonItem = _signOutBtn;
 	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
-	self.counterLbl.text = [NSString stringWithFormat:@"%d", 
-							(kMaxChars-[_tweetWord length])];
+	self.counterLbl.text = [NSString stringWithFormat:@"%d",(kMaxChars-[_tweetWord length])];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -160,9 +162,7 @@
 
 - (void)viewDidUnload 
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
 	self.tweetTxt = nil;
 	self.tweetBtn = nil;
 	self.counterLbl = nil;
@@ -191,7 +191,7 @@
 	[tweetTxt release];
 	[tweetBtn release];
 	[counterLbl release];
-    [super dealloc];
+  [super dealloc];
 }
 
 

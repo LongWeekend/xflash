@@ -13,24 +13,28 @@
 
 @interface CurrentState : NSObject 
 {
-  Tag *_activeTag;                    //! Private property that contains the active tag
-  BOOL isFirstLoad;                   //! returns YES if this is the first time we have launched this app, ever
-  BOOL isUpdatable;                   //! returns YES if there is more current database than the user's current version
-  PluginManager *pluginMgr;           //! Holds PluginManager instance
+  //! Private property that contains the active tag
+  Tag *_activeTag;
 }
 
+//! returns YES if this is the first time we have launched this app, ever
 @property BOOL isFirstLoad;
+
+//! returns YES if there is more current database than the user's current version
 @property BOOL isUpdatable;
+
+//! Holds PluginManager instance
 @property (nonatomic, retain) PluginManager *pluginMgr;
 
 + (CurrentState *)sharedCurrentState;
 
 - (void) initializeSettings;
 - (void) registerDatabaseCopied;
-- (void) _createDefaultSettings;
 - (void) resetActiveTag;
+
 //! getter for active tag.  Loads the NSUserDefault tag from the db if not loaded yet.
 - (Tag *) activeTag;
+
 //! setter for active tag.  Sets the NSUserDefault for the tag id.
 - (void) setActiveTag: (Tag*) tag;
 
