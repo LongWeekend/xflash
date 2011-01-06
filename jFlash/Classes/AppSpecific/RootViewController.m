@@ -153,8 +153,18 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 - (void) switchToSearchWithTerm:(NSString*)term
 {
   [tabBarController setSelectedIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+
   // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
-  [[[tabBarController selectedViewController] topViewController] runSearchAndSetSearchBarForString:term];
+  UINavigationController *vc = (UINavigationController*)[tabBarController selectedViewController];
+  if ([vc isKindOfClass:[UINavigationController class]])
+  {
+    SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
+    if ([searchVC isKindOfClass:[SearchViewController class]])
+    {
+      [searchVC runSearchAndSetSearchBarForString:term];
+    }
+  }
+  
 }
 
 #pragma mark -
