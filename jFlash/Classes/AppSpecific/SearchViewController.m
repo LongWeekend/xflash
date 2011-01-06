@@ -438,6 +438,7 @@ const NSInteger KSegmentedTableHeader = 100;
 //! Standard dealloc
 - (void)dealloc
 {
+  self.searchTerm = nil;
   [self set_searchBar:nil];
   [self set_cardSearchArray:nil];
   [self set_activityIndicator:nil];
