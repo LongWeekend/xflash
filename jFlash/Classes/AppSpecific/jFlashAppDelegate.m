@@ -43,8 +43,9 @@
 {
   if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue])
   {
-    // Now be done with it
+    // Now be done with it, get rid of the observer too
     [self.rootViewController switchToSearchWithTerm:_searchedTerm];
+    [self.rootViewController removeObserver:self forKeyPath:@"isFinishedLoading"];
     [_searchedTerm release];
   }
 }
