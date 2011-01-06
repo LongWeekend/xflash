@@ -23,7 +23,7 @@
 - (id) initWithSentence:(ExampleSentence*) initSentence
 {
   // TODO: iPad customization!
-  if (self = [super initWithNibName:@"SentenceView" bundle:nil])
+  if ((self = [super initWithNibName:@"SentenceView" bundle:nil]))
   {
     [self setSentence:initSentence];
     [self setTitle:NSLocalizedString(@"Example Sentence",@"DisplaySearchedSentenceViewController.NavBarTitle")];

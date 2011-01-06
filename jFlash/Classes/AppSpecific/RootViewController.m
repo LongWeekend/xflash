@@ -150,6 +150,12 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   [self.tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
 }
 
+- (void) switchToSearchWithTerm:(NSString*)term
+{
+  [tabBarController setSelectedIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+  // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
+  [[[tabBarController selectedViewController] topViewController] runSearchAndSetSearchBarForString:term];
+}
 
 #pragma mark -
 #pragma mark Generic Modal Pop-ups and dismissal. 

@@ -63,7 +63,7 @@
 
 - (id)init
 {
-	if (self = [super init])
+	if ((self = [super init]))
 	{
 		sampleDecomposition = [[NSMutableDictionary alloc] init];
 	}

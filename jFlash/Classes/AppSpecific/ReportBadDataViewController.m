@@ -26,7 +26,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
  */
 - (id) initWithNibName:(NSString*)nibName forBadCard:(Card*)card
 {
-  if (self = [super initWithNibName:nibName bundle:nil])
+  if ((self = [super initWithNibName:nibName bundle:nil]))
   {
     // Set internal variables
     _badCard = card;

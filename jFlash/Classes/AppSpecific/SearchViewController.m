@@ -18,7 +18,7 @@ const NSInteger KSegmentedTableHeader = 100;
 
 @implementation SearchViewController
 @synthesize _searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
-@synthesize tableView;
+@synthesize tableView, searchTerm;
 
 @synthesize membershipCacheArray;
 
@@ -62,6 +62,9 @@ const NSInteger KSegmentedTableHeader = 100;
   tmpSearchBar.delegate = self;
   tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  tmpSearchBar.text = self.searchTerm;
+  // we don't need the searchTerm anymore
+  self.searchTerm = nil;
   [self set_searchBar:tmpSearchBar];
   [tmpSearchBar release];
   // Set the Nav Bar title view to be the search bar itself
@@ -234,6 +237,16 @@ const NSInteger KSegmentedTableHeader = 100;
 - (void) searchBarCancelButtonClicked:(UISearchBar*)lclSearchBar
 {
   [lclSearchBar resignFirstResponder];
+}
+
+/** runs a search and sets the text of the searchBar */
+- (void) runSearchAndSetSearchBarForString:(NSString*) text
+{
+  LWE_LOG(@"Should run seach for %@", text);
+  [self._searchBar resignFirstResponder];
+  self._searchBar.text = text;
+  self.searchTerm = text;
+  [self runSearchForString:text];
 }
 
 /** Execute actual search with \param text. Designed to be called in background thread */
@@ -606,6 +619,7 @@ const NSInteger KSegmentedTableHeader = 100;
 //! Standard dealloc
 - (void)dealloc
 {
+  self.searchTerm = nil;
   [self set_searchBar:nil];
   [self set_cardSearchArray:nil];
   [self set_activityIndicator:nil];

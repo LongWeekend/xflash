@@ -35,6 +35,7 @@ extern NSString * const LWEShouldDismissModal;
 
 - (void) switchToStudyView;
 - (IBAction) switchToSettings;
+- (void) switchToSearchWithTerm:(NSString*)term;
 - (void) loadTabBar;
 - (void) showDatabaseLoadingView;
 - (void) hideDatabaseLoadingView;
