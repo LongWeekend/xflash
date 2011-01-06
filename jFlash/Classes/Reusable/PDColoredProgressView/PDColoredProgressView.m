@@ -41,7 +41,7 @@
 }
 
 - (id) initWithProgressViewStyle: (UIProgressViewStyle) style {
-	if(self=[super initWithProgressViewStyle: style]) {
+	if((self=[super initWithProgressViewStyle: style])) {
 		[self setTintColor: [UIColor colorWithRed: 43.0/255.0 green: 134.0/255.0 blue: 225.0/255.0 alpha: 1]];
 	}
 	return self;

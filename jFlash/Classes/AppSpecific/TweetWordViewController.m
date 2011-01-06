@@ -125,7 +125,7 @@
 //! This is the designated initialiser. 
 - (id)initWithNibName:(NSString *)nibName twitterEngine:(LWETwitterEngine *)twitterEngine tweetWord:(NSString *)tweetWord
 {
-	if (self = [super initWithNibName:nibName bundle:nil])
+	if ((self = [super initWithNibName:nibName bundle:nil]))
 	{
     _loadingView = nil;
 		self._twitterEngine = twitterEngine;

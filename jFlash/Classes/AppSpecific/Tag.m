@@ -7,6 +7,7 @@
 //
 
 #import "Tag.h"
+#import "FlurryAPI.h"
 
 @implementation Tag
 
@@ -376,7 +377,16 @@
     {
       [self setCurrentIndex:0];
     }
-    NSNumber *cardId = [[self combinedCardIdsForBrowseMode] objectAtIndex:self.currentIndex];
+    NSArray *combinedCards = [self combinedCardIdsForBrowseMode];
+    NSNumber *cardId = nil;
+    if ([combinedCards count] > 0)
+    {
+      cardId = [combinedCards objectAtIndex:self.currentIndex];
+    }
+    else
+    {
+      cardId = [NSNumber numberWithInt:0];
+    }
     card = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
