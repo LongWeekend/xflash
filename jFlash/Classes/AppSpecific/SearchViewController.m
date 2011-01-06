@@ -226,6 +226,7 @@ const NSInteger KSegmentedTableHeader = 100;
 /** runs a search and sets the text of the searchBar */
 - (void) runSearchAndSetSearchBarForString:(NSString*) text
 {
+  [self._searchBar resignFirstResponder];
   self._searchBar.text = text;
   [self runSearchForString:text];
 }
