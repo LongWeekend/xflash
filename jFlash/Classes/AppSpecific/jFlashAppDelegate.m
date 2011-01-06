@@ -17,6 +17,14 @@
 
 @synthesize window, rootViewController, backgroundSupported;
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  NSString* searchTerm = [url absoluteString];
+  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  [self.rootViewController switchToSearchWithTerm:searchTerm];
+  return YES;
+}
+
 /** App delegate method, point of entry for the app */
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {     
@@ -117,6 +125,38 @@ void uncaughtExceptionHandler(NSException *exception) {
 #pragma mark -
 #pragma mark UIApplication Delegate methods
 
+// TODO: not in use. Waiting for next release
+- (void) scheduleLocalNotification 
+{
+  // get rid of old notifications
+  [[UIApplication sharedApplication] cancelAllLocalNotifications];
+  
+  // should we set up a new one
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  id reminderSetting = [settings objectForKey:APP_REMINDERS];
+  if (reminderSetting == nil || [reminderSetting intValue] == 0)
+  {
+    return;
+  }
+  
+  // create a notification to study again
+  UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+  
+  NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
+
+  localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
+  localNotification.timeZone = [NSTimeZone localTimeZone];
+  localNotification.alertBody = @"It's time to learn some more words! This is your study reminder.";
+  localNotification.alertAction = @"Study Now";
+  localNotification.soundName = UILocalNotificationDefaultSoundName;
+
+  // schedule it
+  [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+  
+  // the application retains the notification
+  [localNotification release];
+}
+
 /**
  * Called on iOS4 when the app is put into the background
  * We ask Tag to freeze its current state to a plist so if the app is killed
@@ -141,6 +181,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     [settings synchronize];
     [[state activeTag] freezeCardIds];
   }
+  
+  // TODO: not in use for this version
+  //[self scheduleLocalNotification];
 }
 
 

@@ -40,6 +40,7 @@ typedef enum searchStates
   UITableView *tableView;
 }
 
+- (void) runSearchAndSetSearchBarForString:(NSString*)text;
 - (void) runSearchForString:(NSString*)text;
 - (void) changeSearchTarget:(id)sender;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
