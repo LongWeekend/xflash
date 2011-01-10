@@ -63,7 +63,9 @@
     numeratorTotal = numeratorTotal + (tmpTotal * i);
   }
   
-  // Quick check to make sure we are not at the "start of a set". 
+  BOOL iWasRun = NO;
+  
+  // Quick check to make sure we are not at the "end of a set". 
   if (cardsSeenTotal == totalCardsInSet)
   {
     p_unseen = 0;
@@ -76,14 +78,24 @@
   }
   else
   {
-    // Get the "new card" p -- RSH - what is "p"??
-    // MMA - p means probability in statistics :) and is usually defined between 0 (impossible) and 1 (definite)
-    mean = (float)numeratorTotal / (float)cardsSeenTotal;
-    p_unseen = (mean - (float)1);
-    p_unseen = pow((p_unseen / (float) 4),weightingFactor);
+    // Sets probability if we have less cards in the study pool than MAX allowed
     if (levelOneTotal < wordsInStudyingBeforeTakingNewCard && (totalCardsInSet - cardsSeenTotal) > 0)
     {
+      iWasRun = YES;
+      mean = (float)numeratorTotal / (float)cardsSeenTotal;
+      p_unseen = (mean - (float)1);
+      p_unseen = pow((p_unseen / (float) 4),weightingFactor);
       p_unseen = p_unseen + (1-p_unseen)*(pow((wordsInStudyingBeforeTakingNewCard - cardsSeenTotal),.25)/pow(wordsInStudyingBeforeTakingNewCard,.25));
+    }
+    else if (levelOneTotal >= wordsInStudyingBeforeTakingNewCard)
+    {
+      iWasRun = YES;
+      p_unseen = 0;
+    }
+    
+    if (!iWasRun)
+    {
+      LWE_ASSERT(@"p_unseen was not set by either if block in Tag calculateNextCardLevel:");
     }
   }
 	
