@@ -61,9 +61,10 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 {
   // Now set up other NIB file
   // TODO: iPad customization!
-  [[NSBundle mainBundle] loadNibNamed:@"LWEToolbarPicker" owner:self options:nil];
+  [[NSBundle mainBundle] loadNibNamed:@"ToolbarPicker" owner:self options:nil];
 
   [super viewDidLoad];
+  
   _cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel") style:UIBarButtonItemStylePlain target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = _cancelButton;
   self.navigationItem.title = NSLocalizedString(@"What's Wrong?",@"ReportBadDataViewController.NavBarTitle");
@@ -111,8 +112,10 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
     return;
   }
   
-  // Move the card to an NSDictionary so we can make it portable
+  LWE_LOG(@"Generating data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
+  
 #if defined(APP_STORE_FINAL)
+  // Move the card to an NSDictionary so we can make it portable
   NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
                            [_badCard headword],@"headword",
@@ -121,7 +124,6 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
                            [_badCard romaji],@"romaji",nil];
 
   // Generate dictionary of user data to send to Flurry
-  LWE_LOG(@"Generated data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
   NSMutableArray *membership = [TagPeer membershipListForCardId:_badCard.cardId];
   NSString *issue = [_issueTypeArray objectAtIndex:_userSelectedIssueType];
   NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -380,6 +382,13 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 
 #pragma mark -
 #pragma mark class plumbing
+
+- (void)viewDidUnload
+{
+  [self setHotheadImg:nil];
+  [self setPickerView:nil];
+  [super viewDidUnload];
+}
 
 //! standard dealloc
 - (void)dealloc
