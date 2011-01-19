@@ -48,11 +48,9 @@
 		24EA0D651200256B0081CBBA /* NSDate+LWEUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA0D641200256B0081CBBA /* NSDate+LWEUtilities.m */; };
 		24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EA10FD12015BF60081CBBA /* SmallLoadingView.m */; };
 		24EA131E1202AC480081CBBA /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA131D1202AC480081CBBA /* downloadedPlugin.plist */; };
-		24F7DC1B125A9E46002638AA /* LWELineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DBFE125A9E46002638AA /* LWELineView.m */; };
 		24F7DC1C125A9E46002638AA /* LWELoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC00125A9E46002638AA /* LWELoadingView.m */; };
 		24F7DC1D125A9E46002638AA /* LWENotificationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC03125A9E46002638AA /* LWENotificationButton.m */; };
 		24F7DC1E125A9E46002638AA /* LWENotificationToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC05125A9E46002638AA /* LWENotificationToolbar.m */; };
-		24F7DC1F125A9E46002638AA /* LWEPickerComponentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */; };
 		24F7DC21125A9E46002638AA /* LWECalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC0D125A9E46002638AA /* LWECalloutView.m */; };
 		24F7DC22125A9E46002638AA /* LWERoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC0F125A9E46002638AA /* LWERoundedRectView.m */; };
 		24F7DC23125A9E46002638AA /* LWETooltipParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC12125A9E46002638AA /* LWETooltipParams.m */; };
@@ -282,11 +280,6 @@
 		496C7B35126327A2004B6B90 /* OAConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F1111F3E754007F6FB7 /* OAConsumer.m */; };
 		496C7B36126327A7004B6B90 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
 		496C7B37126327B0004B6B90 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
-		496C7B38126327B4004B6B90 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
-		496C7B39126327B5004B6B90 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5011AB835400016BD2 /* CellTextView.m */; };
-		496C7B3A126327B6004B6B90 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5211AB835400016BD2 /* DisplayCell.m */; };
-		496C7B3B126327B6004B6B90 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5411AB835400016BD2 /* EditableTableViewCell.m */; };
-		496C7B3C126327B7004B6B90 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5611AB835400016BD2 /* SourceCell.m */; };
 		496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		496C7B40126327DA004B6B90 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5CB211AB85E200016BD2 /* Reachability.m */; };
@@ -296,11 +289,9 @@
 		496C7B44126327E0004B6B90 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8711AB7ADB00016BD2 /* ASIInputStream.m */; };
 		496C7B45126327E1004B6B90 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8911AB7ADB00016BD2 /* ASINetworkQueue.m */; };
 		496C7B46126327E2004B6B90 /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5B8B11AB7ADB00016BD2 /* ASINSStringAdditions.m */; };
-		496C7B47126327E8004B6B90 /* LWELineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DBFE125A9E46002638AA /* LWELineView.m */; };
 		496C7B48126327E9004B6B90 /* LWELoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC00125A9E46002638AA /* LWELoadingView.m */; };
 		496C7B4B126327F7004B6B90 /* LWEViewUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC17125A9E46002638AA /* LWEViewUtility.c */; };
 		496C7B4C126327FB004B6B90 /* LWEToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F7DC1A125A9E46002638AA /* LWEToolbarPicker.xib */; };
-		496C7B4D126327FE004B6B90 /* LWEPickerComponentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */; };
 		496C7B4E12632802004B6B90 /* LWETDefaultAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF011F3E59D007F6FB7 /* LWETDefaultAuthenticationViewController.m */; };
 		496C7B4F12632803004B6B90 /* LWETDefaultAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E47EF111F3E59D007F6FB7 /* LWETDefaultAuthenticationViewController.xib */; };
 		496C7B5012632806004B6B90 /* LWETwitterOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EFC11F3E59D007F6FB7 /* LWETwitterOAuth.m */; };
@@ -419,11 +410,6 @@
 		4986F87E11C715F600947486 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		4986F87F11C715F600947486 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3E11AB829000016BD2 /* LoadingView.m */; };
 		4986F88011C715F600947486 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
-		4986F88111C715F600947486 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
-		4986F88211C715F600947486 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5011AB835400016BD2 /* CellTextView.m */; };
-		4986F88311C715F600947486 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5211AB835400016BD2 /* DisplayCell.m */; };
-		4986F88411C715F600947486 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5411AB835400016BD2 /* EditableTableViewCell.m */; };
-		4986F88511C715F600947486 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5611AB835400016BD2 /* SourceCell.m */; };
 		4986F88611C715F600947486 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		4986F88911C715F600947486 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7C11AB84EE00016BD2 /* Constants.m */; };
 		4986F88A11C715F600947486 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
@@ -506,7 +492,6 @@
 		49B53E3611B105CF00A1119A /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3311B105CF00A1119A /* LWEUILabelUtils.m */; };
 		49B53E3711B105CF00A1119A /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B53E3511B105CF00A1119A /* LWEUITableUtils.m */; };
 		49BE199111B5E993007F4FC1 /* LWEViewAnimationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BE199011B5E993007F4FC1 /* LWEViewAnimationUtils.m */; };
-		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		49C6EA3E11F6F996004633FD /* UIWebView+LWENoBounces.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54811EC52E7003AB713 /* UIWebView+LWENoBounces.m */; };
 		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
@@ -577,11 +562,6 @@
 		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		917A5C4711AB829000016BD2 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3E11AB829000016BD2 /* LoadingView.m */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
-		917A5C5711AB835400016BD2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
-		917A5C5811AB835400016BD2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5011AB835400016BD2 /* CellTextView.m */; };
-		917A5C5911AB835400016BD2 /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5211AB835400016BD2 /* DisplayCell.m */; };
-		917A5C5A11AB835400016BD2 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5411AB835400016BD2 /* EditableTableViewCell.m */; };
-		917A5C5B11AB835400016BD2 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5611AB835400016BD2 /* SourceCell.m */; };
 		917A5C5F11AB839300016BD2 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
 		917A5C7211AB844300016BD2 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6811AB844300016BD2 /* HelpView.xib */; };
@@ -713,8 +693,6 @@
 		24EA10FC12015BF60081CBBA /* SmallLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmallLoadingView.h; path = AppSpecific/SmallLoadingView.h; sourceTree = "<group>"; };
 		24EA10FD12015BF60081CBBA /* SmallLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmallLoadingView.m; path = AppSpecific/SmallLoadingView.m; sourceTree = "<group>"; };
 		24EA131D1202AC480081CBBA /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = downloadedPlugin.plist; sourceTree = "<group>"; };
-		24F7DBFD125A9E46002638AA /* LWELineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELineView.h; sourceTree = "<group>"; };
-		24F7DBFE125A9E46002638AA /* LWELineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWELineView.m; sourceTree = "<group>"; };
 		24F7DBFF125A9E46002638AA /* LWELoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELoadingView.h; sourceTree = "<group>"; };
 		24F7DC00125A9E46002638AA /* LWELoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWELoadingView.m; sourceTree = "<group>"; };
 		24F7DC02125A9E46002638AA /* LWENotificationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationButton.h; sourceTree = "<group>"; };
@@ -722,8 +700,6 @@
 		24F7DC04125A9E46002638AA /* LWENotificationToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationToolbar.h; sourceTree = "<group>"; };
 		24F7DC05125A9E46002638AA /* LWENotificationToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWENotificationToolbar.m; sourceTree = "<group>"; };
 		24F7DC06125A9E46002638AA /* LWENotificationToolbarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWENotificationToolbarConstants.h; sourceTree = "<group>"; };
-		24F7DC07125A9E46002638AA /* LWEPickerComponentDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEPickerComponentDataSource.h; sourceTree = "<group>"; };
-		24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEPickerComponentDataSource.m; sourceTree = "<group>"; };
 		24F7DC0C125A9E46002638AA /* LWECalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECalloutView.h; sourceTree = "<group>"; };
 		24F7DC0D125A9E46002638AA /* LWECalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWECalloutView.m; sourceTree = "<group>"; };
 		24F7DC0E125A9E46002638AA /* LWERoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWERoundedRectView.h; sourceTree = "<group>"; };
@@ -993,16 +969,6 @@
 		917A5C3E11AB829000016BD2 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingView.m; path = AppSpecific/LoadingView.m; sourceTree = "<group>"; };
 		917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressDetailsViewController.h; path = AppSpecific/ProgressDetailsViewController.h; sourceTree = "<group>"; };
 		917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressDetailsViewController.m; path = AppSpecific/ProgressDetailsViewController.m; sourceTree = "<group>"; };
-		917A5C4D11AB835400016BD2 /* CellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextField.h; sourceTree = "<group>"; };
-		917A5C4E11AB835400016BD2 /* CellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextField.m; sourceTree = "<group>"; };
-		917A5C4F11AB835400016BD2 /* CellTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellTextView.h; sourceTree = "<group>"; };
-		917A5C5011AB835400016BD2 /* CellTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellTextView.m; sourceTree = "<group>"; };
-		917A5C5111AB835400016BD2 /* DisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayCell.h; sourceTree = "<group>"; };
-		917A5C5211AB835400016BD2 /* DisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayCell.m; sourceTree = "<group>"; };
-		917A5C5311AB835400016BD2 /* EditableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableViewCell.h; sourceTree = "<group>"; };
-		917A5C5411AB835400016BD2 /* EditableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableViewCell.m; sourceTree = "<group>"; };
-		917A5C5511AB835400016BD2 /* SourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCell.h; sourceTree = "<group>"; };
-		917A5C5611AB835400016BD2 /* SourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCell.m; sourceTree = "<group>"; };
 		917A5C5D11AB839300016BD2 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		917A5C5E11AB839300016BD2 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		917A5C6611AB844300016BD2 /* AddTagView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddTagView.xib; path = XIBs/AddTagView.xib; sourceTree = "<group>"; };
@@ -1256,13 +1222,9 @@
 		24F7DBFC125A9E46002638AA /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				24F7DBFD125A9E46002638AA /* LWELineView.h */,
-				24F7DBFE125A9E46002638AA /* LWELineView.m */,
 				24F7DBFF125A9E46002638AA /* LWELoadingView.h */,
 				24F7DC00125A9E46002638AA /* LWELoadingView.m */,
 				24F7DC01125A9E46002638AA /* LWENotificationToolbar */,
-				24F7DC07125A9E46002638AA /* LWEPickerComponentDataSource.h */,
-				24F7DC08125A9E46002638AA /* LWEPickerComponentDataSource.m */,
 				24F7DC0B125A9E46002638AA /* LWETooltipView */,
 				24F7DC17125A9E46002638AA /* LWEViewUtility.c */,
 				24F7DC18125A9E46002638AA /* LWEViewUtility.h */,
@@ -1517,7 +1479,6 @@
 				496C7C2912633684004B6B90 /* jFlash_Constants.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
-				917A5C4C11AB835400016BD2 /* TableCells */,
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				917A5B7B11AB7A9C00016BD2 /* ASIHTTPRequest */,
@@ -1764,24 +1725,6 @@
 			);
 			name = FlurryLib;
 			path = External/FlurryLib;
-			sourceTree = "<group>";
-		};
-		917A5C4C11AB835400016BD2 /* TableCells */ = {
-			isa = PBXGroup;
-			children = (
-				917A5C4D11AB835400016BD2 /* CellTextField.h */,
-				917A5C4E11AB835400016BD2 /* CellTextField.m */,
-				917A5C4F11AB835400016BD2 /* CellTextView.h */,
-				917A5C5011AB835400016BD2 /* CellTextView.m */,
-				917A5C5111AB835400016BD2 /* DisplayCell.h */,
-				917A5C5211AB835400016BD2 /* DisplayCell.m */,
-				917A5C5311AB835400016BD2 /* EditableTableViewCell.h */,
-				917A5C5411AB835400016BD2 /* EditableTableViewCell.m */,
-				917A5C5511AB835400016BD2 /* SourceCell.h */,
-				917A5C5611AB835400016BD2 /* SourceCell.m */,
-			);
-			name = TableCells;
-			path = Reusable/TableCells;
 			sourceTree = "<group>";
 		};
 		917A5C5C11AB839300016BD2 /* Appirater */ = {
@@ -2469,11 +2412,6 @@
 				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
 				917A5C4711AB829000016BD2 /* LoadingView.m in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
-				917A5C5711AB835400016BD2 /* CellTextField.m in Sources */,
-				917A5C5811AB835400016BD2 /* CellTextView.m in Sources */,
-				917A5C5911AB835400016BD2 /* DisplayCell.m in Sources */,
-				917A5C5A11AB835400016BD2 /* EditableTableViewCell.m in Sources */,
-				917A5C5B11AB835400016BD2 /* SourceCell.m in Sources */,
 				917A5C5F11AB839300016BD2 /* Appirater.m in Sources */,
 				917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */,
 				917A5C8011AB84EE00016BD2 /* CurrentState.m in Sources */,
@@ -2502,7 +2440,6 @@
 				49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */,
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
-				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
 				9181901811D3392300746B09 /* SettingsViewController.m in Sources */,
 				24E47EFD11F3E59D007F6FB7 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				24E47EFF11F3E59D007F6FB7 /* LWETUser.m in Sources */,
@@ -2538,11 +2475,9 @@
 				24EA10FE12015BF60081CBBA /* SmallLoadingView.m in Sources */,
 				490CFBB2120FE8CB00C2BC4E /* LWENetworkUtils.m in Sources */,
 				490CFBF5120FF5F100C2BC4E /* LWEUIAlertView.m in Sources */,
-				24F7DC1B125A9E46002638AA /* LWELineView.m in Sources */,
 				24F7DC1C125A9E46002638AA /* LWELoadingView.m in Sources */,
 				24F7DC1D125A9E46002638AA /* LWENotificationButton.m in Sources */,
 				24F7DC1E125A9E46002638AA /* LWENotificationToolbar.m in Sources */,
-				24F7DC1F125A9E46002638AA /* LWEPickerComponentDataSource.m in Sources */,
 				24F7DC21125A9E46002638AA /* LWECalloutView.m in Sources */,
 				24F7DC22125A9E46002638AA /* LWERoundedRectView.m in Sources */,
 				24F7DC23125A9E46002638AA /* LWETooltipParams.m in Sources */,
@@ -2647,11 +2582,6 @@
 				496C7B35126327A2004B6B90 /* OAConsumer.m in Sources */,
 				496C7B36126327A7004B6B90 /* Base64Transcoder.c in Sources */,
 				496C7B37126327B0004B6B90 /* Appirater.m in Sources */,
-				496C7B38126327B4004B6B90 /* CellTextField.m in Sources */,
-				496C7B39126327B5004B6B90 /* CellTextView.m in Sources */,
-				496C7B3A126327B6004B6B90 /* DisplayCell.m in Sources */,
-				496C7B3B126327B6004B6B90 /* EditableTableViewCell.m in Sources */,
-				496C7B3C126327B7004B6B90 /* SourceCell.m in Sources */,
 				496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */,
 				496C7B40126327DA004B6B90 /* Reachability.m in Sources */,
 				496C7B41126327DC004B6B90 /* ASIAuthenticationDialog.m in Sources */,
@@ -2660,10 +2590,8 @@
 				496C7B44126327E0004B6B90 /* ASIInputStream.m in Sources */,
 				496C7B45126327E1004B6B90 /* ASINetworkQueue.m in Sources */,
 				496C7B46126327E2004B6B90 /* ASINSStringAdditions.m in Sources */,
-				496C7B47126327E8004B6B90 /* LWELineView.m in Sources */,
 				496C7B48126327E9004B6B90 /* LWELoadingView.m in Sources */,
 				496C7B4B126327F7004B6B90 /* LWEViewUtility.c in Sources */,
-				496C7B4D126327FE004B6B90 /* LWEPickerComponentDataSource.m in Sources */,
 				496C7B4E12632802004B6B90 /* LWETDefaultAuthenticationViewController.m in Sources */,
 				496C7B5012632806004B6B90 /* LWETwitterOAuth.m in Sources */,
 				496C7B5112632807004B6B90 /* LWETwitterEngine.m in Sources */,
@@ -2728,11 +2656,6 @@
 				4986F87E11C715F600947486 /* sqlite3.c in Sources */,
 				4986F87F11C715F600947486 /* LoadingView.m in Sources */,
 				4986F88011C715F600947486 /* ProgressDetailsViewController.m in Sources */,
-				4986F88111C715F600947486 /* CellTextField.m in Sources */,
-				4986F88211C715F600947486 /* CellTextView.m in Sources */,
-				4986F88311C715F600947486 /* DisplayCell.m in Sources */,
-				4986F88411C715F600947486 /* EditableTableViewCell.m in Sources */,
-				4986F88511C715F600947486 /* SourceCell.m in Sources */,
 				4986F88611C715F600947486 /* Appirater.m in Sources */,
 				4986F88911C715F600947486 /* Constants.m in Sources */,
 				4986F88A11C715F600947486 /* CurrentState.m in Sources */,
