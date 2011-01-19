@@ -272,6 +272,10 @@
 		496C7C021263363E004B6B90 /* cFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C011263363E004B6B90 /* cFlash_Constants.m */; };
 		496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C2912633684004B6B90 /* jFlash_Constants.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
+		4970EFA912E6FB48004994A2 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4970EFA612E6FB48004994A2 /* ASIAuthenticationDialog.m */; };
+		4970EFAA12E6FB48004994A2 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4970EFA812E6FB48004994A2 /* ASIInputStream.m */; };
+		4970EFAB12E6FB48004994A2 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4970EFA612E6FB48004994A2 /* ASIAuthenticationDialog.m */; };
+		4970EFAC12E6FB48004994A2 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4970EFA812E6FB48004994A2 /* ASIInputStream.m */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		4986F80F11C715F600947486 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
@@ -695,6 +699,10 @@
 		496C7C2812633684004B6B90 /* jFlash_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlash_Constants.h; path = AppSpecific/jFlash/jFlash_Constants.h; sourceTree = "<group>"; };
 		496C7C2912633684004B6B90 /* jFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlash_Constants.m; path = AppSpecific/jFlash/jFlash_Constants.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		4970EFA512E6FB48004994A2 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = "<group>"; };
+		4970EFA612E6FB48004994A2 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "External/asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = "<group>"; };
+		4970EFA712E6FB48004994A2 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = "External/asi-http-request/Classes/ASIInputStream.h"; sourceTree = "<group>"; };
+		4970EFA812E6FB48004994A2 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = "External/asi-http-request/Classes/ASIInputStream.m"; sourceTree = "<group>"; };
 		4986F8B811C715F600947486 /* jFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64.png"; path = "Assets/twitter-bird-64x64.png"; sourceTree = "<group>"; };
@@ -1425,6 +1433,10 @@
 			isa = PBXGroup;
 			children = (
 				917A5CB011AB85CA00016BD2 /* Reachability */,
+				4970EFA512E6FB48004994A2 /* ASIAuthenticationDialog.h */,
+				4970EFA612E6FB48004994A2 /* ASIAuthenticationDialog.m */,
+				4970EFA712E6FB48004994A2 /* ASIInputStream.h */,
+				4970EFA812E6FB48004994A2 /* ASIInputStream.m */,
 				917A5B8211AB7ADB00016BD2 /* ASIHTTPRequest.h */,
 				917A5B8311AB7ADB00016BD2 /* ASIHTTPRequest.m */,
 				917A5B8411AB7ADB00016BD2 /* ASIHTTPRequestConfig.h */,
@@ -2164,6 +2176,8 @@
 				91C33C9B12E6C11B00ADC795 /* ReportBadDataViewController.m in Sources */,
 				91C33F2B12E6E9A500ADC795 /* LWELoadingView.m in Sources */,
 				91C33F3112E6E9DB00ADC795 /* LWEViewUtility.c in Sources */,
+				4970EFA912E6FB48004994A2 /* ASIAuthenticationDialog.m in Sources */,
+				4970EFAA12E6FB48004994A2 /* ASIInputStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2284,6 +2298,8 @@
 				4993AFC4127810AE00872875 /* LWERetinaUtils.m in Sources */,
 				91C33F2C12E6E9A500ADC795 /* LWELoadingView.m in Sources */,
 				91C33F3212E6E9DB00ADC795 /* LWEViewUtility.c in Sources */,
+				4970EFAB12E6FB48004994A2 /* ASIAuthenticationDialog.m in Sources */,
+				4970EFAC12E6FB48004994A2 /* ASIInputStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2729,7 +2745,7 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = APP_STORE_FINAL;
 				GCC_THUMB_SUPPORT = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SHADOW = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
