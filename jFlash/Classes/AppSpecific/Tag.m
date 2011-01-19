@@ -92,11 +92,7 @@
       iWasRun = YES;
       p_unseen = 0;
     }
-    
-    if (!iWasRun)
-    {
-      LWE_ASSERT(@"p_unseen was not set by either if block in Tag calculateNextCardLevel:");
-    }
+    LWE_ASSERT(iWasRun);
   }
 	
   float randomNum = ((float)rand() / (float)RAND_MAX);

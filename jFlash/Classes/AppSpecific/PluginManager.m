@@ -267,8 +267,7 @@
     if (![LWEFile fileExists:filePath])
     {
       // FAIL...
-      NSString *str = [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath];
-      LWE_LOG(@"%@", str);
+      LWE_LOG(@"%@", [NSString stringWithFormat:@"%@ couldnt be found when the file is trying to be loaded", filePath]);
       return nil;
     }
   }
