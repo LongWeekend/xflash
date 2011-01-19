@@ -101,6 +101,8 @@
   {
     // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
     // This is private among these two methods so we are manually managing memory here instead of synthesizers
+    // REVIEW: This is copy pasted code Mark, very bad. Should create a method to do this instead that gets called
+    // from both locations - RSH
     NSString* searchTerm = [aUrl absoluteString];
     searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
     [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
