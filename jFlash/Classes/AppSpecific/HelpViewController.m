@@ -40,14 +40,8 @@
                                                NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),nil];
     NSArray *htmls = nil;
     // UIWebView does not automatically handle Retina images, so we need to manually load one of 2 different HTML files (that reference the hires graphics)
-    if ([LWERetinaUtils isRetinaDisplay])
-    {
-      htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"tags@2x",@"share@2x",@"feedback@2x",nil];
-    }
-    else
-    {
-      htmls = [NSArray arrayWithObjects:@"welcome",@"studysets",@"practice",@"browse",@"search",@"corrections",@"algorithm",@"tags",@"share",@"feedback",nil];
-    }
+    // We use absolute sizes though so let the old devices scale the images down.
+    htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"tags@2x",@"share@2x",@"feedback@2x",nil];
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];
     currentIndex = 0;
