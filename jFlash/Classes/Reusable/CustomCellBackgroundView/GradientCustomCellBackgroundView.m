@@ -35,7 +35,7 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,float ovalWid
 
 - (id)initWithFrame:(CGRect)frame 
 {
-  if (self = [super initWithFrame:frame]) 
+  if ((self = [super initWithFrame:frame])) 
   {
     // Initialization code
     const float* topCol = CGColorGetComponents([[UIColor redColor] CGColor]);
