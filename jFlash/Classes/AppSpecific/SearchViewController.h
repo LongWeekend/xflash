@@ -10,7 +10,8 @@
 #import "CardPeer.h"
 #import "ExampleSentencePeer.h"
 #import "AddTagViewController.h"
-#import "DisplaySearchedSentenceViewController.h"
+// MMA: we're not using this yet, as of 1.3.1
+//#import "DisplaySearchedSentenceViewController.h"
 
 #define SEARCH_TARGET_WORDS 0
 #define SEARCH_TARGET_EXAMPLE_SENTENCES 1

@@ -487,9 +487,11 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
     {
-      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[[self _sentenceSearchArray] objectAtIndex:indexPath.row]];
+      // We're not using this yet and it just adds weight to the code MMA 1/19/2011
+/*      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[[self _sentenceSearchArray] objectAtIndex:indexPath.row]];
       [[self navigationController] pushViewController:tmpVC animated:YES];
       [tmpVC release];
+ */
     }
   }
   
