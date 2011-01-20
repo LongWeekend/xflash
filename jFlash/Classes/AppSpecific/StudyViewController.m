@@ -9,6 +9,7 @@
 #import "jFlashAppDelegate.h"
 #import "StudyViewController.h"
 #import "SettingsViewController.h"
+#import "LWENetworkUtils.h"
 
 
 // declare private methods here
@@ -74,9 +75,14 @@
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     _alreadyShowedAlertView = YES;
+    
     // CFLASH STRING CUSTOMIZATION
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")];
+    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
+                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
+                                            ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
+                                        cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
+                                      delegate:self];
+    
   }
   else if (state.isUpdatable && !_alreadyShowedAlertView)
   {
@@ -146,20 +152,41 @@
 
 #pragma mark UIAlertView delegate method
 
+// private helper method to launch the app store
+-(void) _openLinkshareURL
+{
+  LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
+  [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
+}
+
 /**
  * After 1.0 to 1.1 upgrade, the user will be presented with a UIAlertView to upgrade their DB.
  * This is the delegate method to handle the response of what the user taps (do it now or later)
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  switch (buttonIndex)
+  if([[CurrentState sharedCurrentState] isUpdatable])
   {
-    case LWE_ALERT_OK_BTN:
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
-      break;
-      // Do nothing
-    case LWE_ALERT_CANCEL_BTN:
-      break;
+    switch (buttonIndex)
+    {
+      case LWE_ALERT_OK_BTN:
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
+        break;
+        // Do nothing
+      case LWE_ALERT_CANCEL_BTN:
+        break;
+    }
+  }
+  else
+  {
+    switch (buttonIndex)
+    {
+      case LWE_ALERT_OK_BTN:
+        break;
+      case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
+        [self _openLinkshareURL];
+        break;
+    }
   }
 }
 
