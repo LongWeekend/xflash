@@ -177,10 +177,7 @@
 //! Gets my Tag objects (ones created by the user) as array
 + (NSMutableArray*) retrieveMyTagList
 {
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 ORDER BY utag_name ASC"];
-  NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL: sql];
-	[sql release];
-	return tmpTags;
+  return [TagPeer retrieveTagListByGroupId:0];
 }
 
 

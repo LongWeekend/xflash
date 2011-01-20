@@ -39,6 +39,9 @@ enum EntrySectionRows
     [self setCurrentCard:card];
     [self setMyTagArray:[TagPeer retrieveMyTagList]];
     [self setSysTagArray:[TagPeer retrieveSysTagListContainingCard:card]];
+    
+    // set restricted Tag ID to something rediculous so it can't accidentally be a tag id.
+    _restrictedTagId = INT_MAX;
 
     // Add "add" button to nav bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
