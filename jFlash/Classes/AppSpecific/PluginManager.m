@@ -58,6 +58,7 @@
 	NSDictionary *dict = nil;
 	if ([LWEFile fileExists:docPath])
 	{
+    [self _updatePluginPaths:NO pluginList:LWE_AVAILABLE_PLUGIN_PLIST];
 		LWE_LOG(@"Available plugin plist found in the document path");
     dict = [[NSDictionary alloc] initWithContentsOfFile:docPath];
     [self _setAvailableForDownloadPlugins:dict];
@@ -256,7 +257,7 @@
   if (![LWEFile fileExists:filePath]) 
 	{
     // Now try the relative path????
-    [self _updatePluginPaths:NO];
+    [self _updatePluginPaths:NO pluginList:LWE_DOWNLOADED_PLUGIN_PLIST];
     [self _initDownloadedPluginsList];
     
     // And now re-call this, fix the variables so this method will continue to work
@@ -544,9 +545,9 @@
  * Updates the plugin paths if necessary (for example if they changed after a restore)
  * Passing a YES as a paramater to this method will MESS UP any installation - it is for debugging!
  */
-- (void) _updatePluginPaths:(BOOL) debug
+- (void) _updatePluginPaths:(BOOL) debug pluginList:(NSString*)plistFileName
 {
-  NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
+  NSString *docPath = [LWEFile createDocumentPathWithFilename:plistFileName];
   NSDictionary *pluginDictionary = [[NSDictionary alloc] initWithContentsOfFile:docPath];
   LWE_LOG(@"Old dictionary: %@",pluginDictionary);
 

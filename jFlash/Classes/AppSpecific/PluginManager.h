@@ -59,7 +59,7 @@ extern NSString * const LWEPluginTargetPathKey;
 - (void)_retrievePlistFromServer;
 
 // Used to fix the plugin paths after a restore/transfer to a different device
-- (void) _updatePluginPaths:(BOOL) debug;
+- (void) _updatePluginPaths:(BOOL) debug pluginList:(NSString*)plistFileName;
 
 // this is generic, should refactor to reusable class
 - (NSDictionary*) findDictionaryContainingObject:(NSString*)object forKey:(id)theKey inDictionary:(NSDictionary*)dictionary;
