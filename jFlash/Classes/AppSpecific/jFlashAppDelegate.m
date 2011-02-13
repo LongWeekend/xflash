@@ -12,6 +12,7 @@
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
 #import "DatabaseUpdateManager.h"
+#import "NSURL+IFUnicodeURL.h"
 
 @implementation jFlashAppDelegate
 
@@ -23,8 +24,8 @@
 // handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  NSString* searchTerm = [url absoluteString];
-  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  NSString *searchTerm = [[url unicodeAbsoluteString] stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  
   if ([self.rootViewController isFinishedLoading])
   {
     [self.rootViewController switchToSearchWithTerm:searchTerm];
