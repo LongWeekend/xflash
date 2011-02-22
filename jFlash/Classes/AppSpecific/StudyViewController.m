@@ -499,8 +499,8 @@
 - (void) _setupExampleSentencesView:(BOOL)cardShouldShowExampleView
 {
   // This should always be no because scroll cannot be done when card is not revealed
-	// However, if it is a browse mode, it should have all of the scroll view enabled? - Rendy 19/8/10
-	if (isBrowseMode)
+	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
+	if (isBrowseMode && cardShouldShowExampleView == YES)
 	{
 		scrollView.pagingEnabled = YES;
 		scrollView.scrollEnabled = YES;
