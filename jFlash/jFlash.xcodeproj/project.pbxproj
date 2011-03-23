@@ -549,6 +549,7 @@
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
 		913EEFCA1308053300EBCF87 /* nameprep.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEFC81308053300EBCF87 /* nameprep.c */; };
 		913EEFCB1308053300EBCF87 /* nameprep.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEFC81308053300EBCF87 /* nameprep.c */; };
+		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
 		9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -946,6 +947,7 @@
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
 		913EEFC81308053300EBCF87 /* nameprep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nameprep.c; sourceTree = "<group>"; };
 		913EEFC91308053300EBCF87 /* nameprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameprep.h; sourceTree = "<group>"; };
+		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
 		9177287711C0BF0B00A90071 /* save-changes-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn.png"; path = "Assets/save-changes-btn.png"; sourceTree = "<group>"; };
 		9177287811C0BF0B00A90071 /* select-user-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn.png"; path = "Assets/select-user-btn.png"; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
@@ -1368,6 +1370,7 @@
 				24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */,
 				4958DF8511D322CA0037027C /* jflash_10_to_11.sql */,
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
+				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
@@ -2289,6 +2292,7 @@
 				4993AF8B1278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
 				4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */,
 				4993AF8D1278024800872875 /* twitter-icon@2x.png in Resources */,
+				9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,10 +18,12 @@ NSString * const JFLASH_VERSION_1_0           = @"1.0";
 NSString * const JFLASH_VERSION_1_1           = @"1.1";
 NSString * const JFLASH_VERSION_1_2           = @"1.2";
 NSString * const JFLASH_VERSION_1_3           = @"1.3";
+NSString * const JFLASH_VERSION_1_4           = @"1.4";
 
 NSString * const JFLASH_10_USER_DATABASE      = @"jFlash.db";
 NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"jflash_10_to_11.sql";
 NSString * const JFLASH_12_TO_13_SQL_FILENAME = @"jflash_12_to_13.sql";
+NSString * const JFLASH_13_TO_14_SQL_FILENAME = @"jflash_13_to_14.sql";
 
 // Plugin keys - DO NOT change
 NSString *const CARD_DB_KEY = @"CARD_DB";

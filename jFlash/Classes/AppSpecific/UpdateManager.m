@@ -10,6 +10,7 @@
 
 // Private methods
 @interface UpdateManager ()
++ (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
 // JFLASH 1.0 -> 1.1
 + (void) _createDefaultSettingsFor10:(NSUserDefaults*) settings;
@@ -197,37 +198,93 @@
   // Now do the PLIST as well
   [UpdateManager _updatePlistFrom12to13];
 
+  [UpdateManager _upgradeDBtoVersion:JFLASH_VERSION_1_3 withSQLStatements:JFLASH_12_TO_13_SQL_FILENAME forSettings:settings];
+}
+
+
+/** Returns YES if the user needs to update settings from 1.2 to 1.3, otherwise returns NO */
++ (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
+{
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
+          [settings valueForKey:@"settings_already_created"]);
+}
+
+
+#pragma mark -
+#pragma mark Version 1.4
+/** Returns YES if the user needs to update settings from 1.3 to 1.4, otherwise returns NO */
++ (BOOL) _needs13to14SettingsUpdate:(NSUserDefaults*) settings
+{
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_3] && 
+          [settings valueForKey:@"settings_already_created"]);
+}
+
+#pragma mark -
+#pragma mark Shared Private Methods
+
++ (BOOL) _runMultipleSQLStatements:(NSString*)filePath inDB:(LWEDatabase*)db
+{
+  // Init variables
+  BOOL success = YES;
+  FILE *fh = NULL;
+  char str_buf[256];
+  
+  // Get SQL statement file ready
+  fh = fopen([filePath UTF8String],"r");
+  if (fh == NULL)
+  {
+    [NSException raise:@"SQLStatementFileNotOpened" format:@"Unable to open/read SQL statement file"];
+  }
+  
+  LWE_LOG(@"Starting SQL statement loop");
+  while (!feof(fh))
+  {
+    fgets(str_buf,256,fh); // get me a line of the file    
+    if (![db executeUpdate:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]])
+    {
+      success = NO;
+      LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
+      break;
+    }
+  }
+  
+  // Close the file
+  fclose(fh);
+  
+  if (success)
+  {    
+    // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
+    CurrentState *state = [CurrentState sharedCurrentState];
+    [state resetActiveTag];
+  }
+  return success;
+}
+
+//! a simple runner of SQL statements in a file and set the new version name
++ (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings  
+{
   // Open the database!
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *filename = JFLASH_CURRENT_USER_DATABASE;
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Cool, we are open - run the SQL
-    NSString *commands = [NSString stringWithContentsOfFile:[LWEFile createBundlePathWithFilename:JFLASH_12_TO_13_SQL_FILENAME] encoding:NSUTF8StringEncoding error:NULL];
-    if (commands && [db executeUpdate:commands])
+    if ([UpdateManager _runMultipleSQLStatements:[LWEFile createBundlePathWithFilename:pathToSQL] inDB:db])
     {
       // Now change the app version
-      [settings setValue:JFLASH_VERSION_1_3 forKey:APP_DATA_VERSION];
-      [settings setValue:JFLASH_VERSION_1_3 forKey:APP_SETTINGS_VERSION];
+      [settings setValue:newVersionName forKey:APP_DATA_VERSION];
+      [settings setValue:newVersionName forKey:APP_SETTINGS_VERSION];
     }
     else
     {
-      LWE_LOG(@"Failed to update database from 1.2 to 1.3");
+      LWE_LOG(@"Failed to update database in UpdateManager");
     }
     
     // In any case close the DB so that jFlash can open it
     [db closeDatabase];
   }
-  
-}
-
-
-/** Returns YES if the user needs to update settings from 1.1 to 1.2, otherwise returns NO */
-+ (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
-{
-  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
-  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
-          [settings valueForKey:@"settings_already_created"]);
 }
 
 #pragma mark -
@@ -259,6 +316,13 @@
   {
 		LWE_LOG(@"Oops, we need update to 1.3 version");
 	  [UpdateManager _updateSettingsFrom12to13:settings];
+  }
+  
+  if ([UpdateManager _needs13to14SettingsUpdate:settings])
+  {
+    LWE_LOG(@"Updating to 1.4 version");
+    [UpdateManager _upgradeDBtoVersion:JFLASH_VERSION_1_4 withSQLStatements:JFLASH_13_TO_14_SQL_FILENAME forSettings:settings];
+    [TagPeer recacheCountsForUserTags];
   }
 }
 
