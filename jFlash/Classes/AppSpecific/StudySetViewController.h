@@ -11,11 +11,13 @@
 #import "Group.h"
 #import "TagPeer.h"
 #import "GroupPeer.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
+#define SECTION_BACKUP 2
 #define SECTION_TAG 1
 #define SECTION_GROUP 0
 
-@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate>
+@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate>
 {
   UIBarButtonItem *_addButton;
   UIButton *searchOverlayBtn;

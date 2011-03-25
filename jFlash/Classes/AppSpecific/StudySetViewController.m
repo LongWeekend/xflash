@@ -10,6 +10,7 @@
 #import "StudySetWordsViewController.h"
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
+#import "BackupManager.h"
 
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar;
@@ -189,6 +190,28 @@
 	[addStudySetInputViewController release];
 }
 
+/*!
+    @method     
+    @abstract   Backs up the users sets to email
+    @discussion Temp version. Should eventually go to a online service
+*/
+- (void) _backupUserSets
+{
+  NSData* archivedData = [BackupManager serializedDataForUserSets];
+  
+  MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+  controller.mailComposeDelegate = self;
+  [controller setSubject:@"Backup of jFlash User Sets"];
+  [controller setMessageBody:@"Attached." isHTML:NO]; 
+  [controller addAttachmentData:archivedData mimeType:@"application/xml" fileName:@"jFlashDataBackups.archive"];
+  if (controller) [self presentModalViewController:controller animated:YES];
+  [controller release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+  [self dismissModalViewControllerAnimated:YES];
+}
 
 #pragma mark -
 #pragma mark UITableView methods
@@ -231,7 +254,11 @@
   }
   else
   {
+#if defined (APP_STORE_FINAL)
     return 2;
+#else
+    return 3;
+#endif
   }
 }
 
@@ -258,6 +285,10 @@
     if (section == SECTION_TAG)
     {
       return [self.tagArray count];
+    }
+    else if(section == SECTION_BACKUP)
+    {
+      return 2;  
     }
     else
     {
@@ -329,6 +360,18 @@
         cell.accessoryView = self.activityIndicator;
         cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
       }
+    }
+  }
+  else if (indexPath.section == SECTION_BACKUP)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"backup" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+    if (indexPath.row == 0)
+    {
+      cell.textLabel.text = NSLocalizedString(@"Backup User Sets", @"StudyViewController.backupUserSets");
+    }
+    else
+    {
+      cell.textLabel.text = NSLocalizedString(@"Restore User Sets", @"StudyViewController.backupUserSets");
     }
   }
   // Group Cells
@@ -403,6 +446,19 @@
       // deselect "no results" msg
       [lclTableView deselectRowAtIndexPath:indexPath animated:NO];    
     }
+  }
+  else if (indexPath.section == SECTION_BACKUP)
+  {
+    if (indexPath.row == 0)
+    {
+      [self _backupUserSets];
+    }
+    else 
+    {
+      [BackupManager restoreUserData];
+    }
+    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self reloadTableData];
   }
   else
   {

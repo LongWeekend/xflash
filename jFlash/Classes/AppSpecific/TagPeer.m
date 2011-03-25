@@ -238,6 +238,22 @@
 	return tmpTag;  
 }
 
+//! Gets a Tag by its name
++ (Tag*) retrieveTagByName: (NSString*) tagName
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM tags WHERE tag_name like '%@' LIMIT 1",tagName];
+	FMResultSet *rs = [db executeQuery:sql];
+  Tag* tmpTag = [[[Tag alloc] init] autorelease];
+	while ([rs next])
+  {
+		[tmpTag hydrate:rs];
+	}
+	[rs close];
+	[sql release];
+	return tmpTag;  
+}
+
 
 //! Deletes a tag and all Card links
 + (BOOL) deleteTag:(NSInteger) tagId

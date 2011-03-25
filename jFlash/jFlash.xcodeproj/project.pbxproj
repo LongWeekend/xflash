@@ -606,6 +606,8 @@
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
+		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
 		91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6BE11BB6AC0004BD0D0 /* ExampleSentence.m */; };
@@ -619,6 +621,7 @@
 		91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
+		91E93B0E133AD450007E5F83 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E93B0D133AD450007E5F83 /* MessageUI.framework */; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -1062,6 +1065,8 @@
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91C9EE30111E56B6006B72E6 /* CardTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTest.h; sourceTree = "<group>"; };
 		91C9EE31111E56B6006B72E6 /* CardTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTest.m; sourceTree = "<group>"; };
+		91CA712B133BDE7B008A89A8 /* BackupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupManager.h; sourceTree = "<group>"; };
+		91CA712C133BDE7B008A89A8 /* BackupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupManager.m; sourceTree = "<group>"; };
 		91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesView.xib; path = XIBs/ExampleSentencesView.xib; sourceTree = "<group>"; };
 		91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSentencesViewController.h; path = AppSpecific/ExampleSentencesViewController.h; sourceTree = "<group>"; };
 		91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencesViewController.m; path = AppSpecific/ExampleSentencesViewController.m; sourceTree = "<group>"; };
@@ -1079,6 +1084,7 @@
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
 		91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressBarViewController.xib; path = Classes/AppSpecific/ProgressBarViewController.xib; sourceTree = "<group>"; };
+		91E93B0D133AD450007E5F83 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		D3309B031123C7D800B73E8E /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
@@ -1120,6 +1126,7 @@
 				91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */,
 				24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */,
 				2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */,
+				91E93B0E133AD450007E5F83 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,6 +1403,7 @@
 				D32DC3CF116D82C9005D3852 /* Security.framework */,
 				49F968E111AF64D400DFC3C9 /* CFNetwork.framework */,
 				24E47F4611F3E780007F6FB7 /* CoreData.framework */,
+				91E93B0D133AD450007E5F83 /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1891,6 +1899,8 @@
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
 				4997D21411BB642600016A15 /* DatabaseUpdateManager.h */,
 				4997D21511BB642600016A15 /* DatabaseUpdateManager.m */,
+				91CA712B133BDE7B008A89A8 /* BackupManager.h */,
+				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -2638,6 +2648,7 @@
 				913EEF8E130800F300EBCF87 /* util.c in Sources */,
 				913EEF8F130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
 				913EEFCA1308053300EBCF87 /* nameprep.c in Sources */,
+				91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2777,6 +2788,7 @@
 				913EEF94130800F300EBCF87 /* util.c in Sources */,
 				913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */,
 				913EEFCB1308053300EBCF87 /* nameprep.c in Sources */,
+				91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,7 @@
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId;
 + (NSMutableArray*) retrieveTagListLike: (NSString*)string;
 + (Tag*) retrieveTagById: (NSInteger) tagId;
++ (Tag*) retrieveTagByName: (NSString*) tagName;
 + (BOOL) deleteTag:(NSInteger) tagId;
 + (void) recacheCountsForUserTags;
 
