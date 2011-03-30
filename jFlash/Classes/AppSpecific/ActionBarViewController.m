@@ -8,6 +8,7 @@
 
 #import "ActionBarViewController.h"
 #import "RootViewController.h"
+#import "LWEJanrainLoginManager.h"
 
 //! Informal protocol defined messages sent to delegate
 @interface NSObject (ActionBarDelegateSupport)
@@ -242,6 +243,10 @@
   }
   else if (buttonIndex == SVC_ACTION_TWEET_BUTTON)
   {
+    // couldn't quite get this working the way I wanted. Good idea in the future but stopping for now.
+//    [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] share:@"found a word with Japanese Flash" 
+//                                                           andUrl:@"http://su.pr/1TZSd4" 
+//                                                           userContentOrNil:[self getTweetWord]];
 	  [self tweet];
   }
 }

@@ -11,6 +11,7 @@
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
 #import "BackupManager.h"
+#import "LWEJanrainLoginManager.h"
 
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar;
@@ -137,7 +138,7 @@
         }
       }
       self.tagArray = tmpTagArray;
-    }    
+    }
   }
   [self.tableView reloadData];
 }
@@ -254,11 +255,11 @@
   }
   else
   {
-#if defined (APP_STORE_FINAL)
+    if (self.navigationController.topViewController == self.navigationController.visibleViewController)
+    {
+      return 3; // only show the 3rd view if we are at the top of the stack
+    }
     return 2;
-#else
-    return 3;
-#endif
   }
 }
 
@@ -288,7 +289,11 @@
     }
     else if(section == SECTION_BACKUP)
     {
-      return 2;  
+      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      {
+        return 3;
+      }
+      return 2;
     }
     else
     {
@@ -367,11 +372,18 @@
     cell = [LWEUITableUtils reuseCellForIdentifier:@"backup" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     if (indexPath.row == 0)
     {
-      cell.textLabel.text = NSLocalizedString(@"Backup User Sets", @"StudyViewController.backupUserSets");
+      cell.textLabel.text = NSLocalizedString(@"Backup Custom Sets", @"StudyViewController.backupUserSets");
+    }
+    else if (indexPath.row == 1)
+    {
+      cell.textLabel.text = NSLocalizedString(@"Restore Custom Sets", @"StudyViewController.backupUserSets");
     }
     else
     {
-      cell.textLabel.text = NSLocalizedString(@"Restore User Sets", @"StudyViewController.backupUserSets");
+      if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
+      {
+        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupUserSets");
+      }
     }
   }
   // Group Cells
@@ -453,9 +465,13 @@
     {
       [self _backupUserSets];
     }
-    else 
+    else if (indexPath.row == 1)
     {
       [BackupManager restoreUserData];
+    }
+    else if (indexPath.row == 2)
+    {
+      [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] logout];
     }
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     [self reloadTableData];
