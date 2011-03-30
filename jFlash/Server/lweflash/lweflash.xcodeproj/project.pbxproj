@@ -1,0 +1,98 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXFileReference section */
+		91E5328213425B1E009DC5A4 /* Api.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Api.py; sourceTree = "<group>"; };
+		91E5328613425FCF009DC5A4 /* model.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = model.py; sourceTree = "<group>"; };
+		91E53287134261A1009DC5A4 /* User.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = User.py; sourceTree = "<group>"; };
+		91E5328813427DB6009DC5A4 /* LWEFlashConstants.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = LWEFlashConstants.py; sourceTree = "<group>"; };
+		91E532891342ADA9009DC5A4 /* appengine_config.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = appengine_config.py; sourceTree = "<group>"; };
+		91E533001343720E009DC5A4 /* app.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = app.yaml; sourceTree = "<group>"; };
+		91E533021343720E009DC5A4 /* __init__.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		91E533031343720E009DC5A4 /* main.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = main.py; sourceTree = "<group>"; };
+		91E533041343720E009DC5A4 /* Security.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Security.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		91E53274134255E7009DC5A4 = {
+			isa = PBXGroup;
+			children = (
+				91E533001343720E009DC5A4 /* app.yaml */,
+				91E533011343720E009DC5A4 /* gaesessions */,
+				91E533031343720E009DC5A4 /* main.py */,
+				91E533041343720E009DC5A4 /* Security.py */,
+				91E5328213425B1E009DC5A4 /* Api.py */,
+				91E532891342ADA9009DC5A4 /* appengine_config.py */,
+				91E5328813427DB6009DC5A4 /* LWEFlashConstants.py */,
+				91E5328613425FCF009DC5A4 /* model.py */,
+				91E53287134261A1009DC5A4 /* User.py */,
+			);
+			sourceTree = "<group>";
+		};
+		91E533011343720E009DC5A4 /* gaesessions */ = {
+			isa = PBXGroup;
+			children = (
+				91E533021343720E009DC5A4 /* __init__.py */,
+			);
+			path = gaesessions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		91E53276134255E7009DC5A4 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 91E53279134255E7009DC5A4 /* Build configuration list for PBXProject "lweflash" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 91E53274134255E7009DC5A4;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		91E53277134255E7009DC5A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		91E53278134255E7009DC5A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		91E53279134255E7009DC5A4 /* Build configuration list for PBXProject "lweflash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91E53277134255E7009DC5A4 /* Debug */,
+				91E53278134255E7009DC5A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 91E53276134255E7009DC5A4 /* Project object */;
+}

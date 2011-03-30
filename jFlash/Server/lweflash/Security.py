@@ -8,12 +8,14 @@ def check_session(request):
       if user is None: # this shouldn't be possible but check anyway
         logging.critical("A user was able to have a session but no user object. WTF!?!")
         session.terminate()
-        request.error(401)
+        request.clear()
+        request.set_status(401)
         logging.debug("Not Logged In")
         return None
       return session
     else:
-      request.error(401)
+      request.clear()
+      request.set_status(401)
       logging.debug("Not Logged In")
       return None
-      # the use is not authenticated so we don't want to do anything else
+      # the user is not authenticated so we don't want to do anything else
