@@ -144,7 +144,6 @@
   // Perform the request
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:dataURL]];
   [request setPostValue:[BackupManager stringForFlashType] forKey:@"flashType"];
-//  [request setData:archivedData withFileName:@"flashBackup.archive" andContentType:@"application/xml" forKey:@"backupFile"];
   [request setData:archivedData forKey:@"backupFile"];
   [request startSynchronous];
 }

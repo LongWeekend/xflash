@@ -8,4 +8,4 @@ class User(db.Model):
 class BackupData(db.Model):
   user = db.ReferenceProperty(User)
   flashType = db.StringProperty() # should be something like LWEFLashConstants.APP_NAME_JAPANESE_FLASH
-  backupFile = db.Blob() # the backup file will go in here as is  
+  backupFile = db.BlobProperty() # the backup file will go in here as is  

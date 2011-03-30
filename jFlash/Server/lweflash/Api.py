@@ -101,7 +101,7 @@ class GetBackupHandler(webapp.RequestHandler):
     if backup is None:
       self.error(404)
     else:
-      self.response.headers['Content-Type'] = "text/xml"
+      self.response.headers['Content-Type'] = "application/xml"
       self.response.out.write(backup.backupFile)
     
 def getBackup(user, flashType):
