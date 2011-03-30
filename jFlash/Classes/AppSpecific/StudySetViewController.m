@@ -191,24 +191,6 @@
 	[addStudySetInputViewController release];
 }
 
-/*!
-    @method     
-    @abstract   Backs up the users sets to email
-    @discussion Temp version. Should eventually go to a online service
-*/
-- (void) _backupUserSets
-{
-  NSData* archivedData = [BackupManager serializedDataForUserSets];
-  
-  MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-  controller.mailComposeDelegate = self;
-  [controller setSubject:@"Backup of jFlash User Sets"];
-  [controller setMessageBody:@"Attached." isHTML:NO]; 
-  [controller addAttachmentData:archivedData mimeType:@"application/xml" fileName:@"jFlashDataBackups.archive"];
-  if (controller) [self presentModalViewController:controller animated:YES];
-  [controller release];
-}
-
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
   [self dismissModalViewControllerAnimated:YES];
@@ -463,7 +445,7 @@
   {
     if (indexPath.row == 0)
     {
-      [self _backupUserSets];
+      [BackupManager backupUserData];
     }
     else if (indexPath.row == 1)
     {

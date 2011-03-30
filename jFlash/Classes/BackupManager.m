@@ -8,8 +8,20 @@
 
 #import "BackupManager.h"
 #import "LWEJanrainLoginManager.h"
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @implementation BackupManager
+
+//! Helper method that returns the flashType string name used by the API
++ (NSString*) stringForFlashType
+{
+#if APP_TARGET == APP_TARGET_JFLASH
+  return @"japaneseflash";
+#else
+  return @"chineseflash";
+#endif
+}
 
 /*!
  @method     restoreUserData
@@ -20,9 +32,14 @@
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
-  //  TODO: make this pull data from a web service
   //  download the userdate file
-  NSData* data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:@"https://s3.amazonaws.com/japanese-flash/jFlashDataBackup.archive"]];
+  NSString* dataURL = [NSString stringWithFormat:@"http://lweflash.appspot.com/api/getBackup?flashType=%@",[BackupManager stringForFlashType]];
+  
+  //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
+  ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
+  [request startSynchronous];
+  
+  NSData* data = [request responseData];
   if (data)
   {
     [BackupManager createUserSetsForData:data];
@@ -75,6 +92,7 @@
     }
   return tagId;
 }
+
 //! Takes a NSData created by serializedDataForUserSets and populates the data tables
 + (void) createUserSetsForData:(NSData*)data
 {
@@ -110,6 +128,38 @@
       }
     }
     [currentCardIds removeAllObjects];
+  }
+}
+
+//! Private backup method to be called directly or async
++ (void) _backupUserData 
+{
+  // Stop listening for a login
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
+  
+  // Get the data
+  NSData* archivedData = [BackupManager serializedDataForUserSets];
+  NSString* dataURL = @"http://lweflash.appspot.com/api/uploadBackup";
+  
+  // Perform the request
+  ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:dataURL]];
+  [request setPostValue:[BackupManager stringForFlashType] forKey:@"flashType"];
+//  [request setData:archivedData withFileName:@"flashBackup.archive" andContentType:@"application/xml" forKey:@"backupFile"];
+  [request setData:archivedData forKey:@"backupFile"];
+  [request startSynchronous];
+}
+
+//! Backup the user's data to our API, currently set's and set membership only
++ (void) backupUserData
+{
+  if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated] == YES)
+  {
+    [self _backupUserData];
+  }
+  else
+  {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_backupUserData) name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
+    [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] login]; // need to be logged in for this
   }
 }
 

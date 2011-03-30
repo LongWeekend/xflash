@@ -19,5 +19,9 @@
 + (NSData*) serializedDataForUserSets;
 //! Installs the sets for a serialized associative array of sets
 + (void) createUserSetsForData:(NSData*)data;
+//! Backs up the user's data to the api
++ (void) backupUserData;
+//! Helper method that returns the flashType string name used by the API
++ (NSString*) stringForFlashType;
 
 @end

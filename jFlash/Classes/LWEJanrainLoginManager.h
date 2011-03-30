@@ -12,6 +12,7 @@
 
 + (LWEJanrainLoginManager *)sharedLWEJanrainLoginManager;
 - (void) login;
+- (void) loginForMoreProviders;
 - (void) logout;
 - (BOOL) isAuthenticated;
 

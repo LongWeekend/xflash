@@ -93,8 +93,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 - (void)jrAuthenticationDidReachTokenUrl:(NSString*)tokenUrl withResponse:(NSURLResponse*)response andPayload:(NSData*)tokenUrlPayload forProvider:(NSString*)provider
 { 
   // TODO: handle the response from our server. Likely just a session or whatev
+  if ([response respondsToSelector:@selector(allHeaderFields)])
+  {
+    NSArray* cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:[(NSHTTPURLResponse*)response allHeaderFields] forURL:[response URL]];
+    for (NSHTTPCookie* cookie in cookies)
+    {
+      [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    }
+  }
   LWE_LOG(@"Provider: %@", provider);
-  LWE_LOG(@"MIME Type: %@", [response MIMEType]);
 }
 
 #pragma mark -
