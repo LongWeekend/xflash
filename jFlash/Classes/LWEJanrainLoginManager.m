@@ -84,10 +84,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   NSDictionary *aProfile = [auth_info objectForKey:@"profile"];
   self.profile = aProfile;
   self.userIdentifier = [self.profile objectForKey:@"identifier"];
-  
-  // Tell anyone who might care
-  NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidAuthenticate object:self.userIdentifier];
-  [[NSNotificationCenter defaultCenter] postNotification:aNotification];
 }
 
 - (void)jrAuthenticationDidReachTokenUrl:(NSString*)tokenUrl withResponse:(NSURLResponse*)response andPayload:(NSData*)tokenUrlPayload forProvider:(NSString*)provider
@@ -100,6 +96,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
     {
       [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     }
+    
+    // Tell anyone who might care
+    NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidAuthenticate object:self.userIdentifier];
+    [[NSNotificationCenter defaultCenter] postNotification:aNotification];
   }
   LWE_LOG(@"Provider: %@", provider);
 }
