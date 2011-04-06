@@ -104,6 +104,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   LWE_LOG(@"Provider: %@", provider);
 }
 
+#pragma mark Failure Delegate
+
+- (void) jrEngageDialogDidFailToShowWithError:(NSError *)error	
+{
+  LWE_LOG(@"Got to jrEngageDialogDidFailToShowWithError");
+  if ([error code] == 103) // There was a problem communicating with the Janrain server while configuring authentication.
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+}
+
+- (void) jrAuthenticationDidFailWithError:(NSError *)error forProvider:(NSString *)provider
+{
+  #if defined(LWE_RELEASE_AD_HOC) || defined(LWE_RELEASE_APP_STORE)
+    [FlurryAPI logError:[error code] message:@"Error in jrAuthenticationDidFailWithError" error:error];
+  #endif
+  LWE_LOG(@"Got to jrAuthenticationDidFailWithError");
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Login Failed",@"LWEJanrainLoginManager.authfailed") message:[error localizedDescription]];
+}
+
 #pragma mark -
 #pragma mark Sharing
 
