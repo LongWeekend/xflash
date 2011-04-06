@@ -910,7 +910,6 @@
 		91CA7427133D216C008A89A8 /* JRUserLandingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72E7133D216C008A89A8 /* JRUserLandingController.xib */; };
 		91CA7428133D216C008A89A8 /* JRWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72E8133D216C008A89A8 /* JRWebViewController.xib */; };
 		91CA7429133D216C008A89A8 /* JREngage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72E9133D216C008A89A8 /* JREngage-Info.plist */; };
-		91CA743C133D2189008A89A8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CA743B133D2189008A89A8 /* Security.framework */; };
 		91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */; };
 		91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
@@ -1535,7 +1534,6 @@
 		91CA72E7133D216C008A89A8 /* JRUserLandingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRUserLandingController.xib; sourceTree = "<group>"; };
 		91CA72E8133D216C008A89A8 /* JRWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JRWebViewController.xib; sourceTree = "<group>"; };
 		91CA72E9133D216C008A89A8 /* JREngage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "JREngage-Info.plist"; path = "External/janrain/JREngage/JREngage-Info.plist"; sourceTree = "<group>"; };
-		91CA743B133D2189008A89A8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEJanrainLoginManager.h; sourceTree = "<group>"; };
 		91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEJanrainLoginManager.m; sourceTree = "<group>"; };
 		91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExampleSentencesView.xib; path = XIBs/ExampleSentencesView.xib; sourceTree = "<group>"; };
@@ -1598,7 +1596,6 @@
 				24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */,
 				2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */,
 				91E93B0E133AD450007E5F83 /* MessageUI.framework in Frameworks */,
-				91CA743C133D2189008A89A8 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1876,7 +1873,6 @@
 				49F968E111AF64D400DFC3C9 /* CFNetwork.framework */,
 				24E47F4611F3E780007F6FB7 /* CoreData.framework */,
 				91E93B0D133AD450007E5F83 /* MessageUI.framework */,
-				91CA743B133D2189008A89A8 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3992,6 +3988,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
+				OTHER_LDFLAGS = (
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
 				PRODUCT_NAME = jFlash;
 				SDKROOT = iphoneos;
 			};
@@ -4007,7 +4007,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = APP_STORE_FINAL;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					LWE_RELEASE_APP_STORE,
+					APP_STORE_FINAL,
+				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -4015,6 +4018,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = jFlash;
 				SDKROOT = iphoneos;
@@ -4276,10 +4283,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+					LWE_RELEASE_ADHOC,
+					APP_STORE_FINAL,
+				);
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = jFlash;
 				SDKROOT = iphoneos;

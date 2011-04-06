@@ -194,7 +194,7 @@
 - (Card*) getRandomCard:(NSInteger)currentCardId
 {
   //-----Internal array consistency-----
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE)
   if ([self.cardIds count] != 6)
   {
     [FlurryAPI logError:@"getRandomCard" message:[NSString stringWithFormat:@"cardIds has %d indicies, not 6",[self.cardIds count]] error:nil];
@@ -256,7 +256,7 @@
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
   //-----Internal array consistency-----
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE)
   if ([self.cardIds count] != 6)
   {
     [FlurryAPI logError:@"updateLevelCounts" message:@"currentCardId is nil" error:nil];

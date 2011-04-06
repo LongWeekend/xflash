@@ -215,7 +215,7 @@
     app.idleTimerDisabled = YES;
     
     [self performSelector:@selector(_checkPlugin) withObject:nil afterDelay:0.1f];
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE)
     [FlurryAPI logEvent:@"mergeAttempted"];
 #endif
   }
@@ -251,7 +251,7 @@
   {
     [[self dlHandler] cancelTask];
     [self _updateInternalState:kMigraterCancelled withTaskMessage:NSLocalizedString(@"Update Cancelled",@"VersionManager.UpdateCancelledMsg")];
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE)
     [FlurryAPI logEvent:@"mergeCancelled"];
 #endif
     [self _reenableSleepTimer];
@@ -420,7 +420,7 @@
     {
       success = NO;
       LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
-      #if defined(APP_STORE_FINAL)
+      #if defined(LWE_RELEASE_APP_STORE)
         NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding],@"sql",nil];
         [FlurryAPI logEvent:@"mergeFail" withParameters:dataToSend];
       #endif
@@ -441,7 +441,7 @@
     // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setValue:JFLASH_VERSION_1_1 forKey:@"data_version"];
-    #if defined(APP_STORE_FINAL)
+    #if defined(LWE_RELEASE_APP_STORE)
       [FlurryAPI logEvent:@"mergeSuccess" withParameters:nil];
     #endif
 

@@ -323,7 +323,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   else
   {
     // This is a problem!  Why wouldn't we have stuff???
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE)
     [FlurryAPI logEvent:@"PLUGIN_URL_FAILURE" withParameters:[aNotification userInfo]];
     // Notify the user..
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")

@@ -63,7 +63,7 @@
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
-  #if defined(APP_STORE_FINAL)
+  #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
     // add analytics if this is live
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];

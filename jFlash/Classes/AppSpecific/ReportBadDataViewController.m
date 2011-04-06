@@ -114,7 +114,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   
   LWE_LOG(@"Generating data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
   
-#if defined(APP_STORE_FINAL)
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
   // Move the card to an NSDictionary so we can make it portable
   NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
