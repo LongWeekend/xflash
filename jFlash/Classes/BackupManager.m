@@ -11,10 +11,23 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
+#define API_BACKUP_DATA_URL @"http://lweflash.appspot.com/api/uploadBackup";
+
 @implementation BackupManager
+@synthesize delegate;
+
+//! Init the BackupManager with a Delegate
+- (BackupManager*) initWithDelegate:(id)aDelegate
+{
+  if ((self == [super init]))
+  {
+    self.delegate = aDelegate;
+  }
+  return self;
+}
 
 //! Helper method that returns the flashType string name used by the API
-+ (NSString*) stringForFlashType
+- (NSString*) stringForFlashType
 {
 #if APP_TARGET == APP_TARGET_JFLASH
   return @"japaneseflash";
@@ -23,42 +36,66 @@
 #endif
 }
 
+#pragma mark Restore
+
+//! Delegate on success
+- (void)didRestoreUserData
+{
+  if(self.delegate && [self.delegate respondsToSelector:@selector(didRestoreUserData)])
+  {
+    [delegate didRestoreUserData];
+  }
+}
+
+//! Delegate on failure
+- (void)didFailToRestoreUserDateWithError:(NSError *)error
+{
+  if(self.delegate && [self.delegate respondsToSelector:@selector(didFailToRestoreUserDateWithError:)])
+  {
+    [delegate didFailToRestoreUserDateWithError:error];
+  }
+}
+
+//! Private method to really install the data.
+- (void) _installDataFromResponse: (ASIHTTPRequest *) request  {
+  NSData* data = [request responseData];
+  if (data)
+  {
+    [self createUserSetsForData:data];
+    [TagPeer recacheCountsForUserTags];
+    [self didRestoreUserData];
+  }
+  else
+  {
+    NSError* error = [NSError errorWithDomain:LWEBackupManagerErrorDomain code:kDataNotFound userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Could not find backup data on web sevice.",@"") forKey:NSLocalizedDescriptionKey]];
+    [self didFailToRestoreUserDateWithError:error];
+  }
+}
+
 /*!
  @method     restoreUserData
  @abstract   downloads and installs the data file from the web service. Alerts for success or failure.
  */
-+ (void) _restoreUserDataFromWebService 
+- (void) _restoreUserDataFromWebService 
 {
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
   //  download the userdate file
-  NSString* dataURL = [NSString stringWithFormat:@"http://lweflash.appspot.com/api/getBackup?flashType=%@",[BackupManager stringForFlashType]];
+  NSString* dataURL = [NSString stringWithFormat:@"http://lweflash.appspot.com/api/getBackup?flashType=%@",[self stringForFlashType]];
   
   //This url will return the value of the 'ASIHTTPRequestTestCookie' cookie
   ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:dataURL]];
-  [request startSynchronous];
-  
-  NSData* data = [request responseData];
-  if (data)
-  {
-    [BackupManager createUserSetsForData:data];
-    [TagPeer recacheCountsForUserTags];
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"BackupManager_DataRestored") 
-                                       message:NSLocalizedString(@"Your data has been restored successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
-  }
-  else
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"BackupManager_DataNotFound") 
-                                       message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
-  }
+  [request setDelegate:self];
+  [request setUserInfo:[NSDictionary dictionaryWithObject:@"restore" forKey:@"requestType"]];
+  [request startAsynchronous];
 }
 
 /*!
  @method     restoreUserData
  @abstract   Checks login status and either calls the private install or listens for it
  */
-+ (void) restoreUserData
+- (void) restoreUserData
 {
   if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated] == YES)
   {
@@ -71,7 +108,8 @@
   }
 }
 
-+ (int) _getTagIdForName: (NSString *) tagName AndId: (NSNumber *) key  {
+//! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
+- (int) _getTagIdForName: (NSString *) tagName AndId: (NSNumber *) key  {
   int tagId;
   if (key == [NSNumber numberWithInt:0])
     {
@@ -94,7 +132,7 @@
 }
 
 //! Takes a NSData created by serializedDataForUserSets and populates the data tables
-+ (void) createUserSetsForData:(NSData*)data
+- (void) createUserSetsForData:(NSData*)data
 {
   NSDictionary* idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   NSEnumerator *enumerator = [idsDict keyEnumerator];
@@ -131,25 +169,48 @@
   }
 }
 
+#pragma mark -
+#pragma mark Backup
+
+//! Delegate on success
+- (void)didBackupUserData
+{
+  if(self.delegate && [self.delegate respondsToSelector:@selector(didBackupUserData)])
+  {
+    [delegate didBackupUserData];
+  }
+}
+
+//! Delegate on failure
+- (void)didFailToBackupUserDataWithError:(NSError *)error
+{
+  if(self.delegate && [self.delegate respondsToSelector:@selector(didFailToBackupUserDataWithError:)])
+  {
+    [delegate didFailToBackupUserDataWithError:error];
+  }
+}
+
 //! Private backup method to be called directly or async
-+ (void) _backupUserData 
+- (void) _backupUserData 
 {
   // Stop listening for a login
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEJanrainLoginManagerUserDidAuthenticate object:nil];
   
   // Get the data
-  NSData* archivedData = [BackupManager serializedDataForUserSets];
-  NSString* dataURL = @"http://lweflash.appspot.com/api/uploadBackup";
+  NSData* archivedData = [self serializedDataForUserSets];
+  NSString* dataURL = API_BACKUP_DATA_URL;
   
   // Perform the request
   ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:dataURL]];
-  [request setPostValue:[BackupManager stringForFlashType] forKey:@"flashType"];
+  [request setUserInfo:[NSDictionary dictionaryWithObject:@"backup" forKey:@"requestType"]];
+  [request setDelegate:self];
+  [request setPostValue:[self stringForFlashType] forKey:@"flashType"];
   [request setData:archivedData forKey:@"backupFile"];
-  [request startSynchronous];
+  [request startAsynchronous];
 }
 
 //! Backup the user's data to our API, currently set's and set membership only
-+ (void) backupUserData
+- (void) backupUserData
 {
   if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated] == YES)
   {
@@ -163,7 +224,7 @@
 }
 
 //! Returns an NSData containing the serialized associative array
-+ (NSData*) serializedDataForUserSets
+- (NSData*) serializedDataForUserSets
 {
   NSMutableDictionary* cardDict = [NSMutableDictionary dictionary];
   for (Tag* tag in [TagPeer retrieveMyTagList])
@@ -183,4 +244,46 @@
   return archivedData;
 }
 
+#pragma mark -
+#pragma mark ASIHTTPRequest Response
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+  NSString* responseType = [[request userInfo] objectForKey:@"requestType"];
+
+  if(responseType == @"backup")
+  {
+    [self didBackupUserData];
+  }
+  else if(responseType == @"restore")
+  {
+    [self _installDataFromResponse: request];
+  }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+  NSString* responseType = [[request userInfo] objectForKey:@"requestType"];
+  NSError *error = [request error];
+  
+  if(responseType == @"backup")
+  {
+    [self didFailToBackupUserDataWithError:error];
+  }
+  else if(responseType == @"restore")
+  {
+    [self didFailToRestoreUserDateWithError:error];
+  }
+}
+
+#pragma mark -
+#pragma mark Memory Management
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
 @end
+
+NSString * const LWEBackupManagerErrorDomain  = @"LWEBackupManagerErrorDomain";

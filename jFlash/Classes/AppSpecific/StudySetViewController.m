@@ -10,11 +10,13 @@
 #import "StudySetWordsViewController.h"
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
-#import "BackupManager.h"
 #import "LWEJanrainLoginManager.h"
 
+NSInteger const kBackupConfirmationAlertTag = 10;
+NSInteger const kRestoreConfirmationAlertTag = 11;
+
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar;
+@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager;
 
 /** 
  * Customized initializer - returns UITableView group as self.view
@@ -28,6 +30,7 @@
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
     self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
     searching = NO;
+    self.backupManager = [[BackupManager alloc] initWithDelegate:self];
     selectedTagId = -1;
   }
   return self;
@@ -237,7 +240,7 @@
   }
   else
   {
-    if (self.navigationController.topViewController == self.navigationController.visibleViewController)
+    if (self.navigationController.topViewController == self.navigationController.visibleViewController && self.groupId == 0)
     {
       return 3; // only show the 3rd view if we are at the top of the stack
     }
@@ -445,16 +448,27 @@
   {
     if (indexPath.row == 0)
     {
-      [BackupManager backupUserData];
+      [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Backup Custom Sets", @"StudySetViewController")
+                                         message:NSLocalizedString(@"We will now backup your custom sets. This will overwrite any backup that may already be stored.", @"StudySetViewController")
+                                              ok:NSLocalizedString(@"Do It!", @"StudySetViewController") 
+                                          cancel:NSLocalizedString(@"No Thanks.", @"StudySetViewController") 
+                                        delegate:self 
+                                             tag:kBackupConfirmationAlertTag];
     }
     else if (indexPath.row == 1)
     {
-      [BackupManager restoreUserData];
+      [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Restore Custom Sets", @"StudySetViewController")
+                                         message:NSLocalizedString(@"We will now restore your custom sets from our server. This will add words and sets not already found, but will NOT remove any words or sets on this device.", @"StudySetViewController")
+                                              ok:NSLocalizedString(@"Make it so." , @"StudySetViewController")
+                                          cancel:NSLocalizedString(@"Maybe later." , @"StudySetViewController")
+                                        delegate:self 
+                                             tag:kRestoreConfirmationAlertTag];
     }
     else if (indexPath.row == 2)
     {
       [[LWEJanrainLoginManager sharedLWEJanrainLoginManager] logout];
     }
+    
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     [self reloadTableData];
   }
@@ -517,9 +531,22 @@
   // This is the OK button
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
-    [[self tableView] reloadData];
-    [[self activityIndicator] startAnimating];
-    [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
+    if (alertView.tag == kBackupConfirmationAlertTag)
+    {
+      [[self activityIndicator] startAnimating];
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:.3]; // need to give this method a chance to finish or the modal doesn't work
+    }
+    else if (alertView.tag == kRestoreConfirmationAlertTag)
+    {
+      [[self activityIndicator] startAnimating];
+      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:.3];
+    }
+    else 
+    {
+      [[self tableView] reloadData];
+      [[self activityIndicator] startAnimating];
+      [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
+    }
     return;
   }
   else 
@@ -528,6 +555,46 @@
   }
 }
 
+#pragma mark -
+#pragma mark BackupManager Delegate
+
+- (void)didBackupUserData
+{
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") 
+                                     message:NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
+  
+  [[self activityIndicator] stopAnimating];
+}
+
+- (void)didFailToBackupUserDataWithError:(NSError *)error
+{
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Could Not Restore", @"BackupFailed") 
+                                     message:[NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]]];
+  [[self activityIndicator] stopAnimating];
+}
+
+- (void)didRestoreUserData
+{
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") 
+                                     message:NSLocalizedString(@"Your data has been restored successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
+  [[self activityIndicator] stopAnimating];
+  [self reloadTableData];
+}
+
+- (void)didFailToRestoreUserDateWithError:(NSError *)error
+{
+  if ([error code] == kDataNotFound && [error domain] == LWEBackupManagerErrorDomain)
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
+                                       message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
+  }
+  else // show the other error (we don't know what this will be)
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Could Not Restore", @"RestoreFailed") 
+                                       message:[NSString stringWithFormat:@"Sorry about this! We couldn't restore because: %@", [error localizedDescription]]];
+  }
+  [[self activityIndicator] stopAnimating];
+}
 
 #pragma mark -
 #pragma mark Search Bar delegate methods
@@ -640,6 +707,7 @@
 //  self.tableView = nil;
   [self setActivityIndicator:nil];
   [self setSearchBar:nil];
+  [self setBackupManager:nil];
   [super dealloc];
 }
 

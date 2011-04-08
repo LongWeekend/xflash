@@ -12,12 +12,13 @@
 #import "TagPeer.h"
 #import "GroupPeer.h"
 #import <MessageUI/MFMailComposeViewController.h>
+#import "BackupManager.h"
 
 #define SECTION_BACKUP 2
 #define SECTION_TAG 1
 #define SECTION_GROUP 0
 
-@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate>
+@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
 {
   UIBarButtonItem *_addButton;
   UIButton *searchOverlayBtn;
@@ -38,5 +39,6 @@
 @property (nonatomic, retain) NSMutableArray *subgroupArray;
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (retain) BackupManager *backupManager;
 
 @end
