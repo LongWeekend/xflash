@@ -190,6 +190,15 @@
 	return tmpTags;
 }
 
+//! Gets system Tag objects as array
++ (NSMutableArray*) retrieveUserTagList
+{
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 OR tag_id = 0 ORDER BY utag_name ASC"];
+  NSMutableArray* tmpTags = [TagPeer retrieveTagListWithSQL:sql];
+	[sql release];
+	return tmpTags;
+}
+
 
 //! Gets system Tag objects that have card in them - as array
 + (NSMutableArray*) retrieveSysTagListContainingCard:(Card*)card

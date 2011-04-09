@@ -42,6 +42,7 @@
 - (void) addCardToActiveSet:(Card *)card;
 - (void) setCardCount:(int) count;
 - (NSMutableArray *) combineCardIds;
+- (NSInteger) groupId;
 
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;

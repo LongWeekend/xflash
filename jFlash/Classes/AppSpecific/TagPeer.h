@@ -19,8 +19,9 @@
 + (BOOL) checkMembership: (NSInteger) cardId tagId:(NSInteger) tagId;
 + (NSMutableArray*) membershipListForCardId: (NSInteger) cardId;
 + (NSMutableArray*) retrieveTagListWithSQL: (NSString*) sql;
-+ (NSMutableArray*) retrieveMyTagList;
++ (NSMutableArray*) retrieveMyTagList; // this is not actually all of the user tags
 + (NSMutableArray*) retrieveSysTagList;
++ (NSMutableArray*) retrieveUserTagList;
 + (NSMutableArray*) retrieveSysTagListContainingCard:(Card*)card;
 + (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId;
 + (NSMutableArray*) retrieveTagListLike: (NSString*)string;

@@ -109,7 +109,7 @@
 }
 
 //! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
-- (int) _getTagIdForName: (NSString *) tagName AndId: (NSNumber *) key  {
+- (int) _getTagIdForName: (NSString *) tagName AndId: (NSNumber *) key AndGroup: (NSNumber *) group  {
   int tagId;
   if (key == [NSNumber numberWithInt:0])
     {
@@ -121,7 +121,7 @@
       Tag* existingTag = [TagPeer retrieveTagByName:tagName];
       if (existingTag.tagId == 0) // no tag, create one
       {
-        tagId = [TagPeer createTag:tagName withOwner:0];
+        tagId = [TagPeer createTag:tagName withOwner:[group intValue]];
       }
       else // just use the existing tag
       {
@@ -147,7 +147,10 @@
     // the first oject is the tag name
     NSString* tagName = [objEnumerator nextObject];
     
-    int tagId = [self _getTagIdForName: tagName AndId: key];
+    // the second object is the group id
+    NSNumber* groupId = [objEnumerator nextObject]; 
+    
+    int tagId = [self _getTagIdForName: tagName AndId: key AndGroup: groupId];
     
     // the rest are card ids, so add them to the tag we just made
     NSArray* cards = [CardPeer retrieveCardIdsForTagId:tagId];
@@ -227,11 +230,12 @@
 - (NSData*) serializedDataForUserSets
 {
   NSMutableDictionary* cardDict = [NSMutableDictionary dictionary];
-  for (Tag* tag in [TagPeer retrieveMyTagList])
+  for (Tag* tag in [TagPeer retrieveUserTagList])
   {
     NSMutableArray* cards = [CardPeer retrieveCardIdsForTagId:tag.tagId];
     NSMutableArray* cardIdsAndTagName = [NSMutableArray array];
     [cardIdsAndTagName addObject:tag.tagName];
+    [cardIdsAndTagName addObject:[NSNumber numberWithInt:[tag groupId]]];
     for (Card* card in cards)
     {
       [cardIdsAndTagName addObject:[NSNumber numberWithInt:card.cardId]];

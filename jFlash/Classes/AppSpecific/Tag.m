@@ -23,6 +23,23 @@
 	return self;
 }
 
+/**
+ * Gets the group for this tag and returns the id
+ */
+- (NSInteger) groupId
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tagId];
+	FMResultSet *rs = [[db dao] executeQuery:sql];
+  NSInteger groupId;
+	while ([rs next]) 
+  {
+    groupId = [rs intForColumn:@"group_id"];
+	}
+	[rs close];
+	[sql release];
+  return groupId;
+}
 
 /**
  * Calculates next card level based on current performance & Tag progress
