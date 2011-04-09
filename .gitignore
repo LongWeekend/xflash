@@ -2,3 +2,4 @@ jFlash/build/*
 jFlash/sql/*
 GraphicAssets/
 crunchytoast_npedia-new/
+*.pyc
