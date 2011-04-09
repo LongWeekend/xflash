@@ -568,8 +568,23 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
 
 - (void)didFailToBackupUserDataWithError:(NSError *)error
 {
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Could Not Restore", @"BackupFailed") 
-                                     message:[NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]]];
+  NSString* errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
+  
+  // overwrite the default error message if it's from the server
+  if ([error domain] == NetworkRequestErrorDomain)
+  {
+    switch ([error code]) // these should be http codes
+    {
+      case 503:
+        errorMessage = @"The service is temporaily unavailable. Please try again later. Sorry!";
+        break;
+      case 500:
+        errorMessage = @"Something went wrong on the server. We will try to fix it in a jiffy!";
+      default:
+        break;
+    }
+  }
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
   [[self activityIndicator] stopAnimating];
 }
 

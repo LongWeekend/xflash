@@ -253,11 +253,33 @@
 
   if(responseType == @"backup")
   {
-    [self didBackupUserData];
+    if ([request responseStatusCode] != 200)
+    {
+      NSError* error = [NSError errorWithDomain:NetworkRequestErrorDomain
+                                           code:[request responseStatusCode] 
+                                       userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
+      
+      [self didFailToBackupUserDataWithError:error];
+    }
+    else 
+    {
+      [self didBackupUserData];
+    }
   }
   else if(responseType == @"restore")
   {
-    [self _installDataFromResponse: request];
+    if ([request responseStatusCode] != 200)
+    {
+      NSError* error = [NSError errorWithDomain:NetworkRequestErrorDomain
+                                           code:[request responseStatusCode] 
+                                       userInfo:[NSDictionary dictionaryWithObject:[request responseStatusMessage] forKey:NSLocalizedDescriptionKey]];
+      
+      [self didFailToBackupUserDataWithError:error];
+    }
+    else
+    {
+      [self _installDataFromResponse: request];
+    }
   }
 }
 
