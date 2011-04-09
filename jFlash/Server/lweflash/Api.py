@@ -13,6 +13,7 @@ from gaesessions import get_current_session
 import logging, urllib, urllib2
 import User, model
 from django.utils import simplejson
+from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 
 class AuthorizeHandler(webapp.RequestHandler):
   """Receive the POST from a client with our user's login information."""
@@ -89,7 +90,11 @@ class UploadBackupHandler(webapp.RequestHandler):
       backup.flashType = self.request.get('flashType')
       backup.user = session['me']
     backup.backupFile = self.request.get('backupFile')
-    backup.put()
+    try:
+      backup.put()
+    except CapabilityDisabledError:
+      self.error(503)
+      pass
     
 class GetBackupHandler(webapp.RequestHandler):
   """ Returns a backup file or 404 if it doesn't exist"""

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		91A705B71350CE6200AB18D8 /* gaeunit.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = gaeunit.py; sourceTree = "<group>"; };
+		91A705BE1350D5B200AB18D8 /* CapabilityHook.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = CapabilityHook.py; sourceTree = "<group>"; };
+		91A705BF1350D69A00AB18D8 /* TestUtils.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = TestUtils.py; sourceTree = "<group>"; };
 		91E5328213425B1E009DC5A4 /* Api.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = Api.py; sourceTree = "<group>"; };
 		91E5328613425FCF009DC5A4 /* model.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = model.py; sourceTree = "<group>"; };
 		91E53287134261A1009DC5A4 /* User.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = User.py; sourceTree = "<group>"; };
@@ -22,15 +25,18 @@
 		91E53274134255E7009DC5A4 = {
 			isa = PBXGroup;
 			children = (
-				91E533001343720E009DC5A4 /* app.yaml */,
 				91E533011343720E009DC5A4 /* gaesessions */,
-				91E533031343720E009DC5A4 /* main.py */,
-				91E533041343720E009DC5A4 /* Security.py */,
-				91E5328213425B1E009DC5A4 /* Api.py */,
 				91E532891342ADA9009DC5A4 /* appengine_config.py */,
+				91E5328213425B1E009DC5A4 /* Api.py */,
+				91E533001343720E009DC5A4 /* app.yaml */,
+				91A705B71350CE6200AB18D8 /* gaeunit.py */,
 				91E5328813427DB6009DC5A4 /* LWEFlashConstants.py */,
+				91E533031343720E009DC5A4 /* main.py */,
 				91E5328613425FCF009DC5A4 /* model.py */,
+				91E533041343720E009DC5A4 /* Security.py */,
 				91E53287134261A1009DC5A4 /* User.py */,
+				91A705BE1350D5B200AB18D8 /* CapabilityHook.py */,
+				91A705BF1350D69A00AB18D8 /* TestUtils.py */,
 			);
 			sourceTree = "<group>";
 		};

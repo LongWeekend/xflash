@@ -1,6 +1,7 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import logging, Api
+import TestUtils
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
@@ -15,7 +16,8 @@ def main():
                                           ('/api/authorize', Api.AuthorizeHandler),
                                           ('/api/logout', Api.Logout),
                                           ('/api/getBackup', Api.GetBackupHandler),
-                                          ('/api/uploadBackup', Api.UploadBackupHandler)
+                                          ('/api/uploadBackup', Api.UploadBackupHandler),
+                                          ('/test/set-readonly-db-mode', TestUtils.MakeReadOnly),
                                         ],
                                         debug=True)
     util.run_wsgi_app(application)
