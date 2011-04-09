@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2424111C11F6F46600D535D7 /* TweetWordAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111711F6F46600D535D7 /* TweetWordAuthController.m */; };
 		2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
 		2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
