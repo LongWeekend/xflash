@@ -393,6 +393,12 @@
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
 		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
+		913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
+		913D48341353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
+		913D48531353C099008A4649 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
+		913D48541353C099008A4649 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
+		913D48661353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
+		913D48671353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
 		913EEF8B130800F300EBCF87 /* puny.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF71130800F300EBCF87 /* puny.c */; };
 		913EEF8D130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF8E130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
@@ -1061,6 +1067,12 @@
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		913D48071353A3E0008A4649 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LWE+JRProvidersController.h"; sourceTree = "<group>"; };
+		913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LWE+JRProvidersController.m"; sourceTree = "<group>"; };
+		913D48511353C099008A4649 /* JRWebViewController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRWebViewController+LWE.h"; sourceTree = "<group>"; };
+		913D48521353C099008A4649 /* JRWebViewController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRWebViewController+LWE.m"; sourceTree = "<group>"; };
+		913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRUserLandingController+LWE.h"; sourceTree = "<group>"; };
+		913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRUserLandingController+LWE.m"; sourceTree = "<group>"; };
 		913EEF71130800F300EBCF87 /* puny.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = puny.c; sourceTree = "<group>"; };
 		913EEF72130800F300EBCF87 /* puny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = puny.h; sourceTree = "<group>"; };
 		913EEF76130800F300EBCF87 /* nameprep_bidi_lcat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameprep_bidi_lcat.h; sourceTree = "<group>"; };
@@ -1620,6 +1632,7 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				913D48301353BE26008A4649 /* LWEJanrain */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				49EE8D90134EC15300EC6B0E /* LWE */,
 				91CA7222133D216C008A89A8 /* JREngage */,
@@ -1921,6 +1934,20 @@
 			);
 			name = Reachability;
 			path = "External/asi-http-request/External/Reachability";
+			sourceTree = "<group>";
+		};
+		913D48301353BE26008A4649 /* LWEJanrain */ = {
+			isa = PBXGroup;
+			children = (
+				913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */,
+				913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */,
+				913D48511353C099008A4649 /* JRWebViewController+LWE.h */,
+				913D48521353C099008A4649 /* JRWebViewController+LWE.m */,
+				913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */,
+				913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */,
+			);
+			name = LWEJanrain;
+			path = External/LWEJanrain;
 			sourceTree = "<group>";
 		};
 		913EEF6C130800F300EBCF87 /* IFUnicodeURL */ = {
@@ -3266,6 +3293,9 @@
 				49EE97B2134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B4134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48081353A3E0008A4649 /* Reachability.m in Sources */,
+				913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */,
+				913D48531353C099008A4649 /* JRWebViewController+LWE.m in Sources */,
+				913D48661353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3418,6 +3448,9 @@
 				49EE97B3134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B5134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48091353A3E0008A4649 /* Reachability.m in Sources */,
+				913D48341353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */,
+				913D48541353C099008A4649 /* JRWebViewController+LWE.m in Sources */,
+				913D48671353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
