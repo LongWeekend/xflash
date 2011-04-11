@@ -292,8 +292,6 @@
 		49EE95FD134EC15800EC6B0E /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE90C9134EC15400EC6B0E /* SBJsonParser.m */; };
 		49EE95FE134EC15800EC6B0E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE90CB134EC15400EC6B0E /* SBJsonWriter.m */; };
 		49EE95FF134EC15800EC6B0E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE90CB134EC15400EC6B0E /* SBJsonWriter.m */; };
-		49EE96D4134EC15900EC6B0E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9147134EC15500EC6B0E /* Reachability.m */; };
-		49EE96D5134EC15900EC6B0E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9147134EC15500EC6B0E /* Reachability.m */; };
 		49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
@@ -393,6 +391,8 @@
 		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		9129D4F511550A2B0036C4D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 9129D4F411550A2A0036C4D3 /* iTunesArtwork */; };
+		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
+		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913EEF8B130800F300EBCF87 /* puny.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF71130800F300EBCF87 /* puny.c */; };
 		913EEF8D130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF8E130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
@@ -945,8 +945,6 @@
 		49EE90C9134EC15400EC6B0E /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonParser.m; path = Classes/SBJsonParser.m; sourceTree = "<group>"; };
 		49EE90CA134EC15400EC6B0E /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = Classes/SBJsonWriter.h; sourceTree = "<group>"; };
 		49EE90CB134EC15400EC6B0E /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = Classes/SBJsonWriter.m; sourceTree = "<group>"; };
-		49EE9146134EC15500EC6B0E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		49EE9147134EC15500EC6B0E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
 		49EE9149134EC15500EC6B0E /* LWECoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWECoreData.m; sourceTree = "<group>"; };
 		49EE914A134EC15500EC6B0E /* LWEDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDatabase.h; sourceTree = "<group>"; };
@@ -1061,6 +1059,8 @@
 		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		913D48071353A3E0008A4649 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		913EEF71130800F300EBCF87 /* puny.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = puny.c; sourceTree = "<group>"; };
 		913EEF72130800F300EBCF87 /* puny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = puny.h; sourceTree = "<group>"; };
 		913EEF76130800F300EBCF87 /* nameprep_bidi_lcat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nameprep_bidi_lcat.h; sourceTree = "<group>"; };
@@ -1816,7 +1816,6 @@
 			isa = PBXGroup;
 			children = (
 				49EE9096134EC15400EC6B0E /* json-framework */,
-				49EE9145134EC15500EC6B0E /* Reachability2.0 */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -1837,15 +1836,6 @@
 				49EE90CB134EC15400EC6B0E /* SBJsonWriter.m */,
 			);
 			path = "json-framework";
-			sourceTree = "<group>";
-		};
-		49EE9145134EC15500EC6B0E /* Reachability2.0 */ = {
-			isa = PBXGroup;
-			children = (
-				49EE9146134EC15500EC6B0E /* Reachability.h */,
-				49EE9147134EC15500EC6B0E /* Reachability.m */,
-			);
-			path = Reachability2.0;
 			sourceTree = "<group>";
 		};
 		49EE9178134EC15500EC6B0E /* Twitter */ = {
@@ -1889,6 +1879,7 @@
 		49EE97B6134EC34A00EC6B0E /* asi-http-request */ = {
 			isa = PBXGroup;
 			children = (
+				913D48051353A3E0008A4649 /* Reachability */,
 				49EE9792134EC34300EC6B0E /* ASIAuthenticationDialog.h */,
 				49EE9793134EC34300EC6B0E /* ASIAuthenticationDialog.m */,
 				49EE9794134EC34300EC6B0E /* ASICacheDelegate.h */,
@@ -1920,6 +1911,16 @@
 				917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */,
 			);
 			name = PDColoredProgressView;
+			sourceTree = "<group>";
+		};
+		913D48051353A3E0008A4649 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				913D48061353A3E0008A4649 /* Reachability.h */,
+				913D48071353A3E0008A4649 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = "External/asi-http-request/External/Reachability";
 			sourceTree = "<group>";
 		};
 		913EEF6C130800F300EBCF87 /* IFUnicodeURL */ = {
@@ -3222,7 +3223,6 @@
 				49EE95FA134EC15800EC6B0E /* SBJsonBase.m in Sources */,
 				49EE95FC134EC15800EC6B0E /* SBJsonParser.m in Sources */,
 				49EE95FE134EC15800EC6B0E /* SBJsonWriter.m in Sources */,
-				49EE96D4134EC15900EC6B0E /* Reachability.m in Sources */,
 				49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */,
 				49EE96DA134EC15900EC6B0E /* LWEDatabaseTester.m in Sources */,
@@ -3265,6 +3265,7 @@
 				49EE97B0134EC34500EC6B0E /* ASIHTTPRequest.m in Sources */,
 				49EE97B2134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B4134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
+				913D48081353A3E0008A4649 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3374,7 +3375,6 @@
 				49EE95FB134EC15800EC6B0E /* SBJsonBase.m in Sources */,
 				49EE95FD134EC15800EC6B0E /* SBJsonParser.m in Sources */,
 				49EE95FF134EC15800EC6B0E /* SBJsonWriter.m in Sources */,
-				49EE96D5134EC15900EC6B0E /* Reachability.m in Sources */,
 				49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D9134EC15900EC6B0E /* LWEDatabase.m in Sources */,
 				49EE96DB134EC15900EC6B0E /* LWEDatabaseTester.m in Sources */,
@@ -3417,6 +3417,7 @@
 				49EE97B1134EC34500EC6B0E /* ASIHTTPRequest.m in Sources */,
 				49EE97B3134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B5134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
+				913D48091353A3E0008A4649 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3551,6 +3552,7 @@
 					APP_STORE_FINAL,
 				);
 				INFOPLIST_FILE = "jFlash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
@@ -3562,6 +3564,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = jFlash;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
 		};
