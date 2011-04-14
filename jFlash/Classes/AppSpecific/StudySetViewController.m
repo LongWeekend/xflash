@@ -18,6 +18,13 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager;
 
+enum Sections {
+  kGroupsSection = 0,
+  kSetsSection = 1,
+  kBackupSection = 2
+};
+
+
 /** 
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
@@ -227,6 +234,17 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
   }
 }
 
+/**
+ * Checks if this is the top view controller of this stack
+ */
+- (BOOL) _isTopView 
+{
+  if (self.navigationController.topViewController == self.navigationController.visibleViewController && self.groupId == 0) 
+  {
+    return YES;
+  }
+  return NO;
+}
 
 /**
  * If we are searching, there is only one section (returns 1)
@@ -240,12 +258,22 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
   }
   else
   {
-    if (self.navigationController.topViewController == self.navigationController.visibleViewController && self.groupId == 0)
+    if ([self _isTopView])
     {
-      return 3; // only show the 3rd view if we are at the top of the stack
+      return 3; // only show the 3rd section if we are at the top of the stack
     }
     return 2;
   }
+}
+
+
+-(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+{
+  if ([self _isTopView] && section == kBackupSection)
+  {
+    return @"Backup Custom Sets";
+  }
+  return NULL;
 }
 
 
@@ -268,11 +296,11 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
   }
   else
   {
-    if (section == SECTION_TAG)
+    if (section == kSetsSection)
     {
       return [self.tagArray count];
     }
-    else if(section == SECTION_BACKUP)
+    else if(section == kBackupSection)
     {
       if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
       {
@@ -298,7 +326,7 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
   ThemeManager *tm = [ThemeManager sharedThemeManager];
 
   // Study Set Cells (ie. a tag)
-  if (indexPath.section == SECTION_TAG || searching)
+  if (indexPath.section == kSetsSection || searching)
   {
     
     // No search results msg
@@ -352,16 +380,16 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
       }
     }
   }
-  else if (indexPath.section == SECTION_BACKUP)
+  else if (indexPath.section == kBackupSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"backup" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     if (indexPath.row == 0)
     {
-      cell.textLabel.text = NSLocalizedString(@"Backup Custom Sets", @"StudyViewController.backupUserSets");
+      cell.textLabel.text = NSLocalizedString(@"Backup Now", @"StudyViewController.backupUserSets");
     }
     else if (indexPath.row == 1)
     {
-      cell.textLabel.text = NSLocalizedString(@"Restore Custom Sets", @"StudyViewController.backupUserSets");
+      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.backupUserSets");
     }
     else
     {
@@ -419,7 +447,7 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
 /** UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group) */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == SECTION_TAG || searching)
+  if (indexPath.section == kSetsSection || searching)
   {
     if([tagArray count] > 0)
     {
@@ -444,7 +472,7 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
       [lclTableView deselectRowAtIndexPath:indexPath animated:NO];    
     }
   }
-  else if (indexPath.section == SECTION_BACKUP)
+  else if (indexPath.section == kBackupSection)
   {
     if (indexPath.row == 0)
     {
@@ -491,7 +519,7 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
  */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == SECTION_TAG || searching)
+  if (indexPath.section == kSetsSection || searching)
   {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
@@ -510,7 +538,7 @@ NSInteger const kRestoreConfirmationAlertTag = 11;
 - (BOOL)tableView:(UITableView *)lclTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // Only can edit tags, and user tags at that
-  if (indexPath.section == SECTION_TAG)
+  if (indexPath.section == kSetsSection)
   {
     CurrentState *state = [CurrentState sharedCurrentState];
     Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];

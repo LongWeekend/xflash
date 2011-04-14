@@ -14,10 +14,6 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "BackupManager.h"
 
-#define SECTION_BACKUP 2
-#define SECTION_TAG 1
-#define SECTION_GROUP 0
-
 @interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
 {
   UIBarButtonItem *_addButton;
