@@ -12,11 +12,6 @@
 @interface UpdateManager ()
 + (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
-// JFLASH 1.0 -> 1.1
-+ (void) _createDefaultSettingsFor10:(NSUserDefaults*) settings;
-+ (void) _updateSettingsFrom10to11:(NSUserDefaults*) settings;
-+ (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults*) settings;
-
 // JFLASH 1.1 -> 1.2
 + (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings;
 + (void) _updateSettingsFrom11to12:(NSUserDefaults*) settings;
@@ -29,19 +24,6 @@
 @end
 
 @implementation UpdateManager
-
-/** DEBUG ONLY method to simulate settings for JFlash 1.0 **/
-+ (void) _createDefaultSettingsFor10:(NSUserDefaults*) settings
-{
-  [settings setInteger:0 forKey:@"first_load"];
-  [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
-  [settings setInteger:DEFAULT_USER_ID forKey:APP_USER];
-  [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
-  [settings setValue:SET_THEME_FIRE forKey:APP_THEME];
-  [settings setValue:SET_READING_BOTH forKey:APP_READING];
-  [settings setBool:YES forKey:@"db_did_finish_copying"];
-  [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
-}
 
 /** DEBUG ONLY method to simulate settings for JFlash 1.1 **/
 + (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings
@@ -68,50 +50,6 @@
 
 #pragma mark -
 #pragma mark Update and Check Settings Region. 
-
-#pragma mark Version 1.1
-
-/** Updates NSUserDefaults to use 1.1 values instead of 1.0 values (adds new ones, removes old first_load) */
-+ (void) _updateSettingsFrom10to11:(NSUserDefaults*) settings
-{
-  // Definitely first-run after an upgrade.  Update their settings so we have the right stuff for 1.1
-  // Update plugins so we have that we have that information
-	LWE_LOG(@"This is the updated setting from 1.0 to 1.1");
-  [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
-  [settings setValue:JFLASH_VERSION_1_0 forKey:APP_DATA_VERSION];
-  [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
-  [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
-  [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];    
-  
-  // This is what first load is called now
-  [settings setBool:YES forKey:@"settings_already_created"];
-  
-  // Now get rid of first_load so it doesn't confuse us
-  [settings removeObjectForKey:@"first_load"];                        
-  
-  // This tells the CurrentState initializeSettings method that we're down with the new settings
-  [settings setValue:JFLASH_VERSION_1_1 forKey:APP_SETTINGS_VERSION];
-}
-
-
-/** Returns YES if the user needs to update settings from 1.0 to 1.1, otherwise returns NO */
-+ (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults*) settings
-{
-  // First things first, do a check to make sure this is not a first run after an upgrade
-  if ([settings objectForKey:@"first_load"])
-  {
-    // Aha, this is a JFlash 1.0 install, now double check the data version
-    if ([settings objectForKey:@"data_version"] == nil)
-    {
-      return YES;
-    }
-    else
-    {
-      [NSException raise:@"first load exists, but data version does too!" format:@"data_version value was: %@",[settings objectForKey:@"data_version"]];
-    }
-  }
-  return NO;
-}
 
 #pragma mark Version 1.2
 
@@ -292,16 +230,7 @@
 
 + (void) performMigrations:(NSUserDefaults*)settings
 {
-  // DEBUG: this simulates being a JFlash 1.0 upgrade user
-  //[self _createDefaultSettingsFor10:settings];
-  
   // NOTE THAT THESE ARE MIGRATIONS!!!!  They should be in order of version.
-  
-  // If we are JFlash 1.0 settings, update to 1.1
-  if ([UpdateManager _needs10to11SettingsUpdate:settings])
-  {
-    [UpdateManager _updateSettingsFrom10to11:settings];
-  }
 	
   //In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
   //The plugin manager will have to look at the last time it gets updated, there is the list of the data
