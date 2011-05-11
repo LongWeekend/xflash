@@ -478,7 +478,7 @@ enum Sections {
     {
       [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Backup Custom Sets", @"StudySetViewController")
                                          message:NSLocalizedString(@"We will now backup your custom sets. This will overwrite any backup that may already be stored.", @"StudySetViewController")
-                                              ok:NSLocalizedString(@"Do It!", @"StudySetViewController") 
+                                              ok:NSLocalizedString(@"Backup!", @"StudySetViewController") 
                                           cancel:NSLocalizedString(@"No Thanks.", @"StudySetViewController") 
                                         delegate:self 
                                              tag:kBackupConfirmationAlertTag];
@@ -487,7 +487,7 @@ enum Sections {
     {
       [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Restore Custom Sets", @"StudySetViewController")
                                          message:NSLocalizedString(@"We will now restore your custom sets from our server. This will add words and sets not already found, but will NOT remove any words or sets on this device.", @"StudySetViewController")
-                                              ok:NSLocalizedString(@"Make it so." , @"StudySetViewController")
+                                              ok:NSLocalizedString(@"Restore!" , @"StudySetViewController")
                                           cancel:NSLocalizedString(@"Maybe later." , @"StudySetViewController")
                                         delegate:self 
                                              tag:kRestoreConfirmationAlertTag];
