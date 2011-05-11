@@ -13,6 +13,7 @@
 #import "ThemeManager.h"
 #import "DatabaseUpdateManager.h"
 #import "NSURL+IFUnicodeURL.h"
+#import "TapjoyConnect.h"
 
 @implementation jFlashAppDelegate
 
@@ -67,6 +68,9 @@
     // add analytics if this is live
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
+  
+    // Connect to Tapjoy for CPI ads
+    [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];
   #endif
   
   // Find out if we are a multitasking environment
