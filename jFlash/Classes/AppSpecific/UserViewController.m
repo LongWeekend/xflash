@@ -7,7 +7,6 @@
 //
 
 #import "UserViewController.h"
-#import "LoadingView.h"
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
 #import "UserPeer.h"
@@ -204,7 +203,7 @@
 - (void) activateUserWithModal:(User*) user
 {
   // First, show the loading modal, then call selector after delay to allow it to appear
-  self.loadingView = [LoadingView loadingViewInView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  self.loadingView = [LWELoadingView loadingView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
@@ -221,7 +220,7 @@
   // Activate, post notification and dismiss view
   [user activateUser];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"userWasChanged" object:self];
-  [self.loadingView removeView];
+  [self.loadingView removeFromSuperview];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
