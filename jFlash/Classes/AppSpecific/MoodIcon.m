@@ -29,34 +29,6 @@
   
   // TODO : setting the labels doesn't fit in the text sbubble.
   [percentCorrectLabel setText:[NSString stringWithFormat:@"%.0f%%",tmpRatio]];
-  /* Save the animations for version 1.1
-   if(currentRightStreak == 3)
-   {
-   shouldAnimate = YES;
-   //TODO: get rid of these path names all over this code - use [ThemeManager 
-   tmpStr = [tm elementWithCurrentTheme:[transitionHHArray objectAtIndex:0]];
-   transitionHHAnimationArray = [[NSArray alloc] initWithObjects:
-      [UIImage imageNamed:[tm elementWithCurrentTheme:@"positive/hh-on-a-roll.png"]],
-      [UIImage imageNamed:[tm elementWithCurrentTheme:@"positive/hh-smug.png"]], nil]; 
-   //    [percentCorrectLabel setText:[NSString stringWithString:@"3 in a row!"]];
-   }
-   else if (currentRightStreak == 5)
-   {
-   tmpStr = [tm elementWithCurrentTheme:[transitionHHArray objectAtIndex:1]];
-   //    [percentCorrectLabel setText:[NSString stringWithString:@"5 in a row!"]];
-   }
-   else if (currentWrongStreak == 4)
-   {
-   tmpStr = [tm elementWithCurrentTheme:[transitionHHArray objectAtIndex:2]];
-   //    [percentCorrectLabel setText:[NSString stringWithString:@"3 wrong!"]];
-   }
-   else if (currentWrongStreak == 5)
-   {
-   tmpStr = [tm elementWithCurrentTheme:[transitionHHArray objectAtIndex:3]];
-   //    [percentCorrectLabel setText:[NSString stringWithString:@"5 wrong!"]];
-   }
-   else
-   { */
   
   // default when no animtions
   tmpStr = [tm elementWithCurrentTheme:[hotHeadsArray objectAtIndex:0]];
@@ -74,19 +46,6 @@
     a -= 10;
     loopCount++;
   }
-  /*}
-   // do the animation if we are in a streak
-   if(shouldAnimate)
-   {
-   hhAnimationView.animationImages = transitionHHAnimationArray;
-   hhAnimationView.animationRepeatCount = 15;
-   
-   // shut off the mood icon because we animate in the same spot
-   [moodIconBtn setHidden:YES];
-   [hhAnimationView startAnimating];
-   [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(reenableHH) userInfo:nil repeats:NO];
-   [transitionHHAnimationArray release];
-   } */
   
   [moodIconBtn setBackgroundImage:[UIImage imageNamed:tmpStr] forState:UIControlStateNormal];
   [hotHeadsArray release];

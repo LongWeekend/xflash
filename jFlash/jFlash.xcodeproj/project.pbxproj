@@ -13,7 +13,6 @@
 		2424111C11F6F46600D535D7 /* TweetWordAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111711F6F46600D535D7 /* TweetWordAuthController.m */; };
 		2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111911F6F46600D535D7 /* TweetWordViewController.m */; };
 		2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */; };
-		2424112211F6F48100D535D7 /* TweetWordAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424111F11F6F48100D535D7 /* TweetWordAuthController.xib */; };
 		2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
@@ -87,7 +86,6 @@
 		496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
 		496C7AB51263270B004B6B90 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
 		496C7AB61263270B004B6B90 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
-		496C7AB71263270B004B6B90 /* form-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5D11D0F291008565F8 /* form-background.png */; };
 		496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
 		496C7ABB1263270B004B6B90 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07081116456D00DB5E02 /* 13-target.png */; };
@@ -105,14 +103,11 @@
 		496C7AC81263270B004B6B90 /* practice-btn-unrevealed.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07451116456D00DB5E02 /* practice-btn-unrevealed.png */; };
 		496C7AC91263270B004B6B90 /* practice-btn-wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07461116456D00DB5E02 /* practice-btn-wrong.png */; };
 		496C7ACA1263270B004B6B90 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
-		496C7ACB1263270B004B6B90 /* progressbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07481116456D00DB5E02 /* progressbar-bg.png */; };
 		496C7ACC1263270B004B6B90 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		496C7ACD1263270B004B6B90 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */; };
 		496C7ACE1263270B004B6B90 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 491FE3AB11BA0B5700A54F51 /* twitter-icon.png */; };
 		496C7ACF1263270B004B6B90 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
-		496C7AD01263270B004B6B90 /* twitter-bird-64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */; };
 		496C7AD11263270B004B6B90 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
-		496C7AD21263270B004B6B90 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		496C7AD31263270B004B6B90 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		496C7AD612632725004B6B90 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
@@ -136,7 +131,6 @@
 		496C7AE912632730004B6B90 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		496C7AEA12632730004B6B90 /* StudySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6D11AB844300016BD2 /* StudySetView.xib */; };
 		496C7AEB12632730004B6B90 /* StudyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6E11AB844300016BD2 /* StudyView.xib */; };
-		496C7AEC12632730004B6B90 /* TweetWordAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424111F11F6F48100D535D7 /* TweetWordAuthController.xib */; };
 		496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
@@ -231,18 +225,15 @@
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
-		499006CA120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4993AF871278024800872875 /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF801278024800872875 /* facebook-icon@2x.png */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
 		4993AF891278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
-		4993AF8B1278024800872875 /* twitter-bird-64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF841278024800872875 /* twitter-bird-64x64@2x.png */; };
 		4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
 		4993AF8D1278024800872875 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF861278024800872875 /* twitter-icon@2x.png */; };
 		4993AF8E1278024800872875 /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF801278024800872875 /* facebook-icon@2x.png */; };
 		4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
 		4993AF901278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
-		4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF841278024800872875 /* twitter-bird-64x64@2x.png */; };
 		4993AF931278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
 		4993AF941278024800872875 /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF861278024800872875 /* twitter-icon@2x.png */; };
 		4993AFE21278120000872875 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
@@ -408,6 +399,10 @@
 		9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
 		9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
+		9179E4261384FFB000A7739B /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
+		9179E4271384FFB000A7739B /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
+		9179E44D1385021E00A7739B /* table-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E44C1385021E00A7739B /* table-background.jpg */; };
+		9179E44E1385021E00A7739B /* table-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E44C1385021E00A7739B /* table-background.jpg */; };
 		917A5BDD11AB7C4600016BD2 /* AddStudySetInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */; };
 		917A5BDE11AB7C4600016BD2 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC611AB7C4600016BD2 /* AddTagViewController.m */; };
 		917A5BE011AB7C4600016BD2 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
@@ -491,11 +486,6 @@
 		91CA731D133D216C008A89A8 /* icon_openid_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7273133D216C008A89A8 /* icon_openid_30x30.png */; };
 		91CA731F133D216C008A89A8 /* icon_twitter_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7275133D216C008A89A8 /* icon_twitter_30x30.png */; };
 		91CA7322133D216C008A89A8 /* icon_yahoo_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7278133D216C008A89A8 /* icon_yahoo_30x30.png */; };
-		91CA7323133D216C008A89A8 /* icon_bw_facebook_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727A133D216C008A89A8 /* icon_bw_facebook_30x30.png */; };
-		91CA7324133D216C008A89A8 /* icon_bw_linkedin_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727B133D216C008A89A8 /* icon_bw_linkedin_30x30.png */; };
-		91CA7327133D216C008A89A8 /* icon_bw_myspace_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727E133D216C008A89A8 /* icon_bw_myspace_30x30.png */; };
-		91CA7329133D216C008A89A8 /* icon_bw_twitter_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7280133D216C008A89A8 /* icon_bw_twitter_30x30.png */; };
-		91CA732A133D216C008A89A8 /* icon_bw_yahoo_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7281133D216C008A89A8 /* icon_bw_yahoo_30x30.png */; };
 		91CA732D133D216C008A89A8 /* logo_facebook_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7285133D216C008A89A8 /* logo_facebook_280x65.png */; };
 		91CA732F133D216C008A89A8 /* logo_google_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7287133D216C008A89A8 /* logo_google_280x65.png */; };
 		91CA7331133D216C008A89A8 /* logo_linkedin_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7289133D216C008A89A8 /* logo_linkedin_280x65.png */; };
@@ -533,10 +523,6 @@
 		91CA7360133D216C008A89A8 /* icon_openid_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72BC133D216C008A89A8 /* icon_openid_30x30@2x.png */; };
 		91CA7362133D216C008A89A8 /* icon_twitter_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72BE133D216C008A89A8 /* icon_twitter_30x30@2x.png */; };
 		91CA7365133D216C008A89A8 /* icon_yahoo_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C1133D216C008A89A8 /* icon_yahoo_30x30@2x.png */; };
-		91CA7366133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C3133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png */; };
-		91CA7367133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C4133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png */; };
-		91CA736C133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C9133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png */; };
-		91CA736D133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72CA133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png */; };
 		91CA7370133D216C008A89A8 /* logo_facebook_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72CE133D216C008A89A8 /* logo_facebook_280x65@2x.png */; };
 		91CA7372133D216C008A89A8 /* logo_google_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72D0133D216C008A89A8 /* logo_google_280x65@2x.png */; };
 		91CA7374133D216C008A89A8 /* logo_linkedin_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72D2133D216C008A89A8 /* logo_linkedin_280x65@2x.png */; };
@@ -590,11 +576,6 @@
 		91CA73BD133D216C008A89A8 /* icon_openid_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7273133D216C008A89A8 /* icon_openid_30x30.png */; };
 		91CA73BF133D216C008A89A8 /* icon_twitter_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7275133D216C008A89A8 /* icon_twitter_30x30.png */; };
 		91CA73C2133D216C008A89A8 /* icon_yahoo_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7278133D216C008A89A8 /* icon_yahoo_30x30.png */; };
-		91CA73C3133D216C008A89A8 /* icon_bw_facebook_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727A133D216C008A89A8 /* icon_bw_facebook_30x30.png */; };
-		91CA73C4133D216C008A89A8 /* icon_bw_linkedin_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727B133D216C008A89A8 /* icon_bw_linkedin_30x30.png */; };
-		91CA73C7133D216C008A89A8 /* icon_bw_myspace_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA727E133D216C008A89A8 /* icon_bw_myspace_30x30.png */; };
-		91CA73C9133D216C008A89A8 /* icon_bw_twitter_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7280133D216C008A89A8 /* icon_bw_twitter_30x30.png */; };
-		91CA73CA133D216C008A89A8 /* icon_bw_yahoo_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7281133D216C008A89A8 /* icon_bw_yahoo_30x30.png */; };
 		91CA73CD133D216C008A89A8 /* logo_facebook_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7285133D216C008A89A8 /* logo_facebook_280x65.png */; };
 		91CA73CF133D216C008A89A8 /* logo_google_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7287133D216C008A89A8 /* logo_google_280x65.png */; };
 		91CA73D1133D216C008A89A8 /* logo_linkedin_280x65.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7289133D216C008A89A8 /* logo_linkedin_280x65.png */; };
@@ -632,10 +613,6 @@
 		91CA7400133D216C008A89A8 /* icon_openid_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72BC133D216C008A89A8 /* icon_openid_30x30@2x.png */; };
 		91CA7402133D216C008A89A8 /* icon_twitter_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72BE133D216C008A89A8 /* icon_twitter_30x30@2x.png */; };
 		91CA7405133D216C008A89A8 /* icon_yahoo_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C1133D216C008A89A8 /* icon_yahoo_30x30@2x.png */; };
-		91CA7406133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C3133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png */; };
-		91CA7407133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C4133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png */; };
-		91CA740C133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72C9133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png */; };
-		91CA740D133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72CA133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png */; };
 		91CA7410133D216C008A89A8 /* logo_facebook_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72CE133D216C008A89A8 /* logo_facebook_280x65@2x.png */; };
 		91CA7412133D216C008A89A8 /* logo_google_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72D0133D216C008A89A8 /* logo_google_280x65@2x.png */; };
 		91CA7414133D216C008A89A8 /* logo_linkedin_280x65@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72D2133D216C008A89A8 /* logo_linkedin_280x65@2x.png */; };
@@ -661,7 +638,6 @@
 		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
 		91D3CD2D11D08C71008565F8 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
-		91D3CF5E11D0F291008565F8 /* form-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF5D11D0F291008565F8 /* form-background.png */; };
 		91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
 		91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
 		91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
@@ -688,10 +664,8 @@
 		D35B07831116456D00DB5E02 /* practice-btn-unrevealed.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07451116456D00DB5E02 /* practice-btn-unrevealed.png */; };
 		D35B07841116456D00DB5E02 /* practice-btn-wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07461116456D00DB5E02 /* practice-btn-wrong.png */; };
 		D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
-		D35B07861116456D00DB5E02 /* progressbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07481116456D00DB5E02 /* progressbar-bg.png */; };
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
-		D36CE185111AA1BE0073D809 /* table-background.png in Resources */ = {isa = PBXBuildFile; fileRef = D36CE184111AA1BE0073D809 /* table-background.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 /* End PBXBuildFile section */
@@ -706,7 +680,6 @@
 		2424111911F6F46600D535D7 /* TweetWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordViewController.m; path = AppSpecific/TweetWordViewController.m; sourceTree = "<group>"; };
 		2424111A11F6F46600D535D7 /* TweetWordXAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetWordXAuthController.h; path = AppSpecific/TweetWordXAuthController.h; sourceTree = "<group>"; };
 		2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordXAuthController.m; path = AppSpecific/TweetWordXAuthController.m; sourceTree = "<group>"; };
-		2424111F11F6F48100D535D7 /* TweetWordAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordAuthController.xib; path = XIBs/TweetWordAuthController.xib; sourceTree = "<group>"; };
 		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
 		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
 		24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = LWETUserDB.xcdatamodel; path = Classes/Reusable/LWE/Twitter/LWETUserDB.xcdatamodel; sourceTree = "<group>"; };
@@ -794,12 +767,10 @@
 		496C7C2912633684004B6B90 /* jFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlash_Constants.m; path = AppSpecific/jFlash/jFlash_Constants.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
-		499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64.png"; path = "Assets/twitter-bird-64x64.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF801278024800872875 /* facebook-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon@2x.png"; path = "Assets/facebook-icon@2x.png"; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
-		4993AF841278024800872875 /* twitter-bird-64x64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird-64x64@2x.png"; path = "Assets/twitter-bird-64x64@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
 		4993AF861278024800872875 /* twitter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon@2x.png"; path = "Assets/twitter-icon@2x.png"; sourceTree = "<group>"; };
 		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
@@ -993,6 +964,8 @@
 		9177287711C0BF0B00A90071 /* save-changes-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn.png"; path = "Assets/save-changes-btn.png"; sourceTree = "<group>"; };
 		9177287811C0BF0B00A90071 /* select-user-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn.png"; path = "Assets/select-user-btn.png"; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
+		9179E4251384FFB000A7739B /* form-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "form-background.jpg"; path = "Assets/form-background.jpg"; sourceTree = "<group>"; };
+		9179E44C1385021E00A7739B /* table-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "table-background.jpg"; path = "Assets/table-background.jpg"; sourceTree = "<group>"; };
 		917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddStudySetInputViewController.h; path = AppSpecific/AddStudySetInputViewController.h; sourceTree = "<group>"; };
 		917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddStudySetInputViewController.m; path = AppSpecific/AddStudySetInputViewController.m; sourceTree = "<group>"; };
 		917A5BC511AB7C4600016BD2 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddTagViewController.h; path = AppSpecific/AddTagViewController.h; sourceTree = "<group>"; };
@@ -1129,11 +1102,6 @@
 		91CA7273133D216C008A89A8 /* icon_openid_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_openid_30x30.png; sourceTree = "<group>"; };
 		91CA7275133D216C008A89A8 /* icon_twitter_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_twitter_30x30.png; sourceTree = "<group>"; };
 		91CA7278133D216C008A89A8 /* icon_yahoo_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_yahoo_30x30.png; sourceTree = "<group>"; };
-		91CA727A133D216C008A89A8 /* icon_bw_facebook_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bw_facebook_30x30.png; sourceTree = "<group>"; };
-		91CA727B133D216C008A89A8 /* icon_bw_linkedin_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bw_linkedin_30x30.png; sourceTree = "<group>"; };
-		91CA727E133D216C008A89A8 /* icon_bw_myspace_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bw_myspace_30x30.png; sourceTree = "<group>"; };
-		91CA7280133D216C008A89A8 /* icon_bw_twitter_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bw_twitter_30x30.png; sourceTree = "<group>"; };
-		91CA7281133D216C008A89A8 /* icon_bw_yahoo_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bw_yahoo_30x30.png; sourceTree = "<group>"; };
 		91CA7285133D216C008A89A8 /* logo_facebook_280x65.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_facebook_280x65.png; sourceTree = "<group>"; };
 		91CA7287133D216C008A89A8 /* logo_google_280x65.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_google_280x65.png; sourceTree = "<group>"; };
 		91CA7289133D216C008A89A8 /* logo_linkedin_280x65.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_linkedin_280x65.png; sourceTree = "<group>"; };
@@ -1171,10 +1139,6 @@
 		91CA72BC133D216C008A89A8 /* icon_openid_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_openid_30x30@2x.png"; sourceTree = "<group>"; };
 		91CA72BE133D216C008A89A8 /* icon_twitter_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_twitter_30x30@2x.png"; sourceTree = "<group>"; };
 		91CA72C1133D216C008A89A8 /* icon_yahoo_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yahoo_30x30@2x.png"; sourceTree = "<group>"; };
-		91CA72C3133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bw_facebook_30x30@2x.png"; sourceTree = "<group>"; };
-		91CA72C4133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bw_linkedin_30x30@2x.png"; sourceTree = "<group>"; };
-		91CA72C9133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bw_twitter_30x30@2x.png"; sourceTree = "<group>"; };
-		91CA72CA133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bw_yahoo_30x30@2x.png"; sourceTree = "<group>"; };
 		91CA72CE133D216C008A89A8 /* logo_facebook_280x65@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_facebook_280x65@2x.png"; sourceTree = "<group>"; };
 		91CA72D0133D216C008A89A8 /* logo_google_280x65@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_google_280x65@2x.png"; sourceTree = "<group>"; };
 		91CA72D2133D216C008A89A8 /* logo_linkedin_280x65@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_linkedin_280x65@2x.png"; sourceTree = "<group>"; };
@@ -1203,7 +1167,6 @@
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91D3CD2C11D08C71008565F8 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
-		91D3CF5D11D0F291008565F8 /* form-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "form-background.png"; path = "Assets/form-background.png"; sourceTree = "<group>"; };
 		91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow.png"; path = "Assets/candy-btn-yellow.png"; sourceTree = "<group>"; };
 		91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-textarea-bg.png"; path = "Assets/what-to-fix-textarea-bg.png"; sourceTree = "<group>"; };
 		91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-moodicon-quizzical.png"; path = "Assets/what-to-fix-moodicon-quizzical.png"; sourceTree = "<group>"; };
@@ -1230,10 +1193,8 @@
 		D35B07451116456D00DB5E02 /* practice-btn-unrevealed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed.png"; path = "Assets/practice-btn-unrevealed.png"; sourceTree = "<group>"; };
 		D35B07461116456D00DB5E02 /* practice-btn-wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-wrong.png"; path = "Assets/practice-btn-wrong.png"; sourceTree = "<group>"; };
 		D35B07471116456D00DB5E02 /* practice-btns-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btns-bg.png"; path = "Assets/practice-btns-bg.png"; sourceTree = "<group>"; };
-		D35B07481116456D00DB5E02 /* progressbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "progressbar-bg.png"; path = "Assets/progressbar-bg.png"; sourceTree = "<group>"; };
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
-		D36CE184111AA1BE0073D809 /* table-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "table-background.png"; path = "Assets/table-background.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1576,15 +1537,15 @@
 		49D996D612705D5000D176D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9179E44C1385021E00A7739B /* table-background.jpg */,
+				9179E4251384FFB000A7739B /* form-background.jpg */,
 				49B527B8127680F000EE64D3 /* Stars */,
 				49B527B7127680DB00EE64D3 /* Tab Bar Icons */,
 				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
 				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
-				91D3CF5D11D0F291008565F8 /* form-background.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
 				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
-				D35B07481116456D00DB5E02 /* progressbar-bg.png */,
 				491FE3DE11BA0EAF00A54F51 /* facebook-icon.png */,
 				4993AF801278024800872875 /* facebook-icon@2x.png */,
 				499006D1120FC44600601CD2 /* speech_bubble.png */,
@@ -1592,10 +1553,7 @@
 				4993AF861278024800872875 /* twitter-icon@2x.png */,
 				499006A8120FBBF400601CD2 /* twitter-bird.png */,
 				4993AF851278024800872875 /* twitter-bird@2x.png */,
-				499006C9120FC13C00601CD2 /* twitter-bird-64x64.png */,
-				4993AF841278024800872875 /* twitter-bird-64x64@2x.png */,
 				D35B07711116456D00DB5E02 /* scroll-more.png */,
-				D36CE184111AA1BE0073D809 /* table-background.png */,
 				D35B07721116456D00DB5E02 /* talkbubble-ft.png */,
 				49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */,
 			);
@@ -2015,7 +1973,6 @@
 			children = (
 				91CA7253133D216C008A89A8 /* buttons */,
 				91CA7266133D216C008A89A8 /* icons */,
-				91CA7279133D216C008A89A8 /* icons_bw */,
 				91CA7282133D216C008A89A8 /* logos */,
 				91CA7294133D216C008A89A8 /* other */,
 			);
@@ -2061,18 +2018,6 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
-		91CA7279133D216C008A89A8 /* icons_bw */ = {
-			isa = PBXGroup;
-			children = (
-				91CA727A133D216C008A89A8 /* icon_bw_facebook_30x30.png */,
-				91CA727B133D216C008A89A8 /* icon_bw_linkedin_30x30.png */,
-				91CA727E133D216C008A89A8 /* icon_bw_myspace_30x30.png */,
-				91CA7280133D216C008A89A8 /* icon_bw_twitter_30x30.png */,
-				91CA7281133D216C008A89A8 /* icon_bw_yahoo_30x30.png */,
-			);
-			path = icons_bw;
-			sourceTree = "<group>";
-		};
 		91CA7282133D216C008A89A8 /* logos */ = {
 			isa = PBXGroup;
 			children = (
@@ -2105,7 +2050,6 @@
 			children = (
 				91CA729C133D216C008A89A8 /* buttons */,
 				91CA72AF133D216C008A89A8 /* icons */,
-				91CA72C2133D216C008A89A8 /* icons_bw */,
 				91CA72CB133D216C008A89A8 /* logos */,
 				91CA72DD133D216C008A89A8 /* other */,
 			);
@@ -2149,17 +2093,6 @@
 				91CA72C1133D216C008A89A8 /* icon_yahoo_30x30@2x.png */,
 			);
 			path = icons;
-			sourceTree = "<group>";
-		};
-		91CA72C2133D216C008A89A8 /* icons_bw */ = {
-			isa = PBXGroup;
-			children = (
-				91CA72C3133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png */,
-				91CA72C4133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png */,
-				91CA72C9133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png */,
-				91CA72CA133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png */,
-			);
-			path = icons_bw;
 			sourceTree = "<group>";
 		};
 		91CA72CB133D216C008A89A8 /* logos */ = {
@@ -2276,7 +2209,6 @@
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				91860A941370F17E002F00DB /* ToolbarPicker.xib */,
-				2424111F11F6F48100D535D7 /* TweetWordAuthController.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
@@ -2472,10 +2404,8 @@
 				D35B07831116456D00DB5E02 /* practice-btn-unrevealed.png in Resources */,
 				D35B07841116456D00DB5E02 /* practice-btn-wrong.png in Resources */,
 				D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */,
-				D35B07861116456D00DB5E02 /* progressbar-bg.png in Resources */,
 				D35B07881116456D00DB5E02 /* scroll-more.png in Resources */,
 				D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */,
-				D36CE185111AA1BE0073D809 /* table-background.png in Resources */,
 				D3309B0F1123C7D800B73E8E /* help in Resources */,
 				917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */,
 				917A5C7211AB844300016BD2 /* HelpView.xib in Resources */,
@@ -2502,7 +2432,6 @@
 				49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
-				91D3CF5E11D0F291008565F8 /* form-background.png in Resources */,
 				91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */,
 				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
 				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
@@ -2510,7 +2439,6 @@
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
 				D322368611D370B900B1AF15 /* plugin-resources in Resources */,
-				2424112211F6F48100D535D7 /* TweetWordAuthController.xib in Resources */,
 				2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */,
 				2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */,
 				496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */,
@@ -2518,7 +2446,6 @@
 				496BE55411EC5320003AB713 /* SearchView.xib in Resources */,
 				24EA0D37120016FC0081CBBA /* availablePluginForDownload.plist in Resources */,
 				499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */,
-				499006CA120FC13C00601CD2 /* twitter-bird-64x64.png in Resources */,
 				499006D2120FC44600601CD2 /* speech_bubble.png in Resources */,
 				49A942641263AF4500086F4C /* star-deselected.png in Resources */,
 				49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */,
@@ -2551,7 +2478,6 @@
 				4993AF871278024800872875 /* facebook-icon@2x.png in Resources */,
 				4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */,
 				4993AF891278024800872875 /* select-user-btn@2x.png in Resources */,
-				4993AF8B1278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
 				4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */,
 				4993AF8D1278024800872875 /* twitter-icon@2x.png in Resources */,
 				9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */,
@@ -2579,11 +2505,6 @@
 				91CA73BD133D216C008A89A8 /* icon_openid_30x30.png in Resources */,
 				91CA73BF133D216C008A89A8 /* icon_twitter_30x30.png in Resources */,
 				91CA73C2133D216C008A89A8 /* icon_yahoo_30x30.png in Resources */,
-				91CA73C3133D216C008A89A8 /* icon_bw_facebook_30x30.png in Resources */,
-				91CA73C4133D216C008A89A8 /* icon_bw_linkedin_30x30.png in Resources */,
-				91CA73C7133D216C008A89A8 /* icon_bw_myspace_30x30.png in Resources */,
-				91CA73C9133D216C008A89A8 /* icon_bw_twitter_30x30.png in Resources */,
-				91CA73CA133D216C008A89A8 /* icon_bw_yahoo_30x30.png in Resources */,
 				91CA73CD133D216C008A89A8 /* logo_facebook_280x65.png in Resources */,
 				91CA73CF133D216C008A89A8 /* logo_google_280x65.png in Resources */,
 				91CA73D1133D216C008A89A8 /* logo_linkedin_280x65.png in Resources */,
@@ -2621,10 +2542,6 @@
 				91CA7400133D216C008A89A8 /* icon_openid_30x30@2x.png in Resources */,
 				91CA7402133D216C008A89A8 /* icon_twitter_30x30@2x.png in Resources */,
 				91CA7405133D216C008A89A8 /* icon_yahoo_30x30@2x.png in Resources */,
-				91CA7406133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png in Resources */,
-				91CA7407133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png in Resources */,
-				91CA740C133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png in Resources */,
-				91CA740D133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png in Resources */,
 				91CA7410133D216C008A89A8 /* logo_facebook_280x65@2x.png in Resources */,
 				91CA7412133D216C008A89A8 /* logo_google_280x65@2x.png in Resources */,
 				91CA7414133D216C008A89A8 /* logo_linkedin_280x65@2x.png in Resources */,
@@ -2645,6 +2562,8 @@
 				49EE9706134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.xib in Resources */,
 				91860A951370F17E002F00DB /* ToolbarPicker.xib in Resources */,
 				91E40EDA1373D145009B3167 /* downloadedPlugin.plist in Resources */,
+				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
+				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2660,7 +2579,6 @@
 				496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				496C7AB51263270B004B6B90 /* what-to-fix-textarea-bg.png in Resources */,
 				496C7AB61263270B004B6B90 /* candy-btn-yellow.png in Resources */,
-				496C7AB71263270B004B6B90 /* form-background.png in Resources */,
 				496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */,
 				496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */,
 				496C7ABB1263270B004B6B90 /* 13-target.png in Resources */,
@@ -2678,14 +2596,11 @@
 				496C7AC81263270B004B6B90 /* practice-btn-unrevealed.png in Resources */,
 				496C7AC91263270B004B6B90 /* practice-btn-wrong.png in Resources */,
 				496C7ACA1263270B004B6B90 /* practice-btns-bg.png in Resources */,
-				496C7ACB1263270B004B6B90 /* progressbar-bg.png in Resources */,
 				496C7ACC1263270B004B6B90 /* speech_bubble.png in Resources */,
 				496C7ACD1263270B004B6B90 /* facebook-icon.png in Resources */,
 				496C7ACE1263270B004B6B90 /* twitter-icon.png in Resources */,
 				496C7ACF1263270B004B6B90 /* twitter-bird.png in Resources */,
-				496C7AD01263270B004B6B90 /* twitter-bird-64x64.png in Resources */,
 				496C7AD11263270B004B6B90 /* scroll-more.png in Resources */,
-				496C7AD21263270B004B6B90 /* table-background.png in Resources */,
 				496C7AD31263270B004B6B90 /* talkbubble-ft.png in Resources */,
 				496C7AD812632730004B6B90 /* ActionBarViewController.xib in Resources */,
 				496C7AD912632730004B6B90 /* AlgorithmSettingsView.xib in Resources */,
@@ -2706,7 +2621,6 @@
 				496C7AE912632730004B6B90 /* SentenceView.xib in Resources */,
 				496C7AEA12632730004B6B90 /* StudySetView.xib in Resources */,
 				496C7AEB12632730004B6B90 /* StudyView.xib in Resources */,
-				496C7AEC12632730004B6B90 /* TweetWordAuthController.xib in Resources */,
 				496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */,
 				496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */,
 				496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */,
@@ -2737,7 +2651,6 @@
 				4993AF8E1278024800872875 /* facebook-icon@2x.png in Resources */,
 				4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */,
 				4993AF901278024800872875 /* select-user-btn@2x.png in Resources */,
-				4993AF921278024800872875 /* twitter-bird-64x64@2x.png in Resources */,
 				4993AF931278024800872875 /* twitter-bird@2x.png in Resources */,
 				4993AF941278024800872875 /* twitter-icon@2x.png in Resources */,
 				4993AFE21278120000872875 /* help in Resources */,
@@ -2765,11 +2678,6 @@
 				91CA731D133D216C008A89A8 /* icon_openid_30x30.png in Resources */,
 				91CA731F133D216C008A89A8 /* icon_twitter_30x30.png in Resources */,
 				91CA7322133D216C008A89A8 /* icon_yahoo_30x30.png in Resources */,
-				91CA7323133D216C008A89A8 /* icon_bw_facebook_30x30.png in Resources */,
-				91CA7324133D216C008A89A8 /* icon_bw_linkedin_30x30.png in Resources */,
-				91CA7327133D216C008A89A8 /* icon_bw_myspace_30x30.png in Resources */,
-				91CA7329133D216C008A89A8 /* icon_bw_twitter_30x30.png in Resources */,
-				91CA732A133D216C008A89A8 /* icon_bw_yahoo_30x30.png in Resources */,
 				91CA732D133D216C008A89A8 /* logo_facebook_280x65.png in Resources */,
 				91CA732F133D216C008A89A8 /* logo_google_280x65.png in Resources */,
 				91CA7331133D216C008A89A8 /* logo_linkedin_280x65.png in Resources */,
@@ -2807,10 +2715,6 @@
 				91CA7360133D216C008A89A8 /* icon_openid_30x30@2x.png in Resources */,
 				91CA7362133D216C008A89A8 /* icon_twitter_30x30@2x.png in Resources */,
 				91CA7365133D216C008A89A8 /* icon_yahoo_30x30@2x.png in Resources */,
-				91CA7366133D216C008A89A8 /* icon_bw_facebook_30x30@2x.png in Resources */,
-				91CA7367133D216C008A89A8 /* icon_bw_linkedin_30x30@2x.png in Resources */,
-				91CA736C133D216C008A89A8 /* icon_bw_twitter_30x30@2x.png in Resources */,
-				91CA736D133D216C008A89A8 /* icon_bw_yahoo_30x30@2x.png in Resources */,
 				91CA7370133D216C008A89A8 /* logo_facebook_280x65@2x.png in Resources */,
 				91CA7372133D216C008A89A8 /* logo_google_280x65@2x.png in Resources */,
 				91CA7374133D216C008A89A8 /* logo_linkedin_280x65@2x.png in Resources */,
@@ -2830,6 +2734,8 @@
 				91CA7389133D216C008A89A8 /* JREngage-Info.plist in Resources */,
 				49EE9707134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.xib in Resources */,
 				91860A961370F17E002F00DB /* ToolbarPicker.xib in Resources */,
+				9179E4271384FFB000A7739B /* form-background.jpg in Resources */,
+				9179E44E1385021E00A7739B /* table-background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
