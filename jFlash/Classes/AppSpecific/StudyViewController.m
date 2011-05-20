@@ -238,7 +238,7 @@
   
   // Set up background based on theme
   // TODO: iPad customization
-  NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.png"];
+  NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
   [practiceBgImage setImage:[UIImage imageNamed:pathToBGImage]];
   
   // Update mood icon (is this necessary to do here??)

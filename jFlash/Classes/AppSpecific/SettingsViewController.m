@@ -233,9 +233,9 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     UIImageView* tmpView = cell.imageView;
     // TODO: iPad customization!
     if(key == APP_TWITTER)
-      tmpView.image = [UIImage imageNamed:@"twitter-icon.png"];
+      tmpView.image = [UIImage imageNamed:@"icon_twitter_30x30.png"];
     else
-      tmpView.image = [UIImage imageNamed:@"facebook-icon.png"];
+      tmpView.image = [UIImage imageNamed:@"icon_facebook_30x30.png"];
   }
   else if (key == APP_ALGORITHM)
   {

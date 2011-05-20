@@ -116,5 +116,5 @@ extern NSString * const HTML_FOOTER;
 #define kCellTopOffset			12.0
 
 // default background image for UITableViews
-#define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.png"
+#define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.jpg"
 
