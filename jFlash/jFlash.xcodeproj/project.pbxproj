@@ -55,6 +55,8 @@
 		494783771275901E000F9328 /* practice-btn-next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783751275901E000F9328 /* practice-btn-next@2x.png */; };
 		494783781275901E000F9328 /* practice-btn-last@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783741275901E000F9328 /* practice-btn-last@2x.png */; };
 		494783791275901E000F9328 /* practice-btn-next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783751275901E000F9328 /* practice-btn-next@2x.png */; };
+		494F7FA3138B8E5C00094AE2 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F7FA2138B8E5C00094AE2 /* libsqlite3.a */; };
+		494F7FA5138B8E6400094AE2 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F7FA4138B8E6400094AE2 /* libsqlite3.a */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
@@ -195,7 +197,6 @@
 		496C7B3B126327B6004B6B90 /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5411AB835400016BD2 /* EditableTableViewCell.m */; };
 		496C7B3C126327B7004B6B90 /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5611AB835400016BD2 /* SourceCell.m */; };
 		496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
-		496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		496C7B6F12632831004B6B90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		496C7B7012632838004B6B90 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		496C7B7112632839004B6B90 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
@@ -403,7 +404,6 @@
 		917A5C0011AB7CD700016BD2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
 		917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
-		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		917A5C5711AB835400016BD2 /* CellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4E11AB835400016BD2 /* CellTextField.m */; };
 		917A5C5811AB835400016BD2 /* CellTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5011AB835400016BD2 /* CellTextView.m */; };
@@ -642,19 +642,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		493D5371138B598D00DDC242 /* PBXContainerItemProxy */ = {
+		494F7F9C138B8E1D00094AE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D370E65E10DFB9D000BE6835;
-			remoteInfo = sqlite;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 494F7F81138B8DA000094AE2;
+			remoteInfo = sqlite3;
 		};
-		493D5373138B599300DDC242 /* PBXContainerItemProxy */ = {
+		494F7F9E138B8E4E00094AE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D370E65E10DFB9D000BE6835;
-			remoteInfo = sqlite;
+			remoteGlobalIDString = 494F7F80138B8DA000094AE2;
+			remoteInfo = sqlite3;
+		};
+		494F7FA0138B8E5500094AE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 494F7F80138B8DA000094AE2;
+			remoteInfo = sqlite3;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -724,7 +731,9 @@
 		4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed@2x.png"; path = "Assets/practice-btn-unrevealed@2x.png"; sourceTree = "<group>"; };
 		494783741275901E000F9328 /* practice-btn-last@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-last@2x.png"; path = "Assets/practice-btn-last@2x.png"; sourceTree = "<group>"; };
 		494783751275901E000F9328 /* practice-btn-next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-next@2x.png"; path = "Assets/practice-btn-next@2x.png"; sourceTree = "<group>"; };
-		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlite3.xcodeproj; path = External/sqlite/sqlite3/sqlite3.xcodeproj; sourceTree = "<group>"; };
+		494F7FA2138B8E5C00094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
+		494F7FA4138B8E6400094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
@@ -968,9 +977,6 @@
 		917A5C0C11AB807800016BD2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
 		917A5C2311AB814B00016BD2 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = Reusable/PDColoredProgressView/PDColoredProgressView.h; sourceTree = "<group>"; };
 		917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = Reusable/PDColoredProgressView/PDColoredProgressView.m; sourceTree = "<group>"; };
-		917A5C3311AB81B600016BD2 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = External/sqlite/sqlite3.c; sourceTree = "<group>"; };
-		917A5C3411AB81B600016BD2 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = External/sqlite/sqlite3.h; sourceTree = "<group>"; };
-		917A5C3511AB81B600016BD2 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = External/sqlite/sqlite3ext.h; sourceTree = "<group>"; };
 		917A5C3711AB826000016BD2 /* CustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.h; sourceTree = "<group>"; };
 		917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.m; sourceTree = "<group>"; };
 		917A5C3911AB826000016BD2 /* GradientCustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientCustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/GradientCustomCellBackgroundView.h; sourceTree = "<group>"; };
@@ -1157,6 +1163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494F7FA3138B8E5C00094AE2 /* libsqlite3.a in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -1177,6 +1184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494F7FA5138B8E6400094AE2 /* libsqlite3.a in Frameworks */,
 				493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */,
 				496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */,
 				496C7B821263286D004B6B90 /* libz.1.2.3.dylib in Frameworks */,
@@ -1190,13 +1198,6 @@
 				496C7B8A1263286E004B6B90 /* Security.framework in Frameworks */,
 				496C7B8B1263286E004B6B90 /* CFNetwork.framework in Frameworks */,
 				496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D370E65D10DFB9D000BE6835 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,7 +1220,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* jFlash.app */,
-				494D6C7811AE1C5F006DADF1 /* libsqlite.a */,
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
 			);
 			name = Products;
@@ -1312,6 +1312,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				494F7FA4138B8E6400094AE2 /* libsqlite3.a */,
+				494F7FA2138B8E5C00094AE2 /* libsqlite3.a */,
 				493D5378138B5F7A00DDC242 /* MessageUI.framework */,
 				49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */,
 				917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */,
@@ -1337,6 +1339,14 @@
 				DA8B6A430FB111A200DE105C /* XIBs */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		494F7F96138B8E1D00094AE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				494F7F9D138B8E1D00094AE2 /* libsqlite3.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4965FD39126F6422000AC280 /* Action Bar */ = {
@@ -1758,9 +1768,7 @@
 		917A5BA611AB7B1C00016BD2 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
-				917A5C3311AB81B600016BD2 /* sqlite3.c */,
-				917A5C3411AB81B600016BD2 /* sqlite3.h */,
-				917A5C3511AB81B600016BD2 /* sqlite3ext.h */,
+				494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */,
 			);
 			name = sqlite;
 			sourceTree = "<group>";
@@ -2190,16 +2198,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		D370E65B10DFB9D000BE6835 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* jFlash */ = {
 			isa = PBXNativeTarget;
@@ -2212,7 +2210,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				493D5374138B599300DDC242 /* PBXTargetDependency */,
+				494F7FA1138B8E5500094AE2 /* PBXTargetDependency */,
 			);
 			name = jFlash;
 			productName = jFlash;
@@ -2230,29 +2228,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				493D5372138B598D00DDC242 /* PBXTargetDependency */,
+				494F7F9F138B8E4E00094AE2 /* PBXTargetDependency */,
 			);
 			name = cFlash;
 			productName = cFlash;
 			productReference = 496C7A6C126325FD004B6B90 /* cFlash.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D370E65E10DFB9D000BE6835 /* sqlite */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D370E66410DFB9F000BE6835 /* Build configuration list for PBXNativeTarget "sqlite" */;
-			buildPhases = (
-				D370E65B10DFB9D000BE6835 /* Headers */,
-				D370E65C10DFB9D000BE6835 /* Sources */,
-				D370E65D10DFB9D000BE6835 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = sqlite;
-			productName = sqlite;
-			productReference = 494D6C7811AE1C5F006DADF1 /* libsqlite.a */;
-			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -2291,14 +2272,29 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* jFlash */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 494F7F96138B8E1D00094AE2 /* Products */;
+					ProjectRef = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* jFlash */,
 				496C7A6B126325FD004B6B90 /* cFlash */,
-				D370E65E10DFB9D000BE6835 /* sqlite */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		494F7F9D138B8E1D00094AE2 /* libsqlite3.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsqlite3.a;
+			remoteRef = 494F7F9C138B8E1D00094AE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -2667,7 +2663,6 @@
 				917A5C0011AB7CD700016BD2 /* User.m in Sources */,
 				917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */,
 				917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */,
-				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
 				917A5C5711AB835400016BD2 /* CellTextField.m in Sources */,
 				917A5C5811AB835400016BD2 /* CellTextView.m in Sources */,
@@ -2860,7 +2855,6 @@
 				496C7B3A126327B6004B6B90 /* DisplayCell.m in Sources */,
 				496C7B3B126327B6004B6B90 /* EditableTableViewCell.m in Sources */,
 				496C7B3C126327B7004B6B90 /* SourceCell.m in Sources */,
-				496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */,
 				496C7B6F12632831004B6B90 /* main.m in Sources */,
 				496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */,
 				490B23411277BCE100CF3484 /* FMDatabase.m in Sources */,
@@ -2938,25 +2932,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D370E65C10DFB9D000BE6835 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		493D5372138B598D00DDC242 /* PBXTargetDependency */ = {
+		494F7F9F138B8E4E00094AE2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D370E65E10DFB9D000BE6835 /* sqlite */;
-			targetProxy = 493D5371138B598D00DDC242 /* PBXContainerItemProxy */;
+			name = sqlite3;
+			targetProxy = 494F7F9E138B8E4E00094AE2 /* PBXContainerItemProxy */;
 		};
-		493D5374138B599300DDC242 /* PBXTargetDependency */ = {
+		494F7FA1138B8E5500094AE2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D370E65E10DFB9D000BE6835 /* sqlite */;
-			targetProxy = 493D5373138B599300DDC242 /* PBXContainerItemProxy */;
+			name = sqlite3;
+			targetProxy = 494F7FA0138B8E5500094AE2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2975,6 +2962,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_library",
@@ -3003,6 +2991,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_library",
@@ -3026,6 +3015,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3045,6 +3035,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3065,6 +3056,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3106,6 +3098,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
 					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-weak_library",
@@ -3163,36 +3156,6 @@
 			};
 			name = Release;
 		};
-		D370E66010DFB9D200BE6835 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = sqlite;
-			};
-			name = Debug;
-		};
-		D370E66110DFB9D200BE6835 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				PRODUCT_NAME = sqlite;
-			};
-			name = Beta;
-		};
-		D370E66210DFB9D200BE6835 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = sqlite;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3222,16 +3185,6 @@
 				C01FCF4F08A954540054247B /* Debug */,
 				91EA2F5F1041365600AB848E /* Beta */,
 				C01FCF5008A954540054247B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D370E66410DFB9F000BE6835 /* Build configuration list for PBXNativeTarget "sqlite" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D370E66010DFB9D200BE6835 /* Debug */,
-				D370E66110DFB9D200BE6835 /* Beta */,
-				D370E66210DFB9D200BE6835 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
