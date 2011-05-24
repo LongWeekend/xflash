@@ -25,8 +25,12 @@
 // handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  NSString *searchTerm = [[url unicodeAbsoluteString] stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
-  
+  NSString *searchTerm = [url unicodeAbsoluteString];
+  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
+  {
+    searchTerm = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  }
+  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
   if ([self.rootViewController isFinishedLoading])
   {
     [self.rootViewController switchToSearchWithTerm:searchTerm];
