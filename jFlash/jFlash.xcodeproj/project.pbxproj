@@ -216,6 +216,8 @@
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
+		4987D37D138B9A11005052AE /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987D37C138B9A11005052AE /* LWECrashUtils.m */; };
+		4987D37E138B9A11005052AE /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4987D37C138B9A11005052AE /* LWECrashUtils.m */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
@@ -756,6 +758,8 @@
 		496C7C2812633684004B6B90 /* jFlash_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlash_Constants.h; path = AppSpecific/jFlash/jFlash_Constants.h; sourceTree = "<group>"; };
 		496C7C2912633684004B6B90 /* jFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlash_Constants.m; path = AppSpecific/jFlash/jFlash_Constants.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		4987D37B138B9A11005052AE /* LWECrashUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWECrashUtils.h; path = "../../../../../elf/lib/lwe-dev-tools/LWECrashUtils.h"; sourceTree = "<group>"; };
+		4987D37C138B9A11005052AE /* LWECrashUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWECrashUtils.m; path = "../../../../../elf/lib/lwe-dev-tools/LWECrashUtils.m"; sourceTree = "<group>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
@@ -1521,6 +1525,8 @@
 				49EE8DBA134EC15300EC6B0E /* External */,
 				49EE9148134EC15500EC6B0E /* LWECoreData.h */,
 				49EE9149134EC15500EC6B0E /* LWECoreData.m */,
+				4987D37B138B9A11005052AE /* LWECrashUtils.h */,
+				4987D37C138B9A11005052AE /* LWECrashUtils.m */,
 				49EE914A134EC15500EC6B0E /* LWEDatabase.h */,
 				49EE914B134EC15500EC6B0E /* LWEDatabase.m */,
 				49EE914E134EC15500EC6B0E /* LWEDateUtils.h */,
@@ -2782,6 +2788,7 @@
 				913D48661353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */,
 				911D1961137A56C8005C9B55 /* TapjoyConnect.m in Sources */,
 				91F80CAF138619E700A07663 /* JRPublishActivityController.m in Sources */,
+				4987D37D138B9A11005052AE /* LWECrashUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2929,6 +2936,7 @@
 				91F80CB0138619E700A07663 /* JRPublishActivityController.m in Sources */,
 				493D5375138B5BF200DDC242 /* jFlash_Constants.m in Sources */,
 				493D5377138B5E6F00DDC242 /* UpdateManager.m in Sources */,
+				4987D37E138B9A11005052AE /* LWECrashUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

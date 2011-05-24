@@ -9,6 +9,7 @@
 #import "FlurryAPI.h"
 #import "CurrentState.h"
 #import "LWEFile.h"
+#import "LWECrashUtils.h"
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
 #import "DatabaseUpdateManager.h"
@@ -64,17 +65,15 @@
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
-  #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-    // add analytics if this is live
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
-  
-    // Connect to Tapjoy for CPI ads
-    [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];
-  #endif
+  NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);
+
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
+  [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];    // add analytics if this is live
+  [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
+#endif
   
   // Find out if we are a multitasking environment
-  UIDevice* device = [UIDevice currentDevice];
+  UIDevice *device = [UIDevice currentDevice];
   if ([device respondsToSelector:@selector(isMultitaskingSupported)])
   {
 	  //self.backgroundSupported = device.multitaskingSupported;
@@ -118,25 +117,6 @@
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
   
   return YES;
-}
-
-
-//! Flurry exception handler (only installed in final app store version)
-void uncaughtExceptionHandler(NSException *exception)
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  CurrentState *currentState = [CurrentState sharedCurrentState];
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  NSInteger tabIndex = appDelegate.rootViewController.tabBarController.selectedIndex;
-  NSString *debugInfo = [NSString stringWithFormat:
-                         @"DEBUG - Active Tab: %d, Data: %@, Settings: %@, Active Tag: %d, Browse: %@",
-                         tabIndex,
-                         [settings valueForKey:APP_DATA_VERSION],
-                         [settings valueForKey:APP_SETTINGS_VERSION],
-                         [[currentState activeTag] tagId],
-                         [settings valueForKey:APP_MODE]];
-  LWE_LOG(@"%@",debugInfo);
-  [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
 }
 
 
