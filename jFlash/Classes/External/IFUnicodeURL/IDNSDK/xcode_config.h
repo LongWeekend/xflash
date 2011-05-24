@@ -251,7 +251,7 @@ static const UTF16CHAR ULABEL_DELIMITER_LIST[4] = { 0x002E, 0x3002, 0xFF0E, 0xFF
 /*  in the IDN testbed prior to IDNA's publication and the decision to   */
 /*  use Punycode encoding. See race.h for more information.              */
 /*                                                                       */
-#define SUPPORT_RACE                                                  
+//#define SUPPORT_RACE                                                  
 /*                                                                       */
 /*************************************************************************/
 

@@ -9,7 +9,6 @@
 /*                                                                       */
 /*************************************************************************/
 #include "toxxx.h"
-#include "nameprep.h"
 #include "puny.h"
 #include "util.h"
 XcodeBool Xcode_IsIDNADomainDelimiter( const UTF16CHAR * wp )
@@ -273,90 +272,6 @@ int Xcode_ToASCII( const UTF16CHAR *  puzInputString,
      step 3, using a case-insensitive ASCII comparison.
   8. Return the saved copy from step 5.
 **********************************************************************************/
-int Xcode_ToUnicode8( const UCHAR8 *     pzInputString, 
-                      int                iInputSize,
-                      UTF16CHAR *        puzOutputString, 
-                      int *              piOutputSize )
-{
-  int res, i;
-  XcodeBool bHigh = 0;
-  int iConfirmSize = MAX_LABEL_SIZE_8;
-  int iPrepOutputSize = MAX_LABEL_SIZE_32;
-  int iCopySize;
-  UCHAR8 pzConfirmString[MAX_LABEL_SIZE_8];
-  DWORD dwzPrepInputString[MAX_LABEL_SIZE_32];
-  DWORD dwzPrepOutputString[MAX_LABEL_SIZE_32];
-  UCHAR8 pzCopyString[MAX_LABEL_SIZE_8];
-  DWORD dwProhibitedChar = 0;
-  UTF16CHAR suzDecoded[MAX_LABEL_SIZE_16];
-  int iDecodedSize = MAX_LABEL_SIZE_16;
-  /* Basic input validity checks and buffer length checks */
-  if ( pzInputString == 0 || iInputSize <= 0 ) return XCODE_BAD_ARGUMENT_ERROR;
-  if ( puzOutputString == 0 || *piOutputSize <= 0 ) return XCODE_BAD_ARGUMENT_ERROR;
-  if ( iInputSize > MAX_LABEL_SIZE_8 ) return XCODE_BUFFER_OVERFLOW_ERROR;
-  if ( *piOutputSize < MAX_LABEL_SIZE_16 ) return XCODE_BUFFER_OVERFLOW_ERROR;
-  /* ToUnicode never fails.  If any step fails, then the original input
-     sequence is returned immediately in that step. */
-  for ( i = 0; i < iInputSize; i++ ) *(puzOutputString+i) = (UTF16CHAR)*(pzInputString+i);
-  *piOutputSize = iInputSize;
-  /* 1. If all code points in the sequence are in the ASCII range (0..7F)
-        then skip to step 3. */
-  for ( i = 0; i < iInputSize; i++ ) 
-  {
-    if ( *(pzInputString+i) > 0x7F ) 
-    {
-      bHigh = 1;
-      break;
-    }
-  }
-  if ( bHigh == 1 ) 
-  {
-    /* 2. Perform the steps specified in [NAMEPREP] and fail if there 
-          is an error. (If step 3 of ToAscii is also performed here, 
-          it will not affect the overall behavior of ToUnicode, but it 
-          is not necessary.) The AllowUnassigned flag is used in 
-          [NAMEPREP]. */
-  
-    /* Author: This step maps some unicode codepoints to ascii, which is        useful where in some languages "ascii" characters are emulated in
-       higher unicode codepoints. (for example, Japanese half width and 
-       full width codepoints) Here in the 8-bit input routine, ASCII values 
-       greater that 7F are also mapped, so we convert over to 32-bit and        run the input through nameprep. */
-    for ( i = 0; i < iInputSize; i++ ) dwzPrepInputString[i] = (DWORD)*(pzInputString+i);
-    res = Xcode_nameprepString32( dwzPrepInputString, iInputSize, 
-                                dwzPrepOutputString, &iPrepOutputSize, &dwProhibitedChar );
-    if (res != XCODE_SUCCESS) { return res; }
-  
-    for ( i = 0; i < iPrepOutputSize; i++ ) pzCopyString[i] = (UCHAR8)(dwzPrepOutputString[i]);
-    iCopySize = iPrepOutputSize;
-  } else {
-    memcpy( pzCopyString, pzInputString, iInputSize );
-    iCopySize = iInputSize;
-  }
-  
-  /* 3. Verify that the sequence begins with the ACE prefix, and save a
-        copy of the sequence. */
-  
-  /* 4. Remove the ACE prefix. */
-  /* 5. Decode the sequence using the decoding algorithm in [PUNYCODE]
-        and fail if there is an error. Save a copy of the result of
-        this step. */
-  res = Xcode_puny_decodeString( pzCopyString, iCopySize, suzDecoded, &iDecodedSize );
-  if (res != XCODE_SUCCESS) { return res; }
-  /* 6. Apply ToAscii. */
-  res = Xcode_ToASCII( suzDecoded, iDecodedSize, pzConfirmString, &iConfirmSize );
-  if (res != XCODE_SUCCESS) { return res; }
-               
-  /* 7. Verify that the result of step 6 matches the saved copy from
-        step 3, using a case-insensitive ASCII comparison. */
-  if ( memcmp( pzCopyString, pzConfirmString, iConfirmSize ) != 0 )
-  {
-    return XCODE_TOXXX_CIRCLECHECKFAILED;
-  }
-  /* 8. Return the saved copy from step 5. */
-  memcpy( puzOutputString, suzDecoded, iCopySize*2 );
-  *piOutputSize = iDecodedSize;
-  return XCODE_SUCCESS;
-}
 int Xcode_ToUnicode16( const UTF16CHAR * puzInputString, 
                        int               iInputSize,
                        UTF16CHAR *       puzOutputString, 
@@ -409,9 +324,9 @@ int Xcode_ToUnicode16( const UTF16CHAR * puzInputString,
     /* convert UTF16 to 32-bit */
     res = Xcode_convertUTF16To32Bit( puzInputString, iInputSize, dwzPrepInputString, &iPrepInputSize );
     if (res != XCODE_SUCCESS) { return res; }
-    res = Xcode_nameprepString32( dwzPrepInputString, iPrepInputSize, 
-                                dwzPrepOutputString, &iPrepOutputSize, &dwProhibitedChar );
-    if (res != XCODE_SUCCESS) { return res; }
+//    res = Xcode_nameprepString32( dwzPrepInputString, iPrepInputSize, 
+//                                dwzPrepOutputString, &iPrepOutputSize, &dwProhibitedChar );
+//    if (res != XCODE_SUCCESS) { return res; }
   
     for ( i = 0; i < iPrepOutputSize; i++ ) pzCopyString[i] = (UCHAR8)(dwzPrepOutputString[i]);
     iCopySize = iPrepOutputSize;
@@ -537,62 +452,6 @@ int Xcode_DomainToASCII( const UTF16CHAR *  puzInputString,
 *                    length of resulting decoded string on exit.
 *
 **********************************************************************************/
-int Xcode_DomainToUnicode8( const UCHAR8 *     pzInputString, 
-                            int                iInputSize,
-                            UTF16CHAR *        puzOutputString, 
-                            int *              piOutputSize )
-{
-  int i;
-  UTF16CHAR suzDomain[MAX_DOMAIN_SIZE_16];
-  UCHAR8    szInLabel[MAX_LABEL_SIZE_8];
-  UTF16CHAR suzOutLabel[MAX_LABEL_SIZE_16];
-  int lindex = 0;
-  int dindex = 0;
-  int iOutputSize;
-  int delimiterPresent;
-  /* Basic input validity checks and buffer length checks */
-  if ( pzInputString == 0 || iInputSize <= 0 ) return XCODE_BAD_ARGUMENT_ERROR;
-  if ( puzOutputString == 0 || *piOutputSize <= 0 ) return XCODE_BAD_ARGUMENT_ERROR;
-  if ( iInputSize > MAX_DOMAIN_SIZE_8 ) return XCODE_BUFFER_OVERFLOW_ERROR;
-  if ( *piOutputSize < MAX_DOMAIN_SIZE_16 ) return XCODE_BUFFER_OVERFLOW_ERROR;
-  for ( i = 0; i < iInputSize; i++ )
-  {
-    delimiterPresent = 0;
-    /* www.encoded.com */
-    if ( *(pzInputString+i) == LABEL_DELIMITER ) 
-    {
-      delimiterPresent = 1;
-    } else {
-      szInLabel[lindex] = *(pzInputString+i);
-      lindex++;
-    }
-    if ( i == iInputSize - 1 || delimiterPresent == 1 )
-    {
-      /* encode the label and save the result in domain */
-      szInLabel[lindex] = 0;
-      
-      iOutputSize = MAX_LABEL_SIZE_16;
-      if ( Xcode_ToUnicode8( szInLabel, lindex, suzOutLabel, &iOutputSize ) == XCODE_SUCCESS )
-      {
-        if ( dindex + iOutputSize > MAX_DOMAIN_SIZE_16 ) return XCODE_BUFFER_OVERFLOW_ERROR;
-        memcpy( &suzDomain[dindex], suzOutLabel, iOutputSize*2 );
-        dindex = dindex + iOutputSize;
-      }
-      lindex = 0;
-      if ( delimiterPresent == 1 )
-      {
-        suzDomain[dindex] = LABEL_DELIMITER;
-        dindex++;
-      }
-      continue;
-    }
-  }
-  
-  memcpy( puzOutputString, suzDomain, dindex*2 );
-  *piOutputSize = dindex;
-  puzOutputString[dindex] = 0;
-  return XCODE_SUCCESS;
-}
 int Xcode_DomainToUnicode16( const UTF16CHAR *  puzInputString, 
                              int                iInputSize,
                              UTF16CHAR *        puzOutputString, 
