@@ -47,7 +47,7 @@
 - (NSInteger) calculateNextCardLevel
 {
   //-----Internal array consistency-----
-  LWE_ASSERT_EXC((([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
+  LWE_ASSERT_EXC(([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
   //------------------------------------
   
   // control variables
