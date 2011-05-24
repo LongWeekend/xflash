@@ -147,12 +147,7 @@ void uncaughtExceptionHandler(NSException *exception)
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-
-#if APP_TARGET == APP_TARGET_JFLASH
-  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
-#else
-  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
-#endif
+  NSString *filename = LWE_CURRENT_USER_DATABASE;
   
   NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
@@ -183,12 +178,7 @@ void uncaughtExceptionHandler(NSException *exception)
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-
-#if APP_TARGET == APP_TARGET_JFLASH
-  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
-#else
-  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
-#endif
+  NSString *filename = LWE_CURRENT_USER_DATABASE;
 
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {

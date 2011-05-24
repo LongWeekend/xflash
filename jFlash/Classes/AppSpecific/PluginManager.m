@@ -168,7 +168,7 @@
  */
 + (NSDictionary*) preinstalledPlugins;
 {
-  return [NSDictionary dictionaryWithObjectsAndKeys:JFLASH_CURRENT_CARD_DATABASE, CARD_DB_KEY,nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:LWE_CURRENT_CARD_DATABASE, CARD_DB_KEY,nil];
 }
 
 

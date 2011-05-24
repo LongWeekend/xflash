@@ -7,7 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "DatabaseUpdateManager.h"
 #import "FlurryAPI.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
@@ -41,7 +40,6 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUpdaterModal) name:@"shouldShowUpdaterModal" object:nil];
 	
     //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
@@ -60,7 +58,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
   // Make the main view the themed splash screen
   UIView *aView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
   // TODO: iPad customization HERE?
-  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:APP_SPLASH_IMAGE];
+  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:LWE_APP_SPLASH_IMAGE];
   aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
   self.view = aView;
   [aView release];
@@ -245,34 +243,6 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 
 #pragma mark -
 
-
-/**
- * Pops up a modal over the screen when the user is updating versions
- * Can be used to view release notes only
- */
-- (void) showUpdaterModal
-{
-  //TODO: iPad customization here
-  ModalTaskViewController *updateVC = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  [updateVC setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
-  [[NSNotificationCenter defaultCenter] addObserver:updateVC selector:@selector(updateDisplay) name:@"MigraterStateUpdated" object:nil];
-
-  // Set the web content
-  NSString *filename = [LWEFile createBundlePathWithFilename:@"plugin-resources/release-notes-1.1.html"];
-  // Apparently according to the API docs this should be NULL not nil
-  NSString *webContent = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:NULL];
-  [updateVC setWebViewContent:webContent];
-
-  // Set task parameters
-  [updateVC setShowDetailedViewOnAppear:YES];
-  [updateVC setStartTaskOnAppear:NO];
-
-  DatabaseUpdateManager *tmpVm = [[DatabaseUpdateManager alloc] init];
-  [updateVC setTaskHandler:tmpVm];
-  [tmpVm release];
-  [self _showModalWithViewController:updateVC useNavController:YES];
-  [updateVC release];
-}
 
 /**
  * Update the settings tab bar item with badge number

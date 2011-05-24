@@ -10,6 +10,8 @@
 
 // Private methods
 @interface UpdateManager ()
+#if defined(LWE_JFLASH)
+
 + (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
 // JFLASH 1.1 -> 1.2
@@ -21,16 +23,24 @@
 + (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings;
 + (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings;
 + (BOOL) _updatePlistFrom12to13;
+
+#else
+
+/**
+ * CFLASH Private Helpers Go Here
+ */
+
+#endif
 @end
 
 @implementation UpdateManager
-
+#if defined(LWE_JFLASH)
 /** DEBUG ONLY method to simulate settings for JFlash 1.1 **/
 + (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings
 {
 	LWE_LOG(@"Program runs, and creating the default settings");
 	NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,APP_DATA_VERSION,nil];
-	NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],JFLASH_VERSION_1_1,nil];
+	NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],LWE_JF_VERSION_1_1,nil];
 	for (int i = 0; i < [keys count]; i++)
 	{
 		[settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
@@ -60,8 +70,8 @@
 	[settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];                    
 	
   // Now change the app version and the data version
-	[settings setValue:JFLASH_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
-  [settings setValue:JFLASH_VERSION_1_2 forKey:APP_DATA_VERSION];
+	[settings setValue:LWE_JF_VERSION_1_2 forKey:APP_SETTINGS_VERSION];
+  [settings setValue:LWE_JF_VERSION_1_2 forKey:APP_DATA_VERSION];
 }
 
 
@@ -136,7 +146,7 @@
   // Now do the PLIST as well
   [UpdateManager _updatePlistFrom12to13];
 
-  [UpdateManager _upgradeDBtoVersion:JFLASH_VERSION_1_3 withSQLStatements:JFLASH_12_TO_13_SQL_FILENAME forSettings:settings];
+  [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_3 withSQLStatements:LWE_JF_12_TO_13_SQL_FILENAME forSettings:settings];
 }
 
 
@@ -144,7 +154,7 @@
 + (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings
 {
   // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
-  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_2] &&
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_2] &&
           [settings valueForKey:@"settings_already_created"]);
 }
 
@@ -155,7 +165,7 @@
 + (BOOL) _needs13to14SettingsUpdate:(NSUserDefaults*) settings
 {
   // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
-  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_3] && 
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_3] && 
           [settings valueForKey:@"settings_already_created"]);
 }
 
@@ -205,7 +215,7 @@
 {
   // Open the database!
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
+  NSString *filename = LWE_CURRENT_USER_DATABASE;
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
     // Cool, we are open - run the SQL
@@ -224,12 +234,17 @@
     [db closeDatabase];
   }
 }
+#endif
 
 #pragma mark -
 #pragma mark Public Methods
 
 + (void) performMigrations:(NSUserDefaults*)settings
 {
+/**
+ * JFLASH MIGRATIONS
+ */
+#if defined(LWE_JFLASH)
   // NOTE THAT THESE ARE MIGRATIONS!!!!  They should be in order of version.
 	
   //In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
@@ -250,9 +265,14 @@
   if ([UpdateManager _needs13to14SettingsUpdate:settings])
   {
     LWE_LOG(@"Updating to 1.4 version");
-    [UpdateManager _upgradeDBtoVersion:JFLASH_VERSION_1_4 withSQLStatements:JFLASH_13_TO_14_SQL_FILENAME forSettings:settings];
+    [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
     [TagPeer recacheCountsForUserTags];
   }
+#else
+/**
+ * FUTURE CFLASH MIGRATIONS HERE
+ */
+#endif
 }
 
 /**
@@ -261,6 +281,7 @@
  */
 + (BOOL) databaseIsUpdatable: (NSUserDefaults*)settings
 {
+#if defined(LWE_JFLASH)
   // Get the active database name from settings, compare to the current version.
   NSString *dataVersion = [settings objectForKey:APP_DATA_VERSION];
   if (dataVersion == nil)
@@ -271,11 +292,14 @@
   else
   {
     // Is the active database the current one?
-    if ([dataVersion isEqualToString:JFLASH_VERSION_1_0])
+    if ([dataVersion isEqualToString:LWE_JF_VERSION_1_0])
       return YES;
     else
       return NO;
   }
+#else
+  return NO;
+#endif
 }
 
 @end
