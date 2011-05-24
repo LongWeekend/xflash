@@ -9,7 +9,7 @@
 #if defined(LWE_JFLASH)
 
   // These constants are general to the flashes
-  NSString * const LWE_CURRENT_VERSION       = @"1.3";
+  NSString * const LWE_CURRENT_VERSION       = @"1.4";
   NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
   NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 

@@ -18,7 +18,7 @@
 
 @implementation jFlashAppDelegate
 
-@synthesize window, rootViewController, backgroundSupported;
+@synthesize window, rootViewController;
 
 #pragma mark -
 #pragma mark URL Handling
@@ -65,37 +65,22 @@
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
-  NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);
-
 #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
   [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];    // add analytics if this is live
   [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
 #endif
-  
-  // Find out if we are a multitasking environment
-  UIDevice *device = [UIDevice currentDevice];
-  if ([device respondsToSelector:@selector(isMultitaskingSupported)])
-  {
-	  //self.backgroundSupported = device.multitaskingSupported;
-  }
-  else
-  {
-	  self.backgroundSupported = NO;
-  }
-  
-  // Seed random generator
-  srandomdev();
-  
+
+  NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
+  srandomdev();    // Seed random generator
+
   // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
-  // Seriously.  If you don't call this before ANY jFlash user code, you run this risk of making jFlash's 
-  // upgrade path ABSOLUTELY unstable.  Capiche?
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
 
   // Load root controller to show splash screen
   [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
-	[window addSubview:self.rootViewController.view];
-  [window makeKeyAndVisible];
+	[self.window addSubview:self.rootViewController.view];
+  [self.window makeKeyAndVisible];
   
   // Finally check to see if we launched via URL (this is for non iOS4)
   // On iOS4, the delegate is called back directly
@@ -114,6 +99,8 @@
   }
   
   // Add a delay here so that the UI has time to update
+  // TODO: MMA a performSelector: is probably not the best because we are relying on a hack.
+  // Get a callback from the RootViewController on viewDidLoad, a notification or something.
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
   
   return YES;

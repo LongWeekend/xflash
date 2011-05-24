@@ -765,8 +765,6 @@
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
-		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
-		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		49A942601263AF4500086F4C /* star-deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected.png"; path = "Assets/star-deselected.png"; sourceTree = "<group>"; };
@@ -1830,8 +1828,6 @@
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
-				4997D21411BB642600016A15 /* DatabaseUpdateManager.h */,
-				4997D21511BB642600016A15 /* DatabaseUpdateManager.m */,
 				91CA712B133BDE7B008A89A8 /* BackupManager.h */,
 				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
 				91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */,
