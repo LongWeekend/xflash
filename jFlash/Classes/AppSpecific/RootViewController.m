@@ -59,9 +59,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 {
   // Make the main view the themed splash screen
   UIView *aView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-  // TODO: iPad customization HERE?
-  NSString *pathToSplashImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:APP_SPLASH_IMAGE];
-  aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:pathToSplashImage]];
+  aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:APP_SPLASH_IMAGE]];
   self.view = aView;
   [aView release];
 }  
