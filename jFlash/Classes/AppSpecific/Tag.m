@@ -47,7 +47,7 @@
 - (NSInteger) calculateNextCardLevel
 {
   //-----Internal array consistency-----
-  LWE_ASSERT(([self.cardLevelCounts count] == 6));
+  LWE_ASSERT_EXC(([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
   //------------------------------------
   
   // control variables
@@ -109,7 +109,7 @@
       iWasRun = YES;
       p_unseen = 0;
     }
-    LWE_ASSERT(iWasRun);
+    LWE_ASSERT_EXC(iWasRun,@"Is there ever a case where this is NO?  If so, we want to know what case!");
   }
 	
   float randomNum = ((float)rand() / (float)RAND_MAX);
@@ -136,7 +136,7 @@
 - (void) cacheCardLevelCounts
 {
   //-----Internal array consistency-----
-  LWE_ASSERT(([self.cardIds count] == 6));
+  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be six card level arrays");
   //------------------------------------
 
   NSNumber *count;
@@ -217,7 +217,7 @@
     [FlurryAPI logError:@"getRandomCard" message:[NSString stringWithFormat:@"cardIds has %d indicies, not 6",[self.cardIds count]] error:nil];
   }
 #else
-  LWE_ASSERT(([self.cardIds count] == 6));
+  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Card IDs must have 6 array levels");
 #endif
   //------------------------------------  
   
@@ -227,7 +227,7 @@
   // Get a random card offset
   NSInteger numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
   NSInteger randomOffset = 0;
-  LWE_ASSERT (numCardsAtLevel > 0);
+  LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
   if (numCardsAtLevel > 0)
   {
     randomOffset = arc4random() % numCardsAtLevel;
@@ -257,7 +257,7 @@
     // now get a different card randomly
     cardIdArray = [self.cardIds objectAtIndex:next_level];
     int numCardsAtLevel2 = [[self.cardIds objectAtIndex:next_level] count];
-    LWE_ASSERT(numCardsAtLevel2 > 0);
+    LWE_ASSERT_EXC((numCardsAtLevel2 > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
     if (numCardsAtLevel2 > 0)
     {
       randomOffset = arc4random() % numCardsAtLevel2;
@@ -279,7 +279,7 @@
     [FlurryAPI logError:@"updateLevelCounts" message:@"currentCardId is nil" error:nil];
   }
 #else
-  LWE_ASSERT(([self.cardIds count] == 6));
+  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
 #endif
   //------------------------------------  
   
@@ -310,8 +310,8 @@
       }
       NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
       // Consistency checks
-      LWE_ASSERT((countAfterRemove+1) == countBeforeRemove);
-      LWE_ASSERT((countAfterAdd-1) == countBeforeAdd);
+      LWE_ASSERT_EXC(((countAfterRemove+1) == countBeforeRemove),@"The number after remove (%d) should be 1 less than count before remove (%d)",countAfterRemove,countBeforeRemove);
+      LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
       LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
       LWE_LOG(@"Items in index to be added: %d", countBeforeAdd);
       LWE_LOG(@"Items in removed: %d",countAfterRemove);
