@@ -344,6 +344,8 @@
 		9121517A11B755550091AFEF /* WordCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9121517811B755550091AFEF /* WordCardViewController.m */; };
 		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
+		91343796138E58B400A924E4 /* Default@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91343794138E58B400A924E4 /* Default@2x.jpg */; };
+		91343797138E58B400A924E4 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91343795138E58B400A924E4 /* Default.jpg */; };
 		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
@@ -852,6 +854,8 @@
 		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		91343794138E58B400A924E4 /* Default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Default@2x.jpg"; path = "Assets/Default@2x.jpg"; sourceTree = "<group>"; };
+		91343795138E58B400A924E4 /* Default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Default.jpg; path = Assets/Default.jpg; sourceTree = "<group>"; };
 		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		913D48071353A3E0008A4649 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LWE+JRProvidersController.h"; sourceTree = "<group>"; };
@@ -1413,6 +1417,8 @@
 		49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */ = {
 			isa = PBXGroup;
 			children = (
+				91343795138E58B400A924E4 /* Default.jpg */,
+				91343794138E58B400A924E4 /* Default@2x.jpg */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				490B23561277BF4600CF3484 /* Icon.png */,
 				49D996C012705C8300D176D0 /* Icon@2x.png */,
@@ -2375,6 +2381,8 @@
 				91E40EDA1373D145009B3167 /* downloadedPlugin.plist in Resources */,
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
+				91343796138E58B400A924E4 /* Default@2x.jpg in Resources */,
+				91343797138E58B400A924E4 /* Default.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

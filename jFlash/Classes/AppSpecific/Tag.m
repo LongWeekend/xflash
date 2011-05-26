@@ -11,7 +11,7 @@
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode;
+@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
 
 - (id) init
 {
@@ -19,6 +19,7 @@
   {
     cardCount = -1;
     self.currentIndex = 0;
+    self.lastFiveCards = [NSMutableArray array];
   }
 	return self;
 }
@@ -227,7 +228,23 @@
   // Get a random card offset
   NSInteger numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
   NSInteger randomOffset = 0;
+  
+  // I know there is a condition somewhere where this occurs, but cannot reproduce - RSH
+  int i = 0;
+  while(numCardsAtLevel == 0) 
+  {
+    next_level = [self calculateNextCardLevel];
+    numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
+    i++;
+    if (i == 10)
+    {
+      // TODO: log the error before we move on.
+      // we tried 10 times, fuck it - go ahead and crash
+      break;
+    }
+  }
   LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
+  
   if (numCardsAtLevel > 0)
   {
     randomOffset = arc4random() % numCardsAtLevel;
@@ -237,12 +254,23 @@
   
   NSMutableArray* cardIdArray = [self.cardIds objectAtIndex:next_level];
   cardId = [cardIdArray objectAtIndex:randomOffset];
+  
+  // this is a simple queue of the last five cards
+  [self.lastFiveCards addObject:[NSNumber numberWithInt:currentCardId]];
+  
+  if ([self.lastFiveCards count] == NUM_CARDS_IN_NOT_NEXT_QUEUE)
+  {
+    [self.lastFiveCards removeObjectAtIndex:0];
+  }
 
   // prevent getting the same card twice.
-  if([cardId intValue] == currentCardId)
+  i = 0; // counts how many times we whiled against the array
+  int j = 0; // second iterator to count tries that return the same card as before
+  while([self.lastFiveCards containsObject:cardId])
   {
     LWE_LOG(@"Got the same card as last time");
     // If there is only one card left (this card) in the level, let's get a different level
+    
     if (numCardsAtLevel == 1)
     {
       LWE_LOG(@"Only one card left in this level, getting a new level");
@@ -263,6 +291,17 @@
       randomOffset = arc4random() % numCardsAtLevel2;
     }
     cardId = [cardIdArray objectAtIndex:randomOffset];      
+    
+    i++;
+    if (i > 3)
+    {
+      // the same card is worse than a card that was twice ago, so we check again that it's not that
+      if (j == 3 || currentCardId != [cardId intValue]) 
+      {
+        break; //we tried 5 times, fuck it
+      }
+      j++;
+    }
   }
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
@@ -506,6 +545,7 @@
   [self setCombinedCardIdsForBrowseMode:nil];
   [self setCardLevelCounts:nil];
   [self setCardIds:nil];
+  [self setLastFiveCards:nil];
 	[super dealloc];
 }
 
