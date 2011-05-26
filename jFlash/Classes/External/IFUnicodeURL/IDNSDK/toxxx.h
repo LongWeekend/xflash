@@ -104,11 +104,6 @@ int Xcode_ToASCII( const UTF16CHAR *  puzInputString,
 /*                    exit.                                              */
 /*                                                                       */
 XCODE_EXPORTEDAPI
-int Xcode_ToUnicode8( const UCHAR8 *    pzInputString, 
-                      int                iInputSize,
-                      UTF16CHAR *        puzOutputString, 
-                      int *              piOutputSize );
-XCODE_EXPORTEDAPI
 int Xcode_ToUnicode16( const UTF16CHAR * puzInputString, 
                        int               iInputSize,
                        UTF16CHAR *       puzOutputString, 
@@ -176,11 +171,6 @@ int Xcode_DomainToASCII( const UTF16CHAR *  puzInputString,
 /*                    contains length of resulting decoded string on     */
 /*                    exit.                                              */
 /*                                                                       */
-XCODE_EXPORTEDAPI
-int Xcode_DomainToUnicode8( const UCHAR8 *     pzInputString, 
-                            int                iInputSize,
-                            UTF16CHAR *        puzOutputString, 
-                            int *              piOutputSize );
 XCODE_EXPORTEDAPI
 int Xcode_DomainToUnicode16( const UTF16CHAR *  puzInputString, 
                              int                iInputSize,
