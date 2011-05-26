@@ -190,8 +190,6 @@
 		496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
 		496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		496C7B6F12632831004B6B90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		496C7B7012632838004B6B90 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
-		496C7B7112632839004B6B90 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 		496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		496C7B821263286D004B6B90 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
 		496C7B831263286D004B6B90 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
@@ -237,6 +235,8 @@
 		49B528311276C97500EE64D3 /* practice-btn-showreading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */; };
 		49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
 		49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
+		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
+		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
@@ -732,6 +732,8 @@
 		49B527B4127680D500EE64D3 /* 90-lifebuoy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "90-lifebuoy@2x.png"; path = "Assets/90-lifebuoy@2x.png"; sourceTree = "<group>"; };
 		49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-showreading@2x.png"; path = "Assets/practice-btn-showreading@2x.png"; sourceTree = "<group>"; };
 		49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft@2x.png"; path = "Assets/talkbubble-ft@2x.png"; sourceTree = "<group>"; };
+		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
+		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
 		49C5BC1F11C51B0D00A595D6 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
 		49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
 		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
@@ -1242,6 +1244,8 @@
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
+				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
+				49BD2AF2138E664100FAC045 /* cFlash.db */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
@@ -2442,8 +2446,6 @@
 				496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */,
 				496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */,
 				496C7AF012632730004B6B90 /* WordCardViewController.xib in Resources */,
-				496C7B7012632838004B6B90 /* jFlash.db in Resources */,
-				496C7B7112632839004B6B90 /* jFlash-CARD-1.1.db in Resources */,
 				4965FD35126F6417000AC280 /* practice-btn-actions@2x.png in Resources */,
 				4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
 				4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
@@ -2543,6 +2545,8 @@
 				91860A961370F17E002F00DB /* ToolbarPicker.xib in Resources */,
 				9179E4271384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44E1385021E00A7739B /* table-background.jpg in Resources */,
+				49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */,
+				49BD2AF4138E664100FAC045 /* cFlash.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
