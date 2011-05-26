@@ -404,10 +404,6 @@
   [cardLevel removeObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
   [self cacheCardLevelCounts];
-
-  // This needs to be here to stop a double decrement!! (first decremented here, then in SQL in TagPeer)
-  // SQL in TagPeer just uses Count=count-1, so it is "stupid" about what the actual count is
-  [self setCardCount:cardCount+1];
 }
 
 
@@ -421,10 +417,6 @@
   [cardLevel addObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
   [self cacheCardLevelCounts];
-  
-  // This needs to be here to stop a double increment!! (first incremented here, then in SQL in TagPeer)
-  // SQL in TagPeer just uses Count=count+1, so it is "stupid" about what the actual count is
-  [self setCardCount:cardCount-1];
 }
 
 
