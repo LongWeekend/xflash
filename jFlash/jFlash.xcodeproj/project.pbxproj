@@ -44,8 +44,6 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
-		493D5375138B5BF200DDC242 /* jFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C2912633684004B6B90 /* jFlash_Constants.m */; };
-		493D5377138B5E6F00DDC242 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
@@ -345,8 +343,6 @@
 		9121517A11B755550091AFEF /* WordCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9121517811B755550091AFEF /* WordCardViewController.m */; };
 		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
-		9134371B138DE5A900A924E4 /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
-		9134371C138DE5A900A924E4 /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
@@ -2761,12 +2757,6 @@
 				496C7B35126327A2004B6B90 /* OAConsumer.m in Sources */,
 				496C7B36126327A7004B6B90 /* Base64Transcoder.c in Sources */,
 				496C7B37126327B0004B6B90 /* Appirater.m in Sources */,
-				496C7B38126327B4004B6B90 /* CellTextField.m in Sources */,
-				496C7B39126327B5004B6B90 /* CellTextView.m in Sources */,
-				496C7B3A126327B6004B6B90 /* DisplayCell.m in Sources */,
-				496C7B3B126327B6004B6B90 /* EditableTableViewCell.m in Sources */,
-				496C7B3C126327B7004B6B90 /* SourceCell.m in Sources */,
-				496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */,
 				496C7B6F12632831004B6B90 /* main.m in Sources */,
 				496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */,
 				490B23411277BCE100CF3484 /* FMDatabase.m in Sources */,
