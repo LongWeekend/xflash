@@ -229,20 +229,6 @@
   NSInteger numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
   NSInteger randomOffset = 0;
   
-  // I know there is a condition somewhere where this occurs, but cannot reproduce - RSH
-  int i = 0;
-  while(numCardsAtLevel == 0) 
-  {
-    next_level = [self calculateNextCardLevel];
-    numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
-    i++;
-    if (i == 10)
-    {
-      // TODO: log the error before we move on.
-      // we tried 10 times, fuck it - go ahead and crash
-      break;
-    }
-  }
   LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
   
   if (numCardsAtLevel > 0)
@@ -264,7 +250,7 @@
   }
 
   // prevent getting the same card twice.
-  i = 0; // counts how many times we whiled against the array
+  int i = 0; // counts how many times we whiled against the array
   int j = 0; // second iterator to count tries that return the same card as before
   while([self.lastFiveCards containsObject:cardId])
   {
