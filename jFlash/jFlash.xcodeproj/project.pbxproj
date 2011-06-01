@@ -44,6 +44,8 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		49280A261396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
+		49280A271396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
@@ -1480,11 +1482,11 @@
 		49EE8D90134EC15300EC6B0E /* LWE */ = {
 			isa = PBXGroup;
 			children = (
-				9134371D138DE5B400A924E4 /* LWECrashUtils.h */,
-				9134371A138DE5A900A924E4 /* LWECrashUtils.m */,
 				91013AC513938BC900846038 /* External */,
 				49EE9148134EC15500EC6B0E /* LWECoreData.h */,
 				49EE9149134EC15500EC6B0E /* LWECoreData.m */,
+				9134371D138DE5B400A924E4 /* LWECrashUtils.h */,
+				9134371A138DE5A900A924E4 /* LWECrashUtils.m */,
 				49EE914A134EC15500EC6B0E /* LWEDatabase.h */,
 				49EE914B134EC15500EC6B0E /* LWEDatabase.m */,
 				49EE914E134EC15500EC6B0E /* LWEDateUtils.h */,
@@ -2701,6 +2703,7 @@
 				91013AD413938BE500846038 /* SBJsonBase.m in Sources */,
 				91013AD513938BE500846038 /* SBJsonParser.m in Sources */,
 				91013AD613938BE500846038 /* SBJsonWriter.m in Sources */,
+				49280A261396283D00EF009C /* LWECrashUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2838,6 +2841,7 @@
 				91013AD913938BE500846038 /* SBJsonBase.m in Sources */,
 				91013ADA13938BE500846038 /* SBJsonParser.m in Sources */,
 				91013ADB13938BE500846038 /* SBJsonWriter.m in Sources */,
+				49280A271396283D00EF009C /* LWECrashUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
