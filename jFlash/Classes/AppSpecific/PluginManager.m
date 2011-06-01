@@ -247,6 +247,8 @@
   {
 		pluginForFilename = [self findDictionaryContainingObject:filename forKey:LWEPluginFilenameKey inDictionary:self.availableForDownloadPlugins];
 	}
+  LWE_ASSERT_EXC(pluginForFilename,@"Could not get plugin for filename: %@",filename);
+  
   NSString *filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
   
   LWE_LOG(@"Loading file: %@ in loadPluginFromFile", filename);

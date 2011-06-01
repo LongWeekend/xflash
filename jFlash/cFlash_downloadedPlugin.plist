@@ -19,7 +19,7 @@
 		<key>plugin_target_path</key>
 		<string>cFlash-CARD-1.0.db</string>
 		<key>plugin_target_url</key>
-		<string>http://makbook.local/~phooze/cFlash-CARD-1.1.db.gz</string>
+		<string>http://makbook.local/~phooze/cFlash-CARD-1.0.db.gz</string>
 		<key>plugin_version</key>
 		<string>1.0</string>
 	</dict>
