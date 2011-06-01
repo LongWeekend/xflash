@@ -25,6 +25,11 @@ extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
 extern NSString * const LWE_CF_VERSION_1_0;
 #endif 
 
+// PLugins
+extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
+extern NSString * const LWE_PLUGIN_SERVER_LIST;
+extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
+
 extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
 extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
 extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename

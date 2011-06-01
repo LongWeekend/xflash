@@ -14,6 +14,8 @@
 #define DEFAULT_MAX_STRUDYING 30
 #define DEFAULT_DIFFICULTY 1
 
+#define LWE_PLUGIN_UPDATE_PERIOD		14
+
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;

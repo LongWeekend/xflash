@@ -24,6 +24,11 @@
   NSString * const LWE_JF_VERSION_1_3           = @"1.3";
   NSString * const LWE_JF_VERSION_1_4           = @"1.4";
 
+  // This pertains to the plugin manager
+  NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
+  NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist"
+  NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist"
+
 #else if defined(LWE_CFLASH)
 
   // These constants are general to the flashes
@@ -33,6 +38,12 @@
 
   // These constants are CF specific
   NSString * const LWE_CF_VERSION_1_0 = @"1.0";
+
+  // This pertains to the plugin manager
+  NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"cFlash_downloadedPlugin.plist";
+  NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/cFlash-availablePlugins.plist";
+  NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash_availablePluginForDownload.plist";
+
 
 #endif
 

@@ -12,11 +12,6 @@
 #import "NSDate+LWEUtilities.h"
 #import "ASIHTTPRequest.h"
 
-#define LWE_PLUGIN_UPDATE_PERIOD		14
-#define LWE_PLUGIN_SERVER_LIST			@"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist"
-#define LWE_AVAILABLE_PLUGIN_PLIST	@"availablePluginForDownload.plist"
-#define LWE_DOWNLOADED_PLUGIN_PLIST	@"downloadedPlugin.plist"
-
 extern NSString * const LWEPluginDidInstall;
 extern NSString * const LWEPluginKeyKey;
 extern NSString * const LWEPluginNameKey;
