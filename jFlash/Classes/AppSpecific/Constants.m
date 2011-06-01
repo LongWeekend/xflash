@@ -61,8 +61,8 @@ const NSInteger FAVORITES_TAG_ID = 0;
 
       // This pertains to the plugin manager
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
-      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist"
-      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist"
+      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist";
+      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
 #else if defined(LWE_CFLASH)
 
