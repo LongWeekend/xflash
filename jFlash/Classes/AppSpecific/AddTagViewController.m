@@ -295,6 +295,9 @@ enum EntrySectionRows
   // Check whether or not we are ADDING or REMOVING from the selected tag
   if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
   {
+    // Remove tag
+    [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
+    [self removeFromMembershipCache:tmpTag.tagId];
     // We have special things to check if we are modifying the existing active set
     if (tmpTag.tagId == [[currentState activeTag] tagId])
     {
@@ -312,19 +315,16 @@ enum EntrySectionRows
       // Success - but update counts
       [[currentState activeTag] removeCardFromActiveSet:currentCard];
     }
-    // Remove tag
-    [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
-    [self removeFromMembershipCache:tmpTag.tagId];
   }
   else
   {
+    [TagPeer subscribe:cardId tagId:tmpTag.tagId];
+    [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
     if (tmpTag.tagId == [[currentState activeTag] tagId])
     {
       LWE_LOG(@"Editing current set tags");
-      [[currentState activeTag] addCardToActiveSet:currentCard];
+      [[currentState activeTag] addCardToActiveSet:currentCard]; // maybe fuck off?
     }
-    [TagPeer subscribe:cardId tagId:tmpTag.tagId];
-    [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
   }
   [tableView reloadData];
   // Tell study set controller to reload its set data stats
