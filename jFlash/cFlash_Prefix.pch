@@ -3,28 +3,27 @@
 //
 
 #ifdef __OBJC__
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <sqlite3.h>
-#import "Constants.h"
-#import "jFlash_Constants.h"
-#import "CurrentState.h"
-#import "ThemeManager.h"
-#import "Card.h"
-#import "Tag.h"
-#import "Group.h"
-#import "User.h"
-#import "CardPeer.h"
-#import "GroupPeer.h"
-#import "UserHistoryPeer.h"
-#import "TagPeer.h"
-#import "LWEDatabase.h"
-#import "LWEMacros.h"
-#import "LWEUILabelUtils.h"
-#import "LWEUniversalAppHelpers.h"
-#import "LWEUITableUtils.h"
-#import "LWERetinaUtils.h"
-#import "LWEViewAnimationUtils.h"
-#import "LWENetworkUtils.h"
-#import "LWEUIAlertView.h"
+  #import <Foundation/Foundation.h>
+  #import <UIKit/UIKit.h>
+  #import <sqlite3.h>
+  #import "Constants.h"
+  #import "CurrentState.h"
+  #import "ThemeManager.h"
+  #import "Card.h"
+  #import "Tag.h"
+  #import "Group.h"
+  #import "User.h"
+  #import "CardPeer.h"
+  #import "GroupPeer.h"
+  #import "UserHistoryPeer.h"
+  #import "TagPeer.h"
+  #import "LWEDatabase.h"
+  #import "LWEMacros.h"
+  #import "LWEUILabelUtils.h"
+  #import "LWEUniversalAppHelpers.h"
+  #import "LWEUITableUtils.h"
+  #import "LWERetinaUtils.h"
+  #import "LWEViewAnimationUtils.h"
+  #import "LWENetworkUtils.h"
+  #import "LWEUIAlertView.h"
 #endif

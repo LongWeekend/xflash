@@ -8,7 +8,6 @@
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX 0
 #define SEARCH_VIEW_CONTROLLER_TAB_INDEX 2
 #define SETTINGS_VIEW_CONTROLLER_TAB_INDEX 3
-#define DEFAULT_TAG_ID 124
 #define DEFAULT_USER_ID 1
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
 #define DEFAULT_MAX_STRUDYING 30
@@ -44,6 +43,44 @@ extern NSString * const PLUGIN_LAST_UPDATE;
 
 extern const NSInteger FAVORITES_TAG_ID;
 
+// Talk to MMA about these - do NOT edit them
+extern NSString * const LWE_CURRENT_VERSION;
+extern NSString * const LWE_CURRENT_CARD_DATABASE;
+extern NSString * const LWE_CURRENT_USER_DATABASE;
+
+#if defined(LWE_JFLASH)
+
+  // LWE Favorites - JFlash
+  #define DEFAULT_TAG_ID 124
+
+  extern NSString * const LWE_JF_VERSION_1_0;
+  extern NSString * const LWE_JF_VERSION_1_1;
+  extern NSString * const LWE_JF_VERSION_1_2;
+  extern NSString * const LWE_JF_VERSION_1_3;
+  extern NSString * const LWE_JF_VERSION_1_4;
+  extern NSString * const LWE_JF_10_USER_DATABASE;
+  extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
+  extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
+  extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
+
+#else if defined(LWE_CFLASH)
+
+  // "Politics" (for now) - CFlash
+  #define DEFAULT_TAG_ID 42
+
+  extern NSString * const LWE_CF_VERSION_1_0;
+#endif 
+
+// PLugins
+extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
+extern NSString * const LWE_PLUGIN_SERVER_LIST;
+extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
+
+extern NSString *const CARD_DB_KEY;       //! Dictionary key to refer to main card database
+extern NSString *const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
+extern NSString *const EXAMPLE_DB_KEY;    //! Dictionary key to refer to example database filename
+
+extern NSString *const LWE_APP_SPLASH_IMAGE; // App splash image - different between the flashes
 
 // Study View controllers
 #define kAnimationKey @"transitionViewAnimation"
@@ -81,6 +118,11 @@ extern NSString * const HTML_FOOTER;
 
 // these are the various screen placement constants used across all the UIViewControllers
  
+
+// COMMENTED OUT BY MMA on JUNE 1 2011 -- project find doesn't seem to reveal that any 
+// of these are used anywhere??!
+/**
+
 // padding for margins
 #define kLeftMargin				20.0
 #define kTopMargin				20.0
@@ -118,6 +160,8 @@ extern NSString * const HTML_FOOTER;
 #define kCellLeftOffset			8.0
 #define kCellTopOffset			12.0
 
+ */
+ 
 // default background image for UITableViews
 #define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.jpg"
 
