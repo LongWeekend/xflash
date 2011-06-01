@@ -47,7 +47,6 @@
 		49280A261396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		49280A271396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		49280A281396296800EF009C /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
-		49280A2913962A0800EF009C /* jFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C2912633684004B6B90 /* jFlash_Constants.m */; };
 		49280A2A13962A9500EF009C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
 		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
@@ -212,7 +211,6 @@
 		496C7B8A1263286E004B6B90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		496C7B8B1263286E004B6B90 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
-		496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C2912633684004B6B90 /* jFlash_Constants.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
@@ -739,8 +737,6 @@
 		496C7A6C126325FD004B6B90 /* cFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496C7A6E126325FD004B6B90 /* cFlash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cFlash-Info.plist"; sourceTree = "<group>"; };
 		496C7B9C12632F2E004B6B90 /* cFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cFlash_Prefix.pch; sourceTree = "<group>"; };
-		496C7C2812633684004B6B90 /* jFlash_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlash_Constants.h; path = AppSpecific/jFlash/jFlash_Constants.h; sourceTree = "<group>"; };
-		496C7C2912633684004B6B90 /* jFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlash_Constants.m; path = AppSpecific/jFlash/jFlash_Constants.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
@@ -1378,8 +1374,6 @@
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
 				917A5C7B11AB84EE00016BD2 /* Constants.h */,
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
-				496C7C2812633684004B6B90 /* jFlash_Constants.h */,
-				496C7C2912633684004B6B90 /* jFlash_Constants.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
@@ -2648,7 +2642,6 @@
 				2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */,
 				2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */,
 				49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */,
-				496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */,
 				49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */,
 				490B23441277BCE100CF3484 /* FMDatabase.m in Sources */,
 				490B23451277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
@@ -2857,7 +2850,6 @@
 				91013ADB13938BE500846038 /* SBJsonWriter.m in Sources */,
 				49280A271396283D00EF009C /* LWECrashUtils.m in Sources */,
 				49280A281396296800EF009C /* UpdateManager.m in Sources */,
-				49280A2913962A0800EF009C /* jFlash_Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
