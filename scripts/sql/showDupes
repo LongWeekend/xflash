@@ -1,1 +1,0 @@
-select card_id, count(card_id) as count from user_history group by card_id having (count > 1);
