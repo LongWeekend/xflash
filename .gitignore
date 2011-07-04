@@ -1,7 +1,9 @@
-jFlash/build/*
+jFlash/build
 GraphicAssets/
 crunchytoast_npedia-new/
 *.pyc
+jFlash.xcodeproj/project.xcworkspace/
+jFlash.xcodeproj/xcuserdata/
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
 jFlash/Classes/External/sqlite/sqlite3/sqlite3.xcodeproj/project.xcworkspace
 jFlash/Classes/External/sqlite/sqlite3/sqlite3.xcodeproj/xcuserdata
