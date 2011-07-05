@@ -1,0 +1,24 @@
+<div class="contents forum_contents">
+  <h2 class="title"><%= t caption %></h2>
+	<% form_for @forum do |form| %>
+    <div class="left"><br/>
+      <label for="forum_title"><%= 'Forum Title'[:title_forum_title] %></label>
+      <%= form.text_field :title, :style => 'width:280px' %>
+    </div>
+    <% if admin? %><br/>
+    <div class="left" style="padding-left:15px;"><br/>
+      <label style="margin-left:1em;float:left"><%= form.check_box :suspended %> <%= 'Suspended'[:text_suspended] %></label>
+      <label style="margin-left:1em;float:left"><%= form.check_box :sticky %> <%= 'Sticky'[:text_sticky] %></label>
+      <label style="margin-left:1em;float:left"><%= form.check_box :deleted %> <%= 'Deleted'[:text_deleted] %></label>  
+    </div>
+    <% end %>
+    <div class="clear"></div>
+    <div class="left">
+      <label for="forum_description"><%= 'Description'[:title_description] %></label>
+      <%= form.text_area :description, :rows => 3, :style => 'width:280px' %>
+    </div>
+    <div class="clear"></div><br/>
+    <%= submit_tag 'Cancel'[:cancel_caption], { :name => 'cancel' } %>&nbsp;
+    <%= submit_tag 'Save'[:button_save_forum] +' &gt;&gt;', :class => 'default_submit' %>
+	<% end %><br/>
+</div>

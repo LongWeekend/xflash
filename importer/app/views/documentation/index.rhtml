@@ -1,0 +1,21 @@
+<% html = capture do %>
+<div class="contents" style="background-color:#fff;border:3px solid #D15600">
+  <h2 class="title" style="color:#356AA0"><%= t 'Npedia Help'[:title_help_menu] %></h2><br/>
+  <h3>Searching</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3>Forums (Talk)</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3>Questions</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3>Tags</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante.</p>
+  <h3>Users</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante.</p>
+  <h3>About the Dynamic Interface</h3>
+  <p>Tiddler lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <p>Tiddler lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3><%= 'Avatars'[:title_avatars] %></h3>
+  <p><%= 'Visit {gravatar} and sign up for a free gravatar.'[:text_gravatar_notice, %(<a href="http://www.gravatar.com/" target="_blank">gravatar.com</a>)] %></p>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

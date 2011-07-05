@@ -1,0 +1,181 @@
+鬧鐘	闹钟	nao4 zhong1	/alarm clock/
+用品	用品	yong4 pin3	/articles/
+盥洗池	盥洗池	guan4 xi3 chi2	/basin/
+浴帽	浴帽	yu4 mao4	/bath cap/
+浴衣	浴衣	yu4 yi1	/bath robe/
+浴墊	浴垫	yu4 dian4	/bath mat/
+浴巾	浴巾	yu4 jin1	/bath towel/
+浴室	浴室	yu4 shi4	/bathroom/
+浴缸	浴缸	yu4 gang1	/bathtub/
+床	床	chuang2	/bed/
+床單	床单	chuang2 dan1	/bed sheet/
+臥室	卧室	wo4 shi4	/bedroom/
+床頭櫃	床头柜	chuang2 tou2 gui4	/bedside table/
+床罩	床罩	chuang2 zhao4	/bedspread/
+攪拌機	搅拌机	jiao3 ban4 ji1	/blender/mixer/
+燒斷	烧断	shao1 duan4	/blow (fuse)/
+沐浴液	沐浴液	mu4 yu4 ye4	/body wash lotion/
+燒水	烧水	shao1 shui3	/boil water/
+煮	煮	zhu3	/boil/cook/
+書架	书架	shu1 jia4	/bookcase/
+啟瓶器	启瓶器	qi3 ping2 qi4	/bottle opener/
+碗	碗	wan3	/bowl/
+掃帚	扫帚	sao4 zhou3	/broom/
+刷	刷	shua1	/brush/
+燒壞	烧坏	shao1 huai4	/burn out/
+爐眼	炉眼	lu2 yan3	/burner/
+開罐刀	开罐刀	kai1 guan4 dao1	/can opener/
+地毯	地毯	di4 tan3	/carpet/
+椅子	椅子	yi3 zi5	/chair/
+聊天	聊天	liao2 tian1	/chat/
+五鬥櫃	五斗柜	wu3 dou4 gui4	/chest of drawers/
+切	切	qie1	/chop/cut/
+案板	案板	an4 ban3	/chopping board/
+切菜闆	切菜板	qie1 cai4 ban3	/chopping board/
+打掃	打扫	da3 sao3	/clean/
+洗滌	洗涤	xi3 di2	/cleanse/
+堵住	堵住	du3 zhu4	/clogged up/
+壁櫥	壁橱	bi4 chu2	/closet/
+衣服	衣服	yi1 fu5	/clothes/
+茶幾	茶几	cha2 ji1	/coffee table/
+梳子	梳子	shu1 zi5	/comb/
+做飯	做饭	zuo4 fan4	/cook/
+做米飯	做米饭	zuo4 mi3 fan4	/cook rice/
+蓋上	盖上	gai4 shang4	/cover/
+窗帘	窗帘	chuang1 lian2	/curtain/
+檯燈	台灯	tai2 deng1	/desk lamp/
+髒	脏	zang1	/dirty/
+洗碗布	洗碗布	xi3 wan3 bu4	/dish towel/
+洗碗劑	洗碗剂	xi3 wan3 ji4	/diskwashing liquid/
+洗衣服	洗衣服	xi3 yi1 fu5	/do laundry/
+排水	排水	pai2 shui3	/drain/
+下水道	下水道	xia4 shui3 dao4	/drainage pipe/
+抽屜	抽屉	chou1 ti4	/drawer/
+喝	喝	he1	/drink/
+漏水	漏水	lou4 shui3	/dripping/leaking/
+擦幹	擦干	ca1 gan1	/dry/
+餃子皮	饺子皮	jiao3 zi5 pi2	/dumpling wrap/
+電飯鍋	电饭锅	dian4 fan4 guo1	/electric rice cooker/
+電爐	电炉	dian4 lu2	/electric stove/
+電工	电工	dian4 gong1	/electrician/
+臉	脸	lian3	/face/
+洗臉巾	洗脸巾	xi3 lian3 jin1	/face cloth/
+睡著	睡着	shui4 zhao2	/fall asleep/
+水龍頭	水龙头	shui3 long2 tou2	/faucet/
+魚	鱼	yu2	/fish/
+花	花	hua1	/flowers/
+冷凍室	冷冻室	leng3 dong4 shi4	/freezer/
+炸	炸	zha4	/fry/
+平底鍋	平底锅	ping2 di3 guo1	/frying pan/
+家具	家具	jia1 ju4	/furniture/
+保險絲	保险丝	bao3 xian3 si1	/fuse/
+垃圾	垃圾	la1 ji1	/garbage/
+垃圾筒	垃圾筒	la1 ji1 tong3	/garbage can/
+煤氣爐	煤气炉	mei2 qi4 lu2	/gas stove/
+起床	起床	qi3 chuang2	/get up/
+睡覺	睡觉	shui4 jiao4	/go to bed/
+客人	客人	ke4 ren2	/guests/
+頭髮	头发	tou2 fa5	/hair/
+髮刷	发刷	fa4 shua1	/hairbrush/
+手	手	shou3	/hand/
+衣架	衣架	yi1 jia4	/hanger/
+大火	大火	da4 huo3	/high heat/
+衛生	卫生	wei4 sheng1	/hygiene/
+熨斗	熨斗	yun4 dou3	/iron/
+燙衣闆	烫衣板	tang4 yi1 ban3	/ironing board/
+開水壺	开水壶	kai1 shui3 hu2	/kettle/
+廚房	厨房	chu2 fang2	/kitchen/
+菜刀	菜刀	cai4 dao1	/kitchen knife/
+锅盖	锅盖	guo1 gai4	/lid/
+燈	灯	deng1	/light/
+燈泡	灯泡	deng1 pao4	/light bulb/
+開關	开关	kai1 guan1	/light switch/
+客廳	客厅	ke4 ting1	/living room/
+小火	小火	xiao3 huo3	/low heat/
+雜誌	杂志	za2 zhi4	/magazine/
+烙餅	烙饼	lao4 bing3	/make pancakes/
+床墊	床垫	chuang2 dian4	/mattress/
+肉	肉	rou4	/meat/
+小櫥	小橱	xiao3 chu2	/medicine cabinet/kitchen closet/
+小櫃	小柜	xiao3 gui4	/medicine cabinet/kitchen closet/
+微波爐	微波炉	wei2 bo1 lu2	/microwave/
+鏡子	镜子	jing4 zi5	/mirror/
+拖把	拖把	tuo1 ba3	/mop/
+拖地闆	拖地板	tuo1 di4 ban3	/mop the floor/
+音樂	音乐	yin1 yue4	/music/
+報	报	bao4	/newspaper/
+烤箱	烤箱	kao3 xiang1	/oven/
+畫	画	hua4	/painting/
+削	削	xiao1	/peel/
+削皮刀	削皮刀	xiao1 pi2 dao1	/peeler/
+像框	像框	xiang4 kuang4	/picture frame/
+枕頭	枕头	zhen3 tou5	/pillow/
+枕套	枕套	zhen3 tao4	/pillowcase/
+水管	水管	shui3 guan3	/pipe/
+盤子	盘子	pan2 zi5	/plate/
+電源插頭	电源插头	dian4 yuan2 cha1 tou2	/plug/
+插上	插上	cha1 shang4	/plug in/
+水管工	水管工	shui3 guan3 gong1	/plumber/
+锅	锅	guo1	/pot/
+按下	按下	an4 xia4	/press down/
+化妝	化妆	hua4 zhuang1	/put on make-up/
+被子	被子	bei4 zi5	/quilt/
+剃鬚刀	剃须刀	ti4 xu1 dao1	/razor/
+冰箱	冰箱	bing1 xiang1	/refrigerator/
+輕鬆	轻松	qing1 song1	/relax/
+修	修	xiu1	/repair/
+修理	修理	xiu1 li3	/repair/
+響	响	xiang3	/ring/
+沖洗	冲洗	chong1 xi3	/rinse/
+擀	擀	gan3	/roll/
+擀麵杖	擀面杖	gan3 mian4 zhang4	/rolling pin/
+房間	房间	fang2 jian1	/room/
+撥到	拨到	bo1 dao4	/set to (clock time)/
+洗發香波	洗发香波	xi3 fa1 xiang1 bo1	/shampoo/
+颳鬍子	刮胡子	gua1 hu2 zi5	/shave/
+亮	亮	liang4	/shine/shine on/
+淋浴	淋浴	lin2 yu4	/shower/
+熬	熬	ao2	/simmer/
+洗滌池	洗涤池	xi3 di2 chi2	/sink/basin/
+睡	睡	shui4	/sleep/
+肥皂	肥皂	fei2 zao4	/soap/
+香皂	香皂	xiang1 zao4	/soap/
+肥皂盒	肥皂盒	fei2 zao4 he2	/soapdish/
+沙發	沙发	sha1 fa1	/sofa/
+湯	汤	tang1	/soup/
+湯勺	汤勺	tang1 shao2	/soup ladle/
+海綿	海绵	hai3 mian2	/sponge/
+蒸	蒸	zheng1	/steam/
+饅頭	馒头	man2 tou5	/ManTou (steamed buns)/
+蒸锅	蒸锅	zheng1 guo1	/steamer/
+音響	音响	yin1 xiang3	/stereo/
+燉	炖	dun4	/stew/
+炒	炒	chao3	/stir fry/
+瀝水	沥水	li4 shui3	/strain/
+瀝水盆	沥水盆	li4 shui3 pen2	/strainer/
+掃地	扫地	sao3 di4	/sweep the floor/
+泡澡	泡澡	pao4 zao3	/take a bath/
+茶	茶	cha2	/tea/
+電視	电视	dian4 shi4	/television/
+燙	烫	tang4	/to iron/
+熨	熨	yun4	/to iron/
+牙	牙	ya2	/tooth/
+牙刷	牙刷	ya2 shua1	/toothbrush/
+牙膏	牙膏	ya2 gao1	/toothpaste/
+毛巾	毛巾	mao2 jin1	/towel/
+毛巾架	毛巾架	mao2 jin1 jia4	/towel bar/
+擦幹	擦干	ca1 gan1	/towel dry/
+開	开	kai1	/turn on/
+打開	打开	da3 kai1	/turn on/
+锅铲	锅铲	guo1 chan3	/turner, spatula/
+吸塵器	吸尘器	xi1 chen2 qi4	/vacuum cleaner/
+吸塵	吸尘	xi1 chen2	/vacuum-clean/
+醒來	醒来	xing3 lai2	/wake up/
+衣櫥 	衣橱 	yi1 chu2	/wardrobe/
+衣櫃	衣柜	yi1 gui4	/wardrobe/
+洗	洗	xi3	/wash/
+洗菜盆	洗菜盆	xi3 cai4 pen2	/washbowl/
+洗衣機	洗衣机	xi3 yi1 ji1	/washing machine/
+抹	抹	ma1	/wipe/
+炒鍋	炒锅	chao3 guo1	/wok/
+抹布	抹布	ma1 bu4	/rag (to wipe things)/

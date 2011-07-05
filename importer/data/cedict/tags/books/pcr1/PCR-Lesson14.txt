@@ -1,0 +1,20 @@
+妹妹	妹妹	mei4 mei5	/younger sister/
+姐姐	姐姐	jie3 jie5	/older sister/
+銀行	银行	yin2 hang2	/bank/
+書店	书店	shu1 dian4	/bookstore/
+孩子	孩子	hai2 zi5	/child/
+寫	写	xie3	/to write/
+信	信	xin4	/letter/true/to believe/sign/evidence/
+告訴	告诉	gao4 su5	/to tell/to inform/to let know/
+作	作	zuo4	/to do/
+工作	工作	gong1 zuo4	/work/
+想	想	xiang3	/to think/to want/to miss/
+家	家	jia1	/home/family/
+有	有	you3	/to have/there is/
+沒	没	mei2	/have not/not/
+愛人	爱人	ai4 ren5	/spouse/husband/wife/
+給	给	gei3	/to/for/to give/
+職員	职员	zhi2 yuan2	/office worker/staff member/
+工程師	工程师	gong1 cheng2 shi1	/engineer/
+經理	经理	jing1 li3	/manager/director/
+公司	公司	gong1 si1	/company/

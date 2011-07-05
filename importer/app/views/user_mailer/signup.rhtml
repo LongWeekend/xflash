@@ -1,0 +1,4 @@
+<%= 'Welcome to Npedia'[:text_site_greeting] %>, <%= @user.display_name -%>!
+<%= 'Please visit the link below to activate your account.'[:text_account_activation_instructions] %>
+
+http://<%= @domain -%>/activate/<%= @user.login_key -%>

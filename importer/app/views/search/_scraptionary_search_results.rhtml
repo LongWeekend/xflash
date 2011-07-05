@@ -1,0 +1,16 @@
+<% firstline = true %>
+<% for scrap_page in @search do %>
+<%='<hr/>' if firstline && @next_page != 2 && @page != 1 %>
+<li>
+  <% if ENV['RAILS_ENV'] == 'production' #or true ##debug! %>
+    <%= scrap_page.content %>
+  <% else %>
+    <% if scrap_page.cacheable_type == "ScrapTopic" %>
+     <%= render :partial => "scraps/scrap_topic_show", :locals => { :scrap_topic => scrap_page.scrap_topic, :scraps => scrap_page.scrap_topic.scraps }  %>
+    <% else %>
+      <%= render :partial => "scraps/scrap", :locals => { :scrap => scrap_page.parallel_text, :title => "" }  %>
+    <% end %>
+  <% end %>
+</li><% firstline = false %>
+<% end %>
+<code class="next_page"><%= @next_page %></code>

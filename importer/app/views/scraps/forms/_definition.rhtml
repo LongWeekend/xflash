@@ -1,0 +1,13 @@
+<div class="left">
+  <label for="scrap_readings"><%= 'Readings'[:caption_readings] %></label>
+  <%= form.text_field :readings, :style => "width:235px" %>
+</div>
+<div class="left" style="padding-left:15px;">
+  <label for="scrap_tags"><%= 'Tags'[:caption_tags] %></label>
+  <%= form.text_field :tags, :style => "width:235px", :class => "tags_auto" %>
+</div>
+<div class="clear"></div>
+<div class="left">
+  <label for="scrap_usage"><%= 'Usage'[:caption_usage] %></label>
+  <%= form.text_area(:usage, :rows =>2, :style => "width:495px")%>
+</div>

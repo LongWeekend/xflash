@@ -1,0 +1,6 @@
+<span class="readings"><%= definition.formatted_readings %></span>
+<%= render :partial => 'scraps/templates/tags', :locals => { :tags => definition.tags }%>
+<%= render :partial => 'scraps/templates/star', :locals => { :scrap => definition }%>
+<div class="clear"></div>
+<span class="usage"><%= definition.usage %></span>
+<%= render :partial => 'scraps/templates/version', :locals => { :version => definition.version }%>

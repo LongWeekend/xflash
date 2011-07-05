@@ -1,0 +1,40 @@
+<div class="left">
+  <label for="user_identity_url"><%= 'Got an Open ID URL?'[:caption_identity_url] %></label>
+  <%= form.text_field :identity_url %><br/>
+  <div class="form_help"><%= 'Enter your OpenID Identity Url if you know it. If your Identity Url supports the {sreg} extension, you can {login_link} and create your account automatically. Otherwise use the fields below!'[:help_open_id_field_extended, %(<acronym title="Simple Registration">sreg</acronym>), link_to('login'[:caption_login], login_path)] %></div><br/>
+  <div class="left"><%= submit_tag 'Authenticate via Open ID!'[:button_signup] %></div>
+</div>
+
+<div class="clear"></div>
+<br/><hr/><br/>
+
+<div class="left">
+  <label for="user_login"><%= 'Login'[:title_login] %></label>
+  <%= form.text_field :login %>
+</div>
+
+<div class="left" style="padding-left:10px;">
+  <label for="user_email"><%= 'Email'[:caption_email] %></label>
+  <%= form.text_field :email %>
+</div>
+
+<div class="clear"></div>
+<div class="form_help"><%= 'Logins should start with least 2 characters and may consist of letters, numbers, or the underscore.'[:text_login_field_instructions] %></div>
+<br/>
+
+<div class="left">
+  <label for="display_name"><%= 'Display Name (optional)'[:caption_display_name] %></label>
+  <%= form.text_field :display_name %>
+</div>
+<div class="clear"></div><br/>
+
+<div class="left" id="password_fields">
+  <label for="user_password"><%= 'Password'[:caption_password] %></label>
+  <div>
+    <%= form.password_field :password %>
+    <span class="entryhelp">(<%= 'once'[:text_enter_password] %>)</span><br/>
+    <%= form.password_field :password_confirmation %>
+    <span class="entryhelp">(<%= 'and again to be sure'[:text_confirm_password] %>)</span>
+  </div>
+  <div class="form_help"><%= 'Enter your desired password twice. It must be at least 5 characters.'[:text_password_field_instructions] %></span></div>
+</div>

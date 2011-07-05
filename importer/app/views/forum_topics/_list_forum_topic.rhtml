@@ -1,0 +1,27 @@
+<tr>
+  <td class="forum_activity_icon">
+    <% if recent_topic_activity(topic) %>
+      <%= display_topic_icon(topic, "icon green", "Recent activity"[:text_recent_activity]) %>
+    <% else %>
+      <%= display_topic_icon(topic, "icon grey", "No recent activity"[:text_no_recent_activity]) %>
+    <% end %>
+  </td>
+  <td width=45%>
+    <%#= "<strong style='font-size:17px;'>Q&amp;A&nbsp;</strong>" if topic.answerable? %>
+    <%= link_to h(topic.title), question_path(topic), :rel => "bookmark", :class => "tiddler_link" %>
+    <%= "</strong>" if topic.sticky? %>
+    <%= "<span class='tiny'>" + link_to('edit'[:caption_edit], edit_question_path(topic), :class => "tiddler_link") + "</span>" if topic.editable_by?(current_user) %>
+    <%= display_solved_icon if topic.answerable? and topic.solution_post_id != 0%><br/>
+    <%= topic.description.chars[0..200] + (topic.description.chars.size > 200? " ..." : "")%>
+  </td>
+  <td align=center><%= pluralize('posts'[:caption_posts], topic.posts.count) %></td>
+  <td align=center><%= pluralize('views'[:caption_views], topic.views) %></td>
+  <td>
+    <% if topic.posts.count > 0 %>
+    <%= 'Last post'[:colhdr_last_post] %> <abbr class="updated" title="<%#= topic.last_activity_at.xmlschema %>"><%= time_ago_in_words(topic.last_activity_at) %></abbr><br/>
+    <%= 'by {user}'[:by_user, "<span class=\"author\"><em class=\"fn\">#{h(topic.posts.last.user.display_name)}</em></span>"] %>
+    <% else %>
+      <%= 'No posts yet'[:text_no_posts_yet] %>
+    <% end %>      
+  </td>
+</tr>

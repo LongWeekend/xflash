@@ -1,0 +1,7 @@
+<% html = capture do %>
+  <div class="contents" style="padding-bottom:15px">
+    <h2><%= 'Edit Scraptionary Topic'[:title_edit_scrap_topic] %></h2><br/>
+    <%= render :partial => 'scrap_topic_form' %>
+  </div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

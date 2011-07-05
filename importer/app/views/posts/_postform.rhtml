@@ -1,0 +1,3 @@
+<input type="hidden" name="forumpost[parent_id]" value="<%= post.id %>">
+<%= f.text_area :body, :rows => 1, :class => "reply_editor", :id =>"reply_editor_#{post.id}" %><br/>
+<%= submit_tag "Submit"[:button_submit] %>&nbsp;<%= "or " + link_to_function('cancel'[:caption_cancel], "$('#post_reply_#{post.id}').slideToggle('slow')") %>

@@ -1,0 +1,25 @@
+<h2>
+  <code class="scrap_topic_id"><%= scrap_topic.id %></code>
+  <span class="title"><a href="/scraps/<%= scrap_topic.slug %>" class="tiddler_link"><%= scrap_topic.title %></a></span>
+  <a class="star" id="star_scrap_topic_<%= scrap_topic.id.to_s %>" href="/list/toggle?scrap_topic_id=<%= scrap_topic.id%>"></a>
+  <% if scrap_topic.subtitle != "" %> <span class="subtitle">(<%= scrap_topic.subtitle %>)</span><% end %>
+  <a class="add_scrap_button" href="/scraps/<%= scrap_topic.slug %>/new"></a>
+</h2>
+<ul class="scrap_list">
+<% unless scraps.length > 0 %>
+	<li class="empty"><%= 'No scraps found'[:text_no_scraps_found] %></li>
+<% else %>
+	<% for scrap in scraps do %>
+    <li id="scrap_<%= scrap.id.to_s %>"><%= render :partial => 'scraps/scrap', :locals => { :scrap => scrap, :title => scrap_topic.title } %></li>
+	<% end %>
+<% end %>
+</ul>
+<%# if scrap_topic.related.length > 0 and false ## debug, off for now! %>
+<% if false %>
+  <p><strong><%= 'Related'[:caption_related]%>:</strong>
+  <%# scrap_topic.related.each do |link| %>
+    <%# if ScrapTopic.ar_base_klass(link) == "Collection" %><a href="/scrap/<%#= link.scrap_topic_id %>"><%#= link.title%></a><%# end %>
+	<%# end %>
+  </p>
+  <code class="scrap_topic_id"><%= scrap_topic.id.to_s %></code>
+<% end %>

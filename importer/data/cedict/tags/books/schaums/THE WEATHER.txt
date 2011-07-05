@@ -1,0 +1,32 @@
+不好	不好	bu4 hao3	/bad/
+攝氏	摄氏	she4 shi4	/centigrade/
+多雲	多云	duo1 yun2	/cloudy/
+冷	冷	leng3	/cold/
+涼快	凉快	liang2 kuai5	/cool/
+度	度	du4	/degree (temperature)/
+級	级	ji2	/degree (wind force)/
+下小雨	下小雨	xia4 xiao3 yu3	/drizzle/
+晴天	晴天	qing2 tian1	/fine/clear/
+霧	雾	wu4	/fog/
+大風	大风	da4 feng1	/gusty wind/
+冰雹	冰雹	bing1 bao2	/hail/
+熱	热	re4	/hot/
+悶熱	闷热	men1 re4	/humid/
+濕熱	湿热	shi1 re4	/humid/
+閃電	闪电	shan3 dian4	/lightning/
+很好	很好	hen3 hao3	/nice/
+陰天	阴天	yin1 tian1	/overcast/
+雨	雨	yu3	/rain/
+陣雨	阵雨	zhen4 yu3	/shower/
+雪	雪	xue3	/snow/
+下雨	下雨	xia4 yu3	/rain/
+下雪	下雪	xia4 xue3	/snow/
+暴風雪	暴风雪	bao4 feng1 xue3	/snowstorm/blizzard/
+晴朗	晴朗	qing2 lang3	/sunny/
+雷	雷	lei2	/thunder/
+打雷	打雷	da3 lei2	/thunder/
+雷雨	雷雨	lei2 yu3	/thunderstorm/
+颱風	台风	tai2 feng1	/typhoon/
+暖和	暖和	nuan3 huo2	/warm/
+天氣	天气	tian1 qi4	/weather/
+風很大	风很大	feng1 hen3 da4	/windy/

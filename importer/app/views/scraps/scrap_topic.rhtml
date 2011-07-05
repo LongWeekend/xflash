@@ -1,0 +1,2 @@
+<% html = capture do %><div class="contents"><ol class="scrap_list" style="padding-left:12px;list-style:none;"><li><%= render :partial => 'scraps/scrap_topic_show', :locals => { :scrap_topic => @scrap_topic, :scraps => @scraps } %></li></ol></div><% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

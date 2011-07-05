@@ -1,0 +1,29 @@
+天气	天气	tian1qi4	/weather/
+今天	今天	jin1tian1	/today; at the present; now/
+昨天	昨天	zuo2tian1	/yesterday/
+我	我	wo3	/I; me; myself/
+你	你	ni3	/you/
+您	您	nin2	/you (formal)/
+他	他	ta1	/he; him/
+她	她	ta1	/she/
+我們	我们	wo3men5	/we; us; ourselves/
+你們	你们	ni3men5	/you (plural)/
+他們	他们	ta1men5	/they/
+她們	她们	ta1 men5	/they/
+好	好	hao3	/good; well/
+冷	冷	leng3	/cold/
+熱	热	re4	/heat; to heat up; fervent; hot (of weather); warm up/
+忙	忙	mang2	/busy/
+早	早	zao3	/early; morning/
+很	很	hen3	/very; extremely/
+不	不	bu4	/(negative prefix)/not/no/
+真	真	zhen1	/truly/really/
+也	也	ye3	/also; too/
+都	都	dou1	/all; both (if two things are involved); entirely (due to)each; even; already/
+嗎	吗	ma5	/(question tag)/
+呢	呢	ne5	/(question particle)/
+啊	啊	a5	/(a modal particle showing affirmation, approval, or consent)/
+請坐	请坐	qing3 zuo4	/please sit down/
+請	请	qing3	/to ask; to invite; please (do sth); to treat (to a meal, etc); to request/
+你好	你好	ni3hao3	/hello; how are you/
+再見	再见	zai4jian4	/good bye/

@@ -1,0 +1,20 @@
+<%# Tag counts have been turned off for now !! %>
+
+<% html = capture do %>
+<%# cache do %>
+<div class="contents" style="background-color:#fff;border:3px solid #D15600">
+  <h2 class="title"><%= t 'Tags'[:title_tags] %><br/>
+  <div class="subtitle"><small><%= "Displaying {num} tags"[:message_tags_displayed, @tags.size] %></small></div>
+  </h2>
+  <ul class="taglist" style="padding-left:0px;margin-bottom:10px;">
+  <% for tag in @tags do %>
+  	<%# if tag.count > 0 %>
+  	<li><a href="<%=tags_show_path(tag.name)%>" class="tiddler_link"><%= tag.name%></a> <!--small>(000<%#= tag.count %>)</small--></li>
+  	<%# end %>
+  <% end %>
+  </ul><br/>&nbsp;
+  <div class="clear"></div>
+</div>
+<%# end %>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

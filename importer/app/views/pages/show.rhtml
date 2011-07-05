@@ -1,0 +1,85 @@
+<div class="page_header">
+
+  <div class="history">
+    <%= 'Created by'[:text_created_by] %> <u><%= @revision.user.display_name%></u><br/>
+    <%= 'Last edited by'[:text_last_edited_by] %> <u><%= @revision.user.display_name%></u><br/><%= medium_date(@revision.created_at) %>
+  </div>
+
+  <h2 class="title"><%= t @page.title %><br/>
+   <div class="tags">
+    <% if params[:action] == 'compare' %>
+      <span class="textile"><%= @comparison[:tags] %></span>
+      <% else %>
+        <%= @page.tags or 'None' %>
+     <% end %>
+   </div>
+  </h2>
+
+</div>
+
+<div id="container">
+
+  <div class="panel_view" class="panel">
+    
+    <div class="padded">
+    <% if params[:action] == 'compare' %>
+      <div id="change_info" class="wiki_info">
+      Comparing revision <%= @comparison[:a][:revision] %> to <%= @comparison[:b][:revision] %><br/><small><%= link_to 'show current'[:caption_show_current_revision], book_page_path(:book_id => @book.slug, :id => @page.slug), {:style =>'color:red'} %></small>
+      </div>
+    <% elsif !@revision.latest? %>
+      <div id="change_info" class="wiki_info">
+      Displaying Revision <%= @revision.rid %><br/><small><%= link_to 'show current'[:caption_show_current_revision], book_page_url(@page.slug, :revid => nil) %></small>
+      </div>
+    <% end %>
+    <span class="textile">
+      <%= @page.content %>
+    </span>
+  </div>
+
+    <% if params[:action] != 'compare' and @revision.latest? %>
+    <div class="talk">
+      <a name="talk"></a>
+      <% unless @talkposts.size == 0 %>
+        <%= render :partial => 'posts/postlisting', :locals => { :posts => @talkposts, :current_user => current_user } %>
+			<% else %>
+        <div style="padding:25px;">
+          <% if @talkposts.size == 0 %>
+            <p>No one is talking about this page.</p>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="talkdiv">
+        <div id="reply" style="margin:10px 10px 10px 0; padding-left:8px;"><a name="talk-reply"></a>
+          <h3><%= 'Talk About This Page'[:title_talk_abaout_page] %></h3>
+          <% form_for :talkpost, :url => book_page_talkabout_path(@book.id, @page.id) do |f| %>
+            <%= f.hidden_field :parent_id, :id => 'post_parent_id' %>
+            <%= render :partial => 'posts/postform', :locals => { :f=>f, :show_cancel_link => true} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="panel_changes" class="panel">
+    <% form_tag  compare_book_pages_path(@book.slug, @page.slug), :id => "compare_form" do %>
+      <%= render :partial => 'scraps/revisions', :locals => { :scrap=> @page, :revision => @revision, :comparison => @comparison }  %>
+    <% end %>
+  </div>
+
+</div>
+<%= render :partial => 'layouts/pagefooter' %>
+
+<% content_for :right do %>
+<div id="sidebar">
+
+  <%= render :partial => 'layouts/pageoptions', :locals => { :page=> @page } %><br/>
+
+  <% if @page.book %>
+  <div class="bookcontents" class="paleblue">
+      <%= render :partial => 'books/tree', :locals => { :tree=> @tree, :book=> @book, :style=> '  border:0px;' } %>
+  </div>
+  <% end %>
+
+</div>
+<% end %>

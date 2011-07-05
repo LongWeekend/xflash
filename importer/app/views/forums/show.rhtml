@@ -1,0 +1,39 @@
+<% html = capture do %>
+  <div class="contents forum_topic_contents">
+    <small><%= link_to('Forums'[:caption_forums], forums_path, :class => "tiddler_link_static") %> &gt; </small>
+    <h2 class="title"><%= t h @forum.title %></h2>
+    <div class="subtitle">
+      <%= '{count} Topic(s)'[:child_count, number_with_delimiter(@forum.topics.count)] %>, 
+      <%= '{count} Post(s)'[:child_count, number_with_delimiter(@forum.count_all_posts)] %>,
+      <%= '{count} Voice(s)'[:voices_count, number_with_delimiter(@forum.voice_count)] %>
+    </div>
+
+    <% if @forum_topics.total_pages > 1 -%>
+      <% if logged_in? %>
+        <p style="float:right; margin-top:0;"><%= link_to 'Start New Topic'[:caption_start_new_topic], create_topic_in_url(@forum), :class => "tiddler_link_static" %></p>
+      <% end %>
+    	<%= will_paginate @forum_topics %>
+    <% end -%>
+
+    <table class="styled" border="0">
+    <tbody style="line-height:1.1em;">
+      <% for topic in @forum_topics %>
+        <%= render :partial => 'forum_topics/legacy_list_forum_topic', :locals => { :topic => topic, :forum => @forum } %>
+      <% end %>
+    </tbody>
+    </table>
+
+    <br/>
+    <strong><%= link_to 'Click to Start a Discussion'[:caption_start_new_topic], new_forum_topic_path(@forum.id), :class => "tiddler_link_static" %> |
+    <strong><%= link_to 'Click to Ask a Question'[:caption_ask_new_question], new_forum_topic_path(@forum.id, :answerable => "1"), :class => "tiddler_link_static" %><br/><br/>
+
+    <em><%= h(@forum.description) unless @forum.description.blank? %></em>
+    <% if @forum.moderators.any? %>
+      <br/><ul><%= 'Moderators'[:title_moderators] %> <% @forum.moderators.each { |user| "<li>" + link_to(user.display_name, user_path(user), :class => "tiddler_link_static") + "</li>" } %></ul>
+    <% else %>
+      &nbsp;<em><%= 'Forum is currently unmoderated, please play nice!.'[:text_forum_unmoderated] %></em>
+    <% end %>
+    
+  </div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

@@ -1,0 +1,13 @@
+分	分	fen1	/minute/
+差	差	cha1	/to be short of/to be lacking/
+昨天	昨天	zuo2 tian1	/yesterday/
+前天	前天	qian2 tian1	/the day before yesterday/
+后天	后天	hou4 tian1	/the day after tomorrow/
+明年	明年	ming2 nian2	/next year/
+去年	去年	qu4 nian2	/last year/
+前年	前年	qian2 nian2	/the year before last/
+后年	后年	hou4 nian2	/(n) the year after next/
+下個月	下个月	xia4 ge4 yue4	/next month/
+表	表	biao3	/watch/
+早飯	早饭	zao3 fan4	/breakfast/
+中飯	中饭	zhong1 fan4	/lunch/

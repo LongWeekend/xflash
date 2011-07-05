@@ -1,0 +1,3 @@
+天气	天气	tian1qi4	/weather/
+今天	今天	jin1tian1	/today; at the present; now/
+昨天	昨天	zuo2tian1	/yesterday/

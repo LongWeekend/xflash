@@ -1,0 +1,14 @@
+<% if @list_keys.length > 0 %>
+  <% for key in @list_keys do %>
+    <% obj = @list_items[key.to_i] %>
+    <% if obj.type.to_s  == "ScrapTopic" %>
+      <li><strong><%= link_to(obj.title, "/scraps/" + obj.slug) %></strong>&nbsp;<a href="<%= '/list/remove_item?scrap_topic_id=' + obj.id.to_s %>" class="remove" id="remove_<%= obj.id.to_s %>">(x)</a></li>
+    <% else %>
+      <li><%= render :partial => 'scraps/templates/list_item', :locals => { :scrap => obj } %></li>
+    <% end %>
+  <% end %>
+<% elsif @list_keys.length == 0 %>
+  <li class="empty"><%= 'List is Empty!'[:caption_list_empty] %></li>
+<% else %>
+  <%= 'Ajax Error!'[:error_ajax] %>
+<% end %>

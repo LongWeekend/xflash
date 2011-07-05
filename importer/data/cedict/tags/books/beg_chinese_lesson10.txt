@@ -1,0 +1,45 @@
+北	北	bei3	/north/
+比	比	bi3	/(particle used for comparison and "-er than")/to compare/to contrast/to gesture (with hands)/ratio/
+冰	冰	bing1	/ice/
+常常	常常	chang2 chang2	/frequently/usually/often/
+出	出	chu1	/to go out/to come out/to occur/to produce/to go beyond/to rise/to put forth/to occur/to happen/
+春天	春天	chun1 tian1	/spring (season)/
+大	大	da4	/big/huge/large/major/great/wide/deep/oldest/eldest/
+帶	带	dai4	/carry/wear/band/belt/girdle/ribbon/area/zone/region/lead/bring;/
+東	东	dong1	/east/
+冬天	冬天	dong1 tian1	/winter/
+度	度	du4	/degree/capacity/standard/
+度假	度假	du4 jia4	/go on holiday/
+風	风	feng1	/wind/news/style/custom/manner/
+海灘	海滩	hai3 tan1	/beach/
+滑雪	滑雪	hua2 xue3	/to ski/skiing/
+季節	季节	ji4 jie2	/time/season/period/
+空調	空调	kong1 tiao2	/air conditioning/
+雷	雷	lei2	/thunder/
+冷	冷	leng3	/cold/
+涼	凉	liang2	/cool/cold/
+南	南	nan2	/south/
+暖	暖	nuan3	/warm/
+暖氣	暖气	nuan3 qi4	/heater/heating/
+晴	晴	qing2	/clear/fine (weather)/
+秋天	秋天	qiu1 tian1	/autumn/
+熱	热	re4	/heat/to heat up/fervent/hot (of weather)/warm up/
+傘	伞	san3	/umbrella/
+閃電	闪电	shan3 dian4	/lightning/
+攝氏	摄氏	she4 shi4	/Celsius/centigrade/
+台風	台风	tai2 feng1	/typhoon/
+天氣	天气	tian1 qi4	/weather/
+為什麼	为什么	wei4 shen3 me5	/why/for what reason/
+霧	雾	wu4	/fog/mist/
+西	西	xi1	/west/
+夏天	夏天	xia4 tian1	/summer/
+小	小	xiao3	/small/tiny/few/young/
+雪	雪	xue3	/snow/
+陰	阴	yin1	/cloudy (of weather)/overcast/Yin/feminine/moon/cloudy/negative (electric.)/shady/
+雨	雨	yu3	/rain/
+雨衣	雨衣	yu3 yi1	/raincoat/
+預報	预报	yu4 bao4	/forecast/
+雲	云	yun2	/cloud/
+最好	最好	zui4 hao3	/best/(you) had better (do what we suggest)/
+溜冰	溜冰	liu1bing1	/ice skate/
+華氏	华氏	hua2shi4	/Fahrenheit/

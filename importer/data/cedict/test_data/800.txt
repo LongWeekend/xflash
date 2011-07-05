@@ -1,0 +1,6 @@
+"拼音排序","編號","詞彙","拼音","等級","詞類","英文解釋"
+"A",,,,,,
+1,"1387","挨","āi ","A","(VS)","get close to,be next to,follow in sequence or along designated route/direction"
+2,"2119","愛戴","àidài ","A","(VS)","love and respect"
+3,"2117","愛國","àiguó ","A","(VS)","love one's country,patriotic"
+4,"2118","愛滋病","àizībìng ","A","(N)","AIDS"

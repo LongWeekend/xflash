@@ -1,0 +1,75 @@
+雜技	杂技	za2 ji4	/acrobatics/
+演	演	yan3	/act/play/
+動作片	动作片	dong4 zuo4 pian4	/action movie/
+女演員	女演员	nu:3 yan3 yuan2	/actress/
+幕	幕	mu4	/acts/
+大人	大人	da4 ren2	/adult/
+鼓掌	鼓掌	gu3 zhang3	/applaud/
+拍手	拍手	pai1 shou3	/applaud/
+觀眾	观众	guan1 zhong4	/audience/
+芭蕾	芭蕾	ba1 lei3	/ballet/
+動畫片	动画片	dong4 hua4 pian4	/cartoon/
+兒童	儿童	er2 tong2	/children/
+電影院	电影院	dian4 ying3 yuan4	/cinema/
+存衣處	存衣处	cun2 yi4 chu3	/cloakroom/
+近	近	jin4	/close/near/
+上場	上场	shang4 chang2	/come on stage/
+出場	出场	chu1 chang3	/come on stage/
+喜劇	喜剧	xi3 ju4	/comedy/
+喜劇片	喜剧片	xi3 ju4 pian1	/comedy/
+音樂會	音乐会	yin1 yue4 hui4	/concert/
+音樂廳	音乐厅	yin1 yue4 ting1	/concert hall/
+相聲	相声	xiang4 sheng1	/crosstalk/
+舞劇	舞剧	wu3 ju4	/dance drama/
+導演	导演	dao3 yan3	/director/
+離	离	li2	/distance to/distance from/
+紀錄片	纪录片	ji4 lu4 pian4	/documentary/
+樓下	楼下	lou2 xia4	/downstairs/
+話劇	话剧	hua4 ju4	/drama/
+故事片	故事片	gu4 shi5 pian4	/drama/
+一樓	一楼	yi1 lou2	/first floor/basement/
+外國片	外国片	wai4 guo2 pian1	/foreign film/
+前排	前排	qian2 pai2	/front rows/
+多少錢	多少钱	duo1 shao3 qian2	/how much/
+進口片	进口片	jin4 kou3 pian1	/imported film/
+幕間休息	幕间休息	mu4 jian1 xiu1 xi1	/intermission/
+功伕片	功夫片	gong1 fu1 pian1	/GongFu movie/
+武打片	武打片	wu3 da3 pian1	/GongFu movie/
+主演	主演	zhu3 yan3	/lead/
+女主角	女主角	nu:3 zhu3 jiao3	/leading female actor/
+男主角	男主角	nan2 zhu3 jiao3	/leading male actor/
+左邊	左边	zuo3 bian1	/left/
+中間	中间	zhong1 jian4	/middle/
+電影	电影	dian4 ying3	/movie/
+片子	片子	pian1 zi5	/movie/
+歌劇	歌剧	ge1 ju4	/opera/
+原版	原版	yuan2 ban3	/original release/
+節目單	节目单	jie2 mu4 dan1	/program/
+右邊	右边	you4 bian1	/right/
+愛情片	爱情片	ai4 qing2 pian1	/romance/
+排	排	pai2	/row/
+場	场	chang3	/scenes/
+科幻片	科幻片	ke1 huan4 pian1	/science fiction/
+銀幕	银幕	yin2 mu4	/screen/
+座	座	zuo4	/seat/
+座位	座位	zuo4 wei4	/seat/
+二樓	二楼	er4 lou2	/second floor/
+看演出	看演出	kan4 yan3 chu1	/see a show/
+拍	拍	pai1	/shoot (a movie)/
+歌星	歌星	ge1 xing1	/singing star/
+賣完	卖完	mai4 wan2	/sold out/
+歌舞	歌舞	ge1 wu3	/song and dance/
+開始	开始	kai1 shi3	/start/begin/
+開演	开演	kai1 yan3	/start/begin/
+字幕	字幕	zi4 mu4	/subtitle/
+配角	配角	pei4 jue2	/supporting actor/
+劇場	剧场	ju4 chang3	/theater/
+劇院	剧院	ju4 yuan4	/theater/
+戲院	戏院	xi4 yuan4	/theater/
+驚险片	惊险片	jing1 xian3 pian1	/thriller/
+今天	今天	jin1 tian1	/today/
+明天	明天	ming2 tian1	/tomorrow/
+悲劇	悲剧	bei1 ju4	/tragedy/
+樓上	楼上	lou2 shang4	/upstairs/
+帶位員	带位员	dai4 wei4 yuan2	/usher/
+西部片	西部片	xi1 bu4 pian4	/Western (movie)/

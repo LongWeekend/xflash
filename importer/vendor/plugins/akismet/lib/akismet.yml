@@ -1,0 +1,2 @@
+akismetBlog: "www.npedia.org"  # Home URL of the instance making the request
+akismetKey: "988c59011845"     # Your API key from WordPress

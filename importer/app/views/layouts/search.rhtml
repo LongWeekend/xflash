@@ -1,0 +1,14 @@
+<%= render :partial => 'layouts/html_header' %>
+<%= render :partial => 'layouts/site_header' %>
+<div id="retainer" style="max-width:1200px;margin:auto;">
+  <div id="container">
+    <div id="page">
+  		<div class="page_content" id="search_results">
+  	    <%= @content_for_layout %>
+  		</div>
+  	  <div class="progress_indicator_large" id="search_spinner" style="margin:20px 20px 0 20px"></div>
+    </div>
+  </div>
+  <%= render :partial => 'layouts/sidebar' %>
+</div>
+<%= render :partial => 'layouts/site_footer' %>

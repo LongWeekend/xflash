@@ -1,0 +1,37 @@
+地址	地址	di4 zhi3	/address/
+收信人	收信人	shou1 xin4 ren2	/addressee/
+航空信	航空信	hang2 kong1 xin4	/airmail/
+到	到	dao4	/arrive/
+海運	海运	hai3 yun4	/by sea/
+瓷器	瓷器	ci2 qi4	/ceramics/
+送	送	song4	/deliver/
+信封	信封	xin4 feng1	/envelope/
+除瞭。。。以外	除了。。。以外	chu2 le5 ... yi3 wai4	/exept for/
+特快專遞	特快专递	te4 kuai4 zhuan1 di4	/express mail/
+填	填	tian2	/fill (a form)/
+易碎	易碎	yi4 sui4	/fragile/
+玻璃器皿	玻璃器皿	bo1 li2 qi4 min3	/glassware/
+多重	多重	duo1 zhong4	/how heavy/
+保險	保险	bao3 xian3	/insurance/
+國際	国际	guo2 ji4	/international/
+信	信	xin4	/letter/
+郵件	邮件	you2 jian4	/mail/
+郵遞員	邮递员	you2 di4 yuan2	/mail carrier/
+郵箱	邮箱	you2 xiang1	/mailbox/
+信箱	信箱	xin4 xiang1	/mailbox/
+匯票	汇票	hui4 piao4	/money order/
+包裹	包裹	bao1 guo3	/package/
+郵局	邮局	you2 ju2	/post office/
+郵資	邮资	you2 zi1	/postage/
+郵政編碼	邮政编码	you2 zheng4 bian1 ma3	/postal code/
+郵筒	邮筒	you2 tong3	/postbox/
+信筒	信筒	xin4 tong3	/postbox/
+明信卡	明信卡	ming2 xin4 ka3	/postcard/
+掛號信	挂号信	gua4 hao4 xin4	/registered mail/
+平信	平信	ping2 xin4	/regular mail/
+寄	寄	ji4	/send/
+寄出去	寄出去	ji4 chu1 qu4	/send out/
+寄信人	寄信人	ji4 xin4 ren2	/sender/
+郵票	邮票	you2 piao4	/stamp/
+售郵票機	售邮票机	shou4 you2 piao4 ji1	/stamp vending machine/
+稱	称	cheng1	/weigh/

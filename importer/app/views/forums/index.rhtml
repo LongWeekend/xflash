@@ -1,0 +1,47 @@
+<% html = capture do %>
+  <div class="contents forum_contents">
+    <h2 class="title"><%= t 'Forums'[:title_forums] %><%= feed_icon_tag "Recent Posts"[:caption_recent_posts], forums_path(:format => 'rss') %></h2>
+    <div class="subtitle">
+      <%= '{count} Topic(s)'[:child_count, number_with_delimiter(ForumTopic.count)] %>, 
+      <%= '{count} Post(s)'[:child_count, number_with_delimiter(ForumPost.count)] %>,
+      <%= '{count} Voice(s)'[:voice_count, number_with_delimiter(User.count(:conditions => "forum_posts_count > 0"))] %>
+    </div>
+    <table class="styled" border="0" style="width:99%">
+    <tbody style="line-height:1.1em;">
+    <% for forum in @forums do %>  
+    <tr>
+      <td valign=top>
+        <div class="forum_icon_box">
+          <% if recent_forum_activity(forum) %>
+            <%= display_topic_icon(forum, "icon green", "Recent activity"[:text_recent_activity]) %>
+          <% else %>
+            <%= display_topic_icon(forum, "icon grey", "No recent activity"[:text_no_recent_activity]) %>
+          <% end %>
+        </div>
+    	</td>
+    	<td>
+        <%= link_to h(forum.title), forum, :class => "title tiddler_link_static" %> <%= link_to 'edit'[:caption_edit], edit_forum_path(forum), :class => "tiny tiddler_link_static", :rel => "directory" if admin? %>
+        <div class="posts">
+          <%= forum.description %>
+        </div>
+      </td>
+      <td align=center><%= pluralize('topics'[:caption_topics], forum.child_count) %></td>
+      <td align=center><%= pluralize('posts'[:caption_posts], forum.count_all_posts) %></td>
+      <td>
+    		<% if forum.suspended? %>
+    			<%= 'Suspended'[:text_suspended] %>
+        <% elsif forum.topics.last %>
+          <%= 'Updated'[:colhdr_last_update] %> <%= time_ago_in_words(forum.topics.last.last_activity_at) %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    <% if @forums.length == 0 %>
+      <tr><td><%= 'No forums found, please create one.'[:error_no_forums_found] %></td></tr>
+    <% end %>
+    </tbody>
+    </table><br/>
+    <%= link_to 'Create New Forum'[:caption_create_new_forum], new_forum_url, :class => "tiddler_link_static" %><br/><br/>
+  </div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

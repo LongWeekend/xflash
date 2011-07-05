@@ -1,0 +1,13 @@
+<div class="left">
+  <label for="scrap_links"><%= 'Related Scrap Topics'[:caption_link_collections] %></label><br/>
+  <%= text_field_tag :related_collections, '', :style => "width:235px", :class => "link_collections_auto" %>
+</div>
+<div class="left" style="padding-left:15px;">
+  <label for="scrap_links"><%= 'Related Scraps'[:caption_link_scraps] %></label><br/>
+  <%= text_field_tag :related_scraps, '', :style => "width:235px", :class => "link_scraps_auto" %>
+</div>
+<div class="clear"></div>
+<div class="left">
+  <label for="scrap_tags"><%= 'Tags'[:caption_tags] %></label><br/>
+  <%= text_field_tag :tags, '', :style => "width:235px", :class => "tags_auto" %>
+</div>

@@ -1,0 +1,68 @@
+放學以後	放学以后	fang4 xue2 yi3 hou4	/after school/
+申請	申请	shen1 qing3	/apply for/
+上課	上课	shang4 ke4	/attend class/
+旁聽	旁听	pang2 ting1	/audit/
+學士	学士	xue2 shi4	/bachelor/
+圓珠筆	圆珠笔	yuan2 zhu1 bi3	/ballpoint pen/
+考上	考上	kao3 shang4	/be admitted by/
+黑板	黑板	hei1 ban3	/blackboard/
+寄宿生	寄宿生	ji4 su4 sheng1	/boarder/resident student/
+食堂	食堂	shi2 tang2	/canteen/cafeteria/
+教室	教室	jiao4 shi4	/classroom/
+高考	高考	gao1 kao3	/college entrance exam/
+起讀生	起读生	qi3 du2 sheng1	/day student/
+學位	学位	xue2 wei4	/degree/
+係	系	xi4	/department/
+課桌	课桌	ke4 zhuo1	/desk/
+畢業證書	毕业证书	bi4 ye4 zheng4 shu1	/diploma/
+做功課	做功课	zuo4 gong1 ke4	/do homework/
+博士	博士	bo2 shi4	/doctor/Ph.D./
+宿舍	宿舍	su4 she4	/dormitory/
+教育	教育	jiao4 yu4	/education/
+小學	小学	xiao3 xue2	/elementary school/
+工學院	工学院	gong1 xue2 yuan4	/engineering school/
+一年級	一年级	yi4 nian2 ji2	/first grade/
+五門課	五门课	wu3 men2 ke4	/five courses/
+分數	分数	fen1 shu4	/grade/score/
+畢業	毕业	bi4 ye4	/graduate/
+中學	中学	zhong1 xue2	/high school/middle school/
+初中	初中	chu1 zhong1	/junior high/
+法學院	法学院	fa3 xue2 yuan4	/law school/
+講課 	讲课 	jiang3 ke4	/lecture/
+聽課	听课	ting1 ke4	/listen to lecture/
+文學	文学	wen2 xue2	/literature/
+專業	专业	zhuan1 ye4	/major/
+碩士	硕士	shuo4 shi4	/master/
+醫學院	医学院	yi1 xue2 yuan4	/medical school/
+筆記本	笔记本	bi3 ji4 ben3	/notebook/
+幼兒園	幼儿园	you4 er2 yuan2	/nursery school/kindergarten/
+鉛筆	铅笔	qian1 bi3	/pencil/
+校長	校长	xiao4 zhang3	/principal/
+私立	私立	si1 li4	/private/
+教授	教授	jiao4 shou4	/professor/
+公立	公立	gong1 li4	/public/
+唸	念	nian4	/read aloud/
+註册	注册	zhu4 ce4	/register (at school)/
+獎學金	奖学金	jiang3 xue2 jin1	/scholarship/
+學校	学校	xue2 xiao4	/school/
+學院	学院	xue2 yuan4	/school/
+文學院	文学院	wen2 xue2 yuan4	/school of arts and humanities/
+理學院	理学院	li3 xue2 yuan4	/school of science/
+開學	开学	kai1 xue2	/school starts/
+校服	校服	xiao4 fu2	/school uniform/
+書包	书包	shu1 bao1	/schoolbag/
+學期	学期	xue2 qi1	/semester/
+高中	高中	gao1 zhong1	/senior high/
+學生	学生	xue2 sheng1	/student/
+學習	学习	xue2 xi2	/study/
+課	课	ke4	/subject/course/
+做筆記	做笔记	zuo4 bi3 ji4	/take notes/
+記筆記	记笔记	ji4 bi3 ji4	/take notes/
+教書	教书	jiao1 shu1	/teach/
+教課	教课	jiao1 ke4	/teach/
+老師	老师	lao3 shi1	/teacher/
+考試	考试	kao3 shi4	/test/exam/
+課本	课本	ke4 ben3	/textbook/
+課文	课文	ke4 wen2	/the text/
+學費	学费	xue2 fei4	/tuition/
+大學	大学	da4 xue2	/university/college/

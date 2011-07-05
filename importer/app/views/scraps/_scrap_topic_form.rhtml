@@ -1,0 +1,10 @@
+<% form_for :scrap_topic, :url => create_scrap_topic_wout_id_path() do |f| %>
+  <%= '<h2 class="errorExplanation">' + 'Oops - You missed something!'[:error_on_form_submission] + '</h2>' if !@scrap_topic.nil? and !@scrap_topic.errors.empty? %>
+  <div class="left">
+    <%= text_field :scrap_topic, :title, :class => "scrap_topics_auto", :style=>'width:250px;'%><br/>
+    <small class="gray"><%= 'Please enter only kanji or kana keywords.'[:text_scrap_topic_input_instructions] %></small>
+  </div>
+  <div class="left">
+  	&nbsp; <%= submit_tag '&gt;&gt;' + 'Create'[:button_create] %><br/>
+  </div>
+<% end %>

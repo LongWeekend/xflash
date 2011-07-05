@@ -1,0 +1,54 @@
+會計師	会计师	kuai4 ji4 shi1	/accountant/
+廣告	广告	guang3 gao4	/advertisement/
+資產	资产	zi1 chan3	/assets/
+資產負債表	资产负债表	zi1 chan3 fu4 zhai4 biao3	/balance sheet/
+破產	破产	po4 chan3	/bancruptcy/
+董事會	董事会	dong3 shi4 hui4	/board of directors/
+商業	商业	shang1 ye4	/business/
+買方	买方	mai3 fang1	/buyer/
+主管	主管	zhu3 guan3	/chief executive/
+消費者	消费者	xiao1 fei4 zhe3	/consumer/
+大公司	大公司	da4 gong1 si1	/corporation (big company)/
+做決定	做决定	zuo4 jue2 ding4	/decision making/
+做生意	做生意	zuo4 sheng1 yi4	/do business/
+企業	企业	qi3 ye4	/enterprise/
+定價格	定价格	ding4 jia4 ge2	/establish a price/
+支出	支出	zhi1 chu1	/expense/
+出口	出口	chu1 kou3	/export/
+財務報告	财务报告	cai2 wu4 bao4 gao4	/financial statement/
+浮動	浮动	fu2 dong4	/fluctuate/
+商品	商品	shang1 pin3	/goods/
+進口	进口	jin4 kou3	/import/
+債務	债务	zhai4 wu4	/liabilities/
+虧損	亏损	kui1 sun3	/loss/deficit/
+盈利	盈利	ying2 li4	/make profit/
+經營情況	经营情况	jing1 ying2 qing2 kuang4	/management/performance/
+經理	经理	jing1 li3	/manager/
+市場	市场	shi4 chang2	/market/
+擁有	拥有	yong1 you3	/own/
+合股人	合股人	he2 gu3 ren2	/partner/
+合股公司	合股公司	he2 gu3 gong1 si1	/partnerships/
+納稅	纳税	na4 shui4	/pay tax/
+交稅	交税	jiao1 shui4	/pay tax/
+上稅	上税	shang4 shui4	/pay tax/
+私營	私营	si1 ying2	/privately owned/
+生产	生产	sheng1 chan3	/produce/
+成本	成本	cheng2 ben3	/production costs/
+產品	产品	chan3 pin3	/products/
+利潤	利润	li4 run4	/profit/
+促銷	促销	cu4 xiao1	/promotion/
+零售	零售	ling2 shou4	/retail/
+零售商	零售商	ling2 shou4 shang1	/retailer/
+銷售	销售	xiao1 shou4	/seller/
+服務	服务	fu2 wu4	/service/
+股份	股份	gu3 fen4	/share/
+國營	国营	guo2 ying2	/state-owned/
+股票	股票	gu3 piao4	/stock/
+股票市場	股票市场	gu3 piao4 shi4 chang3	/stock market/
+股東	股东	gu3 dong1	/stockholders/
+供應和需求	供应和需求	gong4 ying4 he4 xu1 qiu2	/supply and demand/
+應納稅的收入	应纳税的收入	ying4 na4 shui4 de5 shou1 ru4	/taxable income/
+買賣	买卖	mai3 mai4	/trade/
+交易	交易	jiao1 yi4	/trade/
+批發	批发	pi1 fa1	/wholesale/
+批發商	批发商	pi1 fa1 shang1	/wholesalers/

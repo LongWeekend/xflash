@@ -1,0 +1,13 @@
+<div class="page_header">
+  <h2 class="title"><%= @book.title %> &gt; <%= 'Edit Page'[:title_edit_page] %></h2>
+</div>
+
+<div class="page_content">
+  <% form_for :page,
+       :url  => book_page_path(@page.book_id, @page.id) do |f| -%>
+    <%= hidden_field_tag :_method, "put" %>
+		<%= render :partial => "form", :object => f %>
+	  <p><%= check_box_tag :minor %> This is a minor revision</p>
+	  <%= submit_tag '&gt;&gt; ' + 'Save'[:button_save]%>
+	<% end %>
+</div>

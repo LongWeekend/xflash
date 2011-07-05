@@ -1,0 +1,5 @@
+<% scrap = @scrap if !scrap and @scrap %>
+<% title = scrap.scrap_topic.title if !title %>
+<% scrap_name = scrap.class.to_s.tableize.singularize %>
+<%= render :partial => "scraps/templates/#{scrap_name}", :locals => { scrap_name.to_sym => scrap, :title => title }%>
+<small class="login_required_element"><a href="/scrap/<%=scrap.id %>/edit/" class="load_form updates_parent"> <%='edit'[:caption_edit]%></a></small>

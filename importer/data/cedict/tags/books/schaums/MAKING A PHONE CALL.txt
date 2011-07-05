@@ -1,0 +1,49 @@
+再	再	zai4	/again/
+接電話	接电话	jie1 dian4 hua4	/answer a phone/
+地區號碼	地区号码	di4 qu1 hao2 ma3	/area code/
+地區號	地区号	di4 qu1 hao2	/area code/
+呼	呼	hu1	/beep/
+呼機	呼机	hu1 ji1	/beeper/
+呼機號碼	呼机号码	hu1 ji1 hao2 ma3	/beeper number/
+壞了	坏了	huai4 le5	/broken/
+忙音	忙音	mang2 yin1	/busy signal/
+手機	手机	shou3 ji1	/cellphone/
+硬幣	硬币	ying4 bi4	/coin/
+對方付費電話	对方付费电话	dui4 fang1 fu4 fei4 dian4 hua4	/collect call/
+接	接	jie1	/connect/
+連通	连通	lian2 tong1	/connection/
+無繩	无绳	wu2 sheng2	/cordless/
+國家號碼	国家号码	guo2 jia1 hao2 ma3	/country code/
+撥	拨	bo1	/dial/
+撥號盤	拨号盘	bo1 hao4 pan2	/dial pad/
+撥號音	拨号音	bo1 hao4 yin1	/dial tone/
+斷瞭	断了	duan4 le5	/disconnected/
+分機	分机	fen1 ji1	/extension/
+分機號碼	分机号码	fen4 ji1 hao2 ma3	/extension number/
+掛	挂	gua4	/hang up/
+稍等	稍等	shao1 deng3	/hold on/
+國際電話	国际电话	guo2 ji4 dian4 hua4	/international call/
+留話	留话	liu2 hua4	/leave a message/
+線	线	xian4	/line/
+本市電話	本市电话	ben3 shi4 dian4 hua4	/long-distance call/
+打電話	打电话	da3 dian4 hua4	/make a call/
+打	打	da3	/make (a call)/
+留言	留言	liu2 yan2	/message/leave a message/
+接線員	接线员	jie1 xian4 yuan2	/operator/
+電話號碼簿	电话号码簿	dian4 hua4 hao4 ma3 bu4	/phone book/
+拿起	拿起	na2 qi3	/pick up/
+收到	收到	shou1 dao4	/receive/
+回電話	回电话	hui2 dian4 hua4	/return call/
+響	响	xiang3	/ring/
+轉槃電話	转盘电话	zhuan4 pan2 dian4 hua4	/rotary dial/
+雜音	杂音	za2 yin1	/static/
+幹擾音	干扰音	gan4 rao3 yin1	/static/
+總機	总机	zong3 ji1	/switchboard/
+電話卡	电话卡	dian4 hua4 ka3	/telephone card/
+公共電話亭	公共电话亭	gong1 gong4 dian4 hua4 ting2	/telephone booth/
+佔線	占线	zhan4 xian4	/the line is busy/
+對方	对方	dui4 fang1	/the other party/
+按鍵電話	按键电话	an4 jian4 dian4 hua4	/touchtone/
+試	试	shi4	/try/
+請問是哪位	请问是哪位	qing3 wen4 shi4 na3 wei4	/who's calling?/
+號碼錯瞭	号码错了	hao2 ma3 cuo4 le5	/wrong number/

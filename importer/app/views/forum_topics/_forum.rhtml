@@ -1,0 +1,53 @@
+THIS PARTIAL IS DEPRECATED
+THIS PARTIAL IS DEPRECATED
+<div class="contents forum_topic_contents">
+
+  <div class="vote_block">
+    +<span id="total_up_votes"><%=@forum_topic.post_votes_up.count %></span><br/>
+    <span style="color:#808185">&minus;<span id="total_down_votes"><%=@forum_topic.post_votes_down.count %></span></span><br/>
+    <span style="font-size:50%;text-align:center">votes</span>
+  </div>
+
+  <small><%= link_to('Forums'[:caption_forums], forums_path, :class => "tiddler_link_static") %> &gt; <%= link_to(h(@forum.title), forum_path(@forum), :class => "tiddler_link_static") %> &gt;</small>
+  <h2 class="title">
+    <%= t header_title %><%= feed_icon_tag @forum_topic.title, formatted_forum_topic_path(@forum, @forum_topic, :rss) %>
+    <span><a class="monitorship<%= " monitorship_clicked" if logged_in? and @monitorship and @monitorship.active %>" id="monitor_forum_topic_<%= @forum_topic.id %>" href="/forums/<%= @forum.id %>/topics/<%= @forum_topic.id %>/monitor"></a></span>
+    <% if logged_in? and admin? %>
+      <span class="modify_forum_topic_links">
+      <% if @forum_topic.editable_by?(current_user) %>
+        <%= link_to('edit'[:caption_edit], edit_forum_topic_path(@forum, @forum_topic), :class => "tiddler_link_static") %>
+        <%= link_to('delete'[:caption_delete], forum_topic_path(@forum, @forum_topic), :class => "tiddler_link_static", :method => :delete, :confirm => 'Delete this topic forever?'[:confirm_delete_topic]) %>
+      <% end %>
+      </span>
+    <% end %>
+  </h2>
+  <div class="subtitle">
+  	<%= @forum_topic.hits %> <%= 'Views'[:text_views] %>, 
+    <%= '{count} Voice(s)'[:voice_count, number_with_delimiter(@forum_topic.voice_count)] %>, 
+  	<%= '{count} Post(s)'[:child_count, number_with_delimiter(@forum_topic.posts.count)] %>
+		<div class="tags">Tags: <%= @forum_topic.tags or 'None' %></div>  </div>
+
+  <%# @forum_posts.map{ |p| p.user }.uniq.each do | user | %>
+    <%#= link_to truncate(h(user.display_name), 28), user_path(user), :title => h(user.display_name), :class => "tiddler_link" %>
+  <%# end %>
+
+  <% if @forum_topic.answerable? and @forum_topic.solution_post_id != 0 %>
+    <strong>Question Answered!</strong><br/>
+  	<a href="#solution">Go to the solution</a><br>
+	<% end %>
+
+  <% if @forum_topic.suspended? %>
+		<h3>(<%= 'Topic Locked'[:title_topic_locked] %>)!</h3>
+  <% end %>
+	
+  <!-- Display forum.topics.posts here -->
+  <%= render :partial => 'posts/postlisting', :locals => { :posts=> @forum_posts, :topic => @forum_topic, :current_user => current_user } %>
+
+  <% if @forum_topic.suspended? %>
+  <p>
+    <%= image_tag "clearbits/lock.gif", :class => "icon grey", :title => "Topic suspended"[:caption_topic_locked] %> 
+    <label><%= 'This topic is suspended'[:text_topic_suspended] %>.</label>
+  </p>
+  <% end %>
+
+</div>

@@ -1,0 +1,2 @@
+<% html = capture do %><%= render :partial => "form", :locals => { :url => question_path(:method => "path", :forum_topic => @forum_topic), :caption => 'Edit Topic'[:title_edit_forum_topic]  } %><% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

@@ -1,0 +1,18 @@
+<%= form.hidden_field :parent_id %>
+
+<div class="left">
+	<%= form.text_field :title, :style => "width:400px", :class => "oversize" %>
+</div>
+<div class="clear"><br/></div>
+
+<div class="left">
+	<label for="page_tags"><%= 'Tags'[:caption_tags] %></label><br/>
+	<%= form.text_field :tags, :style => "width:400px", :class => 'tags_auto' %>
+</div>
+<div class="clear"><br/></div>
+
+<div class="left">
+	<label for="page_content"><%= 'Content'[:caption_content] %></label><br/>
+	<%= form.text_area(:content, :rows =>12, :style => "width:490px", :class => 'textile_editor')%>
+</div>
+<div class="clear"><br/></div>

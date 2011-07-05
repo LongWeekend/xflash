@@ -1,0 +1,25 @@
+<div class="left">
+  <label for="scrap_title"><%= 'Title'[:caption_title] %></label>
+  <%= form.text_field :title, :style => "width:235px"%>
+</div>
+<div class="left" style="padding-left:15px;">
+  <label for="scrap_tags"><%= 'Tags'[:caption_tags] %></label>
+  <%= form.text_field :tags, :style => "width:235px", :class => "tags_auto" %>
+</div>
+<div class="clear"></div>
+<div class="left">
+  <label for="scrap_url"><%= 'URL'[:caption_url] %></label>
+  <%= form.text_field :url, :style => "width:490px" %>
+</div>
+<div class="clear"</div>
+<div class="left">
+  <label for="scrap_definition"><%= 'Description'[:caption_description] %></label>
+  <%= form.text_area(:description, :rows =>4, :style => "width:235px", :class => "limited", :maxlength => "250" )%>
+  <br/><small>Characters left: <span class="charsLeft">250</span></small>
+</div>
+<div class="left" style="padding-left:15px;">
+  <label for="scrap_excerpt"><%= 'Web Excerpt'[:caption_excerpt] %></label>
+  <%= form.text_area(:excerpt, :rows =>4, :style => "width:235px" )%>
+  <br/><small>Paste text from web page here.</small>
+</div>
+<div class="clear"</div>

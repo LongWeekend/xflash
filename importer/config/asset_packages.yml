@@ -1,0 +1,36 @@
+--- 
+javascripts: 
+- base: 
+  - jquery
+  - jquery-ui
+  - jquery-ac
+  - jquery-cookie
+  - jquery-json
+  - jquery-scrollto
+  - jquery-maxlen
+  - jquery-maskinput
+  - jquery-highlight
+  - jquery-livequery
+  - jquery-tabs
+  - jquery-tag-ac
+  - jquery-tiddlers
+  - jrails
+  - nicedit
+  - romaji2kana
+  - urldecode
+  - jquery-greybox
+  - application
+stylesheets: 
+  - base: 
+    - npedia_forum
+    - npedia_forms
+    - npedia_search
+    - npedia_ui
+    - npedia_wiki
+    - clearbits
+    - jtiddler
+    - tabs
+    - ac
+    - tag-ac
+    - greybox
+    - display

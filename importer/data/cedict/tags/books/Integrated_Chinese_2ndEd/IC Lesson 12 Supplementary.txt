@@ -1,0 +1,12 @@
+雞	鸡	ji1	/chicken/
+烤鴨	烤鸭	kao3 ya1	/roast duck/
+烤	烤	kao3	/to roast/to bake/
+豬肉	猪肉	zhu1 rou4	/pork/
+羊肉	羊肉	yang2 rou4	/mutton/lamb/
+漢堡包	汉堡包	han4 bao3bao1	/hamburger/
+麥當勞	麦当劳	mai4 dang1 lao2	/McDonald's/
+比薩餅	比萨饼	bi3 sa4bing3	/pizza/
+必胜客	必胜客	bi4sheng1ke4	/Pizza Hut/
+炸雞	炸鸡	zha2ji1	/fried chicken/
+肯德基	肯德基	ken3de2ji1	/KFC/
+快餐	快餐	kuai4 can1	/fast food/

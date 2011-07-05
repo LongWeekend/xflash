@@ -1,0 +1,12 @@
+<% html = capture do %>
+<div class="contents" style="background-color:#fff;border:3px solid #D15600">
+  <h2 class="title"><%= t 'Register'[:title_register] %></h2><br/>
+	<% form_for :user, :url => create_user_path do |f| -%>
+	  <%= render :partial => "form", :object => f %>
+    <div class="clear"></div><br/>
+	  <div class="left"><%= submit_tag 'Create Your Account!'[:button_signup] %></div>
+	  <div class="clear"></div><br/>
+	<% end -%>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

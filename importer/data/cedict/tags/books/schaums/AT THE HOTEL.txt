@@ -1,0 +1,90 @@
+收	收	shou1	/accept/
+加	加	jia1	/add/
+空調	空调	kong1 tiao2	/air conditioner/
+全天	全天	quan2 tian1	/all day long/
+陽台	阳台	yang2 tai2	/balcony/
+塊	块	kuai4	/bar/
+盥洗池	盥洗池	guan4 xi3 chi2	/basin/
+浴巾	浴巾	yu4 jin1	/bath towel/
+衛生間	卫生间	wei4 sheng1 jian1	/bathroom/
+小聲	小声	xiao3 sheng1	/be quiet/
+床	床	chuang2	/bed/
+帳單	帐单	zhang4 dan1	/bill/
+毛毯	毛毯	mao2 tan3	/blanket/
+開水	开水	kai1 shui3	/boiled water/
+瓶	瓶	ping2	/bottle/
+早餐	早餐	zao3 can1	/breakfast/
+光線好	光线好	guang1 xian4 hao3	/bright/
+叫	叫	jiao4	/call/
+關不上	关不上	guan1 bu4 shang4	/can't close/
+打不開	打不开	da3 bu4 kai1	/can't open/
+退房	退房	tui4 fang2	/check out/
+打掃	打扫	da3 sao3	/clean/
+堵住	堵住	du3 zhu4	/clogged/
+院子	院子	yuan4 zi5	/courtyard/
+信用卡	信用卡	xin4 yong4 ka3	/credit card/
+送	送	song4	/deliver/
+壞了	坏了	huai4 le5	/doesn't work/
+雙人床	双人床	shuang1 ren2 chuang2	/double bed/
+雙人房	双人房	shuang1 ren2 fang2	/double room/
+乾洗	干洗	gan1 xi3	/dry clean/
+剃鬚刀	剃须刀	ti4 xu1 dao1	/electric razor/
+空	空	kong1	/empty/vacant/
+朝	朝	chao2	/face/
+水龍頭	水龙头	shui3 long2 tou2	/faucet/
+加急費	加急费	jia1 ji2 fei4	/fee for express service/
+結帳	结帐	jie2 zhang4	/figure out the bill/
+填	填	tian2	/fill in/
+替	替	ti4	/for/
+表	表	biao3	/form/
+客滿	客满	ke4 man3	/full (no vacancy)/
+客人	客人	ke4 ren2	/guest/
+電吹風	电吹风	dian4 chui1 feng1	/hair drier/
+衣架	衣架	yi1 jia4	/clothes hanger/
+讓人	让人	rang4 ren2	/have someone (do sth.)/
+暖氣	暖气	nuan3 qi4	/heat/
+熱	热	re4	/hot/
+飯店	饭店	fan4 dian4	/hotel/
+客房服務員	客房服务员	ke4 fang2 fu2 wu4 yuan2	/(hotel) housekeeper/
+證件	证件	zheng4 jian4	/ID/
+包	包	bao1	/including/
+燙	烫	tang4	/iron/press/
+鑰匙	钥匙	yao4 shi5	/key/
+電燈 	电灯 	dian4 deng1	/lamp/
+洗衣	洗衣	xi3 yi1	/laundry/
+留	留	liu2	/leave/
+開關	开关	kai1 guan1	/light switch/
+丟瞭	丢了	diu1 le5	/lost/
+山	山	shan1	/mountain/
+別的	别的	bie2 de5	/other/
+枕頭	枕头	zhen3 tou5	/pillow/
+池	池	chi2	/pool/
+行李員	行李员	xing2 li5 yuan2	/porter/
+安靜	安静	an1 jing4	/quiet/
+前台	前台	qian2 tai2	/reception/
+前颱服務員	前台服务员	qian2 tai2 fu2 wu4 yuan2	/receptionist/
+預定	预定	yu4 ding4	/reserve/
+捲	卷	juan3	/roll (of paper)/
+房價	房价	fang2 jia4	/room charge/
+海	海	hai3	/sea/
+服務	服务	fu2 wu4	/service/
+淋浴	淋浴	lin2 yu4	/shower/
+單人床	单人床	dan1 ren2 chuang2	/single bed/
+單人房	单人房	dan1 ren2 fang2	/single room/
+香皂	香皂	xiang1 zao4	/soap/
+插座	插座	cha1 zuo4	/socket/
+待	待	dai4	/stay/
+大街	大街	da4 jie1	/street/
+西裝	西装	xi1 zhuang1	/suit/
+套間	套间	tao4 jian1	/suite/
+游泳	游泳	you2 yong3	/swimming/
+馬桶	马桶	ma3 tong3	/toilet/
+衛生紙	卫生纸	wei4 sheng1 zhi3	/toilet paper/
+毛巾	毛巾	mao2 jin1	/towel/
+電視	电视	dian4 shi4	/TV/
+到	到	dao4	/until/
+騰出	腾出	teng2 chu1	/vacate/
+洗	洗	xi3	/wash/
+水	水	shui3	/water/
+窗戶	窗户	chuang1 hu5	/window/
+帶	带	dai4	/with/

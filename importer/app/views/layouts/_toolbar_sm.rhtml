@@ -1,0 +1,9 @@
+<% resizable = (resizable.nil? ? true : resizable ) %>
+<div class="toolbarsmall">
+  <% if resizable %>
+	<a href="#" class="flatten" title="<%='flatten/unflatten this window'[:caption_flatten]%>">&nbsp;_&nbsp;</a>
+	<a href="#" class="expand" title="<%='expand this window'[:caption_expand]%>">&nbsp;+&nbsp;</a>
+  <% end %>
+	<a href="#" class="close_tiddler" title="<%='close this search'[:caption_close_this]%>">(x)</a>
+	<a href="#" class="close_others" title="<%='close other searches'[:caption_close_others]%>">(xx)</a>
+</div>

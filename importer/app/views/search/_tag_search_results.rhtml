@@ -1,0 +1,7 @@
+<% firstline = true %>
+<% for tag in @search do %>
+  <%='<hr/>' if firstline && @next_page != 2 && @page != 1 %>
+	<li><a href="<%=tags_show_path(tag.name)%>" class="tiddler_link"><%= tag.name%></a> <span class="smalltag"><small><%=tag.group%></small></span></li>
+  <% firstline = false %>
+<% end %>
+<code class="next_page"><%= @next_page %></code>

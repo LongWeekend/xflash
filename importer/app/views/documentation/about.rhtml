@@ -1,0 +1,13 @@
+<% html = capture do %>
+<div class="contents" style="background-color:#fff;border:3px solid #D15600">
+  <h2 class="title" style="color:#356AA0"><%= t 'About Npedia'[:title_about_npedia] %></h2><br/>
+  <h3>Original Idea</h3>
+  <p>Tiddler lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3>An Easy Participation Model</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id.</p>
+  <h3>iPhone Integration</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id nisl ipsum, sagittis dignissim ante. Duis eu enim ante. Aenean lobortis interdum leo, ac pretium elit sagittis id. 
+    Only $2.99 on the iPhone App Store</p>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

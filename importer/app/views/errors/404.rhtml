@@ -1,0 +1,2 @@
+<% html = capture do %><br/><p><%='This URL is invalid, or the referenced record was not found. Try using search to find what you want.'[:error_server_404]%></p><% end %>
+<%= render :partial => 'errors/wrapper', :locals => { :html => html } %>

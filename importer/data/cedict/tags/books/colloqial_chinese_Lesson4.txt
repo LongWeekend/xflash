@@ -1,0 +1,55 @@
+一	一	yi1	/one; 1; single; a(n)/
+二	二	er4	/two; 2/
+兩	两	liang3	/both; two; ounce; some; a few; tael/
+三	三	san1	/three; 3/
+四	四	si4	/four; 4/
+五	五	wu3	/five; 5/
+六	六	liu4	/six; 6/
+七	七	qi1	/seven; 7/
+八	八	ba1	/eight; 8/
+九	九	jiu3	/nine; 9/
+十	十	shi2	/ten; 10/
+位	位	wei4	/polite classifier for persons/
+本	本	ben3	/classifier for books/
+年	年	nian2	/year/
+歲	岁	sui4	/year; years old; (a measure word)/
+個	个	ge4	/(a measure word); individual/
+杯	杯	bei1	/cup; a measure word/
+天	天	tian1	/day; sky; heaven/
+普通話	普通话	pu3tong1hua4	/Mandarin (common language); Putonghua (common speech of the Chinese language)/
+老師	老师	lao3shi1	/teacher/
+字典	字典	zi4dian3	/dictionary; character dictionary/
+漢	汉	han4	/Chinese; name of a dynasty/
+女兒	女儿	nu:3er2	/daughter/
+兒子	儿子	er2zi5	/son/
+孩子	孩子	hai2zi5	/child/
+父母	父母	fu4mu3	/father and mother; parents/
+孫子	孙子	sun1zi5	/son's son; grandson/
+妹妹	妹妹	mei4mei5	/younger sister/
+媽	妈	ma1	/ma; mamma/
+普通	普通	pu3tong1	/common; ordinary; general; average/
+累	累	lei4	/implicate; tired/
+多	多	duo1	/many; much; a lot of; numerous; multi-/
+大	大	da4	/big; huge; large; major; great; wide; deep; oldest; eldest/
+少	少	shao3	/few; little; lack/
+有	有	you3	/to have; there is; there are; to exist; to be/
+生	生	sheng1	/to be born; to give birth; life; to grow/
+想要	想要	xiang3 yao4	/desire/
+要	要	yao4	/important; vital; to want; to be going to; must/
+知道	知道	zhi1dao5	/know; be aware of/
+因为	因为	yin1wei5	/because; owing to; on account of/
+所以	所以	suo3yi3	/therefore; as a result; so/
+為甚么	为什么	wei4shen2me5	/why; for what reason/
+可是	可是	ke3shi4	/but; however/
+一共	一共	yi2gong4	/altogether/
+沒	没	mei2	/(negative prefix for verbs); have not; not/
+就	就	jiu4	/be precisely/exactly/indeed/
+總	总	zong3	/always; to assemble; gather; total; overall; head; chief; general; in every case/
+這么	这么	zhe4me5	/so much; this much; this way; like this/
+那么	那么	na4me5	/like that; in that way; or so; so; so very much; about; in that case/
+一定	一定	yi1ding4	/surely; certainly; necessarily; fixed; a certain (extent, etc.); given; particular/
+太	太	tai4	/highest; greatest; too (much); very; extremely/
+能	能	neng2	/can; may; capable; energy; able/
+近年	近年	jin4nian2	/recent year(s)/
+几	几	ji3	/how much; how many; several; a few/
+多少	多少	duo1shao5	/how much; how many; which (number); as much as/

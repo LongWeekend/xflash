@@ -1,0 +1,5 @@
+<span class="parallel_text_japanese_text"><strong><%= parallel_text.japanese %></strong></span><br/>
+<span class="content"><%= parallel_text.translated %> &nbsp;<span class="tiny gray">(<%= parallel_text.language.code.upcase %>)</span></span>
+<%= render :partial => 'scraps/templates/version', :locals => { :version => parallel_text.version }%> 
+<%= render :partial => 'scraps/templates/tags', :locals => { :tags => parallel_text.tags }%>
+<%= render :partial => 'scraps/templates/star', :locals => { :scrap => parallel_text }%>

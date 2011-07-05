@@ -1,0 +1,83 @@
+/*  Npedia Wiki */
+#book_slider div.book {
+  background:#EAEDDF;
+  border:1px solid #CCCCCC;
+  padding:10px;
+  margin:10px 30px 10px 30px;
+  width:88%;
+}
+#bookcontents div#inner{ 
+  overflow:auto;
+  max-height:650px;
+  min-height:125px;
+  height:100%;
+  width:200px;
+}
+#bookcontents { padding-bottom:2px; }
+#bookcontents div#inner{ padding-bottom:2px; padding-right:1px; }
+.book { float:left; padding:5px; }
+.book_cover {
+  float:left;
+  width:158px;
+  height:220px;
+  margin:8px;
+  margin-bottom:15px;
+  margin-right:22px;
+}
+#wikihome { padding:20px; }
+#page div.wiki_info {
+  padding:8px;
+  clear:both;
+  line-height:17px;
+  margin-bottom:1em;
+	margin:10px;
+}
+div.page_header {
+  margin:0px;
+  background-color:#eaeddf;
+  padding:10px 5px 0px 15px;
+  border-bottom:1px solid #685954;
+}
+div.page_header h1 {
+  font-weight:bold;
+  margin:0;
+  padding:0px;
+  padding-top:0.2em;
+  padding-bottom:0.05em;
+}
+div.page_header h2 {
+	line-height:1.2em;
+  margin:3px 0px 8px 0px;
+}
+div.page_header #subtitle {
+  font-size:11px;
+  padding:0px 0px 6px 0px;
+  margin:0px 0px 0px 3px;
+  font-weight:normal;
+}
+#page #history {
+  float:right;
+  font-size:11px;
+  text-align:right;
+  padding:5px 5px 0 0;
+}
+#page div#versions {
+  border:1px solid #ccc;
+  padding:7px;
+  background-color:gainsboro;
+}
+span.tag a { background: #fff; border:0px; }
+ul.taglist li:hover, span.tag:hover, span.tag a:hover { background-color: #EAEDDF; }
+ul.taglist li a, div.taglist a { text-decoration: none; }
+ul.taglist li, .tag {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border:1px solid lightsteelblue; 
+	margin:8px 8px 3px 3px;
+	padding:6px 4px 6px 21px;
+	background: #fff url(/images/smallicons/tag.gif) no-repeat 4px 5px;
+	list-style: none;
+	width:auto; 
+	cursor:pointer;
+	float:left;
+}

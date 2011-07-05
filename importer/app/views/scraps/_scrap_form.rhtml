@@ -1,0 +1,74 @@
+<% if @scrap and @scrap.new_record?
+  # Create Mode
+  if @scrap.class.to_s == "ParallelText"
+    form_path = create_scrap_path()
+    tiddler_update_option = "updates_tiddler"
+    select_scrap_topic = false
+  else
+    form_path = (@scrap_topic.nil? || @scrap_topic.id.nil? ? create_scrap_path() : create_scrap_w_id_path(@scrap_topic.slug))
+    tiddler_update_option = "updates_tiddler"
+    select_scrap_topic = (@scrap_topic.nil? ? true: false)
+  end
+  restful_type = ""
+  caption = 'Create'[:button_create]
+else
+  # Inline Edit Mode
+  form_path = update_scrap_path(@scrap.id)
+  restful_type = "put"
+  tiddler_update_option = "updates_parent"
+  caption = 'Update'[:button_update]
+  select_scrap_topic = false
+end %>
+
+<%# Shared form element %>
+<% lang_picker = capture do %>
+<div class="left" style="margin-left:15px;">
+  <label for="topic_frorum"><%= 'Scrap Language'[:caption_target_language] %></label>
+  <select name="scrap[language_id]">
+    <%= options_for_select(Language.find(:all, :order => "name", :conditions => "code <> 'jpn'").map {|x| [x.name, x.id]}, 2) %>
+  </select>
+</div>
+<% end %>
+
+<%# Form elements shared between create/edit modes %>
+<% html = capture do %>
+  <% form_for :scrap, @scrap, :url => form_path, :html => { :class => tiddler_update_option } do |form| %>
+  <%= hidden_field_tag :_method, restful_type unless restful_type == "" %>
+    <%#=debug @scrap.errors %>
+    <% if @scrap.class.to_s != "ParallelText" %>
+      <%= '<h3 class="errorExplanation">' + 'Oops - You missed something!'[:error_on_form_submission] + '</h3>' if !@scrap.nil? and !@scrap.errors.empty? %>
+      <div class="left">
+        <label for="scrap_topic_title"><%= 'Select Scrap Topic'[:caption_select_scrap_topic] %></label>
+        <%= text_field_tag :scrap_topic_title, (!@scrap.scrap_topic.nil? ? @scrap.scrap_topic.title : ""), :style => "padding-left:20px;font-size:120%", :class => "scrap_topics_auto" %>
+        <% if !@scrap.errors.empty? and @scrap.scrap_topic.nil? %>
+          <div class="validation-error"><span><%='Select a scrap topic!'[:error_no_scrap_topic_selected] %></span></div>
+        <% end %>
+      </div>
+      <%= hidden_field_tag :scrap_topic_id %>
+      <%= lang_picker %>
+    <% end %>
+    <div class="clear"></div>
+    <%= form.hidden_field :type %>
+    <%= form.hidden_field :scrap_topic_id if params[:scrap_topic_id] %>
+    <%= render :partial => "scraps/forms/#{@scrap.class.to_s.tableize.singularize}", :locals => { :form => form, :caption => caption  } %>
+    <%= lang_picker if @scrap.class.to_s == "ParallelText"%>
+    <div class="clear"></div><br/>
+    <%= submit_tag 'Cancel'[:cancel_caption], { :name => 'cancel' } %>&nbsp;
+    <%= submit_tag caption +' &gt;&gt;', :class => 'default_submit' %>
+  <% end %>
+<% end %>
+
+<%# Switch between create/edit modes %>
+<% if @scrap.new_record? %>
+  <%# Create Mode %>
+  <%= render :partial => "layouts/toolbar_sm" %>
+  <div class="contents" style="padding-bottom:15px">
+    <h2 class="class"" style="padding-bottom:15px;">
+      <%= t 'New Scrap'[:title_new_scrap] + ' : ' + @scrap.class.to_s.camelize %>
+    </h2>
+    <%= html %>
+  </div>
+<% else %>
+  <%# Inline Edit Mode %>
+  <%= html %>
+<% end %>

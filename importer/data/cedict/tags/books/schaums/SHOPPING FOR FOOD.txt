@@ -1,0 +1,45 @@
+酒	酒	jiu3	/alcohol/
+一共	一共	yi1 gong4	/altogether/
+蘋果	苹果	ping2 guo3	/apple/
+糕點	糕点	gao1 dian3	/bakery/
+香蕉	香蕉	xiang1 jiao1	/banana/
+籃子	篮子	lan2 zi5	/basket/
+飲料	饮料	yin3 liao4	/beverage/
+糖果	糖果	tang2 guo3	/candy/
+推車	推车	tui1 che1	/cart/
+煙	烟	yan1	/cigarette/
+熟食	熟食	shu2 shi2	/cooked food/
+貴	贵	gui4	/expensive/
+食物	食物	shi2 wu4	/food/
+自由	自由	zi4 you2	/free/
+新鮮	新鲜	xin1 xian1	/fresh/
+冷凍	冷冻	leng3 dong4	/frozen/
+水果	水果	shui3 guo3	/fruit/
+找	找	zhao3	/give change/
+糧食	粮食	liang2 shi2	/grain/
+菜店	菜店	cai4 dian4	/green grocer/
+副食品店	副食品店	fu4 shi2 pin3 dian4	/grocery store/
+斤	斤	jin1	/half-kilo/
+。。。怎麽賣？	。。。怎么卖？	zen3 me5 mai4	/How do you sell ... ？/
+公斤	公斤	gong1 jin1	/kilo/
+少一點兒	少一点儿	shao3 yi4 dian3 er5	/lower the price (in bargaining)/
+荔枝	荔枝	li4 zhi1	/lychee/
+市場	市场	shi4 chang3	/market/
+想買點甚麽？	想买点什么？	xiang3 mai3 dian3 shen2 me5	/May I help you?/
+肉	肉	rou4	/meat/
+肉食	肉食	rou4 shi2	/meat product/
+桃	桃	tao2	/peach/
+梨	梨	li2	/pear/
+塑料袋	塑料袋	su4 liao4 dai4	/plastic bag/
+水產	水产	shui3 chan3	/seafood/
+部	部	bu4	/section/
+挑	挑	tiao1	/select/
+便宜一點兒	便宜一点儿	pian4 yi2 yi1 dian3 er5	/sell it cheaper/
+購物	购物	gou4 wu4	/shopping/
+賣完瞭	卖完了	mai4 wan2 le5	/sold out/
+豆製品	豆制品	dou4 zhi4 pin3	/soybean product/
+調味品	调味品	tiao2 wei4 pin3	/spice/
+超級市場	超级市场	chao1 ji2 shi4 chang3	/supermarket/
+超市	超市	chao1 shi4	/supermarket/
+嘗	尝	chang2	/taste/
+蔬菜	蔬菜	shu1 cai4	/vegetable/
