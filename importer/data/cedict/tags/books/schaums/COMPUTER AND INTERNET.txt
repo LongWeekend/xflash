@@ -1,0 +1,137 @@
+帳戶	帐户	zhang4 hu4	/account/
+聲音	声音	sheng1 yin1	/audio/
+後退	后退	hou4 tui4	/back/
+大腦	大脑	da4 nao3	/brain/
+瀏覽	浏览	liu2 lan3	/browse/
+瀏覽器	浏览器	liu2 lan3 qi4	/browser/
+按鈕	按钮	an4 niu3	/button/
+取消	取消	qu3 xiao1	/cancel/
+光盤	光盘	guang1 pan2	/CD/
+選擇	选择	xuan3 ze2	/choose/
+關閉	关闭	guan1 bi4	/close/
+來自	来自	lai2 zi4	/come from/
+部件	部件	bu4 jian4	/component/
+連接	连接	lian2 jie1	/connect/
+用戶	用户	yong4 hu4	/consumer/
+控制	控制	kong4 zhi4	/control/
+複製	复制	fu4 zhi4	/copy/
+剪切	剪切	jian3 qie1	/cut/
+資料	资料	zi1 liao4	/data/
+數據	数据	shu4 ju4	/data/
+刪除	删除	shan1 chu2	/delete/
+颱式	台式	tai2 shi4	/desktop/
+桌面	桌面	zhuo1 mian4	/desktop/screen/
+屏幕	屏幕	ping2 mu4	/desktop/screen/
+裝置	装置	zhuang1 zhi4	/device/
+撥號	拨号	bo1 hao4	/dial/
+雙擊	双击	shuang1 ji1	/double click/
+下載	下载	xia4 zai4	/download/
+驅動器	驱动器	qu1 dong4 qi4	/drive/
+各	各	ge4	/each/
+編輯	编辑	bian1 ji2	/edit/
+電子郵件	电子邮件	dian4 zi3 you2 jian4	/e-mail/
+電郵	电邮	dian4 you2	/e-mail/
+電子郵箱地址	电子邮箱地址	dian4 zi3 you2 xiang1 di4 zhi3	/e-mail address/
+設備	设备	she4 bei4	/equipment/
+退出	退出	tui4 chu1	/exit/
+領域	领域	ling3 yu4	/field/
+文件	文件	wen2 jian4	/file/document/
+填入	填入	tian2 ru4	/fill in/
+軟盤	软盘	ruan3 pan2	/floppy disk/
+文件夾 	文件夹 	wen2 jian4 jia1	/folder/
+運算公式	运算公式	yun4 suan4 gong1 shi4	/formula/
+前進	前进	qian2 jin4	/forward/
+功能	功能	gong1 neng2	/function/
+上網	上网	shang4 wang3	/go on line/
+硬盤	硬盘	ying4 pan2	/hard disk/
+硬件	硬件	ying4 jian4	/hardware/
+圖標	图标	tu2 biao1	/icon/
+收信箱	收信箱	shou1 xin4 xiang1	/in-box/
+信息	信息	xin4 xi1	/information/
+輸入	输入	shu1 ru4	/input/
+插入	插入	cha1 ru4	/insert/
+填入	填入	tian2 ru4	/insert/
+安裝	安装	an1 zhuang1	/install/
+指示	指示	zhi3 shi4	/instruct/
+指令	指令	zhi3 ling4	/instruction/
+互聯	互联	hu4 lian2	/inter-/
+國際	国际	guo2 ji4	/international/
+因特網	因特网	yin1 te4 wang3	/Internet/
+網上服務提供商	网上服务提供商	wang3 shang4 fu2 wu4 ti2 gong4 shang1	/ISP (Internet service provider)/
+鍵盤	键盘	jian4 pan2	/keyboard/
+手提式	手提式	shou3 ti2 shi4	/laptop/
+主機	主机	zhu3 ji1	/main machine/tower/
+管理	管理	guan3 li3	/manage/
+存儲器	存储器	cun2 chu3 qi4	/memory/
+菜單	菜单	cai4 dan1	/menu/
+選項但	选项但	xuan3 xiang4 dan4	/menu/
+菜單欄	菜单栏	cai4 dan1 lan2	/menu bar/
+選項欄	选项栏	xuan3 xiang4 lan2	/menu bar/
+微軟字處理	微软字处理	wei1 ruan3 zi4 chu3 li3	/Microsoft Word/
+調製解調貓	调制解调猫	tiao2 zhi4 jie3 tiao2 mao1	/modem/
+調制解調器	调制解调器	tiao2 zhi4 jie3 tiao2 qi4	/modem/
+顯示器	显示器	xian3 shi4 qi4	/monitor/
+主板	主板	zhu3 ban3	/motherboard/
+滑鼠	滑鼠	hua2 shu3	/mouse/
+鼠標	鼠标	shu3 biao1	/mouse/
+我的電腦	我的电脑	wo3 de5 dian4 nao3	/My Computer/
+我的公文包	我的公文包	wo3 de5 gong1 wen2 bao1	/My Briefcase/
+我的文檔	我的文档	wo3 de5 wen2 dang4	/My Documents/
+網	网	wang3	/Net/network/
+新郵件	新邮件	xin1 you2 jian4	/new mail/
+筆記本	笔记本	bi3 ji4 ben3	/notebook/
+開啟	开启	kai1 qi3	/open/
+打開	打开	da3 kai1	/open/
+運行	运行	yun4 xing2	/operating/
+操作系統	操作系统	cao1 zuo4 xi4 tong3	/operating system/
+輸出	输出	shu1 chu1	/output/
+粘貼	粘贴	nian2 tie1	/paste/
+個人電腦	个人电脑	ge4 ren2 dian4 nao3	/PC (personal computer)/
+奔騰	奔腾	ben1 teng2	/Pentium (processor)/
+打印	打印	da3 yin4	/print/
+打印機	打印机	da3 yin4 ji1	/printer/
+處理	处理	chu3 li3	/process/
+程序	程序	cheng2 xu4	/program/
+提供	提供	ti2 gong1	/provide/
+內存	内存	nei4 cun2	/RAM/
+收件人	收件人	shou1 jian4 ren2	/recipient/
+回收站	回收站	hui2 shou1 zhan4	/Recycle Bin/
+回信	回信	hui2 xin4	/reply/
+重新開機	重新开机	chong2 xin1 kai1 ji1	/restart/
+保存	保存	bao3 cun2	/save/
+另存	另存	ling4 cun2	/save as/
+掃描儀	扫描仪	sao4 miao2 yi2	/scanner/
+滾動條	滚动条	gun3 dong4 tiao2	/scroll bar/
+查找	查找	cha2 zhao3	/search/
+發送	发送	fa1 song4	/sent/
+系列	系列	xi4 lie4	/series/
+服務	服务	fu2 wu4	/service/
+建立	建立	jian4 li4	/set up/
+關機	关机	guan1 ji1	/shut down/
+單擊	单击	dan1 ji1	/single click/
+軟件	软件	ruan3 jian4	/software/
+空間	空间	kong1 jian1	/space/
+速度	速度	su4 du4	/speed/
+數據表格 	数据表格 	shu3 ju4 biao3 ge2	/spreadsheet/
+拼寫檢查	拼写检查	pin1 xie3 jian3 cha2	/spell check/
+開始	开始	kai1 shi3	/start/
+開機	开机	kai1 ji1	/start/
+狀態欄	状态栏	zhuang4 tai4 lan2	/status bar/
+儲存	储存	chu2 cun2	/store/
+題目	题目	ti2 mu4	/subject/
+系統	系统	xi4 tong3	/system/
+有形的	有形的	you3 xing2 de5	/tangible/
+標題欄	标题栏	biao1 ti2 lan2	/title bar/
+工具欄	工具栏	gong1 ju4 lan2	/toolbar/
+網址	网址	wang3 zhi3	/URL/
+用戶姓名	用户姓名	yong4 hu4 xing4 ming2	/user name/
+版	版	ban3	/version/
+訪問	访问	fang3 wen4	/visit/
+圖像	图像	tu2 xiang4	/visual/
+網頁	网页	wang3 ye4	/Web page/
+網站	网站	wang3 zhan4	/Web site/
+視窗	视窗	shi4 chuang1	/Windows (Microsoft Windows: 微软视窗)/
+文字處理	文字处理	wen2 zi4 chu3 li3	/word procesing/
+文字	文字	wen2 zi4	/words/text/
+工作區	工作区	gong1 zuo4 qu1	/working area/
+萬維網	万维网	wan4 wei2 wang3	/World Wide Web/www/

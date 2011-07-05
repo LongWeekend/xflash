@@ -1,0 +1,5 @@
+<% show_toolbar = true if show_toolbar.nil? %>
+<%= '<div id="s'+ Time.at( Time.now.to_i ).to_i.to_s + '-' + rand(1000).to_s + '" class="tiddler">' if !ajax_request? %>
+  <%= render :partial => "layouts/toolbar_sm" if show_toolbar %>
+  <%= html %>
+<%= '</div>' if !ajax_request? %>

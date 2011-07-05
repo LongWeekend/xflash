@@ -1,0 +1,79 @@
+航空公司	航空公司	hang2 kong1 gong1 si1	/airline company/
+飛機票	飞机票	fei1 ji1 piao4	/airline ticket/
+飛機場	飞机场	fei1 ji1 chang3	/airport/
+機場費	机场费	ji1 chang3 fei4	/airport departure tax/
+靠走道座位	靠走道座位	kao4 zou3 dao4 zuo4 wei4	/aisle seat/
+通知	通知	tong1 zhi1	/announce/
+到達	到达	dao4 da2	/arrive/
+到港	到港	dao4 gang3	/arrive/
+注意	注意	zhu4 yi4	/attention/pay attention to/
+登機	登机	deng1 ji1	/board the plane/
+登機口	登机口	deng1 ji1 kou3	/boarding gate/
+登機牌	登机牌	deng1 ji1 pai2	/boarding pass/
+旅途愉快	旅途愉快	lu:3 tu2 yu2 kuai4	/Bon Voyage!/
+飛往	飞往	fei1 wang3	/bound for/
+公文包	公文包	gong1 wen2 bao1	/briefcase/
+廣播	广播	guang3 bo1	/broadcast/
+公共汽車	公共汽车	gong1 gong4 qi4 che1	/bus/
+取消	取消	qu3 xiao1	/canceled/
+手體行李	手提行李	shou3 ti3 xing2 li3	/carry-on luggage/
+專機	专机	zhuan1 ji1	/change planes/
+檢查	检查	jian3 cha2	/check/
+辦理登機手續	办理登机手续	ban4 li3 deng1 ji1 shou3 xu4	/check in/
+託運行李	托运行李	tuo1 yun4 xing2 li3	/check in luggage/
+中國	中国	zhong1 guo2	/China/
+市內總站	市内总站	shi4 nei4 zong3 zhan4	/city terminal/
+領取	领取	ling3 qu3	/claim/
+領取單	领取单	ling3 qu3 dan1	/claim stub/
+艙	舱	cang1	/compartment, cabine/
+櫃台	柜台	gui4 tai2	/counter/
+晚點	晚点	wan3 dian3	/delay/
+離港時間	离港时间	li2 gang3 shi2 jian1	/departure time/
+出港	出港	chu1 gang3	/disembark/
+文件	文件	wen2 jian4	/document(s)/
+國內	国内	guo2 nei4	/domestic/
+轉讓	转让	zhuan3 rang4	/endorse/
+票價	票价	piao4 jia4	/fare/
+能放進	能放进	neng2 fang4 jin4	/fit/
+航班	航班	hang2 ban1	/flight/flight number/
+班機	班机	ban1 ji1	/flight/flight number/
+好在	好在	hao3 zai4	/fortunately/
+從	从	cong1	/from/
+滿員	满员	man3 yuan2	/full/
+在這兒	在这儿	zai4 zher5	/Here you are./
+馬上	马上	ma3 shang4	/immediately/
+國際	国际	guo2 ji4	/international/
+標籤	标签	biao1 qian1	/label/
+着陸	着陆	zhuo2 lu4	/land/
+排隊	排队	pai2 dui4	/line up/
+行李	行李	xing2 li3	/luggage/
+大陸	大陆	da4 lu4	/Mainland China/
+誤瞭	误了	wu4 le5	/missed/
+必須	必须	bi4 xu1	/must/
+沒問題	没问题	mei2 wen4 ti2	/No problem./
+直飛	直飞	zhi2 fei1	/nonstop/
+號	号	hao4	/number/
+正點	正点	zheng4 dian3	/on time/
+頭頂上方	头顶上方	tou2 ding3 shang4 fang1	/overhead/
+通過	通过	tong1 guo4	/pass through/
+乘客	乘客	cheng2 ke4	/passenger/
+護照	护照	hu4 zhao4	/passport/
+請	请	qing3	/please/
+推遲	推迟	tui1 chi2	/postpone/
+價錢	价钱	jia4 qian2	/price/
+接待	接待	jie1 dai4	/reception/
+預定	预定	yu4 ding4	/reserve/book/
+排	排	pai2	/row/
+座	座	zuo4	/seat/
+安全	安全	an1 quan2	/security/
+出示	出示	chu1 shi4	/show/
+停	停	ting2	/stop/
+箱子	箱子	xiang1 zi5	/suitcase/
+坐出租車	坐出租车	zuo4 chu1 zu1 che1	/take a taxi/
+起飛	起飞	qi3 fei1	/take off/
+登機樓	登机楼	deng1 ji1 lou2	/terminal/
+空座位	空座位	kong1 zuo4 wei4	/vacant seat/
+簽證	签证	qian1 zheng4	/visa/
+天氣	天气	tian1 qi4	/weather/
+將	将	jiang4	/will (formal)/about to/
+靠窗的座位	靠窗的座位	kao4 chuang1 de5 zuo4 wei4	/window seat/

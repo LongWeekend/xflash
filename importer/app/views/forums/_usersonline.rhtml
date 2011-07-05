@@ -1,0 +1,10 @@
+<% unless online_users.empty? %>
+<% online_users = User.currently_online -%>
+  <div class="stats">
+    <div class="users">
+    <% unless online_users.empty? %>
+    <%= 'Users online:'[:text_users_online] %> <%= online_users.map { |u| link_to "<strong>#{h u.display_name}</strong>", user_path(u) } * ", " %><br />
+    <% end %>
+    </div>
+  </div>
+<% end %>

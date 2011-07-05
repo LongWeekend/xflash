@@ -1,0 +1,31 @@
+愛好	爱好	ai4 hao4	/hobby/
+周末	周末	zhou1 mo4	/weekend/
+打球	打球	da3 qiu2	/to play ball/
+打	打	da3	/to hit/to strike/
+球	球	qiu2	/ball/
+看	看	kan1	/to watch/to look/
+電視	电视	dian4 shi4	/TV/
+電	电	dian4	/electricity/
+視	视	shi4	/-vision/
+唱歌	唱歌	chang4 ge1	/to sing (a song)/
+唱	唱	chang4	/to sing/
+歌	歌	ge1	/song/
+跳舞	跳舞	tiao4 wu3	/to dance/
+跳	跳	tiao4	/to jump/
+舞	舞	wu3	/dance/
+聽	听	ting1	/to listen/
+音樂	音乐	yin1 yue4	/music/
+對	对	dui4	/right/correct/
+有時候	有时候	you3 shi2 hou5	/sometimes/
+時候	时候	shi2 hou5	/(a point in) time/moment/(a duration of) time/
+看書	看书	kan4 shu1	/to read books/to read/
+書	书	shu1	/book/
+電影	电影	dian4 ying3	/movie/
+影	影	ying3	/shadow/
+常常	常常	chang2 chang2	/often/
+那	那	na4	/in that case/then/
+去	去	qu4	/to go/
+外國	外国	wai4 guo2	/foreign country/
+請客	请客	qing3 ke4	/to invite someone to dinner/to be the host/
+昨天	昨天	zuo2 tian1	/yesterday/
+所以	所以	suo3 yi3	/so/

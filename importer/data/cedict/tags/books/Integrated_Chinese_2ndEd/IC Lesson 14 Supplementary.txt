@@ -1,0 +1,23 @@
+左邊	左边	zuo3 bian1	/left side/
+右邊	右边	you4 bian1	/right side/
+上邊	上边	shang4 bian5	/top/
+下邊	下边	xia4 bian1	/bottom/
+前邊	前边	qian2 bian1	/front/
+後邊	后边	hou4 bian1	/back/
+東邊	东边	dong1 bian1	/east side/
+西邊	西边	xi1 bian1	/west side/
+南邊	南边	nan2 bian1	/south side/
+北邊	北边	bei3 bian1	/north side/
+外頭	外头	wai4 tou5	/outside/
+東北	东北	dong1 bei3	/northeast/
+東南	东南	dong1 nan2	/southeast/
+西北	西北	xi1 bei3	/northwest/
+西南	西南	xi1 nan2	/southwest/
+只好	只好	zhi3 hao3	/have to/be forced to/
+黑板	黑板	hei1 ban3	/blackboard/
+墙	墙	qiang2	/wall/
+方向	方向	fang1 xiang4	/direction/
+醫院	医院	yi1 yuan4	/hospital/
+電影院	电影院	dian4 ying3 yuan4	/movie theater/
+中國話	中国话	zhong1 guo2hua4	/Chinese (language)/
+法語	法语	fa3 yu3	/French (language)/

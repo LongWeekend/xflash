@@ -1,0 +1,5 @@
+<% if !tags.nil? %>
+  <ul class="tags">
+    <% for tag in tags do %><li class="tiddler_link tags"><a href="/scraps?q=&t=<%= tag.to_s%>"><%= tag.to_s%></a></li><% end %>
+  </ul>
+<% end %>

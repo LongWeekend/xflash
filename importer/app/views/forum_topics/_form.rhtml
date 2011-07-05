@@ -1,0 +1,56 @@
+<div class="contents forum_contents">
+  <h2 class="title"><%= t caption %></h2>
+	<% form_for @forum_topic, :url => url do |form| %>
+    <% if admin? || (@forum_topic.new_record? && @forum_topic.type != "Question") %>
+      <div class="left"><br/>
+        <label for="topic_frorum"><%= 'Forum'[:title_forum] %></label>
+        <select name="selected_forum_id" style="font-size:18px;font-weight:bold;">
+          <%= options_for_select(Forum.find(:all, :order => "title").map {|x| [x.title, x.id]}, @forum_topic.forum_id) %>
+        </select>
+      </div>
+    <% end %>
+
+    <div class="clear"></div>
+    <div class="left"><br/>
+      <label for="topic_title"><%= 'Title'[:title_title] %></label>
+      <%= form.text_field :title, :class => "primary", :tabindex => 10, :style => 'width:410px' %><br/>
+    </div>
+
+    <% if @forum_topic.editable_by?(current_user) or @forum_topic.new_record? %>
+    <div class="clear"></div>
+    <div class="left" style="padding:7px 0">
+    
+      <% if admin? or current_user.forum_moderator_of?(@forum) %>
+        <label style="margin-left:1em;float:left">
+          <%= form.check_box :sticky %> <%= 'Sticky'[:caption_sticky] %>
+        </label>
+        <label style="margin-left:1em;float:left">
+          <%= form.check_box :suspended %> <%= 'Suspended'[:caption_suspended] %>
+        </label>
+        <% if not @forum_topic.new_record? and false %>
+          <label style="margin-left:1em;float:left">
+            <%= form.check_box :deleted %> <%= 'Deleted'[:caption_deleted] %>
+          </label>
+        <% end %>
+      <% end %>
+      
+    </div>
+    <% end %>
+
+    <div class="clear"></div>
+    <div class="left">
+        <label for="topic_description"><%= 'Description'[:title_description] %></label>
+        <%= form.text_area :description, :rows => 3, :tabindex => 20, :style => 'width:410px' %>
+    </div>
+
+    <div class="clear"></div>
+    <div class="left">
+      <label for="topic_tags"><%= 'Tags'[:title_tags] %></label>
+      <%= form.text_field :tags, :class => "tags_auto", :tabindex => 11, :style => 'width:260px' %>
+    </div>
+
+    <div class="clear"></div><br/>
+    <%= submit_tag 'Cancel'[:cancel_caption], { :name => 'cancel' } %>&nbsp;
+    <%= submit_tag 'Save'[:button_save_forum] +' &gt;&gt;', :class => 'default_submit' %>
+	<% end %><br/>
+</div>

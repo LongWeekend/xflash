@@ -1,0 +1,32 @@
+<div class="contents login_form">
+  <%= render :partial => "layouts/toolbar_sm",:locals => { :resizable => false } %>
+  <h2 class="title"><%= 'Login'[:title_login] %></h2><br/>
+  <% form_tag open_id_complete_path, :id => "login_form" do %>
+  <div style="float:left">
+    <label for="login"><%= 'Username or OpenID URL (begins with http://)'[:text_login_or_openid_url] %></label>
+    <%= text_field_tag :login, params[:login], :style => "width:230px" %>
+  	<p><label><%= check_box_tag "remember_me", "1", true %> <%= 'Remember me on this computer'[:caption_remember_me_on_this_computer] %></label></p>
+  </div>
+
+  <div id="password_fields" style="margin-left:15px;float:left">
+  	<p>
+  	  <label for="password"><%= 'Password'[:caption_password] %></label>
+  	  <%= password_field_tag :password, "", :style => "width:210px" %>
+  	</p>
+  </div>
+  <div style="clear:both"></div>
+
+  <p><%= submit_tag 'Login'[:caption_login], :or => link_to_function('reset password'[:caption_reset_password], "$('#reset-password').slideToggle('slow')") %></p>
+  <% end %>
+
+  <% form_tag users_path, :id => "password_form" do %>
+  	<div id="reset-password" style="display:none">
+  		<hr /><h5><%= 'Reset Password'[:title_reset_password] %></h5>
+  		<p><%= 'Enter your email, and a new login key will be sent to you.  Click the link in the email to log in, and then change your password.'[:text_reset_password_email_instructions] %></p>
+  		<p><%= text_field_tag :email, "", :size => 30 %></p>
+  		<p>
+  			<%= submit_tag 'E-mail me the link'[:button_email_me_link], :or => link_to_function('cancel'[:caption_cancel], "$('#reset-password').slideToggle('fast')") %>
+  		</p>
+  	</div>
+  <% end %>
+</div>

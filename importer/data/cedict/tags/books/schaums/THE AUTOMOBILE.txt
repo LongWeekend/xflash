@@ -1,0 +1,112 @@
+加速	加速	jia1 su4	/accelerate/
+調整	调整	tiao2 zheng3	/adjust/
+氣	气	qi4	/air/
+自動擋	自动挡	zi4 dong4 dang3	/automatic transmission/
+電池	电池	dian4 chi2	/battery/
+剎車	刹车	sha1 che1	/brake/
+剎車閘	刹车闸	sha1 che1 zha2	/brake pedal/
+壞	坏	huai4	/breakdown/
+前保险杠	前保险杠	qian2 bao3 xian3 gang4	/bumper/
+車	车	che1	/car/
+換檔	换档	huan4 dang4	/change gears/
+收費	收费	shou1 fei4	/charge/
+查	查	cha2	/check/
+離合器	离合器	li2 he2 qi4	/clutch/
+離合器踏闆	离合器踏板	li2 he2 qi4 ta4 ban3	/clutch pedal/
+合同	合同	he2 tong5	/contract/
+冷卻液	冷却液	leng3 que4 ye4	/coolant/
+信用卡	信用卡	xin4 yong4 ka3	/credit card/
+儀表槃	仪表盘	yi2 biao3 pan2	/dashbord/
+押金	押金	ya1 jin1	/deposit/
+禁止駛入	禁止驶入	jin1 zhi3 shi3 ru4	/Do not enter!/
+駕照	驾照	jia4 zhao4	/driver's license/
+駕駛執入	驾驶执入	jia4 shi3 zhi2 ru4	/driver's license/
+空	空	kong1	/empty/
+發動機油	发动机油	fa1 dong4 ji1 you2	/engine oil/
+足	足	zu2	/enough/
+加	加	jia1	/fill/
+癟	瘪	bie3	/flat/
+油量表	油量表	you2 liang4 biao3	/fuel gauge/
+汽油	汽油	qi4 you2	/gas/
+油門	油门	you2 men2	/gas pedal/
+加油站	加油站	jia1 you2 zhan4	/gas station/
+換檔桿	换档杆	huan4 dang4 gan3	/gear shift lever/
+手套箱	手套箱	shou3 tao4 xiang1	/glove compartment/
+手閘	手闸	shou3 zha2	/hand brake/
+前燈	前灯	qian2 deng1	/headlight/
+前大燈	前大灯	qian2 dai4 deng1	/headlight/
+高光燈	高光灯	gao1 guang1 deng1	/high beam/
+高速公路	高速公路	gao1 su4 gong1 lu4	/highway/
+高速公路入口	高速公路入口	gao1 su4 gong1 lu4ru4 kou3	/highway entrance/
+發動機蓋	发动机盖	fa1 dong4 ji1 gai4	/hood of car/
+喇叭	喇叭	la3 ba5	/horn/
+點火器	点火器	dian3 huo3 qi4	/ignition switch/
+包括	包括	bao1 kuo4	/include/
+保險	保险	bao3 xian3	/insurance/
+千斤頂	千斤顶	qian1 jin1 ding3	/jack/
+公里	公里	gong1 li3	/kilometer/
+漏油	漏油	lou4 you2	/leaking/dripping/
+左反光鏡	左反光镜	zuo3 fan3 guang1 jing4	/left mirror/
+汽車號牌	汽车号牌	qi4 che1 hao4 pai2	/license plate/
+限制	限制	xian4 zhi4	/limits/
+立昇	立升	li4 sheng1	/liter/
+低	低	di1	/low/
+手排擋	手排挡	shou3 pai2 dang3	/manual transmission/
+里程	里程	li3 cheng2	/milage/
+空檔	空档	kong4 dang3	/neutral gear/
+禁止鸣喇叭	禁止鸣喇叭	jin4 zhi3 ming2 la3 ba1	/No honking!/
+禁止左轉彎	禁止左转弯	jin1 zhi3 zuo3 zhuan4 wan1	/No left turn!/
+禁止停車	禁止停车	jin4 zhi3 ting2 che1	/No parking!/
+禁止超車	禁止超车	jin1 zhi3 chao1 che1	/No passing!/
+禁止機動車通行	禁止机动车通行	jin1 zhi3 ji1 dong4 che1 tong1 xing2	/No thoroughfare for vehicles!/
+禁止通行	禁止通行	jin4 zhi3 tong1 xing2	/No thoroughfare!/
+禁止調頭	禁止调头	jin1 zhi3 diao4 tou2	/No U turn!/
+現在	现在	xian4 zai4	/now/right away/
+裡程表	里程表	li3 cheng2 biao3	/odometer/
+過熱	过热	guo4 re4	/overheating/
+停車	停车	ting2 che1	/parking/
+停車場	停车场	ting2 che1 chang3	/parking lot/
+零件	零件	ling2 jian4	/parts/
+付帳	付帐	fu4 zhang4	/pay/
+按	按	an4	/press/
+掛一檔	挂一档	gua4 yi1 dang4	/put in first gear/
+鐵路道口	铁路道口	tie3 lu4 dao4 kou3	/railroad crossing/
+後視鏡	后视镜	hou4 shi4 jing4	/rearview mirror/
+規則	规则	gui1 ze2	/regulation/
+租	租	zu1	/rent/
+租一天	租一天	zu1 yi1 tian1	/rent for a day/
+修	修	xiu1	/repair/
+倒檔	倒档	dao4 dang4	/reverse gear/
+右	右	you4	/right/
+嚮右轉彎	向右转弯	xiang4 you4 zhuan4 wan1	/right turn/
+道路變窄	道路变窄	dao4 lu4 bian4 zhai3	/road narrows!/
+安全帶	安全带	an1 quan2 dai4	/safety belt/
+嚮左急轉彎	向左急转弯	xiang4 zuo3 ji2 zhuan4 wan1	/Sharp left turn!/
+簽字	签字	qian1 zi4	/sign (a name)/
+路滑	路滑	lu4 hua2	/Slippery road!/
+備用	备用	bei4 yong4	/spare/
+限製速度	限制速度	xian4 zhi4 su4 du4	/speed limit/
+速度表	速度表	su4 du4 biao3	/speedometer/
+拋錨	抛锚	pao1 mao2	/stalled/
+起動	起动	qi3 dong4	/start/
+點火	点火	dian3 huo3	/start the engine/
+方向盤	方向盘	fang1 xiang4 pan2	/steering wheel/
+踩	踩	cai3	/step on/
+熄火	熄火	xi2 huo3	/stop the engine/
+油箱	油箱	you2 xiang1	/tank/
+輪胎	轮胎	lun2 tai1	/tire/
+拖走	拖走	tuo1 zou3	/tow away/
+拖車	拖车	tuo1 che1	/tow truck/
+註意交通信號燈	注意交通信号灯	zhu4 yi4 jiao1 tong1 xin4 hao2 deng1	/Traffic light!/
+交通標誌	交通标志	jiao1 tong1 biao1 zhi4	/traffic sign/
+變速箱潤滑油	变速箱润滑油	bian4 su4 xiang1 run4 hua2 you2	/transmission oil/
+後備箱	后备箱	hou4 bei4 xiang1	/trunk/
+轉嚮燈	转向灯	zhuan4 xiang4 deng1	/turn signal/
+雙嚮交通	双向交通	shuang1 xiang4 jiao1 tong1	/two-way traffic/
+施工	施工	shi1 gong1	/Under construction!/
+無鉛	无铅	wu2 qian1	/unleaded/
+擋風玻璃	挡风玻璃	dang3 feng1 bo1 li5	/windshield/
+雨刷	雨刷	yu3 shua1	/windshield wiper/
+擦	擦	ca1	/wipe (clean)/
+打不著火	打不着火	da3 bu4 zhuo2 huo3	/won't start/
+減速讓行	减速让行	jian3 su4 rang4 xing2	/Yield!/

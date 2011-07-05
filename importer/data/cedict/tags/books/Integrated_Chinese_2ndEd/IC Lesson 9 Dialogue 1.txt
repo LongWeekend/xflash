@@ -1,0 +1,28 @@
+買東西	买东西	mai3 dong1 xi1	/shopping/
+買	买	mai3	/to buy/
+東西	东西	dong1 xi1	/things/objects/
+售貨員	售货员	shou4 huo4 yuan2	/shop assistant/salesclerk/
+要	要	yao1	/to want/to have a desire for/
+衣服	衣服	yi1 fu5	/clothes/
+件	件	jian4	/（a measure word for shirts, dresses, jackets, coats, etc.)/
+襯衫	衬衫	chen4 shan1	/shirt/
+顏色	颜色	yan2 se4	/color/
+黃	黄	huang2	/yellow/
+紅	红	hong2	/red/
+穿	穿	chuan1	/to wear/to put on/
+條	条	tiao2	/(measure word for long, thin objects)/
+褲子	裤子	ku4 zi5	/pants/
+號	号	hao4	/number/size/
+中	中	zhong1	/medium/
+貴	贵	gui4	/expensive/
+便宜	便宜	pian2 yi5	/cheap/inexpensive/
+付钱	付钱	fu4 qian2	/to pay money/
+钱	钱	qian2	/money/
+這兒	这儿	zher4	/here/
+一共	一共	yi2 gong4	/altogether/
+多少	多少	duo1 shao5	/how much/how many/
+塊	块	kuai1	/colloquial term for the basic Chinese monetary unit/
+毛	毛	mao2	/one tenth of a kuai (similar to the US dime)/
+分	分	fen1	/one hundreth of a kuai/cent/
+百	百	bai3	/hundred/
+找錢	找钱	zhao3 qian2	/to give change/

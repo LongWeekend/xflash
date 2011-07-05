@@ -1,0 +1,11 @@
+身高	身高	shen1 gao1	/height/
+公分	公分	gong1 fen1	/(centimeter)/
+尺	尺	chi3	/(foot [a measure of length])/
+寸	寸	cun4	/(inch)/
+體重	体重	ti3 zhong4	/weight (of a person)/
+磅	磅	bang4	/(pound [a measure of weight])/
+公斤	公斤	gong1 jin1	/(kilogram)/
+腳	脚	jiao3	/foot/leg (of a person, animal, table, etc.)/
+慶祝	庆祝	qing4 zhu4	/to celebrate/
+站	站	zhan4	/to stand/
+男朋友	男朋友	nan2 peng2 you5	/boyfriend/

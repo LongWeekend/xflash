@@ -1,0 +1,18 @@
+<div class="page_header">
+  <h2 class="title">
+		<% if params[:parent_id].nil? %>
+			<%= t 'New Page In'[:caption_create_page_in] %> '<%= @book.title %>'<br/>
+		<% else %>
+			<div class="subtitle" style="padding:0px;"><%= @book.title %> &gt;</div>
+			<%= t 'New Child Page '[:caption_create_child_page] %> '<%= @parent.title %>'<br/>
+		<% end %>
+    <div class="subtitle"><%= 'by {user}'[:text_by_user, current_user.display_name] %></div>
+  </h2>
+</div>
+
+<div class="page_content">
+	<% form_for :page, :url => book_path(@book.id) do |f| %>
+		<%= render :partial => 'form', :object => f  %>
+	  <%= submit_tag '&gt;&gt; ' + 'Create'[:button_create]%>
+	<% end %>
+</div>

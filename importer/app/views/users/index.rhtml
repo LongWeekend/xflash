@@ -1,0 +1,38 @@
+<% html = capture do %>
+<div class="contents" style="background-color:white;border:3px solid #CCCCCC">
+  <h2 class="title"><%= t 'Users'[:title_users] %></h2>
+  <div id="subtitle">
+    <%= number_with_delimiter(@user_count) %> <%= 'users'[:text_users] %>, <%= @active %> <%= 'active'[:text_active] %>, <%= @user_count-@active %> <%= 'lurking'[:text_lurking] %>
+  </div>
+
+  <%= will_paginate @users %>
+  <table class="styled" border="0">
+  <thead>
+  <tr>
+    <th width="55%"><%= 'Username'[:colhdr_username] %></th>
+    <th><%= 'Website'[:colhdr_website] %></th>
+    <th width="18%" align=center><%= 'Posts'[:colhdr_posts] %></th>
+    </tr>
+  </thead>
+  <tbody style="line-height:1.1em;">
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= link_to h(user.display_name), user_path(user), :class => (user.admin? ? "admin tiddler_link" : "tiddler_link") %>
+      <span style="color:#666"><%= "(admin)"[:text_admin_in_parens] if user.admin? %></span>
+    </td>
+    <td>
+      <% unless user.website.blank? %>
+        <%= link_to( truncate( user.clean_website, 30), "http://" + user.clean_website, :class => "external_link", :title => user.clean_website) %>
+      <% end %>
+    </td>
+    <td  align=center><%= user.forum_posts_count %></td>
+  </tr>
+  <% end %>
+  </tbody>
+  </table>
+  <%= will_paginate @users %>
+  <%= 'Total Users'[:text_total_users] %>: <%= number_with_delimiter(@user_count) %>
+  <br/><br/>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

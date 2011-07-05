@@ -1,0 +1,19 @@
+<ul id="navigation">
+    <% $NpediaKeyModels.each do |tab| %>
+      <% @id=tab[:model].to_s.downcase.pluralize%>
+      <li class="tab<%= " active" if params[:model] == tab[:model].to_s %>" id="<%=@id%>">
+        <a href="<%=tab[:route]%>"><%= eval("'#{tab[:caption]}'[:title_#{@id}]") %></a>
+      </li>
+    <% end %>
+</ul>
+
+<div id="rightbar">
+  <%= link_to("Login"[:title_login], login_url(), :class => "tiddler_command logout_required_element", :id => "login" ) %>
+  <%= link_to("Logout"[:title_logout], logout_url(), :class => "tiddler_command login_required_element", :id => "logout") %>
+  &nbsp;|&nbsp;
+  <%= link_to("Settings"[:title_settings], settings_url(), :class => "tiddler_command login_required_element", :id => "settings") %>
+  <%= link_to("Register"[:title_register], register_url(), :class => "tiddler_command logout_required_element", :id => "register") %>
+  &nbsp;|&nbsp;<%= link_to("Help!"[:title_help], help_url(), :class => "tiddler_command" ) %>&nbsp;| <%= link_to("About"[:title_about], about_url(), :class => "tiddler_command" ) %>
+  <% if admin? %>&nbsp;|&nbsp;<%= link_to("Question Admin"[:title_question_admin], forums_url(), :class => "tiddler_command login_required_element", :id => "settings") %><% end %>
+</div>
+<div id="pin"><span>[Pin]</span></div>

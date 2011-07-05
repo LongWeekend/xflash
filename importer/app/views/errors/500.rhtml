@@ -1,0 +1,2 @@
+<% html = capture do %><br/><p><%='An internal error has occurred while processing your request.'[:error_server_500]%></p><% end %>
+<%= render :partial => 'errors/wrapper', :locals => { :html => html } %>

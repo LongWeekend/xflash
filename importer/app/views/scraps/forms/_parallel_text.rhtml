@@ -1,0 +1,13 @@
+<div class="left" style="margin-right:15px;">
+  <label for="scrap_title"><%= 'Japanese'[:caption_japanese_text] %></label>
+  <%= form.text_area :japanese, :rows => 1, :style => "width:400px" %>
+</div>
+<div class="left">
+  <label for="scrap_"><%= 'Translated'[:caption_translated_text] %></label>
+  <%= form.text_area :translated, :rows => 1, :style => "width:400px" %>
+</div>
+<div class="clear"></div>
+<div class="left">
+  <label for="scrap_tags"><%= 'Tags'[:caption_tags] %></label>
+  <%= form.text_field :tags, :style => "width:235px", :class => "tags_auto" %>
+</div>

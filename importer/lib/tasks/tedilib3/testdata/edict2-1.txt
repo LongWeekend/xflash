@@ -1,0 +1,23 @@
+ヽ [くりかえし] /(n) repetition mark in katakana/EntL1000000/
+Ｖシネマ [ブイシネマ] /(n) film released direct-to-video (trademark of Toei Company) (wasei: V-cinema)/EntL2451810/
+ワーホリ [ワーホリ] /(Long_Weekend_Favorites) working holiday/
+一 [いち] /(Counting_&_Numbers) 1/
+二 [に] /(Counting_&_Numbers) 2/
+三 [さん] /(Counting_&_Numbers) 3/
+々 [くりかえし;おなじ;おなじく;のま;どうのじてん] /(n) repetition of kanji (sometimes voiced)/EntL1000060X/
+〆 [しめ] /(n) end or closure mark/EntL1000070X/
+〆粕;搾滓;搾め糟;搾めかす;搾め滓;乄粕 [しめかす] /(n) oil cake/scrap cake/EntL2055680X/
+〇;○(iK) [かんすうじゼロ] /(n) (See ゼロ,漢数字) "kanji" zero/EntL1000080X/
+３２ビットの広い [さんじゅうにビットのひろい] /(n) {comp} 32 bits wide/EntL2277110X/
+お座り [おすわり] /(n,vs) (1) (chn) sit down/sit up/(2) Sit! (to a dog)/EntL2164820X/
+お座敷;御座敷 [おざしき] /(n) (1) (See 座敷) (pol) tatami room/(2) gathering (to which one has been invited to perform as a geisha, etc.)/EntL2435400X/
+お歳暮(P);御歳暮 [おせいぼ] /(n) (See 歳暮) end of the year/year-end gift/(P)/EntL1612670X/
+お作り;お造り;御作り;御造り [おつくり] /(n) (1) make-up/(2) (ksb:) sashimi/EntL2140770X/
+お手伝い(P);御手伝い [おてつだい] /(n,vs) (1) maid/(2) help/(P)/EntL1612810X/
+プロ意識 [プロいしき] /(n) professionalism; professional awareness/
+助けて [たすけて] /(Expressions_:_Calling_for_Help,common) Help!/
+ケガしてしまいました [ケガしてしまいました] /(Expressions_:_Calling_for_Help,common) I'm hurt./
+粗;荒 [あら] /(n) (1) leftovers (after filleting a fish)/(2) rice chaff/(3) flaw (esp. of a person)/(pref) (4) rough/roughly/(5) crude/raw/natural/wild/EntL1586730X/
+アイス /(n) (1) ice (eng: ice, ger: Eis)/(2) (See アイスクリーム) (abbr) ice cream/icecream/(P)/EntL1013970X/
+アウストラロピテクス;オーストラロピテクス /(n) Australopithecus (lat:)/EntL1014620X/
+ウイルス(P);ウィルス(P);ビールス;バイラス;ヴィールス;ヴァイラス /(n,adj-no) virus (lat:, ger:)/(P)/EntL1025450X/

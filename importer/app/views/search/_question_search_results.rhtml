@@ -1,0 +1,7 @@
+<% firstline = true %>
+<% for topic in @search do %>
+  <%='<tr><td><hr/></td></tr>' if firstline && @next_page != 2 && @page != 1 %>
+  <%= render :partial => 'forum_topics/list_forum_topic', :locals => { :topic => topic } %>
+  <% firstline = false %>
+<% end %>
+<code class="next_page"><%= @next_page %></code>

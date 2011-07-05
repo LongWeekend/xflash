@@ -1,0 +1,40 @@
+人	人	ren2	/man/
+刀	刀	dao1	/knife/
+力	力	li4	/power/
+又	又	you4	/right hand/again/
+口	口	kou3	/mouth/
+囗	囗	wei2	/enclose/
+土	土	tu3	/earth/
+夕	夕	xi1	/sunset/
+大	大	da4	/big/
+女	女	nu:3	/woman/
+子	子	zi3	/son/
+寸	寸	cun4	/inch/
+小	小	xiao3	/small/
+工	工	gong1	/labor/work/
+幺	幺	yao1	/tiny/small/
+弓	弓	gong1	/bow/
+心	心	xin1	/heart/
+戈	戈	ge1	/dagger-axe/
+手	手	shou3	/hand/
+日	日	ri4	/sun/
+月	月	yue4	/moon/
+木	木	mu4	/wood/
+水	水	shui3	/water/
+火	火	huo3	/fire/
+田	田	tian2	/field/
+目	目	mu4	/eye/
+示	示	shi4	/show/
+糸	糸	mi4	/fine silk/
+耳	耳	er3	/ear/
+衣	衣	yi1	/clothing/
+言	言	yan2	/speech/
+貝	贝	bei4	/cowry shell/
+走	走	zou3	/walk/
+足	足	zu2	/foot/
+金	金	jin1	/gold/
+門	门	men2	/door/
+隹	隹	zhui1	/short-tailed bird/
+雨	雨	yu3	/rain/
+食	食	shi2	/eat/
+馬	马	ma3	/horse/

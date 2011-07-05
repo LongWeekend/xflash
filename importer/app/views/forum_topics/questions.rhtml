@@ -1,0 +1,30 @@
+<% html = capture do %>
+<div class="contents forum_topic_contents">
+  <h2 class="title"><%= t 'Recent Questions'[:title_recent_questions] %></h2>
+	<%= will_paginate @questions %>
+  <ul class="questions" style="margin:15px;">
+  <% for question in @questions do %>
+    <li <%= 'style="border-top:0px;padding-top:0px;"' if question == @questions.first%>>
+    	<div class="post_author">
+    		<small>
+    			<%= link_to truncate(h(question.user.display_name), 22), user_path(question.user), :title => h(question.user.display_name), :class => "tiddler_link" %><br/>
+    			<small><%= pluralize(question.user.posts.count, "post") %><br/>
+    			<%= relative_time question.updated_at%></small>
+    			<%= avatar_for question.user %>
+    		</small>
+    	</div>
+      <div class="vote_block">
+        +<%= question.post_votes_up.count %><br/>
+        <span style="color:#808185">&minus;<%= question.post_votes_down.count %></span><br/>
+      </div>
+      <div class="description">
+        <h3><%= link_to h(question.title), forum_topic_path(question.forum.id, question), :class => "tiddler_link"  %><%= display_solved_icon if question.answerable? and question.solution_post_id != 0%></h3>
+        <div class="tags"><%= question.tags or 'None' %></div>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+	<%= will_paginate @questions %>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

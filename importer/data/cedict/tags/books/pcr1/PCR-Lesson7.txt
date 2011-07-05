@@ -1,0 +1,14 @@
+地圖	地图	di4 tu2	/map/
+什麼	什么	shen2 me5	/what?/
+看	看	kan1	/to look after/to watch/
+請	请	qing3	/please/
+北京	北京	bei3 jing1	/Beijing (capital of People's Republic of China)/
+上海	上海	shang4 hai3	/Shanghai/
+長江	长江	chang2 jiang1	/Changjiang River/Yangtze River/
+黃河	黄河	huang2 he2	/Yellow River (Huang He)/
+長城	长城	chang2 cheng2	/the Great Wall/
+世界	世界	shi4 jie4	/world/
+歐洲	欧洲	ou1 zhou1	/Europe/European/
+非洲	非洲	fei1 zhou1	/Africa/
+南美洲	南美洲	nan2 mei3 zhou1	/South America/
+大洋週	大洋周	da4 yang2 zhou1	/Oceania/

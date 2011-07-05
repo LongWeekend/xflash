@@ -1,0 +1,13 @@
+<div class="clear">&nbsp;</div>
+<%= javascript_include_merged "jquery", "jquery-ui", "jquery-ac", "jquery-cookie", "jquery-maxlen", "jquery-scrollto", "nicedit", "jquery-tiddlers", "jquery-json", "jquery-highlight", "urldecode", "jquery-tag-ac", "application" %>
+<script>
+	// Scripts that require ruby pre-processing for strings!
+	$(function(){
+		// page diff validation (must select two)
+		$("#compare_form").submit(function() {
+			if($("#compare_form input[@type=checkbox][@checked]").length < 2) { alert ('<%= 'Please select at least 2 revisions to compare'[:error_select_two_revisions]%>'); return false; }
+		});
+	});
+</script>
+</body>
+</html>

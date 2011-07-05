@@ -1,0 +1,10 @@
+人	人	ren2	/man/
+刀	刀	dao1	/knife/
+力	力	li4	/power/
+又	又	you4	/right hand/again/
+口	口	kou3	/mouth/
+囗	囗	wei2	/enclose/
+土	土	tu3	/earth/
+夕	夕	xi1	/sunset/
+大	大	da4	/big/
+女	女	nu:3	/woman/

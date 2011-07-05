@@ -1,0 +1,20 @@
+<div id="sidebar">
+  <div class="pumpkin">
+		<h4><%='Starred'[:title_starred_items]%><a href="#" id="clear_user_list" class="small" title="<%='Clear list'[:caption_clear_list]%>"><%= image_tag 'smallicons/lightning.png', :alt=> 'Clear list'[:caption_clear_list] %></a></h4>
+    <ul id="user_list">
+      <li id="empty"><%="Loading"[:caption_loading]%></li>
+    </ul>
+  </div>
+  <div class="paleblue">
+		<h4><%='Recent Searches'[:title_recent_searches]%><a href="#" id="clear_search_history" class="small" title="<%='Clear list'[:caption_clear_list]%>"><%= image_tag 'smallicons/lightning.png', :alt=> 'Clear list'[:caption_clear_list] %></a></h4>
+    <ul id="search_history">
+      <li id="empty"><%="Loading"[:caption_loading]%></li>
+    </ul>
+  </div>
+  <div class="paleyellow">
+		<h4><%='Recent Links'[:title_recent_searches]%><a href="#" id="clear_link_history" class="small" title="<%='Clear list'[:caption_clear_list]%>"><%= image_tag 'smallicons/lightning.png', :alt=> 'Clear list'[:caption_clear_list] %></a></h4>
+    <ul id="link_history">
+      <li id="empty"><%="Loading"[:caption_loading]%></li>
+    </ul>
+  </div>
+</div>

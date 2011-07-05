@@ -1,0 +1,47 @@
+車廂	车厢	che1 xiang1	/(train) car/
+事故	事故	shi4 gu4	/accident/
+臥具	卧具	wo4 ju4	/bedding/
+上車	上车	shang4 che1	/board/
+盒飯	盒饭	he2 fan4	/boxed meal/
+買	买	mai3	/buy/
+換車	换车	huan4 che1	/change train/
+查票	查票	cha2 piao4	/check ticket/
+打掃	打扫	da3 sao3	/clean/
+列車員	列车员	lie4 che1 yuan2	/conductor/
+晚點	晚点	wan3 dian3	/delay/
+餐車	餐车	can1 che1	/dining car/
+顯示	显示	xian3 shi4	/display/
+電子屏幕	电子屏幕	dian4 zi3 ping3 mu4	/electronic screen/
+特快	特快	te4 kuai4	/express train/
+票價	票价	piao4 jia4	/fare/
+下車	下车	xia4 che1	/get off/
+上車	上车	shang4 che1	/get on/
+硬座	硬座	ying4 zuo4	/hard seat/
+硬臥	硬卧	ying4 wo4	/hard sleeper/
+用餐	用餐	yong4 can1	/have a meal/
+慢車	慢车	man4 che1	/local train/
+長途	长途	chang2 tu2	/long distance/
+下鋪	下铺	xia4 pu4	/lower berth/
+現代	现代	xian4 dai4	/modern/
+準時	准时	zhun3 shi2	/on time/
+正點	正点	zheng4 dian3	/on time/
+單程票	单程票	dan1 cheng2 piao4	/one way ticket/
+人員	人员	ren2 yuan2	/personnel/
+站台	站台	zhan4 tai2	/platform/
+月台	月台	yue4 tai2	/platform/
+推遲	推迟	tui1 chi2	/postpone/
+來回票	来回票	lai2 hui2 piao4	/round trip ticket/
+賣	卖	mai4	/sell/
+服務	服务	fu2 wu4	/service/
+臥鋪	卧铺	wo4 pu4	/sleeper/
+小吃	小吃	xiao3 chi1	/snacks/
+零食	零食	ling2 shi2	/snacks/
+軟臥	软卧	ruan3 wo4	/soft sleeper/
+票	票	piao4	/ticket/
+售票處	售票处	shou4 piao4 chu4	/ticket office/
+整理	整理	zheng3 li3	/tidy up/
+時刻表	时刻表	shi2 ke4 biao3	/time schedule/
+火車站	火车站	huo3 che1 zhan4	/train station/
+等	等	deng3	/wait/
+候車室	候车室	hou4 che1 shi4	/waiting room/
+上鋪	上铺	shang4 pu4	/upper berth/

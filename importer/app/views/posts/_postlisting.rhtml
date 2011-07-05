@@ -1,0 +1,86 @@
+<% prevnode_parent_id = 0 %>
+<% prevnode_post_id = 0 %>
+<% prevnode_depth = 0 %>
+<ul class="conversation">
+
+<% for post in posts do %>
+ <%	if post.solution?
+			li_class = ' solution_post' 
+		elsif (post.class == ForumPost and post.topic.answerable? and post.first_post_flag == 1) 
+			li_class = ' question_post'
+		else
+			li_class = ''
+		end
+	%>
+  <% if post.parent_id == prevnode_parent_id && post.first_post_flag==0 && post.depth <= prevnode_depth %></li><% end %>
+  <% if post.depth < prevnode_depth && (prevnode_depth.to_i-post.depth.to_i) > 0 %>
+    <% (prevnode_depth.to_i-post.depth.to_i).times do%></li></ul></li><% end %>
+  <% end %>  
+
+  <% if post.depth > prevnode_depth || post.parent_id > prevnode_post_id && post.parent_id != 0 %><ul class="conversation"><% end %>
+  <li class="talk<%= li_class %>" id="talk<%= post.id %>" style="display:list-item;<%= ';border-top:0px;padding-top:0px;' if post == posts.first %>">
+  <% unless post == posts.first %><a name="talk<%= post.id %>" class="none" id="talk<%= post.id %>"><% end %>
+	<%## DEBUG ONLY ##= "<h2>(" + post.parent_id.to_s + "." + post.id.to_s + "@" + post.depth.to_s + ")</h2>"%>
+
+    <% solution = false if solution.nil? %>
+    <% showtopic = defined?(post.topic) and post.class == ForumPost %>
+    <div class="post" id="forum_post_<%= post.id %>">
+
+      <% if post.solution? %><a name="solution" class="none"></a><% end %>  
+      <a name="talk<%= post.id %>" class="none"></a>
+
+      <div class="post_author">
+        <small>
+          <%= link_to truncate(h(post.user.display_name), :length => 22), user_path(post.user), :class => (posts.first && post.user_id == current_user ? "threadauthor" : nil), :title => h(post.user.display_name) %><br/>
+          <small><%= pluralize(post.user.forum_posts_count, "post") %><br/>
+          <%= relative_time post.updated_at %></small>
+          <%= avatar_for post.user %>
+        </small>
+      </div>
+
+      <div class="post_body">
+        <div class="buttons">
+          <% post.depth > 0 ? icon = "reload" : icon = "comment" %>
+          <%= image_tag('clearbits/upload.gif', :class => 'icon_green vote vote_up', :title => "Vote this post down"[:caption_vote_down]) %>
+          <span class="up_votes"><%= post.votes_up.count %></span>
+          <%= image_tag('clearbits/download.gif', :class => 'icon_green vote vote_down', :title => "Vote this post down"[:caption_vote_down]) %>
+         	<span class="down_votes"><%= post.votes_down.count %></span>
+          <%= image_tag("clearbits/#{icon}.gif", :class => 'icon_gray reply', :title => 'Reply to this post'[:caption_reply_to_post]) %>
+        </div>
+        <%= post.body_html %>
+        <small class="links">
+					<div id="abuse_progress_<%= post.id %>" class="abuse_progress_indicator"></div>
+					<a href="posts/abuse/<%=post.id%>" class="abuse"><%= 'report abuse'[:caption_report_abuse] %></a> | 
+					<a href="<%= forum_topic_path(@forum_topic.forum_id, @forum_topic.id, :anchor => 'talk' + post.id.to_s) %>" class="permalink tiddler_link_external"><%= 'permalink'[:caption_permalink]%></a>
+        	<% if post.class == ForumPost %>
+						<a href="<%#= solve_question_url(post.topic.forum.id, post.topic.id) %>">
+						<% if post.first_post_flag==0 and post.topic.answerable? and post.topic.editable_by?(current_user)%>
+						| <% if post.solution? %><%='remove as solution'[:caption_remove_as_solved]%><% else %><%='mark as solution'[:caption_mark_as_solved]%><% end %>
+						<% end %>
+						</a>
+					<% end %>
+        </small>
+      </div>
+
+			<% if logged_in? %>
+				<div class="clear"></div>
+				<div class="post_reply" id="post_reply_<%= post.id %>" class="post_reply"><a name="talk-reply"></a>
+				  <%# form_for :forumpost, :url => forum_topic_talkabout_path(:forum_id => @forum, :topic_id => @forum_topic, :page => @forum_topic.last_page) do |f| %>
+						<%#= render :partial => 'posts/postform', :locals => { :f => f, :post => post } %>
+				  <%# end %>
+				</div>
+			<% end %>
+
+    </div>
+    
+  <%= "</a>" unless post == posts.first %>
+  <% 
+    prevnode_parent_id = post.parent_id 
+    prevnode_post_id = post.id
+    prevnode_depth = post.depth
+  %>
+  <% if post == posts.last %>
+    <% (prevnode_depth.to_i-0).times do%></li></ul></li><% end %>
+  <% end %>
+<% end %>
+</ul>

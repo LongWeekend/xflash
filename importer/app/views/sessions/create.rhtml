@@ -1,0 +1,2 @@
+<% html = capture do %><%= render :partial => 'create' %><% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

@@ -1,0 +1,10 @@
+<div id="sidebar_options" class="greenhue">
+  <ul>
+    <li id="edit"><%= link_to 'Edit This Page'[:caption_edit_page], edit_book_page_path(:book_id=>@page.book_id, :id => @page.id) %></li>
+    <!--li id="attachments"><%= link_to 'Attachments'[:caption_attachments], edit_book_page_path(:book_id=>@page.book_id, :id => @page.id) %></li-->
+    <li id="addtalk"><a href="#talkdiv" onclick="talk_reply_show();"><%= 'Talk About This Page'[:caption_talk_about_page]%></a></li>
+    <li id="addpage"><%= link_to 'New Page'[:caption_new_page], new_book_page_path(:book_id=>@page.book_id) %></li>
+    <li id="addchildpage"><%= link_to 'New Child Page'[:caption_new_child_page], new_book_page_path(:book_id=>@page.book_id, :parent_id => @page.id) %></li>
+    <!--li id="removepage"><%= link_to 'Remove Page'[:caption_remove_page],  :confirm => "Are you sure?", :method => 'delete', :id => @page.slug  %></li-->
+  </ul>
+</div>

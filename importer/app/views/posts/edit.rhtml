@@ -1,0 +1,13 @@
+<h1><%= t 'Edit Post'[:title_edit_post] %></h1>
+
+<h2><%= link_to h(@post.topic.title), forum_topic_path(@post.forum_id, @post.topic) %></h2>
+
+<%= link_to('Delete post'[:caption_delete_post], post_path(:forum_id => @post.forum_id, :topic_id => @post.topic, :id => @post, :page => params[:page]), 
+      :class => "utility", :method => :delete, :confirm => 'Delete this post forever?'[:confirm_delete_post]) %>
+
+<%= error_messages_for :topic %>
+<% form_for :post, :url  => post_path(:forum_id => params[:forum_id], :id => params[:topic_id], :id => @post, :page => params[:page]) do |f| -%>
+<%= hidden_field_tag :_method, "put" %>
+<p id="post_body"><%= f.text_area :body %></p>
+<%= submit_tag 'Save'[:button_save] %> or <%= link_to 'cancel'[:caption_cancel], forum_topic_path(:forum_id => params[:forum_id], :id => params[:topic_id], :page => params[:page]) %>
+<% end -%>

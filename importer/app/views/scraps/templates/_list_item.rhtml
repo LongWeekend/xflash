@@ -1,0 +1,13 @@
+<% remove_link = "&nbsp;<a href='/list/remove_item?scrap_id=#{scrap.id.to_s}' class='remove'>X</a>" %>
+<% if scrap.type.to_s == "Definition" %>
+  <%= link_to("#{scrap.scrap_topic.title}", "/scraps/" + scrap.scrap_topic.slug + '?scrap_id=' + scrap.id.to_s, :title => "[#{scrap.readings}] (#{scrap.tags}) : #{scrap.usage}" ) %>
+  <br/><small><%= scrap.summary_text %>...</small>
+<%# elsif scrap.type.to_s == "Webscrap" %>
+<%# elsif scrap.type.to_s == "Bookmark" %>
+<%# elsif scrap.type.to_s == "Note" %>
+<% elsif scrap.type.to_s == "ParallelText" %>
+  <em><%= link_to(scrap.japanese[0..30], "/scrap/" + scrap.id.to_s ) %></em> &gt;&gt; <small>[<%= scrap.language.code.upcase %>]</small>
+<% else %>
+  <%= link_to(scrap.scrap_topic.title + ' = ' + scrap.content[0..15], show_scrap_url(scrap.id.to_s) ) %>
+<% end %>
+<%= remove_link %>

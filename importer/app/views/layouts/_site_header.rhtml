@@ -1,0 +1,74 @@
+<div id="header">
+  <div id="inner_header">
+
+    <div id="logo"><a href="/"><h1><span><%= 'Nihongopedia'[:caption_site_name] %></span></h1></a></div>
+  	<div id="navbar">
+      <%= render :partial => 'layouts/navigation' %>
+  	</div>
+  	<div class="clear"></div>
+
+    <div id="query_form">
+
+      	<div id="search_form_elements">
+        	<% form_tag(scraptionary_path, { :method => "get", :id => "search_form", :class => "tiddler_query_form" }) do %>
+            <div class="form_element common">
+              <%= text_field_tag :q, params[:q], :id => "query" %>
+            </div>
+            <div class="form_element common not_users not_tags">
+              <%= text_field_tag :t, params[:t], :id => "query_tags" %>
+            </div>
+            <div class="form_element questions" <%= "style='display:none;' " unless controller.action_name == "forums" %>>
+              <select name="sort">
+                <option>latest</option>
+                <option>popular</option>
+              </select>
+            </div>
+            <div class="form_element questions" <%= "style='display:none;' " unless controller.action_name == "forums" %>>
+              <select name="type">
+                <option>unanswered</option>
+                <option>answered</option>
+                <option>all</option>
+              </select>
+            </div>
+            <div class="form_element users" <%= "style='display:none;' " unless controller.action_name == "users" %>>
+              <select name="sort">
+                <option>username</option>
+                <option>oldest</option>
+                <option>score</option>
+              </select>
+            </div>
+            <div class="form_element activity" <%= "style='display:none;' " unless controller.action_name == "activity" %>>
+              <select name="type">
+                <option>create</option>
+                <option>update</option>
+                <option>vote</option>
+              </select>
+            </div>
+            <div class="form_element common">
+              <a href="#" id="search_form_clear" title="<%= "Clear Form"[:caption_clear_search] %>">X</a>
+            </div>
+            <div class="form_element common">
+              <%= submit_tag 'Search'[:button_search], :id => "query_submit" %> &nbsp;
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form_element">
+          <a href="#" id="search_results_clear"><%= "Clear Results"[:caption_clear_search] %></a>
+        </div>
+
+        <div class="form_element">
+    	    <ul id="commands" class="tiddler_commands">
+    	      <div class="expander"><%='Add New'[:title_add_new]%> &gt;&gt;&gt;</div>
+    	      <li><%= link_to 'Question'[:caption_question], '/question/new', :class => "tiddler_link" %></li>
+    	      <li><%= link_to 'Definition'[:caption_definition], '/scrap/new?type=definition', :class => "tiddler_link" %></li>
+    	      <li><%= link_to 'Parallel Text'[:caption_parallel_text], '/scrap/new?type=parallel_text', :class => "tiddler_link" %></li>
+    	      <li><%= link_to 'Note'[:caption_note], '/scrap/new?type=note', :class => "tiddler_link" %></li>
+    	    </ul>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+<a name="top"></a>

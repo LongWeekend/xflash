@@ -1,0 +1,160 @@
+小腹	小腹	xiao3 fu4	/abdomen/
+事故	事故	shi4 gu4	/accident/
+急性	急性	ji2 xing4	/acute/
+創口貼	创口贴	chuang4 kou3 tie1	/adhesive bandage/
+過敏	过敏	guo4 min3	/allergic/
+過敏症	过敏症	guo4 min3 zheng4	/allergy/
+救護車	救护车	jiu4 hu4 che1	/ambulance/
+麻藥	麻药	ma2 yao4	/anesthesia/
+麻醉師	麻醉师	ma2 zui4 shi1	/anesthetist/
+踝骨	踝骨	huai2 gu3	/ankle/
+抗生素	抗生素	kang4 sheng1 su4	/antibiotics/
+闌尾炎	阑尾炎	lan2 wei3 yan2	/appendicitis/
+盲腸炎	盲肠炎	mang2 chang2 yan2	/appendicites/
+闌尾	阑尾	lan2 wei3	/appendix/
+盲腸	盲肠	mang2 chang2	/appendix/
+胳膊	胳膊	ge1 bo5	/arm/
+手臂	手臂	shou3 bi4	/arm/
+關節炎	关节炎	guan1 jie2 yan2	/arthritis/
+揹	背	bei4	/back/
+繃帶	绷带	beng1 dai4	/bandage/
+包	包	bao1	/bind up/
+血	血	xue4	/blood/
+血壓	血压	xue4 ya1	/blood pressure/
+驗血	验血	yan4 xue4	/blood test/
+血型	血型	xie3 xing2	/blood type/
+骨折	骨折	gu3 zhe2	/bone fracture/
+叫號	叫号	jiao4 hao4	/call number/
+癌癥	癌症	ai2 zheng4	/cancer/
+得	得	de2	/catch/
+測	测	ce4	/check/
+臉	脸	lian3	/cheek/face/
+胸口	胸口	xiong1 kou3	/chest/
+水痘	水痘	shui3 dou4	/chicken pox/
+發冷	发冷	fa1 leng3	/chills/
+不通	不通	bu4 tong1	/congested/
+咳嗽	咳嗽	ke2 sou5	/cough/
+割破	割破	ge1 po4	/cut/
+深	深	shen1	/deep/
+接生	接生	jie1 sheng1	/deliver/
+產房	产房	chan3 fang2	/delivery room/
+拉肚子	拉肚子	la1 du4 zi5	/diarrhea/
+腹瀉	腹泻	fu4 xie4	/diarrhea/
+頭暈	头晕	tou2 yun1	/dizzy/
+醫生	医生	yi1 sheng1	/doctor/
+值班醫生	值班医生	zhi2 ban1 yi1 sheng1	/doctor on duty/
+抽	抽	chou1	/draw/collect/
+耳朵	耳朵	er3 duo1	/ear/
+胳膊肘	胳膊肘	ge1 bo2 zhou3	/elbow/
+心電圖	心电图	xin1 dian4 tu2	/electocardiogram/
+急診室	急诊室	ji2 zhen3 shi4	/emergency room/
+腸炎	肠炎	chang2 yan2	/enteritis/
+癲癇	癫痫	dian1 xian2	/epilepsy/
+每隔四小時	每隔四小时	mei3 ge2 si4 xiao3 shi2	/every four hours/
+檢查	检查	jian3 cha2	/examine/
+大便	大便	da4 bian4	/feces/
+發燒	发烧	fa1 shao1	/fever/
+填	填	tian2	/fill in/
+手指	手指	shou3 zhi3	/finger/
+流感	流感	liu2 gan3	/flu/
+腳	脚	jiao3	/foot/
+表	表	biao3	/form/
+打一針	打一针	da3 yi1 zhen1	/give an injection/
+生孩子	生孩子	sheng1 hai2 zi5	/give birth/
+淋巴	淋巴	lin2 ba1	/glands/
+手	手	shou3	/hand/
+感冒	感冒	gan3 mao4	/have a cold/
+做手術	做手术	zuo4 shou3 shu4	/have a surgery/have an operation/
+頭	头	tou2	/head/
+心臟	心脏	xin1 zang4	/heart/
+心臟病	心脏病	xin1 zang4 bing4	/heart disease/
+胯骨	胯骨	kua4 gu3	/hip/
+醫院	医院	yi1 yuan4	/hospital/
+人體	人体	ren2 ti3	/human body/
+疼	疼	teng2	/hurt/sore/
+分娩中	分娩中	fen4 mian3 zhong1	/in labor/
+發炎	发炎	fa1 yan2	/inflammation/
+注射	注射	zhu4 she4	/inject/
+特護病房	特护病房	te4 hu4 bing4 fang2	/intensive care unit/
+輸液	输液	shu1 ye4	/intravenous feeding/
+我這兒疼	我这儿疼	wo3 zhe4 er5 teng2	/It hurts here./
+腎臟	肾脏	shen4 zang4	/kidney/
+膝蓋	膝盖	xi1 gai4	/knee/
+陣痛	阵痛	zhen4 tong4	/labor pain/
+化驗	化验	hua4 yan4	/lab-test/
+腿	腿	tui3	/leg/
+肝臟	肝脏	gan1 zang4	/liver/
+肺部	肺部	fei4 bu4	/lungs/
+麻疹	麻疹	ma2 zhen3	/measles/
+病史	病史	bing4 shi3	/medical history/
+醫療保險	医疗保险	yi1 liao2 bao3 xian3	/medical insurance/
+藥	药	yao4	/medicine/
+月經	月经	yue4 jing1	/menstrual periods/
+精神病 	精神病 	jing1 shen2 bing4	/mental illness/
+嘴	嘴	zui3	/mouth/
+流行性	流行性	liu2 xing2 xing4	/mumps/
+腮腺炎	腮腺炎	sai1 xian4 yan2	/mumps/
+惡心	恶心	e3 xin1	/nauseous/
+鼻子	鼻子	bi2 zi5	/nose/
+護士	护士	hu4 shi5	/nurse/
+觀察	观察	guan1 cha2	/observe/
+產科醫生	产科医生	chan3 ke1 yi1 sheng1	/obstetrician/
+拄拐杖	拄拐杖	zhu3 guai3 zhang4	/on crutches/
+實習醫生	实习医生	shi2 xi2 yi1 sheng1	/internist/
+張開	张开	zhang1 kai1	/open/
+動手朮	动手术	dong4 shou3 shu4	/operate/
+手術室	手术室	shou3 shu4 shi4	/operating room/
+手術台	手术台	shou3 shu4 tai2	/operating table/
+手術	手术	shou3 shu4	/operation/surgery/
+臟器	脏器	zang1 qi4	/organs/
+輸氧	输氧	shu1 yang3	/oxygen therapy/
+病人	病人	bing4 ren2	/patient/
+青霉素	青霉素	qing1 mei2 su4	/penicillin/
+安置	安置	an1 zhi4	/place/put/
+小兒麻痹症	小儿麻痹症	xiao3 er2 ma2 bi4 zheng4	/polio/
+懷孕	怀孕	huai2 yun4	/pregnant/
+做準備	做准备	zuo4 zhun3 bei4	/prepare/
+開	开	kai1	/prescribe/
+手朮後情況	手术后情况	shou3 shu4 hou4 qing2 kuang4	/prognosis/
+脈搏	脉搏	mai4 bo2	/pulse/
+推	推	tui1	/push/
+上石膏	上石膏	shang4 shi2 gao1	/put it in cast/
+觀察室	观察室	guan1 cha2 shi4	/recovery room/
+掛號	挂号	gua4 hao4	/register/
+掛號處	挂号处	gua4 hao4 chu4	/registration (office)/
+正常	正常	zheng4 chang2	/regular/
+切除	切除	qie1 chu2	/removal/remove/
+捲起	卷起	juan3 qi3	/roll up/
+流鼻涕	流鼻涕	liu2 bi2 ti4	/running nose/
+看病	看病	kan4 bing4	/see a doctor/
+固定骨頭	固定骨头	gu4 ding4 gu3 tou2	/set the bone/
+肩膀	肩膀	jian1 bang3	/shoulder/
+難受	难受	nan2 shou4	/sick/
+袖子	袖子	xiu4 zi5	/sleeve/
+扭傷	扭伤	niu3 shang1	/sprain/
+聽診器	听诊器	ting1 zhen3 qi4	/stethoscope/
+縫合	缝合	feng2 he2	/stitch/
+胃疼	胃疼	wei4 teng2	/stomachache/
+肚子疼	肚子疼	du4 zi5 teng2	/stomachache/
+擔架	担架	dan1 jia4	/stretcher/
+外科醫生	外科医生	wai4 ke1 yi1 sheng1	/surgeon/
+腫	肿	zhong3	/swollen/
+症狀	症状	zheng4 zhuang4	/symptoms/
+片	片	pian1	/tablet/pill/
+量體溫	量体温	liang4 ti3 wen1	/take temperature/
+嗓子	嗓子	sang3 zi5	/throat/
+喉嚨	喉咙	hou2 long2	/throat/
+扁桃腺	扁桃腺	bian3 tao2 xian4	/tonsils/
+鎮靜劑	镇静剂	zhen4 jing4 ji4	/tranquilizer/
+肺結核	肺结核	fei4 jie2 he2	/tuberculosis/
+不舒服	不舒服	bu4 shu1 fu5	/uncomfortable/
+意外	意外	yi4 wai4	/unexpected/
+小便	小便	xiao3 bian4	/urine/
+性病	性病	xing4 bing4	/venereal disease/
+主要	主要	zhu3 yao4	/vital/
+吐	吐	tu4	/vomit/
+腰	腰	yao1	/waist/lower back/
+候診室	候诊室	hou4 zhen3 shi4	/waiting room/
+輪椅	轮椅	lun2 yi3	/wheelchair/
+傷口	伤口	shang1 kou3	/wound/injury/
+手腕	手腕	shou3 wan4	/wrist/

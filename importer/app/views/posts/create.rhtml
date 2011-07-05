@@ -1,0 +1,14 @@
+<h2><%= t 'Add Talk'[:tite_add_talk] %></h2>
+
+<% form_tag :action => 'addtalk' do %>
+<%= error_messages_for 'post' %>
+<%= hidden_field :post, :page_id, :value => @post.page_id %>
+
+<p><label for="post_title">title</label><br/>
+<%= text_field :post, :title, :size =>60 %></p>
+
+<p><%= text_area :post, :body, :rows =>10, :cols =>64 %></p>
+<% if @user %><p>Username: <%=@user.display_name %></p><% end %>
+<%= submit_tag 'Submit'[:button_submit] %>
+
+<% end %>

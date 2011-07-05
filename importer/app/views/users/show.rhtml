@@ -1,0 +1,53 @@
+<% html = capture do %>
+<div class="contents" style="background-color:white;border:3px solid #CCCCCC">
+<div style="width:80%;padding:5px;">
+	<% if admin? %>
+  <div style="float:right;padding:10px;">
+      <div>
+        <% form_for :user, :url => make_admin_user_path(@user) do |f| %>
+          <input type="hidden" name="admin" value="<%= @user.admin? ? 0 : 1 %>"/>
+          <input type="submit" value="<%= @user.admin? ? 'Disable Admin Access'[:text_disable] : 'Enable Admin Access'[:text_enable] %>" class="user_admin_input"　<%= 'style="color:red;font-weight:bold;""' if @user.admin? %>/>
+        <% end %>
+        <% if current_user.id != params[:id].to_i %>
+          <% form_for :user, :url => spoof_user_session_path(@user) do |f| %>
+            <input type="submit" value="<%= 'Login As User'[:title_login_as_user]%>" class="user_admin_input"/>
+          <% end %>
+        <% end %>
+      <select name="forum_id" class="user_admin_input" onchange="document.location='<%#=forum_moderator_path(@user.id, '')%>' + this.value">
+        <option value=''>Make Moderator For ----------&gt;</option>
+        <%= options_from_collection_for_select(Forum.find(:all, :order => 'title') - @user.forums, "id", "title") %>
+      </select>
+      <% if @user.forums.any? %>
+      <h3><%= 'Forums Moderated'[:title_forums_moderated] %></h3>
+        <% @user.forums.each do |forum| %>
+            <%= forum.title %>&nbsp;<%= link_to image_tag('smallicons/alert.gif', :border=>0), forum_moderator_path(@user.id,  forum.id), :confirm => "#{'Remove user as moderator for'[:confirm_remove_user_moderator]} #{forum.title}?", :class => "tiddler_link" %><br/>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+	<% end %>
+
+  <h2 class="title"><%=t h @user.display_name %></h2>
+	<div><%= avatar_for @user, 64 %></div>
+  <div class="subtitle">
+	  <%#= feed_icon_tag @user.display_name, formatted_user_posts_path(:user_id => @user, :format => :rss) %>
+	  <span>
+	    <%= '{count} topics'[(count=@user.forum_topics.count)==1 ? :topic_count : :topics_count, number_with_delimiter(count)] %>,
+	    <%= '{count} posts'[(count=@user.posts.count)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %>
+	    <%#= link_to 'monitored'[:caption_monitored], monitored_posts_path(@user), :class => "tiddler_link" %> <%= 'posts'[:text_posts] %>)<br/>
+    	<% unless @user.website.blank? %>
+    	  <strong><%= 'Website:'[:caption_website] %></strong> <%= white_list link_to(@user.clean_website, "http://" + @user.clean_website, :class => "external_link") %><br/>
+    	<% end %>
+    	<strong><%= 'Since'[:text_user_since] %></strong> <%= @user.created_at.to_date.to_s "yyy/mm/dd" %>
+
+	  </span>
+	</div><br/>
+
+	<div style="-moz-border-radius:4px;-webkit-border-radius:4px;width:99%;min-height:120px;background-color:lightblue;padding:9px 9px 9px 13px;">
+	  <%= (@user.bio_html.size < 3 ? "User biography is empty!"[:captionn_user_bio_empty] : @user.bio_html) %>
+	</div>
+  <br/>
+
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>

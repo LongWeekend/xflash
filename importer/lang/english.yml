@@ -1,0 +1,354 @@
+# Localization dictionary for the 'Gibberish' plugin (npedia)
+
+# -- pages_controller.rb:
+error_add_page_failure: "The page could not be added!"
+msg_page_update_success: "Page updated successfully!"
+msg_page_not_changed: "Nothing changed, page not updated!"
+
+# -- posts_controller.rb:
+error_generic: "An error occurred"
+
+# -- sessions_controller.rb:
+msg_logged_out: "You have been logged out."
+msg_openid_not_found: "t be found"
+msg_openid_canceled: "OpenID verification was canceled"
+msg_openid_failed: "Sorry, the OpenID verification failed"
+error_account_inactive: "This account is not yet activated. Please check your email!"
+error_invalid_login: "Invalid login or password, try again please."
+
+# -- users_controller.rb:
+msg_signup_complete: "Signup complete!"
+msg_settings_saved: "Your settings have been saved."
+
+# -- application_helper.rb:
+format_datetime: "%b %e, %Y  %l:%M%p"
+title_wiki: "Wiki"
+title_forums: "Forums"
+title_questions: "Questions"
+title_tags: "Tags"
+title_search: "Search"
+title_bookshelf: "Bookshelf"
+title_translations: "Translations"
+title_activity: "Activity"
+title_users: "Users"
+text_solved: "Solved"
+text_comma_topic_locked: ", this topic is suspended."
+text_comma_sticky_topic: ", this is sticky."
+
+# -- book.rb:
+text_collection: "Collection"
+text_book: "Book"
+text_hidden: "Hidden"
+text_draft: "Draft"
+text_private_book: "Private Book"
+text_private_collection: "Private Collection"
+
+# -- user.rb:
+msg_check_email_is_valid: "Please check the e-mail address is correct"
+
+# -- user_mailer.rb:
+text_welcome_to_npedia: "Welcome to Nihongopedia"
+
+# -- _book.rhtml:
+caption_edit: "edit"
+caption_new_page: "new page"
+
+# -- _quickadd.rhtml:
+caption_title: "Title"
+caption_tags: "Tags"
+caption_content: "Content"
+caption_keyword: "Keyword"
+caption_description: "Description"
+caption_japanese_sentence: "Japanese Sentence"
+caption_english_sentence: "English Sentence"
+
+# -- edit.rhtml:
+title_edit_book: "Edit Book"
+button_save_changes: "Save Changes"
+caption_cancel: "Cancel"
+
+# -- index.rhtml:
+title_bookshelf_titles: "Bookshelf Titles"
+
+# -- new.rhtml:
+title_create_book: "Create a New Book"
+
+# -- _form.rhtml:
+title_forum: "Forum"
+caption_answerable_question: "Answerable Question"
+caption_sticky: "Sticky"
+caption_suspended: "Suspended"
+caption_deleted: "Deleted"
+title_title: "Title"
+title_body: "Body"
+
+# -- edit.rhtml:
+title_edit_topic: "Edit Topic"
+
+# -- new.rhtml:
+title_create_topic: "Start a New Topic"
+button_create_topic: "Post Topic"
+
+# -- questions.rhtml:
+title_recent_questions: "Recent Questions"
+caption_ask_a_question: "Ask a Question?"
+
+# -- show.rhtml:
+caption_monitoring_topic: "Monitoring Topic"
+caption_forums: "Forums"
+caption_delete: "delete"
+confirm_delete_topic: "Delete this topic forever?"
+caption_next_page: "Next page"
+caption_pages: "Pages"
+caption_topic_locked: "Topic suspended"
+text_topic_suspended: "This topic is suspended"
+title_reply_to_topic: "Reply to Topic"
+text_views: "Views"
+title_topic_locked: "Topic Locked"
+
+# -- show.rxml:
+feed_language: "en-us"
+
+# -- _form.rhtml:
+text_suspended: "Suspended"
+text_sticky: "Sticky"
+text_deleted: "Deleted"
+title_description: "Description"
+
+# -- _usersonline.rhtml:
+text_users_online: "Users online:"
+
+# -- edit.rhtml:
+title_edit_forum: "Edit Forum"
+button_save_forum: "Save Forum"
+
+# -- index.rhtml:
+caption_recent_posts: "Recent Posts"
+colhdr_forum: "Forum"
+colhdr_topics: "Topics"
+colhdr_posts: "Posts"
+colhdr_last_update: "Last Update"
+text_recent_activity: "Recent activity"
+text_no_recent_activity: "No recent activity"
+caption_start_new_topic: "Start New Topic"
+
+# -- new.rhtml:
+title_new_forum: "Start a New Forum"
+button_create: "Create"
+
+# -- show.rhtml:
+text_pages: "Pages"
+colhdr_topic: "Topic"
+colhdr_views: "Views"
+colhdr_last_post: "Last post"
+caption_last: "last"
+caption_view: "view"
+text_no_posts_yet: "No posts yet"
+caption_top: "Top"
+caption_ask_new_question: "Click to Ask a Question"
+title_moderators: "Moderators"
+text_forum_unmoderated: "Forum is currently unmoderated."
+text_please_play_nice: "Please play nice!"
+
+# -- _adminoptions.rhtml:
+title_admin: "Admin"
+caption_create_new_forum: "Create New Forum"
+caption_abuse_posts: "Abuse Posts"
+caption_deleted_posts: "Deleted Posts"
+
+# -- _pagefooter.rhtml:
+text_site_footer: "Powered by Nihongopedia, <br/>Domo Arigatou Mr Robotto"
+
+# -- _pageoptions.rhtml:
+caption_edit_page: "Edit This Page"
+caption_attachments: "Attachments"
+caption_talk_about_page: "Talk About This Page"
+caption_new_child_page: "New Child Page"
+caption_remove_page: "Remove Page"
+
+# -- _site_header.rhtml:
+caption_settings: "Settings"
+caption_my_page: "My Page"
+caption_logout: "Logout"
+caption_signup: "Signup"
+caption_login: "Login"
+caption_site_name: "Nihongopedia"
+
+# -- create.rjs:
+
+# -- destroy.rjs:
+
+# -- _changes.rhtml:
+colhdr_date_updated: "Date Updated"
+colhdr_edited_by: "Edited By"
+text_percentage_changed: "% changed"
+text_now_showing: "Now Showing"
+button_compare: "Compare"
+caption_compare_to_next: "Compare to Next"
+caption_compare_to_previous: "Compare to Previous"
+
+# -- _form.rhtml:
+
+# -- credits.rhtml:
+title_credits: "Credits"
+
+# -- edit.rhtml:
+title_edit_page: "Edit Page"
+button_save: "Save"
+
+# -- index.rhtml:
+title_listing_wiki_pages: "Listing Wiki Pages"
+
+# -- new.rhtml:
+caption_create_page_in: "New Page In"
+caption_create_child_page: "New Child Page "
+
+# -- remove.rhtml:
+title_remove_page: "Remove Page"
+
+# -- show.rhtml:
+caption_show_current_revision: "show current"
+caption_start_talking_about_page: "Talk about this page?"
+
+# -- talkabout.rhtml:
+tite_add_talk: "Add Talk"
+
+# -- _edit.rhtml:
+caption_delete_post: "delete post"
+confirm_delete_post: "Delete this post?  Are you sure?"
+title_formatting_help: "Formatting Help"
+help_formatting_bold: "*bold*"
+help_formatting_italics: "_italics_"
+help_formatting_blockquote: "bq. <span>(quotes)</span>"
+help_formatting_list: "* or # <span>(lists)</span>"
+button_cancel: "cancel"
+
+# -- _postform.rhtml:
+button_submit: "Submit"
+
+# -- _postlisting.rhtml:
+caption_login_first: "Please login first"
+caption_login_to_vote: "Please login to vote"
+caption_reply_to_post: "Reply to this post"
+caption_login_to_reply: "Please login to reply"
+caption_abuse: "abuse"
+caption_permalink: "permalink"
+caption_mark_as_solved: "remove As solution"
+
+# -- create.rhtml:
+
+# -- edit.rhtml:
+title_edit_post: "Edit Post"
+
+# -- index.rhtml:
+caption_searching_for: "Searching for"
+format_date: "%b %e, %Y"
+title_topic: "Topic"
+
+# -- index.rxml:
+
+# -- monitored.rhtml:
+title_monitored_topics: "Monitored Topics"
+
+# -- monitored.rxml:
+
+# -- index.rhtml:
+title_scraps: "Scraps"
+
+# -- new.rhtml:
+
+# -- show.rhtml:
+text_no_scraps_tagged_with: "No scraps found with"
+
+# -- index.rhtml:
+workspace1_tab: "Workspace 1"
+workspace2_tab: "Workspace 2"
+workspace3_tab: "Workspace 3"
+
+# -- create.rhtml:
+title_login: "Login"
+text_login_or_openid_url: "Login or OpenID URL (starts with http://)"
+caption_password: "Password"
+caption_remember_me_on_this_computer: "Remember me on this computer"
+caption_reset_password: "reset password"
+title_reset_password: "Reset Password"
+text_reset_password_email_instructions: "Enter your email, and a brand new login key will be sent to you.  Click the link in the email to log in, and then change your password."
+button_email_me_link: "E-mail me the link"
+
+# -- _taggables.rhtml:
+text_solved_in_parens: "solved"
+
+# -- index.rhtml:
+
+# -- show.rhtml:
+title_tagged_with: "Tagged with"
+caption_show_all_tags: "Show All Tags"
+title_books_tagged: "Books Tagged"
+text_no_books_tagged_with: "No books tagged with"
+title_wiki_topics_tagged: "Wiki Topics Tagged"
+text_no_pages_tagged_with: "No pages tagged with"
+title_forum_topics_tagged: "Forum Topics Tagged"
+text_no_forum_topics_tagged_with: "No topics tagged with"
+
+# -- signup.rhtml:
+text_site_greeting: "Welcome to Npedia"
+text_account_activation_instructions: "Please visit the link below to activate your account."
+
+# -- _contact_info.rhtml:
+title_user_profile: "User Profile"
+caption_display_name: "Display Name"
+caption_identity_url: "Identity Url"
+caption_website: "Website"
+text_without_http: "without http://"
+caption_bio: "Bio"
+
+# -- _form.rhtml:
+text_login_field_instructions: "Logins should start with least 2 characters and may consist of letters, numbers, or the underscore."
+caption_email: "Email"
+text_password_field_instructions: "Enter your desired password twice.  It must be at least 5 characters."
+text_enter_password: "once"
+text_confirm_password: "and then again"
+
+# -- _settings.rhtml:
+title_basics: "Basics"
+text_change_login: "Please change your login"
+text_login_field_instrutions: "Logins should start with least 2 characters and may consist of letters, numbers, or the underscore"
+
+# -- edit.rhtml:
+title_settings: "Settings"
+button_change_email_or_password: "Change e-mail or password"
+button_update_profile: "Update Profile"
+title_avatars: "Avatars"
+
+# -- index.rhtml:
+text_users: "users"
+text_active: "active"
+text_lurking: "lurking"
+colhdr_username: "Username"
+colhdr_website: "Website"
+text_admin_in_parens: "(admin)"
+text_display_name_or_login: "Display name or login"
+button_search: "Search"
+caption_show_all_users: "Show All Users"
+
+# -- list.rhtml:
+text_total_users: "Total Users:"
+
+# -- new.rhtml:
+title_signup: "Signup"
+button_signup: "Sign up!"
+
+# -- show.rhtml:
+text_view: "view"
+caption_view_all: "all"
+caption_monitored: "monitored"
+text_posts: "posts"
+text_user_since: "User since"
+title_admin_access: "Admin Access"
+text_disable: "disable"
+text_enable: "enable"
+title_login_as_user: "Login As User"
+title_make_moderator_for: "Make Moderator For"
+title_forums_moderated: "Forums Moderated"
+confirm_remove_user_moderator: "Remove user as moderator for"
+

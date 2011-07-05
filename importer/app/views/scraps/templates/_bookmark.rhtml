@@ -1,0 +1,7 @@
+<span class="note_title"><strong><%= bookmark.title %></strong></span>
+<%= render :partial => 'scraps/templates/tags', :locals => { :tags => bookmark.tags }%>
+<%= render :partial => 'scraps/templates/star', :locals => { :scrap => bookmark }%>
+<span class="content clear">
+  <cite><a href="http://<%=bookmark.url%>" target="_blank">http://<%= CGI::unescape(bookmark.url) %></a></cite>
+</span>
+<%= render :partial => 'scraps/templates/version', :locals => { :version => bookmark.version }%>

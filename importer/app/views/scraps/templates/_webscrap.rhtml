@@ -1,0 +1,8 @@
+<%= render :partial => 'scraps/templates/tags', :locals => { :tags => webscrap.tags }%>
+<%= render :partial => 'scraps/templates/star', :locals => { :scrap => webscrap }%>
+<div class="clear"></div>
+<span class="desciption">
+  <%= webscrap.description %> <%= edit_scrap_link(webscrap.id) %><br/>
+  <cite><a href="http://<%=webscrap.url%>" target="_blank">http://<%= CGI::unescape(webscrap.url) %></a></cite>
+</span>
+<%= render :partial => 'scraps/templates/version', :locals => { :version => webscrap.version }%>

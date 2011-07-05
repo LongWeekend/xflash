@@ -1,0 +1,55 @@
+<a name="changes"></a>
+<% num = scrap.index_revisions.length + 1 %>
+<% if num > 1 %>
+
+  <table class="styled" border="0">
+  <thead>
+  <tr>
+	  <th align=center>#</th>
+	  <th width=1%></th>
+	  <th><%= 'Date Updated'[:colhdr_date_updated] %></th>
+	  <th><%= 'Edited By'[:colhdr_edited_by] %></th>
+	  <th></th>
+  </tr>
+  </thead>
+ 
+  <tbody>
+  <% make_columns(scrap.index_revisions).each do |col| %>
+    <% col.each do |r| %>
+    <% change_dot_size = ( r.change_size <= 20 ? "4" : ( r.change_size < 50 ? "3" : r.change_size <= 90 ? "2" : "1" ))%>
+    <tr style="background-color:#">
+      <td align=center><%= num -= 1 %></td>
+      <td>
+        <img class="change_size" src="/images/smallicons/dot<%=change_dot_size%>.gif" border="0" title="<%= r.change_size %><%='% changed'[:text_percentage_changed]%>"/>
+      </td>
+      <td width=20%>
+        <% unless revision.only? %>
+          <%= check_box_tag "compare[]", r.id, comparing? && (r.id == comparison[:a][:attributes].id || r.id == comparison[:b][:attributes].id), :id => "compare_#{r.id}" %>&nbsp;
+        <% end %>
+        <%= link_to relative_time(r.created_at), revision_of_book_page_path(@book.slug, scrap.slug, r) %></td>
+      <td><%= r.user.display_name %></td>
+      <td><% if r.id == revision.id%><div class="redtag" style="width:97px;"><div class="icon_star"><%= 'Now Showing'[:text_now_showing]%></div></div><% end %></td>
+    </tr>
+    <% end %>
+  <% end %>
+  <tr></td></td>
+  </tbody>
+  <% unless revision.only? %>
+  <tfoot>
+    <tr>
+      <td colspan=5><% unless revision.only? %>Check two and <%= submit_tag 'Compare'[:button_compare], :id => "compare_button" %><% end %>
+				<% if !comparing? && !revision.only? %>
+					<% if revision.id < revision.nearest_neighbor.id %>
+						or <%= link_to 'Compare to Next'[:caption_compare_to_next], compare_path(scrap.slug, revision.nearest_neighbor.id, revision.id) %>
+					<% else %>
+						or <%= link_to 'Compare to Previous'[:caption_compare_to_previous], compare_path(scrap.slug, revision.id, revision.nearest_neighbor.id), :accesskey => "Q" %>
+					<% end %>
+				<% end %>
+      </td>
+    </tr>
+  </tfoot>
+  <% end %>
+  </table>
+<% else %>
+    Revisions: None
+<% end %>

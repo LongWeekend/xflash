@@ -1,0 +1,104 @@
+拳術	拳术	quan2 shu4	/art of boxing/
+球	球	qiu2	/ball/
+基本	基本	ji1 ben3	/basic/
+籃	篮	lan2	/basket/
+籃球	篮球	lan2 qiu2	/basketball/
+籃球場	篮球场	lan2 qiu2 chang3	/basketball court/
+彎	弯	wan1	/bent/
+擋住	挡住	dang3 zhu4	/block/stop/
+吹	吹	chui1	/blow/
+雙方	双方	shuang1 fang1	/both parties/
+弓步	弓步	gong1 bu4	/bow stance/
+呼吸	呼吸	hu1 xi1	/breathe/
+頂	顶	ding3	/butt (with one's head)/
+換發球	换发球	huan4 fa1 qiu2	/change of service/
+協調	协调	xie2 tiao2	/coordinated/
+守護	守护	shou3 hu4	/defend/
+防守	防守	fang2 shou3	/defense/
+雙打	双打	shuang1 da3	/doubles/
+端	端	duan1	/end (of object)/
+結束	结束	jie2 shu4	/end/close/
+運動	运动	yun4 dong4	/exercise/
+女子	女子	nu:3 zi3	/female/
+上半場	上半场	shang4 ban4 chang2	/first half/
+拳	拳	quan2	/fist/
+腳	脚	jiao3	/foot/
+步法	步法	bu4 fa3	/foot work/
+犯規	犯规	fan4 gui1	/foul/
+球門	球门	qiu2 men2	/goal/
+守門員	守门员	shou3 men2 yuan2	/goalie/
+手型	手型	shou3 xing2	/hand form/
+手位	手位	shou3 wei4	/hand position/
+頭	头	tou2	/head/
+判	判	pan4	/judge/
+踢	踢	ti1	/kick/
+左後衛	左后卫	zuo3 hou4 wei4	/left end/
+腿	腿	tui3	/leg/
+輸	输	shu1	/lose (a game)/
+丟	丢	diu1	/lose (a point)/
+踢進一球	踢进一球	ti1 jin4 yi1 qiu2	/make a goal/
+男子	男子	nan2 zi3	/male/
+男子單打	男子单打	nan2 zi3 dan1 da3	/male single/
+武術	武术	wu3 shu4	/martial arts/
+沒投中	没投中	mei2 tou2 zhong1	/miss the shot/
+混合雙打	混合双打	hun4 he2 shuang1 da3	/mixed doubles/
+前移	前移	qian2 yi2	/move forward/
+動作	动作	dong4 zuo4	/movement/
+自然	自然	zi4 ran2	/natural/
+擦網球	擦网球	ca1 wang3 qiu2	/net ball/
+虛步	虚步	xu1 bu4	/nonweighted step/
+沒有進球	没有进球	mei2 you3 jin4 qiu2	/no-score game/
+對方	对方	dui4 fang1	/opponent/
+出界	出界	chu1 jie4	/out/
+打過網	打过网	da3 guo4 wang3	/over the net/
+掌	掌	zhang3	/palm (of hand)/
+傳	传	zhuan4	/pass/toss/
+乒乓球拍	乒乓球拍	ping1 pang1 qiu2 pai1	/pingpong paddle/
+隊員	队员	dui4 yuan2	/player/
+選手	选手	xuan3 shou3	/player/
+流行	流行	liu2 xing2	/popular/
+按	按	an4	/press/
+推	推	tui1	/push/
+搶攻	抢攻	qiang3 gong1	/qick attack/
+網球拍	网球拍	wang3 qiu2 pai1	/racket/
+裁判員	裁判员	cai2 pan4 yuan2	/referee/
+接球	接球	jie1 qiu2	/return/
+分數	分数	fen1 shu4	/score/
+比分	比分	bi3 fen1	/score/
+得一分	得一分	de2 yi1 fen4	/score a point/
+記分板	记分板	ji4 fen4 ban3	/scoreboard/
+下半場	下半场	xia4 ban4 chang3	/second half/
+發球	发球	fa1 qiu2	/serve the ball/
+移動	移动	yi2 dong4	/shift/
+投籃	投篮	tou2 lan2	/shoot a basket/
+單打	单打	chan2 da3	/singles/
+抽	抽	chou1	/slam/
+扣籃	扣篮	kou4 lan2	/slam dunk/
+削球	削球	xiao1 qiu2	/slice the ball/
+足球	足球	zu2 qiu2	/soccer/
+足球場	足球场	zu2 qiu2 chang3	/soccer field/
+轉球	转球	zhuan4 qiu2	/spinning ball/
+體育運動	体育运动	ti3 yu4 yun4 dong4	/sports/
+運動員 	运动员 	yun4 dong4 yuan2	/sportsman/
+穩定	稳定	wen3 ding4	/stable/
+搶走	抢走	qiang3 zou3	/steel/
+腳步	脚步	jiao3 bu4	/step/
+後退	后退	hou4 tui4	/step backward/
+直	直	zhi2	/straight/
+球桌	球桌	qiu2 zhuo1	/table/
+球檯	球台	qiu2 tai2	/table/
+乒乓球	乒乓球	ping1 pang1 qiu2	/table tennis/
+太極拳	太极拳	tai4 ji2 quan2	/TaiJi/
+隊	队	dui4	/team/
+網球	网球	wang3 qiu2	/tennis/
+網球場	网球场	wang3 qiu2 chang3	/tennis court/
+三比二	三比二	san1 bi4 er4	/three to two/
+平侷	平局	ping2 ju2	/tied/
+嚴密	严密	yan2 mi4	/tight (manoever)/
+比賽	比赛	bi3 sai4	/game/tournament/
+重心	重心	zhong4 xin1	/weight/
+實步	实步	shi2 bu4	/weighted step/
+哨子	哨子	shao4 zi5	/whistle/
+贏	赢	ying2	/win/
+勝	胜	sheng4	/win/
+健身運動	健身运动	jian4 shen1 yun4 dong4	/workout/

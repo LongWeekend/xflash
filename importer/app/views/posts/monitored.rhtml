@@ -1,0 +1,28 @@
+<% @page_title = "Monitored Posts:  {user}"[:posts_user_is_monitoring, h(@user.display_name)] %>
+
+<div class="page_header">
+  <h2><%= t @page_title %></h2>
+  <div class="subtitle">
+    <%#= feed_icon_tag @page_title, formatted_monitored_posts_path(:user_id => @user, :format => 'rss') %>
+    <%= '{count} post(s) found'[(count=@forum_posts.size)==1 ? :post_count_found : :posts_count_found, number_with_delimiter(count)] %>
+  </div><br/>
+</div>
+
+<div style="padding:10px">
+
+  <tt><strong>Problems with this page:</strong><br/>nesting out of order<br/>does not split up different topics (or show them!)<br/>does not turn off un-needed actions<br/>also it is filtering strangely!!</tt>
+  <%= render :partial => 'posts/postlisting', :locals => { :posts=> @forum_posts, :current_user => current_user } %>
+
+  <% content_for :right do %>
+  <div id="sidebar">
+    <div id="adminoptions" class="pumpkin">
+      <ul class="simple">
+        <h3><%= "Monitored Topics"[:title_monitored_topics] %></h3>
+        <% @user.monitored_topics.find(:all, :limit => 25).each do |topic| %>
+          <li><%= link_to topic.title, forum_topic_path(topic.parent_id, topic.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end -%>
+</div>

@@ -1,0 +1,95 @@
+純棉	纯棉	chun2 mian2	/(all) cotton/
+游泳衣	游泳衣	you2 yong3 yi1	/bathing suit/
+皮帶	皮带	pi2 dai4	/belt/
+黑	黑	hei1	/black/
+混紡	混纺	hun4 fang3	/blend/
+藍	蓝	lan2	/blue/
+靴子	靴子	xue1 zi5	/boots/
+胸罩	胸罩	xiong1 zhao4	/brassiere/
+咖啡色	咖啡色	ka1 fei1 se4	/brown/
+釦子	扣子	kou4 zi5	/button/
+格子	格子	ge2 zi5	/checked/
+服裝店	服装店	fu2 zhuang1 dian4	/clothing store/
+大衣	大衣	da4 yi1	/coat/
+顏色	颜色	yan2 se4	/color/
+燈芯絨	灯芯绒	deng1 xin1 rong2	/corduroy/
+連衣裙	连衣裙	lian2 yi1 qun2	/dress/
+加大號	加大号	jia1 dai4 hao4	/extra large/
+料子	料子	liao4 zi5	/fabric/
+合身	合身	he2 shen1	/fit/
+合適	合适	he2 shi4	/fit/
+法蘭絨	法兰绒	fa3 lan2 rong2	/flannel/
+平跟	平跟	ping2 gen1	/flat heel/
+手套	手套	shou3 tao4	/gloves/
+帽子	帽子	mao4 zi5	/hat/
+呢子	呢子	ni2 zi5	/heavy woolen/
+鞋跟	鞋跟	xie2 gen1	/heel/
+高	高	gao1	/high/
+高跟	高跟	gao1 gen1	/high heel/
+擠腳	挤脚	ji3 jiao3	/hurt the feet/
+夾克	夹克	jia2 ke4	/jacket/
+牛仔褲	牛仔裤	niu2 zai3 ku4	/jeans/
+花邊兒	花边儿	hua1 bian1 er5	/lace/
+皮	皮	pi2	/leather/
+長	长	chang2	/long/
+長袖	长袖	chang2 xiu4	/long sleeve/
+旗袍	旗袍	qi2 pao2	/Qipao (Mandarin dress)/
+配	配	pei4	/match/
+量	量	liang2	/measure/
+尺寸	尺寸	chi3 cun4	/measurement/
+中號	中号	zhong1 hao4	/medium (size)/
+大號	大号	da4 hao4	/large (size)/
+瘦	瘦	shou4	/narrow/
+尼龍	尼龙	ni2 long2	/nylon/
+雙	双	shuang1	/pair/
+睡衣	睡衣	shui4 yi1	/pajamas/
+長褲	长裤	chang2 ku4	/pants/trousers/
+長絲襪	长丝袜	chang2 si1 wa4	/panty hose/
+連褲襪	连裤袜	lian2 ku4 wa4	/panty hose/
+花	花	hua1	/patterned/
+帶點兒的	带点儿的	dai4 dian3 er5 de5	/polka-dotted/
+雨衣	雨衣	yu3 yi1	/rain coat/
+人造棉	人造棉	ren2 zao4 mian2	/rayon/
+人棉	人棉	ren2 mian2	/rayon/
+紅	红	hong2	/red/
+橡膠	橡胶	xiang4 jiao1	/rubber/
+膠	胶	jiao1	/rubber/
+涼鞋	凉鞋	liang2 xie2	/sandals/
+圍巾	围巾	wei2 jin1	/scarf/
+襯衫	衬衫	chen4 shan1	/blouse/shirt/
+襯衣	衬衣	chen4 yi1	/blouse/shirt/
+鞋	鞋	xie2	/shoe/
+鞋油	鞋油	xie2 you2	/shoe polish/
+鞋帶	鞋带	xie2 dai4	/shoelace/
+短	短	duan3	/short/
+短袖	短袖	duan3 xiu4	/short sleeve/
+短褲	短裤	duan3 ku4	/shorts/
+號	号	hao4	/size/
+真絲	真丝	zhen1 si1	/(pure) silk/
+裙子	裙子	qun2 zi5	/skirt/
+襯裙	衬裙	chen4 qun2	/slip/
+小號	小号	xiao3 hao4	/small (size)/
+旅遊鞋	旅游鞋	lu:3 you2 xie2	/sneaker/
+拖鞋	拖鞋	tuo1 xie2	/slipper/
+襪子	袜子	wa4 zi5	/socks/
+底	底	di3	/sole/
+單色	单色	dan1 se4	/solid colored/
+條紋	条纹	tiao2 wen2	/striped/
+西裝	西装	xi1 zhuang1	/suit/
+毛衣	毛衣	mao2 yi1	/sweater/
+化纖料	化纤料	hua4 xian1 liao4	/synthetic fabric/
+領帶	领带	ling3 dai4	/tie/
+緊	紧	jin3	/tight/
+緊身褲	紧身裤	jin3 shen1 ku4	/tights/
+風衣	风衣	feng1 yi1	/trench coat/
+內衣	内衣	nei4 yi1	/underclothes/
+汗衫	汗衫	han4 shan1	/undershirt/
+汗揹心	汗背心	han4 bei4 xin1	/undershirt/
+內短褲	内短裤	nei4 duan3 ku4	/underwear/briefs/
+三角褲	三角裤	san1 jiao3 ku4	/underwear/briefs/
+背心	背心	bei4 xin1	/vest/
+多大	多大	duo1 da4	/what size/
+多大號	多大号	duo1 da4 hao4	/what size/
+白	白	bai2	/white/
+肥	肥	fei2	/wide (clothing)/big (clothing)/
+防皺	防皱	fang2 zhou4	/wrinkle-resistant/

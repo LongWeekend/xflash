@@ -1,0 +1,27 @@
+html { height: 100%; margin-bottom: 1px; }
+body {
+  background: #f7e4ab; 
+  font: normal normal normal 11.5pt 'Lucida Grande',"ＭＳ Ｐ ゴシック", Verdana, Arial, Helvetica, sans-serif;
+  color: #393733;
+  text-align:left;
+  line-height: 1.05em;
+  margin:0px;
+  font-size:81%;
+	padding:0px;
+}
+a { color: #24b; margin:0px; }
+p { font-family: Calibri, 'Lucida Grande', 'Trebuchet MS', Arial, Helvetica, sans-serif; margin: 0 0 13px 0}
+img { border:0px; }
+small { font-size:10.5px; }
+h1.nomargin, h2.nomargin, h3.nomargin, h4.nomargin { margin:0px; }
+.clear { clear:both; margin:0px; padding:0px; height:0px;}
+.both, .left { float:left; margin:0px; padding:0px; }
+.both, .right { float:right; margin:0px; padding:0px; }
+.oversize { font-size:1.5em;}
+.padded-lr, .padded-left { padding-left:18px;}
+.padded-lr, .padded-right { padding-right:18px;}
+.padded-tb, .padded-top { padding-top:8px; }
+.padded-tb, .padded-bottom { padding-top:8px; }
+.gray { color: gray; }
+.tiny { font-size:9px; }
+.none { display:none;}

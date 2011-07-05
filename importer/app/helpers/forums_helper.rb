@@ -1,0 +1,4 @@
+module ForumsHelper
+
+  
+end

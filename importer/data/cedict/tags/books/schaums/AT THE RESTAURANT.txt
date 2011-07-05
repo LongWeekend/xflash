@@ -1,0 +1,162 @@
+過敏	过敏	guo4 min3	/allergic/
+開胃菜	开胃菜	kai1 wei4 cai4	/appetizer/
+靠牆角	靠墙角	kao4 qiang2 jiao3	/at the korner/
+空位	空位	kong4 wei4	/availabel seat/available table/
+烤	烤	kao3	/baked/grilled/roasted/
+牛肉	牛肉	niu2 rou4	/beef/
+啤酒	啤酒	pi2 jiu3	/beer/
+帳單	帐单	zhang4 dan1	/bill/
+紅茶	红茶	hong2 cha2	/black tea/
+煮	煮	zhu3	/boiled/
+碗	碗	wan3	/bowl/
+紅燒	红烧	hong2 shao1	/braise in soy sauce/
+白蘭地	白兰地	bai2 lan2 di4	/brandy/
+麵包	面包	mian4 bao1	/bread/
+靠窗	靠窗	kao4 chuang1	/by the window/
+算	算	suan4	/calculate/
+聽	听	ting1	/can/
+香檳	香槟	xiang1 bin1	/champagne/
+收	收	shou1	/charge/
+雞	鸡	ji1	/chicken/
+辣椒醬	辣椒酱	la4 jiao1 jiang4	/chili sauce/
+辣椒	辣椒	la4 jiao1	/chili/hot pepper/
+中餐	中餐	zhong1 can1	/Chinese meal/
+筷子	筷子	kuai4 zi5	/chopsticks/
+菊花	菊花	ju2 hua1	/chrysanthemum/
+咖啡	咖啡	ka1 fei1	/coffee/
+可樂	可乐	ke3 le4	/coke/
+冷	冷	leng3	/cold/
+涼拌	凉拌	liang2 ban4	/cold and dressed with sauce/
+涼菜	凉菜	liang2 cai4	/cold dish/
+米飯	米饭	mi3 fan4	/cooked rice/
+螃蟹	螃蟹	pang2 xie4	/crab/
+香酥鴨	香酥鸭	xiang1 su1 ya1	/crispy duck/
+黃瓜	黄瓜	huang2 gua1	/cucumber/
+杯子	杯子	bei1 zi5	/cup/glass/
+決定	决定	jue2 ding4	/decide/
+炸	炸	zha4	/deep fry/
+甜點	甜点	tian2 dian3	/dessert/
+髒	脏	zang1	/dirty/
+飲料	饮料	yin3 liao4	/drinks/
+幹	干	gan4	/dry/
+鴨	鸭	ya1	/duck/
+餃子	饺子	jiao3 zi5	/Jiaozi (dumplings)/
+雞蛋	鸡蛋	ji1 dan4	/eggs/
+蛋	蛋	dan4	/eggs/
+您慢慢吃	您慢慢吃	nin2 man4 man4 chi1	/Enjoy!/
+主菜	主菜	zhu3 cai4	/entree/
+高級	高级	gao1 ji2	/first class/
+魚	鱼	yu2	/fish/
+洋酒	洋酒	yang2 jiu3	/foreign drinks/
+忘	忘	wang4	/forget/
+叉子	叉子	cha1 zi5	/fork/
+叉	叉	cha2	/fork/
+新鮮	新鲜	xin1 xian5	/fresh/
+鍋貼	锅贴	guo1 tie1	/fried dumplings/
+炒麵	炒面	chao3 mian4	/fried noodles/
+炒飯	炒饭	chao3 fan4	/fried rice/
+果汁	果汁	guo3 zhi1	/fruit juice/
+綠茶	绿茶	lu:4 cha2	/green tea/
+青菜	青菜	qing1 cai4	/green-leaf vegetables/
+火腿	火腿	huo3 tui3	/ham/
+拿手菜	拿手菜	na2 shou3 cai4	/house speciality/
+招牌菜	招牌菜	zhao1 pai2 cai4	/house speciality/
+餓	饿	e4	/hungry/
+冰	冰	bing1	/ice/
+便宜	便宜	pian2 yi5	/inexpensive/
+茉莉花	茉莉花	mo4 li4 hua1	/jasmine/
+刀	刀	dao1	/knife/
+少	少	shao3	/lack/
+羊肉	羊肉	yang2 rou4	/lamb/
+豬油	猪油	zhu1 you2	/lard/
+龍蝦	龙虾	long2 xia1	/lobster/
+豪華	豪华	hao2 hua2	/luxurious/
+茅颱	茅台	mao2 tai2	/MaoTai (a strong Chinese spirit)/
+肉	肉	rou4	/meat/
+丸子	丸子	wan2 zi5	/meatballs/
+菜單	菜单	cai4 dan1	/menu/
+牛奶	牛奶	niu2 nai3	/milk/
+礦泉水	矿泉水	kuang4 quan2 shui3	/mineral water/
+味精	味精	wei4 jing1	/MSG/
+餐巾紙	餐巾纸	can1 jin1 zhi3	/napkin/
+湯麵	汤面	tang1 mian4	/noodle soup/
+麵條	面条	mian4 tiao2	/noodles/
+油	油	you2	/oil/
+油膩	油腻	you2 ni4	/oily/greasy/
+一起算	一起算	yi1 qi3 suan4	/one check for everyone/
+一個菜	一个菜	yi1 ge4 cai4	/one dish/
+桔子汁	桔子汁	ju2 zi5 zhi1	/orange juice/
+橙汁	橙汁	cheng2 zhi1	/orange juice/
+點菜	点菜	dian3 cai4	/order dishes/
+普通	普通	pu3 tong1	/ordinary/
+外頭	外头	wai4 tou5	/outside/
+老	老	lao3	/old/well done/
+結帳	结帐	jie2 zhang4	/pay check/pay bill/
+買單	买单	mai3 dan1	/pay check/pay bill/
+胡椒	胡椒	hu2 jiao1	/pepper/
+盤子	盘子	pan2 zi5	/plate/
+淡	淡	dan4	/plain/bland/
+豬肉	猪肉	zhu1 rou4	/pork/
+壺	壶	hu2	/pot/
+土豆	土豆	tu3 dou4	/potato/
+包間	包间	bao1 jian1	/private room/
+青島	青岛	qing1 dao3	/Qingdao/
+爆	爆	bao4	/quick-fry/
+嫩	嫩	nen4	/rare/
+生	生	sheng1	/rare/
+好	好	hao3	/ready/
+推薦	推荐	tui1 jian4	/recommend/
+紅葡萄酒	红葡萄酒	hong2 pu2 tao2 jiu3	/red wine/
+酒樓	酒楼	jiu3 lou2	/restaurant/
+酒家	酒家	jiu3 jia1	/restaurant/
+飯館	饭馆	fan4 guan3	/restaurant/
+餐廳	餐厅	can1 ting1	/restaurant/
+餐館	餐馆	can1 guan3	/restaurant/
+沙拉	沙拉	sha1 la1	/salad/
+三文魚	三文鱼	san1 wen2 yu2	/salmon/
+鹽	盐	yan2	/salt/
+咸	咸	xian2	/salty/
+三明治	三明治	san1 ming2 zhi4	/sandwich/
+蔥	葱	cong1	/scallion/
+海鮮	海鲜	hai3 xian1	/seafood/
+服務費	服务费	fu2 wu4 fei4	/service fee/
+七喜	七喜	qi1 xi3	/Seven Up/
+肉絲	肉丝	rou4 si1	/shredded pork/
+蝦	虾	xia1	/shrimp/
+片	片	pian1	/sliced/
+熏	熏	xun1	/smoked/
+小吃店	小吃店	xiao3 chi1 dian4	/snack shop/
+湯	汤	tang1	/soup/
+酸	酸	suan1	/sour/
+酸辣	酸辣	suan1 la4	/sour and spicy/
+醬油	酱油	jiang4 you2	/soy sauce/
+宮保雞丁	宫保鸡丁	gong1 bao3 ji1 ding1	/spicy diced chicken with peanuts/
+辣	辣	la4	/spicy/hot/
+分開算	分开算	fen4 kai1 suan4	/split the bill/go Dutch/
+勺	勺	shao2	/spoon/
+魷魚	鱿鱼	you2 yu2	/squid/
+拼盤	拼盘	pin1 pan2	/starter/assorted cold dishes/
+主食	主食	zhu3 shi2	/principal food/main dish/
+牛排	牛排	niu2 pai2	/steak/
+饅頭	馒头	man2 tou5	/Mantou (steamed buns)/
+包子	包子	bao1 zi5	/Baozi (steamed meat buns)/
+燉	炖	dun4	/stew/
+炒	炒	chao3	/stir fry/
+糖	糖	tang2	/sugar/
+甜	甜	tian2	/sweet/
+糖醋	糖醋	tang2 cu4	/sweet and sour/
+桌子	桌子	zhuo1 zi5	/table/
+里脊	里脊	li3 ji3	/tenderloin/
+牙籤	牙签	ya2 qian1	/toothpick/
+硬	硬	ying4	/tough/
+火雞	火鸡	huo3 ji1	/turkey/
+吃素	吃素	chi1 su4	/vegetarian/
+素菜	素菜	su4 cai4	/vegetarian dish/
+醋	醋	cu4	/vinegar/
+伏特加	伏特加	fu2 te4 jia1	/vodka/
+服務員	服务员	fu2 wu4 yuan2	/waiter/
+西餐	西餐	xi1 can1	/Western meal/
+威士忌	威士忌	wei1 shi4 ji4	/whiskey/
+白葡萄酒	白葡萄酒	bai2 pu2 tao2 jiu3	/white wine/
+酒單	酒单	jiu3 dan1	/wine list/
+烏龍茶 	乌龙茶 	wu1 long2 cha2	/Woolong tea/

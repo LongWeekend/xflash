@@ -1,0 +1,29 @@
+月	月	yue4	/moon/month/
+日	日	ri4	/date/day of the month/
+生日	生日	sheng1 ri4	/birthday/
+今天	今天	jin1 tian1	/today/
+班	班	ban1	/class/squad/
+輔導	辅导	fu3 dao3	/to coach/to tutor/to give advise (in study)/
+號	号	hao4	/day of a month/date/
+空兒	空儿	kongr4	/spare time/free time/
+今年	今年	jin1 nian2	/this year/
+歲	岁	sui4	/year/years old/(a measure word)/
+祝賀	祝贺	zhu4 he4	/to congratulate/congratulations/
+舞會	舞会	wu3 hui4	/dance/ball/party/
+參加	参加	can1 jia1	/to participate/to take part/to join/
+同學	同学	tong2 xue2	/(fellow) classmate/
+一定	一定	yi1 ding4	/surely/certainly/certain/given/particular/
+有意思	有意思	you3 yi4 si5	/interesting/
+星期	星期	xing1 qi1	/week/
+星期日	星期日	xing1 qi1 ri4	/Sunday/
+知道	知道	zhi1 dao5	/know/be aware of/
+地址	地址	di4 zhi3	/address/
+年	年	nian2	/year/
+去年	去年	qu4 nian2	/last year/
+明年	明年	ming2 nian2	/next year/
+音樂會	音乐会	yin1 yue4 hui4	/concert/
+結婚	结婚	jie2 hun1	/to marry/to get married/
+對不起	对不起	dui4 bu5 qi3	/I'm sorry/pardon me/forgive me/
+約會	约会	yue1 hui4	/appointment/
+沒關係	没关系	mei2 guan1 xi5	/it doesn't matter/
+談	谈	tan2	/to talk/to chat/

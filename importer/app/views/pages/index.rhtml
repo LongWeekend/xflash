@@ -1,0 +1,19 @@
+<% @i = ( @results.page * @results.page_size ) - @results.page_size %>
+<div class="page_header">
+  <h2><%= t 'Listing Wiki Pages'[:title_listing_wiki_pages] %></h2>
+</div>
+
+<div class="page_content">
+  <p>
+  	<% for page in @results %>
+  	  <h3><%= @i+=1 %>. <%= link_to(page.title, book_page_path(page.slug) ) %> last updated <%= page.created_at %> [<%= link_to "edit", wiki_edit_url(:title => page.title) %>!]</h3>
+  	  <% @ri = 0 %>
+  	  <% for revision in page.revisions %>
+  	  <div style="margin-left:24px">Revision #<%= @ri = @ri + 1 %> made on <%= revision.created_at %> by User #<%= revision.user_id %></div>
+  	  <% end %>
+  	<% end %>
+  </p>
+	<% if @results.total_pages > 1 %>
+	  <%= paginating_links(@results) %>
+	<% end %>
+</div>

@@ -1,0 +1,52 @@
+再	再	zai4	/again/
+問路	问路	wen4 lu4	/ask for direction/
+大道	大道	da4 dao4	/avenue/
+後面	后面	hou4 mian4	/back/
+公共汽車	公共汽车	gong1 gong4 qi4 che1	/bus/
+汽車站	汽车站	qi4 che1 zhan4	/bus stop/
+市區地圖	市区地图	shi4 qu1 di4 tu2	/city map/
+交叉	交叉	jiao1 cha1	/cross/
+路口	路口	lu4 kou3	/cross road/intersection/
+方向	方向	fang1 xiang4	/direction/
+開車	开车	kai1 che1	/drive/
+出口	出口	chu1 kou3	/exit/
+高速公路	高速公路	gao1 su4 gong1 lu4	/express way/
+遠	远	yuan3	/far/
+離	离	li2	/from/
+上	上	shang4	/get (on) to/
+下	下	xia4	/get off/
+怎麽走	怎么走	zen3 me5 zou3	/how to go/
+繼續	继续	ji4 xu4	/keep/continue/
+車道	车道	che1 dao4	/lane/
+迷路	迷路	mi2 lu4	/lost/
+國道	国道	guo2 dao4	/national highway/
+近	近	jin4	/near/
+附近	附近	fu4 jin4	/nearby/
+下一個	下一个	xia4 yi1 ge4	/next/
+十路	十路	shi2 lu4	/Number 10 bus/Route 10 bus/
+單行道	单行道	dan1 xing2 dao4	/one-way street/
+相反	相反	xiang1 fan3	/opposite/
+公園	公园	gong1 yuan2	/park/
+經過	经过	jing1 guo4	/pass/
+公共廁所	公共厕所	gong1 gong4 ce4 suo3	/public restroom/
+餐廳	餐厅	can1 ting1	/restaurant/
+右	右	you4	/right/
+高峰期	高峰期	gao1 feng1 qi1	/rush hour/
+一直向前	一直向前	yi4 zhi2 xiang4 qian2	/straight ahead/
+街	街	jie1	/street/
+街口	街口	jie1 kou3	/street corner/
+街角	街角	jie1 jiao3	/street corner/
+郊區	郊区	jiao1 qu1	/suburb/
+廁所	厕所	ce4 suo3	/toilet/
+高速公路費	高速公路费	gao1 su4 gong1 lu4 fei4	/toll/
+收費站	收费站	shou1 fei4 zhan4	/tollbooth/
+堵車	堵车	du3 che1	/traffic jam/
+塞車	塞车	sai1 che1	/traffic jam/
+紅綠燈	红绿灯	hong2 lu:4 deng1	/traffic light/
+向後轉	向后转	xiang4 hou4 zhuan3	/turn back/
+向左轉	向左转	xiang4 zuo3 zhuan3	/turn to the left/
+向左拐	向左拐	xiang4 zuo3 guai3	/turn to the left/
+收費公路	收费公路	shou1 fei4 gong1 lu4	/turnpike/
+走路	走路	zou3 lu4	/walk/on foot/
+洗手間	洗手间	xi3 shou3 jian1	/washroom/
+你就到瞭	你就到了	ni3 jiu4 dao4 le5	/You'll be there./

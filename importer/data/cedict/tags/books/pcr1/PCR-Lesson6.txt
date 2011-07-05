@@ -1,0 +1,13 @@
+哪	哪	na3	/how/which/
+國	国	guo2	/country/state/nation/
+人	人	ren2	/man/person/people/
+誰	谁	shei2	/who/
+我們	我们	wo3 men5	/we/us/ourselves/
+老師	老师	lao3 shi1	/teacher/
+漢語	汉语	han4 yu3	/Chinese language/
+中國	中国	zhong1 guo2	/China/Chinese/
+德國	德国	de2 guo2	/Germany/German/
+法國	法国	fa3 guo2	/France/French/
+美國	美国	mei3 guo2	/America/American/United States of America/USA/
+馬裡	马里	ma3 li3	/Mali/
+日本	日本	ri4 ben3	/Japan/Japanese/

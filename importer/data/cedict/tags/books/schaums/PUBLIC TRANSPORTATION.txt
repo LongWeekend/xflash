@@ -1,0 +1,46 @@
+按	按	an4	/according to/
+到站	到站	dao4 zhan4	/arrive/
+去	去	qu4	/bound for/bound to/
+公共汽車站	公共汽车站	gong1 gong4 qi4 che1 zhan4	/bus stop/
+叫	叫	jiao4	/call/
+售票員	售票员	shou4 piao4 yuan2	/conductor/
+押金	押金	ya1 jin1	/deposit/
+方向	方向	fang1 xiang4	/direction/
+開	开	kai1	/drive/
+司機	司机	si1 ji1	/driver/
+快	快	kuai4	/fast/
+先	先	xian1	/first/
+頭班地鐵	头班地铁	tou2 ban1 di4 tie3	/first subway/
+末班地鐵	末班地铁	mo4 ban1 di4 tie3	/last subway/
+下車	下车	xia4 che1	/get off/
+上車	上车	shang4 che1	/get on/
+包	包	bao1	/hire/charter/
+多久來一趟？	多久来一趟？	duo1 jiu3 lai2 yi1 tang4	/How often does it come?/
+後	后	hou4	/later/
+開	开	kai1	/leave/drive/
+師傅	师傅	shi1 fu4	/master/
+計程表	计程表	ji4 cheng2 biao3	/meter/
+月票	月票	yue4 piao4	/monthly pass/
+下一站	下一站	xia4 yi2 zhan4	/next stop/
+乘客	乘客	cheng2 ke4	/passenger/
+價錢	价钱	jia4 qian5	/price/
+租	租	zu1	/rent/
+慢	慢	man4	/slow/
+停	停	ting2	/stop/
+站	站	zhan4	/stop/station/
+地鐵	地铁	di4 tie3	/subway/
+地鐵站	地铁站	di4 tie3 zhan4	/subway station/
+坐車	坐车	zuo4 che1	/take vehicle/
+打的	打的	da3 di1	/take a taxi/
+打出租車	打出租车	da3 chu1 zu1 che1	/take a taxi/
+打計程車 	打计程车 	da3 ji4 cheng2 che1	/take a taxi/
+打的士	打的士	da3 di1 shi4	/take a taxi/
+天安門廣場	天安门广场	tian1 an1 men2 guang3 chang3	/Tian'anmen Square/
+票	票	piao4	/ticket/
+小費	小费	xiao3 fei4	/tip/
+換車	换车	huan4 che1	/transfer/
+交通	交通	jiao1 tong1	/transportation/
+運輸	运输	yun4 shu1	/transportation/
+電車	电车	dian4 che1	/trolley/
+幾路	几路	ji3 lu4	/which route/
+以內	以内	yi3 nei4	/within/

@@ -1,0 +1,47 @@
+<% @plural_search_model = @search_model.to_s.downcase.pluralize%>
+<% @the_search_model = @search_model.to_s.downcase%>
+<% html = capture do %>
+    <div class="contents">
+    <% if @search %>
+      <% if @search.total_entries > 0 %>
+        <div class="toolbar">
+        	<a href="#" class="flatten" title="<%='flatten/unflatten this window'[:caption_flatten]%>">&nbsp;_&nbsp;</a>
+        	<a href="#" class="expand" title="<%='expand this window'[:caption_expand]%>">&nbsp;+&nbsp;</a>
+        	<a href="#" class="close_tiddler" title="<%='close this search'[:caption_close_this]%>">(x)</a>
+        	<a href="#" class="close_others" title="<%='close other searches'[:caption_close_others]%>">(xx)</a>
+        	<% if @search %>
+            <% more_results_caption = ( @next_page == 0 ? '[' + 'end'[:caption_last_page_short] + ']' : @search.total_entries.to_s + ' &gt;&gt;' ) %>
+          	<% if @search.total_entries > 0 %><a href="/search/<%=@plural_search_model%>?q=<%= h(params[:q])%><%= '&t=' + h(params[:t]) if params[:t] %>" class="more" title="<%= 'more results'[:caption_next_page] %>"><%= more_results_caption %><%=image_tag('smallicons/progress1.gif', :style => 'display:none; margin:0 0 -2px 2px;', :class => 'progress_indicator')%></a><% end %>
+        	<% end %>
+        </div>
+        <% if @search_model != "Scrap" %>
+            <h2 class="title">
+              <%= t @plural_search_model.camelize %><br/>
+              <% if @search_model == "User" %><div class="subtitle"><small><%= "Total {num} users"[:message_tags_displayed, @search_count.to_s] %></small></div><% end %>
+            </h2>
+        <% end %>
+        <% if @the_search_model == "question" %>
+          <table class="styled" border="0">
+          <tbody>
+            <%= render :partial => "#{@the_search_model}_search_results" %>
+          </tbody>
+          </table><br/>
+        <% else %>
+          <ol class="scrap_list">
+            <%= render :partial => "#{@the_search_model}_search_results" %>
+          </ol>
+        <% end %>
+      <% elsif params[:q] %>
+        <h3 class="tiddler_msg"><%= "No {obj} found - searched for <em>{q}</em>"[:error_search_no_results, @search_model.to_s.downcase.pluralize, params[:q]] %></h3>
+      <% end %>
+    <% else %>
+      <h3 class="tiddler_msg"><%= 'Welcome to the scraptionary, search for something'[:text_scraptionary_welcome] %></h3>
+    <% end %><br/>
+    </div>
+<% end %>
+
+<% if response.headers['Content-Type'] != "text/javascript" %>
+  <%= render :partial => 'layouts/tiddler', :locals => { :html => html, :show_toolbar => false } %>
+<% else %>
+  <%= html %>
+<% end %>

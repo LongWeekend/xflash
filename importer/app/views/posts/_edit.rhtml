@@ -1,0 +1,38 @@
+<h2 style="color:red">This page is deprecated and should be deleted!!!!!</h2>
+
+<div id="edit" class="editbox">
+<div class="container">
+  <% remote_form_for :post, :url => post_path(:forum_id => @post.forum_id, :topic_id => @post.topic_id, :id => @post), :before => "$('editbox_spinner').show();" do |f| -%>
+  <%= hidden_field_tag :_method, "put" %>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td rowspan="2" width="70%">
+        <%= f.text_area :body, :rows => 10, :id => "edit_post_body" %>
+      </td>
+      <td valign="top">
+
+        <%= link_to('delete post'[:caption_delete_post], post_path(:forum_id => @post.topic.forum, :topic_id => @post.topic, :id => @post, :page => params[:page]), 
+              :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?"[:confirm_delete_post]) %>  
+        <h5><%= 'Formatting Help'[:title_formatting_help] %></h5>
+
+        <ul class="help">
+          <li><%= '*bold*'[:help_formatting_bold] %></li>
+          <li><%= '_italics_'[:help_formatting_italics] %></li>
+          <li><%= 'bq. <span>(quotes)</span>'[:help_formatting_blockquote] %></li>
+          <li>"IBM":http://www.ibm.com</li>
+          <li><%= '* or # <span>(lists)</span>'[:help_formatting_list] %></li>
+        </ul>
+
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom" style="padding-bottom:15px;">
+        <%= ajax_spinner_for "editbox", "smallicons/progress6-b.gif" %>
+        <%= submit_tag 'Save Changes'[:button_save_changes], :or => link_to_function('cancel'[:button_cancel], "EditForm.cancel()") %>
+      </td>
+    </tr>
+  </table>
+  <% end -%>
+</div>
+</div>

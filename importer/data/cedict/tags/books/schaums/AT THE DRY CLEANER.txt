@@ -1,0 +1,19 @@
+釦子	扣子	kou4 zi5	/button/
+衣服	衣服	yi1 fu5	/clothes/
+髒	脏	zang1	/dirty/
+乾洗	干洗	gan1 xi3	/dry clean/
+幹洗店	干洗店	gan4 xi3 dian4	/dry cleaner's/
+洞	洞	dong4	/hole/
+燙	烫	tang4	/iron/
+掉瞭	掉了	diao4 le5	/lost/
+補	补	bu3	/mend/
+取	取	qu3	/pick up/
+去掉	去掉	qu4 diao4	/remove/
+縫	缝	feng2	/seam/
+縮水	缩水	suo1 shui3	/shrink/
+污漬	污渍	wu1 zi4	/stain/
+髒東西	脏东西	zang1 dong1 xi5	/stain/
+漿	浆	jiang1	/starch/
+裁縫師傅	裁缝师傅	cai2 feng2 shi1 fu4	/tailor/
+開線	开线	kai1 xian4	/torn/
+洗	洗	xi3	/wash/

@@ -1,0 +1,10 @@
+潮濕	潮湿	chao2 shi1	/wet/humid/
+云	云	yun2	/cloud/
+雪	雪	xue3	/snow/
+晴	晴	qing2	/sunny/clear/
+陰	阴	yin1	/overcast/
+台中	台中	Tai2 zhong1	/Taichung (name of a city in Taiwan)/
+加拿大	加拿大	jia1 na2 da4	/Canada/
+溫哥華	温哥华	wen1 ge1 hua2	/Vancouver/
+香港	香港	xiang1 gang3	/Hong Kong/
+北京	北京	bei3 jing1	/Beijing/

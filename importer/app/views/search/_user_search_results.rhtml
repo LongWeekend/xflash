@@ -1,0 +1,11 @@
+<% firstline = true %>
+<% for user in @search do %>
+  <%='<hr/>' if firstline && @next_page != 2 && @page != 1 %>
+  <li>
+    <strong><u><%= link_to(user.display_name, user, :class =>"tiddler_link") %></u></strong>
+    <% unless user.website.blank? %><%= white_list link_to(user.clean_website, "http://" + user.clean_website, :class => "external_link") %><% end %>
+    (<%= 'since'[:text_user_since] %> <%= user.created_at.to_date.to_s "yyyy/mm/dd" %>)
+  </li>
+  <% firstline = false %>
+<% end %>
+<code class="next_page"><%= @next_page %></code>

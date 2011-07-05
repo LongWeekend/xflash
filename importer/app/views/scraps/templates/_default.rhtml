@@ -1,0 +1,6 @@
+<span class="note_title"><strong><%= note.title %></strong></span>
+<%= render :partial => 'scraps/templates/tags', :locals => { :tags => scrap.tags }%>
+<%= render :partial => 'scraps/templates/star', :locals => { :scrap => scrap }%>
+<div class="clear"></div>
+<span class="content"><%= scrap.content %></span>
+<%= render :partial => 'scraps/templates/version', :locals => { :version => scrap.version }%>

@@ -1,0 +1,2 @@
+<% html = capture do %><br/><p><%='You are not authorized to access this page/resource.'[:error_server_401]%></p><% end %>
+<%= render :partial => 'errors/wrapper', :locals => { :html => html } %>

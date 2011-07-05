@@ -1,0 +1,10 @@
+<% if params[:controller] == 'forums' && admin? %>
+<div class="greenhue">
+  <ul class="nobullets">
+    <h3 style="margin:3px 0px;"><%= 'Admin'[:title_admin] %></h3>
+    <li id="newforum"><%= link_to 'Create New Forum'[:caption_create_new_forum], new_forum_url %></li>
+    <li id="abuseposts"><%= link_to 'Abuse Posts'[:caption_abuse_posts], new_forum_url %></li>
+    <li id="deletedposts"><%= link_to 'Deleted Posts'[:caption_deleted_posts], new_forum_url %></li>
+  </ul>
+</div>
+<% end %>

@@ -1,0 +1,73 @@
+氣壓	气压	qi4 ya1	/air pressure/
+飛機	飞机	fei1 ji1	/airplane/
+暈機	晕机	yun1 ji1	/air sickness/
+海拔	海拔	hai3 ba2	/above sea level/
+高度	高度	gao1 du4	/altitude/height/
+指定的	指定的	zhi3 ding4 de5	/assigned/
+自動	自动	zi4 dong4	/automatically/
+被發現	被发现	bei4 fa1 xian4	/be found out/
+毛毯	毛毯	mao2 tan3	/blanket/
+顛簸	颠簸	dian1 bo3	/bounce/bump/
+早餐	早餐	zao3 can1	/breakfast/
+隨身行李	随身行李	sui2 shen1 xing2 li3	/carry-on luggage/
+換	换	huan4	/change/
+頻道	频道	pin2 dao4	/channel/
+駕駛艙	驾驶舱	jia4 shi3 cang1	/cockpit/
+機組人員	机组人员	ji1 zu3 ren2 yuan2	/crew/
+經濟艙	经济舱	jing1 ji4 cang1	/economy class/
+緊急情況	紧急情况	jin3 ji2 qing2 kuang4	/emergency/
+緊急出口	紧急出口	jin3 ji2 chu1 kou3	/emergency exit/
+遇上	遇上	yu4 shang4	/encounter/
+係緊	系紧	ji4 jin3	/fasten/
+罰款	罚款	fa2 kuan3	/fine/penalty/
+頭等艙	头等舱	tou2 deng3 cang1	/first class/
+能放進	能放进	neng2 fang4 jin4	/fit/
+乘務員	乘务员	cheng2 wu4 yuan2	/flight attendants/
+飛行時間	飞行时间	fei1 xing2 shi2 jian1	/flying time/
+前	前	qian2	/forward/
+耳機 	耳机 	er3 ji1	/headphones/headset/
+小時	小时	xiao3 shi2	/hour/
+鐘頭	钟头	zhong1 tou2	/hour/
+要是	要是	yao4 shi4	/if/
+如果	如果	ru2 guo3	/in case of/
+繼續	继续	ji4 xu4	/keep (doing)/
+公里	公里	gong1 li3	/kilometer/
+着陸	着陆	zhuo2 lu4	/land/
+救生衣	救生衣	jiu4 sheng1 yi4	/life vest/
+雜誌	杂志	za2 zhi4	/magazine/
+餐點	餐点	can1 dian3	/meal/
+米	米	mi3	/meter/
+分鐘	分钟	fen1 zhong1	/minute/
+電影	电影	dian4 ying3	/movie/
+音樂	音乐	yin1 yue4	/music/
+報紙	报纸	bao4 zhi3	/newspaper/
+不準抽煙	不准抽烟	bu4 zhun3 chou1 yan1	/No smoking./
+在 。。。上	在 。。。上	zai4 ... shang4	/on/
+原來位置	原来位置	yuan2 lai2 wei4 zhi4	/original position/
+頭頂藏	头顶藏	tou2 ding3 cang2	/overhead compartment/
+氧氣罩	氧气罩	yang3 qi4 zhao4	/oxygen mask/
+紙袋	纸袋	zhi3 dai4	/paper bag/
+枕頭	枕头	zhen3 tou5	/pillow/
+口袋	口袋	kou3 dai4	/pocket/
+收起來	收起来	shou1 qi3 lai5	/put back/
+後艙	后舱	hou4 cang1	/rear cabin/
+繼續	继续	ji4 xu4	/remain/
+保持	保持	bao3 chi2	/remain/
+租金	租金	zu1 jin1	/rent charge/
+座椅靠揹	座椅靠背	zuo4 yi3 kao4 bei1	/seat back/
+安全帶	安全带	an1 quan2 dai4	/seat belt/
+坐好	坐好	zuo4 hao3	/seated/
+供應	供应	gong1 ying4	/serve/
+抽煙区	抽烟区	chou1 yan1 qu1	/smoking area/
+速度	速度	su4 du4	/speed/
+放直	放直	fang4 zhi2	/straighten/
+起飛	起飞	qi3 fei1	/take off/
+洗手間	洗手间	xi3 shou3 jian1	/toilet/washroom/
+託槃餐桌	托盘餐桌	tuo1 pan2 can1 zhuo1	/tray table/
+湍流	湍流	tuan1 liu2	/turbulence/
+座位	座位	zuo4 wei4	/seat/under the seat/
+座椅	座椅	zuo4 yi3	/seat/under the seat/
+突然	突然	tu1 ran2	/unexpected/
+用	用	yong4	/use/
+歡迎	欢迎	huan1 ying2	/welcome/
+機翼	机翼	ji1 yi4	/wing/

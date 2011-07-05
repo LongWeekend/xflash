@@ -1,0 +1,27 @@
+<% html = capture do %>
+<div class="contents" style="background-color:#fff;border:3px solid #D15600">
+
+  <h3 class="title"><%= t 'Settings'[:title_settings] %><br/>
+    <div class="subtitle">
+			<%= 'for {user}'[:text_for_user, @user.display_name] %>
+			<% if @user.login!=@user.display_name %>
+			(<%= @user.login %>)
+			<% end %>
+		</div>
+  </h3>
+
+	<% form_for :user, :url => user_path(@user) do |f| %>
+	  <%= hidden_field_tag :_method, "put" %>
+	  <%= render :partial => "settings", :object => f %><br/>
+    <%= submit_tag 'Change e-mail or password'[:button_change_email_or_password], :class => 'default_submit' %>
+	<% end %>
+
+	<br/><hr />
+
+	<% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| %>
+	  <%= render :partial => "contact_info", :locals => { :settings => f } %>
+    <%= submit_tag 'Update Profile &gt;&gt;', :class => 'default_submit' %>
+	<% end %><br/>
+</div>
+<% end %>
+<%= render :partial => 'layouts/tiddler', :locals => { :html => html } %>
