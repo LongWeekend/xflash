@@ -293,25 +293,30 @@ enum EntrySectionRows
   }
   
   // Check whether or not we are ADDING or REMOVING from the selected tag
+  //TODO: Isnt it a local cache to check whether the card is a member of which tag? Cant we just use that? --Rendy 19/07/11
   if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
   {
     // Remove tag
-    [TagPeer cancelMembership:cardId tagId:tmpTag.tagId];
+    NSError *error = nil;
+    BOOL result = [TagPeer cancelMembership:cardId tagId:tmpTag.tagId error:&error];
+    if (!result)
+    {
+      //something wrong, check whether it is the last card.
+      if ([error code] == kRemoveLastCardOnATagError)
+      {
+        NSString *errorMessage = [error localizedDescription];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:errorMessage];
+        return;
+      }
+    }
+
+    //this section will only be run if the cancel membership operation is successful.
     [self removeFromMembershipCache:tmpTag.tagId];
+    
     // We have special things to check if we are modifying the existing active set
     if (tmpTag.tagId == [[currentState activeTag] tagId])
     {
-      LWE_LOG(@"Editing current set tags");
-      // Is it the last tag in this set?
-      int tmpInt = [[currentState activeTag] cardCount];
-      LWE_LOG(@"Num cards: %d",tmpInt);
-      if (tmpInt <= 1)
-      {
-        LWE_LOG(@"Last card in set");
-        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
-                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
-        return;
-      }
       // Success - but update counts
       [[currentState activeTag] removeCardFromActiveSet:currentCard];
     }

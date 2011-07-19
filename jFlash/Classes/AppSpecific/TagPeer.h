@@ -3,11 +3,14 @@
 //  jFlash
 //
 //  Created by paul on 5/6/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Long Weekend LLC. All rights reserved.
 //
 
 #import "Tag.h"
 #import "FMResultSet.h"
+
+extern NSString * const kTagPeerErrorDomain;
+extern NSUInteger const kRemoveLastCardOnATagError;
 
 @interface TagPeer : NSObject
 {

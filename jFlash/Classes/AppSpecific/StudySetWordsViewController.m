@@ -73,12 +73,21 @@
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
-    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId];
-    if (result)
+    NSError *error = nil;
+    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId error:&error];
+    if (!result)
     {
-      [cards removeObjectAtIndex:indexPath.row];
-      [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
+      if ([error code] == kRemoveLastCardOnATagError)
+      {
+        NSString *errorMessage = [error localizedDescription];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:errorMessage];
+        return;
+      }
     }
+    
+    [cards removeObjectAtIndex:indexPath.row];
+    [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
   }
 }
 
