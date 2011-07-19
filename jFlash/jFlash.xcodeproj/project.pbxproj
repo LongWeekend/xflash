@@ -21,6 +21,7 @@
 		24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
 		24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660B13CF656200BEE166 /* jFlashTest.h */; };
 		24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B5660D13CF656200BEE166 /* jFlashTest.m */; };
+		24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
 		24E47F0111F3E59D007F6FB7 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		24E47F2211F3E754007F6FB7 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
 		24E47F2311F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0911F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m */; };
@@ -636,11 +637,14 @@
 		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
 		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
 		24B5660013CF656100BEE166 /* jFlashTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jFlashTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24B5660613CF656200BEE166 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; path = "jFlashTest-Info.plist"; sourceTree = "<group>"; };
+		24B5660613CF656200BEE166 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlashTest-Info.plist"; sourceTree = "<group>"; };
 		24B5660813CF656200BEE166 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
+		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
 		24B5660B13CF656200BEE166 /* jFlashTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jFlashTest.h; sourceTree = "<group>"; };
 		24B5660D13CF656200BEE166 /* jFlashTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jFlashTest.m; sourceTree = "<group>"; };
+		24B5661413CF67CD00BEE166 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		24B5661613CF686E00BEE166 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		24B5661713CF686E00BEE166 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = LWETUserDB.xcdatamodel; path = Classes/Reusable/LWE/Twitter/LWETUserDB.xcdatamodel; sourceTree = "<group>"; };
 		24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		24E47F0711F3E754007F6FB7 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
@@ -1134,6 +1138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */,
 				24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */,
 				24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */,
 				24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */,
@@ -1198,6 +1203,8 @@
 				24B5660B13CF656200BEE166 /* jFlashTest.h */,
 				24B5660D13CF656200BEE166 /* jFlashTest.m */,
 				24B5660513CF656200BEE166 /* Supporting Files */,
+				24B5661613CF686E00BEE166 /* Test.h */,
+				24B5661713CF686E00BEE166 /* Test.m */,
 			);
 			path = jFlashTest;
 			sourceTree = "<group>";
@@ -1259,6 +1266,7 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
+				24B5661413CF67CD00BEE166 /* SenTestingKit.framework */,
 				916A89CA101C681800D7917D /* Assets */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
