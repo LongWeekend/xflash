@@ -4,3 +4,7 @@ GraphicAssets/
 crunchytoast_npedia-new/
 *.pyc
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
+
+
+## MacOSX Noise
+.DS_Store
