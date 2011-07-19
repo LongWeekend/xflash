@@ -14,7 +14,7 @@
 }
 
 + (int) createTag: (NSString*) tagName withOwner: (NSInteger) ownerId;
-+ (void) cancelMembership: (NSInteger) cardId tagId:(NSInteger) tagId;
++ (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError;
 + (void) subscribe: (NSInteger) cardId tagId:(NSInteger) tagId;
 + (BOOL) checkMembership: (NSInteger) cardId tagId:(NSInteger) tagId;
 + (NSMutableArray*) membershipListForCardId: (NSInteger) cardId;

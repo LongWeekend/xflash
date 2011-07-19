@@ -15,6 +15,12 @@
 		2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
+		24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
+		24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660B13CF656200BEE166 /* jFlashTest.h */; };
+		24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B5660D13CF656200BEE166 /* jFlashTest.m */; };
 		24E47F0111F3E59D007F6FB7 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		24E47F2211F3E754007F6FB7 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
 		24E47F2311F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0911F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m */; };
@@ -629,6 +635,12 @@
 		2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordXAuthController.m; path = AppSpecific/TweetWordXAuthController.m; sourceTree = "<group>"; };
 		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
 		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
+		24B5660013CF656100BEE166 /* jFlashTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jFlashTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24B5660613CF656200BEE166 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; path = "jFlashTest-Info.plist"; sourceTree = "<group>"; };
+		24B5660813CF656200BEE166 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
+		24B5660B13CF656200BEE166 /* jFlashTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jFlashTest.h; sourceTree = "<group>"; };
+		24B5660D13CF656200BEE166 /* jFlashTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jFlashTest.m; sourceTree = "<group>"; };
 		24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = LWETUserDB.xcdatamodel; path = Classes/Reusable/LWE/Twitter/LWETUserDB.xcdatamodel; sourceTree = "<group>"; };
 		24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		24E47F0711F3E754007F6FB7 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
@@ -1118,6 +1130,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24B565FC13CF656100BEE166 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */,
+				24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */,
+				24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		496C7A6A126325FD004B6B90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1165,8 +1187,29 @@
 				1D6058910D05DD3D006BFB54 /* jFlash.app */,
 				494D6C7811AE1C5F006DADF1 /* libsqlite.a */,
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
+				24B5660013CF656100BEE166 /* jFlashTest.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		24B5660413CF656100BEE166 /* jFlashTest */ = {
+			isa = PBXGroup;
+			children = (
+				24B5660B13CF656200BEE166 /* jFlashTest.h */,
+				24B5660D13CF656200BEE166 /* jFlashTest.m */,
+				24B5660513CF656200BEE166 /* Supporting Files */,
+			);
+			path = jFlashTest;
+			sourceTree = "<group>";
+		};
+		24B5660513CF656200BEE166 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				24B5660613CF656200BEE166 /* jFlashTest-Info.plist */,
+				24B5660713CF656200BEE166 /* InfoPlist.strings */,
+				24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		24E47F0411F3E754007F6FB7 /* OAuthConsumer */ = {
@@ -1220,6 +1263,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				24B5660413CF656100BEE166 /* jFlashTest */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -2137,6 +2181,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* jFlash.app */;
 			productType = "com.apple.product-type.application";
 		};
+		24B565FF13CF656100BEE166 /* jFlashTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24B5661213CF656200BEE166 /* Build configuration list for PBXNativeTarget "jFlashTest" */;
+			buildPhases = (
+				24B565FB13CF656100BEE166 /* Sources */,
+				24B565FC13CF656100BEE166 /* Frameworks */,
+				24B565FD13CF656100BEE166 /* Resources */,
+				24B565FE13CF656100BEE166 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jFlashTest;
+			productName = jFlashTest;
+			productReference = 24B5660013CF656100BEE166 /* jFlashTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		496C7A6B126325FD004B6B90 /* cFlash */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 496C7A75126325FE004B6B90 /* Build configuration list for PBXNativeTarget "cFlash" */;
@@ -2213,6 +2275,7 @@
 				1D6058900D05DD3D006BFB54 /* jFlash */,
 				496C7A6B126325FD004B6B90 /* cFlash */,
 				D370E65E10DFB9D000BE6835 /* sqlite */,
+				24B565FF13CF656100BEE166 /* jFlashTest */,
 			);
 		};
 /* End PBXProject section */
@@ -2390,6 +2453,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24B565FD13CF656100BEE166 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */,
+				24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		496C7A68126325FD004B6B90 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2552,6 +2624,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		24B565FE13CF656100BEE166 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2691,6 +2779,14 @@
 				91013AD413938BE500846038 /* SBJsonBase.m in Sources */,
 				91013AD513938BE500846038 /* SBJsonParser.m in Sources */,
 				91013AD613938BE500846038 /* SBJsonWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24B565FB13CF656100BEE166 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2843,6 +2939,17 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		24B5660713CF656200BEE166 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24B5660813CF656200BEE166 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2887,6 +2994,74 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = jFlash;
+			};
+			name = Release;
+		};
+		24B5660F13CF656200BEE166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "jFlashTest/jFlashTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		24B5661013CF656200BEE166 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				INFOPLIST_FILE = "jFlashTest/jFlashTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Beta;
+		};
+		24B5661113CF656200BEE166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				INFOPLIST_FILE = "jFlashTest/jFlashTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -3073,6 +3248,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		24B5661213CF656200BEE166 /* Build configuration list for PBXNativeTarget "jFlashTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24B5660F13CF656200BEE166 /* Debug */,
+				24B5661013CF656200BEE166 /* Beta */,
+				24B5661113CF656200BEE166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		496C7A75126325FE004B6B90 /* Build configuration list for PBXNativeTarget "cFlash" */ = {
 			isa = XCConfigurationList;

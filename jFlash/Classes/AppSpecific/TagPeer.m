@@ -44,7 +44,7 @@
  * \brief Removes cardId from Tag indicated by parameter tagId
  * Note that this method DOES NOT update the tag count cache on the tags table
  */
-+ (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
++ (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
@@ -59,7 +59,9 @@
   if ([db.dao hadError])
   {
     LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
+    return NO;
   }
+  return YES;
 }
 
 

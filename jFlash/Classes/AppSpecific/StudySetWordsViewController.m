@@ -73,9 +73,12 @@
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
-    [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId];
-    [cards removeObjectAtIndex:indexPath.row];
-    [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
+    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId];
+    if (result)
+    {
+      [cards removeObjectAtIndex:indexPath.row];
+      [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
+    }
   }
 }
 
@@ -114,6 +117,16 @@
     returnCount = 1;
   }
   return returnCount;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.section == kWordSetOptionsSection)
+  {
+    //We dont want user to remove the "Begin studying these" section.
+    return NO;
+  }
+  return YES;
 }
 
 
