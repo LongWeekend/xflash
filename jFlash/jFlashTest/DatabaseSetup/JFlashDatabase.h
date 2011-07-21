@@ -8,9 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kJFlashDatabaseErrorDomain;
+extern NSUInteger const kJFlashCannotOpenDatabaseErrorCode;
 
-@interface JFlashDatabase : NSObject {
+@interface JFlashDatabase : NSObject
+{
     
 }
+
++ (JFlashDatabase *)sharedJFlashDatabase;
+
+- (BOOL)setupTestDatabaseAndOpenConnectionWithError:(NSError **)error;
+- (BOOL)removeTestDatabase;
 
 @end

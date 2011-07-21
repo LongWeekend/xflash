@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SenTestingKit/SenTestingKit.h>
 
-
+@class  jFlashAppDelegate;
 @interface AppDelegate : NSObject {
     
 }
+
++ (jFlashAppDelegate *)delegate;
 
 @end
