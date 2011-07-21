@@ -17,8 +17,9 @@
 //#import "application_headers" as required
 
 
-@interface CardTagTest : SenTestCase {
-    
+@interface CardTagTest : SenTestCase 
+{
+  
 }
 
 #if USE_APPLICATION_UNIT_TEST

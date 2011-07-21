@@ -7,7 +7,12 @@
 //
 
 #import "CardTagTest.h"
+#import "AppDelegate.h"
 
+#import "TagPeer.h"
+#import "JFlashDatabase.h"
+
+static NSString * const kTagTestDefaultName = @"TestTag";
 
 @implementation CardTagTest
 
@@ -20,14 +25,25 @@
     
 }
 
-#else                           // all code under test must be linked into the Unit Test bundle
+#endif
 
-- (void)testMath {
-    
-    STAssertTrue((1+1)==2, @"Compiler isn't feeling well today :-(" );
-    
+#pragma mark -
+#pragma mark Setting up
+
+- (void)setUp
+{
+  NSError *error = nil;
+  JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
+  BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
+  STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
+  
+  //NSUInteger createdTagId = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  //STAssertTrue(createdTagId != 0, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTagId);
 }
 
-#endif
+- (void)tearDown
+{
+  
+}
 
 @end
