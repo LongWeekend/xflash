@@ -18,11 +18,10 @@ static NSString * const kTagTestDefaultName = @"TestTag";
 
 #if USE_APPLICATION_UNIT_TEST     // all code under test is in the iPhone Application
 
-- (void)testAppDelegate {
-    
-    id yourApplicationDelegate = [[UIApplication sharedApplication] delegate];
-    STAssertNotNil(yourApplicationDelegate, @"UIApplication failed to find the AppDelegate");
-    
+- (void)testAppDelegate 
+{
+  jFlashAppDelegate *myApplicationDelegate = [AppDelegate delegate];
+  STAssertNotNil(myApplicationDelegate, @"UIApplication failed to find the AppDelegate");
 }
 
 #endif
@@ -37,13 +36,16 @@ static NSString * const kTagTestDefaultName = @"TestTag";
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
   STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
-  //NSUInteger createdTagId = [TagPeer createTag:kTagTestDefaultName withOwner:0];
-  //STAssertTrue(createdTagId != 0, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTagId);
+  NSUInteger createdTagId = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  STAssertTrue(createdTagId != 0, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTagId);
 }
 
 - (void)tearDown
 {
-  
+  JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
+  NSError *error = nil;
+  BOOL result = [db removeTestDatabaseWithError:&error];
+  STAssertTrue(result, @"Test database cannot be removed for some reason.\nError: %@", [error localizedDescription]);
 }
 
 @end

@@ -15,8 +15,9 @@
 NSString * const JFLASH_CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
 NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
 NSString * const kJFlashDatabaseErrorDomain         = @"kJFlashDatabaseErrorDomain";
-NSUInteger const kJFlashCannotOpenDatabaseErrorCode = 999;
-NSUInteger const kJFlashCannotCopyDatabaseErrorCode = 888;
+NSUInteger const kJFlashCannotOpenDatabaseErrorCode   = 999;
+NSUInteger const kJFlashCannotCopyDatabaseErrorCode   = 888;
+NSUInteger const kJFlashCannotRemoveDatabaseErrorCode = 777;
 
 @interface JFlashDatabase ()
 @end
@@ -66,10 +67,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
   }
 }
 
-- (BOOL)removeTestDatabase
+- (BOOL)removeTestDatabaseWithError:(NSError **)error
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  return [db closeDatabase];
+  BOOL result = [db closeDatabase];
+  if (result)
+  {
+    NSString *testDatabasePath = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE];
+    result = [LWEFile deleteFile:testDatabasePath];
+    if (result)
+      return YES;
+    else
+    {
+      NSString *msg = [NSString stringWithFormat:@"Test database cannot be removed from the user documents folder."];
+      NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:msg, NSLocalizedDescriptionKey, nil];
+      *error = [NSError errorWithDomain:kJFlashDatabaseErrorDomain code:kJFlashCannotRemoveDatabaseErrorCode userInfo:dict];
+      return NO;
+    }
+  }
+  else
+  {
+    NSString *msg = [NSString stringWithFormat:@"Test database cannot be closed for some reason."];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:msg, NSLocalizedDescriptionKey, nil];
+    *error = [NSError errorWithDomain:kJFlashDatabaseErrorDomain code:kJFlashCannotRemoveDatabaseErrorCode userInfo:dict];
+    return NO;
+  }
 }
 
 @end

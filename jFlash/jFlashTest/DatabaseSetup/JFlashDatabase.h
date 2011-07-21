@@ -19,6 +19,6 @@ extern NSUInteger const kJFlashCannotOpenDatabaseErrorCode;
 + (JFlashDatabase *)sharedJFlashDatabase;
 
 - (BOOL)setupTestDatabaseAndOpenConnectionWithError:(NSError **)error;
-- (BOOL)removeTestDatabase;
+- (BOOL)removeTestDatabaseWithError:(NSError **)error;
 
 @end
