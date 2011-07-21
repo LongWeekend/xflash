@@ -542,7 +542,6 @@ enum Sections {
   {
     CurrentState *state = [CurrentState sharedCurrentState];
     Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];
-    NSLog(@"Tag : %@", tmpTag);
     if ([tmpTag tagEditable] && ([[state activeTag] tagId] != [tmpTag tagId]))
     {
       return YES;
