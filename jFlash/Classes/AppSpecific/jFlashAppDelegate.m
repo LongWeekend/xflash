@@ -6,7 +6,6 @@
 
 #import "jFlashAppDelegate.h"
 #import "RootViewController.h"
-#import "FlurryAPI.h"
 #import "CurrentState.h"
 #import "LWEFile.h"
 #import "LWEDatabase.h"
@@ -14,6 +13,10 @@
 #import "DatabaseUpdateManager.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
+
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
+#import "FlurryAPI.h"
+#endif
 
 @implementation jFlashAppDelegate
 
@@ -124,7 +127,7 @@
   return YES;
 }
 
-
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
 //! Flurry exception handler (only installed in final app store version)
 void uncaughtExceptionHandler(NSException *exception)
 {
@@ -142,7 +145,7 @@ void uncaughtExceptionHandler(NSException *exception)
   LWE_LOG(@"%@",debugInfo);
   [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
 }
-
+#endif
 
 /**
  * Checks whether or not to install the main database from the bundle
