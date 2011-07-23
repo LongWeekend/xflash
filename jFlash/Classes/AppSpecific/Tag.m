@@ -527,6 +527,16 @@
 	[super dealloc];
 }
 
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[self class]])
+  {
+    Tag *anotherTag = (Tag *)object;
+    return [anotherTag tagId] == [self tagId];
+  }
+  return NO;
+}
+
 #pragma mark -
 #pragma mark Description
 
