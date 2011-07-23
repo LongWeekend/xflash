@@ -19,13 +19,8 @@
 
 @interface CardTagTest : SenTestCase 
 {
-  
+  Tag *tag_;
 }
 
-#if USE_APPLICATION_UNIT_TEST
-- (void)testAppDelegate;       // simple test on application
-#else
-- (void)testMath;              // simple standalone test
-#endif
-
+- (void)testAddThenRemoveCardsFromStudySet;
 @end
