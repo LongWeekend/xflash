@@ -3037,8 +3037,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
@@ -3062,8 +3060,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
@@ -3229,8 +3225,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
