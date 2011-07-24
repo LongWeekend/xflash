@@ -84,6 +84,10 @@
                                            message:errorMessage];
         return;
       }
+      else
+      {
+        LWE_LOG(@"[UNKNOWN ERROR]%@", error);
+      }
     }
     
     [cards removeObjectAtIndex:indexPath.row];
