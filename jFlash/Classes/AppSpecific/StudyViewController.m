@@ -674,6 +674,7 @@
 		ExampleSentencesViewController *exController = [[ExampleSentencesViewController alloc] init];
 		[exController setDatasource:self];
 		[self setExampleSentencesViewController: exController];
+    [exController release];
   }
   else
   {
