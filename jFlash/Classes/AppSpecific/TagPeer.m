@@ -45,13 +45,15 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
 
 /**
  * \brief   Removes cardId from Tag indicated by parameter tagId
- * \details This method will also check regarding the last card on the active set.
- *          Note that this method DOES NOT update the tag count cache on the tags table.
+ * \details This method will also check regarding the last card on the active set. 
+ *          and automatically remove that card from the active set card cache.
+ *          Note that this method DOES update the tag count cache on the tags table.
  */
 + (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   CurrentState *currentState = [CurrentState sharedCurrentState];
+  BOOL editingActiveSet = NO;
   
   //Check whether the removed card is on the active state.
   //if the tagId supplied is the active card, check for last card cause we dont
@@ -74,36 +76,50 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
       NSString *message = [[NSString alloc] initWithFormat:@"%@", NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.", @"AddTagViewController.AlertViewLastCardMessage")];
       NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
       
-      NSError *lastCardError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
-      *theError = lastCardError;
+      if (theError != NULL)
+        *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
       
       //great citizen!
       [message release];
       [userInfo release];
       return NO;
     }
+    else
+      editingActiveSet = YES;
   }
 
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
   [db executeUpdate:sql];
 	[sql release];
 
-  sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tagId];
-  [db executeUpdate:sql];
-  [sql release];
-  
-  if ([[db dao] hadError])
+  if (editingActiveSet)
   {
-    LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
-    NSString *message = [[NSString alloc] initWithFormat:@"%@", [[db dao] lastErrorMessage]];
-    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
-
-    //put the error information and send it back to whoever calls this function.
-    *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:[[db dao] lastErrorCode] userInfo:userInfo];
-    [message release];
-    [userInfo release];
-    return NO;
+    //TODO: We dont have any report back whether this operation will be sucessful.
+    //for now, it is assumable that this method will always sucess.
+    Card *card = [CardPeer retrieveCardByPK:cardId];
+    [[currentState activeTag] removeCardFromActiveSet:card];
   }
+  else
+  {
+    sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tagId];
+    [db executeUpdate:sql];
+    [sql release];
+    
+    if ([[db dao] hadError])
+    {
+      LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
+      NSString *message = [[NSString alloc] initWithFormat:@"%@", [[db dao] lastErrorMessage]];
+      NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+      
+      //put the error information and send it back to whoever calls this function.
+      if (theError != NULL)
+        *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:[[db dao] lastErrorCode] userInfo:userInfo];
+      [message release];
+      [userInfo release];
+      return NO;
+    }
+  }
+  
   return YES;
 }
 

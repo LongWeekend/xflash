@@ -32,7 +32,7 @@
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tagId];
 	FMResultSet *rs = [[db dao] executeQuery:sql];
-  NSInteger groupId;
+  NSInteger groupId = 0;
 	while ([rs next]) 
   {
     groupId = [rs intForColumn:@"group_id"];
