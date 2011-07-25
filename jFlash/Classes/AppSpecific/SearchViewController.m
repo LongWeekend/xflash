@@ -75,7 +75,9 @@ const NSInteger KSegmentedTableHeader = 100;
   if (_showSearchTargetControl) [self _addSearchControlToHeader];
 
   // Make the spinner
-  [self set_activityIndicator:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+  UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  [self set_activityIndicator:activityIndicator];
+  [activityIndicator release];
 }
 
 
@@ -587,7 +589,6 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else
     {
-      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
       NSError *error = nil;
       BOOL result = [TagPeer cancelMembership:theCard.cardId tagId:FAVORITES_TAG_ID error:&error];
       if (!result)
@@ -600,18 +601,11 @@ const NSInteger KSegmentedTableHeader = 100;
         }
         else
         {
-          LWE_LOG(@"[UNKNOWN ERROR]%@", error);
+          LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
         }
         return;
       }
       
-      //TODO: Should we refactor this IN to the TagPeer cancel membership method?
-      // If we are on starred, remove it from the cache too
-      // Also double check that this is not the last card!
-      if ([currentTag tagId] == FAVORITES_TAG_ID)
-      {
-        [currentTag removeCardFromActiveSet:theCard];
-      }
       [self _removeCardFromMembershipCache:cardId];
     }
 
