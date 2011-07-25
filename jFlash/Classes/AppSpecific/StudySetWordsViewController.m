@@ -26,7 +26,8 @@
  */ 
 - (id) initWithTag:(Tag*)initTag
 {
-  if ((self = [super initWithStyle:UITableViewStyleGrouped]))
+  self = [super initWithStyle:UITableViewStyleGrouped];
+  if (self)
   {
     if ([initTag isKindOfClass:[Tag class]] && [initTag tagId] >= 0)
     {
@@ -35,7 +36,10 @@
     }
     self.navigationItem.title = [initTag tagName];
     [self setCards:nil];
-    [self setActivityIndicator:[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+    
+    UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self setActivityIndicator:av];
+    [av release];
   }
   return self;
 }
@@ -82,12 +86,12 @@
         NSString *errorMessage = [error localizedDescription];
         [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
                                            message:errorMessage];
-        return;
       }
       else
       {
-        LWE_LOG(@"[UNKNOWN ERROR]%@", error);
+        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
       }
+      return;
     }
     
     [cards removeObjectAtIndex:indexPath.row];

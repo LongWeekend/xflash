@@ -214,7 +214,6 @@
     // Do something here - subscribe or cancel, depending.
     if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
     {
-      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
       // First of all, do it
       NSError *error = nil;
       BOOL cancelable = [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID error:&error];
@@ -231,14 +230,6 @@
           LWE_LOG(@"[UNKNOWN ERROR]%@", error);
         }
         return;
-      }
-
-      //TODO: Should we refactor this IN to the TagPeer cancel membership method?
-      // If we are on starred, remove it from the cache too
-      // Also double check that this is not the last card!
-      if ([currentTag tagId] == FAVORITES_TAG_ID)
-      {
-        [currentTag removeCardFromActiveSet:self.currentCard];
       }
     }
     else
