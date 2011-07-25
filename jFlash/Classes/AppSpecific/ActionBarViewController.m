@@ -227,7 +227,7 @@
         }
         else
         {
-          LWE_LOG(@"[UNKNOWN ERROR]%@", error);
+          LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
         }
         return;
       }
