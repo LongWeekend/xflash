@@ -73,7 +73,7 @@ enum ControlSectionRows
   }
   else if (section == kShowBurriedSection)
   {
-    return @"Burried Cards";
+    return @"Buried Cards";
   }
   return @"";
 }
@@ -154,16 +154,16 @@ enum ControlSectionRows
   }
   else if (indexPath.section == kShowBurriedSection)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"showBurried" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    BOOL hideBurriedCard = [settings boolForKey:APP_HIDE_BURRIED_CARDS];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
     
-    NSString *burriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Burried Cards"];
-    [[cell textLabel] setText:burriedStr];
-    [burriedStr release];
+    NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Buried Cards"];
+    [[cell textLabel] setText:buriedStr];
+    [buriedStr release];
     
     //Documentation says that the size component will be completely ignored
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-    [switchView setOn:hideBurriedCard];
+    [switchView setOn:hideBuriedCard];
     [switchView addTarget:self action:@selector(switchView_eventValueChanged:) forControlEvents:UIControlEventValueChanged];
     [cell setAccessoryView:switchView];
     [cell addSubview:switchView];
@@ -260,7 +260,7 @@ enum ControlSectionRows
   BOOL newValue = [switchView isOn];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setBool:newValue forKey:APP_HIDE_BURRIED_CARDS];
+  [settings setBool:newValue forKey:APP_HIDE_BURIED_CARDS];
 }
 
 

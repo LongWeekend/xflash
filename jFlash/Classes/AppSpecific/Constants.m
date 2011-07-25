@@ -34,7 +34,7 @@ NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
 NSString * const APP_DIFFICULTY           = @"app_difficulty";
 NSString * const APP_DATA_VERSION         = @"data_version";
 NSString * const APP_SETTINGS_VERSION     = @"settings_version";
-NSString * const APP_HIDE_BURRIED_CARDS   = @"app_hide_burried_cards";
+NSString * const APP_HIDE_BURIED_CARDS   = @"app_hide_buried_cards";
 
 //Rendy did add this - For the plugin manager feature
 NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
