@@ -37,7 +37,7 @@ extern NSString * const APP_MAX_STUDYING;
 extern NSString * const APP_DIFFICULTY;
 extern NSString * const APP_DATA_VERSION;
 extern NSString * const APP_SETTINGS_VERSION;
-
+extern NSString * const APP_HIDE_BURIED_CARDS;
 
 extern NSString * const PLUGIN_LAST_UPDATE;
 

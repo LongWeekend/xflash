@@ -15,6 +15,7 @@
 enum Sections {
   kControlsSection = 0,
   kFrequencyMultiplierSection = 1,
+  kShowBurriedSection = 2,
   NUM_SECTIONS
 };
 
@@ -66,9 +67,13 @@ enum ControlSectionRows
   {
     return @"Number of Cards in Study Pool";
   }
-  else if(section == kFrequencyMultiplierSection)
+  else if (section == kFrequencyMultiplierSection)
   {
     return @"Frequency of New Cards";
+  }
+  else if (section == kShowBurriedSection)
+  {
+    return @"Buried Cards";
   }
   return @"";
 }
@@ -147,6 +152,23 @@ enum ControlSectionRows
     [rightLabel release];
     [sliderValue release];
   }
+  else if (indexPath.section == kShowBurriedSection)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
+    
+    NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Buried Cards"];
+    [[cell textLabel] setText:buriedStr];
+    [buriedStr release];
+    
+    //Documentation says that the size component will be completely ignored
+    UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+    [switchView setOn:hideBuriedCard];
+    [switchView addTarget:self action:@selector(switchView_eventValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [cell setAccessoryView:switchView];
+    [cell addSubview:switchView];
+    [switchView release];
+  }
   else 
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
@@ -172,7 +194,7 @@ enum ControlSectionRows
     @param      UISegmentedControl* sender
     @result     Void
 */
-- (IBAction) setDifficulty:(UISegmentedControl*)sender
+- (IBAction) setDifficulty:(UISegmentedControl *)sender
 {
   int value = [sender selectedSegmentIndex];
   
@@ -213,7 +235,7 @@ enum ControlSectionRows
 #pragma mark -
 #pragma mark Slider
 
-- (void)sliderAction:(UISlider*)sender
+- (void)sliderAction:(UISlider *)sender
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int value = lroundf([sender value]);
@@ -229,23 +251,38 @@ enum ControlSectionRows
   LWE_LOG(@"sliderAction: sender = %d, value = %d", [sender tag], value);
 }
 
+#pragma mark - 
+#pragma mark UISwitch
+
+- (void)switchView_eventValueChanged:(id)sender
+{
+  UISwitch *switchView = (UISwitch *)sender; 
+  BOOL newValue = [switchView isOn];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setBool:newValue forKey:APP_HIDE_BURIED_CARDS];
+}
+
 
 #pragma mark -
 #pragma mark Class Plumbing
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
   [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
-- (void)dealloc {
+- (void)dealloc 
+{
   [maxCardsUISlider release];
   [frequencyUISlider release];
   [difficultySegmentControl release];

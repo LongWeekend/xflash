@@ -214,10 +214,11 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 {
   if (textField == self.userEmailBox)
   {
-    // Hide the cancel button, show the done button
+    // Hide the cancel button, show the done button 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"Global.Done") style:UIBarButtonItemStyleDone target:self action:@selector(_resignEmailKeyboard)];
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = nil;
+    [doneButton release];
     
     // Move the view up so the keyboard doesn't block the input
     // TODO: iPad customization!
@@ -278,6 +279,7 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
 {
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done",@"Global.Done") style:UIBarButtonItemStyleDone target:self action:@selector(_resignTextViewKeyboard)];
   self.navigationItem.rightBarButtonItem = doneButton;
+  [doneButton release];
   // Get rid of the cancel button, you can't dismiss the whole view w/ the keyboard still up!
   self.navigationItem.leftBarButtonItem = nil;
 

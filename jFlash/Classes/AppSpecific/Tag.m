@@ -9,6 +9,11 @@
 #import "Tag.h"
 #import "FlurryAPI.h"
 
+@interface Tag ()
+//Privates function
+- (float)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal;
+@end
+
 @implementation Tag
 
 @synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
@@ -32,7 +37,7 @@
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tagId];
 	FMResultSet *rs = [[db dao] executeQuery:sql];
-  NSInteger groupId;
+  NSInteger groupId = 0;
 	while ([rs next]) 
   {
     groupId = [rs intForColumn:@"group_id"];
@@ -41,6 +46,9 @@
 	[sql release];
   return groupId;
 }
+
+#pragma mark -
+#pragma mark Level algorithm
 
 /**
  * Calculates next card level based on current performance & Tag progress
@@ -54,84 +62,119 @@
   // control variables
   // controls how many words to show from new before preferring seen words
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
   int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
-  // Total number of cards in this set
-  int levelOneTotal;
+  // Total number of cards in this set and its level
+  int numLevels = 5, levelOneTotal = 0;
+  int levelUnseenTotal = [[[self cardLevelCounts] objectAtIndex:0] intValue];
   int totalCardsInSet = [self cardCount];
+  
+  //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
+  //and also tell that the totalCardsInSet is no longer the whole sets but the one NOT in the buried section.
+  if (hideBuriedCard)
+  {
+    numLevels = 4;
+    NSUInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
+    totalCardsInSet = totalCardsInSet - totalCardsInBurried;
+  }
+  
+  //special cases where this method can return without any math calculation.
+  //the first one if highly unlikely there is less then 1 card in a set.
+  //second one is if the entire set has not been "started". - return with 0.
   if (totalCardsInSet < 1) return 0;
+  if (levelUnseenTotal == totalCardsInSet) return 0;
   
   // Get m cards in n bins, figure out total percentages
   // Calculate different of weights and percentages and adjust accordingly
   int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
-  float p = 0,mean = 0, p_unseen = 0, pTotal = 0;
-  int numLevels = 5;
   
-  // the guts
-  NSMutableArray* tmpTotalArray = [[NSMutableArray alloc] init];
+  // the guts to get the total of card seen so far
+  int tmpTotalArray[6];
   for (i = 1; i <= numLevels; i++)
   {
     // Get denominator values from cache/database
     tmpTotal = [[self.cardLevelCounts objectAtIndex:i] intValue];
     if (i == 1) levelOneTotal = tmpTotal;
-    [tmpTotalArray addObject:[NSNumber numberWithInt:tmpTotal]];
+    tmpTotalArray[i-1] = tmpTotal;
     cardsSeenTotal = cardsSeenTotal + tmpTotal;
     denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - i + 1)); 
     numeratorTotal = numeratorTotal + (tmpTotal * i);
   }
   
-  BOOL iWasRun = NO;
+  float p_unseen = [self calculateProbabilityOfUnseenWithCardsSeen:cardsSeenTotal 
+                                                        totalCards:totalCardsInSet
+                                                         numerator:numeratorTotal 
+                                                     levelOneCards:levelOneTotal];
   
-  // Quick check to make sure we are not at the "end of a set". 
-  if (cardsSeenTotal == totalCardsInSet)
-  {
-    p_unseen = 0;
-  }
-  else if (cardsSeenTotal > totalCardsInSet) // error check
-  {
-    // This should not happen, it is likely that we need to re-cache TotalCards
-    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardsSeenTotal, totalCardsInSet);
-    p_unseen = 0;
-  }
-  else
-  {
-    // Sets probability if we have less cards in the study pool than MAX allowed
-    if (levelOneTotal < wordsInStudyingBeforeTakingNewCard && (totalCardsInSet - cardsSeenTotal) > 0)
-    {
-      iWasRun = YES;
-      mean = (float)numeratorTotal / (float)cardsSeenTotal;
-      p_unseen = (mean - (float)1);
-      p_unseen = pow((p_unseen / (float) 4),weightingFactor);
-      p_unseen = p_unseen + (1-p_unseen)*(pow((wordsInStudyingBeforeTakingNewCard - cardsSeenTotal),.25)/pow(wordsInStudyingBeforeTakingNewCard,.25));
-    }
-    else if (levelOneTotal >= wordsInStudyingBeforeTakingNewCard)
-    {
-      iWasRun = YES;
-      p_unseen = 0;
-    }
-    LWE_ASSERT_EXC(iWasRun,@"Is there ever a case where this is NO?  If so, we want to know what case!");
-  }
-	
   float randomNum = ((float)rand() / (float)RAND_MAX);
-  
+  float p = 0, pTotal = 0;
+  //this for works like russian roulette where there is a 'randomNum' 
+  //and each level has its own probability scaled 0-1 and if it sum-ed it would be 1.
+  //this for enumerate through that level, accumulate the probability until it reach the 'randomNum'.
   for (i = 1; i <= numLevels; i++)
   {
-    tmpTotal = [[tmpTotalArray objectAtIndex:(i-1)] intValue];
+    tmpTotal = tmpTotalArray[i-1];
     weightedTotal = (tmpTotal * weightingFactor * (numLevels - i + 1));
     p = ((float)weightedTotal / (float)denominatorTotal);
     p = (1-p_unseen)*p;
     pTotal = pTotal + p;
 	  if (pTotal > randomNum)
     {
-		  [tmpTotalArray release];
+      LWE_LOG(@"[Debug]Next level will be: %d", i);
 		  return i;
 	  }
   }
-  [tmpTotalArray release];
+  
+  LWE_LOG(@"[Shoudlnt happen?]calculate next level will return with next level: %d", 0);
   return 0;
 }
 
+/**
+ *  \brief  Calculate the probability of the unseen cards showing for the next 'round'
+ *  \return The float ranged 0-1 for the probability of unseen card showing next.
+ */
+- (float)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  int wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
+  int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  
+  // Quick check to make sure we are not at the "end of a set". 
+  if (cardsSeenTotal == totalCardsInSet)
+  {
+    return 0;
+  }
+  else if (cardsSeenTotal > totalCardsInSet) // error check
+  {
+    // This should not happen, it is likely that we need to re-cache TotalCards
+    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardsSeenTotal, totalCardsInSet);
+    return 0;
+  }
+  else
+  {
+    // Sets probability if we have less cards in the study pool than MAX allowed
+    if (levelOneTotal < wordsInStudyingBeforeTakingNewCard && (totalCardsInSet - cardsSeenTotal) > 0)
+    {
+      float p_unseen = 0, mean = 0;
+      mean = (float)numeratorTotal / (float)cardsSeenTotal;
+      p_unseen = (mean - (float)1);
+      p_unseen = pow((p_unseen / (float) 4), weightingFactor);
+      p_unseen = p_unseen + (1-p_unseen)*(pow((wordsInStudyingBeforeTakingNewCard - cardsSeenTotal),.25)/pow(wordsInStudyingBeforeTakingNewCard,.25));
+      return p_unseen;
+    }
+    else if (levelOneTotal >= wordsInStudyingBeforeTakingNewCard)
+    {
+      return 0;
+    }
+    
+    //Should't happen?
+    LWE_LOG_ERROR(@"Is there ever a case where this is NO?  If so, we want to know what case!");
+  }
+  return CGFLOAT_MAX;
+}
+
+#pragma mark -
 
 //! Create a cache of the number of Card objects in each level
 - (void) cacheCardLevelCounts

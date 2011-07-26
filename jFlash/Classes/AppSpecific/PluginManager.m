@@ -607,6 +607,7 @@
  */
 - (void)_retrievePlistFromServer
 {
+  //TODO: Look at comment line 642? Any better solution?
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
   [pool release];

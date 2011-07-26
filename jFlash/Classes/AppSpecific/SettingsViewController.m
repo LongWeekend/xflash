@@ -304,8 +304,10 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     UIViewController *webVC = [[UIViewController alloc] init];
     UIWebView *webView = [[UIWebView alloc] init];
     webVC.title = NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs");
-    webVC.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload")
-                                                                       style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reload",@"Global.Reload")
+                                                            style:UIBarButtonItemStyleBordered target:webView action:@selector(reload)];
+    webVC.navigationItem.rightBarButtonItem = bbi;
+    [bbi release];
 
     NSURL *url = nil;
     if (key == APP_FACEBOOK)
