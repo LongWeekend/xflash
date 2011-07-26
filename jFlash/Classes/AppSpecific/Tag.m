@@ -56,6 +56,7 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   int wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
   int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
   // Total number of cards in this set
   int levelOneTotal;
@@ -67,6 +68,15 @@
   int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
   float p = 0,mean = 0, p_unseen = 0, pTotal = 0;
   int numLevels = 5;
+  
+  if (hideBuriedCard)
+  {
+    //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
+    //and also tell that the totalCardsInSet is no longer the whole sets but the one NOT in the buried section.
+    numLevels = 4;
+    NSUInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
+    totalCardsInSet = totalCardsInSet - totalCardsInBurried;
+  }
   
   // the guts
   NSMutableArray* tmpTotalArray = [[NSMutableArray alloc] init];
@@ -125,10 +135,12 @@
 	  if (pTotal > randomNum)
     {
 		  [tmpTotalArray release];
+      LWE_LOG(@"calculate next level will return with next level: %d", i);
 		  return i;
 	  }
   }
   [tmpTotalArray release];
+  LWE_LOG(@"calculate next level will return with next level: %d", 0);
   return 0;
 }
 
