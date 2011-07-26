@@ -527,4 +527,37 @@
 	[super dealloc];
 }
 
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[self class]])
+  {
+    Tag *anotherTag = (Tag *)object;
+    return [anotherTag tagId] == [self tagId];
+  }
+  return NO;
+}
+
+#pragma mark -
+#pragma mark Description
+
+- (NSString *)description
+{
+  return [NSString stringWithFormat:@"<%@: 0x%0X>\n\
+          Tag Editable: %d\n\
+          Tag Name: %@\n\
+          Tag Description: %@\n\
+          Tag Id: %d\n\
+          Current Index: %d\n\
+          CardIds: %@",
+          NSStringFromClass([self class]),
+          self, 
+          [self tagEditable],
+          [self tagName],
+          [self tagDescription],
+          [self tagId],
+          [self currentIndex],
+          [self cardIds]];
+}
+
+
 @end

@@ -5,5 +5,9 @@ crunchytoast_npedia-new/
 jFlash.xcodeproj/project.xcworkspace/
 jFlash.xcodeproj/xcuserdata/
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
+
+
+## MacOSX Noise
+.DS_Store
 jFlash/Classes/External/sqlite/sqlite3/sqlite3.xcodeproj/project.xcworkspace
 jFlash/Classes/External/sqlite/sqlite3/sqlite3.xcodeproj/xcuserdata

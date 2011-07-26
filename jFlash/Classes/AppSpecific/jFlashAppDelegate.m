@@ -6,7 +6,6 @@
 
 #import "jFlashAppDelegate.h"
 #import "RootViewController.h"
-#import "FlurryAPI.h"
 #import "CurrentState.h"
 #import "LWEFile.h"
 #import "LWECrashUtils.h"
@@ -15,6 +14,10 @@
 #import "DatabaseUpdateManager.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
+
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
+#import "FlurryAPI.h"
+#endif
 
 @implementation jFlashAppDelegate
 

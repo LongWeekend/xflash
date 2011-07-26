@@ -73,7 +73,19 @@
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
-    [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId];
+    NSError *error = nil;
+    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId error:&error];
+    if (!result)
+    {
+      if ([error code] == kRemoveLastCardOnATagError)
+      {
+        NSString *errorMessage = [error localizedDescription];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:errorMessage];
+        return;
+      }
+    }
+    
     [cards removeObjectAtIndex:indexPath.row];
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
   }
@@ -114,6 +126,16 @@
     returnCount = 1;
   }
   return returnCount;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.section == kWordSetOptionsSection)
+  {
+    //We dont want user to remove the "Begin studying these" section.
+    return NO;
+  }
+  return YES;
 }
 
 

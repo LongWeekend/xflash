@@ -3,10 +3,13 @@
 //  jFlash
 //
 //  Created by paul on 5/6/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Long Weekend LLC. All rights reserved.
 //
 
 #import "TagPeer.h"
+
+NSString * const kTagPeerErrorDomain         = @"kTagPeerErrorDomain";
+NSUInteger const kRemoveLastCardOnATagError  = 999;
 
 //! Handles retrieval, creation, deletion, and updating of Tag objects in database
 @implementation TagPeer
@@ -41,12 +44,45 @@
 
 
 /**
- * \brief Removes cardId from Tag indicated by parameter tagId
- * Note that this method DOES NOT update the tag count cache on the tags table
+ * \brief   Removes cardId from Tag indicated by parameter tagId
+ * \details This method will also check regarding the last card on the active set.
+ *          Note that this method DOES NOT update the tag count cache on the tags table.
  */
-+ (void) cancelMembership: (NSInteger) cardId tagId: (NSInteger) tagId
++ (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  CurrentState *currentState = [CurrentState sharedCurrentState];
+  
+  //Check whether the removed card is on the active state.
+  //if the tagId supplied is the active card, check for last card cause we dont
+  //want the last card being removed from a tag. 
+  if (tagId == [[currentState activeTag] tagId])
+  {
+    LWE_LOG(@"Editing current set tags");
+    NSString *countSql = [[NSString alloc] initWithFormat:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '%d'", tagId];
+    FMResultSet *rs = [db executeQuery:countSql];
+    [countSql release];
+    int totalCard = 0;
+    while ([rs next])
+      totalCard = [rs intForColumn:@"total_card"];
+    
+    if (totalCard <= 1)
+    {
+      LWE_LOG(@"Last card in set");
+      //this is the last card, abort!
+      //Construct the error object to be returned back to its caller.
+      NSString *message = [[NSString alloc] initWithFormat:@"%@", NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.", @"AddTagViewController.AlertViewLastCardMessage")];
+      NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+      
+      NSError *lastCardError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
+      *theError = lastCardError;
+      
+      //great citizen!
+      [message release];
+      [userInfo release];
+      return NO;
+    }
+  }
 
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
   [db executeUpdate:sql];
@@ -56,10 +92,19 @@
   [db executeUpdate:sql];
   [sql release];
   
-  if ([db.dao hadError])
+  if ([[db dao] hadError])
   {
     LWE_LOG(@"Err %d: %@", [db.dao lastErrorCode], [db.dao lastErrorMessage]);
+    NSString *message = [[NSString alloc] initWithFormat:@"%@", [[db dao] lastErrorMessage]];
+    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
+
+    //put the error information and send it back to whoever calls this function.
+    *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:[[db dao] lastErrorCode] userInfo:userInfo];
+    [message release];
+    [userInfo release];
+    return NO;
   }
+  return YES;
 }
 
 
