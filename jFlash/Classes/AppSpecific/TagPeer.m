@@ -66,7 +66,9 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
     [countSql release];
     int totalCard = 0;
     while ([rs next])
+    {
       totalCard = [rs intForColumn:@"total_card"];
+    }
     
     if (totalCard <= 1)
     {
@@ -77,7 +79,9 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
       NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:message, NSLocalizedDescriptionKey, nil];
       
       if (theError != NULL)
+      {
         *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
+      }
       
       //great citizen!
       [message release];
@@ -85,7 +89,9 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
       return NO;
     }
     else
+    {
       editingActiveSet = YES;
+    }
   }
 
 	NSString *sql  = [[NSString alloc] initWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
@@ -113,7 +119,9 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
       
       //put the error information and send it back to whoever calls this function.
       if (theError != NULL)
+      {
         *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:[[db dao] lastErrorCode] userInfo:userInfo];
+      }
       [message release];
       [userInfo release];
       return NO;
