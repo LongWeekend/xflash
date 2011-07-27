@@ -9,6 +9,9 @@
 #import "Tag.h"
 #import "FlurryAPI.h"
 
+NSString * const kTagErrorDomain          = @"kTagErrorDomain";
+NSUInteger const kAllBuriedAndHiddenError = 999;
+
 @interface Tag ()
 //Privates function
 - (float)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal;
@@ -53,7 +56,7 @@
 /**
  * Calculates next card level based on current performance & Tag progress
  */
-- (NSInteger) calculateNextCardLevel
+- (NSInteger)calculateNextCardLevelWithError:(NSError **)error
 {
   //-----Internal array consistency-----
   LWE_ASSERT_EXC(([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
@@ -82,7 +85,16 @@
   //special cases where this method can return without any math calculation.
   //the first one if highly unlikely there is less then 1 card in a set.
   //second one is if the entire set has not been "started". - return with 0.
-  if (totalCardsInSet < 1) return 0;
+  if (totalCardsInSet < 1)
+  {
+    if ((hideBuriedCard) && (error != NULL))
+    {
+      //if turns out all cards have been mastered and all are hidden.
+      NSError *allCardsHidden = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
+      *error = allCardsHidden;
+    }
+    return 0;
+  }
   if (levelUnseenTotal == totalCardsInSet) return 0;
   
   // Get m cards in n bins, figure out total percentages
@@ -252,7 +264,7 @@
  * Returns a Card object from the database randomly
  * Accepts current cardId in an attempt to not return the last card again
  */
-- (Card*) getRandomCard:(NSInteger)currentCardId
+- (Card*) getRandomCard:(NSInteger)currentCardId error:(NSError **)error
 {
   //-----Internal array consistency-----
 #if defined(LWE_RELEASE_APP_STORE)
@@ -266,7 +278,13 @@
   //------------------------------------  
   
   // determine the next level
-  NSInteger next_level = [self calculateNextCardLevel];
+  NSError *theError = nil;
+  NSInteger next_level = [self calculateNextCardLevelWithError:&theError];
+  if ((next_level == 0) && ([theError domain] == kTagErrorDomain) && ([theError code] == kAllBuriedAndHiddenError))
+  {
+    if (error != NULL) *error = theError;
+    return nil;
+  }
   
   // Get a random card offset
   NSInteger numCardsAtLevel = [[self.cardIds objectAtIndex:next_level] count];
@@ -307,7 +325,7 @@
       int lastNextLevel = next_level;
       for (int j = 0; j < 5; j++)
       {
-        next_level = [self calculateNextCardLevel];
+        next_level = [self calculateNextCardLevelWithError:nil];
         if (next_level != lastNextLevel) break;
       }
     }
@@ -448,20 +466,23 @@
   [self cacheCardLevelCounts];
 }
 
-
-// TODO: why does Tag care what mode we are in?  Seems fishy to me.
-/** Gets first card in browse mode */
-- (Card*) getFirstCard
+/** 
+ *  \brief  Gets first card in browse mode or in a study mode.
+ */
+- (Card *)getFirstCardWithError:(NSError **)error
 {
+  // TODO: why does Tag care what mode we are in?  Seems fishy to me.
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   Card *card;
   if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
   {
-    // TODO: in some cases the currentIndex can be beyond the range.  We should figure out why, but for the time being I'll reset it to 0 instead of breaking
+    // TODO: in some cases the currentIndex can be beyond the range.  
+    // We should figure out why, but for the time being I'll reset it to 0 instead of breaking
     if ([self currentIndex] >= [[self combinedCardIdsForBrowseMode] count])
     {
       [self setCurrentIndex:0];
     }
+    
     NSArray *combinedCards = [self combinedCardIdsForBrowseMode];
     NSNumber *cardId = nil;
     if ([combinedCards count] > 0)
@@ -484,7 +505,13 @@
     }
     else
     {
-      card = [self getRandomCard:0];
+      NSError *theError = nil;
+      card = [self getRandomCard:0 error:&theError];
+      if ((card == nil) && ([theError code] == kAllBuriedAndHiddenError) && (error != NULL))
+      {
+        LWE_LOG(@"Someone asks for a first card in a set: %@.\nHowever, the user have already mastered this study set, ask the user for a solution.", self);
+        *error = theError;
+      }
     }
   }
   return card;
