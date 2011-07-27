@@ -13,6 +13,7 @@
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
+NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -36,6 +37,7 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
     
     // Register listener to switch the tab bar controller when the user selects a new set
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudySetView) name:LWEShouldShowStudySetView object:nil];
 
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
@@ -147,6 +149,11 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 - (void) switchToStudyView
 {
   [self.tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+}
+
+- (void) switchToStudySetView
+{
+  [[self tabBarController] setSelectedIndex:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX];
 }
 
 - (IBAction) switchToSettings

@@ -23,6 +23,7 @@
 extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldDismissModal;
+extern NSString * const LWEShouldShowStudySetView;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {
