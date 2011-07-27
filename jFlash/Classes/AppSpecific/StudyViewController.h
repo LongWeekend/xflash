@@ -16,15 +16,16 @@
 #import "ExampleSentencesViewController.h"
 
 #define STUDY_SET_HAS_FINISHED_ALERT_TAG  777
-#define STUDY_SET_RESTART_PROGRESS_IDX    1
-#define STUDY_SET_SHOW_BURIED_IDX         2
+#define STUDY_SET_SHOW_BURIED_IDX         1
 #define STUDY_SET_CHANGE_SET_IDX          0
 
 @interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 {
   BOOL _alreadyShowedAlertView;
+  BOOL _finishedSetAlertShowed;
   //! This is set when card is loaded, and used when revealed
   BOOL _cardShouldShowExampleViewCached;
+  BOOL _viewHasBeenLoadedOnce;
   
   id cardViewControllerDelegate;
   

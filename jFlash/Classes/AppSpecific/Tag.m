@@ -69,9 +69,9 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
   // Total number of cards in this set and its level
-  int numLevels = 5, levelOneTotal = 0;
-  int levelUnseenTotal = [[[self cardLevelCounts] objectAtIndex:0] intValue];
-  int totalCardsInSet = [self cardCount];
+  NSUInteger numLevels = 5, levelOneTotal = 0;
+  NSUInteger levelUnseenTotal = [[[self cardLevelCounts] objectAtIndex:0] intValue];
+  NSUInteger totalCardsInSet = [self cardCount];
   
   //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
   //and also tell that the totalCardsInSet is no longer the whole sets but the one NOT in the buried section.
@@ -80,21 +80,29 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     numLevels = 4;
     NSUInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
     totalCardsInSet = totalCardsInSet - totalCardsInBurried;
+    if ((totalCardsInSet < 1) && (totalCardsInBurried > 0))
+    {
+      //if all cards in burried, return 5 with error object instantiated if it has the pointer.
+      if (error != NULL)
+      {
+        //if turns out all cards have been mastered and all are hidden.
+        NSError *allCardsHidden = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
+        *error = allCardsHidden;
+      }
+      return 5;
+    }
+    else 
+    {
+      //RARE CASES, but in case, the cards are all exhausted as they are all in "learned"
+      //but we dont have any "learned" cards. Strange..
+      LWE_LOG_ERROR(@"[UNKNOWN ERROR]All cards are in learned, but we dont have anything in learned. Sides, the 'hide' learned is ON.\nSelf: %@", self);
+    }
   }
   
   //special cases where this method can return without any math calculation.
   //the first one if highly unlikely there is less then 1 card in a set.
   //second one is if the entire set has not been "started". - return with 0.
-  if (totalCardsInSet < 1)
-  {
-    if ((hideBuriedCard) && (error != NULL))
-    {
-      //if turns out all cards have been mastered and all are hidden.
-      NSError *allCardsHidden = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
-      *error = allCardsHidden;
-    }
-    return 0;
-  }
+  if (totalCardsInSet < 1) return 0;
   if (levelUnseenTotal == totalCardsInSet) return 0;
   
   // Get m cards in n bins, figure out total percentages
@@ -280,10 +288,9 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   // determine the next level
   NSError *theError = nil;
   NSInteger next_level = [self calculateNextCardLevelWithError:&theError];
-  if ((next_level == 0) && ([theError domain] == kTagErrorDomain) && ([theError code] == kAllBuriedAndHiddenError))
+  if ((next_level == 5) && ([theError domain] == kTagErrorDomain) && ([theError code] == kAllBuriedAndHiddenError))
   {
     if (error != NULL) *error = theError;
-    return nil;
   }
   
   // Get a random card offset
@@ -291,7 +298,6 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   NSInteger randomOffset = 0;
   
   LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
-  
   if (numCardsAtLevel > 0)
   {
     randomOffset = arc4random() % numCardsAtLevel;
@@ -507,7 +513,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     {
       NSError *theError = nil;
       card = [self getRandomCard:0 error:&theError];
-      if ((card == nil) && ([theError code] == kAllBuriedAndHiddenError) && (error != NULL))
+      if (([card levelId] == 5) && ([theError code] == kAllBuriedAndHiddenError) && (error != NULL))
       {
         LWE_LOG(@"Someone asks for a first card in a set: %@.\nHowever, the user have already mastered this study set, ask the user for a solution.", self);
         *error = theError;
