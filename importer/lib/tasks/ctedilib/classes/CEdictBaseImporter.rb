@@ -1,5 +1,5 @@
 #### IMPORTER BASE CLASS #####
-class Importer
+class CEdictBaseImporter
 
   include ImporterHelpers
   include DatabaseHelpers

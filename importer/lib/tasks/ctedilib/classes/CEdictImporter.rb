@@ -1,5 +1,5 @@
 #### CEdict IMPORTER #####
-class CEdictImporter < Importer
+class CEdictImporter < CEdictBaseImporter
 
   # DESC: Removes all data from import staging tables (should be run before calling import)
   def empty_staging_tables
