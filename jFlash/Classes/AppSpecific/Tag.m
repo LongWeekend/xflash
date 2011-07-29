@@ -288,7 +288,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   // determine the next level
   NSError *theError = nil;
   NSInteger next_level = [self calculateNextCardLevelWithError:&theError];
-  if ((next_level == 5) && ([theError domain] == kTagErrorDomain) && ([theError code] == kAllBuriedAndHiddenError))
+  if ((next_level == 5) && (theError.domain == kTagErrorDomain) && (theError.code == kAllBuriedAndHiddenError))
   {
     if (error != NULL) *error = theError;
   }
