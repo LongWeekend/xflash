@@ -37,7 +37,9 @@ enum Sections {
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
     self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
     searching = NO;
-    self.backupManager = [[BackupManager alloc] initWithDelegate:self];
+    BackupManager *bm = [[BackupManager alloc] initWithDelegate:self];
+    self.backupManager = bm;
+    [bm release];
     selectedTagId = -1;
   }
   return self;

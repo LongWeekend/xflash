@@ -307,19 +307,16 @@ enum EntrySectionRows
         NSString *errorMessage = [error localizedDescription];
         [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
                                            message:errorMessage];
-        return;
       }
+      else 
+      {
+        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
+      }
+      return;
     }
 
     //this section will only be run if the cancel membership operation is successful.
     [self removeFromMembershipCache:tmpTag.tagId];
-    
-    // We have special things to check if we are modifying the existing active set
-    if (tmpTag.tagId == [[currentState activeTag] tagId])
-    {
-      // Success - but update counts
-      [[currentState activeTag] removeCardFromActiveSet:currentCard];
-    }
   }
   else
   {

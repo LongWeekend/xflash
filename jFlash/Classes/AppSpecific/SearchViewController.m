@@ -75,7 +75,9 @@ const NSInteger KSegmentedTableHeader = 100;
   if (_showSearchTargetControl) [self _addSearchControlToHeader];
 
   // Make the spinner
-  [self set_activityIndicator:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+  UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  [self set_activityIndicator:activityIndicator];
+  [activityIndicator release];
 }
 
 
@@ -587,26 +589,23 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else
     {
-      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
-      
-      // Quick check to make sure it's not the last card
-      if (([currentTag tagId] == FAVORITES_TAG_ID) && ([currentTag cardCount] <= 1))
+      NSError *error = nil;
+      BOOL result = [TagPeer cancelMembership:theCard.cardId tagId:FAVORITES_TAG_ID error:&error];
+      if (!result)
       {
-        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set",@"AddTagViewController.AlertViewLastCardTitle")
-                                           message:NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.",@"AddTagViewController.AlertViewLastCardMessage")];
-      }
-      else
-      {
-        // First of all, do it
-        [TagPeer cancelMembership:theCard.cardId tagId:FAVORITES_TAG_ID];
-        
-        // If we are on starred, remove it from the cache too
-        // Also double check that this is not the last card!
-        if ([currentTag tagId] == FAVORITES_TAG_ID)
+        if ([error code] == kRemoveLastCardOnATagError)
         {
-          [currentTag removeCardFromActiveSet:theCard];
+          NSString *errorMessage = [error localizedDescription];
+          [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                             message:errorMessage];
         }
+        else
+        {
+          LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
+        }
+        return;
       }
+      
       [self _removeCardFromMembershipCache:cardId];
     }
 

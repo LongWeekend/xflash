@@ -19,6 +19,7 @@ NSString * const JFLASH_VERSION_1_1           = @"1.1";
 NSString * const JFLASH_VERSION_1_2           = @"1.2";
 NSString * const JFLASH_VERSION_1_3           = @"1.3";
 NSString * const JFLASH_VERSION_1_4           = @"1.4";
+NSString * const JFLASH_VERSION_1_5           = @"1.5";
 
 NSString * const JFLASH_10_USER_DATABASE      = @"jFlash.db";
 NSString * const JFLASH_10_TO_11_SQL_FILENAME = @"jflash_10_to_11.sql";

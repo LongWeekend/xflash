@@ -141,6 +141,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setValue:JFLASH_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
 
+  [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
   [settings setBool:NO forKey:@"db_did_finish_copying"];
   [settings setBool:YES forKey:@"settings_already_created"];
 }
