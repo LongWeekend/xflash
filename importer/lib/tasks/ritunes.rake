@@ -2,9 +2,9 @@
 # RiTunes 0.00
 ##################################################
 
+require 'nokogiri'
 require 'mechanize'
 require 'json'
-require 'nokogiri'
 
 load File.dirname(__FILE__) + "/tedilib3/_modules.rb"
 load File.dirname(__FILE__) + "/tedilib3/classes/_bulk_sql.rb"
