@@ -65,6 +65,12 @@
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
+		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
+		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
+		49570E1913E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
+		49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
+		49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
+		49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
 		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
@@ -732,6 +738,10 @@
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
+		49570E1513E39F7700226D24 /* LWEFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormView.h; sourceTree = "<group>"; };
+		49570E1613E39F7700226D24 /* LWEFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormView.m; sourceTree = "<group>"; };
+		49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormPickerField.h; sourceTree = "<group>"; };
+		49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormPickerField.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
 		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
 		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
@@ -1577,6 +1587,10 @@
 				49EE9152134EC15500EC6B0E /* LWEDownloader.m */,
 				49EE9153134EC15500EC6B0E /* LWEFile.h */,
 				49EE9154134EC15500EC6B0E /* LWEFile.m */,
+				49570E1513E39F7700226D24 /* LWEFormView.h */,
+				49570E1613E39F7700226D24 /* LWEFormView.m */,
+				49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */,
+				49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */,
 				49EE9159134EC15500EC6B0E /* LWEMacros.h */,
 				49EE915A134EC15500EC6B0E /* LWENetworkUtils.h */,
 				49EE915B134EC15500EC6B0E /* LWENetworkUtils.m */,
@@ -2845,6 +2859,8 @@
 				91013AD413938BE500846038 /* SBJsonBase.m in Sources */,
 				91013AD513938BE500846038 /* SBJsonParser.m in Sources */,
 				91013AD613938BE500846038 /* SBJsonWriter.m in Sources */,
+				49570E1713E39F7700226D24 /* LWEFormView.m in Sources */,
+				49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2856,6 +2872,8 @@
 				24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */,
 				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
 				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
+				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,
+				49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2996,6 +3014,8 @@
 				91013AD913938BE500846038 /* SBJsonBase.m in Sources */,
 				91013ADA13938BE500846038 /* SBJsonParser.m in Sources */,
 				91013ADB13938BE500846038 /* SBJsonWriter.m in Sources */,
+				49570E1813E39F7700226D24 /* LWEFormView.m in Sources */,
+				49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
