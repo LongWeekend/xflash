@@ -16,11 +16,6 @@ extern NSString * const RBDVC_USER_TEXT_BOX_DEFAULT;
 //! Allows users to report bad card data to us by sending a Flurry event
 @interface ReportBadDataViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 {
-  IBOutlet UITextView *userMsgInputBox;   //! Where the user types details about the issue
-  IBOutlet UITextField *issueTypeBox;     //! Where the user taps to bring up the picker to select the issue type
-  IBOutlet UITextField *userEmailBox;     //! Where the user types their email address
-  IBOutlet UIView *pickerView;            //! Combined picker & toolbar view, hidden offscreen usually
-  UIImageView *hotheadImg;                //! Hothead image
   Card *_badCard;                         //! Holds the Card object the user selected as bad
   NSString *_activeTagName;
   NSInteger _activeTagId;
@@ -46,9 +41,15 @@ extern NSString * const RBDVC_USER_TEXT_BOX_DEFAULT;
 //! Delegate methods for UITextField
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
 
+
+
+//! Combined picker & toolbar view, hidden offscreen usually
 @property (nonatomic, retain) IBOutlet UIView *pickerView;
+//! Where the user types details about the issue
 @property (nonatomic, retain) IBOutlet UITextView *userMsgInputBox;
+//! Where the user taps to bring up the picker to select the issue type
 @property (nonatomic, retain) IBOutlet UITextField *issueTypeBox;
+//! Where the user types their email address
 @property (nonatomic, retain) IBOutlet UITextField *userEmailBox;
 @property (nonatomic, retain) UIImageView *hotheadImg;
 
