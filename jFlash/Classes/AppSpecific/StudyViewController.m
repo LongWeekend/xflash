@@ -158,11 +158,11 @@
   //make sure that this section is only run once. If somehow the memory warning is issued 
   //and this view controller's view gets unloaded and loaded again, please dont messed up with the
   //boolean for the 'finished' alert view.
-  if (![self hasViewBeenLoadedOnce])
+  if (!self.hasViewBeenLoadedOnce)
   {
     //Comment this out if it is decided to show the 'finished-set' alert when the user run this app.
-    [self setFinishedSetAlertShowed:YES];
-    [self setViewHasBeenLoadedOnce:YES];
+    self.finishedSetAlertShowed = YES;
+    self.viewHasBeenLoadedOnce = YES;
   }
   
   // Load the active study set and be done!!
@@ -231,7 +231,7 @@
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
-  if (![self hasfinishedSetAlertShowed])
+  if (!self.hasfinishedSetAlertShowed)
   {
     UIAlertView *alertView = [[UIAlertView alloc] 
                               initWithTitle:@"Study Set Learned" 
@@ -243,7 +243,7 @@
     [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
     [alertView show];
     [alertView release];
-    [self setFinishedSetAlertShowed:YES];
+    self.finishedSetAlertShowed = YES;
   }
 }
 
@@ -287,13 +287,13 @@
   // Change to new card, by passing nil, there is no animation
   NSError *error = nil;
   Card *nextCard = [[self currentCardSet] getFirstCardWithError:&error];
-  if (([error code] == kAllBuriedAndHiddenError) && ([nextCard levelId] == 5))
+  if ((error.code == kAllBuriedAndHiddenError) && (nextCard.levelId == 5))
   {
     [self _notifyUserStudySetHasBeenLearned];
   }
   else 
   {
-    [self setFinishedSetAlertShowed:NO];
+    self.finishedSetAlertShowed = NO;
   }
   [self doChangeCard:nextCard direction:nil];
 }
@@ -421,7 +421,7 @@
       currentWrongStreak = 0;
       nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
-      if (([nextCard levelId] == 5) && ([error code] == kAllBuriedAndHiddenError))
+      if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
       {
         [self _notifyUserStudySetHasBeenLearned];
       }
