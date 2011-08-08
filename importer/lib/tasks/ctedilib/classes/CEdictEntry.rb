@@ -249,12 +249,11 @@ class CEdictEntry < Entry
       # If we have a false positive just return
       return meaning
     end
-  
-    ref_regex = /see (also |)(.+)/
+    ref_regex = /\Asee (also |)([^a-zA-Z0-9\s]+)(\[[\sA-Za-z0-9]+\])*\z/
     stripped = false
     meaning.scan(ref_regex) do |reference|
       stripped = true
-      @references << reference[1]
+      @references << ("%s%s" % [reference[1],reference[2]])
     end
 
     if stripped

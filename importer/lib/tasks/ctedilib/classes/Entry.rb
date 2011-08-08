@@ -96,7 +96,7 @@ class Entry
     @is_erhua_variant
   end
 
-  def is_only_redirect
+  def is_only_redirect?
     return (meanings.empty? && (references.empty? == false))
   end
   
