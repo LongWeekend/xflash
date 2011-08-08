@@ -16,6 +16,9 @@ class Entry
     @meanings = []
     @is_erhua_variant = false
     @variant_of = false
+    
+    # There can be more than one of these
+    @references = []
   end
 
   #===================================
@@ -91,6 +94,14 @@ class Entry
   
   def is_erhua_variant
     @is_erhua_variant
+  end
+
+  def is_only_redirect
+    return ((meanings.empty? == true) && (references.empty? == false))
+  end
+  
+  def references
+    @references
   end
 
 end
