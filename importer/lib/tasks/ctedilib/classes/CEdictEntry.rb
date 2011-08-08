@@ -112,8 +112,11 @@ class CEdictEntry < Entry
       
       # Is this whitespace?
       skip_this_meaning = true if (meaning.strip == "")
-      
-      # Get tags from meaning - double return is hacky, but it keeps this code clean
+
+      # Is this a reference?
+      meaning = strip_references_from_meaning(meaning)
+
+      # Get tags from meaning - double return is hacky, but it keeps this code cleana
       meaning, tags = get_and_strip_tags_from_meaning(meaning)
       
       # Erhua - do this BEFORE variants
@@ -141,6 +144,10 @@ class CEdictEntry < Entry
   # Helper function to prevent the above method from getting out-of-control large
 
   def get_and_strip_tags_from_meaning(meaning)  
+  
+    # Quick return
+    return false if !meaning
+
     tags = []
     tags_hash = get_tags_for_meaning(meaning)
     tags << tags_hash[:full_match]
@@ -233,6 +240,30 @@ class CEdictEntry < Entry
     return meaning
   end
   
+  # REFERENCE DETECTION
+  
+  def strip_references_from_meaning(meaning = "")
+  
+    false_positive_regex = /see you/
+    meaning.scan(false_positive_regex) do |false_positive|
+      # If we have a false positive just return
+      return meaning
+    end
+  
+    ref_regex = /see (also |)(.+)/
+    stripped = false
+    meaning.scan(ref_regex) do |reference|
+      stripped = true
+      @references << reference[1]
+    end
+
+    if stripped
+      return false
+    else
+      return meaning
+    end
+  end
+  
   # TAG DETECTION
   
   def get_tags_for_meaning(meaning = "")
@@ -274,6 +305,13 @@ class CEdictEntry < Entry
         
       end
     end
+    
+    # Also, try surname
+    surname_regex = /surname [A-Za-z]+/
+    meaning.scan(surname_regex) do
+      tags_hash[:full_match] << "surname"
+    end
+    
     return tags_hash
   end
   

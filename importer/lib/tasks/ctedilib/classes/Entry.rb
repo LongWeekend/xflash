@@ -97,7 +97,7 @@ class Entry
   end
 
   def is_only_redirect
-    return ((meanings.empty? == true) && (references.empty? == false))
+    return (meanings.empty? && (references.empty? == false))
   end
   
   def references

@@ -188,7 +188,11 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry = CEdictEntry.new
     entry.parse_line("旮 旮 [ga1] /see 旮旯[ga1 la2]/")
     assert_equal(true,entry.is_only_redirect)
-    
+  end
+  
+  def test_see_redirect_reference
+    entry = CEdictEntry.new
+    entry.parse_line("旮 旮 [ga1] /see 旮旯[ga1 la2]/")
     expected_references = ["旮旯[ga1 la2]"]
     assert_equal(expected_references,entry.references)
   end
