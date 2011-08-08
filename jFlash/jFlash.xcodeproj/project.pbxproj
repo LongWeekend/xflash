@@ -63,6 +63,9 @@
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
 		49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
+		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
+		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
+		4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
 		4947836912757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
@@ -79,9 +82,6 @@
 		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1913E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
-		49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
-		49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
-		49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
 		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
@@ -647,6 +647,13 @@
 			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
 			remoteInfo = jFlash;
 		};
+		4941833B13EFB237006A5616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 494F7F81138B8DA000094AE2;
+			remoteInfo = sqlite3;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -736,6 +743,8 @@
 		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
 		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
+		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
 		4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed-mini@2x.png"; path = "Assets/practice-btn-unrevealed-mini@2x.png"; sourceTree = "<group>"; };
 		4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed@2x.png"; path = "Assets/practice-btn-unrevealed@2x.png"; sourceTree = "<group>"; };
 		494783741275901E000F9328 /* practice-btn-last@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-last@2x.png"; path = "Assets/practice-btn-last@2x.png"; sourceTree = "<group>"; };
@@ -749,8 +758,6 @@
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
 		49570E1513E39F7700226D24 /* LWEFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormView.h; sourceTree = "<group>"; };
 		49570E1613E39F7700226D24 /* LWEFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormView.m; sourceTree = "<group>"; };
-		49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormPickerField.h; sourceTree = "<group>"; };
-		49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormPickerField.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
 		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
 		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
@@ -1408,7 +1415,7 @@
 		494F7F96138B8E1D00094AE2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				494F7F9D138B8E1D00094AE2 /* libsqlite3.a */,
+				4941833C13EFB237006A5616 /* libsqlite3.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1597,8 +1604,8 @@
 				49EE9154134EC15500EC6B0E /* LWEFile.m */,
 				49570E1513E39F7700226D24 /* LWEFormView.h */,
 				49570E1613E39F7700226D24 /* LWEFormView.m */,
-				49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */,
-				49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */,
+				4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */,
+				4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */,
 				49EE9159134EC15500EC6B0E /* LWEMacros.h */,
 				49EE915A134EC15500EC6B0E /* LWENetworkUtils.h */,
 				49EE915B134EC15500EC6B0E /* LWENetworkUtils.m */,
@@ -2248,7 +2255,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				494F7FA1138B8E5500094AE2 /* PBXTargetDependency */,
 			);
 			name = jFlash;
 			productName = jFlash;
@@ -2285,7 +2291,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				494F7F9F138B8E4E00094AE2 /* PBXTargetDependency */,
 			);
 			name = cFlash;
 			productName = cFlash;
@@ -2339,18 +2344,17 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* jFlash */,
 				496C7A6B126325FD004B6B90 /* cFlash */,
-				D370E65E10DFB9D000BE6835 /* sqlite */,
 				24B565FF13CF656100BEE166 /* jFlashTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		494F7F9D138B8E1D00094AE2 /* libsqlite3.a */ = {
+		4941833C13EFB237006A5616 /* libsqlite3.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libsqlite3.a;
-			remoteRef = 494F7F9C138B8E1D00094AE2 /* PBXContainerItemProxy */;
+			remoteRef = 4941833B13EFB237006A5616 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2857,7 +2861,7 @@
 				91013AD613938BE500846038 /* SBJsonWriter.m in Sources */,
 				49280A261396283D00EF009C /* LWECrashUtils.m in Sources */,
 				49570E1713E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
+				4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2870,7 +2874,7 @@
 				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
 				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
 				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
+				4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3011,7 +3015,7 @@
 				49280A271396283D00EF009C /* LWECrashUtils.m in Sources */,
 				49280A281396296800EF009C /* UpdateManager.m in Sources */,
 				49570E1813E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
+				4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3041,6 +3045,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_DEBUG,
+					LWE_JFLASH,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -3059,7 +3067,6 @@
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
-					APP_STORE_FINAL,
 					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;

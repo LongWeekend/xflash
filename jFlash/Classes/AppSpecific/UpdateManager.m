@@ -179,7 +179,7 @@
 + (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults*) settings
 {
   // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
-  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_4] && 
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_4] && 
           [settings valueForKey:@"settings_already_created"]);
 }
 
@@ -187,6 +187,8 @@
 {
   //New key for the user settings preference in version 1.5
   [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
+  [settings setObject:LWE_JF_VERSION_1_5 forKey:APP_DATA_VERSION];
+  [settings setObject:LWE_JF_VERSION_1_5 forKey:APP_SETTINGS_VERSION];
 }
 
 #pragma mark -
@@ -256,8 +258,7 @@
 }
 #endif
 
-#pragma mark -
-#pragma mark Public Methods
+#pragma mark - Public Methods
 
 + (void) performMigrations:(NSUserDefaults*)settings
 {
@@ -284,7 +285,7 @@
   
   if ([UpdateManager _needs13to14SettingsUpdate:settings])
   {
-    LWE_LOG(@"Updating to 1.4 version");
+    LWE_LOG(@"[Migration Log]Updating to 1.4 version");
     [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
     [TagPeer recacheCountsForUserTags];
   }

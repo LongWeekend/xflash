@@ -59,6 +59,7 @@ const NSInteger FAVORITES_TAG_ID = 0;
       NSString * const LWE_JF_VERSION_1_2           = @"1.2";
       NSString * const LWE_JF_VERSION_1_3           = @"1.3";
       NSString * const LWE_JF_VERSION_1_4           = @"1.4";
+      NSString * const LWE_JF_VERSION_1_5           = @"1.5";
 
       // This pertains to the plugin manager
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";

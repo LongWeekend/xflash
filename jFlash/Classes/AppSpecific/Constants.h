@@ -9,7 +9,7 @@
 #define STUDY_SET_VIEW_CONTROLLER_TAB_INDEX 1
 #define SEARCH_VIEW_CONTROLLER_TAB_INDEX    2
 #define SETTINGS_VIEW_CONTROLLER_TAB_INDEX  3
-#define DEFAULT_TAG_ID 124
+
 #define DEFAULT_USER_ID 1
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
 #define DEFAULT_MAX_STRUDYING 30
@@ -60,6 +60,7 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
   extern NSString * const LWE_JF_VERSION_1_2;
   extern NSString * const LWE_JF_VERSION_1_3;
   extern NSString * const LWE_JF_VERSION_1_4;
+  extern NSString * const LWE_JF_VERSION_1_5;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
