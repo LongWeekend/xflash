@@ -7,6 +7,7 @@ class CEdictImporterTest < Test::Unit::TestCase
     entries = parser.run
     
     importer = CEdictImporter.new(entries)
+    importer.empty_staging_tables
     importer.import
   end
   
@@ -17,6 +18,7 @@ class CEdictImporterTest < Test::Unit::TestCase
     
     # Pass the parsed entries to the importer
     importer = CEdictImporter.new(entries)
+    importer.empty_staging_tables
     importer.import
   end
 
