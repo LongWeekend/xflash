@@ -13,6 +13,9 @@
 #import "LWEFile.h"
 #import "LWEDatabase.h"
 
+extern NSString * const kTagErrorDomain;
+extern NSUInteger const kAllBuriedAndHiddenError;
+
 @interface Tag : NSObject
 {
 	NSInteger tagId;
@@ -28,16 +31,16 @@
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) populateCardIds;
-- (NSInteger) calculateNextCardLevel;
-- (Card*) getRandomCard:(int) currentCardId;
-- (Card*) getFirstCard;
-- (Card*) getNextCard;
-- (Card*) getPrevCard;
+- (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
+- (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
+- (Card *) getFirstCardWithError:(NSError **)error;
+- (Card *) getNextCard;
+- (Card *) getPrevCard;
 - (NSInteger) cardCount;
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel;
 - (void) cacheCardLevelCounts;
 - (void) freezeCardIds;
-- (NSMutableArray*) thawCardIds;
+- (NSMutableArray *) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) addCardToActiveSet:(Card *)card;
 - (void) setCardCount:(int) count;

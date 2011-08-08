@@ -71,10 +71,6 @@ enum ControlSectionRows
   {
     return @"Frequency of New Cards";
   }
-  else if (section == kShowBurriedSection)
-  {
-    return @"Buried Cards";
-  }
   return @"";
 }
 
@@ -157,7 +153,7 @@ enum ControlSectionRows
     cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
     BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
     
-    NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Buried Cards"];
+    NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Learned Cards"];
     [[cell textLabel] setText:buriedStr];
     [buriedStr release];
     

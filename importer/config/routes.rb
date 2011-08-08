@@ -1,117 +1,58 @@
-ActionController::Routing::Routes.draw do |map|
+Importer::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
-  # ===== Session & User Routes =====
-  map.login 'login', :controller => 'sessions', :action => 'create'
-  map.logout 'logout', :controller => 'sessions', :action => 'destroy'
-  map.register 'register', :controller => 'users', :action => 'new'
-  map.open_id_complete 'sessions', :controller => 'sessions', :action => 'create', :conditions => { :method => :get }
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
 
-  # ===== Search Centric Routes =====
-  map.scraptionary 'search/scraps', :controller => 'search', :action => 'search', :model => 'Scrap'
-  map.user_search 'search/users', :controller => 'search', :action => 'search', :model => 'User'
-  map.question_search 'search/questions', :controller => 'search', :action => 'search', :model => 'Question'
-  map.tag_search 'search/tags', :controller => 'search', :action => 'search', :model => 'Tag'
-  
-  # ===== Documentation Routes (static content) =====
-  map.help 'documentation/help', :controller => 'documentation', :action => 'index'
-  map.about 'documentation/about', :controller => 'documentation', :action => 'about'
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
 
-  # ===== Tags =====
-  map.tags_show 'tags/:t', :controller => 'search', :action => 'search', :model => "scrap"
-  map.tags 'tags/index', :controller => 'tags', :action => 'index'
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
-  # ===== autocompete =====
-  map.tags_auto_complete 'autocomplete/tags', :controller => 'autocomplete', :action => 'tags', :format => 'json'
-  map.links_auto_complete 'autocomplete/links', :controller => 'autocomplete', :action => 'links'
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
 
-  # ===== lists =====
-  map.lists 'list/toggle', :controller => 'lists', :action => 'toggle'
-  map.lists 'list/load', :controller => 'lists', :action => 'load'
-  map.lists 'list/contains', :controller => 'lists', :action => 'list_contains'
-  map.lists 'list/remove_item', :controller => 'lists', :action => 'remove_item'
-  map.lists 'list/empty', :controller => 'lists', :action => 'empty_list'
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
 
-  #======= users ======
-  map.settings 'settings', :controller => 'users', :action => 'edit'
-  map.newuser 'signup', :controller => 'users', :action => 'create', :conditions => { :method => :post }
-  map.signup 'signup', :controller => 'users', :action => 'new', :conditions => { :method => :get }
-  map.activate 'activate/:key', :controller => 'users', :action => 'activate'
-  map.create_user 'signup', :controller => 'users', :action => 'create', :conditions => { :method => :post }
-  map.ajax_logged_in 'users/ajax_logged_in', :controller => 'users', :action => 'ajax_logged_in'
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
 
-  # ===== scrap_topics ======
-  map.new_scrap_topic 'scraps/new', :controller => "scraps", :action => 'new_scrap_topic', :conditions => { :method => :get }
-  map.create_scrap_topic_wout_id 'scraps/new', :controller => "scraps", :action => 'create_scrap_topic', :conditions => { :method => :post }
-  map.create_scrap_topic 'scraps/:id', :controller => "scraps", :action => 'create_scrap_topic', :conditions => { :method => :post }
-  map.scrap_topic 'scraps/*scrap_topic_id', :controller => 'scraps', :action => 'show_scrap_topic'
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
 
-  # ===== scraps ======
-  map.edit_scrap 'scrap/:id/edit', :controller => "scraps", :action => 'edit'
-  map.update_scrap 'scrap/:id', :controller => "scraps", :action => 'update', :conditions => { :method => :put }
-  map.new_scrap_wout_id 'scrap/new', :controller => "scraps", :action => 'new', :conditions => { :method => :get }
-  map.create_scrap_w_id 'scrap/:scrap_topic_id', :controller => "scraps", :action => 'create', :conditions => { :method => :post }
-  map.revision 'scrap/:id/revision/:revid', :controller => 'scraps', :action => 'show', :revid => /\d+/
-  map.compare 'compare/:id/:revid/:revid2', :controller => 'scraps', :action => 'compare', :revid => nil, :revid2 => nil
-  map.create_scrap 'scrap', :controller => "scraps", :action => 'create', :conditions => { :method => :post }
-  map.show_scrap 'scrap/:id', :controller => 'scraps', :action => 'show'
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => "welcome#index"
 
-##　Not Used ##  map.create_scrap_wout_id 'scrap/new', :controller => "scraps", :action => 'create', :conditions => { :method => :post }
-##　Not Used ##  map.new_scrap_w_id 'scrap/:scrap_topic_id/new', :controller => "scraps", :action => 'new', :conditions => { :method => :post }
-##　Not Used ##  map.delete_scrap 'scrap/:id', :controller => "scraps", :action => 'destroy', :conditions => { :method => :delete }
+  # See how all your routes lay out with "rake routes"
 
-  # ==== Stack Overflow Style Forum Routes ====
-  map.resources :question, :controller => 'forum_topics'
-  map.solve_question 'question/:id/solve', :controller => 'forum_topics', :action => 'solve_question'
-  map.monitor_forum_topic 'question/:id/monitor', :controller => 'forum_topics', :action => 'monitor'
-=begin
-  map.show_question　'question/show', :controller => 'forum_topics', :action => 'show'
-  map.new_question　'question/ask', :controller => 'forum_topics', :action => 'new'
-  map.create_question　'question/create', :controller => 'forum_topics', :action => 'create'
-  map.edit_question　'question/edit/:id', :controller => 'forum_topics', :action => 'edit', :conditions => { :method => :get }
-  map.update_question　'question/:id', :controller => 'forum_topics', :action => 'update', :conditions => { :method => :put }
-=end
-  map.post_vote_up 'posts/:id/voteup', :controller => 'posts', :action => 'vote_up'
-  map.post_vote_down 'posts/:id/votedown', :controller => 'posts', :action => 'vote_down'
-  map.post_abuse 'posts/:id/abuse', :controller => 'posts', :action => 'abuse'
-
-  # ===== Traditional Style Forum Routes =====
-  map.resources :forums, :controller => 'forums'
-  map.resources :forum_topics, :controller => 'forum_topics', :as => 'topics', :path_prefix => '/forum/:forum_id', :has_many => :topics, :has_many => :posts
-
-### Not Used
-#  map.forum_topic_talkabout 'forum/:forum_id/topics/:topic_id/talkabout', :controller => 'posts', :action => 'talkabout_topic', :forum_id => /\d+/, :topic_id => /\d+/
-#  map.forum_moderator 'users/:user_id/forum/:forum_id', :controller => 'users', :action => 'forum_moderator'
-#  map.solve_question 'forums/:forum_id/topics/:forum_topic_id/solve', :controller => 'forum_topics', :action => 'solve_question'
-#  map.monitor_forum_topic 'forums/:forum_id/topics/:forum_topic_id/monitor', :controller => 'forum_topics', :action => 'monitor'
-#
-#  map.with_options :controller => 'posts', :action => 'monitored' do |m|
-#    m.formatted_monitored_posts 'users/:user_id/monitored.:format'
-#    m.monitored_posts           'users/:user_id/monitored'
-#  end
-#
-#  # forum/topic/monitorship routes
-#  map.resources :forums do |forum|
-#    forum.resources :forum_topics, :as => 'topic', :name_prefix => nil do |topic|
-#      topic.resources :posts, :name_prefix => nil
-#      topic.resource :monitorship, :controller => :monitorships, :name_prefix => nil
-#    end
-#  end
-### Not Used
-  
-  # ====== Generated Routes =======
-  map.resources :sessions, :controller => 'sessions', :member => { :spoof_user => :post }
-  map.resources :users, :member => { :make_admin => :post }
-
-  # ===== controller/action route =====
-  map.connect ':controller/:action/:id'
-
-  # ===== scrap search aliases =====
-  map.e_pseudo_search 'e/:q', :controller => 'search', :action => 'search', :model => 'Scrap'
-  map.j_pseudo_search 'j/:q', :controller => 'search', :action => 'search', :model => 'Scrap'
-  map.pseudo_search ':q', :controller => 'search', :action => 'search', :model => 'Scrap'
-  map.home '', :controller => 'search', :action => 'search', :model => 'Scrap'
-
-  # ===== error route =====
-  map.exceptions 'logged_exceptions/:action/:id', :controller => 'logged_exceptions', :action => 'index', :id => nil
-
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id(.:format)))'
 end

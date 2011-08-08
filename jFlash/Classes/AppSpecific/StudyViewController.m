@@ -10,10 +10,15 @@
 #import "StudyViewController.h"
 #import "SettingsViewController.h"
 #import "LWENetworkUtils.h"
+#import "RootViewController.h"
 
-
-// declare private methods here
 @interface StudyViewController()
+//private properties
+@property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
+@property (nonatomic, assign, getter=hasViewBeenLoadedOnce) BOOL viewHasBeenLoadedOnce;
+//private methods
+- (void)_resetAlertViewAndStudySet;
+- (void)_notifyUserStudySetHasBeenLearned;
 - (void)_setupCardView:(BOOL)cardShouldShowExampleView;
 - (void)_setupExampleSentencesView:(BOOL)cardShouldShowExampleView;
 - (BOOL)_cardShouldShowExampleView:(Card*)card;
@@ -33,6 +38,8 @@
 @synthesize scrollView, pageControl, exampleSentencesViewController;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize cardViewControllerDelegate;
+@synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
+@synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 
 /** Custom initializer */
 - (id) init
@@ -45,6 +52,8 @@
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
     _alreadyShowedAlertView = NO;
+    [self setFinishedSetAlertShowed:NO];
+    [self setViewHasBeenLoadedOnce:NO];
   }
   return self;
 }
@@ -103,8 +112,8 @@
 {
   [super viewDidLoad];
   // This is called before drawing the view
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"setWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:@"userWasChanged" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"setWasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"userWasChanged" object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:LWESettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupView) name:LWECardSettingsChanged object:nil];
@@ -146,6 +155,16 @@
   // Initialize the scroll view
   [self _setupScrollView];
 
+  //make sure that this section is only run once. If somehow the memory warning is issued 
+  //and this view controller's view gets unloaded and loaded again, please dont messed up with the
+  //boolean for the 'finished' alert view.
+  if (!self.hasViewBeenLoadedOnce)
+  {
+    //Comment this out if it is decided to show the 'finished-set' alert when the user run this app.
+    self.finishedSetAlertShowed = YES;
+    self.viewHasBeenLoadedOnce = YES;
+  }
+  
   // Load the active study set and be done!!
   [self resetStudySet];
 }
@@ -165,40 +184,84 @@
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  if([[CurrentState sharedCurrentState] isUpdatable])
+  NSUInteger tag = [alertView tag];
+  if (tag == STUDY_SET_HAS_FINISHED_ALERT_TAG)
   {
     switch (buttonIndex)
     {
-      case LWE_ALERT_OK_BTN:
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
+      case STUDY_SET_SHOW_BURIED_IDX:
+        LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
         break;
-        // Do nothing
-      case LWE_ALERT_CANCEL_BTN:
+      case STUDY_SET_CHANGE_SET_IDX:
+        LWE_LOG(@"Study set change set has been decided after a study set has been master.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudySetView object:self userInfo:nil];
         break;
     }
   }
   else
   {
-    switch (buttonIndex)
+    if([[CurrentState sharedCurrentState] isUpdatable])
     {
-      case LWE_ALERT_OK_BTN:
-        break;
-      case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-        [self _openLinkshareURL];
-        break;
+      switch (buttonIndex)
+      {
+        case LWE_ALERT_OK_BTN:
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
+          break;
+          // Do nothing
+        case LWE_ALERT_CANCEL_BTN:
+          break;
+      }
+    }
+    else
+    {
+      switch (buttonIndex)
+      {
+        case LWE_ALERT_OK_BTN:
+          break;
+        case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
+          [self _openLinkshareURL];
+          break;
+      }
     }
   }
+}
+
+#pragma mark -
+#pragma mark Study set has been learnt.
+
+- (void)_notifyUserStudySetHasBeenLearned
+{
+  if (!self.hasfinishedSetAlertShowed)
+  {
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Study Set Learned" 
+                              message:@"Congratulation! You've already learned this set so we will show cards that usually would be hidden."
+                              delegate:self 
+                              cancelButtonTitle:@"Change Set"
+                              otherButtonTitles:@"OK", nil];
+    
+    [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
+    [alertView show];
+    [alertView release];
+    self.finishedSetAlertShowed = YES;
+  }
+}
+
+- (void)_resetAlertViewAndStudySet
+{
+  [self setFinishedSetAlertShowed:NO];
+  [self resetStudySet];
 }
 
 #pragma mark -
 #pragma mark Public methods
 
 /**
- * \brief Changes to a new study set
+ * \brief   Changes to a new study set
  * \details Gets the active Tag from the CurrentState singleton and
- * re-initializes the entire StudyViewController to a fresh set.
- * Responsible for getting the first card out of the set and
- * refreshing the views accordingly.
+ *          re-initializes the entire StudyViewController to a fresh set.
+ *          Responsible for getting the first card out of the set and
+ *          refreshing the views accordingly.
  */
 - (void) resetStudySet
 {
@@ -222,7 +285,17 @@
   [self refreshCardView];
 
   // Change to new card, by passing nil, there is no animation
-  [self doChangeCard:[[self currentCardSet] getFirstCard] direction:nil];
+  NSError *error = nil;
+  Card *nextCard = [[self currentCardSet] getFirstCardWithError:&error];
+  if ((error.code == kAllBuriedAndHiddenError) && (nextCard.levelId == 5))
+  {
+    [self _notifyUserStudySetHasBeenLearned];
+  }
+  else 
+  {
+    self.finishedSetAlertShowed = NO;
+  }
+  [self doChangeCard:nextCard direction:nil];
 }
 
 
@@ -325,14 +398,17 @@
   
   BOOL knewIt = NO;
   
+  Card *nextCard = nil; NSString *direction = nil; NSError *error = nil;
 	switch (action)
   {
     // Browse Mode options
     case NEXT_BTN: 
-      [self doChangeCard: [currentCardSet getNextCard] direction:kCATransitionFromRight];
+      nextCard = [currentCardSet getNextCard];
+      direction = kCATransitionFromRight;
       break;
     case PREV_BTN:
-      [self doChangeCard: [currentCardSet getPrevCard] direction:kCATransitionFromLeft];
+      nextCard = [currentCardSet getPrevCard];
+      direction = kCATransitionFromLeft;
       break;
       
     case BURY_BTN:
@@ -343,8 +419,13 @@
       numViewed++;
       currentRightStreak++;
       currentWrongStreak = 0;
+      nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
+      direction = kCATransitionFromRight;
+      if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+      {
+        [self _notifyUserStudySetHasBeenLearned];
+      }
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;
       
     case WRONG_BTN:
@@ -352,10 +433,13 @@
       numViewed++;
       currentWrongStreak++;
       currentRightStreak = 0;
+      [self setFinishedSetAlertShowed:NO];
+      nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
+      direction = kCATransitionFromRight;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      [self doChangeCard: [currentCardSet getRandomCard:currentCard.cardId] direction:kCATransitionFromRight];
       break;      
   }
+  [self doChangeCard:nextCard direction:direction];
   
   // Update the speech bubble
   float tmpRatio = 100*((float)numRight / (float)numViewed);

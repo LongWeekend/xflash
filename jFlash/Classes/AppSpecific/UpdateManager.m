@@ -15,14 +15,18 @@
 + (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
 // JFLASH 1.1 -> 1.2
-+ (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings;
-+ (void) _updateSettingsFrom11to12:(NSUserDefaults*) settings;
-+ (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults*) settings;
++ (void) _createDefaultSettingsFor11:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings;
++ (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults *)settings;
 
 // JFLASH 1.2 -> 1.3
-+ (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings;
-+ (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults*) settings;
++ (void) _updateSettingsFrom12to13:(NSUserDefaults *)settings;
++ (BOOL) _needs12to13SettingsUpdate:(NSUserDefaults *)settings;
 + (BOOL) _updatePlistFrom12to13;
+
+// JFLASH 1.4 -> 1.5
++ (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom14to15:(NSUserDefaults *)settings;
 
 #else
 
@@ -169,6 +173,22 @@
           [settings valueForKey:@"settings_already_created"]);
 }
 
+#pragma mark
+#pragma mark Version 1.5
+
++ (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults*) settings
+{
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_4] && 
+          [settings valueForKey:@"settings_already_created"]);
+}
+
++ (void) _updateSettingsFrom14to15:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.5
+  [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
+}
+
 #pragma mark -
 #pragma mark Shared Private Methods
 
@@ -251,14 +271,14 @@
   //The plugin manager will have to look at the last time it gets updated, there is the list of the data
   if ([UpdateManager _needs11to12SettingsUpdate:settings])
   {
-		LWE_LOG(@"Oops, we need update to 1.2 version");
+		LWE_LOG(@"[Migration Log]Oops, we need update to 1.2 version");
 	  [UpdateManager _updateSettingsFrom11to12:settings];
   }
   
   // JFlash 1.3 - does small database migration for favorites!
   if ([UpdateManager _needs12to13SettingsUpdate:settings])
   {
-		LWE_LOG(@"Oops, we need update to 1.3 version");
+		LWE_LOG(@"[Migration Log]Oops, we need update to 1.3 version");
 	  [UpdateManager _updateSettingsFrom12to13:settings];
   }
   
@@ -267,6 +287,12 @@
     LWE_LOG(@"Updating to 1.4 version");
     [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
     [TagPeer recacheCountsForUserTags];
+  }
+  
+  if ([UpdateManager _needs14to15SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
+    [UpdateManager _updateSettingsFrom14to15:settings];
   }
 #else
 /**
