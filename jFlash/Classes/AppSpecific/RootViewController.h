@@ -43,7 +43,6 @@ extern NSString * const LWEShouldShowStudySetView;
 
 // Notification methods
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
-- (void) showUpdaterModal;
 - (void) hideDownloaderModal:(NSNotification*)aNotification;
 - (void) showDownloaderModal:(NSNotification*)aNotification;
 @end

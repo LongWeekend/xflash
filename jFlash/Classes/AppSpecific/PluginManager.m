@@ -168,7 +168,7 @@
  */
 + (NSDictionary*) preinstalledPlugins;
 {
-  return [NSDictionary dictionaryWithObjectsAndKeys:JFLASH_CURRENT_CARD_DATABASE, CARD_DB_KEY,nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:LWE_CURRENT_CARD_DATABASE, CARD_DB_KEY,nil];
 }
 
 
@@ -247,6 +247,8 @@
   {
 		pluginForFilename = [self findDictionaryContainingObject:filename forKey:LWEPluginFilenameKey inDictionary:self.availableForDownloadPlugins];
 	}
+  LWE_ASSERT_EXC(pluginForFilename,@"Could not get plugin for filename: %@",filename);
+  
   NSString *filePath = [pluginForFilename objectForKey:@"plugin_target_path"];
   
   LWE_LOG(@"Loading file: %@ in loadPluginFromFile", filename);

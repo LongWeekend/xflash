@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CARD_DB</key>
+	<dict>
+		<key>plugin_details</key>
+		<string>Core Cards</string>
+		<key>plugin_file_name</key>
+		<string>cFlash-CARD-1.0.db</string>
+		<key>plugin_key</key>
+		<string>CARD_DB</string>
+		<key>plugin_name</key>
+		<string>Chinese Flash Cards</string>
+		<key>plugin_notes_dir</key>
+		<string>plugin_resources</string>
+		<key>plugin_notes_file</key>
+		<string>foo</string>
+		<key>plugin_target_path</key>
+		<string>cFlash-CARD-1.0.db</string>
+		<key>plugin_target_url</key>
+		<string>http://makbook.local/~phooze/cFlash-CARD-1.0.db.gz</string>
+		<key>plugin_version</key>
+		<string>1.0</string>
+	</dict>
+	<key>EX_DB</key>
+	<dict>
+		<key>plugin_details</key>
+		<string>Adds sentences to practice modes (7.5MB)</string>
+		<key>plugin_file_name</key>
+		<string>jFlash-EX-1.1.db</string>
+		<key>plugin_key</key>
+		<string>EX_DB</string>
+		<key>plugin_name</key>
+		<string>Fifty Thousand Examples v1.1</string>
+		<key>plugin_notes_dir</key>
+		<string>plugin-resources</string>
+		<key>plugin_notes_file</key>
+		<string>example-sentences</string>
+		<key>plugin_target_path</key>
+		<string>jFlash-EX-1.1.db</string>
+		<key>plugin_target_url</key>
+		<string>https://d3580k8bnen6up.cloudfront.net/jFlash-EX-1.1.db.gz</string>
+		<key>plugin_version</key>
+		<string>1.1</string>
+	</dict>
+	<key>FTS_DB</key>
+	<dict>
+		<key>plugin_details</key>
+		<string>Adds sub-second full dictionary search (12MB)</string>
+		<key>plugin_file_name</key>
+		<string>jFlash-FTS-1.1.db</string>
+		<key>plugin_key</key>
+		<string>FTS_DB</string>
+		<key>plugin_name</key>
+		<string>Awesomely Fast Search v1.1</string>
+		<key>plugin_notes_dir</key>
+		<string>plugin-resources</string>
+		<key>plugin_notes_file</key>
+		<string>full-text-search</string>
+		<key>plugin_target_path</key>
+		<string>jFlash-FTS-1.1.db</string>
+		<key>plugin_target_url</key>
+		<string>https://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz</string>
+		<key>plugin_version</key>
+		<string>1.1</string>
+	</dict>
+</dict>
+</plist>

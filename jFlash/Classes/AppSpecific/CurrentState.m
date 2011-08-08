@@ -137,8 +137,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
-  [settings setValue:JFLASH_CURRENT_VERSION forKey:APP_DATA_VERSION];
-  [settings setValue:JFLASH_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
 
   [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];

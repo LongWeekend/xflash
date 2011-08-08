@@ -92,13 +92,6 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
   
-  // Do we need to show a button on the other side?
-  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
-  {
-    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Update",@"SettingsViewController.UpdateButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_showUpdaterModal)];
-    self.navigationItem.rightBarButtonItem = updateBtn;
-    [updateBtn release];
-  }
   //Added this in, so that it refreshes it self when the user is going to this Settings view, after the user changes something that is connected with the appearance of this Settings View Controller. 
 	[self setSectionArray:[self _settingsTableDataSource]];
 	
@@ -127,11 +120,6 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   settingsChanged = NO;
 }
 
-//! showUpdaterModal - convenience method for updater
-- (void) _showUpdaterModal
-{
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self];
-}
 
 
 //! launchAppirater - convenience method for appirater

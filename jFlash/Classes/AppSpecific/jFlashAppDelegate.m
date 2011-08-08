@@ -8,6 +8,7 @@
 #import "RootViewController.h"
 #import "CurrentState.h"
 #import "LWEFile.h"
+#import "LWECrashUtils.h"
 #import "LWEDatabase.h"
 #import "ThemeManager.h"
 #import "DatabaseUpdateManager.h"
@@ -20,7 +21,7 @@
 
 @implementation jFlashAppDelegate
 
-@synthesize window, rootViewController, backgroundSupported;
+@synthesize window, rootViewController;
 
 #pragma mark -
 #pragma mark URL Handling
@@ -71,39 +72,22 @@
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
-  #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-    // add analytics if this is live
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];
-  
-    // Connect to Tapjoy for CPI ads
-    [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];
-  #endif
-  
-  // Find out if we are a multitasking environment
-  UIDevice* device = [UIDevice currentDevice];
-  if ([device respondsToSelector:@selector(isMultitaskingSupported)])
-  {
-	  //self.backgroundSupported = device.multitaskingSupported;
-  }
-  else
-  {
-	  self.backgroundSupported = NO;
-  }
-  
-  // Seed random generator
-  srandomdev();
-  
+#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
+  [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];    // add analytics if this is live
+  [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
+#endif
+
+  NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
+  srandomdev();    // Seed random generator
+
   // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
-  // Seriously.  If you don't call this before ANY jFlash user code, you run this risk of making jFlash's 
-  // upgrade path ABSOLUTELY unstable.  Capiche?
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
 
   // Load root controller to show splash screen
   [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
-	[window addSubview:self.rootViewController.view];
-  [window makeKeyAndVisible];
+	[self.window addSubview:self.rootViewController.view];
+  [self.window makeKeyAndVisible];
   
   // Finally check to see if we launched via URL (this is for non iOS4)
   // On iOS4, the delegate is called back directly
@@ -122,30 +106,13 @@
   }
   
   // Add a delay here so that the UI has time to update
+  // TODO: MMA a performSelector: is probably not the best because we are relying on a hack.
+  // Get a callback from the RootViewController on viewDidLoad, a notification or something.
   [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
   
   return YES;
 }
 
-#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-//! Flurry exception handler (only installed in final app store version)
-void uncaughtExceptionHandler(NSException *exception)
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  CurrentState *currentState = [CurrentState sharedCurrentState];
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  NSInteger tabIndex = appDelegate.rootViewController.tabBarController.selectedIndex;
-  NSString *debugInfo = [NSString stringWithFormat:
-                         @"DEBUG - Active Tab: %d, Data: %@, Settings: %@, Active Tag: %d, Browse: %@",
-                         tabIndex,
-                         [settings valueForKey:APP_DATA_VERSION],
-                         [settings valueForKey:APP_SETTINGS_VERSION],
-                         [[currentState activeTag] tagId],
-                         [settings valueForKey:APP_MODE]];
-  LWE_LOG(@"%@",debugInfo);
-  [FlurryAPI logError:@"Uncaught" message:debugInfo exception:exception];
-}
-#endif
 
 /**
  * Checks whether or not to install the main database from the bundle
@@ -154,12 +121,7 @@ void uncaughtExceptionHandler(NSException *exception)
 {
   // Determine if the MAIN database exists or not
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-
-#if APP_TARGET == APP_TARGET_JFLASH
-  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
-#else
-  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
-#endif
+  NSString *filename = LWE_CURRENT_USER_DATABASE;
   
   NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
   if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
@@ -190,12 +152,7 @@ void uncaughtExceptionHandler(NSException *exception)
   
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-
-#if APP_TARGET == APP_TARGET_JFLASH
-  NSString *filename = JFLASH_CURRENT_USER_DATABASE;
-#else
-  NSString *filename = CFLASH_CURRENT_USER_DATABASE;
-#endif
+  NSString *filename = LWE_CURRENT_USER_DATABASE;
 
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {

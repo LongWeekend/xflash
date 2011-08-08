@@ -54,6 +54,18 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		49280A261396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
+		49280A271396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
+		49280A281396296800EF009C /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
+		49280A2A13962A9500EF009C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
+		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
+		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
+		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
+		49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */; };
+		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
+		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
+		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
+		4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
 		4947836912757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
@@ -62,15 +74,14 @@
 		494783771275901E000F9328 /* practice-btn-next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783751275901E000F9328 /* practice-btn-next@2x.png */; };
 		494783781275901E000F9328 /* practice-btn-last@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783741275901E000F9328 /* practice-btn-last@2x.png */; };
 		494783791275901E000F9328 /* practice-btn-next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783751275901E000F9328 /* practice-btn-next@2x.png */; };
+		494F7FA3138B8E5C00094AE2 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F7FA2138B8E5C00094AE2 /* libsqlite3.a */; };
+		494F7FA5138B8E6400094AE2 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F7FA4138B8E6400094AE2 /* libsqlite3.a */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */; };
 		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1913E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
-		49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
-		49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
-		49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
 		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
@@ -148,7 +159,6 @@
 		496C7AF41263273D004B6B90 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		496C7AF51263273E004B6B90 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
-		496C7AF712632740004B6B90 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		496C7AF812632743004B6B90 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEB11AB7CD700016BD2 /* Card.m */; };
 		496C7AF912632744004B6B90 /* CardPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BED11AB7CD700016BD2 /* CardPeer.m */; };
 		496C7AFA12632745004B6B90 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
@@ -204,7 +214,6 @@
 		496C7B36126327A7004B6B90 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
 		496C7B37126327B0004B6B90 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D3CD2C11D08C71008565F8 /* libFlurry.a */; };
-		496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		496C7B6F12632831004B6B90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		496C7B821263286D004B6B90 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */; };
@@ -218,8 +227,6 @@
 		496C7B8A1263286E004B6B90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
 		496C7B8B1263286E004B6B90 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
-		496C7C021263363E004B6B90 /* cFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C011263363E004B6B90 /* cFlash_Constants.m */; };
-		496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 496C7C2912633684004B6B90 /* jFlash_Constants.m */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
@@ -257,9 +264,7 @@
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
 		49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
-		49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4997D21511BB642600016A15 /* DatabaseUpdateManager.m */; };
 		49D996C212705C8300D176D0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* Icon@2x.png */; };
-		49D996C412705C8300D176D0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* Icon@2x.png */; };
 		49D997711270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
 		49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
 		49DADB801277F36F00B8FD72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7E1277F36F00B8FD72 /* Default.png */; };
@@ -406,7 +411,6 @@
 		917A5C0011AB7CD700016BD2 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF711AB7CD700016BD2 /* User.m */; };
 		917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BF911AB7CD700016BD2 /* UserHistoryPeer.m */; };
 		917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
-		917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3311AB81B600016BD2 /* sqlite3.c */; };
 		917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		917A5C5F11AB839300016BD2 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C5E11AB839300016BD2 /* Appirater.m */; };
 		917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
@@ -643,6 +647,13 @@
 			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
 			remoteInfo = jFlash;
 		};
+		4941833B13EFB237006A5616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 494F7F81138B8DA000094AE2;
+			remoteInfo = sqlite3;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -729,19 +740,24 @@
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
+		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
+		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
+		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
+		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
 		4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed-mini@2x.png"; path = "Assets/practice-btn-unrevealed-mini@2x.png"; sourceTree = "<group>"; };
 		4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed@2x.png"; path = "Assets/practice-btn-unrevealed@2x.png"; sourceTree = "<group>"; };
 		494783741275901E000F9328 /* practice-btn-last@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-last@2x.png"; path = "Assets/practice-btn-last@2x.png"; sourceTree = "<group>"; };
 		494783751275901E000F9328 /* practice-btn-next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-next@2x.png"; path = "Assets/practice-btn-next@2x.png"; sourceTree = "<group>"; };
-		494D6C7811AE1C5F006DADF1 /* libsqlite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlite.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlite3.xcodeproj; path = External/sqlite/sqlite3/sqlite3.xcodeproj; sourceTree = "<group>"; };
+		494F7FA2138B8E5C00094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
+		494F7FA4138B8E6400094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
 		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SearchUnavailableView.xib; path = XIBs/SearchUnavailableView.xib; sourceTree = "<group>"; };
 		49570E1513E39F7700226D24 /* LWEFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormView.h; sourceTree = "<group>"; };
 		49570E1613E39F7700226D24 /* LWEFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormView.m; sourceTree = "<group>"; };
-		49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormPickerField.h; sourceTree = "<group>"; };
-		49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormPickerField.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
 		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
 		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
@@ -757,18 +773,12 @@
 		496C7A6C126325FD004B6B90 /* cFlash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cFlash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496C7A6E126325FD004B6B90 /* cFlash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cFlash-Info.plist"; sourceTree = "<group>"; };
 		496C7B9C12632F2E004B6B90 /* cFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cFlash_Prefix.pch; sourceTree = "<group>"; };
-		496C7C001263363E004B6B90 /* cFlash_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cFlash_Constants.h; path = AppSpecific/cFlash/cFlash_Constants.h; sourceTree = "<group>"; };
-		496C7C011263363E004B6B90 /* cFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cFlash_Constants.m; path = AppSpecific/cFlash/cFlash_Constants.m; sourceTree = "<group>"; };
-		496C7C2812633684004B6B90 /* jFlash_Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jFlash_Constants.h; path = AppSpecific/jFlash/jFlash_Constants.h; sourceTree = "<group>"; };
-		496C7C2912633684004B6B90 /* jFlash_Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = jFlash_Constants.m; path = AppSpecific/jFlash/jFlash_Constants.m; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
-		4997D21411BB642600016A15 /* DatabaseUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseUpdateManager.h; path = AppSpecific/DatabaseUpdateManager.h; sourceTree = "<group>"; };
-		4997D21511BB642600016A15 /* DatabaseUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseUpdateManager.m; path = AppSpecific/DatabaseUpdateManager.m; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
 		49A942601263AF4500086F4C /* star-deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected.png"; path = "Assets/star-deselected.png"; sourceTree = "<group>"; };
@@ -909,6 +919,8 @@
 		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		9134371A138DE5A900A924E4 /* LWECrashUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWECrashUtils.m; sourceTree = "<group>"; };
+		9134371D138DE5B400A924E4 /* LWECrashUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECrashUtils.h; sourceTree = "<group>"; };
 		91343794138E58B400A924E4 /* Default@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Default@2x.jpg"; path = "Assets/Default@2x.jpg"; sourceTree = "<group>"; };
 		91343795138E58B400A924E4 /* Default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Default.jpg; path = Assets/Default.jpg; sourceTree = "<group>"; };
 		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -976,9 +988,6 @@
 		917A5C0C11AB807800016BD2 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
 		917A5C2311AB814B00016BD2 /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDColoredProgressView.h; path = Reusable/PDColoredProgressView/PDColoredProgressView.h; sourceTree = "<group>"; };
 		917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = Reusable/PDColoredProgressView/PDColoredProgressView.m; sourceTree = "<group>"; };
-		917A5C3311AB81B600016BD2 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = External/sqlite/sqlite3.c; sourceTree = "<group>"; };
-		917A5C3411AB81B600016BD2 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = External/sqlite/sqlite3.h; sourceTree = "<group>"; };
-		917A5C3511AB81B600016BD2 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = External/sqlite/sqlite3ext.h; sourceTree = "<group>"; };
 		917A5C3711AB826000016BD2 /* CustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.h; sourceTree = "<group>"; };
 		917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.m; sourceTree = "<group>"; };
 		917A5C3911AB826000016BD2 /* GradientCustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientCustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/GradientCustomCellBackgroundView.h; sourceTree = "<group>"; };
@@ -1155,6 +1164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494F7FA3138B8E5C00094AE2 /* libsqlite3.a in Frameworks */,
 				D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -1186,6 +1196,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494F7FA5138B8E6400094AE2 /* libsqlite3.a in Frameworks */,
+				493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */,
 				496C7B3D126327BB004B6B90 /* libFlurry.a in Frameworks */,
 				496C7B821263286D004B6B90 /* libz.1.2.3.dylib in Frameworks */,
 				496C7B831263286D004B6B90 /* SystemConfiguration.framework in Frameworks */,
@@ -1198,13 +1210,6 @@
 				496C7B8A1263286E004B6B90 /* Security.framework in Frameworks */,
 				496C7B8B1263286E004B6B90 /* CFNetwork.framework in Frameworks */,
 				496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D370E65D10DFB9D000BE6835 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,7 +1232,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* jFlash.app */,
-				494D6C7811AE1C5F006DADF1 /* libsqlite.a */,
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
 				24B5660013CF656100BEE166 /* jFlashTest.octest */,
 			);
@@ -1370,6 +1374,8 @@
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
 				24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */,
 				24EA131D1202AC480081CBBA /* downloadedPlugin.plist */,
+				49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */,
+				49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1377,6 +1383,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				494F7FA4138B8E6400094AE2 /* libsqlite3.a */,
+				494F7FA2138B8E5C00094AE2 /* libsqlite3.a */,
+				493D5378138B5F7A00DDC242 /* MessageUI.framework */,
 				49F968D711AF646000DFC3C9 /* libz.1.2.3.dylib */,
 				917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */,
 				917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */,
@@ -1401,6 +1410,14 @@
 				DA8B6A430FB111A200DE105C /* XIBs */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		494F7F96138B8E1D00094AE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4941833C13EFB237006A5616 /* libsqlite3.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4965FD39126F6422000AC280 /* Action Bar */ = {
@@ -1459,10 +1476,6 @@
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
 				917A5C7B11AB84EE00016BD2 /* Constants.h */,
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
-				496C7C001263363E004B6B90 /* cFlash_Constants.h */,
-				496C7C011263363E004B6B90 /* cFlash_Constants.m */,
-				496C7C2812633684004B6B90 /* jFlash_Constants.h */,
-				496C7C2912633684004B6B90 /* jFlash_Constants.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
@@ -1578,6 +1591,8 @@
 				91013AC513938BC900846038 /* External */,
 				49EE9148134EC15500EC6B0E /* LWECoreData.h */,
 				49EE9149134EC15500EC6B0E /* LWECoreData.m */,
+				9134371D138DE5B400A924E4 /* LWECrashUtils.h */,
+				9134371A138DE5A900A924E4 /* LWECrashUtils.m */,
 				49EE914A134EC15500EC6B0E /* LWEDatabase.h */,
 				49EE914B134EC15500EC6B0E /* LWEDatabase.m */,
 				49EE914E134EC15500EC6B0E /* LWEDateUtils.h */,
@@ -1589,8 +1604,8 @@
 				49EE9154134EC15500EC6B0E /* LWEFile.m */,
 				49570E1513E39F7700226D24 /* LWEFormView.h */,
 				49570E1613E39F7700226D24 /* LWEFormView.m */,
-				49570E1B13E39FBD00226D24 /* LWEFormPickerField.h */,
-				49570E1C13E39FBD00226D24 /* LWEFormPickerField.m */,
+				4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */,
+				4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */,
 				49EE9159134EC15500EC6B0E /* LWEMacros.h */,
 				49EE915A134EC15500EC6B0E /* LWENetworkUtils.h */,
 				49EE915B134EC15500EC6B0E /* LWENetworkUtils.m */,
@@ -1822,9 +1837,7 @@
 		917A5BA611AB7B1C00016BD2 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
-				917A5C3311AB81B600016BD2 /* sqlite3.c */,
-				917A5C3411AB81B600016BD2 /* sqlite3.h */,
-				917A5C3511AB81B600016BD2 /* sqlite3ext.h */,
+				494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */,
 			);
 			name = sqlite;
 			sourceTree = "<group>";
@@ -1862,8 +1875,6 @@
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
 				4999672911B3E45F00898A0C /* ThemeManager.m */,
-				4997D21411BB642600016A15 /* DatabaseUpdateManager.h */,
-				4997D21511BB642600016A15 /* DatabaseUpdateManager.m */,
 				91CA712B133BDE7B008A89A8 /* BackupManager.h */,
 				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
 				91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */,
@@ -2232,16 +2243,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		D370E65B10DFB9D000BE6835 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* jFlash */ = {
 			isa = PBXNativeTarget;
@@ -2296,23 +2297,6 @@
 			productReference = 496C7A6C126325FD004B6B90 /* cFlash.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D370E65E10DFB9D000BE6835 /* sqlite */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D370E66410DFB9F000BE6835 /* Build configuration list for PBXNativeTarget "sqlite" */;
-			buildPhases = (
-				D370E65B10DFB9D000BE6835 /* Headers */,
-				D370E65C10DFB9D000BE6835 /* Sources */,
-				D370E65D10DFB9D000BE6835 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = sqlite;
-			productName = sqlite;
-			productReference = 494D6C7811AE1C5F006DADF1 /* libsqlite.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2350,15 +2334,30 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* jFlash */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 494F7F96138B8E1D00094AE2 /* Products */;
+					ProjectRef = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* jFlash */,
 				496C7A6B126325FD004B6B90 /* cFlash */,
-				D370E65E10DFB9D000BE6835 /* sqlite */,
 				24B565FF13CF656100BEE166 /* jFlashTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4941833C13EFB237006A5616 /* libsqlite3.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsqlite3.a;
+			remoteRef = 4941833B13EFB237006A5616 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -2605,7 +2604,6 @@
 				4965FD82126F6FCF000AC280 /* bluetheme-cookie-cutters in Resources */,
 				4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */,
 				4965FEA8126F7793000AC280 /* candy-btn-green@2x.png in Resources */,
-				49D996C412705C8300D176D0 /* Icon@2x.png in Resources */,
 				49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */,
 				4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */,
 				4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */,
@@ -2699,6 +2697,11 @@
 				9179E44E1385021E00A7739B /* table-background.jpg in Resources */,
 				49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */,
 				49BD2AF4138E664100FAC045 /* cFlash.db in Resources */,
+				49280A2A13962A9500EF009C /* star-deselected.png in Resources */,
+				49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */,
+				49280A2C13962A9A00EF009C /* star-selected.png in Resources */,
+				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
+				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2746,7 +2749,6 @@
 				917A5C0011AB7CD700016BD2 /* User.m in Sources */,
 				917A5C0111AB7CD700016BD2 /* UserHistoryPeer.m in Sources */,
 				917A5C2611AB814B00016BD2 /* PDColoredProgressView.m in Sources */,
-				917A5C3611AB81B600016BD2 /* sqlite3.c in Sources */,
 				917A5C4911AB829000016BD2 /* ProgressDetailsViewController.m in Sources */,
 				917A5C5F11AB839300016BD2 /* Appirater.m in Sources */,
 				917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */,
@@ -2768,7 +2770,6 @@
 				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
 				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
 				91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */,
-				49D2D5E011BBDBB000CEE694 /* DatabaseUpdateManager.m in Sources */,
 				4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */,
 				491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */,
 				49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */,
@@ -2790,7 +2791,6 @@
 				2424111D11F6F46600D535D7 /* TweetWordViewController.m in Sources */,
 				2424111E11F6F46600D535D7 /* TweetWordXAuthController.m in Sources */,
 				49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */,
-				496C7C2F126336A5004B6B90 /* jFlash_Constants.m in Sources */,
 				49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */,
 				490B23441277BCE100CF3484 /* FMDatabase.m in Sources */,
 				490B23451277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
@@ -2859,8 +2859,9 @@
 				91013AD413938BE500846038 /* SBJsonBase.m in Sources */,
 				91013AD513938BE500846038 /* SBJsonParser.m in Sources */,
 				91013AD613938BE500846038 /* SBJsonWriter.m in Sources */,
+				49280A261396283D00EF009C /* LWECrashUtils.m in Sources */,
 				49570E1713E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1D13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
+				4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2873,7 +2874,7 @@
 				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
 				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
 				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1F13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
+				4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2888,7 +2889,6 @@
 				496C7AF41263273D004B6B90 /* CurrentState.m in Sources */,
 				496C7AF51263273E004B6B90 /* PluginManager.m in Sources */,
 				496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */,
-				496C7AF712632740004B6B90 /* DatabaseUpdateManager.m in Sources */,
 				496C7AF812632743004B6B90 /* Card.m in Sources */,
 				496C7AF912632744004B6B90 /* CardPeer.m in Sources */,
 				496C7AFA12632745004B6B90 /* Group.m in Sources */,
@@ -2943,10 +2943,8 @@
 				496C7B35126327A2004B6B90 /* OAConsumer.m in Sources */,
 				496C7B36126327A7004B6B90 /* Base64Transcoder.c in Sources */,
 				496C7B37126327B0004B6B90 /* Appirater.m in Sources */,
-				496C7B3F126327D3004B6B90 /* sqlite3.c in Sources */,
 				496C7B6F12632831004B6B90 /* main.m in Sources */,
 				496C7B721263283B004B6B90 /* LWETUserDB.xcdatamodel in Sources */,
-				496C7C021263363E004B6B90 /* cFlash_Constants.m in Sources */,
 				490B23411277BCE100CF3484 /* FMDatabase.m in Sources */,
 				490B23421277BCE100CF3484 /* FMDatabaseAdditions.m in Sources */,
 				490B23431277BCE100CF3484 /* FMResultSet.m in Sources */,
@@ -3014,15 +3012,10 @@
 				91013AD913938BE500846038 /* SBJsonBase.m in Sources */,
 				91013ADA13938BE500846038 /* SBJsonParser.m in Sources */,
 				91013ADB13938BE500846038 /* SBJsonWriter.m in Sources */,
+				49280A271396283D00EF009C /* LWECrashUtils.m in Sources */,
+				49280A281396296800EF009C /* UpdateManager.m in Sources */,
 				49570E1813E39F7700226D24 /* LWEFormView.m in Sources */,
-				49570E1E13E39FBD00226D24 /* LWEFormPickerField.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D370E65C10DFB9D000BE6835 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3052,6 +3045,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_DEBUG,
+					LWE_JFLASH,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -3068,9 +3065,9 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
-					APP_STORE_FINAL,
+					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -3166,12 +3163,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_DEBUG,
+					LWE_CFLASH,
+				);
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3181,12 +3180,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_AD_HOC,
+					LWE_CFLASH,
+				);
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3197,12 +3198,14 @@
 			buildSettings = {
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_APP_STORE,
+					LWE_CFLASH,
+				);
 				INFOPLIST_FILE = "cFlash-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/SnowLeopardGcov\"",
-					"\"$(SRCROOT)/Classes/Reusable/LWE/External/google-toolbox-for-mac/TigerGcov\"",
 				);
 				PRODUCT_NAME = cFlash;
 			};
@@ -3212,7 +3215,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -3223,9 +3226,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "F19BBBC2-C702-4160-95A5-2863E9BA010E";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				PROVISIONING_PROFILE = "10405927-3481-4B3F-B9C5-C9438AB0B01E";
 				SDKROOT = iphoneos;
 			};
 			name = Beta;
@@ -3235,13 +3237,12 @@
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = (
+				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
-					APP_STORE_FINAL,
+					LWE_JFLASH,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "jFlash-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
@@ -3268,7 +3269,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3280,7 +3281,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3292,40 +3293,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				PROVISIONING_PROFILE = "10405927-3481-4B3F-B9C5-C9438AB0B01E";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		D370E66010DFB9D200BE6835 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = sqlite;
-			};
-			name = Debug;
-		};
-		D370E66110DFB9D200BE6835 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				PRODUCT_NAME = sqlite;
-			};
-			name = Beta;
-		};
-		D370E66210DFB9D200BE6835 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = sqlite;
 			};
 			name = Release;
 		};
@@ -3368,16 +3339,6 @@
 				C01FCF4F08A954540054247B /* Debug */,
 				91EA2F5F1041365600AB848E /* Beta */,
 				C01FCF5008A954540054247B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D370E66410DFB9F000BE6835 /* Build configuration list for PBXNativeTarget "sqlite" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D370E66010DFB9D200BE6835 /* Debug */,
-				D370E66110DFB9D200BE6835 /* Beta */,
-				D370E66210DFB9D200BE6835 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

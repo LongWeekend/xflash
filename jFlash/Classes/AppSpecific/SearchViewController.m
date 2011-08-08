@@ -96,9 +96,13 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Fire off a notification to bring up the downloader?  If we are on the old data version, let them use search!
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
   BOOL hasFTS = [pm pluginIsLoaded:FTS_DB_KEY];
-  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0];
+#if defined(LWE_JFLASH)
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
+  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
+#else
+  BOOL isFirstVersion = NO;
+#endif
   if (!(hasFTS || isFirstVersion))
   {
     NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
@@ -192,9 +196,15 @@ const NSInteger KSegmentedTableHeader = 100;
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
   BOOL hasFTS = [pm pluginIsLoaded:FTS_DB_KEY];
-  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0];
+
+#if defined(LWE_JFLASH)
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
+  BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
+#else
+  BOOL isFirstVersion = NO;
+#endif
+  
   if (hasFTS || isFirstVersion)
   {
     return YES;

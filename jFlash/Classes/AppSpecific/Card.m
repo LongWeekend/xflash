@@ -111,14 +111,20 @@
  */
 - (BOOL) hasExampleSentences:(BOOL)newVersion
 {
+#if defined(LWE_JFLASH)
   // Get settings to determine what data versio we are on
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-  if([[settings objectForKey:APP_DATA_VERSION] isEqualToString:JFLASH_VERSION_1_0]) // version 1 doesn't understand this so say NO
+  if([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0]) // version 1 doesn't understand this so say NO
   {
 		LWE_LOG(@"JFlash Version 1.0?"); 
     return NO;
   }
+#else
+  if (0)
+  {
+    return NO;
+  }
+#endif
   else if (![[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
   {
 		LWE_LOG(@"Example Sentences plugin is NOT loaded");

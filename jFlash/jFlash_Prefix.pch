@@ -7,7 +7,6 @@
   #import <UIKit/UIKit.h>
   #import <sqlite3.h>
   #import "Constants.h"
-  #import "jFlash_Constants.h"
   #import "CurrentState.h"
   #import "ThemeManager.h"
   #import "Card.h"
@@ -19,7 +18,9 @@
   #import "UserHistoryPeer.h"
   #import "TagPeer.h"
   #import "LWEDatabase.h"
+  #import "LWEMacros.h"
   #import "LWEUILabelUtils.h"
+  #import "LWEUniversalAppHelpers.h"
   #import "LWEUITableUtils.h"
   #import "LWERetinaUtils.h"
   #import "LWEViewAnimationUtils.h"
