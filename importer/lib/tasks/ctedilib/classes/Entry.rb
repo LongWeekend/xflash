@@ -100,6 +100,15 @@ class Entry
     return (meanings.empty? && (references.empty? == false))
   end
   
+  def is_proper_noun?
+    # Pinyin begins with a capital letter
+    pn_regex = /\A[A-Z]+[a-z0-9\s]+/
+    @pinyin.scan(pn_regex) do |match|
+      return true
+    end
+    return false
+  end
+  
   def references
     @references
   end
