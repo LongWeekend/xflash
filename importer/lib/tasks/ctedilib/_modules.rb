@@ -189,7 +189,7 @@ end
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
   
-  def get_pinyin_uniode_for_reading(readings="")
+  def get_pinyin_unicode_for_reading(readings="")
     
     #probably split with 'spaces' first
     #analyse the tone number
