@@ -258,6 +258,11 @@ module ImporterHelpers
     the_vocal_sym = (vocal + tone).to_sym()
     return [$chinese_reading_unicode[the_vocal_sym]].pack('U*')
   end
+  
+  def fix_unicode_for_tone_3(pinyin)
+    # GSUB accepts hashes on Ruby 1.9 but not 1.8.  We have it categorized in in additions as hash_gsub
+    return pinyin.hash_gsub(/[ăĕĭŏŭ]/,{'ă'=>'ǎ','ĕ'=>'ě','ĭ'=>'ǐ','ŏ'=>'ǒ','ŭ'=>'ǔ'})
+  end
 
   def prt_dotted_line(txt="")
     prt "---------------------------------------------------------------------#{txt}"

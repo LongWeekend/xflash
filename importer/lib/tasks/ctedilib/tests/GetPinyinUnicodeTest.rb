@@ -26,4 +26,10 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     assert_equal(expected_reading,reading)
   end
   
+  def test_fix_tone_3
+    pinyin = fix_unicode_for_tone_3("ăĕĭŏŭ")
+    expected_pinyin = "ǎěǐǒǔ"
+    assert_equal(expected_pinyin,pinyin)
+  end
+  
 end
