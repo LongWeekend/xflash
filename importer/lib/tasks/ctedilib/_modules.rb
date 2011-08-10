@@ -189,7 +189,7 @@ end
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
   
-  def get_pinyin_uniode_for_reading(reading="")
+  def get_pinyin_uniode_for_reading(readings="")
     
     #probably split with 'spaces' first
     #analyse the tone number
@@ -199,31 +199,45 @@ module ImporterHelpers
     ## http://en.wikipedia.org/wiki/Pinyin#Tones
   
     # Only runs if the reading actually has something
-    if (reading.strip().length() > 0)
+    if (readings.strip().length() > 0)
       # Variable to persist the final result.
       result = ""
       # Loop through the individual readings.
-      reading.split($delimiters[:cflash_readings]).each do | the_reading |
+      readings.split($delimiters[:cflash_readings]).each do | reading |
         
         # Just to get the tone in string (even if it should be a number)
-        tone = " "
-        tone << the_reading.slice(the_reading.length()-1)
-        tone.strip!()
+        tone = ""
+        tone << reading.slice(reading.length()-1)
+        # tone.strip!()
         
         if (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
           # Get the reading without the number (tone)
-          the_reading = the_reading.slice(0, the_reading.length()-1)
+          reading = reading.slice(0, reading.length()-1)
           
-          vocals = the_reading.scan($regexes[:vocal])
+          vocals = reading.scan($regexes[:vocal])
           num_of_vocal = vocals.length
-          
+           
+          vocal = ""
           if (num_of_vocal == 1)
-            # Take the vocal
-            diacritic = get_unicode_for_diacritic(vocals[0], tone)
-            result << the_reading.sub(vocals[0], diacritic)
+            # Take the vocal, directly if there is only 1 vocal.
+            vocal = vocals[0]
+          else
+            vocal = reading.scan($regexes[:diacritic_vowel1])[0]
+            
+            vocal = reading.scan($regexes[:diacritic_vowel2])[0] unless vocal
+            if (vocal)
+              # Get the "o" in the 'ou' scan.
+              vocal = vocal[0].chr()
+            end
+            
+            vocal = vocals[1] unless vocal
           end
-                    
+          
+          if ((vocal) && (vocal.strip().length() > 0))
+            diacritic = get_unicode_for_diacritic(vocal, tone)
+            result << reading.sub(vocal, diacritic)
+          end                    
           
           #puts "Reading: %s with tone %s. Number of vocal: %i" % [the_reading, tone, num_of_vocal]
           
