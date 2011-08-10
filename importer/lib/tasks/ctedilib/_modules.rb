@@ -190,14 +190,8 @@ end
 module ImporterHelpers
   
   def get_pinyin_unicode_for_reading(readings="")
-    
-    #probably split with 'spaces' first
-    #analyse the tone number
-    #get the last vocal
-    #replace it with the pinyin unicode
-    #return
-    ## http://en.wikipedia.org/wiki/Pinyin#Tones
-  
+    ## TODO: Think about the tone-5
+    ## http://en.wikipedia.org/wiki/Pinyin#Tones  
     # Only runs if the reading actually has something
     if (readings.strip().length() > 0)
       # Variable to persist the final result.
@@ -208,7 +202,6 @@ module ImporterHelpers
         # Just to get the tone in string (even if it should be a number)
         tone = ""
         tone << reading.slice(reading.length()-1)
-        # tone.strip!()
         
         if (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
@@ -231,6 +224,7 @@ module ImporterHelpers
               vocal = vocal[0].chr()
             end
             
+            # If everything else fails, get the second vocal.
             vocal = vocals[1] unless vocal
           end
           
@@ -238,9 +232,6 @@ module ImporterHelpers
             diacritic = get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
           end                    
-          
-          #puts "Reading: %s with tone %s. Number of vocal: %i" % [the_reading, tone, num_of_vocal]
-          
         else
           # Give the feedback if we dont know what to do
           # This should be a very rare cases. (Throw an exception maybe?)
