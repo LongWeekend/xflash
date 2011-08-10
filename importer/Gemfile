@@ -21,7 +21,14 @@ gem 'sqlite3'
  gem 'json'
  gem 'mechanize'
  gem 'nokogiri'
- gem 'levenshtein'
+
+# Does not compile with Ruby 1.9. This can be substituted with gem Text.
+# https://rubyforge.org/tracker/index.php?func=detail&aid=27462&group_id=6257&atid=24257
+# http://procbits.com/2010/08/07/levenshtein-in-ruby-1-9/
+# gem 'levenshtein'
+gem 'text'
+
+gem 'mysql2', '~> 0.2.6'
 # gem 'base64'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'

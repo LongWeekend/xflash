@@ -6,6 +6,9 @@ jFlash.xcodeproj/project.xcworkspace/
 jFlash.xcodeproj/xcuserdata/
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
 
+## Rack Gem Noise
+importer/rack/ruby/*
+importer/Gemfile.lock
 
 ## MacOSX Noise
 .DS_Store
