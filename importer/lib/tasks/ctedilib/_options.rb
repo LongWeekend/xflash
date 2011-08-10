@@ -56,10 +56,46 @@ $shared_cache = {}
 # Global Registers (Instance Vars)
 $options[:mysql_time_format] = "'%Y-%m-%d %H:%M:%S'"
 
+# This array is for Chinese-specific-tones 
+# Reading Chatacter - Diacritic
+$chinese_reading_unicode = {}
+# a tones - variant
+$chinese_reading_unicode[:a1] = 257
+$chinese_reading_unicode[:a2] = 225
+$chinese_reading_unicode[:a3] = 462
+$chinese_reading_unicode[:a4] = 224
+# i tones - variant
+$chinese_reading_unicode[:i1] = 299
+$chinese_reading_unicode[:i2] = 237
+$chinese_reading_unicode[:i3] = 464
+$chinese_reading_unicode[:i4] = 236
+# u tones - variant
+$chinese_reading_unicode[:u1] = 363
+$chinese_reading_unicode[:u2] = 250
+$chinese_reading_unicode[:u3] = 468
+$chinese_reading_unicode[:u4] = 249
+# e tones - variant
+$chinese_reading_unicode[:e1] = 275
+$chinese_reading_unicode[:e2] = 233
+$chinese_reading_unicode[:e3] = 283
+$chinese_reading_unicode[:e4] = 232
+# o tones - variant
+$chinese_reading_unicode[:o1] = 333
+$chinese_reading_unicode[:o2] = 243
+$chinese_reading_unicode[:o3] = 466
+$chinese_reading_unicode[:o4] = 242
+
 # Regex Definitions
 $regexes = {}
 
 # CFLASH REGEXES
+$regexes[:vocal] = /[aiueo]/
+$regexes[:diacritic_vowel1] = /[ae]/
+$regexes[:diacritic_vowel2] = /[aiueo]/
+$regexes[:diacritic_vowel3] = /[aiueo]/
+$regexes[:chinese_reading] = /^\s{0,1}\d{1,}[1-4] /
+
+$regexes[:pinyin_tone] = /^[0-5]{1}/
 
 # OLD JFLASH REGEXES
 $regexes[:number_marker] = /\(\d?\d?\)\s{1}/
@@ -106,6 +142,11 @@ $regexes[:non_alphanumeric] = /[^A-Z|a-z|0-9]/
 
 # Delimiters
 $delimiters = {}
+
+# CFlash Delimiters
+$delimiters[:cflash_readings]         = " "
+
+# JFlash Delimiters
 $delimiters[:jflash_readings]         = "; "
 $delimiters[:jflash_meanings]         = "; "
 $delimiters[:jflash_glosses]          = " / "

@@ -14,9 +14,10 @@ module DatabaseHelpers
 
   # Create connection to DB in instance scope
   def connect_db
+    breakpoint
     if !$cn
       ActiveRecord::Base.establish_connection (
-         :adapter  => "mysql",
+         :adapter  => :mysql2,
          :database => $options[:mysql_name],
          :port     => $options[:mysql_port],
          :host     => $options[:mysql_host],
@@ -187,6 +188,61 @@ end
 
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
+  
+  def get_pinyin_uniode_for_reading(reading="")
+    
+    #probably split with 'spaces' first
+    #analyse the tone number
+    #get the last vocal
+    #replace it with the pinyin unicode
+    #return
+    ## http://en.wikipedia.org/wiki/Pinyin#Tones
+    
+    if (reading.strip().length() > 0)
+      
+      # Variable to persist the final result.
+      result = ""
+      # Loop through the individual readings.
+      reading.split($delimiters[:cflash_readings]).each do | the_reading |
+        
+        # Just to get the tone in string (even if it should be a number)
+        tone = " "
+        tone << the_reading.slice(the_reading.length()-1)
+        tone.strip!()
+        
+        if (tone.match($regexes[:pinyin_tone]))
+          found_diacritic = false
+          # Get the reading without the number (tone)
+          the_reading = the_reading.slice(0, the_reading.length()-1)
+          
+          vocals = the_reading.scan($regexes[:vocal])
+          num_of_vocal = vocals.length
+          
+          if (num_of_vocal == 1)
+            # Take the vocal
+            diacritic = get_unicode_for_diacritic(vocals[0], tone)
+            result << the_reading.sub(vocals[0], diacritic)
+          end
+                    
+          
+          #puts "Reading: %s with tone %s. Number of vocal: %i" % [the_reading, tone, num_of_vocal]
+          
+        else
+          # Give the feedback if we dont know what to do
+          # This should be a very rare cases. (Throw an exception maybe?)
+          puts "There is no tone: %s defined for pinyin reading" % tone
+        end
+      end
+      
+      return result
+    end
+    return ""
+  end
+  
+  def get_unicode_for_diacritic(vocal, tone)
+    the_vocal_sym = (vocal + tone).to_sym()
+    return [$chinese_reading_unicode[the_vocal_sym]].pack('U*')
+  end
 
   def prt_dotted_line(txt="")
     prt "---------------------------------------------------------------------#{txt}"
