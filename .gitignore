@@ -1,9 +1,8 @@
+jFlash/jFlash.xcodeproj/xcuserdata/
+jFlash/jFlash.xcodeproj/project.xcworkspace/
 jFlash/build
 GraphicAssets/
-crunchytoast_npedia-new/
 *.pyc
-jFlash.xcodeproj/project.xcworkspace/
-jFlash.xcodeproj/xcuserdata/
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
 
 ## Rack Gem Noise
