@@ -4,11 +4,7 @@ class CEdictImporter < CEdictBaseImporter
   # DESC: Removes all data from import staging tables (should be run before calling import)
   def empty_staging_tables
     connect_db
-    prt "Removing all data from JFlash Import staging tables (cards_staging, card_tag_link)\n\n"
-    if mysql_table_exists("cards_staging") and mysql_col_exists("cards_staging.staging_card_id")
-        $cn.execute("ALTER TABLE cards_staging DROP COLUMN card_id;") # Drop jflash_card_id column
-        $cn.execute("ALTER TABLE cards_staging CHANGE staging_card_id card_id int(11) NOT NULL AUTO_INCREMENT;")
-    end
+    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
     $cn.execute("TRUNCATE TABLE cards_staging") 
     $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
     $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
@@ -69,7 +65,7 @@ class CEdictImporter < CEdictBaseImporter
       
       @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
       @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
-      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,meaning,meaning_html,meaning_fts,classifier,tags,is_variant,is_erhua_variant,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,'%s');"
+      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
 
       # Processing flags
       duplicate_exists = false
@@ -130,7 +126,10 @@ class CEdictImporter < CEdictBaseImporter
         return_sql_arr << @insert_entry_sql % [cn_headword_trad, cn_headword_simp, en_headword, readings_str,
             mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts),
             (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
+            (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
+            (cedict_rec.is_only_redirect? ? "1" : "0"),
             (cedict_rec.has_variant ? "1" : "0"), (cedict_rec.is_erhua_variant ? "1" : "0"),
+            (cedict_rec.is_proper_noun? ? "1" : "0"),
             (cedict_rec.variant_of ? "'"+mysql_escape_str(cedict_rec.variant_of)+"'" : "NULL"), serialised_cedict_hash]
 
         new_counter = new_counter + 1

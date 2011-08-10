@@ -173,7 +173,82 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry = CEdictEntry.new
     entry.parse_line("黑客 黑客 [hei1 ke4] /hacker (computing) (loanword)/");
   end
+  
+  # If the meaning starts with "surname", tag it as a surname
+  def test_surname_autotag
+    entry = CEdictEntry.new
+    entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /surname Makdad/foobar/")
+    expected_meanings = [{:meaning=>"surname Makdad",:tags=>["surname"]},
+                         {:meaning=>"foobar",:tags=>[]}]
+    assert_equal(expected_meanings,entry.meanings)
+  end
+  
+  # Test "redirect" detection
+  def test_see_redirect
+    entry = CEdictEntry.new
+    entry.parse_line("旮 旮 [ga1] /see 旮旯[ga1 la2]/")
+    assert_equal(true,entry.is_only_redirect?)
+  end
+  
+  def test_see_also_redirect_reference
+    entry = CEdictEntry.new
+    entry.parse_line("人字拖鞋 人字拖鞋 [ren2 zi4 tuo1 xie2] /flip flops/flip-flop sandals/thongs/see also 人字拖/")
+    assert_equal(false,entry.is_only_redirect?)
+    expected_references = ["人字拖"]
+    assert_equal(expected_references,entry.references)
+  end
 
+  def test_multiple_references
+    entry = CEdictEntry.new
+    entry.parse_line("令 令 [ling2] /see 脊令[ji2 ling2]/see 令狐[Ling2 hu2]/")
+    assert_equal(false,entry.is_only_redirect?)
+    expected_references = ["脊令[ji2 ling2]","令狐[Ling2 hu2]"]
+    assert_equal(expected_references,entry.references)
+  end
+
+
+  def test_multiple_references
+    entry = CEdictEntry.new
+    entry.parse_line("令 令 [ling2] /see 脊令[ji2 ling2]/see 令狐[Ling2 hu2]/")
+    assert_equal(true,entry.is_only_redirect?)
+    expected_references = ["脊令[ji2 ling2]","令狐[Ling2 hu2]"]
+    assert_equal(expected_references,entry.references)
+  end
+  
+  def test_see_redirect_reference
+    entry = CEdictEntry.new
+    entry.parse_line("旮 旮 [ga1] /see 旮旯[ga1 la2]/")
+    expected_references = ["旮旯[ga1 la2]"]
+    assert_equal(true,entry.is_only_redirect?)
+    assert_equal(expected_references,entry.references)
+  end
+  
+  # Gotcha!
+  def test_see_redirect_false_positives
+    entry = CEdictEntry.new
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    assert_equal(false,entry.is_only_redirect?)
+    assert_equal(true,entry.references.empty?)
+    
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    assert_equal(false,entry.is_only_redirect?)
+    assert_equal(true,entry.references.empty?)
+
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    assert_equal(false,entry.is_only_redirect?)
+    assert_equal(true,entry.references.empty?)
+  end
+  
+  # Test detection of "see also" type meanings
+  def test_references
+    entry = CEdictEntry.new
+    entry.parse_line("昏睡病 昏睡病 [hun1 shui4 bing4] /sleeping sickness/African trypanosomiasis/see also 非洲錐蟲病|非洲锥虫病[fei1 zhou1 zhui1 chong2 bing4]/")
+    assert_equal(false,entry.is_only_redirect?)
+    
+    expected_references = ["非洲錐蟲病|非洲锥虫病[fei1 zhou1 zhui1 chong2 bing4]"]
+    assert_equal(expected_references,entry.references)
+  end
+  
   
   # Test pinyin conversion function
 #  def test_transform_pinyin

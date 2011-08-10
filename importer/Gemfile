@@ -29,6 +29,7 @@ gem 'sqlite3'
 gem 'text'
 
 gem 'mysql2', '~> 0.2.6'
+
 # gem 'base64'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
