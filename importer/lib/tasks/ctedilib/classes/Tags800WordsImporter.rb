@@ -15,11 +15,12 @@ class Tags800WordsImporter < TagsBaseImporter
       $cn.execute(select_query).each do | card_id, headword_trad, reading |
         #puts ("Processing: %s, with database record: %s" % [rec.headword_trad, headword_trad])
         
-        puts ("Reading from database: %s, entry: %s" % [reading, rec.pinyin])
         
         
-        get_pinyin_uniode_for_reading(reading)
         
+        pinyin_unicode = get_pinyin_uniode_for_reading(reading)
+      
+        puts ("Reading from database: %s, entry: %s. Result for converting: %s" % [reading, rec.pinyin, pinyin_unicode])
         
       end
       

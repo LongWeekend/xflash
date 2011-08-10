@@ -197,9 +197,9 @@ module ImporterHelpers
     #replace it with the pinyin unicode
     #return
     ## http://en.wikipedia.org/wiki/Pinyin#Tones
-    
+  
+    # Only runs if the reading actually has something
     if (reading.strip().length() > 0)
-      
       # Variable to persist the final result.
       result = ""
       # Loop through the individual readings.
@@ -233,9 +233,10 @@ module ImporterHelpers
           puts "There is no tone: %s defined for pinyin reading" % tone
         end
       end
-      
       return result
     end
+
+    # Back with nothing if there is no reading supplied
     return ""
   end
   
