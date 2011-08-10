@@ -17,7 +17,7 @@ class Tags800WordsImporter < TagsBaseImporter
       select_query = "SELECT card_id, headword_trad, reading FROM cards_staging WHERE headword_trad = '%s'" % [rec.headword_trad]
       $cn.execute(select_query).each do | card_id, headword_trad, reading |
         
-        pinyin_unicode = get_pinyin_uniode_for_reading(reading)
+        pinyin_unicode = get_pinyin_unicode_for_reading(reading)
         
         puts ("Processing: %s, with database record: %s" % [rec.headword_trad, headword_trad])
         if (pinyin_unicode == rec.pinyin)

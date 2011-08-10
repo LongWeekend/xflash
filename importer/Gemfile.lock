@@ -87,7 +87,6 @@ PLATFORMS
 DEPENDENCIES
   json
   mechanize
-  mysql
   mysql2 (~> 0.2.6)
   nokogiri
   rails (= 3.0.9)
