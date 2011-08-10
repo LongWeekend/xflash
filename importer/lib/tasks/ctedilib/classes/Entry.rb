@@ -1,5 +1,7 @@
 class Entry
 
+  include ObjectSpace
+
   @@pos_tags = ["Adv","Conj","VS","VA","N","M","Nb","Prep"]
 
   #===================================
@@ -48,6 +50,27 @@ class Entry
     return all_tags.flatten
   end
   
+  def to_s
+  	# Get the name of the class in string.
+    class_name_str = self.class().to_s()
+    
+    # Concatenate the entire class instance variables and
+    # its values.
+    ivars = "["
+    self.instance_variables.each do |var|
+    	val = self.instance_variable_get(var)
+    	if val.kind_of? @meanings.class
+    		val = val.join("//")
+    	end
+		ivars << var + ": " + val.to_s() + "\n"
+    end
+    ivars[ivars.length-1] = "]"
+    
+    # Constructs the string and return it back
+    result = "<%s: 0x%08x>\n%s\n\n"
+  	return result % [class_name_str, self.object_id, ivars]
+  end
+  
   def id
     @id
   end
@@ -75,7 +98,6 @@ class Entry
   def grade
     @grade
   end
-  
   
   def classifier
     @classifier
