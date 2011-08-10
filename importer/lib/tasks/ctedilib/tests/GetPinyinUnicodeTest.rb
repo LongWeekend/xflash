@@ -16,7 +16,7 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
 
   def test_pinyin_3
     reading = get_pinyin_unicode_for_reading("gai3 bian1")
-    expected_reading = "găibiān"
+    expected_reading = "gǎibiān"
     assert_equal(expected_reading,reading)
   end  
   
