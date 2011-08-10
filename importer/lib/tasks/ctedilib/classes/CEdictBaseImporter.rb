@@ -15,7 +15,7 @@ class CEdictBaseImporter
     # MMA - not sure this is used anymore
     @config[:entry_type] = 0
     @config[:skipped_data] = []
-
+ 
     # Defaults, use setters to change
     @config[:sql_buffer_size] = 30000
     @config[:noisy_debug] = true
@@ -31,7 +31,7 @@ class CEdictBaseImporter
       exit_with_error("Importer not configured correctly.", @config)
     end
 
-    bulkSQL = BulkSQLRunner.new(config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
+    bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
     @config[:data].each do |rec|
       bulkSQL.add( block.call(rec) )
     end
