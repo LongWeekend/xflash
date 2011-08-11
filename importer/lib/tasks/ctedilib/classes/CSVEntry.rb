@@ -4,7 +4,7 @@ class CSVEntry < Entry
   # Parses a line from the data source
   #===================================
   def parse_line (line = "")
-    init
+    init()
   
     # A little sanity checking on line
     if line.nil?
@@ -21,7 +21,10 @@ class CSVEntry < Entry
       @grade = segments[4].gsub("\"","").strip
       pos_with_parens = segments[5].gsub("\"","")
       @pos << pos_with_parens[1..(pos_with_parens.length-2)]
-      @meanings = segments[6].chop.split(",")
+      # Get the meanings with the comma separated, 
+      # also, make sure we dont include the spaces.
+      @meanings = Array.new()
+      @meanings.add_element_with_stripping_from_array!(segments[6].chop().split(","))
       return true
     else
       return false
