@@ -234,11 +234,11 @@
   if (!self.hasfinishedSetAlertShowed)
   {
     UIAlertView *alertView = [[UIAlertView alloc] 
-                              initWithTitle:@"Study Set Learned" 
-                              message:@"Congratulation! You've already learned this set so we will show cards that usually would be hidden."
-                              delegate:self 
-                              cancelButtonTitle:@"Change Set"
-                              otherButtonTitles:@"OK", nil];
+                            initWithTitle:@"Study Set Learned" 
+                            message:@"Congratulations! You've already learned this set. We will show cards that would usually be hidden."
+                            delegate:self 
+                            cancelButtonTitle:@"Change Set"
+                            otherButtonTitles:@"OK", nil];
     
     [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
     [alertView show];
