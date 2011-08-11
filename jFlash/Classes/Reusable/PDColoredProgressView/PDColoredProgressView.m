@@ -70,15 +70,6 @@
 		CGRect upperhalf = rect;
 		upperhalf.size.height /= 1.75;
 		upperhalf.origin.y = 0;
-/*		
-		CGContextSetRGBFillColor(ctx, 202.0/255.0, 202.0/255.0, 202.0/255.0, 0.9);
-		CGContextFillRect(ctx, upperhalf);
-		
-		//fill a part of the upper half with a somewhat darker grey
-		CGRect upperhalfTop = upperhalf;
-		upperhalfTop.size.height /= 2.7;
-		CGContextSetRGBFillColor(ctx, 163.0/255.0, 163.0/255.0, 163.0/255.0, 0.8);
-		CGContextFillRect(ctx, upperhalfTop); */
 		
 		//fill the progress part with our tintcolor
 		if(_tintColor == nil)

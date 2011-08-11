@@ -115,102 +115,11 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
   CGContextStrokePath(c);                      
 }
 
-/*
-// Alternatve method, but produces softer borders
- 
-- (void)drawRect:(CGRect)rect {
-  // Drawing code
-  CGContextRef c = UIGraphicsGetCurrentContext();
-  CGContextSetFillColorWithColor(c, [fillColor CGColor]);
-  CGContextSetStrokeColorWithColor(c, [borderColor CGColor]);
-  CGContextSetLineWidth(c, BORDER_SIZE);
-  
-  if (position == CustomCellBackgroundViewPositionTop) 
-  {
-    CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect) , maxx = CGRectGetMaxX(rect) ;
-    CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
-    minx = minx + 1;
-    miny = miny + 1;
-    
-    maxx = maxx - 1;
-    maxy = maxy ;
-    
-    CGContextMoveToPoint(c, minx, maxy);
-    CGContextAddArcToPoint(c, minx, miny, midx, miny, ROUND_SIZE);
-    CGContextAddArcToPoint(c, maxx, miny, maxx, maxy, ROUND_SIZE);
-    CGContextAddLineToPoint(c, maxx, maxy);
-    
-    CGContextClosePath(c);
-    CGContextDrawPath(c, kCGPathFillStroke);                
-    return;
-  }
-  else if (position == CustomCellBackgroundViewPositionBottom)
-  {
-    
-    CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect) , maxx = CGRectGetMaxX(rect) ;
-    CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
-    minx = minx + 1;
-    miny = miny ;
-    
-    maxx = maxx - 1;
-    maxy = maxy - 1;
-    
-    CGContextMoveToPoint(c, minx, miny);
-    CGContextAddArcToPoint(c, minx, maxy, midx, maxy, ROUND_SIZE);
-    CGContextAddArcToPoint(c, maxx, maxy, maxx, miny, ROUND_SIZE);
-    CGContextAddLineToPoint(c, maxx, miny);
-
-    CGContextClosePath(c);
-    CGContextDrawPath(c, kCGPathFillStroke);        
-    return;
-  }
-  else if (position == CustomCellBackgroundViewPositionMiddle) 
-  {
-    CGFloat minx = CGRectGetMinX(rect) , maxx = CGRectGetMaxX(rect) ;
-    CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
-    minx = minx + 1;
-    miny = miny ;
-    
-    maxx = maxx - 1;
-    maxy = maxy ;
-    
-    CGContextMoveToPoint(c, minx, miny);
-    CGContextAddLineToPoint(c, maxx, miny);
-    CGContextAddLineToPoint(c, maxx, maxy);
-    CGContextAddLineToPoint(c, minx, maxy);
-    
-    CGContextClosePath(c);
-    CGContextDrawPath(c, kCGPathFillStroke);        
-    return;
-  }
-  else if (position == CustomCellBackgroundViewPositionSingle)
-  {
-    CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect) , maxx = CGRectGetMaxX(rect) ;
-    CGFloat miny = CGRectGetMinY(rect) , midy = CGRectGetMidY(rect) , maxy = CGRectGetMaxY(rect) ;
-    minx = minx + 1;
-    miny = miny + 1;
-    maxx = maxx - 1;
-    maxy = maxy - 1;
-    
-    CGContextMoveToPoint(c, minx, midy);
-    CGContextAddArcToPoint(c, minx, miny, midx, miny, ROUND_SIZE);
-    CGContextAddArcToPoint(c, maxx, miny, maxx, midy, ROUND_SIZE);
-    CGContextAddArcToPoint(c, maxx, maxy, midx, maxy, ROUND_SIZE);
-    CGContextAddArcToPoint(c, minx, maxy, minx, midy, ROUND_SIZE);
-    
-    CGContextClosePath(c);
-    CGContextDrawPath(c, kCGPathFillStroke);                
-    return;         
-  }
-}
-
-*/
 - (void)dealloc {
   [borderColor release];
   [fillColor release];
   [super dealloc];
 }
-
 
 @end
 
