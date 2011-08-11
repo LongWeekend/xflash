@@ -21,10 +21,12 @@ class CSVEntry < Entry
       @grade = segments[4].gsub("\"","").strip
       pos_with_parens = segments[5].gsub("\"","")
       @pos << pos_with_parens[1..(pos_with_parens.length-2)]
+      # We dont want the extra quotes in the end of the meaning, do we?
+      clean_raw_meanings = segments[6].chop().gsub("\"","")
       # Get the meanings with the comma separated, 
       # also, make sure we dont include the spaces.
       @meanings = Array.new()
-      @meanings.add_element_with_stripping_from_array!(segments[6].chop().split(","))
+      @meanings.add_element_with_stripping_from_array!(clean_raw_meanings.split(","))
       return true
     else
       return false

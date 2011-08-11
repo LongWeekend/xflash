@@ -14,7 +14,6 @@ module DatabaseHelpers
 
   # Create connection to DB in instance scope
   def connect_db
-    breakpoint
     if !$cn
       ActiveRecord::Base.establish_connection (
          :adapter  => :mysql2,

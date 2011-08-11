@@ -21,8 +21,10 @@ class Tags800WordsImporter < TagsBaseImporter
       result_set.each do | card_id, headword_trad, reading, meaning, meaning_fts |
         # Try to get the pinyin code for the reading 
         # for the card result with the same headword  
-        pinyin_unicode = get_pinyin_unicode_for_reading(reading)
-        if (pinyin_unicode == rec.pinyin)
+        pinyin_unicode = get_pinyin_unicode_for_reading(reading.downcase())
+        ### Made the reading strings in a downcase for consistencies comparison (above)
+        ### Also, downcase the pinyin string from the tag entry (below)
+        if (pinyin_unicode == rec.pinyin.downcase())
           #puts ("Character: %s has pinyin unicode %s is a match with rec %s." % [rec.headword_trad, rec.pinyin, pinyin_unicode])
           exact_match = true
         else
@@ -37,20 +39,18 @@ class Tags800WordsImporter < TagsBaseImporter
           if (similar)
             # puts ("---------------")
             # puts ("[%s]The reading: %s has similar pinyin with: %s. Result: %s" % [rec.headword_trad, reading, rec.pinyin, pinyin_unicode])
-            # puts ("Meaning %s in inside %s" % [rec.meanings.join("//").to_s(), meanings.join(";").to_s()])
+            # puts ("Meaning %s is inside %s" % [rec.meanings.join("//").to_s(), meanings.join(";").to_s()])
             # puts ("---------------")
             exact_match = true
-          else
-            puts ("Meaning %s in inside %s" % [rec.meanings.join("//").to_s(), meanings.join(";").to_s()])
           end
         end
         count = count + 1
       end # End of the query loop
       
       if (count <= 0)
-        puts ("[No Record]There are no card found in the card_staging with headword: %s\n" % [rec.headword_trad])
+        puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
       elsif (!exact_match)
-        puts ("There are no card found for entry: %s, with reading: %s\nMeaning: %s\n" % 
+        puts ("There are no card found for entry: %s, with reading: %s\nMeaning: %s\n\n" % 
                 [rec.headword_trad, rec.pinyin, rec.meanings.join("//").to_s()])  
       end
     end # End of the super do |rec| loop
