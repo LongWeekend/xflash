@@ -29,6 +29,16 @@ class Entry
   def self.is_pos_tag?(tag = "")
     return (@@pos_tags.index(tag) ? true : false)
   end
+  
+  def has_similar_meaning?(array_of_meanings = "")
+    begin
+      # Make sure that this instance is being compared with
+      # the array of meanings. See whether it has similar meaning.
+      intersection = @meanings & array_of_meanings
+      return (intersection.length() > 0)
+    end unless !(array_of_meanings.kind_of?(Array))
+    return false
+  end
 
   #===================================
   # Setters

@@ -9,6 +9,10 @@ jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
 importer/rack/ruby/*
 importer/Gemfile.lock
 
+## XCode Noise
+*.mode1v3
+*.pbxuser
+
 ## MacOSX Noise
 .DS_Store
 jFlash/Classes/External/sqlite/sqlite3/sqlite3.xcodeproj/project.xcworkspace
