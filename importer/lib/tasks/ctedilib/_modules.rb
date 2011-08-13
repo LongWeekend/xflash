@@ -192,7 +192,7 @@ module ImporterHelpers
     ## TODO: Think about the tone-5
     ## http://en.wikipedia.org/wiki/Pinyin#Tones  
     # Only runs if the reading actually has something
-    if (readings.strip().length() > 0)
+    if ((readings) && (readings.strip().length() > 0))
       # Variable to persist the final result.
       result = ""
       # Loop through the individual readings.
@@ -230,11 +230,13 @@ module ImporterHelpers
           if ((vocal) && (vocal.strip().length() > 0))
             diacritic = get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
-          end                    
+          end
+        elsif (reading.match($regexes[:pinyin_separator]))
+          result << " %s " % [reading]
         else
           # Give the feedback if we dont know what to do
           # This should be a very rare cases. (Throw an exception maybe?)
-          puts "There is no tone: %s defined for pinyin reading" % tone
+          puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
       end
       return result
