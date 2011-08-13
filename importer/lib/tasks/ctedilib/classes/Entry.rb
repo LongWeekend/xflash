@@ -7,6 +7,7 @@ class Entry
   #===================================
   # Initializes a new entry
   #===================================
+  
   def init
     @id = -1
     @pos = []
@@ -26,6 +27,7 @@ class Entry
   #===================================
   # Helpers
   #===================================
+  
   def self.is_pos_tag?(tag = "")
     return (@@pos_tags.index(tag) ? true : false)
   end
@@ -43,6 +45,7 @@ class Entry
   #===================================
   # Setters
   #===================================
+  
   def set_id(new_id = -1)
     @id = new_id
   end
