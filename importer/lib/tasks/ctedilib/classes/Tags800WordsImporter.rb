@@ -13,19 +13,13 @@ class Tags800WordsImporter < TagsBaseImporter
       # Debug purposes only.
       #puts ("Processing: %s" % [rec.headword_trad])
       
+      result = find_cards_similar_to(rec)
+      
       # Prepare for some local variables to indicate the exact_match and the query
       exact_match = false
       count = 0
       select_query = "SELECT * FROM cards_staging"
       result_set = $cn.execute(select_query)
-      
-      result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
-        
-        card = CardEntry.new()
-        card.parse_line(rec)
-        
-      end
-      
 =begin
       result_set.each do | card_id, headword_trad, reading, meaning, meaning_fts |
         # Try to get the pinyin code for the reading 
