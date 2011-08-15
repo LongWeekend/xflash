@@ -153,9 +153,7 @@ enum ControlSectionRows
     cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
     BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
     
-    NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Learned Cards"];
-    [[cell textLabel] setText:buriedStr];
-    [buriedStr release];
+    [[cell textLabel] setText:@"Hide Learned Cards"];
     
     //Documentation says that the size component will be completely ignored
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
