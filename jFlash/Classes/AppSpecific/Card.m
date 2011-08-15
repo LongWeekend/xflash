@@ -173,6 +173,16 @@
 	}
 }
 
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[self class]])
+  {
+    Card *anotherCard = (Card *)object;
+    return [anotherCard cardId] == [self cardId];
+  }
+  return NO;
+}
+
 
 //! Standard dealloc
 - (void) dealloc
