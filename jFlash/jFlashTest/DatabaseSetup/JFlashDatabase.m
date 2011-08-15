@@ -11,6 +11,7 @@
 #import "SynthesizeSingleton.h"
 #import "LWEFile.h"
 #import "LWEDatabase.h"
+#import "Constants.h"
 
 NSString * const JFLASH_CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
 NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
@@ -29,7 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
 - (BOOL)setupTestDatabaseAndOpenConnectionWithError:(NSError **)error
 {
   //copy it to the user documents folder
-  BOOL result = [LWEFile copyFromBundleWithFilename:JFLASH_CURRENT_USER_DATABASE toDocumentsWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE shouldOverwrite:YES];
+  BOOL result = [LWEFile copyFromBundleWithFilename:LWE_CURRENT_USER_DATABASE toDocumentsWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE shouldOverwrite:YES];
   if (!result)
   {
     //Cannot copy database

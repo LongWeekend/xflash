@@ -11,6 +11,7 @@ load File.dirname(__FILE__) + "/classes/CEdictEntry.rb"
 load File.dirname(__FILE__) + "/classes/BookEntry.rb"
 load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
+load File.dirname(__FILE__) + "/classes/CardEntry.rb"
 
 # Different parser types
 load File.dirname(__FILE__) + "/classes/_parser.rb"
@@ -19,11 +20,17 @@ load File.dirname(__FILE__) + "/classes/HSKParser.rb"
 load File.dirname(__FILE__) + "/classes/CSVParser.rb"
 load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 
+#added
+load File.dirname(__FILE__) + "/classes/TagsBaseConfiguration.rb"
+load File.dirname(__FILE__) + "/classes/TagsBaseImporter.rb"
+load File.dirname(__FILE__) + "/classes/Tags800WordsImporter.rb"
+
 # Importers
 load File.dirname(__FILE__) + "/classes/CEdictBaseImporter.rb"
 load File.dirname(__FILE__) + "/classes/CEdictImporter.rb"
 load File.dirname(__FILE__) + "/classes/CEdictExporter.rb"
 
 # Required Gems
-require 'levenshtein'
+#require 'levenshtein'
 require 'base64'
+#require 'ruby-debug'
