@@ -11,6 +11,7 @@ class String
     end
   end
   
+=begin
   def is_similar_pinyin?(another_reading)
     result = false
     begin
@@ -25,12 +26,18 @@ class String
         return true
       else
         # Implement to check the tone 5
+        another_reading.split(" ").each do | reading |
+          if (reading.scan("5").length() > 0)
+            
+          end
+        end
         return false
       end
       
     end unless !another_reading.kind_of?(String)
     return false
   end
+=end
 end
 
 class Array
