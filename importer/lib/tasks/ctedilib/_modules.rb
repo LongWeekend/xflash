@@ -467,3 +467,59 @@ SYSTEM_CALL_FAILED
   end
 
 end
+
+module CardHelpers
+  
+  # Initialise the card-entries hash and 
+  # get the card_id as the id and the card object as the values
+  def get_all_cards_from_db()
+     if ($card_entries)
+       puts "Card entries has been initialised, not going to initialised it twice."
+       return false
+     end
+     
+     # Connect to db first
+     connect_db()
+     # Allocate a new hash object to the card_entries
+     $card_entries = Hash.new()
+     # Get the entire data from the database
+     select_query = "SELECT * FROM cards_staging"
+     result_set = $cn.execute(select_query)
+     
+     # For each record in the result set
+     result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
+       # Initialise the card object
+       card = CardEntry.new()
+       card.parse_line(rec)
+       # Get the card id and makes that a symbol for the hash key.
+       card_id = rec[:card_id]
+       # puts "Inserting to hash with key: %s" % [card_id.to_s()]
+       $card_entries[card_id.to_s().to_sym()] = card
+     end # End for-each
+  end # End for method definition
+  
+  # Find cards object which has similarities with the entry as the parameter
+  def find_cards_similar_to(entry)
+    # Make sure we only want the entry as an 
+    # inheritance instances of Entry.
+    if (!entry.kind_of?(Entry))
+      return nil
+    end
+    
+    # If this has not been setup
+    get_all_cards_from_db()
+    
+    # Prepare the result to put the matches and 
+    # the cards object from the Hash-values
+    result = Array.new()
+    cards = $card_entries.values()
+    
+    # First step, get it from the headword
+    headword_trad_match = cards.select {|card| card.headword_trad == entry.headword_trad}
+    result = result + headword_trad_match unless ((headword_trad_match==nil)||(headword_trad_match.length()<=0))
+    
+    return result
+    
+  end
+  
+end
