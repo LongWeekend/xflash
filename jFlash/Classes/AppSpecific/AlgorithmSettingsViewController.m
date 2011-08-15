@@ -150,7 +150,7 @@ enum ControlSectionRows
   }
   else if (indexPath.section == kShowBurriedSection)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
     BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
     
     NSString *buriedStr = [[NSString alloc] initWithFormat:@"%@", @"Hide Learned Cards"];
