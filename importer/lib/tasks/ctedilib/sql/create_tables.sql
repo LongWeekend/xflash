@@ -13,6 +13,9 @@ CREATE TABLE `cards_staging` (
   `is_erhua_variant` tinyint(1) NOT NULL DEFAULT '0',
   `variant` varchar(255) DEFAULT NULL,
   `cedict_hash` longblob NOT NULL,
+  `referenced_cards` varchar(255) DEFAULT NULL,
+  `is_reference_only` tinyint(1) DEFAULT '0',
+  `is_proper_noun` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`card_id`),
   KEY `headword_trad` (`headword_trad`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -65,7 +65,7 @@ class CEdictImporter < CEdictBaseImporter
       
       @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
       @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
-      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,'%s');"
+      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
 
       # Processing flags
       duplicate_exists = false
@@ -129,6 +129,7 @@ class CEdictImporter < CEdictBaseImporter
             (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
             (cedict_rec.is_only_redirect? ? "1" : "0"),
             (cedict_rec.has_variant ? "1" : "0"), (cedict_rec.is_erhua_variant ? "1" : "0"),
+            (cedict_rec.is_proper_noun? ? "1" : "0"),
             (cedict_rec.variant_of ? "'"+mysql_escape_str(cedict_rec.variant_of)+"'" : "NULL"), serialised_cedict_hash]
 
         new_counter = new_counter + 1

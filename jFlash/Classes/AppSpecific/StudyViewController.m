@@ -419,13 +419,13 @@
       numViewed++;
       currentRightStreak++;
       currentWrongStreak = 0;
+      [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
       nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
       {
         [self _notifyUserStudySetHasBeenLearned];
       }
-      [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
       break;
       
     case WRONG_BTN:
@@ -434,9 +434,9 @@
       currentWrongStreak++;
       currentRightStreak = 0;
       [self setFinishedSetAlertShowed:NO];
+      [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
       nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
-      [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
       break;      
   }
   [self doChangeCard:nextCard direction:direction];

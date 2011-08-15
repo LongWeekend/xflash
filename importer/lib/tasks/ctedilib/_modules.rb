@@ -16,7 +16,7 @@ module DatabaseHelpers
   def connect_db
     if !$cn
       ActiveRecord::Base.establish_connection (
-         :adapter  => "mysql",
+         :adapter  => :mysql2,
          :database => $options[:mysql_name],
          :port     => $options[:mysql_port],
          :host     => $options[:mysql_host],
@@ -187,6 +187,74 @@ end
 
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
+  
+  def get_pinyin_unicode_for_reading(readings="")
+    ## TODO: Think about the tone-5
+    ## http://en.wikipedia.org/wiki/Pinyin#Tones  
+    # Only runs if the reading actually has something
+    if ((readings) && (readings.strip().length() > 0))
+      # Variable to persist the final result.
+      result = ""
+      # Loop through the individual readings.
+      readings.split($delimiters[:cflash_readings]).each do | reading |
+        
+        # Just to get the tone in string (even if it should be a number)
+        tone = ""
+        tone << reading.slice(reading.length()-1)
+        
+        if (tone.match($regexes[:pinyin_tone]))
+          found_diacritic = false
+          # Get the reading without the number (tone)
+          reading = reading.slice(0, reading.length()-1)
+          
+          vocals = reading.scan($regexes[:vocal])
+          num_of_vocal = vocals.length
+           
+          vocal = ""
+          if (num_of_vocal == 1)
+            # Take the vocal, directly if there is only 1 vocal.
+            vocal = vocals[0]
+          else
+            vocal = reading.scan($regexes[:diacritic_vowel1])[0]
+            
+            vocal = reading.scan($regexes[:diacritic_vowel2])[0] unless vocal
+            if (vocal)
+              # Get the "o" in the 'ou' scan.
+              vocal = vocal[0].chr()
+            end
+            
+            # If everything else fails, get the second vocal.
+            vocal = vocals[1] unless vocal
+          end
+          
+          if ((vocal) && (vocal.strip().length() > 0))
+            diacritic = get_unicode_for_diacritic(vocal, tone)
+            result << reading.sub(vocal, diacritic)
+          end
+        elsif (reading.match($regexes[:pinyin_separator]))
+          result << " %s " % [reading]
+        else
+          # Give the feedback if we dont know what to do
+          # This should be a very rare cases. (Throw an exception maybe?)
+          puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
+        end
+      end
+      return result
+    end
+
+    # Back with nothing if there is no reading supplied
+    return ""
+  end
+  
+  def get_unicode_for_diacritic(vocal, tone)
+    the_vocal_sym = (vocal + tone).to_sym()
+    return [$chinese_reading_unicode[the_vocal_sym]].pack('U*')
+  end
+  
+  def fix_unicode_for_tone_3(pinyin)
+    # GSUB accepts hashes on Ruby 1.9 but not 1.8.  We have it categorized in in additions as hash_gsub
+    return pinyin.hash_gsub(/[ăĕĭŏŭ]/,{'ă'=>'ǎ','ĕ'=>'ě','ĭ'=>'ǐ','ŏ'=>'ǒ','ŭ'=>'ǔ'})
+  end
 
   def prt_dotted_line(txt="")
     prt "---------------------------------------------------------------------#{txt}"

@@ -15,7 +15,7 @@ class CEdictBaseImporter
     # MMA - not sure this is used anymore
     @config[:entry_type] = 0
     @config[:skipped_data] = []
-
+ 
     # Defaults, use setters to change
     @config[:sql_buffer_size] = 30000
     @config[:noisy_debug] = true

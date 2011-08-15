@@ -1,10 +1,13 @@
 class Entry
 
+  include ObjectSpace
+
   @@pos_tags = ["Adv","Conj","VS","VA","N","M","Nb","Prep"]
 
   #===================================
   # Initializes a new entry
   #===================================
+  
   def init
     @id = -1
     @pos = []
@@ -24,13 +27,25 @@ class Entry
   #===================================
   # Helpers
   #===================================
+  
   def self.is_pos_tag?(tag = "")
     return (@@pos_tags.index(tag) ? true : false)
+  end
+  
+  def has_similar_meaning?(array_of_meanings = "")
+    begin
+      # Make sure that this instance is being compared with
+      # the array of meanings. See whether it has similar meaning.
+      intersection = @meanings & array_of_meanings
+      return (intersection.length() > 0)
+    end unless !(array_of_meanings.kind_of?(Array))
+    return false
   end
 
   #===================================
   # Setters
   #===================================
+  
   def set_id(new_id = -1)
     @id = new_id
   end
@@ -49,6 +64,27 @@ class Entry
       end
     end
     return all_tags.flatten
+  end
+  
+  def to_s
+  	# Get the name of the class in string.
+    class_name_str = self.class().to_s()
+    
+    # Concatenate the entire class instance variables and
+    # its values.
+    ivars = "["
+    self.instance_variables.each do |var|
+    	val = self.instance_variable_get(var)
+    	if val.kind_of? @meanings.class
+    		val = val.join("//")
+    	end
+		ivars << var + ": " + val.to_s() + "\n"
+    end
+    ivars[ivars.length-1] = "]"
+    
+    # Constructs the string and return it back
+    result = "<%s: 0x%08x>\n%s\n\n"
+  	return result % [class_name_str, self.object_id, ivars]
   end
   
   def id
@@ -79,7 +115,6 @@ class Entry
     @grade
   end
   
-  
   def classifier
     @classifier
   end
@@ -98,6 +133,15 @@ class Entry
 
   def is_only_redirect?
     return (meanings.empty? && (references.empty? == false))
+  end
+  
+  def is_proper_noun?
+    # Pinyin begins with a capital letter
+    pn_regex = /\A[A-Z]+[a-z0-9\s]+/
+    @pinyin.scan(pn_regex) do |match|
+      return true
+    end
+    return false
   end
   
   def references
