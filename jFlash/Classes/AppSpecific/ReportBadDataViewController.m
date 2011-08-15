@@ -113,29 +113,18 @@ NSString * const RBDVC_USER_TEXT_BOX_DEFAULT = @"How can we make it Awesome? Ex:
   }
   
   LWE_LOG(@"Generating data dictionary for Flurry - logging event about cardId %d",[_badCard cardId]);
-  
-#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-  // Move the card to an NSDictionary so we can make it portable
-  NSDictionary *tmpCard = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
-                           [_badCard headword],@"headword",
-                           [_badCard meaning],@"meaning",
-                           [_badCard reading],@"reading",
-                           [_badCard romaji],@"romaji",nil];
 
   // Generate dictionary of user data to send to Flurry
-  NSMutableArray *membership = [TagPeer membershipListForCardId:_badCard.cardId];
   NSString *issue = [_issueTypeArray objectAtIndex:_userSelectedIssueType];
   NSDictionary *dataToSend = [NSDictionary dictionaryWithObjectsAndKeys:
-                              tmpCard,@"card",
+                              [NSNumber numberWithInt:[_badCard cardId]],@"card_id",
                               [NSNumber numberWithInt:_activeTagId],@"active_tag_id",
                               _activeTagName,@"active_tag_name",
                               issue,@"issue_type",
                               [[self userMsgInputBox] text],@"user_message",
-                              [[self userEmailBox] text],@"user_email",
-                              membership,@"tag_membership",nil];
+                              [[self userEmailBox] text],@"user_email",nil];
   [FlurryAPI logEvent:@"userBadDataReport" withParameters:dataToSend];
-#endif
+
   [self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
