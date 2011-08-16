@@ -35,5 +35,43 @@ class CardEntriesTest < Test::Unit::TestCase
     puts "Entry %s has been found in card entry: %s" % [entry, results[0]]
     assert_equal(results[0].headword_trad, entry.headword_trad)
   end
+  
+  def test_look_for_headword_cards_3
+    entry = CSVEntry.new
+    entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
+    
+    results = find_cards_similar_to(entry)
+  
+    assert_equal(results.length(), 1)
+    puts "Entry %s has been found in card entry: %s" % [entry, results[0]]
+    assert_equal(results[0].headword_trad, entry.headword_trad)
+  end
+  
+  def test_similarity_1
+    # Get the entry
+    entry = CSVEntry.new
+    entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
+    
+    # Get the card
+    connect_db()
+    card = nil
+    select_query = "SELECT * FROM cards_staging WHERE headword_trad = '愛戴'"
+    $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
+      card = CardEntry.new()
+      card.parse_line(rec)
+    end    
+    
+    # Assertion
+    puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
+    criteria = $options[:similarities_level][:headword] | $options[:similarities_level][:reading] | $options[:similarities_level][:meaning]
+    assert_equal(card.similar_to?(entry, criteria), true)
+  end
+  
+  def test_binary_operator
+    a = $options[:similarities_level][:headword]
+    b = $options[:similarities_level][:headword] | $options[:similarities_level][:reading]
+    puts a
+    puts b
+  end
 
 end
