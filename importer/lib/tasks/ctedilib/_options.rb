@@ -52,6 +52,7 @@ $options[:system_tags] = {
 
 # Global shared object cache (e.g. for pos tag data or similar 'get once' data)
 $shared_cache = {}
+$cards_entries = {}
 
 # Global Registers (Instance Vars)
 $options[:mysql_time_format] = "'%Y-%m-%d %H:%M:%S'"
