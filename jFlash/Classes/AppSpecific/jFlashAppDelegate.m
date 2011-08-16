@@ -26,8 +26,7 @@
 #pragma mark -
 #pragma mark URL Handling
 
-// handles URL openings from other apps
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (NSString *) getDecodedSearchTerm: (NSURL *) url  
 {
   NSString *searchTerm = [url unicodeAbsoluteString];
   if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
@@ -35,6 +34,15 @@
     searchTerm = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   }
   searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  return searchTerm;
+}
+
+// handles URL openings from other apps
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  NSString *searchTerm;
+  searchTerm = [self getDecodedSearchTerm: url];
+
   if ([self.rootViewController isFinishedLoading])
   {
     [self.rootViewController switchToSearchWithTerm:searchTerm];
@@ -97,10 +105,8 @@
   {
     // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
     // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    // REVIEW: This is copy pasted code Mark, very bad. Should create a method to do this instead that gets called
-    // from both locations - RSH
-    NSString* searchTerm = [aUrl absoluteString];
-    searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+    NSString *searchTerm;
+    searchTerm = [self getDecodedSearchTerm: aUrl];
     [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
     _searchedTerm = [searchTerm retain];
   }
