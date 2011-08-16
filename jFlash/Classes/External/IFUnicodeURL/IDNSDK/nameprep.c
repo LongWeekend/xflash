@@ -73,7 +73,8 @@ static const int SCount = 11172;  /* LCount * NCount */
 static void insert( DWORD * target, size_t * length, size_t offset, DWORD ch ) 
 {
   int i;
-  if (offset < 0 || offset > *length) {return;}
+  size_t zero = 0;
+  if (offset < zero || offset > *length) {return;}
 
   for (i=(*length); i>offset; i--) {target[i] = target[i-1];}
 
