@@ -474,7 +474,7 @@ module CardHelpers
   # get the card_id as the id and the card object as the values
   def get_all_cards_from_db()
      if ($card_entries)
-       puts "Card entries has been initialised, not going to initialised it twice."
+       # puts "Card entries has been initialised, not going to initialised it twice."
        return false
      end
      
@@ -515,8 +515,12 @@ module CardHelpers
     cards = $card_entries.values()
     
     # First step, get it from the headword
-    headword_trad_match = cards.select {|card| card.headword_trad == entry.headword_trad}
-    result = result + headword_trad_match unless ((headword_trad_match==nil)||(headword_trad_match.length()<=0))
+    #headword_trad_match = cards.select {|card| card.headword_trad == entry.headword_trad}
+    #result = result + headword_trad_match unless ((headword_trad_match==nil)||(headword_trad_match.length()<=0))
+    
+    criteria = $options[:similarities_level][:headword] | $options[:similarities_level][:reading] | $options[:similarities_level][:meaning]
+    matches = cards.select {|card| card.similar_to?(entry, criteria)}
+    result = result + matches unless ((matches==nil)||(matches.length()<=0))
     
     return result
     

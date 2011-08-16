@@ -20,7 +20,7 @@ class CardEntry < Entry
      @headword_simp = record[:headword_simp] unless !record[:headword_simp]
      
      reading = ""
-     reading = record[:reading].downcase!() unless !record[:reading]
+     reading = record[:reading].downcase() unless !record[:reading]
      @pinyin = get_pinyin_unicode_for_reading(reading)
      
      # Get the meanings (compbination with the meaning column and the meaning_fts)
@@ -44,6 +44,35 @@ class CardEntry < Entry
      @variant_of = variant_of
       
      #@references
+   end
+   
+   def ==(another_card_entry)
+     # If the another_card_entry is not CardEntry type
+     # just return with false.
+     if (!another_card_entry.kind_of?(CardEntry))
+       return false
+     end
+     
+     return self.id == another_card_entry.id
+   end
+   
+   def similar_to?(entry, criteria)
+     # Make sure the entry is kind of Entry class
+     if !entry.kind_of?(Entry)
+       return false
+     end
+     
+     # Comparing the headword
+     same_headword_trad = self.headword_trad == entry.headword_trad
+     same_headword_simp = self.headword_simp == entry.headword_simp
+     same_headword = same_headword_trad || same_headword_simp
+     
+     # Comparing the pinyin/reading
+     same_pinyin = self.pinyin == entry.pinyin
+     
+     # Comparing the meaning
+     
+     return same_headword && same_pinyin
    end
   
 end

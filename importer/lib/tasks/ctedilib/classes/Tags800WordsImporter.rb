@@ -1,5 +1,7 @@
 class Tags800WordsImporter < TagsBaseImporter
   
+  include CardHelpers
+  
   def empty_staging_tables
     
   end
@@ -14,13 +16,20 @@ class Tags800WordsImporter < TagsBaseImporter
       #puts ("Processing: %s" % [rec.headword_trad])
       
       result = find_cards_similar_to(rec)
-      
+      count = result.length()
+      if (count <= 0)
+        puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
+      else
+        puts ("Card %s found for entry: %s\n" % [rec.to_s(), result[0].to_s()])  
+      end
+
+=begin      
       # Prepare for some local variables to indicate the exact_match and the query
       exact_match = false
       count = 0
       select_query = "SELECT * FROM cards_staging"
       result_set = $cn.execute(select_query)
-=begin
+      
       result_set.each do | card_id, headword_trad, reading, meaning, meaning_fts |
         # Try to get the pinyin code for the reading 
         # for the card result with the same headword  
