@@ -237,7 +237,6 @@
 		4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
 		4993AF901278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
 		4993AF931278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
-		4993AFE21278120000872875 /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
 		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
 		49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
@@ -358,6 +357,8 @@
 		91170DB411BF896F00D4A680 /* AlgorithmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */; };
 		911D1961137A56C8005C9B55 /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
 		911D1962137A56C8005C9B55 /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
+		911E527713FB180F00D55363 /* help in Resources */ = {isa = PBXBuildFile; fileRef = 911E527613FB180F00D55363 /* help */; };
+		911E527813FB180F00D55363 /* help in Resources */ = {isa = PBXBuildFile; fileRef = 911E527613FB180F00D55363 /* help */; };
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
 		91214F4911B601490091AFEF /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
@@ -608,7 +609,6 @@
 		91F80F7313865C8700A07663 /* nameprep.c in Sources */ = {isa = PBXBuildFile; fileRef = 91F80F7113865C8700A07663 /* nameprep.c */; };
 		D322368611D370B900B1AF15 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		D32DC3D0116D82C9005D3852 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32DC3CF116D82C9005D3852 /* Security.framework */; };
-		D3309B0F1123C7D800B73E8E /* help in Resources */ = {isa = PBXBuildFile; fileRef = D3309B031123C7D800B73E8E /* help */; };
 		D35B07731116456D00DB5E02 /* 13-target.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07081116456D00DB5E02 /* 13-target.png */; };
 		D35B07741116456D00DB5E02 /* 15-tags.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07091116456D00DB5E02 /* 15-tags.png */; };
 		D35B07751116456D00DB5E02 /* 20-gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B070A1116456D00DB5E02 /* 20-gear2.png */; };
@@ -899,6 +899,7 @@
 		911D195E137A56C8005C9B55 /* TapjoyConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnect.h; sourceTree = "<group>"; };
 		911D195F137A56C8005C9B55 /* TapjoyConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapjoyConnect.m; sourceTree = "<group>"; };
 		911D1960137A56C8005C9B55 /* TapjoyConnectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnectConstants.h; sourceTree = "<group>"; };
+		911E527613FB180F00D55363 /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
 		91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowseModeCardViewDelegate.h; path = AppSpecific/BrowseModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
@@ -1125,7 +1126,6 @@
 		91F80F7113865C8700A07663 /* nameprep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nameprep.c; sourceTree = "<group>"; };
 		D322367A11D370B900B1AF15 /* plugin-resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "plugin-resources"; path = "Assets/plugin-resources"; sourceTree = "<group>"; };
 		D32DC3CF116D82C9005D3852 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		D3309B031123C7D800B73E8E /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
 		D35B07081116456D00DB5E02 /* 13-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "13-target.png"; path = "Assets/13-target.png"; sourceTree = "<group>"; };
 		D35B07091116456D00DB5E02 /* 15-tags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "15-tags.png"; path = "Assets/15-tags.png"; sourceTree = "<group>"; };
 		D35B070A1116456D00DB5E02 /* 20-gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "20-gear2.png"; path = "Assets/20-gear2.png"; sourceTree = "<group>"; };
@@ -1810,7 +1810,7 @@
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
 				4965FD39126F6422000AC280 /* Action Bar */,
 				49D996D612705D5000D176D0 /* Common */,
-				D3309B031123C7D800B73E8E /* help */,
+				911E527613FB180F00D55363 /* help */,
 				D322367A11D370B900B1AF15 /* plugin-resources */,
 				4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */,
 				4965FD83126F7002000AC280 /* redtheme-cookie-cutters */,
@@ -2363,7 +2363,6 @@
 				D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */,
 				D35B07881116456D00DB5E02 /* scroll-more.png in Resources */,
 				D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */,
-				D3309B0F1123C7D800B73E8E /* help in Resources */,
 				917A5C7011AB844300016BD2 /* AddTagView.xib in Resources */,
 				917A5C7211AB844300016BD2 /* HelpView.xib in Resources */,
 				917A5C7311AB844300016BD2 /* MainWindow.xib in Resources */,
@@ -2505,6 +2504,7 @@
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 				91C05A3913F468D500061229 /* Default.jpg in Resources */,
+				911E527713FB180F00D55363 /* help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2596,7 +2596,6 @@
 				4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */,
 				4993AF901278024800872875 /* select-user-btn@2x.png in Resources */,
 				4993AF931278024800872875 /* twitter-bird@2x.png in Resources */,
-				4993AFE21278120000872875 /* help in Resources */,
 				91CA72FF133D216C008A89A8 /* button_black_135x40.png in Resources */,
 				91CA7300133D216C008A89A8 /* button_black_280x40.png in Resources */,
 				91CA7301133D216C008A89A8 /* button_facebook_135x40.png in Resources */,
@@ -2674,6 +2673,7 @@
 				49280A2C13962A9A00EF009C /* star-selected.png in Resources */,
 				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
 				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
+				911E527813FB180F00D55363 /* help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3016,6 +3016,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
@@ -3204,6 +3205,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = LWE_RELEASE_AD_HOC;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -3268,6 +3270,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
 					APP_STORE_FINAL,
