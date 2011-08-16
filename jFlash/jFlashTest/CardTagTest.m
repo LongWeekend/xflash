@@ -61,6 +61,7 @@ static NSString * const kDefaultGroupStudySetToCopyFrom = @"Long Weekend Favorit
     }
     else if ((i==count-1) && (!success))
     {
+      STAssertTrue(((!success) && (error != nil) && ([error code] == kAllBuriedAndHiddenError)), @"Last card also get 'removed' which should not be removed.");
       NSLog(@"[TEST LOG]Last card in an active set couldn't be removed. Error from the TagPeer: %@", error);
     }
     else

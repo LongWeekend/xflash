@@ -35,15 +35,15 @@
                                                NSLocalizedString(@"Search",@"HelpViewController.Table_WordSearch"),
                                                NSLocalizedString(@"Corrections",@"HelpViewController.Table_Corrections"),
                                                NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
-                                               NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),
-                                               NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
+                                               NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),                                               
                                                NSLocalizedString(@"Integration",@"HelpViewController.Table_Integration"),                      
                                                NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
                                                NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
+                                               NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                                               nil];
     NSArray *htmls = nil;
     // We use absolute sizes though so let the old devices scale the images down.
-    htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"feedback@2x",@"integration@2x",@"tags@2x",@"backup@2x",nil];
+    htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
     [self setSectionTitles:names];
     [self setHtmlFilenames:htmls];
     currentIndex = 0;

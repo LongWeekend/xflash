@@ -32,4 +32,17 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     assert_equal(expected_pinyin,pinyin)
   end
   
+  def test_pinyin_similarities_1
+    reading = "ài dai5"
+    pinyin = "àidāi"
+    result = pinyin.is_similar_pinyin?(reading)
+    assert_equal(result, true)
+  end
+  
+  def test_pinyin_unicode
+    reading = get_pinyin_unicode_for_reading("a5 i5 u5 e5 o5")
+    expected_pinyin = "aiueo"
+    assert_equal(reading, expected_pinyin)
+   end
+  
 end

@@ -13,11 +13,14 @@ class Tags800WordsImporter < TagsBaseImporter
       # Debug purposes only.
       #puts ("Processing: %s" % [rec.headword_trad])
       
+      result = find_cards_similar_to(rec)
+      
       # Prepare for some local variables to indicate the exact_match and the query
       exact_match = false
       count = 0
-      select_query = "SELECT card_id, headword_trad, reading, meaning, meaning_fts FROM cards_staging WHERE headword_trad = '%s'" % [rec.headword_trad]
+      select_query = "SELECT * FROM cards_staging"
       result_set = $cn.execute(select_query)
+=begin
       result_set.each do | card_id, headword_trad, reading, meaning, meaning_fts |
         # Try to get the pinyin code for the reading 
         # for the card result with the same headword  
@@ -45,14 +48,17 @@ class Tags800WordsImporter < TagsBaseImporter
           end
         end
         count = count + 1
-      end # End of the query loop
+        end # End of the query loop
+        
+        if (count <= 0)
+          puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
+        elsif (!exact_match)
+          puts ("There are no card found for entry: %s, with reading: %s\nMeaning: %s\n\n" % 
+                  [rec.headword_trad, rec.pinyin, rec.meanings.join("//").to_s()])  
+        end
+        
+=end 
       
-      if (count <= 0)
-        puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
-      elsif (!exact_match)
-        puts ("There are no card found for entry: %s, with reading: %s\nMeaning: %s\n\n" % 
-                [rec.headword_trad, rec.pinyin, rec.meanings.join("//").to_s()])  
-      end
     end # End of the super do |rec| loop
     
   end # End of the method body

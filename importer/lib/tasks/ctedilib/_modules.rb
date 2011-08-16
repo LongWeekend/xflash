@@ -192,7 +192,7 @@ module ImporterHelpers
     ## TODO: Think about the tone-5
     ## http://en.wikipedia.org/wiki/Pinyin#Tones  
     # Only runs if the reading actually has something
-    if (readings.strip().length() > 0)
+    if ((readings) && (readings.strip().length() > 0))
       # Variable to persist the final result.
       result = ""
       # Loop through the individual readings.
@@ -230,11 +230,13 @@ module ImporterHelpers
           if ((vocal) && (vocal.strip().length() > 0))
             diacritic = get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
-          end                    
+          end
+        elsif (reading.match($regexes[:pinyin_separator]))
+          result << " %s " % [reading]
         else
           # Give the feedback if we dont know what to do
           # This should be a very rare cases. (Throw an exception maybe?)
-          puts "There is no tone: %s defined for pinyin reading" % tone
+          puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
       end
       return result
@@ -464,4 +466,60 @@ SYSTEM_CALL_FAILED
     end
   end
 
+end
+
+module CardHelpers
+  
+  # Initialise the card-entries hash and 
+  # get the card_id as the id and the card object as the values
+  def get_all_cards_from_db()
+     if ($card_entries)
+       puts "Card entries has been initialised, not going to initialised it twice."
+       return false
+     end
+     
+     # Connect to db first
+     connect_db()
+     # Allocate a new hash object to the card_entries
+     $card_entries = Hash.new()
+     # Get the entire data from the database
+     select_query = "SELECT * FROM cards_staging"
+     result_set = $cn.execute(select_query)
+     
+     # For each record in the result set
+     result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
+       # Initialise the card object
+       card = CardEntry.new()
+       card.parse_line(rec)
+       # Get the card id and makes that a symbol for the hash key.
+       card_id = rec[:card_id]
+       # puts "Inserting to hash with key: %s" % [card_id.to_s()]
+       $card_entries[card_id.to_s().to_sym()] = card
+     end # End for-each
+  end # End for method definition
+  
+  # Find cards object which has similarities with the entry as the parameter
+  def find_cards_similar_to(entry)
+    # Make sure we only want the entry as an 
+    # inheritance instances of Entry.
+    if (!entry.kind_of?(Entry))
+      return nil
+    end
+    
+    # If this has not been setup
+    get_all_cards_from_db()
+    
+    # Prepare the result to put the matches and 
+    # the cards object from the Hash-values
+    result = Array.new()
+    cards = $card_entries.values()
+    
+    # First step, get it from the headword
+    headword_trad_match = cards.select {|card| card.headword_trad == entry.headword_trad}
+    result = result + headword_trad_match unless ((headword_trad_match==nil)||(headword_trad_match.length()<=0))
+    
+    return result
+    
+  end
+  
 end

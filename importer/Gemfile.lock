@@ -45,10 +45,6 @@ GEM
       nokogiri (~> 1.4)
       webrobots (>= 0.0.9, ~> 0.0)
     mime-types (1.16)
-<<<<<<< HEAD
-=======
-    mysql (2.8.1)
->>>>>>> master
     mysql2 (0.2.11)
     net-http-digest_auth (1.1.1)
     net-http-persistent (1.8)
@@ -92,9 +88,9 @@ DEPENDENCIES
   json
   mechanize
 <<<<<<< HEAD
-=======
   mysql
->>>>>>> master
+=======
+>>>>>>> rendy
   mysql2 (~> 0.2.6)
   nokogiri
   rails (= 3.0.9)
