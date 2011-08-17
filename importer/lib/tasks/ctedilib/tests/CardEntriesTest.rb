@@ -47,7 +47,7 @@ class CardEntriesTest < Test::Unit::TestCase
     assert_equal(results[0].headword_trad, entry.headword_trad)
   end
   
-  def test_similarity_1
+  def test_similarity_exact_true
     # Get the entry
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
@@ -63,15 +63,46 @@ class CardEntriesTest < Test::Unit::TestCase
     
     # Assertion
     puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
-    criteria = $options[:similarities_level][:headword] | $options[:similarities_level][:reading] | $options[:similarities_level][:meaning]
-    assert_equal(card.similar_to?(entry, criteria), true)
+    assert_equal(card.similar_to?(entry, $options[:likeness_level][:exact_match]), true)
   end
   
-  def test_binary_operator
-    a = $options[:similarities_level][:headword]
-    b = $options[:similarities_level][:headword] | $options[:similarities_level][:reading]
-    puts a
-    puts b
-  end
+  def test_similarity_partial_true
+    # The character 打擊 has different reading, but has the same meaning and headword
+    # Get the entry
+    entry = CSVEntry.new
+    entry.parse_line("378,\"0381\",\"打擊\",\"dăjí\",\"A\",\"(VA)\",\"strike,hit,attack\"")
+
+    # Get the card
+    connect_db()
+    card = nil
+    select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打擊'"
+    $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
+      card = CardEntry.new()
+      card.parse_line(rec)
+    end    
+
+    # Assertion
+    puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
+    assert_equal(card.similar_to?(entry, $options[:likeness_level][:partial_match]), true)
+   end
+   
+   def test_similarity_one_true
+     # Get the entry
+     entry = CSVEntry.new
+     entry.parse_line("377,\"0378\",\"打發\",\"dăfā\",\"A\",\"(VA)\",\"to while away (one's time)\"")
+
+     # Get the card
+     connect_db()
+     card = nil
+     select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打發'"
+     $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
+       card = CardEntry.new()
+       card.parse_line(rec)
+     end    
+
+     # Assertion
+     puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
+     assert_equal(card.similar_to?(entry, $options[:likeness_level][:one_likeness_match]), true)
+   end
 
 end
