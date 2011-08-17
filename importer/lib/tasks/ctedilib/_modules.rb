@@ -514,16 +514,8 @@ module CardHelpers
     result = Array.new()
     cards = $card_entries.values()
     
-    # First step, get it from the headword
-    #headword_trad_match = cards.select {|card| card.headword_trad == entry.headword_trad}
-    #result = result + headword_trad_match unless ((headword_trad_match==nil)||(headword_trad_match.length()<=0))
-    
-    criteria = $options[:similarities_level][:headword] | $options[:similarities_level][:reading] | $options[:similarities_level][:meaning]
-    matches = cards.select {|card| card.similar_to?(entry, criteria)}
-    result = result + matches unless ((matches==nil)||(matches.length()<=0))
-    
-    return result
-    
-  end
+    matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
+    return matches
+  end # End for method definition
   
 end

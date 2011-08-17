@@ -50,10 +50,10 @@ $options[:system_tags] = {
   'BAD_DATA' => 160
 }
 
-$options[:similarities_level] = {
-  :headword => 1,
-  :reading => 2,
-  :meaning => 4,
+$options[:likeness_level] = {
+  :exact_match => 1,
+  :partial_match => 2,
+  :one_likeness_match => 3
 }
 
 # Global shared object cache (e.g. for pos tag data or similar 'get once' data)

@@ -56,7 +56,7 @@ class CardEntry < Entry
      return self.id == another_card_entry.id
    end
    
-   def similar_to?(entry, criteria)
+   def similar_to?(entry, match_criteria=$options[:likeness_level][:partial_match])
      # Make sure the entry is kind of Entry class
      if !entry.kind_of?(Entry)
        return false
@@ -71,8 +71,30 @@ class CardEntry < Entry
      same_pinyin = self.pinyin == entry.pinyin
      
      # Comparing the meaning
-     
-     return same_headword && same_pinyin
+     intersection = self.meanings & entry.meanings
+     same_meaning = intersection.length() > 0
+     #if (same_meaning)
+       # puts ("---------------")
+       # puts ("[%s]The reading: %s has similar pinyin with: %s. Result: %s" % [rec.headword_trad, reading, rec.pinyin, pinyin_unicode])
+       # puts ("Meaning %s is inside %s" % [rec.meanings.join("//").to_s(), meanings.join(";").to_s()])
+       # puts ("---------------")
+       exact_match = true
+    # end
+    
+    if (match_criteria == $options[:likeness_level][:exact_match])
+      # Return yes if all criterion is a match
+      return same_headword && same_pinyin && same_meaning
+    elsif (match_criteria == $options[:likeness_level][:partial_match])
+      # Return yes if there is two likeness found
+      return ((same_headword && same_pinyin) || 
+              (same_headword && same_meaning) || 
+              (same_pinyin && same_meaning))
+    elsif (match_criteria == $options[:likeness_level][:one_likeness_match])
+      # Return yes if there is one likeness found.
+      return same_headword || same_pinyin || same_meaning
+    end
+    return false #If everything else fails, return with false
    end
+   
   
 end
