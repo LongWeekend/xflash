@@ -237,18 +237,6 @@ enum Sections {
 }
 
 /**
- * Checks if this is the top view controller of this stack
- */
-- (BOOL) _isTopView 
-{
-  if (self.navigationController.topViewController == self.navigationController.visibleViewController && self.groupId == 0) 
-  {
-    return YES;
-  }
-  return NO;
-}
-
-/**
  * If we are searching, there is only one section (returns 1)
  * If we are not searching, there are groups & tags (returns 2)
  */
@@ -260,7 +248,7 @@ enum Sections {
   }
   else
   {
-    if ([self _isTopView])
+    if (self.groupId == 0)
     {
       return 3; // only show the 3rd section if we are at the top of the stack
     }
@@ -271,7 +259,7 @@ enum Sections {
 
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
-  if ([self _isTopView] && section == kBackupSection)
+  if (section == kBackupSection)
   {
     return @"Backup Custom Sets";
   }
