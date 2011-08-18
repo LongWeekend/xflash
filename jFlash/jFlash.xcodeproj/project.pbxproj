@@ -105,8 +105,6 @@
 		496C7AB01263270B004B6B90 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
-		496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
-		496C7AB51263270B004B6B90 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
 		496C7AB61263270B004B6B90 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
 		496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
@@ -142,7 +140,6 @@
 		496C7ADF12632730004B6B90 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6811AB844300016BD2 /* HelpView.xib */; };
 		496C7AE112632730004B6B90 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6911AB844300016BD2 /* MainWindow.xib */; };
 		496C7AE212632730004B6B90 /* ModalInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6A11AB844300016BD2 /* ModalInputView.xib */; };
-		496C7AE312632730004B6B90 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
 		496C7AE412632730004B6B90 /* ModalTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9686811AF604900DFC3C9 /* ModalTaskView.xib */; };
 		496C7AE512632730004B6B90 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		496C7AE612632730004B6B90 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
@@ -194,7 +191,6 @@
 		496C7B1912632774004B6B90 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
 		496C7B1A12632775004B6B90 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		496C7B1B12632777004B6B90 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
-		496C7B1C12632778004B6B90 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
 		496C7B1D12632778004B6B90 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		496C7B1E12632779004B6B90 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		496C7B1F1263277A004B6B90 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
@@ -260,8 +256,6 @@
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
-		49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */; };
-		49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */; };
 		49D996C212705C8300D176D0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* Icon@2x.png */; };
 		49D997711270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
 		49D997721270640C00D176D0 /* candy-btn-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */; };
@@ -425,8 +419,6 @@
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
-		91860A951370F17E002F00DB /* ToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91860A941370F17E002F00DB /* ToolbarPicker.xib */; };
-		91860A961370F17E002F00DB /* ToolbarPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91860A941370F17E002F00DB /* ToolbarPicker.xib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
 		91C05A3D13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -594,8 +586,6 @@
 		91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */; };
 		91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */; };
 		91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */; };
-		91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */; };
-		91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */; };
 		91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
@@ -790,9 +780,6 @@
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
 		49C5BC1F11C51B0D00A595D6 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
 		49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
-		49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportBadDataViewController.h; path = AppSpecific/ReportBadDataViewController.h; sourceTree = "<group>"; };
-		49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportBadDataViewController.m; path = AppSpecific/ReportBadDataViewController.m; sourceTree = "<group>"; };
-		49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReportBadDataView.xib; path = XIBs/ReportBadDataView.xib; sourceTree = "<group>"; };
 		49D996C012705C8300D176D0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Assets/Icon@2x.png"; sourceTree = "<group>"; };
 		49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow@2x.png"; path = "Assets/candy-btn-yellow@2x.png"; sourceTree = "<group>"; };
 		49DADB7E1277F36F00B8FD72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
@@ -1004,7 +991,6 @@
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
-		91860A941370F17E002F00DB /* ToolbarPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ToolbarPicker.xib; path = XIBs/ToolbarPicker.xib; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91C05A3813F468D500061229 /* Default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Default.jpg; path = Assets/Default.jpg; sourceTree = "<group>"; };
@@ -1111,8 +1097,6 @@
 		91CBA6E911BB787A004BD0D0 /* ExampleSentencePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExampleSentencePeer.m; path = AppSpecific/ExampleSentencePeer.m; sourceTree = "<group>"; };
 		91D3CDE911D0C03F008565F8 /* practice-btn-actions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions.png"; path = "Assets/practice-btn-actions.png"; sourceTree = "<group>"; };
 		91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow.png"; path = "Assets/candy-btn-yellow.png"; sourceTree = "<group>"; };
-		91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-textarea-bg.png"; path = "Assets/what-to-fix-textarea-bg.png"; sourceTree = "<group>"; };
-		91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "what-to-fix-moodicon-quizzical.png"; path = "Assets/what-to-fix-moodicon-quizzical.png"; sourceTree = "<group>"; };
 		91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-green.png"; path = "Assets/candy-btn-green.png"; sourceTree = "<group>"; };
 		91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressBarViewController.h; path = AppSpecific/ProgressBarViewController.h; sourceTree = "<group>"; };
 		91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressBarViewController.m; path = AppSpecific/ProgressBarViewController.m; sourceTree = "<group>"; };
@@ -1555,8 +1539,6 @@
 				9179E4251384FFB000A7739B /* form-background.jpg */,
 				49B527B8127680F000EE64D3 /* Stars */,
 				49B527B7127680DB00EE64D3 /* Tab Bar Icons */,
-				91D3CF7011D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png */,
-				91D3CF6411D0F609008565F8 /* what-to-fix-textarea-bg.png */,
 				917728E011C0CA9600A90071 /* dropped-text-box.png */,
 				D35B073C1116456D00DB5E02 /* overlay-bg.png */,
 				D35B073D1116456D00DB5E02 /* overlay-btn-close.png */,
@@ -2151,13 +2133,11 @@
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
 				917A5C6B11AB844300016BD2 /* ProgressView.xib */,
-				49CDD32E11B4960A00C9F1A4 /* ReportBadDataView.xib */,
 				4951E1EB11B649B800FCE21E /* SearchUnavailableView.xib */,
 				496BE55111EC5320003AB713 /* SearchView.xib */,
 				491D7D0611C4EFFE00BF8323 /* SentenceView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
-				91860A941370F17E002F00DB /* ToolbarPicker.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
@@ -2181,8 +2161,6 @@
 				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
 				4925735211C12619006FA4E1 /* ModalTaskViewController.m */,
-				49CDD32A11B48E6D00C9F1A4 /* ReportBadDataViewController.h */,
-				49CDD32B11B48E6D00C9F1A4 /* ReportBadDataViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
@@ -2374,7 +2352,6 @@
 				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
 				49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
 				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
-				49CDD33011B4960A00C9F1A4 /* ReportBadDataView.xib in Resources */,
 				4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */,
 				4951E1EC11B649B800FCE21E /* SearchUnavailableView.xib in Resources */,
 				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
@@ -2387,8 +2364,6 @@
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
 				91D3CDEA11D0C03F008565F8 /* practice-btn-actions.png in Resources */,
 				91D3CF6211D0F4AC008565F8 /* candy-btn-yellow.png in Resources */,
-				91D3CF6511D0F609008565F8 /* what-to-fix-textarea-bg.png in Resources */,
-				91D3CF7111D0F76D008565F8 /* what-to-fix-moodicon-quizzical.png in Resources */,
 				91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */,
 				D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */,
 				D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */,
@@ -2499,7 +2474,6 @@
 				91CA7428133D216C008A89A8 /* JRWebViewController.xib in Resources */,
 				91CA7429133D216C008A89A8 /* JREngage-Info.plist in Resources */,
 				49EE9706134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.xib in Resources */,
-				91860A951370F17E002F00DB /* ToolbarPicker.xib in Resources */,
 				91E40EDA1373D145009B3167 /* downloadedPlugin.plist in Resources */,
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
@@ -2526,8 +2500,6 @@
 				496C7AB01263270B004B6B90 /* plugin-resources in Resources */,
 				496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */,
 				496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */,
-				496C7AB41263270B004B6B90 /* what-to-fix-moodicon-quizzical.png in Resources */,
-				496C7AB51263270B004B6B90 /* what-to-fix-textarea-bg.png in Resources */,
 				496C7AB61263270B004B6B90 /* candy-btn-yellow.png in Resources */,
 				496C7AB81263270B004B6B90 /* practice-btn-actions.png in Resources */,
 				496C7AB91263270B004B6B90 /* dropped-text-box.png in Resources */,
@@ -2560,7 +2532,6 @@
 				496C7ADF12632730004B6B90 /* HelpView.xib in Resources */,
 				496C7AE112632730004B6B90 /* MainWindow.xib in Resources */,
 				496C7AE212632730004B6B90 /* ModalInputView.xib in Resources */,
-				496C7AE312632730004B6B90 /* ReportBadDataView.xib in Resources */,
 				496C7AE412632730004B6B90 /* ModalTaskView.xib in Resources */,
 				496C7AE512632730004B6B90 /* PluginSettingsView.xib in Resources */,
 				496C7AE612632730004B6B90 /* ProgressBarViewController.xib in Resources */,
@@ -2663,7 +2634,6 @@
 				91CA7388133D216C008A89A8 /* JRWebViewController.xib in Resources */,
 				91CA7389133D216C008A89A8 /* JREngage-Info.plist in Resources */,
 				49EE9707134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.xib in Resources */,
-				91860A961370F17E002F00DB /* ToolbarPicker.xib in Resources */,
 				9179E4271384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44E1385021E00A7739B /* table-background.jpg in Resources */,
 				49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */,
@@ -2731,7 +2701,6 @@
 				91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */,
 				91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */,
 				4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */,
-				49CDD32D11B48E6D00C9F1A4 /* ReportBadDataViewController.m in Sources */,
 				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
@@ -2896,7 +2865,6 @@
 				496C7B1912632774004B6B90 /* HelpViewController.m in Sources */,
 				496C7B1A12632775004B6B90 /* HelpWebViewController.m in Sources */,
 				496C7B1B12632777004B6B90 /* ModalTaskViewController.m in Sources */,
-				496C7B1C12632778004B6B90 /* ReportBadDataViewController.m in Sources */,
 				496C7B1D12632778004B6B90 /* RootViewController.m in Sources */,
 				496C7B1E12632779004B6B90 /* StudySetViewController.m in Sources */,
 				496C7B1F1263277A004B6B90 /* StudySetWordsViewController.m in Sources */,

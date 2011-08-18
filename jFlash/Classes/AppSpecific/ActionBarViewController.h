@@ -9,20 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "AddTagViewController.h"
 #import "Constants.h"
-#import "ReportBadDataViewController.h"
 #import "jFlashAppDelegate.h"
 #import "TweetWordViewController.h"
 #import "LWETwitterEngine.h"
 #import "LWETUser.h"
 #import "LWETRequestDelegate.h"
 #import "TweetWordXAuthController.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 #define SVC_ACTION_ADDTOFAV_BUTTON 0
 #define SVC_ACTION_TWEET_BUTTON 2
 #define SVC_ACTION_REPORT_BUTTON 3
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate>
+@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate, MFMailComposeViewControllerDelegate>
 {
   IBOutlet id delegate;  
   
@@ -54,6 +56,9 @@
 - (void)setup;
 - (void)reveal;
 - (void)tweet;
+
+// bad data
+- (void)reportBadData;
 
 // action sheet
 - (IBAction)showCardActionSheet;

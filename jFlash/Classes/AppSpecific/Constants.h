@@ -50,6 +50,8 @@ extern NSString * const LWE_CURRENT_VERSION;
 extern NSString * const LWE_CURRENT_CARD_DATABASE;
 extern NSString * const LWE_CURRENT_USER_DATABASE;
 
+extern NSString * const LWE_BAD_DATA_EMAIL;
+
 #if defined(LWE_JFLASH)
 
   // LWE Favorites - JFlash

@@ -188,12 +188,7 @@
   
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
-    // TODO: iPad customization!
-    ReportBadDataViewController* rbdvc = [[ReportBadDataViewController alloc] initWithNibName:@"ReportBadDataView" forBadCard:[self currentCard]];
-    UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:rbdvc];
-    [appDelegate.rootViewController presentModalViewController:modalNavController animated:YES];
-    [modalNavController release];
-    [rbdvc release];
+    [self reportBadData];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
@@ -246,6 +241,43 @@
 //                                                           userContentOrNil:[self getTweetWord]];
 	  [self tweet];
   }
+}
+
+#pragma mark -
+#pragma mark MailCompose helper & delegate method
+
+- (void)reportBadData
+{
+  if ([MFMailComposeViewController canSendMail]) 
+  {
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    picker.mailComposeDelegate = self;
+    [picker setSubject:@"Bad Data"];
+    [picker setToRecipients:[NSArray arrayWithObjects:LWE_BAD_DATA_EMAIL, nil]];
+    
+    Tag *tmpTag = [[CurrentState sharedCurrentState] activeTag];
+    NSString *messageBody = [NSString stringWithFormat:@"How can we make this awesome?\n\n\n\nInfo For Long Weekend:\n\nCard Id: %i\nActive Tag Id: %i\nActive Tag Name: %@", [[self currentCard] cardId], tmpTag.tagId, tmpTag.tagName];
+    
+    [picker setMessageBody:messageBody isHTML:NO];
+    
+    jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.rootViewController presentModalViewController:picker animated:YES];
+    [picker release];
+  }
+  else 
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Email Not Available", @"emailVM.notAvailable.title")
+                                       message:NSLocalizedString(@"Oh no!! We can't send mail right now.", @"emailVM.notAvailable.body")];
+    
+  }
+}
+
+//! Called when dismissing email composer
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+  // remove the mail modal
+  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  [appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
