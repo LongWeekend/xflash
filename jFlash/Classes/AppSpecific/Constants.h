@@ -68,7 +68,7 @@ extern NSString * const LWE_BAD_DATA_EMAIL;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
   extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
 
-#else if defined(LWE_CFLASH)
+#elif defined(LWE_CFLASH)
 
   // "Politics" (for now) - CFlash
   #define DEFAULT_TAG_ID 42
