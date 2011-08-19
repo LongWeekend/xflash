@@ -506,7 +506,7 @@ module CardHelpers
       return nil
     end
     
-    # If this has not been setup
+    # If this has not been setup yet
     get_all_cards_from_db()
     
     # Prepare the result to put the matches and 
@@ -514,8 +514,14 @@ module CardHelpers
     result = Array.new()
     cards = $card_entries.values()
     
-    matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
-    return matches
+    criteria = Proc.new do |same_headword, same_pinyin, same_meaning|
+        ((same_headword && same_meaning) || 
+        (same_pinyin && same_meaning) ||
+        (same_headword && same_pinyin))
+    end
+  
+    #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
+    return cards.select { |card| card.similar_to?(entry, criteria) }
   end # End for method definition
   
 end

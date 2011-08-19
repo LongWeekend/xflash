@@ -26,7 +26,6 @@ class CEdictParser < Parser
         print "Backtrace: %s\n" % e.backtrace.inspect
       end
     end
-    debugger
     return entries
   end
 
