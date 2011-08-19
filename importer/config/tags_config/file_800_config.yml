@@ -1,3 +1,67 @@
-file_type: "CSV"
-file_structure: "a"
-file_tolerance: "tone"
+tags_800_beginner:
+    # File name of the source
+    file_name: "/../../../../data/cedict/tags/800+800020100915-beginner.csv"
+    
+    # Not sure
+    file_type: "CSV"
+    file_structure: "a"
+    file_tolerance: "tone"
+    
+    # Database tag_staging table column related
+    # System-readible tag name
+    tag_name: "800Words+Beginner"
+    tag_type: ""
+    
+    # User-readible name for the tag
+    short_name: "800+ Beginner"
+    
+    # Description of the tag
+    description: "800+ Words for beginner"      
+    
+    # Source of the file
+    source: "CSV File"                          
+    
+    # Source file name
+    source_name: "800+800020100915-beginner.csv"     
+    
+    # Tag should be visible
+    visible: 1                                  
+
+    parent_tag_id: 0
+    force_off: "not-sure"
+    
+tags_800_intermediate:
+    file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
+    tag_name: "800Words+Beginner"
+    tag_type: ""
+    short_name: "800+ Beginner"
+    description: "800+ Words for beginner"      
+    source: "CSV File"                          
+    source_name: "800+800020100915-mid.csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: "not-sure"
+
+tags_800_advance:
+    file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
+    tag_name: "800Words+Beginner"
+    tag_type: ""
+    short_name: "800+ Beginner"
+    description: "800+ Words for beginner"      
+    source: "CSV File"                          
+    source_name: "800+800020100915-adv.csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: "not-sure"
+    
+tag_800_test_file_small:
+    file_name: "/../../../../data/cedict/tags/test_800+800020100915.csv"
+    tag_name: "800Words+SampleTag"
+    tag_type: ""
+    short_name: "800+ Sample"
+    description: "800+ Words for testing purposes"      
+    source: "CSV File"                          
+    source_name: "test_800+800020100915.csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: "not-sure"
