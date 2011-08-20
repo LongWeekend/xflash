@@ -4,8 +4,7 @@ class TagParserTest < Test::Unit::TestCase
   
   def test_800_small
     test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
-    #configuration = TagsBaseConfiguration.new(test_configuration_file, "tag_800_test_file_small")
-    configuration = TagsBaseConfiguration.new(test_configuration_file, "asu")
+    configuration = TagsBaseConfiguration.new(test_configuration_file, "tag_800_test_file_small")
     
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = CSVParser.new(test_file_path)

@@ -28,7 +28,7 @@ tags_800_beginner:
     visible: 1                                  
 
     parent_tag_id: 0
-    force_off: "not-sure"
+    force_off: 0
     
 tags_800_intermediate:
     file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
@@ -40,7 +40,7 @@ tags_800_intermediate:
     source_name: "800+800020100915-mid.csv"     
     visible: 1                                  
     parent_tag_id: 0
-    force_off: "not-sure"
+    force_off: 0
 
 tags_800_advance:
     file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
@@ -52,7 +52,7 @@ tags_800_advance:
     source_name: "800+800020100915-adv.csv"     
     visible: 1                                  
     parent_tag_id: 0
-    force_off: "not-sure"
+    force_off: 0
     
 tag_800_test_file_small:
     file_name: "/../../../../data/cedict/tags/test_800+800020100915.csv"
@@ -64,4 +64,4 @@ tag_800_test_file_small:
     source_name: "test_800+800020100915.csv"     
     visible: 1                                  
     parent_tag_id: 0
-    force_off: "not-sure"
+    force_off: 0
