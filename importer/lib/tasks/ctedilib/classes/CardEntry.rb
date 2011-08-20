@@ -20,7 +20,7 @@ class CardEntry < Entry
      @headword_simp = record[:headword_simp] unless !record[:headword_simp]
      
      reading = ""
-     reading = record[:reading].downcase!() unless !record[:reading]
+     reading = record[:reading].downcase() unless !record[:reading]
      @pinyin = get_pinyin_unicode_for_reading(reading)
      
      # Get the meanings (compbination with the meaning column and the meaning_fts)
@@ -44,6 +44,65 @@ class CardEntry < Entry
      @variant_of = variant_of
       
      #@references
+   end
+   
+   def ==(another_card_entry)
+     # If the another_card_entry is not CardEntry type
+     # just return with false.
+     if (!another_card_entry.kind_of?(CardEntry))
+       return false
+     end
+     
+     return self.id == another_card_entry.id
+   end
+   
+   #def similar_to?(entry, match_criteria=$options[:likeness_level][:partial_match])
+   def similar_to?(entry, match_criteria)
+     # Make sure the entry is kind of Entry class
+     if !entry.kind_of?(Entry)
+       return false
+     end
+     
+     same_headword, same_pinyin, same_meaning = false, false, false
+     
+     # Comparing the headword
+     same_headword_trad = self.headword_trad == entry.headword_trad
+     same_headword_simp = self.headword_simp == entry.headword_simp
+     same_headword = same_headword_trad || same_headword_simp
+     
+     # Comparing the pinyin/reading
+     same_pinyin = self.pinyin == entry.pinyin
+     
+     intersection = self.meanings & entry.meanings
+     same_meaning = intersection.length() > 0
+     
+     return match_criteria.call(same_headword, same_pinyin, same_meaning)
+       
+=begin 
+     Comparing the meaning
+     if (((match_criteria == $options[:likeness_level][:exact_match]) && (same_pinyin && same_headword)) ||
+         ((match_criteria == $options[:likeness_level][:partial_match]) && (!(same_pinyin && same_headword))) ||
+         ((match_criteria == $options[:likeness_level][:one_likeness_match]) && (!(same_pinyin || same_headword))))
+          # Inside if body.
+          intersection = self.meanings & entry.meanings
+          same_meaning = intersection.length() > 0
+     end
+
+     if (match_criteria == $options[:likeness_level][:exact_match])
+        # Return yes if all criterion is a match
+        return same_headword && same_pinyin && same_meaning
+     elsif (match_criteria == $options[:likeness_level][:partial_match])
+        # Return yes if there is two likeness found
+        return ((same_headword && same_pinyin) || 
+                (same_headword && same_meaning) || 
+                (same_pinyin && same_meaning))
+      elsif (match_criteria == $options[:likeness_level][:one_likeness_match])
+        # Return yes if there is one likeness found.
+        return same_headword || same_pinyin || same_meaning
+      end
+      
+      return false #If everything else fails, return with false
+=end    
    end
   
 end

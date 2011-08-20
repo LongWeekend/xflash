@@ -3,7 +3,10 @@ require 'test/unit'
 class TagParserTest < Test::Unit::TestCase
   
   def test_800_small
-    test_file_path = File.dirname(__FILE__) + "/../../../../data/cedict/tags/test_800+800020100915.csv"
+    test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
+    configuration = TagsBaseConfiguration.new(test_configuration_file, "tag_800_test_file_small")
+    
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = CSVParser.new(test_file_path)
     results = parser.run()
     
@@ -11,10 +14,7 @@ class TagParserTest < Test::Unit::TestCase
     # of how many result it should be based on the test file.
     assert_equal(results.length, 42)
     
-    test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
-    configuration = TagsBaseConfiguration.new(test_configuration_file)
-    
-    importer = Tags800WordsImporter.new(results)
+    importer = Tags800WordsImporter.new(results, configuration)
     importer.import()
   end
   
@@ -26,7 +26,7 @@ class TagParserTest < Test::Unit::TestCase
     test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
     configuration = TagsBaseConfiguration.new(test_configuration_file)
     
-    importer = Tags800WordsImporter.new(results)
+    importer = Tags800WordsImporter.new(results, configuration)
     importer.import()
   end
   
@@ -38,7 +38,7 @@ class TagParserTest < Test::Unit::TestCase
     test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
     configuration = TagsBaseConfiguration.new(test_configuration_file)
     
-    importer = Tags800WordsImporter.new(results)
+    importer = Tags800WordsImporter.new(results, configuration)
     importer.import()
   end
   
