@@ -5,6 +5,7 @@ class TagsBaseImporter
   #### DESC: Class Constructors
   def initialize (data, configuration)
     @config = {}
+    @tag_id = 0
     
     # Metadata for the tag itself
     @config[:metadata] = configuration
@@ -19,6 +20,38 @@ class TagsBaseImporter
   
   def get_card_id_for_charcaters(characters)
     
+  end
+  
+  def setup_tag_row
+    # Try to connect to the database
+    connect_db()
+  
+    # Grab the config and try inserting into the tags_staging table as row
+    config = @config[:metadata]
+    inserted_short_name = config.short_name
+    insert_query = "INSERT INTO tags_staging(tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s)" %
+                      [config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off]
+            
+    # Execute the query
+    $cn.execute(insert_query)
+    
+    # After executing, get the tag_id and set it globally
+    select_query = "SELECT tag_id FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
+    $cn.execute(select_query).each do |tag_id|
+      @tag_id = tag_id
+    end
+    
+    # Puts the feedback to the user
+    puts ("\nInserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id])
+    prt_dotted_line
+  rescue
+    # In case the is some error is hapenning, try to delete from the databse first,
+    # if a row has been inserted.
+    if ((inserted_short_name != nil) && (inserted_short_name.strip().length() > 0))
+      delete_query = "DELETE FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
+      $cn.execute(delete_query)
+    end
+    raise "Failed in inserting into the tags_staging with the configuration: %s" % [config]
   end
   
   # DESC: Abstract method, call 'super' from the child class to use the

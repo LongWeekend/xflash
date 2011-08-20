@@ -12,11 +12,14 @@ class Tags800WordsImporter < TagsBaseImporter
     connect_db()
     get_all_cards_from_db()
     
+    # Insert into the tags_staging first
+    # to get the parent of the tags.
+    setup_tag_row()
+    
     not_found = 0
     found = 0
     card_ids = Array.new()
     @insert_tag_link_query = "INSERT card_tag_link(tag_id, card_id) VALUES(%s,%s);"
-    @tag_id = 0
     
     #Then do the loop by its super and process every data.
     super do |rec|
@@ -24,15 +27,14 @@ class Tags800WordsImporter < TagsBaseImporter
       # puts ("Processing: %s" % [rec.headword_trad])
       insert_query = ""
       result = find_cards_similar_to(rec)
-      count = result.length()
-      if (count <= 0)
+      if (result == nil)
         not_found += 1
         puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
       else
         found += 1
-        card_id = result[0].id
+        card_id = result.id
         if (!card_ids.include?(card_id))
-          card_ids << result[0].id
+          card_ids << card_id
           insert_query << @insert_tag_link_query % [@tag_id, card_id]
         end
       end
@@ -45,4 +47,5 @@ class Tags800WordsImporter < TagsBaseImporter
     puts ("Finish inserting: %s with %s records not found" % [found.to_s(), not_found.to_s()])
     
   end # End of the method body
+  
 end

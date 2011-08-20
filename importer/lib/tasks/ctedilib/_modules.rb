@@ -521,7 +521,9 @@ module CardHelpers
     end
   
     #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
-    return cards.select { |card| card.similar_to?(entry, criteria) }
+    index = cards.index { |card| card.similar_to?(entry, criteria) }
+    return cards[index] unless index == nil
+    return nil
   end # End for method definition
   
 end
