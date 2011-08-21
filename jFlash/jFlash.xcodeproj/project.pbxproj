@@ -235,6 +235,8 @@
 		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
+		4992F4691400DB62006F7F73 /* ReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4992F4681400DB62006F7F73 /* ReadingView.m */; };
+		4992F46A1400DB62006F7F73 /* ReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4992F4681400DB62006F7F73 /* ReadingView.m */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
 		4993AF891278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
 		4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
@@ -779,6 +781,8 @@
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
+		4992F4671400DB62006F7F73 /* ReadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadingView.h; path = AppSpecific/ReadingView.h; sourceTree = "<group>"; };
+		4992F4681400DB62006F7F73 /* ReadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReadingView.m; path = AppSpecific/ReadingView.m; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
@@ -1406,6 +1410,8 @@
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
+				4992F4671400DB62006F7F73 /* ReadingView.h */,
+				4992F4681400DB62006F7F73 /* ReadingView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2856,6 +2862,7 @@
 				4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 				4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */,
 				4927B8451400BE540076EEED /* JapaneseSettingsDataSource.m in Sources */,
+				4992F4691400DB62006F7F73 /* ReadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3012,6 +3019,7 @@
 				4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 				4927B83D1400A8400076EEED /* ChineseCard.m in Sources */,
 				4927B8481400C7360076EEED /* ChineseSettingsDataSource.m in Sources */,
+				4992F46A1400DB62006F7F73 /* ReadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

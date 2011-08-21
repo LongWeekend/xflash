@@ -26,21 +26,22 @@
   
   // Get values from XIB on first load
   // TODO: iPad customization!
-  CGRect tmpFrame;
-  tmpFrame = cardReadingLabelScrollContainer.frame;
-  cardReadingLabelScrollContainerYPosInXib = tmpFrame.origin.y;
-  tmpFrame = cardHeadwordLabel.frame;
-  cardHeadwordLabelHeightInXib = tmpFrame.size.height;
-  tmpFrame = toggleReadingBtn.frame;
-  toggleReadingBtnYPosInXib = tmpFrame.origin.y;
-  tmpFrame = cardHeadwordLabelScrollContainer.frame;
-  cardHeadwordLabelYPosInXib = tmpFrame.origin.y;  
+  CGRect tmpFrame = CGRectZero;
+  tmpFrame = self.cardReadingLabelScrollContainer.frame;
+  self.cardReadingLabelScrollContainerYPosInXib = tmpFrame.origin.y;
+  tmpFrame = self.cardHeadwordLabel.frame;
+  self.cardHeadwordLabelHeightInXib = tmpFrame.size.height;
+  tmpFrame = self.toggleReadingBtn.frame;
+  self.toggleReadingBtnYPosInXib = tmpFrame.origin.y;
+  tmpFrame = self.cardHeadwordLabelScrollContainer.frame;
+  self.cardHeadwordLabelYPosInXib = tmpFrame.origin.y;  
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
   [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
   
   // Modify the inline CSS for current theme
   // TODO: make this work when the user changes themes
+  // Update - I thnk it does?? MMA 8/2011
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
   NSString *html = [NSString stringWithFormat:@"%@%@",htmlHeader,HTML_FOOTER];
@@ -49,25 +50,25 @@
   [self.meaningWebView loadHTMLString:html baseURL:nil];
 }
 
-#pragma mark layout methods
+#pragma mark - layout methods
 
 - (void) layoutCardContentForStudyDirection: (NSString*)studyDirection
 {
   // Y-Positions for J_TO_E Mode
   // NB: with UIScrollView objects you have to add the height of itself to it's y-position
-  int readingY    = cardReadingLabelScrollContainerYPosInXib;
-  int readingBtnY = toggleReadingBtnYPosInXib;
-  int headwordY   = cardHeadwordLabelYPosInXib;
+  NSInteger readingY    = self.cardReadingLabelScrollContainerYPosInXib;
+  NSInteger readingBtnY = self.toggleReadingBtnYPosInXib;
+  NSInteger headwordY   = self.cardHeadwordLabelYPosInXib;
   
   // TODO: iPad customization!
-  CGRect readingFrame = cardReadingLabelScrollContainer.frame;
-  CGRect headwordFrame = cardHeadwordLabelScrollContainer.frame;
-  CGRect readingBtnFrame = toggleReadingBtn.frame;
-  CGRect readingScrollMoreFrame = cardReadingLabelScrollMoreIcon.frame;
-  CGRect headwordScrollMoreFrame = cardHeadwordLabelScrollMoreIcon.frame;
+  CGRect readingFrame = self.cardReadingLabelScrollContainer.frame;
+  CGRect headwordFrame = self.cardHeadwordLabelScrollContainer.frame;
+  CGRect readingBtnFrame = self.toggleReadingBtn.frame;
+  CGRect readingScrollMoreFrame = self.cardReadingLabelScrollMoreIcon.frame;
+  CGRect headwordScrollMoreFrame = self.cardHeadwordLabelScrollMoreIcon.frame;
   
   // Y-Positions for E_TO_J Mode
-  if([studyDirection isEqualToString: SET_E_TO_J])
+  if ([studyDirection isEqualToString:SET_E_TO_J])
   {
     // Move headword to reading's Y position
     headwordY = readingY;
@@ -75,111 +76,117 @@
     // Now redefine val for reading Y
     readingY = readingY + headwordFrame.size.height;//+ (cardReadingLabelScrollContainerYPosInXib -readingFrame.size.height);
     readingBtnY = readingY;
-    
   }
   
   // Set new linebreak modes
-  if([studyDirection isEqualToString: SET_E_TO_J])
+  if ([studyDirection isEqualToString:SET_E_TO_J])
   {
-    cardHeadwordLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.cardHeadwordLabel.lineBreakMode = UILineBreakModeWordWrap;
   } 
 	else 
 	{
-    cardHeadwordLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+    self.cardHeadwordLabel.lineBreakMode = UILineBreakModeCharacterWrap;
   }
   
   // TODO: iPad customization!
   // Move cardReadingLabel
   readingFrame.origin.y = readingY;
-  cardReadingLabelScrollContainer.frame = readingFrame;
+  self.cardReadingLabelScrollContainer.frame = readingFrame;
   
   // TODO: iPad customization!
   // Move revealReadingBtn
   readingBtnFrame.origin.y = readingBtnY;
-  toggleReadingBtn.frame = readingBtnFrame;
+  self.toggleReadingBtn.frame = readingBtnFrame;
   
   // TODO: iPad customization!
   // Move cardHeadwordLabelScrollContainer
   headwordFrame.origin.y = headwordY;
-  cardHeadwordLabelScrollContainer.frame = headwordFrame;
+  self.cardHeadwordLabelScrollContainer.frame = headwordFrame;
   
   // TODO: iPad customization!
   // Move the headword Scroll More Icon
   headwordScrollMoreFrame.origin.y = headwordY+(headwordFrame.size.height/3);
-  cardHeadwordLabelScrollMoreIcon.frame = headwordScrollMoreFrame;
+  self.cardHeadwordLabelScrollMoreIcon.frame = headwordScrollMoreFrame;
   
   // TODO: iPad customization!
   // Move cardReadingLabelScrollMoreIcon
   readingScrollMoreFrame.origin.y = readingBtnY+(CARDCONTENT_PADDING*3);
-  cardReadingLabelScrollMoreIcon.frame = readingScrollMoreFrame;
+  self.cardReadingLabelScrollMoreIcon.frame = readingScrollMoreFrame;
 }
 
 
 // Toggle "more" icon to indicate the user can scroll meaning down
-- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer 
+- (void) toggleMoreIconForLabel:(UIView *)theLabel forScrollView: (UIScrollView *)scrollViewContainer 
 {
   // TODO: iPad customization!
   CGSize theLabelSize = theLabel.frame.size;
   CGSize theParentSize = scrollViewContainer.frame.size;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  if (theLabel == cardReadingLabel)
+  if (theLabel == self.cardReadingLabel)
   {
-    if(theLabelSize.height > theParentSize.height)
+    if (theLabelSize.height > theParentSize.height)
     {
-      if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J] && meaningRevealed)
+      if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J] && self.meaningRevealed)
       {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
+        self.cardReadingLabelScrollMoreIcon.hidden = NO;
       }
-      else if(!meaningRevealed)
+      else if (self.meaningRevealed == NO)
       {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
+        self.cardReadingLabelScrollMoreIcon.hidden = YES;
       }
       else 
       {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
+        self.cardReadingLabelScrollMoreIcon.hidden = NO;
       }
     } 
     else 
     {
-      [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
+      self.cardReadingLabelScrollMoreIcon.hidden = YES;
     }
   }
-  else if (theLabel == cardHeadwordLabel)
+  else if (theLabel == self.cardHeadwordLabel)
   {
-    if(theLabelSize.height > theParentSize.height)
+    if (theLabelSize.height > theParentSize.height)
     {
-      [[self cardHeadwordLabelScrollMoreIcon] setHidden:NO];
+      self.cardHeadwordLabelScrollMoreIcon.hidden = NO;
     }
     else
     {
-      [[self cardHeadwordLabelScrollMoreIcon] setHidden:YES];
+      self.cardHeadwordLabelScrollMoreIcon.hidden = YES;
     }
   }
 }
 
 - (void) updateCardReading:(Card*) card
 {
-  self.cardReadingLabel.text = [card reading];
-  [LWEUILabelUtils resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
+  // TODO: This is where the shit needs to happen (MMA)
+  [self.cardReadingLabel updateNumberOfLabels:1];
+  [self.cardReadingLabel setText:card.reading andColor:[UIColor greenColor] forLabel:0];
+  
+  
+  [LWEUILabelUtils resizeLabelWithConstraints:[self.cardReadingLabel.labels objectAtIndex:0]
+                                  minFontSize:READING_MIN_FONTSIZE
+                                  maxFontSize:READING_MAX_FONTSIZE
+                            forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
 }
 
 - (void) hideMeaningWebView:(BOOL)hideMeaningWebView
 {
   [self.meaningWebView setHidden:hideMeaningWebView];
-  [self toggleMoreIconForLabel:[self cardReadingLabel] forScrollView:cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
 - (void) setupMeaningWebView: (NSUserDefaults *) settings Card:(Card*)card 
 {
-  NSString *html;
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J])
+  NSString *html = nil;
+  if ([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J])
   {
-    html = [NSString stringWithFormat:@"<span class='jpn'>%@</span>", [card headword]];
+    html = [NSString stringWithFormat:@"<span class='jpn'>%@</span>",card.headword];
   }
   else
   {
-    html = [NSString stringWithFormat:@"<span>%@</span>", [card meaning]];    
+    html = [NSString stringWithFormat:@"<span>%@</span>",card.meaning];    
   }
 
   self.meaningWebView.backgroundColor = [UIColor clearColor];
@@ -208,11 +215,11 @@
 	// Show Blank Card
   if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {
-    [cardHeadwordLabel setText:[card headword_en]];    
+    self.cardHeadwordLabel.text = card.headword_en;
   }
   else
   {
-    [cardHeadwordLabel setText:[card headword]];    
+    self.cardHeadwordLabel.text = card.headword;
   }
   
   [self updateCardReading:card];
@@ -221,41 +228,40 @@
   [self setupMeaningWebView:settings Card:card];
   
   // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:cardReadingLabel forScrollView:cardReadingLabelScrollContainer withText:[card reading] minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
-  [LWEUILabelUtils autosizeLabelText:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer withText:[card headword] minFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
+  [LWEUILabelUtils autosizeLabelText:[self.cardReadingLabel.labels objectAtIndex:0]
+                       forScrollView:self.cardReadingLabelScrollContainer
+                            withText:card.reading
+                         minFontSize:READING_MIN_FONTSIZE
+                         maxFontSize:READING_MAX_FONTSIZE];
   
-  [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
-  [self toggleMoreIconForLabel:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer];
+  [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
+                       forScrollView:self.cardHeadwordLabelScrollContainer
+                            withText:card.headword
+                         minFontSize:HEADWORD_MIN_FONTSIZE
+                         maxFontSize:HEADWORD_MAX_FONTSIZE];
+  
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
   
   LWE_LOG(@"END prepareViewForCard");
 }
 
-#pragma mark Reading Label Methods
-
-- (void) hideShowReadingBtn
-{
-  [toggleReadingBtn setBackgroundImage:NULL forState:UIControlStateNormal];
-}
-
-- (void) displayShowReadingBtn
-{
-  [toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"] forState:UIControlStateNormal];
-}
+#pragma mark - Reading Label Methods
 
 //! shows or hides the reading label and toggleButton according to the readingVisible bool
 - (void) setupReadingVisibility 
 {
-  if ([self readingVisible])
-  { 
-    [cardReadingLabelScrollContainer setHidden:NO];
-    [cardReadingLabel setHidden:NO];
-    [self hideShowReadingBtn];
+  if (self.readingVisible)
+  {
+    self.cardReadingLabelScrollContainer.hidden = NO;
+    self.cardReadingLabel.hidden = NO;
+    [self.toggleReadingBtn setBackgroundImage:NULL forState:UIControlStateNormal];
   }
   else
   {
-    [cardReadingLabelScrollContainer setHidden:YES];
-    [cardReadingLabel setHidden:YES];
-    [self displayShowReadingBtn];
+    self.cardReadingLabelScrollContainer.hidden = YES;
+    self.cardReadingLabel.hidden = YES;
+    [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"] forState:UIControlStateNormal];
   }
 }
 
@@ -263,12 +269,11 @@
 - (IBAction) doToggleReadingBtn
 {
   // Toggle
-  [self setReadingVisible:(![self readingVisible])];
+  [self setReadingVisible:(self.readingVisible == NO)];
   [self setupReadingVisibility];
 }
 
-#pragma mark -
-#pragma mark UIWebViewDelegate Support
+#pragma mark - UIWebViewDelegate Support
 
 /**
  * This callback should only be called once at the beginning of a study session
@@ -320,6 +325,5 @@
 	
   [super dealloc];
 }
-
 
 @end

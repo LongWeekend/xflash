@@ -120,7 +120,7 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
       "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
-             "u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+             "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
       "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
       "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
   Card *tmpCard = [CardPeer retrieveCardWithSQL:sql];
@@ -137,8 +137,7 @@
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
-                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count, "
-                          "c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count, c.*,ch.meaning "
                    "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
                    "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
   FMResultSet *rs = [db executeQuery:sql];
@@ -305,11 +304,11 @@
 	NSString *sql = nil;
   if (showAll)
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
   }
   else
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
   }
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	FMResultSet *rs = [db executeQuery:sql];

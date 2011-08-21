@@ -13,6 +13,27 @@
 
 @synthesize headword_simp;
 
+- (void) simpleHydrate: (FMResultSet*) rs
+{
+  [super simpleHydrate:rs];
+  self._headword = [rs stringForColumn:@"headword_trad"];
+  self.headword_simp = [rs stringForColumn:@"headword_simp"];
+}
+
+- (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
+{
+  [super hydrate:rs simple:isSimple];
+  self._headword = [rs stringForColumn:@"headword_trad"];
+  self.headword_simp = [rs stringForColumn:@"headword_simp"];
+}
+
+- (void) hydrate:(FMResultSet*)rs
+{
+  [super hydrate:rs];
+  self._headword = [rs stringForColumn:@"headword_trad"];
+  self.headword_simp = [rs stringForColumn:@"headword_simp"];
+}
+
 - (NSString *) headword
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
