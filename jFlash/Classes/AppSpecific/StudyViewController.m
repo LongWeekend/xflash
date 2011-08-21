@@ -93,15 +93,6 @@
                                       delegate:self];
     
   }
-  else if (state.isUpdatable && !_alreadyShowedAlertView)
-  {
-    _alreadyShowedAlertView = YES;
-    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to JFlash 1.2!",@"StudyViewController.UpdateAlertViewTitle")
-                                       message:NSLocalizedString(@"We need 3-5 minutes of your time to update the dictionary. Your study progress will also be transferred.\n\nA WiFi or 3G network connection is required. Do this now?",@"RootViewController.UpdateAlertViewMessage")
-                                            ok:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow")
-                                        cancel:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                      delegate:self];
-  }
 }
 
 /**
@@ -169,7 +160,7 @@
   [self resetStudySet];
 }
 
-#pragma mark UIAlertView delegate method
+#pragma mark - UIAlertView delegate method
 
 // private helper method to launch the app store
 -(void) _openLinkshareURL
@@ -200,28 +191,13 @@
   }
   else
   {
-    if([[CurrentState sharedCurrentState] isUpdatable])
+    switch (buttonIndex)
     {
-      switch (buttonIndex)
-      {
-        case LWE_ALERT_OK_BTN:
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
-          break;
-          // Do nothing
-        case LWE_ALERT_CANCEL_BTN:
-          break;
-      }
-    }
-    else
-    {
-      switch (buttonIndex)
-      {
-        case LWE_ALERT_OK_BTN:
-          break;
-        case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-          [self _openLinkshareURL];
-          break;
-      }
+      case LWE_ALERT_OK_BTN:
+        break;
+      case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
+        [self _openLinkshareURL];
+        break;
     }
   }
 }
