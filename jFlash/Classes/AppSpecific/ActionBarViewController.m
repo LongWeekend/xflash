@@ -15,28 +15,6 @@
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
-#pragma mark - Delegate Methods
-
-- (void)_actionBarWillSetup
-{
-  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
-}
-
-- (void)_actionBarDidSetup
-{
-  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
-}
-
-- (void)_actionBarWillReveal
-{
-  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
-}
-
-- (void)_actionBarDidReveal
-{
-  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
-}
-
 //Give the delegate a chance to not reveal the card
 - (BOOL)_actionBarShouldReveal:(BOOL)reveal
 {
@@ -80,23 +58,21 @@
   [self reveal];
 }
 
-#pragma mark -
-#pragma mark Core Class Methods
+#pragma mark - Core Class Methods
 
 - (void) setup
 {
-  [self _actionBarWillSetup];
-  [self _actionBarDidSetup];
+  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
 }
 
 - (void) reveal
 {
-  [self _actionBarWillReveal];
-  [self _actionBarDidReveal];
+  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
 }
 
-#pragma mark -
-#pragma mark Action Sheet
+#pragma mark - Action Sheet
 
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet

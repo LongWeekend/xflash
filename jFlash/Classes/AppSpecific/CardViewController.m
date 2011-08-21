@@ -11,34 +11,12 @@
 @implementation CardViewController
 @synthesize delegate, currentCard;
 
-#pragma mark Delegate Methods
-
-- (void)_cardViewWillSetup
-{
-  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:), self);
-}
-
-- (void)_cardViewDidSetup
-{
-  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:), self);
-}
-
-- (void)_cardViewWillReveal
-{
-  LWE_DELEGATE_CALL(@selector(cardViewWillReveal:), self);
-}
-
-- (void)_cardViewDidReveal
-{
-  LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), self);
-}
-
 #pragma mark - Flow Methods
 
 - (void) setup
 {
-  [self _cardViewWillSetup];
-  [self _cardViewDidSetup];
+  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:), self);
+  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:), self);
 }
 
 - (void) reveal
@@ -48,15 +26,15 @@
     BOOL shouldReveal = [self.delegate cardView:self shouldReveal:NO];
     if (shouldReveal)
     {
-      [self _cardViewWillReveal];
-      [self _cardViewDidReveal];
+      LWE_DELEGATE_CALL(@selector(cardViewWillReveal:), self);
+      LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), self);
     }
   }
 }
 
 - (void)dealloc 
 {
-	if (currentCard)
+	if (self.currentCard)
   {
 		[currentCard release];
 	}
