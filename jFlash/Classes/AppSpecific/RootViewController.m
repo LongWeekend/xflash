@@ -9,6 +9,13 @@
 #import "RootViewController.h"
 #import "FlurryAPI.h"
 
+#import "StudyViewController.h"
+#import "StudySetViewController.h"
+#import "SearchViewController.h"
+#import "SettingsViewController.h"
+#import "JapaneseSettingsDataSource.h"
+#import "HelpViewController.h"
+
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
@@ -116,6 +123,12 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   [localNavigationController release];
   
   SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+#if defined(LWE_JFLASH)
+  settingsViewController.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  settingsViewController.dataSource = nil;
+#endif
+  
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
   [localControllersArray addObject:localNavigationController];
   [settingsViewController release];
