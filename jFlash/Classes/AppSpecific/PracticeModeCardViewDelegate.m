@@ -14,26 +14,24 @@
 @implementation PracticeModeCardViewDelegate
 @synthesize wordCardViewController;
 
-//! Delegate messages
-- (void)cardViewWillSetup:(NSNotification *)aNotification
+#pragma mark - Card View Controller Delegate
+
+- (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-	CardViewController *cardViewController = (CardViewController *) [aNotification object];
   if (self.wordCardViewController == nil)
   {
-    WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    self.wordCardViewController = cvc;
-		[cvc release];
-    [cardViewController setView:self.wordCardViewController.view];
+    self.wordCardViewController = [[[WordCardViewController alloc] init] autorelease];
+    cardViewController.view = self.wordCardViewController.view;
   }
   
-  [self.wordCardViewController prepareView:[cardViewController currentCard]];
+  [self.wordCardViewController prepareView:cardViewController.currentCard];
   // always start with the meaning hidden
   self.wordCardViewController.meaningRevealed = NO;
   [self.wordCardViewController hideMeaningWebView:YES];
   [self.wordCardViewController setupReadingVisibility];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {
     self.wordCardViewController.toggleReadingBtn.hidden = YES;
     self.wordCardViewController.cardReadingLabelScrollContainer.hidden = YES;
@@ -47,12 +45,12 @@
   }
 }
 
-- (BOOL)cardViewShouldReveal:(id)cardView shouldReveal:(BOOL)revealCard
+- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
 {
   return YES;
 }
 
-- (void)cardViewDidReveal:(NSNotification *)aNotification
+- (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
   [self.wordCardViewController hideMeaningWebView:NO];
   
@@ -66,9 +64,8 @@
 
 #pragma mark - Action Bar Delegate Methods
 
--(void) actionBarWillSetup:(NSNotification *)aNotification
+-(void) actionBarWillSetup:(ActionBarViewController*)avc
 {
-  ActionBarViewController *avc = (ActionBarViewController*)[aNotification object];
   avc.rightBtn.hidden = YES;
   avc.wrongBtn.hidden = YES;
   avc.buryCardBtn.hidden = YES;
@@ -83,9 +80,8 @@
   avc.addBtn.frame = rect;
 }
 
--(void) actionBarWillReveal:(NSNotification *)aNotification
+-(void) actionBarWillReveal:(ActionBarViewController*)avc
 {
-  ActionBarViewController *avc = (ActionBarViewController*)[aNotification object];
   avc.rightBtn.hidden = NO;
   avc.wrongBtn.hidden = NO;
   avc.buryCardBtn.hidden = NO;
@@ -93,10 +89,10 @@
   avc.cardMeaningBtnHint.hidden = YES;
   
   // TODO: MMA is this necessray?  if it is hidden you never have to disable it.
-  avc.rightBtn.enabled = YES;
-  avc.wrongBtn.enabled = YES;
-  avc.buryCardBtn.enabled = YES;
-  avc.addBtn.enabled = YES;
+//  avc.rightBtn.enabled = YES;
+//  avc.wrongBtn.enabled = YES;
+//  avc.buryCardBtn.enabled = YES;
+//  avc.addBtn.enabled = YES;
 }
 
 #pragma mark - Class Plumbing

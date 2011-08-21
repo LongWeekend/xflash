@@ -13,11 +13,11 @@
 
 @protocol CardViewControllerDelegate <NSObject>
 @optional
-- (void)cardViewWillSetup:(NSNotification *)aNotification;
-- (void)cardViewDidSetup:(NSNotification *)aNotification;
-- (void)cardViewWillReveal:(NSNotification *)aNotification;
-- (void)cardViewDidReveal:(NSNotification *)aNotification;
-- (BOOL)cardViewShouldReveal:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
+- (void)cardViewWillSetup:(CardViewController*)cardViewController;
+- (void)cardViewDidSetup:(CardViewController*)cardViewController;
+- (void)cardViewWillReveal:(CardViewController*)cardViewController;
+- (void)cardViewDidReveal:(CardViewController*)cardViewController;
+- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
 @end
 
 @interface CardViewController : UIViewController
@@ -30,11 +30,3 @@
 @property (nonatomic, retain) Card *currentCard;
 
 @end
-
-//! Notification names
-extern NSString  *meaningWebViewWillDisplayNotification;
-extern NSString  *meaningWebViewDidDisplayNotification;
-extern NSString  *cardViewWillSetupNotification;
-extern NSString  *cardViewDidSetupNotification;
-extern NSString  *cardViewWillRevealNotification;
-extern NSString  *cardViewDidRevealNotification;

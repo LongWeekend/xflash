@@ -14,25 +14,24 @@
 @implementation BrowseModeCardViewDelegate
 @synthesize wordCardViewController;
 
-//! Delegate messages
-- (void)cardViewWillSetup:(NSNotification *)aNotification
+#pragma mark - Card View Controller Delegate
+
+- (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-	CardViewController *cardViewController = [aNotification object];
-  if(self.wordCardViewController == nil)
+  if (self.wordCardViewController == nil)
   {
-    WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    [self setWordCardViewController:cvc];
-    [cardViewController setView:[self.wordCardViewController view]];
-		[cvc release];
+    self.wordCardViewController = [[[WordCardViewController alloc] init] autorelease];
+    cardViewController.view = self.wordCardViewController.view;
   }
   
   [self.wordCardViewController prepareView:[cardViewController currentCard]];
   [self.wordCardViewController setupReadingVisibility];
 }
 
-- (void)actionBarWillSetup:(NSNotification *)aNotification
+#pragma mark - Action Bar View Controller Delegate
+
+- (void)actionBarWillSetup:(ActionBarViewController*)avc
 {
-  ActionBarViewController *avc = (ActionBarViewController*)[aNotification object];
   avc.prevCardBtn.hidden = NO;
   avc.nextCardBtn.hidden = NO;
   avc.addBtn.hidden = NO;

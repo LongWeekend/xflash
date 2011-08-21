@@ -22,23 +22,22 @@
 #define SVC_ACTION_TWEET_BUTTON 2
 #define SVC_ACTION_REPORT_BUTTON 3
 
+@class ActionBarViewController;
+
+@protocol ActionBarViewControllerDelegate <NSObject>
+@optional
+// setup card to unrevealed state
+- (void)actionBarWillSetup:(ActionBarViewController*)avc;
+- (void)actionBarDidSetup:(ActionBarViewController*)avc;
+// reveal card
+- (void)actionBarWillReveal:(ActionBarViewController*)avc;
+- (void)actionBarDidReveal:(ActionBarViewController*)avc;
+- (BOOL)actionBar:(ActionBarViewController*)avc shouldReveal:(BOOL)reveal;
+@end
+
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate>
 {
-  IBOutlet id delegate;  
-  
-  Card *currentCard;
   LWETwitterEngine *_twitterEngine;
-  
-  // The overtop buttons for quiz mode
-  IBOutlet UIView *cardMeaningBtnHint;
-  IBOutlet UIView *cardMeaningBtnHintMini;
-  
-  IBOutlet UIButton *nextCardBtn;
-  IBOutlet UIButton *prevCardBtn;
-  IBOutlet UIButton *rightBtn;
-  IBOutlet UIButton *wrongBtn;
-  IBOutlet UIButton *addBtn;
-  IBOutlet UIButton *buryCardBtn;
 }
 
 - (NSString *)getTweetWord;
@@ -59,26 +58,19 @@
 - (IBAction)showCardActionSheet;
 - (void) initTwitterEngine;
 
-
 //we don't retain delegates
-@property (assign, nonatomic, readwrite) IBOutlet id delegate;
+@property (assign) IBOutlet id<ActionBarViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) Card *currentCard;
 
-@property (nonatomic, retain) UIButton *addBtn;
-@property (nonatomic, retain) UIButton *buryCardBtn;
-@property (nonatomic, retain) UIButton *nextCardBtn;
-@property (nonatomic, retain) UIButton *prevCardBtn;
-@property (nonatomic, retain) UIButton *rightBtn;
-@property (nonatomic, retain) UIButton *wrongBtn;
+@property (nonatomic, retain) IBOutlet UIButton *addBtn;
+@property (nonatomic, retain) IBOutlet UIButton *buryCardBtn;
+@property (nonatomic, retain) IBOutlet UIButton *nextCardBtn;
+@property (nonatomic, retain) IBOutlet UIButton *prevCardBtn;
+@property (nonatomic, retain) IBOutlet UIButton *rightBtn;
+@property (nonatomic, retain) IBOutlet UIButton *wrongBtn;
 
-@property (nonatomic, retain) UIView *cardMeaningBtnHint;
-@property (nonatomic, retain) UIView *cardMeaningBtnHintMini;
+@property (nonatomic, retain) IBOutlet UIView *cardMeaningBtnHint;
+@property (nonatomic, retain) IBOutlet UIView *cardMeaningBtnHintMini;
 
 @end
-
-//! Notification names
-extern NSString * const actionBarWillSetupNotification;
-extern NSString * const actionBarDidSetupNotification;
-extern NSString * const actionBarWillRevealNotification;
-extern NSString * const actionBarDidRevealNotification;

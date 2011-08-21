@@ -10,98 +10,45 @@
 #import "RootViewController.h"
 #import "LWEJanrainLoginManager.h"
 
-//! Informal protocol defined messages sent to delegate
-@interface NSObject (ActionBarDelegateSupport)
-
-// setup card to unrevealed state
-- (void)actionBarWillSetup:(NSNotification *)aNotification;
-- (void)actionBarDidSetup:(NSNotification *)aNotification;
-
-// reveal card
-- (void)actionBarWillReveal:(NSNotification *)aNotification;
-- (void)actionBarDidReveal:(NSNotification *)aNotification;
-- (BOOL)actionBarShouldReveal:(id)actionMenu shouldReveal:(BOOL)reveal;
-
-@end
-
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
-#pragma mark -
-#pragma mark Delegate Methods
+#pragma mark - Delegate Methods
 
 - (void)_actionBarWillSetup
 {
-  NSNotification *notification = [NSNotification notificationWithName: actionBarWillSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarWillSetup:)])
-  {
-    [[self delegate] actionBarWillSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
+  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
 }
 
 - (void)_actionBarDidSetup
 {
-  NSNotification *notification = [NSNotification notificationWithName: actionBarDidSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarDidSetup:)])
-  {
-    [[self delegate] actionBarDidSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
+  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
 }
 
 - (void)_actionBarWillReveal
 {
-  NSNotification *notification = [NSNotification notificationWithName: actionBarWillRevealNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarWillReveal:)])
-  {
-    [[self delegate] actionBarWillReveal:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
+  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
 }
 
 - (void)_actionBarDidReveal
 {
-  // we created this name previously
-  NSNotification *notification = [NSNotification notificationWithName: actionBarDidRevealNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarDidReveal:)])
-  {
-    [[self delegate] actionBarDidReveal:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
+  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
 }
 
 //Give the delegate a chance to not reveal the card
 - (BOOL)_actionBarShouldReveal:(BOOL)reveal
 {
-  if([[self delegate] respondsToSelector:@selector(actionBarShouldReveal:shouldReveal:)])
+  if ([self.delegate respondsToSelector:@selector(actionBar:shouldReveal:)])
   {
-    reveal = [[self delegate] actionBarShouldReveal:self shouldReveal:reveal];
+    reveal = [self.delegate actionBar:self shouldReveal:reveal];
   }
   
   return reveal;
 }
 
-#pragma mark -
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction) doNextCardBtn
 {
@@ -542,9 +489,3 @@
   [super dealloc];
 }
 @end
-
-//! Notification names
-NSString * const actionBarWillSetupNotification = @"actionBarWillSetupNotification";
-NSString * const actionBarDidSetupNotification = @"actionBarDidSetupNotification";
-NSString * const actionBarWillRevealNotification = @"actionBarWillRevealNotification";
-NSString * const actionBarDidRevealNotification = @"actionBarDidRevealNotification";

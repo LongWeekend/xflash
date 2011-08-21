@@ -15,34 +15,30 @@
 
 - (void)_cardViewWillSetup
 {
-  NSNotification *notification = [NSNotification notificationWithName: cardViewWillSetupNotification object:self];
-  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:), notification);
+  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:), self);
 }
 
 - (void)_cardViewDidSetup
 {
-  NSNotification *notification = [NSNotification notificationWithName: cardViewDidSetupNotification object:self];
-  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:), notification);
+  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:), self);
 }
 
 - (void)_cardViewWillReveal
 {
-  NSNotification *notification = [NSNotification notificationWithName: cardViewWillRevealNotification object:self];
-  LWE_DELEGATE_CALL(@selector(cardViewWillReveal:), notification);
+  LWE_DELEGATE_CALL(@selector(cardViewWillReveal:), self);
 }
 
 - (void)_cardViewDidReveal
 {
-  NSNotification *notification = [NSNotification notificationWithName: cardViewDidRevealNotification object:self];
-  LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), notification);
+  LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), self);
 }
 
 //Give the delegate a chance to not reveal the card
 - (BOOL)_cardViewShouldReveal:(BOOL)shouldReveal
 {
-  if ([self.delegate respondsToSelector:@selector(cardViewShouldReveal:shouldReveal:)])
+  if ([self.delegate respondsToSelector:@selector(cardView:shouldReveal:)])
   {
-    shouldReveal = [self.delegate cardViewShouldReveal:self shouldReveal:shouldReveal];
+    shouldReveal = [self.delegate cardView:self shouldReveal:shouldReveal];
   }
   return shouldReveal;
 }
@@ -74,9 +70,3 @@
 }
 
 @end
-
-//! Notification names
-NSString  *cardViewWillSetupNotification = @"cardViewWillSetupNotification";
-NSString  *cardViewDidSetupNotification = @"cardViewDidSetupNotification";
-NSString  *cardViewWillRevealNotification = @"cardViewWillRevealNotification";
-NSString  *cardViewDidRevealNotification = @"cardViewDidRevealNotification";
