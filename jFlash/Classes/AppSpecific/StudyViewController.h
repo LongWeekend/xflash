@@ -29,7 +29,7 @@
   BOOL _alreadyShowedAlertView;
   BOOL _finishedSetAlertShowed;
   //! This is set when card is loaded, and used when revealed
-  BOOL _cardShouldShowExampleViewCached;
+  BOOL _hasExampleSentences;
   BOOL _viewHasBeenLoadedOnce;
   BOOL _isChangingPage;  // page control state
 }
@@ -38,10 +38,11 @@
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
 
+- (void)resetStudySet;
+- (void)resetViewWithCard:(Card*)card;
+
 - (void)doCardBtn: (NSNotification *)aNotification;
 - (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
-- (void)resetStudySet;
-- (void)refreshCardView;
 
 //! Gets notification from plugin manager
 - (void)pluginDidInstall: (NSNotification *)aNotification;

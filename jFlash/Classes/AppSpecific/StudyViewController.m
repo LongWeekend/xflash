@@ -19,15 +19,13 @@
 //private methods
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
-- (void)_setupCardView:(BOOL)hasExamples;
-- (void)_setupExampleSentencesView:(BOOL)hasExamples;
-- (BOOL)_cardShouldShowExampleView:(Card*)card;
+- (BOOL) _shouldShowExampleViewForCard:(Card*)card;
+- (void) _setupViewWithCard:(Card*)card;
 - (void)_setCardViewDelegateBasedOnMode;
-- (void)_jumpToPage:(int)page;
 - (void)_refreshProgressBarView;
 - (NSMutableArray*) _getLevelDetails;
 - (void)_setupScrollView;
-- (void)_setupView;
+- (void)_setupViewAfterSettingsChange;
 @end
 
 @implementation StudyViewController
@@ -241,16 +239,13 @@
   numRight = 0;
   numWrong = 0;
   numViewed = 0;
-  [self.percentCorrectLabel setText:percentCorrectLabelStartText];
+  self.percentCorrectLabel.text = percentCorrectLabelStartText;
   [self.moodIcon updateMoodIcon:100.0f];
   
   // Get active set/tag  
   self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
-  // Use this to set up delegates, etc
-  [self refreshCardView];
-
   // Change to new card, by passing nil, there is no animation
   NSError *error = nil;
   Card *nextCard = [self.currentCardSet getFirstCardWithError:&error];
@@ -263,8 +258,8 @@
     self.finishedSetAlertShowed = NO;
   }
   
-  // Finally display the card
-  [self doChangeCard:nextCard direction:nil];
+  // Use this to set up delegates, show the card, etc
+  [self resetViewWithCard:nextCard];
 }
 
 
@@ -274,7 +269,7 @@
  * and we need to layout everything again: mode, theme, reading settings,
  * etc etc etc.
  */
-- (void) refreshCardView
+- (void) resetViewWithCard:(Card*)card
 {
   [self _setCardViewDelegateBasedOnMode];
   
@@ -294,49 +289,29 @@
     tmpRatio = 100;
   }
   [self.moodIcon updateMoodIcon:tmpRatio];
-}
-
-
-/** Shows the meaning/reading */
-- (IBAction) revealCard
-{
-  self.revealCardBtn.hidden = YES;
-  self.tapForAnswerImage.hidden = YES;
   
-  [self.cardViewController reveal];
-  [self.actionBarController reveal];
-  
-  // Now update scroll & page control
-  self.scrollView.pagingEnabled = _cardShouldShowExampleViewCached;
-  self.scrollView.scrollEnabled = _cardShouldShowExampleViewCached;
-  self.pageControl.hidden = (_cardShouldShowExampleViewCached == NO);  
+  // Finally display the card
+  [self doChangeCard:card direction:nil];
 }
 
 
 /**
  * \brief Basic method to change cards
  * \param card The Card object to move to
- * \param directionOrNil If direction is a CATransition type, animate.  Otherwise 
+ * \param directionOrNil If direction is a CATransition type, animate
  */
-- (void) doChangeCard:(Card*) card direction:(NSString*)directionOrNil
+- (void) doChangeCard:(Card*)card direction:(NSString*)directionOrNil
 {
   if (card != nil)
   {
     // Update current card here & on CardViewController
+    [self _setupViewWithCard:card];
     self.currentCard = card;
-    [self.cardViewController setupWithCard:card];
-    
-    // Show we show example view here?
-		// Save value for when we tap "Reveal".
-    _cardShouldShowExampleViewCached = [self _cardShouldShowExampleView:card];
-    
-    // Now set up the card
-    [self _setupCardView:_cardShouldShowExampleViewCached];
     
     // If no direction, don't animate transition
     if (directionOrNil != nil)
     {
-      [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)directionOrNil duration:(float)0.15f objectToTransition:(UIViewController *)self];
+      [LWEViewAnimationUtils doViewTransition:kCATransitionPush direction:directionOrNil duration:0.15f objectToTransition:self];
     }
     
     // Finally, update the progress bar
@@ -467,7 +442,7 @@
  * Target for UIPageControl - allows us to flip between
  * card view and example sentence view
  */
-- (IBAction)changePage:(id)sender animated:(BOOL) animated
+- (IBAction)changePage:(id)sender animated:(BOOL)animated
 {
 	//	Change the scroll view
   CGRect frame = self.scrollView.frame;
@@ -487,36 +462,38 @@
   [self changePage:sender animated:YES];
 }
 
+
+/** Shows the meaning/reading */
+- (IBAction) revealCard
+{
+  self.revealCardBtn.hidden = YES;
+  self.tapForAnswerImage.hidden = YES;
+  
+  [self.cardViewController reveal];
+  [self.actionBarController reveal];
+  
+  // Now update scrollability (page control doesn't change)
+  self.scrollView.pagingEnabled = _hasExampleSentences;
+  self.scrollView.scrollEnabled = _hasExampleSentences;
+}
+
+
 #pragma mark - Private methods to setup cards (called every transition)
 
-/**
- * Sets up back the view after these condition, if the card settings has changed, or if plugin has installed. 
- * This will set up the User Interface to the initial state, with the user preference theme. 
- *
- */
-- (void) _setupView
+// TODO: PRIME suspect to be converted to a block, this only exists as a notification callback.
+- (void) _setupViewAfterSettingsChange
 {
-	// This will also reset the cache value for shouldShowExampleView
-	[self refreshCardView];
-	[self.cardViewController setupWithCard:self.currentCard];
-	
-	// Maybe we need to check if our examples view should be different?
-	BOOL hasExamples = [self _cardShouldShowExampleView:self.currentCard];
-	[self _setupCardView:hasExamples];
+	[self resetViewWithCard:self.currentCard];
 }
 
 /**
  * Sets up all of the delegates and sub-controllers of the study view controller.
- * \param cardShouldShowExampleView YES if the scroll view should have 2 pages, and if the page control should be on.
- *  Note that even if this is YES, you may not be able to scroll depending on whether or not the card has been revealed.
  */
-- (void) _setupCardView:(BOOL)hasExamples
+- (void) _setupViewWithCard:(Card*)card
 {
-  //reset to the first page
-  [self _jumpToPage:0];
-  
-  [self.actionBarController setupWithCard:self.currentCard];
-  [self _setupExampleSentencesView:hasExamples];
+  [self.cardViewController setupWithCard:card];
+  [self.actionBarController setupWithCard:card];
+  [self.exampleSentencesViewController setupWithCard:card];
   
   // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
@@ -536,42 +513,33 @@
   self.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currCardCount, [self.currentCardSet cardCount]];
   self.tapForAnswerImage.hidden = self.isBrowseMode;
   self.revealCardBtn.hidden = self.isBrowseMode;
-}
 
-
-/**
- * Re-locks the scrolling to NO (before REVEAL) and calls setup on the ExampleSentencesViewController
- * \param cardShouldShowExampleView if YES, the page control will be visible
- */
-- (void) _setupExampleSentencesView:(BOOL)hasExamples
-{
   // Scroll/paging cannot be done when card is not revealed (quiz mode), or there are no examples.
 	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
-  self.scrollView.pagingEnabled = (self.isBrowseMode && hasExamples);
-  self.scrollView.scrollEnabled = (self.isBrowseMode && hasExamples);
-
+  _hasExampleSentences = [self _shouldShowExampleViewForCard:card];
+  self.scrollView.pagingEnabled = (self.isBrowseMode && _hasExampleSentences);
+  self.scrollView.scrollEnabled = (self.isBrowseMode && _hasExampleSentences);
+  
   // Page control should be shown when we have example sentences, regardless of browse
-  self.pageControl.hidden = (hasExamples == NO);
-  [self.exampleSentencesViewController setupWithCard:self.currentCard];
+  self.pageControl.hidden = (_hasExampleSentences == NO);
+  self.pageControl.currentPage = 0;
+  [self changePage:self.pageControl animated:NO];
+  _isChangingPage = NO;
 }
-
 
 /** 
  * Both page controller visibility setter and scroll view
  * enabler call this.  In the future, we don't want to 
  * hit the DB twice like we are now for the same card.
  */
-- (BOOL) _cardShouldShowExampleView:(Card*)card
+- (BOOL) _shouldShowExampleViewForCard:(Card*)card
 {
-  BOOL cardShouldShowExampleView = YES;
-  
-  // First, check if they have the plugin installed
+  BOOL returnVal = YES;
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    cardShouldShowExampleView = [card hasExampleSentences];
+    returnVal = [card hasExampleSentences];
   }
-  
-  return cardShouldShowExampleView;
+  return returnVal;
 }
 
 /**
@@ -666,7 +634,7 @@
     // Get rid of the old example sentences guy & re-setup the scroll view
     [self.exampleSentencesViewController.view removeFromSuperview];
     [self _setupScrollView];
-		[self _setupView];
+		[self _setupViewAfterSettingsChange];
   }
 }
 
@@ -717,14 +685,6 @@
 	
 	self.pageControl.numberOfPages = views;
 	[self.scrollView setContentSize:CGSizeMake(cx*views, [self.scrollView bounds].size.height)];
-}
-
-/** programatically jump the scrollview to a page, does not animate the scroll */
-- (void) _jumpToPage:(int)page
-{
-  [self.pageControl setCurrentPage:page];
-  [self changePage:self.pageControl animated:NO];
-  _isChangingPage = NO;
 }
 
 
