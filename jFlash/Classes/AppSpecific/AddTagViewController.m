@@ -225,7 +225,7 @@ enum EntrySectionRows
     label.numberOfLines = 0;
     label.font = [UIFont systemFontOfSize:FONT_SIZE];
     label.text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard reading], [currentCard meaningWithoutMarkup]];
-    label.frame = [LWEUILabelUtils makeFrameForText:text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
+    label.frame = [LWEUILabelUtils makeFrameForText:label.text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [[cell contentView] addSubview:label];
