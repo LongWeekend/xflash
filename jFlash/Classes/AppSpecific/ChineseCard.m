@@ -16,13 +16,15 @@
 - (NSString *) headword
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *type = [settings objectForKey:APP_HEADWORD_TYPE];
+
   NSString *hw = nil;
   
-  if ([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
+  if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
   {
     hw = self._headword;
   } 
-  else if ([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
+  else if ([type isEqualToString:SET_HEADWORD_TYPE_SIMP])
   {
     hw = self.headword_simp;
   }
