@@ -12,7 +12,7 @@
 
 #define DEFAULT_USER_ID 1
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
-#define DEFAULT_MAX_STRUDYING 30
+#define DEFAULT_MAX_STUDYING 30
 #define DEFAULT_DIFFICULTY 1
 
 #define LWE_PLUGIN_UPDATE_PERIOD		14
@@ -22,17 +22,13 @@ extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
 extern NSString * const SET_J_TO_E;
 extern NSString * const SET_E_TO_J;
-extern NSString * const SET_READING_KANA;
-extern NSString * const SET_READING_ROMAJI;
-extern NSString * const SET_READING_BOTH;
 
 // Different setting types
 // DO NOT edit these
 extern NSString * const APP_MODE;
-extern NSString * const APP_HEADWORD;
-extern NSString * const APP_READING;
 extern NSString * const APP_THEME;
 extern NSString * const APP_USER;
+extern NSString * const APP_HEADWORD;
 extern NSString * const APP_PLUGIN;
 extern NSString * const APP_FREQUENCY_MULTIPLIER;
 extern NSString * const APP_MAX_STUDYING;
@@ -55,6 +51,11 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
   // LWE Favorites - JFlash
   #define DEFAULT_TAG_ID 124
 
+  extern NSString * const APP_READING;
+  extern NSString * const SET_READING_KANA;
+  extern NSString * const SET_READING_ROMAJI;
+  extern NSString * const SET_READING_BOTH;
+
   extern NSString * const LWE_JF_VERSION_1_0;
   extern NSString * const LWE_JF_VERSION_1_1;
   extern NSString * const LWE_JF_VERSION_1_2;
@@ -70,6 +71,10 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
 
   // "Politics" (for now) - CFlash
   #define DEFAULT_TAG_ID 42
+
+  extern NSString * const APP_HEADWORD_TYPE;
+  extern NSString * const SET_HEADWORD_TYPE_TRAD;
+  extern NSString * const SET_HEADWORD_TYPE_SIMP;
 
   extern NSString * const LWE_CF_VERSION_1_0;
 #endif 

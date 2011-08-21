@@ -1,6 +1,22 @@
 #import "CardPeer.h"
+#import "JapaneseCard.h"
+#import "ChineseCard.h"
 
 @implementation CardPeer
+
+/**
+ * Factory that cares about what language we are using
+ */
++ (Card *) blankCard
+{
+#if defined(LWE_JFLASH)
+  return [[[JapaneseCard alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  return [[[ChineseCard alloc] init] autorelease];
+#else
+  return nil;
+#endif
+}
 
 /**
  * Returns an array of Card objects after searching keyword
@@ -29,7 +45,7 @@
     while ([rs next])
     {
       cardListCount++;
-      Card* tmpCard = [[[Card alloc] init] autorelease];
+      Card *tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
       [cardList addObject: tmpCard];
     }
@@ -49,8 +65,9 @@
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit2];
     rs = [db executeQuery:sql];
-    while ([rs next]) {
-      Card* tmpCard = [[[Card alloc] init] autorelease];
+    while ([rs next])
+    {
+      Card *tmpCard = [CardPeer blankCard]; // [[[Card alloc] init] autorelease];
       [tmpCard hydrate:rs];
       [cardList addObject: tmpCard];
     }
@@ -67,7 +84,7 @@
     rs = [db executeQuery:sql];
     while ([rs next])
     {
-      Card *tmpCard = [[[Card alloc] init] autorelease];
+      Card *tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
       [cardList addObject:tmpCard];
     }
@@ -85,7 +102,7 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [db executeQuery:sql];
-  Card *tmpCard = [[[Card alloc] init] autorelease];
+  Card *tmpCard = [CardPeer blankCard];
   while ([rs next])
   {
     [tmpCard hydrate:rs];
@@ -127,11 +144,12 @@
   FMResultSet *rs = [db executeQuery:sql];
   while ([rs next])
   {
-    [card setHeadword:[rs stringForColumn:@"headword"]];
-    [card setHeadword_en:[rs stringForColumn:@"headword_en"]];
-    [card setReading:[rs stringForColumn:@"reading"]];
-    [card setRomaji:[rs stringForColumn:@"romaji"]];
-    [card setMeaning:[rs stringForColumn:@"meaning"]];
+    [card hydrate:rs];
+//    [card setHeadword:[rs stringForColumn:@"headword"]];
+//    [card setHeadword_en:[rs stringForColumn:@"headword_en"]];
+//    [card setReading:[rs stringForColumn:@"reading"]];
+//    [card setRomaji:[rs stringForColumn:@"romaji"]];
+//    [card setMeaning:[rs stringForColumn:@"meaning"]];
   }
   [rs close];
   [sql release];
@@ -165,12 +183,12 @@
     rightCount = [rs intForColumn:@"right_count"];
   }
   [rs close];
-  sql2 =  [[NSString alloc] initWithFormat:@""
+  sql2 = [[NSString alloc] initWithFormat:@""
     "SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * "
     "FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
   FMResultSet *rs2 = [db executeQuery:sql2];
   [sql2 release];
-  tmpCard = [[[Card alloc] init] autorelease];
+  tmpCard = [CardPeer blankCard];
   while ([rs2 next])
   {
     [tmpCard hydrate:rs2];
@@ -204,14 +222,8 @@
 	while ([rs next])
 	{
 		// Full card?
-		if (basicCard)
-		{
-			tmpCard = [[Card alloc] initAsBasicCard];
-		}
-		else
-		{
-			tmpCard = [[Card alloc] init];
-		}
+    tmpCard = [CardPeer blankCard];
+    tmpCard.isBasicCard = basicCard;
 		
 		// Hydrate?
 		if (hydrate)
@@ -220,11 +232,9 @@
 		}
 		else
 		{
-			[tmpCard setCardId:[rs intForColumn:@"card_id"]];
+      tmpCard.cardId = [rs intForColumn:@"card_id"];
 		}
-		
 		[cardList addObject:tmpCard];
-		[tmpCard release];
 	}
 	[rs close];
 	return cardList;
@@ -292,7 +302,7 @@
  */
 + (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId showAll:(BOOL)showAll
 {	
-	NSString *sql;
+	NSString *sql = nil;
   if (showAll)
   {
     sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
@@ -305,14 +315,13 @@
 	FMResultSet *rs = [db executeQuery:sql];
   [sql release];
 	
-	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *cardList = [NSMutableArray array];
 	while ([rs next])
 	{
-		Card* tmpCard = [[Card alloc] initAsBasicCard];	
+		Card *tmpCard = [CardPeer blankCard];
+    tmpCard.isBasicCard = YES;
 		[tmpCard simpleHydrate:rs];
-		
 		[cardList addObject: tmpCard];
-		[tmpCard release];
 	}
 	[rs close];
 

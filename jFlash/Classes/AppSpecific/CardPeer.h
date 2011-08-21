@@ -1,12 +1,7 @@
 #import "Card.h"
-#import "LWEDebug.h"
-#import "LWEDatabase.h"
-#import "FMResultSet.h"
 
 /** Peer object to retrieve & handle Card objects */
 @interface CardPeer : NSObject
-{
-}
 
 //! Card methods
 + (Card*) retrieveCardWithSQL: (NSString*) sql;

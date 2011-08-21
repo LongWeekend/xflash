@@ -55,15 +55,14 @@
 	[settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
 	[settings setInteger:DEFAULT_USER_ID forKey:APP_USER];
 	[settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
-	[settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
+	[settings setInteger:DEFAULT_MAX_STUDYING forKey:APP_MAX_STUDYING];
 	[settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
 	
 	[settings setBool:NO forKey:@"db_did_finish_copying"];
 	[settings setBool:YES forKey:@"settings_already_created"];
 }
 
-#pragma mark -
-#pragma mark Update and Check Settings Region. 
+#pragma mark - Update and Check Settings Region. 
 
 #pragma mark Version 1.2
 

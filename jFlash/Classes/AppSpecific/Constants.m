@@ -17,17 +17,12 @@ NSString * const SET_MODE_BROWSE     = @"BROWSE";
 NSString * const SET_J_TO_E          = @"JPN";
 NSString * const SET_E_TO_J          = @"ENG";
 
-NSString * const SET_READING_KANA    = @"KANA";
-NSString * const SET_READING_ROMAJI  = @"ROMAJI";
-NSString * const SET_READING_BOTH    = @"BOTH";
-
 // IF YOU CHANGE THESE VALUES, DEMONS WILL FLY OUT OF YOUR CD-ROM DRIVE AND EAT YOUR SOUL.  INSTANTLY.
 // It will COMPLETELY mess up the ability of our users to upgrade versions.
 NSString * const APP_MODE                 = @"mode";
-NSString * const APP_HEADWORD             = @"headword";
-NSString * const APP_READING              = @"reading";
 NSString * const APP_THEME                = @"theme";
 NSString * const APP_USER                 = @"user_id";
+NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_PLUGIN               = @"plugin";
 NSString * const APP_MAX_STUDYING         = @"maxStudying";
 NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
@@ -43,6 +38,12 @@ NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
 const NSInteger FAVORITES_TAG_ID = 0;
 
 #if defined(LWE_JFLASH)
+
+      // This setting is JFlash-specific
+      NSString * const APP_READING              = @"reading";
+      NSString * const SET_READING_KANA    = @"KANA";
+      NSString * const SET_READING_ROMAJI  = @"ROMAJI";
+      NSString * const SET_READING_BOTH    = @"BOTH";
 
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.4";
@@ -67,6 +68,11 @@ const NSInteger FAVORITES_TAG_ID = 0;
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
 #else if defined(LWE_CFLASH)
+
+      // These settings are CFlash specific
+      NSString * const APP_HEADWORD_TYPE       = @"headword_type";
+      NSString * const SET_HEADWORD_TYPE_TRAD  = @"TRAD";
+      NSString * const SET_HEADWORD_TYPE_SIMP  = @"SIMP";
 
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.0";

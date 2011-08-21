@@ -54,6 +54,8 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
+		4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83F1400A93F0076EEED /* JapaneseCard.m */; };
 		49280A261396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		49280A271396283D00EF009C /* LWECrashUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9134371A138DE5A900A924E4 /* LWECrashUtils.m */; };
 		49280A281396296800EF009C /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
@@ -731,6 +733,10 @@
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
+		4927B83B1400A8400076EEED /* ChineseCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseCard.h; path = AppSpecific/ChineseCard.h; sourceTree = "<group>"; };
+		4927B83C1400A8400076EEED /* ChineseCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseCard.m; path = AppSpecific/ChineseCard.m; sourceTree = "<group>"; };
+		4927B83E1400A93F0076EEED /* JapaneseCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JapaneseCard.h; path = AppSpecific/JapaneseCard.h; sourceTree = "<group>"; };
+		4927B83F1400A93F0076EEED /* JapaneseCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseCard.m; path = AppSpecific/JapaneseCard.m; sourceTree = "<group>"; };
 		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
 		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -2198,6 +2204,10 @@
 			children = (
 				917A5BEA11AB7CD700016BD2 /* Card.h */,
 				917A5BEB11AB7CD700016BD2 /* Card.m */,
+				4927B83E1400A93F0076EEED /* JapaneseCard.h */,
+				4927B83F1400A93F0076EEED /* JapaneseCard.m */,
+				4927B83B1400A8400076EEED /* ChineseCard.h */,
+				4927B83C1400A8400076EEED /* ChineseCard.m */,
 				917A5BEC11AB7CD700016BD2 /* CardPeer.h */,
 				917A5BED11AB7CD700016BD2 /* CardPeer.m */,
 				917A5BEE11AB7CD700016BD2 /* Group.h */,
@@ -2834,6 +2844,7 @@
 				49280A261396283D00EF009C /* LWECrashUtils.m in Sources */,
 				49570E1713E39F7700226D24 /* LWEFormView.m in Sources */,
 				4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
+				4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2988,6 +2999,7 @@
 				49280A281396296800EF009C /* UpdateManager.m in Sources */,
 				49570E1813E39F7700226D24 /* LWEFormView.m in Sources */,
 				4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
+				4927B83D1400A8400076EEED /* ChineseCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

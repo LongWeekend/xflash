@@ -11,15 +11,14 @@
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @interface Card : NSObject
 
-- (id) initAsBasicCard;
-
 - (void) simpleHydrate: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs simple:(BOOL)includeMeaning;
 
+- (NSString*) reading;
+- (NSString*) headword;
+
 - (NSString*) meaningWithoutMarkup;
-- (NSString*) combinedReadingForSettings;
-- (NSString*) readingBasedonSettingsForExpandedSampleSentences;
 - (BOOL) hasExampleSentences:(BOOL)newVersion;
 
 @property (nonatomic) BOOL isBasicCard;
@@ -28,6 +27,7 @@
 
 //! User id associated with the level and counts
 @property (nonatomic) NSInteger userId;
+
 //! What level this card is in for user userId
 @property (nonatomic) NSInteger levelId;
 
@@ -38,16 +38,13 @@
 @property (nonatomic) NSInteger rightCount;
 
 //! Japanese headword of a card 
-@property (nonatomic, retain) NSString *headword;
+@property (nonatomic, retain) NSString *_headword;
 
 //! English headword of a card
 @property (nonatomic, retain) NSString *headword_en;
 
-//! Japanese kana reading
-@property (nonatomic, retain) NSString *reading;
-
-//! Romanized reading
-@property (nonatomic, retain) NSString *romaji;
+//! reading, like kana or pinyin, depending
+@property (nonatomic, retain) NSString *hw_reading;
 
 //! Actual English meaning
 @property (nonatomic, retain) NSString *meaning;
