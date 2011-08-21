@@ -45,21 +45,16 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
-  
 
   [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
-  // TODO: get rid of this
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
 }
 
-/**
- * Makes the settings show the plugins when required (e.g. after the user updates their version to JFlash 1.1)
- */
-- (void) _addPluginMenuItem
+- (void) viewDidUnload
 {
-  self.navigationItem.rightBarButtonItem = nil;
-  [self _updateTableDataAfterPluginInstall:nil];
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /**
@@ -76,9 +71,10 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 - (void)viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
@@ -373,15 +369,6 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
-
-- (void) viewDidUnload
-{
-	LWE_LOG(@"Settings View Controller get unload");
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 
 # pragma mark - Housekeeping
 
