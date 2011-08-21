@@ -11,8 +11,12 @@
 #import "UserViewController.h"
 #import "UserPeer.h"
 
+@interface SettingsViewController ()
+-(void) _updateTableDataAfterPluginInstall:(NSNotification*)notification;
+@end
+
 @implementation SettingsViewController
-@synthesize sectionArray, settingsChanged, directionChanged, themeChanged, readingChanged, appirater, dataSource;
+@synthesize sectionArray, dataSource, delegate;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -91,28 +95,38 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  if (settingsChanged)
+  
+  BOOL shouldSendChangeNotification = NO;
+  BOOL shouldSendCardChangeNotification = NO;
+  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendChangeNotification))])
+  {
+    shouldSendChangeNotification = [self.delegate shouldSendChangeNotification];
+  }
+  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendCardChangeNotification))])
+  {
+    shouldSendCardChangeNotification = [self.delegate shouldSendCardChangeNotification];
+  }
+  
+  if (shouldSendChangeNotification)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:LWESettingsChanged object:self];
   }
-  if (directionChanged || themeChanged || readingChanged)
+  
+  if (shouldSendCardChangeNotification)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:LWECardSettingsChanged object:self];
   }
   
-  // we've sent the notifications, so reset to unchanged
-  directionChanged = NO;
-  themeChanged = NO;
-  readingChanged = NO;
-  settingsChanged = NO;
+  LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
 
 
+// TODO: this could be a block someday.
 //! launchAppirater - convenience method for appirater
 - (void) _launchAppirater
 {
-  self.appirater = [[[Appirater alloc] init] autorelease];
-  [self.appirater showPromptManually];
+  Appirater *appirater = [[[Appirater alloc] init] autorelease];
+  [appirater showPromptManually];
 }
 
 
@@ -206,10 +220,14 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     UIImageView* tmpView = cell.imageView;
     // TODO: iPad customization!
-    if(key == APP_TWITTER)
+    if (key == APP_TWITTER)
+    {
       tmpView.image = [UIImage imageNamed:@"icon_twitter_30x30.png"];
+    }
     else
+    {
       tmpView.image = [UIImage imageNamed:@"icon_facebook_30x30.png"];
+    }
   }
   else if (key == APP_ALGORITHM)
   {
@@ -323,25 +341,14 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   else
   {
     // Everything else
+    LWE_DELEGATE_CALL(@selector(settingWillChange:),key);
     [self iterateSetting:key];
     [self.tableView reloadData];
-    if (key == APP_HEADWORD) // we don't want the current card to change for just a headword switch
+    
+    // One special case, theme: reload the nav bar for this page
+    if ([key isEqualToString:APP_THEME])
     {
-      directionChanged = YES;
-    }
-    else if (key == APP_THEME)
-    {
-      themeChanged = YES;
-      // Also reload the nav bar for this page
       self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-    }
-    else if (key == APP_READING)
-    {
-      readingChanged = YES; 
-    }
-    else
-    {
-      settingsChanged = YES;
     }
   }
 }
@@ -382,7 +389,6 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [dataSource release];
   [sectionArray release];
-  [appirater release];
   [super dealloc];
 }
 

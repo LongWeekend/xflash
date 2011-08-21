@@ -14,6 +14,7 @@
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "JapaneseSettingsDataSource.h"
+#import "ChineseSettingsDataSource.h"
 #import "HelpViewController.h"
 
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
@@ -126,8 +127,10 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 #if defined(LWE_JFLASH)
   settingsViewController.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
 #elif defined(LWE_CFLASH)
-  settingsViewController.dataSource = nil;
+  settingsViewController.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
 #endif
+  // Potentially later this could be managed by the RVC.
+  settingsViewController.delegate = (id<LWESettingsDelegate>)settingsViewController.dataSource;
   
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
   [localControllersArray addObject:localNavigationController];

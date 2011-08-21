@@ -1,5 +1,5 @@
 //
-//  JapaneseSettingsDataSource.h
+//  ChineseSettingsDataSource.h
 //  jFlash
 //
 //  Created by Mark Makdad on 8/21/11.
@@ -9,13 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "SettingsViewController.h"
 
-@interface JapaneseSettingsDataSource : NSObject <LWESettingsDataSource, LWESettingsDelegate>
+@interface ChineseSettingsDataSource : NSObject <LWESettingsDataSource, LWESettingsDelegate>
 
 @property (retain) NSDictionary *settingsHash;
 
 @property BOOL settingsChanged;
 @property BOOL directionChanged;
 @property BOOL themeChanged;
-@property BOOL readingChanged;
 
 @end

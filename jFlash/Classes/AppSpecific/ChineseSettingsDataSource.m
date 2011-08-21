@@ -1,18 +1,17 @@
 //
-//  JapaneseSettingsDataSource.m
+//  ChineseSettingsDataSource.m
 //  jFlash
 //
 //  Created by Mark Makdad on 8/21/11.
 //  Copyright 2011 Long Weekend LLC. All rights reserved.
 //
 
-#import "JapaneseSettingsDataSource.h"
-#import "UpdateManager.h"
+#import "ChineseSettingsDataSource.h"
 #import "Constants.h"
 
-@implementation JapaneseSettingsDataSource
+@implementation ChineseSettingsDataSource
 
-@synthesize settingsChanged, directionChanged, themeChanged, readingChanged;
+@synthesize settingsChanged, directionChanged, themeChanged;
 @synthesize settingsHash;
 
 - (void) dealloc
@@ -33,10 +32,6 @@
   {
     self.themeChanged = YES;
   }
-  else if (key == APP_READING)
-  {
-    self.readingChanged = YES; 
-  }
   else
   {
     self.settingsChanged = YES;
@@ -45,7 +40,7 @@
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return (self.directionChanged || self.themeChanged || self.readingChanged);
+  return (self.directionChanged || self.themeChanged);
 }
 
 - (BOOL) shouldSendChangeNotification
@@ -58,8 +53,7 @@
   // we've sent the notifications, so reset to unchanged
   self.directionChanged = NO;
   self.themeChanged = NO;
-  self.readingChanged = NO;
-  self.settingsChanged = NO;
+  self.settingsChanged = NO;  
 }
 
 #pragma mark - Settings Data Source
@@ -79,7 +73,7 @@
   NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
   NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
   
-  NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
+  NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Chinese",@"SettingsViewController.HeadwordLanguage_Chinese"), 
                               NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
   NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
   NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
@@ -88,37 +82,28 @@
   ThemeManager *tm = [ThemeManager sharedThemeManager];
   NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
   
-  NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
-                             NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
-                             NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
-  NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
-  NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
+  NSArray *hwTypeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Traditional",@"SettingsViewController.DisplayHW_Traditional"),
+                            NSLocalizedString(@"Simplified",@"SettingsViewController.DisplayHW_Simplified"),nil];
+  NSArray *hwTypeKeys = [NSArray arrayWithObjects:SET_HEADWORD_TYPE_TRAD,SET_HEADWORD_TYPE_SIMP,nil];
+  NSDictionary *hwTypeDict = [NSDictionary dictionaryWithObjects:hwTypeObjects forKeys:hwTypeKeys];
   
   // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,nil];
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,hwTypeDict,modeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_HEADWORD_TYPE,APP_MODE,nil];
   self.settingsHash = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
   
   // These are the keys and display names of each row
   NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
                                NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
-                               NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
+                               NSLocalizedString(@"Character Style",@"SettingsViewController.SettingNames_HW_Type"),
                                NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_HEADWORD_TYPE,APP_ALGORITHM,nil];
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
                                       NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
                                       NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
   NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
-  
-  // Can we upgrade at all?  If so, hide the plugins
-  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
-  {
-    [userSettingNames removeLastObject];
-    [userSettingKeys removeLastObject];
-  }
-  
   NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
   
   NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),

@@ -23,15 +23,21 @@ extern NSString * const LWESettingsChanged;
 - (NSDictionary*) settingsHash;
 @end
 
+@class SettingsViewController;
+
+@protocol LWESettingsDelegate <NSObject>
+- (void) settingWillChange:(NSString*)key;
+- (BOOL) shouldSendCardChangeNotification;
+- (BOOL) shouldSendChangeNotification;
+- (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc;
+@end
+
 @interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
 
 - (void) iterateSetting: (NSString*) setting;
 
+// TODO: apparently data sources aren't generally retained, but in this case it seems to make sense.  Justify this.
 @property (retain) id<LWESettingsDataSource> dataSource;
-@property BOOL settingsChanged;
-@property BOOL directionChanged;
-@property BOOL themeChanged;
-@property BOOL readingChanged;
+@property (assign) id<LWESettingsDelegate> delegate;
 @property (retain, nonatomic) NSArray *sectionArray;
-@property (retain, nonatomic) Appirater *appirater;
 @end
