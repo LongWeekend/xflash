@@ -21,6 +21,7 @@ NSString * const SET_E_TO_J          = @"ENG";
 // It will COMPLETELY mess up the ability of our users to upgrade versions.
 NSString * const APP_MODE                 = @"mode";
 NSString * const APP_THEME                = @"theme";
+NSString * const APP_ALGORITHM            = @"algorithm";
 NSString * const APP_USER                 = @"user_id";
 NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_PLUGIN               = @"plugin";

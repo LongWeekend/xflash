@@ -27,6 +27,7 @@ extern NSString * const SET_E_TO_J;
 // DO NOT edit these
 extern NSString * const APP_MODE;
 extern NSString * const APP_THEME;
+extern NSString * const APP_ALGORITHM;
 extern NSString * const APP_USER;
 extern NSString * const APP_HEADWORD;
 extern NSString * const APP_PLUGIN;
