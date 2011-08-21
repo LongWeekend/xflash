@@ -11,9 +11,6 @@
 
 @interface JapaneseCard : Card
 
-- (NSString*) reading; //combinedReadingForSettings;
-- (NSString*) readingBasedonSettingsForExpandedSampleSentences;
-
 //! Romanized reading
 @property (nonatomic, retain) NSString *romaji;
 

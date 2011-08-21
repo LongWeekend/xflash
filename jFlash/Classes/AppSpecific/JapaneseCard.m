@@ -63,10 +63,10 @@
 }
 
 /** depending on APP_READING value in settings, will return a combined reading */
-- (NSString*) reading //combinedReadingForSettings
+- (NSString*) reading
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *combined_reading;
+  NSString *combined_reading = nil;
   
   // Mux the readings according to user preference
   if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
@@ -86,29 +86,5 @@
   return combined_reading;
 }
 
-
-/** depending on APP_READING value in settings, will return a combined reading. This is used with the expand sample sentences functionality */
-- (NSString*) readingBasedonSettingsForExpandedSampleSentences
-{
-	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-	NSString *combined_reading;
-	
-	// Mux the readings according to user preference
-	if([[settings objectForKey:APP_READING] isEqualToString:SET_READING_KANA])
-	{
-		combined_reading = [NSString stringWithFormat:@"%@", [self reading]];
-	} 
-	else if([[settings objectForKey:APP_READING] isEqualToString: SET_READING_ROMAJI])
-	{
-		combined_reading = [NSString stringWithFormat:@"%@", [self romaji]];
-	}
-	else
-	{
-		// Both together
-		combined_reading = [NSString stringWithFormat:@"%@ - %@", [self reading], [self romaji]];
-	}
-	
-	return combined_reading;
-}
 
 @end
