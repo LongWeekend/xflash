@@ -60,8 +60,9 @@
 
 #pragma mark - Core Class Methods
 
-- (void) setup
+- (void) setupWithCard:(Card *)card
 {
+  self.currentCard = card;
   LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
   LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
 }

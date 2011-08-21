@@ -50,7 +50,7 @@
 - (IBAction)doBuryCardBtn;
 
 // core methods
-- (void)setup;
+- (void)setupWithCard:(Card*)card;
 - (void)reveal;
 - (void)tweet;
 

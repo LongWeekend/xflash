@@ -22,7 +22,7 @@
 
 @interface CardViewController : UIViewController
 
-- (void) setup;
+- (void) setupWithCard:(Card*)card;
 - (void) reveal;
 
 //we don't retain delegates

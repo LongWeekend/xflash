@@ -22,15 +22,17 @@
 #define STUDY_SET_SHOW_BURIED_IDX         1
 #define STUDY_SET_CHANGE_SET_IDX          0
 
-@interface StudyViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface StudyViewController : UIViewController <UIScrollViewDelegate,
+                                                   UIActionSheetDelegate,
+                                                   UIAlertViewDelegate,
+                                                   ExampleSentencesDataSource>
 {
   BOOL _alreadyShowedAlertView;
   BOOL _finishedSetAlertShowed;
   //! This is set when card is loaded, and used when revealed
   BOOL _cardShouldShowExampleViewCached;
   BOOL _viewHasBeenLoadedOnce;
-  // page control state
-  BOOL pageControlIsChangingPage;
+  BOOL _isChangingPage;  // page control state
 }
 
 - (IBAction)doShowProgressModalBtn;
@@ -81,7 +83,6 @@
 // Progress modal overlay
 @property (nonatomic, retain) IBOutlet UIView *progressModalView;
 @property (nonatomic, retain) IBOutlet UIView *progressModalBtn;
-//@property (nonatomic, retain) IBOutlet UIButton *progressModalCloseBtn;
 
 @property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
 
@@ -95,7 +96,6 @@
 
 @property (nonatomic, retain) id cardViewControllerDelegate;
 
-@property BOOL percentCorrectVisible;
 @property BOOL isBrowseMode;
 
 // stats for progress modal

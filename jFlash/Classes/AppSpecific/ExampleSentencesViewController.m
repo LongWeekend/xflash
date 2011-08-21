@@ -9,23 +9,20 @@
 #import "ExampleSentencesViewController.h"
 #import "RootViewController.h"
 
-@interface NSObject (ExampleSentencesDelegateSupport)
-// setup
-- (void)exampleSentencesViewWillSetup:(NSNotification *)aNotification;
-- (void)exampleSentencesViewDidSetup:(NSNotification *)aNotification;
-
-@end
-
-/** datasource informal protocol.  Officially you don't have to provide a datasource but the view will be empty if you don't */
-@interface NSObject (ExampleSentencesDatasourceSupport)
-- (Card*) currentCard;
-@end
-
-
 @implementation ExampleSentencesViewController
-@synthesize delegate, datasource;
+@synthesize delegate, dataSource;
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
+
+- (id) initWithDataSource:(id<ExampleSentencesDataSource>)aDataSource
+{
+  self = [super init];
+  if (self)
+  {
+    self.dataSource = aDataSource;
+  }
+  return self;
+}
 
 #pragma mark - Delegate Methods
 
@@ -132,16 +129,16 @@
 	[self _exampleSentencesViewWillSetup];
   
   // the datasource must implement currentcard or we don't set any data
-  if([datasource respondsToSelector:@selector(currentCard)])
+  if([self.dataSource respondsToSelector:@selector(currentCard)])
   {    
     // Get all sentences out - extract this
-    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[datasource currentCard] cardId] showAll:!useOldPluginMethods];
+    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[self.dataSource currentCard] cardId] showAll:!useOldPluginMethods];
 		
 		NSMutableString* html = [[NSMutableString alloc]
 														 initWithFormat: @"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>", 
-															[[datasource currentCard] reading], [[datasource currentCard] headword]];
+															[[self.dataSource currentCard] reading], [[self.dataSource currentCard] headword]];
 		
-    for (ExampleSentence* sentence in sentences) 
+    for (ExampleSentence *sentence in sentences) 
     {
 			[html appendFormat:@"<li>"];
       // Only put this stuff in HTML if we have example sentences 1.2
