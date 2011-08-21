@@ -57,9 +57,9 @@
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, retain) IBOutlet CardViewController *cardViewController;
-@property (nonatomic, retain) IBOutlet UIView *cardView;
-
 @property (nonatomic, retain) IBOutlet ActionBarViewController *actionBarController;
+@property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
+@property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
@@ -92,7 +92,6 @@
 @property (nonatomic, retain) Card *currentCard;
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
-@property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 
 @property (nonatomic, retain) id cardViewControllerDelegate;
 

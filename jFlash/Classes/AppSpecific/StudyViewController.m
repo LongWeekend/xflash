@@ -645,46 +645,37 @@
  * Called when a major thing happens (JFlash startup or EX_DB plugin installation)
  * when the fundamental workings of the scroll view may change.
  */
-- (void)_setupScrollView
+- (void) _setupScrollView
 {
-	scrollView.delegate = self;
-	
-  //scrollView.clipsToBounds = YES;
-	scrollView.pagingEnabled = YES;
-  scrollView.delaysContentTouches = NO;
-  scrollView.directionalLockEnabled = YES;
-  scrollView.canCancelContentTouches = YES;
-
-	// This stays NO until "reveal" sets it to yes.  Then setupViewForCard will set it to NO again.
-  scrollView.scrollEnabled = NO;
-  
-	NSUInteger views = 2;
-	CGFloat cx = scrollView.frame.size.width;
-  
+  UIViewController *vc = nil;
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
     self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
+    vc = self.exampleSentencesViewController;
   }
   else
   {
     // No example sentence plugin loaded, so show "please download me" view instead
     // TODO: iPad customization
-    self.exampleSentencesViewController = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
+    vc = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
   }
-  			
-  UIView *sentencesView = [self.exampleSentencesViewController view];
-	CGRect rect = sentencesView.frame;
-	rect.origin.x = ((self.scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
-	rect.origin.y = ((self.scrollView.frame.size.height - sentencesView.frame.size.height) / 2);
-	sentencesView.frame = rect;
+  
+  // Resize our second view to match our first one
+	CGRect rect = vc.view.frame;
+	CGFloat cx = self.scrollView.frame.size.width;
+	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
+	rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
+	vc.view.frame = rect;
+  
+  // Set the content size for the width * the number of views
+	NSInteger views = 2;
+	self.pageControl.numberOfPages = views;
+  self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
   
   // add the new view as a subview for the scroll view to handle
-	[self.scrollView addSubview:sentencesView];
-	
-	self.pageControl.numberOfPages = views;
-	[self.scrollView setContentSize:CGSizeMake(cx*views, [self.scrollView bounds].size.height)];
+	[self.scrollView addSubview:vc.view];
 }
 
 
