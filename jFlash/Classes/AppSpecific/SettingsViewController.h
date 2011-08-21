@@ -18,25 +18,20 @@ extern NSString * const APP_NEW_UPDATE;
 extern NSString * const LWECardSettingsChanged;
 extern NSString * const LWESettingsChanged;
 
+@protocol LWESettingsDataSource <NSObject>
+- (NSArray*) settingsArray;
+- (NSDictionary*) settingsHash;
+@end
+
 @interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
-{
-  NSMutableArray *sectionArray;
-  NSDictionary *settingsDict;
-  BOOL settingsChanged;
-  BOOL directionChanged;
-  BOOL themeChanged;
-  BOOL readingChanged;
-  Appirater *appirater;
-}
 
 - (void) iterateSetting: (NSString*) setting;
-- (NSMutableArray*) _settingsTableDataSource;
 
+@property (retain) id<LWESettingsDataSource> dataSource;
 @property BOOL settingsChanged;
 @property BOOL directionChanged;
 @property BOOL themeChanged;
 @property BOOL readingChanged;
-@property (retain, nonatomic) NSDictionary *settingsDict;
-@property (retain, nonatomic) NSMutableArray *sectionArray;
+@property (retain, nonatomic) NSArray *sectionArray;
 @property (retain, nonatomic) Appirater *appirater;
 @end
