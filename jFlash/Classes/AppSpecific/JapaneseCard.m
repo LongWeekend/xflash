@@ -41,25 +41,14 @@
  * Returns YES if a card has example sentences attached to it
  * \param newVersion - If YES, uses 1.2 version Sql, if NO, uses 1.1 version
  */
-- (BOOL) hasExampleSentences:(BOOL)newVersion
+- (BOOL) hasExampleSentences
 {
-  // Get settings to determine what data versio we are on
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0]) // version 1 doesn't understand this so say NO
+  BOOL returnVal = NO;
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
   {
-		LWE_LOG(@"JFlash Version 1.0?"); 
-    return NO;
+    returnVal = [ExampleSentencePeer sentencesExistForCardId:self.cardId];
   }
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY] == NO) // we always have a sentence if the plugin is not installed
-  {
-		LWE_LOG(@"Example Sentences plugin is NOT loaded");
-    return YES;
-  }
-  else 
-  {
-		LWE_LOG(@"Example sentences show all?");
-    return [ExampleSentencePeer sentencesExistForCardId:self.cardId showAll:newVersion];
-  }
+  return returnVal;
 }
 
 /** depending on APP_READING value in settings, will return a combined reading */

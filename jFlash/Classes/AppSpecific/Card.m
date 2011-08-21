@@ -30,7 +30,7 @@
   return self.hw_reading;
 }
 
-- (BOOL) hasExampleSentences:(BOOL)newVersion
+- (BOOL) hasExampleSentences
 {
   return NO;
 }

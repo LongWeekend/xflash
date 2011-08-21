@@ -19,7 +19,7 @@
 //private methods
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
-- (void)_setupCardView:(BOOL)cardShouldShowExampleView;
+- (void)_setupCardView:(BOOL)hasExamples;
 - (void)_setupExampleSentencesView:(BOOL)hasExamples;
 - (BOOL)_cardShouldShowExampleView:(Card*)card;
 - (void)_setCardViewDelegateBasedOnMode;
@@ -501,8 +501,8 @@
 	[self.cardViewController setupWithCard:self.currentCard];
 	
 	// Maybe we need to check if our examples view should be different?
-	BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:self.currentCard];
-	[self _setupCardView:cardShouldShowExampleView];
+	BOOL hasExamples = [self _cardShouldShowExampleView:self.currentCard];
+	[self _setupCardView:hasExamples];
 }
 
 /**
@@ -510,13 +510,13 @@
  * \param cardShouldShowExampleView YES if the scroll view should have 2 pages, and if the page control should be on.
  *  Note that even if this is YES, you may not be able to scroll depending on whether or not the card has been revealed.
  */
-- (void) _setupCardView:(BOOL)cardShouldShowExampleView
+- (void) _setupCardView:(BOOL)hasExamples
 {
   //reset to the first page
   [self _jumpToPage:0];
   
   [self.actionBarController setupWithCard:self.currentCard];
-  [self _setupExampleSentencesView:cardShouldShowExampleView];
+  [self _setupExampleSentencesView:hasExamples];
   
   // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
@@ -545,7 +545,7 @@
  */
 - (void) _setupExampleSentencesView:(BOOL)hasExamples
 {
-  // This should always be no because scroll cannot be done when card is not revealed
+  // Scroll/paging cannot be done when card is not revealed (quiz mode), or there are no examples.
 	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
   self.scrollView.pagingEnabled = (self.isBrowseMode && hasExamples);
   self.scrollView.scrollEnabled = (self.isBrowseMode && hasExamples);
@@ -568,14 +568,7 @@
   // First, check if they have the plugin installed
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    // Get plugin version
-    BOOL isNewVersion = NO;
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-    {
-      isNewVersion = YES;
-    }
-    cardShouldShowExampleView = [card hasExampleSentences:isNewVersion];
+    cardShouldShowExampleView = [card hasExampleSentences];
   }
   
   return cardShouldShowExampleView;

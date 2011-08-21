@@ -19,7 +19,7 @@
 - (NSString*) headword;
 
 - (NSString*) meaningWithoutMarkup;
-- (BOOL) hasExampleSentences:(BOOL)newVersion;
+- (BOOL) hasExampleSentences;
 
 @property (nonatomic) BOOL isBasicCard;
 //! PK of the card

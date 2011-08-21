@@ -1,6 +1,7 @@
 #import "CardPeer.h"
 #import "JapaneseCard.h"
 #import "ChineseCard.h"
+#import "ExampleSentencePeer.h"
 
 @implementation CardPeer
 
@@ -294,21 +295,20 @@
 /**
  * Returns an array containng cardId integers that are linked to the sentence
  * \param sentenceId Primary key of the sentence to look up cards for
- * \param showAll Determines whether to get all links or just trimmed links
  *
  * The difference with the method above is the query performed. This should be faster since it only asks for the data required. 
  *
  */
-+ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId showAll:(BOOL)showAll
++ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
 {	
 	NSString *sql = nil;
-  if (showAll)
+  if ([ExampleSentencePeer isNewVersion])
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
   }
   else
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
   }
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	FMResultSet *rs = [db executeQuery:sql];

@@ -76,7 +76,7 @@
   NSMutableString *html = [[NSMutableString alloc] initWithFormat:@"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>",card.reading,card.headword];
 
   // Get all sentences out - extract this
-  NSMutableArray *sentences = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId showAll:!_useOldPluginMethods];
+  NSMutableArray *sentences = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId];
   for (ExampleSentence *sentence in sentences) 
   {
     [html appendFormat:@"<li>"];
@@ -180,7 +180,7 @@
 		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
 		if (cardHTML == nil)
 		{
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue] showAll:!_useOldPluginMethods];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
 			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)
