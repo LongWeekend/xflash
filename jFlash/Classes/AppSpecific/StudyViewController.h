@@ -70,7 +70,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
 
 // The progress bar
-//@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
+@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
 @property (nonatomic, retain) IBOutlet UIView *progressBarView;
 
