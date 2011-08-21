@@ -29,64 +29,8 @@
   //! This is set when card is loaded, and used when revealed
   BOOL _cardShouldShowExampleViewCached;
   BOOL _viewHasBeenLoadedOnce;
-  
-  id cardViewControllerDelegate;
-  
-  // scroll view
-  IBOutlet UIScrollView* scrollView;
-  IBOutlet UIPageControl* pageControl;
- 
-  MoodIcon *moodIcon;
-  
-  IBOutlet CardViewController *cardViewController;
-  IBOutlet UIView *cardView;
-  
-  IBOutlet ActionBarViewController *actionBarController;
-  IBOutlet UIView *actionbarView;
-  
-  UIViewController *exampleSentencesViewController;
-  
-  IBOutlet UILabel *cardSetLabel;
-  IBOutlet UILabel *totalWordsLabel;
-
-  IBOutlet UIImageView *percentCorrectTalkBubble;
-  IBOutlet UILabel *percentCorrectLabel;
-  
-  IBOutlet UIButton *revealCardBtn;
-  IBOutlet UIImageView *tapForAnswerImage;
-  
-  // The progress bar
-  IBOutlet UIButton *showProgressModalBtn;
-  IBOutlet UIImageView *practiceBgImage;
-  IBOutlet UIView *progressBarView;
-  ProgressBarViewController *progressBarViewController;
-  
-  // Mood Icon
-  IBOutlet UIButton *moodIconBtn;
-  IBOutlet UIImageView *hhAnimationView;
-  
-  // Progress modal overlay
-  IBOutlet UIView *progressModalView;
-  IBOutlet UIView *progressModalBtn;
-  IBOutlet UIButton *progressModalCloseBtn;
-  
-  IBOutlet UILabel *remainingCardsLabel;
-
-  Tag *currentCardSet;
-  Card *currentCard;
-
-  BOOL percentCorrectVisible;
-  BOOL isBrowseMode;
-  
   // page control state
   BOOL pageControlIsChangingPage;
-
-  // For statistics
-  NSInteger numViewed;
-  NSInteger numRight;
-  NSInteger numWrong;
-  NSInteger currentRightStreak;
-  NSInteger currentWrongStreak;
 }
 
 - (IBAction)doShowProgressModalBtn;
@@ -106,37 +50,48 @@
 - (IBAction) changePage:(id)sender;
 - (IBAction) launchExampleInstaller;
 
+// scroll view
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
+
+@property (nonatomic, retain) IBOutlet CardViewController *cardViewController;
+@property (nonatomic, retain) IBOutlet UIView *cardView;
+
+@property (nonatomic, retain) IBOutlet ActionBarViewController *actionBarController;
+@property (nonatomic, retain) IBOutlet UIView *actionbarView;
+
+@property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
+@property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
+
+@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
+@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
+@property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
+
+// The progress bar
+//@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
+@property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
+@property (nonatomic, retain) IBOutlet UIView *progressBarView;
+
+// Mood Icon
+@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
+@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
+
+// Progress modal overlay
+@property (nonatomic, retain) IBOutlet UIView *progressModalView;
+@property (nonatomic, retain) IBOutlet UIView *progressModalBtn;
+//@property (nonatomic, retain) IBOutlet UIButton *progressModalCloseBtn;
+
+@property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
+
 
 // scroll view
-@property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UIPageControl* pageControl;
-@property (nonatomic, retain) UIButton *revealCardBtn;
-@property (nonatomic, retain) UIImageView *tapForAnswerImage;
-
-@property (nonatomic, retain) MoodIcon *moodIcon;
-@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
-@property (nonatomic, retain) CardViewController *cardViewController; 
-@property (nonatomic, retain) UIView *cardView;
-
-@property (nonatomic, retain) UIViewController *exampleSentencesViewController;
-
-@property (nonatomic, retain) ActionBarViewController *actionBarController;
-@property (nonatomic, retain) UIView *actionbarView;
-
-@property (nonatomic, retain) UILabel *cardSetLabel;
-@property (nonatomic, retain) UILabel *percentCorrectLabel;
-@property (nonatomic, retain) UILabel *totalWordsLabel;
-@property (nonatomic, retain) UILabel *remainingCardsLabel;
-
-@property (nonatomic, retain) UIImageView *practiceBgImage;
-@property (nonatomic, retain) UIView *progressBarView;
-@property (nonatomic, retain) UIImageView *hhAnimationView;
-
-@property (nonatomic, retain) UIView *progressModalView;
-@property (nonatomic, retain) UIView *progressModalBtn;
-
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
+@property (nonatomic, retain) MoodIcon *moodIcon;
+@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
+@property (nonatomic, retain) UIViewController *exampleSentencesViewController;
 
 @property (nonatomic, retain) id cardViewControllerDelegate;
 

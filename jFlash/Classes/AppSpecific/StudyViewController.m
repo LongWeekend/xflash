@@ -35,7 +35,7 @@
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, percentCorrectVisible, isBrowseMode, hhAnimationView;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
-@synthesize scrollView, pageControl, exampleSentencesViewController;
+@synthesize scrollView, pageControl, exampleSentencesViewController, moodIconBtn, percentCorrectTalkBubble;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize cardViewControllerDelegate;
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
