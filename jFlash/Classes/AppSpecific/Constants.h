@@ -77,6 +77,10 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
   extern NSString * const SET_HEADWORD_TYPE_TRAD;
   extern NSString * const SET_HEADWORD_TYPE_SIMP;
 
+  extern NSString * const APP_PINYIN_COLOR;
+  extern NSString * const SET_PINYIN_COLOR_ON;
+  extern NSString * const SET_PINYIN_COLOR_OFF;
+
   extern NSString * const LWE_CF_VERSION_1_0;
 #endif 
 

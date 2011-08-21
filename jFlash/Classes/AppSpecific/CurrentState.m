@@ -127,6 +127,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setValue:SET_READING_BOTH forKey:APP_READING];
 #elif defined(LWE_CFLASH)
   [settings setValue:SET_HEADWORD_TYPE_SIMP forKey:APP_HEADWORD_TYPE];
+  [settings setValue:SET_PINYIN_COLOR_ON forKey:APP_PINYIN_COLOR];
 #endif
     
   [settings setValue:DEFAULT_THEME forKey:APP_THEME];

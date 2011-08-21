@@ -253,7 +253,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:indexPath.section];
+	NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
   NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
 
   CGFloat size;

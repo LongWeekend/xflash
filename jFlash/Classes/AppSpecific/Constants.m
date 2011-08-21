@@ -74,6 +74,10 @@ const NSInteger FAVORITES_TAG_ID = 0;
       NSString * const APP_HEADWORD_TYPE       = @"headword_type";
       NSString * const SET_HEADWORD_TYPE_TRAD  = @"TRAD";
       NSString * const SET_HEADWORD_TYPE_SIMP  = @"SIMP";
+      NSString * const APP_PINYIN_COLOR        = @"pinyin_color";
+      NSString * const SET_PINYIN_COLOR_ON     = @"ON";
+      NSString * const SET_PINYIN_COLOR_OFF    = @"OFF";
+
 
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.0";
