@@ -200,7 +200,7 @@
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
-  if (!self.hasfinishedSetAlertShowed)
+  if (self.hasfinishedSetAlertShowed == NO)
   {
     UIAlertView *alertView = [[UIAlertView alloc] 
                             initWithTitle:@"Study Set Learned" 
@@ -279,10 +279,10 @@
   self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
   
   // Update mood icon (is this necessary to do here??)
-  CGFloat tmpRatio;
+  CGFloat tmpRatio = 0;
   if (numViewed > 0)
   {
-    tmpRatio = 100*((float)numRight / (float)numViewed);
+    tmpRatio = 100*((CGFloat)numRight / (CGFloat)numViewed);
   }
   else
   {
@@ -352,7 +352,7 @@
       currentRightStreak++;
       currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      nextCard = [self.currentCardSet getRandomCard:currentCard.cardId error:&error];
+      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
       {
@@ -365,9 +365,9 @@
       numViewed++;
       currentWrongStreak++;
       currentRightStreak = 0;
-      [self setFinishedSetAlertShowed:NO];
+      self.finishedSetAlertShowed = NO;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      nextCard = [self.currentCardSet getRandomCard:currentCard.cardId error:&error];
+      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       break;      
   }
@@ -592,12 +592,12 @@
     levelDetails = [NSMutableArray arrayWithCapacity:7];
     for (i = 0; i < 6; i++)
     {
-      countObject =[[currentCardSet cardLevelCounts] objectAtIndex:i];
+      countObject = [[self.currentCardSet cardLevelCounts] objectAtIndex:i];
       [levelDetails addObject:countObject];
       if(i > 0)
         seencount = seencount + [[levelDetails objectAtIndex:i] floatValue];
     }
-    [levelDetails addObject:[NSNumber numberWithInt:[currentCardSet cardCount]]];  
+    [levelDetails addObject:[NSNumber numberWithInt:[self.currentCardSet cardCount]]];  
     [levelDetails addObject:[NSNumber numberWithFloat:seencount]];
   }
   return levelDetails;
