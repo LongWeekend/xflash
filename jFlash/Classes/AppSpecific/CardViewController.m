@@ -33,17 +33,7 @@
   LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), self);
 }
 
-//Give the delegate a chance to not reveal the card
-- (BOOL)_cardViewShouldReveal:(BOOL)shouldReveal
-{
-  if ([self.delegate respondsToSelector:@selector(cardView:shouldReveal:)])
-  {
-    shouldReveal = [self.delegate cardView:self shouldReveal:shouldReveal];
-  }
-  return shouldReveal;
-}
-
-#pragma mark Flow Methods
+#pragma mark - Flow Methods
 
 - (void) setup
 {
@@ -53,10 +43,14 @@
 
 - (void) reveal
 {
-  if ([self _cardViewShouldReveal:NO])
+  if ([self.delegate respondsToSelector:@selector(cardView:shouldReveal:)])
   {
-    [self _cardViewWillReveal];
-    [self _cardViewDidReveal];
+    BOOL shouldReveal = [self.delegate cardView:self shouldReveal:NO];
+    if (shouldReveal)
+    {
+      [self _cardViewWillReveal];
+      [self _cardViewDidReveal];
+    }
   }
 }
 

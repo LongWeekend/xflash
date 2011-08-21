@@ -372,7 +372,9 @@
   
   BOOL knewIt = NO;
   
-  Card *nextCard = nil; NSString *direction = nil; NSError *error = nil;
+  Card *nextCard = nil;
+  NSString *direction = nil;
+  NSError *error = nil;
 	switch (action)
   {
     // Browse Mode options
@@ -429,7 +431,7 @@
 - (IBAction) doTogglePercentCorrectBtn
 {
   // Hide the percentage talk bubble on click
-  if(!percentCorrectVisible && !self.isBrowseMode)
+  if((percentCorrectVisible == NO) && (self.isBrowseMode == NO))
   {
     [percentCorrectTalkBubble setHidden:NO];
     [percentCorrectLabel setHidden:NO];
