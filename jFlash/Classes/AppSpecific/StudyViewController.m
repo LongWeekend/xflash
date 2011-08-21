@@ -20,7 +20,7 @@
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
 - (void)_setupCardView:(BOOL)cardShouldShowExampleView;
-- (void)_setupExampleSentencesView:(BOOL)cardShouldShowExampleView;
+- (void)_setupExampleSentencesView:(BOOL)hasExamples;
 - (BOOL)_cardShouldShowExampleView:(Card*)card;
 - (void)_setCardViewDelegateBasedOnMode;
 - (void)_jumpToPage:(int)page;
@@ -530,9 +530,6 @@
   {
     [self _turnPercentCorrectOn];
     currCardCount = [[[self.currentCardSet cardLevelCounts] objectAtIndex:0] intValue];
-
-    // You aren't allowed to scroll over to see the example sentences in quiz mode before revealing.
-    self.scrollView.scrollEnabled = NO;
   }
   
   // If browse mode, hide the quiz stuff.
@@ -546,24 +543,15 @@
  * Re-locks the scrolling to NO (before REVEAL) and calls setup on the ExampleSentencesViewController
  * \param cardShouldShowExampleView if YES, the page control will be visible
  */
-- (void) _setupExampleSentencesView:(BOOL)cardShouldShowExampleView
+- (void) _setupExampleSentencesView:(BOOL)hasExamples
 {
   // This should always be no because scroll cannot be done when card is not revealed
 	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
-	if (self.isBrowseMode && cardShouldShowExampleView == YES)
-	{
-		self.scrollView.pagingEnabled = YES;
-		self.scrollView.scrollEnabled = YES;
-	}
-	else 
-	{
-		self.scrollView.pagingEnabled = NO;
-		self.scrollView.scrollEnabled = NO;
-	}
+  self.scrollView.pagingEnabled = (self.isBrowseMode && hasExamples);
+  self.scrollView.scrollEnabled = (self.isBrowseMode && hasExamples);
 
-  // Page control?
-  self.pageControl.hidden = (cardShouldShowExampleView == NO);
-
+  // Page control should be shown when we have example sentences, regardless of browse
+  self.pageControl.hidden = (hasExamples == NO);
   [self.exampleSentencesViewController setupWithCard:self.currentCard];
 }
 
