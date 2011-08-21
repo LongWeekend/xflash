@@ -5,7 +5,12 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import "jFlashAppDelegate.h"
+
 #import "RootViewController.h"
+
+// TODO: this is a hack
+#import "StudyViewController.h"
+
 #import "CurrentState.h"
 #import "LWEFile.h"
 #import "LWECrashUtils.h"
@@ -212,7 +217,7 @@
   LWE_LOG(@"Application did enter the background now");
   // Get current card from StudyViewController - this is REALLY BAD for coupling!
   // TODO: put the current card into current state
-  StudyViewController* studyCtl = [rootViewController.tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+  StudyViewController *studyCtl = [rootViewController.tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
   
   // Only freeze if we have a database
   if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
