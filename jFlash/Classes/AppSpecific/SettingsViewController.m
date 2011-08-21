@@ -54,9 +54,8 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
  */
 - (void) _addPluginMenuItem
 {
-  [self setSectionArray:[self _settingsTableDataSource]];
   self.navigationItem.rightBarButtonItem = nil;
-  [[self tableView] reloadData];
+  [self _updateTableDataAfterPluginInstall:nil];
 }
 
 /**
