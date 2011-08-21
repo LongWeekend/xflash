@@ -9,8 +9,11 @@
 #import "Constants.h"
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
-#import "CardViewController.h"
+
 #import "MoodIcon.h"
+
+#import "CardViewController.h"
+#import "ActionBarViewController.h"
 #import "BrowseModeCardViewDelegate.h"
 #import "PracticeModeCardViewDelegate.h"
 #import "ExampleSentencesViewController.h"

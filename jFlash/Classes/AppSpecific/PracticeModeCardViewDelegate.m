@@ -78,7 +78,9 @@
   avc.nextCardBtn.hidden = YES;
   
   // Move the add button back to where it belongs - if we were in browse mode, this is changed.
-  avc.addBtn.frame.origin.x = 9;
+  CGRect rect = avc.addBtn.frame;
+  rect.origin.x = 9;
+  avc.addBtn.frame = rect;
 }
 
 -(void) actionBarWillReveal:(NSNotification *)aNotification

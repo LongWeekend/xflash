@@ -45,7 +45,9 @@
   avc.buryCardBtn.hidden = YES;
 
   // move the action button to the middle (it is on the left in practice mode)
-  avc.addBtn.frame.origin.x = 128;
+  CGRect rect = avc.addBtn.frame;
+  rect.origin.x = 128;
+  avc.addBtn.frame = rect;
 }
 
 - (void)dealloc
