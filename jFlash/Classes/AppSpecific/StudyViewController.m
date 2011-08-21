@@ -564,11 +564,7 @@
   // Page control?
   self.pageControl.hidden = (cardShouldShowExampleView == NO);
 
-  if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
-  {
-		ExampleSentencesViewController * exControler = (ExampleSentencesViewController *)self.exampleSentencesViewController;
-    [exControler setup];
-  }
+  [self.exampleSentencesViewController setupWithCard:self.currentCard];
 }
 
 
@@ -720,7 +716,7 @@
   if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
-    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] initWithDataSource:self] autorelease];
+    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
   }
   else
   {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Card.h"
 #import "ExampleSentencePeer.h"
 #import "UIWebView+LWENoBounces.h"
 #import "NSURL+LWEUtilities.h"
@@ -24,31 +25,17 @@ typedef enum
 	ADD_CARD_TO_SET
 } SampleSentenceMethods;
 
-/** datasource informal protocol.  Officially you don't have to provide a datasource but the view will be empty if you don't */
-@protocol ExampleSentencesDataSource <NSObject>
-- (Card*) currentCard;
-@end
-
 @interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {
-  BOOL useOldPluginMethods;
+  BOOL _useOldPluginMethods;
 }
 
-- (id) initWithDataSource:(id<ExampleSentencesDataSource>)aDataSource;
+- (void) setupWithCard:(Card*)card;
 
-- (void) setup;
-
-@property (assign) IBOutlet id<ExampleSentencesDataSource> dataSource;
+@property (retain) NSMutableDictionary *sampleDecomposition;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
-@property (nonatomic, retain) NSMutableDictionary *sampleDecomposition;
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
-
 - (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView;
 
 @end
-
-//* Notification names
-extern NSString * const exampleSentencesViewWillSetupNotification;
-extern NSString * const exampleSentencesViewDidSetupNotification;
-

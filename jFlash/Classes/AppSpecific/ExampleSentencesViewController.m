@@ -10,19 +10,8 @@
 #import "RootViewController.h"
 
 @implementation ExampleSentencesViewController
-@synthesize dataSource;
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
-
-- (id) initWithDataSource:(id<ExampleSentencesDataSource>)aDataSource
-{
-  self = [super init];
-  if (self)
-  {
-    self.dataSource = aDataSource;
-  }
-  return self;
-}
 
 #pragma mark - UIView subclass methods
 
@@ -30,7 +19,7 @@
 {
 	if ((self = [super init]))
 	{
-		sampleDecomposition = [[NSMutableDictionary alloc] init];
+		self.sampleDecomposition = [NSMutableDictionary dictionary];
 	}
 	return self;
 }
@@ -39,21 +28,19 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  sentencesWebView.backgroundColor = [UIColor clearColor];
+
+  self.sentencesWebView.backgroundColor = [UIColor clearColor];
   [self.sentencesWebView shutOffBouncing];
   
   // What version of the example sentence plugin are we using?  If 1.1, it's old.
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   NSString *version = [pm versionForLoadedPlugin:EXAMPLE_DB_KEY];
-  if ([version isEqualToString:@"1.1"])
+  _useOldPluginMethods = [version isEqualToString:@"1.1"];
+
+  // I want to know if someone updated their example sentence version
+  if (_useOldPluginMethods)
   {
-    useOldPluginMethods = YES;
-    // I want to know if someone updated their example sentence version
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
-  }
-  else
-  {
-    useOldPluginMethods = NO;
   }
 }
 
@@ -74,7 +61,7 @@
     NSString *version = [dict objectForKey:@"plugin_version"];
     if (![version isEqualToString:@"1.1"])
     {
-      useOldPluginMethods = NO;
+      _useOldPluginMethods = NO;
       [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
     }
   }
@@ -83,58 +70,43 @@
 
 #pragma mark - Core Methods
 
-- (void) setupSentencesWebView:(NSString *)sentencesHTML
-{  
+//* setup the example sentences view with information from the datasource
+- (void) setupWithCard:(Card *)card
+{
+  NSMutableString *html = [[NSMutableString alloc] initWithFormat:@"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>",card.reading,card.headword];
+
+  // Get all sentences out - extract this
+  NSMutableArray *sentences = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId showAll:!_useOldPluginMethods];
+  for (ExampleSentence *sentence in sentences) 
+  {
+    [html appendFormat:@"<li>"];
+    // Only put this stuff in HTML if we have example sentences 1.2
+    if (_useOldPluginMethods == NO)
+    {
+      [html appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",sentence.sentenceId,kJFlashServer,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
+    }
+    [html appendFormat:@"%@<br />",sentence.sentenceJa];
+    
+    // Only put this stuff in HTML if we have example sentences 1.2
+    if (_useOldPluginMethods == NO)
+    {
+      [html appendFormat:@"<div id='detailedCards%d'></div>",sentence.sentenceId];
+    }
+    [html appendFormat:@"<div class='lowlight'>%@</div></li>",sentence.sentenceEn];
+  }
+  [html appendFormat:@"</ol>"];
+  
+  if ([self.sampleDecomposition count] > 0)
+  {
+    [self.sampleDecomposition removeAllObjects];
+  }
+
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
-  NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
+  [self.sentencesWebView loadHTMLString:[NSString stringWithFormat:@"%@<span>%@</span>%@",htmlHeader,html,HTML_FOOTER] baseURL:nil];
 
-  [self.sentencesWebView loadHTMLString:html baseURL:nil];
-}
-
-//* setup the example sentences view with information from the datasource
-- (void) setup
-{
-  // the datasource must implement currentcard or we don't set any data
-  if([self.dataSource respondsToSelector:@selector(currentCard)])
-  {    
-    // Get all sentences out - extract this
-    NSMutableArray* sentences = [ExampleSentencePeer getExampleSentencesByCardId:[[self.dataSource currentCard] cardId] showAll:!useOldPluginMethods];
-		
-		NSMutableString* html = [[NSMutableString alloc]
-														 initWithFormat: @"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>", 
-															[[self.dataSource currentCard] reading], [[self.dataSource currentCard] headword]];
-		
-    for (ExampleSentence *sentence in sentences) 
-    {
-			[html appendFormat:@"<li>"];
-      // Only put this stuff in HTML if we have example sentences 1.2
-      if (!useOldPluginMethods)
-      {
-        [html appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>%@</span></a></div>", 
-						[sentence sentenceId], kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, [sentence sentenceId],SHOW_BUTTON_TITLE];
-      }
-			
-      [html appendFormat:@"%@<br />", [sentence sentenceJa]];
-      // Only put this stuff in HTML if we have example sentences 1.2
-      if (!useOldPluginMethods)
-      {
-        [html appendFormat:@"<div id='detailedCards%d'></div>", [sentence sentenceId]];
-      }
-      
-			[html appendFormat:@"<div class='lowlight'>%@</div></li>", [sentence sentenceEn]];
-    }
-		
-    [html appendFormat:@"</ol>"];
-		if ([sampleDecomposition count] > 0)
-		{
-			[sampleDecomposition removeAllObjects];
-		}
-
-    [self setupSentencesWebView:html];
-		[html release];
-  }
+  [html release];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -191,14 +163,13 @@
 
 - (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView
 {
-	NSString *js;
+	NSString *js = nil;
 	if ([open isEqualToString:@"1"])
 	{
 		//Close the expanded div. Return back the status of the expaned button
-		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ", sentenceID];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ", sentenceID, SHOW_BUTTON_TITLE];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ", 
-			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
+		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceID];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ",sentenceID,SHOW_BUTTON_TITLE];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ",sentenceID,kJFlashServer,TOKENIZE_SAMPLE_SENTENCE,sentenceID];
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
 	else
@@ -209,7 +180,7 @@
 		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
 		if (cardHTML == nil)
 		{
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue] showAll:!useOldPluginMethods];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue] showAll:!_useOldPluginMethods];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
 			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)
@@ -265,12 +236,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
   [sentencesWebView release];
 	[sampleDecomposition release];
-  // we don't release datasources and delegates because we don't retain them (hands off shit you don't own)
   [super dealloc];
 }
 
-
 @end
-     
-NSString * const exampleSentencesViewWillSetupNotification = @"exampleSentencesViewWillSetupNotification";
-NSString * const exampleSentencesViewDidSetupNotification = @"exampleSentencesViewDidSetupNotification";

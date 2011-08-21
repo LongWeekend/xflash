@@ -24,8 +24,7 @@
 
 @interface StudyViewController : UIViewController <UIScrollViewDelegate,
                                                    UIActionSheetDelegate,
-                                                   UIAlertViewDelegate,
-                                                   ExampleSentencesDataSource>
+                                                   UIAlertViewDelegate>
 {
   BOOL _alreadyShowedAlertView;
   BOOL _finishedSetAlertShowed;
@@ -92,7 +91,7 @@
 @property (nonatomic, retain) Card *currentCard;
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
-@property (nonatomic, retain) UIViewController *exampleSentencesViewController;
+@property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 
 @property (nonatomic, retain) id cardViewControllerDelegate;
 
