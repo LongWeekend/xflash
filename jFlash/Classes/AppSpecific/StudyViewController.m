@@ -170,8 +170,8 @@
 }
 
 /**
- * After 1.0 to 1.1 upgrade, the user will be presented with a UIAlertView to upgrade their DB.
- * This is the delegate method to handle the response of what the user taps (do it now or later)
+ * We prompt users to get Rikai if it is JFlash.
+ * This is the delegate method to handle the response of what the user taps.
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -193,8 +193,6 @@
   {
     switch (buttonIndex)
     {
-      case LWE_ALERT_OK_BTN:
-        break;
       case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
         [self _openLinkshareURL];
         break;

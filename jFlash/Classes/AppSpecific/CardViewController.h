@@ -9,17 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 
+@class CardViewController;
+
+@protocol CardViewControllerDelegate <NSObject>
+@optional
+- (void)cardViewWillSetup:(NSNotification *)aNotification;
+- (void)cardViewDidSetup:(NSNotification *)aNotification;
+- (void)cardViewWillReveal:(NSNotification *)aNotification;
+- (void)cardViewDidReveal:(NSNotification *)aNotification;
+- (BOOL)cardViewShouldReveal:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
+@end
+
 @interface CardViewController : UIViewController
-{
-  IBOutlet id delegate;  
-  Card *currentCard;
-}
 
 - (void) setup;
 - (void) reveal;
 
 //we don't retain delegates
-@property (assign, nonatomic, readwrite) IBOutlet id delegate;
+@property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 @property (nonatomic, retain) Card *currentCard;
 
 @end
