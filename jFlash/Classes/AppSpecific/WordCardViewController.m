@@ -160,7 +160,7 @@
 
 - (void) updateCardReading:(Card*) card
 {
-  [cardReadingLabel setText:[card combinedReadingForSettings]];
+  self.cardReadingLabel.text = [card reading];
   [LWEUILabelUtils resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
 }
 

@@ -131,7 +131,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     NSString *meaningStr = [card meaningWithoutMarkup];
-    NSString *readingStr = [card combinedReadingForSettings];
+    NSString *readingStr = [card reading];
     
     if (readingStr.length > 0)
     {

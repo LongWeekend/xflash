@@ -195,7 +195,7 @@ enum EntrySectionRows
 {
   if (indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard combinedReadingForSettings], [currentCard meaningWithoutMarkup]];
+    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard reading], [currentCard meaningWithoutMarkup]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
   else 
@@ -219,16 +219,13 @@ enum EntrySectionRows
   // setup the cell for the full entry
   if (indexPath.section == kEntrySection)
   {
-    NSString* text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard combinedReadingForSettings], [currentCard meaningWithoutMarkup]];
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
-    [label setLineBreakMode:UILineBreakModeWordWrap];
-    [label setMinimumFontSize:FONT_SIZE];
-    [label setNumberOfLines:0];
-    [label setFont:[UIFont systemFontOfSize:FONT_SIZE]];
-    [label setText:text];
-
-    CGRect rect = [LWEUILabelUtils makeFrameForText:text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
-    [label setFrame:rect];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.minimumFontSize = FONT_SIZE;
+    label.numberOfLines = 0;
+    label.font = [UIFont systemFontOfSize:FONT_SIZE];
+    label.text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard reading], [currentCard meaningWithoutMarkup]];
+    label.frame = [LWEUILabelUtils makeFrameForText:text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [[cell contentView] addSubview:label];

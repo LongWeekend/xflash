@@ -27,8 +27,7 @@
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
 
-#pragma mark -
-#pragma mark Delegate Methods
+#pragma mark - Delegate Methods
 
 - (void)_exampleSentencesViewWillSetup
 {
@@ -58,8 +57,7 @@
   [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-#pragma mark -
-#pragma mark UIView subclass methods
+#pragma mark - UIView subclass methods
 
 - (id)init
 {
@@ -93,8 +91,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Private
+#pragma mark - Private
 
 /**
  * Callback for when a plugin is installed.  
@@ -117,14 +114,12 @@
 }
 
 
-#pragma mark -
-#pragma mark Core Methods
+#pragma mark - Core Methods
 
 - (void) setupSentencesWebView:(NSString *)sentencesHTML
 {  
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-	LWE_LOG(@"CSS : %@", cssHeader);
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
   NSString *html = [NSString stringWithFormat:@"%@<span>%@</span>%@", htmlHeader, sentencesHTML, HTML_FOOTER];
 
@@ -144,7 +139,7 @@
 		
 		NSMutableString* html = [[NSMutableString alloc]
 														 initWithFormat: @"<div class='readingLabel'>%@</div><h2 class='headwordLabel'>%@</h2><ol>", 
-															[[datasource currentCard] combinedReadingForSettings], [[datasource currentCard] headword]];
+															[[datasource currentCard] reading], [[datasource currentCard] headword]];
 		
     for (ExampleSentence* sentence in sentences) 
     {
@@ -178,8 +173,7 @@
   [self _exampleSentencesViewDidSetup];
 }
 
-#pragma mark -
-#pragma mark UIWebViewDelegate
+#pragma mark - UIWebViewDelegate
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -294,8 +288,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:userInfo];
 }
 
-#pragma mark -
-#pragma mark Class Plumbing
+#pragma mark - Class Plumbing
 
 - (void)viewDidUnload
 {
