@@ -10,7 +10,7 @@
 #import "RootViewController.h"
 
 @implementation ExampleSentencesViewController
-@synthesize delegate, dataSource;
+@synthesize dataSource;
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
 
@@ -22,36 +22,6 @@
     self.dataSource = aDataSource;
   }
   return self;
-}
-
-#pragma mark - Delegate Methods
-
-- (void)_exampleSentencesViewWillSetup
-{
-  NSNotification *notification = [NSNotification notificationWithName: exampleSentencesViewWillSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(exampleSentencesViewWillSetup:)])
-  {
-    [[self delegate] exampleSentencesViewWillSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)_exampleSentencesViewDidSetup
-{
-  NSNotification *notification = [NSNotification notificationWithName: exampleSentencesViewDidSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(exampleSentencesViewDidSetup:)])
-  {
-    [[self delegate] exampleSentencesViewDidSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 #pragma mark - UIView subclass methods
@@ -126,8 +96,6 @@
 //* setup the example sentences view with information from the datasource
 - (void) setup
 {
-	[self _exampleSentencesViewWillSetup];
-  
   // the datasource must implement currentcard or we don't set any data
   if([self.dataSource respondsToSelector:@selector(currentCard)])
   {    
@@ -167,7 +135,6 @@
     [self setupSentencesWebView:html];
 		[html release];
   }
-  [self _exampleSentencesViewDidSetup];
 }
 
 #pragma mark - UIWebViewDelegate

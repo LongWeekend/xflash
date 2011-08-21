@@ -24,12 +24,6 @@ typedef enum
 	ADD_CARD_TO_SET
 } SampleSentenceMethods;
 
-@protocol ExampleSentencesDelegate <NSObject>
-@optional
-- (void)exampleSentencesViewWillSetup:(NSNotification *)aNotification;
-- (void)exampleSentencesViewDidSetup:(NSNotification *)aNotification;
-@end
-
 /** datasource informal protocol.  Officially you don't have to provide a datasource but the view will be empty if you don't */
 @protocol ExampleSentencesDataSource <NSObject>
 - (Card*) currentCard;
@@ -44,7 +38,6 @@ typedef enum
 
 - (void) setup;
 
-@property (assign) IBOutlet id<ExampleSentencesDelegate> delegate;
 @property (assign) IBOutlet id<ExampleSentencesDataSource> dataSource;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
 @property (nonatomic, retain) NSMutableDictionary *sampleDecomposition;
