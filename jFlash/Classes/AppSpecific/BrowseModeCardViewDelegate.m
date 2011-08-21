@@ -7,6 +7,7 @@
 //
 
 #import "BrowseModeCardViewDelegate.h"
+
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
 
@@ -17,36 +18,34 @@
 - (void)cardViewWillSetup:(NSNotification *)aNotification
 {
 	CardViewController *cardViewController = [aNotification object];
-  if([self wordCardViewController] == nil)
+  if(self.wordCardViewController == nil)
   {
     WordCardViewController *cvc = [[WordCardViewController alloc] init];
     [self setWordCardViewController:cvc];
-    [cardViewController setView:[[self wordCardViewController] view]];
+    [cardViewController setView:[self.wordCardViewController view]];
 		[cvc release];
   }
   
-  [[self wordCardViewController] prepareView:[cardViewController currentCard]];
-  [[self wordCardViewController] setupReadingVisibility];
+  [self.wordCardViewController prepareView:[cardViewController currentCard]];
+  [self.wordCardViewController setupReadingVisibility];
 }
 
 - (void)actionBarWillSetup:(NSNotification *)aNotification
 {
-  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-  [[[aNotification object] prevCardBtn] setHidden:NO];
-  [[[aNotification object] nextCardBtn] setHidden:NO];
+  ActionBarViewController *avc = (ActionBarViewController*)[aNotification object];
+  avc.prevCardBtn.hidden = NO;
+  avc.nextCardBtn.hidden = NO;
+  avc.addBtn.hidden = NO;
   
   // tell the practice mode to piss off
-  [[[aNotification object] rightBtn] setHidden:YES];
-  [[[aNotification object] wrongBtn] setHidden:YES];
-  [[[aNotification object] buryCardBtn] setHidden:YES];
-  [[[aNotification object] addBtn] setHidden:NO];
-  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-  [[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
-  
-  // move the action button to the middle
-  CGRect frame = [[[aNotification object] addBtn] frame];
-  frame.origin.x = 128;
-  [[[aNotification object] addBtn] setFrame:frame];
+  avc.cardMeaningBtnHint.hidden = YES;
+  avc.cardMeaningBtnHintMini.hidden = YES;
+  avc.rightBtn.hidden = YES;
+  avc.wrongBtn.hidden = YES;
+  avc.buryCardBtn.hidden = YES;
+
+  // move the action button to the middle (it is on the left in practice mode)
+  avc.addBtn.frame.origin.x = 128;
 }
 
 - (void)dealloc

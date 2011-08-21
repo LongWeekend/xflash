@@ -10,9 +10,6 @@
 #import "WordCardViewController.h"
 
 @interface BrowseModeCardViewDelegate : NSObject 
-{
-  WordCardViewController *wordCardViewController;
-}
 
 @property (nonatomic, retain) WordCardViewController *wordCardViewController;
 

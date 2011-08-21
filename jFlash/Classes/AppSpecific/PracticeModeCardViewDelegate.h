@@ -7,15 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CardViewController.h"
 #import "WordCardViewController.h"
-#import "ActionBarViewController.h"
 
 @interface PracticeModeCardViewDelegate : NSObject 
-{
-  WordCardViewController* wordCardViewController;
-}
 
-@property (nonatomic, retain) WordCardViewController* wordCardViewController;
+@property (nonatomic, retain) WordCardViewController *wordCardViewController;
 
 @end
