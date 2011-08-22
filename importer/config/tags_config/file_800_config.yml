@@ -32,10 +32,10 @@ tags_800_beginner:
     
 tags_800_intermediate:
     file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
-    tag_name: "800Words+Beginner"
+    tag_name: "800Words+Mid"
     tag_type: ""
-    short_name: "800+ Beginner"
-    description: "800+ Words for beginner"      
+    short_name: "800+ Intermediate"
+    description: "800+ Words for Intermediate user"      
     source: "CSV File"                          
     source_name: "800+800020100915-mid.csv"     
     visible: 1                                  
@@ -44,10 +44,10 @@ tags_800_intermediate:
 
 tags_800_advance:
     file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
-    tag_name: "800Words+Beginner"
+    tag_name: "800Words+Advance"
     tag_type: ""
-    short_name: "800+ Beginner"
-    description: "800+ Words for beginner"      
+    short_name: "800+ Advance"
+    description: "800+Advanced Words"      
     source: "CSV File"                          
     source_name: "800+800020100915-adv.csv"     
     visible: 1                                  
