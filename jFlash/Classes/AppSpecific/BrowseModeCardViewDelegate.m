@@ -22,18 +22,8 @@
   {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
-    NSString *nibName = nil;
-    if ([studyDirection isEqualToString:SET_E_TO_J])
-    {
-      nibName = @"WordCardViewController-EtoJ";
-    }
-    else
-    {
-      nibName = @"WordCardViewController";
-    }
-    
-    // Note the custom NIB name that has a different positioning for all of the elements
-    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
+    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
   

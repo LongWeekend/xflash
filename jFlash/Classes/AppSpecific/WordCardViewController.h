@@ -11,20 +11,29 @@
 #import "UIWebView+LWENoBounces.h"
 #import "ReadingView.h"
 
+extern NSString * const LWECardHtmlHeader;
+extern NSString * const LWECardHtmlHeader_EtoJ;
+extern NSString * const LWECardHtmlFooter;
+
 @interface WordCardViewController : UIViewController 
 {
   //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;
 }
 
-- (IBAction) doToggleReadingBtn;
-- (void)resetReadingVisibility;
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
+
+
 - (void)toggleMoreIconForLabel: (UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
 - (void)prepareView:(Card*)card;
 - (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
 
 - (void) turnReadingOn;
 - (void) turnReadingOff;
+- (void)resetReadingVisibility;
+- (IBAction) doToggleReadingBtn;
+
+@property (nonatomic, retain) NSString *baseHtml;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
 @property (nonatomic, retain) IBOutlet ReadingView *cardReadingLabel;
@@ -38,5 +47,4 @@
 @property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
 
 @property BOOL readingVisible;
-@property BOOL meaningRevealed;
 @end

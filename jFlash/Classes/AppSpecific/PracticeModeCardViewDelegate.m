@@ -18,33 +18,22 @@
 
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
   if (self.wordCardViewController == nil)
   {
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
-    NSString *nibName = nil;
-    if ([studyDirection isEqualToString:SET_E_TO_J])
-    {
-      nibName = @"WordCardViewController-EtoJ";
-    }
-    else
-    {
-      nibName = @"WordCardViewController";
-    }
-    
-    // Note the custom NIB name that has a different positioning for all of the elements
-    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
+    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
   
   [self.wordCardViewController prepareView:cardViewController.currentCard];
+
   // always start with the meaning hidden
-  self.wordCardViewController.meaningRevealed = NO;
   [self.wordCardViewController hideMeaningWebView:YES];
   [self.wordCardViewController resetReadingVisibility];
   
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  if ([studyDirection isEqualToString:SET_E_TO_J])
   {
     self.wordCardViewController.toggleReadingBtn.hidden = YES;
     self.wordCardViewController.cardReadingLabelScrollContainer.hidden = YES;
@@ -66,7 +55,6 @@
 - (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
   [self.wordCardViewController hideMeaningWebView:NO];
-  self.wordCardViewController.meaningRevealed = YES;
   
   // TODO: MMA why are we caching the value of this only to change it on the next line?
   // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again

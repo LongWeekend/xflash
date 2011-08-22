@@ -2,14 +2,14 @@
 
 @implementation Card 
 
-@synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, meaning, wrongCount, rightCount, isBasicCard;
+@synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount, isBasicCard;
 
 /** Returns the meaning field w/o any HTML markup */
 - (NSString*) meaningWithoutMarkup
 {
   //Remove HTML from cards.meaning field ... messy!
   NSString *txtStr = nil;
-  txtStr = [self.meaning stringByReplacingOccurrencesOfString:@"</dfn><dfn>" withString:@","];
+  txtStr = [self._meaning stringByReplacingOccurrencesOfString:@"</dfn><dfn>" withString:@","];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"<dfn>" withString:@"("];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"</dfn>" withString:@")"];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"<li>" withString:@""];
@@ -18,6 +18,19 @@
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@"</ol>" withString:@""];
   txtStr = [txtStr stringByReplacingOccurrencesOfString:@" ; " withString:@"; "];
   return txtStr;
+}
+
+- (NSString*) meaning
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  {
+    return self._headword;
+  }
+  else
+  {
+    return self._meaning;
+  }
 }
 
 - (NSString *) headword
@@ -65,7 +78,7 @@
 	if (isSimple == NO)
 	{
 		self.headword_en = [rs stringForColumn:@"headword_en"];
-		self.meaning  = [rs stringForColumn:@"meaning"];
+		self._meaning  = [rs stringForColumn:@"meaning"];
 	}
 		
 	// Get additional stuff if we're going to have it
@@ -95,7 +108,7 @@
 	[_headword release];
 	[headword_en release];
 	[hw_reading release];
-	[meaning release];
+	[_meaning release];
 	[super dealloc];
 }
 

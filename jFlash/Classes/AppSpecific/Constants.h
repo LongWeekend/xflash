@@ -103,9 +103,7 @@ extern NSString *const LWE_APP_SPLASH_IMAGE; // App splash image - different bet
 #define VERT_SWIPE_DRAG_MAX   4.0
 #define SLIDER_HEIGHT         23.0
 
-extern NSString * const HTML_HEADER;
 extern NSString * const SENTENCES_HTML_HEADER;
-extern NSString * const HTML_FOOTER;
 
 // algorithm controls
 #define MAX_MAX_STUDYING 50

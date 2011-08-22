@@ -8,21 +8,48 @@
 
 #import "WordCardViewController.h"
 
+// Private Methods
+@interface WordCardViewController()
+- (void) _injectMeaningHTML:(NSString*)html;
+@end
+
 @implementation WordCardViewController
 @synthesize meaningWebView, cardHeadwordLabelScrollMoreIcon, cardHeadwordLabel, cardReadingLabelScrollMoreIcon, cardReadingLabel, toggleReadingBtn;
-@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible, meaningRevealed;
+@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible;
+
+@synthesize baseHtml;
+
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
+{
+  NSString *nibName = nil;
+  NSString *htmlHeader = nil;
+  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+  if (displayMainHeadword)
+  {
+    // Main headword, so don't do anything differently.
+    htmlHeader = [LWECardHtmlHeader stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    nibName = @"WordCardViewController";
+  }
+  else
+  {
+    // Prepare the view for displaying in E-to-J mode
+    htmlHeader = [LWECardHtmlHeader_EtoJ stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    nibName = @"WordCardViewController-EtoJ";
+  }
+  self = [super initWithNibName:nibName bundle:nil];
+  if (self)
+  {
+    self.baseHtml = [NSString stringWithFormat:@"%@%@",htmlHeader,LWECardHtmlFooter];
+  }
+  return self;
+}
 
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
-  
-  // Modify the inline CSS for current theme
-  // TODO: make this work when the user changes themes
-  // Update - I thnk it does?? MMA 8/2011
-  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
-  NSString *html = [NSString stringWithFormat:@"%@%@",htmlHeader,HTML_FOOTER];
-  [self.meaningWebView loadHTMLString:html baseURL:nil];
+  [self.meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
+  [self.meaningWebView shutOffBouncing];
+  self.meaningWebView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - layout methods
@@ -48,41 +75,12 @@
   [self toggleMoreIconForLabel:[[self.cardReadingLabel labels] objectAtIndex:0] forScrollView:cardReadingLabelScrollContainer];
 }
 
-- (void) setupMeaningWebView: (NSUserDefaults *) settings card:(Card*)card 
-{
-  self.meaningWebView.backgroundColor = [UIColor clearColor];
-  [self.meaningWebView shutOffBouncing];
-
-  NSString *html = nil;
-  if ([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J])
-  {
-    // We'd love to set the size of the font in the NIB, but since this is a web view that's not possible.
-    // The class "JPN" makes it big.
-    html = [NSString stringWithFormat:@"<span class='jpn'>%@</span>",card.headword];
-  }
-  else
-  {
-    html = [NSString stringWithFormat:@"<span>%@</span>",card.meaning];    
-  }
-  
-  // The HTML will be encapsulated in Javascript, make sure to escape that noise
-  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
-  
-  // Javascript
-  NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container');"
-  "if (textElement) { textElement.innerHTML = '%@'; } ",escapedHtml];
-
-  // Save of copy of this in case the webview hasn't finished loading yet
-  _tmpJavascript = [js retain];
-    
-  // Not loading, do it as normal
-  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
-}
-
 // Prepare the view for the current card
 - (void) prepareView:(Card*)card
 {
+  // Fix up the headword & the meaning; those are a bit easier.
   self.cardHeadwordLabel.text = card.headword;
+  [self _injectMeaningHTML:card.meaning];
 
   // TODO: This is where the shit needs to happen (MMA)
   [self.cardReadingLabel updateNumberOfLabels:1];
@@ -93,10 +91,6 @@
                                   minFontSize:READING_MIN_FONTSIZE
                                   maxFontSize:READING_MAX_FONTSIZE
                             forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
-  
-  // Setup the web view
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [self setupMeaningWebView:settings card:card];
   
   // Resize text within bounds
   [LWEUILabelUtils autosizeLabelText:[self.cardReadingLabel.labels objectAtIndex:0]
@@ -142,7 +136,12 @@
   [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
 }
 
-//! toggles the readingVisible bool and calls setupReadingVisibility
+#pragma mark - IBActions
+
+/**
+ * If the reading scroll container is hidden, this shows it.
+ * If it's showing, it hides it.
+ */
 - (IBAction) doToggleReadingBtn
 {
   if (self.cardReadingLabelScrollContainer.hidden)
@@ -155,13 +154,29 @@
   }
 }
 
+#pragma mark - Private Methods
+
+- (void) _injectMeaningHTML:(NSString*)html
+{
+  // The HTML will be encapsulated in Javascript, make sure to escape that noise
+  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
+  NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container'); if (textElement) { textElement.innerHTML = '%@'; }",escapedHtml];
+  
+  // Save of copy of this in case the webview hasn't finished loading yet (see WebView delegate below)
+  _tmpJavascript = [js retain];
+  
+  // Not loading, do it as normal
+  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
+}
+
+
 #pragma mark - UIWebViewDelegate Support
 
 /**
  * This callback should only be called once at the beginning of a study session
  * When the webview doesn't load as fast as the view controllers (so far, always)
  * the javascript call in "setupWebMeaning" or whatever will do nothing - so 
- * it caches the result in _tmpHTML and waits for the delegate callback
+ * it caches the result in _tmpJavascript and waits for the delegate callback
  */
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -169,6 +184,8 @@
   if (_tmpJavascript)
   {
     [self.meaningWebView stringByEvaluatingJavaScriptFromString:_tmpJavascript];
+    [_tmpJavascript release];
+    _tmpJavascript = nil;
   }
 }
 
@@ -190,6 +207,7 @@
 
 - (void)dealloc 
 {
+  [baseHtml release];
   [_tmpJavascript release];
   
 	[cardReadingLabelScrollContainer release];
@@ -210,3 +228,29 @@
 }
 
 @end
+
+NSString * const LWECardHtmlHeader = @""
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
+"<style>"
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} "
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"##THEMECSS##"
+"</style></head>"
+"<body><div id='container'>";
+
+NSString * const LWECardHtmlHeader_EtoJ = @""
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
+"<style>"
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} "
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"##THEMECSS##"
+"</style></head>"
+"<body><div id='container'>";
+
+NSString * const LWECardHtmlFooter = @"</div></body></html>";

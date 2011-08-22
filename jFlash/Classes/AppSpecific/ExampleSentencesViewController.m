@@ -9,6 +9,9 @@
 #import "ExampleSentencesViewController.h"
 #import "RootViewController.h"
 
+// Hack that I need this
+#import "WordCardViewController.h"
+
 @implementation ExampleSentencesViewController
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
@@ -104,7 +107,7 @@
   // Modify the inline CSS for current theme
   NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
   NSString *htmlHeader = [SENTENCES_HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader]; 
-  [self.sentencesWebView loadHTMLString:[NSString stringWithFormat:@"%@<span>%@</span>%@",htmlHeader,html,HTML_FOOTER] baseURL:nil];
+  [self.sentencesWebView loadHTMLString:[NSString stringWithFormat:@"%@<span>%@</span>%@",htmlHeader,html,LWECardHtmlFooter] baseURL:nil];
 
   [html release];
 }

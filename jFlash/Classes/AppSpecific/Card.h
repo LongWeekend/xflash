@@ -18,6 +18,8 @@
 - (NSString*) reading;
 - (NSString*) headword;
 
+- (NSString*) meaning;
+
 - (NSString*) meaningWithoutMarkup;
 - (BOOL) hasExampleSentences;
 
@@ -47,6 +49,6 @@
 @property (nonatomic, retain) NSString *hw_reading;
 
 //! Actual English meaning
-@property (nonatomic, retain) NSString *meaning;
+@property (nonatomic, retain) NSString *_meaning;
 
 @end
