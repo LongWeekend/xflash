@@ -26,17 +26,12 @@
   
   // Get values from XIB on first load
   // TODO: iPad customization!
-  CGRect tmpFrame = CGRectZero;
-  tmpFrame = self.cardReadingLabelScrollContainer.frame;
-  self.cardReadingLabelScrollContainerYPosInXib = tmpFrame.origin.y;
-  tmpFrame = self.cardHeadwordLabel.frame;
-  self.cardHeadwordLabelHeightInXib = tmpFrame.size.height;
-  tmpFrame = self.toggleReadingBtn.frame;
-  self.toggleReadingBtnYPosInXib = tmpFrame.origin.y;
-  tmpFrame = self.cardHeadwordLabelScrollContainer.frame;
-  self.cardHeadwordLabelYPosInXib = tmpFrame.origin.y;  
+  self.cardReadingLabelScrollContainerYPosInXib = self.cardReadingLabelScrollContainer.frame.origin.y;
+  self.cardHeadwordLabelHeightInXib = self.cardHeadwordLabel.frame.size.height;
+  self.toggleReadingBtnYPosInXib = self.toggleReadingBtn.frame.origin.y;
+  self.cardHeadwordLabelYPosInXib = self.cardHeadwordLabelScrollContainer.frame.origin.y;  
   
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
   
   // Modify the inline CSS for current theme
@@ -52,6 +47,7 @@
 
 #pragma mark - layout methods
 
+//TODO: MMA is it unreasonable to have 2 views in the XIB file and then turn one off and on depending?
 - (void) layoutCardContentForStudyDirection: (NSString*)studyDirection
 {
   // Y-Positions for J_TO_E Mode
@@ -290,8 +286,7 @@
   }
 }
 
-#pragma mark -
-#pragma mark Plumbing
+#pragma mark - Plumbing
 
 - (void)viewDidUnload 
 {

@@ -20,7 +20,8 @@
 {
   if (self.wordCardViewController == nil)
   {
-    self.wordCardViewController = [[[WordCardViewController alloc] init] autorelease];
+    // Note the custom NIB name that has a different positioning for all of the elements
+    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:@"WordCardViewController-Browse" bundle:nil] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
   
@@ -49,21 +50,11 @@
   avc.addBtn.frame = rect;
 }
 
+#pragma mark -
+
 - (void)dealloc
 {
-	if (wordCardViewController)
-	{
-		NSArray *views = [wordCardViewController.view subviews];
-		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
-		for (UIView *view in views)
-		{
-			LWE_LOG(@"Removing view %@", view);
-			[view removeFromSuperview];
-		}
-		
-		[wordCardViewController release];
-	}
-	
+  [wordCardViewController release];
 	[super dealloc];
 }
 

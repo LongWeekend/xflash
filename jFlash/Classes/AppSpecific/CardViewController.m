@@ -16,8 +16,8 @@
 - (void) setupWithCard:(Card*)card
 {
   self.currentCard = card;
-  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:), self);
-  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:), self);
+  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:),self);
+  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:),self);
 }
 
 - (void) reveal
@@ -27,18 +27,17 @@
     BOOL shouldReveal = [self.delegate cardView:self shouldReveal:NO];
     if (shouldReveal)
     {
-      LWE_DELEGATE_CALL(@selector(cardViewWillReveal:), self);
-      LWE_DELEGATE_CALL(@selector(cardViewDidReveal:), self);
+      LWE_DELEGATE_CALL(@selector(cardViewWillReveal:),self);
+      LWE_DELEGATE_CALL(@selector(cardViewDidReveal:),self);
     }
   }
 }
 
+#pragma mark -
+
 - (void)dealloc 
 {
-	if (self.currentCard)
-  {
-		[currentCard release];
-	}
+  [currentCard release];
   [super dealloc];
 }
 

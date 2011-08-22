@@ -25,8 +25,7 @@
 - (void) setupWithCard:(Card*)card;
 - (void) reveal;
 
-//we don't retain delegates
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
-@property (nonatomic, retain) Card *currentCard;
+@property (retain) Card *currentCard;
 
 @end

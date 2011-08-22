@@ -87,32 +87,13 @@
   avc.buryCardBtn.hidden = NO;
   avc.addBtn.hidden = NO;
   avc.cardMeaningBtnHint.hidden = YES;
-  
-  // TODO: MMA is this necessray?  if it is hidden you never have to disable it.
-//  avc.rightBtn.enabled = YES;
-//  avc.wrongBtn.enabled = YES;
-//  avc.buryCardBtn.enabled = YES;
-//  avc.addBtn.enabled = YES;
 }
 
 #pragma mark - Class Plumbing
 
 - (void)dealloc 
 {
-	if (self.wordCardViewController)
-	{
-		NSArray *views = [self.wordCardViewController.view subviews];
-		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
-		for (UIView *view in views)
-		{
-			LWE_LOG(@"Removing view %@", view);
-			[view removeFromSuperview];
-		}
-		
-		LWE_LOG(@"Retain count of card view controller (being released) : %d", [wordCardViewController retainCount]);
-		[wordCardViewController release];
-	}
-
+  [wordCardViewController release];
   [super dealloc];
 }
 

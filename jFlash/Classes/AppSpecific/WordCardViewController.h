@@ -26,7 +26,6 @@
 - (void)prepareView:(Card*)card;
 - (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
 
-
 @property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
 
 @property (nonatomic, retain) IBOutlet ReadingView *cardReadingLabel;
