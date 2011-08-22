@@ -229,8 +229,15 @@ module ImporterHelpers
           
           if ((vocal) && (vocal.strip().length() > 0))
             diacritic = get_unicode_for_diacritic(vocal, tone)
-            result << reading.sub(vocal, diacritic)
+            result << reading.sub(vocal, diacritic).downcase()
+          else
+            puts "The vocal to be sub with its diacritic is not found for reading: %s and tone: %s" % [reading, tone]
           end
+        elsif (reading.match($regexes[:one_capital_letter]))
+          # If there is a single letter reading, 
+          # it is usually either an acronym or a single letter. (like ka-la-o-k) - Karaoke
+          # Put them just as is
+          result << reading
         elsif (reading.match($regexes[:pinyin_separator]))
           result << " %s " % [reading]
         else
