@@ -26,6 +26,28 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     assert_equal(expected_reading,reading)
   end
   
+  def test_pinyin_single_letter
+    reading = get_pinyin_unicode_for_reading("ka3 la1 O K")
+    expected_reading = "kǎlāOK"
+    assert_equal(expected_reading,reading)
+    
+    reading = get_pinyin_unicode_for_reading("D N A jian4 ding4")
+    expected_reading = "DNAjiàndìng"
+    assert_equal(expected_reading,reading)
+    
+    reading = get_pinyin_unicode_for_reading("U S B ji4 yi4 bang4")
+    expected_reading = "USBjìyìbàng"
+    assert_equal(expected_reading,reading)
+    
+    reading = get_pinyin_unicode_for_reading("G dian3")
+    expected_reading = "Gdiǎn"
+    assert_equal(expected_reading,reading)
+    
+    reading = get_pinyin_unicode_for_reading("T xu4")
+    expected_reading = "Txù"
+    assert_equal(expected_reading,reading)
+  end
+  
   def test_fix_tone_3
     pinyin = fix_unicode_for_tone_3("ăĕĭŏŭ")
     expected_pinyin = "ǎěǐǒǔ"
@@ -43,6 +65,6 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     reading = get_pinyin_unicode_for_reading("a5 i5 u5 e5 o5")
     expected_pinyin = "aiueo"
     assert_equal(reading, expected_pinyin)
-   end
+  end
   
 end
