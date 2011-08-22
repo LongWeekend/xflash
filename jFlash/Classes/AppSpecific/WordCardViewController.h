@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
-#import "ReadingView.h"
+#import "TTTAttributedLabel.h"
 
 extern NSString * const LWECardHtmlHeader;
 extern NSString * const LWECardHtmlHeader_EtoJ;
@@ -36,7 +36,7 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) NSString *baseHtml;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
-@property (nonatomic, retain) IBOutlet ReadingView *cardReadingLabel;
+@property (nonatomic, retain) IBOutlet UILabel *cardReadingLabel;
 @property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
 
 @property (nonatomic, retain) IBOutlet UIScrollView *cardReadingLabelScrollContainer;

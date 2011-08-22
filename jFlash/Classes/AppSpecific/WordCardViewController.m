@@ -55,7 +55,7 @@
 #pragma mark - layout methods
 
 // Toggle "more" icon to indicate the user can scroll meaning down
-- (void) toggleMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
+- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
 {
   BOOL isTooTall = (theLabel.frame.size.height > scrollViewContainer.frame.size.height);
   if (theLabel == self.cardReadingLabel)
@@ -72,7 +72,7 @@
 - (void) hideMeaningWebView:(BOOL)hideMeaningWebView
 {
   self.meaningWebView.hidden = hideMeaningWebView;
-  [self toggleMoreIconForLabel:[[self.cardReadingLabel labels] objectAtIndex:0] forScrollView:cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
 // Prepare the view for the current card
@@ -80,20 +80,17 @@
 {
   // Fix up the headword & the meaning; those are a bit easier.
   self.cardHeadwordLabel.text = card.headword;
+  self.cardReadingLabel.text = card.reading;
   [self _injectMeaningHTML:card.meaning];
-
-  // TODO: This is where the shit needs to happen (MMA)
-  [self.cardReadingLabel updateNumberOfLabels:1];
-  [self.cardReadingLabel setText:card.reading andColor:[UIColor greenColor] forLabel:0];
   
   // TODO: Maybe make this work again too?
-  [LWEUILabelUtils resizeLabelWithConstraints:[self.cardReadingLabel.labels objectAtIndex:0]
+  [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
                                   minFontSize:READING_MIN_FONTSIZE
                                   maxFontSize:READING_MAX_FONTSIZE
                             forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
   
   // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:[self.cardReadingLabel.labels objectAtIndex:0]
+  [LWEUILabelUtils autosizeLabelText:self.cardReadingLabel
                        forScrollView:self.cardReadingLabelScrollContainer
                             withText:card.reading
                          minFontSize:READING_MIN_FONTSIZE
@@ -105,7 +102,7 @@
                          minFontSize:HEADWORD_MIN_FONTSIZE
                          maxFontSize:HEADWORD_MAX_FONTSIZE];
   
-  [self toggleMoreIconForLabel:[[self.cardReadingLabel labels] objectAtIndex:0] forScrollView:self.cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
   [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
 }
 
