@@ -118,7 +118,7 @@
 								<float key="IBUIMinimumFontSize">14</float>
 								<int key="IBUINumberOfLines">0</int>
 								<int key="IBUITextAlignment">1</int>
-								<int key="IBUILineBreakMode">0</int>
+								<int key="IBUILineBreakMode">1</int>
 							</object>
 						</object>
 						<string key="NSFrame">{{11, 48}, {301, 55}}</string>
@@ -189,7 +189,7 @@
 					<object class="IBUIImageView" id="901262833">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 4}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 15}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="484137656"/>
@@ -206,7 +206,7 @@
 					<object class="IBUIImageView" id="283233690">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 56}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 63}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="806681086"/>
@@ -365,7 +365,7 @@
 							<reference ref="124502176"/>
 						</object>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">PracticeModeView</string>
+						<string key="objectName">J to E View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">-1</int>
@@ -513,7 +513,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>browseModeView</string>
 							<string>cardHeadwordLabel</string>
 							<string>cardHeadwordLabelScrollContainer</string>
 							<string>cardHeadwordLabelScrollMoreIcon</string>
@@ -521,12 +520,10 @@
 							<string>cardReadingLabelScrollContainer</string>
 							<string>cardReadingLabelScrollMoreIcon</string>
 							<string>meaningWebView</string>
-							<string>practiceModeView</string>
 							<string>toggleReadingBtn</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIScrollView</string>
 							<string>UIImageView</string>
@@ -534,7 +531,6 @@
 							<string>UIScrollView</string>
 							<string>UIImageView</string>
 							<string>UIWebView</string>
-							<string>UIView</string>
 							<string>UIButton</string>
 						</object>
 					</object>
@@ -542,7 +538,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>browseModeView</string>
 							<string>cardHeadwordLabel</string>
 							<string>cardHeadwordLabelScrollContainer</string>
 							<string>cardHeadwordLabelScrollMoreIcon</string>
@@ -550,15 +545,10 @@
 							<string>cardReadingLabelScrollContainer</string>
 							<string>cardReadingLabelScrollMoreIcon</string>
 							<string>meaningWebView</string>
-							<string>practiceModeView</string>
 							<string>toggleReadingBtn</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">browseModeView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">cardHeadwordLabel</string>
 								<string key="candidateClassName">UILabel</string>
@@ -586,10 +576,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">meaningWebView</string>
 								<string key="candidateClassName">UIWebView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">practiceModeView</string>
-								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toggleReadingBtn</string>

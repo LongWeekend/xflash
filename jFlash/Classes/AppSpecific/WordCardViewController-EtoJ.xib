@@ -68,7 +68,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{12, 6}, {301, 42}}</string>
+						<string key="NSFrame">{{11, 62}, {301, 42}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="527685243"/>
@@ -121,7 +121,7 @@
 								<int key="IBUILineBreakMode">0</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{11, 48}, {301, 55}}</string>
+						<string key="NSFrame">{{11, 6}, {301, 55}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="152311318"/>
@@ -150,7 +150,7 @@
 					<object class="IBUIButton" id="665533496">
 						<reference key="NSNextResponder" ref="755717646"/>
 						<int key="NSvFlags">288</int>
-						<string key="NSFrame">{{107, 11}, {110, 37}}</string>
+						<string key="NSFrame">{{107, 62}, {110, 37}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="9756947"/>
@@ -189,10 +189,10 @@
 					<object class="IBUIImageView" id="9756947">
 						<reference key="NSNextResponder" ref="755717646"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 4}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 71}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1006260728"/>
+						<reference key="NSNextKeyView" ref="906154004"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -206,10 +206,10 @@
 					<object class="IBUIImageView" id="405833436">
 						<reference key="NSNextResponder" ref="755717646"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{286, 56}, {26, 17}}</string>
+						<string key="NSFrame">{{286, 21}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="755717646"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="906154004"/>
+						<reference key="NSNextKeyView" ref="831504020"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -221,7 +221,7 @@
 				<string key="NSFrameSize">{320, 280}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="831504020"/>
+				<reference key="NSNextKeyView" ref="1006260728"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MSAwAA</bytes>
@@ -376,7 +376,7 @@
 							<reference ref="665533496"/>
 						</object>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">BrowseModeView</string>
+						<string key="objectName">E to J View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
@@ -513,7 +513,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>browseModeView</string>
 							<string>cardHeadwordLabel</string>
 							<string>cardHeadwordLabelScrollContainer</string>
 							<string>cardHeadwordLabelScrollMoreIcon</string>
@@ -521,12 +520,10 @@
 							<string>cardReadingLabelScrollContainer</string>
 							<string>cardReadingLabelScrollMoreIcon</string>
 							<string>meaningWebView</string>
-							<string>practiceModeView</string>
 							<string>toggleReadingBtn</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIScrollView</string>
 							<string>UIImageView</string>
@@ -534,7 +531,6 @@
 							<string>UIScrollView</string>
 							<string>UIImageView</string>
 							<string>UIWebView</string>
-							<string>UIView</string>
 							<string>UIButton</string>
 						</object>
 					</object>
@@ -542,7 +538,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>browseModeView</string>
 							<string>cardHeadwordLabel</string>
 							<string>cardHeadwordLabelScrollContainer</string>
 							<string>cardHeadwordLabelScrollMoreIcon</string>
@@ -550,15 +545,10 @@
 							<string>cardReadingLabelScrollContainer</string>
 							<string>cardReadingLabelScrollMoreIcon</string>
 							<string>meaningWebView</string>
-							<string>practiceModeView</string>
 							<string>toggleReadingBtn</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">browseModeView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">cardHeadwordLabel</string>
 								<string key="candidateClassName">UILabel</string>
@@ -586,10 +576,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">meaningWebView</string>
 								<string key="candidateClassName">UIWebView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">practiceModeView</string>
-								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toggleReadingBtn</string>

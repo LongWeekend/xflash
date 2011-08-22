@@ -20,13 +20,25 @@
 {
   if (self.wordCardViewController == nil)
   {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+    NSString *nibName = nil;
+    if ([studyDirection isEqualToString:SET_E_TO_J])
+    {
+      nibName = @"WordCardViewController-EtoJ";
+    }
+    else
+    {
+      nibName = @"WordCardViewController";
+    }
+    
     // Note the custom NIB name that has a different positioning for all of the elements
-    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:@"WordCardViewController-Browse" bundle:nil] autorelease];
+    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
   
-  [self.wordCardViewController prepareView:[cardViewController currentCard]];
-  [self.wordCardViewController setupReadingVisibility];
+  [self.wordCardViewController prepareView:cardViewController.currentCard];
+  [self.wordCardViewController resetReadingVisibility];
 }
 
 #pragma mark - Action Bar View Controller Delegate

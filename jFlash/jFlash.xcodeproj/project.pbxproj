@@ -66,6 +66,9 @@
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
 		49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */; };
+		4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
+		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
+		4938F8BA14024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
@@ -747,6 +750,7 @@
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
 		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
 		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
+		4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "WordCardViewController-EtoJ.xib"; path = "../../../../../../Users/phooze/Documents/iPhone/jFlash/jFlash/Classes/AppSpecific/WordCardViewController-EtoJ.xib"; sourceTree = "<group>"; };
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
 		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
@@ -2184,6 +2188,7 @@
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				9121517911B755550091AFEF /* WordCardViewController.xib */,
+				4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -2531,6 +2536,7 @@
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 				91C05A3913F468D500061229 /* Default.jpg in Resources */,
+				4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2540,6 +2546,7 @@
 			files = (
 				24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */,
 				24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */,
+				4938F8BA14024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2700,6 +2707,7 @@
 				49280A2C13962A9A00EF009C /* star-selected.png in Resources */,
 				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
 				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
+				4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

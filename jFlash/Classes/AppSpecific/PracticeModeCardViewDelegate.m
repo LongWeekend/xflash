@@ -20,7 +20,20 @@
 {
   if (self.wordCardViewController == nil)
   {
-    self.wordCardViewController = [[[WordCardViewController alloc] init] autorelease];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+    NSString *nibName = nil;
+    if ([studyDirection isEqualToString:SET_E_TO_J])
+    {
+      nibName = @"WordCardViewController-EtoJ";
+    }
+    else
+    {
+      nibName = @"WordCardViewController";
+    }
+    
+    // Note the custom NIB name that has a different positioning for all of the elements
+    self.wordCardViewController = [[[WordCardViewController alloc] initWithNibName:nibName bundle:nil] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
   
@@ -28,7 +41,7 @@
   // always start with the meaning hidden
   self.wordCardViewController.meaningRevealed = NO;
   [self.wordCardViewController hideMeaningWebView:YES];
-  [self.wordCardViewController setupReadingVisibility];
+  [self.wordCardViewController resetReadingVisibility];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
@@ -53,13 +66,14 @@
 - (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
   [self.wordCardViewController hideMeaningWebView:NO];
+  self.wordCardViewController.meaningRevealed = YES;
   
   // TODO: MMA why are we caching the value of this only to change it on the next line?
+  // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again
+  // on the next card (in practice mode)
   BOOL userSetReadingVisible = self.wordCardViewController.readingVisible;
-  self.wordCardViewController.readingVisible = YES;
-  self.wordCardViewController.meaningRevealed = YES;
-  [self.wordCardViewController setupReadingVisibility];
-  [self.wordCardViewController setReadingVisible:userSetReadingVisible];
+  [self.wordCardViewController turnReadingOn];
+  self.wordCardViewController.readingVisible = userSetReadingVisible;
 }
 
 #pragma mark - Action Bar Delegate Methods

@@ -41,6 +41,8 @@
 
   NSString *hw = nil;
   
+  // TODO: ALSO PUT ENGLISH HEADWORD IN HERE
+  
   if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
   {
     hw = self._headword;

@@ -105,7 +105,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"userWasChanged" object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:LWESettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupView) name:LWECardSettingsChanged object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterSettingsChange) name:LWECardSettingsChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];

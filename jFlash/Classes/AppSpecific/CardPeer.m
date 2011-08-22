@@ -145,11 +145,6 @@
   while ([rs next])
   {
     [card hydrate:rs];
-//    [card setHeadword:[rs stringForColumn:@"headword"]];
-//    [card setHeadword_en:[rs stringForColumn:@"headword_en"]];
-//    [card setReading:[rs stringForColumn:@"reading"]];
-//    [card setRomaji:[rs stringForColumn:@"romaji"]];
-//    [card setMeaning:[rs stringForColumn:@"meaning"]];
   }
   [rs close];
   [sql release];
