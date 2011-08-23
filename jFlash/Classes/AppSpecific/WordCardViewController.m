@@ -8,6 +8,8 @@
 
 #import "WordCardViewController.h"
 
+#import "ChineseCard.h"
+
 // Private Methods
 @interface WordCardViewController()
 - (void) _injectMeaningHTML:(NSString*)html;
@@ -80,7 +82,11 @@
 {
   // Fix up the headword & the meaning; those are a bit easier.
   self.cardHeadwordLabel.text = card.headword;
+#if defined(LWE_JFLASH)
   self.cardReadingLabel.text = card.reading;
+#elif defined(LWE_CFLASH)
+  self.cardReadingLabel.text = [(ChineseCard*)card attributedReading];
+#endif
   [self _injectMeaningHTML:card.meaning];
   
   // TODO: Maybe make this work again too?
