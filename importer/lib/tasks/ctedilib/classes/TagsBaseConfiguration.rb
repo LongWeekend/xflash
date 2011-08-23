@@ -14,7 +14,12 @@ class TagsBaseConfiguration
   end
   
   def file_name
-    return @configuration["file_name"]
+    return @configuration["file_name"] 
+  end
+  
+  def file_dump_trace
+    return @configuration["file_dump_trace"] unless (@configuration["file_dump_trace"] == nil)
+    return false
   end
   
   def tag_name
