@@ -34,6 +34,88 @@
   self.headword_simp = [rs stringForColumn:@"headword_simp"];
 }
 
+/**
+ * Takes something like "gao4" and converts it to "gáo"
+ */
+- (NSString*) _pinyinForNumberedPinyin:(NSString*)numberedPinyin
+{
+  // Quick return on bad string input/nil input
+  if ([numberedPinyin length] == 0)
+  {
+    return nil;
+  }
+
+  // Another quick return if we don't have a valid tone number - we will use toneNumber later too
+  NSInteger toneNumber = [[numberedPinyin substringFromIndex:([numberedPinyin length]-1)] integerValue];
+  if (toneNumber == 0 || toneNumber > 5)
+  {
+    return numberedPinyin;
+  }
+
+  // Define some regexes that are going to help us
+  NSError *error = NULL;
+  NSRegularExpression *vocalRegex = [NSRegularExpression regularExpressionWithPattern:@"[aeiou]" options:NSRegularExpressionCaseInsensitive error:&error];
+  NSRegularExpression *diacriticRegex1 = [NSRegularExpression regularExpressionWithPattern:@"[ae]" options:NSRegularExpressionCaseInsensitive error:&error];
+  NSRegularExpression *diacriticRegex2 = [NSRegularExpression regularExpressionWithPattern:@"[ou]" options:NSRegularExpressionCaseInsensitive error:&error];
+  
+  // Now get the number of vowels in the reading to determine where the diacritic mark goes
+  NSString *reading = [numberedPinyin substringToIndex:([numberedPinyin length]-1)];
+  NSRange readingRange = NSMakeRange(0,[reading length]);
+  NSString *vowel = nil;
+  NSArray *vowels = [vocalRegex matchesInString:reading options:0 range:readingRange];
+  if ([vowels count] == 1)
+  {
+    vowel = [reading substringWithRange:[[vowels objectAtIndex:0] range]];
+  }
+  else if ([vowels count] > 1)
+  {
+    // OK, so there is more than one vowel, so we need to figure out which one to add the diacritic
+    NSArray *patternVowels = [diacriticRegex1 matchesInString:reading options:0 range:readingRange];
+    if ([patternVowels count] > 0)
+    {
+      // OK, we matched the first diacritic Regex
+      vowel = [reading substringWithRange:[[patternVowels objectAtIndex:0] range]];
+    }
+    else
+    {
+      // Nope, let's try the second one.
+      patternVowels = [diacriticRegex2 matchesInString:reading options:0 range:readingRange];
+      if ([patternVowels count] > 0)
+      {
+        vowel = [reading substringWithRange:[[patternVowels objectAtIndex:0] range]];
+      }
+    }
+    
+    // Assuming we have a vowel now, get the first letter.
+    if (vowel)
+    {
+      vowel = [vowel substringToIndex:1];
+    }
+    else
+    {
+      vowel = [vowels objectAtIndex:1];
+    }
+  }
+  
+  // OK, now swap the vowel if we have one.
+  if (vowel)
+  {
+    // TODO: consider caching this dictionary, it's probably expensive.
+    NSDictionary *diacriticDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   @"ā",@"a1",@"ē",@"e1",@"ī",@"i1",@"ō",@"o1",@"ū",@"u1",
+                                   @"á",@"a2",@"é",@"e2",@"í",@"i2",@"ó",@"o2",@"ú",@"u2",
+                                   @"ǎ",@"a3",@"ě",@"e3",@"ǐ",@"i3",@"ǒ",@"o3",@"ǔ",@"u3",
+                                   @"à",@"a4",@"è",@"e4",@"ì",@"i4",@"ò",@"o4",@"ù",@"u4",nil];
+    if (toneNumber < 5)
+    {
+      NSString *key = [NSString stringWithFormat:@"%@%d",vowel,toneNumber];
+      NSString *newVowel = [diacriticDict objectForKey:key];
+      reading = [reading stringByReplacingOccurrencesOfString:vowel withString:newVowel];
+    }
+  }
+  return reading;
+}
+
 
 - (NSAttributedString*) attributedReading
 {
@@ -56,6 +138,9 @@
         break;
       }
     }
+    
+    // Now pinyin-ify the string
+    pinyinSegment = [self _pinyinForNumberedPinyin:pinyinSegment];
     
     // Now append the string and the color to the total string
     NSDictionary *attributesDict = [NSDictionary dictionaryWithObjectsAndKeys:(void*)theColor.CGColor,(NSString*)kCTForegroundColorAttributeName, nil];
