@@ -16,6 +16,7 @@
 //private properties
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
 @property (nonatomic, assign, getter=hasViewBeenLoadedOnce) BOOL viewHasBeenLoadedOnce;
+@property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
@@ -38,6 +39,7 @@
 @synthesize cardViewControllerDelegate;
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
+@synthesize progressVC = _progressVC;
 
 /** Custom initializer */
 - (id) init
@@ -419,22 +421,27 @@
  * Called when the user tapps the progress bar at the top of the practice view
  * Launches the progress modal view in ProgressDetailsViewController
  */
-- (IBAction) doShowProgressModalBtn
+- (IBAction)doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
-	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-  progressView.levelDetails = [self _getLevelDetails];
-  progressView.rightStreak = currentRightStreak;
-  progressView.wrongStreak = currentWrongStreak;
-  progressView.currentStudySet.text = currentCardSet.tagName;
-  progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
-  progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
-  progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
-  [self.navigationController pushViewController:progressView animated:NO];
-  [self.view addSubview:progressView.view];
-  // No release here because the progressView releases itself later
-  // Not exactly sexy code but it is correct - should be refactored - MMA 8/9/2010
+  if (!self.progressVC)
+  {
+    ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
+    self.progressVC = progressView;
+    [progressView release];
+  }
+  self.progressVC.levelDetails = [self _getLevelDetails];
+  self.progressVC.rightStreak = currentRightStreak;
+  self.progressVC.wrongStreak = currentWrongStreak;
+  self.progressVC.currentStudySet.text = currentCardSet.tagName;
+  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
+  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
+  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
+  self.progressVC.delegate = self;
+  
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:self.progressVC, @"controller", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowPopover object:self userInfo:userInfo];
 }
 
 
@@ -639,6 +646,14 @@
 }
 
 #pragma mark -
+#pragma mark ProgressDetailsViewDelegate
+
+- (void)progressDetailsViewControllerShouldDismissView:(id)progressDetailsViewController
+{
+  self.progressVC = nil;
+}
+
+#pragma mark -
 #pragma mark ScrollView Delegate & Page Control stuff
 
 /**
@@ -747,6 +762,7 @@
 
 - (void) dealloc
 {
+  if (self.progressVC) [_progressVC release];
   //theme
   [practiceBgImage release];
   

@@ -21,6 +21,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
+NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -54,6 +55,7 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
     //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:LWEShouldDismissModal object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:LWEShouldShowPopover object:nil];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
   }
@@ -218,6 +220,20 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   else
   {
     [self.tabBarController presentModalViewController:vc animated:YES];    
+  }
+}
+
+- (void)showPopover:(NSNotification *)notification
+{
+  NSDictionary *dict = [notification userInfo];
+  if ((dict != nil) && ([dict count] > 0))
+  {
+    UIViewController *controller = (UIViewController *)[dict objectForKey:@"controller"];
+    [[[self tabBarController] view] addSubview:controller.view];
+  }
+  else
+  {
+    LWE_LOG(@"Error : Show popover notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
   }
 }
 

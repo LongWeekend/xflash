@@ -24,8 +24,10 @@
 
 @interface StudyViewController : UIViewController <UIScrollViewDelegate,
                                                    UIActionSheetDelegate,
-                                                   UIAlertViewDelegate>
+                                                   UIAlertViewDelegate,
+                                                   ProgressDetailsDelegate>
 {
+  ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;
   BOOL _finishedSetAlertShowed;
   //! This is set when card is loaded, and used when revealed
