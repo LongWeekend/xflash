@@ -15,11 +15,39 @@ class TagsBaseImporter
     @config[:sql_buffer_size] = 1000
     @config[:sql_debug] = false
     
+    @log_stream = nil
+    if (@config[:metadata].file_dump_trace())
+      #Get the stream
+      filename = get_log_dump_filename()
+      @log_stream = File.new(filename, "a+")
+      
+      #Start the stream with the date and time.
+      now = Date.today.to_datetime
+      @log_stream << "#{now}\n"
+    end
+    
     return self
+  end
+  
+  def log(string, print_both=false)
+    logged_to_file = false
+    if (@log_stream != nil)
+      logged_to_file = true
+      @log_stream << "#{string}\n"
+    end
+    
+    if ((!logged_to_file)||(print_both))
+      puts "\n#{string}"
+    end
   end
   
   def get_card_id_for_charcaters(characters)
     
+  end
+  
+  def get_log_dump_filename
+    tag_name = @config[:metadata].short_name()
+    return "#{tag_name}-log.txt"
   end
   
   def setup_tag_row
@@ -38,11 +66,11 @@ class TagsBaseImporter
     # After executing, get the tag_id and set it globally
     select_query = "SELECT tag_id FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
     $cn.execute(select_query).each do |tag_id|
-      @tag_id = tag_id
+    @tag_id = tag_id
     end
     
     # Puts the feedback to the user
-    puts ("\nInserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id])
+    log ("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id], true)
     prt_dotted_line
   rescue
     # In case the is some error is hapenning, try to delete from the databse first,
