@@ -29,13 +29,16 @@ class Tags800WordsImporter < TagsBaseImporter
       result = find_cards_similar_to(rec)
       if (result == nil)
         not_found += 1
-        puts ("[No Record]There are no card found in the card_staging with headword: %s. Reading: %s\n\n" % [rec.headword_trad, rec.pinyin])
+        log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword_trad, rec.pinyin]
       else
         found += 1
         card_id = result.id
         if (!card_ids.include?(card_id))
           card_ids << card_id
           insert_query << @insert_tag_link_query % [@tag_id, card_id]
+        else
+          # There is a same card in the list of added card.
+          log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword_trad, rec.pinyin, rec.meanings.join("/")]
         end
       end
       
@@ -44,8 +47,8 @@ class Tags800WordsImporter < TagsBaseImporter
       insert_query
     end # End of the super do |rec| loop
 
-    puts ("Finish inserting: %s with %s records not found" % [found.to_s(), not_found.to_s()])
-    
+    log "\n"
+    log ("Finish inserting: %s with %s records not found" % [found.to_s(), not_found.to_s()], true)
   end # End of the method body
   
 end
