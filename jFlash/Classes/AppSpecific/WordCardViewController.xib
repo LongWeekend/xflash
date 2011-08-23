@@ -54,7 +54,7 @@
 							<object class="IBUILabel" id="967810335">
 								<reference key="NSNextResponder" ref="613577973"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{9, -3}, {280, 38}}</string>
+								<string key="NSFrameSize">{300, 42}</string>
 								<reference key="NSSuperview" ref="613577973"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="124502176"/>
@@ -63,10 +63,10 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Label</string>
+								<string key="IBUIText">Reading Label</string>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-BoldOblique</string>
-									<double key="NSSize">14</double>
+									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<object class="NSColor" key="IBUITextColor">
@@ -78,11 +78,12 @@
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
+								<float key="IBUIMinimumFontSize">12</float>
 								<int key="IBUITextAlignment">1</int>
+								<int key="IBUILineBreakMode">0</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{12, 6}, {301, 42}}</string>
+						<string key="NSFrame">{{10, 6}, {300, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="967810335"/>
@@ -100,7 +101,7 @@
 							<object class="IBUILabel" id="159549237">
 								<reference key="NSNextResponder" ref="484137656"/>
 								<int key="NSvFlags">295</int>
-								<string key="NSFrame">{{10, 0}, {280, 51}}</string>
+								<string key="NSFrame">{{10, 0}, {279, 51}}</string>
 								<reference key="NSSuperview" ref="484137656"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="283233690"/>
@@ -135,7 +136,7 @@
 								<int key="IBUILineBreakMode">1</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{11, 48}, {301, 55}}</string>
+						<string key="NSFrame">{{10, 49}, {300, 55}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="159549237"/>
@@ -148,7 +149,7 @@
 					<object class="IBUIWebView" id="806681086">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{16, 105}, {295, 146}}</string>
+						<string key="NSFrame">{{10, 105}, {300, 146}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -164,7 +165,7 @@
 					<object class="IBUIButton" id="124502176">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">288</int>
-						<string key="NSFrame">{{107, 11}, {110, 37}}</string>
+						<string key="NSFrame">{{107, 6}, {110, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="901262833"/>
@@ -448,6 +449,7 @@
 						<int key="objectID">42</int>
 						<reference key="object" ref="967810335"/>
 						<reference key="parent" ref="613577973"/>
+						<string key="objectName">Attributed Label - Label</string>
 					</object>
 				</object>
 			</object>

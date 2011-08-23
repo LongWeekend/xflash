@@ -11,7 +11,7 @@
 
 @interface ChineseCard : Card
 
-- (NSAttributedString*) attributedReading;
+- (NSArray *) readingComponents;
 
 @property (nonatomic, retain) NSString *headword_simp;
 

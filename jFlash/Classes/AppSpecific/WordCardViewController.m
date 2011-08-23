@@ -81,13 +81,32 @@
 - (void) prepareView:(Card*)card
 {
   // Fix up the headword & the meaning; those are a bit easier.
+  [self _injectMeaningHTML:card.meaning];
   self.cardHeadwordLabel.text = card.headword;
+
+  // Now do the hard part (for CFlash)
 #if defined(LWE_JFLASH)
   self.cardReadingLabel.text = card.reading;
 #elif defined(LWE_CFLASH)
-  self.cardReadingLabel.text = [(ChineseCard*)card attributedReading];
+  NSMutableString *pinyinString = [NSMutableString string];
+  NSArray *readingHashes = [(ChineseCard*)card readingComponents];
+  for (NSDictionary *readingHash in readingHashes)
+  {
+    [pinyinString appendString:(NSString*)[readingHash objectForKey:@"pinyin"]];
+    [pinyinString appendString:@" "];
+  }
+  
+  [self.cardReadingLabel setText:pinyinString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSAttributedString *(NSMutableAttributedString *mutableAttributedString)
+  {
+    for (NSDictionary *readingHash in readingHashes)
+    {
+      NSRange thisRange = [mutableAttributedString.string rangeOfString:[readingHash objectForKey:@"pinyin"]];
+      [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
+                                      range:thisRange];
+    }
+    return mutableAttributedString;
+  }];
 #endif
-  [self _injectMeaningHTML:card.meaning];
   
   // TODO: Maybe make this work again too?
   [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
@@ -101,7 +120,7 @@
                             withText:card.reading
                          minFontSize:READING_MIN_FONTSIZE
                          maxFontSize:READING_MAX_FONTSIZE];
-  
+
   [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
                        forScrollView:self.cardHeadwordLabelScrollContainer
                             withText:card.headword

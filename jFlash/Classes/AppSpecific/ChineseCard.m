@@ -116,40 +116,49 @@
   return reading;
 }
 
-
-- (NSAttributedString*) attributedReading
+- (NSArray *) readingComponents
 {
+  NSMutableArray *components = [NSMutableArray array];
   // From Wikipedia:
   // the de facto standard has been to use red (tone 1), orange (tone 2), green (tone 3), blue (tone 4) and black (tone 5).[24]
   NSDictionary *colorDict = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],@"1",[UIColor orangeColor],@"2",[UIColor greenColor],@"3",[UIColor blueColor],@"4",nil];
   
-  NSMutableAttributedString *coloredString = [[[[NSAttributedString alloc] initWithString:@""] autorelease] mutableCopy];
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
   for (NSString *pinyinSegment in pinyinSegments)
   {
-    // First determine the color we need (default to black)
-    UIColor *theColor = [UIColor blackColor];
-    for (NSString *toneNumber in colorDict)
+    // Are we using color?  If not...
+    UIColor *theColor = nil;
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    BOOL useColor = [[settings objectForKey:APP_PINYIN_COLOR] isEqualToString:SET_PINYIN_COLOR_ON];
+    
+    if (useColor)
     {
-      NSRange range = [pinyinSegment rangeOfString:toneNumber];
-      if (range.location != NSNotFound)
+      // First determine the color we need (default to black)
+      theColor = [UIColor blackColor];
+      for (NSString *toneNumber in colorDict)
       {
-        theColor = (UIColor*)[colorDict objectForKey:toneNumber];
-        break;
+        NSRange range = [pinyinSegment rangeOfString:toneNumber];
+        if (range.location != NSNotFound)
+        {
+          theColor = (UIColor*)[colorDict objectForKey:toneNumber];
+          break;
+        }
       }
+    }
+    else
+    {
+      theColor = [UIColor whiteColor];
     }
     
     // Now pinyin-ify the string
     pinyinSegment = [self _pinyinForNumberedPinyin:pinyinSegment];
     
-    // Now append the string and the color to the total string
-    NSDictionary *attributesDict = [NSDictionary dictionaryWithObjectsAndKeys:(void*)theColor.CGColor,(NSString*)kCTForegroundColorAttributeName, nil];
-    NSAttributedString *tempStr = [[NSAttributedString alloc] initWithString:pinyinSegment attributes:attributesDict];
-    [coloredString appendAttributedString:tempStr];
-    [tempStr release];
+    NSDictionary *pinyinHash = [NSDictionary dictionaryWithObjectsAndKeys:theColor,@"color",pinyinSegment,@"pinyin",nil];
+    [components addObject:pinyinHash];
   }
-  return [coloredString autorelease];
+  return components;
 }
+
 
 - (NSString *) headword
 {
