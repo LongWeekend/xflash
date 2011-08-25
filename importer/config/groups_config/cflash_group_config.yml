@@ -1,0 +1,27 @@
+# The root of the group
+# Which has the name on beginning of its 
+# element.
+# Followed by another group or tag
+# Differentiated by the structure. 
+# Each Tag will be structured like file_name and key for its dictionary
+# Each Group will be structured with 
+study_sets:
+    name: "Study Sets"
+    # Groups '800'
+    800:
+        name: "800 + Words"
+        800_beginner: 
+            file: "file_800_config.yml"
+            key: "tags_800_beginner"
+        800_intermediate:
+            file: "file_800_config.yml"
+            key: "tags_800_beginner"
+        800_advance:
+            file: "file_800_config.yml"
+            key: "tags_800_beginner"
+    starred_words:
+        file: "system_tags.yml"
+        key: "starred"
+    lwe_favs:
+        file: "system_tags.yml"
+        key: "lwe_favs"
