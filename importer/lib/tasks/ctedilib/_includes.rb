@@ -24,6 +24,7 @@ load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 load File.dirname(__FILE__) + "/classes/TagsBaseConfiguration.rb"
 load File.dirname(__FILE__) + "/classes/TagsBaseImporter.rb"
 load File.dirname(__FILE__) + "/classes/Tags800WordsImporter.rb"
+load File.dirname(__FILE__) + "/classes/TagsSystemImporter.rb"
 
 # Importers
 load File.dirname(__FILE__) + "/classes/CEdictBaseImporter.rb"
