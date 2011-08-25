@@ -74,8 +74,9 @@ class TagsBaseImporter
   end
   
   def get_log_dump_filename
+    folder_path = File.dirname(__FILE__) + "/../../../../result-log"
     tag_name = @config[:metadata].short_name()
-    return "#{tag_name}-log.txt"
+    return "#{folder_path}/#{tag_name}-log.txt"
   end
   
   def setup_tag_row
