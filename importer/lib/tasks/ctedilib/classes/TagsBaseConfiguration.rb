@@ -3,8 +3,9 @@ require 'YAML'
 class TagsBaseConfiguration
   
   ### Class Constructor
-  def initialize (file_to_yaml_file, metadata_key="")
-    @configuration = YAML.load_file(file_to_yaml_file)
+  def initialize (yaml_file, metadata_key="")
+    path_to_yaml_file = File.dirname(__FILE__) + "/../../../../config/tags_config/#{yaml_file}"
+    @configuration = YAML.load_file(path_to_yaml_file)
     @configuration = @configuration[metadata_key] unless ((metadata_key == nil)||(metadata_key.strip().length()<=0))
     
     if (@configuration == nil)
