@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/tasks/ctedilib/tests/GetPinyinUnicodeTest.rb</string>
+	<string>lib/tasks/ctedilib/tests/TagParserTest.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,14 +21,42 @@
 	<integer>326</integer>
 	<key>metaData</key>
 	<dict>
+		<key>config/groups_config/cflash_group_config.yml</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>11</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>config/tags_config/file_800_config.yml</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>21</integer>
+				<integer>26</integer>
 				<key>line</key>
-				<integer>2</integer>
+				<integer>11</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>config/tags_config/system_tags.yml</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>51</integer>
+				<key>line</key>
+				<integer>18</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -54,123 +82,95 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>49</integer>
+				<integer>58</integer>
 				<key>line</key>
-				<integer>13</integer>
+				<integer>26</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/_modules.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>189</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>183</integer>
 		</dict>
 		<key>lib/tasks/ctedilib/_options.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>35</integer>
+				<integer>31</integer>
 				<key>line</key>
-				<integer>76</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>59</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/CardEntry.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>41</integer>
-				<key>line</key>
-				<integer>40</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/Entry.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>77</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/Tags800WordsImporter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>50</integer>
-				<key>line</key>
-				<integer>18</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>2</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/TagsBaseImporter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>6</integer>
-				<key>line</key>
-				<integer>2</integer>
+				<integer>179</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>145</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>13</integer>
 				<key>line</key>
-				<integer>2</integer>
+				<integer>179</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>31</integer>
 				<key>line</key>
-				<integer>2</integer>
+				<integer>179</integer>
 			</dict>
 		</dict>
-		<key>lib/tasks/ctedilib/tests/GetPinyinUnicodeTest.rb</key>
+		<key>lib/tasks/ctedilib/classes/TagsBaseConfiguration.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>10</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>35</integer>
+				<integer>23</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>27</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/TagsBaseImporter.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>27</integer>
+				<key>line</key>
+				<integer>78</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>32</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/TagsSystemImporter.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>36</integer>
+				<key>line</key>
+				<integer>45</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/tests/CSVEntryTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>24</integer>
+				<key>line</key>
+				<integer>22</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -182,9 +182,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>19</integer>
+				<integer>26</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>9</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -197,18 +197,18 @@
 		<string>lib/tasks/ctedilib/_options.rb</string>
 		<string>lib/tasks/ctedilib/_includes.rb</string>
 		<string>lib/tasks/ctedilib/_additions.rb</string>
-		<string>lib/tasks/ctedilib/tests/GetPinyinUnicodeTest.rb</string>
-		<string>lib/tasks/ctedilib/_modules.rb</string>
-		<string>lib/tasks/ctedilib/classes/Entry.rb</string>
 		<string>lib/tasks/ctedilib/classes/TagsBaseImporter.rb</string>
 		<string>lib/tasks/ctedilib/tests/TagParserTest.rb</string>
-		<string>lib/tasks/ctedilib/classes/Tags800WordsImporter.rb</string>
-		<string>lib/tasks/ctedilib/classes/CardEntry.rb</string>
+		<string>lib/tasks/ctedilib/classes/TagsBaseConfiguration.rb</string>
+		<string>lib/tasks/ctedilib/classes/TagsSystemImporter.rb</string>
+		<string>config/groups_config/cflash_group_config.yml</string>
+		<string>config/tags_config/system_tags.yml</string>
+		<string>lib/tasks/ctedilib/tests/CSVEntryTest.rb</string>
 		<string>config/tags_config/file_800_config.yml</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{989, 0}, {933, 1058}}</string>
+	<string>{{390, 30}, {1530, 1028}}</string>
 </dict>
 </plist>
