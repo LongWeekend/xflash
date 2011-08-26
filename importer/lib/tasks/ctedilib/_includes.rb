@@ -21,6 +21,7 @@ load File.dirname(__FILE__) + "/classes/CSVParser.rb"
 load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 
 #added
+load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagsBaseConfiguration.rb"
 load File.dirname(__FILE__) + "/classes/TagsBaseImporter.rb"
 load File.dirname(__FILE__) + "/classes/Tags800WordsImporter.rb"

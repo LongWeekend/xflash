@@ -9,19 +9,19 @@ study_sets:
     name: "Study Sets"
     # Groups '800'
     800:
-        name: "800 + Words"
+        name: ["800 + Words", 1]
         800_beginner: 
             file: "file_800_config.yml"
-            key: "tags_800_beginner"
+            metadata_key: "tags_800_beginner"
         800_intermediate:
             file: "file_800_config.yml"
-            key: "tags_800_beginner"
+            metadata_key: "tags_800_beginner"
         800_advance:
             file: "file_800_config.yml"
-            key: "tags_800_beginner"
+            metadata_key: "tags_800_beginner"
     starred_words:
         file: "system_tags.yml"
-        key: "starred"
+        metadata_key: "starred"
     lwe_favs:
         file: "system_tags.yml"
-        key: "lwe_favs"
+        metadata_key: "lwe_favs"
