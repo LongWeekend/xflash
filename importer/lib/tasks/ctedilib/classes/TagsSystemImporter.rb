@@ -1,4 +1,4 @@
-class Tags800WordsImporter < TagsBaseImporter
+class TagsSystemImporter < TagsBaseImporter
   
   include CardHelpers
   
@@ -8,9 +8,7 @@ class Tags800WordsImporter < TagsBaseImporter
   
   def import
     # Open the connection to the database first
-    # and get the entire cards on the hash table
     connect_db()
-    get_all_cards_from_db()
     
     # Insert into the tags_staging first
     # to get the parent of the tags.
@@ -45,7 +43,7 @@ class Tags800WordsImporter < TagsBaseImporter
       # This will return to the one calling this blocks
       # without the keyword return, seems strange, but works!
       insert_query
-    end # End of the super do |rec| loop
+    end unless @config[:data] == nil # End of the super do |rec| loop
 
     log "\n"
     log ("Finish inserting: %s with %s records not found" % [found.to_s(), not_found.to_s()], true)

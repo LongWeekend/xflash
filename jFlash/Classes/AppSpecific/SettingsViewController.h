@@ -18,25 +18,26 @@ extern NSString * const APP_NEW_UPDATE;
 extern NSString * const LWECardSettingsChanged;
 extern NSString * const LWESettingsChanged;
 
+@protocol LWESettingsDataSource <NSObject>
+- (NSArray*) settingsArray;
+- (NSDictionary*) settingsHash;
+@end
+
+@class SettingsViewController;
+
+@protocol LWESettingsDelegate <NSObject>
+- (void) settingWillChange:(NSString*)key;
+- (BOOL) shouldSendCardChangeNotification;
+- (BOOL) shouldSendChangeNotification;
+- (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc;
+@end
+
 @interface SettingsViewController : UITableViewController <UITableViewDelegate, UIWebViewDelegate>
-{
-  NSMutableArray *sectionArray;
-  NSDictionary *settingsDict;
-  BOOL settingsChanged;
-  BOOL directionChanged;
-  BOOL themeChanged;
-  BOOL readingChanged;
-  Appirater *appirater;
-}
 
 - (void) iterateSetting: (NSString*) setting;
-- (NSMutableArray*) _settingsTableDataSource;
 
-@property BOOL settingsChanged;
-@property BOOL directionChanged;
-@property BOOL themeChanged;
-@property BOOL readingChanged;
-@property (retain, nonatomic) NSDictionary *settingsDict;
-@property (retain, nonatomic) NSMutableArray *sectionArray;
-@property (retain, nonatomic) Appirater *appirater;
+// TODO: apparently data sources aren't generally retained, but in this case it seems to make sense.  Justify this.
+@property (retain) id<LWESettingsDataSource> dataSource;
+@property (assign) id<LWESettingsDelegate> delegate;
+@property (retain, nonatomic) NSArray *sectionArray;
 @end

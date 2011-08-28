@@ -8,285 +8,210 @@
 
 #import "WordCardViewController.h"
 
+#import "ChineseCard.h"
+
+// Private Methods
+@interface WordCardViewController()
+- (void) _injectMeaningHTML:(NSString*)html;
+@end
+
 @implementation WordCardViewController
 @synthesize meaningWebView, cardHeadwordLabelScrollMoreIcon, cardHeadwordLabel, cardReadingLabelScrollMoreIcon, cardReadingLabel, toggleReadingBtn;
-@synthesize cardReadingLabelScrollContainerYPosInXib, cardHeadwordLabelHeightInXib, toggleReadingBtnYPosInXib, cardHeadwordLabelYPosInXib;
-@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible, meaningRevealed;
+@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible;
 
-@synthesize _tmpJavascript;
+@synthesize baseHtml;
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
+{
+  NSString *nibName = nil;
+  NSString *htmlHeader = nil;
+  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
+  if (displayMainHeadword)
+  {
+    // Main headword, so don't do anything differently.
+    htmlHeader = [LWECardHtmlHeader stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    nibName = @"WordCardViewController";
+  }
+  else
+  {
+    // Prepare the view for displaying in E-to-J mode
+    htmlHeader = [LWECardHtmlHeader_EtoJ stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
+    nibName = @"WordCardViewController-EtoJ";
+  }
+  self = [super initWithNibName:nibName bundle:nil];
+  if (self)
+  {
+    self.baseHtml = [NSString stringWithFormat:@"%@%@",htmlHeader,LWECardHtmlFooter];
+  }
+  return self;
+}
+
 - (void)viewDidLoad 
 {
-	LWE_LOG(@"Word card view controller get loaded");
   [super viewDidLoad];
-  
-  // Make sure this is nil before the web view starts loading
-  self._tmpJavascript = nil;
-  
-  // Get values from XIB on first load
-  // TODO: iPad customization!
-  CGRect tmpFrame;
-  tmpFrame = cardReadingLabelScrollContainer.frame;
-  cardReadingLabelScrollContainerYPosInXib = tmpFrame.origin.y;
-  tmpFrame = cardHeadwordLabel.frame;
-  cardHeadwordLabelHeightInXib = tmpFrame.size.height;
-  tmpFrame = toggleReadingBtn.frame;
-  toggleReadingBtnYPosInXib = tmpFrame.origin.y;
-  tmpFrame = cardHeadwordLabelScrollContainer.frame;
-  cardHeadwordLabelYPosInXib = tmpFrame.origin.y;  
-  
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
-  [self layoutCardContentForStudyDirection:[settings objectForKey:APP_HEADWORD]];
-  
-  // Modify the inline CSS for current theme
-  // TODO: make this work when the user changes themes
-  NSString *cssHeader = [[ThemeManager sharedThemeManager] currentThemeCSS];
-  NSString *htmlHeader = [HTML_HEADER stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
-  NSString *html = [NSString stringWithFormat:@"%@%@",htmlHeader,HTML_FOOTER];
-
-  // Initialize the web view
-  [self.meaningWebView loadHTMLString:html baseURL:nil];
+  [self.meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
+  [self.meaningWebView shutOffBouncing];
+  self.meaningWebView.backgroundColor = [UIColor clearColor];
 }
 
-#pragma mark layout methods
-
-- (void) layoutCardContentForStudyDirection: (NSString*)studyDirection
-{
-  // Y-Positions for J_TO_E Mode
-  // NB: with UIScrollView objects you have to add the height of itself to it's y-position
-  int readingY    = cardReadingLabelScrollContainerYPosInXib;
-  int readingBtnY = toggleReadingBtnYPosInXib;
-  int headwordY   = cardHeadwordLabelYPosInXib;
-  
-  // TODO: iPad customization!
-  CGRect readingFrame = cardReadingLabelScrollContainer.frame;
-  CGRect headwordFrame = cardHeadwordLabelScrollContainer.frame;
-  CGRect readingBtnFrame = toggleReadingBtn.frame;
-  CGRect readingScrollMoreFrame = cardReadingLabelScrollMoreIcon.frame;
-  CGRect headwordScrollMoreFrame = cardHeadwordLabelScrollMoreIcon.frame;
-  
-  // Y-Positions for E_TO_J Mode
-  if([studyDirection isEqualToString: SET_E_TO_J])
-  {
-    // Move headword to reading's Y position
-    headwordY = readingY;
-    
-    // Now redefine val for reading Y
-    readingY = readingY + headwordFrame.size.height;//+ (cardReadingLabelScrollContainerYPosInXib -readingFrame.size.height);
-    readingBtnY = readingY;
-    
-  }
-  
-  // Set new linebreak modes
-  if([studyDirection isEqualToString: SET_E_TO_J])
-  {
-    cardHeadwordLabel.lineBreakMode = UILineBreakModeWordWrap;
-  } 
-	else 
-	{
-    cardHeadwordLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-  }
-  
-  // TODO: iPad customization!
-  // Move cardReadingLabel
-  readingFrame.origin.y = readingY;
-  cardReadingLabelScrollContainer.frame = readingFrame;
-  
-  // TODO: iPad customization!
-  // Move revealReadingBtn
-  readingBtnFrame.origin.y = readingBtnY;
-  toggleReadingBtn.frame = readingBtnFrame;
-  
-  // TODO: iPad customization!
-  // Move cardHeadwordLabelScrollContainer
-  headwordFrame.origin.y = headwordY;
-  cardHeadwordLabelScrollContainer.frame = headwordFrame;
-  
-  // TODO: iPad customization!
-  // Move the headword Scroll More Icon
-  headwordScrollMoreFrame.origin.y = headwordY+(headwordFrame.size.height/3);
-  cardHeadwordLabelScrollMoreIcon.frame = headwordScrollMoreFrame;
-  
-  // TODO: iPad customization!
-  // Move cardReadingLabelScrollMoreIcon
-  readingScrollMoreFrame.origin.y = readingBtnY+(CARDCONTENT_PADDING*3);
-  cardReadingLabelScrollMoreIcon.frame = readingScrollMoreFrame;
-}
-
+#pragma mark - layout methods
 
 // Toggle "more" icon to indicate the user can scroll meaning down
-- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView: (UIScrollView *)scrollViewContainer 
+- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
 {
-  // TODO: iPad customization!
-  CGSize theLabelSize = theLabel.frame.size;
-  CGSize theParentSize = scrollViewContainer.frame.size;
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-  if (theLabel == cardReadingLabel)
+  BOOL isTooTall = (theLabel.frame.size.height > scrollViewContainer.frame.size.height);
+  if (theLabel == self.cardReadingLabel)
   {
-    if(theLabelSize.height > theParentSize.height)
-    {
-      if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J] && meaningRevealed)
-      {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
-      }
-      else if(!meaningRevealed)
-      {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
-      }
-      else 
-      {
-        [[self cardReadingLabelScrollMoreIcon] setHidden:NO];
-      }
-    } 
-    else 
-    {
-      [[self cardReadingLabelScrollMoreIcon] setHidden:YES];
-    }
+    // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
+    self.cardReadingLabelScrollMoreIcon.hidden = ((isTooTall == NO) || (self.readingVisible == NO));
   }
-  else if (theLabel == cardHeadwordLabel)
+  else if (theLabel == self.cardHeadwordLabel)
   {
-    if(theLabelSize.height > theParentSize.height)
-    {
-      [[self cardHeadwordLabelScrollMoreIcon] setHidden:NO];
-    }
-    else
-    {
-      [[self cardHeadwordLabelScrollMoreIcon] setHidden:YES];
-    }
+    self.cardHeadwordLabelScrollMoreIcon.hidden = (isTooTall == NO);
   }
-}
-
-- (void) updateCardReading:(Card*) card
-{
-  [cardReadingLabel setText:[card combinedReadingForSettings]];
-  [LWEUILabelUtils resizeLabelWithConstraints:cardReadingLabel minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE forParentViewSize:cardReadingLabelScrollContainer.frame.size];
 }
 
 - (void) hideMeaningWebView:(BOOL)hideMeaningWebView
 {
-  [self.meaningWebView setHidden:hideMeaningWebView];
-  [self toggleMoreIconForLabel:[self cardReadingLabel] forScrollView:cardReadingLabelScrollContainer];
-}
-
-- (void) setupMeaningWebView: (NSUserDefaults *) settings Card:(Card*)card 
-{
-  NSString *html;
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString: SET_E_TO_J])
-  {
-    html = [NSString stringWithFormat:@"<span class='jpn'>%@</span>", [card headword]];
-  }
-  else
-  {
-    html = [NSString stringWithFormat:@"<span>%@</span>", [card meaning]];    
-  }
-
-  self.meaningWebView.backgroundColor = [UIColor clearColor];
-  [self.meaningWebView shutOffBouncing];
-  
-  // The HTML will be encapsulated in Javascript, make sure to escape that noise
-  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
-  
-  // Javascript
-  NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container');"
-  "if (textElement) { textElement.innerHTML = '%@'; } ",escapedHtml];
-
-  // Save of copy of this in case the webview hasn't finished loading yet
-  self._tmpJavascript = js;
-    
-  // Not loading, do it as normal
-  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
+  self.meaningWebView.hidden = hideMeaningWebView;
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
 // Prepare the view for the current card
 - (void) prepareView:(Card*)card
 {
-  LWE_LOG(@"START prepareViewForCard");
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-	// Show Blank Card
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  // Fix up the headword & the meaning; those are a bit easier.
+  [self _injectMeaningHTML:card.meaning];
+  self.cardHeadwordLabel.text = card.headword;
+
+  // Now do the hard part (for CFlash)
+#if defined(LWE_JFLASH)
+  self.cardReadingLabel.text = card.reading;
+#elif defined(LWE_CFLASH)
+  NSMutableString *pinyinString = [NSMutableString string];
+  NSArray *readingHashes = [(ChineseCard*)card readingComponents];
+  for (NSDictionary *readingHash in readingHashes)
   {
-    [cardHeadwordLabel setText:[card headword_en]];    
+    [pinyinString appendString:(NSString*)[readingHash objectForKey:@"pinyin"]];
+    [pinyinString appendString:@" "];
   }
-  else
+  
+  [self.cardReadingLabel setText:pinyinString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSAttributedString *(NSMutableAttributedString *mutableAttributedString)
   {
-    [cardHeadwordLabel setText:[card headword]];    
-  }
+    for (NSDictionary *readingHash in readingHashes)
+    {
+      NSRange thisRange = [mutableAttributedString.string rangeOfString:[readingHash objectForKey:@"pinyin"]];
+      [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
+                                      range:thisRange];
+    }
+    return mutableAttributedString;
+  }];
+#endif
   
-  [self updateCardReading:card];
-  
-  //setup the web view
-  [self setupMeaningWebView:settings Card:card];
+  // TODO: Maybe make this work again too?
+  [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
+                                  minFontSize:READING_MIN_FONTSIZE
+                                  maxFontSize:READING_MAX_FONTSIZE
+                            forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
   
   // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:cardReadingLabel forScrollView:cardReadingLabelScrollContainer withText:[card reading] minFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
-  [LWEUILabelUtils autosizeLabelText:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer withText:[card headword] minFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
+  [LWEUILabelUtils autosizeLabelText:self.cardReadingLabel
+                       forScrollView:self.cardReadingLabelScrollContainer
+                            withText:card.reading
+                         minFontSize:READING_MIN_FONTSIZE
+                         maxFontSize:READING_MAX_FONTSIZE];
+
+  [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
+                       forScrollView:self.cardHeadwordLabelScrollContainer
+                            withText:card.headword
+                         minFontSize:HEADWORD_MIN_FONTSIZE
+                         maxFontSize:HEADWORD_MAX_FONTSIZE];
   
-  [self toggleMoreIconForLabel:cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
-  [self toggleMoreIconForLabel:cardHeadwordLabel forScrollView:cardHeadwordLabelScrollContainer];
-  
-  LWE_LOG(@"END prepareViewForCard");
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
 }
 
-#pragma mark Reading Label Methods
+#pragma mark - Reading Label Methods
 
-- (void) hideShowReadingBtn
+- (void) turnReadingOn
 {
-  [toggleReadingBtn setBackgroundImage:NULL forState:UIControlStateNormal];
+  self.readingVisible = YES;
+  self.cardReadingLabelScrollContainer.hidden = NO;
+  [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
 }
 
-- (void) displayShowReadingBtn
+- (void) turnReadingOff
 {
-  [toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"] forState:UIControlStateNormal];
+  self.readingVisible = NO;
+  self.cardReadingLabelScrollContainer.hidden = YES;
+  [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
+                                   forState:UIControlStateNormal];
 }
 
 //! shows or hides the reading label and toggleButton according to the readingVisible bool
-- (void) setupReadingVisibility 
+- (void) resetReadingVisibility 
 {
-  if ([self readingVisible])
-  { 
-    [cardReadingLabelScrollContainer setHidden:NO];
-    [cardReadingLabel setHidden:NO];
-    [self hideShowReadingBtn];
+  self.cardReadingLabelScrollContainer.hidden = (self.readingVisible == NO);
+
+  // Set the button image to nil when we have a reading showing, and show the "show reading" button when not.
+  UIImage *displayReadingImage = (self.readingVisible) ? nil : [UIImage imageNamed:@"practice-btn-showreading.png"];
+  [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
+}
+
+#pragma mark - IBActions
+
+/**
+ * If the reading scroll container is hidden, this shows it.
+ * If it's showing, it hides it.
+ */
+- (IBAction) doToggleReadingBtn
+{
+  if (self.cardReadingLabelScrollContainer.hidden)
+  {
+    [self turnReadingOn];
   }
   else
   {
-    [cardReadingLabelScrollContainer setHidden:YES];
-    [cardReadingLabel setHidden:YES];
-    [self displayShowReadingBtn];
+    [self turnReadingOff];
   }
 }
 
-//! toggles the readingVisible bool and calls setupReadingVisibility
-- (IBAction) doToggleReadingBtn
+#pragma mark - Private Methods
+
+- (void) _injectMeaningHTML:(NSString*)html
 {
-  // Toggle
-  [self setReadingVisible:(![self readingVisible])];
-  [self setupReadingVisibility];
+  // The HTML will be encapsulated in Javascript, make sure to escape that noise
+  NSString *escapedHtml = [html stringByReplacingOccurrencesOfString:@"'" withString:@"\\\'"];
+  NSString *js = [NSString stringWithFormat:@"var textElement = document.getElementById('container'); if (textElement) { textElement.innerHTML = '%@'; }",escapedHtml];
+  
+  // Save of copy of this in case the webview hasn't finished loading yet (see WebView delegate below)
+  _tmpJavascript = [js retain];
+  
+  // Not loading, do it as normal
+  [self.meaningWebView stringByEvaluatingJavaScriptFromString:js];
 }
 
-#pragma mark -
-#pragma mark UIWebViewDelegate Support
+
+#pragma mark - UIWebViewDelegate Support
 
 /**
  * This callback should only be called once at the beginning of a study session
  * When the webview doesn't load as fast as the view controllers (so far, always)
  * the javascript call in "setupWebMeaning" or whatever will do nothing - so 
- * it caches the result in _tmpHTML and waits for the delegate callback
+ * it caches the result in _tmpJavascript and waits for the delegate callback
  */
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
   // Aha, we have some HTML on first load, so load that shit up
-  if (self._tmpJavascript)
+  if (_tmpJavascript)
   {
-    [self.meaningWebView stringByEvaluatingJavaScriptFromString:self._tmpJavascript];
+    [self.meaningWebView stringByEvaluatingJavaScriptFromString:_tmpJavascript];
+    [_tmpJavascript release];
+    _tmpJavascript = nil;
   }
 }
 
-#pragma mark -
-#pragma mark Plumbing
+#pragma mark - Plumbing
 
 - (void)viewDidUnload 
 {
@@ -304,6 +229,9 @@
 
 - (void)dealloc 
 {
+  [baseHtml release];
+  [_tmpJavascript release];
+  
 	[cardReadingLabelScrollContainer release];
 	[cardHeadwordLabelScrollContainer release];
 	[cardHeadwordLabelScrollMoreIcon release];
@@ -321,5 +249,30 @@
   [super dealloc];
 }
 
-
 @end
+
+NSString * const LWECardHtmlHeader = @""
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
+"<style>"
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} "
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"##THEMECSS##"
+"</style></head>"
+"<body><div id='container'>";
+
+NSString * const LWECardHtmlHeader_EtoJ = @""
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />"
+"<style>"
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } "
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} "
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} "
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} "
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} "
+"##THEMECSS##"
+"</style></head>"
+"<body><div id='container'>";
+
+NSString * const LWECardHtmlFooter = @"</div></body></html>";

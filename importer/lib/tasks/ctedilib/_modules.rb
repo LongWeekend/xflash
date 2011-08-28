@@ -97,7 +97,7 @@ module DatabaseHelpers
      system(cmd)
      prt "\n\n"
   end
-  
+   
   # REINDEX
   def sqlite_reindex_tables(table_name_arr, dbfilepath)
     prt "==== Opening Command Line ====\n" if $options[:verbose]
@@ -201,11 +201,14 @@ module ImporterHelpers
         # Just to get the tone in string (even if it should be a number)
         tone = ""
         tone << reading.slice(reading.length()-1)
-        
-        if (tone.match($regexes[:pinyin_tone]))
+        if reading == "r5"
+          # Exception for the 'r' sound and the tone will always be '5'
+          # Just concatinate with the result
+          result << "r"
+        elsif (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
           # Get the reading without the number (tone)
-          reading = reading.slice(0, reading.length()-1)
+          reading = reading.slice(0, reading.length()-1).downcase()
           
           vocals = reading.scan($regexes[:vocal])
           num_of_vocal = vocals.length
@@ -230,7 +233,14 @@ module ImporterHelpers
           if ((vocal) && (vocal.strip().length() > 0))
             diacritic = get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
+          else
+            puts "The vocal to be sub with its diacritic is not found for readings: %s, vocals: %s, reading: %s and tone: %s" % [readings, vocals, reading, tone]
           end
+        elsif (reading.match($regexes[:one_capital_letter]))
+          # If there is a single letter reading, 
+          # it is usually either an acronym or a single letter. (like ka-la-o-k) - Karaoke
+          # Put them just as is
+          result << reading
         elsif (reading.match($regexes[:pinyin_separator]))
           result << " %s " % [reading]
         else
@@ -522,7 +532,7 @@ module CardHelpers
   
     #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
     index = cards.index { |card| card.similar_to?(entry, criteria) }
-    return cards[index] unless index == nil
+    return cards[index] unless ((index==nil)||(index==0))
     return nil
   end # End for method definition
   

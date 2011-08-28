@@ -1,6 +1,23 @@
 #import "CardPeer.h"
+#import "JapaneseCard.h"
+#import "ChineseCard.h"
+#import "ExampleSentencePeer.h"
 
 @implementation CardPeer
+
+/**
+ * Factory that cares about what language we are using
+ */
++ (Card *) blankCard
+{
+#if defined(LWE_JFLASH)
+  return [[[JapaneseCard alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  return [[[ChineseCard alloc] init] autorelease];
+#else
+  return nil;
+#endif
+}
 
 /**
  * Returns an array of Card objects after searching keyword
@@ -8,10 +25,10 @@
 + (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
-  NSString* sql;
-  FMResultSet *rs;
-  NSString* keywordWildcard;
+  NSMutableArray *cardList = [NSMutableArray array];
+  NSString *sql = nil;
+  FMResultSet *rs = nil;
+  NSString *keywordWildcard = nil;
   
   if (!slowSearch)
   {
@@ -24,29 +41,34 @@
            "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit];
-    rs = [[db dao] executeQuery:sql];
+    rs = [db executeQuery:sql];
     int cardListCount = 0;
     while ([rs next])
     {
       cardListCount++;
-      Card* tmpCard = [[[Card alloc] init] autorelease];
+      Card *tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
       [cardList addObject: tmpCard];
     }
 
     if(cardListCount < queryLimit)
+    {
       queryLimit2 = (queryLimit-cardListCount)+queryLimit;
+    }
     else
+    {
       queryLimit2 = queryLimit;
-      
+    }
+    
     // Do the search using SQLite FTS (NON-PTAG results)
     sql = [NSString stringWithFormat:@""
            "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit2];
-    rs = [[db dao] executeQuery:sql];
-    while ([rs next]) {
-      Card* tmpCard = [[[Card alloc] init] autorelease];
+    rs = [db executeQuery:sql];
+    while ([rs next])
+    {
+      Card *tmpCard = [CardPeer blankCard]; // [[[Card alloc] init] autorelease];
       [tmpCard hydrate:rs];
       [cardList addObject: tmpCard];
     }
@@ -60,12 +82,12 @@
            "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, 200];
-    rs = [[db dao] executeQuery:sql];
+    rs = [db executeQuery:sql];
     while ([rs next])
     {
-      Card* tmpCard = [[[Card alloc] init] autorelease];
+      Card *tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
-      [cardList addObject: tmpCard];
+      [cardList addObject:tmpCard];
     }
     [rs close];
   }
@@ -80,8 +102,8 @@
 + (Card*) retrieveCardWithSQL: (NSString*) sql
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
-  Card* tmpCard = [[[Card alloc] init] autorelease];
+  FMResultSet *rs = [db executeQuery:sql];
+  Card *tmpCard = [CardPeer blankCard];
   while ([rs next])
   {
     [tmpCard hydrate:rs];
@@ -94,15 +116,15 @@
 /**
  * Takes a cardId and returns a hydrated Card from the database
  */
-+ (Card*) retrieveCardByPK: (NSInteger)cardId
++ (Card*) retrieveCardByPK:(NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
       "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
-             "u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+             "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
       "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
       "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
-  Card* tmpCard = [CardPeer retrieveCardWithSQL:sql];
+  Card *tmpCard = [CardPeer retrieveCardWithSQL:sql];
   [sql release];
   return tmpCard;
 }
@@ -111,23 +133,18 @@
 /**
  * Takes a Card object with cardId set, returns a hydrated Card
  */
-+ (Card*) hydrateCardByPK: (Card*) card
++ (Card*) hydrateCardByPK:(Card*)card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
-                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count, "
-                          "c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
+                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,u.wrong_count as wrong_count,u.right_count as right_count, c.*,ch.meaning "
                    "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
                    "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], [card cardId]];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
+  FMResultSet *rs = [db executeQuery:sql];
   while ([rs next])
   {
-    [card setHeadword:[rs stringForColumn:@"headword"]];
-    [card setHeadword_en:[rs stringForColumn:@"headword_en"]];
-    [card setReading:[rs stringForColumn:@"reading"]];
-    [card setRomaji:[rs stringForColumn:@"romaji"]];
-    [card setMeaning:[rs stringForColumn:@"meaning"]];
+    [card hydrate:rs];
   }
   [rs close];
   [sql release];
@@ -152,7 +169,7 @@
   int cardLevel = 0;
   int wrongCount = 0;
   int rightCount = 0;
-  FMResultSet *rs = [[db dao] executeQuery:sql];
+  FMResultSet *rs = [db executeQuery:sql];
   while ([rs next])
   {
     cardId     = [rs intForColumn:@"card_id"];
@@ -161,12 +178,12 @@
     rightCount = [rs intForColumn:@"right_count"];
   }
   [rs close];
-  sql2 =  [[NSString alloc] initWithFormat:@""
+  sql2 = [[NSString alloc] initWithFormat:@""
     "SELECT %d as card_level, %d AS wrong_count, %d AS right_count, %d AS user_id, * "
     "FROM cards WHERE card_id = '%d'",cardLevel,wrongCount,rightCount,[settings integerForKey:@"user_id"],cardId];
-  FMResultSet *rs2 = [[db dao] executeQuery:sql2];
+  FMResultSet *rs2 = [db executeQuery:sql2];
   [sql2 release];
-  tmpCard = [[[Card alloc] init] autorelease];
+  tmpCard = [CardPeer blankCard];
   while ([rs2 next])
   {
     [tmpCard hydrate:rs2];
@@ -194,20 +211,14 @@
 + (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
 {
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-	Card* tmpCard;
-	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+	FMResultSet *rs = [db executeQuery:sql];
+	Card *tmpCard = nil;
+	NSMutableArray *cardList = [NSMutableArray array];
 	while ([rs next])
 	{
 		// Full card?
-		if (basicCard)
-		{
-			tmpCard = [[Card alloc] initAsBasicCard];
-		}
-		else
-		{
-			tmpCard = [[Card alloc] init];
-		}
+    tmpCard = [CardPeer blankCard];
+    tmpCard.isBasicCard = basicCard;
 		
 		// Hydrate?
 		if (hydrate)
@@ -216,11 +227,9 @@
 		}
 		else
 		{
-			[tmpCard setCardId:[rs intForColumn:@"card_id"]];
+      tmpCard.cardId = [rs intForColumn:@"card_id"];
 		}
-		
-		[cardList addObject: tmpCard];
-		[tmpCard release];
+		[cardList addObject:tmpCard];
 	}
 	[rs close];
 	return cardList;
@@ -241,7 +250,7 @@
   }
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level "
 "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id AND u.user_id = '%d' WHERE l.tag_id = '%d'",[settings integerForKey:@"user_id"],tagId];
-  FMResultSet *rs = [[db dao] executeQuery:sql];
+  FMResultSet *rs = [db executeQuery:sql];
   while ([rs next])
   {
     [[cardIdList objectAtIndex:[rs intForColumn:@"card_level"]] addObject:[NSNumber numberWithInt:[rs intForColumn:@"card_id"]]];
@@ -281,34 +290,32 @@
 /**
  * Returns an array containng cardId integers that are linked to the sentence
  * \param sentenceId Primary key of the sentence to look up cards for
- * \param showAll Determines whether to get all links or just trimmed links
  *
  * The difference with the method above is the query performed. This should be faster since it only asks for the data required. 
  *
  */
-+ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId showAll:(BOOL)showAll
++ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
 {	
-	NSString *sql;
-  if (showAll)
+	NSString *sql = nil;
+  if ([ExampleSentencePeer isNewVersion])
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
   }
   else
   {
-    sql = [[NSString alloc] initWithFormat:@"SELECT c.card_id, c.headword, c.reading, c.romaji FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
+    sql = [[NSString alloc] initWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
   }
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	FMResultSet *rs = [db executeQuery:sql];
   [sql release];
 	
-	NSMutableArray *cardList = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *cardList = [NSMutableArray array];
 	while ([rs next])
 	{
-		Card* tmpCard = [[Card alloc] initAsBasicCard];	
+		Card *tmpCard = [CardPeer blankCard];
+    tmpCard.isBasicCard = YES;
 		[tmpCard simpleHydrate:rs];
-		
 		[cardList addObject: tmpCard];
-		[tmpCard release];
 	}
 	[rs close];
 

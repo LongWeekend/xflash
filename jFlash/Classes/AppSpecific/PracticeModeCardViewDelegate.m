@@ -8,110 +8,94 @@
 
 #import "PracticeModeCardViewDelegate.h"
 
+#import "CardViewController.h"
+#import "ActionBarViewController.h"
+
 @implementation PracticeModeCardViewDelegate
 @synthesize wordCardViewController;
 
-//! Delegate messages
-- (void)cardViewWillSetup:(NSNotification *)aNotification
+#pragma mark - Card View Controller Delegate
+
+- (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-	CardViewController *cardViewController = (CardViewController *) [aNotification object];
-  if([self wordCardViewController] == nil)
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+  if (self.wordCardViewController == nil)
   {
-    WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    [self setWordCardViewController:cvc];
-		[cvc release];
-		
-    [cardViewController setView:[[self wordCardViewController] view]];
+    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
+    cardViewController.view = self.wordCardViewController.view;
   }
   
-  [[self wordCardViewController] prepareView:[cardViewController currentCard]];
+  [self.wordCardViewController prepareView:cardViewController.currentCard];
+
   // always start with the meaning hidden
-  [[self wordCardViewController] setMeaningRevealed: NO];
-  [[self wordCardViewController] hideMeaningWebView:YES];
-  [[self wordCardViewController] setupReadingVisibility];
+  [self.wordCardViewController hideMeaningWebView:YES];
+  [self.wordCardViewController resetReadingVisibility];
   
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  if ([studyDirection isEqualToString:SET_E_TO_J])
   {
-    [[[self wordCardViewController] toggleReadingBtn] setHidden:YES];
-    [[[self wordCardViewController] cardReadingLabelScrollContainer] setHidden:YES];
-    [[[self wordCardViewController] cardReadingLabel] setHidden:YES];
-    [[self wordCardViewController] setReadingVisible: NO];
+    self.wordCardViewController.toggleReadingBtn.hidden = YES;
+    self.wordCardViewController.cardReadingLabelScrollContainer.hidden = YES;
+    self.wordCardViewController.cardReadingLabel.hidden = YES;
+    self.wordCardViewController.readingVisible = NO;
   }
   else
   {
     // set the toggleReadingBtn to not hidden for other modes, if this is not here the button can be missing in practice mode
-    [[[self wordCardViewController] toggleReadingBtn] setHidden:NO];
+    self.wordCardViewController.toggleReadingBtn.hidden = NO;
   }
 }
 
-- (BOOL)cardViewShouldReveal:(id)cardView shouldReveal:(BOOL)revealCard
+- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
 {
   return YES;
 }
 
-- (void)cardViewDidReveal:(NSNotification *)aNotification
+- (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
-  [[self wordCardViewController] hideMeaningWebView:NO];
-  BOOL userSetReadingVisible = [[self wordCardViewController] readingVisible];
-  [[self wordCardViewController] setReadingVisible: YES];
-  [[self wordCardViewController] setMeaningRevealed: YES];
-  [[self wordCardViewController] setupReadingVisibility];
-  [[self wordCardViewController] setReadingVisible:userSetReadingVisible];
+  [self.wordCardViewController hideMeaningWebView:NO];
+  
+  // TODO: MMA why are we caching the value of this only to change it on the next line?
+  // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again
+  // on the next card (in practice mode)
+  BOOL userSetReadingVisible = self.wordCardViewController.readingVisible;
+  [self.wordCardViewController turnReadingOn];
+  self.wordCardViewController.readingVisible = userSetReadingVisible;
 }
 
-#pragma mark -
-#pragma mark Action Bar Delegate Methods
+#pragma mark - Action Bar Delegate Methods
 
--(void) actionBarWillSetup:(NSNotification *)aNotification
+-(void) actionBarWillSetup:(ActionBarViewController*)avc
 {
-  [[[aNotification object] rightBtn] setHidden:YES];
-  [[[aNotification object] wrongBtn] setHidden:YES];
-  [[[aNotification object] buryCardBtn] setHidden:YES];
-  [[[aNotification object] addBtn] setHidden:YES];
-  [[[aNotification object] cardMeaningBtnHint] setHidden:NO];
-  [[[aNotification object] prevCardBtn] setHidden:YES];
-  [[[aNotification object] nextCardBtn] setHidden:YES];
+  avc.rightBtn.hidden = YES;
+  avc.wrongBtn.hidden = YES;
+  avc.buryCardBtn.hidden = YES;
+  avc.addBtn.hidden = YES;
+  avc.cardMeaningBtnHint.hidden = NO;
+  avc.prevCardBtn.hidden = YES;
+  avc.nextCardBtn.hidden = YES;
   
-  CGRect frame = [[[aNotification object] addBtn] frame];
-  frame.origin.x = 9;
-  [[[aNotification object] addBtn] setFrame:frame];
+  // Move the add button back to where it belongs - if we were in browse mode, this is changed.
+  CGRect rect = avc.addBtn.frame;
+  rect.origin.x = 9;
+  avc.addBtn.frame = rect;
 }
 
--(void) actionBarWillReveal:(NSNotification *)aNotification
+-(void) actionBarWillReveal:(ActionBarViewController*)avc
 {
-	[[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-  
-	[[[aNotification object] rightBtn] setHidden:NO];
-	[[[aNotification object] wrongBtn] setHidden:NO];
-  [[[aNotification object] addBtn] setHidden:NO];
-  [[[aNotification object] buryCardBtn] setHidden:NO];
-  
-  [[[aNotification object] rightBtn] setEnabled: YES];
-	[[[aNotification object] wrongBtn] setEnabled: YES];	
-  [[[aNotification object] buryCardBtn] setEnabled:YES];
-  [[[aNotification object] addBtn] setEnabled:YES];
+  avc.rightBtn.hidden = NO;
+  avc.wrongBtn.hidden = NO;
+  avc.buryCardBtn.hidden = NO;
+  avc.addBtn.hidden = NO;
+  avc.cardMeaningBtnHint.hidden = YES;
 }
 
-#pragma mark -
-#pragma mark Clas Plumbing
+#pragma mark - Class Plumbing
 
 - (void)dealloc 
 {
-	if (wordCardViewController)
-	{
-		NSArray *views = [wordCardViewController.view subviews];
-		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
-		for (UIView *view in views)
-		{
-			LWE_LOG(@"Removing view %@", view);
-			[view removeFromSuperview];
-		}
-		
-		LWE_LOG(@"Retain count of card view controller (being released) : %d", [wordCardViewController retainCount]);
-		[wordCardViewController release];
-	}
-
+  [wordCardViewController release];
   [super dealloc];
 }
 

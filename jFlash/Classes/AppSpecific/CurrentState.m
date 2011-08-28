@@ -115,32 +115,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setBool:YES forKey:@"db_did_finish_copying"];
 }
 
-#pragma mark -
-#pragma mark Default - First time run.
+#pragma mark - Default - First time run.
 
 /** Create & store default settings to NSUserDefaults */
 - (void) _createDefaultSettings
 {
   LWE_LOG(@"Creating the default settings");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,nil];
-  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],nil];
-  for (int i = 0; i < [keys count]; i++)
-  {
-    [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
-  }  
-  [keys release];
-  [objects release];
   
+#if defined(LWE_JFLASH)
+  [settings setValue:SET_READING_BOTH forKey:APP_READING];
+#elif defined(LWE_CFLASH)
+  [settings setValue:SET_HEADWORD_TYPE_SIMP forKey:APP_HEADWORD_TYPE];
+  [settings setValue:SET_PINYIN_COLOR_ON forKey:APP_PINYIN_COLOR];
+#endif
+    
+  [settings setValue:DEFAULT_THEME forKey:APP_THEME];
+  [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
+  [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
+  [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
   [settings setInteger:DEFAULT_USER_ID forKey:APP_USER];
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
-  [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
+  [settings setInteger:DEFAULT_MAX_STUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
-  [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
-  [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
-
   [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
   [settings setBool:NO forKey:@"db_did_finish_copying"];
   [settings setBool:YES forKey:@"settings_already_created"];

@@ -9,21 +9,17 @@
 #import <QuartzCore/QuartzCore.h>
 #import "LWELoadingView.h"
 #import "CurrentState.h"
-#import "StudyViewController.h"
-#import "StudySetViewController.h"
-#import "SearchViewController.h"
-#import "HelpViewController.h"
 #import "PDColoredProgressView.h"
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"
 #import "LWEDownloader.h"
-#import "SettingsViewController.h"
 
 extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowStudySetView;
+extern NSString * const LWEShouldShowPopover;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
 {

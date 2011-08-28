@@ -10,45 +10,45 @@
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @interface Card : NSObject
-{
-  // Intrinsic card stuff
-	NSInteger cardId;               //! PK of the card
-	NSString* headword;             //! Japanese headword of a card 
-	NSString* headword_en;          //! English headword of a card
-	NSString* reading;              //! Japanese kana reading
-	NSString* romaji;               //! Romanized reading
-	NSString* meaning;              //! Actual English meaning
-  
-  BOOL isBasicCard;               //! If no, none of the properties below are set
-  
-	// User history attributes specific to Card
-  NSInteger userId;               //! User id associated with the level and counts
-	NSInteger levelId;              //! What level this card is in for user userId
-  NSInteger wrongCount;           //! How many times this card has been tapped "wrong" by this userId
-  NSInteger rightCount;           //! How many times this card has been tapped "right" by this userId
-}
-
-- (id) initAsBasicCard;
 
 - (void) simpleHydrate: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs;
 - (void) hydrate: (FMResultSet*) rs simple:(BOOL)includeMeaning;
 
+- (NSString*) reading;
+- (NSString*) headword;
+
+- (NSString*) meaning;
+
 - (NSString*) meaningWithoutMarkup;
-- (NSString*) combinedReadingForSettings;
-- (NSString*) readingBasedonSettingsForExpandedSampleSentences;
-- (BOOL) hasExampleSentences:(BOOL)newVersion;
+- (BOOL) hasExampleSentences;
 
 @property (nonatomic) BOOL isBasicCard;
+//! PK of the card
 @property (nonatomic) NSInteger cardId;
+
+//! User id associated with the level and counts
 @property (nonatomic) NSInteger userId;
+
+//! What level this card is in for user userId
 @property (nonatomic) NSInteger levelId;
+
+//! How many times this card has been tapped "wrong" by this userId
 @property (nonatomic) NSInteger wrongCount;
+
+//! How many times this card has been tapped "right" by this userId
 @property (nonatomic) NSInteger rightCount;
-@property (nonatomic, retain) NSString* headword;
-@property (nonatomic, retain) NSString* headword_en;
-@property (nonatomic, retain) NSString* reading;
-@property (nonatomic, retain) NSString* romaji;
-@property (nonatomic, retain) NSString* meaning;
+
+//! Japanese headword of a card 
+@property (nonatomic, retain) NSString *_headword;
+
+//! English headword of a card
+@property (nonatomic, retain) NSString *headword_en;
+
+//! reading, like kana or pinyin, depending
+@property (nonatomic, retain) NSString *hw_reading;
+
+//! Actual English meaning
+@property (nonatomic, retain) NSString *_meaning;
 
 @end

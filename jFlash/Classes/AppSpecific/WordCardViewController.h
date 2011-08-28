@@ -9,61 +9,42 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
+#import "TTTAttributedLabel.h"
+
+extern NSString * const LWECardHtmlHeader;
+extern NSString * const LWECardHtmlHeader_EtoJ;
+extern NSString * const LWECardHtmlFooter;
 
 @interface WordCardViewController : UIViewController 
 {
-  IBOutlet UILabel *cardHeadwordLabel;
-  IBOutlet UILabel *cardReadingLabel;
-  IBOutlet UIButton *toggleReadingBtn;
-  IBOutlet UIScrollView *cardReadingLabelScrollContainer;
-  IBOutlet UIScrollView *cardHeadwordLabelScrollContainer;
-  IBOutlet UIImageView *cardReadingLabelScrollMoreIcon;
-  IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
-  IBOutlet UIWebView *meaningWebView;
-  
-  // Tracking XIB Layout Coordinates
-  // I think these should go away
-  NSInteger cardReadingLabelScrollContainerYPosInXib;
-  NSInteger cardHeadwordLabelHeightInXib;
-  NSInteger toggleReadingBtnYPosInXib;
-  NSInteger cardHeadwordLabelYPosInXib;
-  
-  // state control
-  BOOL readingRevealed;
-  BOOL showReadingBtnHiddenByUser;
-  BOOL readingVisible;
-  BOOL meaningRevealed;
-  
+  //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;
 }
 
-- (IBAction) doToggleReadingBtn;
-- (void)hideShowReadingBtn;
-- (void)displayShowReadingBtn;
-- (void)setupReadingVisibility;
-- (void)layoutCardContentForStudyDirection: (NSString*)studyDirection;
-- (void)toggleMoreIconForLabel: (UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
-- (void)updateCardReading:(Card*)card;
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
+
+
+- (void)toggleMoreIconForLabel: (UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
 - (void)prepareView:(Card*)card;
 - (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
 
-@property (nonatomic, retain) UILabel *cardHeadwordLabel;
-@property (nonatomic, retain) UILabel *cardReadingLabel;
-@property (nonatomic, retain) UIButton *toggleReadingBtn;
-@property (nonatomic, retain) UIScrollView *cardReadingLabelScrollContainer;
-@property (nonatomic, retain) UIScrollView *cardHeadwordLabelScrollContainer;
-@property (nonatomic, retain) UIWebView *meaningWebView;
-@property (nonatomic, retain) UIImageView *cardHeadwordLabelScrollMoreIcon;
-@property (nonatomic, retain) UIImageView *cardReadingLabelScrollMoreIcon;
+- (void) turnReadingOn;
+- (void) turnReadingOff;
+- (void)resetReadingVisibility;
+- (IBAction) doToggleReadingBtn;
 
-//! Holds a reference to the current meaning's string-replacement javascript
-@property (nonatomic, retain) NSString *_tmpJavascript;
+@property (nonatomic, retain) NSString *baseHtml;
 
-@property NSInteger cardReadingLabelScrollContainerYPosInXib;
-@property NSInteger cardHeadwordLabelHeightInXib;
-@property NSInteger toggleReadingBtnYPosInXib;
-@property NSInteger cardHeadwordLabelYPosInXib;
+@property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
+@property (nonatomic, retain) IBOutlet UILabel *cardReadingLabel;
+@property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
+
+@property (nonatomic, retain) IBOutlet UIScrollView *cardReadingLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIScrollView *cardHeadwordLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIImageView *cardReadingLabelScrollMoreIcon;
+@property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
+
+@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
 
 @property BOOL readingVisible;
-@property BOOL meaningRevealed;
 @end

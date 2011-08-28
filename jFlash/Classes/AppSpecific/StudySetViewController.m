@@ -31,7 +31,8 @@ enum Sections {
  */
 - (id) init
 {
-  if ((self = [super initWithStyle:UITableViewStyleGrouped]))
+  self = [super initWithStyle:UITableViewStyleGrouped];
+  if (self)
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
@@ -93,7 +94,7 @@ enum Sections {
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle:group.groupName];
+  self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];

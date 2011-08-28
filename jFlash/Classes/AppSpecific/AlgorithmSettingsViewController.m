@@ -39,17 +39,16 @@ enum ControlSectionRows
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
-  difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.tableView.backgroundColor = [UIColor clearColor];
+  self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSNumber *segmentedIndex = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_DIFFICULTY]];
-  difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
-  [segmentedIndex release];
+  NSNumber *segmentedIndex = [NSNumber numberWithInt:[settings integerForKey:APP_DIFFICULTY]];
+  self.difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
   [self setDifficulty:difficultySegmentControl];
 }
 
@@ -58,20 +57,21 @@ enum ControlSectionRows
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-    return NUM_SECTIONS;
+  return NUM_SECTIONS;
 }
 
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
+  NSString *returnVal = @"";
   if (section == kControlsSection)
   {
-    return @"Number of Cards in Study Pool";
+    returnVal = NSLocalizedString(@"Number of Cards in Study Pool",@"AlgorithmVC.NumberCards");
   }
   else if (section == kFrequencyMultiplierSection)
   {
-    return @"Frequency of New Cards";
+    returnVal = NSLocalizedString(@"Frequency of New Cards",@"AlgorithmVC.NewCardFrequency");
   }
-  return @"";
+  return returnVal;
 }
 
 // these numbers are controlled by enums at top of this page
@@ -81,25 +81,23 @@ enum ControlSectionRows
 }
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)lcltableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)lcltableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
   UITableViewCell *cell = nil;
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if(indexPath.section == kControlsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    NSNumber *sliderValue = [NSNumber numberWithInt:[settings integerForKey:APP_MAX_STUDYING]];
     // TODO: iPad customization!
-    UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)];
-    [self setMaxCardsUISlider:tmpSlider];
-    [tmpSlider release];
-    
-    NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_MAX_STUDYING]];
-    maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
-    maxCardsUISlider.maximumValue = MAX_MAX_STUDYING;
-    maxCardsUISlider.value = [sliderValue floatValue];
-    maxCardsUISlider.tag = kMaxCardsRow;
-    maxCardsUISlider.continuous = NO;
-    [maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+    self.maxCardsUISlider = [[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)] autorelease];
+    self.maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
+    self.maxCardsUISlider.maximumValue = MAX_MAX_STUDYING;
+    self.maxCardsUISlider.value = [sliderValue floatValue];
+    self.maxCardsUISlider.tag = kMaxCardsRow;
+    self.maxCardsUISlider.continuous = NO;
+    [self.maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
 
     // the label on the left of the cell
     // TODO: iPad customization!
@@ -121,24 +119,21 @@ enum ControlSectionRows
     [cell addSubview:rightLabel];
     
     [rightLabel release];
-    [sliderValue release];
   }
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
+    NSNumber *sliderValue = [NSNumber numberWithInt:[settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
+
     // TODO: iPad customization!
-    UISlider *tmpSlider = [[UISlider alloc] initWithFrame: CGRectMake(20, 0, 180, 50)];
-    [self setFrequencyUISlider:tmpSlider];
-    [tmpSlider release];
-    
-    NSNumber *sliderValue = [[NSNumber alloc] initWithInt: [settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
-    frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
-    frequencyUISlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
-    frequencyUISlider.value = [sliderValue floatValue];
-    frequencyUISlider.tag = kFrequencyMultiplierSection; 
-    frequencyUISlider.continuous = NO;
-    [frequencyUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
-    [cell addSubview: frequencyUISlider];
+    self.frequencyUISlider = [[[UISlider alloc] initWithFrame:CGRectMake(20, 0, 180, 50)] autorelease];
+    self.frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
+    self.frequencyUISlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
+    self.frequencyUISlider.value = [sliderValue floatValue];
+    self.frequencyUISlider.tag = kFrequencyMultiplierSection; 
+    self.frequencyUISlider.continuous = NO;
+    [self.frequencyUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+    [cell addSubview:self.frequencyUISlider];
     // TODO: iPad customization!
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 95, 35)];
     // TODO: iPad customization!
@@ -146,14 +141,13 @@ enum ControlSectionRows
     rightLabel.text = [NSString stringWithFormat:@"More Often"];
     [cell addSubview:rightLabel];
     [rightLabel release];
-    [sliderValue release];
   }
   else if (indexPath.section == kShowBurriedSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
     BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
     
-    [[cell textLabel] setText:@"Hide Learned Cards"];
+    cell.textLabel.text = NSLocalizedString(@"Hide Learned Cards",@"AlgorithmVC.HideLearnedCards");
     
     //Documentation says that the size component will be completely ignored
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -172,22 +166,12 @@ enum ControlSectionRows
   return cell;  
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
-}
+#pragma mark - Segmented Control
 
-#pragma mark -
-#pragma mark Segmented Control
-
-/*!
-    @function
-    @abstract   Sets the ui sliders values based on the segmented value selected by the user
-    @param      UISegmentedControl* sender
-    @result     Void
-*/
+/**
+ * Sets the ui sliders values based on the segmented value selected by the user
+ * \param sender UISegmentedControl object that called this
+ */
 - (IBAction) setDifficulty:(UISegmentedControl *)sender
 {
   int value = [sender selectedSegmentIndex];
@@ -226,8 +210,7 @@ enum ControlSectionRows
   [self sliderAction:frequencyUISlider];
 }
 
-#pragma mark -
-#pragma mark Slider
+#pragma mark - Slider
 
 - (void)sliderAction:(UISlider *)sender
 {
@@ -245,8 +228,7 @@ enum ControlSectionRows
   LWE_LOG(@"sliderAction: sender = %d, value = %d", [sender tag], value);
 }
 
-#pragma mark - 
-#pragma mark UISwitch
+#pragma mark - UISwitch
 
 - (void)switchView_eventValueChanged:(id)sender
 {
@@ -258,21 +240,11 @@ enum ControlSectionRows
 }
 
 
-#pragma mark -
-#pragma mark Class Plumbing
-
-- (void)didReceiveMemoryWarning 
-{
-	// Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
+#pragma mark - Class Plumbing
 
 - (void)viewDidUnload 
 {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+  // TODO: fill this out
 }
 
 - (void)dealloc 

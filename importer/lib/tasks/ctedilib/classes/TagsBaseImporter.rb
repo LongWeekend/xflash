@@ -15,14 +15,73 @@ class TagsBaseImporter
     @config[:sql_buffer_size] = 1000
     @config[:sql_debug] = false
     
+    @log_stream = nil
+    if (@config[:metadata].file_dump_trace())
+      #Get the stream
+      filename = get_log_dump_filename()
+      @log_stream = File.new(filename, "a+")
+      
+      #Start the stream with the date and time.
+      now = Date.today.to_datetime
+      @log_stream << "#{now}\n"
+    end
+    
     return self
+  end
+  
+  def self.tear_down_all_tags
+    connect_db()
+    
+    $cn.execute("TRUNCATE TABLE card_tag_link")
+    $cn.execute("TRUNCATE TABLE tags_staging")
+  end
+  
+  def clean_existing_tags_staging
+    # Make sure we have the shortname and its not blank
+    short_name = @config[:metadata].short_name()
+    if short_name.strip().length() <= 0
+      raise "Short_name is not provided in the configuration meta data, hence exception is thrown!"
+    end
+
+    # Prepare for the checking whether the existing tag has been inserted before.
+    connect_db()
+    removed_tag_id = -1
+    select_query = "SELECT tag_id FROM tags_staging WHERE short_name = '%s'" % [short_name] 
+    $cn.execute(select_query).each do |tag_id|
+      removed_tag_id = tag_id[0]
+    end
+    
+    if removed_tag_id >= 0
+      $cn.execute("DELETE FROM tags_staging WHERE tag_id='#{removed_tag_id}'")
+      $cn.execute("DELETE FROM card_tag_link WHERE tag_id='#{removed_tag_id}'")
+    end
+  end
+  
+  def log(string, print_both=false)
+    logged_to_file = false
+    if (@log_stream != nil)
+      logged_to_file = true
+      @log_stream << "#{string}\n"
+    end
+    
+    if ((!logged_to_file)||(print_both))
+      puts "\n#{string}"
+    end
   end
   
   def get_card_id_for_charcaters(characters)
     
   end
   
+  def get_log_dump_filename
+    folder_path = File.dirname(__FILE__) + "/../../../../result-log"
+    tag_name = @config[:metadata].short_name()
+    return "#{folder_path}/#{tag_name}-log.txt"
+  end
+  
   def setup_tag_row
+    # Clean up before doing anything first.
+    clean_existing_tags_staging
     # Try to connect to the database
     connect_db()
   
@@ -38,20 +97,20 @@ class TagsBaseImporter
     # After executing, get the tag_id and set it globally
     select_query = "SELECT tag_id FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
     $cn.execute(select_query).each do |tag_id|
-      @tag_id = tag_id
+    @tag_id = tag_id
     end
     
     # Puts the feedback to the user
-    puts ("\nInserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id])
+    log ("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id], true)
     prt_dotted_line
-  rescue
+  rescue StandardError => err
     # In case the is some error is hapenning, try to delete from the databse first,
     # if a row has been inserted.
     if ((inserted_short_name != nil) && (inserted_short_name.strip().length() > 0))
       delete_query = "DELETE FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
       $cn.execute(delete_query)
     end
-    raise "Failed in inserting into the tags_staging with the configuration: %s" % [config]
+    raise "Failed in inserting into the tags_staging with the configuration: %s\nUnderlying error was: %s" % [config, err]
   end
   
   # DESC: Abstract method, call 'super' from the child class to use the

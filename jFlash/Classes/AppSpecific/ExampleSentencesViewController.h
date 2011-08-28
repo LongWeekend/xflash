@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Card.h"
 #import "ExampleSentencePeer.h"
 #import "UIWebView+LWENoBounces.h"
 #import "NSURL+LWEUtilities.h"
@@ -26,29 +27,15 @@ typedef enum
 
 @interface ExampleSentencesViewController : UIViewController <UIWebViewDelegate>
 {
-  IBOutlet id delegate;
-  IBOutlet id datasource;
-  
-  IBOutlet UIWebView *sentencesWebView;
-  NSMutableDictionary *sampleDecomposition;
-  
-  BOOL useOldPluginMethods;
+  BOOL _useOldPluginMethods;
 }
 
-- (void) setup;
+- (void) setupWithCard:(Card*)card;
 
-@property (assign, nonatomic, readwrite) IBOutlet id delegate;
-@property (assign, nonatomic, readwrite) IBOutlet id datasource;
+@property (retain) NSMutableDictionary *sampleDecomposition;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
-@property (nonatomic, retain) NSMutableDictionary *sampleDecomposition;
 
 - (void)_showAddToSetWithCardID:(NSString *)cardID;
-
 - (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView;
 
 @end
-
-//* Notification names
-extern NSString * const exampleSentencesViewWillSetupNotification;
-extern NSString * const exampleSentencesViewDidSetupNotification;
-

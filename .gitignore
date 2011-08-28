@@ -9,6 +9,9 @@ jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
 importer/rack/ruby/*
 importer/Gemfile.lock
 
+## Log folder where to put the log for running ctedilib tasks
+importer/result-log/*
+
 ## XCode Noise
 *.mode1v3
 *.pbxuser

@@ -14,6 +14,7 @@
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
+@synthesize delegate;
 
 - (void)viewDidLoad
 {
@@ -85,7 +86,6 @@
     frame.origin.y = pbOrigin;
     
     progressView.frame = frame;
-    
     [self.view addSubview:progressView];
     
     //move the origin of the next progress bar over
@@ -93,13 +93,13 @@
   }
 }
 
-
-
 - (IBAction) dismiss
 {
-  // TODO: MMA 8/9/2010 - this is weird that we are releasing ourself
   [self.view removeFromSuperview];
-  [self release];
+  if ([[self delegate] respondsToSelector:@selector(progressDetailsViewControllerShouldDismissView:)])
+  {
+    [[self delegate] progressDetailsViewControllerShouldDismissView:self];
+  }
 }
 
 //This was added for safety reason? - Rendy 13/08/10

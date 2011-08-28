@@ -2,6 +2,10 @@ tags_800_beginner:
     # File name of the source
     file_name: "/../../../../data/cedict/tags/800+800020100915-beginner.csv"
     
+    # Boolean whether this tag importer will output
+    # some info to a file. (true==>1, false==>0)
+    file_dump_trace: 1
+    
     # Not sure
     file_type: "CSV"
     file_structure: "a"
@@ -32,10 +36,11 @@ tags_800_beginner:
     
 tags_800_intermediate:
     file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
-    tag_name: "800Words+Beginner"
+    file_dump_trace: 1
+    tag_name: "800Words+Mid"
     tag_type: ""
-    short_name: "800+ Beginner"
-    description: "800+ Words for beginner"      
+    short_name: "800+ Intermediate"
+    description: "800+ Words for Intermediate user"      
     source: "CSV File"                          
     source_name: "800+800020100915-mid.csv"     
     visible: 1                                  
@@ -44,10 +49,11 @@ tags_800_intermediate:
 
 tags_800_advance:
     file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
-    tag_name: "800Words+Beginner"
+    file_dump_trace: 1
+    tag_name: "800Words+Advance"
     tag_type: ""
-    short_name: "800+ Beginner"
-    description: "800+ Words for beginner"      
+    short_name: "800+ Advance"
+    description: "800+Advanced Words"      
     source: "CSV File"                          
     source_name: "800+800020100915-adv.csv"     
     visible: 1                                  
@@ -56,6 +62,7 @@ tags_800_advance:
     
 tag_800_test_file_small:
     file_name: "/../../../../data/cedict/tags/test_800+800020100915.csv"
+    file_dump_trace: true
     tag_name: "800Words+SampleTag"
     tag_type: ""
     short_name: "800+ Sample"

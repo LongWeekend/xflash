@@ -20,7 +20,7 @@ class CardEntry < Entry
      @headword_simp = record[:headword_simp] unless !record[:headword_simp]
      
      reading = ""
-     reading = record[:reading].downcase() unless !record[:reading]
+     reading = record[:reading] unless !record[:reading]
      @pinyin = get_pinyin_unicode_for_reading(reading)
      
      # Get the meanings (compbination with the meaning column and the meaning_fts)

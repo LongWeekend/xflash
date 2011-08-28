@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "WordCardViewController.h"
 
-@interface BrowseModeCardViewDelegate : NSObject 
-{
-  WordCardViewController *wordCardViewController;
-}
+#import "ActionBarViewController.h"
+#import "CardViewController.h"
+
+@interface BrowseModeCardViewDelegate : NSObject <CardViewControllerDelegate, ActionBarViewControllerDelegate>
 
 @property (nonatomic, retain) WordCardViewController *wordCardViewController;
 

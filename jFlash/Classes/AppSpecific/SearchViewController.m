@@ -447,7 +447,7 @@ const NSInteger KSegmentedTableHeader = 100;
     readingLabel.tag = SEARCH_CELL_READING;
     [cell.contentView addSubview:readingLabel];
   }
-  readingLabel.text = [card combinedReadingForSettings];
+  readingLabel.text = [card reading];
 
   // Default cell properties
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

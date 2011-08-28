@@ -13,3 +13,6 @@
 [submodule "jFlash/Classes/External/asi-http-request"]
 	path = jFlash/Classes/External/asi-http-request
 	url = git://github.com/pokeb/asi-http-request.git
+[submodule "jFlash/Classes/External/TTTAttributedLabel"]
+	path = jFlash/Classes/External/TTTAttributedLabel
+	url = git://github.com/mattt/TTTAttributedLabel.git

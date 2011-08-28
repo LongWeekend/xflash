@@ -16,30 +16,30 @@
 //private properties
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
 @property (nonatomic, assign, getter=hasViewBeenLoadedOnce) BOOL viewHasBeenLoadedOnce;
+@property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
-- (void)_setupCardView:(BOOL)cardShouldShowExampleView;
-- (void)_setupExampleSentencesView:(BOOL)cardShouldShowExampleView;
-- (BOOL)_cardShouldShowExampleView:(Card*)card;
+- (BOOL) _shouldShowExampleViewForCard:(Card*)card;
+- (void) _setupViewWithCard:(Card*)card;
 - (void)_setCardViewDelegateBasedOnMode;
-- (void)_jumpToPage:(int)page;
 - (void)_refreshProgressBarView;
 - (NSMutableArray*) _getLevelDetails;
 - (void)_setupScrollView;
-- (void)_setupView;
+- (void)_setupViewAfterSettingsChange;
 @end
 
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
-@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, percentCorrectVisible, isBrowseMode, hhAnimationView;
+@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
-@synthesize scrollView, pageControl, exampleSentencesViewController;
+@synthesize scrollView, pageControl, exampleSentencesViewController, moodIconBtn, percentCorrectTalkBubble, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize cardViewControllerDelegate;
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
+@synthesize progressVC = _progressVC;
 
 /** Custom initializer */
 - (id) init
@@ -93,15 +93,6 @@
                                       delegate:self];
     
   }
-  else if (state.isUpdatable && !_alreadyShowedAlertView)
-  {
-    _alreadyShowedAlertView = YES;
-    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to JFlash 1.2!",@"StudyViewController.UpdateAlertViewTitle")
-                                       message:NSLocalizedString(@"We need 3-5 minutes of your time to update the dictionary. Your study progress will also be transferred.\n\nA WiFi or 3G network connection is required. Do this now?",@"RootViewController.UpdateAlertViewMessage")
-                                            ok:NSLocalizedString(@"Now",@"RootViewController.UpdateAlertViewButton_UpdateNow")
-                                        cancel:NSLocalizedString(@"Later",@"RootViewController.UpdateAlertViewButton_UpdateLater")
-                                      delegate:self];
-  }
 }
 
 /**
@@ -116,7 +107,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"userWasChanged" object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:LWESettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupView) name:LWECardSettingsChanged object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterSettingsChange) name:LWECardSettingsChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
@@ -129,9 +120,6 @@
   [self.moodIcon setMoodIconBtn:moodIconBtn];
   [self.moodIcon setPercentCorrectLabel:percentCorrectLabel];
   
-  // Set view default states
-  [self setPercentCorrectVisible: YES];
-
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
   [self setProgressBarViewController:tmpPBVC];
@@ -169,7 +157,7 @@
   [self resetStudySet];
 }
 
-#pragma mark UIAlertView delegate method
+#pragma mark - UIAlertView delegate method
 
 // private helper method to launch the app store
 -(void) _openLinkshareURL
@@ -179,8 +167,8 @@
 }
 
 /**
- * After 1.0 to 1.1 upgrade, the user will be presented with a UIAlertView to upgrade their DB.
- * This is the delegate method to handle the response of what the user taps (do it now or later)
+ * We prompt users to get Rikai if it is JFlash.
+ * This is the delegate method to handle the response of what the user taps.
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -200,28 +188,11 @@
   }
   else
   {
-    if([[CurrentState sharedCurrentState] isUpdatable])
+    switch (buttonIndex)
     {
-      switch (buttonIndex)
-      {
-        case LWE_ALERT_OK_BTN:
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowUpdaterModal" object:self userInfo:nil];
-          break;
-          // Do nothing
-        case LWE_ALERT_CANCEL_BTN:
-          break;
-      }
-    }
-    else
-    {
-      switch (buttonIndex)
-      {
-        case LWE_ALERT_OK_BTN:
-          break;
-        case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-          [self _openLinkshareURL];
-          break;
-      }
+      case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
+        [self _openLinkshareURL];
+        break;
     }
   }
 }
@@ -231,7 +202,7 @@
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
-  if (!self.hasfinishedSetAlertShowed)
+  if (self.hasfinishedSetAlertShowed == NO)
   {
     UIAlertView *alertView = [[UIAlertView alloc] 
                             initWithTitle:@"Study Set Learned" 
@@ -253,8 +224,7 @@
   [self resetStudySet];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - Public methods
 
 /**
  * \brief   Changes to a new study set
@@ -265,28 +235,22 @@
  */
 - (void) resetStudySet
 {
-	LWE_LOG(@"In the reset study set");
   // Initialize all variables
   currentRightStreak = 0;
   currentWrongStreak = 0;
   numRight = 0;
   numWrong = 0;
   numViewed = 0;
-  [percentCorrectLabel setText:percentCorrectLabelStartText];
-  [moodIcon updateMoodIcon:100.0f];
+  self.percentCorrectLabel.text = percentCorrectLabelStartText;
+  [self.moodIcon updateMoodIcon:100.0f];
   
-  // Get active set/tag
-  [self setCurrentCardSet:[[CurrentState sharedCurrentState] activeTag]];
+  // Get active set/tag  
+  self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
+  self.cardSetLabel.text = self.currentCardSet.tagName;
   
-  // Set tag & card-specific stuff
-  [self.cardSetLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%@",@"StudyViewController.CurrentSetName"),self.currentCardSet.tagName]];
-  
-  // Use this to set up delegates, etc
-  [self refreshCardView];
-
   // Change to new card, by passing nil, there is no animation
   NSError *error = nil;
-  Card *nextCard = [[self currentCardSet] getFirstCardWithError:&error];
+  Card *nextCard = [self.currentCardSet getFirstCardWithError:&error];
   if ((error.code == kAllBuriedAndHiddenError) && (nextCard.levelId == 5))
   {
     [self _notifyUserStudySetHasBeenLearned];
@@ -295,7 +259,9 @@
   {
     self.finishedSetAlertShowed = NO;
   }
-  [self doChangeCard:nextCard direction:nil];
+  
+  // Use this to set up delegates, show the card, etc
+  [self resetViewWithCard:nextCard];
 }
 
 
@@ -305,81 +271,49 @@
  * and we need to layout everything again: mode, theme, reading settings,
  * etc etc etc.
  */
-- (void) refreshCardView
+- (void) resetViewWithCard:(Card*)card
 {
   [self _setCardViewDelegateBasedOnMode];
   
   // Set up background based on theme
   // TODO: iPad customization
-  NSString* pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
-  [practiceBgImage setImage:[UIImage imageNamed:pathToBGImage]];
+  NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
+  self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
   
   // Update mood icon (is this necessary to do here??)
-  float tmpRatio;
+  CGFloat tmpRatio = 0;
   if (numViewed > 0)
   {
-    tmpRatio = 100*((float)numRight / (float)numViewed);
+    tmpRatio = 100*((CGFloat)numRight / (CGFloat)numViewed);
   }
   else
   {
     tmpRatio = 100;
   }
-  [moodIcon updateMoodIcon:tmpRatio];
+  [self.moodIcon updateMoodIcon:tmpRatio];
   
-  // Give the card view controller a chance to re-layout the page
-	// TODO: Think this again!
-	// The refresh call view is called in the "Reset Study Set" method, and the Do Change Card method is called after that, 
-	// and this method is called under the doChangeCard as well, shouldnt it be only called once?
-	//[[self cardViewController] setup];
-  
-  // Maybe we need to check if our examples view should be different?
-  //BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:[self currentCard]];
-	
-	//Why is this run twice? - Rendy 18/8/10
-  //[self _setupCardView:cardShouldShowExampleView];
-}
-
-
-/** Shows the meaning/reading */
-- (void) revealCard
-{
-  [[self revealCardBtn] setHidden:YES];
-  [[self tapForAnswerImage] setHidden:YES];
-  [cardViewController reveal];
-  [actionBarController reveal];
-  
-  // Now update scroll & page control
-  scrollView.pagingEnabled = _cardShouldShowExampleViewCached;
-  scrollView.scrollEnabled = _cardShouldShowExampleViewCached;
-  [[self pageControl] setHidden:!_cardShouldShowExampleViewCached];  
+  // Finally display the card
+  [self doChangeCard:card direction:nil];
 }
 
 
 /**
  * \brief Basic method to change cards
  * \param card The Card object to move to
- * \param directionOrNil If direction is a CATransition type, animate.  Otherwise 
+ * \param directionOrNil If direction is a CATransition type, animate
  */
-- (void) doChangeCard: (Card*) card direction:(NSString*)directionOrNil
+- (void) doChangeCard:(Card*)card direction:(NSString*)directionOrNil
 {
   if (card != nil)
   {
     // Update current card here & on CardViewController
-    [self setCurrentCard:card];
-    [self.cardViewController setCurrentCard:self.currentCard];
-    [self.cardViewController setup];
-    
-    // Show we show example view here?
-		// Save value for when we tap "Reveal".
-    _cardShouldShowExampleViewCached = [self _cardShouldShowExampleView:card];
-    
-    // Now set up the card
-    [self _setupCardView:_cardShouldShowExampleViewCached];
+    [self _setupViewWithCard:card];
+    self.currentCard = card;
     
     // If no direction, don't animate transition
     if (directionOrNil != nil)
     {
-      [LWEViewAnimationUtils doViewTransition:(NSString *)kCATransitionPush direction:(NSString *)directionOrNil duration:(float)0.15f objectToTransition:(UIViewController *)self];
+      [LWEViewAnimationUtils doViewTransition:kCATransitionPush direction:directionOrNil duration:0.15f objectToTransition:self];
     }
     
     // Finally, update the progress bar
@@ -387,27 +321,27 @@
   }
 }
 
-- (void) doCardBtn: (NSNotification *)aNotification
+- (void) doCardBtn:(NSNotification *)aNotification
 {
   NSInteger action = [[aNotification object] intValue];
   
-  // Hold on to the last card
-  Card *lastCard = nil;
-  lastCard = [self currentCard];
-  [lastCard retain];
+  // Hold on to the last card in a different variable
+  Card *lastCard = [self.currentCard retain];
   
   BOOL knewIt = NO;
   
-  Card *nextCard = nil; NSString *direction = nil; NSError *error = nil;
+  Card *nextCard = nil;
+  NSString *direction = nil;
+  NSError *error = nil;
 	switch (action)
   {
     // Browse Mode options
     case NEXT_BTN: 
-      nextCard = [currentCardSet getNextCard];
+      nextCard = [self.currentCardSet getNextCard];
       direction = kCATransitionFromRight;
       break;
     case PREV_BTN:
-      nextCard = [currentCardSet getPrevCard];
+      nextCard = [self.currentCardSet getPrevCard];
       direction = kCATransitionFromLeft;
       break;
       
@@ -420,7 +354,7 @@
       currentRightStreak++;
       currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
+      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
       {
@@ -433,9 +367,9 @@
       numViewed++;
       currentWrongStreak++;
       currentRightStreak = 0;
-      [self setFinishedSetAlertShowed:NO];
+      self.finishedSetAlertShowed = NO;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      nextCard = [currentCardSet getRandomCard:currentCard.cardId error:&error];
+      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       break;      
   }
@@ -443,10 +377,22 @@
   
   // Update the speech bubble
   float tmpRatio = 100*((float)numRight / (float)numViewed);
-  [moodIcon updateMoodIcon:tmpRatio];
+  [self.moodIcon updateMoodIcon:tmpRatio];
   
   // Releases
   [lastCard release];
+}
+
+- (void) _turnPercentCorrectOff
+{
+  self.percentCorrectTalkBubble.hidden = YES;
+  self.percentCorrectLabel.hidden = YES;
+}
+
+- (void) _turnPercentCorrectOn
+{
+  self.percentCorrectTalkBubble.hidden = NO;
+  self.percentCorrectLabel.hidden = NO;
 }
 
 /**
@@ -454,18 +400,20 @@
  */
 - (IBAction) doTogglePercentCorrectBtn
 {
-  // Hide the percentage talk bubble on click
-  if(!percentCorrectVisible && !self.isBrowseMode)
+  // If we're browse mode, don't even bother with this; it's always off.
+  if (self.isBrowseMode)
   {
-    [percentCorrectTalkBubble setHidden:NO];
-    [percentCorrectLabel setHidden:NO];
-    percentCorrectVisible = YES;
+    return;
+  }
+  
+  // Hide the percentage talk bubble on click; use its current state to check which we should do.
+  if (self.percentCorrectTalkBubble.hidden == YES)
+  {
+    [self _turnPercentCorrectOn];
   }
   else
   {
-    [percentCorrectTalkBubble setHidden:YES];
-    [percentCorrectLabel setHidden:YES];
-    percentCorrectVisible = NO;
+    [self _turnPercentCorrectOff];
   }
 }
 
@@ -473,22 +421,27 @@
  * Called when the user tapps the progress bar at the top of the practice view
  * Launches the progress modal view in ProgressDetailsViewController
  */
-- (IBAction) doShowProgressModalBtn
+- (IBAction)doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
-	ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-  progressView.levelDetails = [self _getLevelDetails];
-  progressView.rightStreak = currentRightStreak;
-  progressView.wrongStreak = currentWrongStreak;
-  progressView.currentStudySet.text = currentCardSet.tagName;
-  progressView.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
-  progressView.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
-  progressView.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
-  [self.navigationController pushViewController:progressView animated:NO];
-  [self.view addSubview:progressView.view];
-  // No release here because the progressView releases itself later
-  // Not exactly sexy code but it is correct - should be refactored - MMA 8/9/2010
+  if (!self.progressVC)
+  {
+    ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
+    self.progressVC = progressView;
+    [progressView release];
+  }
+  self.progressVC.levelDetails = [self _getLevelDetails];
+  self.progressVC.rightStreak = currentRightStreak;
+  self.progressVC.wrongStreak = currentWrongStreak;
+  self.progressVC.currentStudySet.text = currentCardSet.tagName;
+  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
+  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
+  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
+  self.progressVC.delegate = self;
+  
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:self.progressVC, @"controller", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowPopover object:self userInfo:userInfo];
 }
 
 
@@ -496,17 +449,17 @@
  * Target for UIPageControl - allows us to flip between
  * card view and example sentence view
  */
-- (IBAction)changePage:(id)sender animated:(BOOL) animated
+- (IBAction)changePage:(id)sender animated:(BOOL)animated
 {
 	//	Change the scroll view
-  CGRect frame = scrollView.frame;
-  frame.origin.x = frame.size.width * pageControl.currentPage;
+  CGRect frame = self.scrollView.frame;
+  frame.origin.x = frame.size.width * self.pageControl.currentPage;
   frame.origin.y = 0;
 	
-  [scrollView scrollRectToVisible:frame animated:animated];
+  [self.scrollView scrollRectToVisible:frame animated:animated];
   
 	// When the animated scrolling finishings, scrollViewDidEndDecelerating will turn this off
-  pageControlIsChangingPage = YES;
+  _isChangingPage = YES;
 }
 
 
@@ -516,119 +469,84 @@
   [self changePage:sender animated:YES];
 }
 
-#pragma mark -
-#pragma mark Private methods to setup cards (called every transition)
 
-/**
- * Sets up back the view after these condition, if the card settings has changed, or if plugin has installed. 
- * This will set up the User Interface to the initial state, with the user preference theme. 
- *
- */
-- (void)_setupView
+/** Shows the meaning/reading */
+- (IBAction) revealCard
 {
-	// This will also reset the cache value for shouldShowExampleView
-	[self refreshCardView];
-	[self.cardViewController setup];
-	
-	// Maybe we need to check if our examples view should be different?
-	BOOL cardShouldShowExampleView = [self _cardShouldShowExampleView:self.currentCard];
-	[self _setupCardView:cardShouldShowExampleView];
+  self.revealCardBtn.hidden = YES;
+  self.tapForAnswerImage.hidden = YES;
+  
+  [self.cardViewController reveal];
+  [self.actionBarController reveal];
+  
+  // Now update scrollability (page control doesn't change)
+  self.scrollView.pagingEnabled = _hasExampleSentences;
+  self.scrollView.scrollEnabled = _hasExampleSentences;
+}
+
+
+#pragma mark - Private methods to setup cards (called every transition)
+
+// TODO: PRIME suspect to be converted to a block, this only exists as a notification callback.
+- (void) _setupViewAfterSettingsChange
+{
+	[self resetViewWithCard:self.currentCard];
 }
 
 /**
  * Sets up all of the delegates and sub-controllers of the study view controller.
- * \param cardShouldShowExampleView YES if the scroll view should have 2 pages, and if the page control should be on.
- *  Note that even if this is YES, you may not be able to scroll depending on whether or not the card has been revealed.
  */
-- (void) _setupCardView:(BOOL)cardShouldShowExampleView
+- (void) _setupViewWithCard:(Card*)card
 {
-  //reset to the first page
-  [self _jumpToPage:0];
-  
-  [self.actionBarController setCurrentCard:[self currentCard]];
-  [actionBarController setup];
-  
-  [self _setupExampleSentencesView:cardShouldShowExampleView];
+  [self.cardViewController setupWithCard:card];
+  [self.actionBarController setupWithCard:card];
+  [self.exampleSentencesViewController setupWithCard:card];
   
   // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
   // update the remaining cards label
-  if (isBrowseMode)
+  NSInteger currCardCount = 0;
+  if (self.isBrowseMode)
   {
-		if (percentCorrectVisible)
-    {
-      [self doTogglePercentCorrectBtn];
-    }
-    [self.tapForAnswerImage setHidden:YES];
-    [self.revealCardBtn setHidden:YES];
-    [remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d",[currentCardSet currentIndex]+1, [currentCardSet cardCount]]];
+    [self _turnPercentCorrectOff];
+    currCardCount = [self.currentCardSet currentIndex]+1;
   }
   else	
   {
-    [self.scrollView setScrollEnabled:NO];
-    [self.tapForAnswerImage setHidden:NO];
-    [self.revealCardBtn setHidden:NO];
-    [self.remainingCardsLabel setText:[NSString stringWithFormat:@"%d / %d", [[[currentCardSet cardLevelCounts] objectAtIndex:0] intValue], [currentCardSet cardCount]]];
-    if (!percentCorrectVisible)
-    {
-      [self doTogglePercentCorrectBtn];
-    }
+    [self _turnPercentCorrectOn];
+    currCardCount = [[[self.currentCardSet cardLevelCounts] objectAtIndex:0] intValue];
   }
-}
+  
+  // If browse mode, hide the quiz stuff.
+  self.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currCardCount, [self.currentCardSet cardCount]];
+  self.tapForAnswerImage.hidden = self.isBrowseMode;
+  self.revealCardBtn.hidden = self.isBrowseMode;
 
-
-/**
- * Re-locks the scrolling to NO (before REVEAL) and calls setup on the ExampleSentencesViewController
- * \param cardShouldShowExampleView if YES, the page control will be visible
- */
-- (void) _setupExampleSentencesView:(BOOL)cardShouldShowExampleView
-{
-  // This should always be no because scroll cannot be done when card is not revealed
+  // Scroll/paging cannot be done when card is not revealed (quiz mode), or there are no examples.
 	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
-	if (isBrowseMode && cardShouldShowExampleView == YES)
-	{
-		scrollView.pagingEnabled = YES;
-		scrollView.scrollEnabled = YES;
-	}
-	else 
-	{
-		scrollView.pagingEnabled = NO;
-		scrollView.scrollEnabled = NO;
-	}
-
-  // Page control?
-  [self.pageControl setHidden:!cardShouldShowExampleView];
-
-  if ([[self exampleSentencesViewController] respondsToSelector:@selector(setup)])
-  {
-		ExampleSentencesViewController * exControler = (ExampleSentencesViewController *)self.exampleSentencesViewController;
-    [exControler setup];
-  }
+  _hasExampleSentences = [self _shouldShowExampleViewForCard:card];
+  self.scrollView.pagingEnabled = (self.isBrowseMode && _hasExampleSentences);
+  self.scrollView.scrollEnabled = (self.isBrowseMode && _hasExampleSentences);
+  
+  // Page control should be shown when we have example sentences, regardless of browse
+  self.pageControl.hidden = (_hasExampleSentences == NO);
+  self.pageControl.currentPage = 0;
+  [self changePage:self.pageControl animated:NO];
+  _isChangingPage = NO;
 }
-
 
 /** 
  * Both page controller visibility setter and scroll view
  * enabler call this.  In the future, we don't want to 
  * hit the DB twice like we are now for the same card.
  */
-- (BOOL) _cardShouldShowExampleView:(Card*)card
+- (BOOL) _shouldShowExampleViewForCard:(Card*)card
 {
-  BOOL cardShouldShowExampleView = YES;
-  
-  // First, check if they have the plugin installed
+  BOOL returnVal = YES;
   if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
   {
-    // Get plugin version
-    BOOL isNewVersion = NO;
-    PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-    if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-    {
-      isNewVersion = YES;
-    }
-    cardShouldShowExampleView = [card hasExampleSentences:isNewVersion];
+    returnVal = [card hasExampleSentences];
   }
-  
-  return cardShouldShowExampleView;
+  return returnVal;
 }
 
 /**
@@ -640,7 +558,7 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
 	//TODO: Cache this so that it does not alloc a new object everytime the user changes set
-	id cardViewDelegate = nil;
+	id<CardViewControllerDelegate, ActionBarViewControllerDelegate> cardViewDelegate = nil;
   if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
   {
     self.isBrowseMode = YES;
@@ -653,10 +571,11 @@
   }
 	
 	//Not increasing retain count.
-	[cardViewController setDelegate:cardViewDelegate];
-  [actionBarController setDelegate:cardViewDelegate];
-	//Will increase the retain count.
-	[self setCardViewControllerDelegate:cardViewDelegate];
+  self.cardViewController.delegate = cardViewDelegate;
+  self.actionBarController.delegate = cardViewDelegate;
+  
+	//Will increase the retain count - this class owns the object
+  self.cardViewControllerDelegate = cardViewDelegate;
 	[cardViewDelegate release];
 }
 
@@ -670,38 +589,36 @@
 {
   // This is a convenience method that alloc's and sets to autorelease!
   NSMutableArray* levelDetails = nil;
-  NSNumber *countObject;
-  int i;
-  float seencount = 0;
+  NSNumber *countObject = nil;
+  NSInteger i;
+  CGFloat seencount = 0;
   
   // Crash protection in case we don't have the card level counts yet
-  if ([[currentCardSet cardLevelCounts] count] == 6)
+  if ([[self.currentCardSet cardLevelCounts] count] == 6)
   {
     levelDetails = [NSMutableArray arrayWithCapacity:7];
     for (i = 0; i < 6; i++)
     {
-      countObject =[[currentCardSet cardLevelCounts] objectAtIndex:i];
+      countObject = [[self.currentCardSet cardLevelCounts] objectAtIndex:i];
       [levelDetails addObject:countObject];
       if(i > 0)
         seencount = seencount + [[levelDetails objectAtIndex:i] floatValue];
     }
-    [levelDetails addObject:[NSNumber numberWithInt:[currentCardSet cardCount]]];  
+    [levelDetails addObject:[NSNumber numberWithInt:[self.currentCardSet cardCount]]];  
     [levelDetails addObject:[NSNumber numberWithFloat:seencount]];
   }
   return levelDetails;
 }
 
 
-
 /** redraws the progress bar with new level details */
 - (void) _refreshProgressBarView
 {
-  [progressBarViewController setLevelDetails:[self _getLevelDetails]];
-  [[self progressBarViewController] drawProgressBar];
+  self.progressBarViewController.levelDetails = [self _getLevelDetails];
+  [self.progressBarViewController drawProgressBar];
 }
 
-#pragma mark -
-#pragma mark Plugin-Related
+#pragma mark - Plugin-Related
 
 /**
  * Connects the "Download Example Sentences" button to actually launch the installer
@@ -722,10 +639,18 @@
   if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
   {
     // Get rid of the old example sentences guy & re-setup the scroll view
-    [[self.exampleSentencesViewController view] removeFromSuperview];
+    [self.exampleSentencesViewController.view removeFromSuperview];
     [self _setupScrollView];
-		[self _setupView];
+		[self _setupViewAfterSettingsChange];
   }
+}
+
+#pragma mark -
+#pragma mark ProgressDetailsViewDelegate
+
+- (void)progressDetailsViewControllerShouldDismissView:(id)progressDetailsViewController
+{
+  self.progressVC = nil;
 }
 
 #pragma mark -
@@ -735,59 +660,37 @@
  * Called when a major thing happens (JFlash startup or EX_DB plugin installation)
  * when the fundamental workings of the scroll view may change.
  */
-- (void)_setupScrollView
+- (void) _setupScrollView
 {
-	scrollView.delegate = self;
-	
-  //scrollView.clipsToBounds = YES;
-	scrollView.pagingEnabled = YES;
-  scrollView.delaysContentTouches = NO;
-  scrollView.directionalLockEnabled = YES;
-  scrollView.canCancelContentTouches = YES;
-
-	// This stays NO until "reveal" sets it to yes.  Then setupViewForCard will set it to NO again.
-  scrollView.scrollEnabled = NO;
-  
-	NSUInteger views = 2;
-	CGFloat cx = scrollView.frame.size.width;
-  
+  UIViewController *vc = nil;
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
-		ExampleSentencesViewController *exController = [[ExampleSentencesViewController alloc] init];
-		[exController setDatasource:self];
-		[self setExampleSentencesViewController: exController];
-    [exController release];
+    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
+    vc = self.exampleSentencesViewController;
   }
   else
   {
     // No example sentence plugin loaded, so show "please download me" view instead
     // TODO: iPad customization
-    UIViewController *tmpVC = [[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil];
-    [self setExampleSentencesViewController:tmpVC];
-    [tmpVC release];
+    vc = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
   }
-  			
-  UIView *sentencesView = [self.exampleSentencesViewController view];
-	CGRect rect = sentencesView.frame;
-	rect.origin.x = ((self.scrollView.frame.size.width - sentencesView.frame.size.width) / 2) + cx;
-	rect.origin.y = ((self.scrollView.frame.size.height - sentencesView.frame.size.height) / 2);
-	sentencesView.frame = rect;
+  
+  // Resize our second view to match our first one
+	CGRect rect = vc.view.frame;
+	CGFloat cx = self.scrollView.frame.size.width;
+	rect.origin.x = ((self.scrollView.frame.size.width - rect.size.width) / 2) + cx;
+	rect.origin.y = ((self.scrollView.frame.size.height - rect.size.height) / 2);
+	vc.view.frame = rect;
+  
+  // Set the content size for the width * the number of views
+	NSInteger views = 2;
+	self.pageControl.numberOfPages = views;
+  self.scrollView.contentSize = CGSizeMake(cx * views, self.scrollView.bounds.size.height);
   
   // add the new view as a subview for the scroll view to handle
-	[self.scrollView addSubview:sentencesView];
-	
-	self.pageControl.numberOfPages = views;
-	[self.scrollView setContentSize:CGSizeMake(cx*views, [self.scrollView bounds].size.height)];
-}
-
-/** programatically jump the scrollview to a page, does not animate the scroll */
-- (void) _jumpToPage:(int)page
-{
-  [self.pageControl setCurrentPage:page];
-  [self changePage:self.pageControl animated:NO];
-  pageControlIsChangingPage = NO;
+	[self.scrollView addSubview:vc.view];
 }
 
 
@@ -798,7 +701,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView
 {
   // This will be called if we mess with the page control, but we're only interested in swipes so return here
-  if (pageControlIsChangingPage) 
+  if (_isChangingPage) 
   {
     return;
   }
@@ -814,11 +717,10 @@
  */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView 
 {
-  pageControlIsChangingPage = NO;
+  _isChangingPage = NO;
 }
 
-#pragma mark -
-#pragma mark Class plumbing
+#pragma mark - Class plumbing
 
 - (void) viewDidUnload
 {
@@ -850,16 +752,17 @@
 	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
 	self.cardViewControllerDelegate = nil;
+	self.percentCorrectTalkBubble = nil;
+	self.moodIconBtn = nil;
+	self.showProgressModalBtn = nil;
 	//self.progressModalCloseBtn = nil;
-	//self.percentCorrectTalkBubble = nil;
-	//self.moodIconBtn = nil;
-	//self.showProgressModalBtn = nil;
 	
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) dealloc
 {
+  if (self.progressVC) [_progressVC release];
   //theme
   [practiceBgImage release];
   

@@ -1,0 +1,23 @@
+starred:    
+    file_dump_trace: 1
+    tag_name: "starred_words"
+    tag_type: ""
+    short_name: "My Starred Words"
+    description: "Starred Words"      
+    source: "system_tags"                          
+    source_name: "system_tags"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+lwe_favs:
+    file_dump_trace: 1
+    tag_name: "lwe_favs"
+    tag_type: ""
+    short_name: "Long Weekend Favourites"
+    description: "Long Weekend Favourites Cards"      
+    source: "system_tags"                          
+    source_name: "system_tags"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
