@@ -20,12 +20,10 @@ load File.dirname(__FILE__) + "/classes/HSKParser.rb"
 load File.dirname(__FILE__) + "/classes/CSVParser.rb"
 load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 
-#added
+# Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
-load File.dirname(__FILE__) + "/classes/TagsBaseConfiguration.rb"
-load File.dirname(__FILE__) + "/classes/TagsBaseImporter.rb"
-load File.dirname(__FILE__) + "/classes/Tags800WordsImporter.rb"
-load File.dirname(__FILE__) + "/classes/TagsSystemImporter.rb"
+load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
+load File.dirname(__FILE__) + "/classes/TagImporter.rb"
 
 # Importers
 load File.dirname(__FILE__) + "/classes/CEdictBaseImporter.rb"

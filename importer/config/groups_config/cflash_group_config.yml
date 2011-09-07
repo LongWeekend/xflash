@@ -9,16 +9,17 @@ study_sets:
     name: "Study Sets"
     # Groups '800'
     800:
+        # 1 Means recommended = true
         name: ["800 + Words", 1]
         800_beginner: 
             file: "file_800_config.yml"
             metadata_key: "tags_800_beginner"
         800_intermediate:
             file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
+            metadata_key: "tags_800_intermediate"
         800_advance:
             file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
+            metadata_key: "tags_800_advance"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"

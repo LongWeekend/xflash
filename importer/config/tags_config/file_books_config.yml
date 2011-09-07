@@ -1,0 +1,14 @@
+beg_chinese_lesson_1:
+    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Beg Chinese Lesson 1"
+    tag_type: ""
+    short_name: "BegChineseLesson1"
+    description: "Begging Chinese Lesson Part 1"      
+    source: "Space separated File"                          
+    source_name: "beg_chinese_lesson1.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
