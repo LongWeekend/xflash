@@ -20,6 +20,70 @@ study_sets:
         800_advance:
             file: "file_800_config.yml"
             metadata_key: "tags_800_advance"
+    beg_chinese_lesson:
+        name: "Beg Chinese"
+        beg_chinese_lesson_1:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_1"
+        beg_chinese_lesson_2:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_2"
+        beg_chinese_lesson_3:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_3"
+        beg_chinese_lesson_4:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_4"
+        beg_chinese_lesson_5:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_5"
+        beg_chinese_lesson_6:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_6"
+        beg_chinese_lesson_7:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_7"
+        beg_chinese_lesson_8:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_8"
+        beg_chinese_lesson_9:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_9"
+        beg_chinese_lesson_10:
+            file: "file_books_config.yml"
+            metadata_key: "beg_chinese_lesson_10"
+    colloqial_chinese_lesson:
+        name: "Colloquial Chinese"
+        col_chinese_lesson_1:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_1"
+        col_chinese_lesson_2:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_2"
+        col_chinese_lesson_3:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_3"
+        col_chinese_lesson_4:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_4"
+        col_chinese_lesson_5:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_5"
+        col_chinese_lesson_6:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_6"
+        col_chinese_lesson_7:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_7"
+        col_chinese_lesson_8:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_8"
+        col_chinese_lesson_9:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_9"
+        col_chinese_lesson_10:
+            file: "colloqial_chinese_config.yml"
+            metadata_key: "colloquial_chinese_lesson_10"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"

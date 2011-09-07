@@ -45,24 +45,48 @@ class TagImporterTest < Test::Unit::TestCase
   def test_import_system_tags
     # For starred words
     configuration = TagConfiguration.new("system_tags.yml", "starred")
-    importer = TagsBaseImporter.new(nil, configuration)
+    importer = TagImporter.new(nil, configuration)
     importer.import()
     
     # For LWE's Favourite
-    configuration = TagsBaseConfiguration.new("system_tags.yml", "lwe_favs")
+    configuration = TagConfiguration.new("system_tags.yml", "lwe_favs")
     importer = TagImporter.new(nil, configuration)
     importer.import()
   end
   
   def test_import_beg_chinese
-     configuration = TagConfiguration.new("file_books_config.yml", "beg_chinese_lesson_1")
+     configuration = TagConfiguration.new("beg_chinese_config.yml", "beg_chinese_lesson_1")
 
-      test_file_path = File.dirname(__FILE__) + configuration.file_name
-      parser = BookListParser.new(test_file_path)
-      results = parser.run()
+     test_file_path = File.dirname(__FILE__) + configuration.file_name
+     parser = BookListParser.new(test_file_path)
+     results = parser.run()
 
-      importer = TagImporter.new(results, configuration)
-      importer.import()
+     importer = TagImporter.new(results, configuration)
+     importer.import()
   end
+  
+  def test_import_colloquial_chinese
+     configuration = TagConfiguration.new("colloqial_chinese_config.yml", "colloquial_chinese_lesson_1")
+
+     test_file_path = File.dirname(__FILE__) + configuration.file_name
+     parser = BookListParser.new(test_file_path)
+     results = parser.run()
+
+     importer = TagImporter.new(results, configuration)
+     importer.import()
+  end
+  
+  def test_import_npcr
+    configuration = TagConfiguration.new("npcr_config.yml", "npcr_1")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+    breakpoint
+
+    importer = TagImporter.new(results, configuration)
+    importer.import()
+  end
+  
   
 end

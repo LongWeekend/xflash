@@ -1,0 +1,149 @@
+colloquial_chinese_lesson_1:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 1"
+    tag_type: ""
+    short_name: "ColloquialChinese1"
+    description: "Colloquial Chinese Lesson Part 1"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson1.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lessson_2:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson2.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 2"
+    tag_type: ""
+    short_name: "ColloquialChinese2"
+    description: "Colloquial Chinese Lesson Part 2"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson2.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_3:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson3.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 3"
+    tag_type: ""
+    short_name: "ColloquialChinese3"
+    description: "Colloquial Chinese Lesson Part 3"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson3.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_4:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson4.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 4"
+    tag_type: ""
+    short_name: "ColloquialChinese4"
+    description: "Colloquial Chinese Lesson Part 4"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson4.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_5:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson5.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 5"
+    tag_type: ""
+    short_name: "ColloquialChinese5"
+    description: "Colloquial Chinese Lesson Part 5"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson5.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_6:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson6.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 6"
+    tag_type: ""
+    short_name: "ColloquialChinese6"
+    description: "Colloquial Chinese Lesson Part 6"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson6.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_7:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson7.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 7"
+    tag_type: ""
+    short_name: "ColloquialChinese7"
+    description: "Colloquial Chinese Lesson Part 7"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson7.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_8:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson8.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 8"
+    tag_type: ""
+    short_name: "ColloquialChinese8"
+    description: "Colloquial Chinese Lesson Part 8"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson8.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_9:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson9.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 9"
+    tag_type: ""
+    short_name: "ColloquialChinese9"
+    description: "Colloquial Chinese Lesson Part 9"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson9.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+colloquial_chinese_lesson_10:
+    file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson10.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Colloquial Chinese Lesson 10"
+    tag_type: ""
+    short_name: "ColloquialChinese10"
+    description: "Colloquial Chinese Lesson Part 10"      
+    source: "Space separated File"                          
+    source_name: "colloqial_chinese_Lesson10.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0

@@ -1,0 +1,14 @@
+npcr_1:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Lesson 1"
+    tag_type: ""
+    short_name: "npcr1-1"
+    description: "New Practical Chinese Reader Textbook, Vol.1"      
+    source: "Space separated File"                          
+    source_name: "lesson_01.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
