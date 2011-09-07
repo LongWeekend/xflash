@@ -115,7 +115,7 @@ $regexes[:vocal] = /[aiueo]/
 $regexes[:diacritic_vowel1] = /[ae]/
 $regexes[:diacritic_vowel2] = /ou/
 $regexes[:diacritic_vowel3] = /[aiueo]/
-$regexes[:chinese_reading] = /^\s{0,1}\d{1,}[1-4] /
+$regexes[:chinese_reading] = /[A-Za-z]*[1-5]{1}/
 
 $regexes[:pinyin_tone] = /^[0-5]{1}/
 $regexes[:pinyin_tone_without_normal] = /^[0-4]{1,}/
