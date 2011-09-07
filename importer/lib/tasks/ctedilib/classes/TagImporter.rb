@@ -85,9 +85,17 @@ class TagImporter
     clean_existing_tags_staging
     # Try to connect to the database
     connect_db()
-  
-    # Grab the config and try inserting into the tags_staging table as row
+      
+    # Grab the config
     config = @config[:metadata]
+    
+    # If the shortname is longer than 20 characters, throw an exception as the table structure
+    # for tags_staging, the shortname is only for 20 characters long.
+    if config.short_name.length >= 20
+      raise "The shortname for tag name #{config.tag_name} cannot be longer than 20 characters."
+    end
+    
+    # try inserting into the tags_staging table as row 
     inserted_short_name = config.short_name
     insert_query = "INSERT INTO tags_staging(tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s)" %
                       [config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off]
