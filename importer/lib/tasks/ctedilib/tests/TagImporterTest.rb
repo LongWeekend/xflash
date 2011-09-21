@@ -11,7 +11,7 @@ class TagImporterTest < Test::Unit::TestCase
     
     # Asserting the number of result with the fixed number 
     # of how many result it should be based on the test file.
-    assert_equal(results.length, 42)
+    assert_equal(results.length, 43)
     
     importer = TagImporter.new(results, configuration)
     importer.import()
