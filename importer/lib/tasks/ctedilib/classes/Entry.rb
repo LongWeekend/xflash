@@ -81,6 +81,10 @@ class Entry
     @id
   end
   
+  def headword
+    (@headword_trad != nil) && (@headword_trad.strip.length > 0) ? @headword_trad : @headword_simp
+  end
+  
   def headword_trad
     @headword_trad
   end
