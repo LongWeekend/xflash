@@ -536,10 +536,17 @@ module CardHelpers
     result = Array.new()
     cards = $card_entries.values()
     
-    criteria = Proc.new do |same_headword, same_pinyin, same_meaning|
-        ((same_headword && same_meaning) || 
-        (same_pinyin && same_meaning) ||
-        (same_headword && same_pinyin))
+    criteria = Proc.new do |headword, same_pinyin, same_meaning|
+      result = same_pinyin || same_meaning
+      
+      if (!result)
+        # This is a little bit strange as both the pinyin nor the meaning
+        # is the same. This is better to be logged.
+        # p "Both pinyin nor the meaning is the same, but there is a card with headword #{headword}."
+      end
+      
+      #return with the result
+      result
     end
   
     #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
