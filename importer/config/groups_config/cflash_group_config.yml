@@ -20,70 +20,366 @@ study_sets:
         800_advance:
             file: "file_800_config.yml"
             metadata_key: "tags_800_advance"
-    beg_chinese_lesson:
-        name: "Beg Chinese"
-        beg_chinese_lesson_1:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_1"
-        beg_chinese_lesson_2:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_2"
-        beg_chinese_lesson_3:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_3"
-        beg_chinese_lesson_4:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_4"
-        beg_chinese_lesson_5:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_5"
-        beg_chinese_lesson_6:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_6"
-        beg_chinese_lesson_7:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_7"
-        beg_chinese_lesson_8:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_8"
-        beg_chinese_lesson_9:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_9"
-        beg_chinese_lesson_10:
-            file: "file_books_config.yml"
-            metadata_key: "beg_chinese_lesson_10"
-    colloqial_chinese_lesson:
-        name: "Colloquial Chinese"
-        col_chinese_lesson_1:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_1"
-        col_chinese_lesson_2:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_2"
-        col_chinese_lesson_3:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_3"
-        col_chinese_lesson_4:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_4"
-        col_chinese_lesson_5:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_5"
-        col_chinese_lesson_6:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_6"
-        col_chinese_lesson_7:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_7"
-        col_chinese_lesson_8:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_8"
-        col_chinese_lesson_9:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_9"
-        col_chinese_lesson_10:
-            file: "colloqial_chinese_config.yml"
-            metadata_key: "colloquial_chinese_lesson_10"
+    books:
+        name: "Books"
+        beg_chinese_lesson:
+            name: "Beg Chinese"
+            beg_chinese_lesson_1:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_1"
+            beg_chinese_lesson_2:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_2"
+            beg_chinese_lesson_3:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_3"
+            beg_chinese_lesson_4:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_4"
+            beg_chinese_lesson_5:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_5"
+            beg_chinese_lesson_6:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_6"
+            beg_chinese_lesson_7:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_7"
+            beg_chinese_lesson_8:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_8"
+            beg_chinese_lesson_9:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_9"
+            beg_chinese_lesson_10:
+                file: "beg_chinese_config.yml"
+                metadata_key: "beg_chinese_lesson_10"
+        colloqial_chinese_lesson:
+            name: "Colloquial Chinese"
+            col_chinese_lesson_1:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_1"
+            col_chinese_lesson_2:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_2"
+            col_chinese_lesson_3:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_3"
+            col_chinese_lesson_4:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_4"
+            col_chinese_lesson_5:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_5"
+            col_chinese_lesson_6:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_6"
+            col_chinese_lesson_7:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_7"
+            col_chinese_lesson_8:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_8"
+            col_chinese_lesson_9:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_9"
+            col_chinese_lesson_10:
+                file: "colloqial_chinese_config.yml"
+                metadata_key: "colloquial_chinese_lesson_10"
+        npcr:
+            name: "New Practical Chinese Reader Textbook, Vol.1"
+            npcr_1:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_1"
+            npcr_2:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_2"
+            npcr_3:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_3"
+            npcr_4:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_4"
+            npcr_5:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_5"
+            npcr_6:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_6"
+            npcr_7:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_7"
+            npcr_8:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_8"
+            npcr_9:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_9"
+            npcr_10:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_10"
+            npcr_11:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_11"
+            npcr_12:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_12"
+            npcr_13:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_13"
+            npcr_14:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_14"
+        pcr:
+            name: "PCR Lesson 1-30"
+            pcr_1_5:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_1_5"
+            pcr_6:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_6"
+            pcr_7:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_7"
+            pcr_8:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_8"
+            pcr_9:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_9"
+            pcr_10:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_10"
+            pcr_11:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_11"
+            pcr_12:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_12"
+            pcr_13:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_13"
+            pcr_14:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_14"
+            pcr_15:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_15"
+            pcr_16:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_16"
+            pcr_17:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_17"
+            pcr_18:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_18"
+            pcr_19:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_19"
+            pcr_20:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_20"
+            pcr_21:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_21"
+            pcr_22:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_22"
+            pcr_23:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_23"
+            pcr_24:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_24"
+            pcr_25:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_25"
+            pcr_26:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_26"
+            pcr_27:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_27"
+            pcr_28:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_28"
+            pcr_29:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_29"
+            pcr_30:
+                file: "pcr_config.yml"
+                metadata_key: "pcr_30"
+        pimsleur:
+            name: "Pimsleur Book"
+            pimsleur1_1:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_1"
+            pimsleur1_2:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_2"
+            pimsleur1_3:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_3"
+            pimsleur1_4:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_4"
+            pimsleur1_5:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_5"
+            pimsleur1_6:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur1_6"
+            pimsleur2_1:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_1"
+            pimsleur2_2:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_2"
+            pimsleur2_3:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_3"
+            pimsleur2_4:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_4"
+            pimsleur2_5:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_5"
+            pimsleur2_6:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur2_6"
+            pimsleur3_1:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_1"
+            pimsleur3_2:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_2"
+            pimsleur3_3:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_3"
+            pimsleur3_4:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_4"
+            pimsleur3_5:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_5"
+            pimsleur3_6:
+                file: "pimsleur_config.yml"
+                metadata_key: "pimsleur3_6"
+        schaums:
+            name: "Schaums Book"
+            schaums_direction:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_direction"
+            schaums_home:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_home"
+            schaums_airport:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_airport"
+            schaums_bank:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_bank"
+            schaums_clothing_store:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_clothing_store"
+            schaums_dry_cleaner:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_dry_cleaner"
+            schaums_hospital:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_hospital"
+            schaums_hotel:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_hotel"
+            schaums_post_office:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_post_office"
+            schaums_restaurant:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_restaurant"
+            schaums_movies:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_movies"
+            schaums_train_station:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_train_station"
+            schaums_business:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_business"
+            schaums_computer:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_computer"
+            schaums_education:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_education"
+            schaums_phone_call:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_phone_call"            
+            schaums_airplane:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_airplane"
+            schaums_customs:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_customs"
+            schaums_transport:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_transport"
+            schaums_shop_food:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_shop_food"
+            schaums_sports:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_sports"
+            schaums_automobile:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_automobile"
+            schaums_weather:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_weather"
+    frequency:
+        name: "Frequent Words"
+        frequency_1:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_1"
+        frequency_2:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_2"
+        frequency_3:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_3"
+        frequency_4:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_4"
+        frequency_5:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_5"
+        frequency_6:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_6"
+        frequency_7:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_7"
+    hsk:
+        name: "HSK List"
+        hsk_1:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_1"
+        hsk_2:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_2"
+        hsk_3:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_3"
+        hsk_4:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_4"
+        hsk_5:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_5"
+        hsk_6:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_6"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"

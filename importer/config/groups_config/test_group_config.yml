@@ -1,0 +1,62 @@
+# The root of the group
+# Which has the name on beginning of its 
+# element.
+# Followed by another group or tag
+# Differentiated by the structure. 
+# Each Tag will be structured like file_name and key for its dictionary
+# Each Group will be structured with 
+study_sets:
+    name: "Study Sets"
+    # Groups '800'
+    800:
+        name: ["800 + Words", 1]
+        800_beginner: 
+            file: "file_800_config.yml"
+            metadata_key: "tags_800_beginner"
+        800_intermediate:
+            file: "file_800_config.yml"
+            metadata_key: "tags_800_beginner"
+        800_advance:
+            file: "file_800_config.yml"
+            metadata_key: "tags_800_beginner"
+    starred_words:
+        file: "system_tags.yml"
+        metadata_key: "starred"
+    lwe_favs:
+        file: "system_tags.yml"
+        metadata_key: "lwe_favs"
+    lwe_favs_1:
+        name: "asu"
+        lwe_favs_2:
+            name: "Bangsad"
+            lwe_favs_21:
+                file: "asu"
+                metadata_key: "asu"
+            lwe_favs_22:
+                file: "bangsad"
+                metadata_key: "bangsad"
+        lwe_favs_3:
+            file: "system_tags.yml"
+            metadata_key: "lwe_favs"
+        lwe_favs_4:
+            file: "asu"
+            metadata_key: "jancok"
+    lwe_favs_5:
+        file: "system_tags.yml"
+        metadata_key: "lwe_favs"
+    lwe_favs_6:
+        name: "favs 6"
+        lwe_favs_7:
+            name: "favs_7"
+            lwe_favs_71:
+                file: "asu"
+                metadata_key: "asu"
+            lwe_favs_72:
+                file: "bangsad"
+                metadata_key: "bangsad"
+            lwe_favs_73:
+                file: "system_tags.yml"
+                metadata_key: "lwe_favs"
+            lwe_favs_74:
+                file: "asu"
+                metadata_key: "jancok"

@@ -12,8 +12,8 @@ colloquial_chinese_lesson_1:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
-    
-colloquial_chinese_lessson_2:
+
+colloquial_chinese_lesson_2:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson2.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"

@@ -1,0 +1,84 @@
+hsk_1:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_1_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 1"
+    tag_type: ""
+    short_name: "hsk-level-1"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 1"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_1_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+hsk_2:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_2_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 2"
+    tag_type: ""
+    short_name: "hsk-level-2"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 2"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_2_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+hsk_3:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_3_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 3"
+    tag_type: ""
+    short_name: "hsk-level-3"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 3"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_3_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+hsk_4:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_4_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 4"
+    tag_type: ""
+    short_name: "hsk-level-4"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 4"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_4_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+hsk_5:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_5_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 5"
+    tag_type: ""
+    short_name: "hsk-level-5"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 5"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_5_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+hsk_6:
+    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_6_(New_HSK).csv"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "HSKParser"
+    tag_name: "HSK Level 6"
+    tag_type: ""
+    short_name: "hsk-level-6"
+    description: "This HSK list was produced by Lingomi. Lingomi makes online tools to help you improve your listening skills and sells HSK audio files. Level 6"      
+    source: "Comma Separated File"                          
+    source_name: "HSK_Level_6_(New_HSK).csv"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
