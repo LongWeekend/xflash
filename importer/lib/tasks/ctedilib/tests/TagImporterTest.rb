@@ -82,11 +82,65 @@ class TagImporterTest < Test::Unit::TestCase
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = BookListParser.new(test_file_path)
     results = parser.run()
-    breakpoint
 
     importer = TagImporter.new(results, configuration)
     importer.import()
   end
   
+  def test_import_pcr
+    configuration = TagConfiguration.new("pcr_config.yml", "pcr_1")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+
+    importer = TagImporter.new(results, configuration)
+    importer.import()
+  end
+  
+  def test_import_pimsleur
+    configuration = TagConfiguration.new("pimsleur_config.yml", "pimsleur1_1")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+
+    importer = TagImporter.new(results, configuration)
+    importer.import()
+  end
+  
+  def test_import_schaums
+    configuration = TagConfiguration.new("schaums_config.yml", "schaums_direction")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import()
+  end
+  
+  def test_import_frequency
+    configuration = TagConfiguration.new("frequency_config.yml", "frequency_1")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import()
+  end
+  
+  def test_import_hsk
+    configuration = TagConfiguration.new("hsk_config.yml", "hsk_4")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = HSKParser.new(test_file_path)
+    results = parser.run()
+    breakpoint
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import()    
+  end
   
 end

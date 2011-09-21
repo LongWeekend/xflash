@@ -26,6 +26,9 @@ class GroupImporter
   end
   
   def run
+    # Tearing down the existing groups and tags first
+    tear_down_groups
+        
     # Try opening the connection to the database
     connect_db
     

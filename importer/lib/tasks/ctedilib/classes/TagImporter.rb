@@ -91,7 +91,8 @@ class TagImporter
     
     # If the shortname is longer than 20 characters, throw an exception as the table structure
     # for tags_staging, the shortname is only for 20 characters long.
-    if config.short_name.length >= 20
+    if config.short_name.length > 20
+      breakpoint
       raise "The shortname for tag name #{config.tag_name} cannot be longer than 20 characters."
     end
     
@@ -164,7 +165,7 @@ class TagImporter
       result = find_cards_similar_to(rec)
       if (result == nil)
         not_found += 1
-        log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword_trad, rec.pinyin]
+        log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
       else
         found += 1
         card_id = result.id
@@ -173,7 +174,7 @@ class TagImporter
           insert_query << @insert_tag_link_query % [@tag_id, card_id]
         else
           # There is a same card in the list of added card.
-          log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword_trad, rec.pinyin, rec.meanings.join("/")]
+          log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword, rec.pinyin, rec.meanings.join("/")]
         end
       end
       
