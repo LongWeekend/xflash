@@ -70,10 +70,6 @@ class TagImporter
     end
   end
   
-  def get_card_id_for_charcaters(characters)
-    
-  end
-  
   def get_log_dump_filename
     folder_path = File.dirname(__FILE__) + "/../../../../result-log"
     tag_name = @config[:metadata].short_name()
@@ -182,10 +178,33 @@ class TagImporter
       # without the keyword return, seems strange, but works!
       insert_query
     end unless @config[:data] == nil # End of the super do |rec| loop
+    
+    # Procedure to update the number of
+    # cards in a tag.
+    update_tag_count
 
     log "\n"
     log ("Finish inserting: %s with %s records not found" % [found.to_s(), not_found.to_s()], true)
     return @tag_id
   end # End of the method body
+  
+  def update_tag_count
+    # This is pretty stupid, but for safety purposes
+    # try to connect everytime it has something to do with
+    # the database
+    connect_db
+    
+    # Grab the tag_id first
+    tag_id = @tag_id
+    count = 0
+    
+    select_count_query = "SELECT count(card_id) as cnt FROM card_tag_link WHERE tag_id = #{tag_id}"
+    $cn.execute(select_count_query).each do |cnt|
+      count = cnt
+    end
+    
+    update_query = "UPDATE tags_staging SET count = #{count} WHERE tag_id = #{tag_id}"
+    $cn.execute(update_query)
+  end
   
 end
