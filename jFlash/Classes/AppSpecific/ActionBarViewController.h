@@ -26,7 +26,7 @@
 
 @class ActionBarViewController;
 
-@protocol ActionBarViewControllerDelegate <NSObject>
+@protocol ActionBarViewControllerDelegate <NSObject, MFMailComposeViewControllerDelegate>
 @optional
 // setup card to unrevealed state
 - (void)actionBarWillSetup:(ActionBarViewController*)avc;

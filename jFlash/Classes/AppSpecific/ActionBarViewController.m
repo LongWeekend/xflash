@@ -167,8 +167,7 @@
   }
 }
 
-#pragma mark -
-#pragma mark MailCompose helper & delegate method
+#pragma mark - MailCompose helper & delegate method
 
 - (void)reportBadData
 {
@@ -204,8 +203,7 @@
   [appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UIAlertView delegate methods
+#pragma mark - UIAlertView delegate methods
 
 /**
  * If the user tapped OK, Follow Long WEekend on Twitter
