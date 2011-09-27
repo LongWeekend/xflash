@@ -48,6 +48,39 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     assert_equal(expected_reading,reading)
   end
   
+  def test_u_umlaut
+    pinyin = get_pinyin_unicode_for_reading("qi1 lu:4")
+    expected_pinyin = "qīlǜ"
+    assert_equal(expected_pinyin,pinyin)
+    
+    pinyin = get_pinyin_unicode_for_reading("qi1 lv4")
+    expected_pinyin = "qīlǜ"
+    assert_equal(expected_pinyin,pinyin)
+    
+    pinyin = get_pinyin_unicode_for_reading("San1 Lu:e4")
+    expected_pinyin = "sānlüè"
+    assert_equal(expected_pinyin,pinyin)
+    
+    pinyin = get_pinyin_unicode_for_reading("shi4 lu:e4")
+    expected_pinyin = "shìlüè"
+    assert_equal(expected_pinyin,pinyin)
+    
+    pinyin = get_pinyin_unicode_for_reading("U:5")
+    expected_pinyin = "ü"
+    assert_equal(expected_pinyin,pinyin)
+    
+    # Gonna fail as the capital 'V' cannot be used as
+    # the u umlaut symbol
+    #pinyin = get_pinyin_unicode_for_reading("V5")
+    #expected_pinyin = "ü"
+    #assert_equal(expected_pinyin,pinyin)
+
+    # fail
+    pinyin = get_pinyin_unicode_for_reading("shi4 lu:3e4")
+    expected_pinyin = "shìlü3è"
+    assert_equal(expected_pinyin,pinyin)
+  end
+  
   def test_fix_tone_3
     pinyin = fix_unicode_for_tone_3("ăĕĭŏŭ")
     expected_pinyin = "ǎěǐǒǔ"
@@ -62,8 +95,8 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
   end
   
   def test_pinyin_unicode
-    reading = get_pinyin_unicode_for_reading("a5 i5 u5 e5 o5")
-    expected_pinyin = "aiueo"
+    reading = get_pinyin_unicode_for_reading("a5 i5 u5 e5 o5 u:5 v5")
+    expected_pinyin = "aiueoüü"
     assert_equal(reading, expected_pinyin)
   end
   

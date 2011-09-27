@@ -1,6 +1,6 @@
 require 'YAML'
 
-class TagsBaseConfiguration
+class TagConfiguration
   
   ### Class Constructor
   def initialize (yaml_file, metadata_key="")
@@ -9,13 +9,23 @@ class TagsBaseConfiguration
     @configuration = @configuration[metadata_key] unless ((metadata_key == nil)||(metadata_key.strip().length()<=0))
     
     if (@configuration == nil)
-      raise "Sorry I have to throw an exception as the metadata key (second parameter) supplied is not found in the file"
+      raise "Sorry I have to throw an exception as the metadata key (second parameter) supplied is not found in the file\nYaml file provided: #{yaml_file} and metadata_key provided: #{metadata_key}"
     end
     return self
   end
   
   def file_name
     return @configuration["file_name"] 
+  end
+  
+  def file_importer
+    return @configuration["file_importer"] unless (@configuration["file_importer"] == nil)
+    raise 'Error reading the metadata of TagsConfig file as the file_importer key is not found.'
+  end
+  
+  def file_parser
+    return @configuration["file_parser"] unless (@configuration["file_parser"] == nil)
+    raise 'Error reading the metadata of TagsConfig file as the file_parser key is not found.'
   end
   
   def file_dump_trace

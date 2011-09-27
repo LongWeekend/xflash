@@ -106,16 +106,25 @@ $chinese_reading_unicode[:o3_angle] = 466
 $chinese_reading_unicode[:o3_round] = 335
 $chinese_reading_unicode[:o4] = 242
 $chinese_reading_unicode[:o5] = 111
+# ü tones - variant
+$chinese_reading_unicode[:v1] = 470
+$chinese_reading_unicode[:v2] = 472
+$chinese_reading_unicode[:v3] = 474
+$chinese_reading_unicode[:v3_angle] = 474
+#TODO: How about the ü character with the rounded-3-point-tone?
+$chinese_reading_unicode[:v3_round] = 474
+$chinese_reading_unicode[:v4] = 476
+$chinese_reading_unicode[:v5] = 252
 
 # Regex Definitions
 $regexes = {}
 
 # CFLASH REGEXES
-$regexes[:vocal] = /[aiueo]/
+$regexes[:vocal] = /[aiueoü]/
 $regexes[:diacritic_vowel1] = /[ae]/
 $regexes[:diacritic_vowel2] = /ou/
-$regexes[:diacritic_vowel3] = /[aiueo]/
-$regexes[:chinese_reading] = /^\s{0,1}\d{1,}[1-4] /
+$regexes[:diacritic_vowel3] = /[aiueoü]/
+$regexes[:chinese_reading] = /[A-Za-zü]*[1-5]{1}/
 
 $regexes[:pinyin_tone] = /^[0-5]{1}/
 $regexes[:pinyin_tone_without_normal] = /^[0-4]{1,}/

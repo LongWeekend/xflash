@@ -66,9 +66,12 @@ class CardEntry < Entry
      same_headword, same_pinyin, same_meaning = false, false, false
      
      # Comparing the headword
-     same_headword_trad = self.headword_trad == entry.headword_trad
-     same_headword_simp = self.headword_simp == entry.headword_simp
+     # NOTE: Please make sure that the entry is the one wanted to be matched from.
+     # and self is the CARD.
+     same_headword_trad = self.headword_trad == entry.headword
+     same_headword_simp = self.headword_simp == entry.headword
      same_headword = same_headword_trad || same_headword_simp
+     return false unless same_headword
      
      # Comparing the pinyin/reading
      same_pinyin = self.pinyin == entry.pinyin
@@ -76,7 +79,7 @@ class CardEntry < Entry
      intersection = self.meanings & entry.meanings
      same_meaning = intersection.length() > 0
      
-     return match_criteria.call(same_headword, same_pinyin, same_meaning)
+     return match_criteria.call(entry.headword, same_pinyin, same_meaning)
        
 =begin 
      Comparing the meaning

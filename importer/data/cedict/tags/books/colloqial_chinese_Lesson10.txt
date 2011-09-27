@@ -1,7 +1,8 @@
 倫惇	伦敦	lun2dun1	/London (capital of United Kingdom)/
 圖書館	图书馆	tu2shu1guan3	/library/
 從	从	cong2	/from (used of time and space)/
-興趣	兴趣	xing4qu5	/interest (directed towards, not inherent in something)/
+#Fixed xing4qu5 to xing4qu4 (sources: translate.google.com)
+興趣	兴趣	xing4qu4	/interest (directed towards, not inherent in something)/
 電影	电影	dian4ying3	/movie; film/
 更	更	geng4	/more; even more; further; still; still more/
 前	前	qian2	/before; in front; ago; former; previous; earlier; front/

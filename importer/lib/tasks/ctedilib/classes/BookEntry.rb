@@ -43,7 +43,11 @@ class BookEntry < Entry
     beginning_of_meaning = line.index("/") - 1
     end_of_hw_trad = line.index("\t")
     end_of_hw_simp = line.index("\t",end_of_hw_trad+1)
-    return line[end_of_hw_simp..beginning_of_meaning].strip
+    reading = line[end_of_hw_simp..beginning_of_meaning].strip()
+    space_separated_reading = reading.scan($regexes[:chinese_reading]).join(" ")
+    pinyin = get_pinyin_unicode_for_reading(space_separated_reading)
+    
+    return pinyin
   end
   
   def get_meanings(line = "")
