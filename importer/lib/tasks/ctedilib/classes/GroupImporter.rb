@@ -43,8 +43,20 @@ class GroupImporter
     if values.kind_of? Hash
       metadata = Hash.new()
       group_id = owner_id
+    
+      # Needed to sort based on its keys
+      keys_of_values = values.keys.sort
+      index = keys_of_values.index("name")
+      if (index != nil)
+        #Swap the name to the first element
+        keys_of_values.delete_at(index)
+        temp_array = ["name"]
+        keys_of_values = temp_array + keys_of_values
+      end
+      
       # Traverse through its keys
-      values.each do |key, value|
+      keys_of_values.each do |key|
+        value = values[key]
         if key == "name"
           #Insert it as group
           group_id = insert_group(value, owner_id)
