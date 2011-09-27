@@ -25,5 +25,12 @@ class BookEntryTest < Test::Unit::TestCase
     expected_meanings = ["city map","foobar"]
     assert_equal(expected_meanings,entry.meanings)
   end
+  
+  def test_parse_pinyin
+    entry = BookEntry.new
+    entry.parse_line("綠色通道	绿色通道	lu:4 se4 tong1 dao4	/green channel/")
+    expected_pinyin = "lǜsètōngdào"
+    assert_equal(expected_pinyin,entry.pinyin)
+  end
 
 end

@@ -68,6 +68,10 @@ class GetPinyinUnicodeTest < Test::Unit::TestCase
     pinyin = get_pinyin_unicode_for_reading("U:5")
     expected_pinyin = "ü"
     assert_equal(expected_pinyin,pinyin)
+
+    pinyin = get_pinyin_unicode_for_reading("lu:4 se4 tong1 dao4")
+    expected_pinyin = "lǜsètōngdào"
+    assert_equal(expected_pinyin,pinyin)
     
     # Gonna fail as the capital 'V' cannot be used as
     # the u umlaut symbol
