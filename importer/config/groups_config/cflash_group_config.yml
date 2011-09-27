@@ -8,47 +8,47 @@
 study_sets:
     name: "Study Sets"
     # Groups '800'
-    800:
+    800_words:
         # 1 Means recommended = true
         name: ["800 + Words", 1]
-        800_beginner: 
+        800_1_beginner: 
             file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
-        800_intermediate:
+            metadata_key: "tags_800_1_beginner"
+        800_2_intermediate:
             file: "file_800_config.yml"
-            metadata_key: "tags_800_intermediate"
-        800_advance:
+            metadata_key: "tags_800_2_intermediate"
+        800_3_advance:
             file: "file_800_config.yml"
-            metadata_key: "tags_800_advance"
+            metadata_key: "tags_800_3_advance"
     books:
         name: "Books"
         beg_chinese_lesson:
             name: "Beg Chinese"
-            beg_chinese_lesson_1:
+            beg_chinese_lesson_01:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_1"
-            beg_chinese_lesson_2:
+            beg_chinese_lesson_02:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_2"
-            beg_chinese_lesson_3:
+            beg_chinese_lesson_03:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_3"
-            beg_chinese_lesson_4:
+            beg_chinese_lesson_04:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_4"
-            beg_chinese_lesson_5:
+            beg_chinese_lesson_05:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_5"
-            beg_chinese_lesson_6:
+            beg_chinese_lesson_06:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_6"
-            beg_chinese_lesson_7:
+            beg_chinese_lesson_07:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_7"
-            beg_chinese_lesson_8:
+            beg_chinese_lesson_08:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_8"
-            beg_chinese_lesson_9:
+            beg_chinese_lesson_09:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_9"
             beg_chinese_lesson_10:
@@ -56,31 +56,31 @@ study_sets:
                 metadata_key: "beg_chinese_lesson_10"
         colloqial_chinese_lesson:
             name: "Colloquial Chinese"
-            col_chinese_lesson_1:
+            col_chinese_lesson_01:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_1"
-            col_chinese_lesson_2:
+            col_chinese_lesson_02:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_2"
-            col_chinese_lesson_3:
+            col_chinese_lesson_03:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_3"
-            col_chinese_lesson_4:
+            col_chinese_lesson_04:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_4"
-            col_chinese_lesson_5:
+            col_chinese_lesson_05:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_5"
-            col_chinese_lesson_6:
+            col_chinese_lesson_06:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_6"
-            col_chinese_lesson_7:
+            col_chinese_lesson_07:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_7"
-            col_chinese_lesson_8:
+            col_chinese_lesson_08:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_8"
-            col_chinese_lesson_9:
+            col_chinese_lesson_09:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_9"
             col_chinese_lesson_10:
@@ -88,31 +88,31 @@ study_sets:
                 metadata_key: "colloquial_chinese_lesson_10"
         npcr:
             name: "New Practical Chinese Reader Textbook, Vol.1"
-            npcr_1:
+            npcr_01:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_1"
-            npcr_2:
+            npcr_02:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_2"
-            npcr_3:
+            npcr_03:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_3"
-            npcr_4:
+            npcr_04:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_4"
-            npcr_5:
+            npcr_05:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_5"
-            npcr_6:
+            npcr_06:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_6"
-            npcr_7:
+            npcr_07:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_7"
-            npcr_8:
+            npcr_08:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_8"
-            npcr_9:
+            npcr_09:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_9"
             npcr_10:
@@ -132,19 +132,19 @@ study_sets:
                 metadata_key: "npcr_14"
         pcr:
             name: "PCR Lesson 1-30"
-            pcr_1_5:
+            pcr_01_5:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_1_5"
-            pcr_6:
+            pcr_06:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_6"
-            pcr_7:
+            pcr_07:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_7"
-            pcr_8:
+            pcr_08:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_8"
-            pcr_9:
+            pcr_09:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_9"
             pcr_10:
@@ -268,75 +268,75 @@ study_sets:
                 metadata_key: "pimsleur3_6"
         schaums:
             name: "Schaums Book"
-            schaums_direction:
+            schaums_asking_for_directions:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_direction"
-            schaums_home:
+                metadata_key: "schaums_asking_for_directions"
+            schaums_at_home:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_home"
-            schaums_airport:
+                metadata_key: "schaums_at_home"
+            schaums_at_the_airport:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_airport"
-            schaums_bank:
+                metadata_key: "schaums_at_the_airport"
+            schaums_at_the_bank:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_bank"
-            schaums_clothing_store:
+                metadata_key: "schaums_at_the_bank"
+            schaums_at_the_clothing_store:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_clothing_store"
-            schaums_dry_cleaner:
+                metadata_key: "schaums_at_the_clothing_store"
+            schaums_at_dry_cleaner:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_dry_cleaner"
-            schaums_hospital:
+                metadata_key: "schaums_at_the_dry_cleaner"
+            schaums_at_the_hospital:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_hospital"
-            schaums_hotel:
+                metadata_key: "schaums_at_the_hospital"
+            schaums_at_the_hotel:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_hotel"
-            schaums_post_office:
+                metadata_key: "schaums_at_the_hotel"
+            schaums_at_the_post_office:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_post_office"
-            schaums_restaurant:
+                metadata_key: "schaums_at_the_post_office"
+            schaums_at_the_restaurant:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_restaurant"
-            schaums_movies:
+                metadata_key: "schaums_at_the_restaurant"
+            schaums_at_the_theater_and_the_movies:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_movies"
-            schaums_train_station:
+                metadata_key: "schaums_at_the_theater_and_the_movies"
+            schaums_at_the_train_station:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_train_station"
+                metadata_key: "schaums_at_the_train_station"
             schaums_business:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_business"
-            schaums_computer:
+            schaums_computer_and_internet:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_computer"
+                metadata_key: "schaums_computer_and_internet"
             schaums_education:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_education"
-            schaums_phone_call:
+            schaums_making_a_phone_call:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_phone_call"            
-            schaums_airplane:
+                metadata_key: "schaums_making_a_phone_call"            
+            schaums_on_the_airplane:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_airplane"
-            schaums_customs:
+                metadata_key: "schaums_on_the_airplane"
+            schaums_passport_control_and_customs:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_customs"
-            schaums_transport:
+                metadata_key: "schaums_passport_control_and_customs"
+            schaums_public_transportation:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_transport"
-            schaums_shop_food:
+                metadata_key: "schaums_public_transportation"
+            schaums_shopping_for_food:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_shop_food"
+                metadata_key: "schaums_shopping_for_food"
             schaums_sports:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_sports"
-            schaums_automobile:
+            schaums_the_automobile:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_automobile"
-            schaums_weather:
+                metadata_key: "schaums_the_automobile"
+            schaums_the_weather:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_weather"
+                metadata_key: "schaums_the_weather"
     frequency:
         name: "Frequent Words"
         frequency_1:

@@ -1,4 +1,4 @@
-tags_800_beginner:
+tags_800_1_beginner:
     # File name of the source
     file_name: "/../../../../data/cedict/tags/800+800020100915-beginner.csv"
     
@@ -38,7 +38,7 @@ tags_800_beginner:
     parent_tag_id: 0
     force_off: 0
     
-tags_800_intermediate:
+tags_800_2_intermediate:
     file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -53,7 +53,7 @@ tags_800_intermediate:
     parent_tag_id: 0
     force_off: 0
 
-tags_800_advance:
+tags_800_3_advance:
     file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
