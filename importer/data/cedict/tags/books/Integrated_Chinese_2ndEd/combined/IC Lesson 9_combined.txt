@@ -1,0 +1,73 @@
+買東西	买东西	mai3 dong1 xi1	/shopping/
+買	买	mai3	/to buy/
+東西	东西	dong1 xi1	/things/objects/
+售貨員	售货员	shou4 huo4 yuan2	/shop assistant/salesclerk/
+要	要	yao1	/to want/to have a desire for/
+衣服	衣服	yi1 fu5	/clothes/
+件	件	jian4	/（a measure word for shirts, dresses, jackets, coats, etc.)/
+襯衫	衬衫	chen4 shan1	/shirt/
+顏色	颜色	yan2 se4	/color/
+黃	黄	huang2	/yellow/
+紅	红	hong2	/red/
+穿	穿	chuan1	/to wear/to put on/
+條	条	tiao2	/(measure word for long, thin objects)/
+褲子	裤子	ku4 zi5	/pants/
+號	号	hao4	/number/size/
+中	中	zhong1	/medium/
+貴	贵	gui4	/expensive/
+便宜	便宜	pian2 yi5	/cheap/inexpensive/
+付钱	付钱	fu4 qian2	/to pay money/
+钱	钱	qian2	/money/
+這兒	这儿	zher4	/here/
+一共	一共	yi2 gong4	/altogether/
+多少	多少	duo1 shao5	/how much/how many/
+塊	块	kuai1	/colloquial term for the basic Chinese monetary unit/
+毛	毛	mao2	/one tenth of a kuai (similar to the US dime)/
+分	分	fen1	/one hundreth of a kuai/cent/
+百	百	bai3	/hundred/
+找錢	找钱	zhao3 qian2	/to give change/
+雙	双	shuang1	/a pair of/
+鞋	鞋	xie2	/shoes/
+換	换	huan4	/to change/to exchange/
+一樣	一样	yi2 yang4	/same/alike/
+雖然	虽然	sui1 ran2	/although/
+大小	大小	da4 xiao3	/size/
+合適	合适	he2 shi4	/suitable/
+咖啡色	咖啡色	ka1 fei1 se4	/coffee color/brown/
+黑	黑	hei1	/black/
+不用	不用	bu4 yong4	/need not/
+一杯茶	一杯茶	yi1 bei1 cha2	/a cup of tea/
+一封信	一封信	yi1 feng1 xin4	/a letter/
+一個人	一个人	yi1 ge4 ren2	/a person/
+一節課	一节课	yi1 jie2 ke4	/a class period/
+一件襯衫	一件衬衫	yi1 jian4 chen4 shan1	/a shirt/
+一篇日記	一篇日记	yi4 pian1 ri4 ji4	/a diary entry/
+一瓶啤酒	一瓶啤酒	yi1 ping2 pi2 jiu3	/a bottle of beer/
+一雙鞋	一双鞋	yi1 shuang1 xie2	/a pair of shoes/
+一條褲子	一条裤子	yi1 tiao2 ku4 zi5	/a pair of pants/
+一位相聲	一位相声	yi1 wei4 xiang4 sheng1	/a gentleman/
+一張照片	一张照片	yi1 zhang1 zhao4 pian4	/a picture/
+一本書	一本书	yi1 ben3 shu1	/a book/
+一張紙	一张纸	yi1 zhang1 zhi3	/a piece of paper/
+一支筆	一支笔	yi1 zhi1 bi3	/a pen/
+一只鞋	一只鞋	yi1 zhi1 xie2	/a shoe (one of a pair)/
+賣	卖	mai4	/to sell/
+裙子	裙子	qun2 zi5	/skirt/
+大衣	大衣	da4 yi1	/overcoat/
+夾克	夹克	jia1 ke4	/jacket/
+外套	外套	wai4 tao4	/coat/jacket/
+西裝	西装	xi1 zhuang1	/suit/
+毛衣	毛衣	mao2 yi1	/sweater/
+卹衫	恤衫	xu4 shan1	/T-shirt (as T-恤衫）/
+戴	戴	dai4	/to wear (hat, eyeglasses, etc.)/
+帽子	帽子	mao4 zi5	/hat/
+頂	顶	ding3	/(a measure word for hat)/
+襪子	袜子	wa4 zi5	/socks/
+長	长	chang2	/long/
+短	短	duan3	/short/
+藍	蓝	lan2	/blue/
+綠	绿	lu:4	/green/
+紫	紫	zi3	/purple/
+粉紅色	粉红色	fen3 hong2 se4	/pink/
+橘紅色	橘红色	ju2 hong2 se4	/orange/
+灰	灰	hui1	/gray/

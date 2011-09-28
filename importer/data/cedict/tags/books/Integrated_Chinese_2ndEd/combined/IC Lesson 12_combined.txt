@@ -1,0 +1,63 @@
+飯館	饭馆	fan4 guan3	/restaurant/
+服務員	服务员	fu2 wu4 yuan2	/waiter/attendant/
+服務	服务	fu2 wu4	/to serve/to provide service/
+好像	好像	hao3 xiang4	/to seem/to be like/
+位子	位子	wei4 zi5	/seat/
+桌子	桌子	zhuo1 zi5	/table/
+點菜	点菜	dian3cai4	/to order dishes (in a restaurant)/
+菜	菜	cai4	/(of food) dish/course/
+餃子	饺子	jiao3 zi5	/dumplings (with vegetable or meat stuffing)/
+素	素	su4	/vegetarian/of vegetables/
+槃	盘	pan2	/(plate/dish)/
+家常豆腐	家常豆腐	jia1 chang2dou4 fu5	/home-style tofu/
+豆腐	豆腐	dou4 fu5	/tofu/bean curd/
+肉	肉	rou4	/meat (usually pork, when unmodified)/
+碗	碗	wan3	/(bowl)/
+酸辣湯	酸辣汤	suan1la4tang1	/hot and sour soup/
+酸	酸	suan1	/sour/
+辣	辣	la4	/spicy/hot/
+湯	汤	tang1	/soup/
+放	放	fang4	/to put in/
+味精	味精	wei4 jing1	/monosodium glutamate (MSG)/
+渴	渴	ke3	/thirsty/
+這些	这些	zhe4 xie5	/these/
+些	些	xie1	/(some [a measure word for an indefinite amount])/
+夠	够	gou4	/enough/
+餓	饿	e4	/hungry/to starve/
+上菜	上菜	shang4cai4	/to serve dishes/
+好	好	hao4	/(indicating something is ready)/
+好吃	好吃	hao3 chi1	/delicious/
+師傅	师傅	shi1 fu5	/master worker/
+中餐	中餐	zhong1 can1	/Chinese food/
+西餐	西餐	xi1 can1	/Western food/
+糖醋魚	糖醋鱼	tang2 cu4yu2	/fish in sweet and sour sauce/
+糖	糖	tang2	/sugar/
+醋	醋	cu4	/vinegar/
+魚	鱼	yu2	/fish/
+甜	甜	tian2	/sweet/
+極了	极了	ji2 le5	/extremely (usually with le as a complement of degree)/
+紅燒	红烧	hong2shao1	/to braise in soy sauce/
+牛肉	牛肉	niu2 rou4	/beef/
+牛	牛	niu2	/cow/ox/
+賣完了	卖完了	mai4wan2le5	/to be sold out/
+賣	卖	mai4	/to sell/
+完	完	wan2	/to finish/to run out of/
+涼拌	凉拌	liang2ban4	/(of food) cold and dressed with sauce/
+黃瓜	黄瓜	huang2 gua1	/cucumber/
+再	再	zai4	/in addition/
+兩	两	liang3	/(a Chinese traditional unity of weight, 50 grams)/
+米飯	米饭	mi3 fan4	/cooked rice/
+錯	错	cuo4	/wrong/
+明兒	明儿	ming2er5	/tomorrow/
+雞	鸡	ji1	/chicken/
+烤鴨	烤鸭	kao3 ya1	/roast duck/
+烤	烤	kao3	/to roast/to bake/
+豬肉	猪肉	zhu1 rou4	/pork/
+羊肉	羊肉	yang2 rou4	/mutton/lamb/
+漢堡包	汉堡包	han4 bao3bao1	/hamburger/
+麥當勞	麦当劳	mai4 dang1 lao2	/McDonald's/
+比薩餅	比萨饼	bi3 sa4bing3	/pizza/
+必胜客	必胜客	bi4sheng1ke4	/Pizza Hut/
+炸雞	炸鸡	zha2ji1	/fried chicken/
+肯德基	肯德基	ken3de2ji1	/KFC/
+快餐	快餐	kuai4 can1	/fast food/

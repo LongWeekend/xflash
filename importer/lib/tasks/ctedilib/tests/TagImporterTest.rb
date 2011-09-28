@@ -143,4 +143,28 @@ class TagImporterTest < Test::Unit::TestCase
     importer.import()    
   end
   
+  def test_import_ic
+    configuration = TagConfiguration.new("integrated_chinese_config.yml", "ic_intro_numbers")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+    breakpoint
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import()    
+  end
+  
+  def test_import_ic_combined
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = BookListParser.new(test_file_path)
+    results = parser.run()
+    breakpoint
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import()    
+  end
+  
 end
