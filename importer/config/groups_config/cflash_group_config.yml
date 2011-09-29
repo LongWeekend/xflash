@@ -86,6 +86,74 @@ study_sets:
             col_chinese_lesson_10:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_10"
+        integrated_chinese:
+            name: "Integrated Chinese 2nd Edition"
+            ic_intro_dates_and_time:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_intro_date_and_time"
+            ic_intro_numbers:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_intro_numbers"
+            ic_intro_radicals:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_intro_radicals"
+            ic_lesson_01:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_1"
+            ic_lesson_02:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_2"
+            ic_lesson_03:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_3"
+            ic_lesson_04:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_4"
+            ic_lesson_05:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_5"
+            ic_lesson_06:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_6"
+            ic_lesson_07:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_7"
+            ic_lesson_08:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_8"
+            ic_lesson_09:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_9"
+            ic_lesson_10:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_10"
+            ic_lesson_11:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_11"
+            ic_lesson_12:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_12"
+            ic_lesson_13:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_13"
+            ic_lesson_14:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_14"
+            ic_lesson_15:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_15"
+            ic_lesson_16:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_16"
+            ic_lesson_17:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_17"
+            ic_lesson_18:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_18"
+            ic_lesson_19:
+                file: "integrated_chinese_combined_config.yml"
+                metadata_key: "ic_19"
         npcr:
             name: "New Practical Chinese Reader Textbook, Vol.1"
             npcr_01:

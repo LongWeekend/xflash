@@ -27,16 +27,16 @@ ic_intro_radicals:
     parent_tag_id: 0
     force_off: 0
 ic_intro_date_and_time:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Date and Time.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Dates and Time.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Introduction to Radicals"
+    tag_name: "Introduction to Date Time"
     tag_type: ""
-    short_name: "ic_intro_radicals"
-    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    short_name: "ic_intro_date_time"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Date and Time)"      
     source: "Space separated File"                          
-    source_name: "IC Intro Radicals.txt"     
+    source_name: "IC Intro Date and Time.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
@@ -55,254 +55,254 @@ ic_1:
     parent_tag_id: 0
     force_off: 0
 ic_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 2_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 2"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_2_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 2"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 2_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_3:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 3_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 3"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_3_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 3"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 3_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_4:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 4_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 4"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_4_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 4"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 4_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_5:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 5_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 5"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_5_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 5"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 5_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_6:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 6_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 6"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_6_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 6"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 6_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_7:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 7_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 7"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_7_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 7"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 7_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_8:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 8_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 8"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_8_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 8"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 8_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_9:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 9_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 9"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_9_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 9"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 9_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_10:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 10_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 10"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_10_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 10"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 10_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_11:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 11_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 11"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_11_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 11"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 11_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_12:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 12_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 12"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_12_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 12"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 12_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_13:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 13_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 13"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_13_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 13"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 13_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_14:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 14_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 14"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_14_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 14"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 14_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_15:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 15_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 15"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_15_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 15"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 15_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_16:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 16_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 16"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_16_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 16"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 16_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_17:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 17_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 17"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_17_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 17"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 17_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_18:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 18_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 18"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_18_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 18"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 18_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
 ic_19:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 19_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Integrated Chinese 1"
+    tag_name: "Integrated Chinese 19"
     tag_type: ""
-    short_name: "ic_1_combined"
-    description: "Integrated Chinese Books, 2nd Edition. Lesson 1"      
+    short_name: "ic_19_combined"
+    description: "Integrated Chinese Books, 2nd Edition. Lesson 19"      
     source: "Space separated File"                          
-    source_name: "IC Lesson 1_combined.txt"     
+    source_name: "IC Lesson 19_combined.txt"     
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
