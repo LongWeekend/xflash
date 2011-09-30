@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>config/tags_config/integrated_chinese_combined_config.yml</string>
+	<string>lib/tasks/ctedilib/classes/CEdictExporter.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -54,14 +54,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>67</integer>
+				<integer>57</integer>
 				<key>line</key>
-				<integer>28</integer>
+				<integer>26</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>4</integer>
 		</dict>
 		<key>lib/tasks/ctedilib/classes/GroupImporter.rb</key>
 		<dict>
@@ -89,7 +89,37 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>155</integer>
+			<integer>154</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/sql/create_tables.sql</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>37</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
 		</dict>
 		<key>lib/tasks/ctedilib/tests/TagImporterTest.rb</key>
 		<dict>
@@ -151,6 +181,7 @@
 	<key>openDocuments</key>
 	<array>
 		<string>lib/tasks/ctedilib/classes/CEdictExporter.rb</string>
+		<string>lib/tasks/ctedilib/sql/create_tables.sql</string>
 		<string>lib/tasks/ctedilib/classes/TagImporter.rb</string>
 		<string>lib/tasks/ctedilib/tests/TagImporterTest.rb</string>
 		<string>lib/tasks/ctedilib/classes/GroupImporter.rb</string>
@@ -163,6 +194,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{387, 30}, {1523, 1028}}</string>
+	<string>{{387, 0}, {1283, 1028}}</string>
 </dict>
 </plist>
