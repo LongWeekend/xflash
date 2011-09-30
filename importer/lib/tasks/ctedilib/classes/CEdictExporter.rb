@@ -24,11 +24,11 @@ class CEdictExporter
     $cn.execute("UPDATE cards_staging SET meaning_html = meaning WHERE meaning_html IS NULL")
 
     ## Create intermediate tables
-    $cn.execute("CREATE TABLE cards SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
     $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, visible AS editable, count, force_off FROM tags_staging")
     $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
-    $cn.execute("CREATE TABLE cards_search_content SELECT card_id, headword_trad, headword_simp, reading, meaning_fts FROM #{cards_table}")
-    $cn.execute("CREATE TABLE cards_html SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, meaning_fts FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_html DEFAULT CHARSET=utf8 SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
 
     ## Generate the card search content table
     $cn.execute("ALTER TABLE cards_search_content ADD COLUMN content varchar(5000)")
