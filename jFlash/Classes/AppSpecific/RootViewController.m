@@ -351,7 +351,10 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
   
-  // TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
+  //TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
+  //The TaskHandler property of dlViewController retains the tmpDlHandler
+  //so, the tmpDlHandler can be released safely.
+  [tmpDlHandler release];
 }
 
 

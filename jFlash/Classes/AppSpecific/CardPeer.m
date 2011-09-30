@@ -35,12 +35,19 @@
     int queryLimit = 100;
     int queryLimit2;
     keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
-
+#if defined(LWE_JFLASH)
     // Do the search using SQLite FTS (PTAG results)
     sql = [NSString stringWithFormat:@""
            "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 1 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit];
+#elif defined(LWE_CFLASH)
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' LIMIT %d) "
+           "ORDER BY c.headword_trad", keywordWildcard, queryLimit];
+#endif
+    
     rs = [db executeQuery:sql];
     int cardListCount = 0;
     while ([rs next])
@@ -59,12 +66,20 @@
     {
       queryLimit2 = queryLimit;
     }
-    
+
+#if defined(LWE_JFLASH)
     // Do the search using SQLite FTS (NON-PTAG results)
     sql = [NSString stringWithFormat:@""
            "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
            "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = 0 LIMIT %d) "
            "ORDER BY c.headword", keywordWildcard, queryLimit2];
+#elif defined(LWE_CFLASH)
+    sql = [NSString stringWithFormat:@""
+           "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
+           "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' LIMIT %d) "
+           "ORDER BY c.headword_trad", keywordWildcard, queryLimit];
+#endif
+    
     rs = [db executeQuery:sql];
     while ([rs next])
     {
