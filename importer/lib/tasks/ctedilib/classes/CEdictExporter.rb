@@ -44,6 +44,23 @@ class CEdictExporter
     # Set system tags to uneditable
     $cn.execute("UPDATE tags SET editable = 0 WHERE tag_id NOT IN (#{ editable_tag_array.join(",") })")
     $cn.execute("ALTER TABLE tags DROP force_off")
+    
+    # Make sure starred words tag get the 0 tag id
+    $cn.execute("SELECT * FROM tags WHERE tag_id = 0").each do |rec|
+      raise 'There is already a tag row with id 0. ID-0 has been reserved for the starred words tag.'
+    end
+    # Precaution measures
+    existing_tag_id = -1
+    $cn.execute("SELECT tag_id FROM tags WHERE shortname LIKE '%starred_words%'").each do |tag_id|
+      existing_tag_id = tag_id
+    end
+    if existing_tag_id > 0
+      # Set back the entire tag_id=0 from the root to its
+      # possible child relationship.
+      $cn.execute("UPDATE tags SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+      $cn.execute("UPDATE card_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+      $cn.execute("UPDATE group_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+    end
 
     prt "\n\nExporting tables to temporary file"
     prt_dotted_line

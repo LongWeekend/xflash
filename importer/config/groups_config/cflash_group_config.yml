@@ -448,9 +448,9 @@ study_sets:
         hsk_6:
             file: "hsk_config.yml"
             metadata_key: "hsk_6"
+    lwe_favs:
+        file: "system_tags.yml"
+        metadata_key: "lwe_favs"        
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"
-    lwe_favs:
-        file: "system_tags.yml"
-        metadata_key: "lwe_favs"
