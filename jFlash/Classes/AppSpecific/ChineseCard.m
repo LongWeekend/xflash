@@ -159,6 +159,24 @@
   return components;
 }
 
+- (NSString *) pinyinReading
+{
+  NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
+  NSUInteger resultLength = [self.reading length] - [pinyinSegments count] + 1;
+  NSMutableString *result = [NSMutableString stringWithCapacity:resultLength];
+                             
+  for (NSString *pinyinSegment in pinyinSegments)
+  {
+    // Now pinyin-ify the string
+    pinyinSegment = [self _pinyinForNumberedPinyin:pinyinSegment];
+    [result appendFormat:@"%@ ", pinyinSegment];
+  }
+  
+  NSRange lastCharacter = (NSRange){[result length]-1,1};
+  [result deleteCharactersInRange:lastCharacter];
+  return result;
+}
+
 
 - (NSString *) headword
 {

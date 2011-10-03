@@ -12,6 +12,7 @@
 @interface ChineseCard : Card
 
 - (NSArray *) readingComponents;
+- (NSString *) pinyinReading;
 
 @property (nonatomic, retain) NSString *headword_simp;
 
