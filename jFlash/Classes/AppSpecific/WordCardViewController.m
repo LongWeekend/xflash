@@ -96,7 +96,7 @@
     [pinyinString appendString:@" "];
   }
   
-  [self.cardReadingLabel setText:pinyinString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSAttributedString *(NSMutableAttributedString *mutableAttributedString)
+  [(TTTAttributedLabel *)self.cardReadingLabel setText:pinyinString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSAttributedString *(NSMutableAttributedString *mutableAttributedString)
   {
     for (NSDictionary *readingHash in readingHashes)
     {
