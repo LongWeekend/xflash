@@ -10,6 +10,8 @@
 #import "AddStudySetInputViewController.h"
 #import "TagPeer.h"
 
+#import "ChineseCard.h"
+
 #define FONT_SIZE 14
 
 @interface AddTagViewController : UIViewController

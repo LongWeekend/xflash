@@ -7,6 +7,9 @@
 //
 
 #import "SearchViewController.h"
+
+#import "ChineseCard.h"
+
 const NSInteger KSegmentedTableHeader = 100;
 
 // Private method declarations
@@ -326,7 +329,7 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     return 1;
   }
-  else 
+  else
   {
     if (_currentResultArray)
     {
@@ -447,7 +450,12 @@ const NSInteger KSegmentedTableHeader = 100;
     readingLabel.tag = SEARCH_CELL_READING;
     [cell.contentView addSubview:readingLabel];
   }
+  
+#if defined(LWE_CFLASH)
+  readingLabel.text = [(ChineseCard *)card pinyinReading];
+#else
   readingLabel.text = [card reading];
+#endif  
 
   // Default cell properties
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

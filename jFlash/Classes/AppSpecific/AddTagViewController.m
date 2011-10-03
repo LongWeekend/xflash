@@ -224,7 +224,14 @@ enum EntrySectionRows
     label.minimumFontSize = FONT_SIZE;
     label.numberOfLines = 0;
     label.font = [UIFont systemFontOfSize:FONT_SIZE];
-    label.text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard reading], [currentCard meaningWithoutMarkup]];
+    
+    NSString *reading = nil;
+#if defined(LWE_CFLASH)
+    reading = [(ChineseCard *)currentCard pinyinReading];
+#else
+    reading = [currentCard reading];
+#endif  
+    label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [currentCard meaningWithoutMarkup]];
     label.frame = [LWEUILabelUtils makeFrameForText:label.text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
