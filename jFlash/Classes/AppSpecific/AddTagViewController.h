@@ -14,6 +14,8 @@
 
 #define FONT_SIZE 14
 
+extern NSString * const LWEActiveTagContentDidChange;
+
 @interface AddTagViewController : UIViewController
 {
   IBOutlet UITableView *studySetTable;

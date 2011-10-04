@@ -12,6 +12,8 @@
 #import "LWENetworkUtils.h"
 #import "RootViewController.h"
 
+#import "AddTagViewController.h"
+
 @interface StudyViewController()
 //private properties
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
@@ -111,6 +113,8 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_activeTagContentDidChange:) name:LWEActiveTagContentDidChange object:nil];
   
   // Create a default mood icon object
   MoodIcon *tmpMoodIcon = [[MoodIcon alloc] init];
@@ -616,6 +620,36 @@
 {
   self.progressBarViewController.levelDetails = [self _getLevelDetails];
   [self.progressBarViewController drawProgressBar];
+}
+
+- (void)_activeTagContentDidChange:(NSNotification *)notification
+{
+  LWE_LOG(@"[DEBUG]Active tag content has been changed notification");
+  id obj = [notification object];
+  Card *card = nil;
+  
+  //Make sure we have a Card kind of object
+  if ([obj isKindOfClass:[Card class]])
+    card = (Card *)obj;
+      
+  if (card.cardId == self.currentCard.cardId)
+  {
+    //Get a new random card?
+    NSError *error = nil;
+    Card *nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
+    if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+    {
+      [self _notifyUserStudySetHasBeenLearned];
+    }
+    [self resetViewWithCard:nextCard];
+  }
+  else
+  {
+    //The current tag's content has been changed
+    //to the current card.
+    //Just refresh the view with the current card.
+    [self resetViewWithCard:self.currentCard];
+  }
 }
 
 #pragma mark - Plugin-Related

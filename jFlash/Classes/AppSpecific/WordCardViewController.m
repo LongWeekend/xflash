@@ -108,6 +108,7 @@
   }];
 #endif
   
+  // TODO: TTTAttributedLabel behaves somehow differently from the normal label? (goorudenwiiku)
   // TODO: Maybe make this work again too?
   [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
                                   minFontSize:READING_MIN_FONTSIZE

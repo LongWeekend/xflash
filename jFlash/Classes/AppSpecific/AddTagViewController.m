@@ -22,6 +22,8 @@ enum EntrySectionRows
   NUM_HEADER_SECTION_ROWS
 };
 
+NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChange";
+
 @implementation AddTagViewController
 @synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
 
@@ -288,7 +290,8 @@ enum EntrySectionRows
   CurrentState *currentState = [CurrentState sharedCurrentState];
   Tag* tmpTag = [myTagArray objectAtIndex:indexPath.row];
 
-  // First, determine if we are restricted
+  // First, determine if we are restricted 
+  // (set by the StudySetsWordsViewController if this is an active set)
   if (_restrictedTagId == tmpTag.tagId)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Apologies",@"AddTagViewController.Restricted_AlertViewTitle")
@@ -335,6 +338,16 @@ enum EntrySectionRows
   [tableView reloadData];
   // Tell study set controller to reload its set data stats
   [[NSNotificationCenter defaultCenter] postNotificationName:@"cardAddedToTag" object:self];
+  // If the current study sets content
+  // has been changed, notify the StudyViewController
+  if (tmpTag.tagId == currentState.activeTag.tagId)
+  {
+    //this is a little bit strange, if this list is shown from the StudySetViewController workflow
+    //it wont ever go here as the current set is set as "_restrictedTagId".
+    //HOWEVER, if the user ARE in the current set and go here by tapping "Actions"->"Add To Study Set"
+    //it will go here if the user tries to remove this card (obviously from the current set) =( --Rendy
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagContentDidChange object:self.currentCard];
+  }
 }
 
 

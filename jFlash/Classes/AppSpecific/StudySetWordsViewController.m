@@ -78,7 +78,8 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     NSError *error = nil;
-    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId error:&error];
+    Card *card = [[cards objectAtIndex:indexPath.row] retain];
+    BOOL result = [TagPeer cancelMembership:card.cardId tagId:tag.tagId error:&error];
     if (!result)
     {
       if ([error code] == kRemoveLastCardOnATagError)
@@ -96,6 +97,15 @@
     
     [cards removeObjectAtIndex:indexPath.row];
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
+    
+    // If the current study sets content
+    // has been changed, notify the StudyViewController
+    CurrentState *currentState = [CurrentState sharedCurrentState];
+    if (self.tag.tagId == currentState.activeTag.tagId)
+    {
+      [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagContentDidChange object:card];
+    }
+    [card release];
   }
 }
 
