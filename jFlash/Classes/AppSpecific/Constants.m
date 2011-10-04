@@ -71,7 +71,7 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
-#else if defined(LWE_CFLASH)
+#elif defined(LWE_CFLASH)
 
       // These settings are CFlash specific
       NSString * const APP_HEADWORD_TYPE       = @"headword_type";
