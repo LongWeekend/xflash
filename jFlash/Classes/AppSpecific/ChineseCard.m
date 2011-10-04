@@ -51,10 +51,14 @@
   {
     return numberedPinyin;
   }
+  
+  //Replace the u: with ü (u umlaud)
+  numberedPinyin = [numberedPinyin stringByReplacingOccurrencesOfString:@"u:" withString:@"ü"];
+  
 
   // Define some regexes that are going to help us
   NSError *error = NULL;
-  NSRegularExpression *vocalRegex = [NSRegularExpression regularExpressionWithPattern:@"[aeiou]" options:NSRegularExpressionCaseInsensitive error:&error];
+  NSRegularExpression *vocalRegex = [NSRegularExpression regularExpressionWithPattern:@"[aeiouü]" options:NSRegularExpressionCaseInsensitive error:&error];
   NSRegularExpression *diacriticRegex1 = [NSRegularExpression regularExpressionWithPattern:@"[ae]" options:NSRegularExpressionCaseInsensitive error:&error];
   NSRegularExpression *diacriticRegex2 = [NSRegularExpression regularExpressionWithPattern:@"[ou]" options:NSRegularExpressionCaseInsensitive error:&error];
   
@@ -102,10 +106,11 @@
   {
     // TODO: consider caching this dictionary, it's probably expensive.
     NSDictionary *diacriticDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"ā",@"a1",@"ē",@"e1",@"ī",@"i1",@"ō",@"o1",@"ū",@"u1",
-                                   @"á",@"a2",@"é",@"e2",@"í",@"i2",@"ó",@"o2",@"ú",@"u2",
-                                   @"ǎ",@"a3",@"ě",@"e3",@"ǐ",@"i3",@"ǒ",@"o3",@"ǔ",@"u3",
-                                   @"à",@"a4",@"è",@"e4",@"ì",@"i4",@"ò",@"o4",@"ù",@"u4",nil];
+                                   @"ā",@"a1",@"ē",@"e1",@"ī",@"i1",@"ō",@"o1",@"ū",@"u1",@"ǖ",@"ü1",
+                                   @"á",@"a2",@"é",@"e2",@"í",@"i2",@"ó",@"o2",@"ú",@"u2",@"ǘ",@"ü2",
+                                   @"ǎ",@"a3",@"ě",@"e3",@"ǐ",@"i3",@"ǒ",@"o3",@"ǔ",@"u3",@"ǚ",@"ü3",
+                                   @"à",@"a4",@"è",@"e4",@"ì",@"i4",@"ò",@"o4",@"ù",@"u4",@"ǜ",@"ü4",
+                                   nil];
     if (toneNumber < 5)
     {
       NSString *key = [NSString stringWithFormat:@"%@%d",vowel,toneNumber];
