@@ -44,6 +44,40 @@
   return self;
 }
 
+- (void)viewDidLoad
+{
+  //TODO: If this is a current set list, register to a notification.
+  Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
+  if (currentTag.tagId == self.tag.tagId)
+  {
+    //Only register the notification if this StudySetWordsViewController is editing the active set.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_activeTagContentDidChange:) name:LWEActiveTagContentDidChange object:nil];
+  }
+  [super viewDidLoad];
+}
+
+- (void)_activeTagContentDidChange:(NSNotification *)notification
+{
+  id obj = [notification object];
+  Card *card = nil;
+  if ([obj isKindOfClass:[Card class]])
+  {
+    card = (Card *)obj;
+  }
+  
+  //Check whether the existing local cache still have the card
+  //This is to keep the list of cards synched if a card is removed from the AddTagViewController 
+  //from the "Action" button in the "StudyViewController"
+  NSUInteger index = [self.cards indexOfObject:card];
+  if ((card != nil) && (index != NSNotFound))
+  {
+    //remove the card, reload the table
+    [self.cards removeObjectAtIndex:index];
+    [self.tableView reloadData];
+  }
+  
+}
+
 
 /** UIView delegate - sets theme info */
 - (void) viewWillAppear: (BOOL)animated
@@ -231,6 +265,12 @@
     [self.navigationController pushViewController:tagController animated:YES];
     [tagController release];
   }
+}
+
+- (void)viewDidUnload
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super viewDidUnload];
 }
 
 //! Standard dealloc

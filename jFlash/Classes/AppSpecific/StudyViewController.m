@@ -22,10 +22,11 @@
 //private methods
 - (void)_resetAlertViewAndStudySet;
 - (void)_notifyUserStudySetHasBeenLearned;
-- (BOOL) _shouldShowExampleViewForCard:(Card*)card;
-- (void) _setupViewWithCard:(Card*)card;
+- (BOOL)_shouldShowExampleViewForCard:(Card*)card;
+- (void)_setupViewWithCard:(Card*)card;
 - (void)_setCardViewDelegateBasedOnMode;
 - (void)_refreshProgressBarView;
+- (void)_updateWordsPercentageView;
 - (NSMutableArray*) _getLevelDetails;
 - (void)_setupScrollView;
 - (void)_setupViewAfterSettingsChange;
@@ -505,23 +506,10 @@
   [self.cardViewController setupWithCard:card];
   [self.actionBarController setupWithCard:card];
   [self.exampleSentencesViewController setupWithCard:card];
-  
-  // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
-  // update the remaining cards label
-  NSInteger currCardCount = 0;
-  if (self.isBrowseMode)
-  {
-    [self _turnPercentCorrectOff];
-    currCardCount = [self.currentCardSet currentIndex]+1;
-  }
-  else	
-  {
-    [self _turnPercentCorrectOn];
-    currCardCount = [[[self.currentCardSet cardLevelCounts] objectAtIndex:0] intValue];
-  }
-  
+
+  [self _updateWordsPercentageView];
+
   // If browse mode, hide the quiz stuff.
-  self.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currCardCount, [self.currentCardSet cardCount]];
   self.tapForAnswerImage.hidden = self.isBrowseMode;
   self.revealCardBtn.hidden = self.isBrowseMode;
 
@@ -536,6 +524,25 @@
   self.pageControl.currentPage = 0;
   [self changePage:self.pageControl animated:NO];
   _isChangingPage = NO;
+}
+
+- (void)_updateWordsPercentageView
+{
+  // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
+  // update the remaining cards label
+  NSInteger currCardCount = 0;
+  if (self.isBrowseMode)
+  {
+    [self _turnPercentCorrectOff];
+    currCardCount = [self.currentCardSet currentIndex]+1;
+  }
+  else	
+  {
+    [self _turnPercentCorrectOn];
+    currCardCount = [[[self.currentCardSet cardLevelCounts] objectAtIndex:0] intValue];
+  }
+  
+  self.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currCardCount, [self.currentCardSet cardCount]];
 }
 
 /** 
@@ -645,10 +652,13 @@
   }
   else
   {
-    //The current tag's content has been changed
-    //to the current card.
+    //The current tag's content has been changed to the current card.
     //Just refresh the view with the current card.
-    [self resetViewWithCard:self.currentCard];
+    
+    //It is smoother to just update the percentage below, rather than the need to update the
+    //whole view of the cards (the state will be changed as well like meaning label is hidden, etc)
+    //[self resetViewWithCard:self.currentCard];
+    [self _updateWordsPercentageView];
   }
 }
 
