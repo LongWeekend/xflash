@@ -191,8 +191,53 @@
   [settings setObject:LWE_JF_VERSION_1_5 forKey:APP_SETTINGS_VERSION];
 }
 
+#pragma mark
+#pragma mark Version 1.6
++ (BOOL) _needs15to16SettingsUpdate:(NSUserDefaults*) settings
+{
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_5] && 
+          [settings valueForKey:@"settings_already_created"]);
+}
+
++ (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.6
+  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_DATA_VERSION];
+  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
+  [self _movePluginsToCacheDirectory];
+}
+
+
 #pragma mark -
 #pragma mark Shared Private Methods
+
+/**
+ * This is a migration method to move already downloaded plugins from the doucments directory to the caches director, specific for 1.5->1.6 migration
+ */
++ (BOOL) _movePluginsToCacheDirectory
+{
+  BOOL success = NO;
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSMutableDictionary *plugins = [settings objectForKey:APP_PLUGIN];
+	LWE_LOG(@"This is the APP_PLUGIN in the NSUserDefaults : %@", plugins);
+  NSEnumerator *keyEnumerator = [plugins keyEnumerator];
+  NSString *key;
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSError* error;
+  while ((key = [keyEnumerator nextObject]))
+  {
+    NSString* filename = [plugins objectForKey:key];
+		LWE_LOG(@"LOG : Trying to move the installed plugins = %@, with filename = %@ to caches directory", key, filename);
+    NSString* documentPathToFilename = [LWEFile createDocumentPathWithFilename:filename];
+    if ([LWEFile fileExists:documentPathToFilename])
+    {
+      success = [fileManager moveItemAtPath:documentPathToFilename toPath:[LWEFile createCachesPathWithFilename:filename] error:&error];
+    }
+  }
+  return success;
+}
 
 + (BOOL) _runMultipleSQLStatements:(NSString*)filePath inDB:(LWEDatabase*)db
 {
@@ -295,6 +340,13 @@
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
     [UpdateManager _updateSettingsFrom14to15:settings];
   }
+  
+  if ([UpdateManager _needs15to16SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
+    [UpdateManager _updateSettingsFrom15to16:settings];
+  }
+  
 #else
 /**
  * FUTURE CFLASH MIGRATIONS HERE
