@@ -19,7 +19,7 @@
 //! Init the BackupManager with a Delegate
 - (BackupManager*) initWithDelegate:(id)aDelegate
 {
-  if ((self == [super init]))
+  if ((self = [super init]))
   {
     self.delegate = aDelegate;
   }
@@ -29,6 +29,7 @@
 //! Helper method that returns the flashType string name used by the API
 - (NSString*) stringForFlashType
 {
+  // TODO: change this to use the Bundle Identifier
 #if APP_TARGET == APP_TARGET_JFLASH
   return @"japaneseflash";
 #else
