@@ -574,8 +574,7 @@ enum Sections {
   }
 }
 
-#pragma mark -
-#pragma mark BackupManager Delegate
+#pragma mark - BackupManager Delegate
 
 - (void)didBackupUserData
 {
