@@ -20,9 +20,9 @@
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+  BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
   if (self.wordCardViewController == nil)
   {
-    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
     self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
     cardViewController.view = self.wordCardViewController.view;
   }
@@ -33,16 +33,16 @@
   [self.wordCardViewController hideMeaningWebView:YES];
   [self.wordCardViewController resetReadingVisibility];
   
-  if ([studyDirection isEqualToString:SET_E_TO_J])
+  if (useMainHeadword == NO)
   {
     self.wordCardViewController.toggleReadingBtn.hidden = YES;
     self.wordCardViewController.cardReadingLabelScrollContainer.hidden = YES;
-    self.wordCardViewController.cardReadingLabel.hidden = YES;
     self.wordCardViewController.readingVisible = NO;
   }
   else
   {
-    // set the toggleReadingBtn to not hidden for other modes, if this is not here the button can be missing in practice mode
+    // set the toggleReadingBtn to not hidden for other modes,
+    // if this is not here the button can be missing in practice mode
     self.wordCardViewController.toggleReadingBtn.hidden = NO;
   }
 }
