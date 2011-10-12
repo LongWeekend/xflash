@@ -54,6 +54,12 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		49278C4D1445FCB5005426A3 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */; };
+		49278C4E1445FCB5005426A3 /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */; };
+		49278C4F14460195005426A3 /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */; };
+		49278C5014460198005426A3 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */; };
+		49278C5114460198005426A3 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */; };
+		49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
 		4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83F1400A93F0076EEED /* JapaneseCard.m */; };
 		4927B8451400BE540076EEED /* JapaneseSettingsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */; };
@@ -69,8 +75,6 @@
 		4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8BA14024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
-		4938F8BE1402754F001EB473 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4938F8BD1402754F001EB473 /* TTTAttributedLabel.m */; };
-		4938F8BF1402754F001EB473 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4938F8BD1402754F001EB473 /* TTTAttributedLabel.m */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4938F8C514027841001EB473 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C414027841001EB473 /* libsqlite3.a */; };
 		4938F8C714027853001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -310,8 +314,6 @@
 		49EE9709134EC15900EC6B0E /* LWETUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9180134EC15500EC6B0E /* LWETUser.m */; };
 		49EE970A134EC15900EC6B0E /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9182134EC15500EC6B0E /* LWETUserDB.m */; };
 		49EE970B134EC15900EC6B0E /* LWETUserDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9182134EC15500EC6B0E /* LWETUserDB.m */; };
-		49EE970C134EC15900EC6B0E /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9183134EC15500EC6B0E /* LWETUserDB.xcdatamodel */; };
-		49EE970D134EC15900EC6B0E /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9183134EC15500EC6B0E /* LWETUserDB.xcdatamodel */; };
 		49EE970E134EC15900EC6B0E /* LWETwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9185134EC15500EC6B0E /* LWETwitterEngine.m */; };
 		49EE970F134EC15900EC6B0E /* LWETwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9185134EC15500EC6B0E /* LWETwitterEngine.m */; };
 		49EE9710134EC15900EC6B0E /* LWETwitterOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9187134EC15500EC6B0E /* LWETwitterOAuth.m */; };
@@ -730,6 +732,10 @@
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
+		49278C491445FCB5005426A3 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+Attributes.h"; path = "External/OHAttributedLabel/NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
+		49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+Attributes.m"; path = "External/OHAttributedLabel/NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
+		49278C4B1445FCB5005426A3 /* OHAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OHAttributedLabel.h; path = External/OHAttributedLabel/OHAttributedLabel.h; sourceTree = "<group>"; };
+		49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OHAttributedLabel.m; path = External/OHAttributedLabel/OHAttributedLabel.m; sourceTree = "<group>"; };
 		4927B83B1400A8400076EEED /* ChineseCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseCard.h; path = AppSpecific/ChineseCard.h; sourceTree = "<group>"; };
 		4927B83C1400A8400076EEED /* ChineseCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseCard.m; path = AppSpecific/ChineseCard.m; sourceTree = "<group>"; };
 		4927B83E1400A93F0076EEED /* JapaneseCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JapaneseCard.h; path = AppSpecific/JapaneseCard.h; sourceTree = "<group>"; };
@@ -741,8 +747,6 @@
 		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
 		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
 		4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "WordCardViewController-EtoJ.xib"; path = "Classes/AppSpecific/WordCardViewController-EtoJ.xib"; sourceTree = "<group>"; };
-		4938F8BC1402754F001EB473 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = External/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
-		4938F8BD1402754F001EB473 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = External/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4938F8C614027853001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1407,13 +1411,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		4938F8BB14027532001EB473 /* TTTAttributedLabel */ = {
+		4938F8BB14027532001EB473 /* OHAttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
-				4938F8BC1402754F001EB473 /* TTTAttributedLabel.h */,
-				4938F8BD1402754F001EB473 /* TTTAttributedLabel.m */,
+				49278C491445FCB5005426A3 /* NSAttributedString+Attributes.h */,
+				49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */,
+				49278C4B1445FCB5005426A3 /* OHAttributedLabel.h */,
+				49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */,
 			);
-			name = TTTAttributedLabel;
+			name = OHAttributedLabel;
 			sourceTree = "<group>";
 		};
 		4938F8C814027860001EB473 /* CFlash */ = {
@@ -1480,7 +1486,7 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				4938F8BB14027532001EB473 /* TTTAttributedLabel */,
+				4938F8BB14027532001EB473 /* OHAttributedLabel */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
 				913D48301353BE26008A4649 /* LWEJanrain */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
@@ -2315,6 +2321,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Long Weekend LLC";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "jFlash" */;
@@ -2824,7 +2831,6 @@
 				49EE9704134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.m in Sources */,
 				49EE9708134EC15900EC6B0E /* LWETUser.m in Sources */,
 				49EE970A134EC15900EC6B0E /* LWETUserDB.m in Sources */,
-				49EE970C134EC15900EC6B0E /* LWETUserDB.xcdatamodel in Sources */,
 				49EE970E134EC15900EC6B0E /* LWETwitterEngine.m in Sources */,
 				49EE9710134EC15900EC6B0E /* LWETwitterOAuth.m in Sources */,
 				49EE9712134EC15900EC6B0E /* UIColor+LWEUtilities.m in Sources */,
@@ -2859,7 +2865,8 @@
 				4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 				4927B8401400A93F0076EEED /* JapaneseCard.m in Sources */,
 				4927B8451400BE540076EEED /* JapaneseSettingsDataSource.m in Sources */,
-				4938F8BE1402754F001EB473 /* TTTAttributedLabel.m in Sources */,
+				49278C4D1445FCB5005426A3 /* NSAttributedString+Attributes.m in Sources */,
+				49278C4E1445FCB5005426A3 /* OHAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2873,6 +2880,8 @@
 				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
 				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,
 				4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
+				49278C5114460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
+				49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2979,7 +2988,6 @@
 				49EE9705134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.m in Sources */,
 				49EE9709134EC15900EC6B0E /* LWETUser.m in Sources */,
 				49EE970B134EC15900EC6B0E /* LWETUserDB.m in Sources */,
-				49EE970D134EC15900EC6B0E /* LWETUserDB.xcdatamodel in Sources */,
 				49EE970F134EC15900EC6B0E /* LWETwitterEngine.m in Sources */,
 				49EE9711134EC15900EC6B0E /* LWETwitterOAuth.m in Sources */,
 				49EE9713134EC15900EC6B0E /* UIColor+LWEUtilities.m in Sources */,
@@ -3015,7 +3023,8 @@
 				4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 				4927B83D1400A8400076EEED /* ChineseCard.m in Sources */,
 				4927B8481400C7360076EEED /* ChineseSettingsDataSource.m in Sources */,
-				4938F8BF1402754F001EB473 /* TTTAttributedLabel.m in Sources */,
+				49278C4F14460195005426A3 /* OHAttributedLabel.m in Sources */,
+				49278C5014460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3211,7 +3220,6 @@
 		496C7A71126325FE004B6B90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
@@ -3277,7 +3285,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = LWE_DEBUG;
