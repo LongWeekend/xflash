@@ -88,28 +88,28 @@
 #if defined(LWE_JFLASH)
   self.cardReadingLabel.text = card.reading;
 #elif defined(LWE_CFLASH)
-  NSMutableString *pinyinString = [NSMutableString string];
+  NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
   NSArray *readingHashes = [(ChineseCard*)card readingComponents];
   for (NSDictionary *readingHash in readingHashes)
   {
-    [pinyinString appendString:(NSString*)[readingHash objectForKey:@"pinyin"]];
-    [pinyinString appendString:@" "];
+    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
+    NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
+    NSRange allRange = NSMakeRange(0, [stringToAppend length]);
+    [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
+                          value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
+                          range:allRange];
+    [attrString appendAttributedString:tmpAttrString];
+    [tmpAttrString release];
   }
   
-  [(TTTAttributedLabel *)self.cardReadingLabel setText:pinyinString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSAttributedString *(NSMutableAttributedString *mutableAttributedString)
-  {
-    for (NSDictionary *readingHash in readingHashes)
-    {
-      NSRange thisRange = [mutableAttributedString.string rangeOfString:[readingHash objectForKey:@"pinyin"]];
-      [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
-                                      range:thisRange];
-    }
-    return mutableAttributedString;
-  }];
+  [(OHAttributedLabel *)self.cardReadingLabel setAttributedText:attrString];
+  
+  // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
+  // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
+  // wonky, so we have to go with what works
+  self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
 #endif
   
-  // TODO: TTTAttributedLabel behaves somehow differently from the normal label? (goorudenwiiku)
-  // TODO: Maybe make this work again too?
   [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
                                   minFontSize:READING_MIN_FONTSIZE
                                   maxFontSize:READING_MAX_FONTSIZE
@@ -139,6 +139,7 @@
   self.readingVisible = YES;
   self.cardReadingLabelScrollContainer.hidden = NO;
   [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
+  [self.cardReadingLabel setNeedsDisplay];
 }
 
 - (void) turnReadingOff

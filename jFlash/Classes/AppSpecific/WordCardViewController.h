@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
-#import "TTTAttributedLabel.h"
+#import "OHAttributedLabel.h"
 
 extern NSString * const LWECardHtmlHeader;
 extern NSString * const LWECardHtmlHeader_EtoJ;
