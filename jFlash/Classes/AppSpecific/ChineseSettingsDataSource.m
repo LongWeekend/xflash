@@ -11,7 +11,7 @@
 
 @implementation ChineseSettingsDataSource
 
-@synthesize settingsChanged, directionChanged, themeChanged;
+@synthesize settingsChanged, cardChanged;
 @synthesize settingsHash;
 
 - (void) dealloc
@@ -24,13 +24,13 @@
 
 - (void) settingWillChange:(NSString*)key
 {
-  if ([key isEqualToString:APP_HEADWORD]) // we don't want the current card to change for just a headword switch
+  // These keys don't warrant a full tag reset, just a card reset
+  if ([key isEqualToString:APP_HEADWORD] ||           // Chn<->Eng
+      [key isEqualToString:APP_HEADWORD_TYPE] ||      // Trad<->Simp
+      [key isEqualToString:APP_THEME] ||
+      [key isEqualToString:APP_PINYIN_COLOR]) 
   {
-    self.directionChanged = YES;
-  }
-  else if ([key isEqualToString:APP_THEME])
-  {
-    self.themeChanged = YES;
+    self.cardChanged = YES;
   }
   else
   {
@@ -40,7 +40,7 @@
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return (self.directionChanged || self.themeChanged);
+  return self.cardChanged;
 }
 
 - (BOOL) shouldSendChangeNotification
@@ -51,8 +51,7 @@
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc
 {
   // we've sent the notifications, so reset to unchanged
-  self.directionChanged = NO;
-  self.themeChanged = NO;
+  self.cardChanged = NO;
   self.settingsChanged = NO;  
 }
 
