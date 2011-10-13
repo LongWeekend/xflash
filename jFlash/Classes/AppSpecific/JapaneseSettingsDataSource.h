@@ -13,9 +13,6 @@
 
 @property (retain) NSDictionary *settingsHash;
 
-@property BOOL settingsChanged;
-@property BOOL directionChanged;
-@property BOOL themeChanged;
-@property BOOL readingChanged;
+@property BOOL resetCardOnly;
 
 @end

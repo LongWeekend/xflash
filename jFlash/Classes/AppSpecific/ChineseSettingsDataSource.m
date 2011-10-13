@@ -11,7 +11,7 @@
 
 @implementation ChineseSettingsDataSource
 
-@synthesize settingsChanged, cardChanged;
+@synthesize resetCardOnly;
 @synthesize settingsHash;
 
 - (void) dealloc
@@ -24,35 +24,30 @@
 
 - (void) settingWillChange:(NSString*)key
 {
-  // These keys don't warrant a full tag reset, just a card reset
+  // These keys don't warrant a full tag reset, just a card reset -- for any other, this will stay NO
   if ([key isEqualToString:APP_HEADWORD] ||           // Chn<->Eng
       [key isEqualToString:APP_HEADWORD_TYPE] ||      // Trad<->Simp
       [key isEqualToString:APP_THEME] ||
       [key isEqualToString:APP_PINYIN_COLOR]) 
   {
-    self.cardChanged = YES;
-  }
-  else
-  {
-    self.settingsChanged = YES;
+    self.resetCardOnly = YES;
   }
 }
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return self.cardChanged;
+  return self.resetCardOnly;
 }
 
 - (BOOL) shouldSendChangeNotification
 {
-  return self.settingsChanged;
+  return (self.resetCardOnly == NO);
 }
 
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc
 {
   // we've sent the notifications, so reset to unchanged
-  self.cardChanged = NO;
-  self.settingsChanged = NO;  
+  self.resetCardOnly = NO;
 }
 
 #pragma mark - Settings Data Source

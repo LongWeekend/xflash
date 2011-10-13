@@ -13,7 +13,6 @@
 
 @property (retain) NSDictionary *settingsHash;
 
-@property BOOL settingsChanged;
-@property BOOL cardChanged;
+@property BOOL resetCardOnly;
 
 @end

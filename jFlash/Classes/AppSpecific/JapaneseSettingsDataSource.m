@@ -12,7 +12,7 @@
 
 @implementation JapaneseSettingsDataSource
 
-@synthesize settingsChanged, directionChanged, themeChanged, readingChanged;
+@synthesize resetCardOnly;
 @synthesize settingsHash;
 
 - (void) dealloc
@@ -25,41 +25,29 @@
 
 - (void) settingWillChange:(NSString*)key
 {
-  if ([key isEqualToString:APP_HEADWORD]) // we don't want the current card to change for just a headword switch
+  // we don't want the current card to change for just a headword switch, theme or reading change
+  if ([key isEqualToString:APP_HEADWORD] ||
+      [key isEqualToString:APP_THEME] ||
+      [key isEqualToString:APP_READING])
   {
-    self.directionChanged = YES;
-  }
-  else if ([key isEqualToString:APP_THEME])
-  {
-    self.themeChanged = YES;
-  }
-  else if (key == APP_READING)
-  {
-    self.readingChanged = YES; 
-  }
-  else
-  {
-    self.settingsChanged = YES;
+    self.resetCardOnly = YES; 
   }
 }
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return (self.directionChanged || self.themeChanged || self.readingChanged);
+  return self.resetCardOnly;
 }
 
 - (BOOL) shouldSendChangeNotification
 {
-  return self.settingsChanged;
+  return (self.resetCardOnly == NO);
 }
 
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc
 {
   // we've sent the notifications, so reset to unchanged
-  self.directionChanged = NO;
-  self.themeChanged = NO;
-  self.readingChanged = NO;
-  self.settingsChanged = NO;
+  self.resetCardOnly = NO;
 }
 
 #pragma mark - Settings Data Source
