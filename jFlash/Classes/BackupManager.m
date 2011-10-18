@@ -237,7 +237,7 @@
   NSMutableDictionary* cardDict = [NSMutableDictionary dictionary];
   for (Tag *tag in [TagPeer retrieveUserTagList])
   {
-    NSMutableArray *cards = [CardPeer retrieveCardIdsForTagId:tag.tagId];
+    NSArray *cards = [CardPeer retrieveCardIdsForTagId:tag.tagId];
     NSMutableArray *cardIdsAndTagName = [NSMutableArray array];
     [cardIdsAndTagName addObject:tag.tagName];
     [cardIdsAndTagName addObject:[NSNumber numberWithInt:[tag groupId]]];
