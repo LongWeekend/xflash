@@ -4,22 +4,17 @@
 @interface CardPeer : NSObject
 
 //! Card methods
-+ (Card*) retrieveCardWithSQL: (NSString*) sql;
-+ (Card*) retrieveCardByPK: (NSInteger)cardId;
-+ (Card*) retrieveCardByLevel: (NSInteger)levelId setId:(NSInteger)setId withRandom: (NSInteger) randomNum;
-+ (Card*) hydrateCardByPK: (Card*) card;
-
-// TODO: deprecate/get rid of this method in favor of the one below it
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate;
++ (Card*) retrieveCardByPK:(NSInteger)cardId;
 
 //! Array of cards methods
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
-+ (NSMutableArray*) retrieveCardSet: (NSInteger)setId;
-+ (NSMutableArray*) retrieveCardIdsSortedByLevel: (NSInteger) tagId;
-+ (NSMutableArray*) retrieveCardIdsForTagId: (NSInteger)tagId;
-+ (NSMutableArray*) retrieveCardSetWithSQL: (NSString*) sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
-+ (NSMutableArray*) retrieveCardSetForSentenceId: (NSInteger) sentenceId;
-+ (NSMutableArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceID;
-+ (NSMutableArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId;
-+ (NSMutableArray*) searchCardsForKeyword: (NSString*) keyword doSlowSearch:(BOOL)slowSearch;
++ (NSArray*) retrieveCardIdsSortedByLevel:(NSInteger)tagId;
++ (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId;
+
++ (NSArray*) retrieveCardSet:(NSInteger)setId;
++ (NSArray*) retrieveCardSetForSentenceId: (NSInteger)sentenceId;
++ (NSArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceID;
++ (NSArray*) retrieveCardSetByLevel:(NSInteger)setId levelId:(NSInteger)levelId;
+
+//! Search methods
++ (NSArray*) searchCardsForKeyword:(NSString*) keyword doSlowSearch:(BOOL)slowSearch;
 @end
