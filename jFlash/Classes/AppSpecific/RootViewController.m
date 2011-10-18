@@ -164,22 +164,22 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 /** Switches active view to study view, convenience method for notification */
 - (void) switchToStudyView
 {
-  [self.tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
+  self.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
 }
 
 - (void) switchToStudySetView
 {
-  [[self tabBarController] setSelectedIndex:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX];
+  self.tabBarController.selectedIndex = STUDY_SET_VIEW_CONTROLLER_TAB_INDEX;
 }
 
 - (IBAction) switchToSettings
 {
-  [self.tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
+  self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
 }
 
 - (void) switchToSearchWithTerm:(NSString*)term
 {
-  [tabBarController setSelectedIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
 
   // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
   UINavigationController *vc = (UINavigationController*)[tabBarController selectedViewController];
@@ -203,8 +203,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   }
 }
 
-#pragma mark -
-#pragma mark Generic Modal Pop-ups and dismissal. 
+#pragma mark - Generic Modal Pop-ups and dismissal. 
 
 /**
  * Private method that actually does the dirty work of displaying any modal
