@@ -110,8 +110,8 @@
   {
     // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
     // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    NSString *searchTerm;
-    searchTerm = [self getDecodedSearchTerm: aUrl];
+    NSString *searchTerm = nil;
+    searchTerm = [self getDecodedSearchTerm:aUrl];
     [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
     _searchedTerm = [searchTerm retain];
   }
@@ -178,8 +178,7 @@
   [self.rootViewController loadTabBar];
 }
 
-#pragma mark -
-#pragma mark UIApplication Delegate methods
+#pragma mark - UIApplication Delegate methods
 
 // TODO: not in use. Waiting for next release
 //- (void) scheduleLocalNotification 
