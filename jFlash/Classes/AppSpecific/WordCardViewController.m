@@ -108,7 +108,7 @@
   // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
   // wonky, so we have to go with what works
   self.cardReadingLabel.shadowOffset = CGSizeMake(2.0f, 2.0f);
-  self.cardReadingLabel.shadowColor = [UIColor blackColor];
+  self.cardReadingLabel.shadowColor = [UIColor darkGrayColor];
   self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
 #endif
   
