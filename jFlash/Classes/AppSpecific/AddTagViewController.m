@@ -22,7 +22,9 @@ enum EntrySectionRows
   NUM_HEADER_SECTION_ROWS
 };
 
-NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChange";
+@interface AddTagViewController ()
+@property (retain) NSMutableArray *membershipCacheArray;
+@end
 
 @implementation AddTagViewController
 @synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
@@ -32,15 +34,15 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  * attaches the Card parameter to the object
  * Also sets up nav bar properties
  */
-- (id) initWithCard:(Card*) card
+- (id) initWithCard:(Card*)card
 {
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
-    [self setCardId:[card cardId]];
-    [self setCurrentCard:card];
-    [self setMyTagArray:[TagPeer retrieveMyTagList]];
-    [self setSysTagArray:[TagPeer retrieveSysTagListContainingCard:card]];
+    self.cardId = card.cardId;
+    self.currentCard = card;
+    self.myTagArray = [TagPeer retrieveMyTagList];
+    self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
     
     // set restricted Tag ID to something rediculous so it can't accidentally be a tag id.
     _restrictedTagId = INT_MAX;
@@ -59,8 +61,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   return self;
 }
 
-#pragma mark -
-#pragma mark UIViewDelegate methods
+#pragma mark - UIViewDelegate methods
 
 /** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
 - (void)viewWillAppear:(BOOL)animated
@@ -70,22 +71,21 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [self.studySetTable setBackgroundColor:[UIColor clearColor]];
+  self.studySetTable.backgroundColor = [UIColor clearColor];
   
   // Cache the tag's membership list
-  self.membershipCacheArray = [TagPeer membershipListForCardId:cardId];
+  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
 }
 
-#pragma mark -
-#pragma mark Class Methods
+#pragma mark - Instance Methods
 
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
 - (void)addStudySet
 {
-  AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithDefaultCardId:[self cardId] groupOwnerId:0];
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
-	[addStudySetInputViewController release];
-  [[self navigationController] presentModalViewController:modalNavController animated:YES];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard groupOwnerId:0];
+  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
+	[tmpVC release];
+  [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 }
 
@@ -93,8 +93,8 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 /** Recreates tag membership caches and reloads table view */
 - (void) reloadTableData
 {
-  [self setMyTagArray:[TagPeer retrieveMyTagList]];
-  [self setMembershipCacheArray:[TagPeer membershipListForCardId:[self cardId]]];
+  self.myTagArray = [TagPeer retrieveMyTagList];
+  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
   [self.studySetTable reloadData];
 }
 
@@ -103,7 +103,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  * If set, stops the user from changing membership for a given set.  Useful for restricting the
  * user against pulling the active card out of the active set, etc.
  */
-- (void) restrictMembershipChangeForTagId:(NSInteger) tagId
+- (void) restrictMembershipChangeForTagId:(NSInteger)tagId
 {
   _restrictedTagId = tagId;
 }
@@ -115,9 +115,9 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   BOOL returnVal = NO;
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
   {
-    for (int i = 0; i < [membershipCacheArray count]; i++)
+    for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
     {
-      if ([[membershipCacheArray objectAtIndex:i] intValue] == tagId)
+      if ([[self.membershipCacheArray objectAtIndex:i] intValue] == tagId)
       {
         // Gotcha!
         return YES;
@@ -127,8 +127,8 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   else
   {
     // Rebuild cache and fail over to manual function
-    self.membershipCacheArray = [TagPeer membershipListForCardId:self.cardId];
-    returnVal = [TagPeer checkMembership:self.cardId tagId:tagId];
+    self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
+    returnVal = [TagPeer checkMembership:self.currentCard tagId:tagId];
   }
   return returnVal;
 }
@@ -137,21 +137,21 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 /** Remove a card from the membership cache */
 - (void) removeFromMembershipCache: (NSInteger) tagId
 {
+  // TODO: change this to fast iteration; stop mutating array in place while enumerating!
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
   {
-    for (int i = 0; i < [membershipCacheArray count]; i++)
+    for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
     {
-      if ([[membershipCacheArray objectAtIndex:i] intValue] == tagId)
+      if ([[self.membershipCacheArray objectAtIndex:i] intValue] == tagId)
       {
-        [membershipCacheArray removeObjectAtIndex:i];
+        [self.membershipCacheArray removeObjectAtIndex:i];
         return;
       }
     }
   }
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate methods
+#pragma mark - UITableViewDelegate methods
 
 //! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,14 +161,14 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSUInteger i = 0;
+  NSInteger i = 0;
   if (section == kMyTagsSection)
   {
-    i = [myTagArray count];
+    i = [self.myTagArray count];
   }
   else if (section == kSystemTagsSection)
   {
-    i = [sysTagArray count];  
+    i = [self.sysTagArray count];  
   }
   else if (section == kEntrySection)
   {
@@ -189,7 +189,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   }
   else
   {
-    return currentCard.headword;
+    return self.currentCard.headword;
   }
 }
 
@@ -197,7 +197,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 {
   if (indexPath.section == kEntrySection)
   {
-    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [currentCard reading], [currentCard meaningWithoutMarkup]];
+    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
   else 
@@ -231,23 +231,23 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 #if defined(LWE_CFLASH)
     reading = [(ChineseCard *)currentCard pinyinReading];
 #else
-    reading = [currentCard reading];
+    reading = [self.currentCard reading];
 #endif  
-    label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [currentCard meaningWithoutMarkup]];
+    label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [self.currentCard meaningWithoutMarkup]];
     label.frame = [LWEUILabelUtils makeFrameForText:label.text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [[cell contentView] addSubview:label];
+    [cell.contentView addSubview:label];
     [label release];
   }
   // the cells for either tag type look the same
   else
   {        
     // Get the tag arrays
-    Tag* tmpTag = nil;
+    Tag *tmpTag = nil;
     if (indexPath.section == kMyTagsSection)
     {
-      tmpTag = [myTagArray objectAtIndex:indexPath.row];
+      tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
       if ([self checkMembershipCacheForTagId:tmpTag.tagId])
       {
@@ -260,13 +260,13 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
     }
     else if (indexPath.section == kSystemTagsSection)
     {
-      tmpTag = [sysTagArray objectAtIndex:indexPath.row];
+      tmpTag = [self.sysTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     // Set up the cell
-    cell.textLabel.text = [tmpTag tagName];
+    cell.textLabel.text = tmpTag.tagName;
   }
   
   return cell;
@@ -277,9 +277,9 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  * Calls subscribe or cancel set membership accordingly, also checks 
  * _restrictedTagId to make sure it is allowed to remove/add the card to the set
  */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   
   // do nothing for the entry section or system tags
   if (indexPath.section == kEntrySection || indexPath.section == kSystemTagsSection)
@@ -288,7 +288,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   }
 
   CurrentState *currentState = [CurrentState sharedCurrentState];
-  Tag* tmpTag = [myTagArray objectAtIndex:indexPath.row];
+  Tag *tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
 
   // First, determine if we are restricted 
   // (set by the StudySetsWordsViewController if this is an active set)
@@ -301,7 +301,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   
   // Check whether or not we are ADDING or REMOVING from the selected tag
   //TODO: Isnt it a local cache to check whether the card is a member of which tag? Cant we just use that? --Rendy 19/07/11
-  if ([TagPeer checkMembership:cardId tagId:tmpTag.tagId])
+  if ([TagPeer checkMembership:self.currentCard tagId:tmpTag.tagId])
   {
     // Remove tag
     NSError *error = nil;
@@ -327,21 +327,25 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   }
   else
   {
-    [TagPeer subscribe:cardId tagId:tmpTag.tagId];
+    [TagPeer subscribe:self.currentCard tagId:tmpTag.tagId];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
-    if (tmpTag.tagId == [[currentState activeTag] tagId])
+    if (tmpTag.tagId == currentState.activeTag.tagId)
     {
       LWE_LOG(@"Editing current set tags");
-      [[currentState activeTag] addCardToActiveSet:currentCard]; // maybe fuck off?
+      [currentState.activeTag addCardToActiveSet:self.currentCard]; // maybe fuck off?
     }
   }
-  [tableView reloadData];
+  
+  [lclTableView reloadData];
+  
   // Tell study set controller to reload its set data stats
   [[NSNotificationCenter defaultCenter] postNotificationName:@"cardAddedToTag" object:self];
+  
   // If the current study sets content
   // has been changed, notify the StudyViewController
   if (tmpTag.tagId == currentState.activeTag.tagId)
   {
+    
     //this is a little bit strange, if this list is shown from the StudySetViewController workflow
     //it wont ever go here as the current set is set as "_restrictedTagId".
     //HOWEVER, if the user ARE in the current set and go here by tapping "Actions"->"Add To Study Set"
@@ -351,8 +355,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 }
 
 
-#pragma mark -
-#pragma mark Class plumbing
+#pragma mark - Class plumbing
 
 - (void) viewDidUnload
 {
