@@ -121,7 +121,6 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
       {
         *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:db.dao.lastErrorCode userInfo:userInfo];
       }
-      [userInfo release];
       return NO;
     }
   }
