@@ -103,6 +103,7 @@
   }
   
   [(OHAttributedLabel *)self.cardReadingLabel setAttributedText:attrString];
+  [attrString release];
   
   // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
   // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
