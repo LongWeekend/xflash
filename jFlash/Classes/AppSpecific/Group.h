@@ -11,8 +11,6 @@
 
 - (void) hydrate:(FMResultSet*)rs;
 - (NSArray*) childTags;
-- (NSInteger) getChildTagCount;
-- (NSInteger) getChildGroupCount;
 
 @property (retain) NSString *groupName;   //! Display name
 @property NSInteger groupId;              //! groupId of the parent Group

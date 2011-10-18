@@ -48,10 +48,22 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
     [cardsInTagRS close];
     
     // Now do the update
+    Tag *tmpTag = [[Tag alloc] init]; // encapsulation is a bitch but one we should heed
+    tmpTag.tagId = tagId;
+    [TagPeer setCardCount:numCards forTag:tmpTag];
+    [tmpTag release];
+    
     [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = %d WHERE tag_id = %d",numCards,tagId]];
     LWE_LOG(@"tag id %d has %d cards",tagId,numCards);
   }
   [userTagsRS close];
+}
+
++ (void) setCardCount:(NSInteger)newCount forTag:(Tag*)tag
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString *sql = [NSString stringWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",newCount,tag.tagId];
+  [db executeUpdate:sql];
 }
 
 #pragma mark - Membership Methods

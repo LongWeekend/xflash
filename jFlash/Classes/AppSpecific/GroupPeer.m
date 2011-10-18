@@ -13,13 +13,15 @@
 
 
 //! Returns a Group object hydrated based on groupId parameter
-+ (Group*) retrieveGroupById: (NSInteger)groupId
++ (Group*) retrieveGroupById:(NSInteger)groupId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE group_id = %d LIMIT 1",groupId];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-  Group* tmpGroup = [[[Group alloc] init] autorelease];
-	while ([rs next]) {
+	FMResultSet *rs = [db executeQuery:sql];
+  Group *tmpGroup = nil;
+  while ([rs next])
+  {
+    tmpGroup = [[[Group alloc] init] autorelease];
 		[tmpGroup hydrate:rs];
 	}
 	[rs close];
@@ -27,22 +29,38 @@
 	return tmpGroup;  
 }
 
-
-//! Returns an array of Group objects all owned by the id passed on ownerId parameter
-+(NSMutableArray*) retrieveGroupsByOwner: (NSInteger)ownerId
+//! Gets a tag's parent
++ (NSInteger) parentGroupIdOfTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSMutableArray* groups = [[[NSMutableArray alloc] init] autorelease];
+	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tag.tagId];
+	FMResultSet *rs = [db executeQuery:sql];
+  NSInteger groupId = 0;
+	while ([rs next]) 
+  {
+    groupId = [rs intForColumn:@"group_id"];
+	}
+	[rs close];
+	[sql release];
+  return groupId;
+}
+
+//! Returns an array of Group objects all owned by the id passed on ownerId parameter
++(NSArray*) retrieveGroupsByOwner:(NSInteger)ownerId
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	NSMutableArray *groups = [NSMutableArray array];
 	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE owner_id = '%d' ORDER BY recommended DESC, group_name ASC",ownerId];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-	while ([rs next]) {
-		Group* tmpGroup = [[[Group alloc] init] autorelease];
+	FMResultSet *rs = [db executeQuery:sql];
+	while ([rs next])
+  {
+		Group *tmpGroup = [[[Group alloc] init] autorelease];
 		[tmpGroup hydrate:rs];
 		[groups addObject:tmpGroup];
 	}
 	[rs close];
 	[sql release];
-	return groups;  
+	return (NSArray*)groups;  
 }
 
 @end

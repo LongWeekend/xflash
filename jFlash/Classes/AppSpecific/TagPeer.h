@@ -34,6 +34,7 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 + (Tag*) retrieveTagById: (NSInteger) tagId;
 + (Tag*) retrieveTagByName: (NSString*) tagName;
 + (BOOL) deleteTag:(Tag*)tag;
-+ (void) recacheCountsForUserTags;
 
++ (void) recacheCountsForUserTags;
++ (void) setCardCount:(NSInteger)newCount forTag:(Tag*)tag;
 @end

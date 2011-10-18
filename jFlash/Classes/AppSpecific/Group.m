@@ -15,12 +15,12 @@
 
 - (id) init
 {
-  [self setOwnerId:0];
-  [self setTagCount:-1];
-  [self setChildGroupCount:-1];
-  [self setGroupId:0];
-  [self setGroupName:nil];
-  [self setRecommended:0];
+  self = [super init];
+  if (self)
+  {
+    self.tagCount = -1;
+    self.childGroupCount = -1;
+  }
   return self;
 }
 
@@ -47,28 +47,23 @@
   }
 }
 
-//! Gets a number of children group objects
-- (NSInteger) getChildGroupCount
+- (void) setChildGroupCount:(NSInteger)newChildGroupCount
 {
-  int returnVal = 0;
-  if (childGroupCount >= 0)
-  {
-    returnVal = childGroupCount;
-  }
-  else
-  {
-    NSMutableArray* groups = [GroupPeer retrieveGroupsByOwner:self.groupId];
-    [self setChildGroupCount:[groups count]];
-    returnVal = [groups count];
-  }
-  return returnVal;
+  childGroupCount = newChildGroupCount;
 }
 
-//! Get number of children tags
-- (NSInteger) getChildTagCount
+//! Gets a number of children group objects
+- (NSInteger) childGroupCount
 {
-  return [self tagCount];
+  if (childGroupCount < 0)
+  {
+    NSArray *groups = [GroupPeer retrieveGroupsByOwner:self.groupId];
+    childGroupCount = [groups count];
+  }
+  return childGroupCount;
 }
+
+#pragma mark -
 
 - (void) dealloc
 {
