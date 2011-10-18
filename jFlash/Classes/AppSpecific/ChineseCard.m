@@ -142,8 +142,8 @@
     
     if (useColor)
     {
-      // First determine the color we need (default to black)
-      theColor = [UIColor darkGrayColor];
+      // First determine the color we need (default to white)
+      theColor = [UIColor whiteColor];
       for (NSString *toneNumber in colorDict)
       {
         NSRange range = [pinyinSegment rangeOfString:toneNumber];
