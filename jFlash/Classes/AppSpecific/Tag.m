@@ -57,27 +57,25 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
  */
 - (NSInteger)calculateNextCardLevelWithError:(NSError **)error
 {
-  //-----Internal array consistency-----
   LWE_ASSERT_EXC(([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
-  //------------------------------------
   
   // control variables
   // controls how many words to show from new before preferring seen words
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
   BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
   // Total number of cards in this set and its level
-  NSUInteger numLevels = 5, levelOneTotal = 0;
-  NSUInteger levelUnseenTotal = [[[self cardLevelCounts] objectAtIndex:0] intValue];
-  NSUInteger totalCardsInSet = [self cardCount];
+  NSInteger numLevels = 5, levelOneTotal = 0;
+  NSInteger levelUnseenTotal = [[self.cardLevelCounts objectAtIndex:0] intValue];
+  NSInteger totalCardsInSet = self.cardCount;
   
   //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
   //and also tell that the totalCardsInSet is no longer the whole sets but the one NOT in the buried section.
   if (hideBuriedCard)
   {
     numLevels = 4;
-    NSUInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
+    NSInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
     totalCardsInSet = totalCardsInSet - totalCardsInBurried;
     if ((totalCardsInSet < 1) && (totalCardsInBurried > 0))
     {
@@ -101,15 +99,17 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   //special cases where this method can return without any math calculation.
   //the first one if highly unlikely there is less then 1 card in a set.
   //second one is if the entire set has not been "started". - return with 0.
-  if (totalCardsInSet < 1) return 0;
-  if (levelUnseenTotal == totalCardsInSet) return 0;
+  if ((totalCardsInSet < 1) || (levelUnseenTotal == totalCardsInSet))
+  {
+    return 0;
+  }
   
   // Get m cards in n bins, figure out total percentages
   // Calculate different of weights and percentages and adjust accordingly
-  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
+  NSInteger i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
   
   // the guts to get the total of card seen so far
-  int tmpTotalArray[6];
+  NSInteger tmpTotalArray[6];
   for (i = 1; i <= numLevels; i++)
   {
     // Get denominator values from cache/database
@@ -198,13 +198,11 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 //! Create a cache of the number of Card objects in each level
 - (void) cacheCardLevelCounts
 {
-  //-----Internal array consistency-----
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be six card level arrays");
-  //------------------------------------
 
-  NSNumber *count;
+  NSNumber *count = nil;
   NSInteger totalCount = 0;
-  NSMutableArray* cardLevelCountsTmp = [[NSMutableArray alloc] init];
+  NSMutableArray *cardLevelCountsTmp = [[NSMutableArray alloc] init];
   for (NSInteger i = 0; i < 6; i++)
   {
     count = [[NSNumber alloc] initWithInt:[[self.cardIds objectAtIndex:i] count]];
@@ -212,9 +210,9 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     totalCount = totalCount + [count intValue];
     [count release];
   }
-  [self setCardLevelCounts:cardLevelCountsTmp];
+  self.cardLevelCounts = cardLevelCountsTmp;
   [cardLevelCountsTmp release];
-  [self setCardCount:totalCount];
+  self.cardCount = totalCount;
 }
 
 
@@ -454,7 +452,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
   NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel removeObject:tmpNum];
-  [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
+  [self.combinedCardIdsForBrowseMode removeObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 
@@ -467,7 +465,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
   NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel addObject:tmpNum];
-  [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
+  [self.combinedCardIdsForBrowseMode addObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 
