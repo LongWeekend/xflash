@@ -183,7 +183,7 @@
 		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
 		if (cardHTML == nil)
 		{
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceID:[sentenceID intValue]];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentenceID intValue]];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
 			NSString *headWord = @"";
 			for (Card *c in arrayOfCards)
