@@ -12,8 +12,12 @@
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
 
+#import "SettingsViewController.h"
+
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
+
+NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
 
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager;
@@ -75,7 +79,7 @@ enum Sections {
 
   // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"cardAddedToTag" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
@@ -83,7 +87,8 @@ enum Sections {
   // Get this group & subgroup data, and finally tags
   [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
   [self reloadSubgroupData];
-  [self setTagArray:[group getTags]];
+  
+  self.tagArray = [[[self.group getTags] mutableCopy] autorelease];
   
   // Activity indicator
   UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -128,11 +133,11 @@ enum Sections {
   }
 	if (searching)
   {
-    self.tagArray = [TagPeer retrieveTagListLike:self.searchBar.text];
+    self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
   }
   else
   {
-    self.tagArray = [self.group getTags];
+    self.tagArray = [[[self.group getTags] mutableCopy] autorelease];
     
     // Do something special for starred words - re-sort so starred shows up on top.
     if (self.group.groupId == 0)
@@ -183,7 +188,7 @@ enum Sections {
   [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
 
   // Tell StudyViewController to reload its data
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:self];
   
   // Stop the animator
   selectedTagId = -1;
@@ -660,11 +665,11 @@ enum Sections {
   searchOverlayBtn.frame = frame;
 	_searchOverlay.backgroundColor = [UIColor grayColor];
 	_searchOverlay.alpha = 0.5;
-	[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
+	[self.tableView insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 	
 	searching = YES;
-  [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
-  [[self tableView] setScrollEnabled:NO];
+  self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
+  self.tableView.scrollEnabled = NO;
 	
 	//Add the done button.
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doDoneSearching)] autorelease];
@@ -699,8 +704,8 @@ enum Sections {
 // TODO: MMA 6_12_2010 - does this ever get called?
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
-  [self setTagArray:[TagPeer retrieveTagListLike:self.searchBar.text]];
-  [searchBar resignFirstResponder];
+  self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
+  [self.searchBar resignFirstResponder];
 }
 
 /** 
@@ -710,9 +715,11 @@ enum Sections {
 - (void) doDoneSearching
 {
 	self.searchBar.text = @"";
-	[searchBar resignFirstResponder];
+	[self.searchBar resignFirstResponder];
 	searching = NO;
-  [[self tableView] setScrollEnabled:YES];
+  
+  self.tableView.scrollEnabled = YES;
+
   // Replace the done button w/ the add button again
 	self.navigationItem.rightBarButtonItem = _addButton;
   [self hideSearchBar];
@@ -737,10 +744,9 @@ enum Sections {
   [tagArray release];
   [subgroupArray release];
   [group release];
-//  self.tableView = nil;
-  [self setActivityIndicator:nil];
-  [self setSearchBar:nil];
-  [self setBackupManager:nil];
+  [activityIndicator release];
+  [searchBar release];
+  [backupManager release];
   [super dealloc];
 }
 
