@@ -21,8 +21,8 @@
 {
   if ((self = [super init]))
   {
-    [self setFilename:fn];
-    [self setTitle:title];
+    self.filename = fn;
+    self.title = title;
   }
   return self;
 }
@@ -31,9 +31,9 @@
 /** Calls _loadPageWithBundleFilename and re-sets title */
 - (void) loadPageWithBundleFilename:(NSString*)fn usingTitle:(NSString*) title
 {
-  [self setFilename:fn];
-  [self setTitle:title];
-  [self _loadPageWithBundleFilename:[self filename]];
+  self.filename = fn;
+  self.title = title;
+  [self _loadPageWithBundleFilename:fn];
 }
  
 
@@ -50,7 +50,7 @@
 
   [_webView shutOffBouncing];
   [self _loadPageWithBundleFilename:self.filename];
-  [[self view] addSubview:_webView];
+  [self.view addSubview:_webView];
 }
 
 

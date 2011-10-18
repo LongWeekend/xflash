@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HelpViewController : UITableViewController <UITableViewDelegate>
+@interface HelpViewController : UITableViewController
 {
-  NSArray *sectionTitles;
-  NSArray *htmlFilenames;
   NSInteger currentIndex;
 }
 
