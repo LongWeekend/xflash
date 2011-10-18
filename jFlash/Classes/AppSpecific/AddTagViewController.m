@@ -23,11 +23,16 @@ enum EntrySectionRows
 };
 
 @interface AddTagViewController ()
+- (void) _reloadTableData;
+- (void) _removeFromMembershipCache:(NSInteger)tagId;
+- (BOOL) _checkMembershipCacheForTagId:(NSInteger)tagId;
 @property (retain) NSMutableArray *membershipCacheArray;
 @end
 
 @implementation AddTagViewController
 @synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
+
+#pragma mark - Initializer
 
 /**
  * Initializer - automatically loads AddTagView XIB file
@@ -55,7 +60,7 @@ enum EntrySectionRows
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
 
     // Register listener to reload data if modal added a set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:@"setAddedToView" object:nil];
   }
   return self;
 }
@@ -79,7 +84,7 @@ enum EntrySectionRows
 #pragma mark - Instance Methods
 
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
-- (void)addStudySet
+- (IBAction) addStudySet
 {
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard groupOwnerId:0];
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
@@ -87,16 +92,6 @@ enum EntrySectionRows
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 }
-
-
-/** Recreates tag membership caches and reloads table view */
-- (void) reloadTableData
-{
-  self.myTagArray = [TagPeer retrieveMyTagList];
-  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
-  [self.studySetTable reloadData];
-}
-
 
 /**
  * If set, stops the user from changing membership for a given set.  Useful for restricting the
@@ -108,11 +103,20 @@ enum EntrySectionRows
 }
 
 
-/** Checks the membership cache to see if we are in - FYI similar methods are used by SearchViewController as well */
-- (BOOL) checkMembershipCacheForTagId: (NSInteger)tagId
+#pragma mark - Private Methods
+
+//! Recreates tag membership caches and reloads table view
+- (void) _reloadTableData
 {
-  BOOL returnVal = NO;
-  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
+  self.myTagArray = [TagPeer retrieveMyTagList];
+  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
+  [self.studySetTable reloadData];
+}
+
+/** Checks the membership cache to see if we are in - FYI similar methods are used by SearchViewController as well */
+- (BOOL) _checkMembershipCacheForTagId:(NSInteger)tagId
+{
+  if ([self.membershipCacheArray count] > 0)
   {
     for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
     {
@@ -123,20 +127,14 @@ enum EntrySectionRows
       }
     }
   }
-  else
-  {
-    // Rebuild cache and fail over to manual function
-    self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
-    returnVal = [TagPeer checkMembership:self.currentCard tagId:tagId];
-  }
-  return returnVal;
+  return NO;
 }
 
 
-/** Remove a tag from the membership cache */
-- (void) removeFromMembershipCache:(NSInteger)tagId
+//! Remove a tag from the membership cache
+- (void) _removeFromMembershipCache:(NSInteger)tagId
 {
-  // TODO: change this to fast iteration; stop mutating array in place while enumerating!
+  // Usually we don't want to mutate an array we are iterating, but in this case, we return immediately.
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
   {
     for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
@@ -248,7 +246,7 @@ enum EntrySectionRows
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      if ([self checkMembershipCacheForTagId:tmpTag.tagId])
+      if ([self _checkMembershipCacheForTagId:tmpTag.tagId])
       {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
@@ -322,7 +320,7 @@ enum EntrySectionRows
     }
 
     //this section will only be run if the cancel membership operation is successful.
-    [self removeFromMembershipCache:tmpTag.tagId];
+    [self _removeFromMembershipCache:tmpTag.tagId];
   }
   else
   {
@@ -356,15 +354,11 @@ enum EntrySectionRows
 
 #pragma mark - Class plumbing
 
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 //! Standard dealloc
 - (void)dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

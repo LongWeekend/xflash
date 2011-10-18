@@ -12,6 +12,7 @@
 
 #import "ChineseCard.h"
 
+// TODO: really?  needs a better name, probably in a better place, with a better description/comment
 #define FONT_SIZE 14
 
 @interface AddTagViewController : UIViewController
@@ -20,10 +21,7 @@
 }
 
 - (id) initWithCard:(Card*) card;
-- (void) removeFromMembershipCache:(NSInteger)tagId;
-- (BOOL) checkMembershipCacheForTagId:(NSInteger)tagId;
-- (void) reloadTableData;
-- (void) addStudySet;
+- (IBAction) addStudySet;
 - (void) restrictMembershipChangeForTagId:(NSInteger) tagId;
 
 @property (retain) IBOutlet UITableView *studySetTable;
