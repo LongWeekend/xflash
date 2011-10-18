@@ -9,25 +9,29 @@
 #import "Tag.h"
 #import "FMResultSet.h"
 
+extern NSString * const LWEActiveTagContentDidChange;
+
+extern NSString * const LWETagContentDidChange;
+extern NSString * const LWETagContentDidChangeTypeKey;
+extern NSString * const LWETagContentCardAdded;
+extern NSString * const LWETagContentCardRemoved; 
+
 extern NSString * const kTagPeerErrorDomain;
 extern NSUInteger const kRemoveLastCardOnATagError;
 
 @interface TagPeer : NSObject
-{
-}
 
-+ (int) createTag: (NSString*) tagName withOwner: (NSInteger) ownerId;
++ (NSInteger) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId;
 + (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError;
-+ (void) subscribe: (NSInteger) cardId tagId:(NSInteger) tagId;
-+ (BOOL) checkMembership: (NSInteger) cardId tagId:(NSInteger) tagId;
-+ (NSMutableArray*) membershipListForCardId: (NSInteger) cardId;
-+ (NSMutableArray*) retrieveTagListWithSQL: (NSString*) sql;
-+ (NSMutableArray*) retrieveMyTagList; // this is not actually all of the user tags
-+ (NSMutableArray*) retrieveSysTagList;
-+ (NSMutableArray*) retrieveUserTagList;
-+ (NSMutableArray*) retrieveSysTagListContainingCard:(Card*)card;
-+ (NSMutableArray*) retrieveTagListByGroupId: (NSInteger)groupId;
-+ (NSMutableArray*) retrieveTagListLike: (NSString*)string;
++ (void) subscribe:(Card*)card tagId:(NSInteger)tagId;
++ (BOOL) checkMembership:(Card*)card tagId:(NSInteger)tagId;
++ (NSArray*) membershipListForCard:(Card*)card;
++ (NSArray*) retrieveMyTagList; // this is not actually all of the user tags
++ (NSArray*) retrieveSysTagList;
++ (NSArray*) retrieveUserTagList;
++ (NSArray*) retrieveSysTagListContainingCard:(Card*)card;
++ (NSArray*) retrieveTagListByGroupId: (NSInteger)groupId;
++ (NSArray*) retrieveTagListLike: (NSString*)string;
 + (Tag*) retrieveTagById: (NSInteger) tagId;
 + (Tag*) retrieveTagByName: (NSString*) tagName;
 + (BOOL) deleteTag:(NSInteger) tagId;
