@@ -277,15 +277,16 @@
 {
 	[self setRootViewController:nil];
 	[self setWindow:nil];
-  [super dealloc];
   
   // Handle all singletons
-  CurrentState* state = [CurrentState sharedCurrentState];
+  CurrentState *state = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   ThemeManager *tm = [ThemeManager sharedThemeManager];
   [db release];
   [state release];
   [tm release];
+  
+  [super dealloc];
 }
 
 @end
