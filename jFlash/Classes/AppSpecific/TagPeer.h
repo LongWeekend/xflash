@@ -9,8 +9,6 @@
 #import "Tag.h"
 #import "FMResultSet.h"
 
-extern NSString * const LWEActiveTagContentDidChange;
-
 extern NSString * const LWETagContentDidChange;
 extern NSString * const LWETagContentDidChangeTypeKey;
 extern NSString * const LWETagContentDidChangeCardKey;
@@ -35,7 +33,7 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 + (NSArray*) retrieveTagListLike: (NSString*)string;
 + (Tag*) retrieveTagById: (NSInteger) tagId;
 + (Tag*) retrieveTagByName: (NSString*) tagName;
-+ (BOOL) deleteTag:(NSInteger) tagId;
++ (BOOL) deleteTag:(Tag*)tag;
 + (void) recacheCountsForUserTags;
 
 @end

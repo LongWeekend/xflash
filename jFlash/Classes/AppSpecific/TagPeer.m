@@ -17,8 +17,6 @@ NSString * const LWETagContentDidChangeCardKey = @"LWETagContentDidChangeCardKey
 NSString * const LWETagContentCardAdded = @"LWETagContentCardAdded";
 NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
-NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChange";
-
 @interface TagPeer ()
 + (NSArray*) _retrieveTagListWithSQL:(NSString*)sql;
 + (Tag*) _retrieveTagWithSQL:(NSString*)sql;
@@ -328,12 +326,12 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 }
 
 //! Deletes a tag and all Card links
-+ (BOOL) deleteTag:(NSInteger)tagId
++ (BOOL) deleteTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // First get owner id of a tag
-	NSString *sql4  = [NSString stringWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d",tagId];
+	NSString *sql4  = [NSString stringWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d",tag.tagId];
   FMResultSet *rs = [db executeQuery:sql4];
   NSInteger groupId = 0;
 	while ([rs next])
@@ -343,8 +341,8 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   [rs close];
   
   // Now do everything
-	NSString *sql  = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE tag_id = %d",tagId];
-  NSString *sql2 = [NSString stringWithFormat:@"DELETE FROM tags WHERE tag_id = %d",tagId];
+	NSString *sql  = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE tag_id = %d",tag.tagId];
+  NSString *sql2 = [NSString stringWithFormat:@"DELETE FROM tags WHERE tag_id = %d",tag.tagId];
   NSString *sql3 = [NSString stringWithFormat:@"UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = '%d'",groupId];
   [db.dao beginTransaction];
   [db.dao executeUpdate:sql];
