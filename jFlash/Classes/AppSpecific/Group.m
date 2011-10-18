@@ -35,14 +35,16 @@
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)
-- (NSMutableArray*) getTags
+- (NSArray*) getTags
 {
-  NSMutableArray* tags = nil;
-  if (groupId >= 0)
+  if (self.groupId >= 0)
   {
-    tags = [TagPeer retrieveTagListByGroupId:groupId];
+    return [TagPeer retrieveTagListByGroupId:groupId];
   }
-  return tags;
+  else
+  {
+    return nil;
+  }
 }
 
 //! Gets a number of children group objects
