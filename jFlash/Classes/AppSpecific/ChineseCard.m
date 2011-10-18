@@ -126,7 +126,11 @@
   NSMutableArray *components = [NSMutableArray array];
   // From Wikipedia:
   // the de facto standard has been to use red (tone 1), orange (tone 2), green (tone 3), blue (tone 4) and black (tone 5).[24]
-  NSDictionary *colorDict = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],@"1",[UIColor orangeColor],@"2",[UIColor greenColor],@"3",[UIColor blueColor],@"4",nil];
+  NSDictionary *colorDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [UIColor redColor],@"1",
+                             [UIColor orangeColor],@"2",
+                             [UIColor greenColor],@"3",
+                             [UIColor cyanColor],@"4",nil];
   
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
   for (NSString *pinyinSegment in pinyinSegments)
@@ -139,7 +143,7 @@
     if (useColor)
     {
       // First determine the color we need (default to black)
-      theColor = [UIColor blackColor];
+      theColor = [UIColor darkGrayColor];
       for (NSString *toneNumber in colorDict)
       {
         NSRange range = [pinyinSegment rangeOfString:toneNumber];
