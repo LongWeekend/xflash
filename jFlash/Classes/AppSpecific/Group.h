@@ -10,7 +10,7 @@
 @interface Group : NSObject
 
 - (void) hydrate:(FMResultSet*)rs;
-- (NSArray*) getTags;
+- (NSArray*) childTags;
 - (NSInteger) getChildTagCount;
 - (NSInteger) getChildGroupCount;
 

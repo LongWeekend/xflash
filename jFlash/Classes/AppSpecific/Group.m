@@ -35,7 +35,7 @@
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)
-- (NSArray*) getTags
+- (NSArray*) childTags
 {
   if (self.groupId >= 0)
   {
