@@ -49,7 +49,7 @@
 #endif
     
     rs = [db executeQuery:sql];
-    int cardListCount = 0;
+    NSInteger cardListCount = 0;
     while ([rs next])
     {
       cardListCount++;
