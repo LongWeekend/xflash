@@ -608,7 +608,7 @@ const NSInteger KSegmentedTableHeader = 100;
     else
     {
       NSError *error = nil;
-      BOOL result = [TagPeer cancelMembership:theCard.cardId tagId:FAVORITES_TAG_ID error:&error];
+      BOOL result = [TagPeer cancelMembership:theCard tagId:FAVORITES_TAG_ID error:&error];
       if (!result)
       {
         if ([error code] == kRemoveLastCardOnATagError)

@@ -18,7 +18,6 @@ enum settingsRows
   settingsRowsLength
 };
 
-
 enum wordsSections
 {
   kWordSetOptionsSection = 0,
@@ -27,15 +26,8 @@ enum wordsSections
 };
 
 @interface StudySetWordsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
-{
-	Tag* tag;
-	NSMutableArray* cards;
-  UIActivityIndicatorView *activityIndicator;
-}
 
-
-- (id) initWithTag:(Tag*) initTag;
-
+- (id) initWithTag:(Tag*)initTag;
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) Tag *tag;

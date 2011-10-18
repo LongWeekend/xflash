@@ -63,7 +63,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  *          and automatically remove that card from the active set card cache.
  *          Note that this method DOES update the tag count cache on the tags table.
  */
-+ (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError
++ (BOOL)cancelMembership:(Card*)card tagId:(NSInteger)tagId error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   CurrentState *currentState = [CurrentState sharedCurrentState];
@@ -104,14 +104,13 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   }
 
   // Now execute the deletion from card_tag_link
-	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",cardId,tagId];
+	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tagId];
   [db executeUpdate:sql];
 
   if (editingActiveSet)
   {
     //TODO: We dont have any report back whether this operation will be sucessful.
     //for now, it is assumable that this method will always sucess.
-    Card *card = [CardPeer retrieveCardByPK:cardId];
     [currentState.activeTag removeCardFromActiveSet:card];
   }
   else
@@ -137,7 +136,6 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   
   // Finally, send a system-wide notification that this changed.  Any view controllers or model objects
   // that are interested can respond.
-  Card *card = [CardPeer retrieveCardByPK:cardId];
   NSDictionary *userInfo = [NSDictionary dictionaryWithObject:LWETagContentCardRemoved forKey:LWETagContentDidChangeTypeKey];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange object:card userInfo:userInfo];
   
@@ -264,8 +262,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 //! Gets system Tag objects that have card in them - as array
 + (NSArray*) retrieveSysTagListContainingCard:(Card*)card
 {
-  NSInteger cardId = card.cardId;
-	NSString *sql = [NSString stringWithFormat:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = %d AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",cardId];
+	NSString *sql = [NSString stringWithFormat:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = %d AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",card.cardId];
   return [TagPeer _retrieveTagListWithSQL:sql];
 }
 

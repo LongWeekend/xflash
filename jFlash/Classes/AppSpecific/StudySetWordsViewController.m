@@ -46,6 +46,8 @@
 
 - (void)viewDidLoad
 {
+  [super viewDidLoad];
+
   //TODO: If this is a current set list, register to a notification.
   Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
   if (currentTag.tagId == self.tag.tagId)
@@ -53,7 +55,6 @@
     //Only register the notification if this StudySetWordsViewController is editing the active set.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_activeTagContentDidChange:) name:LWEActiveTagContentDidChange object:nil];
   }
-  [super viewDidLoad];
 }
 
 - (void)_activeTagContentDidChange:(NSNotification *)notification
@@ -105,8 +106,8 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     NSError *error = nil;
-    Card *card = [[cards objectAtIndex:indexPath.row] retain];
-    BOOL result = [TagPeer cancelMembership:card.cardId tagId:tag.tagId error:&error];
+    Card *card = [[self.cards objectAtIndex:indexPath.row] retain];
+    BOOL result = [TagPeer cancelMembership:card tagId:tag.tagId error:&error];
     if (!result)
     {
       if ([error code] == kRemoveLastCardOnATagError)
@@ -122,7 +123,7 @@
       return;
     }
     
-    [cards removeObjectAtIndex:indexPath.row];
+    [self.cards removeObjectAtIndex:indexPath.row];
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
     
     // If the current study sets content

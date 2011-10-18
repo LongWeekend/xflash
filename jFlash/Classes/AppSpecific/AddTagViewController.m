@@ -305,7 +305,7 @@ enum EntrySectionRows
   {
     // Remove tag
     NSError *error = nil;
-    BOOL result = [TagPeer cancelMembership:cardId tagId:tmpTag.tagId error:&error];
+    BOOL result = [TagPeer cancelMembership:self.currentCard tagId:tmpTag.tagId error:&error];
     if (!result)
     {
       //something wrong, check whether it is the last card.

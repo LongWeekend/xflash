@@ -22,7 +22,7 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 @interface TagPeer : NSObject
 
 + (NSInteger) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId;
-+ (BOOL)cancelMembership:(NSInteger)cardId tagId:(NSInteger)tagId error:(NSError **)theError;
++ (BOOL)cancelMembership:(Card*)card tagId:(NSInteger)tagId error:(NSError **)theError;
 + (void) subscribe:(Card*)card tagId:(NSInteger)tagId;
 + (BOOL) checkMembership:(Card*)card tagId:(NSInteger)tagId;
 + (NSArray*) membershipListForCard:(Card*)card;
