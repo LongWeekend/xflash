@@ -50,8 +50,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   return groupId;
 }
 
-#pragma mark -
-#pragma mark Level algorithm
+#pragma mark - Level algorithm
 
 /**
  * Calculates next card level based on current performance & Tag progress
@@ -453,7 +452,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (void) removeCardFromActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel removeObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
   [self cacheCardLevelCounts];
@@ -466,7 +465,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (void) addCardToActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel addObject:tmpNum];
   [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
   [self cacheCardLevelCounts];
