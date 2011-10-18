@@ -13,6 +13,7 @@
 // Call this with a tone button; the tag # should identify which tone
 - (IBAction) toneButtonPressed:(id)sender;
 
-@property (readwrite, retain) IBOutlet UIView *inputAccessoryView;
+@property (nonatomic, readwrite, retain) IBOutlet UIView *inputAccessoryView;
+@property (nonatomic, retain) IBOutlet UIView *accessoryKeysBackgroundView;
 
 @end

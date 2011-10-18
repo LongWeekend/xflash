@@ -65,7 +65,7 @@ const NSInteger KSegmentedTableHeader = 100;
   // TODO: iPad customization!
 #if defined(LWE_CFLASH)
   // For Chinese Flash, add a custom accessory input to the search keyboard
-  UISearchBar *tmpSearchBar = [[LWEChineseSearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+  LWEChineseSearchBar *tmpSearchBar = [[LWEChineseSearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
 #else
   UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
 #endif

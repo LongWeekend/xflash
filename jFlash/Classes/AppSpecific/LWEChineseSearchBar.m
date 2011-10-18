@@ -10,7 +10,7 @@
 
 @implementation LWEChineseSearchBar
 
-@synthesize inputAccessoryView;
+@synthesize inputAccessoryView, accessoryKeysBackgroundView;
 
 #pragma mark - Class Setup & Teardown
 
@@ -27,6 +27,7 @@
 
 - (void) dealloc
 {
+  [accessoryKeysBackgroundView release];
   [inputAccessoryView release];
   [super dealloc];
 }
@@ -37,7 +38,7 @@
 {
   // Get the tone from the button's tag!
   NSInteger whichTone = [(UIView*)sender tag];
-  self.text = [self.text stringByAppendingFormat:@"%d",whichTone];
+  self.text = [self.text stringByAppendingFormat:@"%d ",whichTone];
 }
 
 @end
