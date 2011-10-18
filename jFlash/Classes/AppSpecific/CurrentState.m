@@ -27,11 +27,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 /**
  * Sets the current active study set/tag - also loads cardIds for the tag
  */
-- (void) setActiveTag: (Tag*) tag
+- (void) setActiveTag:(Tag*)tag
 {
-  [tag retain];
-  [_activeTag release];
-  _activeTag = tag;
+  @synchronized (self)
+  {
+    [_activeTag release];
+    _activeTag = [tag retain];
+  }
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:tag.tagId forKey:@"tag_id"];
@@ -55,9 +57,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [_activeTag setCurrentIndex:currentIndex];
   }
   
-  id tag;
-  tag = [[_activeTag retain] autorelease];
-  return tag;
+  return [[_activeTag retain] autorelease];
 }
 
 
@@ -69,8 +69,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [self setActiveTag:[self activeTag]];
 }
 
-#pragma mark -
-#pragma mark Initialization
+
+#pragma mark - Initialization
 
 
 /**
@@ -95,16 +95,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];
-    [self setIsFirstLoad:YES];
+    self.isFirstLoad = YES;
   }
   else
   {
-    [self setIsFirstLoad:NO];
+    self.isFirstLoad = NO;
   }
   
   // STEP 5
   // We initialize the plugins manager
-  [self setPluginMgr:[[[PluginManager alloc] init] autorelease]];  
+  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
 }
 
 
