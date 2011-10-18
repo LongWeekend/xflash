@@ -11,7 +11,7 @@
 + (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId;
 
 + (NSArray*) retrieveCardSetForSentenceId:(NSInteger)sentenceId;
-+ (NSArray*) retrieveCardSetForExampleSentenceID:(NSInteger)sentenceID;
++ (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceID;
 
 //! Search methods
 + (NSArray*) searchCardsForKeyword:(NSString*) keyword doSlowSearch:(BOOL)slowSearch;

@@ -239,7 +239,7 @@
  * The difference with the method above is the query performed.
  * This should be faster since it only asks for the data required. 
  */
-+ (NSArray*) retrieveCardSetForExampleSentenceID:(NSInteger)sentenceId
++ (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceId
 {	
 	NSString *sql = nil;
   if ([ExampleSentencePeer isNewVersion])
