@@ -4,8 +4,8 @@
 #import "ExampleSentencePeer.h"
 
 @interface CardPeer ()
-+ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
-+ (Card*) _retrieveCardWithSQL:(NSString*)sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard;
++ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate;
++ (Card*) _retrieveCardWithSQL:(NSString*)sql;
 @end
 
 @implementation CardPeer
@@ -126,7 +126,7 @@
              "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
       "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
       "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
-  Card *tmpCard = [CardPeer _retrieveCardWithSQL:sql hydrate:YES isBasicCard:NO];
+  Card *tmpCard = [CardPeer _retrieveCardWithSQL:sql];
   [sql release];
   return tmpCard;
 }
@@ -136,7 +136,7 @@
 /**
  * Returns single card from SQL result - assumes 1 record, if multiple, will take last record
  */ 
-+ (Card*) _retrieveCardWithSQL:(NSString*)sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
++ (Card*) _retrieveCardWithSQL:(NSString*)sql
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [db executeQuery:sql];
@@ -144,11 +144,7 @@
   while ([rs next])
   {
     tmpCard = [CardPeer blankCard];
-    tmpCard.isBasicCard = basicCard;
-    if (hydrate)
-    {
-      [tmpCard hydrate:rs];
-    }
+    [tmpCard hydrate:rs];
   }
   [rs close];
   return tmpCard;
@@ -157,7 +153,7 @@
 /**
  * Returns an array of Card objects based on SQL result
  */
-+ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate isBasicCard:(BOOL)basicCard
++ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
 {
 	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 	FMResultSet *rs = [db executeQuery:sql];
@@ -167,7 +163,6 @@
 	{
 		// Full card?
     tmpCard = [CardPeer blankCard];
-    tmpCard.isBasicCard = basicCard;
 		if (hydrate)
 		{
 			[tmpCard hydrate:rs];
@@ -216,28 +211,12 @@
 + (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId
 {
   return [CardPeer _retrieveCardSetWithSQL:[NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId]
-                                   hydrate:NO
-                               isBasicCard:NO];
+                                   hydrate:NO];
 }
 
 /**
  * Returns an array containng cardId integers that are linked to the sentence
  * \param sentenceId Primary key of the sentence to look up cards for
- */
-+ (NSArray*) retrieveCardSetForSentenceId:(NSInteger)sentenceId
-{
-	//TODO: This is probably too slow
-  return [CardPeer _retrieveCardSetWithSQL:[NSString stringWithFormat:@"SELECT c.*, h.* FROM card_sentence_link l, cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = l.card_id AND l.sentence_id = '%d'", sentenceId]
-                                  hydrate:YES
-                              isBasicCard:YES];
-}
-
-/**
- * Returns an array containng cardId integers that are linked to the sentence
- * \param sentenceId Primary key of the sentence to look up cards for
- *
- * The difference with the method above is the query performed.
- * This should be faster since it only asks for the data required. 
  */
 + (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceId
 {	
@@ -257,7 +236,6 @@
 	while ([rs next])
 	{
 		Card *tmpCard = [CardPeer blankCard];
-    tmpCard.isBasicCard = YES;
 		[tmpCard hydrate:rs simple:YES];
 		[cardList addObject:tmpCard];
 	}

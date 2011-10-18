@@ -2,7 +2,7 @@
 
 @implementation Card 
 
-@synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount, isBasicCard;
+@synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount;
 
 /** Returns the meaning field w/o any HTML markup */
 - (NSString*) meaningWithoutMarkup
@@ -77,14 +77,10 @@
 		self._meaning  = [rs stringForColumn:@"meaning"];
 	}
 		
-	// Get additional stuff if we're going to have it
-	if (self.isBasicCard == NO)
-	{
-		self.levelId  =    [rs intForColumn:@"card_level"];
-		self.userId   =    [rs intForColumn:@"user_id"];
-		self.rightCount =  [rs intForColumn:@"right_count"];
-		self.wrongCount =  [rs intForColumn:@"wrong_count"];
-	}
+  self.levelId  =    [rs intForColumn:@"card_level"];
+  self.userId   =    [rs intForColumn:@"user_id"];
+  self.rightCount =  [rs intForColumn:@"right_count"];
+  self.wrongCount =  [rs intForColumn:@"wrong_count"];
 }
 
 - (BOOL)isEqual:(id)object

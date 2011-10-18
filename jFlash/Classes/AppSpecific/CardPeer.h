@@ -10,7 +10,7 @@
 + (NSArray*) retrieveCardIdsSortedByLevel:(NSInteger)tagId;
 + (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId;
 
-+ (NSArray*) retrieveCardSetForSentenceId:(NSInteger)sentenceId;
+//! Example sentences
 + (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceID;
 
 //! Search methods

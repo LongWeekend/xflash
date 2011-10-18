@@ -22,7 +22,6 @@
 - (NSString*) meaningWithoutMarkup;
 - (BOOL) hasExampleSentences;
 
-@property (nonatomic) BOOL isBasicCard;
 //! PK of the card
 @property (nonatomic) NSInteger cardId;
 

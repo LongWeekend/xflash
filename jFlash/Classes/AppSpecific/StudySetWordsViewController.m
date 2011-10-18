@@ -186,7 +186,7 @@
       Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
       if ([tmpCard headword] == nil)
       {
-        tmpCard = [CardPeer hydrateCardByPK:tmpCard];
+        tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
         [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];

@@ -27,7 +27,7 @@
   {
     [self setSentence:initSentence];
     [self setTitle:NSLocalizedString(@"Example Sentence",@"DisplaySearchedSentenceViewController.NavBarTitle")];
-    [self setCards:[CardPeer retrieveCardSetForSentenceId:[initSentence sentenceId]]];
+    [self setCards:[CardPeer retrieveCardSetForExampleSentenceId:[initSentence sentenceId]]];
   }
   return self;
 }
