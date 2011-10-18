@@ -17,6 +17,7 @@
 
 + (BOOL) isNewVersion
 {
+#if defined (LWE_JFLASH)
   // Get plugin version
   BOOL isNewVersion = NO;
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
@@ -25,6 +26,9 @@
     isNewVersion = YES;
   }
   return isNewVersion;
+#else
+  return YES;
+#endif
 }
 
 
