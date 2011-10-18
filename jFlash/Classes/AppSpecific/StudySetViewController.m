@@ -115,7 +115,7 @@ enum Sections {
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:group.groupId];
   for (int i = 0; i < [self.subgroupArray count]; i++)
   {
-    [[self.subgroupArray objectAtIndex:i] getChildGroupCount];
+    [[self.subgroupArray objectAtIndex:i] childGroupCount];
   }
 }
 
@@ -181,11 +181,11 @@ enum Sections {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
   
-  // Post notification to switch active tab
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
-
   // Tell StudyViewController to reload its data
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:self];
+
+  // Post notification to switch active tab
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
   
   // Stop the animator
   selectedTagId = -1;
@@ -197,13 +197,13 @@ enum Sections {
 - (void) addStudySet
 {
   // TODO: iPad customization?
-  AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
-  addStudySetInputViewController.ownerId = self.groupId;
-  addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
+  tmpVC.ownerId = self.groupId;
+  tmpVC.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
+  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
-	[addStudySetInputViewController release];
+	[tmpVC release];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
@@ -211,11 +211,10 @@ enum Sections {
   [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UITableView methods
+#pragma mark - UITableView methods
 
 /** Goes into editing mode **/
-- (void)setEditing:(BOOL) editing animated:(BOOL)animated
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
 	[super setEditing:editing animated:animated];
 	[self.tableView setEditing:editing animated:YES];
@@ -233,7 +232,7 @@ enum Sections {
     // Delete the row from the data source
     Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
     [TagPeer deleteTag:tmpTag];
-    [tagArray removeObjectAtIndex:indexPath.row];
+    [self.tagArray removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     [self reloadSubgroupData];
   }
@@ -410,10 +409,10 @@ enum Sections {
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     NSString* tmpDetailText = [NSString stringWithFormat:@""];
-    if ([tmpGroup getChildGroupCount] > 0)
+    if ([tmpGroup childGroupCount] > 0)
     {
       //Prefix the line below with code if we have groups
-      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup getChildGroupCount]]; 
+      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup childGroupCount]]; 
     }
     tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
 

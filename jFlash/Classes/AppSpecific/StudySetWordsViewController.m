@@ -122,7 +122,7 @@
 - (void) _loadWordListInBackground
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
+  self.cards = [[[CardPeer retrieveCardIdsForTagId:tag.tagId] mutableCopy] autorelease];
   [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
