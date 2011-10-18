@@ -39,7 +39,7 @@ typedef enum searchStates
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
   LWEFlashSearchStates _searchState;              //! Holds the "state" of the search
   BOOL _showSearchTargetControl;                  //! If NO, the "pill" control will not be shown
-  NSMutableArray *_currentResultArray;            //! Holds the current results (switched when the user switches the pill control)
+  NSArray *_currentResultArray;                   //! Holds the current results (switched when the user switches the pill control)
 }
 
 - (IBAction) changeSearchTarget:(id)sender;
@@ -51,10 +51,10 @@ typedef enum searchStates
 @property (nonatomic, retain) NSMutableArray *membershipCacheArray;
 
 //! Contains the returned search results (array of Card objects)
-@property (nonatomic, retain) NSMutableArray *_cardSearchArray;
+@property (nonatomic, retain) NSArray *_cardSearchArray;
 
 //! Contains the returned search results (array of ExampleSentence objects)
-@property (nonatomic, retain) NSMutableArray *_sentenceSearchArray;
+@property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
 
 // UIView-related properties

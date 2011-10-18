@@ -259,7 +259,7 @@ const NSInteger KSegmentedTableHeader = 100;
     runSlowSearch = YES;
   }
   
-  NSMutableArray *tmpResults = nil;
+  NSArray *tmpResults = nil;
   if (_searchTarget == SEARCH_TARGET_WORDS)
   {
     tmpResults = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
@@ -470,7 +470,7 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     // Rebuild cache and fail over to manual function
     Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-    self.membershipCacheArray = [CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID];
+    self.membershipCacheArray = [[[CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID] mutableCopy] autorelease];
     returnVal = [TagPeer card:theCard isMemberOfTag:favoritesTag];
   }
   return returnVal;
