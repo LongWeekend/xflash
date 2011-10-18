@@ -50,8 +50,9 @@ extern NSString * const LWEPluginTargetPathKey;
 - (void)_sendUpdateBadgeNotification:(NSNumber *)badgeNumber;
 - (void)_initAvailableForDownloadPluginsList;
 - (void)_initDownloadedPluginsList;
-- (void)_checkPluginVersionAgainstDownloadedPlist: (NSMutableDictionary *) awaitsUpdatePlugins plugins: (NSArray *) plugins;
+- (void)_checkPluginVersionAgainstDownloadedPlist:(NSMutableDictionary *)awaitsUpdatePlugins plugins: (NSArray *) plugins;
 - (void)_retrievePlistFromServer;
+- (NSString *)_pathToDownloadedPluginForFilename:(NSString *)filename;
 
 // Used to fix the plugin paths after a restore/transfer to a different device
 - (void) _updatePluginPaths:(BOOL) debug pluginList:(NSString*)plistFileName;

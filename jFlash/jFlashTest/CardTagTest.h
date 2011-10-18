@@ -22,5 +22,7 @@
   Tag *tag_;
 }
 
+- (void)testCalculateNextCardLevelWithError;
+- (void) testUpdateLevelCounts;
 - (void)testAddThenRemoveCardsFromStudySet;
 @end
