@@ -56,20 +56,16 @@
   return NO;
 }
 
-/** Takes a sqlite result set and populates the properties of card WITHOUT the maning of the card */
-- (void) simpleHydrate: (FMResultSet*) rs
-{
-	[self hydrate:rs simple:YES];
-}
-
 /** Takes a sqlite result set and populates the properties of card icluding the maning of the card */
-- (void) hydrate: (FMResultSet*) rs
+- (void) hydrate:(FMResultSet*)rs
 {
 	[self hydrate:rs simple:NO];
 }
 
-
-/** Takes a sqlite result set and populates the properties of card. Gives the freedom of not including the meaning */
+/**
+ * Takes a sqlite result set and populates the properties of card. 
+ * Gives the freedom of not including the meaning
+ */
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
 {
 	self.cardId      = [rs intForColumn:@"card_id"];

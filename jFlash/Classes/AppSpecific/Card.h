@@ -11,9 +11,8 @@
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @interface Card : NSObject
 
-- (void) simpleHydrate: (FMResultSet*) rs;
-- (void) hydrate: (FMResultSet*) rs;
-- (void) hydrate: (FMResultSet*) rs simple:(BOOL)includeMeaning;
+- (void) hydrate:(FMResultSet*)rs;
+- (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 
 - (NSString*) reading;
 - (NSString*) headword;
