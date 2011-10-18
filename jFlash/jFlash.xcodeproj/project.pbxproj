@@ -267,6 +267,8 @@
 		49B528311276C97500EE64D3 /* practice-btn-showreading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */; };
 		49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
 		49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
+		49BBA49A144D4BBF00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA499144D4BBF00E6A9AE /* help */; };
+		49BBA49C144D4BCE00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA49B144D4BCE00E6A9AE /* help */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C521DF144D2462002011BD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
@@ -803,6 +805,8 @@
 		49B527B4127680D500EE64D3 /* 90-lifebuoy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "90-lifebuoy@2x.png"; path = "Assets/90-lifebuoy@2x.png"; sourceTree = "<group>"; };
 		49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-showreading@2x.png"; path = "Assets/practice-btn-showreading@2x.png"; sourceTree = "<group>"; };
 		49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft@2x.png"; path = "Assets/talkbubble-ft@2x.png"; sourceTree = "<group>"; };
+		49BBA499144D4BBF00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/JFlash/help; sourceTree = "<group>"; };
+		49BBA49B144D4BCE00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/CFlash/help; sourceTree = "<group>"; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -914,7 +918,6 @@
 		911D195E137A56C8005C9B55 /* TapjoyConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnect.h; sourceTree = "<group>"; };
 		911D195F137A56C8005C9B55 /* TapjoyConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapjoyConnect.m; sourceTree = "<group>"; };
 		911D1960137A56C8005C9B55 /* TapjoyConnectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapjoyConnectConstants.h; sourceTree = "<group>"; };
-		911E527613FB180F00D55363 /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/help; sourceTree = "<group>"; };
 		91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowseModeCardViewDelegate.h; path = AppSpecific/BrowseModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
@@ -1472,6 +1475,7 @@
 		496C7BFE12633543004B6B90 /* Chinese Flash Assets */ = {
 			isa = PBXGroup;
 			children = (
+				49BBA49B144D4BCE00E6A9AE /* help */,
 			);
 			name = "Chinese Flash Assets";
 			sourceTree = "<group>";
@@ -1574,16 +1578,17 @@
 			name = Twitter;
 			sourceTree = "<group>";
 		};
-		49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */ = {
+		49D996C612705C9B00D176D0 /* Japanese Flash Assets */ = {
 			isa = PBXGroup;
 			children = (
+				49BBA499144D4BBF00E6A9AE /* help */,
 				91C05A3813F468D500061229 /* Default.jpg */,
 				9129D4F411550A2A0036C4D3 /* iTunesArtwork */,
 				490B23561277BF4600CF3484 /* Icon.png */,
 				49D996C012705C8300D176D0 /* Icon@2x.png */,
 				490B23581277C05100CF3484 /* Icon-72.png */,
 			);
-			name = "Japanese Flash Base Assets";
+			name = "Japanese Flash Assets";
 			sourceTree = "<group>";
 		};
 		49D996D612705D5000D176D0 /* Common */ = {
@@ -1841,12 +1846,11 @@
 			children = (
 				49DADB7E1277F36F00B8FD72 /* Default.png */,
 				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
-				49D996C612705C9B00D176D0 /* Japanese Flash Base Assets */,
+				49D996C612705C9B00D176D0 /* Japanese Flash Assets */,
 				496C7BFE12633543004B6B90 /* Chinese Flash Assets */,
 				49B4ABEF11C1DCDB00CFC308 /* glass-buttons */,
 				4965FD39126F6422000AC280 /* Action Bar */,
 				49D996D612705D5000D176D0 /* Common */,
-				911E527613FB180F00D55363 /* help */,
 				D322367A11D370B900B1AF15 /* plugin-resources */,
 				4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */,
 				4965FD83126F7002000AC280 /* redtheme-cookie-cutters */,
@@ -2543,6 +2547,7 @@
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 				91C05A3913F468D500061229 /* Default.jpg in Resources */,
 				4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
+				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2709,6 +2714,7 @@
 				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
 				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
 				4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
+				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
