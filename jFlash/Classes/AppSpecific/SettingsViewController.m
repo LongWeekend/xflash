@@ -25,7 +25,7 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 // Notification
 NSString * const LWECardSettingsChanged = @"LWECardSettingsChanged";
-NSString * const LWESettingsChanged = @"LWESettingsChanged";
+NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
@@ -46,7 +46,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
 
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWEUserSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
 }
 
@@ -103,12 +103,13 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     shouldSendCardChangeNotification = [self.delegate shouldSendCardChangeNotification];
   }
   
+  // Note that this is an else-if because a "settings changed" will re-run everything, so there is no
+  // reason to call both if you're calling the first.
   if (shouldSendChangeNotification)
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWESettingsChanged object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   }
-  
-  if (shouldSendCardChangeNotification)
+  else if (shouldSendCardChangeNotification)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:LWECardSettingsChanged object:self];
   }

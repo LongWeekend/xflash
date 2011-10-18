@@ -28,6 +28,7 @@
   // we don't want the current card to change for just a headword switch, theme or reading change
   if ([key isEqualToString:APP_HEADWORD] ||
       [key isEqualToString:APP_THEME] ||
+      [key isEqualToString:APP_DIFFICULTY] ||
       [key isEqualToString:APP_READING])
   {
     self.resetCardOnly = YES; 

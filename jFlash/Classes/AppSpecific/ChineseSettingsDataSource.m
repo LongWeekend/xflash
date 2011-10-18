@@ -27,6 +27,7 @@
   // These keys don't warrant a full tag reset, just a card reset -- for any other, this will stay NO
   if ([key isEqualToString:APP_HEADWORD] ||           // Chn<->Eng
       [key isEqualToString:APP_HEADWORD_TYPE] ||      // Trad<->Simp
+      [key isEqualToString:APP_DIFFICULTY] ||
       [key isEqualToString:APP_THEME] ||
       [key isEqualToString:APP_PINYIN_COLOR]) 
   {

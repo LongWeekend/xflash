@@ -16,7 +16,7 @@ extern NSString * const APP_TWITTER;
 extern NSString * const APP_FACEBOOK;
 extern NSString * const APP_NEW_UPDATE;
 extern NSString * const LWECardSettingsChanged;
-extern NSString * const LWESettingsChanged;
+extern NSString * const LWEUserSettingsChanged;
 
 @protocol LWESettingsDataSource <NSObject>
 - (NSArray*) settingsArray;

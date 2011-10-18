@@ -9,6 +9,7 @@
 #import "UserViewController.h"
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
+#import "SettingsViewController.h"
 #import "UserPeer.h"
 
 /**
@@ -195,7 +196,7 @@
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
 
     // Redraw table if needed
-    [[self tableView] reloadData];
+    [lclTableView reloadData];
   }
 }
 
@@ -207,7 +208,7 @@
   // First, show the loading modal, then call selector after delay to allow it to appear
   self.loadingView = [LWELoadingView loadingView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
-  // Now do it
+  // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
 }
 
@@ -221,7 +222,7 @@
 {
   // Activate, post notification and dismiss view
   [user activateUser];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"userWasChanged" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   [self.loadingView removeFromSuperview];
   [self.navigationController popViewControllerAnimated:YES];
 }
