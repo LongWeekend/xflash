@@ -66,29 +66,25 @@ enum Sections {
   tmpSearchBar.delegate = self;
   tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  [self setSearchBar:tmpSearchBar];
+  self.searchBar = tmpSearchBar;
+  self.tableView.tableHeaderView = tmpSearchBar;
   [tmpSearchBar release];
-  [self.tableView setTableHeaderView:self.searchBar];
   
   // Add add button to nav bar
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  // Set this to the master set (main) if no set
-  if (self.groupId <= 0) self.groupId = 0;
-
   // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"cardAddedToTag" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
   
   // Get this group & subgroup data, and finally tags
-  [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
+  self.group = [GroupPeer retrieveGroupById:self.groupId];
   [self reloadSubgroupData];
   
-  self.tagArray = [[[self.group getTags] mutableCopy] autorelease];
+  self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
   
   // Activity indicator
   UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -125,6 +121,7 @@ enum Sections {
 
 - (void) reloadTableData
 {
+  LWE_ASSERT_EXC(self.tableView,@"This exception is set here to prove that that code below is bullshit - 2011.10.18 MMA");
   if (self.tableView == nil)
   {
     // MMA - 13.10.2010 - does this ever happen??!  really?
@@ -137,7 +134,7 @@ enum Sections {
   }
   else
   {
-    self.tagArray = [[[self.group getTags] mutableCopy] autorelease];
+    self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
     
     // Do something special for starred words - re-sort so starred shows up on top.
     if (self.group.groupId == 0)
@@ -166,13 +163,13 @@ enum Sections {
  */
 - (void) hideSearchBar
 {
-  [self.tableView setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
+  self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
 /** Convenience method to change set using notification from another place */
-- (void) changeStudySetFromWordList:(NSNotification*)dict
+- (void) changeStudySetFromWordList:(NSNotification*)notification
 {
-  [self changeStudySet:[[dict userInfo] objectForKey:@"tag"]];
+  [self changeStudySet:[notification.userInfo objectForKey:@"tag"]];
 }
 
 /**
@@ -234,11 +231,11 @@ enum Sections {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Delete the row from the data source
-    Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
-    [TagPeer deleteTag:tmpTag.tagId];
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+    [TagPeer deleteTag:tmpTag];
     [tagArray removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
+    [self reloadSubgroupData];
   }
 }
 
@@ -502,7 +499,7 @@ enum Sections {
 
     // If they selected a group
     StudySetViewController *subgroupController = [[StudySetViewController alloc] init];
-    subgroupController.groupId = [[[self subgroupArray] objectAtIndex:indexPath.row] groupId];
+    subgroupController.groupId = [[self.subgroupArray objectAtIndex:indexPath.row] groupId];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [subgroupController release];
   }
