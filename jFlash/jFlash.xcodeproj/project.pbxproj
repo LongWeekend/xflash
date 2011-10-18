@@ -143,7 +143,6 @@
 		496C7AD11263270B004B6B90 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		496C7AD31263270B004B6B90 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
 		496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
-		496C7AD612632725004B6B90 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		496C7AD712632729004B6B90 /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */; };
 		496C7AD812632730004B6B90 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496C7AD912632730004B6B90 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
@@ -239,7 +238,6 @@
 		496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
-		497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
@@ -1020,8 +1018,6 @@
 		917A5C2411AB814B00016BD2 /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PDColoredProgressView.m; path = Reusable/PDColoredProgressView/PDColoredProgressView.m; sourceTree = "<group>"; };
 		917A5C3711AB826000016BD2 /* CustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.h; sourceTree = "<group>"; };
 		917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/CustomCellBackgroundView.m; sourceTree = "<group>"; };
-		917A5C3911AB826000016BD2 /* GradientCustomCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientCustomCellBackgroundView.h; path = Reusable/CustomCellBackgroundView/GradientCustomCellBackgroundView.h; sourceTree = "<group>"; };
-		917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientCustomCellBackgroundView.m; path = Reusable/CustomCellBackgroundView/GradientCustomCellBackgroundView.m; sourceTree = "<group>"; };
 		917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressDetailsViewController.h; path = AppSpecific/ProgressDetailsViewController.h; sourceTree = "<group>"; };
 		917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressDetailsViewController.m; path = AppSpecific/ProgressDetailsViewController.m; sourceTree = "<group>"; };
 		917A5C5D11AB839300016BD2 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -2181,8 +2177,6 @@
 			children = (
 				917A5C3711AB826000016BD2 /* CustomCellBackgroundView.h */,
 				917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */,
-				917A5C3911AB826000016BD2 /* GradientCustomCellBackgroundView.h */,
-				917A5C3A11AB826000016BD2 /* GradientCustomCellBackgroundView.m */,
 			);
 			name = CustomCellBackgroundView;
 			sourceTree = "<group>";
@@ -2786,7 +2780,6 @@
 				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
 				497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */,
-				497CAF2111B90E3400558846 /* GradientCustomCellBackgroundView.m in Sources */,
 				91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */,
 				91CBA6BF11BB6AC0004BD0D0 /* ExampleSentence.m in Sources */,
 				91CBA6EA11BB787A004BD0D0 /* ExampleSentencePeer.m in Sources */,
@@ -2909,7 +2902,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */,
-				496C7AD612632725004B6B90 /* GradientCustomCellBackgroundView.m in Sources */,
 				496C7AD712632729004B6B90 /* PDColoredProgressView.m in Sources */,
 				496C7AF31263273C004B6B90 /* MoodIcon.m in Sources */,
 				496C7AF41263273D004B6B90 /* CurrentState.m in Sources */,
