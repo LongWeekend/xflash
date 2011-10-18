@@ -269,6 +269,24 @@
 		49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
 		49BBA49A144D4BBF00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA499144D4BBF00E6A9AE /* help */; };
 		49BBA49C144D4BCE00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA49B144D4BCE00E6A9AE /* help */; };
+		49BBA4AF144D571300E6A9AE /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA49E144D570B00E6A9AE /* JRActivityObject.m */; };
+		49BBA4B0144D571300E6A9AE /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA49E144D570B00E6A9AE /* JRActivityObject.m */; };
+		49BBA4B1144D571300E6A9AE /* JRConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A0144D570C00E6A9AE /* JRConnectionManager.m */; };
+		49BBA4B2144D571300E6A9AE /* JRConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A0144D570C00E6A9AE /* JRConnectionManager.m */; };
+		49BBA4B3144D571300E6A9AE /* JREngage+CustomInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A2144D570D00E6A9AE /* JREngage+CustomInterface.m */; };
+		49BBA4B4144D571300E6A9AE /* JREngage+CustomInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A2144D570D00E6A9AE /* JREngage+CustomInterface.m */; };
+		49BBA4B5144D571300E6A9AE /* JRInfoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A4144D570E00E6A9AE /* JRInfoBar.m */; };
+		49BBA4B6144D571300E6A9AE /* JRInfoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A4144D570E00E6A9AE /* JRInfoBar.m */; };
+		49BBA4B7144D571300E6A9AE /* JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A6144D570F00E6A9AE /* JRProvidersController.m */; };
+		49BBA4B8144D571300E6A9AE /* JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A6144D570F00E6A9AE /* JRProvidersController.m */; };
+		49BBA4B9144D571300E6A9AE /* JRSessionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A8144D571000E6A9AE /* JRSessionData.m */; };
+		49BBA4BA144D571300E6A9AE /* JRSessionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4A8144D571000E6A9AE /* JRSessionData.m */; };
+		49BBA4BB144D571300E6A9AE /* JRUserInterfaceMaestro.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AA144D571000E6A9AE /* JRUserInterfaceMaestro.m */; };
+		49BBA4BC144D571300E6A9AE /* JRUserInterfaceMaestro.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AA144D571000E6A9AE /* JRUserInterfaceMaestro.m */; };
+		49BBA4BD144D571300E6A9AE /* JRUserLandingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */; };
+		49BBA4BE144D571300E6A9AE /* JRUserLandingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */; };
+		49BBA4BF144D571300E6A9AE /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AE144D571300E6A9AE /* JRWebViewController.m */; };
+		49BBA4C0144D571300E6A9AE /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AE144D571300E6A9AE /* JRWebViewController.m */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C521DF144D2462002011BD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
@@ -440,15 +458,6 @@
 		91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA712C133BDE7B008A89A8 /* BackupManager.m */; };
 		91CA72EA133D216C008A89A8 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7225133D216C008A89A8 /* SFHFKeychainUtils.m */; };
 		91CA72F4133D216C008A89A8 /* JREngage.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA723C133D216C008A89A8 /* JREngage.m */; };
-		91CA72F5133D216C008A89A8 /* JREngage+CustomInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA723E133D216C008A89A8 /* JREngage+CustomInterface.m */; };
-		91CA72F6133D216C008A89A8 /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7240133D216C008A89A8 /* JRActivityObject.m */; };
-		91CA72F7133D216C008A89A8 /* JRSessionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7242133D216C008A89A8 /* JRSessionData.m */; };
-		91CA72F8133D216C008A89A8 /* JRConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7244133D216C008A89A8 /* JRConnectionManager.m */; };
-		91CA72F9133D216C008A89A8 /* JRUserInterfaceMaestro.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7246133D216C008A89A8 /* JRUserInterfaceMaestro.m */; };
-		91CA72FA133D216C008A89A8 /* JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7248133D216C008A89A8 /* JRProvidersController.m */; };
-		91CA72FC133D216C008A89A8 /* JRUserLandingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA724C133D216C008A89A8 /* JRUserLandingController.m */; };
-		91CA72FD133D216C008A89A8 /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA724E133D216C008A89A8 /* JRWebViewController.m */; };
-		91CA72FE133D216C008A89A8 /* JRInfoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7250133D216C008A89A8 /* JRInfoBar.m */; };
 		91CA72FF133D216C008A89A8 /* button_black_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7254133D216C008A89A8 /* button_black_135x40.png */; };
 		91CA7300133D216C008A89A8 /* button_black_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7255133D216C008A89A8 /* button_black_280x40.png */; };
 		91CA7301133D216C008A89A8 /* button_facebook_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7256133D216C008A89A8 /* button_facebook_135x40.png */; };
@@ -517,15 +526,6 @@
 		91CA7389133D216C008A89A8 /* JREngage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91CA72E9133D216C008A89A8 /* JREngage-Info.plist */; };
 		91CA738A133D216C008A89A8 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7225133D216C008A89A8 /* SFHFKeychainUtils.m */; };
 		91CA7394133D216C008A89A8 /* JREngage.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA723C133D216C008A89A8 /* JREngage.m */; };
-		91CA7395133D216C008A89A8 /* JREngage+CustomInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA723E133D216C008A89A8 /* JREngage+CustomInterface.m */; };
-		91CA7396133D216C008A89A8 /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7240133D216C008A89A8 /* JRActivityObject.m */; };
-		91CA7397133D216C008A89A8 /* JRSessionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7242133D216C008A89A8 /* JRSessionData.m */; };
-		91CA7398133D216C008A89A8 /* JRConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7244133D216C008A89A8 /* JRConnectionManager.m */; };
-		91CA7399133D216C008A89A8 /* JRUserInterfaceMaestro.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7246133D216C008A89A8 /* JRUserInterfaceMaestro.m */; };
-		91CA739A133D216C008A89A8 /* JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7248133D216C008A89A8 /* JRProvidersController.m */; };
-		91CA739C133D216C008A89A8 /* JRUserLandingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA724C133D216C008A89A8 /* JRUserLandingController.m */; };
-		91CA739D133D216C008A89A8 /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA724E133D216C008A89A8 /* JRWebViewController.m */; };
-		91CA739E133D216C008A89A8 /* JRInfoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA7250133D216C008A89A8 /* JRInfoBar.m */; };
 		91CA739F133D216C008A89A8 /* button_black_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7254133D216C008A89A8 /* button_black_135x40.png */; };
 		91CA73A0133D216C008A89A8 /* button_black_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7255133D216C008A89A8 /* button_black_280x40.png */; };
 		91CA73A1133D216C008A89A8 /* button_facebook_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CA7256133D216C008A89A8 /* button_facebook_135x40.png */; };
@@ -807,6 +807,24 @@
 		49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft@2x.png"; path = "Assets/talkbubble-ft@2x.png"; sourceTree = "<group>"; };
 		49BBA499144D4BBF00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/JFlash/help; sourceTree = "<group>"; };
 		49BBA49B144D4BCE00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/CFlash/help; sourceTree = "<group>"; };
+		49BBA49D144D570B00E6A9AE /* JRActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRActivityObject.h; path = Classes/External/janrain/JREngage/Classes/JRActivityObject.h; sourceTree = SOURCE_ROOT; };
+		49BBA49E144D570B00E6A9AE /* JRActivityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRActivityObject.m; path = Classes/External/janrain/JREngage/Classes/JRActivityObject.m; sourceTree = SOURCE_ROOT; };
+		49BBA49F144D570C00E6A9AE /* JRConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRConnectionManager.h; path = Classes/External/janrain/JREngage/Classes/JRConnectionManager.h; sourceTree = SOURCE_ROOT; };
+		49BBA4A0144D570C00E6A9AE /* JRConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRConnectionManager.m; path = Classes/External/janrain/JREngage/Classes/JRConnectionManager.m; sourceTree = SOURCE_ROOT; };
+		49BBA4A1144D570C00E6A9AE /* JREngage+CustomInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JREngage+CustomInterface.h"; path = "Classes/External/janrain/JREngage/Classes/JREngage+CustomInterface.h"; sourceTree = SOURCE_ROOT; };
+		49BBA4A2144D570D00E6A9AE /* JREngage+CustomInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JREngage+CustomInterface.m"; path = "Classes/External/janrain/JREngage/Classes/JREngage+CustomInterface.m"; sourceTree = SOURCE_ROOT; };
+		49BBA4A3144D570D00E6A9AE /* JRInfoBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRInfoBar.h; path = Classes/External/janrain/JREngage/Classes/JRInfoBar.h; sourceTree = SOURCE_ROOT; };
+		49BBA4A4144D570E00E6A9AE /* JRInfoBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRInfoBar.m; path = Classes/External/janrain/JREngage/Classes/JRInfoBar.m; sourceTree = SOURCE_ROOT; };
+		49BBA4A5144D570F00E6A9AE /* JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRProvidersController.h; path = Classes/External/janrain/JREngage/Classes/JRProvidersController.h; sourceTree = SOURCE_ROOT; };
+		49BBA4A6144D570F00E6A9AE /* JRProvidersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRProvidersController.m; path = Classes/External/janrain/JREngage/Classes/JRProvidersController.m; sourceTree = SOURCE_ROOT; };
+		49BBA4A7144D570F00E6A9AE /* JRSessionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRSessionData.h; path = Classes/External/janrain/JREngage/Classes/JRSessionData.h; sourceTree = SOURCE_ROOT; };
+		49BBA4A8144D571000E6A9AE /* JRSessionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRSessionData.m; path = Classes/External/janrain/JREngage/Classes/JRSessionData.m; sourceTree = SOURCE_ROOT; };
+		49BBA4A9144D571000E6A9AE /* JRUserInterfaceMaestro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRUserInterfaceMaestro.h; path = Classes/External/janrain/JREngage/Classes/JRUserInterfaceMaestro.h; sourceTree = SOURCE_ROOT; };
+		49BBA4AA144D571000E6A9AE /* JRUserInterfaceMaestro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRUserInterfaceMaestro.m; path = Classes/External/janrain/JREngage/Classes/JRUserInterfaceMaestro.m; sourceTree = SOURCE_ROOT; };
+		49BBA4AB144D571200E6A9AE /* JRUserLandingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRUserLandingController.h; path = Classes/External/janrain/JREngage/Classes/JRUserLandingController.h; sourceTree = SOURCE_ROOT; };
+		49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRUserLandingController.m; path = Classes/External/janrain/JREngage/Classes/JRUserLandingController.m; sourceTree = SOURCE_ROOT; };
+		49BBA4AD144D571300E6A9AE /* JRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRWebViewController.h; path = Classes/External/janrain/JREngage/Classes/JRWebViewController.h; sourceTree = SOURCE_ROOT; };
+		49BBA4AE144D571300E6A9AE /* JRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRWebViewController.m; path = Classes/External/janrain/JREngage/Classes/JRWebViewController.m; sourceTree = SOURCE_ROOT; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1033,24 +1051,6 @@
 		91CA7225133D216C008A89A8 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		91CA723B133D216C008A89A8 /* JREngage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JREngage.h; sourceTree = "<group>"; };
 		91CA723C133D216C008A89A8 /* JREngage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JREngage.m; sourceTree = "<group>"; };
-		91CA723D133D216C008A89A8 /* JREngage+CustomInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JREngage+CustomInterface.h"; sourceTree = "<group>"; };
-		91CA723E133D216C008A89A8 /* JREngage+CustomInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JREngage+CustomInterface.m"; sourceTree = "<group>"; };
-		91CA723F133D216C008A89A8 /* JRActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRActivityObject.h; sourceTree = "<group>"; };
-		91CA7240133D216C008A89A8 /* JRActivityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRActivityObject.m; sourceTree = "<group>"; };
-		91CA7241133D216C008A89A8 /* JRSessionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSessionData.h; sourceTree = "<group>"; };
-		91CA7242133D216C008A89A8 /* JRSessionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSessionData.m; sourceTree = "<group>"; };
-		91CA7243133D216C008A89A8 /* JRConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRConnectionManager.h; sourceTree = "<group>"; };
-		91CA7244133D216C008A89A8 /* JRConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRConnectionManager.m; sourceTree = "<group>"; };
-		91CA7245133D216C008A89A8 /* JRUserInterfaceMaestro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRUserInterfaceMaestro.h; sourceTree = "<group>"; };
-		91CA7246133D216C008A89A8 /* JRUserInterfaceMaestro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRUserInterfaceMaestro.m; sourceTree = "<group>"; };
-		91CA7247133D216C008A89A8 /* JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProvidersController.h; sourceTree = "<group>"; };
-		91CA7248133D216C008A89A8 /* JRProvidersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRProvidersController.m; sourceTree = "<group>"; };
-		91CA724B133D216C008A89A8 /* JRUserLandingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRUserLandingController.h; sourceTree = "<group>"; };
-		91CA724C133D216C008A89A8 /* JRUserLandingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRUserLandingController.m; sourceTree = "<group>"; };
-		91CA724D133D216C008A89A8 /* JRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRWebViewController.h; sourceTree = "<group>"; };
-		91CA724E133D216C008A89A8 /* JRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRWebViewController.m; sourceTree = "<group>"; };
-		91CA724F133D216C008A89A8 /* JRInfoBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRInfoBar.h; sourceTree = "<group>"; };
-		91CA7250133D216C008A89A8 /* JRInfoBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRInfoBar.m; sourceTree = "<group>"; };
 		91CA7254133D216C008A89A8 /* button_black_135x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_135x40.png; sourceTree = "<group>"; };
 		91CA7255133D216C008A89A8 /* button_black_280x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_black_280x40.png; sourceTree = "<group>"; };
 		91CA7256133D216C008A89A8 /* button_facebook_135x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_facebook_135x40.png; sourceTree = "<group>"; };
@@ -1931,28 +1931,28 @@
 		91CA723A133D216C008A89A8 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				49BBA49D144D570B00E6A9AE /* JRActivityObject.h */,
+				49BBA49E144D570B00E6A9AE /* JRActivityObject.m */,
+				49BBA49F144D570C00E6A9AE /* JRConnectionManager.h */,
+				49BBA4A0144D570C00E6A9AE /* JRConnectionManager.m */,
+				49BBA4A1144D570C00E6A9AE /* JREngage+CustomInterface.h */,
+				49BBA4A2144D570D00E6A9AE /* JREngage+CustomInterface.m */,
+				49BBA4A3144D570D00E6A9AE /* JRInfoBar.h */,
+				49BBA4A4144D570E00E6A9AE /* JRInfoBar.m */,
+				49BBA4A5144D570F00E6A9AE /* JRProvidersController.h */,
+				49BBA4A6144D570F00E6A9AE /* JRProvidersController.m */,
+				49BBA4A7144D570F00E6A9AE /* JRSessionData.h */,
+				49BBA4A8144D571000E6A9AE /* JRSessionData.m */,
+				49BBA4A9144D571000E6A9AE /* JRUserInterfaceMaestro.h */,
+				49BBA4AA144D571000E6A9AE /* JRUserInterfaceMaestro.m */,
+				49BBA4AB144D571200E6A9AE /* JRUserLandingController.h */,
+				49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */,
+				49BBA4AD144D571300E6A9AE /* JRWebViewController.h */,
+				49BBA4AE144D571300E6A9AE /* JRWebViewController.m */,
 				91F80CAD138619E700A07663 /* JRPublishActivityController.m */,
 				91F80CAE138619E700A07663 /* JRPublishActivityController.h */,
 				91CA723B133D216C008A89A8 /* JREngage.h */,
 				91CA723C133D216C008A89A8 /* JREngage.m */,
-				91CA723D133D216C008A89A8 /* JREngage+CustomInterface.h */,
-				91CA723E133D216C008A89A8 /* JREngage+CustomInterface.m */,
-				91CA723F133D216C008A89A8 /* JRActivityObject.h */,
-				91CA7240133D216C008A89A8 /* JRActivityObject.m */,
-				91CA7241133D216C008A89A8 /* JRSessionData.h */,
-				91CA7242133D216C008A89A8 /* JRSessionData.m */,
-				91CA7243133D216C008A89A8 /* JRConnectionManager.h */,
-				91CA7244133D216C008A89A8 /* JRConnectionManager.m */,
-				91CA7245133D216C008A89A8 /* JRUserInterfaceMaestro.h */,
-				91CA7246133D216C008A89A8 /* JRUserInterfaceMaestro.m */,
-				91CA7247133D216C008A89A8 /* JRProvidersController.h */,
-				91CA7248133D216C008A89A8 /* JRProvidersController.m */,
-				91CA724B133D216C008A89A8 /* JRUserLandingController.h */,
-				91CA724C133D216C008A89A8 /* JRUserLandingController.m */,
-				91CA724D133D216C008A89A8 /* JRWebViewController.h */,
-				91CA724E133D216C008A89A8 /* JRWebViewController.m */,
-				91CA724F133D216C008A89A8 /* JRInfoBar.h */,
-				91CA7250133D216C008A89A8 /* JRInfoBar.m */,
 			);
 			name = classes;
 			path = External/janrain/JREngage/classes;
@@ -2814,15 +2814,6 @@
 				91CA712E133BDE7B008A89A8 /* BackupManager.m in Sources */,
 				91CA738A133D216C008A89A8 /* SFHFKeychainUtils.m in Sources */,
 				91CA7394133D216C008A89A8 /* JREngage.m in Sources */,
-				91CA7395133D216C008A89A8 /* JREngage+CustomInterface.m in Sources */,
-				91CA7396133D216C008A89A8 /* JRActivityObject.m in Sources */,
-				91CA7397133D216C008A89A8 /* JRSessionData.m in Sources */,
-				91CA7398133D216C008A89A8 /* JRConnectionManager.m in Sources */,
-				91CA7399133D216C008A89A8 /* JRUserInterfaceMaestro.m in Sources */,
-				91CA739A133D216C008A89A8 /* JRProvidersController.m in Sources */,
-				91CA739C133D216C008A89A8 /* JRUserLandingController.m in Sources */,
-				91CA739D133D216C008A89A8 /* JRWebViewController.m in Sources */,
-				91CA739E133D216C008A89A8 /* JRInfoBar.m in Sources */,
 				91CA772B133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */,
@@ -2877,6 +2868,15 @@
 				4927B8451400BE540076EEED /* JapaneseSettingsDataSource.m in Sources */,
 				49278C4D1445FCB5005426A3 /* NSAttributedString+Attributes.m in Sources */,
 				49278C4E1445FCB5005426A3 /* OHAttributedLabel.m in Sources */,
+				49BBA4AF144D571300E6A9AE /* JRActivityObject.m in Sources */,
+				49BBA4B1144D571300E6A9AE /* JRConnectionManager.m in Sources */,
+				49BBA4B3144D571300E6A9AE /* JREngage+CustomInterface.m in Sources */,
+				49BBA4B5144D571300E6A9AE /* JRInfoBar.m in Sources */,
+				49BBA4B7144D571300E6A9AE /* JRProvidersController.m in Sources */,
+				49BBA4B9144D571300E6A9AE /* JRSessionData.m in Sources */,
+				49BBA4BB144D571300E6A9AE /* JRUserInterfaceMaestro.m in Sources */,
+				49BBA4BD144D571300E6A9AE /* JRUserLandingController.m in Sources */,
+				49BBA4BF144D571300E6A9AE /* JRWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2971,15 +2971,6 @@
 				91CA712D133BDE7B008A89A8 /* BackupManager.m in Sources */,
 				91CA72EA133D216C008A89A8 /* SFHFKeychainUtils.m in Sources */,
 				91CA72F4133D216C008A89A8 /* JREngage.m in Sources */,
-				91CA72F5133D216C008A89A8 /* JREngage+CustomInterface.m in Sources */,
-				91CA72F6133D216C008A89A8 /* JRActivityObject.m in Sources */,
-				91CA72F7133D216C008A89A8 /* JRSessionData.m in Sources */,
-				91CA72F8133D216C008A89A8 /* JRConnectionManager.m in Sources */,
-				91CA72F9133D216C008A89A8 /* JRUserInterfaceMaestro.m in Sources */,
-				91CA72FA133D216C008A89A8 /* JRProvidersController.m in Sources */,
-				91CA72FC133D216C008A89A8 /* JRUserLandingController.m in Sources */,
-				91CA72FD133D216C008A89A8 /* JRWebViewController.m in Sources */,
-				91CA72FE133D216C008A89A8 /* JRInfoBar.m in Sources */,
 				91CA772A133D2E22008A89A8 /* LWEJanrainLoginManager.m in Sources */,
 				49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D9134EC15900EC6B0E /* LWEDatabase.m in Sources */,
@@ -3035,6 +3026,15 @@
 				4927B8481400C7360076EEED /* ChineseSettingsDataSource.m in Sources */,
 				49278C4F14460195005426A3 /* OHAttributedLabel.m in Sources */,
 				49278C5014460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
+				49BBA4B0144D571300E6A9AE /* JRActivityObject.m in Sources */,
+				49BBA4B2144D571300E6A9AE /* JRConnectionManager.m in Sources */,
+				49BBA4B4144D571300E6A9AE /* JREngage+CustomInterface.m in Sources */,
+				49BBA4B6144D571300E6A9AE /* JRInfoBar.m in Sources */,
+				49BBA4B8144D571300E6A9AE /* JRProvidersController.m in Sources */,
+				49BBA4BA144D571300E6A9AE /* JRSessionData.m in Sources */,
+				49BBA4BC144D571300E6A9AE /* JRUserInterfaceMaestro.m in Sources */,
+				49BBA4BE144D571300E6A9AE /* JRUserLandingController.m in Sources */,
+				49BBA4C0144D571300E6A9AE /* JRWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
