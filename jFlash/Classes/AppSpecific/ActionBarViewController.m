@@ -80,7 +80,8 @@
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  if ([TagPeer checkMembership:self.currentCard tagId:FAVORITES_TAG_ID])
+  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
+  if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
@@ -107,8 +108,10 @@
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+  // TODO: really?  Let's stop using app delegate here and use a notification or somethign.
   // we present on the appDelegates root view controller to make sure it covers everything
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
   
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
@@ -129,13 +132,13 @@
     [modalNavControl release];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
-  {
+  {    
     // Do something here - subscribe or cancel, depending.
-    if ([TagPeer checkMembership:self.currentCard tagId:FAVORITES_TAG_ID])
+    if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
     {
       // First of all, do it
       NSError *error = nil;
-      BOOL cancelable = [TagPeer cancelMembership:self.currentCard tagId:FAVORITES_TAG_ID error:&error];
+      BOOL cancelable = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
       if (!cancelable)
       {
         if ([error code] == kRemoveLastCardOnATagError)
@@ -153,7 +156,7 @@
     }
     else
     {
-      [TagPeer subscribe:self.currentCard tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribeCard:self.currentCard toTag:favoritesTag];
     }
 
   }
