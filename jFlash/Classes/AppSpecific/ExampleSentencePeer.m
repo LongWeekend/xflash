@@ -126,9 +126,9 @@
 /**
  * Returns an array of Sentence objects after searching keyword - for search
  */
-+ (NSMutableArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
++ (NSArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
 {
-  NSMutableArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
+  NSArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
   
   // Do a clever IN SQL statement!  Aha!
   NSString *inStatement = nil;
@@ -149,7 +149,7 @@
   LWE_LOG(@"In Statement: %@",inStatement);
   
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
-  NSMutableArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
+  NSArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
   [sql release];
   return exampleSentences;
 
