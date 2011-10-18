@@ -19,21 +19,15 @@
   [super dealloc];
 }
 
-- (void) simpleHydrate: (FMResultSet*) rs
+- (void) hydrate:(FMResultSet*)rs
 {
-  [super simpleHydrate:rs];
+  [self hydrate:rs simple:NO];
   self.romaji = [rs stringForColumn:@"romaji"];
 }
 
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
 {
   [super hydrate:rs simple:isSimple];
-  self.romaji = [rs stringForColumn:@"romaji"];
-}
-
-- (void) hydrate:(FMResultSet*)rs
-{
-  [super hydrate:rs];
   self.romaji = [rs stringForColumn:@"romaji"];
 }
 

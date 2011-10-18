@@ -13,9 +13,9 @@
 
 @synthesize headword_simp;
 
-- (void) simpleHydrate: (FMResultSet*) rs
+- (void) hydrate:(FMResultSet*)rs
 {
-  [super simpleHydrate:rs];
+  [self hydrate:rs simple:NO];
   self._headword = [rs stringForColumn:@"headword_trad"];
   self.headword_simp = [rs stringForColumn:@"headword_simp"];
 }
@@ -23,13 +23,6 @@
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
 {
   [super hydrate:rs simple:isSimple];
-  self._headword = [rs stringForColumn:@"headword_trad"];
-  self.headword_simp = [rs stringForColumn:@"headword_simp"];
-}
-
-- (void) hydrate:(FMResultSet*)rs
-{
-  [super hydrate:rs];
   self._headword = [rs stringForColumn:@"headword_trad"];
   self.headword_simp = [rs stringForColumn:@"headword_simp"];
 }
