@@ -14,8 +14,8 @@ const NSInteger KSegmentedTableHeader = 100;
 
 // Private method declarations
 @interface SearchViewController ()
-- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId;
-- (void) _removeCardFromMembershipCache: (NSInteger)cardId;
+- (BOOL) _checkMembershipCacheForCard:(Card*)card;
+- (void) _removeCardFromMembershipCache:(Card*)card;
 - (void) _toggleMembership:(id)sender event:(id)event;
 @end
 
@@ -420,7 +420,7 @@ const NSInteger KSegmentedTableHeader = 100;
     [cell.contentView addSubview:starButton];
   }
   // Now set its state
-  if ([self _checkMembershipCacheForCardId:card.cardId])
+  if ([self _checkMembershipCacheForCard:card])
   {
     [starButton setImage:[UIImage imageNamed:@"star-selected.png"] forState:UIControlStateNormal];
   }
@@ -518,18 +518,17 @@ const NSInteger KSegmentedTableHeader = 100;
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-#pragma mark -
-#pragma mark Private method
+#pragma mark - Private method
 
 /** Checks the membership cache to see if we are in - FYI similar methods are used by AddTagViewController as well */
-- (BOOL) _checkMembershipCacheForCardId: (NSInteger)cardId
+- (BOOL) _checkMembershipCacheForCard:(Card*)theCard
 {
   BOOL returnVal = NO;
   if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
   {
     for (Card *cachedCard in self.membershipCacheArray)
     {
-      if (cachedCard.cardId == cardId)
+      if (cachedCard.cardId == theCard.cardId)
       {
         return YES;
       }
@@ -539,15 +538,16 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     // Rebuild cache and fail over to manual function
     self.membershipCacheArray = [CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID];
-    returnVal = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+    returnVal = [TagPeer checkMembership:theCard tagId:FAVORITES_TAG_ID];
   }
   return returnVal;
 }
 
 
 /** Remove a card from the membership cache */
-- (void) _removeCardFromMembershipCache: (NSInteger) cardId
+- (void) _removeCardFromMembershipCache:(Card*)card
 {
+  NSInteger cardId = card.cardId;
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
   {
     for (int i = 0; i < [self.membershipCacheArray count]; i++)
@@ -581,16 +581,16 @@ const NSInteger KSegmentedTableHeader = 100;
     BOOL isMember = NO;
     if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
     {
-      isMember = [self _checkMembershipCacheForCardId:cardId];
+      isMember = [self _checkMembershipCacheForCard:theCard];
     }
     else
     {
-      isMember = [TagPeer checkMembership:cardId tagId:FAVORITES_TAG_ID];
+      isMember = [TagPeer checkMembership:theCard tagId:FAVORITES_TAG_ID];
     }
     
     if (!isMember)
     {
-      [TagPeer subscribe:cardId tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribe:theCard tagId:FAVORITES_TAG_ID];
 
       // If we are currently studying favorites, add it in there!
       Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
@@ -624,7 +624,7 @@ const NSInteger KSegmentedTableHeader = 100;
         return;
       }
       
-      [self _removeCardFromMembershipCache:cardId];
+      [self _removeCardFromMembershipCache:theCard];
     }
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
