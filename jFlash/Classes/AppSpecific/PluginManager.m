@@ -549,8 +549,9 @@
  */
 - (NSString *)_pathToDownloadedPluginForFilename:(NSString *)filename
 {
-  return [LWEFile createCachesPathWithFilename:filename];
-//  return [LWEFile createDocumentPathWithFilename:filename];
+  // Caches is where these "belong" for iOS 5 but given that they delete caches, f Apple for this time being
+//  return [LWEFile createCachesPathWithFilename:filename];
+  return [LWEFile createDocumentPathWithFilename:filename];
 }
 
 /**
