@@ -239,7 +239,7 @@
  * The difference with the method above is the query performed.
  * This should be faster since it only asks for the data required. 
  */
-+ (NSArray*) retrieveCardSetForExampleSentenceID: (NSInteger) sentenceId
++ (NSArray*) retrieveCardSetForExampleSentenceID:(NSInteger)sentenceId
 {	
 	NSString *sql = nil;
   if ([ExampleSentencePeer isNewVersion])
@@ -264,41 +264,6 @@
 	[rs close];
 
 	return (NSArray*)cardList; 
-}
-
-/**
- * Returns an array of Card objects in the Tag given by tagId
- */
-+ (NSArray*) retrieveCardSet:(NSInteger)tagId
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@""
-        "SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
-        "FROM cards c, cards_html ch, card_tag_link l, user_history u WHERE c.card_id = ch.card_id AND c.card_id = u.card_id AND "
-        "c.card_id = l.card_id AND l.tag_id = '%d' AND u.user_id = '%d'",tagId,[settings integerForKey:@"user_id"]];
-  NSArray *cardList = [CardPeer _retrieveCardSetWithSQL:sql
-                                                hydrate:YES
-                                            isBasicCard:NO];
-  [sql release];
-	return cardList;
-}
-
-
-/**
- * Returns an array of Card objects matching a given tagId and levelId
- */
-+ (NSArray*) retrieveCardSetByLevel: (NSInteger)setId levelId:(NSInteger)levelId
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@""
-        "SELECT c.card_id AS card_id,u.user_id as user_id,u.card_level as card_level,u.wrong_count as wrong_count,u.right_count as right_count,c.headword,c.headword_en,c.reading,c.romaji,ch.meaning "
-        "FROM cards c, cards_html ch, card_tag_link l, user_history u WHERE c.card_id = ch.card_id AND c.card_id = u.card_id "
-        "AND c.card_id = l.card_id AND u.user_id = '%d' AND l.tag_id = '%d' AND u.card_level = '%d'",[settings integerForKey:@"user_id"],setId,levelId];
-  NSArray *cardList = [CardPeer _retrieveCardSetWithSQL:sql
-                                                hydrate:YES
-                                            isBasicCard:NO];
-	[sql release];
-	return cardList;
 }
 
 
