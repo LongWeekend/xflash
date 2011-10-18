@@ -287,6 +287,8 @@
 		49BBA4BE144D571300E6A9AE /* JRUserLandingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */; };
 		49BBA4BF144D571300E6A9AE /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AE144D571300E6A9AE /* JRWebViewController.m */; };
 		49BBA4C0144D571300E6A9AE /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4AE144D571300E6A9AE /* JRWebViewController.m */; };
+		49BBA4C3144D5CA000E6A9AE /* LWEChineseSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */; };
+		49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C521DF144D2462002011BD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
@@ -825,6 +827,9 @@
 		49BBA4AC144D571300E6A9AE /* JRUserLandingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRUserLandingController.m; path = Classes/External/janrain/JREngage/Classes/JRUserLandingController.m; sourceTree = SOURCE_ROOT; };
 		49BBA4AD144D571300E6A9AE /* JRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRWebViewController.h; path = Classes/External/janrain/JREngage/Classes/JRWebViewController.h; sourceTree = SOURCE_ROOT; };
 		49BBA4AE144D571300E6A9AE /* JRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRWebViewController.m; path = Classes/External/janrain/JREngage/Classes/JRWebViewController.m; sourceTree = SOURCE_ROOT; };
+		49BBA4C1144D5CA000E6A9AE /* LWEChineseSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWEChineseSearchBar.h; path = AppSpecific/LWEChineseSearchBar.h; sourceTree = "<group>"; };
+		49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWEChineseSearchBar.m; path = AppSpecific/LWEChineseSearchBar.m; sourceTree = "<group>"; };
+		49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LWEChineseSearchBarInput.xib; path = AppSpecific/LWEChineseSearchBarInput.xib; sourceTree = "<group>"; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1414,6 +1419,9 @@
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
+				49BBA4C1144D5CA000E6A9AE /* LWEChineseSearchBar.h */,
+				49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */,
+				49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2715,6 +2723,7 @@
 				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
 				4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
+				49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3035,6 +3044,7 @@
 				49BBA4BC144D571300E6A9AE /* JRUserInterfaceMaestro.m in Sources */,
 				49BBA4BE144D571300E6A9AE /* JRUserLandingController.m in Sources */,
 				49BBA4C0144D571300E6A9AE /* JRWebViewController.m in Sources */,
+				49BBA4C3144D5CA000E6A9AE /* LWEChineseSearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
