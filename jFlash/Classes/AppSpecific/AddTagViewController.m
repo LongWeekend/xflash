@@ -24,8 +24,8 @@ enum EntrySectionRows
 
 @interface AddTagViewController ()
 - (void) _reloadTableData;
-- (void) _removeFromMembershipCache:(NSInteger)tagId;
-- (BOOL) _checkMembershipCacheForTagId:(NSInteger)tagId;
+- (void) _removeTagFromMembershipCache:(NSInteger)tagId;
+- (BOOL) _tagExistsInMembershipCache:(NSInteger)tagId;
 @property (retain) NSMutableArray *membershipCacheArray;
 @end
 
@@ -114,7 +114,7 @@ enum EntrySectionRows
 }
 
 /** Checks the membership cache to see if we are in - FYI similar methods are used by SearchViewController as well */
-- (BOOL) _checkMembershipCacheForTagId:(NSInteger)tagId
+- (BOOL) _tagExistsInMembershipCache:(NSInteger)tagId
 {
   if ([self.membershipCacheArray count] > 0)
   {
@@ -132,7 +132,7 @@ enum EntrySectionRows
 
 
 //! Remove a tag from the membership cache
-- (void) _removeFromMembershipCache:(NSInteger)tagId
+- (void) _removeTagFromMembershipCache:(NSInteger)tagId
 {
   // Usually we don't want to mutate an array we are iterating, but in this case, we return immediately.
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
@@ -147,6 +147,41 @@ enum EntrySectionRows
     }
   }
 }
+
+- (void) _toggleMembershipForTag:(Tag *)tmpTag
+{
+  // Check whether or not we are ADDING or REMOVING from the selected tag
+  if ([self _tagExistsInMembershipCache:tmpTag.tagId])
+  {
+    // Remove tag
+    NSError *error = nil;
+    BOOL result = [TagPeer cancelMembership:self.currentCard fromTag:tmpTag error:&error];
+    if (!result)
+    {
+      //something wrong, check whether it is the last card.
+      if ([error code] == kRemoveLastCardOnATagError)
+      {
+        NSString *errorMessage = [error localizedDescription];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:errorMessage];
+      }
+      else 
+      {
+        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
+      }
+      return;
+    }
+    
+    //this section will only be run if the cancel membership operation is successful.
+    [self _removeTagFromMembershipCache:tmpTag.tagId];
+  }
+  else
+  {
+    [TagPeer subscribeCard:self.currentCard toTag:tmpTag];
+    [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
+  }
+}
+
 
 #pragma mark - UITableViewDelegate methods
 
@@ -246,7 +281,7 @@ enum EntrySectionRows
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      if ([self _checkMembershipCacheForTagId:tmpTag.tagId])
+      if ([self _tagExistsInMembershipCache:tmpTag.tagId])
       {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
@@ -269,6 +304,7 @@ enum EntrySectionRows
   return cell;
 }
 
+
 /**
  * Called when the user selects one of the table rows containing a tag name
  * Calls subscribe or cancel set membership accordingly, also checks 
@@ -284,7 +320,6 @@ enum EntrySectionRows
     return;
   }
 
-  CurrentState *currentState = [CurrentState sharedCurrentState];
   Tag *tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
 
   // First, determine if we are restricted 
@@ -296,59 +331,9 @@ enum EntrySectionRows
     return;
   }
   
-  // Check whether or not we are ADDING or REMOVING from the selected tag
-  //TODO: Isnt it a local cache to check whether the card is a member of which tag? Cant we just use that? --Rendy 19/07/11
-  if ([TagPeer card:self.currentCard isMemberOfTag:tmpTag])
-  {
-    // Remove tag
-    NSError *error = nil;
-    BOOL result = [TagPeer cancelMembership:self.currentCard fromTag:tmpTag error:&error];
-    if (!result)
-    {
-      //something wrong, check whether it is the last card.
-      if ([error code] == kRemoveLastCardOnATagError)
-      {
-        NSString *errorMessage = [error localizedDescription];
-        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
-                                           message:errorMessage];
-      }
-      else 
-      {
-        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
-      }
-      return;
-    }
-
-    //this section will only be run if the cancel membership operation is successful.
-    [self _removeFromMembershipCache:tmpTag.tagId];
-  }
-  else
-  {
-    [TagPeer subscribeCard:self.currentCard toTag:tmpTag];
-    [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
-    if (tmpTag.tagId == currentState.activeTag.tagId)
-    {
-      LWE_LOG(@"Editing current set tags");
-      [currentState.activeTag addCardToActiveSet:self.currentCard]; // maybe fuck off?
-    }
-  }
-  
+  // OK, all tests pass - do it!
+  [self _toggleMembershipForTag:tmpTag];
   [lclTableView reloadData];
-  
-  // Tell study set controller to reload its set data stats
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"cardAddedToTag" object:self];
-  
-  // If the current study sets content
-  // has been changed, notify the StudyViewController
-  if (tmpTag.tagId == currentState.activeTag.tagId)
-  {
-    
-    //this is a little bit strange, if this list is shown from the StudySetViewController workflow
-    //it wont ever go here as the current set is set as "_restrictedTagId".
-    //HOWEVER, if the user ARE in the current set and go here by tapping "Actions"->"Add To Study Set"
-    //it will go here if the user tries to remove this card (obviously from the current set) =( --Rendy
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagContentDidChange object:self.currentCard];
-  }
 }
 
 
