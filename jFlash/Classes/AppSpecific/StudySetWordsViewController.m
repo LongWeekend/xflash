@@ -94,18 +94,11 @@
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
-  [self performSelectorOnMainThread:@selector(reloadTableDataOnMainThread) withObject:nil waitUntilDone:NO];
+  [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
 
-//! Convenience method since we can't update data on background thread
-- (void) reloadTableDataOnMainThread
-{
-  [self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark UITableView delegate methods
+#pragma mark - UITableView delegate methods
 
 - (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
 {
