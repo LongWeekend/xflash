@@ -20,7 +20,7 @@
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr, isUpdatable;
+@synthesize isFirstLoad, pluginMgr, isUpdatable, favoritesTag;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -39,6 +39,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:tag.tagId forKey:@"tag_id"];
   
   [_activeTag populateCardIds];
+  
+  // Set the favorites tag, if not already done
+  if (self.favoritesTag == nil)
+  {
+    self.favoritesTag = [TagPeer retrieveTagById:FAVORITES_TAG_ID];
+  }
 }
 
 
