@@ -4,10 +4,9 @@
 #import "ExampleSentencePeer.h"
 
 @interface CardPeer ()
-+ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate;
 + (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit;
 + (Card*) _retrieveCardWithSQL:(NSString*)sql;
-+ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs;
++ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate;
 @end
 
 @implementation CardPeer
@@ -55,7 +54,7 @@
          "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
          "ORDER BY c.headword", keywordWildcard, 200];
   FMResultSet *rs = [db executeQuery:sql];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:YES];
   return (NSArray*)cardList;
 }
 
@@ -67,7 +66,7 @@
   NSInteger queryLimit = 100;
   
   NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql]];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
 
 #if defined(LWE_JFLASH)
   // Presently JFlash is the only database w/ a PTAG/NON-PTAG setup
@@ -75,7 +74,7 @@
   {
     NSInteger remainingCards = (queryLimit - [cardList count]);
     sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
-    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql]];
+    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
   }
 #endif
   
@@ -83,21 +82,6 @@
 }
 
 #pragma mark - Private Methods
-
-/**
- * Looping helper - used by search
- */
-+ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs
-{
-  while ([rs next])
-  {
-    Card *tmpCard = [CardPeer blankCard]; 
-    [tmpCard hydrate:rs];
-    [cardList addObject:tmpCard];
-  }
-  [rs close];
-  return cardList;
-}
 
 + (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
 {
@@ -136,30 +120,25 @@
 }
 
 /**
- * Returns an array of Card objects based on SQL result
+ * Looping helper - used by search
  */
-+ (NSArray*) _retrieveCardSetWithSQL:(NSString*)sql hydrate:(BOOL)hydrate
++ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate
 {
-	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:sql];
-	NSMutableArray *cardList = [NSMutableArray array];
-	Card *tmpCard = nil;
-	while ([rs next])
-	{
-		// Full card?
-    tmpCard = [CardPeer blankCard];
-		if (hydrate)
-		{
-			[tmpCard hydrate:rs];
-		}
-		else
-		{
+  while ([rs next])
+  {
+    Card *tmpCard = [CardPeer blankCard];
+    if (shouldHydrate)
+    {
+      [tmpCard hydrate:rs];
+    }
+    else
+    {
       tmpCard.cardId = [rs intForColumn:@"card_id"];
-		}
-		[cardList addObject:tmpCard];
-	}
-	[rs close];
-	return (NSArray*)cardList;
+    }
+    [cardList addObject:tmpCard];
+  }
+  [rs close];
+  return cardList;
 }
 
 #pragma mark - Convenience Helpers
@@ -212,8 +191,11 @@
  */
 + (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId
 {
-  return [CardPeer _retrieveCardSetWithSQL:[NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId]
-                                   hydrate:NO];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
+  return (NSArray*)[CardPeer _addCardsToList:[NSMutableArray array]
+                               fromResultSet:[db executeQuery:sql]
+                                     hydrate:NO];
 }
 
 /**
