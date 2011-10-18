@@ -7,8 +7,8 @@
 //
 
 #import "SearchViewController.h"
-
 #import "ChineseCard.h"
+#import "LWEChineseSearchBar.h"
 
 const NSInteger KSegmentedTableHeader = 100;
 
@@ -63,7 +63,12 @@ const NSInteger KSegmentedTableHeader = 100;
 
   // Programmatically make UISearchBar
   // TODO: iPad customization!
+#if defined(LWE_CFLASH)
+  // For Chinese Flash, add a custom accessory input to the search keyboard
+  UISearchBar *tmpSearchBar = [[LWEChineseSearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+#else
   UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
+#endif
   tmpSearchBar.delegate = self;
   tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
