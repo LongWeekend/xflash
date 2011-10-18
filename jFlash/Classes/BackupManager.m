@@ -113,25 +113,20 @@
 //! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
 - (NSInteger) _getTagIdForName:(NSString *)tagName andId:(NSNumber *)key andGroup:(NSNumber *)group
 {
-  NSInteger tagId;
-  if (key == [NSNumber numberWithInt:0])
-    {
-      tagId = 0;
-    }
-    else
-    {
-      // see if the tag already exists
-      Tag* existingTag = [TagPeer retrieveTagByName:tagName];
-      if (existingTag.tagId == 0) // no tag, create one
-      {
-        tagId = [TagPeer createTag:tagName withOwner:[group intValue]];
-      }
-      else // just use the existing tag
-      {
-        tagId = existingTag.tagId;
-      }
-    }
-  return tagId;
+  // Quick return on 0
+  if ([key isEqual:[NSNumber numberWithInt:0]])
+  {
+    return 0;
+  }
+  
+  // see if the tag already exists
+  Tag *tag = [TagPeer retrieveTagByName:tagName];
+  if (tag.tagId == 0) // no tag, create one
+  {
+    tag = [TagPeer createTag:tagName withOwner:[group intValue]];
+  }
+
+  return tag.tagId;
 }
 
 //! Takes a NSData created by serializedDataForUserSets and populates the data tables
@@ -164,18 +159,21 @@
     
     NSNumber *newCardId = nil;
     
-    // We just need a card object to pass to subscribe:, so use one and change its ID
+    // We just need a card & tag object to pass to subscribe:, so use one and change its ID
     Card *card = [[Card alloc] init];
+    Tag *tag = [[Tag alloc] init];
     while ((newCardId = [objEnumerator nextObject])) 
     {
       // add the card to the tag if it isn't already there
       if ([currentCardIds containsObject:newCardId] == NO)
       {
         card.cardId = [newCardId intValue];
-        [TagPeer subscribe:card tagId:tagId];
+        tag.tagId = tagId;
+        [TagPeer subscribeCard:card toTag:tag];
       }
     }
     [card release];
+    [tag release];
     [currentCardIds removeAllObjects];
   }
 }
