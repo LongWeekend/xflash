@@ -111,7 +111,8 @@
 }
 
 //! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
-- (NSInteger) _getTagIdForName: (NSString *) tagName AndId: (NSNumber *) key AndGroup: (NSNumber *) group  {
+- (NSInteger) _getTagIdForName:(NSString *)tagName andId:(NSNumber *)key andGroup:(NSNumber *)group
+{
   NSInteger tagId;
   if (key == [NSNumber numberWithInt:0])
     {
@@ -143,7 +144,7 @@
   
   while ((key = [enumerator nextObject])) 
   {
-    NSArray* cardIdsAndTagName = [idsDict objectForKey:key];
+    NSArray *cardIdsAndTagName = [idsDict objectForKey:key];
     NSEnumerator *objEnumerator = [cardIdsAndTagName objectEnumerator];
     
     // the first oject is the tag name
@@ -152,7 +153,7 @@
     // the second object is the group id
     NSNumber *groupId = [objEnumerator nextObject]; 
     
-    NSInteger tagId = [self _getTagIdForName: tagName AndId: key AndGroup: groupId];
+    NSInteger tagId = [self _getTagIdForName:tagName andId:key andGroup:groupId];
     
     // the rest are card ids, so add them to the tag we just made
     NSArray *cards = [CardPeer retrieveCardIdsForTagId:tagId];
