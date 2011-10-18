@@ -537,8 +537,9 @@ const NSInteger KSegmentedTableHeader = 100;
   else
   {
     // Rebuild cache and fail over to manual function
+    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
     self.membershipCacheArray = [CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID];
-    returnVal = [TagPeer checkMembership:theCard tagId:FAVORITES_TAG_ID];
+    returnVal = [TagPeer card:theCard isMemberOfTag:favoritesTag];
   }
   return returnVal;
 }
@@ -574,6 +575,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
   if (indexPath != nil)
   {
+    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
+    
     Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
     NSInteger cardId = [theCard cardId];
     
@@ -585,18 +588,18 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else
     {
-      isMember = [TagPeer checkMembership:theCard tagId:FAVORITES_TAG_ID];
+      isMember = [TagPeer card:theCard isMemberOfTag:favoritesTag];
     }
     
     if (!isMember)
     {
-      [TagPeer subscribe:theCard tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribeCard:theCard toTag:favoritesTag];
 
       // If we are currently studying favorites, add it in there!
-      Tag *currentTag = [[CurrentState sharedCurrentState] activeTag];
-      if ([currentTag tagId] == FAVORITES_TAG_ID)
+      Tag *activeTag = [[CurrentState sharedCurrentState] activeTag];
+      if ([activeTag isEqual:favoritesTag])
       {
-        [currentTag addCardToActiveSet:theCard];
+        [activeTag addCardToActiveSet:theCard];
       }
       
       // Now add the new ID onto the end of the search cache
@@ -608,7 +611,8 @@ const NSInteger KSegmentedTableHeader = 100;
     else
     {
       NSError *error = nil;
-      BOOL result = [TagPeer cancelMembership:theCard tagId:FAVORITES_TAG_ID error:&error];
+      Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
+      BOOL result = [TagPeer cancelMembership:theCard fromTag:favoritesTag error:&error];
       if (!result)
       {
         if ([error code] == kRemoveLastCardOnATagError)

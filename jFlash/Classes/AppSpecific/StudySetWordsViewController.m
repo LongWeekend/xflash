@@ -107,7 +107,7 @@
   {
     NSError *error = nil;
     Card *card = [[self.cards objectAtIndex:indexPath.row] retain];
-    BOOL result = [TagPeer cancelMembership:card tagId:tag.tagId error:&error];
+    BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
     if (!result)
     {
       if ([error code] == kRemoveLastCardOnATagError)
@@ -254,7 +254,7 @@
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
-    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self cards] objectAtIndex:indexPath.row]];
+    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[self.cards objectAtIndex:indexPath.row]];
     [tagController restrictMembershipChangeForTagId:self.tag.tagId];
     [self.navigationController pushViewController:tagController animated:YES];
     [tagController release];

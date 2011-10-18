@@ -66,14 +66,13 @@
   }
   
   // Create the tag
-  NSInteger lastTagId = [TagPeer createTag:theTextField.text withOwner:self.ownerId];
+  Tag *newTag = [TagPeer createTag:theTextField.text withOwner:self.ownerId];
   
   // TODO: Move this logic to the model level?
   // If there is a default card, subscribe it
-  if (lastTagId > 0 && self.defaultCard.cardId > 0)
+  if (newTag && self.defaultCard.cardId > 0)
   {
-    [TagPeer subscribe:self.defaultCard tagId:lastTagId];
-    LWE_LOG(@"last row: %d",lastTagId);
+    [TagPeer subscribeCard:self.defaultCard toTag:newTag];
   }
   
   [self.parentViewController dismissModalViewControllerAnimated:YES];

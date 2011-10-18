@@ -13,6 +13,7 @@ NSUInteger const kRemoveLastCardOnATagError  = 999;
 
 NSString * const LWETagContentDidChange = @"LWETagContentDidChange";
 NSString * const LWETagContentDidChangeTypeKey = @"LWETagContentDidChangeTypeKey";
+NSString * const LWETagContentDidChangeCardKey = @"LWETagContentDidChangeCardKey";
 NSString * const LWETagContentCardAdded = @"LWETagContentCardAdded";
 NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
@@ -63,7 +64,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  *          and automatically remove that card from the active set card cache.
  *          Note that this method DOES update the tag count cache on the tags table.
  */
-+ (BOOL)cancelMembership:(Card*)card tagId:(NSInteger)tagId error:(NSError **)theError
++ (BOOL)cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   CurrentState *currentState = [CurrentState sharedCurrentState];
@@ -72,12 +73,12 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   // First check whether the removed card is in the active tag.
   // if the tagId supplied is the active card, check for last card cause we dont
   // want the last card being removed from a tag. 
-  if (tagId == currentState.activeTag.tagId)
+  if ([tag isEqual:currentState.activeTag])
   {
     LWE_LOG(@"Editing current set tags");
     editingActiveSet = YES;
 
-    NSString *countSql = [NSString stringWithFormat:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '%d'", tagId];
+    NSString *countSql = [NSString stringWithFormat:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '%d'", tag.tagId];
     FMResultSet *rs = [db executeQuery:countSql];
     
     NSInteger totalCard = 0;
@@ -104,7 +105,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   }
 
   // Now execute the deletion from card_tag_link
-	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tagId];
+	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tag.tagId];
   [db executeUpdate:sql];
 
   if (editingActiveSet)
@@ -116,7 +117,7 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   else
   {
     // Update the tag's card count cache
-    [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tagId]];
+    [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tag.tagId]];
     
     if (db.dao.hadError)
     {
@@ -134,20 +135,23 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
     }
   }
   
-  // Finally, send a system-wide notification that this changed.  Any view controllers or model objects
-  // that are interested can respond.
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:LWETagContentCardRemoved forKey:LWETagContentDidChangeTypeKey];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange object:card userInfo:userInfo];
-  
+  // Finally, send a system-wide notification that this tag changed. Interested objects can listen.
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                            LWETagContentCardRemoved,LWETagContentDidChangeTypeKey,
+                            card,LWETagContentDidChangeCardKey,
+                            nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange
+                                                      object:tag
+                                                    userInfo:userInfo];
   return YES;
 }
 
 //! Checks if a passed tagId/cardId are matched
-+ (BOOL) checkMembership:(Card*)card tagId:(NSInteger)tagId
++ (BOOL) card:(Card*)card isMemberOfTag:(Tag*)tag
 {
   BOOL returnVal = NO;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tagId];
+	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tag.tagId];
 	FMResultSet *rs = [db executeQuery:sql];
 	while ([rs next])
   {
@@ -180,16 +184,16 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
  * Subscribes a Card to a given Tag based on parameter IDs
  * Note that this method DOES NOT update the tag count cache on the tags table
  */
-+ (void) subscribe:(Card*)card tagId:(NSInteger)tagId
++ (void) subscribeCard:(Card*)card toTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   // Insert tag link
-	NSString *sql  = [NSString stringWithFormat:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (%d,%d)",card.cardId,tagId];
+	NSString *sql  = [NSString stringWithFormat:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (%d,%d)",card.cardId,tag.tagId];
   [db executeUpdate:sql];
 
   // Update tag count
-	sql = [NSString stringWithFormat:@"UPDATE tags SET count = (count + 1) WHERE tag_id = %d",tagId];
+	sql = [NSString stringWithFormat:@"UPDATE tags SET count = (count + 1) WHERE tag_id = %d",tag.tagId];
   [db executeUpdate:sql];
 
   if (db.dao.hadError)
@@ -198,10 +202,14 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
     return;
   }
   
-  // Finally, send a system-wide notification that this changed.  Any view controllers or model objects
-  // that are interested can respond.
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:LWETagContentCardAdded forKey:LWETagContentDidChangeTypeKey];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange object:card userInfo:userInfo];
+  // Finally, send a system-wide notification that this tag changed. Interested objects can listen.
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                            LWETagContentCardAdded,LWETagContentDidChangeTypeKey,
+                            card,LWETagContentDidChangeCardKey,
+                            nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange
+                                                      object:tag
+                                                    userInfo:userInfo];
 }
 
 #pragma mark - Private Methods
@@ -258,7 +266,6 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
   return [TagPeer _retrieveTagListWithSQL:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 OR tag_id = 0 ORDER BY utag_name ASC"];
 }
 
-
 //! Gets system Tag objects that have card in them - as array
 + (NSArray*) retrieveSysTagListContainingCard:(Card*)card
 {
@@ -296,14 +303,15 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
 
 #pragma mark - Create & Delete
 
-//! adds a new tag to the database, returns the tagId of the created tag, 0 in case of error
-+ (NSInteger) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId
+//! adds a new tag to the database, returns new tag object, nil in case of error
++ (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
   tagName = [tagName stringByReplacingOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, tagName.length)];
   
+  Tag *createdTag = nil;
   NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name) VALUES ('%@')",tagName];
   [db executeUpdate:sql];
 
@@ -313,16 +321,10 @@ NSString * const LWEActiveTagContentDidChange				= @"LWEActiveTagContentDidChang
     // Link it & then update the tag card count cache
     [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES ('%d','%d')",lastTagId,ownerId]];
     [db executeUpdate:[NSString stringWithFormat:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = '%d'",ownerId]];
+    
+    createdTag = [TagPeer retrieveTagById:lastTagId];
   }
-  else
-  {
-    //TODO: We should fail here.
-    // TODO: TagID 0 is now a valid id (starred words) so this should return -1 or something.
-    // OR better yet it should return the tag object or nil (let's get away from IDs)
-    LWE_LOG(@"Unable to insert tag name: %@",tagName);
-    lastTagId = 0;
-  }
-  return lastTagId;
+  return createdTag;
 }
 
 //! Deletes a tag and all Card links

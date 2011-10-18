@@ -13,6 +13,7 @@ extern NSString * const LWEActiveTagContentDidChange;
 
 extern NSString * const LWETagContentDidChange;
 extern NSString * const LWETagContentDidChangeTypeKey;
+extern NSString * const LWETagContentDidChangeCardKey;
 extern NSString * const LWETagContentCardAdded;
 extern NSString * const LWETagContentCardRemoved; 
 
@@ -21,10 +22,10 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 
 @interface TagPeer : NSObject
 
-+ (NSInteger) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId;
-+ (BOOL)cancelMembership:(Card*)card tagId:(NSInteger)tagId error:(NSError **)theError;
-+ (void) subscribe:(Card*)card tagId:(NSInteger)tagId;
-+ (BOOL) checkMembership:(Card*)card tagId:(NSInteger)tagId;
++ (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId;
++ (BOOL)cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError;
++ (void) subscribeCard:(Card*)card toTag:(Tag*)tag;
++ (BOOL) card:(Card*)card isMemberOfTag:(Tag*)tag;
 + (NSArray*) membershipListForCard:(Card*)card;
 + (NSArray*) retrieveMyTagList; // this is not actually all of the user tags
 + (NSArray*) retrieveSysTagList;

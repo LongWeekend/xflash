@@ -298,11 +298,11 @@ enum EntrySectionRows
   
   // Check whether or not we are ADDING or REMOVING from the selected tag
   //TODO: Isnt it a local cache to check whether the card is a member of which tag? Cant we just use that? --Rendy 19/07/11
-  if ([TagPeer checkMembership:self.currentCard tagId:tmpTag.tagId])
+  if ([TagPeer card:self.currentCard isMemberOfTag:tmpTag])
   {
     // Remove tag
     NSError *error = nil;
-    BOOL result = [TagPeer cancelMembership:self.currentCard tagId:tmpTag.tagId error:&error];
+    BOOL result = [TagPeer cancelMembership:self.currentCard fromTag:tmpTag error:&error];
     if (!result)
     {
       //something wrong, check whether it is the last card.
@@ -324,7 +324,7 @@ enum EntrySectionRows
   }
   else
   {
-    [TagPeer subscribe:self.currentCard tagId:tmpTag.tagId];
+    [TagPeer subscribeCard:self.currentCard toTag:tmpTag];
     [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
     if (tmpTag.tagId == currentState.activeTag.tagId)
     {
