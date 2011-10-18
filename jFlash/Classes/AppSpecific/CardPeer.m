@@ -55,7 +55,7 @@
          "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
          "ORDER BY c.headword", keywordWildcard, 200];
   FMResultSet *rs = [db executeQuery:sql];
-  [CardPeer _addCardsToList:cardList fromResultSet:rs];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs];
   return (NSArray*)cardList;
 }
 
@@ -65,20 +65,20 @@
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardList = [NSMutableArray array];
   NSInteger queryLimit = 100;
-
+  
   NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
-  FMResultSet *rs = [db executeQuery:sql];
-  [CardPeer _addCardsToList:cardList fromResultSet:rs];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql]];
 
-  NSInteger queryLimit2 = queryLimit;
+#if defined(LWE_JFLASH)
+  // Presently JFlash is the only database w/ a PTAG/NON-PTAG setup
   if ([cardList count] < queryLimit)
   {
-    queryLimit2 = (queryLimit - [cardList count]) + queryLimit;
+    NSInteger remainingCards = (queryLimit - [cardList count]);
+    sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
+    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql]];
   }
+#endif
   
-  sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:queryLimit2];
-  rs = [db executeQuery:sql];
-  [CardPeer _addCardsToList:cardList fromResultSet:rs];
   return (NSArray*)cardList;
 }
 
