@@ -65,16 +65,14 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 + (BOOL)cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  CurrentState *currentState = [CurrentState sharedCurrentState];
-  BOOL editingActiveSet = NO;
   
   // First check whether the removed card is in the active tag.
   // if the tagId supplied is the active card, check for last card cause we dont
   // want the last card being removed from a tag. 
+  CurrentState *currentState = [CurrentState sharedCurrentState];
   if ([tag isEqual:currentState.activeTag])
   {
     LWE_LOG(@"Editing current set tags");
-    editingActiveSet = YES;
 
     NSString *countSql = [NSString stringWithFormat:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '%d'", tag.tagId];
     FMResultSet *rs = [db executeQuery:countSql];
@@ -106,13 +104,8 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tag.tagId];
   [db executeUpdate:sql];
 
-  if (editingActiveSet)
-  {
-    //TODO: We dont have any report back whether this operation will be sucessful.
-    //for now, it is assumable that this method will always sucess.
-    [currentState.activeTag removeCardFromActiveSet:card];
-  }
-  else
+  // Only update this stuff if not the active set
+  if ([tag isEqual:currentState.activeTag] == NO)
   {
     // Update the tag's card count cache
     [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tag.tagId]];
