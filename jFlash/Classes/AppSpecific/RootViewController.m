@@ -228,7 +228,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   if ((dict != nil) && ([dict count] > 0))
   {
     UIViewController *controller = (UIViewController *)[dict objectForKey:@"controller"];
-    [[[self tabBarController] view] addSubview:controller.view];
+    [self.tabBarController.view addSubview:controller.view];
   }
   else
   {
