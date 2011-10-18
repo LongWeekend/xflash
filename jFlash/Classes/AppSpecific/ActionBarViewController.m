@@ -80,7 +80,7 @@
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+  if ([TagPeer checkMembership:self.currentCard tagId:FAVORITES_TAG_ID])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
@@ -131,7 +131,7 @@
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
   {
     // Do something here - subscribe or cancel, depending.
-    if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+    if ([TagPeer checkMembership:self.currentCard tagId:FAVORITES_TAG_ID])
     {
       // First of all, do it
       NSError *error = nil;
@@ -153,7 +153,7 @@
     }
     else
     {
-      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribe:self.currentCard tagId:FAVORITES_TAG_ID];
     }
 
   }
