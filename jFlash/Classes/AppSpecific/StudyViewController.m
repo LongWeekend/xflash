@@ -7,6 +7,7 @@
 //
 
 #import "jFlashAppDelegate.h"
+#import "StudySetViewController.h"
 #import "StudyViewController.h"
 #import "SettingsViewController.h"
 #import "LWENetworkUtils.h"
@@ -20,16 +21,17 @@
 @property (nonatomic, assign, getter=hasViewBeenLoadedOnce) BOOL viewHasBeenLoadedOnce;
 @property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
-- (void)_resetAlertViewAndStudySet;
-- (void)_notifyUserStudySetHasBeenLearned;
-- (BOOL)_shouldShowExampleViewForCard:(Card*)card;
-- (void)_setupViewWithCard:(Card*)card;
-- (void)_setCardViewDelegateBasedOnMode;
-- (void)_refreshProgressBarView;
-- (void)_updateWordsPercentageView;
+- (void) _notifyUserStudySetHasBeenLearned;
+- (BOOL) _shouldShowExampleViewForCard:(Card*)card;
+- (void) _setupViewWithCard:(Card*)card;
+- (void) _setCardViewDelegateBasedOnMode;
+- (void) _refreshProgressBarView;
+- (void) _updateWordsPercentageView;
+- (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
-- (void)_setupScrollView;
-- (void)_setupViewAfterSettingsChange;
+- (void) _setupScrollView;
+- (void) _setupViewAfterSettingsChange;
+- (void) _setupViewAfterUserOrTagChange;
 @end
 
 @implementation StudyViewController
@@ -55,14 +57,14 @@
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
     _alreadyShowedAlertView = NO;
-    [self setFinishedSetAlertShowed:NO];
-    [self setViewHasBeenLoadedOnce:NO];
+
+    self.finishedSetAlertShowed = NO;
+    self.viewHasBeenLoadedOnce = NO;
   }
   return self;
 }
 
-#pragma mark -
-#pragma mark UIView Delegate Methods
+#pragma mark - UIView Delegate Methods
 
 /**
  * Refresh progress bar when view appears
@@ -105,44 +107,37 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  // This is called before drawing the view
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"setWasChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resetAlertViewAndStudySet) name:@"userWasChanged" object:nil];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetStudySet) name:LWESettingsChanged object:nil];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterUserOrTagChange) name:LWEActiveTagDidChange object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterUserOrTagChange) name:LWEUserSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterSettingsChange) name:LWECardSettingsChanged object:nil];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_activeTagContentDidChange:) name:LWEActiveTagContentDidChange object:nil];
-  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
+
   // Create a default mood icon object
-  MoodIcon *tmpMoodIcon = [[MoodIcon alloc] init];
-  [self setMoodIcon:tmpMoodIcon];
-  [tmpMoodIcon release];
-  
-  [self.moodIcon setMoodIconBtn:moodIconBtn];
-  [self.moodIcon setPercentCorrectLabel:percentCorrectLabel];
+  self.moodIcon = [[[MoodIcon alloc] init] autorelease];
+  self.moodIcon.moodIconBtn = self.moodIconBtn;
+  self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
   
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
-  [self setProgressBarViewController:tmpPBVC];
-  [self.progressBarView addSubview:progressBarViewController.view];
+  [self.progressBarView addSubview:tmpPBVC.view];
+  self.progressBarViewController = tmpPBVC;
 	[tmpPBVC release];
   
   // Add the CardView to the View
 	CardViewController *tmpCVC = [[CardViewController alloc] init];
-  [tmpCVC setCurrentCard:[self currentCard]];
-  [self.cardView addSubview: [tmpCVC view]];  
-  [self setCardViewController:tmpCVC];
+  tmpCVC.currentCard = self.currentCard;
+  [self.cardView addSubview:tmpCVC.view];
+  self.cardViewController = tmpCVC;
 	[tmpCVC release];
   
   // Add the Action Bar to the View
 	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] init];
-  [tmpABVC setCurrentCard:[self currentCard]];
-  [self.actionbarView addSubview:[tmpABVC view]];
-  [self setActionBarController:tmpABVC];
+  tmpABVC.currentCard = self.currentCard;
+  [self.actionbarView addSubview:tmpABVC.view];
+  self.actionBarController = tmpABVC;
 	[tmpABVC release];
 
   // Initialize the scroll view
@@ -202,8 +197,7 @@
   }
 }
 
-#pragma mark -
-#pragma mark Study set has been learnt.
+#pragma mark - Study set has been learnt.
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
@@ -221,12 +215,6 @@
     [alertView release];
     self.finishedSetAlertShowed = YES;
   }
-}
-
-- (void)_resetAlertViewAndStudySet
-{
-  [self setFinishedSetAlertShowed:NO];
-  [self resetStudySet];
 }
 
 #pragma mark - Public methods
@@ -498,6 +486,13 @@
 	[self resetViewWithCard:self.currentCard];
 }
 
+// TODO: PRIME suspect to be converted to a block.
+- (void) _setupViewAfterUserOrTagChange
+{
+  self.finishedSetAlertShowed = NO;
+  [self resetStudySet];
+}
+
 /**
  * Sets up all of the delegates and sub-controllers of the study view controller.
  */
@@ -629,36 +624,52 @@
   [self.progressBarViewController drawProgressBar];
 }
 
-- (void)_activeTagContentDidChange:(NSNotification *)notification
+- (void) _tagContentDidChange:(NSNotification*)notification
 {
-  LWE_LOG(@"[DEBUG]Active tag content has been changed notification");
-  id obj = [notification object];
-  Card *card = nil;
-  
-  //Make sure we have a Card kind of object
-  if ([obj isKindOfClass:[Card class]])
-    card = (Card *)obj;
-      
-  if (card.cardId == self.currentCard.cardId)
+  // First of all, we don't care if we're not talking about the active set, so quick return otherwise.
+  if ([self.currentCardSet isEqual:(Tag*)notification.object] == NO)
   {
-    //Get a new random card?
-    NSError *error = nil;
-    Card *nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
-    if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
-    {
-      [self _notifyUserStudySetHasBeenLearned];
-    }
-    [self resetViewWithCard:nextCard];
+    return;
   }
-  else
+  
+  // Next check that we have a valid card to deal with
+  Card *theCard = [notification.userInfo objectForKey:LWETagContentDidChangeCardKey];
+  if (theCard == nil)
   {
-    //The current tag's content has been changed to the current card.
-    //Just refresh the view with the current card.
-    
-    //It is smoother to just update the percentage below, rather than the need to update the
-    //whole view of the cards (the state will be changed as well like meaning label is hidden, etc)
-    //[self resetViewWithCard:self.currentCard];
+    return;
+  }
+  // Unfortunately, this new setup isn't perfect yet.  We have a card, but it does NOT have a
+  // levelId associated with it, because we retrieved it in a different, far off place that doesn't
+  // care about level Ids.  So we need to re-get the card, sadly.  This should still be faster
+  // than any other way around the problem... MMA - 18.Oct.2011
+  theCard = [CardPeer retrieveCardByPK:theCard.cardId];
+  
+  NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
+  if ([changeType isEqualToString:LWETagContentCardAdded])
+  {
+    [self.currentCardSet addCardToActiveSet:theCard];
     [self _updateWordsPercentageView];
+  }
+  else if ([changeType isEqualToString:LWETagContentCardRemoved])
+  {
+    [self.currentCardSet removeCardFromActiveSet:theCard];
+    if ([theCard isEqual:self.currentCard])
+    {
+      //Get a new random card?
+      NSError *error = nil;
+      Card *nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
+      if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+      {
+        [self _notifyUserStudySetHasBeenLearned];
+      }
+      [self resetViewWithCard:nextCard];
+    }
+    else
+    {
+      //It is smoother to just update the percentage, rather than the need to update the
+      //whole view of the cards (the state will be changed as well like meaning label is hidden, etc)
+      [self _updateWordsPercentageView];
+    }
   }
 }
 
@@ -689,16 +700,14 @@
   }
 }
 
-#pragma mark -
-#pragma mark ProgressDetailsViewDelegate
+#pragma mark - ProgressDetailsViewDelegate
 
 - (void)progressDetailsViewControllerShouldDismissView:(id)progressDetailsViewController
 {
   self.progressVC = nil;
 }
 
-#pragma mark -
-#pragma mark ScrollView Delegate & Page Control stuff
+#pragma mark - ScrollView Delegate & Page Control stuff
 
 /**
  * Called when a major thing happens (JFlash startup or EX_DB plugin installation)
@@ -806,7 +815,10 @@
 
 - (void) dealloc
 {
-  if (self.progressVC) [_progressVC release];
+  if (self.progressVC)
+  {
+    [_progressVC release];
+  }
   //theme
   [practiceBgImage release];
   
