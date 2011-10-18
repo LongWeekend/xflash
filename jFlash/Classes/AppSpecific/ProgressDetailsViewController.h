@@ -15,33 +15,7 @@
 - (void)progressDetailsViewControllerShouldDismissView:(ProgressDetailsViewController *)progressDetailsViewController;
 @end
 
-@interface ProgressDetailsViewController : UIViewController {
-  IBOutlet UILabel *currentNumberOfWords;
-  IBOutlet UILabel *totalNumberOfWords;
-  
-  IBOutlet UIButton *closeBtn;
-  IBOutlet UILabel *currentStudySet;
-  IBOutlet UILabel *motivationLabel;
-  IBOutlet UILabel *streakLabel;
-  
-  IBOutlet UILabel *cardsViewedNow;
-  IBOutlet UILabel *cardsViewedAllTime;
-  IBOutlet UILabel *cardsRightNow;
-  IBOutlet UILabel *cardsWrongNow;
-  
-  IBOutlet UILabel *cardSetProgressLabel0;
-  IBOutlet UILabel *cardSetProgressLabel1;
-  IBOutlet UILabel *cardSetProgressLabel2;
-  IBOutlet UILabel *cardSetProgressLabel3;
-  IBOutlet UILabel *cardSetProgressLabel4;
-  IBOutlet UILabel *cardSetProgressLabel5;  
-  IBOutlet UILabel *progressViewTitle;  
-  
-  NSMutableArray* levelDetails;
-  NSInteger wrongStreak;
-  NSInteger rightStreak;
-  id<ProgressDetailsDelegate> delegate;
-}
+@interface ProgressDetailsViewController : UIViewController
 
 - (IBAction) dismiss;
 - (void) drawProgressBars;
