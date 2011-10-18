@@ -16,54 +16,80 @@
 @synthesize currentNumberOfWords, totalNumberOfWords;
 @synthesize delegate;
 
+#pragma mark - UIViewController Methods
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7 ];
+  self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7];
   [self drawProgressBars];
   [self setStreakLabel];
-  [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
   NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger totalWords = [[levelDetails objectAtIndex:6] intValue];
+  NSInteger totalWords = [[self.levelDetails objectAtIndex:6] intValue];
   if (totalWords > maxStudying)
   {
-    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d*",maxStudying]];
-    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }
   else
   {
-    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
-    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }    
 
-  // Set the tag name
-  NSString *setName = [[[CurrentState sharedCurrentState] activeTag] tagName];
-  [self.currentStudySet setText:setName];
+  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",[[self.levelDetails objectAtIndex:7] intValue]];
+  self.currentStudySet.text = [[[CurrentState sharedCurrentState] activeTag] tagName];
 }
+
+
+//This was added for safety reason? - Rendy 13/08/10
+- (void)viewDidUnload
+{
+	[super viewDidUnload];
+	
+	self.currentNumberOfWords = nil;
+	self.totalNumberOfWords = nil;
+	self.closeBtn = nil;
+	self.currentStudySet = nil;
+	self.motivationLabel = nil;
+	self.streakLabel = nil;
+	self.cardsViewedNow = nil;
+	self.cardsViewedAllTime = nil;
+	self.cardsRightNow = nil;
+	self.cardsWrongNow = nil;
+	self.cardSetProgressLabel0 = nil;
+	self.cardSetProgressLabel1 = nil;
+	self.cardSetProgressLabel2 = nil;
+	self.cardSetProgressLabel3 = nil;
+	self.cardSetProgressLabel4 = nil;
+	self.cardSetProgressLabel5 = nil;
+	self.progressViewTitle = nil;
+}
+
+#pragma mark -
 
 - (void)setStreakLabel
 {
-  NSString* streakText;
-  if(wrongStreak > 0)
+  NSString *streakText = nil;
+  if (self.wrongStreak > 0)
   {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i wrong",@"ProgressDetailsViewController.NumWrongStreak"), wrongStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i wrong",@"ProgressDetailsViewController.NumWrongStreak"), self.wrongStreak];
   }
   else
   {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i right",@"ProgressDetailsViewController.NumRightStreak"), rightStreak];
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i right",@"ProgressDetailsViewController.NumRightStreak"), self.rightStreak];
   }
-  streakLabel.text = streakText;
+  self.streakLabel.text = streakText;
   [streakText release];
 }
 
 - (void)drawProgressBars
 {  
-  NSString* labelText;
-  NSArray* labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
-  int i;
+  NSString *labelText;
+  NSArray *labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
+  NSInteger i;
   for(i = 0; i < 6; i++)
   {
     labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", 100*[[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue], [[levelDetails objectAtIndex:i]intValue]];
@@ -96,39 +122,20 @@
 - (IBAction) dismiss
 {
   [self.view removeFromSuperview];
-  if ([[self delegate] respondsToSelector:@selector(progressDetailsViewControllerShouldDismissView:)])
-  {
-    [[self delegate] progressDetailsViewControllerShouldDismissView:self];
-  }
+  LWE_DELEGATE_CALL(@selector(progressDetailsViewControllerShouldDismissView:), self);
 }
 
-//This was added for safety reason? - Rendy 13/08/10
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	
-	self.currentNumberOfWords = nil;
-	self.totalNumberOfWords = nil;
-	self.closeBtn = nil;
-	self.currentStudySet = nil;
-	self.motivationLabel = nil;
-	self.streakLabel = nil;
-	self.cardsViewedNow = nil;
-	self.cardsViewedAllTime = nil;
-	self.cardsRightNow = nil;
-	self.cardsWrongNow = nil;
-	self.cardSetProgressLabel0 = nil;
-	self.cardSetProgressLabel1 = nil;
-	self.cardSetProgressLabel2 = nil;
-	self.cardSetProgressLabel3 = nil;
-	self.cardSetProgressLabel4 = nil;
-	self.cardSetProgressLabel5 = nil;
-	self.progressViewTitle = nil;
-}
-
+#pragma mark - Class Plumbing
 
 - (void)dealloc
 {
+  [currentStudySet release];
+  [closeBtn release];
+  [streakLabel release];
+  [motivationLabel release];
+  [cardsViewedNow release];
+  [progressViewTitle release];
+  
   [levelDetails release];
   [currentNumberOfWords release];
   [totalNumberOfWords release];
