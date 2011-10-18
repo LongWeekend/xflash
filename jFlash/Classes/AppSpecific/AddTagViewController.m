@@ -27,7 +27,7 @@ enum EntrySectionRows
 @end
 
 @implementation AddTagViewController
-@synthesize cardId,myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
+@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
 
 /**
  * Initializer - automatically loads AddTagView XIB file
@@ -39,7 +39,6 @@ enum EntrySectionRows
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
-    self.cardId = card.cardId;
     self.currentCard = card;
     self.myTagArray = [TagPeer retrieveMyTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
@@ -134,8 +133,8 @@ enum EntrySectionRows
 }
 
 
-/** Remove a card from the membership cache */
-- (void) removeFromMembershipCache: (NSInteger) tagId
+/** Remove a tag from the membership cache */
+- (void) removeFromMembershipCache:(NSInteger)tagId
 {
   // TODO: change this to fast iteration; stop mutating array in place while enumerating!
   if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)

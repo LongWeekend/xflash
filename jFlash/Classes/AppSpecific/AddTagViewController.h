@@ -31,6 +31,5 @@
 @property (retain) NSArray *myTagArray;
 @property (retain) NSArray *sysTagArray;
 @property (retain) Card *currentCard;
-@property NSInteger cardId;
 
 @end
