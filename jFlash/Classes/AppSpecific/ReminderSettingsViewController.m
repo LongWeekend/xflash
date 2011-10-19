@@ -201,7 +201,7 @@
     cell = [LWEUITableUtils reuseCellForIdentifier:@"settings" onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     if (indexPath.row == 0)
     {
-      cell.textLabel.text = @"Days After Last Session";
+      cell.textLabel.text = NSLocalizedString(@"Days After Last Session",@"RemindersVC.DaysAfterLastSesssionLabel");
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",_numDays];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
