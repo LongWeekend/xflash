@@ -17,11 +17,8 @@
 {
   if ((self = [super init]))
   {
-    [self setMode:kUserViewModeAdd];
-    if ([self mode] == kUserViewModeAdd)
-    {
-      self.selectedUser = [[[User alloc] init] autorelease];      
-    }
+    self.mode = kUserViewModeAdd;
+    self.selectedUser = [[[User alloc] init] autorelease];      
   }
   return self;
 }
@@ -35,15 +32,15 @@
   // Hide all the buttons if we are adding a new user
   if (self.mode == kUserViewModeAdd)
   {
-    [commitChangesBtn setHidden:YES];
-    [activateUserBtn setHidden:YES];
+    self.commitChangesBtn.hidden = YES;
+    self.activateUserBtn.hidden = YES;
   }
 }
 
 - (void)viewDidAppear:(BOOL)animated 
 {
   [super viewDidAppear:animated];
-  self.userNicknameTextField.text = [selectedUser userNickname];
+  self.userNicknameTextField.text = [self.selectedUser userNickname];
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -61,20 +58,20 @@
   [self.selectedUser setUserNickname:[self.userNicknameTextField text]];
   if (self.mode == kUserViewModeEdit)
   {
-    if([[userNicknameTextField text] isEqualToString:self.originalUserNickname])
+    if([self.userNicknameTextField.text isEqualToString:self.originalUserNickname])
     {
       // User hasn't changed their name
-      [self.commitChangesBtn setHidden:YES];
+      self.commitChangesBtn.hidden = YES;
     }
     else if ([self.userNicknameTextField.text length] == 0)
     {
       // You can't save it if there is no name
-      [self.commitChangesBtn setHidden:YES];
+      self.commitChangesBtn.hidden = YES;
     }
     else 
     {
       // Otherwise show
-      [self.commitChangesBtn setHidden:NO];
+      self.commitChangesBtn.hidden = NO;
     }
   }
 }
