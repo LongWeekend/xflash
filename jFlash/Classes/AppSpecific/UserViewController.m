@@ -86,16 +86,16 @@
 {
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* tmpNickname = [[usersArray objectAtIndex:indexPath.row] userNickname];
+  NSString* tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
   UITableViewCell *cell;
 
   // Selected cells are highlighted
-  if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId])
+  if([settings integerForKey:@"user_id"] == [[self.usersArray objectAtIndex:indexPath.row] userId])
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:[usersArray count]];
+    [bgView setCellIndexPath:indexPath tableLength:[self.usersArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -165,7 +165,7 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Cancel deletion if the user is ID=1
-    NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
+    NSInteger selectedUserId = [[self.usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
     {
       [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
@@ -174,11 +174,11 @@
     }
 
     // Delete the row from the data source
-    User *tmpUser = [usersArray objectAtIndex:indexPath.row];
+    User *tmpUser = [self.usersArray objectAtIndex:indexPath.row];
     [tmpUser deleteUser];
 
     // Remove from usersArray
-    [usersArray removeObjectAtIndex:indexPath.row];
+    [self.usersArray removeObjectAtIndex:indexPath.row];
 
     // If we just deleted the active user, change to iPhone Owner
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -243,7 +243,7 @@
 
 - (void)dealloc
 {
-  [self setUsersArray:nil];
+  [usersArray release];
   [super dealloc];
 }
 
