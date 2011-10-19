@@ -28,7 +28,7 @@
     self.remindersOn = ([reminderSetting integerValue] > 0);
     _numDays = [reminderSetting integerValue];
     
-    // Note that the implementation is naive in using the same dataset for values & display: DONT put strings in here
+    // Implementation is naive: using the same dataset for values & display, DO NOT put non-integer strings in here
     self.numDaysArray = [NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"7",@"10",@"14",@"21",@"30",nil];
   }
   return self;
