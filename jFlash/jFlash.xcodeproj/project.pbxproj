@@ -72,7 +72,6 @@
 		49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */; };
 		4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
-		4938F8BA14024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4938F8C514027841001EB473 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C414027841001EB473 /* libsqlite3.a */; };
 		4938F8C714027853001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
