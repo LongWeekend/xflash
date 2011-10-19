@@ -25,6 +25,7 @@ NSString * const APP_ALGORITHM            = @"algorithm";
 NSString * const APP_USER                 = @"user_id";
 NSString * const APP_HEADWORD             = @"headword";
 NSString * const APP_PLUGIN               = @"plugin";
+NSString * const APP_REMINDER             = @"reminder";
 NSString * const APP_MAX_STUDYING         = @"maxStudying";
 NSString * const APP_FREQUENCY_MULTIPLIER = @"frequency_multiplier";
 NSString * const APP_DIFFICULTY           = @"app_difficulty";

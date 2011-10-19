@@ -26,6 +26,7 @@ extern NSString * const APP_ALGORITHM;
 extern NSString * const APP_USER;
 extern NSString * const APP_HEADWORD;
 extern NSString * const APP_PLUGIN;
+extern NSString * const APP_REMINDER;
 extern NSString * const APP_FREQUENCY_MULTIPLIER;
 extern NSString * const APP_MAX_STUDYING;
 extern NSString * const APP_DIFFICULTY;
