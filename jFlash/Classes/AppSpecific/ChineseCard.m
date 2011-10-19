@@ -106,7 +106,7 @@
                                    nil];
     if (toneNumber < 5)
     {
-      NSString *key = [NSString stringWithFormat:@"%@%d",vowel,toneNumber];
+      NSString *key = [NSString stringWithFormat:@"%@%d",[vowel lowercaseString],toneNumber];
       NSString *newVowel = [diacriticDict objectForKey:key];
       reading = [reading stringByReplacingOccurrencesOfString:vowel withString:newVowel];
     }
