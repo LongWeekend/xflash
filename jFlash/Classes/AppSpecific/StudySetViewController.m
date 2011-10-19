@@ -206,14 +206,6 @@ enum Sections {
 
 #pragma mark - UITableView methods
 
-/** Goes into editing mode **/
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-	[super setEditing:editing animated:animated];
-	[self.tableView setEditing:editing animated:YES];
-}
-
-
 /**
  * Allows user to delete the selected tag
  * Note that this does not accept responsibility for IF the tag SHOULD be deleted
@@ -688,8 +680,7 @@ enum Sections {
   [self reloadTableData];
 }
 
-
-// TODO: MMA 6_12_2010 - does this ever get called?
+// Called when the user finally presses "Search" on the keyboard
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
   self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
