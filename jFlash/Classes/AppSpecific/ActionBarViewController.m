@@ -9,6 +9,7 @@
 #import "ActionBarViewController.h"
 #import "RootViewController.h"
 #import "LWEJanrainLoginManager.h"
+#import "LWETwitterEngine.h"
 
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
@@ -108,11 +109,7 @@
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  // TODO: really?  Let's stop using app delegate here and use a notification or somethign.
-  // we present on the appDelegates root view controller to make sure it covers everything
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-  
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
     [self reportBadData];
@@ -120,16 +117,16 @@
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
     AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:self.currentCard];
-    
-    // Set up DONE button
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
-    tmpVC.navigationItem.leftBarButtonItem = doneBtn;
-    [doneBtn release];
-    
-    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:tmpVC];
-    [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
+    tmpVC.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+                                               initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle")
+                                                       style:UIBarButtonItemStyleBordered
+                                                      target:tmpVC
+                                                     action:@selector(dismissModalViewControllerAnimated:)] autorelease];
+
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:tmpVC,@"controller",
+                              [NSNumber numberWithBool:YES],@"useNavController",nil];
     [tmpVC release];
-    [modalNavControl release];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:userInfo];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
   {    
@@ -300,17 +297,12 @@
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
 
-  NSInteger errorCode = [error code];
-  
-  //TODO - change these error codes to constants
-  // This is the error when the user tweets the same thing twice
-  if (errorCode == 1)
+  if (error.domain == LWETwitterErrorDomain && error.code == LWETwitterErrorUnableToSendTweet)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
                                        message:NSLocalizedString(@"Did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")];    
   }
-  // CFNetwork error
-  else if (errorCode == -1009)
+  else if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
   {
     [LWEUIAlertView noNetworkAlert];
   }
