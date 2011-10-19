@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ReminderSettingsViewController : UITableViewController
+@interface ReminderSettingsViewController : UITableViewController <UIPickerViewDelegate>
+{
+  NSInteger _numDays;
+}
 
 - (IBAction) switchValueChanged:(UISwitch*)sender;
-- (IBAction) sliderValueChanged:(UISlider*)sender;
 
 @property BOOL remindersOn;
-
 @property (nonatomic,retain) IBOutlet UISwitch *onOffSwitch;
-@property (nonatomic,retain) IBOutlet UISlider *timeSlider;
+@property (nonatomic,retain) IBOutlet UIPickerView *picker;
+
 @end
