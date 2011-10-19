@@ -7,6 +7,9 @@
 //
 
 #import "AddTagViewController.h"
+#import "AddStudySetInputViewController.h"
+#import "TagPeer.h"
+#import "ChineseCard.h"
 
 enum Sections
 {
@@ -22,6 +25,7 @@ enum EntrySectionRows
   NUM_HEADER_SECTION_ROWS
 };
 
+// Private methods & properties
 @interface AddTagViewController ()
 - (void) _reloadTableData;
 - (void) _removeTagFromMembershipCache:(NSInteger)tagId;
@@ -242,9 +246,9 @@ enum EntrySectionRows
   {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.lineBreakMode = UILineBreakModeWordWrap;
-    label.minimumFontSize = FONT_SIZE;
+    label.minimumFontSize = FONT_SIZE_ADD_TAG_VC;
     label.numberOfLines = 0;
-    label.font = [UIFont systemFontOfSize:FONT_SIZE];
+    label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
     
     NSString *reading = nil;
 #if defined(LWE_CFLASH)
@@ -253,7 +257,10 @@ enum EntrySectionRows
     reading = [self.currentCard reading];
 #endif  
     label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [self.currentCard meaningWithoutMarkup]];
-    label.frame = [LWEUILabelUtils makeFrameForText:label.text fontSize:FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
+    label.frame = [LWEUILabelUtils makeFrameForText:label.text
+                                           fontSize:FONT_SIZE_ADD_TAG_VC
+                                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
+                                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell.contentView addSubview:label];

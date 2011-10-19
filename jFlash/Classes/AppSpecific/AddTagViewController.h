@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddStudySetInputViewController.h"
-#import "TagPeer.h"
+#import "Card.h"
 
-#import "ChineseCard.h"
-
-// TODO: really?  needs a better name, probably in a better place, with a better description/comment
-#define FONT_SIZE 14
 
 @interface AddTagViewController : UIViewController
 
