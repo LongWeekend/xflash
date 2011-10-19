@@ -121,7 +121,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
   
   // Select the active row first
   NSInteger index = [self.numDaysArray indexOfObject:[NSString stringWithFormat:@"%d",_numDays]];
