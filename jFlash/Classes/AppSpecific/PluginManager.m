@@ -145,7 +145,7 @@
         }
 				else 
         {
-					path = [LWEFile createDocumentPathWithFilename:[dict objectForKey:LWEPluginTargetPathKey]];
+					path = [self _pathToDownloadedPluginForFilename:[dict objectForKey:LWEPluginTargetPathKey]];
 				}
         
 				[md setValue:path forKey:LWEPluginTargetPathKey];
@@ -544,6 +544,16 @@
 #pragma mark Privates
 
 /**
+ * Returns the path for a plugin that was downloaded given a filename
+ * Exists to keep the location in one location of this file.
+ */
+- (NSString *)_pathToDownloadedPluginForFilename:(NSString *)filename
+{
+  return [LWEFile createCachesPathWithFilename:filename];
+//  return [LWEFile createDocumentPathWithFilename:filename];
+}
+
+/**
  * Updates the plugin paths if necessary (for example if they changed after a restore)
  * Passing a YES as a paramater to this method will MESS UP any installation - it is for debugging!
  */
@@ -580,7 +590,7 @@
       }
       else
       {
-        newPath = [LWEFile createDocumentPathWithFilename:[tmpDict valueForKey:LWEPluginFilenameKey]];
+        newPath = [self _pathToDownloadedPluginForFilename:[tmpDict valueForKey:LWEPluginFilenameKey]];
       }
     }
     
@@ -686,13 +696,13 @@
     }
 		
     
-    //Needss update means it will add the plugin dictionary to the mutable dictionary initialized
+    //Needs update means it will add the plugin dictionary to the mutable dictionary initialized
     //in the beginning of this method.
     //Before doing that, it also tried to fix the plugin_target_path to be the document path of the device.
     if (needUpdate)
     {
       NSString *plugin_path = [plugin objectForKey:LWEPluginTargetPathKey];
-      [plugin setValue:[LWEFile createDocumentPathWithFilename:plugin_path] forKey:LWEPluginTargetPathKey];
+      [plugin setValue:[self _pathToDownloadedPluginForFilename:plugin_path] forKey:LWEPluginTargetPathKey];
       [awaitsUpdatePlugins setValue:plugin forKey:pluginKey];
     }
   }

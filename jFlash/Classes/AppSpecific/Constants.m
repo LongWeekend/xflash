@@ -65,6 +65,7 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_3           = @"1.3";
       NSString * const LWE_JF_VERSION_1_4           = @"1.4";
       NSString * const LWE_JF_VERSION_1_5           = @"1.5";
+      NSString * const LWE_JF_VERSION_1_6           = @"1.6";
 
       // This pertains to the plugin manager
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";

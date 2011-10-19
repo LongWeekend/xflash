@@ -20,8 +20,6 @@
 		24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
-		24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660B13CF656200BEE166 /* jFlashTest.h */; };
-		24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B5660D13CF656200BEE166 /* jFlashTest.m */; };
 		24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
 		24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E3113D7539F00B2BB56 /* AppDelegate.m */; };
 		24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
@@ -675,8 +673,6 @@
 		24B5660613CF656200BEE166 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlashTest-Info.plist"; sourceTree = "<group>"; };
 		24B5660813CF656200BEE166 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
-		24B5660B13CF656200BEE166 /* jFlashTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jFlashTest.h; sourceTree = "<group>"; };
-		24B5660D13CF656200BEE166 /* jFlashTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jFlashTest.m; sourceTree = "<group>"; };
 		24B5661413CF67CD00BEE166 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		24B5661613CF686E00BEE166 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		24B5661713CF686E00BEE166 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
@@ -1264,8 +1260,6 @@
 			children = (
 				24DE1E2213D6AD1D00B2BB56 /* DatabaseSetup */,
 				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
-				24B5660B13CF656200BEE166 /* jFlashTest.h */,
-				24B5660D13CF656200BEE166 /* jFlashTest.m */,
 				24B5660513CF656200BEE166 /* Supporting Files */,
 				24B5661613CF686E00BEE166 /* Test.h */,
 				24B5661713CF686E00BEE166 /* Test.m */,
@@ -2558,8 +2552,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */,
-				24B5660C13CF656200BEE166 /* jFlashTest.h in Resources */,
-				4938F8BA14024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2887,7 +2879,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */,
-				24B5660E13CF656200BEE166 /* jFlashTest.m in Sources */,
 				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
 				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
 				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,

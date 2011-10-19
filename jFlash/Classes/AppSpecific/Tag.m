@@ -64,7 +64,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   NSInteger totalCardsInSet = self.cardCount;
   
   //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
-  //and also tell that the totalCardsInSet is no longer the whole sets but the one NOT in the buried section.
+  //and also tell that the totalCardsInSet is no longer the whole sets but the ones NOT in the buried section.
   if (hideBuriedCard)
   {
     numLevels = 4;
@@ -81,10 +81,11 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
       }
       return 5;
     }
-    else 
+    else if ((totalCardsInSet < 1) && (totalCardsInBurried == 0))
     {
       //RARE CASES, but in case, the cards are all exhausted as they are all in "learned"
       //but we dont have any "learned" cards. Strange..
+      LWE_ASSERT_EXC(NO, @"All cards are in learned, but we dont have anything in learned.");
       LWE_LOG_ERROR(@"[UNKNOWN ERROR]All cards are in learned, but we dont have anything in learned. Sides, the 'hide' learned is ON.\nSelf: %@", self);
     }
   }
