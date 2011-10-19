@@ -182,7 +182,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
 
   // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
-  UINavigationController *vc = (UINavigationController*)[tabBarController selectedViewController];
+  UINavigationController *vc = (UINavigationController*)[self.tabBarController selectedViewController];
   if ([vc isKindOfClass:[UINavigationController class]])
   {
     SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
@@ -279,23 +279,20 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 #pragma mark -
 
-
 /**
  * Update the settings tab bar item with badge number
  */
 -(void)changeSettingsBadge:(NSNotification*)aNotification
 {
-  NSNumber *badgeNumber = [[aNotification userInfo] objectForKey:@"badge_number"];
-  NSArray *tabBarItems = [[self.tabBarController tabBar] items];
-  // TODO: change this to a constant later
-  UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
+  NSNumber *badgeNumber = [aNotification.userInfo objectForKey:@"badge_number"];
+  UITabBarItem *settingsTabBar = [self.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
 	if ([badgeNumber intValue] != 0)
   {
-		[settingsTabBar setBadgeValue:[badgeNumber stringValue]];
+    settingsTabBar.badgeValue = [badgeNumber stringValue];
   }
   else 
   {
-		[settingsTabBar setBadgeValue:nil];
+    settingsTabBar.badgeValue = nil;
   }
 }
 
