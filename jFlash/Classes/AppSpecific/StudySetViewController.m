@@ -244,13 +244,16 @@ enum Sections {
 }
 
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+-(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == kBackupSection)
   {
-    return @"Backup Custom Sets";
+    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
   }
-  return NULL;
+  else
+  {
+    return nil;
+  }
 }
 
 
