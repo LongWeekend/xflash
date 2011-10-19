@@ -14,5 +14,6 @@
 @property (retain) NSDictionary *settingsHash;
 
 @property BOOL resetCardOnly;
+@property BOOL settingChanged;
 
 @end

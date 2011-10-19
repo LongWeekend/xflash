@@ -12,7 +12,7 @@
 @implementation ChineseSettingsDataSource
 
 @synthesize resetCardOnly;
-@synthesize settingsHash;
+@synthesize settingsHash, settingChanged;
 
 - (void) dealloc
 {
@@ -33,16 +33,21 @@
   {
     self.resetCardOnly = YES;
   }
+  else
+  {
+    self.resetCardOnly = NO;
+  }
+  self.settingChanged = YES;
 }
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return self.resetCardOnly;
+  return (self.settingChanged && self.resetCardOnly);
 }
 
 - (BOOL) shouldSendChangeNotification
 {
-  return (self.resetCardOnly == NO);
+  return (self.settingChanged && (self.resetCardOnly == NO));
 }
 
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc

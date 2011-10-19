@@ -13,7 +13,7 @@
 @implementation JapaneseSettingsDataSource
 
 @synthesize resetCardOnly;
-@synthesize settingsHash;
+@synthesize settingsHash, settingChanged;
 
 - (void) dealloc
 {
@@ -33,6 +33,11 @@
   {
     self.resetCardOnly = YES; 
   }
+  else
+  {
+    self.resetCardOnly = NO;
+  }
+  self.settingChanged = YES;
 }
 
 - (BOOL) shouldSendCardChangeNotification
