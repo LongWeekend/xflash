@@ -24,7 +24,6 @@
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (void) _setupViewWithCard:(Card*)card;
-- (void) _setCardViewDelegateBasedOnMode;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
@@ -232,11 +231,11 @@
 - (void) resetStudySet
 {
   // Initialize all variables
-  currentRightStreak = 0;
-  currentWrongStreak = 0;
-  numRight = 0;
-  numWrong = 0;
-  numViewed = 0;
+  self.currentRightStreak = 0;
+  self.currentWrongStreak = 0;
+  self.numRight = 0;
+  self.numWrong = 0;
+  self.numViewed = 0;
   self.percentCorrectLabel.text = percentCorrectLabelStartText;
   [self.moodIcon updateMoodIcon:100.0f];
   
@@ -269,22 +268,37 @@
  */
 - (void) resetViewWithCard:(Card*)card
 {
-  [self _setCardViewDelegateBasedOnMode];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
+	id<CardViewControllerDelegate, ActionBarViewControllerDelegate> cardViewDelegate = nil;
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
+  {
+		cardViewDelegate = [[BrowseModeCardViewDelegate alloc] init];
+  }
+  else
+  {
+		cardViewDelegate = [[PracticeModeCardViewDelegate alloc] init];
+  }
+	
+	//Not increasing retain count.
+  self.cardViewController.delegate = cardViewDelegate;
+  self.actionBarController.delegate = cardViewDelegate;
+  self.cardViewControllerDelegate = cardViewDelegate;
+	[cardViewDelegate release];
+  
+  // Now send our new delegate a message telling it we are using it
+  [self.cardViewController studyModeDidChange:self];
   
   // Set up background based on theme
   // TODO: iPad customization
   NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
   self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
   
-  // Update mood icon (is this necessary to do here??)
-  CGFloat tmpRatio = 0;
-  if (numViewed > 0)
+  // Update mood icon
+  CGFloat tmpRatio = 100;
+  if (self.numViewed > 0)
   {
-    tmpRatio = 100*((CGFloat)numRight / (CGFloat)numViewed);
-  }
-  else
-  {
-    tmpRatio = 100;
+    tmpRatio = 100*((CGFloat)self.numRight / (CGFloat)self.numViewed);
   }
   [self.moodIcon updateMoodIcon:tmpRatio];
   
@@ -524,33 +538,6 @@
   }
   return returnVal;
 }
-
-/**
- * Chooses an appropriate delegate class for CardViewController
- * depending on which mode we are in (BROWSE or STUDY).
- */
-- (void) _setCardViewDelegateBasedOnMode
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-	id<CardViewControllerDelegate, ActionBarViewControllerDelegate> cardViewDelegate = nil;
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
-  {
-		cardViewDelegate = [[BrowseModeCardViewDelegate alloc] init];
-  }
-  else
-  {
-		cardViewDelegate = [[PracticeModeCardViewDelegate alloc] init];
-  }
-	
-	//Not increasing retain count.
-  self.cardViewController.delegate = cardViewDelegate;
-  self.actionBarController.delegate = cardViewDelegate;
-  self.cardViewControllerDelegate = cardViewDelegate;
-	[cardViewDelegate release];
-}
-
-
 
 /**
  * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,

@@ -14,6 +14,7 @@
 
 @protocol CardViewControllerDelegate <NSObject>
 @optional
+- (void)studyModeDidChange:(StudyViewController*)svc;
 - (void)setupViews:(StudyViewController*)svc;
 - (void)refreshSessionDetailsViews:(StudyViewController*)svc;
 - (void)cardViewWillSetup:(CardViewController*)cardViewController;
@@ -31,6 +32,7 @@
 // These two methods are more temporary, to pull more browsemode/practice mode stuff out of SVC
 - (void) setupViews:(StudyViewController*)svc;
 - (void) refreshSessionDetailsViews:(StudyViewController*)svc;
+- (void) studyModeDidChange:(StudyViewController*)svc;
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 @property (retain) Card *currentCard;

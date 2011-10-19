@@ -83,9 +83,13 @@
   svc.scrollView.pagingEnabled = NO;
   svc.scrollView.scrollEnabled = NO;
   
+  
+}
+
+- (void)studyModeDidChange:(StudyViewController*)svc
+{
   // You can tap the HH in practice mode.
   svc.moodIconBtn.enabled = YES;
-  
 }
 
 #pragma mark - Action Bar Delegate Methods

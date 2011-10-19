@@ -46,13 +46,19 @@
 
 - (void) setupViews:(StudyViewController *)svc
 {
-  // You can't tap the HH in browse mode.
-  svc.moodIconBtn.enabled = NO;
-
 	// In browse mode, scroll view should be enabled if the example sentences view is available
   BOOL hasExampleSentences = [svc hasExampleSentences];
   svc.scrollView.pagingEnabled = hasExampleSentences; 
   svc.scrollView.scrollEnabled = hasExampleSentences;
+}
+
+- (void)studyModeDidChange:(StudyViewController*)svc
+{
+  // You can't tap the HH in browse mode.
+  svc.moodIconBtn.enabled = NO;
+  
+  // Reading should start as "on" in browse mode
+  [self.wordCardViewController turnReadingOn];
 }
 
 #pragma mark - Action Bar View Controller Delegate

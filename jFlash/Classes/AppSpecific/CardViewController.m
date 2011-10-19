@@ -49,6 +49,11 @@
   LWE_DELEGATE_CALL(@selector(setupViews:), svc);
 }
 
+- (void) studyModeDidChange:(StudyViewController*)svc
+{
+  LWE_DELEGATE_CALL(@selector(studyModeDidChange:), svc);
+}
+
 #pragma mark -
 
 - (void)dealloc 
