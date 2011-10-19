@@ -12,6 +12,7 @@
 @interface StudySetWordsViewController ()
 - (void) _loadWordListInBackground;
 - (void) _tagContentDidChange:(NSNotification*)notification;
+@property BOOL cardIsDeletedViaTableSwipe;
 @end
 
 /**
@@ -22,7 +23,7 @@
  */
 @implementation StudySetWordsViewController
 
-@synthesize tag, cards, activityIndicator;
+@synthesize tag, cards, activityIndicator, cardIsDeletedViaTableSwipe;
 
 #pragma mark - Initializer
 
@@ -94,6 +95,13 @@
   // Next, make sure we have a card.
   Card *theCard = [notification.userInfo objectForKey:LWETagContentDidChangeCardKey];
   if (theCard == nil)
+  {
+    return;
+  }
+  
+  // If we are getting a remove notification because we deleted via a table swipe on this page, ignore
+  // The other method handles that.  This method is more for stuff that happens in other VCs.
+  if (self.cardIsDeletedViaTableSwipe)
   {
     return;
   }
@@ -215,7 +223,12 @@
   {
     NSError *error = nil;
     Card *card = [self.cards objectAtIndex:indexPath.row];
+    
+    // Set this to signal to the notification callback that we don't need to do anything
+    self.cardIsDeletedViaTableSwipe = YES;
     BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
+    self.cardIsDeletedViaTableSwipe = NO;
+
     if (result)
     {
       [self.cards removeObjectAtIndex:indexPath.row];

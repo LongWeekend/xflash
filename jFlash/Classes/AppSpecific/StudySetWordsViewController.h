@@ -25,7 +25,7 @@ enum wordsSections
   wordsSectionsLength
 };
 
-@interface StudySetWordsViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface StudySetWordsViewController : UITableViewController
 
 - (id) initWithTag:(Tag*)initTag;
 
