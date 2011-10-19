@@ -211,6 +211,15 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_REMINDER onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
+    if ([reminderSetting intValue] > 0)
+    {
+      cell.detailTextLabel.text = NSLocalizedString(@"On",@"Global.On");
+    }
+    else
+    {
+      cell.detailTextLabel.text = NSLocalizedString(@"Off",@"Global.Off");
+    }
   }
   else if (key == APP_ABOUT)
   {
@@ -342,7 +351,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   }
   else if (key == APP_REMINDER)
   {
-    ReminderSettingsViewController *tmpVC = [[ReminderSettingsViewController alloc] init];
+    ReminderSettingsViewController *tmpVC = [[ReminderSettingsViewController alloc] initWithNibName:@"ReminderSettingsViewController" bundle:nil];
     [self.navigationController pushViewController:tmpVC animated:YES];
     [tmpVC release];
   }
