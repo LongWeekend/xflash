@@ -170,9 +170,6 @@
 
 - (void) scheduleLocalNotification 
 {
-  // get rid of old notifications
-  [[UIApplication sharedApplication] cancelAllLocalNotifications];
-  
   // should we set up a new one
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
@@ -186,7 +183,7 @@
   NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
   localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
   localNotification.timeZone = [NSTimeZone localTimeZone];
-  localNotification.alertBody = NSLocalizedString(@"It's time to learn some more words! This is your study reminder.",@"StudyNotification.Body");
+  localNotification.alertBody = NSLocalizedString(@"You're Awesome!  It's time to learn some more words!",@"StudyNotification.Body");
   localNotification.alertAction = NSLocalizedString(@"Study",@"StudyNotification.Action");
   localNotification.soundName = UILocalNotificationDefaultSoundName;
 
@@ -204,6 +201,13 @@
 {
   LWE_LOG(@"Application did enter the background now");
   [self scheduleLocalNotification];
+}
+
+- (void) applicationDidBecomeActive:(UIApplication *)application
+{
+  // get rid of old notifications -- we use "did become active" because it is called both on 
+  // first launch AND on resume from background/SMS/just about anything
+  [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 /**
