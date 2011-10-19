@@ -12,13 +12,18 @@
 #define PLUGIN_SETTINGS_INSTALLED_SECTION 1
 #define PLUGIN_SETTINGS_AVAILABLE_SECTION 0
 
+// Private Methods
+@interface PluginSettingsViewController()
+- (void) _reloadTableData;
+- (void)_changeLastUpdateLabel;
+@end
+
 @implementation PluginSettingsViewController
 
 @synthesize tableView, availablePlugins, installedPlugins;
 @synthesize btnCheckUpdate, lblLastUpdate;
 
-#pragma mark -
-#pragma mark Check Update Now Button
+#pragma mark - Check Update Now Button
 
 /**
  * The button check for update will trigger this function, and checks for update
@@ -30,21 +35,16 @@
  * selector, with delay. So it allows the iOS to draw the loading screen, and
  * perform the task with the loading screen on top.
  */
-- (IBAction) checkUpdatePluggin:(id)sender
+- (IBAction) checkUpdatePlugin:(id)sender
 {
 	//Give the waiting loading screen. It looks a bit messy
 	//but its for the sake of it blocks all of the view underneath, so it
 	//avoids user clicks the other button while it still loading and
 	//perform the checking for update. 
-	//SmallLoadingView *lv = [SmallLoadingView loadingView:self.parentViewController.parentViewController.view 
-	//																							withText:@"Please Wait"];
-	
 	LWELoadingView *lv = [LWELoadingView loadingView:self.parentViewController.parentViewController.view 
-																							withText:@"Please Wait"];
+                                          withText:NSLocalizedString(@"Please Wait",@"PleaseWait")];
 	
-	[self performSelector:@selector(performCheckUpdateWithLoadingView:) 
-						 withObject:lv 
-						 afterDelay:0.1f];
+	[self performSelector:@selector(performCheckUpdateWithLoadingView:) withObject:lv afterDelay:0.1f];
 }
 
 /**
@@ -58,7 +58,7 @@
 	
 	[self _changeLastUpdateLabel];
   [pm checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
-	[self reloadTableData];
+	[self _reloadTableData];
 	
 	[lv removeFromSuperview];
 }
@@ -72,8 +72,7 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self tableView] setBackgroundColor:[UIColor clearColor]];
-
+  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -81,26 +80,32 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self setTitle:NSLocalizedString(@"Get Updates",@"PluginSettingsViewController.NavBarTitle")];
-  [self reloadTableData];
+  self.navigationItem.title = NSLocalizedString(@"Get Updates",@"PluginSettingsViewController.NavBarTitle");
 	
 	_dateFormatter = [[NSDateFormatter alloc] init];
 	[_dateFormatter setDateStyle:NSDateFormatterLongStyle];
-	
+
+  [self _reloadTableData];
 	[self _changeLastUpdateLabel];
   
   // Register a reload when they hide the modal
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"taskDidCompleteSuccessfully" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:@"taskDidCompleteSuccessfully" object:nil];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 //! Helper method for notification
-- (void) reloadTableData
+- (void) _reloadTableData
 {
   // Refresh plugin data
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  [self setInstalledPlugins:[pm downloadedPlugins]];
-  [self setAvailablePlugins:[pm availablePlugins]];
-  [[self tableView] reloadData];
+  self.installedPlugins = [pm downloadedPlugins];
+  self.availablePlugins = [pm availablePlugins];
+  [self.tableView reloadData];
 }
 
 
@@ -180,39 +185,29 @@
   }
 }
 
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)dealloc
 {
-  [self setAvailablePlugins:nil];
-  [self setInstalledPlugins:nil];
+  [availablePlugins release];
+  [installedPlugins release];
   [btnCheckUpdate release];
   [lblLastUpdate release];
-	
-	if (_dateFormatter)
-		[_dateFormatter release];
+  [_dateFormatter release];
 	
   [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 //! This is the handy method to retreive the last update date from the user setting, OR update it with the updated date and display it right away (Including the saving back to user setting process)
 - (void)_changeLastUpdateLabel
 {
 	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-	NSString *str;
+	NSString *str = nil;
 	
 	NSDate *date = [settings valueForKey:PLUGIN_LAST_UPDATE];
 	if ([date isEqualToDate:[NSDate dateWithTimeIntervalSince1970:0]])
 	{
-		str = [[NSString alloc] initWithFormat:@"Never"];
+		str = [[NSString alloc] initWithFormat:NSLocalizedString(@"Never",@"NeverUpdated")];
 	}
 	else 
 	{
@@ -221,7 +216,7 @@
 	
 	if (str != nil)
 	{
-		lblLastUpdate.text = [NSString stringWithFormat:@"Last update : %@", str];
+		self.lblLastUpdate.text = [NSString stringWithFormat:NSLocalizedString(@"Last update : %@",@"LastUpdate"), str];
 		[str release];
 	}
 }
