@@ -214,7 +214,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (NSArray*) thawCardIds
 {
   // TODO: Move these to cache (can be regenerated)
-  NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+  NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
   NSArray *tmpCardIds = [NSArray arrayWithContentsOfFile:path];
   LWE_LOG(@"Tried unarchiving plist file at path: %@",path);
   return tmpCardIds;
@@ -225,7 +225,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (void) freezeCardIds
 {
   // TODO: Move these to cache (can be regenerated)
-  NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+  NSString* path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
   LWE_LOG(@"Beginning plist freezing: %@",path);
   [self.cardIds writeToFile:path atomically:YES];
   LWE_LOG(@"Finished plist freeze");
@@ -235,26 +235,23 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 /** Executed when loading a new set on app load */
 - (void) populateCardIds
 {
-  LWE_LOG(@"Began populating card ids and setting counts");
-  NSArray *tmpArray = [self thawCardIds];
-  if (tmpArray == nil)
+  NSArray *tmpCardIdsArray = [self thawCardIds];
+  if (tmpCardIdsArray)
   {
-    LWE_LOG(@"No plist, load from database");
-    tmpArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
+    // Delete the PLIST now that we have it in memory
+    [LWEFile deleteFile:[LWEFile createCachesPathWithFilename:@"ids.plist"]];
   }
   else
   {
-    LWE_LOG(@"Found plist, deleting plist");
-    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
+    // No PLIST, generate new card Ids array
+    tmpCardIdsArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
   }
   
-  self.cardIds = [[tmpArray mutableCopy] autorelease];
+  self.cardIds = [[tmpCardIdsArray mutableCopy] autorelease];
   self.combinedCardIdsForBrowseMode = [self combineCardIds];
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
-  
-  LWE_LOG(@"End populating card ids and setting counts");
 }
 
 
