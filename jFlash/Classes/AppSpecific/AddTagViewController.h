@@ -16,13 +16,9 @@
 #define FONT_SIZE 14
 
 @interface AddTagViewController : UIViewController
-{
-  NSInteger _restrictedTagId;
-}
 
 - (id) initWithCard:(Card*) card;
 - (IBAction) addStudySet;
-- (void) restrictMembershipChangeForTagId:(NSInteger) tagId;
 
 @property (retain) IBOutlet UITableView *studySetTable;
 

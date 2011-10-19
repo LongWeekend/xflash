@@ -48,9 +48,6 @@ enum EntrySectionRows
     self.myTagArray = [TagPeer retrieveMyTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
     
-    // set restricted Tag ID to something rediculous so it can't accidentally be a tag id.
-    _restrictedTagId = INT_MAX;
-
     // Add "add" button to nav bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -92,16 +89,6 @@ enum EntrySectionRows
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
 }
-
-/**
- * If set, stops the user from changing membership for a given set.  Useful for restricting the
- * user against pulling the active card out of the active set, etc.
- */
-- (void) restrictMembershipChangeForTagId:(NSInteger)tagId
-{
-  _restrictedTagId = tagId;
-}
-
 
 #pragma mark - Private Methods
 
@@ -307,8 +294,7 @@ enum EntrySectionRows
 
 /**
  * Called when the user selects one of the table rows containing a tag name
- * Calls subscribe or cancel set membership accordingly, also checks 
- * _restrictedTagId to make sure it is allowed to remove/add the card to the set
+ * Calls subscribe or cancel set membership accordingly
  */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -321,17 +307,6 @@ enum EntrySectionRows
   }
 
   Tag *tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
-
-  // First, determine if we are restricted 
-  // (set by the StudySetsWordsViewController if this is an active set)
-  if (_restrictedTagId == tmpTag.tagId)
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Apologies",@"AddTagViewController.Restricted_AlertViewTitle")
-                                       message:NSLocalizedString(@"To remove this card from this set, navigate back to the previous screen.  Swipe from left to right on any entry to remove it.",@"AddTagViewController.Restricted_AlertViewMessage")];
-    return;
-  }
-  
-  // OK, all tests pass - do it!
   [self _toggleMembershipForTag:tmpTag];
   [lclTableView reloadData];
 }
