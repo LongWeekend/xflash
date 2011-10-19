@@ -2,6 +2,12 @@ require 'test/unit'
 
 class GetPinyinUnicodeTest < Test::Unit::TestCase
 
+  def test_pinyin_spacing
+    reading = get_pinyin_unicode_for_reading("da1 pei4", true)
+    expected_reading = "dā pèi"
+    assert_equal(expected_reading,reading)
+  end
+
   def test_pinyin_1
     reading = get_pinyin_unicode_for_reading("da1 pei4")
     expected_reading = "dāpèi"

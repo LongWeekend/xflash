@@ -4,6 +4,7 @@ CREATE TABLE `cards_staging` (
   `headword_simp` varchar(255) NOT NULL,
   `headword_en` varchar(255) NOT NULL,
   `reading` varchar(255) NOT NULL,
+  `reading_diacritic` varchar(255) NOT NULL,
   `meaning` varchar(3000) NOT NULL,
   `meaning_fts` varchar(3000) NOT NULL,
   `meaning_html` varchar(5000) NOT NULL,

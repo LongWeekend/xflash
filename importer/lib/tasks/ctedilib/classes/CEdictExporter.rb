@@ -32,7 +32,7 @@ class CEdictExporter
 
     ## Generate the card search content table
     $cn.execute("ALTER TABLE cards_search_content ADD COLUMN content varchar(5000)")
-    $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' [ ', reading, ' / ', headword_simp, ' / ',  ' ] ', meaning_fts);")
+    $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts);")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_trad")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_simp")
     $cn.execute("ALTER TABLE cards_search_content DROP reading")

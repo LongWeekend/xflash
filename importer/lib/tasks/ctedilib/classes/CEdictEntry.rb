@@ -76,6 +76,9 @@ class CEdictEntry < Entry
     
     # Now get the reading
     @pinyin = get_pinyin(@line_to_parse)
+    
+    # The "true" keeps the spaces in the pinyin - we want that for our FTS database
+    @pinyin_diacritic = get_pinyin_unicode_for_reading(@pinyin, true)
     @meanings = get_meanings(@line_to_parse)
     
     return true

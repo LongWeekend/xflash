@@ -61,11 +61,10 @@ class CEdictImporter < CEdictBaseImporter
       cn_headword_trad = cedict_rec.headword_trad
       cn_headword_simp = cedict_rec.headword_simp
       en_headword = ""
-      readings_str = cedict_rec.pinyin
       
       @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
       @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
-      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
 
       # Processing flags
       duplicate_exists = false
@@ -76,7 +75,7 @@ class CEdictImporter < CEdictBaseImporter
       end
 
       # 2 - Duplicate check by Headword & Readings
-      duplicates_arr = get_duplicates_by_headword_reading(cn_headword_trad, readings_str, existing_card_lookup, @config[:entry_type])
+      duplicates_arr = get_duplicates_by_headword_reading(cn_headword_trad, cedict_rec.pinyin, existing_card_lookup, @config[:entry_type])
 
       # 3 - Merge with duplicates
       if duplicates_arr.size > 0
@@ -123,7 +122,7 @@ class CEdictImporter < CEdictBaseImporter
 #        end
  
         all_tags_list = Parser.combine_and_uniq_arrays(cedict_rec.all_tags).join($delimiters[:jflash_tag_coldata])
-        return_sql_arr << @insert_entry_sql % [cn_headword_trad, cn_headword_simp, en_headword, readings_str,
+        return_sql_arr << @insert_entry_sql % [cn_headword_trad, cn_headword_simp, en_headword, cedict_rec.pinyin, cedict_rec.pinyin_diacritic,
             mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts),
             (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
             (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),

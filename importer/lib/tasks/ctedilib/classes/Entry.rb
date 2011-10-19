@@ -16,6 +16,7 @@ class Entry
     @headword_trad = ""
     @headword_simp = ""
     @pinyin = ""
+    @pinyin_diacritic = ""
     @meanings = []
     @is_erhua_variant = false
     @variant_of = false
@@ -95,6 +96,10 @@ class Entry
   
   def pinyin
     @pinyin
+  end
+  
+  def pinyin_diacritic
+    @pinyin_diacritic
   end
 
   def pos

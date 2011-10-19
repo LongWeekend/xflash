@@ -188,7 +188,7 @@ end
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
   
-  def get_pinyin_unicode_for_reading(readings="")
+  def get_pinyin_unicode_for_reading(readings="", leave_spaces = false)
     ## TODO: Think about the tone-5
     ## http://en.wikipedia.org/wiki/Pinyin#Tones  
     # Only runs if the reading actually has something
@@ -257,8 +257,11 @@ module ImporterHelpers
           # This should be a very rare cases. (Throw an exception maybe?)
           puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
+        
+        # Add a space if we were asked to
+        result << " " if leave_spaces
       end
-      return result
+      return result.strip
     end
 
     # Back with nothing if there is no reading supplied
