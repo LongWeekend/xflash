@@ -153,11 +153,8 @@
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
   User *currUser = [self.usersArray objectAtIndex:indexPath.row];
-  userDetailsView.user = currUser;
-  userDetailsView.title = currUser.userNickname;
-  userDetailsView.mode = kUserViewModeEdit;
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:currUser];
   [self.navigationController pushViewController:userDetailsView animated:YES];
   [userDetailsView release];
 }

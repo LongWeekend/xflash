@@ -13,12 +13,22 @@
 @implementation UserDetailsViewController
 @synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, commitChangesBtn, activateUserBtn;
 
-- (id)init
+- (id)initWithUserDetails:(User*)aUser
 {
   if ((self = [super init]))
   {
-    self.mode = kUserViewModeAdd;
-    self.selectedUser = [[[User alloc] init] autorelease];      
+    if (aUser)
+    {
+      self.mode = kUserViewModeEdit;
+      self.originalUserNickname = aUser.userNickname;
+      self.navigationItem.title = aUser.userNickname;
+      self.selectedUser = aUser;
+    }
+    else
+    {
+      self.mode = kUserViewModeAdd;
+      self.selectedUser = [[[User alloc] init] autorelease];
+    }
   }
   return self;
 }
@@ -113,13 +123,6 @@
 }
 
 # pragma mark Other functions
-
-- (void) setUser:(User *)sourceUser
-{
-  // Make local copy or user
-  self.selectedUser = sourceUser;
-  self.originalUserNickname = [self.selectedUser userNickname];
-}
 
 - (void)dealloc 
 {

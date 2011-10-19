@@ -18,10 +18,10 @@ enum userViewMode
 
 @interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
 
+- (id)initWithUserDetails:(User*)aUser;
 - (IBAction) doCommitChanges;
 - (IBAction) doActivateUser;
 - (IBAction) doUpdateUserNickname:(id)sender;
-- (void) setUser:(User *)sourceUser;
 
 @property (nonatomic) NSInteger mode;
 @property (nonatomic,retain) User *selectedUser;
