@@ -49,6 +49,10 @@
 		490B23461277BCE100CF3484 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B23401277BCE100CF3484 /* FMResultSet.m */; };
 		490B23571277BF4600CF3484 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23561277BF4600CF3484 /* Icon.png */; };
 		490B23591277C05100CF3484 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23581277C05100CF3484 /* Icon-72.png */; };
+		49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */; };
+		49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */; };
+		4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */; };
+		4919507D144F1BFE00DB81F7 /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507B144F1BFE00DB81F7 /* downloadedPlugin.plist */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
@@ -69,7 +73,6 @@
 		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
-		49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */; };
 		4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -604,7 +607,6 @@
 		91D3CFA811D0FDBF008565F8 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
 		91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */; };
-		91E40EDA1373D145009B3167 /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EA131D1202AC480081CBBA /* downloadedPlugin.plist */; };
 		91E93B0E133AD450007E5F83 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E93B0D133AD450007E5F83 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		91F80CAF138619E700A07663 /* JRPublishActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F80CAD138619E700A07663 /* JRPublishActivityController.m */; };
 		91F80CB0138619E700A07663 /* JRPublishActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F80CAD138619E700A07663 /* JRPublishActivityController.m */; };
@@ -713,8 +715,6 @@
 		24E47F2011F3E754007F6FB7 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToken.m; sourceTree = "<group>"; };
 		24E47F2111F3E754007F6FB7 /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		24E47F4611F3E780007F6FB7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = availablePluginForDownload.plist; sourceTree = "<group>"; };
-		24EA131D1202AC480081CBBA /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = downloadedPlugin.plist; sourceTree = "<group>"; };
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -729,6 +729,10 @@
 		490B23401277BCE100CF3484 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/src/FMResultSet.m; sourceTree = "<group>"; };
 		490B23561277BF4600CF3484 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Assets/Icon.png; sourceTree = "<group>"; };
 		490B23581277C05100CF3484 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Assets/Icon-72.png"; sourceTree = "<group>"; };
+		49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-availablePluginForDownload.plist"; path = "Plugins/cFlash-availablePluginForDownload.plist"; sourceTree = "<group>"; };
+		49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-downloadedPlugin.plist"; path = "Plugins/cFlash-downloadedPlugin.plist"; sourceTree = "<group>"; };
+		4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = availablePluginForDownload.plist; path = Plugins/availablePluginForDownload.plist; sourceTree = "<group>"; };
+		4919507B144F1BFE00DB81F7 /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = downloadedPlugin.plist; path = Plugins/downloadedPlugin.plist; sourceTree = "<group>"; };
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
@@ -746,8 +750,6 @@
 		4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseSettingsDataSource.m; path = AppSpecific/JapaneseSettingsDataSource.m; sourceTree = "<group>"; };
 		4927B8461400C7350076EEED /* ChineseSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseSettingsDataSource.h; path = AppSpecific/ChineseSettingsDataSource.h; sourceTree = "<group>"; };
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
-		49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_availablePluginForDownload.plist; sourceTree = "<group>"; };
-		49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cFlash_downloadedPlugin.plist; sourceTree = "<group>"; };
 		4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "WordCardViewController-EtoJ.xib"; path = "Classes/AppSpecific/WordCardViewController-EtoJ.xib"; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
@@ -1414,13 +1416,13 @@
 		49195074144F1AB300DB81F7 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
+				4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */,
+				4919507B144F1BFE00DB81F7 /* downloadedPlugin.plist */,
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
-				24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */,
-				24EA131D1202AC480081CBBA /* downloadedPlugin.plist */,
 			);
 			name = JFlash;
 			sourceTree = "<group>";
@@ -1428,11 +1430,11 @@
 		49195075144F1ACD00DB81F7 /* CFlash */ = {
 			isa = PBXGroup;
 			children = (
+				49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */,
+				49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */,
 				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
 				49BD2AF2138E664100FAC045 /* cFlash.db */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
-				49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */,
-				49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */,
 			);
 			name = CFlash;
 			sourceTree = "<group>";
@@ -2560,13 +2562,14 @@
 				91CA7428133D216C008A89A8 /* JRWebViewController.xib in Resources */,
 				91CA7429133D216C008A89A8 /* JREngage-Info.plist in Resources */,
 				49EE9706134EC15900EC6B0E /* LWETDefaultAuthenticationViewController.xib in Resources */,
-				91E40EDA1373D145009B3167 /* downloadedPlugin.plist in Resources */,
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 				91C05A3913F468D500061229 /* Default.jpg in Resources */,
 				4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 				49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
+				4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */,
+				4919507D144F1BFE00DB81F7 /* downloadedPlugin.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2729,11 +2732,12 @@
 				49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */,
 				49280A2C13962A9A00EF009C /* star-selected.png in Resources */,
 				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
-				49280A3213962C3400EF009C /* cFlash_downloadedPlugin.plist in Resources */,
 				4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
 				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
 				49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */,
 				49716146144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
+				49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */,
+				49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
