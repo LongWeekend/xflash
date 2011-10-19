@@ -69,8 +69,8 @@ extern NSString * const LWE_BAD_DATA_EMAIL;
 
 #elif defined(LWE_CFLASH)
 
-  // "Politics" (for now) - CFlash
-  #define DEFAULT_TAG_ID 42
+  // LWE Favorites - CFlash
+  #define DEFAULT_TAG_ID 140
 
   extern NSString * const APP_HEADWORD_TYPE;
   extern NSString * const SET_HEADWORD_TYPE_TRAD;
