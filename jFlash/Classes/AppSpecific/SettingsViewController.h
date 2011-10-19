@@ -7,9 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Constants.h"
-#import "Appirater.h"
-#import "AlgorithmSettingsViewController.h"
 
 extern NSString * const APP_ABOUT;
 extern NSString * const APP_TWITTER;

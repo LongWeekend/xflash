@@ -102,9 +102,10 @@
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
+                                      NSLocalizedString(@"Study Reminders",@"SettingsViewController.SettingNames_Reminders"),
                                       NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
                                       NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
-  NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
+  NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_REMINDER,APP_USER,APP_PLUGIN,nil];
   
   // Can we upgrade at all?  If so, hide the plugins
   if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])

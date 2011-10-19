@@ -8,6 +8,9 @@
 
 #import "SettingsViewController.h"
 #import "PluginSettingsViewController.h"
+#import "Appirater.h"
+#import "AlgorithmSettingsViewController.h"
+#import "ReminderSettingsViewController.h"
 #import "UserViewController.h"
 #import "UserPeer.h"
 
@@ -157,32 +160,28 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 }
 
 
-# pragma mark UI Table View Methods
+# pragma mark - UITableViewDataSource Methods
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
   return [self.sectionArray count];
 }
 
-- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   NSInteger i = [[[self.sectionArray objectAtIndex:section] objectAtIndex:0] count];
   return i;
 }
 
-- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   UITableViewCell *cell = nil;
-  NSString *key = nil;
-  NSString *displayName = nil;
-  NSInteger row = [indexPath row];
-  NSInteger section = [indexPath section];
-
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
   // Get our key name and display name
-  NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
-  key = [[thisSectionArray objectAtIndex:1] objectAtIndex:row];
-  displayName = [[thisSectionArray objectAtIndex:0] objectAtIndex:row];
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
+  NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
+  NSString *displayName = [[thisSectionArray objectAtIndex:0] objectAtIndex:indexPath.row];
   
   // Handle special cases first
   if (key == APP_USER)
@@ -197,11 +196,21 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
+    NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
     if (numInstalled > 0)
+    {
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
+    }
     else
+    {
       cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
+    }
+  }
+  else if (key == APP_REMINDER)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_REMINDER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == APP_ABOUT)
   {
@@ -215,13 +224,13 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    UIImageView* tmpView = cell.imageView;
+    UIImageView *tmpView = cell.imageView;
     // TODO: iPad customization!
     if (key == APP_TWITTER)
     {
       tmpView.image = [UIImage imageNamed:@"icon_twitter_30x30.png"];
     }
-    else
+    else if (key == APP_FACEBOOK)
     {
       tmpView.image = [UIImage imageNamed:@"icon_facebook_30x30.png"];
     }
@@ -251,6 +260,8 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   cell.textLabel.text = displayName;
   return cell;  
 }
+
+#pragma mark - UITableViewDelegate Methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -288,16 +299,12 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     [self.navigationController pushViewController:userView animated:YES];
     [userView release];
   }
-  else if ((key == APP_PLUGIN)||(key == APP_NEW_UPDATE))
+  else if (key == APP_PLUGIN || key == APP_NEW_UPDATE)
   {
 		// TODO: iPad customization!
 		PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
 		[self.navigationController pushViewController:psvc animated:YES];
 		[psvc release];
-  }
-  else if (key == APP_ABOUT)
-  {
-    // Do nothing, about section
   }
   else if (key == APP_TWITTER || key == APP_FACEBOOK)
   {
@@ -329,6 +336,16 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     [self.navigationController pushViewController:webVC animated:YES];
     [webVC release];
   }
+  else if (key == APP_ABOUT)
+  {
+    // Do nothing, about section
+  }
+  else if (key == APP_REMINDER)
+  {
+    ReminderSettingsViewController *tmpVC = [[ReminderSettingsViewController alloc] init];
+    [self.navigationController pushViewController:tmpVC animated:YES];
+    [tmpVC release];
+  }
   else if (key == APP_ALGORITHM)
   {
     AlgorithmSettingsViewController *avc = [[AlgorithmSettingsViewController alloc] init];
@@ -350,9 +367,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   }
 }
 
-- (NSString *) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-  NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:section];
   return [thisSectionArray objectAtIndex:2];
 }
 
