@@ -188,6 +188,12 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
  */
 + (void) subscribeCard:(Card*)card toTag:(Tag*)tag
 {
+  // Quick return on bad input
+  if (tag == nil || card == nil || card.cardId <= 0)
+  {
+    return;
+  }
+  
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   // Insert tag link

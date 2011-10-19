@@ -65,15 +65,9 @@
     return NO;
   }
   
-  // Create the tag
+  // Create the tag & subscribe the card to it
   Tag *newTag = [TagPeer createTag:theTextField.text withOwner:self.ownerId];
-  
-  // TODO: Move this logic to the model level?
-  // If there is a default card, subscribe it
-  if (newTag && self.defaultCard.cardId > 0)
-  {
-    [TagPeer subscribeCard:self.defaultCard toTag:newTag];
-  }
+  [TagPeer subscribeCard:self.defaultCard toTag:newTag];
   
   [self.parentViewController dismissModalViewControllerAnimated:YES];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"setAddedToView" object:self];
