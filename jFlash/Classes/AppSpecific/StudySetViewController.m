@@ -121,13 +121,6 @@ enum Sections {
 
 - (void) reloadTableData
 {
-  LWE_ASSERT_EXC(self.tableView,@"This exception is set here to prove that that code below is bullshit - 2011.10.18 MMA");
-  if (self.tableView == nil)
-  {
-    // MMA - 13.10.2010 - does this ever happen??!  really?
-    // This was just defensive programming probably because reloadTableData was getting called when the tableview was nil because we forgot to de-observe something...?
-    return;
-  }
 	if (searching)
   {
     self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
