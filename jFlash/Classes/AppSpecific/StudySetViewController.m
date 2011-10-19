@@ -671,22 +671,21 @@ enum Sections {
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText
 {
 	// Remove all objects first.
-  [tagArray removeAllObjects];
+  [self.tagArray removeAllObjects];
 	
 	if([searchText length] > 0)
   {
     [_searchOverlay removeFromSuperview];
 		searching = YES;
-    [[self tableView] setScrollEnabled:YES];
-    [self reloadTableData];
+    self.tableView.scrollEnabled = YES;
 	}
 	else
   {
-		[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
+		[self.tableView insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 		searching = NO;
-    [[self tableView] setScrollEnabled:NO];
-    [self reloadTableData];
+    self.tableView.scrollEnabled = NO;
 	}
+  [self reloadTableData];
 }
 
 
