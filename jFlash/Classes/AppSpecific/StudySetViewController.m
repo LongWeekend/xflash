@@ -369,13 +369,13 @@ enum Sections {
     }
     else if (indexPath.row == 1)
     {
-      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.backupUserSets");
+      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.restoreUserSets");
     }
     else
     {
       if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
       {
-        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupUserSets");
+        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
       }
     }
   }
