@@ -25,7 +25,6 @@
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (void) _setupViewWithCard:(Card*)card;
 - (void) _setCardViewDelegateBasedOnMode;
-- (void) _refreshProgressBarView;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
@@ -64,18 +63,6 @@
 }
 
 #pragma mark - UIView Delegate Methods
-
-/**
- * Refresh progress bar when view appears
- * MMA - WHY?? 8/12/2010
- */
-- (void) viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  
-  // redraw the progress bar
-  [self _refreshProgressBarView];
-}
 
 /**
  * On viewDidAppear, show Alert Views if it is first launch OR after 1.0 upgrade
@@ -326,7 +313,8 @@
     }
     
     // Finally, update the progress bar
-    [self _refreshProgressBarView];
+    self.progressBarViewController.levelDetails = [self _getLevelDetails];
+    [self.progressBarViewController drawProgressBar];
   }
 }
 
@@ -591,14 +579,6 @@
     [levelDetails addObject:[NSNumber numberWithFloat:seencount]];
   }
   return levelDetails;
-}
-
-
-/** redraws the progress bar with new level details */
-- (void) _refreshProgressBarView
-{
-  self.progressBarViewController.levelDetails = [self _getLevelDetails];
-  [self.progressBarViewController drawProgressBar];
 }
 
 - (void) _tagContentDidChange:(NSNotification*)notification
