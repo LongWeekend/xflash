@@ -12,7 +12,6 @@
 #import "SettingsViewController.h"
 #import "LWENetworkUtils.h"
 #import "RootViewController.h"
-
 #import "AddTagViewController.h"
 
 @interface StudyViewController()
@@ -22,6 +21,7 @@
 @property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
 - (void) _notifyUserStudySetHasBeenLearned;
+- (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (void) _setupViewWithCard:(Card*)card;
 - (void) _setCardViewDelegateBasedOnMode;
@@ -90,7 +90,7 @@
   {
     _alreadyShowedAlertView = YES;
     
-    // CFLASH STRING CUSTOMIZATION
+    // TODO: CFLASH STRING CUSTOMIZATION
     [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
                                             ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
@@ -114,7 +114,17 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
-
+  
+  // iOS4+ only.  On iOS3, when the app is terminated.
+  if (UIApplicationDidEnterBackgroundNotification != NULL)
+  {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+  }
+  else
+  {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
+  }
+  
   // Create a default mood icon object
   self.moodIcon = [[[MoodIcon alloc] init] autorelease];
   self.moodIcon.moodIconBtn = self.moodIconBtn;
@@ -775,6 +785,26 @@
 }
 
 #pragma mark - Class plumbing
+
+/*
+* We ask Tag to freeze its current state to a plist so if the app is killed
+* while in the background, we can get it back!
+*/
+- (void) _applicationDidEnterBackground:(NSNotification*)notification
+{
+  // Only freeze if we have a database
+  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
+  {
+    // Save current card, user, and set, update cache - study view controller also does some settings stuff independently
+    CurrentState *state = [CurrentState sharedCurrentState];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setInteger:self.currentCard.cardId forKey:@"card_id"];
+    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
+    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
+    [settings synchronize];
+    [[state activeTag] freezeCardIds];
+  }
+}
 
 - (void) viewDidUnload
 {

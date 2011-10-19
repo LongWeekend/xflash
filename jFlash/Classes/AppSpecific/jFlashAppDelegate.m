@@ -7,16 +7,6 @@
 #import "jFlashAppDelegate.h"
 
 #import "RootViewController.h"
-
-// TODO: this is a hack
-#import "StudyViewController.h"
-
-#import "CurrentState.h"
-#import "LWEFile.h"
-#import "LWECrashUtils.h"
-#import "LWEDatabase.h"
-#import "ThemeManager.h"
-#import "DatabaseUpdateManager.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
 
@@ -28,10 +18,9 @@
 
 @synthesize window, rootViewController;
 
-#pragma mark -
-#pragma mark URL Handling
+#pragma mark - URL Handling
 
-- (NSString *) getDecodedSearchTerm: (NSURL *) url  
+- (NSString*) getDecodedSearchTerm:(NSURL *)url  
 {
   NSString *searchTerm = [url unicodeAbsoluteString];
   if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
@@ -79,8 +68,7 @@
   return [self application:application openURL:url sourceApplication:nil annotation:nil];
 }
 
-#pragma mark -
-#pragma mark appDidFinishingLaunching
+#pragma mark - appDidFinishingLaunching
 
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
@@ -98,7 +86,7 @@
   [state initializeSettings];
 
   // Load root controller to show splash screen
-  [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
+  self.rootViewController = [[[RootViewController alloc] init] autorelease];
 	[self.window addSubview:self.rootViewController.view];
   [self.window makeKeyAndVisible];
   
@@ -214,33 +202,13 @@
 
 /**
  * Called on iOS4 when the app is put into the background
- * We ask Tag to freeze its current state to a plist so if the app is killed
- * while in the background, we can get it back!
  */
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
   LWE_LOG(@"Application did enter the background now");
-  // Get current card from StudyViewController - this is REALLY BAD for coupling!
-  // TODO: put the current card into current state
-  StudyViewController *studyCtl = [rootViewController.tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
-  
-  // Only freeze if we have a database
-  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
-  {
-    // Save current card, user, and set, update cache
-    CurrentState *state = [CurrentState sharedCurrentState];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
-    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
-    [settings synchronize];
-    [[state activeTag] freezeCardIds];
-  }
-  
   // TODO: not in use for this version
   //[self scheduleLocalNotification];
 }
-
 
 /**
  * Called on iOS4 when the app comes back to life from background
@@ -249,6 +217,7 @@
  */
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
+  // TODO: Change this to Cache dir?
   // the plist is only made in case we are terminated.  If not terminated, no need for this - it will mess stuff up in tag -> populateCardIds
   if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:@"ids.plist"]])
   {
@@ -261,22 +230,18 @@
   [settings setInteger:0 forKey:@"card_id"];
 }
 
-
-/**
- * Delegate method from UIApplication - re-delegated to RootViewController
- */ 
+// Just pass it on to the new iOS4 delegate
 - (void) applicationWillTerminate:(UIApplication *)application
 {
-  // Just pass it on to the new iOS4 delegate
-  LWE_LOG(@"Application will terminate");
   [self applicationDidEnterBackground:application];
 }
 
-//! Standard dealloc
+#pragma mark -
+
 - (void)dealloc
 {
-	[self setRootViewController:nil];
-	[self setWindow:nil];
+  [rootViewController release];
+  [window release];
   
   // Handle all singletons
   CurrentState *state = [CurrentState sharedCurrentState];
