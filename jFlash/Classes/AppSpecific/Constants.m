@@ -93,10 +93,10 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
       NSString * const LWE_CF_VERSION_1_0 = @"1.0";
 
       // This pertains to the plugin manager
-      NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"cFlash_downloadedPlugin.plist";
+      NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"cFlash-downloadedPlugin.plist";
       //NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/cFlash-availablePlugins.plist";
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://s3.amazonaws.com/japanese-flash/cFlash-availablePlugins.plist";
-      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash_availablePluginForDownload.plist";
+      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePluginForDownload.plist";
 
 
 #endif
