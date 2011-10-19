@@ -25,10 +25,20 @@ enum ControlSectionRows
   NUM_CONTROL_SECTION_ROWS
 };
 
+#pragma mark - UIViewController Methods
+
 - (void)viewDidLoad 
 {
   [super viewDidLoad];  
    self.navigationItem.title = NSLocalizedString(@"Change Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
+}
+
+- (void)viewDidUnload 
+{
+  self.maxCardsUISlider = nil;
+  self.frequencyUISlider = nil;
+  self.difficultySegmentControl = nil;
+  self.tableView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -43,6 +53,7 @@ enum ControlSectionRows
   self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 }
 
+// TODO: why is viewDidAppear here and this code not in viewWillAppear?  Or even viewDidLoad?
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
@@ -52,8 +63,7 @@ enum ControlSectionRows
   [self setDifficulty:difficultySegmentControl];
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
@@ -174,40 +184,31 @@ enum ControlSectionRows
  */
 - (IBAction) setDifficulty:(UISegmentedControl *)sender
 {
-  int value = [sender selectedSegmentIndex];
+  NSInteger selectedIndex = [sender selectedSegmentIndex];
+  LWE_ASSERT_EXC((selectedIndex < 4),@"We should only have 4 levels, zero-indexed (0,1,2,3).");
   
   // store the result
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];  
-  [settings setInteger:value forKey:APP_DIFFICULTY];
-
-  LWE_LOG(@"segmentedCotnrolAction: sender = %d, value = %d", [sender tag], value);
+  [settings setInteger:selectedIndex forKey:APP_DIFFICULTY];
   
-  [maxCardsUISlider setEnabled:NO];
-  [frequencyUISlider setEnabled:NO];
-  
-  if(value == 0)
+  if (selectedIndex == 3)
   {
-    // TODO: Refactor - pull these numbers out into constants?
-    [maxCardsUISlider setValue:10];
-    [frequencyUISlider setValue:1];
+    // The last index - custom value
+    self.maxCardsUISlider.enabled = YES;
+    self.frequencyUISlider.enabled = YES;
   }
-  else if(value == 1)
+  else
   {
-    [maxCardsUISlider setValue:30];
-    [frequencyUISlider setValue:2];
+    // Otherwise pull from these predefined values
+    NSInteger maxCardsValue[3] = {10,30,40};
+    NSInteger freqValue[3] = {1,2,3};
+    self.maxCardsUISlider.enabled = NO;
+    self.frequencyUISlider.enabled = NO;
+    self.maxCardsUISlider.value = maxCardsValue[selectedIndex];
+    self.frequencyUISlider.value = freqValue[selectedIndex];
   }
-  else if(value == 2)
-  {
-    [maxCardsUISlider setValue:40];
-    [frequencyUISlider setValue:3];
-  }
-  else if (value == 3)
-  {
-    [maxCardsUISlider setEnabled:YES];
-    [frequencyUISlider setEnabled:YES];
-  }
-  [self sliderAction:maxCardsUISlider];
-  [self sliderAction:frequencyUISlider];
+  [self sliderAction:self.maxCardsUISlider];
+  [self sliderAction:self.frequencyUISlider];
 }
 
 #pragma mark - Slider
@@ -215,7 +216,7 @@ enum ControlSectionRows
 - (void)sliderAction:(UISlider *)sender
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int value = lroundf([sender value]);
+  NSInteger value = lroundf([sender value]);
   if([sender tag] == kMaxCardsRow)
   {
     [settings setInteger:value forKey:APP_MAX_STUDYING];
@@ -241,11 +242,6 @@ enum ControlSectionRows
 
 
 #pragma mark - Class Plumbing
-
-- (void)viewDidUnload 
-{
-  // TODO: fill this out
-}
 
 - (void)dealloc 
 {
