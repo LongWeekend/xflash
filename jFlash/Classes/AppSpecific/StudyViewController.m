@@ -26,7 +26,6 @@
 - (void) _setupViewWithCard:(Card*)card;
 - (void) _setCardViewDelegateBasedOnMode;
 - (void) _refreshProgressBarView;
-- (void) _updateWordsPercentageView;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
@@ -37,7 +36,7 @@
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
-@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, isBrowseMode, hhAnimationView;
+@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, hhAnimationView;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, moodIconBtn, percentCorrectTalkBubble, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
@@ -90,13 +89,19 @@
   {
     _alreadyShowedAlertView = YES;
     
-    // TODO: CFLASH STRING CUSTOMIZATION
+#if defined (LWE_JFLASH)
     [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
                                             ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
                                         cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
                                       delegate:self];
-    
+#elif (LWE_CFLASH)
+    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Chinese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
+                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
+                                            ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
+                                        cancel:nil
+                                      delegate:self];
+#endif
   }
 }
 
@@ -387,13 +392,13 @@
   [lastCard release];
 }
 
-- (void) _turnPercentCorrectOff
+- (void) turnPercentCorrectOff
 {
   self.percentCorrectTalkBubble.hidden = YES;
   self.percentCorrectLabel.hidden = YES;
 }
 
-- (void) _turnPercentCorrectOn
+- (void) turnPercentCorrectOn
 {
   self.percentCorrectTalkBubble.hidden = NO;
   self.percentCorrectLabel.hidden = NO;
@@ -404,20 +409,14 @@
  */
 - (IBAction) doTogglePercentCorrectBtn
 {
-  // If we're browse mode, don't even bother with this; it's always off.
-  if (self.isBrowseMode)
-  {
-    return;
-  }
-  
   // Hide the percentage talk bubble on click; use its current state to check which we should do.
   if (self.percentCorrectTalkBubble.hidden == YES)
   {
-    [self _turnPercentCorrectOn];
+    [self turnPercentCorrectOn];
   }
   else
   {
-    [self _turnPercentCorrectOff];
+    [self turnPercentCorrectOff];
   }
 }
 
@@ -513,42 +512,14 @@
   [self.actionBarController setupWithCard:card];
   [self.exampleSentencesViewController setupWithCard:card];
 
-  [self _updateWordsPercentageView];
-
-  // If browse mode, hide the quiz stuff.
-  self.tapForAnswerImage.hidden = self.isBrowseMode;
-  self.revealCardBtn.hidden = self.isBrowseMode;
-
-  // Scroll/paging cannot be done when card is not revealed (quiz mode), or there are no examples.
-	// However, if it is a browse mode, it should have the scroll view enabled if the example sentences view is available
-  _hasExampleSentences = [self _shouldShowExampleViewForCard:card];
-  self.scrollView.pagingEnabled = (self.isBrowseMode && _hasExampleSentences);
-  self.scrollView.scrollEnabled = (self.isBrowseMode && _hasExampleSentences);
+  [self.cardViewController refreshSessionDetailsViews:self];
+  [self.cardViewController setupViews:self];
   
-  // Page control should be shown when we have example sentences, regardless of browse
-  self.pageControl.hidden = (_hasExampleSentences == NO);
+  // Page control should be shown when we have example sentences
+  self.pageControl.hidden = ([self hasExampleSentences] == NO);
   self.pageControl.currentPage = 0;
   [self changePage:self.pageControl animated:NO];
   _isChangingPage = NO;
-}
-
-- (void)_updateWordsPercentageView
-{
-  // TODO: refactor this out to a StudyViewControllerBrowseModeDelegate
-  // update the remaining cards label
-  NSInteger currCardCount = 0;
-  if (self.isBrowseMode)
-  {
-    [self _turnPercentCorrectOff];
-    currCardCount = [self.currentCardSet currentIndex]+1;
-  }
-  else	
-  {
-    [self _turnPercentCorrectOn];
-    currCardCount = [[[self.currentCardSet cardLevelCounts] objectAtIndex:0] intValue];
-  }
-  
-  self.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currCardCount, [self.currentCardSet cardCount]];
 }
 
 /** 
@@ -574,24 +545,19 @@
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-	//TODO: Cache this so that it does not alloc a new object everytime the user changes set
 	id<CardViewControllerDelegate, ActionBarViewControllerDelegate> cardViewDelegate = nil;
-  if ([[settings objectForKey:APP_MODE] isEqualToString: SET_MODE_BROWSE])
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
   {
-    self.isBrowseMode = YES;
 		cardViewDelegate = [[BrowseModeCardViewDelegate alloc] init];
   }
   else
   {
-    self.isBrowseMode = NO;
 		cardViewDelegate = [[PracticeModeCardViewDelegate alloc] init];
   }
 	
 	//Not increasing retain count.
   self.cardViewController.delegate = cardViewDelegate;
   self.actionBarController.delegate = cardViewDelegate;
-  
-	//Will increase the retain count - this class owns the object
   self.cardViewControllerDelegate = cardViewDelegate;
 	[cardViewDelegate release];
 }
@@ -659,7 +625,7 @@
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
     [self.currentCardSet addCardToActiveSet:theCard];
-    [self _updateWordsPercentageView];
+    [self.cardViewController refreshSessionDetailsViews:self];
   }
   else if ([changeType isEqualToString:LWETagContentCardRemoved])
   {
@@ -679,12 +645,17 @@
     {
       //It is smoother to just update the percentage, rather than the need to update the
       //whole view of the cards (the state will be changed as well like meaning label is hidden, etc)
-      [self _updateWordsPercentageView];
+      [self.cardViewController refreshSessionDetailsViews:self];
     }
   }
 }
 
 #pragma mark - Plugin-Related
+
+- (BOOL) hasExampleSentences
+{
+  return [self _shouldShowExampleViewForCard:self.currentCard];
+}
 
 /**
  * Connects the "Download Example Sentences" button to actually launch the installer

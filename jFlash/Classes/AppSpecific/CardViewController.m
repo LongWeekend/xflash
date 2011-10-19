@@ -35,6 +35,22 @@
 
 #pragma mark -
 
+// I don't really like "forwarding" the delegate call here, but it's 
+// better than putting the original logic/functionality in SVC as it was.
+// I think the final solution is to promote the 2 delegates to be CVCs in their
+// own right, instead of just the delegate of this otherwise-hollow class.
+- (void) refreshSessionDetailsViews:(StudyViewController*)svc
+{
+  LWE_DELEGATE_CALL(@selector(refreshSessionDetailsViews:), svc);
+}
+
+- (void) setupViews:(StudyViewController*)svc
+{
+  LWE_DELEGATE_CALL(@selector(setupViews:), svc);
+}
+
+#pragma mark -
+
 - (void)dealloc 
 {
   [currentCard release];

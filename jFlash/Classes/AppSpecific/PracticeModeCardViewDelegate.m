@@ -10,6 +10,7 @@
 
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
+#import "StudyViewController.h"
 
 @implementation PracticeModeCardViewDelegate
 @synthesize wordCardViewController;
@@ -62,6 +63,29 @@
   BOOL userSetReadingVisible = self.wordCardViewController.readingVisible;
   [self.wordCardViewController turnReadingOn];
   self.wordCardViewController.readingVisible = userSetReadingVisible;
+}
+
+- (void) refreshSessionDetailsViews:(StudyViewController*)svc
+{
+  NSInteger unseen = [[svc.currentCardSet.cardLevelCounts objectAtIndex:0] intValue];
+  NSInteger total = svc.currentCardSet.cardCount;
+  [svc turnPercentCorrectOn];
+  svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",unseen,total];
+  
+  // If practice mode, show the quiz stuff.
+  svc.tapForAnswerImage.hidden = NO;
+  svc.revealCardBtn.hidden = NO;
+}
+
+- (void) setupViews:(StudyViewController *)svc
+{
+	// In practice mode, scroll view should always start disabled
+  svc.scrollView.pagingEnabled = NO;
+  svc.scrollView.scrollEnabled = NO;
+  
+  // You can tap the HH in practice mode.
+  svc.moodIconBtn.enabled = YES;
+  
 }
 
 #pragma mark - Action Bar Delegate Methods

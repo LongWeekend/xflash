@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 
+@class StudyViewController;
 @class CardViewController;
 
 @protocol CardViewControllerDelegate <NSObject>
 @optional
+- (void)setupViews:(StudyViewController*)svc;
+- (void)refreshSessionDetailsViews:(StudyViewController*)svc;
 - (void)cardViewWillSetup:(CardViewController*)cardViewController;
 - (void)cardViewDidSetup:(CardViewController*)cardViewController;
 - (void)cardViewWillReveal:(CardViewController*)cardViewController;
@@ -24,6 +27,10 @@
 
 - (void) setupWithCard:(Card*)card;
 - (void) reveal;
+
+// These two methods are more temporary, to pull more browsemode/practice mode stuff out of SVC
+- (void) setupViews:(StudyViewController*)svc;
+- (void) refreshSessionDetailsViews:(StudyViewController*)svc;
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 @property (retain) Card *currentCard;

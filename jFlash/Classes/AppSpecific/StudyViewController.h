@@ -36,6 +36,10 @@
   BOOL _isChangingPage;  // page control state
 }
 
+- (void) turnPercentCorrectOff;
+- (void) turnPercentCorrectOn;
+- (BOOL) hasExampleSentences;
+
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
@@ -96,8 +100,6 @@
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
 @property (nonatomic, retain) id cardViewControllerDelegate;
-
-@property BOOL isBrowseMode;
 
 // stats for progress modal
 @property NSInteger numRight;
