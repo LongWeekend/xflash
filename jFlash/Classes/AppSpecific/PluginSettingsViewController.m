@@ -207,18 +207,14 @@
 	NSDate *date = [settings valueForKey:PLUGIN_LAST_UPDATE];
 	if ([date isEqualToDate:[NSDate dateWithTimeIntervalSince1970:0]])
 	{
-		str = [[NSString alloc] initWithFormat:NSLocalizedString(@"Never",@"NeverUpdated")];
+		str = NSLocalizedString(@"Never",@"NeverUpdated");
 	}
 	else 
 	{
-		str = [[NSString alloc] initWithFormat:@"%@", [_dateFormatter stringFromDate:date]];
+		str = [_dateFormatter stringFromDate:date];
 	}
 	
-	if (str != nil)
-	{
-		self.lblLastUpdate.text = [NSString stringWithFormat:NSLocalizedString(@"Last update : %@",@"LastUpdate"), str];
-		[str release];
-	}
+  self.lblLastUpdate.text = [NSString stringWithFormat:NSLocalizedString(@"Last update : %@",@"LastUpdate"), str];
 }
 
 @end
