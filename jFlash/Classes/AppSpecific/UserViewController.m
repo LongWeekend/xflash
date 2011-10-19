@@ -227,9 +227,8 @@
 - (void) showUserDetailsView
 {
   // TODO: iPad customization!
-  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
-  userDetailsView.mode = kUserViewModeAdd;
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
 
