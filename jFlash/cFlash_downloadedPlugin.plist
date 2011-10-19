@@ -49,21 +49,21 @@
 		<key>plugin_details</key>
 		<string>Adds sub-second full dictionary search (12MB)</string>
 		<key>plugin_file_name</key>
-		<string>jFlash-FTS-1.1.db</string>
+		<string>cFlash-FTS-1.0.db</string>
 		<key>plugin_key</key>
 		<string>FTS_DB</string>
 		<key>plugin_name</key>
-		<string>Awesomely Fast Search v1.1</string>
+		<string>Awesomely Fast Search v1.0</string>
 		<key>plugin_notes_dir</key>
 		<string>plugin-resources</string>
 		<key>plugin_notes_file</key>
 		<string>full-text-search</string>
 		<key>plugin_target_path</key>
-		<string>jFlash-FTS-1.1.db</string>
+		<string>cFlash-FTS-1.0.db</string>
 		<key>plugin_target_url</key>
-		<string>https://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz</string>
+		<string>https://d3580k8bnen6up.cloudfront.net/cFlash-FTS-1.0.db.gz</string>
 		<key>plugin_version</key>
-		<string>1.1</string>
+		<string>1.0</string>
 	</dict>
 </dict>
 </plist>
