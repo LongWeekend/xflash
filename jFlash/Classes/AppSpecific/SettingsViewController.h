@@ -36,7 +36,7 @@ extern NSString * const LWEUserSettingsChanged;
 
 - (void) iterateSetting: (NSString*) setting;
 
-// TODO: apparently data sources aren't generally retained, but in this case it seems to make sense.  Justify this.
+//! This data source is not quite a model in the traditional sense; it is retained - 100% used by this VC
 @property (retain) id<LWESettingsDataSource> dataSource;
 @property (assign) id<LWESettingsDelegate> delegate;
 @property (retain, nonatomic) NSArray *sectionArray;

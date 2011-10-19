@@ -60,7 +60,7 @@ enum ControlSectionRows
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [NSNumber numberWithInt:[settings integerForKey:APP_DIFFICULTY]];
   self.difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
-  [self setDifficulty:difficultySegmentControl];
+  [self setDifficulty:self.difficultySegmentControl];
 }
 
 #pragma mark - Table view methods
