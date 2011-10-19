@@ -29,16 +29,12 @@
     PDColoredProgressView *progressView = (PDColoredProgressView*)[self.view viewWithTag:(i+PROGRESS_BAR_TAG)];
     if (!progressView)
     {
-      progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
+      progressView = [[[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault] autorelease];
       progressView.tag = i+PROGRESS_BAR_TAG;
       [self.view addSubview:progressView];
-      // TODO: i dont like the fact that this is manupulated by this method after being released... relying on view to retain.
-      [progressView release];
     }
-
-    
-    [progressView setTintColor:[lineColors objectAtIndex: i]];
-    if(i == 1)
+    [progressView setTintColor:[lineColors objectAtIndex:i]];
+    if (i == 1)
     {
       thisCount = [[levelDetails objectAtIndex: 7] floatValue];
     }
