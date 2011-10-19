@@ -26,7 +26,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 {
   if ((self = [super init]))
   {
-    self.cardCount = -1;
+    cardCount = -1; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
   }
