@@ -15,7 +15,7 @@
 enum Sections {
   kControlsSection = 0,
   kFrequencyMultiplierSection = 1,
-  kShowBurriedSection = 2,
+  kShowBuriedCardsSection = 2,
   NUM_SECTIONS
 };
 
@@ -57,25 +57,11 @@ enum ControlSectionRows
   [self setDifficulty:self.difficultySegmentControl];
 }
 
-#pragma mark - Table view methods
+#pragma mark - UITableViewDataSource Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
   return NUM_SECTIONS;
-}
-
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
-{
-  NSString *returnVal = @"";
-  if (section == kControlsSection)
-  {
-    returnVal = NSLocalizedString(@"Number of Cards in Study Pool",@"AlgorithmVC.NumberCards");
-  }
-  else if (section == kFrequencyMultiplierSection)
-  {
-    returnVal = NSLocalizedString(@"Frequency of New Cards",@"AlgorithmVC.NewCardFrequency");
-  }
-  return returnVal;
 }
 
 // these numbers are controlled by enums at top of this page
@@ -146,7 +132,7 @@ enum ControlSectionRows
     [cell addSubview:rightLabel];
     [rightLabel release];
   }
-  else if (indexPath.section == kShowBurriedSection)
+  else if (indexPath.section == kShowBuriedCardsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"showBuried" onTable:lcltableView usingStyle:UITableViewCellStyleDefault];
     BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
@@ -170,7 +156,23 @@ enum ControlSectionRows
   return cell;  
 }
 
-#pragma mark - Segmented Control
+#pragma mark - UITableViewDelegate Methods
+
+- (NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
+{
+  NSString *returnVal = nil;
+  if (section == kControlsSection)
+  {
+    returnVal = NSLocalizedString(@"Number of Cards in Study Pool",@"AlgorithmVC.NumberCards");
+  }
+  else if (section == kFrequencyMultiplierSection)
+  {
+    returnVal = NSLocalizedString(@"Frequency of New Cards",@"AlgorithmVC.NewCardFrequency");
+  }
+  return returnVal;
+}
+
+#pragma mark - UISegmentedControl
 
 /**
  * Sets the ui sliders values based on the segmented value selected by the user
