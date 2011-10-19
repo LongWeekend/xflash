@@ -109,8 +109,7 @@
 }
 
 
-# pragma mark UITableView delegate methods
-
+#pragma mark - UITableViewDataSource Methods
 
 //! Hardcoded to 2 - installed and available
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -118,42 +117,43 @@
   return 2;
 }
 
-
 //! Return the number of plugins of each type
-- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   if (section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
-    return [[self installedPlugins] count];
+    return [self.installedPlugins count];
   }
   else
   {
     // section == PLUGIN_SETTINGS_AVAILABLE_SECTION
-    return [[self availablePlugins] count];
+    return [self.availablePlugins count];
   }
 }
 
 //! Makes the table cells
-- (UITableViewCell *)tableView: (UITableView *)lclTableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell;
+  UITableViewCell *cell = nil;
   if (indexPath.section == PLUGIN_SETTINGS_INSTALLED_SECTION)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"installed" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    cell.textLabel.text = [[[self installedPlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
+    cell.textLabel.text = [[self.installedPlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
   else
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"available" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
-    cell.detailTextLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
-    cell.textLabel.text = [[[self availablePlugins] objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
+    cell.detailTextLabel.text = [[self.availablePlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
+    cell.textLabel.text = [[self.availablePlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
   }
 
   return cell;  
 }
+
+#pragma mark - UITableViewDelegate Methods
 
 //! what to do if selected
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,7 +163,7 @@
     [lclTableView deselectRowAtIndexPath:indexPath animated:YES];
 
     // Fire off a notification to bring up the downloader
-    NSDictionary *dict = [[self availablePlugins] objectAtIndex:indexPath.row];
+    NSDictionary *dict = [self.availablePlugins objectAtIndex:indexPath.row];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
   }
 }
@@ -171,18 +171,16 @@
 //! Get the titles
 - (NSString *)tableView: (UITableView*) lclTableView titleForHeaderInSection:(NSInteger)section
 {
-  if (section == PLUGIN_SETTINGS_INSTALLED_SECTION && [[self installedPlugins] count])
+  NSString *returnVal = nil;
+  if (section == PLUGIN_SETTINGS_INSTALLED_SECTION && [self.installedPlugins count])
   {
-    return NSLocalizedString(@"Installed",@"PluginSettingsViewController.TableHeader_Installed");
+    returnVal = NSLocalizedString(@"Installed",@"PluginSettingsViewController.TableHeader_Installed");
   }
-  else if (section == PLUGIN_SETTINGS_AVAILABLE_SECTION && [[self availablePlugins] count])
+  else if (section == PLUGIN_SETTINGS_AVAILABLE_SECTION && [self.availablePlugins count])
   {
-    return NSLocalizedString(@"Available (Tap to Download)",@"PluginSettingsViewController.TableHeader_Available");
+    returnVal = NSLocalizedString(@"Available (Tap to Download)",@"PluginSettingsViewController.TableHeader_Available");
   }
-  else
-  {
-    return @"";
-  }
+  return returnVal;
 }
 
 - (void)dealloc
