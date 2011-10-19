@@ -64,17 +64,17 @@
 #pragma mark - UIView Delegate Methods
 
 /**
- * On viewDidAppear, show Alert Views if it is first launch OR after 1.0 upgrade
+ * On viewDidAppear, show Alert Views if it is first launch
  */
 - (void) viewDidAppear:(BOOL)animated
 {
-
+  [super viewDidAppear:animated];
+  
   // Show a UIAlert if this is the first time the user has launched the app.  
   CurrentState *state = [CurrentState sharedCurrentState];
   if (state.isFirstLoad && !_alreadyShowedAlertView)
   {
     _alreadyShowedAlertView = YES;
-    
 #if defined (LWE_JFLASH)
     [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
@@ -86,7 +86,7 @@
                                        message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.",@"RootViewController.WelcomeAlertViewMessage")
                                             ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
                                         cancel:nil
-                                      delegate:self];
+                                      delegate:nil];
 #endif
   }
 }
