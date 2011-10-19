@@ -119,7 +119,7 @@
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self currentCard]];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:self.currentCard];
     
     // Set up DONE button
     UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
@@ -182,7 +182,7 @@
     [picker setToRecipients:[NSArray arrayWithObjects:LWE_BAD_DATA_EMAIL, nil]];
     
     Tag *tmpTag = [[CurrentState sharedCurrentState] activeTag];
-    NSString *messageBody = [NSString stringWithFormat:@"How can we make this awesome?\n\n\n\nInfo For Long Weekend:\n\nCard Id: %i\nActive Tag Id: %i\nActive Tag Name: %@", [[self currentCard] cardId], tmpTag.tagId, tmpTag.tagName];
+    NSString *messageBody = [NSString stringWithFormat:@"How can we make this awesome?\n\n\n\nInfo For Long Weekend:\n\nCard Id: %i\nActive Tag Id: %i\nActive Tag Name: %@", self.currentCard.cardId, tmpTag.tagId, tmpTag.tagName];
     
     [picker setMessageBody:messageBody isHTML:NO];
     
@@ -478,8 +478,6 @@
 
 - (void)dealloc
 {
-	//TODO: Remove this if crashes
-	LWE_LOG(@"Rendy realised that the current card is assigned using setter, and the setter is 'retain', so shouldnt it be release? Please clarify");
 	[currentCard release];
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
