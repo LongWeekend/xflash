@@ -19,15 +19,7 @@
 
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-  if (self.wordCardViewController == nil)
-  {
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
-    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
-    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
-    cardViewController.view = self.wordCardViewController.view;
-  }
-  
+  cardViewController.view = self.wordCardViewController.view;
   [self.wordCardViewController prepareView:cardViewController.currentCard];
   [self.wordCardViewController resetReadingVisibility];
 }
@@ -83,6 +75,19 @@
 }
 
 #pragma mark -
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
+  }
+  return self;
+}
 
 - (void)dealloc
 {

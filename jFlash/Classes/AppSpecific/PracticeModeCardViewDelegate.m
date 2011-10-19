@@ -19,21 +19,15 @@
 
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
-  BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
-  if (self.wordCardViewController == nil)
-  {
-    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
-    cardViewController.view = self.wordCardViewController.view;
-  }
-  
+  cardViewController.view = self.wordCardViewController.view;
   [self.wordCardViewController prepareView:cardViewController.currentCard];
 
   // always start with the meaning hidden
   [self.wordCardViewController hideMeaningWebView:YES];
   [self.wordCardViewController resetReadingVisibility];
   
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  BOOL useMainHeadword = [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
   if (useMainHeadword == NO)
   {
     self.wordCardViewController.toggleReadingBtn.hidden = YES;
@@ -82,8 +76,6 @@
 	// In practice mode, scroll view should always start disabled
   svc.scrollView.pagingEnabled = NO;
   svc.scrollView.scrollEnabled = NO;
-  
-  
 }
 
 - (void)studyModeDidChange:(StudyViewController*)svc
@@ -120,6 +112,18 @@
 }
 
 #pragma mark - Class Plumbing
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    BOOL useMainHeadword = [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
+  }
+  return self;
+}
 
 - (void)dealloc 
 {
