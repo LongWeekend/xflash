@@ -168,37 +168,34 @@
 
 #pragma mark - UIApplication Delegate methods
 
-// TODO: not in use. Waiting for next release
-//- (void) scheduleLocalNotification 
-//{
-//  // get rid of old notifications
-//  [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//  
-//  // should we set up a new one
-//  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-//  id reminderSetting = [settings objectForKey:APP_REMINDERS];
-//  if (reminderSetting == nil || [reminderSetting intValue] == 0)
-//  {
-//    return;
-//  }
-//  
-//  // create a notification to study again
-//  UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-//  
-//  NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
-//
-//  localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
-//  localNotification.timeZone = [NSTimeZone localTimeZone];
-//  localNotification.alertBody = @"It's time to learn some more words! This is your study reminder.";
-//  localNotification.alertAction = @"Study Now";
-//  localNotification.soundName = UILocalNotificationDefaultSoundName;
-//
-//  // schedule it
-//  [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-//  
-//  // the application retains the notification
-//  [localNotification release];
-//}
+- (void) scheduleLocalNotification 
+{
+  // get rid of old notifications
+  [[UIApplication sharedApplication] cancelAllLocalNotifications];
+  
+  // should we set up a new one
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
+  if (reminderSetting == nil || [reminderSetting intValue] == 0)
+  {
+    return;
+  }
+  
+  // create a notification to study again
+  UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+  NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
+  localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
+  localNotification.timeZone = [NSTimeZone localTimeZone];
+  localNotification.alertBody = NSLocalizedString(@"It's time to learn some more words! This is your study reminder.",@"StudyNotification.Body");
+  localNotification.alertAction = NSLocalizedString(@"Study",@"StudyNotification.Action");
+  localNotification.soundName = UILocalNotificationDefaultSoundName;
+
+  // schedule it
+  [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+  
+  // the application retains the notification
+  [localNotification release];
+}
 
 /**
  * Called on iOS4 when the app is put into the background
@@ -206,8 +203,7 @@
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
   LWE_LOG(@"Application did enter the background now");
-  // TODO: not in use for this version
-  //[self scheduleLocalNotification];
+  [self scheduleLocalNotification];
 }
 
 /**
@@ -217,13 +213,10 @@
  */
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
-  // TODO: Change this to Cache dir?
-  // the plist is only made in case we are terminated.  If not terminated, no need for this - it will mess stuff up in tag -> populateCardIds
-  if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:@"ids.plist"]])
-  {
-    LWE_LOG(@"After entering foreground, found plist, deleting plist (we have cards in memory instead)");
-    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
-  }
+  // We make the PLIST when going into the background, as we may be killed/terminated.
+  // However, this call (enter foreground) means we're back w/o termination, so we can
+  // delete our PLIST.
+  [LWEFile deleteFile:[LWEFile createCachesPathWithFilename:@"ids.plist"]];
   
   // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
