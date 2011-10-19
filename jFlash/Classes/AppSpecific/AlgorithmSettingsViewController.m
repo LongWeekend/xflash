@@ -47,16 +47,10 @@ enum ControlSectionRows
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-}
-
-// TODO: why is viewDidAppear here and this code not in viewWillAppear?  Or even viewDidLoad?
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
+  
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [NSNumber numberWithInt:[settings integerForKey:APP_DIFFICULTY]];
   self.difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
