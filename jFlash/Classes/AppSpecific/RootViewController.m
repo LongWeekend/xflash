@@ -337,8 +337,8 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   }
 
   // Set the installer delegate to the PluginManager class
-  [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
-  [dlViewController setTaskHandler:tmpDlHandler];
+  tmpDlHandler.delegate = [[CurrentState sharedCurrentState] pluginMgr];
+  dlViewController.taskHandler = tmpDlHandler;
   
   // Register notification listener to handle downloader events
 	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
@@ -346,10 +346,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
-  
-  //TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
-  //The TaskHandler property of dlViewController retains the tmpDlHandler
-  //so, the tmpDlHandler can be released safely.
   [tmpDlHandler release];
 }
 
