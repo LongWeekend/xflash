@@ -1366,20 +1366,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				49195075144F1ACD00DB81F7 /* CFlash */,
+				49195074144F1AB300DB81F7 /* JFlash */,
 				24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */,
-				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
-				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
-				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
-				91992E2811D1A2F600CFCACD /* jFlash.db */,
-				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
-				49BD2AF2138E664100FAC045 /* cFlash.db */,
 				912405D9109C263D00ECA1C2 /* Entitlements.plist */,
-				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
-				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
-				24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */,
-				24EA131D1202AC480081CBBA /* downloadedPlugin.plist */,
-				49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */,
-				49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1419,6 +1409,32 @@
 				49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		49195074144F1AB300DB81F7 /* JFlash */ = {
+			isa = PBXGroup;
+			children = (
+				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
+				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
+				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
+				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
+				91992E2811D1A2F600CFCACD /* jFlash.db */,
+				24EA0D36120016FC0081CBBA /* availablePluginForDownload.plist */,
+				24EA131D1202AC480081CBBA /* downloadedPlugin.plist */,
+			);
+			name = JFlash;
+			sourceTree = "<group>";
+		};
+		49195075144F1ACD00DB81F7 /* CFlash */ = {
+			isa = PBXGroup;
+			children = (
+				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
+				49BD2AF2138E664100FAC045 /* cFlash.db */,
+				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
+				49280A2F13962C3300EF009C /* cFlash_availablePluginForDownload.plist */,
+				49280A3013962C3400EF009C /* cFlash_downloadedPlugin.plist */,
+			);
+			name = CFlash;
 			sourceTree = "<group>";
 		};
 		4938F8BB14027532001EB473 /* OHAttributedLabel */ = {
