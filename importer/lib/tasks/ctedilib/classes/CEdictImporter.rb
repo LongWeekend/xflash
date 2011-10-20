@@ -709,15 +709,6 @@ class CEdictImporter < CEdictBaseImporter
 
   # DESC: For kana only headwords, use readings to match for a duplicate
 
-  # DESC: Ensures each JLPT tagged card is included in lower levels using CONCAT
-  def self.add_jlpt_tags
-    connect_db
-    prt "Adding additional JLPT set membership tags to existing JLPT cards"
-    $cn.execute("UPDATE cards_staging SET tags = concat('jlpt3,',tags) WHERE tags like '%jlpt4%' AND tags not like '%jlpt3%'")
-    $cn.execute("UPDATE cards_staging SET tags = concat('jlpt2,',tags) WHERE tags like '%jlpt3%' AND tags not like '%jlpt2%'")
-    $cn.execute("UPDATE cards_staging SET tags = concat('jlpt1,',tags) WHERE tags like '%jlpt2%' AND tags not like '%jlpt1%'")
-  end
-
   # DESC: Overrides base method, passing in data from jFlashImport staging tables
   def self.separate_romaji_readings(forced=true)
 
