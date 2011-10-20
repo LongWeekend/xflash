@@ -40,7 +40,7 @@ class CEdictImporter < CEdictBaseImporter
       end
 
       # Return SQL command to execute
-      return return_sql
+      return_sql
     end
   
     prt "Merged #{merge_counter}"
@@ -54,7 +54,6 @@ class CEdictImporter < CEdictBaseImporter
     serialised_cedict_hash = mysql_serialise_ruby_object(cedict_rec)
 
     # INSERT NEW ENTRY
-    meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(cedict_rec)
     # MMA - what does this do?
 #        update_hash_mtxt_arr = meanings_txt.split($delimiters[:jflash_meanings])
 
@@ -64,7 +63,7 @@ class CEdictImporter < CEdictBaseImporter
 
     all_tags_list = Parser.combine_and_uniq_arrays(cedict_rec.all_tags).join($delimiters[:jflash_tag_coldata])
     return @insert_entry_sql % [cedict_rec.headword_trad, cedict_rec.headword_simp, cedict_rec.headword_en, cedict_rec.pinyin, cedict_rec.pinyin_diacritic,
-        mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts),
+        mysql_escape_str(cedict_rec.meaning_txt), mysql_escape_str(cedict_rec.meaning_html), mysql_escape_str(cedict_rec.meaning_fts),
         (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
         (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
         (cedict_rec.is_only_redirect? ? "1" : "0"),
@@ -82,7 +81,6 @@ class CEdictImporter < CEdictBaseImporter
 
       # Merge existing, format meaning variously, do tags and refs
       merged_entry, meaning_strings_merged = merge_duplicate_entries(cedict_rec, dupe)
-      meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(merged_entry)
     
       all_tags_list = Parser.combine_and_uniq_arrays(merged_entry.all_tags).join($delimiters[:jflash_tag_coldata])
 
@@ -96,11 +94,11 @@ class CEdictImporter < CEdictBaseImporter
       if meaning_strings_merged
         # UPDATE HEADWORD_EN, MEANINGS & TAGS
         ##prt " - Merging tags & meaning!"
-        return @update_entry_sql % [ merged_entry.headword_en, mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
+        return @update_entry_sql % [ merged_entry.headword_en, mysql_escape_str(merged_entry.meanings_txt), mysql_escape_str(merged_entry.meanings_html), mysql_escape_str(merged_entry.meanings_fts), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
       else
         # UPDATE VISIBLE MEANINGS & TAGS
         ##prt " - Merging tags only!"
-        return @update_tags_sql % [mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
+        return @update_tags_sql % [mysql_escape_str(merged_entry.meanings_txt), mysql_escape_str(merged_entry.meanings_html), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
       end
     end # duplicates_arr.each do
   end

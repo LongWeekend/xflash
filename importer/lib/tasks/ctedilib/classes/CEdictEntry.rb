@@ -380,12 +380,12 @@ class CEdictEntry < Entry
   def meaning_html(tag_mode="inhuman")
     meanings_html_arr  = []
     sense_count = @meanings.size
-    cedict_rec.meanings.each do |m|
+    @meanings.each do |m|
       mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m[:meaning], tag_mode)
       mhtml = "<li>#{mhtml}</li>" unless sense_count == 1
       meanings_html_arr << mhtml
     end
-    html = meanings_html_array.collect { |d| d }.join("")
+    html = meanings_html_arr.collect { |d| d }.join("")
     html = "<ol>" + html + "</ol>" unless sense_count == 1
     return html
   end
@@ -393,7 +393,7 @@ class CEdictEntry < Entry
   def meaning_txt(tag_mode="inhuman")
     meanings_text_arr  = []
     sense_count = @meanings.size
-    cedict_rec.meanings.each do |m|
+    @meanings.each do |m|
       mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m[:meaning], tag_mode)
       meanings_text_arr << mtxt
     end
