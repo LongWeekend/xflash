@@ -44,8 +44,10 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
 {
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLongWeekendFavorites];
   [longWeekendFavTag populateCardIds];
-  NSError* error;
-  Card* card = [longWeekendFavTag getRandomCard:0 error:&error];
+  NSError *error = nil;
+  Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
+  STAssertTrue(card, @"Could not get random card");
+  
   [longWeekendFavTag updateLevelCounts:card nextLevel:5];
   int count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
@@ -107,6 +109,14 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   JFlashDatabase *db = [JFlashDatabase sharedJFlashDatabase];
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
   STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
+  
+  //Setup FTS
+  result = [db setupAttachedDatabase:JFLASH_CURRENT_FTS_TEST_DATABASE asName:@"fts"];
+  STAssertTrue(result, @"Failed to setup search database");
+
+  //Setup Cards
+  result = [db setupAttachedDatabase:JFLASH_CURRENT_CARD_TEST_DATABASE asName:@"cards"];
+  STAssertTrue(result, @"Failed to setup cards database");
   
   //Create the tag for testing purposes.
   Tag *createdTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
