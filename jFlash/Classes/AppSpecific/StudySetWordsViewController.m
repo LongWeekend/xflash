@@ -12,7 +12,6 @@
 @interface StudySetWordsViewController ()
 - (void) _loadWordListInBackground;
 - (void) _tagContentDidChange:(NSNotification*)notification;
-@property BOOL cardIsDeletedViaTableSwipe;
 @end
 
 /**
@@ -23,7 +22,7 @@
  */
 @implementation StudySetWordsViewController
 
-@synthesize tag, cards, activityIndicator, cardIsDeletedViaTableSwipe;
+@synthesize tag, cards, activityIndicator;
 
 #pragma mark - Initializer
 
@@ -99,18 +98,15 @@
     return;
   }
   
-  // If we are getting a remove notification because we deleted via a table swipe on this page, ignore
-  // The other method handles that.  This method is more for stuff that happens in other VCs.
-  if (self.cardIsDeletedViaTableSwipe)
-  {
-    return;
-  }
-  
+  [self.tableView beginUpdates];
   // OK, now determine what type of update it is - if we don't know, do nothing
   NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
     [self.cards addObject:theCard];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cards indexOfObject:theCard] inSection:kWordSetListSections];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                          withRowAnimation:UITableViewRowAnimationRight];
   }
   else if ([changeType isEqualToString:LWETagContentCardRemoved])
   {
@@ -119,11 +115,13 @@
     {
       //remove the card, reload the table
       [self.cards removeObjectAtIndex:index];
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:kWordSetListSections];
+      [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                            withRowAnimation:UITableViewRowAnimationRight];
+
     }
   }
-  
-  // In any case, reload the table.
-  [self.tableView reloadData];
+  [self.tableView endUpdates];
 }
 
 /** Run in background on init to load the word list */
@@ -225,18 +223,11 @@
     Card *card = [self.cards objectAtIndex:indexPath.row];
     
     // Set this to signal to the notification callback that we don't need to do anything
-    self.cardIsDeletedViaTableSwipe = YES;
     BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
-    self.cardIsDeletedViaTableSwipe = NO;
 
-    if (result)
+    if (result == NO)
     {
-      [self.cards removeObjectAtIndex:indexPath.row];
-      [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
-    }
-    else
-    {
-      if ([error code] == kRemoveLastCardOnATagError)
+      if (error.code == kRemoveLastCardOnATagError)
       {
         NSString *errorMessage = [error localizedDescription];
         [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
