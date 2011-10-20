@@ -539,8 +539,9 @@ module CardHelpers
     result = Array.new()
     cards = $card_entries.values()
     
-    criteria = Proc.new do |headword, same_pinyin, same_meaning|
-      result = same_pinyin || same_meaning
+    criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
+      # Don't match proper nouns, it tends to be surnames and such
+      result = same_pinyin || same_meaning || (is_proper_noun == false)
       
       if (!result)
         # This is a little bit strange as both the pinyin nor the meaning
