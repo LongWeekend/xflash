@@ -386,7 +386,7 @@ class CEdictEntry < Entry
       meanings_html_arr << mhtml
     end
     html = meanings_html_arr.collect { |d| d }.join("")
-    html = "<ol>" + html + "</ol>" unless sense_count == 1
+    html = "<ol>" + html + "</ol>" unless sense_count <= 1
     return html
   end
   
