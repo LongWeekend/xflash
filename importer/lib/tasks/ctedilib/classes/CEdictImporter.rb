@@ -1,15 +1,6 @@
 #### CEdict IMPORTER #####
 class CEdictImporter < CEdictBaseImporter
 
-  # DESC: Removes all data from import staging tables (should be run before calling import)
-  def empty_staging_tables
-    connect_db
-    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
-    $cn.execute("TRUNCATE TABLE cards_staging") 
-    $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
-    $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
-  end
-
   # RETURNS: Existing cards and adds them into a hash
   def cache_existing_cards(table ="cards_staging", where ="")
     lookup = self.cache_sql_query( { :select => "card_id, headword_trad", :from => table, :where => where } ) do | sqlrow, cache_data |
@@ -23,131 +14,103 @@ class CEdictImporter < CEdictBaseImporter
     return lookup
   end
 
-  # DESC: Caches staging database tag data
-  def cache_tag_data
-    $shared_cache[:pos_tag_human_readings] = {}
-    $shared_cache[:pos_tag_inhuman_readings] = {}
-    connect_db
-    results = $cn.select_all("SELECT tag_id, short_name, source_name FROM tags_staging WHERE source = 'edict'")
-    tickcount("Caching Existing EDICT tags") do
-      results.each do |sqlrow|
-        $shared_cache[:pos_tag_human_readings][sqlrow['source_name']] = { :humanised => sqlrow['short_name'], :id => sqlrow['tag_id'] }
-        if !sqlrow['short_name'].nil?
-          sqlrow['short_name'].split(',').each do |sname|
-            $shared_cache[:pos_tag_inhuman_readings][sname] = { :inhumanised => sname, :id => sqlrow['tag_id'] }
-          end
-        end
-      end
-    end
-  end
-
   # DESC: Overridden base class import method
   def import
 
     # Cache exiting cards into hashes from DB table
-    existing_card_lookup = cache_existing_cards("cards_staging")
+    existing_card_lookup_hash = cache_existing_cards("cards_staging")
 
-    # MERGE_NEW Counters
     merge_counter = 0
     new_counter = 0
     
     # Call 'super' method to process loop for us
     super do |cedict_rec|
-      meanings_txt = ""
-      meanings_fts = ""
-      meanings_html = ""
-
-      return_sql_arr = []
-      cn_headword_trad = cedict_rec.headword_trad
-      cn_headword_simp = cedict_rec.headword_simp
-      en_headword = ""
+      return_sql = ""
       
-      @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
-      @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
-      @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+      # Duplicate check by Headword & Readings
+      duplicates_arr = get_duplicates_by_headword_reading(cedict_rec.headword_trad, cedict_rec.pinyin, existing_card_lookup_hash, @config[:entry_type])
 
-      # Processing flags
-      duplicate_exists = false
-
-      # 1 - Generate EN headword
-      if cedict_rec.meanings.size>0
-        en_headword = self.class.xfrm_extract_en_headword(cedict_rec.meanings.first[:meaning].strip)
-      end
-
-      # 2 - Duplicate check by Headword & Readings
-      duplicates_arr = get_duplicates_by_headword_reading(cn_headword_trad, cedict_rec.pinyin, existing_card_lookup, @config[:entry_type])
-
-      # 3 - Merge with duplicates
-      if duplicates_arr.size > 0
-        # LOOP through each possible duplicate and go
-        duplicates_arr.each do |dupe|
-
-          # Merge existing, format meaning variously, do tags and refs
-          merged_entry, meaning_strings_merged = merge_duplicate_entries(cedict_rec, dupe)
-          meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(merged_entry)
-        
-          all_tags_list = Parser.combine_and_uniq_arrays(merged_entry.all_tags).join($delimiters[:jflash_tag_coldata])
-
-          # Serialise for storage in DB
-          serialised_cedict_rec = mysql_serialise_ruby_object(merged_entry)
-
-          # Remove embedded card_id from hash 
-          merged_entry_card_id = merged_entry.id.to_i
-          merged_entry.set_id(-1)
-
-          if meaning_strings_merged
-            # UPDATE HEADWORD_EN, MEANINGS & TAGS
-            return_sql_arr << @update_entry_sql % [ en_headword, mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
-            ##prt " - Merging tags & meaning!"
-            merge_counter = merge_counter + 1
-          else
-            # UPDATE VISIBLE MEANINGS & TAGS
-            return_sql_arr << @update_tags_sql % [mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
-            ##prt " - Merging tags only!"
-            merge_counter = merge_counter + 1
-          end
-        end # duplicates_arr.each do
+      # Create SQL for import
+      if (duplicates_arr.size > 0)
+        return_sql = process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
+        merge_counter = merge_counter + duplicates_arr.size
       else
-
-        # Serialise for storage in DB
-        serialised_cedict_hash = mysql_serialise_ruby_object(cedict_rec)
-
-        # INSERT NEW ENTRY
-        meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(cedict_rec)
-        # MMA - what does this do?
-#        update_hash_mtxt_arr = meanings_txt.split($delimiters[:jflash_meanings])
-
-#        for i in 0..update_hash_mtxt_arr.size-1
-#          cedict_rec[:meanings][i][:sense] = update_hash_mtxt_arr[i]
-#        end
- 
-        all_tags_list = Parser.combine_and_uniq_arrays(cedict_rec.all_tags).join($delimiters[:jflash_tag_coldata])
-        return_sql_arr << @insert_entry_sql % [cn_headword_trad, cn_headword_simp, en_headword, cedict_rec.pinyin, cedict_rec.pinyin_diacritic,
-            mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts),
-            (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
-            (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
-            (cedict_rec.is_only_redirect? ? "1" : "0"),
-            (cedict_rec.has_variant ? "1" : "0"), (cedict_rec.is_erhua_variant ? "1" : "0"),
-            (cedict_rec.is_proper_noun? ? "1" : "0"),
-            (cedict_rec.variant_of ? "'"+mysql_escape_str(cedict_rec.variant_of)+"'" : "NULL"), serialised_cedict_hash]
-
+        return_sql = process_entry_into_sql(cedict_rec)
         new_counter = new_counter + 1
       end
 
-      # Return string of SQL commands to execute
-      return_sql_arr.join("\n")
+      # Return SQL command to execute
+      return return_sql
     end
   
     prt "Merged #{merge_counter}"
     prt "Inserted #{new_counter}"
   end
+  
+  def process_entry_into_sql(cedict_rec)
+    @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+
+    # Serialise for storage in DB
+    serialised_cedict_hash = mysql_serialise_ruby_object(cedict_rec)
+
+    # INSERT NEW ENTRY
+    meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(cedict_rec)
+    # MMA - what does this do?
+#        update_hash_mtxt_arr = meanings_txt.split($delimiters[:jflash_meanings])
+
+#        for i in 0..update_hash_mtxt_arr.size-1
+#          cedict_rec[:meanings][i][:sense] = update_hash_mtxt_arr[i]
+#        end
+
+    all_tags_list = Parser.combine_and_uniq_arrays(cedict_rec.all_tags).join($delimiters[:jflash_tag_coldata])
+    return @insert_entry_sql % [cedict_rec.headword_trad, cedict_rec.headword_simp, cedict_rec.headword_en, cedict_rec.pinyin, cedict_rec.pinyin_diacritic,
+        mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts),
+        (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
+        (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
+        (cedict_rec.is_only_redirect? ? "1" : "0"),
+        (cedict_rec.has_variant ? "1" : "0"), (cedict_rec.is_erhua_variant ? "1" : "0"),
+        (cedict_rec.is_proper_noun? ? "1" : "0"),
+        (cedict_rec.variant_of ? "'"+mysql_escape_str(cedict_rec.variant_of)+"'" : "NULL"), serialised_cedict_hash]
+  end
+  
+  def process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
+    @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
+    @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
+
+    # LOOP through each possible duplicate and go
+    duplicates_arr.each do |dupe|
+
+      # Merge existing, format meaning variously, do tags and refs
+      merged_entry, meaning_strings_merged = merge_duplicate_entries(cedict_rec, dupe)
+      meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(merged_entry)
+    
+      all_tags_list = Parser.combine_and_uniq_arrays(merged_entry.all_tags).join($delimiters[:jflash_tag_coldata])
+
+      # Serialise for storage in DB
+      serialised_cedict_rec = mysql_serialise_ruby_object(merged_entry)
+
+      # Remove embedded card_id from hash 
+      merged_entry_card_id = merged_entry.id.to_i
+      merged_entry.set_id(-1)
+
+      if meaning_strings_merged
+        # UPDATE HEADWORD_EN, MEANINGS & TAGS
+        ##prt " - Merging tags & meaning!"
+        return @update_entry_sql % [ merged_entry.headword_en, mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), mysql_escape_str(meanings_fts), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
+      else
+        # UPDATE VISIBLE MEANINGS & TAGS
+        ##prt " - Merging tags only!"
+        return @update_tags_sql % [mysql_escape_str(meanings_txt), mysql_escape_str(meanings_html), all_tags_list, serialised_cedict_rec, merged_entry_card_id]
+      end
+    end # duplicates_arr.each do
+  end
 
   # DESC: Check if duplicate exists in existing array, returns dupe edict2hashes
-  def get_duplicates_by_headword_reading(cn_headword_trad, readings_str, existing_card_lookup, entry_scope = 0)
+  def get_duplicates_by_headword_reading(cn_headword_trad, readings_str, existing_card_lookup_hash, entry_scope = 0)
     duplicates = []
-    if existing_card_lookup.has_key?(entry_scope)
-      if existing_card_lookup[entry_scope][cn_headword_trad]
-        existing_card_lookup[entry_scope][cn_headword_trad].each do |card_id|
+    if existing_card_lookup_hash.has_key?(entry_scope)
+      if existing_card_lookup_hash[entry_scope][cn_headword_trad]
+        existing_card_lookup_hash[entry_scope][cn_headword_trad].each do |card_id|
           cedict_entry = get_existing_card_hash_optimised(card_id)
           if readings_str == cedict_entry.pinyin
             duplicates << cedict_entry
@@ -303,102 +266,6 @@ class CEdictImporter < CEdictBaseImporter
     return existing_entry, meaning_strings_merged
   end
   
-  # DESC: Returns formatted meaning strings
-  def get_formatted_meanings(cedict_rec, tag_mode="inhuman")
-    meanings_html_arr  = []
-    meanings_text_arr  = []
-    meanings_fts_arr   = []
-
-    sense_count = cedict_rec.meanings.size
-    cedict_rec.meanings.each do |m|
-      mtxt, mfts, mhtml = xfrm_inline_tags_with_meaning(cedict_rec.pos, m[:meaning], sense_count, tag_mode)
-      meanings_html_arr << mhtml
-      meanings_text_arr << mtxt
-      meanings_fts_arr << mfts
-    end
-
-    meanings_txt  = join_meaning_entries_txt(meanings_text_arr)
-    meanings_html = join_meaning_entries_html(meanings_html_arr)
-    meanings_fts  = xfrm_remove_stop_words(meanings_fts_arr.join($delimiters[:jflash_meanings]))
-
-    return meanings_txt, meanings_html, meanings_fts
-  end
-
-  ## TRANSFORM 
-  def xfrm_inline_tags_with_meaning(tag_array, meaning_str, sense_count=1, tag_mode="inhuman")
-
-    tag_buffer =[]
-    inlined_tags = meaning_str.scan($regexes[:inlined_tags]).to_s
-
-    # Extract trailing parentheticals, re-insert if not tags!
-    meaning_str = meaning_str.gsub($regexes[:inlined_tags], "").strip
-    inlined_tags.split($delimiters[:jflash_inlined_tags]).each do |m|
-      tag_buffer << m if Entry.is_pos_tag?(m)
-    end
-    inlined_tags.strip!
-    meaning_str.strip!
-
-    if tag_buffer.size == 0 and inlined_tags != ""
-      trailing_parentheticals = " (" + inlined_tags + ")"
-    else
-      trailing_parentheticals = ""
-    end
-
-    pos_tag_array = []
-    if !tag_array.nil?
-      tag_array.each do |t|
-        if Entry.is_pos_tag?(t)
-          pos_tag_array << (tag_mode == "inhuman" ? t : xfrm_pos_tag_to_human_tag(t))
-        end
-      end
-      pos_tag_array.compact!
-    end
-
-    mfts  = meaning_str
-    meaning_str = meaning_str + trailing_parentheticals
-    mtxt  = (pos_tag_array.size > 0 ? meaning_str + " (" + pos_tag_array.join($delimiters[:jflash_inlined_tags]) + ")" : meaning_str)
-    mhtml = (pos_tag_array.size > 0 ? meaning_str + " "  + pos_tag_array.collect{ |t| "<dfn>#{t}</dfn>" }.join("") : meaning_str)
-    mhtml = "<li>#{mhtml}</li>" if sense_count > 1
-
-    return mtxt, mfts, mhtml
-  end
-
-  # XFORMATION: Convenience method for returning humanised tags inline!
-  def xfrm_inline_human_tags_with_meaning(tag_array, meaning_str, sense_count)
-    return xfrm_inline_tags_with_meaning(tag_array, meaning_str, sense_count, "human")
-  end
-
-  # XFORMATION: Returns human tag name from the DB, caching everything on first call
-  def xfrm_pos_tag_to_human_tag(tag)
-    cache_tag_data if $shared_cache[:pos_tag_human_readings].nil?
-    if $shared_cache[:pos_tag_human_readings].has_key?(tag)
-      return $shared_cache[:pos_tag_human_readings][tag][:humanised]
-    else
-      return tag
-    end
-  end
-
-  # DESC: Join TXT entries passed in array of strings
-  def join_meaning_entries_txt(meaning_array)
-    meaning_array.join($delimiters[:jflash_meanings])
-  end
-
-  # DESC: Join HTML entries passed in array of strings
-  def join_meaning_entries_html(meaning_array)
-    tmp = meaning_array.collect{ |d| d }.join("")
-    if meaning_array.size > 1
-      return "<ol>" + tmp + "</ol>"
-    else
-      return tmp
-    end
-  end
-
-  # TODO - make me work like for real
-  def self.add_group_links
-    connect_db
-    $cn.execute("INSERT INTO group_tag_link (tag_id,group_id) SELECT tag_id, 0 FROM tags_staging")
-  end
-
   # DESC: Add tag link records to 'card_tag_link'
   def self.add_tag_links(visible_tag_array = [ $options[:system_tags]['LWE_FAVORITES'] ])
 
@@ -471,24 +338,6 @@ class CEdictImporter < CEdictBaseImporter
     end
     prt "==========================================================================="
     
-  end
-
-  # DESC: Humanise inlined tags, and then export tables
-  def self.humanise_inline_tags_in_table(cards_table="cards_staging")
-    prt "Bulk updating formatted meanings with humanised tag names"
-    connect_db
-    output_table = cards_table + "_humanised"
-    $cn.execute("DROP TABLE IF EXISTS #{output_table}")
-    $cn.execute("CREATE TABLE #{output_table} SELECT card_id, card_type, headword, alt_headword, headword_en, reading, romaji, meaning, meaning_html, meaning_fts, tags, ptag FROM #{cards_table}")
-    $cn.execute("ALTER TABLE #{output_table} ADD PRIMARY KEY (card_id)")
-    result_data = $cn.execute("SELECT card_id, cedict_hash FROM #{cards_table}")
-    bulkSQL = BulkSQLRunner.new(0,10000)
-    result_data.each do |card_id, edict2hash|
-      edict2hash = mysql_deserialise_ruby_object(edict2hash)
-      meanings_txt, meanings_html, meanings_fts = get_formatted_meanings(edict2hash, "human")
-      bulkSQL.add("UPDATE #{output_table} SET meaning = \'#{mysql_escape_str(meanings_txt)}\',  meaning_html = \'#{mysql_escape_str(meanings_html)}\',  meaning_fts = \'#{mysql_escape_str(meanings_fts)}\' WHERE card_id = #{card_id};")
-    end
-    bulkSQL.flush # flush the remainder!
   end
 
   # DESC: Empty and update the headword/card_id 
@@ -963,18 +812,6 @@ class CEdictImporter < CEdictBaseImporter
       end
     end
     return out_arr
-  end
-
-  # XFORMATION: Return meaning with tags inlined
-  
-  # XFORMATION: Returns inhuman tag name from the DB, caching everything on first call
-  def self.xfrm_pos_tag_to_inhuman_tag(tag)
-    cache_tag_data if $shared_cache[:pos_tag_inhuman_readings].nil?
-    if $shared_cache[:pos_tag_inhuman_readings].has_key?(tag)
-      return $shared_cache[:pos_tag_inhuman_readings][tag][:inhumanised]
-    else
-      return tag
-    end
   end
 
   # RETURNS: Existing headword lookup data

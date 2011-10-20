@@ -79,7 +79,7 @@ class CardEntry < Entry
      intersection = self.meanings & entry.meanings
      same_meaning = intersection.length() > 0
      
-     return match_criteria.call(entry.headword, same_pinyin, same_meaning)
+     return match_criteria.call(entry.headword, same_pinyin, same_meaning, entry.is_proper_noun?)
        
 =begin 
      Comparing the meaning

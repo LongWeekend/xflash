@@ -15,6 +15,7 @@ class Entry
     @classifier = false
     @headword_trad = ""
     @headword_simp = ""
+    @headword_en = ""
     @pinyin = ""
     @pinyin_diacritic = ""
     @meanings = []
@@ -84,6 +85,10 @@ class Entry
   
   def headword
     (@headword_trad != nil) && (@headword_trad.strip.length > 0) ? @headword_trad : @headword_simp
+  end
+  
+  def headword_en
+    @headword_en
   end
   
   def headword_trad

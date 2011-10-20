@@ -33,10 +33,19 @@ class CEdictBaseImporter
 
     bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
     @config[:data].each do |rec|
-      bulkSQL.add( block.call(rec) )
+      bulkSQL.add( block.call(rec) + "\n" )
     end
   end
   
+  # DESC: Removes all data from import staging tables (should be run before calling import)
+  def empty_staging_tables
+    connect_db
+    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
+    $cn.execute("TRUNCATE TABLE cards_staging") 
+    $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
+    $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
+  end
+
   # ACCEPTS: query options hash, block to process caching
   # RETURNS: hash of cached rows as set by block
   # REQUIRES: block to return a obj
@@ -126,26 +135,6 @@ class CEdictBaseImporter
     end
 
     return duplicate
-  end
-
-  # XFORMATION: Remove common English stop words from string
-  def xfrm_remove_stop_words(str)
-   stop_words = ['I', 'me', 'a', 'an', 'am', 'are', 'as', 'at', 'be', 'by','how', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'than', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the']
-   results = []
-   str.gsub!($regexes[:inlined_tags], "") ## remove tag blocks
-   str.split(' ').each do |sstr|
-     # remove non word characters from string
-     results << sstr unless stop_words.index(sstr.gsub(/[^a-zA-Z|\s]/, '').strip)
-   end
-   return results.flatten.compact.join(' ')
-  end
-
-  def self.xfrm_extract_en_headword(first_meaning_string)
-    if first_meaning_string.length > 0
-      return first_meaning_string.gsub("'","''").gsub('  ',' ').gsub('/', ' / ').split("/").first.strip
-    else
-      return first_meaning_string
-    end
   end
 
 end
