@@ -27,14 +27,6 @@ class CEdictImporterTest < Test::Unit::TestCase
     CEdictImporter.create_tags_staging(results)
   end
   
-  def test_add_tag_links
-    CEdictImporter.add_tag_links
-  end  
-  
-  def test_add_group_links
-    CEdictImporter.add_group_links
-  end
-
   # This guy shouldn't be in importer??  TODO - also needs to be fixed to accommodate more headwords
   def test_keyword_index_builder
     CEdictImporter.create_headword_index
