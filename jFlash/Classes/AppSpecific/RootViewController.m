@@ -43,10 +43,28 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   {
     self.isFinishedLoading = NO;
     
-    // Register listener to switch the tab bar controller when the user selects a new set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudySetView) name:LWEShouldShowStudySetView object:nil];
+    // Apparently, there really isn't a way around this dirtiness:
+    // http://stackoverflow.com/questions/4352561/retain-cycle-on-self-with-blocks
+    __block UIViewController *blockSelf = self;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
+    // Register listener to switch the tab bar controller to user sets when user masters a set
+    [center addObserverForName:LWEShouldShowStudySetView object:nil queue:nil usingBlock:^(NSNotification *notification)
+    {
+      blockSelf.tabBarController.selectedIndex = STUDY_SET_VIEW_CONTROLLER_TAB_INDEX;
+    }];
+    
+    // Register listener to switch the tab bar controller to the study view when the user selects a new set
+    [center addObserverForName:@"switchToStudyView" object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       blockSelf.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
+     }];
+
+    [center addObserverForName:@"switchToSettings" object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       blockSelf.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
+     }];
+    
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
@@ -160,22 +178,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 
 # pragma mark Convenience Methods for Notifications
-
-/** Switches active view to study view, convenience method for notification */
-- (void) switchToStudyView
-{
-  self.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
-}
-
-- (void) switchToStudySetView
-{
-  self.tabBarController.selectedIndex = STUDY_SET_VIEW_CONTROLLER_TAB_INDEX;
-}
-
-- (IBAction) switchToSettings
-{
-  self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
-}
 
 - (void) switchToSearchWithTerm:(NSString*)term
 {
