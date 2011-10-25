@@ -51,6 +51,23 @@
   return self.hw_reading;
 }
 
+#pragma mark - Card Properties
+
+- (BOOL) hasAudio
+{
+  // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
+  NSInteger result = arc4random() % 2;
+  return (BOOL)result;
+}
+
+- (NSDictionary *) audioFilenames
+{
+  // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [dict setObject:@"foo.mp3" forKey:@"full_reading"];
+  return (NSDictionary*)dict;
+}
+
 - (BOOL) hasExampleSentences
 {
   return NO;

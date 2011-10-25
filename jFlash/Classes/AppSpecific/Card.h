@@ -22,6 +22,16 @@
 - (NSString*) meaningWithoutMarkup;
 - (BOOL) hasExampleSentences;
 
+//! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
+- (BOOL) hasAudio;
+
+/**
+ * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
+ * and then a key for each syllable of the reading
+ * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
+ */
+- (NSDictionary*) audioFilenames;
+
 //! PK of the card
 @property (nonatomic) NSInteger cardId;
 
