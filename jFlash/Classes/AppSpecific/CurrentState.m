@@ -32,7 +32,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   [tag populateCardIds];
   LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
-  
+
+  // This code is so we can figure out what our users are studying (only system sets)
+  // If _activeTag == nil, it means we're on startup (no need to log that)
+  if (tag.tagEditable == 0 && _activeTag != nil)
+  {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:tag.tagId] forKey:@"id"];
+    [LWEAnalytics logEvent:LWEActiveTagDidChange parameters:userInfo];
+  }
+
   @synchronized (self)
   {
     [_activeTag release];
