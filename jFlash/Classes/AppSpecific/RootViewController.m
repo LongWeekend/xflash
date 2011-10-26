@@ -54,7 +54,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
     }];
     
     // Register listener to switch the tab bar controller to the study view when the user selects a new set
-    [center addObserverForName:@"switchToStudyView" object:nil queue:nil usingBlock:^(NSNotification *notification)
+    [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        blockSelf.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
      }];
