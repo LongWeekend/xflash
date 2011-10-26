@@ -152,6 +152,16 @@ class Entry
     @references
   end
   
+  def parse_inline_entry(line = "")
+    inline_entry = InlineEntry.new
+    inline_entry.parse_line(line)
+    if inline_entry.headword_trad != nil
+      return inline_entry
+    else
+      return nil
+    end
+  end
+  
   def to_insert_sql
     insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
     serialised_cedict_hash = mysql_serialise_ruby_object(self)
