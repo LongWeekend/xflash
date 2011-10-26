@@ -135,8 +135,8 @@
     {
       // First of all, do it
       NSError *error = nil;
-      BOOL cancelable = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
-      if (!cancelable)
+      BOOL cancelled = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
+      if (!cancelled)
       {
         if ([error code] == kRemoveLastCardOnATagError)
         {
