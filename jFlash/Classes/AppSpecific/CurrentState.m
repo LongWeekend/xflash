@@ -30,12 +30,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) setActiveTag:(Tag*)tag
 {
+  BOOL firstRun = (_activeTag == nil);
   [tag populateCardIds];
   LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
 
   // This code is so we can figure out what our users are studying (only system sets)
-  // If _activeTag == nil, it means we're on startup (no need to log that)
-  if (tag.tagEditable == 0 && _activeTag != nil)
+  if (tag.tagEditable == 0 && firstRun == NO)
   {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:tag.tagId] forKey:@"id"];
     [LWEAnalytics logEvent:LWEActiveTagDidChange parameters:userInfo];
@@ -56,8 +56,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     self.favoritesTag = [TagPeer retrieveTagById:FAVORITES_TAG_ID];
   }
   
-  // Tell everyone to reload their data
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:_activeTag];
+  // Tell everyone to reload their data (only if we're not just starting up)
+  if (firstRun == NO)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:_activeTag];
+  }
 }
 
 
