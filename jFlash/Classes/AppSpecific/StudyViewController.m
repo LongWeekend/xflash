@@ -106,15 +106,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
   
-  // iOS4+ only.  On iOS3, when the app is terminated.
-  if (UIApplicationDidEnterBackgroundNotification != NULL)
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-  }
-  else
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
-  }
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
   
   // Create a default mood icon object
   self.moodIcon = [[[MoodIcon alloc] init] autorelease];
