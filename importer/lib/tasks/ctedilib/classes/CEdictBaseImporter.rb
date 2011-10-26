@@ -11,7 +11,6 @@ class CEdictBaseImporter
   def initialize (data)
     ### Instance config vars
     @config = {}
-    @config[:data] = data
     # MMA - not sure this is used anymore
     @config[:entry_type] = 0
     @config[:skipped_data] = []
@@ -31,10 +30,31 @@ class CEdictBaseImporter
       exit_with_error("Importer not configured correctly.", @config)
     end
 
-    bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
-    @config[:data].each do |rec|
-      bulkSQL.add( block.call(rec) + "\n" )
+    merge_counter = 0
+    new_counter = 0
+      
+    bulkSQL = BulkSQLRunner.new(data.size, @config[:sql_buffer_size], @config[:sql_debug])
+    
+    data.each do |rec|
+      sql = ""
+      
+      # Duplicate check by Headword & Readings
+      duplicates_arr = get_duplicates_by_headword_reading(cedict_rec.headword_trad, cedict_rec.pinyin, existing_card_lookup_hash, @config[:entry_type])
+
+      # Create SQL for import
+      if (duplicates_arr.size > 0)
+        sql = process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
+        merge_counter = merge_counter + duplicates_arr.size
+      else
+        sql = cedict_rec.to_insert_sql
+        new_counter = new_counter + 1
+      end
+    
+      bulkSQL.add( sql + "\n" )
     end
+    
+    prt "Merged #{merge_counter}"
+    prt "Inserted #{new_counter}"
   end
   
   # DESC: Removes all data from import staging tables (should be run before calling import)

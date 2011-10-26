@@ -13,65 +13,7 @@ class CEdictImporter < CEdictBaseImporter
     end
     return lookup
   end
-
-  # DESC: Overridden base class import method
-  def import
-
-    # Cache exiting cards into hashes from DB table
-    existing_card_lookup_hash = cache_existing_cards("cards_staging")
-
-    merge_counter = 0
-    new_counter = 0
     
-    # Call 'super' method to process loop for us
-    super do |cedict_rec|
-      return_sql = ""
-      
-      # Duplicate check by Headword & Readings
-      duplicates_arr = get_duplicates_by_headword_reading(cedict_rec.headword_trad, cedict_rec.pinyin, existing_card_lookup_hash, @config[:entry_type])
-
-      # Create SQL for import
-      if (duplicates_arr.size > 0)
-        return_sql = process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
-        merge_counter = merge_counter + duplicates_arr.size
-      else
-        return_sql = process_entry_into_sql(cedict_rec)
-        new_counter = new_counter + 1
-      end
-
-      # Return SQL command to execute
-      return_sql
-    end
-  
-    prt "Merged #{merge_counter}"
-    prt "Inserted #{new_counter}"
-  end
-  
-  def process_entry_into_sql(cedict_rec)
-    @insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
-
-    # Serialise for storage in DB
-    serialised_cedict_hash = mysql_serialise_ruby_object(cedict_rec)
-
-    # INSERT NEW ENTRY
-    # MMA - what does this do?
-#        update_hash_mtxt_arr = meanings_txt.split($delimiters[:jflash_meanings])
-
-#        for i in 0..update_hash_mtxt_arr.size-1
-#          cedict_rec[:meanings][i][:sense] = update_hash_mtxt_arr[i]
-#        end
-
-    all_tags_list = Parser.combine_and_uniq_arrays(cedict_rec.all_tags).join($delimiters[:jflash_tag_coldata])
-    return @insert_entry_sql % [cedict_rec.headword_trad, cedict_rec.headword_simp, cedict_rec.headword_en, cedict_rec.pinyin, cedict_rec.pinyin_diacritic,
-        mysql_escape_str(cedict_rec.meaning_txt), mysql_escape_str(cedict_rec.meaning_html), mysql_escape_str(cedict_rec.meaning_fts),
-        (cedict_rec.classifier ? "'"+mysql_escape_str(cedict_rec.classifier)+"'" : "NULL"), all_tags_list,
-        (cedict_rec.references.empty? ? "NULL" : "'"+mysql_escape_str(cedict_rec.references.join(";"))+"'"),
-        (cedict_rec.is_only_redirect? ? "1" : "0"),
-        (cedict_rec.has_variant ? "1" : "0"), (cedict_rec.is_erhua_variant ? "1" : "0"),
-        (cedict_rec.is_proper_noun? ? "1" : "0"),
-        (cedict_rec.variant_of ? "'"+mysql_escape_str(cedict_rec.variant_of)+"'" : "NULL"), serialised_cedict_hash]
-  end
-  
   def process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
     @update_entry_sql = "UPDATE cards_staging SET headword_en='%s', meaning='%s', meaning_html='%s',meaning_fts='%s', tags='%s', cedict_hash = '%s' WHERE card_id = %s;"
     @update_tags_sql  = "UPDATE cards_staging SET meaning = '%s', meaning_html = '%s', tags='%s',cedict_hash = '%s' WHERE card_id = %s;"
