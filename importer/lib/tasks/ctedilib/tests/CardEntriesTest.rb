@@ -20,7 +20,6 @@ class CardEntriesTest < Test::Unit::TestCase
     result = cards.select {|card| card.headword_trad == lookup_character}
   
     assert_equal(result.length(), 1)
-    puts "Character %s has been found in card entry: %s" % [lookup_character, result[0]]
     assert_equal(result[0].headword_trad, lookup_character)
   end
   
@@ -29,24 +28,10 @@ class CardEntriesTest < Test::Unit::TestCase
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
     
-    results = find_cards_similar_to(entry)
-  
-    assert_equal(results.length(), 1)
-    puts "Entry %s has been found in card entry: %s" % [entry, results[0]]
-    assert_equal(results[0].headword_trad, entry.headword_trad)
+    result = find_cards_similar_to(entry)
+    assert_equal(result.headword_trad, entry.headword_trad)
   end
-  
-  def test_look_for_headword_cards_3
-    entry = CSVEntry.new
-    entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
     
-    results = find_cards_similar_to(entry)
-  
-    assert_equal(results.length(), 1)
-    puts "Entry %s has been found in card entry: %s" % [entry, results[0]]
-    assert_equal(results[0].headword_trad, entry.headword_trad)
-  end
-  
   def test_similarity_exact_true
     # Get the entry
     entry = CSVEntry.new
@@ -60,10 +45,12 @@ class CardEntriesTest < Test::Unit::TestCase
       card = CardEntry.new()
       card.parse_line(rec)
     end    
+        
+    criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
+      return same_pinyin || same_meaning || (is_proper_noun == false)
+    end
     
-    # Assertion
-    puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
-    assert_equal(card.similar_to?(entry, $options[:likeness_level][:exact_match]), true)
+    assert_equal(card.similar_to?(entry, criteria))
   end
   
   def test_similarity_partial_true
@@ -80,10 +67,11 @@ class CardEntriesTest < Test::Unit::TestCase
       card = CardEntry.new()
       card.parse_line(rec)
     end    
-
-    # Assertion
-    puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
-    assert_equal(card.similar_to?(entry, $options[:likeness_level][:partial_match]), true)
+    
+    criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
+      return same_pinyin || same_meaning || (is_proper_noun == false)
+    end
+    assert_equal(card.similar_to?(entry, criteria), true)
    end
    
    def test_similarity_one_true
@@ -100,9 +88,22 @@ class CardEntriesTest < Test::Unit::TestCase
        card.parse_line(rec)
      end    
 
-     # Assertion
-     puts ("Comparing card:%s with entry: %s\n" % [card.to_s(), entry.to_s()])
-     assert_equal(card.similar_to?(entry, $options[:likeness_level][:one_likeness_match]), true)
+    criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
+      return same_pinyin || same_meaning || (is_proper_noun == false)
+    end
+
+     assert_equal(card.similar_to?(entry, criteria), true)
+   end
+   
+   def test_find_variant
+    get_all_cards_from_db()
+    
+    lookup_character = "龜"
+    cards = $card_entries.values()
+    result = cards.select {|card| card.headword_trad == lookup_character}
+  
+    assert_equal(result.length(), 1)
+    assert_equal(result[0].headword_trad, lookup_character)
    end
 
 end

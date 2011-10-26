@@ -12,6 +12,7 @@ load File.dirname(__FILE__) + "/classes/BookEntry.rb"
 load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
+load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
 
 # Different parser types
 load File.dirname(__FILE__) + "/classes/_parser.rb"

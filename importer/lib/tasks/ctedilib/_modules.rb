@@ -214,6 +214,10 @@ module ImporterHelpers
           # Exception for the 'r' sound and the tone will always be '5'
           # Just concatinate with the result
           result << "r"
+        elsif reading == "xx5"
+          #ignore these BS ones
+        elsif reading == "m2" or reading == "m4"
+          result << reading
         elsif (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
           # Get the reading without the number (tone)

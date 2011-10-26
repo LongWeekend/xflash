@@ -174,9 +174,7 @@ class TagImporter
         end
       end
       
-      # This will return to the one calling this blocks
-      # without the keyword return, seems strange, but works!
-      insert_query
+      return insert_query
     end unless @config[:data] == nil # End of the super do |rec| loop
     
     # Procedure to update the number of
