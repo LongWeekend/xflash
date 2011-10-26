@@ -38,5 +38,4 @@ class InlineEntryTest < Test::Unit::TestCase
     assert_equal("魑",entry.headword_trad)
     assert_equal(nil,entry.headword_simp)
   end
-
 end

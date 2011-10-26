@@ -151,5 +151,19 @@ class Entry
   def references
     @references
   end
+  
+  def to_insert_sql
+    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+    serialised_cedict_hash = mysql_serialise_ruby_object(self)
+    all_tags_list = Parser.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
+    return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
+        mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),
+        (classifier ? "'"+mysql_escape_str(classifier)+"'" : "NULL"), all_tags_list,
+        (references.empty? ? "NULL" : "'"+mysql_escape_str(references.join(";"))+"'"),
+        (is_only_redirect? ? "1" : "0"),
+        (has_variant ? "1" : "0"), (is_erhua_variant ? "1" : "0"),
+        (is_proper_noun? ? "1" : "0"),
+        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
+  end
 end
