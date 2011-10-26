@@ -17,6 +17,7 @@
   #import "GroupPeer.h"
   #import "UserHistoryPeer.h"
   #import "TagPeer.h"
+  #import "LWEAnalytics.h"
   #import "LWECrashUtils.h"
   #import "LWEDatabase.h"
   #import "LWEDebug.h"
