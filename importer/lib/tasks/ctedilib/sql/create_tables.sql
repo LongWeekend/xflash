@@ -13,6 +13,7 @@ CREATE TABLE `cards_staging` (
   `is_variant` tinyint(1) NOT NULL DEFAULT '0',
   `is_erhua_variant` tinyint(1) NOT NULL DEFAULT '0',
   `variant` varchar(255) DEFAULT NULL,
+  `variant_card_id` int(11) DEFAULT NULL,
   `cedict_hash` longblob NOT NULL,
   `referenced_cards` varchar(255) DEFAULT NULL,
   `is_reference_only` tinyint(1) DEFAULT '0',
