@@ -27,8 +27,6 @@
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
-- (void) _setupViewAfterSettingsChange;
-- (void) _setupViewAfterUserOrTagChange;
 @end
 
 @implementation StudyViewController
@@ -98,15 +96,30 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+  __block StudyViewController *blockSelf = self;
 
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterUserOrTagChange) name:LWEActiveTagDidChange object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterUserOrTagChange) name:LWEUserSettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setupViewAfterSettingsChange) name:LWECardSettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  void (^setupViewAfterChangeBlock)(NSNotification*) = ^(NSNotification *notification)
+  {
+    blockSelf.finishedSetAlertShowed = NO;
+    [blockSelf resetStudySet];
+  };
+
+  // Setup block callback for when active tag changes or the user settings changed - resets study set
+  [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:setupViewAfterChangeBlock];
+  [center addObserverForName:LWEUserSettingsChanged object:nil queue:nil usingBlock:setupViewAfterChangeBlock];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
+  // Reset the current view (but nothing else) if the card settings changed (reading type, et al)
+  [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *notification)
+   {
+     [blockSelf resetViewWithCard:self.currentCard];
+   }];
+  
+  [center addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
+  [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+  [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  
+  [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
   
   // Create a default mood icon object
   self.moodIcon = [[[MoodIcon alloc] init] autorelease];
@@ -484,19 +497,6 @@
 
 #pragma mark - Private methods to setup cards (called every transition)
 
-// TODO: PRIME suspect to be converted to a block, this only exists as a notification callback.
-- (void) _setupViewAfterSettingsChange
-{
-	[self resetViewWithCard:self.currentCard];
-}
-
-// TODO: PRIME suspect to be converted to a block.
-- (void) _setupViewAfterUserOrTagChange
-{
-  self.finishedSetAlertShowed = NO;
-  [self resetStudySet];
-}
-
 /**
  * Sets up all of the delegates and sub-controllers of the study view controller.
  */
@@ -637,7 +637,7 @@
     // Get rid of the old example sentences guy & re-setup the scroll view
     [self.exampleSentencesViewController.view removeFromSuperview];
     [self _setupScrollView];
-		[self _setupViewAfterSettingsChange];
+    [self resetViewWithCard:self.currentCard];
   }
 }
 
