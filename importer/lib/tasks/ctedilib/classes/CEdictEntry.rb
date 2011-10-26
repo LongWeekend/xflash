@@ -1,6 +1,8 @@
 # Single entry class - based on active record?
 class CEdictEntry < Entry
 
+  include CardHelpers
+
   # These are class variables
   @@good_tags = ["classical", "golf", "mechanics", "honorific", "Chinese medicine", "psychology",
                  "telecommunications", "technology", "slang", 
@@ -370,11 +372,11 @@ class CEdictEntry < Entry
     sense_count = @meanings.size
     @meanings.each do |m|
       meaning_str = m[:meaning]
-      meaning_str = meaning_str.gsub($regexes[:inlined_tags], "").strip
-      meanings_fts_arr << meaning_str
+      meaning_str = xfrm_remove_stop_words(meaning_str.gsub($regexes[:inlined_tags], "").strip)
+      meanings_fts_arr << meaning_str unless meanings_fts_arr.include?(meaning_str)
     end
 
-    return xfrm_remove_stop_words(meanings_fts_arr.join(" "))
+    return meanings_fts_arr.join(" ")
   end
   
   def meaning_html(tag_mode="inhuman")
@@ -457,19 +459,8 @@ class CEdictEntry < Entry
     end
   end
 
-  # XFORMATION: Remove common English stop words from string
-  def xfrm_remove_stop_words(str)
-   stop_words = ['I', 'me', 'a', 'an', 'am', 'are', 'as', 'at', 'be', 'by','how', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'than', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the']
-   results = []
-   str.gsub!($regexes[:inlined_tags], "") ## remove tag blocks
-   str.split(' ').each do |sstr|
-     # remove non word characters from string
-     results << sstr unless stop_words.index(sstr.gsub(/[^a-zA-Z|\s]/, '').strip)
-   end
-   return results.flatten.compact.join(' ')
-  end
-
   # DESC: Caches staging database tag data
+  
   def cache_tag_data
     $shared_cache[:pos_tag_human_readings] = {}
     $shared_cache[:pos_tag_inhuman_readings] = {}
@@ -485,6 +476,22 @@ class CEdictEntry < Entry
         end
       end
     end
+  end
+  
+  
+  def to_insert_sql
+    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+    serialised_cedict_hash = mysql_serialise_ruby_object(self)
+    all_tags_list = Parser.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
+
+    return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
+        mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),
+        (classifier ? "'"+mysql_escape_str(classifier)+"'" : "NULL"), all_tags_list,
+        (references.empty? ? "NULL" : "'"+mysql_escape_str(references.join(";"))+"'"),
+        (is_only_redirect? ? "1" : "0"),
+        (has_variant ? "1" : "0"), (is_erhua_variant ? "1" : "0"),
+        (is_proper_noun? ? "1" : "0"),
+        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
   end
 
 end

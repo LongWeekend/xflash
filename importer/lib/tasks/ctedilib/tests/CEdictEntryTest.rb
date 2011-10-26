@@ -249,7 +249,47 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal(expected_references,entry.references)
   end
   
+  def test_meaning_html
+    entry = CEdictEntry.new
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    expected = "see you tomorrow"
+    assert_equal(expected,entry.meaning_html("inhuman"))
+  end
+
+  def test_meaning_html_multiple
+    entry = CEdictEntry.new
+    entry.parse_line("人字拖鞋 人字拖鞋 [ren2 zi4 tuo1 xie2] /flip flops/flip-flop sandals/thongs/see also 人字拖/")
+    expected = "<ol><li>flip flops</li><li>flip-flop sandals</li><li>thongs</li></ol>"
+    assert_equal(expected,entry.meaning_html("inhuman"))
+  end
   
+  def test_meaning_txt
+    entry = CEdictEntry.new
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    expected = "see you tomorrow"
+    assert_equal(expected,entry.meaning_txt("inhuman"))
+  end
+  
+  def test_meaning_fts
+    entry = CEdictEntry.new
+    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
+    expected = "see you tomorrow"
+    assert_equal(expected,entry.meaning_fts("inhuman"))
+  end
+  
+  def test_meaning_fts_stopwords
+    entry = CEdictEntry.new
+    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
+    expected = "lateral side beside"
+    assert_equal(expected,entry.meaning_fts("inhuman"))
+  end
+  
+  def test_to_insert_sql
+    entry = CEdictEntry.new
+    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
+    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','BAhvOhBDRWRpY3RFbnRyeRM6E0BoZWFkd29yZF90cmFkIg7ml4HpgorlhZI6\nEEB2YXJpYW50X29mIhLml4Hpgop85peB6L65OgxAcGlueWluIhNwYW5nMiBi\naWFuMSByNToTQGxpbmVfdG9fcGFyc2Uia+aXgemCiuWFkiDml4HovrnlhL8g\nW3BhbmcyIGJpYW4xIHI1XSAvZXJodWEgdmFyaWFudCBvZiDml4Hpgop85peB\n6L65LCBsYXRlcmFsL3NpZGUvdG8gdGhlIHNpZGUvYmVzaWRlLzoQQGNsYXNz\naWZpZXJGOhZAaXNfZXJodWFfdmFyaWFudFQ6EUBoZWFkd29yZF9lbiIMbGF0\nZXJhbDoLQGdyYWRlIgA6DkBtZWFuaW5nc1sJewc6CXRhZ3NbADoMbWVhbmlu\nZyIMbGF0ZXJhbHsHOw9bADsQIglzaWRlewc7D1sAOxAiEHRvIHRoZSBzaWRl\newc7D1sAOxAiC2Jlc2lkZToTQGhlYWR3b3JkX3NpbXAiDuaXgei+ueWEvzoQ\nQHJlZmVyZW5jZXNbADoJQHBvc1sAOhZAcGlueWluX2RpYWNyaXRpYyIScMOh\nbmcgYmnEgW4gcjoIQGlkafo=\n');"
+    assert_equal(expected,entry.to_insert_sql)
+  end
   # Test pinyin conversion function
 #  def test_transform_pinyin
 #    entry = CEdictEntry.new
