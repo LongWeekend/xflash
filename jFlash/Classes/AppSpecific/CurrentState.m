@@ -14,6 +14,7 @@
 - (void) _createDefaultSettings;
 @end
 
+NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
 
 /**
  * Maintains the current state of the application (active set, etc).  Is a singleton.
@@ -29,6 +30,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) setActiveTag:(Tag*)tag
 {
+  [tag populateCardIds];
+  LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
+  
   @synchronized (self)
   {
     [_activeTag release];
@@ -38,13 +42,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:tag.tagId forKey:@"tag_id"];
   
-  [_activeTag populateCardIds];
-  
   // Set the favorites tag, if not already done
   if (self.favoritesTag == nil)
   {
     self.favoritesTag = [TagPeer retrieveTagById:FAVORITES_TAG_ID];
   }
+  
+  // Tell everyone to reload their data
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:_activeTag];
 }
 
 
