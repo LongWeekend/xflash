@@ -14,8 +14,6 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "BackupManager.h"
 
-extern NSString * const LWEActiveTagDidChange;
-
 @interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
 {
   UIBarButtonItem *_addButton;

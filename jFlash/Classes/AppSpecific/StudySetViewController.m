@@ -17,8 +17,6 @@
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
 
-NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
-
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager;
 
@@ -78,7 +76,6 @@ enum Sections {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
   
   // Get this group & subgroup data, and finally tags
   self.group = [GroupPeer retrieveGroupById:self.groupId];
@@ -159,12 +156,6 @@ enum Sections {
   self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
-/** Convenience method to change set using notification from another place */
-- (void) changeStudySetFromWordList:(NSNotification*)notification
-{
-  [self changeStudySet:[notification.userInfo objectForKey:@"tag"]];
-}
-
 /**
  * Changes the user's active study set
  * \param tag Is a Tag object pointing to the tag to begin studying
@@ -173,12 +164,6 @@ enum Sections {
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
-  
-  // Tell StudyViewController to reload its data
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:self];
-
-  // Post notification to switch active tab
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
   
   // Stop the animator
   selectedTagId = -1;
@@ -204,28 +189,12 @@ enum Sections {
   [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - UITableView methods
-
-/**
- * Allows user to delete the selected tag
- * Note that this does not accept responsibility for IF the tag SHOULD be deleted
- */ 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (editingStyle == UITableViewCellEditingStyleDelete)
-  {
-    // Delete the row from the data source
-    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
-    [TagPeer deleteTag:tmpTag];
-    [self.tagArray removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    [self reloadSubgroupData];
-  }
-}
+#pragma mark - UITableViewDataSource Methods
 
 /**
  * If we are searching, there is only one section (returns 1)
  * If we are not searching, there are groups & tags (returns 2)
+ * In either case, if we are at the "top of the stack", show 3 (including backup/restore)
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)lclTableView
 {
@@ -233,28 +202,17 @@ enum Sections {
   {
 		return 1;
   }
-  else
+
+  // Usually, there are 2: groups + tags
+  NSInteger numRows = 2;
+  if (self.groupId == 0)
   {
-    if (self.groupId == 0)
-    {
-      return 3; // only show the 3rd section if we are at the top of the stack
-    }
-    return 2;
+    numRows++;
   }
+  return numRows;
 }
 
 
--(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
-{
-  if (section == kBackupSection)
-  {
-    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
-  }
-  else
-  {
-    return nil;
-  }
-}
 
 
 /**
@@ -304,7 +262,7 @@ enum Sections {
   UITableViewCell *cell = nil;
   // Get theme manager so we can get elements from it
   ThemeManager *tm = [ThemeManager sharedThemeManager];
-
+  
   // Study Set Cells (ie. a tag)
   if (indexPath.section == kSetsSection || searching)
   {
@@ -323,12 +281,12 @@ enum Sections {
     else
     {
       cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-
-      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
-
+      
+      Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+      
       // Set up the image
       // TODO: iPad customization?
-      UIImageView* tmpView = cell.imageView;
+      UIImageView *tmpView = cell.imageView;
       if (tmpTag.tagId == FAVORITES_TAG_ID)
       {
         tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
@@ -393,19 +351,19 @@ enum Sections {
     [bgView release];
     
     // This is for groups?
-    Group* tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
+    Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    NSString* tmpDetailText = [NSString stringWithFormat:@""];
+    NSString *tmpDetailText = [NSString stringWithFormat:@""];
     if ([tmpGroup childGroupCount] > 0)
     {
       //Prefix the line below with code if we have groups
       tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup childGroupCount]]; 
     }
     tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
-
+    
     // Set up the image
-    UIImageView* tmpView = (UIImageView*)cell.imageView;
+    UIImageView *tmpView = (UIImageView*)cell.imageView;
     // TODO: iPad customization?
     if(tmpGroup.recommended)
     {
@@ -423,16 +381,46 @@ enum Sections {
   return cell;
 }
 
+#pragma mark - UITableViewDelegate Methods
+
+/**
+ * Allows user to delete the selected tag
+ * Note that this does not accept responsibility for IF the tag SHOULD be deleted
+ */ 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (editingStyle == UITableViewCellEditingStyleDelete)
+  {
+    // Delete the row from the data source
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+    [TagPeer deleteTag:tmpTag];
+    [self.tagArray removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [self reloadSubgroupData];
+  }
+}
+
+-(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
+{
+  if (section == kBackupSection)
+  {
+    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
+  }
+  else
+  {
+    return nil;
+  }
+}
 
 /** UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group) */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == kSetsSection || searching)
   {
-    if([tagArray count] > 0)
+    if ([self.tagArray count] > 0)
     {
-      int numCards = [[self.tagArray objectAtIndex:indexPath.row] cardCount];
-      if(numCards > 0)
+      NSInteger numCards = [[self.tagArray objectAtIndex:indexPath.row] cardCount];
+      if (numCards > 0)
       {
         self.selectedTagId = indexPath.row;
         NSString *tagName = [[self.tagArray objectAtIndex:indexPath.row] tagName];
@@ -530,8 +518,7 @@ enum Sections {
   return NO;
 }
 
-#pragma mark -
-#pragma mark Alert View Delegate
+#pragma mark - UIAlertViewDelegate Methods
 
 /** Alert view delegate - initiates the "study set change" if they pressed OK */
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -539,21 +526,21 @@ enum Sections {
   // This is the OK button
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
+    [self.activityIndicator startAnimating];
     if (alertView.tag == kBackupConfirmationAlertTag)
     {
-      [[self activityIndicator] startAnimating];
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:.3]; // need to give this method a chance to finish or the modal doesn't work
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
-      [[self activityIndicator] startAnimating];
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:.3];
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
     }
     else 
     {
-      [[self tableView] reloadData];
-      [[self activityIndicator] startAnimating];
-      [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
+      [self.tableView reloadData];
+      [self performSelector:@selector(changeStudySet:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0];
     }
     return;
   }

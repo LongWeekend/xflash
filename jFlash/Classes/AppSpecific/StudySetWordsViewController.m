@@ -262,11 +262,11 @@
     if (indexPath.row == kWordSetOptionsStart)
     {
       // one final check to make sure they do not empty out the set prior to running it
-      Tag *tmpTag = [TagPeer retrieveTagById:[[self tag] tagId]];
-      if (tmpTag.cardCount > 0)
+      self.tag = [TagPeer retrieveTagById:self.tag.tagId];
+      if (self.tag.cardCount > 0)
       {
-        // Fire set change notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
+        CurrentState *appSettings = [CurrentState sharedCurrentState];
+        [appSettings setActiveTag:self.tag];
       }
       else
       {
