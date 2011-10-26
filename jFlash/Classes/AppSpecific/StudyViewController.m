@@ -7,9 +7,9 @@
 //
 
 #import "jFlashAppDelegate.h"
-#import "StudySetViewController.h"
-#import "StudyViewController.h"
+#import "CurrentState.h"
 #import "SettingsViewController.h"
+#import "StudyViewController.h"
 #import "LWENetworkUtils.h"
 #import "RootViewController.h"
 #import "AddTagViewController.h"
@@ -152,7 +152,7 @@
   //make sure that this section is only run once. If somehow the memory warning is issued 
   //and this view controller's view gets unloaded and loaded again, please dont messed up with the
   //boolean for the 'finished' alert view.
-  if (!self.hasViewBeenLoadedOnce)
+  if (self.hasViewBeenLoadedOnce == NO)
   {
     //Comment this out if it is decided to show the 'finished-set' alert when the user run this app.
     self.finishedSetAlertShowed = YES;
