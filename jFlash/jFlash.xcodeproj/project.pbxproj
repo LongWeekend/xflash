@@ -114,6 +114,9 @@
 		4965FD85126F7002000AC280 /* redtheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD83126F7002000AC280 /* redtheme-cookie-cutters */; };
 		4965FEA7126F7793000AC280 /* candy-btn-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FEA6126F7793000AC280 /* candy-btn-green@2x.png */; };
 		4965FEA8126F7793000AC280 /* candy-btn-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FEA6126F7793000AC280 /* candy-btn-green@2x.png */; };
+		49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 49668AE814581D6F005636D0 /* LWEAnalytics.m */; };
+		49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 49668AE814581D6F005636D0 /* LWEAnalytics.m */; };
+		49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 49668AE814581D6F005636D0 /* LWEAnalytics.m */; };
 		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
 		496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496BE55311EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
@@ -782,6 +785,8 @@
 		4965FD80126F6FCF000AC280 /* bluetheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bluetheme-cookie-cutters"; path = "Assets/bluetheme-cookie-cutters"; sourceTree = "<group>"; };
 		4965FD83126F7002000AC280 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
 		4965FEA6126F7793000AC280 /* candy-btn-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-green@2x.png"; path = "Assets/candy-btn-green@2x.png"; sourceTree = "<group>"; };
+		49668AE714581D6F005636D0 /* LWEAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAnalytics.h; sourceTree = "<group>"; };
+		49668AE814581D6F005636D0 /* LWEAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAnalytics.m; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
 		496BE54C11EC5303003AB713 /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionBarViewController.m; path = AppSpecific/ActionBarViewController.m; sourceTree = "<group>"; };
 		496BE54F11EC5320003AB713 /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = XIBs/ActionBarViewController.xib; sourceTree = "<group>"; };
@@ -1645,6 +1650,8 @@
 			isa = PBXGroup;
 			children = (
 				91013AC513938BC900846038 /* External */,
+				49668AE714581D6F005636D0 /* LWEAnalytics.h */,
+				49668AE814581D6F005636D0 /* LWEAnalytics.m */,
 				49EE9148134EC15500EC6B0E /* LWECoreData.h */,
 				49EE9149134EC15500EC6B0E /* LWECoreData.m */,
 				9134371D138DE5B400A924E4 /* LWECrashUtils.h */,
@@ -2914,6 +2921,7 @@
 				49BBA4BD144D571300E6A9AE /* JRUserLandingController.m in Sources */,
 				49BBA4BF144D571300E6A9AE /* JRWebViewController.m in Sources */,
 				49716142144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
+				49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2929,6 +2937,7 @@
 				49278C5114460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
 				49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */,
 				49716144144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
+				49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3073,6 +3082,7 @@
 				49BBA4C0144D571300E6A9AE /* JRWebViewController.m in Sources */,
 				49BBA4C3144D5CA000E6A9AE /* LWEChineseSearchBar.m in Sources */,
 				49716143144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
+				49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
