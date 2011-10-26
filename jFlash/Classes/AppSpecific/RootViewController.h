@@ -38,8 +38,6 @@ extern NSString * const LWEShouldShowPopover;
 - (void) showDatabaseLoadingView;
 - (void) hideDatabaseLoadingView;
 
-// Notification methods
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
-- (void) hideDownloaderModal:(NSNotification*)aNotification;
 - (void) showDownloaderModal:(NSNotification*)aNotification;
 @end

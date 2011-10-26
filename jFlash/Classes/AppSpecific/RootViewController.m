@@ -43,8 +43,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   {
     self.isFinishedLoading = NO;
     
-    // Apparently, there really isn't a way around this dirtiness:
-    // http://stackoverflow.com/questions/4352561/retain-cycle-on-self-with-blocks
+    // MMA Apparently, there really isn't a way around this dirtiness.
     __block UIViewController *blockSelf = self;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
@@ -65,17 +64,52 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
        blockSelf.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
      }];
     
+    // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
+    void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
+    {
+      //if the animated key is not specified in the user info, it will be animated.
+      NSDictionary *dict = [notification userInfo];
+      BOOL animated = YES;
+      if ([dict valueForKey:@"animated"])
+      {
+        animated = [[dict valueForKey:@"animated"] boolValue];
+      }
+      [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
+    };
+    [center addObserverForName:@"taskDidCancelSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [center addObserverForName:@"taskDidCompleteSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
+    
+    // Update the settings tab bar item with badge number
+    [center addObserverForName:LWEShouldUpdateSettingsBadge object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       NSNumber *badgeNumber = [notification.userInfo objectForKey:@"badge_number"];
+       UITabBarItem *settingsTabBar = [blockSelf.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
+       if ([badgeNumber intValue] != 0)
+       {
+         settingsTabBar.badgeValue = [badgeNumber stringValue];
+       }
+       else 
+       {
+         settingsTabBar.badgeValue = nil;
+       }
+     }];
+    
+    // Show popover for progress view
+    [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
+       if (controller)
+       {
+         [blockSelf.tabBarController.view addSubview:controller.view];
+       }
+     }];
+    
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
-	
-    //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:LWEShouldDismissModal object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPopover:) name:LWEShouldShowPopover object:nil];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
+    [center addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
+    
+    //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
+    [center addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
   }
 	return self;
 }
@@ -224,20 +258,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   }
 }
 
-- (void)showPopover:(NSNotification *)notification
-{
-  NSDictionary *dict = [notification userInfo];
-  if ((dict != nil) && ([dict count] > 0))
-  {
-    UIViewController *controller = (UIViewController *)[dict objectForKey:@"controller"];
-    [self.tabBarController.view addSubview:controller.view];
-  }
-  else
-  {
-    LWE_LOG(@"Error : Show popover notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
-  }
-}
-
 /**
  * Show Modal method that will call the show modal view controller private method.
  * the notification user info will determine whether it will be animated, and what view controller to view. 
@@ -263,41 +283,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 		LWE_LOG(@"Error : Show modal notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
 	}
 }
-
-/**
- * Dismiss the modal view controller. The default for animated key is YES.
- */
-- (void)dismissModal:(NSNotification *)notification
-{
-  NSDictionary *dict = [notification userInfo];
-	//if the animated key is not specified in the user info, it will be animated.
-  BOOL animated = YES;
-  if ([dict valueForKey:@"animated"])
-  {
-    animated = [[dict valueForKey:@"animated"] boolValue];
-  }
-	[self.tabBarController dismissModalViewControllerAnimated:animated];
-}
-
-#pragma mark -
-
-/**
- * Update the settings tab bar item with badge number
- */
--(void)changeSettingsBadge:(NSNotification*)aNotification
-{
-  NSNumber *badgeNumber = [aNotification.userInfo objectForKey:@"badge_number"];
-  UITabBarItem *settingsTabBar = [self.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
-	if ([badgeNumber intValue] != 0)
-  {
-    settingsTabBar.badgeValue = [badgeNumber stringValue];
-  }
-  else 
-  {
-    settingsTabBar.badgeValue = nil;
-  }
-}
-
 
 /**
  * Pops up a modal over the screen when the user needs to download something
@@ -350,16 +335,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [dlViewController release];
   [tmpDlHandler release];
 }
-
-
-/** Hides the downloader */
-- (void) hideDownloaderModal:(NSNotification*)aNotification
-{
-  [self.tabBarController dismissModalViewControllerAnimated:YES];
-  // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
-}
-
 
 # pragma mark Delegate Methods
 
