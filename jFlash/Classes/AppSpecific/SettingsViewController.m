@@ -14,10 +14,6 @@
 #import "UserViewController.h"
 #import "UserPeer.h"
 
-@interface SettingsViewController ()
--(void) _updateTableDataAfterPluginInstall:(NSNotification*)notification;
-@end
-
 @implementation SettingsViewController
 @synthesize sectionArray, dataSource, delegate;
 
@@ -48,9 +44,15 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
+  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWEUserSettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
+  __block SettingsViewController *blockSelf = self;
+  [center addObserverForName:LWEPluginDidInstall object:nil queue:nil usingBlock:^(NSNotification *notification)
+  {
+    blockSelf.sectionArray = [blockSelf.dataSource settingsArray];
+    [blockSelf.tableView reloadData];
+  }];
+ [center addObserver:self.tableView selector:@selector(reloadData) name:LWEUserSettingsChanged object:nil];
 }
 
 - (void) viewDidUnload
@@ -59,17 +61,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-/**
- * Called when plugin installed
- */
-- (void) _updateTableDataAfterPluginInstall:(NSNotification *)notification
-{
-	LWE_LOG(@"Update table data after plugin install is called");
-  self.sectionArray = [self.dataSource settingsArray];
-  [self.tableView reloadData];
-}
-
 
 - (void)viewWillAppear: (BOOL)animated
 {
