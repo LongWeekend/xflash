@@ -1,6 +1,9 @@
-#load File.dirname(__FILE__) + "/config/_options.rb"
-#load File.dirname(__FILE__) + "/includes/_modules.rb"
-#load File.dirname(__FILE__) + "/includes/_additions.rb"
+load File.dirname(__FILE__) + "/config/_options.rb"
+load File.dirname(__FILE__) + "/includes/DatabaseHelpers.rb"
+load File.dirname(__FILE__) + "/includes/ImporterHelpers.rb"
+load File.dirname(__FILE__) + "/includes/CardHelpers.rb"
+load File.dirname(__FILE__) + "/includes/String+LWE.rb"
+load File.dirname(__FILE__) + "/includes/Array+LWE.rb"
 
 # Helpers
 load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"

@@ -7,10 +7,7 @@ namespace :ctedi do
   ##############################################################################
   desc "Run all unit tests"
   task :test_all => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     $options[:verbose] = false
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
@@ -23,10 +20,7 @@ namespace :ctedi do
   ##############################################################################
   desc "Run all tests in one test file (REQUIRES: class=TestClassName (note: if your test class includes 'Test' at the end, you need it here!))"
   task :test_class => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     $options[:verbose] = false
     get_cli_debug # Enable/disable debug 
     
@@ -41,10 +35,7 @@ namespace :ctedi do
   ##############################################################################
   desc "Run specific unit test (REQUIRES: class=TestClassName test=method_to_test) (note: if your test class includes 'Test' at the end, you need it here!))"
   task :test_one => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     $options[:verbose] = false
     get_cli_debug # Enable/disable debug
     
