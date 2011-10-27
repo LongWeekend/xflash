@@ -3,7 +3,7 @@
 #load File.dirname(__FILE__) + "/_additions.rb"
 
 # Helpers
-load File.dirname(__FILE__) + "/classes/_bulk_sql.rb"
+load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
 
 # Different entry types
 load File.dirname(__FILE__) + "/classes/Entry.rb"
@@ -14,12 +14,9 @@ load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
 load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
 
-# Different parser types
-load File.dirname(__FILE__) + "/classes/_parser.rb"
+# For parsing CEDICT
+load File.dirname(__FILE__) + "/classes/Parser.rb"
 load File.dirname(__FILE__) + "/classes/CEdictParser.rb"
-load File.dirname(__FILE__) + "/classes/HSKParser.rb"
-load File.dirname(__FILE__) + "/classes/CSVParser.rb"
-load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 
 # Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
