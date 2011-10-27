@@ -17,7 +17,7 @@ class CSVEntry < Entry
     if segments.count == 7 and segments[0].numeric?
       @headword_trad = segments[2].gsub("\"","").strip
       # This extra function call strips out any "stupid" round  tone-3 unicode points and replaces them with angled ones
-      @pinyin = fix_unicode_for_tone_3(segments[3].gsub("\"","").strip)
+      @pinyin = Entry.fix_unicode_for_tone_3(segments[3].gsub("\"","").strip)
       @grade = segments[4].gsub("\"","").strip
       pos_with_parens = segments[5].gsub("\"","")
       @pos << pos_with_parens[1..(pos_with_parens.length-2)]

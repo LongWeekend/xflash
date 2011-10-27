@@ -16,10 +16,7 @@ class GroupImporter
   end
   
   def empty_staging_tables
-    # Try to connect to the database first
     connect_db
-    
-    # Execute some of the tearing down script
     $cn.execute("TRUNCATE TABLE group_tag_link")
     $cn.execute("TRUNCATE TABLE groups_staging")
     $cn.execute("TRUNCATE TABLE card_tag_link")

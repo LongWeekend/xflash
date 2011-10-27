@@ -45,7 +45,7 @@ class BookEntry < Entry
     end_of_hw_simp = line.index("\t",end_of_hw_trad+1)
     reading = line[end_of_hw_simp..beginning_of_meaning].strip()
     space_separated_reading = reading.scan($regexes[:chinese_reading]).join(" ")
-    pinyin = get_pinyin_unicode_for_reading(space_separated_reading)
+    pinyin = Entry.get_pinyin_unicode_for_reading(space_separated_reading)
     
     return pinyin
   end

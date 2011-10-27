@@ -1,6 +1,6 @@
 class TagImporter
   
-  include ImporterHelpers
+  include DatabaseHelpers
   include CardHelpers
   
   #### DESC: Class Constructors
@@ -71,9 +71,9 @@ class TagImporter
   end
   
   def get_log_dump_filename
-    folder_path = File.dirname(__FILE__) + "/../../../../result-log"
+    folder_path = File.dirname(__FILE__) + "/../../../../log"
     tag_name = @config[:metadata].short_name()
-    return "#{folder_path}/#{tag_name}-log.txt"
+    return "#{folder_path}/#{tag_name}-import.log"
   end
   
   def setup_tag_row

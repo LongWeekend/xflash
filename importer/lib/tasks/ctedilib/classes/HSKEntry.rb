@@ -43,7 +43,7 @@ class HSKEntry < Entry
       @grade = segments[1]
       @headword_simp = segments[2]
       reading = segments[3]
-      @pinyin = get_pinyin_unicode_for_reading(reading)
+      @pinyin = Entry.get_pinyin_unicode_for_reading(reading)
       @meanings = segments[4].strip.split("; ")
       return true
     else
