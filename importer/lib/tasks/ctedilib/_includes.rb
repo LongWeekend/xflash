@@ -1,6 +1,6 @@
-#load File.dirname(__FILE__) + "/_options.rb"
-#load File.dirname(__FILE__) + "/_modules.rb"
-#load File.dirname(__FILE__) + "/_additions.rb"
+#load File.dirname(__FILE__) + "/config/_options.rb"
+#load File.dirname(__FILE__) + "/includes/_modules.rb"
+#load File.dirname(__FILE__) + "/includes/_additions.rb"
 
 # Helpers
 load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
