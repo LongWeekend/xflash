@@ -165,7 +165,7 @@ class Entry
   def to_insert_sql
     insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
     serialised_cedict_hash = mysql_serialise_ruby_object(self)
-    all_tags_list = Parser.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
+    all_tags_list = combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
         mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),

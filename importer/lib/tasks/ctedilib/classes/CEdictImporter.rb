@@ -24,7 +24,7 @@ class CEdictImporter < CEdictBaseImporter
       # Merge existing, format meaning variously, do tags and refs
       merged_entry, meaning_strings_merged = merge_duplicate_entries(cedict_rec, dupe)
     
-      all_tags_list = Parser.combine_and_uniq_arrays(merged_entry.all_tags).join($delimiters[:jflash_tag_coldata])
+      all_tags_list = combine_and_uniq_arrays(merged_entry.all_tags).join($delimiters[:jflash_tag_coldata])
 
       # Serialise for storage in DB
       serialised_cedict_rec = mysql_serialise_ruby_object(merged_entry)
@@ -155,7 +155,7 @@ class CEdictImporter < CEdictBaseImporter
           pos_tags_arr << new_pos_tags_per_sense[sense_number]
           meaning_strings_merged = true
         end
-        pos_tags_arr = Parser.combine_and_uniq_arrays(pos_tags_arr)
+        pos_tags_arr = combine_and_uniq_arrays(pos_tags_arr)
         pos_tag_suffix = (pos_tags_arr.size > 0 ? " (#{pos_tags_arr.join($delimiters[:jflash_inlined_tags])})" : "")
         
         # Merge in CAT tags
@@ -163,7 +163,7 @@ class CEdictImporter < CEdictBaseImporter
         if new_cat_tags_per_sense.has_key?(sense_number) and new_cat_tags_per_sense[sense_number].size > 0
           cat_tags_arr << new_cat_tags_per_sense[sense_number]
         end
-        cat_tags_arr = Parser.combine_and_uniq_arrays(cat_tags_arr)
+        cat_tags_arr = combine_and_uniq_arrays(cat_tags_arr)
 
         if related_gloss_found[sense_number]
           # Update sense wth merged glosses & tags
@@ -179,8 +179,8 @@ class CEdictImporter < CEdictBaseImporter
         end
 
         # Flatten down POS/CAT tag arrays
-        existing_entry.meanings[sense_number-1][:tags] = Parser.combine_and_uniq_arrays(existing_entry.meanings[sense_number-1][:pos])
-        existing_entry.meanings[sense_number-1][:tags] = Parser.combine_and_uniq_arrays(existing_entry.meanings[sense_number-1][:cat])
+        existing_entry.meanings[sense_number-1][:tags] = combine_and_uniq_arrays(existing_entry.meanings[sense_number-1][:pos])
+        existing_entry.meanings[sense_number-1][:tags] = combine_and_uniq_arrays(existing_entry.meanings[sense_number-1][:cat])
 
       end
 
@@ -189,17 +189,17 @@ class CEdictImporter < CEdictBaseImporter
     ### Update references in case we merge
     ###################################
 #    if !existing_entry[:jmdict_refs].nil?
-#      merged_reference = Parser.combine_and_uniq_arrays(existing_entry[:jmdict_refs].split($delimiters[:jflash_jmdict_refs]), new_entry[:jmdict_refs])
+#      merged_reference = combine_and_uniq_arrays(existing_entry[:jmdict_refs].split($delimiters[:jflash_jmdict_refs]), new_entry[:jmdict_refs])
 #    else
 #      merged_reference = []
 #    end
 
-#    existing_entry[:pos] = Parser.combine_and_uniq_arrays(existing_entry[:pos], new_entry[:pos])
-#    existing_entry[:cat] = Parser.combine_and_uniq_arrays(existing_entry[:cat], new_entry[:cat])
+#    existing_entry[:pos] = combine_and_uniq_arrays(existing_entry[:pos], new_entry[:pos])
+#    existing_entry[:cat] = combine_and_uniq_arrays(existing_entry[:cat], new_entry[:cat])
 
     # Aggregate all tags including global and sense specific as ALL TAGS
  #   all_lang_tags_arr.flatten!
-#    existing_entry[:all_tags] = Parser.combine_and_uniq_arrays(existing_entry[:pos], existing_entry[:cat], all_lang_tags_arr.collect{|l| l[:language] if l[:language]})
+#    existing_entry[:all_tags] = combine_and_uniq_arrays(existing_entry[:pos], existing_entry[:cat], all_lang_tags_arr.collect{|l| l[:language] if l[:language]})
 #    existing_entry[:jmdict_refs] = merged_reference
 
     ### DEBUG ##  prt "expected_array << "; pp existing_entry; prt ""

@@ -574,5 +574,15 @@ module CardHelpers
    end
    return results.flatten.compact.join(' ')
   end
+
+  # DESC: Combines arrays and ensures they are flatten/compacted/unique
+  def combine_and_uniq_arrays(array1, *others)
+    result = []
+    result << array1
+    others.each do |arr|
+      result << arr
+    end
+    return result.flatten.compact.uniq
+  end
   
 end
