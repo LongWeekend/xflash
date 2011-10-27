@@ -21,10 +21,10 @@ class CEdictImporter
   # DESC: Removes all data from import staging tables (should be run before calling import)
   def empty_staging_tables
     connect_db
-    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
-    $cn.execute("TRUNCATE TABLE cards_staging") 
-    $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
-    $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
+    prt "Removing all data from CEDICT import staging table (cards_staging)\n\n"
+    $cn.execute("TRUNCATE TABLE cards_staging")
+#   $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
+#   $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
   end
 
   # RETURNS: Existing cards and adds them into a hash

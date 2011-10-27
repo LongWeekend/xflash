@@ -92,7 +92,8 @@ namespace :ctedi do
     prt "\nBeginning Group & Tag Import"
     prt_dotted_line
     importer = GroupImporter.new("cflash_group_config.yml")
-    importer.run
+    importer.empty_staging_tables
+    importer.import
     
     prt "\nImport Finished"
     prt_dotted_line
