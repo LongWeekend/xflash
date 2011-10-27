@@ -15,10 +15,16 @@ load File.dirname(__FILE__) + "/classes/Entry.rb"
 load File.dirname(__FILE__) + "/classes/CEdictEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
 load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
+load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
+load File.dirname(__FILE__) + "/classes/BookEntry.rb"
+load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 
-# For parsing CEDICT
+# For parsing CEDICT and tag lists
 load File.dirname(__FILE__) + "/classes/Parser.rb"
 load File.dirname(__FILE__) + "/classes/CEdictParser.rb"
+load File.dirname(__FILE__) + "/classes/CSVParser.rb"
+load File.dirname(__FILE__) + "/classes/BookListParser.rb"
+load File.dirname(__FILE__) + "/classes/HSKParser.rb"
 
 # Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
