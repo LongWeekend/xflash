@@ -64,6 +64,17 @@ module CardHelpers
     return cards[index] unless ((index==nil)||(index==0))
     return nil
   end # End for method definition
+
+
+  # DESC: Combines arrays and ensures they are flatten/compacted/unique
+  def combine_and_uniq_arrays(array1, *others)
+    result = []
+    result << array1
+    others.each do |arr|
+      result << arr
+    end
+    return result.flatten.compact.uniq
+  end
   
     # XFORMATION: Remove common English stop words from string
   def xfrm_remove_stop_words(str)
@@ -77,14 +88,5 @@ module CardHelpers
    return results.flatten.compact.join(' ')
   end
 
-  # DESC: Combines arrays and ensures they are flatten/compacted/unique
-  def combine_and_uniq_arrays(array1, *others)
-    result = []
-    result << array1
-    others.each do |arr|
-      result << arr
-    end
-    return result.flatten.compact.uniq
-  end
   
 end

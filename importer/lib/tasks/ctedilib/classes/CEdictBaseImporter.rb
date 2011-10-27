@@ -6,6 +6,57 @@ class CEdictBaseImporter
 
   @sql_command_buffer = []
 
+  # DESC: Removes all data from import staging tables (should be run before calling import)
+  def empty_staging_tables
+    connect_db
+    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
+    $cn.execute("TRUNCATE TABLE cards_staging") 
+    $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
+    $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
+  end
+
+  # RETURNS: Existing cards and adds them into a hash
+  def cache_existing_cards(table ="cards_staging", where ="")
+    lookup = self.cache_sql_query( { :select => "card_id, headword_trad", :from => table, :where => where } ) do | sqlrow, cache_data |
+      # We are not taking data from multiple sources
+      card_type = 0
+      cache_data[card_type] = {} if !cache_data[card_type]
+      # Store rows in hash, deserialise stored Ruby Obj
+      cache_data[card_type][sqlrow['headword_trad']] = [] if !cache_data[card_type][sqlrow['headword_trad']]
+      cache_data[card_type][sqlrow['headword_trad']] << sqlrow['card_id']
+    end
+    return lookup
+  end
+    
+  # Creates tables in the database from a passed in array of tags
+  def self.create_tags_staging(tags = {})
+    connect_db
+    bulkSQL = BulkSQLRunner.new(tags.size, 30000, false)
+    insert_tag_sql = "INSERT INTO tags_staging (tag_name,tag_type,short_name,description,source_name,source,visible,count,parent_tag_id,force_off) VALUES ('%s','%s','%s','%s','%s','%s',%s,%s,%s,%s);"
+    tags.each do |key, tag_data|
+      bulkSQL.add(insert_tag_sql % [key,"",key,key,key,key,"1",tag_data[:count],"0","0"])
+    end
+  end
+
+  # DESC: Empty and update the headword/card_id 
+  def self.create_headword_index
+
+    connect_db
+    $cn.execute("TRUNCATE TABLE idx_cards_by_headword_staging")
+    bulkSQL = BulkSQLRunner.new(0, 0)
+
+    tickcount("Recreating Headword Keyword-Index") do
+      $cn.execute("SELECT card_id, headword_trad, reading FROM cards_staging").each do | card_id, headword, reading |
+        bulkSQL.add("INSERT INTO idx_cards_by_headword_staging (card_id, keyword) values (#{card_id}, '#{headword}');")
+        reading.split($delimiters[:jflash_readings]).each do |keyword|
+          bulkSQL.add("INSERT INTO idx_cards_by_headword_staging (card_id, keyword) values (#{card_id}, '#{keyword}');")
+        end
+      end
+    end
+    
+    bulkSQL.flush
+    
+  end
   ### Class Constructor
   #####################################
   def initialize (data)
@@ -57,34 +108,6 @@ class CEdictBaseImporter
     prt "Inserted #{new_counter}"
   end
   
-  # DESC: Removes all data from import staging tables (should be run before calling import)
-  def empty_staging_tables
-    connect_db
-    prt "Removing all data from CFlash Import staging tables (cards_staging, card_tag_link)\n\n"
-    $cn.execute("TRUNCATE TABLE cards_staging") 
-    $cn.execute("TRUNCATE TABLE cards_html") if mysql_table_exists("cards_html")
-    $cn.execute("TRUNCATE TABLE card_tag_link") if mysql_table_exists("card_tag_link")
-  end
-
-  # ACCEPTS: query options hash, block to process caching
-  # RETURNS: hash of cached rows as set by block
-  # REQUIRES: block to return a obj
-  def cache_sql_query(options, &block)
-    connect_db
-    cache_data = {}
-    cnt = 0
-    options[:where].gsub!(/^WHERE/)
-    options[:where] = (options[:where].length > 0 ? "WHERE #{options[:where]}": "")
-    tickcount("Caching Query") do
-      results = $cn.select_all("SELECT #{options[:select]} FROM #{options[:from]} #{options[:where]}")
-      results.each do |sqlrow|
-        block.call(sqlrow, cache_data)
-        cnt = noisy_loop_counter(cnt, results.size)
-      end
-    end
-    prt "Cached #{cnt} SQL records\n\n"
-    return cache_data
-  end
 
   # Public Setters & Getter
   #####################################
@@ -108,53 +131,5 @@ class CEdictBaseImporter
     @config[:skipped_data]
   end
 
-  # DESC: Abstract method for exporting to target database
-  def self.export_staging_db
-    prt "WARNING - I should be overridden with a method to export staging data to its final destination!"
-  end
-
-  # UTIL: Simliar string contained in string?
-  def self.util_contains_similar_string?(str1,str2)
-
-    # Homogenize the comparison strings
-    str1.gsub!($regexes[:parenthetical], "")
-    str2.gsub!($regexes[:parenthetical], "")
-    str1.gsub!("'", "")
-    str2.gsub!("'", "")
-    str1.gsub!($regexes[:whitespace_padded_slashes], $delimiters[:jflash_glosses])
-    str2.gsub!($regexes[:whitespace_padded_slashes], $delimiters[:jflash_glosses])
-    str1.strip!
-    str2.strip!
-    str1.gsub!($regexes[:leading_trailing_slashes], "")
-    str2.gsub!($regexes[:leading_trailing_slashes], "")
-    str1.gsub!($regexes[:duplicate_spaces], "")
-    str2.gsub!($regexes[:duplicate_spaces], "")
-    str1.strip!
-    str2.strip!
-
-    # Look for one string in the other
-    duplicate = !str1.strip.downcase.index(str2.strip.downcase).nil?
-    if !duplicate
-      duplicate = !str2.strip.downcase.index(str1.strip.downcase).nil?
-    end
-
-    # Try the Levenshtein distance algo
-    if !duplicate
-
-      ldistance = (Levenshtein.distance(str1.strip.downcase, str2.strip.downcase).to_f / (str1.strip).size.to_f) *100
-      #prt "LDISTANCE: "+ldistance.to_i.to_s
-      #prt "orig "+str1
-      #prt "new  "+str2
-      #prt_dotted_line("\n")
-
-      if ldistance < 33.333
-        puts "Duplicate avoided: '"+ str1.to_s + "'  >>> >>>  " + str2 + "#{ldistance.to_s}"
-        puts "^^^^^^^^^^^^^^^^^"
-        duplicate = true
-      end
-    end
-
-    return duplicate
-  end
 
 end

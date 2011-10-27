@@ -82,6 +82,26 @@ module DatabaseHelpers
     prt "\n\n"
   end
   
+    # ACCEPTS: query options hash, block to process caching
+  # RETURNS: hash of cached rows as set by block
+  # REQUIRES: block to return a obj
+  def cache_sql_query(options, &block)
+    connect_db
+    cache_data = {}
+    cnt = 0
+    options[:where].gsub!(/^WHERE/)
+    options[:where] = (options[:where].length > 0 ? "WHERE #{options[:where]}": "")
+    tickcount("Caching Query") do
+      results = $cn.select_all("SELECT #{options[:select]} FROM #{options[:from]} #{options[:where]}")
+      results.each do |sqlrow|
+        block.call(sqlrow, cache_data)
+        cnt = noisy_loop_counter(cnt, results.size)
+      end
+    end
+    prt "Cached #{cnt} SQL records\n\n"
+    return cache_data
+  end
+  
   # Write text to file and run mysql from command line!
   def sqlite_run_query_via_cli(text_blob, dbfilepath)
     sql_tmp_fn = write_text_to_tmp_file(text_blob)
