@@ -9,6 +9,11 @@
 #import "StudySetWordsViewController.h"
 #import "AddTagViewController.h"
 
+@interface StudySetWordsViewController ()
+- (void) _loadWordListInBackground;
+- (void) _tagContentDidChange:(NSNotification*)notification;
+@end
+
 /**
  * Grouped UITableViewController subclass - shows all words in a given set
  * Some sets may be large, so this controller will not lock the interface
@@ -16,8 +21,10 @@
  * put the cards onto the screen when loaded.
  */
 @implementation StudySetWordsViewController
+
 @synthesize tag, cards, activityIndicator;
 
+#pragma mark - Initializer
 
 /**
  * Customized initializer taking a Tag as a single parameter
@@ -29,21 +36,34 @@
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self)
   {
-    if ([initTag isKindOfClass:[Tag class]] && [initTag tagId] >= 0)
+    if (initTag.tagId >= 0)
     {
-      [self setTag:initTag];
-      [self performSelectorInBackground:@selector(loadWordListInBackground) withObject:nil];
+      self.tag = initTag;
+      [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
     }
     self.navigationItem.title = [initTag tagName];
-    [self setCards:nil];
     
     UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self setActivityIndicator:av];
+    self.activityIndicator = av;
     [av release];
   }
   return self;
 }
 
+#pragma mark - UIViewController Methods
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  // Ideally, I could set the object: to self.tag, but there's no guarantee that the MEMORY ADDY of
+  // the self.tag is the same as the memory address of the tag object sending the notification, even
+  // if they have the same tagId ... sadface. (MMA - 18.10.2011) ... Or is this OK?  Think about it.
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(_tagContentDidChange:)
+                                               name:LWETagContentDidChange
+                                             object:nil];
+}
 
 /** UIView delegate - sets theme info */
 - (void) viewWillAppear: (BOOL)animated
@@ -52,60 +72,74 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  self.tableView.backgroundColor = [UIColor clearColor];
+}
+
+- (void)viewDidUnload
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super viewDidUnload];
+}
+
+#pragma mark - Private Methods
+
+- (void) _tagContentDidChange:(NSNotification*)notification
+{
+  // First, quick return if this tagId isn't relevant to us.
+  if ([self.tag isEqual:(Tag*)notification.object] == NO)
+  {
+    return;
+  }
+  
+  // Next, make sure we have a card.
+  Card *theCard = [notification.userInfo objectForKey:LWETagContentDidChangeCardKey];
+  if (theCard == nil)
+  {
+    return;
+  }
+  
+  [self.tableView beginUpdates];
+  // OK, now determine what type of update it is - if we don't know, do nothing
+  NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
+  if ([changeType isEqualToString:LWETagContentCardAdded])
+  {
+    [self.cards addObject:theCard];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cards indexOfObject:theCard] inSection:kWordSetListSections];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                          withRowAnimation:UITableViewRowAnimationRight];
+  }
+  else if ([changeType isEqualToString:LWETagContentCardRemoved])
+  {
+    NSInteger index = [self.cards indexOfObject:theCard];
+    if (index != NSNotFound)
+    {
+      //remove the card, reload the table
+      [self.cards removeObjectAtIndex:index];
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:kWordSetListSections];
+      [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                            withRowAnimation:UITableViewRowAnimationRight];
+
+    }
+  }
+  [self.tableView endUpdates];
 }
 
 /** Run in background on init to load the word list */
-- (void) loadWordListInBackground
+- (void) _loadWordListInBackground
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  [self setCards:[CardPeer retrieveCardIdsForTagId:[tag tagId]]];
-  [self performSelectorOnMainThread:@selector(reloadTableDataOnMainThread) withObject:nil waitUntilDone:NO];
+  self.cards = [[[CardPeer retrieveCardIdsForTagId:tag.tagId] mutableCopy] autorelease];
+  [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
 
-//! Convenience method since we can't update data on background thread
-- (void) reloadTableDataOnMainThread
-{
-  [self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark UITableView delegate methods
-
-- (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
-{
-  if (editingStyle == UITableViewCellEditingStyleDelete)
-  {
-    NSError *error = nil;
-    BOOL result = [TagPeer cancelMembership:[[cards objectAtIndex:indexPath.row] cardId] tagId:tag.tagId error:&error];
-    if (!result)
-    {
-      if ([error code] == kRemoveLastCardOnATagError)
-      {
-        NSString *errorMessage = [error localizedDescription];
-        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
-                                           message:errorMessage];
-      }
-      else
-      {
-        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
-      }
-      return;
-    }
-    
-    [cards removeObjectAtIndex:indexPath.row];
-    [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
-  }
-}
-
+#pragma mark - UITableViewDataSource Methods
 
 /** Returns the number of enums in wordsSections enum */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return wordsSectionsLength;
 }
-
 
 /**
  * If we are in "header" section with "start this set" button, return 1
@@ -136,17 +170,6 @@
   return returnCount;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (indexPath.section == kWordSetOptionsSection)
-  {
-    //We dont want user to remove the "Begin studying these" section.
-    return NO;
-  }
-  return YES;
-}
-
-
 /** Customize the appearance of table view cells */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -169,7 +192,7 @@
       Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
       if ([tmpCard headword] == nil)
       {
-        tmpCard = [CardPeer hydrateCardByPK:tmpCard];
+        tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
         [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
@@ -190,6 +213,45 @@
   return cell;
 }
 
+#pragma mark - UITableViewDelegate Methods
+
+- (void)tableView:(UITableView *)lclTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *) indexPath
+{
+  if (editingStyle == UITableViewCellEditingStyleDelete)
+  {
+    NSError *error = nil;
+    Card *card = [self.cards objectAtIndex:indexPath.row];
+    
+    // Set this to signal to the notification callback that we don't need to do anything
+    BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
+
+    if (result == NO)
+    {
+      if (error.code == kRemoveLastCardOnATagError)
+      {
+        NSString *errorMessage = [error localizedDescription];
+        [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
+                                           message:errorMessage];
+      }
+      else
+      {
+        LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
+      }
+    } // else error
+  } // editing style is delete
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.section == kWordSetOptionsSection)
+  {
+    //We dont want user to remove the "Begin studying these" section.
+    return NO;
+  }
+  return YES;
+}
+
 
 /** If the user selected the "header" row, start the set.  If the user selected a card, push an AddTagViewController at them. */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -200,11 +262,11 @@
     if (indexPath.row == kWordSetOptionsStart)
     {
       // one final check to make sure they do not empty out the set prior to running it
-      Tag *tmpTag = [TagPeer retrieveTagById:[[self tag] tagId]];
-      if (tmpTag.cardCount > 0)
+      self.tag = [TagPeer retrieveTagById:self.tag.tagId];
+      if (self.tag.cardCount > 0)
       {
-        // Fire set change notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChangedFromWordsList" object:self userInfo:[NSDictionary dictionaryWithObject:[self tag] forKey:@"tag"]];
+        CurrentState *appSettings = [CurrentState sharedCurrentState];
+        [appSettings setActiveTag:self.tag];
       }
       else
       {
@@ -216,12 +278,13 @@
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
-    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self cards] objectAtIndex:indexPath.row]];
-    [tagController restrictMembershipChangeForTagId:self.tag.tagId];
-    [self.navigationController pushViewController:tagController animated:YES];
-    [tagController release];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self.cards objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:tmpVC animated:YES];
+    [tmpVC release];
   }
 }
+
+#pragma mark - Class Plumbing
 
 //! Standard dealloc
 - (void)dealloc

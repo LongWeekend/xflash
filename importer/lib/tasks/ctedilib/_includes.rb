@@ -12,6 +12,7 @@ load File.dirname(__FILE__) + "/classes/BookEntry.rb"
 load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
+load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
 
 # Different parser types
 load File.dirname(__FILE__) + "/classes/_parser.rb"
@@ -20,10 +21,10 @@ load File.dirname(__FILE__) + "/classes/HSKParser.rb"
 load File.dirname(__FILE__) + "/classes/CSVParser.rb"
 load File.dirname(__FILE__) + "/classes/BookListParser.rb"
 
-#added
-load File.dirname(__FILE__) + "/classes/TagsBaseConfiguration.rb"
-load File.dirname(__FILE__) + "/classes/TagsBaseImporter.rb"
-load File.dirname(__FILE__) + "/classes/Tags800WordsImporter.rb"
+# Group and Tag related importer
+load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
+load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
+load File.dirname(__FILE__) + "/classes/TagImporter.rb"
 
 # Importers
 load File.dirname(__FILE__) + "/classes/CEdictBaseImporter.rb"

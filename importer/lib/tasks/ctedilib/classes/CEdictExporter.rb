@@ -24,15 +24,15 @@ class CEdictExporter
     $cn.execute("UPDATE cards_staging SET meaning_html = meaning WHERE meaning_html IS NULL")
 
     ## Create intermediate tables
-    $cn.execute("CREATE TABLE cards SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
     $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, visible AS editable, count, force_off FROM tags_staging")
     $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
-    $cn.execute("CREATE TABLE cards_search_content SELECT card_id, headword_trad, headword_simp, reading, meaning_fts FROM #{cards_table}")
-    $cn.execute("CREATE TABLE cards_html SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, meaning_fts FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_html DEFAULT CHARSET=utf8 SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
 
     ## Generate the card search content table
     $cn.execute("ALTER TABLE cards_search_content ADD COLUMN content varchar(5000)")
-    $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' [ ', reading, ' / ', headword_simp, ' / ',  ' ] ', meaning_fts);")
+    $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts);")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_trad")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_simp")
     $cn.execute("ALTER TABLE cards_search_content DROP reading")
@@ -44,6 +44,23 @@ class CEdictExporter
     # Set system tags to uneditable
     $cn.execute("UPDATE tags SET editable = 0 WHERE tag_id NOT IN (#{ editable_tag_array.join(",") })")
     $cn.execute("ALTER TABLE tags DROP force_off")
+    
+    # Make sure starred words tag get the 0 tag id
+    $cn.execute("SELECT * FROM tags WHERE tag_id = 0").each do |rec|
+      raise 'There is already a tag row with id 0. ID-0 has been reserved for the starred words tag.'
+    end
+    # Precaution measures
+    existing_tag_id = -1
+    $cn.execute("SELECT tag_id FROM tags WHERE shortname LIKE '%starred_words%'").each do |tag_id|
+      existing_tag_id = tag_id
+    end
+    if existing_tag_id > 0
+      # Set back the entire tag_id=0 from the root to its
+      # possible child relationship.
+      $cn.execute("UPDATE tags SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+      $cn.execute("UPDATE card_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+      $cn.execute("UPDATE group_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
+    end
 
     prt "\n\nExporting tables to temporary file"
     prt_dotted_line

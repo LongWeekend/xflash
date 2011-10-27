@@ -8,95 +8,76 @@
 
 #import "SettingsViewController.h"
 #import "PluginSettingsViewController.h"
+#import "Appirater.h"
+#import "AlgorithmSettingsViewController.h"
+#import "ReminderSettingsViewController.h"
 #import "UserViewController.h"
 #import "UserPeer.h"
-#import "UpdateManager.h"
-
-@interface SettingsViewController ()
-- (NSMutableArray*) _settingsTableDataSource;
-@end
-
 
 @implementation SettingsViewController
-@synthesize sectionArray, settingsChanged, directionChanged, themeChanged, readingChanged, appirater, settingsDict;
+@synthesize sectionArray, dataSource, delegate;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
-NSString * const APP_ALGORITHM = @"algorithm";
 NSString * const APP_NEW_UPDATE = @"new_update";
 
 // Notification
 NSString * const LWECardSettingsChanged = @"LWECardSettingsChanged";
-NSString * const LWESettingsChanged = @"LWESettingsChanged";
+NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
-/** Customized initializer with UITableViewStyleGrouped */
 - (id) init
 {
-	if ((self = [super initWithStyle:UITableViewStyleGrouped]))
+  self = [super initWithStyle:UITableViewStyleGrouped];
+  if (self)
   {
-    // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings", @"SettingsViewController.NavBarTitle");
-
-    [self setSectionArray:[self _settingsTableDataSource]];
-    settingsChanged = NO;
-    directionChanged = NO;
-    themeChanged = NO;
-    readingChanged = NO;
   }
-	return self;
+  return self;
 }
-
 
 /** Customized to add support for observers/notifications */
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  self.sectionArray = [self.dataSource settingsArray];
+  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWESettingsChanged object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_updateTableDataAfterPluginInstall:) name:LWEPluginDidInstall object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_addPluginMenuItem) name:@"taskDidCompleteSuccessfully" object:nil];
+  __block SettingsViewController *blockSelf = self;
+  [center addObserverForName:LWEPluginDidInstall object:nil queue:nil usingBlock:^(NSNotification *notification)
+  {
+    blockSelf.sectionArray = [blockSelf.dataSource settingsArray];
+    [blockSelf.tableView reloadData];
+  }];
+ [center addObserver:self.tableView selector:@selector(reloadData) name:LWEUserSettingsChanged object:nil];
 }
 
-/**
- * Makes the settings show the plugins when required (e.g. after the user updates their version to JFlash 1.1)
- */
-- (void) _addPluginMenuItem
+- (void) viewDidUnload
 {
-  [self setSectionArray:[self _settingsTableDataSource]];
-  self.navigationItem.rightBarButtonItem = nil;
-  [[self tableView] reloadData];
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-/**
- * Called when plugin installed
- */
-- (void) _updateTableDataAfterPluginInstall:(NSNotification *)notification
-{
-	LWE_LOG(@"Update table data after plugin install is called");
-  [self setSectionArray:[self _settingsTableDataSource]];
-  [[self tableView] reloadData];
-}
-
 
 - (void)viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+
   UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
   
   //Added this in, so that it refreshes it self when the user is going to this Settings view, after the user changes something that is connected with the appearance of this Settings View Controller. 
-	[self setSectionArray:[self _settingsTableDataSource]];
+  self.sectionArray = [self.dataSource settingsArray];
 	
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
-  [[self tableView] reloadData];
+  self.tableView.backgroundColor = [UIColor clearColor];
+  [self.tableView reloadData];
 }
 
 //! Only re-load the set if settings were changed, otherwise there is no need to do anything
@@ -104,28 +85,38 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  if (settingsChanged)
+  
+  BOOL shouldSendChangeNotification = NO;
+  BOOL shouldSendCardChangeNotification = NO;
+  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendChangeNotification))])
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWESettingsChanged object:self];
+    shouldSendChangeNotification = [self.delegate shouldSendChangeNotification];
   }
-  if (directionChanged || themeChanged || readingChanged)
+  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendCardChangeNotification))])
+  {
+    shouldSendCardChangeNotification = [self.delegate shouldSendCardChangeNotification];
+  }
+  
+  // Note that this is an else-if because a "settings changed" will re-run everything, so there is no
+  // reason to call both if you're calling the first.
+  if (shouldSendChangeNotification)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
+  }
+  else if (shouldSendCardChangeNotification)
   {
     [[NSNotificationCenter defaultCenter] postNotificationName:LWECardSettingsChanged object:self];
   }
   
-  // we've sent the notifications, so reset to unchanged
-  directionChanged = NO;
-  themeChanged = NO;
-  readingChanged = NO;
-  settingsChanged = NO;
+  LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
 
 
-
+// TODO: this could be a block someday.
 //! launchAppirater - convenience method for appirater
 - (void) _launchAppirater
 {
-  appirater = [[Appirater alloc] init];
+  Appirater *appirater = [[[Appirater alloc] init] autorelease];
   [appirater showPromptManually];
 }
 
@@ -134,7 +125,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 - (void) iterateSetting: (NSString*) setting
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSDictionary *dict = [settingsDict objectForKey:setting];
+  NSDictionary *dict = [self.dataSource.settingsHash objectForKey:setting];
   NSEnumerator *enumerator = [dict keyEnumerator];
   NSString *currentValue = [settings objectForKey:setting];
   NSString *lclKey = nil;
@@ -152,7 +143,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   // Now check if we got nothing because we were at the end of the list
   if (nextValue == nil)
   {
-    NSEnumerator* tmpEnumerator = [dict keyEnumerator];
+    NSEnumerator *tmpEnumerator = [dict keyEnumerator];
     nextValue = [tmpEnumerator nextObject];
   }
   [settings setValue:nextValue forKey:setting];
@@ -160,32 +151,28 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 }
 
 
-# pragma mark UI Table View Methods
+# pragma mark - UITableViewDataSource Methods
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return [[self sectionArray] count];
+  return [self.sectionArray count];
 }
 
-- (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSInteger i = [[[[self sectionArray] objectAtIndex:section] objectAtIndex:0] count];
+  NSInteger i = [[[self.sectionArray objectAtIndex:section] objectAtIndex:0] count];
   return i;
 }
 
-- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   UITableViewCell *cell = nil;
-  NSString *key = nil;
-  NSString *displayName = nil;
-  NSInteger row = [indexPath row];
-  NSInteger section = [indexPath section];
-
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  
   // Get our key name and display name
-  NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
-  key = [[thisSectionArray objectAtIndex:1] objectAtIndex:row];
-  displayName = [[thisSectionArray objectAtIndex:0] objectAtIndex:row];
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
+  NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
+  NSString *displayName = [[thisSectionArray objectAtIndex:0] objectAtIndex:indexPath.row];
   
   // Handle special cases first
   if (key == APP_USER)
@@ -200,11 +187,30 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    int numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
+    NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
     if (numInstalled > 0)
+    {
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
+    }
     else
+    {
       cell.detailTextLabel.text = NSLocalizedString(@"None",@"Global.None");
+    }
+  }
+  else if (key == APP_REMINDER)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_REMINDER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
+    if ([reminderSetting intValue] > 0)
+    {
+      cell.detailTextLabel.text = NSLocalizedString(@"On",@"Global.On");
+    }
+    else
+    {
+      cell.detailTextLabel.text = NSLocalizedString(@"Off",@"Global.Off");
+    }
   }
   else if (key == APP_ABOUT)
   {
@@ -218,12 +224,16 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    UIImageView* tmpView = cell.imageView;
+    UIImageView *tmpView = cell.imageView;
     // TODO: iPad customization!
-    if(key == APP_TWITTER)
+    if (key == APP_TWITTER)
+    {
       tmpView.image = [UIImage imageNamed:@"icon_twitter_30x30.png"];
-    else
+    }
+    else if (key == APP_FACEBOOK)
+    {
       tmpView.image = [UIImage imageNamed:@"icon_facebook_30x30.png"];
+    }
   }
   else if (key == APP_ALGORITHM)
   {
@@ -242,7 +252,7 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     // Anything else
     cell = [LWEUITableUtils reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.detailTextLabel.text = [[[self settingsDict] objectForKey:key] objectForKey:[settings objectForKey:key]];        
+    cell.detailTextLabel.text = [[self.dataSource.settingsHash objectForKey:key] objectForKey:[settings objectForKey:key]];        
   }
   
   cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -251,9 +261,11 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   return cell;  
 }
 
+#pragma mark - UITableViewDelegate Methods
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:indexPath.section];
+	NSArray *thisSectionArray = [self.sectionArray objectAtIndex:indexPath.section];
   NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:indexPath.row];
 
   CGFloat size;
@@ -287,16 +299,12 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
     [self.navigationController pushViewController:userView animated:YES];
     [userView release];
   }
-  else if ((key == APP_PLUGIN)||(key == APP_NEW_UPDATE))
+  else if (key == APP_PLUGIN || key == APP_NEW_UPDATE)
   {
 		// TODO: iPad customization!
 		PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
 		[self.navigationController pushViewController:psvc animated:YES];
 		[psvc release];
-  }
-  else if (key == APP_ABOUT)
-  {
-    // Do nothing, about section
   }
   else if (key == APP_TWITTER || key == APP_FACEBOOK)
   {
@@ -311,10 +319,14 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 
     NSURL *url = nil;
     if (key == APP_FACEBOOK)
+    {
       url = [NSURL URLWithString:@"http://m.facebook.com/pages/Japanese-Flash/111141367918"];
+    }
     else
+    {
       url = [NSURL URLWithString:@"http://twitter.com/long_weekend/"];
-      
+    }
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [webView loadRequest:request];
@@ -323,6 +335,16 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
 
     [self.navigationController pushViewController:webVC animated:YES];
     [webVC release];
+  }
+  else if (key == APP_ABOUT)
+  {
+    // Do nothing, about section
+  }
+  else if (key == APP_REMINDER)
+  {
+    ReminderSettingsViewController *tmpVC = [[ReminderSettingsViewController alloc] initWithNibName:@"ReminderSettingsViewController" bundle:nil];
+    [self.navigationController pushViewController:tmpVC animated:YES];
+    [tmpVC release];
   }
   else if (key == APP_ALGORITHM)
   {
@@ -333,32 +355,21 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   else
   {
     // Everything else
+    LWE_DELEGATE_CALL(@selector(settingWillChange:),key);
     [self iterateSetting:key];
-    [[self tableView] reloadData];
-    if (key == APP_HEADWORD) // we don't want the current card to change for just a headword switch
+    [self.tableView reloadData];
+    
+    // One special case, theme: reload the nav bar for this page
+    if ([key isEqualToString:APP_THEME])
     {
-      directionChanged = YES;
-    }
-    else if (key == APP_THEME)
-    {
-      themeChanged = YES;
-      // Also reload the nav bar for this page
       self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-    }
-    else if (key == APP_READING)
-    {
-      readingChanged = YES; 
-    }
-    else
-    {
-      settingsChanged = YES;
     }
   }
 }
 
-- (NSString *) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-  NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:section];
   return [thisSectionArray objectAtIndex:2];
 }
 
@@ -377,98 +388,12 @@ NSString * const LWESettingsChanged = @"LWESettingsChanged";
   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-
-/** Returns all the arrays to configure the settings table */
-- (NSMutableArray*) _settingsTableDataSource
-{
-	NSUInteger newAvailableUpdate = [[[[CurrentState sharedCurrentState] pluginMgr] availableForDownloadPlugins] count];
-	
-	//TODO: Please put the Localized string in. Thanks
-	//This is to set up the very top row and section in the settings table view.
-	NSArray *newUpdateNames = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d Update%@ Available", newAvailableUpdate, (newAvailableUpdate>1) ? @"s" : @""], nil];
-  NSArray *newUpdateKeys = [NSArray arrayWithObjects:APP_NEW_UPDATE,nil];
-  NSArray *newUpdateArray = [NSArray arrayWithObjects:newUpdateNames,newUpdateKeys, [NSString stringWithFormat:@"Available Update%@", (newAvailableUpdate>1) ? @"s" : @""], nil];
-	
-  // The following dictionaries contain all the mappings from actual settings to how they display on the phone
-  NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
-  NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
-  NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
-  
-  NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
-                              NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
-  NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
-  NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
-  
-  // Source theme information from the ThemeManager
-  ThemeManager *tm = [ThemeManager sharedThemeManager];
-  NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
-  
-  NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
-                             NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
-                             NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
-  NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
-  NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
-  
-  // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_READING,APP_MODE,nil];
-  self.settingsDict = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
-  
-  // These are the keys and display names of each row
-  NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
-                               NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
-                               NSLocalizedString(@"Furigana / Reading",@"SettingsViewController.SettingNames_DisplayFuriganaReading"),
-                               NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_READING,APP_ALGORITHM,nil];
-  NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
-  
-  NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),
-                                      NSLocalizedString(@"Active User",@"SettingsViewController.SettingNames_ActiveUser"),
-                                      NSLocalizedString(@"Updates",@"SettingsViewController.SettingNames_DownloadExtras"),nil];
-  NSMutableArray *userSettingKeys = [NSMutableArray arrayWithObjects:APP_THEME,APP_USER,APP_PLUGIN,nil];
-  
-  // Can we upgrade at all?  If so, hide the plugins
-  if ([UpdateManager databaseIsUpdatable:[NSUserDefaults standardUserDefaults]])
-  {
-    [userSettingNames removeLastObject];
-    [userSettingKeys removeLastObject];
-  }
-  
-  NSMutableArray *userSettingArray = [NSMutableArray arrayWithObjects:userSettingNames,userSettingKeys,NSLocalizedString(@"Application",@"SettingsViewController.TableHeader_Application"),nil];
-  
-  NSArray *socialNames = [NSArray arrayWithObjects:NSLocalizedString(@"Follow us on Twitter",@"SettingsViewController.SettingNames_Twitter"),
-                          NSLocalizedString(@"See us on Facebook",@"SettingsViewController.SettingNames_Facebook"),nil];
-  NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
-  NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
-  
-  NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group's license. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
-  NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
-  NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
-  
-  // Make the order
-	// If there is a new available update plugin, it will show in the first section, however, if it does not have anything, it will show nothing. 
-	if (newAvailableUpdate > 0)
-		return [NSMutableArray arrayWithObjects:newUpdateArray,cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
-	else 
-		return [NSMutableArray arrayWithObjects:cardSettingArray,userSettingArray,socialArray,aboutArray,nil];
-}
-
-- (void) viewDidUnload
-{
-	LWE_LOG(@"Settings View Controller get unload");
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
 # pragma mark - Housekeeping
 
 - (void)dealloc
 {
-  [settingsDict release];
+  [dataSource release];
   [sectionArray release];
-  [appirater release];
   [super dealloc];
 }
 

@@ -1,0 +1,25 @@
+starred:    
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    tag_name: "My Starred Words"
+    tag_type: ""
+    short_name: "starred_words"
+    description: "Starred Words"      
+    source: "system_tags"                          
+    source_name: "system_tags"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    
+lwe_favs:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    tag_name: "Long Weekend Favourites"
+    tag_type: ""
+    short_name: "lwe_favs"
+    description: "Long Weekend Favourites Cards"      
+    source: "system_tags"                          
+    source_name: "system_tags"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0

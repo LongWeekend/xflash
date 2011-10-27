@@ -9,25 +9,32 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 
-@interface CardViewController : UIViewController
-{
-  IBOutlet id delegate;  
-  Card *currentCard;
-}
+@class StudyViewController;
+@class CardViewController;
 
-- (void) setup;
-- (void) reveal;
-
-//we don't retain delegates
-@property (assign, nonatomic, readwrite) IBOutlet id delegate;
-@property (nonatomic, retain) Card *currentCard;
-
+@protocol CardViewControllerDelegate <NSObject>
+@optional
+- (void)studyModeDidChange:(StudyViewController*)svc;
+- (void)setupViews:(StudyViewController*)svc;
+- (void)refreshSessionDetailsViews:(StudyViewController*)svc;
+- (void)cardViewWillSetup:(CardViewController*)cardViewController;
+- (void)cardViewDidSetup:(CardViewController*)cardViewController;
+- (void)cardViewWillReveal:(CardViewController*)cardViewController;
+- (void)cardViewDidReveal:(CardViewController*)cardViewController;
+- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
 @end
 
-//! Notification names
-extern NSString  *meaningWebViewWillDisplayNotification;
-extern NSString  *meaningWebViewDidDisplayNotification;
-extern NSString  *cardViewWillSetupNotification;
-extern NSString  *cardViewDidSetupNotification;
-extern NSString  *cardViewWillRevealNotification;
-extern NSString  *cardViewDidRevealNotification;
+@interface CardViewController : UIViewController
+
+- (void) setupWithCard:(Card*)card;
+- (void) reveal;
+
+// These two methods are more temporary, to pull more browsemode/practice mode stuff out of SVC
+- (void) setupViews:(StudyViewController*)svc;
+- (void) refreshSessionDetailsViews:(StudyViewController*)svc;
+- (void) studyModeDidChange:(StudyViewController*)svc;
+
+@property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
+@property (retain) Card *currentCard;
+
+@end

@@ -9,6 +9,7 @@
 #import "UserViewController.h"
 #import "UserDetailsViewController.h"
 #import "CustomCellBackgroundView.h"
+#import "SettingsViewController.h"
 #import "UserPeer.h"
 
 /**
@@ -23,7 +24,7 @@
   {
     self.title = NSLocalizedString(@"Choose User",@"UserViewController.NavBarTitle");
     self.tableView.delegate = self;
-    [self setUsersArray:[UserPeer getUsers]];
+    self.usersArray = [UserPeer getUsers];
   }
   return self;
 }
@@ -43,8 +44,8 @@
 /** Fetch user data and then call a table reload */
 - (void)reloadTableData
 {
-  [self setUsersArray:[UserPeer getUsers]];
-  [[self tableView] reloadData];
+  self.usersArray = [UserPeer getUsers];
+  [self.tableView reloadData];
 }
 
 /** Update the view if any theme info changed */
@@ -54,10 +55,8 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self tableView] setSeparatorColor:[UIColor lightGrayColor]];
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
-  // MMA not sure if this is necessary
-  [[self tableView] reloadData];
+  self.tableView.separatorColor = [UIColor lightGrayColor];
+  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark Table view methods
@@ -71,7 +70,7 @@
 //! Returns the number of users in the usersArray
 - (NSInteger)tableView:(UITableView *)lclTableView numberOfRowsInSection:(NSInteger)section
 {
-  return [[self usersArray] count];
+  return [self.usersArray count];
 }
 
 //! Reloads specific cells
@@ -79,7 +78,7 @@
 {
   for (NSIndexPath *indexPath in indexPaths)
   {
-    [self tableView:[self tableView] cellForRowAtIndexPath:indexPath];
+    [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
   }
 }
 
@@ -87,16 +86,16 @@
 {
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* tmpNickname = [[usersArray objectAtIndex:indexPath.row] userNickname];
+  NSString* tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
   UITableViewCell *cell;
 
   // Selected cells are highlighted
-  if([settings integerForKey:@"user_id"] == [[usersArray objectAtIndex:indexPath.row] userId])
+  if([settings integerForKey:@"user_id"] == [[self.usersArray objectAtIndex:indexPath.row] userId])
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"CellHighlighted" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     
     CustomCellBackgroundView *bgView = [[CustomCellBackgroundView alloc] initWithFrame:CGRectZero];
-    [bgView setCellIndexPath:indexPath tableLength:[usersArray count]];
+    [bgView setCellIndexPath:indexPath tableLength:[self.usersArray count]];
     [bgView setBorderColor:[lclTableView separatorColor]];
     [bgView setFillColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -124,15 +123,15 @@
 
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
+  self.selectedUserInArray = [self.usersArray objectAtIndex:indexPath.row];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([selectedUserInArray userId] == [settings integerForKey:@"user_id"])
+  if (self.selectedUserInArray.userId == [settings integerForKey:@"user_id"])
   {
     return; 
   }
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-  selectedUserInArray = [[self usersArray] objectAtIndex:(NSInteger)indexPath.row];
-  NSString* message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
+  self.selectedUserInArray = [self.usersArray objectAtIndex:indexPath.row];
+  NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Set the active user to %@?",@"UserViewController.ChangeUser_AlertViewMessage"), [selectedUserInArray userNickname]];
   [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Activate User",@"UserViewController.ChangeUser_AlertViewTitle") message:message delegate:self];
 }
 
@@ -142,7 +141,7 @@
   // user activation confirmed 
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
-    [self activateUserWithModal:[self selectedUserInArray]];
+    [self activateUserWithModal:self.selectedUserInArray];
   }
 }
 
@@ -154,11 +153,8 @@
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
-  User* currUser = [[self usersArray] objectAtIndex:indexPath.row];
-  [userDetailsView setUser:currUser];
-  [userDetailsView setTitle: [currUser userNickname]];
-  [userDetailsView setMode: kUserViewModeEdit];
+  User *currUser = [self.usersArray objectAtIndex:indexPath.row];
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:currUser];
   [self.navigationController pushViewController:userDetailsView animated:YES];
   [userDetailsView release];
 }
@@ -169,7 +165,7 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Cancel deletion if the user is ID=1
-    NSInteger selectedUserId = [[usersArray objectAtIndex:indexPath.row] userId];
+    NSInteger selectedUserId = [[self.usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
     {
       [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Cannot Delete User",@"UserViewController.CannotDelete_AlertViewTitle")
@@ -178,11 +174,11 @@
     }
 
     // Delete the row from the data source
-    User *tmpUser = [usersArray objectAtIndex:indexPath.row];
+    User *tmpUser = [self.usersArray objectAtIndex:indexPath.row];
     [tmpUser deleteUser];
 
     // Remove from usersArray
-    [usersArray removeObjectAtIndex:indexPath.row];
+    [self.usersArray removeObjectAtIndex:indexPath.row];
 
     // If we just deleted the active user, change to iPhone Owner
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -195,7 +191,7 @@
     [lclTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationRight];
 
     // Redraw table if needed
-    [[self tableView] reloadData];
+    [lclTableView reloadData];
   }
 }
 
@@ -207,7 +203,7 @@
   // First, show the loading modal, then call selector after delay to allow it to appear
   self.loadingView = [LWELoadingView loadingView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
-  // Now do it
+  // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
 }
 
@@ -221,7 +217,7 @@
 {
   // Activate, post notification and dismiss view
   [user activateUser];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"userWasChanged" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   [self.loadingView removeFromSuperview];
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -231,9 +227,8 @@
 - (void) showUserDetailsView
 {
   // TODO: iPad customization!
-  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] init];
+  UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
-  userDetailsView.mode = kUserViewModeAdd;
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
 
@@ -247,7 +242,7 @@
 
 - (void)dealloc
 {
-  [self setUsersArray:nil];
+  [usersArray release];
   [super dealloc];
 }
 

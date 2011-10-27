@@ -15,6 +15,23 @@
  */
 @implementation ExampleSentencePeer
 
++ (BOOL) isNewVersion
+{
+#if defined (LWE_JFLASH)
+  // Get plugin version
+  BOOL isNewVersion = NO;
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
+  {
+    isNewVersion = YES;
+  }
+  return isNewVersion;
+#else
+  return YES;
+#endif
+}
+
+
 /**
  * Returns a mutable array of ExampleSentence objects based on custom SQL
  * \param sql SQL string used to return the ExampleSentence objects
@@ -62,27 +79,29 @@
  * Returns all linked ExampleSentence objects for a given card
  * \param cardId Primary key of the Card object for which to retrieve ExampleSentences
  */
-+ (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId showAll:(BOOL)showAll
++ (NSMutableArray*) getExampleSentencesByCardId: (NSInteger)cardId
 {
-	NSString *sql;
-	if (showAll)
-		sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10", cardId];
+	NSString *sql = nil;
+	if ([ExampleSentencePeer isNewVersion])
+  {
+		sql = [NSString stringWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10", cardId];
+  }
   else
-		sql = [[NSString alloc] initWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id LIMIT 10", cardId];
-	
-	NSMutableArray* tmpSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
-  [sql release];
-  return tmpSentences;
+  {
+		sql = [NSString stringWithFormat:@"SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = %d AND s.sentence_id = l.sentence_id LIMIT 10", cardId];
+	}
+	return [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
 }
 
 /**
  * Returns a boolean YES if example sentences exist for a given card id. NO if none exist/
  * If a card_sentence_link table record's should_show value is 0, this will return NO even if there is a link
  */
-+ (BOOL) sentencesExistForCardId: (NSInteger)cardId showAll:(BOOL)showAll
++ (BOOL) sentencesExistForCardId: (NSInteger)cardId
 {
   NSString *sql = nil;
-  if (showAll)
+  
+  if ([ExampleSentencePeer isNewVersion])
   {
     // Version 1.2 example sentences DB
     sql = [[NSString alloc] initWithFormat:@"SELECT sentence_id FROM card_sentence_link WHERE card_id = %d AND should_show = '1' LIMIT 1", cardId];
@@ -107,9 +126,9 @@
 /**
  * Returns an array of Sentence objects after searching keyword - for search
  */
-+ (NSMutableArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
++ (NSArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
 {
-  NSMutableArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
+  NSArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
   
   // Do a clever IN SQL statement!  Aha!
   NSString *inStatement = nil;
@@ -130,7 +149,7 @@
   LWE_LOG(@"In Statement: %@",inStatement);
   
   NSString *sql = [[NSString alloc] initWithFormat:@"SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (%@)",inStatement];
-  NSMutableArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
+  NSArray* exampleSentences = [ExampleSentencePeer retrieveSentencesWithSQL:sql hydrate:YES];
   [sql release];
   return exampleSentences;
 

@@ -1,0 +1,742 @@
+ic_intro_numbers:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Intro Numbers.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Numbers"
+    tag_type: ""
+    short_name: "ic_intro_numbers"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Numbers)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Numbers.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_intro_radicals:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Intro Radicals.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_1_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_1_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_1_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_2_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_2_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_3_dates_and_time:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_3_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_3_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_3_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_4_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_4_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_4_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_5_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_5_narrative:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_5_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_6_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_6_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_6_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_7_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_7_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_7_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_8_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_8_letter:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_9_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_9_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_9_measure_words:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_9_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_10_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_10_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_10_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_11_dialogue:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_11_letter:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_11_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_12_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_12_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_12_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_13_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_13_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_13_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_14_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_14_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_14_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_15_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_15_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_15_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_16_dialogue_1:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_16_dialogue_2:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_16_supplementary:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_17_dialogue:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_18:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+ic_19:
+    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/IC Lesson 1 Dialogue 1.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Introduction to Radicals"
+    tag_type: ""
+    short_name: "ic_intro_radicals"
+    description: "Integrated Chinese Books, 2nd Edition. Intro lessons (Radicals)"      
+    source: "Space separated File"                          
+    source_name: "IC Intro Radicals.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0

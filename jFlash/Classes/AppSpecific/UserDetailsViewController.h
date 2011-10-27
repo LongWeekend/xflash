@@ -17,25 +17,17 @@ enum userViewMode
 };
 
 @interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
-{
-  User *selectedUser;
-  IBOutlet UITextField *userNicknameTextField;
-  IBOutlet UIButton *commitChangesBtn;
-  IBOutlet UIButton *activateUserBtn;
-  NSString* originalUserNickname;
-  NSInteger mode;
-}
 
+- (id)initWithUserDetails:(User*)aUser;
 - (IBAction) doCommitChanges;
 - (IBAction) doActivateUser;
 - (IBAction) doUpdateUserNickname:(id)sender;
-- (void) setUser:(User *)sourceUser;
 
 @property (nonatomic) NSInteger mode;
 @property (nonatomic,retain) User *selectedUser;
 @property (nonatomic,retain) UITextField *userNicknameTextField;
 @property (nonatomic,retain) UIButton *commitChangesBtn;
 @property (nonatomic,retain) UIButton *activateUserBtn;
-@property (nonatomic,retain) NSString* originalUserNickname;
+@property (nonatomic,retain) NSString *originalUserNickname;
 
 @end

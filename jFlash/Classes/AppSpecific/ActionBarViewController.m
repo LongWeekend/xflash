@@ -9,99 +9,25 @@
 #import "ActionBarViewController.h"
 #import "RootViewController.h"
 #import "LWEJanrainLoginManager.h"
-
-//! Informal protocol defined messages sent to delegate
-@interface NSObject (ActionBarDelegateSupport)
-
-// setup card to unrevealed state
-- (void)actionBarWillSetup:(NSNotification *)aNotification;
-- (void)actionBarDidSetup:(NSNotification *)aNotification;
-
-// reveal card
-- (void)actionBarWillReveal:(NSNotification *)aNotification;
-- (void)actionBarDidReveal:(NSNotification *)aNotification;
-- (BOOL)actionBarShouldReveal:(id)actionMenu shouldReveal:(BOOL)reveal;
-
-@end
+#import "LWETwitterEngine.h"
 
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
 @synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
 
-#pragma mark -
-#pragma mark Delegate Methods
-
-- (void)_actionBarWillSetup
-{
-  NSNotification *notification = [NSNotification notificationWithName: actionBarWillSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarWillSetup:)])
-  {
-    [[self delegate] actionBarWillSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)_actionBarDidSetup
-{
-  NSNotification *notification = [NSNotification notificationWithName: actionBarDidSetupNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarDidSetup:)])
-  {
-    [[self delegate] actionBarDidSetup:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)_actionBarWillReveal
-{
-  NSNotification *notification = [NSNotification notificationWithName: actionBarWillRevealNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarWillReveal:)])
-  {
-    [[self delegate] actionBarWillReveal:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)_actionBarDidReveal
-{
-  // we created this name previously
-  NSNotification *notification = [NSNotification notificationWithName: actionBarDidRevealNotification object:self];
-  
-  // send the selector to the delegate if it responds
-  if([[self delegate] respondsToSelector:@selector(actionBarDidReveal:)])
-  {
-    [[self delegate] actionBarDidReveal:notification];
-  }
-  
-  //in case something else cares.  Seems to be the pattern from the book but I don't know if we really need this
-  [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
 //Give the delegate a chance to not reveal the card
 - (BOOL)_actionBarShouldReveal:(BOOL)reveal
 {
-  if([[self delegate] respondsToSelector:@selector(actionBarShouldReveal:shouldReveal:)])
+  if ([self.delegate respondsToSelector:@selector(actionBar:shouldReveal:)])
   {
-    reveal = [[self delegate] actionBarShouldReveal:self shouldReveal:reveal];
+    reveal = [self.delegate actionBar:self shouldReveal:reveal];
   }
   
   return reveal;
 }
 
-#pragma mark -
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction) doNextCardBtn
 {
@@ -133,30 +59,30 @@
   [self reveal];
 }
 
-#pragma mark -
-#pragma mark Core Class Methods
+#pragma mark - Core Class Methods
 
-- (void) setup
+- (void) setupWithCard:(Card *)card
 {
-  [self _actionBarWillSetup];
-  [self _actionBarDidSetup];
+  self.currentCard = card;
+  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
 }
 
 - (void) reveal
 {
-  [self _actionBarWillReveal];
-  [self _actionBarDidReveal];
+  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
 }
 
-#pragma mark -
-#pragma mark Action Sheet
+#pragma mark - Action Sheet
 
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
+  if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
@@ -183,36 +109,34 @@
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  // we present on the appDelegates root view controller to make sure it covers everything
-  jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  
+  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
     [self reportBadData];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self currentCard]];
-    
-    // Set up DONE button
-    UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") style:UIBarButtonItemStyleBordered target:appDelegate.rootViewController action:@selector(dismissModalViewControllerAnimated:)];
-    tmpVC.navigationItem.leftBarButtonItem = doneBtn;
-    [doneBtn release];
-    
-    UINavigationController *modalNavControl = [[UINavigationController alloc] initWithRootViewController:tmpVC];
-    [appDelegate.rootViewController presentModalViewController:modalNavControl animated:YES];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:self.currentCard];
+    tmpVC.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
+                                               initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle")
+                                                       style:UIBarButtonItemStyleBordered
+                                                      target:tmpVC
+                                                     action:@selector(dismissModalViewControllerAnimated:)] autorelease];
+
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:tmpVC,@"controller",
+                              [NSNumber numberWithBool:YES],@"useNavController",nil];
     [tmpVC release];
-    [modalNavControl release];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:userInfo];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOFAV_BUTTON)
-  {
+  {    
     // Do something here - subscribe or cancel, depending.
-    if ([TagPeer checkMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID])
+    if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
     {
       // First of all, do it
       NSError *error = nil;
-      BOOL cancelable = [TagPeer cancelMembership:self.currentCard.cardId tagId:FAVORITES_TAG_ID error:&error];
-      if (!cancelable)
+      BOOL cancelled = [TagPeer cancelMembership:self.currentCard fromTag:favoritesTag error:&error];
+      if (!cancelled)
       {
         if ([error code] == kRemoveLastCardOnATagError)
         {
@@ -229,7 +153,7 @@
     }
     else
     {
-      [TagPeer subscribe:self.currentCard.cardId tagId:FAVORITES_TAG_ID];
+      [TagPeer subscribeCard:self.currentCard toTag:favoritesTag];
     }
 
   }
@@ -243,8 +167,7 @@
   }
 }
 
-#pragma mark -
-#pragma mark MailCompose helper & delegate method
+#pragma mark - MailCompose helper & delegate method
 
 - (void)reportBadData
 {
@@ -280,8 +203,7 @@
   [appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UIAlertView delegate methods
+#pragma mark - UIAlertView delegate methods
 
 /**
  * If the user tapped OK, Follow Long WEekend on Twitter
@@ -310,7 +232,7 @@
 	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
   
   // Init twitter engine if not already done
-	if ((!_twitterEngine) && (_twitterEngine == nil))
+	if (_twitterEngine == nil)
 	{
     TweetWordXAuthController *controller = [[TweetWordXAuthController alloc] initWithNibName:@"TweetWordXAuthController" bundle:nil];
 		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY privateKey:JFLASH_TWITTER_PRIVATE_KEY authenticationView:controller];
@@ -375,17 +297,12 @@
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
 
-  NSInteger errorCode = [error code];
-  
-  //TODO - change these error codes to constants
-  // This is the error when the user tweets the same thing twice
-  if (errorCode == 1)
+  if (error.domain == LWETwitterErrorDomain && error.code == LWETwitterErrorUnableToSendTweet)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Tweet", @"ActionBarViewController.TweetFailureAlertTitle")
                                        message:NSLocalizedString(@"Did you tweet the same thing twice in a row?  Twitter doesn't let us.", @"ActionBarViewController.TweetFailureAlertMsg")];    
   }
-  // CFNetwork error
-  else if (errorCode == -1009)
+  else if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
   {
     [LWEUIAlertView noNetworkAlert];
   }
@@ -553,8 +470,6 @@
 
 - (void)dealloc
 {
-	//TODO: Remove this if crashes
-	LWE_LOG(@"Rendy realised that the current card is assigned using setter, and the setter is 'retain', so shouldnt it be release? Please clarify");
 	[currentCard release];
   [cardMeaningBtnHint release];
   [cardMeaningBtnHintMini release];
@@ -574,9 +489,3 @@
   [super dealloc];
 }
 @end
-
-//! Notification names
-NSString * const actionBarWillSetupNotification = @"actionBarWillSetupNotification";
-NSString * const actionBarDidSetupNotification = @"actionBarDidSetupNotification";
-NSString * const actionBarWillRevealNotification = @"actionBarWillRevealNotification";
-NSString * const actionBarDidRevealNotification = @"actionBarDidRevealNotification";

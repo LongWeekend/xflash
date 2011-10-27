@@ -11,19 +11,19 @@
 
 @implementation AddStudySetInputViewController
 
-@synthesize ownerId, defaultCardId, setNameTextfield;
+@synthesize ownerId, defaultCard, setNameTextfield;
 
 /**
  * Custom initializer for AddStudySet modal
  * \param cardId If not 0, this cardId will be added to the membership of the newly-created Tag
  * \param groupOwnerId Specifies which group this Tag will belong to.  For top-level, this is zero.
  */
-- (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId
+- (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId
 {
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"ModalInputView" bundle:nil]))
   {
-    self.defaultCardId = cardId;
+    self.defaultCard = card;
     self.ownerId = groupOwnerId;
   }
   return self;
@@ -35,13 +35,13 @@
   [super viewDidLoad];
   self.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
 
-  [setNameTextfield becomeFirstResponder];
-  setNameTextfield.returnKeyType = UIReturnKeyDone;
-  setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
-  setNameTextfield.backgroundColor = [UIColor clearColor];
-  setNameTextfield.borderStyle = UITextBorderStyleRoundedRect;
+  [self.setNameTextfield becomeFirstResponder];
+  self.setNameTextfield.returnKeyType = UIReturnKeyDone;
+  self.setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
+  self.setNameTextfield.backgroundColor = [UIColor clearColor];
+  self.setNameTextfield.borderStyle = UITextBorderStyleRoundedRect;
   
-  UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
+  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
   self.navigationItem.leftBarButtonItem = cancelButton;
   [cancelButton release];
 }
@@ -58,33 +58,27 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 
 {
-  if([theTextField.text length] == 0)
+  if ([theTextField.text length] == 0)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Enter Set Name",@"AddStudySetInputViewController.AlertViewTitle")
                                        message:NSLocalizedString(@"Please enter a new set name or click 'Cancel'.",@"AddStudySetInputViewController.AlertViewMessage")];
     return NO;
   }
   
-  // TODO: parameter binding?
-  // Escape the string for SQLITE-style escapes (cannot use backslash!)
-  NSMutableString* newTag = [[NSMutableString alloc] initWithString:theTextField.text];
-  [newTag replaceOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, [newTag length])];
-
-  // Create the tag
-  int lastTagId = [TagPeer createTag:newTag withOwner:self.ownerId];
-  [newTag release];
+  // Create the tag & subscribe the card to it
+  Tag *newTag = [TagPeer createTag:theTextField.text withOwner:self.ownerId];
+  [TagPeer subscribeCard:self.defaultCard toTag:newTag];
   
-  // If there is a default card, subscribe it
-  if (lastTagId > 0 && defaultCardId > 0)
-  {
-    [TagPeer subscribe:defaultCardId tagId:lastTagId];
-    LWE_LOG(@"last row: %d",lastTagId);
-  }
-  
-  [[self parentViewController] dismissModalViewControllerAnimated:YES];
+  [self.parentViewController dismissModalViewControllerAnimated:YES];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"setAddedToView" object:self];
  
   return YES;
+}
+
+- (void) dealloc
+{
+  [defaultCard release];
+  [super dealloc];
 }
 
 @end

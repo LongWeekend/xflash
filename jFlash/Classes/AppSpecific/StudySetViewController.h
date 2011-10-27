@@ -32,7 +32,7 @@
 @property NSInteger groupId;
 @property (nonatomic, retain) Group *group;
 @property (nonatomic, retain) NSMutableArray *tagArray;
-@property (nonatomic, retain) NSMutableArray *subgroupArray;
+@property (nonatomic, retain) NSArray *subgroupArray;
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) BackupManager *backupManager;

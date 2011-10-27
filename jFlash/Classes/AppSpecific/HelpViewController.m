@@ -41,11 +41,10 @@
                                                NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
                                                NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                                               nil];
-    NSArray *htmls = nil;
+    self.sectionTitles = names;
+
     // We use absolute sizes though so let the old devices scale the images down.
-    htmls = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
-    [self setSectionTitles:names];
-    [self setHtmlFilenames:htmls];
+    self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
     currentIndex = 0;
   }
 	return self;
@@ -56,10 +55,10 @@
 {
   NSInteger newIndex = currentIndex + 1;
   // Note that newIndex is a 0-based index, whereas count returns a 1-based count - so we use greater than, not equal
-  if (newIndex < [[self htmlFilenames] count] && newIndex < [[self sectionTitles] count])
+  if (newIndex < [self.htmlFilenames count] && newIndex < [self.sectionTitles count])
   {
     // This SHOULD be the HelpWebViewController - but you never know!
-    UIViewController *tmpVC = [[self navigationController] topViewController];
+    UIViewController *tmpVC = [self.navigationController topViewController];
     if ([tmpVC respondsToSelector:@selector(loadPageWithBundleFilename:usingTitle:)])
     {
       [tmpVC performSelector:@selector(loadPageWithBundleFilename:usingTitle:) withObject:[self.htmlFilenames objectAtIndex:newIndex] withObject:[self.sectionTitles objectAtIndex:newIndex]];
@@ -67,7 +66,7 @@
       
       // Also figure out if we need to kill the next button if we have gone to the last page
       // Again note that the indices for these two ways of counting are off by 1
-      if (currentIndex == ([[self sectionTitles] count]-1))
+      if (currentIndex == ([self.sectionTitles count]-1))
       {
         tmpVC.navigationItem.rightBarButtonItem = nil;
       }
@@ -81,24 +80,21 @@
 {
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [[self tableView] setBackgroundColor: [UIColor clearColor]];
+  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
-# pragma mark UITableView Delegate Methods
+#pragma mark - UITableViewDataSource Methods
 
-/** Hardcoded to 1 **/
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
   return 1;
 }
-
 
 /** Returns the number of items in array sectionTitles */
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
 {
   return [self.sectionTitles count];
 }
-
 
 /**
  * Creates a cell with default style with an accessory disclosure indicator
@@ -110,10 +106,11 @@
   cell = [LWEUITableUtils reuseCellForIdentifier:@"help" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   cell.selectionStyle = UITableViewCellSelectionStyleGray;
-  cell.textLabel.text = [[self sectionTitles] objectAtIndex:indexPath.row];
+  cell.textLabel.text = [self.sectionTitles objectAtIndex:indexPath.row];
   return cell;  
 }
 
+#pragma mark - UITableViewDelegate Methods
 
 /** Loads the HelpWebViewController with the selected row's HTML file */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,9 +119,10 @@
 
   NSInteger row = indexPath.row;
   currentIndex = row;
-  HelpWebViewController *webViewController = [[HelpWebViewController alloc] initWithFilename:[[self htmlFilenames] objectAtIndex:row] usingTitle:[[self sectionTitles] objectAtIndex:row]];
+  HelpWebViewController *webViewController = [[HelpWebViewController alloc] initWithFilename:[self.htmlFilenames objectAtIndex:row]
+                                                                                  usingTitle:[self.sectionTitles objectAtIndex:row]];
   // If there is a next, show the next button - note the array indices are different so we need a -1
-  if (currentIndex < ([[self sectionTitles] count]-1))
+  if (currentIndex < ([self.sectionTitles count]-1))
   {
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Next >",@"HelpViewController.Next") style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToNextHelpPage)];
     webViewController.navigationItem.rightBarButtonItem = btn;
@@ -134,15 +132,12 @@
   [webViewController release];
 }
 
+# pragma mark - Class Plumbing
 
-# pragma mark -
-# pragma mark Class Plumbing
-
-//! Standard dealloc
 - (void)dealloc
 {
-  [self setSectionTitles:nil];
-  [self setHtmlFilenames:nil];
+  [sectionTitles release];
+  [htmlFilenames release];
   [super dealloc];
 }
 

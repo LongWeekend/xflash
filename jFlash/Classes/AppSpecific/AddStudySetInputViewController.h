@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Card.h"
 
 @interface AddStudySetInputViewController : UIViewController
-{
-  IBOutlet UITextField *setNameTextfield;
-  NSInteger defaultCardId;
-  NSInteger ownerId;
-}
 
-- (id) initWithDefaultCardId:(NSInteger)cardId groupOwnerId:(NSInteger)groupOwnerId;
+- (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId;
+
+@property (nonatomic, retain) IBOutlet UITextField *setNameTextfield;
 
 @property NSInteger ownerId;
-@property NSInteger defaultCardId;
-@property (nonatomic,retain) UITextField *setNameTextfield;
+@property (retain) Card *defaultCard;
 @end

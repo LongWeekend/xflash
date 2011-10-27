@@ -10,15 +10,16 @@
 
 extern NSString * const kJFlashDatabaseErrorDomain;
 extern NSUInteger const kJFlashCannotOpenDatabaseErrorCode;
+extern NSString * const JFLASH_CURRENT_USER_TEST_DATABASE;
+extern NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE;
+extern NSString * const JFLASH_CURRENT_FTS_TEST_DATABASE;
 
 @interface JFlashDatabase : NSObject
-{
-    
-}
 
 + (JFlashDatabase *)sharedJFlashDatabase;
 
 - (BOOL)setupTestDatabaseAndOpenConnectionWithError:(NSError **)error;
 - (BOOL)removeTestDatabaseWithError:(NSError **)error;
+- (BOOL)setupAttachedDatabase:(NSString*)filename asName:(NSString*)name;
 
 @end

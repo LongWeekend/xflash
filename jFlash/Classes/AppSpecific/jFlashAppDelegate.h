@@ -13,7 +13,6 @@
 
 @interface jFlashAppDelegate : NSObject <UIApplicationDelegate>
 {
-  BOOL backgroundSupported;                 //! YES if we are >=iOS4
   NSString *_searchedTerm;
 }
 

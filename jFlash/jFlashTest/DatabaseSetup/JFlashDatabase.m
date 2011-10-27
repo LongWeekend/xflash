@@ -15,6 +15,7 @@
 
 NSString * const JFLASH_CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
 NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
+NSString * const JFLASH_CURRENT_FTS_TEST_DATABASE   = @"jFlash-FTS-1.1.db";
 NSString * const kJFlashDatabaseErrorDomain         = @"kJFlashDatabaseErrorDomain";
 NSUInteger const kJFlashCannotOpenDatabaseErrorCode   = 999;
 NSUInteger const kJFlashCannotCopyDatabaseErrorCode   = 888;
@@ -44,14 +45,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
   }
 
   //Construct the test database filename
-  NSString *filename = [NSString stringWithFormat:@"%@", JFLASH_CURRENT_USER_TEST_DATABASE];
-  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
+  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   //Create the connection for opening the database
   if ([db openDatabase:pathToDatabase])
   {
-    [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];
     return YES;
   }
   else
@@ -68,6 +67,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
   }
 }
 
+- (BOOL)setupAttachedDatabase:(NSString*)filename asName:(NSString*)name
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  BOOL returnVal = NO;
+  if ([db.dao goodConnection])
+  {
+    NSString *pathToDatabase = [LWEFile createBundlePathWithFilename:filename];
+    returnVal = [db attachDatabase:pathToDatabase withName:name];
+  }
+  return returnVal;
+}
+
 - (BOOL)removeTestDatabaseWithError:(NSError **)error
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -77,7 +88,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
     NSString *testDatabasePath = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE];
     result = [LWEFile deleteFile:testDatabasePath];
     if (result)
+    {
       return YES;
+    }
     else
     {
       NSString *msg = [NSString stringWithFormat:@"Test database cannot be removed from the user documents folder."];

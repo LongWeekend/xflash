@@ -7,63 +7,91 @@
 //
 
 #import "BrowseModeCardViewDelegate.h"
+
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
+#import "StudyViewController.h"
 
 @implementation BrowseModeCardViewDelegate
 @synthesize wordCardViewController;
 
-//! Delegate messages
-- (void)cardViewWillSetup:(NSNotification *)aNotification
+#pragma mark - Card View Controller Delegate
+
+- (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-	CardViewController *cardViewController = [aNotification object];
-  if([self wordCardViewController] == nil)
-  {
-    WordCardViewController *cvc = [[WordCardViewController alloc] init];
-    [self setWordCardViewController:cvc];
-    [cardViewController setView:[[self wordCardViewController] view]];
-		[cvc release];
-  }
-  
-  [[self wordCardViewController] prepareView:[cardViewController currentCard]];
-  [[self wordCardViewController] setupReadingVisibility];
+  cardViewController.view = self.wordCardViewController.view;
+  [self.wordCardViewController prepareView:cardViewController.currentCard];
+  [self.wordCardViewController resetReadingVisibility];
 }
 
-- (void)actionBarWillSetup:(NSNotification *)aNotification
+- (void) refreshSessionDetailsViews:(StudyViewController*)svc
 {
-  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-  [[[aNotification object] prevCardBtn] setHidden:NO];
-  [[[aNotification object] nextCardBtn] setHidden:NO];
+  NSInteger currIndex = svc.currentCardSet.currentIndex + 1;
+  NSInteger total = svc.currentCardSet.cardCount;
+  [svc turnPercentCorrectOff];
+  svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currIndex,total];
+  
+  // If practice mode, show the quiz stuff.
+  svc.tapForAnswerImage.hidden = YES;
+  svc.revealCardBtn.hidden = YES;
+}
+
+- (void) setupViews:(StudyViewController *)svc
+{
+	// In browse mode, scroll view should be enabled if the example sentences view is available
+  BOOL hasExampleSentences = [svc hasExampleSentences];
+  svc.scrollView.pagingEnabled = hasExampleSentences; 
+  svc.scrollView.scrollEnabled = hasExampleSentences;
+}
+
+- (void)studyModeDidChange:(StudyViewController*)svc
+{
+  // You can't tap the HH in browse mode.
+  svc.moodIconBtn.enabled = NO;
+  
+  // Reading should start as "on" in browse mode
+  [self.wordCardViewController turnReadingOn];
+}
+
+#pragma mark - Action Bar View Controller Delegate
+
+- (void)actionBarWillSetup:(ActionBarViewController*)avc
+{
+  avc.prevCardBtn.hidden = NO;
+  avc.nextCardBtn.hidden = NO;
+  avc.addBtn.hidden = NO;
   
   // tell the practice mode to piss off
-  [[[aNotification object] rightBtn] setHidden:YES];
-  [[[aNotification object] wrongBtn] setHidden:YES];
-  [[[aNotification object] buryCardBtn] setHidden:YES];
-  [[[aNotification object] addBtn] setHidden:NO];
-  [[[aNotification object] cardMeaningBtnHint] setHidden:YES];
-  [[[aNotification object] cardMeaningBtnHintMini] setHidden:YES];
-  
-  // move the action button to the middle
-  CGRect frame = [[[aNotification object] addBtn] frame];
-  frame.origin.x = 128;
-  [[[aNotification object] addBtn] setFrame:frame];
+  avc.cardMeaningBtnHint.hidden = YES;
+  avc.cardMeaningBtnHintMini.hidden = YES;
+  avc.rightBtn.hidden = YES;
+  avc.wrongBtn.hidden = YES;
+  avc.buryCardBtn.hidden = YES;
+
+  // move the action button to the middle (it is on the left in practice mode)
+  CGRect rect = avc.addBtn.frame;
+  rect.origin.x = 128;
+  avc.addBtn.frame = rect;
+}
+
+#pragma mark -
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
+    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
+    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
+  }
+  return self;
 }
 
 - (void)dealloc
 {
-	if (wordCardViewController)
-	{
-		NSArray *views = [wordCardViewController.view subviews];
-		LWE_LOG(@"There is %d view(s) in the card view controller's view", [views count]);
-		for (UIView *view in views)
-		{
-			LWE_LOG(@"Removing view %@", view);
-			[view removeFromSuperview];
-		}
-		
-		[wordCardViewController release];
-	}
-	
+  [wordCardViewController release];
 	[super dealloc];
 }
 

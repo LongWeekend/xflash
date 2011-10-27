@@ -29,44 +29,38 @@ typedef enum searchStates
   kSearchHasResults,            //! Any search returned results 
   kSearchHasNoResults,          //! Regular search returned nothing
   kSearchDeepHasNoResults,      //! Deep search returned nothing
-} _searchStates;
+} LWEFlashSearchStates;
 
 /**
  * Handles dictionary-like search functions inside JFlash
  */
 @interface SearchViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate>
 {
-  NSMutableArray *_cardSearchArray;               //! Contains the returned search results (array of Card objects)
-  NSMutableArray *_sentenceSearchArray;           //! Contains the returned search results (array of ExampleSentence objects)
-  UISegmentedControl *_wordsOrSentencesSegment;             //! Holds the instance of the UISegmentedControl allowing us to choose our data target
-  UIActivityIndicatorView *_activityIndicator;    //! Holds the instance to the spinner
-  UISearchBar *_searchBar;                        //! Holds the instance to the UISearchBar
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
+  LWEFlashSearchStates _searchState;              //! Holds the "state" of the search
   BOOL _showSearchTargetControl;                  //! If NO, the "pill" control will not be shown
-  NSInteger _searchState;                         //! Holds the "state" of the search
-  NSMutableArray *_currentResultArray;            //! Holds the current results (switched when the user switches the pill control)
-  UITableView *tableView;
+  NSArray *_currentResultArray;                   //! Holds the current results (switched when the user switches the pill control)
 }
 
+- (IBAction) changeSearchTarget:(id)sender;
 - (void) runSearchAndSetSearchBarForString:(NSString*)text;
 - (void) runSearchForString:(NSString*)text;
-- (void) changeSearchTarget:(id)sender;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
-- (void) _addSearchControlToHeader;
-
-// Helper functions for UITableView delegate methods
-- (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forCard:(Card*) card;
-- (UITableViewCell*) setupTableCell:(UITableViewCell*)cell forSentence:(ExampleSentence*)sentence;
 
 //! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
 @property (nonatomic, retain) NSMutableArray *membershipCacheArray;
 
-@property (nonatomic, retain) NSMutableArray *_cardSearchArray;
-@property (nonatomic, retain) NSMutableArray *_sentenceSearchArray;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;
-@property (nonatomic, retain) UIActivityIndicatorView *_activityIndicator;
-@property (nonatomic, retain) UISearchBar *_searchBar;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+//! Contains the returned search results (array of Card objects)
+@property (nonatomic, retain) NSArray *_cardSearchArray;
+
+//! Contains the returned search results (array of ExampleSentence objects)
+@property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
+
+// UIView-related properties
+@property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *_activityIndicator;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

@@ -19,13 +19,14 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
+@synthesize tagId, tagName, tagEditable, tagDescription;
+@synthesize cardCount, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
 
 - (id) init
 {
   if ((self = [super init]))
   {
-    cardCount = -1;
+    cardCount = -1; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
   }
@@ -37,48 +38,37 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
  */
 - (NSInteger) groupId
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tagId];
-	FMResultSet *rs = [[db dao] executeQuery:sql];
-  NSInteger groupId = 0;
-	while ([rs next]) 
-  {
-    groupId = [rs intForColumn:@"group_id"];
-	}
-	[rs close];
-	[sql release];
-  return groupId;
+  // TODO: all of this makes the assumption that tags are 1-1 with groups.  that was not the 
+  // original design, but are we moving that direction?  MMA - Oct 19 2011
+  return [GroupPeer parentGroupIdOfTag:self];
 }
 
-#pragma mark -
-#pragma mark Level algorithm
+#pragma mark - Level algorithm
 
 /**
  * Calculates next card level based on current performance & Tag progress
  */
 - (NSInteger)calculateNextCardLevelWithError:(NSError **)error
 {
-  //-----Internal array consistency-----
   LWE_ASSERT_EXC(([self.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
-  //------------------------------------
   
   // control variables
   // controls how many words to show from new before preferring seen words
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
   BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
   // Total number of cards in this set and its level
-  NSUInteger numLevels = 5, levelOneTotal = 0;
-  NSUInteger levelUnseenTotal = [[[self cardLevelCounts] objectAtIndex:0] intValue];
-  NSUInteger totalCardsInSet = [self cardCount];
+  NSInteger numLevels = 5, levelOneTotal = 0;
+  NSInteger levelUnseenTotal = [[self.cardLevelCounts objectAtIndex:0] intValue];
+  NSInteger totalCardsInSet = self.cardCount;
   
   //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
   //and also tell that the totalCardsInSet is no longer the whole sets but the ones NOT in the buried section.
   if (hideBuriedCard)
   {
     numLevels = 4;
-    NSUInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
+    NSInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
     totalCardsInSet = totalCardsInSet - totalCardsInBurried;
     if ((totalCardsInSet < 1) && (totalCardsInBurried > 0))
     {
@@ -103,15 +93,17 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   //special cases where this method can return without any math calculation.
   //the first one if highly unlikely there is less then 1 card in a set.
   //second one is if the entire set has not been "started". - return with 0.
-  if (totalCardsInSet < 1) return 0;
-  if (levelUnseenTotal == totalCardsInSet) return 0;
+  if ((totalCardsInSet < 1) || (levelUnseenTotal == totalCardsInSet))
+  {
+    return 0;
+  }
   
   // Get m cards in n bins, figure out total percentages
   // Calculate different of weights and percentages and adjust accordingly
-  int i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
+  NSInteger i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
   
   // the guts to get the total of card seen so far
-  int tmpTotalArray[6];
+  NSInteger tmpTotalArray[6];
   for (i = 1; i <= numLevels; i++)
   {
     // Get denominator values from cache/database
@@ -158,8 +150,8 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (float)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  int wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
-  int weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  NSInteger wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
+  NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
   
   // Quick check to make sure we are not at the "end of a set". 
   if (cardsSeenTotal == totalCardsInSet)
@@ -200,13 +192,11 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 //! Create a cache of the number of Card objects in each level
 - (void) cacheCardLevelCounts
 {
-  //-----Internal array consistency-----
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be six card level arrays");
-  //------------------------------------
 
-  NSNumber *count;
+  NSNumber *count = nil;
   NSInteger totalCount = 0;
-  NSMutableArray* cardLevelCountsTmp = [[NSMutableArray alloc] init];
+  NSMutableArray *cardLevelCountsTmp = [[NSMutableArray alloc] init];
   for (NSInteger i = 0; i < 6; i++)
   {
     count = [[NSNumber alloc] initWithInt:[[self.cardIds objectAtIndex:i] count]];
@@ -214,17 +204,18 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     totalCount = totalCount + [count intValue];
     [count release];
   }
-  [self setCardLevelCounts:cardLevelCountsTmp];
+  self.cardLevelCounts = cardLevelCountsTmp;
   [cardLevelCountsTmp release];
-  [self setCardCount:totalCount];
+  self.cardCount = totalCount;
 }
 
 
 /** Unarchive plist file containing the user's last session data */
-- (NSMutableArray*) thawCardIds
+- (NSArray*) thawCardIds
 {
-  NSString *path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
-  NSMutableArray* tmpCardIds = [[[NSMutableArray alloc] initWithContentsOfFile:path] autorelease];
+  // TODO: Move these to cache (can be regenerated)
+  NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
+  NSArray *tmpCardIds = [NSArray arrayWithContentsOfFile:path];
   LWE_LOG(@"Tried unarchiving plist file at path: %@",path);
   return tmpCardIds;
 }
@@ -233,7 +224,8 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 /** Archive current session data to a plist so we can re-start at same place in next session */
 - (void) freezeCardIds
 {
-  NSString* path = [LWEFile createDocumentPathWithFilename:@"ids.plist"];
+  // TODO: Move these to cache (can be regenerated)
+  NSString* path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
   LWE_LOG(@"Beginning plist freezing: %@",path);
   [self.cardIds writeToFile:path atomically:YES];
   LWE_LOG(@"Finished plist freeze");
@@ -243,29 +235,23 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 /** Executed when loading a new set on app load */
 - (void) populateCardIds
 {
-  LWE_LOG(@"Began populating card ids and setting counts");
-  NSMutableArray* tmpArray = [self thawCardIds];
-  if (tmpArray == nil)
+  NSArray *tmpCardIdsArray = [self thawCardIds];
+  if (tmpCardIdsArray)
   {
-    LWE_LOG(@"No plist, load from database");
-    tmpArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
+    // Delete the PLIST now that we have it in memory
+    [LWEFile deleteFile:[LWEFile createCachesPathWithFilename:@"ids.plist"]];
   }
   else
   {
-    LWE_LOG(@"Found plist, deleting plist");
-    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
+    // No PLIST, generate new card Ids array
+    tmpCardIdsArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
   }
   
-  // Now set it
-  [self setCardIds:tmpArray];
-  
-  // Also set the combined card ids
-  [self setCombinedCardIdsForBrowseMode:[self combineCardIds]];
+  self.cardIds = [[tmpCardIdsArray mutableCopy] autorelease];
+  self.combinedCardIdsForBrowseMode = [self combineCardIds];
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
-  
-  LWE_LOG(@"End populating card ids and setting counts");
 }
 
 
@@ -275,16 +261,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
  */
 - (Card*) getRandomCard:(NSInteger)currentCardId error:(NSError **)error
 {
-  //-----Internal array consistency-----
-#if defined(LWE_RELEASE_APP_STORE)
-  if ([self.cardIds count] != 6)
-  {
-    [FlurryAPI logError:@"getRandomCard" message:[NSString stringWithFormat:@"cardIds has %d indicies, not 6",[self.cardIds count]] error:nil];
-  }
-#else
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Card IDs must have 6 array levels");
-#endif
-  //------------------------------------  
   
   // determine the next level
   NSError *theError = nil;
@@ -304,10 +281,8 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     randomOffset = arc4random() % numCardsAtLevel;
   }
 
-  NSNumber* cardId;
-  
-  NSMutableArray* cardIdArray = [self.cardIds objectAtIndex:next_level];
-  cardId = [cardIdArray objectAtIndex:randomOffset];
+  NSMutableArray *cardIdArray = [self.cardIds objectAtIndex:next_level];
+  NSNumber *cardId = [cardIdArray objectAtIndex:randomOffset];
   
   // this is a simple queue of the last five cards
   [self.lastFiveCards addObject:[NSNumber numberWithInt:currentCardId]];
@@ -318,9 +293,9 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   }
 
   // prevent getting the same card twice.
-  int i = 0; // counts how many times we whiled against the array
-  int j = 0; // second iterator to count tries that return the same card as before
-  while([self.lastFiveCards containsObject:cardId])
+  NSInteger i = 0; // counts how many times we whiled against the array
+  NSInteger j = 0; // second iterator to count tries that return the same card as before
+  while ([self.lastFiveCards containsObject:cardId])
   {
     LWE_LOG(@"Got the same card as last time");
     // If there is only one card left (this card) in the level, let's get a different level
@@ -329,8 +304,8 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     {
       LWE_LOG(@"Only one card left in this level, getting a new level");
       // Try up five times to get a different level
-      int lastNextLevel = next_level;
-      for (int j = 0; j < 5; j++)
+      NSInteger lastNextLevel = next_level;
+      for (NSInteger j = 0; j < 5; j++)
       {
         next_level = [self calculateNextCardLevelWithError:nil];
         if (next_level != lastNextLevel) break;
@@ -338,7 +313,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     }
     // now get a different card randomly
     cardIdArray = [self.cardIds objectAtIndex:next_level];
-    int numCardsAtLevel2 = [[self.cardIds objectAtIndex:next_level] count];
+    NSInteger numCardsAtLevel2 = [[self.cardIds objectAtIndex:next_level] count];
     LWE_ASSERT_EXC((numCardsAtLevel2 > 0),@"We've been asked for cards at level %d but there aren't any.",next_level);
     if (numCardsAtLevel2 > 0)
     {
@@ -365,16 +340,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
  */
 - (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
 {
-  //-----Internal array consistency-----
-#if defined(LWE_RELEASE_APP_STORE)
-  if ([self.cardIds count] != 6)
-  {
-    [FlurryAPI logError:@"updateLevelCounts" message:@"currentCardId is nil" error:nil];
-  }
-#else
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
-#endif
-  //------------------------------------  
   
   // update the cardIds if necessary
   if (nextLevel != card.levelId)
@@ -396,7 +362,6 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
       NSInteger countAfterRemove = [thisLevelCards count];
 
       // Only do the add if remove was successful
-      //LWE_ASSERT(countBeforeRemove == (countAfterRemove + 1));
       if (countBeforeRemove == (countAfterRemove + 1))
       {
         [nextLevelCards addObject:cardId];
@@ -405,10 +370,6 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
       // Consistency checks
       LWE_ASSERT_EXC(((countAfterRemove+1) == countBeforeRemove),@"The number after remove (%d) should be 1 less than count before remove (%d)",countAfterRemove,countBeforeRemove);
       LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
-      LWE_LOG(@"Items in index to be removed: %d",countBeforeRemove);
-      LWE_LOG(@"Items in index to be added: %d", countBeforeAdd);
-      LWE_LOG(@"Items in removed: %d",countAfterRemove);
-      LWE_LOG(@"Items in added: %d",countAfterAdd);
     }
     else
     {
@@ -418,35 +379,34 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   }
 }
 
+#pragma mark - Custom Getter & Setter - Card Count
 
-/**
- * Return how many Card objects are in this Tag
- */
 - (NSInteger) cardCount
-{ 
+{
   return cardCount;
 }
 
-
 //! Setter for cardCount; updates the database cache automatically
-- (void) setCardCount:(NSInteger)count
+- (void) setCardCount:(NSInteger)newCount
 {
-  // do nothing if its the same
-  if (cardCount == count) return;
+  NSInteger currentCount = cardCount;
+  if (currentCount == newCount)
+  {
+    // do nothing if its the same
+   return;
+  }
   
   // update the count in the database if not first load (e.g. cardCount = -1)
-  if (cardCount >= 0)
+  if (currentCount >= 0)
   {
-    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-    NSString *sql = [[NSString alloc] initWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",count,[self tagId]];
-    [db.dao executeUpdate:sql];
-    [sql release];
+    [TagPeer setCardCount:newCount forTag:self];
   }
 
-  // set the variable to the new count
-  cardCount = count; 
+  // set the variable to the new count - do this directly to bypass this setter!
+  cardCount = newCount; 
 }
 
+#pragma mark -
 
 /**
  * Removes card from tag's memory arrays so they are out of the set
@@ -454,12 +414,11 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (void) removeCardFromActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel removeObject:tmpNum];
-  [[self combinedCardIdsForBrowseMode] removeObject:tmpNum];
+  [self.combinedCardIdsForBrowseMode removeObject:tmpNum];
   [self cacheCardLevelCounts];
 }
-
 
 /**
  * Add card to tag's memory arrays
@@ -467,9 +426,9 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 - (void) addCardToActiveSet:(Card *)card
 {
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray* cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel addObject:tmpNum];
-  [[self combinedCardIdsForBrowseMode] addObject:tmpNum];
+  [self.combinedCardIdsForBrowseMode addObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 
@@ -480,14 +439,14 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 {
   // TODO: why does Tag care what mode we are in?  Seems fishy to me.
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  Card *card;
+  Card *card = nil;
   if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
   {
     // TODO: in some cases the currentIndex can be beyond the range.  
     // We should figure out why, but for the time being I'll reset it to 0 instead of breaking
-    if ([self currentIndex] >= [[self combinedCardIdsForBrowseMode] count])
+    if (self.currentIndex >= [[self combinedCardIdsForBrowseMode] count])
     {
-      [self setCurrentIndex:0];
+      self.currentIndex = 0;
     }
     
     NSArray *combinedCards = [self combinedCardIdsForBrowseMode];
@@ -586,21 +545,21 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 //! takes a sqlite result set and populates the properties of Tag
 - (void) hydrate: (FMResultSet*) rs
 {
-	[self setTagId:           [rs intForColumn:@"tag_id"]];
-  [self setTagDescription:  [rs stringForColumn:@"description"]];
-  [self setTagName:         [rs stringForColumn:@"tag_name"]];
-  [self setTagEditable:     [rs intForColumn:@"editable"]];
-  [self setCardCount:       [rs intForColumn:@"count"]];
+  self.tagId = [rs intForColumn:@"tag_id"];
+  self.tagDescription = [rs stringForColumn:@"description"];
+  self.tagName = [rs stringForColumn:@"tag_name"];
+  self.tagEditable = [rs intForColumn:@"editable"];
+  self.cardCount = [rs intForColumn:@"count"];
 }
 
 - (void) dealloc
 {
-  [self setTagName:nil];
-  [self setTagDescription:nil];
-  [self setCombinedCardIdsForBrowseMode:nil];
-  [self setCardLevelCounts:nil];
-  [self setCardIds:nil];
-  [self setLastFiveCards:nil];
+  [tagName release];
+  [tagDescription release];
+  [combinedCardIdsForBrowseMode release];
+  [cardLevelCounts release];
+  [cardIds release];
+  [lastFiveCards release];
 	[super dealloc];
 }
 
@@ -614,15 +573,14 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   return NO;
 }
 
-#pragma mark -
-#pragma mark Description
+#pragma mark - Description
 
 - (NSString *)description
 {
   return [NSString stringWithFormat:@"<%@: 0x%0X>\n\
-          Tag Editable: %d\n\
-          Tag Name: %@\n\
-          Tag Description: %@\n\
+          Editable: %d\n\
+          Name: %@\n\
+          Description: %@\n\
           Tag Id: %d\n\
           Current Index: %d\n\
           CardIds: %@",

@@ -14,29 +14,53 @@
 - (void) _createDefaultSettings;
 @end
 
+NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
 
 /**
  * Maintains the current state of the application (active set, etc).  Is a singleton.
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr, isUpdatable;
+@synthesize isFirstLoad, pluginMgr, isUpdatable, favoritesTag;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 /**
  * Sets the current active study set/tag - also loads cardIds for the tag
  */
-- (void) setActiveTag: (Tag*) tag
+- (void) setActiveTag:(Tag*)tag
 {
-  [tag retain];
-  [_activeTag release];
-  _activeTag = tag;
+  BOOL firstRun = (_activeTag == nil);
+  [tag populateCardIds];
+  LWE_ASSERT_EXC((tag.cardCount > 0),@"Whoa, somehow we set a tag that has zero cards!");
+
+  // This code is so we can figure out what our users are studying (only system sets)
+  if (tag.tagEditable == 0 && firstRun == NO)
+  {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:tag.tagId] forKey:@"id"];
+    [LWEAnalytics logEvent:LWEActiveTagDidChange parameters:userInfo];
+  }
+
+  @synchronized (self)
+  {
+    [_activeTag release];
+    _activeTag = [tag retain];
+  }
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:tag.tagId forKey:@"tag_id"];
   
-  [_activeTag populateCardIds];
+  // Set the favorites tag, if not already done
+  if (self.favoritesTag == nil)
+  {
+    self.favoritesTag = [TagPeer retrieveTagById:FAVORITES_TAG_ID];
+  }
+  
+  // Tell everyone to reload their data (only if we're not just starting up)
+  if (firstRun == NO)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEActiveTagDidChange object:_activeTag];
+  }
 }
 
 
@@ -55,9 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [_activeTag setCurrentIndex:currentIndex];
   }
   
-  id tag;
-  tag = [[_activeTag retain] autorelease];
-  return tag;
+  return [[_activeTag retain] autorelease];
 }
 
 
@@ -69,8 +91,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [self setActiveTag:[self activeTag]];
 }
 
-#pragma mark -
-#pragma mark Initialization
+
+#pragma mark - Initialization
 
 
 /**
@@ -95,16 +117,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];
-    [self setIsFirstLoad:YES];
+    self.isFirstLoad = YES;
   }
   else
   {
-    [self setIsFirstLoad:NO];
+    self.isFirstLoad = NO;
   }
   
   // STEP 5
   // We initialize the plugins manager
-  [self setPluginMgr:[[[PluginManager alloc] init] autorelease]];  
+  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
 }
 
 
@@ -115,32 +137,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setBool:YES forKey:@"db_did_finish_copying"];
 }
 
-#pragma mark -
-#pragma mark Default - First time run.
+#pragma mark - Default - First time run.
 
 /** Create & store default settings to NSUserDefaults */
 - (void) _createDefaultSettings
 {
   LWE_LOG(@"Creating the default settings");
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSArray *keys = [[NSArray alloc] initWithObjects:APP_THEME,APP_HEADWORD,APP_READING,APP_MODE,APP_PLUGIN,nil];
-  NSArray *objects = [[NSArray alloc] initWithObjects:DEFAULT_THEME,SET_J_TO_E,SET_READING_BOTH,SET_MODE_QUIZ,[PluginManager preinstalledPlugins],nil];
-  for (int i = 0; i < [keys count]; i++)
-  {
-    [settings setValue:[objects objectAtIndex:i] forKey:[keys objectAtIndex:i]];
-  }  
-  [keys release];
-  [objects release];
   
+#if defined(LWE_JFLASH)
+  [settings setValue:SET_READING_BOTH forKey:APP_READING];
+#elif defined(LWE_CFLASH)
+  [settings setValue:SET_HEADWORD_TYPE_SIMP forKey:APP_HEADWORD_TYPE];
+  [settings setValue:SET_PINYIN_COLOR_ON forKey:APP_PINYIN_COLOR];
+#endif
+    
+  [settings setValue:DEFAULT_THEME forKey:APP_THEME];
+  [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
+  [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
+  [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
+  [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
   [settings setInteger:DEFAULT_USER_ID forKey:APP_USER];
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
-  [settings setInteger:DEFAULT_MAX_STRUDYING forKey:APP_MAX_STUDYING];
+  [settings setInteger:DEFAULT_MAX_STUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
-  [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
-  [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
-
   [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
   [settings setBool:NO forKey:@"db_did_finish_copying"];
   [settings setBool:YES forKey:@"settings_already_created"];

@@ -37,10 +37,13 @@ class HSKEntry < Entry
     end
 
     # This stops us from getting headers and other non-data rows
-    if segments.count == 5 and segments[0].numeric?
+    # In the HSK data provided for the level 2 and above, it has the comma in the end of
+    # a line and that causes the "\r\n" is in the 6th element of a segment
+    if segments.count >= 5 and segments[0].numeric?
       @grade = segments[1]
       @headword_simp = segments[2]
-      @pinyin = segments[3]
+      reading = segments[3]
+      @pinyin = get_pinyin_unicode_for_reading(reading)
       @meanings = segments[4].strip.split("; ")
       return true
     else

@@ -15,12 +15,12 @@
 
 - (id) init
 {
-  [self setOwnerId:0];
-  [self setTagCount:-1];
-  [self setChildGroupCount:-1];
-  [self setGroupId:0];
-  [self setGroupName:nil];
-  [self setRecommended:0];
+  self = [super init];
+  if (self)
+  {
+    self.tagCount = -1;
+    self.childGroupCount = -1;
+  }
   return self;
 }
 
@@ -35,38 +35,35 @@
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)
-- (NSMutableArray*) getTags
+- (NSArray*) childTags
 {
-  NSMutableArray* tags = nil;
-  if (groupId >= 0)
+  if (self.groupId >= 0)
   {
-    tags = [TagPeer retrieveTagListByGroupId:groupId];
-  }
-  return tags;
-}
-
-//! Gets a number of children group objects
-- (NSInteger) getChildGroupCount
-{
-  int returnVal = 0;
-  if (childGroupCount >= 0)
-  {
-    returnVal = childGroupCount;
+    return [TagPeer retrieveTagListByGroupId:groupId];
   }
   else
   {
-    NSMutableArray* groups = [GroupPeer retrieveGroupsByOwner:self.groupId];
-    [self setChildGroupCount:[groups count]];
-    returnVal = [groups count];
+    return nil;
   }
-  return returnVal;
 }
 
-//! Get number of children tags
-- (NSInteger) getChildTagCount
+- (void) setChildGroupCount:(NSInteger)newChildGroupCount
 {
-  return [self tagCount];
+  childGroupCount = newChildGroupCount;
 }
+
+//! Gets a number of children group objects
+- (NSInteger) childGroupCount
+{
+  if (childGroupCount < 0)
+  {
+    NSArray *groups = [GroupPeer retrieveGroupsByOwner:self.groupId];
+    childGroupCount = [groups count];
+  }
+  return childGroupCount;
+}
+
+#pragma mark -
 
 - (void) dealloc
 {

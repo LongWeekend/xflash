@@ -27,19 +27,15 @@
   //NSArray* transitionHHAnimationArray;
   ThemeManager *tm = [ThemeManager sharedThemeManager];
   
-  // TODO : setting the labels doesn't fit in the text sbubble.
-  [percentCorrectLabel setText:[NSString stringWithFormat:@"%.0f%%",tmpRatio]];
+  self.percentCorrectLabel.text = [NSString stringWithFormat:@"%.0f%%",tmpRatio];
   
   // default when no animtions
   tmpStr = [tm elementWithCurrentTheme:[hotHeadsArray objectAtIndex:0]];
-  // default when no animtions
   
-  if(a == 0){
-    tmpStr = [tm elementWithCurrentTheme:[hotHeadsArray objectAtIndex:0]];
-  }
   while(a >= 0)
   {
-    if(tmpRatio <= a && tmpRatio > a - 10) {
+    if (tmpRatio <= a && tmpRatio > a - 10)
+    {
       tmpStr = [tm elementWithCurrentTheme:[hotHeadsArray objectAtIndex:loopCount]];
       break;
     }
@@ -49,16 +45,6 @@
   
   [moodIconBtn setBackgroundImage:[UIImage imageNamed:tmpStr] forState:UIControlStateNormal];
   [hotHeadsArray release];
-}
-
-- (void) reenableHH
-{
-  [moodIconBtn setHidden:NO];
-}
-
-- (void) disableHH
-{
-  [moodIconBtn setHidden:YES];
 }
 
 //! Returns an image view with a happy HH based on the current theme

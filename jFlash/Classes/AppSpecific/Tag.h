@@ -17,17 +17,6 @@ extern NSString * const kTagErrorDomain;
 extern NSUInteger const kAllBuriedAndHiddenError;
 
 @interface Tag : NSObject
-{
-	NSInteger tagId;
-  NSInteger tagEditable;                            //! Is the tag deletable by the user?
-  NSInteger cardCount;                              //! Current count of Card objects in the Tag
-	NSInteger currentIndex;
-	NSString *tagName;
-	NSString *tagDescription;
-  NSMutableArray *cardIds;
-  NSMutableArray *combinedCardIdsForBrowseMode;
-  NSMutableArray *cardLevelCounts;
-}
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) populateCardIds;
@@ -47,6 +36,7 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 - (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
 
+//! Is the tag deletable by the user?
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
@@ -56,5 +46,8 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 @property (nonatomic, retain) NSMutableArray *lastFiveCards;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
+
+//! Current count of Card objects in the Tag
+@property NSInteger cardCount;
 
 @end

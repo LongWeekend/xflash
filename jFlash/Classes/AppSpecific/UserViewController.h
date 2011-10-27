@@ -14,7 +14,7 @@
  * Shows a table of jFlash users, allows editing/deletion of users,
  * creation of new users
  */
-@interface UserViewController : UITableViewController <UITableViewDelegate> {}
+@interface UserViewController : UITableViewController <UITableViewDelegate>
 
 - (void) showUserDetailsView;
 - (void) activateUserWithModal:(User*) user;
@@ -26,6 +26,6 @@
 @property (nonatomic, retain) NSMutableArray *usersArray;
 
 //! Holds the User object of the currently selected user
-@property (nonatomic, retain) User* selectedUserInArray;
+@property (nonatomic, retain) User *selectedUserInArray;
 
 @end

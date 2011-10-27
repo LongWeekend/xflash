@@ -12,6 +12,8 @@
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
 
+#import "SettingsViewController.h"
+
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
 
@@ -31,7 +33,8 @@ enum Sections {
  */
 - (id) init
 {
-  if ((self = [super initWithStyle:UITableViewStyleGrouped]))
+  self = [super initWithStyle:UITableViewStyleGrouped];
+  if (self)
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
@@ -61,28 +64,24 @@ enum Sections {
   tmpSearchBar.delegate = self;
   tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
   tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  [self setSearchBar:tmpSearchBar];
+  self.searchBar = tmpSearchBar;
+  self.tableView.tableHeaderView = tmpSearchBar;
   [tmpSearchBar release];
-  [self.tableView setTableHeaderView:self.searchBar];
   
   // Add add button to nav bar
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  // Set this to the master set (main) if no set
-  if (self.groupId <= 0) self.groupId = 0;
-
   // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"settingsWereChanged" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"cardAddedToTag" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubgroupData) name:@"tagDeletedFromGroup" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStudySetFromWordList:) name:@"setWasChangedFromWordsList" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   
   // Get this group & subgroup data, and finally tags
-  [self setGroup:[GroupPeer retrieveGroupById:self.groupId]];
+  self.group = [GroupPeer retrieveGroupById:self.groupId];
   [self reloadSubgroupData];
-  [self setTagArray:[group getTags]];
+  
+  self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
   
   // Activity indicator
   UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -93,7 +92,7 @@ enum Sections {
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self setTitle:group.groupName];
+  self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
@@ -113,25 +112,19 @@ enum Sections {
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:group.groupId];
   for (int i = 0; i < [self.subgroupArray count]; i++)
   {
-    [[self.subgroupArray objectAtIndex:i] getChildGroupCount];
+    [[self.subgroupArray objectAtIndex:i] childGroupCount];
   }
 }
 
 - (void) reloadTableData
 {
-  if (self.tableView == nil)
-  {
-    // MMA - 13.10.2010 - does this ever happen??!  really?
-    // This was just defensive programming probably because reloadTableData was getting called when the tableview was nil because we forgot to de-observe something...?
-    return;
-  }
 	if (searching)
   {
-    self.tagArray = [TagPeer retrieveTagListLike:self.searchBar.text];
+    self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
   }
   else
   {
-    self.tagArray = [self.group getTags];
+    self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
     
     // Do something special for starred words - re-sort so starred shows up on top.
     if (self.group.groupId == 0)
@@ -160,13 +153,7 @@ enum Sections {
  */
 - (void) hideSearchBar
 {
-  [self.tableView setContentOffset:CGPointMake(0, self.searchBar.frame.size.height)];
-}
-
-/** Convenience method to change set using notification from another place */
-- (void) changeStudySetFromWordList:(NSNotification*)dict
-{
-  [self changeStudySet:[[dict userInfo] objectForKey:@"tag"]];
+  self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
 /**
@@ -178,12 +165,6 @@ enum Sections {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
   
-  // Post notification to switch active tab
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"switchToStudyView" object:self];
-
-  // Tell StudyViewController to reload its data
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"setWasChanged" object:self];
-  
   // Stop the animator
   selectedTagId = -1;
   [self.activityIndicator stopAnimating];
@@ -194,13 +175,13 @@ enum Sections {
 - (void) addStudySet
 {
   // TODO: iPad customization?
-  AddStudySetInputViewController* addStudySetInputViewController = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
-  addStudySetInputViewController.ownerId = self.groupId;
-  addStudySetInputViewController.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
-  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:addStudySetInputViewController];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
+  tmpVC.ownerId = self.groupId;
+  tmpVC.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
+  UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
-	[addStudySetInputViewController release];
+	[tmpVC release];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
@@ -208,37 +189,12 @@ enum Sections {
   [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UITableView methods
-
-/** Goes into editing mode **/
-- (void)setEditing:(BOOL) editing animated:(BOOL)animated
-{
-	[super setEditing:editing animated:animated];
-	[self.tableView setEditing:editing animated:YES];
-}
-
-
-/**
- * Allows user to delete the selected tag
- * Note that this does not accept responsibility for IF the tag SHOULD be deleted
- */ 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (editingStyle == UITableViewCellEditingStyleDelete)
-  {
-    // Delete the row from the data source
-    Tag *tmpTag = [tagArray objectAtIndex:indexPath.row];
-    [TagPeer deleteTag:tmpTag.tagId];
-    [tagArray removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"tagDeletedFromGroup" object:self];
-  }
-}
+#pragma mark - UITableViewDataSource Methods
 
 /**
  * If we are searching, there is only one section (returns 1)
  * If we are not searching, there are groups & tags (returns 2)
+ * In either case, if we are at the "top of the stack", show 3 (including backup/restore)
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)lclTableView
 {
@@ -246,25 +202,17 @@ enum Sections {
   {
 		return 1;
   }
-  else
+
+  // Usually, there are 2: groups + tags
+  NSInteger numRows = 2;
+  if (self.groupId == 0)
   {
-    if (self.groupId == 0)
-    {
-      return 3; // only show the 3rd section if we are at the top of the stack
-    }
-    return 2;
+    numRows++;
   }
+  return numRows;
 }
 
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
-{
-  if (section == kBackupSection)
-  {
-    return @"Backup Custom Sets";
-  }
-  return NULL;
-}
 
 
 /**
@@ -314,7 +262,7 @@ enum Sections {
   UITableViewCell *cell = nil;
   // Get theme manager so we can get elements from it
   ThemeManager *tm = [ThemeManager sharedThemeManager];
-
+  
   // Study Set Cells (ie. a tag)
   if (indexPath.section == kSetsSection || searching)
   {
@@ -333,12 +281,12 @@ enum Sections {
     else
     {
       cell = [LWEUITableUtils reuseCellForIdentifier:@"normal" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-
-      Tag* tmpTag = [self.tagArray objectAtIndex:indexPath.row];
-
+      
+      Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+      
       // Set up the image
       // TODO: iPad customization?
-      UIImageView* tmpView = cell.imageView;
+      UIImageView *tmpView = cell.imageView;
       if (tmpTag.tagId == FAVORITES_TAG_ID)
       {
         tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
@@ -379,13 +327,13 @@ enum Sections {
     }
     else if (indexPath.row == 1)
     {
-      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.backupUserSets");
+      cell.textLabel.text = NSLocalizedString(@"Restore Now", @"StudyViewController.restoreUserSets");
     }
     else
     {
       if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
       {
-        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupUserSets");
+        cell.textLabel.text = NSLocalizedString(@"Logout", @"StudyViewController.backupLogot");
       }
     }
   }
@@ -403,19 +351,19 @@ enum Sections {
     [bgView release];
     
     // This is for groups?
-    Group* tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
+    Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    NSString* tmpDetailText = [NSString stringWithFormat:@""];
-    if ([tmpGroup getChildGroupCount] > 0)
+    NSString *tmpDetailText = [NSString stringWithFormat:@""];
+    if ([tmpGroup childGroupCount] > 0)
     {
       //Prefix the line below with code if we have groups
-      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup getChildGroupCount]]; 
+      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup childGroupCount]]; 
     }
     tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
-
+    
     // Set up the image
-    UIImageView* tmpView = (UIImageView*)cell.imageView;
+    UIImageView *tmpView = (UIImageView*)cell.imageView;
     // TODO: iPad customization?
     if(tmpGroup.recommended)
     {
@@ -433,16 +381,46 @@ enum Sections {
   return cell;
 }
 
+#pragma mark - UITableViewDelegate Methods
+
+/**
+ * Allows user to delete the selected tag
+ * Note that this does not accept responsibility for IF the tag SHOULD be deleted
+ */ 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (editingStyle == UITableViewCellEditingStyleDelete)
+  {
+    // Delete the row from the data source
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+    [TagPeer deleteTag:tmpTag];
+    [self.tagArray removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    [self reloadSubgroupData];
+  }
+}
+
+-(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
+{
+  if (section == kBackupSection)
+  {
+    return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
+  }
+  else
+  {
+    return nil;
+  }
+}
 
 /** UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group) */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == kSetsSection || searching)
   {
-    if([tagArray count] > 0)
+    if ([self.tagArray count] > 0)
     {
-      int numCards = [[self.tagArray objectAtIndex:indexPath.row] cardCount];
-      if(numCards > 0)
+      NSInteger numCards = [[self.tagArray objectAtIndex:indexPath.row] cardCount];
+      if (numCards > 0)
       {
         self.selectedTagId = indexPath.row;
         NSString *tagName = [[self.tagArray objectAtIndex:indexPath.row] tagName];
@@ -496,7 +474,7 @@ enum Sections {
 
     // If they selected a group
     StudySetViewController *subgroupController = [[StudySetViewController alloc] init];
-    subgroupController.groupId = [[[self subgroupArray] objectAtIndex:indexPath.row] groupId];
+    subgroupController.groupId = [[self.subgroupArray objectAtIndex:indexPath.row] groupId];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [subgroupController release];
   }
@@ -540,8 +518,7 @@ enum Sections {
   return NO;
 }
 
-#pragma mark -
-#pragma mark Alert View Delegate
+#pragma mark - UIAlertViewDelegate Methods
 
 /** Alert view delegate - initiates the "study set change" if they pressed OK */
 - (void) alertView: (UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -549,21 +526,21 @@ enum Sections {
   // This is the OK button
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
+    [self.activityIndicator startAnimating];
     if (alertView.tag == kBackupConfirmationAlertTag)
     {
-      [[self activityIndicator] startAnimating];
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:.3]; // need to give this method a chance to finish or the modal doesn't work
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
-      [[self activityIndicator] startAnimating];
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:.3];
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
     }
     else 
     {
-      [[self tableView] reloadData];
-      [[self activityIndicator] startAnimating];
-      [self performSelector:@selector(changeStudySet:) withObject:[[self tagArray] objectAtIndex:self.selectedTagId] afterDelay:0];
+      [self.tableView reloadData];
+      [self performSelector:@selector(changeStudySet:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0];
     }
     return;
   }
@@ -573,8 +550,7 @@ enum Sections {
   }
 }
 
-#pragma mark -
-#pragma mark BackupManager Delegate
+#pragma mark - BackupManager Delegate
 
 - (void)didBackupUserData
 {
@@ -660,11 +636,11 @@ enum Sections {
   searchOverlayBtn.frame = frame;
 	_searchOverlay.backgroundColor = [UIColor grayColor];
 	_searchOverlay.alpha = 0.5;
-	[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
+	[self.tableView insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 	
 	searching = YES;
-  [self setTagArray: [TagPeer retrieveTagListLike:self.searchBar.text]];
-  [[self tableView] setScrollEnabled:NO];
+  self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
+  self.tableView.scrollEnabled = NO;
 	
 	//Add the done button.
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doDoneSearching)] autorelease];
@@ -677,30 +653,28 @@ enum Sections {
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText
 {
 	// Remove all objects first.
-  [tagArray removeAllObjects];
+  [self.tagArray removeAllObjects];
 	
 	if([searchText length] > 0)
   {
     [_searchOverlay removeFromSuperview];
 		searching = YES;
-    [[self tableView] setScrollEnabled:YES];
-    [self reloadTableData];
+    self.tableView.scrollEnabled = YES;
 	}
 	else
   {
-		[[self tableView] insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
+		[self.tableView insertSubview:_searchOverlay aboveSubview:self.parentViewController.view];
 		searching = NO;
-    [[self tableView] setScrollEnabled:NO];
-    [self reloadTableData];
+    self.tableView.scrollEnabled = NO;
 	}
+  [self reloadTableData];
 }
 
-
-// TODO: MMA 6_12_2010 - does this ever get called?
+// Called when the user finally presses "Search" on the keyboard
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
-  [self setTagArray:[TagPeer retrieveTagListLike:self.searchBar.text]];
-  [searchBar resignFirstResponder];
+  self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
+  [self.searchBar resignFirstResponder];
 }
 
 /** 
@@ -710,9 +684,11 @@ enum Sections {
 - (void) doDoneSearching
 {
 	self.searchBar.text = @"";
-	[searchBar resignFirstResponder];
+	[self.searchBar resignFirstResponder];
 	searching = NO;
-  [[self tableView] setScrollEnabled:YES];
+  
+  self.tableView.scrollEnabled = YES;
+
   // Replace the done button w/ the add button again
 	self.navigationItem.rightBarButtonItem = _addButton;
   [self hideSearchBar];
@@ -737,10 +713,9 @@ enum Sections {
   [tagArray release];
   [subgroupArray release];
   [group release];
-//  self.tableView = nil;
-  [self setActivityIndicator:nil];
-  [self setSearchBar:nil];
-  [self setBackupManager:nil];
+  [activityIndicator release];
+  [searchBar release];
+  [backupManager release];
   [super dealloc];
 }
 

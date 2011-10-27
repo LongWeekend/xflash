@@ -5,13 +5,8 @@
 //  Copyright LONG WEEKEND INC 2009. All rights reserved.
 
 #import "jFlashAppDelegate.h"
+
 #import "RootViewController.h"
-#import "CurrentState.h"
-#import "LWEFile.h"
-#import "LWECrashUtils.h"
-#import "LWEDatabase.h"
-#import "ThemeManager.h"
-#import "DatabaseUpdateManager.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
 
@@ -23,10 +18,9 @@
 
 @synthesize window, rootViewController;
 
-#pragma mark -
-#pragma mark URL Handling
+#pragma mark - URL Handling
 
-- (NSString *) getDecodedSearchTerm: (NSURL *) url  
+- (NSString*) getDecodedSearchTerm:(NSURL *)url  
 {
   NSString *searchTerm = [url unicodeAbsoluteString];
   if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
@@ -74,8 +68,7 @@
   return [self application:application openURL:url sourceApplication:nil annotation:nil];
 }
 
-#pragma mark -
-#pragma mark appDidFinishingLaunching
+#pragma mark - appDidFinishingLaunching
 
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
@@ -93,7 +86,7 @@
   [state initializeSettings];
 
   // Load root controller to show splash screen
-  [self setRootViewController:[[[RootViewController alloc] init] autorelease]];
+  self.rootViewController = [[[RootViewController alloc] init] autorelease];
 	[self.window addSubview:self.rootViewController.view];
   [self.window makeKeyAndVisible];
   
@@ -105,8 +98,8 @@
   {
     // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
     // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    NSString *searchTerm;
-    searchTerm = [self getDecodedSearchTerm: aUrl];
+    NSString *searchTerm = nil;
+    searchTerm = [self getDecodedSearchTerm:aUrl];
     [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
     _searchedTerm = [searchTerm retain];
   }
@@ -173,70 +166,49 @@
   [self.rootViewController loadTabBar];
 }
 
-#pragma mark -
-#pragma mark UIApplication Delegate methods
+#pragma mark - UIApplication Delegate methods
 
-// TODO: not in use. Waiting for next release
-//- (void) scheduleLocalNotification 
-//{
-//  // get rid of old notifications
-//  [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//  
-//  // should we set up a new one
-//  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-//  id reminderSetting = [settings objectForKey:APP_REMINDERS];
-//  if (reminderSetting == nil || [reminderSetting intValue] == 0)
-//  {
-//    return;
-//  }
-//  
-//  // create a notification to study again
-//  UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-//  
-//  NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
-//
-//  localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
-//  localNotification.timeZone = [NSTimeZone localTimeZone];
-//  localNotification.alertBody = @"It's time to learn some more words! This is your study reminder.";
-//  localNotification.alertAction = @"Study Now";
-//  localNotification.soundName = UILocalNotificationDefaultSoundName;
-//
-//  // schedule it
-//  [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-//  
-//  // the application retains the notification
-//  [localNotification release];
-//}
+- (void) scheduleLocalNotification 
+{
+  // should we set up a new one
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
+  if (reminderSetting == nil || [reminderSetting intValue] == 0)
+  {
+    return;
+  }
+  
+  // create a notification to study again
+  UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+  NSTimeInterval secondsToNextReminder = 24 * 60 * 60 * [reminderSetting intValue];
+  localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:secondsToNextReminder];
+  localNotification.timeZone = [NSTimeZone localTimeZone];
+  localNotification.alertBody = NSLocalizedString(@"You're Awesome!  It's time to learn some more words!",@"StudyNotification.Body");
+  localNotification.alertAction = NSLocalizedString(@"Study",@"StudyNotification.Action");
+  localNotification.soundName = UILocalNotificationDefaultSoundName;
+
+  // schedule it
+  [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+  
+  // the application retains the notification
+  [localNotification release];
+}
 
 /**
  * Called on iOS4 when the app is put into the background
- * We ask Tag to freeze its current state to a plist so if the app is killed
- * while in the background, we can get it back!
  */
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
   LWE_LOG(@"Application did enter the background now");
-  // Get current card from StudyViewController - this is REALLY BAD for coupling!
-  // TODO: put the current card into current state
-  StudyViewController* studyCtl = [rootViewController.tabBarController.viewControllers objectAtIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX];
-  
-  // Only freeze if we have a database
-  if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
-  {
-    // Save current card, user, and set, update cache
-    CurrentState *state = [CurrentState sharedCurrentState];
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [settings setInteger:studyCtl.currentCard.cardId forKey:@"card_id"];
-    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
-    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
-    [settings synchronize];
-    [[state activeTag] freezeCardIds];
-  }
-  
-  // TODO: not in use for this version
-  //[self scheduleLocalNotification];
+  [self scheduleLocalNotification];
 }
 
+- (void) applicationDidBecomeActive:(UIApplication *)application
+{
+  // get rid of old notifications -- we use "did become active" because it is called both on 
+  // first launch AND on resume from background/SMS/just about anything
+  [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
 
 /**
  * Called on iOS4 when the app comes back to life from background
@@ -245,43 +217,38 @@
  */
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
-  // the plist is only made in case we are terminated.  If not terminated, no need for this - it will mess stuff up in tag -> populateCardIds
-  if ([LWEFile fileExists:[LWEFile createDocumentPathWithFilename:@"ids.plist"]])
-  {
-    LWE_LOG(@"After entering foreground, found plist, deleting plist (we have cards in memory instead)");
-    [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:@"ids.plist"]];
-  }
+  // We make the PLIST when going into the background, as we may be killed/terminated.
+  // However, this call (enter foreground) means we're back w/o termination, so we can
+  // delete our PLIST.
+  [LWEFile deleteFile:[LWEFile createCachesPathWithFilename:@"ids.plist"]];
   
   // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings setInteger:0 forKey:@"card_id"];
 }
 
-
-/**
- * Delegate method from UIApplication - re-delegated to RootViewController
- */ 
+// Just pass it on to the new iOS4 delegate
 - (void) applicationWillTerminate:(UIApplication *)application
 {
-  // Just pass it on to the new iOS4 delegate
-  LWE_LOG(@"Application will terminate");
   [self applicationDidEnterBackground:application];
 }
 
-//! Standard dealloc
+#pragma mark -
+
 - (void)dealloc
 {
-	[self setRootViewController:nil];
-	[self setWindow:nil];
-  [super dealloc];
+  [rootViewController release];
+  [window release];
   
   // Handle all singletons
-  CurrentState* state = [CurrentState sharedCurrentState];
+  CurrentState *state = [CurrentState sharedCurrentState];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   ThemeManager *tm = [ThemeManager sharedThemeManager];
   [db release];
   [state release];
   [tm release];
+  
+  [super dealloc];
 }
 
 @end

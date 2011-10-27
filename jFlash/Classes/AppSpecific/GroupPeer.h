@@ -8,12 +8,13 @@
 
 
 #import "Group.h"
+#import "Tag.h"
 #import "FMResultSet.h"
 
-@interface GroupPeer : NSObject {
-}
+@interface GroupPeer : NSObject 
 
-+ (Group*) retrieveGroupById: (NSInteger)groupId;
-+ (NSMutableArray*) retrieveGroupsByOwner: (NSInteger)ownerId;
++ (Group*) retrieveGroupById:(NSInteger)groupId;
++ (NSInteger) parentGroupIdOfTag:(Tag*)tag;
++ (NSArray*) retrieveGroupsByOwner:(NSInteger)ownerId;
 
 @end

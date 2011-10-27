@@ -27,7 +27,7 @@
   {
     [self setSentence:initSentence];
     [self setTitle:NSLocalizedString(@"Example Sentence",@"DisplaySearchedSentenceViewController.NavBarTitle")];
-    [self setCards:[CardPeer retrieveCardSetForSentenceId:[initSentence sentenceId]]];
+    [self setCards:[CardPeer retrieveCardSetForExampleSentenceId:[initSentence sentenceId]]];
   }
   return self;
 }
@@ -131,7 +131,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     NSString *meaningStr = [card meaningWithoutMarkup];
-    NSString *readingStr = [card combinedReadingForSettings];
+    NSString *readingStr = [card reading];
     
     if (readingStr.length > 0)
     {

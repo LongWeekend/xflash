@@ -11,6 +11,8 @@
 #import "Tag.h"
 #import "PluginManager.h"
 
+extern NSString * const LWEActiveTagDidChange;
+
 @interface CurrentState : NSObject 
 {
   //! Private property that contains the active tag
@@ -37,5 +39,7 @@
 
 //! setter for active tag.  Sets the NSUserDefault for the tag id.
 - (void) setActiveTag: (Tag*) tag;
+
+@property (retain) Tag *favoritesTag;
 
 @end

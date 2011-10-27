@@ -97,7 +97,7 @@ module DatabaseHelpers
      system(cmd)
      prt "\n\n"
   end
-  
+   
   # REINDEX
   def sqlite_reindex_tables(table_name_arr, dbfilepath)
     prt "==== Opening Command Line ====\n" if $options[:verbose]
@@ -188,24 +188,40 @@ end
 #### IMPORTER HELPER MODULE #####
 module ImporterHelpers
   
-  def get_pinyin_unicode_for_reading(readings="")
+  def get_pinyin_unicode_for_reading(readings="", leave_spaces = false)
     ## TODO: Think about the tone-5
     ## http://en.wikipedia.org/wiki/Pinyin#Tones  
     # Only runs if the reading actually has something
     if ((readings) && (readings.strip().length() > 0))
       # Variable to persist the final result.
       result = ""
+      
+      # sometimes some sources use "u:" <u with collon>
+      # but some other uses "v" character as 
+      # it is not used in the pinyin
+      umlaut_regex = /[uU]:|v/
+      readings.gsub!(umlaut_regex) do |s|
+        [252].pack('U*')
+      end
+      
       # Loop through the individual readings.
       readings.split($delimiters[:cflash_readings]).each do | reading |
         
         # Just to get the tone in string (even if it should be a number)
         tone = ""
         tone << reading.slice(reading.length()-1)
-        
-        if (tone.match($regexes[:pinyin_tone]))
+        if reading == "r5"
+          # Exception for the 'r' sound and the tone will always be '5'
+          # Just concatinate with the result
+          result << "r"
+        elsif reading == "xx5"
+          #ignore these BS ones
+        elsif reading == "m2" or reading == "m4"
+          result << reading
+        elsif (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
           # Get the reading without the number (tone)
-          reading = reading.slice(0, reading.length()-1)
+          reading = reading.slice(0, reading.length()-1).downcase()
           
           vocals = reading.scan($regexes[:vocal])
           num_of_vocal = vocals.length
@@ -230,7 +246,14 @@ module ImporterHelpers
           if ((vocal) && (vocal.strip().length() > 0))
             diacritic = get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
+          else
+            puts "The vocal to be sub with its diacritic is not found for readings: %s, vocals: %s, reading: %s and tone: %s" % [readings, vocals, reading, tone]
           end
+        elsif (reading.match($regexes[:one_capital_letter]))
+          # If there is a single letter reading, 
+          # it is usually either an acronym or a single letter. (like ka-la-o-k) - Karaoke
+          # Put them just as is
+          result << reading
         elsif (reading.match($regexes[:pinyin_separator]))
           result << " %s " % [reading]
         else
@@ -238,8 +261,11 @@ module ImporterHelpers
           # This should be a very rare cases. (Throw an exception maybe?)
           puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
+        
+        # Add a space if we were asked to
+        result << " " if leave_spaces
       end
-      return result
+      return result.strip
     end
 
     # Back with nothing if there is no reading supplied
@@ -247,6 +273,9 @@ module ImporterHelpers
   end
   
   def get_unicode_for_diacritic(vocal, tone)
+    if vocal == "ü"
+      vocal = "v"
+    end
     the_vocal_sym = (vocal + tone).to_sym()
     return [$chinese_reading_unicode[the_vocal_sym]].pack('U*')
   end
@@ -514,16 +543,36 @@ module CardHelpers
     result = Array.new()
     cards = $card_entries.values()
     
-    criteria = Proc.new do |same_headword, same_pinyin, same_meaning|
-        ((same_headword && same_meaning) || 
-        (same_pinyin && same_meaning) ||
-        (same_headword && same_pinyin))
+    criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
+      # Don't match proper nouns, it tends to be surnames and such
+      result = same_pinyin || same_meaning || (is_proper_noun == false)
+      
+      if (!result)
+        # This is a little bit strange as both the pinyin nor the meaning
+        # is the same. This is better to be logged.
+        # p "Both pinyin nor the meaning is the same, but there is a card with headword #{headword}."
+      end
+      
+      #return with the result
+      result
     end
   
     #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
     index = cards.index { |card| card.similar_to?(entry, criteria) }
-    return cards[index] unless index == nil
+    return cards[index] unless ((index==nil)||(index==0))
     return nil
   end # End for method definition
+  
+    # XFORMATION: Remove common English stop words from string
+  def xfrm_remove_stop_words(str)
+   stop_words = ['I', 'me', 'a', 'an', 'am', 'are', 'as', 'at', 'be', 'by','how', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'than', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the']
+   results = []
+   str.gsub!($regexes[:inlined_tags], "") ## remove tag blocks
+   str.split(' ').each do |sstr|
+     # remove non word characters from string
+     results << sstr unless stop_words.index(sstr.gsub(/[^a-zA-Z|\s]/, '').strip)
+   end
+   return results.flatten.compact.join(' ')
+  end
   
 end

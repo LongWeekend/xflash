@@ -14,93 +14,35 @@
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
+@synthesize delegate;
+
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7 ];
+  self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7];
   [self drawProgressBars];
   [self setStreakLabel];
-  [cardsViewedAllTime setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:7]intValue]]];
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
   NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger totalWords = [[levelDetails objectAtIndex:6] intValue];
+  NSInteger totalWords = [[self.levelDetails objectAtIndex:6] intValue];
   if (totalWords > maxStudying)
   {
-    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d*",maxStudying]];
-    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }
   else
   {
-    [self.currentNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
-    [self.totalNumberOfWords setText:[NSString stringWithFormat:@"%d",totalWords]];
+    self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
+    self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }    
 
-  // Set the tag name
-  NSString *setName = [[[CurrentState sharedCurrentState] activeTag] tagName];
-  [self.currentStudySet setText:setName];
+  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",[[self.levelDetails objectAtIndex:7] intValue]];
+  self.currentStudySet.text = [[[CurrentState sharedCurrentState] activeTag] tagName];
 }
 
-- (void)setStreakLabel
-{
-  NSString* streakText;
-  if(wrongStreak > 0)
-  {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i wrong",@"ProgressDetailsViewController.NumWrongStreak"), wrongStreak];
-  }
-  else
-  {
-    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i right",@"ProgressDetailsViewController.NumRightStreak"), rightStreak];
-  }
-  streakLabel.text = streakText;
-  [streakText release];
-}
-
-- (void)drawProgressBars
-{  
-  NSString* labelText;
-  NSArray* labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
-  int i;
-  for(i = 0; i < 6; i++)
-  {
-    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", 100*[[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue], [[levelDetails objectAtIndex:i]intValue]];
-    [[labelsArray objectAtIndex:i] setText:labelText];
-  }
-  [labelsArray release];
-  
-  NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  int pbOrigin = 203;
-  for (i = 0; i < 6; i++)
-  {  
-    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-    [progressView setTintColor:[lineColors objectAtIndex: i]];
-    progressView.progress = [[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue];
-    // TODO: iPad customization!
-    CGRect frame = progressView.frame;
-    frame.size.width = 80;
-    frame.size.height = 14;
-    frame.origin.x = 120;
-    frame.origin.y = pbOrigin;
-    
-    progressView.frame = frame;
-    
-    [self.view addSubview:progressView];
-    
-    //move the origin of the next progress bar over
-    pbOrigin += frame.size.height + 6;
-  }
-}
-
-
-
-- (IBAction) dismiss
-{
-  // TODO: MMA 8/9/2010 - this is weird that we are releasing ourself
-  [self.view removeFromSuperview];
-  [self release];
-}
 
 //This was added for safety reason? - Rendy 13/08/10
 - (void)viewDidUnload
@@ -126,9 +68,74 @@
 	self.progressViewTitle = nil;
 }
 
+#pragma mark -
+
+- (void)setStreakLabel
+{
+  NSString *streakText = nil;
+  if (self.wrongStreak > 0)
+  {
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i wrong",@"ProgressDetailsViewController.NumWrongStreak"), self.wrongStreak];
+  }
+  else
+  {
+    streakText = [[NSString alloc] initWithFormat:NSLocalizedString(@"%i right",@"ProgressDetailsViewController.NumRightStreak"), self.rightStreak];
+  }
+  self.streakLabel.text = streakText;
+  [streakText release];
+}
+
+- (void)drawProgressBars
+{  
+  NSString *labelText;
+  NSArray *labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
+  NSInteger i;
+  for(i = 0; i < 6; i++)
+  {
+    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", 100*[[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue], [[levelDetails objectAtIndex:i]intValue]];
+    [[labelsArray objectAtIndex:i] setText:labelText];
+  }
+  [labelsArray release];
+  
+  NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
+  int pbOrigin = 203;
+  for (i = 0; i < 6; i++)
+  {  
+    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
+    [progressView setTintColor:[lineColors objectAtIndex: i]];
+    progressView.progress = [[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue];
+    // TODO: iPad customization!
+    CGRect frame = progressView.frame;
+    frame.size.width = 80;
+    frame.size.height = 14;
+    frame.origin.x = 120;
+    frame.origin.y = pbOrigin;
+    
+    progressView.frame = frame;
+    [self.view addSubview:progressView];
+    
+    //move the origin of the next progress bar over
+    pbOrigin += frame.size.height + 6;
+  }
+}
+
+- (IBAction) dismiss
+{
+  [self.view removeFromSuperview];
+  LWE_DELEGATE_CALL(@selector(progressDetailsViewControllerShouldDismissView:), self);
+}
+
+#pragma mark - Class Plumbing
 
 - (void)dealloc
 {
+  [currentStudySet release];
+  [closeBtn release];
+  [streakLabel release];
+  [motivationLabel release];
+  [cardsViewedNow release];
+  [progressViewTitle release];
+  
   [levelDetails release];
   [currentNumberOfWords release];
   [totalNumberOfWords release];

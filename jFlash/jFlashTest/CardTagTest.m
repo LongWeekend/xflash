@@ -44,8 +44,10 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
 {
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLongWeekendFavorites];
   [longWeekendFavTag populateCardIds];
-  NSError* error;
-  Card* card = [longWeekendFavTag getRandomCard:0 error:&error];
+  NSError *error = nil;
+  Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
+  STAssertTrue(card, @"Could not get random card");
+  
   [longWeekendFavTag updateLevelCounts:card nextLevel:5];
   int count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
@@ -64,7 +66,7 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   {
     NSUInteger cardId = [card cardId];
     NSLog(@"[TEST LOG]Adding card with id: %d to tag id: %d", cardId, newlyCreatedTagId);
-    [TagPeer subscribe:cardId tagId:newlyCreatedTagId];    
+    [TagPeer subscribeCard:card toTag:newlyCreatedTag];
   }
   NSLog(@"[TEST LOG]The newly created tag is has now been populated with group study set: %@", kLongWeekendFavorites);
   
@@ -79,12 +81,11 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   for (int i=0; i<count; i++)
   {
     Card *card = [newCardIds objectAtIndex:i];
-    NSUInteger cardId = [card cardId];
     NSError *error = nil;
-    BOOL success = [TagPeer cancelMembership:cardId tagId:newlyCreatedTagId error:&error]; 
+    BOOL success = [TagPeer cancelMembership:card fromTag:newlyCreatedTag error:&error]; 
     if ((i!=count-1) && (!success)) 
     {
-      STFail(@"Fail in removing a card from the newly created study set.\nCard with id: %d cannot be removed with error: %@", cardId, [error localizedDescription]);
+      STFail(@"Fail in removing a card from the newly created study set.\nCard with id: %d cannot be removed with error: %@", card.cardId, [error localizedDescription]);
     }
     else if ((i==count-1) && (!success))
     {
@@ -93,7 +94,7 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
     }
     else
     {
-      NSLog(@"[TEST LOG]Card with id %d has been successfuly removed from an active set.", cardId);
+      NSLog(@"[TEST LOG]Card with id %d has been successfuly removed from an active set.", card.cardId);
     }
   }
 }
@@ -109,18 +110,24 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   BOOL result = [db setupTestDatabaseAndOpenConnectionWithError:&error];
   STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
+  //Setup FTS
+  result = [db setupAttachedDatabase:JFLASH_CURRENT_FTS_TEST_DATABASE asName:@"fts"];
+  STAssertTrue(result, @"Failed to setup search database");
+
+  //Setup Cards
+  result = [db setupAttachedDatabase:JFLASH_CURRENT_CARD_TEST_DATABASE asName:@"cards"];
+  STAssertTrue(result, @"Failed to setup cards database");
+  
   //Create the tag for testing purposes.
-  NSUInteger createdTagId = [TagPeer createTag:kTagTestDefaultName withOwner:0];
-  STAssertTrue(createdTagId != 0, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTagId);
+  Tag *createdTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  STAssertTrue(createdTag != nil, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTag.tagId);
   
   //Tried to set the active tag to the one we just newly created
-  Tag *tag = [TagPeer retrieveTagById:createdTagId];
-  STAssertNotNil(tag, @"Tag with createdTagId: %d has failed to be retreived.", createdTagId);
   CurrentState *state = [CurrentState sharedCurrentState];
-  [state setActiveTag:tag];
-  STAssertTrue([tag isEqual:[state activeTag]], 
+  [state setActiveTag:createdTag];
+  STAssertTrue([createdTag isEqual:[state activeTag]], 
                  @"Active tag has not been set properly. The active set tag set is: %@\nWhile the newly created tag should be: %@", 
-                 [state activeTag], tag);
+                 [state activeTag], createdTag);
 }
 
 - (void)tearDown

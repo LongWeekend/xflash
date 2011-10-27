@@ -11,7 +11,6 @@
 
 @interface HelpWebViewController : UIViewController <UIWebViewDelegate>
 {
-  NSString *filename;
   UIWebView *_webView;
 }
 

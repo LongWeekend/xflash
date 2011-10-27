@@ -8,25 +8,15 @@
 
 #import "FMResultSet.h"
 @interface Group : NSObject
-{
-	NSInteger groupId;
-	NSInteger ownerId;            //! groupId of the parent Group
-	NSInteger tagCount;           //! cached number of Tag items in the Group
-	NSInteger recommended;        //! Is a recommended Group?
-  NSInteger childGroupCount;    //! cached number of children Group objects
-	NSString *groupName;          //! Display name
-}
 
 - (void) hydrate:(FMResultSet*)rs;
-- (NSMutableArray*) getTags;
-- (NSInteger) getChildTagCount;
-- (NSInteger) getChildGroupCount;
+- (NSArray*) childTags;
 
-@property (nonatomic,retain) NSString *groupName;
-@property NSInteger groupId;
+@property (retain) NSString *groupName;   //! Display name
+@property NSInteger groupId;              //! groupId of the parent Group
 @property NSInteger ownerId;
-@property NSInteger tagCount;
-@property NSInteger recommended;
-@property NSInteger childGroupCount;
+@property NSInteger tagCount;             //! cached number of Tag items in the Group
+@property NSInteger recommended;          //! Is a recommended Group?
+@property NSInteger childGroupCount;      //! cached number of children Group objects
 
 @end

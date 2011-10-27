@@ -1,0 +1,364 @@
+pcr_1_5:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson1-5.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 1-5"
+    tag_type: ""
+    short_name: "pcr-lesson-1-5"
+    description: "Practical Chinese Reader Textbook, Lesson 1-5"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson1-5.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_6:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson6.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 6"
+    tag_type: ""
+    short_name: "pcr-lesson-6"
+    description: "Practical Chinese Reader Textbook, Lesson 6"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson1-5.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_7:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson7.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 7"
+    tag_type: ""
+    short_name: "pcr-lesson-7"
+    description: "Practical Chinese Reader Textbook, Lesson 7"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson7.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_8:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson8.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 8"
+    tag_type: ""
+    short_name: "pcr-lesson-8"
+    description: "Practical Chinese Reader Textbook, Lesson 8"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson8.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_9:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson9.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 9"
+    tag_type: ""
+    short_name: "pcr-lesson-9"
+    description: "Practical Chinese Reader Textbook, Lesson 9"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson9.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_10:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson10.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 10"
+    tag_type: ""
+    short_name: "pcr-lesson-10"
+    description: "Practical Chinese Reader Textbook, Lesson 10"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson10.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_11:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson11.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 11"
+    tag_type: ""
+    short_name: "pcr-lesson-11"
+    description: "Practical Chinese Reader Textbook, Lesson 11"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson11.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_12:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson12.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "Lesson 12"
+    tag_type: ""
+    short_name: "PCR pcr-lesson-12"
+    description: "Practical Chinese Reader Textbook, Lesson 12"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson12.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_13:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson13.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 13"
+    tag_type: ""
+    short_name: "pcr-lesson-13"
+    description: "Practical Chinese Reader Textbook, Lesson 13"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson13.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_14:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson14.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 14"
+    tag_type: ""
+    short_name: "pcr-lesson-14"
+    description: "Practical Chinese Reader Textbook, Lesson 14"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson14.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_15:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson15.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 15"
+    tag_type: ""
+    short_name: "pcr-lesson-15"
+    description: "Practical Chinese Reader Textbook, Lesson 15"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson15.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_16:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson16.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 16"
+    tag_type: ""
+    short_name: "pcr-lesson-16"
+    description: "Practical Chinese Reader Textbook, Lesson 16"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson16.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_17:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson17.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 17"
+    tag_type: ""
+    short_name: "pcr-lesson-17"
+    description: "Practical Chinese Reader Textbook, Lesson 17"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson17.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_18:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson18.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 18"
+    tag_type: ""
+    short_name: "pcr-lesson-18"
+    description: "Practical Chinese Reader Textbook, Lesson 18"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson18.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_19:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson19.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 19"
+    tag_type: ""
+    short_name: "pcr-lesson-19"
+    description: "Practical Chinese Reader Textbook, Lesson 19"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson19.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_20:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson20.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 20"
+    tag_type: ""
+    short_name: "pcr-lesson-20"
+    description: "Practical Chinese Reader Textbook, Lesson 20"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson20.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_21:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson21.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 21"
+    tag_type: ""
+    short_name: "pcr-lesson-21"
+    description: "Practical Chinese Reader Textbook, Lesson 21"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson21.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_22:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson22.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 22"
+    tag_type: ""
+    short_name: "pcr-lesson-22"
+    description: "Practical Chinese Reader Textbook, Lesson 22"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson22.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_23:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson23.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 23"
+    tag_type: ""
+    short_name: "pcr-lesson-23"
+    description: "Practical Chinese Reader Textbook, Lesson 23"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson23.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_24:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson24.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 24"
+    tag_type: ""
+    short_name: "pcr-lesson-24"
+    description: "Practical Chinese Reader Textbook, Lesson 24"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson24.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_25:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson25.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 25"
+    tag_type: ""
+    short_name: "pcr-lesson-25"
+    description: "Practical Chinese Reader Textbook, Lesson 25"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson25.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_26:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson26.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 26"
+    tag_type: ""
+    short_name: "pcr-lesson-26"
+    description: "Practical Chinese Reader Textbook, Lesson 26"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson26.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_27:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson27.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 27"
+    tag_type: ""
+    short_name: "pcr-lesson-27"
+    description: "Practical Chinese Reader Textbook, Lesson 27"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson27.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_28:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson28.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 28"
+    tag_type: ""
+    short_name: "pcr-lesson-28"
+    description: "Practical Chinese Reader Textbook, Lesson 28"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson28.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_29:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson29.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 29"
+    tag_type: ""
+    short_name: "pcr-lesson-29"
+    description: "Practical Chinese Reader Textbook, Lesson 29"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson29.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+pcr_30:
+    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson30.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "PCR Lesson 30"
+    tag_type: ""
+    short_name: "pcr-lesson-30"
+    description: "Practical Chinese Reader Textbook, Lesson 30"      
+    source: "Space separated File"                          
+    source_name: "PCR-Lesson30.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0

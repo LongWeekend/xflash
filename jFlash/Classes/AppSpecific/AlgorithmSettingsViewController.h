@@ -11,12 +11,6 @@
 #import "Constants.h"
 
 @interface AlgorithmSettingsViewController : UIViewController <UITableViewDelegate>
-{
-  UISlider *maxCardsUISlider;
-  UISlider *frequencyUISlider;
-  IBOutlet UISegmentedControl *difficultySegmentControl;
-  IBOutlet UITableView *tableView;
-}
 
 - (IBAction) setDifficulty:(UISegmentedControl*)sender;
 - (void)sliderAction:(UISlider*)sender;

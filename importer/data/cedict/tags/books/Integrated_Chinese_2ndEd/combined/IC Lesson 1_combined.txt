@@ -1,0 +1,45 @@
+問好	问好	wen4 hao3	/greetings/
+先生	先生	xian1 sheng5	/Mr./husband/teacher/
+你好	你好	ni3 hao3	/How do you do?/Hello!/
+你	你	ni3	/you/
+好	好	hao3	/fine/good/nice/O.K./
+小姐	小姐	xiao3 jie5	/Miss/young lady/
+請問	请问	qing3 wen4	/May I ask.../
+請	请	qing3	/please (a polite form of a request)/
+問	问	wen4	/to ask (a question)/
+您	您	nin2	/you (singular; polite)/
+貴姓	贵姓	gui4 xing4	/What is your honorable surname?/
+貴	贵	gui4	/honorable/
+性	性	xing4	/(one's) surname is.../to be surnamed/surname/
+我	我	wo3	/I/me/
+呢	呢	ne5	/(question particle)/
+叫	叫	jiao4	/to be called/to call/
+什麼	什么	shen2 me5	/what/
+名字	名字	ming2 zi5	/name/
+王朋	王朋	wang2 peng2	/Wang Peng (a person)/
+王	王	wang2	/(a surname)/king/
+李友	李友	li3 you3	/Li You (a person)/
+李	李	li3	/(a surname)/plum/
+是	是	shi4	/to be/
+老師	老师	lao3 shi1	/teacher/
+嗎	吗	ma3	/(interrogative particle)/
+不	不	bu4	/not/no/
+學生	学生	xue2 sheng5	/student/
+也	也	ye3	/too/also/
+中國人	中国人	zhong1 guo2 ren2	/Chinese people/Chinese person/
+中國	中国	zhong1 guo2	/China/
+人	人	ren2	/people/person/
+美國人	美国人	mei3 guo2 ren2	/American person/American people/
+美國	美国	mei3 guo2	/America/
+朋友	朋友	peng2 you5	/friend/
+太太	太太	tai4 tai5	/wife/Mrs./
+英國	英国	ying1 guo2	/Britain/England/
+法國	法国	fa3 guo2	/France/
+日本	日本	ri4 ben3	/Japan/
+德國	德国	de2 guo2	/Germany/
+英國人	英国人	ying1 guo2 ren2	/British people/British person/
+法國人	法国人	fa3 guo2 ren2	/French person/French people/
+日本人	日本人	ri4 ben3 ren2	/Japanese person/Japanese people/
+德國人	德国人	de2 guo2 ren2	/German person/German  people/
+韓國人	韩国人	han2 guo2 ren2	/Korean person/Korean  people/
+越南人	越南人	yue4 nan2 ren2	/Vietnamese person/Vietnamese  people/

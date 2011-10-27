@@ -287,7 +287,8 @@ int Xcode_ToUnicode16( const UTF16CHAR * puzInputString,
   DWORD dwzPrepInputString[MAX_LABEL_SIZE_32];
   DWORD dwzPrepOutputString[MAX_LABEL_SIZE_32];
   UCHAR8 pzCopyString[MAX_LABEL_SIZE_8];
-  DWORD dwProhibitedChar = 0;
+  // MMA: This is commented out below as well, so I commeneted it out here to get rid of the compiler warning.
+  //  DWORD dwProhibitedChar = 0;
   UTF16CHAR suzDecoded[MAX_LABEL_SIZE_16];
   int iDecodedSize = MAX_LABEL_SIZE_16;
   /* Basic input validity checks and buffer length checks */

@@ -9,10 +9,19 @@
 #import "RootViewController.h"
 #import "FlurryAPI.h"
 
+#import "StudyViewController.h"
+#import "StudySetViewController.h"
+#import "SearchViewController.h"
+#import "SettingsViewController.h"
+#import "JapaneseSettingsDataSource.h"
+#import "ChineseSettingsDataSource.h"
+#import "HelpViewController.h"
+
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
+NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 /**
  * Takes UI hierarchy control from appDelegate and 
@@ -34,20 +43,73 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   {
     self.isFinishedLoading = NO;
     
-    // Register listener to switch the tab bar controller when the user selects a new set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudyView) name:@"switchToStudyView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToStudySetView) name:LWEShouldShowStudySetView object:nil];
+    // MMA Apparently, there really isn't a way around this dirtiness.
+    __block UIViewController *blockSelf = self;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
+    // Register listener to switch the tab bar controller to user sets when user masters a set
+    [center addObserverForName:LWEShouldShowStudySetView object:nil queue:nil usingBlock:^(NSNotification *notification)
+    {
+      blockSelf.tabBarController.selectedIndex = STUDY_SET_VIEW_CONTROLLER_TAB_INDEX;
+    }];
+    
+    // Register listener to switch the tab bar controller to the study view when the user selects a new set
+    [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       blockSelf.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
+     }];
+
+    [center addObserverForName:@"switchToSettings" object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       blockSelf.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
+     }];
+    
+    // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
+    void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
+    {
+      //if the animated key is not specified in the user info, it will be animated.
+      NSDictionary *dict = [notification userInfo];
+      BOOL animated = YES;
+      if ([dict valueForKey:@"animated"])
+      {
+        animated = [[dict valueForKey:@"animated"] boolValue];
+      }
+      [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
+    };
+    [center addObserverForName:@"taskDidCancelSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [center addObserverForName:@"taskDidCompleteSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
+    
+    // Update the settings tab bar item with badge number
+    [center addObserverForName:LWEShouldUpdateSettingsBadge object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       NSNumber *badgeNumber = [notification.userInfo objectForKey:@"badge_number"];
+       UITabBarItem *settingsTabBar = [blockSelf.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
+       if ([badgeNumber intValue] != 0)
+       {
+         settingsTabBar.badgeValue = [badgeNumber stringValue];
+       }
+       else 
+       {
+         settingsTabBar.badgeValue = nil;
+       }
+     }];
+    
+    // Show popover for progress view
+    [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+       UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
+       if (controller)
+       {
+         [blockSelf.tabBarController.view addSubview:controller.view];
+       }
+     }];
+    
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCancelSuccessfully" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDownloaderModal:) name:@"taskDidCompleteSuccessfully" object:nil];
-	
-    //Register the generic show modal, and dismiss modal notification which can be used by any view controller.  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissModal:) name:LWEShouldDismissModal object:nil];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSettingsBadge:) name:LWEShouldUpdateSettingsBadge object:nil];
+    [center addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
+    
+    //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
+    [center addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
   }
 	return self;
 }
@@ -116,6 +178,14 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   [localNavigationController release];
   
   SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+#if defined(LWE_JFLASH)
+  settingsViewController.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  settingsViewController.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
+#endif
+  // Potentially later this could be managed by the RVC.
+  settingsViewController.delegate = (id<LWESettingsDelegate>)settingsViewController.dataSource;
+  
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
   [localControllersArray addObject:localNavigationController];
   [settingsViewController release];
@@ -143,28 +213,12 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 
 # pragma mark Convenience Methods for Notifications
 
-/** Switches active view to study view, convenience method for notification */
-- (void) switchToStudyView
-{
-  [self.tabBarController setSelectedIndex:STUDY_VIEW_CONTROLLER_TAB_INDEX]; 
-}
-
-- (void) switchToStudySetView
-{
-  [[self tabBarController] setSelectedIndex:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX];
-}
-
-- (IBAction) switchToSettings
-{
-  [self.tabBarController setSelectedIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX]; 
-}
-
 - (void) switchToSearchWithTerm:(NSString*)term
 {
-  [tabBarController setSelectedIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
 
   // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
-  UINavigationController *vc = (UINavigationController*)[tabBarController selectedViewController];
+  UINavigationController *vc = (UINavigationController*)[self.tabBarController selectedViewController];
   if ([vc isKindOfClass:[UINavigationController class]])
   {
     SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
@@ -185,8 +239,7 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   }
 }
 
-#pragma mark -
-#pragma mark Generic Modal Pop-ups and dismissal. 
+#pragma mark - Generic Modal Pop-ups and dismissal. 
 
 /**
  * Private method that actually does the dirty work of displaying any modal
@@ -232,44 +285,6 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 }
 
 /**
- * Dismiss the modal view controller. The default for animated key is YES.
- */
-- (void)dismissModal:(NSNotification *)notification
-{
-  NSDictionary *dict = [notification userInfo];
-	//if the animated key is not specified in the user info, it will be animated.
-  BOOL animated = YES;
-  if ([dict valueForKey:@"animated"])
-  {
-    animated = [[dict valueForKey:@"animated"] boolValue];
-  }
-	[self.tabBarController dismissModalViewControllerAnimated:animated];
-}
-
-#pragma mark -
-
-
-/**
- * Update the settings tab bar item with badge number
- */
--(void)changeSettingsBadge:(NSNotification*)aNotification
-{
-  NSNumber *badgeNumber = [[aNotification userInfo] objectForKey:@"badge_number"];
-  NSArray *tabBarItems = [[self.tabBarController tabBar] items];
-  // TODO: change this to a constant later
-  UITabBarItem *settingsTabBar = [tabBarItems objectAtIndex:3];
-	if ([badgeNumber intValue] != 0)
-  {
-		[settingsTabBar setBadgeValue:[badgeNumber stringValue]];
-  }
-  else 
-  {
-		[settingsTabBar setBadgeValue:nil];
-  }
-}
-
-
-/**
  * Pops up a modal over the screen when the user needs to download something
  * Relies on _showModalWithViewController:useNavController:
  */
@@ -309,8 +324,8 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   }
 
   // Set the installer delegate to the PluginManager class
-  [tmpDlHandler setDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
-  [dlViewController setTaskHandler:tmpDlHandler];
+  tmpDlHandler.delegate = [[CurrentState sharedCurrentState] pluginMgr];
+  dlViewController.taskHandler = tmpDlHandler;
   
   // Register notification listener to handle downloader events
 	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
@@ -318,19 +333,8 @@ NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
   
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
-  
-  // TODO: Am I not leaking tmpDlHandler here?? MMA 10.11.2010
+  [tmpDlHandler release];
 }
-
-
-/** Hides the downloader */
-- (void) hideDownloaderModal:(NSNotification*)aNotification
-{
-  [self.tabBarController dismissModalViewControllerAnimated:YES];
-  // let everyone know we did this.  Delegate notifcations like souldHide... should be followed by a ...DidHide
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:nil];
-}
-
 
 # pragma mark Delegate Methods
 

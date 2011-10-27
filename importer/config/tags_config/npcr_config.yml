@@ -1,0 +1,196 @@
+npcr_1:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 1"
+    tag_type: ""
+    short_name: "npcr1-1"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 1"      
+    source: "Space separated File"                          
+    source_name: "lesson_01.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_2:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_02.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 2"
+    tag_type: ""
+    short_name: "npcr1-2"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 2"      
+    source: "Space separated File"                          
+    source_name: "lesson_02.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_3:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_03.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 3"
+    tag_type: ""
+    short_name: "npcr1-3"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 3"      
+    source: "Space separated File"                          
+    source_name: "lesson_03.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_4:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_04.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 4"
+    tag_type: ""
+    short_name: "npcr1-4"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 4"      
+    source: "Space separated File"                          
+    source_name: "lesson_04.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_5:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_05.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 5"
+    tag_type: ""
+    short_name: "npcr1-5"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 5"      
+    source: "Space separated File"                          
+    source_name: "lesson_05.txt"     
+    visible: 1                                 
+    parent_tag_id: 0
+    force_off: 0
+npcr_6:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_06.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 6"
+    tag_type: ""
+    short_name: "npcr1-6"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 6"      
+    source: "Space separated File"                          
+    source_name: "lesson_06.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_7:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_07.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 7"
+    tag_type: ""
+    short_name: "npcr1-7"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 7"      
+    source: "Space separated File"                          
+    source_name: "lesson_07.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_8:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_08.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 8"
+    tag_type: ""
+    short_name: "npcr1-8"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 8"      
+    source: "Space separated File"                          
+    source_name: "lesson_08.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_9:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_09.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 9"
+    tag_type: ""
+    short_name: "npcr1-9"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 9"      
+    source: "Space separated File"                          
+    source_name: "lesson_09.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_10:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_10.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 10"
+    tag_type: ""
+    short_name: "npcr1-10"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 10"      
+    source: "Space separated File"                          
+    source_name: "lesson_10.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_11:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_11.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 11"
+    tag_type: ""
+    short_name: "npcr1-11"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 11"      
+    source: "Space separated File"                          
+    source_name: "lesson_11.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_12:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_12.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 12"
+    tag_type: ""
+    short_name: "npcr1-12"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 12"      
+    source: "Space separated File"                          
+    source_name: "lesson_12.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_13:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_13.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 13"
+    tag_type: ""
+    short_name: "npcr1-13"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 13"      
+    source: "Space separated File"                          
+    source_name: "lesson_13.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+npcr_14:
+    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_14.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "BookListParser"
+    tag_name: "NPCR Lesson 14"
+    tag_type: ""
+    short_name: "npcr1-14"
+    description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 14"      
+    source: "Space separated File"                          
+    source_name: "lesson_14.txt"     
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
