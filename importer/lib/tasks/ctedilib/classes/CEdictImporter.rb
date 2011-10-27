@@ -4,7 +4,24 @@ class CEdictImporter
   include DatabaseHelpers
 
   @sql_command_buffer = []
-
+  
+  ### Class Constructor
+  #####################################
+  def initialize (data)
+    ### Instance config vars
+    @config = {}
+    # MMA - not sure this is used anymore
+    @config[:entry_type] = 0
+    @config[:skipped_data] = []
+ 
+    # Defaults, use setters to change
+    @config[:sql_buffer_size] = 30000
+    @config[:noisy_debug] = true
+    @config[:skip_empty_meanings] = false
+    @config[:sql_debug] = false
+    return self
+  end
+  
   # DESC: Removes all data from import staging tables (should be run before calling import)
   def empty_staging_tables
     connect_db
@@ -28,7 +45,7 @@ class CEdictImporter
   end
     
   # Creates tables in the database from a passed in array of tags
-  def self.create_tags_staging(tags = {})
+  def create_tags_staging(tags = {})
     connect_db
     bulkSQL = BulkSQLRunner.new(tags.size, 30000, false)
     insert_tag_sql = "INSERT INTO tags_staging (tag_name,tag_type,short_name,description,source_name,source,visible,count,parent_tag_id,force_off) VALUES ('%s','%s','%s','%s','%s','%s',%s,%s,%s,%s);"
@@ -38,7 +55,7 @@ class CEdictImporter
   end
 
   # DESC: Empty and update the headword/card_id 
-  def self.create_headword_index
+  def create_headword_index
 
     connect_db
     $cn.execute("TRUNCATE TABLE idx_cards_by_headword_staging")
@@ -54,23 +71,6 @@ class CEdictImporter
     end
     
     bulkSQL.flush
-    
-  end
-  ### Class Constructor
-  #####################################
-  def initialize (data)
-    ### Instance config vars
-    @config = {}
-    # MMA - not sure this is used anymore
-    @config[:entry_type] = 0
-    @config[:skipped_data] = []
- 
-    # Defaults, use setters to change
-    @config[:sql_buffer_size] = 30000
-    @config[:noisy_debug] = true
-    @config[:skip_empty_meanings] = false
-    @config[:sql_debug] = false
-    return self
   end
 
   # DESC: Abstract method, call 'super' from child class to use built-in functionality

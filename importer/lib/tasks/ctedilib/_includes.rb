@@ -1,4 +1,5 @@
 load File.dirname(__FILE__) + "/config/_options.rb"
+load File.dirname(__FILE__) + "/includes/RakeHelpers.rb"
 load File.dirname(__FILE__) + "/includes/DatabaseHelpers.rb"
 load File.dirname(__FILE__) + "/includes/ImporterHelpers.rb"
 load File.dirname(__FILE__) + "/includes/CardHelpers.rb"
