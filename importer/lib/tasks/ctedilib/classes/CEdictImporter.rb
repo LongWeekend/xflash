@@ -7,17 +7,13 @@ class CEdictImporter
   
   ### Class Constructor
   #####################################
-  def initialize (data)
+  def initialize
     ### Instance config vars
     @config = {}
-    # MMA - not sure this is used anymore
-    @config[:entry_type] = 0
-    @config[:skipped_data] = []
  
     # Defaults, use setters to change
     @config[:sql_buffer_size] = 30000
     @config[:noisy_debug] = true
-    @config[:skip_empty_meanings] = false
     @config[:sql_debug] = false
     return self
   end
@@ -74,36 +70,15 @@ class CEdictImporter
   end
 
   # DESC: Abstract method, call 'super' from child class to use built-in functionality
-  def import(&block)
-    # Sanity check
-    if !@config[:data]
-      exit_with_error("Importer not configured correctly.", @config)
-    end
-
-    merge_counter = 0
+  def import(data = [])
     new_counter = 0
       
     bulkSQL = BulkSQLRunner.new(data.size, @config[:sql_buffer_size], @config[:sql_debug])
-    
     data.each do |rec|
-      sql = ""
-      
-      # Duplicate check by Headword & Readings
-      duplicates_arr = get_duplicates_by_headword_reading(cedict_rec.headword_trad, cedict_rec.pinyin, existing_card_lookup_hash, @config[:entry_type])
-
-      # Create SQL for import
-      if (duplicates_arr.size > 0)
-        sql = process_duplicates_into_entry_sql(cedict_rec, duplicates_arr)
-        merge_counter = merge_counter + duplicates_arr.size
-      else
-        sql = cedict_rec.to_insert_sql
-        new_counter = new_counter + 1
-      end
-    
+      sql = rec.to_insert_sql
+      new_counter = new_counter + 1
       bulkSQL.add( sql + "\n" )
     end
-    
-    prt "Merged #{merge_counter}"
     prt "Inserted #{new_counter}"
   end
   
@@ -118,17 +93,8 @@ class CEdictImporter
     @config[:noisy_debug] = (enabled ? true : false)
   end
 
-  def set_skip_empty_meanings(enabled)
-    @config[:skip_empty_meanings] = (enabled ? true : false)
-  end
-
   def set_sql_debug(enabled)
     @config[:sql_debug] = (enabled ? true : false)
   end
-
-  def get_skipped_meanings
-    @config[:skipped_data]
-  end
-
 
 end

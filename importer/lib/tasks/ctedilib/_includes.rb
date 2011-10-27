@@ -1,4 +1,5 @@
 load File.dirname(__FILE__) + "/config/_options.rb"
+load File.dirname(__FILE__) + "/includes/DebugHelpers.rb"
 load File.dirname(__FILE__) + "/includes/RakeHelpers.rb"
 load File.dirname(__FILE__) + "/includes/DatabaseHelpers.rb"
 load File.dirname(__FILE__) + "/includes/ImporterHelpers.rb"
@@ -12,9 +13,6 @@ load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
 # Different entry types
 load File.dirname(__FILE__) + "/classes/Entry.rb"
 load File.dirname(__FILE__) + "/classes/CEdictEntry.rb"
-load File.dirname(__FILE__) + "/classes/BookEntry.rb"
-load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
-load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
 load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
 

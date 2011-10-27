@@ -1,6 +1,7 @@
 class Entry
 
   include ObjectSpace
+  include DatabaseHelpers
 
   @@pos_tags = ["Adv","Conj","VS","VA","N","M","Nb","Prep"]
 
@@ -107,6 +108,103 @@ class Entry
     @pinyin_diacritic
   end
 
+  def self.get_pinyin_unicode_for_reading(readings="", leave_spaces = false)
+    ## TODO: Think about the tone-5
+    ## http://en.wikipedia.org/wiki/Pinyin#Tones  
+    # Only runs if the reading actually has something
+    if ((readings) && (readings.strip().length() > 0))
+      # Variable to persist the final result.
+      result = ""
+      
+      # sometimes some sources use "u:" <u with collon>
+      # but some other uses "v" character as 
+      # it is not used in the pinyin
+      umlaut_regex = /[uU]:|v/
+      readings.gsub!(umlaut_regex) do |s|
+        [252].pack('U*')
+      end
+      
+      # Loop through the individual readings.
+      readings.split($delimiters[:cflash_readings]).each do | reading |
+        
+        # Just to get the tone in string (even if it should be a number)
+        tone = ""
+        tone << reading.slice(reading.length()-1)
+        if reading == "r5"
+          # Exception for the 'r' sound and the tone will always be '5'
+          # Just concatinate with the result
+          result << "r"
+        elsif reading == "xx5"
+          #ignore these BS ones
+        elsif reading == "m2" or reading == "m4"
+          result << reading
+        elsif (tone.match($regexes[:pinyin_tone]))
+          found_diacritic = false
+          # Get the reading without the number (tone)
+          reading = reading.slice(0, reading.length()-1).downcase()
+          
+          vocals = reading.scan($regexes[:vocal])
+          num_of_vocal = vocals.length
+           
+          vocal = ""
+          if (num_of_vocal == 1)
+            # Take the vocal, directly if there is only 1 vocal.
+            vocal = vocals[0]
+          else
+            vocal = reading.scan($regexes[:diacritic_vowel1])[0]
+            
+            vocal = reading.scan($regexes[:diacritic_vowel2])[0] unless vocal
+            if (vocal)
+              # Get the "o" in the 'ou' scan.
+              vocal = vocal[0].chr()
+            end
+            
+            # If everything else fails, get the second vocal.
+            vocal = vocals[1] unless vocal
+          end
+          
+          if ((vocal) && (vocal.strip().length() > 0))
+            diacritic = Entry.get_unicode_for_diacritic(vocal, tone)
+            result << reading.sub(vocal, diacritic)
+          else
+            puts "The vocal to be sub with its diacritic is not found for readings: %s, vocals: %s, reading: %s and tone: %s" % [readings, vocals, reading, tone]
+          end
+        elsif (reading.match($regexes[:one_capital_letter]))
+          # If there is a single letter reading, 
+          # it is usually either an acronym or a single letter. (like ka-la-o-k) - Karaoke
+          # Put them just as is
+          result << reading
+        elsif (reading.match($regexes[:pinyin_separator]))
+          result << " %s " % [reading]
+        else
+          # Give the feedback if we dont know what to do
+          # This should be a very rare cases. (Throw an exception maybe?)
+          puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
+        end
+        
+        # Add a space if we were asked to
+        result << " " if leave_spaces
+      end
+      return result.strip
+    end
+
+    # Back with nothing if there is no reading supplied
+    return ""
+  end
+  
+  def self.get_unicode_for_diacritic(vocal, tone)
+    if vocal == "ü"
+      vocal = "v"
+    end
+    the_vocal_sym = (vocal + tone).to_sym()
+    return [$chinese_reading_unicode[the_vocal_sym]].pack('U*')
+  end
+  
+  def self.fix_unicode_for_tone_3(pinyin)
+    # GSUB accepts hashes on Ruby 1.9 but not 1.8.  We have it categorized in in additions as hash_gsub
+    return pinyin.hash_gsub(/[ăĕĭŏŭ]/,{'ă'=>'ǎ','ĕ'=>'ě','ĭ'=>'ǐ','ŏ'=>'ǒ','ŭ'=>'ǔ'})
+  end
+  
   def pos
     @pos
   end

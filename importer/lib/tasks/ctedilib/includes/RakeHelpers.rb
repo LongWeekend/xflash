@@ -1,4 +1,26 @@
 module RakeHelpers
+  # Returns source file name specified at CLI or dies with error
+  def get_cli_source_file
+    if !ENV.include?("src") || ENV['src'].size < 1
+      exit_with_error("Source file not found.", ENV)
+    else
+      return ENV['src'].to_s
+    end
+  end
+
+  # Returns specified attrib from command, dies with error if fail_if_undefined == true
+  def get_cli_attrib(attrib, fail_if_undefined=false, bool=false)
+    if ENV.include?(attrib)
+      if bool
+        return (ENV[attrib] ==0 || ENV[attrib] == "true" ? true : false)
+      else
+        return ENV[attrib]
+      end
+    elsif fail_if_undefined
+      exit_with_error("Command line attribute not found #{attrib} !", ENV) if fail_if_undefined
+    end
+  end
+
 
   # Fetch "to" command line or set to default
   def get_cli_break_point
@@ -80,6 +102,22 @@ module RakeHelpers
       return ENV['add_tags'].downcase.split(',').collect {|s| s.strip }
     else
       return nil
+    end
+  end
+  
+
+  # Sourced from ThinkingSphinx pluing by Pat Allan (http://freelancing-god.github.com)
+  # A fail-fast and helpful version of "system"
+  def system!(cmd)
+    unless system(cmd)
+      raise <<-SYSTEM_CALL_FAILED
+  The following command failed:
+    #{cmd}
+
+  This could be caused by a PATH issue in the environment of Ruby.
+  Your current PATH:
+    #{ENV['PATH']}
+SYSTEM_CALL_FAILED
     end
   end
   

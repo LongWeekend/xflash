@@ -11,6 +11,8 @@ namespace :ctedi do
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     get_cli_debug
+    
+    # Require all the tests we want the runner to run
     Dir[File.dirname(__FILE__) +"/ctedilib/tests/*.rb"].each do |file| 
       require file 
     end
@@ -24,6 +26,8 @@ namespace :ctedi do
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     get_cli_debug
+    
+    # Load the test
     load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
     # Runs automagically before exit
     
@@ -36,6 +40,8 @@ namespace :ctedi do
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     get_cli_debug
+    
+    # Load the test & run - by running 1, the test runner doesn't run any others (convention?)
     load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
     test_name = get_cli_attrib("test",true)
     class_name = get_cli_attrib("class",true)
@@ -49,19 +55,48 @@ namespace :ctedi do
   desc "cFlash CEDICT Parse & Import"
   task :import => :environment do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    
+    include RakeHelpers
+    include DebugHelpers
+    
     get_cli_debug
     
     # Parse
     prt "\nBeginning CEDICT Parse"
     prt_dotted_line
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/cedict_ts.u8")
+    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
     entries = parser.run
-    prt_dotted_line
     
     # Import
+    prt "\nBeginning CEDICT Import"
+    prt_dotted_line
+    importer = CEdictImporter.new
+    importer.empty_staging_tables
+    importer.import(entries)
     
+    prt "\nParse & Import Finished"
+    prt_dotted_line
   end
-  
+
+  ##############################################################################
+  desc "cFlash Group & Tag Importer"
+  task :tag_import => :environment do
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    
+    include RakeHelpers
+    include DebugHelpers
+    
+    get_cli_debug
+    
+    # Import groups and match tags within them
+    prt "\nBeginning Group & Tag Import"
+    prt_dotted_line
+    importer = GroupImporter.new("cflash_group_config.yml")
+    importer.run
+    
+    prt "\nImport Finished"
+    prt_dotted_line
+  end
   
   ##############################################################################
   desc "One Step cFlash Import (ACCEPTS: src=edict2_src_utf8.txt)"
