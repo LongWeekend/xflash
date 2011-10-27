@@ -27,11 +27,8 @@ load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
 load File.dirname(__FILE__) + "/classes/TagImporter.rb"
 
 # Importers
-load File.dirname(__FILE__) + "/classes/CEdictBaseImporter.rb"
 load File.dirname(__FILE__) + "/classes/CEdictImporter.rb"
 load File.dirname(__FILE__) + "/classes/CEdictExporter.rb"
 
 # Required Gems
-#require 'levenshtein'
 require 'base64'
-#require 'ruby-debug'
