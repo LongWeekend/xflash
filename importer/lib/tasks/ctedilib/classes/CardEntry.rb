@@ -21,7 +21,7 @@ class CardEntry < Entry
      
      reading = ""
      reading = record[:reading] unless !record[:reading]
-     @pinyin = get_pinyin_unicode_for_reading(reading)
+     @pinyin = Entry.get_pinyin_unicode_for_reading(reading)
      
      # Get the meanings (compbination with the meaning column and the meaning_fts)
      entire_meanings = Array.new()

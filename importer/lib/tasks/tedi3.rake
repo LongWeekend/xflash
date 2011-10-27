@@ -14,16 +14,15 @@
 #	Storage of results by 
 ##################################################
 
-load File.dirname(__FILE__) + "/tedilib3/_includes.rb"
-
 namespace :tedi3 do
 
-  include DatabaseHelpers
-  include ImporterHelpers
   
   ##############################################################################
   desc "Run all unit tests"
   task :test_all => :environment do
+    load File.dirname(__FILE__) + "/tedilib3/_includes.rb"
+    include DatabaseHelpers
+    include ImporterHelpers
     $options[:verbose] = false
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
@@ -36,6 +35,9 @@ namespace :tedi3 do
   ##############################################################################
   desc "Run all unit tests (REQUIRES: test=[lower case name of unit test])"
   task :test => :environment do
+    load File.dirname(__FILE__) + "/tedilib3/_includes.rb"
+    include DatabaseHelpers
+    include ImporterHelpers
     $options[:verbose] = false
     get_cli_debug # Enable/disable debug 
     
@@ -50,6 +52,9 @@ namespace :tedi3 do
   ##############################################################################
   desc "Run all unit tests (REQUIRES: class=[case sensitive test class name] test=[test method name])"
   task :test_one => :environment do
+    load File.dirname(__FILE__) + "/tedilib3/_includes.rb"
+    include DatabaseHelpers
+    include ImporterHelpers
     $options[:verbose] = false
     get_cli_debug # Enable/disable debug
     
@@ -69,6 +74,9 @@ namespace :tedi3 do
   ##############################################################################
   desc "One Step jFlash Import (ACCEPTS: src=edict2_src_utf8.txt)"
   task :go_jflash => :environment do
+    load File.dirname(__FILE__) + "/tedilib3/_includes.rb"
+    include DatabaseHelpers
+    include ImporterHelpers
 
     get_cli_debug # Enable/disable debug 
 

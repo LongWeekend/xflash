@@ -7,13 +7,12 @@ namespace :ctedi do
   ##############################################################################
   desc "Run all unit tests"
   task :test_all => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
-    $options[:verbose] = false
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    get_cli_debug
+    
+    # Require all the tests we want the runner to run
     Dir[File.dirname(__FILE__) +"/ctedilib/tests/*.rb"].each do |file| 
       require file 
     end
@@ -23,16 +22,12 @@ namespace :ctedi do
   ##############################################################################
   desc "Run all tests in one test file (REQUIRES: class=TestClassName (note: if your test class includes 'Test' at the end, you need it here!))"
   task :test_class => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
-    $options[:verbose] = false
-    get_cli_debug # Enable/disable debug 
-    
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
-    # Add each test class here
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    get_cli_debug
+    
+    # Load the test
     load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
     # Runs automagically before exit
     
@@ -41,17 +36,13 @@ namespace :ctedi do
   ##############################################################################
   desc "Run specific unit test (REQUIRES: class=TestClassName test=method_to_test) (note: if your test class includes 'Test' at the end, you need it here!))"
   task :test_one => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_options.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_modules.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_additions.rb"
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
-    $options[:verbose] = false
-    get_cli_debug # Enable/disable debug
-    
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    get_cli_debug
+    
+    # Load the test & run - by running 1, the test runner doesn't run any others (convention?)
     load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
-
     test_name = get_cli_attrib("test",true)
     class_name = get_cli_attrib("class",true)
     test_suite = Test::Unit::TestSuite.new("CTEDI Single Test Runner")
@@ -60,6 +51,53 @@ namespace :ctedi do
     Test::Unit::UI::Console::TestRunner.run(test_suite) 
   end
 
+  ##############################################################################
+  desc "cFlash CEDICT Parse & Import"
+  task :import => :environment do
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    
+    include RakeHelpers
+    include DebugHelpers
+    
+    get_cli_debug
+    
+    # Parse
+    prt "\nBeginning CEDICT Parse"
+    prt_dotted_line
+    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
+    entries = parser.run
+    
+    # Import
+    prt "\nBeginning CEDICT Import"
+    prt_dotted_line
+    importer = CEdictImporter.new
+    importer.empty_staging_tables
+    importer.import(entries)
+    
+    prt "\nParse & Import Finished"
+    prt_dotted_line
+  end
+
+  ##############################################################################
+  desc "cFlash Group & Tag Importer"
+  task :tag_import => :environment do
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    
+    include RakeHelpers
+    include DebugHelpers
+    
+    get_cli_debug
+    
+    # Import groups and match tags within them
+    prt "\nBeginning Group & Tag Import"
+    prt_dotted_line
+    importer = GroupImporter.new("cflash_group_config.yml")
+    importer.empty_staging_tables
+    importer.import
+    
+    prt "\nImport Finished"
+    prt_dotted_line
+  end
   
   ##############################################################################
   desc "One Step cFlash Import (ACCEPTS: src=edict2_src_utf8.txt)"
@@ -78,29 +116,9 @@ namespace :ctedi do
     importer.empty_staging_tables
 
     # Import from source data files
-#    system!("rake ctedi:edict2jflash src=#{$options[:data_file_rel_path]}/#{get_cli_source_file} card_type=DICTIONARY --trace")
-#    system!("rake ctedi:edict2jflash src=#{$options[:data_file_rel_path]}/ManuallyCompiledWordsEdictFormat.txt card_type=DICTIONARY --trace")
-#    system!("rake ctedi:edict2jflash src=#{$options[:data_file_rel_path]}/ManuallyCompiledWordsEdictFormatAsWords.txt card_type=WORD --trace")
-#    system!("rake ctedi:edict2jflash src=#{$options[:data_file_rel_path]}/KanaLists.txt card_type=KANA --trace")
-
     ## import JLPT words by headword only (only merges)
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-1.utf.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt1")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-2.utf.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt2")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-3.utf.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt3")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-4.utf.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt4")
-
     ## Try rematching left over JLPT words with old source file
-#    system!("rake tedi3:collate_umatched_jlpt unmatched=jlpt-voc-1.utf.txt_unmatched.txt src=jlpt_all_edict.txt")
-#    system!("rake tedi3:collate_umatched_jlpt unmatched=jlpt-voc-2.utf.txt_unmatched.txt src=jlpt_all_edict.txt")
-#    system!("rake tedi3:collate_umatched_jlpt unmatched=jlpt-voc-3.utf.txt_unmatched.txt src=jlpt_all_edict.txt")
-#    system!("rake tedi3:collate_umatched_jlpt unmatched=jlpt-voc-4.utf.txt_unmatched.txt src=jlpt_all_edict.txt")
-
     ## Now reimport JLPT rematches
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-1.utf.txt_rematched.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt1")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-2.utf.txt_rematched.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt2")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-3.utf.txt_rematched.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt3")
-#    system!("rake tedi3:edict2jflash src=#{$options[:data_file_rel_path]}/jlpt-voc-4.utf.txt_rematched.txt card_type=DICTIONARY skip_empty_meanings=true add_tags=jlpt4")
-
 #    JFlashImporter.humanise_inline_tags_in_table("cards_staging")
     # Match REL 1.0  to v 1.1 card ids
 #    system!("rake tedi3:match_rel1_ids reset=true")

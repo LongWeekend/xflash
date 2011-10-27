@@ -2,6 +2,8 @@
 #### Adds support for bulk inserting SQL at command line ####
 class BulkSQLRunner
   
+  include DatabaseHelpers
+  
   def initialize(max_records=0, sql_buffer_size=1000, sql_debug=false)
     @sql_buffer_size = sql_buffer_size # buffer size 0 means manual flush expected
     @max_records = max_records

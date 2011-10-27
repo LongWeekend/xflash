@@ -1,6 +1,7 @@
 class GroupImporter
   
   include ImporterHelpers
+  include DatabaseHelpers
   
   ### Class Constructor
   def initialize (yaml_file)
@@ -14,7 +15,7 @@ class GroupImporter
     return self
   end
   
-  def tear_down_groups
+  def empty_staging_tables
     # Try to connect to the database first
     connect_db
     
@@ -25,10 +26,7 @@ class GroupImporter
     $cn.execute("TRUNCATE TABLE tags_staging")
   end
   
-  def run
-    # Tearing down the existing groups and tags first
-    tear_down_groups
-        
+  def import
     # Try opening the connection to the database
     connect_db
     

@@ -15,15 +15,15 @@ class CEdictParser < Parser
       begin
         # Don't process comments
         if line.index("#") == 0
-          print "Skipping comment on line #%s: %s" % [line_no, line]
+          prt "Skipping comment on line #%s: %s" % [line_no, line]
         else
           entry.parse_line(line)
           entries << entry
         end
       rescue Exception => e
-        print "Could not parse line #%s: %s" % [line_no, line]
-        print "Message: %s\n" % e.message
-        print "Backtrace: %s\n" % e.backtrace.inspect
+        prt "Could not parse line #%s: %s" % [line_no, line]
+        prt "Message: %s\n" % e.message
+        prt "Backtrace: %s\n" % e.backtrace.inspect
       end
     end
     return entries
