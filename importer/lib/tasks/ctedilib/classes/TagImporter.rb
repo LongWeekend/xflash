@@ -118,31 +118,8 @@ class TagImporter
     end
     raise "Failed in inserting into the tags_staging with the configuration: %s\nUnderlying error was: %s" % [config, err]
   end
-  
-  # DESC: Abstract method, call 'super' from the child class to use the
-  #       built-in functionality.
-  def process_individual_record(&block)
-    # Sanity Check
-    if !@config[:data]
-      exit_with_error("Importer not configured correctly.", @config)
-    end
     
-    bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
-    # This is the for each for every record data call the block with
-    # each line as the parameter.
-    tickcount("Processing tag-card-match and importing") do
-      @config[:data].each do |rec|
-        query = block.call(rec)
-        # Its alright to put in a blank string to the bulkSQL as it keeps counting and 
-        # flush the reminder of the data even if the buffer is not yet full. (when all the data has been proceessed)
-        # We want that to happen and just in case we cant find a card, still want the rest to be in the table.
-        bulkSQL.add(query) #unless ((query==nil)||(query.strip().length()<=0))
-      end
-    end
-  end #End of the method definition
-  
   def import
-    # Open the connection to the database first
     connect_db()
     
     # Insert into the tags_staging first
@@ -154,29 +131,41 @@ class TagImporter
     card_ids = Array.new()
     @insert_tag_link_query = "INSERT card_tag_link(tag_id, card_id) VALUES(%s,%s);"
     
-    # Then do the loop by the process_individual_record method
-    # and pass the block of what to do with the record.
-    process_individual_record do |rec|
-      insert_query = ""
-      result = find_cards_similar_to(rec)
-      if (result == nil)
-        not_found += 1
-        log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
-      else
-        found += 1
-        card_id = result.id
-        if (!card_ids.include?(card_id))
-          card_ids << card_id
-          insert_query << @insert_tag_link_query % [@tag_id, card_id]
-        else
-          # There is a same card in the list of added card.
-          log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword, rec.pinyin, rec.meanings.join("/")]
-        end
-      end
-      
-      return insert_query
-    end unless @config[:data] == nil # End of the super do |rec| loop
     
+        # Sanity Check
+    if !@config[:data]
+      exit_with_error("Importer not configured correctly.", @config)
+    end
+    
+    bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
+    # This is the for each for every record data call the block with
+    # each line as the parameter.
+    tickcount("Processing tag-card-match and importing") do
+      @config[:data].each do |rec|
+        insert_query = ""
+        result = find_cards_similar_to(rec)
+        if (result == nil)
+          not_found += 1
+          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+        else
+          found += 1
+          card_id = result.id
+          if (!card_ids.include?(card_id))
+            card_ids << card_id
+            insert_query << @insert_tag_link_query % [@tag_id, card_id]
+          else
+            # There is a same card in the list of added card.
+            log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword, rec.pinyin, rec.meanings.join("/")]
+          end
+        end
+        
+        # Its alright to put in a blank string to the bulkSQL as it keeps counting and 
+        # flush the reminder of the data even if the buffer is not yet full. (when all the data has been proceessed)
+        # We want that to happen and just in case we cant find a card, still want the rest to be in the table.
+        bulkSQL.add(insert_query) #unless ((query==nil)||(query.strip().length()<=0))
+      end
+    end
+
     # Procedure to update the number of
     # cards in a tag.
     update_tag_count
@@ -187,9 +176,6 @@ class TagImporter
   end # End of the method body
   
   def update_tag_count
-    # This is pretty stupid, but for safety purposes
-    # try to connect everytime it has something to do with
-    # the database
     connect_db
     
     # Grab the tag_id first

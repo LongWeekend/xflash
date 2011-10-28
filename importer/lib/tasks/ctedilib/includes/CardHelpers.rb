@@ -9,6 +9,8 @@ module CardHelpers
        return false
      end
      
+     prt "Retrieving card hash from database..."
+     
      # Connect to db first
      connect_db()
      # Allocate a new hash object to the card_entries
@@ -27,6 +29,8 @@ module CardHelpers
        # puts "Inserting to hash with key: %s" % [card_id.to_s()]
        $card_entries[card_id.to_s().to_sym()] = card
      end # End for-each
+     
+     prt "...Finished."
   end # End for method definition
   
   # Find cards object which has similarities with the entry as the parameter

@@ -88,7 +88,7 @@ class GroupImporter
     # and try to constantize / instantiate it from there
     importer = configuration.file_importer.constantize.new(results, configuration)
     inserted_tag_id = importer.import()
-    
+
     # Link the tag to the group.
     link_tag_group(group_id, inserted_tag_id)
   end
@@ -107,6 +107,7 @@ class GroupImporter
     end
     # Inserting to the groups table
     insert_query = "INSERT INTO groups_staging(group_id, group_name, owner_id, recommended) VALUES(%s,'%s', %s, %s)"
+    # TODO: this code assumes we'll never import more than one set of groups at a time??
     inserted_group_id = @counter
     @counter = @counter+1
     $cn.execute(insert_query % [inserted_group_id, name, owner_id, recommended])

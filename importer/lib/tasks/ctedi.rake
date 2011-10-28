@@ -52,6 +52,29 @@ namespace :ctedi do
   end
 
   ##############################################################################
+  desc "cFlash CEDICT Combining Pass"
+  task :combine_variants => :environment do
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    
+    include RakeHelpers
+    include DebugHelpers
+    
+    get_cli_debug
+    
+    # Load all cards into a cache/hash
+    
+    # Load all cards from DB that are is_reference_only or is_variant or is_erhua_variant
+    
+    # Loop through that list, matching cards
+    
+    # If card matched
+    
+        # 
+        #  
+    # End if
+  end
+
+  ##############################################################################
   desc "cFlash CEDICT Parse & Import"
   task :import => :environment do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
