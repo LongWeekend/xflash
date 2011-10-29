@@ -11,6 +11,7 @@ load File.dirname(__FILE__) + "/includes/Array+LWE.rb"
 load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
 
 # Different entry types
+load File.dirname(__FILE__) + "/classes/Meaning.rb"
 load File.dirname(__FILE__) + "/classes/Entry.rb"
 load File.dirname(__FILE__) + "/classes/CEdictEntry.rb"
 load File.dirname(__FILE__) + "/classes/CardEntry.rb"
