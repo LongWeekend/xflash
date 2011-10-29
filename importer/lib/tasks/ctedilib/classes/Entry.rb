@@ -52,8 +52,8 @@ class Entry
   def all_tags
     all_tags = []
     meanings.each do |meaning_hash|
-      if meaning_hash[:tags].size > 0
-        all_tags << meaning_hash[:tags]
+      if meaning_hash.tags.size > 0
+        all_tags << meaning_hash.tags
       end
     end
     return all_tags.flatten
@@ -225,16 +225,17 @@ class Entry
     @variant_of
   end
   
-  def has_variant
+  def has_variant?
     return ((@variant_of == false) ? false : true)
   end
   
-  def is_erhua_variant
+  def is_erhua_variant?
     @is_erhua_variant
   end
 
+  # Returns TRUE if the meanings are empty and this contains references or variants
   def is_only_redirect?
-    return (meanings.empty? && (references.empty? == false))
+    return (meanings.empty? && ((references.empty? == false) || has_variant?))
   end
   
   def is_proper_noun?
@@ -250,7 +251,20 @@ class Entry
     @references
   end
   
-  def parse_inline_entry(line = "")
+  def inline_entry_match?(inline_entry)
+    # Quick return in case of non-headword match
+    return false if @headword_trad != inline_entry.headword_trad
+
+    if inline_entry.pinyin != nil
+      return false if @pinyin != inline_entry.pinyin
+    end
+    
+    # We haven't returned false, and the headword is the same, so match it
+    return true
+  end
+
+  
+  def self.parse_inline_entry(line = "")
     inline_entry = InlineEntry.new
     inline_entry.parse_line(line)
     if inline_entry.headword_trad != nil
@@ -270,7 +284,7 @@ class Entry
         (classifier ? "'"+mysql_escape_str(classifier)+"'" : "NULL"), all_tags_list,
         (references.empty? ? "NULL" : "'"+mysql_escape_str(references.join(";"))+"'"),
         (is_only_redirect? ? "1" : "0"),
-        (has_variant ? "1" : "0"), (is_erhua_variant ? "1" : "0"),
+        (has_variant? ? "1" : "0"), (is_erhua_variant? ? "1" : "0"),
         (is_proper_noun? ? "1" : "0"),
         (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
   end

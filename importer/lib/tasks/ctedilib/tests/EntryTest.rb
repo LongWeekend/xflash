@@ -9,14 +9,12 @@ class EntryTest < Test::Unit::TestCase
   end
   
   def test_inline_parse_null
-    entry = Entry.new
-    result = entry.parse_inline_entry("")
+    result = Entry.parse_inline_entry("")
     assert_equal(nil,result)
   end
   
   def test_inline_parse_not_null
-    entry = Entry.new
-    result = entry.parse_inline_entry("方")
+    result = Entry.parse_inline_entry("方")
     assert_equal(result.headword_trad,"方")
   end
 
