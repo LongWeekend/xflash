@@ -8,9 +8,30 @@
 study_sets:
     name: "Study Sets"
     # Groups '800'
+    hsk:
+        # 1 Means recommended = true
+        name: ["HSK List", 1]
+        hsk_1:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_1"
+        hsk_2:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_2"
+        hsk_3:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_3"
+        hsk_4:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_4"
+        hsk_5:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_5"
+        hsk_6:
+            file: "hsk_config.yml"
+            metadata_key: "hsk_6"
     800_words:
         # 1 Means recommended = true
-        name: ["800 + Words", 1]
+        name: ["800 + Words", 0]
         800_1_beginner: 
             file: "file_800_config.yml"
             metadata_key: "tags_800_1_beginner"
@@ -428,26 +449,6 @@ study_sets:
         frequency_7:
             file: "frequency_config.yml"
             metadata_key: "frequency_7"
-    hsk:
-        name: "HSK List"
-        hsk_1:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_1"
-        hsk_2:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_2"
-        hsk_3:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_3"
-        hsk_4:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_4"
-        hsk_5:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_5"
-        hsk_6:
-            file: "hsk_config.yml"
-            metadata_key: "hsk_6"
     lwe_favs:
         file: "system_tags.yml"
         metadata_key: "lwe_favs"        
