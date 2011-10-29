@@ -85,7 +85,7 @@ class CEdictEntry < Entry
     
     # Finally make an English headword out of the first meaning
     if (@meanings.size > 0)
-      @headword_en = extract_en_headword(@meanings.first[:meaning].strip)
+      @headword_en = extract_en_headword(@meanings.first.meaning.strip)
     end
   end
 
@@ -142,8 +142,8 @@ class CEdictEntry < Entry
       skip_this_meaning = true if found_classifier(meaning)
 
       if (!skip_this_meaning)
-        tmp_hash = {:meaning=>meaning, :tags=>tags}
-        refined_meanings << tmp_hash
+        new_meaning = Meaning.new(meaning, tags)
+        refined_meanings << new_meaning
       end
     end
     return refined_meanings
@@ -371,7 +371,7 @@ class CEdictEntry < Entry
     meanings_fts_arr   = []
     sense_count = @meanings.size
     @meanings.each do |m|
-      meaning_str = m[:meaning]
+      meaning_str = m.meaning
       meaning_str = xfrm_remove_stop_words(meaning_str.gsub($regexes[:inlined_tags], "").strip)
       meanings_fts_arr << meaning_str unless meanings_fts_arr.include?(meaning_str)
     end
@@ -383,7 +383,7 @@ class CEdictEntry < Entry
     meanings_html_arr  = []
     sense_count = @meanings.size
     @meanings.each do |m|
-      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m[:meaning], tag_mode)
+      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m.meaning, tag_mode)
       mhtml = "<li>#{mhtml}</li>" unless sense_count == 1
       meanings_html_arr << mhtml
     end
@@ -396,7 +396,7 @@ class CEdictEntry < Entry
     meanings_text_arr  = []
     sense_count = @meanings.size
     @meanings.each do |m|
-      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m[:meaning], tag_mode)
+      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m.meaning, tag_mode)
       meanings_text_arr << mtxt
     end
     return meanings_text_arr.join($delimiters[:jflash_meanings]);

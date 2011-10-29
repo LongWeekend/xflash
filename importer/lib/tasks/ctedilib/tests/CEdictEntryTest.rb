@@ -40,7 +40,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry.init
     result = entry.found_erhua_variant("erhua variant of 旁邊|旁边, lateral")
     assert_equal(true,result)
-    assert_equal(true,entry.is_erhua_variant)
+    assert_equal(true,entry.is_erhua_variant?)
   end
 
   def test_strip_erhua_variant
@@ -63,8 +63,9 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_parse_single_meaning
     entry = CEdictEntry.new
     entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /player (e.g. CD player)/")
-    expected_meanings = [{:meaning=>"player (e.g. CD player)",:tags=>[]}]
-    assert_equal(expected_meanings,entry.meanings)
+    
+    expected_meaning = Meaning.new("player (e.g. CD player)",[])
+    assert_equal([ expected_meaning ],entry.meanings)
   end
 #堆壘數論 堆垒数论 [dui1 lei3 shu4 lun4] /additive number theory (math.)/
 
@@ -72,22 +73,12 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_parse_multi_meaning
     entry = CEdictEntry.new
     entry.parse_line("方 方 [fang1] /square/power or involution (mathematics)/upright/honest/fair and square/direction/side/party (to a contract, dispute etc)/place/method/prescription (medicine)/upright or honest/just when/only or just/classifier for square things/abbr. for square or cubic meter/ \r\n")
-    expected_meanings = [{:meaning=>"square",:tags=>[]},
-                         {:meaning=>"power or involution",:tags=>["mathematics"]},
-                         {:meaning=>"upright",:tags=>[]},
-                         {:meaning=>"honest",:tags=>[]},
-                         {:meaning=>"fair and square",:tags=>[]},
-                         {:meaning=>"direction",:tags=>[]},
-                         {:meaning=>"side",:tags=>[]},
-                         {:meaning=>"party (to a contract, dispute etc)",:tags=>[]},
-                         {:meaning=>"place",:tags=>[]},
-                         {:meaning=>"method",:tags=>[]},
-                         {:meaning=>"prescription",:tags=>["medicine"]},
-                         {:meaning=>"upright or honest",:tags=>[]},
-                         {:meaning=>"just when",:tags=>[]},
-                         {:meaning=>"only or just",:tags=>[]},
-                         {:meaning=>"classifier for square things",:tags=>[]},
-                         {:meaning=>"abbr. for square or cubic meter",:tags=>["abbr"]}]
+    expected_meanings = [Meaning.new("square"),Meaning.new("power or involution",["mathematics"]),
+            Meaning.new("upright"), Meaning.new("honest"), Meaning.new("fair and square"),
+            Meaning.new("direction"), Meaning.new("side"), Meaning.new("party (to a contract, dispute etc)"),
+            Meaning.new("place"),Meaning.new("method"), Meaning.new("prescription",["medicine"]),
+            Meaning.new("upright or honest"), Meaning.new("just when"), Meaning.new("only or just"),
+            Meaning.new("classifier for square things"), Meaning.new("abbr. for square or cubic meter",["abbr"])]
     assert_equal(expected_meanings,entry.meanings)
   end
   
@@ -95,29 +86,19 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_parse_multi_meaning_replacements
     entry = CEdictEntry.new
     entry.parse_line("方 方 [fang1] /square/power or involution (math.)/upright/honest/fair and square/direction/side/party (to a contract, dispute etc)/place/method/prescription (med.)/upright or honest/just when/only or just/classifier for square things/abbr. for square or cubic meter/ \r\n")
-    expected_meanings = [{:meaning=>"square",:tags=>[]},
-                         {:meaning=>"power or involution",:tags=>["mathematics"]},
-                         {:meaning=>"upright",:tags=>[]},
-                         {:meaning=>"honest",:tags=>[]},
-                         {:meaning=>"fair and square",:tags=>[]},
-                         {:meaning=>"direction",:tags=>[]},
-                         {:meaning=>"side",:tags=>[]},
-                         {:meaning=>"party (to a contract, dispute etc)",:tags=>[]},
-                         {:meaning=>"place",:tags=>[]},
-                         {:meaning=>"method",:tags=>[]},
-                         {:meaning=>"prescription",:tags=>["medicine"]},
-                         {:meaning=>"upright or honest",:tags=>[]},
-                         {:meaning=>"just when",:tags=>[]},
-                         {:meaning=>"only or just",:tags=>[]},
-                         {:meaning=>"classifier for square things",:tags=>[]},
-                         {:meaning=>"abbr. for square or cubic meter",:tags=>["abbr"]}]
+    expected_meanings = [Meaning.new("square"),Meaning.new("power or involution",["mathematics"]),
+            Meaning.new("upright"), Meaning.new("honest"), Meaning.new("fair and square"),
+            Meaning.new("direction"), Meaning.new("side"), Meaning.new("party (to a contract, dispute etc)"),
+            Meaning.new("place"),Meaning.new("method"), Meaning.new("prescription",["medicine"]),
+            Meaning.new("upright or honest"), Meaning.new("just when"), Meaning.new("only or just"),
+            Meaning.new("classifier for square things"), Meaning.new("abbr. for square or cubic meter",["abbr"])]
     assert_equal(expected_meanings,entry.meanings)
   end
   # Test ability to extract classifier  
   def test_parse_classifier
     entry = CEdictEntry.new
     entry.parse_line("攝像機 摄像机 [she4 xiang4 ji1] /video camera/CL:部[bu4]/")
-    expected_meanings = [{:meaning=>"video camera",:tags=>[]}]
+    expected_meanings = [Meaning.new("video camera")]
     assert_equal("部[bu4]",entry.classifier)
     assert_equal(expected_meanings,entry.meanings)
   end
@@ -126,10 +107,9 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_parse_variant_no_pinyin
     entry = CEdictEntry.new
     entry.parse_line("斾 斾 [pei4] /variant of 旆, pennant/banner/")
-    expected_meanings = [{:meaning=>"pennant",:tags=>[]},
-                         {:meaning=>"banner",:tags=>[]}]
+    expected_meanings = [Meaning.new("pennant"),Meaning.new("banner")]
     assert_equal(expected_meanings,entry.meanings)
-    assert_equal(false,entry.is_erhua_variant)
+    assert_equal(false,entry.is_erhua_variant?)
     assert_equal("旆",entry.variant_of)
   end
   
@@ -139,7 +119,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry.parse_line("旄 旄 [mao4] /variant of 耄[mao4]/")
     expected_meanings = []
     assert_equal(expected_meanings,entry.meanings)
-    assert_equal(false,entry.is_erhua_variant)
+    assert_equal(false,entry.is_erhua_variant?)
     assert_equal("耄[mao4]",entry.variant_of)
   end
   
@@ -147,24 +127,22 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_parse_erhua_variant
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
-    expected_meanings = [{:meaning=>"lateral",:tags=>[]},
-                         {:meaning=>"side",:tags=>[]},
-                         {:meaning=>"to the side",:tags=>[]},
-                         {:meaning=>"beside",:tags=>[]}]
+    expected_meanings = [Meaning.new("lateral"),Meaning.new("side"),
+                         Meaning.new("to the side"),Meaning.new("beside")]
     assert_equal(expected_meanings,entry.meanings)
-    assert_equal(true,entry.is_erhua_variant)
+    assert_equal(true,entry.is_erhua_variant?)
     assert_equal("旁邊|旁边",entry.variant_of)
   end
   
   def test_partial_tag_matches
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side (Japanese)/to the side (Budd.)/beside (Buddhist)/")
-    expected_meanings = [{:meaning=>"lateral",:tags=>[]},
-                         {:meaning=>"side (Japanese)",:tags=>["japanese"]},
-                         {:meaning=>"to the side (Budd.)",:tags=>["buddhism"]},
-                         {:meaning=>"beside (Buddhist)",:tags=>["buddhism"]}]
+    
+    expected_meanings = [Meaning.new("lateral"), Meaning.new("side (Japanese)",["japanese"]),
+                         Meaning.new("to the side (Budd.)",["buddhism"]),
+                         Meaning.new("beside (Buddhist)",["buddhism"])]
     assert_equal(expected_meanings,entry.meanings)
-    assert_equal(true,entry.is_erhua_variant)
+    assert_equal(true,entry.is_erhua_variant?)
     assert_equal("旁邊|旁边",entry.variant_of)
   end
   
@@ -178,8 +156,8 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_surname_autotag
     entry = CEdictEntry.new
     entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /surname Makdad/foobar/")
-    expected_meanings = [{:meaning=>"surname Makdad",:tags=>["surname"]},
-                         {:meaning=>"foobar",:tags=>[]}]
+    expected_meanings = [Meaning.new("surname Makdad",["surname"]),
+                         Meaning.new("foobar")]
     assert_equal(expected_meanings,entry.meanings)
   end
   
@@ -290,6 +268,35 @@ class CEdictEntryTest < Test::Unit::TestCase
     expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','BAhvOhBDRWRpY3RFbnRyeRM6E0BoZWFkd29yZF90cmFkIg7ml4HpgorlhZI6\nE0BsaW5lX3RvX3BhcnNlImvml4HpgorlhZIg5peB6L655YS/IFtwYW5nMiBi\naWFuMSByNV0gL2VyaHVhIHZhcmlhbnQgb2Yg5peB6YKKfOaXgei+uSwgbGF0\nZXJhbC9zaWRlL3RvIHRoZSBzaWRlL2Jlc2lkZS86EEB2YXJpYW50X29mIhLm\nl4Hpgop85peB6L65OgxAcGlueWluIhNwYW5nMiBiaWFuMSByNToQQGNsYXNz\naWZpZXJGOhZAaXNfZXJodWFfdmFyaWFudFQ6EUBoZWFkd29yZF9lbiIMbGF0\nZXJhbDoLQGdyYWRlIgA6DkBtZWFuaW5nc1sJewc6CXRhZ3NbADoMbWVhbmlu\nZyIMbGF0ZXJhbHsHOw9bADsQIglzaWRlewc7D1sAOxAiEHRvIHRoZSBzaWRl\newc7D1sAOxAiC2Jlc2lkZToTQGhlYWR3b3JkX3NpbXAiDuaXgei+ueWEvzoQ\nQHJlZmVyZW5jZXNbADoJQHBvc1sAOhZAcGlueWluX2RpYWNyaXRpYyIScMOh\nbmcgYmnEgW4gcjoIQGlkafo=\n');"
     assert_equal(expected,entry.to_insert_sql)
   end
+  
+  def test_inline_match
+    base_entry = CEdictEntry.new
+    base_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jue2 la4] /insipid (like chewing wax)/")
+    
+    # Headword mismatch
+    inline_entry = Entry.parse_inline_entry("人字拖|人字拖[wei4 tong2 jue2 la4]")
+    assert_equal(false,base_entry.inline_entry_match?(inline_entry))
+
+    # Pinyin+headword match
+    inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
+    assert_equal(true,base_entry.inline_entry_match?(inline_entry))
+    
+    # Headword only match (both)
+    inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡")
+    assert_equal(true,base_entry.inline_entry_match?(inline_entry))
+    
+    # Headword only match
+    inline_entry = Entry.parse_inline_entry("味同嚼蠟")
+    assert_equal(true,base_entry.inline_entry_match?(inline_entry))
+
+    # Pinyin mismatch+headword match
+    inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 fu2 jue2 la4]")
+    assert_equal(false,base_entry.inline_entry_match?(inline_entry))
+    
+
+  end
+  
+
   # Test pinyin conversion function
 #  def test_transform_pinyin
 #    entry = CEdictEntry.new

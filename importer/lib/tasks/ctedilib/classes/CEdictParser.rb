@@ -1,11 +1,17 @@
 #### CEDICT PARSER #####
 class CEdictParser < Parser
 
+  @reference_only_entries
+  @variant_only_entries
+
+  # TODO: MMA is this necessary?
   # Alias the base class' method 
   alias :run_super :run
 
   def run
     entries = []
+    @reference_only_entries = []
+    @variant_only_entries = []
     # Call 'super' method to process loop for us
     super do |line, line_no, cache_data|
       
@@ -18,7 +24,17 @@ class CEdictParser < Parser
           prt "Skipping comment on line #%s: %s" % [line_no, line]
         else
           entry.parse_line(line)
-          entries << entry
+          
+          # Determine which array to put it in based on its type
+          if entry.is_only_redirect?
+            if entry.has_variant?
+              @variant_only_entries << entry
+            else
+              @reference_only_entries << entry
+            end
+          else
+            entries << entry
+          end
         end
       rescue Exception => e
         prt "Could not parse line #%s: %s" % [line_no, line]
@@ -26,88 +42,39 @@ class CEdictParser < Parser
         prt "Backtrace: %s\n" % e.backtrace.inspect
       end
     end
+    
+    # Now handle any funkiness with variants
+    
     return entries
   end
-
-  #---------------------------------------------------
-
-  # THIS MIGHT BE USEFUL FOR LATER - CFLASH?? in case we get other word lists from other sources
-  # DESC: Gets headwords/readings from unmatched JLPT file and collates with matching entries from second file
-  def run_collate_unmatched_jlpt(new_fn, umatched_fn)
-
-    unmatched_count=0
-    err_count=0
-    out_count=0
-
-    new_file = File.open(new_fn)
-    new_data_headword_idx = {}
-    new_file.each do |line|
-      next if line.index("/").nil?
-      line.strip!
-      headword_str = self.class.get_headwords(line).join($delimiters[:edict2_headwords])
-      reading_str = self.class.get_readings(line).join($delimiters[:edict2_readings])
-      # replace reading with headword if it contains zenkaku parens
-      if reading_str.scan("（").size > 0
-        new_reading_str = headword_str
-        line.gsub!("["+reading_str+"]", "["+new_reading_str+"]")
-      end
-      new_data_headword_idx[headword_str] = line
-    end
-
-    # setup out file for unmatched entries
-    errors_fn = umatched_fn.gsub("_unmatched.txt","") + "_unmatchable.txt"
-    File.delete(errors_fn) if File.exist?(errors_fn) # delete old tmp files
-    errorf= File.open(errors_fn, "w")
-
-    # setup out file for matches
-    out_fn = umatched_fn.gsub("_unmatched.txt","") + "_rematched.txt"
-    File.delete(out_fn) if File.exist?(out_fn) # delete old tmp files
-    outf = File.open(out_fn, "w")
-
-    # Call run's super to process loop for us
-    run_super do |line, line_no, cache_data|
-
-      line.strip!
-      unmatched_count+=1
-
-      if line.index("/").nil?
-        prt "Empty entry found for #{headword_str}"
-        err_count+=1
-        errorf.write(line +"\n")
-        next
-      end
-
-      headword_str = self.class.get_headwords(line).join($delimiters[:edict2_headwords])
-      reading_str = self.class.get_readings(line).join($delimiters[:edict2_readings])
-
-      if reading_str.scan($regexes[:not_kana_nor_basic_punctuation]).size > 0
-        # Invalid characters found in reading
-        prt "Invalid characters found in reading #{reading_str}"
-        err_count+=1
-        errorf.write(line +"\n")
-      elsif new_data_headword_idx.has_key?(headword_str)
-        # Output matched lines
-        out_count+=1
-        new_line = new_data_headword_idx[headword_str]
-        outf.write(new_line +"\n")
-      else
-        # Headword is not in new file
-        prt "Entry not found for #{headword_str}"
-        err_count+=1
-        errorf.write(line +"\n")
+  
+  def merge_references_into_base_entries(base_entries,ref_entries)
+    tmp_ref = Array.new(ref_entries)
+    base_entries.each do |base_entry|
+      tmp_ref.each do |ref_entry|
+        ref = ref_entry.references[0] if ref_entry.references.count > 0
+        ref = ref_entry.variant_of if (ref_entry.has_variant? or ref_entry.is_erhua_variant?)
+        inline_entry = Entry.parse_inline_entry(ref)
+        if base_entry.inline_entry_match?(inline_entry)
+        end
       end
     end
-
-    prt "Here are the results..."
-    prt_dotted_line
-    prt "Total entries retried        : #{unmatched_count}"
-    prt "Total entries matched        : #{out_count}"
-    prt "Total entries unable to match: #{err_count}"
-    prt ""
-
-    errorf.close
-    outf.close
+      # I loop through my list of "real" entries
     
+    # For each, I loop through my merging entries
+    
+    # I ask the headword if that merge entry matches it
+    
+    # If so, merge it & remove it from the merging entries dict
+    return base_entries
+
+  end
+  
+  def reference_only_entries
+    @reference_only_entries
   end
 
+  def variant_only_entries
+    @variant_only_entries
+  end
 end
