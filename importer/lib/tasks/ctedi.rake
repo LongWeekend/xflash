@@ -10,6 +10,8 @@ namespace :ctedi do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    include RakeHelpers
+    include DebugHelpers
     get_cli_debug
     
     # Require all the tests we want the runner to run
@@ -25,6 +27,9 @@ namespace :ctedi do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    include RakeHelpers
+    include DebugHelpers
+    
     get_cli_debug
     
     # Load the test
@@ -39,6 +44,9 @@ namespace :ctedi do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    include RakeHelpers
+    include DebugHelpers
+    
     get_cli_debug
     
     # Load the test & run - by running 1, the test runner doesn't run any others (convention?)
@@ -61,17 +69,10 @@ namespace :ctedi do
     
     get_cli_debug
     
-    # Load all cards into a cache/hash
-    
-    # Load all cards from DB that are is_reference_only or is_variant or is_erhua_variant
-    
-    # Loop through that list, matching cards
-    
-    # If card matched
-    
-        # 
-        #  
-    # End if
+    # As a card is parsed, get information about it before writing it
+    # Add it to the parser's separate array
+    # Match them
+    # Don't pass it on UNLESS it didn't match anything?
   end
 
   ##############################################################################
