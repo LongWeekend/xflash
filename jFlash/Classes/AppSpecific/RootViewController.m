@@ -201,7 +201,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 	[localControllersArray release];
 
   // Replace active view with tabBarController's view
-  self.view = self.tabBarController.view;
+  [self.view addSubview:self.tabBarController.view];
 
   //launch the please rate us
   [Appirater appLaunched];
