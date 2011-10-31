@@ -50,24 +50,22 @@ class CEdictParser < Parser
   
   def merge_references_into_base_entries(base_entries,ref_entries)
     tmp_ref = Array.new(ref_entries)
+    # Loop through the list of all entries
     base_entries.each do |base_entry|
+      # Then compare that entry to each of our referenced entries
       tmp_ref.each do |ref_entry|
+        # Get the right reference (reference or variant)
         ref = ref_entry.references[0] if ref_entry.references.count > 0
         ref = ref_entry.variant_of if (ref_entry.has_variant? or ref_entry.is_erhua_variant?)
         inline_entry = Entry.parse_inline_entry(ref)
+        
+        # Now merge & remove if the cards match
         if base_entry.inline_entry_match?(inline_entry)
+          base_entry.add_inline_entry_to_meanings(inline_entry)
         end
       end
     end
-      # I loop through my list of "real" entries
-    
-    # For each, I loop through my merging entries
-    
-    # I ask the headword if that merge entry matches it
-    
-    # If so, merge it & remove it from the merging entries dict
     return base_entries
-
   end
   
   def reference_only_entries

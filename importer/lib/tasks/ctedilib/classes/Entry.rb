@@ -251,6 +251,10 @@ class Entry
     @references
   end
   
+  def add_inline_entry_to_meanings(inline_entry)
+    @meanings << Meaning.new("Also: %s" % [ inline_entry.to_str ], ["reference"])
+  end
+  
   def inline_entry_match?(inline_entry)
     # Quick return in case of non-headword match
     return false if @headword_trad != inline_entry.headword_trad
@@ -275,8 +279,8 @@ class Entry
   end
   
   def to_insert_sql
-    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
-    serialised_cedict_hash = mysql_serialise_ruby_object(self)
+    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s);"
+#    serialised_cedict_hash = mysql_serialise_ruby_object(self)
     all_tags_list = combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
@@ -286,6 +290,7 @@ class Entry
         (is_only_redirect? ? "1" : "0"),
         (has_variant? ? "1" : "0"), (is_erhua_variant? ? "1" : "0"),
         (is_proper_noun? ? "1" : "0"),
-        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
+        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL")]
+#        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
   end
 end

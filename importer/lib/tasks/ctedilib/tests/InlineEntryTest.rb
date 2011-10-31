@@ -38,4 +38,22 @@ class InlineEntryTest < Test::Unit::TestCase
     assert_equal("魑",entry.headword_trad)
     assert_equal(nil,entry.headword_simp)
   end
+  
+  def test_to_str_no_simp
+    entry = InlineEntry.new
+    entry.parse_line("令狐[Ling2 hu2]")
+    assert_equal("令狐[Ling2 hu2]",entry.to_str)
+  end
+  
+  def test_to_str_full
+    entry = InlineEntry.new
+    entry.parse_line("龜|龟[gui1]")
+    assert_equal("龜|龟[gui1]",entry.to_str)
+  end
+  
+  def test_to_str_weird
+    entry = InlineEntry.new
+    entry.parse_line("魑 mountain demon")
+    assert_equal("魑 mountain demon",entry.to_str)
+  end
 end

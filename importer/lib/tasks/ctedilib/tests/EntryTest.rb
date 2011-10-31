@@ -17,5 +17,5 @@ class EntryTest < Test::Unit::TestCase
     result = Entry.parse_inline_entry("方")
     assert_equal(result.headword_trad,"方")
   end
-
+  
 end

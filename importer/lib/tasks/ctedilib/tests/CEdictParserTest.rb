@@ -35,7 +35,7 @@ class CEdictParserTest < Test::Unit::TestCase
     merged_entries = parser.merge_references_into_base_entries([base_entry],[ref_entry])
     
     meaning_one = Meaning.new("insipid (like chewing wax)")
-    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
+    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]",["reference"])
     
     # The merge should have added the reference entry to the base entry's meaning
     assert_equal(meaning_one,merged_entries[0].meanings[0])

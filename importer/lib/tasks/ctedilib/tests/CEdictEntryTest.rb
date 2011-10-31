@@ -9,47 +9,13 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry.parse_line(nil)
   end
 
-  # Test parsing utils
-  def test_get_tags_from_meaning
-    entry = CEdictEntry.new
-    entry.init
-    tags = entry.get_tags_for_meaning("power or involution (mathematics)")
-    expected = {:full_match=>["mathematics"], :partial_match=>[]}
-    assert_equal(expected,tags)
-  end
-
-  def test_strip_tags_from_meaning
-    entry = CEdictEntry.new
-    entry.init
-    meaning = entry.strip_tags_from_meaning("power or involution (mathematics)","mathematics")
-    expected = "power or involution"
-    assert_equal(expected,meaning)
-  end
-
-  # Test abbr parsing
-  def test_abbr_detection
-    entry = CEdictEntry.new
-    entry.init
-    result = entry.found_abbreviation("abbr. for square or cubic meter")
-    assert_equal(true,result)
-  end
-
   # Test erhua parsing
   def test_get_erhua_variant
     entry = CEdictEntry.new
-    entry.init
-    result = entry.found_erhua_variant("erhua variant of 旁邊|旁边, lateral")
-    assert_equal(true,result)
+    entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /erhua variant of 旁邊|旁边, lateral")
     assert_equal(true,entry.is_erhua_variant?)
   end
 
-  def test_strip_erhua_variant
-    entry = CEdictEntry.new
-    entry.init
-    result = entry.strip_erhua_variant("erhua variant of 旁邊|旁边, lateral")
-    assert_equal("variant of 旁邊|旁边, lateral",result)
-  end
-  
   # Tests that basic headword and reading can be parsed
 
   def test_parse_headword_and_reading
@@ -179,42 +145,9 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_multiple_references
     entry = CEdictEntry.new
     entry.parse_line("令 令 [ling2] /see 脊令[ji2 ling2]/see 令狐[Ling2 hu2]/")
-    assert_equal(false,entry.is_only_redirect?)
-    expected_references = ["脊令[ji2 ling2]","令狐[Ling2 hu2]"]
-    assert_equal(expected_references,entry.references)
-  end
-
-
-  def test_multiple_references
-    entry = CEdictEntry.new
-    entry.parse_line("令 令 [ling2] /see 脊令[ji2 ling2]/see 令狐[Ling2 hu2]/")
     assert_equal(true,entry.is_only_redirect?)
     expected_references = ["脊令[ji2 ling2]","令狐[Ling2 hu2]"]
     assert_equal(expected_references,entry.references)
-  end
-  
-  def test_see_redirect_reference
-    entry = CEdictEntry.new
-    entry.parse_line("旮 旮 [ga1] /see 旮旯[ga1 la2]/")
-    expected_references = ["旮旯[ga1 la2]"]
-    assert_equal(true,entry.is_only_redirect?)
-    assert_equal(expected_references,entry.references)
-  end
-  
-  # Gotcha!
-  def test_see_redirect_false_positives
-    entry = CEdictEntry.new
-    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
-    assert_equal(false,entry.is_only_redirect?)
-    assert_equal(true,entry.references.empty?)
-    
-    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
-    assert_equal(false,entry.is_only_redirect?)
-    assert_equal(true,entry.references.empty?)
-
-    entry.parse_line("明天見 明天见 [ming2 tian1 jian4] /see you tomorrow/")
-    assert_equal(false,entry.is_only_redirect?)
-    assert_equal(true,entry.references.empty?)
   end
   
   # Test detection of "see also" type meanings
@@ -265,7 +198,7 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_to_insert_sql
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
-    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','BAhvOhBDRWRpY3RFbnRyeRM6E0BoZWFkd29yZF90cmFkIg7ml4HpgorlhZI6\nE0BsaW5lX3RvX3BhcnNlImvml4HpgorlhZIg5peB6L655YS/IFtwYW5nMiBi\naWFuMSByNV0gL2VyaHVhIHZhcmlhbnQgb2Yg5peB6YKKfOaXgei+uSwgbGF0\nZXJhbC9zaWRlL3RvIHRoZSBzaWRlL2Jlc2lkZS86EEB2YXJpYW50X29mIhLm\nl4Hpgop85peB6L65OgxAcGlueWluIhNwYW5nMiBiaWFuMSByNToQQGNsYXNz\naWZpZXJGOhZAaXNfZXJodWFfdmFyaWFudFQ6EUBoZWFkd29yZF9lbiIMbGF0\nZXJhbDoLQGdyYWRlIgA6DkBtZWFuaW5nc1sJewc6CXRhZ3NbADoMbWVhbmlu\nZyIMbGF0ZXJhbHsHOw9bADsQIglzaWRlewc7D1sAOxAiEHRvIHRoZSBzaWRl\newc7D1sAOxAiC2Jlc2lkZToTQGhlYWR3b3JkX3NpbXAiDuaXgei+ueWEvzoQ\nQHJlZmVyZW5jZXNbADoJQHBvc1sAOhZAcGlueWluX2RpYWNyaXRpYyIScMOh\nbmcgYmnEgW4gcjoIQGlkafo=\n');"
+    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边');"
     assert_equal(expected,entry.to_insert_sql)
   end
   
@@ -292,10 +225,19 @@ class CEdictEntryTest < Test::Unit::TestCase
     # Pinyin mismatch+headword match
     inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 fu2 jue2 la4]")
     assert_equal(false,base_entry.inline_entry_match?(inline_entry))
-    
-
   end
   
+  def test_add_inline_entry_to_meaning
+    base_entry = CEdictEntry.new
+    base_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jue2 la4] /insipid (like chewing wax)/")
+    
+    inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
+    base_entry.add_inline_entry_to_meanings(inline_entry)
+    
+    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
+    assert_equal(meaning_two,base_entry.meanings[1])
+  end
+
 
   # Test pinyin conversion function
 #  def test_transform_pinyin
