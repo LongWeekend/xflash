@@ -75,8 +75,8 @@
     _alreadyShowedAlertView = YES;
 #if defined (LWE_JFLASH)
     [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
-                                            ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
+                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nTo study other sets, tap the 'Study Sets' tab below.\n\nLike Japanese Flash? Checkout Rikai Browser: Reading Japanese on your iPhone just got easier!",@"RootViewController.WelcomeAlertViewMessage")
+                                            ok:NSLocalizedString(@"Later", @"StudyViewController.Later")
                                         cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
                                       delegate:self];
 #elif (LWE_CFLASH)
