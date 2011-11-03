@@ -15,6 +15,13 @@
 		2424112311F6F48100D535D7 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		2424112411F6F48100D535D7 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		2424116511F7E1BC00D535D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */; };
+		242A17401461AB60002977E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
+		242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
+		242A17441462893F002977E6 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
+		242A17451462893F002977E6 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
+		242A17461462893F002977E6 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
+		242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
+		242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		24A9F5681461334800C9D46F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */; };
 		24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -671,6 +678,10 @@
 		2424111B11F6F46600D535D7 /* TweetWordXAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetWordXAuthController.m; path = AppSpecific/TweetWordXAuthController.m; sourceTree = "<group>"; };
 		2424112011F6F48100D535D7 /* TweetWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordViewController.xib; path = XIBs/TweetWordViewController.xib; sourceTree = "<group>"; };
 		2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TweetWordXAuthController.xib; path = XIBs/TweetWordXAuthController.xib; sourceTree = "<group>"; };
+		242A173F1461AB60002977E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		242A17421462893E002977E6 /* AudioSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioSessionManager.h; path = AppSpecific/AudioSessionManager.h; sourceTree = "<group>"; };
+		242A17431462893E002977E6 /* AudioSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioSessionManager.m; path = AppSpecific/AudioSessionManager.m; sourceTree = "<group>"; };
+		242A174714628AF4002977E6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		24AEAB1613D5AE0D008ADA45 /* CardTagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTagTest.h; sourceTree = "<group>"; };
 		24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTagTest.m; sourceTree = "<group>"; };
 		24AEAE9E13D5E1EB008ADA45 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1179,6 +1190,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */,
+				242A17411461AB68002977E6 /* AVFoundation.framework in Frameworks */,
 				916ECCB614597E67007FA69E /* libsqlite3.dylib in Frameworks */,
 				91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */,
 				4938F8C714027853001EB473 /* CoreText.framework in Frameworks */,
@@ -1213,6 +1226,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */,
+				242A17401461AB60002977E6 /* AVFoundation.framework in Frameworks */,
 				24A9F5681461334800C9D46F /* libz.1.2.5.dylib in Frameworks */,
 				4938F8C314027818001EB473 /* CoreText.framework in Frameworks */,
 				494F7FA5138B8E6400094AE2 /* libsqlite3.a in Frameworks */,
@@ -1351,6 +1366,8 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
+				242A174714628AF4002977E6 /* AudioToolbox.framework */,
+				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				916ECCB514597E67007FA69E /* libsqlite3.dylib */,
 				916A89CA101C681800D7917D /* Assets */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -1924,6 +1941,8 @@
 		917A5C8611AB851E00016BD2 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				242A17421462893E002977E6 /* AudioSessionManager.h */,
+				242A17431462893E002977E6 /* AudioSessionManager.m */,
 				917A5C8311AB851100016BD2 /* MoodIcon.h */,
 				917A5C8411AB851100016BD2 /* MoodIcon.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
@@ -2918,6 +2937,7 @@
 				49BBA4BF144D571300E6A9AE /* JRWebViewController.m in Sources */,
 				49716142144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */,
+				242A17441462893F002977E6 /* AudioSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2934,6 +2954,7 @@
 				49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */,
 				49716144144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */,
+				242A17461462893F002977E6 /* AudioSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3079,6 +3100,7 @@
 				49BBA4C3144D5CA000E6A9AE /* LWEChineseSearchBar.m in Sources */,
 				49716143144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */,
+				242A17451462893F002977E6 /* AudioSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
