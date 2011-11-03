@@ -6,10 +6,14 @@
 #define CARD_TYPE_DICTIONARY 3
 #define CARD_TYPE_SENTENCE 4
 
+#import <AVFoundation/AVFoundation.h>
 #import "FMResultSet.h"
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
-@interface Card : NSObject
+@interface Card : NSObject <AVAudioPlayerDelegate>
+{
+  AVAudioPlayer *_avPlayer;
+}
 
 - (void) hydrate:(FMResultSet*)rs;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
@@ -25,12 +29,7 @@
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
 - (BOOL) hasAudio;
 
-/**
- * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
- * and then a key for each syllable of the reading
- * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
- */
-- (NSDictionary*) audioFilenames;
+- (void) pronounceWithDelegate:(id)theDelegate;
 
 //! PK of the card
 @property (nonatomic) NSInteger cardId;
