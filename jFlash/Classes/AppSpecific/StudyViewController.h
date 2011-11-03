@@ -43,6 +43,7 @@
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
+- (IBAction)pronounceCard:(id)sender;
 
 - (void)resetStudySet;
 - (void)resetViewWithCard:(Card*)card;
@@ -57,6 +58,8 @@
 /* for pageControl */
 - (IBAction) changePage:(id)sender;
 - (IBAction) launchExampleInstaller;
+
+@property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
 
 // scroll view
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
