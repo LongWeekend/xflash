@@ -40,6 +40,7 @@
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
+@synthesize _pronounceBtn = _pronounceBtn;
 
 /** Custom initializer */
 - (id) init
@@ -494,6 +495,11 @@
   self.scrollView.scrollEnabled = _hasExampleSentences;
 }
 
+- (IBAction) pronounceCard:(id)sender
+{
+  //TODO: REMOVE THIS
+  [self.currentCard pronounceWithDelegate:self];
+}
 
 #pragma mark - Private methods to setup cards (called every transition)
 
@@ -776,6 +782,8 @@
 
 - (void) dealloc
 {
+  self._pronounceBtn = nil;
+  
   if (self.progressVC)
   {
     [_progressVC release];

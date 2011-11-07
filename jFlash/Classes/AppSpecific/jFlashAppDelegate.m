@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
+#import "AudioSessionManager.h"
 
 #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
 #import "FlurryAPI.h"
@@ -84,6 +85,10 @@
   // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
+  
+  // Initialize audio session manager - start with audio session "playback" first
+  AudioSessionManager *audioManager = [AudioSessionManager sharedAudioSessionManager];
+  [audioManager setSessionCategory:AVAudioSessionCategoryPlayback];
 
   // Load root controller to show splash screen
   self.rootViewController = [[[RootViewController alloc] init] autorelease];
