@@ -8,6 +8,7 @@
 
 #import "Tag.h"
 #import "FlurryAPI.h"
+#import "LWEDebug.h"
 
 NSString * const kTagErrorDomain          = @"kTagErrorDomain";
 NSUInteger const kAllBuriedAndHiddenError = 999;
@@ -26,11 +27,23 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 {
   if ((self = [super init]))
   {
+    self.tagId = -1;
     cardCount = -1; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
   }
 	return self;
+}
+
+//! Saves the tag to the DB. WARNING: this only updates the tags basic info, creation is handled in TagPeer for historical reasons.
+// TODO: Should likely be refactored to work as a save method instead of TagPeer creation.
+- (void) save
+{
+  LWE_ASSERT_EXC(self.tagId > 0,@"The tag must already exist to be saved, use createTag in TagPeer to create a tag");
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString *sql;
+  sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];
+  [[db dao] executeUpdate:sql];
 }
 
 /**

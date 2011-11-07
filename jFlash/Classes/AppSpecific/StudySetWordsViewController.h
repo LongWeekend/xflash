@@ -14,7 +14,7 @@
 enum settingsRows
 {
   kWordSetOptionsStart = 0,
-  kWordSetOptionsPublish = 1,
+  kWordSetOptionsEditSet = 1,
   settingsRowsLength
 };
 

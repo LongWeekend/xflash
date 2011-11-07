@@ -35,6 +35,7 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 - (void) setCardCount:(int) count;
 - (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
+- (void) save;
 
 //! Is the tag deletable by the user?
 @property (nonatomic) NSInteger tagEditable;
