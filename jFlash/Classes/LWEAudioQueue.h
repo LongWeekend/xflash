@@ -17,7 +17,7 @@
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue;
 - (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue;
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue;
-- (void)audioQUeueWillStartPlaying:(LWEAudioQueue *)audioQueue;
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue;
 @end
 
 @interface LWEAudioQueue : NSObject <AVAudioPlayerDelegate>

@@ -39,7 +39,7 @@
   if (!self.isPlaying)
   {
     self.playing = YES;
-    LWE_DELEGATE_CALL(@selector(audioQUeueWillStartPlaying), self);
+    LWE_DELEGATE_CALL(@selector(audioQueueWillStartPlaying:), self);
     [self _playThroughTheQueue];
   }
 }
