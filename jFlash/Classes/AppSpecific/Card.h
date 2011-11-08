@@ -14,9 +14,10 @@
 static NSString *const kFullReadingKey;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
+@class LWEAudioQueue;
 @interface Card : NSObject <AVAudioPlayerDelegate>
 {
-  AVQueuePlayer *_player;
+  LWEAudioQueue *_player;
 }
 
 - (void) hydrate:(FMResultSet*)rs;

@@ -6,7 +6,7 @@ static NSString *const kStatusAVPlayerKey = @"status";
 
 @interface Card ()
 //! AudioPlayer object for a card
-@property (nonatomic, retain) AVQueuePlayer *player;
+@property (nonatomic, retain) LWEAudioQueue *player;
 @end
 
 @implementation Card 
@@ -16,21 +16,20 @@ static NSString *const kStatusAVPlayerKey = @"status";
 
 #pragma mark - Public getter
 
-- (AVQueuePlayer *)player
+- (LWEAudioQueue *)player
 {
   if (!_player)
   {
     NSDictionary *dict = [self audioFilenames];
     NSString *fullReading = [dict objectForKey:kFullReadingKey];
-    AVQueuePlayer *q = nil;
+    LWEAudioQueue *q = nil;
     if (fullReading)
     {
       //If the full_reading key exists in the audioFilenames, 
       //means there is an audio file dedicated to this card. 
       //So, just instantiate the AVQueuePlayer with the array
       NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
-      AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
-      q = [[AVQueuePlayer alloc] initWithItems:[NSArray arrayWithObject:item]];
+      q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
     }
     else
     {
@@ -41,25 +40,12 @@ static NSString *const kStatusAVPlayerKey = @"status";
         //and instantiate the AVPlayerItem for it. 
         NSString *filename = (NSString *)obj;
         NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
-        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
-        //Add the AVPlayerItem object to the NSArray.
-        [items addObject:item];
+        [items addObject:url];
       }];
       //And create the player with the NSArray filled with the AVPlayerItem(s)
-      q = [[AVQueuePlayer alloc] initWithItems:items];
+      q = [[LWEAudioQueue alloc] initWithItems:items];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-      if ([[note object] isKindOfClass:[AVPlayerItem class]])
-      {
-        AVPlayerItem *p = [note object];
-        [p seekToTime:kCMTimeZero];
-
-        NSLog(@"FINISH PLAYING WITH : %@", p);
-      }
-      
-    }];
-    [q setActionAtItemEnd:AVPlayerActionAtItemEndPause];
     self.player = q;
     [q release];
   }
@@ -134,55 +120,9 @@ static NSString *const kStatusAVPlayerKey = @"status";
 
 - (void) pronounceWithDelegate:(id)theDelegate
 {
-//  AVQueuePlayer *queue = self.player;
-//  if (queue.status == AVPlayerStatusReadyToPlay)
-//  {
-//    [self.player play];
-//  }
-//  else
-//  {
-//    [self.player addObserver:self forKeyPath:kStatusAVPlayerKey options:NSKeyValueObservingOptionNew context:NULL];
-//  }
-  
-  NSDictionary *dict = [self audioFilenames];
-  NSString *fullReading = [dict objectForKey:kFullReadingKey];
-  LWEAudioQueue *q = nil;
-  if (fullReading)
-  {
-    //If the full_reading key exists in the audioFilenames, 
-    //means there is an audio file dedicated to this card. 
-    //So, just instantiate the AVQueuePlayer with the array
-    NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
-    q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
-  }
-  else
-  {
-    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
-    //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-      //Construct the filename for its audioFilename filename
-      //and instantiate the AVPlayerItem for it. 
-      NSString *filename = (NSString *)obj;
-      NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
-      [items addObject:url];
-    }];
-    //And create the player with the NSArray filled with the AVPlayerItem(s)
-    q = [[LWEAudioQueue alloc] initWithItems:items];
-  }
-
+  LWEAudioQueue *q = self.player;
+  q.delegate = theDelegate;
   [q play];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-  if ((object == self.player) && ([keyPath isEqualToString:kStatusAVPlayerKey]))
-  {
-    if ([self.player status] == AVPlayerStatusReadyToPlay)
-    {
-      [self.player play];
-      [self.player removeObserver:self forKeyPath:@"status"];
-    }
-  }
 }
 
 #pragma mark - Card Properties
@@ -233,7 +173,6 @@ static NSString *const kStatusAVPlayerKey = @"status";
 //! Standard dealloc
 - (void) dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.player = nil;
   
 	[_headword release];
