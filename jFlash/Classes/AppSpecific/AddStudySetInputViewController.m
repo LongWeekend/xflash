@@ -66,7 +66,7 @@
     self.setDescriptionTextView.text = [tag tagDescription];
   }
   
-  //The rounded corner part, where you specify your view's corner radius:
+  //Round the corners of the textView
   [self.setDescriptionTextView.layer setBorderColor: [[UIColor grayColor] CGColor]];
   [self.setDescriptionTextView.layer setBorderWidth: 1.0];
   [self.setDescriptionTextView.layer setCornerRadius:8.0f];
@@ -107,7 +107,7 @@
   }
   else
   {
-    self.tag.tagName = self.setNameTextfield.text;
+    [self.tag setValue:self.setNameTextfield.text forKey:@"tagName"];
     self.tag.tagDescription = self.setDescriptionTextView.text;
     [self.tag save];
   }

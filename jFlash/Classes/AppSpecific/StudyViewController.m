@@ -246,7 +246,9 @@
   [self.moodIcon updateMoodIcon:100.0f];
   
   // Get active set/tag  
+  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"]; // remove the observer from the previous currentCardSet before getting the new one
   self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
+  [self.currentCardSet addObserver:self forKeyPath:@"tagName" options:NSKeyValueObservingOptionNew context:NULL];
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
@@ -263,6 +265,18 @@
   
   // Use this to set up delegates, show the card, etc
   [self resetViewWithCard:nextCard];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqual:@"tagName"]) 
+  {
+    self.cardSetLabel.text = [change objectForKey:NSKeyValueChangeNewKey];
+  }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
 }
 
 
@@ -778,6 +792,7 @@
 	//self.progressModalCloseBtn = nil;
 	
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
 }
 
 - (void) dealloc
