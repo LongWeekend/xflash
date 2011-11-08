@@ -60,22 +60,6 @@ namespace :ctedi do
   end
 
   ##############################################################################
-  desc "cFlash CEDICT Combining Pass"
-  task :combine_variants => :environment do
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
-    
-    include RakeHelpers
-    include DebugHelpers
-    
-    get_cli_debug
-    
-    # As a card is parsed, get information about it before writing it
-    # Add it to the parser's separate array
-    # Match them
-    # Don't pass it on UNLESS it didn't match anything?
-  end
-
-  ##############################################################################
   desc "cFlash CEDICT Parse & Import"
   task :import => :environment do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
@@ -90,6 +74,11 @@ namespace :ctedi do
     prt_dotted_line
     parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
     entries = parser.run
+    
+    prt "\nBeginning CEDICT Parse - Second Pass (Merge Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
+    prt_dotted_line
+    parser.merge_references_into_base_entries(entries, parser.reference_only_entries)
+    parser.merge_references_into_base_entries(entries, parser.variant_only_entries)
     
     # Import
     prt "\nBeginning CEDICT Import"
