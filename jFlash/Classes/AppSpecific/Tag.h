@@ -19,6 +19,7 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 @interface Tag : NSObject
 
 - (void) hydrate: (FMResultSet*)rs;
+- (void) hydrate;
 - (void) populateCardIds;
 - (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
 - (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
