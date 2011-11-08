@@ -1,44 +1,69 @@
 
 #import "Card.h"
 
-@interface Card ()
-/**
- * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
- * and then a key for each syllable of the reading
- * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
- */
-- (NSDictionary*) _audioFilenames;
+static NSString *const kFullReadingKey    = @"full_reading";
+static NSString *const kStatusAVPlayerKey = @"status";
 
+@interface Card ()
 //! AudioPlayer object for a card
-@property (nonatomic, retain) AVAudioPlayer *avPlayer;
+@property (nonatomic, retain) AVQueuePlayer *player;
 @end
 
 @implementation Card 
 
 @synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount;
-@synthesize avPlayer = _avPlayer;
+@synthesize player = _player;
 
 #pragma mark - Public getter
 
-- (AVAudioPlayer *)avPlayer
+- (AVQueuePlayer *)player
 {
-  if (!_avPlayer)
+  if (!_player)
   {
-    NSDictionary *dict = [self _audioFilenames];
-    NSString *fullReading = [dict objectForKey:@"full_reading"];
+    NSDictionary *dict = [self audioFilenames];
+    NSString *fullReading = [dict objectForKey:kFullReadingKey];
+    AVQueuePlayer *q = nil;
     if (fullReading)
     {
-      NSString *path = [LWEFile createBundlePathWithFilename:fullReading];
-      NSURL *url = [NSURL fileURLWithPath:path];
-      
-      AVAudioPlayer *ap = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-      [ap setDelegate:self];
-      [self setAvPlayer:ap];
-      [ap release];
+      //If the full_reading key exists in the audioFilenames, 
+      //means there is an audio file dedicated to this card. 
+      //So, just instantiate the AVQueuePlayer with the array
+      NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
+      AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
+      q = [[AVQueuePlayer alloc] initWithItems:[NSArray arrayWithObject:item]];
+    }
+    else
+    {
+      NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
+      //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
+      [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        //Construct the filename for its audioFilename filename
+        //and instantiate the AVPlayerItem for it. 
+        NSString *filename = (NSString *)obj;
+        NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
+        //Add the AVPlayerItem object to the NSArray.
+        [items addObject:item];
+      }];
+      //And create the player with the NSArray filled with the AVPlayerItem(s)
+      q = [[AVQueuePlayer alloc] initWithItems:items];
     }
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+      if ([[note object] isKindOfClass:[AVPlayerItem class]])
+      {
+        AVPlayerItem *p = [note object];
+        [p seekToTime:kCMTimeZero];
+
+        NSLog(@"FINISH PLAYING WITH : %@", p);
+      }
+      
+    }];
+    [q setActionAtItemEnd:AVPlayerActionAtItemEndPause];
+    self.player = q;
+    [q release];
   }
-  return [[_avPlayer retain] autorelease];
+  return [[_player retain] autorelease];
 }
 
 #pragma mark - Handy Method
@@ -99,7 +124,7 @@
   return (BOOL)result;
 }
 
-- (NSDictionary *) _audioFilenames
+- (NSDictionary *) audioFilenames
 {
   // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -109,8 +134,55 @@
 
 - (void) pronounceWithDelegate:(id)theDelegate
 {
-  AVAudioPlayer *player = [self avPlayer];
-  [player play];
+//  AVQueuePlayer *queue = self.player;
+//  if (queue.status == AVPlayerStatusReadyToPlay)
+//  {
+//    [self.player play];
+//  }
+//  else
+//  {
+//    [self.player addObserver:self forKeyPath:kStatusAVPlayerKey options:NSKeyValueObservingOptionNew context:NULL];
+//  }
+  
+  NSDictionary *dict = [self audioFilenames];
+  NSString *fullReading = [dict objectForKey:kFullReadingKey];
+  LWEAudioQueue *q = nil;
+  if (fullReading)
+  {
+    //If the full_reading key exists in the audioFilenames, 
+    //means there is an audio file dedicated to this card. 
+    //So, just instantiate the AVQueuePlayer with the array
+    NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
+    q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
+  }
+  else
+  {
+    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
+    //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+      //Construct the filename for its audioFilename filename
+      //and instantiate the AVPlayerItem for it. 
+      NSString *filename = (NSString *)obj;
+      NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
+      [items addObject:url];
+    }];
+    //And create the player with the NSArray filled with the AVPlayerItem(s)
+    q = [[LWEAudioQueue alloc] initWithItems:items];
+  }
+
+  [q play];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ((object == self.player) && ([keyPath isEqualToString:kStatusAVPlayerKey]))
+  {
+    if ([self.player status] == AVPlayerStatusReadyToPlay)
+    {
+      [self.player play];
+      [self.player removeObserver:self forKeyPath:@"status"];
+    }
+  }
 }
 
 #pragma mark - Card Properties
@@ -161,7 +233,8 @@
 //! Standard dealloc
 - (void) dealloc
 {
-  self.avPlayer = nil;
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.player = nil;
   
 	[_headword release];
 	[headword_en release];
