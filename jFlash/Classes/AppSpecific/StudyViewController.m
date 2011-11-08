@@ -60,6 +60,38 @@
   return self;
 }
 
+#pragma mark - LWEAudioQueue Delegate Methods
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailLoadingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailPlayingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = NO;
+}
+
 #pragma mark - UIView Delegate Methods
 
 /**
@@ -497,7 +529,6 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
-  //TODO: REMOVE THIS
   [self.currentCard pronounceWithDelegate:self];
 }
 
