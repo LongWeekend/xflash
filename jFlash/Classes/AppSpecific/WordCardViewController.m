@@ -21,6 +21,8 @@
 
 @synthesize baseHtml;
 
+@synthesize  moodIcon, moodIconBtn, percentCorrectLabel, hhAnimationView, percentCorrectTalkBubble;
+
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
 {
   NSString *nibName = nil;
@@ -52,6 +54,47 @@
   [self.meaningWebView loadHTMLString:self.baseHtml baseURL:nil];
   [self.meaningWebView shutOffBouncing];
   self.meaningWebView.backgroundColor = [UIColor clearColor];
+  
+  
+  // Create a default mood icon object
+  self.moodIcon = [[[MoodIcon alloc] init] autorelease];
+  self.moodIcon.moodIconBtn = self.moodIconBtn;
+  self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
+  
+  self.percentCorrectLabel.text = percentCorrectLabelStartText;
+  [self.moodIcon updateMoodIcon:100.0f];
+  
+}
+
+#pragma mark - IBAction
+
+
+- (void) turnPercentCorrectOff
+{
+  self.percentCorrectTalkBubble.hidden = YES;
+  self.percentCorrectLabel.hidden = YES;
+}
+
+- (void) turnPercentCorrectOn
+{
+  self.percentCorrectTalkBubble.hidden = NO;
+  self.percentCorrectLabel.hidden = NO;
+}
+
+/**
+ * Turns the % correct button on and off, in case it is in the way of the meaning
+ */
+- (IBAction) doTogglePercentCorrectBtn
+{
+  // Hide the percentage talk bubble on click; use its current state to check which we should do.
+  if (self.percentCorrectTalkBubble.hidden == YES)
+  {
+    [self turnPercentCorrectOn];
+  }
+  else
+  {
+    [self turnPercentCorrectOff];
+  }
 }
 
 #pragma mark - layout methods
@@ -108,7 +151,7 @@
   // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
   // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
   // wonky, so we have to go with what works
-  self.cardReadingLabel.shadowOffset = CGSizeMake(2.0f, 2.0f);
+  self.cardReadingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
   self.cardReadingLabel.shadowColor = [UIColor blackColor];
   self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
 #endif
@@ -229,11 +272,24 @@
 	self.cardReadingLabel = nil;
 	self.toggleReadingBtn = nil;
 	self.meaningWebView = nil;
+  
+	self.moodIcon = nil;
+	self.moodIconBtn = nil;
+	self.hhAnimationView = nil;
+	self.percentCorrectLabel = nil;
+	self.percentCorrectTalkBubble = nil;
 }
 
 
 - (void)dealloc 
 {
+  //moodicon
+  [moodIcon release];
+  [moodIconBtn release];
+  [hhAnimationView release];
+  [percentCorrectLabel release];
+	[percentCorrectTalkBubble release];
+
   [baseHtml release];
   [_tmpJavascript release];
   

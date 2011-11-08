@@ -32,9 +32,9 @@
 @implementation StudyViewController
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
-@synthesize percentCorrectLabel, numRight, numWrong, numViewed, cardSetLabel, hhAnimationView;
-@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, moodIcon, cardViewController, cardView;
-@synthesize scrollView, pageControl, exampleSentencesViewController, moodIconBtn, percentCorrectTalkBubble, showProgressModalBtn;
+@synthesize numRight, numWrong, numViewed, cardSetLabel;
+@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
+@synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize cardViewControllerDelegate;
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
@@ -121,11 +121,6 @@
   [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
   
   [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
-  
-  // Create a default mood icon object
-  self.moodIcon = [[[MoodIcon alloc] init] autorelease];
-  self.moodIcon.moodIconBtn = self.moodIconBtn;
-  self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
   
   // Initialize the progressBarView
 	ProgressBarViewController *tmpPBVC = [[ProgressBarViewController alloc] init];
@@ -242,8 +237,6 @@
   self.numRight = 0;
   self.numWrong = 0;
   self.numViewed = 0;
-  self.percentCorrectLabel.text = percentCorrectLabelStartText;
-  [self.moodIcon updateMoodIcon:100.0f];
   
   // Get active set/tag  
   self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
@@ -299,14 +292,6 @@
   // TODO: iPad customization
   NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
   self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
-  
-  // Update mood icon
-  CGFloat tmpRatio = 100;
-  if (self.numViewed > 0)
-  {
-    tmpRatio = 100*((CGFloat)self.numRight / (CGFloat)self.numViewed);
-  }
-  [self.moodIcon updateMoodIcon:tmpRatio];
   
   // Finally display the card
   [self doChangeCard:card direction:nil];
@@ -392,41 +377,10 @@
   }
   [self doChangeCard:nextCard direction:direction];
   
-  // Update the speech bubble
-  float tmpRatio = 100*((float)numRight / (float)numViewed);
-  [self.moodIcon updateMoodIcon:tmpRatio];
-  
   // Releases
   [lastCard release];
 }
 
-- (void) turnPercentCorrectOff
-{
-  self.percentCorrectTalkBubble.hidden = YES;
-  self.percentCorrectLabel.hidden = YES;
-}
-
-- (void) turnPercentCorrectOn
-{
-  self.percentCorrectTalkBubble.hidden = NO;
-  self.percentCorrectLabel.hidden = NO;
-}
-
-/**
- * Turns the % correct button on and off, in case it is in the way of the meaning
- */
-- (IBAction) doTogglePercentCorrectBtn
-{
-  // Hide the percentage talk bubble on click; use its current state to check which we should do.
-  if (self.percentCorrectTalkBubble.hidden == YES)
-  {
-    [self turnPercentCorrectOn];
-  }
-  else
-  {
-    [self turnPercentCorrectOff];
-  }
-}
 
 /**
  * Called when the user tapps the progress bar at the top of the practice view
@@ -747,9 +701,6 @@
 	LWE_LOG(@"Study View Controller get Unload");
   [super viewDidUnload];
   
-  // Create a default mood icon object
-	self.moodIcon = nil;
-	
 	self.progressBarViewController = nil;
 	self.cardViewController = nil;
 	self.actionBarController = nil;
@@ -762,18 +713,14 @@
 	self.exampleSentencesViewController = nil;
 	self.cardSetLabel = nil;
 	self.totalWordsLabel = nil;
-	self.percentCorrectLabel = nil;
 	self.revealCardBtn = nil;
 	self.tapForAnswerImage = nil;
 	self.practiceBgImage = nil;
 	self.progressBarView = nil;
-	self.hhAnimationView = nil;
 	self.progressModalView = nil;
 	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
 	self.cardViewControllerDelegate = nil;
-	self.percentCorrectTalkBubble = nil;
-	self.moodIconBtn = nil;
 	self.showProgressModalBtn = nil;
 	//self.progressModalCloseBtn = nil;
 	
@@ -794,11 +741,6 @@
   //kept on this view for now - refactor this too
   [cardSetLabel release];
   [totalWordsLabel release];
- 
-  //moodicon
-  [percentCorrectLabel release];
-  [hhAnimationView release];
-  [moodIcon release];
   
   //progress stuff
   [progressBarView release];

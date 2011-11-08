@@ -10,8 +10,6 @@
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 
-#import "MoodIcon.h"
-
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
 #import "BrowseModeCardViewDelegate.h"
@@ -36,12 +34,9 @@
   BOOL _isChangingPage;  // page control state
 }
 
-- (void) turnPercentCorrectOff;
-- (void) turnPercentCorrectOn;
 - (BOOL) hasExampleSentences;
 
 - (IBAction)doShowProgressModalBtn;
-- (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
 - (IBAction)pronounceCard:(id)sender;
 
@@ -74,9 +69,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
 @property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
 
-@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
-@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
-
 @property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
 
@@ -84,10 +76,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
 @property (nonatomic, retain) IBOutlet UIView *progressBarView;
-
-// Mood Icon
-@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
-@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
 
 // Progress modal overlay
 @property (nonatomic, retain) IBOutlet UIView *progressModalView;
@@ -99,7 +87,7 @@
 // scroll view
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
-@property (nonatomic, retain) MoodIcon *moodIcon;
+
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
 @property (nonatomic, retain) id cardViewControllerDelegate;

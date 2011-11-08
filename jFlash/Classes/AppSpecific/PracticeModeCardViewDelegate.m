@@ -63,12 +63,22 @@
 {
   NSInteger unseen = [[svc.currentCardSet.cardLevelCounts objectAtIndex:0] intValue];
   NSInteger total = svc.currentCardSet.cardCount;
-  [svc turnPercentCorrectOn];
   svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",unseen,total];
+  [self.wordCardViewController turnPercentCorrectOn];
   
   // If practice mode, show the quiz stuff.
   svc.tapForAnswerImage.hidden = NO;
   svc.revealCardBtn.hidden = NO;
+  
+  // Update the speech bubble
+  
+  // Update mood icon
+  CGFloat tmpRatio = 100;
+  if (svc.numViewed > 0)
+  {
+    tmpRatio = 100*((CGFloat)svc.numRight / (CGFloat)svc.numViewed);
+  }
+  [self.wordCardViewController.moodIcon updateMoodIcon:tmpRatio];
 }
 
 - (void) setupViews:(StudyViewController *)svc
@@ -81,7 +91,7 @@
 - (void)studyModeDidChange:(StudyViewController*)svc
 {
   // You can tap the HH in practice mode.
-  svc.moodIconBtn.enabled = YES;
+  self.wordCardViewController.moodIconBtn.enabled = YES;
 }
 
 #pragma mark - Action Bar Delegate Methods

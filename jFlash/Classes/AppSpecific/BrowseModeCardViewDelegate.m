@@ -28,12 +28,13 @@
 {
   NSInteger currIndex = svc.currentCardSet.currentIndex + 1;
   NSInteger total = svc.currentCardSet.cardCount;
-  [svc turnPercentCorrectOff];
+  [self.wordCardViewController turnPercentCorrectOff];
   svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currIndex,total];
   
   // If practice mode, show the quiz stuff.
   svc.tapForAnswerImage.hidden = YES;
   svc.revealCardBtn.hidden = YES;
+  
 }
 
 - (void) setupViews:(StudyViewController *)svc
@@ -47,7 +48,7 @@
 - (void)studyModeDidChange:(StudyViewController*)svc
 {
   // You can't tap the HH in browse mode.
-  svc.moodIconBtn.enabled = NO;
+  self.wordCardViewController.moodIconBtn.enabled = NO;
   
   // Reading should start as "on" in browse mode
   [self.wordCardViewController turnReadingOn];
