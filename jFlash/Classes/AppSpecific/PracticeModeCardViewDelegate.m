@@ -92,6 +92,9 @@
 {
   // You can tap the HH in practice mode.
   self.wordCardViewController.moodIconBtn.enabled = YES;
+  
+  // Change action bar view to other XIB
+  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:svc.actionBarController options:nil];
 }
 
 #pragma mark - Action Bar Delegate Methods

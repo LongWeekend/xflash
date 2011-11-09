@@ -89,6 +89,9 @@
 		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4938F8C714027853001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
+		493A478F146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
+		493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
@@ -770,6 +773,7 @@
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4938F8C614027853001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "ActionBarViewController-Browse.xib"; path = "XIBs/ActionBarViewController-Browse.xib"; sourceTree = "<group>"; };
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
 		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
@@ -2233,6 +2237,7 @@
 			isa = PBXGroup;
 			children = (
 				496BE54F11EC5320003AB713 /* ActionBarViewController.xib */,
+				493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */,
 				496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
 				91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */,
@@ -2598,6 +2603,7 @@
 				4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */,
 				4919507D144F1BFE00DB81F7 /* downloadedPlugin.plist in Resources */,
 				491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */,
+				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2609,6 +2615,7 @@
 				49716147144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */,
 				49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */,
+				493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2768,6 +2775,7 @@
 				49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */,
 				49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */,
 				491AA1CD1456AA29009B9F6E /* foo.mp3 in Resources */,
+				493A478F146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

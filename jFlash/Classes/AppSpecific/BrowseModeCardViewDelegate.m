@@ -34,7 +34,6 @@
   // If practice mode, show the quiz stuff.
   svc.tapForAnswerImage.hidden = YES;
   svc.revealCardBtn.hidden = YES;
-  
 }
 
 - (void) setupViews:(StudyViewController *)svc
@@ -52,6 +51,9 @@
   
   // Reading should start as "on" in browse mode
   [self.wordCardViewController turnReadingOn];
+  
+  // Change action bar view to other XIB
+  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:svc.actionBarController options:nil];
 }
 
 #pragma mark - Action Bar View Controller Delegate
