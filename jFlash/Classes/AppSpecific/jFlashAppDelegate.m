@@ -95,20 +95,6 @@
 	[self.window addSubview:self.rootViewController.view];
   [self.window makeKeyAndVisible];
   
-  // Finally check to see if we launched via URL (this is for non iOS4)
-  // On iOS4, the delegate is called back directly
-  // See: http://stackoverflow.com/questions/3612460/lauching-app-with-url-via-uiapplicationdelegates-handleopenurl-working-under-i
-  NSURL *aUrl = [userInfo objectForKey:UIApplicationLaunchOptionsURLKey];
-  if (aUrl && [[[UIDevice currentDevice] systemVersion] hasPrefix:@"3"])
-  {
-    // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
-    // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    NSString *searchTerm = nil;
-    searchTerm = [self getDecodedSearchTerm:aUrl];
-    [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
-    _searchedTerm = [searchTerm retain];
-  }
-  
   // Add a delay here so that the UI has time to update
   // TODO: MMA a performSelector: is probably not the best because we are relying on a hack.
   // Get a callback from the RootViewController on viewDidLoad, a notification or something.
