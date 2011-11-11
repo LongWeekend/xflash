@@ -62,7 +62,7 @@
 - (IBAction) changePage:(id)sender;
 - (IBAction) launchExampleInstaller;
 
-@property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
+@property (nonatomic, retain) IBOutlet UIButton *pronounceBtn;
 
 // scroll view
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;

@@ -11,8 +11,8 @@
 #import "FMResultSet.h"
 #import "LWEAudioQueue.h"
 
-static NSString *const kFullReadingKey;
-static NSString *const kSegmentedReadingKey;
+static NSString *const kLWEFullReadingKey;
+static NSString *const kLWESegmentedReadingKey;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @class LWEAudioQueue;

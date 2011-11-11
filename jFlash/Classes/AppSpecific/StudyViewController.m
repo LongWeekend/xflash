@@ -40,7 +40,7 @@
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
-@synthesize _pronounceBtn = _pronounceBtn;
+@synthesize pronounceBtn = pronounceBtn;
 
 /** Custom initializer */
 - (id) init
@@ -85,18 +85,18 @@
   }
   else
   {
-    self._pronounceBtn.enabled = YES;
+    self.pronounceBtn.enabled = YES;
   }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
 {
-  self._pronounceBtn.enabled = YES;
+  self.pronounceBtn.enabled = YES;
 }
 
 - (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
 {
-  self._pronounceBtn.enabled = NO;
+  self.pronounceBtn.enabled = NO;
 }
 
 #pragma mark - UIView Delegate Methods
@@ -820,7 +820,7 @@
 
 - (void) dealloc
 {
-  self._pronounceBtn = nil;
+  self.pronounceBtn = nil;
   
   if (self.progressVC)
   {

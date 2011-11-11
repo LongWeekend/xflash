@@ -1,9 +1,8 @@
 
 #import "Card.h"
 
-static NSString *const kFullReadingKey        = @"full_reading";
-static NSString *const kSegmentedReadingKey   = @"segmented_reading";
-static NSString *const kStatusAVPlayerKey     = @"status";
+static NSString *const kLWEFullReadingKey       = @"lwe_full_reading";
+static NSString *const kLWESegmentedReadingKey  = @"lwe_segmented_reading";
 
 @interface Card ()
 //! AudioPlayer object for a card
@@ -22,7 +21,7 @@ static NSString *const kStatusAVPlayerKey     = @"status";
   if (!_player)
   {
     NSDictionary *dict = [self audioFilenames];
-    NSString *fullReading = [dict objectForKey:kFullReadingKey];
+    NSString *fullReading = [dict objectForKey:kLWEFullReadingKey];
     LWEAudioQueue *q = nil;
     if (fullReading)
     {
@@ -117,7 +116,7 @@ static NSString *const kStatusAVPlayerKey     = @"status";
 {
   // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  [dict setObject:@"foo.mp3" forKey:kFullReadingKey];
+  [dict setObject:@"foo.mp3" forKey:kLWEFullReadingKey];
   return (NSDictionary*)dict;
 }
 
