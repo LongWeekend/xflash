@@ -12,9 +12,13 @@
 @interface AddStudySetInputViewController : UIViewController
 
 - (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId;
+- (id) initWithTag:(Tag*)aTag;
+- (BOOL)isModal;
 
-@property (nonatomic, retain) IBOutlet UITextField *setNameTextfield;
-
-@property NSInteger ownerId;
+@property (retain) IBOutlet UITextField *setNameTextfield;
+@property (retain) IBOutlet UITextView *setDescriptionTextView;
+@property (retain) Tag* tag;
 @property (retain) Card *defaultCard;
+@property NSInteger ownerId;
+
 @end
