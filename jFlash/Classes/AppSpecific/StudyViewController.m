@@ -74,12 +74,19 @@
 
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
 {
-  
+  [audioQueue pause];
 }
 
-- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
 {
-  
+  if (flag == LWEAudioQueueInterruptionShouldResume)
+  {
+    [audioQueue play];
+  }
+  else
+  {
+    self._pronounceBtn.enabled = YES;
+  }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
