@@ -121,7 +121,7 @@
   
   // see if the tag already exists
   Tag *tag = [TagPeer retrieveTagByName:tagName];
-  if (tag.tagId == 0) // no tag, create one
+  if (tag.tagId == -1) // no tag, create one
   {
     tag = [TagPeer createTag:tagName withOwner:[group intValue]];
   }
