@@ -326,7 +326,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   tagName = [tagName stringByReplacingOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, tagName.length)];
   
   Tag *createdTag = nil;
-  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, tag_description) VALUES ('%@', '%@')",tagName,description];
+  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,description];
   [db executeUpdate:sql];
   
   NSInteger lastTagId = (NSInteger)db.dao.lastInsertRowId;
