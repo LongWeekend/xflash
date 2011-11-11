@@ -40,6 +40,7 @@
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
+@synthesize _pronounceBtn = _pronounceBtn;
 
 /** Custom initializer */
 - (id) init
@@ -57,6 +58,38 @@
     self.viewHasBeenLoadedOnce = NO;
   }
   return self;
+}
+
+#pragma mark - LWEAudioQueue Delegate Methods
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailLoadingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailPlayingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = NO;
 }
 
 #pragma mark - UIView Delegate Methods
@@ -494,6 +527,10 @@
   self.scrollView.scrollEnabled = _hasExampleSentences;
 }
 
+- (IBAction) pronounceCard:(id)sender
+{
+  [self.currentCard pronounceWithDelegate:self];
+}
 
 #pragma mark - Private methods to setup cards (called every transition)
 
@@ -776,6 +813,8 @@
 
 - (void) dealloc
 {
+  self._pronounceBtn = nil;
+  
   if (self.progressVC)
   {
     [_progressVC release];

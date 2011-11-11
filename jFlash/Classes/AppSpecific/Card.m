@@ -1,8 +1,58 @@
+
 #import "Card.h"
+
+static NSString *const kFullReadingKey    = @"full_reading";
+static NSString *const kStatusAVPlayerKey = @"status";
+
+@interface Card ()
+//! AudioPlayer object for a card
+@property (nonatomic, retain) LWEAudioQueue *player;
+@end
 
 @implementation Card 
 
 @synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount;
+@synthesize player = _player;
+
+#pragma mark - Public getter
+
+- (LWEAudioQueue *)player
+{
+  if (!_player)
+  {
+    NSDictionary *dict = [self audioFilenames];
+    NSString *fullReading = [dict objectForKey:kFullReadingKey];
+    LWEAudioQueue *q = nil;
+    if (fullReading)
+    {
+      //If the full_reading key exists in the audioFilenames, 
+      //means there is an audio file dedicated to this card. 
+      //So, just instantiate the AVQueuePlayer with the array
+      NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
+      q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
+    }
+    else
+    {
+      NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
+      //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
+      [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        //Construct the filename for its audioFilename filename
+        //and instantiate the AVPlayerItem for it. 
+        NSString *filename = (NSString *)obj;
+        NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
+        [items addObject:url];
+      }];
+      //And create the player with the NSArray filled with the AVPlayerItem(s)
+      q = [[LWEAudioQueue alloc] initWithItems:items];
+    }
+    
+    self.player = q;
+    [q release];
+  }
+  return [[_player retain] autorelease];
+}
+
+#pragma mark - Handy Method
 
 /** Returns the meaning field w/o any HTML markup */
 - (NSString*) meaningWithoutMarkup
@@ -51,7 +101,7 @@
   return self.hw_reading;
 }
 
-#pragma mark - Card Properties
+#pragma mark - Audio Related
 
 - (BOOL) hasAudio
 {
@@ -67,6 +117,15 @@
   [dict setObject:@"foo.mp3" forKey:@"full_reading"];
   return (NSDictionary*)dict;
 }
+
+- (void) pronounceWithDelegate:(id)theDelegate
+{
+  LWEAudioQueue *q = self.player;
+  q.delegate = theDelegate;
+  [q play];
+}
+
+#pragma mark - Card Properties
 
 - (BOOL) hasExampleSentences
 {
@@ -114,6 +173,8 @@
 //! Standard dealloc
 - (void) dealloc
 {
+  self.player = nil;
+  
 	[_headword release];
 	[headword_en release];
 	[hw_reading release];

@@ -6,10 +6,19 @@
 #define CARD_TYPE_DICTIONARY 3
 #define CARD_TYPE_SENTENCE 4
 
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CoreMedia.h>
 #import "FMResultSet.h"
+#import "LWEAudioQueue.h"
+
+static NSString *const kFullReadingKey;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
-@interface Card : NSObject
+@class LWEAudioQueue;
+@interface Card : NSObject <AVAudioPlayerDelegate>
+{
+  LWEAudioQueue *_player;
+}
 
 - (void) hydrate:(FMResultSet*)rs;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
@@ -24,6 +33,8 @@
 
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
 - (BOOL) hasAudio;
+
+- (void) pronounceWithDelegate:(id)theDelegate;
 
 /**
  * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
@@ -60,3 +71,6 @@
 @property (nonatomic, retain) NSString *_meaning;
 
 @end
+
+
+

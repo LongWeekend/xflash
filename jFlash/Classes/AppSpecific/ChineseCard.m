@@ -181,9 +181,10 @@
 
 - (NSDictionary *) audioFilenames
 {
-  // TODO: This method is a stub mock (live mock, really) for Rendy - by MMA 10.25.2011
-  NSMutableDictionary *dict = [[[super audioFilenames] mutableCopy] autorelease];
+  //TODO: This method is a stub mock (live mock, really) for Rendy - by MMA 10.25.2011
+  //NSMutableDictionary *dict = [[[super audioFilenames] mutableCopy] autorelease];
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
+  NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:pinyinSegments.count] autorelease];
   for (NSString *pinyin in pinyinSegments)
   {
     [dict setObject:@"foo.mp3" forKey:pinyin];

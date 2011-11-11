@@ -18,6 +18,8 @@
 #import "PracticeModeCardViewDelegate.h"
 #import "ExampleSentencesViewController.h"
 
+#import "LWEAudioQueue.h"
+
 #define STUDY_SET_HAS_FINISHED_ALERT_TAG  777
 #define STUDY_SET_SHOW_BURIED_IDX         1
 #define STUDY_SET_CHANGE_SET_IDX          0
@@ -25,7 +27,8 @@
 @interface StudyViewController : UIViewController <UIScrollViewDelegate,
                                                    UIActionSheetDelegate,
                                                    UIAlertViewDelegate,
-                                                   ProgressDetailsDelegate>
+                                                   ProgressDetailsDelegate,
+                                                   LWEAudioQueueDelegate>
 {
   ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;
@@ -43,6 +46,7 @@
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
+- (IBAction)pronounceCard:(id)sender;
 
 - (void)resetStudySet;
 - (void)resetViewWithCard:(Card*)card;
@@ -57,6 +61,8 @@
 /* for pageControl */
 - (IBAction) changePage:(id)sender;
 - (IBAction) launchExampleInstaller;
+
+@property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
 
 // scroll view
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
