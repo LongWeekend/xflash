@@ -323,6 +323,11 @@
 - (BOOL) installPluginWithPath:(NSString *)path
 {
   NSString* pluginKey;
+  
+  // Our plugins should not be backed up
+  BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:path];
+  LWE_ASSERT_EXC(isNotBackedUp, @"Failed to set skip backup attribute for file at %@", path);
+  
   // Downloader gives us absolute paths, but we need to work with relative from this point on
   // so get the filename and go from there
   NSString* filename = [path lastPathComponent];
