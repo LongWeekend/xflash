@@ -29,6 +29,9 @@
 		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
 		24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
+		24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
+		24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E3113D7539F00B2BB56 /* AppDelegate.m */; };
 		24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
 		24E47F0111F3E59D007F6FB7 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
@@ -698,6 +701,8 @@
 		24B5660813CF656200BEE166 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
 		24B5661413CF67CD00BEE166 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		24BB427F14685E67002C387B /* LWEAudioQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAudioQueue.h; sourceTree = "<group>"; };
+		24BB428014685E67002C387B /* LWEAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAudioQueue.m; sourceTree = "<group>"; };
 		24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashDatabase.h; path = DatabaseSetup/JFlashDatabase.h; sourceTree = "<group>"; };
 		24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashDatabase.m; path = DatabaseSetup/JFlashDatabase.m; sourceTree = "<group>"; };
 		24DE1E3013D7539F00B2BB56 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1370,9 +1375,6 @@
 		29B97314FDCFA39411CA2CEA /* jFlash */ = {
 			isa = PBXGroup;
 			children = (
-				242A174714628AF4002977E6 /* AudioToolbox.framework */,
-				242A173F1461AB60002977E6 /* AVFoundation.framework */,
-				916ECCB514597E67007FA69E /* libsqlite3.dylib */,
 				916A89CA101C681800D7917D /* Assets */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -1408,6 +1410,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				916ECCB514597E67007FA69E /* libsqlite3.dylib */,
+				242A174714628AF4002977E6 /* AudioToolbox.framework */,
+				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
 				49C521DE144D2461002011BD /* CoreText.framework */,
 				4938F8C814027860001EB473 /* CFlash */,
@@ -1963,6 +1968,8 @@
 				91CA712C133BDE7B008A89A8 /* BackupManager.m */,
 				91CA7728133D2E22008A89A8 /* LWEJanrainLoginManager.h */,
 				91CA7729133D2E22008A89A8 /* LWEJanrainLoginManager.m */,
+				24BB427F14685E67002C387B /* LWEAudioQueue.h */,
+				24BB428014685E67002C387B /* LWEAudioQueue.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -2945,6 +2952,7 @@
 				49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17441462893F002977E6 /* AudioSessionManager.m in Sources */,
 				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
+				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2962,6 +2970,7 @@
 				49716144144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17461462893F002977E6 /* AudioSessionManager.m in Sources */,
+				24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3109,6 +3118,7 @@
 				49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17451462893F002977E6 /* AudioSessionManager.m in Sources */,
 				917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */,
+				24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
