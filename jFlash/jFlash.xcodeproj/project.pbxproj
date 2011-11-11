@@ -467,6 +467,8 @@
 		917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
+		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
+		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
@@ -1062,6 +1064,8 @@
 		917A5C8411AB851100016BD2 /* MoodIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoodIcon.m; path = AppSpecific/MoodIcon.m; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		917B2DBA146CC756007C77B1 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSActivityView.h; path = External/DSActivityView/Sources/DSActivityView.h; sourceTree = "<group>"; };
+		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
@@ -1552,6 +1556,8 @@
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
 				917A5C7B11AB84EE00016BD2 /* Constants.h */,
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
+				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
+				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
@@ -2938,6 +2944,7 @@
 				49716142144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17441462893F002977E6 /* AudioSessionManager.m in Sources */,
+				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3101,6 +3108,7 @@
 				49716143144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17451462893F002977E6 /* AudioSessionManager.m in Sources */,
+				917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

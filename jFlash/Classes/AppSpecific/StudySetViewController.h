@@ -13,6 +13,7 @@
 #import "GroupPeer.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "BackupManager.h"
+#import "DSActivityView.h"
 
 @interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
 {
@@ -36,5 +37,6 @@
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) BackupManager *backupManager;
+@property (retain) DSActivityView *activityView;
 
 @end

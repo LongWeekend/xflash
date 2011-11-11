@@ -16,3 +16,6 @@
 [submodule "jFlash/Classes/External/janrain"]
 	path = jFlash/Classes/External/janrain
 	url = git@github.com:LongWeekend/engage.iphone.git
+[submodule "jFlash/Classes/External/DSActivityView"]
+	path = jFlash/Classes/External/DSActivityView
+	url = git@github.com:rsharrott/DSActivityView.git
