@@ -12,6 +12,7 @@
 #import "LWEAudioQueue.h"
 
 static NSString *const kFullReadingKey;
+static NSString *const kSegmentedReadingKey;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @class LWEAudioQueue;
