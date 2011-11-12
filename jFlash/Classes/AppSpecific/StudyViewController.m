@@ -14,6 +14,8 @@
 #import "RootViewController.h"
 #import "AddTagViewController.h"
 
+#import "AudioSessionManager.h"
+
 @interface StudyViewController()
 //private properties
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
@@ -85,17 +87,20 @@
   }
   else
   {
+    [[AudioSessionManager sharedAudioSessionManager] setSessionActive:NO];
     self.pronounceBtn.enabled = YES;
   }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
 {
+  [[AudioSessionManager sharedAudioSessionManager] setSessionActive:NO];
   self.pronounceBtn.enabled = YES;
 }
 
 - (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
 {
+  [[AudioSessionManager sharedAudioSessionManager] setSessionActive:YES];
   self.pronounceBtn.enabled = NO;
 }
 
