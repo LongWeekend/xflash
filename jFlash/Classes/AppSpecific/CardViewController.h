@@ -1,42 +1,61 @@
 //
-//  CardViewController.h
+//  WordCardViewController.h
 //  jFlash
 //
-//  Created by シャロット ロス on 5/25/10.
+//  Created by シャロット ロス on 6/3/10.
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
+#import "UIWebView+LWENoBounces.h"
+#import "OHAttributedLabel.h"
+#import "MoodIcon.h"
 
-@class StudyViewController;
-@class CardViewController;
+extern NSString * const LWECardHtmlHeader;
+extern NSString * const LWECardHtmlHeader_EtoJ;
+extern NSString * const LWECardHtmlFooter;
 
-@protocol CardViewControllerDelegate <NSObject>
-@optional
-- (void) setupWithCard:(Card*)card;
-- (void) reveal;
+@interface WordCardViewController : UIViewController 
+{
+  //! Holds a reference to the current meaning's string-replacement javascript
+  NSString *_tmpJavascript;
+}
 
-- (void)studyModeDidChange:(StudyViewController*)svc;
-- (void)setupViews:(StudyViewController*)svc;
-- (void)refreshSessionDetailsViews:(StudyViewController*)svc;
-- (void)cardViewWillSetup:(CardViewController*)cardViewController;
-- (void)cardViewDidSetup:(CardViewController*)cardViewController;
-- (void)cardViewWillReveal:(CardViewController*)cardViewController;
-- (void)cardViewDidReveal:(CardViewController*)cardViewController;
-- (BOOL)shouldRevealCardView:(CardViewController*)cvc;
-@end
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
-@interface CardViewControllerOld : UIViewController
+- (IBAction)doTogglePercentCorrectBtn;
+- (void) turnPercentCorrectOff;
+- (void) turnPercentCorrectOn;
 
-- (void) setupWithCard:(Card*)card;
-- (void) reveal;
+- (void)toggleMoreIconForLabel: (UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
+- (void)prepareView:(Card*)card;
+- (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
 
-// These two methods are more temporary, to pull more browsemode/practice mode stuff out of SVC
-- (void) setupViews:(StudyViewController*)svc;
-- (void) refreshSessionDetailsViews:(StudyViewController*)svc;
-- (void) studyModeDidChange:(StudyViewController*)svc;
+- (void) turnReadingOn;
+- (void) turnReadingOff;
+- (void)resetReadingVisibility;
+- (IBAction) doToggleReadingBtn;
 
-@property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
+@property (nonatomic, retain) NSString *baseHtml;
 
+@property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
+@property (nonatomic, retain) IBOutlet UILabel *cardReadingLabel;
+@property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
+
+@property (nonatomic, retain) IBOutlet UIScrollView *cardReadingLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIScrollView *cardHeadwordLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIImageView *cardReadingLabelScrollMoreIcon;
+@property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
+
+@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+
+// Mood Icon
+@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
+@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
+@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
+@property (nonatomic, retain) MoodIcon *moodIcon;
+@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
+
+@property BOOL readingVisible;
 @end
