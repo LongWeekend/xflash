@@ -17,6 +17,10 @@
 
 #pragma mark - Card View Controller Delegate
 
+- (void) setupWithCard:(Card *)card
+{
+}
+
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
   cardViewController.view = self.wordCardViewController.view;

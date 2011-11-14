@@ -12,7 +12,7 @@
 #import "ActionBarViewController.h"
 #import "CardViewController.h"
 
-@interface BrowseModeCardViewDelegate : NSObject <CardViewControllerDelegate, ActionBarViewControllerDelegate>
+@interface BrowseModeCardViewController : UIViewController <CardViewControllerDelegate, ActionBarViewControllerDelegate>
 
 @property (nonatomic, retain) WordCardViewController *wordCardViewController;
 
