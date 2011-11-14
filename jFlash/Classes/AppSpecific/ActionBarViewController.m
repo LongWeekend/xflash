@@ -218,8 +218,7 @@
   }
 }
 
-#pragma mark -
-#pragma mark Tweet Word Features
+#pragma mark - Tweet Word Features
 
 /**
  * Initialize the twitter engine class if not already done

@@ -26,7 +26,7 @@
 
 @class ActionBarViewController;
 
-@protocol ActionBarViewControllerDelegate <NSObject, MFMailComposeViewControllerDelegate>
+@protocol ActionBarViewControllerDelegate <NSObject>
 @optional
 // setup card to unrevealed state
 - (void)actionBarWillSetup:(ActionBarViewController*)avc;
@@ -37,7 +37,10 @@
 - (BOOL)actionBar:(ActionBarViewController*)avc shouldReveal:(BOOL)reveal;
 @end
 
-@interface ActionBarViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, LWETRequestDelegate>
+@interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
+                                                       UIAlertViewDelegate,
+                                                       MFMailComposeViewControllerDelegate,
+                                                       LWETRequestDelegate>
 {
   LWETwitterEngine *_twitterEngine;
 }
