@@ -397,10 +397,10 @@
       knewIt = YES;
       
     case RIGHT_BTN:
-      numRight++;
-      numViewed++;
-      currentRightStreak++;
-      currentWrongStreak = 0;
+      self.numRight++;
+      self.numViewed++;
+      self.currentRightStreak++;
+      self.currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
       nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
@@ -411,10 +411,10 @@
       break;
       
     case WRONG_BTN:
-      numWrong++;
-      numViewed++;
-      currentWrongStreak++;
-      currentRightStreak = 0;
+      self.numWrong++;
+      self.numViewed++;
+      self.currentWrongStreak++;
+      self.currentRightStreak = 0;
       self.finishedSetAlertShowed = NO;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
       nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
@@ -446,9 +446,9 @@
   self.progressVC.rightStreak = currentRightStreak;
   self.progressVC.wrongStreak = currentWrongStreak;
   self.progressVC.currentStudySet.text = currentCardSet.tagName;
-  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", numRight];
-  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", numWrong];
-  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", numViewed];
+  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
+  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
+  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
   self.progressVC.delegate = self;
   
   NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:self.progressVC, @"controller", nil];
