@@ -14,6 +14,9 @@
 
 @protocol CardViewControllerDelegate <NSObject>
 @optional
+- (void) setupWithCard:(Card*)card;
+- (void) reveal;
+
 - (void)studyModeDidChange:(StudyViewController*)svc;
 - (void)setupViews:(StudyViewController*)svc;
 - (void)refreshSessionDetailsViews:(StudyViewController*)svc;
@@ -21,7 +24,7 @@
 - (void)cardViewDidSetup:(CardViewController*)cardViewController;
 - (void)cardViewWillReveal:(CardViewController*)cardViewController;
 - (void)cardViewDidReveal:(CardViewController*)cardViewController;
-- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
+- (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
 @interface CardViewController : UIViewController
@@ -35,6 +38,5 @@
 - (void) studyModeDidChange:(StudyViewController*)svc;
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
-@property (retain) Card *currentCard;
 
 @end

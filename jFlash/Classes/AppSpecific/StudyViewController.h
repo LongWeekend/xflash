@@ -13,7 +13,7 @@
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
 #import "BrowseModeCardViewDelegate.h"
-#import "PracticeModeCardViewDelegate.h"
+#import "PracticeModeCardViewController.h"
 #import "ExampleSentencesViewController.h"
 
 #import "LWEAudioQueue.h"

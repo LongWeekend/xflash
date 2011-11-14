@@ -322,7 +322,7 @@
   }
   else
   {
-		cardViewDelegate = [[PracticeModeCardViewDelegate alloc] init];
+		cardViewDelegate = [[PracticeModeCardViewController alloc] init];
   }
 	
 	//Not increasing retain count.

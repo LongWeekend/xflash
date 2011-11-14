@@ -9,22 +9,24 @@
 #import "CardViewController.h"
 
 @implementation CardViewController
-@synthesize delegate, currentCard;
+@synthesize delegate;
 
 #pragma mark - Flow Methods
 
 - (void) setupWithCard:(Card*)card
 {
-  self.currentCard = card;
   LWE_DELEGATE_CALL(@selector(cardViewWillSetup:),self);
   LWE_DELEGATE_CALL(@selector(cardViewDidSetup:),self);
 }
 
+/**
+ * Default "reveal" behavior is no
+ */
 - (void) reveal
 {
-  if ([self.delegate respondsToSelector:@selector(cardView:shouldReveal:)])
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldRevealCardView:)])
   {
-    BOOL shouldReveal = [self.delegate cardView:self shouldReveal:NO];
+    BOOL shouldReveal = [self.delegate shouldRevealCardView:self];
     if (shouldReveal)
     {
       LWE_DELEGATE_CALL(@selector(cardViewWillReveal:),self);
@@ -58,7 +60,6 @@
 
 - (void)dealloc 
 {
-  [currentCard release];
   [super dealloc];
 }
 
