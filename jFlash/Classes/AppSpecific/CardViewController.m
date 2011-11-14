@@ -8,7 +8,7 @@
 
 #import "CardViewController.h"
 
-@implementation CardViewController
+@implementation CardViewControllerOld
 @synthesize delegate;
 
 #pragma mark - Flow Methods

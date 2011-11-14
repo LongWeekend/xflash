@@ -27,7 +27,7 @@
 - (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
-@interface CardViewController : UIViewController
+@interface CardViewControllerOld : UIViewController
 
 - (void) setupWithCard:(Card*)card;
 - (void) reveal;
