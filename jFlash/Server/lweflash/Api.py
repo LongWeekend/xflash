@@ -84,10 +84,11 @@ class UploadBackupHandler(webapp.RequestHandler):
     session = check_session(self.response)
     if session == None:
       return
-    backup = getBackup(session['me'], self.request.get('flashType'))
+    flashType = getFlashType(self.request)
+    backup = getBackup(session['me'], flashType)
     if backup is None:
       backup = model.BackupData()
-      backup.flashType = self.request.get('flashType')
+      backup.flashType = flashType
       backup.user = session['me']
     backup.backupFile = self.request.get('backupFile')
     try:
@@ -99,10 +100,11 @@ class UploadBackupHandler(webapp.RequestHandler):
 class GetBackupHandler(webapp.RequestHandler):
   """ Returns a backup file or 404 if it doesn't exist"""
   def get(self):
-    session = check_session(self.response)
+    session = check_session(self.response)    
     if session == None:
       return
-    backup = getBackup(session['me'], self.request.get('flashType'))
+    flashType = getFlashType(self.request)
+    backup = getBackup(session['me'], flashType)
     if backup is None:
       self.error(404)
     else:
@@ -112,3 +114,10 @@ class GetBackupHandler(webapp.RequestHandler):
 def getBackup(user, flashType):
   query = model.BackupData.gql("WHERE user = :1 AND flashType = :2", user, flashType)
   return query.get()
+
+def getFlashType(request):
+  # jFlash switched to using the bundle identifier but we need to support users with old data
+  flashType = request.get('flashType')
+  if flashType == "com.longweekendmobile.jFlash":
+    flashType = "japaneseflash"
+  return flashType

@@ -8,6 +8,7 @@
 
 #import "StudySetWordsViewController.h"
 #import "AddTagViewController.h"
+#import "AddStudySetInputViewController.h"
 
 @interface StudySetWordsViewController ()
 - (void) _loadWordListInBackground;
@@ -40,8 +41,7 @@
     {
       self.tag = initTag;
       [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
-    }
-    self.navigationItem.title = [initTag tagName];
+    }    
     
     UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator = av;
@@ -73,6 +73,7 @@
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.backgroundColor = [UIColor clearColor];
+  self.navigationItem.title = [self.tag tagName];
 }
 
 - (void)viewDidUnload
@@ -164,8 +165,15 @@
   }
   else
   {
-    // Show one top button
-    returnCount = 1;
+    // non-editable tags can only be studied
+    if(self.tag.tagEditable == 0)
+    {
+      return 1;
+    }
+    else // editable tags can be edited and eventually shared
+    {
+      returnCount = settingsRowsLength;
+    }
   }
   return returnCount;
 }
@@ -204,10 +212,14 @@
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.row == kWordSetOptionsStart)
     {
       cell.textLabel.text = NSLocalizedString(@"Begin Studying These",@"StudySetWordsViewController.BeginStudyingThese");
-      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    if (indexPath.row == kWordSetOptionsEditSet)
+    {
+      cell.textLabel.text = NSLocalizedString(@"Edit Set Details",@"StudySetWordsViewController.EditSetDetails");
     }
   }
   return cell;
@@ -273,6 +285,14 @@
         [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Words In Set",@"StudySetViewController.NoWords_AlertViewTitle")
                                            message:NSLocalizedString(@"To add words to this set, you can use Search.",@"StudySetViewController.NoWords_AlertViewMessage")];
       }
+    }
+    else if(indexPath.row == kWordSetOptionsEditSet)
+    {
+      AddStudySetInputViewController* tmpVC = [[AddStudySetInputViewController alloc] initWithTag:self.tag];
+      UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];      
+      [[self navigationItem] setBackBarButtonItem: newBackButton];      
+      [newBackButton release];
+      [self.navigationController pushViewController:tmpVC animated:YES];
     }
   }
   // If they pressed a card, show the add to set list

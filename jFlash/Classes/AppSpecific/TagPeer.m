@@ -314,15 +314,21 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 //! adds a new tag to the database, returns new tag object, nil in case of error
 + (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  return [self createTag:tagName withOwner:ownerId withDescription:@""];
+}
 
+//! Adds a new tag to the database, returns new tag object, nil if error
++ (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId withDescription:(NSString*)description
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
   tagName = [tagName stringByReplacingOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, tagName.length)];
   
   Tag *createdTag = nil;
-  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name) VALUES ('%@')",tagName];
+  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,description];
   [db executeUpdate:sql];
-
+  
   NSInteger lastTagId = (NSInteger)db.dao.lastInsertRowId;
   if (db.dao.hadError == NO)
   {
