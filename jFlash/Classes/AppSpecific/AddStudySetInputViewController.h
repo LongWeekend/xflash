@@ -11,6 +11,8 @@
 
 @interface AddStudySetInputViewController : UIViewController
 
+extern NSString* const kSetWasAddedOrUpdated;
+
 - (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId;
 - (id) initWithTag:(Tag*)aTag;
 - (BOOL)isModal;

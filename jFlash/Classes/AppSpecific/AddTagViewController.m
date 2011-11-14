@@ -61,7 +61,7 @@ enum EntrySectionRows
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
 
     // Register listener to reload data if modal added a set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:@"setAddedToView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
   }
   return self;
 }
