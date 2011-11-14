@@ -53,7 +53,7 @@
   [self.wordCardViewController turnReadingOn];
   
   // Change action bar view to other XIB
-  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:svc.actionBarController options:nil];
+  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController-Browse" owner:svc.actionBarController options:nil];
 }
 
 #pragma mark - Action Bar View Controller Delegate
