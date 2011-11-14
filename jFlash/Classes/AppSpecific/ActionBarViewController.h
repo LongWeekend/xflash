@@ -16,30 +16,35 @@
 #import "LWETRequestDelegate.h"
 #import "TweetWordXAuthController.h"
 #import <MessageUI/MessageUI.h>
-#import <MessageUI/MFMailComposeViewController.h>
-
+#import "StudyViewProtocols.h"
 
 #define SVC_ACTION_ADDTOSET_BUTTON 1
 #define SVC_ACTION_ADDTOFAV_BUTTON 0
 #define SVC_ACTION_TWEET_BUTTON 2
 #define SVC_ACTION_REPORT_BUTTON 3
 
+extern NSString * const LWEActionBarButtonWasTapped;
+
 @class ActionBarViewController;
 
 @protocol ActionBarViewControllerDelegate <NSObject>
 @optional
+- (void)actionBarDidChangeMode:(ActionBarViewController*)avc;
+
 // setup card to unrevealed state
 - (void)actionBarWillSetup:(ActionBarViewController*)avc;
 - (void)actionBarDidSetup:(ActionBarViewController*)avc;
+
 // reveal card
 - (void)actionBarWillReveal:(ActionBarViewController*)avc;
 - (void)actionBarDidReveal:(ActionBarViewController*)avc;
-- (BOOL)actionBar:(ActionBarViewController*)avc shouldReveal:(BOOL)reveal;
+- (BOOL)actionBarShouldReveal:(ActionBarViewController*)avc;
 @end
 
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
                                                        UIAlertViewDelegate,
                                                        MFMailComposeViewControllerDelegate,
+                                                       StudyViewSubcontrollerDelegate,
                                                        LWETRequestDelegate>
 {
   LWETwitterEngine *_twitterEngine;
@@ -55,18 +60,11 @@
 - (IBAction)doBuryCardBtn;
 
 // core methods
-- (void)setupWithCard:(Card*)card;
-- (void)reveal;
 - (void)tweet;
-
-// bad data
-- (void)reportBadData;
 
 // action sheet
 - (IBAction)showCardActionSheet;
-- (void) initTwitterEngine;
 
-//we don't retain delegates
 @property (assign) IBOutlet id<ActionBarViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) Card *currentCard;
@@ -79,6 +77,5 @@
 @property (nonatomic, retain) IBOutlet UIButton *wrongBtn;
 
 @property (nonatomic, retain) IBOutlet UIView *cardMeaningBtnHint;
-@property (nonatomic, retain) IBOutlet UIView *cardMeaningBtnHintMini;
 
 @end

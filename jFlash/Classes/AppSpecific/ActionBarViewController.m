@@ -11,47 +11,64 @@
 #import "LWEJanrainLoginManager.h"
 #import "LWETwitterEngine.h"
 
+NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
+
+@interface ActionBarViewController ()
+- (void) _reportBadData;
+- (void) _initTwitterEngine;
+@end
+
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
-@synthesize cardMeaningBtnHint, cardMeaningBtnHintMini;
+@synthesize cardMeaningBtnHint;
 
+// MMA: 11/14/2011 -- this method appears to be unused...
 //Give the delegate a chance to not reveal the card
 - (BOOL)_actionBarShouldReveal:(BOOL)reveal
 {
-  if ([self.delegate respondsToSelector:@selector(actionBar:shouldReveal:)])
+  if (self.delegate && [self.delegate respondsToSelector:@selector(actionBarShouldReveal:)])
   {
-    reveal = [self.delegate actionBar:self shouldReveal:reveal];
+    reveal = [self.delegate actionBarShouldReveal:self];
   }
-  
   return reveal;
+}
+
+#pragma mark - StudyViewControllerDelegate
+
+- (void) studyViewModeDidChange:(StudyViewController*)svc
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(actionBarDidChangeMode::)])
+  {
+    [self.delegate actionBarDidChangeMode:self];
+  }
 }
 
 #pragma mark - IBActions
 
 - (IBAction) doNextCardBtn
 {
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"actionBarButtonWasTapped" object:[NSNumber numberWithInt:NEXT_BTN]]];
+  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:NEXT_BTN]]];
 }
 
 - (IBAction) doPrevCardBtn
 {
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"actionBarButtonWasTapped" object:[NSNumber numberWithInt:PREV_BTN]]];
+  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:PREV_BTN]]];
 }
 
 - (IBAction) doBuryCardBtn
 {
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"actionBarButtonWasTapped" object:[NSNumber numberWithInt:BURY_BTN]]];
+  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:BURY_BTN]]];
 }
 
 - (IBAction) doRightBtn
 {
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"actionBarButtonWasTapped" object:[NSNumber numberWithInt:RIGHT_BTN]]];
+  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:RIGHT_BTN]]];
 }
 
 - (IBAction) doWrongBtn
 {
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"actionBarButtonWasTapped" object:[NSNumber numberWithInt:WRONG_BTN]]];
+  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:WRONG_BTN]]];
 }
 
 - (IBAction) doRevealMeaningBtn
@@ -112,7 +129,7 @@
   Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
-    [self reportBadData];
+    [self _reportBadData];
   }
   else if (buttonIndex == SVC_ACTION_ADDTOSET_BUTTON)
   {
@@ -169,7 +186,7 @@
 
 #pragma mark - MailCompose helper & delegate method
 
-- (void)reportBadData
+- (void) _reportBadData
 {
   if ([MFMailComposeViewController canSendMail]) 
   {
@@ -179,7 +196,7 @@
     [picker setToRecipients:[NSArray arrayWithObjects:LWE_BAD_DATA_EMAIL, nil]];
     
     Tag *tmpTag = [[CurrentState sharedCurrentState] activeTag];
-    NSString *messageBody = [NSString stringWithFormat:@"How can we make this awesome?\n\n\n\nInfo For Long Weekend:\n\nCard Id: %i\nCard Headword: %@\nCard Meaning: %@\nActive Tag Id: %i\nActive Tag Name: %@", [[self currentCard] cardId], [[self currentCard] headword], [[self currentCard] meaningWithoutMarkup], tmpTag.tagId, tmpTag.tagName];
+    NSString *messageBody = [NSString stringWithFormat:@"How can we make this awesome?\n\n\n\nInfo For Long Weekend:\n\nCard Id: %i\nCard Headword: %@\nCard Meaning: %@\nActive Tag Id: %i\nActive Tag Name: %@", self.currentCard.cardId, self.currentCard.headword, self.currentCard.meaningWithoutMarkup, tmpTag.tagId, tmpTag.tagName];
     
     [picker setMessageBody:messageBody isHTML:NO];
     
@@ -213,7 +230,7 @@
   if (buttonIndex == LWE_ALERT_OK_BTN)
   {
     LWE_LOG(@"Following long weekend (twitter ID 65012024)");
-    [self initTwitterEngine];
+    [self _initTwitterEngine];
 		[_twitterEngine performSelectorInBackground:@selector(follow:) withObject:@"65012024"];
   }
 }
@@ -225,7 +242,7 @@
  * If called twice, this method is pretty much a NOOP
  * However, tweet and any twitter "action" will nil out the Twitter Engine, so you have to call again
  */
-- (void) initTwitterEngine
+- (void) _initTwitterEngine
 {
 	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
@@ -252,7 +269,7 @@
  */
 - (void)tweet
 {
-  [self initTwitterEngine];
+  [self _initTwitterEngine];
 	
 	if ((_twitterEngine.loggedUser != nil) && (_twitterEngine.loggedUser.isAuthenticated))
 	{
@@ -316,10 +333,9 @@
 - (void)didFinishAuth
 {
 	NSString *tweetWord = [self getTweetWord];
-	TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
-												  initWithNibName:@"TweetWordViewController"  
-												  twitterEngine:_twitterEngine 
-												  tweetWord:tweetWord];
+	TweetWordViewController *twitterController = [[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
+                                                                                  twitterEngine:_twitterEngine 
+                                                                                      tweetWord:tweetWord];
 	
   // Show an alert view asking if they want to follow LWE
   [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
@@ -328,10 +344,8 @@
                                       cancel:NSLocalizedString(@"No Thanks",@"Global.NoThanks")
                                     delegate:self];
   
-	[self performSelector:@selector(presentModal:) 
-			   withObject:twitterController 
-			   afterDelay:0.1f];
-	
+  // TODO: Why is this here?  MMA - 11/14/2011
+	[self performSelector:@selector(presentModal:) withObject:twitterController afterDelay:0.1f];
 	[twitterController release];
 }
 
@@ -433,14 +447,10 @@
   LWE_LOG(@"Tweet string: %@",str);
   LWE_LOG(@"Tweet length: %d",[str length]);
   
-  // Now make it immutable
-	NSString *result = [NSString stringWithString:str];
-	[str release];
-	return result;
+	return (NSString*)[str autorelease];
 }
 
-#pragma mark -
-#pragma mark Class Plumbing
+#pragma mark - Class Plumbing
 
 - (void)didReceiveMemoryWarning
 {
@@ -464,14 +474,12 @@
   self.rightBtn = nil;
   self.wrongBtn = nil;
 	self.cardMeaningBtnHint = nil;
-	self.cardMeaningBtnHintMini = nil;
 }
 
 - (void)dealloc
 {
 	[currentCard release];
   [cardMeaningBtnHint release];
-  [cardMeaningBtnHintMini release];
   
 	if (_twitterEngine != nil)
 	{

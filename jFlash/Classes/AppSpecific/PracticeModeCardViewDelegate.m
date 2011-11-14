@@ -13,64 +13,93 @@
 #import "StudyViewController.h"
 
 @implementation PracticeModeCardViewDelegate
-@synthesize wordCardViewController;
+
+@synthesize currentPercentageCorrect;
+
+#pragma mark - Init
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    self.currentPercentageCorrect = 100.0f;
+  }
+  return self;
+}
 
 #pragma mark - Card View Controller Delegate
 
+- (void) cardViewDidChangeMode:(CardViewController *)cardViewController
+{
+  // You can tap the HH in practice mode.
+  cardViewController.moodIconBtn.enabled = YES;
+}
+
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-  cardViewController.view = self.wordCardViewController.view;
-  [self.wordCardViewController prepareView:cardViewController.currentCard];
-
   // always start with the meaning hidden
-  [self.wordCardViewController hideMeaningWebView:YES];
-  [self.wordCardViewController resetReadingVisibility];
+  [cardViewController hideMeaningWebView:YES];
+  [cardViewController resetReadingVisibility];
   
+  // Show the percent correct when in practice mode
+  [cardViewController turnPercentCorrectOn];
+
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   BOOL useMainHeadword = [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
   if (useMainHeadword == NO)
   {
-    self.wordCardViewController.toggleReadingBtn.hidden = YES;
-    self.wordCardViewController.cardReadingLabelScrollContainer.hidden = YES;
-    self.wordCardViewController.readingVisible = NO;
+    cardViewController.toggleReadingBtn.hidden = YES;
+    cardViewController.cardReadingLabelScrollContainer.hidden = YES;
+    cardViewController.readingVisible = NO;
   }
   else
   {
     // set the toggleReadingBtn to not hidden for other modes,
     // if this is not here the button can be missing in practice mode
-    self.wordCardViewController.toggleReadingBtn.hidden = NO;
+    cardViewController.toggleReadingBtn.hidden = NO;
   }
+  
+  [cardViewController.moodIcon updateMoodIcon:self.currentPercentageCorrect];
 }
 
-- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
+- (BOOL)shouldRevealCardView:(CardViewController *)cvc
 {
+  // We always want to reveal in practice mode
   return YES;
 }
 
 - (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
-  [self.wordCardViewController hideMeaningWebView:NO];
+  [cardViewController hideMeaningWebView:NO];
   
   // TODO: MMA why are we caching the value of this only to change it on the next line?
   // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again
   // on the next card (in practice mode)
-  BOOL userSetReadingVisible = self.wordCardViewController.readingVisible;
-  [self.wordCardViewController turnReadingOn];
-  self.wordCardViewController.readingVisible = userSetReadingVisible;
+  BOOL userSetReadingVisible = cardViewController.readingVisible;
+  [cardViewController turnReadingOn];
+  cardViewController.readingVisible = userSetReadingVisible;
 }
 
-- (void) refreshSessionDetailsViews:(StudyViewController*)svc
+
+#pragma mark - StudyViewControllerDelegate Methods
+
+- (void) studyViewWillSetup:(StudyViewController*)svc
+{
+	// In practice mode, scroll view should always start disabled
+  svc.scrollView.pagingEnabled = NO;
+  svc.scrollView.scrollEnabled = NO;
+}
+
+- (void) updateStudyViewLabels:(StudyViewController*)svc
 {
   NSInteger unseen = [[svc.currentCardSet.cardLevelCounts objectAtIndex:0] intValue];
   NSInteger total = svc.currentCardSet.cardCount;
   svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",unseen,total];
-  [self.wordCardViewController turnPercentCorrectOn];
   
   // If practice mode, show the quiz stuff.
   svc.tapForAnswerImage.hidden = NO;
   svc.revealCardBtn.hidden = NO;
-  
-  // Update the speech bubble
   
   // Update mood icon
   CGFloat tmpRatio = 100;
@@ -78,26 +107,16 @@
   {
     tmpRatio = 100*((CGFloat)svc.numRight / (CGFloat)svc.numViewed);
   }
-  [self.wordCardViewController.moodIcon updateMoodIcon:tmpRatio];
-}
-
-- (void) setupViews:(StudyViewController *)svc
-{
-	// In practice mode, scroll view should always start disabled
-  svc.scrollView.pagingEnabled = NO;
-  svc.scrollView.scrollEnabled = NO;
-}
-
-- (void)studyModeDidChange:(StudyViewController*)svc
-{
-  // You can tap the HH in practice mode.
-  self.wordCardViewController.moodIconBtn.enabled = YES;
-  
-  // Change action bar view to other XIB
-  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:svc.actionBarController options:nil];
+  self.currentPercentageCorrect = tmpRatio;
 }
 
 #pragma mark - Action Bar Delegate Methods
+
+- (void)actionBarDidChangeMode:(ActionBarViewController *)avc
+{
+  // Change action bar view to other XIB
+  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:avc options:nil];
+}
 
 -(void) actionBarWillSetup:(ActionBarViewController*)avc
 {
@@ -115,26 +134,6 @@
   avc.buryCardBtn.hidden = NO;
   avc.addBtn.hidden = NO;
   avc.cardMeaningBtnHint.hidden = YES;
-}
-
-#pragma mark - Class Plumbing
-
-- (id) init
-{
-  self = [super init];
-  if (self)
-  {
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    BOOL useMainHeadword = [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
-    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
-  }
-  return self;
-}
-
-- (void)dealloc 
-{
-  [wordCardViewController release];
-  [super dealloc];
 }
 
 @end

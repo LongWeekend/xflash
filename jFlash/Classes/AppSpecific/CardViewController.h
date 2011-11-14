@@ -11,12 +11,25 @@
 #import "UIWebView+LWENoBounces.h"
 #import "OHAttributedLabel.h"
 #import "MoodIcon.h"
+#import "StudyViewProtocols.h"
 
 extern NSString * const LWECardHtmlHeader;
 extern NSString * const LWECardHtmlHeader_EtoJ;
 extern NSString * const LWECardHtmlFooter;
 
-@interface WordCardViewController : UIViewController 
+@class CardViewController;
+
+@protocol CardViewControllerDelegate <NSObject>
+@optional
+- (void) cardViewDidChangeMode:(CardViewController*)cardViewController;
+- (void)cardViewWillSetup:(CardViewController*)cardViewController;
+- (void)cardViewDidSetup:(CardViewController*)cardViewController;
+- (void)cardViewWillReveal:(CardViewController*)cardViewController;
+- (void)cardViewDidReveal:(CardViewController*)cardViewController;
+- (BOOL)shouldRevealCardView:(CardViewController*)cvc;
+@end
+
+@interface CardViewController : UIViewController <StudyViewSubcontrollerDelegate>
 {
   //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;
@@ -29,13 +42,14 @@ extern NSString * const LWECardHtmlFooter;
 - (void) turnPercentCorrectOn;
 
 - (void)toggleMoreIconForLabel: (UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
-- (void)prepareView:(Card*)card;
 - (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
 
 - (void) turnReadingOn;
 - (void) turnReadingOff;
 - (void)resetReadingVisibility;
 - (IBAction) doToggleReadingBtn;
+
+@property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) NSString *baseHtml;
 

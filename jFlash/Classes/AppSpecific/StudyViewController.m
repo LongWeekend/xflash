@@ -23,20 +23,20 @@
 - (void) _notifyUserStudySetHasBeenLearned;
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
-- (void) _setupViewWithCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
+- (void) _resetViewWithCard:(Card*)card;
 @end
 
 @implementation StudyViewController
+@synthesize delegate, subcontrollerDelegate;
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
-@synthesize cardViewControllerDelegate;
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
@@ -145,13 +145,12 @@
   // Reset the current view (but nothing else) if the card settings changed (reading type, et al)
   [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *notification)
    {
-     [blockSelf resetViewWithCard:self.currentCard];
+     [blockSelf _resetViewWithCard:self.currentCard];
    }];
   
-  [center addObserver:self selector:@selector(doCardBtn:) name:@"actionBarButtonWasTapped" object:nil];
+  [center addObserver:self selector:@selector(doCardBtn:) name:LWEActionBarButtonWasTapped object:nil];
   [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
-  
   [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
   
   // Initialize the progressBarView
@@ -161,14 +160,14 @@
 	[tmpPBVC release];
   
   // Add the CardView to the View
-	CardViewController *tmpCVC = [[CardViewController alloc] init];
-  tmpCVC.currentCard = self.currentCard;
+  BOOL useMainHeadword = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
+	CardViewController *tmpCVC = [[CardViewController alloc] initDisplayMainHeadword:useMainHeadword];
   [self.cardView addSubview:tmpCVC.view];
   self.cardViewController = tmpCVC;
 	[tmpCVC release];
   
   // Add the Action Bar to the View
-	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] init];
+	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] initWithNibName:@"ActionBarViewController" bundle:nil];
   tmpABVC.currentCard = self.currentCard;
   [self.actionbarView addSubview:tmpABVC.view];
   self.actionBarController = tmpABVC;
@@ -289,7 +288,7 @@
   }
   
   // Use this to set up delegates, show the card, etc
-  [self resetViewWithCard:nextCard];
+  [self _resetViewWithCard:nextCard];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -311,33 +310,30 @@
  * and we need to layout everything again: mode, theme, reading settings,
  * etc etc etc.
  */
-- (void) resetViewWithCard:(Card*)card
+- (void) _resetViewWithCard:(Card*)card
 {
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  
-	id<CardViewControllerDelegate, ActionBarViewControllerDelegate> cardViewDelegate = nil;
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
-  {
-		cardViewDelegate = [[BrowseModeCardViewDelegate alloc] init];
-  }
-  else
-  {
-		cardViewDelegate = [[PracticeModeCardViewController alloc] init];
-  }
-	
-	//Not increasing retain count.
-  self.cardViewController.delegate = cardViewDelegate;
-  self.actionBarController.delegate = cardViewDelegate;
-  self.cardViewControllerDelegate = cardViewDelegate;
-	[cardViewDelegate release];
-  
-  // Now send our new delegate a message telling it we are using it
-  [self.cardViewController studyModeDidChange:self];
-  
   // Set up background based on theme
   // TODO: iPad customization
   NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
   self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+  
+  // Set up our subcontroller delegate
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
+  {
+		self.subcontrollerDelegate = [[[BrowseModeCardViewDelegate alloc] init] autorelease];
+  }
+  else
+  {
+		self.subcontrollerDelegate = [[[PracticeModeCardViewDelegate alloc] init] autorelease];
+  }
+  
+  self.cardViewController.delegate = self.subcontrollerDelegate;
+  self.actionBarController.delegate = self.subcontrollerDelegate;
+  
+  // Now send our new subcontrollers a message telling it we are using it
+  [self.cardViewController studyViewModeDidChange:self];
+  [self.actionBarController studyViewModeDidChange:self];
   
   // Finally display the card
   [self doChangeCard:card direction:nil];
@@ -353,8 +349,22 @@
 {
   if (card != nil)
   {
-    // Update current card here & on CardViewController
-    [self _setupViewWithCard:card];
+    // Sets up all of the sub-controllers of the study view controller.
+    LWE_DELEGATE_CALL(@selector(studyViewWillSetup:),self);
+    
+    [self.cardViewController setupWithCard:card];
+    [self.actionBarController setupWithCard:card];
+    [self.exampleSentencesViewController setupWithCard:card];
+    
+    // Asks our delegate if it wants to change any of the details of the view (labels, etc)
+    LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
+    
+    // Page control should be shown when we have example sentences
+    self.pageControl.hidden = ([self hasExampleSentences] == NO);
+    self.pageControl.currentPage = 0;
+    [self changePage:self.pageControl animated:NO];
+    _isChangingPage = NO;
+    
     self.currentCard = card;
     
     // If no direction, don't animate transition
@@ -504,25 +514,6 @@
 
 #pragma mark - Private methods to setup cards (called every transition)
 
-/**
- * Sets up all of the delegates and sub-controllers of the study view controller.
- */
-- (void) _setupViewWithCard:(Card*)card
-{
-  [self.cardViewController setupWithCard:card];
-  [self.actionBarController setupWithCard:card];
-  [self.exampleSentencesViewController setupWithCard:card];
-
-  [self.cardViewController refreshSessionDetailsViews:self];
-  [self.cardViewController setupViews:self];
-  
-  // Page control should be shown when we have example sentences
-  self.pageControl.hidden = ([self hasExampleSentences] == NO);
-  self.pageControl.currentPage = 0;
-  [self changePage:self.pageControl animated:NO];
-  _isChangingPage = NO;
-}
-
 /** 
  * Both page controller visibility setter and scroll view
  * enabler call this.  In the future, we don't want to 
@@ -591,7 +582,7 @@
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
     [self.currentCardSet addCardToActiveSet:theCard];
-    [self.cardViewController refreshSessionDetailsViews:self];
+    LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
   }
   else if ([changeType isEqualToString:LWETagContentCardRemoved])
   {
@@ -605,13 +596,13 @@
       {
         [self _notifyUserStudySetHasBeenLearned];
       }
-      [self resetViewWithCard:nextCard];
+      [self _resetViewWithCard:nextCard];
     }
     else
     {
       //It is smoother to just update the percentage, rather than the need to update the
       //whole view of the cards (the state will be changed as well like meaning label is hidden, etc)
-      [self.cardViewController refreshSessionDetailsViews:self];
+      LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
     }
   }
 }
@@ -644,7 +635,7 @@
     // Get rid of the old example sentences guy & re-setup the scroll view
     [self.exampleSentencesViewController.view removeFromSuperview];
     [self _setupScrollView];
-    [self resetViewWithCard:self.currentCard];
+    [self _resetViewWithCard:self.currentCard];
   }
 }
 
@@ -767,7 +758,6 @@
 	self.progressModalView = nil;
 	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
-	self.cardViewControllerDelegate = nil;
 	self.showProgressModalBtn = nil;
 	//self.progressModalCloseBtn = nil;
 	
@@ -815,8 +805,7 @@
   [pageControl release];
   [exampleSentencesViewController release];
   
-  // Get rid of cardviewcontroller delegate
-  [self setCardViewControllerDelegate:nil];
+  [subcontrollerDelegate release];
   
 	[super dealloc];
 }

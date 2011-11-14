@@ -6,22 +6,63 @@
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
-#import "WordCardViewController.h"
+#import "CardViewController.h"
 
 #import "ChineseCard.h"
 
 // Private Methods
-@interface WordCardViewController()
+@interface CardViewController()
 - (void) _injectMeaningHTML:(NSString*)html;
+- (void) _prepareView:(Card*)card;
 @end
 
-@implementation WordCardViewController
+@implementation CardViewController
+
+@synthesize delegate;
 @synthesize meaningWebView, cardHeadwordLabelScrollMoreIcon, cardHeadwordLabel, cardReadingLabelScrollMoreIcon, cardReadingLabel, toggleReadingBtn;
 @synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible;
 
 @synthesize baseHtml;
 
 @synthesize  moodIcon, moodIconBtn, percentCorrectLabel, hhAnimationView, percentCorrectTalkBubble;
+
+#pragma mark - Flow Methods
+
+- (void) setupWithCard:(Card*)card
+{
+  LWE_DELEGATE_CALL(@selector(cardViewWillSetup:),self);
+  [self _prepareView:card];
+  LWE_DELEGATE_CALL(@selector(cardViewDidSetup:),self);
+}
+
+- (void) studyViewModeDidChange:(StudyViewController*)svc
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(cardViewDidChangeMode:)])
+  {
+    [self.delegate cardViewDidChangeMode:self];
+  }
+}
+
+
+/**
+ * Default "reveal" behavior is no
+ */
+- (void) reveal
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldRevealCardView:)])
+  {
+    BOOL shouldReveal = [self.delegate shouldRevealCardView:self];
+    if (shouldReveal)
+    {
+      LWE_DELEGATE_CALL(@selector(cardViewWillReveal:),self);
+      LWE_DELEGATE_CALL(@selector(cardViewDidReveal:),self);
+    }
+  }
+}
+
+#pragma mark - Class Plumbing
+
+
 
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
 {
@@ -32,13 +73,13 @@
   {
     // Main headword, so don't do anything differently.
     htmlHeader = [LWECardHtmlHeader stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
-    nibName = @"WordCardViewController";
+    nibName = @"CardViewController";
   }
   else
   {
     // Prepare the view for displaying in E-to-J mode
     htmlHeader = [LWECardHtmlHeader_EtoJ stringByReplacingOccurrencesOfString:@"##THEMECSS##" withString:cssHeader];  
-    nibName = @"WordCardViewController-EtoJ";
+    nibName = @"CardViewController-EtoJ";
   }
   self = [super initWithNibName:nibName bundle:nil];
   if (self)
@@ -120,64 +161,6 @@
   [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
-// Prepare the view for the current card
-- (void) prepareView:(Card*)card
-{
-  // Fix up the headword & the meaning; those are a bit easier.
-  [self _injectMeaningHTML:card.meaning];
-  self.cardHeadwordLabel.text = card.headword;
-
-  // Now do the hard part (for CFlash)
-#if defined(LWE_JFLASH)
-  self.cardReadingLabel.text = card.reading;
-#elif defined(LWE_CFLASH)
-  NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
-  NSArray *readingHashes = [(ChineseCard*)card readingComponents];
-  for (NSDictionary *readingHash in readingHashes)
-  {
-    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
-    NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
-    NSRange allRange = NSMakeRange(0, [stringToAppend length]);
-    [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
-                          value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
-                          range:allRange];
-    [attrString appendAttributedString:tmpAttrString];
-    [tmpAttrString release];
-  }
-  
-  [(OHAttributedLabel *)self.cardReadingLabel setAttributedText:attrString];
-  [attrString release];
-  
-  // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
-  // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
-  // wonky, so we have to go with what works
-  self.cardReadingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
-  self.cardReadingLabel.shadowColor = [UIColor blackColor];
-  self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
-#endif
-  
-  [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
-                                  minFontSize:READING_MIN_FONTSIZE
-                                  maxFontSize:READING_MAX_FONTSIZE
-                            forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
-  
-  // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:self.cardReadingLabel
-                       forScrollView:self.cardReadingLabelScrollContainer
-                            withText:card.reading
-                         minFontSize:READING_MIN_FONTSIZE
-                         maxFontSize:READING_MAX_FONTSIZE];
-
-  [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
-                       forScrollView:self.cardHeadwordLabelScrollContainer
-                            withText:card.headword
-                         minFontSize:HEADWORD_MIN_FONTSIZE
-                         maxFontSize:HEADWORD_MAX_FONTSIZE];
-  
-  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
-  [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
-}
-
 #pragma mark - Reading Label Methods
 
 - (void) turnReadingOn
@@ -225,6 +208,64 @@
 }
 
 #pragma mark - Private Methods
+
+// Prepare the view for the current card
+- (void) _prepareView:(Card*)card
+{
+  // Fix up the headword & the meaning; those are a bit easier.
+  [self _injectMeaningHTML:card.meaning];
+  self.cardHeadwordLabel.text = card.headword;
+  
+  // Now do the hard part (for CFlash)
+#if defined(LWE_JFLASH)
+  self.cardReadingLabel.text = card.reading;
+#elif defined(LWE_CFLASH)
+  NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
+  NSArray *readingHashes = [(ChineseCard*)card readingComponents];
+  for (NSDictionary *readingHash in readingHashes)
+  {
+    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
+    NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
+    NSRange allRange = NSMakeRange(0, [stringToAppend length]);
+    [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
+                          value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
+                          range:allRange];
+    [attrString appendAttributedString:tmpAttrString];
+    [tmpAttrString release];
+  }
+  
+  [(OHAttributedLabel *)self.cardReadingLabel setAttributedText:attrString];
+  [attrString release];
+  
+  // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
+  // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
+  // wonky, so we have to go with what works
+  self.cardReadingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
+  self.cardReadingLabel.shadowColor = [UIColor blackColor];
+  self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
+#endif
+  
+  [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
+                                  minFontSize:READING_MIN_FONTSIZE
+                                  maxFontSize:READING_MAX_FONTSIZE
+                            forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
+  
+  // Resize text within bounds
+  [LWEUILabelUtils autosizeLabelText:self.cardReadingLabel
+                       forScrollView:self.cardReadingLabelScrollContainer
+                            withText:card.reading
+                         minFontSize:READING_MIN_FONTSIZE
+                         maxFontSize:READING_MAX_FONTSIZE];
+  
+  [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
+                       forScrollView:self.cardHeadwordLabelScrollContainer
+                            withText:card.headword
+                         minFontSize:HEADWORD_MIN_FONTSIZE
+                         maxFontSize:HEADWORD_MAX_FONTSIZE];
+  
+  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
+  [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
+}
 
 - (void) _injectMeaningHTML:(NSString*)html
 {

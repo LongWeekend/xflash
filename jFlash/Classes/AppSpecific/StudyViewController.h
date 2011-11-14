@@ -10,11 +10,13 @@
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 
-#import "CardViewController.h"
-#import "ActionBarViewController.h"
+#import "StudyViewProtocols.h"
+#import "PracticeModeCardViewDelegate.h"
 #import "BrowseModeCardViewDelegate.h"
-#import "PracticeModeCardViewController.h"
 #import "ExampleSentencesViewController.h"
+
+#import "ActionBarViewController.h"
+#import "CardViewController.h"
 
 #import "LWEAudioQueue.h"
 
@@ -44,18 +46,20 @@
 - (IBAction)pronounceCard:(id)sender;
 
 - (void)resetStudySet;
-- (void)resetViewWithCard:(Card*)card;
 
 - (void)doCardBtn: (NSNotification *)aNotification;
 - (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
 
 //! Gets notification from plugin manager
 - (void)pluginDidInstall: (NSNotification *)aNotification;
-- (void)doCardBtn: (NSNotification *)aNotification;
 
 /* for pageControl */
 - (IBAction) changePage:(id)sender;
+- (IBAction) changePage:(id)sender animated:(BOOL)animated;
 - (IBAction) launchExampleInstaller;
+
+@property (assign) id<StudyViewControllerDelegate> delegate;
+@property (retain) id<ActionBarViewControllerDelegate, CardViewControllerDelegate> subcontrollerDelegate;
 
 @property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
 
@@ -63,8 +67,8 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-@property (nonatomic, retain) IBOutlet CardViewController *cardViewController;
-@property (nonatomic, retain) IBOutlet ActionBarViewController *actionBarController;
+@property (nonatomic, retain) IBOutlet CardViewController<StudyViewSubcontrollerDelegate> *cardViewController;
+@property (nonatomic, retain) IBOutlet ActionBarViewController<StudyViewSubcontrollerDelegate> *actionBarController;
 @property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 @property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
@@ -92,8 +96,6 @@
 @property (nonatomic, retain) Card *currentCard;
 
 @property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
-
-@property (nonatomic, retain) id cardViewControllerDelegate;
 
 // stats for progress modal
 @property NSInteger numRight;

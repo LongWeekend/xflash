@@ -10,7 +10,7 @@
 #import "RootViewController.h"
 
 // Hack that I need this
-#import "WordCardViewController.h"
+#import "CardViewController.h"
 
 @implementation ExampleSentencesViewController
 @synthesize sentencesWebView;
