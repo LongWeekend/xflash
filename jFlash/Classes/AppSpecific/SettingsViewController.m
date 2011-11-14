@@ -288,9 +288,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 
 //! Make selection for a table cell
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   
   NSInteger section = indexPath.section;
   NSInteger row = indexPath.row;
