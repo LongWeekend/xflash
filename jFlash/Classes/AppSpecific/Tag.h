@@ -19,6 +19,7 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 @interface Tag : NSObject
 
 - (void) hydrate: (FMResultSet*)rs;
+- (void) hydrate;
 - (void) populateCardIds;
 - (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
 - (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
@@ -35,6 +36,7 @@ extern NSUInteger const kAllBuriedAndHiddenError;
 - (void) setCardCount:(int) count;
 - (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
+- (void) save;
 
 //! Is the tag deletable by the user?
 @property (nonatomic) NSInteger tagEditable;

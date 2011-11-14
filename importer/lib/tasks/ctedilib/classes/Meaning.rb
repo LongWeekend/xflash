@@ -115,20 +115,20 @@ class Meaning
     has_meaning = true
 
     # Always try erhua first!
-    variant_regex = /^erhua variant of (\w+\|*\w*)([\[\]a-zA-Z0-9\s]*)[,\s]*(.+)*$/
+    variant_regex = /^erhua variant of (\w+(\||\s)*\w*)([\[\]a-zA-Z:0-9\s]*)[,\s]*(.+)*$/
     meaning_str.scan(variant_regex) do |variant|
       @is_erhua = true
       @variant = variant[0]                             # Headword
-      @variant = @variant + variant[1] if variant[1]    # Reading if not nil
-      has_meaning = (variant[2] != nil)                 # A meaning afterward?
+      @variant = @variant + variant[2] if variant[2]    # Reading if not nil
+      has_meaning = (variant[3] != nil)                 # A meaning afterward?
     end
 
     # Now regular variants
-    variant_regex = /^variant of (\w+\|*\w*)([\[\]a-zA-Z0-9\s]*)[,\s]*(.+)*$/
+    variant_regex = /^variant of (\w+(\||\s)*\w*)([\[\]a-zA-Z:0-9\s]*)[,\s]*(.+)*$/
     meaning_str.scan(variant_regex) do |variant|
       @variant = variant[0]                             # Headword
-      @variant = @variant + variant[1] if variant[1]    # Reading if not nil
-      has_meaning = (variant[2] != nil)                 # A meaning afterward?
+      @variant = @variant + variant[2] if variant[2]    # Reading if not nil
+      has_meaning = (variant[3] != nil)                 # A meaning afterward?
     end
 
     if @variant

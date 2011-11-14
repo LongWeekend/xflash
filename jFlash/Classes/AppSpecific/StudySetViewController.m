@@ -18,7 +18,7 @@ NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager;
+@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager,activityView;
 
 enum Sections {
   kGroupsSection = 0,
@@ -531,11 +531,13 @@ enum Sections {
     {
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
       [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];
+      [DSBezelActivityView newActivityViewForView:self.view withLabel:@"Backing Up..."];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
       [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
+      [DSBezelActivityView newActivityViewForView:self.view withLabel:@"Restoring..."];
     }
     else 
     {
@@ -554,6 +556,7 @@ enum Sections {
 
 - (void)didBackupUserData
 {
+  [DSBezelActivityView removeView];  
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") 
                                      message:NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
   
@@ -562,6 +565,7 @@ enum Sections {
 
 - (void)didFailToBackupUserDataWithError:(NSError *)error
 {
+  [DSBezelActivityView removeView];
   NSString* errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
   
   // overwrite the default error message if it's from the server
@@ -579,11 +583,12 @@ enum Sections {
     }
   }
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
-  [[self activityIndicator] stopAnimating];
+  [[self activityIndicator] stopAnimating];  
 }
 
 - (void)didRestoreUserData
 {
+  [DSBezelActivityView removeView];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") 
                                      message:NSLocalizedString(@"Your data has been restored successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
   [[self activityIndicator] stopAnimating];
@@ -592,6 +597,7 @@ enum Sections {
 
 - (void)didFailToRestoreUserDateWithError:(NSError *)error
 {
+  [DSBezelActivityView removeView];
   if ([error code] == kDataNotFound && [error domain] == LWEBackupManagerErrorDomain)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
@@ -716,6 +722,7 @@ enum Sections {
   [activityIndicator release];
   [searchBar release];
   [backupManager release];
+  [activityView release];
   [super dealloc];
 }
 

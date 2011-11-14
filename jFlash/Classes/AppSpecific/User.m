@@ -44,6 +44,8 @@
   [sql release];
 }
 
+//TODO
+//REVIEW: what is a model method doing updating the state engine?
 - (void) activateUser
 {
   // User activation code here 

@@ -8,8 +8,10 @@
 
 #import "Tag.h"
 #import "FlurryAPI.h"
+#import "LWEDebug.h"
 
 NSString * const kTagErrorDomain          = @"kTagErrorDomain";
+NSString * const kTagDidSave = @"kTagDidSave";
 NSUInteger const kAllBuriedAndHiddenError = 999;
 
 @interface Tag ()
@@ -26,11 +28,35 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 {
   if ((self = [super init]))
   {
+    self.tagId = -1;
     cardCount = -1; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:kTagDidSave object:nil];
   }
 	return self;
+}
+
+//! Saves the tag to the DB. WARNING: this only updates the tags basic info, creation is handled in TagPeer for historical reasons.
+// TODO: Should likely be refactored to work as a save method instead of TagPeer creation.
+- (void) save
+{
+  LWE_ASSERT_EXC(self.tagId > 0,@"The tag must already exist to be saved, use createTag in TagPeer to create a tag");
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  NSString *sql;
+  sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];
+  [[db dao] executeUpdate:sql];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"kTagDidSave" object:self];
+}
+
+//! Refreshes self from the DB if a didSave notification is called
+- (void)tagDidSave:(NSNotification *)notification
+{
+  if([[notification object] tagId] == self.tagId) // we only care if it's us
+  {
+    [self hydrate];
+  }
 }
 
 /**
@@ -541,6 +567,17 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   return [CardPeer retrieveCardByPK:tmp];
 }
 
+//! gets a tags info from the db and hydrates
+- (void) hydrate
+{
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM tags WHERE tag_id = %d LIMIT 1",self.tagId]];
+	while ([rs next])
+  {
+		[self hydrate:rs];
+	}
+	[rs close];
+}
 
 //! takes a sqlite result set and populates the properties of Tag
 - (void) hydrate: (FMResultSet*) rs
@@ -554,6 +591,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [tagName release];
   [tagDescription release];
   [combinedCardIdsForBrowseMode release];

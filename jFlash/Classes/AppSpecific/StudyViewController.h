@@ -16,6 +16,8 @@
 #import "PracticeModeCardViewDelegate.h"
 #import "ExampleSentencesViewController.h"
 
+#import "LWEAudioQueue.h"
+
 #define STUDY_SET_HAS_FINISHED_ALERT_TAG  777
 #define STUDY_SET_SHOW_BURIED_IDX         1
 #define STUDY_SET_CHANGE_SET_IDX          0
@@ -23,7 +25,8 @@
 @interface StudyViewController : UIViewController <UIScrollViewDelegate,
                                                    UIActionSheetDelegate,
                                                    UIAlertViewDelegate,
-                                                   ProgressDetailsDelegate>
+                                                   ProgressDetailsDelegate,
+                                                   LWEAudioQueueDelegate>
 {
   ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;

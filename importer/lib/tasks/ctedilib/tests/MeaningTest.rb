@@ -103,5 +103,28 @@ class MeaningTest < Test::Unit::TestCase
     meaning.parse
     assert_equal(false,meaning.reference)
   end
+  
+  def test_strange_variant_with_space
+    meaning = Meaning.new("variant of 按語 按语 [an4 yu3]")
+    meaning.parse
+    assert_equal("按語 按语 [an4 yu3]",meaning.variant)
+  end
+  
+  def test_strange_variant_with_parenth
+    meaning = Meaning.new("variant of 出 (classifier for plays or chapters of classical novels)")
+    meaning.parse
+    assert_equal("出 (classifier for plays or chapters of classical novels)",meaning.variant)
+  end
+  
+  def test_
+  
+      #
+    #variant of 璽|玺 ruler's seal
+    #variant of 伾 or 丕
+    #variant of 懈[xie4] and 邂[xie4] (old)
+    #erhua variant of 紋縷|纹缕[wen2 lu:3]
+    #variant of 薰陶 薰陶[xun1 tao2]
+    #variant of 鉞|钺 battle-ax
+
 
 end

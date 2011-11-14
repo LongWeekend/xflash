@@ -60,6 +60,38 @@
   return self;
 }
 
+#pragma mark - LWEAudioQueue Delegate Methods
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailLoadingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailPlayingURL:(NSURL *)url error:(NSError *)error
+{
+  
+}
+
+- (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue
+{
+  
+}
+
+- (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
+{
+  self._pronounceBtn.enabled = NO;
+}
+
 #pragma mark - UIView Delegate Methods
 
 /**
@@ -76,8 +108,8 @@
     _alreadyShowedAlertView = YES;
 #if defined (LWE_JFLASH)
     [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Welcome to Japanese Flash!",@"StudyViewController.WelcomeAlertViewTitle")
-                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nIf you want to study other sets, tap the 'Study Sets' tab below.\n\nIf you like Japanese Flash, also checkout Rikai Browser: Read Japanese on the Web.",@"RootViewController.WelcomeAlertViewMessage")
-                                            ok:NSLocalizedString(@"OK", @"StudyViewController.OK")
+                                       message:NSLocalizedString(@"We've loaded our favorite word set to get you started.\n\nTo study other sets, tap the 'Study Sets' tab below.\n\nLike Japanese Flash? Checkout Rikai Browser: Reading Japanese on your iPhone just got easier!",@"RootViewController.WelcomeAlertViewMessage")
+                                            ok:NSLocalizedString(@"Later", @"StudyViewController.Later")
                                         cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
                                       delegate:self];
 #elif (LWE_CFLASH)
@@ -239,7 +271,9 @@
   self.numViewed = 0;
   
   // Get active set/tag  
+  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"]; // remove the observer from the previous currentCardSet before getting the new one
   self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
+  [self.currentCardSet addObserver:self forKeyPath:@"tagName" options:NSKeyValueObservingOptionNew context:NULL];
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
@@ -256,6 +290,18 @@
   
   // Use this to set up delegates, show the card, etc
   [self resetViewWithCard:nextCard];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqual:@"tagName"]) 
+  {
+    self.cardSetLabel.text = [change objectForKey:NSKeyValueChangeNewKey];
+  }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
 }
 
 
@@ -451,7 +497,6 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
-  //TODO: REMOVE THIS
   [self.currentCard pronounceWithDelegate:self];
 }
 
@@ -725,6 +770,7 @@
 	//self.progressModalCloseBtn = nil;
 	
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
 }
 
 - (void) dealloc

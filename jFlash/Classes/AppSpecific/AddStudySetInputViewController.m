@@ -8,10 +8,11 @@
 
 #import "AddStudySetInputViewController.h"
 #import "TagPeer.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AddStudySetInputViewController
 
-@synthesize ownerId, defaultCard, setNameTextfield;
+@synthesize ownerId, defaultCard, setNameTextfield, setDescriptionTextView, tag;
 
 /**
  * Custom initializer for AddStudySet modal
@@ -21,10 +22,22 @@
 - (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId
 {
   // TODO: iPad customization!
-  if ((self = [super initWithNibName:@"ModalInputView" bundle:nil]))
+  if ((self = [super initWithNibName:@"AddStudySetView" bundle:nil]))
   {
     self.defaultCard = card;
     self.ownerId = groupOwnerId;
+  }
+  return self;
+}
+
+/**
+ * Custom init for preexisting studyset to update the info
+ */
+- (id) initWithTag:(Tag*)aTag
+{
+  if ((self = [super initWithNibName:@"AddStudySetView" bundle:nil]))
+  {
+    self.tag = aTag;
   }
   return self;
 }
@@ -34,16 +47,32 @@
 {
   [super viewDidLoad];
   self.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
-
-  [self.setNameTextfield becomeFirstResponder];
-  self.setNameTextfield.returnKeyType = UIReturnKeyDone;
-  self.setNameTextfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
-  self.setNameTextfield.backgroundColor = [UIColor clearColor];
-  self.setNameTextfield.borderStyle = UITextBorderStyleRoundedRect;
   
-  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissModalViewControllerAnimated:)];
-  self.navigationItem.leftBarButtonItem = cancelButton;
-  [cancelButton release];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
+  self.navigationItem.rightBarButtonItem = doneButton;
+  [doneButton release];
+  
+  if ([self isModal])
+  {
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
+  }
+  
+  if(self.tag)
+  {
+    self.title = NSLocalizedString(@"Update Study Set",@"AddStudySetInputViewController.NavBarTitle");
+    self.setNameTextfield.text = [tag tagName];
+    self.setDescriptionTextView.text = [tag tagDescription];
+  }
+  
+  //Round the corners of the textView
+  [self.setDescriptionTextView.layer setBorderColor: [[UIColor grayColor] CGColor]];
+  [self.setDescriptionTextView.layer setBorderWidth: 1.0];
+  [self.setDescriptionTextView.layer setCornerRadius:8.0f];
+  [self.setDescriptionTextView.layer setMasksToBounds:YES];
+  
+  [self.setNameTextfield becomeFirstResponder];
 }
 
 
@@ -55,6 +84,37 @@
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 
+- (BOOL)isModal { 
+  NSArray *viewControllers = [[self navigationController] viewControllers];
+  UIViewController *rootViewController = [viewControllers objectAtIndex:0];    
+  return rootViewController == self;
+}
+
+- (void)dismiss
+{
+  [self dismissModalViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)save
+{
+  if (self.tag == nil) 
+  {
+    // Create the tag & subscribe the card to it
+    Tag *newTag = [TagPeer createTag:self.setNameTextfield.text withOwner:self.ownerId withDescription:self.setDescriptionTextView.text];
+    [TagPeer subscribeCard:self.defaultCard toTag:newTag];
+  }
+  else
+  {
+    [self.tag setValue:self.setNameTextfield.text forKey:@"tagName"];
+    self.tag.tagDescription = self.setDescriptionTextView.text;
+    [self.tag save];
+  }
+    
+  [self dismiss];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"setAddedToView" object:self];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 
 {
@@ -64,13 +124,6 @@
                                        message:NSLocalizedString(@"Please enter a new set name or click 'Cancel'.",@"AddStudySetInputViewController.AlertViewMessage")];
     return NO;
   }
-  
-  // Create the tag & subscribe the card to it
-  Tag *newTag = [TagPeer createTag:theTextField.text withOwner:self.ownerId];
-  [TagPeer subscribeCard:self.defaultCard toTag:newTag];
-  
-  [self.parentViewController dismissModalViewControllerAnimated:YES];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"setAddedToView" object:self];
  
   return YES;
 }
@@ -78,6 +131,9 @@
 - (void) dealloc
 {
   [defaultCard release];
+  [setDescriptionTextView release];
+  [setNameTextfield release];
+  [tag release];
   [super dealloc];
 }
 

@@ -59,9 +59,11 @@ class CEdictParser < Parser
         ref = ref_entry.variant_of if (ref_entry.has_variant? or ref_entry.is_erhua_variant?)
         inline_entry = Entry.parse_inline_entry(ref)
         
-        # Now merge & remove if the cards match
+        # Now merge & remove if the cards match (so we don't loop over it again)
         if base_entry.inline_entry_match?(inline_entry)
+          pp "Matched reference entry %s to %s" % [ref_entry, base_entry]
           base_entry.add_inline_entry_to_meanings(inline_entry)
+          ref_entries.delete(ref_entry)
         end
       end
     end
