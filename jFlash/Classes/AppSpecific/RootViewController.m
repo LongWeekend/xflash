@@ -177,7 +177,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [searchViewController release];
   [localNavigationController release];
   
-  SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+  SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
 #if defined(LWE_JFLASH)
   settingsViewController.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
 #elif defined(LWE_CFLASH)
