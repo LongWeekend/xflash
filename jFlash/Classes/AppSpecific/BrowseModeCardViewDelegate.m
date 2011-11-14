@@ -56,27 +56,6 @@
   [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController-Browse" owner:svc.actionBarController options:nil];
 }
 
-#pragma mark - Action Bar View Controller Delegate
-
-- (void)actionBarWillSetup:(ActionBarViewController*)avc
-{
-  avc.prevCardBtn.hidden = NO;
-  avc.nextCardBtn.hidden = NO;
-  avc.addBtn.hidden = NO;
-  
-  // tell the practice mode to piss off
-  avc.cardMeaningBtnHint.hidden = YES;
-  avc.cardMeaningBtnHintMini.hidden = YES;
-  avc.rightBtn.hidden = YES;
-  avc.wrongBtn.hidden = YES;
-  avc.buryCardBtn.hidden = YES;
-
-  // move the action button to the middle (it is on the left in practice mode)
-  CGRect rect = avc.addBtn.frame;
-  rect.origin.x = 128;
-  avc.addBtn.frame = rect;
-}
-
 #pragma mark -
 
 - (id) init

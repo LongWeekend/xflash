@@ -106,13 +106,6 @@
   avc.buryCardBtn.hidden = YES;
   avc.addBtn.hidden = YES;
   avc.cardMeaningBtnHint.hidden = NO;
-  avc.prevCardBtn.hidden = YES;
-  avc.nextCardBtn.hidden = YES;
-  
-  // Move the add button back to where it belongs - if we were in browse mode, this is changed.
-  CGRect rect = avc.addBtn.frame;
-  rect.origin.x = 9;
-  avc.addBtn.frame = rect;
 }
 
 -(void) actionBarWillReveal:(ActionBarViewController*)avc

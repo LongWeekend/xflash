@@ -484,6 +484,8 @@
 /** Shows the meaning/reading */
 - (IBAction) revealCard
 {
+  // TODO: When the delegate has access to StudyViewController, these should be moved.  OR put
+  // them in WordCardViewController.xib and pass that
   self.revealCardBtn.hidden = YES;
   self.tapForAnswerImage.hidden = YES;
   
