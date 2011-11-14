@@ -116,6 +116,7 @@
 		494F7F78138B8DA000094AE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Long Weekend Inc.";
 			};
 			buildConfigurationList = 494F7F7B138B8DA000094AE2 /* Build configuration list for PBXProject "sqlite3" */;
@@ -185,6 +186,7 @@
 				DSTROOT = /tmp/sqlite3.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sqlite3/sqlite3-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -197,6 +199,7 @@
 				DSTROOT = /tmp/sqlite3.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sqlite3/sqlite3-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
