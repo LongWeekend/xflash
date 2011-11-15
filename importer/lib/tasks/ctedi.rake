@@ -70,15 +70,29 @@ namespace :ctedi do
     get_cli_debug
     
     # Parse
-    prt "\nBeginning CEDICT Parse"
+    prt "\nCEDICT Parse - Initial Flatfile Parse"
     prt_dotted_line
     parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
     entries = parser.run
     
-    prt "\nBeginning CEDICT Parse - Second Pass (Merge Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
+    prt "\nCEDICT Parse - Pass 2 (Merge 'reference-only' Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
     prt_dotted_line
     parser.merge_references_into_base_entries(entries, parser.reference_only_entries)
     parser.merge_references_into_base_entries(entries, parser.variant_only_entries)
+    
+    # Cross-reference the variants
+    prt "\nCEDICT Parse - Pass 3 (Cross-Referencing %d Erhua Variants)" % [parser.erhua_variant_entries.count]
+    prt_dotted_line
+    muxed_base_entries = parser.add_variant_entries_into_base_entries(entries, parser.erhua_variant_entries)
+    muxed_erhua_entries = parser.add_base_entries_into_variant_entries(parser.erhua_variant_entries, entries)
+    
+    prt "\nCEDICT Parse - Pass 4 (Cross-Referencing %d Variants)" % [parser.variant_entries.count]
+    prt_dotted_line
+    muxed_base_entries = parser.add_variant_entries_into_base_entries(muxed_base_entries, parser.variant_entries)
+    muxed_variant_entries = parser.add_base_entries_into_variant_entries(parser.variant_entries, entries)
+    
+    # Now combine the 3 types of entries -- they're all valid
+    entries = muxed_base_entries + muxed_variant_entries + muxed_erhua_entries
     
     # Import
     prt "\nBeginning CEDICT Import"

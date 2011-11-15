@@ -116,9 +116,7 @@ class MeaningTest < Test::Unit::TestCase
     assert_equal("出 (classifier for plays or chapters of classical novels)",meaning.variant)
   end
   
-  def test_
-  
-      #
+#  def test_
     #variant of 璽|玺 ruler's seal
     #variant of 伾 or 丕
     #variant of 懈[xie4] and 邂[xie4] (old)
