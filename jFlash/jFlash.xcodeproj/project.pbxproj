@@ -32,7 +32,6 @@
 		24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
-		24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E3113D7539F00B2BB56 /* AppDelegate.m */; };
 		24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
 		24E47F0111F3E59D007F6FB7 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		24E47F2211F3E754007F6FB7 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
@@ -50,14 +49,27 @@
 		24E47F2E11F3E754007F6FB7 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F2011F3E754007F6FB7 /* OAToken.m */; };
 		24E47F4711F3E780007F6FB7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		49046615147270CD004C44E2 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49046613147270CD004C44E2 /* CFlashSearchTest.m */; };
 		49046616147272A0004C44E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
 		49046617147272AD004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
-		49046618147274AE004C44E2 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
-		49046619147274B0004C44E2 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		4904661A147274B5004C44E2 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
-		4904661D147276E3004C44E2 /* cFlash-FTS-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */; };
+		4904662214727835004C44E2 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
+		4904662314727835004C44E2 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */; };
+		4904662B14727835004C44E2 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
+		4904662C14727835004C44E2 /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
+		4904662D14727835004C44E2 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49046613147270CD004C44E2 /* CFlashSearchTest.m */; };
+		4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
+		4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
+		4904663114727835004C44E2 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
+		4904663214727835004C44E2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
+		4904663314727835004C44E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		4904663414727835004C44E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		4904663714727835004C44E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
+		4904663814727835004C44E2 /* ReminderSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */; };
+		4904663B14727835004C44E2 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
+		4904663C14727835004C44E2 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
+		4904663F14727835004C44E2 /* cFlash-FTS-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		490B23411277BCE100CF3484 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233C1277BCE100CF3484 /* FMDatabase.m */; };
@@ -103,7 +115,6 @@
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
-		4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
 		4947836912757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
@@ -117,7 +128,6 @@
 		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
-		49570E1913E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
 		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
@@ -672,6 +682,27 @@
 			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
 			remoteInfo = jFlash;
 		};
+		493DBDBE14727CF6003EB18B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 496C7A6B126325FD004B6B90;
+			remoteInfo = cFlash;
+		};
+		493DBDC214727D09003EB18B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 494F7F80138B8DA000094AE2;
+			remoteInfo = sqlite3;
+		};
+		493DBDC414727D0D003EB18B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 494F7F80138B8DA000094AE2;
+			remoteInfo = sqlite3;
+		};
 		4941833B13EFB237006A5616 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 494F7F95138B8E1D00094AE2 /* sqlite3.xcodeproj */;
@@ -713,8 +744,6 @@
 		24BB428014685E67002C387B /* LWEAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAudioQueue.m; sourceTree = "<group>"; };
 		24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashDatabase.h; path = DatabaseSetup/JFlashDatabase.h; sourceTree = "<group>"; };
 		24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashDatabase.m; path = DatabaseSetup/JFlashDatabase.m; sourceTree = "<group>"; };
-		24DE1E3013D7539F00B2BB56 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		24DE1E3113D7539F00B2BB56 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = LWETUserDB.xcdatamodel; path = Classes/Reusable/LWE/Twitter/LWETUserDB.xcdatamodel; sourceTree = "<group>"; };
 		24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		24E47F0711F3E754007F6FB7 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
@@ -751,6 +780,7 @@
 		49046612147270CD004C44E2 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFlashSearchTest.h; sourceTree = "<group>"; };
 		49046613147270CD004C44E2 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFlashSearchTest.m; sourceTree = "<group>"; };
 		4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-FTS-1.0.db"; path = "sql/plugins/cFlash-FTS-1.0.db"; sourceTree = "<group>"; };
+		4904664514727835004C44E2 /* jFlashTest copy.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlashTest copy.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
@@ -878,6 +908,7 @@
 		49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow@2x.png"; path = "Assets/candy-btn-yellow@2x.png"; sourceTree = "<group>"; };
 		49DADB7E1277F36F00B8FD72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
 		49DADB7F1277F36F00B8FD72 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Assets/Default@2x.png"; sourceTree = "<group>"; };
+		49E3D17314727E5300F79308 /* cFlashTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cFlashTest-Info.plist"; sourceTree = SOURCE_ROOT; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jFlash-Info.plist"; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
@@ -1244,6 +1275,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4904662E14727835004C44E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */,
+				4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */,
+				4904663114727835004C44E2 /* CoreText.framework in Frameworks */,
+				4904663214727835004C44E2 /* SenTestingKit.framework in Frameworks */,
+				4904663314727835004C44E2 /* Foundation.framework in Frameworks */,
+				4904663414727835004C44E2 /* UIKit.framework in Frameworks */,
+				4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		496C7A6A126325FD004B6B90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1289,6 +1334,7 @@
 				1D6058910D05DD3D006BFB54 /* jFlash.app */,
 				496C7A6C126325FD004B6B90 /* cFlash.app */,
 				24B5660013CF656100BEE166 /* jFlashTest.octest */,
+				4904664514727835004C44E2 /* jFlashTest copy.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1308,19 +1354,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		24B5660413CF656100BEE166 /* jFlashTest */ = {
+		24B5660413CF656100BEE166 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				24DE1E2213D6AD1D00B2BB56 /* DatabaseSetup */,
-				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
-				24B5660513CF656200BEE166 /* Supporting Files */,
-				24AEAB1613D5AE0D008ADA45 /* CardTagTest.h */,
-				24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */,
-				24DE1E3013D7539F00B2BB56 /* AppDelegate.h */,
-				24DE1E3113D7539F00B2BB56 /* AppDelegate.m */,
-				49046612147270CD004C44E2 /* CFlashSearchTest.h */,
-				49046613147270CD004C44E2 /* CFlashSearchTest.m */,
+				4904664A14727B17004C44E2 /* CFlash */,
+				4904664914727B0F004C44E2 /* JFlash */,
+				4904664814727B03004C44E2 /* Common */,
 			);
+			name = Tests;
 			path = jFlashTest;
 			sourceTree = "<group>";
 		};
@@ -1332,15 +1373,6 @@
 				24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		24DE1E2213D6AD1D00B2BB56 /* DatabaseSetup */ = {
-			isa = PBXGroup;
-			children = (
-				24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */,
-				24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */,
-			);
-			name = DatabaseSetup;
 			sourceTree = "<group>";
 		};
 		24E47F0411F3E754007F6FB7 /* OAuthConsumer */ = {
@@ -1394,7 +1426,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				24B5660413CF656100BEE166 /* jFlashTest */,
+				24B5660413CF656100BEE166 /* Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -1447,6 +1479,36 @@
 				91E93B0D133AD450007E5F83 /* MessageUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4904664814727B03004C44E2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */,
+				24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */,
+				24AEAB1613D5AE0D008ADA45 /* CardTagTest.h */,
+				24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */,
+				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		4904664914727B0F004C44E2 /* JFlash */ = {
+			isa = PBXGroup;
+			children = (
+				24B5660513CF656200BEE166 /* Supporting Files */,
+			);
+			name = JFlash;
+			sourceTree = "<group>";
+		};
+		4904664A14727B17004C44E2 /* CFlash */ = {
+			isa = PBXGroup;
+			children = (
+				49E3D17214727E4000F79308 /* Supporting Files */,
+				49046612147270CD004C44E2 /* CFlashSearchTest.h */,
+				49046613147270CD004C44E2 /* CFlashSearchTest.m */,
+			);
+			name = CFlash;
 			sourceTree = "<group>";
 		};
 		49075BD6114E641500EDAABB /* Views */ = {
@@ -1684,6 +1746,14 @@
 				49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		49E3D17214727E4000F79308 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49E3D17314727E5300F79308 /* cFlashTest-Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		49EE8D90134EC15300EC6B0E /* LWE */ = {
@@ -2363,6 +2433,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				493DBDC314727D09003EB18B /* PBXTargetDependency */,
 			);
 			name = jFlash;
 			productName = jFlash;
@@ -2388,6 +2459,25 @@
 			productReference = 24B5660013CF656100BEE166 /* jFlashTest.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		4904661E14727835004C44E2 /* cFlashTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4904664114727835004C44E2 /* Build configuration list for PBXNativeTarget "cFlashTest" */;
+			buildPhases = (
+				4904662114727835004C44E2 /* Sources */,
+				4904662E14727835004C44E2 /* Frameworks */,
+				4904663614727835004C44E2 /* Resources */,
+				4904664014727835004C44E2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				493DBDBF14727CF6003EB18B /* PBXTargetDependency */,
+			);
+			name = cFlashTest;
+			productName = jFlashTest;
+			productReference = 4904664514727835004C44E2 /* jFlashTest copy.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		496C7A6B126325FD004B6B90 /* cFlash */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 496C7A75126325FE004B6B90 /* Build configuration list for PBXNativeTarget "cFlash" */;
@@ -2399,6 +2489,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				493DBDC514727D0D003EB18B /* PBXTargetDependency */,
 			);
 			name = cFlash;
 			productName = cFlash;
@@ -2454,6 +2545,7 @@
 				1D6058900D05DD3D006BFB54 /* jFlash */,
 				496C7A6B126325FD004B6B90 /* cFlash */,
 				24B565FF13CF656100BEE166 /* jFlashTest */,
+				4904661E14727835004C44E2 /* cFlashTest */,
 			);
 		};
 /* End PBXProject section */
@@ -2643,11 +2735,20 @@
 				49716147144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */,
 				49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */,
-				49046618147274AE004C44E2 /* cFlash-CARD-1.0.db in Resources */,
-				49046619147274B0004C44E2 /* cFlash.db in Resources */,
 				4904661A147274B5004C44E2 /* jFlash.db in Resources */,
 				4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */,
-				4904661D147276E3004C44E2 /* cFlash-FTS-1.0.db in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4904663614727835004C44E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4904663714727835004C44E2 /* InfoPlist.strings in Resources */,
+				4904663814727835004C44E2 /* ReminderSettingsViewController.xib in Resources */,
+				4904663B14727835004C44E2 /* cFlash-CARD-1.0.db in Resources */,
+				4904663C14727835004C44E2 /* cFlash.db in Resources */,
+				4904663F14727835004C44E2 /* cFlash-FTS-1.0.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2827,6 +2928,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		4904664014727835004C44E2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2983,16 +3097,24 @@
 			files = (
 				24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */,
 				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
-				24DE1E3213D7539F00B2BB56 /* AppDelegate.m in Sources */,
-				49570E1913E39F7700226D24 /* LWEFormView.m in Sources */,
-				4941834213EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */,
 				49278C5114460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
 				49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */,
 				49716144144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17461462893F002977E6 /* AudioSessionManager.m in Sources */,
 				24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */,
-				49046615147270CD004C44E2 /* CFlashSearchTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4904662114727835004C44E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4904662214727835004C44E2 /* JFlashDatabase.m in Sources */,
+				4904662314727835004C44E2 /* CardTagTest.m in Sources */,
+				4904662B14727835004C44E2 /* AudioSessionManager.m in Sources */,
+				4904662C14727835004C44E2 /* LWEAudioQueue.m in Sources */,
+				4904662D14727835004C44E2 /* CFlashSearchTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3152,6 +3274,21 @@
 			target = 1D6058900D05DD3D006BFB54 /* jFlash */;
 			targetProxy = 248460BE13D674E3002AA88F /* PBXContainerItemProxy */;
 		};
+		493DBDBF14727CF6003EB18B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 496C7A6B126325FD004B6B90 /* cFlash */;
+			targetProxy = 493DBDBE14727CF6003EB18B /* PBXContainerItemProxy */;
+		};
+		493DBDC314727D09003EB18B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlite3;
+			targetProxy = 493DBDC214727D09003EB18B /* PBXContainerItemProxy */;
+		};
+		493DBDC514727D0D003EB18B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlite3;
+			targetProxy = 493DBDC414727D0D003EB18B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3296,6 +3433,94 @@
 					SenTestingKit,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		4904664214727835004C44E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					LWE_CFLASH,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "jFlashTest copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "jFlashTest copy";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4904664314727835004C44E2 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_AD_HOC,
+					LWE_JFLASH,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "jFlashTest copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "jFlashTest copy";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Beta;
+		};
+		4904664414727835004C44E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/jFlash.app/jFlash";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jFlashTest/jFlashTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LWE_RELEASE_APP_STORE,
+					APP_STORE_FINAL,
+					LWE_JFLASH,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "jFlashTest copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "jFlashTest copy";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -3466,6 +3691,16 @@
 				24B5660F13CF656200BEE166 /* Debug */,
 				24B5661013CF656200BEE166 /* Beta */,
 				24B5661113CF656200BEE166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4904664114727835004C44E2 /* Build configuration list for PBXNativeTarget "cFlashTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4904664214727835004C44E2 /* Debug */,
+				4904664314727835004C44E2 /* Beta */,
+				4904664414727835004C44E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
