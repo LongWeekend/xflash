@@ -330,6 +330,7 @@
   
   self.cardViewController.delegate = self.subcontrollerDelegate;
   self.actionBarController.delegate = self.subcontrollerDelegate;
+  self.delegate = (id<StudyViewControllerDelegate>)self.subcontrollerDelegate;
   
   // Now send our new subcontrollers a message telling it we are using it
   [self.cardViewController studyViewModeDidChange:self];

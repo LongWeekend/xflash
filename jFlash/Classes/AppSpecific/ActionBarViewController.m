@@ -38,7 +38,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 
 - (void) studyViewModeDidChange:(StudyViewController*)svc
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(actionBarDidChangeMode::)])
+  if (self.delegate && [self.delegate respondsToSelector:@selector(actionBarDidChangeMode:)])
   {
     [self.delegate actionBarDidChangeMode:self];
   }
