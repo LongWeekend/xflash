@@ -109,9 +109,9 @@
 - (NSInteger) _getTagIdForName:(NSString *)tagName andId:(NSNumber *)key andGroup:(NSNumber *)group
 {
   // Quick return on 0
-  if ([key isEqual:[NSNumber numberWithInt:FAVORITES_TAG_ID]])
+  if ([key isEqual:[NSNumber numberWithInt:STARRED_TAG_ID]])
   {
-    return FAVORITES_TAG_ID;
+    return STARRED_TAG_ID;
   }
   
   // see if the tag already exists

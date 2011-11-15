@@ -31,10 +31,8 @@ class CEdictParser < Parser
         else
           entry.parse_line(line)
           
-          # Handle classifier expansion here
-          if entry.classifier
-            entry.meanings << Meaning.new(("Counter: %s" % [entry.classifier]),["classifier"])
-          end
+          # Handle classifier expansion
+          entry.add_classifier_to_meanings
           
           # Determine which array to put it in based on its type
           if entry.is_only_redirect?

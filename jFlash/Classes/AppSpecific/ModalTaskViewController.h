@@ -35,6 +35,7 @@
 - (NSString*) taskMessage;
 
 - (NSString*) statusMessage;
+- (CGFloat) progress;
 @optional
 - (void) willUpdateButtonsInView:(id)sender;
 - (void) didUpdateButtonsInView:(id)sender;
@@ -53,13 +54,9 @@
   NSString *webViewContentFileName;               //! Sets the filename of the content to load into the details web view
 }
 
-// Custom getters & setters
--(void) setStatusMessage: (NSString*) newString;
--(NSString*) statusMessage;
--(void) setTaskMessage: (NSString*) newString;
--(NSString*) taskMessage;
--(void) setProgress: (float) newVal;
--(float) progress;
+@property (copy) NSString *statusMessage;
+@property (copy) NSString *taskMessage;
+@property CGFloat progress;
 
 // IBActions
 - (IBAction) startProcess;

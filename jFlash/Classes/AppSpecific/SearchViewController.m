@@ -470,7 +470,7 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     // Rebuild cache and fail over to manual function
     Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-    self.membershipCacheArray = [[[CardPeer retrieveCardIdsForTagId:FAVORITES_TAG_ID] mutableCopy] autorelease];
+    self.membershipCacheArray = [[[CardPeer retrieveCardIdsForTagId:STARRED_TAG_ID] mutableCopy] autorelease];
     returnVal = [TagPeer card:theCard isMemberOfTag:favoritesTag];
   }
   return returnVal;

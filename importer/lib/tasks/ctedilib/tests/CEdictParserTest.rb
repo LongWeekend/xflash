@@ -110,5 +110,13 @@ class CEdictParserTest < Test::Unit::TestCase
     expected_meanings = [Meaning.new("video camera"),Meaning.new("Counter: 部[bu4]",["classifier"])]
     assert_equal(expected_meanings,entry.meanings)
   end
+  
+  def test_multiple_classifier_expansion
+    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_multiple_classifiers.txt")
+    entries = parser.run
+    
+    expected_meanings = [Meaning.new("store"),Meaning.new("shop"),Meaning.new("Counter: 家[jia1]",["classifier"]),Meaning.new("Counter: 個|个[ge4]",["classifier"])]
+    assert_equal(expected_meanings,entries[1].meanings)
+  end
 
 end

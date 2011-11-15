@@ -10,6 +10,8 @@
 #import "RootViewController.h"
 #import "Reachability.h"
 
+NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
+
 @implementation PluginManager
 
 @synthesize availableForDownloadPlugins;
