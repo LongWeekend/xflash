@@ -14,6 +14,7 @@
 @interface CardViewController()
 - (void) _injectMeaningHTML:(NSString*)html;
 - (void) _prepareView:(Card*)card;
+- (void) _toggleMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
 @end
 
 @implementation CardViewController
@@ -103,20 +104,7 @@
   [self.moodIcon updateMoodIcon:100.0f];
 }
 
-#pragma mark - IBAction
-
-
-- (void) turnPercentCorrectOff
-{
-  self.percentCorrectTalkBubble.hidden = YES;
-  self.percentCorrectLabel.hidden = YES;
-}
-
-- (void) turnPercentCorrectOn
-{
-  self.percentCorrectTalkBubble.hidden = NO;
-  self.percentCorrectLabel.hidden = NO;
-}
+#pragma mark - IBAction Methods
 
 /**
  * Turns the % correct button on and off, in case it is in the way of the meaning
@@ -134,30 +122,35 @@
   }
 }
 
-#pragma mark - layout methods
-
-// Toggle "more" icon to indicate the user can scroll meaning down
-- (void) toggleMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
+/**
+ * If the reading scroll container is hidden, this shows it.
+ * If it's showing, it hides it.
+ */
+- (IBAction) doToggleReadingBtn
 {
-  BOOL isTooTall = (theLabel.frame.size.height > scrollViewContainer.frame.size.height);
-  if (theLabel == self.cardReadingLabel)
+  if (self.cardReadingLabelScrollContainer.hidden == YES)
   {
-    // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
-    self.cardReadingLabelScrollMoreIcon.hidden = ((isTooTall == NO) || (self.readingVisible == NO));
+    [self turnReadingOn];
   }
-  else if (theLabel == self.cardHeadwordLabel)
+  else
   {
-    self.cardHeadwordLabelScrollMoreIcon.hidden = (isTooTall == NO);
+    [self turnReadingOff];
   }
 }
 
-- (void) hideMeaningWebView:(BOOL)hideMeaningWebView
+#pragma mark - Public Helper Methods
+
+- (void) turnPercentCorrectOff
 {
-  self.meaningWebView.hidden = hideMeaningWebView;
-  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
+  self.percentCorrectTalkBubble.hidden = YES;
+  self.percentCorrectLabel.hidden = YES;
 }
 
-#pragma mark - Reading Label Methods
+- (void) turnPercentCorrectOn
+{
+  self.percentCorrectTalkBubble.hidden = NO;
+  self.percentCorrectLabel.hidden = NO;
+}
 
 - (void) turnReadingOn
 {
@@ -179,31 +172,35 @@
 - (void) resetReadingVisibility 
 {
   self.cardReadingLabelScrollContainer.hidden = (self.readingVisible == NO);
-
+  
   // Set the button image to nil when we have a reading showing, and show the "show reading" button when not.
   UIImage *displayReadingImage = (self.readingVisible) ? nil : [UIImage imageNamed:@"practice-btn-showreading.png"];
   [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
 }
 
-#pragma mark - IBActions
-
-/**
- * If the reading scroll container is hidden, this shows it.
- * If it's showing, it hides it.
- */
-- (IBAction) doToggleReadingBtn
+- (void) setMeaningWebViewHidden:(BOOL)hideMeaningWebView
 {
-  if (self.cardReadingLabelScrollContainer.hidden)
-  {
-    [self turnReadingOn];
-  }
-  else
-  {
-    [self turnReadingOff];
-  }
+  self.meaningWebView.hidden = hideMeaningWebView;
+  [self _toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
 #pragma mark - Private Methods
+
+// Toggle "more" icon to indicate the user can scroll meaning down
+- (void) _toggleMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
+{
+  BOOL isTooTall = (theLabel.frame.size.height > scrollViewContainer.frame.size.height);
+  if (theLabel == self.cardReadingLabel)
+  {
+    // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
+    self.cardReadingLabelScrollMoreIcon.hidden = ((isTooTall == NO) || (self.readingVisible == NO));
+  }
+  else if (theLabel == self.cardHeadwordLabel)
+  {
+    self.cardHeadwordLabelScrollMoreIcon.hidden = (isTooTall == NO);
+  }
+}
+
 
 // Prepare the view for the current card
 - (void) _prepareView:(Card*)card
@@ -259,8 +256,8 @@
                          minFontSize:HEADWORD_MIN_FONTSIZE
                          maxFontSize:HEADWORD_MAX_FONTSIZE];
   
-  [self toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
-  [self toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
+  [self _toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
+  [self _toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
 }
 
 - (void) _injectMeaningHTML:(NSString*)html

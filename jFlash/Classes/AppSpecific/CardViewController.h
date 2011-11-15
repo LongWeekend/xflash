@@ -38,16 +38,17 @@ extern NSString * const LWECardHtmlFooter;
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
 - (IBAction)doTogglePercentCorrectBtn;
+- (IBAction) doToggleReadingBtn;
+
 - (void) turnPercentCorrectOff;
 - (void) turnPercentCorrectOn;
-
-- (void)toggleMoreIconForLabel: (UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
-- (void)hideMeaningWebView:(BOOL)hideMeaningWebView;
-
 - (void) turnReadingOn;
 - (void) turnReadingOff;
+
 - (void)resetReadingVisibility;
-- (IBAction) doToggleReadingBtn;
+
+- (void) setMeaningWebViewHidden:(BOOL)hideMeaningWebView;
+
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 
