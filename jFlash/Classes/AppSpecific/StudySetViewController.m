@@ -73,7 +73,7 @@ enum Sections {
   self.navigationItem.rightBarButtonItem = _addButton;
   
   // Register observers to reload table data on other events
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"setAddedToView" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kSetWasAddedOrUpdated object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   
@@ -175,7 +175,7 @@ enum Sections {
 - (void) addStudySet
 {
   // TODO: iPad customization?
-  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithNibName:@"ModalInputView" bundle:nil];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithNibName:@"AddStudySetView" bundle:nil];
   tmpVC.ownerId = self.groupId;
   tmpVC.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
@@ -530,14 +530,14 @@ enum Sections {
     if (alertView.tag == kBackupConfirmationAlertTag)
     {
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];
-      [DSBezelActivityView newActivityViewForView:self.view withLabel:@"Backing Up..."];
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];      
+      [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
       [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
-      [DSBezelActivityView newActivityViewForView:self.view withLabel:@"Restoring..."];
+      [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
     }
     else 
     {
@@ -574,10 +574,10 @@ enum Sections {
     switch ([error code]) // these should be http codes
     {
       case 503:
-        errorMessage = @"The service is temporaily unavailable. Please try again later. Sorry!";
+        errorMessage = NSLocalizedString(@"The service is temporaily unavailable. Please try again later. Sorry!", @"StudySetViewController.503error");
         break;
       case 500:
-        errorMessage = @"Something went wrong on the server. We will try to fix it in a jiffy!";
+        errorMessage = NSLocalizedString(@"Something went wrong on the server. We will try to fix it in a jiffy!", @"StudySetViewController.500error");
       default:
         break;
     }

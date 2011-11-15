@@ -14,6 +14,8 @@
 
 @synthesize ownerId, defaultCard, setNameTextfield, setDescriptionTextView, tag;
 
+NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
+
 /**
  * Custom initializer for AddStudySet modal
  * \param cardId If not 0, this cardId will be added to the membership of the newly-created Tag
@@ -84,7 +86,12 @@
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 }
 
-- (BOOL)isModal { 
+/**
+ * Determines if this viewController was loaded modally or not
+ * \return Yes if modally presented. No if not
+ */
+- (BOOL)isModal 
+{ 
   NSArray *viewControllers = [[self navigationController] viewControllers];
   UIViewController *rootViewController = [viewControllers objectAtIndex:0];    
   return rootViewController == self;
@@ -113,7 +120,7 @@
   }
     
   [self dismiss];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"setAddedToView" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kSetWasAddedOrUpdated object:self];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 

@@ -11,7 +11,7 @@
 #import "LWEDebug.h"
 
 NSString * const kTagErrorDomain          = @"kTagErrorDomain";
-NSString * const kTagDidSave = @"kTagDidSave";
+NSString * const LWETagDidSave = @"kTagDidSave";
 NSUInteger const kAllBuriedAndHiddenError = 999;
 
 @interface Tag ()
@@ -32,7 +32,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     cardCount = -1; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:kTagDidSave object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
   }
 	return self;
 }
@@ -47,7 +47,7 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
   sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];
   [[db dao] executeUpdate:sql];
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"kTagDidSave" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
 }
 
 //! Refreshes self from the DB if a didSave notification is called
