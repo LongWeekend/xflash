@@ -2229,6 +2229,8 @@
 			isa = PBXGroup;
 			children = (
 				49AAB8CD147127E40015D64B /* StudyViewProtocols.h */,
+				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
+				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
 				49AAB8B8147106BE0015D64B /* CardViewController.h */,
 				49AAB8B9147106BE0015D64B /* CardViewController.m */,
 				496BE54B11EC5303003AB713 /* ActionBarViewController.h */,
@@ -2243,8 +2245,6 @@
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
 				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
-				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
-				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
 			);
 			name = "Study View";
 			sourceTree = "<group>";
