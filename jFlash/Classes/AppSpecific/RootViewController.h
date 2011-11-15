@@ -22,6 +22,7 @@
 
 extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEShouldShowModal;
+extern NSString * const LWEShouldShowDownloadModal;
 extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowStudySetView;
 extern NSString * const LWEShouldShowPopover;

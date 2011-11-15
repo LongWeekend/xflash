@@ -617,7 +617,7 @@
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:EXAMPLE_DB_KEY];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
 }
 
 
