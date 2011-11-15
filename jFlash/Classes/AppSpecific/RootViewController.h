@@ -20,7 +20,6 @@
 #define SEARCH_VIEW_CONTROLLER_TAB_INDEX    2
 #define SETTINGS_VIEW_CONTROLLER_TAB_INDEX  3
 
-extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowStudySetView;

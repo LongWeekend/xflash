@@ -37,7 +37,7 @@ NSString * const APP_HIDE_BURIED_CARDS    = @"app_hide_buried_cards";
 NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
 
 // Tag for "favorites" - zero, because it wasn't taken!
-const NSInteger FAVORITES_TAG_ID = 0;
+const NSInteger STARRED_TAG_ID = 0;
 
 // The email address of our bad data reports
 NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";

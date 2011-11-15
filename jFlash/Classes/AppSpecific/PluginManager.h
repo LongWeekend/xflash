@@ -12,6 +12,7 @@
 #import "NSDate+LWEUtilities.h"
 #import "ASIHTTPRequest.h"
 
+extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEPluginDidInstall;
 extern NSString * const LWEPluginKeyKey;
 extern NSString * const LWEPluginNameKey;
