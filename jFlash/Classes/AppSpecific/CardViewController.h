@@ -45,12 +45,14 @@ extern NSString * const LWECardHtmlFooter;
 - (void) turnReadingOn;
 - (void) turnReadingOff;
 
-- (void)resetReadingVisibility;
+- (void) resetReadingVisibility;
 
-- (void) setMeaningWebViewHidden:(BOOL)hideMeaningWebView;
+- (void) setMeaningWebViewHidden:(BOOL)shouldHide;
 
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
+
+@property BOOL readingVisible;
 
 @property (nonatomic, retain) NSString *baseHtml;
 
@@ -72,5 +74,4 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) MoodIcon *moodIcon;
 @property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
 
-@property BOOL readingVisible;
 @end

@@ -178,9 +178,9 @@
   [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
 }
 
-- (void) setMeaningWebViewHidden:(BOOL)hideMeaningWebView
+- (void) setMeaningWebViewHidden:(BOOL)shouldHide
 {
-  self.meaningWebView.hidden = hideMeaningWebView;
+  self.meaningWebView.hidden = shouldHide;
   [self _toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
 }
 
