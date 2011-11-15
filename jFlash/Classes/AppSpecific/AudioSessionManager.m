@@ -42,6 +42,20 @@ void LWEAudioRouteDidChange(void *inClientData, AudioSessionPropertyID inPropert
 }
 
 /**
+ * Returns YES if there are other audio is playing other than this application
+ */
+- (BOOL) otherAudioIsPlaying
+{
+  UInt32 otherAudioIsPlaying;
+  UInt32 propertySize = sizeof(otherAudioIsPlaying);
+  AudioSessionGetProperty (kAudioSessionProperty_OtherAudioIsPlaying,
+                           &propertySize,
+                           &otherAudioIsPlaying);
+ 
+  return otherAudioIsPlaying;
+}
+
+/**
  * Returns the name of the current output audio route (receiver, headphones, speaker, etc)
  */
 - (NSString*) currentRoute
@@ -123,6 +137,30 @@ void LWEAudioRouteDidChange(void *inClientData, AudioSessionPropertyID inPropert
     _routingToSpeaker = NO;
   }
   return (err == 0);
+}
+
+/**
+ * Duck any other audio if any
+ */
+- (void) duckOtherAudio:(BOOL)duck
+{
+  UInt32 allowDucking = (duck) ? true : false;
+  OSStatus err = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck, 
+                                          sizeof(allowDucking),
+                                          &allowDucking);
+  if (err > 0)
+  {
+    LWE_LOG(@"[AudioSessionManager]Error in trying to turn ON/OFF ducking %ld", err);
+  }
+}
+
+- (void) setSessionActive:(BOOL)active
+{
+  OSStatus err = AudioSessionSetActiveWithFlags(active, AVAudioSessionSetActiveFlags_NotifyOthersOnDeactivation);
+  if (err > 0)
+  {
+    LWE_LOG(@"[AudioSessionManager]Error in trying to ACTIVATE/DEACTIVATE session %ld", err);
+  }
 }
 
 
@@ -240,15 +278,49 @@ void LWEAudioRouteDidChange(void *inClientData, AudioSessionPropertyID inPropert
 
 - (void) _appDidBecomeActive
 {
-  if (self.lastSetCategory)
+  if ((self.lastSetCategory) && (![self.lastSetCategory isEqualToString:[self category]]))
   {
-    LWE_LOG(@"App did become active, restoring last active audio session category");
+    LWE_LOG(@"App did become active, last set category: %@. current category %@", self.lastSetCategory, [[AVAudioSession sharedInstance] category]);
     [self setSessionCategory:self.lastSetCategory];
 
     if ([self.lastSetCategory isEqualToString:AVAudioSessionCategoryPlayAndRecord] && self.isRoutedToSpeaker)
     {
       [self routeAudioToSpeakerIgnoringHeadset:NO];
     }
+  }
+}
+
+#pragma mark - AVAudioSessionDelegate
+#pragma mark Interruption Handling
+
+- (void)beginInterruption 
+{
+  LWE_LOG(@"[AudioSessionManager]beginInterruption message");
+  OSStatus err = AudioSessionSetActive(false);
+  if (err > 0)
+  {
+    LWE_LOG(@"[AudioSessionManager]Error in DEACTIVATING audio session %ld", err);
+  }
+}
+
+- (void)endInterruption 
+{
+  LWE_LOG(@"[AudioSessionManager]endInterruption message");
+  OSStatus err = AudioSessionSetActive(true);
+  if (err > 0)
+  {
+    LWE_LOG(@"[AudioSessionManager]Error in ACTIVATING audio session %ld", err);
+  }
+}
+
+#pragma mark - AVAudioSession KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ((object == [AVAudioSession sharedInstance]) && ([change objectForKey:@"new"]!=self))
+  {
+    LWE_LOG(@"[AudioSessionManager]Someone tried to change the delegate of the AVAudioSession singleton and it is not advisable to do that. Ignoring the change...");
+    [[AVAudioSession sharedInstance] setDelegate:self];
   }
 }
 
@@ -266,8 +338,12 @@ static AudioSessionManager *sharedAudioSessionManager = nil;
     OSStatus err = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, LWEAudioRouteDidChange, self);
     if (err > 0)
     {
-      LWE_LOG(@"Could not add listener to route change property; error code: %d",(NSInteger)err);
+      LWE_LOG(@"[AudioSessionManager]Could not add listener to route change property; error code: %ld", err);
     }
+    
+    //Setting the delegate to self for any interruption handling of the AudioSession.
+    [[AVAudioSession sharedInstance] setDelegate:self];
+    [[AVAudioSession sharedInstance] addObserver:self forKeyPath:@"delegate" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:NULL];
     
     _routingToSpeaker = NO;
     self.lastSetCategory = nil;
@@ -318,9 +394,9 @@ static AudioSessionManager *sharedAudioSessionManager = nil;
   return NSUIntegerMax; 
 }
 
-- (void)release 
-{ 
-} 
+- (void)release
+{
+}
 
 - (id)autorelease 
 { 

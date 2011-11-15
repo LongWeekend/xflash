@@ -265,7 +265,7 @@
 							<object class="IBUIButton" id="701139123">
 								<reference key="NSNextResponder" ref="37275877"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{27, 219}, {69, 37}}</string>
+								<string key="NSFrame">{{266, 9}, {41, 27}}</string>
 								<reference key="NSSuperview" ref="37275877"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="852708497"/>
@@ -535,11 +535,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">_pronounceBtn</string>
+						<string key="label">pronounceBtn</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="701139123"/>
 					</object>
-					<int key="connectionID">307</int>
+					<int key="connectionID">308</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -809,7 +809,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">307</int>
+			<int key="maxID">308</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1049,7 +1049,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_pronounceBtn</string>
 							<string>actionBarController</string>
 							<string>actionbarView</string>
 							<string>cardSetLabel</string>
@@ -1064,6 +1063,7 @@
 							<string>progressBarView</string>
 							<string>progressModalBtn</string>
 							<string>progressModalView</string>
+							<string>pronounceBtn</string>
 							<string>remainingCardsLabel</string>
 							<string>revealCardBtn</string>
 							<string>scrollView</string>
@@ -1073,7 +1073,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
 							<string>ActionBarViewController</string>
 							<string>UIView</string>
 							<string>UILabel</string>
@@ -1088,6 +1087,7 @@
 							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIView</string>
+							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>UIScrollView</string>
@@ -1100,7 +1100,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_pronounceBtn</string>
 							<string>actionBarController</string>
 							<string>actionbarView</string>
 							<string>cardSetLabel</string>
@@ -1115,6 +1114,7 @@
 							<string>progressBarView</string>
 							<string>progressModalBtn</string>
 							<string>progressModalView</string>
+							<string>pronounceBtn</string>
 							<string>remainingCardsLabel</string>
 							<string>revealCardBtn</string>
 							<string>scrollView</string>
@@ -1124,10 +1124,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">_pronounceBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">actionBarController</string>
 								<string key="candidateClassName">ActionBarViewController</string>
@@ -1185,6 +1181,10 @@
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">pronounceBtn</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">remainingCardsLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
@@ -1222,10 +1222,6 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
 			<integer value="528" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>

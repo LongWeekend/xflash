@@ -36,12 +36,41 @@
 
 - (void)play
 {
-  if (!self.isPlaying)
+  if ((!self.isPlaying) && (self.currentPlayer == nil))
   {
     self.playing = YES;
     LWE_DELEGATE_CALL(@selector(audioQueueWillStartPlaying:), self);
     [self _playThroughTheQueue];
   }
+  else if (self.currentPlayer != nil)
+  {
+    self.playing = YES;
+    [self.currentPlayer play];
+  }
+}
+
+- (void)pause
+{
+  [self.currentPlayer pause];
+  self.playing = NO;
+}
+
+- (void)stop
+{
+  if ((self.isPlaying)&&(self.delegate)&&([self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)]))
+  {
+    LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
+    //If its in the middle of the queue playing, report to the delegate so.
+    [self.delegate audioQueueFinishInterruption:self withFlag:LWEAudioQueueInterruptionShouldStop];
+  }
+  [self pause];
+  [self _resetState];
+}
+
+- (void)stopAndClearDelegate
+{
+  self.delegate = nil;
+  [self stop];
 }
 
 #pragma mark - Privates
@@ -90,6 +119,7 @@
 /* if an error occurs while decoding it will be reported to the delegate. */
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error
 {
+  //TODO: This method has not been tested, what will happen to the internal state of the queue?
   if ((self.delegate) && ([self.delegate respondsToSelector:@selector(audioQueue:didFailPlayingURL:error:)]))
   {
     [self.delegate audioQueue:self didFailPlayingURL:player.url error:error];
@@ -108,13 +138,35 @@
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags
 {
   [player play];
-  LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
+  LWEAudioQueueInterruptionFlag newFlag = 0;
+  if (flags == AVAudioSessionInterruptionFlags_ShouldResume)
+  {
+    newFlag = LWEAudioQueueInterruptionShouldResume;
+  }
+  
+  if ((self.delegate) && ([self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)]))
+  {
+    [self.delegate audioQueueFinishInterruption:self withFlag:newFlag];
+  }
 }
 
 #pragma mark - Class Plumbing
 
 - (void)dealloc
 {
+  if (self.isPlaying)
+  {
+    //Stop the player
+    [self.currentPlayer stop];
+    //But also tell the delegate if we are in the middle of playing
+    //the queue but got interrupted
+    if ((self.delegate) && ([self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)]))
+    {
+      LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
+      [self.delegate audioQueueFinishInterruption:self withFlag:LWEAudioQueueInterruptionBeingDeallocated];
+    }
+  }
+  
   self.error = nil;
   self.currentPlayer = nil;
   self.players = nil;
@@ -147,6 +199,7 @@
           if ((self.delegate) && ([[self delegate] respondsToSelector:@selector(audioQueue:didFailLoadingURL:error:)]))
             [[self delegate] audioQueue:self didFailLoadingURL:url error:error];
         }
+        [player release];
       }
     }];
     self.players = [NSArray arrayWithArray:array];

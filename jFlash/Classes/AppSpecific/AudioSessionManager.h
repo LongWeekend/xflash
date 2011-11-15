@@ -20,12 +20,15 @@
 - (BOOL) headsetIsPluggedIn;
 - (BOOL) routeAudioToSpeakerIgnoringHeadset:(BOOL)ignoreHeadset;
 - (BOOL) restoreDefaultAudioRouting;
+- (void) duckOtherAudio:(BOOL)duck;
+- (void) setSessionActive:(BOOL)active;
 
 - (NSString*) category;
 - (NSString*) currentRoute;
 - (BOOL) setSessionCategory:(NSString*)category;
 - (BOOL) canRecord;
 - (BOOL) canRecordAndPlay;
+- (BOOL) otherAudioIsPlaying;
 
 @property (readonly) BOOL isRoutedToSpeaker;
 

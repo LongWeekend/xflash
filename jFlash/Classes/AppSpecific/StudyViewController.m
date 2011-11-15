@@ -14,6 +14,8 @@
 #import "RootViewController.h"
 #import "AddTagViewController.h"
 
+#import "AudioSessionManager.h"
+
 @interface StudyViewController()
 //private properties
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
@@ -40,7 +42,7 @@
 @synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 @synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
-@synthesize _pronounceBtn = _pronounceBtn;
+@synthesize pronounceBtn = pronounceBtn;
 
 /** Custom initializer */
 - (id) init
@@ -74,22 +76,32 @@
 
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
 {
-  
+  [audioQueue pause];
 }
 
-- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
 {
-  
+  if (flag == LWEAudioQueueInterruptionShouldResume)
+  {
+    [audioQueue play];
+  }
+  else
+  {
+    [[AudioSessionManager sharedAudioSessionManager] setSessionActive:NO];
+    self.pronounceBtn.enabled = YES;
+  }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
 {
-  self._pronounceBtn.enabled = YES;
+  [[AudioSessionManager sharedAudioSessionManager] setSessionActive:NO];
+  self.pronounceBtn.enabled = YES;
 }
 
 - (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
 {
-  self._pronounceBtn.enabled = NO;
+  [[AudioSessionManager sharedAudioSessionManager] setSessionActive:YES];
+  self.pronounceBtn.enabled = NO;
 }
 
 #pragma mark - UIView Delegate Methods
@@ -828,7 +840,7 @@
 
 - (void) dealloc
 {
-  self._pronounceBtn = nil;
+  self.pronounceBtn = nil;
   
   if (self.progressVC)
   {
