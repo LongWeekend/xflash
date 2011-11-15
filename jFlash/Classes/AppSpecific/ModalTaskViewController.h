@@ -49,22 +49,8 @@
 
 @interface ModalTaskViewController : UIViewController
 {
-  // IBOutlet properties
-  IBOutlet UILabel *statusMsgLabel;
-  IBOutlet UILabel *taskMsgLabel;
-  IBOutlet PDColoredProgressView *progressIndicator;
-  IBOutlet UIButton *pauseButton;
-  IBOutlet UIButton *startButton;
-  
-  // How to behave
-  BOOL startTaskOnAppear;                             //! If YES, -startProcess will be called on viewDidAppear
-  BOOL showDetailedViewOnAppear;                      //! If YES, -showDetailedView will be called on viewDidAppear
-  
-  NSString *webViewContentDirectory;                   //! Sets the sub directory of the content to load into the details web view
-  NSString *webViewContentFileName;                   //! Sets the filename of the content to load into the details web view
-  
-  // Downloader & Updater objects
-  id<ModalTaskViewDelegate> taskHandler;         //! Task delegate, must conform to TaskViewControllerDelegate protocol
+  NSString *webViewContentDirectory;              //! Sets the sub directory of the content to load into the details web view
+  NSString *webViewContentFileName;               //! Sets the filename of the content to load into the details web view
 }
 
 // Custom getters & setters
@@ -99,12 +85,16 @@
 @property (nonatomic, retain) IBOutlet UIButton *pauseButton;
 
 // User-set properties
+
+//! If YES, -startProcess will be called on viewDidAppear
 @property BOOL startTaskOnAppear;
+//! If YES, -showDetailedView will be called on viewDidAppear
 @property BOOL showDetailedViewOnAppear;
 
 // Content to be displayed in the web view
 @property (nonatomic, retain) NSString *webViewContent;
 
-@property (nonatomic, retain) id taskHandler;
+//! Task delegate, must conform to TaskViewControllerDelegate protocol
+@property (nonatomic, retain) id<ModalTaskViewDelegate> taskHandler;
 
 @end
