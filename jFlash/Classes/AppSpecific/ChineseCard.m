@@ -184,11 +184,15 @@
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
   //TODO: This method is a stub mock (live mock, really) for Rendy - by MMA 10.25.2011
   //NSMutableDictionary *dict = [[[super audioFilenames] mutableCopy] autorelease];
-  NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:pinyinSegments.count] autorelease];
+  NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:2] autorelease];
+  
+  NSMutableArray *segmentedPinyinSound = [[NSMutableArray alloc] initWithCapacity:pinyinSegments.count];
   for (NSString *pinyin in pinyinSegments)
   {
-    [dict setObject:@"foo.mp3" forKey:pinyin];
+    [segmentedPinyinSound addObject:@"foo.mp3"];
   }
+  [dict setObject:segmentedPinyinSound forKey:kLWESegmentedReadingKey];
+  [segmentedPinyinSound release];
   
   return (NSDictionary*)dict;
 }
