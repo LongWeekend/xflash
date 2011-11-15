@@ -34,16 +34,16 @@
 {
   // You can tap the HH in practice mode.
   cardViewController.moodIconBtn.enabled = YES;
+
+  // Show the percent correct when in practice mode
+  [cardViewController turnPercentCorrectOn];
 }
 
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-  // always start with the meaning hidden
+  // always start with the meaning hidden, reset the reading to whatever state it should be
   [cardViewController hideMeaningWebView:YES];
   [cardViewController resetReadingVisibility];
-  
-  // Show the percent correct when in practice mode
-  [cardViewController turnPercentCorrectOn];
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   BOOL useMainHeadword = [[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
@@ -86,7 +86,7 @@
 
 - (void) studyViewWillSetup:(StudyViewController*)svc
 {
-	// In practice mode, scroll view should always start disabled
+	// In practice mode, scroll view should always start disabled!
   svc.scrollView.pagingEnabled = NO;
   svc.scrollView.scrollEnabled = NO;
 }
@@ -101,7 +101,10 @@
   svc.tapForAnswerImage.hidden = NO;
   svc.revealCardBtn.hidden = NO;
   
-  // Update mood icon
+  // Update mood icon percentage (TODO: this is a hack, we have it as a 
+  // local property and then update it when cardViewWillSetup: is called)
+  // The problem here is that SVC has "knowledge" of right & wrong counts, even
+  // though it should be mode agnostic.
   CGFloat tmpRatio = 100;
   if (svc.numViewed > 0)
   {
@@ -114,7 +117,7 @@
 
 - (void)actionBarDidChangeMode:(ActionBarViewController *)avc
 {
-  // Change action bar view to other XIB
+  // Change action bar view to original XIB
   [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController" owner:avc options:nil];
 }
 
