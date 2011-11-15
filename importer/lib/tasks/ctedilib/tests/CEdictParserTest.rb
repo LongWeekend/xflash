@@ -102,5 +102,13 @@ class CEdictParserTest < Test::Unit::TestCase
     assert_equal(variant_meaning_one,muxed_variant_entries[0].meanings[0])
     assert_equal(variant_meaning_two,muxed_variant_entries[0].meanings[1])
   end
+  
+  def test_classifier_expansion
+    results_data = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_cedict.u8").run
+    entry = results_data[1]
+    
+    expected_meanings = [Meaning.new("video camera"),Meaning.new("Counter: 部[bu4]",["classifier"])]
+    assert_equal(expected_meanings,entry.meanings)
+  end
 
 end
