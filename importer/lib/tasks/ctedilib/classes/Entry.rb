@@ -251,6 +251,16 @@ class Entry
     @references
   end
   
+  def add_classifier_to_meanings
+    # Quick return if nothing set
+    return false unless classifier
+    
+    # I have NO idea why, but when I call entry.classifier.split, shit goes haywire
+    classifier.split(",").each do |classifier_str|
+      @meanings << Meaning.new(("Counter: %s" % [classifier_str]),["classifier"])
+    end
+  end
+  
   def add_inline_entry_to_meanings(inline_entry)
     @meanings << Meaning.new("Also: %s" % [ inline_entry.to_str ], ["reference"])
   end

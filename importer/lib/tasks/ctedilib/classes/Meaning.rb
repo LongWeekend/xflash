@@ -5,10 +5,14 @@ class Meaning
   @reference
   @meaning
   @tags
+  
+  # If this is true, this meaning shouldn't be considered for the full text search
+  @skip_fts
 
   def initialize(meaning = "",tags = [])
     @reference = false
     @variant = false
+    @skip_fts = false
     @is_erhua = false
     @tags = tags
     @meaning = meaning
@@ -178,6 +182,7 @@ class Meaning
 
     classifier_regex = /CL:(.+)/
     @meaning.scan(classifier_regex) do |cl|
+      @skip_fts = true
       return cl[0]
     end
     return false
@@ -225,6 +230,10 @@ class Meaning
   
   def is_erhua?
     @is_erhua
+  end
+  
+  def should_skip_fts?
+    @skip_fts
   end
   
   def tags

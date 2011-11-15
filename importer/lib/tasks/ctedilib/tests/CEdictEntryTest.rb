@@ -190,7 +190,7 @@ class CEdictEntryTest < Test::Unit::TestCase
   
   def test_meaning_fts_stopwords
     entry = CEdictEntry.new
-    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
+    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/CL:foobar/")
     expected = "lateral side beside"
     assert_equal(expected,entry.meaning_fts("inhuman"))
   end
@@ -266,8 +266,6 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal(expected_meaning,erhua_entry.meanings[4])
   end
   
-  
-
 
   # Test pinyin conversion function
 #  def test_transform_pinyin

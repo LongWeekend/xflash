@@ -105,9 +105,11 @@ class CEdictEntry < Entry
     meanings_fts_arr   = []
     sense_count = @meanings.size
     @meanings.each do |m|
-      meaning_str = m.meaning
-      meaning_str = xfrm_remove_stop_words(meaning_str.gsub($regexes[:inlined_tags], "").strip)
-      meanings_fts_arr << meaning_str unless meanings_fts_arr.include?(meaning_str)
+      if !m.should_skip_fts?
+        meaning_str = m.meaning
+        meaning_str = xfrm_remove_stop_words(meaning_str.strip)
+        meanings_fts_arr << meaning_str unless meanings_fts_arr.include?(meaning_str)
+      end
     end
 
     return meanings_fts_arr.join(" ")
