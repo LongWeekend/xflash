@@ -16,6 +16,11 @@
 NSString * const JFLASH_CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
 NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
 NSString * const JFLASH_CURRENT_FTS_TEST_DATABASE   = @"jFlash-FTS-1.1.db";
+
+NSString * const CFLASH_CURRENT_USER_TEST_DATABASE  = @"cFlash.db";
+NSString * const CFLASH_CURRENT_CARD_TEST_DATABASE  = @"cFlash-CARD-1.0.db";
+NSString * const CFLASH_CURRENT_FTS_TEST_DATABASE   = @"cFlash-FTS-1.0.db";
+
 NSString * const kJFlashDatabaseErrorDomain         = @"kJFlashDatabaseErrorDomain";
 NSUInteger const kJFlashCannotOpenDatabaseErrorCode   = 999;
 NSUInteger const kJFlashCannotCopyDatabaseErrorCode   = 888;

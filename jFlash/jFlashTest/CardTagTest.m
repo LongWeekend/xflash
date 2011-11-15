@@ -46,7 +46,7 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   [longWeekendFavTag populateCardIds];
   NSError *error = nil;
   Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
-  STAssertTrue(card, @"Could not get random card");
+  STAssertTrue((card != nil), @"Could not get random card");
   
   [longWeekendFavTag updateLevelCounts:card nextLevel:5];
   int count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
