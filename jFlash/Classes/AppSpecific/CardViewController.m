@@ -62,8 +62,6 @@
 
 #pragma mark - Class Plumbing
 
-
-
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword
 {
   NSString *nibName = nil;
@@ -96,7 +94,6 @@
   [self.meaningWebView shutOffBouncing];
   self.meaningWebView.backgroundColor = [UIColor clearColor];
   
-  
   // Create a default mood icon object
   self.moodIcon = [[[MoodIcon alloc] init] autorelease];
   self.moodIcon.moodIconBtn = self.moodIconBtn;
@@ -104,7 +101,6 @@
   
   self.percentCorrectLabel.text = percentCorrectLabelStartText;
   [self.moodIcon updateMoodIcon:100.0f];
-  
 }
 
 #pragma mark - IBAction

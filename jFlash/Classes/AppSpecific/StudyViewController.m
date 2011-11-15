@@ -350,15 +350,16 @@
 {
   if (card != nil)
   {
+    // Asks our delegate if it wants to change any of the details of the view (labels, etc)
+    // Due to a hack in PracticeModeCardViewDelegate.m, this call MUST be before setupWithCard:.
+    LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
+
     // Sets up all of the sub-controllers of the study view controller.
     LWE_DELEGATE_CALL(@selector(studyViewWillSetup:),self);
     
     [self.cardViewController setupWithCard:card];
     [self.actionBarController setupWithCard:card];
     [self.exampleSentencesViewController setupWithCard:card];
-    
-    // Asks our delegate if it wants to change any of the details of the view (labels, etc)
-    LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
     
     // Page control should be shown when we have example sentences
     self.pageControl.hidden = ([self hasExampleSentences] == NO);
