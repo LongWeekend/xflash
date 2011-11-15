@@ -496,17 +496,10 @@
 /** Shows the meaning/reading */
 - (IBAction) revealCard
 {
-  // TODO: When the delegate has access to StudyViewController, these should be moved.  OR put
-  // them in WordCardViewController.xib and pass that
-  self.revealCardBtn.hidden = YES;
-  self.tapForAnswerImage.hidden = YES;
+  LWE_DELEGATE_CALL(@selector(studyViewWillReveal:), self);
   
   [self.cardViewController reveal];
-  [self.actionBarController reveal];
-  
-  // Now update scrollability (page control doesn't change)
-  self.scrollView.pagingEnabled = _hasExampleSentences;
-  self.scrollView.scrollEnabled = _hasExampleSentences;
+  [self.actionBarController reveal];  
 }
 
 - (IBAction) pronounceCard:(id)sender

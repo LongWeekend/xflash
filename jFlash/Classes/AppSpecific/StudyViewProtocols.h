@@ -61,4 +61,11 @@
  * are both located in StudyViewController.
  */
 - (void)studyViewWillSetup:(StudyViewController*)svc;
+/**
+ * This method is called before cardViewWillReveal: is called.
+ * This gives a delegate an opportunity to change any of the 
+ * scroll-view related items, as well as tap-for-answer, which
+ * are both located in StudyViewController.
+ */
+- (void)studyViewWillReveal:(StudyViewController*)svc;
 @end

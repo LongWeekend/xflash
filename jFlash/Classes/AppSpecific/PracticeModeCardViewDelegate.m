@@ -86,9 +86,24 @@
 
 - (void) studyViewWillSetup:(StudyViewController*)svc
 {
+  // If practice mode, show the quiz stuff.
+  svc.tapForAnswerImage.hidden = NO;
+  svc.revealCardBtn.hidden = NO;
+
 	// In practice mode, scroll view should always start disabled!
   svc.scrollView.pagingEnabled = NO;
   svc.scrollView.scrollEnabled = NO;
+}
+
+- (void) studyViewWillReveal:(StudyViewController *)svc
+{
+  svc.revealCardBtn.hidden = YES;
+  svc.tapForAnswerImage.hidden = YES;
+  
+  // Now update scrollability (page control doesn't change)
+  BOOL hasExampleSentences = [svc hasExampleSentences];
+  svc.scrollView.pagingEnabled = hasExampleSentences; 
+  svc.scrollView.scrollEnabled = hasExampleSentences;
 }
 
 - (void) updateStudyViewLabels:(StudyViewController*)svc
@@ -96,10 +111,6 @@
   NSInteger unseen = [[svc.currentCardSet.cardLevelCounts objectAtIndex:0] intValue];
   NSInteger total = svc.currentCardSet.cardCount;
   svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",unseen,total];
-  
-  // If practice mode, show the quiz stuff.
-  svc.tapForAnswerImage.hidden = NO;
-  svc.revealCardBtn.hidden = NO;
   
   // Update mood icon percentage (TODO: this is a hack, we have it as a 
   // local property and then update it when cardViewWillSetup: is called)
