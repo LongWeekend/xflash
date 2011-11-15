@@ -11,9 +11,6 @@
 
 
 @interface ProgressBarViewController : UIViewController
-{
-  NSMutableArray *levelDetails;
-}
 
 - (void) drawProgressBar;
 
