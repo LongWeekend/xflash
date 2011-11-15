@@ -13,6 +13,10 @@
 NSString * const kTagErrorDomain          = @"kTagErrorDomain";
 NSString * const LWETagDidSave = @"kTagDidSave";
 NSUInteger const kAllBuriedAndHiddenError = 999;
+NSInteger const kLWEUninitializedTagId = -1;
+NSInteger const kLWEUninitializedCardCount = -1;
+
+#define kLWETimesToRetryForNonRecentCardId 3
 
 @interface Tag ()
 //Privates function
@@ -28,8 +32,8 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
 {
   if ((self = [super init]))
   {
-    self.tagId = -1;
-    cardCount = -1; // don't use setter here, has special behavior of updating DB 
+    self.tagId = kLWEUninitializedTagId;
+    cardCount = kLWEUninitializedCardCount; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
@@ -348,12 +352,12 @@ NSUInteger const kAllBuriedAndHiddenError = 999;
     cardId = [cardIdArray objectAtIndex:randomOffset];      
     
     i++;
-    if (i > 3)
+    if (i > kLWETimesToRetryForNonRecentCardId)
     {
       // the same card is worse than a card that was twice ago, so we check again that it's not that
-      if (j == 3 || currentCardId != [cardId intValue]) 
+      if (j == kLWETimesToRetryForNonRecentCardId || currentCardId != [cardId intValue]) 
       {
-        break; //we tried 5 times, fuck it
+        break; //we tried 3 times, fuck it
       }
       j++;
     }
