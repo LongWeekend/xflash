@@ -27,6 +27,7 @@
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
+- (void) _enablePronounceButton:(BOOL)enabled;
 @end
 
 @implementation StudyViewController
@@ -75,28 +76,33 @@
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
 {
   [audioQueue pause];
+  [self _enablePronounceButton:YES];
 }
 
 - (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
 {
+  //if the reason of interruption is whether the audio get deallocated
+  //or something else happen besides the phone call/other trivia thing which
+  //is better to get the audio play again
   if (flag == LWEAudioQueueInterruptionShouldResume)
   {
     [audioQueue play];
+    [self _enablePronounceButton:NO];
   }
   else
   {
-    self.pronounceBtn.enabled = YES;
+    [self _enablePronounceButton:YES];
   }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
 {
-  self.pronounceBtn.enabled = YES;
+  [self _enablePronounceButton:YES];
 }
 
 - (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
 {
-  self.pronounceBtn.enabled = NO;
+  [self _enablePronounceButton:NO];
 }
 
 #pragma mark - UIView Delegate Methods
@@ -551,6 +557,11 @@
 - (IBAction) pronounceCard:(id)sender
 {
   [self.currentCard pronounceWithDelegate:self];
+}
+
+- (void) _enablePronounceButton:(BOOL)enabled
+{
+  self.pronounceBtn.enabled = enabled;
 }
 
 #pragma mark - Private methods to setup cards (called every transition)

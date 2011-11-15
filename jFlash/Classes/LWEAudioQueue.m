@@ -86,8 +86,11 @@
 {
   AVAudioPlayer *p = (AVAudioPlayer *)[self.players objectAtIndex:self.currentIdx];
   self.currentPlayer = p;
-  [p prepareToPlay];
-  [p play];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{  
+    [p prepareToPlay];
+    [p play];
+  });
 }
 
 - (void)_resetState
