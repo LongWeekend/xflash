@@ -7,6 +7,7 @@
 //
 
 #import "PluginSettingsViewController.h"
+#import "RootViewController.h"
 #import "Constants.h"
 
 #define PLUGIN_SETTINGS_INSTALLED_SECTION 1
@@ -164,7 +165,9 @@
 
     // Fire off a notification to bring up the downloader
     NSDictionary *dict = [self.availablePlugins objectAtIndex:indexPath.row];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal
+                                                        object:self
+                                                      userInfo:dict];
   }
 }
 
