@@ -23,16 +23,13 @@
 		242A174814628AF4002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		242A174914628B17002977E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		24A9F5681461334800C9D46F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
-		24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */; };
 		24B5660113CF656100BEE166 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		24B5660213CF656100BEE166 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		24B5660313CF656100BEE166 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
 		24B5661513CF67CD00BEE166 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B5661413CF67CD00BEE166 /* SenTestingKit.framework */; };
 		24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
 		24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
-		24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
 		24E47F0111F3E59D007F6FB7 /* LWETUserDB.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */; };
 		24E47F2211F3E754007F6FB7 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */; };
 		24E47F2311F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0911F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m */; };
@@ -53,11 +50,8 @@
 		49046617147272AD004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		4904661A147274B5004C44E2 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
-		4904662214727835004C44E2 /* JFlashDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */; };
-		4904662314727835004C44E2 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */; };
 		4904662B14727835004C44E2 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
 		4904662C14727835004C44E2 /* LWEAudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BB428014685E67002C387B /* LWEAudioQueue.m */; };
-		4904662D14727835004C44E2 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49046613147270CD004C44E2 /* CFlashSearchTest.m */; };
 		4904662F14727835004C44E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A174714628AF4002977E6 /* AudioToolbox.framework */; };
 		4904663014727835004C44E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242A173F1461AB60002977E6 /* AVFoundation.framework */; };
 		4904663114727835004C44E2 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C521DE144D2461002011BD /* CoreText.framework */; };
@@ -65,7 +59,6 @@
 		4904663314727835004C44E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		4904663414727835004C44E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4904663514727835004C44E2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
-		4904663714727835004C44E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24B5660713CF656200BEE166 /* InfoPlist.strings */; };
 		4904663814727835004C44E2 /* ReminderSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */; };
 		4904663B14727835004C44E2 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		4904663C14727835004C44E2 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
@@ -337,6 +330,11 @@
 		49DADB811277F36F00B8FD72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7F1277F36F00B8FD72 /* Default@2x.png */; };
 		49DADB821277F36F00B8FD72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7E1277F36F00B8FD72 /* Default.png */; };
 		49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49DADB7F1277F36F00B8FD72 /* Default@2x.png */; };
+		49E3D17D1472803900F79308 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17A1472803900F79308 /* CardTagTest.m */; };
+		49E3D17E1472803900F79308 /* CardTagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17A1472803900F79308 /* CardTagTest.m */; };
+		49E3D17F1472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
+		49E3D1801472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
+		49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D1821472804400F79308 /* CFlashSearchTest.m */; };
 		49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
@@ -726,8 +724,6 @@
 		242A17421462893E002977E6 /* AudioSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioSessionManager.h; path = AppSpecific/AudioSessionManager.h; sourceTree = "<group>"; };
 		242A17431462893E002977E6 /* AudioSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioSessionManager.m; path = AppSpecific/AudioSessionManager.m; sourceTree = "<group>"; };
 		242A174714628AF4002977E6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		24AEAB1613D5AE0D008ADA45 /* CardTagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTagTest.h; sourceTree = "<group>"; };
-		24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTagTest.m; sourceTree = "<group>"; };
 		24AEAE9E13D5E1EB008ADA45 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		24AEAEA113D5E246008ADA45 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		24AEAEA313D5E24F008ADA45 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -736,14 +732,9 @@
 		24AEAEAB13D5E2AB008ADA45 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		24AEAEAD13D5E2B3008ADA45 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		24B5660013CF656100BEE166 /* jFlashTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jFlashTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24B5660613CF656200BEE166 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jFlashTest-Info.plist"; sourceTree = "<group>"; };
-		24B5660813CF656200BEE166 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jFlashTest-Prefix.pch"; sourceTree = "<group>"; };
 		24B5661413CF67CD00BEE166 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		24BB427F14685E67002C387B /* LWEAudioQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAudioQueue.h; sourceTree = "<group>"; };
 		24BB428014685E67002C387B /* LWEAudioQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAudioQueue.m; sourceTree = "<group>"; };
-		24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashDatabase.h; path = DatabaseSetup/JFlashDatabase.h; sourceTree = "<group>"; };
-		24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashDatabase.m; path = DatabaseSetup/JFlashDatabase.m; sourceTree = "<group>"; };
 		24E47EF811F3E59D007F6FB7 /* LWETUserDB.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = LWETUserDB.xcdatamodel; path = Classes/Reusable/LWE/Twitter/LWETUserDB.xcdatamodel; sourceTree = "<group>"; };
 		24E47F0611F3E754007F6FB7 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
 		24E47F0711F3E754007F6FB7 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
@@ -777,8 +768,6 @@
 		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AB4B0D9B1048005BE974 /* jFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jFlash_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		49046612147270CD004C44E2 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFlashSearchTest.h; sourceTree = "<group>"; };
-		49046613147270CD004C44E2 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFlashSearchTest.m; sourceTree = "<group>"; };
 		4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-FTS-1.0.db"; path = "sql/plugins/cFlash-FTS-1.0.db"; sourceTree = "<group>"; };
 		4904664514727835004C44E2 /* jFlashTest copy.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "jFlashTest copy.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
@@ -908,7 +897,15 @@
 		49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "candy-btn-yellow@2x.png"; path = "Assets/candy-btn-yellow@2x.png"; sourceTree = "<group>"; };
 		49DADB7E1277F36F00B8FD72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets/Default.png; sourceTree = "<group>"; };
 		49DADB7F1277F36F00B8FD72 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Assets/Default@2x.png"; sourceTree = "<group>"; };
-		49E3D17314727E5300F79308 /* cFlashTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cFlashTest-Info.plist"; sourceTree = SOURCE_ROOT; };
+		49E3D17614727FAE00F79308 /* jFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jFlashTest-Info.plist"; path = "Tests/jFlashTests/jFlashTest-Info.plist"; sourceTree = SOURCE_ROOT; };
+		49E3D17714727FAE00F79308 /* jFlashTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "jFlashTest-Prefix.pch"; path = "Tests/jFlashTests/jFlashTest-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		49E3D17814727FBF00F79308 /* cFlashTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "cFlashTest-Info.plist"; path = "Tests/cFlashTests/cFlashTest-Info.plist"; sourceTree = SOURCE_ROOT; };
+		49E3D1791472803900F79308 /* CardTagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardTagTest.h; path = Tests/CardTagTest.h; sourceTree = SOURCE_ROOT; };
+		49E3D17A1472803900F79308 /* CardTagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardTagTest.m; path = Tests/CardTagTest.m; sourceTree = SOURCE_ROOT; };
+		49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetupDatabaseHelper.h; path = Tests/SetupDatabaseHelper.h; sourceTree = SOURCE_ROOT; };
+		49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetupDatabaseHelper.m; path = Tests/SetupDatabaseHelper.m; sourceTree = SOURCE_ROOT; };
+		49E3D1811472804400F79308 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFlashSearchTest.h; path = Tests/cFlashTests/CFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
+		49E3D1821472804400F79308 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFlashSearchTest.m; path = Tests/cFlashTests/CFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jFlash-Info.plist"; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
@@ -1357,22 +1354,14 @@
 		24B5660413CF656100BEE166 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				49E3D17514727F9700F79308 /* Supporting Files */,
+				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
+				4904664814727B03004C44E2 /* Common */,
 				4904664A14727B17004C44E2 /* CFlash */,
 				4904664914727B0F004C44E2 /* JFlash */,
-				4904664814727B03004C44E2 /* Common */,
 			);
 			name = Tests;
 			path = jFlashTest;
-			sourceTree = "<group>";
-		};
-		24B5660513CF656200BEE166 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				24B5660613CF656200BEE166 /* jFlashTest-Info.plist */,
-				24B5660713CF656200BEE166 /* InfoPlist.strings */,
-				24B5660A13CF656200BEE166 /* jFlashTest-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		24E47F0411F3E754007F6FB7 /* OAuthConsumer */ = {
@@ -1484,11 +1473,10 @@
 		4904664814727B03004C44E2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				24DE1E2413D6AD4E00B2BB56 /* JFlashDatabase.h */,
-				24DE1E2513D6AD4E00B2BB56 /* JFlashDatabase.m */,
-				24AEAB1613D5AE0D008ADA45 /* CardTagTest.h */,
-				24AEAB1713D5AE0D008ADA45 /* CardTagTest.m */,
-				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
+				49E3D1791472803900F79308 /* CardTagTest.h */,
+				49E3D17A1472803900F79308 /* CardTagTest.m */,
+				49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */,
+				49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1496,7 +1484,6 @@
 		4904664914727B0F004C44E2 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
-				24B5660513CF656200BEE166 /* Supporting Files */,
 			);
 			name = JFlash;
 			sourceTree = "<group>";
@@ -1504,9 +1491,8 @@
 		4904664A14727B17004C44E2 /* CFlash */ = {
 			isa = PBXGroup;
 			children = (
-				49E3D17214727E4000F79308 /* Supporting Files */,
-				49046612147270CD004C44E2 /* CFlashSearchTest.h */,
-				49046613147270CD004C44E2 /* CFlashSearchTest.m */,
+				49E3D1811472804400F79308 /* CFlashSearchTest.h */,
+				49E3D1821472804400F79308 /* CFlashSearchTest.m */,
 			);
 			name = CFlash;
 			sourceTree = "<group>";
@@ -1748,10 +1734,12 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		49E3D17214727E4000F79308 /* Supporting Files */ = {
+		49E3D17514727F9700F79308 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				49E3D17314727E5300F79308 /* cFlashTest-Info.plist */,
+				49E3D17814727FBF00F79308 /* cFlashTest-Info.plist */,
+				49E3D17614727FAE00F79308 /* jFlashTest-Info.plist */,
+				49E3D17714727FAE00F79308 /* jFlashTest-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2731,7 +2719,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24B5660913CF656200BEE166 /* InfoPlist.strings in Resources */,
 				49716147144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */,
 				49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */,
@@ -2744,7 +2731,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4904663714727835004C44E2 /* InfoPlist.strings in Resources */,
 				4904663814727835004C44E2 /* ReminderSettingsViewController.xib in Resources */,
 				4904663B14727835004C44E2 /* cFlash-CARD-1.0.db in Resources */,
 				4904663C14727835004C44E2 /* cFlash.db in Resources */,
@@ -3095,14 +3081,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DE1E3313D753C200B2BB56 /* JFlashDatabase.m in Sources */,
-				24AEAB1813D5AE0D008ADA45 /* CardTagTest.m in Sources */,
 				49278C5114460198005426A3 /* NSAttributedString+Attributes.m in Sources */,
 				49278C521446019B005426A3 /* OHAttributedLabel.m in Sources */,
 				49716144144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */,
 				49668AEE14581D6F005636D0 /* LWEAnalytics.m in Sources */,
 				242A17461462893F002977E6 /* AudioSessionManager.m in Sources */,
 				24BB428314685E67002C387B /* LWEAudioQueue.m in Sources */,
+				49E3D17D1472803900F79308 /* CardTagTest.m in Sources */,
+				49E3D17F1472803900F79308 /* SetupDatabaseHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3110,11 +3096,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4904662214727835004C44E2 /* JFlashDatabase.m in Sources */,
-				4904662314727835004C44E2 /* CardTagTest.m in Sources */,
 				4904662B14727835004C44E2 /* AudioSessionManager.m in Sources */,
 				4904662C14727835004C44E2 /* LWEAudioQueue.m in Sources */,
-				4904662D14727835004C44E2 /* CFlashSearchTest.m in Sources */,
+				49E3D17E1472803900F79308 /* CardTagTest.m in Sources */,
+				49E3D1801472803900F79308 /* SetupDatabaseHelper.m in Sources */,
+				49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3290,17 +3276,6 @@
 			targetProxy = 493DBDC414727D0D003EB18B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		24B5660713CF656200BEE166 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				24B5660813CF656200BEE166 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
