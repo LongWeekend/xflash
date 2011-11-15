@@ -57,6 +57,7 @@
 		49046619147274B0004C44E2 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		4904661A147274B5004C44E2 /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
+		4904661D147276E3004C44E2 /* cFlash-FTS-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */; };
 		4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		490820A511B7959500150499 /* PluginSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490820A411B7959500150499 /* PluginSettingsView.xib */; };
 		490B23411277BCE100CF3484 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B233C1277BCE100CF3484 /* FMDatabase.m */; };
@@ -749,6 +750,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49046612147270CD004C44E2 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFlashSearchTest.h; sourceTree = "<group>"; };
 		49046613147270CD004C44E2 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFlashSearchTest.m; sourceTree = "<group>"; };
+		4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-FTS-1.0.db"; path = "sql/plugins/cFlash-FTS-1.0.db"; sourceTree = "<group>"; };
 		4908209711B794A500150499 /* PluginSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginSettingsViewController.h; path = AppSpecific/PluginSettingsViewController.h; sourceTree = "<group>"; };
 		4908209811B794A500150499 /* PluginSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginSettingsViewController.m; path = AppSpecific/PluginSettingsViewController.m; sourceTree = "<group>"; };
 		490820A411B7959500150499 /* PluginSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PluginSettingsView.xib; path = XIBs/PluginSettingsView.xib; sourceTree = "<group>"; };
@@ -1482,6 +1484,7 @@
 				49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */,
 				49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */,
 				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
+				4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */,
 				49BD2AF2138E664100FAC045 /* cFlash.db */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
 			);
@@ -2644,6 +2647,7 @@
 				49046619147274B0004C44E2 /* cFlash.db in Resources */,
 				4904661A147274B5004C44E2 /* jFlash.db in Resources */,
 				4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */,
+				4904661D147276E3004C44E2 /* cFlash-FTS-1.0.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
