@@ -6,7 +6,7 @@
 //  Copyright 2011 Long Weekend LLC. All rights reserved.
 //
 
-#import "JFlashDatabase.h"
+#import "SetupDatabaseHelper.h"
 
 #import "SynthesizeSingleton.h"
 #import "LWEFile.h"
@@ -14,8 +14,8 @@
 #import "Constants.h"
 
 #if defined (LWE_JFLASH)
-  NSString * const CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
-  NSString * const CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
+  NSString * const CURRENT_USER_TEST_DATABASE  = @"jFlash.db";
+  NSString * const CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1.db";
   NSString * const CURRENT_FTS_TEST_DATABASE   = @"jFlash-FTS-1.1.db";
 #elif defined (LWE_CFLASH)
   NSString * const CURRENT_USER_TEST_DATABASE  = @"cFlash.db";

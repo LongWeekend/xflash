@@ -7,9 +7,9 @@
 //
 
 #import "CardTagTest.h"
+#import "SetupDatabaseHelper.h"
 
 #import "TagPeer.h"
-#import "JFlashDatabase.h"
 
 static NSString * const kTagTestDefaultName             = @"TestTag";
 static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
@@ -119,6 +119,11 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   
   //Create the tag for testing purposes.
   Tag *createdTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  
+  Card *card = [CardPeer retrieveCardByPK:10];
+  [TagPeer subscribeCard:card toTag:createdTag];
+  
+  // This has to be non-zero
   STAssertTrue(createdTag != nil, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTag.tagId);
   
   //Tried to set the active tag to the one we just newly created

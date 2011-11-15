@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JFlashDatabase.h"
+#import "SetupDatabaseHelper.h"
 #import "CardPeer.h"
 
 @implementation CFlashSearchTest
