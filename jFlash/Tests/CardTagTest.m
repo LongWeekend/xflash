@@ -12,7 +12,7 @@
 #import "TagPeer.h"
 
 static NSString * const kTagTestDefaultName             = @"TestTag";
-static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
+static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
 
 @interface CardTagTest ()
 @property (retain) Tag *tag;
@@ -25,55 +25,54 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
 
 - (void)testCalculateNextCardLevelWithError
 {
-  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLongWeekendFavorites];
+  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   [longWeekendFavTag populateCardIds];
-  NSError* error;
+  NSError *error = nil;
   NSInteger nextCardLevel = [longWeekendFavTag calculateNextCardLevelWithError:&error];
   STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
+  STAssertNil(error, @"There should not be an error getting the next level: %@", error);
   
   // Now we cause an error but it's robust enough to work anyway
-  Card* card = [longWeekendFavTag getRandomCard:0 error:&error];
+  Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
   [longWeekendFavTag updateLevelCounts:card nextLevel:1];
   [longWeekendFavTag setCardCount:1];
   nextCardLevel = [longWeekendFavTag calculateNextCardLevelWithError:&error];
   STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
+  //  STAssertNotNil(error, @"There should be an error getting the next level, but wasn't");
 }
 
 - (void) testUpdateLevelCounts
 {
-  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLongWeekendFavorites];
+  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   [longWeekendFavTag populateCardIds];
   NSError *error = nil;
   Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
-  STAssertTrue((card != nil), @"Could not get random card");
+  STAssertNotNil(card,@"Could not get random card");
+  STAssertNil(error, @"Error should be nil, but wasn't: %@",error);
   
   [longWeekendFavTag updateLevelCounts:card nextLevel:5];
-  int count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
+  NSInteger count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
 }
 
 - (void)testAddThenRemoveCardsFromStudySet
 {
-  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLongWeekendFavorites];
-  Tag *newlyCreatedTag = [[CurrentState sharedCurrentState] activeTag];
-  NSUInteger newlyCreatedTagId = [newlyCreatedTag tagId];
-  STAssertNotNil(longWeekendFavTag, @"Failed in getting Long Weekend Favourite tag.");
+  Tag *newlyCreatedTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  NSInteger newlyCreatedTagId = [newlyCreatedTag tagId];
   
+  Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
+
   //get the list of card ids on the sample group study set and copy it over the newly created tag.
-  NSArray *cardIds = [CardPeer retrieveCardIdsForTagId:[longWeekendFavTag tagId]];
+  NSArray *cardIds = [CardPeer retrieveCardIdsForTagId:longWeekendFavTag.tagId];
   for (Card *card in cardIds)
   {
-    NSUInteger cardId = [card cardId];
-    NSLog(@"[TEST LOG]Adding card with id: %d to tag id: %d", cardId, newlyCreatedTagId);
-    [TagPeer subscribeCard:card toTag:newlyCreatedTag];
+    BOOL subscribed = [TagPeer subscribeCard:card toTag:newlyCreatedTag];
+    STAssertTrue(subscribed,@"Could not subscribe card %@ to tag %@",card,newlyCreatedTag);
   }
-  NSLog(@"[TEST LOG]The newly created tag is has now been populated with group study set: %@", kLongWeekendFavorites);
   
   //Make sure that the test study set has the same count as the sample study set.
   NSArray *newCardIds = [CardPeer retrieveCardIdsForTagId:newlyCreatedTagId];
-  STAssertEquals([cardIds count], [newCardIds count], @"Count number is diferent from tag %@ and the newly created group study: %@", 
-                 kLongWeekendFavorites, [newlyCreatedTag tagName]);
-  NSLog(@"[TEST LOG]Group Test Tag: %@ now has %@ as its card list.", newlyCreatedTag, newCardIds);
+  STAssertEquals([cardIds count],[newCardIds count],@"Count number is diferent from default tag and the newly created group study: %@", [newlyCreatedTag tagName]);
   
   //Remove the card one by one.
   NSUInteger count = [newCardIds count];
@@ -117,21 +116,10 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   result = [db setupAttachedDatabase:CURRENT_CARD_TEST_DATABASE asName:@"cards"];
   STAssertTrue(result, @"Failed to setup cards database");
   
-  //Create the tag for testing purposes.
-  Tag *createdTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
-  
-  Card *card = [CardPeer retrieveCardByPK:10];
-  [TagPeer subscribeCard:card toTag:createdTag];
-  
-  // This has to be non-zero
-  STAssertTrue(createdTag != nil, @"Failed in creating new tag (Study Set) for some reason.\nCreated TagId: %d", createdTag.tagId);
-  
-  //Tried to set the active tag to the one we just newly created
+  // Try to set the current tag to be LWE favorites
+  Tag *favoritesTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   CurrentState *state = [CurrentState sharedCurrentState];
-  [state setActiveTag:createdTag];
-  STAssertTrue([createdTag isEqual:[state activeTag]], 
-                 @"Active tag has not been set properly. The active set tag set is: %@\nWhile the newly created tag should be: %@", 
-                 [state activeTag], createdTag);
+  [state setActiveTag:favoritesTag];
 }
 
 - (void)tearDown
