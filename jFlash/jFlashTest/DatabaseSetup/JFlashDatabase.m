@@ -13,13 +13,15 @@
 #import "LWEDatabase.h"
 #import "Constants.h"
 
-NSString * const JFLASH_CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
-NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
-NSString * const JFLASH_CURRENT_FTS_TEST_DATABASE   = @"jFlash-FTS-1.1.db";
-
-NSString * const CFLASH_CURRENT_USER_TEST_DATABASE  = @"cFlash.db";
-NSString * const CFLASH_CURRENT_CARD_TEST_DATABASE  = @"cFlash-CARD-1.0.db";
-NSString * const CFLASH_CURRENT_FTS_TEST_DATABASE   = @"cFlash-FTS-1.0.db";
+#if defined (LWE_JFLASH)
+  NSString * const CURRENT_USER_TEST_DATABASE  = @"jFlash-test.db";
+  NSString * const CURRENT_CARD_TEST_DATABASE  = @"jFlash-CARD-1.1-test.db";
+  NSString * const CURRENT_FTS_TEST_DATABASE   = @"jFlash-FTS-1.1.db";
+#elif defined (LWE_CFLASH)
+  NSString * const CURRENT_USER_TEST_DATABASE  = @"cFlash.db";
+  NSString * const CURRENT_CARD_TEST_DATABASE  = @"cFlash-CARD-1.0.db";
+  NSString * const CURRENT_FTS_TEST_DATABASE   = @"cFlash-FTS-1.0.db";
+#endif
 
 NSString * const kJFlashDatabaseErrorDomain         = @"kJFlashDatabaseErrorDomain";
 NSUInteger const kJFlashCannotOpenDatabaseErrorCode   = 999;
@@ -36,7 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
 - (BOOL)setupTestDatabaseAndOpenConnectionWithError:(NSError **)error
 {
   //copy it to the user documents folder
-  BOOL result = [LWEFile copyFromBundleWithFilename:LWE_CURRENT_USER_DATABASE toDocumentsWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE shouldOverwrite:YES];
+  BOOL result = [LWEFile copyFromBundleWithFilename:LWE_CURRENT_USER_DATABASE toDocumentsWithFilename:CURRENT_USER_TEST_DATABASE shouldOverwrite:YES];
   if (!result)
   {
     //Cannot copy database
@@ -50,7 +52,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
   }
 
   //Construct the test database filename
-  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE];
+  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:CURRENT_USER_TEST_DATABASE];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
   //Create the connection for opening the database
@@ -90,7 +92,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(JFlashDatabase);
   BOOL result = [db closeDatabase];
   if (result)
   {
-    NSString *testDatabasePath = [LWEFile createDocumentPathWithFilename:JFLASH_CURRENT_USER_TEST_DATABASE];
+    NSString *testDatabasePath = [LWEFile createDocumentPathWithFilename:CURRENT_USER_TEST_DATABASE];
     result = [LWEFile deleteFile:testDatabasePath];
     if (result)
     {

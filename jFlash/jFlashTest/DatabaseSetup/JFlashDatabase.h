@@ -10,9 +10,9 @@
 
 extern NSString * const kJFlashDatabaseErrorDomain;
 extern NSUInteger const kJFlashCannotOpenDatabaseErrorCode;
-extern NSString * const JFLASH_CURRENT_USER_TEST_DATABASE;
-extern NSString * const JFLASH_CURRENT_CARD_TEST_DATABASE;
-extern NSString * const JFLASH_CURRENT_FTS_TEST_DATABASE;
+extern NSString * const CURRENT_USER_TEST_DATABASE;
+extern NSString * const CURRENT_CARD_TEST_DATABASE;
+extern NSString * const CURRENT_FTS_TEST_DATABASE;
 
 @interface JFlashDatabase : NSObject
 

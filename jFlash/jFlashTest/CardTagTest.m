@@ -7,7 +7,6 @@
 //
 
 #import "CardTagTest.h"
-#import "AppDelegate.h"
 
 #import "TagPeer.h"
 #import "JFlashDatabase.h"
@@ -111,11 +110,11 @@ static NSString * const kLongWeekendFavorites = @"Long Weekend Favorites";
   STAssertTrue(result, @"Failed in setup the test database with error: %@", [error localizedDescription]);
   
   //Setup FTS
-  result = [db setupAttachedDatabase:JFLASH_CURRENT_FTS_TEST_DATABASE asName:@"fts"];
+  result = [db setupAttachedDatabase:CURRENT_FTS_TEST_DATABASE asName:@"fts"];
   STAssertTrue(result, @"Failed to setup search database");
 
   //Setup Cards
-  result = [db setupAttachedDatabase:JFLASH_CURRENT_CARD_TEST_DATABASE asName:@"cards"];
+  result = [db setupAttachedDatabase:CURRENT_CARD_TEST_DATABASE asName:@"cards"];
   STAssertTrue(result, @"Failed to setup cards database");
   
   //Create the tag for testing purposes.

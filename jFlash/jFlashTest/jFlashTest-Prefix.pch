@@ -7,7 +7,6 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Constants.h"
-//#import "jFlash_Constants.h" ==> As of jFlash_Constants and cFlash_Constants has been combined into the Constants.h file
 #import "CurrentState.h"
 #import "ThemeManager.h"
 #import "Card.h"
