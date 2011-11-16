@@ -26,6 +26,8 @@
  */
 - (void) studyViewModeDidChange:(StudyViewController*)svc;
 
+- (id) delegate;
+
 @optional
 /**
  * This method is called when the user taps the "revealBtn" in StudyViewController.
@@ -46,6 +48,19 @@
  */
 @protocol StudyViewControllerDelegate <NSObject>
 @required
+
+/**
+ * This method is required.  The delegate needs to provide us with the right view controller for the
+ * card area for this study mode.
+ */
+- (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController*)svc;
+
+/**
+ * This method is required.  The delegate needs to provide us with the right view controller for the
+ * action bar area for this study mode.
+ */
+- (UIViewController<StudyViewSubcontrollerDelegate> *)actionBarViewControllerForStudyView:(StudyViewController*)svc;
+
 /**
  * StudyViewController calls this delegate method when an event
  * happens that would require its labels to be re-set.
@@ -53,6 +68,7 @@
  * from the active tag.
  */
 - (void)updateStudyViewLabels:(StudyViewController*)svc;
+
 @optional
 /**
  * This method is called before cardViewWillSetup: is called.

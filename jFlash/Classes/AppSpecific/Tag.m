@@ -138,7 +138,10 @@ NSInteger const kLWEUninitializedCardCount = -1;
   {
     // Get denominator values from cache/database
     tmpTotal = [[self.cardLevelCounts objectAtIndex:i] intValue];
-    if (i == 1) levelOneTotal = tmpTotal;
+    if (i == 1)
+    {
+      levelOneTotal = tmpTotal;
+    }
     tmpTotalArray[i-1] = tmpTotal;
     cardsSeenTotal = cardsSeenTotal + tmpTotal;
     denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - i + 1)); 
@@ -181,6 +184,8 @@ NSInteger const kLWEUninitializedCardCount = -1;
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
+  LWE_ASSERT_EXC(wordsInStudyingBeforeTakingNewCard, @"This value must be non-zero");
+  
   NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
   
   // Quick check to make sure we are not at the "end of a set". 

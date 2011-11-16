@@ -26,12 +26,12 @@
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
-- (void) _resetViewWithCard:(Card*)card;
+- (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
 - (void) _enablePronounceButton:(BOOL)enabled;
 @end
 
 @implementation StudyViewController
-@synthesize delegate, subcontrollerDelegate;
+@synthesize delegate;
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
@@ -148,7 +148,8 @@
   void (^setupViewAfterChangeBlock)(NSNotification*) = ^(NSNotification *notification)
   {
     blockSelf.finishedSetAlertShowed = NO;
-    [blockSelf resetStudySet];
+    // TODO: We can get the new tag out of the notification, eliminating a use of a global state singleton (yay) MMA 11.16.2011
+    [blockSelf changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
   };
 
   // Setup block callback for when active tag changes or the user settings changed - resets study set
@@ -158,7 +159,18 @@
   // Reset the current view (but nothing else) if the card settings changed (reading type, et al)
   [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *notification)
    {
-     [blockSelf _resetViewWithCard:self.currentCard];
+     // Set up background based on theme -- just in case that changed
+     // TODO: iPad customization
+     NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
+     blockSelf.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+     
+     // TODO: Change this to a separate notification -- when mode changes
+     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+     NSString *studyMode = [settings objectForKey:APP_MODE];
+     [blockSelf _setupSubviewsForStudyMode:studyMode];
+     
+     // Passing nil forgoes any animation and just reloads the card
+     [blockSelf doChangeCard:self.currentCard direction:nil];
    }];
   
   [center addObserver:self selector:@selector(doCardBtn:) name:LWEActionBarButtonWasTapped object:nil];
@@ -171,23 +183,14 @@
   [self.progressBarView addSubview:tmpPBVC.view];
   self.progressBarViewController = tmpPBVC;
 	[tmpPBVC release];
-  
-  // Add the CardView to the View
-  BOOL useMainHeadword = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
-	CardViewController *tmpCVC = [[CardViewController alloc] initDisplayMainHeadword:useMainHeadword];
-  [self.cardView addSubview:tmpCVC.view];
-  self.cardViewController = tmpCVC;
-	[tmpCVC release];
-  
-  // Add the Action Bar to the View
-	ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] initWithNibName:@"ActionBarViewController" bundle:nil];
-  tmpABVC.currentCard = self.currentCard;
-  [self.actionbarView addSubview:tmpABVC.view];
-  self.actionBarController = tmpABVC;
-	[tmpABVC release];
 
   // Initialize the scroll view
   [self _setupScrollView];
+  
+  // Choose the background based on the current theme
+  // TODO: iPad customization
+  NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
+  self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
 
   //make sure that this section is only run once. If somehow the memory warning is issued 
   //and this view controller's view gets unloaded and loaded again, please dont messed up with the
@@ -200,7 +203,7 @@
   }
   
   // Load the active study set and be done!!
-  [self resetStudySet];
+  [self changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
 }
 
 #pragma mark - UIAlertView delegate method
@@ -273,7 +276,7 @@
  *          Responsible for getting the first card out of the set and
  *          refreshing the views accordingly.
  */
-- (void) resetStudySet
+- (void) changeStudySetToTag:(Tag *)newTag
 {
   // Initialize all variables
   self.currentRightStreak = 0;
@@ -282,10 +285,16 @@
   self.numWrong = 0;
   self.numViewed = 0;
   
-  // Get active set/tag  
-  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"]; // remove the observer from the previous currentCardSet before getting the new one
-  self.currentCardSet = [[CurrentState sharedCurrentState] activeTag];
+  // remove the observer from the previous currentCardSet before getting the new one
+  if (self.currentCardSet)
+  {
+    [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
+  }
+
+  // Get active set/tag & add an observer
+  self.currentCardSet = newTag;
   [self.currentCardSet addObserver:self forKeyPath:@"tagName" options:NSKeyValueObservingOptionNew context:NULL];
+  
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
@@ -301,8 +310,16 @@
   }
   
   // Use this to set up delegates, show the card, etc
-  [self _resetViewWithCard:nextCard];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *studyMode = [settings objectForKey:APP_MODE];
+  [self _setupSubviewsForStudyMode:studyMode];
+  
+  // TODO:  Set this class' delegate?  Update the card view controller/action?
+  
+  [self doChangeCard:nextCard direction:nil];
 }
+
+#pragma mark - KVO Observer Method
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -315,44 +332,6 @@
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
 }
-
-
-/** 
- * \brief Refreshes the study view without getting a new Card or initializing anything
- * \details This is useful when something in the system changes
- * and we need to layout everything again: mode, theme, reading settings,
- * etc etc etc.
- */
-- (void) _resetViewWithCard:(Card*)card
-{
-  // Set up background based on theme
-  // TODO: iPad customization
-  NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
-  self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
-  
-  // Set up our subcontroller delegate
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
-  {
-		self.subcontrollerDelegate = [[[BrowseModeCardViewDelegate alloc] init] autorelease];
-  }
-  else
-  {
-		self.subcontrollerDelegate = [[[PracticeModeCardViewDelegate alloc] init] autorelease];
-  }
-  
-  self.cardViewController.delegate = self.subcontrollerDelegate;
-  self.actionBarController.delegate = self.subcontrollerDelegate;
-  self.delegate = (id<StudyViewControllerDelegate>)self.subcontrollerDelegate;
-  
-  // Now send our new subcontrollers a message telling it we are using it
-  [self.cardViewController studyViewModeDidChange:self];
-  [self.actionBarController studyViewModeDidChange:self];
-  
-  // Finally display the card
-  [self doChangeCard:card direction:nil];
-}
-
 
 /**
  * \brief Basic method to change cards
@@ -602,14 +581,18 @@
     [self.currentCardSet removeCardFromActiveSet:theCard];
     if ([theCard isEqual:self.currentCard])
     {
-      //Get a new random card?
+      // Get a new random card?
       NSError *error = nil;
+      
+      // TODO: This assumes practice mode!  MMA 11.16.2011
       Card *nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
       {
         [self _notifyUserStudySetHasBeenLearned];
       }
-      [self _resetViewWithCard:nextCard];
+      
+      // Change to the new card we just retrieved
+      [self doChangeCard:nextCard direction:nil];
     }
     else
     {
@@ -619,6 +602,56 @@
     }
   }
 }
+
+- (void) _setupSubviewsForStudyMode:(NSString*)studyMode
+{
+  // TODO: Ideally this code wouldn't be part of the SVC, then it wouldn't need to (a) retain
+  // its delegate, or (b) have specific knowledge of the name of every class/mode that it could be in.
+  //=====================================
+  // Set up our delegate based on mode
+  if ([studyMode isEqualToString:SET_MODE_BROWSE])
+  {
+		self.delegate = [[[BrowseModeCardViewDelegate alloc] init] autorelease];
+  }
+  else
+  {
+		self.delegate = [[[PracticeModeCardViewDelegate alloc] init] autorelease];
+  }
+  //=====================================
+  
+  // Add the CardView to the View -- ask the delegate what controller we want
+  if (self.delegate && [self.delegate respondsToSelector:@selector(cardViewControllerForStudyView:)])
+  {
+    // Remove any old view before setting a new one
+    if (self.cardViewController)
+    {
+      [self.cardViewController.view removeFromSuperview];
+    }
+    
+    // Set the new VC
+    UIViewController<StudyViewSubcontrollerDelegate> *cardVC = [self.delegate cardViewControllerForStudyView:self];
+    [self.cardView addSubview:cardVC.view];
+    self.cardViewController = cardVC;
+  }
+  
+  // Add the Action Bar View -- ask the delegate what controller we want
+  if (self.delegate && [self.delegate respondsToSelector:@selector(actionBarViewControllerForStudyView:)])
+  {
+    if (self.actionBarController)
+    {
+      [self.actionBarController.view removeFromSuperview];
+    }
+    
+    UIViewController<StudyViewSubcontrollerDelegate> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
+    [self.actionbarView addSubview:actionVC.view];
+    self.actionBarController = actionVC;
+  }
+  
+  // Now send our new subcontrollers a message telling it we are using it
+  [self.cardViewController studyViewModeDidChange:self];
+  [self.actionBarController studyViewModeDidChange:self];  
+}
+
 
 #pragma mark - Plugin-Related
 
@@ -648,7 +681,9 @@
     // Get rid of the old example sentences guy & re-setup the scroll view
     [self.exampleSentencesViewController.view removeFromSuperview];
     [self _setupScrollView];
-    [self _resetViewWithCard:self.currentCard];
+    
+    // Reset the card (this will automatically call the code to determine if this card has ex sentences)
+    [self doChangeCard:self.currentCard direction:nil];
   }
 }
 
@@ -817,8 +852,6 @@
   [scrollView release];
   [pageControl release];
   [exampleSentencesViewController release];
-  
-  [subcontrollerDelegate release];
   
 	[super dealloc];
 }

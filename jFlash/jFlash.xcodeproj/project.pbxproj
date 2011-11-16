@@ -396,7 +396,6 @@
 		49A942671263AF4500086F4C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
 		49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
 		49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
-		49AAB8BE147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
 		49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B527951276805000EE64D3 /* 13-target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B527911276805000EE64D3 /* 13-target@2x.png */; };
@@ -1557,7 +1556,6 @@
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
-				916ECCB514597E67007FA69E /* libsqlite3.dylib */,
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				49C521DE144D2461002011BD /* CoreText.framework */,

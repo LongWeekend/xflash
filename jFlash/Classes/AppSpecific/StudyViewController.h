@@ -45,7 +45,7 @@
 - (IBAction)revealCard;
 - (IBAction)pronounceCard:(id)sender;
 
-- (void)resetStudySet;
+- (void)changeStudySetToTag:(Tag*)newTag;
 
 - (void)doCardBtn: (NSNotification *)aNotification;
 - (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
@@ -58,18 +58,17 @@
 - (IBAction) changePage:(id)sender animated:(BOOL)animated;
 - (IBAction) launchExampleInstaller;
 
-@property (assign) id<StudyViewControllerDelegate> delegate;
-@property (retain) id<ActionBarViewControllerDelegate, CardViewControllerDelegate> subcontrollerDelegate;
+// This delegate is retained -- not the best solution.  Someone (probably CurrentState) needs to own him.
+@property (retain) id<StudyViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
 @property (nonatomic, retain) IBOutlet UIButton *pronounceBtn;
 
 // scroll view
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-@property (nonatomic, retain) IBOutlet CardViewController<StudyViewSubcontrollerDelegate> *cardViewController;
-@property (nonatomic, retain) IBOutlet ActionBarViewController<StudyViewSubcontrollerDelegate> *actionBarController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *cardViewController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *actionBarController;
 @property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 @property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
