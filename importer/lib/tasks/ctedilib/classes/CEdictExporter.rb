@@ -1,7 +1,7 @@
 class CEdictExporter
 
   # DESC: Exports contents of staging database to Sqlite file
-  def export_staging_db_from_table(cards_table ="cards_staging", editable_tag_array = [ $options[:system_tags]['LWE_FAVORITES'], $options[:system_tags]['BAD_DATA'] ])
+  def export_staging_db_from_table(cards_table ="cards_staging", editable_tag_array = [])
 
     connect_db
 
@@ -20,14 +20,11 @@ class CEdictExporter
       $cn.execute("UPDATE groups_staging SET tag_count = #{cnt} WHERE group_id = #{group_id}")
     end
 
-    ## Ensure no blank HTML meanings
-    $cn.execute("UPDATE cards_staging SET meaning_html = meaning WHERE meaning_html IS NULL")
-
     ## Create intermediate tables
     $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
     $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, visible AS editable, count, force_off FROM tags_staging")
     $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
-    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, meaning_fts FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning_fts FROM #{cards_table}")
     $cn.execute("CREATE TABLE cards_html DEFAULT CHARSET=utf8 SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
 
     ## Generate the card search content table
@@ -36,31 +33,28 @@ class CEdictExporter
     $cn.execute("ALTER TABLE cards_search_content DROP headword_trad")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_simp")
     $cn.execute("ALTER TABLE cards_search_content DROP reading")
+    $cn.execute("ALTER TABLE cards_search_content DROP reading_diacritic")
     $cn.execute("ALTER TABLE cards_search_content DROP meaning_fts")
 
     # Remove non-visible tags
     $cn.execute("DELETE FROM tags WHERE editable=0 OR force_off=1")
 
-    # Set system tags to uneditable
-    $cn.execute("UPDATE tags SET editable = 0 WHERE tag_id NOT IN (#{ editable_tag_array.join(",") })")
+    # Set system tags to uneditable -- if some are left as editable, they should be in editable_tag_array
+    if editable_tag_array.empty?
+      $cn.execute("UPDATE tags SET editable = 0")
+    else
+      $cn.execute("UPDATE tags SET editable = 0 WHERE tag_id NOT IN (#{ editable_tag_array.join(",") })")
+    end
     $cn.execute("ALTER TABLE tags DROP force_off")
     
     # Make sure starred words tag get the 0 tag id
     $cn.execute("SELECT * FROM tags WHERE tag_id = 0").each do |rec|
       raise 'There is already a tag row with id 0. ID-0 has been reserved for the starred words tag.'
     end
-    # Precaution measures
-    existing_tag_id = -1
-    $cn.execute("SELECT tag_id FROM tags WHERE shortname LIKE '%starred_words%'").each do |tag_id|
-      existing_tag_id = tag_id
-    end
-    if existing_tag_id > 0
-      # Set back the entire tag_id=0 from the root to its
-      # possible child relationship.
-      $cn.execute("UPDATE tags SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
-      $cn.execute("UPDATE card_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
-      $cn.execute("UPDATE group_tag_link SET tag_id = 0 WHERE tag_id=#{existing_tag_id}")
-    end
+    
+    # Create the starred words tag & associate it
+    $cn.execute("INSERT INTO tags (tag_id, tag_name, description, editable, count) VALUES (0,'My Starred Words','Words starred from search or while studying',1,0)")
+    $cn.execute("INSERT INTO group_tag_link (tag_id, group_id) VALUES (0, 0)")
 
     prt "\n\nExporting tables to temporary file"
     prt_dotted_line

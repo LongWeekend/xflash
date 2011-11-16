@@ -132,9 +132,12 @@ namespace :ctedi do
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
+    include ImporterHelpers
+
+    # We need to get the ID of the 
 
     exporter = CEdictExporter.new
-    exporter.export_staging_db_from_table("cards_staging", [ $options[:system_tags]['LWE_FAVORITES'], $options[:system_tags]['BAD_DATA'] ])
+    exporter.export_staging_db_from_table("cards_staging", [])
   end
   
   ##############################################################################
