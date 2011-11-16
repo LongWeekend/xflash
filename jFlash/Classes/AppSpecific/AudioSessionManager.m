@@ -130,7 +130,7 @@ void LWEAudioRouteDidChange(void *inClientData, AudioSessionPropertyID inPropert
   OSStatus err = AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,sizeof(audioRouteRestore),&audioRouteRestore);
   if (err > 0)
   {
-    LWE_LOG(@"Error restoring default audio routing: %d",(NSInteger)err)
+    LWE_LOG(@"Error restoring default audio routing: %d",(NSInteger)err);
   }
   else
   {
@@ -142,9 +142,9 @@ void LWEAudioRouteDidChange(void *inClientData, AudioSessionPropertyID inPropert
 /**
  * Duck any other audio if any
  */
-- (void) duckOtherAudio:(BOOL)duck
+- (void) shouldDuckOtherAudio:(BOOL)duck
 {
-  UInt32 allowDucking = (duck) ? true : false;
+  UInt32 allowDucking = (UInt32)duck;
   OSStatus err = AudioSessionSetProperty (kAudioSessionProperty_OtherMixableAudioShouldDuck, 
                                           sizeof(allowDucking),
                                           &allowDucking);

@@ -20,7 +20,7 @@
 - (BOOL) headsetIsPluggedIn;
 - (BOOL) routeAudioToSpeakerIgnoringHeadset:(BOOL)ignoreHeadset;
 - (BOOL) restoreDefaultAudioRouting;
-- (void) duckOtherAudio:(BOOL)duck;
+- (void) shouldDuckOtherAudio:(BOOL)duck;
 - (void) setSessionActive:(BOOL)active;
 
 - (NSString*) category;
