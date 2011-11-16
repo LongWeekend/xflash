@@ -53,7 +53,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // Set the favorites tag, if not already done
   if (self.favoritesTag == nil)
   {
-    self.favoritesTag = [TagPeer retrieveTagById:FAVORITES_TAG_ID];
+    self.favoritesTag = [TagPeer retrieveTagById:STARRED_TAG_ID];
   }
   
   // Tell everyone to reload their data (only if we're not just starting up)

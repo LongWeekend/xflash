@@ -36,7 +36,7 @@ extern NSString * const APP_HIDE_BURIED_CARDS;
 
 extern NSString * const PLUGIN_LAST_UPDATE;
 
-extern const NSInteger FAVORITES_TAG_ID;
+extern const NSInteger STARRED_TAG_ID;
 
 // Talk to MMA about these - do NOT edit them
 extern NSString * const LWE_CURRENT_VERSION;

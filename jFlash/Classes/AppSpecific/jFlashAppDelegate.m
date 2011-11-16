@@ -89,6 +89,7 @@
   // Initialize audio session manager - start with audio session "playback" first
   AudioSessionManager *audioManager = [AudioSessionManager sharedAudioSessionManager];
   [audioManager setSessionCategory:AVAudioSessionCategoryPlayback];
+  [audioManager setSessionActive:NO];
 
   // Load root controller to show splash screen
   self.rootViewController = [[[RootViewController alloc] init] autorelease];

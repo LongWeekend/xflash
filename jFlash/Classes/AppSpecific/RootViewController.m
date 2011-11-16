@@ -17,7 +17,6 @@
 #import "ChineseSettingsDataSource.h"
 #import "HelpViewController.h"
 
-NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 // TODO: Why is this different than the above?  (MMA 11.14.2011)
 NSString * const LWEShouldShowDownloadModal	  = @"LWEShouldShowDownloadModal";

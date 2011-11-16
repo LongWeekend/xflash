@@ -251,8 +251,36 @@ class Entry
     @references
   end
   
+  def add_classifier_to_meanings
+    # Quick return if nothing set
+    return false unless classifier
+    
+    # I have NO idea why, but when I call entry.classifier.split, shit goes haywire
+    classifier.split(",").each do |classifier_str|
+      @meanings << Meaning.new(("Counter: %s" % [classifier_str]),["classifier"])
+    end
+  end
+  
   def add_inline_entry_to_meanings(inline_entry)
     @meanings << Meaning.new("Also: %s" % [ inline_entry.to_str ], ["reference"])
+  end
+  
+  def add_variant_entry_to_base_meanings(variant_entry)
+    if variant_entry.is_erhua_variant?
+      meaning_str = "Has Erhua variant: %s %s [%s]" % [variant_entry.headword_trad, variant_entry.headword_simp, variant_entry.pinyin]
+    else
+      meaning_str = "Has variant: %s %s [%s]" % [variant_entry.headword_trad, variant_entry.headword_simp, variant_entry.pinyin]
+    end
+    @meanings << Meaning.new(meaning_str,["reference"]) 
+  end
+
+  def add_base_entry_to_variant_meanings(base_entry)
+    if is_erhua_variant?
+      meaning_str = "Erhua variant of: %s %s [%s]" % [base_entry.headword_trad, base_entry.headword_simp, base_entry.pinyin]
+    else
+      meaning_str = "Variant of: %s %s [%s]" % [base_entry.headword_trad, base_entry.headword_simp, base_entry.pinyin]
+    end
+    @meanings << Meaning.new(meaning_str,["reference"]) 
   end
   
   def inline_entry_match?(inline_entry)
@@ -266,7 +294,6 @@ class Entry
     # We haven't returned false, and the headword is the same, so match it
     return true
   end
-
   
   def self.parse_inline_entry(line = "")
     inline_entry = InlineEntry.new

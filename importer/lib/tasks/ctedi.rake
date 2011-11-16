@@ -70,15 +70,29 @@ namespace :ctedi do
     get_cli_debug
     
     # Parse
-    prt "\nBeginning CEDICT Parse"
+    prt "\nCEDICT Parse - Initial Flatfile Parse"
     prt_dotted_line
     parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
     entries = parser.run
     
-    prt "\nBeginning CEDICT Parse - Second Pass (Merge Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
+    prt "\nCEDICT Parse - Pass 2 (Merge 'reference-only' Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
     prt_dotted_line
     parser.merge_references_into_base_entries(entries, parser.reference_only_entries)
     parser.merge_references_into_base_entries(entries, parser.variant_only_entries)
+    
+    # Cross-reference the variants
+    prt "\nCEDICT Parse - Pass 3 (Cross-Referencing %d Erhua Variants)" % [parser.erhua_variant_entries.count]
+    prt_dotted_line
+    muxed_base_entries = parser.add_variant_entries_into_base_entries(entries, parser.erhua_variant_entries)
+    muxed_erhua_entries = parser.add_base_entries_into_variant_entries(parser.erhua_variant_entries, entries)
+    
+    prt "\nCEDICT Parse - Pass 4 (Cross-Referencing %d Variants)" % [parser.variant_entries.count]
+    prt_dotted_line
+    muxed_base_entries = parser.add_variant_entries_into_base_entries(muxed_base_entries, parser.variant_entries)
+    muxed_variant_entries = parser.add_base_entries_into_variant_entries(parser.variant_entries, entries)
+    
+    # Now combine the 3 types of entries -- they're all valid
+    entries = muxed_base_entries + muxed_variant_entries + muxed_erhua_entries
     
     # Import
     prt "\nBeginning CEDICT Import"
@@ -95,7 +109,6 @@ namespace :ctedi do
   desc "cFlash Group & Tag Importer"
   task :tag_import => :environment do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
-    
     include RakeHelpers
     include DebugHelpers
     
@@ -110,6 +123,18 @@ namespace :ctedi do
     
     prt "\nImport Finished"
     prt_dotted_line
+  end
+
+  ##############################################################################
+  desc "cFlash SQLite Exporter"
+  task :export => :environment do
+    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    include RakeHelpers
+    include DebugHelpers
+    include DatabaseHelpers
+
+    exporter = CEdictExporter.new
+    exporter.export_staging_db_from_table("cards_staging", [ $options[:system_tags]['LWE_FAVORITES'], $options[:system_tags]['BAD_DATA'] ])
   end
   
   ##############################################################################
@@ -143,45 +168,5 @@ namespace :ctedi do
     exporter.export_staging_db_from_table("cards_staging")
   end
 
-  
-
-  ##############################################################################
-  desc "CEdict Parser/Importer, ACCEPTS src={source file path} | from={start line} | to={max line} | card_type={WORD,DICTIONARY,KANA,KANJI}"
-  task :parse_cedict_file => :environment do
-    load File.dirname(__FILE__) + "/ctedilib/_includes.rb"
-
-    get_cli_debug # Enable/disable debug
-
-    # Parse EDICT source file
-    parser = CEdictParser.new(get_cli_source_file, get_cli_start_point, get_cli_break_point, get_cli_tags)
-    
-    # Pass in the JFlash tag lists
-#    jflash_tags = JFlashImporter.get_existing_tags_by_type
-#    parser.set_tags(jflash_tags[:pos], jflash_tags[:cat], jflash_tags[:lang])
-
-#    parser.set_warning_level("IGNORE")
-    results_data = parser.run
-
-    importer = CFlashImporter.new(results_data, get_cli_card_type)
-    importer.set_skip_empty_meanings(get_cli_attrib("skip_empty_meanings",false,true)) # Skip empty meanings
-    ##  importer.set_sql_debug(true)
-    importer.import
-    
-    ## Dump skipped entries to CON
-    skipped = importer.get_skipped_meanings
-
-    # UNCHECKED CODE: Log unmatchable JLPT words to text files
-    skipped_txt = ""
-    skipped.each do|s|
-      skipped_txt = skipped_txt+"#{s[:headwords].first[:headword]} [#{s[:readings].first[:reading]}] /\n"
-    end
-    if skipped_txt != ""
-      outf = File.open($options[:data_file_rel_path]+"/"+get_cli_source_file.split('/').last + "_unmatched.txt", 'w')
-      outf.write(skipped_txt)
-      outf.close
-    end
-
-  end
-  
 end
 #------------------------------------------------------------------------------------------------------------#

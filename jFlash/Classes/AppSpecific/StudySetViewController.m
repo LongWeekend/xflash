@@ -132,7 +132,7 @@ enum Sections {
       NSMutableArray *tmpTagArray = [NSMutableArray array];
       for (Tag *tmpTag in self.tagArray)
       {
-        if (tmpTag.tagId == FAVORITES_TAG_ID)
+        if (tmpTag.tagId == STARRED_TAG_ID)
         {
           // Put it at the beginning
           [tmpTagArray insertObject:tmpTag atIndex:0];
@@ -287,7 +287,7 @@ enum Sections {
       // Set up the image
       // TODO: iPad customization?
       UIImageView *tmpView = cell.imageView;
-      if (tmpTag.tagId == FAVORITES_TAG_ID)
+      if (tmpTag.tagId == STARRED_TAG_ID)
       {
         tmpView.image = [UIImage imageNamed:[tm elementWithCurrentTheme:@"tag-starred-icon.png"]];
       }

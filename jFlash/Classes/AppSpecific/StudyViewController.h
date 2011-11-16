@@ -62,6 +62,7 @@
 @property (retain) id<ActionBarViewControllerDelegate, CardViewControllerDelegate> subcontrollerDelegate;
 
 @property (nonatomic, retain) IBOutlet UIButton *_pronounceBtn;
+@property (nonatomic, retain) IBOutlet UIButton *pronounceBtn;
 
 // scroll view
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;

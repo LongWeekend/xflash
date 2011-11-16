@@ -6,7 +6,6 @@
 //
 
 #import "ModalTaskViewController.h"
-//#import "WebGradientView.h"
 
 /**
  * Controls view & program flow during plugin/file downloads, database upgrades

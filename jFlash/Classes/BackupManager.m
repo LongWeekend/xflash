@@ -109,14 +109,14 @@
 - (NSInteger) _getTagIdForName:(NSString *)tagName andId:(NSNumber *)key andGroup:(NSNumber *)group
 {
   // Quick return on 0
-  if ([key isEqual:[NSNumber numberWithInt:0]])
+  if ([key isEqual:[NSNumber numberWithInt:STARRED_TAG_ID]])
   {
-    return 0;
+    return STARRED_TAG_ID;
   }
   
   // see if the tag already exists
   Tag *tag = [TagPeer retrieveTagByName:tagName];
-  if (tag.tagId == -1) // no tag, create one
+  if (tag.tagId == kLWEUninitializedTagId) // no tag, create one
   {
     tag = [TagPeer createTag:tagName withOwner:[group intValue]];
   }

@@ -38,7 +38,14 @@
 {
   // Get the tone from the button's tag!
   NSInteger whichTone = [(UIView*)sender tag];
-  self.text = [self.text stringByAppendingFormat:@"%d ",whichTone];
+  if (whichTone != 5)
+  {
+    self.text = [self.text stringByAppendingFormat:@"%d",whichTone];
+  }
+  else
+  {
+    self.text = [self.text stringByAppendingString:@"?"];
+  }
 }
 
 @end

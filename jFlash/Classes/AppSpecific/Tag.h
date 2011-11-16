@@ -15,6 +15,7 @@
 
 extern NSString * const kTagErrorDomain;
 extern NSUInteger const kAllBuriedAndHiddenError;
+extern NSInteger const kLWEUninitializedTagId;
 
 @interface Tag : NSObject
 

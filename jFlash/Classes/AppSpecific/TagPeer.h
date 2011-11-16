@@ -22,8 +22,8 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 
 + (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId;
 + (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId withDescription:(NSString*)description;
-+ (BOOL)cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError;
-+ (void) subscribeCard:(Card*)card toTag:(Tag*)tag;
++ (BOOL) cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError;
++ (BOOL) subscribeCard:(Card*)card toTag:(Tag*)tag;
 + (BOOL) card:(Card*)card isMemberOfTag:(Tag*)tag;
 + (NSArray*) membershipListForCard:(Card*)card;
 + (NSArray*) retrieveMyTagList; // this is not actually all of the user tags

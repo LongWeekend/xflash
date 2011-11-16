@@ -190,7 +190,7 @@ class CEdictEntryTest < Test::Unit::TestCase
   
   def test_meaning_fts_stopwords
     entry = CEdictEntry.new
-    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
+    entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/CL:foobar/")
     expected = "lateral side beside"
     assert_equal(expected,entry.meaning_fts("inhuman"))
   end
@@ -234,10 +234,38 @@ class CEdictEntryTest < Test::Unit::TestCase
     inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
     base_entry.add_inline_entry_to_meanings(inline_entry)
     
-    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
+    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]",["reference"])
     assert_equal(meaning_two,base_entry.meanings[1])
   end
 
+  def test_add_erhua_entry_to_meaning
+    base_entry = CEdictEntry.new
+    base_entry.parse_line("哥們 哥们 [ge1 men5] /Brothers!/brethren/dude (colloquial)/brother (diminutive form of address between males)/")
+    
+    erhua_entry = CEdictEntry.new
+    erhua_entry.parse_line("哥們兒 哥们儿 [ge1 men5 r5] /erhua variant of 哥們|哥们, Brothers!/brethren/dude (colloquial)/brother (diminutive form of address between males)/")
+    
+    base_entry.add_variant_entry_to_base_meanings(erhua_entry)
+    assert_equal(5,base_entry.meanings.count)
+    
+    expected_meaning = Meaning.new("Has Erhua variant: 哥們兒 哥们儿 [ge1 men5 r5]",["reference"])
+    assert_equal(expected_meaning,base_entry.meanings[4])
+  end
+
+  def test_add_base_entry_to_erhua_entry_meaning
+    base_entry = CEdictEntry.new
+    base_entry.parse_line("哥們 哥们 [ge1 men5] /Brothers!/brethren/dude (colloquial)/brother (diminutive form of address between males)/")
+    
+    erhua_entry = CEdictEntry.new
+    erhua_entry.parse_line("哥們兒 哥们儿 [ge1 men5 r5] /erhua variant of 哥們|哥们, Brothers!/brethren/dude (colloquial)/brother (diminutive form of address between males)/")
+
+    erhua_entry.add_base_entry_to_variant_meanings(base_entry)
+    assert_equal(5,erhua_entry.meanings.count)
+    
+    expected_meaning = Meaning.new("Erhua variant of: 哥們 哥们 [ge1 men5]",["reference"])
+    assert_equal(expected_meaning,erhua_entry.meanings[4])
+  end
+  
 
   # Test pinyin conversion function
 #  def test_transform_pinyin

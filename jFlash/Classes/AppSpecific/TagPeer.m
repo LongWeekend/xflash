@@ -186,12 +186,12 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
  * Subscribes a Card to a given Tag based on parameter IDs
  * Note that this method DOES NOT update the tag count cache on the tags table
  */
-+ (void) subscribeCard:(Card*)card toTag:(Tag*)tag
++ (BOOL) subscribeCard:(Card*)card toTag:(Tag*)tag
 {
   // Quick return on bad input
   if (tag == nil || card == nil || card.cardId <= 0)
   {
-    return;
+    return NO;
   }
   
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -207,7 +207,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   if (db.dao.hadError)
   {
     LWE_LOG(@"Err %d: %@", db.dao.lastErrorCode, db.dao.lastErrorMessage);
-    return;
+    return NO;
   }
   
   // Finally, send a system-wide notification that this tag changed. Interested objects can listen.
@@ -218,6 +218,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange
                                                       object:tag
                                                     userInfo:userInfo];
+  return YES;
 }
 
 #pragma mark - Private Methods
