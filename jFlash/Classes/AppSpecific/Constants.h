@@ -33,6 +33,9 @@ extern NSString * const APP_DIFFICULTY;
 extern NSString * const APP_DATA_VERSION;
 extern NSString * const APP_SETTINGS_VERSION;
 extern NSString * const APP_HIDE_BURIED_CARDS;
+extern NSString * const APP_HEADWORD_TYPE;
+extern NSString * const SET_HEADWORD_TYPE_TRAD;
+extern NSString * const SET_HEADWORD_TYPE_SIMP;
 
 extern NSString * const PLUGIN_LAST_UPDATE;
 
@@ -71,10 +74,6 @@ extern NSString * const LWE_BAD_DATA_EMAIL;
 
   // LWE Favorites - CFlash
   #define DEFAULT_TAG_ID 140
-
-  extern NSString * const APP_HEADWORD_TYPE;
-  extern NSString * const SET_HEADWORD_TYPE_TRAD;
-  extern NSString * const SET_HEADWORD_TYPE_SIMP;
 
   extern NSString * const APP_PINYIN_COLOR;
   extern NSString * const SET_PINYIN_COLOR_ON;

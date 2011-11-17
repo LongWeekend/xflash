@@ -32,6 +32,10 @@ NSString * const APP_DIFFICULTY           = @"app_difficulty";
 NSString * const APP_DATA_VERSION         = @"data_version";
 NSString * const APP_SETTINGS_VERSION     = @"settings_version";
 NSString * const APP_HIDE_BURIED_CARDS    = @"app_hide_buried_cards";
+NSString * const APP_HEADWORD_TYPE        = @"headword_type";
+NSString * const SET_HEADWORD_TYPE_TRAD   = @"TRAD";
+NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
+
 
 //Rendy did add this - For the plugin manager feature
 NSString * const PLUGIN_LAST_UPDATE		  = @"last_update";
@@ -75,10 +79,6 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 
 #elif defined(LWE_CFLASH)
 
-      // These settings are CFlash specific
-      NSString * const APP_HEADWORD_TYPE       = @"headword_type";
-      NSString * const SET_HEADWORD_TYPE_TRAD  = @"TRAD";
-      NSString * const SET_HEADWORD_TYPE_SIMP  = @"SIMP";
       NSString * const APP_PINYIN_COLOR        = @"pinyin_color";
       NSString * const SET_PINYIN_COLOR_ON     = @"ON";
       NSString * const SET_PINYIN_COLOR_OFF    = @"OFF";
