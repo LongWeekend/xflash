@@ -9,6 +9,8 @@
 #import "LWEAudioQueue.h"
 #import "LWEMacros.h"
 
+#import "AudioSessionManager.h"
+
 @interface LWEAudioQueue ()
 //! Items
 @property (nonatomic, retain) NSArray *players;
@@ -24,6 +26,7 @@
 //========PRIVATE METHOD========//
 - (void)_playThroughTheQueue;
 - (void)_resetState;
+- (void)_setAudioSessionActive:(BOOL)setActive;
 @end
 
 @implementation LWEAudioQueue
@@ -38,7 +41,10 @@
 {
   if ((!self.isPlaying) && (self.currentPlayer == nil))
   {
+    //Setting up the states for the queue to be played
+    [self _setAudioSessionActive:YES];
     self.playing = YES;
+    
     LWE_DELEGATE_CALL(@selector(audioQueueWillStartPlaying:), self);
     [self _playThroughTheQueue];
   }
@@ -61,6 +67,7 @@
   {
     LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
     //If its in the middle of the queue playing, report to the delegate so.
+    [self _setAudioSessionActive:NO];
     [self.delegate audioQueueFinishInterruption:self withFlag:LWEAudioQueueInterruptionShouldStop];
   }
   [self pause];
@@ -79,15 +86,29 @@
 {
   AVAudioPlayer *p = (AVAudioPlayer *)[self.players objectAtIndex:self.currentIdx];
   self.currentPlayer = p;
-  [p prepareToPlay];
-  [p play];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{  
+    [p prepareToPlay];
+    [p play];
+  });
 }
 
 - (void)_resetState
 {
+  //reset back any instance variable which are saving state throughout
+  //the queue being played
   self.playing = NO;
   self.currentIdx = 0;
   self.currentPlayer = nil;
+  
+  //Get the audio session to make its session inactive
+  //this will allow any other audio to play in background
+  [self _setAudioSessionActive:NO];
+}
+
+- (void)_setAudioSessionActive:(BOOL)setActive
+{
+  [[AudioSessionManager sharedAudioSessionManager] setSessionActive:setActive];
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -130,14 +151,18 @@
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player
 {
   [player pause];
+  self.playing = NO;
   LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
 }
 
-/* audioPlayerEndInterruption:withFlags: is called when the audio session interruption has ended and this player had been interrupted while playing. */
-/* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
+/**
+ *
+ * \details   audioPlayerEndInterruption:withFlags: is called when the audio session interruption has ended and this player had been interrupted while playing.
+ *            Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume.
+ *            NOTE: This method doesnt not make the current player continue playing. (this behaviour is similar to what CoreAudio behaves as well)
+ */
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags
 {
-  [player play];
   LWEAudioQueueInterruptionFlag newFlag = 0;
   if (flags == AVAudioSessionInterruptionFlags_ShouldResume)
   {
@@ -163,6 +188,7 @@
     if ((self.delegate) && ([self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)]))
     {
       LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
+      [self _setAudioSessionActive:NO];
       [self.delegate audioQueueFinishInterruption:self withFlag:LWEAudioQueueInterruptionBeingDeallocated];
     }
   }

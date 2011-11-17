@@ -94,10 +94,16 @@
 		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
-		4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
-		4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */; };
+		4938F8B814024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
+		4938F8B914024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4938F8C714027853001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
+		493A478F146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
+		493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
+		493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A4791146A89BB00F1E718 /* SettingsView.xib */; };
+		493A4793146A89BB00F1E718 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A4791146A89BB00F1E718 /* SettingsView.xib */; };
+		493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A4791146A89BB00F1E718 /* SettingsView.xib */; };
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
@@ -110,7 +116,6 @@
 		494783781275901E000F9328 /* practice-btn-last@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783741275901E000F9328 /* practice-btn-last@2x.png */; };
 		494783791275901E000F9328 /* practice-btn-next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 494783751275901E000F9328 /* practice-btn-next@2x.png */; };
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
-		4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
@@ -285,7 +290,6 @@
 		496C7AD912632730004B6B90 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496C7ADA12632730004B6B90 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
 		496C7ADB12632730004B6B90 /* AddTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6611AB844300016BD2 /* AddTagView.xib */; };
-		496C7ADC12632730004B6B90 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4951E0FC11B61F7D00FCE21E /* CardView.xib */; };
 		496C7ADD12632730004B6B90 /* ExampleSentencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */; };
 		496C7ADE12632730004B6B90 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		496C7ADF12632730004B6B90 /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6811AB844300016BD2 /* HelpView.xib */; };
@@ -301,7 +305,7 @@
 		496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112011F6F48100D535D7 /* TweetWordViewController.xib */; };
 		496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
-		496C7AF012632730004B6B90 /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
+		496C7AF012632730004B6B90 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* CardViewController.xib */; };
 		496C7AF31263273C004B6B90 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
 		496C7AF41263273D004B6B90 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		496C7AF51263273E004B6B90 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
@@ -324,13 +328,11 @@
 		496C7B081263275A004B6B90 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
 		496C7B091263275E004B6B90 /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		496C7B0A1263275F004B6B90 /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
-		496C7B0B12632760004B6B90 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
 		496C7B0C12632761004B6B90 /* ExampleSentencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */; };
 		496C7B0D12632762004B6B90 /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
 		496C7B0E12632763004B6B90 /* ProgressBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */; };
 		496C7B0F12632764004B6B90 /* ProgressDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */; };
 		496C7B1012632765004B6B90 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD811AB7C4600016BD2 /* StudyViewController.m */; };
-		496C7B1112632766004B6B90 /* WordCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9121517811B755550091AFEF /* WordCardViewController.m */; };
 		496C7B121263276C004B6B90 /* AlgorithmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91170DB311BF896F00D4A680 /* AlgorithmSettingsViewController.m */; };
 		496C7B131263276D004B6B90 /* PluginSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4908209811B794A500150499 /* PluginSettingsViewController.m */; };
 		496C7B141263276E004B6B90 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
@@ -392,6 +394,8 @@
 		49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49A942661263AF4500086F4C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49A942671263AF4500086F4C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
+		49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
+		49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
 		49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B527951276805000EE64D3 /* 13-target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B527911276805000EE64D3 /* 13-target@2x.png */; };
@@ -531,9 +535,7 @@
 		911D1962137A56C8005C9B55 /* TapjoyConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 911D195F137A56C8005C9B55 /* TapjoyConnect.m */; };
 		91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */; };
 		91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */; };
-		91214F4911B601490091AFEF /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91214F4811B601490091AFEF /* CardViewController.m */; };
-		9121517A11B755550091AFEF /* WordCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9121517811B755550091AFEF /* WordCardViewController.m */; };
-		9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* WordCardViewController.xib */; };
+		9121517B11B755550091AFEF /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* CardViewController.xib */; };
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
@@ -899,10 +901,12 @@
 		4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseSettingsDataSource.m; path = AppSpecific/JapaneseSettingsDataSource.m; sourceTree = "<group>"; };
 		4927B8461400C7350076EEED /* ChineseSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseSettingsDataSource.h; path = AppSpecific/ChineseSettingsDataSource.h; sourceTree = "<group>"; };
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
-		4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "WordCardViewController-EtoJ.xib"; path = "Classes/AppSpecific/WordCardViewController-EtoJ.xib"; sourceTree = "<group>"; };
+		4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "CardViewController-EtoJ.xib"; path = "Classes/AppSpecific/CardViewController-EtoJ.xib"; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4938F8C614027853001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "ActionBarViewController-Browse.xib"; path = "XIBs/ActionBarViewController-Browse.xib"; sourceTree = "<group>"; };
+		493A4791146A89BB00F1E718 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = XIBs/SettingsView.xib; sourceTree = "<group>"; };
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
 		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
@@ -914,7 +918,6 @@
 		494F7FA4138B8E6400094AE2 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4950C25111B764B200B70EE9 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManager.h; path = AppSpecific/PluginManager.h; sourceTree = "<group>"; };
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
-		4951E0FC11B61F7D00FCE21E /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardView.xib; path = XIBs/CardView.xib; sourceTree = "<group>"; };
 		49570E1513E39F7700226D24 /* LWEFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormView.h; sourceTree = "<group>"; };
 		49570E1613E39F7700226D24 /* LWEFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormView.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
@@ -950,6 +953,9 @@
 		49A942611263AF4500086F4C /* star-deselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected@2x.png"; path = "Assets/star-deselected@2x.png"; sourceTree = "<group>"; };
 		49A942621263AF4500086F4C /* star-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-selected.png"; path = "Assets/star-selected.png"; sourceTree = "<group>"; };
 		49A942631263AF4500086F4C /* star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-selected@2x.png"; path = "Assets/star-selected@2x.png"; sourceTree = "<group>"; };
+		49AAB8B8147106BE0015D64B /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = AppSpecific/CardViewController.h; sourceTree = "<group>"; };
+		49AAB8B9147106BE0015D64B /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = AppSpecific/CardViewController.m; sourceTree = "<group>"; };
+		49AAB8CD147127E40015D64B /* StudyViewProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudyViewProtocols.h; path = AppSpecific/StudyViewProtocols.h; sourceTree = "<group>"; };
 		49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_12_to_13.sql; path = Migrations/jflash_12_to_13.sql; sourceTree = "<group>"; };
 		49AF3D331265EDCD00CEAA52 /* UpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateManager.h; path = AppSpecific/UpdateManager.h; sourceTree = "<group>"; };
 		49AF3D341265EDCD00CEAA52 /* UpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateManager.m; path = AppSpecific/UpdateManager.m; sourceTree = "<group>"; };
@@ -1106,11 +1112,7 @@
 		91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowseModeCardViewDelegate.m; path = AppSpecific/BrowseModeCardViewDelegate.m; sourceTree = "<group>"; };
 		91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeModeCardViewDelegate.h; path = AppSpecific/PracticeModeCardViewDelegate.h; sourceTree = "<group>"; };
 		91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PracticeModeCardViewDelegate.m; path = AppSpecific/PracticeModeCardViewDelegate.m; sourceTree = "<group>"; };
-		91214F4711B601490091AFEF /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = AppSpecific/CardViewController.h; sourceTree = "<group>"; };
-		91214F4811B601490091AFEF /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = AppSpecific/CardViewController.m; sourceTree = "<group>"; };
-		9121517711B755550091AFEF /* WordCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordCardViewController.h; path = AppSpecific/WordCardViewController.h; sourceTree = "<group>"; };
-		9121517811B755550091AFEF /* WordCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordCardViewController.m; path = AppSpecific/WordCardViewController.m; sourceTree = "<group>"; };
-		9121517911B755550091AFEF /* WordCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WordCardViewController.xib; path = Classes/AppSpecific/WordCardViewController.xib; sourceTree = "<group>"; };
+		9121517911B755550091AFEF /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CardViewController.xib; path = Classes/AppSpecific/CardViewController.xib; sourceTree = "<group>"; };
 		912405D9109C263D00ECA1C2 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		9129D4F411550A2A0036C4D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		9134371A138DE5A900A924E4 /* LWECrashUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWECrashUtils.m; sourceTree = "<group>"; };
@@ -1554,6 +1556,8 @@
 				242A174714628AF4002977E6 /* AudioToolbox.framework */,
 				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */,
+				242A174714628AF4002977E6 /* AudioToolbox.framework */,
+				242A173F1461AB60002977E6 /* AVFoundation.framework */,
 				49C521DE144D2461002011BD /* CoreText.framework */,
 				4938F8C814027860001EB473 /* CFlash */,
 				4938F8C214027818001EB473 /* CoreText.framework */,
@@ -1604,12 +1608,10 @@
 		49075BD6114E641500EDAABB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49AAB8861470DB210015D64B /* LWEChineseSearchBar */,
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
-				49BBA4C1144D5CA000E6A9AE /* LWEChineseSearchBar.h */,
-				49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */,
-				49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1738,6 +1740,16 @@
 				9158C0020FB6C2320083223F /* FMDb */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		49AAB8861470DB210015D64B /* LWEChineseSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				49BBA4C1144D5CA000E6A9AE /* LWEChineseSearchBar.h */,
+				49BBA4C2144D5CA000E6A9AE /* LWEChineseSearchBar.m */,
+				49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */,
+			);
+			name = LWEChineseSearchBar;
 			sourceTree = "<group>";
 		};
 		49B4ABEF11C1DCDB00CFC308 /* glass-buttons */ = {
@@ -2393,24 +2405,23 @@
 		91DDB0A911C1F5CB00E8B962 /* Study View */ = {
 			isa = PBXGroup;
 			children = (
+				49AAB8CD147127E40015D64B /* StudyViewProtocols.h */,
+				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
+				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
+				49AAB8B8147106BE0015D64B /* CardViewController.h */,
+				49AAB8B9147106BE0015D64B /* CardViewController.m */,
 				496BE54B11EC5303003AB713 /* ActionBarViewController.h */,
 				496BE54C11EC5303003AB713 /* ActionBarViewController.m */,
 				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
 				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
 				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
 				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
-				91214F4711B601490091AFEF /* CardViewController.h */,
-				91214F4811B601490091AFEF /* CardViewController.m */,
 				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
 				91CBA67A11BB4986004BD0D0 /* ExampleSentencesViewController.m */,
 				91E1B0E511AE11E1003CCDC2 /* ProgressBarViewController.h */,
 				91E1B0E611AE11E1003CCDC2 /* ProgressBarViewController.m */,
 				917A5C4111AB829000016BD2 /* ProgressDetailsViewController.h */,
 				917A5C4211AB829000016BD2 /* ProgressDetailsViewController.m */,
-				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
-				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
-				9121517711B755550091AFEF /* WordCardViewController.h */,
-				9121517811B755550091AFEF /* WordCardViewController.m */,
 			);
 			name = "Study View";
 			sourceTree = "<group>";
@@ -2428,9 +2439,9 @@
 			isa = PBXGroup;
 			children = (
 				496BE54F11EC5320003AB713 /* ActionBarViewController.xib */,
+				493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */,
 				496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */,
 				917A5C6611AB844300016BD2 /* AddTagView.xib */,
-				4951E0FC11B61F7D00FCE21E /* CardView.xib */,
 				91CBA67711BB496C004BD0D0 /* ExampleSentencesView.xib */,
 				49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
@@ -2443,13 +2454,14 @@
 				49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */,
 				496BE55111EC5320003AB713 /* SearchView.xib */,
 				491D7D0611C4EFFE00BF8323 /* SentenceView.xib */,
+				493A4791146A89BB00F1E718 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
-				9121517911B755550091AFEF /* WordCardViewController.xib */,
-				4938F8B714024797001EB473 /* WordCardViewController-EtoJ.xib */,
+				9121517911B755550091AFEF /* CardViewController.xib */,
+				4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */,
 			);
 			name = XIBs;
 			path = ..;
@@ -2685,8 +2697,7 @@
 				91E1B0E911AE11E1003CCDC2 /* ProgressBarViewController.xib in Resources */,
 				49F9686911AF604900DFC3C9 /* ModalTaskView.xib in Resources */,
 				49FE152C11B2B168007607D9 /* tametheme-cookie-cutters in Resources */,
-				4951E0FD11B61F7D00FCE21E /* CardView.xib in Resources */,
-				9121517B11B755550091AFEF /* WordCardViewController.xib in Resources */,
+				9121517B11B755550091AFEF /* CardViewController.xib in Resources */,
 				490820A511B7959500150499 /* PluginSettingsView.xib in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
 				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
@@ -2809,12 +2820,14 @@
 				9179E4261384FFB000A7739B /* form-background.jpg in Resources */,
 				9179E44D1385021E00A7739B /* table-background.jpg in Resources */,
 				91C05A3913F468D500061229 /* Default.jpg in Resources */,
-				4938F8B814024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
+				4938F8B814024797001EB473 /* CardViewController-EtoJ.xib in Resources */,
 				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 				49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */,
 				4919507D144F1BFE00DB81F7 /* downloadedPlugin.plist in Resources */,
 				491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */,
+				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
+				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2826,6 +2839,8 @@
 				49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */,
 				4904661A147274B5004C44E2 /* jFlash.db in Resources */,
 				4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */,
+				493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
+				493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2874,7 +2889,6 @@
 				496C7AD912632730004B6B90 /* AlgorithmSettingsView.xib in Resources */,
 				496C7ADA12632730004B6B90 /* SearchView.xib in Resources */,
 				496C7ADB12632730004B6B90 /* AddTagView.xib in Resources */,
-				496C7ADC12632730004B6B90 /* CardView.xib in Resources */,
 				496C7ADD12632730004B6B90 /* ExampleSentencesView.xib in Resources */,
 				496C7ADE12632730004B6B90 /* ExamplesUnavailable.xib in Resources */,
 				496C7ADF12632730004B6B90 /* HelpView.xib in Resources */,
@@ -2890,7 +2904,7 @@
 				496C7AED12632730004B6B90 /* TweetWordViewController.xib in Resources */,
 				496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */,
 				496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */,
-				496C7AF012632730004B6B90 /* WordCardViewController.xib in Resources */,
+				496C7AF012632730004B6B90 /* CardViewController.xib in Resources */,
 				4965FD35126F6417000AC280 /* practice-btn-actions@2x.png in Resources */,
 				4965FD36126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */,
 				4965FD37126F6417000AC280 /* practice-btn-right@2x.png in Resources */,
@@ -2989,7 +3003,7 @@
 				49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */,
 				49280A2C13962A9A00EF009C /* star-selected.png in Resources */,
 				49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */,
-				4938F8B914024797001EB473 /* WordCardViewController-EtoJ.xib in Resources */,
+				4938F8B914024797001EB473 /* CardViewController-EtoJ.xib in Resources */,
 				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
 				49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */,
 				49716146144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
@@ -2997,6 +3011,8 @@
 				49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */,
 				491AA1CD1456AA29009B9F6E /* foo.mp3 in Resources */,
 				496C6704147294D9009F04D4 /* cFlash-FTS-1.0.db in Resources */,
+				493A478F146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
+				493A4793146A89BB00F1E718 /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3067,9 +3083,7 @@
 				91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */,
 				91214D6A11B4D77C0091AFEF /* PracticeModeCardViewDelegate.m in Sources */,
 				4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */,
-				91214F4911B601490091AFEF /* CardViewController.m in Sources */,
 				4950C25311B764B200B70EE9 /* PluginManager.m in Sources */,
-				9121517A11B755550091AFEF /* WordCardViewController.m in Sources */,
 				4908209911B794A500150499 /* PluginSettingsViewController.m in Sources */,
 				497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */,
 				91CBA67B11BB4986004BD0D0 /* ExampleSentencesViewController.m in Sources */,
@@ -3176,6 +3190,7 @@
 				242A17441462893F002977E6 /* AudioSessionManager.m in Sources */,
 				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
+				49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3332,13 +3347,11 @@
 				496C7B081263275A004B6B90 /* SearchViewController.m in Sources */,
 				496C7B091263275E004B6B90 /* ActionBarViewController.m in Sources */,
 				496C7B0A1263275F004B6B90 /* BrowseModeCardViewDelegate.m in Sources */,
-				496C7B0B12632760004B6B90 /* CardViewController.m in Sources */,
 				496C7B0C12632761004B6B90 /* ExampleSentencesViewController.m in Sources */,
 				496C7B0D12632762004B6B90 /* PracticeModeCardViewDelegate.m in Sources */,
 				496C7B0E12632763004B6B90 /* ProgressBarViewController.m in Sources */,
 				496C7B0F12632764004B6B90 /* ProgressDetailsViewController.m in Sources */,
 				496C7B1012632765004B6B90 /* StudyViewController.m in Sources */,
-				496C7B1112632766004B6B90 /* WordCardViewController.m in Sources */,
 				496C7B121263276C004B6B90 /* AlgorithmSettingsViewController.m in Sources */,
 				496C7B131263276D004B6B90 /* PluginSettingsViewController.m in Sources */,
 				496C7B141263276E004B6B90 /* SettingsViewController.m in Sources */,
@@ -3449,6 +3462,7 @@
 				242A17451462893F002977E6 /* AudioSessionManager.m in Sources */,
 				917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */,
+				49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

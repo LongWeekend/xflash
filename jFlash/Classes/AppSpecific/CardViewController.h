@@ -1,40 +1,77 @@
 //
-//  CardViewController.h
+//  WordCardViewController.h
 //  jFlash
 //
-//  Created by シャロット ロス on 5/25/10.
+//  Created by シャロット ロス on 6/3/10.
 //  Copyright 2010 LONG WEEKEND INC.. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
+#import "UIWebView+LWENoBounces.h"
+#import "OHAttributedLabel.h"
+#import "MoodIcon.h"
+#import "StudyViewProtocols.h"
 
-@class StudyViewController;
+extern NSString * const LWECardHtmlHeader;
+extern NSString * const LWECardHtmlHeader_EtoJ;
+extern NSString * const LWECardHtmlFooter;
+
 @class CardViewController;
 
 @protocol CardViewControllerDelegate <NSObject>
 @optional
-- (void)studyModeDidChange:(StudyViewController*)svc;
-- (void)setupViews:(StudyViewController*)svc;
-- (void)refreshSessionDetailsViews:(StudyViewController*)svc;
+- (void) cardViewDidChangeMode:(CardViewController*)cardViewController;
 - (void)cardViewWillSetup:(CardViewController*)cardViewController;
 - (void)cardViewDidSetup:(CardViewController*)cardViewController;
 - (void)cardViewWillReveal:(CardViewController*)cardViewController;
 - (void)cardViewDidReveal:(CardViewController*)cardViewController;
-- (BOOL)cardView:(CardViewController*)cvc shouldReveal:(BOOL)shouldReveal;
+- (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
-@interface CardViewController : UIViewController
+@interface CardViewController : UIViewController <StudyViewSubcontrollerDelegate>
+{
+  //! Holds a reference to the current meaning's string-replacement javascript
+  NSString *_tmpJavascript;
+}
 
-- (void) setupWithCard:(Card*)card;
-- (void) reveal;
+- (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
-// These two methods are more temporary, to pull more browsemode/practice mode stuff out of SVC
-- (void) setupViews:(StudyViewController*)svc;
-- (void) refreshSessionDetailsViews:(StudyViewController*)svc;
-- (void) studyModeDidChange:(StudyViewController*)svc;
+- (IBAction)doTogglePercentCorrectBtn;
+- (IBAction) doToggleReadingBtn;
+
+- (void) turnPercentCorrectOff;
+- (void) turnPercentCorrectOn;
+- (void) turnReadingOn;
+- (void) turnReadingOff;
+
+- (void) resetReadingVisibility;
+
+- (void) setMeaningWebViewHidden:(BOOL)shouldHide;
+
 
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
-@property (retain) Card *currentCard;
+
+@property BOOL readingVisible;
+
+@property (nonatomic, retain) NSString *baseHtml;
+
+@property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
+@property (nonatomic, retain) IBOutlet UILabel *cardReadingLabel;
+@property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
+
+@property (nonatomic, retain) IBOutlet UIScrollView *cardReadingLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIScrollView *cardHeadwordLabelScrollContainer;
+@property (nonatomic, retain) IBOutlet UIImageView *cardReadingLabelScrollMoreIcon;
+@property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
+
+@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+
+// Mood Icon
+@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
+@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
+@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
+@property (nonatomic, retain) MoodIcon *moodIcon;
+@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
 
 @end

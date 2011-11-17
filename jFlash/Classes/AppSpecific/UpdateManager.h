@@ -27,6 +27,4 @@
  */
 + (BOOL) databaseIsUpdatable:(NSUserDefaults*)settings;
 
-+ (BOOL) _movePluginsToCacheDirectory;
-
 @end

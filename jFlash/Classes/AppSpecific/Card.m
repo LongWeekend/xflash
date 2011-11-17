@@ -1,8 +1,8 @@
 
 #import "Card.h"
 
-static NSString *const kLWEFullReadingKey       = @"lwe_full_reading";
-static NSString *const kLWESegmentedReadingKey  = @"lwe_segmented_reading";
+NSString *const kLWEFullReadingKey        = @"lwe_full_reading";
+NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 @interface Card ()
 //! AudioPlayer object for a card
@@ -33,11 +33,10 @@ static NSString *const kLWESegmentedReadingKey  = @"lwe_segmented_reading";
     }
     else
     {
-      //NSArray *segmentedReading = [dict objectForKey:kSegmentedReadingKey];
+      NSArray *segmentedReading = [dict objectForKey:kLWESegmentedReadingKey];
       NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
       //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
-      //[segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-      [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         //Construct the filename for its audioFilename filename
         //and instantiate the AVPlayerItem for it. 
         NSString *filename = (NSString *)obj;

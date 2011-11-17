@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WordCardViewController.h"
 
+#import "StudyViewController.h"
 #import "CardViewController.h"
+#import "ActionBarViewController.h"
 
-@interface PracticeModeCardViewDelegate : NSObject <CardViewControllerDelegate>
+@interface PracticeModeCardViewDelegate : NSObject <StudyViewControllerDelegate,
+                                                    CardViewControllerDelegate,
+                                                    ActionBarViewControllerDelegate>
 
-@property (nonatomic, retain) WordCardViewController *wordCardViewController;
+@property CGFloat currentPercentageCorrect;
 
 @end

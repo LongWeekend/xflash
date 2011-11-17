@@ -15,7 +15,7 @@
 #import "UserPeer.h"
 
 @implementation SettingsViewController
-@synthesize sectionArray, dataSource, delegate;
+@synthesize sectionArray, dataSource, delegate, tableView;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -28,9 +28,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
-- (id) init
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-  self = [super initWithStyle:UITableViewStyleGrouped];
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self)
   {
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
@@ -62,7 +62,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewWillAppear: (BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   // TODO: iPad customization!
@@ -80,8 +80,13 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [self.tableView reloadData];
 }
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+}
+
 //! Only re-load the set if settings were changed, otherwise there is no need to do anything
-- (void) viewWillDisappear: (BOOL)animated
+- (void) viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
@@ -164,7 +169,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   return i;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -177,14 +182,14 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   // Handle special cases first
   if (key == APP_USER)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_USER onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.detailTextLabel.text = [[UserPeer getUserByPK:[settings integerForKey:APP_USER]] userNickname];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   else if (key == APP_PLUGIN)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
@@ -199,7 +204,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   }
   else if (key == APP_REMINDER)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:APP_REMINDER onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_REMINDER onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSNumber *reminderSetting = [settings objectForKey:APP_REMINDER];
@@ -215,13 +220,13 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   else if (key == APP_ABOUT)
   {
     // About section
-    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ABOUT onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ABOUT onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   else if (key == APP_FACEBOOK || key == APP_TWITTER)
   {
     // Set up the image
-    cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"social" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     UIImageView *tmpView = cell.imageView;
@@ -237,20 +242,20 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   }
   else if (key == APP_ALGORITHM)
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ALGORITHM onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:APP_ALGORITHM onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
   }
 	else if (key == APP_NEW_UPDATE)
 	{
-		cell = [LWEUITableUtils reuseCellForIdentifier:APP_NEW_UPDATE onTable:tableView usingStyle:UITableViewCellStyleDefault];
+		cell = [LWEUITableUtils reuseCellForIdentifier:APP_NEW_UPDATE onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;	
 	}
   else
   {
     // Anything else
-    cell = [LWEUITableUtils reuseCellForIdentifier:key onTable:tableView usingStyle:UITableViewCellStyleValue1];
+    cell = [LWEUITableUtils reuseCellForIdentifier:key onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailTextLabel.text = [[self.dataSource.settingsHash objectForKey:key] objectForKey:[settings objectForKey:key]];        
   }
@@ -283,9 +288,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 
 //! Make selection for a table cell
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   
   NSInteger section = indexPath.section;
   NSInteger row = indexPath.row;
@@ -392,6 +397,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (void)dealloc
 {
+  [tableView release];
   [dataSource release];
   [sectionArray release];
   [super dealloc];

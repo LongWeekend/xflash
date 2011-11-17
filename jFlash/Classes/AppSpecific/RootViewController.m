@@ -18,6 +18,8 @@
 #import "HelpViewController.h"
 
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
+// TODO: Why is this different than the above?  (MMA 11.14.2011)
+NSString * const LWEShouldShowDownloadModal	  = @"LWEShouldShowDownloadModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
@@ -105,7 +107,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
      }];
     
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
-    [center addObserver:self selector:@selector(showDownloaderModal:) name:@"shouldShowDownloaderModal" object:nil];
+    [center addObserver:self selector:@selector(showDownloaderModal:) name:LWEShouldShowDownloadModal object:nil];
     
     //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
     [center addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
@@ -176,7 +178,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [searchViewController release];
   [localNavigationController release];
   
-  SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+  SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithNibName:@"SettingsView" bundle:nil];
 #if defined(LWE_JFLASH)
   settingsViewController.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
 #elif defined(LWE_CFLASH)

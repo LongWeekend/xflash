@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "ChineseCard.h"
 #import "LWEChineseSearchBar.h"
+#import "RootViewController.h"
 
 const NSInteger KSegmentedTableHeader = 100;
 
@@ -121,7 +122,7 @@ const NSInteger KSegmentedTableHeader = 100;
   if (!(hasFTS || isFirstVersion))
   {
     NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
     self.searchBar.placeholder = NSLocalizedString(@"Tap here to install search",@"SearchViewController.SearchBarPlaceholder_InstallPlugin"); 
   }
   else
@@ -201,7 +202,7 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     // And show them the modal again for good measure
     NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldShowDownloaderModal" object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
     return NO;
   }
 }

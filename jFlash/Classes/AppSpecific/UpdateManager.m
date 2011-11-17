@@ -28,6 +28,7 @@
 + (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom14to15:(NSUserDefaults *)settings;
 
++ (BOOL) _movePluginsToCacheDirectory;
 #else
 
 /**
@@ -210,8 +211,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Shared Private Methods
+#pragma mark - Shared Private Methods
 
 /**
  * This is a migration method to move already downloaded plugins from the doucments directory to the caches director, specific for 1.5->1.6 migration

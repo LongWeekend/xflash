@@ -21,6 +21,7 @@
 #define SETTINGS_VIEW_CONTROLLER_TAB_INDEX  3
 
 extern NSString * const LWEShouldShowModal;
+extern NSString * const LWEShouldShowDownloadModal;
 extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowStudySetView;
 extern NSString * const LWEShouldShowPopover;

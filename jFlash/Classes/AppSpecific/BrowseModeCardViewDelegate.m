@@ -13,86 +13,78 @@
 #import "StudyViewController.h"
 
 @implementation BrowseModeCardViewDelegate
-@synthesize wordCardViewController;
 
-#pragma mark - Card View Controller Delegate
+#pragma mark - CardViewControllerDelegate Methods
 
+//! This method will be called when the cardViewController enters browse mode.
+- (void) cardViewDidChangeMode:(CardViewController*)cardViewController
+{
+  // You can't tap the HH in browse mode.
+  cardViewController.moodIconBtn.enabled = NO;
+  
+  // Reading should start as "on" in browse mode no matter what
+  [cardViewController turnReadingOn];
+  
+  // We never want to see "% correct" in browse mode
+  [cardViewController turnPercentCorrectOff];
+}
+
+//! This method will be called when the cardViewController will set up a new card.
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
-  cardViewController.view = self.wordCardViewController.view;
-  [self.wordCardViewController prepareView:cardViewController.currentCard];
-  [self.wordCardViewController resetReadingVisibility];
+  [cardViewController resetReadingVisibility];
 }
 
-- (void) refreshSessionDetailsViews:(StudyViewController*)svc
+#pragma mark StudyViewControllerDelegate Methods
+
+- (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController *)svc
 {
-  NSInteger currIndex = svc.currentCardSet.currentIndex + 1;
-  NSInteger total = svc.currentCardSet.cardCount;
-  [svc turnPercentCorrectOff];
-  svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currIndex,total];
+  BOOL useMainHeadword = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
+	CardViewController *tmpCVC = [[CardViewController alloc] initDisplayMainHeadword:useMainHeadword];
+  // This class isn't just a delegate for SVC, it's also the card view controller's delegate!
+  tmpCVC.delegate = self;
+  return [tmpCVC autorelease];
+}
+
+- (UIViewController<StudyViewSubcontrollerDelegate> *)actionBarViewControllerForStudyView:(StudyViewController *)svc
+{
+  ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] initWithNibName:@"ActionBarViewController-Browse" bundle:nil];
+  tmpABVC.delegate = self;
+  return [tmpABVC autorelease];
+}
+
+//! This method will be called when StudyViewController will set up a new card.
+- (void) studyViewWillSetup:(StudyViewController*)svc
+{
+  // TODO: Note that our delegate here is making decisions about example sentences
+  // even though ex sentences have nothing to do with the card view controller (and only have to
+  // do with SVC because of the scrollView & pageControl (MMA - 11.14.2011)
   
-  // If practice mode, show the quiz stuff.
-  svc.tapForAnswerImage.hidden = YES;
-  svc.revealCardBtn.hidden = YES;
-}
-
-- (void) setupViews:(StudyViewController *)svc
-{
 	// In browse mode, scroll view should be enabled if the example sentences view is available
   BOOL hasExampleSentences = [svc hasExampleSentences];
   svc.scrollView.pagingEnabled = hasExampleSentences; 
   svc.scrollView.scrollEnabled = hasExampleSentences;
 }
 
-- (void)studyModeDidChange:(StudyViewController*)svc
+//! This method will be called when StudyViewController needs its labels updated
+- (void) updateStudyViewLabels:(StudyViewController *)svc
 {
-  // You can't tap the HH in browse mode.
-  svc.moodIconBtn.enabled = NO;
+  // Set the remainingCardsLabel based on the currentIndex (browse mode)
+  NSInteger currIndex = svc.currentCardSet.currentIndex + 1;
+  NSInteger total = svc.currentCardSet.cardCount;
+  svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",currIndex,total];
   
-  // Reading should start as "on" in browse mode
-  [self.wordCardViewController turnReadingOn];
+  // These buttons should be hidden at all times in browse mode.
+  svc.tapForAnswerImage.hidden = YES;
+  svc.revealCardBtn.hidden = YES;
 }
 
-#pragma mark - Action Bar View Controller Delegate
+#pragma mark - ActionBarViewControllerDelegate Methods
 
-- (void)actionBarWillSetup:(ActionBarViewController*)avc
+- (void) actionBarDidChangeMode:(ActionBarViewController *)avc
 {
-  avc.prevCardBtn.hidden = NO;
-  avc.nextCardBtn.hidden = NO;
-  avc.addBtn.hidden = NO;
-  
-  // tell the practice mode to piss off
-  avc.cardMeaningBtnHint.hidden = YES;
-  avc.cardMeaningBtnHintMini.hidden = YES;
-  avc.rightBtn.hidden = YES;
-  avc.wrongBtn.hidden = YES;
-  avc.buryCardBtn.hidden = YES;
-
-  // move the action button to the middle (it is on the left in practice mode)
-  CGRect rect = avc.addBtn.frame;
-  rect.origin.x = 128;
-  avc.addBtn.frame = rect;
-}
-
-#pragma mark -
-
-- (id) init
-{
-  self = [super init];
-  if (self)
-  {
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    NSString *studyDirection = [settings objectForKey:APP_HEADWORD];
-    BOOL useMainHeadword = [studyDirection isEqualToString:SET_J_TO_E];
-    self.wordCardViewController = [[[WordCardViewController alloc] initDisplayMainHeadword:useMainHeadword] autorelease];
-  }
-  return self;
-}
-
-- (void)dealloc
-{
-  [wordCardViewController release];
-	[super dealloc];
+  // Change action bar view to browse XIB
+  [[NSBundle mainBundle] loadNibNamed:@"ActionBarViewController-Browse" owner:avc options:nil];
 }
 
 @end

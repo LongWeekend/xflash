@@ -10,13 +10,13 @@
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 
-#import "MoodIcon.h"
-
-#import "CardViewController.h"
-#import "ActionBarViewController.h"
-#import "BrowseModeCardViewDelegate.h"
+#import "StudyViewProtocols.h"
 #import "PracticeModeCardViewDelegate.h"
+#import "BrowseModeCardViewDelegate.h"
 #import "ExampleSentencesViewController.h"
+
+#import "ActionBarViewController.h"
+#import "CardViewController.h"
 
 #import "LWEAudioQueue.h"
 
@@ -39,28 +39,27 @@
   BOOL _isChangingPage;  // page control state
 }
 
-- (void) turnPercentCorrectOff;
-- (void) turnPercentCorrectOn;
 - (BOOL) hasExampleSentences;
 
 - (IBAction)doShowProgressModalBtn;
-- (IBAction)doTogglePercentCorrectBtn;
 - (IBAction)revealCard;
 - (IBAction)pronounceCard:(id)sender;
 
-- (void)resetStudySet;
-- (void)resetViewWithCard:(Card*)card;
+- (void)changeStudySetToTag:(Tag*)newTag;
 
 - (void)doCardBtn: (NSNotification *)aNotification;
 - (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
 
 //! Gets notification from plugin manager
 - (void)pluginDidInstall: (NSNotification *)aNotification;
-- (void)doCardBtn: (NSNotification *)aNotification;
 
 /* for pageControl */
 - (IBAction) changePage:(id)sender;
+- (IBAction) changePage:(id)sender animated:(BOOL)animated;
 - (IBAction) launchExampleInstaller;
+
+// This delegate is retained -- not the best solution.  Someone (probably CurrentState) needs to own him.
+@property (retain) id<StudyViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet UIButton *pronounceBtn;
 
@@ -68,17 +67,14 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-@property (nonatomic, retain) IBOutlet CardViewController *cardViewController;
-@property (nonatomic, retain) IBOutlet ActionBarViewController *actionBarController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *cardViewController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *actionBarController;
 @property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 @property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
 @property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
-
-@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
-@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
@@ -87,10 +83,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
 @property (nonatomic, retain) IBOutlet UIView *progressBarView;
-
-// Mood Icon
-@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
-@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
 
 // Progress modal overlay
 @property (nonatomic, retain) IBOutlet UIView *progressModalView;
@@ -102,10 +94,8 @@
 // scroll view
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
-@property (nonatomic, retain) MoodIcon *moodIcon;
-@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
-@property (nonatomic, retain) id cardViewControllerDelegate;
+@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
 // stats for progress modal
 @property NSInteger numRight;
