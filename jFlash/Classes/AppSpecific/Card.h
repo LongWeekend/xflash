@@ -11,8 +11,8 @@
 #import "FMResultSet.h"
 #import "LWEAudioQueue.h"
 
-extern NSString *const kLWEFullReadingKey;
-extern NSString *const kLWESegmentedReadingKey;
+extern NSString * const kLWEFullReadingKey;
+extern NSString * const kLWESegmentedReadingKey;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @class LWEAudioQueue;
@@ -43,6 +43,14 @@ extern NSString *const kLWESegmentedReadingKey;
  * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
  */
 - (NSDictionary*) audioFilenames;
+
+/**
+ * Pass a UILabel with text through this method when you want to
+ * update the label's font with whatever the app's setting for glyph type is
+ * (e.g. in Chinese case, traditional or simplified).
+ */
++ (UIFont *) configureFontForLabel:(UILabel*)theLabel;
+
 
 //! PK of the card
 @property (nonatomic) NSInteger cardId;

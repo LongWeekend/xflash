@@ -170,6 +170,28 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   return NO;
 }
 
+#pragma mark - Static Helper for UILabels
+
++ (UIFont *) configureFontForLabel:(UILabel*)theLabel
+{
+  UIFont *theFont = theLabel.font;
+#if defined (LWE_CFLASH)
+  CGFloat currSize = theLabel.font.pointSize;
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  if ([[settings objectForKey:APP_HEADWORD_TYPE] isEqualToString:SET_HEADWORD_TYPE_TRAD])
+  {
+    theFont = [UIFont fontWithName:@"STHeitiTC-Medium" size:currSize];
+  }
+  else
+  {
+    theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
+  }
+#endif
+  return theFont;
+}
+
+
+#pragma mark - Class Plumbing
 
 //! Standard dealloc
 - (void) dealloc

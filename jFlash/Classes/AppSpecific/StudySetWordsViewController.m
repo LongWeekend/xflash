@@ -9,9 +9,11 @@
 #import "StudySetWordsViewController.h"
 #import "AddTagViewController.h"
 #import "AddStudySetInputViewController.h"
+#import "SettingsViewController.h"
 
 @interface StudySetWordsViewController ()
 - (void) _loadWordListInBackground;
+- (void) _cardSettingsDidChange:(NSNotification*)notification;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 @end
 
@@ -56,6 +58,12 @@
 {
   [super viewDidLoad];
   
+  // For when the glyph type changes (e.g. Chinese font type)
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(_cardSettingsDidChange:)
+                                               name:LWECardSettingsChanged
+                                             object:nil];
+  
   // Ideally, I could set the object: to self.tag, but there's no guarantee that the MEMORY ADDY of
   // the self.tag is the same as the memory address of the tag object sending the notification, even
   // if they have the same tagId ... sadface. (MMA - 18.10.2011) ... Or is this OK?  Think about it.
@@ -83,6 +91,16 @@
 }
 
 #pragma mark - Private Methods
+
+- (void) _cardSettingsDidChange:(NSNotification *)notification
+{
+  // If the key is in the dictionary, the setting changed, so we should reload.
+  BOOL headwordTypeChanged = ([notification.userInfo objectForKey:APP_HEADWORD_TYPE] != nil);
+  if (headwordTypeChanged)
+  {
+    [self.tableView reloadData];
+  }
+}
 
 - (void) _tagContentDidChange:(NSNotification*)notification
 {
@@ -183,11 +201,12 @@
 {
   static NSString *CellIdentifier = @"Cell";
   static NSString *HeaderIdentifier = @"Header";
-  UITableViewCell *cell;
+  UITableViewCell *cell = nil;
   if (indexPath.section == kWordSetListSections)
   {
-    if ([self cards] == nil)
+    if (self.cards == nil)
     {
+      // "Loading words..." pre-display cell
       cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = NSLocalizedString(@"Loading words...",@"StudySetWordsViewController.LoadingWords");
       cell.accessoryView = activityIndicator;
@@ -195,10 +214,11 @@
     }
     else
     {
+      // The actual words, once loaded
       cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
-      cell.selectionStyle = 0;
-      Card* tmpCard = [[self cards] objectAtIndex:indexPath.row];
-      if ([tmpCard headword] == nil)
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
+      if (tmpCard.headword == nil)
       {
         tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
         [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
@@ -206,6 +226,7 @@
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
       cell.textLabel.text = [tmpCard headword];
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      cell.textLabel.font = [Card configureFontForLabel:cell.textLabel];
     }
   }
   else

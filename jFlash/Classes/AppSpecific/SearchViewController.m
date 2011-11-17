@@ -8,6 +8,7 @@
 
 #import "SearchViewController.h"
 #import "ChineseCard.h"
+#import "SettingsViewController.h"
 #import "LWEChineseSearchBar.h"
 #import "RootViewController.h"
 
@@ -15,6 +16,7 @@ const NSInteger KSegmentedTableHeader = 100;
 
 // Private method declarations
 @interface SearchViewController ()
+@property (retain) NSMutableArray *observerArray;
 - (BOOL) _checkMembershipCacheForCard:(Card*)card;
 - (void) _removeCardFromMembershipCache:(Card*)card;
 - (void) _toggleMembership:(id)sender event:(id)event;
@@ -24,6 +26,7 @@ const NSInteger KSegmentedTableHeader = 100;
 @end
 
 @implementation SearchViewController
+@synthesize observerArray;
 @synthesize searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
 @synthesize tableView, searchTerm;
 
@@ -39,6 +42,7 @@ const NSInteger KSegmentedTableHeader = 100;
     // Set the tab bar controller image png to the targets
     self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
     self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
+    self.observerArray = [NSMutableArray array];
     
     // Is the plugin loaded for example sentences?
     _showSearchTargetControl = NO;
@@ -50,7 +54,20 @@ const NSInteger KSegmentedTableHeader = 100;
     _searchState = kSearchNoSearch;
     
     // Register an observer for the example sentences
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+    
+    // This notification will tell the table to reload whenever the user changes the headword type (glyph type)
+    id observer = [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *note)
+    {
+      BOOL headwordTypeChanged = ([note.userInfo objectForKey:APP_HEADWORD_TYPE] != nil);
+      if (headwordTypeChanged)
+      {
+        [self.tableView reloadData];
+      }
+    }];
+    [self.observerArray addObject:observer];
+    
   }
   return self;
 }
@@ -334,7 +351,7 @@ const NSInteger KSegmentedTableHeader = 100;
       cell = [LWEUITableUtils reuseCellForIdentifier:[NSString stringWithFormat:@"Record-%d",_searchTarget] onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       if (_searchTarget == SEARCH_TARGET_WORDS)
       {
-        Card* searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+        Card *searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
         cell = [self _setupTableCell:cell forCard:searchResult];
       }
       else
@@ -579,6 +596,9 @@ const NSInteger KSegmentedTableHeader = 100;
   searchResult.backgroundColor = [UIColor whiteColor];
   searchResult.text = [card headword];
   
+  // Update the glyph based on settings, if necessary
+  searchResult.font = [Card configureFontForLabel:searchResult];
+  
   // Now make the button
   UIButton *starButton = (UIButton*)[cell viewWithTag:SEARCH_CELL_BUTTON];
   if (starButton == nil)
@@ -654,6 +674,13 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   // Plugin did install observer
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // Get rid of block-based observers
+  for (id observer in self.observerArray)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+  }
+  [observerArray release];
   
   [searchTerm release];
   [searchBar release];

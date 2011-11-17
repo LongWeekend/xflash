@@ -14,8 +14,13 @@
 #import "UserViewController.h"
 #import "UserPeer.h"
 
+@interface SettingsViewController ()
+@property (retain) NSMutableDictionary *changedSettings;
+@end
+
 @implementation SettingsViewController
 @synthesize sectionArray, dataSource, delegate, tableView;
+@synthesize changedSettings;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -33,6 +38,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self)
   {
+    self.changedSettings = [NSMutableDictionary dictionary];
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings", @"SettingsViewController.NavBarTitle");
   }
@@ -80,10 +86,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [self.tableView reloadData];
 }
 
-- (void) viewDidDisappear:(BOOL)animated
-{
-  [super viewDidDisappear:animated];
-}
 
 //! Only re-load the set if settings were changed, otherwise there is no need to do anything
 - (void) viewWillDisappear:(BOOL)animated
@@ -110,8 +112,15 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   }
   else if (shouldSendCardChangeNotification)
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWECardSettingsChanged object:self];
+    // For card settings, pass along what changed
+    NSNotification *aNotification = [NSNotification notificationWithName:LWECardSettingsChanged
+                                                                  object:self
+                                                                userInfo:self.changedSettings];
+    [[NSNotificationCenter defaultCenter] postNotification:aNotification];
   }
+  
+  // Reset our "what changed" dictionary now that we've broadcast it
+  [self.changedSettings removeAllObjects];
   
   LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
@@ -152,6 +161,10 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     nextValue = [tmpEnumerator nextObject];
   }
   [settings setValue:nextValue forKey:setting];
+  
+  // Now add to our local dictionary - send out for notifications!
+  [self.changedSettings setValue:nextValue forKey:setting];
+  
   return;
 }
 
@@ -397,6 +410,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (void)dealloc
 {
+  [changedSettings release];
   [tableView release];
   [dataSource release];
   [sectionArray release];

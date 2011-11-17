@@ -24,6 +24,10 @@ NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
 NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
+@interface RootViewController ()
+@property (retain) NSMutableArray *observerArray;
+@end
+
 /**
  * Takes UI hierarchy control from appDelegate and 
  * loads tab bar controller programmatically when loadTabBar is called
@@ -34,6 +38,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 @synthesize loadingView;
 @synthesize tabBarController;
 @synthesize isFinishedLoading;
+@synthesize observerArray;
 
 /**
  * Custom initializer - adds observers for notifications
@@ -43,27 +48,33 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   if ((self = [super init]))
   {
     self.isFinishedLoading = NO;
+    self.observerArray = [NSMutableArray array];
     
     // MMA Apparently, there really isn't a way around this dirtiness.
     __block UIViewController *blockSelf = self;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    id observer = nil;
 
     // Register listener to switch the tab bar controller to user sets when user masters a set
-    [center addObserverForName:LWEShouldShowStudySetView object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:LWEShouldShowStudySetView object:nil queue:nil usingBlock:^(NSNotification *notification)
     {
       blockSelf.tabBarController.selectedIndex = STUDY_SET_VIEW_CONTROLLER_TAB_INDEX;
     }];
+    [self.observerArray addObject:observer];
     
     // Register listener to switch the tab bar controller to the study view when the user selects a new set
-    [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        blockSelf.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
      }];
+    [self.observerArray addObject:observer];
 
-    [center addObserverForName:@"switchToSettings" object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:@"switchToSettings" object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        blockSelf.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
      }];
+    [self.observerArray addObject:observer];
     
     // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
     void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
@@ -77,12 +88,17 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
       }
       [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
     };
-    [center addObserverForName:@"taskDidCancelSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
-    [center addObserverForName:@"taskDidCompleteSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
-    [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
+    observer = [center addObserverForName:@"taskDidCancelSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [self.observerArray addObject:observer];
+
+    observer = [center addObserverForName:@"taskDidCompleteSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
+    [self.observerArray addObject:observer];
+
+    observer = [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
+    [self.observerArray addObject:observer];
     
     // Update the settings tab bar item with badge number
-    [center addObserverForName:LWEShouldUpdateSettingsBadge object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:LWEShouldUpdateSettingsBadge object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        NSNumber *badgeNumber = [notification.userInfo objectForKey:@"badge_number"];
        UITabBarItem *settingsTabBar = [blockSelf.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
@@ -95,9 +111,10 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
          settingsTabBar.badgeValue = nil;
        }
      }];
+    [self.observerArray addObject:observer];
     
     // Show popover for progress view
-    [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
        if (controller)
@@ -105,6 +122,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
          [blockSelf.tabBarController.view addSubview:controller.view];
        }
      }];
+    [self.observerArray addObject:observer];
     
     // Register listener to pop up downloader modal for search FTS download & ex sentence download
     [center addObserver:self selector:@selector(showDownloaderModal:) name:LWEShouldShowDownloadModal object:nil];
@@ -364,19 +382,22 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 	[self.tabBarController viewDidDisappear:animated];
 }
 
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 # pragma mark Housekeeping
 
 - (void)dealloc
 {
-  // Unobserve notifications
+  // This handles the name/selector-based
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // This handles the block-based notifications
+  for (id observer in self.observerArray)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+  }
+
+  [observerArray release];
   [tabBarController release];
-  [self setLoadingView:nil];
+  [loadingView release];
   [super dealloc];
 }
 

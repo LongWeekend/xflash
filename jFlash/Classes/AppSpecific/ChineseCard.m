@@ -219,6 +219,8 @@
   return hw;
 }
 
+#pragma mark - Class Plumbing
+
 - (void) dealloc
 {
   [headword_simp release];

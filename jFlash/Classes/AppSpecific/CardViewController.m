@@ -102,6 +102,9 @@
   
   self.percentCorrectLabel.text = percentCorrectLabelStartText;
   [self.moodIcon updateMoodIcon:100.0f];
+  
+  // For languages such as Chinese, we may need to configure the font
+  self.cardHeadwordLabel.font = [Card configureFontForLabel:self.cardHeadwordLabel];
 }
 
 #pragma mark - IBAction Methods
