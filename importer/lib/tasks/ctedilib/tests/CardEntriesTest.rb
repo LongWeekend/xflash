@@ -27,7 +27,7 @@ class CardEntriesTest < Test::Unit::TestCase
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
     
-    result = find_cards_similar_to(entry)
+    result = TagImporter.find_cards_similar_to(entry)
     assert_equal(result.headword_trad, entry.headword_trad)
   end
     
