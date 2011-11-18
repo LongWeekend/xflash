@@ -1,9 +1,6 @@
 # Single entry class - based on active record?
 class CEdictEntry < Entry
 
-  include CardHelpers
-
-
   #===================================
   # Parses a line from the CEDICT data source
   #===================================
@@ -193,6 +190,18 @@ class CEdictEntry < Entry
     else
       return tag
     end
+  end
+
+    # XFORMATION: Remove common English stop words from string
+  def xfrm_remove_stop_words(str)
+    stop_words = ['Variant','variant', 'Erhua', 'Counter', 'Has', 'I', 'me', 'a', 'an', 'am', 'are', 'as', 'at', 'be', 'by','how', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'than', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the']
+    results = []
+    str.gsub!($regexes[:inlined_tags], "") ## remove tag blocks
+    str.split(' ').each do |sstr|
+      # remove non word characters from string
+      results << sstr unless stop_words.index(sstr.gsub(/[^a-zA-Z|\s]/, '').strip)
+    end
+    return results.flatten.compact.join(' ')
   end
 
   # DESC: Caches staging database tag data

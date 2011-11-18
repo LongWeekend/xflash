@@ -1,7 +1,6 @@
 class TagImporter
   
   include DatabaseHelpers
-  include CardHelpers
   
   #### DESC: Class Constructors
   def initialize (data, configuration)
