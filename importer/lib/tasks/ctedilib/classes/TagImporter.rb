@@ -212,7 +212,7 @@ class TagImporter
     indices = []
     if $card_entries_by_headword[:simp].key?(entry.headword_simp)
       dict_entry = $card_entries_by_headword[:simp][entry.headword_simp]
-      if card.similar_to?(entry, criteria)
+      if dict_entry.similar_to?(entry, criteria)
         indices << card
       end
     else
