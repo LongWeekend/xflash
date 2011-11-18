@@ -49,8 +49,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("system_tags.yml", "lwe_favs")
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     
-    parser = CSVParser.new(test_file_path)
-    entries = parser.run
+    parser = WordListParser.new(test_file_path)
+    entries = parser.run('CSVParser')
     assert_equal(13,entries.count)
     
     importer = TagImporter.new(entries, configuration)
@@ -72,8 +72,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("file_800_config.yml", "tag_800_test_file_small")
     
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = CSVParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('CSVEntry')
     
     # Asserting the number of result with the fixed number 
     # of how many result it should be based on the test file.
@@ -183,7 +183,6 @@ class TagImporterTest < Test::Unit::TestCase
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = WordListParser.new(test_file_path)
     results = parser.run('BookEntry')
-    breakpoint
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
@@ -195,7 +194,6 @@ class TagImporterTest < Test::Unit::TestCase
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = WordListParser.new(test_file_path)
     results = parser.run('BookEntry')
-    breakpoint
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
