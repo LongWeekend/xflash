@@ -20,6 +20,8 @@ class BookEntry < Entry
     
     # Now get the reading
     @pinyin = get_pinyin(line)
+    @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(@pinyin)
+
     @meanings = get_meanings(line)
     
     return true
@@ -44,10 +46,7 @@ class BookEntry < Entry
     end_of_hw_trad = line.index("\t")
     end_of_hw_simp = line.index("\t",end_of_hw_trad+1)
     reading = line[end_of_hw_simp..beginning_of_meaning].strip()
-    space_separated_reading = reading.scan($regexes[:chinese_reading]).join(" ")
-    pinyin = Entry.get_pinyin_unicode_for_reading(space_separated_reading)
-    
-    return pinyin
+    return reading.scan($regexes[:chinese_reading]).join(" ")
   end
   
   def get_meanings(line = "")

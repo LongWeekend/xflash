@@ -180,6 +180,7 @@ class Entry
         else
           # Give the feedback if we dont know what to do
           # This should be a very rare cases. (Throw an exception maybe?)
+          # TODO: MMA 11.18.2011 - throw an exception so we can check w/ the DB and try again
           puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
         
@@ -339,9 +340,11 @@ class Entry
     @headword_trad = record[:headword_trad] unless !record[:headword_trad]
     @headword_simp = record[:headword_simp] unless !record[:headword_simp]
     
-    reading = ""
-    reading = record[:reading] unless !record[:reading]
-    @pinyin = Entry.get_pinyin_unicode_for_reading(reading)
+    if record[:reading]
+      reading = record[:reading]
+      @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(reading)
+      @pinyin = reading
+    end
     
     # TODO: Serialize meaning objects as a hash and then restore?? MMA
     # Get the meanings (compbination with the meaning column and the meaning_fts)
@@ -374,5 +377,25 @@ class Entry
   
     return self.id == another_card_entry.id
   end  
+
+  def similar_to?(entry, match_criteria = nil)
+    # Make sure the entry is kind of Entry class-
+    raise "You must pass an Entry subclass to this method!" unless entry.kind_of?(Entry)
+    
+    # Comparing the headword
+    # NOTE: Please make sure that the entry is the one wanted to be matched from.
+    # and self is the CARD.
+    same_headword_trad = (headword_trad == entry.headword)
+    same_headword_simp = (headword_simp == entry.headword)
+    same_headword = same_headword_trad || same_headword_simp
+    return false unless same_headword
+    
+    if match_criteria
+      return match_criteria.call(self, entry, false)
+    else
+      return true
+    end
+  end
   
+# EOF
 end

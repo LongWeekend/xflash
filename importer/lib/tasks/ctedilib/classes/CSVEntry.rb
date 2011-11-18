@@ -29,7 +29,7 @@ class CSVEntry < Entry
       @meanings.add_element_with_stripping_from_array!(clean_raw_meanings.split(","))
       return true
     else
-      return false
+      raise "Improperly formatted CSV line: %s" % [line]
     end
 
   end
