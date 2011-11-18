@@ -66,11 +66,6 @@ class Parser
     return cache_data
   end
 
-  # Returns hash for storing an entry
-  def self.get_entry_hash(meanings=[], headwords=[], readings=[], jmdict_refs=[], common="", pos=[], cat=[], all_tags=[])
-    { :meanings => meanings, :headwords => headwords, :readings => readings, :jmdict_refs => jmdict_refs, :common => common, :pos => pos, :cat => cat, :all_tags => all_tags}
-  end
-
   # DESC: Combines arrays and ensures they are flatten/compacted/unique
   def self.combine_and_uniq_arrays(array1, *others)
     result = []
