@@ -46,6 +46,7 @@ namespace :ctedi do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     include RakeHelpers
     include DebugHelpers
+    include DatabaseHelpers
     
     get_cli_debug
     
@@ -111,6 +112,7 @@ namespace :ctedi do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     include RakeHelpers
     include DebugHelpers
+    include DatabaseHelpers
     
     get_cli_debug
     
