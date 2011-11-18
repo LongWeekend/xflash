@@ -39,7 +39,10 @@ class CEdictExporter
     # Remove non-visible tags
     $cn.execute("DELETE FROM tags WHERE force_off=1")
     $cn.execute("ALTER TABLE tags DROP force_off")
-    
+   
+    # TOTAL HACK for starred words... unfortunately there's a problem in MySQL trying to insert 0 on an autoincrement field
+    $cn.execute("UPDATE tags_staging SET tag_id = 0 WHERE tag_name = 'My Starred Words'")
+   
     prt "\n\nExporting tables to temporary file"
     prt_dotted_line
 
