@@ -7,10 +7,9 @@
 # Each Group will be structured with 
 study_sets:
     name: "Study Sets"
-    # Groups '800'
     hsk:
         # 1 Means recommended = true
-        name: ["HSK List", 1]
+        name: ["HSK Level 1~6", 1]
         hsk_1:
             file: "hsk_config.yml"
             metadata_key: "hsk_1"
@@ -29,9 +28,9 @@ study_sets:
         hsk_6:
             file: "hsk_config.yml"
             metadata_key: "hsk_6"
-    800_words:
+    tocfl_800_words:
         # 1 Means recommended = true
-        name: ["800 + Words", 0]
+        name: ["TOCFL Level 1~3 (Taiwan)", 1]
         800_1_beginner: 
             file: "file_800_config.yml"
             metadata_key: "tags_800_1_beginner"
@@ -42,9 +41,9 @@ study_sets:
             file: "file_800_config.yml"
             metadata_key: "tags_800_3_advance"
     books:
-        name: "Books"
+        name: ["Textbook Lessons", 0]
         beg_chinese_lesson:
-            name: "Beg Chinese"
+            name: "Beginner's Chinese (Yong Ho)"
             beg_chinese_lesson_01:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_1"
@@ -76,7 +75,7 @@ study_sets:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_10"
         colloqial_chinese_lesson:
-            name: "Colloquial Chinese"
+            name: "Colloquial Chinese (P.C. T'ung, D.E. Pollard)"
             col_chinese_lesson_01:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_1"
@@ -108,7 +107,7 @@ study_sets:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_10"
         integrated_chinese:
-            name: "Integrated Chinese 2nd Edition"
+            name: "Integrated Chinese, 2nd Ed. (Tao-chung Yao, Yuehua Liu)"
             ic_intro_dates_and_time:
                 file: "integrated_chinese_combined_config.yml"
                 metadata_key: "ic_intro_date_and_time"
@@ -175,52 +174,8 @@ study_sets:
             ic_lesson_19:
                 file: "integrated_chinese_combined_config.yml"
                 metadata_key: "ic_19"
-        npcr:
-            name: "New Practical Chinese Reader Textbook, Vol.1"
-            npcr_01:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_1"
-            npcr_02:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_2"
-            npcr_03:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_3"
-            npcr_04:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_4"
-            npcr_05:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_5"
-            npcr_06:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_6"
-            npcr_07:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_7"
-            npcr_08:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_8"
-            npcr_09:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_9"
-            npcr_10:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_10"
-            npcr_11:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_11"
-            npcr_12:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_12"
-            npcr_13:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_13"
-            npcr_14:
-                file: "npcr_config.yml"
-                metadata_key: "npcr_14"
         pcr:
-            name: "PCR Lesson 1-30"
+            name: "Practical Chinese Reader, Book I"
             pcr_01_5:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_1_5"
@@ -299,8 +254,52 @@ study_sets:
             pcr_30:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_30"
+        npcr:
+            name: "New Practical Chinese Reader Textbook, Vol 1 (by Zhang Kai, Liu Shehui, Chen Xi, Zuo Shandan, Shi Jiawei, Liu Xun)"
+            npcr_01:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_1"
+            npcr_02:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_2"
+            npcr_03:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_3"
+            npcr_04:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_4"
+            npcr_05:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_5"
+            npcr_06:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_6"
+            npcr_07:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_7"
+            npcr_08:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_8"
+            npcr_09:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_9"
+            npcr_10:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_10"
+            npcr_11:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_11"
+            npcr_12:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_12"
+            npcr_13:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_13"
+            npcr_14:
+                file: "npcr_config.yml"
+                metadata_key: "npcr_14"
         pimsleur:
-            name: "Pimsleur Book"
+            name: "Pimsleur Mandarin Unit 1"
             pimsleur1_1:
                 file: "pimsleur_config.yml"
                 metadata_key: "pimsleur1_1"
@@ -356,7 +355,7 @@ study_sets:
                 file: "pimsleur_config.yml"
                 metadata_key: "pimsleur3_6"
         schaums:
-            name: "Schaums Book"
+            name: ["Schaums’ Outlines Chinese Vocabulary (Yanping Xie, Duan-Duan Li)",1]
             schaums_asking_for_directions:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_asking_for_directions"
@@ -393,6 +392,9 @@ study_sets:
             schaums_at_the_train_station:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_at_the_train_station"
+            schaums_the_weather:
+                file: "schaums_config.yml"
+                metadata_key: "schaums_the_weather"
             schaums_business:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_business"
@@ -423,11 +425,31 @@ study_sets:
             schaums_the_automobile:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_the_automobile"
-            schaums_the_weather:
-                file: "schaums_config.yml"
-                metadata_key: "schaums_the_weather"
+    frequency_bigrams:
+        name: "Most Frequent Words (Bigrams)"
+        frequency_1:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_1"
+        frequency_2:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_2"
+        frequency_3:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_3"
+        frequency_4:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_4"
+        frequency_5:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_5"
+        frequency_6:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_6"
+        frequency_7:
+            file: "frequency_config.yml"
+            metadata_key: "frequency_7"
     frequency:
-        name: "Frequent Words"
+        name: "Most Frequent Hànzì"
         frequency_1:
             file: "frequency_config.yml"
             metadata_key: "frequency_1"

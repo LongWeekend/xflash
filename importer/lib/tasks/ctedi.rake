@@ -134,41 +134,8 @@ namespace :ctedi do
     include DatabaseHelpers
     include ImporterHelpers
 
-    # We need to get the ID of the 
-
     exporter = CEdictExporter.new
     exporter.export_staging_db_from_table("cards_staging", [])
-  end
-  
-  ##############################################################################
-  desc "One Step cFlash Import (ACCEPTS: src=edict2_src_utf8.txt)"
-  task :go_cflash => :environment do
-
-    get_cli_debug # Enable/disable debug 
-
-    prt "\n"
-    prt_dotted_line
-    prt "Running One Step Import"
-    prt_dotted_line("\n")
-
-    exporter = CEdictExporter.new
-    importer = CEdictImporter.new
-    exporter.drop_export_tables
-    importer.empty_staging_tables
-
-    # Import from source data files
-    ## import JLPT words by headword only (only merges)
-    ## Try rematching left over JLPT words with old source file
-    ## Now reimport JLPT rematches
-#    JFlashImporter.humanise_inline_tags_in_table("cards_staging")
-    # Match REL 1.0  to v 1.1 card ids
-#    system!("rake tedi3:match_rel1_ids reset=true")
-
-#    CFlashImporter.add_jlpt_tags
-#    CFlashImporter.delete_child_tags                # cleans out any child links in tags_staging, tag_group_link
-#    CFlashImporter.add_tag_links                    # cleans card_tag_link first
-
-    exporter.export_staging_db_from_table("cards_staging")
   end
 
 end

@@ -16,15 +16,15 @@ tags_800_1_beginner:
     file_tolerance: "tone"          
     
     # User-readible name for the tag
-    tag_name: "800+ Beginner"
+    tag_name: "TOCFL (TOP) Beginner"
     tag_type: ""
     
     # Database tag_staging table column related
     # System-readible tag name
-    short_name: "800Words+Beginner"
+    short_name: "SC-TOP-beginner"
     
     # Description of the tag
-    description: "800+ Words for beginner"      
+    description: "Beginner words for SC-TOP Huayu Proficiency Tests"      
     
     # Source of the file
     source: "CSV File"                          
@@ -43,9 +43,9 @@ tags_800_2_intermediate:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "CSVParser"
-    tag_name: "800+ Intermediate"
+    tag_name: "TOCFL (TOP) Intermediate"
     tag_type: ""
-    short_name: "800Words+Mid"
+    short_name: "SC-TOP-intermediate"
     description: "800+ Words for Intermediate user"      
     source: "CSV File"                          
     source_name: "800+800020100915-mid.csv"     
@@ -58,10 +58,10 @@ tags_800_3_advance:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "CSVParser"
-    tag_name: "800+ Advance"
+    tag_name: "TOCFL (TOP) Advanced"
     tag_type: ""
-    short_name: "800Words+Advance"
-    description: "800+Advanced Words"      
+    short_name: "SC-TOP-advanced"
+    description: "Advanced words for SC-TOP Huayu Proficiency Tests"      
     source: "CSV File"                          
     source_name: "800+800020100915-adv.csv"     
     visible: 1                                  

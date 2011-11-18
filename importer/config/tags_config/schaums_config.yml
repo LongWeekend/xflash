@@ -34,7 +34,7 @@ schaums_at_the_airport:
     tag_name: "At the Airport"
     tag_type: ""
     short_name: "schaums_airport"
-    description: "Schaums  (At The Airport)"      
+    description: "Schaums  (At the Airport)"      
     source: "Space separated File"                          
     source_name: "AT THE AIRPORT.txt"     
     visible: 1                                  
@@ -45,10 +45,10 @@ schaums_at_the_bank:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Bank"
+    tag_name: "At the Bank"
     tag_type: ""
     short_name: "schaums_bank"
-    description: "Schaums  (At The Bank)"      
+    description: "Schaums  (At the Bank)"      
     source: "Space separated File"                          
     source_name: "AT THE BANK.txt"     
     visible: 1                                  
@@ -59,10 +59,10 @@ schaums_at_the_clothing_store:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Clothing Store"
+    tag_name: "At the Clothing Store"
     tag_type: ""
     short_name: "schaums_clothing_s"
-    description: "Schaums  (At The Clothing Store)"      
+    description: "Schaums  (At the Clothing Store)"      
     source: "Space separated File"                          
     source_name: "AT THE CLOTHING STORE.txt"     
     visible: 1                                  
@@ -73,10 +73,10 @@ schaums_at_the_dry_cleaner:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Dry Cleaner"
+    tag_name: "At the Dry Cleaners"
     tag_type: ""
     short_name: "schaums_dry_cleaner"
-    description: "Schaums  (At The Dry Cleaner)"      
+    description: "Schaums  (At the Dry Cleaners)"      
     source: "Space separated File"                          
     source_name: "AT THE DRY CLEANER.txt"     
     visible: 1                                  
@@ -87,10 +87,10 @@ schaums_at_the_hospital:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Hospital"
+    tag_name: "At the Hospital"
     tag_type: ""
     short_name: "schaums_hospital"
-    description: "Schaums  (At The Hospital)"      
+    description: "Schaums  (At the Hospital)"      
     source: "Space separated File"                          
     source_name: "AT THE HOSPITAL.txt"     
     visible: 1                                  
@@ -101,10 +101,10 @@ schaums_at_the_hotel:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Hotel"
+    tag_name: "At the Hotel"
     tag_type: ""
     short_name: "schaums_hotel"
-    description: "Schaums  (At The Hotel)"      
+    description: "Schaums  (At the Hotel)"      
     source: "Space separated File"                          
     source_name: "AT THE HOTEL.txt"     
     visible: 1                                  
@@ -115,10 +115,10 @@ schaums_at_the_post_office:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Post Office"
+    tag_name: "At the Post Office"
     tag_type: ""
     short_name: "schaums_post_office"
-    description: "Schaums  (At The Post Office)"      
+    description: "Schaums  (At the Post Office)"      
     source: "Space separated File"                          
     source_name: "AT THE POST OFFICE.txt"     
     visible: 1                                  
@@ -129,10 +129,10 @@ schaums_at_the_restaurant:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Restaurant"
+    tag_name: "At the Restaurant"
     tag_type: ""
     short_name: "schaums_restaurant"
-    description: "Schaums  (At The Restaurant)"      
+    description: "Schaums  (At the Restaurant)"      
     source: "Space separated File"                          
     source_name: "AT THE RESTAURANT.txt"     
     visible: 1                                  
@@ -143,10 +143,10 @@ schaums_at_the_theater_and_the_movies:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Theater and The Movies"
+    tag_name: "At the Theater/Movies"
     tag_type: ""
     short_name: "schaums_movies"
-    description: "Schaums  (At The Theater and The Movies)"      
+    description: "Schaums  (At the Theater and The Movies)"      
     source: "Space separated File"                          
     source_name: "AT THE THEATER AND THE MOVIES.txt"     
     visible: 1                                  
@@ -157,10 +157,10 @@ schaums_at_the_train_station:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "At The Train Station"
+    tag_name: "At the Train Station"
     tag_type: ""
     short_name: "schaums_trainstation"
-    description: "Schaums  (At The Train Station)"      
+    description: "Schaums  (At the Train Station)"      
     source: "Space separated File"                          
     source_name: "AT THE TRAIN STATION.txt"     
     visible: 1                                  
@@ -227,7 +227,7 @@ schaums_on_the_airplane:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "On The Airplane"
+    tag_name: "On the Airplane"
     tag_type: ""
     short_name: "schaums_airplane"
     description: "Schaums  (On The Airplane)"      
@@ -297,7 +297,7 @@ schaums_the_automobile:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "The Automobile"
+    tag_name: "Automobile"
     tag_type: ""
     short_name: "schaums_automobile"
     description: "Schaums  (The Automobile)"      
@@ -311,7 +311,7 @@ schaums_the_weather:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "The Weather"
+    tag_name: "Weather"
     tag_type: ""
     short_name: "schaums_weather"
     description: "Schaums  (The Weather)"      

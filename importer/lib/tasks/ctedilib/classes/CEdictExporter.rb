@@ -32,7 +32,7 @@ class CEdictExporter
     $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts);")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_trad")
     $cn.execute("ALTER TABLE cards_search_content DROP headword_simp")
-    $cn.execute("ALTER TABLE cards_search_content DROP reading")
+    $cn.execute("ALTER TABLE cards_search_content DROP reading")  
     $cn.execute("ALTER TABLE cards_search_content DROP reading_diacritic")
     $cn.execute("ALTER TABLE cards_search_content DROP meaning_fts")
 

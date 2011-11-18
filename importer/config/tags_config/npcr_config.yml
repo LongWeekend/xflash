@@ -3,7 +3,7 @@ npcr_1:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 1"
+    tag_name: "NPCR1 Lesson 1"
     tag_type: ""
     short_name: "npcr1-1"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 1"      
@@ -17,7 +17,7 @@ npcr_2:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 2"
+    tag_name: "NPCR1 Lesson 2"
     tag_type: ""
     short_name: "npcr1-2"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 2"      
@@ -31,7 +31,7 @@ npcr_3:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 3"
+    tag_name: "NPCR1 Lesson 3"
     tag_type: ""
     short_name: "npcr1-3"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 3"      
@@ -45,7 +45,7 @@ npcr_4:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 4"
+    tag_name: "NPCR1 Lesson 4"
     tag_type: ""
     short_name: "npcr1-4"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 4"      
@@ -59,7 +59,7 @@ npcr_5:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 5"
+    tag_name: "NPCR1 Lesson 5"
     tag_type: ""
     short_name: "npcr1-5"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 5"      
@@ -73,7 +73,7 @@ npcr_6:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 6"
+    tag_name: "NPCR1 Lesson 6"
     tag_type: ""
     short_name: "npcr1-6"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 6"      
@@ -87,7 +87,7 @@ npcr_7:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 7"
+    tag_name: "NPCR1 Lesson 7"
     tag_type: ""
     short_name: "npcr1-7"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 7"      
@@ -101,7 +101,7 @@ npcr_8:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 8"
+    tag_name: "NPCR1 Lesson 8"
     tag_type: ""
     short_name: "npcr1-8"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 8"      
@@ -115,7 +115,7 @@ npcr_9:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 9"
+    tag_name: "NPCR1 Lesson 9"
     tag_type: ""
     short_name: "npcr1-9"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 9"      
@@ -129,7 +129,7 @@ npcr_10:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 10"
+    tag_name: "NPCR1 Lesson 10"
     tag_type: ""
     short_name: "npcr1-10"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 10"      
@@ -143,7 +143,7 @@ npcr_11:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 11"
+    tag_name: "NPCR1 Lesson 11"
     tag_type: ""
     short_name: "npcr1-11"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 11"      
@@ -157,7 +157,7 @@ npcr_12:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 12"
+    tag_name: "NPCR1 Lesson 12"
     tag_type: ""
     short_name: "npcr1-12"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 12"      
@@ -171,7 +171,7 @@ npcr_13:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 13"
+    tag_name: "NPCR1 Lesson 13"
     tag_type: ""
     short_name: "npcr1-13"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 13"      
@@ -185,7 +185,7 @@ npcr_14:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "NPCR Lesson 14"
+    tag_name: "NPCR1 Lesson 14"
     tag_type: ""
     short_name: "npcr1-14"
     description: "New Practical Chinese Reader Textbook, Vol.1 Lesson 14"      

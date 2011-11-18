@@ -3,11 +3,11 @@ beg_chinese_lesson_1:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 1"
+    tag_name: "Lesson 1"
     tag_type: ""
     short_name: "BegChineseLesson1"
-    description: "Begging Chinese Lesson Part 1"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 1 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson1.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -18,11 +18,11 @@ beg_chinese_lesson_2:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 2"
+    tag_name: "Lesson 2"
     tag_type: ""
     short_name: "BegChineseLesson2"
-    description: "Begging Chinese Lesson Part 2"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 2 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson2.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -33,11 +33,11 @@ beg_chinese_lesson_3:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 3"
+    tag_name: "Lesson 3"
     tag_type: ""
     short_name: "BegChineseLesson3"
-    description: "Begging Chinese Lesson Part 3"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 3 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson3.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -48,11 +48,11 @@ beg_chinese_lesson_4:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 4"
+    tag_name: "Lesson 4"
     tag_type: ""
     short_name: "BegChineseLesson4"
-    description: "Begging Chinese Lesson Part 4"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 4 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson4.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -63,11 +63,11 @@ beg_chinese_lesson_5:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 5"
+    tag_name: "Lesson 5"
     tag_type: ""
     short_name: "BegChineseLesson5"
-    description: "Begging Chinese Lesson Part 5"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 5 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson5.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -78,11 +78,11 @@ beg_chinese_lesson_6:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 6"
+    tag_name: "Lesson 6"
     tag_type: ""
     short_name: "BegChineseLesson6"
-    description: "Begging Chinese Lesson Part 6"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 6 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson6.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -93,11 +93,11 @@ beg_chinese_lesson_7:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 7"
+    tag_name: "Lesson 7"
     tag_type: ""
     short_name: "BegChineseLesson7"
-    description: "Begging Chinese Lesson Part 7"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 7 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson7.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -108,11 +108,11 @@ beg_chinese_lesson_8:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 8"
+    tag_name: "Lesson 8"
     tag_type: ""
     short_name: "BegChineseLesson8"
-    description: "Begging Chinese Lesson Part 8"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 8 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson8.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -123,11 +123,11 @@ beg_chinese_lesson_9:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 9"
+    tag_name: "Lesson 9"
     tag_type: ""
     short_name: "BegChineseLesson9"
-    description: "Begging Chinese Lesson Part 9"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 9 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson9.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -138,11 +138,11 @@ beg_chinese_lesson_10:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Beg Chinese Lesson 10"
+    tag_name: "Lesson 10"
     tag_type: ""
     short_name: "BegChineseLesson10"
-    description: "Begging Chinese Lesson Part 10"      
-    source: "Space separated File"                          
+    description: "Beginner's Chinese by Yong Ho, Lesson 10 Vocabulary"      
+    source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson10.txt"     
     visible: 1                                  
     parent_tag_id: 0

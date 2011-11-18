@@ -3,11 +3,11 @@ frequency_1:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 1"
+    tag_name: "Characters 1-100"
     tag_type: ""
     short_name: "frequency-1-100"
     description: "Frequent Words List 1-100"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_1-100.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -17,11 +17,11 @@ frequency_2:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 2"
+    tag_name: "Characters 101-200"
     tag_type: ""
     short_name: "frequency-101-200"
     description: "Frequent Words List 101-200"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_101-200.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -31,11 +31,11 @@ frequency_3:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 3"
+    tag_name: "Characters 201-300"
     tag_type: ""
     short_name: "frequency-201-300"
     description: "Frequent Words List 201-300"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_201-300.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -45,11 +45,11 @@ frequency_4:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 4"
+    tag_name: "Characters 301-400"
     tag_type: ""
     short_name: "frequency-301-400"
     description: "Frequent Words List 301-400"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_301-400.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -59,11 +59,11 @@ frequency_5:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 5"
+    tag_name: "Characters 401-500"
     tag_type: ""
     short_name: "frequency-401-500"
     description: "Frequent Words List 401-500"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_401-500.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -73,11 +73,11 @@ frequency_6:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 6"
+    tag_name: "Characters 501-600"
     tag_type: ""
     short_name: "frequency-501-600"
     description: "Frequent Words List 501-600"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_501-600.txt"     
     visible: 1                                  
     parent_tag_id: 0
@@ -87,11 +87,11 @@ frequency_7:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "BookListParser"
-    tag_name: "Frequent Words 7"
+    tag_name: "Characters 601-700"
     tag_type: ""
     short_name: "frequency-601-700"
     description: "Frequent Words List 601-700"      
-    source: "Space separated File"                          
+    source: "http://www.zein.se/patrick"                          
     source_name: "frequency_list_601-700.txt"     
     visible: 1                                  
     parent_tag_id: 0

@@ -4,7 +4,7 @@ starred:
     tag_name: "My Starred Words"
     tag_type: ""
     short_name: "starred_words"
-    description: "Starred Words"      
+    description: "Words you've starred in Search and Study will appear here."      
     source: "system_tags"                          
     source_name: "system_tags"     
     visible: 1                                  
@@ -14,6 +14,8 @@ starred:
 lwe_favs:
     file_dump_trace: 1
     file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/lwe_favorites.txt"
+    file_parser: "CSVParser"
     tag_name: "Long Weekend Favorites"
     tag_type: ""
     short_name: "lwe_favs"
