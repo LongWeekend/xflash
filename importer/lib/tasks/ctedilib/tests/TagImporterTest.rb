@@ -50,7 +50,7 @@ class TagImporterTest < Test::Unit::TestCase
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     
     parser = WordListParser.new(test_file_path)
-    entries = parser.run('CSVParser')
+    entries = parser.run('CSVEntry')
     assert_equal(13,entries.count)
     
     importer = TagImporter.new(entries, configuration)
@@ -123,7 +123,7 @@ class TagImporterTest < Test::Unit::TestCase
   end
   
   def test_import_pcr
-    configuration = TagConfiguration.new("pcr_config.yml", "pcr_1")
+    configuration = TagConfiguration.new("pcr_config.yml", "pcr_1_5")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = WordListParser.new(test_file_path)
@@ -145,7 +145,7 @@ class TagImporterTest < Test::Unit::TestCase
   end
   
   def test_import_schaums
-    configuration = TagConfiguration.new("schaums_config.yml", "schaums_direction")
+    configuration = TagConfiguration.new("schaums_config.yml", "schaums_asking_for_directions")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = WordListParser.new(test_file_path)

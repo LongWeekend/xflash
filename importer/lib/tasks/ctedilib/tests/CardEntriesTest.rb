@@ -2,18 +2,9 @@ require 'test/unit'
 
 class CardEntriesTest < Test::Unit::TestCase
   
-  include CardHelpers
-
-  # Test on getting the entire cards on the big hash table
-  def test_getting_all_cards
-    get_all_cards_from_db()
-    expected_num_of_cards = 99139
-    assert_equal($card_entries.length(), expected_num_of_cards)
-  end
-  
   # Test on quick looking for a card with the same headwords
   def test_look_for_headword_cards_1
-    get_all_cards_from_db()
+    TagImporter.get_all_cards_from_db()
     
     lookup_character = "丈母娘"
     result = $card_entries_array.select {|card| card.headword_trad == lookup_character}
@@ -95,7 +86,7 @@ class CardEntriesTest < Test::Unit::TestCase
    end
    
    def test_find_variant
-    get_all_cards_from_db()
+    TagImporter.get_all_cards_from_db()
     
     lookup_character = "龜"
     cards = $card_entries.values()
