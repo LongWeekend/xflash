@@ -39,6 +39,7 @@ CREATE TABLE `tags_staging` (
   `description` varchar(200) DEFAULT NULL,
   `source_name` varchar(50) DEFAULT NULL,
   `source` varchar(50) DEFAULT NULL,
+  `editable` int(11) NOT NULL DEFAULT '0',
   `visible` int(11) NOT NULL DEFAULT '0',
   `count` int(11) NOT NULL DEFAULT '0',
   `parent_tag_id` int(11) NULL DEFAULT NULL,

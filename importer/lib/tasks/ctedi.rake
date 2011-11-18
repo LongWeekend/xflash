@@ -135,7 +135,7 @@ namespace :ctedi do
     include ImporterHelpers
 
     exporter = CEdictExporter.new
-    exporter.export_staging_db_from_table("cards_staging", [])
+    exporter.export_staging_db_from_table("cards_staging")
   end
 
 end

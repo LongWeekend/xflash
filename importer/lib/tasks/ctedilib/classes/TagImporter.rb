@@ -94,8 +94,15 @@ class TagImporter
     
     # try inserting into the tags_staging table as row 
     inserted_short_name = config.short_name
-    insert_query = "INSERT INTO tags_staging(tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s)" %
-                      [config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off]
+    if config.tag_id
+      # For specific cases where the YAML file tells us what SQL ID to use -- presently used for Starred
+      insert_query = "INSERT INTO tags_staging(tag_id, tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off, editable) VALUES(%s, '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, %s)" %
+                        [config.tag_id, config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
+    else
+      # Most other cases -- just add a new tag
+      insert_query = "INSERT INTO tags_staging(tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off, editable) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, %s)" %
+                        [config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
+    end
             
     # Execute the query
     $cn.execute(insert_query)

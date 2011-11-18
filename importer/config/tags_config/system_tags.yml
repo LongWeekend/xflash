@@ -3,10 +3,12 @@ starred:
     file_importer: "TagImporter"
     tag_name: "My Starred Words"
     tag_type: ""
+    tag_id: 0
     short_name: "starred_words"
     description: "Words you've starred in Search and Study will appear here."      
     source: "system_tags"                          
     source_name: "system_tags"     
+    editable: 1
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
@@ -22,6 +24,7 @@ lwe_favs:
     description: "Long Weekend Favorites"      
     source: "system_tags"                          
     source_name: "system_tags"     
+    editable: 1
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0

@@ -53,6 +53,16 @@ class TagConfiguration
     return @configuration["source_name"]
   end
   
+  # If the user would like to specify the ID of the tag (used for starred, presently)
+  def tag_id
+    return @configuration["tag_id"]
+  end
+  
+  def editable
+    return "1" if (@configuration["editable"] == 1)
+    return "0"
+  end
+  
   def source
     return @configuration["source"]
   end
