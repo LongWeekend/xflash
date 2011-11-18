@@ -1,12 +1,13 @@
 class WordListParser < Parser
 
   # Alias the base class' method 
-  alias :run_super :run
+#  alias :run_super :run
+
 
   def run(entry_class = 'Entry')
     entries = []
     # Call 'super' method to process loop for us
-    super do |line, line_no, cache_data|
+    super() do |line, line_no, cache_data|
       
       entry = entry_class.constantize.new
       
