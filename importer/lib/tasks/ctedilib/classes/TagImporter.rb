@@ -213,7 +213,7 @@ class TagImporter
     if $card_entries_by_headword[:simp].key?(entry.headword_simp)
       dict_entry = $card_entries_by_headword[:simp][entry.headword_simp]
       if dict_entry.similar_to?(entry, criteria)
-        indices << card
+        indices << dict_entry
       end
     else
       # OK, we made it here.  No fast hash for us, it's loopy doopy time
