@@ -43,7 +43,7 @@ study_sets:
     books:
         name: ["Textbook Lessons", 0]
         beg_chinese_lesson:
-            name: "Beginner's Chinese (Yong Ho)"
+            name: "Beginner\'s Chinese (Yong Ho)"
             beg_chinese_lesson_01:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_1"
@@ -75,7 +75,7 @@ study_sets:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_10"
         colloqial_chinese_lesson:
-            name: "Colloquial Chinese (P.C. T'ung, D.E. Pollard)"
+            name: "Colloquial Chinese (P.C. T\'ung, D.E. Pollard)"
             col_chinese_lesson_01:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_1"
@@ -355,7 +355,7 @@ study_sets:
                 file: "pimsleur_config.yml"
                 metadata_key: "pimsleur3_6"
         schaums:
-            name: ["Schaums’ Outlines Chinese Vocabulary (Yanping Xie, Duan-Duan Li)",1]
+            name: ["Schaums\' Outlines Chinese Vocabulary (Yanping Xie, Duan-Duan Li)", 1]
             schaums_asking_for_directions:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_asking_for_directions"
