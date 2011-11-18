@@ -16,8 +16,7 @@ class CardEntriesTest < Test::Unit::TestCase
     get_all_cards_from_db()
     
     lookup_character = "丈母娘"
-    cards = $card_entries.values()
-    result = cards.select {|card| card.headword_trad == lookup_character}
+    result = $card_entries_array.select {|card| card.headword_trad == lookup_character}
   
     assert_equal(result.length(), 1)
     assert_equal(result[0].headword_trad, lookup_character)
@@ -42,8 +41,8 @@ class CardEntriesTest < Test::Unit::TestCase
     card = nil
     select_query = "SELECT * FROM cards_staging WHERE headword_trad = '愛戴'"
     $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-      card = CardEntry.new()
-      card.parse_line(rec)
+      card = CEdictEntry.new
+      card.hydrate_from_hash(rec)
     end    
         
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
@@ -64,8 +63,8 @@ class CardEntriesTest < Test::Unit::TestCase
     card = nil
     select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打擊'"
     $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-      card = CardEntry.new()
-      card.parse_line(rec)
+      card = CEdictEntry.new
+      card.hydrate_from_hash(rec)
     end    
     
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
@@ -84,8 +83,8 @@ class CardEntriesTest < Test::Unit::TestCase
      card = nil
      select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打發'"
      $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-       card = CardEntry.new()
-       card.parse_line(rec)
+       card = CEdictEntry.new
+       card.hydrate_from_hash(rec)
      end    
 
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|

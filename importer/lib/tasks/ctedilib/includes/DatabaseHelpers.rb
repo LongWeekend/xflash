@@ -28,6 +28,14 @@ module DatabaseHelpers
     end
   end
   
+  def last_inserted_id
+    connect_db
+    $cn.execute("SELECT LAST_INSERT_ID()").each do |last_id|
+      return last_id
+    end
+    return false
+  end
+  
   def get_random_filename
     # Create a random file name
     s = ""

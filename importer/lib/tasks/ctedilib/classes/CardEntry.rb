@@ -43,7 +43,6 @@ class CardEntry < Entry
      variant_of = record[:is_variant] == 1 ? true : false unless !record[:is_variant]
      @variant_of = variant_of
       
-     #@references
    end
    
    def ==(another_card_entry)
@@ -81,31 +80,6 @@ class CardEntry < Entry
      
      return match_criteria.call(entry.headword, same_pinyin, same_meaning, entry.is_proper_noun?)
        
-=begin 
-     Comparing the meaning
-     if (((match_criteria == $options[:likeness_level][:exact_match]) && (same_pinyin && same_headword)) ||
-         ((match_criteria == $options[:likeness_level][:partial_match]) && (!(same_pinyin && same_headword))) ||
-         ((match_criteria == $options[:likeness_level][:one_likeness_match]) && (!(same_pinyin || same_headword))))
-          # Inside if body.
-          intersection = self.meanings & entry.meanings
-          same_meaning = intersection.length() > 0
-     end
-
-     if (match_criteria == $options[:likeness_level][:exact_match])
-        # Return yes if all criterion is a match
-        return same_headword && same_pinyin && same_meaning
-     elsif (match_criteria == $options[:likeness_level][:partial_match])
-        # Return yes if there is two likeness found
-        return ((same_headword && same_pinyin) || 
-                (same_headword && same_meaning) || 
-                (same_pinyin && same_meaning))
-      elsif (match_criteria == $options[:likeness_level][:one_likeness_match])
-        # Return yes if there is one likeness found.
-        return same_headword || same_pinyin || same_meaning
-      end
-      
-      return false #If everything else fails, return with false
-=end    
    end
   
 end

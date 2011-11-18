@@ -15,6 +15,7 @@ module CardHelpers
      connect_db()
      # Allocate a new hash object to the card_entries
      $card_entries = Hash.new()
+     $card_entries_array = []
      # Get the entire data from the database
      select_query = "SELECT * FROM cards_staging"
      result_set = $cn.execute(select_query)
@@ -22,12 +23,13 @@ module CardHelpers
      # For each record in the result set
      result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
        # Initialise the card object
-       card = CardEntry.new()
-       card.parse_line(rec)
+       card = CEdictEntry.new
+       card.hydrate_from_hash(rec)
        # Get the card id and makes that a symbol for the hash key.
        card_id = rec[:card_id]
        # puts "Inserting to hash with key: %s" % [card_id.to_s()]
        $card_entries[card_id.to_s().to_sym()] = card
+       $card_entries_array << card
      end # End for-each
      
      prt "...Finished."
@@ -35,11 +37,8 @@ module CardHelpers
   
   # Find cards object which has similarities with the entry as the parameter
   def find_cards_similar_to(entry)
-    # Make sure we only want the entry as an 
-    # inheritance instances of Entry.
-    if (!entry.kind_of?(Entry))
-      return nil
-    end
+    # Make sure we only want the entry as an inheritance instances of Entry.
+    raise "You must pass only Entry subclasses to find_cards_similar_to" unless entry.kind_of?(Entry)
     
     # If this has not been setup yet
     get_all_cards_from_db()
@@ -47,7 +46,7 @@ module CardHelpers
     # Prepare the result to put the matches and 
     # the cards object from the Hash-values
     result = Array.new()
-    cards = $card_entries.values()
+    #cards = $card_entries.values()
     
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
       # Don't match proper nouns, it tends to be surnames and such
@@ -64,8 +63,8 @@ module CardHelpers
     end
   
     #matches = cards.select { |card| card.similar_to?(entry, $options[:likeness_level][:partial_match]) }
-    index = cards.index { |card| card.similar_to?(entry, criteria) }
-    return cards[index] unless ((index==nil)||(index==0))
+    index = $card_entries_array.index { |card| card.similar_to?(entry, criteria) }
+    return $card_entries_array[index] unless ((index==nil)||(index==0))
     return nil
   end # End for method definition
 

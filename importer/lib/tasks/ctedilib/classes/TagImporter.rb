@@ -99,12 +99,9 @@ class TagImporter
             
     # Execute the query
     $cn.execute(insert_query)
-    
+
     # After executing, get the tag_id and set it globally
-    select_query = "SELECT tag_id FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
-    $cn.execute(select_query).each do |tag_id|
-      @tag_id = tag_id
-    end
+    @tag_id = last_inserted_id
     
     # Puts the feedback to the user
     log ("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id], true)
@@ -112,8 +109,8 @@ class TagImporter
   rescue StandardError => err
     # In case the is some error is hapenning, try to delete from the databse first,
     # if a row has been inserted.
-    if ((inserted_short_name != nil) && (inserted_short_name.strip().length() > 0))
-      delete_query = "DELETE FROM tags_staging WHERE short_name='%s'" % [inserted_short_name]
+    if (@tag_id != nil)
+      delete_query = "DELETE FROM tags_staging WHERE tag_id='%s'" % [@tag_id]
       $cn.execute(delete_query)
     end
     raise "Failed in inserting into the tags_staging with the configuration: %s\nUnderlying error was: %s" % [config, err]

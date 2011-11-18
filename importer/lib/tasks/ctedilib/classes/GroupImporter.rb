@@ -35,41 +35,41 @@ class GroupImporter
   
   def insert_group_or_tag(values, owner_id)
     # Ensure that we only have parsed data processed
-    if values.kind_of? Hash
-      metadata = Hash.new()
-      group_id = owner_id
+    raise "insert_group_or_tag received non-hash value as parameter" unless values.kind_of? Hash
     
-      # Needed to sort based on its keys
-      keys_of_values = values.keys.sort
-      index = keys_of_values.index("name")
-      if (index != nil)
-        #Swap the name to the first element
-        keys_of_values.delete_at(index)
-        temp_array = ["name"]
-        keys_of_values = temp_array + keys_of_values
+    metadata = Hash.new()
+    group_id = owner_id
+  
+    # Needed to sort based on its keys
+    keys_of_values = values.keys.sort
+    index = keys_of_values.index("name")
+    if (index != nil)
+      #Swap the name to the first element
+      keys_of_values.delete_at(index)
+      temp_array = ["name"]
+      keys_of_values = temp_array + keys_of_values
+    end
+    
+    # Traverse through its keys
+    keys_of_values.each do |key|
+      value = values[key]
+      if key == "name"
+        #Insert it as group
+        group_id = insert_group(value, owner_id)
+      elsif key == "file" || key == "metadata_key"
+        key_sym = key.to_sym()
+        metadata[key_sym] = value
+      else
+        # Recurse as it might still has nested groups or tags
+        insert_group_or_tag(value, group_id)
       end
-      
-      # Traverse through its keys
-      keys_of_values.each do |key|
-        value = values[key]
-        if key == "name"
-          #Insert it as group
-          group_id = insert_group(value, owner_id)
-        elsif key == "file" || key == "metadata_key"
-          key_sym = key.to_sym()
-          metadata[key_sym] = value
-        else
-          # Recurse as it might still has nested groups or tags
-          insert_group_or_tag(value, group_id)
-        end
-      end # In the end of traversing the key and value
-      
-      if metadata[:file] != nil && metadata[:file].strip().length > 0 &&
-         metadata[:metadata_key] != nil && metadata[:metadata_key].strip().length > 0
-         # If body and insert it as tag
-            insert_tag(metadata, group_id)
-      end
-    end # End if to ensure the values is type-of Hash
+    end # In the end of traversing the key and value
+    
+    if metadata[:file] != nil && metadata[:file].strip().length > 0 &&
+       metadata[:metadata_key] != nil && metadata[:metadata_key].strip().length > 0
+       # If body and insert it as tag
+          insert_tag(metadata, group_id)
+    end
   end
   
   def insert_tag(metadata, group_id)

@@ -2,6 +2,7 @@ class Entry
 
   include ObjectSpace
   include DatabaseHelpers
+  include ImporterHelpers
 
   @@pos_tags = ["Adv","Conj","VS","VA","N","M","Nb","Prep"]
 
@@ -320,4 +321,58 @@ class Entry
         (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL")]
 #        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), serialised_cedict_hash]
   end
+  
+  def to_update_sql
+    raise "implement me"
+  end
+  
+  def hydrate_from_hash(record = nil)
+    init()
+    
+    # A little sanity checking on line
+    if ((record.nil?) && (!record.kind_of? Hash))
+     pp ("Record supplied on the Card Entry is either nil or is not a Hash type")
+     return false
+    end
+    
+    @id = record[:card_id] unless !record[:card_id]
+    @headword_trad = record[:headword_trad] unless !record[:headword_trad]
+    @headword_simp = record[:headword_simp] unless !record[:headword_simp]
+    
+    reading = ""
+    reading = record[:reading] unless !record[:reading]
+    @pinyin = Entry.get_pinyin_unicode_for_reading(reading)
+    
+    # TODO: Serialize meaning objects as a hash and then restore?? MMA
+    # Get the meanings (compbination with the meaning column and the meaning_fts)
+    entire_meanings = Array.new()
+    meanings = record[:meaning].split(";") unless !record[:meaning]
+    meaning_fts = record[:meaning_fts].split(";") unless !record[:meaning_fts]
+    # Remove the spaces and put them into a single array.
+    entire_meanings.add_element_with_stripping_from_array!(meanings)
+    entire_meanings.add_element_with_stripping_from_array!(meaning_fts)
+    # Remove dupliacates
+    @meanings = entire_meanings.uniq()
+    
+    # Get whether the card is a erhua variant
+    erhua_variant = false
+    erhua_variant = record[:is_erhua_variant] == 1 ? true : false unless !record[:is_erhua_variant]
+    @is_erhua_variant = erhua_variant
+    
+    # Get whether the card is a variant.
+    variant_of = false
+    variant_of = record[:is_variant] == 1 ? true : false unless !record[:is_variant]
+    @variant_of = variant_of
+  end
+  
+  def ==(another_card_entry)
+    # If the another_card_entry is not Entry type
+    # just return with false.
+    if (!another_card_entry.kind_of?(Entry))
+      return false
+    end
+  
+    return self.id == another_card_entry.id
+  end  
+  
 end
