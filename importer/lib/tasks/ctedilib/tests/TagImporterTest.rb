@@ -3,10 +3,14 @@ require 'test/unit'
 class TagImporterTest < Test::Unit::TestCase
   
   include DatabaseHelpers
-
-  def test_cache
+  
+  def setup
+    # Clear out everything first, then import
+    TagImporter.tear_down_all_tags
     TagImporter.get_all_cards_from_db()
-    
+  end
+
+  def test_caching
     #TODO: get this number on the spot from cards_staging
     # The total number of entries (currently) -- make sure we have them all
     assert_equal(98314,$card_entries.count)
@@ -28,25 +32,19 @@ class TagImporterTest < Test::Unit::TestCase
   end
 
   def test_import_starred_tag
-    # Clear out everything first, then import
-    TagImporter.tear_down_all_tags
-
     # For starred words
     configuration = TagConfiguration.new("system_tags.yml", "starred")
     importer = TagImporter.new(nil, configuration)
     importer.import
 
-    # My Starred Words should also be editable and have 0 cards
-    $cn.execute("SELECT count(*) as count, editable from tags_staging WHERE tag_name LIKE 'My Starred Words'").each do |rec|
-      assert_equal(0, rec[0])
+    # My Starred Words should also be editable
+    $cn.execute("SELECT tag_id, editable from tags_staging WHERE tag_name LIKE 'My Starred Words'").each do |rec|
+      assert_equal(1, rec[0])
       assert_equal(1, rec[1])
     end
   end
     
   def test_import_lwe_favs
-    # Clear out everything first, then import
-    TagImporter.tear_down_all_tags
-
     # For LWE's Favourite - get them parsed
     configuration = TagConfiguration.new("system_tags.yml", "lwe_favs")
     test_file_path = File.dirname(__FILE__) + configuration.file_name
@@ -79,29 +77,24 @@ class TagImporterTest < Test::Unit::TestCase
     
     # Asserting the number of result with the fixed number 
     # of how many result it should be based on the test file.
-    assert_equal(results.length, 43)
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_800_advanced_words
-    configuration = TagConfiguration.new("file_800_config.yml", "tags_800_advance")
-    
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = CSVParser.new(test_file_path)
-    results = parser.run
+    assert_equal(43, results.length)
     
     importer = TagImporter.new(results, configuration)
     importer.import
-  end
+
+    # There should be 43 associated cards now
+    $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '%s'" % importer.tag_id).each do |tag_count_rec|
+      assert_equal(43, tag_count_rec[0])
+    end
     
+  end
+      
   def test_import_beg_chinese
      configuration = TagConfiguration.new("beg_chinese_config.yml", "beg_chinese_lesson_1")
 
      test_file_path = File.dirname(__FILE__) + configuration.file_name
-     parser = BookListParser.new(test_file_path)
-     results = parser.run
+     parser = WordListParser.new(test_file_path)
+     results = parser.run('BookEntry')
 
      importer = TagImporter.new(results, configuration)
      importer.import
@@ -111,8 +104,8 @@ class TagImporterTest < Test::Unit::TestCase
      configuration = TagConfiguration.new("colloqial_chinese_config.yml", "colloquial_chinese_lesson_1")
 
      test_file_path = File.dirname(__FILE__) + configuration.file_name
-     parser = BookListParser.new(test_file_path)
-     results = parser.run
+     parser = WordListParser.new(test_file_path)
+     results = parser.run('BookEntry')
 
      importer = TagImporter.new(results, configuration)
      importer.import
@@ -122,8 +115,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("npcr_config.yml", "npcr_1")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
 
     importer = TagImporter.new(results, configuration)
     importer.import()
@@ -133,8 +126,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("pcr_config.yml", "pcr_1")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
 
     importer = TagImporter.new(results, configuration)
     importer.import()
@@ -144,8 +137,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("pimsleur_config.yml", "pimsleur1_1")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
 
     importer = TagImporter.new(results, configuration)
     importer.import()
@@ -155,8 +148,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("schaums_config.yml", "schaums_direction")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
     
     importer = TagImporter.new(results, configuration)
     importer.import()
@@ -166,8 +159,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("frequency_config.yml", "frequency_1")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
     
     importer = TagImporter.new(results, configuration)
     importer.import()
@@ -177,8 +170,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("hsk_config.yml", "hsk_4")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = HSKParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('HSKEntry')
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
@@ -188,8 +181,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("integrated_chinese_config.yml", "ic_intro_numbers")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
     breakpoint
     
     importer = TagImporter.new(results, configuration)
@@ -200,8 +193,8 @@ class TagImporterTest < Test::Unit::TestCase
     configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
 
     test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = BookListParser.new(test_file_path)
-    results = parser.run()
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('BookEntry')
     breakpoint
     
     importer = TagImporter.new(results, configuration)

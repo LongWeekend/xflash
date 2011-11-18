@@ -5,7 +5,7 @@ class TagImporter
   #### DESC: Class Constructors
   def initialize (data, configuration)
     @config = {}
-    @tag_id = 0
+    @tag_id = nil
     
     # Metadata for the tag itself
     @config[:metadata] = configuration
@@ -29,32 +29,15 @@ class TagImporter
     return self
   end
   
+  def tag_id
+    @tag_id
+  end
+  
   def self.tear_down_all_tags
     connect_db()
     
     $cn.execute("TRUNCATE TABLE card_tag_link")
     $cn.execute("TRUNCATE TABLE tags_staging")
-  end
-  
-  def clean_existing_tags_staging
-    # Make sure we have the shortname and its not blank
-    short_name = @config[:metadata].short_name()
-    if short_name.strip().length() <= 0
-      raise "Short_name is not provided in the configuration meta data, hence exception is thrown!"
-    end
-
-    # Prepare for the checking whether the existing tag has been inserted before.
-    connect_db()
-    removed_tag_id = -1
-    select_query = "SELECT tag_id FROM tags_staging WHERE short_name = '%s'" % [short_name] 
-    $cn.execute(select_query).each do |tag_id|
-      removed_tag_id = tag_id[0]
-    end
-    
-    if removed_tag_id >= 0
-      $cn.execute("DELETE FROM tags_staging WHERE tag_id='#{removed_tag_id}'")
-      $cn.execute("DELETE FROM card_tag_link WHERE tag_id='#{removed_tag_id}'")
-    end
   end
   
   def log(string, print_both=false)
@@ -76,18 +59,12 @@ class TagImporter
   end
   
   def setup_tag_row
-    # Clean up before doing anything first.
-    clean_existing_tags_staging
-    # Try to connect to the database
     connect_db()
-      
-    # Grab the config
     config = @config[:metadata]
     
     # If the shortname is longer than 20 characters, throw an exception as the table structure
     # for tags_staging, the shortname is only for 20 characters long.
     if config.short_name.length > 20
-      breakpoint
       raise "The shortname for tag name #{config.tag_name} cannot be longer than 20 characters."
     end
     
