@@ -2,6 +2,74 @@ require 'test/unit'
 
 class TagImporterTest < Test::Unit::TestCase
   
+  include DatabaseHelpers
+
+  def test_cache
+    TagImporter.get_all_cards_from_db()
+    
+    #TODO: get this number on the spot from cards_staging
+    # The total number of entries (currently) -- make sure we have them all
+    assert_equal(98314,$card_entries.count)
+    
+    # Total number of cards that are duplicates
+    #SELECT SUM(count) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
+    #3622
+    assert_equal((98314 - 3622),$card_entries_by_headword[:simp].count)
+    
+    # Number of headwords that have duplicates
+    #SELECT COUNT(headword_simp) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
+    #1714
+    
+    #SELECT COUNT(headword_trad) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
+    #1470
+    
+    #SELECT SUM(count) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
+    #3069
+  end
+
+  def test_import_starred_tag
+    # Clear out everything first, then import
+    TagImporter.tear_down_all_tags
+
+    # For starred words
+    configuration = TagConfiguration.new("system_tags.yml", "starred")
+    importer = TagImporter.new(nil, configuration)
+    importer.import
+
+    # My Starred Words should also be editable and have 0 cards
+    $cn.execute("SELECT count(*) as count, editable from tags_staging WHERE tag_name LIKE 'My Starred Words'").each do |rec|
+      assert_equal(0, rec[0])
+      assert_equal(1, rec[1])
+    end
+  end
+    
+  def test_import_lwe_favs
+    # Clear out everything first, then import
+    TagImporter.tear_down_all_tags
+
+    # For LWE's Favourite - get them parsed
+    configuration = TagConfiguration.new("system_tags.yml", "lwe_favs")
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    
+    parser = CSVParser.new(test_file_path)
+    entries = parser.run
+    assert_equal(13,entries.count)
+    
+    importer = TagImporter.new(entries, configuration)
+    importer.import
+    
+    # LWE should be editable
+    $cn.execute("SELECT tag_id, editable from tags_staging WHERE tag_name LIKE 'Long Weekend Favorites'").each do |tag_id, editable|
+      assert_equal(1, editable)
+      assert_equal(1, tag_id) # We already added starred words as ID = 0
+    end
+    
+    # LWE should have 13 cards
+    $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '1'").each do |tag_count_rec|
+      assert_equal(13, tag_count_rec[0])
+    end
+  end
+  
   def test_import_800_small
     configuration = TagConfiguration.new("file_800_config.yml", "tag_800_test_file_small")
     
@@ -22,47 +90,21 @@ class TagImporterTest < Test::Unit::TestCase
     
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = CSVParser.new(test_file_path)
-    results = parser.run()
+    results = parser.run
     
     importer = TagImporter.new(results, configuration)
-    importer.import()
+    importer.import
   end
-
-=begin  
-  def test_800_fail
-    test_file_path = File.dirname(__FILE__) + "/../../../../data/cedict/tags/test_800+800020100915-rare_cases.csv"
-    parser = CSVParser.new(test_file_path)
-    results = parser.run()
     
-    test_configuration_file = File.dirname(__FILE__) + "/../../../../config/tags_config/file_800_config.yml"
-    configuration = TagsBaseConfiguration.new(test_configuration_file)
-    
-    importer = Tags800WordsImporter.new(results, configuration)
-    importer.import()
-  end
-=end
-  
-  def test_import_system_tags
-    # For starred words
-    configuration = TagConfiguration.new("system_tags.yml", "starred")
-    importer = TagImporter.new(nil, configuration)
-    importer.import()
-    
-    # For LWE's Favourite
-    configuration = TagConfiguration.new("system_tags.yml", "lwe_favs")
-    importer = TagImporter.new(nil, configuration)
-    importer.import()
-  end
-  
   def test_import_beg_chinese
      configuration = TagConfiguration.new("beg_chinese_config.yml", "beg_chinese_lesson_1")
 
      test_file_path = File.dirname(__FILE__) + configuration.file_name
      parser = BookListParser.new(test_file_path)
-     results = parser.run()
+     results = parser.run
 
      importer = TagImporter.new(results, configuration)
-     importer.import()
+     importer.import
   end
   
   def test_import_colloquial_chinese
@@ -70,10 +112,10 @@ class TagImporterTest < Test::Unit::TestCase
 
      test_file_path = File.dirname(__FILE__) + configuration.file_name
      parser = BookListParser.new(test_file_path)
-     results = parser.run()
+     results = parser.run
 
      importer = TagImporter.new(results, configuration)
-     importer.import()
+     importer.import
   end
   
   def test_import_npcr
@@ -137,7 +179,6 @@ class TagImporterTest < Test::Unit::TestCase
     test_file_path = File.dirname(__FILE__) + configuration.file_name
     parser = HSKParser.new(test_file_path)
     results = parser.run()
-    breakpoint
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
