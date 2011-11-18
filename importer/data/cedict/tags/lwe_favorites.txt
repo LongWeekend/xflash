@@ -1,12 +1,13 @@
-580,3-580,周末,zhou1 mo4,weekend,,
-221,3-221,节日,jie2 ri4,holiday; festival; CL:個|个[ge4],,
-650,3-334,啤酒,pi2 jiu3,"beer; CL:杯[bei1],瓶[ping2],罐[guan4],桶[tong3],缸[gang1]",,
-69,6-9,扎啤,zha1 pi2,draught beer,,
-69,6-9,科罗娜,Ke1 luo2 nuo2,Corona (beer),,69,6-9,芝加哥,Zhi1 jia1 ge1,"Chicago, USA",,
-69,6-9,东京,Dong1 jing1,"Tokyo, Japan",,
-69,6-9,墨尔本,Mo4 er3 ben3,"Melbourne, Australia",,
-69,6-9,纽约市,Niu3 Yue1 shi4,New York City,,
-69,6-9,休假,xiu1 jia4,to take a vacation/holiday,,
-69,6-9,黄金周,huang2 jin1 zhou1,Golden Week (in PRC),,
-69,6-9,度假区,du4 jia4 qu1,vacation (resort),,
-69,6-9,海滩,hai3 tan1,beach,,
+580,"3-580","周末","zhou1 mo4","weekend","",""
+221,"3-221","节日","jie2 ri4","holiday; festival; CL:個|个[ge4]","",""
+650,"3-334","啤酒","pi2 jiu3,"beer; CL:杯[bei1],瓶[ping2],罐[guan4],桶[tong3],缸[gang1]","",""
+69,"6-9","扎啤","zha1 pi2","draught beer","",""
+69,"6-9","科罗娜","Ke1 luo2 nuo2","Corona (beer),"",""
+69,"6-9","芝加哥","Zhi1 jia1 ge1","Chicago, USA","",""
+69,"6-9","东京","Dong1 jing1,"Tokyo, Japan","",""
+69,"6-9","墨尔本","Mo4 er3 ben3,"Melbourne, Australia","",""
+69,"6-9","纽约市","Niu3 Yue1 shi4","New York City","",""
+69,"6-9","休假","xiu1 jia4","to take a vacation/holiday","",""
+69,"6-9","黄金周","huang2 jin1 zhou1","Golden Week (in PRC)","",""
+69,"6-9","度假区","du4 jia4 qu1","vacation (resort)","",""
+69,"6-9","海滩","hai3 tan1","beach","",""
