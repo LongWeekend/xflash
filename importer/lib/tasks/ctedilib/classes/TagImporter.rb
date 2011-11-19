@@ -191,7 +191,11 @@ class TagImporter
     criteria = Proc.new do |dict_entry, tag_entry|
     
       # Comparing the pinyin/reading - ignore case for now
-      same_pinyin = (dict_entry.pinyin.downcase == tag_entry.pinyin.downcase)
+      if tag_entry.pinyin.length > 0
+        same_pinyin = (dict_entry.pinyin.downcase == tag_entry.pinyin.downcase)
+      elsif tag_entry.pinyin_diacritic
+        same_pinyin = (dict_entry.pinyin_diacritic.downcase == tag_entry.pinyin_diacritic.downcase)
+      end
       same_meaning = false
       #    intersection = (meanings & entry.meanings)
       #    same_meaning = intersection.length() > 0

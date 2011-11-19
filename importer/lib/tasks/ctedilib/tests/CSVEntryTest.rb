@@ -17,7 +17,8 @@ class CSVEntryTest < Test::Unit::TestCase
     assert_equal("愛戴",entry.headword_trad)
     assert_equal("",entry.headword_simp)
     assert_equal(["VS"],entry.pos)
-    assert_equal("àidài",entry.pinyin)
+    assert_equal("àidài",entry.pinyin_diacritic)
+    assert_equal("",entry.pinyin)
   end
   
   def test_parse_meaning

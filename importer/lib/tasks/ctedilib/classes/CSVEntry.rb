@@ -16,13 +16,28 @@ class CSVEntry < Entry
     # This stops us from getting headers and other non-data rows
     if segments.count == 7 and segments[0].numeric?
       @headword_trad = segments[2].gsub("\"","").strip
-      # This extra function call strips out any "stupid" round  tone-3 unicode points and replaces them with angled ones
-      @pinyin = Entry.fix_unicode_for_tone_3(segments[3].gsub("\"","").strip)
+
+      # This extra function call strips ouet any "stupid" round  tone-3 unicode points and replaces them with angled ones
+      pinyin = segments[3].gsub("\"","").strip
+      pinyin = Entry.fix_unicode_for_tone_3(pinyin)
+      
+      # Test if the reading is already encoded
+      stripped_numbers = pinyin.gsub(/[1-5]+/,"")
+      
+      if (stripped_numbers == pinyin)
+        @pinyin_diacritic = pinyin
+      else
+        @pinyin = pinyin
+        @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(pinyin)
+      end
+      
       @grade = segments[4].gsub("\"","").strip
       pos_with_parens = segments[5].gsub("\"","")
       @pos << pos_with_parens[1..(pos_with_parens.length-2)]
+
       # We dont want the extra quotes in the end of the meaning, do we?
       clean_raw_meanings = segments[6].chop().gsub("\"","")
+      
       # Get the meanings with the comma separated, 
       # also, make sure we dont include the spaces.
       @meanings = Array.new()

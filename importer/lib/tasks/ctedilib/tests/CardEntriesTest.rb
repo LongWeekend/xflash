@@ -18,8 +18,10 @@ class CardEntriesTest < Test::Unit::TestCase
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
     
+    TagImporter.get_all_cards_from_db()
     result = TagImporter.find_cards_similar_to(entry)
-    assert_equal(result.headword_trad, entry.headword_trad)
+    assert_equal(1, result.count)
+    assert_equal(result[0].headword_trad, entry.headword_trad)
   end
     
   def test_similarity_exact_true
