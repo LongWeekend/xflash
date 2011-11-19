@@ -2,7 +2,8 @@ pcr_1_5:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 1-5"
     tag_type: ""
     short_name: "pcr-lesson-1-5"
@@ -16,7 +17,8 @@ pcr_6:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson6.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 6"
     tag_type: ""
     short_name: "pcr-lesson-6"
@@ -30,7 +32,8 @@ pcr_7:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson7.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 7"
     tag_type: ""
     short_name: "pcr-lesson-7"
@@ -44,7 +47,8 @@ pcr_8:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson8.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 8"
     tag_type: ""
     short_name: "pcr-lesson-8"
@@ -58,7 +62,8 @@ pcr_9:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson9.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 9"
     tag_type: ""
     short_name: "pcr-lesson-9"
@@ -72,7 +77,8 @@ pcr_10:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 10"
     tag_type: ""
     short_name: "pcr-lesson-10"
@@ -86,7 +92,8 @@ pcr_11:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson11.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 11"
     tag_type: ""
     short_name: "pcr-lesson-11"
@@ -100,7 +107,8 @@ pcr_12:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson12.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 12"
     tag_type: ""
     short_name: "pcr-lesson-12"
@@ -114,7 +122,8 @@ pcr_13:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson13.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 13"
     tag_type: ""
     short_name: "pcr-lesson-13"
@@ -128,7 +137,8 @@ pcr_14:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson14.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 14"
     tag_type: ""
     short_name: "pcr-lesson-14"
@@ -142,7 +152,8 @@ pcr_15:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 15"
     tag_type: ""
     short_name: "pcr-lesson-15"
@@ -156,7 +167,8 @@ pcr_16:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson16.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 16"
     tag_type: ""
     short_name: "pcr-lesson-16"
@@ -170,7 +182,8 @@ pcr_17:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson17.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 17"
     tag_type: ""
     short_name: "pcr-lesson-17"
@@ -184,7 +197,8 @@ pcr_18:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson18.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 18"
     tag_type: ""
     short_name: "pcr-lesson-18"
@@ -198,7 +212,8 @@ pcr_19:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson19.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 19"
     tag_type: ""
     short_name: "pcr-lesson-19"
@@ -212,7 +227,8 @@ pcr_20:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 20"
     tag_type: ""
     short_name: "pcr-lesson-20"
@@ -226,7 +242,8 @@ pcr_21:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson21.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 21"
     tag_type: ""
     short_name: "pcr-lesson-21"
@@ -240,7 +257,8 @@ pcr_22:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson22.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 22"
     tag_type: ""
     short_name: "pcr-lesson-22"
@@ -254,7 +272,8 @@ pcr_23:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson23.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 23"
     tag_type: ""
     short_name: "pcr-lesson-23"
@@ -268,7 +287,8 @@ pcr_24:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson24.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 24"
     tag_type: ""
     short_name: "pcr-lesson-24"
@@ -282,7 +302,8 @@ pcr_25:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 25"
     tag_type: ""
     short_name: "pcr-lesson-25"
@@ -296,7 +317,8 @@ pcr_26:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson26.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 26"
     tag_type: ""
     short_name: "pcr-lesson-26"
@@ -310,7 +332,8 @@ pcr_27:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson27.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 27"
     tag_type: ""
     short_name: "pcr-lesson-27"
@@ -324,7 +347,8 @@ pcr_28:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson28.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 28"
     tag_type: ""
     short_name: "pcr-lesson-28"
@@ -338,7 +362,8 @@ pcr_29:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson29.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 29"
     tag_type: ""
     short_name: "pcr-lesson-29"
@@ -352,7 +377,8 @@ pcr_30:
     file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "PCR1 Lesson 30"
     tag_type: ""
     short_name: "pcr-lesson-30"

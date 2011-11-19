@@ -2,7 +2,8 @@ schaums_asking_for_directions:
     file_name: "/../../../../data/cedict/tags/books/schaums/ASKING FOR DIRECTIONS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Asking For Directions"
     tag_type: ""
     short_name: "schaums_direction"
@@ -16,7 +17,8 @@ schaums_at_home:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT HOME.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At Home"
     tag_type: ""
     short_name: "schaums_home"
@@ -30,7 +32,8 @@ schaums_at_the_airport:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE AIRPORT.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Airport"
     tag_type: ""
     short_name: "schaums_airport"
@@ -44,7 +47,8 @@ schaums_at_the_bank:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE BANK.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Bank"
     tag_type: ""
     short_name: "schaums_bank"
@@ -58,7 +62,8 @@ schaums_at_the_clothing_store:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE CLOTHING STORE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Clothing Store"
     tag_type: ""
     short_name: "schaums_clothing_s"
@@ -72,7 +77,8 @@ schaums_at_the_dry_cleaner:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE DRY CLEANER.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Dry Cleaners"
     tag_type: ""
     short_name: "schaums_dry_cleaner"
@@ -86,7 +92,8 @@ schaums_at_the_hospital:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE HOSPITAL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Hospital"
     tag_type: ""
     short_name: "schaums_hospital"
@@ -100,7 +107,8 @@ schaums_at_the_hotel:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE HOTEL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Hotel"
     tag_type: ""
     short_name: "schaums_hotel"
@@ -114,7 +122,8 @@ schaums_at_the_post_office:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE POST OFFICE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Post Office"
     tag_type: ""
     short_name: "schaums_post_office"
@@ -128,7 +137,8 @@ schaums_at_the_restaurant:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE RESTAURANT.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Restaurant"
     tag_type: ""
     short_name: "schaums_restaurant"
@@ -142,7 +152,8 @@ schaums_at_the_theater_and_the_movies:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE THEATER AND THE MOVIES.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Theater/Movies"
     tag_type: ""
     short_name: "schaums_movies"
@@ -156,7 +167,8 @@ schaums_at_the_train_station:
     file_name: "/../../../../data/cedict/tags/books/schaums/AT THE TRAIN STATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "At the Train Station"
     tag_type: ""
     short_name: "schaums_trainstation"
@@ -170,7 +182,8 @@ schaums_business:
     file_name: "/../../../../data/cedict/tags/books/schaums/BUSINESS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Business"
     tag_type: ""
     short_name: "schaums_business"
@@ -184,7 +197,8 @@ schaums_computer_and_internet:
     file_name: "/../../../../data/cedict/tags/books/schaums/COMPUTER AND INTERNET.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Computer And Internet"
     tag_type: ""
     short_name: "schaums_computer"
@@ -198,7 +212,8 @@ schaums_education:
     file_name: "/../../../../data/cedict/tags/books/schaums/EDUCATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Education"
     tag_type: ""
     short_name: "schaums_education"
@@ -212,7 +227,8 @@ schaums_making_a_phone_call:
     file_name: "/../../../../data/cedict/tags/books/schaums/MAKING A PHONE CALL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Making A Phone Call"
     tag_type: ""
     short_name: "schaums_phone_call"
@@ -226,7 +242,8 @@ schaums_on_the_airplane:
     file_name: "/../../../../data/cedict/tags/books/schaums/ON THE AIRPLANE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "On the Airplane"
     tag_type: ""
     short_name: "schaums_airplane"
@@ -240,7 +257,8 @@ schaums_passport_control_and_customs:
     file_name: "/../../../../data/cedict/tags/books/schaums/PASSPORT CONTROL AND CUSTOMS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Passport Control and Customs"
     tag_type: ""
     short_name: "schaums_customs"
@@ -254,7 +272,8 @@ schaums_public_transportation:
     file_name: "/../../../../data/cedict/tags/books/schaums/PUBLIC TRANSPORTATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Public Transportation"
     tag_type: ""
     short_name: "schaums_transport"
@@ -268,7 +287,8 @@ schaums_shopping_for_food:
     file_name: "/../../../../data/cedict/tags/books/schaums/SHOPPING FOR FOOD.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Shopping For Food"
     tag_type: ""
     short_name: "schaums_shop_food"
@@ -282,7 +302,8 @@ schaums_sports:
     file_name: "/../../../../data/cedict/tags/books/schaums/SPORTS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Sports"
     tag_type: ""
     short_name: "schaums_sports"
@@ -296,7 +317,8 @@ schaums_the_automobile:
     file_name: "/../../../../data/cedict/tags/books/schaums/THE AUTOMOBILE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Automobile"
     tag_type: ""
     short_name: "schaums_automobile"
@@ -310,7 +332,8 @@ schaums_the_weather:
     file_name: "/../../../../data/cedict/tags/books/schaums/THE WEATHER.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Weather"
     tag_type: ""
     short_name: "schaums_weather"

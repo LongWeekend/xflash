@@ -33,6 +33,10 @@ class TagConfiguration
     return false
   end
   
+  def entry_type
+    return @configuration["entry_type"]
+  end
+  
   def tag_name
     return @configuration["tag_name"] 
   end

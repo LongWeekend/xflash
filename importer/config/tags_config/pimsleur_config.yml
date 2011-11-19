@@ -2,7 +2,8 @@ pimsleur1_1:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 1-5"
     tag_type: ""
     short_name: "pimsleur_1-1-5"
@@ -16,7 +17,8 @@ pimsleur1_2:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 6-10"
     tag_type: ""
     short_name: "pimsleur_1-6-10"
@@ -30,7 +32,8 @@ pimsleur1_3:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 11-15"
     tag_type: ""
     short_name: "pimsleur_1-11-15"
@@ -44,7 +47,8 @@ pimsleur1_4:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 16-20"
     tag_type: ""
     short_name: "pimsleur_1-16-20"
@@ -58,7 +62,8 @@ pimsleur1_5:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 21-25"
     tag_type: ""
     short_name: "pimsleur_1-21-25"
@@ -72,7 +77,8 @@ pimsleur1_6:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 1 Lesson 26-30"
     tag_type: ""
     short_name: "pimsleur_1-26-30"
@@ -86,7 +92,8 @@ pimsleur2_1:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 1-5"
     tag_type: ""
     short_name: "pimsleur_2-1-5"
@@ -100,7 +107,8 @@ pimsleur2_2:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 6-10"
     tag_type: ""
     short_name: "pimsleur_2-6-10"
@@ -114,7 +122,8 @@ pimsleur2_3:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 11-15"
     tag_type: ""
     short_name: "pimsleur_2-11-15"
@@ -128,7 +137,8 @@ pimsleur2_4:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 16-20"
     tag_type: ""
     short_name: "pimsleur_2-16-20"
@@ -142,7 +152,8 @@ pimsleur2_5:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 21-25"
     tag_type: ""
     short_name: "pimsleur_2-21-25"
@@ -156,7 +167,8 @@ pimsleur2_6:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 2 Lesson 26-30"
     tag_type: ""
     short_name: "pimsleur_2-26-30"
@@ -170,7 +182,8 @@ pimsleur3_1:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 1-5"
     tag_type: ""
     short_name: "pimsleur_3-1-5"
@@ -184,7 +197,8 @@ pimsleur3_2:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 6-10"
     tag_type: ""
     short_name: "pimsleur_3-6-10"
@@ -198,7 +212,8 @@ pimsleur3_3:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 11-15"
     tag_type: ""
     short_name: "pimsleur_3-11-15"
@@ -212,7 +227,8 @@ pimsleur3_4:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 16-20"
     tag_type: ""
     short_name: "pimsleur_3-16-20"
@@ -226,7 +242,8 @@ pimsleur3_5:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 21-25"
     tag_type: ""
     short_name: "pimsleur_3-21-25"
@@ -240,7 +257,8 @@ pimsleur3_6:
     file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Ch. 3 Lesson 26-30"
     tag_type: ""
     short_name: "pimsleur_3-26-30"

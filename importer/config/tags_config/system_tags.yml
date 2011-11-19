@@ -17,7 +17,8 @@ lwe_favs:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_name: "/../../../../data/cedict/tags/lwe_favorites.txt"
-    file_parser: "CSVParser"
+    file_parser: "WordListParser"
+    entry_type: "CSVEntry"
     tag_name: "Long Weekend Favorites"
     tag_type: ""
     short_name: "lwe_favs"

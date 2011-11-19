@@ -10,8 +10,11 @@ tags_800_1_beginner:
     # Class used for importing the data to the database
     file_importer: "TagImporter"
         
+    entry_type: "CSVEntry"
+
     # Class used for parsing and reading the data into memory
     file_parser: "CSVParser"
+    
     # Not used yet
     file_tolerance: "tone"          
     
@@ -42,7 +45,8 @@ tags_800_2_intermediate:
     file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "CSVParser"
+    file_parser: "WordListParser"
+    entry_type: "CSVEntry"
     tag_name: "TOCFL (TOP) Intermediate"
     tag_type: ""
     short_name: "SC-TOP-intermediate"
@@ -57,7 +61,8 @@ tags_800_3_advance:
     file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "CSVParser"
+    file_parser: "WordListParser"
+    entry_type: "CSVEntry"
     tag_name: "TOCFL (TOP) Advanced"
     tag_type: ""
     short_name: "SC-TOP-advanced"
@@ -72,7 +77,8 @@ tag_800_test_file_small:
     file_name: "/../../../../data/cedict/tags/test_800+800020100915.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "CSVParser"
+    file_parser: "WordListParser"
+    entry_type: "CSVEntry"
     tag_name: "800+ Sample"
     tag_type: ""
     short_name: "800Words+SampleTag"

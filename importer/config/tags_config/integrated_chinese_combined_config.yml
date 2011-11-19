@@ -2,7 +2,8 @@ ic_intro_numbers:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Numbers.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Introduction to Numbers"
     tag_type: ""
     short_name: "ic_intro_numbers"
@@ -16,7 +17,8 @@ ic_intro_radicals:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Radicals.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Introduction to Radicals"
     tag_type: ""
     short_name: "ic_intro_radicals"
@@ -30,7 +32,8 @@ ic_intro_date_and_time:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Dates and Time.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Introduction to Date Time"
     tag_type: ""
     short_name: "ic_intro_date_time"
@@ -44,7 +47,8 @@ ic_1:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 1"
     tag_type: ""
     short_name: "ic_1_combined"
@@ -58,7 +62,8 @@ ic_2:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 2_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 2"
     tag_type: ""
     short_name: "ic_2_combined"
@@ -72,7 +77,8 @@ ic_3:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 3_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 3"
     tag_type: ""
     short_name: "ic_3_combined"
@@ -86,7 +92,8 @@ ic_4:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 4_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 4"
     tag_type: ""
     short_name: "ic_4_combined"
@@ -100,7 +107,8 @@ ic_5:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 5_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 5"
     tag_type: ""
     short_name: "ic_5_combined"
@@ -114,7 +122,8 @@ ic_6:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 6_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 6"
     tag_type: ""
     short_name: "ic_6_combined"
@@ -128,7 +137,8 @@ ic_7:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 7_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 7"
     tag_type: ""
     short_name: "ic_7_combined"
@@ -142,7 +152,8 @@ ic_8:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 8_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 8"
     tag_type: ""
     short_name: "ic_8_combined"
@@ -156,7 +167,8 @@ ic_9:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 9_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 9"
     tag_type: ""
     short_name: "ic_9_combined"
@@ -170,7 +182,8 @@ ic_10:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 10_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 10"
     tag_type: ""
     short_name: "ic_10_combined"
@@ -184,7 +197,8 @@ ic_11:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 11_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 11"
     tag_type: ""
     short_name: "ic_11_combined"
@@ -198,7 +212,8 @@ ic_12:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 12_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 12"
     tag_type: ""
     short_name: "ic_12_combined"
@@ -212,7 +227,8 @@ ic_13:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 13_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 13"
     tag_type: ""
     short_name: "ic_13_combined"
@@ -226,7 +242,8 @@ ic_14:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 14_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 14"
     tag_type: ""
     short_name: "ic_14_combined"
@@ -240,7 +257,8 @@ ic_15:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 15_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 15"
     tag_type: ""
     short_name: "ic_15_combined"
@@ -254,7 +272,8 @@ ic_16:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 16_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 16"
     tag_type: ""
     short_name: "ic_16_combined"
@@ -268,7 +287,8 @@ ic_17:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 17_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 17"
     tag_type: ""
     short_name: "ic_17_combined"
@@ -282,7 +302,8 @@ ic_18:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 18_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 18"
     tag_type: ""
     short_name: "ic_18_combined"
@@ -296,7 +317,8 @@ ic_19:
     file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 19_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Integrated Chinese 19"
     tag_type: ""
     short_name: "ic_19_combined"

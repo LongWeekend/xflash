@@ -2,7 +2,8 @@ frequency_1:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_1-100.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 1-100"
     tag_type: ""
     short_name: "frequency-1-100"
@@ -16,7 +17,8 @@ frequency_2:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_101-200.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 101-200"
     tag_type: ""
     short_name: "frequency-101-200"
@@ -30,7 +32,8 @@ frequency_3:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_201-300.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 201-300"
     tag_type: ""
     short_name: "frequency-201-300"
@@ -44,7 +47,8 @@ frequency_4:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_301-400.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 301-400"
     tag_type: ""
     short_name: "frequency-301-400"
@@ -58,7 +62,8 @@ frequency_5:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_401-500.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 401-500"
     tag_type: ""
     short_name: "frequency-401-500"
@@ -72,7 +77,8 @@ frequency_6:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_501-600.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 501-600"
     tag_type: ""
     short_name: "frequency-501-600"
@@ -86,7 +92,8 @@ frequency_7:
     file_name: "/../../../../data/cedict/tags/frequency/frequency_list_601-700.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Characters 601-700"
     tag_type: ""
     short_name: "frequency-601-700"

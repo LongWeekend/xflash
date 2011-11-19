@@ -81,7 +81,7 @@ class GroupImporter
       test_file_path = File.dirname(__FILE__) + configuration.file_name
       # Get the designated parser for the tag 
       parser = configuration.file_parser.constantize.new(test_file_path)
-      results = parser.run()
+      results = parser.run(configuration.entry_type)
     end
 
     # Get the class of the importer used

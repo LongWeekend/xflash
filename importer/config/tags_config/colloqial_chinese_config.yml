@@ -2,7 +2,8 @@ colloquial_chinese_lesson_1:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 1"
     tag_type: ""
     short_name: "ColloquialChinese1"
@@ -17,7 +18,8 @@ colloquial_chinese_lesson_2:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson2.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 2"
     tag_type: ""
     short_name: "ColloquialChinese2"
@@ -32,7 +34,8 @@ colloquial_chinese_lesson_3:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson3.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 3"
     tag_type: ""
     short_name: "ColloquialChinese3"
@@ -47,7 +50,8 @@ colloquial_chinese_lesson_4:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson4.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 4"
     tag_type: ""
     short_name: "ColloquialChinese4"
@@ -62,7 +66,8 @@ colloquial_chinese_lesson_5:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 5"
     tag_type: ""
     short_name: "ColloquialChinese5"
@@ -77,7 +82,8 @@ colloquial_chinese_lesson_6:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson6.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 6"
     tag_type: ""
     short_name: "ColloquialChinese6"
@@ -92,7 +98,8 @@ colloquial_chinese_lesson_7:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson7.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 7"
     tag_type: ""
     short_name: "ColloquialChinese7"
@@ -107,7 +114,8 @@ colloquial_chinese_lesson_8:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson8.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 8"
     tag_type: ""
     short_name: "ColloquialChinese8"
@@ -122,7 +130,8 @@ colloquial_chinese_lesson_9:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson9.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 9"
     tag_type: ""
     short_name: "ColloquialChinese9"
@@ -137,7 +146,7 @@ colloquial_chinese_lesson_10:
     file_name: "/../../../../data/cedict/tags/books/colloqial_chinese_Lesson10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_parser: "BookListParser"
+    file_parser: "WordListParser"
     tag_name: "Colloquial Chinese 10"
     tag_type: ""
     short_name: "ColloquialChinese10"
