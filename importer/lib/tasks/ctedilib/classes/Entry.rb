@@ -168,9 +168,10 @@ class Entry
             diacritic = Entry.get_unicode_for_diacritic(vocal, tone)
             result << reading.sub(vocal, diacritic)
           else
-            puts "The vocal to be sub with its diacritic is not found for readings: %s, vocals: %s, reading: %s and tone: %s" % [readings, vocals, reading, tone]
+            # This should be a very rare cases.
+            raise ToneParseException, "The vocal to be sub with its diacritic is not found for readings: %s, vocals: %s, reading: %s and tone: %s" % [readings, vocals, reading, tone]
           end
-        elsif (reading.match($regexes[:one_capital_letter]))
+        elsif (reading.match($regexes[:single_letter]))
           # If there is a single letter reading, 
           # it is usually either an acronym or a single letter. (like ka-la-o-k) - Karaoke
           # Put them just as is
@@ -178,10 +179,8 @@ class Entry
         elsif (reading.match($regexes[:pinyin_separator]))
           result << " %s " % [reading]
         else
-          # Give the feedback if we dont know what to do
-          # This should be a very rare cases. (Throw an exception maybe?)
-          # TODO: MMA 11.18.2011 - throw an exception so we can check w/ the DB and try again
-          puts "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
+          # This should be a very rare cases.
+          raise ToneParseException, "There is no tone: %s defined for pinyin reading: %s in readings: %s" % [tone, reading, readings]
         end
         
         # Add a space if we were asked to
@@ -310,7 +309,7 @@ class Entry
   def to_insert_sql
     insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s);"
 #    serialised_cedict_hash = mysql_serialise_ruby_object(self)
-    all_tags_list = combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
+    all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
         mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),

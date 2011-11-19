@@ -128,7 +128,8 @@ $regexes[:chinese_reading] = /[A-Za-zü:]*[1-5]{1}/
 $regexes[:pinyin_tone] = /^[0-5]{1}/
 $regexes[:pinyin_tone_without_normal] = /^[0-4]{1,}/
 $regexes[:pinyin_separator] = /^[,·]/
-$regexes[:one_capital_letter] = /^[A-Z]{1}/
+$regexes[:single_letter] = /^[A-Za-z]{1}/
+$regexes[:inlined_tags] = /\(([^\)]*)\)$/
 
 # OLD JFLASH REGEXES
 # $regexes[:number_marker] = /\(\d?\d?\)\s{1}/

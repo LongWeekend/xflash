@@ -12,4 +12,15 @@ class Array
     end unless !another_array.kind_of?(Array)
   end
   
+  # DESC: Combines arrays and ensures they are flatten/compacted/unique
+  def self.combine_and_uniq_arrays(array1, *others)
+    result = []
+    result << array1
+    others.each do |arr|
+      result << arr
+    end
+    return result.flatten.compact.uniq
+  end
+
+  
 end

@@ -53,10 +53,16 @@ class CEdictParser < Parser
             end
           end
         end
-      rescue Exception => e
+      rescue EntryParseException => e
         prt "Could not parse line #%s: %s" % [line_no, line]
         prt "Message: %s\n" % e.message
         prt "Backtrace: %s\n" % e.backtrace.inspect
+      rescue ToneParseException => e
+        prt "Could not parse line #%s: %s" % [line_no, line]
+        prt "Message: %s\n" % e.message
+      rescue MeaningParseException => e
+        prt "Could not parse line #%s: %s" % [line_no, line]
+        prt "Message: %s\n" % e.message
       end
     end
     

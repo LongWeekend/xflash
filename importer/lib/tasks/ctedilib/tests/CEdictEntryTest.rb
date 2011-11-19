@@ -8,16 +8,20 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry.init
     entry.parse_line(nil)
   end
-
-  # Test erhua parsing
-  def test_get_erhua_variant
+  
+  def test_comment
     entry = CEdictEntry.new
-    entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /erhua variant of 旁邊|旁边, lateral")
-    assert_equal(true,entry.is_erhua_variant?)
+    entry.init
+    entry.parse_line("# foobar")
+  end
+  
+  # Test exception thrown if data input is bad
+  def test_bad_input_exception
+    entry = CEdictEntry.new
+    entry.parse_line("播放機 播放机 [bo1 fang4 ji1 /erhua variant of 旁邊|旁边, lateral")
   end
 
   # Tests that basic headword and reading can be parsed
-
   def test_parse_headword_and_reading
     entry = CEdictEntry.new
     entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /player (e.g. CD player)/")
@@ -60,6 +64,14 @@ class CEdictEntryTest < Test::Unit::TestCase
             Meaning.new("classifier for square things"), Meaning.new("abbr. for square or cubic meter",["abbr"])]
     assert_equal(expected_meanings,entry.meanings)
   end
+
+  # Test erhua parsing
+  def test_get_erhua_variant
+    entry = CEdictEntry.new
+    entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /erhua variant of 旁邊|旁边, lateral")
+    assert_equal(true,entry.is_erhua_variant?)
+  end
+
   # Test ability to extract classifier  
   def test_parse_classifier
     entry = CEdictEntry.new

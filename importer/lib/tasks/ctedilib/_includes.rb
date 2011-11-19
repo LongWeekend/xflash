@@ -9,6 +9,9 @@ load File.dirname(__FILE__) + "/includes/Array+LWE.rb"
 # Helpers
 load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
 
+# Custom Exception class
+load File.dirname(__FILE__) + "/classes/ParseException.rb"
+
 # Different entry types
 load File.dirname(__FILE__) + "/classes/Meaning.rb"
 load File.dirname(__FILE__) + "/classes/Entry.rb"

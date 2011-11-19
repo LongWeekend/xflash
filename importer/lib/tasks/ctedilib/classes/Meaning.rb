@@ -19,37 +19,41 @@ class Meaning
   end
   
   def parse(meaning = "")
-    # Use the one from the initializer if there isn't any on the parse call
-    meaning = @meaning if meaning = ""
-    
-    # First, strip out any references - this populates @reference
-    meaning = strip_reference_from_meaning_str(meaning)
-    meaning = strip_variants_from_meaning_str(meaning)
-    
-    # Get our tags (both full and partial match)
-    tags_by_type = parse_tags_from_meaning_str(meaning)
-    
-    # Snag the fully matching tags, then put them all together
-    fully_matching_tags = tags_by_type[:full_match]
-    
-    if (!fully_matching_tags.empty?)
-      meaning = strip_tags_from_meaning_str(meaning,fully_matching_tags)
+    begin
+      # Use the one from the initializer if there isn't any on the parse call
+      meaning = @meaning if meaning = ""
+      
+      # First, strip out any references - this populates @reference
+      meaning = strip_reference_from_meaning_str(meaning)
+      meaning = strip_variants_from_meaning_str(meaning)
+      
+      # Get our tags (both full and partial match)
+      tags_by_type = parse_tags_from_meaning_str(meaning)
+      
+      # Snag the fully matching tags, then put them all together
+      fully_matching_tags = tags_by_type[:full_match]
+      
+      if (!fully_matching_tags.empty?)
+        meaning = strip_tags_from_meaning_str(meaning,fully_matching_tags)
+      end
+      
+      all_tags = tags_by_type[:full_match]
+      partial_tags = tags_by_type[:partial_match]
+      partial_tags.each do |tag|
+        all_tags << tag if tag.empty? == false
+      end
+      
+      all_tags = transform_tags(all_tags)
+      all_tags.each do |tag|
+        @tags << tag if tag.empty? == false
+      end
+      @meaning = meaning
+      
+      # TODO: should this take an argument?
+      @tags << "abbr" if found_abbreviation?
+    rescue StandardError => e
+      raise MeaningParseException, "Error parsing meaning string '%s'" % [meaning]
     end
-    
-    all_tags = tags_by_type[:full_match]
-    partial_tags = tags_by_type[:partial_match]
-    partial_tags.each do |tag|
-      all_tags << tag if tag.empty? == false
-    end
-    
-    all_tags = transform_tags(all_tags)
-    all_tags.each do |tag|
-      @tags << tag if tag.empty? == false
-    end
-    @meaning = meaning
-    
-    # TODO: should this take an argument?
-    @tags << "abbr" if found_abbreviation?
   end
 
   # Helper function to prevent the above method from getting out-of-control large

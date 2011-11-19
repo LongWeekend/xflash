@@ -6,13 +6,10 @@ class CEdictEntry < Entry
   #===================================
   def parse_line (line = "")
     init
-
     @line_to_parse = line
 
     # A little sanity checking on line
-    if @line_to_parse.nil?
-      return false
-    end
+    return false if @line_to_parse.nil?
     
     # Get the headwords, traditional then simplified
     headword_arr = get_headwords(@line_to_parse)

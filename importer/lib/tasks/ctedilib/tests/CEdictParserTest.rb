@@ -118,5 +118,9 @@ class CEdictParserTest < Test::Unit::TestCase
     expected_meanings = [Meaning.new("store"),Meaning.new("shop"),Meaning.new("Counter: 家[jia1]",["classifier"]),Meaning.new("Counter: 個|个[ge4]",["classifier"])]
     assert_equal(expected_meanings,entries[1].meanings)
   end
+  
+  #==========================================================================================
+  
+  # TODO: Write parser exception tests here
 
 end
