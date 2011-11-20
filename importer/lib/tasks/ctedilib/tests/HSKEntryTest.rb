@@ -5,8 +5,7 @@ class HSKEntryTest < Test::Unit::TestCase
   # Test non-failure on bad data
   def test_bad_input_blank
     entry = CSVEntry.new
-    entry.init
-    entry.parse_line(nil)
+    assert_equal(false, entry.parse_line(nil))
   end
 
   # Tests that basic headword and reading can be parsed

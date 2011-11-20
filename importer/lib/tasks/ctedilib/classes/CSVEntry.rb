@@ -4,13 +4,8 @@ class CSVEntry < Entry
   # Parses a line from the data source
   #===================================
   def parse_line (line = "")
-    init()
-  
     # A little sanity checking on line
-    if line.nil?
-      pp "CSVEntry received a nil line"
-      return false
-    end
+    return false if line.nil?
     
     segments = line.split(",\"")
     # This stops us from getting headers and other non-data rows
@@ -43,6 +38,8 @@ class CSVEntry < Entry
       @meanings = Array.new()
       @meanings.add_element_with_stripping_from_array!(clean_raw_meanings.split(","))
       return true
+    elsif segments[0].gsub("\"","").strip.match($regexes[:single_letter])
+      return false
     else
       raise "Improperly formatted CSV line: %s" % [line]
     end

@@ -10,7 +10,7 @@ class Entry
   # Initializes a new entry
   #===================================
   
-  def init
+  def initialize
     @id = -1
     @pos = []
     @grade = ""
@@ -303,7 +303,7 @@ class Entry
   def self.parse_inline_entry(line = "")
     inline_entry = InlineEntry.new
     inline_entry.parse_line(line)
-    if inline_entry.headword_trad != nil
+    if inline_entry.headword_trad.empty? == false
       return inline_entry
     else
       return nil
@@ -325,7 +325,22 @@ class Entry
   end
   
   def to_update_sql
-    raise "implement me"
+    return false if (id == -1)
+    
+    update_entry_sql = "UPDATE cards_staging SET headword_trad = '%s',headword_simp = '%s',headword_en = '%s',reading = '%s',reading_diacritic = '%s',meaning = '%s',meaning_html = '%s',meaning_fts = '%s',classifier = %s,tags = '%s',referenced_cards = %s,is_reference_only = %s,is_variant = %s,is_erhua_variant = %s,is_proper_noun = %s,variant = %s,cedict_hash = '%s' WHERE card_id = %s;"
+    all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
+
+    return update_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
+        mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),
+        (classifier ? "'"+mysql_escape_str(classifier)+"'" : "NULL"), all_tags_list,
+        (references.empty? ? "NULL" : "'"+mysql_escape_str(references.join(";"))+"'"),
+        (is_only_redirect? ? "1" : "0"),
+        (has_variant? ? "1" : "0"), (is_erhua_variant? ? "1" : "0"),
+        (is_proper_noun? ? "1" : "0"),
+        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"),
+        mysql_serialise_ruby_object(self),
+        id.to_s]
+    
   end
   
   def self.from_sql(record = nil)
@@ -361,6 +376,113 @@ class Entry
     else
       return true
     end
+  end
+  # FORMAT MEANING STRINGS FOR HUMAN CONSUMPTION
+  
+  def meaning_fts(tag_mode="inhuman")
+    meanings_fts_arr   = []
+    sense_count = @meanings.size
+    @meanings.each do |m|
+      if !m.should_skip_fts?
+        meaning_str = m.meaning
+        meaning_str = xfrm_remove_stop_words(meaning_str.strip)
+        meanings_fts_arr << meaning_str unless meanings_fts_arr.include?(meaning_str)
+      end
+    end
+
+    return meanings_fts_arr.join(" ")
+  end
+  
+  def meaning_html(tag_mode="inhuman")
+    meanings_html_arr  = []
+    sense_count = @meanings.size
+    @meanings.each do |m|
+      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m.meaning, tag_mode)
+      mhtml = "<li>#{mhtml}</li>" unless sense_count == 1
+      meanings_html_arr << mhtml
+    end
+    html = meanings_html_arr.collect { |d| d }.join("")
+    html = "<ol>" + html + "</ol>" unless sense_count <= 1
+    return html
+  end
+  
+  def meaning_txt(tag_mode="inhuman")
+    meanings_text_arr  = []
+    sense_count = @meanings.size
+    @meanings.each do |m|
+      mtxt, mhtml = xfrm_inline_tags_with_meaning(@pos, m.meaning, tag_mode)
+      meanings_text_arr << mtxt
+    end
+    return meanings_text_arr.join($delimiters[:jflash_meanings]);
+  end
+
+  ## TRANSFORM 
+  def xfrm_inline_tags_with_meaning(tag_array, meaning_str, tag_mode="inhuman")
+
+    tag_buffer =[]
+
+    # Extract trailing parentheticals, re-insert if not tags!
+    inlined_tags = meaning_str.scan($regexes[:inlined_tags]).to_s
+    meaning_str = meaning_str.gsub($regexes[:inlined_tags], "").strip
+    inlined_tags.split($delimiters[:jflash_inlined_tags]).each do |m|
+      tag_buffer << m if Entry.is_pos_tag?(m)
+    end
+    inlined_tags.strip!
+    meaning_str.strip!
+
+    if tag_buffer.size == 0 and inlined_tags != ""
+      trailing_parentheticals = " (" + inlined_tags + ")"
+    else
+      trailing_parentheticals = ""
+    end
+
+    pos_tag_array = []
+    if !tag_array.nil?
+      tag_array.each do |t|
+        if Entry.is_pos_tag?(t)
+          pos_tag_array << (tag_mode == "inhuman" ? t : xfrm_pos_tag_to_human_tag(t))
+        end
+      end
+      pos_tag_array.compact!
+    end
+
+    meaning_str = meaning_str + trailing_parentheticals
+    mtxt  = (pos_tag_array.size > 0 ? meaning_str + " (" + pos_tag_array.join($delimiters[:jflash_inlined_tags]) + ")" : meaning_str)
+    mhtml = (pos_tag_array.size > 0 ? meaning_str + " "  + pos_tag_array.collect{ |t| "<dfn>#{t}</dfn>" }.join("") : meaning_str)
+
+    return mtxt, mhtml
+  end
+
+  # XFORMATION: Returns human tag name from the DB, caching everything on first call
+  def xfrm_pos_tag_to_human_tag(tag)
+    cache_tag_data if $shared_cache[:pos_tag_human_readings].nil?
+    if $shared_cache[:pos_tag_human_readings].has_key?(tag)
+      return $shared_cache[:pos_tag_human_readings][tag][:humanised]
+    else
+      return tag
+    end
+  end
+  
+  # XFORMATION: Returns inhuman tag name from the DB, caching everything on first call
+  def xfrm_pos_tag_to_inhuman_tag(tag)
+    cache_tag_data if $shared_cache[:pos_tag_inhuman_readings].nil?
+    if $shared_cache[:pos_tag_inhuman_readings].has_key?(tag)
+      return $shared_cache[:pos_tag_inhuman_readings][tag][:inhumanised]
+    else
+      return tag
+    end
+  end
+
+    # XFORMATION: Remove common English stop words from string
+  def xfrm_remove_stop_words(str)
+    stop_words = ['Variant','variant', 'Erhua', 'Counter', 'Has', 'I', 'me', 'a', 'an', 'am', 'are', 'as', 'at', 'be', 'by','how', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'than', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the']
+    results = []
+    str.gsub!($regexes[:inlined_tags], "") ## remove tag blocks
+    str.split(' ').each do |sstr|
+      # remove non word characters from string
+      results << sstr unless stop_words.index(sstr.gsub(/[^a-zA-Z|\s]/, '').strip)
+    end
+    return results.flatten.compact.join(' ')
   end
   
 # EOF

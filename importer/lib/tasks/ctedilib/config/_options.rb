@@ -131,6 +131,7 @@ $regexes[:pinyin_separator] = /^[,·]/
 $regexes[:single_letter] = /^[A-Za-z]{1}/
 $regexes[:inlined_tags] = /\(([^\)]*)\)$/
 
+
 # OLD JFLASH REGEXES
 # $regexes[:number_marker] = /\(\d?\d?\)\s{1}/
 # $regexes[:inside_hard_brackets] = /\[(\S+)\]/
@@ -176,6 +177,7 @@ $regexes[:inlined_tags] = /\(([^\)]*)\)$/
 
 # Delimiters
 $delimiters = {}
+$delimiters[:jflash_meanings]         = "; "
 
 # CFlash Delimiters
 #$delimiters[:cflash_readings]         = " "

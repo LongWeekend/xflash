@@ -5,13 +5,8 @@ class BookEntry < Entry
   # Parses a line from the CEDICT data source
   #===================================
   def parse_line (line = "")
-    init
-  
     # A little sanity checking on line
-    if line.nil?
-      pp "BookEntry received a nil line"
-      return false
-    end
+    return false if line.nil?
     
     # Get the headwords, traditional then simplified
     headword_arr = get_headwords(line)

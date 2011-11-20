@@ -4,13 +4,8 @@ class HSKEntry < Entry
   # Parses a line from the data source
   #===================================
   def parse_line (line = "")
-    init
-  
     # A little sanity checking on line
-    if line.nil?
-      pp "HSKEntry received a nil line"
-      return false
-    end
+    return false if line.nil?
     
     # Set up to loop through the line one character at a time
     line_length = line.length - 1

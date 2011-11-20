@@ -25,12 +25,8 @@ class CEdictParser < Parser
       
       # Use exception handling to weed out bad entries
       begin
-        # Don't process comments
-        if line.index("#") == 0
-          prt "Skipping comment on line #%s: %s" % [line_no, line]
-        else
-          entry.parse_line(line)
-          
+        result = entry.parse_line(line)
+        if result
           # Handle classifier expansion
           entry.add_classifier_to_meanings
           

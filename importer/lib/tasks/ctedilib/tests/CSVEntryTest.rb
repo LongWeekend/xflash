@@ -5,8 +5,13 @@ class CSVEntryTest < Test::Unit::TestCase
   # Test non-failure on bad data
   def test_bad_input_blank
     entry = CSVEntry.new
-    entry.init
     entry.parse_line(nil)
+  end
+
+  def test_heading_detector
+    entry = CSVEntry.new
+    result = entry.parse_line('"Z",,,,,,')
+    assert_equal(false, result)
   end
 
   # Tests that basic headword and reading can be parsed

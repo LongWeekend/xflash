@@ -5,8 +5,7 @@ class BookEntryTest < Test::Unit::TestCase
   # Test non-failure on bad data
   def test_bad_input_blank
     entry = BookEntry.new
-    entry.init
-    entry.parse_line(nil)
+    assert_equal(false, entry.parse_line(nil))
   end
 
   # Tests that basic headword and reading can be parsed
@@ -29,7 +28,7 @@ class BookEntryTest < Test::Unit::TestCase
   def test_parse_pinyin
     entry = BookEntry.new
     entry.parse_line("綠色通道	绿色通道	lu:4 se4 tong1 dao4	/green channel/")
-    expected_pinyin = "lǜsètōngdào"
+    expected_pinyin = "lü4 se4 tong1 dao4"
     assert_equal(expected_pinyin,entry.pinyin)
   end
 
