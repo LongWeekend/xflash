@@ -13,7 +13,7 @@ tags_800_1_beginner:
     entry_type: "CSVEntry"
 
     # Class used for parsing and reading the data into memory
-    file_parser: "CSVParser"
+    file_parser: "WordListParser"
     
     # Not used yet
     file_tolerance: "tone"          
