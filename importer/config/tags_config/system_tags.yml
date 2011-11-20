@@ -3,6 +3,7 @@ starred:
     file_importer: "TagImporter"
     tag_name: "My Starred Words"
     tag_type: ""
+    entry_type: "CSVEntry"
     tag_id: 0
     short_name: "starred_words"
     description: "Words you\'ve starred in Search and Study will appear here."      

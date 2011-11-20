@@ -106,9 +106,9 @@ class TagImporter
     # to get the parent of the tags.
     setup_tag_row()
     
-    if (@config[:data] == nil)
+    if (@config[:data] == nil or @config[:data].empty?)
       prt "Skipping matching process for empty tag (no data passed in)"
-      return
+      return @tag_id
     end
     
     multiple_found = 0

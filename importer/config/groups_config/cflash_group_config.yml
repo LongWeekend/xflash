@@ -427,27 +427,6 @@ study_sets:
                 metadata_key: "schaums_the_automobile"
     frequency_bigrams:
         name: "Most Frequent Words (Bigrams)"
-        frequency_1:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_1"
-        frequency_2:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_2"
-        frequency_3:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_3"
-        frequency_4:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_4"
-        frequency_5:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_5"
-        frequency_6:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_6"
-        frequency_7:
-            file: "frequency_config.yml"
-            metadata_key: "frequency_7"
     frequency:
         name: "Most Frequent Hànzì"
         frequency_1:

@@ -147,6 +147,7 @@ colloquial_chinese_lesson_10:
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
+    entry_type: "BookEntry"
     tag_name: "Colloquial Chinese 10"
     tag_type: ""
     short_name: "ColloquialChinese10"
