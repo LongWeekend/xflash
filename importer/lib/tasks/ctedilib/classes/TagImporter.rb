@@ -259,12 +259,11 @@ class TagImporter
       # For each record in the result set
       result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
         # Initialise the card object
-        card = CEdictEntry.new
-        card.hydrate_from_hash(rec)
+        card = CEdictEntry.from_sql(rec)
+        card.id = rec[:card_id]
         # Get the card id and makes that a symbol for the hash key.
-        card_id = rec[:card_id]
         # puts "Inserting to hash with key: %s" % [card_id.to_s()]
-        $card_entries[card_id.to_s().to_sym()] = card
+        $card_entries[card.id.to_s().to_sym()] = card
         $card_entries_array << card
         
         # DUPE HEADWORD FLAGGING - we don't want dupe headwords in our super fast hash

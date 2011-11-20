@@ -34,8 +34,7 @@ class CardEntriesTest < Test::Unit::TestCase
     card = nil
     select_query = "SELECT * FROM cards_staging WHERE headword_trad = '愛戴'"
     $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-      card = CEdictEntry.new
-      card.hydrate_from_hash(rec)
+      card = CEdictEntry.from_sql(rec)
     end    
         
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
@@ -56,8 +55,7 @@ class CardEntriesTest < Test::Unit::TestCase
     card = nil
     select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打擊'"
     $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-      card = CEdictEntry.new
-      card.hydrate_from_hash(rec)
+      card = CEdictEntry.from_sql(rec)
     end    
     
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
@@ -76,8 +74,7 @@ class CardEntriesTest < Test::Unit::TestCase
      card = nil
      select_query = "SELECT * FROM cards_staging WHERE headword_trad = '打發'"
      $cn.execute(select_query).each(:symbolize_keys => true, :as => :hash) do |rec|
-       card = CEdictEntry.new
-       card.hydrate_from_hash(rec)
+       card = CEdictEntry.from_sql(rec)
      end    
 
     criteria = Proc.new do |headword, same_pinyin, same_meaning, is_proper_noun|
