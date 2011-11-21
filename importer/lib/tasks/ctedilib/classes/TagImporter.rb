@@ -6,6 +6,7 @@ class TagImporter
   def initialize (data, configuration)
     @config = {}
     @tag_id = nil
+    @human_importer = HumanTagImporter.new
     
     # Metadata for the tag itself
     @config[:metadata] = configuration
@@ -59,7 +60,7 @@ class TagImporter
   end
   
   def setup_tag_row
-    connect_db()
+    connect_db
     config = @config[:metadata]
     
     # If the shortname is longer than 20 characters, throw an exception as the table structure
@@ -100,12 +101,13 @@ class TagImporter
   end
     
   def import
-    connect_db()
-
-    # Insert into the tags_staging first
-    # to get the parent of the tags.
-    setup_tag_row()
+    # Insert into the tags_staging first to get the parent of the tags.
+    connect_db
     
+    # TODO: This should really *return* the tag_id -- MMA 11.20.2011
+    setup_tag_row
+    
+    # After creating the table, skip the import process if we have no card data
     if (@config[:data] == nil or @config[:data].empty?)
       prt "Skipping matching process for empty tag (no data passed in)"
       return @tag_id
@@ -116,45 +118,46 @@ class TagImporter
     found = 0
     card_ids = Array.new()
     @insert_tag_link_query = "INSERT card_tag_link(tag_id, card_id) VALUES(%s,%s);"
-        
     bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
-    # This is the for each for every record data call the block with
-    # each line as the parameter.
+
+    # This is the for each for every record data call the block with each line as the parameter.
     tickcount("Processing tag-card-match and importing") do
       @config[:data].each do |rec|
-        insert_query = ""
+        # First, try to match it programmatically
         result = TagImporter.find_cards_similar_to(rec)
-        if result.empty?
-          # TODO: MMA This is where we need to check for a human decision to resolve it
-          # TODO: MMA This is where it needs to be logged for a human to look at it if no prior decision
-          not_found += 1
-          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
-        elsif result.count > 1
-          # TODO: MMA This is where we need to check for a human decision to resolve it
-          # TODO: MMA This is where it needs to be logged for a human to look at it if no prior decision
-          multiple_found += 1
-          log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
-        else
+        
+        # If nothing found by the TagImporter, ask the HumanImporter
+        if result.empty? or result.count > 1
+          matched_card = @human_importer.get_human_result_for_entry(result)
+          if matched_card
+            result = [matched_card]
+          else
+            if result.empty?
+              not_found += 1
+              log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+            else
+              multiple_found += 1
+              log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+            end
+          end
+        end
+        
+        # Finally, register the match if we have one
+        if result.count == 1
           found += 1
           card_id = result[0].id
           if (!card_ids.include?(card_id))
             card_ids << card_id
-            insert_query << @insert_tag_link_query % [@tag_id, card_id]
+            bulkSQL.add((@insert_tag_link_query % [@tag_id, card_id]))
           else
-            # There is a same card in the list of added card.
             log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword, rec.pinyin, rec.meanings.join("/")]
           end
         end
-        
-        # Its alright to put in a blank string to the bulkSQL as it keeps counting and 
-        # flush the reminder of the data even if the buffer is not yet full. (when all the data has been proceessed)
-        # We want that to happen and just in case we cant find a card, still want the rest to be in the table.
-        bulkSQL.add(insert_query) #unless ((query==nil)||(query.strip().length()<=0))
       end
     end
 
-    # Procedure to update the number of
-    # cards in a tag.
+    # Write any remaining records & update tag counts
+    bulkSQL.flush
     update_tag_count
 
     log "\n"
@@ -186,28 +189,15 @@ class TagImporter
     # If this has not been setup yet
     TagImporter.get_all_cards_from_db()
     
-    # Prepare the result to put the matches and 
-    # the cards object from the Hash-values
+    # This block defines how the cards should be matched (beyond having the same headwords)
     criteria = Proc.new do |dict_entry, tag_entry|
-    
       # Comparing the pinyin/reading - ignore case for now
       if tag_entry.pinyin.length > 0
-        same_pinyin = (dict_entry.pinyin.downcase == tag_entry.pinyin.downcase)
+        same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ",""))
       elsif tag_entry.pinyin_diacritic
-        same_pinyin = (dict_entry.pinyin_diacritic.downcase == tag_entry.pinyin_diacritic.downcase)
+        same_pinyin = (dict_entry.pinyin_diacritic.downcase.gsub(" ","") == tag_entry.pinyin_diacritic.downcase.gsub(" ",""))
       end
-      same_meaning = false
-      #    intersection = (meanings & entry.meanings)
-      #    same_meaning = intersection.length() > 0
-  
-      # Don't match proper nouns, it tends to be surnames and such
-      result = same_pinyin or same_meaning
-      if (result == false)
-        # TODO: Throw an exception here (MMA 11.18.2011)
-        # This is a little bit strange as both the pinyin nor the meaning
-        # is the same. This is better to be logged.
-#        prt "Pinyin does not match %s: '%s' - '%s'." % [tag_entry.headword_simp, dict_entry.pinyin, tag_entry.pinyin]
-      end
+      result = same_pinyin
       # The "return" keyword will F everything up when used in blocks!
       result
     end
@@ -216,6 +206,11 @@ class TagImporter
     indices = []
     if $card_entries_by_headword[:simp].key?(entry.headword_simp)
       dict_entry = $card_entries_by_headword[:simp][entry.headword_simp]
+      if dict_entry.similar_to?(entry, criteria)
+        indices << dict_entry
+      end
+    elsif $card_entries_by_headword[:trad].key?(entry.headword_trad)
+      dict_entry = $card_entries_by_headword[:trad][entry.headword_trad]
       if dict_entry.similar_to?(entry, criteria)
         indices << dict_entry
       end
@@ -248,10 +243,10 @@ class TagImporter
       $card_entries_by_headword[:trad] = {}
       
       # Use this hash as a "blacklist" for any headwords we detect multiple times
-      dupe_headwords = {}
-      dupe_headwords[:simp] = {}
-      dupe_headwords[:trad] = {}
-      
+      $dupe_headwords = {}
+      $dupe_headwords[:simp] = {}
+      $dupe_headwords[:trad] = {}
+
       # Get the entire data from the database
       select_query = "SELECT * FROM cards_staging"
       result_set = $cn.execute(select_query)
@@ -265,23 +260,30 @@ class TagImporter
         # puts "Inserting to hash with key: %s" % [card_id.to_s()]
         $card_entries[card.id.to_s().to_sym()] = card
         $card_entries_array << card
-        
-        # DUPE HEADWORD FLAGGING - we don't want dupe headwords in our super fast hash
-        is_flagged_dupe = dupe_headwords[:simp].key?(card.headword_simp)
-        if (is_flagged_dupe == false)
-          # Now check that it's not the second occurance
-          is_dupe = $card_entries_by_headword[:simp].key?(card.headword_simp)
-          if is_dupe == false
-            $card_entries_by_headword[:simp][card.headword_simp] = card
-          else
-            # It's a dupe, pull out the original from the quick lookup headword hash, add key to dupes
-            $card_entries_by_headword[:simp].delete(card.headword_simp)
-            dupe_headwords[:simp][card.headword_simp] = true
-          end
-        end
+        TagImporter._add_card_to_headword_idx_hash(card, :simp)
+        TagImporter._add_card_to_headword_idx_hash(card, :trad)
       end 
     end #tickcount
   end
+
+  def self._add_card_to_headword_idx_hash(card, type = :simp)
+    hw = (type == :simp) ? card.headword_simp : card.headword_trad
+  
+    # DUPE HEADWORD FLAGGING - we don't want dupe headwords in our super fast hash
+    is_flagged_dupe = $dupe_headwords[type].key?(hw)
+    if (is_flagged_dupe == false)
+      # Now check that it's not the second occurance
+      is_dupe = $card_entries_by_headword[type].key?(hw)
+      if is_dupe == false
+        $card_entries_by_headword[type][hw] = card
+      else
+        # It's a dupe, pull out the original from the quick lookup headword hash, add key to dupes
+        $card_entries_by_headword[type].delete(hw)
+        $dupe_headwords[type][hw] = true
+      end
+    end
+  end
+
   
 #EOF
 end

@@ -10,6 +10,12 @@ class InlineEntryTest < Test::Unit::TestCase
     assert_equal("gui1",entry.pinyin)
   end
 
+  def test_description
+    entry = InlineEntry.new
+    entry.parse_line("龜|龟[gui1]")
+    assert_equal("龜 龟 [gui1], ",entry.description)
+  end
+
   def test_headword_trad_single
     entry = InlineEntry.new
     entry.parse_line("齰")

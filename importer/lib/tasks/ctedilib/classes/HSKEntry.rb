@@ -5,7 +5,10 @@ class HSKEntry < Entry
   #===================================
   def parse_line (line = "")
     # A little sanity checking on line
-    return false if line.nil?
+    return false if line.nil? or (line == "")
+    
+    # Hold on to this for later when we need a unique ID
+    @original_line = line
     
     # Set up to loop through the line one character at a time
     line_length = line.length - 1
@@ -40,7 +43,10 @@ class HSKEntry < Entry
       reading = segments[3]
       @pinyin = reading
       @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(reading)
-      @meanings = segments[4].strip.split("; ")
+      @meanings = []
+      segments[4].strip.split("; ").each do |meaning|
+        @meanings << Meaning.new(meaning)
+      end
       return true
     else
       return false

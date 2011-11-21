@@ -6,7 +6,9 @@ class BookEntry < Entry
   #===================================
   def parse_line (line = "")
     # A little sanity checking on line
-    return false if line.nil?
+    return false if line.nil? or (line == "")
+    
+    @original_line = line
     
     # Get the headwords, traditional then simplified
     headword_arr = get_headwords(line)
@@ -18,7 +20,6 @@ class BookEntry < Entry
     @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(@pinyin)
 
     @meanings = get_meanings(line)
-    
     return true
   end
 
@@ -48,7 +49,11 @@ class BookEntry < Entry
     first_index = line.index("/") + 1
     length = line.length
     meanings = line[first_index..length].split("/")
-    return meanings
+    meaning_obj_array = []
+    meanings.each do |meaning|
+      meaning_obj_array << Meaning.new(meaning)
+    end
+    return meaning_obj_array
   end
   
 end

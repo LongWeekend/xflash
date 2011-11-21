@@ -21,10 +21,11 @@ class EntryTest < Test::Unit::TestCase
   def test_update_sql
     entry = Entry.new
     entry.id = 1
-    expected = "UPDATE cards_staging SET headword_trad = '',headword_simp = '',headword_en = '',reading = '',reading_diacritic = '',meaning = '',meaning_html = '',meaning_fts = '',classifier = NULL,tags = '',referenced_cards = NULL,is_reference_only = 0,is_variant = 0,is_erhua_variant = 0,is_proper_noun = 0,variant = NULL,cedict_hash = 'BAhvOgpFbnRyeRI6EUBoZWFkd29yZF9lbiIAOgtAZ3JhZGUiADoOQG1lYW5p\nbmdzWwA6E0BoZWFkd29yZF9zaW1wIgA6EEByZWZlcmVuY2VzWwA6CUBwb3Nb\nADoWQHBpbnlpbl9kaWFjcml0aWMiADoTQGhlYWR3b3JkX3RyYWQiADoQQHZh\ncmlhbnRfb2ZGOgxAcGlueWluIgA6EEBjbGFzc2lmaWVyRjoIQGlkaQY6FkBp\nc19lcmh1YV92YXJpYW50Rg==\n' WHERE card_id = 1;"
+    cedict_hash = mysql_serialise_ruby_object(entry)
+    expected = "UPDATE cards_staging SET headword_trad = '',headword_simp = '',headword_en = '',reading = '',reading_diacritic = '',meaning = '',meaning_html = '',meaning_fts = '',classifier = NULL,tags = '',referenced_cards = NULL,is_reference_only = 0,is_variant = 0,is_erhua_variant = 0,is_proper_noun = 0,variant = NULL,cedict_hash = '%s' WHERE card_id = 1;" % cedict_hash
     assert_equal(expected,entry.to_update_sql)
   end
-
+  
   def test_update_sql_fail
     entry = Entry.new
     assert_equal(false, entry.to_update_sql)

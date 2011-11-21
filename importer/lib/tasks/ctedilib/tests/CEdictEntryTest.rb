@@ -20,6 +20,12 @@ class CEdictEntryTest < Test::Unit::TestCase
       entry.parse_line("播放機 播放机 [bo1 fang4 ji1 /erhua variant of 旁邊|旁边, lateral")
     end
   end
+  
+  def test_description
+    entry = CEdictEntry.new
+    entry.parse_line("播放機 播放机 [bo1 fang4 ji1] /player (e.g. CD player)/")
+    assert_equal("播放機 播放机 [bo1 fang4 ji1], player (e.g. CD player)",entry.description)
+  end
 
   # Tests that basic headword and reading can be parsed
   def test_parse_headword_and_reading
@@ -28,6 +34,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal("播放機",entry.headword_trad)
     assert_equal("播放机",entry.headword_simp)
     assert_equal("bo1 fang4 ji1",entry.pinyin)
+    assert_equal("播放機 播放机 [bo1 fang4 ji1] /player (e.g. CD player)/",entry.original_line)
   end
 
   def test_parse_single_meaning
@@ -210,7 +217,8 @@ class CEdictEntryTest < Test::Unit::TestCase
   def test_to_insert_sql
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
-    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','BAhvOhBDRWRpY3RFbnRyeRM6EUBoZWFkd29yZF9lbiIMbGF0ZXJhbDoLQGdy\nYWRlIgA6DkBtZWFuaW5nc1sJbzoMTWVhbmluZws6DkBza2lwX2Z0c0Y6DUB2\nYXJpYW50IhLml4Hpgop85peB6L65Og1AbWVhbmluZyIMbGF0ZXJhbDoOQGlz\nX2VyaHVhVDoKQHRhZ3NbADoPQHJlZmVyZW5jZUZvOwkLOwpGOwtGOwwiCXNp\nZGU7DUY7DlsAOw9GbzsJCzsKRjsLRjsMIhB0byB0aGUgc2lkZTsNRjsOWwA7\nD0ZvOwkLOwpGOwtGOwwiC2Jlc2lkZTsNRjsOWwA7D0Y6E0BoZWFkd29yZF9z\naW1wIg7ml4HovrnlhL86EEByZWZlcmVuY2VzWwA6CUBwb3NbADoWQHBpbnlp\nbl9kaWFjcml0aWMiEnDDoW5nIGJpxIFuIHI6E0BoZWFkd29yZF90cmFkIg7m\nl4HpgorlhZI6EEB2YXJpYW50X29mQAo6E0BsaW5lX3RvX3BhcnNlImvml4Hp\ngorlhZIg5peB6L655YS/IFtwYW5nMiBiaWFuMSByNV0gL2VyaHVhIHZhcmlh\nbnQgb2Yg5peB6YKKfOaXgei+uSwgbGF0ZXJhbC9zaWRlL3RvIHRoZSBzaWRl\nL2Jlc2lkZS86DEBwaW55aW4iE3BhbmcyIGJpYW4xIHI1OhBAY2xhc3NpZmll\nckY6CEBpZGn6OhZAaXNfZXJodWFfdmFyaWFudFQ=\n');"
+    cedict_hash = mysql_serialise_ruby_object(entry)
+    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','%s');" % cedict_hash
     assert_equal(expected,entry.to_insert_sql)
   end
   

@@ -1,7 +1,5 @@
 class InlineEntry < Entry
 
-  @original_text
-
   def parse_line(line = "")
     killer_regex = /(\w+)\|{0,1}(\w*)(\[([a-zA-Z0-5\s]+)\]){0,1}/
     match_found = false
@@ -17,14 +15,14 @@ class InlineEntry < Entry
       match_found = true
     end
     
-    @original_text = line if match_found
+    @original_line = line if match_found
     
     return line
   end
   
   def to_str
     # Basically put it back together
-    @original_text
+    @original_line
   end
 
 end

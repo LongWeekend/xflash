@@ -11,6 +11,7 @@ class Entry
   #===================================
   
   def initialize
+    @original_line = ""
     @id = -1
     @pos = []
     @grade = ""
@@ -87,6 +88,14 @@ class Entry
   
   def id
     @id
+  end
+  
+  def original_line
+    @original_line
+  end
+  
+  def checksum
+    Digest::MD5.hexdigest(@original_line)
   end
   
   def headword
@@ -310,6 +319,12 @@ class Entry
     end
   end
   
+  # This method is used to create a human-readable version of the card (for exception handling)
+  def description
+    reading = @pinyin.empty? ? @pinyin_diacritic : @pinyin
+    desc_str = "%s %s [%s], %s" % [@headword_trad, @headword_simp, reading, meaning_txt]
+  end
+  
   def to_insert_sql
     insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
@@ -358,6 +373,8 @@ class Entry
   
     return self.id == another_card_entry.id
   end  
+
+  # USED FOR MATCHING BY TAG IMPORTER
 
   def similar_to?(entry, match_criteria = nil)
     # Make sure the entry is kind of Entry class-

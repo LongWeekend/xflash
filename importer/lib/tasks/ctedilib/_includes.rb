@@ -29,6 +29,7 @@ load File.dirname(__FILE__) + "/classes/WordListParser.rb"
 # Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
+load File.dirname(__FILE__) + "/classes/HumanTagImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagImporter.rb"
 
 # Importers
@@ -37,3 +38,4 @@ load File.dirname(__FILE__) + "/classes/CEdictExporter.rb"
 
 # Required Gems
 require 'base64'
+require 'digest/md5'

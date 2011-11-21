@@ -9,22 +9,20 @@ class CEdictEntry < Entry
       # Don't process comments or bad data
       return false if line.nil? or (line.index("#") == 0)
       
-      @line_to_parse = line
-  
-      # A little sanity checking on line
-      return false if @line_to_parse.nil?
+      # Save a copy of this -- we'll use it later when we need a unique ID value to match against
+      @original_line = line
       
       # Get the headwords, traditional then simplified
-      headword_arr = get_headwords(@line_to_parse)
+      headword_arr = get_headwords(line)
       @headword_trad = headword_arr[0]
       @headword_simp = headword_arr[1]
       
       # Now get the reading
-      @pinyin = get_pinyin(@line_to_parse)
+      @pinyin = get_pinyin(line)
       
       # The "true" keeps the spaces in the pinyin - we want that for our FTS database
       @pinyin_diacritic = Entry.get_pinyin_unicode_for_reading(@pinyin, true)
-      @meanings = parse_meanings(@line_to_parse)
+      @meanings = parse_meanings(line)
       
       # Finally make an English headword out of the first meaning
       if (@meanings.size > 0)

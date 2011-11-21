@@ -19,16 +19,17 @@ class TagImporterTest < Test::Unit::TestCase
     #SELECT SUM(count) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
     #3622
     assert_equal((98314 - 3622),$card_entries_by_headword[:simp].count)
-    
+
     # Number of headwords that have duplicates
     #SELECT COUNT(headword_simp) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
     #1714
     
-    #SELECT COUNT(headword_trad) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
-    #1470
-    
     #SELECT SUM(count) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
     #3069
+    assert_equal((98314 - 3069),$card_entries_by_headword[:trad].count)
+    
+    #SELECT COUNT(headword_trad) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
+    #1470
   end
 
   def test_import_starred_tag
@@ -82,9 +83,9 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new(results, configuration)
     importer.import
 
-    # There should be 43 associated cards now
+    # There should be 40 associated cards now -- 3 of the cards can't be matched by the importer
     $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '%s'" % importer.tag_id).each do |tag_count_rec|
-      assert_equal(43, tag_count_rec[0])
+      assert_equal(40, tag_count_rec[0])
     end
     
   end

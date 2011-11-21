@@ -5,8 +5,10 @@ class CSVEntry < Entry
   #===================================
   def parse_line (line = "")
     # A little sanity checking on line
-    return false if line.nil?
-    
+    return false if line.nil? or (line == "")
+
+    @original_line = line
+
     segments = line.split(",\"")
     # This stops us from getting headers and other non-data rows
     if segments.count == 7 and segments[0].numeric?
@@ -35,8 +37,10 @@ class CSVEntry < Entry
       
       # Get the meanings with the comma separated, 
       # also, make sure we dont include the spaces.
-      @meanings = Array.new()
-      @meanings.add_element_with_stripping_from_array!(clean_raw_meanings.split(","))
+      @meanings = []
+      clean_raw_meanings.split(",").each do |meaning|
+        @meanings << Meaning.new(meaning)
+      end
       return true
     elsif segments[0].gsub("\"","").strip.match($regexes[:single_letter])
       return false

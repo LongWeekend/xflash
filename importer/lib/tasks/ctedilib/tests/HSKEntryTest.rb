@@ -16,12 +16,19 @@ class HSKEntryTest < Test::Unit::TestCase
     assert_equal("爸爸",entry.headword_simp)
     assert_equal("ba4 ba5",entry.pinyin)
     assert_equal("4",entry.grade)
+    assert_equal('3,4,爸爸,ba4 ba5,"(informal) father; CL:個|个[ge4],位[wei4]"',entry.original_line)
+  end
+  
+  def test_description
+    entry = HSKEntry.new
+    entry.parse_line('3,4,爸爸,ba4 ba5,"(informal) father; CL:個|个[ge4],位[wei4]"')
+    assert_equal(" 爸爸 [ba4 ba5], (informal) father; CL:個|个[ge4],位[wei4]",entry.description)
   end
 
   def test_parse_meaning
     entry = HSKEntry.new
     entry.parse_line('3,1,爸爸,ba4 ba5,"(informal) father; CL:個|个[ge4],位[wei4]"')
-    expected_meanings = ["(informal) father","CL:個|个[ge4],位[wei4]"]
+    expected_meanings = [Meaning.new("(informal) father"),Meaning.new("CL:個|个[ge4],位[wei4]")]
     assert_equal(expected_meanings,entry.meanings)
   end
   
