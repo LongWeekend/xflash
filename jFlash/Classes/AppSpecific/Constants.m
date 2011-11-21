@@ -47,6 +47,7 @@ const NSInteger STARRED_TAG_ID = 0;
 NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 
 #if defined(LWE_JFLASH)
+      NSString * const LWE_APP_SPLASH_IMAGE = @"Default.jpg";
 
       // This setting is JFlash-specific
       NSString * const APP_READING              = @"reading";
@@ -65,7 +66,7 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
       NSString * const LWE_JF_12_TO_13_SQL_FILENAME = @"jflash_12_to_13.sql";
       NSString * const LWE_JF_13_TO_14_SQL_FILENAME = @"jflash_13_to_14.sql";
       NSString * const LWE_JF_VERSION_1_0           = @"1.0";
-      NSString * const LWE_JF_VERSION_1_1           = @"1.1";
+      NSString * const LWE_JF_VERSION_1_1           = @"1.1"; 
       NSString * const LWE_JF_VERSION_1_2           = @"1.2";
       NSString * const LWE_JF_VERSION_1_3           = @"1.3";
       NSString * const LWE_JF_VERSION_1_4           = @"1.4";
@@ -78,6 +79,7 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
 #elif defined(LWE_CFLASH)
+      NSString * const LWE_APP_SPLASH_IMAGE = @"chinese-flash-splash.png";
 
       NSString * const APP_PINYIN_COLOR        = @"pinyin_color";
       NSString * const SET_PINYIN_COLOR_ON     = @"ON";
@@ -105,9 +107,6 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 NSString *const CARD_DB_KEY = @"CARD_DB";
 NSString *const FTS_DB_KEY = @"FTS_DB";
 NSString *const EXAMPLE_DB_KEY = @"EX_DB";
-
-// App splash image - different between the flashes
-NSString * const LWE_APP_SPLASH_IMAGE = @"Default.jpg";
 
 
 //------------------------------------------------------------
