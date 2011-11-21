@@ -11,6 +11,7 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>chinese-flash-icon.png</string>
+		<string>chinese-flash-icon@2x.png</string>
 		<string>chinese-flash-icon-ipad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
