@@ -1,12 +1,5 @@
 class HumanTagImporter
 
-  # CLASS CONSTRUCTOR
-  
-  def initialize
-    @human_matched_entries = []
-    @entries_for_human_review = []
-  end
-
   # MAIN METHODS
 
   def get_human_result_for_entry(fuzzy_entry = false, fuzzy_matches = [])
@@ -16,27 +9,40 @@ class HumanTagImporter
     # Initialize
     connect_db
 
-    # Check the database to see if we have any objects that match it
-    resolutions = $cn.execute("SELECT * FROM tag_matching_resolutions WHERE entry_id = '%s'" % fuzzy_entry.checksum)
-    
-    # If yes, go get it and return it
-    # If no, check if we've already inserted
-    
+    # Check the database to see if we have any objects that match it -- quick return if YES
+    resolutions = $cn.execute("SELECT serialized_entry, resolution_type FROM tag_matching_resolutions WHERE entry_id = '%s' LIMIT 1" % fuzzy_entry.checksum).each do |rec|
+      resolution_type = rec[1]
+      if (resolution_type == "human_matched")
+        matched_entry = mysql_deserialise_ruby_object(rec[0])
+        return matched_entry
+      end
+    end
+
+    # Well, we didn't return above, so now add it as unmatched
+    _store_new_fuzzy_entry_as_unmatched(fuzzy_entry)
     return false
   end
 
   def add_ignore_for_entry(fuzzy_entry)
     connect_db
     resolution_type = "ignore"
-    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialised_ruby_object(matching_entry), resolution_type]
+    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialise_ruby_object(matching_entry), resolution_type]
     $cn.execute(insert_sql)
   end
 
   def add_match_for_entry(fuzzy_entry, matching_entry)
     connect_db
     resolution_type = "human_matched"
-    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialised_ruby_object(matching_entry), resolution_type]
+    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialise_ruby_object(matching_entry), resolution_type]
     $cn.execute(insert_sql)
+  end
+  
+  def retrieve_exception_entry_from_db(entry)
+    connect_db
+    $cn.execute("SELECT serialized_entry FROM tag_matching_exceptions WHERE entry_id = '%s'" % [entry.checksum]).each do |rec|
+      return mysql_deserialise_ruby_object(rec[0])
+    end
+    return false
   end
   
   # PRIVATE METHODS
@@ -66,7 +72,17 @@ class HumanTagImporter
   
   def self.create_exception_tables
     connect_db
-    $cn.execute(IO.read((File.dirname(__FILE__) + '/../sql/create_exception_tables.sql')))
+    sql_statements = IO.read((File.dirname(__FILE__) + '/../sql/create_exception_tables.sql'))
+    sql_statements.split("\n\n").each do |statement|
+      $cn.execute(statement)
+    end
+  end
+  
+  def self.drop_exception_tables
+    connect_db
+    $cn.execute("DROP TABLE IF EXISTS tag_matching_exceptions")
+    $cn.execute("DROP TABLE IF EXISTS tag_matching_resolutions")
+    $cn.execute("DROP TABLE IF EXISTS tag_matching_resolution_choices")
   end
   
   # GETTERS
