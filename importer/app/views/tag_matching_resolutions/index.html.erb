@@ -1,0 +1,27 @@
+<h1>Listing tag_matching_resolutions</h1>
+
+<table>
+  <tr>
+    <th>Entry</th>
+    <th>Serialized entry</th>
+    <th>Resolution type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tag_matching_resolutions.each do |tag_matching_resolution| %>
+  <tr>
+    <td><%= tag_matching_resolution.entry_id %></td>
+    <td><%= tag_matching_resolution.serialized_entry %></td>
+    <td><%= tag_matching_resolution.resolution_type %></td>
+    <td><%= link_to 'Show', tag_matching_resolution %></td>
+    <td><%= link_to 'Edit', edit_tag_matching_resolution_path(tag_matching_resolution) %></td>
+    <td><%= link_to 'Destroy', tag_matching_resolution, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tag matching resolution', new_tag_matching_resolution_path %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Base entry:</b>
+  <%= @tag_matching_resolution_choice.base_entry_id %>
+</p>
+
+<p>
+  <b>Human readable:</b>
+  <%= @tag_matching_resolution_choice.human_readable %>
+</p>
+
+<p>
+  <b>Serialized entry:</b>
+  <%= @tag_matching_resolution_choice.serialized_entry %>
+</p>
+
+
+<%= link_to 'Edit', edit_tag_matching_resolution_choice_path(@tag_matching_resolution_choice) %> |
+<%= link_to 'Back', tag_matching_resolution_choices_path %>

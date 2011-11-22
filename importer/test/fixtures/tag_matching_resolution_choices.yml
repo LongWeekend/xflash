@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  base_entry_id: MyString
+  human_readable: MyString
+  serialized_entry: MyText
+
+two:
+  base_entry_id: MyString
+  human_readable: MyString
+  serialized_entry: MyText

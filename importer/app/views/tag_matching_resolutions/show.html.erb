@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Entry:</b>
+  <%= @tag_matching_resolution.entry_id %>
+</p>
+
+<p>
+  <b>Serialized entry:</b>
+  <%= @tag_matching_resolution.serialized_entry %>
+</p>
+
+<p>
+  <b>Resolution type:</b>
+  <%= @tag_matching_resolution.resolution_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_tag_matching_resolution_path(@tag_matching_resolution) %> |
+<%= link_to 'Back', tag_matching_resolutions_path %>

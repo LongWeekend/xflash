@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  entry_id: MyString
+  serialized_entry: MyText
+  resolution_type: MyString
+
+two:
+  entry_id: MyString
+  serialized_entry: MyText
+  resolution_type: MyString

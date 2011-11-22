@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Entry:</b>
+  <%= @tag_matching_exception.entry_id %>
+</p>
+
+<p>
+  <b>Human readable:</b>
+  <%= @tag_matching_exception.human_readable %>
+</p>
+
+<p>
+  <b>Serialized entry:</b>
+  <%= @tag_matching_exception.serialized_entry %>
+</p>
+
+
+<%= link_to 'Edit', edit_tag_matching_exception_path(@tag_matching_exception) %> |
+<%= link_to 'Back', tag_matching_exceptions_path %>
