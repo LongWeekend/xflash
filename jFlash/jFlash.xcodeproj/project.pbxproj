@@ -68,6 +68,8 @@
 		490B23461277BCE100CF3484 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 490B23401277BCE100CF3484 /* FMResultSet.m */; };
 		490B23571277BF4600CF3484 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23561277BF4600CF3484 /* Icon.png */; };
 		490B23591277C05100CF3484 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23581277C05100CF3484 /* Icon-72.png */; };
+		49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
+		49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
 		49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */; };
 		49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */; };
 		4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */; };
@@ -3283,6 +3285,7 @@
 				496C66FB14728AEC009F04D4 /* LWERetinaUtils.m in Sources */,
 				496C66FF14728B9C009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
+				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3346,6 +3349,7 @@
 				496C66FA14728AEC009F04D4 /* LWERetinaUtils.m in Sources */,
 				496C66FE14728B9B009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670014728BC8009F04D4 /* ThemeManager.m in Sources */,
+				49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
