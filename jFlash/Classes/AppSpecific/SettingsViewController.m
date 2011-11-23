@@ -130,7 +130,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 //! launchAppirater - convenience method for appirater
 - (void) _launchAppirater
 {
-  Appirater *appirater = [[[Appirater alloc] init] autorelease];
+  Appirater *appirater = [[Appirater alloc] init]; // appirater releases itself, do not autorelease here.
   [appirater showPromptManually];
 }
 
