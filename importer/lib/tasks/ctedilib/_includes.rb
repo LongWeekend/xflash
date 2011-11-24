@@ -11,6 +11,7 @@ load File.dirname(__FILE__) + "/classes/BulkSQLRunner.rb"
 
 # Custom Exception class
 load File.dirname(__FILE__) + "/classes/ParseException.rb"
+load File.dirname(__FILE__) + "/classes/HumanParseExceptionHandler.rb"
 
 # Different entry types
 load File.dirname(__FILE__) + "/classes/Meaning.rb"
