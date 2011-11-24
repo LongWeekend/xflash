@@ -11,10 +11,17 @@
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
 #import "StudyViewController.h"
+#import "RootViewController.h"
+
+@interface PracticeModeCardViewDelegate()
+@property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
+- (void) _notifyUserStudySetHasBeenLearned;
+@end
 
 @implementation PracticeModeCardViewDelegate
 
 @synthesize currentPercentageCorrect;
+@synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
 
 #pragma mark - Init
 
@@ -24,6 +31,7 @@
   if (self)
   {
     self.currentPercentageCorrect = 100.0f;
+    self.finishedSetAlertShowed = NO;
   }
   return self;
 }
@@ -83,6 +91,33 @@
 
 
 #pragma mark - StudyViewControllerDelegate Methods
+
+- (Card*) getFirstCard:(Tag*)cardSet
+{
+  self.finishedSetAlertShowed = NO; // must be a new set if they want the first card
+  NSError* error = nil;
+  Card* firstCard = [cardSet getFirstCardWithError:&error];
+  if ((firstCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+  {
+    [self _notifyUserStudySetHasBeenLearned];
+  }
+  return firstCard;
+}
+
+- (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
+{
+  NSError* error = nil;
+  Card* nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
+  if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+  {
+    [self _notifyUserStudySetHasBeenLearned];
+  }
+  else // we are not showing the setHasBeenLearned - so it hasn't been
+  {
+    self.finishedSetAlertShowed = NO;
+  }
+  return nextCard;
+}
 
 - (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController *)svc
 {
@@ -164,6 +199,44 @@
   avc.buryCardBtn.hidden = NO;
   avc.addBtn.hidden = NO;
   avc.cardMeaningBtnHint.hidden = YES;
+}
+
+#pragma mark - Study set has been learnt.
+
+- (void)_notifyUserStudySetHasBeenLearned
+{
+  if (self.hasfinishedSetAlertShowed == NO)
+  {
+    UIAlertView *alertView = [[UIAlertView alloc] 
+                              initWithTitle:@"Study Set Learned" 
+                              message:@"Congratulations! You've already learned this set. We will show cards that would usually be hidden."
+                              delegate:self 
+                              cancelButtonTitle:@"Change Set"
+                              otherButtonTitles:@"OK", nil];
+    
+    [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
+    [alertView show];
+    [alertView release];
+    self.finishedSetAlertShowed = YES;
+  }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  NSUInteger tag = [alertView tag];
+  if (tag == STUDY_SET_HAS_FINISHED_ALERT_TAG)
+  {
+    switch (buttonIndex)
+    {
+      case STUDY_SET_SHOW_BURIED_IDX:
+        LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
+        break;
+      case STUDY_SET_CHANGE_SET_IDX:
+        LWE_LOG(@"Study set change set has been decided after a study set has been master.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudySetView object:self userInfo:nil];
+        break;
+    }
+  }
 }
 
 @end

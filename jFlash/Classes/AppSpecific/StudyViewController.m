@@ -16,11 +16,8 @@
 
 @interface StudyViewController()
 //private properties
-@property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
-@property (nonatomic, assign, getter=hasViewBeenLoadedOnce) BOOL viewHasBeenLoadedOnce;
 @property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
-- (void) _notifyUserStudySetHasBeenLearned;
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
@@ -28,6 +25,8 @@
 - (void) _setupScrollView;
 - (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
 - (void) _enablePronounceButton:(BOOL)enabled;
+- (Card*) _getNextCard:(NSString*)directionOrNil;
+- (Card*) _getFirstCardWithError;
 @end
 
 @implementation StudyViewController
@@ -38,8 +37,6 @@
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
-@synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
-@synthesize viewHasBeenLoadedOnce = _viewHasBeenLoadedOnce;
 @synthesize progressVC = _progressVC;
 @synthesize pronounceBtn = pronounceBtn;
 
@@ -54,9 +51,6 @@
     self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
     self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
     _alreadyShowedAlertView = NO;
-
-    self.finishedSetAlertShowed = NO;
-    self.viewHasBeenLoadedOnce = NO;
   }
   return self;
 }
@@ -147,7 +141,6 @@
 
   void (^setupViewAfterChangeBlock)(NSNotification*) = ^(NSNotification *notification)
   {
-    blockSelf.finishedSetAlertShowed = NO;
     // TODO: We can get the new tag out of the notification, eliminating a use of a global state singleton (yay) MMA 11.16.2011
     [blockSelf changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
   };
@@ -191,16 +184,6 @@
   // TODO: iPad customization
   NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
   self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
-
-  //make sure that this section is only run once. If somehow the memory warning is issued 
-  //and this view controller's view gets unloaded and loaded again, please dont messed up with the
-  //boolean for the 'finished' alert view.
-  if (self.hasViewBeenLoadedOnce == NO)
-  {
-    //Comment this out if it is decided to show the 'finished-set' alert when the user run this app.
-    self.finishedSetAlertShowed = YES;
-    self.viewHasBeenLoadedOnce = YES;
-  }
   
   // Load the active study set and be done!!
   [self changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
@@ -222,48 +205,11 @@
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  NSUInteger tag = [alertView tag];
-  if (tag == STUDY_SET_HAS_FINISHED_ALERT_TAG)
+  switch (buttonIndex)
   {
-    switch (buttonIndex)
-    {
-      case STUDY_SET_SHOW_BURIED_IDX:
-        LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
-        break;
-      case STUDY_SET_CHANGE_SET_IDX:
-        LWE_LOG(@"Study set change set has been decided after a study set has been master.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudySetView object:self userInfo:nil];
-        break;
-    }
-  }
-  else
-  {
-    switch (buttonIndex)
-    {
-      case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-        [self _openLinkshareURL];
-        break;
-    }
-  }
-}
-
-#pragma mark - Study set has been learnt.
-
-- (void)_notifyUserStudySetHasBeenLearned
-{
-  if (self.hasfinishedSetAlertShowed == NO)
-  {
-    UIAlertView *alertView = [[UIAlertView alloc] 
-                            initWithTitle:@"Study Set Learned" 
-                            message:@"Congratulations! You've already learned this set. We will show cards that would usually be hidden."
-                            delegate:self 
-                            cancelButtonTitle:@"Change Set"
-                            otherButtonTitles:@"OK", nil];
-    
-    [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
-    [alertView show];
-    [alertView release];
-    self.finishedSetAlertShowed = YES;
+    case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
+      [self _openLinkshareURL];
+    break;
   }
 }
 
@@ -298,16 +244,7 @@
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
-  NSError *error = nil;
-  Card *nextCard = [self.currentCardSet getFirstCardWithError:&error];
-  if ((error.code == kAllBuriedAndHiddenError) && (nextCard.levelId == 5))
-  {
-    [self _notifyUserStudySetHasBeenLearned];
-  }
-  else 
-  {
-    self.finishedSetAlertShowed = NO;
-  }
+  Card *nextCard = [self _getFirstCardWithError];
   
   // Use this to set up delegates, show the card, etc
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -315,7 +252,6 @@
   [self _setupSubviewsForStudyMode:studyMode];
   
   // TODO:  Set this class' delegate?  Update the card view controller/action?
-  
   [self doChangeCard:nextCard direction:nil];
 }
 
@@ -384,16 +320,13 @@
   
   Card *nextCard = nil;
   NSString *direction = nil;
-  NSError *error = nil;
 	switch (action)
   {
     // Browse Mode options
     case NEXT_BTN: 
-      nextCard = [self.currentCardSet getNextCard];
       direction = kCATransitionFromRight;
       break;
     case PREV_BTN:
-      nextCard = [self.currentCardSet getPrevCard];
       direction = kCATransitionFromLeft;
       break;
       
@@ -406,12 +339,7 @@
       self.currentRightStreak++;
       self.currentWrongStreak = 0;
       [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
-      if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
-      {
-        [self _notifyUserStudySetHasBeenLearned];
-      }
       break;
       
     case WRONG_BTN:
@@ -419,12 +347,11 @@
       self.numViewed++;
       self.currentWrongStreak++;
       self.currentRightStreak = 0;
-      self.finishedSetAlertShowed = NO;
       [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
       direction = kCATransitionFromRight;
       break;      
   }
+  nextCard = [self _getNextCard:direction];
   [self doChangeCard:nextCard direction:direction];
   
   // Releases
@@ -506,6 +433,24 @@
 
 #pragma mark - Private methods to setup cards (called every transition)
 
+- (Card*) _getFirstCardWithError
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(getFirstCard:)])
+  {
+    return [self.delegate getFirstCard:self.currentCardSet];
+  }
+  return [self.currentCardSet getFirstCardWithError:nil]; // the pattern calls for doing something no matter what
+}
+
+- (Card*) _getNextCard:(NSString*)directionOrNil
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(getNextCard:afterCard:direction:)])
+  {
+    return [self.delegate getNextCard:self.currentCardSet afterCard:self.currentCard direction:(NSString*)directionOrNil];
+  }
+  return self.currentCard; // just keep the same card if the delegate cannot help us
+}
+
 /** 
  * Both page controller visibility setter and scroll view
  * enabler call this.  In the future, we don't want to 
@@ -581,15 +526,8 @@
     [self.currentCardSet removeCardFromActiveSet:theCard];
     if ([theCard isEqual:self.currentCard])
     {
-      // Get a new random card?
-      NSError *error = nil;
-      
-      // TODO: This assumes practice mode!  MMA 11.16.2011
-      Card *nextCard = [self.currentCardSet getRandomCard:self.currentCard.cardId error:&error];
-      if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
-      {
-        [self _notifyUserStudySetHasBeenLearned];
-      }
+      // Get a new card
+      Card *nextCard = [self _getNextCard:nil];
       
       // Change to the new card we just retrieved
       [self doChangeCard:nextCard direction:nil];

@@ -32,7 +32,6 @@
 {
   ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;
-  BOOL _finishedSetAlertShowed;
   //! This is set when card is loaded, and used when revealed
   BOOL _hasExampleSentences;
   BOOL _viewHasBeenLoadedOnce;

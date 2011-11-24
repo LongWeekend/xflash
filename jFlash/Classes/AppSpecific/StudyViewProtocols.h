@@ -69,6 +69,16 @@
  */
 - (void)updateStudyViewLabels:(StudyViewController*)svc;
 
+/**
+ * This method determines "how" a new card is selected. Ask the delegate to get the next card based on the transition direction.
+ */
+- (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil;
+
+/**
+ * This method determines "how" the first card is selected. Ask the delegate.
+ */
+- (Card*) getFirstCard:(Tag*)cardSet;
+
 @optional
 /**
  * This method is called before cardViewWillSetup: is called.
