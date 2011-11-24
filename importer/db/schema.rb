@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122051946) do
+ActiveRecord::Schema.define(:version => 20111122071220) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -134,13 +134,17 @@ ActiveRecord::Schema.define(:version => 20111122051946) do
     t.datetime "updated_at"
   end
 
+  add_index "tag_matching_exceptions", ["entry_id"], :name => "index_tag_matching_exceptions_on_entry_id", :unique => true
+
   create_table "tag_matching_resolution_choices", :force => true do |t|
-    t.string   "base_entry_id"
+    t.string   "tag_matching_exception_id"
     t.string   "human_readable"
     t.text     "serialized_entry"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tag_matching_resolution_choices", ["tag_matching_exception_id"], :name => "index_tag_matching_resolution_choices_on_base_entry_id"
 
   create_table "tag_matching_resolutions", :force => true do |t|
     t.string   "entry_id"
