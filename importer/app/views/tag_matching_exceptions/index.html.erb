@@ -2,26 +2,39 @@
 
 <table>
   <tr>
-    <th>Entry</th>
-    <th>Human readable</th>
-    <th>Serialized entry</th>
-    <th></th>
+    <th>Type</th>
+    <th>GUID</th>
+    <th>Unmatched Entry</th>
+    <th>Choices</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @tag_matching_exceptions.each do |tag_matching_exception| %>
   <tr>
+    <td>
+    <%=
+    if tag_matching_exception.tag_matching_resolution_choices.empty?
+      "No Match"
+    else
+      cnt = tag_matching_exception.tag_matching_resolution_choices.count
+      "%s Match%s" % [cnt, (cnt > 1) ? "es" : ""]
+    end
+    %>
+    </td>
     <td><%= tag_matching_exception.entry_id %></td>
     <td><%= tag_matching_exception.human_readable %></td>
-    <td><%= tag_matching_exception.serialized_entry %></td>
+    <td>
+    <%=
+    if tag_matching_exception.tag_matching_resolution_choices.count > 0
+      collection_select(:tag_matching_resolution, :create, tag_matching_exception.tag_matching_resolution_choices, :id, :human_readable_trimmed, :prompt => true)
+    end
+    %>
+    </td>
     <td><%= link_to 'Show', tag_matching_exception %></td>
-    <td><%= link_to 'Edit', edit_tag_matching_exception_path(tag_matching_exception) %></td>
     <td><%= link_to 'Destroy', tag_matching_exception, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Tag matching exception', new_tag_matching_exception_path %>
