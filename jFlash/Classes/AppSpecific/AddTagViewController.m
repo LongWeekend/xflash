@@ -121,7 +121,7 @@ enum EntrySectionRows
   return NO;
 }
 
-
+// REVIEW: can't we just use removeObject:[NSNumber tagId] instead of iterating
 //! Remove a tag from the membership cache
 - (void) _removeTagFromMembershipCache:(NSInteger)tagId
 {
@@ -164,7 +164,8 @@ enum EntrySectionRows
     }
     
     //this section will only be run if the cancel membership operation is successful.
-    [self _removeTagFromMembershipCache:tmpTag.tagId];
+    // TODO: shouldn't this just be [self.membershipCacheArray removeObject:[NSNumber numberWithInt:tmpTag.tagId]];?
+    [self _removeTagFromMembershipCache:tmpTag.tagId];    
   }
   else
   {
