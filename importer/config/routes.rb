@@ -1,5 +1,7 @@
 Importer::Application.routes.draw do
 
+  resources :parse_exceptions
+
   resources :tag_matching_resolutions
   resources :tag_matching_exceptions
   

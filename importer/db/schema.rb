@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122071220) do
+ActiveRecord::Schema.define(:version => 20111124091809) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(:version => 20111122071220) do
   end
 
   add_index "idx_sentences_by_keyword_staging", ["sentence_id"], :name => "sentence_id"
+
+  create_table "parse_exceptions", :force => true do |t|
+    t.string   "input_string"
+    t.string   "exception_type"
+    t.string   "resolution_string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "parse_exceptions", ["input_string", "exception_type"], :name => "input_string_and_type_unique", :unique => true
 
   create_table "sentences_staging", :id => false, :force => true do |t|
     t.integer "sentence_id",                :null => false
