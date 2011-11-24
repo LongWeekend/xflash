@@ -5,6 +5,7 @@ class HumanTagImporter
   def get_human_result_for_entry(fuzzy_entry = false, fuzzy_matches = [])
     # Don't take any bull
     raise "Impromper input to get_human_result_for_entry, must be Entry subclass" unless fuzzy_entry.kind_of?(Entry)
+    raise "Impromper input to get_human_result_for_entry, second param must be array" unless fuzzy_matches.kind_of?(Array)
   
     # Initialize
     connect_db
@@ -19,7 +20,8 @@ class HumanTagImporter
     end
 
     # Well, we didn't return above, so now add it as unmatched
-    _store_new_fuzzy_entry_as_unmatched(fuzzy_entry)
+    entry_id = _store_new_fuzzy_entry_as_unmatched(fuzzy_entry)
+    _store_fuzzy_matches_as_unmatched_to_id(entry_id, fuzzy_matches) if (fuzzy_matches.empty? == false)
     return false
   end
 
@@ -49,14 +51,17 @@ class HumanTagImporter
   
   def _store_new_fuzzy_entry_as_unmatched(fuzzy_entry)
     hash = mysql_serialise_ruby_object(fuzzy_entry)
-    insert_sql = "INSERT INTO tag_matching_exceptions (entry_id, human_readable, serialized_entry) VALUES ('%s','%s','%s') ON DUPLICATE KEY UPDATE human_readable = '%s'" % [fuzzy_entry.checksum, fuzzy_entry.description, hash, fuzzy_entry.description]
+    desc = mysql_escape_str(fuzzy_entry.description)
+    insert_sql = "INSERT INTO tag_matching_exceptions (entry_id, human_readable, serialized_entry, created_at, updated_at) VALUES ('%s','%s','%s',NOW(),NOW()) ON DUPLICATE KEY UPDATE human_readable = '%s', updated_at = NOW()" % [fuzzy_entry.checksum, desc, hash, desc]
     $cn.execute(insert_sql)
+    return $cn.last_inserted_id
   end
   
   def _store_fuzzy_matches_as_unmatched_to_id(entry_id, fuzzy_matches)
     fuzzy_matches.each do |match_entry|
       hash = mysql_serialise_ruby_object(match_entry)
-      insert_sql = "INSERT INTO tag_matching_resolution_choices (base_entry_id, human_readable, serialized_entry) VALUES ('%s','%s','%s') ON DUPLICATE KEY UPDATE human_readable = '%s'" % [entry_id, match_entry.checksum, match_entry.description, hash, match_entry.description]
+      desc = mysql_escape_str(match_entry.description)
+      insert_sql = "INSERT INTO tag_matching_resolution_choices (tag_matching_exception_id, human_readable, serialized_entry, created_at, updated_at) VALUES ('%s','%s','%s',NOW(),NOW()) ON DUPLICATE KEY UPDATE human_readable = '%s', updated_at = NOW()" % [entry_id, desc, hash, desc]
       $cn.execute(insert_sql)
     end
   end
@@ -68,21 +73,6 @@ class HumanTagImporter
     $cn.execute("TRUNCATE TABLE tag_matching_exceptions")
     $cn.execute("TRUNCATE TABLE tag_matching_resolutions")
     $cn.execute("TRUNCATE TABLE tag_matching_resolution_choices")
-  end
-  
-  def self.create_exception_tables
-    connect_db
-    sql_statements = IO.read((File.dirname(__FILE__) + '/../sql/create_exception_tables.sql'))
-    sql_statements.split("\n\n").each do |statement|
-      $cn.execute(statement)
-    end
-  end
-  
-  def self.drop_exception_tables
-    connect_db
-    $cn.execute("DROP TABLE IF EXISTS tag_matching_exceptions")
-    $cn.execute("DROP TABLE IF EXISTS tag_matching_resolutions")
-    $cn.execute("DROP TABLE IF EXISTS tag_matching_resolution_choices")
   end
   
   # GETTERS
