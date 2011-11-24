@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  input_string: MyString
+  exception_type: MyString
+  resolution_string: MyString
+
+two:
+  input_string: MyString
+  exception_type: MyString
+  resolution_string: MyString

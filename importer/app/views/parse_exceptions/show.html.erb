@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Input string:</b>
+  <%= @parse_exception.input_string %>
+</p>
+
+<p>
+  <b>Exception type:</b>
+  <%= @parse_exception.exception_type %>
+</p>
+
+<p>
+  <b>Resolution string:</b>
+  <%= @parse_exception.resolution_string %>
+</p>
+
+
+<%= link_to 'Edit', edit_parse_exception_path(@parse_exception) %> |
+<%= link_to 'Back', parse_exceptions_path %>
