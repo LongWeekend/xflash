@@ -128,7 +128,7 @@ class TagImporter
         
         # If nothing found by the TagImporter, ask the HumanImporter
         if result.empty? or result.count > 1
-          matched_card = @human_importer.get_human_result_for_entry(result)
+          matched_card = @human_importer.get_human_result_for_entry(rec, result)
           if matched_card
             result = [matched_card]
           else

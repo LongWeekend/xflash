@@ -1,5 +1,10 @@
 Importer::Application.routes.draw do
 
+  resources :parse_exceptions
+
+  resources :tag_matching_resolutions
+  resources :tag_matching_exceptions
+  
   root :to => "tag_matching_exceptions#index"
 
   # The priority is based upon order of creation:

@@ -1,0 +1,27 @@
+<h1>Listing parse_exceptions</h1>
+
+<table>
+  <tr>
+    <th>Input string</th>
+    <th>Exception type</th>
+    <th>Resolution string</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @parse_exceptions.each do |parse_exception| %>
+  <tr>
+    <td><%= parse_exception.input_string %></td>
+    <td><%= parse_exception.exception_type %></td>
+    <td><%= parse_exception.resolution_string %></td>
+    <td><%= link_to 'Show', parse_exception %></td>
+    <td><%= link_to 'Edit', edit_parse_exception_path(parse_exception) %></td>
+    <td><%= link_to 'Destroy', parse_exception, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Parse exception', new_parse_exception_path %>

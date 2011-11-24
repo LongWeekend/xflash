@@ -4,8 +4,7 @@ class HumanTagImporterTest < Test::Unit::TestCase
   include DatabaseHelpers
   
   def setup
-    HumanTagImporter.drop_exception_tables
-    HumanTagImporter.create_exception_tables
+    HumanTagImporter.truncate_exception_tables
   end
   
   # TESTS
@@ -17,7 +16,6 @@ class HumanTagImporterTest < Test::Unit::TestCase
     end
   end
     
-  
   # This is a brand-new importer, it shouldn't have any human-matched entries associated
   def test_initialization
     entry = CEdictEntry.new
@@ -45,6 +43,25 @@ class HumanTagImporterTest < Test::Unit::TestCase
     human_tag_importer = HumanTagImporter.new
     assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry, []))
   end
+  
+  def test_description_sql_escaped_and_added_options
+    # Create our word list input -- the entry we are trying to match
+    fuzzy_entry = HSKEntry.new
+    fuzzy_entry.parse_line("18,2-6,百,bai3,hundred; num'erous; all ki\"nd's of; surna'me Bai,")
+  
+    # Create our result inputs -- TagImporter returns these when it doesn't know which to match to
+    results = []
+    entry = CEdictEntry.new
+    entry.parse_line("百 百 [Bai3] /surn\"am'e Bai/")
+    results << entry
+    entry = CEdictEntry.new
+    entry.parse_line("百 百 [bai3] /hundred/nu'merous/a'll k\"\"inds of/")
+    results << entry
+    
+    human_tag_importer = HumanTagImporter.new
+    assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry, results))
+  end
+
   
   # Test the addition of a human-matched entry -- some web interface would call this
   def test_add_human_resolution
