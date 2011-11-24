@@ -7,6 +7,10 @@ class HumanParseExceptionHandlerTest < Test::Unit::TestCase
     HumanParseExceptionHandler.truncate_exception_tables
   end
   
+  def teardown
+    HumanParseExceptionHandler.truncate_exception_tables
+  end
+  
   # TESTS
   
   def test_bad_input
