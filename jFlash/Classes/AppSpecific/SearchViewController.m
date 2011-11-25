@@ -18,7 +18,6 @@ const NSInteger KSegmentedTableHeader = 100;
 @interface SearchViewController ()
 @property (retain) NSMutableArray *observerArray;
 - (BOOL) _checkMembershipCacheForCard:(Card*)card;
-- (void) _removeCardFromMembershipCache:(Card*)card;
 - (void) _toggleMembership:(id)sender event:(id)event;
 - (void) _addSearchControlToHeader;
 - (UITableViewCell*) _setupTableCell:(UITableViewCell*)cell forCard:(Card*) card;
@@ -495,23 +494,6 @@ const NSInteger KSegmentedTableHeader = 100;
 }
 
 
-/** Remove a card from the membership cache */
-- (void) _removeCardFromMembershipCache:(Card*)card
-{
-  NSInteger cardId = card.cardId;
-  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
-  {
-    for (int i = 0; i < [self.membershipCacheArray count]; i++)
-    {
-      if ([[self.membershipCacheArray objectAtIndex:i] cardId] == cardId)
-      {
-        [self.membershipCacheArray removeObjectAtIndex:i];
-        return;
-      }
-    }
-  }
-}
-
 /**
  * Adds a card to a favorites tag, or removes it, depending on its current
  */
@@ -569,7 +551,7 @@ const NSInteger KSegmentedTableHeader = 100;
         return;
       }
       
-      [self _removeCardFromMembershipCache:theCard];
+      [self.membershipCacheArray removeObject:theCard];
     }
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
