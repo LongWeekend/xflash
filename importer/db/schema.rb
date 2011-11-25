@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124091809) do
+ActiveRecord::Schema.define(:version => 20111125044628) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -142,6 +142,8 @@ ActiveRecord::Schema.define(:version => 20111124091809) do
     t.text     "serialized_entry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "should_ignore",             :default => false, :null => false
+    t.text     "resolved_serialized_entry"
   end
 
   add_index "tag_matching_exceptions", ["entry_id"], :name => "index_tag_matching_exceptions_on_entry_id", :unique => true
@@ -155,14 +157,6 @@ ActiveRecord::Schema.define(:version => 20111124091809) do
   end
 
   add_index "tag_matching_resolution_choices", ["tag_matching_exception_id"], :name => "index_tag_matching_resolution_choices_on_base_entry_id"
-
-  create_table "tag_matching_resolutions", :force => true do |t|
-    t.string   "entry_id"
-    t.text     "serialized_entry"
-    t.string   "resolution_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "tags", :id => false, :force => true do |t|
     t.integer "tag_id",                     :default => 0, :null => false
