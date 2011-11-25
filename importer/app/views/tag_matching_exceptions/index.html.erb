@@ -1,9 +1,7 @@
-<h1>Listing tag_matching_exceptions</h1>
+<h1>No Match / Multiple Match Tag Entries</h1>
 
 <table>
   <tr>
-    <th>Type</th>
-    <th>GUID</th>
     <th>Unmatched Entry</th>
     <th>Choices</th>
     <th></th>
@@ -12,17 +10,6 @@
 
 <% @tag_matching_exceptions.each do |tag_matching_exception| %>
   <tr>
-    <td>
-    <%=
-    if tag_matching_exception.tag_matching_resolution_choices.empty?
-      "No Match"
-    else
-      cnt = tag_matching_exception.tag_matching_resolution_choices.count
-      "%s Match%s" % [cnt, (cnt > 1) ? "es" : ""]
-    end
-    %>
-    </td>
-    <td><%= tag_matching_exception.entry_id %></td>
     <td><%= tag_matching_exception.human_readable %></td>
     <td>
     <%=
@@ -31,7 +18,7 @@
     end
     %>
     </td>
-    <td><%= link_to 'Show', tag_matching_exception %></td>
+    <td><%= link_to 'Ignore', tag_matching_exception, :confirm => 'Are you sure?', :method => :ignore %></td>
     <td><%= link_to 'Destroy', tag_matching_exception, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -2,7 +2,7 @@ class ParseExceptionsController < ApplicationController
   # GET /parse_exceptions
   # GET /parse_exceptions.xml
   def index
-    @parse_exceptions = ParseException.all
+    @parse_exceptions = ParseException.all_unresolved
 
     respond_to do |format|
       format.html # index.html.erb
