@@ -28,8 +28,6 @@ enum EntrySectionRows
 // Private methods & properties
 @interface AddTagViewController ()
 - (void) _reloadTableData;
-- (void) _removeTagFromMembershipCache:(NSInteger)tagId;
-- (BOOL) _tagExistsInMembershipCache:(NSInteger)tagId;
 @property (retain) NSMutableArray *membershipCacheArray;
 @end
 
@@ -104,45 +102,10 @@ enum EntrySectionRows
   [self.studySetTable reloadData];
 }
 
-/** Checks the membership cache to see if we are in - FYI similar methods are used by SearchViewController as well */
-- (BOOL) _tagExistsInMembershipCache:(NSInteger)tagId
-{
-  if ([self.membershipCacheArray count] > 0)
-  {
-    for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
-    {
-      if ([[self.membershipCacheArray objectAtIndex:i] intValue] == tagId)
-      {
-        // Gotcha!
-        return YES;
-      }
-    }
-  }
-  return NO;
-}
-
-// REVIEW: can't we just use removeObject:[NSNumber tagId] instead of iterating
-//! Remove a tag from the membership cache
-- (void) _removeTagFromMembershipCache:(NSInteger)tagId
-{
-  // Usually we don't want to mutate an array we are iterating, but in this case, we return immediately.
-  if (self.membershipCacheArray && [self.membershipCacheArray count] > 0)
-  {
-    for (NSInteger i = 0; i < [self.membershipCacheArray count]; i++)
-    {
-      if ([[self.membershipCacheArray objectAtIndex:i] intValue] == tagId)
-      {
-        [self.membershipCacheArray removeObjectAtIndex:i];
-        return;
-      }
-    }
-  }
-}
-
 - (void) _toggleMembershipForTag:(Tag *)tmpTag
 {
   // Check whether or not we are ADDING or REMOVING from the selected tag
-  if ([self _tagExistsInMembershipCache:tmpTag.tagId])
+  if ([self.membershipCacheArray containsObject:[NSNumber numberWithInt:tmpTag.tagId]])
   {
     // Remove tag
     NSError *error = nil;
@@ -162,10 +125,7 @@ enum EntrySectionRows
       }
       return;
     }
-    
-    //this section will only be run if the cancel membership operation is successful.
-    // TODO: shouldn't this just be [self.membershipCacheArray removeObject:[NSNumber numberWithInt:tmpTag.tagId]];?
-    [self _removeTagFromMembershipCache:tmpTag.tagId];    
+    [self.membershipCacheArray removeObject:[NSNumber numberWithInt:tmpTag.tagId]];
   }
   else
   {
@@ -276,7 +236,7 @@ enum EntrySectionRows
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      if ([self _tagExistsInMembershipCache:tmpTag.tagId])
+      if ([self.membershipCacheArray containsObject:[NSNumber numberWithInt:tmpTag.tagId]])
       {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
