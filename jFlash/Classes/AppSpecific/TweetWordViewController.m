@@ -100,6 +100,7 @@
 	}
 	else
 	{
+    self.counterLbl.text = [NSString stringWithFormat:@"%d", 0];
 		textView.text = [textView.text substringToIndex:kMaxChars];
 	}
 }
