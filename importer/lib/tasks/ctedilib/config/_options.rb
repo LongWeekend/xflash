@@ -178,6 +178,7 @@ $regexes[:inlined_tags] = /\(([^\)]*)\)$/
 # Delimiters
 $delimiters = {}
 $delimiters[:jflash_meanings]         = "; "
+$delimiters[:jflash_tag_coldata]      = ","
 
 # CFlash Delimiters
 #$delimiters[:cflash_readings]         = " "
@@ -188,7 +189,6 @@ $delimiters[:jflash_meanings]         = "; "
 # $delimiters[:jflash_glosses]          = " / "
 # $delimiters[:jflash_headwords]        = "; "
 # $delimiters[:jflash_inlined_tags]     = ", "
-# $delimiters[:jflash_tag_coldata]      = ","
 # $delimiters[:jflash_jmdict_refs]      = ","
 # $delimiters[:jflash_tag_sourcenames]  = ","
 # $delimiters[:jflash_alt_headwords]    = ";"
