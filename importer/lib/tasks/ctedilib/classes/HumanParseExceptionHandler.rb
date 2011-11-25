@@ -9,10 +9,15 @@ class HumanParseExceptionHandler
     connect_db
 
     # Check the database to see if we have any objects that match it -- quick return if YES
-    escaped_input_str = mysql_escape_str(input_str)
-    escaped_exc_str = mysql_escape_str(exception_type_str)
-    resolution = $cn.execute("SELECT resolution_string FROM parse_exceptions WHERE input_string = '%s' AND exception_type = '%s' LIMIT 1" % [escaped_input_str, escaped_exc_str]).each do |rec|
-      return rec[0]
+    escaped_input_str = mysql_escape_str(input_str.strip)
+    escaped_exc_str = mysql_escape_str(exception_type_str.strip)
+    search_sql = "SELECT resolution_string FROM parse_exceptions WHERE input_string = '%s' AND exception_type = '%s' LIMIT 1" % [escaped_input_str, escaped_exc_str]
+    resolution = $cn.execute(search_sql).each do |rec|
+      if rec[0].nil?
+        return false
+      else
+        return rec[0]
+      end
     end
     
     # OK, didn't find anything, so insert a new row

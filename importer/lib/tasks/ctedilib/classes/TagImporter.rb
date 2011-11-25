@@ -120,15 +120,42 @@ class TagImporter
     @insert_tag_link_query = "INSERT card_tag_link(tag_id, card_id) VALUES(%s,%s);"
     bulkSQL = BulkSQLRunner.new(@config[:data].size, @config[:sql_buffer_size], @config[:sql_debug])
 
+    # This block defines how the cards should be matched (beyond having the same headwords)
+    normal_criteria = Proc.new do |dict_entry, tag_entry|
+      # Comparing the pinyin/reading - ignore case for now
+      if tag_entry.pinyin.length > 0
+        same_pinyin = (dict_entry.pinyin.gsub(" ","") == tag_entry.pinyin.gsub(" ",""))
+      elsif tag_entry.pinyin_diacritic
+        same_pinyin = (dict_entry.pinyin_diacritic.gsub(" ","") == tag_entry.pinyin_diacritic.gsub(" ",""))
+      end
+      result = same_pinyin
+      # The "return" keyword will F everything up when used in blocks!
+      result
+    end
+    
+    # Use this when we want to match headword only -- we don't care about the particulars of the card
+    loose_criteria = Proc.new do |dict_entry, tag_entry|
+      true
+    end
+
     # This is the for each for every record data call the block with each line as the parameter.
     tickcount("Processing tag-card-match and importing") do
       @config[:data].each do |rec|
         # First, try to match it programmatically
-        result = TagImporter.find_cards_similar_to(rec)
+        result = TagImporter.find_cards_similar_to(rec, normal_criteria)
         
-        # If nothing found by the TagImporter, ask the HumanImporter
-        if result.empty? or result.count > 1
-          matched_card = @human_importer.get_human_result_for_entry(rec, result)
+        # If the normal criteria turned up nothing conclusive, check with human importer and/or log it
+        if (result.empty? or result.count > 1)
+        
+          # If the normal result is empty, check with looser criteria to give us good results for the human matching
+          if result.empty?
+            loose_results = TagImporter.find_cards_similar_to(rec, loose_criteria)
+            matched_card = @human_importer.get_human_result_for_entry(rec, loose_results)
+          else
+            matched_card = @human_importer.get_human_result_for_entry(rec, result)
+          end
+
+          # Great, we found something?
           if matched_card
             result = [matched_card]
           else
@@ -182,25 +209,12 @@ class TagImporter
   end
   
   # Find cards object which has similarities with the entry as the parameter
-  def self.find_cards_similar_to(entry)
+  def self.find_cards_similar_to(entry, criteria)
     # Make sure we only want the entry as an inheritance instances of Entry.
     raise "You must pass only Entry subclasses to find_cards_similar_to" unless entry.kind_of?(Entry)
     
     # If this has not been setup yet
     TagImporter.get_all_cards_from_db()
-    
-    # This block defines how the cards should be matched (beyond having the same headwords)
-    criteria = Proc.new do |dict_entry, tag_entry|
-      # Comparing the pinyin/reading - ignore case for now
-      if tag_entry.pinyin.length > 0
-        same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ",""))
-      elsif tag_entry.pinyin_diacritic
-        same_pinyin = (dict_entry.pinyin_diacritic.downcase.gsub(" ","") == tag_entry.pinyin_diacritic.downcase.gsub(" ",""))
-      end
-      result = same_pinyin
-      # The "return" keyword will F everything up when used in blocks!
-      result
-    end
     
     # Try the fast hash first -- saves us from having to loop through all the cards and do comparisons
     indices = []

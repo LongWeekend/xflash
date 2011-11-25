@@ -7,6 +7,10 @@ class HumanTagImporterTest < Test::Unit::TestCase
     HumanTagImporter.truncate_exception_tables
   end
   
+  def teardown
+    HumanTagImporter.truncate_exception_tables
+  end
+  
   # TESTS
   
   def test_bad_input
@@ -73,8 +77,8 @@ class HumanTagImporterTest < Test::Unit::TestCase
     matching_entry.parse_line("百 百 [bai3] /hundred/numerous/all kinds of/")
 
     human_tag_importer = HumanTagImporter.new
+    assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry))
     human_tag_importer.add_match_for_entry(fuzzy_entry, matching_entry)
-    
     assert_equal(matching_entry, human_tag_importer.get_human_result_for_entry(fuzzy_entry))
   end
 

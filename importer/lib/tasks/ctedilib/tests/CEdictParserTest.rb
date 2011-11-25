@@ -23,6 +23,9 @@ class CEdictParserTest < Test::Unit::TestCase
     entries = parser.run
     assert_equal(6,entries.count)
     assert_equal(1,parser.reference_only_entries.count)
+    
+    merged_entries = parser.merge_references_into_base_entries(entries,parser.reference_only_entries)
+    assert_equal(6,merged_entries.count)
   end
   
   def test_match_reference_merge
@@ -118,9 +121,5 @@ class CEdictParserTest < Test::Unit::TestCase
     expected_meanings = [Meaning.new("store"),Meaning.new("shop"),Meaning.new("Counter: 家[jia1]",["classifier"]),Meaning.new("Counter: 個|个[ge4]",["classifier"])]
     assert_equal(expected_meanings,entries[1].meanings)
   end
-  
-  #==========================================================================================
-  
-  # TODO: Write parser exception tests here
 
 end

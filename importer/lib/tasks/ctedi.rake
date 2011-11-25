@@ -12,6 +12,7 @@ namespace :ctedi do
     load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
     include RakeHelpers
     include DebugHelpers
+    include DatabaseHelpers
     get_cli_debug
     
     # Require all the tests we want the runner to run
@@ -68,6 +69,7 @@ namespace :ctedi do
     
     include RakeHelpers
     include DebugHelpers
+    include DatabaseHelpers
     
     get_cli_debug
     

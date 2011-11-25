@@ -11,9 +11,14 @@ class HumanTagImporter
     connect_db
 
     # Check the database to see if we have any objects that match it -- quick return if YES
-    resolutions = $cn.execute("SELECT serialized_entry, resolution_type FROM tag_matching_resolutions WHERE entry_id = '%s' LIMIT 1" % fuzzy_entry.checksum).each do |rec|
-      resolution_type = rec[1]
-      if (resolution_type == "human_matched")
+    resolutions = $cn.execute("SELECT resolved_serialized_entry, should_ignore FROM tag_matching_exceptions WHERE entry_id = '%s' LIMIT 1" % fuzzy_entry.checksum).each do |rec|
+      # Quick return on should ignore
+      if rec[1] == true
+        return false
+      end
+      
+      # Otherwise match it
+      if rec[0].nil? == false
         matched_entry = mysql_deserialise_ruby_object(rec[0])
         return matched_entry
       end
@@ -25,18 +30,10 @@ class HumanTagImporter
     return false
   end
 
-  def add_ignore_for_entry(fuzzy_entry)
-    connect_db
-    resolution_type = "ignore"
-    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialise_ruby_object(matching_entry), resolution_type]
-    $cn.execute(insert_sql)
-  end
-
   def add_match_for_entry(fuzzy_entry, matching_entry)
     connect_db
-    resolution_type = "human_matched"
-    insert_sql = "INSERT INTO tag_matching_resolutions (entry_id, serialized_entry, resolution_type) VALUES ('%s','%s','%s')" % [fuzzy_entry.checksum, mysql_serialise_ruby_object(matching_entry), resolution_type]
-    $cn.execute(insert_sql)
+    update_sql = "UPDATE tag_matching_exceptions SET resolved_serialized_entry = '%s' WHERE entry_id = '%s'" % [mysql_serialise_ruby_object(matching_entry), fuzzy_entry.checksum]
+    $cn.execute(update_sql)
   end
   
   def retrieve_exception_entry_from_db(entry)
@@ -71,7 +68,6 @@ class HumanTagImporter
   def self.truncate_exception_tables
     connect_db
     $cn.execute("TRUNCATE TABLE tag_matching_exceptions")
-    $cn.execute("TRUNCATE TABLE tag_matching_resolutions")
     $cn.execute("TRUNCATE TABLE tag_matching_resolution_choices")
   end
   

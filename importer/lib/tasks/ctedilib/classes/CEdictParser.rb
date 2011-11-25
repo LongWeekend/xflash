@@ -1,4 +1,3 @@
-#### CEDICT PARSER #####
 class CEdictParser < Parser
 
   @reference_only_entries
@@ -13,10 +12,14 @@ class CEdictParser < Parser
     # These store entries that are simply redirects
     @reference_only_entries = []
     @variant_only_entries = []
+    @human_exception_handler = HumanParseExceptionHandler.new
     
     # These store entries that are redirects, but also have content in their own right
     @erhua_variant_entries = []
     @variant_entries = []
+    
+    # Use this for when we have an exception and want to retry
+    @rescued_line = false
     
     # Call 'super' method to process loop for us
     super do |line, line_no, cache_data|
@@ -25,7 +28,14 @@ class CEdictParser < Parser
       
       # Use exception handling to weed out bad entries
       begin
-        result = entry.parse_line(line)
+      
+        # this is the normal behavior, we are just using the normal line
+        if @rescued_line == false
+          result = entry.parse_line(line)
+        else
+          result = entry.parse_line(@rescued_line)
+          @rescued_line = false
+        end
         if result
           # Handle classifier expansion
           entry.add_classifier_to_meanings
@@ -49,16 +59,18 @@ class CEdictParser < Parser
             end
           end
         end
-      rescue EntryParseException => e
-        prt "Could not parse line #%s: %s" % [line_no, line]
-        prt "Message: %s\n" % e.message
-        prt "Backtrace: %s\n" % e.backtrace.inspect
-      rescue ToneParseException => e
-        prt "Could not parse line #%s: %s" % [line_no, line]
-        prt "Message: %s\n" % e.message
-      rescue MeaningParseException => e
-        prt "Could not parse line #%s: %s" % [line_no, line]
-        prt "Message: %s\n" % e.message
+      rescue Exception => e
+        if @rescued_line == false
+          @rescued_line = @human_exception_handler.get_human_result_for_string(line,e.class.name)
+          if @rescued_line
+            retry
+          else
+            prt "Could not parse line #%s: %s (msg: %s)" % [line_no, line,e.message]
+          end
+        else
+          prt "Rescued line was not false but exception caught -- this means we may have infinite loop!"
+          @rescued_line == false
+        end
       end
     end
     
