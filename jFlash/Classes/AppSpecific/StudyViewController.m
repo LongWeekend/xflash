@@ -23,6 +23,7 @@
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
+- (void)_setupPageControl:(NSInteger)page;
 - (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
 - (void) _enablePronounceButton:(BOOL)enabled;
 - (Card*) _getNextCard:(NSString*)directionOrNil;
@@ -39,6 +40,8 @@
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize progressVC = _progressVC;
 @synthesize pronounceBtn = pronounceBtn;
+
+#define LWE_EX_SENTENCE_INSTALLER_VIEW_TAG 69
 
 /** Custom initializer */
 - (id) init
@@ -269,6 +272,26 @@
   }
 }
 
+- (void)_setupPageControl:(NSInteger)page
+{
+    if ([self hasExampleSentences] == NO) // can't show the examples if there are none
+    {
+      page = 0;
+      // Page control should be shown when we have example sentences
+      self.pageControl.hidden = YES;
+      self.scrollView.scrollEnabled = NO;
+    }
+    else
+    {
+      self.pageControl.hidden = NO;
+      self.scrollView.scrollEnabled = YES;      
+    }
+
+    self.pageControl.currentPage = page;
+    [self changePage:self.pageControl animated:NO];
+    _isChangingPage = NO;
+}
+
 /**
  * \brief Basic method to change cards
  * \param card The Card object to move to
@@ -288,14 +311,10 @@
     [self.cardViewController setupWithCard:card];
     [self.actionBarController setupWithCard:card];
     [self.exampleSentencesViewController setupWithCard:card];
-    
-    // Page control should be shown when we have example sentences
-    self.pageControl.hidden = ([self hasExampleSentences] == NO);
-    self.pageControl.currentPage = 0;
-    [self changePage:self.pageControl animated:NO];
-    _isChangingPage = NO;
-    
+             
     self.currentCard = card;
+    
+    [self _setupPageControl:0];
     
     // If no direction, don't animate transition
     if (directionOrNil != nil)
@@ -618,11 +637,12 @@
   if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
   {
     // Get rid of the old example sentences guy & re-setup the scroll view
-    [self.exampleSentencesViewController.view removeFromSuperview];
+    [[self.scrollView viewWithTag:LWE_EX_SENTENCE_INSTALLER_VIEW_TAG] removeFromSuperview];
     [self _setupScrollView];
     
-    // Reset the card (this will automatically call the code to determine if this card has ex sentences)
-    [self doChangeCard:self.currentCard direction:nil];
+    // Reset the page control (this will automatically call the code to determine if this card has ex sentences)
+    [self _setupPageControl:1];
+    [self.exampleSentencesViewController setupWithCard:self.currentCard]; // finally setup the example view for the current card
   }
 }
 
@@ -654,6 +674,7 @@
     // No example sentence plugin loaded, so show "please download me" view instead
     // TODO: iPad customization
     vc = [[[UIViewController alloc] initWithNibName:@"ExamplesUnavailable" bundle:nil] autorelease];
+    vc.view.tag = LWE_EX_SENTENCE_INSTALLER_VIEW_TAG;
   }
   
   // Resize our second view to match our first one
