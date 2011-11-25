@@ -470,6 +470,7 @@
  * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,
  * the sixth element is the total number of seen cards (levels 1-5)
  */
+// REVIEW: Why isn't this method in Tag.m??  Or, the level details I believe are passed to Progress Bar- maybe it should be there?
 - (NSMutableArray*) _getLevelDetails
 {
   // This is a convenience method that alloc's and sets to autorelease!
@@ -722,14 +723,11 @@
 
 - (void) viewDidUnload
 {
-	LWE_LOG(@"Study View Controller get Unload");
   [super viewDidUnload];
   
 	self.progressBarViewController = nil;
 	self.cardViewController = nil;
 	self.actionBarController = nil;
-	
-	//RENDY: Is this really important?
 	self.scrollView = nil;
 	self.pageControl = nil;
 	self.cardView = nil;
@@ -745,15 +743,15 @@
 	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
 	self.showProgressModalBtn = nil;
-	//self.progressModalCloseBtn = nil;
-	
+  self.pronounceBtn = nil;
+
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
 }
 
 - (void) dealloc
 {
-  self.pronounceBtn = nil;
+  [pronounceBtn release];
   
   if (self.progressVC)
   {
