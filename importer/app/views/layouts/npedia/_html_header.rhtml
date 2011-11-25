@@ -3,11 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <%= title :site => "Nihongopedia | Japanese-English definitions, translations, glossaries, examples, et al (Npedia)", :reverse => true %>
-	<%= stylesheet_link_merged  'display', 'ac', 'tabs', 'npedia_ui', 'npedia_search', 'npedia_forms', 'npedia_forum', 'jtiddler', 'tag-ac' %>
-  <% unless @feed_icons.blank? %>
-    <% @feed_icons.each do |feed| %><%= auto_discovery_link_tag :rss, feed[:url], :title => "Subscribe to '#{feed[:title]}'" %><% end %>
-	<% end %>
+  <%= title "Importer"  %>
   <link rel="search" type="application/opensearchdescription+xml" href="http://<%= request.host_with_port %>/open_search.xml" />
 </head>
 

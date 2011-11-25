@@ -2,7 +2,7 @@ class TagMatchingExceptionsController < ApplicationController
   # GET /tag_matching_exceptions
   # GET /tag_matching_exceptions.xml
   def index
-    @tag_matching_exceptions = TagMatchingException.all
+    @tag_matching_exceptions = TagMatchingException.all_unmatched_and_has_options
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,6 +19,10 @@ class TagMatchingExceptionsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @tag_matching_exception }
     end
+  end
+  
+  def update_all
+    
   end
 
   # GET /tag_matching_exceptions/new
@@ -52,7 +56,7 @@ class TagMatchingExceptionsController < ApplicationController
       end
     end
   end
-
+  
   # PUT /tag_matching_exceptions/1
   # PUT /tag_matching_exceptions/1.xml
   def update
@@ -60,11 +64,14 @@ class TagMatchingExceptionsController < ApplicationController
 
     respond_to do |format|
       if @tag_matching_exception.update_attributes(params[:tag_matching_exception])
-        format.html { redirect_to(@tag_matching_exception, :notice => 'Tag matching exception was successfully updated.') }
+        format.html { redirect_to(:action => :index) }
+#        format.html { redirect_to(@tag_matching_exception, :notice => 'Tag matching exception was successfully updated.') }
         format.xml  { head :ok }
+        format.js
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @tag_matching_exception.errors, :status => :unprocessable_entity }
+        format.js
       end
     end
   end

@@ -1,5 +1,6 @@
-<h1>No Match / Multiple Match Tag Entries</h1>
-
+<% javascript_include_tag 'default' %>
+<% csrf_meta_tag %>
+<h1>Unmatched Tag Entries (<%= @tag_matching_exceptions.count %>)</h1>
 <table>
   <tr>
     <th>Unmatched Entry</th>
@@ -9,19 +10,24 @@
   </tr>
 
 <% @tag_matching_exceptions.each do |tag_matching_exception| %>
-  <tr>
-    <td><%= tag_matching_exception.human_readable %></td>
-    <td>
-    <%=
-    if tag_matching_exception.tag_matching_resolution_choices.count > 0
-      collection_select(:tag_matching_resolution, :create, tag_matching_exception.tag_matching_resolution_choices, :id, :human_readable_trimmed, :prompt => true)
-    end
-    %>
-    </td>
-    <td><%= link_to 'Ignore', tag_matching_exception, :confirm => 'Are you sure?', :method => :ignore %></td>
-    <td><%= link_to 'Destroy', tag_matching_exception, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <%= form_for tag_matching_exception, :remote => true do |f| %>
+    <tr>
+      <td><%= tag_matching_exception.human_readable %></td>
+      <td>
+      <%
+      if tag_matching_exception.tag_matching_resolution_choices.count > 0
+      %>
+      <%=
+        include_blank = (tag_matching_exception.tag_matching_resolution_choices.count > 1)
+        select("tag_matching_exception","resolved_serialized_entry",tag_matching_exception.tag_matching_resolution_choices.collect { |p| [p.human_readable_trimmed,p.serialized_entry] }, {:include_blank => include_blank})
+      %>
+      <% end %>
+      </td>
+      <td><div id="status_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
+      <td><%= link_to 'Ignore', tag_matching_exception, :confirm => 'Are you sure?', :method => :ignore %></td>
+      <td><%= link_to 'Destroy', tag_matching_exception, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
-
 <br />
