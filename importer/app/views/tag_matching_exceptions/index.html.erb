@@ -39,8 +39,8 @@
             <%= hidden_field("tag_matching_exception","resolved_serialized_entry", :id => "tag_matching_exception_#{tag_matching_exception.id}") %>
             <div id="status_<%= tag_matching_exception.id %>" style="display: none;"><%= f.submit "Match" %></div>
           <% end %>
-          <% form_for %>
-          <% %>
+          <% #form_tag("/cards_staging", :method => :get, :remote => true) %>
+          <% #end %>
         </td>
       <% end %>
 
