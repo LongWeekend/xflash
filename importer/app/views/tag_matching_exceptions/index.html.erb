@@ -6,26 +6,47 @@
   <tr>
     <th>Unmatched Entry</th>
     <th>Choices</th>
+    <% if @has_matches %>
     <th></th>
+    <% end %>
     <th></th>
   </tr>
 
 <% @tag_matching_exceptions.each do |tag_matching_exception| %>
-  <%= form_for tag_matching_exception, :remote => true do |f| %>
     <tr id='exception_row_<%= tag_matching_exception.id %>'>
       <td><%= tag_matching_exception.human_readable %></td>
-      <td>
-      <% if tag_matching_exception.tag_matching_resolution_choices.count > 0 %>
-      <%=
-        include_blank = (tag_matching_exception.tag_matching_resolution_choices.count > 1)
-        select("tag_matching_exception","resolved_serialized_entry",tag_matching_exception.tag_matching_resolution_choices.collect { |p| [p.human_readable_trimmed,p.serialized_entry] }, {:include_blank => include_blank})
-      %>
+
+
+      <% if @has_matches %>
+        <!-- THIS SECTION IS FOR MATCHING HEADWORDS WHEN UNSURE -->
+        <% form_for tag_matching_exception, :remote => true do |f| %>
+          <td>
+          <%=
+            include_blank = (tag_matching_exception.tag_matching_resolution_choices.count > 1)
+            select("tag_matching_exception","resolved_serialized_entry",tag_matching_exception.tag_matching_resolution_choices.collect { |p| [p.human_readable_trimmed,p.serialized_entry] }, {:include_blank => include_blank})
+          %>
+          </td>
+          <td><div id="status_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
+        <% end %>
       <% end %>
-      </td>
-      <td><div id="status_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
+
+
+      <% if @has_matches == false %>
+        <!-- THIS SECTION IS FOR LOOKING UP NEW HEADWORDS -->
+        <td>
+          <% form_for tag_matching_exception, :remote => true do |f| %>
+            <!-- We put a hidden tag here with this form so that our match button has a value to update from, match button starts hidden -->
+            <%= hidden_field("tag_matching_exception","resolved_serialized_entry", :id => "tag_matching_exception_#{tag_matching_exception.id}") %>
+            <div id="status_<%= tag_matching_exception.id %>" style="display: none;"><%= f.submit "Match" %></div>
+          <% end %>
+          <% form_for %>
+          <% %>
+        </td>
+      <% end %>
+
+
       <td><%= link_to 'Ignore', tag_matching_exception, {:confirm => 'Are you sure?', :method => :delete, :remote => true} %></td>
     </tr>
-  <% end %>
 <% end %>
 </table>
 <br />
