@@ -3,6 +3,7 @@ class Meaning
   @variant
   @variant_erhua
   @reference
+  @is_archaic_variant
   @meaning
   @tags
   
@@ -13,6 +14,7 @@ class Meaning
     @reference = false
     @variant = false
     @skip_fts = false
+    @is_archaic_variant = false
     @is_erhua = false
     @tags = tags
     @meaning = meaning
@@ -122,21 +124,13 @@ class Meaning
 
     has_meaning = true
 
-    # Always try erhua first!
-    variant_regex = /^erhua variant of (\w+(\||\s)*\w*)([\[\]a-zA-Z:0-9\s]*)[,\s]*(.+)*$/
+    variant_regex = /^(erhua |archaic |old |)variant of (\w+(\||\s)*\w*)([\[\]a-zA-Z:0-9\s]*)[,\s]*(.+)*$/
     meaning_str.scan(variant_regex) do |variant|
-      @is_erhua = true
-      @variant = variant[0]                             # Headword
-      @variant = @variant + variant[2] if variant[2]    # Reading if not nil
-      has_meaning = (variant[3] != nil)                 # A meaning afterward?
-    end
-
-    # Now regular variants
-    variant_regex = /^variant of (\w+(\||\s)*\w*)([\[\]a-zA-Z:0-9\s]*)[,\s]*(.+)*$/
-    meaning_str.scan(variant_regex) do |variant|
-      @variant = variant[0]                             # Headword
-      @variant = @variant + variant[2] if variant[2]    # Reading if not nil
-      has_meaning = (variant[3] != nil)                 # A meaning afterward?
+      @is_erhua = (variant[0] == "erhua ")
+      @is_archaic_variant = (variant[0] == "archaic " || variant[0] == "old ")
+      @variant = variant[1]                             # Headword
+      @variant = @variant + variant[3] if variant[3]    # Reading if not nil
+      has_meaning = (variant[4] != nil)                 # A meaning afterward?
     end
 
     if @variant
@@ -230,6 +224,10 @@ class Meaning
   
   def variant
     @variant
+  end
+  
+  def is_archaic_variant?
+    return (@is_archaic_variant != false)
   end
   
   def is_erhua?

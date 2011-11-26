@@ -23,6 +23,7 @@ class Entry
     @pinyin_diacritic = ""
     @meanings = []
     @is_erhua_variant = false
+    @is_archaic_variant = false
     @variant_of = false
     
     # There can be more than one of these
@@ -246,6 +247,10 @@ class Entry
   def is_erhua_variant?
     @is_erhua_variant
   end
+  
+  def is_archaic_variant?
+    @is_archaic_variant
+  end
 
   # Returns TRUE if the meanings are empty and this contains references or variants
   def is_only_redirect?
@@ -275,26 +280,29 @@ class Entry
     end
   end
   
-  def add_inline_entry_to_meanings(inline_entry)
-    @meanings << Meaning.new("Also: %s" % [ inline_entry.to_str ], ["reference"])
+  def add_ref_entry_into_meanings(ref_entry, modifier = "Also")
+    meaning_str = "%s: %s|%s [%s]" % [modifier, ref_entry.headword_trad, ref_entry.headword_simp, ref_entry.pinyin]
+    @meanings << Meaning.new(meaning_str,["reference"]) 
   end
   
   def add_variant_entry_to_base_meanings(variant_entry)
+    modifier = "Has variant"
     if variant_entry.is_erhua_variant?
-      meaning_str = "Has Erhua variant: %s %s [%s]" % [variant_entry.headword_trad, variant_entry.headword_simp, variant_entry.pinyin]
-    else
-      meaning_str = "Has variant: %s %s [%s]" % [variant_entry.headword_trad, variant_entry.headword_simp, variant_entry.pinyin]
+      modifier = "Has Erhua variant"
+    elsif variant_entry.is_archaic_variant?
+      modifier = "Has archaic variant"
     end
-    @meanings << Meaning.new(meaning_str,["reference"]) 
+    add_ref_entry_into_meanings(variant_entry,modifier)
   end
 
   def add_base_entry_to_variant_meanings(base_entry)
+    modifier = "Variant of"
     if is_erhua_variant?
-      meaning_str = "Erhua variant of: %s %s [%s]" % [base_entry.headword_trad, base_entry.headword_simp, base_entry.pinyin]
-    else
-      meaning_str = "Variant of: %s %s [%s]" % [base_entry.headword_trad, base_entry.headword_simp, base_entry.pinyin]
+      modifier = "Erhua variant of"
+    elsif is_archaic_variant?
+      modifier = "Archaic variant of"
     end
-    @meanings << Meaning.new(meaning_str,["reference"]) 
+    add_ref_entry_into_meanings(base_entry,modifier)
   end
   
   def inline_entry_match?(inline_entry)

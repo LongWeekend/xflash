@@ -72,6 +72,7 @@ class CEdictEntry < Entry
           @variant_of = meaning.variant
           skip_this_meaning = meaning.is_redirect_only?
           @is_erhua_variant = meaning.is_erhua?
+          @is_archaic_variant = meaning.is_archaic_variant?
         elsif meaning.reference
           @references << meaning.reference
         else

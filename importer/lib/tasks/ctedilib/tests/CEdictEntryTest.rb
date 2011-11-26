@@ -108,7 +108,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal("耄[mao4]",entry.variant_of)
   end
   
-  # Extract variants - erhua (gee I wish I knew what that was)
+  # Extract variants - erhua
   def test_parse_erhua_variant
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
@@ -117,6 +117,36 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal(expected_meanings,entry.meanings)
     assert_equal(true,entry.is_erhua_variant?)
     assert_equal("旁邊|旁边",entry.variant_of)
+  end
+  
+  def test_parse_archaic_variant
+  
+    # FIRST, "Archaic"
+    entry = CEdictEntry.new
+    entry.parse_line("㐅 㐅 [wu3] /archaic variant of 五[wu3]/")
+    
+    # This is only a variant, there is no meaning
+    expected_meanings = []
+    assert_equal(expected_meanings,entry.meanings)
+    
+    assert_equal(true,entry.has_variant?)
+    assert_equal("五[wu3]",entry.variant_of)
+    assert_equal(false,entry.is_erhua_variant?)
+    assert_equal(true,entry.is_only_redirect?)
+
+
+    # SECOND, "old"
+    entry = CEdictEntry.new
+    entry.parse_line("㬎 㬎 [xian3] /old variant of 顯|显[xian3]/visible/apparent/")
+    
+    # This is only a variant, there is no meaning
+    expected_meanings = [Meaning.new("visible"),Meaning.new("apparent")]
+    assert_equal(expected_meanings,entry.meanings)
+    
+    assert_equal(true,entry.has_variant?)
+    assert_equal("顯|显[xian3]",entry.variant_of)
+    assert_equal(false,entry.is_erhua_variant?)
+    assert_equal(false,entry.is_only_redirect?)
   end
   
   def test_partial_tag_matches
@@ -247,14 +277,15 @@ class CEdictEntryTest < Test::Unit::TestCase
     assert_equal(false,base_entry.inline_entry_match?(inline_entry))
   end
   
-  def test_add_inline_entry_to_meaning
+  def test_add_ref_entry_to_meaning
     base_entry = CEdictEntry.new
     base_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jue2 la4] /insipid (like chewing wax)/")
     
-    inline_entry = Entry.parse_inline_entry("味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]")
-    base_entry.add_inline_entry_to_meanings(inline_entry)
+    ref_entry = CEdictEntry.new
+    ref_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jiao2 la4] /see 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]/")
+    base_entry.add_ref_entry_into_meanings(ref_entry)
     
-    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]",["reference"])
+    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡 [wei4 tong2 jiao2 la4]",["reference"])
     assert_equal(meaning_two,base_entry.meanings[1])
   end
 
@@ -268,7 +299,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     base_entry.add_variant_entry_to_base_meanings(erhua_entry)
     assert_equal(5,base_entry.meanings.count)
     
-    expected_meaning = Meaning.new("Has Erhua variant: 哥們兒 哥们儿 [ge1 men5 r5]",["reference"])
+    expected_meaning = Meaning.new("Has Erhua variant: 哥們兒|哥们儿 [ge1 men5 r5]",["reference"])
     assert_equal(expected_meaning,base_entry.meanings[4])
   end
 
@@ -282,7 +313,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     erhua_entry.add_base_entry_to_variant_meanings(base_entry)
     assert_equal(5,erhua_entry.meanings.count)
     
-    expected_meaning = Meaning.new("Erhua variant of: 哥們 哥们 [ge1 men5]",["reference"])
+    expected_meaning = Meaning.new("Erhua variant of: 哥們|哥们 [ge1 men5]",["reference"])
     assert_equal(expected_meaning,erhua_entry.meanings[4])
   end
   

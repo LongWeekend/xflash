@@ -98,7 +98,7 @@ class CEdictParser < Parser
           if ((i % 10) == 0)
             prt "Matched %d of %d reference entries" % [i, total]
           end
-          base_entry.add_inline_entry_to_meanings(inline_entry)
+          base_entry.add_ref_entry_into_meanings(ref_entry)
           
           # We can break from this loop here because we only match 1-to-1
           break

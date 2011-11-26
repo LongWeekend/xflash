@@ -28,6 +28,20 @@ class CEdictParserTest < Test::Unit::TestCase
     assert_equal(6,merged_entries.count)
   end
   
+  def test_match_reference_only
+    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_reference_only.txt")
+    entries = parser.run
+    assert_equal(1,entries.count)
+    assert_equal(1,parser.reference_only_entries.count)
+    
+    merged_entries = parser.merge_references_into_base_entries(entries,parser.reference_only_entries)
+    assert_equal(1,merged_entries.count)
+    
+    expected_meanings = [Meaning.new("India",["archaic"]),Meaning.new("Also: 㐖|㐖 [Ye4]",["reference"])]
+    assert_equal(expected_meanings,merged_entries[0].meanings)
+  end
+  
+
   def test_match_reference_merge
     base_entry = CEdictEntry.new
     base_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jue2 la4] /insipid (like chewing wax)/")
@@ -39,7 +53,7 @@ class CEdictParserTest < Test::Unit::TestCase
     merged_entries = parser.merge_references_into_base_entries([base_entry],[ref_entry])
     
     meaning_one = Meaning.new("insipid (like chewing wax)")
-    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]",["reference"])
+    meaning_two = Meaning.new("Also: 味同嚼蠟|味同嚼蜡 [wei4 tong2 jiao2 la4]",["reference"])
     
     # The merge should have added the reference entry to the base entry's meaning
     assert_equal(meaning_one,merged_entries[0].meanings[0])
@@ -73,12 +87,12 @@ class CEdictParserTest < Test::Unit::TestCase
     assert_equal(5,muxed_erhua_entries[0].meanings.count)
     
     base_meaning_one = Meaning.new("brother (diminutive form of address between males)")
-    base_meaning_two = Meaning.new("Has Erhua variant: 哥們兒 哥们儿 [ge1 men5 r5]",["reference"])
+    base_meaning_two = Meaning.new("Has Erhua variant: 哥們兒|哥们儿 [ge1 men5 r5]",["reference"])
     assert_equal(base_meaning_one,muxed_base_entries[0].meanings[3])
     assert_equal(base_meaning_two,muxed_base_entries[0].meanings[4])
 
     erhua_meaning_one = Meaning.new("brother (diminutive form of address between males)")
-    erhua_meaning_two = Meaning.new("Erhua variant of: 哥們 哥们 [ge1 men5]",["reference"])
+    erhua_meaning_two = Meaning.new("Erhua variant of: 哥們|哥们 [ge1 men5]",["reference"])
     assert_equal(erhua_meaning_one,muxed_erhua_entries[0].meanings[3])
     assert_equal(erhua_meaning_two,muxed_erhua_entries[0].meanings[4])
   end
@@ -96,14 +110,28 @@ class CEdictParserTest < Test::Unit::TestCase
     assert_equal(2,muxed_variant_entries[0].meanings.count)
     
     base_meaning_one = Meaning.new("twenty (banker's anti-fraud numeral corresponding to 廿, 20)")
-    base_meaning_two = Meaning.new("Has variant: 唸 唸 [nian4]",["reference"])
+    base_meaning_two = Meaning.new("Has variant: 唸|唸 [nian4]",["reference"])
     assert_equal(base_meaning_one,muxed_base_entries[0].meanings[6])
     assert_equal(base_meaning_two,muxed_base_entries[0].meanings[7])
 
     variant_meaning_one = Meaning.new("to read aloud")
-    variant_meaning_two = Meaning.new("Variant of: 念 念 [nian4]",["reference"])
+    variant_meaning_two = Meaning.new("Variant of: 念|念 [nian4]",["reference"])
     assert_equal(variant_meaning_one,muxed_variant_entries[0].meanings[0])
     assert_equal(variant_meaning_two,muxed_variant_entries[0].meanings[1])
+  end
+  
+  def test_old_variant_cross_reference
+    base_entry = CEdictEntry.new
+    base_entry.parse_line("五 五 [wu3] /five/5/")
+    variant_entry = CEdictEntry.new
+    variant_entry.parse_line("㐅 㐅 [wu3] /archaic variant of 五[wu3]/")
+    
+    entries = [base_entry]
+    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_variant.txt")
+    parser.add_variant_entries_into_base_entries(entries, [variant_entry])
+
+    base_meanings = [Meaning.new("five"), Meaning.new("5"), Meaning.new("Has archaic variant: 㐅|㐅 [wu3]",["reference"])]
+    assert_equal(base_meanings,entries[0].meanings)
   end
   
   def test_classifier_expansion
