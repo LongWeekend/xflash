@@ -7,6 +7,7 @@ class TagImporter
     @config = {}
     @tag_id = nil
     @human_importer = HumanTagImporter.new
+    @entry_cache = EntryCache.new
     
     # Metadata for the tag itself
     @config[:metadata] = configuration
@@ -30,13 +31,20 @@ class TagImporter
     return self
   end
   
+  def entry_cache=(new_cache)
+    @entry_cache = new_cache
+  end
+  
+  def entry_cache
+    @entry_cache
+  end
+  
   def tag_id
     @tag_id
   end
   
   def self.tear_down_all_tags
     connect_db()
-    
     $cn.execute("TRUNCATE TABLE card_tag_link")
     $cn.execute("TRUNCATE TABLE tags_staging")
   end
@@ -84,34 +92,25 @@ class TagImporter
     # Execute the query
     $cn.execute(insert_query)
 
-    # After executing, get the tag_id and set it globally
-    @tag_id = last_inserted_id
-    
     # Puts the feedback to the user
     log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id], true)
-    prt_dotted_line
-  rescue StandardError => err
-    # In case the is some error is hapenning, try to delete from the databse first,
-    # if a row has been inserted.
-    if (@tag_id != nil)
-      delete_query = "DELETE FROM tags_staging WHERE tag_id='%s'" % [@tag_id]
-      $cn.execute(delete_query)
-    end
-    raise "Failed in inserting into the tags_staging with the configuration: %s\nUnderlying error was: %s" % [config, err]
+    
+    return last_inserted_id
   end
     
   def import
     # Insert into the tags_staging first to get the parent of the tags.
     connect_db
     
-    # TODO: This should really *return* the tag_id -- MMA 11.20.2011
-    setup_tag_row
+    @tag_id = setup_tag_row
     
     # After creating the table, skip the import process if we have no card data
     if (@config[:data] == nil or @config[:data].empty?)
       prt "Skipping matching process for empty tag (no data passed in)"
       return @tag_id
     end
+    
+    @entry_cache.prepare_cache_if_necessary
     
     multiple_found = 0
     not_found = 0
@@ -128,7 +127,7 @@ class TagImporter
       elsif tag_entry.pinyin_diacritic
         same_pinyin = (dict_entry.pinyin_diacritic.gsub(" ","") == tag_entry.pinyin_diacritic.gsub(" ",""))
       end
-      result = same_pinyin
+      result = same_pinyin and (dict_entry.headword_simp == tag_entry.headword_simp)
       # The "return" keyword will F everything up when used in blocks!
       result
     end
@@ -142,14 +141,14 @@ class TagImporter
     tickcount("Processing tag-card-match and importing") do
       @config[:data].each do |rec|
         # First, try to match it programmatically
-        result = TagImporter.find_cards_similar_to(rec, normal_criteria)
+        result = find_cards_similar_to(rec, normal_criteria)
         
         # If the normal criteria turned up nothing conclusive, check with human importer and/or log it
         if (result.empty? or result.count > 1)
         
           # If the normal result is empty, check with looser criteria to give us good results for the human matching
           if result.empty?
-            loose_results = TagImporter.find_cards_similar_to(rec, loose_criteria)
+            loose_results = find_cards_similar_to(rec, loose_criteria)
             matched_card = @human_importer.get_human_result_for_entry(rec, loose_results)
           else
             matched_card = @human_importer.get_human_result_for_entry(rec, result)
@@ -189,7 +188,7 @@ class TagImporter
 
     log "\n"
     log("Finish inserting: %s with %s records not found and %s duplicates" % [found.to_s(), not_found.to_s(), multiple_found.to_s()], true)
-    return @tag_id
+    return found
   end # End of the method body
   
   def update_tag_count
@@ -209,28 +208,23 @@ class TagImporter
   end
   
   # Find cards object which has similarities with the entry as the parameter
-  def self.find_cards_similar_to(entry, criteria)
+  def find_cards_similar_to(entry, criteria)
     # Make sure we only want the entry as an inheritance instances of Entry.
     raise "You must pass only Entry subclasses to find_cards_similar_to" unless entry.kind_of?(Entry)
     
-    # If this has not been setup yet
-    TagImporter.get_all_cards_from_db()
-    
     # Try the fast hash first -- saves us from having to loop through all the cards and do comparisons
     indices = []
-    if $card_entries_by_headword[:simp].key?(entry.headword_simp)
-      dict_entry = $card_entries_by_headword[:simp][entry.headword_simp]
+    if (dict_entry = @entry_cache.entry_in_cache?(entry, :trad))
       if dict_entry.similar_to?(entry, criteria)
         indices << dict_entry
       end
-    elsif $card_entries_by_headword[:trad].key?(entry.headword_trad)
-      dict_entry = $card_entries_by_headword[:trad][entry.headword_trad]
+    elsif (dict_entry = @entry_cache.entry_in_cache?(entry, :simp))
       if dict_entry.similar_to?(entry, criteria)
         indices << dict_entry
       end
     else
       # OK, we made it here.  No fast hash for us, it's loopy doopy time
-      $card_entries_array.each do |card|
+      @entry_cache.card_entries_array.each do |card|
         if card.similar_to?(entry, criteria)
           indices << card
         end
@@ -238,66 +232,6 @@ class TagImporter
     end
     return indices
   end
-
-  # Initialise the card-entries hash and 
-  # get the card_id as the id and the card object as the values
-  def self.get_all_cards_from_db()
-    # Card entries has been initialised, not going to initialised it twice.
-    return if $card_entries
-    
-    tickcount("Retrieving card hash from database...") do
-      connect_db()
-      # Allocate a new hash object to the card_entries
-      $card_entries = Hash.new()
-      $card_entries_array = []
-      
-      # Keep an index of all cards sorted by both trad & simp headword
-      $card_entries_by_headword = {}
-      $card_entries_by_headword[:simp] = {}
-      $card_entries_by_headword[:trad] = {}
-      
-      # Use this hash as a "blacklist" for any headwords we detect multiple times
-      $dupe_headwords = {}
-      $dupe_headwords[:simp] = {}
-      $dupe_headwords[:trad] = {}
-
-      # Get the entire data from the database
-      select_query = "SELECT * FROM cards_staging"
-      result_set = $cn.execute(select_query)
-      
-      # For each record in the result set
-      result_set.each(:symbolize_keys => true, :as => :hash) do |rec|
-        # Initialise the card object
-        card = CEdictEntry.from_sql(rec)
-        card.id = rec[:card_id]
-        # Get the card id and makes that a symbol for the hash key.
-        # puts "Inserting to hash with key: %s" % [card_id.to_s()]
-        $card_entries[card.id.to_s().to_sym()] = card
-        $card_entries_array << card
-        TagImporter._add_card_to_headword_idx_hash(card, :simp)
-        TagImporter._add_card_to_headword_idx_hash(card, :trad)
-      end 
-    end #tickcount
-  end
-
-  def self._add_card_to_headword_idx_hash(card, type = :simp)
-    hw = (type == :simp) ? card.headword_simp : card.headword_trad
-  
-    # DUPE HEADWORD FLAGGING - we don't want dupe headwords in our super fast hash
-    is_flagged_dupe = $dupe_headwords[type].key?(hw)
-    if (is_flagged_dupe == false)
-      # Now check that it's not the second occurance
-      is_dupe = $card_entries_by_headword[type].key?(hw)
-      if is_dupe == false
-        $card_entries_by_headword[type][hw] = card
-      else
-        # It's a dupe, pull out the original from the quick lookup headword hash, add key to dupes
-        $card_entries_by_headword[type].delete(hw)
-        $dupe_headwords[type][hw] = true
-      end
-    end
-  end
-
   
 #EOF
 end

@@ -7,7 +7,6 @@ class TagImporterTest < Test::Unit::TestCase
   def setup
     # Clear out everything first, then import
     TagImporter.tear_down_all_tags
-    TagImporter.get_all_cards_from_db()
   end
 
   def test_caching
@@ -198,6 +197,23 @@ class TagImporterTest < Test::Unit::TestCase
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
+  end
+  
+  def test_simplified_only_matching
+    book_entry = BookEntry.new
+    book_entry.parse_line('台風	台风	tai2 feng1	/typhoon/')
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("颱風 台风 [tai2 feng1] /hurricane/typhoon/")
+
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([book_entry], configuration)
+    
+    # Now create a mock cache
+    cache = EntryCache.new([cedict_entry])
+    importer.entry_cache = cache
+    
+    # Returns the number of matched entries
+    assert_equal(1,importer.import)
   end
   
 end

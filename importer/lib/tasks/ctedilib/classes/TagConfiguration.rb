@@ -83,6 +83,10 @@ class TagConfiguration
     return @configuration["force_off"]
   end
   
+  def is_priority_words?
+    return (@configuration["contains_priority_words"] == 1)
+  end
+  
   def to_s
   	# Get the name of the class in string.
     class_name_str = self.class().to_s()

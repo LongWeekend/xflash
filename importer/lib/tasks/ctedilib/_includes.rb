@@ -32,6 +32,7 @@ load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
 load File.dirname(__FILE__) + "/classes/HumanTagImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagImporter.rb"
+load File.dirname(__FILE__) + "/classes/EntryCache.rb"
 
 # Importers
 load File.dirname(__FILE__) + "/classes/CEdictImporter.rb"

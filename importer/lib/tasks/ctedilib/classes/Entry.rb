@@ -25,6 +25,7 @@ class Entry
     @is_erhua_variant = false
     @is_archaic_variant = false
     @variant_of = false
+    @priority_word = false
     
     # There can be more than one of these
     @references = []
@@ -244,6 +245,14 @@ class Entry
     return ((@variant_of == false) ? false : true)
   end
   
+  def is_priority_word?
+    @priority_word
+  end
+  
+  def priority_word=(new_val)
+    @priority_word = new_val
+  end
+  
   def is_erhua_variant?
     @is_erhua_variant
   end
@@ -334,7 +343,7 @@ class Entry
   end
   
   def to_insert_sql
-    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,'%s');"
+    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,priority_word,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,%s,'%s');"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
@@ -344,13 +353,15 @@ class Entry
         (is_only_redirect? ? "1" : "0"),
         (has_variant? ? "1" : "0"), (is_erhua_variant? ? "1" : "0"),
         (is_proper_noun? ? "1" : "0"),
-        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"), mysql_serialise_ruby_object(self)]
+        (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"),
+        (is_priority_word? ? "1" : "0"),
+        mysql_serialise_ruby_object(self)]
   end
   
   def to_update_sql
     return false if (id == -1)
     
-    update_entry_sql = "UPDATE cards_staging SET headword_trad = '%s',headword_simp = '%s',headword_en = '%s',reading = '%s',reading_diacritic = '%s',meaning = '%s',meaning_html = '%s',meaning_fts = '%s',classifier = %s,tags = '%s',referenced_cards = %s,is_reference_only = %s,is_variant = %s,is_erhua_variant = %s,is_proper_noun = %s,variant = %s,cedict_hash = '%s' WHERE card_id = %s;"
+    update_entry_sql = "UPDATE cards_staging SET headword_trad = '%s',headword_simp = '%s',headword_en = '%s',reading = '%s',reading_diacritic = '%s',meaning = '%s',meaning_html = '%s',meaning_fts = '%s',classifier = %s,tags = '%s',referenced_cards = %s,is_reference_only = %s,is_variant = %s,is_erhua_variant = %s,is_proper_noun = %s,variant = %s,priority_word = %s, cedict_hash = '%s' WHERE card_id = %s;"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return update_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
@@ -361,6 +372,7 @@ class Entry
         (has_variant? ? "1" : "0"), (is_erhua_variant? ? "1" : "0"),
         (is_proper_noun? ? "1" : "0"),
         (variant_of ? "'"+mysql_escape_str(variant_of)+"'" : "NULL"),
+        (is_priority_word? ? "1" : "0"),
         mysql_serialise_ruby_object(self),
         id.to_s]
     
@@ -391,8 +403,8 @@ class Entry
     # Comparing the headword
     # NOTE: Please make sure that the entry is the one wanted to be matched from.
     # and self is the CARD.
-    same_headword_trad = (headword_trad == entry.headword)
-    same_headword_simp = (headword_simp == entry.headword)
+    same_headword_trad = (headword_trad == entry.headword_trad)
+    same_headword_simp = (headword_simp == entry.headword_simp)
     same_headword = same_headword_trad || same_headword_simp
     return false unless same_headword
     

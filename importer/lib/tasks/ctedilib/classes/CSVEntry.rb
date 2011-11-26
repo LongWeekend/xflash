@@ -8,7 +8,7 @@ class CSVEntry < Entry
     return false if line.nil? or (line == "")
 
     @original_line = line
-
+    
     segments = line.split(",\"")
     # This stops us from getting headers and other non-data rows
     if segments.count == 7 and segments[0].numeric?
@@ -45,7 +45,7 @@ class CSVEntry < Entry
     elsif segments[0].gsub("\"","").strip.match($regexes[:single_letter])
       return false
     else
-      raise "Improperly formatted CSV line: %s" % [line]
+      raise EntryParseException, "Improperly formatted CSV line: %s" % [line]
     end
 
   end

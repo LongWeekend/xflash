@@ -13,6 +13,7 @@ hsk_1:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1
 hsk_2:
     file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_2_(New_HSK).csv"
     file_dump_trace: 1
@@ -28,6 +29,7 @@ hsk_2:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1
 hsk_3:
     file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_3_(New_HSK).csv"
     file_dump_trace: 1
@@ -43,6 +45,7 @@ hsk_3:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1
 hsk_4:
     file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_4_(New_HSK).csv"
     file_dump_trace: 1
@@ -58,6 +61,7 @@ hsk_4:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1
 hsk_5:
     file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_5_(New_HSK).csv"
     file_dump_trace: 1
@@ -73,6 +77,7 @@ hsk_5:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1
 hsk_6:
     file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_6_(New_HSK).csv"
     file_dump_trace: 1
@@ -88,3 +93,4 @@ hsk_6:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
+    contains_priority_words: 1

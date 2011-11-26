@@ -87,10 +87,17 @@ class GroupImporter
     # Get the class of the importer used
     # and try to constantize / instantiate it from there
     importer = configuration.file_importer.constantize.new(results, configuration)
-    inserted_tag_id = importer.import()
+    importer.import
+
+    # Set the priority word flag is appropriate
+    if configuration.is_priority_words?
+      prt "Updating cards to be priority words..."
+      update_query = "UPDATE cards_staging SET priority_word = 1 WHERE card_id IN (SELECT card_id FROM card_tag_link WHERE tag_id = %s)" % importer.tag_id
+      $cn.execute(update_query)
+    end
 
     # Link the tag to the group.
-    link_tag_group(group_id, inserted_tag_id)
+    link_tag_group(group_id, importer.tag_id)
   end
     
   def insert_group(value, owner_id)

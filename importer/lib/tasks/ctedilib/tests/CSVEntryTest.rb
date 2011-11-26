@@ -14,6 +14,13 @@ class CSVEntryTest < Test::Unit::TestCase
     assert_equal(false, result)
   end
 
+  def test_throw_exception
+    entry = CSVEntry.new
+    assert_raise(EntryParseException) do
+      entry.parse_line('1463,"1463","看看","kànkan","I",,')
+    end
+  end
+
   # Tests that basic headword and reading can be parsed
 
   def test_parse_headword_and_reading
