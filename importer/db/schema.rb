@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20111125044628) do
     t.boolean "is_proper_noun",                          :default => false, :null => false
     t.boolean "is_reference_only",                       :default => false, :null => false
     t.string  "referenced_cards"
+    t.boolean "priority_word",                           :default => false, :null => false
   end
 
   add_index "cards_staging", ["headword_simp"], :name => "headword_simp"
