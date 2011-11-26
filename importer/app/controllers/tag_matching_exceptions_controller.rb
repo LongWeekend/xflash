@@ -2,14 +2,20 @@ class TagMatchingExceptionsController < ApplicationController
   # GET /tag_matching_exceptions
   # GET /tag_matching_exceptions.xml
   def index
-    @tag_matching_exceptions = TagMatchingException.all_unmatched_and_has_options
+    if params[:has_matches] == "true"
+      @tag_matching_exceptions = TagMatchingException.all_unmatched_and_has_options
+      @has_matches = true
+    else
+      @tag_matching_exceptions = TagMatchingException.all_unmatched_and_no_options
+      @has_matches = false
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tag_matching_exceptions }
     end
   end
-
+  
   # GET /tag_matching_exceptions/1
   # GET /tag_matching_exceptions/1.xml
   def show
@@ -80,11 +86,14 @@ class TagMatchingExceptionsController < ApplicationController
   # DELETE /tag_matching_exceptions/1.xml
   def destroy
     @tag_matching_exception = TagMatchingException.find(params[:id])
-    @tag_matching_exception.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(tag_matching_exceptions_url) }
-      format.xml  { head :ok }
+#    @tag_matching_exception.destroy
+    @tag_matching_exception.should_ignore = 1
+    if @tag_matching_exception.save
+      respond_to do |format|
+        format.js
+        format.html { redirect_to(tag_matching_exceptions_url) }
+        format.xml  { head :ok }
+      end
     end
   end
 end

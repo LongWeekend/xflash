@@ -1,7 +1,6 @@
 <% javascript_include_tag 'default' %>
 <% csrf_meta_tag %>
-<h1>Orphan Tag Entries - (<%= @tag_matching_exceptions.count %>)</h1>
-<h3><%= link_to "Entries Without Matches", tag_matching_exceptions_path(:has_matches => false) %> | <%= link_to "Entries With Matches", tag_matching_exceptions_path(:has_matches => true) %></h3>
+<h1>Tag Entries With No Matches (<%= @tag_matching_exceptions.count %>)</h1>
 <table>
   <tr>
     <th>Unmatched Entry</th>
@@ -23,7 +22,7 @@
       <% end %>
       </td>
       <td><div id="status_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
-      <td><%= link_to 'Ignore', tag_matching_exception, {:confirm => 'Are you sure?', :method => :delete, :remote => true} %></td>
+      <td><%= link_to 'Ignore', tag_matching_exception, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 <% end %>

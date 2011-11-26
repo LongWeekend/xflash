@@ -12,13 +12,11 @@ class HumanTagImporter
 
     # Check the database to see if we have any objects that match it -- quick return if YES
     resolutions = $cn.execute("SELECT resolved_serialized_entry, should_ignore FROM tag_matching_exceptions WHERE entry_id = '%s' LIMIT 1" % fuzzy_entry.checksum).each do |rec|
-      # Quick return on should ignore
-      if rec[1] == true
+      # Quick return on should ignore or not yet resolved
+      if rec[1] == true or rec[0].nil?
         return false
-      end
-      
-      # Otherwise match it
-      if rec[0].nil? == false
+      else
+        # Otherwise match it
         matched_entry = mysql_deserialise_ruby_object(rec[0])
         return matched_entry
       end
@@ -51,7 +49,13 @@ class HumanTagImporter
     desc = mysql_escape_str(fuzzy_entry.description)
     insert_sql = "INSERT INTO tag_matching_exceptions (entry_id, human_readable, serialized_entry, created_at, updated_at) VALUES ('%s','%s','%s',NOW(),NOW()) ON DUPLICATE KEY UPDATE human_readable = '%s', updated_at = NOW()" % [fuzzy_entry.checksum, desc, hash, desc]
     $cn.execute(insert_sql)
-    return $cn.last_inserted_id
+    
+    # This sucks, but on an update duplicate we can't be guaranteed to get the right last_inserted_id, so we need to re-select it
+    #    return $cn.last_inserted_id
+    select_sql = "SELECT id FROM tag_matching_exceptions WHERE entry_id = '%s'" % [fuzzy_entry.checksum]
+    result = $cn.execute(select_sql).each do |rec|
+      return rec[0]
+    end
   end
   
   def _store_fuzzy_matches_as_unmatched_to_id(entry_id, fuzzy_matches)
