@@ -116,13 +116,15 @@ class TagImporter
     normal_criteria = Proc.new do |dict_entry, tag_entry|
       # Comparing the pinyin/reading - ignore case for now
       if tag_entry.pinyin.length > 0
-        same_pinyin = (dict_entry.pinyin.gsub(" ","") == tag_entry.pinyin.gsub(" ",""))
+        same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ",""))
+        if (same_pinyin == false and (tag_entry.pinyin.index("yi2") or tag_entry.pinyin.index("bu2")))
+          same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ","").gsub("yi2","yi1").gsub("bu2","bu4"))
+        end
       elsif tag_entry.pinyin_diacritic
-        same_pinyin = (dict_entry.pinyin_diacritic.gsub(" ","") == tag_entry.pinyin_diacritic.gsub(" ",""))
+        same_pinyin = (dict_entry.pinyin_diacritic.downcase.gsub(" ","") == tag_entry.pinyin_diacritic.downcase.gsub(" ",""))
       end
-      result = same_pinyin and (dict_entry.headword_simp == tag_entry.headword_simp)
       # The "return" keyword will F everything up when used in blocks!
-      result
+      same_pinyin
     end
     
     # Use this when we want to match headword only -- we don't care about the particulars of the card
@@ -165,6 +167,7 @@ class TagImporter
         if result.count == 1
           found += 1
           card_id = result[0].id
+          raise "card ID must be initialized!" if (card_id == -1)
           if (!card_ids.include?(card_id))
             card_ids << card_id
             bulkSQL.add((@insert_tag_link_query % [@tag_id, card_id]))
