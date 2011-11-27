@@ -63,11 +63,21 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new(results, configuration)
     importer.import
 
-    # There should be 40 associated cards now -- 3 of the cards can't be matched by the importer
+    # There should be 39 associated cards now -- 4 of the cards can't be matched by the importer (2 unknown x 2 dupes)
     $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '%s'" % importer.tag_id).each do |tag_count_rec|
-      assert_equal(40, tag_count_rec[0])
+      assert_equal(39, tag_count_rec[0])
     end
+  end
+  
+  def test_import_800_beginner
+    configuration = TagConfiguration.new("file_800_config.yml", "tags_800_1_beginner")
     
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    parser = WordListParser.new(test_file_path)
+    results = parser.run('CSVEntry')
+    
+    importer = TagImporter.new(results, configuration)
+    importer.import
   end
       
   def test_import_beg_chinese

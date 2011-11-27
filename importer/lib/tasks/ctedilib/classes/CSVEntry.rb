@@ -12,10 +12,12 @@ class CSVEntry < Entry
     segments = line.split(",\"")
     # This stops us from getting headers and other non-data rows
     if segments.count == 7 and segments[0].numeric?
-      @headword_trad = segments[2].gsub("\"","").strip
+      # The first gsub removes numbers, parenthesis and quotes, the second removes variant char in any "headword/variant char" pattern
+      @headword_trad = segments[2].gsub(/["\(\)1-5]/,"").gsub(/(\/.+)/,"").strip
 
+      # The first gsub removes parenthesis and quotes, the second removes variant char in any "reading/variant reading" pattern
+      pinyin = segments[3].gsub(/["\(\)]/,"").gsub(/(\/.+)/,"").strip
       # This extra function call strips ouet any "stupid" round  tone-3 unicode points and replaces them with angled ones
-      pinyin = segments[3].gsub("\"","").strip
       pinyin = Entry.fix_unicode_for_tone_3(pinyin)
       
       # Test if the reading is already encoded

@@ -54,5 +54,35 @@ class CSVEntryTest < Test::Unit::TestCase
     expected_meanings = [Meaning.new("get close to"),Meaning.new("be next to"),Meaning.new("follow in sequence or along designated route/direction")]
     assert_equal(expected_meanings,entry.meanings)
   end
+  
+  def test_optional_headword
+    entry = CSVEntry.new
+    entry.parse_line('58,"1352","鼻(子)","bí(zi) ","B","(N)","nose"')
+    expected_meanings = [Meaning.new("nose")]
+    assert_equal(expected_meanings, entry.meanings)
+    
+    assert_equal("鼻子",entry.headword_trad)
+    assert_equal("bízi",entry.pinyin_diacritic)
+  end
+  
+  def test_alternate_character
+    entry = CSVEntry.new
+    entry.parse_line('1344,"0003","一下子/兒","yíxiàzi/ér ","B","(N)","in a short while"')
+    expected_meanings = [Meaning.new("in a short while")]
+    assert_equal(expected_meanings, entry.meanings)
+    
+    assert_equal("一下子",entry.headword_trad)
+    assert_equal("yíxiàzi",entry.pinyin_diacritic)
+  end
+  
+  def test_meaning_separated_hw
+    entry = CSVEntry.new
+    entry.parse_line('568,"0276","叫1","jiào ","B","(VA)","to ask"')
+    expected_meanings = [Meaning.new("to ask")]
+    assert_equal(expected_meanings, entry.meanings)
+    
+    assert_equal("叫",entry.headword_trad)
+    assert_equal("jiào",entry.pinyin_diacritic)
+  end
 
 end

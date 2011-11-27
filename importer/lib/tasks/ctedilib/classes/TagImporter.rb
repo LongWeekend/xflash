@@ -134,39 +134,36 @@ class TagImporter
 
     # This is the for each for every record data call the block with each line as the parameter.
     tickcount("Processing tag-card-match and importing") do
-      @config[:data].each do |rec|
-        # First, try to match it programmatically
-        result = find_cards_similar_to(rec, normal_criteria)
+      @config[:data].each do |entry|
+        # First, try to match it programmatically, also check the loose criteria if we didn't get any strict matches
+        matching_cards = find_cards_similar_to(entry, normal_criteria)
         
         # If the normal criteria turned up nothing conclusive, check with human importer and/or log it
-        if (result.empty? or result.count > 1)
-        
-          # If the normal result is empty, check with looser criteria to give us good results for the human matching
-          if result.empty?
-            loose_results = find_cards_similar_to(rec, loose_criteria)
-            matched_card = @human_importer.get_human_result_for_entry(rec, loose_results)
-          else
-            matched_card = @human_importer.get_human_result_for_entry(rec, result)
-          end
-
-          # Great, we found something?
-          if matched_card
-            result = [matched_card]
-          else
-            if result.empty?
-              not_found += 1
-              log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
-            else
-              multiple_found += 1
-              log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
-            end
-          end
+        normal_card = false
+        if matching_cards.empty?
+          # This is for the case where nothing matched at all on the strict criteria
+          loosely_matching_cards = find_cards_similar_to(entry, loose_criteria)
+          matched_card = @human_importer.get_human_result_for_entry(entry, loose_results)
+          matched_cards = [matched_card] if matched_card  # Great, we got something
+        elsif matching_cards.count > 1
+          # This is where too much matched on the strict criteria
+          matched_card = @human_importer.get_human_result_for_entry(entry, matching_cards)
+          matched_cards = [matched_card] if matched_card  # Great, we got something
+        else
+          # Only 1 record for strict match, all is normal
+          normal_card = true
         end
-        
-        # Finally, register the match if we have one
-        if result.count == 1
+
+        # OK, we've been through all we can do in terms of recovery, et al.  Log the results, good or bad
+        if matching_cards.empty?
+          not_found += 1
+          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+        elsif matching_cards.count > 1
+          multiple_found += 1
+          log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+        else
           found += 1
-          card_id = result[0].id
+          card_id = matching_cards.first.id
           raise "card ID must be initialized!" if (card_id == -1)
           if (!card_ids.include?(card_id))
             card_ids << card_id
