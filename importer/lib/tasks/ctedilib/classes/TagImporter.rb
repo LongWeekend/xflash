@@ -143,7 +143,7 @@ class TagImporter
         if matching_cards.empty?
           # This is for the case where nothing matched at all on the strict criteria
           loosely_matching_cards = find_cards_similar_to(entry, loose_criteria)
-          matched_card = @human_importer.get_human_result_for_entry(entry, loose_results)
+          matched_card = @human_importer.get_human_result_for_entry(entry, loosely_matching_cards)
           matched_cards = [matched_card] if matched_card  # Great, we got something
         elsif matching_cards.count > 1
           # This is where too much matched on the strict criteria
@@ -157,10 +157,10 @@ class TagImporter
         # OK, we've been through all we can do in terms of recovery, et al.  Log the results, good or bad
         if matching_cards.empty?
           not_found += 1
-          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
         elsif matching_cards.count > 1
           multiple_found += 1
-          log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [rec.headword, rec.pinyin]
+          log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
         else
           found += 1
           card_id = matching_cards.first.id
@@ -169,7 +169,7 @@ class TagImporter
             card_ids << card_id
             bulkSQL.add((@insert_tag_link_query % [@tag_id, card_id]))
           else
-            log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, rec.headword, rec.pinyin, rec.meanings.join("/")]
+            log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, entry.headword, entry.pinyin, entry.meanings.join("/")]
           end
         end
       end
