@@ -109,17 +109,18 @@ class GroupImporter
     recommended = 0
     name = ""
     if value.kind_of? Array
-      name = value[0]
+      name = mysql_escape_str(value[0])
       recommended = value[1]
     else
       name = value
     end
     # Inserting to the groups table
-    insert_query = "INSERT INTO groups_staging(group_id, group_name, owner_id, recommended) VALUES(%s,'%s', %s, %s)"
+    insert_query = "INSERT INTO groups_staging(group_id, group_name, description, owner_id, recommended) VALUES(%s, '%s', %s, %s, %s)"
     # TODO: this code assumes we'll never import more than one set of groups at a time??
     inserted_group_id = @counter
+    description = (value.count > 2) ? mysql_escape_str(value[2]) : "NULL"
     @counter = @counter+1
-    $cn.execute(insert_query % [inserted_group_id, name, owner_id, recommended])
+    $cn.execute(insert_query % [inserted_group_id, name, description, owner_id, recommended])
           
     return inserted_group_id
     #raise "Failed inserting to the group_staging with the group_name: #{group_name}, owner_id:#{owner_id} and recommended: #{recommended}\nInsert query: #{insert_query}\nSelect Query: #{select_query}"
