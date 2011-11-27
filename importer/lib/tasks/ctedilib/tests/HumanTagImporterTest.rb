@@ -24,6 +24,7 @@ class HumanTagImporterTest < Test::Unit::TestCase
   def test_initialization
     entry = CEdictEntry.new
     entry.parse_line("百 百 [Bai3] /surname Bai/")
+    entry.id = 3
     human_tag_importer = HumanTagImporter.new
     result = human_tag_importer.get_human_result_for_entry(entry)
     assert_equal(false,result)
@@ -39,13 +40,16 @@ class HumanTagImporterTest < Test::Unit::TestCase
     fuzzy_entry = HSKEntry.new
     fuzzy_entry.parse_line("18,2-6,百,bai3,hundred; numerous; all kinds of; surname Bai,")
   
-    # Create our result inputs -- TagImporter returns these when it doesn't know which to match to
     results = []
-    results << CEdictEntry.new.parse_line("百 百 [Bai3] /surname Bai/")
-    results << CEdictEntry.new.parse_line("百 百 [bai3] /hundred/numerous/all kinds of/")
+    entry = CEdictEntry.new
+    entry.id = 3
+    results << entry.parse_line("百 百 [Bai3] /surname Bai/")
+    entry = CEdictEntry.new
+    entry.id = 4
+    results << entry.parse_line("百 百 [bai3] /hundred/numerous/all kinds of/")
     
     human_tag_importer = HumanTagImporter.new
-    assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry, []))
+    assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry, results))
   end
   
   def test_description_sql_escaped_and_added_options
@@ -57,9 +61,11 @@ class HumanTagImporterTest < Test::Unit::TestCase
     results = []
     entry = CEdictEntry.new
     entry.parse_line("百 百 [Bai3] /surn\"am'e Bai/")
+    entry.id = 3
     results << entry
     entry = CEdictEntry.new
     entry.parse_line("百 百 [bai3] /hundred/nu'merous/a'll k\"\"inds of/")
+    entry.id = 4
     results << entry
     
     human_tag_importer = HumanTagImporter.new
@@ -75,10 +81,15 @@ class HumanTagImporterTest < Test::Unit::TestCase
 
     matching_entry = CEdictEntry.new
     matching_entry.parse_line("百 百 [bai3] /hundred/numerous/all kinds of/")
+    matching_entry.id = 3
 
     human_tag_importer = HumanTagImporter.new
     assert_equal(false, human_tag_importer.get_human_result_for_entry(fuzzy_entry))
     human_tag_importer.add_match_for_entry(fuzzy_entry, matching_entry)
+    
+    # Te ACTUAL #3 id entry won't match this at all, but presently they are set to match based on ID only, so this passes.
+    # TODO: in the future instead of calling out to SQL, the HumanTagIMporter should also have a reference toe the EntryCache
+    # and use that instead.
     assert_equal(matching_entry, human_tag_importer.get_human_result_for_entry(fuzzy_entry))
   end
 
