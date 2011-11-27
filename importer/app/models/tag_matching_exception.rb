@@ -2,7 +2,7 @@ class TagMatchingException < ActiveRecord::Base
   has_many :tag_matching_resolution_choices
   
   def self.all_unmatched
-    where("resolved_serialized_entry IS NULL AND should_ignore = 0")
+    where("resolved_entry_id IS NULL AND should_ignore = 0")
   end
   
   def self.all_unmatched_and_has_options
