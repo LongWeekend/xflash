@@ -34,7 +34,6 @@ class TagImporterTest < Test::Unit::TestCase
     parser = WordListParser.new(test_file_path)
     entries = parser.run('CSVEntry')
     assert_equal(13,entries.count)
-    
     importer = TagImporter.new(entries, configuration)
     importer.import
     
