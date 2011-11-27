@@ -38,14 +38,6 @@ class CEdictImporter
     prt "Inserted #{data.count} entries"
   end
   
-  def update_serialized_entries_with_card_id
-    $cn.execute("SELECT * from cards_staging").each do |rec|
-      cedict_entry = mysql_deserialise_ruby_object(rec[:cedict_hash])
-      cedict_entry.id = rec[:id]
-      $cn.execute(cedict_entry.to_update_sql)
-    end
-  end
-
   # Public Setters & Getter
   #####################################
   def set_sql_buffer_size(size)

@@ -384,6 +384,7 @@ class Entry
     end
   end
   
+  # Won't work if the card IDs aren't set
   def ==(another_card_entry)
     # If the another_card_entry is not Entry type
     # just return with false.
@@ -391,7 +392,7 @@ class Entry
       return false
     end
   
-    return self.id == another_card_entry.id
+    return (self.id == another_card_entry.id and self.id != -1)
   end  
 
   # USED FOR MATCHING BY TAG IMPORTER
