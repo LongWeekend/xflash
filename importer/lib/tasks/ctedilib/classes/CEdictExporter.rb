@@ -24,7 +24,7 @@ class CEdictExporter
     $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
     $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, editable, count, force_off FROM tags_staging")
     $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
-    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning_fts FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning_fts, priority_word as ptag FROM #{cards_table}")
     $cn.execute("CREATE TABLE cards_html DEFAULT CHARSET=utf8 SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
 
     ## Generate the card search content table
