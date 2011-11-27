@@ -345,7 +345,7 @@ class Entry
   def to_insert_sql
     insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,entry_tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,priority_word,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,%s,'%s');"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
-
+    
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
         mysql_escape_str(meaning_txt), mysql_escape_str(meaning_html), mysql_escape_str(meaning_fts),
         (classifier ? "'"+mysql_escape_str(classifier)+"'" : "NULL"), all_tags_list,

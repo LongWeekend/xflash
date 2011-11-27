@@ -67,6 +67,10 @@ class EntryCache
     
     return dict_entry
   end
+  
+  def size_of_headword_cache(type = :trad)
+    return @card_entries_by_headword[type].count
+  end
     
   # ======================
   # PRIVATE METHODS
