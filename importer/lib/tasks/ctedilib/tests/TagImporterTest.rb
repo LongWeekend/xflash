@@ -9,27 +9,9 @@ class TagImporterTest < Test::Unit::TestCase
     TagImporter.tear_down_all_tags
   end
 
-  def test_caching
-    #TODO: get this number on the spot from cards_staging
-    # The total number of entries (currently) -- make sure we have them all
-    assert_equal(98314,$card_entries.count)
-    
-    # Total number of cards that are duplicates
-    #SELECT SUM(count) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
-    #3622
-    assert_equal((98314 - 3622),$card_entries_by_headword[:simp].count)
-
-    # Number of headwords that have duplicates
-    #SELECT COUNT(headword_simp) FROM (SELECT headword_simp, count(*) as count FROM cards_staging GROUP BY headword_simp ORDER BY count DESC) as dupes WHERE count > 1
-    #1714
-    
-    #SELECT SUM(count) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
-    #3069
-    assert_equal((98314 - 3069),$card_entries_by_headword[:trad].count)
-    
-    #SELECT COUNT(headword_trad) FROM (SELECT headword_trad, count(*) as count FROM cards_staging GROUP BY headword_trad ORDER BY count DESC) as dupes WHERE count > 1
-    #1470
-  end
+  #=========================
+  # TEST METHODS
+  #=========================
 
   def test_import_starred_tag
     # For starred words
@@ -197,6 +179,27 @@ class TagImporterTest < Test::Unit::TestCase
     
     importer = TagImporter.new(results, configuration)
     importer.import()    
+  end
+  
+  def test_fuzzy_matching_on_yi_or_bu_sound_change
+    hsk_entry = HSKEntry.new
+    hsk_entry.parse_line('309,6,"不料","bu2 liao4","unexpectedly; to one\'s surprise"')
+    hsk_entry2 = HSKEntry.new
+    hsk_entry2.parse_line('4256,5,"一辈子","yi2 bei4 zi5","(for) a lifetime"')
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("不料 不料 [bu4 liao4] /unexpectedly/to one's surprise/")
+    cedict_entry.id = 200  # We need a non-negative ID for this not to fail
+    cedict_entry2 = CEdictEntry.new
+    cedict_entry2.parse_line("一輩子 一辈子 [yi1 bei4 zi5] /(for) a lifetime/")
+    cedict_entry2.id = 200  # We need a non-negative ID for this not to fail
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([cedict_entry, cedict_entry2])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([hsk_entry, hsk_entry2], configuration, cache)
+    
+    # Returns the number of matched entries
+    assert_equal(2,importer.import)
   end
   
   def test_simplified_only_matching
