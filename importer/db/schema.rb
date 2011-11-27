@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125044628) do
+ActiveRecord::Schema.define(:version => 20111127045220) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20111125044628) do
     t.integer "tag_id"
     t.integer "card_id"
   end
+
+  add_index "card_tag_link", ["tag_id"], :name => "tag_id"
 
   create_table "cards", :id => false, :force => true do |t|
     t.integer "card_id",       :default => 0, :null => false
@@ -54,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20111125044628) do
     t.string  "meaning_fts",       :limit => 3000,                          :null => false
     t.string  "meaning_html",      :limit => 5000,                          :null => false
     t.string  "classifier"
-    t.string  "tags",              :limit => 200
+    t.string  "entry_tags",        :limit => 200
     t.boolean "is_variant",                              :default => false, :null => false
     t.boolean "is_erhua_variant",                        :default => false, :null => false
     t.string  "variant"
@@ -151,10 +153,9 @@ ActiveRecord::Schema.define(:version => 20111125044628) do
 
   create_table "tag_matching_resolution_choices", :force => true do |t|
     t.string   "tag_matching_exception_id"
-    t.string   "human_readable"
-    t.text     "serialized_entry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "entry_id"
   end
 
   add_index "tag_matching_resolution_choices", ["tag_matching_exception_id"], :name => "index_tag_matching_resolution_choices_on_base_entry_id"
