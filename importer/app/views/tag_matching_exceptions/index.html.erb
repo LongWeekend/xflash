@@ -6,9 +6,7 @@
   <tr>
     <th>Unmatched Entry</th>
     <th>Choices</th>
-    <% if @has_matches %>
     <th></th>
-    <% end %>
     <th></th>
   </tr>
 
@@ -19,14 +17,14 @@
 
       <% if @has_matches %>
         <!-- THIS SECTION IS FOR MATCHING HEADWORDS WHEN UNSURE -->
-        <% form_for tag_matching_exception, :remote => true do |f| %>
+        <%= form_for tag_matching_exception, :remote => true do |f| %>
           <td>
           <%=
             include_blank = (tag_matching_exception.tag_matching_resolution_choices.count > 1)
             select("tag_matching_exception","resolved_serialized_entry",tag_matching_exception.tag_matching_resolution_choices.collect { |p| [p.human_readable_trimmed,p.serialized_entry] }, {:include_blank => include_blank})
           %>
           </td>
-          <td><div id="status_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
+          <td><div id="match_btn_<%= tag_matching_exception.id %>"><%= f.submit "Match" %></div></td>
         <% end %>
       <% end %>
 
@@ -34,13 +32,19 @@
       <% if @has_matches == false %>
         <!-- THIS SECTION IS FOR LOOKING UP NEW HEADWORDS -->
         <td>
-          <% form_for tag_matching_exception, :remote => true do |f| %>
+          <%= form_for tag_matching_exception, :remote => true do |f| %>
             <!-- We put a hidden tag here with this form so that our match button has a value to update from, match button starts hidden -->
             <%= hidden_field("tag_matching_exception","resolved_serialized_entry", :id => "tag_matching_exception_#{tag_matching_exception.id}") %>
-            <div id="status_<%= tag_matching_exception.id %>" style="display: none;"><%= f.submit "Match" %></div>
+            <div id="search_results_<%= tag_matching_exception.id %>"></div>
+            <div id="match_btn_<%= tag_matching_exception.id %>" style="display: none;"><%= f.submit "Match" %></div>
           <% end %>
-          <% #form_tag("/cards_staging", :method => :get, :remote => true) %>
-          <% #end %>
+        </td>
+        <td>
+          <%= form_tag "/entry/search", :remote => true, :method => :get do %>
+            <%= text_field_tag 'query', nil, :size => 10 %>
+            <%= hidden_field_tag('exc_id', tag_matching_exception.id) %>
+            <%= submit_tag "Search" %>
+          <% end %>
         </td>
       <% end %>
 

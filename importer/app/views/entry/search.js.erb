@@ -1,0 +1,5 @@
+$("#search_results_<%= @exception_id %>").html("<%= escape_javascript ( select ("tag_matching_exception", "resolved_serialized_entry", @results.collect {|entry| [entry.human_readable_trimmed, entry.cedict_hash]}, {:include_blank => @include_blank}) ) %>")
+$("#match_btn_<%= @exception_id %>").show()
+<% if (@results.count > 0) %>
+$("").hide()
+<% end %>

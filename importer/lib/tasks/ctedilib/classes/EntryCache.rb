@@ -49,7 +49,11 @@ class EntryCache
   # ======================
   
   def prepare_cache_if_necessary
-    _cache_sql_cards(_get_cards_from_db) if @card_entries == false
+    if (@card_entries == false)
+      tickcount("Caching cards_staging to memory...") do
+        _cache_sql_cards(_get_cards_from_db)
+      end
+    end
   end
 
   def entry_in_cache?(entry = false,type = :trad)

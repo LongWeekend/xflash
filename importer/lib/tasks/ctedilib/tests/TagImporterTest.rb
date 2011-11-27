@@ -205,12 +205,10 @@ class TagImporterTest < Test::Unit::TestCase
     cedict_entry = CEdictEntry.new
     cedict_entry.parse_line("颱風 台风 [tai2 feng1] /hurricane/typhoon/")
 
-    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
-    importer = TagImporter.new([book_entry], configuration)
-    
-    # Now create a mock cache
+    # Now create a mock cache & pass it to the importer
     cache = EntryCache.new([cedict_entry])
-    importer.entry_cache = cache
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([book_entry], configuration, cache)
     
     # Returns the number of matched entries
     assert_equal(1,importer.import)

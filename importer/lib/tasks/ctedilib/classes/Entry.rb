@@ -343,7 +343,7 @@ class Entry
   end
   
   def to_insert_sql
-    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,priority_word,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,%s,'%s');"
+    insert_entry_sql = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,entry_tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,priority_word,cedict_hash) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s,%s,%s,'%s');"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return insert_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,
@@ -361,7 +361,7 @@ class Entry
   def to_update_sql
     return false if (id == -1)
     
-    update_entry_sql = "UPDATE cards_staging SET headword_trad = '%s',headword_simp = '%s',headword_en = '%s',reading = '%s',reading_diacritic = '%s',meaning = '%s',meaning_html = '%s',meaning_fts = '%s',classifier = %s,tags = '%s',referenced_cards = %s,is_reference_only = %s,is_variant = %s,is_erhua_variant = %s,is_proper_noun = %s,variant = %s,priority_word = %s, cedict_hash = '%s' WHERE card_id = %s;"
+    update_entry_sql = "UPDATE cards_staging SET headword_trad = '%s',headword_simp = '%s',headword_en = '%s',reading = '%s',reading_diacritic = '%s',meaning = '%s',meaning_html = '%s',meaning_fts = '%s',classifier = %s,entry_tags = '%s',referenced_cards = %s,is_reference_only = %s,is_variant = %s,is_erhua_variant = %s,is_proper_noun = %s,variant = %s,priority_word = %s, cedict_hash = '%s' WHERE card_id = %s;"
     all_tags_list = Array.combine_and_uniq_arrays(all_tags).join($delimiters[:jflash_tag_coldata])
 
     return update_entry_sql % [headword_trad, headword_simp, headword_en, pinyin, pinyin_diacritic,

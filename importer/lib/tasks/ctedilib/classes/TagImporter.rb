@@ -3,11 +3,15 @@ class TagImporter
   include DatabaseHelpers
   
   #### DESC: Class Constructors
-  def initialize (data, configuration)
+  def initialize (data, configuration, prev_entry_cache = false)
     @config = {}
     @tag_id = nil
     @human_importer = HumanTagImporter.new
-    @entry_cache = EntryCache.new
+    if prev_entry_cache
+      @entry_cache = prev_entry_cache
+    else
+      @entry_cache = EntryCache.new
+    end
     
     # Metadata for the tag itself
     @config[:metadata] = configuration
@@ -29,14 +33,6 @@ class TagImporter
     end
     
     return self
-  end
-  
-  def entry_cache=(new_cache)
-    @entry_cache = new_cache
-  end
-  
-  def entry_cache
-    @entry_cache
   end
   
   def tag_id
@@ -92,17 +88,14 @@ class TagImporter
     # Execute the query
     $cn.execute(insert_query)
 
-    # Puts the feedback to the user
-    log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [inserted_short_name, @tag_id], true)
-    
     return last_inserted_id
   end
     
   def import
     # Insert into the tags_staging first to get the parent of the tags.
     connect_db
-    
     @tag_id = setup_tag_row
+    log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [@config[:metadata].short_name, @tag_id], true)
     
     # After creating the table, skip the import process if we have no card data
     if (@config[:data] == nil or @config[:data].empty?)

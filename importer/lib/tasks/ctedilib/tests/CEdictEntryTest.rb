@@ -248,7 +248,7 @@ class CEdictEntryTest < Test::Unit::TestCase
     entry = CEdictEntry.new
     entry.parse_line("旁邊兒 旁边儿 [pang2 bian1 r5] /erhua variant of 旁邊|旁边, lateral/side/to the side/beside/")
     cedict_hash = mysql_serialise_ruby_object(entry)
-    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','%s');" % cedict_hash
+    expected = "INSERT INTO cards_staging (headword_trad,headword_simp,headword_en,reading,reading_diacritic,meaning,meaning_html,meaning_fts,classifier,entry_tags,referenced_cards,is_reference_only,is_variant,is_erhua_variant,is_proper_noun,variant,cedict_hash) VALUES ('旁邊兒','旁边儿','lateral','pang2 bian1 r5','páng biān r','lateral; side; to the side; beside','<ol><li>lateral</li><li>side</li><li>to the side</li><li>beside</li></ol>','lateral side beside',NULL,'',NULL,0,1,1,0,'旁邊|旁边','%s');" % cedict_hash
     assert_equal(expected,entry.to_insert_sql)
   end
   

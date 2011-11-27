@@ -8,6 +8,7 @@ class GroupImporter
     path_to_yaml_file = File.dirname(__FILE__) + "/../../../../config/groups_config/#{yaml_file}"
     @configuration = YAML.load_file(path_to_yaml_file)
     @counter = 0
+    @entry_cache = EntryCache.new
     
     if (@configuration == nil)
       raise "Sorry I have to throw an exception as the file seems broken"
@@ -86,7 +87,8 @@ class GroupImporter
 
     # Get the class of the importer used
     # and try to constantize / instantiate it from there
-    importer = configuration.file_importer.constantize.new(results, configuration)
+    @entry_cache.prepare_cache_if_necessary
+    importer = configuration.file_importer.constantize.new(results, configuration, @entry_cache)
     importer.import
 
     # Set the priority word flag is appropriate
