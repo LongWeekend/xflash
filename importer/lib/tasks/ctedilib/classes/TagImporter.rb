@@ -144,11 +144,28 @@ class TagImporter
           # This is for the case where nothing matched at all on the strict criteria
           loosely_matching_cards = find_cards_similar_to(entry, loose_criteria)
           matched_card = @human_importer.get_human_result_for_entry(entry, loosely_matching_cards)
-          matched_cards = [matched_card] if matched_card  # Great, we got something
+          if matched_card
+            # Great, we got something
+            matched_cards = [matched_card]
+          else
+            if loosely_matching_cards.count > 1
+              multiple_found += 1
+              log "\n[Multiple Records]There are multiple loosely matching cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+            else
+              not_found += 1
+              log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+            end
+          end
         elsif matching_cards.count > 1
           # This is where too much matched on the strict criteria
           matched_card = @human_importer.get_human_result_for_entry(entry, matching_cards)
-          matched_cards = [matched_card] if matched_card  # Great, we got something
+          if matched_card
+            # Great, we got something
+            matched_cards = [matched_card]
+          else
+            multiple_found += 1
+            log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+          end
         else
           # Only 1 record for strict match, all is normal
           normal_card = true
@@ -156,11 +173,7 @@ class TagImporter
 
         # OK, we've been through all we can do in terms of recovery, et al.  Log the results, good or bad
         if matching_cards.empty?
-          not_found += 1
-          log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
         elsif matching_cards.count > 1
-          multiple_found += 1
-          log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
         else
           found += 1
           card_id = matching_cards.first.id
