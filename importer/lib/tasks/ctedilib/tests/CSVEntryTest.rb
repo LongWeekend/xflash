@@ -27,7 +27,7 @@ class CSVEntryTest < Test::Unit::TestCase
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
     assert_equal("愛戴",entry.headword_trad)
-    assert_equal("",entry.headword_simp)
+    assert_equal("愛戴",entry.headword_simp)
     assert_equal(["VS"],entry.pos)
     assert_equal("àidài",entry.pinyin_diacritic)
     assert_equal("",entry.pinyin)
@@ -38,7 +38,7 @@ class CSVEntryTest < Test::Unit::TestCase
   def test_description
     entry = CSVEntry.new
     entry.parse_line("2,\"2119\",\"愛戴\",\"àidài \",\"A\",\"(VS)\",\"love and respect\"")
-    assert_equal("愛戴  [àidài], love and respect (VS)",entry.description)
+    assert_equal("愛戴 愛戴 [àidài], love and respect (VS)",entry.description)
   end
   
   def test_parse_meaning
@@ -75,13 +75,23 @@ class CSVEntryTest < Test::Unit::TestCase
     assert_equal("yíxiàzi",entry.pinyin_diacritic)
   end
   
-  def test_meaning_separated_hw
+  def test_meaning_strip_sense_numbers_from_hw
     entry = CSVEntry.new
     entry.parse_line('568,"0276","叫1","jiào ","B","(VA)","to ask"')
     expected_meanings = [Meaning.new("to ask")]
     assert_equal(expected_meanings, entry.meanings)
     
     assert_equal("叫",entry.headword_trad)
+    assert_equal("jiào",entry.pinyin_diacritic)
+  end
+  
+  def test_strip_full_width_parenths
+    entry = CSVEntry.new
+    entry.parse_line('568,"0276","叫（foo）","jiào ","B","(VA)","to ask"')
+    expected_meanings = [Meaning.new("to ask")]
+    assert_equal(expected_meanings, entry.meanings)
+    
+    assert_equal("叫foo",entry.headword_trad)
     assert_equal("jiào",entry.pinyin_diacritic)
   end
 

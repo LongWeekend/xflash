@@ -225,5 +225,43 @@ class TagImporterTest < Test::Unit::TestCase
     # Returns the number of matched entries
     assert_equal(1,importer.import)
   end
+
+  def test_surname_problem
+    book_entry = BookEntry.new
+    book_entry.parse_line('文	文	wen2	/language/script/written language/')
+    bogus_entry = CEdictEntry.new
+    bogus_entry.parse_line("文 文 [Wen2] /surname Wen/")
+    bogus_entry.id = 2
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("文 文 [wen2] /language/culture/writing/formal/literary/gentle/(old) classifier for coins/Kangxi radical 118/")
+    cedict_entry.id = 3
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([bogus_entry,cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([book_entry], configuration, cache)
+    
+    # Returns the number of matched entries
+    assert_equal(1,importer.import)
+  end
+  
+  def test_surname_problem_2
+    csv_entry = CSVEntry.new
+    csv_entry.parse_line('19,"0337","白","bái ","B","(VS)","white"')
+    bogus_entry = CEdictEntry.new
+    bogus_entry.parse_line("白 白 [Bai2] /surname Bai/")
+    bogus_entry.id = 2
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("白 白 [bai2] /white/snowy/pure/bright/empty/blank/plain/clear/to make clear/in vain/gratuitous/free of charge/reactionary/anti-communist/funeral/to stare coldly/to write wrong character/to state/to explain/vernacular/spoken lines in opera/")
+    cedict_entry.id = 3
+    
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([bogus_entry,cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([csv_entry], configuration, cache)
+    
+    # Returns the number of matched entries
+    assert_equal(1,importer.import)
+  end
   
 end

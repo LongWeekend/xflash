@@ -116,13 +116,25 @@ class TagImporter
     normal_criteria = Proc.new do |dict_entry, tag_entry|
       # Comparing the pinyin/reading - ignore case for now
       if tag_entry.pinyin.length > 0
-        same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ",""))
-        if (same_pinyin == false and (tag_entry.pinyin.index("yi2") or tag_entry.pinyin.index("bu2")))
-          same_pinyin = (dict_entry.pinyin.downcase.gsub(" ","") == tag_entry.pinyin.downcase.gsub(" ","").gsub("yi2","yi1").gsub("bu2","bu4"))
-        end
-      elsif tag_entry.pinyin_diacritic
-        same_pinyin = (dict_entry.pinyin_diacritic.downcase.gsub(" ","") == tag_entry.pinyin_diacritic.downcase.gsub(" ",""))
+        tag_pinyin = tag_entry.pinyin.gsub(" ","")
+        dict_pinyin = dict_entry.pinyin.gsub(" ","")
+      else
+        tag_pinyin = tag_entry.pinyin_diacritic.gsub(" ","")
+        dict_pinyin = dict_entry.pinyin_diacritic.gsub(" ","")
       end
+      
+      # Don't use "downcase" in the case where "Surname" is one of the meanings.
+      if dict_entry.meaning_txt.downcase.index("surname")
+        same_pinyin = (dict_pinyin == tag_pinyin)
+      else
+        same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase)
+      end
+        
+      # If we didn't match right away, also check for the funny tone changes 
+      if (same_pinyin == false and (tag_pinyin.index("yi2") or tag_pinyin.index("bu2")))
+        same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase.gsub("yi2","yi1").gsub("bu2","bu4"))
+      end
+        
       # The "return" keyword will F everything up when used in blocks!
       same_pinyin
     end

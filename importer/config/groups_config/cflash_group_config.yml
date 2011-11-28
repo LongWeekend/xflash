@@ -256,7 +256,7 @@ study_sets:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_30"
         npcr:
-            name: ["New Practical Chinese Reader, V1", 0,"By Zhang Kai, Liu Shehui, Chen Xi, Zuo Shandan, Shi Jiawei, Liu Xun"]
+            name: ["New Practical Chinese Reader, V1", 0, "By Zhang Kai, Liu Shehui, Chen Xi, Zuo Shandan, Shi Jiawei, Liu Xun"]
             npcr_01:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_1"
@@ -300,7 +300,7 @@ study_sets:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_14"
         schaums:
-            name: ["Schaums\' Outlines Chinese Vocabulary", 0, "By Yanping Xie, Duan-Duan Li"]
+            name: ["Schaums' Outlines Chinese Vocabulary", 0, "By Yanping Xie, Duan-Duan Li"]
             schaums_asking_for_directions:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_asking_for_directions"
@@ -351,7 +351,7 @@ study_sets:
                 metadata_key: "schaums_education"
             schaums_making_a_phone_call:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_making_a_phone_call"            
+                metadata_key: "schaums_making_a_phone_call"
             schaums_on_the_airplane:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_on_the_airplane"
@@ -394,7 +394,7 @@ study_sets:
             metadata_key: "frequency_7"
     lwe_favs:
         file: "system_tags.yml"
-        metadata_key: "lwe_favs"        
+        metadata_key: "lwe_favs"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"

@@ -157,7 +157,7 @@ class Entry
         elsif (tone.match($regexes[:pinyin_tone]))
           found_diacritic = false
           # Get the reading without the number (tone)
-          reading = reading.slice(0, reading.length()-1).downcase()
+          reading = reading.slice(0, reading.length()-1)
           
           vocals = reading.scan($regexes[:vocal])
           num_of_vocal = vocals.length

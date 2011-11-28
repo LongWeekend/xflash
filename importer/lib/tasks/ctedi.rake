@@ -122,8 +122,8 @@ namespace :ctedi do
     # Import groups and match tags within them
     prt "\nBeginning Group & Tag Import"
     prt_dotted_line
+    GroupImporter.empty_staging_tables
     importer = GroupImporter.new("cflash_group_config.yml")
-    importer.empty_staging_tables
     importer.import
     
     prt "\nImport Finished"
