@@ -472,8 +472,8 @@ enum Sections {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 
     // If they selected a group
-    StudySetViewController *subgroupController = [[StudySetViewController alloc] init];
-    subgroupController.group = [[self.subgroupArray objectAtIndex:indexPath.row] group];
+    Group *childGroup = [self.subgroupArray objectAtIndex:indexPath.row];
+    StudySetViewController *subgroupController = [[StudySetViewController alloc] initWithGroup:childGroup];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [subgroupController release];
   }
