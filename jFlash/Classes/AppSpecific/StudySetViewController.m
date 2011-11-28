@@ -18,7 +18,7 @@ NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
 
 @implementation StudySetViewController
-@synthesize subgroupArray,tagArray,selectedTagId,group,groupId,activityIndicator,searchBar,backupManager,activityView;
+@synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
 
 enum Sections {
   kGroupsSection = 0,
@@ -31,7 +31,7 @@ enum Sections {
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
  */
-- (id) init
+- (id) initWithGroup:(Group*)aGroup
 {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self)
@@ -44,6 +44,11 @@ enum Sections {
     self.backupManager = bm;
     [bm release];
     selectedTagId = -1;
+    
+    // Get this group & subgroup data, and finally tags
+    self.group = aGroup;
+    [self reloadSubgroupData];
+
   }
   return self;
 }
@@ -77,11 +82,7 @@ enum Sections {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   
-  // Get this group & subgroup data, and finally tags
-  self.group = [GroupPeer retrieveGroupById:self.groupId];
-  [self reloadSubgroupData];
-  
-  self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
+  self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   
   // Activity indicator
   UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -109,7 +110,7 @@ enum Sections {
 - (void) reloadSubgroupData
 {
   // Get subgroups
-  self.subgroupArray = [GroupPeer retrieveGroupsByOwner:group.groupId];
+  self.subgroupArray = [GroupPeer retrieveGroupsByOwner:self.group.groupId];
   for (int i = 0; i < [self.subgroupArray count]; i++)
   {
     [[self.subgroupArray objectAtIndex:i] childGroupCount];
@@ -127,7 +128,7 @@ enum Sections {
     self.tagArray = [[[self.group childTags] mutableCopy] autorelease];
     
     // Do something special for starred words - re-sort so starred shows up on top.
-    if (self.group.groupId == 0)
+    if ([self.group isTopLevelGroup])
     {
       NSMutableArray *tmpTagArray = [NSMutableArray array];
       for (Tag *tmpTag in self.tagArray)
@@ -175,9 +176,7 @@ enum Sections {
 - (void) addStudySet
 {
   // TODO: iPad customization?
-  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithNibName:@"AddStudySetView" bundle:nil];
-  tmpVC.ownerId = self.groupId;
-  tmpVC.title = NSLocalizedString(@"Create Study Set",@"AddStudySetInputViewController.NavBarTitle");
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:nil inGroup:self.group];
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
   [self.navigationController presentModalViewController:modalNavController animated:YES];
   [modalNavController release];
@@ -205,7 +204,7 @@ enum Sections {
 
   // Usually, there are 2: groups + tags
   NSInteger numRows = 2;
-  if (self.groupId == 0)
+  if ([self.group isTopLevelGroup])
   {
     numRows++;
   }
@@ -474,7 +473,7 @@ enum Sections {
 
     // If they selected a group
     StudySetViewController *subgroupController = [[StudySetViewController alloc] init];
-    subgroupController.groupId = [[self.subgroupArray objectAtIndex:indexPath.row] groupId];
+    subgroupController.group = [[self.subgroupArray objectAtIndex:indexPath.row] group];
     [self.navigationController pushViewController:subgroupController animated:YES];
     [subgroupController release];
   }

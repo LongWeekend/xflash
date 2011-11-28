@@ -184,7 +184,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [localControllersArray addObject:studyViewController];   
   [studyViewController release];
   
-  StudySetViewController *studySetViewController = [[StudySetViewController alloc] init];
+  StudySetViewController *studySetViewController = [[StudySetViewController alloc] initWithGroup:[GroupPeer topLevelGroup]];
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:studySetViewController];
   [localControllersArray addObject:localNavigationController];
   [studySetViewController release];

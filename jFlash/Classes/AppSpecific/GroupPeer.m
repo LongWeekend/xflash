@@ -11,6 +11,10 @@
 //! Handles retrieval of Group objects from the database
 @implementation GroupPeer
 
++ (Group*) topLevelGroup
+{
+  return [[self class] retrieveGroupById:0];
+}
 
 //! Returns a Group object hydrated based on groupId parameter
 + (Group*) retrieveGroupById:(NSInteger)groupId

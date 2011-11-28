@@ -45,7 +45,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 // TODO: Should likely be refactored to work as a save method instead of TagPeer creation.
 - (void) save
 {
-  LWE_ASSERT_EXC(self.tagId > 0,@"The tag must already exist to be saved, use createTag in TagPeer to create a tag");
+  LWE_ASSERT_EXC(self.tagId > 0,@"The tag must already exist to be saved, use createTagNamed in TagPeer to create a tag");
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql;
   sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];

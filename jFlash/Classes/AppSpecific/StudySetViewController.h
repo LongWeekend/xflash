@@ -23,6 +23,7 @@
 	BOOL searching;
 }
 
+- (id) initWithGroup:(Group*)aGroup;
 - (void) changeStudySet: (Tag*) tag;
 - (void) reloadTableData;
 - (void) reloadSubgroupData;
@@ -30,7 +31,6 @@
 - (void) hideSearchBar;
 
 @property NSInteger selectedTagId;
-@property NSInteger groupId;
 @property (nonatomic, retain) Group *group;
 @property (nonatomic, retain) NSMutableArray *tagArray;
 @property (nonatomic, retain) NSArray *subgroupArray;

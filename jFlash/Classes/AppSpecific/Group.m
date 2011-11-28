@@ -12,7 +12,6 @@
 @implementation Group
 @synthesize groupId, groupName, ownerId, tagCount, childGroupCount, recommended;
 
-
 - (id) init
 {
   self = [super init];
@@ -32,6 +31,11 @@
   [self setOwnerId:    [rs intForColumn:@"owner_id"]];
   [self setTagCount:   [rs intForColumn:@"tag_count"]];
   [self setRecommended:[rs intForColumn:@"recommended"]];
+}
+
+- (BOOL) isTopLevelGroup
+{
+  return (self.groupId == 0);
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)
