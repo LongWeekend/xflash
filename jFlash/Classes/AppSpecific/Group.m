@@ -35,7 +35,7 @@
 
 - (BOOL) isTopLevelGroup
 {
-  return (self.groupId == 0);
+  return (self.ownerId == -1);
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)

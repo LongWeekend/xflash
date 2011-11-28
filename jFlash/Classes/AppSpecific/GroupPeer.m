@@ -13,7 +13,9 @@
 
 + (Group*) topLevelGroup
 {
-  return [[self class] retrieveGroupById:0];
+  NSArray *groups = [[self class] retrieveGroupsByOwner:-1];
+  LWE_ASSERT_EXC([groups count] == 1,@"There should be 1 and only 1 group in the DB with owner -1");
+  return (Group*)[groups objectAtIndex:0];
 }
 
 //! Returns a Group object hydrated based on groupId parameter
