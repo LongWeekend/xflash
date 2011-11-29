@@ -290,7 +290,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   // Special case for about section
   if (key == APP_ABOUT)
   {
-    size = 435.0f;    
+    size = [self.dataSource sizeForAcknowledgementsRow];
   }
   else
   {
