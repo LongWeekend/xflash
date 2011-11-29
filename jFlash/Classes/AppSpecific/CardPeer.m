@@ -84,12 +84,17 @@
 + (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
 {
   NSString *returnSql = nil;
+#if defined (LWE_CFLASH)
+  NSString *orderBy = @"headword_simp";
+#else
+  NSString *orderBy = @"headword";
+#endif
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
   // Do the search using SQLite FTS (PTAG results)
   returnSql = [NSString stringWithFormat:@""
          "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
          "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = %d LIMIT %d) "
-         "ORDER BY c.headword", keywordWildcard, usePTag, limit];
+         "ORDER BY c.%@", keywordWildcard, usePTag, limit, orderBy];
   return returnSql;
 }
 
