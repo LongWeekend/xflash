@@ -184,7 +184,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [localControllersArray addObject:studyViewController];   
   [studyViewController release];
   
-  StudySetViewController *studySetViewController = [[StudySetViewController alloc] init];
+  StudySetViewController *studySetViewController = [[StudySetViewController alloc] initWithGroup:[GroupPeer topLevelGroup]];
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:studySetViewController];
   [localControllersArray addObject:localNavigationController];
   [studySetViewController release];
@@ -202,7 +202,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 #elif defined(LWE_CFLASH)
   settingsViewController.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
 #endif
-  // Potentially later this could be managed by the RVC.
   settingsViewController.delegate = (id<LWESettingsDelegate>)settingsViewController.dataSource;
   
   localNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];

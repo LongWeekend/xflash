@@ -31,7 +31,7 @@ module DatabaseHelpers
   def last_inserted_id
     connect_db
     $cn.execute("SELECT LAST_INSERT_ID()").each do |last_id|
-      return last_id
+      return last_id[0]
     end
     return false
   end

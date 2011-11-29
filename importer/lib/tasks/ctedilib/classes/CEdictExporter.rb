@@ -76,7 +76,7 @@ class CEdictExporter
     CREATE TABLE group_tag_link (group_id INTEGER NOT NULL , tag_id INTEGER NOT NULL );\\
     \\
     DROP TABLE IF EXISTS groups;\\
-    CREATE TABLE groups (group_id INTEGER PRIMARY KEY NOT NULL, group_name VARCHAR NOT NULL,owner_id INTEGER NOT NULL  DEFAULT 0, tag_count INTEGER NOT NULL  DEFAULT 0, recommended INTEGER DEFAULT 0 );\\
+    CREATE TABLE groups (group_id INTEGER PRIMARY KEY NOT NULL, group_name VARCHAR NOT NULL, description VARCHAR, owner_id INTEGER NOT NULL  DEFAULT 0, tag_count INTEGER NOT NULL  DEFAULT 0, recommended INTEGER DEFAULT 0 );\\
     \\
     DROP TABLE IF EXISTS tags;\\
     CREATE TABLE tags (tag_id INTEGER PRIMARY KEY AUTOINCREMENT, tag_name TEXT, description TEXT, editable INTEGER DEFAULT 1, count INTEGER NOT NULL  DEFAULT 0);\\
@@ -190,7 +190,7 @@ class CEdictExporter
     BEGIN TRANSACTION;\\
     \\
     DROP TABLE IF EXISTS cards_search_content;\\
-    CREATE VIRTUAL TABLE cards_search_content using FTS3(card_id, content);\\
+    CREATE VIRTUAL TABLE cards_search_content using FTS3(card_id, ptag, content);\\
     \\
     DROP TABLE IF EXISTS version;\\
     CREATE TABLE version (plugin_key TEXT PRIMARY KEY NOT NULL, version TEXT, plugin_name TEXT);\\

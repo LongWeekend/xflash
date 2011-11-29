@@ -58,6 +58,11 @@
 
 #pragma mark - Settings Data Source
 
+- (CGFloat) sizeForAcknowledgementsRow
+{
+  return 435.0f;
+}
+
 /** Returns all the arrays to configure the settings table */
 - (NSArray*) settingsArray
 {

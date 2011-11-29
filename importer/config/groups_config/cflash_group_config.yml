@@ -10,8 +10,7 @@ study_sets:
     description: ""
     hsk:
         # 1 Means recommended = true
-        name: ["HSK Level 1~6", 1]
-    	description: ""
+        name: ["HSK Word Lists 1~6", 1, "Courtesy http://lingomi.com/"]
         hsk_1:
             file: "hsk_config.yml"
             metadata_key: "hsk_1"
@@ -32,8 +31,7 @@ study_sets:
             metadata_key: "hsk_6"
     tocfl_800_words:
         # 1 Means recommended = true
-        name: ["TOCFL Level 1~3", 1]
-    	description: "Used in Taiwan, formerly called TOPS"
+        name: ["TOCFL Level 1~3", 1, "Taiwanese language test, formerly called SC-TOP"]
         800_1_beginner: 
             file: "file_800_config.yml"
             metadata_key: "tags_800_1_beginner"
@@ -44,10 +42,9 @@ study_sets:
             file: "file_800_config.yml"
             metadata_key: "tags_800_3_advance"
     books:
-        name: ["Textbook Lessons", 0]
+        name: ["Textbook Lessons", 0, "Vocabulary Lists from Various Texts"]
         beg_chinese_lesson:
-            name: "Beginner\'s Chinese"
-    	    description: "By Yong Ho"
+            name: ["Beginner's Chinese", 0, "By Yong Ho"]
             beg_chinese_lesson_01:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_1"
@@ -79,8 +76,7 @@ study_sets:
                 file: "beg_chinese_config.yml"
                 metadata_key: "beg_chinese_lesson_10"
         colloqial_chinese_lesson:
-            name: "Colloquial Chinese"
-    	    description: "By P.C. T\'ung, D.E. Pollard"
+            name: ["Colloquial Chinese", 0, "By P.C. T'ung, D.E. Pollard"]
             col_chinese_lesson_01:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_1"
@@ -112,8 +108,7 @@ study_sets:
                 file: "colloqial_chinese_config.yml"
                 metadata_key: "colloquial_chinese_lesson_10"
         integrated_chinese:
-            name: "Integrated Chinese, 2nd Edition"
-    	    description: "By Tao-chung Yao, Yuehua Liu"
+            name: ["Integrated Chinese, 2nd Edition", 0, "By Tao-chung Yao, Yuehua Liu"]
             ic_intro_dates_and_time:
                 file: "integrated_chinese_combined_config.yml"
                 metadata_key: "ic_intro_date_and_time"
@@ -261,8 +256,7 @@ study_sets:
                 file: "pcr_config.yml"
                 metadata_key: "pcr_30"
         npcr:
-            name: "New Practical Chinese Reader, V1"
-            description: "By Zhang Kai, Liu Shehui, Chen Xi, Zuo Shandan, Shi Jiawei, Liu Xun"
+            name: ["New Practical Chinese Reader, V1", 0, "By Zhang Kai, Liu Shehui, Chen Xi, Zuo Shandan, Shi Jiawei, Liu Xun"]
             npcr_01:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_1"
@@ -306,8 +300,7 @@ study_sets:
                 file: "npcr_config.yml"
                 metadata_key: "npcr_14"
         schaums:
-            name: ["Schaums\' Outlines Chinese Vocabulary", 1]
-            description: "By Yanping Xie, Duan-Duan Li"
+            name: ["Schaums' Outlines Chinese Vocabulary", 0, "By Yanping Xie, Duan-Duan Li"]
             schaums_asking_for_directions:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_asking_for_directions"
@@ -358,7 +351,7 @@ study_sets:
                 metadata_key: "schaums_education"
             schaums_making_a_phone_call:
                 file: "schaums_config.yml"
-                metadata_key: "schaums_making_a_phone_call"            
+                metadata_key: "schaums_making_a_phone_call"
             schaums_on_the_airplane:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_on_the_airplane"
@@ -374,12 +367,132 @@ study_sets:
             schaums_sports:
                 file: "schaums_config.yml"
                 metadata_key: "schaums_sports"
-    frequency_bigrams:
-        name: "Most Frequent Words (Bigrams)"
-        description: "Courtesy Jun Da, http://lingua.mtsu.edu/chinese-computing/"
+    frequent_news_bigrams:
+        name: ["Frequent Bigrams (News)", 0, "Courtesy Jun Da, http://lingua.mtsu.edu/chinese-computing/"]
+        frequent_bigram_n_1:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_01"
+        frequent_bigram_n_2:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_02"
+        frequent_bigram_n_3:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_03"
+        frequent_bigram_n_4:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_04"
+        frequent_bigram_n_5:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_05"
+        frequent_bigram_n_6:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_06"
+        frequent_bigram_n_7:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_07"
+        frequent_bigram_n_8:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_08"
+        frequent_bigram_n_9:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_09"
+        frequent_bigram_n_10:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_10"
+        frequent_bigram_n_11:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_11"
+        frequent_bigram_n_12:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_12"
+        frequent_bigram_n_13:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_13"
+        frequent_bigram_n_14:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_14"
+        frequent_bigram_n_15:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_15"
+        frequent_bigram_n_16:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_16"
+        frequent_bigram_n_17:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_17"
+        frequent_bigram_n_18:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_18"
+        frequent_bigram_n_19:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_19"
+        frequent_bigram_n_20:
+            file: "bigram_news_config.yml"
+            metadata_key: "frequency_news_20"
+    frequent_fiction_bigrams:
+        name: ["Frequent Bigrams (Fiction)", 0, "Courtesy Jun Da, http://lingua.mtsu.edu/chinese-computing/"]
+        frequent_bigram_f_1:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_01"
+        frequent_bigram_f_2:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_02"
+        frequent_bigram_f_3:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_03"
+        frequent_bigram_f_4:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_04"
+        frequent_bigram_f_5:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_05"
+        frequent_bigram_f_6:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_06"
+        frequent_bigram_f_7:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_07"
+        frequent_bigram_f_8:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_08"
+        frequent_bigram_f_9:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_09"
+        frequent_bigram_f_10:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_10"
+        frequent_bigram_f_11:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_11"
+        frequent_bigram_f_12:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_12"
+        frequent_bigram_f_13:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_13"
+        frequent_bigram_f_14:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_14"
+        frequent_bigram_f_15:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_15"
+        frequent_bigram_f_16:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_16"
+        frequent_bigram_f_17:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_17"
+        frequent_bigram_f_18:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_18"
+        frequent_bigram_f_19:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_19"
+        frequent_bigram_f_20:
+            file: "bigram_fict_config.yml"
+            metadata_key: "frequency_fict_20"
     frequency:
-        name: "Most Frequent Hànzì"
-        description: "Courtesy Patrick Hassel Zein, http://www.zein.se/"
+        name: ["Most Frequent Hànzì", 0, "Courtesy Patrick Hassel Zein, http://www.zein.se/"]
         frequency_1:
             file: "frequency_config.yml"
             metadata_key: "frequency_1"
@@ -403,7 +516,7 @@ study_sets:
             metadata_key: "frequency_7"
     lwe_favs:
         file: "system_tags.yml"
-        metadata_key: "lwe_favs"        
+        metadata_key: "lwe_favs"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"

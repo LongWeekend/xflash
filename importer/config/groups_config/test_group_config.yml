@@ -12,19 +12,15 @@ study_sets:
         name: ["800 + Words", 1]
         800_beginner: 
             file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
-        800_intermediate:
-            file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
-        800_advance:
-            file: "file_800_config.yml"
-            metadata_key: "tags_800_beginner"
+            metadata_key: "tags_800_1_beginner"
     starred_words:
         file: "system_tags.yml"
         metadata_key: "starred"
     lwe_favs:
         file: "system_tags.yml"
         metadata_key: "lwe_favs"
+    empty_group:
+        name: ["Empty Group", 0, "Empty Group"]
     lwe_favs_1:
         name: "asu"
         lwe_favs_2:

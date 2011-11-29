@@ -15,7 +15,7 @@ typedef enum {
 } LWEBackupManagerErrorCode;
 
 //! Informational Methods mostly for UX responses to success or failure
-@protocol BackupManagerDelegate
+@protocol LWEBackupManagerDelegate <NSObject>
 @optional
 - (void)didBackupUserData;
 - (void)didFailToBackupUserDataWithError:(NSError *)error;
@@ -41,6 +41,6 @@ typedef enum {
 //! Helper method that returns the flashType string name used by the API
 - (NSString*) stringForFlashType;
 
-@property (assign) id delegate;
+@property (assign) id<LWEBackupManagerDelegate> delegate;
 
 @end

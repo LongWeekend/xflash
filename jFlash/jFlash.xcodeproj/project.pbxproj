@@ -1779,6 +1779,19 @@
 			name = LWEChineseSearchBar;
 			sourceTree = "<group>";
 		};
+		49AD179F148343A70017EFB4 /* Study Sets */ = {
+			isa = PBXGroup;
+			children = (
+				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
+				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
+				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
+				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
+				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
+				917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */,
+			);
+			name = "Study Sets";
+			sourceTree = "<group>";
+		};
 		49B4ABEF11C1DCDB00CFC308 /* glass-buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -2497,23 +2510,18 @@
 		DA8B6A4B0FB111D600DE105C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				91DDB0A911C1F5CB00E8B962 /* Study View */,
+				49AD179F148343A70017EFB4 /* Study Sets */,
+				49C5BC1E11C51AE300A595D6 /* Search */,
+				91DDB0A811C1F57700E8B962 /* Settings */,
 				4993AFBF1278103E00872875 /* Help */,
 				49C6E9F311F6F7B5004633FD /* Twitter */,
-				49C5BC1E11C51AE300A595D6 /* Search */,
-				91DDB0A911C1F5CB00E8B962 /* Study View */,
-				91DDB0A811C1F57700E8B962 /* Settings */,
 				49F9692511AF680700DFC3C9 /* jFlashAppDelegate.h */,
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
-				917A5BC311AB7C4600016BD2 /* AddStudySetInputViewController.h */,
-				917A5BC411AB7C4600016BD2 /* AddStudySetInputViewController.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
 				4925735211C12619006FA4E1 /* ModalTaskViewController.m */,
 				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
 				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
-				917A5BD311AB7C4600016BD2 /* StudySetViewController.h */,
-				917A5BD411AB7C4600016BD2 /* StudySetViewController.m */,
-				917A5BD511AB7C4600016BD2 /* StudySetWordsViewController.h */,
-				917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

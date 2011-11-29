@@ -75,8 +75,14 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 
       // This pertains to the plugin manager
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
-      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
+
+// Don't use Cloudfront in development
+#if defined(LWE_DEBUG)
+      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://s3.amazonaws.com/japanese-flash/jFlash-availablePlugins.plist";
+#else
+      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3580k8bnen6up.cloudfront.net/jFlash-availablePlugins.plist";
+#endif
 
 #elif defined(LWE_CFLASH)
       NSString * const LWE_APP_SPLASH_IMAGE = @"chinese-flash-splash.png";
@@ -96,9 +102,12 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 
       // This pertains to the plugin manager
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"cFlash-downloadedPlugin.plist";
-      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3jxezdeu5e50q.cloudfront.net/cFlash-availablePlugins.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePluginForDownload.plist";
-
+#if defined(LWE_DEBUG)
+      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://s3.amazonaws.com/chinese-flash/cFlash-availablePlugins.plist";
+#else
+      NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3jxezdeu5e50q.cloudfront.net/cFlash-availablePlugins.plist";
+#endif
 
 #endif
 

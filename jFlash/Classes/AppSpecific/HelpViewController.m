@@ -9,6 +9,10 @@
 #import "HelpViewController.h"
 #import "HelpWebViewController.h"
 
+#define SUPPORT_ALERT_CANCEL_IDX 0
+#define SUPPORT_ALERT_SITE_IDX 1
+#define SUPPORT_ALERT_EMAIL_IDX 2
+
 /**
  * View controller for the user help.
  * Loads a web view controller w/ HTML data when a user
@@ -42,6 +46,11 @@
                                                NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                                               nil];
     self.sectionTitles = names;
+    
+    UIBarButtonItem *supportBtn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ask Us", @"HelpViewController.GetSatsifactionLink")
+                                                                    style:UIBarButtonItemStyleBordered
+                                                                   target:self action:@selector(_supportBtnPressed:)] autorelease];
+    self.navigationItem.rightBarButtonItem = supportBtn;
 
     // We use absolute sizes though so let the old devices scale the images down.
     self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
@@ -81,6 +90,61 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - 
+
+- (void) _supportBtnPressed:(id)sender
+{
+  UIAlertView *supportAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"GetSatisfaction.com",@"HelpViewController.SupportAlertMsgTitle")  
+                                                         message:NSLocalizedString(@"Do you have a question?\nA feature request?\nJust need some help?\n\nIt's best to make your voice heard on our support site, but we respond to e-mail too!",@"HelpViewController.SupportAlertMsgMsg")
+                                                        delegate:self
+                                               cancelButtonTitle:NSLocalizedString(@"No Thanks",@"Cancel")
+                                               otherButtonTitles:NSLocalizedString(@"Visit Site",@"Visit Site"),NSLocalizedString(@"Send an Email",@"Mail Us"), nil];
+  [supportAlert show];
+  [supportAlert release];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (buttonIndex == SUPPORT_ALERT_SITE_IDX)
+  {
+#if defined (LWE_JFLASH)
+    NSURL *url = [NSURL URLWithString:@"http://getsatisfaction.com/longweekend/products/longweekend_japanese_flash"];
+#elif defined (LWE_CFLASH)
+    NSURL *url = [NSURL URLWithString:@"http://getsatisfaction.com/longweekend/products/longweekend_chinese_flash"];
+#else
+    NSURL *url = [NSURL URLWithString:@"http://getsatisfaction.com/longweekend/"];
+#endif
+    [[UIApplication sharedApplication] openURL:url];
+  }
+  else if (buttonIndex == SUPPORT_ALERT_EMAIL_IDX)
+  {
+    if ([MFMailComposeViewController canSendMail]) 
+    {
+      MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+      picker.mailComposeDelegate = self;
+      [picker setSubject:@"Please Make This Awesome."];
+      [picker setToRecipients:[NSArray arrayWithObjects:LWE_SUPPORT_EMAIL, nil]];
+      [self presentModalViewController:picker animated:YES];
+      [picker release];
+    }
+    else 
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Email Not Available", @"emailVM.notAvailable.title")
+                                         message:NSLocalizedString(@"Oh no!  It looks like your device isn't set up for Mail yet!", @"emailVM.notAvailable.body")];
+      
+    }
+  }
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate Methods
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource Methods

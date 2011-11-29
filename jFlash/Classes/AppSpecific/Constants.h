@@ -73,7 +73,7 @@ extern NSString * const LWE_BAD_DATA_EMAIL;
 #elif defined(LWE_CFLASH)
 
   // LWE Favorites - CFlash
-  #define DEFAULT_TAG_ID 140
+  #define DEFAULT_TAG_ID 118
 
   extern NSString * const APP_PINYIN_COLOR;
   extern NSString * const SET_PINYIN_COLOR_ON;

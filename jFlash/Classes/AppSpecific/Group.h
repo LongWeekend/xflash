@@ -12,6 +12,8 @@
 - (void) hydrate:(FMResultSet*)rs;
 - (NSArray*) childTags;
 
+- (BOOL) isTopLevelGroup;
+
 @property (retain) NSString *groupName;   //! Display name
 @property NSInteger groupId;              //! groupId of the parent Group
 @property NSInteger ownerId;

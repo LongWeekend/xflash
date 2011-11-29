@@ -12,10 +12,15 @@ class CSVEntry < Entry
     segments = line.split(",\"")
     # This stops us from getting headers and other non-data rows
     if segments.count == 7 and segments[0].numeric?
-      @headword_trad = segments[2].gsub("\"","").strip
+      # The first gsub removes numbers, parenthesis and quotes, the second removes variant char in any "headword/variant char" pattern
+      @headword_trad = segments[2].gsub(/["\(\)1-5（）]/,"").gsub(/(\/.+)/,"").strip
+      
+      # These cards don't have a simplified headword, but it may aid in matching, so set them both here.
+      @headword_simp = @headword_trad
 
+      # The first gsub removes parenthesis and quotes, the second removes variant char in any "reading/variant reading" pattern
+      pinyin = segments[3].gsub(/["\(\)（）]/,"").gsub(/(\/.+)/,"").strip
       # This extra function call strips ouet any "stupid" round  tone-3 unicode points and replaces them with angled ones
-      pinyin = segments[3].gsub("\"","").strip
       pinyin = Entry.fix_unicode_for_tone_3(pinyin)
       
       # Test if the reading is already encoded
@@ -48,6 +53,37 @@ class CSVEntry < Entry
       raise EntryParseException, "Improperly formatted CSV line: %s" % [line]
     end
 
+  end
+  
+  # OVERRIDES
+  
+  def default_match_criteria
+    normal_criteria = Proc.new do |dict_entry, tag_entry|
+      same_headword = (dict_entry.headword_trad == tag_entry.headword_trad) || (dict_entry.headword_simp == tag_entry.headword_simp)
+      if same_headword
+        # Comparing the pinyin/reading - ignore case for now
+        tag_pinyin = tag_entry.pinyin_diacritic.gsub(" ","")
+        dict_pinyin = dict_entry.pinyin_diacritic.gsub(" ","")
+        
+        # Don't use "downcase" in the case where "Surname" is one of the meanings.
+        if dict_entry.meaning_txt.downcase.index("surname")
+          same_pinyin = (dict_pinyin == tag_pinyin)
+        else
+          same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase)
+        end
+          
+        # If we didn't match right away, also check for the funny tone changes 
+        if (same_pinyin == false and (tag_pinyin.index("yí") or tag_pinyin.index("bú")))
+          same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase.gsub("yí","yi1").gsub("bú","bu4"))
+        end
+          
+        # The "return" keyword will F everything up when used in blocks!
+        same_pinyin
+      else
+        false #hw did not match
+      end
+    end
+    return normal_criteria
   end
 
 end

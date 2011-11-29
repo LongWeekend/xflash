@@ -16,8 +16,10 @@ extern NSString * const LWECardSettingsChanged;
 extern NSString * const LWEUserSettingsChanged;
 
 @protocol LWESettingsDataSource <NSObject>
+@required
 - (NSArray*) settingsArray;
 - (NSDictionary*) settingsHash;
+- (CGFloat) sizeForAcknowledgementsRow;
 @end
 
 @class SettingsViewController;

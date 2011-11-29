@@ -7,7 +7,7 @@ beg_chinese_lesson_1:
     tag_name: "Lesson 1"
     tag_type: ""
     short_name: "BegChineseLesson1"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 1 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 1 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson1.txt"     
     visible: 1                                  
@@ -23,7 +23,7 @@ beg_chinese_lesson_2:
     tag_name: "Lesson 2"
     tag_type: ""
     short_name: "BegChineseLesson2"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 2 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 2 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson2.txt"     
     visible: 1                                  
@@ -39,7 +39,7 @@ beg_chinese_lesson_3:
     tag_name: "Lesson 3"
     tag_type: ""
     short_name: "BegChineseLesson3"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 3 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 3 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson3.txt"     
     visible: 1                                  
@@ -55,7 +55,7 @@ beg_chinese_lesson_4:
     tag_name: "Lesson 4"
     tag_type: ""
     short_name: "BegChineseLesson4"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 4 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 4 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson4.txt"     
     visible: 1                                  
@@ -71,7 +71,7 @@ beg_chinese_lesson_5:
     tag_name: "Lesson 5"
     tag_type: ""
     short_name: "BegChineseLesson5"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 5 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 5 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson5.txt"     
     visible: 1                                  
@@ -87,7 +87,7 @@ beg_chinese_lesson_6:
     tag_name: "Lesson 6"
     tag_type: ""
     short_name: "BegChineseLesson6"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 6 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 6 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson6.txt"     
     visible: 1                                  
@@ -103,7 +103,7 @@ beg_chinese_lesson_7:
     tag_name: "Lesson 7"
     tag_type: ""
     short_name: "BegChineseLesson7"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 7 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 7 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson7.txt"     
     visible: 1                                  
@@ -119,7 +119,7 @@ beg_chinese_lesson_8:
     tag_name: "Lesson 8"
     tag_type: ""
     short_name: "BegChineseLesson8"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 8 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 8 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson8.txt"     
     visible: 1                                  
@@ -135,7 +135,7 @@ beg_chinese_lesson_9:
     tag_name: "Lesson 9"
     tag_type: ""
     short_name: "BegChineseLesson9"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 9 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 9 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson9.txt"     
     visible: 1                                  
@@ -151,7 +151,7 @@ beg_chinese_lesson_10:
     tag_name: "Lesson 10"
     tag_type: ""
     short_name: "BegChineseLesson10"
-    description: "Beginner\'s Chinese by Yong Ho, Lesson 10 Vocabulary"      
+    description: "Beginner's Chinese by Yong Ho, Lesson 10 Vocabulary"      
     source: "zdt.sourceforge.net"                          
     source_name: "beg_chinese_lesson10.txt"     
     visible: 1                                  

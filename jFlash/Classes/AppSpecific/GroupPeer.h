@@ -13,6 +13,7 @@
 
 @interface GroupPeer : NSObject 
 
++ (Group*) topLevelGroup;
 + (Group*) retrieveGroupById:(NSInteger)groupId;
 + (NSInteger) parentGroupIdOfTag:(Tag*)tag;
 + (NSArray*) retrieveGroupsByOwner:(NSInteger)ownerId;

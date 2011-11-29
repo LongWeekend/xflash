@@ -85,7 +85,7 @@ enum EntrySectionRows
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
 - (IBAction) addStudySet
 {
-  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard groupOwnerId:0];
+  AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:self.currentCard inGroup:nil];
   UINavigationController *modalNavController = [[UINavigationController alloc] initWithRootViewController:tmpVC];
 	[tmpVC release];
   [self.navigationController presentModalViewController:modalNavController animated:YES];

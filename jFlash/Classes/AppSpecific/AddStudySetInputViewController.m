@@ -12,7 +12,7 @@
 
 @implementation AddStudySetInputViewController
 
-@synthesize ownerId, defaultCard, setNameTextfield, setDescriptionTextView, tag;
+@synthesize owner, defaultCard, setNameTextfield, setDescriptionTextView, tag;
 
 NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 
@@ -21,13 +21,13 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
  * \param cardId If not 0, this cardId will be added to the membership of the newly-created Tag
  * \param groupOwnerId Specifies which group this Tag will belong to.  For top-level, this is zero.
  */
-- (id) initWithDefaultCard:(Card*)card groupOwnerId:(NSInteger)groupOwnerId
+- (id) initWithDefaultCard:(Card *)card inGroup:(Group *)group
 {
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"AddStudySetView" bundle:nil]))
   {
     self.defaultCard = card;
-    self.ownerId = groupOwnerId;
+    self.owner = group;
   }
   return self;
 }
@@ -61,7 +61,7 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
     [cancelButton release];
   }
   
-  if(self.tag)
+  if (self.tag)
   {
     self.title = NSLocalizedString(@"Update Study Set",@"AddStudySetInputViewController.NavBarTitle");
     self.setNameTextfield.text = [tag tagName];
@@ -109,12 +109,15 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   if (self.tag == nil) 
   {
     // Create the tag & subscribe the card to it
-    Tag *newTag = [TagPeer createTag:self.setNameTextfield.text withOwner:self.ownerId withDescription:self.setDescriptionTextView.text];
-    [TagPeer subscribeCard:self.defaultCard toTag:newTag];
+    Tag *newTag = [TagPeer createTagNamed:self.setNameTextfield.text inGroup:self.owner withDescription:self.setDescriptionTextView.text];
+    if (self.defaultCard)
+    {
+      [TagPeer subscribeCard:self.defaultCard toTag:newTag];
+    }
   }
   else
   {
-    [self.tag setValue:self.setNameTextfield.text forKey:@"tagName"];
+    self.tag.tagName = self.setNameTextfield.text;
     self.tag.tagDescription = self.setDescriptionTextView.text;
     [self.tag save];
   }
@@ -141,6 +144,7 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 
 - (void) dealloc
 {
+  [owner release];
   [defaultCard release];
   [setDescriptionTextView release];
   [setNameTextfield release];

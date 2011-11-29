@@ -313,30 +313,29 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 #pragma mark - Create & Delete
 
 //! adds a new tag to the database, returns new tag object, nil in case of error
-+ (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId
++ (Tag*) createTagNamed:(NSString*)tagName inGroup:(Group*)owner
 {
-  return [self createTag:tagName withOwner:ownerId withDescription:@""];
+  return [[self class] createTagNamed:tagName inGroup:owner withDescription:@""];
 }
 
 //! Adds a new tag to the database, returns new tag object, nil if error
-+ (Tag*) createTag:(NSString*)tagName withOwner:(NSInteger)ownerId withDescription:(NSString*)description
++ (Tag*) createTagNamed:(NSString*)tagName inGroup:(Group*)owner withDescription:(NSString*)description;
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  LWE_ASSERT_EXC([tagName isKindOfClass:[NSString class]],@"You must pass a string as the tag name");
   
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
   tagName = [tagName stringByReplacingOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, tagName.length)];
-  
-  Tag *createdTag = nil;
   NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,description];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db executeUpdate:sql];
   
   NSInteger lastTagId = (NSInteger)db.dao.lastInsertRowId;
+  Tag *createdTag = nil;
   if (db.dao.hadError == NO)
   {
     // Link it & then update the tag card count cache
-    [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES ('%d','%d')",lastTagId,ownerId]];
-    [db executeUpdate:[NSString stringWithFormat:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = '%d'",ownerId]];
-    
+    [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES ('%d','%d')",lastTagId,owner.groupId]];
+    [db executeUpdate:[NSString stringWithFormat:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = '%d'",owner.groupId]];
     createdTag = [TagPeer retrieveTagById:lastTagId];
   }
   return createdTag;

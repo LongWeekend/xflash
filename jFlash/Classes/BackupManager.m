@@ -118,7 +118,8 @@
   Tag *tag = [TagPeer retrieveTagByName:tagName];
   if (tag.tagId == kLWEUninitializedTagId) // no tag, create one
   {
-    tag = [TagPeer createTag:tagName withOwner:[group intValue]];
+    Group *owningGroup = [GroupPeer retrieveGroupById:[group intValue]];
+    tag = [TagPeer createTagNamed:tagName inGroup:owningGroup];
   }
 
   return tag.tagId;

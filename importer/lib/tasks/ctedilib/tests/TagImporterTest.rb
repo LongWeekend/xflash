@@ -35,7 +35,7 @@ class TagImporterTest < Test::Unit::TestCase
     entries = parser.run('CSVEntry')
     assert_equal(13,entries.count)
     importer = TagImporter.new(entries, configuration)
-    importer.import
+    matched_records_arr = importer.import
     
     # LWE should be editable
     $cn.execute("SELECT tag_id, editable from tags_staging WHERE tag_name LIKE 'Long Weekend Favorites'").each do |tag_id, editable|
@@ -63,121 +63,10 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new(results, configuration)
     importer.import
 
-    # There should be 40 associated cards now -- 3 of the cards can't be matched by the importer
+    # There should be 39 associated cards now -- 4 of the cards can't be matched by the importer (2 unknown x 2 dupes)
     $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '%s'" % importer.tag_id).each do |tag_count_rec|
-      assert_equal(40, tag_count_rec[0])
+      assert_equal(39, tag_count_rec[0])
     end
-    
-  end
-      
-  def test_import_beg_chinese
-     configuration = TagConfiguration.new("beg_chinese_config.yml", "beg_chinese_lesson_1")
-
-     test_file_path = File.dirname(__FILE__) + configuration.file_name
-     parser = WordListParser.new(test_file_path)
-     results = parser.run('BookEntry')
-
-     importer = TagImporter.new(results, configuration)
-     importer.import
-  end
-  
-  def test_import_colloquial_chinese
-     configuration = TagConfiguration.new("colloqial_chinese_config.yml", "colloquial_chinese_lesson_1")
-
-     test_file_path = File.dirname(__FILE__) + configuration.file_name
-     parser = WordListParser.new(test_file_path)
-     results = parser.run('BookEntry')
-
-     importer = TagImporter.new(results, configuration)
-     importer.import
-  end
-  
-  def test_import_npcr
-    configuration = TagConfiguration.new("npcr_config.yml", "npcr_1")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_pcr
-    configuration = TagConfiguration.new("pcr_config.yml", "pcr_1_5")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_pimsleur
-    configuration = TagConfiguration.new("pimsleur_config.yml", "pimsleur1_1")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_schaums
-    configuration = TagConfiguration.new("schaums_config.yml", "schaums_asking_for_directions")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_frequency
-    configuration = TagConfiguration.new("frequency_config.yml", "frequency_1")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()
-  end
-  
-  def test_import_hsk
-    configuration = TagConfiguration.new("hsk_config.yml", "hsk_4")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('HSKEntry')
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()    
-  end
-  
-  def test_import_ic
-    configuration = TagConfiguration.new("integrated_chinese_config.yml", "ic_intro_numbers")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()    
-  end
-  
-  def test_import_ic_combined
-    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
-
-    test_file_path = File.dirname(__FILE__) + configuration.file_name
-    parser = WordListParser.new(test_file_path)
-    results = parser.run('BookEntry')
-    
-    importer = TagImporter.new(results, configuration)
-    importer.import()    
   end
   
   def test_fuzzy_matching_on_yi_or_bu_sound_change
@@ -198,7 +87,10 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([hsk_entry, hsk_entry2], configuration, cache)
     
     # Returns the number of matched entries
-    assert_equal(2,importer.import)
+    importer.import
+    assert_equal(2,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
   end
   
   def test_simplified_only_matching
@@ -213,7 +105,118 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([book_entry], configuration, cache)
     
     # Returns the number of matched entries
-    assert_equal(1,importer.import)
+    importer.import
+    assert_equal(1,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
+  end
+  
+  def test_headword_only_matching
+    bigram_entry = BigramEntry.new
+    bigram_entry.parse_line("6	问题	19992	8.50211672358	174715")
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry.id = 3
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([bigram_entry], configuration, cache)
+
+    # Returns the number of matched entries
+    importer.import
+    assert_equal(1,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
+  end
+  
+  def test_headword_only_dupes
+    bigram_entry = BigramEntry.new
+    bigram_entry.parse_line("6	问题	19992	8.50211672358	174715")
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry.id = 3
+    cedict_entry_2 = CEdictEntry.new
+    cedict_entry_2.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry_2.id = 4
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([cedict_entry, cedict_entry_2])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([bigram_entry], configuration, cache)
+
+    # Returns the number of matched entries
+    importer.import
+    assert_equal(0,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(1,importer.cards_multiple_found)
+  end
+
+  def test_surname_problem
+    book_entry = BookEntry.new
+    book_entry.parse_line('文	文	wen2	/language/script/written language/')
+    bogus_entry = CEdictEntry.new
+    bogus_entry.parse_line("文 文 [Wen2] /surname Wen/")
+    bogus_entry.id = 2
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("文 文 [wen2] /language/culture/writing/formal/literary/gentle/(old) classifier for coins/Kangxi radical 118/")
+    cedict_entry.id = 3
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([bogus_entry,cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([book_entry], configuration, cache)
+    
+    # Returns the number of matched entries
+    importer.import
+    assert_equal(1,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
+  end
+  
+  def test_surname_problem_2
+    csv_entry = CSVEntry.new
+    csv_entry.parse_line('19,"0337","白","bái ","B","(VS)","white"')
+    bogus_entry = CEdictEntry.new
+    bogus_entry.parse_line("白 白 [Bai2] /surname Bai/")
+    bogus_entry.id = 2
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("白 白 [bai2] /white/snowy/pure/bright/empty/blank/plain/clear/to make clear/in vain/gratuitous/free of charge/reactionary/anti-communist/funeral/to stare coldly/to write wrong character/to state/to explain/vernacular/spoken lines in opera/")
+    cedict_entry.id = 3
+    
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([bogus_entry,cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([csv_entry], configuration, cache)
+    
+    # Returns the number of matched entries
+    importer.import
+    assert_equal(1,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
+  end
+  
+  # I introduced a bug where non-headword matches were still matching!  Yipe!  This confirms the fix
+  def test_custom_csv_entry_matching_criteria
+    csv_entry = CSVEntry.new
+    csv_entry.parse_line('1425,"0795","約","yuē ","B","(VA)","to make an appointment"')
+    bogus_entry = CEdictEntry.new
+    bogus_entry.parse_line("曰 曰 [yue1] /to speak/to say/")
+    bogus_entry.id = 2
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("約 约 [yue1] /to make an appointment/to invite/approximately/pact/treaty/to economize/to restrict/to reduce (a fraction)/concise/")
+    cedict_entry.id = 3
+    
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([bogus_entry,cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([csv_entry], configuration, cache)
+    
+    # Returns the number of matched entries
+    importer.import
+    assert_equal(1,importer.cards_matched)
+    assert_equal(0,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
   end
   
 end

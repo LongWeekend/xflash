@@ -22,7 +22,7 @@ class EntryTest < Test::Unit::TestCase
     entry = Entry.new
     entry.id = 1
     cedict_hash = mysql_serialise_ruby_object(entry)
-    expected = "UPDATE cards_staging SET headword_trad = '',headword_simp = '',headword_en = '',reading = '',reading_diacritic = '',meaning = '',meaning_html = '',meaning_fts = '',classifier = NULL,tags = '',referenced_cards = NULL,is_reference_only = 0,is_variant = 0,is_erhua_variant = 0,is_proper_noun = 0,variant = NULL,cedict_hash = '%s' WHERE card_id = 1;" % cedict_hash
+    expected = "UPDATE cards_staging SET headword_trad = '',headword_simp = '',headword_en = '',reading = '',reading_diacritic = '',meaning = '',meaning_html = '',meaning_fts = '',classifier = NULL,entry_tags = '',referenced_cards = NULL,is_reference_only = 0,is_variant = 0,is_erhua_variant = 0,is_proper_noun = 0,variant = NULL,priority_word = 0, cedict_hash = '%s' WHERE card_id = 1;" % cedict_hash
     assert_equal(expected,entry.to_update_sql)
   end
   
@@ -76,6 +76,12 @@ class EntryTest < Test::Unit::TestCase
     assert_equal(expected_reading,reading)
   end
   
+  def test_maintain_caps
+    reading = Entry.get_pinyin_unicode_for_reading("Bai4")
+    expected_reading = "Bài"
+    assert_equal(expected_reading,reading)
+  end
+  
   def test_pinyin_single_letter
     reading = Entry.get_pinyin_unicode_for_reading("ka3 la1 O K")
     expected_reading = "kǎlāOK"
@@ -112,7 +118,7 @@ class EntryTest < Test::Unit::TestCase
     assert_equal(expected_pinyin,pinyin)
     
     pinyin = Entry.get_pinyin_unicode_for_reading("San1 Lu:e4")
-    expected_pinyin = "sānlüè"
+    expected_pinyin = "SānLüè"
     assert_equal(expected_pinyin,pinyin)
     
     pinyin = Entry.get_pinyin_unicode_for_reading("shi4 lu:e4")
