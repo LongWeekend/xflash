@@ -1,0 +1,16 @@
+frequency_news_XX:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-XX.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "News Bigrams XX"
+    tag_type: ""
+    short_name: "bigram-news-XX"
+    description: "Common News Bigrams (2 character words), YYY"
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"            
+    source_name: "bigram-news-XX.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
