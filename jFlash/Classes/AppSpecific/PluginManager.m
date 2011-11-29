@@ -316,15 +316,86 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   return nil;
 }
 
-#pragma mark -
-#pragma mark LWEDownloader delegate method
+#pragma mark - LWEPackageDownloaderDelegate Methods
+
+- (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
+{
+  
+}
+
+- (void) unpackageFinished:(LWEPackage*)package
+{
+  NSString *pluginKey = nil;
+  
+  // Our plugins should not be backed up
+  BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:package.unpackagePath];
+  LWE_ASSERT_EXC(isNotBackedUp, @"Failed to set skip backup attribute for file at %@", package.unpackagePath);
+  
+  // Downloader gives us absolute paths, but we need to work with relative from this point on
+  // so get the filename and go from there
+  NSString *filename = [package.unpackagePath lastPathComponent];
+	
+	LWE_LOG(@"LOG : The download has just finished, now checking whther the download is an updated version, or a refresh plugin download");
+	NSString *updatedKey = [self _checkWhetherAnUpdate:package.unpackagePath];
+	NSString *oldPluginPathFileName = nil;
+	
+	if (updatedKey)
+	{
+		oldPluginPathFileName = [[_downloadedPlugins objectForKey:updatedKey] objectForKey:@"plugin_target_path"];
+		LWE_LOG(@"This is an update plugin, path of the old plugin file : %@", oldPluginPathFileName);
+		//Detach the old database
+		[[LWEDatabase sharedLWEDatabase] detachDatabase:updatedKey];
+	}
+	
+  if ((pluginKey = [self loadPluginFromFile:filename afterDownload:YES]))
+  {
+		//If plugin key does exists, means it sucess load the new plugin (no matter its a fresh installed plugin, or the
+		//update plugin
+    LWE_LOG(@"Registering plugin %@ with filename: %@", pluginKey, filename);
+		[self _registerPlugin:pluginKey withFilename:filename];
+		
+		//After it registered, make sure it deletes the data from the available for download plugin, and 
+		//do some cleaning.
+		//If it is an update, delete the old one after a successful update
+		if (updatedKey)
+		{
+			LWE_LOG(@"After a successful installation of the update, delete the old file of the plugin : %@", oldPluginPathFileName);
+			[LWEFile deleteFile:oldPluginPathFileName];
+		}
+		
+		//Now update the downloaded plugin file and variable, so that the next time the program runs, 
+		//it shows the downloaded plugin as "has been downloaded"
+		LWE_LOG(@"Write the just downloaded plugin : %@ to the file. This is the detail : %@", pluginKey, [self.availableForDownloadPlugins objectForKey:pluginKey]);
+		[_downloadedPlugins setValue:[self.availableForDownloadPlugins objectForKey:pluginKey] forKey:pluginKey];
+		[_downloadedPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST] atomically:YES];
+		LWE_LOG(@"This is the result of the _downloadedPlugins content after being modified, and overwrite : %@", _downloadedPlugins);
+		
+		[self _removeFromAvailableDownloadForPlugin:pluginKey];
+  }
+  else
+  {
+		//Means install failed?
+		//Then how if its an update plugin, not a fresh installed plugin? NOOO....
+		//Return back the old detached database
+		if (updatedKey)
+		{
+			[[LWEDatabase sharedLWEDatabase] attachDatabase:oldPluginPathFileName withName:updatedKey];
+			LWE_LOG(@"Installed update has just failed. Attach the old database, with the old database path.(Backup plan)");
+		}
+    return;
+  }
+  
+  // Tell anyone who cares that we've just successfully installed a plugin
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEPluginDidInstall object:self userInfo:[_downloadedPlugins objectForKey:pluginKey]];
+  return;
+}
 
 /**
- * LWEDownloader delegate method - installs a plugin database
+ * LWEPackageDownloader delegate method - installs a plugin database
  */
 - (BOOL) installPluginWithPath:(NSString *)path
 {
-  NSString* pluginKey;
+  NSString *pluginKey;
   
   // Our plugins should not be backed up
   BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:path];

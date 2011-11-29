@@ -11,6 +11,7 @@
 #import "FMResultSet.h"
 #import "NSDate+LWEUtilities.h"
 #import "ASIHTTPRequest.h"
+#import "LWEPackageDownloader.h"
 
 extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEPluginDidInstall;
@@ -21,7 +22,7 @@ extern NSString * const LWEPluginFilenameKey;
 extern NSString * const LWEPluginTargetPathKey;
 
 //! Handles downloaded plugins' installation and versioning
-@interface PluginManager : NSObject <LWEDownloaderInstallerDelegate>
+@interface PluginManager : NSObject <LWEPackageDownloaderDelegate>
 {
   NSMutableDictionary *_loadedPlugins;				//! Maintains in memory a list of loaded plugins
   NSDictionary *_downloadedPlugins;						//! Maintains in memory a list of the downloaded plugin in the user device. This is used for loading the plugin back to the program when the program runs. 
