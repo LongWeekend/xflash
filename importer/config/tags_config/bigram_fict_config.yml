@@ -1,4 +1,4 @@
-frequency_news_01:
+frequency_fict_01:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-01.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -14,7 +14,7 @@ frequency_news_01:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_02:
+frequency_fict_02:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-02.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -30,7 +30,7 @@ frequency_news_02:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_03:
+frequency_fict_03:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-03.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -46,7 +46,7 @@ frequency_news_03:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_04:
+frequency_fict_04:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-04.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -62,7 +62,7 @@ frequency_news_04:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_05:
+frequency_fict_05:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-05.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -78,7 +78,7 @@ frequency_news_05:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_06:
+frequency_fict_06:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-06.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -94,7 +94,7 @@ frequency_news_06:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_07:
+frequency_fict_07:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-07.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -110,7 +110,7 @@ frequency_news_07:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_08:
+frequency_fict_08:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-08.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -126,7 +126,7 @@ frequency_news_08:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_09:
+frequency_fict_09:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-09.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -142,7 +142,7 @@ frequency_news_09:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_10:
+frequency_fict_10:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -158,7 +158,7 @@ frequency_news_10:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_11:
+frequency_fict_11:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-11.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -174,7 +174,7 @@ frequency_news_11:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_12:
+frequency_fict_12:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-12.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -190,7 +190,7 @@ frequency_news_12:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_13:
+frequency_fict_13:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-13.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -206,7 +206,7 @@ frequency_news_13:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_14:
+frequency_fict_14:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-14.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -222,7 +222,7 @@ frequency_news_14:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_15:
+frequency_fict_15:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -238,7 +238,7 @@ frequency_news_15:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_16:
+frequency_fict_16:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-16.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -254,7 +254,7 @@ frequency_news_16:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_17:
+frequency_fict_17:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-17.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -270,7 +270,7 @@ frequency_news_17:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_18:
+frequency_fict_18:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-18.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -286,7 +286,7 @@ frequency_news_18:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_19:
+frequency_fict_19:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-19.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
@@ -302,7 +302,7 @@ frequency_news_19:
     parent_tag_id: 0
     force_off: 0
     contains_priority_words: 1
-frequency_news_20:
+frequency_fict_20:
     file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
