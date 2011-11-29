@@ -10,20 +10,19 @@ class BigramEntry < Entry
     
     @original_line = line
     
-    # Get the headwords, traditional then simplified
-    @headword_simp = get_headword(line)
-    return true
-  end
-
-  #==================================
-  # Parsing helper methods
-  #==================================
- 
-  # Extracts and returns headword block
-  def get_headword(line = "")
+    # Get the headword
     segments = line.split("\t")
     raise EntryParseException, "Unable to parse bigram data: %s" % [line] unless segments.count == 5
-    return segments[1]
+    
+    # Now check once to see if it's a fishy character
+    headword = segments[1].strip
+    mutual_information_value = segments[3]
+    if headword.index("的") and (mutual_information_value < 3.5)
+      raise EntryParseException, "Not processing fishy bigram entry: %s" % [line]
+    else
+      @headword_simp = headword
+    end
+    return true
   end
   
   #=================================

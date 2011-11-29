@@ -14,6 +14,13 @@ class BigramEntryTest < Test::Unit::TestCase
       entry.parse_line("8	工作	18904	6.89133239246213454")
     end
   end
+  
+  def test_fishy_line
+    entry = BigramEntry.new
+    assert_raise(EntryParseException) do
+      entry.parse_line("8	工的	18904	3.39133239246213454")
+    end
+  end
 
   def test_ignore_comment
     entry = BigramEntry.new
