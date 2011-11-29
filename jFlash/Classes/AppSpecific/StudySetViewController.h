@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 #import "Group.h"
 #import "TagPeer.h"
 #import "GroupPeer.h"
-#import <MessageUI/MFMailComposeViewController.h>
 #import "BackupManager.h"
 #import "DSActivityView.h"
 
-@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
+@interface StudySetViewController : UITableViewController <UISearchBarDelegate,
+                                                           MFMailComposeViewControllerDelegate,
+                                                           LWEBackupManagerDelegate>
 {
   UIBarButtonItem *_addButton;
   UIButton *searchOverlayBtn;

@@ -40,10 +40,9 @@ enum Sections {
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
     self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
     searching = NO;
-    BackupManager *bm = [[BackupManager alloc] initWithDelegate:self];
-    self.backupManager = bm;
-    [bm release];
     selectedTagId = -1;
+    // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
+    self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
     
     // Get this group & subgroup data, and finally tags
     self.group = aGroup;
