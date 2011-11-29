@@ -45,6 +45,7 @@ const NSInteger STARRED_TAG_ID = 0;
 
 // The email address of our bad data reports
 NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
+NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 #if defined(LWE_JFLASH)
       NSString * const LWE_APP_SPLASH_IMAGE = @"Default.jpg";
