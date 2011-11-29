@@ -408,6 +408,38 @@
 		49A942671263AF4500086F4C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
 		49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
 		49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAB8B9147106BE0015D64B /* CardViewController.m */; };
+		49AD17A6148355EA0017EFB4 /* LWEDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */; };
+		49AD17A7148355EA0017EFB4 /* LWEDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */; };
+		49AD17A8148355EA0017EFB4 /* LWEDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */; };
+		49AD17A9148355EA0017EFB4 /* LWEDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */; };
+		49AD17AA148355EA0017EFB4 /* LWEPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A3148355EA0017EFB4 /* LWEPackage.m */; };
+		49AD17AB148355EA0017EFB4 /* LWEPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A3148355EA0017EFB4 /* LWEPackage.m */; };
+		49AD17AC148355EA0017EFB4 /* LWEPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A3148355EA0017EFB4 /* LWEPackage.m */; };
+		49AD17AD148355EA0017EFB4 /* LWEPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A3148355EA0017EFB4 /* LWEPackage.m */; };
+		49AD17AE148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */; };
+		49AD17AF148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */; };
+		49AD17B0148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */; };
+		49AD17B1148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */; };
+		49AD17F2148476340017EFB4 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E3148476340017EFB4 /* ioapi.c */; };
+		49AD17F3148476340017EFB4 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E3148476340017EFB4 /* ioapi.c */; };
+		49AD17F4148476340017EFB4 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E3148476340017EFB4 /* ioapi.c */; };
+		49AD17F5148476340017EFB4 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E3148476340017EFB4 /* ioapi.c */; };
+		49AD17FA148476340017EFB4 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E6148476340017EFB4 /* mztools.c */; };
+		49AD17FB148476340017EFB4 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E6148476340017EFB4 /* mztools.c */; };
+		49AD17FC148476340017EFB4 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E6148476340017EFB4 /* mztools.c */; };
+		49AD17FD148476340017EFB4 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E6148476340017EFB4 /* mztools.c */; };
+		49AD17FE148476340017EFB4 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E8148476340017EFB4 /* unzip.c */; };
+		49AD17FF148476340017EFB4 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E8148476340017EFB4 /* unzip.c */; };
+		49AD1800148476340017EFB4 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E8148476340017EFB4 /* unzip.c */; };
+		49AD1801148476340017EFB4 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17E8148476340017EFB4 /* unzip.c */; };
+		49AD1802148476340017EFB4 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17EA148476340017EFB4 /* zip.c */; };
+		49AD1803148476340017EFB4 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17EA148476340017EFB4 /* zip.c */; };
+		49AD1804148476340017EFB4 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17EA148476340017EFB4 /* zip.c */; };
+		49AD1805148476340017EFB4 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17EA148476340017EFB4 /* zip.c */; };
+		49AD1806148476340017EFB4 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17ED148476340017EFB4 /* ZipArchive.mm */; };
+		49AD1807148476340017EFB4 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17ED148476340017EFB4 /* ZipArchive.mm */; };
+		49AD1808148476340017EFB4 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17ED148476340017EFB4 /* ZipArchive.mm */; };
+		49AD1809148476340017EFB4 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49AD17ED148476340017EFB4 /* ZipArchive.mm */; };
 		49AF3D351265EDCD00CEAA52 /* UpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AF3D341265EDCD00CEAA52 /* UpdateManager.m */; };
 		49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */; };
 		49B527951276805000EE64D3 /* 13-target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B527911276805000EE64D3 /* 13-target@2x.png */; };
@@ -959,6 +991,7 @@
 		497607E0147A6570000A9FC5 /* chinese-flash-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-icon@2x.png"; path = "Assets/CFlash/chinese-flash-icon@2x.png"; sourceTree = "<group>"; };
 		497607E1147A6570000A9FC5 /* chinese-flash-splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash.png"; path = "Assets/CFlash/chinese-flash-splash.png"; sourceTree = "<group>"; };
 		497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash@2x.png"; path = "Assets/CFlash/chinese-flash-splash@2x.png"; sourceTree = "<group>"; };
+		4986609B14847766007F3E20 /* LWELongRunningTaskProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELongRunningTaskProtocol.h; sourceTree = "<group>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
@@ -973,6 +1006,23 @@
 		49AAB8B8147106BE0015D64B /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = AppSpecific/CardViewController.h; sourceTree = "<group>"; };
 		49AAB8B9147106BE0015D64B /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = AppSpecific/CardViewController.m; sourceTree = "<group>"; };
 		49AAB8CD147127E40015D64B /* StudyViewProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudyViewProtocols.h; path = AppSpecific/StudyViewProtocols.h; sourceTree = "<group>"; };
+		49AD17A0148355EA0017EFB4 /* LWEDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDecompressor.h; sourceTree = "<group>"; };
+		49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEDecompressor.m; sourceTree = "<group>"; };
+		49AD17A2148355EA0017EFB4 /* LWEPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEPackage.h; sourceTree = "<group>"; };
+		49AD17A3148355EA0017EFB4 /* LWEPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEPackage.m; sourceTree = "<group>"; };
+		49AD17A4148355EA0017EFB4 /* LWEPackageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEPackageDownloader.h; sourceTree = "<group>"; };
+		49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEPackageDownloader.m; sourceTree = "<group>"; };
+		49AD17E2148476340017EFB4 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		49AD17E3148476340017EFB4 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		49AD17E4148476340017EFB4 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		49AD17E6148476340017EFB4 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		49AD17E7148476340017EFB4 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		49AD17E8148476340017EFB4 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		49AD17E9148476340017EFB4 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		49AD17EA148476340017EFB4 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		49AD17EB148476340017EFB4 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		49AD17EC148476340017EFB4 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		49AD17ED148476340017EFB4 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_12_to_13.sql; path = Migrations/jflash_12_to_13.sql; sourceTree = "<group>"; };
 		49AF3D331265EDCD00CEAA52 /* UpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateManager.h; path = AppSpecific/UpdateManager.h; sourceTree = "<group>"; };
 		49AF3D341265EDCD00CEAA52 /* UpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateManager.m; path = AppSpecific/UpdateManager.m; sourceTree = "<group>"; };
@@ -1743,6 +1793,7 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				49AD17B2148476080017EFB4 /* ZipArchive */,
 				4938F8BB14027532001EB473 /* OHAttributedLabel */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
 				913D48301353BE26008A4649 /* LWEJanrain */,
@@ -1785,6 +1836,41 @@
 				917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */,
 			);
 			name = "Study Sets";
+			sourceTree = "<group>";
+		};
+		49AD17B2148476080017EFB4 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				49AD17DF148476340017EFB4 /* ZipArchive */,
+			);
+			name = ZipArchive;
+			sourceTree = "<group>";
+		};
+		49AD17DF148476340017EFB4 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				49AD17E0148476340017EFB4 /* minizip */,
+				49AD17EC148476340017EFB4 /* ZipArchive.h */,
+				49AD17ED148476340017EFB4 /* ZipArchive.mm */,
+			);
+			name = ZipArchive;
+			path = External/ZipArchive;
+			sourceTree = "<group>";
+		};
+		49AD17E0148476340017EFB4 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				49AD17E2148476340017EFB4 /* crypt.h */,
+				49AD17E3148476340017EFB4 /* ioapi.c */,
+				49AD17E4148476340017EFB4 /* ioapi.h */,
+				49AD17E6148476340017EFB4 /* mztools.c */,
+				49AD17E7148476340017EFB4 /* mztools.h */,
+				49AD17E8148476340017EFB4 /* unzip.c */,
+				49AD17E9148476340017EFB4 /* unzip.h */,
+				49AD17EA148476340017EFB4 /* zip.c */,
+				49AD17EB148476340017EFB4 /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		49B4ABEF11C1DCDB00CFC308 /* glass-buttons */ = {
@@ -1900,6 +1986,7 @@
 			isa = PBXGroup;
 			children = (
 				91013AC513938BC900846038 /* External */,
+				4986609B14847766007F3E20 /* LWELongRunningTaskProtocol.h */,
 				49668AE714581D6F005636D0 /* LWEAnalytics.h */,
 				49668AE814581D6F005636D0 /* LWEAnalytics.m */,
 				49EE9148134EC15500EC6B0E /* LWECoreData.h */,
@@ -1913,6 +2000,12 @@
 				49EE9150134EC15500EC6B0E /* LWEDebug.h */,
 				49EE9151134EC15500EC6B0E /* LWEDownloader.h */,
 				49EE9152134EC15500EC6B0E /* LWEDownloader.m */,
+				49AD17A0148355EA0017EFB4 /* LWEDecompressor.h */,
+				49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */,
+				49AD17A2148355EA0017EFB4 /* LWEPackage.h */,
+				49AD17A3148355EA0017EFB4 /* LWEPackage.m */,
+				49AD17A4148355EA0017EFB4 /* LWEPackageDownloader.h */,
+				49AD17A5148355EA0017EFB4 /* LWEPackageDownloader.m */,
 				49EE9153134EC15500EC6B0E /* LWEFile.h */,
 				49EE9154134EC15500EC6B0E /* LWEFile.m */,
 				49570E1513E39F7700226D24 /* LWEFormView.h */,
@@ -3231,6 +3324,14 @@
 				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */,
+				49AD17A6148355EA0017EFB4 /* LWEDecompressor.m in Sources */,
+				49AD17AA148355EA0017EFB4 /* LWEPackage.m in Sources */,
+				49AD17AE148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */,
+				49AD17F2148476340017EFB4 /* ioapi.c in Sources */,
+				49AD17FA148476340017EFB4 /* mztools.c in Sources */,
+				49AD17FE148476340017EFB4 /* unzip.c in Sources */,
+				49AD1802148476340017EFB4 /* zip.c in Sources */,
+				49AD1806148476340017EFB4 /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3294,6 +3395,14 @@
 				496C66FF14728B9C009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
 				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
+				49AD17A8148355EA0017EFB4 /* LWEDecompressor.m in Sources */,
+				49AD17AC148355EA0017EFB4 /* LWEPackage.m in Sources */,
+				49AD17B0148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */,
+				49AD17F4148476340017EFB4 /* ioapi.c in Sources */,
+				49AD17FC148476340017EFB4 /* mztools.c in Sources */,
+				49AD1800148476340017EFB4 /* unzip.c in Sources */,
+				49AD1804148476340017EFB4 /* zip.c in Sources */,
+				49AD1808148476340017EFB4 /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3358,6 +3467,14 @@
 				496C66FE14728B9B009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670014728BC8009F04D4 /* ThemeManager.m in Sources */,
 				49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */,
+				49AD17A9148355EA0017EFB4 /* LWEDecompressor.m in Sources */,
+				49AD17AD148355EA0017EFB4 /* LWEPackage.m in Sources */,
+				49AD17B1148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */,
+				49AD17F5148476340017EFB4 /* ioapi.c in Sources */,
+				49AD17FD148476340017EFB4 /* mztools.c in Sources */,
+				49AD1801148476340017EFB4 /* unzip.c in Sources */,
+				49AD1805148476340017EFB4 /* zip.c in Sources */,
+				49AD1809148476340017EFB4 /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3505,6 +3622,14 @@
 				917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */,
+				49AD17A7148355EA0017EFB4 /* LWEDecompressor.m in Sources */,
+				49AD17AB148355EA0017EFB4 /* LWEPackage.m in Sources */,
+				49AD17AF148355EA0017EFB4 /* LWEPackageDownloader.m in Sources */,
+				49AD17F3148476340017EFB4 /* ioapi.c in Sources */,
+				49AD17FB148476340017EFB4 /* mztools.c in Sources */,
+				49AD17FF148476340017EFB4 /* unzip.c in Sources */,
+				49AD1803148476340017EFB4 /* zip.c in Sources */,
+				49AD1807148476340017EFB4 /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
