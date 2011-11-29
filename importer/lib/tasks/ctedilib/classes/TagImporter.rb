@@ -13,6 +13,9 @@ class TagImporter
     @config = {}
     @tag_id = nil
     @human_importer = HumanTagImporter.new
+    @cards_multiple_found = 0
+    @cards_not_found = 0
+    @cards_matched = 0
     
     # If we are passed an EntryCache, use it, otherwise create a new cache.
     if prev_entry_cache
@@ -41,6 +44,18 @@ class TagImporter
     end
     
     return self
+  end
+  
+  def cards_multiple_found
+    @cards_multiple_found
+  end
+  
+  def cards_not_found
+    @cards_not_found
+  end
+  
+  def cards_matched
+    @cards_matched
   end
   
   def get_log_dump_filename
@@ -116,9 +131,9 @@ class TagImporter
     
     @entry_cache.prepare_cache_if_necessary
     
-    multiple_found = 0
-    not_found = 0
-    found = 0
+    @cards_multiple_found = 0
+    @cards_not_found = 0
+    @cards_matched = 0
     card_ids = Array.new
 
     # This is the for each for every record data call the block with each line as the parameter.
@@ -142,10 +157,10 @@ class TagImporter
             matched_cards = [matched_card]
           else
             if loosely_matching_cards.count > 1
-              multiple_found += 1
+              @cards_multiple_found += 1
               log "\n[Multiple Records]There are multiple loosely matching cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
             else
-              not_found += 1
+              @cards_not_found += 1
               log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
             end
           end
@@ -156,7 +171,7 @@ class TagImporter
             # Great, we got something
             matched_cards = [matched_card]
           else
-            multiple_found += 1
+            @cards_multiple_found += 1
             log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
           end
         else
@@ -169,7 +184,7 @@ class TagImporter
           card_id = matching_cards.first.id
           raise "card ID must be initialized!" if (card_id == -1)
           if (!card_ids.include?(card_id))
-            found += 1
+            @cards_matched += 1
             card_ids << card_id
           else
             log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, entry.headword, entry.pinyin, entry.meanings.join("/")]
@@ -180,8 +195,8 @@ class TagImporter
 
     # Now actually do the SQL work from our in-memory card_ids array
     insert_card_tag_links_for_ids(@tag_id, card_ids)
-    log("Finish inserting: %s with %s records not found and %s duplicates" % [card_ids.size, not_found, multiple_found], true)
-    return found
+    log("Finish inserting: %s with %s records not found and %s duplicates" % [card_ids.size, @cards_not_found, @cards_multiple_found], true)
+    return card_ids
   end # End of the method body
   
   def update_tag_count
