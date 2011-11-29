@@ -611,6 +611,7 @@
 		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -1225,6 +1226,8 @@
 		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		91910048148052A1003E9A19 /* JFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashSearchTest.h; path = Tests/jFlashTests/JFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
+		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -1609,6 +1612,8 @@
 		4904664914727B0F004C44E2 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
+				91910048148052A1003E9A19 /* JFlashSearchTest.h */,
+				91910049148052A1003E9A19 /* JFlashSearchTest.m */,
 			);
 			name = JFlash;
 			sourceTree = "<group>";
@@ -3286,6 +3291,7 @@
 				496C66FF14728B9C009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
 				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
+				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
