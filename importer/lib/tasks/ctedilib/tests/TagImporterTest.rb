@@ -225,6 +225,41 @@ class TagImporterTest < Test::Unit::TestCase
     # Returns the number of matched entries
     assert_equal(1,importer.import)
   end
+  
+  def test_headword_only_matching
+    bigram_entry = BigramEntry.new
+    bigram_entry.parse_line("6	问题	19992	8.50211672358	174715")
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry.id = 3
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([cedict_entry])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([bigram_entry], configuration, cache)
+
+    # Returns the number of matched entries
+    assert_equal(1,importer.import)
+  end
+  
+  def test_headword_only_dupes
+    bigram_entry = BigramEntry.new
+    bigram_entry.parse_line("6	问题	19992	8.50211672358	174715")
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry.id = 3
+    cedict_entry_2 = CEdictEntry.new
+    cedict_entry_2.parse_line("問題 问题 [wen4 ti2] /question/problem/issue/topic/CL:個|个[ge4]/")
+    cedict_entry_2.id = 4
+
+    # Now create a mock cache & pass it to the importer
+    cache = EntryCache.new([cedict_entry, cedict_entry_2])
+    configuration = TagConfiguration.new("integrated_chinese_combined_config.yml", "ic_1")
+    importer = TagImporter.new([bigram_entry], configuration, cache)
+
+    # Returns the number of matched entries
+    assert_equal(0,importer.import)
+  end
 
   def test_surname_problem
     book_entry = BookEntry.new

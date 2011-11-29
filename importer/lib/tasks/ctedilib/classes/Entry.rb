@@ -396,21 +396,48 @@ class Entry
   end  
 
   # USED FOR MATCHING BY TAG IMPORTER
+  
+  # You can, and should, override these in the subclasses
+  def default_match_criteria
+    match_criteria = Proc.new do |dict_entry, tag_entry|
+      same_headword = (dict_entry.headword_trad == tag_entry.headword_trad) || (dict_entry.headword_simp == tag_entry.headword_simp)
+      if same_headword
+        # Now process the pinyin and see if we match
+        tag_pinyin = tag_entry.pinyin.gsub(" ","")
+        dict_pinyin = dict_entry.pinyin.gsub(" ","")
+        if dict_entry.meaning_txt.downcase.index("surname")
+          same_pinyin = (dict_pinyin == tag_pinyin)
+        else
+          same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase)
+        end
+          
+        # If we didn't match right away, also check for the funny tone changes 
+        if (same_pinyin == false and (tag_pinyin.index("yi2") or tag_pinyin.index("bu2")))
+          same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase.gsub("yi2","yi1").gsub("bu2","bu4"))
+        end
+        
+        # The return keyword will F everything up!
+        (same_headword and same_pinyin)
+      else
+        false
+      end
+    end
+    return match_criteria
+  end
+  
+  # You can, and should, override these in the subclasses
+  def loose_match_criteria
+    match_criteria = Proc.new do |dict_entry, tag_entry|
+      same_headword = (dict_entry.headword_trad == tag_entry.headword_trad) || (dict_entry.headword_simp == tag_entry.headword_simp)
+    end
+    return match_criteria
+  end
 
   def similar_to?(entry, match_criteria = nil)
     # Make sure the entry is kind of Entry class-
     raise "You must pass an Entry subclass to this method!" unless entry.kind_of?(Entry)
-    
-    # Comparing the headword
-    # NOTE: Please make sure that the entry is the one wanted to be matched from.
-    # and self is the CARD.
-    same_headword_trad = (headword_trad == entry.headword_trad)
-    same_headword_simp = (headword_simp == entry.headword_simp)
-    same_headword = same_headword_trad || same_headword_simp
-    return false unless same_headword
-    
     if match_criteria
-      return match_criteria.call(self, entry, false)
+      return match_criteria.call(self, entry)
     else
       return true
     end

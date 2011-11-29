@@ -23,8 +23,16 @@ class BigramEntry < Entry
   def get_headword(line = "")
     segments = line.split("\t")
     raise EntryParseException, "Unable to parse bigram data: %s" % [line] unless segments.count == 5
-    
     return segments[1]
   end
- 
+  
+  #=================================
+  # MATCHING METHODS
+  #=================================
+  
+  # Use the loose one because we have no other information other than headword for these cards
+  def default_match_criteria
+    return loose_match_criteria
+  end
+  
 end

@@ -54,5 +54,31 @@ class CSVEntry < Entry
     end
 
   end
+  
+  # OVERRIDES
+  
+  def default_match_criteria
+    normal_criteria = Proc.new do |dict_entry, tag_entry|
+      # Comparing the pinyin/reading - ignore case for now
+      tag_pinyin = tag_entry.pinyin_diacritic.gsub(" ","")
+      dict_pinyin = dict_entry.pinyin_diacritic.gsub(" ","")
+      
+      # Don't use "downcase" in the case where "Surname" is one of the meanings.
+      if dict_entry.meaning_txt.downcase.index("surname")
+        same_pinyin = (dict_pinyin == tag_pinyin)
+      else
+        same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase)
+      end
+        
+      # If we didn't match right away, also check for the funny tone changes 
+      if (same_pinyin == false and (tag_pinyin.index("yí") or tag_pinyin.index("bú")))
+        same_pinyin = (dict_pinyin.downcase == tag_pinyin.downcase.gsub("yí","yi1").gsub("bú","bu4"))
+      end
+        
+      # The "return" keyword will F everything up when used in blocks!
+      same_pinyin
+    end
+    return normal_criteria
+  end
 
 end
