@@ -36,14 +36,14 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
       NSArray *segmentedReading = [dict objectForKey:kLWESegmentedReadingKey];
       NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
       //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
-      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        //Construct the filename for its audioFilename filename
-        //and instantiate the AVPlayerItem for it. 
+      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+      {
+        //Construct the filename for its audioFilename filename and instantiate the AVPlayerItem for it. 
         NSString *filename = (NSString *)obj;
-        NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
+        NSURL *url = [NSURL fileURLWithPath:[LWEFile createLibraryPathWithFilename:filename]];
         [items addObject:url];
       }];
-      //And create the player with the NSArray filled with the AVPlayerItem(s)
+      // And create the player with the NSArray filled with the AVPlayerItem(s)
       q = [[LWEAudioQueue alloc] initWithItems:items];
     }
     
