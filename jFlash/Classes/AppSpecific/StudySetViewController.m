@@ -596,7 +596,7 @@ enum Sections {
 - (void)didFailToRestoreUserDateWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
-  if ([error code] == kDataNotFound && [error domain] == LWEBackupManagerErrorDomain)
+  if ([error code] == kDataNotFound && [[error domain] isEqualToString:LWEBackupManagerErrorDomain])
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
                                        message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
