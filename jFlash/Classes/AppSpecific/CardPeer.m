@@ -51,7 +51,7 @@
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
   NSString *sql = [NSString stringWithFormat:@""
          "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' AND ptag = 0 LIMIT %d) "
+         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' LIMIT %d) "
          "ORDER BY c.headword", keywordWildcard, 200];
   FMResultSet *rs = [db executeQuery:sql];
   cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:YES];
@@ -68,15 +68,13 @@
   NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
   cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
 
-#if defined(LWE_JFLASH)
-  // Presently JFlash is the only database w/ a PTAG/NON-PTAG setup
+  // Fill with non-ptag entries if we have space leftover
   if ([cardList count] < queryLimit)
   {
     NSInteger remainingCards = (queryLimit - [cardList count]);
     sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
     cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
   }
-#endif
   
   return (NSArray*)cardList;
 }
@@ -87,18 +85,11 @@
 {
   NSString *returnSql = nil;
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
-#if defined(LWE_JFLASH)
   // Do the search using SQLite FTS (PTAG results)
   returnSql = [NSString stringWithFormat:@""
          "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
          "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = %d LIMIT %d) "
          "ORDER BY c.headword", keywordWildcard, usePTag, limit];
-#elif defined(LWE_CFLASH)
-  returnSql = [NSString stringWithFormat:@""
-         "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' LIMIT %d) "
-         "ORDER BY c.headword_trad", keywordWildcard, limit];
-#endif
   return returnSql;
 }
 
