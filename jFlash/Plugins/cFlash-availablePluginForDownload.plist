@@ -61,7 +61,7 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<key>plugin_target_path</key>
 			<string>cFlash-FTS-1.0.db</string>
 			<key>plugin_target_url</key>
-			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.gz</string>
+			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.zip</string>
 			<key>plugin_version</key>
 			<string>1.0</string>
 		</dict>
