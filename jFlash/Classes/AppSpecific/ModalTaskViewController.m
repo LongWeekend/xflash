@@ -7,152 +7,90 @@
 
 #import "ModalTaskViewController.h"
 
+NSString * const LWEModalTaskDidCancel = @"LWEModalTaskDidCancel";
+NSString * const LWEModalTaskDidFinish = @"LWEModalTaskDidFinish";
+NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
+
 /**
  * Controls view & program flow during plugin/file downloads, database upgrades
  */
 @implementation ModalTaskViewController
 
-@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton, pauseButton;
+@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton;
 @synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
 
 // For content/webview
 @synthesize webViewContent;
 
-//! Initialization
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
-  {
-    [self setTaskHandler:nil];
-    [self setWebViewContent:nil];
-    self.navigationItem.leftBarButtonItem = nil;
-  }
-  return self;
-}
+#pragma mark - View Hierarchy
 
 /** UIView delegate - Initialize UI elements in the view - progress indicator & labels */
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-
-  // Reset all variables to default
-  [self setStatusMessage:@""];
-  [self setTaskMessage:@""];
-  [self setProgress:0.0f];
-
-  // Sets the disabled/enabled state of start button
-//  [[self startButton] setEnabled:![self startTaskOnAppear]];
-
-  [[self progressIndicator] setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
-}
-
-
-/** UIView Delegate method - sets nav title bar tint according to theme */
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
+  [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
   // Make sure the buttons are set to the right states
   [self updateButtons];
 }
 
-
 /** UIView Delegate method - starts the download! */
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  if (startTaskOnAppear)
+  if (self.startTaskOnAppear)
   {
     [self startProcess];
   }
-  if (showDetailedViewOnAppear)
+  if (self.showDetailedViewOnAppear)
   {
     // Avoid infinite loop when user presses "back" on nav bar
-    [self setShowDetailedViewOnAppear:NO];
+    self.showDetailedViewOnAppear = NO;
     [self showDetailedView];
   }
 }
 
+#pragma mark - Getters and Setters
 
 /** Sets the status message of the Downloader View */
 -(void) setStatusMessage: (NSString*) newString
 {
-  // Check that nil was not passed
-  if (newString != nil)
-  {
-    if ([newString isKindOfClass:[NSString class]])
-    {
-      // OK - we got a string
-      [[self statusMsgLabel] setText:newString];
-    }
-    else
-    {
-      // When passed non-NSString, throw exception
-      [NSException raise:@"Invalid String Object Passed" format:@"Was passed object: %@",newString];
-    }
-  }
-  else
-  {
-    // In nil case, set string to blank
-    [[self statusMsgLabel] setText:@""];
-  }
+  self.statusMsgLabel.text = newString;
 }
-
 
 /** Gets the current status message of the Downloader View */
 -(NSString*) statusMessage
 {
-  return [[self statusMsgLabel] text];
+  return self.statusMsgLabel.text;
 }
-
 
 /** Sets the current task message of the Downloader View */
--(void) setTaskMessage: (NSString*) newString
+-(void) setTaskMessage:(NSString*) newString
 {
-  // Check that nil was not passed
-  if (newString != nil)
-  {
-    if ([newString isKindOfClass:[NSString class]])
-    {
-      // OK - we got a string
-      [self.taskMsgLabel setText:newString];
-    }
-    else
-    {
-      // When passed non-NSString, throw exception
-      [NSException raise:@"Invalid String Object Passed" format:@"Was passed object: %@",newString];
-    }
-  }
-  else
-  {
-    // In nil case, set string to blank
-    [self.taskMsgLabel setText:@""];
-  }
+  self.taskMsgLabel.text = newString;
 }
-
 
 /** Gets the current task message of the Downloader View */
 -(NSString*) taskMessage
 {
-  return [self.taskMsgLabel text];
+  return self.taskMsgLabel.text;
 }
-
 
 /** Sets the current progress % complete of the UIProgressView on the Downloader View */
 -(void) setProgress: (float) newVal
 {
-  [self.progressIndicator setProgress:newVal];
+  self.progressIndicator.progress = newVal;
 }
-
 
 /** Gets the current progress % complete of the UIProgressView on the Downloader View */
 -(float) progress
 {
-  return [self.progressIndicator progress];
+  return self.progressIndicator.progress;
 }
 
+#pragma mark - IBAction Methods
 
 /**
  * Starts a new task using delegate
@@ -162,9 +100,7 @@
 {
   if ([self canStartTask])
   {
-    [self.taskHandler startTask];
-    self.progressIndicator.hidden = NO;
-    self.startButton.hidden = YES;
+    [self.taskHandler start];
     [self updateButtons];
   }
 }
@@ -178,53 +114,30 @@
 - (BOOL) canStartTask
 {
   if ([self.taskHandler respondsToSelector:@selector(canStartTask)])
-    return [self.taskHandler canStartTask];
-  else
-    return NO;
-}
-
-
-/** 
- * Pauses an ongoing task, calling on canPauseTask (or delegate) first
- */
-- (IBAction) pauseProcess
-{
-  if ([self canPauseTask] && [self.taskHandler respondsToSelector:@selector(pauseTask)])
   {
-    [self.taskHandler pauseTask];
+    return [self.taskHandler canStartTask];
+  }
+  else
+  {
+    return NO;
   }
 }
-
-                         
-/*
-* If delegate does not implement canPauseTask, assumes
-* that it is not possible to pause (always returns NO)
-*/
-- (BOOL) canPauseTask
-{
-  if ([self.taskHandler respondsToSelector:@selector(canPauseTask)])
-    return [self.taskHandler canPauseTask];
-  else
-    return NO;
-}
-                         
 
 /**
  * Cancels an ongoing task process
  * If delegate does not implement canCancelTask, assume that it is possible
  * to cancel and sends cancelTask message to taskHandler.
- * Also sends a taskDidCompleteSuccessfully notification on the current thread if cancel msg sent to delegate
+ * Also sends a notification on the current thread if cancel msg sent to delegate
  */
 - (IBAction) cancelProcess
 {
   if ([self canCancelTask])
   {
-    [self.taskHandler cancelTask];
-    self.progressIndicator.hidden = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCancelSuccessfully" object:nil];
+    [self.taskHandler cancel];
+    [self updateButtons];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidCancel object:nil];
   }
 }
-
 
 /**
  * Determines whether or not we can cancel based on delegate
@@ -234,72 +147,12 @@
 - (BOOL) canCancelTask
 {
   if ([self.taskHandler respondsToSelector:@selector(canCancelTask)])
+  {
     return [self.taskHandler canCancelTask];
-  else
-    return YES;  
-}
-
-
-/**
- * Retries a failed task process
- * Checks if delegate responds to canRetryTask - assumes NO if not implemented
- * Also will call resetTask if implemented prior to restarting
- * Updates UI buttons accordingly
- */
-- (IBAction) retryProcess
-{
-  if ([self.taskHandler isFailureState])
-  {
-    if ([self canRetryTask])
-    {
-      // See if reset is possible
-      if ([self.taskHandler respondsToSelector:@selector(resetTask)]) 
-      {
-        [self.taskHandler resetTask];
-      }
-      
-      // Finally, restart
-      [self startProcess];
-    }
-  }
-}
-
-
-/**
- * Assume that I cannot retry (always return NO) unless delegate
- * implements this method and says YES.
- */
-- (BOOL) canRetryTask
-{
-  if ([self.taskHandler respondsToSelector:@selector(canRetryTask)])
-  {
-    return [self.taskHandler canRetryTask];
   }
   else
   {
-    return NO;
-  }
-}
-
-
-/** 
- * Called immediately before we update buttons
- * Gives the delegate a chance to change the visibility
- * (hidden = YES, for example)
- */
-- (void) willUpdateButtonsInView:(id)sender
-{
-  if ([self.taskHandler respondsToSelector:@selector(willUpdateButtonsInView:)])
-  {
-    [self.taskHandler willUpdateButtonsInView:sender];
-  }
-}
-
-- (void) didUpdateButtonsInView:(id)sender
-{
-  if ([self.taskHandler respondsToSelector:@selector(didUpdateButtonsInView:)])
-  {
-    [self.taskHandler didUpdateButtonsInView:sender];
+    return YES;
   }
 }
 
@@ -310,13 +163,22 @@
  */
 - (void) updateButtons
 {
-  [self willUpdateButtonsInView:self];
+  if ([self canStartTask])
+  {
+    self.startButton.hidden = NO;
+    self.progressIndicator.hidden = YES;
+  }
+  else
+  {
+    self.startButton.hidden = YES;
+    self.progressIndicator.hidden = NO;
+  }
        
   if ([self canCancelTask])
   {
     if (self.navigationItem.leftBarButtonItem == nil)
     {
-      UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
+      UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
       self.navigationItem.leftBarButtonItem = cancelButton;
       [cancelButton release];
     }
@@ -325,8 +187,6 @@
   {
     self.navigationItem.leftBarButtonItem = nil;
   }
-  
-  [self didUpdateButtonsInView:self];
 }
 
 
@@ -335,20 +195,13 @@
  */
 - (void) updateDisplay
 {
-  [self setTaskMessage:[self.taskHandler taskMessage]];
-  [self setStatusMessage:[self.taskHandler statusMessage]];
-  [self setProgress:[self.taskHandler progress]];
-  
   if ([self.taskHandler isSuccessState])
   {
-    // Tell someone about this!  Let someone else handle this noise
-    LWE_LOG(@"DownloaderVC got success state, send a notification and stop worrying about it");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidCompleteSuccessfully" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidFinish object:self];
   }
   else if ([self.taskHandler isFailureState])
   {
-    // Tell someone about this!  Let someone else handle this noise
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"taskDidFail" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidFail object:self];
   }
   
   // Call delegate & update the UI buttons
@@ -359,6 +212,7 @@
 /**
  * Pushes the detail view controller on top of the ModalTaskViewController
  * The idea is that users have things to look @ while waiting on the task to complete
+ * New idea: DOWNLOAD IN THE BACKGROUND FOOL.  MMA 2011.11.29
  */
 - (IBAction) showDetailedView
 {
@@ -383,15 +237,21 @@
 
 - (void) viewDidUnload
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [super viewDidUnload];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.statusMsgLabel = nil;
+  self.taskMsgLabel = nil;
+  self.progressIndicator = nil;
 }
 
 //! standard dealloc
 - (void)dealloc
 {
+  [taskMsgLabel release];
+  [statusMsgLabel release];
+  [progressIndicator release];
   [webViewContent release];
-  [self setTaskHandler:nil];
+  [taskHandler release];
   [super dealloc];
 }
 

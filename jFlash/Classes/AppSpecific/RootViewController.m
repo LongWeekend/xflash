@@ -16,6 +16,8 @@
 #import "JapaneseSettingsDataSource.h"
 #import "ChineseSettingsDataSource.h"
 #import "HelpViewController.h"
+#import "LWEPackageDownloader.h"
+#import "ModalTaskViewController.h"
 
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 // TODO: Why is this different than the above?  (MMA 11.14.2011)
@@ -310,48 +312,37 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 {
   // Instantiate downloader with jFlash download URL & destination filename
   //TODO: iPad customization here
-  ModalTaskViewController* dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
+  ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   //[dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
-  [dlViewController setTitle:NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle")];
-  [dlViewController setShowDetailedViewOnAppear:YES];
-  [dlViewController setStartTaskOnAppear:NO];
+  dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
+  dlViewController.showDetailedViewOnAppear = YES;
+  dlViewController.startTaskOnAppear = NO;
   
+  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
+
   // Use HTML from PLIST
-  NSString *htmlString = [[aNotification userInfo] objectForKey:@"plugin_html_content"];
-  [dlViewController setWebViewContent:htmlString];
+  NSString *htmlString = [aNotification.userInfo objectForKey:@"plugin_html_content"];
+  dlViewController.webViewContent = htmlString;
 
   // Get path information
-  NSString *targetURL  = [[aNotification userInfo] objectForKey:@"plugin_target_url"];
-  NSString *targetPath = [[aNotification userInfo] objectForKey:@"plugin_target_path"];
-  LWEDownloader *tmpDlHandler = nil;
+  NSURL *targetURL = [NSURL URLWithString:[aNotification.userInfo objectForKey:@"plugin_target_url"]];
+  NSString *targetPath = [aNotification.userInfo objectForKey:@"plugin_target_path"];
   if (targetURL && targetPath)
   {
-    tmpDlHandler = [[LWEDownloader alloc] initWithTargetURL:targetURL targetPath:targetPath];
+    LWEPackage *pluginPackage = [LWEPackage packageWithUrl:targetURL destinationFilepath:[targetPath stringByAppendingString:@".zip"]];
+    [packageDownloader queuePackage:pluginPackage];
+    dlViewController.taskHandler = packageDownloader;
+    [self _showModalWithViewController:dlViewController useNavController:YES];
   }
   else
   {
     // This is a problem!  Why wouldn't we have stuff???
-#if defined(LWE_RELEASE_APP_STORE)
-    [FlurryAPI logEvent:@"PLUGIN_URL_FAILURE" withParameters:[aNotification userInfo]];
-    // Notify the user..
+    [LWEAnalytics logEvent:@"PLUGIN_URL_FAILURE" parameters:[aNotification userInfo]];
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
                                        message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
-#endif
-    [dlViewController release];
-    return;
   }
-
-  // Set the installer delegate to the PluginManager class
-  tmpDlHandler.delegate = [[CurrentState sharedCurrentState] pluginMgr];
-  dlViewController.taskHandler = tmpDlHandler;
-  
-  // Register notification listener to handle downloader events
-	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderStateUpdated" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:dlViewController selector:@selector(updateDisplay) name:@"LWEDownloaderProgressUpdated" object:nil];
-  
-  [self _showModalWithViewController:dlViewController useNavController:YES];
   [dlViewController release];
-  [tmpDlHandler release];
+  [packageDownloader release];
 }
 
 # pragma mark Delegate Methods
