@@ -125,13 +125,17 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 
 {
-  if ([theTextField.text length] == 0)
+  if (theTextField == self.setNameTextfield && [theTextField.text length] == 0)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Enter Set Name",@"AddStudySetInputViewController.AlertViewTitle")
                                        message:NSLocalizedString(@"Please enter a new set name or click 'Cancel'.",@"AddStudySetInputViewController.AlertViewMessage")];
     return NO;
   }
- 
+  else if (theTextField == self.setNameTextfield)
+  {
+    [self.setDescriptionTextView becomeFirstResponder];
+    return NO;
+  }
   return YES;
 }
 
