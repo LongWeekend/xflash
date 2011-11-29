@@ -80,11 +80,11 @@ class TagImporter
     if config.tag_id != nil
       # For specific cases where the YAML file tells us what SQL ID to use -- presently used for Starred
       insert_query = "INSERT INTO tags_staging(tag_id, tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off, editable) VALUES(%s, '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, %s)" %
-                        [config.tag_id, config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
+                        [config.tag_id, mysql_escape_str(config.tag_name), config.tag_type, config.short_name, mysql_escape_str(config.description), config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
     else
       # Most other cases -- just add a new tag
       insert_query = "INSERT INTO tags_staging(tag_name, tag_type, short_name, description, source_name, source, visible, parent_tag_id, force_off, editable) VALUES('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, %s)" %
-                        [config.tag_name, config.tag_type, config.short_name, config.description, config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
+                        [mysql_escape_str(config.tag_name), config.tag_type, config.short_name, mysql_escape_str(config.description), config.source_name, config.source, config.visible, config.parent_tag_id, config.force_off, config.editable]
     end
             
     $cn.execute(insert_query)

@@ -6,7 +6,7 @@ starred:
     entry_type: "CSVEntry"
     tag_id: 0
     short_name: "starred_words"
-    description: "Words you\'ve starred in Search and Study will appear here."      
+    description: "Words you've starred in Search and Study will appear here."      
     source: "system_tags"                          
     source_name: "system_tags"     
     editable: 1
