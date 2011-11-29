@@ -57,7 +57,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
 
 - (void)testAddThenRemoveCardsFromStudySet
 {
-  Tag *newlyCreatedTag = [TagPeer createTag:kTagTestDefaultName withOwner:0];
+  Tag *newlyCreatedTag = [TagPeer createTagNamed:kTagTestDefaultName inGroup:[GroupPeer topLevelGroup]];
   NSInteger newlyCreatedTagId = [newlyCreatedTag tagId];
   
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
