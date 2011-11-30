@@ -12,8 +12,6 @@
 #import "LWETDelegates.h"
 #import "LWELoadingView.h"
 
-#define JFLASH_TWITTER_CONSUMER_KEY	@"BGDlaaZWdjPo3oPudnIUNA"
-#define JFLASH_TWITTER_PRIVATE_KEY	@"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU"
 #define kMaxChars					132
 
 @class LWETwitterEngine;
@@ -63,8 +61,6 @@
  * This is the designated initializer, and it asks for nib name for the view, twiter engine that
  * already has a logged on user (authenticated) and what is the initial word to be tweeted.
  */
-- (id)initWithNibName:(NSString *)nibName 
-		twitterEngine:(LWETwitterEngine *)twitterEngine 
-			tweetWord:(NSString *)tweetWord;
+- (id)initWithNibName:(NSString *)nibName twitterEngine:(LWETwitterEngine *)twitterEngine tweetWord:(NSString *)tweetWord;
 
 @end
