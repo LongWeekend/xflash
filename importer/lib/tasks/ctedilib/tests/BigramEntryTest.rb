@@ -57,6 +57,12 @@ class BigramEntryTest < Test::Unit::TestCase
     cedict_entry_mid.parse_line("人工作員 人工作员 [gong1 zuo4 ren2 yuan2] /staff/")
     cedict_entry_end = CEdictEntry.new
     cedict_entry_end.parse_line("人員工作 人员工作 [gong1 zuo4 ren2 yuan2] /staff/")
+    no_match_entry = CEdictEntry.new
+    no_match_entry.parse_line("工流 工流 [gong1 zuo4 liu2] /workflow/")
+
+    # No match
+    assert_equal(false,entry.loose_match_criteria.call(no_match_entry,entry))
+    assert_equal(false,entry.default_match_criteria.call(no_match_entry,entry))
 
     # Partial HW match
     result = entry.loose_match_criteria.call(cedict_entry_beg,entry)
