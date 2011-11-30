@@ -12,6 +12,8 @@
 
 #define LWE_PLUGIN_UPDATE_PERIOD		14
 
+#define LWE_TWITTER_MAX_CHARS	132
+
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
 extern NSString * const SET_MODE_BROWSE;
@@ -48,6 +50,10 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
 
 extern NSString * const LWE_BAD_DATA_EMAIL;
 extern NSString * const LWE_SUPPORT_EMAIL;
+
+// Twitter Keys
+extern NSString * const LWE_TWITTER_CONSUMER_KEY;
+extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 
 #if defined(LWE_JFLASH)
 

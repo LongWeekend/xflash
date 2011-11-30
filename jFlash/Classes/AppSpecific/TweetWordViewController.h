@@ -12,10 +12,6 @@
 #import "LWETDelegates.h"
 #import "LWELoadingView.h"
 
-#define JFLASH_TWITTER_CONSUMER_KEY	@"BGDlaaZWdjPo3oPudnIUNA"
-#define JFLASH_TWITTER_PRIVATE_KEY	@"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU"
-#define kMaxChars					132
-
 @class LWETwitterEngine;
 @class LWETUser;
 
