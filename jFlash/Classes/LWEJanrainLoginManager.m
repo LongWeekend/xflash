@@ -20,7 +20,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (id) init
 {
-  if ((self == [super init]))
+  if (self == [super init])
   {
     static NSString *appId = @"mhbbfdgbbdndhjlcnkfd"; // <-- This is your app ID
     static NSString *tokenURL = @"http://lweflash.appspot.com/api/authorize";
@@ -105,6 +105,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   LWE_LOG(@"Provider: %@", provider);
 }
 
+- (void) jrAuthenticationDidNotComplete
+{
+  // Tell anyone who might care
+  NSNotification *aNotification = [NSNotification notificationWithName:LWEJanrainLoginManagerUserDidNotAuthenticate object:self.userIdentifier];
+  [[NSNotificationCenter defaultCenter] postNotification:aNotification];  
+}
+
 #pragma mark Failure Delegate
 
 - (void) jrEngageDialogDidFailToShowWithError:(NSError *)error	
@@ -130,7 +137,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (void) share:(NSString*)action andUrl:(NSString*)url
 {
-  [self login];
+//  [self login];
   
   JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
   [self.jrEngage showSocialPublishingDialogWithActivity:activity];
@@ -143,7 +150,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 */
 - (void) share:(NSString*)action andUrl:(NSString*)url userContentOrNil:(NSString*)userContent
 {
-  [self login];
+//  [self login];
   
   JRActivityObject *activity = [[[JRActivityObject alloc] initWithAction:action andUrl:url] autorelease];
   activity.title = userContent;
@@ -153,4 +160,5 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 @end
 
+NSString * const LWEJanrainLoginManagerUserDidNotAuthenticate = @"LWEJanrainLoginManagerUserDidNotAuthenticate";
 NSString * const LWEJanrainLoginManagerUserDidAuthenticate = @"LWEJanrainLoginManagerUserDidAuthenticate";
