@@ -314,6 +314,7 @@
       [[self navigationItem] setBackBarButtonItem: newBackButton];      
       [newBackButton release];
       [self.navigationController pushViewController:tmpVC animated:YES];
+      [tmpVC release];
     }
   }
   // If they pressed a card, show the add to set list
