@@ -47,6 +47,7 @@ extern NSString * const LWE_CURRENT_CARD_DATABASE;
 extern NSString * const LWE_CURRENT_USER_DATABASE;
 
 extern NSString * const LWE_BAD_DATA_EMAIL;
+extern NSString * const LWE_SUPPORT_EMAIL;
 
 #if defined(LWE_JFLASH)
 
