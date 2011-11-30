@@ -21,22 +21,16 @@ class CEdictExporter
     end
 
     ## Create intermediate tables
-    $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading FROM #{cards_table}")
-    $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, editable, count, force_off FROM tags_staging")
-    $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
-    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning_fts, priority_word as ptag FROM #{cards_table}")
+    $cn.execute("CREATE TABLE cards DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, headword_en, reading FROM #{cards_table}")
     $cn.execute("CREATE TABLE cards_html DEFAULT CHARSET=utf8 SELECT card_id, meaning_html AS meaning FROM #{cards_table}")
+    $cn.execute("CREATE TABLE groups SELECT * FROM groups_staging")
+    $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, editable, count, force_off FROM tags_staging")
+    
+    # Create FTS table & generate content
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts) AS content, priority_word as ptag FROM #{cards_table}")
+#    $cn.execute("ALTER TABLE cards_search_content ADD COLUMN headword_reading varchar(100)")
 
-    ## Generate the card search content table
-    $cn.execute("ALTER TABLE cards_search_content ADD COLUMN content varchar(5000)")
-    $cn.execute("UPDATE cards_search_content SET content = CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts);")
-    $cn.execute("ALTER TABLE cards_search_content DROP headword_trad")
-    $cn.execute("ALTER TABLE cards_search_content DROP headword_simp")
-    $cn.execute("ALTER TABLE cards_search_content DROP reading")  
-    $cn.execute("ALTER TABLE cards_search_content DROP reading_diacritic")
-    $cn.execute("ALTER TABLE cards_search_content DROP meaning_fts")
-
-    # Remove non-visible tags
+    # Remove non-visible tags - MMA 11.30.2011 -- is this still used? TODO
     $cn.execute("DELETE FROM tags WHERE force_off=1")
     $cn.execute("ALTER TABLE tags DROP force_off")
    
