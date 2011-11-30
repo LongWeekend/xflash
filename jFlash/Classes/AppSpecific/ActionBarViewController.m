@@ -251,7 +251,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 	if (_twitterEngine == nil)
 	{
     TweetWordXAuthController *controller = [[TweetWordXAuthController alloc] initWithNibName:@"TweetWordXAuthController" bundle:nil];
-		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:JFLASH_TWITTER_CONSUMER_KEY privateKey:JFLASH_TWITTER_PRIVATE_KEY authenticationView:controller];
+		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:LWE_TWITTER_CONSUMER_KEY privateKey:LWE_TWITTER_PRIVATE_KEY authenticationView:controller];
     [controller release];
 	}
 
@@ -372,8 +372,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 	LWE_LOG(@"Done Sending the notification");
 }
 
-#pragma mark -
-#pragma mark TweetWordMethod
+#pragma mark - TweetWordMethod
 
 //! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
 - (NSString *)getTweetWord

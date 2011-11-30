@@ -49,6 +49,9 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
 extern NSString * const LWE_BAD_DATA_EMAIL;
 extern NSString * const LWE_SUPPORT_EMAIL;
 
+extern NSString * const LWE_TWITTER_CONSUMER_KEY;
+extern NSString * const LWE_TWITTER_PRIVATE_KEY;
+
 #if defined(LWE_JFLASH)
 
   // LWE Favorites - JFlash
