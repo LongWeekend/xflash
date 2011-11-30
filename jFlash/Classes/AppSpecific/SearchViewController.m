@@ -475,13 +475,7 @@ const NSInteger KSegmentedTableHeader = 100;
   BOOL returnVal = NO;
   if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
   {
-    for (Card *cachedCard in self.membershipCacheArray)
-    {
-      if (cachedCard.cardId == theCard.cardId)
-      {
-        return YES;
-      }
-    }
+    return [self.membershipCacheArray containsObject:[NSNumber numberWithInt:theCard.cardId]];
   }
   else
   {
@@ -521,15 +515,12 @@ const NSInteger KSegmentedTableHeader = 100;
       isMember = [TagPeer card:theCard isMemberOfTag:favoritesTag];
     }
     
-    if (!isMember)
+    if (isMember == NO)
     {
       [TagPeer subscribeCard:theCard toTag:favoritesTag];
       
       // Now add the new ID onto the end of the search cache
-      Card *tmpCard = [[Card alloc] init];
-      tmpCard.cardId = cardId;
-      [self.membershipCacheArray addObject:tmpCard];
-      [tmpCard release];
+      [self.membershipCacheArray addObject:[NSNumber numberWithInt:cardId]];
     }
     else
     {
@@ -551,7 +542,7 @@ const NSInteger KSegmentedTableHeader = 100;
         return;
       }
       
-      [self.membershipCacheArray removeObject:theCard];
+      [self.membershipCacheArray removeObject:[NSNumber numberWithInt:theCard.cardId]];
     }
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];

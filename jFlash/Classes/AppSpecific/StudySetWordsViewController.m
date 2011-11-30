@@ -25,7 +25,7 @@
  */
 @implementation StudySetWordsViewController
 
-@synthesize tag, cards, activityIndicator;
+@synthesize tag, cardIds, activityIndicator;
 
 #pragma mark - Initializer
 
@@ -122,18 +122,18 @@
   NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
-    [self.cards addObject:theCard];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cards indexOfObject:theCard] inSection:kWordSetListSections];
+    [self.cardIds addObject:[NSNumber numberWithInt:theCard.cardId]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cardIds indexOfObject:[NSNumber numberWithInt:theCard.cardId]] inSection:kWordSetListSections];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                           withRowAnimation:UITableViewRowAnimationRight];
   }
   else if ([changeType isEqualToString:LWETagContentCardRemoved])
   {
-    NSInteger index = [self.cards indexOfObject:theCard];
+    NSInteger index = [self.cardIds indexOfObject:[NSNumber numberWithInt:theCard.cardId]];
     if (index != NSNotFound)
     {
       //remove the card, reload the table
-      [self.cards removeObjectAtIndex:index];
+      [self.cardIds removeObjectAtIndex:index];
       NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:kWordSetListSections];
       [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                             withRowAnimation:UITableViewRowAnimationRight];
@@ -147,7 +147,7 @@
 - (void) _loadWordListInBackground
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  self.cards = [[[CardPeer retrieveCardIdsForTagId:tag.tagId] mutableCopy] autorelease];
+  self.cardIds = [[[CardPeer retrieveCardIdsForTagId:self.tag.tagId] mutableCopy] autorelease];
   [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
@@ -169,11 +169,11 @@
   int returnCount = 0;
   if (section == kWordSetListSections)
   {
-    if ([self cards])
+    if ([self cardIds])
     {
       // Show cards & stop the animator
-      [activityIndicator stopAnimating];
-      returnCount = [cards count];
+      [self.activityIndicator stopAnimating];
+      returnCount = [self.cardIds count];
     }
     else
     {
@@ -204,7 +204,7 @@
   UITableViewCell *cell = nil;
   if (indexPath.section == kWordSetListSections)
   {
-    if (self.cards == nil)
+    if (self.cardIds == nil)
     {
       // "Loading words..." pre-display cell
       cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
@@ -217,11 +217,11 @@
       // The actual words, once loaded
       cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
+      Card *tmpCard = [CardPeer retrieveCardByPK:[[self.cardIds objectAtIndex:indexPath.row] intValue]];
       if (tmpCard.headword == nil)
       {
         tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
-        [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+        [self.cardIds replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
       cell.textLabel.text = [tmpCard headword];
@@ -253,7 +253,7 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     NSError *error = nil;
-    Card *card = [self.cards objectAtIndex:indexPath.row];
+    Card *card = [self.cardIds objectAtIndex:indexPath.row];
     
     // Set this to signal to the notification callback that we don't need to do anything
     BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
@@ -319,7 +319,8 @@
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self.cards objectAtIndex:indexPath.row]];
+    Card *card = [CardPeer retrieveCardByPK:[[self.cardIds objectAtIndex:indexPath.row] intValue]];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:card];
     [self.navigationController pushViewController:tmpVC animated:YES];
     [tmpVC release];
   }
@@ -331,7 +332,7 @@
 - (void)dealloc
 {
   [tag release]; 
-  [cards release];
+  [cardIds release];
   [activityIndicator release];
   [super dealloc];
 }

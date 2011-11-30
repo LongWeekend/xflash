@@ -189,9 +189,14 @@
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
-  return (NSArray*)[CardPeer _addCardsToList:[NSMutableArray array]
-                               fromResultSet:[db executeQuery:sql]
-                                     hydrate:NO];
+  NSMutableArray *ids = [NSMutableArray array];
+  FMResultSet *rs = [db executeQuery:sql];
+  while ([rs next])
+  {
+    [ids addObject:[NSNumber numberWithInt:[rs intForColumn:@"card_id"]]];
+  }
+  [rs close];
+  return (NSArray*)ids;
 }
 
 /**
