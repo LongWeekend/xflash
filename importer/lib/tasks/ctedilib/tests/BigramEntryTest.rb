@@ -36,4 +36,44 @@ class BigramEntryTest < Test::Unit::TestCase
     assert_equal("工作",entry.headword_simp)
   end
 
+  # Must match headword_simp exactly
+  def test_strict_match_criteria
+    entry = BigramEntry.new
+    entry.parse_line("8	工作	18904	6.89133239246	213454")
+    cedict_entry = CEdictEntry.new
+    cedict_entry.parse_line("工作 工作 [gong1 zuo4] /job/work/construction/task/CL:個|个[ge4],份[fen4],項|项[xiang4]/")
+    
+    result = entry.default_match_criteria.call(cedict_entry,entry)
+    assert(true,result)
+  end
+
+  def test_loose_match_criteria
+    entry = BigramEntry.new
+    entry.parse_line("8	工作	18904	6.89133239246	213454")
+    
+    cedict_entry_beg = CEdictEntry.new
+    cedict_entry_beg.parse_line("工作人員 工作人员 [gong1 zuo4 ren2 yuan2] /staff/")
+    cedict_entry_mid = CEdictEntry.new
+    cedict_entry_mid.parse_line("人工作員 人工作员 [gong1 zuo4 ren2 yuan2] /staff/")
+    cedict_entry_end = CEdictEntry.new
+    cedict_entry_end.parse_line("人員工作 人员工作 [gong1 zuo4 ren2 yuan2] /staff/")
+
+    # Partial HW match
+    result = entry.loose_match_criteria.call(cedict_entry_beg,entry)
+    assert_equal(true,result)
+    result = entry.loose_match_criteria.call(cedict_entry_mid,entry)
+    assert_equal(true,result)
+    result = entry.loose_match_criteria.call(cedict_entry_end,entry)
+    assert_equal(true,result)
+
+    # Not exact match
+    result = entry.default_match_criteria.call(cedict_entry_beg,entry)
+    assert_equal(false,result)
+    result = entry.default_match_criteria.call(cedict_entry_mid,entry)
+    assert_equal(false,result)
+    result = entry.default_match_criteria.call(cedict_entry_end,entry)
+    assert_equal(false,result)
+  end
+
+
 end

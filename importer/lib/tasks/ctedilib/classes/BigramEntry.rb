@@ -29,9 +29,21 @@ class BigramEntry < Entry
   # MATCHING METHODS
   #=================================
   
-  # Use the loose one because we have no other information other than headword for these cards
   def default_match_criteria
-    return loose_match_criteria
+    criteria = Proc.new do |dict_entry, tag_entry|
+      # These no-return statements weird me out
+      same_headword = (dict_entry.headword_simp == tag_entry.headword_simp)
+    end
+    return criteria
+  end
+  
+  # Override this method to do more than just headword matches -- use "headword contains"
+  def loose_match_criteria
+    criteria = Proc.new do |dict_entry, tag_entry|
+      # These no-return statements weird me out
+      contains_headword = (dict_entry.headword_simp.index(tag_entry.headword_simp).nil? == false)
+    end
+    return criteria
   end
   
 end
