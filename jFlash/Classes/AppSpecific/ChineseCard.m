@@ -206,16 +206,22 @@
 
   NSString *hw = nil;
   
-  // TODO: ALSO PUT ENGLISH HEADWORD IN HERE
-  
-  if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
+  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {
-    hw = self._headword;
-  } 
-  else if ([type isEqualToString:SET_HEADWORD_TYPE_SIMP])
-  {
-    hw = self.headword_simp;
+    hw = self.headword_en;
   }
+  else
+  {
+    if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
+    {
+      hw = self._headword;
+    } 
+    else if ([type isEqualToString:SET_HEADWORD_TYPE_SIMP])
+    {
+      hw = self.headword_simp;
+    }
+  }
+  
   return hw;
 }
 
