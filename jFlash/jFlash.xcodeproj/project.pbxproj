@@ -96,6 +96,10 @@
 		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
+		49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
 		4938F8B814024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
 		4938F8B914024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -913,6 +917,7 @@
 		4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseSettingsDataSource.m; path = AppSpecific/JapaneseSettingsDataSource.m; sourceTree = "<group>"; };
 		4927B8461400C7350076EEED /* ChineseSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseSettingsDataSource.h; path = AppSpecific/ChineseSettingsDataSource.h; sourceTree = "<group>"; };
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
+		49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GroupDescriptionView.xib; path = XIBs/GroupDescriptionView.xib; sourceTree = "<group>"; };
 		4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "CardViewController-EtoJ.xib"; path = "Classes/AppSpecific/CardViewController-EtoJ.xib"; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
@@ -2482,6 +2487,7 @@
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
 				917A5C6A11AB844300016BD2 /* AddStudySetView.xib */,
+				49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */,
 				49F9686811AF604900DFC3C9 /* ModalTaskView.xib */,
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
@@ -2858,6 +2864,7 @@
 				491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */,
 				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
+				49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2871,6 +2878,7 @@
 				4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */,
 				493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */,
+				49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2886,6 +2894,7 @@
 				497607E8147A6570000A9FC5 /* chinese-flash-icon@2x.png in Resources */,
 				497607EA147A6570000A9FC5 /* chinese-flash-splash.png in Resources */,
 				497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
+				49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3053,6 +3062,7 @@
 				497607E7147A6570000A9FC5 /* chinese-flash-icon@2x.png in Resources */,
 				497607E9147A6570000A9FC5 /* chinese-flash-splash.png in Resources */,
 				497607EB147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
+				49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
