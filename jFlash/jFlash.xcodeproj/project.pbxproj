@@ -603,6 +603,8 @@
 		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
+		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -1130,12 +1132,6 @@
 		9134371D138DE5B400A924E4 /* LWECrashUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECrashUtils.h; sourceTree = "<group>"; };
 		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		913D48071353A3E0008A4649 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LWE+JRProvidersController.h"; sourceTree = "<group>"; };
-		913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LWE+JRProvidersController.m"; sourceTree = "<group>"; };
-		913D48511353C099008A4649 /* JRWebViewController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRWebViewController+LWE.h"; sourceTree = "<group>"; };
-		913D48521353C099008A4649 /* JRWebViewController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRWebViewController+LWE.m"; sourceTree = "<group>"; };
-		913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRUserLandingController+LWE.h"; sourceTree = "<group>"; };
-		913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRUserLandingController+LWE.m"; sourceTree = "<group>"; };
 		913EEF71130800F300EBCF87 /* puny.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = puny.c; sourceTree = "<group>"; };
 		913EEF72130800F300EBCF87 /* puny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = puny.h; sourceTree = "<group>"; };
 		913EEF82130800F300EBCF87 /* toxxx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = toxxx.c; sourceTree = "<group>"; };
@@ -1219,6 +1215,8 @@
 		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
+		919100F21486A6B1003E9A19 /* JRPreviewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRPreviewLabel.m; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -1739,7 +1737,6 @@
 			children = (
 				4938F8BB14027532001EB473 /* OHAttributedLabel */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
-				913D48301353BE26008A4649 /* LWEJanrain */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				49EE8D90134EC15300EC6B0E /* LWE */,
 				91CA7222133D216C008A89A8 /* JREngage */,
@@ -2067,20 +2064,6 @@
 			path = "External/asi-http-request/External/Reachability";
 			sourceTree = "<group>";
 		};
-		913D48301353BE26008A4649 /* LWEJanrain */ = {
-			isa = PBXGroup;
-			children = (
-				913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */,
-				913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */,
-				913D48511353C099008A4649 /* JRWebViewController+LWE.h */,
-				913D48521353C099008A4649 /* JRWebViewController+LWE.m */,
-				913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */,
-				913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */,
-			);
-			name = LWEJanrain;
-			path = External/LWEJanrain;
-			sourceTree = "<group>";
-		};
 		913EEF6C130800F300EBCF87 /* IFUnicodeURL */ = {
 			isa = PBXGroup;
 			children = (
@@ -2217,6 +2200,8 @@
 		91CA723A133D216C008A89A8 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				919100F11486A6B0003E9A19 /* JRPreviewLabel.h */,
+				919100F21486A6B1003E9A19 /* JRPreviewLabel.m */,
 				49C50623148496640094734D /* JSONKit.h */,
 				49C506241484966A0094734D /* JSONKit.m */,
 				49BBA49D144D570B00E6A9AE /* JRActivityObject.h */,
@@ -3225,6 +3210,7 @@
 				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */,
 				49C506251484966A0094734D /* JSONKit.m in Sources */,
+				919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3493,6 +3479,7 @@
 				24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */,
 				49C506261484966A0094734D /* JSONKit.m in Sources */,
+				919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
