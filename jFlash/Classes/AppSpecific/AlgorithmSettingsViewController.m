@@ -54,6 +54,7 @@ enum ControlSectionRows
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSNumber *segmentedIndex = [NSNumber numberWithInt:[settings integerForKey:APP_DIFFICULTY]];
   self.difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
+  [self.maxCardsUISlider setValue:(CGFloat)[settings integerForKey:APP_MAX_STUDYING] animated:NO];
   [self setDifficulty:self.difficultySegmentControl];
 }
 
@@ -211,6 +212,12 @@ enum ControlSectionRows
 
 - (void)sliderAction:(UISlider *)sender
 {
+  // TODO: This is a poor fix and MMA added a ticket to deal with it
+  if (sender == nil)
+  {
+    return;
+  }
+  
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger value = lroundf([sender value]);
   if([sender tag] == kMaxCardsRow)
