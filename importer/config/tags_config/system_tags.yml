@@ -4,7 +4,6 @@ starred:
     tag_name: "My Starred Words"
     tag_type: ""
     entry_type: "CSVEntry"
-    tag_id: 0
     short_name: "starred_words"
     description: "Words you've starred in Search and Study will appear here."      
     source: "system_tags"                          
@@ -13,7 +12,6 @@ starred:
     visible: 1                                  
     parent_tag_id: 0
     force_off: 0
-    
 lwe_favs:
     file_dump_trace: 1
     file_importer: "TagImporter"
