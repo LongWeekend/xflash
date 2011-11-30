@@ -260,7 +260,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 //! Gets my Tag objects (ones created by the user) as array
 + (NSArray*) retrieveMyTagList
 {
-  return [TagPeer retrieveTagListByGroupId:0];
+  return [TagPeer retrieveTagListByGroupId:[[GroupPeer topLevelGroup] groupId]];
 }
 
 //! Gets system Tag objects as array
