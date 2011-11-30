@@ -41,7 +41,8 @@ class CEdictExporter
     $cn.execute("ALTER TABLE tags DROP force_off")
    
     # TOTAL HACK for starred words... unfortunately there's a problem in MySQL trying to insert 0 on an autoincrement field
-    $cn.execute("UPDATE tags_staging SET tag_id = 0 WHERE tag_name = 'My Starred Words'")
+    $cn.execute("UPDATE group_tag_link l, tags s SET l.tag_id = 0 WHERE (l.tag_id = s.tag_id AND s.tag_name = 'My Starred Words')")
+    $cn.execute("UPDATE tags SET tag_id = 0 WHERE tag_name = 'My Starred Words'")
    
     prt "\n\nExporting tables to temporary file"
     prt_dotted_line
