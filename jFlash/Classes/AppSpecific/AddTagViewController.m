@@ -47,7 +47,7 @@ enum EntrySectionRows
   if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
     self.currentCard = card;
-    self.myTagArray = [TagPeer retrieveMyTagList];
+    self.myTagArray = [TagPeer retrieveUserTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
     
     // Add "add" button to nav bar
@@ -97,7 +97,7 @@ enum EntrySectionRows
 //! Recreates tag membership caches and reloads table view
 - (void) _reloadTableData
 {
-  self.myTagArray = [TagPeer retrieveMyTagList];
+  self.myTagArray = [TagPeer retrieveUserTagList];
   self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
   [self.studySetTable reloadData];
 }
