@@ -178,13 +178,18 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 #if defined (LWE_CFLASH)
   CGFloat currSize = theLabel.font.pointSize;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_HEADWORD_TYPE] isEqualToString:SET_HEADWORD_TYPE_TRAD])
+  
+  // Don't change anything about the font if we're in English headword mode
+  if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E])
   {
-    theFont = [UIFont fontWithName:@"STHeitiTC-Medium" size:currSize];
-  }
-  else
-  {
-    theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
+    if ([[settings objectForKey:APP_HEADWORD_TYPE] isEqualToString:SET_HEADWORD_TYPE_TRAD])
+    {
+      theFont = [UIFont fontWithName:@"STHeitiTC-Medium" size:currSize];
+    }
+    else
+    {
+      theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
+    }
   }
 #endif
   return theFont;
