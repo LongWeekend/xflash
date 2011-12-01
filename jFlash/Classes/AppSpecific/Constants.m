@@ -82,11 +82,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
-      // Twitter App Keys
-      NSString * const LWE_TWITTER_CONSUMER_KEY     =	@"BGDlaaZWdjPo3oPudnIUNA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY      =	@"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
-
-
 // Don't use Cloudfront in development
 #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://s3.amazonaws.com/japanese-flash/jFlash-availablePlugins.plist";
