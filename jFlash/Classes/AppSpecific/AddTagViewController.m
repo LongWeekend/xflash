@@ -46,6 +46,7 @@ enum EntrySectionRows
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
+    LWE_ASSERT_EXC((card.isFault == NO), @"Card passed to AddTagViewcontroller should not be a fault!");
     self.currentCard = card;
     self.myTagArray = [TagPeer retrieveUserTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
