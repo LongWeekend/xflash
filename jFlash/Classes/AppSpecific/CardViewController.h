@@ -10,7 +10,7 @@
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
 #import "OHAttributedLabel.h"
-#import "MoodIconView.h"
+#import "MoodIcon.h"
 #import "StudyViewProtocols.h"
 
 extern NSString * const LWECardHtmlHeader;
@@ -63,6 +63,6 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
 
 @property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
-@property (nonatomic, retain) IBOutlet MoodIconView *moodIcon;
+@property (nonatomic, retain) IBOutlet MoodIcon *moodIcon;
 
 @end
