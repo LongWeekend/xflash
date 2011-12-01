@@ -96,6 +96,16 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 - (NSString *) headword
 {
+  return [self headwordIgnoringMode:NO];
+}
+
+- (NSString *) headwordIgnoringMode:(BOOL)ignoreMode
+{
+  if (ignoreMode)
+  {
+    return self._headword;
+  }
+  
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {

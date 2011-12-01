@@ -612,7 +612,8 @@ const NSInteger KSegmentedTableHeader = 100;
     [cell.contentView addSubview:searchResult];
   }
   searchResult.backgroundColor = [UIColor whiteColor];
-  searchResult.text = [card headword];
+  // Ignore == YES means we will always get the target language's headword
+  searchResult.text = [card headwordIgnoringMode:YES];
   
   // Update the glyph based on settings, if necessary
   searchResult.font = [Card configureFontForLabel:searchResult];

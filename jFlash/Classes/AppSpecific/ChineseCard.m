@@ -197,33 +197,34 @@
   return (NSDictionary*)dict;
 }
 
-
-
-- (NSString *) headword
+// -headword will call this automatically with a value of NO
+- (NSString *) headwordIgnoringMode:(BOOL)ignoreMode
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *type = [settings objectForKey:APP_HEADWORD_TYPE];
 
   NSString *hw = nil;
-  
-  if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
+  if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
   {
-    hw = self.headword_en;
+    hw = self._headword;
+  } 
+  else if ([type isEqualToString:SET_HEADWORD_TYPE_SIMP])
+  {
+    hw = self.headword_simp;
   }
-  else
+  
+  // Only run this code if we're not ignoring
+  if (ignoreMode == NO)
   {
-    if ([type isEqualToString:SET_HEADWORD_TYPE_TRAD])
+    if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
     {
-      hw = self._headword;
-    } 
-    else if ([type isEqualToString:SET_HEADWORD_TYPE_SIMP])
-    {
-      hw = self.headword_simp;
+      hw = self.headword_en;
     }
   }
   
   return hw;
 }
+
 
 #pragma mark - Class Plumbing
 

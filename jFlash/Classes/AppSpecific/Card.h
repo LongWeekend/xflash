@@ -25,7 +25,12 @@ extern NSString * const kLWESegmentedReadingKey;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 
 - (NSString*) reading;
+
+// Returns the headword, taking into account the app's current HW Mode setting
 - (NSString*) headword;
+
+// If ignoreMode == YES, returns the "headword" regardless of HW Mode
+- (NSString *) headwordIgnoringMode:(BOOL)ignoreMode;
 
 - (NSString*) meaning;
 

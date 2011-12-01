@@ -224,7 +224,8 @@
         [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
-      cell.textLabel.text = [tmpCard headword];
+      // Ignore = YES means we get the target language HW no matter what, no headword_en
+      cell.textLabel.text = [tmpCard headwordIgnoringMode:YES];
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
       cell.textLabel.font = [Card configureFontForLabel:cell.textLabel];
     }
