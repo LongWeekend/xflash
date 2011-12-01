@@ -344,13 +344,17 @@ NSInteger const kLWEBackupSection = 2;
     Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    NSString *tmpDetailText = [NSString stringWithFormat:@""];
-    if ([tmpGroup childGroupCount] > 0)
+
+    NSMutableArray *descItems = [NSMutableArray arrayWithCapacity:2];
+    if (tmpGroup.childGroupCount > 0)
     {
-      //Prefix the line below with code if we have groups
-      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup childGroupCount]]; 
+      [descItems addObject:[NSString stringWithFormat:NSLocalizedString(@"%d Groups",@"StudySetViewController.GroupCount"),tmpGroup.childGroupCount]]; 
     }
-    tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
+    if (tmpGroup.tagCount > 0)  // note that this is *not* else if, these are additive
+    {
+      [descItems addObject:[NSString stringWithFormat:NSLocalizedString(@"%d Sets",@"StudySetViewController.TagCount"),tmpGroup.tagCount]];
+    }
+    NSString *tmpDetailText = [descItems componentsJoinedByString:@"; "];
     
     // Set up the image
     UIImageView *tmpView = (UIImageView*)cell.imageView;
