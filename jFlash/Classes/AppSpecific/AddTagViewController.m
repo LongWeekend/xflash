@@ -134,8 +134,7 @@ enum EntrySectionRows
   }
 }
 
-
-#pragma mark - UITableViewDelegate methods
+#pragma mark - UITableViewDataSource Methods
 
 //! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,35 +160,6 @@ enum EntrySectionRows
   return i;
 }
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
-{
-  if (section == kMyTagsSection)
-  {
-    return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
-  }
-  else if (section == kSystemTagsSection)
-  {
-    return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
-  }
-  else
-  {
-    return self.currentCard.headword;
-  }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-  if (indexPath.section == kEntrySection)
-  {
-    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
-    return [LWEUITableUtils autosizeHeightForCellWithText:text];
-  }
-  else 
-  {
-    return 44.0f;
-  }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
@@ -201,7 +171,7 @@ enum EntrySectionRows
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   } 
-
+  
   // setup the cell for the full entry
   if (indexPath.section == kEntrySection)
   {
@@ -209,6 +179,7 @@ enum EntrySectionRows
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.minimumFontSize = FONT_SIZE_ADD_TAG_VC;
     label.numberOfLines = 0;
+    label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
     
     NSString *reading = nil;
@@ -251,12 +222,42 @@ enum EntrySectionRows
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    // Set up the cell
     cell.textLabel.text = tmpTag.tagName;
   }
   
   return cell;
+}
+
+
+#pragma mark - UITableViewDelegate methods
+
+-(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+{
+  if (section == kMyTagsSection)
+  {
+    return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
+  }
+  else if (section == kSystemTagsSection)
+  {
+    return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
+  }
+  else
+  {
+    return self.currentCard.headword;
+  }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+  if (indexPath.section == kEntrySection)
+  {
+    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
+    return [LWEUITableUtils autosizeHeightForCellWithText:text];
+  }
+  else 
+  {
+    return 44.0f;
+  }
 }
 
 
