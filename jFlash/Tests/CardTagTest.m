@@ -58,12 +58,10 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
 - (void)testAddThenRemoveCardsFromStudySet
 {
   Tag *newlyCreatedTag = [TagPeer createTagNamed:kTagTestDefaultName inGroup:[GroupPeer topLevelGroup]];
-  NSInteger newlyCreatedTagId = [newlyCreatedTag tagId];
-  
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
 
   //get the list of card ids on the sample group study set and copy it over the newly created tag.
-  NSArray *cardIds = [CardPeer retrieveCardIdsForTagId:longWeekendFavTag.tagId];
+  NSArray *cardIds = [CardPeer retrieveFaultedCardsForTag:longWeekendFavTag];
   for (Card *card in cardIds)
   {
     BOOL subscribed = [TagPeer subscribeCard:card toTag:newlyCreatedTag];
@@ -71,7 +69,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   }
   
   //Make sure that the test study set has the same count as the sample study set.
-  NSArray *newCardIds = [CardPeer retrieveCardIdsForTagId:newlyCreatedTagId];
+  NSArray *newCardIds = [CardPeer retrieveFaultedCardsForTag:newlyCreatedTag];
   STAssertEquals([cardIds count],[newCardIds count],@"Count number is diferent from default tag and the newly created group study: %@", [newlyCreatedTag tagName]);
   
   //Remove the card one by one.
