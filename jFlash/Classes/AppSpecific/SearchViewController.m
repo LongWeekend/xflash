@@ -521,14 +521,14 @@ const NSInteger KSegmentedTableHeader = 100;
   BOOL returnVal = NO;
   if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
   {
-    return [self.membershipCacheArray containsObject:[NSNumber numberWithInt:theCard.cardId]];
+    return [self.membershipCacheArray containsObject:theCard];
   }
   else
   {
     // Rebuild cache and fail over to manual function
-    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-    self.membershipCacheArray = [[[CardPeer retrieveCardIdsForTagId:STARRED_TAG_ID] mutableCopy] autorelease];
-    returnVal = [TagPeer card:theCard isMemberOfTag:favoritesTag];
+    Tag *starredTag = [[CurrentState sharedCurrentState] favoritesTag];
+    self.membershipCacheArray = [[[CardPeer retrieveFaultedCardsForTag:starredTag] mutableCopy] autorelease];
+    returnVal = [TagPeer card:theCard isMemberOfTag:starredTag];
   }
   return returnVal;
 }
@@ -548,7 +548,6 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
     Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
-    NSInteger cardId = [theCard cardId];
     
     // Use cache for toggling status if we have it
     BOOL isMember = NO;
@@ -566,7 +565,7 @@ const NSInteger KSegmentedTableHeader = 100;
       [TagPeer subscribeCard:theCard toTag:favoritesTag];
       
       // Now add the new ID onto the end of the search cache
-      [self.membershipCacheArray addObject:[NSNumber numberWithInt:cardId]];
+      [self.membershipCacheArray addObject:theCard];
     }
     else
     {
@@ -588,7 +587,7 @@ const NSInteger KSegmentedTableHeader = 100;
         return;
       }
       
-      [self.membershipCacheArray removeObject:[NSNumber numberWithInt:theCard.cardId]];
+      [self.membershipCacheArray removeObject:theCard];
     }
 
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];

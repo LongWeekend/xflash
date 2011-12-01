@@ -25,7 +25,7 @@
  */
 @implementation StudySetWordsViewController
 
-@synthesize tag, cardIds, activityIndicator;
+@synthesize tag, cards, activityIndicator;
 
 #pragma mark - Initializer
 
@@ -39,11 +39,9 @@
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self)
   {
-    if (initTag.tagId >= 0)
-    {
-      self.tag = initTag;
-      [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
-    }    
+    LWE_ASSERT_EXC((initTag.tagId >= 0), @"You can't launch this VC with an uninitialized tag");
+    self.tag = initTag;
+    [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
     
     UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator = av;
@@ -57,6 +55,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.navigationItem.title = self.tag.tagName;
   
   // For when the glyph type changes (e.g. Chinese font type)
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -81,7 +80,6 @@
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.backgroundColor = [UIColor clearColor];
-  self.navigationItem.title = [self.tag tagName];
 }
 
 - (void)viewDidUnload
@@ -122,18 +120,18 @@
   NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
-    [self.cardIds addObject:[NSNumber numberWithInt:theCard.cardId]];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cardIds indexOfObject:[NSNumber numberWithInt:theCard.cardId]] inSection:kWordSetListSections];
+    [self.cards addObject:theCard];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.cards indexOfObject:theCard] inSection:kWordSetListSections];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                           withRowAnimation:UITableViewRowAnimationRight];
   }
   else if ([changeType isEqualToString:LWETagContentCardRemoved])
   {
-    NSInteger index = [self.cardIds indexOfObject:[NSNumber numberWithInt:theCard.cardId]];
+    NSInteger index = [self.cards indexOfObject:theCard];
     if (index != NSNotFound)
     {
       //remove the card, reload the table
-      [self.cardIds removeObjectAtIndex:index];
+      [self.cards removeObjectAtIndex:index];
       NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:kWordSetListSections];
       [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                             withRowAnimation:UITableViewRowAnimationRight];
@@ -147,7 +145,7 @@
 - (void) _loadWordListInBackground
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  self.cardIds = [[[CardPeer retrieveCardIdsForTagId:self.tag.tagId] mutableCopy] autorelease];
+  self.cards = [[[CardPeer retrieveFaultedCardsForTag:self.tag] mutableCopy] autorelease];
   [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
@@ -169,11 +167,11 @@
   int returnCount = 0;
   if (section == kWordSetListSections)
   {
-    if ([self cardIds])
+    if ([self cards])
     {
       // Show cards & stop the animator
       [self.activityIndicator stopAnimating];
-      returnCount = [self.cardIds count];
+      returnCount = [self.cards count];
     }
     else
     {
@@ -205,7 +203,7 @@
   UITableViewCell *cell = nil;
   if (indexPath.section == kWordSetListSections)
   {
-    if (self.cardIds == nil)
+    if (self.cards == nil)
     {
       // "Loading words..." pre-display cell
       cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
@@ -218,11 +216,12 @@
       // The actual words, once loaded
       cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      Card *tmpCard = [CardPeer retrieveCardByPK:[[self.cardIds objectAtIndex:indexPath.row] intValue]];
-      if (tmpCard.headword == nil)
+      Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
+      if (tmpCard.isFault)
       {
+        // Lazy load & update our array
         tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
-        [self.cardIds replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+        [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
       cell.textLabel.text = [tmpCard headword];
@@ -254,8 +253,7 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     NSError *error = nil;
-    NSInteger cardId = [[self.cardIds objectAtIndex:indexPath.row] intValue];
-    Card *card = [CardPeer retrieveCardByPK:cardId];
+    Card *card = [self.cards objectAtIndex:indexPath.row];
     
     // Set this to signal to the notification callback that we don't need to do anything
     BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
@@ -323,8 +321,7 @@
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
-    Card *card = [CardPeer retrieveCardByPK:[[self.cardIds objectAtIndex:indexPath.row] intValue]];
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:card];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self.cards objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:tmpVC animated:YES];
     [tmpVC release];
   }
@@ -336,7 +333,7 @@
 - (void)dealloc
 {
   [tag release]; 
-  [cardIds release];
+  [cards release];
   [activityIndicator release];
   [super dealloc];
 }
