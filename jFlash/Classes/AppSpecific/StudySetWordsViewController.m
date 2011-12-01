@@ -183,14 +183,15 @@
   }
   else
   {
-    // non-editable tags can only be studied
-    if(self.tag.tagEditable == 0)
+    if (self.tag.isEditable)
     {
-      return 1;
-    }
-    else // editable tags can be edited and eventually shared
-    {
+      // editable tags can be edited and eventually shared
       returnCount = settingsRowsLength;
+    }
+    else
+    {
+      // non-editable tags can only be studied
+      returnCount = 1;
     }
   }
   return returnCount;
@@ -253,7 +254,8 @@
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
     NSError *error = nil;
-    Card *card = [self.cardIds objectAtIndex:indexPath.row];
+    NSInteger cardId = [[self.cardIds objectAtIndex:indexPath.row] intValue];
+    Card *card = [CardPeer retrieveCardByPK:cardId];
     
     // Set this to signal to the notification callback that we don't need to do anything
     BOOL result = [TagPeer cancelMembership:card fromTag:self.tag error:&error];
@@ -277,12 +279,13 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == kWordSetOptionsSection)
+  BOOL returnVal = NO;
+  // Only let the user edit the word list, and only if the tag is editable
+  if (self.tag.isEditable && indexPath.section == kWordSetListSections)
   {
-    //We dont want user to remove the "Begin studying these" section.
-    return NO;
+    returnVal = YES;
   }
-  return YES;
+  return returnVal;
 }
 
 

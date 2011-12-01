@@ -73,6 +73,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
   return [GroupPeer parentGroupIdOfTag:self];
 }
 
+- (BOOL) isEditable
+{
+  return (self.tagEditable == 1);
+}
+
 #pragma mark - Level algorithm
 
 /**

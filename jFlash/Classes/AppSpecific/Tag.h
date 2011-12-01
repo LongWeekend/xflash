@@ -21,6 +21,10 @@ extern NSInteger const kLWEUninitializedTagId;
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) hydrate;
+
+//! Returns YES if the user is allowed to edit this tag (either description or the contents)
+- (BOOL) isEditable;
+
 - (void) populateCardIds;
 - (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
 - (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
