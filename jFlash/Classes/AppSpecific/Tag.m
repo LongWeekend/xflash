@@ -28,6 +28,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
 @synthesize tagId, tagName, tagEditable, tagDescription;
 @synthesize cardCount, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
 
++ (Tag *) starredWordsTag
+{
+  return [TagPeer retrieveTagById:STARRED_TAG_ID];
+}
+
 - (id) init
 {
   if ((self = [super init]))

@@ -22,6 +22,9 @@ extern NSInteger const kLWEUninitializedTagId;
 - (void) hydrate: (FMResultSet*)rs;
 - (void) hydrate;
 
+//! Factory method that returns the starred words tag
++ (Tag *) starredWordsTag;
+
 //! Returns YES if the user is allowed to edit this tag (either description or the contents)
 - (BOOL) isEditable;
 

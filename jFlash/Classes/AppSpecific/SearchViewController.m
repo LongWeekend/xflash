@@ -106,10 +106,23 @@ const NSInteger KSegmentedTableHeader = 100;
     [self _addSearchControlToHeader];
   }
 
+  // Register for notification when tag content changes (might be starred words.. in which case we want to know)
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  
   // Make the spinner
   UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   [self set_activityIndicator:activityIndicator];
   [activityIndicator release];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  self.tableView = nil;
+  self.searchBar = nil;
+  
+  // Stop observing for tag content changes
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -191,6 +204,39 @@ const NSInteger KSegmentedTableHeader = 100;
   }
 }
 
+#pragma mark - TagContentDidChange Methods
+
+- (void) tagContentDidChange:(NSNotification *)aNotification
+{
+  // Foremost, if the tag isn't starred words, we don't care -- quick return
+  if ([aNotification.object isEqual:[Tag starredWordsTag]] == NO)
+  {
+    return;
+  }
+  
+  // OK, now let's see to add a star or take it away.
+  Card *card = [aNotification.userInfo objectForKey:LWETagContentDidChangeCardKey];
+  NSString *changeType = [aNotification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
+  if ([changeType isEqualToString:LWETagContentCardAdded])
+  {
+    if ([self._cardSearchArray containsObject:card])
+    {
+      // Add to the cache & reload so the star appears
+      [self.membershipCacheArray addObject:[NSNumber numberWithInt:card.cardId]];
+      [self.tableView reloadData];
+    }
+  }
+  else if ([changeType isEqualToString:LWETagContentCardRemoved])
+  {
+    // Only react if this card is listed in the search results
+    BOOL cardInSearchResults = [self _checkMembershipCacheForCard:card];
+    if (cardInSearchResults)
+    {
+      [self.membershipCacheArray removeObject:[NSNumber numberWithInt:card.cardId]];
+      [self.tableView reloadData];
+    }
+  }
+}
 
 #pragma mark - UISearchBarDelegate methods
 
