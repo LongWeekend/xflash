@@ -126,9 +126,10 @@ NSInteger const kLWEBackupSection = 2;
     if ([self.group isTopLevelGroup])
     {
       NSMutableArray *tmpTagArray = [NSMutableArray array];
+      Tag *starredTag = [Tag starredWordsTag];
       for (Tag *tmpTag in self.tagArray)
       {
-        if (tmpTag.tagId == STARRED_TAG_ID)
+        if ([tmpTag isEqual:starredTag])
         {
           // Put it at the beginning
           [tmpTagArray insertObject:tmpTag atIndex:0];
