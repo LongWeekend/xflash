@@ -21,11 +21,12 @@
     {
       self.mode = kUserViewModeEdit;
       self.originalUserNickname = aUser.userNickname;
-      self.navigationItem.title = aUser.userNickname;
+      self.title = aUser.userNickname;
       self.selectedUser = aUser;
     }
     else
     {
+      self.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
       self.mode = kUserViewModeAdd;
       self.selectedUser = [[[User alloc] init] autorelease];
     }

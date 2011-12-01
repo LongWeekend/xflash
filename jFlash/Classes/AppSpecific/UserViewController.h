@@ -19,9 +19,6 @@
 - (void) showUserDetailsView;
 - (void) activateUserWithModal:(User*) user;
 
-//! Loading modal when switching users on large sets
-@property (nonatomic, retain) LWELoadingView *loadingView;
-
 //! Holds an array of all users
 @property (nonatomic, retain) NSMutableArray *usersArray;
 
