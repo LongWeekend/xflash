@@ -25,7 +25,7 @@
 
 @synthesize baseHtml;
 
-@synthesize  moodIcon, moodIconBtn, percentCorrectLabel, percentCorrectTalkBubble;
+@synthesize moodIcon;
 
 #pragma mark - Flow Methods
 
@@ -95,12 +95,6 @@
   [self.meaningWebView shutOffBouncing];
   self.meaningWebView.backgroundColor = [UIColor clearColor];
   
-  // Create a default mood icon object
-  self.moodIcon = [[[MoodIconView alloc] init] autorelease];
-  self.moodIcon.moodIconBtn = self.moodIconBtn;
-  self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
-  
-  self.percentCorrectLabel.text = percentCorrectLabelStartText;
   [self.moodIcon updateMoodIcon:100.0f];
   
   // For languages such as Chinese, we may need to configure the font
@@ -108,22 +102,6 @@
 }
 
 #pragma mark - IBAction Methods
-
-/**
- * Turns the % correct button on and off, in case it is in the way of the meaning
- */
-- (IBAction) doTogglePercentCorrectBtn
-{
-  // Hide the percentage talk bubble on click; use its current state to check which we should do.
-  if (self.percentCorrectTalkBubble.hidden == YES)
-  {
-    [self turnPercentCorrectOn];
-  }
-  else
-  {
-    [self turnPercentCorrectOff];
-  }
-}
 
 /**
  * If the reading scroll container is hidden, this shows it.
@@ -142,18 +120,6 @@
 }
 
 #pragma mark - Public Helper Methods
-
-- (void) turnPercentCorrectOff
-{
-  self.percentCorrectTalkBubble.hidden = YES;
-  self.percentCorrectLabel.hidden = YES;
-}
-
-- (void) turnPercentCorrectOn
-{
-  self.percentCorrectTalkBubble.hidden = NO;
-  self.percentCorrectLabel.hidden = NO;
-}
 
 - (void) turnReadingOn
 {
@@ -309,21 +275,13 @@
 	self.cardReadingLabel = nil;
 	self.toggleReadingBtn = nil;
 	self.meaningWebView = nil;
-  
 	self.moodIcon = nil;
-	self.moodIconBtn = nil;
-	self.percentCorrectLabel = nil;
-	self.percentCorrectTalkBubble = nil;
 }
 
 
 - (void)dealloc 
 {
-  //moodicon
   [moodIcon release];
-  [moodIconBtn release];
-  [percentCorrectLabel release];
-	[percentCorrectTalkBubble release];
 
   [baseHtml release];
   [_tmpJavascript release];

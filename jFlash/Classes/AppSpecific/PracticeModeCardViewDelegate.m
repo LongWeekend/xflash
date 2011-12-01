@@ -41,10 +41,10 @@
 - (void) cardViewDidChangeMode:(CardViewController *)cardViewController
 {
   // You can tap the HH in practice mode.
-  cardViewController.moodIconBtn.enabled = YES;
+  cardViewController.moodIcon.moodIconBtn.enabled = YES;
 
   // Show the percent correct when in practice mode
-  [cardViewController turnPercentCorrectOn];
+  [cardViewController.moodIcon turnPercentCorrectOn];
 }
 
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
