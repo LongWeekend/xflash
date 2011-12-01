@@ -12,8 +12,6 @@
 #import "LWETDelegates.h"
 #import "LWELoadingView.h"
 
-#define kMaxChars					132
-
 @class LWETwitterEngine;
 @class LWETUser;
 

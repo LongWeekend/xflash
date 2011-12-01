@@ -387,17 +387,17 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
   NSInteger readingLength = [self.currentCard.reading length];
   NSInteger meaningLength = [[self.currentCard meaningWithoutMarkup] length];
   
-  // Now go from most conservative (headword exceeds kMaxChars) 
-  // to most liberal (the whole thing fits in kMaxChars)  
-  if (headwordLength > kMaxChars)
+  // Now go from most conservative (headword exceeds LWE_TWITTER_MAX_CHARS) 
+  // to most liberal (the whole thing fits in LWE_TWITTER_MAX_CHARS)  
+  if (headwordLength > LWE_TWITTER_MAX_CHARS)
   {
     // Headword alone is longer than kMaxChars
-    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.currentCard.headword substringToIndex:kMaxChars]];
+    str = [[NSMutableString alloc] initWithFormat:@"%@", [self.currentCard.headword substringToIndex:LWE_TWITTER_MAX_CHARS]];
   }
   else
   {
     // Add four because we add brackets and spaces
-    if ((headwordLength + readingLength + 4) > kMaxChars)
+    if ((headwordLength + readingLength + 4) > LWE_TWITTER_MAX_CHARS)
     {
       // Headword + reading is too long, so just use headword.
       str = [[NSMutableString alloc] initWithFormat:@"%@",self.currentCard.headword];
@@ -409,7 +409,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
   }
 
   // Now determine if we have any space left for a meaning.
-	NSInteger charLeftBeforeMeaning = kMaxChars - [str length];
+	NSInteger charLeftBeforeMeaning = LWE_TWITTER_MAX_CHARS - [str length];
   
   // If there are less than 5, just ignore - not worth it
   if (charLeftBeforeMeaning > 5)

@@ -91,7 +91,7 @@
 - (void) textViewDidChange:(UITextView *)textView
 {
 	NSUInteger c = [self.tweetTxt.text length];
-	NSInteger length = kMaxChars - c;
+	NSInteger length = LWE_TWITTER_MAX_CHARS - c;
 	if (length >= 0)
 	{
 		self.counterLbl.text = [NSString stringWithFormat:@"%d", length];
@@ -99,7 +99,7 @@
 	else
 	{
     self.counterLbl.text = [NSString stringWithFormat:@"%d", 0];
-		textView.text = [textView.text substringToIndex:kMaxChars];
+		textView.text = [textView.text substringToIndex:LWE_TWITTER_MAX_CHARS];
 	}
 }
 
@@ -148,7 +148,7 @@
 	self.navigationItem.rightBarButtonItem = _signOutBtn;
 	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
-	self.counterLbl.text = [NSString stringWithFormat:@"%d",(kMaxChars-[_tweetWord length])];
+	self.counterLbl.text = [NSString stringWithFormat:@"%d",(LWE_TWITTER_MAX_CHARS-[_tweetWord length])];
 }
 
 - (void)viewWillAppear:(BOOL)animated
