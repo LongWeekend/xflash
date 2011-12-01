@@ -46,12 +46,10 @@
     self.commitChangesBtn.hidden = YES;
     self.activateUserBtn.hidden = YES;
   }
-}
-
-- (void)viewDidAppear:(BOOL)animated 
-{
-  [super viewDidAppear:animated];
-  self.userNicknameTextField.text = [self.selectedUser userNickname];
+  else
+  {
+    self.userNicknameTextField.text = [self.selectedUser userNickname];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated 
