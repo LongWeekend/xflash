@@ -10,7 +10,7 @@
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
 #import "OHAttributedLabel.h"
-#import "MoodIcon.h"
+#import "MoodIconView.h"
 #import "StudyViewProtocols.h"
 
 extern NSString * const LWECardHtmlHeader;
@@ -71,7 +71,6 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
 @property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
 @property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
-@property (nonatomic, retain) MoodIcon *moodIcon;
-@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
+@property (nonatomic, retain) MoodIconView *moodIcon;
 
 @end

@@ -25,7 +25,7 @@
 
 @synthesize baseHtml;
 
-@synthesize  moodIcon, moodIconBtn, percentCorrectLabel, hhAnimationView, percentCorrectTalkBubble;
+@synthesize  moodIcon, moodIconBtn, percentCorrectLabel, percentCorrectTalkBubble;
 
 #pragma mark - Flow Methods
 
@@ -96,7 +96,7 @@
   self.meaningWebView.backgroundColor = [UIColor clearColor];
   
   // Create a default mood icon object
-  self.moodIcon = [[[MoodIcon alloc] init] autorelease];
+  self.moodIcon = [[[MoodIconView alloc] init] autorelease];
   self.moodIcon.moodIconBtn = self.moodIconBtn;
   self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
   
@@ -312,7 +312,6 @@
   
 	self.moodIcon = nil;
 	self.moodIconBtn = nil;
-	self.hhAnimationView = nil;
 	self.percentCorrectLabel = nil;
 	self.percentCorrectTalkBubble = nil;
 }
@@ -323,7 +322,6 @@
   //moodicon
   [moodIcon release];
   [moodIconBtn release];
-  [hhAnimationView release];
   [percentCorrectLabel release];
 	[percentCorrectTalkBubble release];
 
