@@ -14,7 +14,13 @@
 //! Update the mood icon depending on the current percentage correct
 - (void) updateMoodIcon:(CGFloat)percentCorrect;
 
-@property (retain,nonatomic) IBOutlet UIButton *moodIconBtn;
-@property (retain,nonatomic) IBOutlet UILabel *percentCorrectLabel;
+- (IBAction) doTogglePercentCorrectBtn;
+
+- (void) turnPercentCorrectOff;
+- (void) turnPercentCorrectOn;
+
+@property (retain, nonatomic) IBOutlet UIButton *moodIconBtn;
+@property (retain, nonatomic) IBOutlet UILabel *percentCorrectLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *talkBubble;
 
 @end

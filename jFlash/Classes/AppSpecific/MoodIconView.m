@@ -10,8 +10,39 @@
 
 //! Handles "hot head" mood icons
 @implementation MoodIconView
+@synthesize talkBubble;
 
 @synthesize percentCorrectLabel,moodIconBtn;
+
+/**
+ * Turns the % correct button on and off, in case it is in the way of the meaning
+ */
+- (IBAction) doTogglePercentCorrectBtn
+{
+  // Hide the percentage talk bubble on click; use its current state to check which we should do.
+  if (self.talkBubble.hidden == YES)
+  {
+    [self turnPercentCorrectOn];
+  }
+  else
+  {
+    [self turnPercentCorrectOff];
+  }
+}
+
+#pragma mark -
+
+- (void) turnPercentCorrectOff
+{
+  self.talkBubble.hidden = YES;
+  self.percentCorrectLabel.hidden = YES;
+}
+
+- (void) turnPercentCorrectOn
+{
+  self.talkBubble.hidden = NO;
+  self.percentCorrectLabel.hidden = NO;
+}
 
 - (void) updateMoodIcon:(CGFloat)percentCorrect
 {
@@ -48,4 +79,11 @@
   [hotHeadsArray release];
 }
 
+- (void)dealloc
+{
+  [moodIconBtn release];
+  [percentCorrectLabel release];
+  [talkBubble release];
+  [super dealloc];
+}
 @end
