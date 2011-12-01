@@ -69,6 +69,7 @@
   }
   
   [cardViewController.moodIcon updateMoodIcon:self.currentPercentageCorrect];
+  [cardViewController.moodIcon turnPercentCorrectOn];
 }
 
 - (BOOL)shouldRevealCardView:(CardViewController *)cvc
