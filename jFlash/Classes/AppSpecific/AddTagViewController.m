@@ -244,7 +244,8 @@ enum EntrySectionRows
   }
   else
   {
-    return self.currentCard.headword;
+    // Return the native language HW no matter what
+    return [self.currentCard headwordIgnoringMode:YES];
   }
 }
 
