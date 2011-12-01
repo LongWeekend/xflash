@@ -12,7 +12,17 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 @implementation Card 
 
 @synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount;
-@synthesize player = _player;
+@synthesize player = _player, isFault = _isFault;
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    _isFault = YES;
+  }
+  return self;
+}
 
 #pragma mark - Public getter
 
@@ -158,6 +168,9 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   self.userId   =    [rs intForColumn:@"user_id"];
   self.rightCount =  [rs intForColumn:@"right_count"];
   self.wrongCount =  [rs intForColumn:@"wrong_count"];
+  
+  // Now that we have hydrated, note that this object is no longer a fault
+  _isFault = NO;
 }
 
 - (BOOL)isEqual:(id)object
@@ -165,7 +178,7 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   if ([object isKindOfClass:[self class]])
   {
     Card *anotherCard = (Card *)object;
-    return [anotherCard cardId] == [self cardId];
+    return (anotherCard.cardId == self.cardId);
   }
   return NO;
 }

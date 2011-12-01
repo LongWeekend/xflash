@@ -51,6 +51,8 @@ extern NSString * const kLWESegmentedReadingKey;
  */
 + (UIFont *) configureFontForLabel:(UILabel*)theLabel;
 
+//! If YES, this Card object isn't really a card -- jsut has an ID and hasn't been fetched.
+@property (readonly) BOOL isFault;
 
 //! PK of the card
 @property (nonatomic) NSInteger cardId;
