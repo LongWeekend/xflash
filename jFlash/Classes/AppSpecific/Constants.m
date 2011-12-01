@@ -122,10 +122,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
   #else
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3jxezdeu5e50q.cloudfront.net/cFlash-availablePlugins.plist";
   #endif
-
-      // Twitter App Keys
-      NSString * const LWE_TWITTER_CONSUMER_KEY     =	@"2xLbYtl787ShwJBFIC1QaA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY      = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
 #endif
 
 
