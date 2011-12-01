@@ -222,7 +222,7 @@ const NSInteger KSegmentedTableHeader = 100;
     if ([self._cardSearchArray containsObject:card])
     {
       // Add to the cache & reload so the star appears
-      [self.membershipCacheArray addObject:[NSNumber numberWithInt:card.cardId]];
+      [self.membershipCacheArray addObject:card];
       [self.tableView reloadData];
     }
   }
@@ -232,7 +232,7 @@ const NSInteger KSegmentedTableHeader = 100;
     BOOL cardInSearchResults = [self _checkMembershipCacheForCard:card];
     if (cardInSearchResults)
     {
-      [self.membershipCacheArray removeObject:[NSNumber numberWithInt:card.cardId]];
+      [self.membershipCacheArray removeObject:card];
       [self.tableView reloadData];
     }
   }
