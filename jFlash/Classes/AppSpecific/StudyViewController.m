@@ -489,7 +489,7 @@
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card
 {
   BOOL returnVal = YES;
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY])
+  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
     returnVal = [card hasExampleSentences];
   }
@@ -503,7 +503,7 @@
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card
 {
   BOOL returnVal = NO;
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:AUDIO_SAMPLES_KEY])
+  if ([CurrentState pluginKeyIsLoaded:AUDIO_SAMPLES_KEY])
   {
     returnVal = [card hasAudio];
   }
@@ -667,8 +667,8 @@
 - (IBAction) launchExampleInstaller
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:EXAMPLE_DB_KEY];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
+  Plugin *exPlugin = [pm.availableForDownloadPlugins objectForKey:EXAMPLE_DB_KEY];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
 
@@ -704,8 +704,7 @@
 - (void) _setupScrollView
 {
   UIViewController *vc = nil;
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([pm pluginIsLoaded:EXAMPLE_DB_KEY])
+  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
     // We have EX db installed
     self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
