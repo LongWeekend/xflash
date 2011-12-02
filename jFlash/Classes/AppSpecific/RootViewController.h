@@ -13,7 +13,6 @@
 #import "Appirater.h"
 #import "Constants.h"
 #import "LWEFile.h"
-#import "LWEDownloader.h"
 
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX     0
 #define STUDY_SET_VIEW_CONTROLLER_TAB_INDEX 1
@@ -24,6 +23,7 @@ extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldShowDownloadModal;
 extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowStudySetView;
+extern NSString * const LWEShouldShowStudyView;
 extern NSString * const LWEShouldShowPopover;
 
 @interface RootViewController : UIViewController <UIAlertViewDelegate>
