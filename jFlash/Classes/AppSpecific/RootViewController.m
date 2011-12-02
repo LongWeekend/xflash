@@ -313,27 +313,23 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
  */
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
+  Plugin *thePlugin = (Plugin *)aNotification.object;
+
   // Instantiate downloader with jFlash download URL & destination filename
   //TODO: iPad customization here
   ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  //[dlViewController setTitle:[[aNotification userInfo] objectForKey:@"plugin_name"]];
   dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
   dlViewController.showDetailedViewOnAppear = YES;
   dlViewController.startTaskOnAppear = NO;
-  
-  // Use HTML from PLIST
-  NSString *htmlString = [aNotification.userInfo objectForKey:@"plugin_html_content"];
-  dlViewController.webViewContent = htmlString;
+  dlViewController.webViewContent = thePlugin.htmlString;
 
   // Get path information
   NSURL *targetURL = [NSURL URLWithString:[aNotification.userInfo objectForKey:@"plugin_target_url"]];
-  NSString *targetPath = [aNotification.userInfo objectForKey:@"plugin_target_path"];
   if (targetURL && targetPath)
   {
     LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
     packageDownloader.progressDelegate = dlViewController;
-    LWEPackage *pluginPackage = [LWEPackage packageWithUrl:targetURL destinationFilepath:[targetPath stringByAppendingString:@".zip"]];
-    [packageDownloader queuePackage:pluginPackage];
+    [packageDownloader queuePackage:thePlugin.downloadPackage];
     dlViewController.taskHandler = packageDownloader;
     [packageDownloader release];
     [self _showModalWithViewController:dlViewController useNavController:YES];

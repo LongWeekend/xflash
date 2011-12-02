@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Long Weekend LLC. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import "LWEPackage.h"
 
 typedef enum
 {
@@ -21,6 +23,8 @@ typedef enum
 
 - (BOOL) isNewVersionOfPlugin:(Plugin *)plugin;
 
+- (LWEPackage *) downloadPackage;
+
 - (NSString *) fullPath;
 - (BOOL) isDirectoryPlugin;
 - (BOOL) isDatabasePlugin;
@@ -33,5 +37,6 @@ typedef enum
 @property (retain) NSString *version;
 @property (retain) NSString *pluginType;
 @property (retain) NSString *pluginId;
+@property (retain) NSString *targetURL;
 
 @end

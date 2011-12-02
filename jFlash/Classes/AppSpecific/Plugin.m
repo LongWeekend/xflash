@@ -10,7 +10,7 @@
 
 @implementation Plugin
 
-@synthesize name, details, htmlString, filePath, pluginId, pluginType, version, fileLocation;
+@synthesize name, details, htmlString, targetURL, filePath, pluginId, pluginType, version, fileLocation;
 
 #pragma mark - Initialization/Constructors
 
@@ -34,6 +34,7 @@
   [encoder encodeObject:self.name forKey:@"name"];
   [encoder encodeObject:self.details forKey:@"details"];
   [encoder encodeObject:self.version forKey:@"version"];
+  [encoder encodeObject:self.targetURL forKey:@"targetURL"];
   [encoder encodeObject:self.htmlString forKey:@"htmlString"];
   [encoder encodeObject:self.filePath forKey:@"filePath"];
   [encoder encodeObject:self.pluginId forKey:@"pluginId"];
@@ -51,6 +52,7 @@
     self.details = [aDecoder decodeObjectForKey:@"details"];
     self.version = [aDecoder decodeObjectForKey:@"version"];
     self.filePath = [aDecoder decodeObjectForKey:@"filePath"];
+    self.targetURL = [aDecoder decodeObjectForKey:@"targetURL"];
     self.htmlString = [aDecoder decodeObjectForKey:@"htmlString"];
     self.pluginId = [aDecoder decodeObjectForKey:@"pluginId"];
     self.pluginType = [aDecoder decodeObjectForKey:@"pluginType"];
@@ -102,6 +104,12 @@
   return [self.pluginType isEqualToString:@"database"];
 }
 
+- (LWEPackage *) downloadPackage
+{
+  LWEPackage *pluginPackage = [LWEPackage packageWithUrl:self.targetURL
+                                     destinationFilepath:[[self fullPath] stringByAppendingString:@".zip"]];
+}
+
 - (BOOL) isEqual:(id)object
 {
   BOOL returnVal = NO;
@@ -122,6 +130,7 @@
   [details release];
   [version release];
   [htmlString release];
+  [targetURL release];
   [filePath release];
   [pluginType release];
   [pluginId release];
