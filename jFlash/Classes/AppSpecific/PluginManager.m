@@ -81,22 +81,20 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 	}
 	else if (bundlePathExists)
 	{
-		if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER] == NO)
-		{
-			NSDictionary *installedPluginsDict = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
-			NSArray *plugins = [[NSDictionary dictionaryWithContentsOfFile:bundlePath] objectForKey:@"Plugins"];
-			
-			NSMutableDictionary *availablePlugins = [NSMutableDictionary dictionary];
-			for (NSDictionary *pluginHash in plugins)
-			{
-        Plugin *plugin = [Plugin pluginWithDictionary:pluginHash];
-				if ([installedPluginsDict objectForKey:plugin.pluginId] == nil)
-				{
-					[availablePlugins setValue:plugin forKey:plugin.pluginId];
-				}
-			}
-      self.availableForDownloadPlugins = availablePlugins;
-		}
+    // If Doc path doesn't exist, it must be first load
+    NSDictionary *installedPluginsDict = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
+    NSArray *plugins = [[NSDictionary dictionaryWithContentsOfFile:bundlePath] objectForKey:@"Plugins"];
+    
+    NSMutableDictionary *availablePlugins = [NSMutableDictionary dictionary];
+    for (NSDictionary *pluginHash in plugins)
+    {
+      Plugin *plugin = [Plugin pluginWithDictionary:pluginHash];
+      if ([installedPluginsDict objectForKey:plugin.pluginId] == nil)
+      {
+        [availablePlugins setValue:plugin forKey:plugin.pluginId];
+      }
+    }
+    self.availableForDownloadPlugins = availablePlugins;
 	}
 }
 

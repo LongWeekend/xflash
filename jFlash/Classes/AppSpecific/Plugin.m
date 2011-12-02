@@ -16,13 +16,18 @@
 
 + (id) pluginWithDictionary:(NSDictionary *)dict
 {
-  id plugin = [[[[self class] alloc] init] autorelease];
+  Plugin *plugin = [[[[self class] alloc] init] autorelease];
   for (NSString *key in dict)
   {
     // KVC-style setters
     id value = [dict valueForKey:key];
     [plugin setValue:value forKey:key];
   }
+  
+  // Put a little sanity checking here to make sure we have the bare-bones
+  LWE_ASSERT_EXC(plugin.name, @"Every plugin needs a name");
+  LWE_ASSERT_EXC(plugin.filePath, @"Every plugin needs a filePath");
+  LWE_ASSERT_EXC(plugin.pluginId, @"Every plugin needs pluginId");
   return plugin;
 }
 
