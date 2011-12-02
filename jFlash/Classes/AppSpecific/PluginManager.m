@@ -68,7 +68,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 	}
 	else if ([LWEFile fileExists:bundlePath])
 	{
-		if (![LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
+		if (![LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER])
 		{
 			LWE_LOG(@"Available plugin plist found in the bundle path. Because, by the time of checking, the device is not connected to the internet.");
 			NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
@@ -600,7 +600,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 - (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail
 {	
   // Check if they have network first, if so, start the background thread
-	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER_LIST])
+	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER])
 	{
     if (asynch)
     {
@@ -618,8 +618,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   }
 }
 
-#pragma mark -
-#pragma mark Privates
+#pragma mark - Privates
 
 /**
  * Returns the path for a plugin that was downloaded given a filename
@@ -698,7 +697,8 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 {
   //TODO: Look at comment line 642? Any better solution?
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:LWE_PLUGIN_SERVER_LIST]];
+  NSString *urlStr = [LWE_PLUGIN_SERVER stringByAppendingString:LWE_PLUGIN_LIST_REL_URL];
+  NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
   [pool release];
   [self performSelectorOnMainThread:@selector(_plistDidDownload:) withObject:dictionary waitUntilDone:NO];
 }

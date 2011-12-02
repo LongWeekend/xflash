@@ -91,8 +91,9 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 
 // PLugins
 extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
-extern NSString * const LWE_PLUGIN_SERVER_LIST;
 extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
+extern NSString * const LWE_PLUGIN_SERVER;            
+extern NSString * const LWE_PLUGIN_LIST_REL_URL;
 
 extern NSString * const CARD_DB_KEY;       //! Dictionary key to refer to main card database
 extern NSString * const FTS_DB_KEY;        //! Dictionary key to refer to FTS database filename
