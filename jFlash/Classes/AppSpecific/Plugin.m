@@ -87,14 +87,14 @@
   switch (self.fileLocation)
   {
     case LWEPluginLocationLibrary:
-      returnVal = [LWEFile createLibraryPathWithFilename:self.filePath];
+      returnVal = [LWEFile createLibraryPathWithFilename:relPath];
       break;
     case LWEPluginLocationDocuments:
-      returnVal = [LWEFile createDocumentPathWithFilename:self.filePath];
+      returnVal = [LWEFile createDocumentPathWithFilename:relPath];
       break;
     case LWEPluginLocationBundle:
     default:
-      returnVal = [LWEFile createBundlePathWithFilename:self.filePath];
+      returnVal = [LWEFile createBundlePathWithFilename:relPath];
       break;
   }
   return returnVal;
