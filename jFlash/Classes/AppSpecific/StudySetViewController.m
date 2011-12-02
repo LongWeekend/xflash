@@ -524,10 +524,10 @@ NSInteger const kLWEBackupSection = 2;
  */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   if (indexPath.section == kLWETagsSection || searching)
   {
-    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-    Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
     StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTag:tmpTag]; 
     [self.navigationController pushViewController:wordsController animated:YES];
     [wordsController release];
@@ -545,9 +545,9 @@ NSInteger const kLWEBackupSection = 2;
   // Only can edit tags, and user tags at that
   if (indexPath.section == kLWETagsSection)
   {
-    CurrentState *state = [CurrentState sharedCurrentState];
-    Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];
-    if ([tmpTag tagEditable] && ([[state activeTag] tagId] != [tmpTag tagId]))
+    Tag *activeTag = [[CurrentState sharedCurrentState] activeTag];
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+    if (tmpTag.isEditable && ([tmpTag isEqual:activeTag] == NO))
     {
       return YES;
     }
