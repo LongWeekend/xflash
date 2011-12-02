@@ -13,6 +13,10 @@
 
 #define API_BACKUP_DATA_URL @"http://lweflash.appspot.com/api/uploadBackup";
 
+@interface BackupManager ()
+- (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId;
+@end
+
 @implementation BackupManager
 @synthesize delegate;
 
@@ -106,23 +110,23 @@
 }
 
 //! Gets or creates a tag for the given name. Uses an existing Id to handle the magic set
-- (NSInteger) _getTagIdForName:(NSString *)tagName andId:(NSNumber *)key andGroup:(NSNumber *)group
+- (Tag *) _tagForName:(NSString *)tagName andId:(NSNumber *)key andGroupId:(NSNumber *)groupId
 {
   // Quick return on 0
   if ([key isEqual:[NSNumber numberWithInt:STARRED_TAG_ID]])
   {
-    return STARRED_TAG_ID;
+    return [Tag starredWordsTag];
   }
   
   // see if the tag already exists
   Tag *tag = [TagPeer retrieveTagByName:tagName];
   if (tag.tagId == kLWEUninitializedTagId) // no tag, create one
   {
-    Group *owningGroup = [GroupPeer retrieveGroupById:[group intValue]];
+    Group *owningGroup = [GroupPeer retrieveGroupById:[groupId intValue]];
     tag = [TagPeer createTagNamed:tagName inGroup:owningGroup];
   }
 
-  return tag.tagId;
+  return tag;
 }
 
 //! Takes a NSData created by serializedDataForUserSets and populates the data tables
@@ -131,8 +135,6 @@
   NSDictionary *idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
   NSEnumerator *enumerator = [idsDict keyEnumerator];
   NSNumber *key = nil;
-  NSMutableArray *currentCardIds = [NSMutableArray array];
-  
   while ((key = [enumerator nextObject])) 
   {
     NSArray *cardIdsAndTagName = [idsDict objectForKey:key];
@@ -144,33 +146,13 @@
     // the second object is the group id
     NSNumber *groupId = [objEnumerator nextObject]; 
     
-    NSInteger tagId = [self _getTagIdForName:tagName andId:key andGroup:groupId];
-    
     // the rest are card ids, so add them to the tag we just made
-    NSArray *cards = [CardPeer retrieveCardIdsForTagId:tagId];
+    Tag *userTag = [self _tagForName:tagName andId:key andGroupId:groupId];
+    NSArray *cards = [CardPeer retrieveFaultedCardsForTag:userTag];
     for (Card *card in cards)
     {
-      [currentCardIds addObject:[NSNumber numberWithInt:card.cardId]];
+      [TagPeer subscribeCard:card toTag:userTag];
     }
-    
-    NSNumber *newCardId = nil;
-    
-    // We just need a card & tag object to pass to subscribe:, so use one and change its ID
-    Card *card = [[Card alloc] init];
-    Tag *tag = [[Tag alloc] init];
-    while ((newCardId = [objEnumerator nextObject])) 
-    {
-      // add the card to the tag if it isn't already there
-      if ([currentCardIds containsObject:newCardId] == NO)
-      {
-        card.cardId = [newCardId intValue];
-        tag.tagId = tagId;
-        [TagPeer subscribeCard:card toTag:tag];
-      }
-    }
-    [card release];
-    [tag release];
-    [currentCardIds removeAllObjects];
   }
 }
 
@@ -230,13 +212,14 @@
 //! Returns an NSData containing the serialized associative array
 - (NSData*) serializedDataForUserSets
 {
-  NSMutableDictionary* cardDict = [NSMutableDictionary dictionary];
+  NSMutableDictionary *cardDict = [NSMutableDictionary dictionary];
   for (Tag *tag in [TagPeer retrieveUserTagList])
   {
-    NSArray *cards = [CardPeer retrieveCardIdsForTagId:tag.tagId];
+    // Faulted cards are Card objects but have not been retrieved/hydrated and have IDs only.
+    NSArray *cards = [CardPeer retrieveFaultedCardsForTag:tag];
     NSMutableArray *cardIdsAndTagName = [NSMutableArray array];
     [cardIdsAndTagName addObject:tag.tagName];
-    [cardIdsAndTagName addObject:[NSNumber numberWithInt:[tag groupId]]];
+    [cardIdsAndTagName addObject:[NSNumber numberWithInt:tag.groupId]];
     for (Card *card in cards)
     {
       [cardIdsAndTagName addObject:[NSNumber numberWithInt:card.cardId]];
@@ -245,7 +228,6 @@
   }
   
   NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:cardDict]; // serialize the cardDict
-  
   return archivedData;
 }
 

@@ -58,6 +58,11 @@
 
 #pragma mark - Settings Data Source
 
+- (CGFloat) sizeForAcknowledgementsRow
+{
+  return 710.0f;
+}
+
 /** Returns all the arrays to configure the settings table */
 - (NSArray*) settingsArray
 {
@@ -118,7 +123,7 @@
   NSArray *socialKeys = [NSArray arrayWithObjects:APP_TWITTER,APP_FACEBOOK,nil];
   NSArray *socialArray = [NSArray arrayWithObjects:socialNames,socialKeys,NSLocalizedString(@"Follow Us",@"SettingsViewController.TableHeader_FollowUs"),nil];
   
-  NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Special thanks goes to Teja for helping us write and simulate the frequency algorithm. This application uses data from CC-CEDICT, a public domain Chinese language dictionary, which is licensed under the Creative Commons Attribution-Share Alike 3.0 License.  The Chinese Flash Logo & Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.",@"SettingsViewController.Acknowledgements"),nil];
+  NSArray *aboutNames = [NSArray arrayWithObjects:NSLocalizedString(@"Special thanks goes to Teja for helping us write and simulate the frequency algorithm.\n\nThis application uses data from CC-CEDICT, a public domain Chinese language dictionary, which is licensed under the Creative Commons Attribution-Share Alike 3.0 License.\n\nWord frequency lists are courtesy of Jun Da and Patrick Hassel Zein.\n\nTextbook names & content in the Study Sets are copyright of their respective owners.  Their inclusion neither constitutes an endorsement of Chinese Flash by those owners, or vice-versa.  Users on http://zdt.sourceforge.net/ provided these lists; Long Weekend offers no warranty regarding their accuracy.\n\nPhew, I hate legal stuff.  Shouldn't you be studying instead of reading the fine print?\n\nIf you want a break, you could write us a great review (up there on the left!).",@"SettingsViewController.Acknowledgements"),nil];
   NSArray *aboutKeys = [NSArray arrayWithObjects:APP_ABOUT,nil];
   NSArray *aboutArray = [NSArray arrayWithObjects:aboutNames,aboutKeys,NSLocalizedString(@"Acknowledgements",@"SettingsViewController.TableHeader_Acknowledgements"),nil];
   

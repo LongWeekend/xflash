@@ -37,11 +37,8 @@ extern NSString * const LWECardHtmlFooter;
 
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
-- (IBAction)doTogglePercentCorrectBtn;
 - (IBAction) doToggleReadingBtn;
 
-- (void) turnPercentCorrectOff;
-- (void) turnPercentCorrectOn;
 - (void) turnReadingOn;
 - (void) turnReadingOff;
 
@@ -66,12 +63,6 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
 
 @property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
-
-// Mood Icon
-@property (nonatomic, retain) IBOutlet UIImageView *percentCorrectTalkBubble;
-@property (nonatomic, retain) IBOutlet UILabel *percentCorrectLabel;
-@property (nonatomic, retain) IBOutlet UIButton *moodIconBtn;
-@property (nonatomic, retain) MoodIcon *moodIcon;
-@property (nonatomic, retain) IBOutlet UIImageView *hhAnimationView;
+@property (nonatomic, retain) IBOutlet MoodIcon *moodIcon;
 
 @end

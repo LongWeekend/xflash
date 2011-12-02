@@ -20,13 +20,13 @@
 - (void) cardViewDidChangeMode:(CardViewController*)cardViewController
 {
   // You can't tap the HH in browse mode.
-  cardViewController.moodIconBtn.enabled = NO;
-  
-  // Reading should start as "on" in browse mode no matter what
-  [cardViewController turnReadingOn];
+  cardViewController.moodIcon.moodIconBtn.enabled = NO;
   
   // We never want to see "% correct" in browse mode
-  [cardViewController turnPercentCorrectOff];
+  [cardViewController.moodIcon turnPercentCorrectOff];
+  
+  // Reading should start as "on" in browse mode no matter what
+  [cardViewController turnReadingOn];  
 }
 
 //! This method will be called when the cardViewController will set up a new card.

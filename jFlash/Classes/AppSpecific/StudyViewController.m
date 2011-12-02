@@ -615,7 +615,12 @@
 
 - (BOOL) hasExampleSentences
 {
+#if defined (LWE_JFLASH)
+  // JFlash is currently the only code base with example sentences
   return [self _shouldShowExampleViewForCard:self.currentCard];
+#else
+  return NO;
+#endif
 }
 
 /**

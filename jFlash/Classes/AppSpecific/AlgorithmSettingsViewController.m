@@ -8,9 +8,11 @@
 
 #import "AlgorithmSettingsViewController.h"
 
+#define FREQUENCY_SLIDER_TAG 100
+#define MAX_CARDS_SLIDER_TAG 101
 
 @implementation AlgorithmSettingsViewController
-@synthesize maxCardsUISlider, frequencyUISlider, difficultySegmentControl, tableView;
+@synthesize maxCardsSlider, frequencySlider, difficultySegmentControl, tableView;
 
 enum Sections {
   kControlsSection = 0,
@@ -31,12 +33,27 @@ enum ControlSectionRows
 {
   [super viewDidLoad];  
    self.navigationItem.title = NSLocalizedString(@"Change Difficulty",@"AlgorithmSettingsViewController.NavBarTitle");
+
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  self.maxCardsSlider.minimumValue = MIN_MAX_STUDYING;
+  self.maxCardsSlider.maximumValue = MAX_MAX_STUDYING;
+  self.maxCardsSlider.tag = MAX_CARDS_SLIDER_TAG;
+  self.maxCardsSlider.value = (CGFloat)[settings integerForKey:APP_MAX_STUDYING];
+  
+  self.frequencySlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
+  self.frequencySlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
+  self.frequencySlider.tag = FREQUENCY_SLIDER_TAG;
+  self.frequencySlider.value = (CGFloat)[settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  
+  self.difficultySegmentControl.selectedSegmentIndex = [settings integerForKey:APP_DIFFICULTY];
+  [self setDifficulty:self.difficultySegmentControl];
 }
 
 - (void)viewDidUnload 
 {
-  self.maxCardsUISlider = nil;
-  self.frequencyUISlider = nil;
+  [super viewDidUnload];
+  self.maxCardsSlider = nil;
+  self.frequencySlider = nil;
   self.difficultySegmentControl = nil;
   self.tableView = nil;
 }
@@ -45,16 +62,11 @@ enum ControlSectionRows
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.backgroundColor = [UIColor clearColor];
-  self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSNumber *segmentedIndex = [NSNumber numberWithInt:[settings integerForKey:APP_DIFFICULTY]];
-  self.difficultySegmentControl.selectedSegmentIndex = [segmentedIndex intValue];
-  [self setDifficulty:self.difficultySegmentControl];
 }
 
 #pragma mark - UITableViewDataSource Methods
@@ -79,15 +91,8 @@ enum ControlSectionRows
   if(indexPath.section == kControlsSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"maxCards" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    NSNumber *sliderValue = [NSNumber numberWithInt:[settings integerForKey:APP_MAX_STUDYING]];
     // TODO: iPad customization!
-    self.maxCardsUISlider = [[[UISlider alloc] initWithFrame: CGRectMake(40, 0, 230, 48)] autorelease];
-    self.maxCardsUISlider.minimumValue = MIN_MAX_STUDYING;
-    self.maxCardsUISlider.maximumValue = MAX_MAX_STUDYING;
-    self.maxCardsUISlider.value = [sliderValue floatValue];
-    self.maxCardsUISlider.tag = kMaxCardsRow;
-    self.maxCardsUISlider.continuous = NO;
-    [self.maxCardsUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+    self.maxCardsSlider.frame = CGRectMake(40, 0, 230, 48);
 
     // the label on the left of the cell
     // TODO: iPad customization!
@@ -98,7 +103,7 @@ enum ControlSectionRows
     [leftLabel release];
     
     // the slider
-    [cell addSubview: maxCardsUISlider];
+    [cell addSubview:self.maxCardsSlider];
     
     // the label on the right
     // TODO: iPad customization!
@@ -113,17 +118,10 @@ enum ControlSectionRows
   else if (indexPath.section == kFrequencyMultiplierSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"frequency" onTable:lcltableView usingStyle:UITableViewCellStyleValue1];
-    NSNumber *sliderValue = [NSNumber numberWithInt:[settings integerForKey:APP_FREQUENCY_MULTIPLIER]];
 
     // TODO: iPad customization!
-    self.frequencyUISlider = [[[UISlider alloc] initWithFrame:CGRectMake(20, 0, 180, 50)] autorelease];
-    self.frequencyUISlider.minimumValue = MIN_FREQUENCY_MULTIPLIER;
-    self.frequencyUISlider.maximumValue = MAX_FREQUENCY_MULTIPLIER;
-    self.frequencyUISlider.value = [sliderValue floatValue];
-    self.frequencyUISlider.tag = kFrequencyMultiplierSection; 
-    self.frequencyUISlider.continuous = NO;
-    [self.frequencyUISlider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
-    [cell addSubview:self.frequencyUISlider];
+    self.frequencySlider.frame = CGRectMake(20, 0, 180, 50);
+    [cell addSubview:self.frequencySlider];
     // TODO: iPad customization!
     UILabel *rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 95, 35)];
     // TODO: iPad customization!
@@ -190,39 +188,43 @@ enum ControlSectionRows
   if (selectedIndex == 3)
   {
     // The last index - custom value
-    self.maxCardsUISlider.enabled = YES;
-    self.frequencyUISlider.enabled = YES;
+    self.maxCardsSlider.enabled = YES;
+    self.frequencySlider.enabled = YES;
   }
   else
   {
     // Otherwise pull from these predefined values
     NSInteger maxCardsValue[3] = {10,30,40};
     NSInteger freqValue[3] = {1,2,3};
-    self.maxCardsUISlider.enabled = NO;
-    self.frequencyUISlider.enabled = NO;
-    self.maxCardsUISlider.value = maxCardsValue[selectedIndex];
-    self.frequencyUISlider.value = freqValue[selectedIndex];
+    self.maxCardsSlider.enabled = NO;
+    self.frequencySlider.enabled = NO;
+    self.maxCardsSlider.value = maxCardsValue[selectedIndex];
+    self.frequencySlider.value = freqValue[selectedIndex];
   }
-  [self sliderAction:self.maxCardsUISlider];
-  [self sliderAction:self.frequencyUISlider];
+  
+  // Manually update the values
+  [self sliderValueChanged:self.maxCardsSlider];
+  [self sliderValueChanged:self.frequencySlider];
 }
 
 #pragma mark - Slider
 
-- (void)sliderAction:(UISlider *)sender
+- (IBAction)sliderValueChanged:(UISlider *)sender
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger value = lroundf([sender value]);
-  if([sender tag] == kMaxCardsRow)
+  if(sender.tag == MAX_CARDS_SLIDER_TAG)
   {
+    LWE_ASSERT_EXC((value >= MIN_MAX_STUDYING),@"Trying to set max studying to be lower than minimum");
+    LWE_ASSERT_EXC((value <= MAX_MAX_STUDYING),@"Trying to set max studying to be higher than max");
     [settings setInteger:value forKey:APP_MAX_STUDYING];
   }
-  else if ([sender tag] == kFrequencyMultiplierSection)
+  else if (sender.tag == FREQUENCY_SLIDER_TAG)
   {
+    LWE_ASSERT_EXC((value >= MIN_FREQUENCY_MULTIPLIER),@"Trying to set max studying to be lower than minimum");
+    LWE_ASSERT_EXC((value <= MAX_FREQUENCY_MULTIPLIER),@"Trying to set frequency to be higher than max");
     [settings setInteger:value forKey:APP_FREQUENCY_MULTIPLIER];
   }
-  
-  LWE_LOG(@"sliderAction: sender = %d, value = %d", [sender tag], value);
 }
 
 #pragma mark - UISwitch
@@ -241,8 +243,8 @@ enum ControlSectionRows
 
 - (void)dealloc 
 {
-  [maxCardsUISlider release];
-  [frequencyUISlider release];
+  [maxCardsSlider release];
+  [frequencySlider release];
   [difficultySegmentControl release];
   [tableView release];
   [super dealloc];

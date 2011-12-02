@@ -11,12 +11,13 @@
 #import "CustomCellBackgroundView.h"
 #import "SettingsViewController.h"
 #import "UserPeer.h"
+#import "DSActivityView.h"
 
 /**
  * Grouped Table View where the user can select which user they will study as
  */
 @implementation UserViewController
-@synthesize usersArray, selectedUserInArray, loadingView;
+@synthesize usersArray, selectedUserInArray;
 
 - (id) init
 {
@@ -200,8 +201,7 @@
 /** Takes a user objects and activates it, calling notifications appropriately */
 - (void) activateUserWithModal:(User*) user
 {
-  // First, show the loading modal, then call selector after delay to allow it to appear
-  self.loadingView = [LWELoadingView loadingView:[self view] withText:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  [DSActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
@@ -217,8 +217,8 @@
 {
   // Activate, post notification and dismiss view
   [user activateUser];
+  [DSActivityView removeView];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
-  [self.loadingView removeFromSuperview];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -228,7 +228,6 @@
 {
   // TODO: iPad customization!
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
-  userDetailsView.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
 

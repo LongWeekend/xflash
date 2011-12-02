@@ -22,11 +22,6 @@
 {
 	LWETwitterOAuth *authEngine;
 	
-	IBOutlet UITextField *unameTxt;
-	IBOutlet UITextField *passwordTxt;
-	IBOutlet UIButton *authBtn;
-  IBOutlet UIButton *signupBtn;
-	
 @private
 	UIBarButtonItem *_cancelBtn;
 	LWELoadingView *_lv;

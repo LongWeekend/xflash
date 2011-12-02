@@ -16,16 +16,12 @@
 
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
+NSInteger const kLWEGroupsSection = 0;
+NSInteger const kLWETagsSection = 1;
+NSInteger const kLWEBackupSection = 2;
 
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
-
-enum Sections {
-  kGroupsSection = 0,
-  kSetsSection = 1,
-  kBackupSection = 2
-};
-
 
 /** 
  * Customized initializer - returns UITableView group as self.view
@@ -38,12 +34,12 @@ enum Sections {
   {
     // Set the tab bar controller image png to the targets
     self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
-    self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
+    self.title = aGroup.groupName;
+    //NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
     searching = NO;
-    BackupManager *bm = [[BackupManager alloc] initWithDelegate:self];
-    self.backupManager = bm;
-    [bm release];
     selectedTagId = -1;
+    // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
+    self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
     
     // Get this group & subgroup data, and finally tags
     self.group = aGroup;
@@ -93,13 +89,12 @@ enum Sections {
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.title = NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
-  if (!searching)
+  if (searching == NO)
   {
     [self hideSearchBar];
   }
@@ -131,9 +126,10 @@ enum Sections {
     if ([self.group isTopLevelGroup])
     {
       NSMutableArray *tmpTagArray = [NSMutableArray array];
+      Tag *starredTag = [Tag starredWordsTag];
       for (Tag *tmpTag in self.tagArray)
       {
-        if (tmpTag.tagId == STARRED_TAG_ID)
+        if ([tmpTag isEqual:starredTag])
         {
           // Put it at the beginning
           [tmpTagArray insertObject:tmpTag atIndex:0];
@@ -183,10 +179,6 @@ enum Sections {
 	[tmpVC release];
 }
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{
-  [self dismissModalViewControllerAnimated:YES];
-}
 
 #pragma mark - UITableViewDataSource Methods
 
@@ -199,19 +191,20 @@ enum Sections {
 {
 	if (searching)
   {
+    // Tags only
 		return 1;
   }
-
-  // Usually, there are 2: groups + tags
-  NSInteger numRows = 2;
-  if ([self.group isTopLevelGroup])
+  else if ([self.group isTopLevelGroup])
   {
-    numRows++;
+    // Groups + Tags + Backup
+    return 3;
   }
-  return numRows;
+  else
+  {
+    // Groups + Tags
+    return 2;
+  }
 }
-
-
 
 
 /**
@@ -233,11 +226,11 @@ enum Sections {
   }
   else
   {
-    if (section == kSetsSection)
+    if (section == kLWETagsSection)
     {
       return [self.tagArray count];
     }
-    else if(section == kBackupSection)
+    else if (section == kLWEBackupSection)
     {
       if ([[LWEJanrainLoginManager sharedLWEJanrainLoginManager] isAuthenticated])
       {
@@ -263,7 +256,7 @@ enum Sections {
   ThemeManager *tm = [ThemeManager sharedThemeManager];
   
   // Study Set Cells (ie. a tag)
-  if (indexPath.section == kSetsSection || searching)
+  if (indexPath.section == kLWETagsSection || searching)
   {
     
     // No search results msg
@@ -300,15 +293,14 @@ enum Sections {
       NSString* tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
+      cell.accessoryView = nil;
       if (tmpTag.cardCount == 0)
       {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.accessoryView = nil;
       }
       else
       {
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        cell.accessoryView = nil;
       }
       if (selectedTagId == indexPath.row)
       {
@@ -317,7 +309,7 @@ enum Sections {
       }
     }
   }
-  else if (indexPath.section == kBackupSection)
+  else if (indexPath.section == kLWEBackupSection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"backup" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     if (indexPath.row == 0)
@@ -353,13 +345,17 @@ enum Sections {
     Group *tmpGroup = [self.subgroupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = tmpGroup.groupName;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    NSString *tmpDetailText = [NSString stringWithFormat:@""];
-    if ([tmpGroup childGroupCount] > 0)
+
+    NSMutableArray *descItems = [NSMutableArray arrayWithCapacity:2];
+    if (tmpGroup.childGroupCount > 0)
     {
-      //Prefix the line below with code if we have groups
-      tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Groups; ",@"StudySetViewController.GroupCount"),[tmpGroup childGroupCount]]; 
+      [descItems addObject:[NSString stringWithFormat:NSLocalizedString(@"%d Groups",@"StudySetViewController.GroupCount"),tmpGroup.childGroupCount]]; 
     }
-    tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%@%d Sets",@"StudySetViewController.TagCount"),tmpDetailText,tmpGroup.tagCount];
+    if (tmpGroup.tagCount > 0)  // note that this is *not* else if, these are additive
+    {
+      [descItems addObject:[NSString stringWithFormat:NSLocalizedString(@"%d Sets",@"StudySetViewController.TagCount"),tmpGroup.tagCount]];
+    }
+    NSString *tmpDetailText = [descItems componentsJoinedByString:@"; "];
     
     // Set up the image
     UIImageView *tmpView = (UIImageView*)cell.imageView;
@@ -401,7 +397,7 @@ enum Sections {
 
 -(NSString*) tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-  if (section == kBackupSection)
+  if (section == kLWEBackupSection && [self.group isTopLevelGroup])
   {
     return NSLocalizedString(@"Backup Custom Sets",@"StudySetVC.BackupCustomSetsTitle");
   }
@@ -411,10 +407,50 @@ enum Sections {
   }
 }
 
+/*- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  // No group description if we are at the top level or searching
+  if ([self.group isTopLevelGroup] || searching || section != kLWEGroupsSection)
+  {
+    return nil;
+  }
+  
+  CGFloat topPadding = 5.0f;
+  CGRect rect = CGRectMake(8, topPadding, 304, 50);
+  UILabel *groupDescription = [[[UILabel alloc] initWithFrame:rect] autorelease];
+  groupDescription.text = self.group.groupDescription;
+  groupDescription.font = [UIFont systemFontOfSize:14.0f];
+  groupDescription.backgroundColor = [UIColor colorWithRed:0.95f green:0.95f blue:0.95f alpha:1.0f];
+  groupDescription.numberOfLines = 0;
+  groupDescription.lineBreakMode = UILineBreakModeWordWrap;
+  groupDescription.layer.borderWidth = 1.0f;
+  groupDescription.layer.cornerRadius = 7.0f;
+  groupDescription.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+  
+  CGRect labelRect = [LWEUILabelUtils makeFrameForText:self.group.groupDescription fontSize:12 cellWidth:320 cellMargin:10];
+  CGRect viewRect = CGRectMake(0, 0, 320, labelRect.size.height + (topPadding * 2));
+  UIView *holdingView = [[UIView alloc] initWithFrame:viewRect];
+  [holdingView addSubview:groupDescription];
+  return [holdingView autorelease];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  if ([self.group isTopLevelGroup] == NO && section == kLWEGroupsSection)
+  {
+    CGRect labelRect = [LWEUILabelUtils makeFrameForText:self.group.groupDescription fontSize:12 cellWidth:320 cellMargin:10];
+    return labelRect.size.height + 10;
+  }
+  else
+  {
+    return 44.0f;
+  }
+}*/
+
 /** UI Table View delegate - when a user selects a cell, either start that set, or navigate to the group (if a group) */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == kSetsSection || searching)
+  if (indexPath.section == kLWETagsSection || searching)
   {
     if ([self.tagArray count] > 0)
     {
@@ -439,7 +475,7 @@ enum Sections {
       [lclTableView deselectRowAtIndexPath:indexPath animated:NO];    
     }
   }
-  else if (indexPath.section == kBackupSection)
+  else if (indexPath.section == kLWEBackupSection)
   {
     if (indexPath.row == 0)
     {
@@ -486,7 +522,7 @@ enum Sections {
  */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == kSetsSection || searching)
+  if (indexPath.section == kLWETagsSection || searching)
   {
     [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
     Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
@@ -505,7 +541,7 @@ enum Sections {
 - (BOOL)tableView:(UITableView *)lclTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   // Only can edit tags, and user tags at that
-  if (indexPath.section == kSetsSection)
+  if (indexPath.section == kLWETagsSection)
   {
     CurrentState *state = [CurrentState sharedCurrentState];
     Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];
@@ -597,7 +633,7 @@ enum Sections {
 - (void)didFailToRestoreUserDateWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
-  if ([error code] == kDataNotFound && [error domain] == LWEBackupManagerErrorDomain)
+  if ([error code] == kDataNotFound && [[error domain] isEqualToString:LWEBackupManagerErrorDomain])
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
                                        message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];

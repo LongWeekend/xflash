@@ -12,7 +12,17 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 @implementation Card 
 
 @synthesize cardId, userId, levelId, _headword, headword_en, hw_reading, _meaning, wrongCount, rightCount;
-@synthesize player = _player;
+@synthesize player = _player, isFault = _isFault;
+
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    _isFault = YES;
+  }
+  return self;
+}
 
 #pragma mark - Public getter
 
@@ -36,14 +46,14 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
       NSArray *segmentedReading = [dict objectForKey:kLWESegmentedReadingKey];
       NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
       //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
-      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        //Construct the filename for its audioFilename filename
-        //and instantiate the AVPlayerItem for it. 
+      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+      {
+        //Construct the filename for its audioFilename filename and instantiate the AVPlayerItem for it. 
         NSString *filename = (NSString *)obj;
-        NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:filename]];
+        NSURL *url = [NSURL fileURLWithPath:[LWEFile createLibraryPathWithFilename:filename]];
         [items addObject:url];
       }];
-      //And create the player with the NSArray filled with the AVPlayerItem(s)
+      // And create the player with the NSArray filled with the AVPlayerItem(s)
       q = [[LWEAudioQueue alloc] initWithItems:items];
     }
     
@@ -86,6 +96,16 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 - (NSString *) headword
 {
+  return [self headwordIgnoringMode:NO];
+}
+
+- (NSString *) headwordIgnoringMode:(BOOL)ignoreMode
+{
+  if (ignoreMode)
+  {
+    return self._headword;
+  }
+  
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   if([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_E_TO_J])
   {
@@ -158,6 +178,9 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   self.userId   =    [rs intForColumn:@"user_id"];
   self.rightCount =  [rs intForColumn:@"right_count"];
   self.wrongCount =  [rs intForColumn:@"wrong_count"];
+  
+  // Now that we have hydrated, note that this object is no longer a fault
+  _isFault = NO;
 }
 
 - (BOOL)isEqual:(id)object
@@ -165,7 +188,7 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   if ([object isKindOfClass:[self class]])
   {
     Card *anotherCard = (Card *)object;
-    return [anotherCard cardId] == [self cardId];
+    return (anotherCard.cardId == self.cardId);
   }
   return NO;
 }
@@ -178,13 +201,18 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 #if defined (LWE_CFLASH)
   CGFloat currSize = theLabel.font.pointSize;
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  if ([[settings objectForKey:APP_HEADWORD_TYPE] isEqualToString:SET_HEADWORD_TYPE_TRAD])
+  
+  // Don't change anything about the font if we're in English headword mode
+  if ([[settings objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E])
   {
-    theFont = [UIFont fontWithName:@"STHeitiTC-Medium" size:currSize];
-  }
-  else
-  {
-    theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
+    if ([[settings objectForKey:APP_HEADWORD_TYPE] isEqualToString:SET_HEADWORD_TYPE_TRAD])
+    {
+      theFont = [UIFont fontWithName:@"STHeitiTC-Medium" size:currSize];
+    }
+    else
+    {
+      theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
+    }
   }
 #endif
   return theFont;

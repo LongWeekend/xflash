@@ -11,11 +11,10 @@
 #import "Group.h"
 #import "TagPeer.h"
 #import "GroupPeer.h"
-#import <MessageUI/MFMailComposeViewController.h>
 #import "BackupManager.h"
 #import "DSActivityView.h"
 
-@interface StudySetViewController : UITableViewController <UITableViewDelegate, UISearchBarDelegate, MFMailComposeViewControllerDelegate, BackupManagerDelegate>
+@interface StudySetViewController : UITableViewController <UISearchBarDelegate, LWEBackupManagerDelegate>
 {
   UIBarButtonItem *_addButton;
   UIButton *searchOverlayBtn;
