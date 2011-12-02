@@ -19,6 +19,7 @@ typedef enum NSInteger
 //! For creating a plugin file out of an NSDictionary hash of strings
 + (id) pluginWithDictionary:(NSDictionary *)dict;
 
+- (NSString *) fullPath;
 - (BOOL) isDirectoryPlugin;
 - (BOOL) isDatabasePlugin;
 

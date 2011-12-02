@@ -12,4 +12,6 @@
 #import <SenTestingKit/SenTestingKit.h>
 @interface PluginTest : SenTestCase
 
+@property (retain) Plugin *plugin;
+
 @end

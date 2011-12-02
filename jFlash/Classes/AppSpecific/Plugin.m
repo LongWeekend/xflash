@@ -57,6 +57,25 @@
 
 #pragma mark - Public Methods
 
+- (NSString *) fullPath
+{
+  NSString *returnVal = nil;
+  switch (self.fileLocation)
+  {
+    case LWEPluginLocationLibrary:
+      returnVal = [LWEFile createLibraryPathWithFilename:self.filePath];
+      break;
+    case LWEPluginLocationDocuments:
+      returnVal = [LWEFile createDocumentPathWithFilename:self.filePath];
+      break;
+    case LWEPluginLocationBundle:
+    default:
+      returnVal = [LWEFile createBundlePathWithFilename:self.filePath];
+      break;
+  }
+  return returnVal;
+}
+
 - (BOOL) isDirectoryPlugin
 {
   return YES;
