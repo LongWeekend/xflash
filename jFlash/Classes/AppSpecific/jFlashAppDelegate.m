@@ -147,8 +147,19 @@
 
   if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
   {
+    CurrentState *state = [CurrentState sharedCurrentState];
+    
+    if (state.isFirstLoad)
+    {
+      // "Install" the CARD plugin now
+      NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:@"cFlash-installed" ofType:@"plist"];
+      NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
+      Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
+      [state.pluginMgr installPlugin:cardsDb error:NULL];
+    }
+    
     // Then load plugins
-    [[[CurrentState sharedCurrentState] pluginMgr] loadInstalledPlugins];
+    [state.pluginMgr loadInstalledPlugins];
   }
   else
   {

@@ -38,7 +38,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   if ((self = [super init]))
   {
     // Initialize instance variables
-    _loadedPlugins = [NSMutableArray array];
+    _loadedPlugins = [[NSMutableDictionary alloc] init];
 		_downloadedPlugins = nil; //[NSMutableArray array];
     self.availableForDownloadPlugins = nil;
 
@@ -184,7 +184,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   {
     // Re-instantiate the plugins here
     NSData *data = [plugins objectForKey:pluginKey];
-    Plugin *plugin = [[Plugin alloc] initWithCoder:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+    Plugin *plugin = (Plugin*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     // Now try to load it
     NSError *error = nil;
@@ -199,13 +199,22 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
  */
 - (BOOL) loadPlugin:(Plugin *)plugin error:(NSError **)error;
 {
+  // You can't reload a plugin that's already loaded.
+  if ([_loadedPlugins objectForKey:plugin.pluginId])
+  {
+    return YES;
+  }
+  
   // If it's a directory, just make sure it exists only.
-  BOOL pathExists = [LWEFile fileExists:plugin.filePath];
+  BOOL pathExists = [LWEFile fileExists:[plugin fullPath]];
   if (pathExists == NO)
   {
     // TODO: MORE ROBUST CODE HERE PLEEEZE
     // Make sure we can find the file - if not, it's probably after the user did a restore.  Try to recover!
-    *error = [NSError errorWithCode:5 localizedDescription:@"Cannot find plugin file/directory."];
+    if (error != NULL)
+    {
+      *error = [NSError errorWithCode:5 localizedDescription:@"Cannot find plugin file/directory."];
+    }
     return NO;
   }
   
@@ -231,7 +240,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // 1) Can we attach the database?
-  if ([db attachDatabase:plugin.filePath withName:LWEDatabaseTempAttachName] == NO)
+  if ([db attachDatabase:[plugin fullPath] withName:LWEDatabaseTempAttachName] == NO)
   {
     // Fail and return!
     *error = [NSError errorWithCode:1 localizedDescription:@"Failed to attach database"];
@@ -248,7 +257,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   }
   
   // 3) Reattach with proper name
-  if ([db attachDatabase:plugin.filePath withName:plugin.pluginId] == NO)
+  if ([db attachDatabase:[plugin fullPath] withName:plugin.pluginId] == NO)
   {		  
     *error = [NSError errorWithCode:3 localizedDescription:@"Could not re-attach database w/ new name - pluginId invalid?"];
     return NO;
@@ -283,7 +292,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   [self _registerPlugin:plugin];
   
   // 4. Set not to be backed up
-  BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:plugin.filePath];
+  BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:[plugin fullPath]];
   LWE_ASSERT_EXC(isNotBackedUp, @"Failed to set skip backup attribute for file at %@", plugin.filePath);
   
   // 5. Be nice, delete the old plugin

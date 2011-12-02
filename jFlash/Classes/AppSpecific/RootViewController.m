@@ -314,6 +314,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
   Plugin *thePlugin = (Plugin *)aNotification.object;
+  LWE_ASSERT_EXC(thePlugin, @"This method can't be called with a nil plugin.");
 
   // Instantiate downloader with jFlash download URL & destination filename
   //TODO: iPad customization here
@@ -326,7 +327,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   // Get path information
   LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
   packageDownloader.progressDelegate = dlViewController;
-  [packageDownloader queuePackage:thePlugin.downloadPackage];
+  [packageDownloader queuePackage:[thePlugin downloadPackage]];
   dlViewController.taskHandler = packageDownloader;
   [self _showModalWithViewController:dlViewController useNavController:YES];
   [packageDownloader release];

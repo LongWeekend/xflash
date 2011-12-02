@@ -126,6 +126,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // STEP 2 - is the database update-able?  Let the update manager tell us
   [self setIsUpdatable:[UpdateManager databaseIsUpdatable:settings]];
 
+  // STEP 3 - Initialize the plugin manager
+  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
+  
   // STEP 4 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
@@ -139,7 +142,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   
   // STEP 5
   // We initialize the plugins manager
-  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
 	if ([[self class] isTimeForCheckingUpdate])
 	{
 		/**
@@ -178,7 +180,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setValue:DEFAULT_THEME forKey:APP_THEME];
   [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
   [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
-  [settings setValue:[PluginManager preinstalledPlugins] forKey:APP_PLUGIN];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_DATA_VERSION];
   [settings setValue:LWE_CURRENT_VERSION forKey:APP_SETTINGS_VERSION];
   [settings setInteger:DEFAULT_TAG_ID forKey:@"tag_id"];
@@ -186,10 +187,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:DEFAULT_FREQUENCY_MULTIPLIER forKey:APP_FREQUENCY_MULTIPLIER];
   [settings setInteger:DEFAULT_MAX_STUDYING forKey:APP_MAX_STUDYING];
   [settings setInteger:DEFAULT_DIFFICULTY forKey:APP_DIFFICULTY];
-  [settings setObject:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
+  [settings setValue:[NSDictionary dictionary] forKey:APP_PLUGIN];
+  [settings setValue:[NSDate dateWithTimeIntervalSince1970:0] forKey:PLUGIN_LAST_UPDATE];
   [settings setBool:NO forKey:APP_HIDE_BURIED_CARDS];
   [settings setBool:NO forKey:@"db_did_finish_copying"];
   [settings setBool:YES forKey:@"settings_already_created"];
+  [settings synchronize];
 }
 
 #pragma mark - Plugin Manager helpers
