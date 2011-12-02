@@ -160,15 +160,11 @@
 //! what to do if selected
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [lclTableView deselectRowAtIndexPath:indexPath animated:YES];
   if (indexPath.section == PLUGIN_SETTINGS_AVAILABLE_SECTION)
   {
-    [lclTableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    // Fire off a notification to bring up the downloader
-    NSDictionary *dict = [self.availablePlugins objectAtIndex:indexPath.row];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal
-                                                        object:self
-                                                      userInfo:dict];
+    Plugin *plugin = [self.availablePlugins objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:plugin userInfo:nil];
   }
 }
 
