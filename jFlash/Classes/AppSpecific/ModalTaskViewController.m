@@ -16,7 +16,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 @implementation ModalTaskViewController
 
-@synthesize statusMsgLabel, taskMsgLabel, progressIndicator, startButton;
+@synthesize taskMsgLabel, progressIndicator, startButton;
 @synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
 
 // For content/webview
@@ -29,16 +29,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewDidLoad];
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-
-  // Reset all variables to default
-  [self setStatusMessage:@""];
-  [self setTaskMessage:@""];
-  [self setProgress:0.0f];
-
-  // Sets the disabled/enabled state of start button
-//  [[self startButton] setEnabled:![self startTaskOnAppear]];
-
-  [[self progressIndicator] setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+  [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
 
 
@@ -68,42 +59,16 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   }
 }
 
-#pragma mark - Getters and Setters
+#pragma mark - LWEPackageDownloaderProgressDelegate
 
-/** Sets the status message of the Downloader View */
--(void) setStatusMessage: (NSString*) newString
+- (void) packageDownloader:(LWEPackageDownloader *)downloader progressDidUpdate:(CGFloat)progress
 {
-  self.statusMsgLabel.text = newString;
+  self.progressIndicator.progress = progress;
 }
 
-/** Gets the current status message of the Downloader View */
--(NSString*) statusMessage
+- (void) packageDownloader:(LWEPackageDownloader *)downloader statusDidUpdate:(NSString *)string
 {
-  return self.statusMsgLabel.text;
-}
-
-/** Sets the current task message of the Downloader View */
--(void) setTaskMessage:(NSString*) newString
-{
-  self.taskMsgLabel.text = newString;
-}
-
-/** Gets the current task message of the Downloader View */
--(NSString*) taskMessage
-{
-  return self.taskMsgLabel.text;
-}
-
-/** Sets the current progress % complete of the UIProgressView on the Downloader View */
--(void) setProgress: (float) newVal
-{
-  self.progressIndicator.progress = newVal;
-}
-
-/** Gets the current progress % complete of the UIProgressView on the Downloader View */
--(float) progress
-{
-  return self.progressIndicator.progress;
+  self.taskMsgLabel.text = string;
 }
 
 #pragma mark - IBAction Methods
@@ -179,7 +144,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (void) updateButtons
 {
-  if ([self canStartTask])
+  if (self.canStartTask)
   {
     self.startButton.hidden = NO;
     self.progressIndicator.hidden = YES;
@@ -190,7 +155,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
     self.progressIndicator.hidden = NO;
   }
        
-  if ([self canCancelTask])
+  if (self.canCancelTask)
   {
     if (self.navigationItem.leftBarButtonItem == nil)
     {
@@ -255,7 +220,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewDidUnload];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.statusMsgLabel = nil;
   self.taskMsgLabel = nil;
   self.progressIndicator = nil;
 }
@@ -264,7 +228,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)dealloc
 {
   [taskMsgLabel release];
-  [statusMsgLabel release];
   [progressIndicator release];
   [webViewContent release];
   [taskHandler release];

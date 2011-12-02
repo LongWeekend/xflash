@@ -17,7 +17,7 @@ extern NSString * const LWEModalTaskDidFail;
 
 
 
-@interface ModalTaskViewController : UIViewController
+@interface ModalTaskViewController : UIViewController <LWEPackageDownloaderProgressDelegate>
 {
   NSString *webViewContentDirectory;              //! Sets the sub directory of the content to load into the details web view
   NSString *webViewContentFileName;               //! Sets the filename of the content to load into the details web view
@@ -37,7 +37,6 @@ extern NSString * const LWEModalTaskDidFail;
 - (BOOL) canCancelTask;
 
 // Properties set from XIB file
-@property (nonatomic, retain) IBOutlet UILabel *statusMsgLabel;
 @property (nonatomic, retain) IBOutlet UILabel *taskMsgLabel;
 @property (nonatomic, retain) IBOutlet PDColoredProgressView *progressIndicator;
 @property (nonatomic, retain) IBOutlet UIButton *startButton;
