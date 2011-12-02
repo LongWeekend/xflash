@@ -25,7 +25,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 
 @implementation Tag
 
-@synthesize tagId, tagName, tagEditable, tagDescription;
+@synthesize tagId, tagName, tagEditable, tagDescription, isFault = _isFault;
 @synthesize cardCount, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
 
 + (Tag *) starredWordsTag
@@ -44,11 +44,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
 {
   if ((self = [super init]))
   {
+    _isFault = YES;
     self.tagId = kLWEUninitializedTagId;
     cardCount = kLWEUninitializedCardCount; // don't use setter here, has special behavior of updating DB 
     self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
   }
 	return self;
 }
@@ -59,9 +59,8 @@ NSInteger const kLWEUninitializedCardCount = -1;
 {
   LWE_ASSERT_EXC(self.tagId > 0,@"The tag must already exist to be saved, use createTagNamed in TagPeer to create a tag");
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql;
-  sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];
-  [[db dao] executeUpdate:sql];
+  NSString *sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", self.tagName, self.tagDescription, self.tagId];
+  [db executeUpdate:sql];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
 }
@@ -69,7 +68,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 //! Refreshes self from the DB if a didSave notification is called
 - (void)tagDidSave:(NSNotification *)notification
 {
-  if([[notification object] tagId] == self.tagId) // we only care if it's us
+  if ([self isEqual:notification.object] && (self.isFault == NO)) // we only care if it's us & this isn't a faulted entry
   {
     [self hydrate];
   }
@@ -613,11 +612,18 @@ NSInteger const kLWEUninitializedCardCount = -1;
   self.tagName = [rs stringForColumn:@"tag_name"];
   self.tagEditable = [rs intForColumn:@"editable"];
   self.cardCount = [rs intForColumn:@"count"];
+  
+  // We only care about getting new updates on data if we had data to begin with.
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
+  _isFault = NO;
 }
 
 - (void) dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  if (self.isFault == NO)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+  }
   [tagName release];
   [tagDescription release];
   [combinedCardIdsForBrowseMode release];

@@ -60,6 +60,8 @@ extern NSInteger const kLWEUninitializedTagId;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
 
+@property (readonly) BOOL isFault;
+
 //! Current count of Card objects in the Tag
 @property NSInteger cardCount;
 
