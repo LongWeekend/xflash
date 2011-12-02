@@ -48,7 +48,7 @@
 		<key>plugin_version</key>
 		<string>1.0</string>
 	</dict>
-	<key>AUDIO_SAMPLE</key>
+	<key>AUDIO_SAMPLES</key>
 	<dict>
 		<key>plugin_type</key>
 		<string>directory</string>
