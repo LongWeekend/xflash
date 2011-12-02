@@ -11,17 +11,10 @@
 #import "FMResultSet.h"
 
 @interface User : NSObject
-{
-	NSInteger userId;
-	NSString *userNickname;
-	NSString *avatarImagePath;
-  NSString *dateCreated;
-}
 
 - (void)hydrate: (FMResultSet*) rs;
 - (void)save;
 - (void)deleteUser;
-- (void)activateUser;
 
 @property (nonatomic) NSInteger userId;
 @property (nonatomic,retain) NSString *userNickname;
