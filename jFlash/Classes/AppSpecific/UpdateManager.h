@@ -10,8 +10,6 @@
 
 
 @interface UpdateManager : NSObject
-{
-}
 
 /**
  * This method migrates the NSUserDefaults to the most

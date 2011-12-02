@@ -20,6 +20,7 @@
 //private methods
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
+- (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
@@ -274,22 +275,32 @@
 
 - (void)_setupPageControl:(NSInteger)page
 {
-    if ([self hasExampleSentences] == NO) // can't show the examples if there are none
-    {
-      page = 0;
-      // Page control should be shown when we have example sentences
-      self.pageControl.hidden = YES;
-      self.scrollView.scrollEnabled = NO;
-    }
-    else
-    {
-      self.pageControl.hidden = NO;
-      self.scrollView.scrollEnabled = YES;      
-    }
+  if ([self hasExampleSentences] == NO) // can't show the examples if there are none
+  {
+    page = 0;
+    // Page control should be shown when we have example sentences
+    self.pageControl.hidden = YES;
+    self.scrollView.scrollEnabled = NO;
+  }
+  else
+  {
+    self.pageControl.hidden = NO;
+    self.scrollView.scrollEnabled = YES;      
+  }
 
-    self.pageControl.currentPage = page;
-    [self changePage:self.pageControl animated:NO];
-    _isChangingPage = NO;
+  // Show/Hide pronounce button
+  if([self hasAudioSample])
+  {
+    self.pronounceBtn.hidden = NO;
+  }
+  else
+  {
+    self.pronounceBtn.hidden = YES;
+  }
+
+  self.pageControl.currentPage = page;
+  [self changePage:self.pageControl animated:NO];
+  _isChangingPage = NO;
 }
 
 /**
@@ -485,6 +496,21 @@
   return returnVal;
 }
 
+/** 
+ * Show the audio button if there plugin enabled and card has audio sample
+ * Cards may have a "pieced together" sample, but Card class will take care of this
+ */
+- (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card
+{
+  BOOL returnVal = NO;
+  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:AUDIO_SAMPLES_KEY])
+  {
+    returnVal = [card hasAudio];
+  }
+  return returnVal;
+}
+
+
 /**
  * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,
  * the sixth element is the total number of seen cards (levels 1-5)
@@ -622,6 +648,17 @@
   return NO;
 #endif
 }
+
+- (BOOL) hasAudioSample
+{
+#if defined (LWE_JFLASH)
+  // JFlash currently does not have sample audio implemented
+  return NO;
+#else
+  return [self _shouldShowSampleAudioButtonForCard:self.currentCard];
+#endif
+}
+
 
 /**
  * Connects the "Download Example Sentences" button to actually launch the installer

@@ -38,15 +38,6 @@
   UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   self.navigationItem.rightBarButtonItem = bbi;
   [bbi release];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
-}
-
-
-/** Fetch user data and then call a table reload */
-- (void)reloadTableData
-{
-  self.usersArray = [UserPeer getUsers];
-  [self.tableView reloadData];
 }
 
 /** Update the view if any theme info changed */
@@ -55,9 +46,24 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.tableView.separatorColor = [UIColor lightGrayColor];
   self.tableView.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Delegate for child view
+
+- (void) userDetailsDidChange:(User*)user
+{
+  // REVIEW: MMA Dec.02.2011
+  // A better way to do this would be to just update the table cell with this user.
+  self.usersArray = [UserPeer getUsers];
+  [self.tableView reloadData];
+}
+
+- (void) activateUser:(User*)user
+{
+  [self activateUserWithModal:user];
 }
 
 #pragma mark Table view methods
@@ -87,7 +93,7 @@
 {
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
+  NSString *tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
   UITableViewCell *cell;
 
   // Selected cells are highlighted
@@ -156,6 +162,7 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   User *currUser = [self.usersArray objectAtIndex:indexPath.row];
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:currUser];
+  userDetailsView.delegate = self;
   [self.navigationController pushViewController:userDetailsView animated:YES];
   [userDetailsView release];
 }
@@ -165,6 +172,10 @@
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
+    // REVIEW: MMA we're starting to move more in the direction now of trying to 
+    // do something, and if we get an error back, then report -- not so much upfront checking.
+    // This kind of logic goes better in the model.
+    
     // Cancel deletion if the user is ID=1
     NSInteger selectedUserId = [[self.usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
@@ -201,7 +212,7 @@
 /** Takes a user objects and activates it, calling notifications appropriately */
 - (void) activateUserWithModal:(User*) user
 {
-  [DSActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  [DSBezelActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
@@ -215,10 +226,14 @@
  */
 - (void) _activateUser:(User*) user 
 {
-  // Activate, post notification and dismiss view
-  [user activateUser];
+  // User activation code here 
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:user.userId forKey:@"user_id"];
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [currentStateSingleton resetActiveTag];
+
+  // post notification and dismiss view
   [DSActivityView removeView];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -230,13 +245,6 @@
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
-
-}
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
 }
 
 - (void)dealloc

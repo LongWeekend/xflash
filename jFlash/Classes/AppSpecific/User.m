@@ -44,20 +44,9 @@
   [sql release];
 }
 
-//TODO
-//REVIEW: what is a model method doing updating the state engine?
-- (void) activateUser
-{
-  // User activation code here 
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setInteger:userId forKey:@"user_id"];
-  
-  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
-  [currentStateSingleton resetActiveTag];
-}
 
-#pragma mark -
-#pragma mark Class plumbing
+
+#pragma mark - Class plumbing
 
 - (id) init
 {

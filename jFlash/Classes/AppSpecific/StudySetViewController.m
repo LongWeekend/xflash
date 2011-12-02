@@ -11,7 +11,7 @@
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
-
+#import "RootViewController.h"
 #import "SettingsViewController.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
@@ -92,7 +92,7 @@ NSInteger const kLWEBackupSection = 2;
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   if (searching == NO)
@@ -162,6 +162,8 @@ NSInteger const kLWEBackupSection = 2;
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudyView object:nil];
   
   // Stop the animator
   selectedTagId = -1;
@@ -523,10 +525,10 @@ NSInteger const kLWEBackupSection = 2;
  */
 - (void)tableView:(UITableView *)lclTableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   if (indexPath.section == kLWETagsSection || searching)
   {
-    [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
-    Tag* tmpTag = [[self tagArray] objectAtIndex:indexPath.row];
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
     StudySetWordsViewController *wordsController = [[StudySetWordsViewController alloc] initWithTag:tmpTag]; 
     [self.navigationController pushViewController:wordsController animated:YES];
     [wordsController release];
@@ -544,9 +546,9 @@ NSInteger const kLWEBackupSection = 2;
   // Only can edit tags, and user tags at that
   if (indexPath.section == kLWETagsSection)
   {
-    CurrentState *state = [CurrentState sharedCurrentState];
-    Tag* tmpTag = [tagArray objectAtIndex:indexPath.row];
-    if ([tmpTag tagEditable] && ([[state activeTag] tagId] != [tmpTag tagId]))
+    Tag *activeTag = [[CurrentState sharedCurrentState] activeTag];
+    Tag *tmpTag = [self.tagArray objectAtIndex:indexPath.row];
+    if (tmpTag.isEditable && ([tmpTag isEqual:activeTag] == NO))
     {
       return YES;
     }

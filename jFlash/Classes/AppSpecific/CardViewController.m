@@ -178,6 +178,9 @@
 // Prepare the view for the current card
 - (void) _prepareView:(Card*)card
 {
+  // Reset the meaning's scroll view location
+  self.meaningWebView.scrollView.contentOffset = CGPointZero;
+  
   // Fix up the headword & the meaning; those are a bit easier.
   [self _injectMeaningHTML:card.meaning];
   self.cardHeadwordLabel.text = card.headword;

@@ -98,8 +98,8 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 {
   // Show them "remove" if they happen to be studying the favorites instead of "add to favorites".
   NSString *favoriteString = @"";
-  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-  if ([TagPeer card:self.currentCard isMemberOfTag:favoritesTag])
+  Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
+  if ([TagPeer card:self.currentCard isMemberOfTag:starredTag])
   {
     favoriteString = NSLocalizedString(@"Remove from Starred",@"ActionBarViewController.ActionSheetRemoveFromFavorites");
   }
@@ -126,7 +126,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 //! UIActionSheet delegate method - which modal do we load when the user taps "add to set" or "report bad data"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
+  Tag *favoritesTag = [[CurrentState sharedCurrentState] starredTag];
   if (buttonIndex == SVC_ACTION_REPORT_BUTTON)
   {
     [self _reportBadData];

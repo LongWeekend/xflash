@@ -65,7 +65,7 @@ enum ControlSectionRows
   self.difficultySegmentControl.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.tableView.backgroundColor = [UIColor clearColor];
 }
 
