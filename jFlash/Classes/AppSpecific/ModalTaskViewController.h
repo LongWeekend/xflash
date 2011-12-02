@@ -23,8 +23,6 @@ extern NSString * const LWEModalTaskDidFail;
   NSString *webViewContentFileName;               //! Sets the filename of the content to load into the details web view
 }
 
-@property CGFloat progress;
-
 // IBActions
 - (IBAction) startProcess;
 - (IBAction) cancelProcess;
