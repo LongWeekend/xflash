@@ -16,11 +16,11 @@
 
 - (void) testInitFromHash
 {
-  STAssertEqualObjects(@"Mark's Cards",self.plugin.name);
-  STAssertEqualObjects(@"FTS-DB",self.plugin.pluginId);
-  STAssertEqualObjects(@"database",self.plugin.pluginType);
-  STAssertEqualObjects(@"1.0",self.plugin.version);
-  STAssertEqualObjects(@"cFlash-FTS-1.0.db",self.plugin.filePath);
+  STAssertEqualObjects(@"Mark's FTS Cards",self.plugin.name,@"");
+  STAssertEqualObjects(@"FTS-DB",self.plugin.pluginId,@"");
+  STAssertEqualObjects(@"database",self.plugin.pluginType,@"");
+  STAssertEqualObjects(@"1.0",self.plugin.version,@"");
+  STAssertEqualObjects(@"cFlash-FTS-1.0.db",self.plugin.filePath,@"");
 }
 
 - (void) testFullPaths
@@ -29,22 +29,22 @@
   
   // Documents
   expectedPath = [LWEFile createDocumentPathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath);
+  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Library
   self.plugin.fileLocation = LWEPluginLocationLibrary;
   expectedPath = [LWEFile createLibraryPathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath);
+  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Bundle
   self.plugin.fileLocation = LWEPluginLocationBundle;
   expectedPath = [LWEFile createBundlePathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath);
+  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
   
   // Unknown value defaults to bundle
   self.plugin.fileLocation = 6543;
   expectedPath = [LWEFile createBundlePathWithFilename:self.plugin.filePath];
-  STAssertEqualObjects(expectedPath, self.plugin.fullPath);
+  STAssertEqualObjects(expectedPath, self.plugin.fullPath, @"Must be equal");
 }
 
 - (void) testVersionDetection
@@ -68,11 +68,11 @@
   Plugin *newPlugin = [Plugin pluginWithDictionary:newDict];
   Plugin *evenNewerPlugin = [Plugin pluginWithDictionary:evenNewerDict];
   
-  STAssertEqual(YES,[newPlugin isNewVersionOfPlugin:self.plugin]);
-  STAssertEqual(YES,[evenNewerPlugin isNewVersionOfPlugin:self.plugin]);
-  STAssertEqual(YES,[evenNewerPlugin isNewVersionOfPlugin:newPlugin]);
-  STAssertEqual(NO,[self.plugin isNewVersionOfPlugin:newPlugin]);
-  STAssertEqual(NO,[self.plugin isNewVersionOfPlugin:evenNewerPlugin]);
+  STAssertTrue((YES == [newPlugin isNewVersionOfPlugin:self.plugin]),@"Should be YES");
+  STAssertEquals(YES,[evenNewerPlugin isNewVersionOfPlugin:self.plugin],@"Should be YES");
+  STAssertEquals(YES,[evenNewerPlugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
+  STAssertEquals(NO,[self.plugin isNewVersionOfPlugin:newPlugin],@"Should be YES");
+  STAssertEquals(NO,[self.plugin isNewVersionOfPlugin:evenNewerPlugin],@"Should be YES");
 }
 
 #pragma mark - Setup/Teardown

@@ -7,7 +7,6 @@
 //
 
 #import "PluginManagerTest.h"
-#import <UIKit/UIKit.h>
 
 @implementation PluginManagerTest
 @synthesize pluginMgr;
@@ -23,7 +22,7 @@
 
 - (void) setUp
 {
-  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
+  //  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
 }
 
 - (void) tearDown

@@ -26,6 +26,12 @@
   return plugin;
 }
 
+- (void) setValue:(id)value forUndefinedKey:(NSString*)key
+{
+  // Ignore non-matching KVC properties
+  return;
+}
+
 #pragma mark - NSCoding Support
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -87,7 +93,8 @@
   BOOL returnVal = NO;
   double pluginVersion = [plugin.version doubleValue];
   double myVersion = [self.version doubleValue];
-  if (pluginVersion > myVersion)
+  // Note that "isNewVersion" is being asked about self, not the parameter -- so this logic seems backward but isn't
+  if (pluginVersion < myVersion)
   {
     returnVal = YES;
   }
@@ -106,8 +113,9 @@
 
 - (LWEPackage *) downloadPackage
 {
-  LWEPackage *pluginPackage = [LWEPackage packageWithUrl:self.targetURL
+  LWEPackage *pluginPackage = [LWEPackage packageWithUrl:[NSURL URLWithString:self.targetURL]
                                      destinationFilepath:[[self fullPath] stringByAppendingString:@".zip"]];
+  return pluginPackage;
 }
 
 - (BOOL) isEqual:(id)object
