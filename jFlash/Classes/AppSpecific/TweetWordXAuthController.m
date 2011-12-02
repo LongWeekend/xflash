@@ -18,8 +18,7 @@
 @synthesize authBtn;
 @synthesize signupBtn;
 
-#pragma mark -
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 //! This method is used mainly for usability, and user experience for the easiness of use
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
@@ -69,17 +68,15 @@
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 }
 
-#pragma mark -
-#pragma mark UIAlertViewDelegate
+#pragma mark - UIAlertViewDelegate
 
 //! After the alert view is dismissed, clearing all the text fields.
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	passwordTxt.text = @"";
+	self.passwordTxt.text = @"";
 }
 
-#pragma mark -
-#pragma mark LWETXAuthViewProtocol
+#pragma mark - LWETXAuthViewProtocol
 
 //! This is the method called when authentication is failing. Either caused by the server, or the wrong username and password
 - (void)didFailAuthentication:(NSError *)error
@@ -94,13 +91,13 @@
                                      message:NSLocalizedString(@"Please check your username and password and try again.  Also, make sure that you have a network connection.", @"TweetWordXAuthController.FailMsgMsg")];
 }
 
-#pragma mark -
-#pragma mark Header File Implementation
+#pragma mark - Header File Implementation
 
 //! IBAction for "Authentication" button being clicked. It fires the authentication engine being passed to this view controller.
 - (IBAction)authenticateUser:(id)sender
 {
-	_lv = [LWELoadingView loadingView:self.parentViewController.view withText:@"Logging In"];
+	_lv = [LWELoadingView loadingView:self.parentViewController.view withText:NSLocalizedString(@"Logging In",@"Logging In")];
+  // TODO: MMA Danger Will Robinson, afterDelay:0.0
 	[self performSelector:@selector(_performAuthentication) withObject:nil afterDelay:0.0];
 }
 
@@ -119,7 +116,7 @@
  */
 - (void)_performAuthentication
 {
-	[self.authEngine startXAuthProcessWithUsername:unameTxt.text password:passwordTxt.text];
+	[self.authEngine startXAuthProcessWithUsername:self.unameTxt.text password:self.passwordTxt.text];
 }
 
 //! IBAction for cancelling the authentication proccess, and report back to the auth engine that the authorization has just failed.
@@ -143,19 +140,20 @@
 - (void)_textFieldResign
 {
 	if ([unameTxt isFirstResponder])
+  {
 		[unameTxt resignFirstResponder];
+  }
 	else if ([passwordTxt isFirstResponder])
+  {
 		[passwordTxt resignFirstResponder];
+  }
 	
 	//Put the view back to the normal view
-	[LWEViewAnimationUtils translateView:self.view 
-								 byPoint:CGPointMake(0,0) 
-							withInterval:0.5f];
+	[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,0) withInterval:0.5f];
 }
 
 
-#pragma mark -
-#pragma mark UIViewController stuffs
+#pragma mark - UIViewController stuffs
 
 //! When the view is touched, resign all of the text boxes
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -191,8 +189,8 @@
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
 	
-	unameTxt.text = @"";
-	passwordTxt.text = @"";
+	self.unameTxt.text = @"";
+	self.passwordTxt.text = @"";
 }
 
 

@@ -97,7 +97,7 @@
 - (void) _supportBtnPressed:(id)sender
 {
   UIAlertView *supportAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"GetSatisfaction.com",@"HelpViewController.SupportAlertMsgTitle")  
-                                                         message:NSLocalizedString(@"Do you have a question?\nA feature request?\nJust need some help?\n\nIt's best to make your voice heard on our support site, but we respond to e-mail too!",@"HelpViewController.SupportAlertMsgMsg")
+                                                         message:NSLocalizedString(@"Do you have a question?\nA feature request?\n\nIt's best to make your voice heard on our support site, but we respond to e-mail too!",@"HelpViewController.SupportAlertMsgMsg")
                                                         delegate:self
                                                cancelButtonTitle:NSLocalizedString(@"No Thanks",@"Cancel")
                                                otherButtonTitles:NSLocalizedString(@"Visit Site",@"Visit Site"),NSLocalizedString(@"Send an Email",@"Mail Us"), nil];

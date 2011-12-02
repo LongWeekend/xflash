@@ -220,6 +220,9 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
   // Replace active view with tabBarController's view
   [self.view addSubview:self.tabBarController.view];
+  
+  // Get rid of the splash image beneath
+  self.view.backgroundColor = [UIColor blackColor];
 
   //launch the please rate us
   [Appirater appLaunched];

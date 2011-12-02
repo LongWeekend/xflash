@@ -373,8 +373,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 	LWE_LOG(@"Done Sending the notification");
 }
 
-#pragma mark -
-#pragma mark TweetWordMethod
+#pragma mark - TweetWordMethod
 
 //! get the tweet word and try to cut the maning of the tweet word so that it gives the result of NSString which is going to fit within the allocation of twitter status update
 - (NSString *)getTweetWord

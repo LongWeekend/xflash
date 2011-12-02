@@ -56,6 +56,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const SET_READING_ROMAJI  = @"ROMAJI";
       NSString * const SET_READING_BOTH    = @"BOTH";
 
+      // Each flash has its own Tiwtter key
+      NSString * const LWE_TWITTER_CONSUMER_KEY = @"BGDlaaZWdjPo3oPudnIUNA";
+      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
+
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.5";
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
@@ -78,11 +82,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
-      // Twitter App Keys
-      NSString * const LWE_TWITTER_CONSUMER_KEY     =	@"BGDlaaZWdjPo3oPudnIUNA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY      =	@"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
-
-
 // Don't use Cloudfront in development
 #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://s3.amazonaws.com/japanese-flash/jFlash-availablePlugins.plist";
@@ -96,6 +95,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const APP_PINYIN_COLOR             = @"pinyin_color";
       NSString * const SET_PINYIN_COLOR_ON          = @"ON";
       NSString * const SET_PINYIN_COLOR_OFF         = @"OFF";
+
+      // Each flash has its own Tiwtter key
+      NSString * const LWE_TWITTER_CONSUMER_KEY = @"2xLbYtl787ShwJBFIC1QaA";
+      NSString * const LWE_TWITTER_PRIVATE_KEY  = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
 
 
       // These constants are general to the flashes
@@ -114,10 +117,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
   #else
       NSString * const LWE_PLUGIN_SERVER_LIST       = @"https://d3jxezdeu5e50q.cloudfront.net/cFlash-availablePlugins.plist";
   #endif
-
-      // Twitter App Keys
-      NSString * const LWE_TWITTER_CONSUMER_KEY     =	@"2xLbYtl787ShwJBFIC1QaA";
-      NSString * const LWE_TWITTER_PRIVATE_KEY      = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
 #endif
 
 

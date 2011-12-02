@@ -59,8 +59,6 @@
  * This is the designated initializer, and it asks for nib name for the view, twiter engine that
  * already has a logged on user (authenticated) and what is the initial word to be tweeted.
  */
-- (id)initWithNibName:(NSString *)nibName 
-		twitterEngine:(LWETwitterEngine *)twitterEngine 
-			tweetWord:(NSString *)tweetWord;
+- (id)initWithNibName:(NSString *)nibName twitterEngine:(LWETwitterEngine *)twitterEngine tweetWord:(NSString *)tweetWord;
 
 @end

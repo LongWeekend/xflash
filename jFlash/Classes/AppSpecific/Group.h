@@ -8,10 +8,14 @@
 
 #import "FMResultSet.h"
 @interface Group : NSObject
+{
+  NSInteger childGroupCount;
+}
 
 - (void) hydrate:(FMResultSet*)rs;
 - (NSArray*) childTags;
 
+//! Returns YES if this group is the top level group in a hierarchy.
 - (BOOL) isTopLevelGroup;
 
 @property (retain) NSString *groupName;   //! Display name
@@ -20,5 +24,6 @@
 @property NSInteger tagCount;             //! cached number of Tag items in the Group
 @property NSInteger recommended;          //! Is a recommended Group?
 @property NSInteger childGroupCount;      //! cached number of children Group objects
+@property (retain) NSString *groupDescription;
 
 @end

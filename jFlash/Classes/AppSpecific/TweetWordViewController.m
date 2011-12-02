@@ -19,8 +19,7 @@
 @synthesize _tweetWord;
 @synthesize _twitterEngine;
 
-#pragma mark -
-#pragma mark Private Methods
+#pragma mark - Private Methods
 
 //! Handy method to take care all of the text field keyboards.
 - (void)_resignTextFieldKeyboard
@@ -70,8 +69,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UITextViewDelegate
+#pragma mark - UITextViewDelegate
 
 //! Its handy to resign all of the keyboard it the user touch the view.
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -105,8 +103,7 @@
 	}
 }
 
-#pragma mark -
-#pragma mark UIViewController stuffs
+#pragma mark - UIViewController stuffs
 
 // The designated initializer.  Override if you 
 // create the controller programmatically and want to 

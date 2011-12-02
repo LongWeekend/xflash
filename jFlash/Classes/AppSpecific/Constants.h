@@ -80,7 +80,7 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 #elif defined(LWE_CFLASH)
 
   // LWE Favorites - CFlash
-  #define DEFAULT_TAG_ID 118
+  #define DEFAULT_TAG_ID 158
 
   extern NSString * const APP_PINYIN_COLOR;
   extern NSString * const SET_PINYIN_COLOR_ON;

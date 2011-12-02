@@ -257,12 +257,6 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
 #pragma mark - Convenience Methods to Abstract SQL
 
-//! Gets my Tag objects (ones created by the user) as array
-+ (NSArray*) retrieveMyTagList
-{
-  return [TagPeer retrieveTagListByGroupId:0];
-}
-
 //! Gets system Tag objects as array
 + (NSArray*) retrieveSysTagList
 {

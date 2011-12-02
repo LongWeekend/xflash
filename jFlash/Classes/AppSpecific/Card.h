@@ -25,7 +25,12 @@ extern NSString * const kLWESegmentedReadingKey;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 
 - (NSString*) reading;
+
+// Returns the headword, taking into account the app's current HW Mode setting
 - (NSString*) headword;
+
+// If ignoreMode == YES, returns the "headword" regardless of HW Mode
+- (NSString *) headwordIgnoringMode:(BOOL)ignoreMode;
 
 - (NSString*) meaning;
 
@@ -51,6 +56,8 @@ extern NSString * const kLWESegmentedReadingKey;
  */
 + (UIFont *) configureFontForLabel:(UILabel*)theLabel;
 
+//! If YES, this Card object isn't really a card -- jsut has an ID and hasn't been fetched.
+@property (readonly) BOOL isFault;
 
 //! PK of the card
 @property (nonatomic) NSInteger cardId;

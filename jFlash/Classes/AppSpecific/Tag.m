@@ -28,6 +28,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
 @synthesize tagId, tagName, tagEditable, tagDescription;
 @synthesize cardCount, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
 
++ (Tag *) starredWordsTag
+{
+  return [TagPeer retrieveTagById:STARRED_TAG_ID];
+}
+
 - (id) init
 {
   if ((self = [super init]))
@@ -71,6 +76,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
   // TODO: all of this makes the assumption that tags are 1-1 with groups.  that was not the 
   // original design, but are we moving that direction?  MMA - Oct 19 2011
   return [GroupPeer parentGroupIdOfTag:self];
+}
+
+- (BOOL) isEditable
+{
+  return (self.tagEditable == 1);
 }
 
 #pragma mark - Level algorithm

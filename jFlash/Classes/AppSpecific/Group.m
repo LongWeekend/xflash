@@ -10,7 +10,7 @@
 
 //! Group contains Tag objects for display to the user in categorical hierarchies
 @implementation Group
-@synthesize groupId, groupName, ownerId, tagCount, childGroupCount, recommended;
+@synthesize groupId, groupName, ownerId, tagCount, recommended, groupDescription;
 
 - (id) init
 {
@@ -26,11 +26,12 @@
 //!takes a sqlite result set and populates the properties of tag
 - (void) hydrate: (FMResultSet*) rs
 {
-	[self setGroupId:    [rs intForColumn:@"group_id"]];
-  [self setGroupName:  [rs stringForColumn:@"group_name"]];
-  [self setOwnerId:    [rs intForColumn:@"owner_id"]];
-  [self setTagCount:   [rs intForColumn:@"tag_count"]];
-  [self setRecommended:[rs intForColumn:@"recommended"]];
+  self.groupId = [rs intForColumn:@"group_id"];
+  self.groupName = [rs stringForColumn:@"group_name"];
+  self.ownerId = [rs intForColumn:@"owner_id"];
+  self.tagCount = [rs intForColumn:@"tag_count"];
+  self.recommended = [rs intForColumn:@"recommended"];
+  self.groupDescription = [rs stringForColumn:@"description"];
 }
 
 - (BOOL) isTopLevelGroup
@@ -72,6 +73,7 @@
 - (void) dealloc
 {
   [groupName release];
+  [groupDescription release];
 	[super dealloc];
 }
 

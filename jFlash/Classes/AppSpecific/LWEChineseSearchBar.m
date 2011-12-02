@@ -40,11 +40,11 @@
   NSInteger whichTone = [(UIView*)sender tag];
   if (whichTone != 5)
   {
-    self.text = [self.text stringByAppendingFormat:@"%d",whichTone];
+    self.text = [self.text stringByAppendingFormat:@"%d ",whichTone];
   }
   else
   {
-    self.text = [self.text stringByAppendingString:@"?"];
+    self.text = [self.text stringByAppendingString:@"? "];
   }
 }
 
