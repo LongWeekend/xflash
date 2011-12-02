@@ -5,13 +5,15 @@
 	<key>Plugins</key>
 	<array>
 		<dict>
-			<key>plugin_type</key>
+			<key>pluginType</key>
 			<string>database</string>
-			<key>plugin_details</key>
+			<key>details</key>
 			<string>Adds sub-second full dictionary search (12MB)</string>
-			<key>plugin_file_name</key>
-			<string>cFlash-FTS-1.0.db</string>
-			<key>plugin_html_content</key>
+			<key>fileLocation</key>
+			<integer>2</integer>
+			<key>comment</key>
+			<string>file Location #2 = documents (0 = bundle, 1 = library)</string>
+			<key>htmlString</key>
 			<string>&lt;!DOCTYPE html PUBLIC &apos;-//W3C//DTD XHTML 1.0 Transitional//EN&apos; &apos;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&apos;&gt;
 &lt;html&gt;&lt;head&gt;
   &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
@@ -52,29 +54,29 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</string>
-			<key>plugin_key</key>
+			<key>pluginId</key>
 			<string>FTS_DB</string>
-			<key>plugin_name</key>
+			<key>name</key>
 			<string>Awesomely Fast Search v1.0</string>
-			<key>plugin_notes_dir</key>
-			<string>plugin-resources</string>
-			<key>plugin_notes_file</key>
-			<string>full-text-search</string>
-			<key>plugin_target_path</key>
+			<key>filePath</key>
 			<string>cFlash-FTS-1.0.db</string>
-			<key>plugin_target_url</key>
+			<key>targetURL</key>
 			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.zip</string>
-			<key>plugin_version</key>
+			<key>version</key>
 			<string>1.0</string>
 		</dict>
 		<dict>
-			<key>plugin_type</key>
+			<key>pluginType</key>
 			<string>directory</string>
-			<key>plugin_details</key>
+			<key>details</key>
 			<string>Adds audio for each HSK card, recorded by a native speaker (34MB)</string>
-			<key>plugin_file_name</key>
+			<key>filePath</key>
 			<string>cFlash-AUDIO-1.0/</string>
-			<key>plugin_html_content</key>
+			<key>fileLocation</key>
+			<integer>2</integer>
+			<key>comment</key>
+			<string>file Location #2 = documents (0 = bundle, 1 = library)</string>
+			<key>htmlString</key>
 			<string>&lt;!DOCTYPE html PUBLIC &apos;-//W3C//DTD XHTML 1.0 Transitional//EN&apos; &apos;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&apos;&gt;
 &lt;html&gt;&lt;head&gt;
   &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
@@ -115,19 +117,13 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</string>
-			<key>plugin_key</key>
+			<key>pluginId</key>
 			<string>AUDIO_SAMPLES</string>
-			<key>plugin_name</key>
+			<key>name</key>
 			<string>Native-speaker audio for each HSK card</string>
-			<key>plugin_notes_dir</key>
-			<string>plugin-resources</string>
-			<key>plugin_notes_file</key>
-			<string>full-text-search</string>
-			<key>plugin_target_path</key>
-			<string>cFlash-FTS-1.0.db</string>
-			<key>plugin_target_url</key>
-			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.zip</string>
-			<key>plugin_version</key>
+			<key>targetURL</key>
+			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-HSK-AUDIO-1.0.zip</string>
+			<key>version</key>
 			<string>1.0</string>
 		</dict>
 	</array>
