@@ -75,6 +75,12 @@
   STAssertEquals(NO,[self.plugin isNewVersionOfPlugin:evenNewerPlugin],@"Should be YES");
 }
 
+- (void) testLooseKVC
+{
+  // Doesn't throw an exception even with unknown value
+  STAssertNoThrow([self.plugin setValue:@"foo" forKey:@"fsd43dsar32"], @"This should pass");
+}
+
 #pragma mark - Setup/Teardown
 
 - (void) setUp
