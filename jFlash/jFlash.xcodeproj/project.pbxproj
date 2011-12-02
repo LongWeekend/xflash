@@ -3310,6 +3310,7 @@
 				496C66FF14728B9C009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
 				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
+				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
 				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
