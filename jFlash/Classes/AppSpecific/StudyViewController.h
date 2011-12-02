@@ -33,12 +33,12 @@
   ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;
   //! This is set when card is loaded, and used when revealed
-  BOOL _hasExampleSentences;
   BOOL _viewHasBeenLoadedOnce;
   BOOL _isChangingPage;  // page control state
 }
 
 - (BOOL) hasExampleSentences;
+- (BOOL) hasAudioSample;
 
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)revealCard;

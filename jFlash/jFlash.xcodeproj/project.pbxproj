@@ -801,6 +801,10 @@
 		D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
+		D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */; };
+		D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */; };
+		D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
+		D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 /* End PBXBuildFile section */
@@ -1359,6 +1363,8 @@
 		D35B07471116456D00DB5E02 /* practice-btns-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btns-bg.png"; path = "Assets/practice-btns-bg.png"; sourceTree = "<group>"; };
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
+		D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon.png"; path = "Assets/glyphish-style-listen-icon.png"; sourceTree = "<group>"; };
+		D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon@2x.png"; path = "Assets/glyphish-style-listen-icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2148,6 +2154,8 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */,
+				D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */,
 				491AA1CB1456AA29009B9F6E /* foo.mp3 */,
 				49DADB7E1277F36F00B8FD72 /* Default.png */,
 				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
@@ -2879,6 +2887,8 @@
 				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
 				49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125241487300A00D4D150 /* MoodIcon.xib in Resources */,
+				D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
+				D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3080,6 +3090,8 @@
 				497607EB147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
 				49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125251487300A00D4D150 /* MoodIcon.xib in Resources */,
+				D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
+				D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
