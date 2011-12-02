@@ -2195,8 +2195,6 @@
 		917A5C8611AB851E00016BD2 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				4971252814873B0000D4D150 /* MoodIcon.h */,
-				4971252914873B0000D4D150 /* MoodIcon.m */,
 				242A17421462893E002977E6 /* AudioSessionManager.h */,
 				242A17431462893E002977E6 /* AudioSessionManager.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
@@ -2457,6 +2455,8 @@
 		91DDB0A911C1F5CB00E8B962 /* Study View */ = {
 			isa = PBXGroup;
 			children = (
+				4971252814873B0000D4D150 /* MoodIcon.h */,
+				4971252914873B0000D4D150 /* MoodIcon.m */,
 				49AAB8CD147127E40015D64B /* StudyViewProtocols.h */,
 				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
 				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
