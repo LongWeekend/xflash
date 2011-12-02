@@ -205,7 +205,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] downloadedPlugins] count];
+    NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPlugins] count];
     if (numInstalled > 0)
     {
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
