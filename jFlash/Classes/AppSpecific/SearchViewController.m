@@ -526,7 +526,7 @@ const NSInteger KSegmentedTableHeader = 100;
   else
   {
     // Rebuild cache and fail over to manual function
-    Tag *starredTag = [[CurrentState sharedCurrentState] favoritesTag];
+    Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
     self.membershipCacheArray = [[[CardPeer retrieveFaultedCardsForTag:starredTag] mutableCopy] autorelease];
     returnVal = [TagPeer card:theCard isMemberOfTag:starredTag];
   }
@@ -546,8 +546,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
   if (indexPath != nil)
   {
-    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
     Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+    Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
     
     // Use cache for toggling status if we have it
     BOOL isMember = NO;
@@ -557,12 +557,12 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else
     {
-      isMember = [TagPeer card:theCard isMemberOfTag:favoritesTag];
+      isMember = [TagPeer card:theCard isMemberOfTag:starredTag];
     }
     
     if (isMember == NO)
     {
-      [TagPeer subscribeCard:theCard toTag:favoritesTag];
+      [TagPeer subscribeCard:theCard toTag:starredTag];
       
       // Now add the new ID onto the end of the search cache
       [self.membershipCacheArray addObject:theCard];
@@ -570,8 +570,7 @@ const NSInteger KSegmentedTableHeader = 100;
     else
     {
       NSError *error = nil;
-      Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-      BOOL result = [TagPeer cancelMembership:theCard fromTag:favoritesTag error:&error];
+      BOOL result = [TagPeer cancelMembership:theCard fromTag:starredTag error:&error];
       if (!result)
       {
         if ([error code] == kRemoveLastCardOnATagError)
