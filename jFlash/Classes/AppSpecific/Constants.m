@@ -116,10 +116,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePluginForDownload.plist";
   #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/chinese-flash/cFlash-availablePlugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/chinese-flash/cFlash-plugins.plist";
   #else
       NSString * const LWE_PLUGIN_SERVER            = @"https://d3jxezdeu5e50q.cloudfront.net";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/cFlash-availablePlugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/cFlash-plugins.plist";
   #endif
 #endif
 
