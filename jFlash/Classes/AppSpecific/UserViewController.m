@@ -212,7 +212,7 @@
 /** Takes a user objects and activates it, calling notifications appropriately */
 - (void) activateUserWithModal:(User*) user
 {
-  [DSActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  [DSBezelActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
