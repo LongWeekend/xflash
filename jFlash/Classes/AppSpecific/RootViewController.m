@@ -324,23 +324,12 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   dlViewController.webViewContent = thePlugin.htmlString;
 
   // Get path information
-  NSURL *targetURL = [NSURL URLWithString:[aNotification.userInfo objectForKey:@"plugin_target_url"]];
-  if (targetURL && targetPath)
-  {
-    LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
-    packageDownloader.progressDelegate = dlViewController;
-    [packageDownloader queuePackage:thePlugin.downloadPackage];
-    dlViewController.taskHandler = packageDownloader;
-    [packageDownloader release];
-    [self _showModalWithViewController:dlViewController useNavController:YES];
-  }
-  else
-  {
-    // This is a problem!  Why wouldn't we have stuff???
-    [LWEAnalytics logError:@"PLUGIN_URL_FAILURE" message:[NSString stringWithFormat:@"%@",aNotification.userInfo]];
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
-                                       message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
-  }
+  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
+  packageDownloader.progressDelegate = dlViewController;
+  [packageDownloader queuePackage:thePlugin.downloadPackage];
+  dlViewController.taskHandler = packageDownloader;
+  [self _showModalWithViewController:dlViewController useNavController:YES];
+  [packageDownloader release];
   
   // Hold on to this
   [[CurrentState sharedCurrentState] setModalTaskViewController:dlViewController];
