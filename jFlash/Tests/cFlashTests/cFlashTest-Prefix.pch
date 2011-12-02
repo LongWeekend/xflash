@@ -18,6 +18,7 @@
 #import "UserHistoryPeer.h"
 #import "TagPeer.h"
 #import "LWEAnalytics.h"
+#import "LWEError.h"
 #import "LWEDatabase.h"
 #import "LWEUILabelUtils.h"
 #import "LWEUITableUtils.h"

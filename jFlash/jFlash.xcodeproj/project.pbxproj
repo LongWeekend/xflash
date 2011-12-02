@@ -70,7 +70,6 @@
 		490B23591277C05100CF3484 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23581277C05100CF3484 /* Icon-72.png */; };
 		49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
 		49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
-		49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */; };
 		49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */; };
 		4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */; };
 		4919507D144F1BFE00DB81F7 /* downloadedPlugin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507B144F1BFE00DB81F7 /* downloadedPlugin.plist */; };
@@ -414,6 +413,10 @@
 		498EBDB01488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
 		498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
 		498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
+		498EBDB81489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
+		498EBDB91489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
+		498EBDBA1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
+		498EBDBB1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
@@ -946,7 +949,6 @@
 		490B23401277BCE100CF3484 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/src/FMResultSet.m; sourceTree = "<group>"; };
 		490B23561277BF4600CF3484 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Assets/Icon.png; sourceTree = "<group>"; };
 		490B23581277C05100CF3484 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Assets/Icon-72.png"; sourceTree = "<group>"; };
-		49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-availablePluginForDownload.plist"; path = "Plugins/cFlash-availablePluginForDownload.plist"; sourceTree = "<group>"; };
 		49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-downloadedPlugin.plist"; path = "Plugins/cFlash-downloadedPlugin.plist"; sourceTree = "<group>"; };
 		4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = availablePluginForDownload.plist; path = Plugins/availablePluginForDownload.plist; sourceTree = "<group>"; };
 		4919507B144F1BFE00DB81F7 /* downloadedPlugin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = downloadedPlugin.plist; path = Plugins/downloadedPlugin.plist; sourceTree = "<group>"; };
@@ -1029,6 +1031,7 @@
 		498EBDAC1488BDE000BA6DE7 /* LWEError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEError.m; sourceTree = "<group>"; };
 		498EBDB11488D43A00BA6DE7 /* PluginTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginTest.h; path = Tests/PluginTest.h; sourceTree = SOURCE_ROOT; };
 		498EBDB21488D43A00BA6DE7 /* PluginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginTest.m; path = Tests/PluginTest.m; sourceTree = SOURCE_ROOT; };
+		498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-availablePlugins.plist"; path = "Plugins/cFlash-availablePlugins.plist"; sourceTree = "<group>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
@@ -1745,7 +1748,7 @@
 		49195075144F1ACD00DB81F7 /* CFlash */ = {
 			isa = PBXGroup;
 			children = (
-				49195076144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist */,
+				498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */,
 				49195077144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist */,
 				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
 				4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */,
@@ -3004,6 +3007,7 @@
 				497125241487300A00D4D150 /* MoodIcon.xib in Resources */,
 				D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
 				D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
+				498EBDB81489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3019,6 +3023,7 @@
 				493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */,
 				49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125261487300A00D4D150 /* MoodIcon.xib in Resources */,
+				498EBDBA1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3036,6 +3041,7 @@
 				497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
 				49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125271487300A00D4D150 /* MoodIcon.xib in Resources */,
+				498EBDBB1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3192,7 +3198,6 @@
 				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
 				49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */,
 				49716146144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
-				49195078144F1BEF00DB81F7 /* cFlash-availablePluginForDownload.plist in Resources */,
 				49195079144F1BEF00DB81F7 /* cFlash-downloadedPlugin.plist in Resources */,
 				491AA1CD1456AA29009B9F6E /* foo.mp3 in Resources */,
 				496C6704147294D9009F04D4 /* cFlash-FTS-1.0.db in Resources */,
@@ -3207,6 +3212,7 @@
 				497125251487300A00D4D150 /* MoodIcon.xib in Resources */,
 				D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
 				D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
+				498EBDB91489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

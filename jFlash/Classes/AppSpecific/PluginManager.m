@@ -13,6 +13,9 @@
 NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 
 @interface PluginManager ()
+- (void)_initAvailableForDownloadPluginsList;
+- (void)_initDownloadedPluginsList;
+
 - (void) _registerPlugin:(Plugin *)plugin;
 - (BOOL) _loadDatabasePlugin:(Plugin *)plugin error:(NSError **)error;
 @end
@@ -48,15 +51,21 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 }
 
 /** 
- * This is new in 1.2, because prior to this, the list dictionary of dictionary for plugin is hardcoded in the code, and now it is moved to the flat file.
- * This method will try to load the available for download plugin list from the user document folder, if it is not there it means the program first launched (after upgrade, or after install).
- * It has default bundle plist file which contains all of the "should be available for download" plugin list file, read from that, and check with the user settings, 
- * if the user has not downloaded the plugin, it means that it should copy the one from the bundle, and populate the path to the plugin, and last step would be write the file back to the DOCUMENT folder.
- * However, if its not the first run, the user should already has the file in the DOCUMENT folder, and just load it from there directly.
+ * This method will try to load the "available for download" plugin list from the user document folder,
+ * if it is not there it means the program first launched (after upgrade, or after install).
  *
- * UPDATE: After given some thought, it would be best to read from file only if the device not connected to the internet, if the device is connected, it should check for update
- * right away.
+ * It has default bundle plist file which contains all of the "should be available for download"
+ * plugin list file, read from that, and check with the user settings, if the user has not downloaded
+ * the plugin, it means that it should copy the one from the bundle, and populate the path to the plugin,
+ * and last step would be write the file back to the DOCUMENT folder.
+ *
+ * However, if its not the first run, the user should already has the file in the DOCUMENT folder, and
+ * just load it from there directly.
+ *
+ * UPDATE: After given some thought, it would be best to read from file only if the device not
+ * connected to the internet, if the device is connected, it should check for update right away.
  */
+
 - (void) _initAvailableForDownloadPluginsList
 {
 	NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
@@ -349,9 +358,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
     
     Plugin *availPlugin = [Plugin pluginWithDictionary:availPluginHash];
     Plugin *waitingToDownloadPlugin = [self.availableForDownloadPlugins objectForKey:availPlugin.pluginId];
-
-    NSDictionary *pluginSettings = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
-    Plugin *currPlugin = [pluginSettings objectForKey:availPlugin.pluginId];
+    Plugin *currPlugin = [_loadedPlugins objectForKey:availPlugin.pluginId];
     
     // Determine whether case 1) or 2) applies
     BOOL installedPluginNeedsUpdate = (currPlugin && [availPlugin isNewVersionOfPlugin:currPlugin]);

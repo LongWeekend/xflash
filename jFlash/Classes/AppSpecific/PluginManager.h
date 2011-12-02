@@ -28,10 +28,6 @@ extern NSString * const LWEPluginTargetPathKey;
   NSMutableArray *_downloadedPlugins;
 }
 
-- (void)_initAvailableForDownloadPluginsList;
-- (void)_initDownloadedPluginsList;
-
-
 // ======= THESE DO SOMETHING =========
 
 //! Returns YES if the plugin was able to be disabled.  Directory plugins always return YES.
