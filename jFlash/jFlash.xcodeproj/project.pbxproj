@@ -616,6 +616,8 @@
 		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
 		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
+		91910156148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
+		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -1236,6 +1238,8 @@
 		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
 		919100F21486A6B1003E9A19 /* JRPreviewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRPreviewLabel.m; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.m; sourceTree = SOURCE_ROOT; };
+		91910154148992EC003E9A19 /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = SOURCE_ROOT; };
+		91910155148992EC003E9A19 /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -1615,6 +1619,8 @@
 				49E3D17A1472803900F79308 /* CardTagTest.m */,
 				49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */,
 				49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */,
+				91910154148992EC003E9A19 /* TagTest.h */,
+				91910155148992EC003E9A19 /* TagTest.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -3314,6 +3320,7 @@
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
 				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
+				91910156148992EC003E9A19 /* TagTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3377,6 +3384,7 @@
 				49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */,
 				49C506281484966A0094734D /* JSONKit.m in Sources */,
 				4971252D14873B0000D4D150 /* MoodIcon.m in Sources */,
+				91910157148992EC003E9A19 /* TagTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

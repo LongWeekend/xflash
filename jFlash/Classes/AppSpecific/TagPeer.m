@@ -318,8 +318,8 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   LWE_ASSERT_EXC([tagName isKindOfClass:[NSString class]],@"You must pass a string as the tag name");
   
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
-  tagName = [tagName stringByReplacingOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, tagName.length)];
-  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,description];
+  tagName = [LWEDatabase sqliteEscapedString:tagName];
+  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,[LWEDatabase sqliteEscapedString:description]];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   [db executeUpdate:sql];
   
