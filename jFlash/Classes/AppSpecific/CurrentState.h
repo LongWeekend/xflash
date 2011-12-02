@@ -40,6 +40,6 @@ extern NSString * const LWEActiveTagDidChange;
 //! setter for active tag.  Sets the NSUserDefault for the tag id.
 - (void) setActiveTag: (Tag*) tag;
 
-@property (retain) Tag *favoritesTag;
+@property (retain) Tag *starredTag;
 
 @end

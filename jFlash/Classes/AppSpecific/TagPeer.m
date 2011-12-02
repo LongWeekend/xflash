@@ -164,7 +164,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 }
 
 //! Returns an array of tag Ids this card is a member of
-+ (NSArray*) membershipListForCard:(Card*)card
++ (NSArray *) faultedTagsForCard:(Card *)card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *membershipListArray = [NSMutableArray array];
@@ -174,7 +174,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 	while ([rs next])
   {
     tmpTagId = [rs intForColumn:@"tag_id"];
-    [membershipListArray addObject:[NSNumber numberWithInt:tmpTagId]];
+    [membershipListArray addObject:[Tag blankTagWithId:tmpTagId]];
 	}
 	[rs close];
   return (NSArray*)membershipListArray;
