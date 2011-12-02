@@ -1752,10 +1752,10 @@
 			children = (
 				498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */,
 				498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */,
+				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
 				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
 				4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */,
 				49BD2AF2138E664100FAC045 /* cFlash.db */,
-				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
 			);
 			name = CFlash;
 			sourceTree = "<group>";
