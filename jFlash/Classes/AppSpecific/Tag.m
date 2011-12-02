@@ -33,6 +33,13 @@ NSInteger const kLWEUninitializedCardCount = -1;
   return [TagPeer retrieveTagById:STARRED_TAG_ID];
 }
 
++ (Tag *) blankTagWithId:(NSInteger)tagId
+{
+  Tag *tag = [[[[self class] alloc] init] autorelease];
+  tag.tagId = tagId;
+  return tag;
+}
+
 - (id) init
 {
   if ((self = [super init]))

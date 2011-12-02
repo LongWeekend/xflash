@@ -25,6 +25,9 @@ extern NSInteger const kLWEUninitializedTagId;
 //! Factory method that returns the starred words tag
 + (Tag *) starredWordsTag;
 
+//! Factory method for an unitialized tag that only has its ID set
++ (Tag *) blankTagWithId:(NSInteger)tagId;
+
 //! Returns YES if the user is allowed to edit this tag (either description or the contents)
 - (BOOL) isEditable;
 
