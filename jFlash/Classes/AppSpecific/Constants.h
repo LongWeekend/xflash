@@ -11,8 +11,19 @@
 #define DEFAULT_DIFFICULTY 1
 
 #define LWE_PLUGIN_UPDATE_PERIOD		14
-
 #define LWE_TWITTER_MAX_CHARS	132
+
+// algorithm controls
+#define MAX_MAX_STUDYING 50
+#define MIN_MAX_STUDYING 5
+#define MAX_FREQUENCY_MULTIPLIER 4
+#define MIN_FREQUENCY_MULTIPLIER 1
+#define NUM_CARDS_IN_NOT_NEXT_QUEUE 5
+
+#define FONT_SIZE_ADD_TAG_VC 14
+
+// default background image for UITableViews
+extern NSString * const LWETableBackgroundImage;
 
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
@@ -102,18 +113,3 @@ extern NSString * const LWE_APP_SPLASH_IMAGE; // App splash image - different be
 
 extern NSString * const SENTENCES_HTML_HEADER;
 
-// Study View controllers
-#define kAnimationKey @"transitionViewAnimation"
-#define percentCorrectLabelStartText @"100%"
-
-// algorithm controls
-#define MAX_MAX_STUDYING 50
-#define MIN_MAX_STUDYING 5
-#define MAX_FREQUENCY_MULTIPLIER 4
-#define MIN_FREQUENCY_MULTIPLIER 1
-#define NUM_CARDS_IN_NOT_NEXT_QUEUE 5
-
-#define FONT_SIZE_ADD_TAG_VC 14
-
-// default background image for UITableViews
-#define TABLEVIEW_BACKGROUND_IMAGE @"/table-background.jpg"

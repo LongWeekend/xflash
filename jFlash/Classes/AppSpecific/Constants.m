@@ -11,6 +11,8 @@
 #define APP_TARGET_JFLASH 0
 #define APP_TARGET_CFLASH 1
 
+extern NSString * const LWETableBackgroundImage = @"/table-background.jpg";
+
 // Settings (also defined in header Constants.h)
 NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";
@@ -121,9 +123,9 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 
 // Plugin keys - DO NOT change
-NSString *const CARD_DB_KEY = @"CARD_DB";
-NSString *const FTS_DB_KEY = @"FTS_DB";
-NSString *const EXAMPLE_DB_KEY = @"EX_DB";
+NSString * const CARD_DB_KEY = @"CARD_DB";
+NSString * const FTS_DB_KEY = @"FTS_DB";
+NSString * const EXAMPLE_DB_KEY = @"EX_DB";
 
 
 //------------------------------------------------------------
