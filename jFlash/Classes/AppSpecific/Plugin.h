@@ -7,7 +7,7 @@
 //
 
 
-typedef enum NSInteger
+typedef enum
 {
   LWEPluginLocationBundle = 0,
   LWEPluginLocationLibrary = 1,
@@ -19,6 +19,8 @@ typedef enum NSInteger
 //! For creating a plugin file out of an NSDictionary hash of strings
 + (id) pluginWithDictionary:(NSDictionary *)dict;
 
+- (BOOL) isNewVersionOfPlugin:(Plugin *)plugin;
+
 - (NSString *) fullPath;
 - (BOOL) isDirectoryPlugin;
 - (BOOL) isDatabasePlugin;
@@ -26,6 +28,7 @@ typedef enum NSInteger
 @property LWEPluginLocation fileLocation;
 @property (retain) NSString *filePath;
 @property (retain) NSString *name;
+@property (retain) NSString *details;
 @property (retain) NSString *version;
 @property (retain) NSString *pluginType;
 @property (retain) NSString *pluginId;

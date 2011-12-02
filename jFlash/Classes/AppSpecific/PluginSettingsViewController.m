@@ -55,10 +55,9 @@
  */
 - (void)performCheckUpdateWithLoadingView:(LWELoadingView *)lv
 {
-	PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
 	
 	[self _changeLastUpdateLabel];
-  [pm checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
+	[[CurrentState sharedCurrentState] checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self _reloadTableData];
 	
 	[lv removeFromSuperview];
@@ -104,8 +103,8 @@
 {
   // Refresh plugin data
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  self.installedPlugins = [pm downloadedPlugins];
-  self.availablePlugins = [pm availablePlugins];
+  self.installedPlugins = [[pm downloadedPlugins] allValues];
+  self.availablePlugins = [pm.availableForDownloadPlugins allValues];
   [self.tableView reloadData];
 }
 
@@ -141,14 +140,16 @@
     cell = [LWEUITableUtils reuseCellForIdentifier:@"installed" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    cell.textLabel.text = [[self.installedPlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
+    Plugin *thePlugin = [self.installedPlugins objectAtIndex:indexPath.row];
+    cell.textLabel.text = thePlugin.name;
   }
   else
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"available" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
+    Plugin *thePlugin = [self.availablePlugins objectAtIndex:indexPath.row];
+    cell.textLabel.text = thePlugin.name;
     cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];    
-    cell.detailTextLabel.text = [[self.availablePlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_details"];
-    cell.textLabel.text = [[self.availablePlugins objectAtIndex:indexPath.row] objectForKey:@"plugin_name"];
+    cell.detailTextLabel.text = thePlugin.details;
   }
 
   return cell;  

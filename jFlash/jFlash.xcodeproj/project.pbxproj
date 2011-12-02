@@ -402,6 +402,18 @@
 		497607EB147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */; };
 		497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
+		498EBDA31488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */; };
+		498EBDA41488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */; };
+		498EBDA71488B96800BA6DE7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA61488B96800BA6DE7 /* Plugin.m */; };
+		498EBDA81488B96800BA6DE7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA61488B96800BA6DE7 /* Plugin.m */; };
+		498EBDA91488B96800BA6DE7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA61488B96800BA6DE7 /* Plugin.m */; };
+		498EBDAA1488B96800BA6DE7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA61488B96800BA6DE7 /* Plugin.m */; };
+		498EBDAD1488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
+		498EBDAE1488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
+		498EBDAF1488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
+		498EBDB01488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
+		498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
+		498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
 		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
@@ -1009,6 +1021,14 @@
 		497607E1147A6570000A9FC5 /* chinese-flash-splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash.png"; path = "Assets/CFlash/chinese-flash-splash.png"; sourceTree = "<group>"; };
 		497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash@2x.png"; path = "Assets/CFlash/chinese-flash-splash@2x.png"; sourceTree = "<group>"; };
 		4986609B14847766007F3E20 /* LWELongRunningTaskProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWELongRunningTaskProtocol.h; sourceTree = "<group>"; };
+		498EBDA11488AEAA00BA6DE7 /* PluginManagerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginManagerTest.h; path = Tests/PluginManagerTest.h; sourceTree = SOURCE_ROOT; };
+		498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManagerTest.m; path = Tests/PluginManagerTest.m; sourceTree = SOURCE_ROOT; };
+		498EBDA51488B96800BA6DE7 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plugin.h; path = AppSpecific/Plugin.h; sourceTree = "<group>"; };
+		498EBDA61488B96800BA6DE7 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Plugin.m; path = AppSpecific/Plugin.m; sourceTree = "<group>"; };
+		498EBDAB1488BDE000BA6DE7 /* LWEError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEError.h; sourceTree = "<group>"; };
+		498EBDAC1488BDE000BA6DE7 /* LWEError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEError.m; sourceTree = "<group>"; };
+		498EBDB11488D43A00BA6DE7 /* PluginTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginTest.h; path = Tests/PluginTest.h; sourceTree = SOURCE_ROOT; };
+		498EBDB21488D43A00BA6DE7 /* PluginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginTest.m; path = Tests/PluginTest.m; sourceTree = SOURCE_ROOT; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
 		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
@@ -1667,6 +1687,10 @@
 			children = (
 				49E3D1791472803900F79308 /* CardTagTest.h */,
 				49E3D17A1472803900F79308 /* CardTagTest.m */,
+				498EBDB11488D43A00BA6DE7 /* PluginTest.h */,
+				498EBDB21488D43A00BA6DE7 /* PluginTest.m */,
+				498EBDA11488AEAA00BA6DE7 /* PluginManagerTest.h */,
+				498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */,
 				49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */,
 				49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */,
 			);
@@ -1818,6 +1842,7 @@
 				913D48301353BE26008A4649 /* LWEJanrain */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				49EE8D90134EC15300EC6B0E /* LWE */,
+				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				91CA7222133D216C008A89A8 /* JREngage */,
 				913EEF6C130800F300EBCF87 /* IFUnicodeURL */,
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
@@ -1827,7 +1852,6 @@
 				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
-				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				9158C0020FB6C2320083223F /* FMDb */,
 			);
@@ -2056,6 +2080,8 @@
 				49EE918B134EC15500EC6B0E /* UIKit */,
 				49EE91A8134EC15500EC6B0E /* UIWebView+LWENoBounces.h */,
 				49EE91A9134EC15500EC6B0E /* UIWebView+LWENoBounces.m */,
+				498EBDAB1488BDE000BA6DE7 /* LWEError.h */,
+				498EBDAC1488BDE000BA6DE7 /* LWEError.m */,
 			);
 			name = LWE;
 			path = Reusable/LWE;
@@ -2296,6 +2322,8 @@
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
 				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
 				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
+				498EBDA51488B96800BA6DE7 /* Plugin.h */,
+				498EBDA61488B96800BA6DE7 /* Plugin.m */,
 				4950C25111B764B200B70EE9 /* PluginManager.h */,
 				4950C25211B764B200B70EE9 /* PluginManager.m */,
 				4999672811B3E45F00898A0C /* ThemeManager.h */,
@@ -3364,6 +3392,8 @@
 				49AD1802148476340017EFB4 /* zip.c in Sources */,
 				49AD1806148476340017EFB4 /* ZipArchive.mm in Sources */,
 				4971252A14873B0000D4D150 /* MoodIcon.m in Sources */,
+				498EBDA71488B96800BA6DE7 /* Plugin.m in Sources */,
+				498EBDAD1488BDE000BA6DE7 /* LWEError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3437,6 +3467,10 @@
 				49AD1808148476340017EFB4 /* ZipArchive.mm in Sources */,
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
+				498EBDA31488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */,
+				498EBDA91488B96800BA6DE7 /* Plugin.m in Sources */,
+				498EBDAF1488BDE000BA6DE7 /* LWEError.m in Sources */,
+				498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3510,6 +3544,10 @@
 				49AD1805148476340017EFB4 /* zip.c in Sources */,
 				49AD1809148476340017EFB4 /* ZipArchive.mm in Sources */,
 				4971252D14873B0000D4D150 /* MoodIcon.m in Sources */,
+				498EBDA41488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */,
+				498EBDAA1488B96800BA6DE7 /* Plugin.m in Sources */,
+				498EBDB01488BDE000BA6DE7 /* LWEError.m in Sources */,
+				498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3664,6 +3702,8 @@
 				49AD1803148476340017EFB4 /* zip.c in Sources */,
 				49AD1807148476340017EFB4 /* ZipArchive.mm in Sources */,
 				4971252B14873B0000D4D150 /* MoodIcon.m in Sources */,
+				498EBDA81488B96800BA6DE7 /* Plugin.m in Sources */,
+				498EBDAE1488BDE000BA6DE7 /* LWEError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

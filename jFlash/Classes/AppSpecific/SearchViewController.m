@@ -140,8 +140,7 @@ const NSInteger KSegmentedTableHeader = 100;
   self._wordsOrSentencesSegment.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
   // Fire off a notification to bring up the downloader?  If we are on the old data version, let them use search!
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  BOOL hasFTS = [pm pluginIsLoaded:FTS_DB_KEY];
+  BOOL hasFTS = [CurrentState pluginKeyIsLoaded:FTS_DB_KEY];
 #if defined(LWE_JFLASH)
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
   BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
@@ -150,8 +149,8 @@ const NSInteger KSegmentedTableHeader = 100;
 #endif
   if (!(hasFTS || isFirstVersion))
   {
-    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
+    Plugin *ftsPlugin = [CurrentState availablePluginForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:ftsPlugin userInfo:nil];
     self.searchBar.placeholder = NSLocalizedString(@"Tap here to install search",@"SearchViewController.SearchBarPlaceholder_InstallPlugin"); 
   }
   else
@@ -174,13 +173,13 @@ const NSInteger KSegmentedTableHeader = 100;
 - (void) pluginDidInstall:(NSNotification*)aNotification
 {
   // Only show control if both FTS AND EX are installed
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:EXAMPLE_DB_KEY])
-  {
+//  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+//  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:EXAMPLE_DB_KEY])
+//  {
     // Disabled for JFlash 1.1 release
 //    _showSearchTargetControl = YES;
 //    [self _addSearchControlToHeader];
-  }
+//  }
 }
 
 
@@ -246,9 +245,8 @@ const NSInteger KSegmentedTableHeader = 100;
  */
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  BOOL hasFTS = [pm pluginIsLoaded:FTS_DB_KEY];
-
+  BOOL hasFTS = [CurrentState pluginKeyIsLoaded:FTS_DB_KEY];
+  
 #if defined(LWE_JFLASH)
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
   BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
@@ -263,8 +261,8 @@ const NSInteger KSegmentedTableHeader = 100;
   else
   {
     // And show them the modal again for good measure
-    NSDictionary *dict = [[pm availablePluginsDictionary] objectForKey:FTS_DB_KEY];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:self userInfo:dict];
+    Plugin *ftsPlugin = [CurrentState availablePluginForKey:FTS_DB_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:ftsPlugin userInfo:nil];
     return NO;
   }
 }

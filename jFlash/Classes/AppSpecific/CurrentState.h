@@ -10,14 +10,24 @@
 #import "SynthesizeSingleton.h"
 #import "Tag.h"
 #import "PluginManager.h"
+#import "LWEPackageDownloader.h"
 
 extern NSString * const LWEActiveTagDidChange;
 
-@interface CurrentState : NSObject 
-{
-  //! Private property that contains the active tag
-  Tag *_activeTag;
-}
+@interface CurrentState : NSObject <LWEPackageDownloaderDelegate>
+
++ (CurrentState *) sharedCurrentState;
+
+// Plugin related
++ (Plugin *) availablePluginForKey:(NSString *)key;
++ (BOOL) pluginKeyIsLoaded:(NSString *)key;
++ (BOOL)isTimeForCheckingUpdate;
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
+
+
+- (void) initializeSettings;
+- (void) registerDatabaseCopied;
+- (void) resetActiveTag;
 
 //! returns YES if this is the first time we have launched this app, ever
 @property BOOL isFirstLoad;
@@ -26,20 +36,13 @@ extern NSString * const LWEActiveTagDidChange;
 @property BOOL isUpdatable;
 
 //! Holds PluginManager instance
-@property (nonatomic, retain) PluginManager *pluginMgr;
+@property (retain) PluginManager *pluginMgr;
 
-+ (CurrentState *)sharedCurrentState;
-
-- (void) initializeSettings;
-- (void) registerDatabaseCopied;
-- (void) resetActiveTag;
-
-//! getter for active tag.  Loads the NSUserDefault tag from the db if not loaded yet.
-- (Tag *) activeTag;
-
-//! setter for active tag.  Sets the NSUserDefault for the tag id.
-- (void) setActiveTag: (Tag*) tag;
+//! Changing this value causes lots of things to happen program-wide -- the app re-loads using the new tag
+@property (retain) Tag *activeTag;
 
 @property (retain) Tag *starredTag;
+
+@property (retain, nonatomic) UIViewController *modalTaskViewController;
 
 @end

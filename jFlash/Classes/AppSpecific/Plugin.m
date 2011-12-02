@@ -10,7 +10,7 @@
 
 @implementation Plugin
 
-@synthesize name, filePath, pluginId, pluginType, version, fileLocation;
+@synthesize name, details, filePath, pluginId, pluginType, version, fileLocation;
 
 #pragma mark - Initialization/Constructors
 
@@ -32,6 +32,7 @@
 {
   // NSObject doesn't conform to NSCoding so we don't have to call super
   [encoder encodeObject:self.name forKey:@"name"];
+  [encoder encodeObject:self.details forKey:@"details"];
   [encoder encodeObject:self.version forKey:@"version"];
   [encoder encodeObject:self.filePath forKey:@"filePath"];
   [encoder encodeObject:self.pluginId forKey:@"pluginId"];
@@ -46,6 +47,7 @@
   if (self)
   {
     self.name = [aDecoder decodeObjectForKey:@"name"];
+    self.details = [aDecoder decodeObjectForKey:@"details"];
     self.version = [aDecoder decodeObjectForKey:@"version"];
     self.filePath = [aDecoder decodeObjectForKey:@"filePath"];
     self.pluginId = [aDecoder decodeObjectForKey:@"pluginId"];
@@ -76,6 +78,19 @@
   return returnVal;
 }
 
+- (BOOL) isNewVersionOfPlugin:(Plugin *)plugin
+{
+//  double pluginVersion = [[plugin objectForKey:LWEPluginVersionKey] doubleValue];
+//  double installedVersion = [[db databaseVersionForDatabase:pluginKey] doubleValue];
+//  
+//  LWE_LOG(@"Debug : Installed version %f, plugin version %f, need upgrade? %@", installedVersion, pluginVersion, (pluginVersion > installedVersion) ? @"YES" : @"NO");
+//  if (pluginVersion > installedVersion)
+//  {
+//    needUpdate = YES;
+//  }
+  return YES;
+}
+
 - (BOOL) isDirectoryPlugin
 {
   return YES;
@@ -103,6 +118,7 @@
 - (void) dealloc
 {
   [name release];
+  [details release];
   [version release];
   [filePath release];
   [pluginType release];
