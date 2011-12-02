@@ -121,6 +121,7 @@
 {
   LWEPackage *pluginPackage = [LWEPackage packageWithUrl:[NSURL URLWithString:self.targetURL]
                                      destinationFilepath:[[self fullPath] stringByAppendingString:@".zip"]];
+  pluginPackage.userInfo = [NSDictionary dictionaryWithObject:self forKey:@"plugin"];
   return pluginPackage;
 }
 
