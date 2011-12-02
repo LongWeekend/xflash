@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Use this to avoid lots of annoying manual work
+touch output.yml
+for ((n=1;n<=$1;n++)) 
+do
+  if [ $n -lt 10 ]
+  then
+    i="0$n"
+  else
+    i="$n"
+  fi
+  if [ $n -gt 1 ]
+  then
+    x=$n
+    y=`expr $n + 1`
+    j=$x"01-"$y"00"
+  else
+    j="1-100"
+  fi
+  cat bigram_template.yml | sed "s/XX/$i/" | sed "s/YYY/$j/" >> output.yml
+done

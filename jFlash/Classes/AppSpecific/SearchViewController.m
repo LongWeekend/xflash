@@ -106,10 +106,23 @@ const NSInteger KSegmentedTableHeader = 100;
     [self _addSearchControlToHeader];
   }
 
+  // Register for notification when tag content changes (might be starred words.. in which case we want to know)
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  
   // Make the spinner
   UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   [self set_activityIndicator:activityIndicator];
   [activityIndicator release];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  self.tableView = nil;
+  self.searchBar = nil;
+  
+  // Stop observing for tag content changes
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -191,6 +204,39 @@ const NSInteger KSegmentedTableHeader = 100;
   }
 }
 
+#pragma mark - TagContentDidChange Methods
+
+- (void) tagContentDidChange:(NSNotification *)aNotification
+{
+  // Foremost, if the tag isn't starred words, we don't care -- quick return
+  if ([aNotification.object isEqual:[Tag starredWordsTag]] == NO)
+  {
+    return;
+  }
+  
+  // OK, now let's see to add a star or take it away.
+  Card *card = [aNotification.userInfo objectForKey:LWETagContentDidChangeCardKey];
+  NSString *changeType = [aNotification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
+  if ([changeType isEqualToString:LWETagContentCardAdded])
+  {
+    if ([self._cardSearchArray containsObject:card])
+    {
+      // Add to the cache & reload so the star appears
+      [self.membershipCacheArray addObject:card];
+      [self.tableView reloadData];
+    }
+  }
+  else if ([changeType isEqualToString:LWETagContentCardRemoved])
+  {
+    // Only react if this card is listed in the search results
+    BOOL cardInSearchResults = [self _checkMembershipCacheForCard:card];
+    if (cardInSearchResults)
+    {
+      [self.membershipCacheArray removeObject:card];
+      [self.tableView reloadData];
+    }
+  }
+}
 
 #pragma mark - UISearchBarDelegate methods
 
@@ -475,20 +521,14 @@ const NSInteger KSegmentedTableHeader = 100;
   BOOL returnVal = NO;
   if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
   {
-    for (Card *cachedCard in self.membershipCacheArray)
-    {
-      if (cachedCard.cardId == theCard.cardId)
-      {
-        return YES;
-      }
-    }
+    return [self.membershipCacheArray containsObject:theCard];
   }
   else
   {
     // Rebuild cache and fail over to manual function
-    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-    self.membershipCacheArray = [[[CardPeer retrieveCardIdsForTagId:STARRED_TAG_ID] mutableCopy] autorelease];
-    returnVal = [TagPeer card:theCard isMemberOfTag:favoritesTag];
+    Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
+    self.membershipCacheArray = [[[CardPeer retrieveFaultedCardsForTag:starredTag] mutableCopy] autorelease];
+    returnVal = [TagPeer card:theCard isMemberOfTag:starredTag];
   }
   return returnVal;
 }
@@ -506,9 +546,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
   if (indexPath != nil)
   {
-    Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
     Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
-    NSInteger cardId = [theCard cardId];
+    Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
     
     // Use cache for toggling status if we have it
     BOOL isMember = NO;
@@ -518,24 +557,20 @@ const NSInteger KSegmentedTableHeader = 100;
     }
     else
     {
-      isMember = [TagPeer card:theCard isMemberOfTag:favoritesTag];
+      isMember = [TagPeer card:theCard isMemberOfTag:starredTag];
     }
     
-    if (!isMember)
+    if (isMember == NO)
     {
-      [TagPeer subscribeCard:theCard toTag:favoritesTag];
+      [TagPeer subscribeCard:theCard toTag:starredTag];
       
       // Now add the new ID onto the end of the search cache
-      Card *tmpCard = [[Card alloc] init];
-      tmpCard.cardId = cardId;
-      [self.membershipCacheArray addObject:tmpCard];
-      [tmpCard release];
+      [self.membershipCacheArray addObject:theCard];
     }
     else
     {
       NSError *error = nil;
-      Tag *favoritesTag = [[CurrentState sharedCurrentState] favoritesTag];
-      BOOL result = [TagPeer cancelMembership:theCard fromTag:favoritesTag error:&error];
+      BOOL result = [TagPeer cancelMembership:theCard fromTag:starredTag error:&error];
       if (!result)
       {
         if ([error code] == kRemoveLastCardOnATagError)
@@ -576,7 +611,8 @@ const NSInteger KSegmentedTableHeader = 100;
     [cell.contentView addSubview:searchResult];
   }
   searchResult.backgroundColor = [UIColor whiteColor];
-  searchResult.text = [card headword];
+  // Ignore == YES means we will always get the target language's headword
+  searchResult.text = [card headwordIgnoringMode:YES];
   
   // Update the glyph based on settings, if necessary
   searchResult.font = [Card configureFontForLabel:searchResult];

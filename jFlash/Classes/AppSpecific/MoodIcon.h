@@ -9,17 +9,19 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MoodIcon : NSObject {
-  UIButton *moodIconBtn;
-  UILabel *percentCorrectLabel;
-}
-
+@interface MoodIcon : NSObject
 
 //! Update the mood icon depending on the current percentage correct
-- (void)updateMoodIcon: (float)tmpRatio;
-+ (UIImageView*) makeHappyMoodIconView;
+- (void) updateMoodIcon:(CGFloat)percentCorrect;
 
-@property (retain,nonatomic) UIButton *moodIconBtn;
-@property (retain,nonatomic) UILabel *percentCorrectLabel;
+- (IBAction) doTogglePercentCorrectBtn;
+
+- (void) turnPercentCorrectOff;
+- (void) turnPercentCorrectOn;
+
+@property (retain, nonatomic) IBOutlet UIView *view;
+@property (retain, nonatomic) IBOutlet UIButton *moodIconBtn;
+@property (retain, nonatomic) IBOutlet UILabel *percentCorrectLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *talkBubble;
 
 @end

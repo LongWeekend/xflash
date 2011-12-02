@@ -96,6 +96,10 @@
 		49280A2B13962A9800EF009C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49280A2C13962A9A00EF009C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
 		49280A2D13962A9D00EF009C /* star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942631263AF4500086F4C /* star-selected@2x.png */; };
+		49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
 		4938F8B814024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
 		4938F8B914024797001EB473 /* CardViewController-EtoJ.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -302,7 +306,6 @@
 		496C7AEE12632730004B6B90 /* TweetWordXAuthController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */; };
 		496C7AEF12632730004B6B90 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
 		496C7AF012632730004B6B90 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9121517911B755550091AFEF /* CardViewController.xib */; };
-		496C7AF31263273C004B6B90 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
 		496C7AF41263273D004B6B90 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
 		496C7AF51263273E004B6B90 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
@@ -370,6 +373,14 @@
 		496C7B8B1263286E004B6B90 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F968E111AF64D400DFC3C9 /* CFNetwork.framework */; };
 		496C7B8C1263286E004B6B90 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E47F4611F3E780007F6FB7 /* CoreData.framework */; };
 		496E656F0FCD76450062CF09 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496E656E0FCD76450062CF09 /* QuartzCore.framework */; };
+		497125241487300A00D4D150 /* MoodIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497125231487300A00D4D150 /* MoodIcon.xib */; };
+		497125251487300A00D4D150 /* MoodIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497125231487300A00D4D150 /* MoodIcon.xib */; };
+		497125261487300A00D4D150 /* MoodIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497125231487300A00D4D150 /* MoodIcon.xib */; };
+		497125271487300A00D4D150 /* MoodIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497125231487300A00D4D150 /* MoodIcon.xib */; };
+		4971252A14873B0000D4D150 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971252914873B0000D4D150 /* MoodIcon.m */; };
+		4971252B14873B0000D4D150 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971252914873B0000D4D150 /* MoodIcon.m */; };
+		4971252C14873B0000D4D150 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971252914873B0000D4D150 /* MoodIcon.m */; };
+		4971252D14873B0000D4D150 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4971252914873B0000D4D150 /* MoodIcon.m */; };
 		49716142144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49716140144EC74D006BBEB4 /* ReminderSettingsViewController.m */; };
 		49716143144EC74E006BBEB4 /* ReminderSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49716140144EC74D006BBEB4 /* ReminderSettingsViewController.m */; };
 		49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */; };
@@ -597,14 +608,12 @@
 		917A5C7911AB844300016BD2 /* UserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 917A5C6F11AB844300016BD2 /* UserDetailsView.xib */; };
 		917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7C11AB84EE00016BD2 /* Constants.m */; };
 		917A5C8011AB84EE00016BD2 /* CurrentState.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C7E11AB84EE00016BD2 /* CurrentState.m */; };
-		917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C8411AB851100016BD2 /* MoodIcon.m */; };
 		917A5D0911AB89FD00016BD2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */; };
 		917A5D0E11AB8A1400016BD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */; };
 		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
-		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
-		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
+		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -784,6 +793,10 @@
 		D35B07851116456D00DB5E02 /* practice-btns-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07471116456D00DB5E02 /* practice-btns-bg.png */; };
 		D35B07881116456D00DB5E02 /* scroll-more.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07711116456D00DB5E02 /* scroll-more.png */; };
 		D35B07891116456D00DB5E02 /* talkbubble-ft.png in Resources */ = {isa = PBXBuildFile; fileRef = D35B07721116456D00DB5E02 /* talkbubble-ft.png */; };
+		D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */; };
+		D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */; };
+		D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
+		D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
 /* End PBXBuildFile section */
@@ -907,6 +920,7 @@
 		4927B8441400BE540076EEED /* JapaneseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JapaneseSettingsDataSource.m; path = AppSpecific/JapaneseSettingsDataSource.m; sourceTree = "<group>"; };
 		4927B8461400C7350076EEED /* ChineseSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseSettingsDataSource.h; path = AppSpecific/ChineseSettingsDataSource.h; sourceTree = "<group>"; };
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
+		49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GroupDescriptionView.xib; path = XIBs/GroupDescriptionView.xib; sourceTree = "<group>"; };
 		4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "CardViewController-EtoJ.xib"; path = "Classes/AppSpecific/CardViewController-EtoJ.xib"; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
@@ -945,6 +959,9 @@
 		496C7A6E126325FD004B6B90 /* cFlash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cFlash-Info.plist"; sourceTree = "<group>"; };
 		496C7B9C12632F2E004B6B90 /* cFlash_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cFlash_Prefix.pch; sourceTree = "<group>"; };
 		496E656E0FCD76450062CF09 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		497125231487300A00D4D150 /* MoodIcon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoodIcon.xib; path = XIBs/MoodIcon.xib; sourceTree = "<group>"; };
+		4971252814873B0000D4D150 /* MoodIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoodIcon.h; path = AppSpecific/MoodIcon.h; sourceTree = "<group>"; };
+		4971252914873B0000D4D150 /* MoodIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoodIcon.m; path = AppSpecific/MoodIcon.m; sourceTree = "<group>"; };
 		4971613F144EC74C006BBEB4 /* ReminderSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderSettingsViewController.h; path = AppSpecific/ReminderSettingsViewController.h; sourceTree = "<group>"; };
 		49716140144EC74D006BBEB4 /* ReminderSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderSettingsViewController.m; path = AppSpecific/ReminderSettingsViewController.m; sourceTree = "<group>"; };
 		49716141144EC74D006BBEB4 /* ReminderSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReminderSettingsViewController.xib; path = Classes/AppSpecific/ReminderSettingsViewController.xib; sourceTree = "<group>"; };
@@ -1207,16 +1224,14 @@
 		917A5C7C11AB84EE00016BD2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = AppSpecific/Constants.m; sourceTree = "<group>"; };
 		917A5C7D11AB84EE00016BD2 /* CurrentState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentState.h; path = AppSpecific/CurrentState.h; sourceTree = "<group>"; };
 		917A5C7E11AB84EE00016BD2 /* CurrentState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentState.m; path = AppSpecific/CurrentState.m; sourceTree = "<group>"; };
-		917A5C8311AB851100016BD2 /* MoodIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoodIcon.h; path = AppSpecific/MoodIcon.h; sourceTree = "<group>"; };
-		917A5C8411AB851100016BD2 /* MoodIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoodIcon.m; path = AppSpecific/MoodIcon.m; sourceTree = "<group>"; };
 		917A5D0811AB89FD00016BD2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		917A5D0D11AB8A1400016BD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		917B2DBA146CC756007C77B1 /* DSActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSActivityView.h; path = External/DSActivityView/Sources/DSActivityView.h; sourceTree = "<group>"; };
 		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
-		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
-		919100F21486A6B1003E9A19 /* JRPreviewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRPreviewLabel.m; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.m; sourceTree = SOURCE_ROOT; };
+		91910048148052A1003E9A19 /* JFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashSearchTest.h; path = Tests/jFlashTests/JFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
+		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -1336,6 +1351,8 @@
 		D35B07471116456D00DB5E02 /* practice-btns-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btns-bg.png"; path = "Assets/practice-btns-bg.png"; sourceTree = "<group>"; };
 		D35B07711116456D00DB5E02 /* scroll-more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "scroll-more.png"; path = "Assets/scroll-more.png"; sourceTree = "<group>"; };
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
+		D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon.png"; path = "Assets/glyphish-style-listen-icon.png"; sourceTree = "<group>"; };
+		D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon@2x.png"; path = "Assets/glyphish-style-listen-icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1601,6 +1618,8 @@
 		4904664914727B0F004C44E2 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
+				91910048148052A1003E9A19 /* JFlashSearchTest.h */,
+				91910049148052A1003E9A19 /* JFlashSearchTest.m */,
 			);
 			name = JFlash;
 			sourceTree = "<group>";
@@ -2108,6 +2127,8 @@
 		916A89CA101C681800D7917D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */,
+				D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */,
 				491AA1CB1456AA29009B9F6E /* foo.mp3 */,
 				49DADB7E1277F36F00B8FD72 /* Default.png */,
 				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
@@ -2157,8 +2178,6 @@
 			children = (
 				242A17421462893E002977E6 /* AudioSessionManager.h */,
 				242A17431462893E002977E6 /* AudioSessionManager.m */,
-				917A5C8311AB851100016BD2 /* MoodIcon.h */,
-				917A5C8411AB851100016BD2 /* MoodIcon.m */,
 				917A5C7D11AB84EE00016BD2 /* CurrentState.h */,
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
 				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
@@ -2421,6 +2440,8 @@
 		91DDB0A911C1F5CB00E8B962 /* Study View */ = {
 			isa = PBXGroup;
 			children = (
+				4971252814873B0000D4D150 /* MoodIcon.h */,
+				4971252914873B0000D4D150 /* MoodIcon.m */,
 				49AAB8CD147127E40015D64B /* StudyViewProtocols.h */,
 				917A5BD711AB7C4600016BD2 /* StudyViewController.h */,
 				917A5BD811AB7C4600016BD2 /* StudyViewController.m */,
@@ -2462,7 +2483,9 @@
 				49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
+				497125231487300A00D4D150 /* MoodIcon.xib */,
 				917A5C6A11AB844300016BD2 /* AddStudySetView.xib */,
+				49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */,
 				49F9686811AF604900DFC3C9 /* ModalTaskView.xib */,
 				490820A411B7959500150499 /* PluginSettingsView.xib */,
 				91E1B0E711AE11E1003CCDC2 /* ProgressBarViewController.xib */,
@@ -2839,6 +2862,10 @@
 				491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */,
 				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
+				49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
+				497125241487300A00D4D150 /* MoodIcon.xib in Resources */,
+				D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
+				D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2852,6 +2879,8 @@
 				4904661B147274B8004C44E2 /* jFlash-CARD-1.1.db in Resources */,
 				493A4790146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */,
+				49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
+				497125261487300A00D4D150 /* MoodIcon.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2867,6 +2896,8 @@
 				497607E8147A6570000A9FC5 /* chinese-flash-icon@2x.png in Resources */,
 				497607EA147A6570000A9FC5 /* chinese-flash-splash.png in Resources */,
 				497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
+				49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
+				497125271487300A00D4D150 /* MoodIcon.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3034,6 +3065,10 @@
 				497607E7147A6570000A9FC5 /* chinese-flash-icon@2x.png in Resources */,
 				497607E9147A6570000A9FC5 /* chinese-flash-splash.png in Resources */,
 				497607EB147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
+				49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
+				497125251487300A00D4D150 /* MoodIcon.xib in Resources */,
+				D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
+				D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3098,7 +3133,6 @@
 				917A5C5F11AB839300016BD2 /* Appirater.m in Sources */,
 				917A5C7F11AB84EE00016BD2 /* Constants.m in Sources */,
 				917A5C8011AB84EE00016BD2 /* CurrentState.m in Sources */,
-				917A5C8511AB851100016BD2 /* MoodIcon.m in Sources */,
 				91E1B0E811AE11E1003CCDC2 /* ProgressBarViewController.m in Sources */,
 				49F9692711AF680700DFC3C9 /* jFlashAppDelegate.m in Sources */,
 				91214D0911B4B9E80091AFEF /* BrowseModeCardViewDelegate.m in Sources */,
@@ -3209,8 +3243,7 @@
 				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */,
-				49C506251484966A0094734D /* JSONKit.m in Sources */,
-				919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
+				4971252A14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3272,6 +3305,8 @@
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
 				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
 				49C506271484966A0094734D /* JSONKit.m in Sources */,
+				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
+				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3334,6 +3369,7 @@
 				496C670014728BC8009F04D4 /* ThemeManager.m in Sources */,
 				49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */,
 				49C506281484966A0094734D /* JSONKit.m in Sources */,
+				4971252D14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3343,7 +3379,6 @@
 			files = (
 				496C7AD512632725004B6B90 /* CustomCellBackgroundView.m in Sources */,
 				496C7AD712632729004B6B90 /* PDColoredProgressView.m in Sources */,
-				496C7AF31263273C004B6B90 /* MoodIcon.m in Sources */,
 				496C7AF41263273D004B6B90 /* CurrentState.m in Sources */,
 				496C7AF51263273E004B6B90 /* PluginManager.m in Sources */,
 				496C7AF61263273F004B6B90 /* ThemeManager.m in Sources */,
@@ -3480,6 +3515,7 @@
 				49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */,
 				49C506261484966A0094734D /* JSONKit.m in Sources */,
 				919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
+				4971252B14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3736,6 +3772,7 @@
 		496C7A70126325FE004B6B90 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_AD_HOC,
@@ -3748,12 +3785,14 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
 				PRODUCT_NAME = cFlash;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Beta;
 		};
 		496C7A71126325FE004B6B90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_RELEASE_APP_STORE,
@@ -3766,6 +3805,7 @@
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
 				PRODUCT_NAME = cFlash;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

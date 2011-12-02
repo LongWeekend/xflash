@@ -13,10 +13,10 @@
 @interface AlgorithmSettingsViewController : UIViewController <UITableViewDelegate>
 
 - (IBAction) setDifficulty:(UISegmentedControl*)sender;
-- (void)sliderAction:(UISlider*)sender;
+- (IBAction) sliderValueChanged:(UISlider*)sender;
 
-@property (nonatomic, retain) UISlider *maxCardsUISlider;
-@property (nonatomic, retain) UISlider *frequencyUISlider;
+@property (nonatomic, retain) IBOutlet UISlider *maxCardsSlider;
+@property (nonatomic, retain) IBOutlet UISlider *frequencySlider;
 @property (nonatomic, retain) UISegmentedControl *difficultySegmentControl;
 @property (nonatomic, retain) UITableView *tableView;
 

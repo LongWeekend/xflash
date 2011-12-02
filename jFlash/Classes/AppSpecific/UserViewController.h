@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
-#import "LWELoadingView.h"
+#import "UserDetailsViewController.h"
 
 /**
  * Shows a table of jFlash users, allows editing/deletion of users,
  * creation of new users
  */
-@interface UserViewController : UITableViewController <UITableViewDelegate>
+@interface UserViewController : UITableViewController <UITableViewDelegate, UserDetailsViewControllerDelegate>
 
 - (void) showUserDetailsView;
 - (void) activateUserWithModal:(User*) user;
-
-//! Loading modal when switching users on large sets
-@property (nonatomic, retain) LWELoadingView *loadingView;
 
 //! Holds an array of all users
 @property (nonatomic, retain) NSMutableArray *usersArray;

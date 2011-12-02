@@ -164,7 +164,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 }
 
 //! Returns an array of tag Ids this card is a member of
-+ (NSArray*) membershipListForCard:(Card*)card
++ (NSArray *) faultedTagsForCard:(Card *)card
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *membershipListArray = [NSMutableArray array];
@@ -174,7 +174,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 	while ([rs next])
   {
     tmpTagId = [rs intForColumn:@"tag_id"];
-    [membershipListArray addObject:[NSNumber numberWithInt:tmpTagId]];
+    [membershipListArray addObject:[Tag blankTagWithId:tmpTagId]];
 	}
 	[rs close];
   return (NSArray*)membershipListArray;
@@ -256,12 +256,6 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 }
 
 #pragma mark - Convenience Methods to Abstract SQL
-
-//! Gets my Tag objects (ones created by the user) as array
-+ (NSArray*) retrieveMyTagList
-{
-  return [TagPeer retrieveTagListByGroupId:0];
-}
 
 //! Gets system Tag objects as array
 + (NSArray*) retrieveSysTagList

@@ -25,7 +25,7 @@
 
 @synthesize baseHtml;
 
-@synthesize  moodIcon, moodIconBtn, percentCorrectLabel, hhAnimationView, percentCorrectTalkBubble;
+@synthesize moodIcon;
 
 #pragma mark - Flow Methods
 
@@ -95,12 +95,10 @@
   [self.meaningWebView shutOffBouncing];
   self.meaningWebView.backgroundColor = [UIColor clearColor];
   
-  // Create a default mood icon object
-  self.moodIcon = [[[MoodIcon alloc] init] autorelease];
-  self.moodIcon.moodIconBtn = self.moodIconBtn;
-  self.moodIcon.percentCorrectLabel = self.percentCorrectLabel;
-  
-  self.percentCorrectLabel.text = percentCorrectLabelStartText;
+  // Add mood icon subview - TODO: MMA this is 90% complete, but I want to find a way to do this in the NIB
+  CGRect moodIconRect = CGRectMake(235, 197, 80, 73);
+  self.moodIcon.view.frame = moodIconRect;
+  [self.view addSubview:self.moodIcon.view];
   [self.moodIcon updateMoodIcon:100.0f];
   
   // For languages such as Chinese, we may need to configure the font
@@ -108,22 +106,6 @@
 }
 
 #pragma mark - IBAction Methods
-
-/**
- * Turns the % correct button on and off, in case it is in the way of the meaning
- */
-- (IBAction) doTogglePercentCorrectBtn
-{
-  // Hide the percentage talk bubble on click; use its current state to check which we should do.
-  if (self.percentCorrectTalkBubble.hidden == YES)
-  {
-    [self turnPercentCorrectOn];
-  }
-  else
-  {
-    [self turnPercentCorrectOff];
-  }
-}
 
 /**
  * If the reading scroll container is hidden, this shows it.
@@ -142,18 +124,6 @@
 }
 
 #pragma mark - Public Helper Methods
-
-- (void) turnPercentCorrectOff
-{
-  self.percentCorrectTalkBubble.hidden = YES;
-  self.percentCorrectLabel.hidden = YES;
-}
-
-- (void) turnPercentCorrectOn
-{
-  self.percentCorrectTalkBubble.hidden = NO;
-  self.percentCorrectLabel.hidden = NO;
-}
 
 - (void) turnReadingOn
 {
@@ -208,6 +178,9 @@
 // Prepare the view for the current card
 - (void) _prepareView:(Card*)card
 {
+  // Reset the meaning's scroll view location
+  self.meaningWebView.scrollView.contentOffset = CGPointZero;
+  
   // Fix up the headword & the meaning; those are a bit easier.
   [self _injectMeaningHTML:card.meaning];
   self.cardHeadwordLabel.text = card.headword;
@@ -309,23 +282,13 @@
 	self.cardReadingLabel = nil;
 	self.toggleReadingBtn = nil;
 	self.meaningWebView = nil;
-  
 	self.moodIcon = nil;
-	self.moodIconBtn = nil;
-	self.hhAnimationView = nil;
-	self.percentCorrectLabel = nil;
-	self.percentCorrectTalkBubble = nil;
 }
 
 
 - (void)dealloc 
 {
-  //moodicon
   [moodIcon release];
-  [moodIconBtn release];
-  [hhAnimationView release];
-  [percentCorrectLabel release];
-	[percentCorrectTalkBubble release];
 
   [baseHtml release];
   [_tmpJavascript release];

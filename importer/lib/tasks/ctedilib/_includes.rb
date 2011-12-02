@@ -20,6 +20,7 @@ load File.dirname(__FILE__) + "/classes/CEdictEntry.rb"
 load File.dirname(__FILE__) + "/classes/InlineEntry.rb"
 load File.dirname(__FILE__) + "/classes/HSKEntry.rb"
 load File.dirname(__FILE__) + "/classes/BookEntry.rb"
+load File.dirname(__FILE__) + "/classes/BigramEntry.rb"
 load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 
 # For parsing CEDICT and tag lists

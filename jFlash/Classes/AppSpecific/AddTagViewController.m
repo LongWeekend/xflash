@@ -46,8 +46,9 @@ enum EntrySectionRows
   // TODO: iPad customization!
   if ((self = [super initWithNibName:@"AddTagView" bundle:nil]))
   {
+    LWE_ASSERT_EXC((card.isFault == NO), @"Card passed to AddTagViewcontroller should not be a fault!");
     self.currentCard = card;
-    self.myTagArray = [TagPeer retrieveMyTagList];
+    self.myTagArray = [TagPeer retrieveUserTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
     
     // Add "add" button to nav bar
@@ -59,12 +60,21 @@ enum EntrySectionRows
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
 
     // Register listener to reload data if modal added a set
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
   }
   return self;
 }
 
 #pragma mark - UIViewDelegate methods
+
+- (void) viewDidLoad
+{
+  [super viewDidLoad];
+
+  // Cache the tag's membership list
+  self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
+}
 
 /** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
 - (void)viewWillAppear:(BOOL)animated
@@ -73,11 +83,33 @@ enum EntrySectionRows
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.studySetTable.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Tag Content Did Change Methods
+
+- (void) tagContentDidChange:(NSNotification *)notification
+{
+  // If the card that changed wasn't what we are currently showing, who cares?
+  Card *card = [notification.userInfo objectForKey:LWETagContentDidChangeCardKey];
+  if ([self.currentCard isEqual:card] == NO)
+  {
+    return;
+  }
   
-  // Cache the tag's membership list
-  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
+  // OK, it is our card, update the tag membership.
+  Tag *changedTag = (Tag*)notification.object;
+  NSString *type = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
+  if ([type isEqualToString:LWETagContentCardAdded])
+  {
+    [self.membershipCacheArray addObject:changedTag];
+  }
+  else if ([type isEqualToString:LWETagContentCardRemoved])
+  {
+    [self.membershipCacheArray removeObject:changedTag];
+  }
+  [self.studySetTable reloadData];
 }
 
 #pragma mark - Instance Methods
@@ -97,15 +129,15 @@ enum EntrySectionRows
 //! Recreates tag membership caches and reloads table view
 - (void) _reloadTableData
 {
-  self.myTagArray = [TagPeer retrieveMyTagList];
-  self.membershipCacheArray = [[[TagPeer membershipListForCard:self.currentCard] mutableCopy] autorelease];
+  self.myTagArray = [TagPeer retrieveUserTagList];
+  self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
   [self.studySetTable reloadData];
 }
 
 - (void) _toggleMembershipForTag:(Tag *)tmpTag
 {
   // Check whether or not we are ADDING or REMOVING from the selected tag
-  if ([self.membershipCacheArray containsObject:[NSNumber numberWithInt:tmpTag.tagId]])
+  if ([self.membershipCacheArray containsObject:tmpTag])
   {
     // Remove tag
     NSError *error = nil;
@@ -125,17 +157,16 @@ enum EntrySectionRows
       }
       return;
     }
-    [self.membershipCacheArray removeObject:[NSNumber numberWithInt:tmpTag.tagId]];
+    [self.membershipCacheArray removeObject:tmpTag];
   }
   else
   {
     [TagPeer subscribeCard:self.currentCard toTag:tmpTag];
-    [self.membershipCacheArray addObject:[NSNumber numberWithInt:tmpTag.tagId]];
+    [self.membershipCacheArray addObject:tmpTag];
   }
 }
 
-
-#pragma mark - UITableViewDelegate methods
+#pragma mark - UITableViewDataSource Methods
 
 //! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -161,39 +192,10 @@ enum EntrySectionRows
   return i;
 }
 
--(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
-{
-  if (section == kMyTagsSection)
-  {
-    return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
-  }
-  else if (section == kSystemTagsSection)
-  {
-    return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
-  }
-  else
-  {
-    return self.currentCard.headword;
-  }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-  if (indexPath.section == kEntrySection)
-  {
-    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
-    return [LWEUITableUtils autosizeHeightForCellWithText:text];
-  }
-  else 
-  {
-    return 44.0f;
-  }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
-  if(indexPath.section == kEntrySection)
+  if (indexPath.section == kEntrySection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"entry" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
@@ -201,14 +203,23 @@ enum EntrySectionRows
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"cell" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   } 
-
+  
   // setup the cell for the full entry
   if (indexPath.section == kEntrySection)
   {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    // Don't re-add the same label
+    UILabel *label = (UILabel*)[cell.contentView viewWithTag:101];
+    if (label == nil)
+    {
+      label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+      label.tag = 101;
+      [cell.contentView addSubview:label];
+    }
+    
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.minimumFontSize = FONT_SIZE_ADD_TAG_VC;
     label.numberOfLines = 0;
+    label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
     
     NSString *reading = nil;
@@ -224,8 +235,6 @@ enum EntrySectionRows
                                          cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.contentView addSubview:label];
-    [label release];
   }
   // the cells for either tag type look the same
   else
@@ -236,7 +245,7 @@ enum EntrySectionRows
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      if ([self.membershipCacheArray containsObject:[NSNumber numberWithInt:tmpTag.tagId]])
+      if ([self.membershipCacheArray containsObject:tmpTag])
       {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
       }
@@ -251,12 +260,43 @@ enum EntrySectionRows
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    // Set up the cell
     cell.textLabel.text = tmpTag.tagName;
   }
   
   return cell;
+}
+
+
+#pragma mark - UITableViewDelegate methods
+
+-(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
+{
+  if (section == kMyTagsSection)
+  {
+    return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
+  }
+  else if (section == kSystemTagsSection)
+  {
+    return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
+  }
+  else
+  {
+    // Return the native language HW no matter what
+    return [self.currentCard headwordIgnoringMode:YES];
+  }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+  if (indexPath.section == kEntrySection)
+  {
+    NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
+    return [LWEUITableUtils autosizeHeightForCellWithText:text];
+  }
+  else 
+  {
+    return 44.0f;
+  }
 }
 
 
@@ -276,6 +316,8 @@ enum EntrySectionRows
 
   Tag *tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
   [self _toggleMembershipForTag:tmpTag];
+  
+  // MMA: TODO: we shouldn't reload the whole table, that's really lazy-- weshould change the row
   [lclTableView reloadData];
 }
 

@@ -21,6 +21,16 @@ extern NSInteger const kLWEUninitializedTagId;
 
 - (void) hydrate: (FMResultSet*)rs;
 - (void) hydrate;
+
+//! Factory method that returns the starred words tag
++ (Tag *) starredWordsTag;
+
+//! Factory method for an unitialized tag that only has its ID set
++ (Tag *) blankTagWithId:(NSInteger)tagId;
+
+//! Returns YES if the user is allowed to edit this tag (either description or the contents)
+- (BOOL) isEditable;
+
 - (void) populateCardIds;
 - (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
 - (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
@@ -49,6 +59,9 @@ extern NSInteger const kLWEUninitializedTagId;
 @property (nonatomic, retain) NSMutableArray *lastFiveCards;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
+
+//! Returns YES if this Tag is not actually a Tag, but a shell of a tag.  If so, call -hydrate
+@property (readonly) BOOL isFault;
 
 //! Current count of Card objects in the Tag
 @property NSInteger cardCount;

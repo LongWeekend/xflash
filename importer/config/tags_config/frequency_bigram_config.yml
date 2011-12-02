@@ -1,0 +1,272 @@
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "News Bigrams 01"
+    tag_type: ""
+    short_name: "bigram-news-01"
+    description: "Common News Bigrams (2 character words), 1-100"
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_2:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-02.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "News Bigrams 02"
+    tag_type: ""
+    short_name: "bigram-news-02"
+    description: "Common News Bigrams (2 character words), 101-200"
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-02.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_3:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-03.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "News Bigrams 201-300"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Common News Bigrams (2 character words), 201-300"
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_4:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-04.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "News Bigrams 201-300"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Common News Bigrams (2 character words), 301-400"
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1
+frequency_news_1:
+    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_parser: "WordListParser"
+    entry_type: "BigramEntry"
+    tag_name: "Characters 1-100"
+    tag_type: ""
+    short_name: "bigram-news-1-100"
+    description: "Frequent Words List 1-100"      
+    source: "Jun Da, http://lingua.mtsu.edu/chinese-computing/"                          
+    source_name: "bigram-news-01.txt"
+    visible: 1                                  
+    parent_tag_id: 0
+    force_off: 0
+    contains_priority_words: 1

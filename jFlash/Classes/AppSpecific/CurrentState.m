@@ -21,7 +21,7 @@ NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr, isUpdatable, favoritesTag;
+@synthesize isFirstLoad, pluginMgr, isUpdatable, starredTag;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -51,9 +51,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setInteger:tag.tagId forKey:@"tag_id"];
   
   // Set the favorites tag, if not already done
-  if (self.favoritesTag == nil)
+  if (self.starredTag == nil)
   {
-    self.favoritesTag = [TagPeer retrieveTagById:STARRED_TAG_ID];
+    self.starredTag = [Tag starredWordsTag];
   }
   
   // Tell everyone to reload their data (only if we're not just starting up)

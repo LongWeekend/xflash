@@ -26,8 +26,9 @@ extern NSUInteger const kRemoveLastCardOnATagError;
 + (BOOL) cancelMembership:(Card*)card fromTag:(Tag*)tag error:(NSError **)theError;
 + (BOOL) subscribeCard:(Card*)card toTag:(Tag*)tag;
 + (BOOL) card:(Card*)card isMemberOfTag:(Tag*)tag;
-+ (NSArray*) membershipListForCard:(Card*)card;
-+ (NSArray*) retrieveMyTagList; // this is not actually all of the user tags
+
+// Returns an array of faulted Tag objects that this card is a member of.
++ (NSArray *) faultedTagsForCard:(Card *)card;
 + (NSArray*) retrieveSysTagList;
 + (NSArray*) retrieveUserTagList;
 + (NSArray*) retrieveSysTagListContainingCard:(Card*)card;

@@ -22,6 +22,7 @@ NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldShowDownloadModal	  = @"LWEShouldShowDownloadModal";
 NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowStudySetView    = @"LWEShouldShowStudySet";
+NSString * const LWEShouldShowStudyView       = @"LWEShouldShowStudyView";
 NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 @interface RootViewController ()
@@ -64,7 +65,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
     [self.observerArray addObject:observer];
     
     // Register listener to switch the tab bar controller to the study view when the user selects a new set
-    observer = [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
+    observer = [center addObserverForName:LWEShouldShowStudyView object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
        blockSelf.tabBarController.selectedIndex = STUDY_VIEW_CONTROLLER_TAB_INDEX;
      }];
@@ -220,6 +221,9 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
   // Replace active view with tabBarController's view
   [self.view addSubview:self.tabBarController.view];
+  
+  // Get rid of the splash image beneath
+  self.view.backgroundColor = [UIColor blackColor];
 
   //launch the please rate us
   [Appirater appLaunched];

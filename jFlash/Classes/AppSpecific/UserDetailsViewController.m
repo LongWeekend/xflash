@@ -12,6 +12,7 @@
 
 @implementation UserDetailsViewController
 @synthesize selectedUser, mode, userNicknameTextField, originalUserNickname, commitChangesBtn, activateUserBtn;
+@synthesize delegate;
 
 - (id)initWithUserDetails:(User*)aUser
 {
@@ -21,11 +22,12 @@
     {
       self.mode = kUserViewModeEdit;
       self.originalUserNickname = aUser.userNickname;
-      self.navigationItem.title = aUser.userNickname;
+      self.title = aUser.userNickname;
       self.selectedUser = aUser;
     }
     else
     {
+      self.title = NSLocalizedString(@"Add User",@"UserDetailsViewController.NavBarTitle");
       self.mode = kUserViewModeAdd;
       self.selectedUser = [[[User alloc] init] autorelease];
     }
@@ -45,12 +47,10 @@
     self.commitChangesBtn.hidden = YES;
     self.activateUserBtn.hidden = YES;
   }
-}
-
-- (void)viewDidAppear:(BOOL)animated 
-{
-  [super viewDidAppear:animated];
-  self.userNicknameTextField.text = [self.selectedUser userNickname];
+  else
+  {
+    self.userNicknameTextField.text = [self.selectedUser userNickname];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -58,7 +58,7 @@
   [super viewWillAppear:animated];
   // TODO: iPad customization!
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
 }
 
 # pragma mark UI Responders
@@ -88,10 +88,14 @@
 
 - (IBAction) doActivateUser
 {
-  // Activate, post notification and dismiss view
-  [self.selectedUser activateUser];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"settingsWereChanged" object:self];
+  // Dismiss this VC
   [self.navigationController popToRootViewControllerAnimated:YES];
+
+  // Activate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(activateUser:)])
+  {
+    [self.delegate activateUser:self.selectedUser];
+  }
 }
 
 - (IBAction) doCommitChanges
@@ -105,9 +109,13 @@
   [self.selectedUser save];
   [newUser release];  
   
-  // Close view and post notification - this will tell the parent to reload the users table to update the name
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"userSettingsWereChanged" object:self];
+  // We're done with this VC
   [self.navigationController popViewControllerAnimated:YES];
+
+  if (self.delegate && [self.delegate respondsToSelector:@selector(userDetailsDidChange:)])
+  {
+    [self.delegate userDetailsDidChange:self.selectedUser];
+  }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 

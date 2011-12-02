@@ -142,7 +142,7 @@
 								<string key="NSFrame">{{179, 259}, {86, 21}}</string>
 								<reference key="NSSuperview" ref="37275877"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="881465520"/>
+								<reference key="NSNextKeyView" ref="701139123"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -165,7 +165,7 @@
 								<string key="NSFrame">{{0, 1}, {320, 285}}</string>
 								<reference key="NSSuperview" ref="37275877"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="701139123"/>
+								<reference key="NSNextKeyView" ref="1065009926"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MSAwAA</bytes>
@@ -175,32 +175,6 @@
 								</object>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
-							<object class="IBUIButton" id="701139123">
-								<reference key="NSNextResponder" ref="37275877"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{266, 9}, {41, 27}}</string>
-								<reference key="NSSuperview" ref="37275877"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1065009926"/>
-								<string key="NSReuseIdentifierKey">_NS:225</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">Play</string>
-								<reference key="IBUIHighlightedTitleColor" ref="155934136"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="1058310146"/>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">2</int>
-									<double key="pointSize">15</double>
-								</object>
-								<reference key="IBUIFont" ref="713668576"/>
 							</object>
 						</object>
 						<string key="NSFrame">{{0, 38}, {320, 285}}</string>
@@ -232,6 +206,42 @@
 						</object>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIButton" id="701139123">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{282, 45}, {32, 29}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="881465520"/>
+						<string key="NSReuseIdentifierKey">_NS:225</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
+						</object>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC45MzA0NjA1NzM1IDEgMC41MjMxMzA2Njg3AA</bytes>
+						</object>
+						<reference key="IBUIHighlightedTitleColor" ref="155934136"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="1058310146"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">glyphish-style-listen-icon.png</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<reference key="IBUIFont" ref="713668576"/>
 					</object>
 					<object class="IBUIPageControl" id="523448396">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -287,7 +297,7 @@
 					<object class="IBUIButton" id="551950292">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">269</int>
-						<string key="NSFrame">{{1, 129}, {320, 282}}</string>
+						<string key="NSFrame">{{1, 125}, {320, 282}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="523448396"/>
@@ -380,14 +390,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">revealCardBtn</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="551950292"/>
-					</object>
-					<int key="connectionID">299</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">tapForAnswerImage</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="881465520"/>
@@ -404,14 +406,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pronounceBtn</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="701139123"/>
-					</object>
-					<int key="connectionID">308</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">cardSetLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1065009926"/>
@@ -425,6 +419,22 @@
 						<reference key="destination" ref="377282217"/>
 					</object>
 					<int key="connectionID">284</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">revealCardBtn</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="551950292"/>
+					</object>
+					<int key="connectionID">299</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pronounceBtn</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="701139123"/>
+					</object>
+					<int key="connectionID">308</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -495,6 +505,7 @@
 							<reference ref="132615970"/>
 							<reference ref="881465520"/>
 							<reference ref="551950292"/>
+							<reference ref="701139123"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">studyView</string>
@@ -534,7 +545,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="72185285"/>
-							<reference ref="701139123"/>
 							<reference ref="377282217"/>
 							<reference ref="1065009926"/>
 						</object>
@@ -570,17 +580,6 @@
 						<string key="objectName">CardView</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">298</int>
-						<reference key="object" ref="551950292"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">revealButton</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">305</int>
-						<reference key="object" ref="701139123"/>
-						<reference key="parent" ref="37275877"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">158</int>
 						<reference key="object" ref="1065009926"/>
 						<reference key="parent" ref="37275877"/>
@@ -591,6 +590,18 @@
 						<reference key="object" ref="377282217"/>
 						<reference key="parent" ref="37275877"/>
 						<string key="objectName">setCardsViewedNum</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">298</int>
+						<reference key="object" ref="551950292"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">revealButton</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">305</int>
+						<reference key="object" ref="701139123"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Play Button</string>
 					</object>
 				</object>
 			</object>
@@ -655,174 +666,6 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">ActionBarViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>doBuryCardBtn</string>
-							<string>doNextCardBtn</string>
-							<string>doPrevCardBtn</string>
-							<string>doRightBtn</string>
-							<string>doWrongBtn</string>
-							<string>showCardActionSheet</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>doBuryCardBtn</string>
-							<string>doNextCardBtn</string>
-							<string>doPrevCardBtn</string>
-							<string>doRightBtn</string>
-							<string>doWrongBtn</string>
-							<string>showCardActionSheet</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">doBuryCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doNextCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doPrevCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doRightBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doWrongBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showCardActionSheet</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addBtn</string>
-							<string>buryCardBtn</string>
-							<string>cardMeaningBtnHint</string>
-							<string>cardMeaningBtnHintMini</string>
-							<string>delegate</string>
-							<string>nextCardBtn</string>
-							<string>prevCardBtn</string>
-							<string>rightBtn</string>
-							<string>wrongBtn</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIView</string>
-							<string>UIView</string>
-							<string>id</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addBtn</string>
-							<string>buryCardBtn</string>
-							<string>cardMeaningBtnHint</string>
-							<string>cardMeaningBtnHintMini</string>
-							<string>delegate</string>
-							<string>nextCardBtn</string>
-							<string>prevCardBtn</string>
-							<string>rightBtn</string>
-							<string>wrongBtn</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">addBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">buryCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cardMeaningBtnHint</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cardMeaningBtnHintMini</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">delegate</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">nextCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">prevCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">rightBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">wrongBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ActionBarViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CardViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">delegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CardViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">StudyViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -830,6 +673,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePage:</string>
+							<string>changePage:animated:</string>
 							<string>doShowProgressModalBtn</string>
 							<string>launchExampleInstaller</string>
 							<string>pronounceCard:</string>
@@ -842,6 +686,7 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -849,6 +694,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePage:</string>
+							<string>changePage:animated:</string>
 							<string>doShowProgressModalBtn</string>
 							<string>launchExampleInstaller</string>
 							<string>pronounceCard:</string>
@@ -858,6 +704,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">changePage:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">changePage:animated:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -902,11 +752,11 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ActionBarViewController</string>
+							<string>UIViewController</string>
 							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIView</string>
-							<string>CardViewController</string>
+							<string>UIViewController</string>
 							<string>UIPageControl</string>
 							<string>UIImageView</string>
 							<string>UIView</string>
@@ -947,7 +797,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">actionBarController</string>
-								<string key="candidateClassName">ActionBarViewController</string>
+								<string key="candidateClassName">UIViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">actionbarView</string>
@@ -963,7 +813,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">cardViewController</string>
-								<string key="candidateClassName">CardViewController</string>
+								<string key="candidateClassName">UIViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pageControl</string>
@@ -1038,11 +888,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>glyphish-style-listen-icon.png</string>
 				<string>practice-btn-unrevealed-mini.png</string>
 				<string>redtheme-cookie-cutters/practice-bg.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{32, 29}</string>
 				<string>{139, 20}</string>
 				<string>{16, 16}</string>
 			</object>

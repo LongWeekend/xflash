@@ -39,11 +39,9 @@
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self)
   {
-    if (initTag.tagId >= 0)
-    {
-      self.tag = initTag;
-      [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
-    }    
+    LWE_ASSERT_EXC((initTag.tagId >= 0), @"You can't launch this VC with an uninitialized tag");
+    self.tag = initTag;
+    [self performSelectorInBackground:@selector(_loadWordListInBackground) withObject:nil];
     
     UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator = av;
@@ -57,6 +55,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.navigationItem.title = self.tag.tagName;
   
   // For when the glyph type changes (e.g. Chinese font type)
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -79,9 +78,8 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.tableView.backgroundColor = [UIColor clearColor];
-  self.navigationItem.title = [self.tag tagName];
 }
 
 - (void)viewDidUnload
@@ -147,7 +145,7 @@
 - (void) _loadWordListInBackground
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  self.cards = [[[CardPeer retrieveCardIdsForTagId:tag.tagId] mutableCopy] autorelease];
+  self.cards = [[[CardPeer retrieveFaultedCardsForTag:self.tag] mutableCopy] autorelease];
   [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [pool release];
 }
@@ -172,8 +170,8 @@
     if ([self cards])
     {
       // Show cards & stop the animator
-      [activityIndicator stopAnimating];
-      returnCount = [cards count];
+      [self.activityIndicator stopAnimating];
+      returnCount = [self.cards count];
     }
     else
     {
@@ -183,14 +181,15 @@
   }
   else
   {
-    // non-editable tags can only be studied
-    if(self.tag.tagEditable == 0)
+    if (self.tag.isEditable)
     {
-      return 1;
-    }
-    else // editable tags can be edited and eventually shared
-    {
+      // editable tags can be edited and eventually shared
       returnCount = settingsRowsLength;
+    }
+    else
+    {
+      // non-editable tags can only be studied
+      returnCount = 1;
     }
   }
   return returnCount;
@@ -218,13 +217,15 @@
       cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
-      if (tmpCard.headword == nil)
+      if (tmpCard.isFault)
       {
+        // Lazy load & update our array
         tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
-        [cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+        [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
-      cell.textLabel.text = [tmpCard headword];
+      // Ignore = YES means we get the target language HW no matter what, no headword_en
+      cell.textLabel.text = [tmpCard headwordIgnoringMode:YES];
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
       cell.textLabel.font = [Card configureFontForLabel:cell.textLabel];
     }
@@ -277,12 +278,13 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.section == kWordSetOptionsSection)
+  BOOL returnVal = NO;
+  // Only let the user edit the word list, and only if the tag is editable
+  if (self.tag.isEditable && indexPath.section == kWordSetListSections)
   {
-    //We dont want user to remove the "Begin studying these" section.
-    return NO;
+    returnVal = YES;
   }
-  return YES;
+  return returnVal;
 }
 
 
@@ -314,6 +316,7 @@
       [[self navigationItem] setBackBarButtonItem: newBackButton];      
       [newBackButton release];
       [self.navigationController pushViewController:tmpVC animated:YES];
+      [tmpVC release];
     }
   }
   // If they pressed a card, show the add to set list

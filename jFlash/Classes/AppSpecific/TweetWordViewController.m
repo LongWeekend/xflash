@@ -19,8 +19,7 @@
 @synthesize _tweetWord;
 @synthesize _twitterEngine;
 
-#pragma mark -
-#pragma mark Private Methods
+#pragma mark - Private Methods
 
 //! Handy method to take care all of the text field keyboards.
 - (void)_resignTextFieldKeyboard
@@ -70,8 +69,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark -
-#pragma mark UITextViewDelegate
+#pragma mark - UITextViewDelegate
 
 //! Its handy to resign all of the keyboard it the user touch the view.
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -93,7 +91,7 @@
 - (void) textViewDidChange:(UITextView *)textView
 {
 	NSUInteger c = [self.tweetTxt.text length];
-	NSInteger length = kMaxChars - c;
+	NSInteger length = LWE_TWITTER_MAX_CHARS - c;
 	if (length >= 0)
 	{
 		self.counterLbl.text = [NSString stringWithFormat:@"%d", length];
@@ -101,12 +99,11 @@
 	else
 	{
     self.counterLbl.text = [NSString stringWithFormat:@"%d", 0];
-		textView.text = [textView.text substringToIndex:kMaxChars];
+		textView.text = [textView.text substringToIndex:LWE_TWITTER_MAX_CHARS];
 	}
 }
 
-#pragma mark -
-#pragma mark UIViewController stuffs
+#pragma mark - UIViewController stuffs
 
 // The designated initializer.  Override if you 
 // create the controller programmatically and want to 
@@ -151,14 +148,14 @@
 	self.navigationItem.rightBarButtonItem = _signOutBtn;
 	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
 	self.tweetTxt.text = _tweetWord;
-	self.counterLbl.text = [NSString stringWithFormat:@"%d",(kMaxChars-[_tweetWord length])];
+	self.counterLbl.text = [NSString stringWithFormat:@"%d",(LWE_TWITTER_MAX_CHARS-[_tweetWord length])];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-	self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+	self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:LWETableBackgroundImage]];
 }
 
 - (void)viewDidUnload 

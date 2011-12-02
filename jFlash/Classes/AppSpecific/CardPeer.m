@@ -14,15 +14,24 @@
 /**
  * Factory that cares about what language we are using
  */
++ (Card *) blankCardWithId:(NSInteger)cardId
+{
+  Card *card = nil;
+#if defined(LWE_JFLASH)
+  card = [[[JapaneseCard alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  card = [[[ChineseCard alloc] init] autorelease];
+#endif
+  card.cardId = cardId;
+  return card;
+}
+
+/**
+ * When we *REALLY* want a blank card
+ */
 + (Card *) blankCard
 {
-#if defined(LWE_JFLASH)
-  return [[[JapaneseCard alloc] init] autorelease];
-#elif defined(LWE_CFLASH)
-  return [[[ChineseCard alloc] init] autorelease];
-#else
-  return nil;
-#endif
+  return [[self class] blankCardWithId:0];
 }
 
 #pragma mark - Search APIs
@@ -84,12 +93,17 @@
 + (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
 {
   NSString *returnSql = nil;
+#if defined (LWE_CFLASH)
+  NSString *orderBy = @"headword_simp";
+#else
+  NSString *orderBy = @"headword";
+#endif
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
   // Do the search using SQLite FTS (PTAG results)
   returnSql = [NSString stringWithFormat:@""
          "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
          "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = %d LIMIT %d) "
-         "ORDER BY c.headword", keywordWildcard, usePTag, limit];
+         "ORDER BY c.%@", keywordWildcard, usePTag, limit, orderBy];
   return returnSql;
 }
 
@@ -180,13 +194,18 @@
 /**
  * Returns an array containing cardId integers contained in by the Tag tagId
  */
-+ (NSArray*) retrieveCardIdsForTagId:(NSInteger)tagId
++ (NSArray*) retrieveFaultedCardsForTag:(Tag *)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tagId];
-  return (NSArray*)[CardPeer _addCardsToList:[NSMutableArray array]
-                               fromResultSet:[db executeQuery:sql]
-                                     hydrate:NO];
+  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tag.tagId];
+  NSMutableArray *ids = [NSMutableArray array];
+  FMResultSet *rs = [db executeQuery:sql];
+  while ([rs next])
+  {
+    [ids addObject:[[self class] blankCardWithId:[rs intForColumn:@"card_id"]]];
+  }
+  [rs close];
+  return (NSArray*)ids;
 }
 
 /**
