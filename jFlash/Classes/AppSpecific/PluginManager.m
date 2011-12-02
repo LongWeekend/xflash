@@ -14,7 +14,6 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 
 @interface PluginManager ()
 - (void)_initAvailableForDownloadPluginsList;
-- (void)_initDownloadedPluginsList;
 
 - (void) _registerPlugin:(Plugin *)plugin;
 - (BOOL) _loadDatabasePlugin:(Plugin *)plugin error:(NSError **)error;
@@ -37,14 +36,8 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 {
   if ((self = [super init]))
   {
-    // Initialize instance variables
     _loadedPlugins = [[NSMutableDictionary alloc] init];
-		_downloadedPlugins = nil; //[NSMutableArray array];
-    self.availableForDownloadPlugins = nil;
-
 		[self _initAvailableForDownloadPluginsList];
-		[self _initDownloadedPluginsList];
-    
     [self addObserver:self forKeyPath:@"availableForDownloadPlugins" options:NSKeyValueObservingOptionNew context:NULL];
 	}
   return self;
@@ -95,55 +88,6 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
       }
     }
     self.availableForDownloadPlugins = availablePlugins;
-	}
-}
-
-
-/** This is new in 1.2, because prior to this, the list dictionary of dictionary for plugin is hardcoded in the code, and now it is moved to the flat file.
- * This method will try to load the downloaded plugin list from the user document folder, if it is not there it means the program first launched (after upgrade, or after install).
- * It has default bundle plist file which contains all of the "should be there" plugin list file, read from that, and check with the user settings, if the user has downloaded 
- * the plugin, it means that it should copy the one from the bundle, and populate the path to the plugin, and last step would be write the file back to the DOCUMENT folder.
- * However, if its not the first run, the user should already has the file in the DOCUMENT folder, and just load it from there directly.
- */
-- (void) _initDownloadedPluginsList
-{
-  NSString *bundlePath = [LWEFile createBundlePathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
-  NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
-
-  BOOL docPathExists = [LWEFile fileExists:docPath];
-  BOOL bundlePathExists = [LWEFile fileExists:bundlePath];
-  LWE_ASSERT_EXC((docPathExists || bundlePathExists), @"PLIST must exist somewhere!  Checked: %@ AND %@",docPath,bundlePath);
-  
-  _downloadedPlugins = [[NSMutableArray alloc] init];
-	if (docPathExists)
-	{
-    NSArray *plugins = [[NSDictionary dictionaryWithContentsOfFile:docPath] allValues];
-    for (NSDictionary *pluginHash in plugins)
-    {
-      [_downloadedPlugins addObject:[Plugin pluginWithDictionary:pluginHash]];
-    }
-	}
-	else if (bundlePathExists)
-	{
-    // Check this once
-    NSDictionary *userSettingPlugin = [[NSUserDefaults standardUserDefaults] objectForKey:APP_PLUGIN];
-
-		NSArray *pluginHashes = [[NSDictionary dictionaryWithContentsOfFile:bundlePath] allValues];
-		for (NSDictionary *pluginHash in pluginHashes)
-		{
-      Plugin *plugin = [Plugin pluginWithDictionary:pluginHash];
-      BOOL pluginInSettings = ([userSettingPlugin objectForKey:plugin.pluginId] != nil);
-      BOOL isCardDB = [plugin.pluginId isEqualToString:CARD_DB_KEY];
-      
-      // If Cards DB or already in settings (somehow??!)
-			if (isCardDB || pluginInSettings)
-			{
-        [_downloadedPlugins addObject:plugin];
-			}
-		}
-    
-    // Now write to to the docs path so we have it for next time
-		[_downloadedPlugins writeToFile:docPath atomically:YES];
 	}
 }
 
@@ -299,11 +243,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
     [LWEFile deleteFile:oldPlugin.filePath];
   }
   
-  // 6. Update the downloaded plugins array.  Also write it to disk to mark this plugin as "downloaded"
-  [_downloadedPlugins addObject:plugin];
-  [_downloadedPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST] atomically:YES];
-  
-  // 7. Finally, remove from available downloads
+  // 6. Finally, remove from available downloads
   [self.availableForDownloadPlugins removeObjectForKey:plugin.pluginId];
   
   // 8. Tell anyone who cares that we've just successfully installed a plugin
@@ -313,19 +253,6 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 }
 
 #pragma mark - Public Methods - Find out about plugin state
-
-/**
- * Returns a dictionary with KEY => plugin filename of preinstalled plugins
- */
-+ (NSDictionary *) preinstalledPlugins;
-{
-  return [NSDictionary dictionaryWithObjectsAndKeys:LWE_CURRENT_CARD_DATABASE,CARD_DB_KEY,nil];
-}
-
-- (NSDictionary *) downloadedPlugins
-{
-  return (NSDictionary *)[[_downloadedPlugins retain] autorelease];
-}
 
 //! Returns the version string of a plugin, or nil if the key is not a loaded plugin
 - (NSString *) versionForLoadedPlugin:(NSString*)key
@@ -351,6 +278,12 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 {
   return [_loadedPlugins objectForKey:pluginKey];
 }
+
+- (NSDictionary *) loadedPlugins
+{
+  return [NSDictionary dictionaryWithDictionary:_loadedPlugins];
+}
+
 #pragma mark - 
 
 - (void) processPlistHash:(NSDictionary*)plistHash
@@ -429,7 +362,6 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   [self removeObserver:self forKeyPath:@"availableForDownloadPlugins"];
   
 	[availableForDownloadPlugins release];
-  [_downloadedPlugins release];
   [_loadedPlugins release];
   [super dealloc];
 }

@@ -25,7 +25,6 @@ extern NSString * const LWEPluginTargetPathKey;
 @interface PluginManager : NSObject
 {
   NSMutableDictionary *_loadedPlugins;
-  NSMutableArray *_downloadedPlugins;
 }
 
 // ======= THESE DO SOMETHING =========
@@ -47,10 +46,6 @@ extern NSString * const LWEPluginTargetPathKey;
 
 
 //========= THESE GIVE STATE ========
-/**
- * Returns a dictionary of plugins that should be in the bundle as pre-installed
- */
-+ (NSDictionary*) preinstalledPlugins;
 
 //! Returns YES if the plugin is loaded.  Directory plugins always return YES.
 - (BOOL) pluginKeyIsLoaded:(NSString *)pluginKey;
@@ -59,14 +54,14 @@ extern NSString * const LWEPluginTargetPathKey;
 
 - (NSString*) versionForLoadedPlugin:(NSString*)key;
 
+- (NSDictionary *) loadedPlugins;
+
 - (BOOL) loadPlugin:(Plugin *)plugin error:(NSError **)error;
 
 - (void) processPlistHash:(NSDictionary*)plistHash;
 
 // Used to fix the plugin paths after a restore/transfer to a different device
 //- (void) _updatePluginPaths:(BOOL) debug pluginList:(NSString*)plistFileName;
-
-- (NSDictionary *) downloadedPlugins;
 
 //! Maintains in memory a list of availavle for download plugin.
 @property (nonatomic, retain) NSMutableDictionary *availableForDownloadPlugins;
