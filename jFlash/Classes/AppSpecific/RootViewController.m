@@ -321,8 +321,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   dlViewController.showDetailedViewOnAppear = YES;
   dlViewController.startTaskOnAppear = NO;
   
-  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[[CurrentState sharedCurrentState] pluginMgr]];
-
   // Use HTML from PLIST
   NSString *htmlString = [aNotification.userInfo objectForKey:@"plugin_html_content"];
   dlViewController.webViewContent = htmlString;
@@ -332,20 +330,25 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   NSString *targetPath = [aNotification.userInfo objectForKey:@"plugin_target_path"];
   if (targetURL && targetPath)
   {
+    LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
+    packageDownloader.progressDelegate = dlViewController;
     LWEPackage *pluginPackage = [LWEPackage packageWithUrl:targetURL destinationFilepath:[targetPath stringByAppendingString:@".zip"]];
     [packageDownloader queuePackage:pluginPackage];
     dlViewController.taskHandler = packageDownloader;
+    [packageDownloader release];
     [self _showModalWithViewController:dlViewController useNavController:YES];
   }
   else
   {
     // This is a problem!  Why wouldn't we have stuff???
-    [LWEAnalytics logEvent:@"PLUGIN_URL_FAILURE" parameters:[aNotification userInfo]];
+    [LWEAnalytics logError:@"PLUGIN_URL_FAILURE" message:[NSString stringWithFormat:@"%@",aNotification.userInfo]];
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"This isn't Good",@"RootViewController.ThisIsntGoodAlertViewTitle")
                                        message:NSLocalizedString(@"Yikes!  We almost crashed just now trying to download your plugin.  If you have network access, LWE will be notified now so that we can fix this.  Try checking for new plugins on the 'Settings' tab and try again.  It may fix this.",@"RootViewController.ThisIsntGoodAlertViewMsg")];
   }
+  
+  // Hold on to this
+  [[CurrentState sharedCurrentState] setModalTaskViewController:dlViewController];
   [dlViewController release];
-  [packageDownloader release];
 }
 
 # pragma mark Delegate Methods
