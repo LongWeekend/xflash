@@ -60,6 +60,7 @@ extern NSInteger const kLWEUninitializedTagId;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
 
+//! Returns YES if this Tag is not actually a Tag, but a shell of a tag.  If so, call -hydrate
 @property (readonly) BOOL isFault;
 
 //! Current count of Card objects in the Tag
