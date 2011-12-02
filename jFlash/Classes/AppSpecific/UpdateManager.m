@@ -163,8 +163,8 @@
 }
 
 
-#pragma mark -
-#pragma mark Version 1.4
+#pragma mark - Version 1.4
+
 /** Returns YES if the user needs to update settings from 1.3 to 1.4, otherwise returns NO */
 + (BOOL) _needs13to14SettingsUpdate:(NSUserDefaults*) settings
 {
@@ -173,8 +173,7 @@
           [settings valueForKey:@"settings_already_created"]);
 }
 
-#pragma mark
-#pragma mark Version 1.5
+#pragma mark - Version 1.5
 
 + (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults*) settings
 {
@@ -191,8 +190,8 @@
   [settings setObject:LWE_JF_VERSION_1_5 forKey:APP_SETTINGS_VERSION];
 }
 
-#pragma mark
-#pragma mark Version 1.6
+#pragma mark - Version 1.6
+
 + (BOOL) _needs15to16SettingsUpdate:(NSUserDefaults*) settings
 {
   // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
@@ -344,7 +343,7 @@
   
   if ([UpdateManager _needs15to16SettingsUpdate:settings])
   {
-    LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.6 version");
     [UpdateManager _updateSettingsFrom15to16:settings];
   }
   
