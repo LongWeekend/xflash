@@ -33,6 +33,7 @@ extern NSString * const LWEShouldShowPopover;
 
 @property BOOL isFinishedLoading;
 
+- (IBAction)switchToSettings;
 - (void) switchToSearchWithTerm:(NSString*)term;
 - (void) loadTabBar;
 - (void) showDatabaseLoadingView;

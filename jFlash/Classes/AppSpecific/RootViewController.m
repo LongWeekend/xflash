@@ -73,12 +73,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
      }];
     [self.observerArray addObject:observer];
 
-    observer = [center addObserverForName:@"switchToSettings" object:nil queue:nil usingBlock:^(NSNotification *notification)
-     {
-       blockSelf.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
-     }];
-    [self.observerArray addObject:observer];
-    
     // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
     void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
     {
@@ -147,7 +141,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   self.view = aView;
   [aView release];
 }  
-
 
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
@@ -235,7 +228,13 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 }
 
 
-# pragma mark Convenience Methods for Notifications
+# pragma mark Convenience Methods
+
+//! Called via first responder from progress view
+- (IBAction)switchToSettings
+{
+  self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
+}
 
 - (void) switchToSearchWithTerm:(NSString*)term
 {
