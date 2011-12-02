@@ -165,6 +165,10 @@
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
+    // REVIEW: MMA we're starting to move more in the direction now of trying to 
+    // do something, and if we get an error back, then report -- not so much upfront checking.
+    // This kind of logic goes better in the model.
+    
     // Cancel deletion if the user is ID=1
     NSInteger selectedUserId = [[self.usersArray objectAtIndex:indexPath.row] userId];
     if (selectedUserId == DEFAULT_USER_ID)
