@@ -8,9 +8,13 @@
 
 #import "Plugin.h"
 
+@interface Plugin ()
+- (NSString *) _constructPathWithRelPath:(NSString *)relPath;
+@end
+
 @implementation Plugin
 
-@synthesize name, details, htmlString, targetURL, filePath, pluginId, pluginType, version, fileLocation;
+@synthesize name, details, htmlString, targetURL, targetPath, filePath, pluginId, pluginType, version, fileLocation;
 
 #pragma mark - Initialization/Constructors
 
@@ -47,6 +51,7 @@
   [encoder encodeObject:self.details forKey:@"details"];
   [encoder encodeObject:self.version forKey:@"version"];
   [encoder encodeObject:self.targetURL forKey:@"targetURL"];
+  [encoder encodeObject:self.targetPath forKey:@"targetPath"];
   [encoder encodeObject:self.htmlString forKey:@"htmlString"];
   [encoder encodeObject:self.filePath forKey:@"filePath"];
   [encoder encodeObject:self.pluginId forKey:@"pluginId"];
@@ -65,6 +70,7 @@
     self.version = [aDecoder decodeObjectForKey:@"version"];
     self.filePath = [aDecoder decodeObjectForKey:@"filePath"];
     self.targetURL = [aDecoder decodeObjectForKey:@"targetURL"];
+    self.targetPath = [aDecoder decodeObjectForKey:@"targetPath"];
     self.htmlString = [aDecoder decodeObjectForKey:@"htmlString"];
     self.pluginId = [aDecoder decodeObjectForKey:@"pluginId"];
     self.pluginType = [aDecoder decodeObjectForKey:@"pluginType"];
@@ -73,9 +79,9 @@
   return self;
 }
 
-#pragma mark - Public Methods
+#pragma mark - Private
 
-- (NSString *) fullPath
+- (NSString *) _constructPathWithRelPath:(NSString *)relPath
 {
   NSString *returnVal = nil;
   switch (self.fileLocation)
@@ -92,6 +98,18 @@
       break;
   }
   return returnVal;
+}
+
+#pragma mark - Public Methods
+
+- (NSString *) fullTargetPath
+{
+  return [self _constructPathWithRelPath:self.targetPath];
+}
+
+- (NSString *) fullPath
+{
+  return [self _constructPathWithRelPath:self.filePath];
 }
 
 - (BOOL) isNewVersionOfPlugin:(Plugin *)plugin
@@ -120,7 +138,7 @@
 - (LWEPackage *) downloadPackage
 {
   LWEPackage *pluginPackage = [LWEPackage packageWithUrl:[NSURL URLWithString:self.targetURL]
-                                     destinationFilepath:[[self fullPath] stringByAppendingString:@".zip"]];
+                                     destinationFilepath:[self fullTargetPath]];
   pluginPackage.userInfo = [NSDictionary dictionaryWithObject:self forKey:@"plugin"];
   return pluginPackage;
 }
@@ -146,6 +164,7 @@
   [version release];
   [htmlString release];
   [targetURL release];
+  [targetPath release];
   [filePath release];
   [pluginType release];
   [pluginId release];
