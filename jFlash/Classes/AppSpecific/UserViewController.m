@@ -201,7 +201,7 @@
 /** Takes a user objects and activates it, calling notifications appropriately */
 - (void) activateUserWithModal:(User*) user
 {
-  [DSActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  [DSActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
@@ -215,8 +215,13 @@
  */
 - (void) _activateUser:(User*) user 
 {
-  // Activate, post notification and dismiss view
-  [user activateUser];
+  // User activation code here 
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setInteger:user.userId forKey:@"user_id"];
+  CurrentState *currentStateSingleton = [CurrentState sharedCurrentState];
+  [currentStateSingleton resetActiveTag];
+
+  // post notification and dismiss view
   [DSActivityView removeView];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   [self.navigationController popViewControllerAnimated:YES];
