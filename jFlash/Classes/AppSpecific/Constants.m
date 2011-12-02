@@ -81,7 +81,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_6           = @"1.6";
 
       // This pertains to the plugin manager
-      NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"downloadedPlugin.plist";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
 
 // Don't use Cloudfront in development
@@ -114,8 +113,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
 
       // This pertains to the plugin manager
-      NSString * const LWE_DOWNLOADED_PLUGIN_PLIST	= @"cFlash-downloadedPlugin.plist";
-      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePluginForDownload.plist";
+      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePlugins.plist";
   #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
       NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/chinese-flash/cFlash-plugins.plist";
