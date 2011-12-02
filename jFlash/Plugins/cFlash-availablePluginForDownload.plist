@@ -5,6 +5,8 @@
 	<key>Plugins</key>
 	<array>
 		<dict>
+			<key>plugin_type</key>
+			<string>database</string>
 			<key>plugin_details</key>
 			<string>Adds sub-second full dictionary search (12MB)</string>
 			<key>plugin_file_name</key>
@@ -54,6 +56,69 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<string>FTS_DB</string>
 			<key>plugin_name</key>
 			<string>Awesomely Fast Search v1.0</string>
+			<key>plugin_notes_dir</key>
+			<string>plugin-resources</string>
+			<key>plugin_notes_file</key>
+			<string>full-text-search</string>
+			<key>plugin_target_path</key>
+			<string>cFlash-FTS-1.0.db</string>
+			<key>plugin_target_url</key>
+			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.zip</string>
+			<key>plugin_version</key>
+			<string>1.0</string>
+		</dict>
+		<dict>
+			<key>plugin_type</key>
+			<string>directory</string>
+			<key>plugin_details</key>
+			<string>Adds audio for each HSK card, recorded by a native speaker (34MB)</string>
+			<key>plugin_file_name</key>
+			<string>cFlash-AUDIO-1.0/</string>
+			<key>plugin_html_content</key>
+			<string>&lt;!DOCTYPE html PUBLIC &apos;-//W3C//DTD XHTML 1.0 Transitional//EN&apos; &apos;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&apos;&gt;
+&lt;html&gt;&lt;head&gt;
+  &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
+  &lt;link href=&quot;plugins.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+  &lt;link rel=&quot;stylesheet&quot; media=&quot;only screen and (-webkit-min-device-pixel-ratio: 2)&quot; type=&quot;text/css&quot; href=&quot;plugins_retina.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body style=&quot;background-color:transparent;&quot;&gt;
+
+&lt;img src=&quot;fast-search@2x.png&quot; border=&quot;0&quot; width=&quot;290&quot; class=&quot;title retina&quot;/&gt;
+&lt;div class=&quot;subtitle&quot;&gt;&lt;small&gt;Version 1.1, 12.1MB&lt;br/&gt;
+WiFi: 2 min / 3G: 12+ mins (approx)&lt;/small&gt;&lt;/div&gt;
+&lt;div id=&quot;release-notes&quot;&gt;
+&lt;p&gt;
+Chinese Flash is more than just a flash card program.  AUDIOWhen you download &amp;amp; install this update, it&apos;s also a blazingly fast dictionary that can search 100,000 entries in less than a second.
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Press &amp;quot;Start Download&amp;quot; to begin updating.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You&apos;ll need a network connection for the download. &lt;strong&gt;We strongly recommend using a WiFi connection.&lt;/strong&gt;
+You can get the update via your mobile network (3G), however it takes a while due to download speed limits.
+&lt;/p&gt;
+&lt;h3&gt;Here&apos;s how it works&lt;/h3&gt;
+&lt;p&gt;
+After installation: tap the &amp;quot;Search&amp;quot; icon at the bottom of the screen from the main screen (you probably already figured that out - that&apos;s how you got here!).
+Type a word in Chinese (hanzi or pinyin [numeric or accented]) or English, press &amp;quot;Search&amp;quot;, and look at the results.
+&lt;/p&gt;
+&lt;p&gt;
+Once you&apos;ve found a particular result that is interesting, or you want to remember, tap the word to proceed to add it to a study set, or you can add it to your starred words immediately.  One common use of this feature is to create a study set for new words that you encounter &amp;quot;in the wild&amp;quot;.
+&lt;/p&gt;
+&lt;h3&gt;Why do I have to download something?&lt;/h3&gt;
+&lt;p&gt;
+We separated the components (dictionary search, example sentences, etc) into downloadable updates to make it easier to deliver new data as it changes.&lt;/p&gt;
+&lt;p&gt;
+We all know language changes - so your study application needs to change with it. So if we receive reports of errors in the dictionary, we will be able to roll out changes to everyone automatically, without re-installing the application. Cool, right?
+&lt;/p&gt;
+&lt;p&gt;
+That platform isn&apos;t quite ready yet - but we are working on it - and this change was a key step along the way.
+&lt;/p&gt;
+&lt;h3&gt;&lt;em style=&quot;color:red&quot;&gt;Enjoy the Awesomely fast search!&lt;/em&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
+			<key>plugin_key</key>
+			<string>AUDIO_SAMPLES</string>
+			<key>plugin_name</key>
+			<string>Native-speaker audio for each HSK card</string>
 			<key>plugin_notes_dir</key>
 			<string>plugin-resources</string>
 			<key>plugin_notes_file</key>

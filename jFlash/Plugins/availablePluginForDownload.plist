@@ -50,6 +50,8 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<string>FTS_DB</string>
 			<key>plugin_version</key>
 			<string>1.1</string>
+			<key>plugin_type</key>
+			<string>database</string>
 			<key>plugin_name</key>
 			<string>Awesomely Fast Search v1.1</string>
 			<key>plugin_details</key>
@@ -117,6 +119,8 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<string>EX_DB</string>
 			<key>plugin_version</key>
 			<string>1.2</string>
+			<key>plugin_type</key>
+			<string>database</string>
 			<key>plugin_name</key>
 			<string>Fifty Thousand Examples v1.2</string>
 			<key>plugin_details</key>
