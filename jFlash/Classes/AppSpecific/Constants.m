@@ -130,7 +130,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 NSString * const CARD_DB_KEY = @"CARD_DB";
 NSString * const FTS_DB_KEY = @"FTS_DB";
 NSString * const EXAMPLE_DB_KEY = @"EX_DB";
-
+NSString *const AUDIO_SAMPLES_KEY = @"AUDIO_SAMPLES";
 
 //------------------------------------------------------------
 // Everything after here can easily be changed across versions
