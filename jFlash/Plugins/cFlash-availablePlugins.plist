@@ -59,9 +59,9 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<key>name</key>
 			<string>Awesomely Fast Search v1.0</string>
 			<key>filePath</key>
-			<string>cFlash-FTS-1.0.db</string>
+			<string>cFlash-FTS-1.0/cFlash-FTS-1.0.db</string>
 			<key>targetURL</key>
-			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.db.zip</string>
+			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-FTS-1.0.zip</string>
 			<key>version</key>
 			<string>1.0</string>
 		</dict>
