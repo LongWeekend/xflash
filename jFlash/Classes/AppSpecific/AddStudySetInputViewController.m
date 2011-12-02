@@ -14,6 +14,9 @@
 
 @synthesize owner, defaultCard, setNameTextfield, setDescriptionTextView, tag;
 
+// REVIEW: Ross I have been putting more of these notifications into the model, it's been working well
+// for decoupling the tag content changes code.  By putting it there you also get the same functioality
+// for free with any other code that adds sets (well, I think the only other one is the backup mgr, but).
 NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 
 /**
