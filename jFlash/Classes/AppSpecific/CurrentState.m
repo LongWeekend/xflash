@@ -100,10 +100,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSError *error = nil;
   Plugin *plugin = [package.userInfo objectForKey:@"plugin"];
   [self.pluginMgr installPlugin:plugin error:&error];
+  [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
 {
+  LWE_LOG(@"%@",error);
+  [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Initialization
