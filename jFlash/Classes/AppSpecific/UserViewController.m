@@ -38,15 +38,6 @@
   UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   self.navigationItem.rightBarButtonItem = bbi;
   [bbi release];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:@"userSettingsWereChanged" object:nil];
-}
-
-
-/** Fetch user data and then call a table reload */
-- (void)reloadTableData
-{
-  self.usersArray = [UserPeer getUsers];
-  [self.tableView reloadData];
 }
 
 /** Update the view if any theme info changed */
@@ -58,6 +49,21 @@
   self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
   self.tableView.separatorColor = [UIColor lightGrayColor];
   self.tableView.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Delegate for child view
+
+- (void) userDetailsDidChange:(User*)user
+{
+  // REVIEW: MMA Dec.02.2011
+  // A better way to do this would be to just update the table cell with this user.
+  self.usersArray = [UserPeer getUsers];
+  [self.tableView reloadData];
+}
+
+- (void) activateUser:(User*)user
+{
+  [self activateUserWithModal:user];
 }
 
 #pragma mark Table view methods
@@ -87,7 +93,7 @@
 {
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString* tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
+  NSString *tmpNickname = [[self.usersArray objectAtIndex:indexPath.row] userNickname];
   UITableViewCell *cell;
 
   // Selected cells are highlighted
@@ -156,6 +162,7 @@
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   User *currUser = [self.usersArray objectAtIndex:indexPath.row];
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:currUser];
+  userDetailsView.delegate = self;
   [self.navigationController pushViewController:userDetailsView animated:YES];
   [userDetailsView release];
 }
@@ -222,7 +229,6 @@
   // Activate, post notification and dismiss view
   [user activateUser];
   [DSActivityView removeView];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -234,13 +240,6 @@
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];
-
-}
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"userSettingsWereChanged" object:nil];
 }
 
 - (void)dealloc
