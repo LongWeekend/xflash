@@ -29,6 +29,7 @@ typedef enum
 @property (retain) NSString *filePath;
 @property (retain) NSString *name;
 @property (retain) NSString *details;
+@property (retain) NSString *htmlString;
 @property (retain) NSString *version;
 @property (retain) NSString *pluginType;
 @property (retain) NSString *pluginId;

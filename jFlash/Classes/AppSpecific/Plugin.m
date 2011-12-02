@@ -10,7 +10,7 @@
 
 @implementation Plugin
 
-@synthesize name, details, filePath, pluginId, pluginType, version, fileLocation;
+@synthesize name, details, htmlString, filePath, pluginId, pluginType, version, fileLocation;
 
 #pragma mark - Initialization/Constructors
 
@@ -34,6 +34,7 @@
   [encoder encodeObject:self.name forKey:@"name"];
   [encoder encodeObject:self.details forKey:@"details"];
   [encoder encodeObject:self.version forKey:@"version"];
+  [encoder encodeObject:self.htmlString forKey:@"htmlString"];
   [encoder encodeObject:self.filePath forKey:@"filePath"];
   [encoder encodeObject:self.pluginId forKey:@"pluginId"];
   [encoder encodeObject:self.pluginType forKey:@"pluginType"];
@@ -50,6 +51,7 @@
     self.details = [aDecoder decodeObjectForKey:@"details"];
     self.version = [aDecoder decodeObjectForKey:@"version"];
     self.filePath = [aDecoder decodeObjectForKey:@"filePath"];
+    self.htmlString = [aDecoder decodeObjectForKey:@"htmlString"];
     self.pluginId = [aDecoder decodeObjectForKey:@"pluginId"];
     self.pluginType = [aDecoder decodeObjectForKey:@"pluginType"];
     self.fileLocation = [aDecoder decodeIntegerForKey:@"fileLocation"];
@@ -93,12 +95,12 @@
 
 - (BOOL) isDirectoryPlugin
 {
-  return YES;
+  return [self.pluginType isEqualToString:@"directory"];
 }
 
 - (BOOL) isDatabasePlugin
 {
-  return YES;
+  return [self.pluginType isEqualToString:@"database"];
 }
 
 - (BOOL) isEqual:(id)object
@@ -120,6 +122,7 @@
   [name release];
   [details release];
   [version release];
+  [htmlString release];
   [filePath release];
   [pluginType release];
   [pluginId release];
