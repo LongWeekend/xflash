@@ -509,8 +509,6 @@
 		49EE96D9134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
 		49EE96DC134EC15900EC6B0E /* LWEDateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914F134EC15500EC6B0E /* LWEDateUtils.m */; };
 		49EE96DD134EC15900EC6B0E /* LWEDateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914F134EC15500EC6B0E /* LWEDateUtils.m */; };
-		49EE96DE134EC15900EC6B0E /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9152134EC15500EC6B0E /* LWEDownloader.m */; };
-		49EE96DF134EC15900EC6B0E /* LWEDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9152134EC15500EC6B0E /* LWEDownloader.m */; };
 		49EE96E0134EC15900EC6B0E /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9154134EC15500EC6B0E /* LWEFile.m */; };
 		49EE96E1134EC15900EC6B0E /* LWEFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9154134EC15500EC6B0E /* LWEFile.m */; };
 		49EE96E6134EC15900EC6B0E /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE915B134EC15500EC6B0E /* LWENetworkUtils.m */; };
@@ -1098,8 +1096,6 @@
 		49EE914E134EC15500EC6B0E /* LWEDateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDateUtils.h; sourceTree = "<group>"; };
 		49EE914F134EC15500EC6B0E /* LWEDateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEDateUtils.m; sourceTree = "<group>"; };
 		49EE9150134EC15500EC6B0E /* LWEDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDebug.h; sourceTree = "<group>"; };
-		49EE9151134EC15500EC6B0E /* LWEDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEDownloader.h; sourceTree = "<group>"; };
-		49EE9152134EC15500EC6B0E /* LWEDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEDownloader.m; sourceTree = "<group>"; };
 		49EE9153134EC15500EC6B0E /* LWEFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFile.h; sourceTree = "<group>"; };
 		49EE9154134EC15500EC6B0E /* LWEFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFile.m; sourceTree = "<group>"; };
 		49EE9159134EC15500EC6B0E /* LWEMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEMacros.h; sourceTree = "<group>"; };
@@ -2015,8 +2011,6 @@
 				49EE914E134EC15500EC6B0E /* LWEDateUtils.h */,
 				49EE914F134EC15500EC6B0E /* LWEDateUtils.m */,
 				49EE9150134EC15500EC6B0E /* LWEDebug.h */,
-				49EE9151134EC15500EC6B0E /* LWEDownloader.h */,
-				49EE9152134EC15500EC6B0E /* LWEDownloader.m */,
 				49AD17A0148355EA0017EFB4 /* LWEDecompressor.h */,
 				49AD17A1148355EA0017EFB4 /* LWEDecompressor.m */,
 				49AD17A2148355EA0017EFB4 /* LWEPackage.h */,
@@ -3285,7 +3279,6 @@
 				49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */,
 				49EE96DC134EC15900EC6B0E /* LWEDateUtils.m in Sources */,
-				49EE96DE134EC15900EC6B0E /* LWEDownloader.m in Sources */,
 				49EE96E0134EC15900EC6B0E /* LWEFile.m in Sources */,
 				49EE96E6134EC15900EC6B0E /* LWENetworkUtils.m in Sources */,
 				49EE96EE134EC15900EC6B0E /* LWERetinaUtils.m in Sources */,
@@ -3584,7 +3577,6 @@
 				49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */,
 				49EE96D9134EC15900EC6B0E /* LWEDatabase.m in Sources */,
 				49EE96DD134EC15900EC6B0E /* LWEDateUtils.m in Sources */,
-				49EE96DF134EC15900EC6B0E /* LWEDownloader.m in Sources */,
 				49EE96E1134EC15900EC6B0E /* LWEFile.m in Sources */,
 				49EE96E7134EC15900EC6B0E /* LWENetworkUtils.m in Sources */,
 				49EE96EF134EC15900EC6B0E /* LWERetinaUtils.m in Sources */,
