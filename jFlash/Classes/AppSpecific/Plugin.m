@@ -82,15 +82,14 @@
 
 - (BOOL) isNewVersionOfPlugin:(Plugin *)plugin
 {
-//  double pluginVersion = [[plugin objectForKey:LWEPluginVersionKey] doubleValue];
-//  double installedVersion = [[db databaseVersionForDatabase:pluginKey] doubleValue];
-//  
-//  LWE_LOG(@"Debug : Installed version %f, plugin version %f, need upgrade? %@", installedVersion, pluginVersion, (pluginVersion > installedVersion) ? @"YES" : @"NO");
-//  if (pluginVersion > installedVersion)
-//  {
-//    needUpdate = YES;
-//  }
-  return YES;
+  BOOL returnVal = NO;
+  double pluginVersion = [plugin.version doubleValue];
+  double myVersion = [self.version doubleValue];
+  if (pluginVersion > myVersion)
+  {
+    returnVal = YES;
+  }
+  return returnVal;
 }
 
 - (BOOL) isDirectoryPlugin
