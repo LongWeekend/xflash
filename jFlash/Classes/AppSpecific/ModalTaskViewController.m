@@ -28,8 +28,24 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
-  [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+
+  // Reset all variables to default
+  [self setStatusMessage:@""];
+  [self setTaskMessage:@""];
+  [self setProgress:0.0f];
+
+  // Sets the disabled/enabled state of start button
+//  [[self startButton] setEnabled:![self startTaskOnAppear]];
+
+  [[self progressIndicator] setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+}
+
+
+/** UIView Delegate method - sets nav title bar tint according to theme */
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
   // Make sure the buttons are set to the right states

@@ -11,6 +11,8 @@
 #define APP_TARGET_JFLASH 0
 #define APP_TARGET_CFLASH 1
 
+extern NSString * const LWETableBackgroundImage = @"/table-background.jpg";
+
 // Settings (also defined in header Constants.h)
 NSString * const SET_MODE_QUIZ       = @"QUIZ";
 NSString * const SET_MODE_BROWSE     = @"BROWSE";

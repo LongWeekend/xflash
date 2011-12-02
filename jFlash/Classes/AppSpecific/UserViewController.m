@@ -46,7 +46,7 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TABLEVIEW_BACKGROUND_IMAGE]];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.tableView.separatorColor = [UIColor lightGrayColor];
   self.tableView.backgroundColor = [UIColor clearColor];
 }
@@ -212,7 +212,7 @@
 /** Takes a user objects and activates it, calling notifications appropriately */
 - (void) activateUserWithModal:(User*) user
 {
-  [DSActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
+  [DSBezelActivityView newActivityViewForView:self.tableView withLabel:NSLocalizedString(@"Switching User...",@"UserViewController.SwitchingUserDialog")];
 
   // Now do it after a delay so we can get the modal loading view to pop up
   [self performSelector:@selector(_activateUser:) withObject:user afterDelay:0.0];
