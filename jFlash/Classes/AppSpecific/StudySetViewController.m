@@ -11,7 +11,7 @@
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
-
+#import "RootViewController.h"
 #import "SettingsViewController.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
@@ -161,6 +161,8 @@ NSInteger const kLWEBackupSection = 2;
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudyView object:nil];
   
   // Stop the animator
   selectedTagId = -1;
