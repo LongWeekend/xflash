@@ -97,6 +97,12 @@
       returnVal = [LWEFile createBundlePathWithFilename:relPath];
       break;
   }
+  
+  // As amazing as you'd think it is, create...pathWithFilename will actually trim the trailing /.
+  if ([self.pluginType isEqualToString:@"directory"])
+  {
+    returnVal = [returnVal stringByAppendingString:@"/"];
+  }
   return returnVal;
 }
 
