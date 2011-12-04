@@ -41,9 +41,6 @@ extern NSString * const LWEModalTaskDidFail;
 
 // User-set properties
 
-//! If YES, -showDetailedView will be called on viewDidAppear
-@property BOOL showDetailedViewOnAppear;
-
 // Content to be displayed in the web view
 @property (retain) NSString *webViewContent;
 

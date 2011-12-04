@@ -16,8 +16,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 @implementation ModalTaskViewController
 
-@synthesize taskMsgLabel, progressIndicator, startButton;
-@synthesize taskHandler, showDetailedViewOnAppear;
+@synthesize taskMsgLabel, progressIndicator, startButton, taskHandler;
 
 // For content/webview
 @synthesize webViewContent;
@@ -28,8 +27,10 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
+  
+  // Make sure the buttons are set to the right states
+  [self updateButtons];
+  [self showDetailedView];
 }
 
 
@@ -38,21 +39,8 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  
-  // Make sure the buttons are set to the right states
-  [self updateButtons];
-}
-
-/** UIView Delegate method - starts the download! */
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-  if (self.showDetailedViewOnAppear)
-  {
-    // Avoid infinite loop when user presses "back" on nav bar
-    self.showDetailedViewOnAppear = NO;
-    [self showDetailedView];
-  }
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  [self.progressIndicator setTintColor:[[ThemeManager sharedThemeManager] currentThemeTintColor]];
 }
 
 #pragma mark - LWEPackageDownloaderProgressDelegate

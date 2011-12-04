@@ -320,7 +320,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   //TODO: iPad customization here
   ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
-  dlViewController.showDetailedViewOnAppear = YES;
   dlViewController.webViewContent = thePlugin.htmlString;
 
   // Get path information
