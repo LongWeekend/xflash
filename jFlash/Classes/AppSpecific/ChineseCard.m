@@ -9,6 +9,11 @@
 #import "ChineseCard.h"
 #import <CoreText/CoreText.h>
 
+@interface ChineseCard ()
+- (NSArray *) _pinyinAudioFilenames;
+- (NSString *) _fullAudioFilename;
+@end
+
 @implementation ChineseCard
 
 @synthesize headword_simp;
@@ -179,23 +184,58 @@
   return result;
 }
 
+#pragma mark - Audio Related
+
+- (BOOL) hasAudio
+{
+  // Quick return if they have pinyin installed, saves us from searching for their card in HSK
+  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY])
+  {
+    return YES;
+  }
+  else
+  {
+    // If have a filename we have audio -- TODO maybe cache this value?
+    return ([self _fullAudioFilename] != nil);
+  }
+}
+
 - (NSDictionary *) audioFilenames
 {
-  NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
-  //TODO: This method is a stub mock (live mock, really) for Rendy - by MMA 10.25.2011
-  //NSMutableDictionary *dict = [[[super audioFilenames] mutableCopy] autorelease];
-  NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:2] autorelease];
+  NSMutableDictionary *audioFilenames = [NSMutableDictionary dictionaryWithCapacity:2];
+  [audioFilenames setValue:[self _pinyinAudioFilenames] forKey:kLWESegmentedReadingKey];
+  [audioFilenames setValue:[self _fullAudioFilename] forKey:kLWEFullReadingKey];
+  return (NSDictionary*)audioFilenames;
+}
+
+- (NSString *) _fullAudioFilename
+{
+  // Quick return if we don't have the full audio plugin
+  BOOL hskInstalled = [CurrentState pluginKeyIsLoaded:AUDIO_HSK_KEY];
+  if (hskInstalled == NO)
+  {
+    return nil;
+  }
   
-  NSMutableArray *segmentedPinyinSound = [[NSMutableArray alloc] initWithCapacity:pinyinSegments.count];
+  // OK, we have it, so search for the file.
+}
+
+- (NSArray *) _pinyinAudioFilenames
+{
+  NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
+  NSMutableArray *audioArray = [NSMutableArray array];
   for (NSString *pinyin in pinyinSegments)
   {
-    [segmentedPinyinSound addObject:@"foo.mp3"];
+    NSString *filename = [LWEFile createDocumentPathWithFilename:[pinyin stringByAppendingString:@".mp3"]];
+    if ([LWEFile fileExists:filename])
+    {
+      [audioArray addObject:filename];
+    }
   }
-  [dict setObject:segmentedPinyinSound forKey:kLWESegmentedReadingKey];
-  [segmentedPinyinSound release];
-  
-  return (NSDictionary*)dict;
+  return (NSArray *)audioArray;
 }
+
+#pragma mark -
 
 // -headword will call this automatically with a value of NO
 - (NSString *) headwordIgnoringMode:(BOOL)ignoreMode

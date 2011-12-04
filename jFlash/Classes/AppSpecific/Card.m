@@ -28,31 +28,27 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 - (LWEAudioQueue *)player
 {
-  if (!_player)
+  if (_player == nil)
   {
     NSDictionary *dict = [self audioFilenames];
     NSString *fullReading = [dict objectForKey:kLWEFullReadingKey];
     LWEAudioQueue *q = nil;
     if (fullReading)
     {
-      //If the full_reading key exists in the audioFilenames, 
-      //means there is an audio file dedicated to this card. 
-      //So, just instantiate the AVQueuePlayer with the array
+      //If the full_reading key exists in the audioFilenames, it means there is an audio file
+      // dedicated to this card.  So, just instantiate the AVQueuePlayer with the array
       NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
       q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
     }
     else
     {
       NSArray *segmentedReading = [dict objectForKey:kLWESegmentedReadingKey];
-      NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:[dict count]];
-      //Enumerate the dict which is filled with the filename(s) associated with a card-pinyin
-      [segmentedReading enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+      NSMutableArray *items = [NSMutableArray arrayWithCapacity:[dict count]];
+      for (NSString *filename in segmentedReading)
       {
         //Construct the filename for its audioFilename filename and instantiate the AVPlayerItem for it. 
-        NSString *filename = (NSString *)obj;
-        NSURL *url = [NSURL fileURLWithPath:[LWEFile createLibraryPathWithFilename:filename]];
-        [items addObject:url];
-      }];
+        [items addObject:[NSURL fileURLWithPath:[LWEFile createLibraryPathWithFilename:filename]]];
+      }
       // And create the player with the NSArray filled with the AVPlayerItem(s)
       q = [[LWEAudioQueue alloc] initWithItems:items];
     }
@@ -126,17 +122,14 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 - (BOOL) hasAudio
 {
-  // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
-  NSInteger result = arc4random() % 2;
-  return (BOOL)result;
+  // It is up to the subclasses to handle this and say yes
+  return NO;
 }
 
 - (NSDictionary *) audioFilenames
 {
-  // TODO: this is stub code (really, a live mock) for Rendy - done by MMA 10.25.2011
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  [dict setObject:@"foo.mp3" forKey:kLWEFullReadingKey];
-  return (NSDictionary*)dict;
+  // By default this does nothing, it is up to the subclasses to implement.
+  return nil;
 }
 
 - (void) pronounceWithDelegate:(id)theDelegate

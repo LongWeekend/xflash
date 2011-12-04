@@ -100,7 +100,7 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
   extern NSString * const LWE_CF_VERSION_1_0;
 
   // Plugins - CFlash
-  extern NSString * const AUDIO_SAMPLES_KEY;  //! Key for referring to the Pinyin Audio plugin
+  extern NSString * const AUDIO_PINYIN_KEY;  //! Key for referring to the Pinyin Audio plugin
   extern NSString * const AUDIO_HSK_KEY;      //! Key for referring to the HSK Audio plugin
 #endif 
 

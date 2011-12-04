@@ -170,7 +170,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 &lt;/body&gt;
 &lt;/html&gt;</string>
 			<key>pluginId</key>
-			<string>AUDIO_SAMPLES</string>
+			<string>AUDIO_PINYIN</string>
 			<key>name</key>
 			<string>Awesome Pinyin Audio 1.0</string>
 			<key>targetURL</key>

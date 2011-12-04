@@ -26,7 +26,6 @@
 - (void) _setupScrollView;
 - (void)_setupPageControl:(NSInteger)page;
 - (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
-- (void) _enablePronounceButton:(BOOL)enabled;
 - (Card*) _getNextCard:(NSString*)directionOrNil;
 - (Card*) _getFirstCardWithError;
 @end
@@ -74,7 +73,7 @@
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
 {
   [audioQueue pause];
-  [self _enablePronounceButton:YES];
+  self.pronounceBtn.enabled = YES;
 }
 
 - (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
@@ -85,22 +84,22 @@
   if (flag == LWEAudioQueueInterruptionShouldResume)
   {
     [audioQueue play];
-    [self _enablePronounceButton:NO];
+    self.pronounceBtn.enabled = NO;
   }
   else
   {
-    [self _enablePronounceButton:YES];
+    self.pronounceBtn.enabled = YES;
   }
 }
 
 - (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
 {
-  [self _enablePronounceButton:YES];
+  self.pronounceBtn.enabled = YES;
 }
 
 - (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
 {
-  [self _enablePronounceButton:NO];
+  self.pronounceBtn.enabled = NO;
 }
 
 #pragma mark - UIView Delegate Methods
@@ -450,11 +449,6 @@
   [self.currentCard pronounceWithDelegate:self];
 }
 
-- (void) _enablePronounceButton:(BOOL)enabled
-{
-  self.pronounceBtn.enabled = enabled;
-}
-
 #pragma mark - Private methods to setup cards (called every transition)
 
 - (Card*) _getFirstCardWithError
@@ -500,7 +494,7 @@
   BOOL returnVal = NO;
 #if defined (LWE_CFLASH)
   // Only CFlash has audio at present
-  if ([CurrentState pluginKeyIsLoaded:AUDIO_SAMPLES_KEY])
+  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY])
   {
     returnVal = [card hasAudio];
   }
@@ -666,7 +660,7 @@
 - (IBAction) launchAudioInstaller
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:AUDIO_SAMPLES_KEY];
+  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
@@ -685,7 +679,7 @@
     [self _setupPageControl:1];
     [self.exampleSentencesViewController setupWithCard:self.currentCard]; // finally setup the example view for the current card
   }
-  else if ([installedPlugin.pluginId isEqualToString:AUDIO_SAMPLES_KEY])
+  else if ([installedPlugin.pluginId isEqualToString:AUDIO_PINYIN_KEY])
   {
     
   }

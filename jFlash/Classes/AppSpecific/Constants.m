@@ -114,7 +114,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
       //CFlash specific plugins
       NSString * const AUDIO_HSK_KEY = @"AUDIO_HSK";
-      NSString * const AUDIO_SAMPLES_KEY = @"AUDIO_SAMPLES";
+      NSString * const AUDIO_PINYIN_KEY = @"AUDIO_PINYIN";
 
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePlugins.plist";
