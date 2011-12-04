@@ -37,9 +37,15 @@
 
 #pragma mark - Public Handy Method
 
-- (void)play
+- (void) play
 {
-  if ((!self.isPlaying) && (self.currentPlayer == nil))
+  // Do nothing if we have nothing to play
+  if ([self.players count] == 0)
+  {
+    return;
+  }
+  
+  if ((self.isPlaying == NO) && (self.currentPlayer == nil))
   {
     //Setting up the states for the queue to be played
     [self _setAudioSessionActive:YES];
@@ -55,18 +61,18 @@
   }
 }
 
-- (void)pause
+- (void) pause
 {
   [self.currentPlayer pause];
   self.playing = NO;
 }
 
-- (void)stop
+- (void) stop
 {
-  if ((self.isPlaying)&&(self.delegate)&&([self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)]))
+  if (self.isPlaying && self.delegate && [self.delegate respondsToSelector:@selector(audioQueueFinishInterruption:withFlag:)])
   {
-    LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
     //If its in the middle of the queue playing, report to the delegate so.
+    LWE_DELEGATE_CALL(@selector(audioQueueBeginInterruption:), self);
     [self _setAudioSessionActive:NO];
     [self.delegate audioQueueFinishInterruption:self withFlag:LWEAudioQueueInterruptionShouldStop];
   }
@@ -74,7 +80,7 @@
   [self _resetState];
 }
 
-- (void)stopAndClearDelegate
+- (void) stopAndClearDelegate
 {
   self.delegate = nil;
   [self stop];
@@ -82,18 +88,19 @@
 
 #pragma mark - Privates
 
-- (void)_playThroughTheQueue
+- (void) _playThroughTheQueue
 {
   AVAudioPlayer *p = (AVAudioPlayer *)[self.players objectAtIndex:self.currentIdx];
   self.currentPlayer = p;
   
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+  {
     [p prepareToPlay];
     [p play];
   });
 }
 
-- (void)_resetState
+- (void) _resetState
 {
   //reset back any instance variable which are saving state throughout
   //the queue being played
@@ -205,31 +212,28 @@
   if (self)
   {
     //Get the AVAudioPlayer object
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[theUrls count]];
-    [theUrls enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-      //Make sure we are only dealing with NSURL object, not the other.
-      if ([obj isKindOfClass:[NSURL class]])
+    NSMutableArray *playerArray = [NSMutableArray arrayWithCapacity:[theUrls count]];
+    for (NSURL *url in theUrls)
+    {
+      LWE_ASSERT_EXC([url isKindOfClass:[NSURL class]], @"You must pass this method an array of NSURL objs");
+      NSError *error = nil;
+      AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+      if (!error)
       {
-        NSURL *url = (NSURL *)obj;
-        NSError *error = nil;
-        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        if (!error)
-        {
-          player.delegate = self;
-          //Collect the player instantiated from a URL.
-          [array addObject:player];
-        }
-        else
-        {
-          //Tell the delegate if the loading of an URL is failing.
-          if ((self.delegate) && ([[self delegate] respondsToSelector:@selector(audioQueue:didFailLoadingURL:error:)]))
-            [[self delegate] audioQueue:self didFailLoadingURL:url error:error];
-        }
-        [player release];
+        player.delegate = self;
+        [playerArray addObject:player];
       }
-    }];
-    self.players = [NSArray arrayWithArray:array];
-    [array release];
+      else
+      {
+        //Tell the delegate if the loading of an URL is failing.
+        if ((self.delegate) && ([self.delegate respondsToSelector:@selector(audioQueue:didFailLoadingURL:error:)]))
+        {
+          [self.delegate audioQueue:self didFailLoadingURL:url error:error];
+        }
+      }
+      [player release];
+    }
+    self.players = (NSArray *)playerArray;
     
     //Another initialisation
     self.error = nil;
