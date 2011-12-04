@@ -288,16 +288,6 @@
     self.scrollView.scrollEnabled = YES;      
   }
 
-  // Show/Hide pronounce button
-  if([self hasAudioSample])
-  {
-    self.pronounceBtn.hidden = NO;
-  }
-  else
-  {
-    self.pronounceBtn.hidden = YES;
-  }
-
   self.pageControl.currentPage = page;
   [self changePage:self.pageControl animated:NO];
   _isChangingPage = NO;
@@ -325,7 +315,11 @@
              
     self.currentCard = card;
     
+    // Sets up the page control (incl. determining if we have example sentences)
     [self _setupPageControl:0];
+
+    // Show/Hide pronounce button depending on presence of plugin + sound for this file
+    self.pronounceBtn.hidden = ([self _shouldShowSampleAudioButtonForCard:card] == NO);
     
     // If no direction, don't animate transition
     if (directionOrNil != nil)
@@ -488,6 +482,7 @@
  */
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card
 {
+  // Default value is YES because if no plugin, we want to show the installer
   BOOL returnVal = YES;
   if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
@@ -503,10 +498,13 @@
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card
 {
   BOOL returnVal = NO;
+#if defined (LWE_CFLASH)
+  // Only CFlash has audio at present
   if ([CurrentState pluginKeyIsLoaded:AUDIO_SAMPLES_KEY])
   {
     returnVal = [card hasAudio];
   }
+#endif
   return returnVal;
 }
 
@@ -649,17 +647,6 @@
 #endif
 }
 
-- (BOOL) hasAudioSample
-{
-#if defined (LWE_JFLASH)
-  // JFlash currently does not have sample audio implemented
-  return NO;
-#else
-  return [self _shouldShowSampleAudioButtonForCard:self.currentCard];
-#endif
-}
-
-
 /**
  * Connects the "Download Example Sentences" button to actually launch the installer
  * Kind of just a convenience method
@@ -672,11 +659,23 @@
 }
 
 
+/**
+ * Connects the "Play Audio" button to actually launch the installer
+ * Kind of just a convenience method
+ */
+- (IBAction) launchAudioInstaller
+{
+  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
+  Plugin *exPlugin = [pm.availableForDownloadPlugins objectForKey:AUDIO_SAMPLES_KEY];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
+}
+
+
 /** Called by notification when a plugin is installed - if it is Example sentences, handle that */
 - (void)pluginDidInstall:(NSNotification *)aNotification
 {
-  NSDictionary *dict = [aNotification userInfo];
-  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  Plugin *installedPlugin = (Plugin *)aNotification.object;
+  if ([installedPlugin.pluginId isEqualToString:EXAMPLE_DB_KEY])
   {
     // Get rid of the old example sentences guy & re-setup the scroll view
     [[self.scrollView viewWithTag:LWE_EX_SENTENCE_INSTALLER_VIEW_TAG] removeFromSuperview];
@@ -685,6 +684,10 @@
     // Reset the page control (this will automatically call the code to determine if this card has ex sentences)
     [self _setupPageControl:1];
     [self.exampleSentencesViewController setupWithCard:self.currentCard]; // finally setup the example view for the current card
+  }
+  else if ([installedPlugin.pluginId isEqualToString:AUDIO_SAMPLES_KEY])
+  {
+    
   }
 }
 
