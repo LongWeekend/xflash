@@ -128,15 +128,29 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (void) updateButtons
 {
-  if (self.canStartTask)
+  if ([self.taskHandler isActive])
   {
-    self.startButton.hidden = NO;
-    self.progressIndicator.hidden = YES;
+    // Only show task label & progress indicator if task is active
+    self.startButton.hidden = YES;
+    self.taskMsgLabel.hidden = NO;
+    self.progressIndicator.hidden = NO;
   }
   else
   {
-    self.startButton.hidden = YES;
-    self.progressIndicator.hidden = NO;
+    // Can we start the task?
+    if (self.canStartTask)
+    {
+      self.startButton.hidden = NO;
+      self.taskMsgLabel.hidden = YES;
+      self.progressIndicator.hidden = YES;
+    }
+    else
+    {
+      // This is really a YAGNI case, but.
+      self.startButton.hidden = YES;
+      self.taskMsgLabel.hidden = YES;
+      self.progressIndicator.hidden = YES;
+    }
   }
        
   if (self.canCancelTask)
