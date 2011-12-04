@@ -291,6 +291,13 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
  */
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
+  // If the user tries to re-lauch while we are downloading, just re-launch that modal.
+  if ([CurrentState pluginIsDownloading])
+  {
+    [self _showModalWithViewController:[[CurrentState sharedCurrentState] modalTaskViewController] useNavController:YES];
+    return;
+  }
+  
   Plugin *thePlugin = (Plugin *)aNotification.object;
   LWE_ASSERT_EXC(thePlugin, @"This method can't be called with a nil plugin.");
 
