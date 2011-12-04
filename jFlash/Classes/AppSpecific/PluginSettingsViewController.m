@@ -87,15 +87,6 @@
 
   [self _reloadTableData];
 	[self _changeLastUpdateLabel];
-  
-  // Register a reload when they hide the modal
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:@"taskDidCompleteSuccessfully" object:nil];
-}
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 //! Helper method for notification
