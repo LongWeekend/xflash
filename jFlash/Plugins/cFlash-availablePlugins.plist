@@ -71,7 +71,7 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<key>pluginType</key>
 			<string>directory</string>
 			<key>details</key>
-			<string>Adds pronounciation for each HSK word (34MB)</string>
+			<string>Adds pronounciation for each HSK word (35MB)</string>
 			<key>filePath</key>
 			<string>hsk-audio-1.0/</string>
 			<key>fileLocation</key>
@@ -116,7 +116,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>pluginId</key>
 			<string>AUDIO_HSK</string>
 			<key>name</key>
-			<string>Native-speaker audio for each HSK card</string>
+			<string>HSK Audio 1.0</string>
 			<key>targetURL</key>
 			<string>https://d3jxezdeu5e50q.cloudfront.net/hsk-audio-1.0.zip</string>
 			<key>targetPath</key>
@@ -172,7 +172,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>pluginId</key>
 			<string>AUDIO_PINYIN</string>
 			<key>name</key>
-			<string>Awesome Pinyin Audio 1.0</string>
+			<string>Pinyin Audio 1.0</string>
 			<key>targetURL</key>
 			<string>https://d3jxezdeu5e50q.cloudfront.net/pinyin-audio-1.0.zip</string>
 			<key>targetPath</key>
