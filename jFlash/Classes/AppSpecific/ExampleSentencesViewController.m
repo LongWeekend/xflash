@@ -58,15 +58,11 @@
  */
 - (void) _pluginDidInstall:(NSNotification*)aNotification
 {
-  NSDictionary *dict = [aNotification userInfo];
-  if ([[dict objectForKey:@"plugin_key"] isEqualToString:EXAMPLE_DB_KEY])
+  Plugin *installedPlugin = (Plugin *)aNotification.object;
+  if ([installedPlugin.pluginId isEqualToString:EXAMPLE_DB_KEY] && [installedPlugin.version isEqualToString:@"1.1"])
   {
-    NSString *version = [dict objectForKey:@"plugin_version"];
-    if (![version isEqualToString:@"1.1"])
-    {
-      _useOldPluginMethods = NO;
-      [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
-    }
+    _useOldPluginMethods = NO;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEPluginDidInstall object:nil];
   }
 }
 
@@ -230,8 +226,9 @@
 
 - (void)viewDidUnload
 {
-	//Rendy added this in regards on memory warning, and there has been an obeserver that is registered in the viewDidLoad (Avoid the observer registered twice)
+  [super viewDidUnload];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.sentencesWebView = nil;
 }
 
 - (void)dealloc
