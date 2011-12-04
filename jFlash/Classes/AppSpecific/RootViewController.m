@@ -85,12 +85,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
       }
       [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
     };
-    observer = [center addObserverForName:@"taskDidCancelSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
-    [self.observerArray addObject:observer];
-
-    observer = [center addObserverForName:@"taskDidCompleteSuccessfully" object:nil queue:nil usingBlock:dismissBlock];
-    [self.observerArray addObject:observer];
-
     observer = [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
     [self.observerArray addObject:observer];
     

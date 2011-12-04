@@ -8,7 +8,6 @@
 #import "ModalTaskViewController.h"
 
 NSString * const LWEModalTaskDidCancel = @"LWEModalTaskDidCancel";
-NSString * const LWEModalTaskDidFinish = @"LWEModalTaskDidFinish";
 NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 
 /**
@@ -99,9 +98,10 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   if ([self canCancelTask])
   {
     [self.taskHandler cancel];
-    [self updateButtons];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidCancel object:nil];
   }
+  
+  // Go away
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 /**
@@ -111,7 +111,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (BOOL) canCancelTask
 {
-  if ([self.taskHandler respondsToSelector:@selector(canCancelTask)])
+  if ([self.taskHandler isActive] && [self.taskHandler respondsToSelector:@selector(canCancelTask)])
   {
     return [self.taskHandler canCancelTask];
   }
@@ -152,25 +152,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   {
     self.navigationItem.leftBarButtonItem = nil;
   }
-}
-
-
-/**
- * Retrieves current status from task delegate and updates view
- */
-- (void) updateDisplay
-{
-  if ([self.taskHandler isSuccessState])
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidFinish object:self];
-  }
-  else if ([self.taskHandler isFailureState])
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEModalTaskDidFail object:self];
-  }
-  
-  // Call delegate & update the UI buttons
-  [self updateButtons];
 }
 
 

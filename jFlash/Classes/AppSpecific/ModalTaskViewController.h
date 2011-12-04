@@ -12,10 +12,6 @@
 #import "UIWebView+LWENoBounces.h"
 
 extern NSString * const LWEModalTaskDidCancel;
-extern NSString * const LWEModalTaskDidFinish;
-extern NSString * const LWEModalTaskDidFail;
-
-
 
 @interface ModalTaskViewController : UIViewController <LWEPackageDownloaderProgressDelegate>
 {
