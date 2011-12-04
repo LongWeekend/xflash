@@ -116,7 +116,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>pluginId</key>
 			<string>AUDIO_HSK</string>
 			<key>name</key>
-			<string>HSK Audio 1.0</string>
+			<string>HSK Word Audio v1.0</string>
 			<key>targetURL</key>
 			<string>https://d3jxezdeu5e50q.cloudfront.net/hsk-audio-1.0.zip</string>
 			<key>targetPath</key>
@@ -172,7 +172,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>pluginId</key>
 			<string>AUDIO_PINYIN</string>
 			<key>name</key>
-			<string>Pinyin Audio 1.0</string>
+			<string>Pinyin Audio v1.0</string>
 			<key>targetURL</key>
 			<string>https://d3jxezdeu5e50q.cloudfront.net/pinyin-audio-1.0.zip</string>
 			<key>targetPath</key>
