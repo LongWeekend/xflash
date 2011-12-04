@@ -38,7 +38,6 @@
 }
 
 - (BOOL) hasExampleSentences;
-- (BOOL) hasAudioSample;
 
 - (IBAction)doShowProgressModalBtn;
 - (IBAction)revealCard;
