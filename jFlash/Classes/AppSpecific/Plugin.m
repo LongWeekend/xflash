@@ -98,11 +98,6 @@
       break;
   }
   
-  // As amazing as you'd think it is, create...pathWithFilename will actually trim the trailing /.
-  if ([self.pluginType isEqualToString:@"directory"])
-  {
-    returnVal = [returnVal stringByAppendingString:@"/"];
-  }
   return returnVal;
 }
 
@@ -115,7 +110,13 @@
 
 - (NSString *) fullPath
 {
-  return [self _constructPathWithRelPath:self.filePath];
+  // As amazing as you'd think it is, create...pathWithFilename will actually trim the trailing /.
+  NSString *returnVal = [self _constructPathWithRelPath:self.filePath];
+  if ([self.pluginType isEqualToString:@"directory"])
+  {
+    returnVal = [returnVal stringByAppendingString:@"/"];
+  }
+  return returnVal;
 }
 
 - (BOOL) isNewVersionOfPlugin:(Plugin *)plugin

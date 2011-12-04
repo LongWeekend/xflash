@@ -73,9 +73,9 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<key>details</key>
 			<string>Adds pronounciation for each HSK word (34MB)</string>
 			<key>filePath</key>
-			<string>cFlash-AUDIO-1.0/</string>
+			<string>hsk-audio-1.0/</string>
 			<key>fileLocation</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>comment</key>
 			<string>file Location #2 = documents (0 = bundle, 1 = library)</string>
 			<key>htmlString</key>
@@ -118,9 +118,9 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>name</key>
 			<string>Native-speaker audio for each HSK card</string>
 			<key>targetURL</key>
-			<string>https://d3jxezdeu5e50q.cloudfront.net/cFlash-HSK-AUDIO-1.0.zip</string>
+			<string>https://d3jxezdeu5e50q.cloudfront.net/hsk-audio-1.0.zip</string>
 			<key>targetPath</key>
-			<string>cFlash-HSK-AUDIO-1.0.zip</string>
+			<string>hsk-audio-1.0.zip</string>
 			<key>version</key>
 			<string>1.0</string>
 		</dict>
@@ -132,7 +132,7 @@ We separated the components (dictionary search, audio, etc.) into downloadable u
 			<key>filePath</key>
 			<string>pinyin-audio-1.0/</string>
 			<key>fileLocation</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>comment</key>
 			<string>file Location #2 = documents (0 = bundle, 1 = library)</string>
 			<key>htmlString</key>

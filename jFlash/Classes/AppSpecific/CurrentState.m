@@ -111,7 +111,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
 {
   // TODO: MMA Make this work!
-  LWE_LOG(@"%@",error);
+  [LWEUIAlertView notificationAlertWithTitle:@"Plugin Error" message:error.localizedDescription];
+  //  LWE_LOG(@"%@",error);
   if (self.modalTaskViewController.parentViewController)
   {
     [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
