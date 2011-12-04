@@ -101,13 +101,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   NSError *error = nil;
   Plugin *plugin = [package.userInfo objectForKey:@"plugin"];
   [self.pluginMgr installPlugin:plugin error:&error];
-  [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
+  if (self.modalTaskViewController.parentViewController)
+  {
+    [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
+  }
+  self.modalTaskViewController = nil;
 }
 
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
 {
+  // TODO: MMA Make this work!
   LWE_LOG(@"%@",error);
-  [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
+  if (self.modalTaskViewController.parentViewController)
+  {
+    [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
+  }
+  self.modalTaskViewController = nil;
 }
 
 #pragma mark - Initialization
