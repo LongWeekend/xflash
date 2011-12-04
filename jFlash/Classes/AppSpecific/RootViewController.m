@@ -88,22 +88,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
     observer = [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
     [self.observerArray addObject:observer];
     
-    // Update the settings tab bar item with badge number
-    observer = [center addObserverForName:LWEShouldUpdateSettingsBadge object:nil queue:nil usingBlock:^(NSNotification *notification)
-     {
-       NSNumber *badgeNumber = [notification.userInfo objectForKey:@"badge_number"];
-       UITabBarItem *settingsTabBar = [blockSelf.tabBarController.tabBar.items objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
-       if ([badgeNumber intValue] != 0)
-       {
-         settingsTabBar.badgeValue = [badgeNumber stringValue];
-       }
-       else 
-       {
-         settingsTabBar.badgeValue = nil;
-       }
-     }];
-    [self.observerArray addObject:observer];
-    
     // Show popover for progress view
     observer = [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
