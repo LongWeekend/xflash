@@ -274,7 +274,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     {
       [self _retrievePlistFromServer];
     }
-    
   }
   else if (notifyOnNetworkFail)
   {
@@ -297,6 +296,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
     [self.pluginMgr performSelectorOnMainThread:@selector(processPlistHash:) withObject:plist waitUntilDone:YES];
   }
   [plist release];
+  
+  // Now update the settings so we record that we checked
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setValue:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
+  
   [pool release];
 }
 
