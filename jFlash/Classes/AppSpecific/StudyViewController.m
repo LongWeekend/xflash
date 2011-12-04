@@ -446,7 +446,16 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
-  [self.currentCard pronounceWithDelegate:self];
+  if ([self.currentCard hasAudio])
+  {
+    [self.currentCard pronounceWithDelegate:self];
+  }
+  else
+  {
+    // Assume we haven't installed the plugin yet
+    Plugin *pinyinPlugin = [CurrentState availablePluginForKey:AUDIO_PINYIN_KEY];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:pinyinPlugin userInfo:nil];
+  }
 }
 
 #pragma mark - Private methods to setup cards (called every transition)
@@ -491,15 +500,16 @@
  */
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card
 {
-  BOOL returnVal = NO;
 #if defined (LWE_CFLASH)
-  // Only CFlash has audio at present
-  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY])
+  BOOL returnVal = YES;
+  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [CurrentState pluginKeyIsLoaded:AUDIO_HSK_KEY])
   {
     returnVal = [card hasAudio];
   }
-#endif
   return returnVal;
+#else
+  return NO;
+#endif
 }
 
 
@@ -681,7 +691,8 @@
   }
   else if ([installedPlugin.pluginId isEqualToString:AUDIO_PINYIN_KEY])
   {
-    
+    // Reset the current card
+    [self doChangeCard:self.currentCard direction:nil];
   }
 }
 
