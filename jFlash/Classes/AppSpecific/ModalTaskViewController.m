@@ -17,7 +17,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 @implementation ModalTaskViewController
 
 @synthesize taskMsgLabel, progressIndicator, startButton;
-@synthesize taskHandler, showDetailedViewOnAppear, startTaskOnAppear;
+@synthesize taskHandler, showDetailedViewOnAppear;
 
 // For content/webview
 @synthesize webViewContent;
@@ -47,10 +47,6 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  if (self.startTaskOnAppear)
-  {
-    [self startProcess];
-  }
   if (self.showDetailedViewOnAppear)
   {
     // Avoid infinite loop when user presses "back" on nav bar

@@ -41,9 +41,6 @@ extern NSString * const LWEModalTaskDidFail;
 
 // User-set properties
 
-//! If YES, -startProcess will be called on viewDidAppear
-@property BOOL startTaskOnAppear;
-
 //! If YES, -showDetailedView will be called on viewDidAppear
 @property BOOL showDetailedViewOnAppear;
 

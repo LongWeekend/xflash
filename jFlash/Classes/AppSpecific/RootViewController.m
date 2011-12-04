@@ -321,7 +321,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
   dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
   dlViewController.showDetailedViewOnAppear = YES;
-  dlViewController.startTaskOnAppear = NO;
   dlViewController.webViewContent = thePlugin.htmlString;
 
   // Get path information
