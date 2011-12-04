@@ -192,12 +192,6 @@
 		496C66B91472897C009F04D4 /* LWEUILabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE916C134EC15500EC6B0E /* LWEUILabelUtils.m */; };
 		496C66BA1472897E009F04D4 /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE916E134EC15500EC6B0E /* LWEUITableUtils.m */; };
 		496C66BB1472897E009F04D4 /* LWEUITableUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE916E134EC15500EC6B0E /* LWEUITableUtils.m */; };
-		496C66BC1472898C009F04D4 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
-		496C66BD1472898C009F04D4 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
-		496C66BE1472898F009F04D4 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
-		496C66BF1472898F009F04D4 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
-		496C66C014728998009F04D4 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
-		496C66C114728998009F04D4 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
 		496C66C2147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C3147289A3009F04D4 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BEF11AB7CD700016BD2 /* Group.m */; };
 		496C66C4147289BB009F04D4 /* LWENetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE915B134EC15500EC6B0E /* LWENetworkUtils.m */; };
@@ -457,6 +451,10 @@
 		49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
+		49C506251484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
+		49C506261484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
+		49C506271484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
+		49C506281484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
 		49D996C212705C8300D176D0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D996C012705C8300D176D0 /* Icon@2x.png */; };
@@ -562,12 +560,6 @@
 		912405DA109C263D00ECA1C2 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 912405D9109C263D00ECA1C2 /* Entitlements.plist */; };
 		913D48081353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
 		913D48091353A3E0008A4649 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48071353A3E0008A4649 /* Reachability.m */; };
-		913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
-		913D48341353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */; };
-		913D48531353C099008A4649 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
-		913D48541353C099008A4649 /* JRWebViewController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48521353C099008A4649 /* JRWebViewController+LWE.m */; };
-		913D48661353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
-		913D48671353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */ = {isa = PBXBuildFile; fileRef = 913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */; };
 		913EEF8B130800F300EBCF87 /* puny.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF71130800F300EBCF87 /* puny.c */; };
 		913EEF8D130800F300EBCF87 /* toxxx.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF82130800F300EBCF87 /* toxxx.c */; };
 		913EEF8E130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
@@ -622,6 +614,10 @@
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
 		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
+		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
+		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
+		91910156148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
+		91910157148992EC003E9A19 /* TagTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910155148992EC003E9A19 /* TagTest.m */; };
 		91B3E2F1144FD8ED003F8986 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */; };
 		91C05A3913F468D500061229 /* Default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91C05A3813F468D500061229 /* Default.jpg */; };
 		91C05A3C13F4827D00061229 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C05A3B13F4827D00061229 /* libFlurry.a */; };
@@ -1027,6 +1023,8 @@
 		49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LWEChineseSearchBarInput.xib; path = AppSpecific/LWEChineseSearchBarInput.xib; sourceTree = "<group>"; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
+		49C50623148496640094734D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.h; sourceTree = SOURCE_ROOT; };
+		49C506241484966A0094734D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.m; sourceTree = SOURCE_ROOT; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		49C5BC1F11C51B0D00A595D6 /* DisplaySearchedSentenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplaySearchedSentenceViewController.h; path = AppSpecific/DisplaySearchedSentenceViewController.h; sourceTree = "<group>"; };
 		49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplaySearchedSentenceViewController.m; path = AppSpecific/DisplaySearchedSentenceViewController.m; sourceTree = "<group>"; };
@@ -1155,12 +1153,6 @@
 		9134371D138DE5B400A924E4 /* LWECrashUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECrashUtils.h; sourceTree = "<group>"; };
 		913D48061353A3E0008A4649 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		913D48071353A3E0008A4649 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LWE+JRProvidersController.h"; sourceTree = "<group>"; };
-		913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LWE+JRProvidersController.m"; sourceTree = "<group>"; };
-		913D48511353C099008A4649 /* JRWebViewController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRWebViewController+LWE.h"; sourceTree = "<group>"; };
-		913D48521353C099008A4649 /* JRWebViewController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRWebViewController+LWE.m"; sourceTree = "<group>"; };
-		913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JRUserLandingController+LWE.h"; sourceTree = "<group>"; };
-		913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JRUserLandingController+LWE.m"; sourceTree = "<group>"; };
 		913EEF71130800F300EBCF87 /* puny.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = puny.c; sourceTree = "<group>"; };
 		913EEF72130800F300EBCF87 /* puny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = puny.h; sourceTree = "<group>"; };
 		913EEF82130800F300EBCF87 /* toxxx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = toxxx.c; sourceTree = "<group>"; };
@@ -1244,6 +1236,10 @@
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
 		91910048148052A1003E9A19 /* JFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashSearchTest.h; path = Tests/jFlashTests/JFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
 		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
+		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
+		919100F21486A6B1003E9A19 /* JRPreviewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRPreviewLabel.m; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.m; sourceTree = SOURCE_ROOT; };
+		91910154148992EC003E9A19 /* TagTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagTest.h; path = Tests/TagTest.h; sourceTree = SOURCE_ROOT; };
+		91910155148992EC003E9A19 /* TagTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagTest.m; path = Tests/TagTest.m; sourceTree = SOURCE_ROOT; };
 		91992E2811D1A2F600CFCACD /* jFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = jFlash.db; path = sql/jFlash.db; sourceTree = "<group>"; };
 		91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-CARD-1.1.db"; path = "sql/jFlash-CARD-1.1.db"; sourceTree = "<group>"; };
 		91B3E2F0144FD8ED003F8986 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -1623,6 +1619,8 @@
 				49E3D17A1472803900F79308 /* CardTagTest.m */,
 				49E3D17B1472803900F79308 /* SetupDatabaseHelper.h */,
 				49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */,
+				91910154148992EC003E9A19 /* TagTest.h */,
+				91910155148992EC003E9A19 /* TagTest.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1768,7 +1766,6 @@
 			children = (
 				4938F8BB14027532001EB473 /* OHAttributedLabel */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
-				913D48301353BE26008A4649 /* LWEJanrain */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				49EE8D90134EC15300EC6B0E /* LWE */,
 				91CA7222133D216C008A89A8 /* JREngage */,
@@ -2096,20 +2093,6 @@
 			path = "External/asi-http-request/External/Reachability";
 			sourceTree = "<group>";
 		};
-		913D48301353BE26008A4649 /* LWEJanrain */ = {
-			isa = PBXGroup;
-			children = (
-				913D48311353BEDB008A4649 /* LWE+JRProvidersController.h */,
-				913D48321353BEDB008A4649 /* LWE+JRProvidersController.m */,
-				913D48511353C099008A4649 /* JRWebViewController+LWE.h */,
-				913D48521353C099008A4649 /* JRWebViewController+LWE.m */,
-				913D48641353C1ED008A4649 /* JRUserLandingController+LWE.h */,
-				913D48651353C1ED008A4649 /* JRUserLandingController+LWE.m */,
-			);
-			name = LWEJanrain;
-			path = External/LWEJanrain;
-			sourceTree = "<group>";
-		};
 		913EEF6C130800F300EBCF87 /* IFUnicodeURL */ = {
 			isa = PBXGroup;
 			children = (
@@ -2246,6 +2229,10 @@
 		91CA723A133D216C008A89A8 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				919100F11486A6B0003E9A19 /* JRPreviewLabel.h */,
+				919100F21486A6B1003E9A19 /* JRPreviewLabel.m */,
+				49C50623148496640094734D /* JSONKit.h */,
+				49C506241484966A0094734D /* JSONKit.m */,
 				49BBA49D144D570B00E6A9AE /* JRActivityObject.h */,
 				49BBA49E144D570B00E6A9AE /* JRActivityObject.m */,
 				49BBA49F144D570C00E6A9AE /* JRConnectionManager.h */,
@@ -3235,9 +3222,6 @@
 				49EE97B2134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B4134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48081353A3E0008A4649 /* Reachability.m in Sources */,
-				913D48331353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */,
-				913D48531353C099008A4649 /* JRWebViewController+LWE.m in Sources */,
-				913D48661353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */,
 				911D1961137A56C8005C9B55 /* TapjoyConnect.m in Sources */,
 				91F80CAF138619E700A07663 /* JRPublishActivityController.m in Sources */,
 				91F80F0C1386583F00A07663 /* LWEUniversalAppHelpers.m in Sources */,
@@ -3269,6 +3253,8 @@
 				917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428114685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BC147106BF0015D64B /* CardViewController.m in Sources */,
+				49C506251484966A0094734D /* JSONKit.m in Sources */,
+				919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
 				4971252A14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3303,9 +3289,6 @@
 				496C66B714728978009F04D4 /* LWEUIAlertView.m in Sources */,
 				496C66B91472897C009F04D4 /* LWEUILabelUtils.m in Sources */,
 				496C66BB1472897E009F04D4 /* LWEUITableUtils.m in Sources */,
-				496C66BD1472898C009F04D4 /* JRUserLandingController+LWE.m in Sources */,
-				496C66BF1472898F009F04D4 /* JRWebViewController+LWE.m in Sources */,
-				496C66C114728998009F04D4 /* LWE+JRProvidersController.m in Sources */,
 				496C66C3147289A3009F04D4 /* Group.m in Sources */,
 				496C66C5147289BB009F04D4 /* LWENetworkUtils.m in Sources */,
 				496C66C7147289C2009F04D4 /* ASIHTTPRequest.m in Sources */,
@@ -3333,8 +3316,11 @@
 				496C66FF14728B9C009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670114728BC9009F04D4 /* ThemeManager.m in Sources */,
 				49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */,
+				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
+				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
+				91910156148992EC003E9A19 /* TagTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3369,9 +3355,6 @@
 				496C66B614728978009F04D4 /* LWEUIAlertView.m in Sources */,
 				496C66B81472897B009F04D4 /* LWEUILabelUtils.m in Sources */,
 				496C66BA1472897E009F04D4 /* LWEUITableUtils.m in Sources */,
-				496C66BC1472898C009F04D4 /* JRUserLandingController+LWE.m in Sources */,
-				496C66BE1472898F009F04D4 /* JRWebViewController+LWE.m in Sources */,
-				496C66C014728998009F04D4 /* LWE+JRProvidersController.m in Sources */,
 				496C66C2147289A3009F04D4 /* Group.m in Sources */,
 				496C66C4147289BB009F04D4 /* LWENetworkUtils.m in Sources */,
 				496C66C6147289C1009F04D4 /* ASIHTTPRequest.m in Sources */,
@@ -3399,7 +3382,9 @@
 				496C66FE14728B9B009F04D4 /* SFHFKeychainUtils.m in Sources */,
 				496C670014728BC8009F04D4 /* ThemeManager.m in Sources */,
 				49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */,
+				49C506281484966A0094734D /* JSONKit.m in Sources */,
 				4971252D14873B0000D4D150 /* MoodIcon.m in Sources */,
+				91910157148992EC003E9A19 /* TagTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3510,9 +3495,6 @@
 				49EE97B3134EC34500EC6B0E /* ASIInputStream.m in Sources */,
 				49EE97B5134EC34500EC6B0E /* ASINetworkQueue.m in Sources */,
 				913D48091353A3E0008A4649 /* Reachability.m in Sources */,
-				913D48341353BEDB008A4649 /* LWE+JRProvidersController.m in Sources */,
-				913D48541353C099008A4649 /* JRWebViewController+LWE.m in Sources */,
-				913D48671353C1ED008A4649 /* JRUserLandingController+LWE.m in Sources */,
 				911D1962137A56C8005C9B55 /* TapjoyConnect.m in Sources */,
 				91F80CB0138619E700A07663 /* JRPublishActivityController.m in Sources */,
 				91F80F0D1386583F00A07663 /* LWEUniversalAppHelpers.m in Sources */,
@@ -3546,6 +3528,8 @@
 				917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */,
 				24BB428214685E67002C387B /* LWEAudioQueue.m in Sources */,
 				49AAB8BD147106BF0015D64B /* CardViewController.m in Sources */,
+				49C506261484966A0094734D /* JSONKit.m in Sources */,
+				919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */,
 				4971252B14873B0000D4D150 /* MoodIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,3 +27,4 @@
 @end
 
 extern NSString * const LWEJanrainLoginManagerUserDidAuthenticate;
+extern NSString * const LWEJanrainLoginManagerUserDidNotAuthenticate;
