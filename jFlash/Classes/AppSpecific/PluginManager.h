@@ -13,13 +13,7 @@
 #import "ASIHTTPRequest.h"
 #import "LWEPackageDownloader.h"
 
-extern NSString * const LWEShouldUpdateSettingsBadge;
 extern NSString * const LWEPluginDidInstall;
-extern NSString * const LWEPluginKeyKey;
-extern NSString * const LWEPluginNameKey;
-extern NSString * const LWEPluginVersionKey;
-extern NSString * const LWEPluginFilenameKey;
-extern NSString * const LWEPluginTargetPathKey;
 
 //! Handles downloaded plugins' installation and versioning
 @interface PluginManager : NSObject
@@ -64,6 +58,6 @@ extern NSString * const LWEPluginTargetPathKey;
 //- (void) _updatePluginPaths:(BOOL) debug pluginList:(NSString*)plistFileName;
 
 //! Maintains in memory a list of availavle for download plugin.
-@property (nonatomic, retain) NSMutableDictionary *availableForDownloadPlugins;
+@property (nonatomic, retain) NSDictionary *downloadablePlugins;
 
 @end

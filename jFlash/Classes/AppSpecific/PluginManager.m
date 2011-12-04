@@ -10,18 +10,17 @@
 #import "RootViewController.h"
 #import "Reachability.h"
 
-NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
+NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 
 @interface PluginManager ()
-- (void)_initAvailableForDownloadPluginsList;
-
+- (void)_initDownloadablePluginsDict;
 - (void) _registerPlugin:(Plugin *)plugin;
 - (BOOL) _loadDatabasePlugin:(Plugin *)plugin error:(NSError **)error;
 @end
 
 @implementation PluginManager
 
-@synthesize availableForDownloadPlugins;
+@synthesize downloadablePlugins;
 
 /**
  * Customized initializer - the available plugin dictionary is defined in this method
@@ -37,8 +36,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   if ((self = [super init]))
   {
     _loadedPlugins = [[NSMutableDictionary alloc] init];
-		[self _initAvailableForDownloadPluginsList];
-    [self addObserver:self forKeyPath:@"availableForDownloadPlugins" options:NSKeyValueObservingOptionNew context:NULL];
+		[self _initDownloadablePluginsDict];
 	}
   return self;
 }
@@ -59,7 +57,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
  * connected to the internet, if the device is connected, it should check for update right away.
  */
 
-- (void) _initAvailableForDownloadPluginsList
+- (void) _initDownloadablePluginsDict
 {
 	NSString *docPath = [LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
   NSString *bundlePath = [LWEFile createBundlePathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST];
@@ -70,7 +68,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
     
 	if (docPathExists)
 	{
-    self.availableForDownloadPlugins = [NSMutableDictionary dictionaryWithContentsOfFile:docPath];
+    self.downloadablePlugins = [NSDictionary dictionaryWithContentsOfFile:docPath];
 	}
 	else if (bundlePathExists)
 	{
@@ -87,7 +85,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
         [availablePlugins setValue:plugin forKey:plugin.pluginId];
       }
     }
-    self.availableForDownloadPlugins = availablePlugins;
+    self.downloadablePlugins = (NSDictionary *)availablePlugins;
 	}
 }
 
@@ -244,7 +242,9 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   }
   
   // 6. Finally, remove from available downloads
-  [self.availableForDownloadPlugins removeObjectForKey:plugin.pluginId];
+  NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:self.downloadablePlugins];
+  [tmpDict removeObjectForKey:plugin.pluginId];
+  self.downloadablePlugins = (NSDictionary *)tmpDict;
   
   // 8. Tell anyone who cares that we've just successfully installed a plugin
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEPluginDidInstall object:plugin userInfo:nil];
@@ -284,11 +284,10 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
   return [NSDictionary dictionaryWithDictionary:_loadedPlugins];
 }
 
-#pragma mark - 
-
 - (void) processPlistHash:(NSDictionary*)plistHash
 {
   LWE_ASSERT_EXC(plistHash, @"You must pass a proper hash to this method!");
+  NSMutableDictionary *tmpDownloadableDict = [NSMutableDictionary dictionaryWithDictionary:self.downloadablePlugins];
   for (NSDictionary *availPluginHash in [plistHash objectForKey:@"Plugins"])
   {
     // There are 3 cases we would want to incorporate a new value:
@@ -297,7 +296,7 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
     // 3) When there is a brand new plugin we knew nothing about
     
     Plugin *availPlugin = [Plugin pluginWithDictionary:availPluginHash];
-    Plugin *waitingToDownloadPlugin = [self.availableForDownloadPlugins objectForKey:availPlugin.pluginId];
+    Plugin *waitingToDownloadPlugin = [tmpDownloadableDict objectForKey:availPlugin.pluginId];
     Plugin *currPlugin = [_loadedPlugins objectForKey:availPlugin.pluginId];
     
     // Determine whether case 1) or 2) applies
@@ -307,32 +306,16 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
     
     if (installedPluginNeedsUpdate || waitingToInstallPluginNeedsUpdate || isNewPlugin)
     {
-      [self.availableForDownloadPlugins setValue:availPlugin forKey:availPlugin.pluginId];
+      [tmpDownloadableDict setValue:availPlugin forKey:availPlugin.pluginId];
     }
+    
+    // Now save a copy of it so we have our changes for next time
+    [tmpDownloadableDict writeToFile:[LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST] atomically:YES];
   }
+  self.downloadablePlugins = (NSDictionary *)tmpDownloadableDict;
 }
 
-
-#pragma mark - KVO for available plugins dictionary
-
-/**
- * This is the setter for available for download plugin. 
- * However, unlike the usual setter, it also sets the badge number via notification to the RootViewController
- * and it also persist that in the file. 
- */
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-  // Additional processing - write out to file
-	[self.availableForDownloadPlugins writeToFile:[LWEFile createDocumentPathWithFilename:LWE_AVAILABLE_PLUGIN_PLIST] atomically:YES];
-	
-	//Update the badge in the settings. 
-  //	LWE_LOG(@"Debug : New %d update(s)",[dict count]);
-	NSNumber *badgeNumber = [NSNumber numberWithInt:[self.availableForDownloadPlugins count]];
-	NSDictionary *userDict = [NSDictionary dictionaryWithObject:badgeNumber forKey:@"badge_number"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldUpdateSettingsBadge object:self userInfo:userDict];
-}
-
-#pragma mark -
+#pragma mark - Private methods
 
 /**
  * Register plugin filename with NSUserDefaults
@@ -359,20 +342,9 @@ NSString * const LWEShouldUpdateSettingsBadge	= @"LWEShouldUpdateSettingsBadge";
 
 - (void)dealloc
 {
-  [self removeObserver:self forKeyPath:@"availableForDownloadPlugins"];
-  
-	[availableForDownloadPlugins release];
+	[downloadablePlugins release];
   [_loadedPlugins release];
   [super dealloc];
 }
-
-#pragma mark -
-
-NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
-NSString * const LWEPluginKeyKey = @"plugin_key";
-NSString * const LWEPluginNameKey = @"plugin_name";
-NSString * const LWEPluginVersionKey = @"plugin_version";
-NSString * const LWEPluginFilenameKey = @"plugin_file_name";
-NSString * const LWEPluginTargetPathKey = @"plugin_target_path";
 
 @end
