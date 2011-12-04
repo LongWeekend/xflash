@@ -112,6 +112,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // These constants are CF specific
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
 
+      //CFlash specific plugins
+      NSString * const AUDIO_HSK_KEY = @"AUDIO_HSK";
+      NSString * const AUDIO_SAMPLES_KEY = @"AUDIO_SAMPLES";
+
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePlugins.plist";
   #if defined(LWE_DEBUG)
@@ -128,7 +132,6 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 NSString * const CARD_DB_KEY = @"CARD_DB";
 NSString * const FTS_DB_KEY = @"FTS_DB";
 NSString * const EXAMPLE_DB_KEY = @"EX_DB";
-NSString * const AUDIO_SAMPLES_KEY = @"AUDIO_SAMPLES";
 
 //------------------------------------------------------------
 // Everything after here can easily be changed across versions

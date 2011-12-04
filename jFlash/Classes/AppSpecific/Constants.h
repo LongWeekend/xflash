@@ -98,9 +98,13 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
   extern NSString * const SET_PINYIN_COLOR_OFF;
 
   extern NSString * const LWE_CF_VERSION_1_0;
+
+  // Plugins - CFlash
+  extern NSString * const AUDIO_SAMPLES_KEY;  //! Key for referring to the Pinyin Audio plugin
+  extern NSString * const AUDIO_HSK_KEY;      //! Key for referring to the HSK Audio plugin
 #endif 
 
-// PLugins
+// PLugins - global
 extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
 extern NSString * const LWE_PLUGIN_SERVER;            
 extern NSString * const LWE_PLUGIN_LIST_REL_URL;
@@ -108,7 +112,6 @@ extern NSString * const LWE_PLUGIN_LIST_REL_URL;
 extern NSString * const CARD_DB_KEY;        //! Dictionary key to refer to main card database
 extern NSString * const FTS_DB_KEY;         //! Dictionary key to refer to FTS database filename
 extern NSString * const EXAMPLE_DB_KEY;     //! Dictionary key to refer to example database filename
-extern NSString * const AUDIO_SAMPLES_KEY; //! Key for referring to the Audio Examples plugin
 
 extern NSString * const LWE_APP_SPLASH_IMAGE; // App splash image - different between the flashes
 
