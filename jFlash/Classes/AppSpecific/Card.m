@@ -31,13 +31,13 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   if (_player == nil)
   {
     NSDictionary *dict = [self audioFilenames];
-    NSString *fullReading = [dict objectForKey:kLWEFullReadingKey];
+    NSString *fullReadingFilename = [dict objectForKey:kLWEFullReadingKey];
     LWEAudioQueue *q = nil;
-    if (fullReading)
+    if (fullReadingFilename)
     {
       //If the full_reading key exists in the audioFilenames, it means there is an audio file
       // dedicated to this card.  So, just instantiate the AVQueuePlayer with the array
-      NSURL *url = [NSURL fileURLWithPath:[LWEFile createBundlePathWithFilename:fullReading]];
+      NSURL *url = [NSURL fileURLWithPath:fullReadingFilename];
       q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
     }
     else
@@ -47,7 +47,7 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
       for (NSString *filename in segmentedReading)
       {
         //Construct the filename for its audioFilename filename and instantiate the AVPlayerItem for it. 
-        [items addObject:[NSURL fileURLWithPath:[LWEFile createLibraryPathWithFilename:filename]]];
+        [items addObject:[NSURL fileURLWithPath:filename]];
       }
       // And create the player with the NSArray filled with the AVPlayerItem(s)
       q = [[LWEAudioQueue alloc] initWithItems:items];
