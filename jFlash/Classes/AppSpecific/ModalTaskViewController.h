@@ -23,6 +23,7 @@ extern NSString * const LWEModalTaskDidCancel;
 - (IBAction) startProcess;
 - (IBAction) cancelProcess;
 - (IBAction) showDetailedView;
+- (IBAction) dismiss;
 
 - (void) updateButtons;
 

@@ -134,9 +134,16 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
     self.startButton.hidden = YES;
     self.taskMsgLabel.hidden = NO;
     self.progressIndicator.hidden = NO;
+    
+    UIBarButtonItem *bgButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
+    self.navigationItem.rightBarButtonItem = bgButton;
+    [bgButton release];
   }
   else
   {
+    // Don't show the DONE button (backgrounding) if we are not active.
+    self.navigationItem.rightBarButtonItem = nil;
+    
     // Can we start the task?
     if (self.canStartTask)
     {
@@ -168,6 +175,11 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   }
 }
 
+
+- (IBAction) dismiss
+{
+  [self dismissModalViewControllerAnimated:YES];
+}
 
 /**
  * Pushes the detail view controller on top of the ModalTaskViewController
