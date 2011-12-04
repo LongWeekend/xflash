@@ -90,7 +90,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
  */
 - (void) resetActiveTag
 {
-  [self setActiveTag:[self activeTag]];
+  LWE_ASSERT_EXC(_activeTag,@"Call to resetActiveTag but no tag active");
+  [self setActiveTag:_activeTag];
 }
 
 #pragma mark - LWEPackageDownloaderDelegate Methods
