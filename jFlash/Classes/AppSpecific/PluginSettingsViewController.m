@@ -9,6 +9,7 @@
 #import "PluginSettingsViewController.h"
 #import "RootViewController.h"
 #import "Constants.h"
+#import "DSActivityView.h"
 
 #define PLUGIN_SETTINGS_INSTALLED_SECTION 1
 #define PLUGIN_SETTINGS_AVAILABLE_SECTION 0
@@ -41,26 +42,25 @@
 	//Give the waiting loading screen. It looks a bit messy
 	//but its for the sake of it blocks all of the view underneath, so it
 	//avoids user clicks the other button while it still loading and
-	//perform the checking for update. 
-	LWELoadingView *lv = [LWELoadingView loadingView:self.parentViewController.parentViewController.view 
-                                          withText:NSLocalizedString(@"Please Wait",@"PleaseWait")];
+	//perform the checking for update.
+  [DSBezelActivityView newActivityViewForView:self.view
+                                    withLabel:NSLocalizedString(@"Please Wait",@"PleaseWait")];
 	
-	[self performSelector:@selector(performCheckUpdateWithLoadingView:) withObject:lv afterDelay:0.1f];
+	[self performSelector:@selector(performCheckUpdateWithLoadingView) withObject:nil afterDelay:0.1f];
 }
 
 /**
  * This method will perform the real check update method on the 
  * plugin manager.
- *
  */
-- (void)performCheckUpdateWithLoadingView:(LWELoadingView *)lv
+- (void)performCheckUpdateWithLoadingView
 {
 	
 	[self _changeLastUpdateLabel];
 	[[CurrentState sharedCurrentState] checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self _reloadTableData];
-	
-	[lv removeFromSuperview];
+  
+  [DSBezelActivityView removeViewAnimated:YES];
 }
 
 #pragma mark -
@@ -87,6 +87,18 @@
 
   [self _reloadTableData];
 	[self _changeLastUpdateLabel];
+  
+  // Watch for plugins installing so we can reload the table
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:LWEPluginDidInstall object:nil];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.tableView = nil;
+  self.btnCheckUpdate = nil;
+  self.lblLastUpdate = nil;
 }
 
 //! Helper method for notification
