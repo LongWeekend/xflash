@@ -210,7 +210,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 + (Plugin *) availablePluginForKey:(NSString *)key
 {
   CurrentState *state = [CurrentState sharedCurrentState];
-  return [state.pluginMgr.availableForDownloadPlugins objectForKey:key];
+  return [state.pluginMgr.downloadablePlugins objectForKey:key];
 }
 
 /**

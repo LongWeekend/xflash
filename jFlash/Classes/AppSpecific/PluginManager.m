@@ -25,7 +25,7 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 /**
  * Customized initializer - the available plugin dictionary is defined in this method
  *
- * In this intializer, it also loads the availableForDownload plist file (to persist the available plugin to download)
+ * In this intializer, it also loads the downloadable plist file (to persist the available plugin to download)
  * and also downloaded plist file (to persist the list of downloaded plugin).
  * If, both of the plist does not exist, we provide one with the bundle of the app. Load from there, and
  * write it to the document immediately. That case only happens in the first time the program runs.

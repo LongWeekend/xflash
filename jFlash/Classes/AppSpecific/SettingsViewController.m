@@ -41,6 +41,13 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     self.changedSettings = [NSMutableDictionary dictionary];
     self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     self.title = NSLocalizedString(@"Settings", @"SettingsViewController.NavBarTitle");
+
+    // Add an observer on the plugin manager so we can update the available for download badge
+    PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+    [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    // While we're at it, set our badge value
+    self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[pluginMgr.downloadablePlugins count]];
   }
   return self;
 }
@@ -50,22 +57,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
-  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
-  __block SettingsViewController *blockSelf = self;
-  [center addObserverForName:LWEPluginDidInstall object:nil queue:nil usingBlock:^(NSNotification *notification)
-  {
-    blockSelf.sectionArray = [blockSelf.dataSource settingsArray];
-    [blockSelf.tableView reloadData];
-  }];
- [center addObserver:self.tableView selector:@selector(reloadData) name:LWEUserSettingsChanged object:nil];
-}
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -125,6 +116,31 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
 
+#pragma mark - KVO
+
+//! Monitor the plugin situation and update ourselves accordingly
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:@"downloadablePlugins"] && [object isKindOfClass:[PluginManager class]])
+  {
+    // First, update the badge value if necessary
+    PluginManager *mgr = (PluginManager *)object;
+    if ([mgr.downloadablePlugins count] > 0)
+    {
+      self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[mgr.downloadablePlugins count]];
+    }
+    else
+    {
+      self.tabBarItem.badgeValue = nil;
+    }
+    
+    // Second, reload the table -- chances are something changed that on the plugin row
+    self.sectionArray = [self.dataSource settingsArray];
+    [self.tableView reloadData];
+  }
+}
+
+#pragma mark - Private Methods
 
 // TODO: this could be a block someday.
 //! launchAppirater - convenience method for appirater

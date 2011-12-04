@@ -104,7 +104,7 @@
   // Refresh plugin data
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
   self.installedPlugins = [[pm loadedPlugins] allValues];
-  self.availablePlugins = [pm.availableForDownloadPlugins allValues];
+  self.availablePlugins = [pm.downloadablePlugins allValues];
   [self.tableView reloadData];
 }
 

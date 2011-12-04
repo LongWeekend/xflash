@@ -66,7 +66,7 @@
 /** Returns all the arrays to configure the settings table */
 - (NSArray*) settingsArray
 {
-	NSInteger newAvailableUpdate = [[[[CurrentState sharedCurrentState] pluginMgr] availableForDownloadPlugins] count];
+	NSInteger newAvailableUpdate = [[[[CurrentState sharedCurrentState] pluginMgr] downloadablePlugins] count];
 	
 	//This is to set up the very top row and section in the settings table view.
 	NSArray *newUpdateNames = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d Update%@ Available", newAvailableUpdate, (newAvailableUpdate>1) ? @"s" : @""], nil];

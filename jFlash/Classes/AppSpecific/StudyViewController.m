@@ -654,7 +654,7 @@
 - (IBAction) launchExampleInstaller
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.availableForDownloadPlugins objectForKey:EXAMPLE_DB_KEY];
+  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:EXAMPLE_DB_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
@@ -666,7 +666,7 @@
 - (IBAction) launchAudioInstaller
 {
   PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.availableForDownloadPlugins objectForKey:AUDIO_SAMPLES_KEY];
+  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:AUDIO_SAMPLES_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
