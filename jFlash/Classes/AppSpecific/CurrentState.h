@@ -20,6 +20,7 @@ extern NSString * const LWEActiveTagDidChange;
 
 // Plugin related
 + (Plugin *) availablePluginForKey:(NSString *)key;
++ (BOOL) pluginIsDownloading;
 + (BOOL) pluginKeyIsLoaded:(NSString *)key;
 + (BOOL)isTimeForCheckingUpdate;
 + (Plugin *) loadedPluginForKey:(NSString *)key;

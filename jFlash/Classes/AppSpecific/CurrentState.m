@@ -222,6 +222,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return [state.pluginMgr.downloadablePlugins objectForKey:key];
 }
 
++ (BOOL) pluginIsDownloading
+{
+  CurrentState *state = [CurrentState sharedCurrentState];
+  return (state.modalTaskViewController != nil);
+}
+
 + (Plugin *) loadedPluginForKey:(NSString *)key
 {
   CurrentState *state = [CurrentState sharedCurrentState];
