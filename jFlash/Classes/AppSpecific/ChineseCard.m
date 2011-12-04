@@ -211,13 +211,22 @@
 - (NSString *) _fullAudioFilename
 {
   // Quick return if we don't have the full audio plugin
-  BOOL hskInstalled = [CurrentState pluginKeyIsLoaded:AUDIO_HSK_KEY];
-  if (hskInstalled == NO)
+  Plugin *hskPlugin = [CurrentState loadedPluginForKey:AUDIO_HSK_KEY];
+  if (hskPlugin == nil)
   {
     return nil;
   }
   
   // OK, we have it, so search for the file.
+  NSString *filename = [[hskPlugin fullPath] stringByAppendingFormat:@"%@.mp3",self.headword_simp];
+  if ([LWEFile fileExists:filename])
+  {
+    return filename;
+  }
+  else
+  {
+    return nil;
+  }
 }
 
 - (NSArray *) _pinyinAudioFilenames
@@ -226,11 +235,12 @@
   NSMutableArray *audioArray = [NSMutableArray array];
   for (NSString *pinyin in pinyinSegments)
   {
-    NSString *filename = [LWEFile createDocumentPathWithFilename:[pinyin stringByAppendingString:@".mp3"]];
-    if ([LWEFile fileExists:filename])
-    {
-      [audioArray addObject:filename];
-    }
+    Plugin *pinyinPlugin = [CurrentState loadedPluginForKey:AUDIO_PINYIN_KEY];
+    LWE_ASSERT_EXC(pinyinPlugin, @"We shouldn't be asking for filenames if the plugin isn't loaded");
+    
+    // Note there is no checking here for whether the file exists
+    NSString *filename = [[pinyinPlugin fullPath] stringByAppendingFormat:@"%@.mp3",pinyin];
+    [audioArray addObject:filename];
   }
   return (NSArray *)audioArray;
 }

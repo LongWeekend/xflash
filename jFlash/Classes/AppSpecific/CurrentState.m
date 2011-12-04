@@ -213,6 +213,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return [state.pluginMgr.downloadablePlugins objectForKey:key];
 }
 
++ (Plugin *) loadedPluginForKey:(NSString *)key
+{
+  CurrentState *state = [CurrentState sharedCurrentState];
+  return [state.pluginMgr pluginForKey:key];
+}
+
 /**
  * Tells whether update check is necessary
  * \return YES if settings' PLUGIN_LAST_UPDATE is more than LWE_PLUGIN_UPDATE_PERIOD days ago

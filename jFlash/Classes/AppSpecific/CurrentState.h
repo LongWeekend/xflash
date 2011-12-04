@@ -22,6 +22,7 @@ extern NSString * const LWEActiveTagDidChange;
 + (Plugin *) availablePluginForKey:(NSString *)key;
 + (BOOL) pluginKeyIsLoaded:(NSString *)key;
 + (BOOL)isTimeForCheckingUpdate;
++ (Plugin *) loadedPluginForKey:(NSString *)key;
 - (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
 
 
