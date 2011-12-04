@@ -231,9 +231,12 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   // 3. Register it
   [self _registerPlugin:plugin];
   
-  // 4. Set not to be backed up
-  BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:[plugin fullPath]];
-  LWE_ASSERT_EXC(isNotBackedUp, @"Failed to set skip backup attribute for file at %@", plugin.filePath);
+  // 4. Set not to be backed up from Docs dir
+  if (plugin.fileLocation == kLWEFileLocationDocuments)
+  {
+    BOOL isNotBackedUp = [LWEFile addSkipBackupAttributeToItemAtPath:[plugin fullPath]];
+    LWE_ASSERT_EXC(isNotBackedUp, @"Failed to set skip backup attribute for file at %@", plugin.filePath);
+  }
   
   // 5. Be nice, delete the old plugin
   if (oldPlugin)
