@@ -217,7 +217,7 @@
     return nil;
   }
   
-  // OK, we have it, so search for the file.
+  // OK, we have it, so search for the file
   NSString *filename = [[hskPlugin fullPath] stringByAppendingFormat:@"%@.mp3",self.headword_simp];
   if ([LWEFile fileExists:filename])
   {
@@ -239,7 +239,7 @@
     LWE_ASSERT_EXC(pinyinPlugin, @"We shouldn't be asking for filenames if the plugin isn't loaded");
     
     // Note there is no checking here for whether the file exists
-    NSString *filename = [[pinyinPlugin fullPath] stringByAppendingFormat:@"%@.mp3",pinyin];
+    NSString *filename = [[pinyinPlugin fullPath] stringByAppendingFormat:@"%@.mp3",[pinyin lowercaseString]];
     [audioArray addObject:filename];
   }
   return (NSArray *)audioArray;
