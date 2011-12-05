@@ -7,7 +7,6 @@
 //
 
 #import "ExampleSentencesViewController.h"
-#import "RootViewController.h"
 
 // Hack that I need this
 #import "CardViewController.h"

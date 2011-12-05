@@ -407,25 +407,20 @@ NSInteger const kLWEUninitializedCardCount = -1;
     NSInteger countBeforeAdd = [nextLevelCards count];
 
     // Now do the remove
-    if ([thisLevelCards containsObject:cardId])
-    {
-      [thisLevelCards removeObject:cardId];
-      NSInteger countAfterRemove = [thisLevelCards count];
+    LWE_ASSERT_EXC([thisLevelCards containsObject:cardId], @"Can't remove the card, it's no longer there!");
+    [thisLevelCards removeObject:cardId];
+    NSInteger countAfterRemove = [thisLevelCards count];
 
-      // Only do the add if remove was successful
-      if (countBeforeRemove == (countAfterRemove + 1))
-      {
-        [nextLevelCards addObject:cardId];
-      }
-      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
-      // Consistency checks
-      LWE_ASSERT_EXC(((countAfterRemove+1) == countBeforeRemove),@"The number after remove (%d) should be 1 less than count before remove (%d)",countAfterRemove,countBeforeRemove);
-      LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
-    }
-    else
+    // Only do the add if remove was successful
+    if (countBeforeRemove == (countAfterRemove + 1))
     {
-      LWE_LOG(@"Card ID %d was not contained in the current tag's level cache for level %d - this is OK if you removed this card from the set!",card.cardId,card.levelId);
+      [nextLevelCards addObject:cardId];
     }
+    NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
+    // Consistency checks
+    LWE_ASSERT_EXC(((countAfterRemove+1) == countBeforeRemove),@"The number after remove (%d) should be 1 less than count before remove (%d)",countAfterRemove,countBeforeRemove);
+    LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
+    
     [self cacheCardLevelCounts];
   }
 }

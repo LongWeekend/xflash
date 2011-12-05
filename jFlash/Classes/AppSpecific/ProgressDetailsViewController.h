@@ -18,6 +18,7 @@
 @interface ProgressDetailsViewController : UIViewController
 
 - (IBAction) dismiss;
+- (IBAction)switchToSettings:(id)sender;
 - (void) drawProgressBars;
 - (void) setStreakLabel;
 

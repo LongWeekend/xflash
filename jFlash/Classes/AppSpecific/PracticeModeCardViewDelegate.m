@@ -11,7 +11,6 @@
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
 #import "StudyViewController.h"
-#import "RootViewController.h"
 
 @interface PracticeModeCardViewDelegate()
 @property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
@@ -202,7 +201,7 @@
   avc.cardMeaningBtnHint.hidden = YES;
 }
 
-#pragma mark - Study set has been learnt.
+#pragma mark - Study Set Completed
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
@@ -224,19 +223,19 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  NSUInteger tag = [alertView tag];
-  if (tag == STUDY_SET_HAS_FINISHED_ALERT_TAG)
+  if (alertView.tag != STUDY_SET_HAS_FINISHED_ALERT_TAG)
   {
-    switch (buttonIndex)
-    {
-      case STUDY_SET_SHOW_BURIED_IDX:
-        LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
-        break;
-      case STUDY_SET_CHANGE_SET_IDX:
-        LWE_LOG(@"Study set change set has been decided after a study set has been master.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudySetView object:self userInfo:nil];
-        break;
-    }
+    return;
+  }
+  
+  if (buttonIndex == STUDY_SET_SHOW_BURIED_IDX)
+  {
+    LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
+  }
+  else if (buttonIndex == STUDY_SET_CHANGE_SET_IDX)
+  {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX] forKey:@"index"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
   }
 }
 

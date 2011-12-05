@@ -22,8 +22,21 @@
 
 #define FONT_SIZE_ADD_TAG_VC 14
 
+#define STUDY_VIEW_CONTROLLER_TAB_INDEX     0
+#define STUDY_SET_VIEW_CONTROLLER_TAB_INDEX 1
+#define SEARCH_VIEW_CONTROLLER_TAB_INDEX    2
+#define SETTINGS_VIEW_CONTROLLER_TAB_INDEX  3
+
 // default background image for UITableViews
 extern NSString * const LWETableBackgroundImage;
+
+// Notification names
+extern NSString * const LWEShouldSwitchTab;
+extern NSString * const LWEShouldShowModal;
+extern NSString * const LWEShouldShowDownloadModal;
+extern NSString * const LWEShouldDismissModal;
+extern NSString * const LWEShouldShowPopover;
+
 
 // Settings - do not change
 extern NSString * const SET_MODE_QUIZ;
@@ -105,6 +118,7 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 #endif 
 
 // PLugins - global
+extern NSString * const LWE_PREINSTALLED_PLUGIN_PLIST;
 extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
 extern NSString * const LWE_PLUGIN_SERVER;            
 extern NSString * const LWE_PLUGIN_LIST_REL_URL;

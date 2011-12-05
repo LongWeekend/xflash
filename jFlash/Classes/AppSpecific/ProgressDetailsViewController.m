@@ -119,6 +119,17 @@
   }
 }
 
+- (IBAction)switchToSettings:(id)sender
+{
+  // And switch to settings
+  NSNumber *index = [NSNumber numberWithInt:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:self userInfo:userInfo];
+  
+  // Make sure to call this last
+  [self dismiss];
+}
+
 - (IBAction) dismiss
 {
   [self.view removeFromSuperview];

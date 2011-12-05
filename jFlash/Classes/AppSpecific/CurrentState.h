@@ -28,7 +28,6 @@ extern NSString * const LWEActiveTagDidChange;
 
 
 - (void) initializeSettings;
-- (void) registerDatabaseCopied;
 - (void) resetActiveTag;
 
 //! returns YES if this is the first time we have launched this app, ever

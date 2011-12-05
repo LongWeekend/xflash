@@ -7,7 +7,6 @@
 //
 
 #import "PluginSettingsViewController.h"
-#import "RootViewController.h"
 #import "Constants.h"
 #import "DSActivityView.h"
 

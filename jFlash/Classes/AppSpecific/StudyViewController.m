@@ -11,7 +11,6 @@
 #import "SettingsViewController.h"
 #import "StudyViewController.h"
 #import "LWENetworkUtils.h"
-#import "RootViewController.h"
 #import "AddTagViewController.h"
 
 @interface StudyViewController()
@@ -42,21 +41,6 @@
 @synthesize pronounceBtn = pronounceBtn;
 
 #define LWE_EX_SENTENCE_INSTALLER_VIEW_TAG 69
-
-/** Custom initializer */
-- (id) init
-{
-  self = [super init];
-  if (self != nil)
-  {
-    // Set the tab bar controller image png to the targets
-    // TODO: iPad customization?
-    self.tabBarItem.image = [UIImage imageNamed:@"13-target.png"];
-    self.title = NSLocalizedString(@"Practice",@"StudyViewController.NavBarTitle");
-    _alreadyShowedAlertView = NO;
-  }
-  return self;
-}
 
 #pragma mark - LWEAudioQueue Delegate Methods
 

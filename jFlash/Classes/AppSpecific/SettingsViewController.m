@@ -14,6 +14,10 @@
 #import "UserViewController.h"
 #import "UserPeer.h"
 
+#import "ChineseSettingsDataSource.h"
+#import "JapaneseSettingsDataSource.h"
+
+
 @interface SettingsViewController ()
 @property (retain) NSMutableDictionary *changedSettings;
 @end
@@ -33,21 +37,27 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+/**
+ * Some might say this shouldn't be here.  Then again, this code will change once per xFlash, so I think it 
+ * makes sense to keep it with the settings.  Though, it does have knowledge of its own delegate, at least
+ * on its constructor.
+ */
+- (void) awakeFromNib
 {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+#if defined(LWE_JFLASH)
+  self.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  self.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
+#endif
+  self.delegate = (id<LWESettingsDelegate>)self.dataSource;
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
   if (self)
   {
     self.changedSettings = [NSMutableDictionary dictionary];
-    self.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
-    self.title = NSLocalizedString(@"Settings", @"SettingsViewController.NavBarTitle");
-
-    // Add an observer on the plugin manager so we can update the available for download badge
-    PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
-    [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    // While we're at it, set our badge value
-    self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[pluginMgr.downloadablePlugins count]];
   }
   return self;
 }
@@ -57,6 +67,18 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
+  self.tableView = (UITableView*)self.view;
+
+  // Add an observer on the plugin manager so we can update the available for download badge
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  [pluginMgr removeObserver:self forKeyPath:@"downloadablePlugins"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,7 +92,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   self.navigationItem.leftBarButtonItem = rateUsBtn;
   [rateUsBtn release];
   
-  //Added this in, so that it refreshes it self when the user is going to this Settings view, after the user changes something that is connected with the appearance of this Settings View Controller. 
+  //Added this in, so that it refreshes it self when the user is going to this Settings view,
+  // after the user changes something that is connected with the appearance of this VC
+  // (e.g. after they change users, et al)
   self.sectionArray = [self.dataSource settingsArray];
 	
   self.tableView.backgroundColor = [UIColor clearColor];
@@ -115,6 +139,19 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   
   LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
+
+#pragma mark - Badge
+
+- (void) updateBadgeValue
+{
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  NSInteger pluginCount = [pluginMgr.downloadablePlugins count];
+  if (pluginCount > 0)
+  {
+    self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
+  }
+}
+
 
 #pragma mark - KVO
 
@@ -324,7 +361,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   NSInteger section = indexPath.section;
   NSInteger row = indexPath.row;
 
-  NSArray *thisSectionArray = [[self sectionArray] objectAtIndex:section];
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:section];
   NSString *key = [[thisSectionArray objectAtIndex:1] objectAtIndex:row];
 
   if (key == APP_USER)
@@ -391,7 +428,8 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     // Everything else
     LWE_DELEGATE_CALL(@selector(settingWillChange:),key);
     [self iterateSetting:key];
-    [self.tableView reloadData];
+    [lclTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                        withRowAnimation:UITableViewRowAnimationNone];
     
     // One special case, theme: reload the nav bar for this page
     if ([key isEqualToString:APP_THEME])

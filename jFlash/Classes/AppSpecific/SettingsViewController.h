@@ -31,12 +31,11 @@ extern NSString * const LWEUserSettingsChanged;
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc;
 @end
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate>
-
+@interface SettingsViewController : UITableViewController <UIWebViewDelegate>
+- (void) updateBadgeValue;
 - (void) iterateSetting: (NSString*) setting;
 
 //! This data source is not quite a model in the traditional sense; it is retained - 100% used by this VC
-@property (retain) IBOutlet UITableView *tableView;
 @property (retain) id<LWESettingsDataSource> dataSource;
 @property (assign) id<LWESettingsDelegate> delegate;
 @property (retain, nonatomic) NSArray *sectionArray;

@@ -10,7 +10,7 @@
 #import "ChineseCard.h"
 #import "SettingsViewController.h"
 #import "LWEChineseSearchBar.h"
-#import "RootViewController.h"
+#import "jFlashAppDelegate.h"
 
 const NSInteger KSegmentedTableHeader = 100;
 
