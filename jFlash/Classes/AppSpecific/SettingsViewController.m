@@ -47,7 +47,11 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
     
     // While we're at it, set our badge value
-    self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[pluginMgr.downloadablePlugins count]];
+    NSInteger pluginCount = [pluginMgr.downloadablePlugins count];
+    if (pluginCount > 0)
+    {
+      self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
+    }
   }
   return self;
 }
