@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "LWELoadingView.h"
+#import "DSActivityView.h"
 #import "CurrentState.h"
 #import "PDColoredProgressView.h"
 #import "Appirater.h"
@@ -26,10 +26,9 @@ extern NSString * const LWEShouldShowStudySetView;
 extern NSString * const LWEShouldShowStudyView;
 extern NSString * const LWEShouldShowPopover;
 
-@interface RootViewController : UIViewController <UIAlertViewDelegate>
+@interface RootViewController : UIViewController <UIAlertViewDelegate, UITabBarControllerDelegate>
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
-@property (retain,nonatomic) LWELoadingView *loadingView;
 
 @property BOOL isFinishedLoading;
 

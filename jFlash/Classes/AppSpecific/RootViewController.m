@@ -38,7 +38,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
  */
 @implementation RootViewController
 
-@synthesize loadingView;
 @synthesize tabBarController;
 @synthesize isFinishedLoading;
 @synthesize observerArray;
@@ -123,17 +122,14 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 //! Shows the "database loading" view on top of the splash screen
 - (void) showDatabaseLoadingView
 {
-  self.loadingView = [LWELoadingView loadingView:self.view withText:NSLocalizedString(@"Setting up for first time use. This might take a minute.",@"RootViewController.FirstLoadModalText")];
+  [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Setting up...\nThis will take a moment.",@"RootViewController.FirstLoadModalText")];
 }
 
 
 //! Hides the "database loading" view
 - (void) hideDatabaseLoadingView
 {
-  if (self.loadingView)
-  {
-    [self.loadingView removeFromSuperview];
-  }
+  [DSBezelActivityView removeViewAnimated:YES];
 }
 
 
@@ -143,6 +139,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 - (void) loadTabBar
 {
 	self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+  self.tabBarController.delegate = self;
   
   // Make room for the status bar
   CGRect tabBarFrame;
@@ -362,7 +359,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
   [observerArray release];
   [tabBarController release];
-  [loadingView release];
   [super dealloc];
 }
 
