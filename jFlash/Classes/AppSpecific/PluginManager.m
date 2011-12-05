@@ -7,7 +7,6 @@
 //
 
 #import "PluginManager.h"
-#import "RootViewController.h"
 #import "Reachability.h"
 
 NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";

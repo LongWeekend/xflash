@@ -32,7 +32,7 @@ extern NSString * const LWEUserSettingsChanged;
 @end
 
 @interface SettingsViewController : UITableViewController <UIWebViewDelegate>
-
+- (void) updateBadgeValue;
 - (void) iterateSetting: (NSString*) setting;
 
 //! This data source is not quite a model in the traditional sense; it is retained - 100% used by this VC

@@ -14,6 +14,10 @@
 #import "UserViewController.h"
 #import "UserPeer.h"
 
+#import "ChineseSettingsDataSource.h"
+#import "JapaneseSettingsDataSource.h"
+
+
 @interface SettingsViewController ()
 @property (retain) NSMutableDictionary *changedSettings;
 @end
@@ -33,23 +37,27 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
+/**
+ * Some might say this shouldn't be here.  Then again, this code will change once per xFlash, so I think it 
+ * makes sense to keep it with the settings.  Though, it does have knowledge of its own delegate, at least
+ * on its constructor.
+ */
+- (void) awakeFromNib
+{
+#if defined(LWE_JFLASH)
+  self.dataSource = [[[JapaneseSettingsDataSource alloc] init] autorelease];
+#elif defined(LWE_CFLASH)
+  self.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
+#endif
+  self.delegate = (id<LWESettingsDelegate>)self.dataSource;
+}
+
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
   self = [super initWithCoder:aDecoder];
   if (self)
   {
     self.changedSettings = [NSMutableDictionary dictionary];
-
-    // Add an observer on the plugin manager so we can update the available for download badge
-    PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
-    [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    // While we're at it, set our badge value
-    NSInteger pluginCount = [pluginMgr.downloadablePlugins count];
-    if (pluginCount > 0)
-    {
-      self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
-    }
   }
   return self;
 }
@@ -60,6 +68,17 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
   self.tableView = (UITableView*)self.view;
+
+  // Add an observer on the plugin manager so we can update the available for download badge
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  [pluginMgr removeObserver:self forKeyPath:@"downloadablePlugins"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -120,6 +139,19 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   
   LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
+
+#pragma mark - Badge
+
+- (void) updateBadgeValue
+{
+  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
+  NSInteger pluginCount = [pluginMgr.downloadablePlugins count];
+  if (pluginCount > 0)
+  {
+    self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
+  }
+}
+
 
 #pragma mark - KVO
 

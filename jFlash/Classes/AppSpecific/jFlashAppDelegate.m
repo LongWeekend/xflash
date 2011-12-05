@@ -12,6 +12,7 @@
 #import "AudioSessionManager.h"
 #import "Appirater.h"
 
+#import "SettingsViewController.h"
 #import "SearchViewController.h"
 
 #import "LWEPackageDownloader.h"
@@ -124,12 +125,18 @@
   self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
   [self.window makeKeyAndVisible];
   
+  // If we need to copy the xFlash user database (e.g. this is first load), do that first.
   if ([self _needToCopyDatabase])
   {
+    // Show a spinny so the user knows what's up.
     [DSBezelActivityView newActivityViewForView:self.splashView withLabel:NSLocalizedString(@"Setting up...\nThis will take a moment.",@"FirstLoadModalText")];
+
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
     [db asynchCopyDatabaseFromBundle:LWE_CURRENT_USER_DATABASE
                      completionBlock:^{
+                       // Get rid of the spinny
+                       [DSBezelActivityView removeViewAnimated:YES];
+
                        // Register & open the database when finished
                        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
                        [settings setBool:YES forKey:@"db_did_finish_copying"];
@@ -138,7 +145,6 @@
   }
   else
   {
-    // No more "performSelector:afterDelay:".  This executes on the main thread, but in a priority queue -- giving the UI time to update.
     dispatch_async(dispatch_get_main_queue(), ^{ [self _openUserDatabaseWithPlugins]; });
   }
   return YES;
@@ -167,10 +173,10 @@
   {
     // "Install" the preinstalled bundle plugins (CARD-DB) now
     NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
+    LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
     NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
     Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
     [state.pluginMgr installPlugin:cardsDb error:NULL];
-    [DSBezelActivityView removeViewAnimated:YES];
   }
   
   // Then load plugins
@@ -185,6 +191,11 @@
   [self.window addSubview:self.tabBarController.view];
   self.isFinishedLoading = YES;
   [Appirater appLaunched];
+  
+  // MMA: don't like it, it's sort of hacky.  Wanted to do it earlier but the plugin mgr isn't set up yet :(
+  UINavigationController *navVC = [[self.tabBarController viewControllers] objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
+  SettingsViewController *settingsVC = (SettingsViewController*)[navVC topViewController];
+  [settingsVC updateBadgeValue];
 }
 
 # pragma mark Convenience Methods
@@ -274,23 +285,17 @@
 - (void)showModal:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
-	//It will do anything if there is any information in regard to what view controller to be pop-ed up. 
-	if ((dict != nil) && ([dict count] > 0))
-	{
-		UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
-    
-    // Default to YES
-    BOOL useNavController = YES;
-    if ([dict valueForKey:@"useNavController"])
-    {
-      useNavController = [[dict valueForKey:@"useNavController"] boolValue];
-    }
-		[self _showModalWithViewController:vc useNavController:useNavController];
-	}
-	else 
-	{
-		LWE_LOG(@"Error : Show modal notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
-	}
+	//It will do anything if there is any information in regard to what view controller to be pop-ed up.
+  LWE_ASSERT_EXC(dict && ([dict count] > 0), @"Show modal notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary.");
+  UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
+  
+  // Default to YES
+  BOOL useNavController = YES;
+  if ([dict valueForKey:@"useNavController"])
+  {
+    useNavController = [[dict valueForKey:@"useNavController"] boolValue];
+  }
+  [self _showModalWithViewController:vc useNavController:useNavController];
 }
 
 /**

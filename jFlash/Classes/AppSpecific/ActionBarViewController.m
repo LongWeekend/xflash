@@ -7,7 +7,6 @@
 //
 
 #import "ActionBarViewController.h"
-#import "RootViewController.h"
 #import "LWEJanrainLoginManager.h"
 #import "LWETwitterEngine.h"
 

@@ -11,7 +11,6 @@
 #import "AddStudySetInputViewController.h"
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
-#import "RootViewController.h"
 #import "SettingsViewController.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
