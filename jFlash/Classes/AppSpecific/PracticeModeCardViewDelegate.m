@@ -233,8 +233,10 @@
         LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
         break;
       case STUDY_SET_CHANGE_SET_IDX:
-        LWE_LOG(@"Study set change set has been decided after a study set has been master.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudySetView object:self userInfo:nil];
+        // Tell the tab bar to switch to the Study Sets
+        NSNumber *index = [NSNumber numberWithInt:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
         break;
     }
   }

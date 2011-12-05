@@ -155,7 +155,10 @@ NSInteger const kLWEBackupSection = 2;
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
   
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowStudyView object:nil];
+  // Tell the tab bar to switch to the SVC
+  NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
   
   // Stop the animator
   selectedTagId = -1;
