@@ -800,7 +800,6 @@
   self.pronounceBtn = nil;
 
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
 }
 
 - (void) dealloc
@@ -835,6 +834,7 @@
   [tapForAnswerImage release];
   
   //state
+  [currentCardSet removeObserver:self forKeyPath:@"tagName"];
   [currentCardSet release];
   [currentCard release];
   
