@@ -22,52 +22,43 @@ NSInteger const kLWEBackupSection = 2;
 
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
-
 /** 
  * Customized initializer - returns UITableView group as self.view
  * Also creates tab bar image and sets nav bar title
  */
-- (id) initWithGroup:(Group*)aGroup
+
+- (id) initWithCoder:(NSCoder *)aDecoder
 {
-  self = [super initWithStyle:UITableViewStyleGrouped];
+  self = [super initWithCoder:aDecoder];
   if (self)
   {
-    // Set the tab bar controller image png to the targets
-    self.tabBarItem.image = [UIImage imageNamed:@"15-tags.png"];
-    self.title = aGroup.groupName;
-    //NSLocalizedString(@"Study Sets",@"StudySetViewController.NavBarTitle");
-    searching = NO;
     selectedTagId = -1;
     // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
     self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
-    
-    // Get this group & subgroup data, and finally tags
-    self.group = aGroup;
-    [self reloadSubgroupData];
-
   }
   return self;
 }
 
-/**
- * Loads view
- * Programmatically adds search bar into table header view
- * Registers observers to reload data in case of external changes
- * Sets up group & tag information
- * Programmatically creates activity indicator
- */
-- (void) loadView
+- (id) initWithGroup:(Group*)aGroup
 {
-  [super loadView];
+  self = [self initWithNibName:@"StudySetView" bundle:nil];
+  if (self)
+  {
+    self.group = aGroup;
+    self.title = aGroup.groupName;
+  }
+  return self;
+}
+
+- (void) viewDidLoad
+{
+  [super viewDidLoad];
+  if (self.group == nil)
+  {
+    self.group = [GroupPeer topLevelGroup];
+  }
   
-  // Add the search bar
-  UISearchBar *tmpSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,45)];
-  tmpSearchBar.delegate = self;
-  tmpSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-  tmpSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  self.searchBar = tmpSearchBar;
-  self.tableView.tableHeaderView = tmpSearchBar;
-  [tmpSearchBar release];
+  [self reloadSubgroupData];
   
   // Add add button to nav bar
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
@@ -85,6 +76,7 @@ NSInteger const kLWEBackupSection = 2;
   UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   [self setActivityIndicator:tmpIndicator];
   [tmpIndicator release];
+  
 }
 
 - (void) viewWillAppear: (BOOL)animated
@@ -172,7 +164,7 @@ NSInteger const kLWEBackupSection = 2;
 }
 
 /** Pops up AddStudySetInputViewController modal to create a new set */
-- (void) addStudySet
+- (IBAction)addStudySet:(id)sender
 {
   // TODO: iPad customization?
   AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithDefaultCard:nil inGroup:self.group];

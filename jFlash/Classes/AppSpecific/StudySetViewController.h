@@ -24,16 +24,18 @@
 
 - (id) initWithGroup:(Group*)aGroup;
 - (void) changeStudySet: (Tag*) tag;
+- (IBAction)addStudySet:(id)sender;
 - (void) reloadTableData;
 - (void) reloadSubgroupData;
 - (void) doDoneSearching;
 - (void) hideSearchBar;
 
 @property NSInteger selectedTagId;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+
 @property (nonatomic, retain) Group *group;
 @property (nonatomic, retain) NSMutableArray *tagArray;
 @property (nonatomic, retain) NSArray *subgroupArray;
-@property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) BackupManager *backupManager;
 @property (retain) DSActivityView *activityView;
