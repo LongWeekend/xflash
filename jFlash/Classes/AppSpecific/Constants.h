@@ -105,6 +105,7 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
 #endif 
 
 // PLugins - global
+extern NSString * const LWE_PREINSTALLED_PLUGIN_PLIST;
 extern NSString * const LWE_AVAILABLE_PLUGIN_PLIST;
 extern NSString * const LWE_PLUGIN_SERVER;            
 extern NSString * const LWE_PLUGIN_LIST_REL_URL;

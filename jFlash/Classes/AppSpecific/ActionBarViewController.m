@@ -117,7 +117,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
                        NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
 
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [as showInView:[[appDelegate rootViewController]view]]; 
+  [as showInView:[[appDelegate tabBarController]view]]; 
   [as release];
 }
 
@@ -202,7 +202,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
     [picker setMessageBody:messageBody isHTML:NO];
     
     jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootViewController presentModalViewController:picker animated:YES];
+    [appDelegate.tabBarController presentModalViewController:picker animated:YES];
     [picker release];
   }
   else 
@@ -218,7 +218,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 {
   // remove the mail modal
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [appDelegate.rootViewController dismissModalViewControllerAnimated:YES];
+  [appDelegate.tabBarController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UIAlertView delegate methods
@@ -258,7 +258,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 
   // TODO: fix this so it doesn't use App Delegate - use notifications instead
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
-	UIViewController *vc = (UIViewController *)appDelegate.rootViewController;
+	UIViewController *vc = (UIViewController *)appDelegate.tabBarController;
 	_twitterEngine.parentForUserAuthenticationView = vc;
 	LWE_LOG(@"changed the user for twitter with user id %@", idCurrentUser);
 	[_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];

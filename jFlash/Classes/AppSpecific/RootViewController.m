@@ -39,7 +39,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 @implementation RootViewController
 
 @synthesize tabBarController;
-@synthesize isFinishedLoading;
 @synthesize observerArray;
 
 /**
@@ -49,7 +48,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 {
   if ((self = [super init]))
   {
-    self.isFinishedLoading = NO;
     self.observerArray = [NSMutableArray array];
     
     // MMA Apparently, there really isn't a way around this dirtiness.
@@ -113,10 +111,6 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 - (void) loadView
 {
   // Make the main view the themed splash screen
-  UIView *aView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-  aView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWE_APP_SPLASH_IMAGE]];
-  self.view = aView;
-  [aView release];
 }  
 
 //! Shows the "database loading" view on top of the splash screen
@@ -190,7 +184,8 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 	[localControllersArray release];
 
   // Replace active view with tabBarController's view
-  [self.view addSubview:self.tabBarController.view];
+  //  [self.view addSubview:self.tabBarController.view];
+  self.view = self.tabBarController.view;
   
   // Get rid of the splash image beneath
   self.view.backgroundColor = [UIColor blackColor];
@@ -199,7 +194,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   [Appirater appLaunched];
   
   // We're done!
-  self.isFinishedLoading = YES;
+  //self.isFinishedLoading = YES;
 }
 
 
@@ -211,31 +206,7 @@ NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
   self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
 }
 
-- (void) switchToSearchWithTerm:(NSString*)term
-{
-  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
 
-  // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
-  UINavigationController *vc = (UINavigationController*)[self.tabBarController selectedViewController];
-  if ([vc isKindOfClass:[UINavigationController class]])
-  {
-    SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
-    if ([searchVC isKindOfClass:[SearchViewController class]])
-    {
-      [searchVC runSearchAndSetSearchBarForString:term];
-    }
-    else
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search",@"Unable to load Search")
-                                         message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
-    }
-  }
-  else
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search Nav",@"Unable to load Search")
-                                       message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
-  }
-}
 
 #pragma mark - Generic Modal Pop-ups and dismissal. 
 

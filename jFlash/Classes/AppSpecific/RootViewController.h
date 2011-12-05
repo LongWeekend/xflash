@@ -30,10 +30,8 @@ extern NSString * const LWEShouldShowPopover;
 
 @property (retain,nonatomic) UITabBarController *tabBarController;
 
-@property BOOL isFinishedLoading;
 
 - (IBAction)switchToSettings;
-- (void) switchToSearchWithTerm:(NSString*)term;
 - (void) loadTabBar;
 - (void) showDatabaseLoadingView;
 - (void) hideDatabaseLoadingView;

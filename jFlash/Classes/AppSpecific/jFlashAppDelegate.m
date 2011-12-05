@@ -11,13 +11,16 @@
 #import "TapjoyConnect.h"
 #import "AudioSessionManager.h"
 
+#import "SearchViewController.h"
+
 #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
 #import "FlurryAPI.h"
 #endif
 
 @implementation jFlashAppDelegate
 
-@synthesize window, rootViewController;
+@synthesize window, tabBarController, splashView;
+@synthesize isFinishedLoading;
 
 #pragma mark - URL Handling
 
@@ -38,15 +41,15 @@
   NSString *searchTerm;
   searchTerm = [self getDecodedSearchTerm: url];
 
-  if ([self.rootViewController isFinishedLoading])
+  if (self.isFinishedLoading)
   {
-    [self.rootViewController switchToSearchWithTerm:searchTerm];
+    [self switchToSearchWithTerm:searchTerm];
   }
   else
   {
     // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
     // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    [self.rootViewController addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
+    [self addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
     _searchedTerm = [searchTerm retain];
   }
   return YES;
@@ -57,9 +60,35 @@
   if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue])
   {
     // Now be done with it, get rid of the observer too
-    [self.rootViewController switchToSearchWithTerm:_searchedTerm];
-    [self.rootViewController removeObserver:self forKeyPath:@"isFinishedLoading"];
+    [self switchToSearchWithTerm:_searchedTerm];
+    [self removeObserver:self forKeyPath:@"isFinishedLoading"];
     [_searchedTerm release];
+  }
+}
+
+- (void) switchToSearchWithTerm:(NSString*)term
+{
+  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
+  
+  // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
+  UINavigationController *vc = (UINavigationController*)[self.tabBarController selectedViewController];
+  if ([vc isKindOfClass:[UINavigationController class]])
+  {
+    SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
+    if ([searchVC isKindOfClass:[SearchViewController class]])
+    {
+      [searchVC runSearchAndSetSearchBarForString:term];
+    }
+    else
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search",@"Unable to load Search")
+                                         message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
+    }
+  }
+  else
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search Nav",@"Unable to load Search")
+                                       message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
   }
 }
 
@@ -91,9 +120,15 @@
   [audioManager setSessionCategory:AVAudioSessionCategoryPlayback];
   [audioManager setSessionActive:NO];
 
+  self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
+  
+/*  UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:LWE_APP_SPLASH_IMAGE]];
+  imageView.frame = [UIScreen mainScreen].applicationFrame;
+  self.view = imageView;
+  [imageView release];*/
+
+  
   // Load root controller to show splash screen
-  self.rootViewController = [[[RootViewController alloc] init] autorelease];
-	[self.window addSubview:self.rootViewController.view];
   [self.window makeKeyAndVisible];
   
   // Add a delay here so that the UI has time to update
@@ -105,24 +140,26 @@
 }
 
 
+- (BOOL) _needToCopyDatabase
+{
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:LWE_CURRENT_USER_DATABASE];
+  return ([LWEFile fileExists:pathToDatabase] == NO || [settings boolForKey:@"db_did_finish_copying"] == NO);
+}
+
 /**
  * Checks whether or not to install the main database from the bundle
  */
 - (void) _prepareUserDatabase
 {
-  // Determine if the MAIN database exists or not
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *filename = LWE_CURRENT_USER_DATABASE;
-  
-  NSString *pathToDatabase = [LWEFile createDocumentPathWithFilename:filename];
-  if (![LWEFile fileExists:pathToDatabase] || ![settings boolForKey:@"db_did_finish_copying"])
+  if ([self _needToCopyDatabase])
   {
     // Register a notification to wait here for the success, then do the DB copy
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
     LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-    [[self rootViewController] showDatabaseLoadingView];
+    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:LWE_CURRENT_USER_DATABASE];
+    //    [[self rootViewController] showDatabaseLoadingView];
     // Only ever copy the latest user database
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:filename];
   }
   else
   {
@@ -151,8 +188,8 @@
     
     if (state.isFirstLoad)
     {
-      // "Install" the CARD plugin now
-      NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:@"cFlash-installed" ofType:@"plist"];
+      // "Install" the preinstalled bundle plugins (CARD-DB) now
+      NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
       NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
       Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
       [state.pluginMgr installPlugin:cardsDb error:NULL];
@@ -166,7 +203,12 @@
     // Could not open database!
     [NSException raise:@"DatabaseFileNotFound" format:@"Looked for file: %@",[LWEFile createDocumentPathWithFilename:filename]];
   }
-  [self.rootViewController loadTabBar];
+  
+  [self.splashView removeFromSuperview];
+  self.splashView = nil;
+  
+  [self.window addSubview:self.tabBarController.view];
+
 }
 
 #pragma mark - UIApplication Delegate methods
@@ -240,7 +282,7 @@
 
 - (void)dealloc
 {
-  [rootViewController release];
+  [tabBarController release];
   [window release];
   
   // Handle all singletons
