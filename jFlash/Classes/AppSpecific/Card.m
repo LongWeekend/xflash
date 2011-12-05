@@ -159,7 +159,6 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
 {
 	self.cardId      = [rs intForColumn:@"card_id"];
-	self._headword    = [rs stringForColumn:@"headword"];
 	self.hw_reading  = [rs stringForColumn:@"reading"];
 	if (isSimple == NO)
 	{

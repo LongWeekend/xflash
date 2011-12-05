@@ -23,12 +23,14 @@
 {
   [self hydrate:rs simple:NO];
   self.romaji = [rs stringForColumn:@"romaji"];
+	self._headword    = [rs stringForColumn:@"headword"];
 }
 
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
 {
   [super hydrate:rs simple:isSimple];
   self.romaji = [rs stringForColumn:@"romaji"];
+	self._headword    = [rs stringForColumn:@"headword"];
 }
 
 /**
