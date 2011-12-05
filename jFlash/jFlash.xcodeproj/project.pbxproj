@@ -339,7 +339,6 @@
 		496C7B1912632774004B6B90 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
 		496C7B1A12632775004B6B90 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
 		496C7B1B12632777004B6B90 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
-		496C7B1D12632778004B6B90 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		496C7B1E12632779004B6B90 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		496C7B1F1263277A004B6B90 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
 		496C7B251263278F004B6B90 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E47F0911F3E754007F6FB7 /* NSMutableURLRequest+Parameters.m */; };
@@ -627,7 +626,6 @@
 		917A5BDE11AB7C4600016BD2 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BC611AB7C4600016BD2 /* AddTagViewController.m */; };
 		917A5BE011AB7C4600016BD2 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCA11AB7C4600016BD2 /* HelpViewController.m */; };
 		917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */; };
-		917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BCE11AB7C4600016BD2 /* RootViewController.m */; };
 		917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD011AB7C4600016BD2 /* SearchViewController.m */; };
 		917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD411AB7C4600016BD2 /* StudySetViewController.m */; };
 		917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5BD611AB7C4600016BD2 /* StudySetWordsViewController.m */; };
@@ -1248,8 +1246,6 @@
 		917A5BCA11AB7C4600016BD2 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = AppSpecific/HelpViewController.m; sourceTree = "<group>"; };
 		917A5BCB11AB7C4600016BD2 /* HelpWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpWebViewController.h; path = AppSpecific/HelpWebViewController.h; sourceTree = "<group>"; };
 		917A5BCC11AB7C4600016BD2 /* HelpWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpWebViewController.m; path = AppSpecific/HelpWebViewController.m; sourceTree = "<group>"; };
-		917A5BCD11AB7C4600016BD2 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = AppSpecific/RootViewController.h; sourceTree = "<group>"; };
-		917A5BCE11AB7C4600016BD2 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = AppSpecific/RootViewController.m; sourceTree = "<group>"; };
 		917A5BCF11AB7C4600016BD2 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = AppSpecific/SearchViewController.h; sourceTree = "<group>"; };
 		917A5BD011AB7C4600016BD2 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = AppSpecific/SearchViewController.m; sourceTree = "<group>"; };
 		917A5BD311AB7C4600016BD2 /* StudySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudySetViewController.h; path = AppSpecific/StudySetViewController.h; sourceTree = "<group>"; };
@@ -2649,8 +2645,6 @@
 				49F9692611AF680700DFC3C9 /* jFlashAppDelegate.m */,
 				4925735111C12619006FA4E1 /* ModalTaskViewController.h */,
 				4925735211C12619006FA4E1 /* ModalTaskViewController.m */,
-				917A5BCD11AB7C4600016BD2 /* RootViewController.h */,
-				917A5BCE11AB7C4600016BD2 /* RootViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -3248,7 +3242,6 @@
 				917A5BDE11AB7C4600016BD2 /* AddTagViewController.m in Sources */,
 				917A5BE011AB7C4600016BD2 /* HelpViewController.m in Sources */,
 				917A5BE111AB7C4600016BD2 /* HelpWebViewController.m in Sources */,
-				917A5BE211AB7C4600016BD2 /* RootViewController.m in Sources */,
 				917A5BE311AB7C4600016BD2 /* SearchViewController.m in Sources */,
 				917A5BE511AB7C4600016BD2 /* StudySetViewController.m in Sources */,
 				917A5BE611AB7C4600016BD2 /* StudySetWordsViewController.m in Sources */,
@@ -3588,7 +3581,6 @@
 				496C7B1912632774004B6B90 /* HelpViewController.m in Sources */,
 				496C7B1A12632775004B6B90 /* HelpWebViewController.m in Sources */,
 				496C7B1B12632777004B6B90 /* ModalTaskViewController.m in Sources */,
-				496C7B1D12632778004B6B90 /* RootViewController.m in Sources */,
 				496C7B1E12632779004B6B90 /* StudySetViewController.m in Sources */,
 				496C7B1F1263277A004B6B90 /* StudySetWordsViewController.m in Sources */,
 				496C7B251263278F004B6B90 /* NSMutableURLRequest+Parameters.m in Sources */,
@@ -3720,6 +3712,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3736,12 +3729,14 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3760,6 +3755,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -3936,6 +3932,7 @@
 		496C7A6F126325FE004B6B90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = cFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LWE_DEBUG,
@@ -3947,7 +3944,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Classes/External/FlurryLib\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = cFlash;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -3968,6 +3967,7 @@
 				);
 				PRODUCT_NAME = cFlash;
 				PROVISIONING_PROFILE = "";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
 		};
@@ -3994,9 +3994,7 @@
 		91EA2F5F1041365600AB848E /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -4006,7 +4004,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
-				PROVISIONING_PROFILE = "F19BBBC2-C702-4160-95A5-2863E9BA010E";
 				SDKROOT = iphoneos;
 			};
 			name = Beta;
@@ -4014,6 +4011,7 @@
 		91EA2F601041365600AB848E /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = jFlash_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4030,6 +4028,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = jFlash;
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -4037,8 +4036,6 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4056,9 +4053,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Long Weekend";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4070,7 +4065,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
-				PROVISIONING_PROFILE = "EA9EA653-1E52-45B3-9525-6AF8B89F280B";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
