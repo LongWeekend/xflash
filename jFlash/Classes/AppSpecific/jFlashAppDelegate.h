@@ -15,16 +15,10 @@
 
 void uncaughtExceptionHandler(NSException *exception);
 
-- (void) _prepareUserDatabase;
-- (void) _openUserDatabaseWithPlugins;
-
 @property BOOL isFinishedLoading;
-- (void) switchToSearchWithTerm:(NSString*)term;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UIImageView *splashView;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
-
-//@property (nonatomic, retain) RootViewController *rootViewController;
 
 @end

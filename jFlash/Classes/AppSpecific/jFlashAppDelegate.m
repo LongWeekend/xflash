@@ -6,19 +6,34 @@
 
 #import "jFlashAppDelegate.h"
 
-#import "RootViewController.h"
+#import "DSActivityView.h"
 #import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
 #import "AudioSessionManager.h"
+#import "Appirater.h"
 
 #import "SearchViewController.h"
+
+#import "LWEPackageDownloader.h"
+#import "ModalTaskViewController.h"
 
 #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
 #import "FlurryAPI.h"
 #endif
 
+@interface jFlashAppDelegate ()
+- (void) _switchToSearchWithTerm:(NSString*)term;
+- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
+- (void) showDownloaderModal:(NSNotification*)aNotification;
+- (void) _registerObservers;
+- (BOOL) _needToCopyDatabase;
+- (void) _openUserDatabaseWithPlugins;
+@property (retain) NSMutableArray *observerArray;
+@end
+
 @implementation jFlashAppDelegate
 
+@synthesize observerArray;
 @synthesize window, tabBarController, splashView;
 @synthesize isFinishedLoading;
 
@@ -38,12 +53,11 @@
 // handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  NSString *searchTerm;
-  searchTerm = [self getDecodedSearchTerm: url];
-
+  NSString *searchTerm = [self getDecodedSearchTerm:url];
   if (self.isFinishedLoading)
   {
-    [self switchToSearchWithTerm:searchTerm];
+    // If we have finished loading our database, et al, we can jump straight to search.
+    [self _switchToSearchWithTerm:searchTerm];
   }
   else
   {
@@ -57,39 +71,26 @@
 
 - (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context
 {
-  if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue])
+  if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue] == YES)
   {
     // Now be done with it, get rid of the observer too
-    [self switchToSearchWithTerm:_searchedTerm];
     [self removeObserver:self forKeyPath:@"isFinishedLoading"];
+    [self _switchToSearchWithTerm:_searchedTerm];
     [_searchedTerm release];
   }
 }
 
-- (void) switchToSearchWithTerm:(NSString*)term
+- (void) _switchToSearchWithTerm:(NSString*)term
 {
-  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
+  UINavigationController *searchNav = [self.tabBarController.viewControllers objectAtIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+  LWE_ASSERT_EXC([searchNav isKindOfClass:[UINavigationController class]],@"Whoa");
   
-  // TODO: this is a little ghetto. Maybe a Notification is more appropriate?
-  UINavigationController *vc = (UINavigationController*)[self.tabBarController selectedViewController];
-  if ([vc isKindOfClass:[UINavigationController class]])
-  {
-    SearchViewController *searchVC = (SearchViewController*)[vc topViewController];
-    if ([searchVC isKindOfClass:[SearchViewController class]])
-    {
-      [searchVC runSearchAndSetSearchBarForString:term];
-    }
-    else
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search",@"Unable to load Search")
-                                         message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
-    }
-  }
-  else
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to load Search Nav",@"Unable to load Search")
-                                       message:NSLocalizedString(@"An unexpected error occurred.  Gawd I hate these kinds of errors.  Always when I never expect it.",@"foobar")];
-  }
+  SearchViewController *searchVC = (SearchViewController*)[searchNav topViewController];
+  LWE_ASSERT_EXC([searchVC isKindOfClass:[SearchViewController class]], @"Whoa");
+  [searchVC runSearchAndSetSearchBarForString:term];
+  
+  // Now set the index so the search shows up
+  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
 }
 
 //! For compatibility
@@ -121,24 +122,27 @@
   [audioManager setSessionActive:NO];
 
   self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
-  
-/*  UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:LWE_APP_SPLASH_IMAGE]];
-  imageView.frame = [UIScreen mainScreen].applicationFrame;
-  self.view = imageView;
-  [imageView release];*/
-
-  
-  // Load root controller to show splash screen
   [self.window makeKeyAndVisible];
   
-  // Add a delay here so that the UI has time to update
-  // TODO: MMA a performSelector: is probably not the best because we are relying on a hack.
-  // Get a callback from the RootViewController on viewDidLoad, a notification or something.
-  [self performSelector:@selector(_prepareUserDatabase) withObject:nil afterDelay:0.0f];
-  
+  if ([self _needToCopyDatabase])
+  {
+    [DSBezelActivityView newActivityViewForView:self.splashView withLabel:NSLocalizedString(@"Setting up...\nThis will take a moment.",@"FirstLoadModalText")];
+    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+    [db asynchCopyDatabaseFromBundle:LWE_CURRENT_USER_DATABASE
+                     completionBlock:^{
+                       // Register & open the database when finished
+                       NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+                       [settings setBool:YES forKey:@"db_did_finish_copying"];
+                       [self _openUserDatabaseWithPlugins];
+                     }];
+  }
+  else
+  {
+    // No more "performSelector:afterDelay:".  This executes on the main thread, but in a priority queue -- giving the UI time to update.
+    dispatch_async(dispatch_get_main_queue(), ^{ [self _openUserDatabaseWithPlugins]; });
+  }
   return YES;
 }
-
 
 - (BOOL) _needToCopyDatabase
 {
@@ -147,69 +151,183 @@
   return ([LWEFile fileExists:pathToDatabase] == NO || [settings boolForKey:@"db_did_finish_copying"] == NO);
 }
 
-/**
- * Checks whether or not to install the main database from the bundle
- */
-- (void) _prepareUserDatabase
-{
-  if ([self _needToCopyDatabase])
-  {
-    // Register a notification to wait here for the success, then do the DB copy
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_openUserDatabaseWithPlugins) name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
-    LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-    [db performSelectorInBackground:@selector(copyDatabaseFromBundle:) withObject:LWE_CURRENT_USER_DATABASE];
-    //    [[self rootViewController] showDatabaseLoadingView];
-    // Only ever copy the latest user database
-  }
-  else
-  {
-    // Finished copying, and we have the database file - just open it
-    [self _openUserDatabaseWithPlugins];
-  }
-}
-
 
 /**
- * Loads & opens the databases and plugins, calls
- * RootViewController loadTabBar when finished
+ * Loads & opens the databases and plugins
  */
 - (void) _openUserDatabaseWithPlugins
 {
-  // Remove observer if we had one for first copy, also get rid of the loading page if we had one
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:LWEDatabaseCopyDatabaseDidSucceed object:nil];
-  
   // Open the database - it already exists & is properly copied
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *filename = LWE_CURRENT_USER_DATABASE;
-
-  if ([db openDatabase:[LWEFile createDocumentPathWithFilename:filename]])
+  BOOL openedDB = [db openDatabase:[LWEFile createDocumentPathWithFilename:filename]];
+  LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
+  CurrentState *state = [CurrentState sharedCurrentState];
+  if (state.isFirstLoad)
   {
-    CurrentState *state = [CurrentState sharedCurrentState];
-    
-    if (state.isFirstLoad)
-    {
-      // "Install" the preinstalled bundle plugins (CARD-DB) now
-      NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
-      NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
-      Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-      [state.pluginMgr installPlugin:cardsDb error:NULL];
-    }
-    
-    // Then load plugins
-    [state.pluginMgr loadInstalledPlugins];
-  }
-  else
-  {
-    // Could not open database!
-    [NSException raise:@"DatabaseFileNotFound" format:@"Looked for file: %@",[LWEFile createDocumentPathWithFilename:filename]];
+    // "Install" the preinstalled bundle plugins (CARD-DB) now
+    NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
+    NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
+    Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
+    [state.pluginMgr installPlugin:cardsDb error:NULL];
+    [DSBezelActivityView removeViewAnimated:YES];
   }
   
+  // Then load plugins
+  [state.pluginMgr loadInstalledPlugins];
+
+  // Get rid of the splash view
   [self.splashView removeFromSuperview];
   self.splashView = nil;
   
+  // Finish setting up & load tab bar
+  [self _registerObservers];
   [self.window addSubview:self.tabBarController.view];
-
+  self.isFinishedLoading = YES;
+  [Appirater appLaunched];
 }
+
+# pragma mark Convenience Methods
+
+//! Called via first responder from progress view
+- (IBAction)switchToSettings
+{
+  self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
+}
+
+#pragma mark - Register Observers
+
+- (void) _registerObservers
+{
+  self.observerArray = [NSMutableArray array];
+  
+  // MMA Apparently, there really isn't a way around this dirtiness.
+  __block jFlashAppDelegate *blockSelf = self;
+  NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+  
+  id observer = nil;
+  // Register listener to switch the tab bar controller index programmatically
+  observer = [center addObserverForName:LWEShouldSwitchTab object:nil queue:nil usingBlock:^(NSNotification *notification)
+  {
+    NSNumber *index = [notification.userInfo objectForKey:@"index"];
+    blockSelf.tabBarController.selectedIndex = [index integerValue];
+  }];
+  [self.observerArray addObject:observer];
+  
+  // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
+  void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
+  {
+    //if the animated key is not specified in the user info, it will be animated.
+    NSDictionary *dict = [notification userInfo];
+    BOOL animated = YES;
+    if ([dict valueForKey:@"animated"])
+    {
+      animated = [[dict valueForKey:@"animated"] boolValue];
+    }
+    [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
+  };
+  observer = [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
+  [self.observerArray addObject:observer];
+  
+  // Show popover for progress view
+  observer = [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
+  {
+    UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
+    if (controller)
+    {
+      [blockSelf.tabBarController.view addSubview:controller.view];
+    }
+  }];
+  [self.observerArray addObject:observer];
+  
+  // Register listener to pop up downloader modal for search FTS download & ex sentence download
+  [center addObserver:self selector:@selector(showDownloaderModal:) name:LWEShouldShowDownloadModal object:nil];
+  
+  //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
+  [center addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
+}
+
+
+#pragma mark - Generic Modal Pop-ups and dismissal. 
+
+/**
+ * Private method that actually does the dirty work of displaying any modal
+ */
+- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController
+{
+  if (useNavController)
+  {
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.tabBarController presentModalViewController:controller animated:YES];
+    [controller release];
+  }
+  else
+  {
+    [self.tabBarController presentModalViewController:vc animated:YES];    
+  }
+}
+
+/**
+ * Show Modal method that will call the show modal view controller private method.
+ * the notification user info will determine whether it will be animated, and what view controller to view. 
+ */
+- (void)showModal:(NSNotification *)notification
+{
+	NSDictionary *dict = [notification userInfo];
+	//It will do anything if there is any information in regard to what view controller to be pop-ed up. 
+	if ((dict != nil) && ([dict count] > 0))
+	{
+		UIViewController *vc = (UIViewController *) [dict objectForKey:@"controller"];
+    
+    // Default to YES
+    BOOL useNavController = YES;
+    if ([dict valueForKey:@"useNavController"])
+    {
+      useNavController = [[dict valueForKey:@"useNavController"] boolValue];
+    }
+		[self _showModalWithViewController:vc useNavController:useNavController];
+	}
+	else 
+	{
+		LWE_LOG(@"Error : Show modal notification cannot run properly, caused by nil or zero length of NSNotification user info dictionary. ");
+	}
+}
+
+/**
+ * Pops up a modal over the screen when the user needs to download something
+ * Relies on _showModalWithViewController:useNavController:
+ */
+- (void) showDownloaderModal:(NSNotification*)aNotification
+{
+  // If the user tries to re-lauch while we are downloading, just re-launch that modal.
+  if ([CurrentState pluginIsDownloading])
+  {
+    [self _showModalWithViewController:[[CurrentState sharedCurrentState] modalTaskViewController] useNavController:YES];
+    return;
+  }
+  
+  Plugin *thePlugin = (Plugin *)aNotification.object;
+  LWE_ASSERT_EXC(thePlugin, @"This method can't be called with a nil plugin.");
+  
+  // Instantiate downloader with jFlash download URL & destination filename
+  //TODO: iPad customization here
+  ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
+  dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
+  dlViewController.webViewContent = thePlugin.htmlString;
+  
+  // Get path information
+  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
+  packageDownloader.progressDelegate = dlViewController;
+  [packageDownloader queuePackage:[thePlugin downloadPackage]];
+  dlViewController.taskHandler = packageDownloader;
+  [self _showModalWithViewController:dlViewController useNavController:YES];
+  [packageDownloader release];
+  
+  // Hold on to this
+  [[CurrentState sharedCurrentState] setModalTaskViewController:dlViewController];
+  [dlViewController release];
+}
+
 
 #pragma mark - UIApplication Delegate methods
 
@@ -282,6 +400,16 @@
 
 - (void)dealloc
 {
+  // This handles the name/selector-based
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // This handles the block-based notifications
+  for (id observer in self.observerArray)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+  }
+  
+  [observerArray release];
   [tabBarController release];
   [window release];
   
