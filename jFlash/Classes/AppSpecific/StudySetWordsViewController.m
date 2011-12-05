@@ -302,6 +302,11 @@
       {
         CurrentState *appSettings = [CurrentState sharedCurrentState];
         [appSettings setActiveTag:self.tag];
+        
+        // Now switch to the main tab.
+        NSNumber *index = [NSNumber numberWithInt:STUDY_VIEW_CONTROLLER_TAB_INDEX];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:index forKey:@"index"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:self userInfo:userInfo];
       }
       else
       {
