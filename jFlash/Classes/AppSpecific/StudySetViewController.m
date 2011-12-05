@@ -61,7 +61,7 @@ NSInteger const kLWEBackupSection = 2;
   [self reloadSubgroupData];
   
   // Add add button to nav bar
-  _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
+  _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
   // Register observers to reload table data on other events
