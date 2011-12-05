@@ -246,6 +246,10 @@
     UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
     if (controller)
     {
+      // For some reason we have to adjust this.   Tihs is still a hack.
+      CGRect frame = controller.view.frame;
+      frame.origin = CGPointMake(0, 20);
+      controller.view.frame = frame;
       [blockSelf.tabBarController.view addSubview:controller.view];
     }
   }];
