@@ -24,40 +24,43 @@
 /**
  * Initializer - sets all of the titles and filenames of the help files.
  */
-- (id) init
+- (void) viewDidLoad
 {
-	if ((self = [super initWithStyle:UITableViewStyleGrouped]))
-  {
-    // Set the tab bar controller image png to the targets
-    self.tabBarItem.image = [UIImage imageNamed:@"90-lifebuoy.png"];
-    self.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
-    self.navigationItem.title = NSLocalizedString(@"Help",@"HelpViewController.NavBarTitle");
-    NSArray *names = [NSArray arrayWithObjects:NSLocalizedString(@"Welcome",@"HelpViewController.Table_Welcome"),
-                                               NSLocalizedString(@"Study Sets",@"HelpViewController.Table_StudySets"),
-                                               NSLocalizedString(@"Practice",@"HelpViewController.Table_Practice"),
-                                               NSLocalizedString(@"Browse Mode",@"HelpViewController.Table_BrowseMode"),
-                                               NSLocalizedString(@"Search",@"HelpViewController.Table_WordSearch"),
-                                               NSLocalizedString(@"Corrections",@"HelpViewController.Table_Corrections"),
-                                               NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
-                                               NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),                                               
-                                               NSLocalizedString(@"Integration",@"HelpViewController.Table_Integration"),                      
-                                               NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
-                                               NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
-                                               NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
-                                              nil];
-    self.sectionTitles = names;
-    
-    UIBarButtonItem *supportBtn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ask Us", @"HelpViewController.GetSatsifactionLink")
-                                                                    style:UIBarButtonItemStyleBordered
-                                                                   target:self action:@selector(_supportBtnPressed:)] autorelease];
-    self.navigationItem.rightBarButtonItem = supportBtn;
-
-    // We use absolute sizes though so let the old devices scale the images down.
-    self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
-    currentIndex = 0;
-  }
-	return self;
+  // Set the tab bar controller image png to the targets
+  NSArray *names = [NSArray arrayWithObjects:NSLocalizedString(@"Welcome",@"HelpViewController.Table_Welcome"),
+                    NSLocalizedString(@"Study Sets",@"HelpViewController.Table_StudySets"),
+                    NSLocalizedString(@"Practice",@"HelpViewController.Table_Practice"),
+                    NSLocalizedString(@"Browse Mode",@"HelpViewController.Table_BrowseMode"),
+                    NSLocalizedString(@"Search",@"HelpViewController.Table_WordSearch"),
+                    NSLocalizedString(@"Corrections",@"HelpViewController.Table_Corrections"),
+                    NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
+                    NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),                                               
+                    NSLocalizedString(@"Integration",@"HelpViewController.Table_Integration"),                      
+                    NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
+                    NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
+                    NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
+                    nil];
+  self.sectionTitles = names;
+  
+  UIBarButtonItem *supportBtn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Ask Us", @"HelpViewController.GetSatsifactionLink")
+                                                                  style:UIBarButtonItemStyleBordered
+                                                                 target:self action:@selector(_supportBtnPressed:)] autorelease];
+  self.navigationItem.rightBarButtonItem = supportBtn;
+  
+  // We use absolute sizes though so let the old devices scale the images down.
+  self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
+  currentIndex = 0;
 }
+
+/** Sets the nav bar tint to the current theme and sets the background to our standard */
+- (void)viewWillAppear: (BOOL)animated
+{
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.tableView.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - 
 
 /** Changes the help view to the next page */
 - (void) navigateToNextHelpPage
@@ -81,15 +84,6 @@
       }
     }
   }
-}
-
-
-/** Sets the nav bar tint to the current theme and sets the background to our standard */
-- (void)viewWillAppear: (BOOL)animated
-{
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - 
