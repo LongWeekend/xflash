@@ -43,6 +43,7 @@ NSInteger const kLWEBackupSection = 2;
   self = [self initWithNibName:@"StudySetView" bundle:nil];
   if (self)
   {
+    selectedTagId = -1;
     self.group = aGroup;
     self.title = aGroup.groupName;
   }
