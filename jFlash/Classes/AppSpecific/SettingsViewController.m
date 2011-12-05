@@ -150,6 +150,10 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   {
     self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
   }
+  else
+  {
+    self.navigationController.tabBarItem.badgeValue = nil;
+  }
 }
 
 
@@ -161,15 +165,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   if ([keyPath isEqualToString:@"downloadablePlugins"] && [object isKindOfClass:[PluginManager class]])
   {
     // First, update the badge value if necessary
-    PluginManager *mgr = (PluginManager *)object;
-    if ([mgr.downloadablePlugins count] > 0)
-    {
-      self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[mgr.downloadablePlugins count]];
-    }
-    else
-    {
-      self.tabBarItem.badgeValue = nil;
-    }
+    [self updateBadgeValue];
     
     // Second, reload the table -- chances are something changed that on the plugin row
     self.sectionArray = [self.dataSource settingsArray];
