@@ -22,11 +22,17 @@ const NSInteger KSegmentedTableHeader = 100;
 - (void) _addSearchControlToHeader;
 - (UITableViewCell*) _setupTableCell:(UITableViewCell*)cell forCard:(Card*) card;
 - (UITableViewCell*) _setupTableCell:(UITableViewCell*)cell forSentence:(ExampleSentence*)sentence;
+
+//! Contains the returned search results (array of Card objects, may be flywheeled (faulted) objects)
+@property (nonatomic, retain) NSArray *cardResultsArray;
+
+//! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
+@property (nonatomic, retain) NSMutableArray *membershipCacheArray;
 @end
 
 @implementation SearchViewController
 @synthesize observerArray;
-@synthesize searchBar, _wordsOrSentencesSegment, _cardSearchArray, _sentenceSearchArray, _activityIndicator;
+@synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray, _activityIndicator;
 @synthesize tableView, searchTerm;
 
 @synthesize membershipCacheArray;
@@ -38,9 +44,6 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   if ((self = [super init]))
   {
-    // Set the tab bar controller image png to the targets
-    self.tabBarItem = [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:0] autorelease];
-    self.title = NSLocalizedString(@"Search",@"SearchViewController.NavBarTitle");
     self.observerArray = [NSMutableArray array];
     
     // Is the plugin loaded for example sentences?
@@ -218,7 +221,7 @@ const NSInteger KSegmentedTableHeader = 100;
   NSString *changeType = [aNotification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])
   {
-    if ([self._cardSearchArray containsObject:card])
+    if ([self.cardResultsArray containsObject:card])
     {
       // Add to the cache & reload so the star appears
       [self.membershipCacheArray addObject:card];
@@ -323,9 +326,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSArray *tmpResults = nil;
   if (_searchTarget == SEARCH_TARGET_WORDS)
   {
-    tmpResults = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
-    [self set_cardSearchArray:tmpResults];
-    _currentResultArray = [self _cardSearchArray];
+    self.cardResultsArray = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
+    _currentResultArray = self.cardResultsArray;
   }
   else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
   {
@@ -394,7 +396,12 @@ const NSInteger KSegmentedTableHeader = 100;
       cell = [LWEUITableUtils reuseCellForIdentifier:[NSString stringWithFormat:@"Record-%d",_searchTarget] onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       if (_searchTarget == SEARCH_TARGET_WORDS)
       {
-        Card *searchResult = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+        // These cards be flywheeled, see if we need to hydrate it
+        Card *searchResult = [self.cardResultsArray objectAtIndex:indexPath.row];
+        if (searchResult.isFault)
+        {
+          [searchResult hydrate];
+        }
         cell = [self _setupTableCell:cell forCard:searchResult];
       }
       else
@@ -464,7 +471,7 @@ const NSInteger KSegmentedTableHeader = 100;
     // Load child controller onto nav stack
     if (_searchTarget == SEARCH_TARGET_WORDS)
     {
-      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self _cardSearchArray] objectAtIndex:indexPath.row]];
+      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self cardResultsArray] objectAtIndex:indexPath.row]];
       [[self navigationController] pushViewController:tagController animated:YES];
       [tagController release];
     }
@@ -517,7 +524,7 @@ const NSInteger KSegmentedTableHeader = 100;
 - (BOOL) _checkMembershipCacheForCard:(Card*)theCard
 {
   BOOL returnVal = NO;
-  if ([self.membershipCacheArray isKindOfClass:[NSMutableArray class]])
+  if (self.membershipCacheArray)
   {
     return [self.membershipCacheArray containsObject:theCard];
   }
@@ -544,7 +551,7 @@ const NSInteger KSegmentedTableHeader = 100;
   NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
   if (indexPath != nil)
   {
-    Card *theCard = [[self _cardSearchArray] objectAtIndex:indexPath.row];
+    Card *theCard = [self.cardResultsArray objectAtIndex:indexPath.row];
     Tag *starredTag = [[CurrentState sharedCurrentState] starredTag];
     
     // Use cache for toggling status if we have it
@@ -568,19 +575,15 @@ const NSInteger KSegmentedTableHeader = 100;
     else
     {
       NSError *error = nil;
-      BOOL result = [TagPeer cancelMembership:theCard fromTag:starredTag error:&error];
-      if (!result)
+      if ([TagPeer cancelMembership:theCard fromTag:starredTag error:&error] == NO)
       {
-        if ([error code] == kRemoveLastCardOnATagError)
+        NSString *title = NSLocalizedString(@"Remove From Set Error",@"Remove from Set Error");
+        if (error.code == kRemoveLastCardOnATagError)
         {
-          NSString *errorMessage = [error localizedDescription];
-          [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle")
-                                             message:errorMessage];
+          // We know about this error, we can give slightly better detail
+          title = NSLocalizedString(@"Last Card in Set", @"AddTagViewController.AlertViewLastCardTitle");
         }
-        else
-        {
-          LWE_LOG_ERROR(@"[UNKNOWN ERROR]%@", error);
-        }
+        [LWEUIAlertView notificationAlertWithTitle:title message:[error localizedDescription]];
         return;
       }
       
@@ -597,7 +600,6 @@ const NSInteger KSegmentedTableHeader = 100;
 /** Helper method - makes a cell for cellForIndexPath for a Card */
 - (UITableViewCell*) _setupTableCell:(UITableViewCell*)cell forCard:(Card*) card
 {
-  
   // Get the headword (or make a new one)
   UILabel *searchResult = (UILabel*)[cell viewWithTag:SEARCH_CELL_HEADWORD];
   if (searchResult == nil) 
@@ -700,7 +702,7 @@ const NSInteger KSegmentedTableHeader = 100;
   
   [searchTerm release];
   [searchBar release];
-  [_cardSearchArray release];
+  [cardResultsArray release];
   [_activityIndicator release];
   [_wordsOrSentencesSegment release];
   [super dealloc];

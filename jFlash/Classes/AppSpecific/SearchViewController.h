@@ -47,12 +47,6 @@ typedef enum searchStates
 - (void) runSearchForString:(NSString*)text;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
 
-//! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
-@property (nonatomic, retain) NSMutableArray *membershipCacheArray;
-
-//! Contains the returned search results (array of Card objects)
-@property (nonatomic, retain) NSArray *_cardSearchArray;
-
 //! Contains the returned search results (array of ExampleSentence objects)
 @property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
