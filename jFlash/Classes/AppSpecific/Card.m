@@ -189,9 +189,14 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 
 + (UIFont *) configureFontForLabel:(UILabel*)theLabel
 {
-  UIFont *theFont = theLabel.font;
 #if defined (LWE_CFLASH)
-  CGFloat currSize = theLabel.font.pointSize;
+  UIFont *theFont = theLabel.font;
+  CGFloat currSize = theFont.pointSize;
+  if (currSize == 0)
+  {
+    // Use default if not set
+    currSize = FONT_SIZE_CELL_HEADWORD;
+  }
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
   // Don't change anything about the font if we're in English headword mode
@@ -206,8 +211,10 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
       theFont = [UIFont fontWithName:@"STHeitiSC-Medium" size:currSize];
     }
   }
-#endif
   return theFont;
+#else
+  return theLabel.font;
+#endif
 }
 
 

@@ -196,17 +196,17 @@
 }
 
 /** Customize the appearance of table view cells */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"Cell";
-  static NSString *HeaderIdentifier = @"Header";
+  static NSString *cellIdentifier = @"StudySetWordsCell";
+  static NSString *headerIdentifier = @"Header";
   UITableViewCell *cell = nil;
   if (indexPath.section == kWordSetListSections)
   {
     if (self.cards == nil)
     {
       // "Loading words..." pre-display cell
-      cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
+      cell = [LWEUITableUtils reuseCellForIdentifier:headerIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = NSLocalizedString(@"Loading words...",@"StudySetWordsViewController.LoadingWords");
       cell.accessoryView = activityIndicator;
       [activityIndicator startAnimating];
@@ -214,7 +214,7 @@
     else
     {
       // The actual words, once loaded
-      cell = [LWEUITableUtils reuseCellForIdentifier:CellIdentifier onTable:tableView usingStyle:UITableViewCellStyleSubtitle];
+      cell = [LWEUITableUtils reuseCellForIdentifier:cellIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
       if (tmpCard.isFault)
@@ -232,7 +232,7 @@
   }
   else
   {
-    cell = [LWEUITableUtils reuseCellForIdentifier:HeaderIdentifier onTable:tableView usingStyle:UITableViewCellStyleDefault];
+    cell = [LWEUITableUtils reuseCellForIdentifier:headerIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.row == kWordSetOptionsStart)
