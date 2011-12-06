@@ -326,7 +326,8 @@ const NSInteger KSegmentedTableHeader = 100;
   NSArray *tmpResults = nil;
   if (_searchTarget == SEARCH_TARGET_WORDS)
   {
-    self.cardResultsArray = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
+    tmpResults = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
+    self.cardResultsArray = tmpResults;
     _currentResultArray = self.cardResultsArray;
   }
   else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
