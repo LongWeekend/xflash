@@ -387,7 +387,12 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     NSURL *url = nil;
     if (key == APP_FACEBOOK)
     {
+#if defined (LWE_JFLASH)
+      // JFlash is the only app with its own FB page
       url = [NSURL URLWithString:@"http://m.facebook.com/pages/Japanese-Flash/111141367918"];
+#else
+      url = [NSURL URLWithString:@"http://www.facebook.com/pages/Long-Weekend/174666231385"];
+#endif
     }
     else
     {
