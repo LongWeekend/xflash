@@ -58,12 +58,10 @@
   NSMutableArray *cardList = [NSMutableArray array];
 
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
-  NSString *sql = [NSString stringWithFormat:@""
-         "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' LIMIT %d) "
-         "ORDER BY c.headword", keywordWildcard, 200];
+  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
+                   "content MATCH '%@*' LIMIT %d", keywordWildcard, 200];
   FMResultSet *rs = [db executeQuery:sql];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:YES];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:NO];
   return (NSArray*)cardList;
 }
 
@@ -74,15 +72,16 @@
   NSMutableArray *cardList = [NSMutableArray array];
   NSInteger queryLimit = 100;
   
+  // Do not hydrate these cards, we will flywheel it on the table view.
   NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
 
   // Fill with non-ptag entries if we have space leftover
   if ([cardList count] < queryLimit)
   {
     NSInteger remainingCards = (queryLimit - [cardList count]);
     sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
-    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
+    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
   }
   
   return (NSArray*)cardList;
@@ -90,20 +89,16 @@
 
 #pragma mark - Private Methods
 
-+ (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
+/**
+ * This will return a SQL query that will return card ids from the FTS table based on the settings passed
+ */
++ (NSString *) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
 {
   NSString *returnSql = nil;
-#if defined (LWE_CFLASH)
-  NSString *orderBy = @"headword_simp";
-#else
-  NSString *orderBy = @"headword";
-#endif
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
   // Do the search using SQLite FTS (PTAG results)
-  returnSql = [NSString stringWithFormat:@""
-         "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = %d LIMIT %d) "
-         "ORDER BY c.%@", keywordWildcard, usePTag, limit, orderBy];
+  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
+               "content MATCH '%@' AND ptag = %d LIMIT %d", keywordWildcard, usePTag, limit];
   return returnSql;
 }
 
@@ -131,14 +126,15 @@
 {
   while ([rs next])
   {
-    Card *tmpCard = [CardPeer blankCard];
+    Card *tmpCard = nil;
     if (shouldHydrate)
     {
+      tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
     }
     else
     {
-      tmpCard.cardId = [rs intForColumn:@"card_id"];
+      tmpCard = [CardPeer blankCardWithId:[rs intForColumn:@"card_id"]];
     }
     [cardList addObject:tmpCard];
   }
