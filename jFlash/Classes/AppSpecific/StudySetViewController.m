@@ -12,6 +12,7 @@
 #import "CustomCellBackgroundView.h"
 #import "LWEJanrainLoginManager.h"
 #import "SettingsViewController.h"
+#import "Constants.h"
 
 NSInteger const kBackupConfirmationAlertTag = 10;
 NSInteger const kRestoreConfirmationAlertTag = 11;
@@ -589,9 +590,8 @@ NSInteger const kLWEBackupSection = 2;
 - (void)didBackupUserData
 {
   [DSBezelActivityView removeView];  
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") 
-                                     message:NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] ,@"BackupManager_DataRestoredBody")]; 
-  
+  NSString* alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
   [[self activityIndicator] stopAnimating];
 }
 
@@ -621,8 +621,8 @@ NSInteger const kLWEBackupSection = 2;
 - (void)didRestoreUserData
 {
   [DSBezelActivityView removeView];
-  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") 
-                                     message:NSLocalizedString(@"Your data has been restored successfully. Enjoy %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], @"BackupManager_DataRestoredBody")]; 
+  NSString* alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
   [[self activityIndicator] stopAnimating];
   [self reloadTableData];
 }
