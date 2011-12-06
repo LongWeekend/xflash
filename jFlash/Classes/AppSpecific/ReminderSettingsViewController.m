@@ -36,6 +36,14 @@
 
 #pragma mark - View lifecycle
 
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  // Get rid of cat's pajama's.
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.tableView.backgroundColor = [UIColor clearColor];
+}
+
 - (void) viewDidLoad
 {
   [super viewDidLoad];
