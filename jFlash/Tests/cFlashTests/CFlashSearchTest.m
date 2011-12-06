@@ -42,13 +42,13 @@
 }
 
 // When I search for "人", the first match should be only that
-- (void) testMatchExactCharacterFirst
+- (void) testMatchExactHeadwordFirst
 {
   // The first card's headword should match
-  NSArray *results = [self _searchKeywordExpectingResults:@"人"];
+  NSArray *results = [self _searchKeywordExpectingResults:@"拼音"];
   Card *resultCard = [results objectAtIndex:0];
   [resultCard hydrate];
-  STAssertEqualObjects(@"人", resultCard.headword, @"HW of these cards should be the same");
+  STAssertEqualObjects(@"拼音", resultCard.headword, @"HW of these cards should be the same");
 }
 
 - (void) testMatchMultiplePinyin
@@ -58,6 +58,13 @@
   [resultCard hydrate];
   
   STAssertEqualObjects(@"duo1 gong1", resultCard.reading, @"First search results should match pinyin search.");
+}
+
+- (void) testMatchMultipleUnknownTonePinyin
+{
+  NSArray *results = [self _searchKeywordExpectingResults:@"pin? yin?"];
+  Card *resultCard = [results objectAtIndex:0];
+  [resultCard hydrate];
 }
 
 #pragma mark - Setup & Teardown
