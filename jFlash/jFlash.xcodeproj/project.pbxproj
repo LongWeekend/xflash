@@ -73,8 +73,6 @@
 		4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */; };
 		49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
 		49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
-		491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 491AA1CB1456AA29009B9F6E /* foo.mp3 */; };
-		491AA1CD1456AA29009B9F6E /* foo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 491AA1CB1456AA29009B9F6E /* foo.mp3 */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
@@ -948,7 +946,6 @@
 		4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = availablePluginForDownload.plist; path = Plugins/availablePluginForDownload.plist; sourceTree = "<group>"; };
 		4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-FTS-1.1.db"; path = "sql/plugins/jFlash-FTS-1.1.db"; sourceTree = "<group>"; };
 		4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-EX-1.2.db"; path = "sql/plugins/jFlash-EX-1.2.db"; sourceTree = "<group>"; };
-		491AA1CB1456AA29009B9F6E /* foo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = foo.mp3; path = ../foo.mp3; sourceTree = "<group>"; };
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
@@ -2253,7 +2250,6 @@
 			children = (
 				D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */,
 				D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */,
-				491AA1CB1456AA29009B9F6E /* foo.mp3 */,
 				49DADB7E1277F36F00B8FD72 /* Default.png */,
 				49DADB7F1277F36F00B8FD72 /* Default@2x.png */,
 				49D996C612705C9B00D176D0 /* Japanese Flash Assets */,
@@ -2982,7 +2978,6 @@
 				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 				49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
 				4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */,
-				491AA1CC1456AA29009B9F6E /* foo.mp3 in Resources */,
 				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
 				49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
@@ -3183,7 +3178,6 @@
 				49BBA49C144D4BCE00E6A9AE /* help in Resources */,
 				49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */,
 				49716146144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
-				491AA1CD1456AA29009B9F6E /* foo.mp3 in Resources */,
 				496C6704147294D9009F04D4 /* cFlash-FTS-1.0.db in Resources */,
 				493A478F146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4793146A89BB00F1E718 /* SettingsView.xib in Resources */,
