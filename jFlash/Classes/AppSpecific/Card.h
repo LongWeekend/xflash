@@ -13,6 +13,7 @@
 
 extern NSString * const kLWEFullReadingKey;
 extern NSString * const kLWESegmentedReadingKey;
+extern NSInteger const kLWEUninitializedCardId;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
 @class LWEAudioQueue;
@@ -21,6 +22,7 @@ extern NSString * const kLWESegmentedReadingKey;
   LWEAudioQueue *_player;
 }
 
+- (void) hydrate;
 - (void) hydrate:(FMResultSet*)rs;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 

@@ -1,8 +1,9 @@
 
 #import "Card.h"
 
-NSString *const kLWEFullReadingKey        = @"lwe_full_reading";
-NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
+NSString * const kLWEFullReadingKey        = @"lwe_full_reading";
+NSString * const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
+NSInteger const kLWEUninitializedCardId    = -1;
 
 @interface Card ()
 //! AudioPlayer object for a card
@@ -20,6 +21,7 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
   if (self)
   {
     _isFault = YES;
+    cardId = kLWEUninitializedCardId;
   }
   return self;
 }
@@ -144,6 +146,19 @@ NSString *const kLWESegmentedReadingKey   = @"lwe_segmented_reading";
 - (BOOL) hasExampleSentences
 {
   return NO;
+}
+
+//! gets a card from the db and hydrates
+- (void) hydrate
+{
+  LWE_ASSERT_EXC(self.cardId != kLWEUninitializedCardId, @"Hydrate called with uninitialized card ID");
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM cards WHERE card_id = %d LIMIT 1",self.cardId]];
+	while ([rs next])
+  {
+		[self hydrate:rs];
+	}
+	[rs close];
 }
 
 /** Takes a sqlite result set and populates the properties of card icluding the maning of the card */
