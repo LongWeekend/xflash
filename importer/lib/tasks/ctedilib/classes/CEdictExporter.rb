@@ -27,8 +27,7 @@ class CEdictExporter
     $cn.execute("CREATE TABLE tags SELECT tag_id, tag_name, description, editable, count, force_off FROM tags_staging")
     
     # Create FTS table & generate content
-    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, CONCAT(headword_trad, ' ', headword_simp, ' ', reading, ' ', reading_diacritic, ' ', meaning_fts) AS content, priority_word as ptag FROM #{cards_table}")
-#    $cn.execute("ALTER TABLE cards_search_content ADD COLUMN headword_reading varchar(100)")
+    $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning_fts AS content, priority_word as ptag FROM #{cards_table}")
 
     # Remove non-visible tags - MMA 11.30.2011 -- is this still used? TODO
     $cn.execute("DELETE FROM tags WHERE force_off=1")
@@ -185,7 +184,7 @@ class CEdictExporter
     BEGIN TRANSACTION;\\
     \\
     DROP TABLE IF EXISTS cards_search_content;\\
-    CREATE VIRTUAL TABLE cards_search_content using FTS3(card_id, ptag, content);\\
+    CREATE VIRTUAL TABLE cards_search_content using FTS3(card_id, headword_trad, headword_simp, reading, reading_diacritic, content, ptag);\\
     \\
     DROP TABLE IF EXISTS version;\\
     CREATE TABLE version (plugin_key TEXT PRIMARY KEY NOT NULL, version TEXT, plugin_name TEXT);\\

@@ -71,63 +71,6 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 			<key>pluginType</key>
 			<string>directory</string>
 			<key>details</key>
-			<string>Adds pronounciation for each HSK word (35MB)</string>
-			<key>filePath</key>
-			<string>hsk-audio-1.0/</string>
-			<key>fileLocation</key>
-			<integer>1</integer>
-			<key>comment</key>
-			<string>file Location #2 = documents (0 = bundle, 1 = library)</string>
-			<key>htmlString</key>
-			<string>&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
-  &lt;link href=&quot;plugins.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
-  &lt;link rel=&quot;stylesheet&quot; media=&quot;only screen and (-webkit-min-device-pixel-ratio: 2)&quot; type=&quot;text/css&quot; href=&quot;plugins_retina.css&quot; /&gt;
-&lt;/head&gt;
-&lt;body style=&quot;background-color:transparent;&quot;&gt;
-
-&lt;img src=&quot;hsk-audio@2x.png&quot; border=&quot;0&quot; width=&quot;290&quot; class=&quot;title retina&quot;/&gt;
-&lt;div class=&quot;subtitle&quot;&gt;&lt;small&gt;Version 1.0, 16.6MB&lt;br/&gt;&lt;/div&gt;
-&lt;div id=&quot;release-notes&quot;&gt;
-&lt;p&gt;
-Chinese Flash is more than just a flash card app.  It&apos;s a tool to help you improve your listening comprehension.
-This update includes full-word audio, recorded by a native speaker, for 5,000+ words in the HSK word lists.
-&lt;/p&gt;
-&lt;p&gt;
-&lt;strong&gt;We strongly recommend using a WiFi connection.&lt;/strong&gt;
-&lt;/p&gt;
-&lt;h3&gt;Here&apos;s how it works&lt;/h3&gt;
-&lt;p&gt;
-After installation: Tap the &amp;quot;Audio&amp;quot; icon on each study card.  You&apos;ll hear a pronounciation of the word.
-Also, you can listen to music while studying -- your music will simply duck out while the tones are playing.  Cool, right?
-&lt;/p&gt;
-&lt;p&gt;
-Each word has been recorded by a native speaker; the recordings are resources of Lingomi (http://lingomi.com/), used with permission under license.
-&lt;/p&gt;
-&lt;h3&gt;Why do I have to download something?&lt;/h3&gt;
-&lt;p&gt;
-We separated the components (dictionary search, audio, etc.) into downloadable updates to make it easier to deliver new data as it changes.
-&lt;/p&gt;
-&lt;h3&gt;&lt;em&gt;Enjoy the Awesome HSK Audio!&lt;/em&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</string>
-			<key>pluginId</key>
-			<string>AUDIO_HSK</string>
-			<key>name</key>
-			<string>HSK Word Audio v1.0</string>
-			<key>targetURL</key>
-			<string>https://d3jxezdeu5e50q.cloudfront.net/hsk-audio-1.0.zip</string>
-			<key>targetPath</key>
-			<string>hsk-audio-1.0.zip</string>
-			<key>version</key>
-			<string>1.0</string>
-		</dict>
-		<dict>
-			<key>pluginType</key>
-			<string>directory</string>
-			<key>details</key>
 			<string>Adds native tone pronounciation (16.6MB)</string>
 			<key>filePath</key>
 			<string>pinyin-audio-1.0/</string>

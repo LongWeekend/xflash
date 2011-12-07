@@ -156,7 +156,7 @@ NSInteger const kLWEUninitializedCardId    = -1;
 	FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT c.*, h.meaning FROM cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = %d LIMIT 1",self.cardId]];
 	while ([rs next])
   {
-		[self hydrate:rs];
+		[self hydrate:rs simple:YES];
 	}
 	[rs close];
 }
@@ -175,16 +175,16 @@ NSInteger const kLWEUninitializedCardId    = -1;
 {
 	self.cardId      = [rs intForColumn:@"card_id"];
 	self.hw_reading  = [rs stringForColumn:@"reading"];
+  self._meaning  = [rs stringForColumn:@"meaning"];
+  
 	if (isSimple == NO)
 	{
 		self.headword_en = [rs stringForColumn:@"headword_en"];
-		self._meaning  = [rs stringForColumn:@"meaning"];
+    self.levelId  =    [rs intForColumn:@"card_level"];
+    self.userId   =    [rs intForColumn:@"user_id"];
+    self.rightCount =  [rs intForColumn:@"right_count"];
+    self.wrongCount =  [rs intForColumn:@"wrong_count"];
 	}
-		
-  self.levelId  =    [rs intForColumn:@"card_level"];
-  self.userId   =    [rs intForColumn:@"user_id"];
-  self.rightCount =  [rs intForColumn:@"right_count"];
-  self.wrongCount =  [rs intForColumn:@"wrong_count"];
   
   // Now that we have hydrated, note that this object is no longer a fault
   _isFault = NO;

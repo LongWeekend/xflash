@@ -59,7 +59,7 @@
 
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
   NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
-                   "content MATCH '%@*' LIMIT %d", keywordWildcard, 200];
+                   "content MATCH '\"%@*\"' LIMIT %d", keywordWildcard, 200];
   FMResultSet *rs = [db executeQuery:sql];
   cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:NO];
   return (NSArray*)cardList;
@@ -95,10 +95,11 @@
 + (NSString *) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
 {
   NSString *returnSql = nil;
-  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
+  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"%"];
   // Do the search using SQLite FTS (PTAG results)
-  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
-               "content MATCH '%@' AND ptag = %d LIMIT %d", keywordWildcard, usePTag, limit];
+  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards WHERE (headword_trad LIKE '%@' OR headword_simp LIKE '%@') LIMIT %d",keywordWildcard,keywordWildcard,keywordWildcard,limit];
+//  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
+//               "cards_search_content MATCH 'headword:%@' AND ptag = %d LIMIT %d", keywordWildcard, usePTag, limit];
   return returnSql;
 }
 
