@@ -37,6 +37,61 @@
 #pragma mark - Search APIs
 
 /**
+ * Returns YES if the keyword appears to be reading-like.  Note that this
+ * current implementation is specific to Chinese Flash (it would actually not
+ * work at all for JFlash).
+ */
++ (BOOL) keywordIsReading:(NSString *)keyword
+{
+  // If it has any string components longer than 5 chars, it's not pinyin.
+  NSArray *components = [keyword componentsSeparatedByString:@" "];
+  for (NSString *item in components)
+  {
+    if ([item length] > 5)
+    {
+      return NO;
+    }
+  }
+  
+  // OK, it has short bits.  So make sure there are no kanji/hanzi in there.
+  BOOL hasIdeograph = NO;
+  for (NSInteger charIndex = 0; charIndex < [keyword length]; charIndex++)
+  {
+    unichar testChar = [keyword characterAtIndex:charIndex];
+    //4E00 is the first code point for Unicode characters in the CJK kanji mix
+    if (testChar >= 0x4E00)
+    {
+      hasIdeograph = YES;
+    }
+  }
+  return (hasIdeograph == NO);
+}
+
+/**
+ *
+ */
++ (BOOL) keywordIsHeadword:(NSString *)keyword
+{
+  // Strip out numbers, symbols & whitespace
+  NSCharacterSet *stripChars = [NSCharacterSet characterSetWithCharactersInString:@"? "];
+  NSArray *components = [keyword componentsSeparatedByCharactersInSet:stripChars];
+  for (NSString *part in components)
+  {
+    for (NSInteger charIndex = 0; charIndex < [part length]; charIndex++)
+    {
+      unichar testChar = [part characterAtIndex:charIndex];
+      // 2E80 is the first code point for Unicode characters in the CJK mix (kana, etc), 9FFF the last
+      if (testChar < 0x2E80 || testChar > 0x9FFF)
+      {
+        return NO;
+      }
+    }
+  }
+  return YES;
+}
+
+
+/**
  * Returns an array of Card objects after searching keyword
  */
 + (NSArray*) searchCardsForKeyword:(NSString*)keyword doSlowSearch:(BOOL)slowSearch
@@ -97,9 +152,8 @@
   NSString *returnSql = nil;
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"%"];
   // Do the search using SQLite FTS (PTAG results)
-  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards WHERE (headword_trad LIKE '%@' OR headword_simp LIKE '%@') LIMIT %d",keywordWildcard,keywordWildcard,keywordWildcard,limit];
-//  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
-//               "cards_search_content MATCH 'headword:%@' AND ptag = %d LIMIT %d", keywordWildcard, usePTag, limit];
+  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
+               "cards_search_content MATCH '\"%@\"' AND ptag = %d ORDER BY LENGTH(cards_search_content) ASC LIMIT %d", keywordWildcard, usePTag, limit];
   return returnSql;
 }
 

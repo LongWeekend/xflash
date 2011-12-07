@@ -20,6 +20,8 @@
 + (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceID;
 
 //! Search methods
++ (BOOL) keywordIsReading:(NSString *)keyword;
++ (BOOL) keywordIsHeadword:(NSString *)keyword;
 + (NSArray*) fullTextSearchForKeyword:(NSString*)keyword;
 + (NSArray*) substringSearchForKeyword:(NSString*)keyword;
 + (NSArray*) searchCardsForKeyword:(NSString*) keyword doSlowSearch:(BOOL)slowSearch;
