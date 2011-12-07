@@ -41,7 +41,11 @@ extern NSString *const kAppiraterDeclinedToRate;
 /*
  Place your Apple generated software id here.
  */
+#if defined(LWE_JFLASH)
 #define APPIRATER_APP_ID 367216357
+#elif defined(LWE_CFLASH)
+#define APPIRATER_APP_ID 486531735
+#endif
 
 /*
  Your app's name.

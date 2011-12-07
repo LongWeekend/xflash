@@ -591,7 +591,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   [DSBezelActivityView removeView];  
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") 
-                                     message:NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
+                                     message:NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] ,@"BackupManager_DataRestoredBody")]; 
   
   [[self activityIndicator] stopAnimating];
 }
@@ -623,7 +623,7 @@ NSInteger const kLWEBackupSection = 2;
 {
   [DSBezelActivityView removeView];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") 
-                                     message:NSLocalizedString(@"Your data has been restored successfully. Enjoy Japanese Flash!", @"BackupManager_DataRestoredBody")]; 
+                                     message:NSLocalizedString(@"Your data has been restored successfully. Enjoy %@!", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"], @"BackupManager_DataRestoredBody")]; 
   [[self activityIndicator] stopAnimating];
   [self reloadTableData];
 }
