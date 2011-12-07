@@ -28,6 +28,8 @@
 #define SEARCH_VIEW_CONTROLLER_TAB_INDEX    2
 #define SETTINGS_VIEW_CONTROLLER_TAB_INDEX  3
 
+#define BUNDLE_APP_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey]
+
 // default background image for UITableViews
 extern NSString * const LWETableBackgroundImage;
 
