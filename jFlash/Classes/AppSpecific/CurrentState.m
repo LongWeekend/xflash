@@ -110,9 +110,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
 {
-  // TODO: MMA Make this work!
-  [LWEUIAlertView notificationAlertWithTitle:@"Plugin Error" message:error.localizedDescription];
-  //  LWE_LOG(@"%@",error);
+  // Don't alert the user if they cancelled/it timed out due to backgrounding
+  if (error.code != ASIRequestTimedOutErrorType && error.code != ASIRequestCancelledErrorType)
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Problem Installing Update",@"PluginError.AlertMsgTitle") message:error.localizedDescription];
+  }
+
   if (self.modalTaskViewController.parentViewController)
   {
     [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
