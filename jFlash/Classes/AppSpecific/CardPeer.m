@@ -4,7 +4,7 @@
 #import "ExampleSentencePeer.h"
 
 @interface CardPeer ()
-+ (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit;
++ (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit;
 + (Card*) _retrieveCardWithSQL:(NSString*)sql;
 + (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate;
 @end
@@ -128,14 +128,23 @@
   NSInteger queryLimit = 100;
   
   // Do not hydrate these cards, we will flywheel it on the table view.
-  NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
-
-  // Fill with non-ptag entries if we have space leftover
-  if ([cardList count] < queryLimit)
+  NSString *column = nil;
+  if ([[self class] keywordIsHeadword:keyword])
   {
-    NSInteger remainingCards = (queryLimit - [cardList count]);
-    sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
+    column = @"headword";
+  }
+  else if ([[self class] keywordIsReading:keyword])
+  {
+    column = @"reading";
+  }
+  NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:column queryLimit:queryLimit];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
+  
+  // Now, did we get enough cards (if it was a no-column search, don't re-run)
+  if (column != nil && [cardList count] < queryLimit)
+  {
+    NSInteger newLimit = queryLimit - [cardList count];
+    NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:nil queryLimit:newLimit];
     cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
   }
   
@@ -147,13 +156,29 @@
 /**
  * This will return a SQL query that will return card ids from the FTS table based on the settings passed
  */
-+ (NSString *) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
++ (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit
 {
+  // Users understand "?" better than "*".  Well, maybe not geeks.
+  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
+  NSString *column = nil;
   NSString *returnSql = nil;
-  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"%"];
+  NSString *searchString = nil;
+
+  if (columnName)
+  {
+    // If we are searching a specific column, and not the whole table, wrap it in quotes for exact match.
+    searchString = [NSString stringWithFormat:@"\"%@\"",keywordWildcard];
+    column = columnName;
+  }
+  else
+  {
+    searchString = keywordWildcard;
+    column = @"cards_search_content";
+  }
+  
   // Do the search using SQLite FTS (PTAG results)
   returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
-               "cards_search_content MATCH '\"%@\"' AND ptag = %d ORDER BY LENGTH(cards_search_content) ASC LIMIT %d", keywordWildcard, usePTag, limit];
+               "%@ MATCH '%@' ORDER BY LENGTH(%@) ASC, ptag DESC LIMIT %d", column, searchString, column, limit];
   return returnSql;
 }
 
@@ -175,9 +200,9 @@
 }
 
 /**
- * Looping helper - used by search
+ * Looping helper.  Populates an array of cards, either lightweight or full.
  */
-+ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate
++ (NSMutableArray *) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate
 {
   while ([rs next])
   {
@@ -202,7 +227,7 @@
 /**
  * Takes a cardId and returns a hydrated Card from the database
  */
-+ (Card*) retrieveCardByPK:(NSInteger)cardId
++ (Card *) retrieveCardByPK:(NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
@@ -245,18 +270,11 @@
 /**
  * Returns an array containing cardId integers contained in by the Tag tagId
  */
-+ (NSArray*) retrieveFaultedCardsForTag:(Tag *)tag
++ (NSArray *) retrieveFaultedCardsForTag:(Tag *)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tag.tagId];
-  NSMutableArray *ids = [NSMutableArray array];
-  FMResultSet *rs = [db executeQuery:sql];
-  while ([rs next])
-  {
-    [ids addObject:[[self class] blankCardWithId:[rs intForColumn:@"card_id"]]];
-  }
-  [rs close];
-  return (NSArray*)ids;
+  return (NSArray *)[self _addCardsToList:[NSMutableArray array] fromResultSet:[db executeQuery:sql] hydrate:NO];
 }
 
 /**

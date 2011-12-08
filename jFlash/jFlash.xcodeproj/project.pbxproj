@@ -76,6 +76,7 @@
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
+		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		49278C4D1445FCB5005426A3 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */; };
 		49278C4E1445FCB5005426A3 /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */; };
 		49278C4F14460195005426A3 /* OHAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49278C4C1445FCB5005426A3 /* OHAttributedLabel.m */; };
@@ -951,6 +952,8 @@
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
+		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
+		4926EA01148FADDE00F55D09 /* CardPeerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardPeerTest.m; path = Tests/cFlashTests/CardPeerTest.m; sourceTree = SOURCE_ROOT; };
 		49278C491445FCB5005426A3 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+Attributes.h"; path = "External/OHAttributedLabel/NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
 		49278C4A1445FCB5005426A3 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+Attributes.m"; path = "External/OHAttributedLabel/NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 		49278C4B1445FCB5005426A3 /* OHAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OHAttributedLabel.h; path = External/OHAttributedLabel/OHAttributedLabel.h; sourceTree = "<group>"; };
@@ -1707,6 +1710,8 @@
 			children = (
 				49E3D1811472804400F79308 /* CFlashSearchTest.h */,
 				49E3D1821472804400F79308 /* CFlashSearchTest.m */,
+				4926EA00148FADDE00F55D09 /* CardPeerTest.h */,
+				4926EA01148FADDE00F55D09 /* CardPeerTest.m */,
 			);
 			name = CFlash;
 			sourceTree = "<group>";
@@ -3530,6 +3535,7 @@
 				498EBDB01488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910157148992EC003E9A19 /* TagTest.m in Sources */,
+				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
