@@ -94,34 +94,7 @@
 /**
  * Returns an array of Card objects after searching keyword
  */
-+ (NSArray*) searchCardsForKeyword:(NSString*)keyword doSlowSearch:(BOOL)slowSearch
-{
-  if (slowSearch)
-  {
-    return [CardPeer substringSearchForKeyword:keyword];
-  }
-  else
-  {
-    return [CardPeer fullTextSearchForKeyword:keyword];
-  }
-}
-
-// Do slow substring match (w/ ASTERISK)
-+ (NSArray*) substringSearchForKeyword:(NSString*)keyword
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSMutableArray *cardList = [NSMutableArray array];
-
-  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
-  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
-                   "content MATCH '\"%@*\"' LIMIT %d", keywordWildcard, 200];
-  FMResultSet *rs = [db executeQuery:sql];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:NO];
-  return (NSArray*)cardList;
-}
-
-//! Runs a search against the full text index returning 100 records
-+ (NSArray*) fullTextSearchForKeyword:(NSString*)keyword
++ (NSArray*) searchCardsForKeyword:(NSString*)keyword
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardList = [NSMutableArray array];
