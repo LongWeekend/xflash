@@ -23,7 +23,7 @@
 @end
 
 @implementation SettingsViewController
-@synthesize sectionArray, dataSource, delegate, tableView;
+@synthesize sectionArray, dataSource, delegate;
 @synthesize changedSettings;
 
 NSString * const APP_ABOUT = @"about";
@@ -67,7 +67,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArray];
-  self.tableView = (UITableView*)self.view;
 
   // Add an observer on the plugin manager so we can update the available for download badge
   PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
@@ -466,7 +465,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 - (void)dealloc
 {
   [changedSettings release];
-  [tableView release];
   [dataSource release];
   [sectionArray release];
   [super dealloc];
