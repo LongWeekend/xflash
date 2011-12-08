@@ -26,15 +26,15 @@
 typedef enum searchStates
 {
   kSearchNoSearch,              //! Default state when not searching
+  kSearchSearching,             //! When a search is active but nothing is happening yet
   kSearchHasResults,            //! Any search returned results 
   kSearchHasNoResults,          //! Regular search returned nothing
-  kSearchDeepHasNoResults,      //! Deep search returned nothing
 } LWEFlashSearchStates;
 
 /**
  * Handles dictionary-like search functions inside JFlash
  */
-@interface SearchViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate>
+@interface SearchViewController : UITableViewController <UISearchBarDelegate>
 {
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
   LWEFlashSearchStates _searchState;              //! Holds the "state" of the search
@@ -45,16 +45,15 @@ typedef enum searchStates
 - (IBAction) changeSearchTarget:(id)sender;
 - (void) runSearchAndSetSearchBarForString:(NSString*)text;
 - (void) runSearchForString:(NSString*)text;
+- (void) receivedSearchResults:(NSArray *)results;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
 
 //! Contains the returned search results (array of ExampleSentence objects)
-@property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
 
 // UIView-related properties
-@property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *_activityIndicator;
+@property (nonatomic, retain) IBOutlet UITableViewCell *searchingCell;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

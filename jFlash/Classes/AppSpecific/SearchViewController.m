@@ -17,6 +17,8 @@ const NSInteger KSegmentedTableHeader = 100;
 // Private method declarations
 @interface SearchViewController ()
 @property (retain) NSMutableArray *observerArray;
+@property (nonatomic, retain) NSArray *_sentenceSearchArray;
+@property (nonatomic, retain) UISegmentedControl *_wordsOrSentencesSegment;
 - (BOOL) _checkMembershipCacheForCard:(Card*)card;
 - (void) _toggleMembership:(id)sender event:(id)event;
 - (void) _addSearchControlToHeader;
@@ -32,8 +34,9 @@ const NSInteger KSegmentedTableHeader = 100;
 
 @implementation SearchViewController
 @synthesize observerArray;
-@synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray, _activityIndicator;
-@synthesize tableView, searchTerm;
+@synthesize activityIndicator, searchingCell;
+@synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray;
+@synthesize searchTerm;
 
 @synthesize membershipCacheArray;
 
@@ -81,6 +84,8 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   [super viewDidLoad];
 
+  [[NSBundle mainBundle] loadNibNamed:@"SearchingTableCell" owner:self options:nil];
+  
   // Programmatically make UISearchBar
   // TODO: iPad customization!
 #if defined(LWE_CFLASH)
@@ -111,18 +116,14 @@ const NSInteger KSegmentedTableHeader = 100;
 
   // Register for notification when tag content changes (might be starred words.. in which case we want to know)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
-  
-  // Make the spinner
-  UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-  [self set_activityIndicator:activityIndicator];
-  [activityIndicator release];
 }
 
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  self.tableView = nil;
   self.searchBar = nil;
+  self.searchingCell = nil;
+  self.activityIndicator = nil;
   
   // Stop observing for tag content changes
   [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -313,40 +314,64 @@ const NSInteger KSegmentedTableHeader = 100;
   [self runSearchForString:text];
 }
 
-/** Execute actual search with \param text. Designed to be called in background thread */
+/** Execute actual search with \param text */
 - (void) runSearchForString:(NSString*) text
 {
-  // Do we want a slow search?
-  BOOL runSlowSearch = NO;
-  if (_searchState == kSearchHasNoResults)
-  {
-    runSlowSearch = YES;
-  }
+  _searchState = kSearchSearching;
+
+  // Show the searching cell
+  [self.tableView reloadData];
+  [self.activityIndicator startAnimating];
   
-  NSArray *tmpResults = nil;
+  dispatch_queue_t queue = dispatch_queue_create("com.longweekendmobile.databasecopy",NULL);
+  dispatch_queue_t main = dispatch_get_main_queue();
+  dispatch_async(queue,^
+                 {
+                   NSArray *tmpResults = [CardPeer searchCardsForKeyword:text];
+                   dispatch_async(main,^{ [self receivedSearchResults:tmpResults]; });
+                 });
+}
+
+- (void) receivedSearchResults:(NSArray *)results
+{
+  // No need to spin anymore!
+  [self.activityIndicator stopAnimating];
+  
   if (_searchTarget == SEARCH_TARGET_WORDS)
   {
-    tmpResults = [CardPeer searchCardsForKeyword:text doSlowSearch:runSlowSearch];
-    self.cardResultsArray = tmpResults;
-    _currentResultArray = self.cardResultsArray;
+    self.cardResultsArray = _currentResultArray = results;
   }
   else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
   {
-    tmpResults = [ExampleSentencePeer searchSentencesForKeyword:text doSlowSearch:runSlowSearch];
-    [self set_sentenceSearchArray:tmpResults];
-    _currentResultArray = [self _sentenceSearchArray];
+    self._sentenceSearchArray = _currentResultArray = results;
   }
   
   // Change state based on results (move us through state diagram --> has results -> no results -> no deep results)
-  if ([tmpResults count] > 0)
+  if ([results count] > 0)
+  {
     _searchState = kSearchHasResults;
-  else if (_searchState == kSearchHasNoResults)
-    _searchState = kSearchDeepHasNoResults;
-  else
-    _searchState = kSearchHasNoResults;
+    [self.tableView beginUpdates];
 
-  [self._activityIndicator stopAnimating];
-  [self.tableView reloadData];
+    // Get rid of the "searching" row, we don't need it anymore
+    NSIndexPath *searchingPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:searchingPath] withRowAnimation:UITableViewRowAnimationTop];
+
+    // Populate the new table cells
+    NSMutableArray *newResultPaths = [NSMutableArray arrayWithCapacity:[results count]];
+    for (NSInteger i = 0; i < [results count]; i++)
+    {
+      [newResultPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    [self.tableView insertRowsAtIndexPaths:newResultPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+  }
+  else
+  {
+    // TODO: add bit about wether it is still searching or not.
+    _searchState = kSearchHasNoResults;
+    [self.tableView reloadData];
+  }
+
   
   // reset the user to the top of the tableview for new searches
   self.tableView.contentOffset = CGPointMake(0, 0);
@@ -362,7 +387,7 @@ const NSInteger KSegmentedTableHeader = 100;
 /** Returns 1 row ("no results") if there are no search results, otherwise returns number of results **/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if (_searchState == kSearchHasNoResults || _searchState == kSearchDeepHasNoResults)
+  if (_searchState == kSearchHasNoResults || _searchState == kSearchSearching)
   {
     return 1;
   }
@@ -412,20 +437,13 @@ const NSInteger KSegmentedTableHeader = 100;
       }
       break;
       
-      // Regular search had no results
-    case kSearchHasNoResults:
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-      cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
-      cell.detailTextLabel.text = NSLocalizedString(@"Tap here to do a DEEP search.",@"SearchViewController.DoDeepSearch");
-      cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
-      cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-      cell.selectionStyle = UITableViewCellSelectionStyleGray;
-      cell.accessoryView = [self _activityIndicator];
+    case kSearchSearching:
+      cell = self.searchingCell;
       break;
       
-      // Ran deep search, still nothing
-    case kSearchDeepHasNoResults:
-      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults-DEEP" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
+      // Regular search had no results
+    case kSearchHasNoResults:
+      cell = [LWEUITableUtils reuseCellForIdentifier:@"NoResults" onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = NSLocalizedString(@"No Results Found",@"SearchViewController.NoResults");
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
       cell.accessoryType = UITableViewCellAccessoryNone;
@@ -445,9 +463,13 @@ const NSInteger KSegmentedTableHeader = 100;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
   if (_showSearchTargetControl)
+  {
     return 75.0f;
+  }
   else
+  {
     return 0.0f;
+  }
 }
 
 /**
@@ -459,12 +481,12 @@ const NSInteger KSegmentedTableHeader = 100;
  */
 - (void)tableView:(UITableView *)lclTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  // Deselect the row
+  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
+
   if (_searchState == kSearchHasNoResults)
   {
-    // Do deep search
-    [[self _activityIndicator] startAnimating];
-    // Run selector after delay to allow UIVIew to update on run loop
-    [self performSelector:@selector(runSearchForString:) withObject:self.searchBar.text afterDelay:0];
+    // So what if they tap the "no results" cell.
     return;
   }
   else if (_searchState == kSearchHasResults)
@@ -479,14 +501,12 @@ const NSInteger KSegmentedTableHeader = 100;
     else if (_searchTarget == SEARCH_TARGET_EXAMPLE_SENTENCES)
     {
       // We're not using this yet and it just adds weight to the code MMA 1/19/2011
-/*      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[[self _sentenceSearchArray] objectAtIndex:indexPath.row]];
-      [[self navigationController] pushViewController:tmpVC animated:YES];
-      [tmpVC release];
- */
+      /*      DisplaySearchedSentenceViewController *tmpVC = [[DisplaySearchedSentenceViewController alloc] initWithSentence:[[self _sentenceSearchArray] objectAtIndex:indexPath.row]];
+       [[self navigationController] pushViewController:tmpVC animated:YES];
+       [tmpVC release];
+       */
     }
   }
-  
-  [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark - Private methods
@@ -704,7 +724,8 @@ const NSInteger KSegmentedTableHeader = 100;
   [searchTerm release];
   [searchBar release];
   [cardResultsArray release];
-  [_activityIndicator release];
+  [activityIndicator release];
+  [searchingCell release];
   [_wordsOrSentencesSegment release];
   [super dealloc];
 }
