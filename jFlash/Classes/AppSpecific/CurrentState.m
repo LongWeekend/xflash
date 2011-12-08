@@ -108,6 +108,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   self.modalTaskViewController = nil;
 }
 
+- (void) unpackageCancelled:(LWEPackage *)package
+{
+  self.modalTaskViewController = nil;
+}
+
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
 {
   // Don't alert the user if they cancelled/it timed out due to backgrounding
