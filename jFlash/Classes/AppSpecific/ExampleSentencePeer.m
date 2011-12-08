@@ -126,9 +126,9 @@
 /**
  * Returns an array of Sentence objects after searching keyword - for search
  */
-+ (NSArray*) searchSentencesForKeyword: (NSString*)keyword doSlowSearch:(BOOL)slowSearch
++ (NSArray*) searchSentencesForKeyword: (NSString*)keyword
 {
-  NSArray *cardList = [CardPeer searchCardsForKeyword:keyword doSlowSearch:slowSearch];
+  NSArray *cardList = [CardPeer searchCardsForKeyword:keyword];
   
   // Do a clever IN SQL statement!  Aha!
   NSString *inStatement = nil;
