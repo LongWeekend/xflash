@@ -31,6 +31,7 @@
 
 @implementation StudyViewController
 @synthesize delegate;
+@synthesize pluginManager;
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
@@ -437,7 +438,7 @@
   else
   {
     // Assume we haven't installed the plugin yet
-    Plugin *pinyinPlugin = [CurrentState availablePluginForKey:AUDIO_PINYIN_KEY];
+    Plugin *pinyinPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:pinyinPlugin userInfo:nil];
   }
 }
@@ -471,7 +472,7 @@
 {
   // Default value is YES because if no plugin, we want to show the installer
   BOOL returnVal = YES;
-  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
+  if ([self.pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
     returnVal = [card hasExampleSentences];
   }
@@ -486,7 +487,7 @@
 {
 #if defined (LWE_CFLASH)
   BOOL returnVal = YES;
-  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [CurrentState pluginKeyIsLoaded:AUDIO_HSK_KEY])
+  if ([self.pluginManager pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [self.pluginManager pluginKeyIsLoaded:AUDIO_HSK_KEY])
   {
     returnVal = [card hasAudio];
   }
@@ -641,8 +642,7 @@
  */
 - (IBAction) launchExampleInstaller
 {
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:EXAMPLE_DB_KEY];
+  Plugin *exPlugin = [self.pluginManager.downloadablePlugins objectForKey:EXAMPLE_DB_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
@@ -653,8 +653,7 @@
  */
 - (IBAction) launchAudioInstaller
 {
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
+  Plugin *exPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
@@ -696,10 +695,11 @@
 - (void) _setupScrollView
 {
   UIViewController *vc = nil;
-  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
+  Plugin *exPlugin = [self.pluginManager pluginForKey:EXAMPLE_DB_KEY];
+  if (exPlugin)
   {
     // We have EX db installed
-    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
+    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] initWithExamplesPlugin:exPlugin] autorelease];
     vc = self.exampleSentencesViewController;
   }
   else
@@ -837,6 +837,8 @@
   [currentCardSet removeObserver:self forKeyPath:@"tagName"];
   [currentCardSet release];
   [currentCard release];
+  
+  [pluginManager release];
   
   //scrollView
   [scrollView release];

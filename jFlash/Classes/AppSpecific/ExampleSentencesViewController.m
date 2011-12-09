@@ -11,17 +11,34 @@
 // Hack that I need this
 #import "CardViewController.h"
 
+#import "ExampleSentencePeer.h"
+#import "UIWebView+LWENoBounces.h"
+#import "NSURL+LWEUtilities.h"
+#import "AddTagViewController.h"
+#import "jFlashAppDelegate.h"
+
+#define kJFlashServer	@"http://jflash.com"
+#define SHOW_BUTTON_TITLE @"Read"
+#define CLOSE_BUTTON_TITLE @"Close"
+#define ADD_BUTTON_TITLE @"Add"
+
 @implementation ExampleSentencesViewController
 @synthesize sentencesWebView;
 @synthesize sampleDecomposition;
 
 #pragma mark - UIView subclass methods
 
-- (id)init
+- (id)initWithExamplesPlugin:(Plugin *)plugin
 {
 	if ((self = [super init]))
 	{
+    LWE_ASSERT_EXC([plugin.pluginId isEqualToString:EXAMPLE_DB_KEY], @"This class only knows how to deal with EXAMPLE_DB_KEY plugin");
 		self.sampleDecomposition = [NSMutableDictionary dictionary];
+    
+    // What version of the example sentence plugin are we using?  If 1.1, it's old.
+#if defined (LWE_JFLASH)
+    _useOldPluginMethods = [plugin.version isEqualToString:@"1.1"];
+#endif
 	}
 	return self;
 }
@@ -33,11 +50,6 @@
 
   self.sentencesWebView.backgroundColor = [UIColor clearColor];
   [self.sentencesWebView shutOffBouncing];
-  
-  // What version of the example sentence plugin are we using?  If 1.1, it's old.
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  NSString *version = [pm versionForLoadedPlugin:EXAMPLE_DB_KEY];
-  _useOldPluginMethods = [version isEqualToString:@"1.1"];
 
   // I want to know if someone updated their example sentence version
   if (_useOldPluginMethods)

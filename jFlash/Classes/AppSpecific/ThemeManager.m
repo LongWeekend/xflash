@@ -6,6 +6,7 @@
 //
 
 #import "ThemeManager.h"
+#import "SynthesizeSingleton.h"
 
 // Theme configuration names
 NSString * const SET_THEME_FIRE      = @"FIRE";
@@ -83,15 +84,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
   return self;  
 }
 
-
-//! Device type returns "IPAD" if iPad, "IPHONE 4" if iPhone 4, and "IPHONE" otherwise
-- (NSString*) _deviceType
-{
-  //TODO - actually build this function
-  // TODO: iPad customization!
-  return @"IPHONE";
-}
-
 //! Returns the current theme - private method
 - (NSDictionary*) _currentTheme
 {
@@ -134,7 +126,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (NSString*) currentThemeName
 {
-  NSDictionary* tm = [self _currentTheme];
+  NSDictionary *tm = [self _currentTheme];
   return [tm objectForKey:@"name"];
 }
 
@@ -144,7 +136,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (NSString*) currentThemeFileName
 {
-  NSDictionary* tm = [self _currentTheme];
+  NSDictionary *tm = [self _currentTheme];
   return [tm objectForKey:@"filename"];
 }
 
@@ -154,7 +146,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
  */
 - (NSString*) currentThemeCSS
 {
-  NSDictionary* tm = [self _currentTheme];
+  NSDictionary *tm = [self _currentTheme];
   return [tm objectForKey:@"CSS"];
 }
 

@@ -15,6 +15,7 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 - (void)_initDownloadablePluginsDict;
 - (void) _registerPlugin:(Plugin *)plugin;
 - (BOOL) _loadDatabasePlugin:(Plugin *)plugin error:(NSError **)error;
+- (void) _retrievePlistFromServer;
 @end
 
 @implementation PluginManager
@@ -317,6 +318,49 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   self.downloadablePlugins = (NSDictionary *)tmpDownloadableDict;
 }
 
+#pragma mark - Check for New Plugins
+
+/**
+ * Tells whether update check is necessary
+ * \return YES if settings' PLUGIN_LAST_UPDATE is more than LWE_PLUGIN_UPDATE_PERIOD days ago
+ */
+- (BOOL) isTimeForCheckingUpdate
+{
+	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+	NSDate *date = [settings objectForKey:PLUGIN_LAST_UPDATE];
+	date = [date addDays:LWE_PLUGIN_UPDATE_PERIOD];
+	NSDate *now = [NSDate date];
+	
+	//date is earlier than now, means it is for update
+	return ([date compare:now] == NSOrderedAscending);
+}
+
+/**
+ * Check the new plugin over the website, and looks whether it has a new stuff
+ * \param asynch If YES, the URL retrieve will happen on a background thread (the processing afterward will remain on the main thread)
+ * \param notifyOnNetworkFail If YES, and network is not available, will prompt a LWEUIAlertView noNetwork alert
+ */
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail
+{	
+  // Check if they have network first, if so, start the background thread
+	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER])
+	{
+    if (asynch)
+    {
+      [self performSelectorInBackground:@selector(_retrievePlistFromServer) withObject:nil];
+    }
+    else
+    {
+      [self _retrievePlistFromServer];
+    }
+  }
+  else if (notifyOnNetworkFail)
+  {
+    [LWEUIAlertView noNetworkAlert];
+  }
+}
+
+
 #pragma mark - Private methods
 
 /**
@@ -338,6 +382,29 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   [tmpDict setObject:[NSKeyedArchiver archivedDataWithRootObject:plugin] forKey:plugin.pluginId];
   [settings setValue:tmpDict forKey:APP_PLUGIN];
   [settings synchronize];
+}
+
+
+/**
+ * Intended to be run in the background so we don't lock the main thread
+ */
+- (void)_retrievePlistFromServer
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSString *urlStr = [LWE_PLUGIN_SERVER stringByAppendingString:LWE_PLUGIN_LIST_REL_URL];
+  NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
+  if (plist)
+  {
+    // Ask the plugin manager to deal with it. Wait until done because it needs the plist var to stay around
+    [self performSelectorOnMainThread:@selector(processPlistHash:) withObject:plist waitUntilDone:YES];
+  }
+  [plist release];
+  
+  // Now update the settings so we record that we checked
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings setValue:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
+  
+  [pool release];
 }
 
 #pragma mark - Memory Management

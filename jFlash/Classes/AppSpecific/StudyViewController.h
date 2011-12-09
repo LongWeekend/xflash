@@ -10,6 +10,8 @@
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 
+#import "PluginManager.h"
+
 #import "StudyViewProtocols.h"
 #import "PracticeModeCardViewDelegate.h"
 #import "BrowseModeCardViewDelegate.h"
@@ -87,6 +89,9 @@
 @property (nonatomic, retain) IBOutlet UIView *progressModalBtn;
 
 @property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
+
+// Plugin related
+@property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
 
 
 // scroll view
