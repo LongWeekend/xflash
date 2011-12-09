@@ -20,7 +20,9 @@
 
 - (BOOL) pluginIsDownloading;
 
-@property (retain, nonatomic) UIViewController *baseViewController;
+@property (retain, nonatomic) IBOutlet UIViewController *baseViewController;
+
+//! Todo: make this readonly MMA
 @property (retain, nonatomic) UIViewController *modalTaskViewController;
 
 @property (retain) NSTimer *tabIconTimer;

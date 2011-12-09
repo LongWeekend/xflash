@@ -42,10 +42,10 @@
 			<object class="IBUICustomObject" id="664661524">
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUICustomObject" id="16368604">
+			<object class="IBUICustomObject" id="212279162">
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUICustomObject" id="377131118">
+			<object class="IBUICustomObject" id="705602736">
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIWindow" id="380026005">
@@ -109,6 +109,7 @@
 							<string key="NSResourceName">13-target.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUITabBar" ref="757348779"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="963262134"/>
 					<string key="IBUINibName">StudyView</string>
@@ -129,6 +130,7 @@
 								<string key="NSResourceName">15-tags.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="757348779"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="963262134"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -170,6 +172,7 @@
 					<object class="IBUINavigationController" id="717682172">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="732995814">
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="757348779"/>
 							<int key="IBUISystemItemIdentifier">8</int>
 						</object>
 						<reference key="IBUIParentViewController" ref="963262134"/>
@@ -215,6 +218,7 @@
 								<string key="NSResourceName">20-gear2.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="757348779"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="963262134"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -260,6 +264,7 @@
 								<string key="NSResourceName">90-lifebuoy.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="757348779"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="963262134"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -302,6 +307,7 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView"/>
 					<string key="NSReuseIdentifierKey">_NS:473</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
@@ -309,6 +315,14 @@
 						<bytes key="NSWhite">MCAwAA</bytes>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<array class="NSMutableArray" key="IBUIItems">
+						<reference ref="271751500"/>
+						<reference ref="953247542"/>
+						<reference ref="732995814"/>
+						<reference ref="1009053078"/>
+						<reference ref="714116462"/>
+					</array>
+					<reference key="IBUISelectedItem" ref="271751500"/>
 				</object>
 			</object>
 		</array>
@@ -350,7 +364,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pluginManager</string>
 						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="16368604"/>
+						<reference key="destination" ref="212279162"/>
 					</object>
 					<int key="connectionID">214</int>
 				</object>
@@ -358,7 +372,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">downloadManager</string>
 						<reference key="source" ref="664661524"/>
-						<reference key="destination" ref="377131118"/>
+						<reference key="destination" ref="705602736"/>
 					</object>
 					<int key="connectionID">215</int>
 				</object>
@@ -366,7 +380,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pluginManager</string>
 						<reference key="source" ref="200974083"/>
-						<reference key="destination" ref="16368604"/>
+						<reference key="destination" ref="212279162"/>
 					</object>
 					<int key="connectionID">218</int>
 				</object>
@@ -374,7 +388,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pluginManager</string>
 						<reference key="source" ref="1021349331"/>
-						<reference key="destination" ref="16368604"/>
+						<reference key="destination" ref="212279162"/>
 					</object>
 					<int key="connectionID">217</int>
 				</object>
@@ -382,9 +396,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pluginManager</string>
 						<reference key="source" ref="1007766751"/>
-						<reference key="destination" ref="16368604"/>
+						<reference key="destination" ref="212279162"/>
 					</object>
 					<int key="connectionID">213</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">baseViewController</string>
+						<reference key="source" ref="705602736"/>
+						<reference key="destination" ref="963262134"/>
+					</object>
+					<int key="connectionID">219</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -595,12 +617,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">211</int>
-						<reference key="object" ref="16368604"/>
+						<reference key="object" ref="212279162"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">212</int>
-						<reference key="object" ref="377131118"/>
+						<reference key="object" ref="705602736"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -653,13 +675,24 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">218</int>
+			<int key="maxID">219</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">DownloadManager</string>
 					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">baseViewController</string>
+						<string key="NS.object.0">UIViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">baseViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">baseViewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/DownloadManager.h</string>
