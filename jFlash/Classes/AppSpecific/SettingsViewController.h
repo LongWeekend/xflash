@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DownloadManager.h"
+#import "PluginManager.h"
 
 extern NSString * const APP_ABOUT;
 extern NSString * const APP_TWITTER;
@@ -17,7 +19,7 @@ extern NSString * const LWEUserSettingsChanged;
 
 @protocol LWESettingsDataSource <NSObject>
 @required
-- (NSArray*) settingsArray;
+- (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager;
 - (NSDictionary*) settingsHash;
 - (CGFloat) sizeForAcknowledgementsRow;
 @end
@@ -39,4 +41,7 @@ extern NSString * const LWEUserSettingsChanged;
 @property (retain) id<LWESettingsDataSource> dataSource;
 @property (assign) id<LWESettingsDelegate> delegate;
 @property (retain, nonatomic) NSArray *sectionArray;
+
+@property (retain) DownloadManager *downloadManager;
+@property (retain) PluginManager *pluginManager;
 @end

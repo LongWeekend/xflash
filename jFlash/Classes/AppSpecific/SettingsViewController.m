@@ -25,6 +25,7 @@
 @implementation SettingsViewController
 @synthesize sectionArray, dataSource, delegate;
 @synthesize changedSettings;
+@synthesize downloadManager, pluginManager;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
@@ -66,18 +67,16 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  self.sectionArray = [self.dataSource settingsArray];
+  self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
 
   // Add an observer on the plugin manager so we can update the available for download badge
-  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
-  [pluginMgr addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
+  [self.pluginManager addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
-  [pluginMgr removeObserver:self forKeyPath:@"downloadablePlugins"];
+  [self.pluginManager removeObserver:self forKeyPath:@"downloadablePlugins"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,7 +93,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   //Added this in, so that it refreshes it self when the user is going to this Settings view,
   // after the user changes something that is connected with the appearance of this VC
   // (e.g. after they change users, et al)
-  self.sectionArray = [self.dataSource settingsArray];
+  self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
 	
   self.tableView.backgroundColor = [UIColor clearColor];
   [self.tableView reloadData];
@@ -143,8 +142,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (void) updateBadgeValue
 {
-  PluginManager *pluginMgr = [[CurrentState sharedCurrentState] pluginMgr];
-  NSInteger pluginCount = [pluginMgr.downloadablePlugins count];
+  NSInteger pluginCount = [self.pluginManager.downloadablePlugins count];
   if (pluginCount > 0)
   {
     self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",pluginCount];
@@ -167,7 +165,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     [self updateBadgeValue];
     
     // Second, reload the table -- chances are something changed that on the plugin row
-    self.sectionArray = [self.dataSource settingsArray];
+    self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
     [self.tableView reloadData];
   }
 }
@@ -253,7 +251,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     cell = [LWEUITableUtils reuseCellForIdentifier:APP_PLUGIN onTable:lclTableView usingStyle:UITableViewCellStyleValue1];
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSInteger numInstalled = [[[[CurrentState sharedCurrentState] pluginMgr] loadedPlugins] count];
+    NSInteger numInstalled = [self.pluginManager.loadedPlugins count];
     if (numInstalled > 0)
     {
       cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d installed",@"SettingsViewController.Plugins_NumInstalled"),numInstalled];
@@ -464,6 +462,8 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (void)dealloc
 {
+  [downloadManager release];
+  [pluginManager release];
   [changedSettings release];
   [dataSource release];
   [sectionArray release];
