@@ -350,7 +350,8 @@ const NSInteger KSegmentedTableHeader = 100;
   if ([results count] > 0)
   {
     _searchState = kSearchHasResults;
-    [self.tableView beginUpdates];
+    [self.tableView reloadData];
+/*    //    [self.tableView beginUpdates];
 
     // Get rid of the "searching" row, we don't need it anymore
     NSIndexPath *searchingPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -362,8 +363,8 @@ const NSInteger KSegmentedTableHeader = 100;
     {
       [newResultPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
-    [self.tableView insertRowsAtIndexPaths:newResultPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+    [self.tableView insertRowsAtIndexPaths:newResultPaths withRowAnimation:UITableViewRowAnimationNone];
+    //    [self.tableView endUpdates];*/
   }
   else
   {
