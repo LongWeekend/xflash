@@ -37,6 +37,7 @@
 @synthesize observerArray;
 @synthesize window, tabBarController, splashView;
 @synthesize isFinishedLoading;
+@synthesize downloadManager, pluginManager;
 
 #pragma mark - URL Handling
 
@@ -117,6 +118,18 @@
   CurrentState *state = [CurrentState sharedCurrentState];
   [state initializeSettings];
   
+  // We initialize the plugins manager
+	if ([self.pluginManager isTimeForCheckingUpdate])
+	{
+		/**
+		 * This only runs when the program is launched. 
+		 * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
+		 * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
+		 * number, and all of the data if it has finished.
+		 */
+    [self.pluginManager checkNewPluginsAsynchronous:YES notifyOnNetworkFail:NO];
+	}
+  
   // Initialize audio session manager - start with audio session "playback" first
   AudioSessionManager *audioManager = [AudioSessionManager sharedAudioSessionManager];
   [audioManager setSessionCategory:AVAudioSessionCategoryPlayback];
@@ -168,19 +181,18 @@
   NSString *filename = LWE_CURRENT_USER_DATABASE;
   BOOL openedDB = [db openDatabase:[LWEFile createDocumentPathWithFilename:filename]];
   LWE_ASSERT_EXC(openedDB, @"Unable to open DB: %@", filename);
-  CurrentState *state = [CurrentState sharedCurrentState];
-  if (state.isFirstLoad)
+  if ([CurrentState sharedCurrentState].isFirstLoad)
   {
     // "Install" the preinstalled bundle plugins (CARD-DB) now
     NSString *cardsDbFilePath = [[NSBundle mainBundle] pathForResource:LWE_PREINSTALLED_PLUGIN_PLIST ofType:nil];
     LWE_ASSERT_EXC(cardsDbFilePath, @"Cannot find preinstalled plugins file");
     NSDictionary *preinstalledPluginHash = [[NSDictionary dictionaryWithContentsOfFile:cardsDbFilePath] objectForKey:CARD_DB_KEY];
     Plugin *cardsDb = [Plugin pluginWithDictionary:preinstalledPluginHash];
-    [state.pluginMgr installPlugin:cardsDb error:NULL];
+    [self.pluginManager installPlugin:cardsDb error:NULL];
   }
   
   // Then load plugins
-  [state.pluginMgr loadInstalledPlugins];
+  [self.pluginManager loadInstalledPlugins];
 
   // Get rid of the splash view
   [self.splashView removeFromSuperview];
@@ -191,11 +203,6 @@
   [self.window addSubview:self.tabBarController.view];
   self.isFinishedLoading = YES;
   [Appirater appLaunched];
-  
-  // MMA: don't like it, it's sort of hacky.  Wanted to do it earlier but the plugin mgr isn't set up yet :(
-  UINavigationController *navVC = [[self.tabBarController viewControllers] objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
-  SettingsViewController *settingsVC = (SettingsViewController*)[navVC topViewController];
-  [settingsVC updateBadgeValue];
 }
 
 # pragma mark Convenience Methods
@@ -309,9 +316,9 @@
 - (void) showDownloaderModal:(NSNotification*)aNotification
 {
   // If the user tries to re-lauch while we are downloading, just re-launch that modal.
-  if ([CurrentState pluginIsDownloading])
+  if ([self.downloadManager pluginIsDownloading])
   {
-    [self _showModalWithViewController:[[CurrentState sharedCurrentState] modalTaskViewController] useNavController:YES];
+    [self _showModalWithViewController:self.downloadManager.modalTaskViewController useNavController:YES];
     return;
   }
   
@@ -325,7 +332,7 @@
   dlViewController.webViewContent = thePlugin.htmlString;
   
   // Get path information
-  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:[CurrentState sharedCurrentState]];
+  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:self.downloadManager];
   packageDownloader.progressDelegate = dlViewController;
   [packageDownloader queuePackage:[thePlugin downloadPackage]];
   dlViewController.taskHandler = packageDownloader;
@@ -333,7 +340,7 @@
   [packageDownloader release];
   
   // Hold on to this
-  [[CurrentState sharedCurrentState] setModalTaskViewController:dlViewController];
+  self.downloadManager.modalTaskViewController = dlViewController;
   [dlViewController release];
 }
 
@@ -421,6 +428,9 @@
   [observerArray release];
   [tabBarController release];
   [window release];
+  
+  [downloadManager release];
+  [pluginManager release];
   
   // Handle all singletons
   CurrentState *state = [CurrentState sharedCurrentState];

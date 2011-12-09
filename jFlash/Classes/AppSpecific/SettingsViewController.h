@@ -42,6 +42,6 @@ extern NSString * const LWEUserSettingsChanged;
 @property (assign) id<LWESettingsDelegate> delegate;
 @property (retain, nonatomic) NSArray *sectionArray;
 
-@property (retain) DownloadManager *downloadManager;
-@property (retain) PluginManager *pluginManager;
+@property (retain) IBOutlet DownloadManager *downloadManager;
+@property (retain) IBOutlet PluginManager *pluginManager;
 @end

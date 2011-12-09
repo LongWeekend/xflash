@@ -21,5 +21,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblLastUpdate;
 @property (retain) NSArray *availablePlugins;
 @property (retain) NSArray *installedPlugins;
+@property (retain) PluginManager *pluginManager;
 
 @end

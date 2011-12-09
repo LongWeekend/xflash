@@ -10,6 +10,8 @@
 #import "CardPeer.h"
 #import "ExampleSentencePeer.h"
 #import "AddTagViewController.h"
+#import "DownloadManager.h"
+#import "PluginManager.h"
 // MMA: we're not using this yet, as of 1.3.1
 //#import "DisplaySearchedSentenceViewController.h"
 
@@ -55,5 +57,7 @@ typedef enum searchStates
 @property (nonatomic, retain) IBOutlet UITableViewCell *searchingCell;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+
+@property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
 
 @end

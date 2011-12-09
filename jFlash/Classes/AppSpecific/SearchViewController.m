@@ -34,6 +34,7 @@ const NSInteger KSegmentedTableHeader = 100;
 
 @implementation SearchViewController
 @synthesize observerArray;
+@synthesize pluginManager;
 @synthesize activityIndicator, searchingCell;
 @synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray;
 @synthesize searchTerm;
@@ -144,7 +145,7 @@ const NSInteger KSegmentedTableHeader = 100;
   self._wordsOrSentencesSegment.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   
   // Fire off a notification to bring up the downloader?  If we are on the old data version, let them use search!
-  BOOL hasFTS = [CurrentState pluginKeyIsLoaded:FTS_DB_KEY];
+  BOOL hasFTS = [self.pluginManager pluginKeyIsLoaded:FTS_DB_KEY];
 #if defined(LWE_JFLASH)
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
   BOOL isFirstVersion = [[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_0];
@@ -153,7 +154,7 @@ const NSInteger KSegmentedTableHeader = 100;
 #endif
   if (!(hasFTS || isFirstVersion))
   {
-    Plugin *ftsPlugin = [CurrentState availablePluginForKey:FTS_DB_KEY];
+    Plugin *ftsPlugin = [self.pluginManager.downloadablePlugins objectForKey:FTS_DB_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:ftsPlugin userInfo:nil];
     self.searchBar.placeholder = NSLocalizedString(@"Tap here to install search",@"SearchViewController.SearchBarPlaceholder_InstallPlugin"); 
   }
@@ -249,7 +250,7 @@ const NSInteger KSegmentedTableHeader = 100;
  */
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-  BOOL hasFTS = [CurrentState pluginKeyIsLoaded:FTS_DB_KEY];
+  BOOL hasFTS = [self.pluginManager pluginKeyIsLoaded:FTS_DB_KEY];
   
 #if defined(LWE_JFLASH)
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults]; 
@@ -265,7 +266,7 @@ const NSInteger KSegmentedTableHeader = 100;
   else
   {
     // And show them the modal again for good measure
-    Plugin *ftsPlugin = [CurrentState availablePluginForKey:FTS_DB_KEY];
+    Plugin *ftsPlugin = [self.pluginManager.downloadablePlugins objectForKey:FTS_DB_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:ftsPlugin userInfo:nil];
     return NO;
   }
@@ -722,6 +723,7 @@ const NSInteger KSegmentedTableHeader = 100;
   }
   [observerArray release];
   
+  [pluginManager release];
   [searchTerm release];
   [searchBar release];
   [cardResultsArray release];

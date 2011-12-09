@@ -13,7 +13,6 @@
 
 @synthesize resetCardOnly;
 @synthesize settingsHash, settingChanged;
-@synthesize pluginManager;
 
 - (void) dealloc
 {

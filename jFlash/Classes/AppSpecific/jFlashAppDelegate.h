@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DownloadManager.h"
+#import "PluginManager.h"
 
 @interface jFlashAppDelegate : NSObject <UIApplicationDelegate>
 {
@@ -20,5 +22,8 @@ void uncaughtExceptionHandler(NSException *exception);
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UIImageView *splashView;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+
+@property (retain) IBOutlet PluginManager *pluginManager;
+@property (retain) IBOutlet DownloadManager *downloadManager;
 
 @end

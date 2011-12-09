@@ -66,6 +66,8 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
   {
     [self.taskHandler start];
     [self updateButtons];
+    
+    [[CurrentState sharedCurrentState] startTabAnimation];
   }
 }
 

@@ -51,6 +51,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   self.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
 #endif
   self.delegate = (id<LWESettingsDelegate>)self.dataSource;
+  
+  // Update the badge value now that the outlet to the plugin manager is set
+  [self updateBadgeValue];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder

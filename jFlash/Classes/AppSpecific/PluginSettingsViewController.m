@@ -22,7 +22,7 @@
 @implementation PluginSettingsViewController
 
 @synthesize tableView, availablePlugins, installedPlugins;
-@synthesize btnCheckUpdate, lblLastUpdate;
+@synthesize btnCheckUpdate, lblLastUpdate, pluginManager;
 
 #pragma mark - Check Update Now Button
 
@@ -56,7 +56,7 @@
 {
 	
 	[self _changeLastUpdateLabel];
-	[[CurrentState sharedCurrentState] checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
+	[self.pluginManager checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self _reloadTableData];
   
   [DSBezelActivityView removeViewAnimated:YES];
@@ -104,9 +104,8 @@
 - (void) _reloadTableData
 {
   // Refresh plugin data
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  self.installedPlugins = [[pm loadedPlugins] allValues];
-  self.availablePlugins = [pm.downloadablePlugins allValues];
+  self.installedPlugins = [[self.pluginManager loadedPlugins] allValues];
+  self.availablePlugins = [self.pluginManager.downloadablePlugins allValues];
   [self.tableView reloadData];
 }
 
