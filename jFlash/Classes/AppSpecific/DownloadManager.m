@@ -7,22 +7,40 @@
 //
 
 #import "DownloadManager.h"
+
 #import "jFlashAppDelegate.h"
+#import "LWEPackageDownloader.h"
+#import "ModalTaskViewController.h"
 
 @interface DownloadManager ()
+- (void) _showDownloaderModal:(NSNotification*)aNotification;
 @end
 
 @implementation DownloadManager
 
-@synthesize modalTaskViewController, pluginMgr;
+@synthesize modalTaskViewController, baseViewController, pluginMgr;
 @synthesize tabIconTimer, tabIconImages, tabIconIndex;
 
 #pragma mark - Class Plumbing
 
+- (id) init
+{
+  self = [super init];
+  if (self)
+  {
+    // Register listener to pop up downloader modal for search FTS download & ex sentence download
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_showDownloaderModal:) name:LWEShouldShowDownloadModal object:nil];
+  }
+  return self;
+}
+
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [tabIconTimer release];
   [tabIconImages release];
+  [baseViewController release];
   [modalTaskViewController release];
   [pluginMgr release];
 
@@ -105,5 +123,40 @@
   return (self.modalTaskViewController != nil);
 }
 
+/**
+ * Pops up a modal over the screen when the user needs to download something
+ * Relies on _showModalWithViewController:useNavController:
+ */
+- (void) _showDownloaderModal:(NSNotification*)aNotification
+{
+  // If the user tries to re-lauch while we are downloading, just re-launch that modal.
+  if ([self pluginIsDownloading])
+  {
+    [self.baseViewController presentModalViewController:self.modalTaskViewController animated:YES];
+    return;
+  }
+  
+  Plugin *thePlugin = (Plugin *)aNotification.object;
+  LWE_ASSERT_EXC(thePlugin, @"This method can't be called with a nil plugin.");
+  
+  // Instantiate downloader with jFlash download URL & destination filename
+  //TODO: iPad customization here
+  ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
+  dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
+  dlViewController.webViewContent = thePlugin.htmlString;
+  
+  // Get path information
+  LWEPackageDownloader *packageDownloader = [[[LWEPackageDownloader alloc] initWithDownloaderDelegate:self] autorelease];
+  packageDownloader.progressDelegate = dlViewController;
+  [packageDownloader queuePackage:[thePlugin downloadPackage]];
+  dlViewController.taskHandler = packageDownloader;
+
+  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:dlViewController];
+  [dlViewController release];
+  
+  [self.baseViewController presentModalViewController:navController animated:YES];
+  self.modalTaskViewController = navController;
+  [navController release];
+}
 
 @end

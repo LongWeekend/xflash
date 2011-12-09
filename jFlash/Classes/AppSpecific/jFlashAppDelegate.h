@@ -18,6 +18,7 @@
 void uncaughtExceptionHandler(NSException *exception);
 
 @property BOOL isFinishedLoading;
+@property BOOL loadSearchOnBoot;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UIImageView *splashView;

@@ -20,6 +20,7 @@
 
 - (BOOL) pluginIsDownloading;
 
+@property (retain, nonatomic) UIViewController *baseViewController;
 @property (retain, nonatomic) UIViewController *modalTaskViewController;
 
 @property (retain) NSTimer *tabIconTimer;

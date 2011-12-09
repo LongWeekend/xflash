@@ -15,18 +15,16 @@
 #import "SettingsViewController.h"
 #import "SearchViewController.h"
 
-#import "LWEPackageDownloader.h"
-#import "ModalTaskViewController.h"
-
 #if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
 #import "FlurryAPI.h"
 #endif
 
 @interface jFlashAppDelegate ()
+- (NSString*) _getDecodedSearchTerm:(NSURL *)url;
 - (void) _switchToSearchWithTerm:(NSString*)term;
-- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
-- (void) showDownloaderModal:(NSNotification*)aNotification;
 - (void) _registerObservers;
+- (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
+- (void) _showModal:(NSNotification *)notification;
 - (BOOL) _needToCopyDatabase;
 - (void) _openUserDatabaseWithPlugins;
 @property (retain) NSMutableArray *observerArray;
@@ -36,12 +34,36 @@
 
 @synthesize observerArray;
 @synthesize window, tabBarController, splashView;
-@synthesize isFinishedLoading;
+@synthesize isFinishedLoading, loadSearchOnBoot;
 @synthesize downloadManager, pluginManager;
 
 #pragma mark - URL Handling
 
-- (NSString*) getDecodedSearchTerm:(NSURL *)url  
+//! For compatibility with iOS2.0 through iOS4.2, when it was deprecated in favor of the below.
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+  return [self application:application openURL:url sourceApplication:nil annotation:nil];
+}
+
+// handles URL openings from other apps
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  NSString *searchTerm = [self _getDecodedSearchTerm:url];
+  if (self.isFinishedLoading)
+  {
+    // If we have finished loading our database, et al, we can jump straight to search.
+    [self _switchToSearchWithTerm:searchTerm];
+  }
+  else
+  {
+    self.loadSearchOnBoot = YES;
+    // This is released in the appDidFinishLaunching: method below.  We want to hold on while booting.
+    _searchedTerm = [searchTerm retain];
+  }
+  return YES;
+}
+
+- (NSString*) _getDecodedSearchTerm:(NSURL *)url  
 {
   NSString *searchTerm = [url unicodeAbsoluteString];
   if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
@@ -50,36 +72,6 @@
   }
   searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
   return searchTerm;
-}
-
-// handles URL openings from other apps
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-  NSString *searchTerm = [self getDecodedSearchTerm:url];
-  if (self.isFinishedLoading)
-  {
-    // If we have finished loading our database, et al, we can jump straight to search.
-    [self _switchToSearchWithTerm:searchTerm];
-  }
-  else
-  {
-    // Add an observer to wait for the loading of the Tab Bar, stash the term so we have it later
-    // This is private among these two methods so we are manually managing memory here instead of synthesizers
-    [self addObserver:self forKeyPath:@"isFinishedLoading" options:NSKeyValueObservingOptionNew context:NULL];
-    _searchedTerm = [searchTerm retain];
-  }
-  return YES;
-}
-
-- (void) observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void *)context
-{
-  if ([keyPath isEqualToString:@"isFinishedLoading"] && [[change objectForKey:NSKeyValueChangeNewKey] boolValue] == YES)
-  {
-    // Now be done with it, get rid of the observer too
-    [self removeObserver:self forKeyPath:@"isFinishedLoading"];
-    [self _switchToSearchWithTerm:_searchedTerm];
-    [_searchedTerm release];
-  }
 }
 
 - (void) _switchToSearchWithTerm:(NSString*)term
@@ -93,12 +85,6 @@
   
   // Now set the index so the search shows up
   self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
-}
-
-//! For compatibility
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-  return [self application:application openURL:url sourceApplication:nil annotation:nil];
 }
 
 #pragma mark - appDidFinishingLaunching
@@ -201,16 +187,20 @@
   // Finish setting up & load tab bar
   [self _registerObservers];
   [self.window addSubview:self.tabBarController.view];
-  self.isFinishedLoading = YES;
   [Appirater appLaunched];
-}
-
-# pragma mark Convenience Methods
-
-//! Called via first responder from progress view
-- (IBAction)switchToSettings
-{
-  self.tabBarController.selectedIndex = SETTINGS_VIEW_CONTROLLER_TAB_INDEX;
+  
+  // Finally load search if we're supposed to do that.
+  if (self.loadSearchOnBoot)
+  {
+    [self _switchToSearchWithTerm:_searchedTerm];
+    [_searchedTerm release];
+  }
+  
+  // MMA - 12.10.2011 not ENTIRELY sure this is still necessary.  If this code can enver be executed 
+  // before openURL: call above, then this whole setup can be removed.  It was originally set up as a 
+  // concurrency check?  Or maybe, no, I remember now -- it's for when the app's already been loaded 
+  // but is just in the BG.  That's right.
+  self.isFinishedLoading = YES;
 }
 
 #pragma mark - Register Observers
@@ -262,11 +252,8 @@
   }];
   [self.observerArray addObject:observer];
   
-  // Register listener to pop up downloader modal for search FTS download & ex sentence download
-  [center addObserver:self selector:@selector(showDownloaderModal:) name:LWEShouldShowDownloadModal object:nil];
-  
   //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
-  [center addObserver:self selector:@selector(showModal:) name:LWEShouldShowModal object:nil];
+  [center addObserver:self selector:@selector(_showModal:) name:LWEShouldShowModal object:nil];
 }
 
 
@@ -293,7 +280,7 @@
  * Show Modal method that will call the show modal view controller private method.
  * the notification user info will determine whether it will be animated, and what view controller to view. 
  */
-- (void)showModal:(NSNotification *)notification
+- (void) _showModal:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
 	//It will do anything if there is any information in regard to what view controller to be pop-ed up.
@@ -309,43 +296,8 @@
   [self _showModalWithViewController:vc useNavController:useNavController];
 }
 
-/**
- * Pops up a modal over the screen when the user needs to download something
- * Relies on _showModalWithViewController:useNavController:
- */
-- (void) showDownloaderModal:(NSNotification*)aNotification
-{
-  // If the user tries to re-lauch while we are downloading, just re-launch that modal.
-  if ([self.downloadManager pluginIsDownloading])
-  {
-    [self _showModalWithViewController:self.downloadManager.modalTaskViewController useNavController:YES];
-    return;
-  }
-  
-  Plugin *thePlugin = (Plugin *)aNotification.object;
-  LWE_ASSERT_EXC(thePlugin, @"This method can't be called with a nil plugin.");
-  
-  // Instantiate downloader with jFlash download URL & destination filename
-  //TODO: iPad customization here
-  ModalTaskViewController *dlViewController = [[ModalTaskViewController alloc] initWithNibName:@"ModalTaskView" bundle:nil];
-  dlViewController.title = NSLocalizedString(@"Get Update",@"ModalTaskViewController_Update.NavBarTitle");
-  dlViewController.webViewContent = thePlugin.htmlString;
-  
-  // Get path information
-  LWEPackageDownloader *packageDownloader = [[LWEPackageDownloader alloc] initWithDownloaderDelegate:self.downloadManager];
-  packageDownloader.progressDelegate = dlViewController;
-  [packageDownloader queuePackage:[thePlugin downloadPackage]];
-  dlViewController.taskHandler = packageDownloader;
-  [self _showModalWithViewController:dlViewController useNavController:YES];
-  [packageDownloader release];
-  
-  // Hold on to this
-  self.downloadManager.modalTaskViewController = dlViewController;
-  [dlViewController release];
-}
 
-
-#pragma mark - UIApplication Delegate methods
+#pragma mark - Local Notifications
 
 - (void) scheduleLocalNotification 
 {
@@ -372,6 +324,8 @@
   // the application retains the notification
   [localNotification release];
 }
+
+#pragma mark - UIApplication Delegate methods
 
 /**
  * Called on iOS4 when the app is put into the background
@@ -431,14 +385,6 @@
   
   [downloadManager release];
   [pluginManager release];
-  
-  // Handle all singletons
-  CurrentState *state = [CurrentState sharedCurrentState];
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  ThemeManager *tm = [ThemeManager sharedThemeManager];
-  [db release];
-  [state release];
-  [tm release];
   
   [super dealloc];
 }
