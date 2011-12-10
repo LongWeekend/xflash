@@ -8,10 +8,12 @@
 
 #import "ChineseCard.h"
 #import <CoreText/CoreText.h>
+#import "Plugin.h"
+#import "PluginManager.h"
 
 @interface ChineseCard ()
-- (NSArray *) _pinyinAudioFilenames;
-- (NSString *) _fullAudioFilename;
+- (NSArray *) _pinyinAudioFilenamesWithPlugin:(Plugin *)pinyinPlugin;
+- (NSString *) _fullAudioFilenameWithPlugin:(Plugin *)hskPlugin;
 @end
 
 @implementation ChineseCard
@@ -53,7 +55,6 @@
   //Replace the u: with ü (u umlaud)
   numberedPinyin = [numberedPinyin stringByReplacingOccurrencesOfString:@"u:" withString:@"ü"];
   
-
   // Define some regexes that are going to help us
   NSError *error = NULL;
   NSRegularExpression *vocalRegex = [NSRegularExpression regularExpressionWithPattern:@"[aeiouü]" options:NSRegularExpressionCaseInsensitive error:&error];
@@ -186,32 +187,34 @@
 
 #pragma mark - Audio Related
 
-- (BOOL) hasAudio
+- (BOOL) hasAudioWithPluginManager:(PluginManager *)pluginManager
 {
   // Quick return if they have pinyin installed, saves us from searching for their card in HSK
-  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY])
+  if ([pluginManager pluginKeyIsLoaded:AUDIO_PINYIN_KEY])
   {
     return YES;
   }
   else
   {
     // If have a filename we have audio -- TODO maybe cache this value?
-    return ([self _fullAudioFilename] != nil);
+    Plugin *hskPlugin = [pluginManager pluginForKey:AUDIO_HSK_KEY];
+    return ([self _fullAudioFilenameWithPlugin:hskPlugin] != nil);
   }
 }
 
-- (NSDictionary *) audioFilenames
+- (NSDictionary *) audioFilenamesWithPluginManager:(PluginManager *)mgr
 {
+  Plugin *pinyinPlugin = [mgr pluginForKey:AUDIO_PINYIN_KEY];
+  Plugin *hskPlugin = [mgr pluginForKey:AUDIO_HSK_KEY];
   NSMutableDictionary *audioFilenames = [NSMutableDictionary dictionaryWithCapacity:2];
-  [audioFilenames setValue:[self _pinyinAudioFilenames] forKey:kLWESegmentedReadingKey];
-  [audioFilenames setValue:[self _fullAudioFilename] forKey:kLWEFullReadingKey];
+  [audioFilenames setValue:[self _pinyinAudioFilenamesWithPlugin:pinyinPlugin] forKey:kLWESegmentedReadingKey];
+  [audioFilenames setValue:[self _fullAudioFilenameWithPlugin:hskPlugin] forKey:kLWEFullReadingKey];
   return (NSDictionary*)audioFilenames;
 }
 
-- (NSString *) _fullAudioFilename
+- (NSString *) _fullAudioFilenameWithPlugin:(Plugin *)hskPlugin
 {
   // Quick return if we don't have the full audio plugin
-  Plugin *hskPlugin = [CurrentState loadedPluginForKey:AUDIO_HSK_KEY];
   if (hskPlugin == nil)
   {
     return nil;
@@ -229,15 +232,13 @@
   }
 }
 
-- (NSArray *) _pinyinAudioFilenames
+- (NSArray *) _pinyinAudioFilenamesWithPlugin:(Plugin *)pinyinPlugin
 {
+  LWE_ASSERT_EXC(pinyinPlugin, @"We shouldn't be asking for filenames if the plugin isn't loaded");
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
   NSMutableArray *audioArray = [NSMutableArray array];
   for (NSString *pinyin in pinyinSegments)
   {
-    Plugin *pinyinPlugin = [CurrentState loadedPluginForKey:AUDIO_PINYIN_KEY];
-    LWE_ASSERT_EXC(pinyinPlugin, @"We shouldn't be asking for filenames if the plugin isn't loaded");
-    
     // Note there is no checking here for whether the file exists
     NSString *filename = [[pinyinPlugin fullPath] stringByAppendingFormat:@"%@.mp3",[pinyin lowercaseString]];
     [audioArray addObject:filename];

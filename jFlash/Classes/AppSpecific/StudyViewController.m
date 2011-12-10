@@ -424,9 +424,10 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
-  if ([self.currentCard hasAudio])
+  // We have to pass the plugin manager to each call so that Card knows what plugins (PINYIN, HSK) we have installed.
+  if ([self.currentCard hasAudioWithPluginManager:self.pluginManager])
   {
-    [self.currentCard pronounceWithDelegate:self];
+    [self.currentCard pronounceWithDelegate:self pluginManager:self.pluginManager];
   }
   else
   {
@@ -482,7 +483,7 @@
   BOOL returnVal = YES;
   if ([self.pluginManager pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [self.pluginManager pluginKeyIsLoaded:AUDIO_HSK_KEY])
   {
-    returnVal = [card hasAudio];
+    returnVal = [card hasAudioWithPluginManager:self.pluginManager];
   }
   return returnVal;
 #else

@@ -10,6 +10,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import "FMResultSet.h"
 #import "LWEAudioQueue.h"
+#import "PluginManager.h"
 
 extern NSString * const kLWEFullReadingKey;
 extern NSString * const kLWESegmentedReadingKey;
@@ -40,16 +41,16 @@ extern NSInteger const kLWEUninitializedCardId;
 - (BOOL) hasExampleSentences;
 
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
-- (BOOL) hasAudio;
+- (BOOL) hasAudioWithPluginManager:(PluginManager *)mgr;
 
-- (void) pronounceWithDelegate:(id)theDelegate;
+- (void) pronounceWithDelegate:(id)theDelegate pluginManager:(PluginManager *)pluginManager;
 
 /**
  * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
  * and then a key for each syllable of the reading
  * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
  */
-- (NSDictionary*) audioFilenames;
+- (NSDictionary *) audioFilenamesWithPluginManager:(PluginManager *)mgr;
 
 /**
  * Pass a UILabel with text through this method when you want to

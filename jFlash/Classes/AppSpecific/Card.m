@@ -7,7 +7,7 @@ NSInteger const kLWEUninitializedCardId    = -1;
 
 @interface Card ()
 //! AudioPlayer object for a card
-@property (nonatomic, retain) LWEAudioQueue *player;
+@property (nonatomic, readonly, retain) LWEAudioQueue *player;
 @end
 
 @implementation Card 
@@ -28,19 +28,18 @@ NSInteger const kLWEUninitializedCardId    = -1;
 
 #pragma mark - Public getter
 
-- (LWEAudioQueue *)player
+- (LWEAudioQueue *)playerWithPluginManager:(PluginManager *)pluginManager
 {
   if (_player == nil)
   {
-    NSDictionary *dict = [self audioFilenames];
+    NSDictionary *dict = [self audioFilenamesWithPluginManager:pluginManager];
     NSString *fullReadingFilename = [dict objectForKey:kLWEFullReadingKey];
-    LWEAudioQueue *q = nil;
     if (fullReadingFilename)
     {
       //If the full_reading key exists in the audioFilenames, it means there is an audio file
       // dedicated to this card.  So, just instantiate the AVQueuePlayer with the array
       NSURL *url = [NSURL fileURLWithPath:fullReadingFilename];
-      q = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
+      _player = [[LWEAudioQueue alloc] initWithItems:[NSArray arrayWithObject:url]];
     }
     else
     {
@@ -52,13 +51,10 @@ NSInteger const kLWEUninitializedCardId    = -1;
         [items addObject:[NSURL fileURLWithPath:filename]];
       }
       // And create the player with the NSArray filled with the AVPlayerItem(s)
-      q = [[LWEAudioQueue alloc] initWithItems:items];
+      _player = [[LWEAudioQueue alloc] initWithItems:items];
     }
-    
-    self.player = q;
-    [q release];
   }
-  return [[_player retain] autorelease];
+  return [_player autorelease];
 }
 
 #pragma mark - Handy Method
@@ -122,23 +118,23 @@ NSInteger const kLWEUninitializedCardId    = -1;
 
 #pragma mark - Audio Related
 
-- (BOOL) hasAudio
+- (BOOL) hasAudioWithPluginManager:(PluginManager *)mgr
 {
   // It is up to the subclasses to handle this and say yes
   return NO;
 }
 
-- (NSDictionary *) audioFilenames
+- (NSDictionary *) audioFilenamesWithPluginManager:(PluginManager *)mgr
 {
   // By default this does nothing, it is up to the subclasses to implement.
   return nil;
 }
 
-- (void) pronounceWithDelegate:(id)theDelegate
+- (void) pronounceWithDelegate:(id)theDelegate pluginManager:(PluginManager *)pluginManager
 {
-  LWEAudioQueue *q = self.player;
-  q.delegate = theDelegate;
-  [q play];
+  _player = [[self playerWithPluginManager:pluginManager] retain];
+  _player.delegate = theDelegate;
+  [_player play];
 }
 
 #pragma mark - Card Properties
@@ -238,8 +234,7 @@ NSInteger const kLWEUninitializedCardId    = -1;
 //! Standard dealloc
 - (void) dealloc
 {
-  self.player = nil;
-  
+  [_player release];
 	[_headword release];
 	[headword_en release];
 	[hw_reading release];
