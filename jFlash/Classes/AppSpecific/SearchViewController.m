@@ -117,6 +117,9 @@ const NSInteger KSegmentedTableHeader = 100;
 
   // Register for notification when tag content changes (might be starred words.. in which case we want to know)
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  
+  // Notification for when the card headword stlye changes
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWECardSettingsChanged object:nil];
 }
 
 - (void) viewDidUnload
@@ -128,6 +131,7 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Stop observing for tag content changes
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
 }
 
 
@@ -715,6 +719,9 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   // Plugin did install observer
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // Headword style did change
+  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
   
   // Get rid of block-based observers
   for (id observer in self.observerArray)
