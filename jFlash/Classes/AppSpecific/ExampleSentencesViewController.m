@@ -155,13 +155,14 @@
 - (void)_showAddToSetWithCardID:(NSString *)cardID
 {
 	LWE_LOG(@"Add to set with card ID : %@", cardID);
-	// Set up DONE button
-	UIBarButtonItem* doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") 
-																style:UIBarButtonItemStyleBordered 
-															   target:self 
-															   action:@selector(dismissAddToSetModal)];
-
 	AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[CardPeer retrieveCardByPK:[cardID intValue]]];
+
+	// Set up DONE button
+	UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"AddTagViewController.NavDoneButtonTitle") 
+																style:UIBarButtonItemStyleBordered 
+															   target:tmpVC
+															   action:@selector(dismissModalViewControllerAnimated:)];
+
 	tmpVC.navigationItem.leftBarButtonItem = doneBtn;
 	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:tmpVC, @"controller", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
@@ -225,12 +226,6 @@
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
-}
-
-- (void)dismissAddToSetModal
-{
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"YES" forKey:@"animated"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self userInfo:userInfo];
 }
 
 #pragma mark - Class Plumbing
