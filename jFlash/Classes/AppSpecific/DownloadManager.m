@@ -80,7 +80,7 @@
   }
 }
 
-#pragma mark - Total Hack
+#pragma mark - Tab Image Animation
 
 - (void) startTabAnimation
 {
@@ -113,6 +113,8 @@
   }
 }
 
+#pragma mark -
+
 - (BOOL) pluginIsDownloading
 {
   return (self.modalTaskViewController != nil);
@@ -120,7 +122,7 @@
 
 /**
  * Pops up a modal over the screen when the user needs to download something
- * Relies on _showModalWithViewController:useNavController:
+ * Relies on showModalWithViewController:useNavController:
  */
 - (void) _showDownloaderModal:(NSNotification*)aNotification
 {
