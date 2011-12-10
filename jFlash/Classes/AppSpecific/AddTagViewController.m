@@ -374,7 +374,9 @@ enum EntrySectionRows
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
   
+  [studySetTable release];
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];
