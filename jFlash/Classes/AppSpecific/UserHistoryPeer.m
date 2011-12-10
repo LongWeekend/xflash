@@ -8,10 +8,15 @@
 #import "UserHistoryPeer.h"
 #import "CardPeer.h"
 
+@interface UserHistoryPeer ()
++ (void) _recordResult:(Card*)card forTag:(Tag *)tag gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt;
++ (NSInteger)_nextAfterLevel:(NSInteger)level gotItRight:(BOOL)gotItRight;
+@end
+
 @implementation UserHistoryPeer
 
 //! Returns what the next level should be based on the user's answer
-+ (int) getNextAfterLevel:(int)level gotItRight: (BOOL)gotItRight
++ (NSInteger) _nextAfterLevel:(int)level gotItRight:(BOOL)gotItRight
 {
   if (gotItRight)
   {
@@ -36,25 +41,34 @@
 }
 
 
-//! Updates the database based on the user's answer
-+ (void) recordResult: (Card*)card gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
++ (void) buryCard:(Card *)card inTag:(Tag *)tag
 {
-  // Get database singleton & settings singleton
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  CurrentState *appSettings = [CurrentState sharedCurrentState];
-  
+  [[self class] _recordResult:card forTag:tag gotItRight:YES knewIt:YES];
+}
+
++ (void) recordCorrectForCard:(Card *)card inTag:(Tag *)tag
+{
+  [[self class] _recordResult:card forTag:tag gotItRight:YES knewIt:NO];
+}
+
++ (void) recordWrongForCard:(Card *)card inTag:(Tag *)tag
+{
+  [[self class] _recordResult:card forTag:tag gotItRight:NO knewIt:NO];
+}
+
+//! Updates the database based on the user's answer
++ (void) _recordResult:(Card*)card forTag:(Tag *)tag gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt
+{
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-
-  NSString *sql;
-  int nextLevel;
-
+  NSString *sql = nil;
+  NSInteger nextLevel = -1;
   if (knewIt)
   {
     nextLevel = 5;
   }
   else
   {
-    nextLevel = [UserHistoryPeer getNextAfterLevel:card.levelId gotItRight:gotItRight];
+    nextLevel = [[self class] _nextAfterLevel:card.levelId gotItRight:gotItRight];
   }
 
   if (gotItRight)
@@ -67,9 +81,11 @@
     // int
     sql = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES ('%d',current_timestamp,current_timestamp,'%d','%d','%d','%d')",card.cardId,[settings integerForKey:@"user_id"],card.rightCount,(card.wrongCount+1),nextLevel];
   }
-  [[db dao] executeUpdate:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  [db executeUpdate:sql];
   [sql release];
-  [[appSettings activeTag] updateLevelCounts:card nextLevel:nextLevel];
+  
+  [tag updateLevelCounts:card nextLevel:nextLevel];
 }
 
 

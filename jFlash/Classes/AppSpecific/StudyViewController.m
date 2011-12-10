@@ -319,35 +319,33 @@
 
 - (void) doCardBtn:(NSNotification *)aNotification
 {
-  NSInteger action = [[aNotification object] intValue];
+  NSInteger action = [aNotification.object intValue];
   
-  // Hold on to the last card in a different variable
-  Card *lastCard = [self.currentCard retain];
-  
-  BOOL knewIt = NO;
-  
-  Card *nextCard = nil;
-  NSString *direction = nil;
+  // Default to animation from the right.
+  NSString *direction = kCATransitionFromRight;
 	switch (action)
   {
     // Browse Mode options
     case NEXT_BTN: 
-      direction = kCATransitionFromRight;
       break;
     case PREV_BTN:
       direction = kCATransitionFromLeft;
       break;
       
     case BURY_BTN:
-      knewIt = YES;
+      self.numRight++;
+      self.numViewed++;
+      self.currentRightStreak++;
+      self.currentWrongStreak = 0;
+      [UserHistoryPeer buryCard:self.currentCard inTag:self.currentCardSet];
+      break;
       
     case RIGHT_BTN:
       self.numRight++;
       self.numViewed++;
       self.currentRightStreak++;
       self.currentWrongStreak = 0;
-      [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      direction = kCATransitionFromRight;
+      [UserHistoryPeer recordCorrectForCard:self.currentCard inTag:self.currentCardSet];
       break;
       
     case WRONG_BTN:
@@ -355,15 +353,10 @@
       self.numViewed++;
       self.currentWrongStreak++;
       self.currentRightStreak = 0;
-      [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      direction = kCATransitionFromRight;
+      [UserHistoryPeer recordWrongForCard:self.currentCard inTag:self.currentCardSet];
       break;      
   }
-  nextCard = [self _getNextCard:direction];
-  [self doChangeCard:nextCard direction:direction];
-  
-  // Releases
-  [lastCard release];
+  [self doChangeCard:[self _getNextCard:direction] direction:direction];
 }
 
 
