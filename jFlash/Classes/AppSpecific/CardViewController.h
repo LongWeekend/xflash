@@ -29,7 +29,7 @@ extern NSString * const LWECardHtmlFooter;
 - (BOOL)shouldRevealCardView:(CardViewController*)cvc;
 @end
 
-@interface CardViewController : UIViewController <StudyViewSubcontrollerDelegate>
+@interface CardViewController : UIViewController <StudyViewSubcontrollerProtocol>
 {
   //! Holds a reference to the current meaning's string-replacement javascript
   NSString *_tmpJavascript;

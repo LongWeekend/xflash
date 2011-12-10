@@ -44,7 +44,7 @@ extern NSString * const LWEActionBarButtonWasTapped;
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
                                                        UIAlertViewDelegate,
                                                        MFMailComposeViewControllerDelegate,
-                                                       StudyViewSubcontrollerDelegate,
+                                                       StudyViewSubcontrollerProtocol,
                                                        LWETRequestDelegate>
 {
   LWETwitterEngine *_twitterEngine;

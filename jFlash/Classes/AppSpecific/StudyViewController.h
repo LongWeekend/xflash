@@ -67,8 +67,8 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *cardViewController;
-@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *actionBarController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerProtocol> *cardViewController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerProtocol> *actionBarController;
 @property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 @property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;

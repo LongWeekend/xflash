@@ -593,7 +593,7 @@
     }
     
     // Set the new VC
-    UIViewController<StudyViewSubcontrollerDelegate> *cardVC = [self.delegate cardViewControllerForStudyView:self];
+    UIViewController<StudyViewSubcontrollerProtocol> *cardVC = [self.delegate cardViewControllerForStudyView:self];
     [self.cardView addSubview:cardVC.view];
     self.cardViewController = cardVC;
   }
@@ -606,7 +606,7 @@
       [self.actionBarController.view removeFromSuperview];
     }
     
-    UIViewController<StudyViewSubcontrollerDelegate> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
+    UIViewController<StudyViewSubcontrollerProtocol> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }

@@ -14,7 +14,7 @@
  * The action bar and card view controllers should
  * implement this protocol to respond to card changes.
  */
-@protocol StudyViewSubcontrollerDelegate <NSObject>
+@protocol StudyViewSubcontrollerProtocol <NSObject>
 @required
 /**
  * This method is called by StudyViewController when a new card.
@@ -53,13 +53,13 @@
  * This method is required.  The delegate needs to provide us with the right view controller for the
  * card area for this study mode.
  */
-- (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController*)svc;
+- (UIViewController<StudyViewSubcontrollerProtocol> *)cardViewControllerForStudyView:(StudyViewController*)svc;
 
 /**
  * This method is required.  The delegate needs to provide us with the right view controller for the
  * action bar area for this study mode.
  */
-- (UIViewController<StudyViewSubcontrollerDelegate> *)actionBarViewControllerForStudyView:(StudyViewController*)svc;
+- (UIViewController<StudyViewSubcontrollerProtocol> *)actionBarViewControllerForStudyView:(StudyViewController*)svc;
 
 /**
  * StudyViewController calls this delegate method when an event
