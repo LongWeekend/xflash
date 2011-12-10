@@ -370,6 +370,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   {
 		// TODO: iPad customization!
 		PluginSettingsViewController *psvc = [[PluginSettingsViewController alloc] initWithNibName:@"PluginSettingsView" bundle:nil];
+    psvc.pluginManager = self.pluginManager;
 		[self.navigationController pushViewController:psvc animated:YES];
 		[psvc release];
   }
