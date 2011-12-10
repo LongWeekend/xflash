@@ -13,7 +13,7 @@
 @interface DownloadManager : NSObject <LWEPackageDownloaderDelegate>
 
 //! Holds PluginManager instance
-@property (retain) PluginManager *pluginMgr;
+@property (retain) IBOutlet PluginManager *pluginManager;
 
 - (void) startTabAnimation;
 - (void) stopTabAnimation;

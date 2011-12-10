@@ -18,7 +18,7 @@
 
 @implementation DownloadManager
 
-@synthesize modalTaskViewController, baseViewController, pluginMgr;
+@synthesize modalTaskViewController, baseViewController, pluginManager;
 @synthesize tabIconTimer, tabIconImages, tabIconIndex;
 
 #pragma mark - Class Plumbing
@@ -42,30 +42,33 @@
   [tabIconImages release];
   [baseViewController release];
   [modalTaskViewController release];
-  [pluginMgr release];
+  [pluginManager release];
 
   [super dealloc];
 }
 
 #pragma mark - LWEPackageDownloaderDelegate Methods
 
-- (void) unpackageFinished:(LWEPackage*)package
+- (void) packageDownloaderStarted:(LWEPackageDownloader *)packageDownloader
 {
-  NSError *error = nil;
-  Plugin *plugin = [package.userInfo objectForKey:@"plugin"];
-  [self.pluginMgr installPlugin:plugin error:&error];
+  [self startTabAnimation];
+}
+
+- (void) packageDownloaderFinished:(LWEPackageDownloader *)packageDownloader
+{
+  [self stopTabAnimation];
   if (self.modalTaskViewController.parentViewController)
   {
     [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
   }
   self.modalTaskViewController = nil;
-  
-  [self stopTabAnimation];
 }
 
-- (void) unpackageCancelled:(LWEPackage *)package
+- (void) unpackageFinished:(LWEPackage*)package
 {
-  self.modalTaskViewController = nil;
+  NSError *error = nil;
+  Plugin *plugin = [package.userInfo objectForKey:@"plugin"];
+  [self.pluginManager installPlugin:plugin error:&error];
 }
 
 - (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
@@ -75,14 +78,6 @@
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Problem Installing Update",@"PluginError.AlertMsgTitle") message:error.localizedDescription];
   }
-  
-  if (self.modalTaskViewController.parentViewController)
-  {
-    [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
-  }
-  self.modalTaskViewController = nil;
-  
-  [self stopTabAnimation];
 }
 
 #pragma mark - Total Hack
