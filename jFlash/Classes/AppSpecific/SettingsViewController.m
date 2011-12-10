@@ -54,6 +54,9 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   
   // Update the badge value now that the outlet to the plugin manager is set
   [self updateBadgeValue];
+
+  // Add an observer on the plugin manager so we can update the available for download badge
+  [self.pluginManager addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -71,15 +74,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
-
-  // Add an observer on the plugin manager so we can update the available for download badge
-  [self.pluginManager addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
-}
-
-- (void) viewDidUnload
-{
-  [super viewDidUnload];
-  [self.pluginManager removeObserver:self forKeyPath:@"downloadablePlugins"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -227,8 +221,7 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSInteger i = [[[self.sectionArray objectAtIndex:section] objectAtIndex:0] count];
-  return i;
+  return [[[self.sectionArray objectAtIndex:section] objectAtIndex:0] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)lclTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -466,8 +459,10 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 - (void)dealloc
 {
-  [downloadManager release];
+  [self.pluginManager removeObserver:self forKeyPath:@"downloadablePlugins"];
   [pluginManager release];
+
+  [downloadManager release];
   [changedSettings release];
   [dataSource release];
   [sectionArray release];
