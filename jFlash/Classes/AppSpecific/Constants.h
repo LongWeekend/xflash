@@ -37,7 +37,6 @@ extern NSString * const LWETableBackgroundImage;
 extern NSString * const LWEShouldSwitchTab;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldShowDownloadModal;
-extern NSString * const LWEShouldDismissModal;
 extern NSString * const LWEShouldShowPopover;
 
 
@@ -130,6 +129,7 @@ extern NSString * const CARD_DB_KEY;        //! Dictionary key to refer to main 
 extern NSString * const FTS_DB_KEY;         //! Dictionary key to refer to FTS database filename
 extern NSString * const EXAMPLE_DB_KEY;     //! Dictionary key to refer to example database filename
 
+extern NSString * const LWE_FLURRY_API_KEY;   // FLurry key for this app
 extern NSString * const LWE_APP_SPLASH_IMAGE; // App splash image - different between the flashes
 
 extern NSString * const SENTENCES_HTML_HEADER;

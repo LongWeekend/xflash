@@ -42,7 +42,6 @@ NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
 NSString * const LWEShouldSwitchTab           = @"LWEShouldSwitchTab";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldShowDownloadModal	  = @"LWEShouldShowDownloadModal";
-NSString * const LWEShouldDismissModal		   	= @"LWEShouldDismissModal";
 NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 
@@ -57,6 +56,7 @@ NSString * const LWE_BAD_DATA_EMAIL       = @"fix-card@longweekendmobile.com";
 NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 #if defined(LWE_JFLASH)
+      NSString * const LWE_FLURRY_API_KEY           = @"1ZHZ39TNG7GC3VT5PSW4";
       NSString * const LWE_APP_SPLASH_IMAGE = @"Default.jpg";
 
       // This setting is JFlash-specific
@@ -101,6 +101,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 #endif
 
 #elif defined(LWE_CFLASH)
+      NSString * const LWE_FLURRY_API_KEY           = @"CJB5CHQSQ4ZZMRS16ZJ5";
       NSString * const LWE_APP_SPLASH_IMAGE         = @"chinese-flash-splash.png";
 
       NSString * const APP_PINYIN_COLOR             = @"pinyin_color";

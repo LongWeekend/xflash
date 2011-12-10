@@ -92,39 +92,35 @@
 /** App delegate method, point of entry for the app */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)userInfo
 {
-#if defined(LWE_RELEASE_APP_STORE) || defined(LWE_RELEASE_AD_HOC)
-  [FlurryAPI startSession:@"1ZHZ39TNG7GC3VT5PSW4"];    // add analytics if this is live
-  [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
-#endif
-
   NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
   srandomdev();    // Seed random generator
 
-  // This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
-  CurrentState *state = [CurrentState sharedCurrentState];
-  [state initializeSettings];
+  // Log user sessions on release builds
+  [LWEAnalytics startSession:LWE_FLURRY_API_KEY];
+
+#if defined (LWE_JFLASH)
+  [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
+#endif
+
+  // 1. This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
+  [[CurrentState sharedCurrentState] initializeSettings];
   
-  // We initialize the plugins manager
+  // 2. Check for plugin updates if it's time for that
 	if ([self.pluginManager isTimeForCheckingUpdate])
 	{
-		/**
-		 * This only runs when the program is launched. 
-		 * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
-		 * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
-		 * number, and all of the data if it has finished.
-		 */
     [self.pluginManager checkNewPluginsAsynchronous:YES notifyOnNetworkFail:NO];
 	}
   
-  // Initialize audio session manager - start with audio session "playback" first
+  // 3. Initialize audio session manager - start with audio session "playback" first
   AudioSessionManager *audioManager = [AudioSessionManager sharedAudioSessionManager];
   [audioManager setSessionCategory:AVAudioSessionCategoryPlayback];
   [audioManager setSessionActive:NO];
-
+  
+  // 4. Show the splash view
   self.splashView.image = [UIImage imageNamed:LWE_APP_SPLASH_IMAGE];
   [self.window makeKeyAndVisible];
   
-  // If we need to copy the xFlash user database (e.g. this is first load), do that first.
+  // 5. If we need to copy the xFlash user database (e.g. this is first load), schedule that.
   if ([self _needToCopyDatabase])
   {
     // Show a spinny so the user knows what's up.
@@ -220,21 +216,6 @@
     NSNumber *index = [notification.userInfo objectForKey:@"index"];
     blockSelf.tabBarController.selectedIndex = [index integerValue];
   }];
-  [self.observerArray addObject:observer];
-  
-  // Hide any modal view controller, optionally animated.  Used by plugin downloaders, twitter stuff
-  void (^dismissBlock)(NSNotification*) = ^(NSNotification *notification)
-  {
-    //if the animated key is not specified in the user info, it will be animated.
-    NSDictionary *dict = [notification userInfo];
-    BOOL animated = YES;
-    if ([dict valueForKey:@"animated"])
-    {
-      animated = [[dict valueForKey:@"animated"] boolValue];
-    }
-    [blockSelf.tabBarController dismissModalViewControllerAnimated:animated];
-  };
-  observer = [center addObserverForName:LWEShouldDismissModal object:nil queue:nil usingBlock:dismissBlock];
   [self.observerArray addObject:observer];
   
   // Show popover for progress view
