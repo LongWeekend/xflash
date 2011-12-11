@@ -5,7 +5,11 @@
 	<key>Plugins</key>
 	<array>
 		<dict>
-			<key>plugin_html_content</key>
+			<key>fileLocation</key>
+			<integer>2</integer>
+			<key>comment</key>
+			<string>fileLocation values: 0 = Bundle, 1 = Library, 2 = Documents</string>
+			<key>htmlString</key>
 			<string>&lt;!DOCTYPE html PUBLIC &apos;-//W3C//DTD XHTML 1.0 Transitional//EN&apos; &apos;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&apos;&gt;
 &lt;html&gt;&lt;head&gt;
   &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
@@ -46,29 +50,27 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</string>
-			<key>plugin_key</key>
+			<key>pluginId</key>
 			<string>FTS_DB</string>
-			<key>plugin_version</key>
+			<key>version</key>
 			<string>1.1</string>
-			<key>plugin_type</key>
+			<key>pluginType</key>
 			<string>database</string>
-			<key>plugin_name</key>
+			<key>name</key>
 			<string>Awesomely Fast Search v1.1</string>
-			<key>plugin_details</key>
+			<key>details</key>
 			<string>Adds sub-second full dictionary search (12MB)</string>
-			<key>plugin_notes_dir</key>
-			<string>plugin-resources</string>
-			<key>plugin_notes_file</key>
-			<string>full-text-search</string>
-			<key>plugin_target_url</key>
+			<key>targetURL</key>
 			<string>https://d3580k8bnen6up.cloudfront.net/jFlash-FTS-1.1.db.gz</string>
-			<key>plugin_target_path</key>
-			<string>jFlash-FTS-1.1.db</string>
-			<key>plugin_file_name</key>
+			<key>filePath</key>
 			<string>jFlash-FTS-1.1.db</string>
 		</dict>
 		<dict>
-			<key>plugin_html_content</key>
+			<key>comment</key>
+			<string>fileLocation values: 0 = Bundle, 1 = Library, 2 = Documents</string>
+			<key>fileLocation</key>
+			<integer>2</integer>
+			<key>htmlString</key>
 			<string>&lt;!DOCTYPE html PUBLIC &apos;-//W3C//DTD XHTML 1.0 Transitional//EN&apos; &apos;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&apos;&gt;
 &lt;html&gt;&lt;head&gt;
   &lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=utf-8&apos; /&gt;
@@ -115,25 +117,19 @@ That platform isn&apos;t quite ready yet - but we are working on it - and this c
 
 &lt;/body&gt;
 &lt;/html&gt;</string>
-			<key>plugin_key</key>
+			<key>pluginId</key>
 			<string>EX_DB</string>
-			<key>plugin_version</key>
+			<key>version</key>
 			<string>1.2</string>
-			<key>plugin_type</key>
+			<key>pluginType</key>
 			<string>database</string>
-			<key>plugin_name</key>
+			<key>name</key>
 			<string>Fifty Thousand Examples v1.2</string>
-			<key>plugin_details</key>
+			<key>details</key>
 			<string>Adds sentences to practice screen (17MB)</string>
-			<key>plugin_notes_dir</key>
-			<string>plugin-resources</string>
-			<key>plugin_notes_file</key>
-			<string>example-sentences</string>
-			<key>plugin_target_url</key>
+			<key>targetURL</key>
 			<string>https://d3580k8bnen6up.cloudfront.net/jFlash-EX-1.2.db.gz</string>
-			<key>plugin_target_path</key>
-			<string>jFlash-EX-1.2.db</string>
-			<key>plugin_file_name</key>
+			<key>filePath</key>
 			<string>jFlash-EX-1.2.db</string>
 		</dict>
 	</array>
