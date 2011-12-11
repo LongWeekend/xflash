@@ -38,7 +38,7 @@ extern NSInteger const kLWEUninitializedCardId;
 - (NSString*) meaning;
 
 - (NSString*) meaningWithoutMarkup;
-- (BOOL) hasExampleSentences;
+- (BOOL) hasExampleSentencesWithPluginManager:(PluginManager *)mgr;
 
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
 - (BOOL) hasAudioWithPluginManager:(PluginManager *)mgr;

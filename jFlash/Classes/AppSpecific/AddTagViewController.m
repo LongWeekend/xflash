@@ -293,7 +293,9 @@ enum EntrySectionRows
     headword.shadowOffset = CGSizeMake(0.5f,1.0f);
     headword.textColor = [UIColor colorWithRed:0.3f green:0.3f blue:0.4f alpha:1.0f];
     headword.font = [UIFont boldSystemFontOfSize:24];
+#if defined (LWE_CFLASH)
     headword.font = [ChineseCard configureFontForLabel:headword];
+#endif
     [containingView addSubview:headword];
     return containingView;
   }

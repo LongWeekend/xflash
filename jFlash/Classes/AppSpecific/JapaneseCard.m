@@ -37,10 +37,10 @@
  * Returns YES if a card has example sentences attached to it
  * \param newVersion - If YES, uses 1.2 version Sql, if NO, uses 1.1 version
  */
-- (BOOL) hasExampleSentences
+- (BOOL) hasExampleSentencesWithPluginManager:(PluginManager *)pluginManager;
 {
   BOOL returnVal = NO;
-  if ([[[CurrentState sharedCurrentState] pluginMgr] pluginIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
+  if ([pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY]) // we always have a sentence if the plugin is not installed
   {
     returnVal = [ExampleSentencePeer sentencesExistForCardId:self.cardId];
   }

@@ -424,6 +424,7 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
+#if defined(LWE_CFLASH)
   // We have to pass the plugin manager to each call so that Card knows what plugins (PINYIN, HSK) we have installed.
   if ([self.currentCard hasAudioWithPluginManager:self.pluginManager])
   {
@@ -435,6 +436,7 @@
     Plugin *pinyinPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:pinyinPlugin userInfo:nil];
   }
+#endif
 }
 
 #pragma mark - Private methods to setup cards (called every transition)
@@ -468,7 +470,7 @@
   BOOL returnVal = YES;
   if ([self.pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
-    returnVal = [card hasExampleSentences];
+    returnVal = [card hasExampleSentencesWithPluginManager:self.pluginManager];
   }
   return returnVal;
 }
@@ -647,8 +649,10 @@
  */
 - (IBAction) launchAudioInstaller
 {
+#if defined (LWE_CFLASH)
   Plugin *exPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
+#endif
 }
 
 
@@ -666,11 +670,13 @@
     [self _setupPageControl:1];
     [self.exampleSentencesViewController setupWithCard:self.currentCard]; // finally setup the example view for the current card
   }
+#if defined (LWE_CFLASH)
   else if ([installedPlugin.pluginId isEqualToString:AUDIO_PINYIN_KEY])
   {
     // Reset the current card
     [self doChangeCard:self.currentCard direction:nil];
   }
+#endif
 }
 
 #pragma mark - ProgressDetailsViewDelegate

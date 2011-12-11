@@ -139,7 +139,7 @@ NSInteger const kLWEUninitializedCardId    = -1;
 
 #pragma mark - Card Properties
 
-- (BOOL) hasExampleSentences
+- (BOOL) hasExampleSentencesWithPluginManager:(PluginManager *)mgr;
 {
   return NO;
 }

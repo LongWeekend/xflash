@@ -8,6 +8,7 @@
 
 #import "ExampleSentencePeer.h"
 #import "CardPeer.h"
+#import "jFlashAppDelegate.h"
 
 /*!
     @class ExampleSentencePeer
@@ -20,8 +21,10 @@
 #if defined (LWE_JFLASH)
   // Get plugin version
   BOOL isNewVersion = NO;
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  if ([[pm versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
+  // MMA TODO: 12/11/2011 -- this is a total hack, but it's no better than the [CurrentState..] static code
+  // that was here before.  Point is, we need a way to just stop all this plugin versioning ridiculousness altogether.
+  jFlashAppDelegate *appDelegate = (jFlashAppDelegate*)[[UIApplication sharedApplication] delegate];
+  if ([[appDelegate.pluginManager versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
   {
     isNewVersion = YES;
   }
