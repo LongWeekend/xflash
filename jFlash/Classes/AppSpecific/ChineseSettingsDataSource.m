@@ -60,7 +60,7 @@
 
 - (CGFloat) sizeForAcknowledgementsRow
 {
-  return 710.0f;
+  return 730.0f;
 }
 
 /** Returns all the arrays to configure the settings table */
