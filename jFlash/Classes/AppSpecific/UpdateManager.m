@@ -221,6 +221,9 @@
   }
   [settings setValue:pluginsDict forKey:APP_PLUGIN];
   
+  // Delete old plugin file now
+  [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
+  
   // 3. for moving the already downloaded plugins, but it's not happening for now
   //[self _movePluginsToCacheDirectory];
 
