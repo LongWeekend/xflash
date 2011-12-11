@@ -17,7 +17,7 @@
 
 - (NSArray *) _resultsForSearchKeyword:(NSString *)keyword
 {
-  NSArray *results = [CardPeer fullTextSearchForKeyword:keyword];
+  NSArray *results = [CardPeer searchCardsForKeyword:keyword];
   STAssertTrue(([results count] > 0), @"Search should return more than 0 entries for keyword %@", keyword);
   return results;
 }
@@ -26,7 +26,7 @@
 
 - (void) testBasicSearch
 {
-  NSArray *results = [CardPeer fullTextSearchForKeyword:@"日本語"];
+  NSArray *results = [CardPeer searchCardsForKeyword:@"日本語"];
   NSInteger resultCount = [results count];
   STAssertEquals(1, resultCount, @"JFlash database should return 1 results for search keyword '日本語'");
 }
