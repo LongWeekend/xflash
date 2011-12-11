@@ -114,7 +114,7 @@ class TagImporter
       bulkSQL.add((insert_tag_link_query % [card_id]))
     end
     bulkSQL.flush
-    update_tag_count
+    update_tag_count(tag_id)
   end
     
   def match_cards
@@ -187,11 +187,10 @@ class TagImporter
     return card_ids
   end # End of the method body
   
-  def update_tag_count
+  def update_tag_count(tag_id = -1)
     connect_db
     
     # Grab the tag_id first
-    tag_id = @tag_id
     count = 0
     
     select_count_query = "SELECT count(card_id) as cnt FROM card_tag_link WHERE tag_id = #{tag_id}"

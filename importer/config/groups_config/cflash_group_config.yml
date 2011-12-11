@@ -517,34 +517,34 @@ study_sets:
     pos:
         name: ["Parts of Speech", 0]
         pos_nouns:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_nouns"
         pos_verbs_active:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_verbs_active"
         pos_verbs_stative:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_verbs_stative"
         pos_adv:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_adv"
         pos_det:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_det"
         pos_conj:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_conj"
         pos_measure:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_measure"
         pos_particle:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_particle"
         pos_pre:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_pre"
         pos_post:
-            file: "pos.yml"
+            file: "pos_tags.yml"
             metadata_key: "pos_post"
     lwe_favs:
         file: "system_tags.yml"
