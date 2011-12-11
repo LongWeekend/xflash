@@ -532,7 +532,6 @@
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
 		49C506251484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506261484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
-		49C506271484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506281484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C5BC2111C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5BC2011C51B0D00A595D6 /* DisplaySearchedSentenceViewController.m */; };
 		49C6EA2C11F6F95D004633FD /* ActionBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496BE54C11EC5303003AB713 /* ActionBarViewController.m */; };
@@ -3529,9 +3528,7 @@
 				49AD1800148476340017EFB4 /* unzip.c in Sources */,
 				49AD1804148476340017EFB4 /* zip.c in Sources */,
 				49AD1808148476340017EFB4 /* ZipArchive.mm in Sources */,
-				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */,
-				49C506271484966A0094734D /* JSONKit.m in Sources */,
 				4971252C14873B0000D4D150 /* MoodIcon.m in Sources */,
 				498EBDA31488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */,
 				498EBDA91488B96800BA6DE7 /* Plugin.m in Sources */,
