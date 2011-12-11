@@ -422,8 +422,6 @@
 		4982294E1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498229361490F028009EC2CD /* 02-turning-gear@2x.png */; };
 		498229511491D02B009EC2CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 498229501491D02A009EC2CD /* DownloadManager.m */; };
 		498229521491D02B009EC2CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 498229501491D02A009EC2CD /* DownloadManager.m */; };
-		498229531491D02B009EC2CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 498229501491D02A009EC2CD /* DownloadManager.m */; };
-		498229541491D02B009EC2CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 498229501491D02A009EC2CD /* DownloadManager.m */; };
 		498EBDA31488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */; };
 		498EBDA41488AEAA00BA6DE7 /* PluginManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA21488AEAA00BA6DE7 /* PluginManagerTest.m */; };
 		498EBDA71488B96800BA6DE7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDA61488B96800BA6DE7 /* Plugin.m */; };
@@ -3540,7 +3538,6 @@
 				498EBDAF1488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910156148992EC003E9A19 /* TagTest.m in Sources */,
-				498229531491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3619,7 +3616,6 @@
 				498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910157148992EC003E9A19 /* TagTest.m in Sources */,
 				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
-				498229541491D02B009EC2CD /* DownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
