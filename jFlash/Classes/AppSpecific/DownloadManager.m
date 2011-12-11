@@ -126,6 +126,12 @@
  */
 - (void) _showDownloaderModal:(NSNotification*)aNotification
 {
+  // Already showing!  Don't do it again.
+  if (self.baseViewController.modalViewController != nil)
+  {
+    return;
+  }
+  
   // If the user tries to re-lauch while we are downloading, just re-launch that modal.
   if ([self pluginIsDownloading])
   {
