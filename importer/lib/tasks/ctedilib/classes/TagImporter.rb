@@ -117,16 +117,11 @@ class TagImporter
     update_tag_count
   end
     
-  def import
-    # Insert into the tags_staging first to get the parent of the tags.
-    connect_db
-    @tag_id = insert_tag_into_table
-    log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [@config[:tag_configuration].short_name, @tag_id], true)
-    
-    # After creating the table, skip the import process if we have no card data
+  def match_cards
+    # Quick return if this method isn't set up with any matching data
     if (@config[:data].nil? or @config[:data].empty?)
       prt "Skipping matching process for empty tag (no data passed in)"
-      return @tag_id
+      return []
     end
     
     @entry_cache.prepare_cache_if_necessary
@@ -137,7 +132,7 @@ class TagImporter
     card_ids = Array.new
 
     # This is the for each for every record data call the block with each line as the parameter.
-    tickcount("Processing tag-card-match and importing") do
+    tickcount("Processing tag-card-match for '%s'" % [@config[:tag_configuration].short_name]) do
       @config[:data].each do |entry|
         # Cache these once so we're not making new blocks on every loop
         default_match_criteria = entry.default_match_criteria if default_match_criteria.nil?
@@ -147,7 +142,6 @@ class TagImporter
         matching_cards = find_cards_similar_to(entry, default_match_criteria)
         
         # If the normal criteria turned up nothing conclusive, check with human importer and/or log it
-        normal_card = false
         if matching_cards.empty?
           # This is for the case where nothing matched at all on the strict criteria
           loosely_matching_cards = find_cards_similar_to(entry, loose_match_criteria)
@@ -174,9 +168,6 @@ class TagImporter
             @cards_multiple_found += 1
             log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
           end
-        else
-          # Only 1 record for strict match, all is normal
-          normal_card = true
         end
 
         # OK, we've been through all we can do in terms of recovery, et al.  Log the results, good or bad
@@ -187,15 +178,12 @@ class TagImporter
             @cards_matched += 1
             card_ids << card_id
           else
-            log "\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, entry.headword, entry.pinyin, entry.meanings.join("/")]
+            log ("\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, entry.headword, entry.pinyin, entry.meanings.join("/")], true)
           end
         end
       end
     end
-
-    # Now actually do the SQL work from our in-memory card_ids array
-    insert_card_tag_links_for_ids(@tag_id, card_ids)
-    log("Finish inserting: %s with %s records not found and %s duplicates" % [card_ids.size, @cards_not_found, @cards_multiple_found], true)
+    log("Finish matching: %s with %s records not found and %s duplicates" % [card_ids.size, @cards_not_found, @cards_multiple_found], true)
     return card_ids
   end # End of the method body
   

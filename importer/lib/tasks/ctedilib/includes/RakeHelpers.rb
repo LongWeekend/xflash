@@ -18,6 +18,8 @@ module RakeHelpers
       end
     elsif fail_if_undefined
       exit_with_error("Command line attribute not found #{attrib} !", ENV) if fail_if_undefined
+    else
+      return nil
     end
   end
 

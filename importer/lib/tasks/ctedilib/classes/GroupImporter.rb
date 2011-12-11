@@ -85,7 +85,14 @@ class GroupImporter
     # Get the class of the importer used and try to constantize / instantiate it from there
     @entry_cache.prepare_cache_if_necessary
     importer = configuration.file_importer.constantize.new(results, configuration, @entry_cache)
-    importer.import
+
+    # Insert into the tags_staging first to get the parent of the tags.
+    @tag_id = importer.insert_tag_into_table
+    log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [configuration[:tag_configuration].short_name, @tag_id], true)
+
+    # Now do the matching & inserting into card_tag_link
+    card_ids = importer.match_cards
+    importer.insert_card_tag_links_for_ids(@tag_id, card_ids)
 
     # Set the priority word flag is appropriate
     if configuration.is_priority_words?

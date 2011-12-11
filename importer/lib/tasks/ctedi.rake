@@ -118,17 +118,23 @@ namespace :ctedi do
     include DatabaseHelpers
     
     get_cli_debug
+
+    tag_name = get_cli_attrib("config_file")
+    if tag_name.nil?
+      tag_name = "cflash_group_config.yml"
+    end
     
     # Import groups and match tags within them
     prt "\nBeginning Group & Tag Import"
     prt_dotted_line
     GroupImporter.empty_staging_tables
-    importer = GroupImporter.new("cflash_group_config.yml")
+    importer = GroupImporter.new(tag_name)
     importer.import
     
     prt "\nImport Finished"
     prt_dotted_line
   end
+
 
   ##############################################################################
   desc "cFlash SQLite Exporter"
