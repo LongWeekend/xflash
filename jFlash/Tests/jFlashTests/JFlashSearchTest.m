@@ -42,10 +42,17 @@
     beginning of a headword, reading, or meaning.
  */
   NSArray *results = [self _resultsForSearchKeyword:@"teru"];
-  Card *card = [results objectAtIndex:0];
-  [card hydrate];
-  
-  STAssertTrue([card.reading hasPrefix:@"teru"], @"Card reading should start with search term");
+  if ([results count] > 0)
+  {
+    Card *card = [results objectAtIndex:0];
+    [card hydrate];
+    
+    STAssertTrue([card.reading hasPrefix:@"teru"], @"Card reading should start with search term");
+  }
+  else
+  {
+    STFail(@"Couldn't get any cards for search: teru");
+  }
 }
 
 #pragma mark - Setup & Teardown
