@@ -514,6 +514,38 @@ study_sets:
         frequency_7:
             file: "frequency_config.yml"
             metadata_key: "frequency_7"
+    pos:
+        name: ["Parts of Speech", 0]
+        pos_nouns:
+            file: "pos.yml"
+            metadata_key: "pos_nouns"
+        pos_verbs_active:
+            file: "pos.yml"
+            metadata_key: "pos_verbs_active"
+        pos_verbs_stative:
+            file: "pos.yml"
+            metadata_key: "pos_verbs_stative"
+        pos_adv:
+            file: "pos.yml"
+            metadata_key: "pos_adv"
+        pos_det:
+            file: "pos.yml"
+            metadata_key: "pos_det"
+        pos_conj:
+            file: "pos.yml"
+            metadata_key: "pos_conj"
+        pos_measure:
+            file: "pos.yml"
+            metadata_key: "pos_measure"
+        pos_particle:
+            file: "pos.yml"
+            metadata_key: "pos_particle"
+        pos_pre:
+            file: "pos.yml"
+            metadata_key: "pos_pre"
+        pos_post:
+            file: "pos.yml"
+            metadata_key: "pos_post"
     lwe_favs:
         file: "system_tags.yml"
         metadata_key: "lwe_favs"
