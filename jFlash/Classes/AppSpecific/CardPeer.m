@@ -43,6 +43,7 @@
  */
 + (BOOL) keywordIsReading:(NSString *)keyword
 {
+#if defined (LWE_CFLASH)
   // If it has any string components longer than 5 chars, it's not pinyin.
   NSArray *components = [keyword componentsSeparatedByString:@" "];
   for (NSString *item in components)
@@ -65,6 +66,9 @@
     }
   }
   return (hasIdeograph == NO);
+#elif defined (LWE_JFLASH)
+  return NO;
+#endif
 }
 
 /**
@@ -72,6 +76,7 @@
  */
 + (BOOL) keywordIsHeadword:(NSString *)keyword
 {
+#if defined (LWE_CFLASH)
   // Strip out numbers, symbols & whitespace
   NSCharacterSet *stripChars = [NSCharacterSet characterSetWithCharactersInString:@"? "];
   NSArray *components = [keyword componentsSeparatedByCharactersInSet:stripChars];
@@ -88,6 +93,9 @@
     }
   }
   return YES;
+#elif defined (LWE_JFLASH)
+  return NO;
+#endif
 }
 
 
