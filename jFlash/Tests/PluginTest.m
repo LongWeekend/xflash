@@ -81,6 +81,21 @@
   STAssertNoThrow([self.plugin setValue:@"foo" forKey:@"fsd43dsar32"], @"This should pass");
 }
 
+#pragma mark - Migration Testing
+
+- (void) testParseLegacyPLIST
+{
+  // Don't use what we got in setup, make our own.
+  self.plugin = nil;
+  
+  NSDictionary *oldPluginHash = [[NSBundle mainBundle] pathForResource:@"old-plist-format" ofType:@"plist"];
+  STAssertNotNil(oldPluginHash, @"Could not get old plist format file");
+  
+  
+  
+  
+}
+
 #pragma mark - Setup/Teardown
 
 - (void) setUp

@@ -204,10 +204,15 @@
 + (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings
 {
   //New key for the user settings preference in version 1.6
-  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_DATA_VERSION];
   [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
 
-  // for moving the already downloaded plugins, but it's not happening for now
+  // 1. Execute SQL update file for bad data fixes - TODO
+  //[UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6 withSQLStatements:@"" forSettings:settings];
+  
+  // 2. Update settings inre: plugins
+  //  NSDictionary *pluginsDict = [settings objectForKey:APP_PLUGIN];
+  
+  // 3. for moving the already downloaded plugins, but it's not happening for now
   //[self _movePluginsToCacheDirectory];
 }
 
