@@ -17,7 +17,7 @@
 
 - (NSArray *) _searchKeywordExpectingResults:(NSString*)keyword
 {
-  NSArray *results = [CardPeer fullTextSearchForKeyword:keyword];
+  NSArray *results = [CardPeer searchCardsForKeyword:keyword];
   STAssertTrue(([results count] > 0), @"FTS search returned no results for keyword: %@!", keyword);
   return results;
 }
@@ -26,7 +26,7 @@
 
 - (void) testBasicSearch
 {
-  NSArray *results = [CardPeer fullTextSearchForKeyword:@"keyword"];
+  NSArray *results = [CardPeer searchCardsForKeyword:@"keyword"];
   NSInteger resultCount = [results count];
   STAssertEquals(3, resultCount, @"CFlash database should return 3 results for search keyword 'keyword'");
 }
