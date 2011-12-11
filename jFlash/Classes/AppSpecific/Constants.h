@@ -103,6 +103,9 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
   extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
 
+  // This is here for legacy JFlash reasons - before v1.6 this was used.  Used for upgrade path now.
+  extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
+
 #elif defined(LWE_CFLASH)
 
   // LWE Favorites - CFlash

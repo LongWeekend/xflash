@@ -91,6 +91,9 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";
       NSString * const LWE_PREINSTALLED_PLUGIN_PLIST= @"jFlash-installed.plist";
 
+      // This is here for legacy migration only, as of JFLash 1.6.
+      NSString * const LWE_DOWNLOADED_PLUGIN_PLIST  = @"downloadedPlugin.plist";
+
 // Don't use Cloudfront in development
 #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
