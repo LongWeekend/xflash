@@ -390,8 +390,7 @@
 		497607EA147A6570000A9FC5 /* chinese-flash-splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 497607E1147A6570000A9FC5 /* chinese-flash-splash.png */; };
 		497607EB147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */; };
 		497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */; };
-		4979D7941494982200625635 /* old-plist-format.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4979D7931494982200625635 /* old-plist-format.plist */; };
-		4979D7951494982200625635 /* old-plist-format.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4979D7931494982200625635 /* old-plist-format.plist */; };
+		4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4979D7AD14949AB800625635 /* JFlashPluginMigrationTest.m */; };
 		497CAF2011B90E3300558846 /* CustomCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917A5C3811AB826000016BD2 /* CustomCellBackgroundView.m */; };
 		4982292D1490A0BE009EC2CD /* SearchingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982292C1490A0BD009EC2CD /* SearchingTableCell.xib */; };
 		4982292E1490A0BE009EC2CD /* SearchingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4982292C1490A0BD009EC2CD /* SearchingTableCell.xib */; };
@@ -1049,7 +1048,8 @@
 		497607E0147A6570000A9FC5 /* chinese-flash-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-icon@2x.png"; path = "Assets/CFlash/chinese-flash-icon@2x.png"; sourceTree = "<group>"; };
 		497607E1147A6570000A9FC5 /* chinese-flash-splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash.png"; path = "Assets/CFlash/chinese-flash-splash.png"; sourceTree = "<group>"; };
 		497607E2147A6570000A9FC5 /* chinese-flash-splash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chinese-flash-splash@2x.png"; path = "Assets/CFlash/chinese-flash-splash@2x.png"; sourceTree = "<group>"; };
-		4979D7931494982200625635 /* old-plist-format.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "old-plist-format.plist"; path = "Tests/Assets/old-plist-format.plist"; sourceTree = SOURCE_ROOT; };
+		4979D7AC14949AB800625635 /* JFlashPluginMigrationTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashPluginMigrationTest.h; path = Tests/jFlashTests/JFlashPluginMigrationTest.h; sourceTree = SOURCE_ROOT; };
+		4979D7AD14949AB800625635 /* JFlashPluginMigrationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashPluginMigrationTest.m; path = Tests/jFlashTests/JFlashPluginMigrationTest.m; sourceTree = SOURCE_ROOT; };
 		4982292C1490A0BD009EC2CD /* SearchingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchingTableCell.xib; path = XIBs/SearchingTableCell.xib; sourceTree = "<group>"; };
 		498229311490F028009EC2CD /* 00-turning-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "00-turning-gear.png"; path = "Assets/00-turning-gear.png"; sourceTree = "<group>"; };
 		498229321490F028009EC2CD /* 00-turning-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "00-turning-gear@2x.png"; path = "Assets/00-turning-gear@2x.png"; sourceTree = "<group>"; };
@@ -1605,7 +1605,6 @@
 		24B5660413CF656100BEE166 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4979D7921494980A00625635 /* Test Assets */,
 				49E3D17514727F9700F79308 /* Supporting Files */,
 				24AEAEA013D5E1F6008ADA45 /* Frameworks */,
 				4904664814727B03004C44E2 /* Common */,
@@ -1743,6 +1742,8 @@
 		4904664914727B0F004C44E2 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
+				4979D7AC14949AB800625635 /* JFlashPluginMigrationTest.h */,
+				4979D7AD14949AB800625635 /* JFlashPluginMigrationTest.m */,
 				91910048148052A1003E9A19 /* JFlashSearchTest.h */,
 				91910049148052A1003E9A19 /* JFlashSearchTest.m */,
 			);
@@ -1865,14 +1866,6 @@
 				49BBA49B144D4BCE00E6A9AE /* help */,
 			);
 			name = "Chinese Flash Assets";
-			sourceTree = "<group>";
-		};
-		4979D7921494980A00625635 /* Test Assets */ = {
-			isa = PBXGroup;
-			children = (
-				4979D7931494982200625635 /* old-plist-format.plist */,
-			);
-			name = "Test Assets";
 			sourceTree = "<group>";
 		};
 		4993AFBF1278103E00872875 /* Help */ = {
@@ -3083,7 +3076,6 @@
 				498229451490F028009EC2CD /* 01-turning-gear@2x.png in Resources */,
 				498229491490F028009EC2CD /* 02-turning-gear.png in Resources */,
 				4982294D1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
-				4979D7941494982200625635 /* old-plist-format.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3110,7 +3102,6 @@
 				498229461490F028009EC2CD /* 01-turning-gear@2x.png in Resources */,
 				4982294A1490F028009EC2CD /* 02-turning-gear.png in Resources */,
 				4982294E1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
-				4979D7951494982200625635 /* old-plist-format.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3550,6 +3541,7 @@
 				498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910156148992EC003E9A19 /* TagTest.m in Sources */,
 				498229531491D02B009EC2CD /* DownloadManager.m in Sources */,
+				4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
