@@ -88,16 +88,16 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_6           = @"1.6";
 
       // This pertains to the plugin manager
-      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"availablePluginForDownload.plist";
+      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";
       NSString * const LWE_PREINSTALLED_PLUGIN_PLIST= @"jFlash-installed.plist";
 
 // Don't use Cloudfront in development
 #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/japanese-flash/jFlash-availablePlugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/japanese-flash/jFlash-available.plist";
 #else
       NSString * const LWE_PLUGIN_SERVER            = @"https://d3580k8bnen6up.cloudfront.net";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/jFlash-availablePlugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/jFlash-available.plist";
 #endif
 
 #elif defined(LWE_CFLASH)
@@ -126,14 +126,14 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const AUDIO_PINYIN_KEY = @"AUDIO_PINYIN";
 
       // This pertains to the plugin manager
-      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-availablePlugins.plist";
+      NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"cFlash-available.plist";
       NSString * const LWE_PREINSTALLED_PLUGIN_PLIST   = @"cFlash-installed.plist";
   #if defined(LWE_DEBUG)
       NSString * const LWE_PLUGIN_SERVER            = @"https://s3.amazonaws.com";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/chinese-flash/cFlash-availablePlugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/chinese-flash/cFlash-available.plist";
   #else
       NSString * const LWE_PLUGIN_SERVER            = @"https://d3jxezdeu5e50q.cloudfront.net";
-      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/cFlash-plugins.plist";
+      NSString * const LWE_PLUGIN_LIST_REL_URL      = @"/cFlash-available.plist";
   #endif
 #endif
 
