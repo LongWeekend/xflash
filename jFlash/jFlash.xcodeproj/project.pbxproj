@@ -70,7 +70,7 @@
 		490B23591277C05100CF3484 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 490B23581277C05100CF3484 /* Icon-72.png */; };
 		49111A05147C9CDE0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
 		49111A06147C9CDF0059D620 /* AudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242A17431462893E002977E6 /* AudioSessionManager.m */; };
-		4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */; };
+		4919507C144F1BFE00DB81F7 /* jFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4919507A144F1BFE00DB81F7 /* jFlash-available.plist */; };
 		49195080144F9E7900DB81F7 /* jFlash-FTS-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */; };
 		49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
@@ -435,10 +435,10 @@
 		498EBDB01488BDE000BA6DE7 /* LWEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDAC1488BDE000BA6DE7 /* LWEError.m */; };
 		498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
 		498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EBDB21488D43A00BA6DE7 /* PluginTest.m */; };
-		498EBDB81489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
-		498EBDB91489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
-		498EBDBA1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
-		498EBDBB1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */; };
+		498EBDB81489031A00BA6DE7 /* cFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-available.plist */; };
+		498EBDB91489031A00BA6DE7 /* cFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-available.plist */; };
+		498EBDBA1489031A00BA6DE7 /* cFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-available.plist */; };
+		498EBDBB1489031A00BA6DE7 /* cFlash-available.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDB71489031A00BA6DE7 /* cFlash-available.plist */; };
 		498EBDBD148909CF00BA6DE7 /* jFlash-installed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */; };
 		498EBDBE148909CF00BA6DE7 /* jFlash-installed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */; };
 		498EBDC014890AAD00BA6DE7 /* cFlash-installed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */; };
@@ -976,7 +976,7 @@
 		490B23401277BCE100CF3484 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = External/FMDB/src/FMResultSet.m; sourceTree = "<group>"; };
 		490B23561277BF4600CF3484 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Assets/Icon.png; sourceTree = "<group>"; };
 		490B23581277C05100CF3484 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Assets/Icon-72.png"; sourceTree = "<group>"; };
-		4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = availablePluginForDownload.plist; path = Plugins/availablePluginForDownload.plist; sourceTree = "<group>"; };
+		4919507A144F1BFE00DB81F7 /* jFlash-available.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "jFlash-available.plist"; path = "Plugins/jFlash-available.plist"; sourceTree = "<group>"; };
 		4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-FTS-1.1.db"; path = "sql/plugins/jFlash-FTS-1.1.db"; sourceTree = "<group>"; };
 		4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "jFlash-EX-1.2.db"; path = "sql/plugins/jFlash-EX-1.2.db"; sourceTree = "<group>"; };
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
@@ -1066,7 +1066,7 @@
 		498EBDAC1488BDE000BA6DE7 /* LWEError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEError.m; sourceTree = "<group>"; };
 		498EBDB11488D43A00BA6DE7 /* PluginTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginTest.h; path = Tests/PluginTest.h; sourceTree = SOURCE_ROOT; };
 		498EBDB21488D43A00BA6DE7 /* PluginTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginTest.m; path = Tests/PluginTest.m; sourceTree = SOURCE_ROOT; };
-		498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-availablePlugins.plist"; path = "Plugins/cFlash-availablePlugins.plist"; sourceTree = "<group>"; };
+		498EBDB71489031A00BA6DE7 /* cFlash-available.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-available.plist"; path = "Plugins/cFlash-available.plist"; sourceTree = "<group>"; };
 		498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "jFlash-installed.plist"; path = "Plugins/jFlash-installed.plist"; sourceTree = "<group>"; };
 		498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-installed.plist"; path = "Plugins/cFlash-installed.plist"; sourceTree = "<group>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
@@ -1771,7 +1771,7 @@
 		49195074144F1AB300DB81F7 /* JFlash */ = {
 			isa = PBXGroup;
 			children = (
-				4919507A144F1BFE00DB81F7 /* availablePluginForDownload.plist */,
+				4919507A144F1BFE00DB81F7 /* jFlash-available.plist */,
 				498EBDBC148909CF00BA6DE7 /* jFlash-installed.plist */,
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
@@ -1787,7 +1787,7 @@
 		49195075144F1ACD00DB81F7 /* CFlash */ = {
 			isa = PBXGroup;
 			children = (
-				498EBDB71489031A00BA6DE7 /* cFlash-availablePlugins.plist */,
+				498EBDB71489031A00BA6DE7 /* cFlash-available.plist */,
 				498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */,
 				496C7A6E126325FD004B6B90 /* cFlash-Info.plist */,
 				49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */,
@@ -3032,14 +3032,14 @@
 				4938F8B814024797001EB473 /* CardViewController-EtoJ.xib in Resources */,
 				49BBA49A144D4BBF00E6A9AE /* help in Resources */,
 				49716145144EC74E006BBEB4 /* ReminderSettingsViewController.xib in Resources */,
-				4919507C144F1BFE00DB81F7 /* availablePluginForDownload.plist in Resources */,
+				4919507C144F1BFE00DB81F7 /* jFlash-available.plist in Resources */,
 				493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */,
 				493A4792146A89BB00F1E718 /* SettingsView.xib in Resources */,
 				49377B1F1485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125241487300A00D4D150 /* MoodIcon.xib in Resources */,
 				D3C180011488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
 				D3C180031488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
-				498EBDB81489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
+				498EBDB81489031A00BA6DE7 /* cFlash-available.plist in Resources */,
 				498EBDBD148909CF00BA6DE7 /* jFlash-installed.plist in Resources */,
 				4982292D1490A0BE009EC2CD /* SearchingTableCell.xib in Resources */,
 				498229371490F028009EC2CD /* 00-turning-gear.png in Resources */,
@@ -3063,7 +3063,7 @@
 				493A4794146A89BB00F1E718 /* SettingsView.xib in Resources */,
 				49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125261487300A00D4D150 /* MoodIcon.xib in Resources */,
-				498EBDBA1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
+				498EBDBA1489031A00BA6DE7 /* cFlash-available.plist in Resources */,
 				498EBDBE148909CF00BA6DE7 /* jFlash-installed.plist in Resources */,
 				4982292F1490A0BE009EC2CD /* SearchingTableCell.xib in Resources */,
 				498229391490F028009EC2CD /* 00-turning-gear.png in Resources */,
@@ -3089,7 +3089,7 @@
 				497607EC147A6570000A9FC5 /* chinese-flash-splash@2x.png in Resources */,
 				49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */,
 				497125271487300A00D4D150 /* MoodIcon.xib in Resources */,
-				498EBDBB1489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
+				498EBDBB1489031A00BA6DE7 /* cFlash-available.plist in Resources */,
 				498EBDC114890AAD00BA6DE7 /* cFlash-installed.plist in Resources */,
 				498229301490A0BE009EC2CD /* SearchingTableCell.xib in Resources */,
 				4982293A1490F028009EC2CD /* 00-turning-gear.png in Resources */,
@@ -3266,7 +3266,7 @@
 				497125251487300A00D4D150 /* MoodIcon.xib in Resources */,
 				D3C180021488864600834EAC /* glyphish-style-listen-icon.png in Resources */,
 				D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */,
-				498EBDB91489031A00BA6DE7 /* cFlash-availablePlugins.plist in Resources */,
+				498EBDB91489031A00BA6DE7 /* cFlash-available.plist in Resources */,
 				498EBDC014890AAD00BA6DE7 /* cFlash-installed.plist in Resources */,
 				4982292E1490A0BE009EC2CD /* SearchingTableCell.xib in Resources */,
 				498229381490F028009EC2CD /* 00-turning-gear.png in Resources */,

@@ -261,11 +261,12 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
 - (NSString *) versionForLoadedPlugin:(NSString*)key
 {
   NSString *returnVal = nil;
-  for (Plugin *plugin in _loadedPlugins)
+  for (NSString *pluginId in _loadedPlugins)
   {
-    if ([plugin.pluginId isEqualToString:key])
+    if ([pluginId isEqualToString:key])
     {
-      returnVal = plugin.version;
+      Plugin *plugin = [_loadedPlugins objectForKey:pluginId];
+      returnVal =  plugin.version;
     }
   }
   return returnVal;
