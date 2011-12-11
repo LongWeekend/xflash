@@ -203,17 +203,29 @@
 
 + (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings
 {
-  //New key for the user settings preference in version 1.6
-  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
-
   // 1. Execute SQL update file for bad data fixes - TODO
   //[UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6 withSQLStatements:@"" forSettings:settings];
   
-  // 2. Update settings inre: plugins
-  //  NSDictionary *pluginsDict = [settings objectForKey:APP_PLUGIN];
+  // 2. Update settings inre: plugins -- read from the PLIST file, store everything back to the NSUserDefaults
+  NSMutableDictionary *pluginsDict = [[[settings objectForKey:APP_PLUGIN] mutableCopy] autorelease];
+  NSString *installedPluginPlistPath = [LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST];
+  NSDictionary *installedPluginHash = [NSDictionary dictionaryWithContentsOfFile:installedPluginPlistPath];
+  if (installedPluginHash)
+  {
+    for (NSString *key in installedPluginHash)
+    {
+      NSDictionary *oldPluginHash = [installedPluginHash objectForKey:key];
+      Plugin *newPlugin = [Plugin pluginWithLegacyDictionary:oldPluginHash];
+      [pluginsDict setObject:[NSKeyedArchiver archivedDataWithRootObject:newPlugin] forKey:newPlugin.pluginId];
+    }
+  }
+  [settings setValue:pluginsDict forKey:APP_PLUGIN];
   
   // 3. for moving the already downloaded plugins, but it's not happening for now
   //[self _movePluginsToCacheDirectory];
+
+  //New key for the user settings preference in version 1.6
+  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
 }
 
 
