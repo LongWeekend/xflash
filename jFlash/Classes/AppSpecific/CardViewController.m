@@ -14,14 +14,16 @@
 @interface CardViewController()
 - (void) _injectMeaningHTML:(NSString*)html;
 - (void) _prepareView:(Card*)card;
-- (void) _toggleMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
+
+//! Returns YES if the contents of theLabel fit in scrollViewContainer w/o scrolling
+- (BOOL) _shouldHideMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
 @end
 
 @implementation CardViewController
 
 @synthesize delegate;
-@synthesize meaningWebView, cardHeadwordLabelScrollMoreIcon, cardHeadwordLabel, cardReadingLabelScrollMoreIcon, cardReadingLabel, toggleReadingBtn;
-@synthesize cardReadingLabelScrollContainer, cardHeadwordLabelScrollContainer, readingVisible;
+@synthesize meaningWebView, headwordMoreIcon, headwordLabel, readingMoreIcon, readingLabel, toggleReadingBtn;
+@synthesize readingScrollContainer, headwordScrollContainer, readingVisible = _readingVisible;
 
 @synthesize baseHtml;
 
@@ -102,7 +104,7 @@
   [self.moodIcon updateMoodIcon:100.0f];
   
   // For languages such as Chinese, we may need to configure the font
-  self.cardHeadwordLabel.font = [Card configureFontForLabel:self.cardHeadwordLabel];
+  self.headwordLabel.font = [Card configureFontForLabel:self.headwordLabel];
 }
 
 #pragma mark - IBAction Methods
@@ -113,13 +115,15 @@
  */
 - (IBAction) doToggleReadingBtn
 {
-  if (self.cardReadingLabelScrollContainer.hidden == YES)
+  if (self.readingScrollContainer.hidden == YES)
   {
     [self turnReadingOn];
+    self.readingVisible = YES;
   }
   else
   {
     [self turnReadingOff];
+    self.readingVisible = NO;
   }
 }
 
@@ -127,16 +131,14 @@
 
 - (void) turnReadingOn
 {
-  self.readingVisible = YES;
-  self.cardReadingLabelScrollContainer.hidden = NO;
+  self.readingScrollContainer.hidden = NO;
   [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
-  [self.cardReadingLabel setNeedsDisplay];
+  [self.readingLabel setNeedsDisplay];
 }
 
 - (void) turnReadingOff
 {
-  self.readingVisible = NO;
-  self.cardReadingLabelScrollContainer.hidden = YES;
+  self.readingScrollContainer.hidden = YES;
   [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
                                    forState:UIControlStateNormal];
 }
@@ -144,41 +146,25 @@
 //! shows or hides the reading label and toggleButton according to the readingVisible bool
 - (void) resetReadingVisibility 
 {
-  self.cardReadingLabelScrollContainer.hidden = (self.readingVisible == NO);
+  self.readingScrollContainer.hidden = (self.readingVisible == NO);
   
   // Set the button image to nil when we have a reading showing, and show the "show reading" button when not.
   UIImage *displayReadingImage = (self.readingVisible) ? nil : [UIImage imageNamed:@"practice-btn-showreading.png"];
   [self.toggleReadingBtn setBackgroundImage:displayReadingImage forState:UIControlStateNormal];
 }
 
-- (void) setMeaningWebViewHidden:(BOOL)shouldHide
-{
-  self.meaningWebView.hidden = shouldHide;
-  [self _toggleMoreIconForLabel:self.cardReadingLabel forScrollView:cardReadingLabelScrollContainer];
-}
-
 #pragma mark - Private Methods
 
 // Toggle "more" icon to indicate the user can scroll meaning down
-- (void) _toggleMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
+- (BOOL) _shouldHideMoreIconForLabel:(UILabel *)theLabel forScrollView:(UIScrollView *)scrollViewContainer 
 {
-  BOOL isTooTall = (theLabel.frame.size.height > scrollViewContainer.frame.size.height);
-  if (theLabel == self.cardReadingLabel)
-  {
-    // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
-    self.cardReadingLabelScrollMoreIcon.hidden = ((isTooTall == NO) || (self.readingVisible == NO));
-  }
-  else if (theLabel == self.cardHeadwordLabel)
-  {
-    self.cardHeadwordLabelScrollMoreIcon.hidden = (isTooTall == NO);
-  }
+  return (theLabel.frame.size.height <= scrollViewContainer.frame.size.height);
 }
-
 
 // Prepare the view for the current card
 - (void) _prepareView:(Card*)card
 {
-  // Reset the meaning's scroll view location -- this is not available in earlier iOS versions, so wrap it.
+  // Reset the meaning's scroll view location -- this is not available earlier than iOS5, so wrap it.
   if ([self.meaningWebView respondsToSelector:@selector(scrollView)])
   {
     self.meaningWebView.scrollView.contentOffset = CGPointZero;
@@ -186,7 +172,7 @@
   
   // Fix up the headword & the meaning; those are a bit easier.
   [self _injectMeaningHTML:card.meaning];
-  self.cardHeadwordLabel.text = card.headword;
+  self.headwordLabel.text = card.headword;
   
   // Now do the hard part (for CFlash)
 #if defined(LWE_JFLASH)
@@ -206,37 +192,42 @@
     [tmpAttrString release];
   }
   
-  [(OHAttributedLabel *)self.cardReadingLabel setAttributedText:attrString];
+  [(OHAttributedLabel *)self.readingLabel setAttributedText:attrString];
   [attrString release];
   
   // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
   // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
   // wonky, so we have to go with what works
-  self.cardReadingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
-  self.cardReadingLabel.shadowColor = [UIColor blackColor];
-  self.cardReadingLabel.textAlignment = UITextAlignmentCenter;
+  self.readingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
+  self.readingLabel.shadowColor = [UIColor blackColor];
+  self.readingLabel.textAlignment = UITextAlignmentCenter;
 #endif
   
-  [LWEUILabelUtils resizeLabelWithConstraints:self.cardReadingLabel
+  [LWEUILabelUtils resizeLabelWithConstraints:self.readingLabel
                                   minFontSize:READING_MIN_FONTSIZE
                                   maxFontSize:READING_MAX_FONTSIZE
-                            forParentViewSize:self.cardReadingLabelScrollContainer.frame.size];
+                            forParentViewSize:self.readingScrollContainer.frame.size];
   
   // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:self.cardReadingLabel
-                       forScrollView:self.cardReadingLabelScrollContainer
+  [LWEUILabelUtils autosizeLabelText:self.readingLabel
+                       forScrollView:self.readingScrollContainer
                             withText:card.reading
                          minFontSize:READING_MIN_FONTSIZE
                          maxFontSize:READING_MAX_FONTSIZE];
   
-  [LWEUILabelUtils autosizeLabelText:self.cardHeadwordLabel
-                       forScrollView:self.cardHeadwordLabelScrollContainer
+  [LWEUILabelUtils autosizeLabelText:self.headwordLabel
+                       forScrollView:self.headwordScrollContainer
                             withText:card.headword
                          minFontSize:HEADWORD_MIN_FONTSIZE
                          maxFontSize:HEADWORD_MAX_FONTSIZE];
   
-  [self _toggleMoreIconForLabel:self.cardReadingLabel forScrollView:self.cardReadingLabelScrollContainer];
-  [self _toggleMoreIconForLabel:self.cardHeadwordLabel forScrollView:self.cardHeadwordLabelScrollContainer];
+  // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
+  BOOL shouldHideReadingScroll = [self _shouldHideMoreIconForLabel:self.readingLabel
+                                                     forScrollView:self.readingScrollContainer];
+  self.readingMoreIcon.hidden = (shouldHideReadingScroll || (self.readingVisible == NO));
+  
+  self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
+                                                                    forScrollView:self.headwordScrollContainer];
 }
 
 - (void) _injectMeaningHTML:(NSString*)html
@@ -277,12 +268,12 @@
 - (void)viewDidUnload 
 {
 	[super viewDidUnload];
-	self.cardReadingLabelScrollContainer = nil;
-	self.cardHeadwordLabelScrollContainer = nil;
-	self.cardHeadwordLabelScrollMoreIcon = nil;
-	self.cardReadingLabelScrollMoreIcon = nil;
-	self.cardHeadwordLabel = nil;
-	self.cardReadingLabel = nil;
+	self.readingScrollContainer = nil;
+	self.headwordScrollContainer = nil;
+	self.headwordMoreIcon = nil;
+	self.readingMoreIcon = nil;
+	self.headwordLabel = nil;
+	self.readingLabel = nil;
 	self.toggleReadingBtn = nil;
 	self.meaningWebView = nil;
 	self.moodIcon = nil;
@@ -296,13 +287,13 @@
   [baseHtml release];
   [_tmpJavascript release];
   
-	[cardReadingLabelScrollContainer release];
-	[cardHeadwordLabelScrollContainer release];
-	[cardHeadwordLabelScrollMoreIcon release];
-	[cardReadingLabelScrollMoreIcon release];
+	[headwordScrollContainer release];
+	[headwordMoreIcon release];
+  [headwordLabel release];
 	
-  [cardHeadwordLabel release];
-  [cardReadingLabel release];
+	[readingScrollContainer release];
+	[readingMoreIcon release];
+  [readingLabel release];
   [toggleReadingBtn release];
   
   // Apparently we're supposed to set this to nil, according to the docs

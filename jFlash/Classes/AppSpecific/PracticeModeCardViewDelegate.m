@@ -49,7 +49,7 @@
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
   // always start with the meaning hidden, reset the reading to whatever state it should be
-  [cardViewController setMeaningWebViewHidden:YES];
+  cardViewController.meaningWebView.hidden = YES;
   [cardViewController resetReadingVisibility];
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -79,14 +79,8 @@
 
 - (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
-  [cardViewController setMeaningWebViewHidden:NO];
-  
-  // TODO: MMA why are we caching the value of this only to change it on the next line?
-  // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again
-  // on the next card (in practice mode)
-  BOOL userSetReadingVisible = cardViewController.readingVisible;
+  cardViewController.meaningWebView.hidden = NO;
   [cardViewController turnReadingOn];
-  cardViewController.readingVisible = userSetReadingVisible;
 }
 
 

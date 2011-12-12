@@ -26,7 +26,7 @@
   [cardViewController.moodIcon turnPercentCorrectOff];
   
   // Reading should start as "on" in browse mode no matter what
-  [cardViewController turnReadingOn];  
+  cardViewController.readingVisible = YES;
 }
 
 //! This method will be called when the cardViewController will set up a new card.

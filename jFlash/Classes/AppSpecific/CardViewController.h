@@ -35,34 +35,53 @@ extern NSString * const LWECardHtmlFooter;
   NSString *_tmpJavascript;
 }
 
+//! Designated initializer.  Passing "NO" to displayMainHeadword shows alt headword (e.g. English)
 - (id) initDisplayMainHeadword:(BOOL)displayMainHeadword;
 
 - (IBAction) doToggleReadingBtn;
 
+//! Use when you want to show the reading (w/o persisting that state)
 - (void) turnReadingOn;
+
+//! Use when you want to stop the reading from showing (w/o persisting that state)
 - (void) turnReadingOff;
 
+//! Whatever the value of readingVisible is, this will reset it to that state.
 - (void) resetReadingVisibility;
 
-- (void) setMeaningWebViewHidden:(BOOL)shouldHide;
-
-
+//! Implement this delegate to control how the card is displayed in a mode.
 @property (assign) IBOutlet id<CardViewControllerDelegate> delegate;
 
-@property BOOL readingVisible;
-
-@property (nonatomic, retain) NSString *baseHtml;
-
-@property (nonatomic, retain) IBOutlet UILabel *cardHeadwordLabel;
-@property (nonatomic, retain) IBOutlet UILabel *cardReadingLabel;
-@property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
-
-@property (nonatomic, retain) IBOutlet UIScrollView *cardReadingLabelScrollContainer;
-@property (nonatomic, retain) IBOutlet UIScrollView *cardHeadwordLabelScrollContainer;
-@property (nonatomic, retain) IBOutlet UIImageView *cardReadingLabelScrollMoreIcon;
-@property (nonatomic, retain) IBOutlet UIImageView *cardHeadwordLabelScrollMoreIcon;
-
-@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+//! Our little guy.
 @property (nonatomic, retain) IBOutlet MoodIcon *moodIcon;
 
+//! The label holding the reading for this card
+@property (nonatomic, retain) IBOutlet UILabel *readingLabel;
+
+//! If yes, the reading is visible.  Separate variable than label.hidden because we preserve state across cards.
+@property BOOL readingVisible;
+
+//! Toggles the visibility of the reading off and on.  Will persist state to readingVisible
+@property (nonatomic, retain) IBOutlet UIButton *toggleReadingBtn;
+
+//! Scroll view containing the reading label.  If the reading doesn't fit, we can scroll it.
+@property (nonatomic, retain) IBOutlet UIScrollView *readingScrollContainer;
+
+//! If the reading is scrollable, the "more icon" will show to help the user understand
+@property (nonatomic, retain) IBOutlet UIImageView *readingMoreIcon;
+
+
+//! The label holding the card's main headword
+@property (nonatomic, retain) IBOutlet UILabel *headwordLabel;
+
+//! Scroll view containing the headword label.  If the headword doesn't fit, we can scroll it.
+@property (nonatomic, retain) IBOutlet UIScrollView *headwordScrollContainer;
+
+//! If the headword is scrollable, the "more icon" will show to help the user understand
+@property (nonatomic, retain) IBOutlet UIImageView *headwordMoreIcon;
+
+//! Web view that renders the meaning HTML
+@property (nonatomic, retain) IBOutlet UIWebView *meaningWebView;
+
+@property (nonatomic, retain) NSString *baseHtml;
 @end
