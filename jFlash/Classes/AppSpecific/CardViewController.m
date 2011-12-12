@@ -227,7 +227,7 @@
   self.readingMoreIcon.hidden = (shouldHideReadingScroll || (self.readingVisible == NO));
   
   self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
-                                                                    forScrollView:self.headwordScrollContainer];
+                                                     forScrollView:self.headwordScrollContainer];
 }
 
 - (void) _injectMeaningHTML:(NSString*)html
