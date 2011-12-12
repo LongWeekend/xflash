@@ -15,6 +15,7 @@ class TagImporter
     @human_importer = HumanTagImporter.new
     @cards_multiple_found = 0
     @cards_not_found = 0
+    @duplicate_source_cards = 0
     @cards_matched = 0
     
     # If we are passed an EntryCache, use it, otherwise create a new cache.
@@ -48,6 +49,10 @@ class TagImporter
   
   def cards_multiple_found
     @cards_multiple_found
+  end
+  
+  def duplicate_source_cards
+    @duplicate_source_cards
   end
   
   def cards_not_found
@@ -129,10 +134,11 @@ class TagImporter
     @cards_multiple_found = 0
     @cards_not_found = 0
     @cards_matched = 0
+    @duplicate_source_cards = 0
     card_ids = Array.new
 
     # This is the for each for every record data call the block with each line as the parameter.
-    tickcount("Processing tag-card-match for '%s'" % [@config[:tag_configuration].short_name]) do
+    tickcount("Processing tag-card-match for '%s' - %s cards" % [@config[:tag_configuration].short_name, @config[:data].count]) do
       @config[:data].each do |entry|
         # Cache these once so we're not making new blocks on every loop
         default_match_criteria = entry.default_match_criteria if default_match_criteria.nil?
@@ -143,49 +149,66 @@ class TagImporter
         
         # If the normal criteria turned up nothing conclusive, check with human importer and/or log it
         if matching_cards.empty?
-          # This is for the case where nothing matched at all on the strict criteria
-          loosely_matching_cards = find_cards_similar_to(entry, loose_match_criteria)
-          matched_card = @human_importer.get_human_result_for_entry(entry, loosely_matching_cards)
-          if matched_card
-            # Great, we got something
-            matched_cards = [matched_card]
-          else
-            if loosely_matching_cards.count > 1
-              @cards_multiple_found += 1
-              log "\n[Multiple Records]There are multiple loosely matching cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
-            else
-              @cards_not_found += 1
-              log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
-            end
-          end
+          matching_cards = _match_entry_with_loose_criteria(entry, loose_match_criteria)
         elsif matching_cards.count > 1
-          # This is where too much matched on the strict criteria
-          matched_card = @human_importer.get_human_result_for_entry(entry, matching_cards)
-          if matched_card
-            # Great, we got something
-            matched_cards = [matched_card]
-          else
-            @cards_multiple_found += 1
-            log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
-          end
+          matching_cards = _match_entry_with_multiple_results(entry, matching_cards)
         end
 
         # OK, we've been through all we can do in terms of recovery, et al.  Log the results, good or bad
         if matching_cards.count == 1
           card_id = matching_cards.first.id
           raise "card ID must be initialized!" if (card_id == -1)
-          if (!card_ids.include?(card_id))
+          # Don't include a card_id more than once in a tag (a "unique" operation basically)
+          if (card_ids.include?(card_id) == false)
             @cards_matched += 1
             card_ids << card_id
           else
-            log ("\nSomehow, there is a duplicated card with id: %s from headword: %s, pinyin: %s, meanings: %s" % [card_id, entry.headword, entry.pinyin, entry.meanings.join("/")], true)
+            # Make note of this
+            @duplicate_source_cards += 1
           end
         end
-      end
-    end
+      end # end of do block - each
+    end # end of do block - tickcount
     log("Finish matching: %s with %s records not found and %s duplicates" % [card_ids.size, @cards_not_found, @cards_multiple_found], true)
     return card_ids
   end # End of the method body
+  
+  def _match_entry_with_loose_criteria(entry, loose_match_criteria)
+    # This is for the case where nothing matched at all on the strict criteria
+    loosely_matching_cards = find_cards_similar_to(entry, loose_match_criteria)
+    matched_cards = []
+    
+    # Note that even if there is 1 record in loosely_matching_cards, we don't take it -- we pass it -- because we
+    # want a human to look at it.  AFTER a human has looked at it, it will return from this method.
+    matched_card = @human_importer.get_human_result_for_entry(entry, loosely_matching_cards)
+    if matched_card
+      # Great, we got something
+      matched_cards << matched_card
+    else
+      if loosely_matching_cards.count > 1
+        @cards_multiple_found += 1
+        log "\n[Multiple Records]There are multiple loosely matching cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+      else
+        @cards_not_found += 1
+        log "\n[No Record]There are no card found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+      end
+    end
+    return matched_cards
+  end
+  
+  def _match_entry_with_multiple_results(entry, matching_cards)
+    # This is where too much matched on the strict criteria
+    matched_cards = []
+    matched_card = @human_importer.get_human_result_for_entry(entry, matching_cards)
+    if matched_card
+      # Great, we got something
+      matched_cards << matched_card
+    else
+      @cards_multiple_found += 1
+      log "\n[Multiple Records]There are multiple cards found in the card_staging with headword: %s. Reading: %s" % [entry.headword, entry.pinyin]
+    end
+    return matched_cards
+  end
   
   def update_tag_count(tag_id = -1)
     connect_db

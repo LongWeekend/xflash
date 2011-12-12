@@ -219,4 +219,22 @@ class TagImporterTest < Test::Unit::TestCase
     assert_equal(0,importer.cards_multiple_found)
   end
   
+  def test_parsing_pos_tags
+    configuration = TagConfiguration.new("pos_tags.yml", "pos_nouns")
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    
+    parser = WordListParser.new(test_file_path)
+    entries = parser.run('CSVEntry')
+    assert_equal(2453,entries.count)
+    
+    importer = TagImporter.new(entries, configuration)
+    importer.insert_tag_into_table
+    matched_records_arr = importer.match_cards
+    
+    num_dupes = importer.duplicate_source_cards
+    num_not_found = importer.cards_not_found
+    assert_equal((2453 - num_dupes - num_not_found), matched_records_arr.count)
+    
+  end
+  
 end

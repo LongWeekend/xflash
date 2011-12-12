@@ -38,8 +38,8 @@ class WordListParser < Parser
             prt "Could not parse line #%s: %s (msg: %s)" % [line_no, line,e.message]
           end
         else
-          prt "Rescued line was not false but exception caught -- this means we may have infinite loop!"
-          @rescued_line == false
+          prt "Rescued line threw exception, ignoring entirely: %s" % @rescued_line
+          @rescued_line = false
         end
       end
     end
