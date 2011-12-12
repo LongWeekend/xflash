@@ -14,7 +14,7 @@
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
-@synthesize delegate;
+@synthesize bgView;
 
 #pragma mark - UIViewController Methods
 
@@ -24,6 +24,10 @@
   self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7];
   [self drawProgressBars];
   [self setStreakLabel];
+  
+  self.bgView.layer.cornerRadius = 10.0f;
+  self.bgView.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.bgView.layer.borderWidth = 2.0f;
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
@@ -133,13 +137,13 @@
 - (IBAction) dismiss
 {
   [self.view removeFromSuperview];
-  LWE_DELEGATE_CALL(@selector(progressDetailsViewControllerShouldDismissView:), self);
 }
 
 #pragma mark - Class Plumbing
 
 - (void)dealloc
 {
+  [bgView release];
   [currentStudySet release];
   [closeBtn release];
   [streakLabel release];

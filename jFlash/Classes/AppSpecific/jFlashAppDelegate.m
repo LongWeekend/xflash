@@ -218,21 +218,6 @@
   }];
   [self.observerArray addObject:observer];
   
-  // Show popover for progress view
-  observer = [center addObserverForName:LWEShouldShowPopover object:nil queue:nil usingBlock:^(NSNotification *notification)
-  {
-    UIViewController *controller = (UIViewController *)[notification.userInfo objectForKey:@"controller"];
-    if (controller)
-    {
-      // For some reason we have to adjust this.   Tihs is still a hack.
-      CGRect frame = controller.view.frame;
-      frame.origin = CGPointMake(0, 20);
-      controller.view.frame = frame;
-      [blockSelf.tabBarController.view addSubview:controller.view];
-    }
-  }];
-  [self.observerArray addObject:observer];
-  
   //Register the generic show modal, and dismiss modal notification which can be used by any view controller.
   [center addObserver:self selector:@selector(_showModal:) name:LWEShouldShowModal object:nil];
 }

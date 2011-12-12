@@ -42,7 +42,6 @@ NSString * const SET_HEADWORD_TYPE_SIMP   = @"SIMP";
 NSString * const LWEShouldSwitchTab           = @"LWEShouldSwitchTab";
 NSString * const LWEShouldShowModal				    = @"LWEShouldShowModal";
 NSString * const LWEShouldShowDownloadModal	  = @"LWEShouldShowDownloadModal";
-NSString * const LWEShouldShowPopover         = @"LWEShouldShowPopover";
 
 
 //Rendy did add this - For the plugin manager feature

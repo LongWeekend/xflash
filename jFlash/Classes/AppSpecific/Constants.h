@@ -37,7 +37,6 @@ extern NSString * const LWETableBackgroundImage;
 extern NSString * const LWEShouldSwitchTab;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldShowDownloadModal;
-extern NSString * const LWEShouldShowPopover;
 
 
 // Settings - do not change

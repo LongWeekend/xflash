@@ -361,14 +361,14 @@
 
 
 /**
- * Called when the user tapps the progress bar at the top of the practice view
+ * Called when the user taps the progress bar at the top of the practice view
  * Launches the progress modal view in ProgressDetailsViewController
  */
 - (IBAction)doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
-  if (!self.progressVC)
+  if (self.progressVC == nil)
   {
     ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
     self.progressVC = progressView;
@@ -381,10 +381,16 @@
   self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
   self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
   self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
-  self.progressVC.delegate = self;
+
+  // Make room for the status bar
+  CGRect frame = self.progressVC.view.frame;
+  frame.origin = CGPointMake(0, 20);
+  self.progressVC.view.frame = frame;
   
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:self.progressVC, @"controller", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowPopover object:self userInfo:userInfo];
+  // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
+  // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
+  // There is a call to -removeFromSuperview inside the progress VC on dismiss.
+  [self.parentViewController.view addSubview:self.progressVC.view];
 }
 
 
@@ -677,13 +683,6 @@
     [self doChangeCard:self.currentCard direction:nil];
   }
 #endif
-}
-
-#pragma mark - ProgressDetailsViewDelegate
-
-- (void)progressDetailsViewControllerShouldDismissView:(id)progressDetailsViewController
-{
-  self.progressVC = nil;
 }
 
 #pragma mark - ScrollView Delegate & Page Control stuff
