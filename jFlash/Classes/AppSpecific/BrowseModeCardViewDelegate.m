@@ -87,7 +87,7 @@
 
 - (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  Card* nextCard;
+  Card *nextCard = nil;
   if(directionOrNil == kCATransitionFromLeft) // if we are coming from the left, get the previous card
   {
     nextCard = [cardSet getPrevCard];
