@@ -51,8 +51,12 @@ module DatabaseHelpers
     return sql_tmp_fn
   end
 
-  def mysql_escape_str(txt)
-    txt.gsub("'" , '\\\\\'')
+  def mysql_escape_str(txt = "")
+    if txt.kind_of?(String)
+      return txt.gsub("'" , '\\\\\'')
+    else
+      return ""
+    end
   end
   
   # Return serialized object 
