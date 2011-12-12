@@ -28,6 +28,8 @@ load File.dirname(__FILE__) + "/classes/Parser.rb"
 load File.dirname(__FILE__) + "/classes/CEdictParser.rb"
 load File.dirname(__FILE__) + "/classes/WordListParser.rb"
 
+load File.dirname(__FILE__) + "/classes/CEdictImporterConfiguration.rb"
+
 # Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
 load File.dirname(__FILE__) + "/classes/TagConfiguration.rb"
