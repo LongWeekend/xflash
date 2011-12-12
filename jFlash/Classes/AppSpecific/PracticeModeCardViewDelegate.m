@@ -40,8 +40,8 @@
 - (void) cardViewDidChangeMode:(CardViewController *)cardViewController
 {
   // You can tap the HH in practice mode.
-  cardViewController.moodIcon.moodIconBtn.enabled = YES;
-
+  [cardViewController.moodIcon setButtonEnabled:YES];
+  
   // Show the percent correct when in practice mode
   [cardViewController.moodIcon turnPercentCorrectOn];
 }
@@ -57,7 +57,7 @@
   if (useMainHeadword == NO)
   {
     cardViewController.toggleReadingBtn.hidden = YES;
-    cardViewController.cardReadingLabelScrollContainer.hidden = YES;
+    cardViewController.readingScrollContainer.hidden = YES;
     cardViewController.readingVisible = NO;
   }
   else

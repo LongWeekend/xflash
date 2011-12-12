@@ -19,6 +19,11 @@
   [[NSBundle mainBundle] loadNibNamed:@"MoodIcon" owner:self options:nil];
 }
 
+- (void) setButtonEnabled:(BOOL)enable
+{
+  self.moodIconBtn.enabled = enable;
+}
+
 /**
  * Turns the % correct button on and off, in case it is in the way of the meaning
  */

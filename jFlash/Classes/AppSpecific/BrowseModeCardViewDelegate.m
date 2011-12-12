@@ -20,7 +20,7 @@
 - (void) cardViewDidChangeMode:(CardViewController*)cardViewController
 {
   // You can't tap the HH in browse mode.
-  cardViewController.moodIcon.moodIconBtn.enabled = NO;
+  [cardViewController.moodIcon setButtonEnabled:NO];
   
   // We never want to see "% correct" in browse mode
   [cardViewController.moodIcon turnPercentCorrectOff];

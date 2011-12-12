@@ -19,6 +19,9 @@
 - (void) turnPercentCorrectOff;
 - (void) turnPercentCorrectOn;
 
+//! If Enabled, you can tap the mood icon (practice mode)
+- (void) setButtonEnabled:(BOOL)isEnabled;
+
 @property (retain, nonatomic) IBOutlet UIView *view;
 @property (retain, nonatomic) IBOutlet UIButton *moodIconBtn;
 @property (retain, nonatomic) IBOutlet UILabel *percentCorrectLabel;
