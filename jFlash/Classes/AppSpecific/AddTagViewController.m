@@ -240,11 +240,9 @@ enum EntrySectionRows
     reading = [self.currentCard reading];
 #endif  
     label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [self.currentCard meaningWithoutMarkup]];
-    label.frame = [LWEUILabelUtils makeFrameForText:label.text
-                                           fontSize:FONT_SIZE_ADD_TAG_VC
-                                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
-                                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
-    
+    [label adjustFrameWithFontSize:FONT_SIZE_ADD_TAG_VC
+                         cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
+                        cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   // the cells for either tag type look the same

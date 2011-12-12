@@ -113,7 +113,9 @@
     [label setNumberOfLines:0];
     [label setFont:[UIFont systemFontOfSize:LWE_UITABLE_CELL_FONT_SIZE]];
     [label setText:text];
-    [label setFrame:[LWEUILabelUtils makeFrameForText:text fontSize:LWE_UITABLE_CELL_FONT_SIZE cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN]];
+    [label adjustFrameWithFontSize:LWE_UITABLE_CELL_FONT_SIZE
+                         cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
+                        cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [[cell contentView] addSubview:label];
     [label release];
