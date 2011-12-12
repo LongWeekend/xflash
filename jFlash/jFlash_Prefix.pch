@@ -26,7 +26,7 @@
   #import "LWEMacros.h"
   #import "LWENetworkUtils.h"
   #import "LWERetinaUtils.h"
-  #import "LWEUILabelUtils.h"
+  #import "UILabel+LWEUtilities.h"
   #import "LWEUIAlertView.h"
   #import "LWEUITableUtils.h"
   #import "LWEUniversalAppHelpers.h"

@@ -20,13 +20,13 @@
 - (void) cardViewDidChangeMode:(CardViewController*)cardViewController
 {
   // You can't tap the HH in browse mode.
-  cardViewController.moodIcon.moodIconBtn.enabled = NO;
+  [cardViewController.moodIcon setButtonEnabled:NO];
   
   // We never want to see "% correct" in browse mode
   [cardViewController.moodIcon turnPercentCorrectOff];
   
   // Reading should start as "on" in browse mode no matter what
-  [cardViewController turnReadingOn];  
+  cardViewController.readingVisible = YES;
 }
 
 //! This method will be called when the cardViewController will set up a new card.
@@ -37,7 +37,7 @@
 
 #pragma mark StudyViewControllerDelegate Methods
 
-- (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController *)svc
+- (UIViewController<StudyViewSubcontrollerProtocol> *)cardViewControllerForStudyView:(StudyViewController *)svc
 {
   BOOL useMainHeadword = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
 	CardViewController *tmpCVC = [[CardViewController alloc] initDisplayMainHeadword:useMainHeadword];
@@ -46,7 +46,7 @@
   return [tmpCVC autorelease];
 }
 
-- (UIViewController<StudyViewSubcontrollerDelegate> *)actionBarViewControllerForStudyView:(StudyViewController *)svc
+- (UIViewController<StudyViewSubcontrollerProtocol> *)actionBarViewControllerForStudyView:(StudyViewController *)svc
 {
   ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] initWithNibName:@"ActionBarViewController-Browse" bundle:nil];
   tmpABVC.delegate = self;
@@ -87,7 +87,7 @@
 
 - (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  Card* nextCard;
+  Card *nextCard = nil;
   if(directionOrNil == kCATransitionFromLeft) // if we are coming from the left, get the previous card
   {
     nextCard = [cardSet getPrevCard];

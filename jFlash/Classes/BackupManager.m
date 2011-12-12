@@ -43,7 +43,7 @@
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(didRestoreUserData)])
   {
-    [delegate didRestoreUserData];
+    [self.delegate didRestoreUserData];
   }
 }
 
@@ -52,7 +52,7 @@
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(didFailToRestoreUserDateWithError:)])
   {
-    [delegate didFailToRestoreUserDateWithError:error];
+    [self.delegate didFailToRestoreUserDateWithError:error];
   }
 }
 
@@ -133,25 +133,29 @@
 - (void) createUserSetsForData:(NSData*)data
 {
   NSDictionary *idsDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  NSEnumerator *enumerator = [idsDict keyEnumerator];
-  NSNumber *key = nil;
-  while ((key = [enumerator nextObject])) 
+  for (NSNumber *tagIdNum in idsDict)
   {
-    NSArray *cardIdsAndTagName = [idsDict objectForKey:key];
+    LWE_ASSERT_EXC([tagIdNum isKindOfClass:[NSNumber class]], @"Must pass a dict where keys are NSNumbers");
+    
+    NSArray *cardIdsAndTagName = [idsDict objectForKey:tagIdNum];
+    LWE_ASSERT_EXC([cardIdsAndTagName count] > 1, @"Tag info must be an array of at least 2 values");
+    
+    // the first oject is the tag name, second is the group id
     NSEnumerator *objEnumerator = [cardIdsAndTagName objectEnumerator];
-    
-    // the first oject is the tag name
-    NSString *tagName = [objEnumerator nextObject];
-    
-    // the second object is the group id
-    NSNumber *groupId = [objEnumerator nextObject]; 
+    NSString *tagName = [objEnumerator nextObject];  // index = 0
+    NSNumber *groupId = [objEnumerator nextObject];  // index = 1
     
     // the rest are card ids, so add them to the tag we just made
-    Tag *userTag = [self _tagForName:tagName andId:key andGroupId:groupId];
-    NSArray *cards = [CardPeer retrieveFaultedCardsForTag:userTag];
-    for (Card *card in cards)
+    Tag *userTag = [self _tagForName:tagName andId:tagIdNum andGroupId:groupId];
+    NSArray *currentCards = [CardPeer retrieveFaultedCardsForTag:userTag];
+    NSNumber *newCardId = nil;
+    while ((newCardId = [objEnumerator nextObject])) 
     {
-      [TagPeer subscribeCard:card toTag:userTag];
+      Card *newCard = [CardPeer blankCardWithId:[newCardId integerValue]];
+      if ([currentCards containsObject:newCard] == NO)
+      {
+        [TagPeer subscribeCard:newCard toTag:userTag];
+      }
     }
   }
 }

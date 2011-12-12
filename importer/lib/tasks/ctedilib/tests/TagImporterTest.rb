@@ -17,7 +17,7 @@ class TagImporterTest < Test::Unit::TestCase
     # For starred words
     configuration = TagConfiguration.new("system_tags.yml", "starred")
     importer = TagImporter.new(nil, configuration)
-    importer.import
+    importer.match_cards
 
     # My Starred Words should also be editable
     $cn.execute("SELECT tag_id, editable from tags_staging WHERE tag_name LIKE 'My Starred Words'").each do |rec|
@@ -33,9 +33,11 @@ class TagImporterTest < Test::Unit::TestCase
     
     parser = WordListParser.new(test_file_path)
     entries = parser.run('CSVEntry')
-    assert_equal(13,entries.count)
+    assert_equal(12,entries.count)
+    
     importer = TagImporter.new(entries, configuration)
-    matched_records_arr = importer.import
+    importer.insert_tag_into_table
+    matched_records_arr = importer.match_cards
     
     # LWE should be editable
     $cn.execute("SELECT tag_id, editable from tags_staging WHERE tag_name LIKE 'Long Weekend Favorites'").each do |tag_id, editable|
@@ -44,9 +46,7 @@ class TagImporterTest < Test::Unit::TestCase
     end
     
     # LWE should have 13 cards
-    $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '1'").each do |tag_count_rec|
-      assert_equal(13, tag_count_rec[0])
-    end
+    assert_equal(12, matched_records_arr.count)
   end
   
   def test_import_800_small
@@ -61,12 +61,11 @@ class TagImporterTest < Test::Unit::TestCase
     assert_equal(43, results.length)
     
     importer = TagImporter.new(results, configuration)
-    importer.import
+    card_ids = importer.match_cards
 
-    # There should be 39 associated cards now -- 4 of the cards can't be matched by the importer (2 unknown x 2 dupes)
-    $cn.execute("SELECT count(*) as count from card_tag_link WHERE tag_id = '%s'" % importer.tag_id).each do |tag_count_rec|
-      assert_equal(39, tag_count_rec[0])
-    end
+    assert_equal(42, card_ids.count)
+    assert_equal(1,importer.cards_not_found)
+    assert_equal(0,importer.cards_multiple_found)
   end
   
   def test_fuzzy_matching_on_yi_or_bu_sound_change
@@ -79,7 +78,7 @@ class TagImporterTest < Test::Unit::TestCase
     cedict_entry.id = 200  # We need a non-negative ID for this not to fail
     cedict_entry2 = CEdictEntry.new
     cedict_entry2.parse_line("一輩子 一辈子 [yi1 bei4 zi5] /(for) a lifetime/")
-    cedict_entry2.id = 200  # We need a non-negative ID for this not to fail
+    cedict_entry2.id = 201  # We need a non-negative ID for this not to fail
 
     # Now create a mock cache & pass it to the importer
     cache = EntryCache.new([cedict_entry, cedict_entry2])
@@ -87,8 +86,8 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([hsk_entry, hsk_entry2], configuration, cache)
     
     # Returns the number of matched entries
-    importer.import
-    assert_equal(2,importer.cards_matched)
+    card_ids = importer.match_cards
+    assert_equal(2,card_ids.count)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
   end
@@ -98,6 +97,7 @@ class TagImporterTest < Test::Unit::TestCase
     book_entry.parse_line('台風	台风	tai2 feng1	/typhoon/')
     cedict_entry = CEdictEntry.new
     cedict_entry.parse_line("颱風 台风 [tai2 feng1] /hurricane/typhoon/")
+    cedict_entry.id = 30
 
     # Now create a mock cache & pass it to the importer
     cache = EntryCache.new([cedict_entry])
@@ -105,7 +105,7 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([book_entry], configuration, cache)
     
     # Returns the number of matched entries
-    importer.import
+    card_ids = importer.match_cards
     assert_equal(1,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
@@ -124,7 +124,7 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([bigram_entry], configuration, cache)
 
     # Returns the number of matched entries
-    importer.import
+    importer.match_cards
     assert_equal(1,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
@@ -146,7 +146,7 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([bigram_entry], configuration, cache)
 
     # Returns the number of matched entries
-    importer.import
+    importer.match_cards
     assert_equal(0,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(1,importer.cards_multiple_found)
@@ -168,7 +168,7 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([book_entry], configuration, cache)
     
     # Returns the number of matched entries
-    importer.import
+    importer.match_cards
     assert_equal(1,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
@@ -190,7 +190,7 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([csv_entry], configuration, cache)
     
     # Returns the number of matched entries
-    importer.import
+    importer.match_cards
     assert_equal(1,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
@@ -213,10 +213,28 @@ class TagImporterTest < Test::Unit::TestCase
     importer = TagImporter.new([csv_entry], configuration, cache)
     
     # Returns the number of matched entries
-    importer.import
+    importer.match_cards
     assert_equal(1,importer.cards_matched)
     assert_equal(0,importer.cards_not_found)
     assert_equal(0,importer.cards_multiple_found)
+  end
+  
+  def test_parsing_pos_tags
+    configuration = TagConfiguration.new("pos_tags.yml", "pos_nouns")
+    test_file_path = File.dirname(__FILE__) + configuration.file_name
+    
+    parser = WordListParser.new(test_file_path)
+    entries = parser.run('CSVEntry')
+    assert_equal(2453,entries.count)
+    
+    importer = TagImporter.new(entries, configuration)
+    importer.insert_tag_into_table
+    matched_records_arr = importer.match_cards
+    
+    num_dupes = importer.duplicate_source_cards
+    num_not_found = importer.cards_not_found
+    assert_equal((2453 - num_dupes - num_not_found), matched_records_arr.count)
+    
   end
   
 end

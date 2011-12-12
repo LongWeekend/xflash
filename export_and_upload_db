@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Clear out any old dir
+rm -rf dbtmp
+
+# Create the CFlash databases
+cd importer
+rake ctedi:export
+mkdir ../dbtmp
+mv *.db ../dbtmp
+
+# Package the files
+cd ../dbtmp
+for file in *.db
+do
+  # Zip up
+  file_w_no_ext=${file%.*}  
+  mkdir $file_w_no_ext
+  mv $file $file_w_no_ext
+  zip -r $file_w_no_ext.zip $file_w_no_ext
+  rm -rf $file_w_no_ext
+
+  # Send to S3
+  s3cmd put --acl-public --guess-mime-type $file_w_no_ext.zip s3://chinese-flash/$file_w_no_ext.zip
+done
+
+# Finally, update the plugin package file
+cd ../jFlash/Plugins
+s3cmd put --acl-public --guess-mime-type cFlash-availablePlugins.plist s3://chinese-flash/cFlash-availablePlugins.plist

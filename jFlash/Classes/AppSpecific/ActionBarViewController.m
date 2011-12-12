@@ -20,7 +20,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 @implementation ActionBarViewController
 @synthesize delegate, currentCard;
 @synthesize nextCardBtn, prevCardBtn, addBtn, rightBtn, wrongBtn, buryCardBtn;
-@synthesize cardMeaningBtnHint;
+@synthesize cardMeaningBtnHint, twitterEngine, tweetWordViewController;
 
 // MMA: 11/14/2011 -- this method appears to be unused...
 //Give the delegate a chance to not reveal the card
@@ -231,7 +231,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
   {
     LWE_LOG(@"Following long weekend (twitter ID 65012024)");
     [self _initTwitterEngine];
-		[_twitterEngine performSelectorInBackground:@selector(follow:) withObject:@"65012024"];
+		[self.twitterEngine performSelectorInBackground:@selector(follow:) withObject:@"65012024"];
   }
 }
 
@@ -248,20 +248,20 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 	NSString *idCurrentUser = [NSString stringWithFormat:@"%d", [settings integerForKey:@"user_id"]];
   
   // Init twitter engine if not already done
-	if (_twitterEngine == nil)
+	if (self.twitterEngine == nil)
 	{
     TweetWordXAuthController *controller = [[TweetWordXAuthController alloc] initWithNibName:@"TweetWordXAuthController" bundle:nil];
-		_twitterEngine = [[LWETwitterEngine alloc] initWithConsumerKey:LWE_TWITTER_CONSUMER_KEY privateKey:LWE_TWITTER_PRIVATE_KEY authenticationView:controller];
+		self.twitterEngine = [[[LWETwitterEngine alloc] initWithConsumerKey:LWE_TWITTER_CONSUMER_KEY privateKey:LWE_TWITTER_PRIVATE_KEY authenticationView:controller] autorelease];
     [controller release];
 	}
 
   // TODO: fix this so it doesn't use App Delegate - use notifications instead
 	jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];	
 	UIViewController *vc = (UIViewController *)appDelegate.tabBarController;
-	_twitterEngine.parentForUserAuthenticationView = vc;
+	self.twitterEngine.parentForUserAuthenticationView = vc;
 	LWE_LOG(@"changed the user for twitter with user id %@", idCurrentUser);
-	[_twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
-	_twitterEngine.delegate = self;
+	[self.twitterEngine setLoggedUser:[LWETUser userWithID:idCurrentUser] authMode:LWET_AUTH_XAUTH];
+	self.twitterEngine.delegate = self;
 }
 
 /**
@@ -271,14 +271,14 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 {
   [self _initTwitterEngine];
 	
-	if ((_twitterEngine.loggedUser != nil) && (_twitterEngine.loggedUser.isAuthenticated))
+	if ((self.twitterEngine.loggedUser != nil) && (self.twitterEngine.loggedUser.isAuthenticated))
 	{
 		LWE_LOG(@"It tries to open up the tweet this words controller");
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
 		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
 													  initWithNibName:@"TweetWordViewController"  
-													  twitterEngine:_twitterEngine 
+													  twitterEngine:self.twitterEngine 
 													  tweetWord:tweetWord];
     
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:twitterController, @"controller", nil];
@@ -288,22 +288,19 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 	}
 }
 
-#pragma mark -
-#pragma mark LWETRequestDelegate
+#pragma mark - LWETRequestDelegate
 
 /**
  * Callback - LWETRequestDelegate - processes result data
  */
 - (void)didFinishProcessWithData:(NSData *)data
 {
-  LWE_LOG(@"Successfully tweeted");
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
+  [self.tweetWordViewController dismissModalViewControllerAnimated:YES];
+  self.tweetWordViewController = nil;
 	
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Tweeted", @"ActionBarViewController.TweetSuccessAlertTitle") 
                                      message:NSLocalizedString(@"Successfully added to your Twitter feed!", @"ActionBarViewController.TweetSuccessAlertMsg")];
-  
-	[_twitterEngine release];
-	_twitterEngine = nil;
+  self.twitterEngine = nil;
 }
 
 /**
@@ -311,7 +308,8 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
  */
 - (void) didFailedWithError:(NSError *)error
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldDismissModal object:self];
+  [self.tweetWordViewController dismissModalViewControllerAnimated:YES];
+  self.tweetWordViewController = nil;
 
   if (error.domain == LWETwitterErrorDomain && error.code == LWETwitterErrorUnableToSendTweet)
   {
@@ -323,8 +321,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
     [LWEUIAlertView noNetworkAlert];
   }
   
-	[_twitterEngine release];
-	_twitterEngine = nil;
+  self.twitterEngine = nil;
 }
 
 /**
@@ -333,9 +330,9 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 - (void)didFinishAuth
 {
 	NSString *tweetWord = [self getTweetWord];
-	TweetWordViewController *twitterController = [[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
-                                                                                  twitterEngine:_twitterEngine 
-                                                                                      tweetWord:tweetWord];
+	self.tweetWordViewController = [[[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
+                                                                     twitterEngine:self.twitterEngine
+                                                                         tweetWord:tweetWord] autorelease];
 	
   // Show an alert view asking if they want to follow LWE
   [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Follow Long Weekend?",@"ActionBarViewController.FollowLWEAlertTitle")
@@ -345,8 +342,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
                                     delegate:self];
   
   // TODO: Why is this here?  MMA - 11/14/2011
-	[self performSelector:@selector(presentModal:) withObject:twitterController afterDelay:0.1f];
-	[twitterController release];
+	[self performSelector:@selector(presentModal:) withObject:self.tweetWordViewController afterDelay:0.1f];
 }
 
 - (void)didFailedAuth:(NSError *)error
@@ -357,8 +353,7 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Unable to Login",@"ActionBarViewController.TweetLoginFailureAlertTitle")
                                        message:NSLocalizedString(@"We were unable to log in to the Twitter server.  Do you have a network connection?",@"ActionBarViewController.TweetLoginFailureAlertMsg")];
 	}
-	[_twitterEngine release];
-	_twitterEngine = nil;
+  self.twitterEngine = nil;
 }
 
 
@@ -453,13 +448,8 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 
 - (void)didReceiveMemoryWarning
 {
-	if (_twitterEngine != nil)
-	{
-		[_twitterEngine release];
-		_twitterEngine = nil;
-	}
-
 	[super didReceiveMemoryWarning];
+  self.twitterEngine = nil;
 }
 
 - (void)viewDidUnload
@@ -478,14 +468,9 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 - (void)dealloc
 {
 	[currentCard release];
+  [tweetWordViewController release];
   [cardMeaningBtnHint release];
-  
-	if (_twitterEngine != nil)
-	{
-		[_twitterEngine release];
-		_twitterEngine = nil;
-	}
-	
+  [twitterEngine release];
   [addBtn release];
   [buryCardBtn release];
   [nextCardBtn release];

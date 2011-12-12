@@ -44,11 +44,8 @@ extern NSString * const LWEActionBarButtonWasTapped;
 @interface ActionBarViewController : UIViewController <UIActionSheetDelegate,
                                                        UIAlertViewDelegate,
                                                        MFMailComposeViewControllerDelegate,
-                                                       StudyViewSubcontrollerDelegate,
+                                                       StudyViewSubcontrollerProtocol,
                                                        LWETRequestDelegate>
-{
-  LWETwitterEngine *_twitterEngine;
-}
 
 - (NSString *)getTweetWord;
 
@@ -66,6 +63,10 @@ extern NSString * const LWEActionBarButtonWasTapped;
 - (IBAction)showCardActionSheet;
 
 @property (assign) IBOutlet id<ActionBarViewControllerDelegate> delegate;
+
+@property (retain) LWETwitterEngine *twitterEngine;
+
+@property (retain, nonatomic) IBOutlet UIViewController *tweetWordViewController;
 
 @property (nonatomic, retain) Card *currentCard;
 

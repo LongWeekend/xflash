@@ -14,8 +14,6 @@
 #import "AddTagViewController.h"
 
 @interface StudyViewController()
-//private properties
-@property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
@@ -31,13 +29,14 @@
 
 @implementation StudyViewController
 @synthesize delegate;
+@synthesize pluginManager;
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
-@synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
+@synthesize progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
-@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
+@synthesize practiceBgImage, currentRightStreak, currentWrongStreak, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
-@synthesize progressVC = _progressVC;
+@synthesize progressDetailsViewController;
 @synthesize pronounceBtn = pronounceBtn;
 
 #define LWE_EX_SENTENCE_INSTALLER_VIEW_TAG 69
@@ -318,35 +317,33 @@
 
 - (void) doCardBtn:(NSNotification *)aNotification
 {
-  NSInteger action = [[aNotification object] intValue];
+  NSInteger action = [aNotification.object intValue];
   
-  // Hold on to the last card in a different variable
-  Card *lastCard = [self.currentCard retain];
-  
-  BOOL knewIt = NO;
-  
-  Card *nextCard = nil;
-  NSString *direction = nil;
+  // Default to animation from the right.
+  NSString *direction = kCATransitionFromRight;
 	switch (action)
   {
     // Browse Mode options
     case NEXT_BTN: 
-      direction = kCATransitionFromRight;
       break;
     case PREV_BTN:
       direction = kCATransitionFromLeft;
       break;
       
     case BURY_BTN:
-      knewIt = YES;
+      self.numRight++;
+      self.numViewed++;
+      self.currentRightStreak++;
+      self.currentWrongStreak = 0;
+      [UserHistoryPeer buryCard:self.currentCard inTag:self.currentCardSet];
+      break;
       
     case RIGHT_BTN:
       self.numRight++;
       self.numViewed++;
       self.currentRightStreak++;
       self.currentWrongStreak = 0;
-      [UserHistoryPeer recordResult:lastCard gotItRight:YES knewIt:knewIt];
-      direction = kCATransitionFromRight;
+      [UserHistoryPeer recordCorrectForCard:self.currentCard inTag:self.currentCardSet];
       break;
       
     case WRONG_BTN:
@@ -354,43 +351,44 @@
       self.numViewed++;
       self.currentWrongStreak++;
       self.currentRightStreak = 0;
-      [UserHistoryPeer recordResult:lastCard gotItRight:NO knewIt:NO];
-      direction = kCATransitionFromRight;
+      [UserHistoryPeer recordWrongForCard:self.currentCard inTag:self.currentCardSet];
       break;      
   }
-  nextCard = [self _getNextCard:direction];
-  [self doChangeCard:nextCard direction:direction];
-  
-  // Releases
-  [lastCard release];
+  [self doChangeCard:[self _getNextCard:direction] direction:direction];
 }
 
 
 /**
- * Called when the user tapps the progress bar at the top of the practice view
+ * Called when the user taps the progress bar at the top of the practice view
  * Launches the progress modal view in ProgressDetailsViewController
  */
 - (IBAction)doShowProgressModalBtn
 {
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
-  if (!self.progressVC)
+  if (self.progressDetailsViewController == nil)
   {
     ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-    self.progressVC = progressView;
+    self.progressDetailsViewController = progressView;
     [progressView release];
   }
-  self.progressVC.levelDetails = [self _getLevelDetails];
-  self.progressVC.rightStreak = currentRightStreak;
-  self.progressVC.wrongStreak = currentWrongStreak;
-  self.progressVC.currentStudySet.text = currentCardSet.tagName;
-  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
-  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
-  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
-  self.progressVC.delegate = self;
+  self.progressDetailsViewController.levelDetails = [self _getLevelDetails];
+  self.progressDetailsViewController.rightStreak = currentRightStreak;
+  self.progressDetailsViewController.wrongStreak = currentWrongStreak;
+  self.progressDetailsViewController.currentStudySet.text = currentCardSet.tagName;
+  self.progressDetailsViewController.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
+  self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
+  self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
+
+  // Make room for the status bar
+  CGRect frame = self.progressDetailsViewController.view.frame;
+  frame.origin = CGPointMake(0, 20);
+  self.progressDetailsViewController.view.frame = frame;
   
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:self.progressVC, @"controller", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowPopover object:self userInfo:userInfo];
+  // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
+  // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
+  // There is a call to -removeFromSuperview inside the progress VC on dismiss.
+  [self.parentViewController.view addSubview:self.progressDetailsViewController.view];
 }
 
 
@@ -430,16 +428,19 @@
 
 - (IBAction) pronounceCard:(id)sender
 {
-  if ([self.currentCard hasAudio])
+#if defined(LWE_CFLASH)
+  // We have to pass the plugin manager to each call so that Card knows what plugins (PINYIN, HSK) we have installed.
+  if ([self.currentCard hasAudioWithPluginManager:self.pluginManager])
   {
-    [self.currentCard pronounceWithDelegate:self];
+    [self.currentCard pronounceWithDelegate:self pluginManager:self.pluginManager];
   }
   else
   {
     // Assume we haven't installed the plugin yet
-    Plugin *pinyinPlugin = [CurrentState availablePluginForKey:AUDIO_PINYIN_KEY];
+    Plugin *pinyinPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
     [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:pinyinPlugin userInfo:nil];
   }
+#endif
 }
 
 #pragma mark - Private methods to setup cards (called every transition)
@@ -471,9 +472,9 @@
 {
   // Default value is YES because if no plugin, we want to show the installer
   BOOL returnVal = YES;
-  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
+  if ([self.pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
   {
-    returnVal = [card hasExampleSentences];
+    returnVal = [card hasExampleSentencesWithPluginManager:self.pluginManager];
   }
   return returnVal;
 }
@@ -486,9 +487,9 @@
 {
 #if defined (LWE_CFLASH)
   BOOL returnVal = YES;
-  if ([CurrentState pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [CurrentState pluginKeyIsLoaded:AUDIO_HSK_KEY])
+  if ([self.pluginManager pluginKeyIsLoaded:AUDIO_PINYIN_KEY] || [self.pluginManager pluginKeyIsLoaded:AUDIO_HSK_KEY])
   {
-    returnVal = [card hasAudio];
+    returnVal = [card hasAudioWithPluginManager:self.pluginManager];
   }
   return returnVal;
 #else
@@ -599,7 +600,7 @@
     }
     
     // Set the new VC
-    UIViewController<StudyViewSubcontrollerDelegate> *cardVC = [self.delegate cardViewControllerForStudyView:self];
+    UIViewController<StudyViewSubcontrollerProtocol> *cardVC = [self.delegate cardViewControllerForStudyView:self];
     [self.cardView addSubview:cardVC.view];
     self.cardViewController = cardVC;
   }
@@ -612,7 +613,7 @@
       [self.actionBarController.view removeFromSuperview];
     }
     
-    UIViewController<StudyViewSubcontrollerDelegate> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
+    UIViewController<StudyViewSubcontrollerProtocol> *actionVC = [self.delegate actionBarViewControllerForStudyView:self];
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }
@@ -641,8 +642,7 @@
  */
 - (IBAction) launchExampleInstaller
 {
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:EXAMPLE_DB_KEY];
+  Plugin *exPlugin = [self.pluginManager.downloadablePlugins objectForKey:EXAMPLE_DB_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
@@ -653,9 +653,10 @@
  */
 - (IBAction) launchAudioInstaller
 {
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  Plugin *exPlugin = [pm.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
+#if defined (LWE_CFLASH)
+  Plugin *exPlugin = [self.pluginManager.downloadablePlugins objectForKey:AUDIO_PINYIN_KEY];
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
+#endif
 }
 
 
@@ -673,18 +674,13 @@
     [self _setupPageControl:1];
     [self.exampleSentencesViewController setupWithCard:self.currentCard]; // finally setup the example view for the current card
   }
+#if defined (LWE_CFLASH)
   else if ([installedPlugin.pluginId isEqualToString:AUDIO_PINYIN_KEY])
   {
     // Reset the current card
     [self doChangeCard:self.currentCard direction:nil];
   }
-}
-
-#pragma mark - ProgressDetailsViewDelegate
-
-- (void)progressDetailsViewControllerShouldDismissView:(id)progressDetailsViewController
-{
-  self.progressVC = nil;
+#endif
 }
 
 #pragma mark - ScrollView Delegate & Page Control stuff
@@ -696,10 +692,11 @@
 - (void) _setupScrollView
 {
   UIViewController *vc = nil;
-  if ([CurrentState pluginKeyIsLoaded:EXAMPLE_DB_KEY])
+  Plugin *exPlugin = [self.pluginManager pluginForKey:EXAMPLE_DB_KEY];
+  if (exPlugin)
   {
     // We have EX db installed
-    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] init] autorelease];
+    self.exampleSentencesViewController = [[[ExampleSentencesViewController alloc] initWithExamplesPlugin:exPlugin] autorelease];
     vc = self.exampleSentencesViewController;
   }
   else
@@ -778,51 +775,42 @@
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  
+  self.progressDetailsViewController = nil;
 	self.progressBarViewController = nil;
+	self.exampleSentencesViewController = nil;
 	self.cardViewController = nil;
 	self.actionBarController = nil;
+  
 	self.scrollView = nil;
 	self.pageControl = nil;
 	self.cardView = nil;
 	self.actionbarView = nil;
-	self.exampleSentencesViewController = nil;
 	self.cardSetLabel = nil;
-	self.totalWordsLabel = nil;
 	self.revealCardBtn = nil;
 	self.tapForAnswerImage = nil;
 	self.practiceBgImage = nil;
 	self.progressBarView = nil;
-	self.progressModalView = nil;
-	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
 	self.showProgressModalBtn = nil;
   self.pronounceBtn = nil;
-
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
 }
 
 - (void) dealloc
 {
   [pronounceBtn release];
   
-  if (self.progressVC)
-  {
-    [_progressVC release];
-  }
+  
   //theme
   [practiceBgImage release];
   
   //kept on this view for now - refactor this too
   [cardSetLabel release];
-  [totalWordsLabel release];
   
   //progress stuff
-  [progressBarView release];
+  [progressDetailsViewController release];
   [progressBarViewController release];
-  [progressModalView release];
-  [progressModalBtn release];
+  [progressBarView release];
   
   //card view stuff
   [cardViewController release];
@@ -835,8 +823,11 @@
   [tapForAnswerImage release];
   
   //state
+  [currentCardSet removeObserver:self forKeyPath:@"tagName"];
   [currentCardSet release];
   [currentCard release];
+  
+  [pluginManager release];
   
   //scrollView
   [scrollView release];

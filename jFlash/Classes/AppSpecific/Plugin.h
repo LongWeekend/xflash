@@ -21,6 +21,9 @@ typedef enum
 //! For creating a plugin file out of an NSDictionary hash of strings
 + (id) pluginWithDictionary:(NSDictionary *)dict;
 
+//! For legacy PLISTs.
++ (id) pluginWithLegacyDictionary:(NSDictionary *)dict;
+
 - (BOOL) isNewVersionOfPlugin:(Plugin *)plugin;
 
 - (LWEPackage *) downloadPackage;

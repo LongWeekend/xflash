@@ -10,17 +10,16 @@
 #import <CoreMedia/CoreMedia.h>
 #import "FMResultSet.h"
 #import "LWEAudioQueue.h"
+#import "PluginManager.h"
 
 extern NSString * const kLWEFullReadingKey;
 extern NSString * const kLWESegmentedReadingKey;
+extern NSInteger const kLWEUninitializedCardId;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
-@class LWEAudioQueue;
 @interface Card : NSObject <AVAudioPlayerDelegate>
-{
-  LWEAudioQueue *_player;
-}
 
+- (void) hydrate;
 - (void) hydrate:(FMResultSet*)rs;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 
@@ -34,20 +33,22 @@ extern NSString * const kLWESegmentedReadingKey;
 
 - (NSString*) meaning;
 
+//! Returns the meaning stripped of HTML
 - (NSString*) meaningWithoutMarkup;
-- (BOOL) hasExampleSentences;
+
+- (BOOL) hasExampleSentencesWithPluginManager:(PluginManager *)mgr;
 
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
-- (BOOL) hasAudio;
+- (BOOL) hasAudioWithPluginManager:(PluginManager *)mgr;
 
-- (void) pronounceWithDelegate:(id)theDelegate;
+- (void) pronounceWithDelegate:(id)theDelegate pluginManager:(PluginManager *)pluginManager;
 
 /**
  * Returns nil if no audio, otherwise a hash containing the keys: "full_reading",
  * and then a key for each syllable of the reading
  * e.g. "peng4" "you5" would be 2 keys with filenames for each key for the card "peng4 you5".
  */
-- (NSDictionary*) audioFilenames;
+- (NSDictionary *) audioFilenamesWithPluginManager:(PluginManager *)mgr;
 
 /**
  * Pass a UILabel with text through this method when you want to

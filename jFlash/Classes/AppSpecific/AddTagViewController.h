@@ -10,7 +10,7 @@
 #import "Card.h"
 
 
-@interface AddTagViewController : UIViewController
+@interface AddTagViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (id) initWithCard:(Card*) card;
 - (IBAction) addStudySet;

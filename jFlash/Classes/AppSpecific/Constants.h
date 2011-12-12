@@ -21,6 +21,7 @@
 #define NUM_CARDS_IN_NOT_NEXT_QUEUE 5
 
 #define FONT_SIZE_ADD_TAG_VC 14
+#define FONT_SIZE_CELL_HEADWORD 16
 
 #define STUDY_VIEW_CONTROLLER_TAB_INDEX     0
 #define STUDY_SET_VIEW_CONTROLLER_TAB_INDEX 1
@@ -36,8 +37,6 @@ extern NSString * const LWETableBackgroundImage;
 extern NSString * const LWEShouldSwitchTab;
 extern NSString * const LWEShouldShowModal;
 extern NSString * const LWEShouldShowDownloadModal;
-extern NSString * const LWEShouldDismissModal;
-extern NSString * const LWEShouldShowPopover;
 
 
 // Settings - do not change
@@ -103,6 +102,9 @@ extern NSString * const LWE_TWITTER_PRIVATE_KEY;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
   extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
 
+  // This is here for legacy JFlash reasons - before v1.6 this was used.  Used for upgrade path now.
+  extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;
+
 #elif defined(LWE_CFLASH)
 
   // LWE Favorites - CFlash
@@ -129,6 +131,7 @@ extern NSString * const CARD_DB_KEY;        //! Dictionary key to refer to main 
 extern NSString * const FTS_DB_KEY;         //! Dictionary key to refer to FTS database filename
 extern NSString * const EXAMPLE_DB_KEY;     //! Dictionary key to refer to example database filename
 
+extern NSString * const LWE_FLURRY_API_KEY;   // FLurry key for this app
 extern NSString * const LWE_APP_SPLASH_IMAGE; // App splash image - different between the flashes
 
 extern NSString * const SENTENCES_HTML_HEADER;

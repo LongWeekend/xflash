@@ -118,13 +118,21 @@ namespace :ctedi do
     include DatabaseHelpers
     
     get_cli_debug
+
+    tag_name = get_cli_attrib("config_file")
+    if tag_name.nil?
+      tag_name = "cflash_group_config.yml"
+    end
+
+    # If the user passes anything to the dry_run CLI attrib, make it a dry run
+    dry_run = (get_cli_attrib("dry_run").nil? == false)
     
     # Import groups and match tags within them
     prt "\nBeginning Group & Tag Import"
     prt_dotted_line
     GroupImporter.empty_staging_tables
-    importer = GroupImporter.new("cflash_group_config.yml")
-    importer.import
+    importer = GroupImporter.new(tag_name)
+    importer.import(dry_run)
     
     prt "\nImport Finished"
     prt_dotted_line

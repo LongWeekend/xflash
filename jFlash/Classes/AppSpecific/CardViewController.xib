@@ -43,7 +43,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -57,7 +57,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, -3}, {300, 42}}</string>
 								<reference key="NSSuperview" ref="613577973"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="124502176"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -92,7 +91,6 @@
 						</object>
 						<string key="NSFrame">{{10, 6}, {300, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="967810335"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -110,7 +108,6 @@
 								<int key="NSvFlags">295</int>
 								<string key="NSFrame">{{10, 0}, {279, 51}}</string>
 								<reference key="NSSuperview" ref="484137656"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="283233690"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -151,7 +148,6 @@
 						</object>
 						<string key="NSFrame">{{10, 49}, {300, 55}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="159549237"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -164,7 +160,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{10, 105}, {300, 146}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEgMC45ODAwMDAwMTkxAA</bytes>
@@ -179,7 +174,6 @@
 						<int key="NSvFlags">288</int>
 						<string key="NSFrame">{{107, 4}, {110, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="901262833"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -224,7 +218,6 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{286, 15}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="484137656"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -241,7 +234,6 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{286, 63}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="806681086"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -252,8 +244,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 285}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="613577973"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -274,22 +264,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardHeadwordLabelScrollMoreIcon</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="283233690"/>
-					</object>
-					<int key="connectionID">12</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardReadingLabelScrollMoreIcon</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="901262833"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">toggleReadingBtn</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="124502176"/>
@@ -306,30 +280,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardHeadwordLabelScrollContainer</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="484137656"/>
-					</object>
-					<int key="connectionID">19</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardReadingLabelScrollContainer</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="613577973"/>
-					</object>
-					<int key="connectionID">21</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardHeadwordLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="159549237"/>
-					</object>
-					<int key="connectionID">23</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="191373211"/>
@@ -338,19 +288,59 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cardReadingLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="967810335"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">moodIcon</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="137765644"/>
 					</object>
 					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">readingLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="967810335"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">headwordLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="159549237"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">readingScrollContainer</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="613577973"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">headwordScrollContainer</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="484137656"/>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">readingMoreIcon</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="901262833"/>
+					</object>
+					<int key="connectionID">65</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">headwordMoreIcon</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="283233690"/>
+					</object>
+					<int key="connectionID">66</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -539,7 +529,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

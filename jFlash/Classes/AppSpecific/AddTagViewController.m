@@ -8,6 +8,7 @@
 
 #import "AddTagViewController.h"
 #import "AddStudySetInputViewController.h"
+#import "SettingsViewController.h"
 #import "TagPeer.h"
 #import "ChineseCard.h"
 
@@ -74,6 +75,16 @@ enum EntrySectionRows
 
   // Cache the tag's membership list
   self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
+  
+  // For listening for headword direction changes
+  [[NSNotificationCenter defaultCenter] addObserver:self.studySetTable selector:@selector(reloadData) name:LWECardSettingsChanged object:nil];
+}
+
+- (void) viewDidUnload
+{
+  [super viewDidUnload];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
+  self.studySetTable = nil;
 }
 
 /** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
@@ -229,11 +240,9 @@ enum EntrySectionRows
     reading = [self.currentCard reading];
 #endif  
     label.text = [NSString stringWithFormat:@"[%@]\n%@", reading, [self.currentCard meaningWithoutMarkup]];
-    label.frame = [LWEUILabelUtils makeFrameForText:label.text
-                                           fontSize:FONT_SIZE_ADD_TAG_VC
-                                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
-                                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
-    
+    [label adjustFrameWithFontSize:FONT_SIZE_ADD_TAG_VC
+                         cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
+                        cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   // the cells for either tag type look the same
@@ -269,20 +278,57 @@ enum EntrySectionRows
 
 #pragma mark - UITableViewDelegate methods
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  if (section == kEntrySection)
+  {
+    UIView *containingView = [[[UIView alloc] init] autorelease];
+    containingView.autoresizesSubviews = NO;
+    UILabel *headword = [[[UILabel alloc] initWithFrame:CGRectMake(15, 5, 300, 50)] autorelease];
+    headword.text = [self.currentCard headwordIgnoringMode:YES];
+    headword.backgroundColor = [UIColor clearColor];
+    headword.shadowColor = [UIColor whiteColor];
+    headword.shadowOffset = CGSizeMake(0.5f,1.0f);
+    headword.textColor = [UIColor colorWithRed:0.3f green:0.3f blue:0.4f alpha:1.0f];
+    headword.font = [UIFont boldSystemFontOfSize:24];
+#if defined (LWE_CFLASH)
+    headword.font = [ChineseCard configureFontForLabel:headword];
+#endif
+    [containingView addSubview:headword];
+    return containingView;
+  }
+  else
+  {
+    // Use the method below and let UI kit do the hard work
+    return nil;
+  }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  if (section == kEntrySection)
+  {
+    return 50.0f;
+  }
+  else
+  {
+    return 44.0f;
+  }
+}
+
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
   if (section == kMyTagsSection)
   {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
   }
-  else if (section == kSystemTagsSection)
+  else if (section == kSystemTagsSection && ([self.sysTagArray count] > 0))
   {
     return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
   }
   else
   {
-    // Return the native language HW no matter what
-    return [self.currentCard headwordIgnoringMode:YES];
+    return nil;
   }
 }
 
@@ -328,7 +374,9 @@ enum EntrySectionRows
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
   
+  [studySetTable release];
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

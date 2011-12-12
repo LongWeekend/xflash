@@ -40,8 +40,8 @@
 - (void) cardViewDidChangeMode:(CardViewController *)cardViewController
 {
   // You can tap the HH in practice mode.
-  cardViewController.moodIcon.moodIconBtn.enabled = YES;
-
+  [cardViewController.moodIcon setButtonEnabled:YES];
+  
   // Show the percent correct when in practice mode
   [cardViewController.moodIcon turnPercentCorrectOn];
 }
@@ -49,7 +49,7 @@
 - (void)cardViewWillSetup:(CardViewController*)cardViewController
 {
   // always start with the meaning hidden, reset the reading to whatever state it should be
-  [cardViewController setMeaningWebViewHidden:YES];
+  cardViewController.meaningWebView.hidden = YES;
   [cardViewController resetReadingVisibility];
 
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -57,7 +57,7 @@
   if (useMainHeadword == NO)
   {
     cardViewController.toggleReadingBtn.hidden = YES;
-    cardViewController.cardReadingLabelScrollContainer.hidden = YES;
+    cardViewController.readingScrollContainer.hidden = YES;
     cardViewController.readingVisible = NO;
   }
   else
@@ -79,14 +79,8 @@
 
 - (void)cardViewDidReveal:(CardViewController*)cardViewController
 {
-  [cardViewController setMeaningWebViewHidden:NO];
-  
-  // TODO: MMA why are we caching the value of this only to change it on the next line?
-  // EDIT: I guess this is because we show the card AFTER reveal, but want it to be hidden again
-  // on the next card (in practice mode)
-  BOOL userSetReadingVisible = cardViewController.readingVisible;
+  cardViewController.meaningWebView.hidden = NO;
   [cardViewController turnReadingOn];
-  cardViewController.readingVisible = userSetReadingVisible;
 }
 
 
@@ -119,7 +113,7 @@
   return nextCard;
 }
 
-- (UIViewController<StudyViewSubcontrollerDelegate> *)cardViewControllerForStudyView:(StudyViewController *)svc
+- (UIViewController<StudyViewSubcontrollerProtocol> *)cardViewControllerForStudyView:(StudyViewController *)svc
 {
   BOOL useMainHeadword = [[[NSUserDefaults standardUserDefaults] objectForKey:APP_HEADWORD] isEqualToString:SET_J_TO_E];
 	CardViewController *tmpCVC = [[CardViewController alloc] initDisplayMainHeadword:useMainHeadword];
@@ -128,7 +122,7 @@
   return [tmpCVC autorelease];
 }
 
-- (UIViewController<StudyViewSubcontrollerDelegate> *)actionBarViewControllerForStudyView:(StudyViewController *)svc
+- (UIViewController<StudyViewSubcontrollerProtocol> *)actionBarViewControllerForStudyView:(StudyViewController *)svc
 {
   ActionBarViewController *tmpABVC = [[ActionBarViewController alloc] initWithNibName:@"ActionBarViewController" bundle:nil];
   tmpABVC.delegate = self;

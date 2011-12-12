@@ -8,16 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
-#import "ExampleSentencePeer.h"
-#import "UIWebView+LWENoBounces.h"
-#import "NSURL+LWEUtilities.h"
-#import "AddTagViewController.h"
-#import "jFlashAppDelegate.h"
-
-#define kJFlashServer	@"http://jflash.com"
-#define SHOW_BUTTON_TITLE @"Read"
-#define CLOSE_BUTTON_TITLE @"Close"
-#define ADD_BUTTON_TITLE @"Add"
+#import "Plugin.h"
 
 typedef enum 
 {
@@ -29,6 +20,8 @@ typedef enum
 {
   BOOL _useOldPluginMethods;
 }
+
+- (id) initWithExamplesPlugin:(Plugin *)plugin;
 
 - (void) setupWithCard:(Card*)card;
 

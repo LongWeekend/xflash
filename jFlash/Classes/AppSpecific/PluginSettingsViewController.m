@@ -22,7 +22,7 @@
 @implementation PluginSettingsViewController
 
 @synthesize tableView, availablePlugins, installedPlugins;
-@synthesize btnCheckUpdate, lblLastUpdate;
+@synthesize btnCheckUpdate, lblLastUpdate, pluginManager;
 
 #pragma mark - Check Update Now Button
 
@@ -56,7 +56,7 @@
 {
 	
 	[self _changeLastUpdateLabel];
-	[[CurrentState sharedCurrentState] checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
+	[self.pluginManager checkNewPluginsAsynchronous:NO notifyOnNetworkFail:YES];
 	[self _reloadTableData];
   
   [DSBezelActivityView removeViewAnimated:YES];
@@ -70,7 +70,7 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.tableView.backgroundColor = [UIColor clearColor];
 }
 
@@ -88,7 +88,7 @@
 	[self _changeLastUpdateLabel];
   
   // Watch for plugins installing so we can reload the table
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:LWEPluginDidInstall object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
 }
 
 - (void) viewDidUnload
@@ -104,10 +104,43 @@
 - (void) _reloadTableData
 {
   // Refresh plugin data
-  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-  self.installedPlugins = [[pm loadedPlugins] allValues];
-  self.availablePlugins = [pm.downloadablePlugins allValues];
+  self.installedPlugins = [[self.pluginManager loadedPlugins] allValues];
+  self.availablePlugins = [self.pluginManager.downloadablePlugins allValues];
   [self.tableView reloadData];
+}
+
+// We used to call the _reloadTableData method above, but this is far sexier
+- (void) _pluginDidInstall:(NSNotification *)notification
+{
+  Plugin *installedPlugin = (Plugin*)notification.object;
+  LWE_ASSERT_EXC([installedPlugin isKindOfClass:[Plugin class]], @"WTF Plugin Manager is passing us bogus objs");
+  
+  NSInteger index = [self.availablePlugins indexOfObject:installedPlugin];
+  if (index != NSNotFound)
+  {
+    // Do the data stuff first - remove
+    NSMutableArray *tmpArray = [[self.availablePlugins mutableCopy] autorelease];
+    [tmpArray removeObjectAtIndex:index];
+    self.availablePlugins = (NSArray*)tmpArray;
+    
+    // Add to installed
+    tmpArray = [[self.installedPlugins mutableCopy] autorelease];
+    [tmpArray addObject:installedPlugin];
+    self.installedPlugins = (NSArray*)tmpArray;
+    
+    // What to update
+    NSIndexPath *rowToDelete = [NSIndexPath indexPathForRow:index inSection:PLUGIN_SETTINGS_AVAILABLE_SECTION];
+    NSIndexPath *rowToInsert = [NSIndexPath indexPathForRow:([self.installedPlugins count] - 1) inSection:PLUGIN_SETTINGS_INSTALLED_SECTION];
+
+    // Now do the table
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:rowToInsert] withRowAnimation:UITableViewRowAnimationLeft];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:rowToDelete] withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView endUpdates];
+    
+    // In case "available" went to zero, get rid of the title
+    [self.tableView reloadSectionIndexTitles];
+  }
 }
 
 

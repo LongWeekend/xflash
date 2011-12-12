@@ -1,0 +1,160 @@
+pos_nouns:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_noun.csv"
+    file_parser: "WordListParser"
+    tag_name: "Common Nouns"
+    description: "Nouns from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_nouns"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_verbs_active:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_verb_active.csv"
+    file_parser: "WordListParser"
+    tag_name: "Common Verbs - Active"
+    description: "Active Verbs from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_verbs_active"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_verbs_stative:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_verb_stative.csv"
+    file_parser: "WordListParser"
+    tag_name: "Common Verbs - Stative"
+    description: "Stative Verbs from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_verbs_stative"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_adv:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_adv.csv"
+    file_parser: "WordListParser"
+    tag_name: "Common Adverbs"
+    description: "Adverbs from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_adv"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_det:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_det.csv"
+    file_parser: "WordListParser"
+    tag_name: "Determiners"
+    description: "Determiners from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_det"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_conj:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_conj.csv"
+    file_parser: "WordListParser"
+    tag_name: "Conjunctions"
+    description: "Conjunctions from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_conj"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_measure:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_measure.csv"
+    file_parser: "WordListParser"
+    tag_name: "Measure Words / Counters"
+    description: "Measure Words/Counters from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_measure"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_particle:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_particle.csv"
+    file_parser: "WordListParser"
+    tag_name: "Particles"
+    description: "Particles from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_particle"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_pre:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_pre.csv"
+    file_parser: "WordListParser"
+    tag_name: "Prepositions"
+    description: "Prepositions from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_pre"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0
+pos_post:
+    file_dump_trace: 1
+    file_importer: "TagImporter"
+    file_name: "/../../../../data/cedict/tags/pos/pos_post.csv"
+    file_parser: "WordListParser"
+    tag_name: "Postpositions"
+    description: "Postpositions from the TOCFL Lists"
+    tag_type: ""
+    entry_type: "CSVEntry"
+    short_name: "pos_post"
+    source: "pos"
+    source_name: "pos_tags"
+    editable: 0
+    visible: 1
+    parent_tag_id: 0
+    force_off: 0

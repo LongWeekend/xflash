@@ -36,6 +36,36 @@
   return plugin;
 }
 
+//! This method provides support for migration from JFlash <1.6 to 1.6.
++ (id) pluginWithLegacyDictionary:(NSDictionary *)dict
+{
+  // Translation hash -- Keys = old key values, values = new key values
+  NSDictionary *mapHash = [NSDictionary dictionaryWithObjectsAndKeys:
+    @"pluginId",@"plugin_key",
+    @"version",@"plugin_version",
+    @"name",@"plugin_name",
+    @"details",@"plugin_details",
+    @"htmlString",@"plugin_html_content",
+    @"targetPath",@"plugin_target_path",
+    @"targetURL",@"plugin_target_url",
+    @"filePath",@"plugin_file_name",nil];
+  
+  NSMutableDictionary *newDict = [NSMutableDictionary dictionary];
+  for (NSString *oldKey in dict)
+  {
+    NSString *value = [dict objectForKey:oldKey];
+    NSString *newKey = [mapHash objectForKey:oldKey];
+    [newDict setValue:value forKey:newKey];
+  }
+  
+  // Now set up the default values we didn't used to have.
+  [newDict setValue:[NSNumber numberWithInt:kLWEFileLocationDocuments] forKey:@"fileLocation"];
+  [newDict setValue:@"database" forKey:@"pluginType"];
+  
+  // Finally now that we have translated, run the normal constructor.
+  return [[self class] pluginWithDictionary:newDict];
+}
+
 - (void) setValue:(id)value forUndefinedKey:(NSString*)key
 {
   // Ignore non-matching KVC properties

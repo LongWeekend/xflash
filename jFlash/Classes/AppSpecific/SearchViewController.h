@@ -10,6 +10,8 @@
 #import "CardPeer.h"
 #import "ExampleSentencePeer.h"
 #import "AddTagViewController.h"
+#import "DownloadManager.h"
+#import "PluginManager.h"
 // MMA: we're not using this yet, as of 1.3.1
 //#import "DisplaySearchedSentenceViewController.h"
 
@@ -26,15 +28,15 @@
 typedef enum searchStates
 {
   kSearchNoSearch,              //! Default state when not searching
+  kSearchSearching,             //! When a search is active but nothing is happening yet
   kSearchHasResults,            //! Any search returned results 
   kSearchHasNoResults,          //! Regular search returned nothing
-  kSearchDeepHasNoResults,      //! Deep search returned nothing
 } LWEFlashSearchStates;
 
 /**
  * Handles dictionary-like search functions inside JFlash
  */
-@interface SearchViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate>
+@interface SearchViewController : UITableViewController <UISearchBarDelegate>
 {
   NSInteger _searchTarget;                        //! Specifies which data set to search against - words or example sentences
   LWEFlashSearchStates _searchState;              //! Holds the "state" of the search
@@ -45,22 +47,17 @@ typedef enum searchStates
 - (IBAction) changeSearchTarget:(id)sender;
 - (void) runSearchAndSetSearchBarForString:(NSString*)text;
 - (void) runSearchForString:(NSString*)text;
+- (void) receivedSearchResults:(NSArray *)results;
 - (void) pluginDidInstall:(NSNotification *)aNotification;
 
-//! Array to contain cache of starred words membership (so we don't have to hit the DB EVERY time)
-@property (nonatomic, retain) NSMutableArray *membershipCacheArray;
-
-//! Contains the returned search results (array of Card objects)
-@property (nonatomic, retain) NSArray *_cardSearchArray;
-
 //! Contains the returned search results (array of ExampleSentence objects)
-@property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
 
 // UIView-related properties
-@property (nonatomic, retain) IBOutlet UISegmentedControl *_wordsOrSentencesSegment;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *_activityIndicator;
+@property (nonatomic, retain) IBOutlet UITableViewCell *searchingCell;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+
+@property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
 
 @end

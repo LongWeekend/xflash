@@ -13,6 +13,7 @@ class GroupImporter
 
   ### Class Constructor
   def initialize (yaml_file)
+    @dry_run = false
     # TODO: This will break if we move this class! MMA 11.28.2011
     path_to_yaml_file = File.dirname(__FILE__) + "/../../../../config/groups_config/#{yaml_file}"
     @configuration = YAML.load_file(path_to_yaml_file)
@@ -24,7 +25,10 @@ class GroupImporter
     return self
   end  
   
-  def import
+  def import(is_dry_run = false)
+    # This stops us from actually matching any of the tags
+    @dry_run = is_dry_run
+    
     connect_db
     # Get the first root to traverse to which is the values of the "study_sets" key on the yml file.
     # with the owner as -1 to mark that as the root of all groups.
@@ -83,20 +87,31 @@ class GroupImporter
     end
 
     # Get the class of the importer used and try to constantize / instantiate it from there
-    @entry_cache.prepare_cache_if_necessary
+    @entry_cache.prepare_cache_if_necessary if (@dry_run == false)
     importer = configuration.file_importer.constantize.new(results, configuration, @entry_cache)
-    importer.import
 
-    # Set the priority word flag is appropriate
-    if configuration.is_priority_words?
-      tickcount("Updating cards to be priority words...") do
-        update_query = "UPDATE cards_staging s, card_tag_link l SET s.priority_word = 1 WHERE l.tag_id = %s AND l.card_id = s.card_id" % importer.tag_id
-        $cn.execute(update_query)
+    if (@dry_run == false)
+      # Insert into the tags_staging first to get the parent of the tags.
+      tag_id = importer.insert_tag_into_table
+
+  #    config = configuration
+  #    log("Inserted into the tags_staging table for short_name: %s with tag_id: %s" % [config.short_name, @tag_id], true)
+  
+      # Now do the matching & inserting into card_tag_link
+      card_ids = importer.match_cards 
+      importer.insert_card_tag_links_for_ids(tag_id, card_ids) if (@dry_run == false)
+      
+      # Set the priority word flag is appropriate
+      if configuration.is_priority_words?
+        tickcount("Updating cards to be priority words...") do
+          update_query = "UPDATE cards_staging s, card_tag_link l SET s.priority_word = 1 WHERE l.tag_id = %s AND l.card_id = s.card_id" % tag_id
+          $cn.execute(update_query)
+        end
       end
-    end
 
-    # Link the tag to the group.
-    link_tag_group(group_id, importer.tag_id)
+      # Link the tag to the group.
+      link_tag_group(group_id, tag_id)
+    end
   end
     
   def insert_group(value, owner_id)
@@ -114,10 +129,14 @@ class GroupImporter
       name = value
     end
 
-    # Inserting to the groups table
-    insert_query = "INSERT INTO groups_staging (group_name, description, owner_id, recommended) VALUES('%s', %s, %s, %s)"
-    $cn.execute(insert_query % [name, description, owner_id, recommended])
-    return last_inserted_id
+    if (@dry_run == false)
+      # Inserting to the groups table
+      insert_query = "INSERT INTO groups_staging (group_name, description, owner_id, recommended) VALUES('%s', %s, %s, %s)"
+      $cn.execute(insert_query % [name, description, owner_id, recommended])
+      return last_inserted_id
+    else
+      return 0
+    end
   end
   
   def link_tag_group(group_id = -1, tag_id = -1)

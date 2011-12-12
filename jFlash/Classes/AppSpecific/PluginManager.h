@@ -38,8 +38,11 @@ extern NSString * const LWEPluginDidInstall;
  */
 - (BOOL) installPlugin:(Plugin *)plugin error:(NSError **)error;
 
-
 //========= THESE GIVE STATE ========
+
+- (BOOL) isTimeForCheckingUpdate;
+- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
+
 
 //! Returns YES if the plugin is loaded.  Directory plugins always return YES.
 - (BOOL) pluginKeyIsLoaded:(NSString *)pluginKey;

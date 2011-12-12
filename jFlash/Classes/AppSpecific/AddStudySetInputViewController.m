@@ -106,10 +106,17 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 - (void)save
 {
-  if (self.tag == nil) 
+  // Is it whitespace only?
+  if ([[self.setNameTextfield.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Please Tap a Name", "")
+                                       message:NSLocalizedString(@"We need to call your new set something.  Please tap a name and press 'Save'.", "")];
+    return;
+  }
+  
+  if (self.tag == nil)
   {
     // Create the tag & subscribe the card to it
     Tag *newTag = [TagPeer createTagNamed:self.setNameTextfield.text inGroup:self.owner withDescription:self.setDescriptionTextView.text];

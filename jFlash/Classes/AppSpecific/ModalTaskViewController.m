@@ -160,14 +160,11 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
     }
   }
        
-  if (self.canCancelTask)
+  if (self.canCancelTask && (self.navigationItem.leftBarButtonItem == nil))
   {
-    if (self.navigationItem.leftBarButtonItem == nil)
-    {
-      UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
-      self.navigationItem.leftBarButtonItem = cancelButton;
-      [cancelButton release];
-    }
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
   }
   else
   {

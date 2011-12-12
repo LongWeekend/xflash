@@ -11,9 +11,6 @@ extern NSString * const SET_THEME_TAME;
 extern NSString * const DEFAULT_THEME;
 
 @interface ThemeManager : NSObject
-{
-  NSDictionary* themes;
-}
 
 + (ThemeManager*) sharedThemeManager;
 - (UIColor*) currentThemeTintColor;
@@ -24,7 +21,6 @@ extern NSString * const DEFAULT_THEME;
 - (NSString*) currentThemeWebSelectionColor;
 - (NSString*) elementWithCurrentTheme:(NSString*)element;
 - (NSDictionary*) _currentTheme;
-- (NSString*) _deviceType;
 - (NSArray*) _themeListWithKey:(NSString*)key;
 
 //! Provide list of names of all available themes
@@ -34,6 +30,6 @@ extern NSString * const DEFAULT_THEME;
 - (NSArray*) themeKeysList;
 
 //! Holds themes dictionary
-@property (nonatomic, retain) NSDictionary* themes;
+@property (nonatomic, retain) NSDictionary *themes;
 
 @end

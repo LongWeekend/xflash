@@ -9,12 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PDColoredProgressView.h"
 
-@class ProgressDetailsViewController;
-@protocol ProgressDetailsDelegate <NSObject>
-@optional
-- (void)progressDetailsViewControllerShouldDismissView:(ProgressDetailsViewController *)progressDetailsViewController;
-@end
-
 @interface ProgressDetailsViewController : UIViewController
 
 - (IBAction) dismiss;
@@ -23,6 +17,7 @@
 - (void) setStreakLabel;
 
 @property (nonatomic, retain) NSMutableArray *levelDetails;
+@property (nonatomic, retain) IBOutlet UIView *bgView;
 @property (nonatomic,retain) IBOutlet UILabel *currentNumberOfWords;
 @property (nonatomic,retain) IBOutlet UILabel *totalNumberOfWords;
 @property (nonatomic,retain) IBOutlet UIButton *closeBtn;
@@ -43,6 +38,5 @@
 @property (nonatomic, retain) UILabel *cardSetProgressLabel4;
 @property (nonatomic, retain) UILabel *cardSetProgressLabel5;
 @property (nonatomic, retain) UILabel *progressViewTitle;
-@property (nonatomic, assign) id<ProgressDetailsDelegate> delegate;
 
 @end

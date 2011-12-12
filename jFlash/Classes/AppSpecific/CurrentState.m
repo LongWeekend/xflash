@@ -8,11 +8,11 @@
 
 #import "CurrentState.h"
 #import "UpdateManager.h"
+#import "SynthesizeSingleton.h"
 
 // For private methods
 @interface CurrentState ()
 - (void) _createDefaultSettings;
-- (void) _retrievePlistFromServer;
 @end
 
 NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
@@ -22,8 +22,7 @@ NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, pluginMgr, isUpdatable, starredTag, modalTaskViewController;
-@synthesize activeTag = _activeTag;
+@synthesize isFirstLoad, isUpdatable, starredTag, activeTag = _activeTag;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -84,7 +83,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   return [[_activeTag retain] autorelease];
 }
 
-
 /**
  * Reloads cardIds for active set
  */
@@ -92,32 +90,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   LWE_ASSERT_EXC(_activeTag,@"Call to resetActiveTag but no tag active");
   [self setActiveTag:_activeTag];
-}
-
-#pragma mark - LWEPackageDownloaderDelegate Methods
-
-- (void) unpackageFinished:(LWEPackage*)package
-{
-  NSError *error = nil;
-  Plugin *plugin = [package.userInfo objectForKey:@"plugin"];
-  [self.pluginMgr installPlugin:plugin error:&error];
-  if (self.modalTaskViewController.parentViewController)
-  {
-    [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
-  }
-  self.modalTaskViewController = nil;
-}
-
-- (void) unpackageFailed:(LWEPackage*)package withError:(NSError*)error
-{
-  // TODO: MMA Make this work!
-  [LWEUIAlertView notificationAlertWithTitle:@"Plugin Error" message:error.localizedDescription];
-  //  LWE_LOG(@"%@",error);
-  if (self.modalTaskViewController.parentViewController)
-  {
-    [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
-  }
-  self.modalTaskViewController = nil;
 }
 
 #pragma mark - Initialization
@@ -137,10 +109,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   // STEP 2 - is the database update-able?  Let the update manager tell us
   [self setIsUpdatable:[UpdateManager databaseIsUpdatable:settings]];
 
-  // STEP 3 - Initialize the plugin manager
-  self.pluginMgr = [[[PluginManager alloc] init] autorelease];
-  
-  // STEP 4 - is this first run after a fresh install?  Do we need to freshly create settings?
+  // STEP 3 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];
@@ -150,19 +119,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   {
     self.isFirstLoad = NO;
   }
-  
-  // STEP 5
-  // We initialize the plugins manager
-	if ([[self class] isTimeForCheckingUpdate])
-	{
-		/**
-		 * This only runs when the program is launched. 
-		 * This private methods will be run in the background, because the dictionary which data is coming from the internet sometimes can take quite a few minutes. 
-		 * And that process will block the UI. So, if the user click the button "Check For Update" This method will be called from the background, and it will update the badge
-		 * number, and all of the data if it has finished.
-		 */
-    [self checkNewPluginsAsynchronous:YES notifyOnNetworkFail:NO];
-	}
 }
 
 #pragma mark - Default - First time run.
@@ -198,109 +154,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings synchronize];
 }
 
-#pragma mark - Plugin Manager helpers
-
-+ (BOOL) pluginKeyIsLoaded:(NSString *)key
-{
-  CurrentState *state = [CurrentState sharedCurrentState];
-  return [state.pluginMgr pluginKeyIsLoaded:key];
-}
-
-+ (Plugin *) availablePluginForKey:(NSString *)key
-{
-  CurrentState *state = [CurrentState sharedCurrentState];
-  return [state.pluginMgr.downloadablePlugins objectForKey:key];
-}
-
-+ (BOOL) pluginIsDownloading
-{
-  CurrentState *state = [CurrentState sharedCurrentState];
-  return (state.modalTaskViewController != nil);
-}
-
-+ (Plugin *) loadedPluginForKey:(NSString *)key
-{
-  CurrentState *state = [CurrentState sharedCurrentState];
-  return [state.pluginMgr pluginForKey:key];
-}
-
-/**
- * Tells whether update check is necessary
- * \return YES if settings' PLUGIN_LAST_UPDATE is more than LWE_PLUGIN_UPDATE_PERIOD days ago
- */
-+ (BOOL) isTimeForCheckingUpdate
-{
-	NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-	NSDate *date = [settings objectForKey:PLUGIN_LAST_UPDATE];
-	date = [date addDays:LWE_PLUGIN_UPDATE_PERIOD];
-	NSDate *now = [NSDate date];
-	
-	//date is earlier than now, means it is for update
-	if ([date compare:now] == NSOrderedAscending)
-  {
-		return YES;
-  }
-	else 
-  {
-		return NO;
-  }
-}
-
-/**
- * Check the new plugin over the website, and looks whether it has a new stuff
- * \param asynch If YES, the URL retrieve will happen on a background thread (the processing afterward will remain on the main thread)
- * \param notifyOnNetworkFail If YES, and network is not available, will prompt a LWEUIAlertView noNetwork alert
- */
-- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail
-{	
-  // Check if they have network first, if so, start the background thread
-	if ([LWENetworkUtils networkAvailableFor:LWE_PLUGIN_SERVER])
-	{
-    if (asynch)
-    {
-      [self performSelectorInBackground:@selector(_retrievePlistFromServer) withObject:nil];
-    }
-    else
-    {
-      [self _retrievePlistFromServer];
-    }
-  }
-  else if (notifyOnNetworkFail)
-  {
-    [LWEUIAlertView noNetworkAlert];
-  }
-}
-
-
-/**
- * Intended to be run in the background so we don't lock the main thread
- */
-- (void)_retrievePlistFromServer
-{
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSString *urlStr = [LWE_PLUGIN_SERVER stringByAppendingString:LWE_PLUGIN_LIST_REL_URL];
-  NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfURL:[NSURL URLWithString:urlStr]];
-  if (plist)
-  {
-    // Ask the plugin manager to deal with it. Wait until done because it needs the plist var to stay around
-    [self.pluginMgr performSelectorOnMainThread:@selector(processPlistHash:) withObject:plist waitUntilDone:YES];
-  }
-  [plist release];
-  
-  // Now update the settings so we record that we checked
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setValue:[NSDate date] forKey:PLUGIN_LAST_UPDATE];
-  
-  [pool release];
-}
-
 #pragma mark -
 
 //! Standard dealloc
 - (void) dealloc
 {
-  [modalTaskViewController release];
-  [pluginMgr release];
+  [_activeTag release];
+  [starredTag release];
   [super dealloc];
 }
    

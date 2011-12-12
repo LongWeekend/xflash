@@ -60,13 +60,13 @@
 
 - (CGFloat) sizeForAcknowledgementsRow
 {
-  return 710.0f;
+  return 730.0f;
 }
 
 /** Returns all the arrays to configure the settings table */
-- (NSArray*) settingsArray
+- (NSArray*) settingsArrayWithPluginManager:(PluginManager *)pluginManager
 {
-	NSInteger newAvailableUpdate = [[[[CurrentState sharedCurrentState] pluginMgr] downloadablePlugins] count];
+	NSInteger newAvailableUpdate = [pluginManager.downloadablePlugins count];
 	
 	//This is to set up the very top row and section in the settings table view.
 	NSArray *newUpdateNames = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d Update%@ Available", newAvailableUpdate, (newAvailableUpdate>1) ? @"s" : @""], nil];

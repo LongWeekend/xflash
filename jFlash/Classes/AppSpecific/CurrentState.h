@@ -7,27 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SynthesizeSingleton.h"
 #import "Tag.h"
-#import "PluginManager.h"
-#import "LWEPackageDownloader.h"
 
 extern NSString * const LWEActiveTagDidChange;
 
-@interface CurrentState : NSObject <LWEPackageDownloaderDelegate>
+@interface CurrentState : NSObject
 
 + (CurrentState *) sharedCurrentState;
 
-// Plugin related
-+ (Plugin *) availablePluginForKey:(NSString *)key;
-+ (BOOL) pluginIsDownloading;
-+ (BOOL) pluginKeyIsLoaded:(NSString *)key;
-+ (BOOL)isTimeForCheckingUpdate;
-+ (Plugin *) loadedPluginForKey:(NSString *)key;
-- (void)checkNewPluginsAsynchronous:(BOOL)asynch notifyOnNetworkFail:(BOOL)notifyOnNetworkFail;
-
-
+//! Initialize the NSUserDefaults on first load
 - (void) initializeSettings;
+
+//! Keeps the same tag active, but resets it.  Useful for changing the user
 - (void) resetActiveTag;
 
 //! returns YES if this is the first time we have launched this app, ever
@@ -36,14 +27,10 @@ extern NSString * const LWEActiveTagDidChange;
 //! returns YES if there is more current database than the user's current version
 @property BOOL isUpdatable;
 
-//! Holds PluginManager instance
-@property (retain) PluginManager *pluginMgr;
-
 //! Changing this value causes lots of things to happen program-wide -- the app re-loads using the new tag
 @property (retain) Tag *activeTag;
 
+//! A reference to the starred tag set -- this never changes (but its contents may!)
 @property (retain) Tag *starredTag;
-
-@property (retain, nonatomic) UIViewController *modalTaskViewController;
 
 @end

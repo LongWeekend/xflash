@@ -4,7 +4,7 @@
 #import "ExampleSentencePeer.h"
 
 @interface CardPeer ()
-+ (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit;
++ (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit;
 + (Card*) _retrieveCardWithSQL:(NSString*)sql;
 + (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate;
 @end
@@ -37,52 +37,96 @@
 #pragma mark - Search APIs
 
 /**
+ * Returns YES if the keyword appears to be reading-like.  Note that this
+ * current implementation is specific to Chinese Flash (it would actually not
+ * work at all for JFlash).
+ */
++ (BOOL) keywordIsReading:(NSString *)keyword
+{
+#if defined (LWE_CFLASH)
+  // If it has any string components longer than 5 chars, it's not pinyin.
+  NSArray *components = [keyword componentsSeparatedByString:@" "];
+  for (NSString *item in components)
+  {
+    if ([item length] > 5)
+    {
+      return NO;
+    }
+  }
+  
+  // OK, it has short bits.  So make sure there are no kanji/hanzi in there.
+  BOOL hasIdeograph = NO;
+  for (NSInteger charIndex = 0; charIndex < [keyword length]; charIndex++)
+  {
+    unichar testChar = [keyword characterAtIndex:charIndex];
+    //4E00 is the first code point for Unicode characters in the CJK kanji mix
+    if (testChar >= 0x4E00)
+    {
+      hasIdeograph = YES;
+    }
+  }
+  return (hasIdeograph == NO);
+#elif defined (LWE_JFLASH)
+  return NO;
+#endif
+}
+
+/**
+ *
+ */
++ (BOOL) keywordIsHeadword:(NSString *)keyword
+{
+#if defined (LWE_CFLASH)
+  // Strip out numbers, symbols & whitespace
+  NSCharacterSet *stripChars = [NSCharacterSet characterSetWithCharactersInString:@"? "];
+  NSArray *components = [keyword componentsSeparatedByCharactersInSet:stripChars];
+  for (NSString *part in components)
+  {
+    for (NSInteger charIndex = 0; charIndex < [part length]; charIndex++)
+    {
+      unichar testChar = [part characterAtIndex:charIndex];
+      // 2E80 is the first code point for Unicode characters in the CJK mix (kana, etc), 9FFF the last
+      if (testChar < 0x2E80 || testChar > 0x9FFF)
+      {
+        return NO;
+      }
+    }
+  }
+  return YES;
+#elif defined (LWE_JFLASH)
+  return NO;
+#endif
+}
+
+
+/**
  * Returns an array of Card objects after searching keyword
  */
-+ (NSArray*) searchCardsForKeyword:(NSString*)keyword doSlowSearch:(BOOL)slowSearch
-{
-  if (slowSearch)
-  {
-    return [CardPeer substringSearchForKeyword:keyword];
-  }
-  else
-  {
-    return [CardPeer fullTextSearchForKeyword:keyword];
-  }
-}
-
-// Do slow substring match (w/ ASTERISK)
-+ (NSArray*) substringSearchForKeyword:(NSString*)keyword
-{
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSMutableArray *cardList = [NSMutableArray array];
-
-  NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@" " withString:@"* "];
-  NSString *sql = [NSString stringWithFormat:@""
-         "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@*' LIMIT %d) "
-         "ORDER BY c.headword", keywordWildcard, 200];
-  FMResultSet *rs = [db executeQuery:sql];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:rs hydrate:YES];
-  return (NSArray*)cardList;
-}
-
-//! Runs a search against the full text index returning 100 records
-+ (NSArray*) fullTextSearchForKeyword:(NSString*)keyword
++ (NSArray*) searchCardsForKeyword:(NSString*)keyword
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *cardList = [NSMutableArray array];
   NSInteger queryLimit = 100;
   
-  NSString *sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:YES queryLimit:queryLimit];
-  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
-
-  // Fill with non-ptag entries if we have space leftover
-  if ([cardList count] < queryLimit)
+  // Do not hydrate these cards, we will flywheel it on the table view.
+  NSString *column = nil;
+  if ([[self class] keywordIsHeadword:keyword])
   {
-    NSInteger remainingCards = (queryLimit - [cardList count]);
-    sql = [CardPeer _FTSSQLForKeyword:keyword usePriorityTag:NO queryLimit:remainingCards];
-    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:YES];
+    column = @"headword";
+  }
+  else if ([[self class] keywordIsReading:keyword])
+  {
+    column = @"reading";
+  }
+  NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:column queryLimit:queryLimit];
+  cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
+  
+  // Now, did we get enough cards (if it was a no-column search, don't re-run)
+  if (column != nil && [cardList count] < queryLimit)
+  {
+    NSInteger newLimit = queryLimit - [cardList count];
+    NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:nil queryLimit:newLimit];
+    cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
   }
   
   return (NSArray*)cardList;
@@ -90,20 +134,32 @@
 
 #pragma mark - Private Methods
 
-+ (NSString*) _FTSSQLForKeyword:(NSString*)keyword usePriorityTag:(BOOL)usePTag queryLimit:(NSInteger)limit
+/**
+ * This will return a SQL query that will return card ids from the FTS table based on the settings passed
+ */
++ (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit
 {
-  NSString *returnSql = nil;
-#if defined (LWE_CFLASH)
-  NSString *orderBy = @"headword_simp";
-#else
-  NSString *orderBy = @"headword";
-#endif
+  // Users understand "?" better than "*".  Well, maybe not geeks.
   NSString *keywordWildcard = [keyword stringByReplacingOccurrencesOfString:@"?" withString:@"*"];
+  NSString *column = nil;
+  NSString *returnSql = nil;
+  NSString *searchString = nil;
+
+  if (columnName)
+  {
+    // If we are searching a specific column, and not the whole table, wrap it in quotes for exact match.
+    searchString = [NSString stringWithFormat:@"\"%@\"",keywordWildcard];
+    column = columnName;
+  }
+  else
+  {
+    searchString = keywordWildcard;
+    column = @"cards_search_content";
+  }
+  
   // Do the search using SQLite FTS (PTAG results)
-  returnSql = [NSString stringWithFormat:@""
-         "SELECT c.*, ch.meaning, 0 as card_level, 0 as user_id, 0 as wrong_count, 0 as right_count FROM cards c, cards_html ch "
-         "WHERE c.card_id = ch.card_id AND c.card_id in (SELECT card_id FROM cards_search_content WHERE content MATCH '%@' AND ptag = %d LIMIT %d) "
-         "ORDER BY c.%@", keywordWildcard, usePTag, limit, orderBy];
+  returnSql = [NSString stringWithFormat:@"SELECT card_id FROM cards_search_content WHERE "
+               "%@ MATCH '%@' ORDER BY LENGTH(%@) ASC, ptag DESC LIMIT %d", column, searchString, column, limit];
   return returnSql;
 }
 
@@ -125,20 +181,21 @@
 }
 
 /**
- * Looping helper - used by search
+ * Looping helper.  Populates an array of cards, either lightweight or full.
  */
-+ (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate
++ (NSMutableArray *) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate
 {
   while ([rs next])
   {
-    Card *tmpCard = [CardPeer blankCard];
+    Card *tmpCard = nil;
     if (shouldHydrate)
     {
+      tmpCard = [CardPeer blankCard];
       [tmpCard hydrate:rs];
     }
     else
     {
-      tmpCard.cardId = [rs intForColumn:@"card_id"];
+      tmpCard = [CardPeer blankCardWithId:[rs intForColumn:@"card_id"]];
     }
     [cardList addObject:tmpCard];
   }
@@ -151,7 +208,7 @@
 /**
  * Takes a cardId and returns a hydrated Card from the database
  */
-+ (Card*) retrieveCardByPK:(NSInteger)cardId
++ (Card *) retrieveCardByPK:(NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *sql = [[NSString alloc] initWithFormat:@""
@@ -194,18 +251,11 @@
 /**
  * Returns an array containing cardId integers contained in by the Tag tagId
  */
-+ (NSArray*) retrieveFaultedCardsForTag:(Tag *)tag
++ (NSArray *) retrieveFaultedCardsForTag:(Tag *)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tag.tagId];
-  NSMutableArray *ids = [NSMutableArray array];
-  FMResultSet *rs = [db executeQuery:sql];
-  while ([rs next])
-  {
-    [ids addObject:[[self class] blankCardWithId:[rs intForColumn:@"card_id"]]];
-  }
-  [rs close];
-  return (NSArray*)ids;
+  return (NSArray *)[self _addCardsToList:[NSMutableArray array] fromResultSet:[db executeQuery:sql] hydrate:NO];
 }
 
 /**

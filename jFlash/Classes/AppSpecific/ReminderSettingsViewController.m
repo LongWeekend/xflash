@@ -14,6 +14,9 @@
 @property (retain) NSArray *numDaysArray;
 @end
 
+#define REMINDER_SETTINGS_TABLE_TOGGLE_SECTION 0
+#define REMINDER_SETTINGS_TABLE_DAYS_SECTION 1
+
 @implementation ReminderSettingsViewController
 
 @synthesize remindersOn, onOffSwitch, numDaysArray, picker;
@@ -35,6 +38,14 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  // Get rid of cat's pajama's.
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.tableView.backgroundColor = [UIColor clearColor];
+}
 
 - (void) viewDidLoad
 {
@@ -123,13 +134,16 @@
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
   
-  // Select the active row first
-  NSInteger index = [self.numDaysArray indexOfObject:[NSString stringWithFormat:@"%d",_numDays]];
-  [self.picker selectRow:index inComponent:0 animated:NO];
-  
-  // Bring up a picker to let the user choose how many days
-  CGSize pickerSize = self.picker.frame.size;
-  [LWEViewAnimationUtils translateView:self.picker byPoint:CGPointMake(0, -(pickerSize.height)) withInterval:0.5f];
+  if (indexPath.section == REMINDER_SETTINGS_TABLE_DAYS_SECTION)
+  {
+    // Select the active row first
+    NSInteger index = [self.numDaysArray indexOfObject:[NSString stringWithFormat:@"%d",_numDays]];
+    [self.picker selectRow:index inComponent:0 animated:NO];
+    
+    // Bring up a picker to let the user choose how many days
+    CGSize pickerSize = self.picker.frame.size;
+    [LWEViewAnimationUtils translateView:self.picker byPoint:CGPointMake(0, -(pickerSize.height)) withInterval:0.5f];
+  }
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

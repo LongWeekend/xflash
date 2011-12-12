@@ -15,11 +15,8 @@ tags_800_1_beginner:
     # Class used for parsing and reading the data into memory
     file_parser: "WordListParser"
     
-    # Not used yet
-    file_tolerance: "tone"          
-    
     # User-readible name for the tag
-    tag_name: "TOCFL (TOP) Beginner"
+    tag_name: "TOCFL 1 Beginner"
     tag_type: ""
     
     # Database tag_staging table column related
@@ -51,7 +48,7 @@ tags_800_2_intermediate:
     file_importer: "TagImporter"
     file_parser: "WordListParser"
     entry_type: "CSVEntry"
-    tag_name: "TOCFL (TOP) Intermediate"
+    tag_name: "TOCFL 2 Intermediate"
     tag_type: ""
     short_name: "SC-TOP-intermediate"
     description: "800+ Words for Intermediate user"      
@@ -68,7 +65,7 @@ tags_800_3_advance:
     file_importer: "TagImporter"
     file_parser: "WordListParser"
     entry_type: "CSVEntry"
-    tag_name: "TOCFL (TOP) Advanced"
+    tag_name: "TOCFL 3 Advanced"
     tag_type: ""
     short_name: "SC-TOP-advanced"
     description: "Advanced words for SC-TOP Huayu Proficiency Tests"      

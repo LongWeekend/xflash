@@ -10,6 +10,7 @@
 #import "LWELongRunningTaskProtocol.h"
 #import "PDColoredProgressView.h"
 #import "UIWebView+LWENoBounces.h"
+#import "LWEPackageDownloader.h"
 
 extern NSString * const LWEModalTaskDidCancel;
 

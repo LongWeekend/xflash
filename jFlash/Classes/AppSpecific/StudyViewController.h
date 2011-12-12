@@ -10,6 +10,8 @@
 #import "ProgressDetailsViewController.h"
 #import "ProgressBarViewController.h"
 
+#import "PluginManager.h"
+
 #import "StudyViewProtocols.h"
 #import "PracticeModeCardViewDelegate.h"
 #import "BrowseModeCardViewDelegate.h"
@@ -27,10 +29,8 @@
 @interface StudyViewController : UIViewController <UIScrollViewDelegate,
                                                    UIActionSheetDelegate,
                                                    UIAlertViewDelegate,
-                                                   ProgressDetailsDelegate,
                                                    LWEAudioQueueDelegate>
 {
-  ProgressDetailsViewController *_progressVC;
   BOOL _alreadyShowedAlertView;
   //! This is set when card is loaded, and used when revealed
   BOOL _viewHasBeenLoadedOnce;
@@ -65,35 +65,35 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *cardViewController;
-@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerDelegate> *actionBarController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerProtocol> *cardViewController;
+@property (nonatomic, retain) IBOutlet UIViewController<StudyViewSubcontrollerProtocol> *actionBarController;
 @property (nonatomic, retain) ExampleSentencesViewController *exampleSentencesViewController;
 @property (nonatomic, retain) IBOutlet UIView *cardView;
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
-@property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
+@property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
 
-// The progress bar
-@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
+
+// The progress bar
+@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 @property (nonatomic, retain) IBOutlet UIView *progressBarView;
+@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 
 // Progress modal overlay
-@property (nonatomic, retain) IBOutlet UIView *progressModalView;
-@property (nonatomic, retain) IBOutlet UIView *progressModalBtn;
+@property (nonatomic, retain) ProgressDetailsViewController *progressDetailsViewController;
 
-@property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
+// Plugin related
+@property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
 
 
 // scroll view
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
-
-@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
 // stats for progress modal
 @property NSInteger numRight;

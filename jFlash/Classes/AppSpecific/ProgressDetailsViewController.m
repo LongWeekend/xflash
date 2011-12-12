@@ -14,14 +14,22 @@
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
-@synthesize delegate;
+@synthesize bgView;
 
 #pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  // Set the background view to be semi-transparent to shadow over the study view 
   self.view.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.7];
+
+  // Draw the border & the rounded corners on the background view
+  self.bgView.layer.cornerRadius = 10.0f;
+  self.bgView.layer.borderWidth = 2.0f;
+  self.bgView.layer.borderColor = [[UIColor whiteColor] CGColor];
+
   [self drawProgressBars];
   [self setStreakLabel];
   
@@ -44,11 +52,10 @@
 }
 
 
-//This was added for safety reason? - Rendy 13/08/10
 - (void)viewDidUnload
 {
 	[super viewDidUnload];
-	
+  self.bgView = nil;
 	self.currentNumberOfWords = nil;
 	self.totalNumberOfWords = nil;
 	self.closeBtn = nil;
@@ -87,19 +94,18 @@
 
 - (void)drawProgressBars
 {  
-  NSString *labelText;
+  NSString *labelText = nil;
   NSArray *labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
-  NSInteger i;
-  for(i = 0; i < 6; i++)
+  for (NSInteger i = 0; i < 6; i++)
   {
     labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", 100*[[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue], [[levelDetails objectAtIndex:i]intValue]];
     [[labelsArray objectAtIndex:i] setText:labelText];
   }
   [labelsArray release];
   
-  NSArray* lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  int pbOrigin = 203;
-  for (i = 0; i < 6; i++)
+  NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
+  NSInteger pbOrigin = 203;
+  for (NSInteger i = 0; i < 6; i++)
   {  
     PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
     [progressView setTintColor:[lineColors objectAtIndex: i]];
@@ -119,6 +125,8 @@
   }
 }
 
+#pragma mark - IBActions
+
 - (IBAction)switchToSettings:(id)sender
 {
   // And switch to settings
@@ -133,13 +141,13 @@
 - (IBAction) dismiss
 {
   [self.view removeFromSuperview];
-  LWE_DELEGATE_CALL(@selector(progressDetailsViewControllerShouldDismissView:), self);
 }
 
 #pragma mark - Class Plumbing
 
 - (void)dealloc
 {
+  [bgView release];
   [currentStudySet release];
   [closeBtn release];
   [streakLabel release];

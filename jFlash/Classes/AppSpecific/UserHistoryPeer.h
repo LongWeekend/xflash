@@ -7,10 +7,9 @@
 //
 
 @interface UserHistoryPeer : NSObject
-{
-}
 
-+ (void) recordResult: (Card*)card gotItRight:(BOOL) gotItRight knewIt:(BOOL) knewIt;
-+ (NSInteger) getNextAfterLevel:(NSInteger) level gotItRight: (BOOL)gotItRight;
++ (void) buryCard:(Card *)card inTag:(Tag *)tag;
++ (void) recordCorrectForCard:(Card *)card inTag:(Tag *)tag;
++ (void) recordWrongForCard:(Card *)card inTag:(Tag *)tag;
 
 @end
