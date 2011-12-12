@@ -35,8 +35,11 @@
                     NSLocalizedString(@"Corrections",@"HelpViewController.Table_Corrections"),
                     NSLocalizedString(@"Learning Algorithm",@"HelpViewController.Table_LearningAlgorithm"),
                     NSLocalizedString(@"Sharing",@"HelpViewController.Table_Sharing"),                                               
-                    NSLocalizedString(@"Integration",@"HelpViewController.Table_Integration"),                      
+                    NSLocalizedString(@"Integration",@"HelpViewController.Table_Integration"),
+#if defined (LWE_JFLASH)
+                    // The tag glossary is only in JFlash
                     NSLocalizedString(@"Tag Glossary",@"HelpViewController.Table_TagGlossary"),
+#endif
                     NSLocalizedString(@"Backup Custom Sets",@"HelpViewController.Table_BackupCustomSets"),
                     NSLocalizedString(@"Feedback",@"HelpViewController.Table_Feedback"),
                     nil];
@@ -48,7 +51,21 @@
   self.navigationItem.rightBarButtonItem = supportBtn;
   
   // We use absolute sizes though so let the old devices scale the images down.
-  self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",@"studysets@2x",@"practice@2x",@"browse@2x",@"search@2x",@"corrections@2x",@"algorithm@2x",@"share@2x",@"integration@2x",@"tags@2x",@"backup@2x",@"feedback@2x",nil];
+  self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",
+                        @"studysets@2x",
+                        @"practice@2x",
+                        @"browse@2x",
+                        @"search@2x",
+                        @"corrections@2x",
+                        @"algorithm@2x",
+                        @"share@2x",
+                        @"integration@2x",
+#if defined (LWE_JFLASH)
+                        // We only use this in JFlash
+                        @"tags@2x",
+#endif
+                        @"backup@2x",
+                        @"feedback@2x",nil];
   currentIndex = 0;
 }
 
