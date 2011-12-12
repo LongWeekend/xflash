@@ -202,24 +202,9 @@
   self.readingLabel.shadowColor = [UIColor blackColor];
   self.readingLabel.textAlignment = UITextAlignmentCenter;
 #endif
-  
-  [LWEUILabelUtils resizeLabelWithConstraints:self.readingLabel
-                                  minFontSize:READING_MIN_FONTSIZE
-                                  maxFontSize:READING_MAX_FONTSIZE
-                            forParentViewSize:self.readingScrollContainer.frame.size];
-  
-  // Resize text within bounds
-  [LWEUILabelUtils autosizeLabelText:self.readingLabel
-                       forScrollView:self.readingScrollContainer
-                            withText:card.reading
-                         minFontSize:READING_MIN_FONTSIZE
-                         maxFontSize:READING_MAX_FONTSIZE];
-  
-  [LWEUILabelUtils autosizeLabelText:self.headwordLabel
-                       forScrollView:self.headwordScrollContainer
-                            withText:card.headword
-                         minFontSize:HEADWORD_MIN_FONTSIZE
-                         maxFontSize:HEADWORD_MAX_FONTSIZE];
+  // These calls used to take the scrollContainer as well, but we infer it (superview) of the labels.
+  [self.readingLabel resizeWithMinFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
+  [self.headwordLabel resizeWithMinFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
   
   // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
   BOOL shouldHideReadingScroll = [self _shouldHideMoreIconForLabel:self.readingLabel
