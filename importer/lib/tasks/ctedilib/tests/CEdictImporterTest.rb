@@ -5,10 +5,10 @@ class CEdictImporterTest < Test::Unit::TestCase
   def test_short_import
     parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_cedict.u8")
     entries = parser.run
-    
-    importer = CEdictImporter.new(entries)
+  
+    importer = CEdictImporter.new
     importer.empty_staging_tables
-    importer.import
+    importer.import(entries)
   end
   
   def test_import
@@ -17,9 +17,9 @@ class CEdictImporterTest < Test::Unit::TestCase
     entries = parser.run
     
     # Pass the parsed entries to the importer
-    importer = CEdictImporter.new(entries)
+    importer = CEdictImporter.new
     importer.empty_staging_tables
-    importer.import
+    importer.import(entries)
   end
 
   def test_tag_list_builder
