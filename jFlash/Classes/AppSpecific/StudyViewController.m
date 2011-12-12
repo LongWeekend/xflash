@@ -375,7 +375,7 @@
   self.progressDetailsViewController.levelDetails = [self _getLevelDetails];
   self.progressDetailsViewController.rightStreak = currentRightStreak;
   self.progressDetailsViewController.wrongStreak = currentWrongStreak;
-  self.progressVC.currentStudySet.text = currentCardSet.tagName;
+  self.progressDetailsViewController.currentStudySet.text = currentCardSet.tagName;
   self.progressDetailsViewController.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
   self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
   self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];

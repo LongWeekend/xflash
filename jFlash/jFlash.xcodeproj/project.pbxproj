@@ -109,6 +109,10 @@
 		493D5379138B5F7B00DDC242 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493D5378138B5F7A00DDC242 /* MessageUI.framework */; };
 		4941834013EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
 		4941834113EFB2C6006A5616 /* LWEFormDatePickerField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */; };
+		4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4944B1E11495D23700AE23BE /* CloseButtonView.m */; };
+		4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4944B1E11495D23700AE23BE /* CloseButtonView.m */; };
+		4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4944B1E11495D23700AE23BE /* CloseButtonView.m */; };
+		4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4944B1E11495D23700AE23BE /* CloseButtonView.m */; };
 		4947836712757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
 		4947836812757EE4000F9328 /* practice-btn-unrevealed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */; };
 		4947836912757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */; };
@@ -1004,6 +1008,8 @@
 		493D5378138B5F7A00DDC242 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4941833E13EFB2C6006A5616 /* LWEFormDatePickerField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormDatePickerField.h; sourceTree = "<group>"; };
 		4941833F13EFB2C6006A5616 /* LWEFormDatePickerField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormDatePickerField.m; sourceTree = "<group>"; };
+		4944B1E01495D23700AE23BE /* CloseButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CloseButtonView.h; path = AppSpecific/CloseButtonView.h; sourceTree = "<group>"; };
+		4944B1E11495D23700AE23BE /* CloseButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CloseButtonView.m; path = AppSpecific/CloseButtonView.m; sourceTree = "<group>"; };
 		4947836512757EE4000F9328 /* practice-btn-unrevealed-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed-mini@2x.png"; path = "Assets/practice-btn-unrevealed-mini@2x.png"; sourceTree = "<group>"; };
 		4947836612757EE4000F9328 /* practice-btn-unrevealed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-unrevealed@2x.png"; path = "Assets/practice-btn-unrevealed@2x.png"; sourceTree = "<group>"; };
 		494783741275901E000F9328 /* practice-btn-last@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-last@2x.png"; path = "Assets/practice-btn-last@2x.png"; sourceTree = "<group>"; };
@@ -1763,6 +1769,8 @@
 				D36CE144111A9A050073D809 /* CustomCellBackgroundView */,
 				911DA682108B52F500E3D928 /* PDColoredProgressView */,
 				DA8B6A430FB111A200DE105C /* XIBs */,
+				4944B1E01495D23700AE23BE /* CloseButtonView.h */,
+				4944B1E11495D23700AE23BE /* CloseButtonView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3457,6 +3465,7 @@
 				498EBDA71488B96800BA6DE7 /* Plugin.m in Sources */,
 				498EBDAD1488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498229511491D02B009EC2CD /* DownloadManager.m in Sources */,
+				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3533,6 +3542,7 @@
 				498EBDB51488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910156148992EC003E9A19 /* TagTest.m in Sources */,
 				4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */,
+				4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3610,6 +3620,7 @@
 				498EBDB61488D43A00BA6DE7 /* PluginTest.m in Sources */,
 				91910157148992EC003E9A19 /* TagTest.m in Sources */,
 				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
+				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3765,6 +3776,7 @@
 				498EBDA81488B96800BA6DE7 /* Plugin.m in Sources */,
 				498EBDAE1488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498229521491D02B009EC2CD /* DownloadManager.m in Sources */,
+				4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
