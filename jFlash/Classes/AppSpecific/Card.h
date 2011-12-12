@@ -17,11 +17,7 @@ extern NSString * const kLWESegmentedReadingKey;
 extern NSInteger const kLWEUninitializedCardId;
 
 //! Class for an individual card's data, also holds user data ABOUT the card for convenience
-@class LWEAudioQueue;
 @interface Card : NSObject <AVAudioPlayerDelegate>
-{
-  LWEAudioQueue *_player;
-}
 
 - (void) hydrate;
 - (void) hydrate:(FMResultSet*)rs;
@@ -37,7 +33,9 @@ extern NSInteger const kLWEUninitializedCardId;
 
 - (NSString*) meaning;
 
+//! Returns the meaning stripped of HTML
 - (NSString*) meaningWithoutMarkup;
+
 - (BOOL) hasExampleSentencesWithPluginManager:(PluginManager *)mgr;
 
 //! Returns YES if the card has audio data associated with it (accessible from -audioFilenames hash)
