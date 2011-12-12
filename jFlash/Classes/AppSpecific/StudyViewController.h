@@ -72,21 +72,21 @@
 @property (nonatomic, retain) IBOutlet UIView *actionbarView;
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
+@property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
 @property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;
 
-// The progress bar
-@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *practiceBgImage;
+
+// The progress bar
+@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 @property (nonatomic, retain) IBOutlet UIView *progressBarView;
+@property (nonatomic, retain) IBOutlet UIButton *showProgressModalBtn;
 
 // Progress modal overlay
-@property (nonatomic, retain) IBOutlet UIView *progressModalView;
-@property (nonatomic, retain) IBOutlet UIView *progressModalBtn;
-
-@property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
+@property (nonatomic, retain) ProgressDetailsViewController *progressDetailsViewController;
 
 // Plugin related
 @property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
@@ -95,8 +95,6 @@
 // scroll view
 @property (nonatomic, retain) Tag *currentCardSet;
 @property (nonatomic, retain) Card *currentCard;
-
-@property (nonatomic, retain) ProgressBarViewController *progressBarViewController; 
 
 // stats for progress modal
 @property NSInteger numRight;

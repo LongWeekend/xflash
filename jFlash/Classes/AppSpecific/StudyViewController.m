@@ -14,8 +14,6 @@
 #import "AddTagViewController.h"
 
 @interface StudyViewController()
-//private properties
-@property (nonatomic, retain) ProgressDetailsViewController *progressVC;
 //private methods
 - (void) _applicationDidEnterBackground:(NSNotification*)notification;
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
@@ -33,12 +31,12 @@
 @synthesize delegate;
 @synthesize pluginManager;
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
-@synthesize progressModalView, progressModalBtn, progressBarViewController, progressBarView;
+@synthesize progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
 @synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
-@synthesize progressVC = _progressVC;
+@synthesize progressDetailsViewController;
 @synthesize pronounceBtn = pronounceBtn;
 
 #define LWE_EX_SENTENCE_INSTALLER_VIEW_TAG 69
@@ -368,29 +366,29 @@
 {
   // Bring up the modal dialog for progress view
   // TODO: iPad customization!
-  if (self.progressVC == nil)
+  if (self.progressDetailsViewController == nil)
   {
     ProgressDetailsViewController *progressView = [[ProgressDetailsViewController alloc] initWithNibName:@"ProgressView" bundle:nil];
-    self.progressVC = progressView;
+    self.progressDetailsViewController = progressView;
     [progressView release];
   }
-  self.progressVC.levelDetails = [self _getLevelDetails];
-  self.progressVC.rightStreak = currentRightStreak;
-  self.progressVC.wrongStreak = currentWrongStreak;
+  self.progressDetailsViewController.levelDetails = [self _getLevelDetails];
+  self.progressDetailsViewController.rightStreak = currentRightStreak;
+  self.progressDetailsViewController.wrongStreak = currentWrongStreak;
   self.progressVC.currentStudySet.text = currentCardSet.tagName;
-  self.progressVC.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
-  self.progressVC.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
-  self.progressVC.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
+  self.progressDetailsViewController.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
+  self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
+  self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
 
   // Make room for the status bar
-  CGRect frame = self.progressVC.view.frame;
+  CGRect frame = self.progressDetailsViewController.view.frame;
   frame.origin = CGPointMake(0, 20);
-  self.progressVC.view.frame = frame;
+  self.progressDetailsViewController.view.frame = frame;
   
   // The parent is a nav bar controller, (tab bar in this case), so it will cover the whole view
   // We could use presentModalViewController, but then we lose the "see-through" ability with the views underneath.
   // There is a call to -removeFromSuperview inside the progress VC on dismiss.
-  [self.parentViewController.view addSubview:self.progressVC.view];
+  [self.parentViewController.view addSubview:self.progressDetailsViewController.view];
 }
 
 
@@ -777,27 +775,25 @@
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  
+  self.progressDetailsViewController = nil;
 	self.progressBarViewController = nil;
+	self.exampleSentencesViewController = nil;
 	self.cardViewController = nil;
 	self.actionBarController = nil;
+  
 	self.scrollView = nil;
 	self.pageControl = nil;
 	self.cardView = nil;
 	self.actionbarView = nil;
-	self.exampleSentencesViewController = nil;
 	self.cardSetLabel = nil;
 	self.totalWordsLabel = nil;
 	self.revealCardBtn = nil;
 	self.tapForAnswerImage = nil;
 	self.practiceBgImage = nil;
 	self.progressBarView = nil;
-	self.progressModalView = nil;
-	self.progressModalBtn = nil;
 	self.remainingCardsLabel = nil;
 	self.showProgressModalBtn = nil;
   self.pronounceBtn = nil;
-
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -805,10 +801,7 @@
 {
   [pronounceBtn release];
   
-  if (self.progressVC)
-  {
-    [_progressVC release];
-  }
+  
   //theme
   [practiceBgImage release];
   
@@ -817,10 +810,9 @@
   [totalWordsLabel release];
   
   //progress stuff
-  [progressBarView release];
+  [progressDetailsViewController release];
   [progressBarViewController release];
-  [progressModalView release];
-  [progressModalBtn release];
+  [progressBarView release];
   
   //card view stuff
   [cardViewController release];
