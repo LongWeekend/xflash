@@ -73,7 +73,6 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *cardSetLabel;
 @property (nonatomic, retain) IBOutlet UILabel *remainingCardsLabel;
-@property (nonatomic, retain) IBOutlet UILabel *totalWordsLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *revealCardBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *tapForAnswerImage;

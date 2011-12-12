@@ -33,7 +33,7 @@
 @synthesize currentCard, currentCardSet, remainingCardsLabel;
 @synthesize progressBarViewController, progressBarView;
 @synthesize numRight, numWrong, numViewed, cardSetLabel;
-@synthesize practiceBgImage, totalWordsLabel, currentRightStreak, currentWrongStreak, cardViewController, cardView;
+@synthesize practiceBgImage, currentRightStreak, currentWrongStreak, cardViewController, cardView;
 @synthesize scrollView, pageControl, exampleSentencesViewController, showProgressModalBtn;
 @synthesize actionBarController, actionbarView, revealCardBtn, tapForAnswerImage;
 @synthesize progressDetailsViewController;
@@ -786,7 +786,6 @@
 	self.cardView = nil;
 	self.actionbarView = nil;
 	self.cardSetLabel = nil;
-	self.totalWordsLabel = nil;
 	self.revealCardBtn = nil;
 	self.tapForAnswerImage = nil;
 	self.practiceBgImage = nil;
@@ -807,7 +806,6 @@
   
   //kept on this view for now - refactor this too
   [cardSetLabel release];
-  [totalWordsLabel release];
   
   //progress stuff
   [progressDetailsViewController release];
