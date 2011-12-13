@@ -133,22 +133,22 @@
 
 - (void) turnReadingOn
 {
-  // This will handle the "more" icon
-  [self _updateReadingContainer];
-  
+  // Change state
   self.readingScrollContainer.hidden = NO;
   [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
-  [self.readingLabel setNeedsDisplay];
+  
+  // This will handle the "more" icon after the state change
+  [self _updateReadingContainer];
 }
 
 - (void) turnReadingOff
 {
-  // This will handle the "more" icon
-  [self _updateReadingContainer];
-  
   self.readingScrollContainer.hidden = YES;
   [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
                                    forState:UIControlStateNormal];
+
+  // This will handle the "more" icon after the state change
+  [self _updateReadingContainer];
 }
 
 //! shows or hides the reading label and toggleButton according to the readingVisible bool
@@ -214,7 +214,7 @@
   // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
   BOOL shouldHideReadingScroll = [self _shouldHideMoreIconForLabel:self.readingLabel
                                                      forScrollView:self.readingScrollContainer];
-  self.readingMoreIcon.hidden = (shouldHideReadingScroll || (self.readingVisible == NO));
+  self.readingMoreIcon.hidden = (shouldHideReadingScroll || (self.readingScrollContainer.hidden == YES));
 }
 
 - (void) _injectMeaningHTML:(NSString*)html

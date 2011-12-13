@@ -56,7 +56,7 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) IBOutlet MoodIcon *moodIcon;
 
 //! The label holding the reading for this card
-@property (nonatomic, retain) IBOutlet OHAttributedLabel *readingLabel;
+@property (nonatomic, retain) IBOutlet UILabel *readingLabel; //OHAttributedLabel *readingLabel;
 
 //! If yes, the reading is visible.  Separate variable than label.hidden because we preserve state across cards.
 @property BOOL readingVisible;
