@@ -120,6 +120,24 @@
   return reading;
 }
 
+- (NSAttributedString *) attributedReading
+{
+  NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
+  NSArray *readingHashes = [self readingComponents];
+  for (NSDictionary *readingHash in readingHashes)
+  {
+    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
+    NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
+    NSRange allRange = NSMakeRange(0, [stringToAppend length]);
+    [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
+                          value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
+                          range:allRange];
+    [attrString appendAttributedString:tmpAttrString];
+    [tmpAttrString release];
+  }
+  return [attrString autorelease];
+}
+
 - (NSArray *) readingComponents
 {
   NSMutableArray *components = [NSMutableArray array];

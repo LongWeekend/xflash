@@ -14,6 +14,7 @@
 @interface CardViewController()
 - (void) _injectMeaningHTML:(NSString*)html;
 - (void) _prepareView:(Card*)card;
+- (void) _updateReadingContainer;
 
 //! Returns YES if the contents of theLabel fit in scrollViewContainer w/o scrolling
 - (BOOL) _shouldHideMoreIconForLabel:(UIView *)theLabel forScrollView:(UIScrollView *)scrollViewContainer;
@@ -131,6 +132,9 @@
 
 - (void) turnReadingOn
 {
+  // This will handle the "more" icon
+  [self _updateReadingContainer];
+  
   self.readingScrollContainer.hidden = NO;
   [self.toggleReadingBtn setBackgroundImage:nil forState:UIControlStateNormal];
   [self.readingLabel setNeedsDisplay];
@@ -138,6 +142,9 @@
 
 - (void) turnReadingOff
 {
+  // This will handle the "more" icon
+  [self _updateReadingContainer];
+  
   self.readingScrollContainer.hidden = YES;
   [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
                                    forState:UIControlStateNormal];
@@ -176,25 +183,9 @@
   
   // Now do the hard part (for CFlash)
 #if defined(LWE_JFLASH)
-  self.cardReadingLabel.text = card.reading;
+  self.readingLabel.text = card.reading;
 #elif defined(LWE_CFLASH)
-  NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
-  NSArray *readingHashes = [(ChineseCard*)card readingComponents];
-  for (NSDictionary *readingHash in readingHashes)
-  {
-    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
-    NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
-    NSRange allRange = NSMakeRange(0, [stringToAppend length]);
-    [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
-                          value:(id)[(UIColor*)[readingHash objectForKey:@"color"] CGColor]
-                          range:allRange];
-    [attrString appendAttributedString:tmpAttrString];
-    [tmpAttrString release];
-  }
-  
-  [(OHAttributedLabel *)self.readingLabel setAttributedText:attrString];
-  [attrString release];
-  
+  [self.readingLabel setAttributedText:card.attributedReading];
   // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
   // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
   // wonky, so we have to go with what works
@@ -221,13 +212,17 @@
                          minFontSize:HEADWORD_MIN_FONTSIZE
                          maxFontSize:HEADWORD_MAX_FONTSIZE];
   
+  [self _updateReadingContainer];
+  self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
+                                                     forScrollView:self.headwordScrollContainer];
+}
+
+- (void) _updateReadingContainer
+{
   // Hide the scroll icon if the label fits, or if the reading isn't visible yet.
   BOOL shouldHideReadingScroll = [self _shouldHideMoreIconForLabel:self.readingLabel
                                                      forScrollView:self.readingScrollContainer];
   self.readingMoreIcon.hidden = (shouldHideReadingScroll || (self.readingVisible == NO));
-  
-  self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
-                                                     forScrollView:self.headwordScrollContainer];
 }
 
 - (void) _injectMeaningHTML:(NSString*)html
