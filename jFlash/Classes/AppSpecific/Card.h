@@ -23,7 +23,11 @@ extern NSInteger const kLWEUninitializedCardId;
 - (void) hydrate:(FMResultSet*)rs;
 - (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
 
+//! Returns the reading of the card
 - (NSString*) reading;
+
+//! Returns the reading of the card, with any special attributes (color, links etc)
+- (NSAttributedString *) attributedReading;
 
 // Returns the headword, taking into account the app's current HW Mode setting
 - (NSString*) headword;
