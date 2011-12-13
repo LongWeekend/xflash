@@ -8,6 +8,7 @@
 
 #import "CardViewController.h"
 
+#import "UIScrollView+LWEUtilities.h"
 #import "ChineseCard.h"
 
 // Private Methods
@@ -193,9 +194,15 @@
   self.readingLabel.shadowColor = [UIColor blackColor];
   self.readingLabel.textAlignment = UITextAlignmentCenter;
 #endif
-  // These calls used to take the scrollContainer as well, but we infer it (superview) of the labels.
+  // These calls re-size the reading & headword labels.  They used to take the scrollContainer as well,
+  // but we infer it (superview) of the labels inside this call.
   [self.readingLabel resizeWithMinFontSize:READING_MIN_FONTSIZE maxFontSize:READING_MAX_FONTSIZE];
   [self.headwordLabel resizeWithMinFontSize:HEADWORD_MIN_FONTSIZE maxFontSize:HEADWORD_MAX_FONTSIZE];
+  
+  // Now resize the scroll views as necessary based on the resized views above, if necessary.
+  // This call also centers the label inside the scroll view.
+  [self.readingScrollContainer resizeScrollViewWithContentView:self.readingLabel];
+  [self.headwordScrollContainer resizeScrollViewWithContentView:self.headwordLabel];
   
   [self _updateReadingContainer];
   self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
