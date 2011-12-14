@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212082450) do
+ActiveRecord::Schema.define(:version => 20111212090226) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20111212082450) do
     t.string  "referenced_cards"
     t.boolean "is_reference_only",                       :default => false
     t.boolean "is_proper_noun",                          :default => false
+    t.integer "priority_word",     :limit => 1,          :default => 0,     :null => false
   end
 
   add_index "cards_staging", ["headword_trad"], :name => "headword_trad"
