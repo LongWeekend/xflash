@@ -131,6 +131,8 @@ $regexes[:pinyin_separator] = /^[,·]/
 $regexes[:single_letter] = /^[A-Za-z]{1}/
 $regexes[:inlined_tags] = /\(([^\)]*)\)$/
 
+$regexes[:diff_info] = /^\d+(,{1}\d+)?[a|c|d]\d+(,{1}\d+)?$/
+
 
 # OLD JFLASH REGEXES
 # $regexes[:number_marker] = /\(\d?\d?\)\s{1}/

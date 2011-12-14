@@ -26,9 +26,8 @@ load File.dirname(__FILE__) + "/classes/CSVEntry.rb"
 # For parsing CEDICT and tag lists
 load File.dirname(__FILE__) + "/classes/Parser.rb"
 load File.dirname(__FILE__) + "/classes/CEdictParser.rb"
+load File.dirname(__FILE__) + "/classes/CEdictDiffParser.rb"
 load File.dirname(__FILE__) + "/classes/WordListParser.rb"
-
-load File.dirname(__FILE__) + "/classes/CEdictImporterConfiguration.rb"
 
 # Group and Tag related importer
 load File.dirname(__FILE__) + "/classes/GroupImporter.rb"
