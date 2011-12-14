@@ -116,6 +116,12 @@ NSInteger const kLWEUninitializedCardId    = -1;
   return self.hw_reading;
 }
 
+//! By default, just return the regular string.
+- (NSAttributedString *) attributedReading
+{
+  return [[[NSAttributedString alloc] initWithString:self.hw_reading] autorelease];
+}
+
 #pragma mark - Audio Related
 
 - (BOOL) hasAudioWithPluginManager:(PluginManager *)mgr
