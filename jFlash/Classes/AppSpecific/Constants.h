@@ -79,6 +79,7 @@ extern NSString * const LWE_SUPPORT_EMAIL;
 // Twitter Keys
 extern NSString * const LWE_TWITTER_CONSUMER_KEY;
 extern NSString * const LWE_TWITTER_PRIVATE_KEY;
+extern NSString * const LWE_TWITTER_HASH_TAG;
 
 #if defined(LWE_JFLASH)
 

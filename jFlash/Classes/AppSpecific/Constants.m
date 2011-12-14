@@ -67,6 +67,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // Each flash has its own Tiwtter key
       NSString * const LWE_TWITTER_CONSUMER_KEY = @"BGDlaaZWdjPo3oPudnIUNA";
       NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
+      NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
 
       // These constants are general to the flashes
       NSString * const LWE_CURRENT_VERSION       = @"1.5";
@@ -113,6 +114,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // Each flash has its own Tiwtter key
       NSString * const LWE_TWITTER_CONSUMER_KEY = @"2xLbYtl787ShwJBFIC1QaA";
       NSString * const LWE_TWITTER_PRIVATE_KEY  = @"AKst54TeQWdQssmKL9PZrDTmm0DyIO48iEnaZIbFmc";
+      NSString * const LWE_TWITTER_HASH_TAG     = @"#cflash";
 
 
       // These constants are general to the flashes

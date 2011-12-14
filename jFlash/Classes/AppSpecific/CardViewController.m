@@ -143,6 +143,9 @@
 
 - (void) turnReadingOff
 {
+  // This will handle the "more" icon
+  [self _updateReadingContainer];
+  
   self.readingScrollContainer.hidden = YES;
   [self.toggleReadingBtn setBackgroundImage:[UIImage imageNamed:@"practice-btn-showreading.png"]
                                    forState:UIControlStateNormal];
