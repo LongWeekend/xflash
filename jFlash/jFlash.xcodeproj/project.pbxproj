@@ -456,6 +456,10 @@
 		499448D01472817000671849 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941833C13EFB237006A5616 /* libsqlite3.a */; };
 		499448D11472817800671849 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941833C13EFB237006A5616 /* libsqlite3.a */; };
 		4999672A11B3E45F00898A0C /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4999672911B3E45F00898A0C /* ThemeManager.m */; };
+		499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
+		499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
+		499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
+		499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
 		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
 		49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49A942661263AF4500086F4C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
@@ -1080,6 +1084,8 @@
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
+		499E56B414972A7200088BD3 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = External/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
+		499E56B514972A7200088BD3 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = External/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
 		49A942601263AF4500086F4C /* star-deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected.png"; path = "Assets/star-deselected.png"; sourceTree = "<group>"; };
 		49A942611263AF4500086F4C /* star-deselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-deselected@2x.png"; path = "Assets/star-deselected@2x.png"; sourceTree = "<group>"; };
 		49A942621263AF4500086F4C /* star-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-selected.png"; path = "Assets/star-selected.png"; sourceTree = "<group>"; };
@@ -1885,6 +1891,8 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
+				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
 				4938F8BB14027532001EB473 /* OHAttributedLabel */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
@@ -3466,6 +3474,7 @@
 				498EBDAD1488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498229511491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
+				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3543,6 +3552,7 @@
 				91910156148992EC003E9A19 /* TagTest.m in Sources */,
 				4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */,
 				4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */,
+				499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3621,6 +3631,7 @@
 				91910157148992EC003E9A19 /* TagTest.m in Sources */,
 				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
 				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
+				499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3777,6 +3788,7 @@
 				498EBDAE1488BDE000BA6DE7 /* LWEError.m in Sources */,
 				498229521491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */,
+				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
