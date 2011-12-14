@@ -135,6 +135,7 @@
     [attrString appendAttributedString:tmpAttrString];
     [tmpAttrString release];
   }
+  
   return [attrString autorelease];
 }
 
