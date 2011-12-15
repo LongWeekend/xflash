@@ -276,14 +276,13 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 		LWE_LOG(@"It tries to open up the tweet this words controller");
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
-		TweetWordViewController *twitterController = [[TweetWordViewController alloc] 
+		self.tweetWordViewController = [[TweetWordViewController alloc] 
 													  initWithNibName:@"TweetWordViewController"  
 													  twitterEngine:self.twitterEngine 
 													  tweetWord:tweetWord];
     
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:twitterController, @"controller", nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.tweetWordViewController, @"controller", nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];
-		[twitterController release];
 		[dict release];
 	}
 }

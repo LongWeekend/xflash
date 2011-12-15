@@ -39,19 +39,15 @@
 #pragma mark -
 #pragma mark IBAction
 
-//! Tweet the text in the text fields, and add the " #jflash" after.
+//! Tweet the text in the text fields, and add the " #xflash" after.
 - (IBAction)tweet
 {
   // Make sure they have network!
   if ([LWENetworkUtils networkAvailable])
   {
     [self _resignTextFieldKeyboard];
-#if APP_TARGET == APP_TARGET_JFLASH
-    NSString *string = [NSString stringWithFormat:@"%@ #jflash", tweetTxt.text];
-#else
-    NSString *string = [NSString stringWithFormat:@"%@ #cflash", tweetTxt.text];
-#endif
-    [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:string];
+    NSString *tweet = [NSString stringWithFormat:@"%@ %@", tweetTxt.text, LWE_TWITTER_HASH_TAG];
+    [_twitterEngine performSelectorInBackground:@selector(tweet:) withObject:tweet];
     
     _loadingView = [LWELoadingView loadingView:self.parentViewController.view withText:@"Tweeting..."];
   }
