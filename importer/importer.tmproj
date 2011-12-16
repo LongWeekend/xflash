@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/tasks/ctedilib/classes/CEdictExporter.rb</string>
+	<string>lib/tasks/ctedilib/classes/Meaning.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,156 +21,114 @@
 	<integer>333</integer>
 	<key>metaData</key>
 	<dict>
-		<key>config/groups_config/cflash_group_config.yml</key>
+		<key>lib/tasks/ctedi.rake</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>37</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>143</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>45</integer>
-		</dict>
-		<key>config/tags_config/integrated_chinese_combined_config.yml</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>22</integer>
-				<key>line</key>
-				<integer>30</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/CEdictExporter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>57</integer>
-				<key>line</key>
-				<integer>26</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>4</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/GroupImporter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>30</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/classes/TagImporter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>18</integer>
-				<key>line</key>
-				<integer>178</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>154</integer>
-		</dict>
-		<key>lib/tasks/ctedilib/sql/create_tables.sql</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>20</integer>
+				<integer>91</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>79</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>37</integer>
+				<integer>109</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>94</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>20</integer>
-			</dict>
-		</dict>
-		<key>lib/tasks/ctedilib/tests/TagImporterTest.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>25</integer>
-				<key>line</key>
-				<integer>154</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>113</integer>
-		</dict>
-		<key>lib/tasks/tedilib3/classes/_importer.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
 				<integer>0</integer>
+				<key>line</key>
+				<integer>91</integer>
+			</dict>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/CEdictDiffParser.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>10</integer>
 				<key>line</key>
 				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>295</integer>
+			<integer>0</integer>
 		</dict>
-		<key>lib/tasks/tedilib3/classes/_jflash_importer.rb</key>
+		<key>lib/tasks/ctedilib/classes/CEdictEntry.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>65</integer>
+				<integer>26</integer>
 				<key>line</key>
-				<integer>741</integer>
+				<integer>37</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>713</integer>
+			<integer>0</integer>
 		</dict>
-		<key>lib/tasks/tedilib3/classes/_parser.rb</key>
+		<key>lib/tasks/ctedilib/classes/CEdictParser.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>109</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/Entry.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>7</integer>
+				<key>line</key>
+				<integer>315</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>164</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/Meaning.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>9</integer>
+				<key>line</key>
+				<integer>100</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>91</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/tests/ParserTest.rb</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>88</integer>
+				<key>line</key>
+				<integer>31</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -180,20 +138,17 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/tasks/ctedilib/classes/CEdictExporter.rb</string>
-		<string>lib/tasks/ctedilib/sql/create_tables.sql</string>
-		<string>lib/tasks/ctedilib/classes/TagImporter.rb</string>
-		<string>lib/tasks/ctedilib/tests/TagImporterTest.rb</string>
-		<string>lib/tasks/ctedilib/classes/GroupImporter.rb</string>
-		<string>lib/tasks/tedilib3/classes/_importer.rb</string>
-		<string>lib/tasks/tedilib3/classes/_parser.rb</string>
-		<string>lib/tasks/tedilib3/classes/_jflash_importer.rb</string>
-		<string>config/groups_config/cflash_group_config.yml</string>
-		<string>config/tags_config/integrated_chinese_combined_config.yml</string>
+		<string>lib/tasks/ctedilib/classes/CEdictDiffParser.rb</string>
+		<string>lib/tasks/ctedilib/tests/ParserTest.rb</string>
+		<string>lib/tasks/ctedilib/classes/CEdictParser.rb</string>
+		<string>lib/tasks/ctedilib/classes/CEdictEntry.rb</string>
+		<string>lib/tasks/ctedilib/classes/Entry.rb</string>
+		<string>lib/tasks/ctedilib/classes/Meaning.rb</string>
+		<string>lib/tasks/ctedi.rake</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{387, 0}, {1283, 1028}}</string>
+	<string>{{344, 0}, {1576, 1058}}</string>
 </dict>
 </plist>
