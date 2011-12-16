@@ -73,6 +73,10 @@ namespace :ctedi do
     
     get_cli_debug
     
+    # Get the filename to load (the dictionary filename)
+    filename = get_cli_attrib "file", true
+    full_path_importfile = File.dirname(__FILE__) + "../../data/cedict" + filename
+    
     # Parse
     prt "\nCEDICT Parse - Initial Flatfile Parse"
     prt_dotted_line
@@ -92,11 +96,11 @@ namespace :ctedi do
     
     prt "\nCEDICT Parse - Pass 4 (Cross-Referencing %d Variants)" % [parser.variant_entries.count]
     prt_dotted_line
-    muxed_base_entries = parser.add_variant_entries_into_base_entries(muxed_base_entries, parser.variant_entries)
+    muxed_base_entries = parser.add_variant_entries_into_base_entries(entries, parser.variant_entries)
     muxed_variant_entries = parser.add_base_entries_into_variant_entries(parser.variant_entries, entries)
     
     # Now combine the 3 types of entries -- they're all valid
-    entries = muxed_base_entries + muxed_variant_entries + muxed_erhua_entries
+    entries = entries + muxed_variant_entries + muxed_erhua_entries
     
     # Import
     prt "\nBeginning CEDICT Import"

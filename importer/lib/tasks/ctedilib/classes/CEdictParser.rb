@@ -75,13 +75,17 @@ class CEdictParser < Parser
     end
     
     # Now handle any funkiness with variants
-    
     return entries
   end
   
-  def merge_references_into_base_entries(base_entries,ref_entries)
+  def unmerge_references_from_base_entries(base_entries,ref_entries)
+    return self._relationship_reference_with_base_entries(base_entries,ref_entries,false)
+  end
+  
+  def _relationship_reference_with_base_entries(base_entries,ref_entries,merge=true)
     i = 0
     total = ref_entries.count
+    affected_entries = []
     
     ref_entries.each do |ref_entry|
       # Get the right reference (reference or variant)
@@ -98,20 +102,34 @@ class CEdictParser < Parser
           if ((i % 10) == 0)
             prt "Matched %d of %d reference entries" % [i, total]
           end
-          base_entry.add_ref_entry_into_meanings(ref_entry)
+          
+          if (merge)
+            base_entry.add_ref_entry_into_meanings(ref_entry)
+          else
+            base_entry.rem_ref_entry_from_meanings(ref_entry)
+          end
+          affected_entries << base_entry
           
           # We can break from this loop here because we only match 1-to-1
           break
         end
       end
     end
-    return base_entries
+    
+    # Returning only the entries which reference have been added.
+    return affected_entries
+  end
+  
+  def merge_references_into_base_entries(base_entries,ref_entries)
+    return self._relationship_reference_with_base_entries(base_entries,ref_entries,true)
   end
   
   # Semi-private method to mux together variant & regular entries (goes both ways)
   def _mux_variant_entries_and_base_entries(base_entries,variant_entries,base_into_variant = false)
     matched = 0
     total = variant_entries.count
+    muxed_base_entries = []
+    muxed_variant_entries = []
     
     # Loop through the list of all erhua entries
     variant_entries.each do |variant_entry|
@@ -119,8 +137,10 @@ class CEdictParser < Parser
       base_entries.each do |base_entry|
         if base_entry.inline_entry_match?(inline_variant_entry)
           if base_into_variant
+            muxed_variant_entries << variant_entry
             variant_entry.add_base_entry_to_variant_meanings(base_entry)
           else
+            muxed_base_entries << base_entry
             base_entry.add_variant_entry_to_base_meanings(variant_entry)
           end
           matched = matched + 1
@@ -135,7 +155,7 @@ class CEdictParser < Parser
         end
       end
     end
-    return variant_entries, base_entries
+    return muxed_variant_entries, muxed_base_entries
   end
   
   def add_variant_entries_into_base_entries(base_entries,variant_entries)
