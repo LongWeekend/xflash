@@ -1,5 +1,17 @@
 class CEdictDiffParser
   
+  @config_filename
+  @last_config
+  @counter
+  @diff_filename
+  @written_to_file
+  @file_exist
+    
+  @added
+  @removed
+  @changed
+  @config
+  
   ### Class Constructor
   def initialize (new_dict_file, yaml_file)
     # File related toegther with the hash object of the last configuration
@@ -42,7 +54,7 @@ class CEdictDiffParser
     
     # If this is run for the first time, we are not gonna have the diff_file, so
     # What we are doing is to read all of the lines, and put them under "added" section
-    if !(File.file? @diff_filename)
+    if (File.file? @diff_filename)
       # Parse the diff file
       parse_diff 
     else
@@ -57,7 +69,7 @@ class CEdictDiffParser
   ### Return with the hash :added, :removed and :changed containing line
   ### in CEdictParser-friendly format
   def line_diff
-    return { :added => @added, :removed => @"removed", :changed => @changed }
+    return { :added => @added, :removed => @removed, :changed => @changed }
   end
   
   ### parse the file directly from the source as this is the first
@@ -147,22 +159,22 @@ class CEdictDiffParser
   ### comparing the new edict file from the old one.
   ### This method only needed to run once in every "import" operation.
   def get_diff_from_previous_file
-    if (@diff_filename == nil) || (@diff_filename.strip == "")
+    result = ""
+    if (@diff_filename == nil)
       # Get both the filename for logging.
       previous_filename = self.full_path_from_edict_file(self.old_filename)
       current_filename = self.full_path_from_edict_file(@config["filename"])
 
       # Only do the diff if both files actually exist
-      result = nil
       if (File.file? previous_filename) && (File.file? current_filename)
         # We want to add the timestamp as part of the diff filename
         timestamp = DateTime.now.strftime "%d%m%y-%H%M"
         result = File.dirname(__FILE__) + "/../../../../data/cedict/migration_history/diff#{timestamp}.txt"
         `diff '#{previous_filename}' '#{current_filename}' > '#{result}'`
       end
-
-      @diff_filename = result
     end
+    
+    @diff_filename = result
     return @diff_filename
   end
   

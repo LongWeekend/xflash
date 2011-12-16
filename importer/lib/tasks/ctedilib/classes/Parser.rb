@@ -28,6 +28,22 @@ class Parser
     @category_tags_array = (category_tags_list.nil? ? [] : category_tags_list.split(",").flatten)
   end
   
+  ### Class Constructor
+  #####################################
+  def initialize(lines, from=0, to=0)
+    @from_rec_no = from # support from/to
+    @to_rec_no = to # support from/to
+    @source_file = nil
+    @source_file_name = nil
+    @source_file_ext = nil
+    @line_count_atomicity = 1 ### support for records split that take up multiple lines
+    @warning_level = "VERBOSE"
+    @source_data_object = lines
+    
+    # Category tags added via the command line
+    @category_tags_array = []
+  end
+  
   def set_line_count_atomicity(val)
     @line_count_atomicity = val
   end
