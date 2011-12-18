@@ -20,18 +20,6 @@ class Meaning
     @meaning = meaning
   end
   
-  # Won't work if the card IDs aren't set
-  def ==(another_meaning)
-    # If the another_card_entry is not Entry type
-    # just return with false.
-    if (!another_card_entry.kind_of?(Meaning))
-      return false
-    end
-  
-    return false if self.tags != another_meaning.tags
-    return (self.meaning == another_card_entry.meaning and self.variant == another_card_entry.variant and self.reference == another_card_entry.reference)
-  end
-  
   def parse(meaning = "")
     begin
       # Use the one from the initializer if there isn't any on the parse call
@@ -223,6 +211,11 @@ class Meaning
   # HELPERS
   
   def ==(obj)
+    # If the obj is not Meaning type
+    # just return with false.
+    if (!obj.kind_of?(Meaning))
+      return false
+    end
     return (obj.meaning == @meaning && obj.tags.eql?(@tags))
   end
   
