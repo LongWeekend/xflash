@@ -298,8 +298,9 @@ class Entry
     meaning_str = Entry.construct_meaning_str(ref_entry, modifier)
     removed_meaning = Meaning.new(meaning_str,["reference"]) 
     
-    removed_obj = @meanings.delete removed_meaning
-    p "This reference entry :\n %s \ncouldn't be found inside the following entries :\n %s " % [removed_meaning.to_s, self.to_s] if removed_obj == nil
+    idx = @meanings.index removed_meaning
+    @meanings.delete_at idx if idx != nil
+    prt "This reference entry :\n %s \ncouldn't be found inside the following entries :\n %s " % [removed_meaning.to_s, self.to_s] if idx == nil
   end
   
   def self.construct_meaning_str(ref_entry, modifier = "Also")
@@ -308,23 +309,43 @@ class Entry
   end
   
   def add_variant_entry_to_base_meanings(variant_entry)
-    modifier = "Has variant"
-    if variant_entry.is_erhua_variant?
-      modifier = "Has Erhua variant"
-    elsif variant_entry.is_archaic_variant?
-      modifier = "Has archaic variant"
-    end
+    modifier = self._get_modifier_for_variant(variant_entry)
     add_ref_entry_into_meanings(variant_entry,modifier)
   end
 
   def add_base_entry_to_variant_meanings(base_entry)
+    modifier = self._get_modifier_for_base(base_entry)
+    add_ref_entry_into_meanings(base_entry,modifier)
+  end
+  
+  def rem_variant_entry_from_base_meanings(variant_entry)
+    modifier = self._get_modifier_for_variant(variant_entry)
+    rem_ref_entry_from_meanings(variant_entry,modifier)
+  end
+
+  def rem_base_entry_from_variant_meanings(base_entry)
+    modifier = self._get_modifier_for_base(base_entry)
+    rem_ref_entry_from_meanings(base_entry,modifier)
+  end
+  
+  def _get_modifier_for_base(base_entry)
     modifier = "Variant of"
     if is_erhua_variant?
       modifier = "Erhua variant of"
     elsif is_archaic_variant?
       modifier = "Archaic variant of"
     end
-    add_ref_entry_into_meanings(base_entry,modifier)
+    return modifier
+  end
+  
+  def _get_modifier_for_variant(variant_entry)
+    modifier = "Has variant"
+    if variant_entry.is_erhua_variant?
+      modifier = "Has Erhua variant"
+    elsif variant_entry.is_archaic_variant?
+      modifier = "Has archaic variant"
+   end
+   return modifier
   end
     
   def inline_entry_match?(inline_entry)

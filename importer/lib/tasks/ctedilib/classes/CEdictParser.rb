@@ -125,7 +125,7 @@ class CEdictParser < Parser
   end
   
   # Semi-private method to mux together variant & regular entries (goes both ways)
-  def _mux_variant_entries_and_base_entries(base_entries,variant_entries,base_into_variant = false)
+  def _mux_variant_entries_and_base_entries(base_entries,variant_entries,base_into_variant = false,add = true)
     matched = 0
     total = variant_entries.count
     muxed_base_entries = []
@@ -138,10 +138,12 @@ class CEdictParser < Parser
         if base_entry.inline_entry_match?(inline_variant_entry)
           if base_into_variant
             muxed_variant_entries << variant_entry
-            variant_entry.add_base_entry_to_variant_meanings(base_entry)
+            variant_entry.add_base_entry_to_variant_meanings(base_entry) if add
+            variant_entry.rem_base_entry_from_variant_meanings(base_entry) if !add
           else
             muxed_base_entries << base_entry
-            base_entry.add_variant_entry_to_base_meanings(variant_entry)
+            base_entry.add_variant_entry_to_base_meanings(variant_entry) if add
+            base_entry.rem_variant_entry_from_base_meanings(variant_entry) if !add
           end
           matched = matched + 1
           
@@ -160,13 +162,26 @@ class CEdictParser < Parser
   
   def add_variant_entries_into_base_entries(base_entries,variant_entries)
     # Gah I hate the double return here, but it kinda works well MMA
-    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,false)
+    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,false,true)
     return base
   end
 
   def add_base_entries_into_variant_entries(variant_entries,base_entries)
     # Gah I hate the double return here, but it kinda works well MMA
-    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,true)
+    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,true,true)
+    return var
+  end
+  
+  def rem_variant_entries_from_base_entries(base_entries,variant_entries)
+    # I just knew that we can do double return...
+    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,false,false)
+    return base
+  end
+  
+  ### This is'nt needed as the variant is to be deleted anyway.
+  def rem_base_entries_from_variant_entries(variant_entries,base_entries)
+    # I just knew that we can do double return...
+    var, base = _mux_variant_entries_and_base_entries(base_entries,variant_entries,true,false)
     return var
   end
   
