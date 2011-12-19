@@ -189,27 +189,7 @@
 #if defined(LWE_JFLASH)
   self.readingLabel.text = card.reading;
 #elif defined(LWE_CFLASH)
-  //  self.readingLabel.text = card.attributedReading;
-  
-  //[self.readingLabel inheritAttributesAndSetText:card.attributedReading];
-  [self.readingLabel setText:card.attributedReading afterInheritingLabelAttributesAndConfiguringWithBlock:nil];
-  //  self.readingLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
-  
-  LWE_ASSERT_EXC((self.readingLabel.numberOfLines == 0), @"Num lines should be zero");
-  LWE_ASSERT_EXC((self.readingLabel.verticalAlignment == TTTAttributedLabelVerticalAlignmentCenter), @"alignment should be center");
-  LWE_ASSERT_EXC((self.readingLabel.lineBreakMode == UILineBreakModeWordWrap),@"Should be word wrap");
-  // [self.readingLabel setText:card.attributedReading];
-  //  [self.readingLabel setText:card.attributedReading afterInheritingLabelAttributesAndConfiguringWithBlock:nil];
-  //  - (void)setText:(id)text afterInheritingLabelAttribu
-  //tesAndConfiguringWithBlock:(NSMutableAttributedString *(^)(NSMutableAttributedString *mutableAttributedString))block;
-  
-  //  [self.readingLabel setAttributedText:card.attributedReading];
-  // Unfortunately this class (OHAttributedLabel) doesn't seem to preserve the UILabel attributes
-  // from the XIB file, so we have to re-set it as centered :(   TTTAttributedLabel did, but it was 
-  // wonky, so we have to go with what works
-/*  self.readingLabel.shadowOffset = CGSizeMake(1.0f, 1.0f);
-  self.readingLabel.shadowColor = [UIColor blackColor];
-  self.readingLabel.textAlignment = UITextAlignmentCenter;*/
+  self.readingLabel.text = [card attributedReading];
 #endif
   // These calls re-size the reading & headword labels.  They used to take the scrollContainer as well,
   // but we infer it (superview) of the labels inside this call.
@@ -221,7 +201,7 @@
   [self.readingScrollContainer resizeScrollViewWithContentView:self.readingLabel];
   [self.headwordScrollContainer resizeScrollViewWithContentView:self.headwordLabel];
 
-  [self _updateReadingContainer];
+  //[self _updateReadingContainer];
   self.headwordMoreIcon.hidden = [self _shouldHideMoreIconForLabel:self.headwordLabel
                                                      forScrollView:self.headwordScrollContainer];
 }
