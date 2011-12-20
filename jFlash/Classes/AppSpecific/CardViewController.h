@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
-#import "OHAttributedLabel.h"
 #import "TTTAttributedLabel.h"
 #import "MoodIcon.h"
 #import "StudyViewProtocols.h"
