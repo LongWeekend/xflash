@@ -1,6 +1,5 @@
-jFlash/jFlash.xcodeproj/xcuserdata/
-jFlash/jFlash.xcodeproj/project.xcworkspace/
-jFlash/build
+jFlash/xFlash.xcodeproj/xcuserdata/
+jFlash/xFlash.xcodeproj/project.xcworkspace/
 GraphicAssets/
 *.pyc
 jFlash/Server/lweflash/lweflash.xcodeproj/Ross.*
@@ -11,10 +10,6 @@ importer/Gemfile.lock
 
 ## Log folder where to put the log for running ctedilib tasks
 importer/result-log/*
-
-## XCode Noise
-*.mode1v3
-*.pbxuser
 
 ## MacOSX Noise
 .DS_Store
