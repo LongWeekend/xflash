@@ -64,9 +64,7 @@ class TagImporter
   end
   
   def get_log_dump_filename
-    folder_path = File.dirname(__FILE__) + "/../../../../log"
-    tag_name = @config[:tag_configuration].short_name()
-    return "#{folder_path}/#{tag_name}-import.log"
+    Rails.root.join("log",@config[:tag_configuration].short_name()+"-import.log").to_s
   end
 
   def log(string, print_both=false)

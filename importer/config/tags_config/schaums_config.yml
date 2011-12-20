@@ -1,5 +1,5 @@
 schaums_asking_for_directions:
-    file_name: "/../../../../data/cedict/tags/books/schaums/ASKING FOR DIRECTIONS.txt"
+    file_name: "books/schaums/ASKING FOR DIRECTIONS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ schaums_asking_for_directions:
     parent_tag_id: 0
     force_off: 0
 schaums_at_home:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT HOME.txt"
+    file_name: "books/schaums/AT HOME.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ schaums_at_home:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_airport:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE AIRPORT.txt"
+    file_name: "books/schaums/AT THE AIRPORT.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ schaums_at_the_airport:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_bank:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE BANK.txt"
+    file_name: "books/schaums/AT THE BANK.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ schaums_at_the_bank:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_clothing_store:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE CLOTHING STORE.txt"
+    file_name: "books/schaums/AT THE CLOTHING STORE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ schaums_at_the_clothing_store:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_dry_cleaner:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE DRY CLEANER.txt"
+    file_name: "books/schaums/AT THE DRY CLEANER.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ schaums_at_the_dry_cleaner:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_hospital:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE HOSPITAL.txt"
+    file_name: "books/schaums/AT THE HOSPITAL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ schaums_at_the_hospital:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_hotel:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE HOTEL.txt"
+    file_name: "books/schaums/AT THE HOTEL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ schaums_at_the_hotel:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_post_office:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE POST OFFICE.txt"
+    file_name: "books/schaums/AT THE POST OFFICE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ schaums_at_the_post_office:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_restaurant:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE RESTAURANT.txt"
+    file_name: "books/schaums/AT THE RESTAURANT.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ schaums_at_the_restaurant:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_theater_and_the_movies:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE THEATER AND THE MOVIES.txt"
+    file_name: "books/schaums/AT THE THEATER AND THE MOVIES.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ schaums_at_the_theater_and_the_movies:
     parent_tag_id: 0
     force_off: 0
 schaums_at_the_train_station:
-    file_name: "/../../../../data/cedict/tags/books/schaums/AT THE TRAIN STATION.txt"
+    file_name: "books/schaums/AT THE TRAIN STATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ schaums_at_the_train_station:
     parent_tag_id: 0
     force_off: 0
 schaums_business:
-    file_name: "/../../../../data/cedict/tags/books/schaums/BUSINESS.txt"
+    file_name: "books/schaums/BUSINESS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ schaums_business:
     parent_tag_id: 0
     force_off: 0
 schaums_computer_and_internet:
-    file_name: "/../../../../data/cedict/tags/books/schaums/COMPUTER AND INTERNET.txt"
+    file_name: "books/schaums/COMPUTER AND INTERNET.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -209,7 +209,7 @@ schaums_computer_and_internet:
     parent_tag_id: 0
     force_off: 0
 schaums_education:
-    file_name: "/../../../../data/cedict/tags/books/schaums/EDUCATION.txt"
+    file_name: "books/schaums/EDUCATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -224,7 +224,7 @@ schaums_education:
     parent_tag_id: 0
     force_off: 0
 schaums_making_a_phone_call:
-    file_name: "/../../../../data/cedict/tags/books/schaums/MAKING A PHONE CALL.txt"
+    file_name: "books/schaums/MAKING A PHONE CALL.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ schaums_making_a_phone_call:
     parent_tag_id: 0
     force_off: 0
 schaums_on_the_airplane:
-    file_name: "/../../../../data/cedict/tags/books/schaums/ON THE AIRPLANE.txt"
+    file_name: "books/schaums/ON THE AIRPLANE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -254,7 +254,7 @@ schaums_on_the_airplane:
     parent_tag_id: 0
     force_off: 0
 schaums_passport_control_and_customs:
-    file_name: "/../../../../data/cedict/tags/books/schaums/PASSPORT CONTROL AND CUSTOMS.txt"
+    file_name: "books/schaums/PASSPORT CONTROL AND CUSTOMS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -269,7 +269,7 @@ schaums_passport_control_and_customs:
     parent_tag_id: 0
     force_off: 0
 schaums_public_transportation:
-    file_name: "/../../../../data/cedict/tags/books/schaums/PUBLIC TRANSPORTATION.txt"
+    file_name: "books/schaums/PUBLIC TRANSPORTATION.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -284,7 +284,7 @@ schaums_public_transportation:
     parent_tag_id: 0
     force_off: 0
 schaums_shopping_for_food:
-    file_name: "/../../../../data/cedict/tags/books/schaums/SHOPPING FOR FOOD.txt"
+    file_name: "books/schaums/SHOPPING FOR FOOD.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -299,7 +299,7 @@ schaums_shopping_for_food:
     parent_tag_id: 0
     force_off: 0
 schaums_sports:
-    file_name: "/../../../../data/cedict/tags/books/schaums/SPORTS.txt"
+    file_name: "books/schaums/SPORTS.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -314,7 +314,7 @@ schaums_sports:
     parent_tag_id: 0
     force_off: 0
 schaums_the_automobile:
-    file_name: "/../../../../data/cedict/tags/books/schaums/THE AUTOMOBILE.txt"
+    file_name: "books/schaums/THE AUTOMOBILE.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -329,7 +329,7 @@ schaums_the_automobile:
     parent_tag_id: 0
     force_off: 0
 schaums_the_weather:
-    file_name: "/../../../../data/cedict/tags/books/schaums/THE WEATHER.txt"
+    file_name: "books/schaums/THE WEATHER.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

@@ -14,8 +14,7 @@ class GroupImporter
   ### Class Constructor
   def initialize (yaml_file)
     @dry_run = false
-    # TODO: This will break if we move this class! MMA 11.28.2011
-    path_to_yaml_file = File.dirname(__FILE__) + "/../../../../config/groups_config/#{yaml_file}"
+    path_to_yaml_file = Rails.root.join("config/groups_config/#{yaml_file}").to_s
     @configuration = YAML.load_file(path_to_yaml_file)
     @entry_cache = EntryCache.new
     
@@ -80,9 +79,10 @@ class GroupImporter
     results = nil
     # if there is a source needed to be parse first parse that first
     if (configuration.file_name != nil)
-      test_file_path = File.dirname(__FILE__) + configuration.file_name
+      # TODO: lateron make this work for any importer, not just CEDICT
+      tag_list_filename = Rails.root.join("data/cedict/tags/" + configuration.file_name) #File.dirname(__FILE__) + configuration.file_name
       # Get the designated parser for the tag 
-      parser = configuration.file_parser.constantize.new(test_file_path)
+      parser = configuration.file_parser.constantize.new(tag_list_filename)
       results = parser.run(configuration.entry_type)
     end
 

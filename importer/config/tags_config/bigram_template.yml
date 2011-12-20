@@ -1,5 +1,5 @@
 frequency_news_XX:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-fict-XX.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-fict-XX.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

@@ -1,5 +1,5 @@
 hsk_1:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_1_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_1_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -15,7 +15,7 @@ hsk_1:
     force_off: 0
     contains_priority_words: 1
 hsk_2:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_2_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_2_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -31,7 +31,7 @@ hsk_2:
     force_off: 0
     contains_priority_words: 1
 hsk_3:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_3_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_3_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -47,7 +47,7 @@ hsk_3:
     force_off: 0
     contains_priority_words: 1
 hsk_4:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_4_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_4_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -63,7 +63,7 @@ hsk_4:
     force_off: 0
     contains_priority_words: 1
 hsk_5:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_5_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_5_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -79,7 +79,7 @@ hsk_5:
     force_off: 0
     contains_priority_words: 1
 hsk_6:
-    file_name: "/../../../../data/cedict/tags/hsk/HSK_Level_6_(New_HSK).csv"
+    file_name: "hsk/HSK_Level_6_(New_HSK).csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

@@ -1,5 +1,5 @@
 beg_chinese_lesson_1:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson1.txt"
+    file_name: "books/beg_chinese_lesson1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -15,7 +15,7 @@ beg_chinese_lesson_1:
     force_off: 0
     
 beg_chinese_lesson_2:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson2.txt"
+    file_name: "books/beg_chinese_lesson2.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -31,7 +31,7 @@ beg_chinese_lesson_2:
     force_off: 0
     
 beg_chinese_lesson_3:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson3.txt"
+    file_name: "books/beg_chinese_lesson3.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -47,7 +47,7 @@ beg_chinese_lesson_3:
     force_off: 0
     
 beg_chinese_lesson_4:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson4.txt"
+    file_name: "books/beg_chinese_lesson4.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -63,7 +63,7 @@ beg_chinese_lesson_4:
     force_off: 0
     
 beg_chinese_lesson_5:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson5.txt"
+    file_name: "books/beg_chinese_lesson5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -79,7 +79,7 @@ beg_chinese_lesson_5:
     force_off: 0
     
 beg_chinese_lesson_6:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson6.txt"
+    file_name: "books/beg_chinese_lesson6.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -95,7 +95,7 @@ beg_chinese_lesson_6:
     force_off: 0
     
 beg_chinese_lesson_7:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson7.txt"
+    file_name: "books/beg_chinese_lesson7.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -111,7 +111,7 @@ beg_chinese_lesson_7:
     force_off: 0
     
 beg_chinese_lesson_8:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson8.txt"
+    file_name: "books/beg_chinese_lesson8.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -127,7 +127,7 @@ beg_chinese_lesson_8:
     force_off: 0
     
 beg_chinese_lesson_9:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson9.txt"
+    file_name: "books/beg_chinese_lesson9.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -143,7 +143,7 @@ beg_chinese_lesson_9:
     force_off: 0
     
 beg_chinese_lesson_10:
-    file_name: "/../../../../data/cedict/tags/books/beg_chinese_lesson10.txt"
+    file_name: "books/beg_chinese_lesson10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

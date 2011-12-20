@@ -1,5 +1,5 @@
 pimsleur1_1:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_1-5.txt"
+    file_name: "books/pimsleur/pimsleur1_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ pimsleur1_1:
     parent_tag_id: 0
     force_off: 0
 pimsleur1_2:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_6-10.txt"
+    file_name: "books/pimsleur/pimsleur1_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ pimsleur1_2:
     parent_tag_id: 0
     force_off: 0
 pimsleur1_3:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_11-15.txt"
+    file_name: "books/pimsleur/pimsleur1_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ pimsleur1_3:
     parent_tag_id: 0
     force_off: 0
 pimsleur1_4:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_16-20.txt"
+    file_name: "books/pimsleur/pimsleur1_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ pimsleur1_4:
     parent_tag_id: 0
     force_off: 0
 pimsleur1_5:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_21-25.txt"
+    file_name: "books/pimsleur/pimsleur1_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ pimsleur1_5:
     parent_tag_id: 0
     force_off: 0
 pimsleur1_6:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur1_26-30.txt"
+    file_name: "books/pimsleur/pimsleur1_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ pimsleur1_6:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_1:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_1-5.txt"
+    file_name: "books/pimsleur/pimsleur2_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ pimsleur2_1:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_2:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_6-10.txt"
+    file_name: "books/pimsleur/pimsleur2_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ pimsleur2_2:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_3:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_11-15.txt"
+    file_name: "books/pimsleur/pimsleur2_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ pimsleur2_3:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_4:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_16-20.txt"
+    file_name: "books/pimsleur/pimsleur2_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ pimsleur2_4:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_5:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_21-25.txt"
+    file_name: "books/pimsleur/pimsleur2_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ pimsleur2_5:
     parent_tag_id: 0
     force_off: 0
 pimsleur2_6:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur2_26-30.txt"
+    file_name: "books/pimsleur/pimsleur2_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ pimsleur2_6:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_1:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_1-5.txt"
+    file_name: "books/pimsleur/pimsleur3_1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ pimsleur3_1:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_2:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_6-10.txt"
+    file_name: "books/pimsleur/pimsleur3_6-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -209,7 +209,7 @@ pimsleur3_2:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_3:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_11-15.txt"
+    file_name: "books/pimsleur/pimsleur3_11-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -224,7 +224,7 @@ pimsleur3_3:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_4:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_16-20.txt"
+    file_name: "books/pimsleur/pimsleur3_16-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ pimsleur3_4:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_5:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_21-25.txt"
+    file_name: "books/pimsleur/pimsleur3_21-25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -254,7 +254,7 @@ pimsleur3_5:
     parent_tag_id: 0
     force_off: 0
 pimsleur3_6:
-    file_name: "/../../../../data/cedict/tags/books/pimsleur/pimsleur3_26-30.txt"
+    file_name: "books/pimsleur/pimsleur3_26-30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

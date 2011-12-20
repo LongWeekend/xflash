@@ -1,5 +1,5 @@
 ic_intro_numbers:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Numbers.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Intro Numbers.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ ic_intro_numbers:
     parent_tag_id: 0
     force_off: 0
 ic_intro_radicals:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Radicals.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Intro Radicals.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ ic_intro_radicals:
     parent_tag_id: 0
     force_off: 0
 ic_intro_date_and_time:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Dates and Time.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Intro Dates and Time.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ ic_intro_date_and_time:
     parent_tag_id: 0
     force_off: 0
 ic_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 1_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ ic_1:
     parent_tag_id: 0
     force_off: 0
 ic_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 2_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 2_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ ic_2:
     parent_tag_id: 0
     force_off: 0
 ic_3:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 3_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 3_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ ic_3:
     parent_tag_id: 0
     force_off: 0
 ic_4:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 4_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 4_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ ic_4:
     parent_tag_id: 0
     force_off: 0
 ic_5:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 5_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 5_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ ic_5:
     parent_tag_id: 0
     force_off: 0
 ic_6:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 6_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 6_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ ic_6:
     parent_tag_id: 0
     force_off: 0
 ic_7:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 7_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 7_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ ic_7:
     parent_tag_id: 0
     force_off: 0
 ic_8:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 8_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 8_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ ic_8:
     parent_tag_id: 0
     force_off: 0
 ic_9:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 9_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 9_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ ic_9:
     parent_tag_id: 0
     force_off: 0
 ic_10:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 10_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 10_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ ic_10:
     parent_tag_id: 0
     force_off: 0
 ic_11:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 11_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 11_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -209,7 +209,7 @@ ic_11:
     parent_tag_id: 0
     force_off: 0
 ic_12:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 12_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 12_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -224,7 +224,7 @@ ic_12:
     parent_tag_id: 0
     force_off: 0
 ic_13:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 13_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 13_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ ic_13:
     parent_tag_id: 0
     force_off: 0
 ic_14:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 14_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 14_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -254,7 +254,7 @@ ic_14:
     parent_tag_id: 0
     force_off: 0
 ic_15:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 15_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 15_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -269,7 +269,7 @@ ic_15:
     parent_tag_id: 0
     force_off: 0
 ic_16:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 16_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 16_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -284,7 +284,7 @@ ic_16:
     parent_tag_id: 0
     force_off: 0
 ic_17:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 17_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 17_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -299,7 +299,7 @@ ic_17:
     parent_tag_id: 0
     force_off: 0
 ic_18:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 18_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 18_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -314,7 +314,7 @@ ic_18:
     parent_tag_id: 0
     force_off: 0
 ic_19:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/combined/IC Lesson 19_combined.txt"
+    file_name: "books/integrated_chinese_2ndEd/combined/IC Lesson 19_combined.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

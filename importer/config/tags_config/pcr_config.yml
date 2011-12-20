@@ -1,5 +1,5 @@
 pcr_1_5:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson1-5.txt"
+    file_name: "books/pcr1/PCR-Lesson1-5.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ pcr_1_5:
     parent_tag_id: 0
     force_off: 0
 pcr_6:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson6.txt"
+    file_name: "books/pcr1/PCR-Lesson6.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ pcr_6:
     parent_tag_id: 0
     force_off: 0
 pcr_7:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson7.txt"
+    file_name: "books/pcr1/PCR-Lesson7.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ pcr_7:
     parent_tag_id: 0
     force_off: 0
 pcr_8:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson8.txt"
+    file_name: "books/pcr1/PCR-Lesson8.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ pcr_8:
     parent_tag_id: 0
     force_off: 0
 pcr_9:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson9.txt"
+    file_name: "books/pcr1/PCR-Lesson9.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ pcr_9:
     parent_tag_id: 0
     force_off: 0
 pcr_10:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson10.txt"
+    file_name: "books/pcr1/PCR-Lesson10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ pcr_10:
     parent_tag_id: 0
     force_off: 0
 pcr_11:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson11.txt"
+    file_name: "books/pcr1/PCR-Lesson11.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ pcr_11:
     parent_tag_id: 0
     force_off: 0
 pcr_12:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson12.txt"
+    file_name: "books/pcr1/PCR-Lesson12.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ pcr_12:
     parent_tag_id: 0
     force_off: 0
 pcr_13:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson13.txt"
+    file_name: "books/pcr1/PCR-Lesson13.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ pcr_13:
     parent_tag_id: 0
     force_off: 0
 pcr_14:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson14.txt"
+    file_name: "books/pcr1/PCR-Lesson14.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ pcr_14:
     parent_tag_id: 0
     force_off: 0
 pcr_15:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson15.txt"
+    file_name: "books/pcr1/PCR-Lesson15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ pcr_15:
     parent_tag_id: 0
     force_off: 0
 pcr_16:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson16.txt"
+    file_name: "books/pcr1/PCR-Lesson16.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ pcr_16:
     parent_tag_id: 0
     force_off: 0
 pcr_17:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson17.txt"
+    file_name: "books/pcr1/PCR-Lesson17.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ pcr_17:
     parent_tag_id: 0
     force_off: 0
 pcr_18:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson18.txt"
+    file_name: "books/pcr1/PCR-Lesson18.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -209,7 +209,7 @@ pcr_18:
     parent_tag_id: 0
     force_off: 0
 pcr_19:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson19.txt"
+    file_name: "books/pcr1/PCR-Lesson19.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -224,7 +224,7 @@ pcr_19:
     parent_tag_id: 0
     force_off: 0
 pcr_20:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson20.txt"
+    file_name: "books/pcr1/PCR-Lesson20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ pcr_20:
     parent_tag_id: 0
     force_off: 0
 pcr_21:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson21.txt"
+    file_name: "books/pcr1/PCR-Lesson21.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -254,7 +254,7 @@ pcr_21:
     parent_tag_id: 0
     force_off: 0
 pcr_22:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson22.txt"
+    file_name: "books/pcr1/PCR-Lesson22.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -269,7 +269,7 @@ pcr_22:
     parent_tag_id: 0
     force_off: 0
 pcr_23:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson23.txt"
+    file_name: "books/pcr1/PCR-Lesson23.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -284,7 +284,7 @@ pcr_23:
     parent_tag_id: 0
     force_off: 0
 pcr_24:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson24.txt"
+    file_name: "books/pcr1/PCR-Lesson24.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -299,7 +299,7 @@ pcr_24:
     parent_tag_id: 0
     force_off: 0
 pcr_25:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson25.txt"
+    file_name: "books/pcr1/PCR-Lesson25.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -314,7 +314,7 @@ pcr_25:
     parent_tag_id: 0
     force_off: 0
 pcr_26:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson26.txt"
+    file_name: "books/pcr1/PCR-Lesson26.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -329,7 +329,7 @@ pcr_26:
     parent_tag_id: 0
     force_off: 0
 pcr_27:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson27.txt"
+    file_name: "books/pcr1/PCR-Lesson27.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -344,7 +344,7 @@ pcr_27:
     parent_tag_id: 0
     force_off: 0
 pcr_28:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson28.txt"
+    file_name: "books/pcr1/PCR-Lesson28.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -359,7 +359,7 @@ pcr_28:
     parent_tag_id: 0
     force_off: 0
 pcr_29:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson29.txt"
+    file_name: "books/pcr1/PCR-Lesson29.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -374,7 +374,7 @@ pcr_29:
     parent_tag_id: 0
     force_off: 0
 pcr_30:
-    file_name: "/../../../../data/cedict/tags/books/pcr1/PCR-Lesson30.txt"
+    file_name: "books/pcr1/PCR-Lesson30.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

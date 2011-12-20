@@ -1,5 +1,5 @@
 frequency_1:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_1-100.txt"
+    file_name: "frequency/frequency_list_1-100.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -15,7 +15,7 @@ frequency_1:
     force_off: 0
     contains_priority_words: 1
 frequency_2:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_101-200.txt"
+    file_name: "frequency/frequency_list_101-200.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -31,7 +31,7 @@ frequency_2:
     force_off: 0
     contains_priority_words: 1
 frequency_3:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_201-300.txt"
+    file_name: "frequency/frequency_list_201-300.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -47,7 +47,7 @@ frequency_3:
     force_off: 0
     contains_priority_words: 1
 frequency_4:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_301-400.txt"
+    file_name: "frequency/frequency_list_301-400.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -63,7 +63,7 @@ frequency_4:
     force_off: 0
     contains_priority_words: 1
 frequency_5:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_401-500.txt"
+    file_name: "frequency/frequency_list_401-500.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -79,7 +79,7 @@ frequency_5:
     force_off: 0
     contains_priority_words: 1
 frequency_6:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_501-600.txt"
+    file_name: "frequency/frequency_list_501-600.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -95,7 +95,7 @@ frequency_6:
     force_off: 0
     contains_priority_words: 1
 frequency_7:
-    file_name: "/../../../../data/cedict/tags/frequency/frequency_list_601-700.txt"
+    file_name: "frequency/frequency_list_601-700.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

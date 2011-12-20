@@ -1,5 +1,5 @@
 npcr_1:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_01.txt"
+    file_name: "books/npcr_vol1/lesson_01.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ npcr_1:
     parent_tag_id: 0
     force_off: 0
 npcr_2:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_02.txt"
+    file_name: "books/npcr_vol1/lesson_02.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ npcr_2:
     parent_tag_id: 0
     force_off: 0
 npcr_3:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_03.txt"
+    file_name: "books/npcr_vol1/lesson_03.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ npcr_3:
     parent_tag_id: 0
     force_off: 0
 npcr_4:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_04.txt"
+    file_name: "books/npcr_vol1/lesson_04.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ npcr_4:
     parent_tag_id: 0
     force_off: 0
 npcr_5:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_05.txt"
+    file_name: "books/npcr_vol1/lesson_05.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ npcr_5:
     parent_tag_id: 0
     force_off: 0
 npcr_6:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_06.txt"
+    file_name: "books/npcr_vol1/lesson_06.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ npcr_6:
     parent_tag_id: 0
     force_off: 0
 npcr_7:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_07.txt"
+    file_name: "books/npcr_vol1/lesson_07.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ npcr_7:
     parent_tag_id: 0
     force_off: 0
 npcr_8:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_08.txt"
+    file_name: "books/npcr_vol1/lesson_08.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ npcr_8:
     parent_tag_id: 0
     force_off: 0
 npcr_9:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_09.txt"
+    file_name: "books/npcr_vol1/lesson_09.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ npcr_9:
     parent_tag_id: 0
     force_off: 0
 npcr_10:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_10.txt"
+    file_name: "books/npcr_vol1/lesson_10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ npcr_10:
     parent_tag_id: 0
     force_off: 0
 npcr_11:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_11.txt"
+    file_name: "books/npcr_vol1/lesson_11.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ npcr_11:
     parent_tag_id: 0
     force_off: 0
 npcr_12:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_12.txt"
+    file_name: "books/npcr_vol1/lesson_12.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ npcr_12:
     parent_tag_id: 0
     force_off: 0
 npcr_13:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_13.txt"
+    file_name: "books/npcr_vol1/lesson_13.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ npcr_13:
     parent_tag_id: 0
     force_off: 0
 npcr_14:
-    file_name: "/../../../../data/cedict/tags/books/npcr_vol1/lesson_14.txt"
+    file_name: "books/npcr_vol1/lesson_14.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

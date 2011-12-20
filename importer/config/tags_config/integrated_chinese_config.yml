@@ -1,5 +1,5 @@
 ic_intro_numbers:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Numbers.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Intro Numbers.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -14,7 +14,7 @@ ic_intro_numbers:
     parent_tag_id: 0
     force_off: 0
 ic_intro_radicals:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Intro Radicals.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Intro Radicals.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -29,7 +29,7 @@ ic_intro_radicals:
     parent_tag_id: 0
     force_off: 0
 ic_1_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -44,7 +44,7 @@ ic_1_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_1_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -59,7 +59,7 @@ ic_1_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_1_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -74,7 +74,7 @@ ic_1_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_2_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -89,7 +89,7 @@ ic_2_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_2_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -104,7 +104,7 @@ ic_2_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_3_dates_and_time:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -119,7 +119,7 @@ ic_3_dates_and_time:
     parent_tag_id: 0
     force_off: 0
 ic_3_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -134,7 +134,7 @@ ic_3_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_3_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -149,7 +149,7 @@ ic_3_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_3_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -164,7 +164,7 @@ ic_3_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_4_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -179,7 +179,7 @@ ic_4_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_4_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -194,7 +194,7 @@ ic_4_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_4_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -209,7 +209,7 @@ ic_4_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_5_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -224,7 +224,7 @@ ic_5_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_5_narrative:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ ic_5_narrative:
     parent_tag_id: 0
     force_off: 0
 ic_5_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -254,7 +254,7 @@ ic_5_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_6_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -269,7 +269,7 @@ ic_6_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_6_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -284,7 +284,7 @@ ic_6_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_6_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -299,7 +299,7 @@ ic_6_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_7_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -314,7 +314,7 @@ ic_7_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_7_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -329,7 +329,7 @@ ic_7_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_7_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -344,7 +344,7 @@ ic_7_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_8_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -359,7 +359,7 @@ ic_8_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_8_letter:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -374,7 +374,7 @@ ic_8_letter:
     parent_tag_id: 0
     force_off: 0
 ic_9_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -389,7 +389,7 @@ ic_9_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_9_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -404,7 +404,7 @@ ic_9_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_9_measure_words:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -419,7 +419,7 @@ ic_9_measure_words:
     parent_tag_id: 0
     force_off: 0
 ic_9_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -434,7 +434,7 @@ ic_9_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_10_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -449,7 +449,7 @@ ic_10_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_10_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -464,7 +464,7 @@ ic_10_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_10_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -479,7 +479,7 @@ ic_10_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_11_dialogue:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -494,7 +494,7 @@ ic_11_dialogue:
     parent_tag_id: 0
     force_off: 0
 ic_11_letter:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -509,7 +509,7 @@ ic_11_letter:
     parent_tag_id: 0
     force_off: 0
 ic_11_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -524,7 +524,7 @@ ic_11_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_12_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -539,7 +539,7 @@ ic_12_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_12_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -554,7 +554,7 @@ ic_12_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_12_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -569,7 +569,7 @@ ic_12_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_13_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -584,7 +584,7 @@ ic_13_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_13_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -599,7 +599,7 @@ ic_13_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_13_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -614,7 +614,7 @@ ic_13_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_14_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -629,7 +629,7 @@ ic_14_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_14_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -644,7 +644,7 @@ ic_14_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_14_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -659,7 +659,7 @@ ic_14_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_15_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -674,7 +674,7 @@ ic_15_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_15_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -689,7 +689,7 @@ ic_15_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_15_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -704,7 +704,7 @@ ic_15_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_16_dialogue_1:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -719,7 +719,7 @@ ic_16_dialogue_1:
     parent_tag_id: 0
     force_off: 0
 ic_16_dialogue_2:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -734,7 +734,7 @@ ic_16_dialogue_2:
     parent_tag_id: 0
     force_off: 0
 ic_16_supplementary:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -749,7 +749,7 @@ ic_16_supplementary:
     parent_tag_id: 0
     force_off: 0
 ic_17_dialogue:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -764,7 +764,7 @@ ic_17_dialogue:
     parent_tag_id: 0
     force_off: 0
 ic_18:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -779,7 +779,7 @@ ic_18:
     parent_tag_id: 0
     force_off: 0
 ic_19:
-    file_name: "/../../../../data/cedict/tags/books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
+    file_name: "books/integrated_chinese_2ndEd/raw/IC Lesson 1 Dialogue 1.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

@@ -1,5 +1,5 @@
 frequency_news_01:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-01.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -15,7 +15,7 @@ frequency_news_01:
     force_off: 0
     contains_priority_words: 1
 frequency_news_02:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-02.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-02.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -31,7 +31,7 @@ frequency_news_02:
     force_off: 0
     contains_priority_words: 1
 frequency_news_03:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-03.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-03.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -47,7 +47,7 @@ frequency_news_03:
     force_off: 0
     contains_priority_words: 1
 frequency_news_04:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-04.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-04.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -63,7 +63,7 @@ frequency_news_04:
     force_off: 0
     contains_priority_words: 1
 frequency_news_05:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-05.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-05.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -79,7 +79,7 @@ frequency_news_05:
     force_off: 0
     contains_priority_words: 1
 frequency_news_06:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-06.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-06.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -95,7 +95,7 @@ frequency_news_06:
     force_off: 0
     contains_priority_words: 1
 frequency_news_07:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-07.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-07.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -111,7 +111,7 @@ frequency_news_07:
     force_off: 0
     contains_priority_words: 1
 frequency_news_08:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-08.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-08.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -127,7 +127,7 @@ frequency_news_08:
     force_off: 0
     contains_priority_words: 1
 frequency_news_09:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-09.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-09.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -143,7 +143,7 @@ frequency_news_09:
     force_off: 0
     contains_priority_words: 1
 frequency_news_10:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-10.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-10.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -159,7 +159,7 @@ frequency_news_10:
     force_off: 0
     contains_priority_words: 1
 frequency_news_11:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-11.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-11.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -175,7 +175,7 @@ frequency_news_11:
     force_off: 0
     contains_priority_words: 1
 frequency_news_12:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-12.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-12.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -191,7 +191,7 @@ frequency_news_12:
     force_off: 0
     contains_priority_words: 1
 frequency_news_13:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-13.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-13.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -207,7 +207,7 @@ frequency_news_13:
     force_off: 0
     contains_priority_words: 1
 frequency_news_14:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-14.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-14.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -223,7 +223,7 @@ frequency_news_14:
     force_off: 0
     contains_priority_words: 1
 frequency_news_15:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-15.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-15.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -239,7 +239,7 @@ frequency_news_15:
     force_off: 0
     contains_priority_words: 1
 frequency_news_16:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-16.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-16.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -255,7 +255,7 @@ frequency_news_16:
     force_off: 0
     contains_priority_words: 1
 frequency_news_17:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-17.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-17.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -271,7 +271,7 @@ frequency_news_17:
     force_off: 0
     contains_priority_words: 1
 frequency_news_18:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-18.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-18.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -287,7 +287,7 @@ frequency_news_18:
     force_off: 0
     contains_priority_words: 1
 frequency_news_19:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-19.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-19.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -303,7 +303,7 @@ frequency_news_19:
     force_off: 0
     contains_priority_words: 1
 frequency_news_20:
-    file_name: "/../../../../data/cedict/tags/frequency/jun-da-frequency-bigrams/bigram-news-20.txt"
+    file_name: "frequency/jun-da-frequency-bigrams/bigram-news-20.txt"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

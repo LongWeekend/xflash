@@ -1,6 +1,6 @@
 tags_800_1_beginner:
     # File name of the source
-    file_name: "/../../../../data/cedict/tags/800+800020100915-beginner.csv"
+    file_name: "800+800020100915-beginner.csv"
     
     # Boolean whether this tag importer will output
     # some info to a file. (true==>1, false==>0)
@@ -43,7 +43,7 @@ tags_800_1_beginner:
 
     
 tags_800_2_intermediate:
-    file_name: "/../../../../data/cedict/tags/800+800020100915-mid.csv"
+    file_name: "800+800020100915-mid.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -60,7 +60,7 @@ tags_800_2_intermediate:
     contains_priority_words: 1
 
 tags_800_3_advance:
-    file_name: "/../../../../data/cedict/tags/800+800020100915-adv.csv"
+    file_name: "800+800020100915-adv.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"
@@ -77,7 +77,7 @@ tags_800_3_advance:
     contains_priority_words: 1
     
 tag_800_test_file_small:
-    file_name: "/../../../../data/cedict/tags/test_800+800020100915.csv"
+    file_name: "test_800+800020100915.csv"
     file_dump_trace: 1
     file_importer: "TagImporter"
     file_parser: "WordListParser"

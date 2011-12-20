@@ -15,7 +15,7 @@ class CEdictDiffParser
   ### Class Constructor
   def initialize (new_dict_file, yaml_file)
     # File related toegther with the hash object of the last configuration
-    @config_filename = File.dirname(__FILE__) + "/../../../../config/cedict_config/#{yaml_file}"
+    @config_filename = Rails.root.join("config/cedict_config/#{yaml_file}").to_s
     @last_config = nil
     @counter = 0
     @diff_filename = nil
@@ -169,7 +169,7 @@ class CEdictDiffParser
       if (File.file? previous_filename) && (File.file? current_filename)
         # We want to add the timestamp as part of the diff filename
         timestamp = DateTime.now.strftime "%d%m%y-%H%M"
-        result = File.dirname(__FILE__) + "/../../../../data/cedict/migration_history/diff#{timestamp}.txt"
+        result = Rails.root.join("data/cedict/migration_history/diff#{timestamp}.txt").to_s
         `diff '#{previous_filename}' '#{current_filename}' > '#{result}'`
       end
     end
@@ -180,7 +180,7 @@ class CEdictDiffParser
   
   ### Handy method for returning the full path of an cedict file
   def full_path_from_edict_file(filename="")
-    return File.dirname(__FILE__) + "/../../../../data/cedict/#{filename}"
+    return Rails.root.join("data/cedict/#{filename}").to_s
   end
   
   ### This method will sync the number of added, removed and changed with the

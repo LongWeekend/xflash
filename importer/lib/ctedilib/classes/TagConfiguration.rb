@@ -4,7 +4,7 @@ class TagConfiguration
   
   ### Class Constructor
   def initialize (yaml_file, metadata_key="")
-    path_to_yaml_file = File.dirname(__FILE__) + "/../../../../config/tags_config/#{yaml_file}"
+    path_to_yaml_file = Rails.root.join("config/tags_config/#{yaml_file}").to_s
     @configuration = YAML.load_file(path_to_yaml_file)
     @configuration = @configuration[metadata_key] unless ((metadata_key == nil)||(metadata_key.strip().length()<=0))
     

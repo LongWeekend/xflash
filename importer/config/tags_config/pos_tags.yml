@@ -1,7 +1,7 @@
 pos_nouns:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_noun.csv"
+    file_name: "pos/pos_noun.csv"
     file_parser: "WordListParser"
     tag_name: "Common Nouns"
     description: "Nouns from the TOCFL Lists"
@@ -17,7 +17,7 @@ pos_nouns:
 pos_verbs_active:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_verb_active.csv"
+    file_name: "pos/pos_verb_active.csv"
     file_parser: "WordListParser"
     tag_name: "Common Verbs - Active"
     description: "Active Verbs from the TOCFL Lists"
@@ -33,7 +33,7 @@ pos_verbs_active:
 pos_verbs_stative:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_verb_stative.csv"
+    file_name: "pos/pos_verb_stative.csv"
     file_parser: "WordListParser"
     tag_name: "Common Verbs - Stative"
     description: "Stative Verbs from the TOCFL Lists"
@@ -49,7 +49,7 @@ pos_verbs_stative:
 pos_adv:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_adv.csv"
+    file_name: "pos/pos_adv.csv"
     file_parser: "WordListParser"
     tag_name: "Common Adverbs"
     description: "Adverbs from the TOCFL Lists"
@@ -65,7 +65,7 @@ pos_adv:
 pos_det:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_det.csv"
+    file_name: "pos/pos_det.csv"
     file_parser: "WordListParser"
     tag_name: "Determiners"
     description: "Determiners from the TOCFL Lists"
@@ -81,7 +81,7 @@ pos_det:
 pos_conj:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_conj.csv"
+    file_name: "pos/pos_conj.csv"
     file_parser: "WordListParser"
     tag_name: "Conjunctions"
     description: "Conjunctions from the TOCFL Lists"
@@ -97,7 +97,7 @@ pos_conj:
 pos_measure:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_measure.csv"
+    file_name: "pos/pos_measure.csv"
     file_parser: "WordListParser"
     tag_name: "Measure Words / Counters"
     description: "Measure Words/Counters from the TOCFL Lists"
@@ -113,7 +113,7 @@ pos_measure:
 pos_particle:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_particle.csv"
+    file_name: "pos/pos_particle.csv"
     file_parser: "WordListParser"
     tag_name: "Particles"
     description: "Particles from the TOCFL Lists"
@@ -129,7 +129,7 @@ pos_particle:
 pos_pre:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_pre.csv"
+    file_name: "pos/pos_pre.csv"
     file_parser: "WordListParser"
     tag_name: "Prepositions"
     description: "Prepositions from the TOCFL Lists"
@@ -145,7 +145,7 @@ pos_pre:
 pos_post:
     file_dump_trace: 1
     file_importer: "TagImporter"
-    file_name: "/../../../../data/cedict/tags/pos/pos_post.csv"
+    file_name: "pos/pos_post.csv"
     file_parser: "WordListParser"
     tag_name: "Postpositions"
     description: "Postpositions from the TOCFL Lists"
