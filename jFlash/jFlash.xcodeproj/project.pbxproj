@@ -1872,8 +1872,6 @@
 		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
-				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
 				49AD17B2148476080017EFB4 /* ZipArchive */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
@@ -1884,6 +1882,8 @@
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
 				917A5C7B11AB84EE00016BD2 /* Constants.h */,
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
+				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
+				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
 				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
 				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
