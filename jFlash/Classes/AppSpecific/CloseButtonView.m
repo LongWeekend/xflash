@@ -101,7 +101,6 @@
   CGContextSetLineCap(ctx, kCGLineCapRound);
   CGContextSetLineWidth(ctx, CLOSE_BUTTON_X_WIDTH);
   CGContextStrokePath(ctx);
-  CGContextClosePath(ctx);
   
 }
 
