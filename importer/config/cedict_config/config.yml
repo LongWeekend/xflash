@@ -1,0 +1,13 @@
+--- 
+- 0: 
+    added: 177
+    removed: 0
+    changed: 0
+    date: 2011-12-20 19:43:49 +11:00
+    filename: test_data/test_diff_cedict_old.u8
+- 1: 
+    added: 36
+    changed: 0
+    removed: 14
+    date: 2011-12-20T19:43:50+11:00
+    filename: test_data/test_diff_cedict_new.u8
