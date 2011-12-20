@@ -57,7 +57,7 @@
 - (void) packageDownloaderFinished:(LWEPackageDownloader *)packageDownloader
 {
   [self stopTabAnimation];
-  if (self.modalTaskViewController.parentViewController)
+  if (self.baseViewController.modalViewController && (self.baseViewController.modalViewController == self.modalTaskViewController))
   {
     [self.modalTaskViewController dismissModalViewControllerAnimated:YES];
   }
