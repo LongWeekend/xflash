@@ -10,9 +10,6 @@
 [submodule "jFlash/Classes/External/asi-http-request"]
 	path = jFlash/Classes/External/asi-http-request
 	url = git://github.com/pokeb/asi-http-request.git
-[submodule "jFlash/Classes/External/OHAttributedLabel"]
-	path = jFlash/Classes/External/OHAttributedLabel
-	url = git://github.com/AliSoftware/OHAttributedLabel.git
 [submodule "jFlash/Classes/External/janrain"]
 	path = jFlash/Classes/External/janrain
 	url = git@github.com:LongWeekend/engage.iphone.git
