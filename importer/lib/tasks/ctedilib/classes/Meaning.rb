@@ -211,6 +211,11 @@ class Meaning
   # HELPERS
   
   def ==(obj)
+    # If the obj is not Meaning type
+    # just return with false.
+    if (!obj.kind_of?(Meaning))
+      return false
+    end
     return (obj.meaning == @meaning && obj.tags.eql?(@tags))
   end
   

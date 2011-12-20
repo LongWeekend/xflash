@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127050747) do
+ActiveRecord::Schema.define(:version => 20111212090226) do
 
   create_table "card_sentence_link", :id => false, :force => true do |t|
     t.integer "card_id"
@@ -27,31 +27,15 @@ ActiveRecord::Schema.define(:version => 20111127050747) do
     t.integer "card_id"
   end
 
-  add_index "card_tag_link", ["tag_id"], :name => "tag_id"
-
-  create_table "cards", :id => false, :force => true do |t|
-    t.integer "card_id",       :default => 0, :null => false
-    t.string  "headword_trad",                :null => false
-    t.string  "headword_simp",                :null => false
-    t.string  "reading",                      :null => false
-  end
-
-  create_table "cards_html", :id => false, :force => true do |t|
-    t.integer "card_id",                 :default => 0, :null => false
-    t.string  "meaning", :limit => 5000,                :null => false
-  end
-
-  create_table "cards_search_content", :id => false, :force => true do |t|
-    t.integer "card_id",                 :default => 0, :null => false
-    t.string  "content", :limit => 5000
-  end
+  add_index "card_tag_link", ["tag_id", "card_id"], :name => "card_tag_link_uniq", :unique => true
+  add_index "card_tag_link", ["tag_id"], :name => "card_tag"
 
   create_table "cards_staging", :primary_key => "card_id", :force => true do |t|
     t.string  "headword_trad",                                              :null => false
     t.string  "headword_simp",                                              :null => false
     t.string  "headword_en",                                                :null => false
     t.string  "reading",                                                    :null => false
-    t.string  "reading_diacritic",                       :default => "",    :null => false
+    t.string  "reading_diacritic",                                          :null => false
     t.string  "meaning",           :limit => 3000,                          :null => false
     t.string  "meaning_fts",       :limit => 3000,                          :null => false
     t.string  "meaning_html",      :limit => 5000,                          :null => false
@@ -62,15 +46,13 @@ ActiveRecord::Schema.define(:version => 20111127050747) do
     t.string  "variant"
     t.integer "variant_card_id"
     t.binary  "cedict_hash",       :limit => 2147483647,                    :null => false
-    t.boolean "is_proper_noun",                          :default => false, :null => false
-    t.boolean "is_reference_only",                       :default => false, :null => false
     t.string  "referenced_cards"
-    t.boolean "priority_word",                           :default => false, :null => false
+    t.boolean "is_reference_only",                       :default => false
+    t.boolean "is_proper_noun",                          :default => false
+    t.integer "priority_word",     :limit => 1,          :default => 0,     :null => false
   end
 
-  add_index "cards_staging", ["headword_simp"], :name => "headword_simp"
   add_index "cards_staging", ["headword_trad"], :name => "headword_trad"
-  add_index "cards_staging", ["reading"], :name => "reading"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -90,19 +72,16 @@ ActiveRecord::Schema.define(:version => 20111127050747) do
     t.integer "tag_id",   :null => false
   end
 
-  create_table "groups", :id => false, :force => true do |t|
-    t.integer "group_id",                                 :null => false
+  create_table "groups_staging", :primary_key => "group_id", :force => true do |t|
     t.string  "group_name",  :limit => 50,                :null => false
     t.integer "owner_id",                                 :null => false
     t.integer "tag_count",                 :default => 0
     t.integer "recommended",               :default => 0
   end
 
-  create_table "groups_staging", :primary_key => "group_id", :force => true do |t|
-    t.string  "group_name",  :limit => 50,                :null => false
-    t.integer "owner_id",                                 :null => false
-    t.integer "tag_count",                 :default => 0
-    t.integer "recommended",               :default => 0
+  create_table "idx_cards_by_headword_staging", :id => false, :force => true do |t|
+    t.integer "card_id"
+    t.string  "keyword", :limit => 100
   end
 
   create_table "idx_sentences_by_keyword_staging", :id => false, :force => true do |t|
@@ -160,14 +139,6 @@ ActiveRecord::Schema.define(:version => 20111127050747) do
 
   add_index "tag_matching_resolution_choices", ["tag_matching_exception_id"], :name => "index_tag_matching_resolution_choices_on_base_entry_id"
 
-  create_table "tags", :id => false, :force => true do |t|
-    t.integer "tag_id",                     :default => 0, :null => false
-    t.string  "tag_name",    :limit => 50
-    t.string  "description", :limit => 200
-    t.integer "editable",                   :default => 0, :null => false
-    t.integer "count",                      :default => 0, :null => false
-  end
-
   create_table "tags_staging", :primary_key => "tag_id", :force => true do |t|
     t.string  "tag_name",      :limit => 50
     t.string  "tag_type",      :limit => 4
@@ -175,8 +146,8 @@ ActiveRecord::Schema.define(:version => 20111127050747) do
     t.string  "description",   :limit => 200
     t.string  "source_name",   :limit => 50
     t.string  "source",        :limit => 50
-    t.integer "visible",                      :default => 0, :null => false
     t.integer "editable",                     :default => 0, :null => false
+    t.integer "visible",                      :default => 0, :null => false
     t.integer "count",                        :default => 0, :null => false
     t.integer "parent_tag_id"
     t.integer "force_off",     :limit => 1,   :default => 0
