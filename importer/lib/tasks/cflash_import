@@ -1,1 +1,0 @@
-rake ctedi:test_one class=CEdictImporterTest test=test_import --trace
