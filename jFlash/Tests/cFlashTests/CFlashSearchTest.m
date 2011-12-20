@@ -70,7 +70,7 @@
 - (void) testOnlyMatchACardOnce
 {
   NSArray *results = [self _searchKeywordExpectingResults:@"nang4"];
-  STAssertEquals(1, [results count], @"There should only be 1 card with reading 'nang4'");
+  STAssertTrue(([results count] == 1), @"There should only be 1 card reading with 'nang4'");
 }
 
 #pragma mark - Setup & Teardown

@@ -121,11 +121,11 @@
   NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:column queryLimit:queryLimit];
   cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
   
-  // Now, did we get enough cards (if it was a no-column search, don't re-run)
+  // Now, did we get enough cards, query "content" column as well (if it was a no-column search, don't re-run)
   if (column != nil && [cardList count] < queryLimit)
   {
     NSInteger newLimit = queryLimit - [cardList count];
-    NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:nil queryLimit:newLimit];
+    NSString *sql = [CardPeer _FTSSQLForKeyword:keyword column:@"content" queryLimit:newLimit];
     cardList = [CardPeer _addCardsToList:cardList fromResultSet:[db executeQuery:sql] hydrate:NO];
   }
   
