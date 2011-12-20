@@ -9,15 +9,15 @@ namespace :ctedi do
   task :test_all => :environment do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
     get_cli_debug
     
     # Require all the tests we want the runner to run
-    Dir[File.dirname(__FILE__) +"/ctedilib/tests/*.rb"].each do |file| 
-      require file 
+    Dir[Rails.root.join("lib/ctedilib/tests/*.rb").to_s].each do |file| 
+      require file
     end
     # Test Suite Runs automagically before exit!
   end
@@ -27,7 +27,7 @@ namespace :ctedi do
   task :test_class => :environment do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
@@ -35,7 +35,7 @@ namespace :ctedi do
     get_cli_debug
     
     # Load the test
-    load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
+    load Rails.root.join(("lib/ctedilib/tests/"+ get_cli_attrib("class",true) + ".rb")).to_s
     # Runs automagically before exit
     
   end
@@ -45,7 +45,7 @@ namespace :ctedi do
   task :test_one => :environment do
     require 'test/unit'
     require 'test/unit/ui/console/testrunner'
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
@@ -53,7 +53,7 @@ namespace :ctedi do
     get_cli_debug
     
     # Load the test & run - by running 1, the test runner doesn't run any others (convention?)
-    load File.dirname(__FILE__) + "/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb"
+    load Rails.root.join("lib/ctedilib/tests/" + get_cli_attrib("class",true) + ".rb").to_s
     test_name = get_cli_attrib("test",true)
     class_name = get_cli_attrib("class",true)
     test_suite = Test::Unit::TestSuite.new("CTEDI Single Test Runner")
@@ -65,7 +65,7 @@ namespace :ctedi do
   ##############################################################################
   desc "cFlash CEDICT Parse & Import"
   task :import => :environment do
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     
     include RakeHelpers
     include DebugHelpers
@@ -74,13 +74,12 @@ namespace :ctedi do
     get_cli_debug
     
     # Get the filename to load (the dictionary filename)
-    filename = get_cli_attrib "file", true
-    full_path_importfile = File.dirname(__FILE__) + "../../data/cedict" + filename
+    full_path_importfile =  Rails.root.join("data/cedict/" + get_cli_attrib("file", true)).to_s
     
     # Parse
     prt "\nCEDICT Parse - Initial Flatfile Parse"
     prt_dotted_line
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../data/cedict/cedict_ts.u8")
+    parser = CEdictParser.new(full_path_importfile)
     entries = parser.run
     
     prt "\nCEDICT Parse - Pass 2 (Merge 'reference-only' Entries: %s reference, %s variant)" % [parser.reference_only_entries.count, parser.variant_only_entries.count]
@@ -116,7 +115,7 @@ namespace :ctedi do
   ##############################################################################
   desc "cFlash Group & Tag Importer"
   task :tag_import => :environment do
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
@@ -145,7 +144,7 @@ namespace :ctedi do
   ##############################################################################
   desc "cFlash SQLite Exporter"
   task :export => :environment do
-    load File.dirname(__FILE__)+'/ctedilib/_includes.rb'
+    load Rails.root.join("lib/ctedilib/_includes.rb").to_s
     include RakeHelpers
     include DebugHelpers
     include DatabaseHelpers
