@@ -3,7 +3,7 @@ require 'test/unit'
 class CEdictImporterTest < Test::Unit::TestCase
 
   def test_short_import
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_cedict.u8")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_cedict.u8").to_s)
     entries = parser.run
   
     importer = CEdictImporter.new
@@ -13,7 +13,7 @@ class CEdictImporterTest < Test::Unit::TestCase
   
   def test_import
     # Run the parser
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/cedict_ts.u8")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/cedict_ts.u8").to_s)
     entries = parser.run
     
     # Pass the parsed entries to the importer

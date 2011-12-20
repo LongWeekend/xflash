@@ -6,25 +6,25 @@ class BookListParserTest < Test::Unit::TestCase
   # This is more or less testing that it is working at the broad level
   def test_parse_beg_chinese
     expected_entries =[]
-    results_data = WordListParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/beg_chinese.txt").run('BookEntry')
+    results_data = WordListParser.new(Rails.root.join("data/cedict/test_data/beg_chinese.txt").to_str).run('BookEntry')
     assert_equal(3,results_data.count)
   end
 
   def test_parse_colloquial_chinese
     expected_entries =[]
-    results_data = WordListParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/coll_chinese.txt").run('BookEntry')
+    results_data = WordListParser.new(Rails.root.join("data/cedict/test_data/coll_chinese.txt").to_str).run('BookEntry')
     assert_equal(3,results_data.count)
   end
 
   def test_parse_integrated_chinese
     expected_entries =[]
-    results_data = WordListParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/integrated_chinese.txt").run('BookEntry')
+    results_data = WordListParser.new(Rails.root.join("data/cedict/test_data/integrated_chinese.txt").to_str).run('BookEntry')
     assert_equal(10,results_data.count)
   end
 
   def test_parse_schaums
     expected_entries =[]
-    results_data = WordListParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/schaums.txt").run('BookEntry')
+    results_data = WordListParser.new(Rails.root.join("data/cedict/test_data/schaums.txt").to_str).run('BookEntry')
     assert_equal(7,results_data.count)
   end
 end

@@ -105,7 +105,7 @@ class CEdictParserTest < Test::Unit::TestCase
     variant_entry = CEdictEntry.new
     variant_entry.parse_line("唸 唸 [nian4] /variant of 念, to read aloud/")
 
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_variant.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant.txt")
     muxed_base_entries = parser.add_variant_entries_into_base_entries([base_entry], [variant_entry])
     muxed_variant_entries = parser.add_base_entries_into_variant_entries([variant_entry], [base_entry])
     assert_equal(8,muxed_base_entries[0].meanings.count)
@@ -129,7 +129,7 @@ class CEdictParserTest < Test::Unit::TestCase
     variant_entry.parse_line("㐅 㐅 [wu3] /archaic variant of 五[wu3]/")
     
     entries = [base_entry]
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_variant.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant.txt").to_s)
     parser.add_variant_entries_into_base_entries(entries, [variant_entry])
 
     base_meanings = [Meaning.new("five"), Meaning.new("5"), Meaning.new("Has archaic variant: 㐅|㐅 [wu3]",["reference"])]
@@ -137,7 +137,7 @@ class CEdictParserTest < Test::Unit::TestCase
   end
   
   def test_classifier_expansion
-    results_data = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_cedict.u8").run
+    results_data = CEdictParser.new(Rails.root.join("data/cedict/test_cedict.u8").to_s).run
     entry = results_data[1]
     
     expected_meanings = [Meaning.new("video camera"),Meaning.new("Counter: 部[bu4]",["classifier"])]
@@ -145,7 +145,7 @@ class CEdictParserTest < Test::Unit::TestCase
   end
   
   def test_multiple_classifier_expansion
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_multiple_classifiers.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_multiple_classifiers.txt").to_s)
     entries = parser.run
     
     expected_meanings = [Meaning.new("store"),Meaning.new("shop"),Meaning.new("Counter: 家[jia1]",["classifier"]),Meaning.new("Counter: 個|个[ge4]",["classifier"])]
