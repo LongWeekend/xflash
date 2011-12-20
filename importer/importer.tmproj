@@ -26,9 +26,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>78</integer>
+				<integer>4</integer>
 				<key>line</key>
-				<integer>96</integer>
+				<integer>74</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -47,16 +47,16 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>112</integer>
+			<integer>116</integer>
 		</dict>
 		<key>lib/tasks/ctedilib/classes/CEdictParser.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>27</integer>
+				<integer>63</integer>
 				<key>line</key>
-				<integer>119</integer>
+				<integer>180</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -68,58 +68,56 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>25</integer>
+				<integer>54</integer>
 				<key>line</key>
-				<integer>296</integer>
+				<integer>325</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>282</integer>
-			<key>selectFrom</key>
+			<integer>295</integer>
+		</dict>
+		<key>lib/tasks/ctedilib/classes/InlineEntry.rb</key>
+		<dict>
+			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>11</integer>
 				<key>line</key>
-				<integer>296</integer>
+				<integer>7</integer>
 			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>33</integer>
-				<key>line</key>
-				<integer>296</integer>
-			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>lib/tasks/ctedilib/classes/Meaning.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>153</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>31</integer>
+				<integer>217</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>10</integer>
+			<integer>171</integer>
 		</dict>
 		<key>lib/tasks/ctedilib/tests/ParserTest.rb</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>78</integer>
+				<integer>68</integer>
 				<key>line</key>
-				<integer>67</integer>
+				<integer>98</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>22</integer>
+			<integer>52</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -128,6 +126,7 @@
 		<string>lib/tasks/ctedilib/tests/ParserTest.rb</string>
 		<string>lib/tasks/ctedilib/classes/CEdictParser.rb</string>
 		<string>lib/tasks/ctedilib/classes/Entry.rb</string>
+		<string>lib/tasks/ctedilib/classes/InlineEntry.rb</string>
 		<string>lib/tasks/ctedilib/classes/Meaning.rb</string>
 		<string>lib/tasks/ctedi.rake</string>
 	</array>
