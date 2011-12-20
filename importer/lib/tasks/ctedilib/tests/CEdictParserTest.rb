@@ -3,14 +3,15 @@ require 'test/unit'
 class CEdictParserTest < Test::Unit::TestCase
 
   def test_parse
-    results_data = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_cedict.u8").run
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_cedict.u8").to_s)
+    results_data = parser.run
     # MMA: This is 3 now, not 5, because our parser no longer returns erhua or variant entries with the run method
     assert_equal(3,results_data.count)
   end
   
   # Count should be two less than the number of records because we are removing a variant-only item, plus another variant with definition
   def test_match_variant
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_variant_only.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant_only.txt").to_s)
     entries = parser.run
     assert_equal(13,entries.count)
     assert_equal(1,parser.variant_only_entries.count)
@@ -19,7 +20,7 @@ class CEdictParserTest < Test::Unit::TestCase
 
   # Count should be one less than the number of records because we are removing a reference-only item
   def test_match_reference
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_reference.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_reference.txt").to_s)
     entries = parser.run
     assert_equal(6,entries.count)
     assert_equal(1,parser.reference_only_entries.count)
@@ -29,7 +30,7 @@ class CEdictParserTest < Test::Unit::TestCase
   end
   
   def test_match_reference_only
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_reference_only.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_reference_only.txt").to_s)
     entries = parser.run
     assert_equal(1,entries.count)
     assert_equal(1,parser.reference_only_entries.count)
@@ -49,7 +50,8 @@ class CEdictParserTest < Test::Unit::TestCase
     ref_entry = CEdictEntry.new
     ref_entry.parse_line("味同嚼蠟 味同嚼蜡 [wei4 tong2 jiao2 la4] /see 味同嚼蠟|味同嚼蜡[wei4 tong2 jue2 la4]/")
     
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_reference.txt")
+    # Note we're just passing a file here because the constructor requires it -- doesn't affect this test
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_reference.txt").to_s)
     merged_entries = parser.merge_references_into_base_entries([base_entry],[ref_entry])
     
     meaning_one = Meaning.new("insipid (like chewing wax)")
@@ -61,14 +63,14 @@ class CEdictParserTest < Test::Unit::TestCase
   end
   
   def test_match_erhua_cross_reference_parse
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_erhua.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_erhua.txt").to_s)
     entries = parser.run
     assert_equal(5,entries.count)
     assert_equal(1,parser.erhua_variant_entries.count)
   end
 
   def test_match_variant_cross_reference_parse
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_variant.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant.txt").to_s)
     entries = parser.run
     assert_equal(4,entries.count)
     assert_equal(1,parser.variant_entries.count)
@@ -80,7 +82,7 @@ class CEdictParserTest < Test::Unit::TestCase
     erhua_entry = CEdictEntry.new
     erhua_entry.parse_line("哥們兒 哥们儿 [ge1 men5 r5] /erhua variant of 哥們|哥们, Brothers!/brethren/dude (colloquial)/brother (diminutive form of address between males)/")
 
-    parser = CEdictParser.new(File.dirname(__FILE__) + "/../../../../data/cedict/test_data/cedict_parser_match_erhua.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_erhua.txt").to_s)
     muxed_base_entries = parser.add_variant_entries_into_base_entries([base_entry], [erhua_entry])
     muxed_erhua_entries = parser.add_base_entries_into_variant_entries([erhua_entry], [base_entry])
     assert_equal(5,muxed_base_entries[0].meanings.count)
