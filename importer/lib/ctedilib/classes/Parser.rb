@@ -29,12 +29,6 @@ class Parser
   ### Class Constructor
   #####################################
   def initialize(lines, from=0, to=0)
-    # Call the other initializer if "lines" is a string (=filename)
-    if lines.kind_of? String
-      initialize(lines, from, to, [])
-      return
-    end
-  
     @from_rec_no = from # support from/to
     @to_rec_no = to # support from/to
     @source_file = nil
