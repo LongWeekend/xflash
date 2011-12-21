@@ -42,10 +42,10 @@ module DebugHelpers
   end
 
   # Loop counter to count aloud for you!
-  def noisy_loop_counter(count, max=0, every=1000, item_name="records", atomicity=1)
+  def noisy_loop_counter(count, max=0, every=1000, item_name="records")
     count +=1
     if count % every == 0 || (max > 0 && count == max)
-      prt "Looped #{count/atomicity} #{item_name}" if count%atomicity == 0 ## display count based on atomicity
+      prt "Looped #{count/atomicity} #{item_name}"
     end
     return count
   end

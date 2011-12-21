@@ -3,14 +3,14 @@ require 'test/unit'
 class ParserTest < Test::Unit::TestCase
 
   def test_parse_diff
-    diff_parser = CEdictDiffParser.new("test_data/test_diff_cedict_old.u8", "config.yml")
+    diff_parser = DiffParser.new("test_data/test_diff_cedict_old.u8", "config.yml")
     line_hash = diff_parser.run
     diff_parser.update_data_with (line_hash[:added], nil, nil)
     diff_parser.dump
     
     prt "\nCEDICT Diff Parse (1) - Initial Difference file parsing"
     prt_dotted_line
-    diff_parser = CEdictDiffParser.new("test_data/test_diff_cedict_new.u8", "config.yml")
+    diff_parser = DiffParser.new("test_data/test_diff_cedict_new.u8", "config.yml")
     line_hash = diff_parser.run
     
     # Added and removed lines

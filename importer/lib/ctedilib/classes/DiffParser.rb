@@ -1,4 +1,4 @@
-class CEdictDiffParser
+class DiffParser
   
   @config_filename
   @last_config
@@ -14,6 +14,7 @@ class CEdictDiffParser
   ### Class Constructor
   def initialize (new_dict_file, yaml_file)
     # File related toegther with the hash object of the last configuration
+    # TODO: This is another place where we need to change the config depending on the importer (JFlash CFlash etc)
     @config_filename = Rails.root.join("config/cedict_config/#{yaml_file}").to_s
     @last_config = nil
     @counter = 0
@@ -48,7 +49,7 @@ class CEdictDiffParser
   def run
     # Try to get the diff_filename and open it for the comparison
     # And if this is the first time the import is run, there wont be any diff_filename whatsoever, so we loop from the file directly =)
-    get_diff_from_previous_file unless (@diff_filename != nil) && !(@diff_filename == "")
+    get_diff_from_previous_file if @diff_filename.nil?
     
     # If this is run for the first time, we are not gonna have the diff_file, so
     # What we are doing is to read all of the lines, and put them under "added" section
@@ -156,7 +157,7 @@ class CEdictDiffParser
   ### comparing the new edict file from the old one.
   ### This method only needed to run once in every "import" operation.
   def get_diff_from_previous_file
-    result = ""
+    result = nil
     if (@diff_filename == nil)
       # Get both the filename for logging.
       previous_filename = self.full_path_from_edict_file(self.old_filename)

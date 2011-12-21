@@ -3,10 +3,6 @@ class CEdictParser < Parser
   @reference_only_entries
   @variant_only_entries
 
-  # TODO: MMA is this necessary?
-  # Alias the base class' method 
-  alias :run_super :run
-
   def run
     entries = []
     # These store entries that are simply redirects
@@ -21,7 +17,7 @@ class CEdictParser < Parser
     # Use this for when we have an exception and want to retry
     @rescued_line = false
     
-    # Call 'super' method to process loop for us
+    # Call 'super' method to process loop for us, passing this entire "do" block as a parameter
     super do |line, line_no, cache_data|
       
       entry = CEdictEntry.new
