@@ -77,8 +77,13 @@ class ParserTest < Test::Unit::TestCase
     # These two are getting updated cause somewhere in their meaning has changed, cause some of them is getting removed.
     muxed_base_entries_with_removed_variant = removed_parser.rem_variant_entries_from_base_entries(base, removed_parser.variant_entries)
     muxed_base_entries_with_removed_erhua = removed_parser.rem_variant_entries_from_base_entries(base, removed_parser.erhua_variant_entries)
-    
-    ## TO-DO Actually cross reference between the removed and added. If either one is crossed, meaning that they should be in 'changed' section
+
+    ## Actually cross reference between the removed and added. 
+    ## If either one is crossed, meaning that they should be in 'changed' section.
+    prt "\nCEDICT Diff Parse (11) - (Cross-Referencing %d Added base entries and %d Removed Base entries for changed-entries)" % [new_entries.count, removed_entries.count]   
+    prt_dotted_line    
+    cross_base_entries = diff_parser.cross_reference_added_and_removed(new_entries, removed_entries)
+    prt "\nResult: %d has cross reference and put on the changed-entries section." % [cross_base_entries.count]
     
     ## These are added
     added = new_entries + muxed_variant_entries + muxed_erhua_entries
@@ -87,26 +92,17 @@ class ParserTest < Test::Unit::TestCase
     changed = added_reference_entries + added_variant_entries + 
               removed_reference_entries + removed_variant_entries +
               muxed_base_entries_with_new_variant + muxed_base_entries_with_new_erhua +
-              muxed_base_entries_with_removed_variant + muxed_base_entries_with_removed_erhua
+              muxed_base_entries_with_removed_variant + muxed_base_entries_with_removed_erhua + cross_base_entries
     
     ## This are deleted
     removed = removed_entries + removed_parser.variant_only_entries + removed_parser.reference_only_entries + removed_parser.variant_entries + removed_parser.erhua_variant_entries
 
-    prt_dotted_line    
     prt "\nCEDICT Diff Parse (RESULT)\nAdded   : %d\nRemoved : %d\nUpdated : %d\n" % [added.count, removed.count, changed.count]
     prt_dotted_line
     
+    ## Last Step would be write all of those result on a file
     diff_parser.update_data_with (added, changed, removed)
     diff_parser.dump
-    
-    # Changed would be harder... :( we have to pair the add/remove entries together.
-    # changed_entries = []
-    # changed_line_sets = line_hash[:changed]
-    # changed_line_sets.each do |added_lines, removed_lines|
-    #  added_entries = Parser.new(added_lines).run
-    #  removed_entries = Parser.new(removed_lines).run
-    #  changed_entries << [:added => added_entries, :removed => removed_entries]
-    #end
   end
   
 end

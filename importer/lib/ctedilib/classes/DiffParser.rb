@@ -44,6 +44,31 @@ class DiffParser
     return self
   end
   
+  ### This method will cross reference any same cards on both added and removed.
+  ### Those entry will be returned as "removed" 
+  ### while also being removed from both added and removed array.
+  def cross_reference_added_and_removed (added, removed)
+    changed = []
+    new_added = []
+    
+    added.each do |added_entry|
+      idx = removed.index(added_entry)
+      if (idx.nil?)
+        # It does not exist on the removed array, so it is added instead.
+        new_added << added_entry
+      else
+        # It is on the removed
+        removed.delete_at(idx)
+        changed << added_entry
+      end
+    end
+    
+    # We are modifying the added array.
+    added.clear
+    added.concat new_added
+    return changed
+  end
+  
   ### Run method, when this is run, it will populate the added and removed array and then
   ### return with the hash containing line, ready to be parsed by the CEdictParser.
   def run
@@ -157,8 +182,8 @@ class DiffParser
   ### comparing the new edict file from the old one.
   ### This method only needed to run once in every "import" operation.
   def get_diff_from_previous_file
-    result = nil
-    if (@diff_filename == nil)
+    result = ""
+    if (@diff_filename.nil?)
       # Get both the filename for logging.
       previous_filename = self.full_path_from_edict_file(self.old_filename)
       current_filename = self.full_path_from_edict_file(@config["filename"])
@@ -170,9 +195,9 @@ class DiffParser
         result = Rails.root.join("data/cedict/migration_history/diff#{timestamp}.txt").to_s
         `diff '#{previous_filename}' '#{current_filename}' > '#{result}'`
       end
+      @diff_filename = result
     end
     
-    @diff_filename = result
     return @diff_filename
   end
   
