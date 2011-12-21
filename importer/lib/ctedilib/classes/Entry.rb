@@ -418,12 +418,19 @@ class Entry
     end
   end
   
-  # Won't work if the card IDs aren't set
+  # Won't work if one of the card IDs aren't set
+  # But it will work if both IDs are not set
   def ==(another_card_entry)
     # If the another_card_entry is not Entry type
     # just return with false.
     if (!another_card_entry.kind_of?(Entry))
       return false
+    end
+    
+    # Incase both of the entries has not gotten the ID yet
+    # and the match depends on the headword.
+    if ((self.id == -1) and (another_card_entry.id == -1))
+      return (self.headword_simp == another_card_entry.headword_simp or self.headword_trad == another_card_entry.headword_trad)
     end
   
     return (self.id == another_card_entry.id and self.id != -1)
