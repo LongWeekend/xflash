@@ -17,7 +17,7 @@ class CEdictParser < Parser
     # Use this for when we have an exception and want to retry
     @rescued_line = false
     
-    # Call 'super' method to process loop for us
+    # Call 'super' method to process loop for us, passing this entire "do" block as a parameter
     super do |line, line_no, cache_data|
       
       entry = CEdictEntry.new
