@@ -5,16 +5,16 @@ class ParserTest < Test::Unit::TestCase
   def test_parse_diff
     diff_parser = CEdictDiffParser.new("test_data/test_diff_cedict_old.u8", "config.yml")
     line_hash = diff_parser.run
+    diff_parser.update_data_with (line_hash[:added], nil, nil)
     diff_parser.dump
     
     prt "\nCEDICT Diff Parse (1) - Initial Difference file parsing"
     prt_dotted_line
     diff_parser = CEdictDiffParser.new("test_data/test_diff_cedict_new.u8", "config.yml")
     line_hash = diff_parser.run
-    diff_parser.dump
     
-    # Added, removed, changed
-    assert_equal(3, line_hash.count)
+    # Added and removed lines
+    assert_equal(2, line_hash.count)
     
     # Get the base of the entire cards library.
     prt "\nCEDICT Diff Parse (2) - Get all the existing cards object from database"
@@ -95,6 +95,9 @@ class ParserTest < Test::Unit::TestCase
     prt_dotted_line    
     prt "\nCEDICT Diff Parse (RESULT)\nAdded   : %d\nRemoved : %d\nUpdated : %d\n" % [added.count, removed.count, changed.count]
     prt_dotted_line
+    
+    diff_parser.update_data_with (added, changed, removed)
+    diff_parser.dump
     
     # Changed would be harder... :( we have to pair the add/remove entries together.
     # changed_entries = []

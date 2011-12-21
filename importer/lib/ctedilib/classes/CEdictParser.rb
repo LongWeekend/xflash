@@ -25,7 +25,6 @@ class CEdictParser < Parser
     super do |line, line_no, cache_data|
       
       entry = CEdictEntry.new
-      
       # Use exception handling to weed out bad entries
       begin
       
