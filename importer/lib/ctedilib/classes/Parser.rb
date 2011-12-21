@@ -7,41 +7,33 @@ class Parser
 
   ### Class Constructor
   #####################################
-  def initialize(file_name, from=0, to=0, category_tags_list=[])
+  def initialize(file_name_or_lines, from=0, to=0, category_tags_list=[])
     @from_rec_no = from # support from/to
     @to_rec_no = to # support from/to
-    @source_file = File.open(file_name, 'r')
-    @source_file_name = file_name
-    @source_file_ext =File.extname(file_name)
     @line_count_atomicity = 1 ### support for records split that take up multiple lines
     @warning_level = "VERBOSE"
-    if @source_file_ext.downcase ==".xml"
-      # XML mode, read in immediately and close stream
-      @source_xml = Nokogiri::XML(@source_file, nil, 'UTF-8')
-      @source_data_object = @source_xml # Should be defined later
-      @source_file.close
-    else
-      # Txt files, open stream and close later!
-      @source_data_object = @source_file
-    end
     # Category tags added via the command line
     @category_tags_array = (category_tags_list.nil? ? [] : category_tags_list.split(",").flatten)
-  end
-  
-  ### Class Constructor
-  #####################################
-  def initialize(lines, from=0, to=0)
-    @from_rec_no = from # support from/to
-    @to_rec_no = to # support from/to
-    @source_file = nil
-    @source_file_name = nil
-    @source_file_ext = nil
-    @line_count_atomicity = 1 ### support for records split that take up multiple lines
-    @warning_level = "VERBOSE"
-    @source_data_object = lines
     
-    # Category tags added via the command line
-    @category_tags_array = []
+    if (file_name_or_lines.kind_of?(String) && File.exists?(file_name_or_lines))
+      file_name = file_name_or_lines
+      @source_file = File.open(file_name, 'r')
+      @source_file_name = file_name
+      @source_file_ext =File.extname(file_name)
+      if @source_file_ext.downcase ==".xml"
+        # XML mode, read in immediately and close stream
+        @source_xml = Nokogiri::XML(@source_file, nil, 'UTF-8')
+        @source_data_object = @source_xml # Should be defined later
+        @source_file.close
+      else
+        # Txt files, open stream and close later!
+        @source_data_object = @source_file
+      end
+    else
+      #This is an array of line
+      @source_data_object = file_name_or_lines
+    end
+    
   end
   
   def set_line_count_atomicity(val)
