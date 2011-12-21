@@ -48,7 +48,7 @@ class DiffParser
   ### Those entry will be returned as "removed" 
   ### while also being removed from both added and removed array.
   def cross_reference_added_and_removed (added, removed)
-    changed = []
+    updated_entries = []
     new_added = []
     
     added.each do |added_entry|
@@ -58,15 +58,19 @@ class DiffParser
         new_added << added_entry
       else
         # It is on the removed
+        # construct an associative array consist of those added and removed entry as updated.
+        removed_entry = removed[idx];
+        updated_entries << [:added => added_entry, :removed => removed_entry]
+                
+        # Removed the object from the removed array        
         removed.delete_at(idx)
-        changed << added_entry
       end
     end
     
     # We are modifying the added array.
     added.clear
     added.concat new_added
-    return changed
+    return updated_entries
   end
   
   ### Run method, when this is run, it will populate the added and removed array and then
@@ -227,9 +231,9 @@ class DiffParser
   end
   
   def update_data_with (new_added, new_changed, new_removed)
-    @config["added"] = new_added.length
-    @config["removed"] = (new_removed) ? new_removed.length : 0
-    @config["changed"] = (new_changed) ? new_changed.length : 0
+    @config["added"] = new_added
+    @config["removed"] = new_removed
+    @config["changed"] = new_changed
   end
     
   def old_filename

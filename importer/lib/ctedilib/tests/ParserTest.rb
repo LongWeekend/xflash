@@ -5,7 +5,7 @@ class ParserTest < Test::Unit::TestCase
   def test_parse_diff
     diff_parser = DiffParser.new("test_data/test_diff_cedict_old.u8", "config.yml")
     line_hash = diff_parser.run
-    diff_parser.update_data_with (line_hash[:added], nil, nil)
+    diff_parser.update_data_with (line_hash[:added].count, 0, 0)
     diff_parser.dump
     
     prt "\nCEDICT Diff Parse (1) - Initial Difference file parsing"
@@ -82,8 +82,8 @@ class ParserTest < Test::Unit::TestCase
     ## If either one is crossed, meaning that they should be in 'changed' section.
     prt "\nCEDICT Diff Parse (11) - (Cross-Referencing %d Added base entries and %d Removed Base entries for changed-entries)" % [new_entries.count, removed_entries.count]   
     prt_dotted_line    
-    cross_base_entries = diff_parser.cross_reference_added_and_removed(new_entries, removed_entries)
-    prt "\nResult: %d has cross reference and put on the changed-entries section." % [cross_base_entries.count]
+    updated_entries = diff_parser.cross_reference_added_and_removed(new_entries, removed_entries)
+    prt "\nResult: %d has cross reference and put on the changed-entries section." % [updated_entries.count]
     
     ## These are added
     added = new_entries + muxed_variant_entries + muxed_erhua_entries
@@ -92,16 +92,17 @@ class ParserTest < Test::Unit::TestCase
     changed = added_reference_entries + added_variant_entries + 
               removed_reference_entries + removed_variant_entries +
               muxed_base_entries_with_new_variant + muxed_base_entries_with_new_erhua +
-              muxed_base_entries_with_removed_variant + muxed_base_entries_with_removed_erhua + cross_base_entries
+              muxed_base_entries_with_removed_variant + muxed_base_entries_with_removed_erhua
     
     ## This are deleted
     removed = removed_entries + removed_parser.variant_only_entries + removed_parser.reference_only_entries + removed_parser.variant_entries + removed_parser.erhua_variant_entries
 
-    prt "\nCEDICT Diff Parse (RESULT)\nAdded   : %d\nRemoved : %d\nUpdated : %d\n" % [added.count, removed.count, changed.count]
+    prt "\nCEDICT Diff Parse (RESULT)\nAdded   : %d\nRemoved : %d\nUpdated : %d\n" % [added.count, removed.count, changed.count + updated_entries.count]
     prt_dotted_line
+    #debugger
     
     ## Last Step would be write all of those result on a file
-    diff_parser.update_data_with (added, changed, removed)
+    diff_parser.update_data_with (added.count, changed.count + updated_entries.count, removed.count)
     diff_parser.dump
   end
   
