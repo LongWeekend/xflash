@@ -7,9 +7,8 @@ class CEdictDiffParser
   @written_to_file
   @file_exist
     
-  @added
-  @removed
-  @changed
+  @added_lines
+  @removed_lines
   @config
   
   ### Class Constructor
@@ -23,9 +22,8 @@ class CEdictDiffParser
     @file_exist = File.exist? @config_filename
     
     # Statistic
-    @added = []
-    @removed = []
-    @changed = []
+    @added_lines = []
+    @removed_lines = []
     
     # Read the last configuration if there is one.
     if @file_exist
@@ -69,7 +67,7 @@ class CEdictDiffParser
   ### Return with the hash :added, :removed and :changed containing line
   ### in CEdictParser-friendly format
   def line_diff
-    return { :added => @added, :removed => @removed, :changed => @changed }
+    return { :added => @added_lines, :removed => @removed_lines }
   end
   
   ### parse the file directly from the source as this is the first
@@ -79,7 +77,7 @@ class CEdictDiffParser
     ### Get all the line into memory
     file_obj = File.new(filename, "r")
     file_obj.each do |line|
-      @added.push line
+      @added_lines.push line
     end
   end
   
@@ -101,8 +99,8 @@ class CEdictDiffParser
         # as it is easier and cheaper. Well, this structure is retained if we decided to have 
         # 'extra' action when we finish with a 'diff' block
         # Pushing the temporary 'lines' back to where it should belong
-        @added.concat temp_a unless temp_a == nil
-        @removed.concat temp_r unless temp_r == nil
+        @added_lines.concat temp_a unless temp_a == nil
+        @removed_lines.concat temp_r unless temp_r == nil
         
         # reset the temporary variable
         temp_a = []
@@ -137,7 +135,6 @@ class CEdictDiffParser
 
     # Some preparation for consistencies in the numbers.
     yaml_obj = nil
-    self.sync_statistic
     added_config = { @counter => @config }
     
     # If this is the first time ever logging the operation, get the dict inside the array.
@@ -186,9 +183,9 @@ class CEdictDiffParser
   ### This method will sync the number of added, removed and changed with the
   ### length of each of those array.
   def sync_statistic
-    @config["added"] = @added.length
-    @config["removed"] = @removed.length
-    @config["changed"] = @changed.length
+    @config["added"] = @added_lines.length
+    @config["removed"] = @removed_lines.length
+    @config["changed"] = 0
   end
   
   def diff_filename
@@ -196,17 +193,19 @@ class CEdictDiffParser
   end
   
   def added
-    return @added
-  end
-  
-  def changed
-    return @changed
+    return @added_lines
   end
   
   def removed
-    return @removed
+    return @removed_lines
   end
   
+  def update_data_with (new_added, new_changed, new_removed)
+    @config["added"] = new_added.length
+    @config["removed"] = (new_removed) ? new_removed.length : 0
+    @config["changed"] = (new_changed) ? new_changed.length : 0
+  end
+    
   def old_filename
     return @last_config["filename"] unless @last_config == nil
     return ""
