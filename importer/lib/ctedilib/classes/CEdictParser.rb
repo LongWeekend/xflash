@@ -3,10 +3,6 @@ class CEdictParser < Parser
   @reference_only_entries
   @variant_only_entries
 
-  # TODO: MMA is this necessary?
-  # Alias the base class' method 
-  alias :run_super :run
-
   def run
     entries = []
     # These store entries that are simply redirects

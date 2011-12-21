@@ -1,4 +1,4 @@
-class CEdictDiffParser
+class DiffParser
   
   @config_filename
   @last_config
@@ -15,6 +15,7 @@ class CEdictDiffParser
   ### Class Constructor
   def initialize (new_dict_file, yaml_file)
     # File related toegther with the hash object of the last configuration
+    # TODO: This is another place where we need to change the config depending on the importer (JFlash CFlash etc)
     @config_filename = Rails.root.join("config/cedict_config/#{yaml_file}").to_s
     @last_config = nil
     @counter = 0

@@ -105,7 +105,7 @@ class CEdictParserTest < Test::Unit::TestCase
     variant_entry = CEdictEntry.new
     variant_entry.parse_line("唸 唸 [nian4] /variant of 念, to read aloud/")
 
-    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant.txt")
+    parser = CEdictParser.new(Rails.root.join("data/cedict/test_data/cedict_parser_match_variant.txt").to_s)
     muxed_base_entries = parser.add_variant_entries_into_base_entries([base_entry], [variant_entry])
     muxed_variant_entries = parser.add_base_entries_into_variant_entries([variant_entry], [base_entry])
     assert_equal(8,muxed_base_entries[0].meanings.count)
