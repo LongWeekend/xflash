@@ -13,14 +13,14 @@
 #import "StudyViewController.h"
 
 @interface PracticeModeCardViewDelegate()
-@property (nonatomic, assign, getter=hasfinishedSetAlertShowed) BOOL finishedSetAlertShowed;
+@property (nonatomic, assign) BOOL alreadyShowedLearnedAlert;
 - (void) _notifyUserStudySetHasBeenLearned;
 @end
 
 @implementation PracticeModeCardViewDelegate
 
 @synthesize currentPercentageCorrect;
-@synthesize finishedSetAlertShowed = _finishedSetAlertShowed;
+@synthesize alreadyShowedLearnedAlert;
 
 #pragma mark - Init
 
@@ -30,7 +30,6 @@
   if (self)
   {
     self.currentPercentageCorrect = 100.0f;
-    self.finishedSetAlertShowed = NO;
   }
   return self;
 }
@@ -88,9 +87,9 @@
 
 - (Card*) getFirstCard:(Tag*)cardSet
 {
-  self.finishedSetAlertShowed = NO; // must be a new set if they want the first card
-  NSError* error = nil;
-  Card* firstCard = [cardSet getFirstCardWithError:&error];
+  self.alreadyShowedLearnedAlert = NO; // must be a new set if they want the first card
+  NSError *error = nil;
+  Card *firstCard = [cardSet getFirstCardWithError:&error];
   if ((firstCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
   {
     [self _notifyUserStudySetHasBeenLearned];
@@ -100,15 +99,16 @@
 
 - (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  NSError* error = nil;
-  Card* nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
-  if ((nextCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+  NSError *error = nil;
+  Card *nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
+  if ((nextCard.levelId == 5) && (error.code == kAllBuriedAndHiddenError))
   {
     [self _notifyUserStudySetHasBeenLearned];
   }
-  else // we are not showing the setHasBeenLearned - so it hasn't been
+  else 
   {
-    self.finishedSetAlertShowed = NO;
+    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
+    self.alreadyShowedLearnedAlert = NO;
   }
   return nextCard;
 }
@@ -199,37 +199,11 @@
 
 - (void)_notifyUserStudySetHasBeenLearned
 {
-  if (self.hasfinishedSetAlertShowed == NO)
+  if (self.alreadyShowedLearnedAlert == NO)
   {
-    UIAlertView *alertView = [[UIAlertView alloc] 
-                              initWithTitle:@"Study Set Learned" 
-                              message:@"Congratulations! You've already learned this set. We will show cards that would usually be hidden."
-                              delegate:self 
-                              cancelButtonTitle:@"Change Set"
-                              otherButtonTitles:@"OK", nil];
-    
-    [alertView setTag:STUDY_SET_HAS_FINISHED_ALERT_TAG];
-    [alertView show];
-    [alertView release];
-    self.finishedSetAlertShowed = YES;
-  }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (alertView.tag != STUDY_SET_HAS_FINISHED_ALERT_TAG)
-  {
-    return;
-  }
-  
-  if (buttonIndex == STUDY_SET_SHOW_BURIED_IDX)
-  {
-    LWE_LOG(@"Study set show burried has been selected after a study set has been master.");
-  }
-  else if (buttonIndex == STUDY_SET_CHANGE_SET_IDX)
-  {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:STUDY_SET_VIEW_CONTROLLER_TAB_INDEX] forKey:@"index"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
+                                       message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")];
+    self.alreadyShowedLearnedAlert = YES;
   }
 }
 
