@@ -1,4 +1,4 @@
-    //
+//
 //  DisplaySearchedSentenceViewController.m
 //  jFlash
 //
