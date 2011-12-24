@@ -19,3 +19,6 @@
 [submodule "jFlash/Classes/External/TTTAttributedLabel"]
 	path = jFlash/Classes/External/TTTAttributedLabel
 	url = git@github.com:LongWeekend/TTTAttributedLabel.git
+[submodule "jFlash/Classes/External/rikai-kit"]
+	path = jFlash/Classes/External/rikai-kit
+	url = git@github.com:LongWeekend/rikai-kit.git
