@@ -874,6 +874,18 @@
 		D3C180041488864600834EAC /* glyphish-style-listen-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */; };
 		D3CD3DA411D3021200F7A62C /* jFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E2811D1A2F600CFCACD /* jFlash.db */; };
 		D3CD3DA511D3021300F7A62C /* jFlash-CARD-1.1.db in Resources */ = {isa = PBXBuildFile; fileRef = 91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */; };
+		D3D29A6C14A5E741004DCD48 /* Deinflector.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A5814A5E741004DCD48 /* Deinflector.m */; };
+		D3D29A6D14A5E741004DCD48 /* DeinflectorReason.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A5A14A5E741004DCD48 /* DeinflectorReason.m */; };
+		D3D29A6E14A5E741004DCD48 /* DeinflectorRule.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A5C14A5E741004DCD48 /* DeinflectorRule.m */; };
+		D3D29A6F14A5E741004DCD48 /* DeinflectorRuleMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A5E14A5E741004DCD48 /* DeinflectorRuleMatch.m */; };
+		D3D29A7014A5E741004DCD48 /* KanjiEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6014A5E741004DCD48 /* KanjiEntry.m */; };
+		D3D29A7114A5E741004DCD48 /* KanjiLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6214A5E741004DCD48 /* KanjiLookup.m */; };
+		D3D29A7214A5E741004DCD48 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3D29A6314A5E741004DCD48 /* license.txt */; };
+		D3D29A7314A5E741004DCD48 /* RadicalEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6514A5E741004DCD48 /* RadicalEntry.m */; };
+		D3D29A7414A5E741004DCD48 /* README in Resources */ = {isa = PBXBuildFile; fileRef = D3D29A6614A5E741004DCD48 /* README */; };
+		D3D29A7514A5E741004DCD48 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6814A5E741004DCD48 /* RegexKitLite.m */; };
+		D3D29A7614A5E741004DCD48 /* ResultPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6A14A5E741004DCD48 /* ResultPeer.m */; };
+		D3D29A7714A5E741004DCD48 /* RikaiKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D29A6B14A5E741004DCD48 /* RikaiKitTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1465,6 +1477,27 @@
 		D35B07721116456D00DB5E02 /* talkbubble-ft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft.png"; path = "Assets/talkbubble-ft.png"; sourceTree = "<group>"; };
 		D3C17FFF1488864600834EAC /* glyphish-style-listen-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon.png"; path = "Assets/glyphish-style-listen-icon.png"; sourceTree = "<group>"; };
 		D3C180001488864600834EAC /* glyphish-style-listen-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "glyphish-style-listen-icon@2x.png"; path = "Assets/glyphish-style-listen-icon@2x.png"; sourceTree = "<group>"; };
+		D3D29A5714A5E741004DCD48 /* Deinflector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deinflector.h; sourceTree = "<group>"; };
+		D3D29A5814A5E741004DCD48 /* Deinflector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deinflector.m; sourceTree = "<group>"; };
+		D3D29A5914A5E741004DCD48 /* DeinflectorReason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeinflectorReason.h; sourceTree = "<group>"; };
+		D3D29A5A14A5E741004DCD48 /* DeinflectorReason.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeinflectorReason.m; sourceTree = "<group>"; };
+		D3D29A5B14A5E741004DCD48 /* DeinflectorRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeinflectorRule.h; sourceTree = "<group>"; };
+		D3D29A5C14A5E741004DCD48 /* DeinflectorRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeinflectorRule.m; sourceTree = "<group>"; };
+		D3D29A5D14A5E741004DCD48 /* DeinflectorRuleMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeinflectorRuleMatch.h; sourceTree = "<group>"; };
+		D3D29A5E14A5E741004DCD48 /* DeinflectorRuleMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeinflectorRuleMatch.m; sourceTree = "<group>"; };
+		D3D29A5F14A5E741004DCD48 /* KanjiEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KanjiEntry.h; sourceTree = "<group>"; };
+		D3D29A6014A5E741004DCD48 /* KanjiEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KanjiEntry.m; sourceTree = "<group>"; };
+		D3D29A6114A5E741004DCD48 /* KanjiLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KanjiLookup.h; sourceTree = "<group>"; };
+		D3D29A6214A5E741004DCD48 /* KanjiLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KanjiLookup.m; sourceTree = "<group>"; };
+		D3D29A6314A5E741004DCD48 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		D3D29A6414A5E741004DCD48 /* RadicalEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadicalEntry.h; sourceTree = "<group>"; };
+		D3D29A6514A5E741004DCD48 /* RadicalEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadicalEntry.m; sourceTree = "<group>"; };
+		D3D29A6614A5E741004DCD48 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		D3D29A6714A5E741004DCD48 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		D3D29A6814A5E741004DCD48 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		D3D29A6914A5E741004DCD48 /* ResultPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultPeer.h; sourceTree = "<group>"; };
+		D3D29A6A14A5E741004DCD48 /* ResultPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultPeer.m; sourceTree = "<group>"; };
+		D3D29A6B14A5E741004DCD48 /* RikaiKitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RikaiKitTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1565,7 +1598,7 @@
 				917A5C8611AB851E00016BD2 /* Objects */,
 				DA8B6A560FB1121000DE105C /* Models */,
 				DA8B6A4B0FB111D600DE105C /* Controllers */,
-				499E5AE70FF4D3ED006926A2 /* Helpers */,
+				499E5AE70FF4D3ED006926A2 /* External */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1864,7 +1897,7 @@
 			name = Help;
 			sourceTree = "<group>";
 		};
-		499E5AE70FF4D3ED006926A2 /* Helpers */ = {
+		499E5AE70FF4D3ED006926A2 /* External */ = {
 			isa = PBXGroup;
 			children = (
 				917A5C5C11AB839300016BD2 /* Appirater */,
@@ -1874,6 +1907,7 @@
 				917A5C0B11AB807800016BD2 /* FlurryLib */,
 				9158C0020FB6C2320083223F /* FMDb */,
 				49EE8D90134EC15300EC6B0E /* LWE */,
+				D3D29A5614A5E741004DCD48 /* rikaikit */,
 				24E47F0411F3E754007F6FB7 /* OAuthConsumer */,
 				917A5BA611AB7B1C00016BD2 /* sqlite */,
 				911D195D137A56C8005C9B55 /* TapjoyConnect */,
@@ -1886,7 +1920,7 @@
 				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
 				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
 			);
-			name = Helpers;
+			name = External;
 			sourceTree = "<group>";
 		};
 		49AAB8861470DB210015D64B /* LWEChineseSearchBar */ = {
@@ -2637,6 +2671,35 @@
 			name = CustomCellBackgroundView;
 			sourceTree = "<group>";
 		};
+		D3D29A5614A5E741004DCD48 /* rikaikit */ = {
+			isa = PBXGroup;
+			children = (
+				D3D29A5714A5E741004DCD48 /* Deinflector.h */,
+				D3D29A5814A5E741004DCD48 /* Deinflector.m */,
+				D3D29A5914A5E741004DCD48 /* DeinflectorReason.h */,
+				D3D29A5A14A5E741004DCD48 /* DeinflectorReason.m */,
+				D3D29A5B14A5E741004DCD48 /* DeinflectorRule.h */,
+				D3D29A5C14A5E741004DCD48 /* DeinflectorRule.m */,
+				D3D29A5D14A5E741004DCD48 /* DeinflectorRuleMatch.h */,
+				D3D29A5E14A5E741004DCD48 /* DeinflectorRuleMatch.m */,
+				D3D29A5F14A5E741004DCD48 /* KanjiEntry.h */,
+				D3D29A6014A5E741004DCD48 /* KanjiEntry.m */,
+				D3D29A6114A5E741004DCD48 /* KanjiLookup.h */,
+				D3D29A6214A5E741004DCD48 /* KanjiLookup.m */,
+				D3D29A6314A5E741004DCD48 /* license.txt */,
+				D3D29A6414A5E741004DCD48 /* RadicalEntry.h */,
+				D3D29A6514A5E741004DCD48 /* RadicalEntry.m */,
+				D3D29A6614A5E741004DCD48 /* README */,
+				D3D29A6714A5E741004DCD48 /* RegexKitLite.h */,
+				D3D29A6814A5E741004DCD48 /* RegexKitLite.m */,
+				D3D29A6914A5E741004DCD48 /* ResultPeer.h */,
+				D3D29A6A14A5E741004DCD48 /* ResultPeer.m */,
+				D3D29A6B14A5E741004DCD48 /* RikaiKitTests.m */,
+			);
+			name = rikaikit;
+			path = Reusable/rikaikit;
+			sourceTree = "<group>";
+		};
 		DA8B6A430FB111A200DE105C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
@@ -3036,6 +3099,8 @@
 				498229431490F028009EC2CD /* 01-turning-gear@2x.png in Resources */,
 				498229471490F028009EC2CD /* 02-turning-gear.png in Resources */,
 				4982294B1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
+				D3D29A7214A5E741004DCD48 /* license.txt in Resources */,
+				D3D29A7414A5E741004DCD48 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3443,6 +3508,16 @@
 				498229511491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
+				D3D29A6C14A5E741004DCD48 /* Deinflector.m in Sources */,
+				D3D29A6D14A5E741004DCD48 /* DeinflectorReason.m in Sources */,
+				D3D29A6E14A5E741004DCD48 /* DeinflectorRule.m in Sources */,
+				D3D29A6F14A5E741004DCD48 /* DeinflectorRuleMatch.m in Sources */,
+				D3D29A7014A5E741004DCD48 /* KanjiEntry.m in Sources */,
+				D3D29A7114A5E741004DCD48 /* KanjiLookup.m in Sources */,
+				D3D29A7314A5E741004DCD48 /* RadicalEntry.m in Sources */,
+				D3D29A7514A5E741004DCD48 /* RegexKitLite.m in Sources */,
+				D3D29A7614A5E741004DCD48 /* ResultPeer.m in Sources */,
+				D3D29A7714A5E741004DCD48 /* RikaiKitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
