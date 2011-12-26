@@ -24,6 +24,7 @@
                                     @"some details about my awesome plugin",@"plugin_details",
                                     @"<html> some html here </html>",@"plugin_html_content",
                                     @"localfilename.db",@"plugin_target_path",
+                                    @"THIS VALUE SHOULD NOT MAKE US CRASH",@"some_unknown_key_we_dont_use_now",
                                     @"http://yourmom.com/backdoor.php",@"plugin_target_url",
                                     @"localfilename.db",@"plugin_file_name",
                                     nil];

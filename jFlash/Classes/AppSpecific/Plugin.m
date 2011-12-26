@@ -55,7 +55,11 @@
   {
     NSString *value = [dict objectForKey:oldKey];
     NSString *newKey = [mapHash objectForKey:oldKey];
-    [newDict setValue:value forKey:newKey];
+    // Only set the new value if we have a key (this will ignore the deprecated keys)
+    if (newKey)
+    {
+      [newDict setValue:value forKey:newKey];
+    }
   }
   
   // Now set up the default values we didn't used to have.
