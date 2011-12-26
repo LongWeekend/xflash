@@ -13,7 +13,7 @@
 + (Card*) retrieveCardByPK:(NSInteger)cardId;
 
 //! Array of cards methods
-+ (NSArray*) retrieveCardIdsSortedByLevel:(NSInteger)tagId;
++ (NSArray*) retrieveCardIdsSortedByLevelForTag:(Tag *)tag;
 + (NSArray*) retrieveFaultedCardsForTag:(Tag *)tag;
 
 //! Example sentences

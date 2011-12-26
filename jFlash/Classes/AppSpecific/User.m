@@ -8,43 +8,43 @@
 
 #import "User.h"
 
+NSInteger const kLWEUninitializedUserId = -1;
+
 @implementation User
 @synthesize userId, userNickname, avatarImagePath, dateCreated;
 
 // Takes a sqlite result set and populates the properties of user
-- (void) hydrate: (FMResultSet*) rs
+- (void) hydrate:(FMResultSet*)rs
 {
   self.userId          = [rs intForColumn:@"user_id"];
   self.userNickname    = [rs stringForColumn:@"nickname"];
   self.avatarImagePath = [rs stringForColumn:@"avatar_image_path"];
-  if([self.avatarImagePath length] == 0) self.avatarImagePath = DEFAULT_USER_AVATAR_PATH;
+  if ([self.avatarImagePath length] == 0)
+  {
+    self.avatarImagePath = DEFAULT_USER_AVATAR_PATH;
+  }
   self.dateCreated     = [rs stringForColumn:@"date_created"];
 }
 
 - (void) save
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql;
-  if(self.userId > 0){
-    sql = [NSString stringWithFormat:@"UPDATE users SET nickname ='%@', avatar_image_path='%@' WHERE user_id = %d", userNickname, avatarImagePath, userId];
-  } else {
-    sql = [NSString stringWithFormat:@"INSERT INTO users (nickname, avatar_image_path) VALUES ('%@','%@')", userNickname, avatarImagePath];
+  if(self.userId != kLWEUninitializedUserId)
+  {
+    [db.dao executeUpdate:@"UPDATE users SET nickname = ?, avatar_image_path = ? WHERE user_id = ?",self.userNickname,self.avatarImagePath,[NSNumber numberWithInt:self.userId]];
   }
-  [[db dao] executeUpdate:sql];
+  else
+  {
+    [db.dao executeUpdate:@"INSERT INTO users (nickname, avatar_image_path) VALUES (?,?)",self.userNickname,self.avatarImagePath];
+  }
 }
 
 - (void) deleteUser
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [[NSString alloc] initWithFormat:@"DELETE FROM users WHERE user_id = %d", userId];
-  [[db dao] executeUpdate:sql];
-  [sql release];
-  sql = [[NSString alloc] initWithFormat:@"DELETE FROM user_history WHERE user_id = %d", userId];
-  [[db dao] executeUpdate:sql];
-  [sql release];
+  [db.dao executeUpdate:@"DELETE FROM users WHERE user_id = ?",[NSNumber numberWithInt:self.userId]];
+  [db.dao executeUpdate:@"DELETE FROM user_history WHERE user_id = ?",[NSNumber numberWithInt:self.userId]];
 }
-
-
 
 #pragma mark - Class plumbing
 
@@ -53,10 +53,8 @@
   self = [super init];
   if (self)
   {
-    self.userId          = 0;
-    self.userNickname    = nil;
+    self.userId          = kLWEUninitializedUserId;
     self.avatarImagePath = DEFAULT_USER_AVATAR_PATH;
-    self.dateCreated     = nil;
   }
   return self;
 }

@@ -88,13 +88,8 @@
 // Save user details
 - (IBAction) doCommitChanges
 {
-  // Escape the string for SQLITE-style escapes (cannot use backslash!)
-  NSMutableString *newUser = [[NSMutableString alloc] initWithString:self.userNicknameTextField.text];
-  // TODO: When we switch to parameter binding, this can go
-  [newUser replaceOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, [newUser length])];
-  [self.selectedUser setUserNickname:newUser];
+  self.selectedUser.userNickname = self.userNicknameTextField.text;
   [self.selectedUser save];
-  [newUser release];
   
   // We're done with this VC
   [self.navigationController popViewControllerAnimated:YES];

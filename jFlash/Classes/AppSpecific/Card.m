@@ -155,7 +155,7 @@ NSInteger const kLWEUninitializedCardId    = -1;
 {
   LWE_ASSERT_EXC(self.cardId != kLWEUninitializedCardId, @"Hydrate called with uninitialized card ID");
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT c.*, h.meaning FROM cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = %d LIMIT 1",self.cardId]];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT c.*, h.meaning FROM cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = ? LIMIT 1",[NSNumber numberWithInt:self.cardId]];
 	while ([rs next])
   {
 		[self hydrate:rs simple:YES];

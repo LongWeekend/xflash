@@ -296,7 +296,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   else
   {
     // No PLIST, generate new card Ids array
-    tmpCardIdsArray = [CardPeer retrieveCardIdsSortedByLevel:self.tagId];
+    tmpCardIdsArray = [CardPeer retrieveCardIdsSortedByLevelForTag:self];
   }
   
   self.cardIds = [[tmpCardIdsArray mutableCopy] autorelease];

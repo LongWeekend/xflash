@@ -10,6 +10,8 @@
 
 #import "FMResultSet.h"
 
+extern NSInteger const kLWEUninitializedUserId;
+
 @interface User : NSObject
 
 - (void)hydrate: (FMResultSet*) rs;

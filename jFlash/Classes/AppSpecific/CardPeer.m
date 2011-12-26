@@ -5,7 +5,7 @@
 
 @interface CardPeer ()
 + (NSString *) _FTSSQLForKeyword:(NSString*)keyword column:(NSString *)columnName queryLimit:(NSInteger)limit;
-+ (Card*) _retrieveCardWithSQL:(NSString*)sql;
++ (Card*) _retrieveCardWithResultSet:(FMResultSet *)rs;
 + (NSMutableArray*) _addCardsToList:(NSMutableArray*)cardList fromResultSet:(FMResultSet*)rs hydrate:(BOOL)shouldHydrate;
 @end
 
@@ -164,12 +164,10 @@
 }
 
 /**
- * Returns single card from SQL result - assumes 1 record, if multiple, will take last record
+ * Returns single card from result set - if multiple records, will take the last one
  */ 
-+ (Card*) _retrieveCardWithSQL:(NSString*)sql
++ (Card *) _retrieveCardWithResultSet:(FMResultSet *)rs
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  FMResultSet *rs = [db executeQuery:sql];
   Card *tmpCard = nil;
   while ([rs next])
   {
@@ -211,21 +209,21 @@
 + (Card *) retrieveCardByPK:(NSInteger)cardId
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSString *sql = [[NSString alloc] initWithFormat:@""
-                   "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
-                   "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
-                   "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = '%d' "
-                   "WHERE c.card_id = ch.card_id AND c.card_id = '%d'",[settings integerForKey:@"user_id"], cardId];
-  Card *tmpCard = [CardPeer _retrieveCardWithSQL:sql];
-  [sql release];
-  return tmpCard;
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [db.dao executeQuery:@""
+     "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
+     "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
+     "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id "
+     "LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = ? "
+     "WHERE c.card_id = ch.card_id AND c.card_id = ?",[settings objectForKey:@"user_id"],[NSNumber numberWithInt:cardId]];
+  return [CardPeer _retrieveCardWithResultSet:rs];
 }
 
 
 /**
  * Returns an array of Card ids for a given tagId
  */
-+ (NSArray*) retrieveCardIdsSortedByLevel:(NSInteger)tagId
++ (NSArray*) retrieveCardIdsSortedByLevelForTag:(Tag *)tag
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -234,9 +232,9 @@
   {
     [cardIdList addObject:[NSMutableArray array]];
   }
-  NSString *sql = [[NSString alloc] initWithFormat:@"SELECT l.card_id AS card_id,u.card_level as card_level "
-"FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id AND u.user_id = '%d' WHERE l.tag_id = '%d'",[settings integerForKey:@"user_id"],tagId];
-  FMResultSet *rs = [db executeQuery:sql];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT l.card_id AS card_id,u.card_level as card_level "
+                     "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id "
+                     "AND u.user_id = ? WHERE l.tag_id = ?",[settings objectForKey:@"user_id"],[NSNumber numberWithInt:tag.tagId]];
   while ([rs next])
   {
     NSInteger levelId = [rs intForColumn:@"card_level"];
@@ -244,7 +242,6 @@
     [[cardIdList objectAtIndex:levelId] addObject:[NSNumber numberWithInt:cardId]];
   }
   [rs close];
-  [sql release];
   return cardIdList;
 }
 
@@ -254,8 +251,8 @@
 + (NSArray *) retrieveFaultedCardsForTag:(Tag *)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [NSString stringWithFormat:@"SELECT card_id FROM card_tag_link WHERE tag_id = '%d'",tag.tagId];
-  return (NSArray *)[self _addCardsToList:[NSMutableArray array] fromResultSet:[db executeQuery:sql] hydrate:NO];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT card_id FROM card_tag_link WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
+  return (NSArray *)[self _addCardsToList:[NSMutableArray array] fromResultSet:rs hydrate:NO];
 }
 
 /**
@@ -264,18 +261,17 @@
  */
 + (NSArray*) retrieveCardSetForExampleSentenceId:(NSInteger)sentenceId
 {	
-	NSString *sql = nil;
+	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = nil;
   if ([ExampleSentencePeer isNewVersion])
   {
-    sql = [NSString stringWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d' AND l.should_show = '1'", sentenceId];
+    rs = [db.dao executeQuery:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ? AND l.should_show = '1'", [NSNumber numberWithInt:sentenceId]];
   }
   else
   {
-    sql = [NSString stringWithFormat:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = '%d'", sentenceId];
+    rs = [db.dao executeQuery:@"SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ?", [NSNumber numberWithInt:sentenceId]];
   }
-	LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:sql];
-	
+	        
 	NSMutableArray *cardList = [NSMutableArray array];
 	while ([rs next])
 	{

@@ -12,7 +12,7 @@
 
 @interface AddStudySetInputViewController : UIViewController
 
-extern NSString* const kSetWasAddedOrUpdated;
+extern NSString * const kSetWasAddedOrUpdated;
 
 - (id) initWithDefaultCard:(Card *)card inGroup:(Group *)group;
 - (id) initWithTag:(Tag*)aTag;
