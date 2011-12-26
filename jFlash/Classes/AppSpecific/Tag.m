@@ -26,7 +26,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 @implementation Tag
 
 @synthesize tagId, tagName, tagEditable, tagDescription, isFault = _isFault;
-@synthesize cardCount, currentIndex, cardIds, cardLevelCounts, combinedCardIdsForBrowseMode, lastFiveCards;
+@synthesize cardCount, currentIndex, cardIds, cardLevelCounts, flattenedCardIdArray, lastFiveCards;
 
 + (Tag *) starredWordsTag
 {
@@ -300,7 +300,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   }
   
   self.cardIds = [[tmpCardIdsArray mutableCopy] autorelease];
-  self.combinedCardIdsForBrowseMode = [self combineCardIds];
+  self.flattenedCardIdArray = [self combineCardIds];
 
   // populate the card level counts
 	[self cacheCardLevelCounts];
@@ -463,7 +463,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
   NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel removeObject:tmpNum];
-  [self.combinedCardIdsForBrowseMode removeObject:tmpNum];
+  [self.flattenedCardIdArray removeObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 
@@ -475,7 +475,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
   NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
   [cardLevel addObject:tmpNum];
-  [self.combinedCardIdsForBrowseMode addObject:tmpNum];
+  [self.flattenedCardIdArray addObject:tmpNum];
   [self cacheCardLevelCounts];
 }
 
@@ -491,12 +491,12 @@ NSInteger const kLWEUninitializedCardCount = -1;
   {
     // TODO: in some cases the currentIndex can be beyond the range.  
     // We should figure out why, but for the time being I'll reset it to 0 instead of breaking
-    if (self.currentIndex >= [[self combinedCardIdsForBrowseMode] count])
+    if (self.currentIndex >= [[self flattenedCardIdArray] count])
     {
       self.currentIndex = 0;
     }
     
-    NSArray *combinedCards = [self combinedCardIdsForBrowseMode];
+    NSArray *combinedCards = [self flattenedCardIdArray];
     NSNumber *cardId = nil;
     if ([combinedCards count] > 0)
     {
@@ -534,9 +534,8 @@ NSInteger const kLWEUninitializedCardCount = -1;
 //! Concatenate cardId arrays for browse mode
 - (NSMutableArray *) combineCardIds
 {
-  NSMutableArray* allCardIds = [[[NSMutableArray alloc] init] autorelease];
-  NSMutableArray* cardIdsInLevel;
-  for (cardIdsInLevel in self.cardIds) 
+  NSMutableArray *allCardIds = [NSMutableArray arrayWithCapacity:self.cardCount];
+  for (NSArray *cardIdsInLevel in self.cardIds) 
   {
     [allCardIds addObjectsFromArray:cardIdsInLevel];
   }
@@ -547,45 +546,34 @@ NSInteger const kLWEUninitializedCardCount = -1;
 /**
  * Returns the next card in the list, resets index if at the end of the list
  */
-- (Card*) getNextCard
+- (Card *) getNextCard
 {
-  NSMutableArray *allCardIds = [self combinedCardIdsForBrowseMode];
-	NSInteger currIdx = self.currentIndex;
-	NSInteger total = [allCardIds count];
-	if (currIdx >= total - 1)
+	if (self.currentIndex >= ([self.flattenedCardIdArray count] - 1))
   {
-    currIdx = 0;
+    self.currentIndex = 0;
   }
   else 
   {
-    currIdx++;
+    self.currentIndex++;
   }
-
-  self.currentIndex = currIdx;
-  return [CardPeer retrieveCardByPK:[[allCardIds objectAtIndex:currIdx] intValue]];
+  return [CardPeer retrieveCardByPK:[[self.flattenedCardIdArray objectAtIndex:self.currentIndex] intValue]];
 }
 
 
 /**
  * Returns the previous card in the list, resets index to top last card if at 0
  */
-- (Card*) getPrevCard
+- (Card *) getPrevCard
 {
-  NSMutableArray *allCardIds = [self combinedCardIdsForBrowseMode];
-	NSInteger currIdx = self.currentIndex;
-	NSInteger total = [allCardIds count];
-	if (currIdx == 0)
+	if (self.currentIndex == 0)
   {
-    currIdx = total-1;
+    self.currentIndex = ([self.flattenedCardIdArray count] - 1);
   }
   else
   {
-    currIdx--;
+    self.currentIndex--;
   }
-  
-  self.currentIndex = currIdx;
-  NSInteger tmp = [[allCardIds objectAtIndex:currIdx] intValue];
-  return [CardPeer retrieveCardByPK:tmp];
+  return [CardPeer retrieveCardByPK:[[self.flattenedCardIdArray objectAtIndex:self.currentIndex] intValue]];
 }
 
 //! gets a tags info from the db and hydrates
@@ -602,7 +590,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 }
 
 //! takes a sqlite result set and populates the properties of Tag
-- (void) hydrate: (FMResultSet*) rs
+- (void) hydrate: (FMResultSet *) rs
 {
   self.tagId = [rs intForColumn:@"tag_id"];
   self.tagDescription = [rs stringForColumn:@"description"];
@@ -623,7 +611,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   }
   [tagName release];
   [tagDescription release];
-  [combinedCardIdsForBrowseMode release];
+  [flattenedCardIdArray release];
   [cardLevelCounts release];
   [cardIds release];
   [lastFiveCards release];

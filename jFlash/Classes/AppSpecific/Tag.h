@@ -54,7 +54,7 @@ extern NSInteger const kLWEUninitializedTagId;
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
 @property (nonatomic, retain) NSMutableArray *cardIds;
-@property (nonatomic, retain) NSMutableArray *combinedCardIdsForBrowseMode;
+@property (nonatomic, retain) NSMutableArray *flattenedCardIdArray;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic, retain) NSMutableArray *lastFiveCards;
 @property (nonatomic) NSInteger tagId;
