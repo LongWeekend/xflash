@@ -15,7 +15,11 @@
 
 extern NSString * const kTagErrorDomain;
 extern NSUInteger const kAllBuriedAndHiddenError;
+extern NSUInteger const kLWETagUnknownError;
+
 extern NSInteger const kLWEUninitializedTagId;
+extern NSInteger const kLWEUnseenCardLevel;
+extern NSInteger const kLWELearnedCardLevel;
 
 @interface Tag : NSObject
 
@@ -39,7 +43,7 @@ extern NSInteger const kLWEUninitializedTagId;
 - (Card *) getPrevCard;
 - (NSInteger) cardCount;
 - (void) moveCard:(Card*) card toLevel:(NSInteger) nextLevel;
-- (void) cacheCardLevelCounts;
+- (void) recacheCardCountForEachLevel;
 - (void) freezeCardIds;
 - (NSMutableArray *) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;

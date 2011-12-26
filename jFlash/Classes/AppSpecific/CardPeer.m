@@ -223,7 +223,7 @@
 /**
  * Returns an array of Card ids for a given tagId
  */
-+ (NSArray*) retrieveCardIdsSortedByLevelForTag:(Tag *)tag
++ (NSArray *) retrieveCardIdsSortedByLevelForTag:(Tag *)tag
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];

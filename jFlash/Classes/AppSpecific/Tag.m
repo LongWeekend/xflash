@@ -13,8 +13,11 @@
 NSString * const kTagErrorDomain          = @"kTagErrorDomain";
 NSString * const LWETagDidSave = @"kTagDidSave";
 NSUInteger const kAllBuriedAndHiddenError = 999;
+NSUInteger const kLWETagUnknownError = 998;
 NSInteger const kLWEUninitializedTagId = -1;
 NSInteger const kLWEUninitializedCardCount = -1;
+NSInteger const kLWEUnseenCardLevel = 0;
+NSInteger const kLWELearnedCardLevel = 5;
 
 #define kLWETimesToRetryForNonRecentCardId 3
 
@@ -47,7 +50,6 @@ NSInteger const kLWEUninitializedCardCount = -1;
     _isFault = YES;
     self.tagId = kLWEUninitializedTagId;
     cardCount = kLWEUninitializedCardCount; // don't use setter here, has special behavior of updating DB 
-    self.currentIndex = 0;
     self.lastFiveCards = [NSMutableArray array];
   }
 	return self;
@@ -82,94 +84,86 @@ NSInteger const kLWEUninitializedCardCount = -1;
   // controls how many words to show from new before preferring seen words
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
-  BOOL hideBuriedCard = [settings boolForKey:APP_HIDE_BURIED_CARDS];
+  BOOL hideLearnedCards = [settings boolForKey:APP_HIDE_BURIED_CARDS];
   
   // Total number of cards in this set and its level
-  NSInteger numLevels = 5, levelOneTotal = 0;
-  NSInteger levelUnseenTotal = [[self.cardLevelCounts objectAtIndex:0] intValue];
+  NSInteger numLevels = 5;
+  NSInteger unseenCount = [[self.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] intValue];
   NSInteger totalCardsInSet = self.cardCount;
   
-  //if the hide burried cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
-  //and also tell that the totalCardsInSet is no longer the whole sets but the ones NOT in the buried section.
-  if (hideBuriedCard)
+  // This is a quick return case; if all cards are unseen, just return that
+  if (unseenCount == totalCardsInSet)
   {
+    return kLWEUnseenCardLevel;
+  }
+
+  //if the hide learned cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
+  //and also tell that the totalCardsInSet is no longer the whole sets but the ones NOT in the buried section.
+  if (hideLearnedCards)
+  {
+    // In this mode, we don't have 5 levels, we have four.
     numLevels = 4;
-    NSInteger totalCardsInBurried = [[self.cardLevelCounts objectAtIndex:5] intValue];
-    totalCardsInSet = totalCardsInSet - totalCardsInBurried;
-    if ((totalCardsInSet < 1) && (totalCardsInBurried > 0))
+    
+    // If all cards are learned, return "Learned" along with an error
+    NSInteger learnedCount = [[self.cardLevelCounts objectAtIndex:kLWELearnedCardLevel] intValue];
+    totalCardsInSet = totalCardsInSet - learnedCount;
+    if ((totalCardsInSet == 0) && (learnedCount > 0))
     {
-      //if all cards in burried, return 5 with error object instantiated if it has the pointer.
       if (error != NULL)
       {
-        //if turns out all cards have been mastered and all are hidden.
-        NSError *allCardsHidden = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
-        *error = allCardsHidden;
+        *error = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
       }
-      return 5;
-    }
-    else if ((totalCardsInSet < 1) && (totalCardsInBurried == 0))
-    {
-      //RARE CASES, but in case, the cards are all exhausted as they are all in "learned"
-      //but we dont have any "learned" cards. Strange..
-      LWE_ASSERT_EXC(NO, @"All cards are in learned, but we dont have anything in learned.");
-      LWE_LOG_ERROR(@"[UNKNOWN ERROR]All cards are in learned, but we dont have anything in learned. Sides, the 'hide' learned is ON.\nSelf: %@", self);
+      return kLWELearnedCardLevel;
     }
   }
   
-  //special cases where this method can return without any math calculation.
-  //the first one if highly unlikely there is less then 1 card in a set.
-  //second one is if the entire set has not been "started". - return with 0.
-  if ((totalCardsInSet < 1) || (levelUnseenTotal == totalCardsInSet))
-  {
-    return 0;
-  }
+  LWE_ASSERT_EXC(totalCardsInSet > 0, @"Beyond this point we assume we have some cards!");
   
   // Get m cards in n bins, figure out total percentages
   // Calculate different of weights and percentages and adjust accordingly
-  NSInteger i, tmpTotal = 0, denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
+  NSInteger denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
   
   // the guts to get the total of card seen so far
-  NSInteger tmpTotalArray[6];
-  for (i = 1; i <= numLevels; i++)
+  NSInteger totalArray[6];
+  for (NSInteger levelId = 1; levelId <= numLevels; levelId++)
   {
     // Get denominator values from cache/database
-    tmpTotal = [[self.cardLevelCounts objectAtIndex:i] intValue];
-    if (i == 1)
-    {
-      levelOneTotal = tmpTotal;
-    }
-    tmpTotalArray[i-1] = tmpTotal;
+    NSInteger tmpTotal = [[self.cardLevelCounts objectAtIndex:levelId] intValue];
+    totalArray[levelId-1] = tmpTotal;   // all the level references (& the math) are 1-indexed, the array is 0 indexed
     cardsSeenTotal = cardsSeenTotal + tmpTotal;
-    denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - i + 1)); 
-    numeratorTotal = numeratorTotal + (tmpTotal * i);
+    denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - levelId + 1)); 
+    numeratorTotal = numeratorTotal + (tmpTotal * levelId);
   }
   
   float p_unseen = [self calculateProbabilityOfUnseenWithCardsSeen:cardsSeenTotal 
                                                         totalCards:totalCardsInSet
                                                          numerator:numeratorTotal 
-                                                     levelOneCards:levelOneTotal];
+                                                     levelOneCards:totalArray[0]];
   
-  float randomNum = ((float)rand() / (float)RAND_MAX);
-  float p = 0, pTotal = 0;
+  CGFloat randomNum = ((float)rand() / (float)RAND_MAX);
+  CGFloat p = 0, pTotal = 0;
   //this for works like russian roulette where there is a 'randomNum' 
   //and each level has its own probability scaled 0-1 and if it sum-ed it would be 1.
   //this for enumerate through that level, accumulate the probability until it reach the 'randomNum'.
-  for (i = 1; i <= numLevels; i++)
+  for (NSInteger levelId = 1; levelId <= numLevels; levelId++)
   {
-    tmpTotal = tmpTotalArray[i-1];
-    weightedTotal = (tmpTotal * weightingFactor * (numLevels - i + 1));
-    p = ((float)weightedTotal / (float)denominatorTotal);
-    p = (1-p_unseen)*p;
+    // For this array, the levels are 0-indexed, so we have to minus one (see above)
+    weightedTotal = (totalArray[levelId-1] * weightingFactor * (numLevels - levelId + 1));
+    p = ((CGFloat)weightedTotal / (CGFloat)denominatorTotal);
+    p = (1 - p_unseen) * p;
     pTotal = pTotal + p;
 	  if (pTotal > randomNum)
     {
-      LWE_LOG(@"[Debug]Next level will be: %d", i);
-		  return i;
+		  return levelId;
 	  }
   }
   
-  LWE_LOG(@"[Shoudlnt happen?]calculate next level will return with next level: %d", 0);
-  return 0;
+  // If we get here, that would be an error (we should return in the above for loop) -- fail with level unseen
+  if (error != NULL)
+  {
+    *error = [NSError errorWithDomain:kTagErrorDomain code:kLWETagUnknownError userInfo:nil];
+  }
+  return kLWEUnseenCardLevel;
 }
 
 /**
@@ -179,87 +173,64 @@ NSInteger const kLWEUninitializedCardCount = -1;
 - (float)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSInteger wordsInStudyingBeforeTakingNewCard = [settings integerForKey:APP_MAX_STUDYING];
-  LWE_ASSERT_EXC(wordsInStudyingBeforeTakingNewCard, @"This value must be non-zero");
-  
+  NSInteger maxCardsToStudy = [settings integerForKey:APP_MAX_STUDYING];
   NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
+  LWE_ASSERT_EXC((maxCardsToStudy > 0), @"This value must be non-zero");
+  LWE_ASSERT_EXC((weightingFactor > 0), @"This value must be non-zero");
   
-  // Quick check to make sure we are not at the "end of a set". 
-  if (cardsSeenTotal == totalCardsInSet)
+  // Quick return of 0 probability if we've already seen all the cards in a set, or aren't taking any more
+  if ((cardsSeenTotal == totalCardsInSet) || (levelOneTotal >= maxCardsToStudy))
   {
-    return 0;
-  }
-  else if (cardsSeenTotal > totalCardsInSet) // error check
-  {
-    // This should not happen, it is likely that we need to re-cache TotalCards
-    LWE_LOG(@"CardTotal became more than totalCards... (%d, %d)", cardsSeenTotal, totalCardsInSet);
     return 0;
   }
   else
   {
-    // Sets probability if we have less cards in the study pool than MAX allowed
-    if (levelOneTotal < wordsInStudyingBeforeTakingNewCard && (totalCardsInSet - cardsSeenTotal) > 0)
-    {
-      float p_unseen = 0, mean = 0;
-      mean = (float)numeratorTotal / (float)cardsSeenTotal;
-      p_unseen = (mean - (float)1);
-      p_unseen = pow((p_unseen / (float) 4), weightingFactor);
-      p_unseen = p_unseen + (1-p_unseen)*(pow((wordsInStudyingBeforeTakingNewCard - cardsSeenTotal),.25)/pow(wordsInStudyingBeforeTakingNewCard,.25));
-      return p_unseen;
-    }
-    else if (levelOneTotal >= wordsInStudyingBeforeTakingNewCard)
-    {
-      return 0;
-    }
+    LWE_ASSERT_EXC((cardsSeenTotal < totalCardsInSet), @"To get to this point, there should be more cards in the set than cards seen");
     
-    //Should't happen?
-    LWE_LOG_ERROR(@"Is there ever a case where this is NO?  If so, we want to know what case!");
+    // Sets probability if we have less cards in the study pool than MAX allowed
+    CGFloat p_unseen = 0, mean = 0;
+    mean = (CGFloat)numeratorTotal / (CGFloat)cardsSeenTotal;
+    p_unseen = (mean - 1.0f);
+    p_unseen = pow((p_unseen / 4.0f), weightingFactor);
+    p_unseen = p_unseen + (1.0f - p_unseen)*(pow((maxCardsToStudy - cardsSeenTotal),0.25)/pow(maxCardsToStudy,0.25));
+    return p_unseen;
   }
-  return CGFLOAT_MAX;
 }
 
-#pragma mark -
+#pragma mark - Prep Card Ids, Deal with Card Ids
 
 //! Create a cache of the number of Card objects in each level
-- (void) cacheCardLevelCounts
+- (void) recacheCardCountForEachLevel
 {
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be six card level arrays");
 
   NSNumber *count = nil;
   NSInteger totalCount = 0;
-  NSMutableArray *cardLevelCountsTmp = [[NSMutableArray alloc] init];
+  NSMutableArray *cardLevelCountsTmp = [NSMutableArray array];
   for (NSInteger i = 0; i < 6; i++)
   {
-    count = [[NSNumber alloc] initWithInt:[[self.cardIds objectAtIndex:i] count]];
+    count = [NSNumber numberWithInt:[[self.cardIds objectAtIndex:i] count]];
     [cardLevelCountsTmp addObject:count];
     totalCount = totalCount + [count intValue];
-    [count release];
   }
   self.cardLevelCounts = cardLevelCountsTmp;
-  [cardLevelCountsTmp release];
   self.cardCount = totalCount;
 }
 
 
 /** Unarchive plist file containing the user's last session data */
-- (NSArray*) thawCardIds
+- (NSArray *) thawCardIds
 {
-  // TODO: Move these to cache (can be regenerated)
   NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
-  NSArray *tmpCardIds = [NSArray arrayWithContentsOfFile:path];
-  LWE_LOG(@"Tried unarchiving plist file at path: %@",path);
-  return tmpCardIds;
+  return [NSArray arrayWithContentsOfFile:path];
 }
 
 
 /** Archive current session data to a plist so we can re-start at same place in next session */
 - (void) freezeCardIds
 {
-  // TODO: Move these to cache (can be regenerated)
-  NSString* path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
-  LWE_LOG(@"Beginning plist freezing: %@",path);
+  NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
   [self.cardIds writeToFile:path atomically:YES];
-  LWE_LOG(@"Finished plist freeze");
 }
 
 
@@ -282,9 +253,149 @@ NSInteger const kLWEUninitializedCardCount = -1;
   self.flattenedCardIdArray = [self combineCardIds];
 
   // populate the card level counts
-	[self cacheCardLevelCounts];
+	[self recacheCardCountForEachLevel];
 }
 
+//! Concatenate cardId arrays for browse mode
+- (NSMutableArray *)combineCardIds
+{
+  NSMutableArray *allCardIds = [NSMutableArray arrayWithCapacity:self.cardCount];
+  for (NSArray *cardIdsInLevel in self.cardIds) 
+  {
+    [allCardIds addObjectsFromArray:cardIdsInLevel];
+  }
+  [allCardIds sortUsingSelector:@selector(compare:)];
+  return allCardIds;
+}
+
+
+/**
+ * Update level counts cache - (kept in memory how many cards are in each level)
+ */
+- (void) moveCard:(Card*)card toLevel:(NSInteger) nextLevel
+{
+  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
+  
+  // update the cardIds if necessary
+  if (nextLevel != card.levelId)
+  {
+    NSNumber *cardId = [NSNumber numberWithInt:card.cardId];
+
+    NSMutableArray *thisLevelCards = [self.cardIds objectAtIndex:card.levelId];
+    NSMutableArray *nextLevelCards = [self.cardIds objectAtIndex:nextLevel];
+    
+    NSInteger countBeforeRemove = [thisLevelCards count];
+    NSInteger countBeforeAdd = [nextLevelCards count];
+
+    // Now do the remove
+    LWE_ASSERT_EXC([thisLevelCards containsObject:cardId], @"Can't remove the card, it's no longer there!");
+    [thisLevelCards removeObject:cardId];
+    NSInteger countAfterRemove = [thisLevelCards count];
+
+    // Only do the add if remove was successful
+    if (countBeforeRemove == (countAfterRemove + 1))
+    {
+      [nextLevelCards addObject:cardId];
+      
+      // Now confirm the add
+      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
+      LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
+
+      [self recacheCardCountForEachLevel];
+    }
+  }
+}
+
+#pragma mark - Custom Getter & Setter - Card Count
+
+- (NSInteger) cardCount
+{
+  return cardCount;
+}
+
+//! Setter for cardCount; updates the database cache automatically
+- (void) setCardCount:(NSInteger)newCount
+{
+  NSInteger currentCount = cardCount;
+  if (currentCount == newCount)
+  {
+    // do nothing if its the same
+   return;
+  }
+  
+  // update the count in the database if not first load (e.g. cardCount = -1)
+  if (currentCount >= 0)
+  {
+    [TagPeer setCardCount:newCount forTag:self];
+  }
+
+  // set the variable to the new count - do this directly to bypass this setter!
+  cardCount = newCount; 
+}
+
+#pragma mark - Add & Remove Cards From the Tag
+
+/**
+ * Removes card from tag's memory arrays so they are out of the set
+ */
+- (void) removeCardFromActiveSet:(Card *)card
+{
+  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  [cardLevel removeObject:tmpNum];
+  [self.flattenedCardIdArray removeObject:tmpNum];
+  [self recacheCardCountForEachLevel];
+}
+
+/**
+ * Add card to tag's memory arrays
+ */
+- (void) addCardToActiveSet:(Card *)card
+{
+  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
+  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
+  [cardLevel addObject:tmpNum];
+  [self.flattenedCardIdArray addObject:tmpNum];
+  [self recacheCardCountForEachLevel];
+}
+
+#pragma mark - Get Cards
+
+/** 
+ *  \brief  Gets first card in browse mode or in a study mode.
+ */
+- (Card *)getFirstCardWithError:(NSError **)error
+{
+  // TODO: why does Tag care what mode we are in?  Seems fishy to me.
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  Card *card = nil;
+  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
+  {
+    LWE_ASSERT_EXC((self.currentIndex < [self.flattenedCardIdArray count]), @"the currentIndex is out of bounds?");
+    NSNumber *cardId = [self.flattenedCardIdArray objectAtIndex:self.currentIndex];
+    card = [CardPeer retrieveCardByPK:[cardId intValue]];
+  }
+  else
+  {
+    if ([settings integerForKey:@"card_id"] != 0)
+    {
+      card = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
+      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
+      [settings setInteger:0 forKey:@"card_id"];
+    }
+    else
+    {
+      NSError *theError = nil;
+      card = [self getRandomCard:0 error:&theError];
+      if ((card.levelId == kLWELearnedCardLevel) && (theError.code == kAllBuriedAndHiddenError) && (error != NULL))
+      {
+        LWE_LOG(@"Someone asks for a first card in a set: %@.\nHowever, the user have already mastered this study set, ask the user for a solution.", self);
+        *error = theError;
+      }
+    }
+  }
+  return card;
+}
 
 /**
  * Returns a Card object from the database randomly
@@ -297,7 +408,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   // determine the next level
   NSError *theError = nil;
   NSInteger next_level = [self calculateNextCardLevelWithError:&theError];
-  if ((next_level == 5) && (theError.domain == kTagErrorDomain) && (theError.code == kAllBuriedAndHiddenError))
+  if ((next_level == kLWELearnedCardLevel) && (theError.domain == kTagErrorDomain) && (theError.code == kAllBuriedAndHiddenError))
   {
     if (error != NULL) *error = theError;
   }
@@ -311,7 +422,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   {
     randomOffset = arc4random() % numCardsAtLevel;
   }
-
+  
   NSMutableArray *cardIdArray = [self.cardIds objectAtIndex:next_level];
   NSNumber *cardId = [cardIdArray objectAtIndex:randomOffset];
   
@@ -322,7 +433,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   {
     [self.lastFiveCards removeObjectAtIndex:0];
   }
-
+  
   // prevent getting the same card twice.
   NSInteger i = 0; // counts how many times we whiled against the array
   NSInteger j = 0; // second iterator to count tries that return the same card as before
@@ -366,154 +477,6 @@ NSInteger const kLWEUninitializedCardCount = -1;
   return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
-/**
- * Update level counts cache - (kept in memory how many cards are in each level)
- */
-- (void) moveCard:(Card*)card toLevel:(NSInteger) nextLevel
-{
-  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
-  
-  // update the cardIds if necessary
-  if (nextLevel != card.levelId)
-  {
-    NSNumber *cardId = [NSNumber numberWithInt:card.cardId];
-
-    NSMutableArray *thisLevelCards = [self.cardIds objectAtIndex:card.levelId];
-    NSMutableArray *nextLevelCards = [self.cardIds objectAtIndex:nextLevel];
-    
-    NSInteger countBeforeRemove = [thisLevelCards count];
-    NSInteger countBeforeAdd = [nextLevelCards count];
-
-    // Now do the remove
-    LWE_ASSERT_EXC([thisLevelCards containsObject:cardId], @"Can't remove the card, it's no longer there!");
-    [thisLevelCards removeObject:cardId];
-    NSInteger countAfterRemove = [thisLevelCards count];
-
-    // Only do the add if remove was successful
-    if (countBeforeRemove == (countAfterRemove + 1))
-    {
-      [nextLevelCards addObject:cardId];
-      
-      // Now confirm the add
-      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
-      LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
-
-      [self cacheCardLevelCounts];
-    }
-  }
-}
-
-#pragma mark - Custom Getter & Setter - Card Count
-
-- (NSInteger) cardCount
-{
-  return cardCount;
-}
-
-//! Setter for cardCount; updates the database cache automatically
-- (void) setCardCount:(NSInteger)newCount
-{
-  NSInteger currentCount = cardCount;
-  if (currentCount == newCount)
-  {
-    // do nothing if its the same
-   return;
-  }
-  
-  // update the count in the database if not first load (e.g. cardCount = -1)
-  if (currentCount >= 0)
-  {
-    [TagPeer setCardCount:newCount forTag:self];
-  }
-
-  // set the variable to the new count - do this directly to bypass this setter!
-  cardCount = newCount; 
-}
-
-#pragma mark - Add & Remove Cards From the Tag
-
-/**
- * Removes card from tag's memory arrays so they are out of the set
- */
-- (void) removeCardFromActiveSet:(Card *)card
-{
-  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
-  [cardLevel removeObject:tmpNum];
-  [self.flattenedCardIdArray removeObject:tmpNum];
-  [self cacheCardLevelCounts];
-}
-
-/**
- * Add card to tag's memory arrays
- */
-- (void) addCardToActiveSet:(Card *)card
-{
-  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
-  [cardLevel addObject:tmpNum];
-  [self.flattenedCardIdArray addObject:tmpNum];
-  [self cacheCardLevelCounts];
-}
-
-#pragma mark - Get Cards
-
-/** 
- *  \brief  Gets first card in browse mode or in a study mode.
- */
-- (Card *)getFirstCardWithError:(NSError **)error
-{
-  // TODO: why does Tag care what mode we are in?  Seems fishy to me.
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  Card *card = nil;
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
-  {
-    // TODO: in some cases the currentIndex can be beyond the range.  
-    LWE_ASSERT_EXC((self.currentIndex < [self.flattenedCardIdArray count]), @"WTF - how can the currentIndex get out of bounds?");
-    // We should figure out why, but for the time being I'll reset it to 0 instead of breaking (for production)
-    if (self.currentIndex >= [[self flattenedCardIdArray] count])
-    {
-      self.currentIndex = 0;
-    }
-    
-    LWE_ASSERT_EXC(([self.flattenedCardIdArray count] > 0), @"If this is 0, we are in trouble");
-    NSNumber *cardId = [self.flattenedCardIdArray objectAtIndex:self.currentIndex];
-    card = [CardPeer retrieveCardByPK:[cardId intValue]];
-  }
-  else
-  {
-    if ([settings integerForKey:@"card_id"] != 0)
-    {
-      card = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
-      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
-      [settings setInteger:0 forKey:@"card_id"];
-    }
-    else
-    {
-      NSError *theError = nil;
-      card = [self getRandomCard:0 error:&theError];
-      if (([card levelId] == 5) && ([theError code] == kAllBuriedAndHiddenError) && (error != NULL))
-      {
-        LWE_LOG(@"Someone asks for a first card in a set: %@.\nHowever, the user have already mastered this study set, ask the user for a solution.", self);
-        *error = theError;
-      }
-    }
-  }
-  return card;
-}
-
-
-//! Concatenate cardId arrays for browse mode
-- (NSMutableArray *) combineCardIds
-{
-  NSMutableArray *allCardIds = [NSMutableArray arrayWithCapacity:self.cardCount];
-  for (NSArray *cardIdsInLevel in self.cardIds) 
-  {
-    [allCardIds addObjectsFromArray:cardIdsInLevel];
-  }
-  [allCardIds sortUsingSelector:@selector(compare:)];
-  return allCardIds;
-}
 
 /**
  * Returns the next card in the list, resets index if at the end of the list
