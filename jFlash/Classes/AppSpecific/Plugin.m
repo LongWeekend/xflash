@@ -63,7 +63,7 @@
   }
   
   // Now set up the default values we didn't used to have.
-  [newDict setValue:[NSNumber numberWithInt:kLWEFileLocationDocuments] forKey:@"fileLocation"];
+  [newDict setValue:[NSNumber numberWithInt:LWEPluginLocationDocuments] forKey:@"fileLocation"];
   [newDict setValue:@"database" forKey:@"pluginType"];
   
   // Finally now that we have translated, run the normal constructor.
