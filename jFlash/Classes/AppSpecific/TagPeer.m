@@ -18,8 +18,8 @@ NSString * const LWETagContentCardAdded = @"LWETagContentCardAdded";
 NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
 @interface TagPeer ()
-+ (NSArray*) _retrieveTagListWithSQL:(NSString*)sql;
-+ (Tag*) _retrieveTagWithSQL:(NSString*)sql;
++ (NSArray *) _tagListWithResultSet:(FMResultSet *)rs;
++ (Tag *) _tagWithResultSet:(FMResultSet *)rs;
 @end
 
 //! Handles retrieval, creation, deletion, and updating of Tag objects in database
@@ -52,8 +52,6 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
     tmpTag.tagId = tagId;
     [TagPeer setCardCount:numCards forTag:tmpTag];
     [tmpTag release];
-    
-    [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = %d WHERE tag_id = %d",numCards,tagId]];
     LWE_LOG(@"tag id %d has %d cards",tagId,numCards);
   }
   [userTagsRS close];
@@ -62,8 +60,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 + (void) setCardCount:(NSInteger)newCount forTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [NSString stringWithFormat:@"UPDATE tags SET count = '%d' WHERE tag_id = '%d'",newCount,tag.tagId];
-  [db executeUpdate:sql];
+  [db.dao executeUpdate:@"UPDATE tags SET count = '?' WHERE tag_id = '?'",newCount,tag.tagId];
 }
 
 #pragma mark - Membership Methods
@@ -86,9 +83,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   {
     LWE_LOG(@"Editing current set tags");
 
-    NSString *countSql = [NSString stringWithFormat:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '%d'", tag.tagId];
-    FMResultSet *rs = [db executeQuery:countSql];
-    
+    FMResultSet *rs = [db.dao executeQuery:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '?'",tag.tagId];
     NSInteger totalCard = 0;
     while ([rs next])
     {
@@ -113,14 +108,13 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   }
 
   // Now execute the deletion from card_tag_link
-	NSString *sql = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tag.tagId];
-  [db executeUpdate:sql];
+  [db.dao executeUpdate:@"DELETE FROM card_tag_link WHERE card_id = '?' AND tag_id = '?'",card.cardId,tag.tagId];
 
   // Only update this stuff if not the active set
   if ([tag isEqual:currentState.activeTag] == NO)
   {
     // Update the tag's card count cache
-    [db executeUpdate:[NSString stringWithFormat:@"UPDATE tags SET count = (count - 1) WHERE tag_id = %d",tag.tagId]];
+    [db.dao executeUpdate:@"UPDATE tags SET count = (count - 1) WHERE tag_id = '?'",tag.tagId];
     
     if (db.dao.hadError)
     {
@@ -153,8 +147,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 {
   BOOL returnVal = NO;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM card_tag_link WHERE card_id = '%d' AND tag_id = '%d'",card.cardId,tag.tagId];
-	FMResultSet *rs = [db executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM card_tag_link WHERE card_id = '?' AND tag_id = '?'",card.cardId,tag.tagId];
 	while ([rs next])
   {
     returnVal = YES;
@@ -169,8 +162,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *membershipListArray = [NSMutableArray array];
   NSInteger tmpTagId = 0;
-	NSString *sql = [NSString stringWithFormat:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = '%d'",card.cardId];
-	FMResultSet *rs = [db executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = '?'",card.cardId];
 	while ([rs next])
   {
     tmpTagId = [rs intForColumn:@"tag_id"];
@@ -196,13 +188,9 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
 
-  // Insert tag link
-	NSString *sql  = [NSString stringWithFormat:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (%d,%d)",card.cardId,tag.tagId];
-  [db executeUpdate:sql];
-
-  // Update tag count
-	sql = [NSString stringWithFormat:@"UPDATE tags SET count = (count + 1) WHERE tag_id = %d",tag.tagId];
-  [db executeUpdate:sql];
+  // Insert tag link & update its count
+  [db.dao executeUpdate:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (?,?)",card.cardId,tag.tagId];
+  [db.dao executeUpdate:@"UPDATE tags SET count = (count + 1) WHERE tag_id = '?'",tag.tagId];
 
   if (db.dao.hadError)
   {
@@ -223,12 +211,9 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
 #pragma mark - Private Methods
 
-//! Gets Tag array based on the SQL you give us
-+ (NSArray*) _retrieveTagListWithSQL:(NSString*)sql
++ (NSArray *) _tagListWithResultSet:(FMResultSet *)rs
 {
 	NSMutableArray *tags = [NSMutableArray array];
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:sql];
 	while ([rs next])
   {
 		Tag *tmpTag = [[Tag alloc] init];
@@ -240,11 +225,8 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 	return (NSArray*)tags;
 }
 
-//! Gets a Tag based on SQL you give us
-+ (Tag*) _retrieveTagWithSQL:(NSString*)sql
++ (Tag *) _tagWithResultSet:(FMResultSet *)rs
 {
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:sql];
   // TODO: it would make more sense to return NIL if there were no tag, not an empty tag object.
   Tag *tmpTag = [[[Tag alloc] init] autorelease];
 	while ([rs next])
@@ -258,78 +240,85 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 #pragma mark - Convenience Methods to Abstract SQL
 
 //! Gets system Tag objects as array
-+ (NSArray*) retrieveSysTagList
++ (NSArray *) retrieveSysTagList
 {
-  return [TagPeer _retrieveTagListWithSQL:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 0 ORDER BY utag_name ASC"];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db executeQuery:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 0 ORDER BY utag_name ASC"];
+  return [TagPeer _tagListWithResultSet:rs];
 }
 
 //! Gets user Tag objects as array
-+ (NSArray*) retrieveUserTagList
++ (NSArray *) retrieveUserTagList
 {
-  return [TagPeer _retrieveTagListWithSQL:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 OR tag_id = 0 ORDER BY utag_name ASC"];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db executeQuery:@"SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 OR tag_id = 0 ORDER BY utag_name ASC"];
+  return [TagPeer _tagListWithResultSet:rs];
 }
 
 //! Gets system Tag objects that have card in them - as array
-+ (NSArray*) retrieveSysTagListContainingCard:(Card*)card
++ (NSArray *) retrieveSysTagListContainingCard:(Card*)card
 {
-	NSString *sql = [NSString stringWithFormat:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = %d AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",card.cardId];
-  return [TagPeer _retrieveTagListWithSQL:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = ? AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC",[NSNumber numberWithInt:card.cardId]];
+  return [TagPeer _tagListWithResultSet:rs];
 }
 
 //! Returns array of Tag objects based on Group membership
-+ (NSArray*) retrieveTagListByGroupId:(NSInteger)groupId
++ (NSArray *) retrieveTagListByGroupId:(NSInteger)groupId
 {
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM tags t, group_tag_link l WHERE t.tag_id = l.tag_id AND l.group_id = %d ORDER BY t.tag_name ASC",groupId];
-	return [TagPeer _retrieveTagListWithSQL:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags t, group_tag_link l WHERE t.tag_id = l.tag_id AND l.group_id = ? ORDER BY t.tag_name ASC",[NSNumber numberWithInt:groupId]];
+	return [TagPeer _tagListWithResultSet:rs];
 }
 
 //! Returns a Tag array containing any Tag with a title LIKE '%string%'
-+ (NSArray*) retrieveTagListLike:(NSString*)string
++ (NSArray *) retrieveTagListLike:(NSString*)string
 {
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM tags WHERE tag_name LIKE '%%%@%%' ORDER BY tag_name ASC",string];
-	return [TagPeer _retrieveTagListWithSQL:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  // This generates "%string%"; we pass the parameter binding the string w/ the like % attached
+  NSString *searchString = [NSString stringWithFormat:@"%%%@%%",string];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_name LIKE ? ORDER BY tag_name ASC",searchString];
+	return [TagPeer _tagListWithResultSet:rs];
 }
 
 //! Gets a Tag by its id (PK)
 + (Tag*) retrieveTagById:(NSInteger)tagId
 {
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM tags WHERE tag_id = %d LIMIT 1",tagId];
-  return [TagPeer _retrieveTagWithSQL:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_id = ? LIMIT 1",[NSNumber numberWithInt:tagId]];
+  return [TagPeer _tagWithResultSet:rs];
 }
 
 //! Gets a Tag by its name
 + (Tag*) retrieveTagByName:(NSString*)tagName
 {
-	NSString *sql = [NSString stringWithFormat:@"SELECT * FROM tags WHERE tag_name like '%@' LIMIT 1",tagName];
-  return [TagPeer _retrieveTagWithSQL:sql];
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_name LIKE ? LIMIT 1",tagName];
+  return [TagPeer _tagWithResultSet:rs];
 }
 
 #pragma mark - Create & Delete
 
 //! adds a new tag to the database, returns new tag object, nil in case of error
-+ (Tag*) createTagNamed:(NSString*)tagName inGroup:(Group*)owner
++ (Tag *) createTagNamed:(NSString*)tagName inGroup:(Group*)owner
 {
   return [[self class] createTagNamed:tagName inGroup:owner withDescription:@""];
 }
 
 //! Adds a new tag to the database, returns new tag object, nil if error
-+ (Tag*) createTagNamed:(NSString*)tagName inGroup:(Group*)owner withDescription:(NSString*)description;
++ (Tag *) createTagNamed:(NSString*)tagName inGroup:(Group*)owner withDescription:(NSString*)description;
 {
   LWE_ASSERT_EXC([tagName isKindOfClass:[NSString class]],@"You must pass a string as the tag name");
-  
-  // Escape the string for SQLITE-style escapes (cannot use backslash!)
-  tagName = [LWEDatabase sqliteEscapedString:tagName];
-  NSString *sql = [NSString stringWithFormat:@"INSERT INTO tags (tag_name, description) VALUES ('%@', '%@')",tagName,[LWEDatabase sqliteEscapedString:description]];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db executeUpdate:sql];
+  [db.dao executeUpdate:@"INSERT INTO tags (tag_name, description) VALUES (?,?)",tagName,description];
   
   NSInteger lastTagId = (NSInteger)db.dao.lastInsertRowId;
   Tag *createdTag = nil;
   if (db.dao.hadError == NO)
   {
     // Link it & then update the tag card count cache
-    [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES ('%d','%d')",lastTagId,owner.groupId]];
-    [db executeUpdate:[NSString stringWithFormat:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = '%d'",owner.groupId]];
+    [db.dao executeUpdate:@"INSERT INTO group_tag_link (tag_id, group_id) VALUES (?,?)",[NSNumber numberWithInt:lastTagId],[NSNumber numberWithInt:owner.groupId]];
+    [db.dao executeUpdate:@"UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = ?",[NSNumber numberWithInt:owner.groupId]];
     createdTag = [TagPeer retrieveTagById:lastTagId];
   }
   return createdTag;
@@ -341,8 +330,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   
   // First get owner id of a tag
-	NSString *sql4  = [NSString stringWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d",tag.tagId];
-  FMResultSet *rs = [db executeQuery:sql4];
+  FMResultSet *rs = [db.dao executeQuery:@"SELECT group_id FROM group_tag_link WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
   NSInteger groupId = 0;
 	while ([rs next])
   {
@@ -351,13 +339,10 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   [rs close];
   
   // Now do everything
-	NSString *sql  = [NSString stringWithFormat:@"DELETE FROM card_tag_link WHERE tag_id = %d",tag.tagId];
-  NSString *sql2 = [NSString stringWithFormat:@"DELETE FROM tags WHERE tag_id = %d",tag.tagId];
-  NSString *sql3 = [NSString stringWithFormat:@"UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = '%d'",groupId];
   [db.dao beginTransaction];
-  [db.dao executeUpdate:sql];
-  [db.dao executeUpdate:sql2];
-  [db.dao executeUpdate:sql3];
+  [db.dao executeUpdate:@"DELETE FROM card_tag_link WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
+  [db.dao executeUpdate:@"DELETE FROM tags WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
+  [db.dao executeUpdate:@"UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = ?",[NSNumber numberWithInt:groupId]];
   [db.dao commit];
   
   if (db.dao.hadError)

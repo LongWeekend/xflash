@@ -59,10 +59,11 @@ NSInteger const kLWEUninitializedCardCount = -1;
 {
   LWE_ASSERT_EXC((self.tagId != kLWEUninitializedTagId),@"The tag must already exist to be saved, use createTagNamed in TagPeer to create a tag");
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  NSString *sql = [NSString stringWithFormat:@"UPDATE tags SET tag_name = '%@', description = '%@' WHERE tag_id = %d", [LWEDatabase sqliteEscapedString:self.tagName], [LWEDatabase sqliteEscapedString:self.tagDescription], self.tagId];
-  [db executeUpdate:sql];
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
+  BOOL success = [db.dao executeUpdate:@"UPDATE tags SET tag_name = ?, description = ? WHERE tag_id = ?",self.tagName,self.tagDescription,[NSNumber numberWithInt:self.tagId]];
+  if (success)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
+  }
 }
 
 //! Refreshes self from the DB if a didSave notification is called
