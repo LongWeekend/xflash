@@ -8,6 +8,10 @@
 
 #import "Group.h"
 
+NSInteger const kLWEUninitializedGroupId = -99;
+
+#define LWE_TOP_LEVEL_GROUP_ID -1
+
 //! Group contains Tag objects for display to the user in categorical hierarchies
 @implementation Group
 @synthesize groupId, groupName, ownerId, tagCount, recommended, groupDescription;
@@ -17,6 +21,7 @@
   self = [super init];
   if (self)
   {
+    self.groupId = kLWEUninitializedGroupId;
     self.tagCount = -1;
     self.childGroupCount = -1;
   }
@@ -36,15 +41,15 @@
 
 - (BOOL) isTopLevelGroup
 {
-  return (self.ownerId == -1);
+  return (self.ownerId == LWE_TOP_LEVEL_GROUP_ID);
 }
 
 //! Retrieves out a list of Tag objects based on this Group ID (direct children)
-- (NSArray*) childTags
+- (NSArray *) childTags
 {
-  if (self.groupId >= 0)
+  if (self.groupId != kLWEUninitializedGroupId)
   {
-    return [TagPeer retrieveTagListByGroupId:groupId];
+    return [TagPeer retrieveTagListByGroupId:self.groupId];
   }
   else
   {

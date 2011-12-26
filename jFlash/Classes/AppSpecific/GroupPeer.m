@@ -22,8 +22,7 @@
 + (Group*) retrieveGroupById:(NSInteger)groupId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE group_id = %d LIMIT 1",groupId];
-	FMResultSet *rs = [db executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM groups WHERE group_id = ? LIMIT 1",[NSNumber numberWithInt:groupId]];
   Group *tmpGroup = nil;
   while ([rs next])
   {
@@ -31,7 +30,6 @@
 		[tmpGroup hydrate:rs];
 	}
 	[rs close];
-	[sql release];
 	return tmpGroup;  
 }
 
@@ -39,15 +37,13 @@
 + (NSInteger) parentGroupIdOfTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT group_id FROM group_tag_link WHERE tag_id = %d LIMIT 1",tag.tagId];
-	FMResultSet *rs = [db executeQuery:sql];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT group_id FROM group_tag_link WHERE tag_id = ? LIMIT 1",[NSNumber numberWithInt:tag.tagId]];
   NSInteger groupId = 0;
 	while ([rs next]) 
   {
     groupId = [rs intForColumn:@"group_id"];
 	}
 	[rs close];
-	[sql release];
   return groupId;
 }
 
@@ -55,9 +51,8 @@
 +(NSArray*) retrieveGroupsByOwner:(NSInteger)ownerId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM groups WHERE owner_id = ? ORDER BY recommended DESC, group_name ASC",[NSNumber numberWithInt:ownerId]];
 	NSMutableArray *groups = [NSMutableArray array];
-	NSString *sql = [[NSString alloc] initWithFormat:@"SELECT * FROM groups WHERE owner_id = '%d' ORDER BY recommended DESC, group_name ASC",ownerId];
-	FMResultSet *rs = [db executeQuery:sql];
 	while ([rs next])
   {
 		Group *tmpGroup = [[[Group alloc] init] autorelease];
@@ -65,7 +60,6 @@
 		[groups addObject:tmpGroup];
 	}
 	[rs close];
-	[sql release];
 	return (NSArray*)groups;  
 }
 

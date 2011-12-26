@@ -7,6 +7,9 @@
 //
 
 #import "FMResultSet.h"
+
+extern NSInteger const kLWEUninitializedGroupId;
+
 @interface Group : NSObject
 {
   NSInteger childGroupCount;
