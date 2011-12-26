@@ -59,7 +59,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 + (void) setCardCount:(NSInteger)newCount forTag:(Tag*)tag
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  [db.dao executeUpdate:@"UPDATE tags SET count = '?' WHERE tag_id = '?'",[NSNumber numberWithInt:newCount],[NSNumber numberWithInt:tag.tagId]];
+  [db.dao executeUpdate:@"UPDATE tags SET count = ? WHERE tag_id = ?",[NSNumber numberWithInt:newCount],[NSNumber numberWithInt:tag.tagId]];
 }
 
 #pragma mark - Membership Methods
@@ -82,7 +82,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   {
     LWE_LOG(@"Editing current set tags");
 
-    FMResultSet *rs = [db.dao executeQuery:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = '?'",[NSNumber numberWithInt:tag.tagId]];
+    FMResultSet *rs = [db.dao executeQuery:@"SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
     NSInteger totalCard = 0;
     while ([rs next])
     {
@@ -107,13 +107,13 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   }
 
   // Now execute the deletion from card_tag_link
-  [db.dao executeUpdate:@"DELETE FROM card_tag_link WHERE card_id = '?' AND tag_id = '?'",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
+  [db.dao executeUpdate:@"DELETE FROM card_tag_link WHERE card_id = ? AND tag_id = ?",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
 
   // Only update this stuff if not the active set
   if ([tag isEqual:currentState.activeTag] == NO)
   {
     // Update the tag's card count cache
-    [db.dao executeUpdate:@"UPDATE tags SET count = (count - 1) WHERE tag_id = '?'",[NSNumber numberWithInt:tag.tagId]];
+    [db.dao executeUpdate:@"UPDATE tags SET count = (count - 1) WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
     
     if (db.dao.hadError)
     {
@@ -146,7 +146,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 {
   BOOL returnVal = NO;
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM card_tag_link WHERE card_id = '?' AND tag_id = '?'",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM card_tag_link WHERE card_id = ? AND tag_id = ?",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
 	while ([rs next])
   {
     returnVal = YES;
@@ -161,7 +161,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   NSMutableArray *membershipListArray = [NSMutableArray array];
   NSInteger tmpTagId = 0;
-	FMResultSet *rs = [db.dao executeQuery:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = '?'",[NSNumber numberWithInt:card.cardId]];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT t.tag_id AS tag_id FROM tags t, card_tag_link c WHERE t.tag_id = c.tag_id AND c.card_id = ?",[NSNumber numberWithInt:card.cardId]];
 	while ([rs next])
   {
     tmpTagId = [rs intForColumn:@"tag_id"];
@@ -189,7 +189,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 
   // Insert tag link & update its count
   [db.dao executeUpdate:@"INSERT INTO card_tag_link (card_id,tag_id) VALUES (?,?)",[NSNumber numberWithInt:card.cardId],[NSNumber numberWithInt:tag.tagId]];
-  [db.dao executeUpdate:@"UPDATE tags SET count = (count + 1) WHERE tag_id = '?'",[NSNumber numberWithInt:tag.tagId]];
+  [db.dao executeUpdate:@"UPDATE tags SET count = (count + 1) WHERE tag_id = ?",[NSNumber numberWithInt:tag.tagId]];
 
   if (db.dao.hadError)
   {
@@ -281,7 +281,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 }
 
 //! Gets a Tag by its id (PK)
-+ (Tag*) retrieveTagById:(NSInteger)tagId
++ (Tag *) retrieveTagById:(NSInteger)tagId
 {
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
   FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_id = ? LIMIT 1",[NSNumber numberWithInt:tagId]];

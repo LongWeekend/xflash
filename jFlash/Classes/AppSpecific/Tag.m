@@ -593,7 +593,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
 {
   LWE_ASSERT_EXC(self.tagId != kLWEUninitializedTagId, @"Hydrate called with uninitialized tag ID");
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM tags WHERE tag_id = %d LIMIT 1",self.tagId]];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_id = ? LIMIT 1",[NSNumber numberWithInt:self.tagId]];
 	while ([rs next])
   {
 		[self hydrate:rs];
