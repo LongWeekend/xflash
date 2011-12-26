@@ -44,12 +44,12 @@
 
 - (BOOL) shouldSendCardChangeNotification
 {
-  return self.resetCardOnly;
+  return (self.settingChanged && self.resetCardOnly);
 }
 
 - (BOOL) shouldSendChangeNotification
 {
-  return (self.resetCardOnly == NO);
+  return (self.settingChanged && (self.resetCardOnly == NO));
 }
 
 - (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc
