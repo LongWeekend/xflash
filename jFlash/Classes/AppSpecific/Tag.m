@@ -490,22 +490,15 @@ NSInteger const kLWEUninitializedCardCount = -1;
   if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
   {
     // TODO: in some cases the currentIndex can be beyond the range.  
-    // We should figure out why, but for the time being I'll reset it to 0 instead of breaking
+    LWE_ASSERT_EXC((self.currentIndex < [self.flattenedCardIdArray count]), @"WTF - how can the currentIndex get out of bounds?");
+    // We should figure out why, but for the time being I'll reset it to 0 instead of breaking (for production)
     if (self.currentIndex >= [[self flattenedCardIdArray] count])
     {
       self.currentIndex = 0;
     }
     
-    NSArray *combinedCards = [self flattenedCardIdArray];
-    NSNumber *cardId = nil;
-    if ([combinedCards count] > 0)
-    {
-      cardId = [combinedCards objectAtIndex:self.currentIndex];
-    }
-    else
-    {
-      cardId = [NSNumber numberWithInt:0];
-    }
+    LWE_ASSERT_EXC(([self.flattenedCardIdArray count] > 0), @"If this is 0, we are in trouble");
+    NSNumber *cardId = [self.flattenedCardIdArray objectAtIndex:self.currentIndex];
     card = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
