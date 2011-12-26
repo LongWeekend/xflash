@@ -62,8 +62,13 @@
     }
   }
   
-  // Now set up the default values we didn't used to have.
-  [newDict setValue:[NSNumber numberWithInt:LWEPluginLocationDocuments] forKey:@"fileLocation"];
+  // Now set up the default values we didn't used to have - for location, CARDS_DB gets special treatment
+  NSNumber *fileLocation = [NSNumber numberWithInt:LWEPluginLocationDocuments];
+  if ([[newDict objectForKey:@"pluginId"] isEqualToString:CARD_DB_KEY])
+  {
+    fileLocation = [NSNumber numberWithInt:LWEPluginLocationBundle];
+  }
+  [newDict setValue:fileLocation forKey:@"fileLocation"];
   [newDict setValue:@"database" forKey:@"pluginType"];
   
   // Finally now that we have translated, run the normal constructor.
