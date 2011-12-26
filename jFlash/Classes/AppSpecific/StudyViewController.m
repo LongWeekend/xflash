@@ -23,7 +23,7 @@
 - (void) _setupScrollView;
 - (void)_setupPageControl:(NSInteger)page;
 - (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
-- (Card*) _getNextCard:(NSString*)directionOrNil;
+- (Card*) _getNextCardWithDirection:(NSString*)directionOrNil currentCard:(Card *)theCurrentCard;
 @end
 
 @implementation StudyViewController
@@ -362,7 +362,10 @@
       [UserHistoryPeer recordWrongForCard:self.currentCard inTag:self.currentCardSet];
       break;      
   }
-  [self doChangeCard:[self _getNextCard:direction] direction:direction];
+  
+  // Get the next card and switch to it
+  Card *nextCard = [self _getNextCardWithDirection:direction currentCard:self.currentCard];
+  [self doChangeCard:nextCard direction:direction];
 }
 
 
@@ -453,13 +456,13 @@
 
 #pragma mark - Private methods to setup cards (called every transition)
 
-- (Card*) _getNextCard:(NSString*)directionOrNil
+- (Card*) _getNextCardWithDirection:(NSString*)directionOrNil currentCard:(Card *)theCurrentCard
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(getNextCard:afterCard:direction:)])
   {
-    return [self.delegate getNextCard:self.currentCardSet afterCard:self.currentCard direction:(NSString*)directionOrNil];
+    return [self.delegate getNextCard:self.currentCardSet afterCard:theCurrentCard direction:(NSString*)directionOrNil];
   }
-  return self.currentCard; // just keep the same card if the delegate cannot help us
+  return theCurrentCard; // just keep the same card if the delegate cannot help us
 }
 
 /** 
@@ -558,10 +561,8 @@
     [self.currentCardSet removeCardFromActiveSet:theCard];
     if ([theCard isEqual:self.currentCard])
     {
-      // Get a new card
-      Card *nextCard = [self _getNextCard:nil];
-      
-      // Change to the new card we just retrieved
+      // Get a new card & change to it
+      Card *nextCard = [self _getNextCardWithDirection:nil currentCard:self.currentCard];
       [self doChangeCard:nextCard direction:nil];
     }
     else
