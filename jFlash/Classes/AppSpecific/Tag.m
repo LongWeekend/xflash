@@ -53,27 +53,6 @@ NSInteger const kLWEUninitializedCardCount = -1;
 	return self;
 }
 
-//! Saves the tag to the DB. WARNING: this only updates the tags basic info, creation is handled in TagPeer for historical reasons.
-// TODO: Should likely be refactored to work as a save method instead of TagPeer creation.
-- (void) save
-{
-  LWE_ASSERT_EXC((self.tagId != kLWEUninitializedTagId),@"The tag must already exist to be saved, use createTagNamed in TagPeer to create a tag");
-  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-  BOOL success = [db.dao executeUpdate:@"UPDATE tags SET tag_name = ?, description = ? WHERE tag_id = ?",self.tagName,self.tagDescription,[NSNumber numberWithInt:self.tagId]];
-  if (success)
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
-  }
-}
-
-//! Refreshes self from the DB if a didSave notification is called
-- (void)tagDidSave:(NSNotification *)notification
-{
-  if ([self isEqual:notification.object] && (self.isFault == NO)) // we only care if it's us & this isn't a faulted entry
-  {
-    [self hydrate];
-  }
-}
 
 /**
  * Gets the group for this tag and returns the id
@@ -390,20 +369,18 @@ NSInteger const kLWEUninitializedCardCount = -1;
 /**
  * Update level counts cache - (kept in memory how many cards are in each level)
  */
-- (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel
+- (void) moveCard:(Card*)card toLevel:(NSInteger) nextLevel
 {
   LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
   
   // update the cardIds if necessary
   if (nextLevel != card.levelId)
   {
-    LWE_LOG(@"Moving card Id %d From level %d to level %d",card.cardId,card.levelId,nextLevel);
     NSNumber *cardId = [NSNumber numberWithInt:card.cardId];
 
     NSMutableArray *thisLevelCards = [self.cardIds objectAtIndex:card.levelId];
     NSMutableArray *nextLevelCards = [self.cardIds objectAtIndex:nextLevel];
     
-    // First do the remove
     NSInteger countBeforeRemove = [thisLevelCards count];
     NSInteger countBeforeAdd = [nextLevelCards count];
 
@@ -416,13 +393,13 @@ NSInteger const kLWEUninitializedCardCount = -1;
     if (countBeforeRemove == (countAfterRemove + 1))
     {
       [nextLevelCards addObject:cardId];
+      
+      // Now confirm the add
+      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
+      LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
+
+      [self cacheCardLevelCounts];
     }
-    NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
-    // Consistency checks
-    LWE_ASSERT_EXC(((countAfterRemove+1) == countBeforeRemove),@"The number after remove (%d) should be 1 less than count before remove (%d)",countAfterRemove,countBeforeRemove);
-    LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
-    
-    [self cacheCardLevelCounts];
   }
 }
 
@@ -453,7 +430,7 @@ NSInteger const kLWEUninitializedCardCount = -1;
   cardCount = newCount; 
 }
 
-#pragma mark -
+#pragma mark - Add & Remove Cards From the Tag
 
 /**
  * Removes card from tag's memory arrays so they are out of the set
@@ -478,6 +455,8 @@ NSInteger const kLWEUninitializedCardCount = -1;
   [self.flattenedCardIdArray addObject:tmpNum];
   [self cacheCardLevelCounts];
 }
+
+#pragma mark - Get Cards
 
 /** 
  *  \brief  Gets first card in browse mode or in a study mode.
@@ -569,6 +548,30 @@ NSInteger const kLWEUninitializedCardCount = -1;
   return [CardPeer retrieveCardByPK:[[self.flattenedCardIdArray objectAtIndex:self.currentIndex] intValue]];
 }
 
+#pragma mark - Database Related
+
+//! Saves the tag to the DB. WARNING: this only updates the tags basic info, creation is handled in TagPeer for historical reasons.
+// TODO: Should likely be refactored to work as a save method instead of TagPeer creation.
+- (void) save
+{
+  LWE_ASSERT_EXC((self.tagId != kLWEUninitializedTagId),@"The tag must already exist to be saved, use createTagNamed in TagPeer to create a tag");
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  BOOL success = [db.dao executeUpdate:@"UPDATE tags SET tag_name = ?, description = ? WHERE tag_id = ?",self.tagName,self.tagDescription,[NSNumber numberWithInt:self.tagId]];
+  if (success)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
+  }
+}
+
+//! Refreshes self from the DB if a didSave notification is called
+- (void)tagDidSave:(NSNotification *)notification
+{
+  if ([self isEqual:notification.object] && (self.isFault == NO)) // we only care if it's us & this isn't a faulted entry
+  {
+    [self hydrate];
+  }
+}
+
 //! gets a tags info from the db and hydrates
 - (void) hydrate
 {
@@ -596,6 +599,8 @@ NSInteger const kLWEUninitializedCardCount = -1;
   _isFault = NO;
 }
 
+#pragma mark - Class Plumbing
+
 - (void) dealloc
 {
   if (self.isFault == NO)
@@ -611,12 +616,14 @@ NSInteger const kLWEUninitializedCardCount = -1;
 	[super dealloc];
 }
 
+#pragma mark - NSObject Protocol
+
 - (BOOL)isEqual:(id)object
 {
   if ([object isKindOfClass:[self class]])
   {
     Tag *anotherTag = (Tag *)object;
-    return [anotherTag tagId] == [self tagId];
+    return (anotherTag.tagId == self.tagId);
   }
   return NO;
 }

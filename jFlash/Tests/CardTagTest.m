@@ -34,7 +34,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   
   // Now we cause an error but it's robust enough to work anyway
   Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
-  [longWeekendFavTag updateLevelCounts:card nextLevel:1];
+  [longWeekendFavTag moveCard:card toLevel:1];
   [longWeekendFavTag setCardCount:1];
   nextCardLevel = [longWeekendFavTag calculateNextCardLevelWithError:&error];
   STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
@@ -50,7 +50,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   STAssertNotNil(card,@"Could not get random card");
   STAssertNil(error, @"Error should be nil, but wasn't: %@",error);
   
-  [longWeekendFavTag updateLevelCounts:card nextLevel:5];
+  [longWeekendFavTag moveCard:card toLevel:5];
   NSInteger count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
 }

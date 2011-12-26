@@ -85,7 +85,7 @@
   [db executeUpdate:sql];
   [sql release];
   
-  [tag updateLevelCounts:card nextLevel:nextLevel];
+  [tag moveCard:card toLevel:nextLevel];
 }
 
 

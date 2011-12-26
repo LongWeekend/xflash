@@ -38,7 +38,7 @@ extern NSInteger const kLWEUninitializedTagId;
 - (Card *) getNextCard;
 - (Card *) getPrevCard;
 - (NSInteger) cardCount;
-- (void) updateLevelCounts:(Card*) card nextLevel:(NSInteger) nextLevel;
+- (void) moveCard:(Card*) card toLevel:(NSInteger) nextLevel;
 - (void) cacheCardLevelCounts;
 - (void) freezeCardIds;
 - (NSMutableArray *) thawCardIds;
