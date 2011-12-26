@@ -87,6 +87,35 @@
   [self _reloadTableData];
 	[self _changeLastUpdateLabel];
   
+  // Is a little bit ghetto for now.  We could consider updating this class.
+  self.btnCheckUpdate.layer.borderWidth = 3.0f;
+  self.btnCheckUpdate.layer.cornerRadius = 9.0f;
+  
+  // Set YELLOW, not RED
+  NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
+  UIColor *color = nil;
+  //#e4ce9f, 228,206,159 - top of top
+  color = [UIColor colorWithRed:0.891 green:0.805 blue:0.621 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#efcd64, 239,205,100 - bottom of top
+  color = [UIColor colorWithRed:0.933 green:0.8 blue:0.39 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#efbc22, 239,188,34 - top of bottom
+  color = [UIColor colorWithRed:0.933 green:0.734 blue:0.133 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#f6dc24, 246,220,36 - bottom of bottom
+  color = [UIColor colorWithRed:0.960 green:0.859 blue:0.141 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  self.btnCheckUpdate.normalGradientColors = colors;
+  
+  self.btnCheckUpdate.normalGradientLocations = [NSArray arrayWithObjects:
+                                  [NSNumber numberWithFloat:1.0f],
+                                  [NSNumber numberWithFloat:0.5001f],
+                                  [NSNumber numberWithFloat:0.5f],
+                                  [NSNumber numberWithFloat:0.0f],
+                                  nil];
+
+  
   // Watch for plugins installing so we can reload the table
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
 }

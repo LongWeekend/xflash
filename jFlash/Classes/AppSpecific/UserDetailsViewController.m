@@ -55,11 +55,12 @@
   
   // Finally, customize the buttons
   [self.commitChangesBtn useGreenConfirmStyle];
-  [self.activateUserBtn useGreenConfirmStyle];
   self.commitChangesBtn.layer.borderWidth = 2.5f;
-  self.commitChangesBtn.layer.cornerRadius = 7.0f;
+  self.commitChangesBtn.layer.cornerRadius = 9.0f;
+
+  [self.activateUserBtn useGreenConfirmStyle];
   self.activateUserBtn.layer.borderWidth = 2.5f;
-  self.activateUserBtn.layer.cornerRadius = 7.0f;
+  self.activateUserBtn.layer.cornerRadius = 9.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated 

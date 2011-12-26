@@ -27,6 +27,11 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
 {
   [super viewDidLoad];
   
+  // Initialize the start button
+  [self.startButton useGreenConfirmStyle];
+  self.startButton.layer.borderWidth = 2.5f;
+  self.startButton.layer.cornerRadius = 9.0f;
+  
   // Make sure the buttons are set to the right states
   [self updateButtons];
   [self showDetailedView];

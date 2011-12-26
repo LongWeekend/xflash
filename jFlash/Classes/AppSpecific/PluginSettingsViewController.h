@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PluginManager.h"
+#import "GradientButton.h"
 
 @interface PluginSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
@@ -17,7 +18,7 @@
 - (IBAction) checkUpdatePlugin:(id)sender;
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIButton *btnCheckUpdate;
+@property (nonatomic, retain) IBOutlet GradientButton *btnCheckUpdate;
 @property (nonatomic, retain) IBOutlet UILabel *lblLastUpdate;
 @property (retain) NSArray *availablePlugins;
 @property (retain) NSArray *installedPlugins;
