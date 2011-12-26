@@ -538,8 +538,8 @@
 		49E3D17F1472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1801472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D1821472804400F79308 /* CFlashSearchTest.m */; };
-		49E797F314A8306D009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F214A8306D009B505A /* GradientButton.m */; };
-		49E797F414A8306D009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F214A8306D009B505A /* GradientButton.m */; };
+		49E797F914A8434C009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F714A8434C009B505A /* GradientButton.m */; };
+		49E797FA14A8434C009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F714A8434C009B505A /* GradientButton.m */; };
 		49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
@@ -1142,8 +1142,8 @@
 		49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetupDatabaseHelper.m; path = Tests/SetupDatabaseHelper.m; sourceTree = SOURCE_ROOT; };
 		49E3D1811472804400F79308 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFlashSearchTest.h; path = Tests/cFlashTests/CFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
 		49E3D1821472804400F79308 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFlashSearchTest.m; path = Tests/cFlashTests/CFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
-		49E797F114A8306D009B505A /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientButton.h; path = External/GradientButton.h; sourceTree = "<group>"; };
-		49E797F214A8306D009B505A /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientButton.m; path = External/GradientButton.m; sourceTree = "<group>"; };
+		49E797F614A8434C009B505A /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
+		49E797F714A8434C009B505A /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jFlash-Info.plist"; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
@@ -1859,6 +1859,7 @@
 		499E5AE70FF4D3ED006926A2 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				49E797F514A8434C009B505A /* LWEGradientButton */,
 				917A5C5C11AB839300016BD2 /* Appirater */,
 				49EE97B6134EC34A00EC6B0E /* asi-http-request */,
 				913EEF6C130800F300EBCF87 /* IFUnicodeURL */,
@@ -1875,8 +1876,6 @@
 				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
 				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
 				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
-				49E797F114A8306D009B505A /* GradientButton.h */,
-				49E797F214A8306D009B505A /* GradientButton.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
 				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
@@ -2050,6 +2049,16 @@
 				49E3D17714727FAE00F79308 /* jFlashTest-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49E797F514A8434C009B505A /* LWEGradientButton */ = {
+			isa = PBXGroup;
+			children = (
+				49E797F614A8434C009B505A /* GradientButton.h */,
+				49E797F714A8434C009B505A /* GradientButton.m */,
+			);
+			name = LWEGradientButton;
+			path = External/LWEGradientButton;
 			sourceTree = "<group>";
 		};
 		49EE8D90134EC15300EC6B0E /* LWE */ = {
@@ -3425,7 +3434,7 @@
 				498229511491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
-				49E797F314A8306D009B505A /* GradientButton.m in Sources */,
+				49E797F914A8434C009B505A /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3738,7 +3747,7 @@
 				498229521491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
-				49E797F414A8306D009B505A /* GradientButton.m in Sources */,
+				49E797FA14A8434C009B505A /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
