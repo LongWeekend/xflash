@@ -174,7 +174,8 @@
   }
   
   // Then load plugins
-  [self.pluginManager loadInstalledPlugins];
+  BOOL loadedPlugins = [self.pluginManager loadInstalledPlugins];
+  LWE_ASSERT_EXC(loadedPlugins, @"Unable to load plugins");
 
   // Get rid of the splash view
   [self.splashView removeFromSuperview];
