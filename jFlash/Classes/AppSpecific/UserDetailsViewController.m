@@ -38,8 +38,9 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  [self.userNicknameTextField becomeFirstResponder]; // makes keyboard cancellable
-  [self.userNicknameTextField addTarget:self action:@selector(doUpdateUserNickname:) forControlEvents:UIControlEventEditingChanged];
+  
+  // Start editing right away
+  [self.userNicknameTextField becomeFirstResponder];
 
   // Hide all the buttons if we are adding a new user
   if (self.mode == kUserViewModeAdd)
@@ -51,6 +52,14 @@
   {
     self.userNicknameTextField.text = [self.selectedUser userNickname];
   }
+  
+  // Finally, customize the buttons
+  [self.commitChangesBtn useGreenConfirmStyle];
+  [self.activateUserBtn useGreenConfirmStyle];
+  self.commitChangesBtn.layer.borderWidth = 2.5f;
+  self.commitChangesBtn.layer.cornerRadius = 7.0f;
+  self.activateUserBtn.layer.borderWidth = 2.5f;
+  self.activateUserBtn.layer.cornerRadius = 7.0f;
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -62,29 +71,6 @@
 }
 
 # pragma mark UI Responders
-
-- (IBAction) doUpdateUserNickname:(id)sender;
-{
-  [self.selectedUser setUserNickname:[self.userNicknameTextField text]];
-  if (self.mode == kUserViewModeEdit)
-  {
-    if([self.userNicknameTextField.text isEqualToString:self.originalUserNickname])
-    {
-      // User hasn't changed their name
-      self.commitChangesBtn.hidden = YES;
-    }
-    else if ([self.userNicknameTextField.text length] == 0)
-    {
-      // You can't save it if there is no name
-      self.commitChangesBtn.hidden = YES;
-    }
-    else 
-    {
-      // Otherwise show
-      self.commitChangesBtn.hidden = NO;
-    }
-  }
-}
 
 - (IBAction) doActivateUser
 {
@@ -98,16 +84,16 @@
   }
 }
 
+// Save user details
 - (IBAction) doCommitChanges
 {
-  // Save user details
-
   // Escape the string for SQLITE-style escapes (cannot use backslash!)
-  NSMutableString* newUser = [[NSMutableString alloc] initWithString:[userNicknameTextField text]];
+  NSMutableString *newUser = [[NSMutableString alloc] initWithString:self.userNicknameTextField.text];
+  // TODO: When we switch to parameter binding, this can go
   [newUser replaceOccurrencesOfString:@"'" withString:@"''" options:NSLiteralSearch range:NSMakeRange(0, [newUser length])];
   [self.selectedUser setUserNickname:newUser];
   [self.selectedUser save];
-  [newUser release];  
+  [newUser release];
   
   // We're done with this VC
   [self.navigationController popViewControllerAnimated:YES];
@@ -118,12 +104,33 @@
   }
 }
 
+#pragma mark - UITextFieldDelegate Methods 
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+  if (self.mode == kUserViewModeEdit && textField == self.userNicknameTextField)
+  {
+    // Hide the "Save" button if the user's input is blank or equal to the old nickname.
+    NSString *proposedNewString = [self.userNicknameTextField.text stringByReplacingCharactersInRange:range withString:string];
+    BOOL noChanges = [proposedNewString isEqualToString:self.originalUserNickname];
+    BOOL noInput = ([proposedNewString length] == 0);
+    self.commitChangesBtn.hidden = (noChanges || noInput);
+  }
+  return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+  self.commitChangesBtn.hidden = YES;
+  return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField 
 {
   if ([theTextField.text length] == 0)
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Enter a Name",@"UserDetailsViewController.EnterNameAlertTitle")
-                                       message:NSLocalizedString(@"Please enter a user name or click the arrow to go back.",@"UserDetailsViewController.EnterNameAlertMsg")];
+                                       message:NSLocalizedString(@"Please enter a user name or tap back to cancel.",@"UserDetailsViewController.EnterNameAlertMsg")];
     return NO;
   }
   [self doCommitChanges];

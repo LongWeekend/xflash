@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "GradientButton.h"
 
 enum userViewMode
 {
@@ -26,20 +27,19 @@ enum userViewMode
 - (void) activateUser:(User*)user;
 @end
 
-@interface UserDetailsViewController : UIViewController <UIActionSheetDelegate>
+@interface UserDetailsViewController : UIViewController <UITextFieldDelegate>
 
 - (id)initWithUserDetails:(User*)aUser;
 - (IBAction) doCommitChanges;
 - (IBAction) doActivateUser;
-- (IBAction) doUpdateUserNickname:(id)sender;
 
 @property (assign) id<UserDetailsViewControllerDelegate> delegate;
 
 @property (nonatomic) NSInteger mode;
 @property (nonatomic,retain) User *selectedUser;
 @property (nonatomic,retain) UITextField *userNicknameTextField;
-@property (nonatomic,retain) UIButton *commitChangesBtn;
-@property (nonatomic,retain) UIButton *activateUserBtn;
+@property (nonatomic,retain) GradientButton *commitChangesBtn;
+@property (nonatomic,retain) GradientButton *activateUserBtn;
 @property (nonatomic,retain) NSString *originalUserNickname;
 
 @end
