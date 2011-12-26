@@ -534,6 +534,8 @@
 		49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D1821472804400F79308 /* CFlashSearchTest.m */; };
 		49E797F914A8434C009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F714A8434C009B505A /* GradientButton.m */; };
 		49E797FA14A8434C009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F714A8434C009B505A /* GradientButton.m */; };
+		49E797FE14A8598F009B505A /* jflash_15_to_16.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49E797FD14A8598F009B505A /* jflash_15_to_16.sql */; };
+		49E797FF14A8598F009B505A /* jflash_15_to_16.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49E797FD14A8598F009B505A /* jflash_15_to_16.sql */; };
 		49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
@@ -1134,6 +1136,7 @@
 		49E3D1821472804400F79308 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFlashSearchTest.m; path = Tests/cFlashTests/CFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		49E797F614A8434C009B505A /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		49E797F714A8434C009B505A /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
+		49E797FD14A8598F009B505A /* jflash_15_to_16.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_15_to_16.sql; path = Migrations/jflash_15_to_16.sql; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jFlash-Info.plist"; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
@@ -1756,6 +1759,7 @@
 				49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */,
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
+				49E797FD14A8598F009B505A /* jflash_15_to_16.sql */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */,
@@ -3003,6 +3007,7 @@
 				498229431490F028009EC2CD /* 01-turning-gear@2x.png in Resources */,
 				498229471490F028009EC2CD /* 02-turning-gear.png in Resources */,
 				4982294B1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
+				49E797FE14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3027,6 +3032,7 @@
 				498229451490F028009EC2CD /* 01-turning-gear@2x.png in Resources */,
 				498229491490F028009EC2CD /* 02-turning-gear.png in Resources */,
 				4982294D1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
+				49E797FF14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

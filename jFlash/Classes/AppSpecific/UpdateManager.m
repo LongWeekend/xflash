@@ -203,8 +203,11 @@
 
 + (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings
 {
-  // 1. Execute SQL update file for bad data fixes - TODO
-  //[UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6 withSQLStatements:@"" forSettings:settings];
+  //New key for the user settings preference in version 1.6
+  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
+
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6 withSQLStatements:LWE_JF_15_TO_16_SQL_FILENAME forSettings:settings];
   
   // 2. Update settings inre: plugins -- read from the PLIST file, store everything back to the NSUserDefaults
   NSMutableDictionary *pluginsDict = [[[settings objectForKey:APP_PLUGIN] mutableCopy] autorelease];
@@ -223,13 +226,9 @@
   
   // Delete old plugin file now
   [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
-  
+
   // 3. for moving the already downloaded plugins, but it's not happening for now
   //[self _movePluginsToCacheDirectory];
-
-  //New key for the user settings preference in version 1.6
-  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];
-  [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_DATA_VERSION];
 }
 
 
@@ -267,7 +266,7 @@
   // Init variables
   BOOL success = YES;
   FILE *fh = NULL;
-  char str_buf[256];
+  char str_buf[1024];
   
   // Get SQL statement file ready
   fh = fopen([filePath UTF8String],"r");
@@ -276,27 +275,31 @@
     [NSException raise:@"SQLStatementFileNotOpened" format:@"Unable to open/read SQL statement file"];
   }
   
+  [db.dao beginDeferredTransaction];
+  
   LWE_LOG(@"Starting SQL statement loop");
   while (!feof(fh))
   {
-    fgets(str_buf,256,fh); // get me a line of the file    
-    if (![db executeUpdate:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]])
+    fgets(str_buf,1024,fh); // get me a line of the file    
+    if (![db.dao executeUpdate:[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]])
     {
       success = NO;
       LWE_LOG(@"Unable to do SQL: %@",[NSString stringWithCString:str_buf encoding:NSUTF8StringEncoding]);
       break;
     }
   }
+  if (success)
+  {
+    success = success && [db.dao commit];
+  }
+  else
+  {
+    [db.dao rollback];
+  }
   
   // Close the file
   fclose(fh);
   
-  if (success)
-  {    
-    // The only thing that is really important is that we ONLY execute this code if and when the transaction is complete.
-    CurrentState *state = [CurrentState sharedCurrentState];
-    [state resetActiveTag];
-  }
   return success;
 }
 
@@ -313,10 +316,10 @@
     {
       // Now change the app version
       [settings setValue:newVersionName forKey:APP_DATA_VERSION];
-      [settings setValue:newVersionName forKey:APP_SETTINGS_VERSION];
     }
     else
     {
+      // TODO: do something better here?
       LWE_LOG(@"Failed to update database in UpdateManager");
     }
     

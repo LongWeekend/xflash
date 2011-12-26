@@ -79,6 +79,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_10_TO_11_SQL_FILENAME = @"jflash_10_to_11.sql";
       NSString * const LWE_JF_12_TO_13_SQL_FILENAME = @"jflash_12_to_13.sql";
       NSString * const LWE_JF_13_TO_14_SQL_FILENAME = @"jflash_13_to_14.sql";
+      NSString * const LWE_JF_15_TO_16_SQL_FILENAME = @"jflash_15_to_16.sql";
       NSString * const LWE_JF_VERSION_1_0           = @"1.0";
       NSString * const LWE_JF_VERSION_1_1           = @"1.1"; 
       NSString * const LWE_JF_VERSION_1_2           = @"1.2";
