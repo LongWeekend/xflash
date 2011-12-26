@@ -253,8 +253,6 @@
 		496C670214728BDC009F04D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AEAE9E13D5E1EB008ADA45 /* Security.framework */; };
 		496C670314728BE2009F04D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AEAE9E13D5E1EB008ADA45 /* Security.framework */; };
 		496C6704147294D9009F04D4 /* cFlash-FTS-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 4904661C147276E3004C44E2 /* cFlash-FTS-1.0.db */; };
-		496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
-		496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		496C7AB01263270B004B6B90 /* plugin-resources in Resources */ = {isa = PBXBuildFile; fileRef = D322367A11D370B900B1AF15 /* plugin-resources */; };
 		496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */ = {isa = PBXBuildFile; fileRef = 49FE152B11B2B168007607D9 /* tametheme-cookie-cutters */; };
 		496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 91D3CFA711D0FDBF008565F8 /* candy-btn-green.png */; };
@@ -438,11 +436,7 @@
 		498EBDC114890AAD00BA6DE7 /* cFlash-installed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */; };
 		499006A9120FBBF400601CD2 /* twitter-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006A8120FBBF400601CD2 /* twitter-bird.png */; };
 		499006D2120FC44600601CD2 /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 499006D1120FC44600601CD2 /* speech_bubble.png */; };
-		4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
-		4993AF891278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
 		4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
-		4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF811278024800872875 /* save-changes-btn@2x.png */; };
-		4993AF901278024800872875 /* select-user-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF821278024800872875 /* select-user-btn@2x.png */; };
 		4993AF931278024800872875 /* twitter-bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4993AF851278024800872875 /* twitter-bird@2x.png */; };
 		499448D01472817000671849 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941833C13EFB237006A5616 /* libsqlite3.a */; };
 		499448D11472817800671849 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4941833C13EFB237006A5616 /* libsqlite3.a */; };
@@ -544,6 +538,8 @@
 		49E3D17F1472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1801472803900F79308 /* SetupDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */; };
 		49E3D1831472804400F79308 /* CFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E3D1821472804400F79308 /* CFlashSearchTest.m */; };
+		49E797F314A8306D009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F214A8306D009B505A /* GradientButton.m */; };
+		49E797F414A8306D009B505A /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E797F214A8306D009B505A /* GradientButton.m */; };
 		49EE96D6134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D7134EC15900EC6B0E /* LWECoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE9149134EC15500EC6B0E /* LWECoreData.m */; };
 		49EE96D8134EC15900EC6B0E /* LWEDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EE914B134EC15500EC6B0E /* LWEDatabase.m */; };
@@ -642,8 +638,6 @@
 		913EEF94130800F300EBCF87 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF84130800F300EBCF87 /* util.c */; };
 		913EEF95130800F300EBCF87 /* NSURL+IFUnicodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */; };
 		9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */ = {isa = PBXBuildFile; fileRef = 9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */; };
-		9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287711C0BF0B00A90071 /* save-changes-btn.png */; };
-		9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9177287811C0BF0B00A90071 /* select-user-btn.png */; };
 		917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 917728E011C0CA9600A90071 /* dropped-text-box.png */; };
 		9179E4261384FFB000A7739B /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
 		9179E4271384FFB000A7739B /* form-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9179E4251384FFB000A7739B /* form-background.jpg */; };
@@ -1066,8 +1060,6 @@
 		498EBDBF14890AAD00BA6DE7 /* cFlash-installed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "cFlash-installed.plist"; path = "Plugins/cFlash-installed.plist"; sourceTree = "<group>"; };
 		499006A8120FBBF400601CD2 /* twitter-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird.png"; path = "Assets/twitter-bird.png"; sourceTree = "<group>"; };
 		499006D1120FC44600601CD2 /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = speech_bubble.png; path = Assets/speech_bubble.png; sourceTree = "<group>"; };
-		4993AF811278024800872875 /* save-changes-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn@2x.png"; path = "Assets/save-changes-btn@2x.png"; sourceTree = "<group>"; };
-		4993AF821278024800872875 /* select-user-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn@2x.png"; path = "Assets/select-user-btn@2x.png"; sourceTree = "<group>"; };
 		4993AF851278024800872875 /* twitter-bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-bird@2x.png"; path = "Assets/twitter-bird@2x.png"; sourceTree = "<group>"; };
 		4999672811B3E45F00898A0C /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeManager.h; path = AppSpecific/ThemeManager.h; sourceTree = "<group>"; };
 		4999672911B3E45F00898A0C /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeManager.m; path = AppSpecific/ThemeManager.m; sourceTree = "<group>"; };
@@ -1150,6 +1142,8 @@
 		49E3D17C1472803900F79308 /* SetupDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetupDatabaseHelper.m; path = Tests/SetupDatabaseHelper.m; sourceTree = SOURCE_ROOT; };
 		49E3D1811472804400F79308 /* CFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFlashSearchTest.h; path = Tests/cFlashTests/CFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
 		49E3D1821472804400F79308 /* CFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFlashSearchTest.m; path = Tests/cFlashTests/CFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
+		49E797F114A8306D009B505A /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientButton.h; path = External/GradientButton.h; sourceTree = "<group>"; };
+		49E797F214A8306D009B505A /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradientButton.m; path = External/GradientButton.m; sourceTree = "<group>"; };
 		49EC5E8C10369BF300BC6D44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		49EE8D68134EC0EA00EC6B0E /* jFlash-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "jFlash-Info.plist"; sourceTree = "<group>"; };
 		49EE9148134EC15500EC6B0E /* LWECoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWECoreData.h; sourceTree = "<group>"; };
@@ -1271,8 +1265,6 @@
 		913EEF88130800F300EBCF87 /* NSURL+IFUnicodeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+IFUnicodeURL.h"; sourceTree = "<group>"; };
 		913EEF89130800F300EBCF87 /* NSURL+IFUnicodeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+IFUnicodeURL.m"; sourceTree = "<group>"; };
 		9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_13_to_14.sql; path = Migrations/jflash_13_to_14.sql; sourceTree = "<group>"; };
-		9177287711C0BF0B00A90071 /* save-changes-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "save-changes-btn.png"; path = "Assets/save-changes-btn.png"; sourceTree = "<group>"; };
-		9177287811C0BF0B00A90071 /* select-user-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "select-user-btn.png"; path = "Assets/select-user-btn.png"; sourceTree = "<group>"; };
 		917728E011C0CA9600A90071 /* dropped-text-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dropped-text-box.png"; path = "Assets/dropped-text-box.png"; sourceTree = "<group>"; };
 		9179E4251384FFB000A7739B /* form-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "form-background.jpg"; path = "Assets/form-background.jpg"; sourceTree = "<group>"; };
 		9179E44C1385021E00A7739B /* table-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "table-background.jpg"; path = "Assets/table-background.jpg"; sourceTree = "<group>"; };
@@ -1327,7 +1319,7 @@
 		917A5C6B11AB844300016BD2 /* ProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressView.xib; path = XIBs/ProgressView.xib; sourceTree = "<group>"; };
 		917A5C6D11AB844300016BD2 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudySetView.xib; path = XIBs/StudySetView.xib; sourceTree = "<group>"; };
 		917A5C6E11AB844300016BD2 /* StudyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyView.xib; path = XIBs/StudyView.xib; sourceTree = "<group>"; };
-		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
+		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = ../XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
 		917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = Reusable/SynthesizeSingleton/SynthesizeSingleton.h; sourceTree = "<group>"; };
 		917A5C7B11AB84EE00016BD2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = AppSpecific/Constants.h; sourceTree = "<group>"; };
 		917A5C7C11AB84EE00016BD2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = AppSpecific/Constants.m; sourceTree = "<group>"; };
@@ -1882,6 +1874,9 @@
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
 				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
 				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
+				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
+				49E797F114A8306D009B505A /* GradientButton.h */,
+				49E797F214A8306D009B505A /* GradientButton.m */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
 				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
@@ -1954,10 +1949,6 @@
 				4965FEA6126F7793000AC280 /* candy-btn-green@2x.png */,
 				91D3CF6111D0F4AC008565F8 /* candy-btn-yellow.png */,
 				49D997701270640C00D176D0 /* candy-btn-yellow@2x.png */,
-				9177287711C0BF0B00A90071 /* save-changes-btn.png */,
-				4993AF811278024800872875 /* save-changes-btn@2x.png */,
-				9177287811C0BF0B00A90071 /* select-user-btn.png */,
-				4993AF821278024800872875 /* select-user-btn@2x.png */,
 			);
 			name = "glass-buttons";
 			sourceTree = "<group>";
@@ -2664,7 +2655,6 @@
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
-				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				9121517911B755550091AFEF /* CardViewController.xib */,
 				4938F8B714024797001EB473 /* CardViewController-EtoJ.xib */,
 			);
@@ -2897,8 +2887,6 @@
 				9121517B11B755550091AFEF /* CardViewController.xib in Resources */,
 				490820A511B7959500150499 /* PluginSettingsView.xib in Resources */,
 				91CBA67811BB496C004BD0D0 /* ExampleSentencesView.xib in Resources */,
-				9177287911C0BF0B00A90071 /* save-changes-btn.png in Resources */,
-				9177287A11C0BF0B00A90071 /* select-user-btn.png in Resources */,
 				917728E111C0CA9600A90071 /* dropped-text-box.png in Resources */,
 				49B4ABC411C1D03600CFC308 /* ExamplesUnavailable.xib in Resources */,
 				491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */,
@@ -2943,8 +2931,6 @@
 				490B23591277C05100CF3484 /* Icon-72.png in Resources */,
 				49DADB801277F36F00B8FD72 /* Default.png in Resources */,
 				49DADB811277F36F00B8FD72 /* Default@2x.png in Resources */,
-				4993AF881278024800872875 /* save-changes-btn@2x.png in Resources */,
-				4993AF891278024800872875 /* select-user-btn@2x.png in Resources */,
 				4993AF8C1278024800872875 /* twitter-bird@2x.png in Resources */,
 				9175396C1310AA5C00B34EDF /* jflash_13_to_14.sql in Resources */,
 				91CA739F133D216C008A89A8 /* button_black_135x40.png in Resources */,
@@ -3088,8 +3074,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				496C7AA91263270B004B6B90 /* save-changes-btn.png in Resources */,
-				496C7AAA1263270B004B6B90 /* select-user-btn.png in Resources */,
 				496C7AB01263270B004B6B90 /* plugin-resources in Resources */,
 				496C7AB21263270B004B6B90 /* tametheme-cookie-cutters in Resources */,
 				496C7AB31263270B004B6B90 /* candy-btn-green.png in Resources */,
@@ -3154,8 +3138,6 @@
 				49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */,
 				49DADB821277F36F00B8FD72 /* Default.png in Resources */,
 				49DADB831277F36F00B8FD72 /* Default@2x.png in Resources */,
-				4993AF8F1278024800872875 /* save-changes-btn@2x.png in Resources */,
-				4993AF901278024800872875 /* select-user-btn@2x.png in Resources */,
 				4993AF931278024800872875 /* twitter-bird@2x.png in Resources */,
 				91CA72FF133D216C008A89A8 /* button_black_135x40.png in Resources */,
 				91CA7300133D216C008A89A8 /* button_black_280x40.png in Resources */,
@@ -3443,6 +3425,7 @@
 				498229511491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
+				49E797F314A8306D009B505A /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3755,6 +3738,7 @@
 				498229521491D02B009EC2CD /* DownloadManager.m in Sources */,
 				4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
+				49E797F414A8306D009B505A /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
