@@ -85,27 +85,26 @@
 
 #pragma mark - StudyViewControllerDelegate Methods
 
-- (Card*) getFirstCard:(Tag*)cardSet
+- (Card *) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  self.alreadyShowedLearnedAlert = NO; // must be a new set if they want the first card
   NSError *error = nil;
-  Card *firstCard = [cardSet getFirstCardWithError:&error];
-  if ((firstCard.levelId == 5) && ([error code] == kAllBuriedAndHiddenError))
+  Card *nextCard = nil;
+  if (currentCard == nil)
   {
-    [self _notifyUserStudySetHasBeenLearned];
+    self.alreadyShowedLearnedAlert = NO; // must be a new set if they want the first card
+    nextCard = [cardSet getFirstCardWithError:&error];
   }
-  return firstCard;
-}
-
-- (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
-{
-  NSError *error = nil;
-  Card *nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
+  else
+  {
+    nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
+  }
+  
+  // Notify if necessary
   if ((nextCard.levelId == 5) && (error.code == kAllBuriedAndHiddenError))
   {
     [self _notifyUserStudySetHasBeenLearned];
   }
-  else 
+  else if (currentCard != nil)
   {
     // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
     self.alreadyShowedLearnedAlert = NO;

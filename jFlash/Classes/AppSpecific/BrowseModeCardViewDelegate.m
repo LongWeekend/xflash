@@ -79,22 +79,24 @@
   svc.revealCardBtn.hidden = YES;
 }
 
-- (Card*) getFirstCard:(Tag*)cardSet
+- (Card *)getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  // TODO: remove the mode logic from Tag, right now just don't care about the error in browse mode
-  return [cardSet getFirstCardWithError:nil]; 
-}
-
-- (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
-{
+  NSError *error = nil;
   Card *nextCard = nil;
-  if(directionOrNil == kCATransitionFromLeft) // if we are coming from the left, get the previous card
+  if (currentCard == nil)
   {
-    nextCard = [cardSet getPrevCard];
+    nextCard = [cardSet getFirstCardWithError:&error];
   }
-  else // if we are coming from the right or don't know, get the next card
+  else
   {
-    nextCard = [cardSet getNextCard];
+    if (directionOrNil == kCATransitionFromLeft) // if we are coming from the left, get the previous card
+    {
+      nextCard = [cardSet getPrevCard];
+    }
+    else // if we are coming from the right or don't know, get the next card
+    {
+      nextCard = [cardSet getNextCard];
+    }
   }
   return nextCard;
 }

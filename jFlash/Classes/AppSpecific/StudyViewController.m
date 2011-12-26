@@ -24,7 +24,6 @@
 - (void)_setupPageControl:(NSInteger)page;
 - (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
 - (Card*) _getNextCard:(NSString*)directionOrNil;
-- (Card*) _getFirstCardWithError;
 @end
 
 @implementation StudyViewController
@@ -227,10 +226,19 @@
   self.currentCardSet = newTag;
   [self.currentCardSet addObserver:self forKeyPath:@"tagName" options:NSKeyValueObservingOptionNew context:NULL];
   
+  // TODO: this should be on the delegate callback that sets the view's properties?
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
-  Card *nextCard = [self _getFirstCardWithError];
+  Card *nextCard = nil;
+  if (self.delegate && [self.delegate respondsToSelector:@selector(getNextCard:afterCard:direction:)])
+  {
+    nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
+  }
+  else
+  {
+    nextCard = [self.currentCardSet getFirstCardWithError:nil]; // the pattern calls for doing something no matter what
+  }
   
   // Use this to set up delegates, show the card, etc
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -444,15 +452,6 @@
 }
 
 #pragma mark - Private methods to setup cards (called every transition)
-
-- (Card*) _getFirstCardWithError
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(getFirstCard:)])
-  {
-    return [self.delegate getFirstCard:self.currentCardSet];
-  }
-  return [self.currentCardSet getFirstCardWithError:nil]; // the pattern calls for doing something no matter what
-}
 
 - (Card*) _getNextCard:(NSString*)directionOrNil
 {

@@ -71,13 +71,9 @@
 
 /**
  * This method determines "how" a new card is selected. Ask the delegate to get the next card based on the transition direction.
+ * Pass "nil" to currentCard to get the first card.
  */
 - (Card*) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil;
-
-/**
- * This method determines "how" the first card is selected. Ask the delegate.
- */
-- (Card*) getFirstCard:(Tag*)cardSet;
 
 @optional
 /**
