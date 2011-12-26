@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">10K540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">301</string>
+			<string key="NS.object.0">933</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -22,11 +22,8 @@
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys" id="0">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-			</object>
-			<reference key="dict.values" ref="0"/>
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -55,12 +52,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">This is where you can see example sentences for each card.  First, you need to download the Example Sentences plug-in.   Tap below to get started, and make sure you have a network connection.</string>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">14</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<string key="IBUIText">This is where you can see example sentences.  First, you'll need to download the Example Sentences plug-in.   Tap below to get started; make sure you have a WiFi connection.</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC45ODgyMzUzNTQ0IDAuOTk2MDc4NDkxMiAxAA</bytes>
@@ -75,6 +67,17 @@
 						<int key="IBUINumberOfLines">7</int>
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">0</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">0</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIButton" id="786804800">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -87,11 +90,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -107,6 +105,17 @@
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">plugin-resources/download-example-plugin-button@2x.png</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Helvetica-Bold</string>
+							<string key="family">Helvetica</string>
+							<int key="traits">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
 						</object>
 					</object>
 				</object>
@@ -152,7 +161,9 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<object class="NSArray" key="object" id="0">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -195,8 +206,9 @@
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
+					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
-					<string>1.IBEditorWindowLastContentRect</string>
+					<string>-2.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
@@ -204,8 +216,9 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>{{600, 308}, {320, 298}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -229,171 +242,11 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">ActionBarViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>doBuryCardBtn</string>
-							<string>doNextCardBtn</string>
-							<string>doPrevCardBtn</string>
-							<string>doRightBtn</string>
-							<string>doWrongBtn</string>
-							<string>showCardActionSheet</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>doBuryCardBtn</string>
-							<string>doNextCardBtn</string>
-							<string>doPrevCardBtn</string>
-							<string>doRightBtn</string>
-							<string>doWrongBtn</string>
-							<string>showCardActionSheet</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">doBuryCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doNextCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doPrevCardBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doRightBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">doWrongBtn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showCardActionSheet</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addBtn</string>
-							<string>buryCardBtn</string>
-							<string>cardMeaningBtnHint</string>
-							<string>cardMeaningBtnHintMini</string>
-							<string>delegate</string>
-							<string>nextCardBtn</string>
-							<string>prevCardBtn</string>
-							<string>rightBtn</string>
-							<string>wrongBtn</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIView</string>
-							<string>UIView</string>
-							<string>id</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addBtn</string>
-							<string>buryCardBtn</string>
-							<string>cardMeaningBtnHint</string>
-							<string>cardMeaningBtnHintMini</string>
-							<string>delegate</string>
-							<string>nextCardBtn</string>
-							<string>prevCardBtn</string>
-							<string>rightBtn</string>
-							<string>wrongBtn</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">addBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">buryCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cardMeaningBtnHint</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cardMeaningBtnHintMini</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">delegate</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">nextCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">prevCardBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">rightBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">wrongBtn</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-						</object>
-					</object>
+					<string key="className">PluginManager</string>
+					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ActionBarViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CardViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">delegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CardViewController.h</string>
+						<string key="minorKey">./Classes/PluginManager.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -404,13 +257,15 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePage:</string>
+							<string>changePage:animated:</string>
 							<string>doShowProgressModalBtn</string>
-							<string>doTogglePercentCorrectBtn</string>
 							<string>launchExampleInstaller</string>
+							<string>pronounceCard:</string>
 							<string>revealCard</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -423,9 +278,10 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>changePage:</string>
+							<string>changePage:animated:</string>
 							<string>doShowProgressModalBtn</string>
-							<string>doTogglePercentCorrectBtn</string>
 							<string>launchExampleInstaller</string>
+							<string>pronounceCard:</string>
 							<string>revealCard</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -435,15 +291,19 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">changePage:animated:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">doShowProgressModalBtn</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">doTogglePercentCorrectBtn</string>
+								<string key="name">launchExampleInstaller</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">launchExampleInstaller</string>
+								<string key="name">pronounceCard:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -461,46 +321,34 @@
 							<string>cardSetLabel</string>
 							<string>cardView</string>
 							<string>cardViewController</string>
-							<string>hhAnimationView</string>
-							<string>moodIconBtn</string>
 							<string>pageControl</string>
-							<string>percentCorrectLabel</string>
-							<string>percentCorrectTalkBubble</string>
+							<string>pluginManager</string>
 							<string>practiceBgImage</string>
 							<string>progressBarView</string>
-							<string>progressModalBtn</string>
-							<string>progressModalCloseBtn</string>
-							<string>progressModalView</string>
+							<string>pronounceBtn</string>
 							<string>remainingCardsLabel</string>
 							<string>revealCardBtn</string>
 							<string>scrollView</string>
 							<string>showProgressModalBtn</string>
 							<string>tapForAnswerImage</string>
-							<string>totalWordsLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ActionBarViewController</string>
+							<string>UIViewController</string>
 							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIView</string>
-							<string>CardViewController</string>
-							<string>UIImageView</string>
-							<string>UIButton</string>
+							<string>UIViewController</string>
 							<string>UIPageControl</string>
-							<string>UILabel</string>
+							<string>PluginManager</string>
 							<string>UIImageView</string>
-							<string>UIImageView</string>
-							<string>UIView</string>
 							<string>UIView</string>
 							<string>UIButton</string>
-							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>UIScrollView</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
-							<string>UILabel</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -512,28 +360,22 @@
 							<string>cardSetLabel</string>
 							<string>cardView</string>
 							<string>cardViewController</string>
-							<string>hhAnimationView</string>
-							<string>moodIconBtn</string>
 							<string>pageControl</string>
-							<string>percentCorrectLabel</string>
-							<string>percentCorrectTalkBubble</string>
+							<string>pluginManager</string>
 							<string>practiceBgImage</string>
 							<string>progressBarView</string>
-							<string>progressModalBtn</string>
-							<string>progressModalCloseBtn</string>
-							<string>progressModalView</string>
+							<string>pronounceBtn</string>
 							<string>remainingCardsLabel</string>
 							<string>revealCardBtn</string>
 							<string>scrollView</string>
 							<string>showProgressModalBtn</string>
 							<string>tapForAnswerImage</string>
-							<string>totalWordsLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">actionBarController</string>
-								<string key="candidateClassName">ActionBarViewController</string>
+								<string key="candidateClassName">UIViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">actionbarView</string>
@@ -549,27 +391,15 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">cardViewController</string>
-								<string key="candidateClassName">CardViewController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">hhAnimationView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">moodIconBtn</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="candidateClassName">UIViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pageControl</string>
 								<string key="candidateClassName">UIPageControl</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">percentCorrectLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">percentCorrectTalkBubble</string>
-								<string key="candidateClassName">UIImageView</string>
+								<string key="name">pluginManager</string>
+								<string key="candidateClassName">PluginManager</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">practiceBgImage</string>
@@ -580,16 +410,8 @@
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">progressModalBtn</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">progressModalCloseBtn</string>
+								<string key="name">pronounceBtn</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">progressModalView</string>
-								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">remainingCardsLabel</string>
@@ -611,10 +433,6 @@
 								<string key="name">tapForAnswerImage</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">totalWordsLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -632,7 +450,7 @@
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<integer value="1024" key="NS.object.0"/>
+			<real value="1280" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
@@ -644,6 +462,6 @@
 			<string key="NS.key.0">plugin-resources/download-example-plugin-button@2x.png</string>
 			<string key="NS.object.0">{16, 16}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">301</string>
+		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>
