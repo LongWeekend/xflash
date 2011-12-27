@@ -16,7 +16,6 @@
 
 @interface PracticeModeCardViewDelegate()
 @property (nonatomic, assign) BOOL alreadyShowedLearnedAlert;
-- (void) _notifyUserStudySetHasBeenLearned;
 - (Card *) _randomCardInTag:(Tag *)tag currentCard:(Card *)currentCard error:(NSError **)error;
 @end
 
@@ -101,24 +100,20 @@
 - (Card *) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
   NSError *error = nil;
-  Card *nextCard = nil;
-  if (currentCard == nil)
-  {
-    // If there is no current card, it's the first card, so re-set the "alreadyShown" alert
-    self.alreadyShowedLearnedAlert = NO;
-    nextCard = [self _randomCardInTag:cardSet currentCard:nil error:&error];
-  }
-  else
-  {
-    nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
-  }
+  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
   
-  // Notify if necessary
+  // If necessary, tell the user they've learned this set
   if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
   {
-    [self _notifyUserStudySetHasBeenLearned];
+    if (self.alreadyShowedLearnedAlert == NO)
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
+                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
+                                        delegate:self];
+      self.alreadyShowedLearnedAlert = YES;
+    }
   }
-  else if (currentCard != nil)
+  else if (self.alreadyShowedLearnedAlert)
   {
     // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
     self.alreadyShowedLearnedAlert = NO;
@@ -298,18 +293,6 @@
     [randomCard hydrate];
   }
   return randomCard;
-}
-
-#pragma mark - Study Set Completed
-
-- (void)_notifyUserStudySetHasBeenLearned
-{
-  if (self.alreadyShowedLearnedAlert == NO)
-  {
-    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
-                                       message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")];
-    self.alreadyShowedLearnedAlert = YES;
-  }
 }
 
 @end
