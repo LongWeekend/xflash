@@ -120,6 +120,10 @@
 		4950C25311B764B200B70EE9 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4950C25211B764B200B70EE9 /* PluginManager.m */; };
 		49570E1713E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
 		49570E1813E39F7700226D24 /* LWEFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49570E1613E39F7700226D24 /* LWEFormView.m */; };
+		4964E53E14A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
+		4964E53F14A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
+		4964E54014A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
+		4964E54114A959EB00683A58 /* PracticeCardSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4964E53D14A959EB00683A58 /* PracticeCardSelector.m */; };
 		4965FD31126F6417000AC280 /* practice-btn-actions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */; };
 		4965FD32126F6417000AC280 /* practice-btn-goaway@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */; };
 		4965FD33126F6417000AC280 /* practice-btn-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */; };
@@ -999,6 +1003,8 @@
 		4950C25211B764B200B70EE9 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PluginManager.m; path = AppSpecific/PluginManager.m; sourceTree = "<group>"; };
 		49570E1513E39F7700226D24 /* LWEFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEFormView.h; sourceTree = "<group>"; };
 		49570E1613E39F7700226D24 /* LWEFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEFormView.m; sourceTree = "<group>"; };
+		4964E53C14A959EB00683A58 /* PracticeCardSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PracticeCardSelector.h; path = AppSpecific/PracticeCardSelector.h; sourceTree = "<group>"; };
+		4964E53D14A959EB00683A58 /* PracticeCardSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PracticeCardSelector.m; path = AppSpecific/PracticeCardSelector.m; sourceTree = "<group>"; };
 		4965FD2D126F6417000AC280 /* practice-btn-actions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-actions@2x.png"; path = "Assets/practice-btn-actions@2x.png"; sourceTree = "<group>"; };
 		4965FD2E126F6417000AC280 /* practice-btn-goaway@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-goaway@2x.png"; path = "Assets/practice-btn-goaway@2x.png"; sourceTree = "<group>"; };
 		4965FD2F126F6417000AC280 /* practice-btn-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-right@2x.png"; path = "Assets/practice-btn-right@2x.png"; sourceTree = "<group>"; };
@@ -2596,6 +2602,8 @@
 				496BE54C11EC5303003AB713 /* ActionBarViewController.m */,
 				91214D0711B4B9E80091AFEF /* BrowseModeCardViewDelegate.h */,
 				91214D0811B4B9E80091AFEF /* BrowseModeCardViewDelegate.m */,
+				4964E53C14A959EB00683A58 /* PracticeCardSelector.h */,
+				4964E53D14A959EB00683A58 /* PracticeCardSelector.m */,
 				91214D6811B4D77C0091AFEF /* PracticeModeCardViewDelegate.h */,
 				91214D6911B4D77C0091AFEF /* PracticeModeCardViewDelegate.m */,
 				91CBA67911BB4986004BD0D0 /* ExampleSentencesViewController.h */,
@@ -3409,6 +3417,7 @@
 				4944B1E21495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797F914A8434C009B505A /* GradientButton.m in Sources */,
+				4964E53E14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3487,6 +3496,7 @@
 				4979D7AE14949AB800625635 /* JFlashPluginMigrationTest.m in Sources */,
 				4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
+				4964E54014A959EB00683A58 /* PracticeCardSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3566,6 +3576,7 @@
 				4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */,
 				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
+				4964E54114A959EB00683A58 /* PracticeCardSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3722,6 +3733,7 @@
 				4944B1E31495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797FA14A8434C009B505A /* GradientButton.m in Sources */,
+				4964E53F14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
