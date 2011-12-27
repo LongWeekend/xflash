@@ -154,26 +154,32 @@ NSInteger const kLWEUninitializedCardId    = -1;
 - (void) hydrate
 {
   LWE_ASSERT_EXC(self.cardId != kLWEUninitializedCardId, @"Hydrate called with uninitialized card ID");
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
-	FMResultSet *rs = [db.dao executeQuery:@"SELECT c.*, h.meaning FROM cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = ? LIMIT 1",[NSNumber numberWithInt:self.cardId]];
+	FMResultSet *rs = [db.dao executeQuery:@"SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id,"
+                      "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning "
+                      "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id "
+                      "LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = ? "
+                      "WHERE c.card_id = ch.card_id AND c.card_id = ? LIMIT 1",[settings objectForKey:@"user_id"],[NSNumber numberWithInt:self.cardId]];
+  //                   @"SELECT c.*, h.meaning FROM cards c, cards_html h WHERE c.card_id = h.card_id AND c.card_id = ? LIMIT 1",[NSNumber numberWithInt:self.cardId]];
 	while ([rs next])
   {
-		[self hydrate:rs simple:YES];
+		[self hydrateWithResultSet:rs simpleHydrate:NO];
 	}
 	[rs close];
 }
 
 /** Takes a sqlite result set and populates the properties of card icluding the maning of the card */
-- (void) hydrate:(FMResultSet*)rs
+- (void) hydrateWithResultSet:(FMResultSet*)rs
 {
-	[self hydrate:rs simple:NO];
+	[self hydrateWithResultSet:rs simpleHydrate:NO];
 }
 
 /**
  * Takes a sqlite result set and populates the properties of card. 
  * Gives the freedom of not including the meaning
  */
-- (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
+- (void) hydrateWithResultSet:(FMResultSet*)rs simpleHydrate:(BOOL)isSimple
 {
 	self.cardId      = [rs intForColumn:@"card_id"];
 	self.hw_reading  = [rs stringForColumn:@"reading"];
@@ -194,12 +200,31 @@ NSInteger const kLWEUninitializedCardId    = -1;
 
 - (BOOL)isEqual:(id)object
 {
-  if ([object isKindOfClass:[self class]])
+  if ([object isKindOfClass:[self class]] == NO)
   {
-    Card *anotherCard = (Card *)object;
-    return (anotherCard.cardId == self.cardId);
+    return NO;
   }
-  return NO;
+  
+  Card *anotherCard = (Card *)object;
+  return (anotherCard.cardId == self.cardId);
+}
+
+- (NSComparisonResult) compare:(id)object
+{
+  LWE_ASSERT_EXC([object isKindOfClass:[self class]], @"Whoa, you can't compare objects of different types");
+  Card *anotherCard = (Card *)object;
+  if (anotherCard.cardId > self.cardId)
+  {
+    return NSOrderedAscending;
+  }
+  else if (anotherCard.cardId < self.cardId)
+  {
+    return NSOrderedDescending;
+  }
+  else 
+  {
+    return NSOrderedSame;
+  }
 }
 
 #pragma mark - Static Helper for UILabels

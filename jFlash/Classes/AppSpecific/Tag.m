@@ -22,7 +22,7 @@ NSInteger const kLWELearnedCardLevel = 5;
 @implementation Tag
 
 @synthesize tagId, tagName, tagEditable, tagDescription, isFault = _isFault;
-@synthesize cardCount, currentIndex, cardIds, cardLevelCounts, flattenedCardIdArray;
+@synthesize cardCount, currentIndex, cardsByLevel, cardLevelCounts, flattenedCardIdArray;
 
 #pragma mark - Class Plumbing
 
@@ -48,7 +48,7 @@ NSInteger const kLWELearnedCardLevel = 5;
   [tagDescription release];
   [flattenedCardIdArray release];
   [cardLevelCounts release];
-  [cardIds release];
+  [cardsByLevel release];
 	[super dealloc];
 }
 
@@ -126,14 +126,14 @@ NSInteger const kLWELearnedCardLevel = 5;
 //! Create a cache of the number of Card objects in each level
 - (void) recacheCardCountForEachLevel
 {
-  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be six card level arrays");
+  LWE_ASSERT_EXC(([self.cardsByLevel count] == 6),@"Must be six card level arrays");
 
   NSNumber *count = nil;
   NSInteger totalCount = 0;
   NSMutableArray *cardLevelCountsTmp = [NSMutableArray array];
   for (NSInteger i = 0; i < 6; i++)
   {
-    count = [NSNumber numberWithInt:[[self.cardIds objectAtIndex:i] count]];
+    count = [NSNumber numberWithInt:[[self.cardsByLevel objectAtIndex:i] count]];
     [cardLevelCountsTmp addObject:count];
     totalCount = totalCount + [count intValue];
   }
@@ -143,10 +143,10 @@ NSInteger const kLWELearnedCardLevel = 5;
 
 
 /** Unarchive plist file containing the user's last session data */
-- (NSArray *) thawCardIds
+- (NSMutableArray *) thawCardIds
 {
   NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
-  return [NSArray arrayWithContentsOfFile:path];
+  return [NSMutableArray arrayWithContentsOfFile:path];
 }
 
 
@@ -154,14 +154,14 @@ NSInteger const kLWELearnedCardLevel = 5;
 - (void) freezeCardIds
 {
   NSString *path = [LWEFile createCachesPathWithFilename:@"ids.plist"];
-  [self.cardIds writeToFile:path atomically:YES];
+  [self.cardsByLevel writeToFile:path atomically:YES];
 }
 
 
 /** Executed when loading a new set on app load */
 - (void) populateCardIds
 {
-  NSArray *tmpCardIdsArray = [self thawCardIds];
+  NSMutableArray *tmpCardIdsArray = [self thawCardIds];
   if (tmpCardIdsArray)
   {
     // Delete the PLIST now that we have it in memory
@@ -170,26 +170,26 @@ NSInteger const kLWELearnedCardLevel = 5;
   else
   {
     // No PLIST, generate new card Ids array
-    tmpCardIdsArray = [CardPeer retrieveCardIdsSortedByLevelForTag:self];
+    tmpCardIdsArray = [CardPeer retrieveCardsSortedByLevelForTag:self];
   }
   
-  self.cardIds = [[tmpCardIdsArray mutableCopy] autorelease];
-  self.flattenedCardIdArray = [self combineCardIds];
+  self.cardsByLevel = tmpCardIdsArray;
+  self.flattenedCardIdArray = [self flattenCardArrays];
 
   // populate the card level counts
 	[self recacheCardCountForEachLevel];
 }
 
 //! Concatenate cardId arrays for browse mode
-- (NSMutableArray *)combineCardIds
+- (NSMutableArray *)flattenCardArrays
 {
-  NSMutableArray *allCardIds = [NSMutableArray arrayWithCapacity:self.cardCount];
-  for (NSArray *cardIdsInLevel in self.cardIds) 
+  NSMutableArray *allCards = [NSMutableArray arrayWithCapacity:self.cardCount];
+  for (NSArray *cardsInLevel in self.cardsByLevel) 
   {
-    [allCardIds addObjectsFromArray:cardIdsInLevel];
+    [allCards addObjectsFromArray:cardsInLevel];
   }
-  [allCardIds sortUsingSelector:@selector(compare:)];
-  return allCardIds;
+  [allCards sortUsingSelector:@selector(compare:)];
+  return allCards;
 }
 
 
@@ -198,31 +198,32 @@ NSInteger const kLWELearnedCardLevel = 5;
  */
 - (void) moveCard:(Card*)card toLevel:(NSInteger) nextLevel
 {
-  LWE_ASSERT_EXC(([self.cardIds count] == 6),@"Must be 6 arrays in cardIds");
+  LWE_ASSERT_EXC(([self.cardsByLevel count] == 6),@"Must be 6 arrays in cardIds");
   
   // update the cardIds if necessary
   if (nextLevel != card.levelId)
   {
-    NSNumber *cardId = [NSNumber numberWithInt:card.cardId];
-
-    NSMutableArray *thisLevelCards = [self.cardIds objectAtIndex:card.levelId];
-    NSMutableArray *nextLevelCards = [self.cardIds objectAtIndex:nextLevel];
+    NSMutableArray *thisLevelCards = [self.cardsByLevel objectAtIndex:card.levelId];
+    NSMutableArray *nextLevelCards = [self.cardsByLevel objectAtIndex:nextLevel];
     
     NSInteger countBeforeRemove = [thisLevelCards count];
     NSInteger countBeforeAdd = [nextLevelCards count];
 
     // Now do the remove
-    LWE_ASSERT_EXC([thisLevelCards containsObject:cardId], @"Can't remove the card, it's no longer there!");
-    [thisLevelCards removeObject:cardId];
+    LWE_ASSERT_EXC([thisLevelCards containsObject:card], @"Can't remove the card, it's no longer there!");
+    [thisLevelCards removeObject:card];
     NSInteger countAfterRemove = [thisLevelCards count];
 
     // Only do the add if remove was successful
     if (countBeforeRemove == (countAfterRemove + 1))
     {
-      [nextLevelCards addObject:cardId];
+      [nextLevelCards addObject:card];
+      
+      // And now update its level ID so it stays accurate
+      card.levelId = nextLevel;
       
       // Now confirm the add
-      NSInteger countAfterAdd = [[self.cardIds objectAtIndex:nextLevel] count];
+      NSInteger countAfterAdd = [[self.cardsByLevel objectAtIndex:nextLevel] count];
       LWE_ASSERT_EXC(((countAfterAdd-1) == countBeforeAdd),@"The number after add (%d) should be 1 more than the count before add (%d)",countAfterAdd,countBeforeAdd);
 
       [self recacheCardCountForEachLevel];
@@ -237,10 +238,9 @@ NSInteger const kLWELearnedCardLevel = 5;
  */
 - (void) removeCardFromActiveSet:(Card *)card
 {
-  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
-  [cardLevel removeObject:tmpNum];
-  [self.flattenedCardIdArray removeObject:tmpNum];
+  NSMutableArray *cardLevel = [self.cardsByLevel objectAtIndex:card.levelId];
+  [cardLevel removeObject:card];
+  [self.flattenedCardIdArray removeObject:card];
   [self recacheCardCountForEachLevel];
 }
 
@@ -249,10 +249,9 @@ NSInteger const kLWELearnedCardLevel = 5;
  */
 - (void) addCardToActiveSet:(Card *)card
 {
-  NSNumber *tmpNum = [NSNumber numberWithInt:card.cardId];
-  NSMutableArray *cardLevel = [self.cardIds objectAtIndex:card.levelId];
-  [cardLevel addObject:tmpNum];
-  [self.flattenedCardIdArray addObject:tmpNum];
+  NSMutableArray *cardLevel = [self.cardsByLevel objectAtIndex:card.levelId];
+  [cardLevel addObject:card];
+  [self.flattenedCardIdArray addObject:card];
   [self recacheCardCountForEachLevel];
 }
 
@@ -325,7 +324,7 @@ NSInteger const kLWELearnedCardLevel = 5;
           [self tagDescription],
           [self tagId],
           [self currentIndex],
-          [self cardIds]];
+          [self cardsByLevel]];
 }
 
 

@@ -220,7 +220,7 @@
       if (tmpCard.isFault)
       {
         // Lazy load & update our array
-        tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
+        [tmpCard hydrate];
         [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];

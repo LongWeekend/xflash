@@ -17,7 +17,7 @@
 @interface PracticeModeCardViewDelegate()
 @property (nonatomic, assign) BOOL alreadyShowedLearnedAlert;
 - (void) _notifyUserStudySetHasBeenLearned;
-- (Card*) _randomCardInTag:(Tag *)tag currentCardId:(NSInteger)currentCardId error:(NSError **)error;
+- (Card *) _randomCardInTag:(Tag *)tag currentCard:(Card *)currentCard error:(NSError **)error;
 @end
 
 @implementation PracticeModeCardViewDelegate
@@ -108,18 +108,21 @@
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     if ([settings integerForKey:@"card_id"] != 0)
     {
-      nextCard = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
+      nextCard = [CardPeer blankCardWithId:[settings integerForKey:@"card_id"]];
+      [nextCard hydrate];
+      
       // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
       [settings setInteger:0 forKey:@"card_id"];
     }
     else
     {
-      nextCard = [self _randomCardInTag:cardSet currentCardId:0 error:&error];
+      // currentCard = nil here, there may be a way to refactor this logic
+      nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
     }
   }
   else
   {
-    nextCard = [self _randomCardInTag:cardSet currentCardId:currentCard.cardId error:&error];
+    nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
   }
   
   // Notify if necessary
@@ -223,9 +226,11 @@
  * Returns a Card object from the database randomly
  * Accepts current cardId in an attempt to not return the last card again
  */
-- (Card*) _randomCardInTag:(Tag *)tag currentCardId:(NSInteger)currentCardId error:(NSError **)error
+- (Card*) _randomCardInTag:(Tag *)tag currentCard:(Card *)currentCard error:(NSError **)error
 {
-  LWE_ASSERT_EXC(([tag.cardIds count] == 6),@"Card IDs must have 6 array levels");
+  LWE_ASSERT_EXC(([tag.cardsByLevel count] == 6),@"Card IDs must have 6 array levels");
+  
+  Card *randomCard = nil;
   
   // determine the next level
   NSError *theError = nil;
@@ -241,14 +246,17 @@
   }
   
   // Get a random card offset
-  NSMutableArray *cardIdArray = [tag.cardIds objectAtIndex:nextLevelId];
-  NSInteger numCardsAtLevel = [cardIdArray count];
+  NSMutableArray *cardArray = [tag.cardsByLevel objectAtIndex:nextLevelId];
+  NSInteger numCardsAtLevel = [cardArray count];
   LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",nextLevelId);
   NSInteger randomOffset = arc4random() % numCardsAtLevel;
-  NSNumber *cardId = [cardIdArray objectAtIndex:randomOffset];
+  randomCard = [cardArray objectAtIndex:randomOffset];
   
   // this is a simple queue of the last five cards
-  [self.lastFiveCards addObject:[NSNumber numberWithInt:currentCardId]];
+  if (currentCard)
+  {
+    [self.lastFiveCards addObject:currentCard];
+  }
   
   if ([self.lastFiveCards count] == NUM_CARDS_IN_NOT_NEXT_QUEUE)
   {
@@ -258,7 +266,7 @@
   // prevent getting the same card twice.
   NSInteger i = 0; // counts how many times we whiled against the array
   NSInteger j = 0; // second iterator to count tries that return the same card as before
-  while ([self.lastFiveCards containsObject:cardId])
+  while ([self.lastFiveCards containsObject:randomCard])
   {
     LWE_LOG(@"Got the same card as last time");
     // If there is only one card left (this card) in the level, let's get a different level
@@ -279,24 +287,29 @@
     }
 
     // now get a different card randomly
-    cardIdArray = [tag.cardIds objectAtIndex:nextLevelId];
-    NSInteger numCardsAtLevel2 = [cardIdArray count];
+    cardArray = [tag.cardsByLevel objectAtIndex:nextLevelId];
+    NSInteger numCardsAtLevel2 = [cardArray count];
     LWE_ASSERT_EXC((numCardsAtLevel2 > 0),@"We've been asked for cards at level %d but there aren't any.",nextLevelId);
     randomOffset = arc4random() % numCardsAtLevel2;
-    cardId = [cardIdArray objectAtIndex:randomOffset];      
+    randomCard = [cardArray objectAtIndex:randomOffset];      
     
     i++;
     if (i > kLWETimesToRetryForNonRecentCardId)
     {
       // the same card is worse than a card that was twice ago, so we check again that it's not that
-      if (j == kLWETimesToRetryForNonRecentCardId || currentCardId != [cardId intValue]) 
+      if (j == kLWETimesToRetryForNonRecentCardId || ([currentCard isEqual:randomCard] == NO))
       {
         break; //we tried 3 times, fuck it
       }
       j++;
     }
   }
-  return [CardPeer retrieveCardByPK:[cardId intValue]];
+  
+  if (randomCard.isFault)
+  {
+    [randomCard hydrate];
+  }
+  return randomCard;
 }
 
 #pragma mark - Study Set Completed

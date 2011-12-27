@@ -20,8 +20,8 @@ extern NSInteger const kLWEUninitializedCardId;
 @interface Card : NSObject <AVAudioPlayerDelegate>
 
 - (void) hydrate;
-- (void) hydrate:(FMResultSet*)rs;
-- (void) hydrate:(FMResultSet*)rs simple:(BOOL)includeMeaning;
+- (void) hydrateWithResultSet:(FMResultSet*)rs;
+- (void) hydrateWithResultSet:(FMResultSet*)rs simpleHydrate:(BOOL)includeMeaning;
 
 //! Returns the reading of the card
 - (NSString*) reading;

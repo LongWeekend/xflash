@@ -541,7 +541,7 @@
   // levelId associated with it, because we retrieved it in a different, far off place that doesn't
   // care about level Ids.  So we need to re-get the card, sadly.  This should still be faster
   // than any other way around the problem... MMA - 18.Oct.2011
-  theCard = [CardPeer retrieveCardByPK:theCard.cardId];
+  [theCard hydrate];
   
   NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])
