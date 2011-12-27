@@ -757,7 +757,6 @@
     // Save current card, user, and set, update cache - study view controller also does some settings stuff independently
     CurrentState *state = [CurrentState sharedCurrentState];
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [settings setInteger:self.currentCard.cardId forKey:@"card_id"];
     [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
     [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
     [settings synchronize];
