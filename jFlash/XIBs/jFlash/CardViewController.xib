@@ -112,7 +112,7 @@
 						<string key="NSFrame">{{2, 16}, {26, 17}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="613577973"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -202,7 +202,7 @@
 						<string key="NSFrame">{{10, 105}, {300, 146}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="901262833"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEgMC45ODAwMDAwMTkxAA</bytes>
@@ -261,7 +261,7 @@
 				<string key="NSFrameSize">{320, 285}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="613577973"/>
+				<reference key="NSNextKeyView" ref="901262833"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MSAwAA</bytes>
@@ -504,7 +504,6 @@
 					<string>1.IBPluginDependency</string>
 					<string>10.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
-					<string>42.CustomClassName</string>
 					<string>42.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>57.CustomClassName</string>
@@ -523,7 +522,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>TTTAttributedLabel</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MoodIcon</string>
@@ -588,7 +586,7 @@
 							<string>UIScrollView</string>
 							<string>UIWebView</string>
 							<string>MoodIcon</string>
-							<string>TTTAttributedLabel</string>
+							<string>UILabel</string>
 							<string>UIImageView</string>
 							<string>UIScrollView</string>
 							<string>UIButton</string>
@@ -637,7 +635,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">readingLabel</string>
-								<string key="candidateClassName">TTTAttributedLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">readingMoreIcon</string>
@@ -721,14 +719,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MoodIcon.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TTTAttributedLabel</string>
-					<string key="superclassName">UILabel</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TTTAttributedLabel.h</string>
 					</object>
 				</object>
 			</object>
