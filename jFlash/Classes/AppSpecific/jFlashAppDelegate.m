@@ -321,10 +321,6 @@
   // However, this call (enter foreground) means we're back w/o termination, so we can
   // delete our PLIST.
   [LWEFile deleteFile:[LWEFile createCachesPathWithFilename:@"ids.plist"]];
-  
-  // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings setInteger:0 forKey:@"card_id"];
 }
 
 // Just pass it on to the new iOS4 delegate

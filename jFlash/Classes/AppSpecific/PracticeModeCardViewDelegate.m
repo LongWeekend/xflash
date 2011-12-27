@@ -104,21 +104,9 @@
   Card *nextCard = nil;
   if (currentCard == nil)
   {
-    self.alreadyShowedLearnedAlert = NO; // must be a new set if they want the first card
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    if ([settings integerForKey:@"card_id"] != 0)
-    {
-      nextCard = [CardPeer blankCardWithId:[settings integerForKey:@"card_id"]];
-      [nextCard hydrate];
-      
-      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
-      [settings setInteger:0 forKey:@"card_id"];
-    }
-    else
-    {
-      // currentCard = nil here, there may be a way to refactor this logic
-      nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
-    }
+    // If there is no current card, it's the first card, so re-set the "alreadyShown" alert
+    self.alreadyShowedLearnedAlert = NO;
+    nextCard = [self _randomCardInTag:cardSet currentCard:nil error:&error];
   }
   else
   {
