@@ -247,6 +247,8 @@
     // TODO: iPad customization
     NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
     self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+    [self _setupSubviews];
+    [self doChangeCard:self.currentCard direction:nil];
   }
   else if ([keyPath isEqualToString:APP_HEADWORD])
   {
