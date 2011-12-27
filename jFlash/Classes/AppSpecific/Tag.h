@@ -36,8 +36,6 @@ extern NSInteger const kLWELearnedCardLevel;
 - (BOOL) isEditable;
 
 - (void) populateCardIds;
-- (NSInteger) calculateNextCardLevelWithError:(NSError **)error;
-- (Card *) getRandomCard:(NSInteger)currentCardId error:(NSError **)error;
 - (NSInteger) cardCount;
 - (void) moveCard:(Card*) card toLevel:(NSInteger) nextLevel;
 - (void) recacheCardCountForEachLevel;
@@ -57,7 +55,6 @@ extern NSInteger const kLWELearnedCardLevel;
 @property (nonatomic, retain) NSMutableArray *cardIds;
 @property (nonatomic, retain) NSMutableArray *flattenedCardIdArray;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
-@property (nonatomic, retain) NSMutableArray *lastFiveCards;
 @property (nonatomic) NSInteger tagId;
 @property (nonatomic) NSInteger currentIndex;
 

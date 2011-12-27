@@ -11,11 +11,13 @@
 #import "StudyViewController.h"
 #import "CardViewController.h"
 #import "ActionBarViewController.h"
+#import "PracticeCardSelector.h"
 
 @interface PracticeModeCardViewDelegate : NSObject <StudyViewControllerDelegate,
                                                     CardViewControllerDelegate,
                                                     ActionBarViewControllerDelegate>
 
 @property CGFloat currentPercentageCorrect;
-
+@property (nonatomic, retain) NSMutableArray *lastFiveCards;
+@property (nonatomic, retain) PracticeCardSelector *cardSelector;
 @end

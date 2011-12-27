@@ -12,17 +12,21 @@
 #import "ActionBarViewController.h"
 #import "StudyViewController.h"
 
+#define kLWETimesToRetryForNonRecentCardId 3
+
 @interface PracticeModeCardViewDelegate()
 @property (nonatomic, assign) BOOL alreadyShowedLearnedAlert;
 - (void) _notifyUserStudySetHasBeenLearned;
+- (Card*) _randomCardInTag:(Tag *)tag currentCardId:(NSInteger)currentCardId error:(NSError **)error;
 @end
 
 @implementation PracticeModeCardViewDelegate
 
 @synthesize currentPercentageCorrect;
 @synthesize alreadyShowedLearnedAlert;
+@synthesize lastFiveCards, cardSelector;
 
-#pragma mark - Init
+#pragma mark - Plumbing
 
 - (id) init
 {
@@ -30,8 +34,17 @@
   if (self)
   {
     self.currentPercentageCorrect = 100.0f;
+    self.lastFiveCards = [NSMutableArray array];
+    self.cardSelector = [[[PracticeCardSelector alloc] init] autorelease];
   }
   return self;
+}
+
+- (void) dealloc
+{
+  [cardSelector release];
+  [lastFiveCards release];
+  [super dealloc];
 }
 
 #pragma mark - Card View Controller Delegate
@@ -101,12 +114,12 @@
     }
     else
     {
-      nextCard = [cardSet getRandomCard:0 error:&error];
+      nextCard = [self _randomCardInTag:cardSet currentCardId:0 error:&error];
     }
   }
   else
   {
-    nextCard = [cardSet getRandomCard:currentCard.cardId error:&error];
+    nextCard = [self _randomCardInTag:cardSet currentCardId:currentCard.cardId error:&error];
   }
   
   // Notify if necessary
@@ -202,6 +215,88 @@
   avc.buryCardBtn.hidden = NO;
   avc.addBtn.hidden = NO;
   avc.cardMeaningBtnHint.hidden = YES;
+}
+
+#pragma mark - Get Random Card
+
+/**
+ * Returns a Card object from the database randomly
+ * Accepts current cardId in an attempt to not return the last card again
+ */
+- (Card*) _randomCardInTag:(Tag *)tag currentCardId:(NSInteger)currentCardId error:(NSError **)error
+{
+  LWE_ASSERT_EXC(([tag.cardIds count] == 6),@"Card IDs must have 6 array levels");
+  
+  // determine the next level
+  NSError *theError = nil;
+  NSInteger nextLevelId = [self.cardSelector calculateNextCardLevelForTag:tag error:&theError];
+  if ((nextLevelId == kLWELearnedCardLevel) &&
+      (theError.domain == kTagErrorDomain) &&
+      (theError.code == kAllBuriedAndHiddenError))
+  {
+    if (error != NULL)
+    {
+      *error = theError;
+    }
+  }
+  
+  // Get a random card offset
+  NSMutableArray *cardIdArray = [tag.cardIds objectAtIndex:nextLevelId];
+  NSInteger numCardsAtLevel = [cardIdArray count];
+  LWE_ASSERT_EXC((numCardsAtLevel > 0),@"We've been asked for cards at level %d but there aren't any.",nextLevelId);
+  NSInteger randomOffset = arc4random() % numCardsAtLevel;
+  NSNumber *cardId = [cardIdArray objectAtIndex:randomOffset];
+  
+  // this is a simple queue of the last five cards
+  [self.lastFiveCards addObject:[NSNumber numberWithInt:currentCardId]];
+  
+  if ([self.lastFiveCards count] == NUM_CARDS_IN_NOT_NEXT_QUEUE)
+  {
+    [self.lastFiveCards removeObjectAtIndex:0];
+  }
+  
+  // prevent getting the same card twice.
+  NSInteger i = 0; // counts how many times we whiled against the array
+  NSInteger j = 0; // second iterator to count tries that return the same card as before
+  while ([self.lastFiveCards containsObject:cardId])
+  {
+    LWE_LOG(@"Got the same card as last time");
+    // If there is only one card left (this card) in the level, let's get a different level
+    
+    if (numCardsAtLevel == 1)
+    {
+      LWE_LOG(@"Only one card left in this level, getting a new level");
+      // Try up five times to get a different level
+      NSInteger lastNextLevel = nextLevelId;
+      for (NSInteger j = 0; j < 5; j++)
+      {
+        nextLevelId = [self.cardSelector calculateNextCardLevelForTag:tag error:NULL];
+        if (nextLevelId != lastNextLevel)
+        {
+          break;
+        }
+      }
+    }
+
+    // now get a different card randomly
+    cardIdArray = [tag.cardIds objectAtIndex:nextLevelId];
+    NSInteger numCardsAtLevel2 = [cardIdArray count];
+    LWE_ASSERT_EXC((numCardsAtLevel2 > 0),@"We've been asked for cards at level %d but there aren't any.",nextLevelId);
+    randomOffset = arc4random() % numCardsAtLevel2;
+    cardId = [cardIdArray objectAtIndex:randomOffset];      
+    
+    i++;
+    if (i > kLWETimesToRetryForNonRecentCardId)
+    {
+      // the same card is worse than a card that was twice ago, so we check again that it's not that
+      if (j == kLWETimesToRetryForNonRecentCardId || currentCardId != [cardId intValue]) 
+      {
+        break; //we tried 3 times, fuck it
+      }
+      j++;
+    }
+  }
+  return [CardPeer retrieveCardByPK:[cardId intValue]];
 }
 
 #pragma mark - Study Set Completed
