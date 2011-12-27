@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Card.h"
 #import "UIWebView+LWENoBounces.h"
-#import "TTTAttributedLabel.h"
 #import "MoodIcon.h"
 #import "StudyViewProtocols.h"
 
@@ -56,7 +55,7 @@ extern NSString * const LWECardHtmlFooter;
 @property (nonatomic, retain) IBOutlet MoodIcon *moodIcon;
 
 //! The label holding the reading for this card
-@property (nonatomic, retain) IBOutlet TTTAttributedLabel *readingLabel; //OHAttributedLabel *readingLabel;
+@property (nonatomic, retain) IBOutlet UILabel *readingLabel;
 
 //! If yes, the reading is visible.  Separate variable than label.hidden because we preserve state across cards.
 @property BOOL readingVisible;

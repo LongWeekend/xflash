@@ -7,9 +7,12 @@
 //
 
 #import "CardViewController.h"
-
 #import "UIScrollView+LWEUtilities.h"
-#import "ChineseCard.h"
+
+#if defined (LWE_CFLASH)
+  #import "ChineseCard.h"
+  #import "TTTAttributedLabel.h"
+#endif
 
 // Private Methods
 @interface CardViewController()
@@ -189,7 +192,7 @@
 #if defined(LWE_JFLASH)
   self.readingLabel.text = card.reading;
 #elif defined(LWE_CFLASH)
-  self.readingLabel.text = [card attributedReading];
+  [(TTTAttributedLabel *)self.readingLabel setText:[card attributedReading]];
 #endif
   // These calls re-size the reading & headword labels.  They used to take the scrollContainer as well,
   // but we infer it (superview) of the labels inside this call.
