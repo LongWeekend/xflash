@@ -133,11 +133,12 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings addObserver:self forKeyPath:APP_MODE options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
-  [settings addObserver:self forKeyPath:APP_READING options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD options:NSKeyValueObservingOptionNew context:NULL];
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
 #if defined (LWE_CFLASH)
   [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
+#elif defined (LWE_JFLASH)
+  [settings addObserver:self forKeyPath:APP_READING options:NSKeyValueObservingOptionNew context:NULL];
 #endif
   
   [center addObserver:self selector:@selector(doCardBtn:) name:LWEActionBarButtonWasTapped object:nil];
@@ -256,12 +257,13 @@
     [self _setupSubviews];
     [self doChangeCard:self.currentCard direction:nil];
   }
-  else if ([keyPath isEqualToString:APP_READING])
+#if defined (LWE_CFLASH)
+  else if ([keyPath isEqualToString:APP_PINYIN_COLOR] || [keyPath isEqualToString:APP_HEADWORD_TYPE])
   {
     [self doChangeCard:self.currentCard direction:nil];
   }
-#if defined (LWE_CFLASH)
-  else if ([keyPath isEqualToString:APP_PINYIN_COLOR] || [keyPath isEqualToString:APP_HEADWORD_TYPE])
+#elif defined (LWE_JFLASH)
+  else if ([keyPath isEqualToString:APP_READING])
   {
     [self doChangeCard:self.currentCard direction:nil];
   }
@@ -814,11 +816,12 @@
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings removeObserver:self forKeyPath:APP_MODE];
   [settings removeObserver:self forKeyPath:APP_THEME];
-  [settings removeObserver:self forKeyPath:APP_READING];
   [settings removeObserver:self forKeyPath:APP_HEADWORD];
   [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
 #if defined (LWE_CFLASH)
   [settings removeObserver:self forKeyPath:APP_PINYIN_COLOR];
+#elif defined (LWE_JFLASH)
+  [settings removeObserver:self forKeyPath:APP_READING];
 #endif
   [super viewDidUnload];
 }
