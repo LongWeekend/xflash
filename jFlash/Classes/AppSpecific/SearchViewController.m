@@ -16,7 +16,6 @@ const NSInteger KSegmentedTableHeader = 100;
 
 // Private method declarations
 @interface SearchViewController ()
-@property (retain) NSMutableArray *observerArray;
 @property (nonatomic, retain) NSArray *_sentenceSearchArray;
 @property (nonatomic, retain) UISegmentedControl *_wordsOrSentencesSegment;
 - (BOOL) _checkMembershipCacheForCard:(Card*)card;
@@ -33,7 +32,6 @@ const NSInteger KSegmentedTableHeader = 100;
 @end
 
 @implementation SearchViewController
-@synthesize observerArray;
 @synthesize pluginManager;
 @synthesize activityIndicator, searchingCell;
 @synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray;
@@ -48,8 +46,6 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   if ((self = [super init]))
   {
-    self.observerArray = [NSMutableArray array];
-    
     // Is the plugin loaded for example sentences?
     _showSearchTargetControl = NO;
     // Disabled for 1.1 release
@@ -60,20 +56,7 @@ const NSInteger KSegmentedTableHeader = 100;
     _searchState = kSearchNoSearch;
     
     // Register an observer for the example sentences
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
-    
-    // This notification will tell the table to reload whenever the user changes the headword type (glyph type)
-    id observer = [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *note)
-    {
-      BOOL headwordTypeChanged = ([note.userInfo objectForKey:APP_HEADWORD_TYPE] != nil);
-      if (headwordTypeChanged)
-      {
-        [self.tableView reloadData];
-      }
-    }];
-    [self.observerArray addObject:observer];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   }
   return self;
 }
@@ -119,7 +102,8 @@ const NSInteger KSegmentedTableHeader = 100;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
   
   // Notification for when the card headword stlye changes
-  [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:LWECardSettingsChanged object:nil];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void) viewDidUnload
@@ -131,7 +115,10 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Stop observing for tag content changes
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
+  
+  // Stop observing headword changes
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
 }
 
 
@@ -170,6 +157,20 @@ const NSInteger KSegmentedTableHeader = 100;
       // Show keyboard if no results
       [self.searchBar becomeFirstResponder];
     }
+  }
+}
+
+#pragma mark - KVO
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  {
+    [self.tableView reloadData];
+  }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
 }
 
@@ -722,13 +723,6 @@ const NSInteger KSegmentedTableHeader = 100;
   
   // Headword style did change
   [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
-  
-  // Get rid of block-based observers
-  for (id observer in self.observerArray)
-  {
-    [[NSNotificationCenter defaultCenter] removeObserver:observer];
-  }
-  [observerArray release];
   
   [pluginManager release];
   [searchTerm release];

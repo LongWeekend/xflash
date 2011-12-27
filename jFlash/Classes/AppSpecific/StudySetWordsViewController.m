@@ -13,7 +13,6 @@
 
 @interface StudySetWordsViewController ()
 - (void) _loadWordListInBackground;
-- (void) _cardSettingsDidChange:(NSNotification*)notification;
 - (void) _tagContentDidChange:(NSNotification*)notification;
 @end
 
@@ -57,11 +56,9 @@
   [super viewDidLoad];
   self.navigationItem.title = self.tag.tagName;
   
-  // For when the glyph type changes (e.g. Chinese font type)
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(_cardSettingsDidChange:)
-                                               name:LWECardSettingsChanged
-                                             object:nil];
+  // When the headword type changes, reload the table
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
   
   // Ideally, I could set the object: to self.tag, but there's no guarantee that the MEMORY ADDY of
   // the self.tag is the same as the memory address of the tag object sending the notification, even
@@ -84,21 +81,28 @@
 
 - (void)viewDidUnload
 {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super viewDidUnload];
 }
 
-#pragma mark - Private Methods
+#pragma mark - KVO
 
-- (void) _cardSettingsDidChange:(NSNotification *)notification
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  // If the key is in the dictionary, the setting changed, so we should reload.
-  BOOL headwordTypeChanged = ([notification.userInfo objectForKey:APP_HEADWORD_TYPE] != nil);
-  if (headwordTypeChanged)
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
   {
     [self.tableView reloadData];
   }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
 }
+
+#pragma mark - Private Methods
 
 - (void) _tagContentDidChange:(NSNotification*)notification
 {

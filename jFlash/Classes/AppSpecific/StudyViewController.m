@@ -22,7 +22,8 @@
 - (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
 - (void)_setupPageControl:(NSInteger)page;
-- (void) _setupSubviewsForStudyMode:(NSString*)studyMode;
+- (void) _setupDelegateForStudyMode:(NSString*)studyMode;
+- (void) _setupSubviews;
 - (Card*) _getNextCardWithDirection:(NSString*)directionOrNil currentCard:(Card *)theCurrentCard;
 @end
 
@@ -122,34 +123,22 @@
 {
   [super viewDidLoad];
   NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-  __block StudyViewController *blockSelf = self;
-
-  void (^setupViewAfterChangeBlock)(NSNotification*) = ^(NSNotification *notification)
-  {
-    // TODO: We can get the new tag out of the notification, eliminating a use of a global state singleton (yay) MMA 11.16.2011
-    [blockSelf changeStudySetToTag:[[CurrentState sharedCurrentState] activeTag]];
-  };
 
   // Setup block callback for when active tag changes or the user settings changed - resets study set
-  [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:setupViewAfterChangeBlock];
-  [center addObserverForName:LWEUserSettingsChanged object:nil queue:nil usingBlock:setupViewAfterChangeBlock];
-  
-  // Reset the current view (but nothing else) if the card settings changed (reading type, et al)
-  [center addObserverForName:LWECardSettingsChanged object:nil queue:nil usingBlock:^(NSNotification *notification)
+  [center addObserverForName:LWEActiveTagDidChange object:nil queue:nil usingBlock:^(NSNotification *notification)
    {
-     // Set up background based on theme -- just in case that changed
-     // TODO: iPad customization
-     NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
-     blockSelf.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
-     
-     // TODO: Change this to a separate notification -- when mode changes
-     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-     NSString *studyMode = [settings objectForKey:APP_MODE];
-     [blockSelf _setupSubviewsForStudyMode:studyMode];
-     
-     // Passing nil forgoes any animation and just reloads the card
-     [blockSelf doChangeCard:self.currentCard direction:nil];
+     [self changeStudySetToTag:(Tag *)notification.object];
    }];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings addObserver:self forKeyPath:APP_MODE options:NSKeyValueObservingOptionNew context:NULL];
+  [settings addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
+  [settings addObserver:self forKeyPath:APP_READING options:NSKeyValueObservingOptionNew context:NULL];
+  [settings addObserver:self forKeyPath:APP_HEADWORD options:NSKeyValueObservingOptionNew context:NULL];
+  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+#if defined (LWE_CFLASH)
+  [settings addObserver:self forKeyPath:APP_PINYIN_COLOR options:NSKeyValueObservingOptionNew context:NULL];
+#endif
   
   [center addObserver:self selector:@selector(doCardBtn:) name:LWEActionBarButtonWasTapped object:nil];
   [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
@@ -232,7 +221,7 @@
   // Use this to set up delegates, show the card, etc
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *studyMode = [settings objectForKey:APP_MODE];
-  [self _setupSubviewsForStudyMode:studyMode];
+  [self _setupDelegateForStudyMode:studyMode];
   
   // Change to new card, by passing nil, there is no animation
   Card *nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
@@ -244,15 +233,44 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if ([keyPath isEqual:@"tagName"]) 
+  if ([keyPath isEqualToString:@"tagName"]) 
   {
     self.cardSetLabel.text = [change objectForKey:NSKeyValueChangeNewKey];
   }
+  else if ([keyPath isEqualToString:APP_MODE])
+  {
+    [self _setupDelegateForStudyMode:[change objectForKey:NSKeyValueChangeNewKey]];
+    [self doChangeCard:self.currentCard direction:nil];
+  }
+  else if ([keyPath isEqualToString:APP_THEME])
+  {
+    // TODO: iPad customization
+    NSString *pathToBGImage = [[ThemeManager sharedThemeManager] elementWithCurrentTheme:@"practice-bg.jpg"];
+    self.practiceBgImage.image = [UIImage imageNamed:pathToBGImage];
+  }
+  else if ([keyPath isEqualToString:APP_HEADWORD])
+  {
+    // We need to setup the card view controller again
+    [self _setupSubviews];
+    [self doChangeCard:self.currentCard direction:nil];
+  }
+  else if ([keyPath isEqualToString:APP_READING])
+  {
+    [self doChangeCard:self.currentCard direction:nil];
+  }
+#if defined (LWE_CFLASH)
+  else if ([keyPath isEqualToString:APP_PINYIN_COLOR] || [keyPath isEqualToString:APP_HEADWORD_TYPE])
+  {
+    [self doChangeCard:self.currentCard direction:nil];
+  }
+#endif
   else
   {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
 }
+
+#pragma mark - Page Control
 
 - (void)_setupPageControl:(NSInteger)page
 {
@@ -567,7 +585,7 @@
   }
 }
 
-- (void) _setupSubviewsForStudyMode:(NSString*)studyMode
+- (void) _setupDelegateForStudyMode:(NSString*)studyMode
 {
   // TODO: Ideally this code wouldn't be part of the SVC, then it wouldn't need to (a) retain
   // its delegate, or (b) have specific knowledge of the name of every class/mode that it could be in.
@@ -581,8 +599,17 @@
   {
 		self.delegate = [[[PracticeModeCardViewDelegate alloc] init] autorelease];
   }
-  //=====================================
   
+  // Now that we have a new delegate, re-init the subviews asking the delegate for VCs
+  [self _setupSubviews];
+  
+  // Now send our new subcontrollers a message telling it we are using it
+  [self.cardViewController studyViewModeDidChange:self];
+  [self.actionBarController studyViewModeDidChange:self];  
+}
+
+- (void) _setupSubviews
+{
   // Add the CardView to the View -- ask the delegate what controller we want
   if (self.delegate && [self.delegate respondsToSelector:@selector(cardViewControllerForStudyView:)])
   {
@@ -610,10 +637,6 @@
     [self.actionbarView addSubview:actionVC.view];
     self.actionBarController = actionVC;
   }
-  
-  // Now send our new subcontrollers a message telling it we are using it
-  [self.cardViewController studyViewModeDidChange:self];
-  [self.actionBarController studyViewModeDidChange:self];  
 }
 
 
@@ -766,7 +789,6 @@
 
 - (void) viewDidUnload
 {
-  [super viewDidUnload];
   self.progressDetailsViewController = nil;
 	self.progressBarViewController = nil;
 	self.exampleSentencesViewController = nil;
@@ -786,6 +808,17 @@
 	self.showProgressModalBtn = nil;
   self.pronounceBtn = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings removeObserver:self forKeyPath:APP_MODE];
+  [settings removeObserver:self forKeyPath:APP_THEME];
+  [settings removeObserver:self forKeyPath:APP_READING];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+#if defined (LWE_CFLASH)
+  [settings removeObserver:self forKeyPath:APP_PINYIN_COLOR];
+#endif
+  [super viewDidUnload];
 }
 
 - (void) dealloc
