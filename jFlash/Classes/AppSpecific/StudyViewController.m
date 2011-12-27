@@ -230,15 +230,7 @@
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
   // Change to new card, by passing nil, there is no animation
-  Card *nextCard = nil;
-  if (self.delegate && [self.delegate respondsToSelector:@selector(getNextCard:afterCard:direction:)])
-  {
-    nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
-  }
-  else
-  {
-    nextCard = [self.currentCardSet getFirstCardWithError:nil]; // the pattern calls for doing something no matter what
-  }
+  Card *nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
   
   // Use this to set up delegates, show the card, etc
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -290,37 +282,39 @@
  */
 - (void) doChangeCard:(Card*)card direction:(NSString*)directionOrNil
 {
-  if (card != nil)
+  if (card == nil)
   {
-    // Asks our delegate if it wants to change any of the details of the view (labels, etc)
-    // Due to a hack in PracticeModeCardViewDelegate.m, this call MUST be before setupWithCard:.
-    LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
-
-    // Sets up all of the sub-controllers of the study view controller.
-    LWE_DELEGATE_CALL(@selector(studyViewWillSetup:),self);
-    
-    [self.cardViewController setupWithCard:card];
-    [self.actionBarController setupWithCard:card];
-    [self.exampleSentencesViewController setupWithCard:card];
-             
-    self.currentCard = card;
-    
-    // Sets up the page control (incl. determining if we have example sentences)
-    [self _setupPageControl:0];
-
-    // Show/Hide pronounce button depending on presence of plugin + sound for this file
-    self.pronounceBtn.hidden = ([self _shouldShowSampleAudioButtonForCard:card] == NO);
-    
-    // If no direction, don't animate transition
-    if (directionOrNil != nil)
-    {
-      [LWEViewAnimationUtils doViewTransition:kCATransitionPush direction:directionOrNil duration:0.15f objectToTransition:self];
-    }
-    
-    // Finally, update the progress bar
-    self.progressBarViewController.levelDetails = [self _getLevelDetails];
-    [self.progressBarViewController drawProgressBar];
+    return;
   }
+  
+  // Asks our delegate if it wants to change any of the details of the view (labels, etc)
+  // Due to a hack in PracticeModeCardViewDelegate.m, this call MUST be before setupWithCard:.
+  LWE_DELEGATE_CALL(@selector(updateStudyViewLabels:), self);
+
+  // Sets up all of the sub-controllers of the study view controller.
+  LWE_DELEGATE_CALL(@selector(studyViewWillSetup:),self);
+  
+  [self.cardViewController setupWithCard:card];
+  [self.actionBarController setupWithCard:card];
+  [self.exampleSentencesViewController setupWithCard:card];
+           
+  self.currentCard = card;
+  
+  // Sets up the page control (incl. determining if we have example sentences)
+  [self _setupPageControl:0];
+
+  // Show/Hide pronounce button depending on presence of plugin + sound for this file
+  self.pronounceBtn.hidden = ([self _shouldShowSampleAudioButtonForCard:card] == NO);
+  
+  // If no direction, don't animate transition
+  if (directionOrNil != nil)
+  {
+    [LWEViewAnimationUtils doViewTransition:kCATransitionPush direction:directionOrNil duration:0.15f objectToTransition:self];
+  }
+  
+  // Finally, update the progress bar
+  self.progressBarViewController.levelDetails = [self _getLevelDetails];
+  [self.progressBarViewController drawProgressBar];
 }
 
 - (void) doCardBtn:(NSNotification *)aNotification
