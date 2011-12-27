@@ -17,24 +17,14 @@
 #import "ChineseSettingsDataSource.h"
 #import "JapaneseSettingsDataSource.h"
 
-
-@interface SettingsViewController ()
-@property (retain) NSMutableDictionary *changedSettings;
-@end
-
 @implementation SettingsViewController
-@synthesize sectionArray, dataSource, delegate;
-@synthesize changedSettings;
+@synthesize sectionArray, dataSource;
 @synthesize downloadManager, pluginManager;
 
 NSString * const APP_ABOUT = @"about";
 NSString * const APP_TWITTER = @"twitter";
 NSString * const APP_FACEBOOK = @"facebook";
 NSString * const APP_NEW_UPDATE = @"new_update";
-
-// Notification
-NSString * const LWECardSettingsChanged = @"LWECardSettingsChanged";
-NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 
 #pragma mark -
 
@@ -50,23 +40,12 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 #elif defined(LWE_CFLASH)
   self.dataSource = [[[ChineseSettingsDataSource alloc] init] autorelease];
 #endif
-  self.delegate = (id<LWESettingsDelegate>)self.dataSource;
   
   // Update the badge value now that the outlet to the plugin manager is set
   [self updateBadgeValue];
 
   // Add an observer on the plugin manager so we can update the available for download badge
   [self.pluginManager addObserver:self forKeyPath:@"downloadablePlugins" options:NSKeyValueObservingOptionNew context:NULL];
-}
-
-- (id) initWithCoder:(NSCoder *)aDecoder
-{
-  self = [super initWithCoder:aDecoder];
-  if (self)
-  {
-    self.changedSettings = [NSMutableDictionary dictionary];
-  }
-  return self;
 }
 
 /** Customized to add support for observers/notifications */
@@ -94,45 +73,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
 	
   self.tableView.backgroundColor = [UIColor clearColor];
   [self.tableView reloadData];
-}
-
-
-//! Only re-load the set if settings were changed, otherwise there is no need to do anything
-- (void) viewWillDisappear:(BOOL)animated
-{
-  [super viewWillDisappear:animated];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  
-  BOOL shouldSendChangeNotification = NO;
-  BOOL shouldSendCardChangeNotification = NO;
-  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendChangeNotification))])
-  {
-    shouldSendChangeNotification = [self.delegate shouldSendChangeNotification];
-  }
-  if (self.delegate && [self.delegate respondsToSelector:(@selector(shouldSendCardChangeNotification))])
-  {
-    shouldSendCardChangeNotification = [self.delegate shouldSendCardChangeNotification];
-  }
-  
-  // Note that this is an else-if because a "settings changed" will re-run everything, so there is no
-  // reason to call both if you're calling the first.
-  if (shouldSendChangeNotification)
-  {
-    [[NSNotificationCenter defaultCenter] postNotificationName:LWEUserSettingsChanged object:self];
-  }
-  else if (shouldSendCardChangeNotification)
-  {
-    // For card settings, pass along what changed
-    NSNotification *aNotification = [NSNotification notificationWithName:LWECardSettingsChanged
-                                                                  object:self
-                                                                userInfo:self.changedSettings];
-    [[NSNotificationCenter defaultCenter] postNotification:aNotification];
-  }
-  
-  // Reset our "what changed" dictionary now that we've broadcast it
-  [self.changedSettings removeAllObjects];
-  
-  LWE_DELEGATE_CALL(@selector(settingsViewControllerWillDisappear:),self);
 }
 
 #pragma mark - Badge
@@ -204,9 +144,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
     nextValue = [tmpEnumerator nextObject];
   }
   [settings setValue:nextValue forKey:setting];
-  
-  // Now add to our local dictionary - send out for notifications!
-  [self.changedSettings setValue:nextValue forKey:setting];
   
   return;
 }
@@ -421,7 +358,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   else
   {
     // Everything else
-    LWE_DELEGATE_CALL(@selector(settingWillChange:),key);
     [self iterateSetting:key];
     [lclTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                         withRowAnimation:UITableViewRowAnimationNone];
@@ -463,7 +399,6 @@ NSString * const LWEUserSettingsChanged = @"LWESettingsChanged";
   [pluginManager release];
 
   [downloadManager release];
-  [changedSettings release];
   [dataSource release];
   [sectionArray release];
   [super dealloc];

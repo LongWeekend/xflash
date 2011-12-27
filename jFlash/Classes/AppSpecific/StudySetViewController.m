@@ -67,9 +67,11 @@ NSInteger const kLWEBackupSection = 2;
   
   // Register observers to reload table data on other events
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kSetWasAddedOrUpdated object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWECardSettingsChanged object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate object:nil queue:nil usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
+
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
   
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   
@@ -96,11 +98,27 @@ NSInteger const kLWEBackupSection = 2;
   [self reloadTableData];
 }
 
+#pragma mark - KVO
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  {
+    [self reloadTableData];
+  }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
+}
+
+#pragma mark -
+
 - (void) reloadSubgroupData
 {
   // Get subgroups
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:self.group.groupId];
-  for (int i = 0; i < [self.subgroupArray count]; i++)
+  for (NSInteger i = 0; i < [self.subgroupArray count]; i++)
   {
     [[self.subgroupArray objectAtIndex:i] childGroupCount];
   }
@@ -741,6 +759,9 @@ NSInteger const kLWEBackupSection = 2;
 
 - (void)viewDidUnload
 {
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self];  
   [super viewDidUnload];
 }

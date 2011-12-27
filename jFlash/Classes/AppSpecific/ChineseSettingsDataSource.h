@@ -9,11 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SettingsViewController.h"
 
-@interface ChineseSettingsDataSource : NSObject <LWESettingsDataSource, LWESettingsDelegate>
+@interface ChineseSettingsDataSource : NSObject <LWESettingsDataSource>
 
 @property (retain) NSDictionary *settingsHash;
-
-@property BOOL resetCardOnly;
-@property BOOL settingChanged;
 
 @end

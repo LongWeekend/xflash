@@ -12,8 +12,7 @@
 
 @implementation JapaneseSettingsDataSource
 
-@synthesize resetCardOnly;
-@synthesize settingsHash, settingChanged;
+@synthesize settingsHash;
 
 #pragma mark - Class Plumbing
 
@@ -21,41 +20,6 @@
 {
   [settingsHash release];
   [super dealloc];
-}
-
-#pragma mark - Settings Delegate
-
-- (void) settingWillChange:(NSString*)key
-{
-  // we don't want the current card to change for just a headword switch, theme or reading change
-  if ([key isEqualToString:APP_HEADWORD] ||
-      [key isEqualToString:APP_THEME] ||
-      [key isEqualToString:APP_DIFFICULTY] ||
-      [key isEqualToString:APP_READING])
-  {
-    self.resetCardOnly = YES; 
-  }
-  else
-  {
-    self.resetCardOnly = NO;
-  }
-  self.settingChanged = YES;
-}
-
-- (BOOL) shouldSendCardChangeNotification
-{
-  return (self.settingChanged && self.resetCardOnly);
-}
-
-- (BOOL) shouldSendChangeNotification
-{
-  return (self.settingChanged && (self.resetCardOnly == NO));
-}
-
-- (void) settingsViewControllerWillDisappear:(SettingsViewController*)vc
-{
-  // we've sent the notifications, so reset to unchanged
-  self.resetCardOnly = NO;
 }
 
 #pragma mark - Settings Data Source

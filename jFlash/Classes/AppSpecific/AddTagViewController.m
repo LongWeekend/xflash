@@ -77,13 +77,15 @@ enum EntrySectionRows
   self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
   
   // For listening for headword direction changes
-  [[NSNotificationCenter defaultCenter] addObserver:self.studySetTable selector:@selector(reloadData) name:LWECardSettingsChanged object:nil];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void) viewDidUnload
 {
   [super viewDidUnload];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
+  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
   self.studySetTable = nil;
 }
 
@@ -96,6 +98,20 @@ enum EntrySectionRows
   // TODO: iPad customization!
   self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
   self.studySetTable.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - KVO
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  {
+    [self.studySetTable reloadData];
+  }
+  else
+  {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
 }
 
 #pragma mark - Tag Content Did Change Methods
