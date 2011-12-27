@@ -92,7 +92,17 @@
   if (currentCard == nil)
   {
     self.alreadyShowedLearnedAlert = NO; // must be a new set if they want the first card
-    nextCard = [cardSet getFirstCardWithError:&error];
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if ([settings integerForKey:@"card_id"] != 0)
+    {
+      nextCard = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
+      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
+      [settings setInteger:0 forKey:@"card_id"];
+    }
+    else
+    {
+      nextCard = [cardSet getRandomCard:0 error:&error];
+    }
   }
   else
   {
@@ -100,7 +110,7 @@
   }
   
   // Notify if necessary
-  if ((nextCard.levelId == 5) && (error.code == kAllBuriedAndHiddenError))
+  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
   {
     [self _notifyUserStudySetHasBeenLearned];
   }

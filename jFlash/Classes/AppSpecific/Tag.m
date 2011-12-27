@@ -361,42 +361,6 @@ NSInteger const kLWELearnedCardLevel = 5;
 
 #pragma mark - Get Cards
 
-/** 
- *  \brief  Gets first card in browse mode or in a study mode.
- */
-- (Card *)getFirstCardWithError:(NSError **)error
-{
-  // TODO: why does Tag care what mode we are in?  Seems fishy to me.
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  Card *card = nil;
-  if ([[settings objectForKey:APP_MODE] isEqualToString:SET_MODE_BROWSE])
-  {
-    LWE_ASSERT_EXC((self.currentIndex < [self.flattenedCardIdArray count]), @"the currentIndex is out of bounds?");
-    NSNumber *cardId = [self.flattenedCardIdArray objectAtIndex:self.currentIndex];
-    card = [CardPeer retrieveCardByPK:[cardId intValue]];
-  }
-  else
-  {
-    if ([settings integerForKey:@"card_id"] != 0)
-    {
-      card = [CardPeer retrieveCardByPK:[settings integerForKey:@"card_id"]];
-      // We need to do this so that way this code knows to get a new card when loading 2nd or later set in one session
-      [settings setInteger:0 forKey:@"card_id"];
-    }
-    else
-    {
-      NSError *theError = nil;
-      card = [self getRandomCard:0 error:&theError];
-      if ((card.levelId == kLWELearnedCardLevel) && (theError.code == kAllBuriedAndHiddenError) && (error != NULL))
-      {
-        LWE_LOG(@"Someone asks for a first card in a set: %@.\nHowever, the user have already mastered this study set, ask the user for a solution.", self);
-        *error = theError;
-      }
-    }
-  }
-  return card;
-}
-
 /**
  * Returns a Card object from the database randomly
  * Accepts current cardId in an attempt to not return the last card again
@@ -475,40 +439,6 @@ NSInteger const kLWELearnedCardLevel = 5;
     }
   }
   return [CardPeer retrieveCardByPK:[cardId intValue]];
-}
-
-
-/**
- * Returns the next card in the list, resets index if at the end of the list
- */
-- (Card *) getNextCard
-{
-	if (self.currentIndex >= ([self.flattenedCardIdArray count] - 1))
-  {
-    self.currentIndex = 0;
-  }
-  else 
-  {
-    self.currentIndex++;
-  }
-  return [CardPeer retrieveCardByPK:[[self.flattenedCardIdArray objectAtIndex:self.currentIndex] intValue]];
-}
-
-
-/**
- * Returns the previous card in the list, resets index to top last card if at 0
- */
-- (Card *) getPrevCard
-{
-	if (self.currentIndex == 0)
-  {
-    self.currentIndex = ([self.flattenedCardIdArray count] - 1);
-  }
-  else
-  {
-    self.currentIndex--;
-  }
-  return [CardPeer retrieveCardByPK:[[self.flattenedCardIdArray objectAtIndex:self.currentIndex] intValue]];
 }
 
 #pragma mark - Database Related

@@ -81,21 +81,40 @@
 
 - (Card *)getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
 {
-  NSError *error = nil;
   Card *nextCard = nil;
   if (currentCard == nil)
   {
-    nextCard = [cardSet getFirstCardWithError:&error];
+    // If currentCard == nil, this is the "first card" -- use whatever the value of currentIndex is
+    LWE_ASSERT_EXC((cardSet.currentIndex < [cardSet.flattenedCardIdArray count]), @"the currentIndex is out of bounds?");
+    NSNumber *cardId = [cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex];
+    nextCard = [CardPeer retrieveCardByPK:[cardId intValue]];
   }
   else
   {
+    // We already have a card, so get the next card based on the current index
     if (directionOrNil == kCATransitionFromLeft) // if we are coming from the left, get the previous card
     {
-      nextCard = [cardSet getPrevCard];
+      if (cardSet.currentIndex == 0)
+      {
+        cardSet.currentIndex = ([cardSet.flattenedCardIdArray count] - 1);
+      }
+      else
+      {
+        cardSet.currentIndex--;
+      }
+      nextCard = [CardPeer retrieveCardByPK:[[cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex] intValue]];
     }
     else // if we are coming from the right or don't know, get the next card
     {
-      nextCard = [cardSet getNextCard];
+      if (cardSet.currentIndex >= ([cardSet.flattenedCardIdArray count] - 1))
+      {
+        cardSet.currentIndex = 0;
+      }
+      else 
+      {
+        cardSet.currentIndex++;
+      }
+      nextCard = [CardPeer retrieveCardByPK:[[cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex] intValue]];
     }
   }
   return nextCard;

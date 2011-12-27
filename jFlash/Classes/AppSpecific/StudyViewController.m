@@ -229,14 +229,13 @@
   // TODO: this should be on the delegate callback that sets the view's properties?
   self.cardSetLabel.text = self.currentCardSet.tagName;
   
-  // Change to new card, by passing nil, there is no animation
-  Card *nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
-  
   // Use this to set up delegates, show the card, etc
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSString *studyMode = [settings objectForKey:APP_MODE];
   [self _setupSubviewsForStudyMode:studyMode];
   
+  // Change to new card, by passing nil, there is no animation
+  Card *nextCard = [self.delegate getNextCard:self.currentCardSet afterCard:nil direction:nil];
   // TODO:  Set this class' delegate?  Update the card view controller/action?
   [self doChangeCard:nextCard direction:nil];
 }
