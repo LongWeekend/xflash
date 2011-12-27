@@ -116,7 +116,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
  */
 - (BOOL) canCancelTask
 {
-  if ([self.taskHandler isActive] && [self.taskHandler respondsToSelector:@selector(canCancelTask)])
+  if ([self.taskHandler respondsToSelector:@selector(canCancelTask)])
   {
     return [self.taskHandler canCancelTask];
   }
@@ -165,7 +165,7 @@ NSString * const LWEModalTaskDidFail = @"LWEModalTaskDidFail";
     }
   }
        
-  if (self.canCancelTask && (self.navigationItem.leftBarButtonItem == nil))
+  if (self.canCancelTask)
   {
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelProcess)];
     self.navigationItem.leftBarButtonItem = cancelButton;
