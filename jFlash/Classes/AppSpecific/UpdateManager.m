@@ -205,6 +205,7 @@
 {
   // We don't use this anymore -- iOS4.0+ state control does most of the heavy lifting for us now.
   [settings removeObjectForKey:@"card_id"];
+  [settings setInteger:DEFAULT_REMINDER_DAYS forKey:APP_REMINDER];
   
   //New key for the user settings preference in version 1.6
   [settings setObject:LWE_JF_VERSION_1_6 forKey:APP_SETTINGS_VERSION];

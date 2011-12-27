@@ -136,6 +136,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
   [settings setValue:SET_PINYIN_COLOR_ON forKey:APP_PINYIN_COLOR];
 #endif
     
+  [settings setInteger:DEFAULT_REMINDER_DAYS forKey:APP_REMINDER];
   [settings setValue:DEFAULT_THEME forKey:APP_THEME];
   [settings setValue:SET_MODE_QUIZ forKey:APP_MODE];
   [settings setValue:SET_J_TO_E forKey:APP_HEADWORD];
