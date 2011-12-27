@@ -75,7 +75,12 @@ class CEdictExporter
     DROP TABLE IF EXISTS tags;\\
     CREATE TABLE tags (tag_id INTEGER PRIMARY KEY AUTOINCREMENT, tag_name TEXT, description TEXT, editable INTEGER DEFAULT 1, count INTEGER NOT NULL  DEFAULT 0);\\
     \\
-    CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY ON CONFLICT REPLACE, nickname TEXT NOT NULL , avatar_image_path TEXT NOT NULL , date_created DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP );\\
+    DROP TABLE IF EXISTS users;\\
+    CREATE TABLE users (user_id INTEGER PRIMARY KEY ON CONFLICT REPLACE, nickname TEXT NOT NULL , avatar_image_path TEXT NOT NULL , date_created DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP );\\
+    INSERT INTO users VALUES(1,'You','foo','2011-10-19 11:55:36');\\
+    INSERT INTO users VALUES(2,'The Chairman','foo','2011-10-19 11:56:18');\\
+    INSERT INTO users VALUES(3,'My Best Friend','foo','2011-10-19 11:56:28');\\
+    INSERT INTO users VALUES(4,'Mom','foo','2011-10-19 11:56:36');\\
     \\
     DROP TABLE IF EXISTS user_history;\\
     CREATE TABLE user_history (card_id INTEGER, timestamp TIMESTAMP, user_id INTEGER, right_count INTEGER DEFAULT 0, wrong_count INTEGER DEFAULT 0, created_on TIMESTAMP, card_level INTEGER);\\
