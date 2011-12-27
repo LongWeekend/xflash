@@ -23,8 +23,9 @@ extern NSInteger const kLWELearnedCardLevel;
 
 @interface Tag : NSObject
 
-- (void) hydrate: (FMResultSet*)rs;
+- (void) hydrateWithResultSet:(FMResultSet*)rs;
 - (void) hydrate;
+- (void) save;
 
 //! Factory method that returns the starred words tag
 + (Tag *) starredWordsTag;
@@ -36,17 +37,14 @@ extern NSInteger const kLWELearnedCardLevel;
 - (BOOL) isEditable;
 
 - (void) populateCardIds;
-- (NSInteger) cardCount;
 - (void) moveCard:(Card*) card toLevel:(NSInteger) nextLevel;
 - (void) recacheCardCountForEachLevel;
 - (void) freezeCardIds;
 - (NSMutableArray *) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) addCardToActiveSet:(Card *)card;
-- (void) setCardCount:(int) count;
 - (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
-- (void) save;
 
 //! Is the tag deletable by the user?
 @property (nonatomic) NSInteger tagEditable;

@@ -24,17 +24,7 @@ NSInteger const kLWELearnedCardLevel = 5;
 @synthesize tagId, tagName, tagEditable, tagDescription, isFault = _isFault;
 @synthesize cardCount, currentIndex, cardIds, cardLevelCounts, flattenedCardIdArray;
 
-+ (Tag *) starredWordsTag
-{
-  return [TagPeer retrieveTagById:STARRED_TAG_ID];
-}
-
-+ (Tag *) blankTagWithId:(NSInteger)tagId
-{
-  Tag *tag = [[[[self class] alloc] init] autorelease];
-  tag.tagId = tagId;
-  return tag;
-}
+#pragma mark - Class Plumbing
 
 - (id) init
 {
@@ -47,6 +37,48 @@ NSInteger const kLWELearnedCardLevel = 5;
 	return self;
 }
 
+- (void) dealloc
+{
+  if (self.isFault == NO)
+  {
+    // When we hydrate a card, we also add an observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+  }
+  [tagName release];
+  [tagDescription release];
+  [flattenedCardIdArray release];
+  [cardLevelCounts release];
+  [cardIds release];
+	[super dealloc];
+}
+
+#pragma mark - NSObject Protocol
+
+- (BOOL)isEqual:(id)object
+{
+  if ([object isKindOfClass:[self class]])
+  {
+    Tag *anotherTag = (Tag *)object;
+    return (anotherTag.tagId == self.tagId);
+  }
+  return NO;
+}
+
+#pragma mark - Factory Helpers
+
++ (Tag *) starredWordsTag
+{
+  return [TagPeer retrieveTagById:STARRED_TAG_ID];
+}
+
++ (Tag *) blankTagWithId:(NSInteger)tagId
+{
+  Tag *tag = [[[[self class] alloc] init] autorelease];
+  tag.tagId = tagId;
+  return tag;
+}
+
+#pragma mark - Getters & Setters
 
 /**
  * Gets the group for this tag and returns the id
@@ -62,6 +94,32 @@ NSInteger const kLWELearnedCardLevel = 5;
 {
   return (self.tagEditable == 1);
 }
+
+- (NSInteger) cardCount
+{
+  return cardCount;
+}
+
+//! Setter for cardCount; updates the database cache automatically
+- (void) setCardCount:(NSInteger)newCount
+{
+  NSInteger currentCount = cardCount;
+  if (currentCount == newCount)
+  {
+    // do nothing if its the same
+    return;
+  }
+  
+  // update the count in the database if not first load (e.g. cardCount = -1)
+  if (currentCount >= 0)
+  {
+    [TagPeer setCardCount:newCount forTag:self];
+  }
+  
+  // set the variable to the new count - do this directly to bypass this setter!
+  cardCount = newCount; 
+}
+
 
 #pragma mark - Prep Card Ids, Deal with Card Ids
 
@@ -172,33 +230,6 @@ NSInteger const kLWELearnedCardLevel = 5;
   }
 }
 
-#pragma mark - Custom Getter & Setter - Card Count
-
-- (NSInteger) cardCount
-{
-  return cardCount;
-}
-
-//! Setter for cardCount; updates the database cache automatically
-- (void) setCardCount:(NSInteger)newCount
-{
-  NSInteger currentCount = cardCount;
-  if (currentCount == newCount)
-  {
-    // do nothing if its the same
-   return;
-  }
-  
-  // update the count in the database if not first load (e.g. cardCount = -1)
-  if (currentCount >= 0)
-  {
-    [TagPeer setCardCount:newCount forTag:self];
-  }
-
-  // set the variable to the new count - do this directly to bypass this setter!
-  cardCount = newCount; 
-}
-
 #pragma mark - Add & Remove Cards From the Tag
 
 /**
@@ -257,13 +288,13 @@ NSInteger const kLWELearnedCardLevel = 5;
 	FMResultSet *rs = [db.dao executeQuery:@"SELECT * FROM tags WHERE tag_id = ? LIMIT 1",[NSNumber numberWithInt:self.tagId]];
 	while ([rs next])
   {
-		[self hydrate:rs];
+		[self hydrateWithResultSet:rs];
 	}
 	[rs close];
 }
 
 //! takes a sqlite result set and populates the properties of Tag
-- (void) hydrate: (FMResultSet *) rs
+- (void) hydrateWithResultSet: (FMResultSet *) rs
 {
   self.tagId = [rs intForColumn:@"tag_id"];
   self.tagDescription = [rs stringForColumn:@"description"];
@@ -274,35 +305,6 @@ NSInteger const kLWELearnedCardLevel = 5;
   // We only care about getting new updates on data if we had data to begin with.
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
   _isFault = NO;
-}
-
-#pragma mark - Class Plumbing
-
-- (void) dealloc
-{
-  if (self.isFault == NO)
-  {
-    // When we hydrate a card, we also add an observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-  }
-  [tagName release];
-  [tagDescription release];
-  [flattenedCardIdArray release];
-  [cardLevelCounts release];
-  [cardIds release];
-	[super dealloc];
-}
-
-#pragma mark - NSObject Protocol
-
-- (BOOL)isEqual:(id)object
-{
-  if ([object isKindOfClass:[self class]])
-  {
-    Tag *anotherTag = (Tag *)object;
-    return (anotherTag.tagId == self.tagId);
-  }
-  return NO;
 }
 
 #pragma mark - Description

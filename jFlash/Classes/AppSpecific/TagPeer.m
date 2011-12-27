@@ -216,7 +216,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
 	while ([rs next])
   {
 		Tag *tmpTag = [[Tag alloc] init];
-		[tmpTag hydrate:rs];
+		[tmpTag hydrateWithResultSet:rs];
 		[tags addObject:tmpTag];
 		[tmpTag release];
 	}
@@ -230,7 +230,7 @@ NSString * const LWETagContentCardRemoved = @"LWETagContentCardRemoved";
   Tag *tmpTag = [[[Tag alloc] init] autorelease];
 	while ([rs next])
   {
-		[tmpTag hydrate:rs];
+		[tmpTag hydrateWithResultSet:rs];
 	}
 	[rs close];
 	return tmpTag;
