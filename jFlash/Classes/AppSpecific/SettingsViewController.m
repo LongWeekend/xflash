@@ -106,7 +106,6 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 
 #pragma mark - Private Methods
 
-// TODO: this could be a block someday.
 //! launchAppirater - convenience method for appirater
 - (void) _launchAppirater
 {

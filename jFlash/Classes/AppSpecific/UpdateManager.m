@@ -85,7 +85,6 @@
 + (BOOL) _needs11to12SettingsUpdate:(NSUserDefaults*) settings
 {
 	// First things first, do a check to make sure this is not a first run after an upgrade
-	// TODO: Check whether it needs to check [settings objectForKey:@"first_load"] as well
 	if (![settings objectForKey:PLUGIN_LAST_UPDATE] && [settings valueForKey:@"settings_already_created"])
 	{
 		return YES;

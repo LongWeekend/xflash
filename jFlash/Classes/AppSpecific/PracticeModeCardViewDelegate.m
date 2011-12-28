@@ -169,6 +169,7 @@
   NSInteger unseen = [[svc.currentCardSet.cardLevelCounts objectAtIndex:0] intValue];
   NSInteger total = svc.currentCardSet.cardCount;
   svc.remainingCardsLabel.text = [NSString stringWithFormat:@"%d / %d",unseen,total];
+  svc.cardSetLabel.text = svc.currentCardSet.tagName;
   
   // Update mood icon percentage (TODO: this is a hack, we have it as a 
   // local property and then update it when cardViewWillSetup: is called)

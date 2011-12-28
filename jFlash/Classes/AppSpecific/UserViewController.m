@@ -240,7 +240,6 @@
 /** Pushs the user details view controller onto the nav controller stack */
 - (void) showUserDetailsView
 {
-  // TODO: iPad customization!
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];

@@ -57,6 +57,8 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
   self.navigationItem.rightBarButtonItem = doneButton;
   [doneButton release];
   
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  
   if ([self isModal])
   {
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismiss)];
@@ -85,8 +87,6 @@ NSString * const kSetWasAddedOrUpdated = @"setAddedToView";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
 }
 
 /**
