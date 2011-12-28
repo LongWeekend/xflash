@@ -45,7 +45,7 @@
 
 - (void)changeStudySetToTag:(Tag*)newTag;
 
-- (void)doCardBtn: (NSNotification *)aNotification;
+- (IBAction)doCardBtn:(id)sender;
 - (void)doChangeCard: (Card*) card direction:(NSString*)directionOrNil;
 
 //! Gets notification from plugin manager

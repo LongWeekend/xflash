@@ -10,8 +10,6 @@
 #import "LWEJanrainLoginManager.h"
 #import "LWETwitterEngine.h"
 
-NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
-
 @interface ActionBarViewController ()
 - (void) _reportBadData;
 - (void) _initTwitterEngine;
@@ -45,52 +43,10 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
 
 #pragma mark - IBActions
 
-- (IBAction) doNextCardBtn
-{
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:NEXT_BTN]]];
-}
-
-- (IBAction) doPrevCardBtn
-{
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:PREV_BTN]]];
-}
-
-- (IBAction) doBuryCardBtn
-{
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:BURY_BTN]]];
-}
-
-- (IBAction) doRightBtn
-{
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:RIGHT_BTN]]];
-}
-
-- (IBAction) doWrongBtn
-{
-  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:LWEActionBarButtonWasTapped object:[NSNumber numberWithInt:WRONG_BTN]]];
-}
-
 - (IBAction) doRevealMeaningBtn
 {
   [self reveal];
 }
-
-#pragma mark - Core Class Methods
-
-- (void) setupWithCard:(Card *)card
-{
-  self.currentCard = card;
-  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
-  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
-}
-
-- (void) reveal
-{
-  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
-  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
-}
-
-#pragma mark - Action Sheet
 
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
@@ -106,18 +62,33 @@ NSString * const LWEActionBarButtonWasTapped = @"LWEActionBarButtonWasTapped";
   {
     favoriteString = NSLocalizedString(@"Add to Starred",@"ActionBarViewController.ActionSheetAddToFavorites");
   }
-
+  
   UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Card Actions",@"ActionBarViewController.ActionSheetTitle") delegate:self
-                                             cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
-                                             otherButtonTitles:
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel",@"ActionBarViewController.ActionSheetCancel") destructiveButtonTitle:nil
+                                         otherButtonTitles:
                        favoriteString,
                        NSLocalizedString(@"Add to Study Set",@"ActionBarViewController.ActionSheetAddToSet"),
 											 NSLocalizedString(@"Tweet Card",@"ActionBarViewController.ActionSheetTweet"),
                        NSLocalizedString(@"Fix Card",@"ActionBarViewController.ActionSheetReportBadData"),nil];
-
+  
   jFlashAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [as showInView:[[appDelegate tabBarController]view]]; 
   [as release];
+}
+
+#pragma mark - SVC Subcontroller Delegate Implementation
+
+- (void) setupWithCard:(Card *)card
+{
+  self.currentCard = card;
+  LWE_DELEGATE_CALL(@selector(actionBarWillSetup:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidSetup:), self);
+}
+
+- (void) reveal
+{
+  LWE_DELEGATE_CALL(@selector(actionBarWillReveal:), self);
+  LWE_DELEGATE_CALL(@selector(actionBarDidReveal:), self);
 }
 
 #pragma mark UIActionSheetDelegate methods - for "add to set" or "report bad data" action sheet

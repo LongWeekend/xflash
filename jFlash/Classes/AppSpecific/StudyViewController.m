@@ -130,7 +130,6 @@
   [settings addObserver:self forKeyPath:APP_READING options:NSKeyValueObservingOptionNew context:NULL];
 #endif
   
-  [center addObserver:self selector:@selector(doCardBtn:) name:LWEActionBarButtonWasTapped object:nil];
   [center addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
   [center addObserver:self selector:@selector(_tagContentDidChange:) name:LWETagContentDidChange object:nil];
   [center addObserver:self selector:@selector(_applicationDidEnterBackground:) name:UIApplicationWillTerminateNotification object:nil];
@@ -326,9 +325,9 @@
   [self.progressBarViewController drawProgressBar];
 }
 
-- (void) doCardBtn:(NSNotification *)aNotification
+- (IBAction)doCardBtn:(id)sender
 {
-  NSInteger action = [aNotification.object intValue];
+  NSInteger action = [(UIButton *)sender tag];
   
   // Default to animation from the right.
   NSString *direction = kCATransitionFromRight;

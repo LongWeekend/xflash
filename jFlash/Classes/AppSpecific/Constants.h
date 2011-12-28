@@ -1,9 +1,9 @@
 // Long weekend values
-#define NEXT_BTN 1
-#define PREV_BTN 2
-#define RIGHT_BTN 3
-#define WRONG_BTN 4
-#define BURY_BTN 6
+#define PREV_BTN 100
+#define NEXT_BTN 200
+#define RIGHT_BTN 300
+#define WRONG_BTN 400
+#define BURY_BTN 600
 
 #define DEFAULT_USER_ID 1
 #define DEFAULT_FREQUENCY_MULTIPLIER 1
