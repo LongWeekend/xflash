@@ -242,10 +242,9 @@
 		LWE_LOG(@"It tries to open up the tweet this words controller");
 		//Set all of the data 
 		NSString *tweetWord = [self getTweetWord];
-		self.tweetWordViewController = [[TweetWordViewController alloc] 
-													  initWithNibName:@"TweetWordViewController"  
-													  twitterEngine:self.twitterEngine 
-													  tweetWord:tweetWord];
+		self.tweetWordViewController = [[[TweetWordViewController alloc] initWithNibName:@"TweetWordViewController"  
+                                                                       twitterEngine:self.twitterEngine 
+                                                                           tweetWord:tweetWord] autorelease];
     
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.tweetWordViewController, @"controller", nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowModal object:self userInfo:dict];

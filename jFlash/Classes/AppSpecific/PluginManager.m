@@ -183,7 +183,10 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   if ([db attachDatabase:[plugin fullPath] withName:LWEDatabaseTempAttachName] == NO)
   {
     // Fail and return!
-    *error = [NSError errorWithCode:1 localizedDescription:@"Failed to attach database"];
+    if (error != NULL)
+    {
+      *error = [NSError errorWithCode:1 localizedDescription:@"Failed to attach database"];
+    }
     return NO;
   }
   
@@ -192,14 +195,20 @@ NSString * const LWEPluginDidInstall = @"LWEPluginDidInstall";
   [db detachDatabase:LWEDatabaseTempAttachName];
   if (version == nil)
   {
-    *error = [NSError errorWithCode:2 localizedDescription:@"Attached database, but could not find version table data"];
+    if (error != NULL)
+    {
+      *error = [NSError errorWithCode:2 localizedDescription:@"Attached database, but could not find version table data"];
+    }
     return NO;
   }
   
   // 3) Reattach with proper name
   if ([db attachDatabase:[plugin fullPath] withName:plugin.pluginId] == NO)
   {		  
-    *error = [NSError errorWithCode:3 localizedDescription:@"Could not re-attach database w/ new name - pluginId invalid?"];
+    if (error != NULL)
+    {
+      *error = [NSError errorWithCode:3 localizedDescription:@"Could not re-attach database w/ new name - pluginId invalid?"];
+    }
     return NO;
   }
   return YES;
