@@ -231,20 +231,21 @@ enum EntrySectionRows
   // setup the cell for the full entry
   if (indexPath.section == kAddTagEntrySection)
   {
+    // Cell attributes
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     // Don't re-add the same label
     UILabel *label = (UILabel*)[cell.contentView viewWithTag:101];
     if (label == nil)
     {
       label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
       label.tag = 101;
+      label.lineBreakMode = UILineBreakModeWordWrap;
+      label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
+      label.numberOfLines = 0;
+      label.backgroundColor = [UIColor clearColor];
       [cell.contentView addSubview:label];
     }
-    
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.minimumFontSize = FONT_SIZE_ADD_TAG_VC;
-    label.numberOfLines = 0;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
     
     NSString *reading = nil;
 #if defined(LWE_CFLASH)
@@ -256,7 +257,6 @@ enum EntrySectionRows
     [label adjustFrameWithFontSize:FONT_SIZE_ADD_TAG_VC
                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   // the cells for either tag type look the same
   else
