@@ -43,11 +43,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction) doRevealMeaningBtn
-{
-  [self reveal];
-}
-
 //! IBAction method - loads card action sheet so user can choose "add to set" or "report bad data"
 - (IBAction) showCardActionSheet
 {
