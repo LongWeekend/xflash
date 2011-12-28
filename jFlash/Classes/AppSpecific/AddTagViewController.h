@@ -10,12 +10,10 @@
 #import "Card.h"
 
 
-@interface AddTagViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AddTagViewController : UITableViewController
 
 - (id) initWithCard:(Card*) card;
 - (IBAction) addStudySet;
-
-@property (retain) IBOutlet UITableView *studySetTable;
 
 @property (retain) NSArray *myTagArray;
 @property (retain) NSArray *sysTagArray;

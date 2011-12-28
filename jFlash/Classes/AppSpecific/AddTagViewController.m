@@ -33,7 +33,7 @@ enum EntrySectionRows
 @end
 
 @implementation AddTagViewController
-@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
+@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard;
 
 #pragma mark - Initializer
 
@@ -59,10 +59,6 @@ enum EntrySectionRows
 
     // Set nav bar title
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
-
-    // Register listener to reload data if modal added a set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
   }
   return self;
 }
@@ -79,6 +75,10 @@ enum EntrySectionRows
   // For listening for headword direction changes
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+
+  // Register listener to reload data if modal added a set
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
 }
 
 - (void) viewDidUnload
@@ -86,18 +86,17 @@ enum EntrySectionRows
   [super viewDidUnload];
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
-  self.studySetTable = nil;
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
 - (void)viewWillAppear:(BOOL)animated
 {
-  // View related stuff
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.studySetTable.backgroundColor = [UIColor clearColor];
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
 }
 
 #pragma mark - KVO
@@ -106,7 +105,7 @@ enum EntrySectionRows
 {
   if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
   {
-    [self.studySetTable reloadData];
+    [self.tableView reloadData];
   }
   else
   {
@@ -136,7 +135,7 @@ enum EntrySectionRows
   {
     [self.membershipCacheArray removeObject:changedTag];
   }
-  [self.studySetTable reloadData];
+  [self.tableView reloadData];
 }
 
 #pragma mark - Instance Methods
@@ -158,7 +157,7 @@ enum EntrySectionRows
 {
   self.myTagArray = [TagPeer retrieveUserTagList];
   self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
-  [self.studySetTable reloadData];
+  [self.tableView reloadData];
 }
 
 - (void) _toggleMembershipForTag:(Tag *)tmpTag
@@ -389,10 +388,6 @@ enum EntrySectionRows
 //! Standard dealloc
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
-  
-  [studySetTable release];
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];
