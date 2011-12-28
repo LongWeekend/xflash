@@ -36,16 +36,42 @@
 
 - (IBAction) toneButtonPressed:(id)sender
 {
+  // Get the pasteboard
+  UIPasteboard *generalPasteboard = [UIPasteboard generalPasteboard];
+  NSArray *pasteboardItems = [generalPasteboard.items copy];
+  
   // Get the tone from the button's tag!
   NSInteger whichTone = [(UIView*)sender tag];
   if (whichTone != 5)
   {
-    self.text = [self.text stringByAppendingFormat:@"%d ",whichTone];
+    generalPasteboard.string = [NSString stringWithFormat:@"%d ",whichTone];
   }
   else
   {
-    self.text = [self.text stringByAppendingString:@"? "];
+    generalPasteboard.string = @"? ";
   }
+  
+  // This is ghetto, but UISearchBar doesn't expose its text field directly, so you have to
+  // find the subview with it.
+  BOOL found = NO;
+  for (UIView *subview in self.subviews)
+  {
+    if ([subview isKindOfClass:[UITextField class]])
+    {
+      found = YES;
+      [subview paste:subview];
+    }
+  }
+  
+  if (found == NO)
+  {
+    // Do it the old way, something CRAZY happened
+    self.text = [self.text stringByAppendingString:generalPasteboard.string];
+  }
+  
+  // Put everything back
+  generalPasteboard.items = pasteboardItems;
+  [pasteboardItems release];
 }
 
 @end

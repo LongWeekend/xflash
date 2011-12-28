@@ -46,11 +46,11 @@
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
 	//TODO: Calibrate this again
-	if (textField == passwordTxt)
+	if (textField == self.passwordTxt)
   {
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-75) withInterval:0.5f];
   }
-	else if (textField == unameTxt)
+	else if (textField == self.unameTxt)
   {
 		[LWEViewAnimationUtils translateView:self.view byPoint:CGPointMake(0,-75) withInterval:0.5f];
   }

@@ -38,6 +38,9 @@
   UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showUserDetailsView)];
   self.navigationItem.rightBarButtonItem = bbi;
   [bbi release];
+
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+  self.tableView.separatorColor = [UIColor lightGrayColor];
 }
 
 /** Update the view if any theme info changed */
@@ -45,10 +48,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  // TODO: iPad customization!
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.tableView.separatorColor = [UIColor lightGrayColor];
-  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - Delegate for child view
@@ -241,7 +240,6 @@
 /** Pushs the user details view controller onto the nav controller stack */
 - (void) showUserDetailsView
 {
-  // TODO: iPad customization!
   UserDetailsViewController *userDetailsView = [[UserDetailsViewController alloc] initWithUserDetails:nil];
   [self.navigationController pushViewController:userDetailsView animated:YES];
 	[userDetailsView release];

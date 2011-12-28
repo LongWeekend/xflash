@@ -49,6 +49,8 @@
                                                                   style:UIBarButtonItemStyleBordered
                                                                  target:self action:@selector(_supportBtnPressed:)] autorelease];
   self.navigationItem.rightBarButtonItem = supportBtn;
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+
   
   // We use absolute sizes though so let the old devices scale the images down.
   self.htmlFilenames = [NSArray arrayWithObjects:@"welcome@2x",
@@ -72,9 +74,8 @@
 /** Sets the nav bar tint to the current theme and sets the background to our standard */
 - (void)viewWillAppear: (BOOL)animated
 {
+  [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - 

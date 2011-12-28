@@ -44,6 +44,7 @@ extern NSInteger const kLWELearnedCardLevel;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) addCardToActiveSet:(Card *)card;
 - (NSMutableArray *) flattenCardArrays;
+- (NSInteger) seenCardCount;
 - (NSInteger) groupId;
 
 //! Is the tag deletable by the user?

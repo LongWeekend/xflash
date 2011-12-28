@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PDColoredProgressView.h"
-
+#import "Tag.h"
 
 @interface ProgressBarViewController : UIViewController
 
 - (void) drawProgressBar;
 
-@property (nonatomic, retain) NSMutableArray *levelDetails;
+@property (nonatomic, retain) Tag *tag;
 
 @end

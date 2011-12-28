@@ -38,7 +38,9 @@
 - (void) viewDidLoad
 {
   [super viewDidLoad];
-  
+
+  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+
   // Start editing right away
   [self.userNicknameTextField becomeFirstResponder];
 
@@ -66,9 +68,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
   [super viewWillAppear:animated];
-  // TODO: iPad customization!
 	self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
 }
 
 # pragma mark UI Responders

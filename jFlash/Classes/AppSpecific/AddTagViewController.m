@@ -12,18 +12,18 @@
 #import "TagPeer.h"
 #import "ChineseCard.h"
 
-enum Sections
+enum AddTagSections
 {
-  kEntrySection = 0,
-  kMyTagsSection = 1,
-  kSystemTagsSection = 2,
-  NUM_SECTIONS
+  kAddTagEntrySection = 0,
+  kAddTagUserSection = 1,
+  kAddTagSystemSection = 2,
+  kAddTagSectionCount
 };
 
 enum EntrySectionRows
 {
   kEntrySectionInfoRow = 0,
-  NUM_HEADER_SECTION_ROWS
+  kEntrySectionCount
 };
 
 // Private methods & properties
@@ -33,7 +33,7 @@ enum EntrySectionRows
 @end
 
 @implementation AddTagViewController
-@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard,studySetTable;
+@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard;
 
 #pragma mark - Initializer
 
@@ -59,45 +59,38 @@ enum EntrySectionRows
 
     // Set nav bar title
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
-
-    // Register listener to reload data if modal added a set
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
   }
   return self;
 }
 
-#pragma mark - UIViewDelegate methods
+#pragma mark - UIViewController methods
 
 - (void) viewDidLoad
 {
   [super viewDidLoad];
 
+  // Set up the table view background so we're not looking at cat's pajamas
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
+
   // Cache the tag's membership list
   self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
   
   // For listening for headword direction changes
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
+
+  // Register listener to reload data if modal added a set
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
 }
 
 - (void) viewDidUnload
 {
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_THEME];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super viewDidUnload];
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
-  self.studySetTable = nil;
-}
-
-/** Handles theming the nav bar, also caches the membershipCacheArray from TagPeer so we know what tags this card is a member of */
-- (void)viewWillAppear:(BOOL)animated
-{
-  // View related stuff
-  [super viewWillAppear:animated];
-  self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.studySetTable.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - KVO
@@ -106,7 +99,11 @@ enum EntrySectionRows
 {
   if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
   {
-    [self.studySetTable reloadData];
+    [self.tableView reloadData];
+  }
+  else if ([keyPath isEqualToString:APP_THEME])
+  {
+    self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   }
   else
   {
@@ -136,10 +133,10 @@ enum EntrySectionRows
   {
     [self.membershipCacheArray removeObject:changedTag];
   }
-  [self.studySetTable reloadData];
+  [self.tableView reloadData];
 }
 
-#pragma mark - Instance Methods
+#pragma mark - IBAction Methods
 
 /** Target action for the Nav Bar "Add" button, launches AddStudySetInputViewController in a modal */
 - (IBAction) addStudySet
@@ -158,7 +155,7 @@ enum EntrySectionRows
 {
   self.myTagArray = [TagPeer retrieveUserTagList];
   self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
-  [self.studySetTable reloadData];
+  [self.tableView reloadData];
 }
 
 - (void) _toggleMembershipForTag:(Tag *)tmpTag
@@ -193,28 +190,62 @@ enum EntrySectionRows
   }
 }
 
+#pragma mark - LWEAudioQueue Delegate Methods
+
+/*- (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
+{
+  [audioQueue pause];
+  self.pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
+{
+  //if the reason of interruption is whether the audio get deallocated
+  //or something else happen besides the phone call/other trivia thing which
+  //is better to get the audio play again
+  if (flag == LWEAudioQueueInterruptionShouldResume)
+  {
+    [audioQueue play];
+    self.pronounceBtn.enabled = NO;
+  }
+  else
+  {
+    self.pronounceBtn.enabled = YES;
+  }
+}
+
+- (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
+{
+  self.pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
+{
+  self.pronounceBtn.enabled = NO;
+}*/
+
 #pragma mark - UITableViewDataSource Methods
 
 //! Returns the total number of enum values in "Sections" enum
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return NUM_SECTIONS;
+  return kAddTagSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   NSInteger i = 0;
-  if (section == kMyTagsSection)
+  if (section == kAddTagUserSection)
   {
     i = [self.myTagArray count];
   }
-  else if (section == kSystemTagsSection)
+  else if (section == kAddTagSystemSection)
   {
     i = [self.sysTagArray count];  
   }
-  else if (section == kEntrySection)
+  else if (section == kAddTagEntrySection)
   {
-    i = NUM_HEADER_SECTION_ROWS;
+    i = kEntrySectionCount;
   }
   return i;
 }
@@ -222,7 +253,7 @@ enum EntrySectionRows
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = nil;
-  if (indexPath.section == kEntrySection)
+  if (indexPath.section == kAddTagEntrySection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"entry" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
@@ -232,22 +263,23 @@ enum EntrySectionRows
   } 
   
   // setup the cell for the full entry
-  if (indexPath.section == kEntrySection)
+  if (indexPath.section == kAddTagEntrySection)
   {
+    // Cell attributes
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     // Don't re-add the same label
     UILabel *label = (UILabel*)[cell.contentView viewWithTag:101];
     if (label == nil)
     {
       label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
       label.tag = 101;
+      label.lineBreakMode = UILineBreakModeWordWrap;
+      label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
+      label.numberOfLines = 0;
+      label.backgroundColor = [UIColor clearColor];
       [cell.contentView addSubview:label];
     }
-    
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.minimumFontSize = FONT_SIZE_ADD_TAG_VC;
-    label.numberOfLines = 0;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:FONT_SIZE_ADD_TAG_VC];
     
     NSString *reading = nil;
 #if defined(LWE_CFLASH)
@@ -259,14 +291,13 @@ enum EntrySectionRows
     [label adjustFrameWithFontSize:FONT_SIZE_ADD_TAG_VC
                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
   // the cells for either tag type look the same
   else
   {        
     // Get the tag arrays
     Tag *tmpTag = nil;
-    if (indexPath.section == kMyTagsSection)
+    if (indexPath.section == kAddTagUserSection)
     {
       tmpTag = [self.myTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -279,7 +310,7 @@ enum EntrySectionRows
         cell.accessoryType = UITableViewCellAccessoryNone;
       }
     }
-    else if (indexPath.section == kSystemTagsSection)
+    else if (indexPath.section == kAddTagSystemSection)
     {
       tmpTag = [self.sysTagArray objectAtIndex:indexPath.row];
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -296,7 +327,7 @@ enum EntrySectionRows
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-  if (section == kEntrySection)
+  if (section == kAddTagEntrySection)
   {
     UIView *containingView = [[[UIView alloc] init] autorelease];
     containingView.autoresizesSubviews = NO;
@@ -322,7 +353,7 @@ enum EntrySectionRows
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-  if (section == kEntrySection)
+  if (section == kAddTagEntrySection)
   {
     return 50.0f;
   }
@@ -334,11 +365,11 @@ enum EntrySectionRows
 
 -(NSString*) tableView: (UITableView*) tableView titleForHeaderInSection:(NSInteger)section
 {
-  if (section == kMyTagsSection)
+  if (section == kAddTagUserSection)
   {
     return NSLocalizedString(@"My Sets",@"AddTagViewController.TableHeader_MySets");
   }
-  else if (section == kSystemTagsSection && ([self.sysTagArray count] > 0))
+  else if (section == kAddTagSystemSection && ([self.sysTagArray count] > 0))
   {
     return NSLocalizedString(@"Other Sets with this Card",@"AddTagViewController.TableHeader_AllSets");
   }
@@ -350,7 +381,7 @@ enum EntrySectionRows
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  if (indexPath.section == kEntrySection)
+  if (indexPath.section == kAddTagEntrySection)
   {
     NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
@@ -371,7 +402,7 @@ enum EntrySectionRows
   [lclTableView deselectRowAtIndexPath:indexPath animated:NO];
   
   // do nothing for the entry section or system tags
-  if (indexPath.section == kEntrySection || indexPath.section == kSystemTagsSection)
+  if (indexPath.section == kAddTagEntrySection || indexPath.section == kAddTagSystemSection)
   {
     return;
   }
@@ -389,10 +420,6 @@ enum EntrySectionRows
 //! Standard dealloc
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [[NSNotificationCenter defaultCenter] removeObserver:self.studySetTable];
-  
-  [studySetTable release];
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

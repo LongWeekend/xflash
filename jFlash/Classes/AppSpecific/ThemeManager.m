@@ -22,7 +22,6 @@ NSString * const DEFAULT_THEME       = @"FIRE";
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ThemeManager);
 
-//TODO: someday it would make sense to break out each theme as a class, but not for this app
 //! Initialize theme manager (defines all themes as well)
 - (id) init
 {

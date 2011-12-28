@@ -32,7 +32,7 @@ NSInteger const kLWEBackupSection = 2;
   self = [super initWithCoder:aDecoder];
   if (self)
   {
-    selectedTagId = -1;
+    selectedTagId = kLWEUninitializedTagId;
     // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
     self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
   }
@@ -44,7 +44,7 @@ NSInteger const kLWEBackupSection = 2;
   self = [self initWithNibName:@"StudySetView" bundle:nil];
   if (self)
   {
-    selectedTagId = -1;
+    selectedTagId = kLWEUninitializedTagId;
     self.group = aGroup;
     self.title = aGroup.groupName;
   }
@@ -87,14 +87,15 @@ NSInteger const kLWEBackupSection = 2;
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+  
+  //  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   if (searching == NO)
   {
     [self hideSearchBar];
   }
-  [self.tableView setBackgroundColor:[UIColor clearColor]];
   [self reloadTableData];
 }
 
@@ -118,9 +119,9 @@ NSInteger const kLWEBackupSection = 2;
 {
   // Get subgroups
   self.subgroupArray = [GroupPeer retrieveGroupsByOwner:self.group.groupId];
-  for (NSInteger i = 0; i < [self.subgroupArray count]; i++)
+  for (Group *subGroup in self.subgroupArray)
   {
-    [[self.subgroupArray objectAtIndex:i] childGroupCount];
+    [subGroup childGroupCount];
   }
 }
 

@@ -23,8 +23,6 @@
 #define SVC_ACTION_TWEET_BUTTON 2
 #define SVC_ACTION_REPORT_BUTTON 3
 
-extern NSString * const LWEActionBarButtonWasTapped;
-
 @class ActionBarViewController;
 
 @protocol ActionBarViewControllerDelegate <NSObject>
@@ -48,13 +46,6 @@ extern NSString * const LWEActionBarButtonWasTapped;
                                                        LWETRequestDelegate>
 
 - (NSString *)getTweetWord;
-
-// interface actions
-- (IBAction)doNextCardBtn;
-- (IBAction)doPrevCardBtn;
-- (IBAction)doRightBtn;
-- (IBAction)doWrongBtn;
-- (IBAction)doBuryCardBtn;
 
 // core methods
 - (void)tweet;

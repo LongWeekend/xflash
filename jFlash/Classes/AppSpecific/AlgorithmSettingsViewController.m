@@ -14,7 +14,7 @@
 @implementation AlgorithmSettingsViewController
 @synthesize maxCardsSlider, frequencySlider, difficultySegmentControl, tableView;
 
-enum Sections {
+enum AlgorithmSections {
   kControlsSection = 0,
   kFrequencyMultiplierSection = 1,
   kShowBuriedCardsSection = 2,

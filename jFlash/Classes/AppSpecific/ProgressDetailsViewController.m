@@ -10,11 +10,13 @@
 #import "UserPeer.h"
 
 @implementation ProgressDetailsViewController
-@synthesize closeBtn, currentStudySet, motivationLabel, levelDetails, streakLabel, rightStreak, wrongStreak;
+@synthesize closeBtn, currentStudySet, motivationLabel, streakLabel, rightStreak, wrongStreak;
 @synthesize cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2, cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5;
 @synthesize cardsViewedAllTime, cardsViewedNow, cardsRightNow, cardsWrongNow, progressViewTitle;
 @synthesize currentNumberOfWords, totalNumberOfWords;
 @synthesize bgView;
+
+@synthesize tag;
 
 #pragma mark - UIViewController Methods
 
@@ -35,7 +37,7 @@
   
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   NSInteger maxStudying = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger totalWords = [[self.levelDetails objectAtIndex:6] intValue];
+  NSInteger totalWords = tag.cardCount;
   if (totalWords > maxStudying)
   {
     self.currentNumberOfWords.text = [NSString stringWithFormat:@"%d*",maxStudying];
@@ -47,8 +49,8 @@
     self.totalNumberOfWords.text = [NSString stringWithFormat:@"%d",totalWords];
   }    
 
-  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",[[self.levelDetails objectAtIndex:7] intValue]];
-  self.currentStudySet.text = [[[CurrentState sharedCurrentState] activeTag] tagName];
+  self.cardsViewedAllTime.text = [NSString stringWithFormat:@"%d",(tag.cardCount - [[tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue])];
+  self.currentStudySet.text = tag.tagName;
 }
 
 
@@ -95,10 +97,11 @@
 - (void)drawProgressBars
 {  
   NSString *labelText = nil;
-  NSArray *labelsArray = [[NSArray alloc] initWithObjects: cardSetProgressLabel0, cardSetProgressLabel1, cardSetProgressLabel2 , cardSetProgressLabel3, cardSetProgressLabel4, cardSetProgressLabel5, nil];
+  NSArray *labelsArray = [[NSArray alloc] initWithObjects:self.cardSetProgressLabel0, self.cardSetProgressLabel1, self.cardSetProgressLabel2 , self.cardSetProgressLabel3, self.cardSetProgressLabel4, self.cardSetProgressLabel5, nil];
   for (NSInteger i = 0; i < 6; i++)
   {
-    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", 100*[[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue], [[levelDetails objectAtIndex:i]intValue]];
+    NSNumber *cardsAtLevel = [tag.cardLevelCounts objectAtIndex:i];
+    labelText = [NSString stringWithFormat:@"%.0f%% ~ %i", (100*([cardsAtLevel floatValue] / (CGFloat)tag.cardCount)), [cardsAtLevel integerValue]];
     [[labelsArray objectAtIndex:i] setText:labelText];
   }
   [labelsArray release];
@@ -107,21 +110,15 @@
   NSInteger pbOrigin = 203;
   for (NSInteger i = 0; i < 6; i++)
   {  
-    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault];
-    [progressView setTintColor:[lineColors objectAtIndex: i]];
-    progressView.progress = [[levelDetails objectAtIndex: i] floatValue] / [[levelDetails objectAtIndex: 6] floatValue];
+    PDColoredProgressView *progressView = [[PDColoredProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    [progressView setTintColor:[lineColors objectAtIndex:i]];
+    progressView.progress = ([[tag.cardLevelCounts objectAtIndex:i] floatValue] / (CGFloat)tag.cardCount);
     // TODO: iPad customization!
-    CGRect frame = progressView.frame;
-    frame.size.width = 80;
-    frame.size.height = 14;
-    frame.origin.x = 120;
-    frame.origin.y = pbOrigin;
-    
-    progressView.frame = frame;
+    progressView.frame = CGRectMake(120, pbOrigin, 80, 14);
     [self.view addSubview:progressView];
-    
     //move the origin of the next progress bar over
-    pbOrigin += frame.size.height + 6;
+    pbOrigin += progressView.frame.size.height + 6;
+    [progressView release];
   }
 }
 
@@ -155,7 +152,6 @@
   [cardsViewedNow release];
   [progressViewTitle release];
   
-  [levelDetails release];
   [currentNumberOfWords release];
   [totalNumberOfWords release];
   [cardSetProgressLabel0 release];

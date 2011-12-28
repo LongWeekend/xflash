@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
+#import "LWEAudioQueue.h"
 
-
-@interface AddTagViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AddTagViewController : UITableViewController <LWEAudioQueueDelegate>
 
 - (id) initWithCard:(Card*) card;
 - (IBAction) addStudySet;
-
-@property (retain) IBOutlet UITableView *studySetTable;
 
 @property (retain) NSArray *myTagArray;
 @property (retain) NSArray *sysTagArray;

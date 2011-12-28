@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tag.h"
 #import "PDColoredProgressView.h"
 
 @interface ProgressDetailsViewController : UIViewController
@@ -16,7 +17,8 @@
 - (void) drawProgressBars;
 - (void) setStreakLabel;
 
-@property (nonatomic, retain) NSMutableArray *levelDetails;
+@property (nonatomic, retain) Tag *tag;
+
 @property (nonatomic, retain) IBOutlet UIView *bgView;
 @property (nonatomic,retain) IBOutlet UILabel *currentNumberOfWords;
 @property (nonatomic,retain) IBOutlet UILabel *totalNumberOfWords;

@@ -75,8 +75,7 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.tableView.backgroundColor = [UIColor clearColor];
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
 }
 
 - (void)viewDidUnload
@@ -212,20 +211,20 @@
       // "Loading words..." pre-display cell
       cell = [LWEUITableUtils reuseCellForIdentifier:headerIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = NSLocalizedString(@"Loading words...",@"StudySetWordsViewController.LoadingWords");
-      cell.accessoryView = activityIndicator;
-      [activityIndicator startAnimating];
+      cell.accessoryView = self.activityIndicator;
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      [self.activityIndicator startAnimating];
     }
     else
     {
       // The actual words, once loaded
       cell = [LWEUITableUtils reuseCellForIdentifier:cellIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      cell.selectionStyle = UITableViewCellSelectionStyleGray;
       Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
       if (tmpCard.isFault)
       {
         // Lazy load & update our array
         [tmpCard hydrate];
-        [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
       // Ignore = YES means we get the target language HW no matter what, no headword_en

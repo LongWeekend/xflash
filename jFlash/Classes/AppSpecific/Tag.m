@@ -95,6 +95,11 @@ NSInteger const kLWELearnedCardLevel = 5;
   return (self.tagEditable == 1);
 }
 
+- (NSInteger) seenCardCount
+{
+  return (self.cardCount - [[self.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] integerValue]);
+}
+
 - (NSInteger) cardCount
 {
   return cardCount;
@@ -140,7 +145,6 @@ NSInteger const kLWELearnedCardLevel = 5;
   self.cardLevelCounts = cardLevelCountsTmp;
   self.cardCount = totalCount;
 }
-
 
 /** Unarchive plist file containing the user's last session data */
 - (NSMutableArray *) thawCardIds
