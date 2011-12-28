@@ -190,6 +190,40 @@ enum EntrySectionRows
   }
 }
 
+#pragma mark - LWEAudioQueue Delegate Methods
+
+/*- (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
+{
+  [audioQueue pause];
+  self.pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueFinishInterruption:(LWEAudioQueue *)audioQueue withFlag:(LWEAudioQueueInterruptionFlag)flag
+{
+  //if the reason of interruption is whether the audio get deallocated
+  //or something else happen besides the phone call/other trivia thing which
+  //is better to get the audio play again
+  if (flag == LWEAudioQueueInterruptionShouldResume)
+  {
+    [audioQueue play];
+    self.pronounceBtn.enabled = NO;
+  }
+  else
+  {
+    self.pronounceBtn.enabled = YES;
+  }
+}
+
+- (void)audioQueueDidFinishPlaying:(LWEAudioQueue *)audioQueue
+{
+  self.pronounceBtn.enabled = YES;
+}
+
+- (void)audioQueueWillStartPlaying:(LWEAudioQueue *)audioQueue
+{
+  self.pronounceBtn.enabled = NO;
+}*/
+
 #pragma mark - UITableViewDataSource Methods
 
 //! Returns the total number of enum values in "Sections" enum

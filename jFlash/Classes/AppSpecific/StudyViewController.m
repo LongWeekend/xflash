@@ -42,16 +42,6 @@
 
 #pragma mark - LWEAudioQueue Delegate Methods
 
-- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailLoadingURL:(NSURL *)url error:(NSError *)error
-{
-  
-}
-
-- (void)audioQueue:(LWEAudioQueue *)audioQueue didFailPlayingURL:(NSURL *)url error:(NSError *)error
-{
-  
-}
-
 - (void)audioQueueBeginInterruption:(LWEAudioQueue *)audioQueue
 {
   [audioQueue pause];
