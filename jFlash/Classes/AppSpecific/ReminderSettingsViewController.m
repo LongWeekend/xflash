@@ -39,17 +39,13 @@
 
 #pragma mark - View lifecycle
 
-- (void) viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  // Get rid of cat's pajama's.
-  self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-  self.tableView.backgroundColor = [UIColor clearColor];
-}
-
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  
+  // Get rid of the cat's pajamas
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+
   self.onOffSwitch.on = self.remindersOn;
   self.navigationItem.title = NSLocalizedString(@"Study Reminders",@"ReminderVC.Title");
   

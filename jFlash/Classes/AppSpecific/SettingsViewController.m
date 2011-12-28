@@ -53,25 +53,22 @@ NSString * const APP_NEW_UPDATE = @"new_update";
 {
   [super viewDidLoad];
   self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
+
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+
+  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
+  self.navigationItem.leftBarButtonItem = rateUsBtn;
+  [rateUsBtn release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  // TODO: iPad customization!
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
-
-  UIBarButtonItem *rateUsBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rate Us",@"SettingsViewController.RateUsButton") style:UIBarButtonItemStyleBordered target:self action:@selector(_launchAppirater)];
-  self.navigationItem.leftBarButtonItem = rateUsBtn;
-  [rateUsBtn release];
-  
   //Added this in, so that it refreshes it self when the user is going to this Settings view,
   // after the user changes something that is connected with the appearance of this VC
   // (e.g. after they change users, et al)
   self.sectionArray = [self.dataSource settingsArrayWithPluginManager:self.pluginManager];
-	
-  self.tableView.backgroundColor = [UIColor clearColor];
   [self.tableView reloadData];
 }
 

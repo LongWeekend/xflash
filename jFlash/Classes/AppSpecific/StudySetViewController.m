@@ -87,14 +87,15 @@ NSInteger const kLWEBackupSection = 2;
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization?
-  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:LWETableBackgroundImage]];
+  self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+  
+  //  self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:];
   self.searchBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   self.searchBar.placeholder = NSLocalizedString(@"Search Sets By Name",@"StudySetViewController.SearchPlaceholder");
   if (searching == NO)
   {
     [self hideSearchBar];
   }
-  [self.tableView setBackgroundColor:[UIColor clearColor]];
   [self reloadTableData];
 }
 
