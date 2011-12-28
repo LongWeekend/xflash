@@ -7,74 +7,72 @@
 //
 
 #import "ProgressBarViewController.h"
+#import "PDColoredProgressView.h"
 
 // The label tags are set in the NIB file!! Be careful!  (That's how we find out what the labels are, not a reference)
 #define PROGRESS_BAR_TAG 100
 #define PROGRESS_LABEL_TAG 200
 
+@interface ProgressBarViewController ()
+- (PDColoredProgressView *)_progressBarForLevel:(NSInteger)i;
+@end
+
 @implementation ProgressBarViewController
-@synthesize levelDetails;
+@synthesize tag;
+
+- (PDColoredProgressView *)_progressBarForLevel:(NSInteger)i
+{
+    // Get the current progress view for this guy and remove him (we are going to re-add)
+    PDColoredProgressView *progressView = (PDColoredProgressView*)[self.view viewWithTag:(i+PROGRESS_BAR_TAG)];
+    if (progressView == nil)
+    {
+        NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
+        progressView = [[[PDColoredProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
+        progressView.tag = i+PROGRESS_BAR_TAG;
+        [progressView setTintColor:[lineColors objectAtIndex:i]];
+        [self.view addSubview:progressView];
+    }
+    return progressView;
+}
 
 // draws the progress bar
 - (void) drawProgressBar
 {
-  NSArray *lineColors = [NSArray arrayWithObjects:[UIColor darkGrayColor],[UIColor redColor],[UIColor lightGrayColor],[UIColor cyanColor],[UIColor orangeColor],[UIColor greenColor], nil];
-  NSInteger i;
+  // TODO: iPad customization
   NSInteger pbOrigin = 7;
-  float thisCount;
+  NSInteger thisLevelCount = tag.seenCardCount;
   
-  for (i = 1; i < 6; i++)
+  // For levels 1-5
+  for (NSInteger i = 1; i < 6; i++)
   {
-    // Get the current progress view for this guy and remove him (we are going to re-add)
-    PDColoredProgressView *progressView = (PDColoredProgressView*)[self.view viewWithTag:(i+PROGRESS_BAR_TAG)];
-    if (!progressView)
+    // This call handles the creation and/or getting of the progress bar
+    PDColoredProgressView *progressView = [self _progressBarForLevel:i];
+
+    if (i > 1)
     {
-      progressView = [[[PDColoredProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleDefault] autorelease];
-      progressView.tag = i+PROGRESS_BAR_TAG;
-      [self.view addSubview:progressView];
+      thisLevelCount -= [[tag.cardLevelCounts objectAtIndex:i-1] intValue];
     }
-    [progressView setTintColor:[lineColors objectAtIndex:i]];
-    if (i == 1)
+    CGFloat progress = 0.0f;
+    if (tag.seenCardCount > 0)
     {
-      thisCount = [[levelDetails objectAtIndex: 7] floatValue];
-    }
-    else
-    {
-      thisCount -= [[levelDetails objectAtIndex: i-1] floatValue]; 
-    }
-    float seencount = [[levelDetails objectAtIndex: 7] floatValue];
-    float progress;
-    if(seencount == 0)
-    {
-      progress = 0;
-    }
-    else
-    {
-      progress = thisCount / seencount;
+      progress = ((CGFloat)thisLevelCount / (CGFloat)tag.seenCardCount);
     }
     progressView.progress = progress;
+    
     // TODO: iPad customization!
-    CGRect frame = progressView.frame;
-    frame.size.width = 57;
-    frame.size.height = 14;
-    frame.origin.x = pbOrigin;
-    frame.origin.y = 19;
-    
-    progressView.frame = frame;
-    
     //move the origin of the next progress bar over
-    pbOrigin += frame.size.width + 5;
-    
+    progressView.frame = CGRectMake(pbOrigin, 19, 57, 14);
+    pbOrigin += progressView.frame.size.width + 5;
   }
   
   // Finally bring all the labels to the front
-  for (i = 1; i < 6; i++)
+  for (NSInteger i = 1; i < 6; i++)
   {
     // Update the label
     UILabel *progressLabel = (UILabel*)[self.view viewWithTag:(i+PROGRESS_LABEL_TAG)];
-    if (progressLabel && [self levelDetails])
+    if (progressLabel)
     {
-      [progressLabel setText:[NSString stringWithFormat:@"%d",[[levelDetails objectAtIndex:i] integerValue]]];
+      progressLabel.text = [NSString stringWithFormat:@"%d",[[tag.cardLevelCounts objectAtIndex:i] integerValue]];
       [self.view bringSubviewToFront:progressLabel];
     }
   }
@@ -84,7 +82,7 @@
 
 - (void)dealloc 
 {
-  [levelDetails release];
+  [tag release];
   [super dealloc];
 }
 

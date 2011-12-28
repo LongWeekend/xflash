@@ -43,6 +43,7 @@ extern NSInteger const kLWELearnedCardLevel;
 - (NSMutableArray *) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) addCardToActiveSet:(Card *)card;
+- (NSInteger) seenCardCount;
 - (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
 

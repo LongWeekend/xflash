@@ -19,7 +19,6 @@
 - (BOOL) _shouldShowExampleViewForCard:(Card*)card;
 - (BOOL) _shouldShowSampleAudioButtonForCard:(Card*)card;
 - (void) _tagContentDidChange:(NSNotification*)notification;
-- (NSMutableArray*) _getLevelDetails;
 - (void) _setupScrollView;
 - (void)_setupPageControl:(NSInteger)page;
 - (void) _setupDelegateForStudyMode:(NSString*)studyMode;
@@ -211,6 +210,10 @@
   {
     [self.currentCardSet removeObserver:self forKeyPath:@"tagName"];
   }
+  
+  // Tell the progress bars about this new tag
+  self.progressDetailsViewController.tag = newTag;
+  self.progressBarViewController.tag = newTag;
 
   // Get active set/tag & add an observer
   self.currentCardSet = newTag;
@@ -330,7 +333,6 @@
   }
   
   // Finally, update the progress bar
-  self.progressBarViewController.levelDetails = [self _getLevelDetails];
   [self.progressBarViewController drawProgressBar];
 }
 
@@ -394,10 +396,9 @@
     self.progressDetailsViewController = progressView;
     [progressView release];
   }
-  self.progressDetailsViewController.levelDetails = [self _getLevelDetails];
-  self.progressDetailsViewController.rightStreak = currentRightStreak;
-  self.progressDetailsViewController.wrongStreak = currentWrongStreak;
-  self.progressDetailsViewController.currentStudySet.text = currentCardSet.tagName;
+  self.progressDetailsViewController.tag = self.currentCardSet;
+  self.progressDetailsViewController.rightStreak = self.currentRightStreak;
+  self.progressDetailsViewController.wrongStreak = self.currentWrongStreak;
   self.progressDetailsViewController.cardsRightNow.text = [NSString stringWithFormat:@"%i", self.numRight];
   self.progressDetailsViewController.cardsWrongNow.text = [NSString stringWithFormat:@"%i", self.numWrong];
   self.progressDetailsViewController.cardsViewedNow.text = [NSString stringWithFormat:@"%i", self.numViewed];
@@ -431,21 +432,18 @@
   _isChangingPage = YES;
 }
 
-
 //! convenience method for have the animated bool defalut to yes for Interface Builder
 - (IBAction)changePage:(id)sender
 {
   [self changePage:sender animated:YES];
 }
 
-
 /** Shows the meaning/reading */
 - (IBAction) revealCard
 {
   LWE_DELEGATE_CALL(@selector(studyViewWillReveal:), self);
-  
   [self.cardViewController reveal];
-  [self.actionBarController reveal];  
+  [self.actionBarController reveal];
 }
 
 - (IBAction) pronounceCard:(id)sender
@@ -508,37 +506,6 @@
 #else
   return NO;
 #endif
-}
-
-
-/**
- * Returns an array with card counts.  First six elements of the array are the card counts for set levels unseen through 5,
- * the sixth element is the total number of seen cards (levels 1-5)
- */
-// REVIEW: Why isn't this method in Tag.m??  Or, the level details I believe are passed to Progress Bar- maybe it should be there?
-- (NSMutableArray*) _getLevelDetails
-{
-  // This is a convenience method that alloc's and sets to autorelease!
-  NSMutableArray* levelDetails = nil;
-  NSNumber *countObject = nil;
-  NSInteger i;
-  CGFloat seencount = 0;
-  
-  // Crash protection in case we don't have the card level counts yet
-  if ([[self.currentCardSet cardLevelCounts] count] == 6)
-  {
-    levelDetails = [NSMutableArray arrayWithCapacity:7];
-    for (i = 0; i < 6; i++)
-    {
-      countObject = [[self.currentCardSet cardLevelCounts] objectAtIndex:i];
-      [levelDetails addObject:countObject];
-      if(i > 0)
-        seencount = seencount + [[levelDetails objectAtIndex:i] floatValue];
-    }
-    [levelDetails addObject:[NSNumber numberWithInt:[self.currentCardSet cardCount]]];  
-    [levelDetails addObject:[NSNumber numberWithFloat:seencount]];
-  }
-  return levelDetails;
 }
 
 - (void) _tagContentDidChange:(NSNotification*)notification
@@ -639,7 +606,6 @@
   }
 }
 
-
 #pragma mark - Plugin-Related
 
 - (BOOL) hasExampleSentences
@@ -662,7 +628,6 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 }
 
-
 /**
  * Connects the "Play Audio" button to actually launch the installer
  * Kind of just a convenience method
@@ -674,7 +639,6 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldShowDownloadModal object:exPlugin userInfo:nil];
 #endif
 }
-
 
 /** Called by notification when a plugin is installed - if it is Example sentences, handle that */
 - (void)pluginDidInstall:(NSNotification *)aNotification
@@ -777,13 +741,12 @@
   // Only freeze if we have a database
   if ([[[LWEDatabase sharedLWEDatabase] dao] goodConnection])
   {
-    // Save current card, user, and set, update cache - study view controller also does some settings stuff independently
-    CurrentState *state = [CurrentState sharedCurrentState];
+    // Save current tag id & location
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    [settings setInteger:state.activeTag.tagId forKey:@"tag_id"];
-    [settings setInteger:state.activeTag.currentIndex forKey:@"current_index"];
+    [settings setInteger:self.currentCardSet.tagId forKey:@"tag_id"];
+    [settings setInteger:self.currentCardSet.currentIndex forKey:@"current_index"];
     [settings synchronize];
-    [[state activeTag] freezeCardIds];
+    [self.currentCardSet freezeCardIds];
   }
 }
 
@@ -825,7 +788,6 @@
 - (void) dealloc
 {
   [pronounceBtn release];
-  
   
   //theme
   [practiceBgImage release];
