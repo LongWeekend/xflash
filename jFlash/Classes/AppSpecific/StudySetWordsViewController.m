@@ -211,20 +211,20 @@
       // "Loading words..." pre-display cell
       cell = [LWEUITableUtils reuseCellForIdentifier:headerIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleDefault];
       cell.textLabel.text = NSLocalizedString(@"Loading words...",@"StudySetWordsViewController.LoadingWords");
-      cell.accessoryView = activityIndicator;
-      [activityIndicator startAnimating];
+      cell.accessoryView = self.activityIndicator;
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      [self.activityIndicator startAnimating];
     }
     else
     {
       // The actual words, once loaded
       cell = [LWEUITableUtils reuseCellForIdentifier:cellIdentifier onTable:lclTableView usingStyle:UITableViewCellStyleSubtitle];
-      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+      cell.selectionStyle = UITableViewCellSelectionStyleGray;
       Card *tmpCard = [self.cards objectAtIndex:indexPath.row];
       if (tmpCard.isFault)
       {
         // Lazy load & update our array
-        tmpCard = [CardPeer retrieveCardByPK:tmpCard.cardId];
-        [self.cards replaceObjectAtIndex:indexPath.row withObject:tmpCard];
+        [tmpCard hydrate];
       }
       cell.detailTextLabel.text = [tmpCard meaningWithoutMarkup];
       // Ignore = YES means we get the target language HW no matter what, no headword_en
