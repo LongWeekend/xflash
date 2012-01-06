@@ -11,7 +11,6 @@
 // Private methods
 @interface UpdateManager ()
 #if defined(LWE_JFLASH)
-
 + (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
 
 // JFLASH 1.1 -> 1.2
@@ -28,7 +27,11 @@
 + (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom14to15:(NSUserDefaults *)settings;
 
-+ (BOOL) _movePluginsToCacheDirectory;
+// JFLASH 1.5 -> 1.6
++ (BOOL) _needs15to16SettingsUpdate:(NSUserDefaults *) settings;
++ (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings;
+
+
 #else
 
 /**
@@ -144,7 +147,7 @@
 }
 
 /** Updates NSUserDefaults to add 1.2 values*/
-+ (void) _updateSettingsFrom12to13:(NSUserDefaults*) settings
++ (void) _updateSettingsFrom12to13:(NSUserDefaults *) settings
 {
 	LWE_LOG(@"Update from 1.2 to 1.3 - we need to make a tag for favorites!");
 
@@ -211,6 +214,7 @@
 
   // 1. Execute SQL update file for bad data fixes
   [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6 withSQLStatements:LWE_JF_15_TO_16_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
   
   // 2. Update settings inre: plugins -- read from the PLIST file, store everything back to the NSUserDefaults
   NSMutableDictionary *pluginsDict = [[[settings objectForKey:APP_PLUGIN] mutableCopy] autorelease];
@@ -230,39 +234,12 @@
   // Delete old plugin file now
   [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
 
-  // 3. for moving the already downloaded plugins, but it's not happening for now
-  //[self _movePluginsToCacheDirectory];
+  // Show shout-out UI Alert view
+  [LWEUIAlertView notificationAlertWithTitle:@"Updated to JFlash 1.6" message:@"Thanks for updating Japanese Flash!  In this version, special thanks go out to Ben, Murray, Riley, and David for helping us improve a few dictionary entries!"];
 }
 
 
 #pragma mark - Shared Private Methods
-
-/**
- * This is a migration method to move already downloaded plugins from the doucments directory to the caches director, specific for 1.5->1.6 migration
- */
-+ (BOOL) _movePluginsToCacheDirectory
-{
-  BOOL success = NO;
-  
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSMutableDictionary *plugins = [settings objectForKey:APP_PLUGIN];
-	LWE_LOG(@"This is the APP_PLUGIN in the NSUserDefaults : %@", plugins);
-  NSEnumerator *keyEnumerator = [plugins keyEnumerator];
-  NSString *key;
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSError* error;
-  while ((key = [keyEnumerator nextObject]))
-  {
-    NSString* filename = [plugins objectForKey:key];
-		LWE_LOG(@"LOG : Trying to move the installed plugins = %@, with filename = %@ to caches directory", key, filename);
-    NSString* documentPathToFilename = [LWEFile createDocumentPathWithFilename:filename];
-    if ([LWEFile fileExists:documentPathToFilename])
-    {
-      success = [fileManager moveItemAtPath:documentPathToFilename toPath:[LWEFile createCachesPathWithFilename:filename] error:&error];
-    }
-  }
-  return success;
-}
 
 + (BOOL) _runMultipleSQLStatements:(NSString*)filePath inDB:(LWEDatabase*)db
 {
@@ -334,12 +311,13 @@
 
 #pragma mark - Public Methods
 
-+ (void) performMigrations:(NSUserDefaults*)settings
++ (BOOL) performMigrations:(NSUserDefaults*)settings
 {
-/**
- * JFLASH MIGRATIONS
- */
+  BOOL migrated = NO;
 #if defined(LWE_JFLASH)
+  /**
+   * JFLASH MIGRATIONS
+   */
   // NOTE THAT THESE ARE MIGRATIONS!!!!  They should be in order of version.
 	
   //In the jFlash 1.2, jFlash included some new features, and it requires the plugin manager to be updated.
@@ -348,6 +326,7 @@
   {
 		LWE_LOG(@"[Migration Log]Oops, we need update to 1.2 version");
 	  [UpdateManager _updateSettingsFrom11to12:settings];
+    migrated = YES;
   }
   
   // JFlash 1.3 - does small database migration for favorites!
@@ -355,6 +334,7 @@
   {
 		LWE_LOG(@"[Migration Log]Oops, we need update to 1.3 version");
 	  [UpdateManager _updateSettingsFrom12to13:settings];
+    migrated = YES;
   }
   
   if ([UpdateManager _needs13to14SettingsUpdate:settings])
@@ -362,18 +342,21 @@
     LWE_LOG(@"[Migration Log]Updating to 1.4 version");
     [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_4 withSQLStatements:LWE_JF_13_TO_14_SQL_FILENAME forSettings:settings];
     [TagPeer recacheCountsForUserTags];
+    migrated = YES;
   }
   
   if ([UpdateManager _needs14to15SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.5 version");
     [UpdateManager _updateSettingsFrom14to15:settings];
+    migrated = YES;
   }
   
   if ([UpdateManager _needs15to16SettingsUpdate:settings])
   {
     LWE_LOG(@"[Migration Log]YAY! Updating to 1.6 version");
     [UpdateManager _updateSettingsFrom15to16:settings];
+    migrated = YES;
   }
   
 #else
@@ -381,6 +364,7 @@
  * FUTURE CFLASH MIGRATIONS HERE
  */
 #endif
+  return migrated;
 }
 
 /**

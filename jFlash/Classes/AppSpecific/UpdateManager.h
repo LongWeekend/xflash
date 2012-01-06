@@ -16,9 +16,11 @@
  * recent version of the application.  This is a static
  * method, and the application should pass in the settings
  * that it wishes to migrate.
+ * 
+ * \return YES if settings/app was migrated
  * \param settings an NSUserDefaults object
  */
-+ (void) performMigrations:(NSUserDefaults*)settings;
++ (BOOL) performMigrations:(NSUserDefaults*)settings;
 
 /**
  * Determine's if the user's database is lagging behind the current version
