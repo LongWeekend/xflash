@@ -582,15 +582,15 @@ NSInteger const kLWEBackupSection = 2;
     [self.activityIndicator startAnimating];
     if (alertView.tag == kBackupConfirmationAlertTag)
     {
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];      
       [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      dispatch_async(dispatch_get_main_queue(), ^{ [self.backupManager backupUserData]; });
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
-      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
       [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
+      // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
+      dispatch_async(dispatch_get_main_queue(), ^{ [self.backupManager restoreUserData]; });
     }
     else 
     {
