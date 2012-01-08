@@ -161,25 +161,18 @@
 
 #pragma mark - UIAlertView delegate method
 
-// private helper method to launch the app store
--(void) _openLinkshareURL
-{
-  LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
-  [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
-  [tmpNet release];
-}
-
 /**
  * We prompt users to get Rikai if it is JFlash.
  * This is the delegate method to handle the response of what the user taps.
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  switch (buttonIndex)
+  // not really a cancel button, just button two
+  if (buttonIndex == LWE_ALERT_CANCEL_BTN)
   {
-    case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-      [self _openLinkshareURL];
-    break;
+    LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
+    [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
+    [tmpNet release];
   }
 }
 
