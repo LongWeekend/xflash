@@ -96,7 +96,7 @@
   srandomdev();    // Seed random generator
 
   // Log user sessions on release builds
-  [LWEAnalytics startSession:LWE_FLURRY_API_KEY];
+  [LWEAnalytics startSessionWithKey:LWE_FLURRY_API_KEY];
 
 #if defined (LWE_JFLASH)
   [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
