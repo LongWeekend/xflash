@@ -595,7 +595,7 @@ NSInteger const kLWEBackupSection = 2;
     else 
     {
       [self.tableView reloadData];
-      [self performSelector:@selector(changeStudySet:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0];
+      dispatch_async(dispatch_get_main_queue(), ^{ [self changeStudySet:[self.tagArray objectAtIndex:self.selectedTagId]]; });
     }
     return;
   }
