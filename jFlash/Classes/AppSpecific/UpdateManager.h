@@ -27,4 +27,9 @@
  */
 + (BOOL) databaseIsUpdatable:(NSUserDefaults*)settings;
 
+/**
+ * Prompts a UIAlertView to show with a message pertaining to this update
+ */
++ (void) showUpgradeAlertView:(NSUserDefaults *)settings delegate:(id<UIAlertViewDelegate>)alertDelegate;
+
 @end

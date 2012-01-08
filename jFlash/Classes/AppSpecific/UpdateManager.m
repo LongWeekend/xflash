@@ -233,9 +233,6 @@
   
   // Delete old plugin file now
   [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
-
-  // Show shout-out UI Alert view
-  [LWEUIAlertView notificationAlertWithTitle:@"Updated to JFlash 1.6" message:@"Thanks for updating Japanese Flash!  In this version, special thanks go out to Ben, Murray, Riley, and David for helping us improve a few dictionary entries!"];
 }
 
 
@@ -365,6 +362,25 @@
  */
 #endif
   return migrated;
+}
+
++ (void) showUpgradeAlertView:(NSUserDefaults *)settings delegate:(id<UIAlertViewDelegate>)alertDelegate
+{
+#if defined (LWE_JFLASH)
+  NSString *version = [settings objectForKey:APP_SETTINGS_VERSION];
+  if ([version isEqualToString:LWE_JF_VERSION_1_6])
+  {
+    // Show shout-out UI Alert view
+    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Updated to JFlash 1.6",@"JFlash1.6 upgrade alert title")
+                                       message:NSLocalizedString(@"Thanks for updating!  Special thanks to Ben, Murray, Riley & David for helping us improve a few entries.  Also, do you have Rikai Browser yet?  It tightly integrates with JFlash and helps you read Japanese webpages and learn new words.  Want it?",@"JFlash1.6 upgrade alert msg")
+                                            ok:NSLocalizedString(@"Later", @"StudyViewController.Later")
+                                        cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
+                                      delegate:alertDelegate];
+     
+  }
+#elif defined (LWE_CFLASH)
+  // Do nothing for now, we only have 1 CFlash version!
+#endif
 }
 
 /**
