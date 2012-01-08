@@ -299,8 +299,8 @@
   {
     if (indexPath.row == kWordSetOptionsStart)
     {
-      // one final check to make sure they do not empty out the set prior to running it
-      self.tag = [TagPeer retrieveTagById:self.tag.tagId];
+      // one final check to make sure they do not empty out the set prior to running it - reload the card
+      [self.tag hydrate];
       if (self.tag.cardCount > 0)
       {
         CurrentState *appSettings = [CurrentState sharedCurrentState];
@@ -319,10 +319,11 @@
     }
     else if(indexPath.row == kWordSetOptionsEditSet)
     {
-      AddStudySetInputViewController* tmpVC = [[AddStudySetInputViewController alloc] initWithTag:self.tag];
-      UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: @"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];      
-      [[self navigationItem] setBackBarButtonItem: newBackButton];      
-      [newBackButton release];
+      AddStudySetInputViewController *tmpVC = [[AddStudySetInputViewController alloc] initWithTag:self.tag];
+      self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Global.Cancel")
+                                                                                style:UIBarButtonItemStyleBordered
+                                                                               target:nil
+                                                                               action:nil] autorelease];
       [self.navigationController pushViewController:tmpVC animated:YES];
       [tmpVC release];
     }
