@@ -31,9 +31,8 @@
                                                    UIAlertViewDelegate,
                                                    LWEAudioQueueDelegate>
 {
+  //! Used to remember if the user has already seen the alert view for first run
   BOOL _alreadyShowedAlertView;
-  //! This is set when card is loaded, and used when revealed
-  BOOL _viewHasBeenLoadedOnce;
   BOOL _isChangingPage;  // page control state
 }
 

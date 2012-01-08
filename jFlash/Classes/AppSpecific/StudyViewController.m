@@ -12,6 +12,7 @@
 #import "StudyViewController.h"
 #import "LWENetworkUtils.h"
 #import "AddTagViewController.h"
+#import "UpdateManager.h"
 
 @interface StudyViewController()
 //private methods
@@ -85,7 +86,7 @@
   
   // Show a UIAlert if this is the first time the user has launched the app.  
   CurrentState *state = [CurrentState sharedCurrentState];
-  if (state.isFirstLoad && !_alreadyShowedAlertView)
+  if (state.isFirstLoad && _alreadyShowedAlertView == NO)
   {
     _alreadyShowedAlertView = YES;
 #if defined (LWE_JFLASH)
@@ -101,6 +102,12 @@
                                         cancel:nil
                                       delegate:nil];
 #endif
+  }
+  else if (state.isFirstLaunchAfterUpdate && _alreadyShowedAlertView == NO)
+  {
+    // The update manager will handle showing the proper message based on which app & which version
+    [UpdateManager showUpgradeAlertView:[NSUserDefaults standardUserDefaults] delegate:self];
+    _alreadyShowedAlertView = YES;
   }
 }
 
