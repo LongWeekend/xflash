@@ -42,22 +42,22 @@
   // The following dictionaries contain all the mappings from actual settings to how they display on the phone
   NSArray *modeObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Practice",@"SettingsViewController.Practice"), NSLocalizedString(@"Browse",@"SettingsViewController.Browse"), nil];
   NSArray *modeKeys = [NSArray arrayWithObjects:SET_MODE_QUIZ,SET_MODE_BROWSE,nil];
-  NSDictionary* modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
+  NSDictionary *modeDict = [NSDictionary dictionaryWithObjects:modeObjects forKeys:modeKeys];
   
   NSArray *headwordObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Japanese",@"SettingsViewController.HeadwordLanguage_Japanese"), 
                               NSLocalizedString(@"English",@"SettingsViewController.HeadwordLanguage_English"), nil];
   NSArray *headwordKeys = [NSArray arrayWithObjects:SET_J_TO_E,SET_E_TO_J,nil];
-  NSDictionary* headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
+  NSDictionary *headwordDict = [NSDictionary dictionaryWithObjects:headwordObjects forKeys:headwordKeys];
   
   // Source theme information from the ThemeManager
   ThemeManager *tm = [ThemeManager sharedThemeManager];
-  NSDictionary* themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
+  NSDictionary *themeDict = [NSDictionary dictionaryWithObjects:[tm themeNameList] forKeys:[tm themeKeysList]];
   
   NSArray *readingObjects = [NSArray arrayWithObjects:NSLocalizedString(@"Kana",@"SettingsViewController.DisplayReading_Kana"),
                              NSLocalizedString(@"Romaji",@"SettingsViewController.DisplayReading_Romaji"),
                              NSLocalizedString(@"Both",@"SettingsViewController.DisplayReading_Both"),nil];
   NSArray *readingKeys = [NSArray arrayWithObjects:SET_READING_KANA,SET_READING_ROMAJI,SET_READING_BOTH,nil];
-  NSDictionary* readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
+  NSDictionary *readingDict = [NSDictionary dictionaryWithObjects:readingObjects forKeys:readingKeys];
   
   // Create a complete dictionary of all settings display names & their setting constants
   NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,readingDict,modeDict,nil];

@@ -372,6 +372,21 @@ NSString * const APP_NEW_UPDATE = @"new_update";
   return [thisSectionArray objectAtIndex:2];
 }
 
+- (NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+  NSArray *thisSectionArray = [self.sectionArray objectAtIndex:section];
+  NSArray *keys = [thisSectionArray objectAtIndex:1];
+  if ([[keys objectAtIndex:0] isEqualToString:APP_ABOUT])
+  {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    return [NSString stringWithFormat:@"Settings: %@, Data: %@, Build: %@",[settings objectForKey:APP_SETTINGS_VERSION],[settings objectForKey:APP_DATA_VERSION],[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+  }
+  else
+  {
+    return nil;
+  }
+}
+
 # pragma mark - UIWebView delegate methods
 
 //! Turns off the network activity indicator & shows a "you are not connected" error
