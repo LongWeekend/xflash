@@ -104,7 +104,6 @@
   jFlashAppDelegate *appDelegate = (jFlashAppDelegate *)[[UIApplication sharedApplication] delegate];
   UIViewController *vc = [appDelegate.tabBarController.viewControllers objectAtIndex:SETTINGS_VIEW_CONTROLLER_TAB_INDEX];
   vc.tabBarItem.image = [self.tabIconImages objectAtIndex:self.tabIconIndex];
-  //  [appDelegate.tabBarController.tabBar setNeedsDisplay];
   
   self.tabIconIndex++;
   if (self.tabIconIndex == [self.tabIconImages count])
