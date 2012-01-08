@@ -10,6 +10,7 @@
 #import "LWETwitterEngine.h"
 #import "LWETUser.h"
 #import "Constants.h"
+#import "GradientButton.h"
 
 @implementation TweetWordViewController
 
@@ -121,7 +122,6 @@
 {
 	if ((self = [super initWithNibName:nibName bundle:nil]))
 	{
-    _loadingView = nil;
 		self._twitterEngine = twitterEngine;
 		self._tweetWord = tweetWord;
 	}
@@ -140,6 +140,9 @@
   _doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(_resignTextFieldKeyboard)];
 	_cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.parentViewController action:@selector(dismissModalViewControllerAnimated:)];
 	
+  // Make the tweet button green
+  [(GradientButton*)self.tweetBtn useGreenConfirmStyle];
+  
 	self.navigationItem.leftBarButtonItem = _cancelBtn;
 	self.navigationItem.rightBarButtonItem = _signOutBtn;
 	self.navigationItem.title = NSLocalizedString(@"Tweet this Card", @"TweetWordViewController.TweetThisCard");
@@ -166,22 +169,9 @@
 {
 	[_twitterEngine release];
 	[_tweetWord release];
-		
-	if (_cancelBtn)
-	{
-		[_cancelBtn release];
-	}
-	
-	if (_signOutBtn)
-	{
-		[_signOutBtn release];
-	}
-	
-	if (_doneBtn)
-	{
-		[_doneBtn release];
-	}
-	
+  [_cancelBtn release];
+  [_signOutBtn release];
+  [_doneBtn release];
 	[tweetTxt release];
 	[tweetBtn release];
 	[counterLbl release];

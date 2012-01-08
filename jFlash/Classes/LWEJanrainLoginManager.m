@@ -20,7 +20,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (id) init
 {
-  if (self == [super init])
+  self = [super init];
+  if (self)
   {
     static NSString *appId = @"mhbbfdgbbdndhjlcnkfd"; // <-- This is your app ID
     static NSString *tokenURL = @"http://lweflash.appspot.com/api/authorize";

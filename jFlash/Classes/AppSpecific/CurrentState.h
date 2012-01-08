@@ -24,6 +24,9 @@ extern NSString * const LWEActiveTagDidChange;
 //! returns YES if this is the first time we have launched this app, ever
 @property BOOL isFirstLoad;
 
+//! Returns YES if this is the first time we have launched the app after an upgrade
+@property BOOL isFirstLaunchAfterUpdate;
+
 //! returns YES if there is more current database than the user's current version
 @property BOOL isUpdatable;
 

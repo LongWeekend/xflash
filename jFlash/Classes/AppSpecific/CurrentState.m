@@ -22,7 +22,7 @@ NSString * const LWEActiveTagDidChange = @"LWEActiveTagDidChange";
  * Owns the plugin manager (to be debated whether that is the best design or not)
  */
 @implementation CurrentState
-@synthesize isFirstLoad, isUpdatable, starredTag, activeTag = _activeTag;
+@synthesize isFirstLoad, isUpdatable, starredTag, activeTag = _activeTag, isFirstLaunchAfterUpdate;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 
@@ -103,17 +103,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   
-  // STEP 1 - Migrations for settings for different versions of JFlash
-  [UpdateManager performMigrations:settings];
+  // STEP 1 - Migrations for settings for different versions of JFlash - returns YES if something changed
+  self.isFirstLaunchAfterUpdate = [UpdateManager performMigrations:settings];
 
   // STEP 2 - is the database update-able?  Let the update manager tell us
-  [self setIsUpdatable:[UpdateManager databaseIsUpdatable:settings]];
-
+  // TODO: we should entirely deprecate JFlash 1.0 if we ever touch this code again.
+  self.isUpdatable = [UpdateManager databaseIsUpdatable:settings];
+  
   // STEP 3 - is this first run after a fresh install?  Do we need to freshly create settings?
   if ([settings objectForKey:@"settings_already_created"] == nil)
   {
     [self _createDefaultSettings];
     self.isFirstLoad = YES;
+    self.isFirstLaunchAfterUpdate = NO;
   }
   else
   {

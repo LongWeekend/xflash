@@ -23,7 +23,7 @@
 }
 
 - (id) initWithGroup:(Group*)aGroup;
-- (void) changeStudySet: (Tag*) tag;
+- (void) activateTag: (Tag*) tag;
 - (IBAction)addStudySet:(id)sender;
 - (void) reloadTableData;
 - (void) reloadSubgroupData;
