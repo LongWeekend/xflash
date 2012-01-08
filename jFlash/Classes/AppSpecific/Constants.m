@@ -70,7 +70,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.5";
+      NSString * const LWE_CURRENT_VERSION       = @"1.6";
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 
