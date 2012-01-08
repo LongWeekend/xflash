@@ -581,13 +581,13 @@ NSInteger const kLWEBackupSection = 2;
     {
       [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      dispatch_async(dispatch_get_main_queue(), ^{ [self.backupManager backupUserData]; });
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
       [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      dispatch_async(dispatch_get_main_queue(), ^{ [self.backupManager restoreUserData]; });
+      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];
     }
     else 
     {
@@ -595,16 +595,15 @@ NSInteger const kLWEBackupSection = 2;
       CGPoint offset = self.tableView.contentOffset;
       
       // We want to reload the selected row because it will now say "loading cards"
-      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
       [self.tableView beginUpdates];
-      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
+      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
       [self.tableView endUpdates];
       
       // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
       self.tableView.contentOffset = offset;
 
       [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
-      //dispatch_async(dispatch_get_main_queue(), ^{ [self activateTag:[self.tagArray objectAtIndex:self.selectedTagId]]; });
     }
     return;
   }
