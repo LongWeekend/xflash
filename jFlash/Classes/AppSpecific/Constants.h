@@ -77,6 +77,9 @@ extern NSString * const LWE_CURRENT_USER_DATABASE;
 extern NSString * const LWE_BAD_DATA_EMAIL;
 extern NSString * const LWE_SUPPORT_EMAIL;
 
+// Tapjoy ID - should be updated for each app!
+extern NSString * const LWE_TAPJOY_APP_ID;
+
 // Twitter Keys
 extern NSString * const LWE_TWITTER_CONSUMER_KEY;
 extern NSString * const LWE_TWITTER_PRIVATE_KEY;
