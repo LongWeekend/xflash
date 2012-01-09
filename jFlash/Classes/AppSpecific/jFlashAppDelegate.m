@@ -65,12 +65,20 @@
 
 - (NSString*) _getDecodedSearchTerm:(NSURL *)url  
 {
+  // Get the PLIST data about the scheme
+  NSArray *urlSchemes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+  NSDictionary *schemeInfo = [urlSchemes objectAtIndex:0];
+  NSString *scheme = [(NSArray*)[schemeInfo objectForKey:@"CFBundleURLSchemes"] objectAtIndex:0];
+  NSString *schemeUri = [NSString stringWithFormat:@"%@://",scheme];
+  
   NSString *searchTerm = [url unicodeAbsoluteString];
-  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
+  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:schemeUri])
   {
     searchTerm = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   }
-  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  
+  // Replace out the schema name
+  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:schemeUri withString:@""];
   return searchTerm;
 }
 
