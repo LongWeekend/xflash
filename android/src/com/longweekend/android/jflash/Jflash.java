@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.longweekend.android.jflash.model.LWEDatabase;
 import com.longweekend.android.jflash.model.Card;
@@ -34,10 +35,6 @@ public class Jflash extends Activity
     private LinearLayout myLayout;
 
     public void pop1(View v) {
-   
-    }
-
-    public void pop2(View v) {
 
         Card myCard = new Card();
         myCard.setCardId(12204);
@@ -164,6 +161,9 @@ public class Jflash extends Activity
                     
                     if( firedUp )
                     {
+                        Button tempButton = (Button)findViewById(R.id.testbutton);
+                        tempButton.setVisibility(View.VISIBLE); 
+    
                         tempView.setText("Database attached");
                         myLayout.addView(tempView);
                     }

@@ -19,22 +19,18 @@
     >
 </LinearLayout>
 <Button
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="attach"
-    android:onClick="pop1"
-    />
-<Button
+    android:id="@+id/testbutton"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="test"
-    android:onClick="pop2"
+    android:onClick="pop1"
+    android:visibility="invisible"
     />
 <TextView  
     android:id="@+id/tempview"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="tempview"
+    android:text="testing response field"
     />
     
 </LinearLayout>
