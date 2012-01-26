@@ -24,3 +24,4 @@ android/bin
 android/gen
 android/workfiles
 backup
+*.swp
