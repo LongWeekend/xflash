@@ -1,0 +1,34 @@
+Sign form and send to Mark
+
+
+
+Card.java
+	- audio and font related methods
+
+ChineseCard.java
+	- audio and font related methods
+	- didn't feel like dealing with any of the pinyin stuff yet
+
+CardPeer.java
+	- untested methods due to lack of appropriate database tables/columns
+
+ExampleSentence/Peer.java
+	- cannot test yet because I don't have a database to test on
+	- isNewVersion()
+
+LWEDatabase.java
+	- deal with cutting up the databases into small files (UGH)
+
+Tag.java
+	- add Receiver when hydrating
+	- send Broadcast when saving
+	- on receive, re-hydrate
+
+TagPeer.java
+	- cancelMembership() - is current tag? + notifications
+	- NSDictionary + throw error?
+	- subscribeCard() - notifications
+
+Everywhere
+	- implement real-time user settings -> user id
+
