@@ -40,6 +40,7 @@ public class Jflash extends Activity
         myCard.setCardId(12204);
         myCard.hydrate();
 
+        // new commit
         TextView tempView = (TextView)findViewById(R.id.tempview);
         tempView.setText( myCard.meaningWithoutMarkup() );
     }
