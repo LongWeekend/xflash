@@ -11,16 +11,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Button;
 
-import com.longweekend.android.jflash.model.LWEDatabase;
 import com.longweekend.android.jflash.model.Card;
+import com.longweekend.android.jflash.model.LWEDatabase;
 
 public class PracticeActivity extends Activity
 {

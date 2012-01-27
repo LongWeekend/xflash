@@ -7,20 +7,7 @@ package com.longweekend.android.jflash;
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Button;
-
-import com.longweekend.android.jflash.model.LWEDatabase;
-import com.longweekend.android.jflash.model.Card;
 
 public class HelpActivity extends Activity
 {

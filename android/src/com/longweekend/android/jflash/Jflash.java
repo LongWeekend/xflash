@@ -6,23 +6,11 @@ package com.longweekend.android.jflash;
 //  Created by Todd Presson on 1/7/12.
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
 
-import android.content.res.Resources;
-import android.widget.TabHost;
 import android.app.TabActivity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Button;
-
-import com.longweekend.android.jflash.model.LWEDatabase;
-import com.longweekend.android.jflash.model.Card;
+import android.widget.TabHost;
 
 public class Jflash extends TabActivity
 {
