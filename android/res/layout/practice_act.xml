@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="Jflash, bitches"
+    android:layout_marginBottom="20px"
+    />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20px"
+    >
+</LinearLayout>
+<Button
+    android:id="@+id/testbutton"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="test"
+    android:onClick="pop1"
+    android:visibility="invisible"
+    />
+<TextView  
+    android:id="@+id/tempview"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="testing response field"
+    />
+    
+</LinearLayout>
+
