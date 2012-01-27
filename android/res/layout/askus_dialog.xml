@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/askus_root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="8px" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"
+        android:textSize="24px" 
+        android:text="GetSatisfaction.com"
+        android:layout_marginBottom="16px"
+        android:gravity="center" />
+
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Do you have a question?"
+        android:gravity="center" />
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="A feature request?"
+        android:layout_marginBottom="20px"
+        android:gravity="center" />
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="It's best to make your voice heard on our support site, but we respond to email too!"
+        android:layout_marginBottom="16px"
+        android:gravity="center" />
+
+    <Button 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Visit Site"
+        android:gravity="center" /> 
+    <Button 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Send an Email"
+        android:layout_marginBottom="16px"
+        android:gravity="center" /> 
+    
+    <Button 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="No Thanks"
+        android:gravity="center" /> 
+
+</LinearLayout> 
+
+
+

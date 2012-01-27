@@ -24,7 +24,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="6px"
-            android:text="Ask Us" />
+            android:text="Ask Us"
+            android:onClick="goAskUs" />
 
     </RelativeLayout>
 
