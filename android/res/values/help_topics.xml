@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="help_topics">
+        <item>Welcome</item>
+        <item>Study Sets</item>
+        <item>Practice</item>
+        <item>Browse Mode</item>
+        <item>Search</item>
+        <item>Corrections</item>
+        <item>Learning Algorithm</item>
+        <item>Sharing</item>
+        <item>Integration</item>
+        <item>Backup Custom Sets</item>
+        <item>Feedback</item>
+    </string-array>
+</resources>

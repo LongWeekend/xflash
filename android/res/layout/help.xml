@@ -2,13 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Help Activity"
-    />
+    android:layout_height="fill_parent" >
+    
+    <RelativeLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:background="#FFDD0000"
+        android:padding="4px" >
+
+        <TextView
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:textColor="#FFFFFFFF"
+            android:textSize="32px"
+            android:text="Help" />
+
+        <Button
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6px"
+            android:text="Ask Us" />
+
+    </RelativeLayout>
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:drawSelectorOnTop="false" />
 
 </LinearLayout>
 
