@@ -7,7 +7,7 @@ package com.longweekend.android.jflash;
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -25,11 +25,11 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.util.Log;
 
-public class HelpActivity extends ListActivity
+public class HelpActivity extends Activity
 {
     private static final String MYTAG = "JFlash HelpActivity";
     
-    // dialog object for our "ask us" button
+    private ListView myLV;
     private AlertDialog askDialog;
 
     /** Called when the activity is first created. */
@@ -53,14 +53,13 @@ public class HelpActivity extends ListActivity
             // topics = res.getStringArray(R.array.help_topics_chinese);
         }
 
-        setListAdapter(new ArrayAdapter<String>(this,R.layout.help_row,
-                                                R.id.help_label,topics));
-    
-
+        myLV = (ListView)findViewById(R.id.help_list);
+        
+        myLV.setAdapter( new ArrayAdapter<String>(this,R.layout.help_row,
+                         R.id.help_label,topics) );
+        
         // now the ListActivity is set, queue onClickListeners for
         // the help topics
-        ListView myLV = getListView();
-
         myLV.setOnItemClickListener( new OnItemClickListener()
         {
             public void onItemClick( AdapterView<?> parent, View view, int position, long id) 
@@ -72,7 +71,7 @@ public class HelpActivity extends ListActivity
 
         // set our popup dialog instance to null
         askDialog = null;
-
+    
     }  // end onCreate()
 
    
@@ -85,7 +84,9 @@ public class HelpActivity extends ListActivity
     // reset the content view to the main help screen
     public void goBackToHelp(View v)
     {
-        Log.d(MYTAG,"Go back to help!");
+        setContentView(R.layout.help);
+    
+        // asdf
     }
     
     // sets the Activity content view to the appropriate topic
