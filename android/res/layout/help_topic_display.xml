@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/help_layout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
@@ -11,13 +10,21 @@
         android:background="#FFDD0000"
         android:padding="4px" >
 
+        <Button
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="6px"
+            android:onClick="goBackToHelp"
+            android:text="To Help" />
+
         <TextView
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:textColor="#FFFFFFFF"
-            android:textSize="32px"
-            android:text="Help" />
+            android:textSize="32px" />
 
         <Button
             android:layout_width="wrap_content" 
@@ -25,8 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="6px"
-            android:text="Ask Us"
-            android:onClick="goAskUs" />
+            android:text="Next >" />
 
     </RelativeLayout>
 

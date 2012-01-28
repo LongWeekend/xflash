@@ -18,6 +18,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
+import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.util.Log;
 
 public class HelpActivity extends ListActivity
 {
@@ -49,14 +55,49 @@ public class HelpActivity extends ListActivity
 
         setListAdapter(new ArrayAdapter<String>(this,R.layout.help_row,
                                                 R.id.help_label,topics));
+    
+
+        // now the ListActivity is set, queue onClickListeners for
+        // the help topics
+        ListView myLV = getListView();
+
+        myLV.setOnItemClickListener( new OnItemClickListener()
+        {
+            public void onItemClick( AdapterView<?> parent, View view, int position, long id) 
+            {
+                // local private HelpActivity.pullHelpTopic()
+                pullHelpTopic(id);
+            }
+        });
+
+        // set our popup dialog instance to null
         askDialog = null;
 
     }  // end onCreate()
 
-    
+   
     // onClick method for the "ask us" button - pops a dialog
-    public void goAskUs(View v) {
-        
+    public void goAskUs(View v)
+    {
+        fireAskusDialog();
+    }
+
+    // reset the content view to the main help screen
+    public void goBackToHelp(View v)
+    {
+        Log.d(MYTAG,"Go back to help!");
+    }
+    
+    // sets the Activity content view to the appropriate topic
+    private void pullHelpTopic(long inId)
+    {
+        setContentView(R.layout.help_topic_display);     
+    }
+
+    
+    // set up all objects and listeners for the "ask us" dialog
+    private void fireAskusDialog() {
+
         AlertDialog.Builder builder;
 
         // inflate the dialog layout into a View object
@@ -121,8 +162,7 @@ public class HelpActivity extends ListActivity
             }
         });    
 
-    }  // end goAskUs()
-
+    }  // end fireAskusDialog()
 
 
 }  // end HelpActivity class declaration
