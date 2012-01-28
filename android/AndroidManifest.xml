@@ -40,8 +40,22 @@
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
         </activity>
+        <activity android:name="HelpGroupActivity"
+                  android:label="@string/help_group_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.TAB" />
+            </intent-filter>
+        </activity>
         <activity android:name="HelpActivity"
                   android:label="@string/help_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.TAB" />
+            </intent-filter>
+        </activity>
+        <activity android:name="HelpPageActivity"
+                  android:label="@string/help_page_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.TAB" />

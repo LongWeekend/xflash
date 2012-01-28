@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Jflash</string>
-    <string name="practice_name">The Practice Activity</string>
-    <string name="tag_name">The Tag Activity</string>
-    <string name="search_name">The Search Activity</string>
-    <string name="settings_name">The Settings Activity</string>
-    <string name="help_name">The Help Activity</string>
+    <string name="practice_name">PracticeActivity</string>
+    <string name="tag_name">TagActivity</string>
+    <string name="search_name">SearchActivity</string>
+    <string name="settings_name">SettingsActivity</string>
+    <string name="help_group_name">HelpGroupActivity</string>
+    <string name="help_name">HelpActivity</string>
+    <string name="help_page_name">HelpPageActivity</string>
 </resources>

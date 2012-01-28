@@ -1,29 +1,25 @@
 package com.longweekend.android.jflash;
 
-//  SearchActivity.java
+//  HelpGroupActivity.java
 //  jFlash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-public class SearchActivity extends Activity
+public class HelpGroupActivity extends XflashGroupActivity
 {
-    private static final String MYTAG = "JFlash SearchActivity";
     
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.practice);
+
+        startChildActivity("HelpActivity", new Intent(this,HelpActivity.class));
     }
 
-
-
-}  // end SearchActivity class declaration
-
-
+}  // end Help1GroupActivity class declaration

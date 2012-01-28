@@ -5,9 +5,16 @@ package com.longweekend.android.jflash;
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
+//
+//  public void onCreate()      @over
+//
+//  public void goAskUs(View  )
+//
+//  private void pullHelpTopic(long  )
+//  private void fireAskusDialog()
 
-import android.app.AlertDialog;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -16,17 +23,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
 import android.widget.ListView;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.util.Log;
-import android.widget.LinearLayout;
 
-public class HelpActivity extends Activity
+public class HelpActivity extends Activity 
 {
     private static final String MYTAG = "JFlash HelpActivity";
     
@@ -81,27 +84,17 @@ public class HelpActivity extends Activity
         fireAskusDialog();
     }
 
-    // reset the content view to the main help screen
-    public void goBackToHelp(View v)
-    {
-        LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_content_layout);
-        myLayout.setVisibility(View.GONE);
-
-        myLayout = (LinearLayout)findViewById(R.id.help_layout);
-        myLayout.setVisibility(View.VISIBLE); 
-    }
     
-    // sets the Activity content view to the appropriate topic
+    // calls a new child activity for the Activity group
     private void pullHelpTopic(long inId)
     {
-        LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_layout);
-        myLayout.setVisibility(View.GONE);
-
-        myLayout = (LinearLayout)findViewById(R.id.help_content_layout);
-        myLayout.setVisibility(View.VISIBLE); 
+        Intent previewMessage = new Intent( getParent(), HelpPageActivity.class);
+        HelpGroupActivity parentActivity = (HelpGroupActivity)getParent();
+        parentActivity.startChildActivity("HelpPageActivity", previewMessage);
     }
 
     
+    // TODO - this no longer works in the multitab scenario
     // set up all objects and listeners for the "ask us" dialog
     private void fireAskusDialog() {
 
@@ -111,7 +104,7 @@ public class HelpActivity extends Activity
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.askus_dialog, (ViewGroup)findViewById(R.id.askus_root));
 
-        builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder( getParent() );
         builder.setView(layout);
             
         askDialog = builder.create();
