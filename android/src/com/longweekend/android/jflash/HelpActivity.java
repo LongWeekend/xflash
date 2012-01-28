@@ -24,12 +24,12 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 public class HelpActivity extends Activity
 {
     private static final String MYTAG = "JFlash HelpActivity";
     
-    private ListView myLV;
     private AlertDialog askDialog;
 
     /** Called when the activity is first created. */
@@ -53,7 +53,7 @@ public class HelpActivity extends Activity
             // topics = res.getStringArray(R.array.help_topics_chinese);
         }
 
-        myLV = (ListView)findViewById(R.id.help_list);
+        ListView myLV = (ListView)findViewById(R.id.help_list);
         
         myLV.setAdapter( new ArrayAdapter<String>(this,R.layout.help_row,
                          R.id.help_label,topics) );
@@ -84,15 +84,21 @@ public class HelpActivity extends Activity
     // reset the content view to the main help screen
     public void goBackToHelp(View v)
     {
-        setContentView(R.layout.help);
-    
-        // asdf
+        LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_content_layout);
+        myLayout.setVisibility(View.GONE);
+
+        myLayout = (LinearLayout)findViewById(R.id.help_layout);
+        myLayout.setVisibility(View.VISIBLE); 
     }
     
     // sets the Activity content view to the appropriate topic
     private void pullHelpTopic(long inId)
     {
-        setContentView(R.layout.help_topic_display);     
+        LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_layout);
+        myLayout.setVisibility(View.GONE);
+
+        myLayout = (LinearLayout)findViewById(R.id.help_content_layout);
+        myLayout.setVisibility(View.VISIBLE); 
     }
 
     
