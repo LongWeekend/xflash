@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string-array name="help_topics">
+    <string-array name="help_topics_japanese">
         <item>Welcome</item>
         <item>Study Sets</item>
         <item>Practice</item>
