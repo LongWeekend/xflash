@@ -31,8 +31,7 @@ import com.longweekend.android.jflash.JFApplication;
 
 public class User
 {
-
-    private static final String MYTAG = "JFlash User";
+    // private static final String MYTAG = "JFlash User";
 
     private static final int kLWEUninitializedUserId = -1;
     private static final String DEFAULT_USER_AVATAR_PATH  = "/avatars/default00.png";

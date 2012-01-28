@@ -26,7 +26,7 @@ import android.database.Cursor;
 
 public class JapaneseCard extends Card
 {
-    private static final String MYTAG = "JFlash JapaneseCard";
+    // private static final String MYTAG = "JFlash JapaneseCard";
 
     private String romaji;
 
@@ -75,10 +75,12 @@ public class JapaneseCard extends Card
         // TODO
         // we always have a sentence if the plugin is not installed
         // if ([pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
+/*      
         if( false )
         {
             returnVal = ExampleSentencePeer.sentencesExistForCardId(cardId);
         }
+*/
 
         return returnVal;
 

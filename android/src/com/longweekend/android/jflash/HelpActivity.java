@@ -31,7 +31,7 @@ import android.widget.ListView;
 
 public class HelpActivity extends Activity 
 {
-    private static final String MYTAG = "JFlash HelpActivity";
+    // private static final String MYTAG = "JFlash HelpActivity";
     
     private AlertDialog askDialog;
 

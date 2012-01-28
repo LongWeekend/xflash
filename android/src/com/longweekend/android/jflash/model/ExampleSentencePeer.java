@@ -188,7 +188,10 @@ public class ExampleSentencePeer
             // just making sure the query was successful
             int rowCount = myCursor.getCount();
 
-            return true;        
+            if( rowCount > 0 )
+                return true;
+            else
+                return false;
         } 
         catch (Throwable t)
         {

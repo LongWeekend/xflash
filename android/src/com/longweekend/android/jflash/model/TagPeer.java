@@ -45,14 +45,14 @@ public class TagPeer
 {
     private static final String MYTAG = "JFlash TagPeer";
 
-    private static final String kTagPeerErrorDomain = "kTagPeerErrorDomain";
-    private static final String LWETagContentDidChange = "LWETagContentDidChange";
-    private static final String LWETagContentDidChangeTypeKey = "LWETagContentDidChangeTypeKey";
-    private static final String LWETagContentDidChangeCardKey = "LWETagContentDidChangeCardKey";
-    private static final String LWETagContentCardAdded = "LWETagContentCardAdded";
-    private static final String LWETagContentCardRemoved = "LWETagContentCardRemoved";
+    // private static final String kTagPeerErrorDomain = "kTagPeerErrorDomain";
+    // private static final String LWETagContentDidChange = "LWETagContentDidChange";
+    // private static final String LWETagContentDidChangeTypeKey = "LWETagContentDidChangeTypeKey";
+    // private static final String LWETagContentDidChangeCardKey = "LWETagContentDidChangeCardKey";
+    // private static final String LWETagContentCardAdded = "LWETagContentCardAdded";
+    // private static final String LWETagContentCardRemoved = "LWETagContentCardRemoved";
 
-    private static final int kRemoveLastCardOnATagError = 999;
+    // private static final int kRemoveLastCardOnATagError = 999;
 
     private static SQLiteDatabase tempDB;
 

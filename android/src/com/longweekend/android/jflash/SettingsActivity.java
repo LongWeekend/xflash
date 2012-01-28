@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 public class SettingsActivity extends Activity
 {
-    private static final String MYTAG = "JFlash SettingsActivity";
+    // private static final String MYTAG = "JFlash SettingsActivity";
     
     /** Called when the activity is first created. */
     @Override

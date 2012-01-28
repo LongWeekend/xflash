@@ -12,7 +12,7 @@ import android.view.View;
 
 public class HelpPageActivity extends Activity 
 {
-    private static final String MYTAG = "JFlash HelpPageActivity";
+    // private static final String MYTAG = "JFlash HelpPageActivity";
    
  
     /** Called when the activity is first created. */

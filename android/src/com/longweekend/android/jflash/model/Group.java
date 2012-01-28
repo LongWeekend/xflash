@@ -33,7 +33,7 @@ import android.database.Cursor;
 
 public class Group
 {
-    private static final String MYTAG = "JFlash Group";
+    // private static final String MYTAG = "JFlash Group";
 
     private static final int kLWEUninitializedGroupId = -99;
     private static final int LWE_TOP_LEVEL_GROUP_ID = -1;

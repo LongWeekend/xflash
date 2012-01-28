@@ -65,14 +65,14 @@ public class Tag
 {
     private static final String MYTAG = "JFlash Tag";
 
-    private static final String kTagErrorDomain = "kTagErrorDomain";
-    private static final String LWETagDidSave = "kTagDidSave";
-    private static final int kAllBuriedAndHiddenError = 999;
-    private static final int kLWETagUnknownError = 998;
+    // private static final String kTagErrorDomain = "kTagErrorDomain";
+    // private static final String LWETagDidSave = "kTagDidSave";
+    // private static final int kAllBuriedAndHiddenError = 999;
+    // private static final int kLWETagUnknownError = 998;
     private static final int kLWEUninitializedTagId = -1;
     private static final int kLWEUninitializedCardCount = -1;
     private static final int kLWEUnseenCardLevel = 0;
-    private static final int kLWELearnedCardLevel = 5;
+    // private static final int kLWELearnedCardLevel = 5;
     private static final int STARRED_TAG_ID = 0;
 
     private int tagId;

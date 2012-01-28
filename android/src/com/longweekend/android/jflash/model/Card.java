@@ -44,7 +44,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.MediaPlayer;
 import android.util.Log;
 
 import com.longweekend.android.jflash.JFApplication;
@@ -77,8 +76,6 @@ public class Card
     // if true, this Card isn't really a Card -- just has an ID and 
     // hasn't been fetched
     private boolean isFault;
-
-    private MediaPlayer mp;
 
     public Card() 
     {

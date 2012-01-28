@@ -8,11 +8,10 @@ package com.longweekend.android.jflash;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 public class SearchActivity extends Activity
 {
-    private static final String MYTAG = "JFlash SearchActivity";
+    // private static final String MYTAG = "JFlash SearchActivity";
     
     /** Called when the activity is first created. */
     @Override

@@ -27,7 +27,7 @@ import android.database.Cursor;
 
 public class ExampleSentence
 {
-    private static final String MYTAG = "JFlash ExampleSentence";
+    // private static final String MYTAG = "JFlash ExampleSentence";
 
     int sentenceId;
     int checked;

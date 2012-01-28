@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 public class TagActivity extends Activity
 {
-    private static final String MYTAG = "JFlash TagActivity";
+    // private static final String MYTAG = "JFlash TagActivity";
     
     /** Called when the activity is first created. */
     @Override
