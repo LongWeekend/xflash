@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:background="#FFDD0000"
+        android:background="#FFBB0000"
         android:padding="4px" >
 
         <TextView

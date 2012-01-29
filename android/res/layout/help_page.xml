@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:background="#FFDD0000"
+        android:background="#FFBB0000"
         android:padding="4px" >
 
         <Button
@@ -20,26 +20,30 @@
             android:text="To Help" />
         
         <TextView
+            android:id="@+id/help_title"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:textColor="#FFFFFFFF"
-            android:textSize="32px" />
+            android:textSize="24px" />
 
         <Button
+            android:id="@+id/nextbutton"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="6px"
+            android:onClick="helpNext"
             android:text="Next >" />
 
     </RelativeLayout>
 
-    <ListView android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:drawSelectorOnTop="false" />
 
+    <WebView android:id="@+id/help_display"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+    />
+        
 </LinearLayout>
 

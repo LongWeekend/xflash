@@ -28,10 +28,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.util.Log;
 
 public class HelpActivity extends Activity 
 {
-    // private static final String MYTAG = "JFlash HelpActivity";
+    private static final String MYTAG = "JFlash HelpActivity";
     
     private AlertDialog askDialog;
 
@@ -68,6 +70,8 @@ public class HelpActivity extends Activity
             public void onItemClick( AdapterView<?> parent, View view, int position, long id) 
             {
                 // local private HelpActivity.pullHelpTopic()
+                Log.d(MYTAG,"position: " + position);
+                Log.d(MYTAG,"id:       " + id);
                 pullHelpTopic(id);
             }
         });
@@ -88,9 +92,17 @@ public class HelpActivity extends Activity
     // calls a new child activity for the Activity group
     private void pullHelpTopic(long inId)
     {
-        Intent previewMessage = new Intent( getParent(), HelpPageActivity.class);
+        // set the ListView id of the topic selected
+        // Bundle helpTopic = new Bundle();
+        // helpTopic.putLong("help_topic",inId);
+
+        Intent myIntent = new Intent( getParent(), HelpPageActivity.class);
+        myIntent.putExtra("help_topic",inId);
+ 
+        // call the main ActivityGroup of the Help tab,
+        // ask it to start our Intent
         HelpGroupActivity parentActivity = (HelpGroupActivity)getParent();
-        parentActivity.startChildActivity("HelpPageActivity", previewMessage);
+        parentActivity.startChildActivity("HelpPageActivity", myIntent);
     }
 
     
