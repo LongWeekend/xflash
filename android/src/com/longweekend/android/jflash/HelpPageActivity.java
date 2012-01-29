@@ -5,6 +5,11 @@ package com.longweekend.android.jflash;
 //
 //  Created by Todd Presson on 1/28/2012.
 //  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
+//
+//  public void onCreate()      @over
+//
+//  public void goBackToHelp(View  )
+//  public void helpNext(View  ) 
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -54,6 +59,7 @@ public class HelpPageActivity extends Activity
         TextView tempView = (TextView)findViewById(R.id.help_title);
         tempView.setText( topics[helpTopic] );         
     
+        // TODO - couldn't disable zoom on WebView
         helpDisplay = (WebView)findViewById(R.id.help_display);
         
         // set the html body
