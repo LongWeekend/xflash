@@ -4,24 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
+    android:background="#FFFFFFFF"
+    android:padding="6dp"
     >
 
     <TextView android:id="@+id/help_label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="6px"
-        android:textSize="24px"
-        android:padding="2px" />
+        android:layout_marginLeft="10dp"
+        android:textColor="#FF000000"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="6px" 
+        android:layout_marginRight="10dp" 
         android:text=">"
-        android:textSize="24px"
-        android:padding="2px" />
+        android:textColor="#FF000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:padding="2dp" />
 
 </RelativeLayout>
 

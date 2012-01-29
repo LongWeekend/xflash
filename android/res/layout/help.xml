@@ -2,36 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
     
     <RelativeLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:background="#FFBB0000"
-        android:padding="4px" >
+        android:background="@drawable/gradient_red"
+        android:padding="8dp" >
 
         <TextView
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:textColor="#FFFFFFFF"
-            android:textSize="32px"
-            android:text="Help" />
+            android:text="Help" 
+            style="@style/heading_text" />
 
         <Button
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="6px"
             android:text="Ask Us"
-            android:onClick="goAskUs" />
+            android:onClick="goAskUs"
+            android:background="@drawable/button_red"
+            style="@style/buttontext_white" />
 
     </RelativeLayout>
 
     <ListView android:id="@+id/help_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:drawSelectorOnTop="false" />
+     />
 
 </LinearLayout>

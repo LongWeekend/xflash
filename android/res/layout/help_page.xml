@@ -2,30 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
+
     
     <RelativeLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
-        android:background="#FFBB0000"
-        android:padding="4px" >
+        android:background="@drawable/gradient_red"
+        android:padding="8dp" >
 
-        <Button
+        <Button android:id="@+id/back_help_button"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="6px"
             android:onClick="goBackToHelp"
-            android:text="To Help" />
+            android:text="To Help"
+            android:background="@drawable/button_red"
+            style="@style/buttontext_white" />
         
-        <TextView
-            android:id="@+id/help_title"
+        <TextView android:id="@+id/help_title"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:textColor="#FFFFFFFF"
-            android:textSize="24px" />
+            style="@style/heading_text" />
 
         <Button
             android:id="@+id/nextbutton"
@@ -33,17 +34,17 @@
             android:layout_height="wrap_content" 
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="6px"
             android:onClick="helpNext"
-            android:text="Next >" />
+            android:text="Next >"
+            android:background="@drawable/button_red"
+            style="@style/buttontext_white" />
 
     </RelativeLayout>
-
 
     <WebView android:id="@+id/help_display"
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent"
     />
-        
+
 </LinearLayout>
 

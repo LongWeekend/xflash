@@ -50,17 +50,14 @@ public class XflashGroupActivity extends ActivityGroup
         LocalActivityManager manager = getLocalActivityManager();
         
         int index = myIdList.size() - 1;
-/*
-        // code for killing our actually activity group if no more children
-        // we don't need this (I THINK) because we'll never want to close
-        // the bottom level Activity in any given tab
-
+        
+        // code for killing our activity group if no more children
         if (index < 1) 
         {
             finish();
             return;
         }
-*/
+        
         // remove the ending Activity from memory
         manager.destroyActivity(myIdList.get(index),true);
         myIdList.remove(index);

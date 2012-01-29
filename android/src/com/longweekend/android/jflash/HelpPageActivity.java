@@ -12,16 +12,15 @@ package com.longweekend.android.jflash;
 //  public void helpNext(View  ) 
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.content.res.Resources;
-import android.util.Log;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 public class HelpPageActivity extends Activity 
 {
-    private static final String MYTAG = "JFlash HelpPageActivity";
+    // private static final String MYTAG = "JFlash HelpPageActivity";
    
     private int helpTopic;
     private String[] topics;
@@ -50,22 +49,26 @@ public class HelpPageActivity extends Activity
         }
         else
         {
-            // topics = res.getStringArray(R.array.help_topics_chinese);
-            // helpFiles = res.getStringArray(R.array.help_files_chinese);
+            topics = res.getStringArray(R.array.help_topics_chinese);
+            helpFiles = res.getStringArray(R.array.help_files_chinese);
         }
 
-        
         // set the title bar
         TextView tempView = (TextView)findViewById(R.id.help_title);
         tempView.setText( topics[helpTopic] );         
     
-        // TODO - couldn't disable zoom on WebView
+        // get our WebView and disable pinch zoom
         helpDisplay = (WebView)findViewById(R.id.help_display);
-        
+        helpDisplay.getSettings().setSupportZoom(false); 
+
         // set the html body
         String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
         helpDisplay.loadUrl(localUrl);
-    
+        
+        // WebView background must be set to transparency
+        // programatically or it won't work (known bug Android 2.2.x and up)
+        helpDisplay.setBackgroundColor(0x00000000);
+
     }  // end onCreate()
 
 
