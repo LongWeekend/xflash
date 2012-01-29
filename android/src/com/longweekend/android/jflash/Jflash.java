@@ -16,8 +16,6 @@ public class Jflash extends TabActivity
 {
     // private static final String MYTAG = "JFlash main";
     
-    // MASTER CONTROL FOR JFLASH/CFLASH
-    public static final boolean IS_JFLASH = true;
     
     /** Called when the activity is first created. */
     @Override

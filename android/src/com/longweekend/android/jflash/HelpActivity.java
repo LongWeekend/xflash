@@ -47,7 +47,7 @@ public class HelpActivity extends Activity
         
         // set the ListActivity to strings defined in resources xml
         // depending on whether we're in Jflash or Cflash
-        if( com.longweekend.android.jflash.Jflash.IS_JFLASH )
+        if( com.longweekend.android.jflash.JFApplication.IS_JFLASH )
         {
             topics = res.getStringArray(R.array.help_topics_japanese);
         }

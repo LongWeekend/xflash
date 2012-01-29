@@ -3,12 +3,29 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Tag Activity"
-    />
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout style="@style/heading_bar">
+
+        <!-- HEADING -->
+        <TextView
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:text="Study Sets" 
+            style="@style/heading_text" />
+
+        <!-- RIGHT BUTTON -->
+        <ImageButton
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/plus" 
+            style="@style/heading_button" />
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
 

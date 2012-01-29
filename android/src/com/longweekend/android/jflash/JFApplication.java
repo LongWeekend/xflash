@@ -17,6 +17,9 @@ import com.longweekend.android.jflash.model.LWEDatabase;
 
 public class JFApplication extends Application
 {
+    // MASTER CONTROL FOR JFLASH/CFLASH
+    public static final boolean IS_JFLASH = true;
+
     // our master "singleton" database instance
     // though it actually isn't a singleton, it's
     // superclassed to hang out in the global

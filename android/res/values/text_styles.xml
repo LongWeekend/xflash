@@ -9,9 +9,4 @@
         <item name="android:textSize">24px</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="buttontext_white">
-        <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">11px</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 </resources>
