@@ -4,7 +4,7 @@ package com.longweekend.android.jflash.model;
 //  jFlash
 //
 //  Created by Todd Presson on 1/14/12.
-//  Copyright 2012 LONG WEEKEND INC. All rights reserved.
+//  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  represents a single example sentence in both English and Japanese
 //  also has the "checked" flag to indicate whether or not the sentence

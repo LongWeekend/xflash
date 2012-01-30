@@ -4,7 +4,7 @@ package com.longweekend.android.jflash;
 //  jFlash
 //
 //  Created by Todd Presson on 1/26/2012.
-//  Copyright 2012 LONG WEEKEND INC.. All rights reserved.
+//  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public void onCreate()      @over
 //
