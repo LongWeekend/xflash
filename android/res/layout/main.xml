@@ -5,19 +5,32 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <LinearLayout 
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="bottom"
         android:padding="4dp" >
 
+        <!-- the row of tabs -->
         <TabWidget android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:tabStripEnabled="false" />
+        
+        <!-- the divider between tabs and content -->
+        <View android:id="@+id/the_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_above="@android:id/tabs"
+            android:background="@drawable/tab_divider" />
+        
+        <!-- the content of any given tab -->
         <FrameLayout android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:layout_above="@id/the_divider" />
     
-    </LinearLayout>
+    </RelativeLayout>
 </TabHost>
