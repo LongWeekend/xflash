@@ -40,8 +40,8 @@ public class PracticeActivity extends Activity
         myCard.hydrate();
 
         // new commit
-        TextView tempView = (TextView)findViewById(R.id.tempview);
-        tempView.setText( myCard.meaningWithoutMarkup() );
+//        TextView tempView = (TextView)findViewById(R.id.tempview);
+//        tempView.setText( myCard.meaningWithoutMarkup() );
     }
 
     
@@ -56,7 +56,7 @@ public class PracticeActivity extends Activity
         myReceiver = null;
 
         // asdf
-        myLayout = (LinearLayout)findViewById(R.id.mainlayout);
+        // myLayout = (LinearLayout)findViewById(R.id.mainlayout);
     }
 
 
@@ -157,7 +157,7 @@ public class PracticeActivity extends Activity
                 {
                     LWEDatabase tempDB = JFApplication.getDao();
                     firedUp = tempDB.attachDatabase();
-                    
+/*          
                     if( firedUp )
                     {
                         Button tempButton = (Button)findViewById(R.id.testbutton);
@@ -171,7 +171,8 @@ public class PracticeActivity extends Activity
                         tempView.setText("Database attach failed");
                         myLayout.addView(tempView);
                     } 
-                }
+*/
+               }
                 catch (Exception e)
                 {
                     Log.d(MYTAG,"Exception caught attaching DB:  " + e.toString() );
