@@ -7,8 +7,8 @@
     <application android:name="JFApplication" android:label="@string/app_name" android:icon="@drawable/icon">
         <activity android:name="Jflash"
             android:screenOrientation="portrait"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -61,6 +61,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.TAB" />
+            </intent-filter>
+        </activity>
+        <activity android:name="CreateTagActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/create_tag_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

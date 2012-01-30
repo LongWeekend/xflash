@@ -1,17 +1,16 @@
 package com.longweekend.android.jflash;
 
-//  TagActivity.java
+//  CreateTagActivity.java
 //  jFlash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class TagActivity extends Activity
+public class CreateTagActivity extends Activity
 {
     // private static final String MYTAG = "JFlash TagActivity";
     
@@ -20,14 +19,28 @@ public class TagActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tag);
+        setContentView(R.layout.create_tag);
     }
 
-
-    // onClick for our PLUS button
-    public void addTag(View v)
+    @Override
+    public void onResume()
     {
-        startActivity(new Intent(this,CreateTagActivity.class));
+        super.onResume();
+
+        overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        
+        overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
+    }
+
+    public void cancel(View v)
+    {
+        finish();
     }
 
 }  // end TagActivity class declaration

@@ -13,15 +13,15 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="Study Sets" 
+            android:text="Create Study Set" 
             style="@style/heading_text" />
 
-        <!-- RIGHT BUTTON -->
-        <ImageButton
+        <!-- LEFT BUTTON -->
+        <Button
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/plus" 
-            android:onClick="addTag"
+            android:layout_alignParentLeft="true"
+            android:text="Cancel" 
+            android:onClick="cancel"
             style="@style/heading_button" />
 
     </RelativeLayout>
