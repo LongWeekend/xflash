@@ -77,14 +77,13 @@ public class HelpActivity extends Activity
     
     }  // end onCreate()
 
-   
+ 
     // onClick method for the "ask us" button - pops a dialog
     public void goAskUs(View v)
     {
         fireAskusDialog();
     }
 
-    
     // calls a new child activity for the Activity group
     private void pullHelpTopic(long inId)
     {

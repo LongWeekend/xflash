@@ -22,4 +22,5 @@ public class HelpGroupActivity extends XflashGroupActivity
         startChildActivity("HelpActivity", new Intent(this,HelpActivity.class));
     }
 
+
 }  // end Help1GroupActivity class declaration

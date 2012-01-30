@@ -69,6 +69,4 @@ public class Jflash extends TabActivity
     }  // end onCreate()
 
 
-
-
 }  // end Jflash class declaration

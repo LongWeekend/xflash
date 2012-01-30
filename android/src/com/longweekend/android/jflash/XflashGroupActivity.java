@@ -81,7 +81,7 @@ public class XflashGroupActivity extends ActivityGroup
     {
         // fire up the intended child Activity
         Window window = getLocalActivityManager().startActivity(Id,intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        
+
         if ( window != null )
         { 
             // if it worked, add it to the list of running Activities
@@ -90,6 +90,9 @@ public class XflashGroupActivity extends ActivityGroup
             setContentView(window.getDecorView());
         }
     }
+
+
+
 
 
 }  // end HelpGroupActivity class declaration

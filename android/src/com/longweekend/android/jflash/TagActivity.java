@@ -22,7 +22,6 @@ public class TagActivity extends Activity
     }
 
 
-
 }  // end TagActivity class declaration
 
 
