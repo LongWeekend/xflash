@@ -8,33 +8,20 @@
     <!-- TITLE BAR -->
     <RelativeLayout style="@style/heading_bar" >
 
+        <!-- HEADING -->
+        <TextView
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:text="Help"
+            style="@style/heading_text" />
+
         <!-- RIGHT BUTTON -->
         <Button android:id="@+id/askus_button"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="8dp"
             android:text="Ask Us"
             android:onClick="goAskUs"
+            android:layout_alignParentRight="true"
             style="@style/heading_button" />
-
-        <!-- TEST BUTTON -->
-        <Button android:id="@+id/left_button"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="8dp"
-            android:text="Ask Us"
-            style="@style/heading_button"
-            android:visibility="invisible" />
-
-        <!-- HEADING -->
-        <TextView android:id="@+id/help_heading"
-            android:layout_width="fill_parent" 
-            android:layout_height="wrap_content" 
-            android:layout_toRightOf="@id/left_button"
-            android:layout_toLeftOf="@id/askus_button"
-            android:text="Well what if i need more space" 
-            android:gravity="center"
-            style="@style/heading_text" />
 
     </RelativeLayout>
 

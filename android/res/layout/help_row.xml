@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:textColor="#FF000000"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView 
@@ -24,7 +24,7 @@
         android:layout_marginRight="10dp" 
         android:text=">"
         android:textColor="#FF000000"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:padding="2dp" />
 
