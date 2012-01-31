@@ -48,7 +48,6 @@ typedef enum searchStates
 - (void) runSearchAndSetSearchBarForString:(NSString*)text;
 - (void) runSearchForString:(NSString*)text;
 - (void) receivedSearchResults:(NSArray *)results;
-- (void) pluginDidInstall:(NSNotification *)aNotification;
 
 //! Contains the returned search results (array of ExampleSentence objects)
 @property (nonatomic, retain) NSString *searchTerm; // used to tell viewDidLoad to set the search boxes text
