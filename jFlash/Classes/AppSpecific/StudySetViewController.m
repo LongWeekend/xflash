@@ -32,7 +32,7 @@ NSInteger const kLWEBackupSection = 2;
   self = [super initWithCoder:aDecoder];
   if (self)
   {
-    selectedTagId = kLWEUninitializedTagId;
+    self.selectedTagId = kLWEUninitializedTagId;
     // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
     self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
   }
@@ -44,7 +44,7 @@ NSInteger const kLWEBackupSection = 2;
   self = [self initWithNibName:@"StudySetView" bundle:nil];
   if (self)
   {
-    selectedTagId = kLWEUninitializedTagId;
+    self.selectedTagId = kLWEUninitializedTagId;
     self.group = aGroup;
     self.title = aGroup.groupName;
   }
@@ -74,12 +74,7 @@ NSInteger const kLWEBackupSection = 2;
   [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
   
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
-  
-  // Activity indicator
-  UIActivityIndicatorView *tmpIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-  [self setActivityIndicator:tmpIndicator];
-  [tmpIndicator release];
-  
+  self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
 }
 
 - (void) viewWillAppear: (BOOL)animated
@@ -170,7 +165,7 @@ NSInteger const kLWEBackupSection = 2;
  * Changes the user's active study set
  * \param tag Is a Tag object pointing to the tag to begin studying
  */
-- (void) changeStudySet:(Tag*) tag
+- (void) activateTag:(Tag*) tag
 {
   CurrentState *appSettings = [CurrentState sharedCurrentState];
   [appSettings setActiveTag:tag];
@@ -181,7 +176,7 @@ NSInteger const kLWEBackupSection = 2;
   [[NSNotificationCenter defaultCenter] postNotificationName:LWEShouldSwitchTab object:nil userInfo:userInfo];
   
   // Stop the animator
-  selectedTagId = -1;
+  self.selectedTagId = kLWEUninitializedTagId;
   [self.activityIndicator stopAnimating];
   [self.tableView reloadData];
 }
@@ -308,7 +303,7 @@ NSInteger const kLWEBackupSection = 2;
       
       cell.textLabel.text = tmpTag.tagName;
       cell.selectionStyle = UITableViewCellSelectionStyleNone;
-      NSString* tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
+      NSString *tmpDetailText = [NSString stringWithFormat:NSLocalizedString(@"%d Words",@"StudySetViewController.WordCount"), [tmpTag cardCount]];
       cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:12];
       cell.detailTextLabel.text = tmpDetailText;
       cell.accessoryView = nil;
@@ -320,7 +315,9 @@ NSInteger const kLWEBackupSection = 2;
       {
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
       }
-      if (selectedTagId == indexPath.row)
+      
+      // Special behavior if we are loading the set
+      if (self.selectedTagId == indexPath.row)
       {
         cell.accessoryView = self.activityIndicator;
         cell.detailTextLabel.text = NSLocalizedString(@"Loading cards...",@"StudySetViewController.LoadingCards");
@@ -582,26 +579,37 @@ NSInteger const kLWEBackupSection = 2;
     [self.activityIndicator startAnimating];
     if (alertView.tag == kBackupConfirmationAlertTag)
     {
+      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3];      
-      [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Backing Up...", @"StudySetViewController.BackingUp")];
+      [self.backupManager performSelector:@selector(backupUserData) withObject:nil afterDelay:0.3f];
     }
     else if (alertView.tag == kRestoreConfirmationAlertTag)
     {
+      [DSBezelActivityView newActivityViewForView:self.parentViewController.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
       // need to give this method a chance to finish or the modal doesn't work - Janrain code is ghetto?
-      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3];
-      [DSBezelActivityView newActivityViewForView:self.view withLabel:NSLocalizedString(@"Restoring...", @"StudySetViewController.Restoring")];
+      [self.backupManager performSelector:@selector(restoreUserData) withObject:nil afterDelay:0.3f];
     }
     else 
     {
-      [self.tableView reloadData];
-      [self performSelector:@selector(changeStudySet:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0];
+      // Cache this value and re-set it, the animation messes it up by resetting it to zero
+      CGPoint offset = self.tableView.contentOffset;
+      
+      // We want to reload the selected row because it will now say "loading cards"
+      [self.tableView beginUpdates];
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedTagId inSection:kLWETagsSection];
+      [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+      [self.tableView endUpdates];
+      
+      // For some unknown reason, the above calls (but not -reloadData) reset the table offset.  We don't want that.
+      self.tableView.contentOffset = offset;
+
+      [self performSelector:@selector(activateTag:) withObject:[self.tagArray objectAtIndex:self.selectedTagId] afterDelay:0.1];
     }
     return;
   }
   else 
   {
-    selectedTagId = -1;
+    self.selectedTagId = kLWEUninitializedTagId;
   }
 }
 
@@ -610,20 +618,20 @@ NSInteger const kLWEBackupSection = 2;
 - (void)didBackupUserData
 {
   [DSBezelActivityView removeView];  
-  NSString* alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your custom sets have been backed up successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Complete", @"BackupComplete") message:alertMessage];
-  [[self activityIndicator] stopAnimating];
+  [self.activityIndicator stopAnimating];
 }
 
 - (void)didFailToBackupUserDataWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
-  NSString* errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
+  NSString *errorMessage = [NSString stringWithFormat:@"Sorry about this! We couldn't back up because: %@", [error localizedDescription]];
   
   // overwrite the default error message if it's from the server
-  if ([error domain] == NetworkRequestErrorDomain)
+  if ([error.domain isEqualToString:NetworkRequestErrorDomain])
   {
-    switch ([error code]) // these should be http codes
+    switch (error.code) // these should be http codes
     {
       case 503:
         errorMessage = NSLocalizedString(@"The service is temporaily unavailable. Please try again later. Sorry!", @"StudySetViewController.503error");
@@ -635,22 +643,22 @@ NSInteger const kLWEBackupSection = 2;
     }
   }
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Backup Failed", @"BackupFailed") message:errorMessage];
-  [[self activityIndicator] stopAnimating];  
+  [self.activityIndicator stopAnimating];  
 }
 
 - (void)didRestoreUserData
 {
   [DSBezelActivityView removeView];
-  NSString* alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
+  NSString *alertMessage = [NSString stringWithFormat:@"%@%@!", NSLocalizedString(@"Your data has been restored successfully. Enjoy ",@"BackupManager_DataRestoredBody"),BUNDLE_APP_NAME];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Data Restored", @"DataRestored") message:alertMessage]; 
-  [[self activityIndicator] stopAnimating];
+  [self.activityIndicator stopAnimating];
   [self reloadTableData];
 }
 
 - (void)didFailToRestoreUserDateWithError:(NSError *)error
 {
   [DSBezelActivityView removeView];
-  if ([error code] == kDataNotFound && [[error domain] isEqualToString:LWEBackupManagerErrorDomain])
+  if (error.code == kDataNotFound && [error.domain isEqualToString:LWEBackupManagerErrorDomain])
   {
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"No Backup Found", @"DataNotFound") 
                                        message:NSLocalizedString(@"We couldn't find a backup for you! Please login with another account or create a backup first.", @"BackupManager_DataNotFoundBody")];
@@ -660,7 +668,7 @@ NSInteger const kLWEBackupSection = 2;
     [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Could Not Restore", @"RestoreFailed") 
                                        message:[NSString stringWithFormat:@"Sorry about this! We couldn't restore because: %@", [error localizedDescription]]];
   }
-  [[self activityIndicator] stopAnimating];
+  [self.activityIndicator stopAnimating];
 }
 
 #pragma mark -

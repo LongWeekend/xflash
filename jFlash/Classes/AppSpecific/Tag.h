@@ -43,15 +43,15 @@ extern NSInteger const kLWELearnedCardLevel;
 - (NSMutableArray *) thawCardIds;
 - (void) removeCardFromActiveSet:(Card *)card;
 - (void) addCardToActiveSet:(Card *)card;
+- (NSMutableArray *) flattenCardArrays;
 - (NSInteger) seenCardCount;
-- (NSMutableArray *) combineCardIds;
 - (NSInteger) groupId;
 
 //! Is the tag deletable by the user?
 @property (nonatomic) NSInteger tagEditable;
 @property (nonatomic, retain) NSString *tagName;
 @property (nonatomic, retain) NSString *tagDescription;
-@property (nonatomic, retain) NSMutableArray *cardIds;
+@property (nonatomic, retain) NSMutableArray *cardsByLevel;
 @property (nonatomic, retain) NSMutableArray *flattenedCardIdArray;
 @property (nonatomic, retain) NSMutableArray *cardLevelCounts;
 @property (nonatomic) NSInteger tagId;

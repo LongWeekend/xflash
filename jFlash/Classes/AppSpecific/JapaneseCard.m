@@ -19,16 +19,16 @@
   [super dealloc];
 }
 
-- (void) hydrate:(FMResultSet*)rs
+- (void) hydrateWithResultSet:(FMResultSet*)rs
 {
-  [self hydrate:rs simple:NO];
+  [self hydrateWithResultSet:rs simpleHydrate:NO];
   self.romaji = [rs stringForColumn:@"romaji"];
 	self._headword    = [rs stringForColumn:@"headword"];
 }
 
-- (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
+- (void) hydrateWithResultSet:(FMResultSet*)rs simpleHydrate:(BOOL)isSimple
 {
-  [super hydrate:rs simple:isSimple];
+  [super hydrateWithResultSet:rs simpleHydrate:isSimple];
   self.romaji = [rs stringForColumn:@"romaji"];
 	self._headword    = [rs stringForColumn:@"headword"];
 }

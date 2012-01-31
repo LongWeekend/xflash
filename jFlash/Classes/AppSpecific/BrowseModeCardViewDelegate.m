@@ -87,8 +87,7 @@
   {
     // If currentCard == nil, this is the "first card" -- use whatever the value of currentIndex is
     LWE_ASSERT_EXC((cardSet.currentIndex < [cardSet.flattenedCardIdArray count]), @"the currentIndex is out of bounds?");
-    NSNumber *cardId = [cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex];
-    nextCard = [CardPeer retrieveCardByPK:[cardId intValue]];
+    nextCard = [cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex];
   }
   else
   {
@@ -103,7 +102,6 @@
       {
         cardSet.currentIndex--;
       }
-      nextCard = [CardPeer retrieveCardByPK:[[cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex] intValue]];
     }
     else // if we are coming from the right or don't know, get the next card
     {
@@ -115,8 +113,16 @@
       {
         cardSet.currentIndex++;
       }
-      nextCard = [CardPeer retrieveCardByPK:[[cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex] intValue]];
     }
+    
+    // OK, we've updated currentIndex, get the new card
+    nextCard = [cardSet.flattenedCardIdArray objectAtIndex:cardSet.currentIndex];
+  }
+  
+  // Now, if we have a faulted card, hydrate it
+  if (nextCard.isFault)
+  {
+    [nextCard hydrate];
   }
   return nextCard;
 }

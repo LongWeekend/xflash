@@ -313,7 +313,6 @@ const NSInteger KSegmentedTableHeader = 100;
 /** runs a search and sets the text of the searchBar */
 - (void) runSearchAndSetSearchBarForString:(NSString*) text
 {
-  LWE_LOG(@"Should run seach for %@", text);
   [self.searchBar resignFirstResponder];
   self.searchBar.text = text;
   self.searchTerm = text;
@@ -329,13 +328,22 @@ const NSInteger KSegmentedTableHeader = 100;
   [self.tableView reloadData];
   [self.activityIndicator startAnimating];
   
-  dispatch_queue_t queue = dispatch_queue_create("com.longweekendmobile.databasecopy",NULL);
-  dispatch_queue_t main = dispatch_get_main_queue();
+  dispatch_queue_t queue = dispatch_queue_create("com.longweekendmobile.ftssearch",NULL);
   dispatch_async(queue,^
-                 {
-                   NSArray *tmpResults = [CardPeer searchCardsForKeyword:text];
-                   dispatch_async(main,^{ [self receivedSearchResults:tmpResults]; });
-                 });
+  {
+    // Run the regular search
+    NSArray *tmpResults = [CardPeer searchCardsForKeyword:text];
+
+    // If we had no results from the first search and there was no "deep" search, do it automatically
+    if ([tmpResults count] == 0 && ([text hasSuffix:@"?"] == NO))
+    {
+      tmpResults = [CardPeer searchCardsForKeyword:[text stringByAppendingString:@"?"]];
+    }
+    
+    // Report the results back to the view controller on the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{ [self receivedSearchResults:tmpResults]; });
+  });
+  dispatch_release(queue);
 }
 
 - (void) receivedSearchResults:(NSArray *)results
@@ -501,7 +509,7 @@ const NSInteger KSegmentedTableHeader = 100;
     // Load child controller onto nav stack
     if (_searchTarget == SEARCH_TARGET_WORDS)
     {
-      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[[self cardResultsArray] objectAtIndex:indexPath.row]];
+      AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[self.cardResultsArray objectAtIndex:indexPath.row]];
       [[self navigationController] pushViewController:tagController animated:YES];
       [tagController release];
     }

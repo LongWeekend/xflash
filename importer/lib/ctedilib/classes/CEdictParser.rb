@@ -133,12 +133,18 @@ class CEdictParser < Parser
         if base_entry.inline_entry_match?(inline_variant_entry)
           if base_into_variant
             muxed_variant_entries << variant_entry
-            variant_entry.add_base_entry_to_variant_meanings(base_entry) if add
-            variant_entry.rem_base_entry_from_variant_meanings(base_entry) if !add
+            if add
+              variant_entry.add_base_entry_to_variant_meanings(base_entry)
+            else
+              variant_entry.rem_base_entry_from_variant_meanings(base_entry)
+            end
           else
             muxed_base_entries << base_entry
-            base_entry.add_variant_entry_to_base_meanings(variant_entry) if add
-            base_entry.rem_variant_entry_from_base_meanings(variant_entry) if !add
+            if add
+              base_entry.add_variant_entry_to_base_meanings(variant_entry)
+            else
+             base_entry.rem_variant_entry_from_base_meanings(variant_entry)
+            end
           end
           matched = matched + 1
           

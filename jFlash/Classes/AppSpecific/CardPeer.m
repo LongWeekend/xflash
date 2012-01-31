@@ -31,7 +31,7 @@
  */
 + (Card *) blankCard
 {
-  return [[self class] blankCardWithId:0];
+  return [[self class] blankCardWithId:kLWEUninitializedCardId];
 }
 
 #pragma mark - Search APIs
@@ -172,7 +172,7 @@
   while ([rs next])
   {
     tmpCard = [CardPeer blankCard];
-    [tmpCard hydrate:rs];
+    [tmpCard hydrateWithResultSet:rs];
   }
   [rs close];
   return tmpCard;
@@ -189,7 +189,7 @@
     if (shouldHydrate)
     {
       tmpCard = [CardPeer blankCard];
-      [tmpCard hydrate:rs];
+      [tmpCard hydrateWithResultSet:rs];
     }
     else
     {
@@ -223,7 +223,7 @@
 /**
  * Returns an array of Card ids for a given tagId
  */
-+ (NSArray *) retrieveCardIdsSortedByLevelForTag:(Tag *)tag
++ (NSMutableArray *) retrieveCardsSortedByLevelForTag:(Tag *)tag
 {
   NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
   LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
@@ -237,9 +237,9 @@
                      "AND u.user_id = ? WHERE l.tag_id = ?",[settings objectForKey:@"user_id"],[NSNumber numberWithInt:tag.tagId]];
   while ([rs next])
   {
+    Card *newCard = [CardPeer blankCardWithId:[rs intForColumn:@"card_id"]];
     NSInteger levelId = [rs intForColumn:@"card_level"];
-    NSInteger cardId = [rs intForColumn:@"card_id"];
-    [[cardIdList objectAtIndex:levelId] addObject:[NSNumber numberWithInt:cardId]];
+    [[cardIdList objectAtIndex:levelId] addObject:newCard];
   }
   [rs close];
   return cardIdList;
@@ -276,7 +276,7 @@
 	while ([rs next])
 	{
 		Card *tmpCard = [CardPeer blankCard];
-		[tmpCard hydrate:rs simple:YES];
+		[tmpCard hydrateWithResultSet:rs simpleHydrate:YES];
 		[cardList addObject:tmpCard];
 	}
 	[rs close];

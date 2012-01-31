@@ -12,6 +12,7 @@
 #import "StudyViewController.h"
 #import "LWENetworkUtils.h"
 #import "AddTagViewController.h"
+#import "UpdateManager.h"
 
 @interface StudyViewController()
 //private methods
@@ -85,7 +86,7 @@
   
   // Show a UIAlert if this is the first time the user has launched the app.  
   CurrentState *state = [CurrentState sharedCurrentState];
-  if (state.isFirstLoad && !_alreadyShowedAlertView)
+  if (state.isFirstLoad && _alreadyShowedAlertView == NO)
   {
     _alreadyShowedAlertView = YES;
 #if defined (LWE_JFLASH)
@@ -101,6 +102,12 @@
                                         cancel:nil
                                       delegate:nil];
 #endif
+  }
+  else if (state.isFirstLaunchAfterUpdate && _alreadyShowedAlertView == NO)
+  {
+    // The update manager will handle showing the proper message based on which app & which version
+    [UpdateManager showUpgradeAlertView:[NSUserDefaults standardUserDefaults] delegate:self];
+    _alreadyShowedAlertView = YES;
   }
 }
 
@@ -154,25 +161,18 @@
 
 #pragma mark - UIAlertView delegate method
 
-// private helper method to launch the app store
--(void) _openLinkshareURL
-{
-  LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
-  [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
-  [tmpNet release];
-}
-
 /**
  * We prompt users to get Rikai if it is JFlash.
  * This is the delegate method to handle the response of what the user taps.
  */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  switch (buttonIndex)
+  // not really a cancel button, just button two
+  if (buttonIndex == LWE_ALERT_CANCEL_BTN)
   {
-    case LWE_ALERT_CANCEL_BTN: // not really a cancel button, just button two
-      [self _openLinkshareURL];
-    break;
+    LWENetworkUtils *tmpNet = [[LWENetworkUtils alloc] init];
+    [tmpNet followLinkshareURL:@"http://click.linksynergy.com/fs-bin/stat?id=qGx1VSppku4&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fus%252Fapp%252Fid380853144%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30&u1=JFLASH_APP_WELCOME_MESSAGE"];
+    [tmpNet release];
   }
 }
 
@@ -515,7 +515,7 @@
   // levelId associated with it, because we retrieved it in a different, far off place that doesn't
   // care about level Ids.  So we need to re-get the card, sadly.  This should still be faster
   // than any other way around the problem... MMA - 18.Oct.2011
-  theCard = [CardPeer retrieveCardByPK:theCard.cardId];
+  [theCard hydrate];
   
   NSString *changeType = [notification.userInfo objectForKey:LWETagContentDidChangeTypeKey];
   if ([changeType isEqualToString:LWETagContentCardAdded])

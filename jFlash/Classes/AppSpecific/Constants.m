@@ -69,8 +69,11 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TWITTER_PRIVATE_KEY  = @"1rsNXW8Oqomevvdzk4MvQ62sowLqYNKUQNQ9GgWhU";
       NSString * const LWE_TWITTER_HASH_TAG     = @"#jflash";
 
+      // Tapjoy
+      NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
+
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.5";
+      NSString * const LWE_CURRENT_VERSION       = @"1.6";
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 
@@ -108,6 +111,10 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_FLURRY_API_KEY           = @"CJB5CHQSQ4ZZMRS16ZJ5";
       NSString * const LWE_APP_SPLASH_IMAGE         = @"chinese-flash-splash.png";
 
+      // Tapjoy
+      NSString * const LWE_TAPJOY_APP_ID            = @"d05949e8-ab10-4039-b6f6-51ff3504084a";
+
+      // This setting is CFlash only
       NSString * const APP_PINYIN_COLOR             = @"pinyin_color";
       NSString * const SET_PINYIN_COLOR_ON          = @"ON";
       NSString * const SET_PINYIN_COLOR_OFF         = @"OFF";

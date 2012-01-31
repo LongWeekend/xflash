@@ -1324,7 +1324,7 @@
 		917A5C6B11AB844300016BD2 /* ProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProgressView.xib; path = XIBs/ProgressView.xib; sourceTree = "<group>"; };
 		917A5C6D11AB844300016BD2 /* StudySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudySetView.xib; path = XIBs/StudySetView.xib; sourceTree = "<group>"; };
 		917A5C6E11AB844300016BD2 /* StudyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyView.xib; path = XIBs/StudyView.xib; sourceTree = "<group>"; };
-		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = ../XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
+		917A5C6F11AB844300016BD2 /* UserDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserDetailsView.xib; path = XIBs/UserDetailsView.xib; sourceTree = "<group>"; };
 		917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = Reusable/SynthesizeSingleton/SynthesizeSingleton.h; sourceTree = "<group>"; };
 		917A5C7B11AB84EE00016BD2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = AppSpecific/Constants.h; sourceTree = "<group>"; };
 		917A5C7C11AB84EE00016BD2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = AppSpecific/Constants.m; sourceTree = "<group>"; };
@@ -1879,7 +1879,6 @@
 				917A5C7C11AB84EE00016BD2 /* Constants.m */,
 				917B2DBA146CC756007C77B1 /* DSActivityView.h */,
 				917B2DBB146CC756007C77B1 /* DSActivityView.m */,
-				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				917A5C7A11AB84D600016BD2 /* SynthesizeSingleton.h */,
 				499E56B414972A7200088BD3 /* TTTAttributedLabel.h */,
 				499E56B514972A7200088BD3 /* TTTAttributedLabel.m */,
@@ -2676,6 +2675,7 @@
 				493A4791146A89BB00F1E718 /* SettingsView.xib */,
 				917A5C6D11AB844300016BD2 /* StudySetView.xib */,
 				917A5C6E11AB844300016BD2 /* StudyView.xib */,
+				917A5C6F11AB844300016BD2 /* UserDetailsView.xib */,
 				2424112011F6F48100D535D7 /* TweetWordViewController.xib */,
 				2424112111F6F48100D535D7 /* TweetWordXAuthController.xib */,
 			);

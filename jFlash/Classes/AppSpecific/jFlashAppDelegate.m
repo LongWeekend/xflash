@@ -65,12 +65,20 @@
 
 - (NSString*) _getDecodedSearchTerm:(NSURL *)url  
 {
+  // Get the PLIST data about the scheme
+  NSArray *urlSchemes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+  NSDictionary *schemeInfo = [urlSchemes objectAtIndex:0];
+  NSString *scheme = [(NSArray*)[schemeInfo objectForKey:@"CFBundleURLSchemes"] objectAtIndex:0];
+  NSString *schemeUri = [NSString stringWithFormat:@"%@://",scheme];
+  
   NSString *searchTerm = [url unicodeAbsoluteString];
-  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:@"jflash://"])
+  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:schemeUri])
   {
     searchTerm = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   }
-  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"jflash://" withString:@""];
+  
+  // Replace out the schema name
+  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:schemeUri withString:@""];
   return searchTerm;
 }
 
@@ -95,13 +103,10 @@
   NSSetUncaughtExceptionHandler(&LWEUncaughtExceptionHandler);  // in case we crash, we can log it
   srandomdev();    // Seed random generator
 
-  // Log user sessions on release builds
-  [LWEAnalytics startSession:LWE_FLURRY_API_KEY];
-
-#if defined (LWE_JFLASH)
-  [TapjoyConnect requestTapjoyConnectWithAppId:@"6f0f78d1-f4bf-437b-befc-977b317f7b04"];     // Connect to Tapjoy for CPI ads
-#endif
-
+  // Log user sessions on release builds & connect to Tapjoy for CPI ads
+  [LWEAnalytics startSessionWithKey:LWE_FLURRY_API_KEY];
+  [TapjoyConnect requestTapjoyConnectWithAppId:LWE_TAPJOY_APP_ID];
+  
   // 1. This call initializes app settings in NSUserDefaults if not already done.  Important!  Do this FIRST!
   [[CurrentState sharedCurrentState] initializeSettings];
   

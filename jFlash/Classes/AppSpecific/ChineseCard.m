@@ -20,16 +20,16 @@
 
 @synthesize headword_simp;
 
-- (void) hydrate:(FMResultSet*)rs
+- (void) hydrateWithResultSet:(FMResultSet*)rs
 {
-  [self hydrate:rs simple:NO];
+  [self hydrateWithResultSet:rs simpleHydrate:NO];
   self._headword = [rs stringForColumn:@"headword_trad"];
   self.headword_simp = [rs stringForColumn:@"headword_simp"];
 }
 
-- (void) hydrate:(FMResultSet*)rs simple:(BOOL)isSimple
+- (void) hydrateWithResultSet:(FMResultSet*)rs simpleHydrate:(BOOL)isSimple
 {
-  [super hydrate:rs simple:isSimple];
+  [super hydrateWithResultSet:rs simpleHydrate:isSimple];
   self._headword = [rs stringForColumn:@"headword_trad"];
   self.headword_simp = [rs stringForColumn:@"headword_simp"];
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
+ 
+    <!-- TITLE BAR -->
+    <RelativeLayout style="@style/heading_bar" >
+
+        <!-- RIGHT BUTTON -->
+        <Button android:id="@+id/search_cancel_button"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="Cancel"
+            style="@style/heading_button" />
+
+        <!-- SEARCH BAR -->
+        <EditText
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/search_cancel_button"
+            android:layout_marginRight="8dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

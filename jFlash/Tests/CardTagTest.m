@@ -51,7 +51,7 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   STAssertNil(error, @"Error should be nil, but wasn't: %@",error);
   
   [longWeekendFavTag moveCard:card toLevel:5];
-  NSInteger count = [[[longWeekendFavTag cardIds] objectAtIndex:5] count];
+  NSInteger count = [[[longWeekendFavTag cardsByLevel] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
 }
 

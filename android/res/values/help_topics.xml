@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="help_topics_japanese">
+        <item>Welcome</item>
+        <item>Study Sets</item>
+        <item>Practice</item>
+        <item>Browse Mode</item>
+        <item>Search</item>
+        <item>Corrections</item>
+        <item>Learning Algorithm</item>
+        <item>Sharing</item>
+        <item>Integration</item>
+        <item>Tag Glossary</item>
+        <item>Backup Custom Sets</item>
+        <item>Feedback</item>
+    </string-array>
+    <string-array name="help_files_japanese">
+        <item>welcome@2x.html</item>
+        <item>studysets@2x.html</item>
+        <item>practice@2x.html</item>
+        <item>browse@2x.html</item>
+        <item>search@2x.html</item>
+        <item>corrections@2x.html</item>
+        <item>algorithm@2x.html</item>
+        <item>share@2x.html</item>
+        <item>integration@2x.html</item>
+        <item>tags@2x.html</item>
+        <item>backup@2x.html</item>
+        <item>feedback@2x.html</item>
+    </string-array>
+    <string-array name="help_topics_chinese">
+        <item>Welcome</item>
+        <item>Study Sets</item>
+        <item>Practice</item>
+        <item>Browse Mode</item>
+        <item>Search</item>
+        <item>Corrections</item>
+        <item>Learning Algorithm</item>
+        <item>Sharing</item>
+        <item>Integration</item>
+        <item>Backup Custom Sets</item>
+        <item>Feedback</item>
+    </string-array>
+    <string-array name="help_files_chinese">
+        <item>welcome@2x.html</item>
+        <item>studysets@2x.html</item>
+        <item>practice@2x.html</item>
+        <item>browse@2x.html</item>
+        <item>search@2x.html</item>
+        <item>corrections@2x.html</item>
+        <item>algorithm@2x.html</item>
+        <item>share@2x.html</item>
+        <item>integration@2x.html</item>
+        <item>backup@2x.html</item>
+        <item>feedback@2x.html</item>
+    </string-array>
+
+</resources>
