@@ -19,13 +19,50 @@
 
         <!-- LEFT BUTTON -->
         <Button android:id="@+id/settings_ratebutton"
+            style="@style/heading_button"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:text="Rate Us"
-            android:onClick="advanceColorScheme"
-            style="@style/heading_button" />
+            android:text="Rate Us" />
 
     </RelativeLayout>
+
+    <ScrollView style="@style/default_scroll_block">
+
+        <LinearLayout android:id="@+id/settings_page"  
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView 
+                style="@style/default_display_heading"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Application" />
+
+            <RelativeLayout 
+                style="@style/default_display_block"
+                android:onClick="advanceColorScheme" >
+
+                <TextView 
+                    style="@style/default_display_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="Theme" />
+                <TextView android:id="@+id/settings_themelabel"
+                    style="@style/default_value_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
 

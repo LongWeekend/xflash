@@ -7,9 +7,12 @@ package com.longweekendmobile.android.jflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public void onCreate()      @over
+//  public void onResume()      @over
 //
 //  public void goBackToHelp(View  )
 //  public void helpNext(View  ) 
+//
+//  private void setHelpPageColor()
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -25,6 +28,7 @@ public class HelpPageActivity extends Activity
 {
     private static final String MYTAG = "JFlash HelpPageActivity";
    
+    private int localColor;
     private int helpTopic;
     private String[] topics;
     private String[] helpFiles;
@@ -37,28 +41,8 @@ public class HelpPageActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_page);
 
-        // set the title bar to the current color scheme
-        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_page_heading);
-        Button tempButton1 = (Button)findViewById(R.id.help_backbutton);
-        Button tempButton2 = (Button)findViewById(R.id.help_nextbutton);
-
-        switch( JFApplication.PrefsManager.getColorScheme() )
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton1.setBackgroundResource(R.drawable.button_red);
-                    tempButton2.setBackgroundResource(R.drawable.button_red);
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton1.setBackgroundResource(R.drawable.button_blue);
-                    tempButton2.setBackgroundResource(R.drawable.button_blue);
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
-                    tempButton1.setBackgroundResource(R.drawable.button_tame);
-                    tempButton2.setBackgroundResource(R.drawable.button_tame);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
+        // if we're just starting up, force load of color
+        localColor = -1;
 
         // accept extra passed from parent Activity
         helpTopic = this.getIntent().getIntExtra("help_topic",-1);
@@ -97,6 +81,19 @@ public class HelpPageActivity extends Activity
     }  // end onCreate()
 
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        // set the background to the current color scheme
+        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        {
+            setHelpPageColor();
+        }
+    }
+
+
     // reset the content view to the main help screen
     public void goBackToHelp(View v)
     {
@@ -119,6 +116,39 @@ public class HelpPageActivity extends Activity
             helpDisplay.loadUrl(localUrl);
         }
     }
+
+
+    // set the local colors
+    private void setHelpPageColor()
+    {
+        // set the title bar to the current color scheme
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_page_heading);
+        Button tempButton1 = (Button)findViewById(R.id.help_backbutton);
+        Button tempButton2 = (Button)findViewById(R.id.help_nextbutton);
+
+        switch( JFApplication.PrefsManager.getColorScheme() )
+        {
+            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
+                    tempButton1.setBackgroundResource(R.drawable.button_red);
+                    tempButton2.setBackgroundResource(R.drawable.button_red);
+                    break;
+            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
+                    tempButton1.setBackgroundResource(R.drawable.button_blue);
+                    tempButton2.setBackgroundResource(R.drawable.button_blue);
+                    break;
+            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
+                    tempButton1.setBackgroundResource(R.drawable.button_tame);
+                    tempButton2.setBackgroundResource(R.drawable.button_tame);
+                    break;
+            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
+                    tempButton1.setBackgroundResource(R.drawable.button_green);
+                    tempButton2.setBackgroundResource(R.drawable.button_green);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
+    
+    }  // end setHelpPageColor()
 
 
 }  // end HelpPageActivity class declaration

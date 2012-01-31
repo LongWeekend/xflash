@@ -2,31 +2,25 @@
 <resources>
     <style name="heading_text">
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:shadowColor">#EE000000</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="count_label">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">10dp</item>
+    <style name="default_display_heading">
+        <item name="android:textColor">#FF828282</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
-    <style name="count_num">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">2dp</item>
+    <style name="default_display_text">
         <item name="android:textColor">#FF000000</item>
-        <item name="android:background">@drawable/count_back</item>
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
-    <style name="practice_info">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">12sp</item>
+    <style name="default_value_text">
+        <item name="android:textColor">#FFB0B0B0</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

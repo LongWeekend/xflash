@@ -26,12 +26,7 @@
 
     </RelativeLayout>
 
-    <ScrollView 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:scrollbarStyle="outsideInset" >
+    <ScrollView style="@style/default_scroll_block">
 
         <LinearLayout android:id="@+id/help_list"  
             android:orientation="vertical"

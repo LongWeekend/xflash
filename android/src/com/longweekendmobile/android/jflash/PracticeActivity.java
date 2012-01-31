@@ -25,10 +25,12 @@ public class PracticeActivity extends Activity
 {
     private static final String MYTAG = "JFlash PracticeActivity";
     
-    private DBReceiver myReceiver;
+    private PracticeReceiver myReceiver;
 
     // boolean for checking whether database is already open
     private boolean firedUp;
+
+    private int localColor;
 
     // also for debugging
     private LinearLayout myLayout;
@@ -52,53 +54,48 @@ public class PracticeActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.practice);
 
+        // if we're just starting up, force load of color
+        localColor = -1;
+        
         firedUp = false;
         myReceiver = null;
 
         // asdf
         myLayout = (LinearLayout)findViewById(R.id.mainlayout);
         
-        // set the practice background to the current color scheme
-        RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
-
-        switch( JFApplication.PrefsManager.getColorScheme() )
-        {
-            case 0: practiceBack.setBackgroundResource(R.drawable.practice_bg_red);
-                    break;
-            case 1: practiceBack.setBackgroundResource(R.drawable.practice_bg_blue);
-                    break;
-            case 2: practiceBack.setBackgroundResource(R.drawable.practice_bg_tame);
-                    break;
-            case 3: practiceBack.setBackgroundResource(R.drawable.practice_bg_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-
-
-
     }
 
 
     // this is a bad place to take care of this, just temporary for debugging
+    @Override
     public void onResume()
     {
         super.onResume();
+        
+        // set the background to the current color scheme
+        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        {
+            setPracticeColor();
+        }
         
         // if our receiver isn't running, start it
         if( myReceiver == null )
         {
             IntentFilter intentFilter;
-            myReceiver = new DBReceiver();
+            myReceiver = new PracticeReceiver();
 
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START);
             registerReceiver(myReceiver,intentFilter);
+            
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START2);
             registerReceiver(myReceiver,intentFilter);
+            
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_SUCCESS);
             registerReceiver(myReceiver,intentFilter);
+            
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_FAILURE);
             registerReceiver(myReceiver,intentFilter);
+            
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY);
             registerReceiver(myReceiver,intentFilter);
         }
@@ -139,18 +136,42 @@ public class PracticeActivity extends Activity
         tempDB.detachDatabase();
         tempDB.closeDatabase();
     }
+        
+
+    // sets the local color
+    private void setPracticeColor()
+    {
+        // set the practice background to the current color scheme
+        RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
+
+        localColor = JFApplication.PrefsManager.getColorScheme();
+
+        switch(localColor)
+        {
+            case 0: practiceBack.setBackgroundResource(R.drawable.practice_bg_red);
+                    break;
+            case 1: practiceBack.setBackgroundResource(R.drawable.practice_bg_blue);
+                    break;
+            case 2: practiceBack.setBackgroundResource(R.drawable.practice_bg_tame);
+                    break;
+            case 3: practiceBack.setBackgroundResource(R.drawable.practice_bg_green);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
+        
+    }  // end setPracticeColor()
 
     
-    // our receiver class for broadcasts sent from the database 
-    // TODO - temporary for debugging purposes
-    protected class DBReceiver extends BroadcastReceiver
+    // our receiver class for broadcasts
+    // TODO - database stuff temporary for debugging purposes
+    protected class PracticeReceiver extends BroadcastReceiver
     {
         @Override
         public void onReceive(Context context,Intent intent)
         {
             TextView tempView = new TextView(context);
 
-            // in this case, update the song list when it advances (on shuffle)
             if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START))
             {
                 tempView.setText("Copying db 1...");
@@ -201,7 +222,7 @@ public class PracticeActivity extends Activity
 
         }  // end onReceive()
 
-    }  // end DBReceiver declaration
+    }  // end PracticeReceiver declaration
 
 
 

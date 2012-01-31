@@ -56,7 +56,8 @@ public class JFApplication extends Application
     } 
 
     
-
+    // static class for JFApplication
+    // TODO - will eventually be centralized managed for SharedPreferences
     public static class PrefsManager
     {
         private static int colorScheme;

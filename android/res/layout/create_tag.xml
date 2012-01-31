@@ -6,7 +6,8 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout style="@style/heading_bar">
+    <RelativeLayout android:id="@+id/create_tag_heading"
+        style="@style/heading_bar">
 
         <!-- HEADING -->
         <TextView
@@ -17,7 +18,7 @@
             style="@style/heading_text" />
 
         <!-- LEFT BUTTON -->
-        <Button
+        <Button android:id="@+id/create_tag_cancelbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:text="Cancel" 

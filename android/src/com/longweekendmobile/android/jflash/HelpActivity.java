@@ -7,11 +7,13 @@ package com.longweekendmobile.android.jflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public void onCreate()      @over
+//  public void onResume()      @over
 //
 //  public void goAskUs(View  )
 //
 //  private void pullHelpTopic(long  )
 //  private void fireAskusDialog()
+//  private void setHelpColor()
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,6 +36,7 @@ public class HelpActivity extends Activity
 {
     private static final String MYTAG = "JFlash HelpActivity";
     
+    private int localColor;
     private AlertDialog askDialog;
 
     /** Called when the activity is first created. */
@@ -43,27 +46,11 @@ public class HelpActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
 
+        // if we're just starting up, force load of color
+        localColor = -1;
+
         // set our popup dialog instance to null
         askDialog = null;
-
-        // set the title bar to the current color scheme
-        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_heading);
-        Button tempButton = (Button)findViewById(R.id.help_askusbutton);
-
-        switch( JFApplication.PrefsManager.getColorScheme() )
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton.setBackgroundResource(R.drawable.button_red);
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton.setBackgroundResource(R.drawable.button_blue);
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
-                    tempButton.setBackgroundResource(R.drawable.button_tame);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
 
         Resources res = getResources();
         String[] topics;
@@ -114,6 +101,19 @@ public class HelpActivity extends Activity
         } // end for loop
         
     }  // end onCreate()
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        // set the background to the current color scheme
+        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        {
+            setHelpColor();
+        }
+    }
 
  
     // onClick method for the "ask us" button - pops a dialog
@@ -208,6 +208,34 @@ public class HelpActivity extends Activity
         });    
 
     }  // end fireAskusDialog()
+
+
+    // sets local colors
+    private void setHelpColor()
+    {
+        // set the title bar to the current color scheme
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_heading);
+        Button tempButton = (Button)findViewById(R.id.help_askusbutton);
+
+        switch( JFApplication.PrefsManager.getColorScheme() )
+        {
+            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
+                    tempButton.setBackgroundResource(R.drawable.button_red);
+                    break;
+            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
+                    tempButton.setBackgroundResource(R.drawable.button_blue);
+                    break;
+            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
+                    tempButton.setBackgroundResource(R.drawable.button_tame);
+                    break;
+            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
+                    tempButton.setBackgroundResource(R.drawable.button_green);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
+
+    }  // end setHelpColor()
 
 
 }  // end HelpActivity class declaration
