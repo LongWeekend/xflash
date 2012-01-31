@@ -66,7 +66,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.navigationItem.title = self.tag.tagName;
 }
 
 /** UIView delegate - sets theme info */
@@ -76,6 +75,7 @@
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
+  self.navigationItem.title = self.tag.tagName;
 }
 
 #pragma mark - KVO
