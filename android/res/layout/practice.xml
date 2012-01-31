@@ -108,7 +108,7 @@
         android:background="@drawable/practice_btn_bg" />
 
     <!-- the info just above the answer button -->
-    <LinearLayout
+    <LinearLayout android:id="@+id/practice_info_layout"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -135,8 +135,15 @@
         android:layout_above="@id/answer_button"
         android:src="@drawable/hh_temp" />
 
+<!-- begin test code layout -->
 
-<!--
+    <LinearLayout android:id="@+id/mainlayout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/practice_info_layout"
+        android:textColor="#FF000000"
+        >
     <TextView  
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
@@ -144,17 +151,6 @@
         android:textColor="#FF000000"
         android:layout_marginBottom="20dp"
         />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/mainlayout"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:textColor="#FF000000"
-        >
-    </LinearLayout>
-
     <Button
         android:id="@+id/testbutton"
         android:layout_width="fill_parent" 
@@ -177,7 +173,9 @@
         android:textColor="#FF000000"
     />
 
--->
- 
+    </LinearLayout>
+
+<!-- end test code layout -->
+
 </RelativeLayout>
 

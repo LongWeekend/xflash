@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  HelpActivity.java
 //  jFlash
@@ -55,7 +55,7 @@ public class HelpActivity extends Activity
         
         // set topics[] to strings defined in resources xml
         // depending on whether we're in Jflash or Cflash
-        if( com.longweekend.android.jflash.JFApplication.IS_JFLASH )
+        if( com.longweekendmobile.android.jflash.JFApplication.IS_JFLASH )
         {
             topics = res.getStringArray(R.array.help_topics_japanese);
         }
@@ -119,7 +119,7 @@ public class HelpActivity extends Activity
 
         // call the main ActivityGroup of the Help tab,
         // ask it to start our Intent
-        HelpGroupActivity parentActivity = (HelpGroupActivity)getParent();
+        HelpActivityGroup parentActivity = (HelpActivityGroup)getParent();
         parentActivity.startChildActivity("HelpPageActivity", myIntent);
     }
 

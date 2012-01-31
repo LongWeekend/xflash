@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  PracticeActivity.java
 //  jFlash
@@ -18,8 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.longweekend.android.jflash.model.Card;
-import com.longweekend.android.jflash.model.LWEDatabase;
+import com.longweekendmobile.android.jflash.model.Card;
+import com.longweekendmobile.android.jflash.model.LWEDatabase;
 
 public class PracticeActivity extends Activity
 {
@@ -56,7 +56,7 @@ public class PracticeActivity extends Activity
         myReceiver = null;
 
         // asdf
-        // myLayout = (LinearLayout)findViewById(R.id.mainlayout);
+        myLayout = (LinearLayout)findViewById(R.id.mainlayout);
     }
 
 
@@ -71,15 +71,15 @@ public class PracticeActivity extends Activity
             IntentFilter intentFilter;
             myReceiver = new DBReceiver();
 
-            intentFilter = new IntentFilter(com.longweekend.android.jflash.model.LWEDatabase.COPY_START);
+            intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START);
             registerReceiver(myReceiver,intentFilter);
-            intentFilter = new IntentFilter(com.longweekend.android.jflash.model.LWEDatabase.COPY_START2);
+            intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START2);
             registerReceiver(myReceiver,intentFilter);
-            intentFilter = new IntentFilter(com.longweekend.android.jflash.model.LWEDatabase.COPY_SUCCESS);
+            intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_SUCCESS);
             registerReceiver(myReceiver,intentFilter);
-            intentFilter = new IntentFilter(com.longweekend.android.jflash.model.LWEDatabase.COPY_FAILURE);
+            intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_FAILURE);
             registerReceiver(myReceiver,intentFilter);
-            intentFilter = new IntentFilter(com.longweekend.android.jflash.model.LWEDatabase.DATABASE_READY);
+            intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY);
             registerReceiver(myReceiver,intentFilter);
         }
         
@@ -131,27 +131,27 @@ public class PracticeActivity extends Activity
             TextView tempView = new TextView(context);
 
             // in this case, update the song list when it advances (on shuffle)
-            if( intent.getAction().equals(com.longweekend.android.jflash.model.LWEDatabase.COPY_START))
+            if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START))
             {
                 tempView.setText("Copying db 1...");
                 myLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekend.android.jflash.model.LWEDatabase.COPY_START2))
+            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START2))
             {
                 tempView.setText("Copying db 2...");                                
                 myLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekend.android.jflash.model.LWEDatabase.COPY_SUCCESS))
+            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_SUCCESS))
             {
                 tempView.setText("Copy Success");   
                 myLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekend.android.jflash.model.LWEDatabase.COPY_FAILURE))
+            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_FAILURE))
             {
                 tempView.setText("Copy Failure");                                
                 myLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekend.android.jflash.model.LWEDatabase.DATABASE_READY))
+            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY))
             {
                 try
                 {

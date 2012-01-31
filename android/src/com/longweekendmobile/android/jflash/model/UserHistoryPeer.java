@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  UserHistoryPeer.java
 //  jFlash
@@ -20,7 +20,7 @@ package com.longweekend.android.jflash.model;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekend.android.jflash.JFApplication;
+import com.longweekendmobile.android.jflash.JFApplication;
 
 public class UserHistoryPeer
 {

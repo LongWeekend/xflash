@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  User.java
 //  jFlash
@@ -27,7 +27,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.longweekend.android.jflash.JFApplication;
+import com.longweekendmobile.android.jflash.JFApplication;
 
 public class User
 {

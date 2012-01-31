@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  JFApplication.java
 //  jFlash
@@ -13,7 +13,7 @@ package com.longweekend.android.jflash;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.longweekend.android.jflash.model.LWEDatabase;
+import com.longweekendmobile.android.jflash.model.LWEDatabase;
 
 public class JFApplication extends Application
 {

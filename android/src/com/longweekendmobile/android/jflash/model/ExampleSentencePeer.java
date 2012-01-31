@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  ExampleSentencePeer.java
 //  jFlash
@@ -27,7 +27,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekend.android.jflash.JFApplication;
+import com.longweekendmobile.android.jflash.JFApplication;
 
 // TODO - this class has not been properly tested due to lack of
 //        sentence table in database to test on

@@ -22,9 +22,9 @@
         <!-- the divider between tabs and content -->
         <View android:id="@+id/the_divider"
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_above="@android:id/tabs"
-            android:background="@drawable/tab_divider" />
+            android:background="#FF000000" />
         
         <!-- the content of any given tab -->
         <FrameLayout android:id="@android:id/tabcontent"

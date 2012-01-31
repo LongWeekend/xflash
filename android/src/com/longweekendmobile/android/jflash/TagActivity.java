@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  TagActivity.java
 //  jFlash

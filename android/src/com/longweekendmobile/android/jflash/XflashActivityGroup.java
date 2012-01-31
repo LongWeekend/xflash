@@ -1,6 +1,6 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
-//  XflashGroupActivity.java
+//  XflashActivityGroup.java
 //  jFlash
 //
 //  Created by Todd Presson on 1/28/2012.
@@ -22,9 +22,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
-public class XflashGroupActivity extends ActivityGroup
+public class XflashActivityGroup extends ActivityGroup
 {
-    // private static final String MYTAG = "JFlash HelpGroupActivity";
+    // private static final String MYTAG = "JFlash HelpActivityGroup";
     
     private ArrayList<String> myIdList;
     
@@ -76,7 +76,7 @@ public class XflashGroupActivity extends ActivityGroup
 
 
     // start child method that is called from any Activity that
-    // inherits from XflashGroupActivity.class
+    // inherits from XflashActivityGroup.class
     public void startChildActivity(String Id,Intent intent)
     {
         // fire up the intended child Activity
@@ -95,7 +95,7 @@ public class XflashGroupActivity extends ActivityGroup
 
 
 
-}  // end HelpGroupActivity class declaration
+}  // end XflashActivityGroup class declaration
 
 
 

@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  Jflash.java
 //  jFlash
@@ -58,7 +58,7 @@ public class Jflash extends TabActivity
         tabHost.addTab(spec);
 
         // add the help tab
-        intent = new Intent().setClass(this,HelpGroupActivity.class);
+        intent = new Intent().setClass(this,HelpActivityGroup.class);
         spec = tabHost.newTabSpec("help").setIndicator("Help",
                         res.getDrawable(R.drawable.lifebuoy_flip)).setContent(intent);
         tabHost.addTab(spec);

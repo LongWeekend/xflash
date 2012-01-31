@@ -1,6 +1,6 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
-//  HelpGroupActivity.java
+//  HelpActivityGroup.java
 //  jFlash
 //
 //  Created by Todd Presson on 1/26/2012.
@@ -9,7 +9,7 @@ package com.longweekend.android.jflash;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class HelpGroupActivity extends XflashGroupActivity
+public class HelpActivityGroup extends XflashActivityGroup
 {
     
     /** Called when the activity is first created. */
@@ -23,4 +23,4 @@ public class HelpGroupActivity extends XflashGroupActivity
     }
 
 
-}  // end Help1GroupActivity class declaration
+}  // end HelpActivityGroup class declaration

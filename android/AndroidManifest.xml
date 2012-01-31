@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.longweekend.android.jflash"
+      package="com.longweekendmobile.android.jflash"
       android:versionCode="1"
       android:versionName="1.0">
     <uses-permission android:name="android.permission.INTERNET" /> 
@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
         </activity>
-        <activity android:name="HelpGroupActivity"
+        <activity android:name="HelpActivityGroup"
                   android:label="@string/help_group_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

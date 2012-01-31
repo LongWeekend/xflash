@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  ChineseCard.java
 //  jFlash

@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash;
+package com.longweekendmobile.android.jflash;
 
 //  HelpPageActivity.java
 //  jFlash
@@ -42,7 +42,7 @@ public class HelpPageActivity extends Activity
         
         // pull the topics to display the title
         // depending on whether we're in Jflash or Cflash
-        if( com.longweekend.android.jflash.JFApplication.IS_JFLASH )
+        if( com.longweekendmobile.android.jflash.JFApplication.IS_JFLASH )
         {
             topics = res.getStringArray(R.array.help_topics_japanese);
             helpFiles = res.getStringArray(R.array.help_files_japanese);

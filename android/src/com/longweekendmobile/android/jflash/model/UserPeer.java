@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  UserPeer.java
 //  jFlash
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.longweekend.android.jflash.JFApplication;
+import com.longweekendmobile.android.jflash.JFApplication;
 
 public class UserPeer
 {

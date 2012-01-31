@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  CardPeer.java
 //  jFlash
@@ -33,7 +33,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekend.android.jflash.JFApplication;
+import com.longweekendmobile.android.jflash.JFApplication;
 
 public class CardPeer
 {

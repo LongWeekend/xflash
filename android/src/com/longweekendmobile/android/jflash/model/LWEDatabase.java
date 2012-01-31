@@ -1,4 +1,4 @@
-package com.longweekend.android.jflash.model;
+package com.longweekendmobile.android.jflash.model;
 
 //  LWEDatabase.java
 //  jFlash
@@ -41,14 +41,14 @@ public class LWEDatabase extends SQLiteOpenHelper
     private final String MYTAG = "JFlash LWEDatabase";
 
     // our broadcast intent names
-    public static final String COPY_START = "com.longweekend.android.jflash.COPY_START";
-    public static final String COPY_START2 = "com.longweekend.android.jflash.COPY_START2";
-    public static final String COPY_SUCCESS = "com.longweekend.android.jflash.COPY_SUCCESS";
-    public static final String COPY_FAILURE = "com.longweekend.android.jflash.COPY_FAILURE";
-    public static final String DATABASE_READY = "com.longweekend.android.jflash.DATABASE_READY";
+    public static final String COPY_START = "com.longweekendmobile.android.jflash.COPY_START";
+    public static final String COPY_START2 = "com.longweekendmobile.android.jflash.COPY_START2";
+    public static final String COPY_SUCCESS = "com.longweekendmobile.android.jflash.COPY_SUCCESS";
+    public static final String COPY_FAILURE = "com.longweekendmobile.android.jflash.COPY_FAILURE";
+    public static final String DATABASE_READY = "com.longweekendmobile.android.jflash.DATABASE_READY";
                         
     // the Android default onboard database location
-    private static final String DB_PATH = "/data/data/com.longweekend.android.jflash/databases/";
+    private static final String DB_PATH = "/data/data/com.longweekendmobile.android.jflash/databases/";
     // TODO change these from mp3 when files are cut up
     private static final String DB_NAME = "jFlash.mp3";
     private static final String DB_CARD = "jFlash-CARD-1.1.mp3";
