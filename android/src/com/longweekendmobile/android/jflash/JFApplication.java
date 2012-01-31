@@ -57,6 +57,26 @@ public class JFApplication extends Application
 
     
 
+    public static class PrefsManager
+    {
+        private static int colorScheme;
+
+        public PrefsManager()
+        {
+            colorScheme = 0;
+        }
+
+        public static int getColorScheme()
+        {
+            return colorScheme;
+        }
+
+        public static void setColorScheme(int inColor)
+        {
+            colorScheme = inColor;
+        }
+
+    }  // end JFApplication.PrefsManager class declaration
 
 
 }  // end JFApplication class declaration

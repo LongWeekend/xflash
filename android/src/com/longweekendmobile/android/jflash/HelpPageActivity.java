@@ -14,10 +14,12 @@ package com.longweekendmobile.android.jflash;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
 public class HelpPageActivity extends Activity 
 {
@@ -34,6 +36,29 @@ public class HelpPageActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_page);
+
+        // set the title bar to the current color scheme
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_page_heading);
+        Button tempButton1 = (Button)findViewById(R.id.help_backbutton);
+        Button tempButton2 = (Button)findViewById(R.id.help_nextbutton);
+
+        switch( JFApplication.PrefsManager.getColorScheme() )
+        {
+            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
+                    tempButton1.setBackgroundResource(R.drawable.button_red);
+                    tempButton2.setBackgroundResource(R.drawable.button_red);
+                    break;
+            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
+                    tempButton1.setBackgroundResource(R.drawable.button_blue);
+                    tempButton2.setBackgroundResource(R.drawable.button_blue);
+                    break;
+            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
+                    tempButton1.setBackgroundResource(R.drawable.button_tame);
+                    tempButton2.setBackgroundResource(R.drawable.button_tame);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
 
         // accept extra passed from parent Activity
         helpTopic = this.getIntent().getIntExtra("help_topic",-1);
@@ -54,7 +79,7 @@ public class HelpPageActivity extends Activity
         }
 
         // set the title bar
-        TextView tempView = (TextView)findViewById(R.id.help_title);
+        TextView tempView = (TextView)findViewById(R.id.help_page_title);
         tempView.setText( topics[helpTopic] );         
     
         // get our WebView and disable pinch zoom
@@ -87,7 +112,7 @@ public class HelpPageActivity extends Activity
             ++helpTopic;
            
             // change both the title bar and the page content
-            TextView tempView = (TextView)findViewById(R.id.help_title);
+            TextView tempView = (TextView)findViewById(R.id.help_page_title);
             tempView.setText( topics[helpTopic] );
 
             String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];

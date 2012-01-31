@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/practice_mainlayout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/practice_bg_red" >
+    android:layout_height="fill_parent" >
  
     <!-- the five count blocks in the top bar -->
     <LinearLayout android:id="@+id/count_bar"
@@ -83,7 +83,7 @@
     </LinearLayout>
     <!-- end top bar layout -->
 
-    <ImageButton android:id="@+id/show_reading_button"
+    <ImageButton android:id="@+id/practice_showreadingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -96,11 +96,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/show_reading_button"
+        android:layout_below="@id/practice_showreadingbutton"
         android:layout_marginTop="60dp"
         android:src="@drawable/practice_btn_unrevealed_mini" />
     
-    <ImageButton android:id="@+id/answer_button"
+    <ImageButton android:id="@+id/practice_answerbutton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -112,7 +112,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/answer_button"
+        android:layout_above="@id/practice_answerbutton"
         android:padding="2dp" >
 
         <TextView android:id="@+id/practice_tag_name"
@@ -132,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/answer_button"
+        android:layout_above="@id/practice_answerbutton"
         android:src="@drawable/hh_temp" />
 
 <!-- begin test code layout -->

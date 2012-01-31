@@ -6,7 +6,8 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout style="@style/heading_red">
+    <RelativeLayout android:id="@+id/tag_heading"
+        style="@style/heading_bar">
 
         <!-- HEADING -->
         <TextView
@@ -17,12 +18,12 @@
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->
-        <ImageButton
+        <ImageButton android:id="@+id/tag_addbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
             android:onClick="addTag"
-            style="@style/heading_button_red" />
+            style="@style/heading_button" />
 
     </RelativeLayout>
 

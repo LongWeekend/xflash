@@ -15,24 +15,20 @@ package com.longweekendmobile.android.jflash;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.content.Context;
-import android.widget.ListView;
-import android.util.Log;
 
 public class HelpActivity extends Activity 
 {
@@ -49,7 +45,26 @@ public class HelpActivity extends Activity
 
         // set our popup dialog instance to null
         askDialog = null;
-    
+
+        // set the title bar to the current color scheme
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_heading);
+        Button tempButton = (Button)findViewById(R.id.help_askusbutton);
+
+        switch( JFApplication.PrefsManager.getColorScheme() )
+        {
+            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
+                    tempButton.setBackgroundResource(R.drawable.button_red);
+                    break;
+            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
+                    tempButton.setBackgroundResource(R.drawable.button_blue);
+                    break;
+            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
+                    tempButton.setBackgroundResource(R.drawable.button_tame);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
+
         Resources res = getResources();
         String[] topics;
         

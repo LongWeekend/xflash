@@ -14,8 +14,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.longweekendmobile.android.jflash.model.Card;
@@ -57,6 +57,26 @@ public class PracticeActivity extends Activity
 
         // asdf
         myLayout = (LinearLayout)findViewById(R.id.mainlayout);
+        
+        // set the practice background to the current color scheme
+        RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
+
+        switch( JFApplication.PrefsManager.getColorScheme() )
+        {
+            case 0: practiceBack.setBackgroundResource(R.drawable.practice_bg_red);
+                    break;
+            case 1: practiceBack.setBackgroundResource(R.drawable.practice_bg_blue);
+                    break;
+            case 2: practiceBack.setBackgroundResource(R.drawable.practice_bg_tame);
+                    break;
+            case 3: practiceBack.setBackgroundResource(R.drawable.practice_bg_green);
+                    break;
+            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+                        break;
+        }
+
+
+
     }
 
 

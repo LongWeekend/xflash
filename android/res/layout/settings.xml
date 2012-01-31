@@ -6,7 +6,8 @@
     android:background="@drawable/table_background" >
  
     <!-- TITLE BAR -->
-    <RelativeLayout style="@style/heading_tame" >
+    <RelativeLayout android:id="@+id/settings_heading"
+        style="@style/heading_bar" >
 
         <!-- HEADING -->
         <TextView
@@ -17,11 +18,12 @@
             style="@style/heading_text" />
 
         <!-- LEFT BUTTON -->
-        <Button
+        <Button android:id="@+id/settings_ratebutton"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:text="Rate Us"
-            style="@style/heading_button_tame" />
+            android:onClick="advanceColorScheme"
+            style="@style/heading_button" />
 
     </RelativeLayout>
 
