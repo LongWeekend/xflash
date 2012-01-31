@@ -25,9 +25,22 @@
 
     </RelativeLayout>
 
-    <ListView android:id="@+id/help_list"
+    <ScrollView 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-     />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:scrollbarStyle="outsideInset" >
+
+        <LinearLayout android:id="@+id/help_list"  
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFFFF" 
+            android:padding="4dp" >
+
+        </LinearLayout>
+    
+    </ScrollView>
 
 </LinearLayout>

@@ -27,11 +27,16 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.content.Context;
 import android.widget.ListView;
+import android.util.Log;
 
 public class HelpActivity extends Activity 
 {
-    // private static final String MYTAG = "JFlash HelpActivity";
+    private static final String MYTAG = "JFlash HelpActivity";
     
     private AlertDialog askDialog;
 
@@ -42,10 +47,13 @@ public class HelpActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
 
+        // set our popup dialog instance to null
+        askDialog = null;
+    
         Resources res = getResources();
         String[] topics;
         
-        // set the ListActivity to strings defined in resources xml
+        // set topics[] to strings defined in resources xml
         // depending on whether we're in Jflash or Cflash
         if( com.longweekend.android.jflash.JFApplication.IS_JFLASH )
         {
@@ -53,28 +61,43 @@ public class HelpActivity extends Activity
         }
         else
         {
-            // topics = res.getStringArray(R.array.help_topics_chinese);
+            topics = res.getStringArray(R.array.help_topics_chinese);
         }
 
-        ListView myLV = (ListView)findViewById(R.id.help_list);
+        // pick up the child of our ScrollView so we can add rows
+        LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_list);
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
         
-        myLV.setAdapter( new ArrayAdapter<String>(this,R.layout.help_row,
-                         R.id.help_label,topics) );
-        
-        // now the ListActivity is set, queue onClickListeners for
-        // the help topics
-        myLV.setOnItemClickListener( new OnItemClickListener()
+        int rowCount = 0;
+        for( String myTopic : topics )
         {
-            public void onItemClick( AdapterView<?> parent, View view, int position, long id) 
-            {
-                // local private HelpActivity.pullHelpTopic()
-                pullHelpTopic(id);
-            }
-        });
+            // inflate our exiting row resource (which is a RelativeLayout) for each 
+            // row and tag the view with the row number of each particular help topic
+            RelativeLayout toInflate = (RelativeLayout)inflater.inflate(R.layout.help_row,null);
+            toInflate.setTag(rowCount);
+            ++rowCount;
+            
+            // set the label
+            TextView tempView = (TextView)toInflate.findViewById(R.id.help_label);
+            tempView.setText(myTopic);            
 
-        // set our popup dialog instance to null
-        askDialog = null;
-    
+            // add a click listener
+            toInflate.setOnClickListener( new OnClickListener()
+            {
+                public void onClick(View v) 
+                {
+                    // local private HelpActivity.pullHelpTopic()
+                    int tempInt = (Integer)v.getTag(); 
+                    pullHelpTopic(tempInt);
+                }
+
+            });
+ 
+            // add the new label/row to the LinearLayout (inside the ScrollView)
+            myLayout.addView(toInflate);    
+        
+        } // end for loop
+        
     }  // end onCreate()
 
  
@@ -85,7 +108,7 @@ public class HelpActivity extends Activity
     }
 
     // calls a new child activity for the Activity group
-    private void pullHelpTopic(long inId)
+    private void pullHelpTopic(int inId)
     {
         // set the ListView id of the topic selected
         // Bundle helpTopic = new Bundle();
@@ -93,7 +116,7 @@ public class HelpActivity extends Activity
 
         Intent myIntent = new Intent( getParent(), HelpPageActivity.class);
         myIntent.putExtra("help_topic",inId);
- 
+
         // call the main ActivityGroup of the Help tab,
         // ask it to start our Intent
         HelpGroupActivity parentActivity = (HelpGroupActivity)getParent();

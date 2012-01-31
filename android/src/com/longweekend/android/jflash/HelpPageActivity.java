@@ -17,10 +17,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.util.Log;
 
 public class HelpPageActivity extends Activity 
 {
-    // private static final String MYTAG = "JFlash HelpPageActivity";
+    private static final String MYTAG = "JFlash HelpPageActivity";
    
     private int helpTopic;
     private String[] topics;
@@ -34,9 +35,8 @@ public class HelpPageActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_page);
 
-        // accept bundle passed from parent Activity
-        Bundle incoming = this.getIntent().getExtras();
-        helpTopic = (int)incoming.getLong("help_topic");
+        // accept extra passed from parent Activity
+        helpTopic = this.getIntent().getIntExtra("help_topic",-1);
 
         Resources res = getResources();
         
