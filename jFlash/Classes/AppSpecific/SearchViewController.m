@@ -55,8 +55,11 @@ const NSInteger KSegmentedTableHeader = 100;
     _searchTarget = SEARCH_TARGET_WORDS;
     _searchState = kSearchNoSearch;
     
-    // Register an observer for the example sentences
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+    // Notification for when the card headword stlye changes
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+
+    // Register for notification when tag content changes (might be starred words.. in which case we want to know)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
   }
   return self;
 }
@@ -97,13 +100,6 @@ const NSInteger KSegmentedTableHeader = 100;
   {
     [self _addSearchControlToHeader];
   }
-
-  // Register for notification when tag content changes (might be starred words.. in which case we want to know)
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
-  
-  // Notification for when the card headword stlye changes
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void) viewDidUnload
@@ -112,13 +108,6 @@ const NSInteger KSegmentedTableHeader = 100;
   self.searchBar = nil;
   self.searchingCell = nil;
   self.activityIndicator = nil;
-  
-  // Stop observing for tag content changes
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
-  // Stop observing headword changes
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
 }
 
 
@@ -126,7 +115,7 @@ const NSInteger KSegmentedTableHeader = 100;
  * Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct 
  * If search is not installed, will call shouldShowDownloaderModal notification to stop user from using this screen
  */
-- (void) viewWillAppear: (BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
   // View related
   [super viewWillAppear:animated];
@@ -164,7 +153,7 @@ const NSInteger KSegmentedTableHeader = 100;
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE] && self.tableView)
   {
     [self.tableView reloadData];
   }
@@ -175,24 +164,6 @@ const NSInteger KSegmentedTableHeader = 100;
 }
 
 #pragma mark - Public Methods
-
-/** 
- * This should be called by something else - maybe a notification-
- * after example sentences have been installed
- */
-- (void) pluginDidInstall:(NSNotification*)aNotification
-{
-  // Only show control if both FTS AND EX are installed
-//  PluginManager *pm = [[CurrentState sharedCurrentState] pluginMgr];
-//  if ([pm pluginIsLoaded:FTS_DB_KEY] && [pm pluginIsLoaded:EXAMPLE_DB_KEY])
-//  {
-    // Disabled for JFlash 1.1 release
-//    _showSearchTargetControl = YES;
-//    [self _addSearchControlToHeader];
-//  }
-}
-
-
 
 /**
  * Reads the value of the "pill" chooser and sets _searchTarget appropriately
@@ -729,8 +700,8 @@ const NSInteger KSegmentedTableHeader = 100;
   // Plugin did install observer
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
-  // Headword style did change
-  [[NSNotificationCenter defaultCenter] removeObserver:self.tableView];
+  // Stop observing headword changes
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
   
   [pluginManager release];
   [searchTerm release];
