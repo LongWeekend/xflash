@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="heading_bar">
+    <style name="heading_red">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/gradient_red</item>
         <item name="android:padding">8dp</item>
     </style>
-    <style name="heading_button">
+    <style name="heading_blue">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/gradient_blue</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="heading_tame">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/gradient_tame</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="heading_button_red">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/button_red</item>
+    </style>
+    <style name="heading_button_blue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/button_blue</item>
+    </style>
+    <style name="heading_button_tame">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/button_tame</item>
     </style>
 </resources>

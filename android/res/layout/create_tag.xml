@@ -6,7 +6,7 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout style="@style/heading_bar">
+    <RelativeLayout style="@style/heading_red">
 
         <!-- HEADING -->
         <TextView
@@ -22,7 +22,7 @@
             android:layout_alignParentLeft="true"
             android:text="Cancel" 
             android:onClick="cancel"
-            style="@style/heading_button" />
+            style="@style/heading_button_red" />
 
     </RelativeLayout>
 
