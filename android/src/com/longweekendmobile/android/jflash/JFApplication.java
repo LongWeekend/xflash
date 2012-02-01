@@ -12,6 +12,7 @@ package com.longweekendmobile.android.jflash;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -67,14 +68,29 @@ public class JFApplication extends Application
     public static class ColorManager
     {
         private static int colorScheme = LWE_THEME_RED;
+
+        // arrays of resource IDs for use in setupScheme()
+        // they are loaded such that their index corresponds to the appropriate
+        // color scheme, i.e.  { LWE_THEME_RED , LWE_THEME_BLUE , LWE_THEME_TAME }
+        // so that we can use colorScheme directly
         private static int[] backgroundIds = { R.drawable.practice_bg_red , R.drawable.practice_bg_blue , 
                                                R.drawable.practice_bg_tame };
-
+        private static int[] viewGradients = { R.drawable.gradient_red , R.drawable.gradient_blue ,
+                                               R.drawable.gradient_tame };
+        private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
+                                                 R.drawable.button_tame };
 
         public static int getColorScheme()
         {
             return colorScheme;
         }
+
+        // sets the background image for the PracticeActivity
+        public static void setupPracticeBack(RelativeLayout inLayout)
+        {
+            inLayout.setBackgroundResource( backgroundIds[colorScheme] );
+        }
+
 
         public static void setColorScheme(int inColor)
         {
@@ -86,62 +102,28 @@ public class JFApplication extends Application
             setupScheme(inLayout,null,null);
         }
 
-        public static void setupScheme(RelativeLayout inLayout,Button inButton1)
+        public static void setupScheme(RelativeLayout inLayout,View inButton1)
         {
             setupScheme(inLayout,inButton1,null);
         }
 
 
-        // sets the background image for the PracticeActivity
-        public static void setupPracticeBack(RelativeLayout inLayout)
-        {
-            inLayout.setBackgroundResource( backgroundIds[colorScheme] );
-        }
-
-
-        // TODO - okay, there HAS to be a better way to do this
-        public static void setupScheme(RelativeLayout inLayout,Button inButton1,Button inButton2)
+        // takes in views from the title bar of any given Activity and sets
+        // the background drawables according to color scheme
+        public static void setupScheme(RelativeLayout inLayout,View inButton1,View inButton2)
         {
             // based on the current color scheme, set up as many parameters as have been passed
-            switch(colorScheme)
+            inLayout.setBackgroundResource( viewGradients[colorScheme] );
+
+            if( inButton1 != null )
             {
-                case LWE_THEME_RED: 
-                        inLayout.setBackgroundResource(R.drawable.gradient_red);
-                        if( inButton1 != null )
-                        {
-                            inButton1.setBackgroundResource(R.drawable.button_red);
-                        }
-                        if( inButton2 != null )
-                        {
-                            inButton2.setBackgroundResource(R.drawable.button_red);
-                        }
-                        break;
-                case LWE_THEME_BLUE: 
-                        inLayout.setBackgroundResource(R.drawable.gradient_blue);
-                        if( inButton1 != null )
-                        {
-                            inButton1.setBackgroundResource(R.drawable.button_blue);
-                        }
-                        if( inButton2 != null )
-                        {
-                            inButton2.setBackgroundResource(R.drawable.button_blue);
-                        }
-                        break;
-                case LWE_THEME_TAME: 
-                        inLayout.setBackgroundResource(R.drawable.gradient_tame);
-                        if( inButton1 != null )
-                        {
-                            inButton1.setBackgroundResource(R.drawable.button_tame);
-                        }
-                        if( inButton2 != null )
-                        {
-                            inButton2.setBackgroundResource(R.drawable.button_tame);
-                        }
-                        break;
+                inButton1.setBackgroundResource( buttonGradients[colorScheme] );
+            }
 
-                default: break;
-
-            }  // end switch()
+            if( inButton2 != null )
+            {
+                inButton2.setBackgroundResource( buttonGradients[colorScheme] );
+            }
 
         }  // end setupScheme()
 
