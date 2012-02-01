@@ -69,6 +69,7 @@ public class HelpPageActivity extends Activity
         // get our WebView and disable pinch zoom
         helpDisplay = (WebView)findViewById(R.id.help_display);
         helpDisplay.getSettings().setSupportZoom(false); 
+        helpDisplay.setHorizontalScrollBarEnabled(false);
 
         // set the html body
         String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
