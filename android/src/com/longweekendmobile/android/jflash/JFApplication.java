@@ -64,7 +64,12 @@ public class JFApplication extends Application
 
     
     // static class for JFApplication
-    // TODO - will eventually be centralized managed for SharedPreferences
+    // TODO - this is currently a subclass of JFApplication because I'm suspicious
+    //        that it will wind up using Preferences, in which case we want it to
+    //        have direct access to JFApplication.myInstance, lest we need to pass
+    //        another copy of the Context
+    //        If it winds up not developing that way, it can easily be moved out
+    //        to be an independent class
     public static class ColorManager
     {
         private static int colorScheme = LWE_THEME_RED;

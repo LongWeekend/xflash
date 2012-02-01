@@ -9,4 +9,5 @@
     <string name="help_name">HelpActivity</string>
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
+    <string name="acknowledgement_content">Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write an simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group\'s liscense. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo and Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.</string>
 </resources>
