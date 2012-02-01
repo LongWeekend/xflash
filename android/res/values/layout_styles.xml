@@ -26,6 +26,18 @@
         <item name="android:padding">4dp</item>
         <item name="android:clickable">true</item>
     </style>
+    <style name="default_display_left" parent="@style/default_display_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <style name="default_display_right" parent="@style/default_value_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
     <style name="count_label">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

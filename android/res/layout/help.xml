@@ -29,11 +29,8 @@
     <ScrollView style="@style/default_scroll_block">
 
         <LinearLayout android:id="@+id/help_list"  
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FFFFFFFF" 
-            android:padding="4dp" >
+            style="@style/default_display_block"
+            android:orientation="vertical" >
 
         </LinearLayout>
     

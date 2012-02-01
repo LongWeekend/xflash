@@ -73,9 +73,12 @@ public class PracticeActivity extends Activity
         super.onResume();
         
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
-            setPracticeColor();
+            // load the title bar elements and pass them to the color manager
+            RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
+
+            JFApplication.ColorManager.setupPracticeBack(practiceBack);
         }
         
         // if our receiver isn't running, start it
@@ -138,31 +141,6 @@ public class PracticeActivity extends Activity
     }
         
 
-    // sets the local color
-    private void setPracticeColor()
-    {
-        // set the practice background to the current color scheme
-        RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
-
-        localColor = JFApplication.PrefsManager.getColorScheme();
-
-        switch(localColor)
-        {
-            case 0: practiceBack.setBackgroundResource(R.drawable.practice_bg_red);
-                    break;
-            case 1: practiceBack.setBackgroundResource(R.drawable.practice_bg_blue);
-                    break;
-            case 2: practiceBack.setBackgroundResource(R.drawable.practice_bg_tame);
-                    break;
-            case 3: practiceBack.setBackgroundResource(R.drawable.practice_bg_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-        
-    }  // end setPracticeColor()
-
-    
     // our receiver class for broadcasts
     // TODO - database stuff temporary for debugging purposes
     protected class PracticeReceiver extends BroadcastReceiver

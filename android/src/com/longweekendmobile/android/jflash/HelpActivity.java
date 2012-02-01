@@ -13,7 +13,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  private void pullHelpTopic(long  )
 //  private void fireAskusDialog()
-//  private void setHelpColor()
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -70,8 +70,9 @@ public class HelpActivity extends Activity
         LinearLayout myLayout = (LinearLayout)findViewById(R.id.help_list);
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
         
+        int totalTopics = topics.length;
         int rowCount = 0;
-        for( String myTopic : topics )
+        for(int i = 0; i < totalTopics; i++)
         {
             // inflate our exiting row resource (which is a RelativeLayout) for each 
             // row and tag the view with the row number of each particular help topic
@@ -81,7 +82,7 @@ public class HelpActivity extends Activity
             
             // set the label
             TextView tempView = (TextView)toInflate.findViewById(R.id.help_label);
-            tempView.setText(myTopic);            
+            tempView.setText( topics[i] );            
 
             // add a click listener
             toInflate.setOnClickListener( new OnClickListener()
@@ -95,6 +96,12 @@ public class HelpActivity extends Activity
 
             });
  
+            // add a divider before all except the first
+            if( i > 0 )
+            {
+                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+                myLayout.addView(divider);
+            }
             // add the new label/row to the LinearLayout (inside the ScrollView)
             myLayout.addView(toInflate);    
         
@@ -109,9 +116,13 @@ public class HelpActivity extends Activity
         super.onResume();
 
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
-            setHelpColor();
+            // load the title bar elements and pass them to the color manager
+            RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_heading);
+            Button tempButton = (Button)findViewById(R.id.help_askusbutton);
+            
+            JFApplication.ColorManager.setupScheme(titleBar,tempButton);
         }
     }
 
@@ -208,34 +219,6 @@ public class HelpActivity extends Activity
         });    
 
     }  // end fireAskusDialog()
-
-
-    // sets local colors
-    private void setHelpColor()
-    {
-        // set the title bar to the current color scheme
-        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.help_heading);
-        Button tempButton = (Button)findViewById(R.id.help_askusbutton);
-
-        switch( JFApplication.PrefsManager.getColorScheme() )
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton.setBackgroundResource(R.drawable.button_red);
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton.setBackgroundResource(R.drawable.button_blue);
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
-                    tempButton.setBackgroundResource(R.drawable.button_tame);
-                    break;
-            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
-                    tempButton.setBackgroundResource(R.drawable.button_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-
-    }  // end setHelpColor()
 
 
 }  // end HelpActivity class declaration

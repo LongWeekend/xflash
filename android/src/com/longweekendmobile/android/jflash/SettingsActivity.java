@@ -9,8 +9,6 @@ package com.longweekendmobile.android.jflash;
 //  public void onCreate()      @over
 //
 //  public void advanceColorScheme(View  )
-//
-//  private void setSettingsColor()
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -35,18 +33,26 @@ public class SettingsActivity extends Activity
         // this Activity does not need the onResume check present in
         // all other activities, because this Activity will never
         // start with an unexpected color change
-        setSettingsColor();
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.settings_heading);
+        Button tempButton = (Button)findViewById(R.id.settings_ratebutton);
  
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+ 
+        // and set the "Theme" label in our settings view
+        TextView tempView = (TextView)findViewById(R.id.settings_themelabel);
+        tempView.setText( JFApplication.ColorManager.getSchemeName() );
+
     }  // end onCreate()
 
 
     // called when user makes a change to the color scheme in Settings
     public void advanceColorScheme(View v)
     {
-        int tempScheme = JFApplication.PrefsManager.getColorScheme();
+        int tempScheme = JFApplication.ColorManager.getColorScheme();
 
         // set our new color
-        if(tempScheme == 3)
+        if(tempScheme == 2)
         {
             tempScheme = 0;
         }
@@ -56,43 +62,19 @@ public class SettingsActivity extends Activity
         }
 
         // set our static color field
-        JFApplication.PrefsManager.setColorScheme(tempScheme);
-        setSettingsColor();
+        JFApplication.ColorManager.setColorScheme(tempScheme);
 
-    }  // end advanceColorScheme()
-
-
-    // sets the local colors
-    private void setSettingsColor()
-    {
-        // set the title bar to the current color theme
+        // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.settings_heading);
         Button tempButton = (Button)findViewById(R.id.settings_ratebutton);
-        TextView tempView = (TextView)findViewById(R.id.settings_themelabel);
  
-        switch( JFApplication.PrefsManager.getColorScheme() )
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton.setBackgroundResource(R.drawable.button_red);
-                    tempView.setText("Fire");
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton.setBackgroundResource(R.drawable.button_blue);
-                    tempView.setText("Water");
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);       
-                    tempButton.setBackgroundResource(R.drawable.button_tame);
-                    tempView.setText("Tame");
-                    break;
-            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);       
-                    tempButton.setBackgroundResource(R.drawable.button_green);
-                    tempView.setText("Forest");
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+             
+        // and update the "Theme" label in our settings view
+        TextView tempView = (TextView)findViewById(R.id.settings_themelabel);
+        tempView.setText( JFApplication.ColorManager.getSchemeName() );
 
-    }  // end setSettingsColors()
+    }  // end advanceColorScheme()
 
 
 }  // end SettingsActivity class declaration

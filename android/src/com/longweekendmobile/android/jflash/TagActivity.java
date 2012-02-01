@@ -44,7 +44,7 @@ public class TagActivity extends Activity
         super.onResume();
 
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
             setTagColor();
         }
@@ -64,7 +64,7 @@ public class TagActivity extends Activity
         RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.tag_heading);
         ImageButton tempButton = (ImageButton)findViewById(R.id.tag_addbutton);
 
-        localColor = JFApplication.PrefsManager.getColorScheme();
+        localColor = JFApplication.ColorManager.getColorScheme();
 
         switch(localColor)
         {
@@ -80,7 +80,7 @@ public class TagActivity extends Activity
             case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
                     tempButton.setBackgroundResource(R.drawable.button_green);
                     break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
+            default:    Log.d(MYTAG,"Error - ColorManager.colorScheme out of bounds");
                         break;
         }
 

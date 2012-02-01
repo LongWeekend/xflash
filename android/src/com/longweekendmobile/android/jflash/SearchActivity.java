@@ -8,8 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()      @over
 //  public void onResume()      @over
-//
-//  private void setSearchColor()
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -41,41 +39,15 @@ public class SearchActivity extends Activity
         super.onResume();
 
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
-            setSearchColor();
+            // load the title bar elements and pass them to the color manager
+            RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.search_heading);
+            Button tempButton = (Button)findViewById(R.id.search_cancelbutton);
+  
+            JFApplication.ColorManager.setupScheme(titleBar,tempButton);
         }
     }
-
-
-    // sets the local color
-    private void setSearchColor()
-    {
-        // set the title bar to the current color scheme
-        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.search_heading);
-        Button tempButton = (Button)findViewById(R.id.search_cancelbutton);
-
-        localColor = JFApplication.PrefsManager.getColorScheme();
-
-        switch(localColor)
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton.setBackgroundResource(R.drawable.button_red);
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton.setBackgroundResource(R.drawable.button_blue);
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
-                    tempButton.setBackgroundResource(R.drawable.button_tame);
-                    break;
-            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
-                    tempButton.setBackgroundResource(R.drawable.button_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-
-    }  // end setSearchColor() 
 
 
 }  // end SearchActivity class declaration
