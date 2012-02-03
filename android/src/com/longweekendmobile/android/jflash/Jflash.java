@@ -51,10 +51,11 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TextView;
+import android.util.Log;
 
 public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListener
 {
-    // private static final String MYTAG = "JFlash main";
+    private static final String MYTAG = "JFlash main";
    
     // TODO - we don't really want to leave these instantiated for the lifecycle of
     //        the app, as they're only necessary for changing internal tab views
@@ -229,7 +230,8 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         HelpPageFragment.setHelpTopic(inId);
 
         // load the HelpPageFragment to the fragment tab manager
-        myContext.onTabChanged("help_page");
+        myContext.onScreenTransition("help_page");
+        // myContext.onTabChanged("help_page");
     }
 
 // END HelpFragment sub-activity methods
@@ -241,7 +243,10 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void HelpPageFragment_goBackToHelp(View v)
     {
         // reload the HelpPage fragment to the fragment tab manager
-        this.onTabChanged("help");
+        
+        this.onScreenTransition("help");
+
+        // this.onTabChanged("help");
     }
     
 
@@ -406,6 +411,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                 {
                     newTab.fragment = Fragment.instantiate(this,
                            newTab.clss.getName(), newTab.args);
+                    
                     ft.add(R.id.realtabcontent, newTab.fragment, newTab.tag);
                 } else
                 {
@@ -414,9 +420,57 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
             }
 
             mLastTab = newTab;
+            
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
+
+        }  // end if( mLastTab != newTab ) - end if we clicked the tab
+           //                                we're alread on
+
+    }  // end onTabChanged()
+
+    
+    // fragment handling for loading new screens to a single tab
+    public void onScreenTransition(String tag)
+    {
+        // (non-Javadoc) see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
+        TabInfo newTab = Jflash.mapTabInfo.get(tag);
+
+        FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+                    
+        // for each possible incoming tag tab (i.e. all Activity fragments that have
+        // mutiple screends), check for fragment instantiation and set an animation
+        if( tag == "help" )
+        {
+            Log.d(MYTAG,"incoming tag is 'help'");
+            if( newTab.fragment == null )
+            {
+                Log.d(MYTAG,"HELP FRAGMENT is null");
+                newTab.fragment = Fragment.instantiate(this, HelpFragment.class.getName() );
+            }
+    
+            // add our custom animation when we're sure we have a fragment
+            ft.setCustomAnimations(R.anim.slidein_left,R.anim.slideout_right);
         }
+        else if( tag == "help_page" )
+        {
+            Log.d(MYTAG,"incoming tag is 'help_page'");
+            
+            if( newTab.fragment == null )
+            {
+                Log.d(MYTAG,"newTab.fragment is null");
+                newTab.fragment = Fragment.instantiate(this, HelpPageFragment.class.getName() );
+            }
+            
+            // add our custom animation when we're sure we have a fragment
+            ft.setCustomAnimations(R.anim.slidein_right,R.anim.slideout_left);
+        }
+        
+        ft.replace(R.id.realtabcontent, newTab.fragment, newTab.tag);
+
+        ft.commit();
+        
+        this.getSupportFragmentManager().executePendingTransactions();
 
     }  // end onTabChanged()
 
