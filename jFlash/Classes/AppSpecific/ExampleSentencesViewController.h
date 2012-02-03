@@ -22,13 +22,9 @@ typedef enum
 }
 
 - (id) initWithExamplesPlugin:(Plugin *)plugin;
-
 - (void) setupWithCard:(Card*)card;
 
 @property (retain) NSMutableDictionary *sampleDecomposition;
 @property (nonatomic, retain) IBOutlet UIWebView *sentencesWebView;
-
-- (void)_showAddToSetWithCardID:(NSString *)cardID;
-- (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView;
 
 @end

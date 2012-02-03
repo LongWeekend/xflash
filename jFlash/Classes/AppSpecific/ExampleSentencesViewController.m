@@ -17,10 +17,14 @@
 #import "AddTagViewController.h"
 #import "jFlashAppDelegate.h"
 
-#define kJFlashServer	@"http://jflash.com"
-#define SHOW_BUTTON_TITLE @"Read"
-#define CLOSE_BUTTON_TITLE @"Close"
-#define ADD_BUTTON_TITLE @"Add"
+#define SHOW_BUTTON_TITLE NSLocalizedString(@"Read",@"ReadButton")
+#define CLOSE_BUTTON_TITLE NSLocalizedString(@"Close",@"CloseButton")
+#define ADD_BUTTON_TITLE NSLocalizedString(@"Add",@"AddButton")
+
+@interface ExampleSentencesViewController ()
+- (void)_showAddToSetWithCardID:(NSString *)cardID;
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView;
+@end
 
 @implementation ExampleSentencesViewController
 @synthesize sentencesWebView;
@@ -38,7 +42,12 @@
     // What version of the example sentence plugin are we using?  If 1.1, it's old.
 #if defined (LWE_JFLASH)
     _useOldPluginMethods = [plugin.version isEqualToString:@"1.1"];
+    // I want to know if someone updated their example sentence version
 #endif
+    if (_useOldPluginMethods)
+    {
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
+    }
 	}
 	return self;
 }
@@ -47,15 +56,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
   self.sentencesWebView.backgroundColor = [UIColor clearColor];
   [self.sentencesWebView shutOffBouncing];
-
-  // I want to know if someone updated their example sentence version
-  if (_useOldPluginMethods)
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pluginDidInstall:) name:LWEPluginDidInstall object:nil];
-  }
 }
 
 
@@ -93,7 +95,8 @@
     // Only put this stuff in HTML if we have example sentences 1.2
     if (_useOldPluginMethods == NO)
     {
-      [html appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='%@/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",sentence.sentenceId,kJFlashServer,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
+      [html appendFormat:@"<div class='showWordsDiv'><a id='anchor%d' href='http://xflash.com/%d?id=%d&open=0'><span class='button'>%@</span></a></div>",
+        sentence.sentenceId,TOKENIZE_SAMPLE_SENTENCE,sentence.sentenceId,SHOW_BUTTON_TITLE];
     }
     [html appendFormat:@"%@<br />",sentence.sentenceJa];
     
@@ -172,15 +175,16 @@
 	[dict release];
 }
 
-- (void)_showCardsForSentences:(NSString *)sentenceID isOpen:(NSString *)open webView:(UIWebView *)webView
+- (void)_showCardsForSentences:(NSString *)sentenceIDStr isOpen:(NSString *)open webView:(UIWebView *)webView
 {
 	NSString *js = nil;
+  // TODO: WTF is this
 	if ([open isEqualToString:@"1"])
 	{
 		//Close the expanded div. Return back the status of the expaned button
-		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceID];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ",sentenceID,SHOW_BUTTON_TITLE];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=0'; ",sentenceID,kJFlashServer,TOKENIZE_SAMPLE_SENTENCE,sentenceID];
+		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = ''; ",sentenceIDStr];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@'; ",sentenceIDStr,SHOW_BUTTON_TITLE];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%d?id=%@&open=0'; ",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
 	else
@@ -188,41 +192,42 @@
 		//expand the sample sentence.
 		//Try to look at the dictionary representative of the example decomposition in the memory, if its null, populate a new one,
 		//if its not. it just takes the sample decomposition out from it.
-		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceID];
+		NSString *cardHTML = [self.sampleDecomposition objectForKey:sentenceIDStr];
 		if (cardHTML == nil)
 		{
-			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentenceID intValue]];
+			NSArray *arrayOfCards = [CardPeer retrieveCardSetForExampleSentenceId:[sentenceIDStr intValue]];
 			cardHTML = @"<table class='ExpandedSentencesTable' cellpadding='5'>";
-			NSString *headWord = @"";
+			NSString *lastHeadword = @"";
 			for (Card *c in arrayOfCards)
 			{
 				cardHTML = [cardHTML stringByAppendingFormat:@"<tr class='HeadwordRow'>"];
-				
-				if (![[c headword] isEqualToString:headWord])
+
+        // This block keeps us from showing the same headword over and over when it just has multiple meanings
+        NSString *cardHeadword = [c headwordIgnoringMode:YES];
+				if ([cardHeadword isEqualToString:lastHeadword] == NO)
 				{
-					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>", [c headword]]; 
-					headWord = [c headword];
+					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'>%@</td>",cardHeadword]; 
+					lastHeadword = cardHeadword;
 				}
 				else 
 				{
 					cardHTML = [cardHTML stringByAppendingFormat:@"<td class='HeadwordCell'></td>"]; 
 				}
 				
-				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='%@/%d?id=%d' class='AddToSetAnchor'><span class='button'>%@</span></a></td>", 
-										[c reading], kJFlashServer, ADD_CARD_TO_SET, [c cardId], ADD_BUTTON_TITLE];
+				cardHTML = [cardHTML stringByAppendingFormat:@"<td class='ContentCell'>%@ </td><td><a href='http://xflash.com/%d?id=%d' class='AddToSetAnchor'><span class='button'>%@</span></a></td>", 
+										c.reading,ADD_CARD_TO_SET,c.cardId,ADD_BUTTON_TITLE];
 				cardHTML = [cardHTML stringByAppendingFormat:@"</tr>"];
 			}
 			
 			cardHTML = [cardHTML stringByAppendingFormat:@"</table>"];
-			[self.sampleDecomposition setObject:cardHTML forKey:sentenceID];
+			[self.sampleDecomposition setObject:cardHTML forKey:sentenceIDStr];
 		}
 		
 		//First, put the tokenized sample sentence to the detailedcard-"id" blank div.
 		//then tries to change the anchor value, and the href query string. 
-		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";", sentenceID, cardHTML];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@';", sentenceID,CLOSE_BUTTON_TITLE];
-		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = '%@/%d?id=%@&open=1';", 
-			  sentenceID, kJFlashServer, TOKENIZE_SAMPLE_SENTENCE, sentenceID];
+		js = [NSString stringWithFormat:@"document.getElementById('detailedCards%@').innerHTML = \"%@\";",sentenceIDStr,cardHTML];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').firstChild.innerHTML = '%@';",sentenceIDStr,CLOSE_BUTTON_TITLE];
+		js = [js stringByAppendingFormat:@"document.getElementById('anchor%@').href = 'http://xflash.com/%d?id=%@&open=1';",sentenceIDStr,TOKENIZE_SAMPLE_SENTENCE,sentenceIDStr];
 		
 		[webView stringByEvaluatingJavaScriptFromString:js];
 	}
@@ -233,7 +238,6 @@
 - (void)viewDidUnload
 {
   [super viewDidUnload];
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   self.sentencesWebView = nil;
 }
 
