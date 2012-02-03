@@ -5,32 +5,38 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:padding="4dp" >
-
-        <!-- the row of tabs -->
-        <TabWidget android:id="@android:id/tabs"
+        android:layout_height="fill_parent" >
+        
+        <!-- hack for tabs with fragments -->
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+        <FrameLayout
+            android:id="@+android:id/realtabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:tabStripEnabled="false" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         
         <!-- the divider between tabs and content -->
         <View android:id="@+id/the_divider"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:layout_above="@android:id/tabs"
             android:background="#FF000000" />
         
-        <!-- the content of any given tab -->
-        <FrameLayout android:id="@android:id/tabcontent"
+        <!-- the row of tabs -->
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@id/the_divider" />
-    
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:tabStripEnabled="false" />
+       
+    </LinearLayout> 
+
 </TabHost>

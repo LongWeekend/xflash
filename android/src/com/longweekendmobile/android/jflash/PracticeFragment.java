@@ -1,50 +1,29 @@
 package com.longweekendmobile.android.jflash;
 
-//  PracticeActivity.java
+//  PracticeFragment.java
 //  jFlash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
+//
+//  public void onCreate()                                              @over
+//  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//  public void onResume()                                              @over
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.longweekendmobile.android.jflash.model.Card;
-import com.longweekendmobile.android.jflash.model.LWEDatabase;
-
-public class PracticeActivity extends Activity
+public class PracticeFragment extends Fragment
 {
-    private static final String MYTAG = "JFlash PracticeActivity";
+    // private static final String MYTAG = "JFlash PracticeFragment";
     
-    private PracticeReceiver myReceiver;
-
-    // boolean for checking whether database is already open
-    private boolean firedUp;
-
+    // properties for handling color theme transitions
     private int localColor;
-
-    // also for debugging
-    private LinearLayout myLayout;
-
-    public void pop1(View v) {
-
-        Card myCard = new Card();
-        myCard.setCardId(12204);
-        myCard.hydrate();
-
-        // new commit
-//        TextView tempView = (TextView)findViewById(R.id.tempview);
-//        tempView.setText( myCard.meaningWithoutMarkup() );
-    }
+    private RelativeLayout practiceLayout;
 
     
     /** Called when the activity is first created. */
@@ -52,19 +31,23 @@ public class PracticeActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.practice);
 
         // if we're just starting up, force load of color
         localColor = -1;
-        
-        firedUp = false;
-        myReceiver = null;
-
-        // asdf
-        myLayout = (LinearLayout)findViewById(R.id.mainlayout);
-        
     }
 
+
+    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        // inflate the layout for our practice activity and return it
+        practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
+        
+        return practiceLayout;
+    }
+  
 
     // this is a bad place to take care of this, just temporary for debugging
     @Override
@@ -73,11 +56,47 @@ public class PracticeActivity extends Activity
         super.onResume();
         
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
-            setPracticeColor();
+            // load the title bar elements and pass them to the color manager
+            RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
+
+            JFApplication.ColorManager.setupPracticeBack(practiceBack);
         }
         
+    }  // end onResume()
+
+}  // end PracticeFragment class declaration
+
+
+
+
+
+/*
+    RIPPED FROM FUNCTIONALITY - MUST BE MOVED TO Jflash.class
+
+    private PracticeReceiver myReceiver;
+    
+    // boolean for checking whether database is already open
+    private boolean firedUp;
+    
+    // also for debugging
+    private LinearLayout myLayout;
+   
+
+FROM ONCREATE
+        
+        firedUp = false;
+        myReceiver = null;
+
+        myLayout = (LinearLayout)findViewById(R.id.mainlayout);
+
+END FROM ONCREATE
+
+
+
+FROM ONRESUME
+
         // if our receiver isn't running, start it
         if( myReceiver == null )
         {
@@ -99,7 +118,6 @@ public class PracticeActivity extends Activity
             intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY);
             registerReceiver(myReceiver,intentFilter);
         }
-        
         // if our database is not set up, get it started and open it
         if( !firedUp )
         {
@@ -111,14 +129,26 @@ public class PracticeActivity extends Activity
             tempDB.asynchCopyDatabaseFromAPK();
         }
     
-    }  // end onResume()
+END FROM ONRESUME
+
+ 
+    public void pop1(View v) {
+
+        Card myCard = new Card();
+        myCard.setCardId(12204);
+        myCard.hydrate();
+
+        // new commit
+        // TextView tempView = (TextView)findViewById(R.id.tempview);
+        // tempView.setText( myCard.meaningWithoutMarkup() );
+    }
 
 
     @Override
     public void onPause()
     {
         super.onPause();
-
+        
         if( myReceiver != null )
         {
             unregisterReceiver(myReceiver);
@@ -137,34 +167,11 @@ public class PracticeActivity extends Activity
         tempDB.closeDatabase();
     }
         
+*/
 
-    // sets the local color
-    private void setPracticeColor()
-    {
-        // set the practice background to the current color scheme
-        RelativeLayout practiceBack = (RelativeLayout)findViewById(R.id.practice_mainlayout);
-
-        localColor = JFApplication.PrefsManager.getColorScheme();
-
-        switch(localColor)
-        {
-            case 0: practiceBack.setBackgroundResource(R.drawable.practice_bg_red);
-                    break;
-            case 1: practiceBack.setBackgroundResource(R.drawable.practice_bg_blue);
-                    break;
-            case 2: practiceBack.setBackgroundResource(R.drawable.practice_bg_tame);
-                    break;
-            case 3: practiceBack.setBackgroundResource(R.drawable.practice_bg_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-        
-    }  // end setPracticeColor()
-
-    
     // our receiver class for broadcasts
     // TODO - database stuff temporary for debugging purposes
+/*
     protected class PracticeReceiver extends BroadcastReceiver
     {
         @Override
@@ -198,7 +205,7 @@ public class PracticeActivity extends Activity
                 {
                     LWEDatabase tempDB = JFApplication.getDao();
                     firedUp = tempDB.attachDatabase();
-/*          
+                    
                     if( firedUp )
                     {
                         Button tempButton = (Button)findViewById(R.id.testbutton);
@@ -212,7 +219,6 @@ public class PracticeActivity extends Activity
                         tempView.setText("Database attach failed");
                         myLayout.addView(tempView);
                     } 
-*/
                }
                 catch (Exception e)
                 {
@@ -224,8 +230,8 @@ public class PracticeActivity extends Activity
 
     }  // end PracticeReceiver declaration
 
+*/
 
 
-}  // end PracticeActivity class declaration
 
 

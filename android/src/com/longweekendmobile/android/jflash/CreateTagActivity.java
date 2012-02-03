@@ -11,20 +11,16 @@ package com.longweekendmobile.android.jflash;
 //  public void onPause()       @over
 //
 //  public void cancel(View v)
-//
-//  private void setCreateTagColor()
-
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class CreateTagActivity extends Activity
 {
-    private static final String MYTAG = "JFlash TagActivity";
+    // private static final String MYTAG = "JFlash TagActivity";
    
     private int localColor;
  
@@ -46,9 +42,13 @@ public class CreateTagActivity extends Activity
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
 
         // set the background to the current color scheme
-        if( localColor != JFApplication.PrefsManager.getColorScheme() )
+        if( localColor != JFApplication.ColorManager.getColorScheme() )
         {
-            setCreateTagColor();
+            // load the title bar elements and pass them to the color manager
+            RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
+            Button tempButton = (Button)findViewById(R.id.create_tag_cancelbutton);
+            
+            JFApplication.ColorManager.setupScheme(titleBar,tempButton);
         }
     }
 
@@ -64,37 +64,6 @@ public class CreateTagActivity extends Activity
     {
         finish();
     }
-
-
-    // method for setting all local colors
-    private void setCreateTagColor()
-    {
-        // set the title bar to the current color scheme
-        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
-        Button tempButton = (Button)findViewById(R.id.create_tag_cancelbutton);
-
-        localColor = JFApplication.PrefsManager.getColorScheme();
-
-        switch(localColor)
-        {
-            case 0: titleBar.setBackgroundResource(R.drawable.gradient_red);
-                    tempButton.setBackgroundResource(R.drawable.button_red);
-                    break;
-            case 1: titleBar.setBackgroundResource(R.drawable.gradient_blue);
-                    tempButton.setBackgroundResource(R.drawable.button_blue);
-                    break;
-            case 2: titleBar.setBackgroundResource(R.drawable.gradient_tame);
-                    tempButton.setBackgroundResource(R.drawable.button_tame);
-                    break;
-            case 3: titleBar.setBackgroundResource(R.drawable.gradient_green);
-                    tempButton.setBackgroundResource(R.drawable.button_green);
-                    break;
-            default:    Log.d(MYTAG,"Error - PrefsManager.colorScheme out of bounds");
-                        break;
-        }
-
-    }  // end setCreateTagColor()
-
 
 
 }  // end TagActivity class declaration

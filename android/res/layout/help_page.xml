@@ -21,7 +21,7 @@
         <Button android:id="@+id/help_backbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:onClick="goBackToHelp"
+            android:onClick="HelpPageFragment_goBackToHelp"
             android:text="To Help"
             style="@style/heading_button" />
                 
@@ -29,7 +29,7 @@
         <Button android:id="@+id/help_nextbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:onClick="helpNext"
+            android:onClick="HelpPageFragment_helpNext"
             android:text="Next >"
             style="@style/heading_button" />
 

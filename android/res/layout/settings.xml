@@ -31,36 +31,112 @@
         <LinearLayout android:id="@+id/settings_page"  
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp" >
 
+            <!-- the 'Studying' block -->
             <TextView 
-                style="@style/default_display_heading"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Application" />
+                style="@style/default_display_heading_layout"
+                android:text="Studying" />
 
-            <RelativeLayout 
-                style="@style/default_display_block"
-                android:onClick="advanceColorScheme" >
-
+            <RelativeLayout style="@style/default_display_block">
                 <TextView 
-                    style="@style/default_display_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:text="Theme" />
-                <TextView android:id="@+id/settings_themelabel"
-                    style="@style/default_value_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp" />
-
+                    style="@style/default_display_left"
+                    android:text="Study Mode" />
+                <TextView android:id="@+id/settings_studymodelabel"
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Study Language" />
+                <TextView android:id="@+id/settings_studylanguagelabel"
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Furigana / Reading" />
+                <TextView android:id="@+id/settings_furiganalabel"
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Difficulty" />
+                <TextView android:id="@+id/settings_difficultylabel"
+                    style="@style/not_implemented" />
             </RelativeLayout>
 
-        </LinearLayout>
+            <!-- the 'Application' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Application" />
+
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_advanceColorScheme" >
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Theme" />
+                <TextView android:id="@+id/settings_themelabel"
+                    style="@style/default_display_right" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Active User" />
+                <TextView android:id="@+id/settings_activeuserlabel"
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Updates" />
+                <TextView android:id="@+id/settings_updateslabel"
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+
+            <!-- the 'Follow Us' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Follow Us" />
+
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:drawableLeft="@drawable/twitter_icon"
+                    android:text=" Follow us on Twitter" />
+                <TextView
+                    style="@style/default_display_right"
+                    android:text=">" />
+            </RelativeLayout>
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:drawableLeft="@drawable/facebook_icon"
+                    android:text=" Follow us on Facebook" />
+                <TextView
+                    style="@style/default_display_right"
+                    android:text=">" />
+            </RelativeLayout>
+
+            <!-- the 'Follow Us' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Acknowledgements" />
+
+            <RelativeLayout style="@style/default_display_block"
+                android:layout_marginBottom="10dp">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:layout_marginRight="6dp"
+                    android:textSize="14dp"
+                    android:text="@string/acknowledgement_content" />
+                    <!-- add a right margin to match the
+                             marginLeft in the style     -->
+            </RelativeLayout>
+
+        </LinearLayout>  <!-- end single child of ScrollView -->
 
     </ScrollView>
 
