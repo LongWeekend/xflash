@@ -86,9 +86,6 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
         myContext = this;
         
-        // if we're on the Help page, we're definitely on page 0
-        FragManager.setCurrentHelpScreen(0);
-
     }  // end onCreate
 
 
@@ -395,32 +392,42 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }
 
     
-    // fragment handling for changing tabs to the appropriate display
-    public void onTabChanged(String tag)
-    {
-        // (non-Javadoc) see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
-        TabInfo newTab = Jflash.mapTabInfo.get(tag);
+    // TODO - this feels over-commented, but is hard to understand
+    //        just by reading the code
 
-        // if we aren't clicking on the tab we're already on
+    // fragment handling for changing tabs to the appropriate display
+    // (non-Javadoc) see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
+    public void onTabChanged(String inTabTagname)
+    {
+        // the tab we need to change to - as passed into method by 'inTabTagname'
+        TabInfo newTab = Jflash.mapTabInfo.get(inTabTagname);
+
+        // if we AREN'T clicking on the tab we're already on
         if( mLastTab != newTab )
         {
             FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+            
+            // if we are coming from an instantiated tab, remove the old
+            // fragment to free memory taken by its view hierarchy.
+            // this will ALWAYS happen, except when the first tab is 
+            // loaded when the app launches
             if( mLastTab != null )
             {
                 if( mLastTab.fragment != null )
                 {
                     ft.detach(mLastTab.fragment);
-    
-                    Log.d(MYTAG,"detaching last, mLastTab both not null");
                 }
             }
 
+            // if we were passed in a 'tag' for a valid (previously added) fragment
             if( newTab != null )
             {
+                // if the fragment we are switching to does not already have
+                // and instantiation
+                // i.e. it has not yet been switched to in the current
+                // run of the application - we need to fire it up
                 if( newTab.fragment == null )
                 {
-                    Log.d(MYTAG,"instantiating, newTab real, fragment null");
-
                     newTab.fragment = Fragment.instantiate(this,
                            newTab.clss.getName(), newTab.args);
                     
@@ -430,37 +437,39 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                 {
                     // we only need to check for multiple screens here, where the tab
                     // is fully instantiated - as that means we've been here before and
-                    // MAY have opened secondary screens
-                    Log.d(MYTAG,"last tab null, fragment not null, no instantiation");
-        
-                    Log.d(MYTAG,"currentHelpScreen == " + FragManager.getCurrentHelpScreen() );
+                    // MAY have opened secondary screens 
                     
+                    // a temporary TabInfo, in case we have a secondary screen to add
                     TabInfo tempTab = null;
  
-                    if( tag == "help" )
+                    // if HelpFragment is what we're loading
+                    if( inTabTagname == "help" )
                     {
+                        // if we ARE on the secondary screen
                         if( FragManager.getCurrentHelpScreen() == 1 )
                         {
+                            // TODO - there may be a better way of doing
+                            //        this, but I can't find it
+
+                            // if the help screen is already instantiated,
+                            // remove and reattach it so it appears in the
+                            // correct order, without animation transitions
                             tempTab = Jflash.mapTabInfo.get("help");
-                            if( tempTab.fragment == null )
+                            if( tempTab.fragment != null )
                             {
-                                Log.d(MYTAG,"doubling up, instantiation");
-                    
-                                tempTab.fragment = Fragment.instantiate(this,
-                                tempTab.clss.getName() );
-                            
-                                ft.add(R.id.realtabcontent, tempTab.fragment, tempTab.tag);
-                            } 
-                            else
-                            {
-                                Log.d(MYTAG,"doubling up, no instantiation necessary");
-                                Log.d(MYTAG,"but we'll try it anyway");
+                                ft.detach(tempTab.fragment); 
                             }
-                            
+
+                            // now instantiate the incoming class, which here will be help_page
+                            tempTab.fragment = Fragment.instantiate(this,
+                            tempTab.clss.getName() );
                         }
                     }
                     
                     ft.attach(newTab.fragment);
+                    
+                    // if we have are loading a secondary screen for this tab,
+                    // attach it AFTER the base screen so it starts on top
                     if( tempTab != null )
                     {
                         ft.attach(tempTab.fragment);
@@ -469,13 +478,18 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                 }  // end else -- for if( newTab.fragment == null )
 
             }  // end if( newTab != null )
+            else
+            {
+                Log.d(MYTAG,"onTabChanged() passed an invalid tab tag:  " + inTabTagname);
+            }
 
             mLastTab = newTab;
             
+            // commit changes and act immediately
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
 
-        }  // end if( we clicked the tab we're already on )  (
+        }  // end if( we clicked a tab we're NOT already on)
 
     }  // end onTabChanged()
 
@@ -492,10 +506,8 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // mutiple screends), check for fragment instantiation and set an animation
         if( tag == "help" )
         {
-            Log.d(MYTAG,"incoming tag is 'help'");
             if( newTab.fragment == null )
             {
-                Log.d(MYTAG,"HELP FRAGMENT is null");
                 newTab.fragment = Fragment.instantiate(this, HelpFragment.class.getName() );
             }
     
@@ -504,11 +516,8 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
         else if( tag == "help_page" )
         {
-            Log.d(MYTAG,"tag is 'help_page'");
-            
             if( newTab.fragment == null )
             {
-                Log.d(MYTAG,"HELP PAGE FRAGMENT is null");
                 newTab.fragment = Fragment.instantiate(this, HelpPageFragment.class.getName() );
             }
             

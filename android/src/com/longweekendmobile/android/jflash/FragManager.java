@@ -25,7 +25,13 @@ public class FragManager
     private static final String MYTAG = "JFlash FragManager";
     
     // properties for handling color theme transitions
-    private static int currentHelpScreen = 0;
+    private static int currentHelpScreen;
+
+    // set all fragment page values to zero when starting app
+    public static void fireUpFragManager()
+    {
+        currentHelpScreen = 0;
+    } 
 
     public static int getCurrentHelpScreen()
     {
@@ -34,7 +40,6 @@ public class FragManager
 
     public static void setCurrentHelpScreen(int inScreen)
     {
-        Log.d(MYTAG,"current HelpScreen set to: " + inScreen);
         currentHelpScreen = inScreen;
     }
 

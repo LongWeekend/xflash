@@ -58,6 +58,9 @@ public class JFApplication extends Application
         // set out database to the global app context
         myInstance = this;
         dao = new LWEDatabase(myInstance);
+    
+        // set all display pages to 0 on app start
+        FragManager.fireUpFragManager(); 
     }
 
     // return our entire SQLiteOpenHelper -> LWEDatabase object
