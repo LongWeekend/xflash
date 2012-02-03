@@ -229,7 +229,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // set the help topic we are pulling
         HelpPageFragment.setHelpTopic(inId);
         
-        FragManager.setCurrentHelpScreen(1);
+        ScreenManager.setCurrentHelpScreen(1);
 
         // load the HelpPageFragment to the fragment tab manager
         myContext.onScreenTransition("help_page");
@@ -246,7 +246,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         // reload the HelpPage fragment to the fragment tab manager
         
-        FragManager.setCurrentHelpScreen(0);
+        ScreenManager.setCurrentHelpScreen(0);
         
         this.onScreenTransition("help");
 
@@ -446,7 +446,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     if( inTabTagname == "help" )
                     {
                         // if we ARE on the secondary screen
-                        if( FragManager.getCurrentHelpScreen() == 1 )
+                        if( ScreenManager.getCurrentHelpScreen() == 1 )
                         {
                             // TODO - there may be a better way of doing
                             //        this, but I can't find it

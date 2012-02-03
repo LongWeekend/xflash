@@ -1,6 +1,6 @@
 package com.longweekendmobile.android.jflash;
 
-//  FragManager.java
+//  ScreenManager.java
 //  jFlash
 //
 //  Created by Todd Presson on 2/3/2012.
@@ -20,15 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-public class FragManager 
+public class ScreenManager 
 {
-    private static final String MYTAG = "JFlash FragManager";
+    private static final String MYTAG = "JFlash ScreenManager";
     
     // properties for handling color theme transitions
     private static int currentHelpScreen;
 
     // set all fragment page values to zero when starting app
-    public static void fireUpFragManager()
+    public static void fireUpScreenManager()
     {
         currentHelpScreen = 0;
     } 
@@ -44,6 +44,6 @@ public class FragManager
     }
 
 
-}  // end FragManager class declaration
+}  // end ScreenManager class declaration
 
 

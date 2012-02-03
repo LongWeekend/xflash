@@ -60,7 +60,7 @@ public class JFApplication extends Application
         dao = new LWEDatabase(myInstance);
     
         // set all display pages to 0 on app start
-        FragManager.fireUpFragManager(); 
+        ScreenManager.fireUpScreenManager(); 
     }
 
     // return our entire SQLiteOpenHelper -> LWEDatabase object
