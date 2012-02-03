@@ -31,6 +31,9 @@
 + (BOOL) _needs15to16SettingsUpdate:(NSUserDefaults *) settings;
 + (void) _updateSettingsFrom15to16:(NSUserDefaults *)settings;
 
+// JFLASH 1.6 -> 1.6.1
++ (BOOL) _needs16to161SettingsUpdate:(NSUserDefaults *) settings;
++ (void) _updateSettingsFrom16to161:(NSUserDefaults *)settings;
 
 #else
 
@@ -235,6 +238,25 @@
   [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
 }
 
+#pragma mark - Version 1.6.1
+
++ (BOOL) _needs16to161SettingsUpdate:(NSUserDefaults*) settings
+{
+  // We do not want to update the settings if we are STILL waiting on a 1.0 upgrade
+  return ([[settings objectForKey:APP_DATA_VERSION] isEqualToString:LWE_JF_VERSION_1_6] && 
+          [settings valueForKey:@"settings_already_created"]);
+}
+
++ (void) _updateSettingsFrom16to161:(NSUserDefaults *)settings
+{
+  //New key for the user settings preference in version 1.6
+  [settings setObject:LWE_JF_VERSION_1_6_1 forKey:APP_SETTINGS_VERSION];
+  
+  // 1. Execute SQL update file for bad data fixes
+  [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6_1 withSQLStatements:LWE_JF_16_TO_161_SQL_FILENAME forSettings:settings];
+  [TagPeer recacheCountsForUserTags];
+}
+
 
 #pragma mark - Shared Private Methods
 
@@ -356,6 +378,13 @@
     migrated = YES;
   }
   
+  if ([UpdateManager _needs16to161SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.6.1 version");
+    [UpdateManager _updateSettingsFrom16to161:settings];
+    migrated = YES;
+  }
+  
 #else
 /**
  * FUTURE CFLASH MIGRATIONS HERE
@@ -377,6 +406,14 @@
                                         cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
                                       delegate:alertDelegate];
      
+  }
+  else if ([version isEqualToString:LWE_JF_VERSION_1_6_1])
+  {
+    [LWEUIAlertView confirmationAlertWithTitle:NSLocalizedString(@"Updated to JFlash 1.6.1",@"JFlash1.6.1 upgrade alert title")
+                                       message:NSLocalizedString(@"Thanks for updating!  We fixed a minor bug in the example sentences display.  Special thanks to Michael & Murray for helping us improve a few entries.  Also, do you have Rikai Browser yet?  It tightly integrates with JFlash and helps you read Japanese webpages and learn new words.",@"JFlash1.6.1 upgrade alert msg")
+                                            ok:NSLocalizedString(@"Later", @"StudyViewController.Later")
+                                        cancel:NSLocalizedString(@"Get Rikai", @"WebViewController.RikaiAppStore")
+                                      delegate:alertDelegate];
   }
 #elif defined (LWE_CFLASH)
   // Do nothing for now, we only have 1 CFlash version!

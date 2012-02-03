@@ -92,6 +92,8 @@
 		49377B201485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
 		49377B211485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
 		49377B221485259D00BD80C5 /* GroupDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */; };
+		4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4937876014DB8D9700361203 /* jflash_16_to_161.sql */; };
+		4937876214DB8D9700361203 /* jflash_16_to_161.sql in Resources */ = {isa = PBXBuildFile; fileRef = 4937876014DB8D9700361203 /* jflash_16_to_161.sql */; };
 		4938F8C314027818001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4938F8C714027853001EB473 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C614027853001EB473 /* CoreText.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		493A478E146A829900F1E718 /* ActionBarViewController-Browse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493A478D146A829900F1E718 /* ActionBarViewController-Browse.xib */; };
@@ -986,6 +988,7 @@
 		4927B8461400C7350076EEED /* ChineseSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseSettingsDataSource.h; path = AppSpecific/ChineseSettingsDataSource.h; sourceTree = "<group>"; };
 		4927B8471400C7360076EEED /* ChineseSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseSettingsDataSource.m; path = AppSpecific/ChineseSettingsDataSource.m; sourceTree = "<group>"; };
 		49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GroupDescriptionView.xib; path = XIBs/GroupDescriptionView.xib; sourceTree = "<group>"; };
+		4937876014DB8D9700361203 /* jflash_16_to_161.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_16_to_161.sql; path = Migrations/jflash_16_to_161.sql; sourceTree = "<group>"; };
 		4938F8C214027818001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4938F8C414027841001EB473 /* libsqlite3.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libsqlite3.a; sourceTree = SOURCE_ROOT; };
 		4938F8C614027853001EB473 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1772,6 +1775,7 @@
 				49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */,
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				49E797FD14A8598F009B505A /* jflash_15_to_16.sql */,
+				4937876014DB8D9700361203 /* jflash_16_to_161.sql */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */,
@@ -3040,6 +3044,7 @@
 				49E797FE14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 				49FE8C7714A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7914A9B83200579716 /* CardViewController.xib in Resources */,
+				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3067,6 +3072,7 @@
 				49E797FF14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 				49FE8C7814A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7A14A9B83200579716 /* CardViewController.xib in Resources */,
+				4937876214DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
