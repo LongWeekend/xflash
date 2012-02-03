@@ -44,7 +44,7 @@ public class HelpPageFragment extends Fragment
     private static int helpTopic;
     private static String[] topics;
     private static String[] helpFiles;
-    private static WebView helpDisplay;
+    private static NoHorizontalWebView helpDisplay;
  
     /** Called when the activity is first created. */
     @Override
@@ -85,16 +85,18 @@ public class HelpPageFragment extends Fragment
         TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
         tempView.setText( topics[helpTopic] );         
     
-        // get our WebView and disable pinch zoom
-        helpDisplay = (WebView)helpPageLayout.findViewById(R.id.help_display);
+        // get our (NoHorizontal)WebView and disable pinch zoom
+        helpDisplay = (NoHorizontalWebView)helpPageLayout.findViewById(R.id.help_display);
         helpDisplay.getSettings().setSupportZoom(false); 
         helpDisplay.setHorizontalScrollBarEnabled(false);
+
+        
 
         // set the html body
         String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
         helpDisplay.loadUrl(localUrl);
         
-        // WebView background must be set to transparency
+        // (NoHorizontal)WebView background must be set to transparency
         // programatically or it won't work (known bug Android 2.2.x and up)
         helpDisplay.setBackgroundColor(0x00000000);
         
@@ -127,7 +129,7 @@ public class HelpPageFragment extends Fragment
         return helpPageLayout;
     }
 
-    public static WebView getHelpDisplay()
+    public static NoHorizontalWebView getHelpDisplay()
     {
         return helpDisplay;
     }
