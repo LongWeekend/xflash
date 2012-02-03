@@ -28,6 +28,7 @@
 
     <ScrollView style="@style/default_scroll_block">
 
+        <!-- single child of the scroll view -->
         <LinearLayout android:id="@+id/settings_page"  
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -46,6 +47,7 @@
                 <TextView android:id="@+id/settings_studymodelabel"
                     style="@style/not_implemented" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
@@ -53,6 +55,7 @@
                 <TextView android:id="@+id/settings_studylanguagelabel"
                     style="@style/not_implemented" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
@@ -60,6 +63,7 @@
                 <TextView android:id="@+id/settings_furiganalabel"
                     style="@style/not_implemented" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
@@ -81,6 +85,7 @@
                 <TextView android:id="@+id/settings_themelabel"
                     style="@style/default_display_right" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
@@ -88,6 +93,7 @@
                 <TextView android:id="@+id/settings_activeuserlabel"
                     style="@style/not_implemented" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
@@ -110,6 +116,7 @@
                     style="@style/default_display_right"
                     android:text=">" />
             </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"

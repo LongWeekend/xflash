@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class TagFragment extends Fragment
 {
@@ -45,7 +47,39 @@ public class TagFragment extends Fragment
     {
         // inflate our layout for the Tag activity and return it
         tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
-        
+       
+        // populate the main list of tags
+        LinearLayout tempTagList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
+
+        RelativeLayout myTagRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
+    
+        ImageView tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
+        tagRowImage.setImageResource(R.drawable.folder_icon_red); 
+
+        TextView tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
+        tempView.setText("Here is a tag title");
+    
+        tempView = (TextView)myTagRow.findViewById(R.id.tag_row_bottom);
+        tempView.setText("12 sets?");
+
+        tempTagList.addView(myTagRow);
+
+        // populate the list of 'favorite' tags
+        tempTagList = (LinearLayout)tagLayout.findViewById(R.id.fav_tag_list);
+
+        myTagRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
+    
+        tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
+        tagRowImage.setImageResource(R.drawable.folder_icon_red); 
+         
+        tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
+        tempView.setText("Favorites tag title");
+    
+        tempView = (TextView)myTagRow.findViewById(R.id.tag_row_bottom);
+        tempView.setText("2 sets?");
+
+
+ 
         return tagLayout;
     }
 

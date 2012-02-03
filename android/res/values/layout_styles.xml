@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="generic_divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#FFCCCCCC</item>
+    </style>
     <style name="heading_bar">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -64,5 +69,14 @@
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">12sp</item>
     </style>
-     
+    <style name="tag_row_toplayout" parent="@style/tag_text_top">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
+    <style name="tag_row_bottomlayout" parent="@style/tag_text_bottom">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
 </resources>

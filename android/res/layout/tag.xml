@@ -27,7 +27,56 @@
 
     </RelativeLayout>
 
+    <ScrollView style="@style/default_scroll_block">
 
+        <!-- single child of scroll view -->
+        <LinearLayout 
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- main list of tags, populated dynamically -->
+            <LinearLayout android:id="@+id/main_tag_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+            
+    
+            </LinearLayout>  
+
+            <!-- 'favorites' list -->
+            <LinearLayout android:id="@+id/fav_tag_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+            
+            
+            </LinearLayout>
+
+            <!-- the Backup block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Backup Custom Sets" />
+
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Backup Now" />
+                <TextView
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="Restore Now" />
+                <TextView
+                    style="@style/not_implemented" />
+            </RelativeLayout>
+ 
+        </LinearLayout>  <!-- end single child of scroll view -->
+
+    </ScrollView>
 
 </LinearLayout>
 
