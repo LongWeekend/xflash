@@ -132,6 +132,7 @@ public class HelpFragment extends Fragment
             
             JFApplication.ColorManager.setupScheme(titleBar,tempButton);
         }
+        
     }
 
 

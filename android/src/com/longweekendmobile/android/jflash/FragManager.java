@@ -18,10 +18,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.util.Log;
 
 public class FragManager 
 {
-    // private static final String MYTAG = "JFlash FragManager";
+    private static final String MYTAG = "JFlash FragManager";
     
     // properties for handling color theme transitions
     private static int currentHelpScreen = 0;
@@ -33,6 +34,7 @@ public class FragManager
 
     public static void setCurrentHelpScreen(int inScreen)
     {
+        Log.d(MYTAG,"current HelpScreen set to: " + inScreen);
         currentHelpScreen = inScreen;
     }
 
