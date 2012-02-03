@@ -9,11 +9,27 @@ package com.longweekendmobile.android.jflash;
 //
 //  a simple wrapper extending the base Application class so
 //  we can create a single instance of our database instance
+//
+//  public void onCreate()      @over
+//
+//  public static LWEDatabase getDao()
+//  public static SQLiteDatabase getReadableDao()
+//  public static SQLiteDatabase getWritableDao()
+//
+//  public static class ColorManager
+//
+//  public static int ColorManager.getColorScheme()
+//  public static void ColorManager.setupPracticeBack(RelativeLayout  )
+//  public static void ColorManager.setColorScheme(int  )
+//  public static void ColorManager.setupScheme(RelativeLayout  )
+//  public static void ColorManager.setupScheme(RelativeLayout  )
+//  public static void ColorManager.setupScheme(RelativeLayout  ,View  )
+//  public static void ColorManager.setupScheme(RelativeLayout  ,View  ,View  )
+//  public static String ColorManager.getSchemeName()
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.longweekendmobile.android.jflash.model.LWEDatabase;

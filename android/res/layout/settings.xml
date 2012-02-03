@@ -74,7 +74,7 @@
                 android:text="Application" />
 
             <RelativeLayout style="@style/default_display_block"
-                android:onClick="advanceColorScheme" >
+                android:onClick="SettingsFragment_advanceColorScheme" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Theme" />

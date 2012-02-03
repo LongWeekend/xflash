@@ -20,7 +20,7 @@
         <!-- RIGHT BUTTON -->
         <Button android:id="@+id/help_askusbutton"
             android:text="Ask Us"
-            android:onClick="goAskUs"
+            android:onClick="HelpFragment_goAskUs"
             android:layout_alignParentRight="true"
             style="@style/heading_button" />
 

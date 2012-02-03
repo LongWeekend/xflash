@@ -14,14 +14,13 @@ package com.longweekendmobile.android.jflash;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class CreateTagActivity extends Activity
 {
-    private static final String MYTAG = "JFlash TagActivity";
+    // private static final String MYTAG = "JFlash TagActivity";
    
     private int localColor;
  
