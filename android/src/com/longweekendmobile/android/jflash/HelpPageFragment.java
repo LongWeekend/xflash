@@ -32,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.longweekendmobile.android.jflash.Jflash;
+
 public class HelpPageFragment extends Fragment 
 {
     // private static final String MYTAG = "JFlash HelpPageFragment";
@@ -52,7 +54,7 @@ public class HelpPageFragment extends Fragment
     }
 
 
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
+    // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -112,6 +114,17 @@ public class HelpPageFragment extends Fragment
         helpTopic = inTopic;
     }
 
+
+    // reset the content view to the main help screen
+    public static void goBackToHelp(Jflash inContext)
+    {
+        // reload the HelpPage fragment to the fragment tab manager
+
+        ScreenManager.setCurrentHelpScreen(0);
+
+        inContext.onScreenTransition("help");
+    }
+    
 
     // when the 'next' button is pressed
     public static void helpNext()

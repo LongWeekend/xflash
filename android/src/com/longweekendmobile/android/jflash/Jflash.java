@@ -286,6 +286,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                            newTab.clss.getName(), newTab.args);
                     
                     ft.add(R.id.realtabcontent, newTab.fragment, newTab.tag);
+                    Log.d(MYTAG,"help.fragment null, instantiate and add");
                 } 
                 else
                 {
@@ -293,9 +294,6 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // is fully instantiated - as that means we've been here before and
                     // MAY have opened secondary screens 
                     
-                    // a temporary TabInfo, in case we have a secondary screen to add
-                    TabInfo tempTab = null;
- 
                     // if HelpFragment is what we're loading
                     if( inTabTagname == "help" )
                     {
@@ -306,29 +304,17 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                             //        this, but I can't find it
 
                             // if the help screen is already instantiated,
-                            // remove and reattach it so it appears in the
-                            // correct order, without animation transitions
-                            tempTab = Jflash.mapTabInfo.get("help");
-                            if( tempTab.fragment != null )
-                            {
-                                ft.detach(tempTab.fragment); 
-                            }
-
-                            // now instantiate the incoming class, which here will be help_page
-                            tempTab.fragment = Fragment.instantiate(this,
-                            tempTab.clss.getName() );
+                            // re-instantiate before attach to recreate
+                            // the view hierarchy
+                            newTab.fragment = Fragment.instantiate(this,
+                            newTab.clss.getName() );
+                            
+                            Log.d(MYTAG,"detach and reinstantiate help.fragment");
                         }
                     }
                     
                     ft.attach(newTab.fragment);
                     
-                    // if we have are loading a secondary screen for this tab,
-                    // attach it AFTER the base screen so it starts on top
-                    if( tempTab != null )
-                    {
-                        ft.attach(tempTab.fragment);
-                    }
- 
                 }  // end else -- for if( newTab.fragment == null )
 
             }  // end if( newTab != null )
