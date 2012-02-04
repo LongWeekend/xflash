@@ -17,55 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="PracticeActivity"
-                  android:label="@string/practice_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="TagActivity"
-                  android:label="@string/tag_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="SearchActivity"
-                  android:label="@string/search_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="SettingsActivity"
-                  android:label="@string/settings_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="HelpActivityGroup"
-                  android:label="@string/help_group_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="HelpActivity"
-                  android:label="@string/help_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
-        <activity android:name="HelpPageActivity"
-                  android:label="@string/help_page_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.TAB" />
-            </intent-filter>
-        </activity>
         <activity android:name="CreateTagActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
