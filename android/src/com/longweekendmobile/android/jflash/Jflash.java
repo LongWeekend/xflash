@@ -99,67 +99,31 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }
 
 
-// START TagFragment sub-activity methods
-    
-    // onClick for our PLUS button
     public void TagFragment_addTag(View v)
     {
-        // start the 'add tag' activity as a modal
-        startActivity(new Intent(this,CreateTagActivity.class));
+        TagFragment.addTag(this);
     }
 
-// END TagFragment sub-activity methods
-
-
-// START SettingsFragment sub-activity methods
-
-    // called when user makes a change to the color scheme in Settings
     public void SettingsFragment_advanceColorScheme(View v)
     {
         SettingsFragment.advanceColorScheme();
     }
 
-// END SettingsFragment sub-activity methods
-
-// START HelpFragment sub-activity methods
-
-    // onClick method for the "ask us" button - pops a dialog
     public void HelpFragment_goAskUs(View v)
     {
         HelpFragment.goAskUs(this);
     }
 
-    
-    // TODO - move to HelpFragment (onScreenTransition?)
-    // calls a new view activity for fragment tab layout 
     public static void HelpFragment_pullHelpTopic(int inId)
     {
-        // set the help topic we are pulling
-        HelpPageFragment.setHelpTopic(inId);
-        
-        ScreenManager.setCurrentHelpScreen(1);
-
-        // load the HelpPageFragment to the fragment tab manager
-        myContext.onScreenTransition("help_page");
+        HelpFragment.pullHelpTopic(inId,myContext);
     }
 
-// END HelpFragment sub-activity methods
-
-
-// START HelpPageFragment sub-activity methods
-
-    // reset the content view to the main help screen
     public void HelpPageFragment_goBackToHelp(View v)
     {
-        // reload the HelpPage fragment to the fragment tab manager
-        
-        ScreenManager.setCurrentHelpScreen(0);
-        
-        this.onScreenTransition("help");
+        HelpPageFragment.goBackToHelp(myContext);
     }
     
-
-    // when the 'next' button is pressed
     public void HelpPageFragment_helpNext(View v)
     {
         HelpPageFragment.helpNext();

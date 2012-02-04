@@ -202,6 +202,19 @@ public class HelpFragment extends Fragment
     }  // end HelpFragment_goAskUs()
 
 
+    // calls a new view activity for fragment tab layout 
+    public static void pullHelpTopic(int inId,Jflash inContext)
+    {
+        // set the help topic we are pulling
+        HelpPageFragment.setHelpTopic(inId);
+
+        ScreenManager.setCurrentHelpScreen(1);
+
+        // load the HelpPageFragment to the fragment tab manager
+        inContext.onScreenTransition("help_page");
+    }
+
+
 }  // end HelpFragment class declaration
 
 

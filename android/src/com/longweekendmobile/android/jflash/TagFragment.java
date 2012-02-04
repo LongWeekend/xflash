@@ -9,6 +9,8 @@ package com.longweekendmobile.android.jflash;
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -96,6 +98,13 @@ public class TagFragment extends Fragment
 
     }  // end onCreateView()
 
+
+    // onClick for our PLUS button
+    public static void addTag(Context inContext)
+    {
+        // start the 'add tag' activity as a modal
+        inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
+    }
 
 }  // end TagFragment class declaration
 
