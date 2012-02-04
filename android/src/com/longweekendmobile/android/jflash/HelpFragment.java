@@ -8,7 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
 //
 //  public static AlertDialog getDialog()
 //  public static void setDialog(AlertDialog  )
@@ -52,9 +51,15 @@ public class HelpFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the Tag activity and return it
+        // inflate our layout for the Help fragment 
         helpLayout = (LinearLayout)inflater.inflate(R.layout.help, container, false);
 
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
+        Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
+            
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        
         // Resources object to pull our help topics
         Resources res = getResources();
         String[] topics;
@@ -113,18 +118,6 @@ public class HelpFragment extends Fragment
         return helpLayout;
 
     }  // end onCreateView
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-
-        // load the title bar elements and pass them to the color manager
-        RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
-        Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
-            
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
-    }
 
 
     // return the Dialog object for manipulation

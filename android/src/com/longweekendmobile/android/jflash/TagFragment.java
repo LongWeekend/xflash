@@ -8,7 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,20 +44,30 @@ public class TagFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
                              Bundle savedInstanceState) 
     {
-        // inflate our layout for the Tag activity and return it
+        // inflate our layout for the Tag fragment and load our icon array
         tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
-       
+        tagIcons = JFApplication.ColorManager.getTagIcons();
+
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)tagLayout.findViewById(R.id.tag_heading);
+        ImageButton tempButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
+        
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+    
         // populate the main list of tags
         LinearLayout tempTagList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
 
         RelativeLayout myTagRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
     
+        // set the tag image
         ImageView tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource(R.drawable.folder_icon_red); 
+        tagRowImage.setImageResource( tagIcons[JFApplication.LWE_ICON_FOLDER ] ); 
 
+        // set the tag title
         TextView tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
         tempView.setText("Here is a tag title");
     
+        // set the tag information
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_bottom);
         tempView.setText("12 sets?");
 
@@ -69,12 +78,15 @@ public class TagFragment extends Fragment
 
         myTagRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
     
+        // set the image
         tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource(R.drawable.folder_icon_red); 
+        tagRowImage.setImageResource( tagIcons[JFApplication.LWE_ICON_STARRED_TAG ] ); 
          
+        // set the tag label
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
         tempView.setText("Favorites tag title");
     
+        // set the tag information
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_bottom);
         tempView.setText("2 sets?");
 
@@ -83,21 +95,6 @@ public class TagFragment extends Fragment
 
     }  // end onCreateView()
 
-   
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-
-        // load the title bar elements and pass them to the color manager
-        RelativeLayout titleBar = (RelativeLayout)tagLayout.findViewById(R.id.tag_heading);
-        ImageButton tempButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
-        
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
-
-    }  // end onResume()
-
-    
 
 }  // end TagFragment class declaration
 

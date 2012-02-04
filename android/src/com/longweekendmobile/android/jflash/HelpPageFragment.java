@@ -8,7 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
 //
 //  public static LinearLayout getHelpPageLayout()
 //  public static WebView getHelpDisplay()
@@ -58,9 +57,16 @@ public class HelpPageFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the Tag activity and return it
+        // inflate our layout for the HelpPage fragment
         helpPageLayout = (LinearLayout)inflater.inflate(R.layout.help_page, container, false);
 
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
+        Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
+        Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
+ 
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
+        
         // Resources object necessary to pull help topics
         Resources res = getResources();
         
@@ -97,20 +103,6 @@ public class HelpPageFragment extends Fragment
         helpDisplay.setBackgroundColor(0x00000000);
         
         return helpPageLayout;
-    }
-
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-
-        // load the title bar elements and pass them to the color manager
-        RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
-        Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
-        Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
- 
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
     }
 
 

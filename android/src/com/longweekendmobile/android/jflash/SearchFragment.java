@@ -8,7 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,23 +38,16 @@ public class SearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the Search activity and return it
+        // inflate our layout for the Search activity
         searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
-
-        return searchLayout;
-    }
-
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
         Button tempButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
   
         JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        
+        return searchLayout;
     }
 
 

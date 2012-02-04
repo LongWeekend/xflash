@@ -43,6 +43,11 @@ public class JFApplication extends Application
     public static final int LWE_THEME_BLUE = 1;
     public static final int LWE_THEME_TAME = 2;
     
+    public static final int LWE_ICON_FOLDER = 0;
+    public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
+    public static final int LWE_ICON_TAG= 2;
+    public static final int LWE_ICON_STARRED_TAG= 3;
+
     // our master "singleton" database instance
     // though it actually isn't a singleton, it's
     // superclassed to hang out in the global
@@ -164,7 +169,29 @@ public class JFApplication extends Application
             }
 
         }  // end getSchemeName()
-    
+   
+
+        // returns an int[4] of resource IDs for tag icons
+        // in order: LWE_ICON_FOLDER , LWE_ICON_SPECIAL_FOLDER , LWE_ICON_TAG , LWE_ICON_STARRED_TAG
+        public static int[] getTagIcons()
+        {
+            int[] tempIcons;
+
+            // switch(colorScheme)
+            // {
+                // case: LWE_THEME_RED:    
+                                            tempIcons = new int[] { R.drawable.folder_icon_red,
+                                                                R.drawable.special_folder_icon_red,
+                                                                R.drawable.tag_icon_red,
+                                                                R.drawable.tag_starred_icon_red };
+
+
+
+            // }
+        
+            return tempIcons; 
+        }
+ 
     }  // end JFApplication.ColorManager class declaration
 
 

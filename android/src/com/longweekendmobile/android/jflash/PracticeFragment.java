@@ -8,7 +8,6 @@ package com.longweekendmobile.android.jflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,25 +37,17 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate the layout for our practice activity and return it
+        // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
-        
-        return practiceLayout;
-    }
-  
 
-    // this is a bad place to take care of this, just temporary for debugging
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        
         // load the title bar elements and pass them to the color manager
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
 
         JFApplication.ColorManager.setupPracticeBack(practiceBack);
-    
-    }  // end onResume()
+        
+        return practiceLayout;
+    }
+  
 
 }  // end PracticeFragment class declaration
 

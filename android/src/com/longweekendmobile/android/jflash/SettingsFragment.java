@@ -39,7 +39,7 @@ public class SettingsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // inflate our layout for the Settings activity and return it
+        // inflate our layout for the Settings activity
         settingsLayout = (LinearLayout)inflater.inflate(R.layout.settings, container, false);
 
         // set the title bar to the current color scheme
