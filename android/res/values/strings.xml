@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="splash_name">JflashSplash</string>
     <string name="app_name">Jflash</string>
     <string name="practice_name">PracticeActivity</string>
     <string name="tag_name">TagActivity</string>
