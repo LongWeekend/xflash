@@ -67,7 +67,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private TabInfo mLastTab = null;
 
     /** Called when the activity is first created. */
-    // (non-Javadoc) see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
+    // see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
@@ -89,7 +89,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }  // end onCreate
 
 
-    // (non-Javadoc) see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
+    // see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
@@ -162,7 +162,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
             mContext = context;
         }
         
-        // (non-Javadoc)  see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
+        // see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
         public View createTabContent(String tag)
         {
             View v = new View(mContext);
@@ -250,7 +250,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     //        just by reading the code
 
     // fragment handling for changing tabs to the appropriate display
-    // (non-Javadoc) see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
+    // see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
     public void onTabChanged(String inTabTagname)
     {
         // the tab we need to change to - as passed into method by 'inTabTagname'
@@ -286,7 +286,6 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                            newTab.clss.getName(), newTab.args);
                     
                     ft.add(R.id.realtabcontent, newTab.fragment, newTab.tag);
-                    Log.d(MYTAG,"help.fragment null, instantiate and add");
                 } 
                 else
                 {
@@ -300,16 +299,14 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         // if we ARE on the secondary screen
                         if( ScreenManager.getCurrentHelpScreen() == 1 )
                         {
-                            // TODO - there may be a better way of doing
-                            //        this, but I can't find it
-
-                            // if the help screen is already instantiated,
-                            // re-instantiate before attach to recreate
-                            // the view hierarchy
+                            // TODO - re-instantiating the help tab is necessary
+                            //        to rebuild the view for the HelpFragment
+                            // but I'm not sure how to get the HelpPageFragment
+                            //        to refresh on color changes...
+                            //        shouldn't the view automatically be
+                            //        recreated when 'help' is attached?
                             newTab.fragment = Fragment.instantiate(this,
                             newTab.clss.getName() );
-                            
-                            Log.d(MYTAG,"detach and reinstantiate help.fragment");
                         }
                     }
                     
@@ -337,7 +334,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     // fragment handling for loading new screens to a single tab
     public void onScreenTransition(String tag)
     {
-        // (non-Javadoc) see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
+        // see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
         TabInfo newTab = Jflash.mapTabInfo.get(tag);
 
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
