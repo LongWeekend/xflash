@@ -15,6 +15,7 @@ package com.longweekendmobile.android.jflash;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -23,6 +24,7 @@ public class CreateTagActivity extends Activity
     // private static final String MYTAG = "JFlash TagActivity";
    
     private int localColor;
+    private EditText myEdit;
  
     /** Called when the activity is first created. */
     @Override
@@ -33,6 +35,10 @@ public class CreateTagActivity extends Activity
     
         // if we're just starting up, force load of color
         localColor = -1;
+
+        // launch with the keyboard displayed
+        myEdit = (EditText)findViewById(R.id.create_tag_text);
+        myEdit.requestFocus();
     }
 
     @Override

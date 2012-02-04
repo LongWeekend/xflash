@@ -90,6 +90,7 @@ public class TagFragment extends Fragment
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_bottom);
         tempView.setText("2 sets?");
 
+        tempTagList.addView(myTagRow);
  
         return tagLayout;
 

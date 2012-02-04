@@ -27,7 +27,24 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+            style="@style/default_frame_block"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" >
 
+            <TextView 
+                style="@style/default_normal_text"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="Name your new study set!" />
+
+            <EditText android:id="@+id/create_tag_text"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+     
+    </LinearLayout>       
 
 </LinearLayout>
 
