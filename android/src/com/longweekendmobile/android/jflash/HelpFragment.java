@@ -32,7 +32,6 @@ public class HelpFragment extends Fragment
     // private static final String MYTAG = "JFlash HelpFragment";
     
     // properties for handling color theme transition
-    private int localColor;
     private LinearLayout helpLayout;
  
     private static AlertDialog askDialog;
@@ -42,9 +41,6 @@ public class HelpFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // if we're just starting up, force load of color
-        localColor = -1;
 
         // set our popup dialog instance to null
         askDialog = null;
@@ -123,16 +119,11 @@ public class HelpFragment extends Fragment
     {
         super.onResume();
 
-        // set the background to the current color scheme
-        if( localColor != JFApplication.ColorManager.getColorScheme() )
-        {
-            // load the title bar elements and pass them to the color manager
-            RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
-            Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
+        Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
             
-            JFApplication.ColorManager.setupScheme(titleBar,tempButton);
-        }
-        
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
     }
 
 

@@ -38,7 +38,6 @@ public class HelpPageFragment extends Fragment
     // private static final String MYTAG = "JFlash HelpPageFragment";
    
     // properties for handling color theme transitions
-    private int localColor;
     private static LinearLayout helpPageLayout;
 
     private static int helpTopic;
@@ -51,9 +50,6 @@ public class HelpPageFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // if we're just starting up, force load of color
-        localColor = -1;
     }
 
 
@@ -109,16 +105,12 @@ public class HelpPageFragment extends Fragment
     {
         super.onResume();
 
-        // set the background to the current color scheme
-        if( localColor != JFApplication.ColorManager.getColorScheme() )
-        {
-            // load the title bar elements and pass them to the color manager
-            RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
-            Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
-            Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
+        Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
+        Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
  
-            JFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
-        }
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
     }
 
 

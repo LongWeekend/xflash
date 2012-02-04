@@ -22,7 +22,6 @@ public class PracticeFragment extends Fragment
     // private static final String MYTAG = "JFlash PracticeFragment";
     
     // properties for handling color theme transitions
-    private int localColor;
     private RelativeLayout practiceLayout;
 
     
@@ -31,9 +30,6 @@ public class PracticeFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // if we're just starting up, force load of color
-        localColor = -1;
     }
 
 
@@ -55,15 +51,11 @@ public class PracticeFragment extends Fragment
     {
         super.onResume();
         
-        // set the background to the current color scheme
-        if( localColor != JFApplication.ColorManager.getColorScheme() )
-        {
-            // load the title bar elements and pass them to the color manager
-            RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
 
-            JFApplication.ColorManager.setupPracticeBack(practiceBack);
-        }
-        
+        JFApplication.ColorManager.setupPracticeBack(practiceBack);
+    
     }  // end onResume()
 
 }  // end PracticeFragment class declaration
