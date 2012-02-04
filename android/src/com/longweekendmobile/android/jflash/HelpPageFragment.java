@@ -106,47 +106,29 @@ public class HelpPageFragment extends Fragment
     }
 
 
-    // helper methods so the page can be updated from the onClick
-    // method in Jflash
-    public static LinearLayout getHelpPageLayout()
-    {
-        return helpPageLayout;
-    }
-
-    public static NoHorizontalWebView getHelpDisplay()
-    {
-        return helpDisplay;
-    }
-    public static int getNumTopics()
-    {
-        return topics.length;
-    }
-
-    public static String getSingleTopic(int inTopic)
-    {
-        return topics[inTopic];
-    } 
-
-    public static String getSingleFilename(int inFilename)
-    {
-        return helpFiles[inFilename];
-    } 
-
-    public static int getHelpTopic()
-    {
-        return helpTopic;
-    }
-
     public static void setHelpTopic(int inTopic)
     {
         helpTopic = inTopic;
     }
 
-    public static void incrementHelpTopic()
-    {
-        ++helpTopic;
-    }
 
+    // when the 'next' button is pressed
+    public static void helpNext()
+    {
+        // if we're not already at the last page
+        if( helpTopic < ( topics.length - 1 ) )
+        {
+            ++helpTopic;
+
+            // change both the title bar and the page content
+            TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
+            tempView.setText( topics[helpTopic] );
+
+            String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
+            helpDisplay.loadUrl(localUrl);
+        }
+
+    }  // end HelpPageFragment_helpNext()
 
 
 }  // end HelpPageFragment class declaration

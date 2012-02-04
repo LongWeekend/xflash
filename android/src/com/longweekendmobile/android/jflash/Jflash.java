@@ -116,33 +116,8 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     // called when user makes a change to the color scheme in Settings
     public void SettingsFragment_advanceColorScheme(View v)
     {
-        int tempScheme = JFApplication.ColorManager.getColorScheme();
-        LinearLayout tempLayout = SettingsFragment.getSettingsLayout();
-
-        // set our new color
-        if(tempScheme == 2)
-        {
-            tempScheme = 0;
-        }
-        else
-        {
-            ++tempScheme;
-        }
-
-        // set our static color field
-        JFApplication.ColorManager.setColorScheme(tempScheme);
-
-        // load the title bar elements and pass them to the color manager
-        RelativeLayout titleBar = (RelativeLayout)tempLayout.findViewById(R.id.settings_heading);
-        Button tempButton = (Button)tempLayout.findViewById(R.id.settings_ratebutton);
-
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
-
-        // and update the "Theme" label in our settings view
-        TextView tempView = (TextView)tempLayout.findViewById(R.id.settings_themelabel);
-        tempView.setText( JFApplication.ColorManager.getSchemeName() );
-
-    }  // end advanceColorScheme()
+        SettingsFragment.advanceColorScheme();
+    }
 
 // END SettingsFragment sub-activity methods
 
@@ -151,78 +126,11 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     // onClick method for the "ask us" button - pops a dialog
     public void HelpFragment_goAskUs(View v)
     {
-        AlertDialog tempDialog;
-        AlertDialog.Builder builder;
-
-        // inflate the dialog layout into a View object
-        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.askus_dialog, (ViewGroup)findViewById(R.id.askus_root));
-
-        builder = new AlertDialog.Builder(this);
-        builder.setView(layout);
-
-        tempDialog = builder.create();
-        tempDialog.show();
-
-        // we cannot reference our buttons until after the dialog.show()
-        // method has been called - otherwise they don't "exist" 
-
-        // set the "Visit Site" button 
-        Button tempButton = (Button)tempDialog.findViewById(R.id.sitebutton);
-        tempButton.setOnClickListener( new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent myIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://getsatisfaction.com/longweekend"));
-
-                startActivity(myIntent);
-
-                // dismiss, so we'll return to the overall help screen
-                HelpFragment.getDialog().dismiss();
-            }
-        });
-
-        // set the "Send Email" button 
-        tempButton = (Button)tempDialog.findViewById(R.id.emailbutton);
-        tempButton.setOnClickListener( new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent myIntent  = new Intent(Intent.ACTION_SEND);
-                myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "support@longweekendmobile.com" });
-                myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Please make this awesome.");
-
-                // I believe this is the current email MIME?
-                myIntent.setType("message/rfc5322");
-
-                startActivity(myIntent);
-
-                // dismiss, so we'll return to the overall help screen
-                HelpFragment.getDialog().dismiss();
-            }
-        });
-
-        // set the "No Thanks" button
-        tempButton = (Button)tempDialog.findViewById(R.id.closebutton);
-        tempButton.setOnClickListener( new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                HelpFragment.getDialog().dismiss();
-            }
-        });
-
-        // set the HelpFragment.askDialog so we can reference it in our
-        // OnClickLisetner events
-        HelpFragment.setDialog(tempDialog);
-
-    }  // end HelpFragment_goAskUs()
+        HelpFragment.goAskUs(this);
+    }
 
     
+    // TODO - move to HelpFragment (onScreenTransition?)
     // calls a new view activity for fragment tab layout 
     public static void HelpFragment_pullHelpTopic(int inId)
     {
@@ -233,7 +141,6 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
         // load the HelpPageFragment to the fragment tab manager
         myContext.onScreenTransition("help_page");
-        // myContext.onTabChanged("help_page");
     }
 
 // END HelpFragment sub-activity methods
@@ -249,31 +156,14 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         ScreenManager.setCurrentHelpScreen(0);
         
         this.onScreenTransition("help");
-
-        // this.onTabChanged("help");
     }
     
 
     // when the 'next' button is pressed
     public void HelpPageFragment_helpNext(View v)
     {
-        int tempInt = HelpPageFragment.getHelpTopic();
-
-        // if we're not already at the last page
-        if( tempInt < ( HelpPageFragment.getNumTopics() - 1 ) )
-        {
-            ++tempInt;
-            HelpPageFragment.incrementHelpTopic();
-           
-            // change both the title bar and the page content
-            TextView tempView = (TextView)HelpPageFragment.getHelpPageLayout().findViewById(R.id.help_page_title);
-            tempView.setText( HelpPageFragment.getSingleTopic(tempInt) );
-
-            String localUrl = "file:///android_asset/JFlash/help/" + HelpPageFragment.getSingleFilename(tempInt);
-            HelpPageFragment.getHelpDisplay().loadUrl(localUrl);
-        }
-
-    }  // end HelpPageFragment_helpNext()
+        HelpPageFragment.helpNext();
+    } 
 
 // END HelpPageFragment sub-activity methods
 

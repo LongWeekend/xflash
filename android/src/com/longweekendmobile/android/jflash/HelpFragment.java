@@ -13,9 +13,13 @@ package com.longweekendmobile.android.jflash;
 //  public static void setDialog(AlertDialog  )
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -120,16 +124,83 @@ public class HelpFragment extends Fragment
     }  // end onCreateView
 
 
-    // return the Dialog object for manipulation
     public static AlertDialog getDialog()
     {
         return askDialog;
     }
 
-    public static void setDialog(AlertDialog inDialog)
+
+    // onClick method for the "ask us" button - pops a dialog
+    public static void goAskUs(FragmentActivity incoming)
     {
-        askDialog = inDialog;
-    }
+        final FragmentActivity inContext = incoming;
+
+        AlertDialog.Builder builder;
+
+        // inflate the dialog layout into a View object
+        LayoutInflater inflater = (LayoutInflater)inContext.getSystemService(inContext.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.askus_dialog, (ViewGroup)inContext.findViewById(R.id.askus_root));
+
+        builder = new AlertDialog.Builder(inContext);
+        builder.setView(layout);
+
+        askDialog = builder.create();
+        askDialog.show();
+
+        // we cannot reference our buttons until after the dialog.show()
+        // method has been called - otherwise they don't "exist" 
+
+        // set the "Visit Site" button 
+        Button tempButton = (Button)askDialog.findViewById(R.id.sitebutton);
+        tempButton.setOnClickListener( new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent myIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://getsatisfaction.com/longweekend"));
+
+                inContext.startActivity(myIntent);
+
+                // dismiss, so we'll return to the overall help screen
+                HelpFragment.getDialog().dismiss();
+            }
+        });
+
+        // set the "Send Email" button 
+        tempButton = (Button)askDialog.findViewById(R.id.emailbutton);
+        tempButton.setOnClickListener( new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent myIntent  = new Intent(Intent.ACTION_SEND);
+                myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "support@longweekendmobile.com" });
+                myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Please make this awesome.");
+
+                // I believe this is the current email MIME?
+                myIntent.setType("message/rfc5322");
+
+                inContext.startActivity(myIntent);
+
+                // dismiss, so we'll return to the overall help screen
+                HelpFragment.getDialog().dismiss();
+            }
+        });
+
+        // set the "No Thanks" button
+        tempButton = (Button)askDialog.findViewById(R.id.closebutton);
+        tempButton.setOnClickListener( new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                HelpFragment.getDialog().dismiss();
+            }
+        });
+
+    }  // end HelpFragment_goAskUs()
+
 
 }  // end HelpFragment class declaration
 

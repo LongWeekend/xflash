@@ -61,12 +61,36 @@ public class SettingsFragment extends Fragment
     }  // end onCreateView()
 
     
-    // static method to retrieve our settings layout so Jflash 
-    // can change the color theme on update
-    public static LinearLayout getSettingsLayout()
+    // called when user makes a change to the color scheme in Settings
+    public static void advanceColorScheme()
     {
-        return settingsLayout;
-    }
+        int tempScheme = JFApplication.ColorManager.getColorScheme();
+
+        // set our new color
+        if(tempScheme == 2)
+        {
+            tempScheme = 0;
+        }
+        else
+        {
+            ++tempScheme;
+        }
+
+        // set our static color field
+        JFApplication.ColorManager.setColorScheme(tempScheme);
+
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)settingsLayout.findViewById(R.id.settings_heading);
+        Button tempButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
+
+        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+
+        // and update the "Theme" label in our settings view
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_themelabel);
+        tempView.setText( JFApplication.ColorManager.getSchemeName() );
+
+    }  // end advanceColorScheme()
+
 
 }  // end SettingsFragment class declaration
 
