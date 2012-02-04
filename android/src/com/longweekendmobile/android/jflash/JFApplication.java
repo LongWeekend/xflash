@@ -31,11 +31,14 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.util.Log;
 
 import com.longweekendmobile.android.jflash.model.LWEDatabase;
 
 public class JFApplication extends Application
 {
+    private static final String MYTAG = "JFlash JFApplication";
+
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;
 
@@ -175,19 +178,27 @@ public class JFApplication extends Application
         // in order: LWE_ICON_FOLDER , LWE_ICON_SPECIAL_FOLDER , LWE_ICON_TAG , LWE_ICON_STARRED_TAG
         public static int[] getTagIcons()
         {
-            int[] tempIcons;
+            int[] tempIcons = null;
 
-            // switch(colorScheme)
-            // {
-                // case: LWE_THEME_RED:    
-                                            tempIcons = new int[] { R.drawable.folder_icon_red,
-                                                                R.drawable.special_folder_icon_red,
-                                                                R.drawable.tag_icon_red,
-                                                                R.drawable.tag_starred_icon_red };
-
-
-
-            // }
+            switch(colorScheme)
+            {
+                case LWE_THEME_RED: tempIcons = new int[] { R.drawable.folder_icon_red,
+                                                            R.drawable.special_folder_icon_red,
+                                                            R.drawable.tag_icon_red,
+                                                            R.drawable.tag_starred_icon_red };
+                                    break;
+                case LWE_THEME_BLUE: tempIcons = new int[] { R.drawable.folder_icon_blue,
+                                                            R.drawable.special_folder_icon_blue,
+                                                            R.drawable.tag_icon_blue,
+                                                            R.drawable.tag_starred_icon_blue };
+                                    break;
+                case LWE_THEME_TAME: tempIcons = new int[] { R.drawable.folder_icon_tame,
+                                                            R.drawable.special_folder_icon_tame,
+                                                            R.drawable.tag_icon_tame,
+                                                            R.drawable.tag_starred_icon_tame };
+                                    break;
+                default:    Log.d(MYTAG,"Error in ColorManager.getTagIcons() - invalid colorScheme: " + colorScheme);
+            }
         
             return tempIcons; 
         }
