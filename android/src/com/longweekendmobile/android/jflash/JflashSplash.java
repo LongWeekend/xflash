@@ -24,6 +24,9 @@ import com.longweekendmobile.android.jflash.model.LWEDatabase;
 public class JflashSplash extends Activity
 {
     private static final String MYTAG = "JFlash JflashSpalsh";
+
+    private static final boolean isDebugging = true;
+
     private final Activity myContext = this;
 
     private boolean active;
@@ -42,6 +45,12 @@ public class JflashSplash extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        if( isDebugging )
+        {
+            finish();
+            myContext.startActivity(new Intent(myContext,Jflash.class));
+        }
         
         // set background to splash1 (Long Weekend label)
         setContentView(R.layout.splash);
@@ -152,7 +161,7 @@ public class JflashSplash extends Activity
                     myContext.unregisterReceiver(myReceiver);
                     finish();
                     myContext.startActivity(new Intent(myContext,Jflash.class));
-                    stop();
+                    // deprecated stop();
                 }
             }
 

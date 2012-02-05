@@ -89,8 +89,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/count_bar"
         android:layout_marginTop="30dp"
-        android:src="@drawable/practice_btn_showreading"
-        android:background="@null" />
+        android:background="@drawable/practice_btn_showreading" />
     
     <ImageView
         android:layout_width="wrap_content"
@@ -98,21 +97,74 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/practice_showreadingbutton"
         android:layout_marginTop="60dp"
-        android:src="@drawable/practice_btn_unrevealed_mini" />
+        android:background="@drawable/practice_btn_unrevealed_mini" />
     
-    <ImageButton android:id="@+id/practice_answerbutton"
+    <!-- the answer button -->
+    <RelativeLayout android:id="@+id/practice_answerbutton_frame"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/practice_btn_unrevealed"
-        android:background="@drawable/practice_btn_bg" />
+        android:gravity="center" >
+
+        <ImageButton android:id="@+id/practice_answerbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/practice_btn_unrevealed"
+            android:background="@drawable/practice_btn_bg"
+            android:onClick="PracticeFragment_reveal" />
+
+<!-- TODO - buttons selectors not changing on press -->
+ 
+        <!-- the options button block -->
+        <RelativeLayout android:id="@+id/practice_options_block"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone" 
+            android:background="@drawable/practice_btn_bg" >
+
+            <ImageButton android:id="@+id/optionblock_btn_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_actions_flip"
+                android:onClick="PracticeFragment_practiceClick" />
+            <ImageButton android:id="@+id/optionblock_btn_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/optionblock_btn_zero"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_right_flip"
+                android:onClick="PracticeFragment_practiceClick" />
+            <ImageButton android:id="@+id/optionblock_btn_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/optionblock_btn_one"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_wrong_flip"
+                android:onClick="PracticeFragment_practiceClick" />
+            <ImageButton android:id="@+id/optionblock_btn_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/optionblock_btn_two"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_goaway_flip"
+                android:onClick="PracticeFragment_practiceClick" />
+    
+        </RelativeLayout>
+        <!-- end practice_options_block -->
+
+    </RelativeLayout> 
+    <!-- end practice_anwerbutton_frame -->
+
 
     <!-- the info just above the answer button -->
     <LinearLayout android:id="@+id/practice_info_layout"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/practice_answerbutton"
+        android:layout_above="@id/practice_answerbutton_frame"
         android:padding="2dp" >
 
         <TextView android:id="@+id/practice_tag_name"
@@ -128,15 +180,27 @@
             style="@style/practice_info" />
     </LinearLayout>
 
+    <!-- the right arrow button above the info -->
+    <ImageButton android:id="@+id/practice_rightbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/practice_info_layout"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/practice_arrow_flip"
+        android:onClick="PracticeFragment_goRight"
+        android:visibility="gone" />
+    
     <ImageView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/practice_answerbutton"
+        android:layout_above="@id/practice_answerbutton_frame"
         android:src="@drawable/hh_temp" />
 
 <!-- begin test code layout -->
 
+<!--
     <LinearLayout android:id="@+id/mainlayout"
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -174,6 +238,8 @@
     />
 
     </LinearLayout>
+
+-->
 
 <!-- end test code layout -->
 

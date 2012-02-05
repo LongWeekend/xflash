@@ -11,6 +11,8 @@ package com.longweekendmobile.android.jflash;
 //
 //  *** METHODS CALLED BY FRAGMENTS ***
 //
+//  public void PracticeFragment_reveal(View  )
+//
 //  public void TagFragment_addTag(View  )
 //
 //  public void SettingsFragment_advanceColorScheme(View  )
@@ -98,6 +100,21 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         super.onSaveInstanceState(outState);
     }
 
+
+    public void PracticeFragment_reveal(View v)
+    {
+        PracticeFragment.reveal();
+    }
+
+    public void PracticeFragment_practiceClick(View v)
+    {
+        PracticeFragment.practiceClick(v);
+    }
+
+    public void PracticeFragment_goRight(View v)
+    {
+        PracticeFragment.goRight();
+    }
 
     public void TagFragment_addTag(View v)
     {
