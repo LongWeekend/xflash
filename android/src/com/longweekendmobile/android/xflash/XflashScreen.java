@@ -1,6 +1,6 @@
 package com.longweekendmobile.android.xflash;
 
-//  ScreenManager.java
+//  XflashScreen.java
 //  Xflash
 //
 //  Created by Todd Presson on 2/3/2012.
@@ -20,9 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-public class ScreenManager 
+public class XflashScreen 
 {
-    private static final String MYTAG = "XFlash ScreenManager";
+    private static final String MYTAG = "XFlash XflashScreen";
     
     // properties for handling color theme transitions
     private static int currentHelpScreen;
@@ -44,6 +44,6 @@ public class ScreenManager
     }
 
 
-}  // end ScreenManager class declaration
+}  // end XflashScreen class declaration
 
 

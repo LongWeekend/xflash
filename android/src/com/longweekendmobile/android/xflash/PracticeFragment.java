@@ -46,7 +46,7 @@ public class PracticeFragment extends Fragment
         // load the title bar elements and pass them to the color manager
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
 
-        XFApplication.ColorManager.setupPracticeBack(practiceBack);
+        XflashColor.setupPracticeBack(practiceBack);
         
         return practiceLayout;
     }

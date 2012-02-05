@@ -50,11 +50,11 @@ public class SettingsFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)settingsLayout.findViewById(R.id.settings_heading);
         Button tempButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
  
-        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XflashColor.setupScheme(titleBar,tempButton);
  
         // and set the "Theme" label in our settings view
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_themelabel);
-        tempView.setText( XFApplication.ColorManager.getSchemeName() );
+        tempView.setText( XflashColor.getSchemeName() );
         
         return settingsLayout;
 
@@ -64,7 +64,7 @@ public class SettingsFragment extends Fragment
     // called when user makes a change to the color scheme in Settings
     public static void advanceColorScheme()
     {
-        int tempScheme = XFApplication.ColorManager.getColorScheme();
+        int tempScheme = XflashColor.getColorScheme();
 
         // set our new color
         if(tempScheme == 2)
@@ -77,17 +77,17 @@ public class SettingsFragment extends Fragment
         }
 
         // set our static color field
-        XFApplication.ColorManager.setColorScheme(tempScheme);
+        XflashColor.setColorScheme(tempScheme);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)settingsLayout.findViewById(R.id.settings_heading);
         Button tempButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
 
-        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XflashColor.setupScheme(titleBar,tempButton);
 
         // and update the "Theme" label in our settings view
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_themelabel);
-        tempView.setText( XFApplication.ColorManager.getSchemeName() );
+        tempView.setText( XflashColor.getSchemeName() );
 
     }  // end advanceColorScheme()
 

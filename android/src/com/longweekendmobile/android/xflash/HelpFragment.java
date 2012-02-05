@@ -62,7 +62,7 @@ public class HelpFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
         Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
             
-        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XflashColor.setupScheme(titleBar,tempButton);
         
         // Resources object to pull our help topics
         Resources res = getResources();
@@ -208,7 +208,7 @@ public class HelpFragment extends Fragment
         // set the help topic we are pulling
         HelpPageFragment.setHelpTopic(inId);
 
-        ScreenManager.setCurrentHelpScreen(1);
+        XflashScreen.setCurrentHelpScreen(1);
 
         // load the HelpPageFragment to the fragment tab manager
         inContext.onScreenTransition("help_page");

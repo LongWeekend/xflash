@@ -48,13 +48,13 @@ public class TagFragment extends Fragment
     {
         // inflate our layout for the Tag fragment and load our icon array
         tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
-        tagIcons = XFApplication.ColorManager.getTagIcons();
+        tagIcons = XflashColor.getTagIcons();
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)tagLayout.findViewById(R.id.tag_heading);
         ImageButton tempButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
         
-        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XflashColor.setupScheme(titleBar,tempButton);
     
         // populate the main list of tags
         LinearLayout tempTagList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
@@ -63,7 +63,7 @@ public class TagFragment extends Fragment
     
         // set the tag image
         ImageView tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource( tagIcons[XFApplication.LWE_ICON_FOLDER ] ); 
+        tagRowImage.setImageResource( tagIcons[XflashColor.LWE_ICON_FOLDER ] ); 
 
         // set the tag title
         TextView tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
@@ -82,7 +82,7 @@ public class TagFragment extends Fragment
     
         // set the image
         tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource( tagIcons[XFApplication.LWE_ICON_STARRED_TAG ] ); 
+        tagRowImage.setImageResource( tagIcons[XflashColor.LWE_ICON_STARRED_TAG ] ); 
          
         // set the tag label
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);

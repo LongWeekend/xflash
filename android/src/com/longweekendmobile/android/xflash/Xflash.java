@@ -314,7 +314,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     if( inTabTagname == "help" )
                     {
                         // if we ARE on the secondary screen
-                        if( ScreenManager.getCurrentHelpScreen() == 1 )
+                        if( XflashScreen.getCurrentHelpScreen() == 1 )
                         {
                             // TODO - re-instantiating the help tab is necessary
                             //        to rebuild the view for the HelpFragment

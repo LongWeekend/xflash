@@ -48,13 +48,13 @@ public class CreateTagActivity extends Activity
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
 
         // set the background to the current color scheme
-        if( localColor != XFApplication.ColorManager.getColorScheme() )
+        if( localColor != XflashColor.getColorScheme() )
         {
             // load the title bar elements and pass them to the color manager
             RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
             Button tempButton = (Button)findViewById(R.id.create_tag_cancelbutton);
             
-            XFApplication.ColorManager.setupScheme(titleBar,tempButton);
+            XflashColor.setupScheme(titleBar,tempButton);
         }
     }
 
