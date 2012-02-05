@@ -62,7 +62,7 @@ public class HelpFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
         Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
             
-        XflashColor.setupScheme(titleBar,tempButton);
+        XflashSettings.setupColorScheme(titleBar,tempButton);
         
         // Resources object to pull our help topics
         Resources res = getResources();

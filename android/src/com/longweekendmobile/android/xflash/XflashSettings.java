@@ -1,29 +1,33 @@
 package com.longweekendmobile.android.xflash;
 
-//  XflashColor.java
+//  XflashSettings.java
 //  Xflash
 //
 //  Created by Todd Presson on 2/5/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
+//
+//  a class to maintain all of the app level settings
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-public class XflashColor
+public class XflashSettings
 {
-    private static final String MYTAG = "XFlash XflashColor";
+    private static final String MYTAG = "XFlash XflashSettings";
 
-    public static final int LWE_THEME_RED = 0;
-    public static final int LWE_THEME_BLUE = 1;
-    public static final int LWE_THEME_TAME = 2;
+    private static final int LWE_THEME_RED = 0;
+    private static final int LWE_THEME_BLUE = 1;
+    private static final int LWE_THEME_TAME = 2;
     
     public static final int LWE_ICON_FOLDER = 0;
     public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
     public static final int LWE_ICON_TAG= 2;
     public static final int LWE_ICON_STARRED_TAG= 3;
 
-    private static int colorScheme = LWE_THEME_RED;
+    private static int colorScheme = -1;
 
     // arrays of resource IDs for use in setupScheme()
     // they are loaded such that their index corresponds to the appropriate
@@ -36,37 +40,61 @@ public class XflashColor
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                                  R.drawable.button_tame };
 
+    // load all settings from Preferences on start
+    public static void load()
+    {
+        // get a Context, get the SharedPreferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        // on error, default to RED scheme
+        colorScheme = settings.getInt("colorScheme",LWE_THEME_RED);
+    }
+
+
+//  *** COLOR SETTINGS ***
+
     public static int getColorScheme()
     {
         return colorScheme;
     }
 
+    
     // sets the background image for the PracticeActivity
     public static void setupPracticeBack(RelativeLayout inLayout)
     {
         inLayout.setBackgroundResource( backgroundIds[colorScheme] );
     }
 
-
+    
+    // sets the color scheme and saves for persistence
     public static void setColorScheme(int inColor)
     {
         colorScheme = inColor;
+        
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("colorScheme",colorScheme);
+        editor.commit();
     }
 
-    public static void setupScheme(RelativeLayout inLayout)
+    public static void setupColorScheme(RelativeLayout inLayout)
     {
-        setupScheme(inLayout,null,null);
+        setupColorScheme(inLayout,null,null);
     }
 
-    public static void setupScheme(RelativeLayout inLayout,View inButton1)
+    public static void setupColorScheme(RelativeLayout inLayout,View inButton1)
     {
-        setupScheme(inLayout,inButton1,null);
+        setupColorScheme(inLayout,inButton1,null);
     }
 
 
     // takes in views from the title bar of any given Activity and sets
     // the background drawables according to color scheme
-    public static void setupScheme(RelativeLayout inLayout,View inButton1,View inButton2)
+    public static void setupColorScheme(RelativeLayout inLayout,View inButton1,View inButton2)
     {
         // based on the current color scheme, set up as many parameters as have been passed
         inLayout.setBackgroundResource( viewGradients[colorScheme] );
@@ -85,7 +113,7 @@ public class XflashColor
 
         
     // return a String for the name of the current theme
-    public static String getSchemeName()
+    public static String getColorSchemeName()
     {
         switch(colorScheme)
         {
@@ -121,14 +149,14 @@ public class XflashColor
                                                             R.drawable.tag_icon_tame,
                                                             R.drawable.tag_starred_icon_tame };
                                     break;
-            default:    Log.d(MYTAG,"Error in ColorManager.getTagIcons() - invalid colorScheme: " + colorScheme);
+            default:    Log.d(MYTAG,"Error in XflashSettings.getTagIcons() - invalid colorScheme: " + colorScheme);
         }
         
         return tempIcons; 
     }
  
 
-}  // end XflashColor class declaration
+}  // end XflashSettings class declaration
 
 
 

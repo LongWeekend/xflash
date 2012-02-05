@@ -25,7 +25,7 @@ public class XflashScreen
     private static final String MYTAG = "XFlash XflashScreen";
     
     // properties for handling color theme transitions
-    private static int currentHelpScreen;
+    private static int currentHelpScreen = -1;
 
     // set all fragment page values to zero when starting app
     public static void fireUpScreenManager()
@@ -35,6 +35,12 @@ public class XflashScreen
 
     public static int getCurrentHelpScreen()
     {
+        if( ( currentHelpScreen < 0 ) || ( currentHelpScreen > 1 ) )
+        {
+            Log.d(MYTAG,"Error: XflashScreen.getCurrentHelpScreen()");
+            Log.d(MYTAG,"       currentHelpScreen invalid:  " + currentHelpScreen);
+        }
+
         return currentHelpScreen;
     }
 

@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
         Button tempButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
   
-        XflashColor.setupScheme(titleBar,tempButton);
+        XflashSettings.setupColorScheme(titleBar,tempButton);
         
         return searchLayout;
     }

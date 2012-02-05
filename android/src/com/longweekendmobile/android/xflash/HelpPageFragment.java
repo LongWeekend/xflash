@@ -68,7 +68,7 @@ public class HelpPageFragment extends Fragment
         Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
         Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
  
-        XflashColor.setupScheme(titleBar,tempButton1,tempButton2); 
+        XflashSettings.setupColorScheme(titleBar,tempButton1,tempButton2); 
         
         // Resources object necessary to pull help topics
         Resources res = getResources();

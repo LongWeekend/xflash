@@ -29,12 +29,15 @@ public class XFApplication extends Application
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;
 
+    // Preferences file name
+    public static final String XFLASH_PREFNAME = "XFLASH_PREFS";
+
     // our master "singleton" database instance
     // though it actually isn't a singleton, it's
     // superclassed to hang out in the global
     // application context
-    private static XFApplication myInstance;
-    private static LWEDatabase dao;
+    private static XFApplication myInstance = null;
+    private static LWEDatabase dao = null;
     
     @Override
     public void onCreate()
@@ -47,6 +50,9 @@ public class XFApplication extends Application
     
         // set all display pages to 0 on app start
         XflashScreen.fireUpScreenManager(); 
+
+        // setup all persistent app settings
+        XflashSettings.load();
     }
 
     public static XFApplication getInstance()
@@ -57,18 +63,33 @@ public class XFApplication extends Application
     // return our entire SQLiteOpenHelper -> LWEDatabase object
     public static LWEDatabase getDao()
     {
+        if( dao == null )
+        {
+            dao = new LWEDatabase( getInstance() );
+        }
+
         return dao;
     }
 
     // return just a readable SQLiteDatabase
     public static SQLiteDatabase getReadableDao()
     {
+        if( dao == null )
+        {
+            dao = getDao();
+        }
+
         return dao.getReadableDatabase();
     } 
 
     // return just a writable SQLiteDatabase
     public static SQLiteDatabase getWritableDao()
     {
+        if( dao == null )
+        {
+            dao = getDao();
+        }
+
         return dao.getWritableDatabase();
     } 
 
