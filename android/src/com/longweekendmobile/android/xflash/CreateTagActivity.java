@@ -13,7 +13,9 @@ package com.longweekendmobile.android.xflash;
 //  public void cancel(View v)
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -39,7 +41,18 @@ public class CreateTagActivity extends Activity
         // launch with the keyboard displayed
         myEdit = (EditText)findViewById(R.id.create_tag_text);
         myEdit.requestFocus();
-    }
+
+        myEdit.postDelayed( new Runnable() 
+        {
+            @Override
+            public void run() 
+            {
+                InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                keyboard.showSoftInput(myEdit,0);
+            }
+        },300);
+
+    }  // end onCreate()
 
     @Override
     public void onResume()

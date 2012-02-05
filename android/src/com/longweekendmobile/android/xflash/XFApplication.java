@@ -49,6 +49,11 @@ public class XFApplication extends Application
         XflashScreen.fireUpScreenManager(); 
     }
 
+    public static XFApplication getInstance()
+    {
+        return myInstance;
+    }
+
     // return our entire SQLiteOpenHelper -> LWEDatabase object
     public static LWEDatabase getDao()
     {
