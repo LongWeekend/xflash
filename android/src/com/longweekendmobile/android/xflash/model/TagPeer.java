@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  TagPeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/15/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -39,11 +39,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class TagPeer
 {
-    private static final String MYTAG = "JFlash TagPeer";
+    private static final String MYTAG = "XFlash TagPeer";
 
     // private static final String kTagPeerErrorDomain = "kTagPeerErrorDomain";
     // private static final String LWETagContentDidChange = "LWETagContentDidChange";
@@ -61,7 +61,7 @@ public class TagPeer
     public TagPeer()
     {
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // recaches card counts for user tags

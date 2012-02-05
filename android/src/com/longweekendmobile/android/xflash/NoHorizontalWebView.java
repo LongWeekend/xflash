@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  NoHorizontalWebView.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 2/3/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.

@@ -35,7 +35,7 @@
 
     </RelativeLayout>
 
-    <com.longweekendmobile.android.jflash.NoHorizontalWebView android:id="@+id/help_display"
+    <com.longweekendmobile.android.xflash.NoHorizontalWebView android:id="@+id/help_display"
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent"
     />

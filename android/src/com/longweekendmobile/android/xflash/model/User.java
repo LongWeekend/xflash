@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  User.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/13/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -27,11 +27,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class User
 {
-    // private static final String MYTAG = "JFlash User";
+    // private static final String MYTAG = "XFlash User";
 
     private static final int kLWEUninitializedUserId = -1;
     private static final String DEFAULT_USER_AVATAR_PATH  = "/avatars/default00.png";
@@ -86,7 +86,7 @@ public class User
     public void save()
     {
         // get the dao
-        SQLiteDatabase tempDB = JFApplication.getWritableDao();
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
 
         // set our values for either insert or update
         ContentValues updateValues = new ContentValues();
@@ -117,7 +117,7 @@ public class User
         }
 
         // get the dao
-        SQLiteDatabase tempDB = JFApplication.getWritableDao();
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
 
         String[] deleteArgs = new String[] { Integer.toString(userId) };
 

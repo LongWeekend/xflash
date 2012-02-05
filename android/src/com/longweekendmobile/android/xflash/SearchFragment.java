@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  SearchFragment.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 
 public class SearchFragment extends Fragment
 {
-    // private static final String MYTAG = "JFlash SearchFragment";
+    // private static final String MYTAG = "XFlash SearchFragment";
 
     // properties for handling color theme transitions
     private LinearLayout searchLayout;
@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
         Button tempButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
   
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
         
         return searchLayout;
     }

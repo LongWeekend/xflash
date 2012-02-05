@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  ExampleSentencePeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson 1/14/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -27,14 +27,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 // TODO - this class has not been properly tested due to lack of
 //        sentence table in database to test on
 
 public class ExampleSentencePeer
 {
-    private static final String MYTAG = "JFlash ExampleSentencePeer";
+    private static final String MYTAG = "XFlash ExampleSentencePeer";
 
     private static SQLiteDatabase tempDB;
 
@@ -45,7 +45,7 @@ public class ExampleSentencePeer
         // and don't want to pass contexts along a chain
         
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // TODO - really I have no idea what to do with this at this point

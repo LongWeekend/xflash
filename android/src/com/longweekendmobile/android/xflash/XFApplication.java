@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
-//  JFApplication.java
-//  jFlash
+//  XFApplication.java
+//  Xflash
 //
 //  Created by Todd Presson on 1/7/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -33,11 +33,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.model.LWEDatabase;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
-public class JFApplication extends Application
+public class XFApplication extends Application
 {
-    private static final String MYTAG = "JFlash JFApplication";
+    private static final String MYTAG = "XFlash XFApplication";
 
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;
@@ -55,7 +55,7 @@ public class JFApplication extends Application
     // though it actually isn't a singleton, it's
     // superclassed to hang out in the global
     // application context
-    private static JFApplication myInstance;
+    private static XFApplication myInstance;
     private static LWEDatabase dao;
     
     @Override
@@ -90,10 +90,10 @@ public class JFApplication extends Application
     } 
 
     
-    // static class for JFApplication
-    // TODO - this is currently a subclass of JFApplication because I'm suspicious
+    // static class for XFApplication
+    // TODO - this is currently a subclass of XFApplication because I'm suspicious
     //        that it will wind up using Preferences, in which case we want it to
-    //        have direct access to JFApplication.myInstance, lest we need to pass
+    //        have direct access to XFApplication.myInstance, lest we need to pass
     //        another copy of the Context
     //        If it winds up not developing that way, it can easily be moved out
     //        to be an independent class
@@ -203,10 +203,10 @@ public class JFApplication extends Application
             return tempIcons; 
         }
  
-    }  // end JFApplication.ColorManager class declaration
+    }  // end XFApplication.ColorManager class declaration
 
 
-}  // end JFApplication class declaration
+}  // end XFApplication class declaration
 
 
 

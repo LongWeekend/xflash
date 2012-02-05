@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
-//  JflashSplash.java
-//  jFlash
+//  XflashSplash.java
+//  XFlash
 //
 //  Created by Todd Presson on 2/4/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -19,11 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.longweekendmobile.android.jflash.model.LWEDatabase;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
-public class JflashSplash extends Activity
+public class XflashSplash extends Activity
 {
-    private static final String MYTAG = "JFlash JflashSpalsh";
+    private static final String MYTAG = "XFlash XflashSpalsh";
 
     private static final boolean isDebugging = true;
 
@@ -49,7 +49,7 @@ public class JflashSplash extends Activity
         if( isDebugging )
         {
             finish();
-            myContext.startActivity(new Intent(myContext,Jflash.class));
+            myContext.startActivity(new Intent(myContext,Xflash.class));
         }
         
         // set background to splash1 (Long Weekend label)
@@ -113,14 +113,14 @@ public class JflashSplash extends Activity
     // change splash screens, check the database
     public void goSplash2()
     {
-        // reset splash background to splash2 (Jflash label)
+        // reset splash background to splash2 (Xflash label)
         RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.splashback);
         myLayout.setBackgroundResource(R.drawable.splash2);
        
         DBupdateLayout.setVisibility(View.VISIBLE);
  
         // set our master database instance
-        LWEDatabase tempDB = JFApplication.getDao();
+        LWEDatabase tempDB = XFApplication.getDao();
             
         // check if our databases have been copied,
         // copy them if they haven't
@@ -128,7 +128,7 @@ public class JflashSplash extends Activity
     }
 
    
-    // clean up splash and exit to Jflash
+    // clean up splash and exit to Xflash
     public void wrapUp()
     {
         // start a thread to pause the first screen for [splashtime] milliseconds
@@ -156,11 +156,11 @@ public class JflashSplash extends Activity
                 finally
                 {
                     // without a specific override, Android chooses the animation
-                    // to use as this activity closese and Jflash.class opens
+                    // to use as this activity closese and Xflash.class opens
                     // may or may not be unpredictable and require manual override
                     myContext.unregisterReceiver(myReceiver);
                     finish();
-                    myContext.startActivity(new Intent(myContext,Jflash.class));
+                    myContext.startActivity(new Intent(myContext,Xflash.class));
                     // deprecated stop();
                 }
             }
@@ -177,19 +177,19 @@ public class JflashSplash extends Activity
         IntentFilter intentFilter;
         myReceiver = new SplashReceiver();
 
-        intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START);
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START);
         registerReceiver(myReceiver,intentFilter);
             
-        intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START2);
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2);
         registerReceiver(myReceiver,intentFilter);
             
-        intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_SUCCESS);
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS);
         registerReceiver(myReceiver,intentFilter);
             
-        intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_FAILURE);
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_FAILURE);
         registerReceiver(myReceiver,intentFilter);
             
-        intentFilter = new IntentFilter(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY);
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.DATABASE_READY);
         registerReceiver(myReceiver,intentFilter);
 
     }  // end turnOnReceiver()
@@ -206,33 +206,33 @@ public class JflashSplash extends Activity
             tempView.setTextSize((float)16);
             tempView.setTextColor(0xFF000000);
         
-            if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START))
+            if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START))
             {
                 tempView.setText("Copying db 1...");
                 DBupdateLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_START2))
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2))
             {
                 tempView.setText("Copying db 2...");                                
                 DBupdateLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_SUCCESS))
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS))
 
             {
                 tempView.setText("Copy Success");   
                 DBupdateLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.COPY_FAILURE))
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_FAILURE))
             {
                 tempView.setText("Copy Failure");                                
                 DBupdateLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekendmobile.android.jflash.model.LWEDatabase.DATABASE_READY))
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.DATABASE_READY))
             {
                 tempView.setText("Database Available!");                                
                 DBupdateLayout.addView(tempView);
                 
-                // clean up splash and exit to Jflash
+                // clean up splash and exit to Xflash
                 wrapUp();   
                  
 /*
@@ -273,7 +273,7 @@ public class JflashSplash extends Activity
 
 
 
-}  // end JflashSplash class declaration
+}  // end XflashSplash class declaration
 
 
 

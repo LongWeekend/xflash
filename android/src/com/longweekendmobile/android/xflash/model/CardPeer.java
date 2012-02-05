@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  CardPeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/17/12.
 //  Copyright 2012 Long Weekend LLC.  All rights reserved.
@@ -33,11 +33,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class CardPeer
 {
-    private static final String MYTAG = "JFlash CardPeer";
+    private static final String MYTAG = "XFlash CardPeer";
 
     // TODO - temporary fix until we understand what to do
     // with the preprocessor calls for language
@@ -51,7 +51,7 @@ public class CardPeer
         isJ = true;
 
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // factory that cares about what language we are using

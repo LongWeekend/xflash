@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  TagFragment.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 public class TagFragment extends Fragment
 {
-    // private static final String MYTAG = "JFlash TagFragment";
+    // private static final String MYTAG = "XFlash TagFragment";
    
     // an array of drawable IDs for the icons, populated 
     // dynamically based on the current color scheme
@@ -48,13 +48,13 @@ public class TagFragment extends Fragment
     {
         // inflate our layout for the Tag fragment and load our icon array
         tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
-        tagIcons = JFApplication.ColorManager.getTagIcons();
+        tagIcons = XFApplication.ColorManager.getTagIcons();
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)tagLayout.findViewById(R.id.tag_heading);
         ImageButton tempButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
         
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
     
         // populate the main list of tags
         LinearLayout tempTagList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
@@ -63,7 +63,7 @@ public class TagFragment extends Fragment
     
         // set the tag image
         ImageView tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource( tagIcons[JFApplication.LWE_ICON_FOLDER ] ); 
+        tagRowImage.setImageResource( tagIcons[XFApplication.LWE_ICON_FOLDER ] ); 
 
         // set the tag title
         TextView tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);
@@ -82,7 +82,7 @@ public class TagFragment extends Fragment
     
         // set the image
         tagRowImage = (ImageView)myTagRow.findViewById(R.id.tag_row_image);
-        tagRowImage.setImageResource( tagIcons[JFApplication.LWE_ICON_STARRED_TAG ] ); 
+        tagRowImage.setImageResource( tagIcons[XFApplication.LWE_ICON_STARRED_TAG ] ); 
          
         // set the tag label
         tempView = (TextView)myTagRow.findViewById(R.id.tag_row_top);

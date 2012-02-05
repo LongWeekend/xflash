@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  ChineseCard.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/17/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.

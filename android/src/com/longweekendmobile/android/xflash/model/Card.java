@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  Tag.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/16/12.
 //  Copyright 2012 Long Weekend LLC.  All rights reserved.
@@ -46,11 +46,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class Card
 {
-    private static final String MYTAG = "JFlash Card";
+    private static final String MYTAG = "XFlash Card";
 
     protected static final String kLWEFullReadingKey = "lwe_full_reading";
     protected static final String kLWESegmentedReadingKey = "lwe_segmented_reading";
@@ -107,7 +107,7 @@ public class Card
     //  preprocessor directives
     public String getMeaning(Context inContext)
     { 
-        SharedPreferences settings = inContext.getSharedPreferences("JFlash",0);
+        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
         String tempString = settings.getString("APP_HEADWORD","fail");
 
         // if no APP_HEADWORD preferences has been set
@@ -139,7 +139,7 @@ public class Card
             return headword;
         }
 
-        SharedPreferences settings = inContext.getSharedPreferences("JFlash",0);
+        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
         String tempString = settings.getString("APP_HEADWORD","fail");
 
         // if no APP_HEADWORD preferences has been set
@@ -167,7 +167,7 @@ public class Card
     public void hydrate()
     {
         // get the dao
-        SQLiteDatabase tempDB = JFApplication.getReadableDao();
+        SQLiteDatabase tempDB = XFApplication.getReadableDao();
   
         if( cardId == kLWEUninitializedCardId )
             Log.d(MYTAG,"ERROR - hydrate() called on uninitialzied card");

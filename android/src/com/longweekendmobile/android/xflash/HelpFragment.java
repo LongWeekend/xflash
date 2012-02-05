@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  HelpFragment.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 public class HelpFragment extends Fragment
 {
-    // private static final String MYTAG = "JFlash HelpFragment";
+    // private static final String MYTAG = "XFlash HelpFragment";
     
     // properties for handling color theme transition
     private LinearLayout helpLayout;
@@ -62,7 +62,7 @@ public class HelpFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
         Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
             
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+        XFApplication.ColorManager.setupScheme(titleBar,tempButton);
         
         // Resources object to pull our help topics
         Resources res = getResources();
@@ -70,7 +70,7 @@ public class HelpFragment extends Fragment
         
         // set topics[] to strings defined in resources xml
         // depending on whether we're in Jflash or Cflash
-        if( com.longweekendmobile.android.jflash.JFApplication.IS_JFLASH )
+        if( com.longweekendmobile.android.xflash.XFApplication.IS_JFLASH )
         {
             topics = res.getStringArray(R.array.help_topics_japanese);
         }
@@ -103,7 +103,7 @@ public class HelpFragment extends Fragment
                 {
                     int tempInt = (Integer)v.getTag(); 
                     
-                    Jflash.HelpFragment_pullHelpTopic(tempInt);
+                    Xflash.HelpFragment_pullHelpTopic(tempInt);
                 }
 
             });
@@ -203,7 +203,7 @@ public class HelpFragment extends Fragment
 
 
     // calls a new view activity for fragment tab layout 
-    public static void pullHelpTopic(int inId,Jflash inContext)
+    public static void pullHelpTopic(int inId,Xflash inContext)
     {
         // set the help topic we are pulling
         HelpPageFragment.setHelpTopic(inId);

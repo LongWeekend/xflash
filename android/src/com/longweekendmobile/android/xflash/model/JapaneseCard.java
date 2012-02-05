@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  JapaneseCard.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/17/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -26,7 +26,7 @@ import android.database.Cursor;
 
 public class JapaneseCard extends Card
 {
-    // private static final String MYTAG = "JFlash JapaneseCard";
+    // private static final String MYTAG = "XFlash JapaneseCard";
 
     private String romaji;
 
@@ -93,7 +93,7 @@ public class JapaneseCard extends Card
     {
         String combinedReading;
 
-        SharedPreferences settings = inContext.getSharedPreferences("JFlash",0);
+        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
         String tempString = settings.getString("APP_READING","fail");
 
         // mux the readings according to user preferences

@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  CreateTagActivity.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 
 public class CreateTagActivity extends Activity
 {
-    // private static final String MYTAG = "JFlash TagActivity";
+    // private static final String MYTAG = "XFlash TagActivity";
    
     private int localColor;
     private EditText myEdit;
@@ -48,13 +48,13 @@ public class CreateTagActivity extends Activity
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
 
         // set the background to the current color scheme
-        if( localColor != JFApplication.ColorManager.getColorScheme() )
+        if( localColor != XFApplication.ColorManager.getColorScheme() )
         {
             // load the title bar elements and pass them to the color manager
             RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
             Button tempButton = (Button)findViewById(R.id.create_tag_cancelbutton);
             
-            JFApplication.ColorManager.setupScheme(titleBar,tempButton);
+            XFApplication.ColorManager.setupScheme(titleBar,tempButton);
         }
     }
 

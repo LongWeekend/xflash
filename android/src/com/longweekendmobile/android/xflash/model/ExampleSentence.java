@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  ExampleSentences.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/14/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -27,7 +27,7 @@ import android.database.Cursor;
 
 public class ExampleSentence
 {
-    // private static final String MYTAG = "JFlash ExampleSentence";
+    // private static final String MYTAG = "XFlash ExampleSentence";
 
     int sentenceId;
     int checked;

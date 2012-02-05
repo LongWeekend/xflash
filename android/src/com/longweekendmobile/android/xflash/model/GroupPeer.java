@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  GroupPeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/5/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -20,11 +20,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class GroupPeer
 {
-    private static final String MYTAG = "JFlash GroupPeer";
+    private static final String MYTAG = "XFlash GroupPeer";
 
     private static SQLiteDatabase tempDB;
 
@@ -33,7 +33,7 @@ public class GroupPeer
     public GroupPeer()
     {
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // I'm not actually entirely sure what this is for.  It pulls the...

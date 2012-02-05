@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  HelpPageFragment.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/28/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -32,11 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.longweekendmobile.android.jflash.Jflash;
+import com.longweekendmobile.android.xflash.Xflash;
 
 public class HelpPageFragment extends Fragment 
 {
-    // private static final String MYTAG = "JFlash HelpPageFragment";
+    // private static final String MYTAG = "XFlash HelpPageFragment";
    
     // properties for handling color theme transitions
     private static LinearLayout helpPageLayout;
@@ -68,14 +68,14 @@ public class HelpPageFragment extends Fragment
         Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
         Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
  
-        JFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
+        XFApplication.ColorManager.setupScheme(titleBar,tempButton1,tempButton2); 
         
         // Resources object necessary to pull help topics
         Resources res = getResources();
         
         // pull the topics to display the title
         // depending on whether we're in Jflash or Cflash
-        if( com.longweekendmobile.android.jflash.JFApplication.IS_JFLASH )
+        if( com.longweekendmobile.android.xflash.XFApplication.IS_JFLASH )
         {
             topics = res.getStringArray(R.array.help_topics_japanese);
             helpFiles = res.getStringArray(R.array.help_files_japanese);
@@ -116,7 +116,7 @@ public class HelpPageFragment extends Fragment
 
 
     // reset the content view to the main help screen
-    public static void goBackToHelp(Jflash inContext)
+    public static void goBackToHelp(Xflash inContext)
     {
         // reload the HelpPage fragment to the fragment tab manager
 
@@ -138,7 +138,7 @@ public class HelpPageFragment extends Fragment
             TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
             tempView.setText( topics[helpTopic] );
 
-            String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
+            String localUrl = "file:///android_asset/XFlash/help/" + helpFiles[helpTopic];
             helpDisplay.loadUrl(localUrl);
         }
 

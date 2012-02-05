@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
-//  Jflash.java
-//  jFlash
+//  Xflash.java
+//  Xflash
 //
 //  Created by Todd Presson on 1/7/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -29,7 +29,7 @@ package com.longweekendmobile.android.jflash;
 //  class TabFactory implements TabContentFactory
 //
 //  private void initializeTabHost(Bundle  )
-//  private static void addTab(Jflash  ,TabHost  ,TabHost.TabSpec  ,TabInfo  )
+//  private static void addTab(Xflash  ,TabHost  ,TabHost.TabSpec  ,TabInfo  )
 //  public void onTabChanged(String  )
 
 import java.util.HashMap;
@@ -55,17 +55,17 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TextView;
 import android.util.Log;
 
-public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListener
+public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListener
 {
-    private static final String MYTAG = "JFlash main";
+    private static final String MYTAG = "XFlash main";
    
     // TODO - we don't really want to leave these instantiated for the lifecycle of
     //        the app, as they're only necessary for changing internal tab views
-    private static Jflash myContext;
+    private static Xflash myContext;
  
     // properties for our fragment tab management
     private TabHost mTabHost;
-    private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, Jflash.TabInfo>();
+    private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, Xflash.TabInfo>();
     private TabInfo mLastTab = null;
 
     /** Called when the activity is first created. */
@@ -193,7 +193,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     // initialize the Tab Host
     private void initializeTabHost(Bundle args)
     {
-        // Jflash.mTabhost - top level class property
+        // Xflash.mTabhost - top level class property
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setup();
         
@@ -205,33 +205,33 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
         
         // add the Practice tab
         spec = this.mTabHost.newTabSpec("practice").setIndicator("Practice", res.getDrawable(R.drawable.practice_flip));
-        Jflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
         
         // add the Study Sets tab
         spec = this.mTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
-        Jflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
         spec = this.mTabHost.newTabSpec("search").setIndicator("Search", res.getDrawable(R.drawable.search_flip));
-        Jflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
         spec = this.mTabHost.newTabSpec("settings").setIndicator("Settings", res.getDrawable(R.drawable.settings_flip));
-        Jflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
         spec = this.mTabHost.newTabSpec("help").setIndicator("Help", res.getDrawable(R.drawable.help_flip));
-        Jflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.addTab(this, this.mTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         
         // add fragments to the HashMap that aren't displayed as a tab root
         tabInfo = new TabInfo("help_page", HelpPageFragment.class, args);
-        Jflash.mapTabInfo.put(tabInfo.tag, tabInfo);
+        Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
  
 
         // default to displaying the first tab
@@ -241,7 +241,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
     
     // adds new tabs to the fragment tab manager
-    private static void addTab(Jflash activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo)
+    private static void addTab(Xflash activity, TabHost tabHost, TabHost.TabSpec tabSpec, TabInfo tabInfo)
     {
         // Attach a Tab view factory to the spec
         tabSpec.setContent(activity.new TabFactory(activity));
@@ -271,7 +271,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void onTabChanged(String inTabTagname)
     {
         // the tab we need to change to - as passed into method by 'inTabTagname'
-        TabInfo newTab = Jflash.mapTabInfo.get(inTabTagname);
+        TabInfo newTab = Xflash.mapTabInfo.get(inTabTagname);
 
         // if we AREN'T clicking on the tab we're already on
         if( mLastTab != newTab )
@@ -352,7 +352,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void onScreenTransition(String tag)
     {
         // see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
-        TabInfo newTab = Jflash.mapTabInfo.get(tag);
+        TabInfo newTab = Xflash.mapTabInfo.get(tag);
 
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
                     
@@ -388,7 +388,7 @@ public class Jflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }  // end onTabChanged()
 
 
-}  // end Jflash class declaration
+}  // end Xflash class declaration
       
 
 

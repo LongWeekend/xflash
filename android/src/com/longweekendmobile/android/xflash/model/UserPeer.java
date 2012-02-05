@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  UserPeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/13/12.
 //  Copyright 2012 Long Weekend Inc. All rights reserved.
@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class UserPeer
 {
-    private static final String MYTAG = "JFlash UserPeer";
+    private static final String MYTAG = "XFlash UserPeer";
 
     private static SQLiteDatabase tempDB;
 
@@ -32,7 +32,7 @@ public class UserPeer
     public UserPeer()
     {
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // queries DB for all users returns an ArrayList of User objects

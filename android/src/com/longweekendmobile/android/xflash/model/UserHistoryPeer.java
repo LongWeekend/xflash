@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  UserHistoryPeer.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/22/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -20,18 +20,18 @@ package com.longweekendmobile.android.jflash.model;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class UserHistoryPeer
 {
-    private static final String MYTAG = "JFlash UserHistoryPeer";
+    private static final String MYTAG = "XFlash UserHistoryPeer";
 
     private static SQLiteDatabase tempDB;
 
     public UserHistoryPeer()
     {
         // get the dao
-        tempDB = JFApplication.getWritableDao();
+        tempDB = XFApplication.getWritableDao();
     }
 
     // returns what the next level should be based on the users's answer

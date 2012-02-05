@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  Group.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/5/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -33,7 +33,7 @@ import android.database.Cursor;
 
 public class Group
 {
-    // private static final String MYTAG = "JFlash Group";
+    // private static final String MYTAG = "XFlash Group";
 
     private static final int kLWEUninitializedGroupId = -99;
     private static final int LWE_TOP_LEVEL_GROUP_ID = -1;

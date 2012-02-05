@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash.model;
+package com.longweekendmobile.android.xflash.model;
 
 //  Tag.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/8/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -59,11 +59,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.jflash.JFApplication;
+import com.longweekendmobile.android.xflash.XFApplication;
 
 public class Tag
 {
-    private static final String MYTAG = "JFlash Tag";
+    private static final String MYTAG = "XFlash Tag";
 
     // private static final String kTagErrorDomain = "kTagErrorDomain";
     // private static final String LWETagDidSave = "kTagDidSave";
@@ -395,7 +395,7 @@ public class Tag
         }
 
         // get the dao
-        SQLiteDatabase tempDB = JFApplication.getWritableDao();
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
     
         ContentValues updateValues = new ContentValues();
         updateValues.put("tag_name",tagName);
@@ -436,7 +436,7 @@ public class Tag
         }
 
         // get the dao
-        SQLiteDatabase tempDB = JFApplication.getWritableDao();
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
 
         String[] selectionArgs = new String[] { Integer.toString(tagId) };
         String query = "SELECT * FROM tags WHERE tag_id = ? LIMIT 1";

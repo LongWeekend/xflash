@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  ScreenManager.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 2/3/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -22,7 +22,7 @@ import android.util.Log;
 
 public class ScreenManager 
 {
-    private static final String MYTAG = "JFlash ScreenManager";
+    private static final String MYTAG = "XFlash ScreenManager";
     
     // properties for handling color theme transitions
     private static int currentHelpScreen;

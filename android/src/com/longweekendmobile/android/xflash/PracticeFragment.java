@@ -1,7 +1,7 @@
-package com.longweekendmobile.android.jflash;
+package com.longweekendmobile.android.xflash;
 
 //  PracticeFragment.java
-//  jFlash
+//  Xflash
 //
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 
 public class PracticeFragment extends Fragment
 {
-    private static final String MYTAG = "JFlash PracticeFragment";
+    private static final String MYTAG = "XFlash PracticeFragment";
     
     // properties for handling color theme transitions
     private static RelativeLayout practiceLayout;
@@ -46,7 +46,7 @@ public class PracticeFragment extends Fragment
         // load the title bar elements and pass them to the color manager
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
 
-        JFApplication.ColorManager.setupPracticeBack(practiceBack);
+        XFApplication.ColorManager.setupPracticeBack(practiceBack);
         
         return practiceLayout;
     }
