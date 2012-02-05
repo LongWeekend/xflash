@@ -26,7 +26,10 @@ public class PracticeFragment extends Fragment
     // properties for handling color theme transitions
     private static RelativeLayout practiceLayout;
 
-    
+    private static final int PRACTICE_BAR_BLANK = 0;  // corresponds to XflashSettings.LWE_STUDYMODE_PRACTICE 
+    private static final int PRACTICE_BAR_BROWSE = 2; // corresponds to XflashSettings.LWE_STUDYMODE_BROWSE
+    private static final int PRACTICE_BAR_SHOW = 3;
+ 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -45,34 +48,68 @@ public class PracticeFragment extends Fragment
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
-
         XflashSettings.setupPracticeBack(practiceBack);
         
+        // set the appropriate answer bar based on our settings
+        setAnswerBar( XflashSettings.getStudyMode() ); 
+
         return practiceLayout;
     }
   
 
-    // method called when user taps to reveal the answer
+    // when the answer bar is clicked in practice mode
     public static void reveal()
     {
-        // hide the answer button
-        ImageButton tempButton= (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
-        tempButton.setVisibility(View.GONE);
- 
-        // show the options block
-        RelativeLayout answerFrame = (RelativeLayout)practiceLayout.findViewById(R.id.practice_options_block);
-        answerFrame.setVisibility(View.VISIBLE);
-        
-        // show the right arrow 
-        tempButton = (ImageButton)practiceLayout.findViewById(R.id.practice_rightbutton);
-        tempButton.setVisibility(View.VISIBLE);
+        setAnswerBar(PRACTICE_BAR_SHOW);
     }
+
+
+    // method called when user taps to reveal the answer
+    public static void setAnswerBar(int inMode)
+    {
+        // pull all necessary resources
+        ImageButton rightArrow = (ImageButton)practiceLayout.findViewById(R.id.practice_rightbutton);
+        ImageButton blankButton= (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
+        RelativeLayout showFrame = (RelativeLayout)practiceLayout.findViewById(R.id.practice_options_block);
+        RelativeLayout browseFrame = (RelativeLayout)practiceLayout.findViewById(R.id.browse_options_block);
+
+        // set what should be visible based on study mode
+        switch(inMode)
+        {
+            case PRACTICE_BAR_BLANK:    browseFrame.setVisibility(View.GONE);
+                                        showFrame.setVisibility(View.GONE);
+                                        rightArrow.setVisibility(View.GONE);
+                                        blankButton.setVisibility(View.VISIBLE);
+                                        break;
+            case PRACTICE_BAR_BROWSE:   blankButton.setVisibility(View.GONE);
+                                        rightArrow.setVisibility(View.GONE);
+                                        showFrame.setVisibility(View.GONE);
+                                        browseFrame.setVisibility(View.VISIBLE);
+                                        break;
+            case PRACTICE_BAR_SHOW:     blankButton.setVisibility(View.GONE);
+                                        browseFrame.setVisibility(View.GONE);
+                                        rightArrow.setVisibility(View.VISIBLE);
+                                        showFrame.setVisibility(View.VISIBLE);
+                                        break;
+            default:    Log.d(MYTAG,"Error in setAnswerBar()  :  invalid study mode");
+        } 
+
+    }  // end setAnswerBar()
 
     
     // method called when any button in the options block is clicked
     public static void practiceClick(View v)
     {
         Log.d(MYTAG,"click in the options block");
+
+        setAnswerBar(PRACTICE_BAR_BLANK);
+    }
+
+
+    // method called when any button in the options block is clicked
+    public static void browseClick()
+    {
+        Log.d(MYTAG,"click in the browse block");
     }
 
 

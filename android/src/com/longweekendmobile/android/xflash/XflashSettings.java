@@ -18,6 +18,7 @@ public class XflashSettings
 {
     private static final String MYTAG = "XFlash XflashSettings";
 
+    // COLOR SETTINGS PROPERTIES
     private static final int LWE_THEME_RED = 0;
     private static final int LWE_THEME_BLUE = 1;
     private static final int LWE_THEME_TAME = 2;
@@ -40,6 +41,16 @@ public class XflashSettings
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                                  R.drawable.button_tame };
 
+
+
+    // STUDY MODE PROPERTIES
+    public static final int LWE_STUDYMODE_PRACTICE = 0;
+    public static final int LWE_STUDYMODE_BROWSE = 1;
+
+    private static int studyMode = -1;
+
+
+
     // load all settings from Preferences on start
     public static void load()
     {
@@ -49,6 +60,7 @@ public class XflashSettings
 
         // on error, default to RED scheme
         colorScheme = settings.getInt("colorScheme",LWE_THEME_RED);
+        studyMode = settings.getInt("studyMode",LWE_STUDYMODE_PRACTICE);
     }
 
 
@@ -56,14 +68,12 @@ public class XflashSettings
 
     public static int getColorScheme()
     {
-        return colorScheme;
-    }
-
+        if( ( colorScheme < 0 ) || ( colorScheme > 2 ) )
+        {
+            Log.d(MYTAG,"Error in getColorScheme()  :  colorScheme invalid:  " + colorScheme); 
+        }
     
-    // sets the background image for the PracticeActivity
-    public static void setupPracticeBack(RelativeLayout inLayout)
-    {
-        inLayout.setBackgroundResource( backgroundIds[colorScheme] );
+        return colorScheme;
     }
 
     
@@ -81,6 +91,14 @@ public class XflashSettings
         editor.commit();
     }
 
+    
+    // sets the background image for the PracticeActivity
+    public static void setupPracticeBack(RelativeLayout inLayout)
+    {
+        inLayout.setBackgroundResource( backgroundIds[colorScheme] );
+    }
+   
+ 
     public static void setupColorScheme(RelativeLayout inLayout)
     {
         setupColorScheme(inLayout,null,null);
@@ -123,7 +141,7 @@ public class XflashSettings
             default:                return "Error";
         }
 
-    }  // end getSchemeName()
+    }  // end getColorSchemeName()
    
 
     // returns an int[4] of resource IDs for tag icons
@@ -156,6 +174,47 @@ public class XflashSettings
     }
  
 
+//  *** STUDY MODE SETTINGS ***
+
+
+    public static int getStudyMode()
+    {
+        if( ( studyMode < 0 ) || ( studyMode > 1 ) )
+        {
+            Log.d(MYTAG,"Error in getStudyMode()  :  studyMode invalid:  " + studyMode);
+        }
+    
+        return studyMode;
+    }
+
+    
+    // sets the color scheme and saves for persistence
+    public static void setStudyMode(int inMode)
+    {
+        studyMode = inMode;
+        
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("studyMode",studyMode);
+        editor.commit();
+    }
+
+
+    // return a String for the name of the current study mode 
+    public static String getStudyModeName()
+    {
+        switch(studyMode)
+        {
+            case LWE_STUDYMODE_PRACTICE:    return "Practice";
+            case LWE_STUDYMODE_BROWSE:      return "Browse";
+            default:                        return "Error";
+        }
+    }
+   
+        
 }  // end XflashSettings class declaration
 
 

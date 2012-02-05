@@ -87,7 +87,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
 
         myContext = this;
-        
+       
     }  // end onCreate
 
 
@@ -100,6 +100,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         super.onSaveInstanceState(outState);
     }
 
+
+    public void PracticeFragment_browseClick(View v)
+    {
+        PracticeFragment.browseClick();
+    }
 
     public void PracticeFragment_reveal(View v)
     {
@@ -119,6 +124,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void TagFragment_addTag(View v)
     {
         TagFragment.addTag(this);
+    }
+
+    public void SettingsFragment_switchStudyMode(View v)
+    {
+        SettingsFragment.switchStudyMode();
     }
 
     public void SettingsFragment_advanceColorScheme(View v)

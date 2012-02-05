@@ -52,15 +52,39 @@ public class SettingsFragment extends Fragment
  
         XflashSettings.setupColorScheme(titleBar,tempButton);
  
+        // set the "Study Mode" label in our settings view
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
+        tempView.setText( XflashSettings.getStudyModeName() );
+        
         // and set the "Theme" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_themelabel);
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
         
         return settingsLayout;
 
     }  // end onCreateView()
 
-    
+
+    public static void switchStudyMode()
+    {
+        int tempMode = XflashSettings.getStudyMode();
+
+        if( tempMode == XflashSettings.LWE_STUDYMODE_PRACTICE )
+        {
+            XflashSettings.setStudyMode(XflashSettings.LWE_STUDYMODE_BROWSE);
+        }
+        else
+        {
+            XflashSettings.setStudyMode(XflashSettings.LWE_STUDYMODE_PRACTICE);
+        }
+        
+        // set the "Study Mode" label in our settings view
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
+        tempView.setText( XflashSettings.getStudyModeName() );
+
+    }  // end switchStudyMode()
+   
+ 
     // called when user makes a change to the color scheme in Settings
     public static void advanceColorScheme()
     {
@@ -86,7 +110,7 @@ public class SettingsFragment extends Fragment
         XflashSettings.setupColorScheme(titleBar,tempButton);
 
         // and update the "Theme" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_themelabel);
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
 
     }  // end advanceColorScheme()

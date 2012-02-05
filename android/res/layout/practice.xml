@@ -115,45 +115,73 @@
             android:background="@drawable/practice_btn_bg"
             android:onClick="PracticeFragment_reveal" />
 
-<!-- TODO - buttons selectors not changing on press -->
- 
         <!-- the options button block -->
         <RelativeLayout android:id="@+id/practice_options_block"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:visibility="gone" 
             android:background="@drawable/practice_btn_bg" >
 
-            <ImageButton android:id="@+id/optionblock_btn_zero"
+            <ImageButton android:id="@+id/optionblock_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_actions_flip"
                 android:onClick="PracticeFragment_practiceClick" />
-            <ImageButton android:id="@+id/optionblock_btn_one"
+            <ImageButton android:id="@+id/optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/optionblock_btn_zero"
+                android:layout_toRightOf="@id/optionblock_actions"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_right_flip"
                 android:onClick="PracticeFragment_practiceClick" />
-            <ImageButton android:id="@+id/optionblock_btn_two"
+            <ImageButton android:id="@+id/optionblock_wrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/optionblock_btn_one"
+                android:layout_toRightOf="@id/optionblock_right"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_wrong_flip"
                 android:onClick="PracticeFragment_practiceClick" />
-            <ImageButton android:id="@+id/optionblock_btn_three"
+            <ImageButton android:id="@+id/optionblock_goaway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/optionblock_btn_two"
+                android:layout_toRightOf="@id/optionblock_wrong"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_goaway_flip"
                 android:onClick="PracticeFragment_practiceClick" />
     
         </RelativeLayout>
-        <!-- end practice_options_block -->
+        <!-- end practice options block -->
+
+        <!-- the browse button block -->
+        <RelativeLayout android:id="@+id/browse_options_block"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/practice_btn_bg" >
+
+            <ImageButton android:id="@+id/browseblock_last"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_last_flip"
+                android:onClick="PracticeFragment_browseClick" />
+            <ImageButton android:id="@+id/browseblock_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/browseblock_last"
+                android:layout_marginLeft="18dp"
+                android:background="@drawable/btn_actions_flip"
+                android:onClick="PracticeFragment_browseClick" />
+            <ImageButton android:id="@+id/browseblock_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/browseblock_actions"
+                android:layout_marginLeft="18dp"
+                android:background="@drawable/btn_next_flip"
+                android:onClick="PracticeFragment_browseClick" />
+    
+        </RelativeLayout>
+        <!-- end browse button block -->
+
 
     </RelativeLayout> 
     <!-- end practice_anwerbutton_frame -->
@@ -188,15 +216,18 @@
         android:layout_above="@id/practice_info_layout"
         android:layout_marginBottom="10dp"
         android:background="@drawable/practice_arrow_flip"
-        android:onClick="PracticeFragment_goRight"
-        android:visibility="gone" />
+        android:onClick="PracticeFragment_goRight" />
     
+    <!-- the little fire guy -->
     <ImageView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_above="@id/practice_answerbutton_frame"
         android:src="@drawable/hh_temp" />
+
+</RelativeLayout>
+
 
 <!-- begin test code layout -->
 
@@ -243,5 +274,4 @@
 
 <!-- end test code layout -->
 
-</RelativeLayout>
 

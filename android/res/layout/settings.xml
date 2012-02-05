@@ -40,19 +40,20 @@
                 style="@style/default_display_heading_layout"
                 android:text="Studying" />
 
-            <RelativeLayout style="@style/default_display_block">
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_switchStudyMode" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Study Mode" />
-                <TextView android:id="@+id/settings_studymodelabel"
-                    style="@style/not_implemented" />
+                <TextView android:id="@+id/settings_studymode_label"
+                    style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Study Language" />
-                <TextView android:id="@+id/settings_studylanguagelabel"
+                <TextView android:id="@+id/settings_studylanguage_label"
                     style="@style/not_implemented" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
@@ -60,7 +61,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Furigana / Reading" />
-                <TextView android:id="@+id/settings_furiganalabel"
+                <TextView android:id="@+id/settings_furigana_label"
                     style="@style/not_implemented" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
@@ -68,7 +69,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Difficulty" />
-                <TextView android:id="@+id/settings_difficultylabel"
+                <TextView android:id="@+id/settings_difficulty_label"
                     style="@style/not_implemented" />
             </RelativeLayout>
 
@@ -82,7 +83,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Theme" />
-                <TextView android:id="@+id/settings_themelabel"
+                <TextView android:id="@+id/settings_theme_label"
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
@@ -90,7 +91,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Active User" />
-                <TextView android:id="@+id/settings_activeuserlabel"
+                <TextView android:id="@+id/settings_activeuser_label"
                     style="@style/not_implemented" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
@@ -98,7 +99,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Updates" />
-                <TextView android:id="@+id/settings_updateslabel"
+                <TextView android:id="@+id/settings_updates_label"
                     style="@style/not_implemented" />
             </RelativeLayout>
 
