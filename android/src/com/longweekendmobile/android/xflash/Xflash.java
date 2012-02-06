@@ -130,6 +130,16 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.switchStudyMode();
     }
+    
+    public void SettingsFragment_switchStudyLanguage(View v)
+    {
+        SettingsFragment.switchStudyLanguage();
+    }
+    
+    public void SettingsFragment_switchReadingMode(View v)
+    {
+        SettingsFragment.switchReadingMode();
+    }
 
     public void SettingsFragment_advanceColorScheme(View v)
     {

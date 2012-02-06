@@ -18,6 +18,11 @@ public class XflashSettings
 {
     private static final String MYTAG = "XFlash XflashSettings";
 
+    private static int colorScheme = -1;
+    private static int studyMode = -1;
+    private static int studyLanguage = -1;
+    private static int readingMode = -1;
+
     // COLOR SETTINGS PROPERTIES
     private static final int LWE_THEME_RED = 0;
     private static final int LWE_THEME_BLUE = 1;
@@ -27,8 +32,6 @@ public class XflashSettings
     public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
     public static final int LWE_ICON_TAG= 2;
     public static final int LWE_ICON_STARRED_TAG= 3;
-
-    private static int colorScheme = -1;
 
     // arrays of resource IDs for use in setupScheme()
     // they are loaded such that their index corresponds to the appropriate
@@ -42,14 +45,19 @@ public class XflashSettings
                                                  R.drawable.button_tame };
 
 
-
     // STUDY MODE PROPERTIES
     public static final int LWE_STUDYMODE_PRACTICE = 0;
     public static final int LWE_STUDYMODE_BROWSE = 1;
 
-    private static int studyMode = -1;
-
-
+    // STUDY LANGUAGE PROPERTIES
+    public static final int LWE_STUDYLANGUAGE_JAPANESE = 0;
+    public static final int LWE_STUDYLANGUAGE_ENGLISH = 1;
+        
+    // READING MODE PROPERTIES
+    public static final int LWE_READINGMODE_BOTH = 0;
+    public static final int LWE_READINGMODE_ROMAJI= 1;
+    public static final int LWE_READINGMODE_KANA = 2;
+        
 
     // load all settings from Preferences on start
     public static void load()
@@ -61,6 +69,8 @@ public class XflashSettings
         // on error, default to RED scheme
         colorScheme = settings.getInt("colorScheme",LWE_THEME_RED);
         studyMode = settings.getInt("studyMode",LWE_STUDYMODE_PRACTICE);
+        studyLanguage = settings.getInt("studyLanguage",LWE_STUDYLANGUAGE_JAPANESE);
+        readingMode = settings.getInt("readingMode",LWE_STUDYLANGUAGE_JAPANESE);
     }
 
 
@@ -214,7 +224,87 @@ public class XflashSettings
         }
     }
    
+       
+//  *** STUDY LANGUAGE SETTINGS ***
+
+    public static int getStudyLanguage()
+    {
+        if( ( studyLanguage < 0 ) || ( studyLanguage > 1 ) )
+        {
+            Log.d(MYTAG,"Error in getStudyLanguage()  :  studyLanguage invalid:  " + studyLanguage);
+        }
+
+        return studyLanguage;
+    }
+
+    public static void setStudyLanguage(int inMode)
+    {
+        studyLanguage = inMode;
         
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("studyLanguage",studyLanguage);
+        editor.commit();
+    }
+
+
+    // return a String for the name of the current language mode 
+    public static String getStudyLanguageName()
+    {
+        switch(studyLanguage)
+        {
+            case LWE_STUDYLANGUAGE_JAPANESE: return "Japanese";
+            case LWE_STUDYLANGUAGE_ENGLISH:  return "English";
+            default:                         return "Error";
+        }
+    }
+   
+//  *** READING MODE SETTINGS ***
+
+    public static int getReadingMode()
+    {
+        if( ( readingMode < 0 ) || ( readingMode > 2 ) )
+        {
+            Log.d(MYTAG,"Error in getStudyLanguage()  :  studyLanguage invalid:  " + studyLanguage);
+        }
+        
+        return readingMode;
+    }
+
+    public static void setReadingMode(int inMode)
+    {
+        readingMode = inMode;
+        
+        Log.d(MYTAG,"reading mode set: " + inMode);
+
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("readingMode",readingMode);
+        editor.commit();
+    }
+
+
+    // return a String for the name of the current language mode 
+    public static String getReadingModeName()
+    {
+        switch(readingMode)
+        {
+            case LWE_READINGMODE_BOTH:      return "Both";
+            case LWE_READINGMODE_ROMAJI:    return "Romaji";
+            case LWE_READINGMODE_KANA:      return "Kana";
+            default:                         return "Error";
+        }
+    }
+   
+       
+
+ 
 }  // end XflashSettings class declaration
 
 

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsFragment extends Fragment
 {
@@ -56,6 +57,14 @@ public class SettingsFragment extends Fragment
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
         tempView.setText( XflashSettings.getStudyModeName() );
         
+        // set the "Language Mode" label in our settings view
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_studylanguage_label);
+        tempView.setText( XflashSettings.getStudyLanguageName() );
+        
+        // set the "Furigana / Reading" label in our settings view
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
+        tempView.setText( XflashSettings.getReadingModeName() );
+        
         // and set the "Theme" label in our settings view
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
@@ -84,8 +93,52 @@ public class SettingsFragment extends Fragment
 
     }  // end switchStudyMode()
    
- 
-    // called when user makes a change to the color scheme in Settings
+
+    public static void switchStudyLanguage()
+    {
+        int tempMode = XflashSettings.getStudyLanguage();
+
+        if( tempMode == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
+        {
+            XflashSettings.setStudyLanguage(XflashSettings.LWE_STUDYLANGUAGE_ENGLISH);
+        }
+        else
+        {
+            XflashSettings.setStudyLanguage(XflashSettings.LWE_STUDYLANGUAGE_JAPANESE);
+        }
+        
+        // set the "Study Language" label in our settings view
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studylanguage_label);
+        tempView.setText( XflashSettings.getStudyLanguageName() );
+    
+    }  // end switchStudyLanguage()
+   
+
+    public static void switchReadingMode()
+    {
+        int tempMode = XflashSettings.getReadingMode();
+
+        switch(tempMode) 
+        {
+            case XflashSettings.LWE_READINGMODE_BOTH:   
+                                XflashSettings.setReadingMode(XflashSettings.LWE_READINGMODE_ROMAJI);
+                                break;
+            case XflashSettings.LWE_READINGMODE_ROMAJI:   
+                                XflashSettings.setReadingMode(XflashSettings.LWE_READINGMODE_KANA);
+                                break;
+            case XflashSettings.LWE_READINGMODE_KANA:   
+                                XflashSettings.setReadingMode(XflashSettings.LWE_READINGMODE_BOTH);
+                                break;
+            default:            break;
+        }
+
+        // set the "Furigana / Reading" label in our settings view
+        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
+        tempView.setText( XflashSettings.getReadingModeName() );
+    
+    }  // end switchStudyLanguage()
+   
+
     public static void advanceColorScheme()
     {
         int tempScheme = XflashSettings.getColorScheme();

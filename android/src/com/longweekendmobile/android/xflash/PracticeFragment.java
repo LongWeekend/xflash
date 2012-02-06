@@ -27,8 +27,8 @@ public class PracticeFragment extends Fragment
     private static RelativeLayout practiceLayout;
 
     private static final int PRACTICE_BAR_BLANK = 0;  // corresponds to XflashSettings.LWE_STUDYMODE_PRACTICE 
-    private static final int PRACTICE_BAR_BROWSE = 2; // corresponds to XflashSettings.LWE_STUDYMODE_BROWSE
-    private static final int PRACTICE_BAR_SHOW = 3;
+    private static final int PRACTICE_BAR_BROWSE = 1; // corresponds to XflashSettings.LWE_STUDYMODE_BROWSE
+    private static final int PRACTICE_BAR_SHOW = 2;
  
     /** Called when the activity is first created. */
     @Override
@@ -91,7 +91,7 @@ public class PracticeFragment extends Fragment
                                         rightArrow.setVisibility(View.VISIBLE);
                                         showFrame.setVisibility(View.VISIBLE);
                                         break;
-            default:    Log.d(MYTAG,"Error in setAnswerBar()  :  invalid study mode");
+            default:    Log.d(MYTAG,"Error in setAnswerBar()  :  invalid study mode: " + inMode);
         } 
 
     }  // end setAnswerBar()
