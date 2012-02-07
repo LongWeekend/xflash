@@ -76,7 +76,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // set up all of our tab systems
+        // set up all of our persistence settings, screen manager, and tab host
+        XflashSettings.load();
+        XflashScreen.fireUpScreenManager();
         initializeTabHost(savedInstanceState);
         
         // if we're coming back from a stop, queue the previously open tab
@@ -101,15 +103,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
     
     @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        Log.d(MYTAG,"kill screens");
-        
-    }
-
-    @Override
     public void onBackPressed()
     {
         String newTabTag = XflashScreen.goBack(currentTab.tag);
@@ -119,6 +112,12 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         {
             onScreenTransition(newTabTag); 
         }
+        else if( currentTab.tag != "practice" )
+        {
+            // take them back to the opening screen before exiting
+            onTabChanged("practice"); 
+            myTabHost.setCurrentTabByTag("practice");
+        } 
         else
         {
             // exit the app

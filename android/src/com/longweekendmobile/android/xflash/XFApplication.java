@@ -46,12 +46,6 @@ public class XFApplication extends Application
         // set out database to the global app context
         myInstance = this;
         dao = new LWEDatabase(myInstance);
-    
-        // set all display pages to 0 on app start
-        XflashScreen.fireUpScreenManager(); 
-
-        // setup all persistent app settings
-        XflashSettings.load();
     }
 
     public static XFApplication getInstance()
