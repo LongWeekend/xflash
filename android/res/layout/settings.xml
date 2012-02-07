@@ -67,12 +67,14 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block">
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_goDifficulty" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="Difficulty" />
                 <TextView android:id="@+id/settings_difficulty_label"
-                    style="@style/not_implemented" />
+                    style="@style/default_display_right"
+                    android:text=">" />
             </RelativeLayout>
 
             <!-- the 'Application' block -->

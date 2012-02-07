@@ -138,7 +138,7 @@ public class HelpFragment extends Fragment
         AlertDialog.Builder builder;
 
         // inflate the dialog layout into a View object
-        LayoutInflater inflater = (LayoutInflater)inContext.getSystemService(inContext.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater)inContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.askus_dialog, (ViewGroup)inContext.findViewById(R.id.askus_root));
 
         builder = new AlertDialog.Builder(inContext);
@@ -207,8 +207,6 @@ public class HelpFragment extends Fragment
     {
         // set the help topic we are pulling
         HelpPageFragment.setHelpTopic(inId);
-
-        XflashScreen.setCurrentHelpScreen(1);
 
         // load the HelpPageFragment to the fragment tab manager
         inContext.onScreenTransition("help_page");

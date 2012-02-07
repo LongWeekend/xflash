@@ -26,13 +26,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.longweekendmobile.android.xflash.Xflash;
 
 public class HelpPageFragment extends Fragment 
 {
@@ -119,9 +116,6 @@ public class HelpPageFragment extends Fragment
     public static void goBackToHelp(Xflash inContext)
     {
         // reload the HelpPage fragment to the fragment tab manager
-
-        XflashScreen.setCurrentHelpScreen(0);
-
         inContext.onScreenTransition("help");
     }
     

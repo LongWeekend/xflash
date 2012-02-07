@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SettingsFragment extends Fragment
 {
@@ -139,6 +138,14 @@ public class SettingsFragment extends Fragment
     }  // end switchStudyLanguage()
    
 
+    // calls a new view activity for fragment tab layout 
+    public static void goDifficulty(Xflash inContext)
+    {
+        // load the HelpPageFragment to the fragment tab manager
+        inContext.onScreenTransition("difficulty");
+    }
+
+    
     public static void advanceColorScheme()
     {
         int tempScheme = XflashSettings.getColorScheme();

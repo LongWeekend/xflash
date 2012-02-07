@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
+    
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/difficulty_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="Change Difficulty"
+            style="@style/heading_text" />
+
+        <!-- LEFT BUTTON -->
+        <Button android:id="@+id/difficulty_backbutton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="DifficultyFragment_goBackToSettings"
+            android:text="Settings"
+            style="@style/heading_button" />
+                
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/default_frame_block"
+        android:layout_marginTop="10dp" >
+
+        <TextView 
+            style="@style/default_display_heading_layout"
+            android:text="Difficulty" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

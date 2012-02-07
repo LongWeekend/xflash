@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  a custom WebView that will not scroll horizontally
 
-import android.os.Bundle;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;

@@ -9,10 +9,9 @@ package com.longweekendmobile.android.xflash;
 //  a class to maintain all of the app level settings
 
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.util.Log;
 
 public class XflashSettings
 {
