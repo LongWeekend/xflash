@@ -6,9 +6,31 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/3/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
-//  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
+//  PERSONAL NOTE: it would probably be more portable, more
+//      conventional, and generally better design if this class 
+//      were built on ArrayList objects, and coordinated to
+//      operate on dynamic number of tabs, with a dynamic
+//      of sub-screens, recognized by dynamically set name tags.
+//
+//      however, in switching to using Fragments we are now 
+//      reconstructing each view on each view change, and I
+//      feel it's worth keeping the class simple to avoid extra
+//      object construction and garbage collection while the
+//      phones resources are already taxed by the animation
+//
+//
+//      *** ALL METHODS STATIC ***
+//
+//  public void fireUpScreenManager()
+//  public void setScreenValues(String  )
+//  public int[] getAnim(String  )
+//  public TabInfo getTransitionFragment(String  )
+//  public void detachExtras(FragmentTransaction  )
+//  public void detachSelectExtras(FragmentTransaction  ,String  )
+//  public String goBack(String  )
+//
+//  public int getCurrentSettingsScreen()
+//  public int getCurrentHelpScreen()
 
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -43,25 +65,26 @@ public class XflashScreen
     } 
 
 
-    // set all necessary flags for an in-tab Xflash.onScreenTransition()
-    public static void setScreenValues(String tag)
+    // set all necessary internal flags following a view change
+    // (called for both  Xflash.onTabChanged()  and  Xflash.onScreenTransition()
+    public static void setScreenValues(String inTag)
     {
-        if( tag == "settings" )
+        if( inTag == "settings" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = false;
             currentSettingsScreen = 0;
         }
-        else if( tag == "help" )
+        else if( inTag == "help" )
         {
             extraScreensOn[LWE_HELP_TAB] = false;
             currentHelpScreen = 0;
         }
-        else if( tag == "difficulty" )
+        else if( inTag == "difficulty" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
         }
-        else if( tag == "help_page" )
+        else if( inTag == "help_page" )
         {
             extraScreensOn[LWE_HELP_TAB] = true;
             currentHelpScreen = 1;
@@ -70,6 +93,10 @@ public class XflashScreen
     }  // end setScreenValues()
 
     
+    // takes the 'tag' of the view fragment we are transitioning to, and
+    // returns an int[] contining the resource IDs of the appropriate
+    // animation for  FragmentTransaction.setCustomAnimations(int incoming,int outgoing)
+    // only called by  Xflash.onScreenTransition()
     public static int[] getAnim(String inTag)
     {
         int[] tempAnimSet = null;
@@ -89,9 +116,14 @@ public class XflashScreen
         }
 
         return tempAnimSet;
-    }
+
+    }  // end getAnim()
 
 
+    // takes the 'tag' of a view fragment and returns the TabInfo containing
+    // that fragment's information
+    // ONLY USED FOR EXTRA SCREENS, as the TabInfo data for the primary tab
+    // screens is held and controlled by Xflash.class and the tab host
     public static TabInfo getTransitionFragment(String inTag)
     {
         if( inTag == "difficulty" )
@@ -114,11 +146,14 @@ public class XflashScreen
         }
 
         return null;
-    }
 
+    }  // end getTransitionFragment()
+
+
+    // called by Xflash.onTabChanged() to detach any extra screen fragments
     public static void detachExtras(FragmentTransaction ft)
     {
-        // cycle through extra fragments, if any are attached, detach them
+        // cycle through each tab, looking for attached extra screens
         for(int i = XflashScreen.LWE_PRACTICE_TAB; i <= XflashScreen.LWE_HELP_TAB; i++)
         {
             if( extraScreensOn[i] )
@@ -129,8 +164,11 @@ public class XflashScreen
         }
     }
 
+    // called by Xflash.onScreenTransition() to detach a specific extra screen
     public static void detachSelectExtras(FragmentTransaction ft,String inTag)
     {
+        // when transitioning to a specific screen (inTag) away from a single
+        // extra screen, we already know exactly which fragment to detach
         if( inTag == "settings" )
         {
             if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
@@ -139,7 +177,7 @@ public class XflashScreen
                 extraScreensOn[LWE_SETTINGS_TAB] = false;
             }
         }
-        if( inTag == "help" )
+        else if( inTag == "help" )
         {
             if( extraFragments[LWE_HELP_TAB].fragment != null )
             {
@@ -148,7 +186,32 @@ public class XflashScreen
             }
         }
 
-    }
+    }  // end detachSelectExtras()
+
+
+    // return the 'tag' for any eligible fragment when the hardware
+    // back button is pressed, or null if we are in root view state
+    public static String goBack(String currentTab)
+    {
+        if( currentTab == "settings" )
+        { 
+            if( currentSettingsScreen > 0 )
+            {
+                return "settings";
+            }     
+        }
+        else if( currentTab == "help" )
+        {
+            if( currentHelpScreen > 0 )
+            {
+                return "help";
+            }
+        }
+
+        // no available screens, return null for app exit
+        return null;
+
+    }  // end goBack()
 
 
     public static int getCurrentSettingsScreen()
@@ -173,7 +236,6 @@ public class XflashScreen
 
         return currentHelpScreen;
     }
-
 
 
 }  // end XflashScreen class declaration
