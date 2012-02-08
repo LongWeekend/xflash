@@ -62,10 +62,11 @@ public class HelpPageFragment extends Fragment
         // TODO - this is not loading when the tab is switched to
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
-        Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
+//      Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
         Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
  
-        XflashSettings.setupColorScheme(titleBar,tempButton1,tempButton2); 
+        // XflashSettings.setupColorScheme(titleBar,tempButton1,tempButton2); 
+        XflashSettings.setupColorScheme(titleBar,tempButton2); 
         
         // Resources object necessary to pull help topics
         Resources res = getResources();

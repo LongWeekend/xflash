@@ -44,9 +44,10 @@ public class DifficultyFragment extends Fragment
         // TODO - this is not loading when the tab is switched to
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)difficultyLayout.findViewById(R.id.difficulty_heading);
-        Button tempButton1 = (Button)difficultyLayout.findViewById(R.id.difficulty_backbutton);
+//      Button tempButton1 = (Button)difficultyLayout.findViewById(R.id.difficulty_backbutton);
  
-        XflashSettings.setupColorScheme(titleBar,tempButton1); 
+//      XflashSettings.setupColorScheme(titleBar,tempButton1); 
+        XflashSettings.setupColorScheme(titleBar); 
         
         return difficultyLayout;
     }

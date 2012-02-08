@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/table_background" >
-    
+  
     <!-- TITLE BAR -->
     <RelativeLayout android:id="@+id/difficulty_heading"
         style="@style/heading_bar" >
@@ -19,23 +19,106 @@
             style="@style/heading_text" />
 
         <!-- LEFT BUTTON -->
+<!--
         <Button android:id="@+id/difficulty_backbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:onClick="DifficultyFragment_goBackToSettings"
             android:text="Settings"
             style="@style/heading_button" />
-                
+-->                
     </RelativeLayout>
 
-    <LinearLayout
+    <LinearLayout 
         style="@style/default_frame_block"
-        android:layout_marginTop="10dp" >
+        android:orientation="vertical" >
 
-        <TextView 
-            style="@style/default_display_heading_layout"
-            android:text="Difficulty" />
+            <!-- the Backup block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Difficulty" />
 
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+                <RadioButton android:id="@+id/difficulty_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E" />
+                <RadioButton android:id="@+id/difficulty_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M" />
+                <RadioButton android:id="@+id/difficulty_hard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H" />
+                <RadioButton android:id="@+id/difficulty_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="C" />
+
+            </RadioGroup> 
+
+            <!-- the Backup block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Number of Cards in Study Pool" />
+
+            <RelativeLayout style="@style/default_display_block"
+                android:padding="4dp" >
+                <TextView android:id="@+id/difficulty_lower"
+                    style="@style/default_display_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="5" />
+                <TextView android:id="@+id/difficulty_upper"
+                    style="@style/default_display_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="50" />
+                <SeekBar android:id="@+id/difficulty_studycards"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toRightOf="@id/difficulty_lower"
+                    android:layout_toLeftOf="@id/difficulty_upper"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:max="100"
+                    android:progress="25" />
+            </RelativeLayout>
+ 
+            <!-- the Backup block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="Frequency of New Cards" />
+
+            <RelativeLayout style="@style/default_display_block"
+                android:padding="4dp" >
+                <TextView android:id="@+id/more_often"
+                    style="@style/default_display_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="More Often" />
+                <SeekBar android:id="@+id/difficulty_studycards"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:layout_toLeftOf="@id/more_often"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:max="100"
+                    android:progress="50" />
+            </RelativeLayout>
+ 
     </LinearLayout>
 
 </LinearLayout>
