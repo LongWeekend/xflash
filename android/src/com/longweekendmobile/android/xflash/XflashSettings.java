@@ -21,6 +21,9 @@ public class XflashSettings
     private static int studyMode = -1;
     private static int studyLanguage = -1;
     private static int readingMode = -1;
+    private static int difficultyMode = -1;
+    private static int customStudyPool = -1;
+    private static int customFrequency = -1;
 
     // COLOR SETTINGS PROPERTIES
     private static final int LWE_THEME_RED = 0;
@@ -57,6 +60,19 @@ public class XflashSettings
     public static final int LWE_READINGMODE_ROMAJI= 1;
     public static final int LWE_READINGMODE_KANA = 2;
         
+    // DIFFICULTY PROPERTIES
+    public static final int LWE_DIFFICULTY_EASY = 0;
+    public static final int LWE_DIFFICULTY_MEDIUM = 1;
+    public static final int LWE_DIFFICULTY_HARD = 2;
+    public static final int LWE_DIFFICULTY_CUSTOM = 3;
+
+    public static final int LWE_STUDYPOOL_EASY = 25;
+    public static final int LWE_STUDYPOOL_MEDIUM = 50;
+    public static final int LWE_STUDYPOOL_HARD = 75;
+
+    public static final int LWE_FREQUENCY_EASY = 0;
+    public static final int LWE_FREQUENCY_MEDIUM = 25;
+    public static final int LWE_FREQUENCY_HARD = 50;
 
     // load all settings from Preferences on start
     public static void load()
@@ -70,6 +86,9 @@ public class XflashSettings
         studyMode = settings.getInt("studyMode",LWE_STUDYMODE_PRACTICE);
         studyLanguage = settings.getInt("studyLanguage",LWE_STUDYLANGUAGE_JAPANESE);
         readingMode = settings.getInt("readingMode",LWE_STUDYLANGUAGE_JAPANESE);
+        difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_EASY);
+        customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
+        customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
     }
 
 
@@ -139,6 +158,31 @@ public class XflashSettings
     }  // end setupScheme()
 
         
+    // sets the color scheme for our radio button array in DifficultyFragment
+    public static void setRadioColors(XflashRadio inArray[])
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     inArray[0].setButtonDrawable(R.drawable.radio_red_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_red_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_red_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_red_right_flip);
+                                    break;
+            case LWE_THEME_BLUE:    inArray[0].setButtonDrawable(R.drawable.radio_blue_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_blue_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_blue_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_blue_right_flip);
+                                    break;
+            case LWE_THEME_TAME:    inArray[0].setButtonDrawable(R.drawable.radio_tame_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_tame_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_tame_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_tame_right_flip);
+                                    break;
+        }
+
+    }  // end setRadioColors()
+ 
+    
     // return a String for the name of the current theme
     public static String getColorSchemeName()
     {
@@ -202,7 +246,7 @@ public class XflashSettings
     {
         studyMode = inMode;
         
-        // set the new color in the Preferences
+        // set the new study mode in the Preferences
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
@@ -240,7 +284,7 @@ public class XflashSettings
     {
         studyLanguage = inMode;
         
-        // set the new color in the Preferences
+        // set the new study language in the Preferences
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
@@ -267,7 +311,7 @@ public class XflashSettings
     {
         if( ( readingMode < 0 ) || ( readingMode > 2 ) )
         {
-            Log.d(MYTAG,"Error in getStudyLanguage()  :  studyLanguage invalid:  " + studyLanguage);
+            Log.d(MYTAG,"Error in getReadingMode()  :  readingMode invalid:  " + readingMode);
         }
         
         return readingMode;
@@ -277,9 +321,7 @@ public class XflashSettings
     {
         readingMode = inMode;
         
-        Log.d(MYTAG,"reading mode set: " + inMode);
-
-        // set the new color in the Preferences
+        // set the new reading mode in the Preferences
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
@@ -297,34 +339,84 @@ public class XflashSettings
             case LWE_READINGMODE_BOTH:      return "Both";
             case LWE_READINGMODE_ROMAJI:    return "Romaji";
             case LWE_READINGMODE_KANA:      return "Kana";
-            default:                         return "Error";
+            default:                        return "Error";
         }
     }
    
+//  *** READING MODE SETTINGS ***
        
-    public static void setRadioColors(XflashRadio inArray[])
+    public static int getDifficultyMode()
     {
-        switch(colorScheme)
+        if( ( difficultyMode < 0 ) || ( difficultyMode > 3 ) )
         {
-            case LWE_THEME_RED:     inArray[0].setButtonDrawable(R.drawable.radio_red_left_flip);
-                                    inArray[1].setButtonDrawable(R.drawable.radio_red_middle_flip);
-                                    inArray[2].setButtonDrawable(R.drawable.radio_red_middle_flip);
-                                    inArray[3].setButtonDrawable(R.drawable.radio_red_right_flip);
-                                    break;
-            case LWE_THEME_BLUE:    inArray[0].setButtonDrawable(R.drawable.radio_blue_left_flip);
-                                    inArray[1].setButtonDrawable(R.drawable.radio_blue_middle_flip);
-                                    inArray[2].setButtonDrawable(R.drawable.radio_blue_middle_flip);
-                                    inArray[3].setButtonDrawable(R.drawable.radio_blue_right_flip);
-                                    break;
-            case LWE_THEME_TAME:    inArray[0].setButtonDrawable(R.drawable.radio_tame_left_flip);
-                                    inArray[1].setButtonDrawable(R.drawable.radio_tame_middle_flip);
-                                    inArray[2].setButtonDrawable(R.drawable.radio_tame_middle_flip);
-                                    inArray[3].setButtonDrawable(R.drawable.radio_tame_right_flip);
-                                    break;
+            Log.d(MYTAG,"Error in getDifficultyMode()  :  difficultyMode invalid:  " + difficultyMode);
         }
+        
+        return difficultyMode;
+    }
 
-    }  // end setRadioColors()
- 
+    // sets the difficulty and saves for persistence
+    public static void setDifficultyMode(int inMode)
+    {
+        difficultyMode = inMode;
+        
+        // set the new difficulty in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("difficultyMode",difficultyMode);
+        editor.commit();
+    }
+
+    public static int getCustomStudyPool()
+    {
+        if( ( customStudyPool < 0 ) || ( customStudyPool > 100 ) )
+        {
+            Log.d(MYTAG,"Error in getCustomStudyPool()  :  customStudyPool:  " + customStudyPool);
+        }
+        
+        return customStudyPool;
+    }
+
+    // sets the custom study pool seek value and saves for persistence
+    public static void setCustomStudyPool(int inMode)
+    {
+        customStudyPool = inMode;
+        
+        // set the new custom study pool seek value in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("customStudyPool",customStudyPool);
+        editor.commit();
+    }
+    
+    public static int getCustomFrequency()
+    {
+        if( ( customFrequency < 0 ) || ( customFrequency > 100 ) )
+        {
+            Log.d(MYTAG,"Error in getCustomFrequency()  :  customFrequency:  " + customFrequency);
+        }
+        
+        return customFrequency;
+    }
+
+    // sets the custom card frequency and saves for persistence
+    public static void setCustomFrequency(int inMode)
+    {
+        customFrequency = inMode;
+        
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("customFrequency",customFrequency);
+        editor.commit();
+    }
+
 }  // end XflashSettings class declaration
 
 
