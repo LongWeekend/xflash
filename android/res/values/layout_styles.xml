@@ -85,4 +85,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">4dp</item>
     </style>
+    <dimen name="default_radio_width">70dp</dimen>
+    <dimen name="default_radio_height">34dp</dimen>
+    <dimen name="default_radio_corner">6dp</dimen>
 </resources>

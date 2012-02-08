@@ -302,7 +302,28 @@ public class XflashSettings
     }
    
        
+    public static void setRadioColors(XflashRadio inArray[])
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     inArray[0].setButtonDrawable(R.drawable.radio_red_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_red_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_red_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_red_right_flip);
+                                    break;
+            case LWE_THEME_BLUE:    inArray[0].setButtonDrawable(R.drawable.radio_blue_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_blue_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_blue_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_blue_right_flip);
+                                    break;
+            case LWE_THEME_TAME:    inArray[0].setButtonDrawable(R.drawable.radio_tame_left_flip);
+                                    inArray[1].setButtonDrawable(R.drawable.radio_tame_middle_flip);
+                                    inArray[2].setButtonDrawable(R.drawable.radio_tame_middle_flip);
+                                    inArray[3].setButtonDrawable(R.drawable.radio_tame_right_flip);
+                                    break;
+        }
 
+    }  // end setRadioColors()
  
 }  // end XflashSettings class declaration
 

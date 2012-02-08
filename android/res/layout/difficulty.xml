@@ -39,27 +39,31 @@
                 android:text="Difficulty" />
 
             <RadioGroup
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center" >
 
-                <RadioButton android:id="@+id/difficulty_easy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="E" />
-                <RadioButton android:id="@+id/difficulty_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="M" />
-                <RadioButton android:id="@+id/difficulty_hard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="H" />
-                <RadioButton android:id="@+id/difficulty_custom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="C" />
+                <com.longweekendmobile.android.xflash.XflashRadio
+                    android:id="@+id/difficulty_easy"
+                    android:layout_width="@dimen/default_radio_width"
+                    android:layout_height="@dimen/default_radio_height"
+                    android:button="@drawable/radio_red_left_flip" />
+                <com.longweekendmobile.android.xflash.XflashRadio
+                    android:id="@+id/difficulty_medium"
+                    android:layout_width="@dimen/default_radio_width"
+                    android:layout_height="@dimen/default_radio_height"
+                    android:button="@drawable/radio_red_middle_flip" />
+                <com.longweekendmobile.android.xflash.XflashRadio
+                    android:id="@+id/difficulty_hard"
+                    android:layout_width="@dimen/default_radio_width"
+                    android:layout_height="@dimen/default_radio_height"
+                    android:button="@drawable/radio_red_middle_flip" />
+                <com.longweekendmobile.android.xflash.XflashRadio
+                    android:id="@+id/difficulty_custom"
+                    android:layout_width="@dimen/default_radio_width"
+                    android:layout_height="@dimen/default_radio_height"
+                    android:button="@drawable/radio_red_right_flip" />
 
             </RadioGroup> 
 
@@ -82,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="50" />
-                <SeekBar android:id="@+id/difficulty_studycards"
+                <SeekBar android:id="@+id/difficulty_cardpool"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -108,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="More Often" />
-                <SeekBar android:id="@+id/difficulty_studycards"
+                <SeekBar android:id="@+id/difficulty_frequency"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
@@ -118,7 +122,7 @@
                     android:max="100"
                     android:progress="50" />
             </RelativeLayout>
- 
+
     </LinearLayout>
 
 </LinearLayout>
