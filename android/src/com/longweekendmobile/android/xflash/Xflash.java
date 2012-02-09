@@ -48,6 +48,7 @@ import java.util.HashMap;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -55,6 +56,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.Toast;
 
 public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListener
 {
@@ -70,7 +72,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public static final int DIRECTION_CLOSE = 0;
     public static final int DIRECTION_OPEN = 1;
     public static final int DIRECTION_NULL = -1;
-   
+
+    private static boolean exitOnce;   
+    private static long exitCount;
 
     /** Called when the activity is first created. */
     // see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
@@ -92,6 +96,8 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
 
         myContext = this;
+        exitOnce = false;
+        exitCount = 0;
        
     }  // end onCreate
 
@@ -130,10 +136,32 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
             onTabChanged("practice"); 
             myTabHost.setCurrentTabByTag("practice");
         } 
-        else
+        else 
         {
-            // exit the app
-            super.onBackPressed();
+            // if we're at the root view
+            long now = SystemClock.uptimeMillis();
+ 
+            // THIS MAY NOT BE NECESSARY?
+
+            // fire a toast warning the user that another back press will exit
+            // because each tab has its own backstack, I'm concerned users may
+            // not realize when they are back to the root view, and thus
+            // exit the app unintentionally in the middle of use
+            if( !exitOnce  || ( ( SystemClock.uptimeMillis() - exitCount ) > 3000 ) )
+            {
+                // if this is their first back press at the root view, or more
+                // than 3 seconds elapsed 
+                exitOnce = true;
+                exitCount = SystemClock.uptimeMillis();
+                
+                // warn they are about to exit
+                Toast.makeText(this,"press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                // exit the app
+                super.onBackPressed();
+            }
         }
     }
 
