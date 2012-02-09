@@ -133,7 +133,7 @@ public class HelpPageFragment extends Fragment
             TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
             tempView.setText( topics[helpTopic] );
 
-            String localUrl = "file:///android_asset/XFlash/help/" + helpFiles[helpTopic];
+            String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
             helpDisplay.loadUrl(localUrl);
         }
 

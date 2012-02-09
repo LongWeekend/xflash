@@ -32,6 +32,8 @@ package com.longweekendmobile.android.xflash;
 //  public String goBack(String  )
 //
 //  public int getCurrentSettingsScreen()
+//  public static void setCurrentSettingsType(int  )
+//  public static int getCurrentSettingsType()
 //  public int getCurrentHelpScreen()
 
 import android.support.v4.app.FragmentTransaction;
@@ -47,10 +49,14 @@ public class XflashScreen
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
 
+    public static final int LWE_SETTINGS_DIFFICULTY = 0;
+    public static final int LWE_SETTINGS_WEB = 1;
+
     // properties for handling fragment view transitions
     private static int currentPracticeScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
+    private static int currentSettingsType = -1;
 
     private static boolean overridePracticeCount;
 
@@ -131,6 +137,11 @@ public class XflashScreen
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
         }
+        else if( inTag == "settings_web" )
+        {
+            extraScreensOn[LWE_SETTINGS_TAB] = true;
+            currentSettingsScreen = 1;
+        }
         else if( inTag == "help" )
         {
             extraScreensOn[LWE_HELP_TAB] = false;
@@ -162,9 +173,24 @@ public class XflashScreen
         }
         else if( inTag == "difficulty" )
         {
-            if( extraFragments[LWE_SETTINGS_TAB] == null ) 
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "difficulty" ) )
             {    
                 extraFragments[LWE_SETTINGS_TAB] = new TabInfo("difficulty", DifficultyFragment.class, null);
+            }
+
+            return extraFragments[LWE_SETTINGS_TAB];
+        }
+        else if( inTag == "settings_web" )
+        {
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "settings_web" ) )
+            {    
+                extraFragments[LWE_SETTINGS_TAB] = new TabInfo("settings_web", SettingsWebFragment.class, null);
             }
 
             return extraFragments[LWE_SETTINGS_TAB];
@@ -277,10 +303,27 @@ public class XflashScreen
         if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 1 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsScreen()");
-            Log.d(MYTAG,"       currentHelpScreen invalid:  " + currentSettingsScreen);
+            Log.d(MYTAG,"       currentSettingsScreen invalid:  " + currentSettingsScreen);
         }
 
         return currentSettingsScreen;
+    }
+
+   
+    public static void setCurrentSettingsType(int inType)
+    {
+        currentSettingsType = inType;
+    }
+ 
+    public static int getCurrentSettingsType()
+    {
+        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 1 ) )
+        {
+            Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsType()");
+            Log.d(MYTAG,"       currentSettingsType invalid:  " + currentSettingsType);
+        }
+
+        return currentSettingsType;
     }
 
     

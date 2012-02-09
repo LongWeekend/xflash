@@ -11,6 +11,9 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static LinearLayout getSettingsLayout()
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +28,8 @@ public class SettingsFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SettingsFragment";
     private static LinearLayout settingsLayout;
+
+    public static boolean isTwitter = false;
     
     /** Called when the activity is first created. */
     @Override
@@ -144,6 +149,7 @@ public class SettingsFragment extends Fragment
     public static void goDifficulty(Xflash inContext)
     {
         // load the HelpPageFragment to the fragment tab manager
+        XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_DIFFICULTY);
         inContext.onScreenTransition("difficulty",Xflash.DIRECTION_OPEN);
     }
 
@@ -176,6 +182,23 @@ public class SettingsFragment extends Fragment
         tempView.setText( XflashSettings.getColorSchemeName() );
 
     }  // end advanceColorScheme()
+
+    
+    public static void launchSettingsWeb(View v,Xflash inContext)
+    {
+        if( v.getId() == R.id.settings_launch_twitter)
+        {
+            isTwitter = true;
+        }
+        else
+        {
+            isTwitter = false;
+        }
+
+        XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_WEB);
+        inContext.onScreenTransition("settings_web",Xflash.DIRECTION_OPEN);
+    }
+
 
 
 }  // end SettingsFragment class declaration

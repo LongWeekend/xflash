@@ -24,6 +24,8 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_switchReadingMode(View  )
 //  public void SettingsFragment_goDifficulty(View  )
 //  public void SettingsFragment_advanceColorScheme(View  )
+//  public void SettingsFragment_launchTwitter(View  )
+//  public void SettingsFragment_launchFacebook(View  )
 //
 //  public void DifficultyFragment_goBackToSettings(View  )
 //
@@ -215,6 +217,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.advanceColorScheme();
     }
+    public void SettingsFragment_launchSettingsWeb(View v)
+    {
+        SettingsFragment.launchSettingsWeb(v,this);
+    }
+
+    public void SettingsWebFragment_reload(View v)
+    {
+        SettingsWebFragment.reload();
+    }
 
     public void DifficultyFragment_goBackToSettings(View v)
     {
@@ -393,7 +404,14 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         {
                             // intercede and substitute the fragment TabInfo for where
                             // we really need to navigate to
-                            switchTab = XflashScreen.getTransitionFragment("difficulty");
+                            if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_DIFFICULTY )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("difficulty");
+                            }
+                            else
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("settings_web");
+                            }
                         }
                     }
                     else if( inTabTagname == "help" )
