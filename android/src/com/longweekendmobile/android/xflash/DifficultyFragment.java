@@ -103,7 +103,7 @@ public class DifficultyFragment extends Fragment
     public static void goBackToSettings(Xflash inContext)
     {
         // reload the Difficulty fragment to the fragment tab manager
-        inContext.onScreenTransition("settings");
+        inContext.onScreenTransition("settings",Xflash.DIRECTION_CLOSE);
     }
     
 

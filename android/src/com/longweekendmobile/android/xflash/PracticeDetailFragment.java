@@ -1,9 +1,9 @@
 package com.longweekendmobile.android.xflash;
 
-//  PracticeFragment.java
+//  PracticeDetailFragment.java
 //  Xflash
 //
-//  Created by Todd Presson on 1/26/2012.
+//  Created by Todd Presson on 2/8/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public void onCreate()                                              @over
@@ -18,17 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-public class PracticeFragment extends Fragment
+public class PracticeDetailFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash PracticeFragment";
+    private static final String MYTAG = "XFlash PracticeDetailFragment";
     
     // properties for handling color theme transitions
-    private static RelativeLayout practiceLayout;
+    private static RelativeLayout practiceDetailLayout;
 
-    public static final int PRACTICE_BAR_BLANK = 0;  // corresponds to XflashSettings.LWE_STUDYMODE_PRACTICE 
-    public static final int PRACTICE_BAR_BROWSE = 1; // corresponds to XflashSettings.LWE_STUDYMODE_BROWSE
-    public static final int PRACTICE_BAR_SHOW = 2;
- 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -43,23 +39,23 @@ public class PracticeFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate the layout for our practice activity
-        practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
+        practiceDetailLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
         // load the title bar elements and pass them to the color manager
-        RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
+        RelativeLayout practiceBack = (RelativeLayout)practiceDetailLayout.findViewById(R.id.practice_mainlayout);
         XflashSettings.setupPracticeBack(practiceBack);
         
         // set the appropriate answer bar based on our settings
         setAnswerBar( XflashSettings.getStudyMode() ); 
 
-        return practiceLayout;
+        return practiceDetailLayout;
     }
   
 
     // when the answer bar is clicked in practice mode
     public static void reveal()
     {
-        setAnswerBar(PRACTICE_BAR_SHOW);
+        setAnswerBar(PracticeFragment.PRACTICE_BAR_SHOW);
     }
 
 
@@ -67,25 +63,25 @@ public class PracticeFragment extends Fragment
     public static void setAnswerBar(int inMode)
     {
         // pull all necessary resources
-        ImageButton rightArrow = (ImageButton)practiceLayout.findViewById(R.id.practice_rightbutton);
-        ImageButton blankButton= (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
-        RelativeLayout showFrame = (RelativeLayout)practiceLayout.findViewById(R.id.practice_options_block);
-        RelativeLayout browseFrame = (RelativeLayout)practiceLayout.findViewById(R.id.browse_options_block);
+        ImageButton rightArrow = (ImageButton)practiceDetailLayout.findViewById(R.id.practice_rightbutton);
+        ImageButton blankButton= (ImageButton)practiceDetailLayout.findViewById(R.id.practice_answerbutton);
+        RelativeLayout showFrame = (RelativeLayout)practiceDetailLayout.findViewById(R.id.practice_options_block);
+        RelativeLayout browseFrame = (RelativeLayout)practiceDetailLayout.findViewById(R.id.browse_options_block);
 
         // set what should be visible based on study mode
         switch(inMode)
         {
-            case PRACTICE_BAR_BLANK:    browseFrame.setVisibility(View.GONE);
+            case PracticeFragment.PRACTICE_BAR_BLANK:    browseFrame.setVisibility(View.GONE);
                                         showFrame.setVisibility(View.GONE);
                                         rightArrow.setVisibility(View.GONE);
                                         blankButton.setVisibility(View.VISIBLE);
                                         break;
-            case PRACTICE_BAR_BROWSE:   blankButton.setVisibility(View.GONE);
+            case PracticeFragment.PRACTICE_BAR_BROWSE:   blankButton.setVisibility(View.GONE);
                                         rightArrow.setVisibility(View.GONE);
                                         showFrame.setVisibility(View.GONE);
                                         browseFrame.setVisibility(View.VISIBLE);
                                         break;
-            case PRACTICE_BAR_SHOW:     blankButton.setVisibility(View.GONE);
+            case PracticeFragment.PRACTICE_BAR_SHOW:     blankButton.setVisibility(View.GONE);
                                         browseFrame.setVisibility(View.GONE);
                                         rightArrow.setVisibility(View.VISIBLE);
                                         showFrame.setVisibility(View.VISIBLE);
@@ -101,21 +97,14 @@ public class PracticeFragment extends Fragment
     {
         Log.d(MYTAG,"click in the options block");
 
-        setAnswerBar(PRACTICE_BAR_BLANK);
+        setAnswerBar(PracticeFragment.PRACTICE_BAR_BLANK);
     }
 
 
     // method called when any button in the options block is clicked
-    public static void browseClick(View v,Xflash inContext)
+    public static void browseClick()
     {
-        switch( v.getId() )
-        {
-            case R.id.browseblock_last:     inContext.onScreenTransition("practice",Xflash.DIRECTION_CLOSE);
-                                            break;
-            case R.id.browseblock_actions:  break;
-            case R.id.browseblock_next:     inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
-                                            break;  
-        } 
+        Log.d(MYTAG,"click in the browse block");
     }
 
 

@@ -23,7 +23,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void fireUpScreenManager()
 //  public void setScreenValues(String  )
-//  public int[] getAnim(String  )
 //  public TabInfo getTransitionFragment(String  )
 //  public void detachExtras(FragmentTransaction  )
 //  public void detachSelectExtras(FragmentTransaction  ,String  )
@@ -46,6 +45,7 @@ public class XflashScreen
     private static final int LWE_HELP_TAB = 4; 
 
     // properties for handling color theme transitions
+    private static int currentPracticeScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
 
@@ -57,6 +57,7 @@ public class XflashScreen
     // set all fragment page values to zero when starting app
     public static void fireUpScreenManager()
     {
+        currentPracticeScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
         
@@ -67,22 +68,43 @@ public class XflashScreen
 
     // set all necessary internal flags following a view change
     // (called for both  Xflash.onTabChanged()  and  Xflash.onScreenTransition()
-    public static void setScreenValues(String inTag)
+    public static void setScreenValues(String inTag,int direction)
     {
-        if( inTag == "settings" )
+        if( inTag == "practice" || inTag == "detail" )
+        {
+            // the detail screen can scroll in either direction
+            if(direction == Xflash.DIRECTION_OPEN)
+            {
+                ++currentPracticeScreen;
+            }
+            else
+            {
+                --currentPracticeScreen;
+            }
+
+            if( ( currentPracticeScreen != 0 ) && ( inTag == "detail" ) )
+            {
+                extraScreensOn[LWE_PRACTICE_TAB] = true;
+            }
+            else
+            {
+                extraScreensOn[LWE_PRACTICE_TAB] = false;
+            }
+        }
+        else if( inTag == "settings" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = false;
             currentSettingsScreen = 0;
-        }
-        else if( inTag == "help" )
-        {
-            extraScreensOn[LWE_HELP_TAB] = false;
-            currentHelpScreen = 0;
         }
         else if( inTag == "difficulty" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
+        }
+        else if( inTag == "help" )
+        {
+            extraScreensOn[LWE_HELP_TAB] = false;
+            currentHelpScreen = 0;
         }
         else if( inTag == "help_page" )
         {
@@ -93,40 +115,22 @@ public class XflashScreen
     }  // end setScreenValues()
 
     
-    // takes the 'tag' of the view fragment we are transitioning to, and
-    // returns an int[] contining the resource IDs of the appropriate
-    // animation for  FragmentTransaction.setCustomAnimations(int incoming,int outgoing)
-    // only called by  Xflash.onScreenTransition()
-    public static int[] getAnim(String inTag)
-    {
-        int[] tempAnimSet = null;
-
-        if( ( inTag == "settings" ) || ( inTag == "help" ) )
-        {
-            tempAnimSet = new int[] { R.anim.slidein_left, R.anim.slideout_right };
-        }
-        else if( ( inTag == "difficulty" ) || ( inTag == "help_page" ) ) 
-        {
-            tempAnimSet = new int[] { R.anim.slidein_right, R.anim.slideout_left };
-        }
-
-        if( tempAnimSet == null )
-        {
-            Log.d(MYTAG,"ERROR in getAnim() : tempAnimSet is NULL");
-        }
-
-        return tempAnimSet;
-
-    }  // end getAnim()
-
-
     // takes the 'tag' of a view fragment and returns the TabInfo containing
     // that fragment's information
     // ONLY USED FOR EXTRA SCREENS, as the TabInfo data for the primary tab
     // screens is held and controlled by Xflash.class and the tab host
     public static TabInfo getTransitionFragment(String inTag)
     {
-        if( inTag == "difficulty" )
+        if( inTag == "detail" )
+        {
+            if( extraFragments[LWE_PRACTICE_TAB] == null ) 
+            {    
+                extraFragments[LWE_PRACTICE_TAB] = new TabInfo("detail", PracticeDetailFragment.class, null);
+            }
+
+            return extraFragments[LWE_PRACTICE_TAB];
+        }
+        else if( inTag == "difficulty" )
         {
             if( extraFragments[LWE_SETTINGS_TAB] == null ) 
             {    
@@ -169,6 +173,14 @@ public class XflashScreen
     {
         // when transitioning to a specific screen (inTag) away from a single
         // extra screen, we already know exactly which fragment to detach
+        if( ( inTag == "practice" ) && ( extraScreensOn[LWE_PRACTICE_TAB] == true ) )
+        {
+            if( extraFragments[LWE_PRACTICE_TAB].fragment != null )
+            {
+                ft.detach(extraFragments[XflashScreen.LWE_PRACTICE_TAB].fragment);
+                extraScreensOn[LWE_PRACTICE_TAB] = false;
+            }
+        }
         if( inTag == "settings" )
         {
             if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
@@ -193,7 +205,17 @@ public class XflashScreen
     // back button is pressed, or null if we are in root view state
     public static String goBack(String currentTab)
     {
-        if( currentTab == "settings" )
+        // check each tab for which we have extra screens
+        // if we aren't on the root screen for that tab, return
+        // the new screen in line, otherwise do nothing to return null
+        if( currentTab == "practice" )
+        { 
+            if( currentPracticeScreen != 0 )
+            {
+                return "practice";
+            }     
+        }
+        else if( currentTab == "settings" )
         { 
             if( currentSettingsScreen > 0 )
             {
@@ -214,6 +236,12 @@ public class XflashScreen
     }  // end goBack()
 
 
+    public static int getCurrentPracticeScreen()
+    {
+        return currentPracticeScreen;
+    }
+
+    
     public static int getCurrentSettingsScreen()
     {
         if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 1 ) )

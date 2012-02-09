@@ -41,7 +41,7 @@ package com.longweekendmobile.android.xflash;
 //  private static void addTab(Xflash  ,TabHost  ,TabHost.TabSpec  ,TabInfo  )
 //
 //  public void onTabChanged(String  )
-//  public void onScreenTransition(String  )
+//  public void onScreenTransition(String  ,int  )
 
 import java.util.HashMap;
 
@@ -59,7 +59,7 @@ import android.widget.TabHost.TabContentFactory;
 public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListener
 {
     private static final String MYTAG = "XFlash main";
-   
+
     private static Xflash myContext;
  
     // properties for our fragment tab management
@@ -67,6 +67,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo currentTab = null;
 
+    public static final int DIRECTION_CLOSE = 0;
+    public static final int DIRECTION_OPEN = 1;
+    public static final int DIRECTION_NULL = -1;
+   
 
     /** Called when the activity is first created. */
     // see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
@@ -110,7 +114,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // if the screen manager returned a fragment to go-back to (or exit)
         if( newTabTag != null )
         {
-            onScreenTransition(newTabTag); 
+            if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
+            {
+                onScreenTransition(newTabTag,DIRECTION_OPEN); 
+            }
+            else
+            {
+                onScreenTransition(newTabTag,DIRECTION_CLOSE); 
+            }
+
         }
         else if( currentTab.tag != "practice" )
         {
@@ -138,11 +150,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }
     public void PracticeFragment_browseClick(View v)
     {
-        PracticeFragment.browseClick();
+        PracticeFragment.browseClick(v,this);
     }
     public void PracticeFragment_goRight(View v)
     {
-        PracticeFragment.goRight();
+        PracticeFragment.goRight(this);
     }
 
     public void TagFragment_addTag(View v)
@@ -367,7 +379,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     else
                     {
                         ft.attach(switchTab.fragment);
-                        XflashScreen.setScreenValues(switchTab.tag);
+                        XflashScreen.setScreenValues(switchTab.tag,DIRECTION_NULL);
                     }
                     
                 }  // end else -- from:   if( newTab.fragment == null )
@@ -390,20 +402,34 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
     
     // fragment handling for loading extra screens inside a tab
-    public void onScreenTransition(String inTag)
+    public void onScreenTransition(String inTag,int direction)
     {
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+        
+        // pull the fragment TabInfo if we are switching to an extra screen
+        TabInfo newTab = XflashScreen.getTransitionFragment(inTag);
                 
-        // set the appropriate animation transition
-        int[] tempAnimSet = XflashScreen.getAnim(inTag);
-        ft.setCustomAnimations(tempAnimSet[0],tempAnimSet[1]);
+        // if we are not transitioning to an extra fragment, load root from tab HashMap 
+        if( newTab == null )
+        {
+            newTab = Xflash.mapTabInfo.get(inTag);
+        }
+
+        if( direction == DIRECTION_OPEN )
+        {
+            ft.setCustomAnimations(R.anim.slidein_right,R.anim.slideout_left);
+        }
+        else if( direction == DIRECTION_CLOSE )
+        {
+            ft.setCustomAnimations(R.anim.slidein_left,R.anim.slideout_right);
+        }
 
     // FIRST WE NEED TO detach any currently attached fragment
     
         // detach the tab's root fragment
         if( currentTab != null )
         {
-            if( currentTab.fragment != null )
+            if( currentTab.fragment != null ) 
             {
                 ft.detach(currentTab.fragment);
             }
@@ -415,14 +441,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     
     // THEN WE NEED TO attach the new fragment of the tab we're moving to
 
-        // pull the fragment TabInfo if we are switching to an extra screen
-        TabInfo newTab = XflashScreen.getTransitionFragment(inTag);
-
-        // if we are not transitioning to an extra fragment, load root from tab HashMap 
-        if( newTab == null )
-        {
-            newTab = Xflash.mapTabInfo.get(inTag);
-        }
 
         // if the extra screen we are switching to does not already have
         // an instantiated fragment, it hasn't been viewed yet
@@ -440,7 +458,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         this.getSupportFragmentManager().executePendingTransactions();
         
         // set all necessary screen manager flags following transition
-        XflashScreen.setScreenValues(inTag); 
+        XflashScreen.setScreenValues(inTag,direction); 
         
     }  // end onScreenTransition()
 

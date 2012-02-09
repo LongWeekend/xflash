@@ -142,7 +142,7 @@ public class SettingsFragment extends Fragment
     public static void goDifficulty(Xflash inContext)
     {
         // load the HelpPageFragment to the fragment tab manager
-        inContext.onScreenTransition("difficulty");
+        inContext.onScreenTransition("difficulty",Xflash.DIRECTION_OPEN);
     }
 
     

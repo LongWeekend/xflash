@@ -117,7 +117,7 @@ public class HelpPageFragment extends Fragment
     public static void goBackToHelp(Xflash inContext)
     {
         // reload the HelpPage fragment to the fragment tab manager
-        inContext.onScreenTransition("help");
+        inContext.onScreenTransition("help",Xflash.DIRECTION_CLOSE);
     }
     
 
