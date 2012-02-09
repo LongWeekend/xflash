@@ -146,7 +146,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }
     public void PracticeFragment_practiceClick(View v)
     {
-        PracticeFragment.practiceClick(v);
+        PracticeFragment.practiceClick(v,this);
     }
     public void PracticeFragment_browseClick(View v)
     {
@@ -155,6 +155,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void PracticeFragment_goRight(View v)
     {
         PracticeFragment.goRight(this);
+    }
+
+    public void ExampleSentenceFragment_exampleClick(View v)
+    {
+        ExampleSentenceFragment.exampleClick(v,this);
     }
 
     public void TagFragment_addTag(View v)

@@ -97,11 +97,10 @@ public class PracticeFragment extends Fragment
 
     
     // method called when any button in the options block is clicked
-    public static void practiceClick(View v)
+    public static void practiceClick(View v,Xflash inContext)
     {
-        Log.d(MYTAG,"click in the options block");
-
-        setAnswerBar(PRACTICE_BAR_BLANK);
+        XflashScreen.setPracticeOverride();
+        inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
     }
 
 
@@ -122,8 +121,8 @@ public class PracticeFragment extends Fragment
     // method called when user click to queue the extra screen
     public static void goRight(Xflash inContext)
     {
-        // load the PracticeDetailFragment to the fragment tab manager
-        inContext.onScreenTransition("detail",Xflash.DIRECTION_OPEN);
+        // load the ExampleSentenceFragment to the fragment tab manager
+        inContext.onScreenTransition("example_sentence",Xflash.DIRECTION_OPEN);
     }
 
 

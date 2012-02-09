@@ -22,6 +22,9 @@ package com.longweekendmobile.android.xflash;
 //      *** ALL METHODS STATIC ***
 //
 //  public void fireUpScreenManager()
+//  public static void popBackPractice()
+//  public static void setPracticeOverride()
+//  public static void clearPracticeScreens()
 //  public void setScreenValues(String  )
 //  public TabInfo getTransitionFragment(String  )
 //  public void detachExtras(FragmentTransaction  )
@@ -44,10 +47,12 @@ public class XflashScreen
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
 
-    // properties for handling color theme transitions
+    // properties for handling fragment view transitions
     private static int currentPracticeScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
+
+    private static boolean overridePracticeCount;
 
     // the index of this array corresponds to the five tabs 
     // practice = 0, tag = 1, search = 2, settings = 3, help = 4
@@ -60,29 +65,54 @@ public class XflashScreen
         currentPracticeScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
+    
+        overridePracticeCount = false;
         
         extraScreensOn = new boolean[] { false, false, false, false, false };
         extraFragments = new TabInfo[] { null, null, null, null, null };
     } 
 
+    // remove the last transition from the practice back stack
+    public static void popBackPractice()
+    {
+        --currentPracticeScreen;
+    }
+
+
+    // called after scoring a card - sets flag to open a practice window WITHOUT
+    // adding it to the 'backstack'
+    public static void setPracticeOverride()
+    {
+        overridePracticeCount = true;
+    }
+
+    // when switching   practice mode <-> browse mode   clear practice backstack
+    public static void clearPracticeScreens()
+    {
+        currentPracticeScreen = 0;
+    }
 
     // set all necessary internal flags following a view change
     // (called for both  Xflash.onTabChanged()  and  Xflash.onScreenTransition()
     public static void setScreenValues(String inTag,int direction)
     {
-        if( inTag == "practice" || inTag == "detail" )
+        if( inTag == "practice" || inTag == "example_sentence" )
         {
-            // the detail screen can scroll in either direction
-            if(direction == Xflash.DIRECTION_OPEN)
+            // the practice and example sentence screen can scroll in either direction
+            if( ( direction == Xflash.DIRECTION_OPEN ) && !overridePracticeCount )
             {
                 ++currentPracticeScreen;
             }
-            else
+            else if( ( direction == Xflash.DIRECTION_CLOSE ) && !overridePracticeCount )
             {
                 --currentPracticeScreen;
             }
+            else if( overridePracticeCount )
+            {
+                overridePracticeCount = false;
+            }
 
-            if( ( currentPracticeScreen != 0 ) && ( inTag == "detail" ) )
+            if( ( currentPracticeScreen != 0 ) && ( inTag == "example_sentence" ) )
             {
                 extraScreensOn[LWE_PRACTICE_TAB] = true;
             }
@@ -121,11 +151,11 @@ public class XflashScreen
     // screens is held and controlled by Xflash.class and the tab host
     public static TabInfo getTransitionFragment(String inTag)
     {
-        if( inTag == "detail" )
+        if( inTag == "example_sentence" )
         {
             if( extraFragments[LWE_PRACTICE_TAB] == null ) 
             {    
-                extraFragments[LWE_PRACTICE_TAB] = new TabInfo("detail", PracticeDetailFragment.class, null);
+                extraFragments[LWE_PRACTICE_TAB] = new TabInfo("example_sentence", ExampleSentenceFragment.class, null);
             }
 
             return extraFragments[LWE_PRACTICE_TAB];

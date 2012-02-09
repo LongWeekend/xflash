@@ -90,6 +90,8 @@ public class SettingsFragment extends Fragment
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
         tempView.setText( XflashSettings.getStudyModeName() );
 
+        XflashScreen.clearPracticeScreens();
+
     }  // end switchStudyMode()
    
 
