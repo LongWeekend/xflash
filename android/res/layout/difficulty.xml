@@ -89,13 +89,11 @@
                 <SeekBar android:id="@+id/difficulty_studypool"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
                     android:layout_toRightOf="@id/difficulty_lower"
                     android:layout_toLeftOf="@id/difficulty_upper"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:max="100" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:max="50" />
             </RelativeLayout>
  
             <!-- the Backup block -->
@@ -114,11 +112,10 @@
                 <SeekBar android:id="@+id/difficulty_frequency"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="6dp"
                     android:layout_toLeftOf="@id/more_often"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:max="100" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:max="4" />
             </RelativeLayout>
 
     </LinearLayout>

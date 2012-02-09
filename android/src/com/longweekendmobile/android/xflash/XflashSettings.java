@@ -66,13 +66,13 @@ public class XflashSettings
     public static final int LWE_DIFFICULTY_HARD = 2;
     public static final int LWE_DIFFICULTY_CUSTOM = 3;
 
-    public static final int LWE_STUDYPOOL_EASY = 25;
-    public static final int LWE_STUDYPOOL_MEDIUM = 50;
-    public static final int LWE_STUDYPOOL_HARD = 75;
+    public static final int LWE_STUDYPOOL_EASY = 15;
+    public static final int LWE_STUDYPOOL_MEDIUM = 25;
+    public static final int LWE_STUDYPOOL_HARD = 35;
 
     public static final int LWE_FREQUENCY_EASY = 0;
-    public static final int LWE_FREQUENCY_MEDIUM = 25;
-    public static final int LWE_FREQUENCY_HARD = 50;
+    public static final int LWE_FREQUENCY_MEDIUM = 1;
+    public static final int LWE_FREQUENCY_HARD = 2;
 
     // load all settings from Preferences on start
     public static void load()
