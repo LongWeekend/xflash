@@ -20,7 +20,8 @@
         <activity android:name="Xflash"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:label="@string/main_name" >
+            android:label="@string/main_name" 
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -76,8 +76,6 @@ public class SettingsWebFragment extends Fragment
         // also called when reload button is pressed
         reload();
 
-        settingsWebDisplay.loadUrl(tempUrl);
-       
         return settingsWebLayout;
 
     }  // end onCreateView()

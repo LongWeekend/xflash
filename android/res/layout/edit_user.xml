@@ -31,7 +31,7 @@
                 style="@style/default_normal_text"
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content" 
-                android:text="Name your new study set!" />
+                android:text="Nickname:" />
 
             <EditText android:id="@+id/edit_user_text"
                 android:layout_width="fill_parent" 

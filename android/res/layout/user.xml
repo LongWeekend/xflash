@@ -35,10 +35,12 @@
         <RelativeLayout style="@style/default_display_block">
             <TextView 
                 style="@style/default_display_left"
+                android:clickable="true"
                 android:onClick="UserFragment_activateUser" 
                 android:text="Dummy User" />
             <TextView 
                 style="@style/default_display_right"
+                android:clickable="true"
                 android:onClick="UserFragment_editUser"
                 android:text="edit" />
         </RelativeLayout>
