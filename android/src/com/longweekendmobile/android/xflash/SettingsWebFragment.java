@@ -11,21 +11,25 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static LinearLayout getSettingsLayout()
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class SettingsWebFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SettingsWebFragment";
     private static LinearLayout settingsWebLayout;
     private static WebView settingsWebDisplay;
+    private static ProgressDialog loadDialog;
  
     /** Called when the activity is first created. */
     @Override
@@ -53,17 +57,27 @@ public class SettingsWebFragment extends Fragment
  
         XflashSettings.setupColorScheme(titleBar,tempButton);
  
+        // our loading ProgressDialog
+        final ProgressDialog tempDialog = new ProgressDialog(getActivity());
+        loadDialog = tempDialog;
+        
         // get the WebView and display the appropriate web page
         settingsWebDisplay = (WebView)settingsWebLayout.findViewById(R.id.settings_web_display);
         settingsWebDisplay.getSettings().setJavaScriptEnabled(true);
+        settingsWebDisplay.setWebViewClient( new WebViewClient()
+        {
+            public void onPageFinished(WebView view,String url)
+            {
+                loadDialog.dismiss();
+            }
+        });
 
-        String tempUrl = settingsWebDisplay.getUrl();
-
-        // load the web page requested, also called when reload button is pressed
+        // display the loading ProgressDialog and load the web page requested, 
+        // also called when reload button is pressed
         reload();
 
         settingsWebDisplay.loadUrl(tempUrl);
-        
+       
         return settingsWebLayout;
 
     }  // end onCreateView()
@@ -83,6 +97,8 @@ public class SettingsWebFragment extends Fragment
             tempUrl = "http://m.facebook.com/pages/Japanese-Flash/111141367918";
         }
 
+        // re-show the loading dialog and reload the webpage
+        loadDialog.show();
         settingsWebDisplay.loadUrl(tempUrl);
     }
 
