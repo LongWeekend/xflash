@@ -18,4 +18,9 @@
     <color name="button_tame_startcolor_up">#FFB3C1CD</color>
     <color name="button_tame_endcolor_up">#FF0A3350</color>
     <color name="radio_tame_endcolor_up">#FF062236</color>
+    <color name="button_yellow_startcolor">#FFD2D6B7</color>
+    <color name="button_yellow_endcolor">#FFE4C628</color>
+    <color name="button_yellow_strokecolor">#FF363404</color>
+    <color name="button_yellow_startcolor_up">#FFE9EF3D</color>
+    <color name="button_yellow_endcolor_up">#FF8F7900</color>
 </resources>

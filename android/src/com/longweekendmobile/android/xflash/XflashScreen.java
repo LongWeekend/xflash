@@ -52,7 +52,8 @@ public class XflashScreen
     public static final int LWE_SETTINGS_DIFFICULTY = 0;
     public static final int LWE_SETTINGS_USER = 1;
     public static final int LWE_SETTINGS_EDIT_USER = 2;
-    public static final int LWE_SETTINGS_WEB = 3;
+    public static final int LWE_SETTINGS_UPDATE = 3;
+    public static final int LWE_SETTINGS_WEB = 4;
 
     // properties for handling fragment view transitions
     private static int currentPracticeScreen = -1;
@@ -134,7 +135,8 @@ public class XflashScreen
             extraScreensOn[LWE_SETTINGS_TAB] = false;
             currentSettingsScreen = 0;
         }
-        else if( ( inTag == "difficulty" ) || ( inTag == "user" ) || ( inTag == "settings_web" ) )
+        else if( ( inTag == "difficulty" ) || ( inTag == "user" ) ||
+                 ( inTag == "update" ) || ( inTag == "settings_web" ) )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
@@ -205,6 +207,18 @@ public class XflashScreen
                 ( extraFragments[LWE_SETTINGS_TAB].tag != "edit_user" ) )
             {    
                 extraFragments[LWE_SETTINGS_TAB] = new TabInfo("edit_user", EditUserFragment.class, null);
+            }
+
+            return extraFragments[LWE_SETTINGS_TAB];
+        }
+        else if( inTag == "update" )
+        {
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "update" ) )
+            {    
+                extraFragments[LWE_SETTINGS_TAB] = new TabInfo("update", UpdateFragment.class, null);
             }
 
             return extraFragments[LWE_SETTINGS_TAB];
@@ -349,7 +363,7 @@ public class XflashScreen
     
     public static int getCurrentSettingsScreen()
     {
-        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 2 ) )
+        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 4 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsScreen()");
             Log.d(MYTAG,"       currentSettingsScreen invalid:  " + currentSettingsScreen);

@@ -30,11 +30,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
 public class HelpPageFragment extends Fragment 
 {
-    private static final String MYTAG = "XFlash HelpPageFragment";
+    // private static final String MYTAG = "XFlash HelpPageFragment";
    
     // properties for handling color theme transitions
     private static LinearLayout helpPageLayout;

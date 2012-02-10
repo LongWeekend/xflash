@@ -22,7 +22,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class SettingsWebFragment extends Fragment
 {
@@ -60,6 +59,7 @@ public class SettingsWebFragment extends Fragment
         // our loading ProgressDialog
         final ProgressDialog tempDialog = new ProgressDialog(getActivity());
         loadDialog = tempDialog;
+        loadDialog.setMessage(" Loading... ");
         
         // get the WebView and display the appropriate web page
         settingsWebDisplay = (WebView)settingsWebLayout.findViewById(R.id.settings_web_display);

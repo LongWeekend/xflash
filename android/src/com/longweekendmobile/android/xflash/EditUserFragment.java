@@ -20,11 +20,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
 public class EditUserFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash EditUserFragment";
+    // private static final String MYTAG = "XFlash EditUserFragment";
    
     // properties for handling color theme transitions
     private static LinearLayout editUserLayout;
@@ -56,13 +55,11 @@ public class EditUserFragment extends Fragment
         if( UserFragment.isNew )
         {
             editLabel.setText("New User");
-            Log.d(MYTAG,"Looking at a new one here");
         }
         else
         {
             editLabel.setText("Dummy User"); 
             myEdit.setText("Dummy User");
-            Log.d(MYTAG,"this one is not new");
         }
 
         XflashSettings.setupColorScheme(titleBar); 
@@ -76,7 +73,6 @@ public class EditUserFragment extends Fragment
                 myEdit.requestFocus();
                 InputMethodManager keyboard = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 keyboard.showSoftInput(myEdit,0);
-                Log.d(MYTAG,"JUST REQUESTED OPEN");
             }
         },300);
         

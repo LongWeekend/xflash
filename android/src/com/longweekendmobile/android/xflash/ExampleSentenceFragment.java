@@ -11,16 +11,14 @@ package com.longweekendmobile.android.xflash;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 public class ExampleSentenceFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash ExampleSentenceFragment";
+    // private static final String MYTAG = "XFlash ExampleSentenceFragment";
     
     // properties for handling color theme transitions
     private static RelativeLayout exampleSentenceLayout;

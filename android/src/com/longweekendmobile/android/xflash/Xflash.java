@@ -24,7 +24,11 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_switchReadingMode(View  )
 //  public void SettingsFragment_goDifficulty(View  )
 //  public void SettingsFragment_advanceColorScheme(View  )
+//  public void SettingsFragment_goUser(View  )
+//  public void SettingsFragment_goUpdate(View  )
 //  public void SettingsFragment_launchSettingsWeb(View  )
+//
+//  public void UpdateFragment_check(View v)
 //
 //  public void HelpFragment_goAskUs(View  )
 //  public static void HelpFragment_pullHelpTopic(int  )
@@ -217,6 +221,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.goUser(this);
     }
+    public void SettingsFragment_goUpdate(View v)
+    {
+        SettingsFragment.goUpdate(this);
+    }
     public void SettingsFragment_launchSettingsWeb(View v)
     {
         SettingsFragment.launchSettingsWeb(v,this);
@@ -231,6 +239,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         UserFragment.editUser(v,this);
     }
 
+    
+    public void UpdateFragment_check(View v)
+    {
+        UpdateFragment.check();
+    }
     
     public void SettingsWebFragment_reload(View v)
     {
@@ -420,6 +433,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                             else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_EDIT_USER )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("edit_user");
+                            }
+                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_UPDATE )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("update");
                             }
                             else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_WEB )
                             {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/update_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="Get Updates"
+            style="@style/heading_text" />
+
+    </RelativeLayout>
+
+    <LinearLayout style="@style/default_frame_block"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp" >
+
+        <!-- check for updates button -->
+        <Button android:id="@+id/update_checkbutton"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_yellow"
+            android:text="Check For Updates"
+            android:onClick="UpdateFragment_check"
+            style="@style/yellow_button" />
+
+        <TextView android:id="@+id/last_update"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF828282"
+            android:textSize="12sp"
+            android:text="Last update: February 10th, 2011" />
+
+        <!-- update list -->
+        <TextView 
+            style="@style/default_display_heading_layout"
+            android:layout_marginTop="20dp"
+            android:text="Installed" />
+
+         <RelativeLayout style="@style/default_display_block">
+            <TextView 
+                style="@style/default_display_left"
+                android:text="Awesomely Fast Search" />
+            <TextView 
+                style="@style/default_display_right"
+                android:text="" />
+        </RelativeLayout>
+        <LinearLayout style="@style/generic_divider" />
+        <RelativeLayout style="@style/default_display_block">
+            <TextView 
+                style="@style/default_display_left"
+                android:text="Japanese Flash Cards" />
+            <TextView 
+                style="@style/default_display_right"
+                android:text="" />
+        </RelativeLayout>
+        <LinearLayout style="@style/generic_divider" />
+        <RelativeLayout style="@style/default_display_block">
+            <TextView 
+                style="@style/default_display_left"
+                android:text="Fifty Thousand Examples v1.2" />
+            <TextView 
+                style="@style/default_display_right"
+                android:text="" />
+        </RelativeLayout>
+ 
+    </LinearLayout>
+
+</LinearLayout>
+
