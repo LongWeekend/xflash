@@ -9,19 +9,16 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.util.Log;
 
 public class DifficultyFragment extends Fragment
 {
@@ -98,14 +95,6 @@ public class DifficultyFragment extends Fragment
 
         return difficultyLayout;
     }
-
-    // reset the content view to the main settings screen
-    public static void goBackToSettings(Xflash inContext)
-    {
-        // reload the Difficulty fragment to the fragment tab manager
-        inContext.onScreenTransition("settings",Xflash.DIRECTION_CLOSE);
-    }
-    
 
     // sets the seek bars to the appropriate value depending on difficulty mode
     private void setSeekBars()

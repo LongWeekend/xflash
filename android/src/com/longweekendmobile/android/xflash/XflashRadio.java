@@ -13,7 +13,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.RadioButton;
 
 public class XflashRadio extends RadioButton
@@ -21,7 +20,6 @@ public class XflashRadio extends RadioButton
     // TODO - I have no idea how this will render on smaller screens
 
     private static final float LWE_RADIO_WIDTH = 70;
-    private static final float LWE_RADIO_HEIGHT = 34;
     
     private float xOffset;
     private String buttonText;

@@ -30,10 +30,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 public class HelpPageFragment extends Fragment 
 {
-    // private static final String MYTAG = "XFlash HelpPageFragment";
+    private static final String MYTAG = "XFlash HelpPageFragment";
    
     // properties for handling color theme transitions
     private static LinearLayout helpPageLayout;
@@ -62,11 +63,9 @@ public class HelpPageFragment extends Fragment
         // TODO - this is not loading when the tab is switched to
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
-//      Button tempButton1 = (Button)helpPageLayout.findViewById(R.id.help_backbutton);
-        Button tempButton2 = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
+        Button tempButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
  
-        // XflashSettings.setupColorScheme(titleBar,tempButton1,tempButton2); 
-        XflashSettings.setupColorScheme(titleBar,tempButton2); 
+        XflashSettings.setupColorScheme(titleBar,tempButton); 
         
         // Resources object necessary to pull help topics
         Resources res = getResources();
@@ -82,6 +81,12 @@ public class HelpPageFragment extends Fragment
         {
             topics = res.getStringArray(R.array.help_topics_chinese);
             helpFiles = res.getStringArray(R.array.help_files_chinese);
+        }
+
+        // if we're on the last topic, kill the 'next' button
+        if( helpTopic == ( topics.length - 1 ) )
+        {
+            tempButton.setVisibility(View.INVISIBLE);
         }
 
         // set the title bar
@@ -135,6 +140,13 @@ public class HelpPageFragment extends Fragment
 
             String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
             helpDisplay.loadUrl(localUrl);
+        }
+
+        // if we're on the last topic, kill the 'next' button
+        if( helpTopic == ( topics.length - 1 ) )
+        {
+            Button tempButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
+            tempButton.setVisibility(View.INVISIBLE);
         }
 
     }  // end HelpPageFragment_helpNext()

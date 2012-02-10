@@ -24,10 +24,7 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_switchReadingMode(View  )
 //  public void SettingsFragment_goDifficulty(View  )
 //  public void SettingsFragment_advanceColorScheme(View  )
-//  public void SettingsFragment_launchTwitter(View  )
-//  public void SettingsFragment_launchFacebook(View  )
-//
-//  public void DifficultyFragment_goBackToSettings(View  )
+//  public void SettingsFragment_launchSettingsWeb(View  )
 //
 //  public void HelpFragment_goAskUs(View  )
 //  public static void HelpFragment_pullHelpTopic(int  )
@@ -62,7 +59,7 @@ import android.widget.Toast;
 
 public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListener
 {
-    private static final String MYTAG = "XFlash main";
+    private static final String MYTAG = "XFlash XFlash";
 
     private static Xflash myContext;
  
@@ -141,8 +138,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         else 
         {
             // if we're at the root view
-            long now = SystemClock.uptimeMillis();
- 
+            
             // THIS MAY NOT BE NECESSARY?
 
             // fire a toast warning the user that another back press will exit
@@ -217,19 +213,28 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.advanceColorScheme();
     }
+    public void SettingsFragment_goUser(View v)
+    {
+        SettingsFragment.goUser(this);
+    }
     public void SettingsFragment_launchSettingsWeb(View v)
     {
         SettingsFragment.launchSettingsWeb(v,this);
     }
 
+    public void UserFragment_activateUser(View v)
+    {
+        UserFragment.activateUser();
+    }
+    public void UserFragment_editUser(View v)
+    {
+        UserFragment.editUser(v,this);
+    }
+
+    
     public void SettingsWebFragment_reload(View v)
     {
         SettingsWebFragment.reload();
-    }
-
-    public void DifficultyFragment_goBackToSettings(View v)
-    {
-        DifficultyFragment.goBackToSettings(this);
     }
 
     public void HelpFragment_goAskUs(View v)
@@ -408,7 +413,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                             {
                                 switchTab = XflashScreen.getTransitionFragment("difficulty");
                             }
-                            else
+                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_USER )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("user");
+                            }
+                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_EDIT_USER )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("edit_user");
+                            }
+                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_WEB )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("settings_web");
                             }
@@ -457,15 +470,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
         
-        // pull the fragment TabInfo if we are switching to an extra screen
-        TabInfo newTab = XflashScreen.getTransitionFragment(inTag);
-                
-        // if we are not transitioning to an extra fragment, load root from tab HashMap 
-        if( newTab == null )
-        {
-            newTab = Xflash.mapTabInfo.get(inTag);
-        }
-
         if( direction == DIRECTION_OPEN )
         {
             ft.setCustomAnimations(R.anim.slidein_right,R.anim.slideout_left);
@@ -473,6 +477,18 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         else if( direction == DIRECTION_CLOSE )
         {
             ft.setCustomAnimations(R.anim.slidein_left,R.anim.slideout_right);
+        }
+
+        // detach extra screens, if we're transitioning back to a tab root
+        XflashScreen.detachSelectExtras(ft,inTag);
+        
+        // pull the fragment TabInfo if we are switching to an extra screen
+        TabInfo newTab = XflashScreen.getTransitionFragment(inTag);
+                
+        // if we are not transitioning to an extra fragment, load root from tab HashMap 
+        if( newTab == null )
+        {
+            newTab = Xflash.mapTabInfo.get(inTag);
         }
 
     // FIRST WE NEED TO detach any currently attached fragment
@@ -486,8 +502,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
             }
         }
 
-        // detach extra screens, if we're transitioning back to a tab root
-        XflashScreen.detachSelectExtras(ft,inTag);
 
     
     // THEN WE NEED TO attach the new fragment of the tab we're moving to

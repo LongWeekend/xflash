@@ -6,15 +6,16 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/create_tag_heading"
-        style="@style/heading_bar">
+    <RelativeLayout android:id="@+id/edit_user_heading"
+        style="@style/heading_bar" >
 
         <!-- HEADING -->
-        <TextView
+        <TextView android:id="@+id/edit_user_label"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="Create Study Set" 
+            android:singleLine="true"
+            android:text=""
             style="@style/heading_text" />
 
     </RelativeLayout>
@@ -32,12 +33,12 @@
                 android:layout_height="wrap_content" 
                 android:text="Name your new study set!" />
 
-            <EditText android:id="@+id/create_tag_text"
+            <EditText android:id="@+id/edit_user_text"
                 android:layout_width="fill_parent" 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp" />
-     
-    </LinearLayout>       
+
+    </LinearLayout>
 
 </LinearLayout>
 

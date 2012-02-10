@@ -2,6 +2,7 @@
 <resources>
     <string name="splash_name">jFlash</string>
     <string name="app_name">Xflash</string>
+    <string name="main_name">Xflash</string>
     <string name="practice_name">PracticeActivity</string>
     <string name="tag_name">TagActivity</string>
     <string name="search_name">SearchActivity</string>

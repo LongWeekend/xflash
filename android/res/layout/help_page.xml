@@ -17,16 +17,6 @@
             android:singleLine="true"
             style="@style/heading_text" />
 
-        <!-- LEFT BUTTON -->
-<!--
-        <Button android:id="@+id/help_backbutton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:onClick="HelpPageFragment_goBackToHelp"
-            android:text="To Help"
-            style="@style/heading_button" />
--->
-                
         <!-- RIGHT BUTTON -->
         <Button android:id="@+id/help_nextbutton"
             android:layout_centerVertical="true"

@@ -45,50 +45,10 @@ public class ExampleSentenceFragment extends Fragment
         RelativeLayout exampleBack = (RelativeLayout)exampleSentenceLayout.findViewById(R.id.example_mainlayout);
         XflashSettings.setupPracticeBack(exampleBack);
         
-        // set the appropriate answer bar based on our settings
-        // setAnswerBar( XflashSettings.getStudyMode() ); 
-        setAnswerBar(PracticeFragment.PRACTICE_BAR_SHOW);
-
         return exampleSentenceLayout;
     }
   
 
-    // when the answer bar is clicked in practice mode
-    public static void reveal()
-    {
-        setAnswerBar(PracticeFragment.PRACTICE_BAR_SHOW);
-    }
-
-
-    // method called when user taps to reveal the answer
-    public static void setAnswerBar(int inMode)
-    {
-        // pull all necessary resources
-        ImageButton blankButton= (ImageButton)exampleSentenceLayout.findViewById(R.id.example_sentence_answerbutton);
-        RelativeLayout showFrame = (RelativeLayout)exampleSentenceLayout.findViewById(R.id.example_sentence_options_block);
-        RelativeLayout browseFrame = (RelativeLayout)exampleSentenceLayout.findViewById(R.id.es_browse_options_block);
-
-        // set what should be visible based on study mode
-        switch(inMode)
-        {
-            case PracticeFragment.PRACTICE_BAR_BLANK:    browseFrame.setVisibility(View.GONE);
-                                        showFrame.setVisibility(View.GONE);
-                                        blankButton.setVisibility(View.VISIBLE);
-                                        break;
-            case PracticeFragment.PRACTICE_BAR_BROWSE:   blankButton.setVisibility(View.GONE);
-                                        showFrame.setVisibility(View.GONE);
-                                        browseFrame.setVisibility(View.VISIBLE);
-                                        break;
-            case PracticeFragment.PRACTICE_BAR_SHOW:     blankButton.setVisibility(View.GONE);
-                                        browseFrame.setVisibility(View.GONE);
-                                        showFrame.setVisibility(View.VISIBLE);
-                                        break;
-            default:    Log.d(MYTAG,"Error in setAnswerBar()  :  invalid study mode: " + inMode);
-        } 
-
-    }  // end setAnswerBar()
-
-    
     // method called when any button in the options block is clicked
     public static void exampleClick(View v,Xflash inContext)
     {
@@ -96,16 +56,9 @@ public class ExampleSentenceFragment extends Fragment
         XflashScreen.popBackPractice();
  
         XflashScreen.setPracticeOverride();
+        PracticeFragment.clearAnswerBar();
         inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
     }
-
-
-    // method called when any button in the options block is clicked
-    public static void browseClick()
-    {
-        Log.d(MYTAG,"click in the browse block");
-    }
-
 
 
 }  // end PracticeFragment class declaration

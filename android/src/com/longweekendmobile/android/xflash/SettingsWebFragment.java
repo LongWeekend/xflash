@@ -11,9 +11,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static LinearLayout getSettingsLayout()
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,12 +20,10 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.util.Log;
 
 public class SettingsWebFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash SettingsWebFragment";
+    // private static final String MYTAG = "XFlash SettingsWebFragment";
     private static LinearLayout settingsWebLayout;
     private static WebView settingsWebDisplay;
  

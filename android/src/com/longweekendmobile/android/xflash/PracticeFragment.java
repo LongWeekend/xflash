@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class PracticeFragment extends Fragment
@@ -28,6 +29,9 @@ public class PracticeFragment extends Fragment
     public static final int PRACTICE_BAR_BLANK = 0;  // corresponds to XflashSettings.LWE_STUDYMODE_PRACTICE 
     public static final int PRACTICE_BAR_BROWSE = 1; // corresponds to XflashSettings.LWE_STUDYMODE_BROWSE
     public static final int PRACTICE_BAR_SHOW = 2;
+ 
+    private static int practiceBarStatus = -1;
+    private static boolean countBarVisible = true;
  
     /** Called when the activity is first created. */
     @Override
@@ -49,8 +53,32 @@ public class PracticeFragment extends Fragment
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
         XflashSettings.setupPracticeBack(practiceBack);
         
-        // set the appropriate answer bar based on our settings
-        setAnswerBar( XflashSettings.getStudyMode() ); 
+        if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
+        {
+            // if we're in practice mode and NOT already looking at a shown card
+            if( !countBarVisible )
+            {
+                LinearLayout countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
+                countBar.setVisibility(View.VISIBLE);
+                countBarVisible = true;
+            }
+
+            if( practiceBarStatus != PRACTICE_BAR_SHOW )
+            {
+                practiceBarStatus = PRACTICE_BAR_BLANK;
+            }
+        }
+        else
+        {
+            // if we are in browse mode
+            LinearLayout countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
+            countBar.setVisibility(View.INVISIBLE);
+            countBarVisible = false;
+
+            practiceBarStatus = PRACTICE_BAR_BROWSE;
+        } 
+    
+        setAnswerBar(practiceBarStatus); 
 
         return practiceLayout;
     }
@@ -59,11 +87,19 @@ public class PracticeFragment extends Fragment
     // when the answer bar is clicked in practice mode
     public static void reveal()
     {
-        setAnswerBar(PRACTICE_BAR_SHOW);
+        practiceBarStatus = PRACTICE_BAR_SHOW;
+        setAnswerBar(practiceBarStatus);
     }
 
 
-    // method called when user taps to reveal the answer
+    public static void clearAnswerBar()
+    {
+        practiceBarStatus = PRACTICE_BAR_BLANK;
+        
+    }
+
+    
+// method called when user taps to reveal the answer
     public static void setAnswerBar(int inMode)
     {
         // pull all necessary resources
@@ -99,6 +135,9 @@ public class PracticeFragment extends Fragment
     // method called when any button in the options block is clicked
     public static void practiceClick(View v,Xflash inContext)
     {
+        clearAnswerBar();
+        
+        // load the next practice view without adding to the back stack
         XflashScreen.setPracticeOverride();
         inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
     }

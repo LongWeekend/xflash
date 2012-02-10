@@ -9,16 +9,12 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()      @over
 //  public void onResume()      @over
 //  public void onPause()       @over
-//
-//  public void cancel(View v)
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 public class CreateTagActivity extends Activity
@@ -65,9 +61,8 @@ public class CreateTagActivity extends Activity
         {
             // load the title bar elements and pass them to the color manager
             RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
-            Button tempButton = (Button)findViewById(R.id.create_tag_cancelbutton);
             
-            XflashSettings.setupColorScheme(titleBar,tempButton);
+            XflashSettings.setupColorScheme(titleBar);
         }
     }
 
@@ -77,11 +72,6 @@ public class CreateTagActivity extends Activity
         super.onPause();
         
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
-    }
-
-    public void cancel(View v)
-    {
-        finish();
     }
 
 

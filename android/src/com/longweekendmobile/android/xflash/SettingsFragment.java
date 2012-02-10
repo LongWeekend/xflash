@@ -11,9 +11,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static LinearLayout getSettingsLayout()
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -182,6 +179,15 @@ public class SettingsFragment extends Fragment
         tempView.setText( XflashSettings.getColorSchemeName() );
 
     }  // end advanceColorScheme()
+
+    
+    // calls a new view activity for fragment tab layout 
+    public static void goUser(Xflash inContext)
+    {
+        // load the HelpPageFragment to the fragment tab manager
+        XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
+        inContext.onScreenTransition("user",Xflash.DIRECTION_OPEN);
+    }
 
     
     public static void launchSettingsWeb(View v,Xflash inContext)

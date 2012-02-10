@@ -44,13 +44,15 @@ public class XflashScreen
     private static final String MYTAG = "XFlash XflashScreen";
     
     private static final int LWE_PRACTICE_TAB = 0; 
-    private static final int LWE_TAG_TAB = 1; 
-    private static final int LWE_SEARCH_TAB = 2; 
+    // private static final int LWE_TAG_TAB = 1; 
+    // private static final int LWE_SEARCH_TAB = 2; 
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
 
     public static final int LWE_SETTINGS_DIFFICULTY = 0;
-    public static final int LWE_SETTINGS_WEB = 1;
+    public static final int LWE_SETTINGS_USER = 1;
+    public static final int LWE_SETTINGS_EDIT_USER = 2;
+    public static final int LWE_SETTINGS_WEB = 3;
 
     // properties for handling fragment view transitions
     private static int currentPracticeScreen = -1;
@@ -132,15 +134,15 @@ public class XflashScreen
             extraScreensOn[LWE_SETTINGS_TAB] = false;
             currentSettingsScreen = 0;
         }
-        else if( inTag == "difficulty" )
+        else if( ( inTag == "difficulty" ) || ( inTag == "user" ) || ( inTag == "settings_web" ) )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
             currentSettingsScreen = 1;
         }
-        else if( inTag == "settings_web" )
+        else if( inTag == "edit_user" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = true;
-            currentSettingsScreen = 1;
+            currentSettingsScreen = 2;
         }
         else if( inTag == "help" )
         {
@@ -152,7 +154,7 @@ public class XflashScreen
             extraScreensOn[LWE_HELP_TAB] = true;
             currentHelpScreen = 1;
         }
-
+    
     }  // end setScreenValues()
 
     
@@ -179,6 +181,30 @@ public class XflashScreen
                 ( extraFragments[LWE_SETTINGS_TAB].tag != "difficulty" ) )
             {    
                 extraFragments[LWE_SETTINGS_TAB] = new TabInfo("difficulty", DifficultyFragment.class, null);
+            }
+
+            return extraFragments[LWE_SETTINGS_TAB];
+        }
+        else if( inTag == "user" )
+        {
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "user" ) )
+            {    
+                extraFragments[LWE_SETTINGS_TAB] = new TabInfo("user", UserFragment.class, null);
+            }
+
+            return extraFragments[LWE_SETTINGS_TAB];
+        }
+        else if( inTag == "edit_user" )
+        {
+            // if we haven't instantiated our extra screen, or if we have 
+            // and it's the wrong one
+            if( ( extraFragments[LWE_SETTINGS_TAB] == null ) ||
+                ( extraFragments[LWE_SETTINGS_TAB].tag != "edit_user" ) )
+            {    
+                extraFragments[LWE_SETTINGS_TAB] = new TabInfo("edit_user", EditUserFragment.class, null);
             }
 
             return extraFragments[LWE_SETTINGS_TAB];
@@ -233,23 +259,39 @@ public class XflashScreen
         {
             if( extraFragments[LWE_PRACTICE_TAB].fragment != null )
             {
-                ft.detach(extraFragments[XflashScreen.LWE_PRACTICE_TAB].fragment);
+                ft.detach(extraFragments[LWE_PRACTICE_TAB].fragment);
                 extraScreensOn[LWE_PRACTICE_TAB] = false;
             }
         }
-        if( inTag == "settings" )
+        else if( inTag == "settings" ) 
         {
             if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
             {
-                ft.detach(extraFragments[XflashScreen.LWE_SETTINGS_TAB].fragment);
+                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
                 extraScreensOn[LWE_SETTINGS_TAB] = false;
+            }
+        }
+        else if( inTag == "user" && ( extraScreensOn[LWE_SETTINGS_TAB] == true ) )
+        {
+            if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
+            {
+                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
+                extraScreensOn[LWE_SETTINGS_TAB] = true;
+            }
+        }
+        else if( inTag == "edit_user" ) 
+        {
+            if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
+            {
+                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
+                extraScreensOn[LWE_SETTINGS_TAB] = true;
             }
         }
         else if( inTag == "help" )
         {
             if( extraFragments[LWE_HELP_TAB].fragment != null )
             {
-                ft.detach(extraFragments[XflashScreen.LWE_HELP_TAB].fragment);
+                ft.detach(extraFragments[LWE_HELP_TAB].fragment);
                 extraScreensOn[LWE_HELP_TAB] = false;
             }
         }
@@ -275,7 +317,14 @@ public class XflashScreen
         { 
             if( currentSettingsScreen > 0 )
             {
-                return "settings";
+                if( currentSettingsScreen == 1 )
+                {
+                    return "settings";
+                }
+                else
+                {
+                    return "user";
+                }
             }     
         }
         else if( currentTab == "help" )
@@ -300,7 +349,7 @@ public class XflashScreen
     
     public static int getCurrentSettingsScreen()
     {
-        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 1 ) )
+        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 2 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsScreen()");
             Log.d(MYTAG,"       currentSettingsScreen invalid:  " + currentSettingsScreen);
@@ -317,7 +366,7 @@ public class XflashScreen
  
     public static int getCurrentSettingsType()
     {
-        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 1 ) )
+        if( ( currentSettingsType < 0 ) || ( currentSettingsType > 3 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsType()");
             Log.d(MYTAG,"       currentSettingsType invalid:  " + currentSettingsType);
