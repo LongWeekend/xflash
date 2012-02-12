@@ -24,6 +24,7 @@ public class XflashSettings
     private static int difficultyMode = -1;
     private static int customStudyPool = -1;
     private static int customFrequency = -1;
+    private static int currentUser = -1;
 
     // COLOR SETTINGS PROPERTIES
     private static final int LWE_THEME_RED = 0;
@@ -89,6 +90,7 @@ public class XflashSettings
         difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_EASY);
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
+        currentUser = settings.getInt("currentUser",1);
     }
 
 
@@ -305,6 +307,31 @@ public class XflashSettings
         }
     }
    
+//  *** CURRENT USER SETTINGS ***
+
+    public static int getCurrentUser()
+    {
+        if( currentUser < 0 )
+        {
+            Log.d(MYTAG,"Error in getCurrentUser()  :  currentUser invalid:  " + currentUser);
+        }
+        
+        return currentUser;
+    }
+
+    public static void setCurrentUser(int inUser)
+    {
+        currentUser = inUser;
+        
+        // set the new reading mode in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("currentUser",currentUser);
+        editor.commit();
+    }
+
 //  *** READING MODE SETTINGS ***
 
     public static int getReadingMode()
@@ -343,7 +370,7 @@ public class XflashSettings
         }
     }
    
-//  *** READING MODE SETTINGS ***
+//  *** DIFFICULTY MODE SETTINGS ***
        
     public static int getDifficultyMode()
     {

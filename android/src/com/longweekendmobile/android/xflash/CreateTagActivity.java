@@ -34,10 +34,10 @@ public class CreateTagActivity extends Activity
         // if we're just starting up, force load of color
         localColor = -1;
 
-        // launch with the keyboard displayed
         myEdit = (EditText)findViewById(R.id.create_tag_text);
         myEdit.requestFocus();
 
+        // launch with the keyboard displayed
         myEdit.postDelayed( new Runnable() 
         {
             @Override

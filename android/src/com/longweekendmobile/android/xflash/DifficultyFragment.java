@@ -6,8 +6,9 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/5/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  private void setSeekBars()
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,13 +31,6 @@ public class DifficultyFragment extends Fragment
     private RadioGroup myGroup;
     private SeekBar studyPoolBar;
     private SeekBar frequencyBar;
-
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
 
 
     // see android.support.v4.app.Fragment#onCreateView()

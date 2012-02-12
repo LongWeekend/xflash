@@ -6,8 +6,15 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void reveal()
+//  public static void clearAnswerBar()
+//  public static void setAnswerBar(int  )
+//
+//  public static void practiceClick(View  ,Xflash  )
+//  public static void browseClick(View  ,Xflash  )
+//  public static void goRight(Xflash  )
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,13 +40,6 @@ public class PracticeFragment extends Fragment
     private static int practiceBarStatus = -1;
     private static boolean countBarVisible = true;
  
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -81,7 +81,8 @@ public class PracticeFragment extends Fragment
         setAnswerBar(practiceBarStatus); 
 
         return practiceLayout;
-    }
+
+    }  // end onCreateView()
   
 
     // when the answer bar is clicked in practice mode
@@ -99,7 +100,7 @@ public class PracticeFragment extends Fragment
     }
 
     
-// method called when user taps to reveal the answer
+    // method called when user taps to reveal the answer
     public static void setAnswerBar(int inMode)
     {
         // pull all necessary resources
@@ -163,7 +164,6 @@ public class PracticeFragment extends Fragment
         // load the ExampleSentenceFragment to the fragment tab manager
         inContext.onScreenTransition("example_sentence",Xflash.DIRECTION_OPEN);
     }
-
 
 
 }  // end PracticeFragment class declaration

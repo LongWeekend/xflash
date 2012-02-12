@@ -33,8 +33,7 @@
                 android:text="Name your new study set!" />
 
             <EditText android:id="@+id/create_tag_text"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content"
+                style="@style/default_edittext"
                 android:layout_marginTop="4dp" />
      
     </LinearLayout>       

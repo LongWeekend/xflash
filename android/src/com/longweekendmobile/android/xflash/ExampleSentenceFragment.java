@@ -6,8 +6,9 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/8/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void exampleClick(View  ,Xflash  )
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,13 +23,6 @@ public class ExampleSentenceFragment extends Fragment
     
     // properties for handling color theme transitions
     private static RelativeLayout exampleSentenceLayout;
-
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
 
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()

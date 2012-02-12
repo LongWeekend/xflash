@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block">
+
+    <TextView android:id="@+id/user_editbutton"
+        style="@style/default_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:onClick="UserFragment_editUser"
+        android:text="edit" />
+
+    <TextView android:id="@+id/user_label"
+        style="@style/default_display_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/user_editbutton"
+        android:layout_marginLeft="10dp"
+        android:clickable="true"
+        android:onClick="UserFragment_activateUser" />
+
+</RelativeLayout>
+

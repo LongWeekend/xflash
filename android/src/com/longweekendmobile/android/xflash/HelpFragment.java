@@ -6,11 +6,11 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static AlertDialog getDialog()
-//  public static void setDialog(AlertDialog  )
+//  public static void goAskUs(FragmentActivity  )
+//  public static void pullHelpTopic(int  ,Xflash  )
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -39,22 +39,15 @@ public class HelpFragment extends Fragment
  
     private static AlertDialog askDialog;
 
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-
-        // set our popup dialog instance to null
-        askDialog = null;
-    } 
-
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        // set our popup dialog instance to null
+        askDialog = null;
+        
         // inflate our layout for the Help fragment 
         helpLayout = (LinearLayout)inflater.inflate(R.layout.help, container, false);
 

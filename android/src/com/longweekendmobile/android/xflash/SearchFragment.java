@@ -6,7 +6,6 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
 import android.os.Bundle;
@@ -25,13 +24,6 @@ public class SearchFragment extends Fragment
     // properties for handling color theme transitions
     private LinearLayout searchLayout;
     
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    } 
-
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -48,7 +40,8 @@ public class SearchFragment extends Fragment
         XflashSettings.setupColorScheme(titleBar,tempButton);
         
         return searchLayout;
-    }
+
+    }  // end onCreateView()
 
 
 }  // end SearchFragment class declaration

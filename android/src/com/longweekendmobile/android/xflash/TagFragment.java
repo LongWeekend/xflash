@@ -6,8 +6,9 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void addTag(Context  )
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,13 +33,6 @@ public class TagFragment extends Fragment
  
     // properties for handling color theme transitions
     private LinearLayout tagLayout;
-
-    /** Called when the fragment is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
 
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()

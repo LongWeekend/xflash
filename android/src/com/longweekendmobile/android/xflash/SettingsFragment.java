@@ -6,10 +6,16 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/26/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static LinearLayout getSettingsLayout()
+//  public static void switchStudyMode()
+//  public static void switchStudyLanguage()
+//  public static void switchReadingMode()
+//  public static void goDifficulty(Xflash  )
+//  public static void advanceColorScheme()
+//  public static void goUser(Xflash  )
+//  public static void goUpdate(Xflash  )
+//  public static void launchSettingsWeb(View  ,Xflash  )
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +27,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.longweekendmobile.android.xflash.model.User;
+import com.longweekendmobile.android.xflash.model.UserPeer;
+
 public class SettingsFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SettingsFragment";
@@ -28,13 +37,6 @@ public class SettingsFragment extends Fragment
 
     public static boolean isTwitter = false;
     
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -66,10 +68,15 @@ public class SettingsFragment extends Fragment
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
         tempView.setText( XflashSettings.getReadingModeName() );
         
-        // and set the "Theme" label in our settings view
+        // set the "Theme" label in our settings view
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
-        
+       
+        // and set the current user label
+        User tempUser = UserPeer.getUserByPK( XflashSettings.getCurrentUser() );
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_activeuser_label);
+        tempView.setText( tempUser.getUserNickname() ); 
+     
         return settingsLayout;
 
     }  // end onCreateView()
@@ -212,7 +219,6 @@ public class SettingsFragment extends Fragment
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_WEB);
         inContext.onScreenTransition("settings_web",Xflash.DIRECTION_OPEN);
     }
-
 
 
 }  // end SettingsFragment class declaration

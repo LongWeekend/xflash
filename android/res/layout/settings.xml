@@ -97,8 +97,7 @@
                     style="@style/default_display_left"
                     android:text="Active User" />
                 <TextView android:id="@+id/settings_activeuser_label"
-                    style="@style/default_display_right"
-                    android:text="Dummy User" />
+                    style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block"

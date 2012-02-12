@@ -23,4 +23,10 @@
     <color name="button_yellow_strokecolor">#FF363404</color>
     <color name="button_yellow_startcolor_up">#FFE9EF3D</color>
     <color name="button_yellow_endcolor_up">#FF8F7900</color>
+    <color name="button_green_startcolor">#FFAFE8A2</color>
+    <color name="button_green_endcolor">#FF1FA21F</color>
+    <color name="button_green_strokecolor">#FF363404</color>
+    <color name="button_green_startcolor_up">#FF457338</color>
+    <color name="button_green_endcolor_up">#FF094603</color>
+    <color name="selected_row">#FF7C95A3</color>
 </resources>

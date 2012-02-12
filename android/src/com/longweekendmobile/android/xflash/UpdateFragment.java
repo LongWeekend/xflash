@@ -6,8 +6,9 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/5/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void check()
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,13 +28,6 @@ public class UpdateFragment extends Fragment
 
     public static boolean isNew = false;
 
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
 
     // see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -49,7 +43,8 @@ public class UpdateFragment extends Fragment
         XflashSettings.setupColorScheme(titleBar); 
 
         return updateLayout;
-    }
+
+    }  // end onCreateView()
 
 
     public static void check()

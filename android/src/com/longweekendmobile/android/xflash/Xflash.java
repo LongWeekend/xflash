@@ -133,12 +133,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
             }
 
         }
-        else if( currentTab.tag != "practice" )
-        {
-            // take them back to the opening screen before exiting
-            onTabChanged("practice"); 
-            myTabHost.setCurrentTabByTag("practice");
-        } 
         else 
         {
             // if we're at the root view
@@ -232,11 +226,20 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
     public void UserFragment_activateUser(View v)
     {
-        UserFragment.activateUser();
+        UserFragment.activateUser(v,this);
     }
     public void UserFragment_editUser(View v)
     {
         UserFragment.editUser(v,this);
+    }
+
+    public void EditUserFragment_select(View v)
+    {
+        EditUserFragment.select(this);
+    }
+    public void EditUserFragment_save(View v)
+    {
+        EditUserFragment.save(this);
     }
 
     
@@ -422,23 +425,25 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         {
                             // intercede and substitute the fragment TabInfo for where
                             // we really need to navigate to
-                            if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_DIFFICULTY )
+                            int tempSettingsType = XflashScreen.getCurrentSettingsType();
+
+                            if( tempSettingsType == XflashScreen.LWE_SETTINGS_DIFFICULTY )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("difficulty");
                             }
-                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_USER )
+                            else if( tempSettingsType == XflashScreen.LWE_SETTINGS_USER )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("user");
                             }
-                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_EDIT_USER )
+                            else if( tempSettingsType == XflashScreen.LWE_SETTINGS_EDIT_USER )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("edit_user");
                             }
-                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_UPDATE )
+                            else if( tempSettingsType == XflashScreen.LWE_SETTINGS_UPDATE )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("update");
                             }
-                            else if( XflashScreen.getCurrentSettingsType() == XflashScreen.LWE_SETTINGS_WEB )
+                            else if( tempSettingsType == XflashScreen.LWE_SETTINGS_WEB )
                             {
                                 switchTab = XflashScreen.getTransitionFragment("settings_web");
                             }

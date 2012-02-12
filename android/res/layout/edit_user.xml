@@ -23,6 +23,7 @@
     <LinearLayout
             style="@style/default_frame_block"
             android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp" >
@@ -34,11 +35,34 @@
                 android:text="Nickname:" />
 
             <EditText android:id="@+id/edit_user_text"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content"
+                style="@style/default_edittext"
                 android:layout_marginTop="4dp" />
 
+                
     </LinearLayout>
+            
+    <!-- the select/save button block -->
+    <LinearLayout 
+        style="@style/default_frame_block"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" >
+
+        <Button android:id="@+id/edituser_selectbutton"
+            style="@style/green_button"
+            android:background="@drawable/button_green"
+            android:text="Select User"
+            android:onClick="EditUserFragment_select"
+            android:layout_weight="1" />
+
+        <Button android:id="@+id/edituser_savebutton"
+            style="@style/green_button"
+            android:background="@drawable/button_green"
+            android:text="Save"
+            android:onClick="EditUserFragment_save"
+            android:layout_weight="1" />
+
+    </LinearLayout>  <!-- end button block -->
 
 </LinearLayout>
 

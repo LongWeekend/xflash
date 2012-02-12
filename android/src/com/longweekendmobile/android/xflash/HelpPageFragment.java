@@ -6,19 +6,11 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 1/28/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static LinearLayout getHelpPageLayout()
-//  public static WebView getHelpDisplay()
-//
-//  public static int getNumTopics()
-//  public static String getSingleTopic(int  )
-//  public static String getSingleFilename(int  )
-//
-//  public static int getHelpTopic()
 //  public static void setHelpTopic(int  )
-//  public static void incrementHelpTopic()
+//  public static void goBackToHelp(Xflash  )
+//  public static void helpNext()
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -43,13 +35,6 @@ public class HelpPageFragment extends Fragment
     private static String[] helpFiles;
     private static NoHorizontalWebView helpDisplay;
  
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
 
     // see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -97,8 +82,6 @@ public class HelpPageFragment extends Fragment
         helpDisplay.getSettings().setSupportZoom(false); 
         helpDisplay.setHorizontalScrollBarEnabled(false);
 
-        
-
         // set the html body
         String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
         helpDisplay.loadUrl(localUrl);
@@ -108,7 +91,8 @@ public class HelpPageFragment extends Fragment
         helpDisplay.setBackgroundColor(0x00000000);
         
         return helpPageLayout;
-    }
+
+    }  // end onCreateView()
 
 
     public static void setHelpTopic(int inTopic)

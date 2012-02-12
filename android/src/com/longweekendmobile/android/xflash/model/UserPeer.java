@@ -25,20 +25,12 @@ public class UserPeer
 {
     private static final String MYTAG = "XFlash UserPeer";
 
-    private static SQLiteDatabase tempDB;
-
-    // pull the context in the constructor, because we will
-    // need it for any given method
-    public UserPeer()
-    {
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
-
     // queries DB for all users returns an ArrayList of User objects
     public static ArrayList<User> getUsers()
     {
-        // users to return, and a temporary
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
+        // users to return, and a temporary for loading 
         ArrayList<User> userList = new ArrayList<User>();
         User tempUser;
     
@@ -81,10 +73,19 @@ public class UserPeer
         //      - or add a bunch of java code to format a date string locally to
         //      - allow us to use ContentValues?
 
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // make our new user, set the incoming info
         User tempUser = new User();
         tempUser.setUserNickname(inName);
-        tempUser.setAvatarImagePath(inPath);
+        if( inPath != null )
+        {
+            tempUser.setAvatarImagePath(inPath);
+        }
+        else
+        {
+            tempUser.setAvatarImagePath(User.DEFAULT_USER_AVATAR_PATH);
+        }
 
         String query = "INSERT INTO users (nickname,avatar_image_path,date_created) VALUES ('" + inName + "','" + inPath + "',date('now'))";
 
@@ -109,6 +110,8 @@ public class UserPeer
     // returns a user from database, selected by id
     public static User getUserByPK(int inId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String[] selectionArgs = new String[] { Integer.toString(inId) };
         String query = "SELECT * FROM users WHERE user_id = ?";
     

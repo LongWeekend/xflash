@@ -34,7 +34,7 @@ public class User
     // private static final String MYTAG = "XFlash User";
 
     private static final int kLWEUninitializedUserId = -1;
-    private static final String DEFAULT_USER_AVATAR_PATH  = "/avatars/default00.png";
+    public static final String DEFAULT_USER_AVATAR_PATH  = "/avatars/default00.png";
 
     private int userId;
     private String userNickname;

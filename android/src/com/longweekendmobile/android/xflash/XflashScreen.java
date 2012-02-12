@@ -74,6 +74,7 @@ public class XflashScreen
         currentPracticeScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
+        currentSettingsType = 0;
     
         overridePracticeCount = false;
         
