@@ -14,12 +14,12 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="Help"
+            android:text="@string/help_title"
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->
         <Button android:id="@+id/help_askusbutton"
-            android:text="Ask Us"
+            android:text="@string/help_askus_text"
             android:onClick="HelpFragment_goAskUs"
             android:layout_alignParentRight="true"
             style="@style/heading_button" />

@@ -15,7 +15,6 @@
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text=""
             style="@style/heading_text" />
 
     </RelativeLayout>
@@ -32,7 +31,7 @@
                 style="@style/default_normal_text"
                 android:layout_width="match_parent" 
                 android:layout_height="wrap_content" 
-                android:text="Nickname:" />
+                android:text="@string/edituser_nickname" />
 
             <EditText android:id="@+id/edit_user_text"
                 style="@style/default_edittext"
@@ -51,14 +50,14 @@
         <Button android:id="@+id/edituser_selectbutton"
             style="@style/green_button"
             android:background="@drawable/button_green"
-            android:text="Select User"
+            android:text="@string/edituser_selectbutton"
             android:onClick="EditUserFragment_select"
             android:layout_weight="1" />
 
         <Button android:id="@+id/edituser_savebutton"
             style="@style/green_button"
             android:background="@drawable/button_green"
-            android:text="Save"
+            android:text="@string/edituser_savebutton"
             android:onClick="EditUserFragment_save"
             android:layout_weight="1" />
 

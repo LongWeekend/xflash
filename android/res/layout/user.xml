@@ -15,7 +15,7 @@
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Choose User"
+            android:text="@string/user_title"
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->

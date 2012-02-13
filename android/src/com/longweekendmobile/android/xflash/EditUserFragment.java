@@ -66,7 +66,8 @@ public class EditUserFragment extends Fragment
         // set the fragment label based on whether we're adding or editing
         if( isNew )
         {
-            editLabel.setText("New User");
+            String tempTitle = getActivity().getResources().getString(R.string.new_user_title);
+            editLabel.setText(tempTitle);
             setButton.setVisibility(View.INVISIBLE);
         }
         else

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Get Updates"
+            android:text="@string/update_title"
             style="@style/heading_text" />
 
     </RelativeLayout>
@@ -28,7 +28,7 @@
         <Button android:id="@+id/update_checkbutton"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_yellow"
-            android:text="Check For Updates"
+            android:text="@string/update_checkbutton"
             android:onClick="UpdateFragment_check"
             style="@style/yellow_button" />
 
@@ -44,12 +44,12 @@
         <TextView 
             style="@style/default_display_heading_layout"
             android:layout_marginTop="20dp"
-            android:text="Installed" />
+            android:text="@string/update_install_block_title" />
 
          <RelativeLayout style="@style/default_display_block">
             <TextView 
                 style="@style/default_display_left"
-                android:text="Awesomely Fast Search" />
+                android:text="@string/update_awesomesearch" />
             <TextView 
                 style="@style/default_display_right"
                 android:text="" />
@@ -58,7 +58,7 @@
         <RelativeLayout style="@style/default_display_block">
             <TextView 
                 style="@style/default_display_left"
-                android:text="Japanese Flash Cards" />
+                android:text="@string/update_jflash_cards" />
             <TextView 
                 style="@style/default_display_right"
                 android:text="" />
@@ -67,7 +67,7 @@
         <RelativeLayout style="@style/default_display_block">
             <TextView 
                 style="@style/default_display_left"
-                android:text="Fifty Thousand Examples v1.2" />
+                android:text="@string/update_thousand_examples" />
             <TextView 
                 style="@style/default_display_right"
                 android:text="" />

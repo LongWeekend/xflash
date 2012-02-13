@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:onClick="HelpPageFragment_helpNext"
-            android:text="Next >"
+            android:text="@string/helppage_nextbutton"
             style="@style/heading_button" />
 
     </RelativeLayout>

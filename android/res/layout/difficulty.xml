@@ -15,7 +15,7 @@
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Change Difficulty"
+            android:text="@string/difficulty_title"
             style="@style/heading_text" />
 
     </RelativeLayout>
@@ -27,7 +27,7 @@
             <!-- the Backup block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Difficulty" />
+                android:text="@string/difficulty_radio_title" />
 
             <RadioGroup android:id="@+id/difficulty_group"
                 android:orientation="horizontal"
@@ -61,7 +61,7 @@
             <!-- the Backup block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Number of Cards in Study Pool" />
+                android:text="@string/difficulty_studypool_title" />
 
             <RelativeLayout style="@style/default_display_block"
                 android:padding="4dp" >
@@ -90,7 +90,7 @@
             <!-- the Backup block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Frequency of New Cards" />
+                android:text="@string/difficulty_frequency_title" />
 
             <RelativeLayout style="@style/default_display_block"
                 android:padding="4dp" >
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="More Often" />
+                    android:text="@string/difficulty_frequency_moreoften" />
                 <SeekBar android:id="@+id/difficulty_frequency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

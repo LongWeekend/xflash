@@ -11,46 +11,46 @@
         android:layout_height="wrap_content"
         android:textColor="#FFFFFFFF"
         android:textSize="24dp" 
-        android:text="GetSatisfaction.com"
+        android:text="@string/help_dialog_url"
         android:layout_marginBottom="16dp"
         android:gravity="center" />
 
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Do you have a question?"
+        android:text="@string/help_dialog_question"
         android:gravity="center" />
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A feature request?"
+        android:text="@string/help_dialog_feature"
         android:layout_marginBottom="20dp"
         android:gravity="center" />
     
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="It's best to make your voice heard on our support site, but we respond to email too!"
+        android:text="@string/help_dialog_comment"
         android:layout_marginBottom="16dp"
         android:gravity="center" />
 
     <Button android:id="@+id/sitebutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Visit Site"
+        android:text="@string/help_dialog_sitebutton"
         android:gravity="center" /> 
 
     <Button android:id="@+id/emailbutton" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send an Email"
+        android:text="@string/help_dialog_emailbutton"
         android:layout_marginBottom="16dp"
         android:gravity="center" /> 
     
     <Button android:id="@+id/closebutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Thanks"
+        android:text="@string/help_dialog_closebutton"
         android:gravity="center" /> 
 
 </LinearLayout> 

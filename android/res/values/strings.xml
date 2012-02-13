@@ -11,5 +11,56 @@
     <string name="help_name">HelpActivity</string>
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
-    <string name="acknowledgement_content">Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write an simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group\'s liscense. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo and Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.</string>
+    <string name="tag_title">Study Sets</string>
+    <string name="tag_backup_block_title">Backup Custom Sets</string>
+    <string name="tag_backup_now">Backup Now</string>
+    <string name="tag_restore_now">Restore Now</string>
+    <string name="create_tag_title">Create Study Set</string>
+    <string name="createtag_edit_caption">Name your new study set!</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_study_block_title">Studying</string>
+    <string name="settings_studyblock_studymode">Study Mode</string>
+    <string name="settings_studyblock_studylanguage">Study Language</string>
+    <string name="settings_studyblock_reading">Furigana / Reading</string>
+    <string name="settings_studyblock_difficulty">Difficulty</string>
+    <string name="settings_app_block_title">Application</string>
+    <string name="settings_appblock_theme">Theme</string>
+    <string name="settings_appblock_activeuser">Active User</string>
+    <string name="settings_appblock_updates">Updates</string>
+    <string name="settings_follow_block_title">Follow Us</string>
+    <string name="settings_followblock_twitter">  Follow us on Twitter</string>
+    <string name="settings_followblock_facebook">  Follow us on Facebook</string>
+    <string name="settings_acknowledgement_title">Acknowledgements</string>
+    <string name="settings_acknowledgement_content">Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write an simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group\'s liscense. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo and Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.</string>
+    <string name="difficulty_title">Change Difficulty</string>
+    <string name="difficulty_radio_title">Difficulty</string>
+    <string name="difficulty_studypool_title">Number of Cards in Study Pool</string>
+    <string name="difficulty_frequency_title">Frequency of New Cards</string>
+    <string name="difficulty_frequency_moreoften">More Often</string>
+    <string name="user_title">Choose User</string>
+    <string name="user_edit">edit</string>
+    <string name="new_user_title">New User</string>
+    <string name="edituser_nickname">Nickname:</string>
+    <string name="edituser_selectbutton">Select User</string>
+    <string name="edituser_savebutton">Save</string>
+    <string name="update_title">Get Updates</string>
+    <string name="update_checkbutton">Check For Updates</string>
+    <string name="update_install_block_title">Installed</string>
+    <string name="update_awesomesearch">Awesomely Fast Search</string>
+    <string name="update_jflash_cards">Japanese Flash Cards</string>
+    <string name="update_thousand_examples">Fifty Thousand Examples v1.2</string>
+    <string name="help_title">Help</string>
+    <string name="help_askus_text">Ask Us</string>
+    <string name="help_dialog_url">GetSatisfaction.com</string>
+    <string name="help_dialog_question">Do you have a question?</string>
+    <string name="help_dialog_feature">A feature request?</string>
+    <string name="help_dialog_comment">It\'s best to make your voice heard on our support site, but we respond to email too!</string>
+    <string name="help_dialog_sitebutton">Visit Site</string>
+    <string name="help_dialog_emailbutton">Send an Email</string>
+    <string name="help_dialog_closebutton">No Thanks</string>
+    <string name="helppage_nextbutton">Next ></string>
 </resources>
+
+
+
+
