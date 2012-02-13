@@ -44,7 +44,7 @@ public class XflashScreen
     private static final String MYTAG = "XFlash XflashScreen";
     
     private static final int LWE_PRACTICE_TAB = 0; 
-    // private static final int LWE_TAG_TAB = 1; 
+    // private static final int LWE_SETS_TAB = 1; 
     // private static final int LWE_SEARCH_TAB = 2; 
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
@@ -63,6 +63,7 @@ public class XflashScreen
 
     // properties for how many screens we are away from tab root screen
     private static int currentPracticeScreen = -1;
+    private static int currentSetsScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
     
@@ -72,7 +73,7 @@ public class XflashScreen
     private static boolean overridePracticeCount;
 
     // the index of this array corresponds to the five tabs 
-    // practice = 0, tag = 1, search = 2, settings = 3, help = 4
+    // practice = 0, sets = 1, search = 2, settings = 3, help = 4
     private static boolean[] extraScreensOn;
     private static TabInfo[] extraFragments;
 
@@ -81,8 +82,10 @@ public class XflashScreen
     {
         // start all tabs at root screen
         currentPracticeScreen = 0;
+        currentSetsScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
+        
         currentSettingsType = 0;
     
         overridePracticeCount = false;

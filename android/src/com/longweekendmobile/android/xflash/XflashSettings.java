@@ -208,7 +208,7 @@ public class XflashSettings
 
     // returns an int[4] of resource IDs for tag icons
     // in order: LWE_ICON_FOLDER , LWE_ICON_SPECIAL_FOLDER , LWE_ICON_TAG , LWE_ICON_STARRED_TAG
-    public static int[] getTagIcons()
+    public static int[] getIcons()
     {
         int[] tempIcons = null;
 

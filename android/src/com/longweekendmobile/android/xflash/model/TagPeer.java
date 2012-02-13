@@ -54,19 +54,11 @@ public class TagPeer
 
     // private static final int kRemoveLastCardOnATagError = 999;
 
-    private static SQLiteDatabase tempDB;
-
-    // pull the context in the constructor, because we will
-    // need it for any given method
-    public TagPeer()
-    {
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
-
     // recaches card counts for user tags
     public static void recacheCountsForUserTags()
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // get all editable (i.e. user-created) tags
         String query = "SELECT tag_id FROM tags WHERE editable = 1";
     
@@ -107,6 +99,8 @@ public class TagPeer
     // self explanatory
     public static void setCardCount(int newCount,Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String[] whereArgs = new String[] { Integer.toString( inTag.getId() ) };
          
         ContentValues updateValues = new ContentValues();
@@ -122,6 +116,8 @@ public class TagPeer
     // note this method DOES update the tag count cache on the tags table
     public static boolean cancelMembership(Card inCard,Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         Log.d(MYTAG,"ALERT - MISSING FUNCTIONALITY");
         Log.d(MYTAG,"      - IN METHOD TagPeer.cancelMembership()");
 
@@ -220,6 +216,8 @@ public class TagPeer
     // checked if a passed tagId/cardId are matched
     public static boolean card(Card inCard,Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String[] selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         String query = "SELECT * FROM card_tag_link WHERE card_id = ? AND tag_id = ?";
 
@@ -239,6 +237,8 @@ public class TagPeer
     // returns an ArrayList<int> of Tag objects this card is a member of
     public static ArrayList<Tag> faultedTagsForCard(Card inCard)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // ArrayList to return
         ArrayList<Tag> membershipList = new ArrayList<Tag>();
 
@@ -273,6 +273,8 @@ public class TagPeer
     // note that this method DOES NOT update the tag count cache on the tags table
     public static boolean subscribeCard(Card inCard,Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // quick return on bad input
         if( inCard.getCardId() <= 0 )
         {
@@ -309,6 +311,8 @@ public class TagPeer
     // gets system Tag objects as an ArrayList
     public static ArrayList<Tag> retrieveSysTagList()
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Tag> tempList;
         String query = "SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 0 ORDER BY utag_name ASC";
 
@@ -323,6 +327,8 @@ public class TagPeer
     // returns an ArrayList of Tag objects by Tag.editable = 1;
     public static ArrayList<Tag> retrieveUserTagList()
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Tag> tempList;
         String query = "SELECT *, UPPER(tag_name) as utag_name FROM tags WHERE editable = 1 OR tag_id = 0 ORDER BY utag_name ASC";
 
@@ -337,6 +343,8 @@ public class TagPeer
     // gets system Tag objects that have inCard in them as ArrayList<Tag>
     public static ArrayList<Tag> retrieveSysTagListContainingCard(Card inCard)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Tag> tempList;
         String[] selectionArgs = new String[] { Integer.toString( inCard.getCardId() ) }; 
         String query = "SELECT *, UPPER(t.tag_name) as utag_name FROM card_tag_link l,tags t WHERE l.card_id = ? AND l.tag_id = t.tag_id AND t.editable = 0 ORDER BY utag_name ASC";
@@ -352,6 +360,8 @@ public class TagPeer
     // returns an ArrayList<Tag> based on Group membership
     public static ArrayList<Tag> retrieveTagListByGroupId(int inId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Tag> tempList;
         String[] selectionArgs = new String[] { Integer.toString(inId) }; 
         String query = "SELECT * FROM tags t, group_tag_link l WHERE t.tag_id = l.tag_id AND l.group_id = ? ORDER BY t.tag_name ASC";
@@ -367,6 +377,8 @@ public class TagPeer
     // returns an ArrayList<Tag> containgin any Tag with a title LIKE inString
     public static ArrayList<Tag> retrieveTagListLike(String inString)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Tag> tempList;
         String[] selectionArgs = new String[] { "%" + inString + "%" };
         String query = "SELECT * FROM tags WHERE tag_name LIKE ? ORDER BY tag_name ASC";
@@ -382,6 +394,8 @@ public class TagPeer
     // gets a Tag by its Id
     public static Tag retrieveTagById(int inId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         Tag myTag;
         String[] selectionArgs = new String[] { Integer.toString(inId) };
         String query = "SELECT * FROM tags WHERE tag_id = ? LIMIT 1";
@@ -397,6 +411,8 @@ public class TagPeer
     // gets a Tag by its name
     public static Tag retrieveTagByName(String inName)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         Tag tempTag;
         String[] selectionArgs = new String[] { inName }; 
         String query = "SELECT * FROM tags WHERE tag_name LIKE ? LIMIT 1";
@@ -420,6 +436,8 @@ public class TagPeer
     // adds a new Tag to the database, returns the new Tag
     public static Tag createTagNamed(String inName,Group inGroup,String inDescription)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // insert the new Tag into 'tags'
         ContentValues insertValues = new ContentValues();
         insertValues.put("tag_name",inName);
@@ -459,6 +477,8 @@ public class TagPeer
     // deletes a Tag and all Card links
     public static boolean deleteTag(Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Integer> groupList = new ArrayList<Integer>();
 
         // First get owner id of a tag

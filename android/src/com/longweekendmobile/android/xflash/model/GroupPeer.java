@@ -26,16 +26,6 @@ public class GroupPeer
 {
     private static final String MYTAG = "XFlash GroupPeer";
 
-    private static SQLiteDatabase tempDB;
-
-    // takes a context on initialization because we have no 
-    // we use it in all methods
-    public GroupPeer()
-    {
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
-
     // I'm not actually entirely sure what this is for.  It pulls the...
     // uh... the top level group with owner = -1... I don't know what that means
     public static Group topLevelGroup()
@@ -53,12 +43,14 @@ public class GroupPeer
 
     // this will take a group id number and return an ArrayList containing
     // all groups whose owner_id field matches the incoming groupId 
-    public static ArrayList<Group> retrieveGroupsByOwner(int inGroupId)
+    public static ArrayList<Group> retrieveGroupsByOwner(int inUserId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Group> tmpArray = new ArrayList<Group>();
         Group tmpGroup = null;
         
-        String[] selectionArgs = new String[] { Integer.toString(inGroupId) };
+        String[] selectionArgs = new String[] { Integer.toString(inUserId) };
         String query = "SELECT * FROM groups WHERE owner_id = ? ORDER BY recommended DESC, group_name ASC";
 
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
@@ -94,6 +86,8 @@ public class GroupPeer
     // returns a single Group based on the incoming groupId
     public static Group retrieveGroupById(int inGroupId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         Group tmpGroup = new Group();
 
         String[] selectionArgs = new String[] { Integer.toString(inGroupId) };
@@ -117,6 +111,8 @@ public class GroupPeer
     // returns the groupId of the parent group of inTag
     public static int parentGroupIdOfTag(Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // TODO
         // why are we passing in the entire Tag object
         // if we just need its id?

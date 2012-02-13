@@ -6,7 +6,7 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/tag_heading"
+    <RelativeLayout android:id="@+id/group_heading"
         style="@style/heading_bar">
 
         <!-- HEADING -->
@@ -14,15 +14,15 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="@string/tag_title" 
+            android:text="@string/group_title" 
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->
-        <ImageButton android:id="@+id/tag_addbutton"
+        <ImageButton android:id="@+id/group_addbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
-            android:onClick="TagFragment_addTag"
+            android:onClick="GroupFragment_addToplevelTag"
             style="@style/heading_button" />
 
     </RelativeLayout>
@@ -35,17 +35,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <!-- main list of tags, populated dynamically -->
-            <LinearLayout android:id="@+id/main_tag_list"
+            <!-- main list of groups, populated dynamically -->
+            <LinearLayout android:id="@+id/main_group_list"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" >
+                android:layout_height="wrap_content" >
             
     
             </LinearLayout>  
 
             <!-- 'favorites' list -->
             <LinearLayout android:id="@+id/fav_tag_list"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
@@ -56,20 +57,21 @@
             <!-- the Backup block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="@string/tag_backup_block_title" />
+                android:text="@string/group_backup_block_title" />
 
             <RelativeLayout style="@style/default_display_block">
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="@string/tag_backup_now" />
+                    android:text="@string/group_backup_now" />
                 <TextView
                     style="@style/not_implemented" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block">
+            <RelativeLayout style="@style/default_display_block"
+                android:layout_marginBottom="10dp" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="@string/tag_restore_now" />
+                    android:text="@string/group_restore_now" />
                 <TextView
                     style="@style/not_implemented" />
             </RelativeLayout>
