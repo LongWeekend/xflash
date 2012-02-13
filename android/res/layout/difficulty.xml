@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
@@ -31,7 +31,7 @@
 
             <RadioGroup android:id="@+id/difficulty_group"
                 android:orientation="horizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center" >
 
@@ -78,7 +78,7 @@
                     android:layout_alignParentRight="true"
                     android:text="50" />
                 <SeekBar android:id="@+id/difficulty_studypool"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/difficulty_lower"
                     android:layout_toLeftOf="@id/difficulty_upper"
@@ -101,7 +101,7 @@
                     android:layout_alignParentRight="true"
                     android:text="More Often" />
                 <SeekBar android:id="@+id/difficulty_frequency"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/more_often"
                     android:paddingLeft="8dp"

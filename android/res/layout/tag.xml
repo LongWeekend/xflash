@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
@@ -32,12 +32,12 @@
         <!-- single child of scroll view -->
         <LinearLayout 
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <!-- main list of tags, populated dynamically -->
             <LinearLayout android:id="@+id/main_tag_list"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
             
@@ -46,7 +46,7 @@
 
             <!-- 'favorites' list -->
             <LinearLayout android:id="@+id/fav_tag_list"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
             
