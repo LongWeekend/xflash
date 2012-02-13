@@ -33,8 +33,6 @@ public class UserFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash UserFragment";
    
-    // the whole screen view
-    private static LinearLayout userLayout;
     // the view containing users
     private static LinearLayout userListLayout;
 
@@ -48,7 +46,7 @@ public class UserFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        userLayout = (LinearLayout)inflater.inflate(R.layout.user, container, false);
+        LinearLayout userLayout = (LinearLayout)inflater.inflate(R.layout.user, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)userLayout.findViewById(R.id.user_heading);

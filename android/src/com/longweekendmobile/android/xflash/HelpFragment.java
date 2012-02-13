@@ -35,8 +35,6 @@ public class HelpFragment extends Fragment
     // private static final String MYTAG = "XFlash HelpFragment";
     
     // properties for handling color theme transition
-    private LinearLayout helpLayout;
- 
     private static AlertDialog askDialog;
 
 
@@ -49,7 +47,7 @@ public class HelpFragment extends Fragment
         askDialog = null;
         
         // inflate our layout for the Help fragment 
-        helpLayout = (LinearLayout)inflater.inflate(R.layout.help, container, false);
+        LinearLayout helpLayout = (LinearLayout)inflater.inflate(R.layout.help, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);

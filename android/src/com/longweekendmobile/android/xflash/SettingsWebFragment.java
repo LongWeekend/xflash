@@ -25,7 +25,7 @@ import android.widget.RelativeLayout;
 public class SettingsWebFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SettingsWebFragment";
-    private static LinearLayout settingsWebLayout;
+    
     private static WebView settingsWebDisplay;
     private static ProgressDialog loadDialog;
  
@@ -36,7 +36,7 @@ public class SettingsWebFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the Settings activity
-        settingsWebLayout = (LinearLayout)inflater.inflate(R.layout.settings_web, container, false);
+        LinearLayout settingsWebLayout = (LinearLayout)inflater.inflate(R.layout.settings_web, container, false);
 
         // set the title bar to the current color scheme
         // this Activity does not need the onResume check present in

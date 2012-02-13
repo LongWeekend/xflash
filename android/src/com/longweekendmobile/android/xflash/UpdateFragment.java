@@ -23,9 +23,6 @@ public class UpdateFragment extends Fragment
 {
     private static final String MYTAG = "XFlash UpdateFragment";
    
-    // properties for handling color theme transitions
-    private static LinearLayout updateLayout;
-
     public static boolean isNew = false;
 
 
@@ -35,7 +32,7 @@ public class UpdateFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        updateLayout = (LinearLayout)inflater.inflate(R.layout.update, container, false);
+        LinearLayout updateLayout = (LinearLayout)inflater.inflate(R.layout.update, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)updateLayout.findViewById(R.id.update_heading);

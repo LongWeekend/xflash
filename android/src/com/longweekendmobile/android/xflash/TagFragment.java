@@ -27,12 +27,11 @@ public class TagFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash TagFragment";
    
+    private LinearLayout tagLayout;
+    
     // an array of drawable IDs for the icons, populated 
     // dynamically based on the current color scheme
     private int tagIcons[];
- 
-    // properties for handling color theme transitions
-    private LinearLayout tagLayout;
 
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()

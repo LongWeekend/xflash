@@ -25,9 +25,6 @@ public class DifficultyFragment extends Fragment
 {
     private static final String MYTAG = "XFlash DifficultyFragment";
    
-    // properties for handling color theme transitions
-    private static LinearLayout difficultyLayout;
-
     private RadioGroup myGroup;
     private SeekBar studyPoolBar;
     private SeekBar frequencyBar;
@@ -39,7 +36,7 @@ public class DifficultyFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        difficultyLayout = (LinearLayout)inflater.inflate(R.layout.difficulty, container, false);
+        LinearLayout difficultyLayout = (LinearLayout)inflater.inflate(R.layout.difficulty, container, false);
 
         // set the seek bars so we can change their values
         studyPoolBar = (SeekBar)difficultyLayout.findViewById(R.id.difficulty_studypool);

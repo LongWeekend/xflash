@@ -20,9 +20,6 @@ import android.widget.RelativeLayout;
 public class SearchFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SearchFragment";
-
-    // properties for handling color theme transitions
-    private LinearLayout searchLayout;
     
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
@@ -31,7 +28,7 @@ public class SearchFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the Search activity
-        searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
+        LinearLayout searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);

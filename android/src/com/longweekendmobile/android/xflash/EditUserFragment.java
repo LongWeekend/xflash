@@ -34,8 +34,6 @@ public class EditUserFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash EditUserFragment";
    
-    private static LinearLayout editUserLayout;
-    
     private static boolean isNew;
     private static EditText myEdit;
     private Button saveButton;
@@ -52,7 +50,7 @@ public class EditUserFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        editUserLayout = (LinearLayout)inflater.inflate(R.layout.edit_user, container, false);
+        LinearLayout editUserLayout = (LinearLayout)inflater.inflate(R.layout.edit_user, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)editUserLayout.findViewById(R.id.edit_user_heading);
