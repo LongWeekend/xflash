@@ -106,7 +106,7 @@
                     android:layout_toLeftOf="@id/more_often"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:max="4" />
+                    android:max="3" />
             </RelativeLayout>
 
     </LinearLayout>

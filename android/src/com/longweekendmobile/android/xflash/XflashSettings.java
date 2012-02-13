@@ -30,11 +30,18 @@ public class XflashSettings
     private static final int LWE_THEME_RED = 0;
     private static final int LWE_THEME_BLUE = 1;
     private static final int LWE_THEME_TAME = 2;
+   
+    // NAVIGATION VALUES FOR SCREENS
+    private static final int ROOT_SCREEN = 0;
+    private static final int MAX_PRACTICE_SCREEN = 1;
+    private static final int MAX_SETTINGS_SCREEN = 2;
+    private static final int MAX_HELP_SCREEN = 1;
     
+ 
     public static final int LWE_ICON_FOLDER = 0;
     public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
-    public static final int LWE_ICON_TAG= 2;
-    public static final int LWE_ICON_STARRED_TAG= 3;
+    public static final int LWE_ICON_TAG = 2;
+    public static final int LWE_ICON_STARRED_TAG = 3;
 
     // arrays of resource IDs for use in setupScheme()
     // they are loaded such that their index corresponds to the appropriate
@@ -67,13 +74,16 @@ public class XflashSettings
     public static final int LWE_DIFFICULTY_HARD = 2;
     public static final int LWE_DIFFICULTY_CUSTOM = 3;
 
+    private static final int LWE_STUDYPOOL_MIN = 5;
     public static final int LWE_STUDYPOOL_EASY = 15;
     public static final int LWE_STUDYPOOL_MEDIUM = 25;
     public static final int LWE_STUDYPOOL_HARD = 35;
+    private static final int LWE_STUDYPOOL_MAX = 50;
 
     public static final int LWE_FREQUENCY_EASY = 0;
     public static final int LWE_FREQUENCY_MEDIUM = 1;
     public static final int LWE_FREQUENCY_HARD = 2;
+    public static final int LWE_FREQUENCY_MAX = 3;
 
     // load all settings from Preferences on start
     public static void load()
@@ -98,11 +108,6 @@ public class XflashSettings
 
     public static int getColorScheme()
     {
-        if( ( colorScheme < 0 ) || ( colorScheme > 2 ) )
-        {
-            Log.d(MYTAG,"Error in getColorScheme()  :  colorScheme invalid:  " + colorScheme); 
-        }
-    
         return colorScheme;
     }
 
@@ -110,6 +115,12 @@ public class XflashSettings
     // sets the color scheme and saves for persistence
     public static void setColorScheme(int inColor)
     {
+        // if the passed value is out of range
+        if( ( colorScheme < LWE_THEME_RED ) || ( colorScheme > LWE_THEME_TAME ) )
+        {
+            throwBadValue("setColorScheme",inColor);
+        }
+    
         colorScheme = inColor;
         
         // set the new color in the Preferences
@@ -180,6 +191,7 @@ public class XflashSettings
                                     inArray[2].setButtonDrawable(R.drawable.radio_tame_middle_flip);
                                     inArray[3].setButtonDrawable(R.drawable.radio_tame_right_flip);
                                     break;
+            default:                break;
         }
 
     }  // end setRadioColors()
@@ -234,11 +246,6 @@ public class XflashSettings
 
     public static int getStudyMode()
     {
-        if( ( studyMode < 0 ) || ( studyMode > 1 ) )
-        {
-            Log.d(MYTAG,"Error in getStudyMode()  :  studyMode invalid:  " + studyMode);
-        }
-    
         return studyMode;
     }
 
@@ -246,6 +253,11 @@ public class XflashSettings
     // sets the color scheme and saves for persistence
     public static void setStudyMode(int inMode)
     {
+        if( ( studyMode != LWE_STUDYMODE_PRACTICE ) && ( studyMode != LWE_STUDYMODE_BROWSE ) )
+        {
+            throwBadValue("setStudyMode",inMode);
+        }
+    
         studyMode = inMode;
         
         // set the new study mode in the Preferences
@@ -274,16 +286,17 @@ public class XflashSettings
 
     public static int getStudyLanguage()
     {
-        if( ( studyLanguage < 0 ) || ( studyLanguage > 1 ) )
-        {
-            Log.d(MYTAG,"Error in getStudyLanguage()  :  studyLanguage invalid:  " + studyLanguage);
-        }
-
         return studyLanguage;
     }
 
     public static void setStudyLanguage(int inMode)
     {
+        if( ( studyLanguage != LWE_STUDYLANGUAGE_JAPANESE ) &&
+            ( studyLanguage != LWE_STUDYLANGUAGE_ENGLISH ) )
+        {
+            throwBadValue("setStudyLanguage",inMode);
+        }
+
         studyLanguage = inMode;
         
         // set the new study language in the Preferences
@@ -309,11 +322,11 @@ public class XflashSettings
    
 //  *** CURRENT USER SETTINGS ***
 
-    public static int getCurrentUser()
+    public static int getCurrentUserId()
     {
         if( currentUser < 0 )
         {
-            Log.d(MYTAG,"Error in getCurrentUser()  :  currentUser invalid:  " + currentUser);
+            Log.d(MYTAG,"Error in getCurrentUserId()  :  currentUser invalid:  " + currentUser);
         }
         
         return currentUser;
@@ -336,16 +349,16 @@ public class XflashSettings
 
     public static int getReadingMode()
     {
-        if( ( readingMode < 0 ) || ( readingMode > 2 ) )
-        {
-            Log.d(MYTAG,"Error in getReadingMode()  :  readingMode invalid:  " + readingMode);
-        }
-        
         return readingMode;
     }
 
     public static void setReadingMode(int inMode)
     {
+        if( ( readingMode < LWE_READINGMODE_BOTH ) || ( readingMode > LWE_READINGMODE_KANA ) )
+        {
+            throwBadValue("setReadingMode",inMode);
+        }
+        
         readingMode = inMode;
         
         // set the new reading mode in the Preferences
@@ -374,17 +387,17 @@ public class XflashSettings
        
     public static int getDifficultyMode()
     {
-        if( ( difficultyMode < 0 ) || ( difficultyMode > 3 ) )
-        {
-            Log.d(MYTAG,"Error in getDifficultyMode()  :  difficultyMode invalid:  " + difficultyMode);
-        }
-        
         return difficultyMode;
     }
 
     // sets the difficulty and saves for persistence
     public static void setDifficultyMode(int inMode)
     {
+        if( ( difficultyMode < LWE_DIFFICULTY_EASY ) || ( difficultyMode > LWE_DIFFICULTY_CUSTOM ) )
+        {
+            throwBadValue("setDifficultyMode",inMode);
+        }
+        
         difficultyMode = inMode;
         
         // set the new difficulty in the Preferences
@@ -398,17 +411,17 @@ public class XflashSettings
 
     public static int getCustomStudyPool()
     {
-        if( ( customStudyPool < 0 ) || ( customStudyPool > 100 ) )
-        {
-            Log.d(MYTAG,"Error in getCustomStudyPool()  :  customStudyPool:  " + customStudyPool);
-        }
-        
         return customStudyPool;
     }
 
     // sets the custom study pool seek value and saves for persistence
     public static void setCustomStudyPool(int inMode)
     {
+        if( ( customStudyPool < LWE_STUDYPOOL_MIN ) || ( customStudyPool > LWE_STUDYPOOL_MAX ) )
+        {
+            throwBadValue("setCustomStudyPool",inMode);
+        }
+        
         customStudyPool = inMode;
         
         // set the new custom study pool seek value in the Preferences
@@ -422,18 +435,18 @@ public class XflashSettings
     
     public static int getCustomFrequency()
     {
-        if( ( customFrequency < 0 ) || ( customFrequency > 100 ) )
-        {
-            Log.d(MYTAG,"Error in getCustomFrequency()  :  customFrequency:  " + customFrequency);
-        }
-        
         return customFrequency;
     }
 
     // sets the custom card frequency and saves for persistence
-    public static void setCustomFrequency(int inMode)
+    public static void setCustomFrequency(int inFrequency)
     {
-        customFrequency = inMode;
+        if( ( customFrequency < LWE_FREQUENCY_EASY ) || ( customFrequency > LWE_FREQUENCY_MAX ) )
+        {
+            throwBadValue("setCustomFrequency",inFrequency);
+        }
+
+        customFrequency = inFrequency;
         
         // set the new color in the Preferences
         XFApplication tempInstance = XFApplication.getInstance();
@@ -442,6 +455,14 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("customFrequency",customFrequency);
         editor.commit();
+    }
+
+
+    public static void throwBadValue(String method,int value)
+    {
+        String error = "invalid value passed to XflashSettings." + method + "(" + value + ")";
+        
+        throw new RuntimeException(error);    
     }
 
 }  // end XflashSettings class declaration

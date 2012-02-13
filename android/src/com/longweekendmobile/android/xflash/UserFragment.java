@@ -60,7 +60,7 @@ public class UserFragment extends Fragment
         userListLayout = (LinearLayout)userLayout.findViewById(R.id.user_list);
        
         int numUsers = userList.size();
-        int tempCurrentUser = XflashSettings.getCurrentUser();
+        int tempCurrentUser = XflashSettings.getCurrentUserId();
 
         // add the layout for each user
         for(int i = 0; i < numUsers; i++)

@@ -73,7 +73,7 @@ public class SettingsFragment extends Fragment
         tempView.setText( XflashSettings.getColorSchemeName() );
        
         // and set the current user label
-        User tempUser = UserPeer.getUserByPK( XflashSettings.getCurrentUser() );
+        User tempUser = UserPeer.getUserByPK( XflashSettings.getCurrentUserId() );
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_activeuser_label);
         tempView.setText( tempUser.getUserNickname() ); 
      
