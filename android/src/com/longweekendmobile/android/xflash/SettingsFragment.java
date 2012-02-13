@@ -154,7 +154,7 @@ public class SettingsFragment extends Fragment
     {
         // load the HelpPageFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_DIFFICULTY);
-        inContext.onScreenTransition("difficulty",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("difficulty",XflashScreen.DIRECTION_OPEN);
     }
 
     
@@ -193,7 +193,7 @@ public class SettingsFragment extends Fragment
     {
         // load the UserFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
-        inContext.onScreenTransition("user",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("user",XflashScreen.DIRECTION_OPEN);
     }
 
    
@@ -201,7 +201,7 @@ public class SettingsFragment extends Fragment
     {
         // load the UpdateFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_UPDATE);
-        inContext.onScreenTransition("update",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("update",XflashScreen.DIRECTION_OPEN);
     }
 
  
@@ -217,7 +217,7 @@ public class SettingsFragment extends Fragment
         }
 
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_WEB);
-        inContext.onScreenTransition("settings_web",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("settings_web",XflashScreen.DIRECTION_OPEN);
     }
 
 

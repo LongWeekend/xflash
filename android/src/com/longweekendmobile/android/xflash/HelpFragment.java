@@ -202,7 +202,7 @@ public class HelpFragment extends Fragment
         HelpPageFragment.setHelpTopic(inId);
 
         // load the HelpPageFragment to the fragment tab manager
-        inContext.onScreenTransition("help_page",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("help_page",XflashScreen.DIRECTION_OPEN);
     }
 
 

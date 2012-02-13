@@ -126,7 +126,7 @@ public class UserFragment extends Fragment
             {
                 // set the new user and return to settings
                 XflashSettings.setCurrentUser(switchUser);
-                inContext.onScreenTransition("settings",Xflash.DIRECTION_CLOSE);
+                inContext.onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
        });
         
@@ -154,7 +154,7 @@ public class UserFragment extends Fragment
         } 
 
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_EDIT_USER);
-        inContext.onScreenTransition("edit_user",Xflash.DIRECTION_OPEN); 
+        inContext.onScreenTransition("edit_user",XflashScreen.DIRECTION_OPEN); 
     }
 
 

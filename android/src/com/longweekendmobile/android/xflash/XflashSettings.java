@@ -17,6 +17,7 @@ public class XflashSettings
 {
     private static final String MYTAG = "XFlash XflashSettings";
 
+    // properties for global app settings
     private static int colorScheme = -1;
     private static int studyMode = -1;
     private static int studyLanguage = -1;
@@ -31,13 +32,6 @@ public class XflashSettings
     private static final int LWE_THEME_BLUE = 1;
     private static final int LWE_THEME_TAME = 2;
    
-    // NAVIGATION VALUES FOR SCREENS
-    private static final int ROOT_SCREEN = 0;
-    private static final int MAX_PRACTICE_SCREEN = 1;
-    private static final int MAX_SETTINGS_SCREEN = 2;
-    private static final int MAX_HELP_SCREEN = 1;
-    
- 
     public static final int LWE_ICON_FOLDER = 0;
     public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
     public static final int LWE_ICON_TAG = 2;
@@ -53,7 +47,6 @@ public class XflashSettings
                                                R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                                  R.drawable.button_tame };
-
 
     // STUDY MODE PROPERTIES
     public static final int LWE_STUDYMODE_PRACTICE = 0;
@@ -85,6 +78,8 @@ public class XflashSettings
     public static final int LWE_FREQUENCY_HARD = 2;
     public static final int LWE_FREQUENCY_MAX = 3;
 
+    public static final int LWE_DEFAULT_USER = 1;
+    
     // load all settings from Preferences on start
     public static void load()
     {
@@ -100,7 +95,7 @@ public class XflashSettings
         difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_EASY);
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
-        currentUser = settings.getInt("currentUser",1);
+        currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
     }
 
 
@@ -334,6 +329,11 @@ public class XflashSettings
 
     public static void setCurrentUser(int inUser)
     {
+        if( inUser < 0 )
+        {
+            throwBadValue("setCurrentUser",inUser);
+        }
+
         currentUser = inUser;
         
         // set the new reading mode in the Preferences
@@ -458,6 +458,8 @@ public class XflashSettings
     }
 
 
+    // method to throw an exception when attempting to set any of the
+    // settings to an invalid value
     public static void throwBadValue(String method,int value)
     {
         String error = "invalid value passed to XflashSettings." + method + "(" + value + ")";

@@ -140,7 +140,7 @@ public class PracticeFragment extends Fragment
         
         // load the next practice view without adding to the back stack
         XflashScreen.setPracticeOverride();
-        inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
 
@@ -149,10 +149,10 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_last:     inContext.onScreenTransition("practice",Xflash.DIRECTION_CLOSE);
+            case R.id.browseblock_last:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
                                             break;
             case R.id.browseblock_actions:  break;
-            case R.id.browseblock_next:     inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
+            case R.id.browseblock_next:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
                                             break;  
         } 
     }
@@ -162,7 +162,7 @@ public class PracticeFragment extends Fragment
     public static void goRight(Xflash inContext)
     {
         // load the ExampleSentenceFragment to the fragment tab manager
-        inContext.onScreenTransition("example_sentence",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 
 

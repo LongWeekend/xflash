@@ -151,7 +151,7 @@ public class EditUserFragment extends Fragment
 
         // return to UserFragment
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
-        inContext.onScreenTransition("user",Xflash.DIRECTION_CLOSE);
+        inContext.onScreenTransition("user",XflashScreen.DIRECTION_CLOSE);
 
     }  // end save()
 

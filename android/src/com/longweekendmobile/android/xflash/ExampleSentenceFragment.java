@@ -49,7 +49,7 @@ public class ExampleSentenceFragment extends Fragment
  
         XflashScreen.setPracticeOverride();
         PracticeFragment.clearAnswerBar();
-        inContext.onScreenTransition("practice",Xflash.DIRECTION_OPEN);
+        inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
 

@@ -72,10 +72,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo currentTab = null;
 
-    public static final int DIRECTION_CLOSE = 0;
-    public static final int DIRECTION_OPEN = 1;
-    public static final int DIRECTION_NULL = -1;
-
     private static boolean exitOnce;   
     private static long exitCount;
 
@@ -125,11 +121,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         {
             if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
             {
-                onScreenTransition(newTabTag,DIRECTION_OPEN); 
+                onScreenTransition(newTabTag,XflashScreen.DIRECTION_OPEN); 
             }
             else
             {
-                onScreenTransition(newTabTag,DIRECTION_CLOSE); 
+                onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
             }
 
         }
@@ -465,7 +461,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     else
                     {
                         ft.attach(switchTab.fragment);
-                        XflashScreen.setScreenValues(switchTab.tag,DIRECTION_NULL);
+                        XflashScreen.setScreenValues(switchTab.tag,XflashScreen.DIRECTION_NULL);
                     }
                     
                 }  // end else -- from:   if( newTab.fragment == null )
@@ -492,11 +488,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
         
-        if( direction == DIRECTION_OPEN )
+        if( direction == XflashScreen.DIRECTION_OPEN )
         {
             ft.setCustomAnimations(R.anim.slidein_right,R.anim.slideout_left);
         }
-        else if( direction == DIRECTION_CLOSE )
+        else if( direction == XflashScreen.DIRECTION_CLOSE )
         {
             ft.setCustomAnimations(R.anim.slidein_left,R.anim.slideout_right);
         }

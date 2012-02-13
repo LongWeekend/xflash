@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  PERSONAL NOTE: it would probably be more portable, more
 //      conventional, and generally better design if this class 
 //      were built on ArrayList objects, and coordinated to
-//      operate on dynamic number of tabs, with a dynamic
+//      operate on dynamic number of tabs, with a dynamic number
 //      of sub-screens, recognized by dynamically set name tags.
 //
 //      however, in switching to using Fragments we are now 
@@ -55,10 +55,18 @@ public class XflashScreen
     public static final int LWE_SETTINGS_UPDATE = 3;
     public static final int LWE_SETTINGS_WEB = 4;
 
-    // properties for handling fragment view transitions
+    // properties for screen transitions
+    public static final int LWE_TAB_ROOT_SCREEN = 0;
+    public static final int DIRECTION_CLOSE = 0;
+    public static final int DIRECTION_OPEN = 1;
+    public static final int DIRECTION_NULL = -1;
+
+    // properties for how many screens we are away from tab root screen
     private static int currentPracticeScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
+    
+    // properties for keeping track of the currently active screen
     private static int currentSettingsType = -1;
 
     private static boolean overridePracticeCount;
@@ -71,6 +79,7 @@ public class XflashScreen
     // set all fragment page values to zero when starting app
     public static void fireUpScreenManager()
     {
+        // start all tabs at root screen
         currentPracticeScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
@@ -78,6 +87,7 @@ public class XflashScreen
     
         overridePracticeCount = false;
         
+        // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
         extraFragments = new TabInfo[] { null, null, null, null, null };
     } 
@@ -109,11 +119,11 @@ public class XflashScreen
         if( inTag == "practice" || inTag == "example_sentence" )
         {
             // the practice and example sentence screen can scroll in either direction
-            if( ( direction == Xflash.DIRECTION_OPEN ) && !overridePracticeCount )
+            if( ( direction == DIRECTION_OPEN ) && !overridePracticeCount )
             {
                 ++currentPracticeScreen;
             }
-            else if( ( direction == Xflash.DIRECTION_CLOSE ) && !overridePracticeCount )
+            else if( ( direction == DIRECTION_CLOSE ) && !overridePracticeCount )
             {
                 --currentPracticeScreen;
             }
@@ -364,7 +374,7 @@ public class XflashScreen
     
     public static int getCurrentSettingsScreen()
     {
-        if( ( currentSettingsScreen < 0 ) || ( currentSettingsScreen > 4 ) )
+        if( ( currentSettingsScreen < LWE_TAB_ROOT_SCREEN ) || ( currentSettingsScreen > 4 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsScreen()");
             Log.d(MYTAG,"       currentSettingsScreen invalid:  " + currentSettingsScreen);
@@ -381,7 +391,8 @@ public class XflashScreen
  
     public static int getCurrentSettingsType()
     {
-        if( ( currentSettingsType < 0 ) || ( currentSettingsType > 3 ) )
+        // valid settings types (specific screens) range form 0 to 4
+        if( ( currentSettingsType < 0 ) || ( currentSettingsType > 4 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentSettingsType()");
             Log.d(MYTAG,"       currentSettingsType invalid:  " + currentSettingsType);
@@ -393,7 +404,7 @@ public class XflashScreen
     
     public static int getCurrentHelpScreen()
     {
-        if( ( currentHelpScreen < 0 ) || ( currentHelpScreen > 1 ) )
+        if( ( currentHelpScreen < LWE_TAB_ROOT_SCREEN ) || ( currentHelpScreen > 1 ) )
         {
             Log.d(MYTAG,"Error: XflashScreen.getCurrentHelpScreen()");
             Log.d(MYTAG,"       currentHelpScreen invalid:  " + currentHelpScreen);
