@@ -548,6 +548,8 @@ public class TagPeer
 
             tempTag.hydrateWithCursor(inCursor);
             tags.add(tempTag);          
+
+            inCursor.moveToNext();
         }
 
         return tags;

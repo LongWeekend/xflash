@@ -7,6 +7,7 @@ package com.longweekendmobile.android.xflash.model;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public Group ()
+//  public Object clone()
 //
 //  public void hydrate(Cursor  )
 //  public boolean isTopLevelGroup()
@@ -30,10 +31,11 @@ package com.longweekendmobile.android.xflash.model;
 import java.util.ArrayList;
 
 import android.database.Cursor;
+import android.util.Log;
 
-public class Group
+public class Group implements Cloneable
 {
-    // private static final String MYTAG = "XFlash Group";
+    private static final String MYTAG = "XFlash Group";
 
     private static final int kLWEUninitializedGroupId = -99;
     private static final int LWE_TOP_LEVEL_GROUP_ID = -1;
@@ -44,7 +46,7 @@ public class Group
     int recommended;          // Is a recommended Group?
     int childGroupCount;      // cached number of children Group objects
 
-    String groupName;   // Display name
+    String groupName;         // Display name
     String groupDescription;
         
     public Group()
@@ -53,7 +55,21 @@ public class Group
         tagCount = -1;
         childGroupCount = -1;
     }
-
+    
+    public Object clone()
+    {
+        try
+        {
+            return super.clone();
+        }
+        catch(Exception e)
+        {
+            Log.d(MYTAG,"well, fuck");
+            return null;
+        }
+    }
+   
+ 
     // takes a cursor pointing to a row of Group information and loads into 'this'
     //
     //      expect that the incoming Cursor has already been 
@@ -93,7 +109,7 @@ public class Group
     // simply returns a boolean as to whether 'this' Group is TOP_LEEVL_GROUP
     public boolean isTopLevelGroup()
     {
-        return ( ownerId == LWE_TOP_LEVEL_GROUP_ID);
+        return ( ownerId == LWE_TOP_LEVEL_GROUP_ID );
     }
 
     // returns an array of all tags belonging to 'this' Group

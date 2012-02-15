@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/default_display_block" 
-    android:onClick="TagFragment_startStudying" >
+    android:onClick="TagFragment_openGroup" >
 
-    <ImageView android:id="@+id/tag_row_image"
+    <ImageView android:id="@+id/group_row_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" />
 
-    <TextView android:id="@+id/tag_row_click"
-        style="@style/default_display_right"
-        android:layout_centerVertical="true"
-        android:clickable="true"
-        android:onClick="TagFragment_openTag"
-        android:text="view" />
-
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_toRightOf="@id/tag_row_image"
-        android:layout_toLeftOf="@id/tag_row_click" >
+        android:layout_toRightOf="@id/group_row_image" >
 
-        <TextView android:id="@+id/tag_row_top"
+        <TextView android:id="@+id/group_row_top"
             style="@style/tag_row_toplayout" />
 
-        <TextView android:id="@+id/tag_row_bottom"
+        <TextView android:id="@+id/group_row_bottom"
             style="@style/tag_row_bottomlayout" />
 
     </LinearLayout>

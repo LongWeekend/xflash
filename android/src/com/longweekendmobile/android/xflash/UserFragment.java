@@ -109,6 +109,12 @@ public class UserFragment extends Fragment
         int tempIndex = (Integer)v.getTag(R.id.user_rowtag);
         String tempName = userList.get(tempIndex).getUserNickname();
         
+        // if they clicked to activate the already active user, do nothing
+        if( tempIndex == XflashSettings.getCurrentUserId() )
+        {
+            return;
+        } 
+
         // set a class property so the AlertDialog knows which user was clicked
         switchUser = userList.get(tempIndex).getUserId();
         
@@ -123,7 +129,7 @@ public class UserFragment extends Fragment
             public void onClick(DialogInterface dialog,int which)
             {
                 // set the new user and return to settings
-                XflashSettings.setCurrentUser(switchUser);
+                XflashSettings.setCurrentUserId(switchUser);
                 inContext.onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
        });

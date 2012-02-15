@@ -7,6 +7,37 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  a class to maintain all of the app level settings
+//
+//  public static void load()
+//  public static int getColorScheme()
+//  public static String getColorSchemeName()
+//  public static void setColorScheme(int  )
+//  public static void setupPracticeBack(RelativeLayout  )
+//  public static void setupColorScheme(RelativeLayout  )
+//  public static void setupColorScheme(RelativeLayout  ,View  )
+//  public static void setupColorScheme(RelativeLayout  ,View  )
+//  public static void setRadioColors(XflashRadio[]  )
+//  public static int[] getIcons()
+//
+//  public static int getStudyMode()
+//  public static String getStudyModeName()
+//  public static void setStudyMode(int  )
+//  public static int getStudyLanguage()
+//  public static String getStudyLanguageName()
+//  public static void setStudyLanguage(int  )
+//  public static int getCurrentUserId()
+//  public static void setCurrentUserId(int  )
+//  public static int getReadingMode()
+//  public static String getReadingModeName()
+//  public static void setReadingMode(int  )
+//  public static int getDifficultyMode()
+//  public static void setDifficultyMode(int  )
+//  public static int getCustomStudyPool()
+//  public static void setCustomStudyPool(int  )
+//  public static int getCustomFrequency()
+//  public static void setCustomFrequency(int  )
+//
+//  public static void throwBadValue(String  ,int  )
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -107,6 +138,20 @@ public class XflashSettings
     }
 
     
+    // return a String for the name of the current theme
+    public static String getColorSchemeName()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return "Fire";
+            case LWE_THEME_BLUE:    return "Water";
+            case LWE_THEME_TAME:    return "Tame";
+            default:                return "Error";
+        }
+
+    }  // end getColorSchemeName()
+   
+
     // sets the color scheme and saves for persistence
     public static void setColorScheme(int inColor)
     {
@@ -192,20 +237,6 @@ public class XflashSettings
     }  // end setRadioColors()
  
     
-    // return a String for the name of the current theme
-    public static String getColorSchemeName()
-    {
-        switch(colorScheme)
-        {
-            case LWE_THEME_RED:     return "Fire";
-            case LWE_THEME_BLUE:    return "Water";
-            case LWE_THEME_TAME:    return "Tame";
-            default:                return "Error";
-        }
-
-    }  // end getColorSchemeName()
-   
-
     // returns an int[4] of resource IDs for tag icons
     // in order: LWE_ICON_FOLDER , LWE_ICON_SPECIAL_FOLDER , LWE_ICON_TAG , LWE_ICON_STARRED_TAG
     public static int[] getIcons()
@@ -245,6 +276,18 @@ public class XflashSettings
     }
 
     
+    // return a String for the name of the current study mode 
+    public static String getStudyModeName()
+    {
+        switch(studyMode)
+        {
+            case LWE_STUDYMODE_PRACTICE:    return "Practice";
+            case LWE_STUDYMODE_BROWSE:      return "Browse";
+            default:                        return "Error";
+        }
+    }
+   
+       
     // sets the color scheme and saves for persistence
     public static void setStudyMode(int inMode)
     {
@@ -265,18 +308,6 @@ public class XflashSettings
     }
 
 
-    // return a String for the name of the current study mode 
-    public static String getStudyModeName()
-    {
-        switch(studyMode)
-        {
-            case LWE_STUDYMODE_PRACTICE:    return "Practice";
-            case LWE_STUDYMODE_BROWSE:      return "Browse";
-            default:                        return "Error";
-        }
-    }
-   
-       
 //  *** STUDY LANGUAGE SETTINGS ***
 
     public static int getStudyLanguage()
@@ -284,6 +315,17 @@ public class XflashSettings
         return studyLanguage;
     }
 
+    // return a String for the name of the current language mode 
+    public static String getStudyLanguageName()
+    {
+        switch(studyLanguage)
+        {
+            case LWE_STUDYLANGUAGE_JAPANESE: return "Japanese";
+            case LWE_STUDYLANGUAGE_ENGLISH:  return "English";
+            default:                         return "Error";
+        }
+    }
+  
     public static void setStudyLanguage(int inMode)
     {
         if( ( studyLanguage != LWE_STUDYLANGUAGE_JAPANESE ) &&
@@ -304,17 +346,6 @@ public class XflashSettings
     }
 
 
-    // return a String for the name of the current language mode 
-    public static String getStudyLanguageName()
-    {
-        switch(studyLanguage)
-        {
-            case LWE_STUDYLANGUAGE_JAPANESE: return "Japanese";
-            case LWE_STUDYLANGUAGE_ENGLISH:  return "English";
-            default:                         return "Error";
-        }
-    }
-   
 //  *** CURRENT USER SETTINGS ***
 
     public static int getCurrentUserId()
@@ -327,7 +358,7 @@ public class XflashSettings
         return currentUser;
     }
 
-    public static void setCurrentUser(int inUser)
+    public static void setCurrentUserId(int inUser)
     {
         if( inUser < 0 )
         {
@@ -352,6 +383,19 @@ public class XflashSettings
         return readingMode;
     }
 
+    
+    // return a String for the name of the current language mode 
+    public static String getReadingModeName()
+    {
+        switch(readingMode)
+        {
+            case LWE_READINGMODE_BOTH:      return "Both";
+            case LWE_READINGMODE_ROMAJI:    return "Romaji";
+            case LWE_READINGMODE_KANA:      return "Kana";
+            default:                        return "Error";
+        }
+    }
+ 
     public static void setReadingMode(int inMode)
     {
         if( ( readingMode < LWE_READINGMODE_BOTH ) || ( readingMode > LWE_READINGMODE_KANA ) )
@@ -371,20 +415,9 @@ public class XflashSettings
     }
 
 
-    // return a String for the name of the current language mode 
-    public static String getReadingModeName()
-    {
-        switch(readingMode)
-        {
-            case LWE_READINGMODE_BOTH:      return "Both";
-            case LWE_READINGMODE_ROMAJI:    return "Romaji";
-            case LWE_READINGMODE_KANA:      return "Kana";
-            default:                        return "Error";
-        }
-    }
-   
 //  *** DIFFICULTY MODE SETTINGS ***
-       
+      
+ 
     public static int getDifficultyMode()
     {
         return difficultyMode;
@@ -407,7 +440,9 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("difficultyMode",difficultyMode);
         editor.commit();
-    }
+
+    }  // end setDifficultyMode()
+
 
     public static int getCustomStudyPool()
     {

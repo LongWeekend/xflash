@@ -270,7 +270,9 @@ public class CardPeer
     }  // end addCardsToList()
 
     // takes a cardId and returns a hydrated card from the database
-    private static Card retrieveCardByPK(int inId)
+/*
+       private static Card retrieveCardByPK(int inId)
+ 
     {
         // TODO - temporary in place of the following code
         //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -291,8 +293,8 @@ public class CardPeer
 
         return tempCard;        
     }
-
-
+*/
+    
     // returns an ArrayList of (int) Card ids for a given tagId
     // TODO - once again, why pass the entire Tag object when we just want a single int?
     // TODO - cannot test because we have no level_id columns in database

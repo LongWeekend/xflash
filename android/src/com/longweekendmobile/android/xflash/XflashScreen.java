@@ -27,6 +27,8 @@ package com.longweekendmobile.android.xflash;
 //  public static void clearPracticeScreens()
 //  public void setScreenValues(String  )
 //  public TabInfo getTransitionFragment(String  )
+//  public static void addTagStack()
+//  public static void popTagStack()
 //  public void detachExtras(FragmentTransaction  )
 //  public void detachSelectExtras(FragmentTransaction  ,String  )
 //  public String goBack(String  )
@@ -36,19 +38,24 @@ package com.longweekendmobile.android.xflash;
 //  public static int getCurrentSettingsType()
 //  public int getCurrentHelpScreen()
 
+import java.util.ArrayList;
+
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+
+import com.longweekendmobile.android.xflash.model.Group;
 
 public class XflashScreen 
 {
     private static final String MYTAG = "XFlash XflashScreen";
     
     private static final int LWE_PRACTICE_TAB = 0; 
-    // private static final int LWE_SETS_TAB = 1; 
+    // private static final int LWE_TAG_TAB = 1; 
     // private static final int LWE_SEARCH_TAB = 2; 
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
 
+    // settings page extra screen ids 
     public static final int LWE_SETTINGS_DIFFICULTY = 0;
     public static final int LWE_SETTINGS_USER = 1;
     public static final int LWE_SETTINGS_EDIT_USER = 2;
@@ -63,7 +70,7 @@ public class XflashScreen
 
     // properties for how many screens we are away from tab root screen
     private static int currentPracticeScreen = -1;
-    private static int currentSetsScreen = -1;
+    private static int currentTagScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
     
@@ -73,16 +80,18 @@ public class XflashScreen
     private static boolean overridePracticeCount;
 
     // the index of this array corresponds to the five tabs 
-    // practice = 0, sets = 1, search = 2, settings = 3, help = 4
+    // practice = 0, tag = 1, search = 2, settings = 3, help = 4
     private static boolean[] extraScreensOn;
     private static TabInfo[] extraFragments;
+    private static ArrayList<Group> tagStack;
+
 
     // set all fragment page values to zero when starting app
     public static void fireUpScreenManager()
     {
         // start all tabs at root screen
         currentPracticeScreen = 0;
-        currentSetsScreen = 0;
+        currentTagScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
         
@@ -93,6 +102,7 @@ public class XflashScreen
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
         extraFragments = new TabInfo[] { null, null, null, null, null };
+        tagStack = null;
     } 
 
     // remove the last transition from the practice back stack
@@ -142,6 +152,22 @@ public class XflashScreen
             else
             {
                 extraScreensOn[LWE_PRACTICE_TAB] = false;
+            }
+        }
+        else if( inTag == "tag" )
+        {
+            if( direction == DIRECTION_OPEN )
+            {
+                ++currentTagScreen;
+            }
+            else
+            {
+                --currentTagScreen;
+                
+                if( currentTagScreen == 0 )
+                {
+                    tagStack = null;
+                }
             }
         }
         else if( inTag == "settings" )
@@ -264,6 +290,26 @@ public class XflashScreen
     }  // end getTransitionFragment()
 
 
+    public static void addTagStack()
+    {
+        if(tagStack == null)
+        {   
+            tagStack = new ArrayList<Group>();
+        }
+        
+        tagStack.add( (Group)TagFragment.currentGroup.clone() );
+    }
+
+    public static void popTagStack()
+    {
+        int tempInt = ( tagStack.size() - 1 );
+
+        TagFragment.currentGroup = (Group)tagStack.get(tempInt).clone();
+
+        tagStack.remove(tempInt);
+    }
+
+    
     // called by Xflash.onTabChanged() to detach any extra screen fragments
     public static void detachExtras(FragmentTransaction ft)
     {
@@ -339,6 +385,14 @@ public class XflashScreen
             if( currentPracticeScreen != 0 )
             {
                 return "practice";
+            }     
+        }
+        else if( currentTab == "tag" )
+        { 
+            if( currentTagScreen != 0 )
+            {
+                popTagStack();
+                return "tag";
             }     
         }
         else if( currentTab == "settings" )
@@ -417,6 +471,7 @@ public class XflashScreen
     }
 
 
+    
 }  // end XflashScreen class declaration
 
 

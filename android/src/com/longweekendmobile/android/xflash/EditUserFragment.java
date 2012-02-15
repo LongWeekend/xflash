@@ -120,7 +120,7 @@ public class EditUserFragment extends Fragment
     public static void select(Xflash inContext)
     {
         // set the user and return to the UserFragment
-        XflashSettings.setCurrentUser(incomingEditId);
+        XflashSettings.setCurrentUserId(incomingEditId);
 
         // local EditUserFragment.save()
         save(inContext);

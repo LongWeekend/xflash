@@ -73,7 +73,7 @@ public class Tag
     private static final int kLWEUninitializedCardCount = -1;
     private static final int kLWEUnseenCardLevel = 0;
     // private static final int kLWELearnedCardLevel = 5;
-    private static final int STARRED_TAG_ID = 0;
+    public static final int STARRED_TAG_ID = 0;
 
     private int tagId;
     private int cardCount;

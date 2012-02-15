@@ -6,23 +6,22 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/group_heading"
+    <RelativeLayout android:id="@+id/tag_heading"
         style="@style/heading_bar">
 
         <!-- HEADING -->
-        <TextView
+        <TextView android:id="@+id/tag_heading_text"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="@string/group_title" 
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->
-        <ImageButton android:id="@+id/group_addbutton"
+        <ImageButton android:id="@+id/tag_addbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
-            android:onClick="GroupFragment_addToplevelTag"
+            android:onClick="TagFragment_addToplevelTag"
             style="@style/heading_button" />
 
     </RelativeLayout>
@@ -40,41 +39,48 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-            
     
             </LinearLayout>  
 
+
             <!-- 'favorites' list -->
-            <LinearLayout android:id="@+id/fav_tag_list"
+            <LinearLayout android:id="@+id/main_tag_list"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
             
-            
             </LinearLayout>
 
+            
             <!-- the Backup block -->
-            <TextView 
-                style="@style/default_display_heading_layout"
-                android:text="@string/group_backup_block_title" />
+            <LinearLayout android:id="@+id/tag_backup_block"
+                android:orientation="vertical" 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                
+                <TextView 
+                    style="@style/default_display_heading_layout"
+                    android:text="@string/group_backup_block_title" />
 
-            <RelativeLayout style="@style/default_display_block">
-                <TextView 
-                    style="@style/default_display_left"
-                    android:text="@string/group_backup_now" />
-                <TextView
-                    style="@style/not_implemented" />
-            </RelativeLayout>
-            <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:layout_marginBottom="10dp" >
-                <TextView 
-                    style="@style/default_display_left"
-                    android:text="@string/group_restore_now" />
-                <TextView
-                    style="@style/not_implemented" />
-            </RelativeLayout>
+                <RelativeLayout style="@style/default_display_block">
+                    <TextView 
+                        style="@style/default_display_left"
+                        android:text="@string/group_backup_now" />
+                    <TextView
+                        style="@style/not_implemented" />
+                </RelativeLayout>
+                <LinearLayout style="@style/generic_divider" />
+                <RelativeLayout style="@style/default_display_block"
+                    android:layout_marginBottom="10dp" >
+                    <TextView 
+                        style="@style/default_display_left"
+                        android:text="@string/group_restore_now" />
+                    <TextView
+                        style="@style/not_implemented" />
+                </RelativeLayout>
+
+            </LinearLayout>  <!-- end backup block -->
  
         </LinearLayout>  <!-- end single child of scroll view -->
 

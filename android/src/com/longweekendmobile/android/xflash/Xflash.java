@@ -17,7 +17,10 @@ package com.longweekendmobile.android.xflash;
 //  public void PracticeFragment_browseClick(View  )
 //  public void PracticeFragment_goRight(View  )
 //
-//  public void GroupFragment_addToplevelTag(View  )
+//  public void TagFragment_addToplevelTag(View  )
+//  public void TagFragment_openGroup(View  )
+//  public void TagFragment_openTag(View  )
+//  public void TagFragment_startStudying(View  )
 //
 //  public void SettingsFragment_switchStudyMode(View  )
 //  public void SettingsFragment_switchStudyLanguage(View  )
@@ -182,9 +185,21 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         ExampleSentenceFragment.exampleClick(v,this);
     }
 
-    public void GroupFragment_addToplevelTag(View v)
+    public void TagFragment_addToplevelTag(View v)
     {
-        GroupFragment.addToplevelTag(this);
+        TagFragment.addToplevelTag(this);
+    }
+    public void TagFragment_openGroup(View v)
+    {
+        TagFragment.openGroup(v,this);
+    }
+    public void TagFragment_openTag(View v)
+    {
+        TagFragment.openTag(v,this);
+    }
+    public void TagFragment_startStudying(View v)
+    {
+        TagFragment.startStudying(v,this);
     }
 
     public void SettingsFragment_switchStudyMode(View v)
@@ -315,8 +330,8 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
  
         // add the Study Sets tab
-        spec = this.myTabHost.newTabSpec("sets").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("sets", GroupFragment.class, args)));
+        spec = this.myTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
+        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab

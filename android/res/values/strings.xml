@@ -12,7 +12,6 @@
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
     <string name="group_title">Study Sets</string>
-    <string name="tag_title">Study Sets</string>
     <string name="group_backup_block_title">Backup Custom Sets</string>
     <string name="group_backup_now">Backup Now</string>
     <string name="group_restore_now">Restore Now</string>
@@ -60,6 +59,8 @@
     <string name="help_dialog_emailbutton">Send an Email</string>
     <string name="help_dialog_closebutton">No Thanks</string>
     <string name="helppage_nextbutton">Next ></string>
+    <string name="emptyset_dialog_title">No Words In Set</string>
+    <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
 </resources>
 
 
