@@ -230,9 +230,13 @@ public class TagFragment extends Fragment
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
-    public static void openTag(View v,Xflash inContext)
+    public static void goAllCards(View v,Xflash inContext)
     {
-        Log.d(MYTAG,"clicked openTag id:  " + (Integer)v.getTag() );
+        int tempInt = (Integer)v.getTag();
+
+         
+
+        inContext.onScreenTransition("all_cards",XflashScreen.DIRECTION_OPEN);
     }
     
     public static void startStudying(View v,Xflash inContext)

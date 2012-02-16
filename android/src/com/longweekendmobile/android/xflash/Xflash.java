@@ -19,7 +19,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
-//  public void TagFragment_openTag(View  )
+//  public void TagFragment_goAllCards(View  )
 //  public void TagFragment_startStudying(View  )
 //
 //  public void SettingsFragment_switchStudyMode(View  )
@@ -193,9 +193,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         TagFragment.openGroup(v,this);
     }
-    public void TagFragment_openTag(View v)
+    public void TagFragment_goAllCards(View v)
     {
-        TagFragment.openTag(v,this);
+        TagFragment.goAllCards(v,this);
     }
     public void TagFragment_startStudying(View v)
     {
@@ -429,7 +429,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // we only need to check for multiple screens here, where the tab
                     // is fully instantiated - as that means we've been here before and
                     // MAY have opened secondary screens 
-                    if( inTabTagname == "settings" )
+                    if( inTabTagname == "tag" )
+                    {
+                        // if we are in the card view of the tag tab
+                        if( XflashScreen.getTagAllCardsOn() )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("all_cards");
+                        }
+                    }
+                    else if( inTabTagname == "settings" )
                     {
                         // if we are loading a tab currently on an extra screen
                         if( XflashScreen.getCurrentSettingsScreen() > 0 )

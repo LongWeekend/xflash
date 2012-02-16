@@ -46,17 +46,19 @@ public class XflashSplash extends Activity
     {
         super.onCreate(savedInstanceState);
 
-        if( isDebugging )
-        {
-            finish();
-            myContext.startActivity(new Intent(myContext,Xflash.class));
-        }
-        
         // set background to splash1 (Long Weekend label)
         setContentView(R.layout.splash);
         
+        if( isDebugging )
+        {
+            splashTime = 200;
+        }
+        else
+        {
+            splashTime = 2000;
+        } 
+
         active = true;
-        splashTime = 2000;
         firedUp = false;
         myLayout = (RelativeLayout)findViewById(R.id.splashback);
         DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);

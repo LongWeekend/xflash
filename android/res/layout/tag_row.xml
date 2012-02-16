@@ -13,7 +13,7 @@
         style="@style/default_display_right"
         android:layout_centerVertical="true"
         android:clickable="true"
-        android:onClick="TagFragment_openTag"
+        android:onClick="TagFragment_goAllCards"
         android:text="view" />
 
     <LinearLayout 

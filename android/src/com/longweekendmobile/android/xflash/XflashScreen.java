@@ -50,7 +50,7 @@ public class XflashScreen
     private static final String MYTAG = "XFlash XflashScreen";
     
     private static final int LWE_PRACTICE_TAB = 0; 
-    // private static final int LWE_TAG_TAB = 1; 
+    private static final int LWE_TAG_TAB = 1; 
     // private static final int LWE_SEARCH_TAB = 2; 
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
@@ -81,7 +81,10 @@ public class XflashScreen
 
     // the index of this array corresponds to the five tabs 
     // practice = 0, tag = 1, search = 2, settings = 3, help = 4
+    // used solely to determine what to detach during Xflash.onTabChanged
     private static boolean[] extraScreensOn;
+    private static boolean tagAllCardsOn;
+
     private static TabInfo[] extraFragments;
     private static ArrayList<Group> tagStack;
 
@@ -101,9 +104,16 @@ public class XflashScreen
         
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
+        tagAllCardsOn = false;
+        
         extraFragments = new TabInfo[] { null, null, null, null, null };
         tagStack = null;
     } 
+
+    public static boolean getTagAllCardsOn()
+    {
+        return tagAllCardsOn;
+    }
 
     // remove the last transition from the practice back stack
     public static void popBackPractice()
@@ -156,18 +166,37 @@ public class XflashScreen
         }
         else if( inTag == "tag" )
         {
-            if( direction == DIRECTION_OPEN )
+            if( extraScreensOn[LWE_TAG_TAB] == true )
             {
-                ++currentTagScreen;
+                // if they are going back from an AllCardsFragment
+                extraScreensOn[LWE_TAG_TAB] = false;
+                --currentTagScreen;
             }
             else
             {
-                --currentTagScreen;
-                
-                if( currentTagScreen == 0 )
+                if( direction == DIRECTION_OPEN )
                 {
-                    tagStack = null;
+                    ++currentTagScreen;
                 }
+                else if( direction == DIRECTION_CLOSE )
+                {
+                    --currentTagScreen;
+                    
+                    if( currentTagScreen == 0 )
+                    {
+                        tagStack = null;
+                    }
+                }
+            }
+        }
+        else if( inTag == "all_cards" )
+        {
+            extraScreensOn[LWE_TAG_TAB] = true;
+            tagAllCardsOn = true;
+            
+            if( direction == DIRECTION_OPEN )
+            {
+                ++currentTagScreen;
             }
         }
         else if( inTag == "settings" )
@@ -214,6 +243,15 @@ public class XflashScreen
             }
 
             return extraFragments[LWE_PRACTICE_TAB];
+        }
+        if( inTag == "all_cards" )
+        {
+            if( extraFragments[LWE_TAG_TAB] == null ) 
+            {    
+                extraFragments[LWE_TAG_TAB] = new TabInfo("all_cards", AllCardsFragment.class, null);
+            }
+
+            return extraFragments[LWE_TAG_TAB];
         }
         else if( inTag == "difficulty" )
         {
@@ -337,6 +375,17 @@ public class XflashScreen
                 extraScreensOn[LWE_PRACTICE_TAB] = false;
             }
         }
+        else if( inTag == "tag" ) 
+        {
+            if( extraFragments[LWE_TAG_TAB] != null )
+            {
+                if( extraFragments[LWE_TAG_TAB].fragment != null )
+                {
+                    ft.detach(extraFragments[LWE_TAG_TAB].fragment);
+                    extraScreensOn[LWE_TAG_TAB] = false;
+                }
+            }
+        }
         else if( inTag == "settings" ) 
         {
             if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
@@ -391,9 +440,17 @@ public class XflashScreen
         { 
             if( currentTagScreen != 0 )
             {
-                popTagStack();
+                if( extraScreensOn[LWE_TAG_TAB] == false )
+                {
+                    popTagStack();
+                }     
+                else if( tagAllCardsOn == true )
+                {
+                    tagAllCardsOn = false;
+                }
+
                 return "tag";
-            }     
+            }
         }
         else if( currentTab == "settings" )
         { 
@@ -426,6 +483,11 @@ public class XflashScreen
     public static int getCurrentPracticeScreen()
     {
         return currentPracticeScreen;
+    }
+
+    public static int getCurrentTagScreen()
+    {
+        return currentTagScreen;
     }
 
     
