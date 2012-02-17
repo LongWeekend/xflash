@@ -124,24 +124,23 @@ public class Card
 
     
     // return conditional headword
-    public String getHeadword(Context inContext)
+    public String getHeadword()
     {
-        return headwordIgnoringMode(false,inContext);
+        return headwordIgnoringMode(false);
     }
 
     //  CONTEXT IS ONLY NECESSARY FOR PREFERENCES
     //  this is a hack until Mark and Co. decide what to do about
     //  preprocessor directives
-    public String headwordIgnoringMode(boolean isIgnore,Context inContext)
+    public String headwordIgnoringMode(boolean isIgnore)
     {
         if( isIgnore )
         {
             return headword;
         }
 
-        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
-        String tempString = settings.getString("APP_HEADWORD","fail");
-
+        // TODO - gotta figure out what we want to do with this setting
+/*
         // if no APP_HEADWORD preferences has been set
         if( tempString.equals("SET_E_TO_J") )
         { 
@@ -151,6 +150,10 @@ public class Card
         {
             return headword;
         }   
+*/
+
+        // temporary
+        return headword;
 
     }  // end headwordIgnoringMode()
 

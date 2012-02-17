@@ -231,39 +231,45 @@ public class XflashSplash extends Activity
             }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.DATABASE_READY))
             {
-                tempView.setText("Database Available!");                                
-                DBupdateLayout.addView(tempView);
-                
-                // clean up splash and exit to Xflash
-                wrapUp();   
-                 
-/*
-                // TODO - on hold, code for opening and attaching databases
+                // when the database is ready to go, attach the CARD database
                 try
                 {
-                    LWEDatabase tempDB = JFApplication.getDao();
+                    LWEDatabase tempDB = XFApplication.getDao();
                     firedUp = tempDB.attachDatabase();
                     
                     if( firedUp )
                     {
-                        Button tempButton = (Button)findViewById(R.id.testbutton);
-                        tempButton.setVisibility(View.VISIBLE); 
-    
                         tempView.setText("Database attached");
-                        myLayout.addView(tempView);
+                        DBupdateLayout.addView(tempView);
+            
+                        tempView = new TextView(myContext);
+                        tempView.setTextSize((float)16);
+                        tempView.setTextColor(0xFF000000);
+            
+                        tempView.setText("Database Available!");
+                        DBupdateLayout.addView(tempView);
                     }
                     else
                     {
                         tempView.setText("Database attach failed");
-                        myLayout.addView(tempView);
+                        DBupdateLayout.addView(tempView);
+            
+                        tempView = new TextView(myContext);
+                        tempView.setTextSize((float)16);
+                        tempView.setTextColor(0xFF000000);
+            
+                        tempView.setText("Database BROKEN!");
+                        DBupdateLayout.addView(tempView);
                     } 
-               }
+                }
                 catch (Exception e)
                 {
                     Log.d(MYTAG,"Exception caught attaching DB:  " + e.toString() );
                 }
-
-*/
+                
+                // clean up splash and exit to Xflash
+                wrapUp();   
+                 
 
             }  // end receive case DATABASE_READY
 
@@ -272,50 +278,9 @@ public class XflashSplash extends Activity
     }  // end PracticeReceiver declaration
 
 
-
-
-
 }  // end XflashSplash class declaration
 
 
 
 
-
-
-/* 
-    public void pop1(View v) {
-
-        Card myCard = new Card();
-        myCard.setCardId(12204);
-        myCard.hydrate();
-
-        // new commit
-        // TextView tempView = (TextView)findViewById(R.id.tempview);
-        // tempView.setText( myCard.meaningWithoutMarkup() );
-    }
-
-
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        
-        if( myReceiver != null )
-        {
-            unregisterReceiver(myReceiver);
-            myReceiver = null;
-        }
-    }
-
-
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-
-        LWEDatabase tempDB = JFApplication.getDao();
-        tempDB.detachDatabase();
-        tempDB.closeDatabase();
-    }
-*/
 

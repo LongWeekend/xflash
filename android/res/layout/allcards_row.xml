@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block" 
+    android:onClick="AllCardsFragment_singleCard" >
+
+    <TextView android:id="@+id/allcards_row_click"
+        style="@style/default_display_right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:text=">" />
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@id/allcards_row_click" >
+
+        <TextView android:id="@+id/allcards_word"
+            style="@style/tag_row_toplayout" />
+
+        <TextView android:id="@+id/allcards_meaning"
+            style="@style/tag_row_bottomlayout"
+            android:text="or testing" />
+
+    </LinearLayout>
+        
+</RelativeLayout>
+

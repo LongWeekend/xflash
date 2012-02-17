@@ -10,23 +10,21 @@
         style="@style/heading_bar" >
 
         <!-- HEADING -->
-        <TextView 
+        <TextView android:id="@+id/allcards_heading_text"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="All Cards View"
             style="@style/heading_text" />
-
-        <!-- RIGHT BUTTON -->
-        <ImageButton android:id="@+id/allcards_addbutton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/plus" 
-            style="@style/heading_button" />
 
     </RelativeLayout>
 
+    <ListView
+        style="@style/default_frame_block"
+        android:id="@+id/allcards_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>
 

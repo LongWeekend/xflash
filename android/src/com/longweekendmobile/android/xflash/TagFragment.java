@@ -10,7 +10,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void addToplevelTag(Context  )
 //  public static void openGroup(View  ,Xflash  )
-//  public static void openTag(View  ,Xflash  )
+//  public static void goAllCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
 
@@ -45,9 +45,7 @@ public class TagFragment extends Fragment
     
     public static Group currentGroup = null;
     
-    // true if we are loading ONLY a tag, no groups
-    public static boolean loadingTag = false;
-
+    
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -70,7 +68,7 @@ public class TagFragment extends Fragment
         TextView tempView = null;
         
         // if the TagFragment is not set to a specific group or tag, load top level
-        if( currentGroup == null && !loadingTag )
+        if( currentGroup == null )
         {
             currentGroup = GroupPeer.topLevelGroup();
         }
@@ -224,7 +222,6 @@ public class TagFragment extends Fragment
     {
         XflashScreen.addTagStack();
         
-        loadingTag = false;
         currentGroup = GroupPeer.retrieveGroupById( (Integer)v.getTag() );
         
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
@@ -234,8 +231,7 @@ public class TagFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-         
-
+        AllCardsFragment.setIncomingTagId(tempInt); 
         inContext.onScreenTransition("all_cards",XflashScreen.DIRECTION_OPEN);
     }
     

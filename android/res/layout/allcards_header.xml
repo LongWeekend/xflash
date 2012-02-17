@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block"
+    android:onClick="AllCardsFragment_startStudying"
+    android:layout_marginBottom="10dp" >
+
+    <TextView 
+        style="@style/default_display_left"
+        android:text="@string/allcard_start_studying" />
+    <TextView 
+        style="@style/default_display_right"
+        android:text=">" />
+
+</RelativeLayout>

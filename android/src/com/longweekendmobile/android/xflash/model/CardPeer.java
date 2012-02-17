@@ -39,27 +39,13 @@ public class CardPeer
 {
     private static final String MYTAG = "XFlash CardPeer";
 
-    // TODO - temporary fix until we understand what to do
-    // with the preprocessor calls for language
-    private static boolean isJ;
-
-    private static SQLiteDatabase tempDB;
-
-    public CardPeer()
-    {
-        // for our purposes, the same is #define JFLASH or whatever they did
-        isJ = true;
-
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
-
+    
     // factory that cares about what language we are using
     public static Card blankCardWithId(int inId)
     {
         Card tempCard;
 
-        if( isJ )
+        if( XFApplication.IS_JFLASH )
         {
             tempCard = new JapaneseCard();
         }
@@ -91,7 +77,7 @@ public class CardPeer
     //        also, do we need a special unicode char variable?
     public static boolean keywordIsReading(String inKey)
     {
-        if( isJ )
+        if( XFApplication.IS_JFLASH )
         {
             return false;
         }
@@ -128,7 +114,7 @@ public class CardPeer
     // TODO - see note on keywordIsReading() above
     public static boolean keywordIsHeadword(String inKey)
     {
-        if( isJ )
+        if( XFApplication.IS_JFLASH )
         {
             return false;
         }
@@ -158,6 +144,8 @@ public class CardPeer
     // TODO - untested, need database with table cards_search_content
     public static ArrayList<Card> searchCardsForKeyword(String inKey)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Card> cardList = new ArrayList<Card>();
         int queryLimit = 100;
         String column = null;
@@ -262,7 +250,8 @@ public class CardPeer
             }
 
             inList.add(tempCard);
-            
+            inCursor.moveToNext();
+ 
         } // end for loop
 
         return inList;
@@ -300,6 +289,8 @@ public class CardPeer
     // TODO - cannot test because we have no level_id columns in database
     public static ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         // TODO - temporary in place of the following code
         //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
         //        [settings objectForKey:@"user_id"]
@@ -345,6 +336,8 @@ public class CardPeer
     // returns an ArrayList of cardId integers contained in the Tag inTag
     public static ArrayList<Card> retrieveFaultedCardsForTag(Tag inTag)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ArrayList<Card> tempList = new ArrayList<Card>();
         String[] selectionArgs = new String[] { Integer.toString( inTag.getId() ) };
         String query = "SELECT card_id FROM card_tag_link WHERE tag_id = ?";
@@ -365,6 +358,8 @@ public class CardPeer
     //      - as the original comment would imply
     public static ArrayList<Card> retrieveCardSetForExampleSentenceId(int inId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String query;
         String[] selectionArgs = new String[] { Integer.toString(inId) };
         ArrayList<Card> tempList = new ArrayList<Card>();
@@ -396,17 +391,6 @@ public class CardPeer
         return tempList;
 
     }  // end retrieveCardSetForExampleSentenceId()
-
-    // generic getter/setter for temporary isJ
-    public static void setJ(boolean inJ)
-    {
-        isJ = inJ;
-    }
-
-    public static boolean getJ()
-    {
-        return isJ;
-    }
 
 
 }  // end CardPeer declaration

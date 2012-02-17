@@ -22,6 +22,8 @@ package com.longweekendmobile.android.xflash;
 //  public void TagFragment_goAllCards(View  )
 //  public void TagFragment_startStudying(View  )
 //
+//  public void AllCardsFragment_startStudying(View  )
+//
 //  public void SettingsFragment_switchStudyMode(View  )
 //  public void SettingsFragment_switchStudyLanguage(View  )
 //  public void SettingsFragment_switchReadingMode(View  )
@@ -200,6 +202,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void TagFragment_startStudying(View v)
     {
         TagFragment.startStudying(v,this);
+    }
+
+    public void AllCardsFragment_startStudying(View v)
+    {
+        AllCardsFragment.startStudying(v,this);
+    }
+    public void AllCardsFragment_singleCard(View v)
+    {
+        AllCardsFragment.singleCard(v,this);
     }
 
     public void SettingsFragment_switchStudyMode(View v)
