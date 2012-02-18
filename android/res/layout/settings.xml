@@ -121,6 +121,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/twitter_icon"
+                    android:drawablePadding="4dp"
                     android:text="@string/settings_followblock_twitter" />
                 <TextView
                     style="@style/default_display_right"
@@ -133,6 +134,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/facebook_icon"
+                    android:drawablePadding="4dp"
                     android:text="@string/settings_followblock_facebook" />
                 <TextView
                     style="@style/default_display_right"

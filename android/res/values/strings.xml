@@ -32,8 +32,8 @@
     <string name="settings_appblock_activeuser">Active User</string>
     <string name="settings_appblock_updates">Updates</string>
     <string name="settings_follow_block_title">Follow Us</string>
-    <string name="settings_followblock_twitter">  Follow us on Twitter</string>
-    <string name="settings_followblock_facebook">  Follow us on Facebook</string>
+    <string name="settings_followblock_twitter">Follow us on Twitter</string>
+    <string name="settings_followblock_facebook">Follow us on Facebook</string>
     <string name="settings_acknowledgement_title">Acknowledgements</string>
     <string name="settings_acknowledgement_content">Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write an simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group\'s liscense. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo and Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.</string>
     <string name="difficulty_title">Change Difficulty</string>

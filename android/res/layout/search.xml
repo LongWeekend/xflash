@@ -18,8 +18,7 @@
 
         <!-- SEARCH BAR -->
         <EditText
-            android:layout_width="match_parent" 
-            android:layout_height="wrap_content"
+            style="@style/default_edittext"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/search_cancelbutton"
             android:layout_marginRight="8dp" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/default_display_block" 
+    android:paddingRight="0dp"
     android:onClick="TagFragment_startStudying" >
 
     <ImageView android:id="@+id/tag_row_image"
@@ -12,10 +13,13 @@
     <TextView android:id="@+id/tag_row_click"
         style="@style/default_display_right"
         android:layout_centerVertical="true"
+        android:layout_marginRight="0dp"
         android:clickable="true"
         android:onClick="TagFragment_goAllCards"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="8dp"
         android:text="view" />
 
     <LinearLayout 

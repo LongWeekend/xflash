@@ -7,11 +7,9 @@
         style="@style/default_display_right"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
         android:text=">" />
 
-    <LinearLayout 
+    <LinearLayout android:id="@+id/cardrow_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -25,6 +23,13 @@
             android:text="or testing" />
 
     </LinearLayout>
-        
+    
+    <LinearLayout android:id="@+id/allcards_divider"
+        style="@style/generic_divider"
+        android:layout_below="@id/cardrow_block"
+        android:layout_marginTop="10dp" >
+    </LinearLayout>
+
 </RelativeLayout>
+
 

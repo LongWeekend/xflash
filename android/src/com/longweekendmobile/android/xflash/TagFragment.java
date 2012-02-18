@@ -67,7 +67,7 @@ public class TagFragment extends Fragment
         ImageView tempRowImage = null;
         TextView tempView = null;
         
-        // if the TagFragment is not set to a specific group or tag, load top level
+        // if the TagFragment is not set to a specific group, load top level
         if( currentGroup == null )
         {
             currentGroup = GroupPeer.topLevelGroup();

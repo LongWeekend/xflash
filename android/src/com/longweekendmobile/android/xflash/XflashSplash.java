@@ -5,7 +5,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  Created by Todd Presson on 2/4/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
-//
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -25,7 +24,7 @@ public class XflashSplash extends Activity
 {
     private static final String MYTAG = "XFlash XflashSpalsh";
 
-    private static final boolean isDebugging = true;
+    private static final boolean isDebugging = false;
 
     private final Activity myContext = this;
 
@@ -38,7 +37,6 @@ public class XflashSplash extends Activity
     private boolean firedUp;
     
     // also for debugging
-    private RelativeLayout myLayout;
     private LinearLayout DBupdateLayout; 
 
     @Override
@@ -60,7 +58,6 @@ public class XflashSplash extends Activity
 
         active = true;
         firedUp = false;
-        myLayout = (RelativeLayout)findViewById(R.id.splashback);
         DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);
 
         turnOnReceiver();

@@ -110,7 +110,7 @@ public class TagPeer
     }
 
     // removes inCard.cardId from the incoming Tag object
-    // this will alsoc heck regarding the last card on the active set and automatically
+    // this will also check regarding the last card on the active set and automatically
     // remove that card from the active set card cache
     //
     // note this method DOES update the tag count cache on the tags table

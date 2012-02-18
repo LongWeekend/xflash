@@ -24,7 +24,11 @@
         android:id="@+id/allcards_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+        android:divider="@null"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:scrollbarStyle="outsideInset"
+        android:cacheColorHint="#00000000" />
 
 </LinearLayout>
 

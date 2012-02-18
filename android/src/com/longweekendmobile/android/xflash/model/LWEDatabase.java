@@ -222,13 +222,14 @@ public class LWEDatabase extends SQLiteOpenHelper
             if( isAttached )
             {
                 Log.d(MYTAG,"      - when database is already attached");
+                return true;
             }
-            if( !tempBool )
+            else
             {
                 Log.d(MYTAG,"      - when database is closed");
+                return false;
             }
         
-            return false;
         }
 
     }  // end attachDatabase() declaration

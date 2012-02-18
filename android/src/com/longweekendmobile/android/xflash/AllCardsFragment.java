@@ -9,25 +9,20 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
@@ -68,12 +63,11 @@ public class AllCardsFragment extends Fragment
         TextView tempView = (TextView)allCardsLayout.findViewById(R.id.allcards_heading_text);
         tempView.setText( currentTag.getName() );
 
-        // TODO - android book page 159
-        
         // get the header, tag it with the id of the current Tag, and add it to the ListView
         ListView cardList = (ListView)allCardsLayout.findViewById(R.id.allcards_list);
-        RelativeLayout header = (RelativeLayout)inflater.inflate(R.layout.allcards_header,cardList,false);
-        header.setTag( currentTag.getId() );
+        LinearLayout header = (LinearLayout)inflater.inflate(R.layout.allcards_header,cardList,false);
+        RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
+        realHeader.setTag( currentTag.getId() );
         cardList.addHeaderView(header);
         
         // get all of our cards for the current tag and hydrate
@@ -112,6 +106,8 @@ public class AllCardsFragment extends Fragment
         Log.d(MYTAG,">>> single card clicked for Card: " + (Integer)v.getTag() );
     }
 
+    
+    // custom adapter to appropriately fill the view for our ListView
     class CardAdapter extends ArrayAdapter<Card> 
     {
         CardAdapter() 
