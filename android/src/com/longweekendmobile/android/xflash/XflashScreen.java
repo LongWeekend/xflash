@@ -84,6 +84,7 @@ public class XflashScreen
     // used solely to determine what to detach during Xflash.onTabChanged
     private static boolean[] extraScreensOn;
     private static boolean tagAllCardsOn;
+    private static boolean tagSingleCardOn;
 
     private static TabInfo[] extraFragments;
     private static ArrayList<Group> tagStack;
@@ -105,6 +106,7 @@ public class XflashScreen
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
         tagAllCardsOn = false;
+        tagSingleCardOn= false;
         
         extraFragments = new TabInfo[] { null, null, null, null, null };
         tagStack = null;
@@ -113,6 +115,11 @@ public class XflashScreen
     public static boolean getTagAllCardsOn()
     {
         return tagAllCardsOn;
+    }
+
+    public static boolean getTagSingleCardOn()
+    {
+        return tagSingleCardOn;
     }
 
     // remove the last transition from the practice back stack
@@ -196,6 +203,25 @@ public class XflashScreen
             
             if( direction == DIRECTION_OPEN )
             {
+                // coming from TagFragment
+                ++currentTagScreen;
+            }
+            else if( direction == DIRECTION_CLOSE )
+            {
+                // coming from SingleCardFragment
+                tagSingleCardOn = false;     
+                --currentTagScreen;
+            }
+        }
+        else if( inTag == "single_card" )
+        {
+            extraScreensOn[LWE_TAG_TAB] = true;
+            tagSingleCardOn = true;
+            
+            if( direction == DIRECTION_OPEN )
+            {
+                // coming from AllCardsFragment
+                tagAllCardsOn = false;
                 ++currentTagScreen;
             }
         }
@@ -246,9 +272,20 @@ public class XflashScreen
         }
         if( inTag == "all_cards" )
         {
-            if( extraFragments[LWE_TAG_TAB] == null ) 
+            if( ( extraFragments[LWE_TAG_TAB] == null ) ||
+                ( extraFragments[LWE_TAG_TAB].tag != "all_cards" ) )
             {    
                 extraFragments[LWE_TAG_TAB] = new TabInfo("all_cards", AllCardsFragment.class, null);
+            }
+
+            return extraFragments[LWE_TAG_TAB];
+        }
+        if( inTag == "single_card" )
+        {
+            if( ( extraFragments[LWE_TAG_TAB] == null ) ||
+                ( extraFragments[LWE_TAG_TAB].tag != "single_card" ) )
+            {    
+                extraFragments[LWE_TAG_TAB] = new TabInfo("single_card", SingleCardFragment.class, null);
             }
 
             return extraFragments[LWE_TAG_TAB];
@@ -386,6 +423,16 @@ public class XflashScreen
                 }
             }
         }
+        else if( ( inTag == "single_card" ) || ( inTag == "all_cards" ) ) 
+        {
+            if( extraFragments[LWE_TAG_TAB] != null )
+            {
+                if( extraFragments[LWE_TAG_TAB].fragment != null )
+                {
+                    ft.detach(extraFragments[LWE_TAG_TAB].fragment);
+                }
+            }
+        }
         else if( inTag == "settings" ) 
         {
             if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
@@ -443,13 +490,22 @@ public class XflashScreen
                 if( extraScreensOn[LWE_TAG_TAB] == false )
                 {
                     popTagStack();
+                    
+                    return "tag";
                 }     
                 else if( tagAllCardsOn == true )
                 {
                     tagAllCardsOn = false;
+                    
+                    return "tag";
                 }
-
-                return "tag";
+                else if( tagSingleCardOn == true ) 
+                {
+                    tagSingleCardOn = false;
+                    tagAllCardsOn = true;
+                    
+                    return "all_cards";
+                }
             }
         }
         else if( currentTab == "settings" )

@@ -23,6 +23,9 @@ package com.longweekendmobile.android.xflash;
 //  public void TagFragment_startStudying(View  )
 //
 //  public void AllCardsFragment_startStudying(View  )
+//  public void AllCardsFragment_singleCard(View  )
+//
+//  public void SingleCardFragment_addTag(View  )
 //
 //  public void SettingsFragment_switchStudyMode(View  )
 //  public void SettingsFragment_switchStudyLanguage(View  )
@@ -211,6 +214,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void AllCardsFragment_singleCard(View v)
     {
         AllCardsFragment.singleCard(v,this);
+    }
+
+    public void SingleCardFragment_addTag(View v)
+    {
+        SingleCardFragment.addTag(this);
     }
 
     public void SettingsFragment_switchStudyMode(View v)
@@ -446,6 +454,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         if( XflashScreen.getTagAllCardsOn() )
                         {
                             switchTab = XflashScreen.getTransitionFragment("all_cards");
+                        }
+                        else if( XflashScreen.getTagSingleCardOn() )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("single_card");
                         }
                     }
                     else if( inTabTagname == "settings" )

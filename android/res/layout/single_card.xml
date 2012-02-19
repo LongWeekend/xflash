@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/allcards_heading"
+    <RelativeLayout android:id="@+id/singlecard_heading"
         style="@style/heading_bar" >
 
         <!-- HEADING -->
-        <TextView android:id="@+id/allcards_heading_text"
+        <TextView 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
+            android:text="@string/singlecard_title"
             style="@style/heading_text" />
+
+        <!-- RIGHT BUTTON -->
+        <ImageButton android:id="@+id/singlecard_addbutton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/plus" 
+            android:onClick="SingleCardFragment_addTag"
+            style="@style/heading_button" />
 
     </RelativeLayout>
 
-    <!-- TODO - this ListView is not properly displaying either its 
-                scrollbar, nor its shading on scroll -->
-    <ListView android:id="@+id/allcards_list"
-        style="@style/default_list_block" />
-        
 </LinearLayout>
 

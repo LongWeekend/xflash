@@ -98,7 +98,10 @@ public class AllCardsFragment extends Fragment
 
     public static void singleCard(View v,Xflash inContext)
     {
-        Log.d(MYTAG,">>> single card clicked for Card: " + (Integer)v.getTag() );
+        int tempInt = (Integer)v.getTag();
+
+        SingleCardFragment.setIncomingCardId(tempInt);
+        inContext.onScreenTransition("single_card",XflashScreen.DIRECTION_OPEN);
     }
 
     
