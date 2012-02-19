@@ -12,7 +12,10 @@ package com.longweekendmobile.android.xflash;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,12 +38,14 @@ public class AllCardsFragment extends Fragment
    
     // properties for handling color theme transitions
     private static LinearLayout allCardsLayout;
+    private LayoutInflater myInflater;
 
     private static int incomingTagId;
     private Tag currentTag = null;
 
-    private LayoutInflater myInflater;
+    private ListView cardList;
     private ArrayList<Card> cardArray;
+    private static ProgressDialog cardLoadDialog = null;
  
     
     // see android.support.v4.app.Fragment#onCreateView()
@@ -64,28 +69,18 @@ public class AllCardsFragment extends Fragment
         tempView.setText( currentTag.getName() );
 
         // get the header, tag it with the id of the current Tag, and add it to the ListView
-        ListView cardList = (ListView)allCardsLayout.findViewById(R.id.allcards_list);
+        cardList = (ListView)allCardsLayout.findViewById(R.id.allcards_list);
         LinearLayout header = (LinearLayout)inflater.inflate(R.layout.allcards_header,cardList,false);
         RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
         realHeader.setTag( currentTag.getId() );
         cardList.addHeaderView(header);
         
-        // get all of our cards for the current tag and hydrate
-        cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
-        
-        int tempInt = cardArray.size();
-        for(int i = 0; i < tempInt; i++)
-        {
-            cardArray.get(i).hydrate();
-        }
- 
-        // set our card info into the ListView
-        CardAdapter theAdapter = new CardAdapter();
-        cardList.setAdapter(theAdapter);
-
         // save the inflater for use in CardAdapter
         myInflater = inflater;
-        
+       
+        AsyncLoadcards tempLoad = new AsyncLoadcards();
+        tempLoad.execute();
+ 
         return allCardsLayout;
 
     }  // end onCreateView
@@ -108,7 +103,7 @@ public class AllCardsFragment extends Fragment
 
     
     // custom adapter to appropriately fill the view for our ListView
-    class CardAdapter extends ArrayAdapter<Card> 
+    private class CardAdapter extends ArrayAdapter<Card> 
     {
         CardAdapter() 
         {
@@ -141,6 +136,60 @@ public class AllCardsFragment extends Fragment
         }
 
     }  // end CardAdapter class declaration
+
+ 
+    // our Async class for loading cards from the database
+    private class AsyncLoadcards extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            // if the Tag is larger than an arbitrary size, display
+            // the dialog on the presumption that the load will take
+            // a few seconds while the app just sits there
+            if( currentTag.getCardCount() > 50 )
+            {
+                cardLoadDialog = new ProgressDialog(getActivity());
+                cardLoadDialog.setMessage(" Fetching cards... ");
+                cardLoadDialog.show();
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... unused)
+        {
+
+            // TODO - between the two of these, I think I can SEE the smoke
+            //        coming off my phone's CPU. Takes forever for large sets
+        
+            // get all of our cards for the current tag and hydrate
+            cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
+       
+            int tempInt = cardArray.size();
+            for(int i = 0; i < tempInt; i++)
+            {
+                cardArray.get(i).hydrate();
+            }
+ 
+            return null;
+ 
+        }  // end doInBackground()
+
+
+        @Override
+        protected void onPostExecute(Void unused)
+        {
+            // set our card info into the ListView
+            CardAdapter theAdapter = new CardAdapter();
+            cardList.setAdapter(theAdapter);
+
+            if( cardLoadDialog != null)
+            {
+                cardLoadDialog.dismiss();
+            }
+        }
+  
+    }  // end AsyncLoadcards eclaration
 
   
 }  // end AllCardsFragment class declaration

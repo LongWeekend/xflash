@@ -24,7 +24,7 @@ public class XflashSplash extends Activity
 {
     private static final String MYTAG = "XFlash XflashSpalsh";
 
-    private static final boolean isDebugging = false;
+    private static final boolean isDebugging = true;
 
     private final Activity myContext = this;
 
