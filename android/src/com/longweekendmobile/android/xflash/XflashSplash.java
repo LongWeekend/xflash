@@ -7,8 +7,11 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -24,7 +27,7 @@ public class XflashSplash extends Activity
 {
     private static final String MYTAG = "XFlash XflashSpalsh";
 
-    private static final boolean isDebugging = false;
+    private static final boolean isDebugging = true;
 
     private final Activity myContext = this;
 
@@ -223,8 +226,27 @@ public class XflashSplash extends Activity
             }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_FAILURE))
             {
+                // if the database fails to copy over successfully, they're probably
+                // running low on space on their phone
                 tempView.setText("Copy Failure");                                
                 DBupdateLayout.addView(tempView);
+
+                // set and fire our AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+                builder.setTitle( getResources().getString(R.string.copyerror_title) );
+                builder.setMessage( getResources().getString(R.string.copyerror_body) );
+
+                // on postive response, set the new active user
+                builder.setPositiveButton("bummer", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog,int which)
+                    {
+                        finish();
+                    }
+               });
+
+                // show error dialog and exit the app
+                builder.create().show();
             }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.DATABASE_READY))
             {

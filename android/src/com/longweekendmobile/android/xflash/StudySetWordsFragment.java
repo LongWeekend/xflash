@@ -1,6 +1,6 @@
 package com.longweekendmobile.android.xflash;
 
-//  AllCardsFragment.java
+//  StudySetWordsFragment.java
 //  Xflash
 //
 //  Created by Todd Presson on 2/5/2012.
@@ -32,12 +32,12 @@ import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
-public class AllCardsFragment extends Fragment
+public class StudySetWordsFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash AllCardsFragment";
+    private static final String MYTAG = "XFlash StudySetWordsFragment";
    
     // properties for handling color theme transitions
-    private LinearLayout allCardsLayout;
+    private LinearLayout studySetWordsLayout;
     private ListView cardList;
     private LayoutInflater myInflater;
 
@@ -55,10 +55,10 @@ public class AllCardsFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate our layout for the AllCardsPage fragment
-        allCardsLayout = (LinearLayout)inflater.inflate(R.layout.all_cards, container, false);
+        studySetWordsLayout = (LinearLayout)inflater.inflate(R.layout.studyset_words, container, false);
 
         // load the title bar elements and pass them to the color manager
-        RelativeLayout titleBar = (RelativeLayout)allCardsLayout.findViewById(R.id.allcards_heading);
+        RelativeLayout titleBar = (RelativeLayout)studySetWordsLayout.findViewById(R.id.studysetwords_heading);
         
         XflashSettings.setupColorScheme(titleBar); 
 
@@ -66,12 +66,12 @@ public class AllCardsFragment extends Fragment
         currentTag = TagPeer.retrieveTagById(incomingTagId);
 
         // set the title bar to the tag name we're looking at
-        TextView tempView = (TextView)allCardsLayout.findViewById(R.id.allcards_heading_text);
+        TextView tempView = (TextView)studySetWordsLayout.findViewById(R.id.studysetwords_heading_text);
         tempView.setText( currentTag.getName() );
 
         // get the header, tag it with the id of the current Tag, and add it to the ListView
-        cardList = (ListView)allCardsLayout.findViewById(R.id.allcards_list);
-        LinearLayout header = (LinearLayout)inflater.inflate(R.layout.allcards_header,cardList,false);
+        cardList = (ListView)studySetWordsLayout.findViewById(R.id.studysetwords_list);
+        LinearLayout header = (LinearLayout)inflater.inflate(R.layout.studysetwords_header,cardList,false);
         RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
         realHeader.setTag( currentTag.getId() );
         cardList.addHeaderView(header);
@@ -83,7 +83,7 @@ public class AllCardsFragment extends Fragment
         AsyncLoadcards tempLoad = new AsyncLoadcards();
         tempLoad.execute();
  
-        return allCardsLayout;
+        return studySetWordsLayout;
 
     }  // end onCreateView
 
@@ -113,7 +113,7 @@ public class AllCardsFragment extends Fragment
     {
         CardAdapter() 
         {
-            super( getActivity(), R.layout.allcards_row, (List)cardArray);
+            super( getActivity(), R.layout.studysetwords_row, (List)cardArray);
         }
         
         public View getView(int position, View convertView, ViewGroup parent) 
@@ -122,17 +122,22 @@ public class AllCardsFragment extends Fragment
             
             if( row == null ) 
             {
-                row = myInflater.inflate(R.layout.allcards_row, parent, false);
+                row = myInflater.inflate(R.layout.studysetwords_row, parent, false);
             }
             
             Card tempCard = cardArray.get(position);
 
+            if( tempCard.isFault )
+            {
+                tempCard.hydrate();
+            }
+
             // set the word
-            TextView tempView = (TextView)row.findViewById(R.id.allcards_word);
+            TextView tempView = (TextView)row.findViewById(R.id.studysetwords_word);
             tempView.setText( tempCard.getHeadword() );
 
             // set the meaning
-            tempView = (TextView)row.findViewById(R.id.allcards_meaning);
+            tempView = (TextView)row.findViewById(R.id.studysetwords_meaning);
             tempView.setText( tempCard.meaningWithoutMarkup() );
            
             // tag each row with the card id it represents
@@ -153,7 +158,7 @@ public class AllCardsFragment extends Fragment
             // if the Tag is larger than an arbitrary size, display
             // the dialog on the presumption that the load will take
             // a few seconds while the app just sits there
-            if( currentTag.getCardCount() > 50 && 
+            if( currentTag.getCardCount() > 200 && 
                 ( ( needLoad == true ) || ( cardArray == null ) ) )
             {
                 cardLoadDialog = new ProgressDialog(getActivity());
@@ -174,10 +179,6 @@ public class AllCardsFragment extends Fragment
                 cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
        
                 int tempInt = cardArray.size();
-                for(int i = 0; i < tempInt; i++)
-                {
-                    cardArray.get(i).hydrate();
-                }
                 
                 needLoad = false;
             }
@@ -205,7 +206,7 @@ public class AllCardsFragment extends Fragment
     }  // end AsyncLoadcards declaration
 
   
-}  // end AllCardsFragment class declaration
+}  // end StudySetWordsFragment class declaration
 
 
 

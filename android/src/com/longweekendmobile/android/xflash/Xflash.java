@@ -22,8 +22,8 @@ package com.longweekendmobile.android.xflash;
 //  public void TagFragment_goAllCards(View  )
 //  public void TagFragment_startStudying(View  )
 //
-//  public void AllCardsFragment_startStudying(View  )
-//  public void AllCardsFragment_singleCard(View  )
+//  public void StudySetWordsFragment_startStudying(View  )
+//  public void StudySetWordsFragment_singleCard(View  )
 //
 //  public void SingleCardFragment_addTag(View  )
 //
@@ -207,13 +207,13 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         TagFragment.startStudying(v,this);
     }
 
-    public void AllCardsFragment_startStudying(View v)
+    public void StudySetWordsFragment_startStudying(View v)
     {
-        AllCardsFragment.startStudying(v,this);
+        StudySetWordsFragment.startStudying(v,this);
     }
-    public void AllCardsFragment_singleCard(View v)
+    public void StudySetWordsFragment_singleCard(View v)
     {
-        AllCardsFragment.singleCard(v,this);
+        StudySetWordsFragment.singleCard(v,this);
     }
 
     public void SingleCardFragment_addTag(View v)
@@ -451,9 +451,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab
-                        if( XflashScreen.getTagAllCardsOn() )
+                        if( XflashScreen.getTagStudySetWordsOn() )
                         {
-                            switchTab = XflashScreen.getTransitionFragment("all_cards");
+                            switchTab = XflashScreen.getTransitionFragment("studyset_words");
                         }
                         else if( XflashScreen.getTagSingleCardOn() )
                         {

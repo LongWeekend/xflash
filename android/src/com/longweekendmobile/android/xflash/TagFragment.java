@@ -231,8 +231,8 @@ public class TagFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        AllCardsFragment.setIncomingTagId(tempInt); 
-        inContext.onScreenTransition("all_cards",XflashScreen.DIRECTION_OPEN);
+        StudySetWordsFragment.setIncomingTagId(tempInt); 
+        inContext.onScreenTransition("studyset_words",XflashScreen.DIRECTION_OPEN);
     }
     
     public static void startStudying(View v,Xflash inContext)

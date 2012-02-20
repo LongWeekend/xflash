@@ -75,11 +75,11 @@ public class Card
 
     // if true, this Card isn't really a Card -- just has an ID and 
     // hasn't been fetched
-    // private boolean isFault;
+    public boolean isFault;
 
     public Card() 
     {
-        // isFault = true;
+        isFault = true;
         cardId = kLWEUninitializedCardId;
     }
 
@@ -232,7 +232,7 @@ public class Card
             wrongCount = inCursor.getInt(tempColumn);
         }
 
-        // isFault = false;
+        isFault = false;
         
     }  // end hydrate(Cursor  ,boolean  )
 

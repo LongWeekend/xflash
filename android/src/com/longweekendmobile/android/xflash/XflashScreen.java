@@ -83,7 +83,7 @@ public class XflashScreen
     // practice = 0, tag = 1, search = 2, settings = 3, help = 4
     // used solely to determine what to detach during Xflash.onTabChanged
     private static boolean[] extraScreensOn;
-    private static boolean tagAllCardsOn;
+    private static boolean tagStudySetWordsOn;
     private static boolean tagSingleCardOn;
 
     private static TabInfo[] extraFragments;
@@ -105,16 +105,16 @@ public class XflashScreen
         
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
-        tagAllCardsOn = false;
+        tagStudySetWordsOn = false;
         tagSingleCardOn= false;
         
         extraFragments = new TabInfo[] { null, null, null, null, null };
         tagStack = null;
     } 
 
-    public static boolean getTagAllCardsOn()
+    public static boolean getTagStudySetWordsOn()
     {
-        return tagAllCardsOn;
+        return tagStudySetWordsOn;
     }
 
     public static boolean getTagSingleCardOn()
@@ -175,7 +175,7 @@ public class XflashScreen
         {
             if( extraScreensOn[LWE_TAG_TAB] == true )
             {
-                // if they are going back from an AllCardsFragment
+                // if they are going back from a StudySetWordsFragment
                 extraScreensOn[LWE_TAG_TAB] = false;
                 --currentTagScreen;
             }
@@ -196,10 +196,10 @@ public class XflashScreen
                 }
             }
         }
-        else if( inTag == "all_cards" )
+        else if( inTag == "studyset_words" )
         {
             extraScreensOn[LWE_TAG_TAB] = true;
-            tagAllCardsOn = true;
+            tagStudySetWordsOn = true;
             
             if( direction == DIRECTION_OPEN )
             {
@@ -220,8 +220,8 @@ public class XflashScreen
             
             if( direction == DIRECTION_OPEN )
             {
-                // coming from AllCardsFragment
-                tagAllCardsOn = false;
+                // coming from StudySetWordsFragment
+                tagStudySetWordsOn = false;
                 ++currentTagScreen;
             }
         }
@@ -270,12 +270,12 @@ public class XflashScreen
 
             return extraFragments[LWE_PRACTICE_TAB];
         }
-        if( inTag == "all_cards" )
+        if( inTag == "studyset_words" )
         {
             if( ( extraFragments[LWE_TAG_TAB] == null ) ||
-                ( extraFragments[LWE_TAG_TAB].tag != "all_cards" ) )
+                ( extraFragments[LWE_TAG_TAB].tag != "studyset_words" ) )
             {    
-                extraFragments[LWE_TAG_TAB] = new TabInfo("all_cards", AllCardsFragment.class, null);
+                extraFragments[LWE_TAG_TAB] = new TabInfo("studyset_words", StudySetWordsFragment.class, null);
             }
 
             return extraFragments[LWE_TAG_TAB];
@@ -423,7 +423,7 @@ public class XflashScreen
                 }
             }
         }
-        else if( ( inTag == "single_card" ) || ( inTag == "all_cards" ) ) 
+        else if( ( inTag == "single_card" ) || ( inTag == "studyset_words" ) ) 
         {
             if( extraFragments[LWE_TAG_TAB] != null )
             {
@@ -493,18 +493,18 @@ public class XflashScreen
                     
                     return "tag";
                 }     
-                else if( tagAllCardsOn == true )
+                else if( tagStudySetWordsOn == true )
                 {
-                    tagAllCardsOn = false;
+                    tagStudySetWordsOn = false;
                     
                     return "tag";
                 }
                 else if( tagSingleCardOn == true ) 
                 {
                     tagSingleCardOn = false;
-                    tagAllCardsOn = true;
+                    tagStudySetWordsOn = true;
                     
-                    return "all_cards";
+                    return "studyset_words";
                 }
             }
         }
