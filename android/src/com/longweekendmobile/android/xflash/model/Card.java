@@ -10,7 +10,7 @@ package com.longweekendmobile.android.xflash.model;
 //  
 //  public String meaningWithoutMarkup()
 //  public String getMeaning(Context  )
-//  public String getHeadword(Context  )
+//  public String getHeadword()
 //  public String headwordIgnoringMode(boolean  ,Context  )
 //  public AttributedString attributedReading()
 //  public void hydrate()

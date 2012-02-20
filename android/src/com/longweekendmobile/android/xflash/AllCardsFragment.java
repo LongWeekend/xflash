@@ -37,14 +37,15 @@ public class AllCardsFragment extends Fragment
     private static final String MYTAG = "XFlash AllCardsFragment";
    
     // properties for handling color theme transitions
-    private static LinearLayout allCardsLayout;
+    private LinearLayout allCardsLayout;
+    private ListView cardList;
     private LayoutInflater myInflater;
 
+    private static boolean needLoad = false;
     private static int incomingTagId;
-    private Tag currentTag = null;
+    private static Tag currentTag = null;
 
-    private ListView cardList;
-    private ArrayList<Card> cardArray;
+    private static ArrayList<Card> cardArray = null;
     private static ProgressDialog cardLoadDialog = null;
  
     
@@ -77,7 +78,8 @@ public class AllCardsFragment extends Fragment
         
         // save the inflater for use in CardAdapter
         myInflater = inflater;
-       
+      
+        // load the cards (if necessary)
         AsyncLoadcards tempLoad = new AsyncLoadcards();
         tempLoad.execute();
  
@@ -89,6 +91,7 @@ public class AllCardsFragment extends Fragment
     public static void setIncomingTagId(int inId)
     {
         incomingTagId = inId;
+        needLoad = true;
     }
 
     public static void startStudying(View v,Xflash inContext)
@@ -150,7 +153,8 @@ public class AllCardsFragment extends Fragment
             // if the Tag is larger than an arbitrary size, display
             // the dialog on the presumption that the load will take
             // a few seconds while the app just sits there
-            if( currentTag.getCardCount() > 50 )
+            if( currentTag.getCardCount() > 50 && 
+                ( ( needLoad == true ) || ( cardArray == null ) ) )
             {
                 cardLoadDialog = new ProgressDialog(getActivity());
                 cardLoadDialog.setMessage(" Fetching cards... ");
@@ -164,14 +168,18 @@ public class AllCardsFragment extends Fragment
 
             // TODO - between the two of these, I think I can SEE the smoke
             //        coming off my phone's CPU. Takes forever for large sets
-        
-            // get all of our cards for the current tag and hydrate
-            cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
-       
-            int tempInt = cardArray.size();
-            for(int i = 0; i < tempInt; i++)
+            if( ( needLoad == true ) || ( cardArray == null ) )
             {
-                cardArray.get(i).hydrate();
+                // get all of our cards for the current tag and hydrate
+                cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
+       
+                int tempInt = cardArray.size();
+                for(int i = 0; i < tempInt; i++)
+                {
+                    cardArray.get(i).hydrate();
+                }
+                
+                needLoad = false;
             }
  
             return null;
@@ -190,9 +198,11 @@ public class AllCardsFragment extends Fragment
             {
                 cardLoadDialog.dismiss();
             }
-        }
+    
+        }  // end onPostExecute()
+
   
-    }  // end AsyncLoadcards eclaration
+    }  // end AsyncLoadcards declaration
 
   
 }  // end AllCardsFragment class declaration

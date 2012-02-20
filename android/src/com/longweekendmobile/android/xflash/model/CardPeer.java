@@ -15,11 +15,11 @@ package com.longweekendmobile.android.xflash.model;
 //  public boolean keywordIsReading(String  )
 //  public boolean keywordIsHeadword(String  )
 //  public ArrayList<Card> searchCardsForKeyword(String  )
+//  public Card retrieveCardByPK(int  )
 //
 //  private String FTSSQLForKeyword(String  ,String  ,int  )
 //  private Card retrieveCardWithCursor(Cursor  )
 //  private ArrayList<Card> addCardsToList(ArrayList<Card>  ,Cursor  ,boolean  )
-//  private Card retrieveCardByPK(int  )
 //
 //  public ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag  )
 //  public ArrayList<Card> retrieveFaultedCardsForTag(Tag  )
@@ -34,6 +34,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class CardPeer
 {
@@ -185,6 +186,30 @@ public class CardPeer
 
     }  // end searchCardsForKeyword()
 
+    
+    public static Card retrieveCardByPK(int inId)
+    {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
+        int tempInt = XflashSettings.getCurrentUserId();
+
+        String[] selectionArgs = new String[] { Integer.toString(tempInt), Integer.toString(inId) };
+        String query = 
+     "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id," +
+     "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning " + 
+     "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id " + 
+     "LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = ?" +
+     "WHERE c.card_id = ch.card_id AND c.card_id = ?";
+
+        Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+        Card tempCard = retrieveCardWithCursor(myCursor);
+        myCursor.close();
+
+        return tempCard;        
+
+    }  // end retrieveCardByPK()
+   
+ 
     // this will return a SQL query that will return Card IDs from the FTS table
     // based on settings passed in
     // TODO - untested, we need database with table column card_search_content
@@ -258,32 +283,8 @@ public class CardPeer
 
     }  // end addCardsToList()
 
-    // takes a cardId and returns a hydrated card from the database
-/*
-       private static Card retrieveCardByPK(int inId)
- 
-    {
-        // TODO - temporary in place of the following code
-        //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        //    [settings objectForKey:@"user_id"]
-        int debughold = 0;
-
-        String[] selectionArgs = new String[] { Integer.toString(debughold), Integer.toString(inId) };
-        String query = 
-     "SELECT c.card_id AS card_id,u.card_level as card_level,u.user_id as user_id," +
-     "u.wrong_count as wrong_count,u.right_count as right_count,c.*,ch.meaning " + 
-     "FROM cards c INNER JOIN cards_html ch ON c.card_id = ch.card_id " + 
-     "LEFT OUTER JOIN user_history u ON c.card_id = u.card_id AND u.user_id = ?" +
-     "WHERE c.card_id = ch.card_id AND c.card_id = ?";
-
-        Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
-        Card tempCard = retrieveCardWithCursor(myCursor);
-        myCursor.close();
-
-        return tempCard;        
-    }
-*/
     
+    // takes a cardId and returns a hydrated card from the database
     // returns an ArrayList of (int) Card ids for a given tagId
     // TODO - once again, why pass the entire Tag object when we just want a single int?
     // TODO - cannot test because we have no level_id columns in database

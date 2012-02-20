@@ -28,5 +28,40 @@
 
     </RelativeLayout>
 
+    <ScrollView style="@style/default_scroll_block">
+
+        <!-- single child of the scroll view -->
+        <LinearLayout android:id="@+id/settings_page"  
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" >
+
+            <!-- the word block -->
+            <TextView android:id="@+id/singlecard_word"
+                style="@style/default_display_heading_layout"
+                android:text="@string/settings_study_block_title" />
+
+            <TextView android:id="@+id/singlecard_reading"
+                style="@style/default_display_block"
+                android:textColor="#FF000000" />
+            <TextView android:id="@+id/singlecard_meaning"
+                style="@style/default_display_block"
+                android:textColor="#FF000000" />
+
+            <!-- the 'my sets' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="@string/singlecard_mysets" />
+
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="@string/singlecard_othersets" />
+
+
+        </LinearLayout>  <!-- end single child of scroll view -->
+
+    </ScrollView>
+
 </LinearLayout>
 
