@@ -13,15 +13,23 @@ package com.longweekendmobile.android.xflash;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+
+import com.longweekendmobile.android.xflash.model.Group;
+import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class CreateTagActivity extends Activity
 {
-    // private static final String MYTAG = "XFlash TagActivity";
+    private static final String MYTAG = "XFlash TagActivity";
    
-    private int localColor;
+    private static Group currentGroup;
     private EditText myEdit;
  
     /** Called when the activity is first created. */
@@ -31,10 +39,27 @@ public class CreateTagActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_tag);
     
-        // if we're just starting up, force load of color
-        localColor = -1;
-
+        // set our click listener for the edit text and request
+        // focus
         myEdit = (EditText)findViewById(R.id.create_tag_text);
+        myEdit.setOnEditorActionListener( new OnEditorActionListener() 
+        {
+            @Override
+            public boolean onEditorAction(TextView v,int actionId,KeyEvent event) 
+            {
+                if( actionId == EditorInfo.IME_ACTION_DONE )
+                {
+                    // when they click 'done' on the keyboard, add the new
+                    // group and exit
+                    TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+    
+                    finish();
+                }
+                
+                return false;
+            }
+
+        });
         myEdit.requestFocus();
 
         // launch with the keyboard displayed
@@ -56,14 +81,10 @@ public class CreateTagActivity extends Activity
         super.onResume();
         overridePendingTransition(R.anim.slidein_bottom,R.anim.hold);
 
-        // set the background to the current color scheme
-        if( localColor != XflashSettings.getColorScheme() )
-        {
-            // load the title bar elements and pass them to the color manager
-            RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
+        // load the title bar elements and pass them to the color manager
+        RelativeLayout titleBar = (RelativeLayout)findViewById(R.id.create_tag_heading);
             
-            XflashSettings.setupColorScheme(titleBar);
-        }
+        XflashSettings.setupColorScheme(titleBar);
     }
 
     @Override
@@ -72,6 +93,11 @@ public class CreateTagActivity extends Activity
         super.onPause();
         
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
+    }
+
+    public static void setCurrentGroup(Group inGroup)
+    {
+        currentGroup = inGroup;
     }
 
 

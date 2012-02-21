@@ -118,6 +118,8 @@ public class TagPeer
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
+        String[] tempArgs = null;
+
         Log.d(MYTAG,"ALERT - MISSING FUNCTIONALITY");
         Log.d(MYTAG,"      - IN METHOD TagPeer.cancelMembership()");
 
@@ -136,10 +138,10 @@ public class TagPeer
             Log.d(MYTAG,"editing current set tags");
 
             // get the total card count of relevant tag
-            String[] selectionArgs = new String[] { Integer.toString( inTag.getId() ) };
+            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
             String query = "SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = ?";
         
-            Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+            Cursor myCursor = tempDB.rawQuery(query,tempArgs);
             myCursor.moveToFirst();
 
             int tempColumn = myCursor.getColumnIndex("total_card");
@@ -155,7 +157,7 @@ public class TagPeer
 
 /* 
                 // this is the last card, abort!
-                    // construct the error object to be returned back to its caller.
+                // construct the error object to be returned back to its caller.
       
                 NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                 NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.", @"AddTagViewController.AlertViewLastCardMessage"), NSLocalizedDescriptionKey,nil];
@@ -177,10 +179,8 @@ public class TagPeer
 
         
         // now we actually delete from card_tag_link
-        String[] selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
-        String query = "DELETE FROM card_tag_link WHERE card_id = ? AND tag_id = ?";
-
-        tempDB.rawQuery(query,selectionArgs);
+        tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
+        tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
         // only update this stuff if NOT the active set - actual comment
         // TODO - don't know the proper way to implement this yet
@@ -188,13 +188,13 @@ public class TagPeer
         // if ([tag isEqual:currentState.activeTag] == NO)
         if( true )
         {
-            selectionArgs = new String[] { Integer.toString( inTag.getId() ) };
-            query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
+            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
+            String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 
             // TODO - original TempPeer.m had error correcting code here
             //        but the query executes normally even if there are
             //        no tags with the specified ID
-            tempDB.rawQuery(query,selectionArgs);
+            tempDB.execSQL(query,tempArgs);
         } 
 
         
@@ -278,20 +278,23 @@ public class TagPeer
         // quick return on bad input
         if( inCard.getCardId() <= 0 )
         {
+            Log.d(MYTAG,">>> subscribeCard() returning false on id < 1");
             return false;
         }
 
         // TODO - the original code had error checking on whether these     
         //    queries were successful, but they execute normallly
         //        no matter the input numbers
-        String[] selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
-        String query = "INSERT INTO card_tag_link (card_id,tag_id) VALUES (?,?)";
-        tempDB.rawQuery(query,selectionArgs);
+        // insert the new Tag into 'tags'
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("card_id", inCard.getCardId() );
+        insertValues.put("tag_id", inTag.getId() ); 
+        tempDB.insert("card_tag_link",null,insertValues);
 
-        selectionArgs = new String[] { Integer.toString( inTag.getId() ) };
-        query = "UPDATE tags SET count = (count + 1) WHERE tag_id = ?";
-        tempDB.rawQuery(query,selectionArgs);
-
+        String[] updateArgs = { Integer.toString( inTag.getId() ) };
+        String query = "UPDATE tags SET count = (count + 1) WHERE tag_id = ?";
+        tempDB.execSQL(query,updateArgs);
+ 
         // TODO - more notifications
 /*      
   // Finally, send a system-wide notification that this tag changed. Interested objects can listen.
@@ -465,8 +468,9 @@ public class TagPeer
         tempDB.insert("group_tag_link",null,insertValues);
 
         // increment the tag_count for the appropriate Group
-        query = "UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = " + inGroup.getGroupId();
-        tempDB.execSQL(query);
+        String[] updateArgs = { Integer.toString( inGroup.getGroupId() ) };
+        query = "UPDATE groups SET tag_count=(tag_count+1) WHERE group_id = ?";
+        tempDB.execSQL(query,updateArgs);
 
         Tag tempTag = retrieveTagById(newId);
         

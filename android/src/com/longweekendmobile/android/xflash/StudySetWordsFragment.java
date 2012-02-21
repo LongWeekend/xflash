@@ -88,6 +88,11 @@ public class StudySetWordsFragment extends Fragment
     }  // end onCreateView
 
     
+    public static void setNeedLoad()
+    {
+        needLoad = true;
+    }
+
     public static void setIncomingTagId(int inId)
     {
         incomingTagId = inId;

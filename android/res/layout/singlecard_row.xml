@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block" 
+    android:onClick="SingleCardFragment_toggleWord" >
+
+    <ImageView android:id="@+id/singlecard_row_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/check" />
+
+    <TextView android:id="@+id/singlecard_row_tagname"
+        style="@style/default_display_left"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@id/singlecard_row_checked"
+        android:layout_marginRight="6dp" />
+
+</RelativeLayout>
+

@@ -40,7 +40,7 @@
             <!-- the word block -->
             <TextView android:id="@+id/singlecard_word"
                 style="@style/default_display_heading_layout"
-                android:text="@string/settings_study_block_title" />
+                android:textColor="#FF000000" />
 
             <TextView android:id="@+id/singlecard_reading"
                 style="@style/default_display_block"
@@ -53,10 +53,23 @@
             <TextView 
                 style="@style/default_display_heading_layout"
                 android:text="@string/singlecard_mysets" />
+            <LinearLayout android:id="@+id/singlecard_usertags_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            
+            </LinearLayout>
 
+            <!-- the 'other sets' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
                 android:text="@string/singlecard_othersets" />
+            <LinearLayout android:id="@+id/singlecard_systags_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+            </LinearLayout>
 
 
         </LinearLayout>  <!-- end single child of scroll view -->

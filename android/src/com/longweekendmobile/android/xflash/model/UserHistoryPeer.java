@@ -104,7 +104,7 @@ public class UserHistoryPeer
         }
 
         Log.d(MYTAG,query);
-        tempDB.rawQuery(query,selectionArgs);
+        tempDB.execSQL(query,selectionArgs);
 
         inTag.moveCard(inCard,nextLevel);
 

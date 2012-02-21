@@ -42,7 +42,6 @@ public class TagFragment extends Fragment
     private static final String MYTAG = "XFlash TagFragment";
    
     private LinearLayout tagLayout;
-    
     public static Group currentGroup = null;
     
     
@@ -214,6 +213,8 @@ public class TagFragment extends Fragment
     public static void addToplevelTag(Context inContext)
     {
         // start the 'add tag' activity as a modal
+        CreateTagActivity.setCurrentGroup(currentGroup);
+
         inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
     }
 
@@ -271,6 +272,8 @@ public class TagFragment extends Fragment
 
     }  // end fireEmptyTagDialong()
 
+
 }  // end TagFragment class declaration
+
 
 

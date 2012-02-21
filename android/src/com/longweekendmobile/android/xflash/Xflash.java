@@ -25,6 +25,7 @@ package com.longweekendmobile.android.xflash;
 //  public void StudySetWordsFragment_startStudying(View  )
 //  public void StudySetWordsFragment_singleCard(View  )
 //
+//  public void SingleCardFragment_toggleWord(View  )
 //  public void SingleCardFragment_addTag(View  )
 //
 //  public void SettingsFragment_switchStudyMode(View  )
@@ -216,6 +217,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         StudySetWordsFragment.singleCard(v,this);
     }
 
+    public void SingleCardFragment_toggleWord(View v)
+    {
+        SingleCardFragment.toggleWord(v);
+    }
     public void SingleCardFragment_addTag(View v)
     {
         SingleCardFragment.addTag(this);
