@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,13 +29,14 @@ public class XflashSplash extends Activity
     private static final String MYTAG = "XFlash XflashSpalsh";
 
     private static final boolean isDebugging = true;
+    private static final boolean XFLASH_COPY_FAIL = false;
+    private static final boolean XFLASH_ATTACH_FAIL = true;
 
     private final Activity myContext = this;
-
-    private boolean active;
-    private int splashTime;
-    
     private SplashReceiver myReceiver;
+
+    // properties for managing the splash delay
+    private int splashTime;
     
     // boolean for checking whether database is already open
     private boolean firedUp;
@@ -59,7 +61,6 @@ public class XflashSplash extends Activity
             splashTime = 2000;
         } 
 
-        active = true;
         firedUp = false;
         DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);
 
@@ -75,13 +76,10 @@ public class XflashSplash extends Activity
                 try
                 {
                     int waited = 0;
-                    while( active && ( waited < splashTime ) )
+                    while( waited < splashTime )
                     {
                         sleep(100);
-                        if(active)
-                        {
-                            waited += 100;
-                        }
+                        waited += 100;
                     }
                 }
                 catch(Exception e)
@@ -142,13 +140,10 @@ public class XflashSplash extends Activity
                 try
                 {
                     int waited = 0;
-                    while( active && ( waited < splashTime ) )
+                    while( waited < splashTime )
                     {
                         sleep(100);
-                        if(active)
-                        {
-                            waited += 100;
-                        }
+                        waited += 100;
                     }
                 }
                 catch(Exception e)
@@ -170,7 +165,42 @@ public class XflashSplash extends Activity
         };  // end Thread declaration
 
         splashThread2.start();
-    }
+
+    }  // end wrapUp()
+
+
+    // handles informing user of a fatal error relating to database initialization
+    public void splashError(boolean inError)
+    {
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+        
+        Resources res = getResources();
+
+        if( inError == XFLASH_COPY_FAIL )
+        {
+            builder.setTitle( res.getString(R.string.copyerror_title) );
+            builder.setMessage( res.getString(R.string.copyerror_body) );
+        }
+        else if( inError == XFLASH_ATTACH_FAIL )
+        {
+            builder.setTitle( res.getString(R.string.attacherror_title) );
+            builder.setMessage( res.getString(R.string.attacherror_body) );
+        }
+
+        // exit the app when they're done
+        builder.setPositiveButton("bummer", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+                finish();
+            }
+        });
+
+        // show error dialog and exit the app
+        builder.create().show();
+
+    }  // end splashError()
 
  
     // turn on our BroadcastReceiver
@@ -228,25 +258,9 @@ public class XflashSplash extends Activity
             {
                 // if the database fails to copy over successfully, they're probably
                 // running low on space on their phone
-                tempView.setText("Copy Failure");                                
-                DBupdateLayout.addView(tempView);
-
-                // set and fire our AlertDialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
-                builder.setTitle( getResources().getString(R.string.copyerror_title) );
-                builder.setMessage( getResources().getString(R.string.copyerror_body) );
-
-                // on postive response, set the new active user
-                builder.setPositiveButton("bummer", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog,int which)
-                    {
-                        finish();
-                    }
-               });
-
-                // show error dialog and exit the app
-                builder.create().show();
+            
+                // display an error dialog and exit
+                splashError(XFLASH_COPY_FAIL);
             }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.DATABASE_READY))
             {
@@ -255,7 +269,7 @@ public class XflashSplash extends Activity
                 {
                     LWEDatabase tempDB = XFApplication.getDao();
                     firedUp = tempDB.attachDatabase();
-                    
+   
                     if( firedUp )
                     {
                         tempView.setText("Database attached");
@@ -267,18 +281,21 @@ public class XflashSplash extends Activity
             
                         tempView.setText("Database Available!");
                         DBupdateLayout.addView(tempView);
+                
+                        // THIS IS WHERE WE ARE ACTUALLY EXITING THE SPLASH
+                        // SCREEN SUCCESSFULLY AND STARTING THE APP
+
+                        // if everything copied/attached properly, clean
+                        // up splash and exit to Xflash
+                        wrapUp();   
                     }
                     else
                     {
-                        tempView.setText("Database attach failed");
-                        DBupdateLayout.addView(tempView);
-            
-                        tempView = new TextView(myContext);
-                        tempView.setTextSize((float)16);
-                        tempView.setTextColor(0xFF000000);
-            
-                        tempView.setText("Database BROKEN!");
-                        DBupdateLayout.addView(tempView);
+                        // if they database exists copied to the phone, but failed
+                        // to attach extra DBs for some reason or another
+                        
+                        // display an error dialog and exit
+                        splashError(XFLASH_ATTACH_FAIL);
                     } 
                 }
                 catch (Exception e)
@@ -286,10 +303,6 @@ public class XflashSplash extends Activity
                     Log.d(MYTAG,"Exception caught attaching DB:  " + e.toString() );
                 }
                 
-                // clean up splash and exit to Xflash
-                wrapUp();   
-                 
-
             }  // end receive case DATABASE_READY
 
         }  // end onReceive()

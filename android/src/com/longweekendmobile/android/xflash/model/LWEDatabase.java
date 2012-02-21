@@ -221,6 +221,7 @@ public class LWEDatabase extends SQLiteOpenHelper
 
             if( isAttached )
             {
+                // return true becaues we're up, attached, and running
                 Log.d(MYTAG,"      - when database is already attached");
                 return true;
             }

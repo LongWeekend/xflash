@@ -222,7 +222,7 @@ public class TagFragment extends Fragment
     {
         XflashScreen.addTagStack();
         
-        currentGroup = GroupPeer.retrieveGroupById( (Integer)v.getTag() );
+        currentGroup = GroupPeer.retrieveGroupById( (int)(Integer)v.getTag() );
         
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
