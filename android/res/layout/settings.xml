@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/table_background" >
  
     <!-- TITLE BAR -->
@@ -14,7 +14,7 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="Settings" 
+            android:text="@string/settings_title" 
             style="@style/heading_text" />
 
         <!-- LEFT BUTTON -->
@@ -28,93 +28,114 @@
 
     <ScrollView style="@style/default_scroll_block">
 
+        <!-- single child of the scroll view -->
         <LinearLayout android:id="@+id/settings_page"  
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp" >
 
             <!-- the 'Studying' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Studying" />
+                android:text="@string/settings_study_block_title" />
 
-            <RelativeLayout style="@style/default_display_block">
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_switchStudyMode" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Study Mode" />
-                <TextView android:id="@+id/settings_studymodelabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_studyblock_studymode" />
+                <TextView android:id="@+id/settings_studymode_label"
+                    style="@style/default_display_right" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_switchStudyLanguage" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Study Language" />
-                <TextView android:id="@+id/settings_studylanguagelabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_studyblock_studylanguage" />
+                <TextView android:id="@+id/settings_studylanguage_label"
+                    style="@style/default_display_right" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_switchReadingMode" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Furigana / Reading" />
-                <TextView android:id="@+id/settings_furiganalabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_studyblock_reading" />
+                <TextView android:id="@+id/settings_furigana_label"
+                    style="@style/default_display_right" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_goDifficulty" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Difficulty" />
-                <TextView android:id="@+id/settings_difficultylabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_studyblock_difficulty" />
+                <TextView android:id="@+id/settings_difficulty_label"
+                    style="@style/default_display_right"
+                    android:text=">" />
             </RelativeLayout>
 
             <!-- the 'Application' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Application" />
+                android:text="@string/settings_app_block_title" />
 
             <RelativeLayout style="@style/default_display_block"
                 android:onClick="SettingsFragment_advanceColorScheme" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Theme" />
-                <TextView android:id="@+id/settings_themelabel"
+                    android:text="@string/settings_appblock_theme" />
+                <TextView android:id="@+id/settings_theme_label"
                     style="@style/default_display_right" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_goUser" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Active User" />
-                <TextView android:id="@+id/settings_activeuserlabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_appblock_activeuser" />
+                <TextView android:id="@+id/settings_activeuser_label"
+                    style="@style/default_display_right" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_goUpdate" >
                 <TextView 
                     style="@style/default_display_left"
-                    android:text="Updates" />
-                <TextView android:id="@+id/settings_updateslabel"
-                    style="@style/not_implemented" />
+                    android:text="@string/settings_appblock_updates" />
+                <TextView android:id="@+id/settings_updates_label"
+                    style="@style/default_display_right" 
+                    android:text="0 installed >" />
             </RelativeLayout>
 
             <!-- the 'Follow Us' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Follow Us" />
+                android:text="@string/settings_follow_block_title" />
 
-            <RelativeLayout style="@style/default_display_block">
+            <RelativeLayout android:id="@+id/settings_launch_twitter"
+                style="@style/default_display_block"
+                android:onClick="SettingsFragment_launchSettingsWeb" >
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/twitter_icon"
-                    android:text=" Follow us on Twitter" />
+                    android:drawablePadding="4dp"
+                    android:text="@string/settings_followblock_twitter" />
                 <TextView
                     style="@style/default_display_right"
                     android:text=">" />
             </RelativeLayout>
-            <RelativeLayout style="@style/default_display_block">
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout android:id="@+id/settings_launch_facebook"
+                style="@style/default_display_block"
+                android:onClick="SettingsFragment_launchSettingsWeb" >
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/facebook_icon"
-                    android:text=" Follow us on Facebook" />
+                    android:drawablePadding="4dp"
+                    android:text="@string/settings_followblock_facebook" />
                 <TextView
                     style="@style/default_display_right"
                     android:text=">" />
@@ -123,7 +144,7 @@
             <!-- the 'Follow Us' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="Acknowledgements" />
+                android:text="@string/settings_acknowledgement_title" />
 
             <RelativeLayout style="@style/default_display_block"
                 android:layout_marginBottom="10dp">
@@ -131,7 +152,7 @@
                     style="@style/default_display_left"
                     android:layout_marginRight="6dp"
                     android:textSize="14dp"
-                    android:text="@string/acknowledgement_content" />
+                    android:text="@string/settings_acknowledgement_content" />
                     <!-- add a right margin to match the
                              marginLeft in the style     -->
             </RelativeLayout>

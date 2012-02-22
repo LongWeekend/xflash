@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block" 
+    android:paddingRight="0dp"
+    android:onClick="TagFragment_startStudying" >
+
+    <ImageView android:id="@+id/tag_row_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+
+    <TextView android:id="@+id/tag_row_click"
+        style="@style/default_display_right"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="0dp"
+        android:clickable="true"
+        android:onClick="TagFragment_goAllCards"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="8dp"
+        android:text="view" />
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/tag_row_image"
+        android:layout_toLeftOf="@id/tag_row_click" >
+
+        <TextView android:id="@+id/tag_row_top"
+            style="@style/tag_row_toplayout" />
+
+        <TextView android:id="@+id/tag_row_bottom"
+            style="@style/tag_row_bottomlayout" />
+
+    </LinearLayout>
+        
+</RelativeLayout>
+

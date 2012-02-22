@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+    <gradient
+        android:startColor="@color/button_red_startcolor_up"
+        android:endColor="@color/radio_red_endcolor_up"
+        android:angle="270" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/button_red_strokecolor" />
+    <corners
+        android:radius="2dp"
+        android:bottomLeftRadius="8dp"
+        android:topRightRadius="8dp"
+        android:bottomRightRadius="0dp"
+        android:topLeftRadius="0dp" />
+    <size
+        android:width="@dimen/default_radio_width"
+        android:height="@dimen/default_radio_height" />
+</shape>

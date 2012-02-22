@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
@@ -14,20 +14,29 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
-            android:text="Create Study Set" 
+            android:text="@string/create_tag_title" 
             style="@style/heading_text" />
-
-        <!-- LEFT BUTTON -->
-        <Button android:id="@+id/create_tag_cancelbutton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:text="Cancel" 
-            android:onClick="cancel"
-            style="@style/heading_button" />
 
     </RelativeLayout>
 
+    <LinearLayout
+            style="@style/default_frame_block"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp" >
 
+            <TextView 
+                style="@style/default_normal_text"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/createtag_edit_caption" />
+
+            <EditText android:id="@+id/create_tag_text"
+                style="@style/default_edittext"
+                android:layout_marginTop="4dp" />
+     
+    </LinearLayout>       
 
 </LinearLayout>
 

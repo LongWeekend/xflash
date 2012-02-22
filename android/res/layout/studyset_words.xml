@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/studysetwords_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView android:id="@+id/studysetwords_heading_text"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            style="@style/heading_text" />
+
+    </RelativeLayout>
+
+    <!-- TODO - this ListView is not properly displaying either its 
+                scrollbar, nor its shading on scroll -->
+    <ListView android:id="@+id/studysetwords_list"
+        style="@style/default_list_block" />
+        
+</LinearLayout>
+

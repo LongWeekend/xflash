@@ -19,8 +19,21 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="default_normal_text">
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="default_value_text">
         <item name="android:textColor">#FFB0B0B0</item>
         <item name="android:textSize">18sp</item>
+    </style>
+    <style name="tag_text_top">
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="tag_text_bottom">
+        <item name="android:textColor">#FFB0B0B0</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

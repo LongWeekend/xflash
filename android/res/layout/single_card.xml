@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/singlecard_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="@string/singlecard_title"
+            style="@style/heading_text" />
+
+        <!-- RIGHT BUTTON -->
+        <ImageButton android:id="@+id/singlecard_addbutton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/plus" 
+            android:onClick="SingleCardFragment_addTag"
+            style="@style/heading_button" />
+
+    </RelativeLayout>
+
+    <ScrollView style="@style/default_scroll_block">
+
+        <!-- single child of the scroll view -->
+        <LinearLayout android:id="@+id/settings_page"  
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" >
+
+            <!-- the word block -->
+            <TextView android:id="@+id/singlecard_word"
+                style="@style/default_display_heading_layout"
+                android:textColor="#FF000000" />
+
+            <TextView android:id="@+id/singlecard_reading"
+                style="@style/default_display_block"
+                android:textColor="#FF000000" />
+            <TextView android:id="@+id/singlecard_meaning"
+                style="@style/default_display_block"
+                android:textColor="#FF000000" />
+
+            <!-- the 'my sets' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="@string/singlecard_mysets" />
+            <LinearLayout android:id="@+id/singlecard_usertags_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            
+            </LinearLayout>
+
+            <!-- the 'other sets' block -->
+            <TextView 
+                style="@style/default_display_heading_layout"
+                android:text="@string/singlecard_othersets" />
+            <LinearLayout android:id="@+id/singlecard_systags_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+            </LinearLayout>
+
+
+        </LinearLayout>  <!-- end single child of scroll view -->
+
+    </ScrollView>
+
+</LinearLayout>
+

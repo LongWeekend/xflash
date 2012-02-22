@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="button_red_startcolor">#FFE5B0A9</color>
+    <color name="button_red_endcolor">#FF881C11</color>
+    <color name="button_red_strokecolor">#FF992F2F</color>
+    <color name="button_red_startcolor_up">#FFD4A49D</color>
+    <color name="button_red_endcolor_up">#FF761406</color>
+    <color name="radio_red_endcolor_up">#FF570A00</color>
+    <color name="button_blue_startcolor">#FF91A5CB</color>
+    <color name="button_blue_endcolor">#FF032E76</color>
+    <color name="button_blue_strokecolor">#FF042863</color>
+    <color name="button_blue_startcolor_up">#FF616792</color>
+    <color name="button_blue_endcolor_up">#FF00054C</color>
+    <color name="radio_blue_endcolor_up">#FF00032F</color>
+    <color name="button_tame_startcolor">#FFBECBD4</color>
+    <color name="button_tame_endcolor">#FF244563</color>
+    <color name="button_tame_strokecolor">#FF062B4E</color>
+    <color name="button_tame_startcolor_up">#FFB3C1CD</color>
+    <color name="button_tame_endcolor_up">#FF0A3350</color>
+    <color name="radio_tame_endcolor_up">#FF062236</color>
+    <color name="button_yellow_startcolor">#FFD2D6B7</color>
+    <color name="button_yellow_endcolor">#FFE4C628</color>
+    <color name="button_yellow_strokecolor">#FF363404</color>
+    <color name="button_yellow_startcolor_up">#FFE9EF3D</color>
+    <color name="button_yellow_endcolor_up">#FF8F7900</color>
+    <color name="button_green_startcolor">#FFAFE8A2</color>
+    <color name="button_green_endcolor">#FF1FA21F</color>
+    <color name="button_green_strokecolor">#FF363404</color>
+    <color name="button_green_startcolor_up">#FF457338</color>
+    <color name="button_green_endcolor_up">#FF094603</color>
+    <color name="selected_row">#FF7C95A3</color>
+</resources>
