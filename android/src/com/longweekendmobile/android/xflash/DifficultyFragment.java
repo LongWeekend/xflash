@@ -49,7 +49,6 @@ public class DifficultyFragment extends Fragment
         myGroup = (RadioGroup)difficultyLayout.findViewById(R.id.difficulty_group);
         myGroup.setOnCheckedChangeListener(radioChange);
 
-        // TODO - this is not loading when the tab is switched to
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)difficultyLayout.findViewById(R.id.difficulty_heading);
         XflashSettings.setupColorScheme(titleBar); 

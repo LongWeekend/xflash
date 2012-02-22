@@ -72,7 +72,6 @@ public class JapaneseCard extends Card
     {
         boolean returnVal = false;
 
-        // TODO
         // we always have a sentence if the plugin is not installed
         // if ([pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
 /*      

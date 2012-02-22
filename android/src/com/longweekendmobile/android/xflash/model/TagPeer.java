@@ -191,9 +191,6 @@ public class TagPeer
             tempArgs = new String[] { Integer.toString( inTag.getId() ) };
             String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 
-            // TODO - original TempPeer.m had error correcting code here
-            //        but the query executes normally even if there are
-            //        no tags with the specified ID
             tempDB.execSQL(query,tempArgs);
         } 
 
@@ -282,9 +279,6 @@ public class TagPeer
             return false;
         }
 
-        // TODO - the original code had error checking on whether these     
-        //    queries were successful, but they execute normallly
-        //        no matter the input numbers
         // insert the new Tag into 'tags'
         ContentValues insertValues = new ContentValues();
         insertValues.put("card_id", inCard.getCardId() );
@@ -519,8 +513,9 @@ public class TagPeer
             // drop tag_count for all relevant groups
             for(int i = 0; i < rowCount; i++)
             {
-                query = "UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = " + groupList.get(i);
-                tempDB.execSQL(query);
+                selectionArgs = new String[] { Integer.toString( groupList.get(i) ) };
+                query = "UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = ?";
+                tempDB.execSQL(query,selectionArgs);
             }
 
             tempDB.setTransactionSuccessful();
@@ -538,6 +533,7 @@ public class TagPeer
         return true;
 
     }  // end deleteTag()
+
 
     //  does not close Cursor
     private static ArrayList<Tag> tagListWithCursor(Cursor inCursor)

@@ -132,15 +132,13 @@ public class Tag
         // 1-1 with groups.  that was not the original design, 
         // but are we moving that direction?  MMA - Oct 19 2011
 
-        // TODO - why are we passing in the entire 'this' Tag
-        //        object when we only need the ID?
         return GroupPeer.parentGroupIdOfTag(this);
     }
 
     // returns a boolean if this object's tagEditable is 1
     public boolean isEditable()
     {
-        return (tagEditable == 1);
+        return ( tagEditable == 1 );
     }
 
     // not ENTIRELY sure what's going on here yet
@@ -203,10 +201,9 @@ public class Tag
             FileInputStream fis = inContext.openFileInput(cacheFile); 
             ObjectInputStream in = new ObjectInputStream(fis); 
             
-            // TODO - the following line causes the compiler to
-            //      - complain about unsafe operations
-            //      - (i.e. an unspecified List)
-            //      - CANNOT BE HELPED, SUPPRESS
+            // the following line causes the compiler to complain about
+            // unsafe operations (i.e. an unspecified List)
+            //      - CANNOT BE HELPED, SUPPRESS WARNING
             cardIds = (ArrayList<ArrayList<Integer>>)in.readObject();
             
             in.close(); 
@@ -409,7 +406,9 @@ public class Tag
         //  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
             
         return;
-    }
+    
+    }  // end save()
+
 
     // TODO - rework as a receiver when we find out where we're broadcasting from
     public void tagDidSave()
@@ -589,20 +588,6 @@ public class Tag
 
 }  // end Tag class declaration
 
-
-// TODO - dealloc is not necessary due to garbage collection
-//    however, do we need to deal with this removeObserver business?
-    
-/*
-- (void) dealloc
-{
-  if (self.isFault == NO)
-  {
-    // When we hydrate a card, we also add an observer
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-  }
-}
-*/
 
 
 

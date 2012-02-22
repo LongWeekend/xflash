@@ -19,7 +19,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
-//  public void TagFragment_goAllCards(View  )
+//  public void TagFragment_goStudySetWords(View  )
 //  public void TagFragment_startStudying(View  )
 //
 //  public void StudySetWordsFragment_startStudying(View  )
@@ -199,9 +199,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         TagFragment.openGroup(v,this);
     }
-    public void TagFragment_goAllCards(View v)
+    public void TagFragment_goStudySetWords(View v)
     {
-        TagFragment.goAllCards(v,this);
+        TagFragment.goStudySetWords(v,this);
     }
     public void TagFragment_startStudying(View v)
     {
@@ -421,7 +421,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
             
     // FIRST WE NEED TO detach any currently attached fragment
 
-            // TODO - we're running detaches we don't necessarily need to here
             // detach the fragment of the tab we are leaving
             if( currentTab != null )
             {

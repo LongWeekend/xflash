@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -228,7 +227,6 @@ public class XflashSplash extends Activity
 
 
     // our receiver class for broadcasts
-    // TODO - database stuff temporary for debugging purposes
     protected class SplashReceiver extends BroadcastReceiver
     {
         @Override

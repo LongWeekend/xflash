@@ -15,7 +15,6 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -175,16 +174,11 @@ public class StudySetWordsFragment extends Fragment
         @Override
         protected Void doInBackground(Void... unused)
         {
-
-            // TODO - between the two of these, I think I can SEE the smoke
-            //        coming off my phone's CPU. Takes forever for large sets
+            // get a list of faulted cards, reset the load flag
             if( ( needLoad == true ) || ( cardArray == null ) )
             {
-                // get all of our cards for the current tag and hydrate
                 cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
        
-                int tempInt = cardArray.size();
-                
                 needLoad = false;
             }
  

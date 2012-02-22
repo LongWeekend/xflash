@@ -113,10 +113,6 @@ public class GroupPeer
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
-        // TODO
-        // why are we passing in the entire Tag object
-        // if we just need its id?
-
         int groupId = 0;
 
         String[] selectionArgs = new String[] { Integer.toString( inTag.getId() ) };

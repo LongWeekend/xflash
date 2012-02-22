@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
@@ -33,7 +32,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SingleCardFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash SingleCardFragment";
+    // private static final String MYTAG = "XFlash SingleCardFragment";
    
     private static int incomingCardId; 
     private static Card currentCard = null;

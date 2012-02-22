@@ -10,7 +10,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void addToplevelTag(Context  )
 //  public static void openGroup(View  ,Xflash  )
-//  public static void goAllCards(View  ,Xflash  )
+//  public static void goStudySetWords(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
 
@@ -18,12 +18,15 @@ import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -44,12 +47,15 @@ public class TagFragment extends Fragment
     private LinearLayout tagLayout;
     public static Group currentGroup = null;
     
+    private static FragmentActivity myContext = null;
     
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
                              Bundle savedInstanceState) 
     {
+        myContext = getActivity();
+
         // inflate our layout for the Tag fragment and load our icon array
         tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
         int icons[] = XflashSettings.getIcons();
@@ -124,7 +130,7 @@ public class TagFragment extends Fragment
             }
             tempList.addView(tempRow);
 
-        }  // end for loop
+        }  // end for loop (groups)
 
 
         // pull and display any tags for currentGroup
@@ -151,7 +157,13 @@ public class TagFragment extends Fragment
             
             tempRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
             tempRow.setTag( tempTag.getId() );
-      
+     
+            // if this is a user tag, set a long-click listener for deletion
+            if( tempTag.isEditable() )
+            {
+                tempRow.setOnLongClickListener(userTagLongClick);
+            }
+ 
             // set the group image
             tempRowImage = (ImageView)tempRow.findViewById(R.id.tag_row_image);
 
@@ -191,7 +203,8 @@ public class TagFragment extends Fragment
             }
             tempList.addView(tempRow);
 
-        }  // end for loop
+        }  // end for loop (tags)
+
 
         // only display backup block on root view
         LinearLayout backupBlock = (LinearLayout)tagLayout.findViewById(R.id.tag_backup_block);
@@ -207,6 +220,45 @@ public class TagFragment extends Fragment
         return tagLayout;
 
     }  // end onCreateView()
+
+
+    // a long-click listener for deletion of user tags
+    OnLongClickListener userTagLongClick = new OnLongClickListener() 
+    {
+        @Override
+        public boolean onLongClick(View v) 
+        {
+            final int tempInt = (Integer)v.getTag();
+            final Tag tempTag = TagPeer.retrieveTagById(tempInt);
+
+            // set and fire our AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+            builder.setTitle("Delete Tag?");
+            builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
+
+            // on postive response, set the new active user
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog,int which)
+                {
+                    TagPeer.deleteTag(tempTag);
+
+                    // TODO - need to refresh tag fragment
+                }
+            });
+
+            // on negative response, do nothing
+            builder.setNegativeButton("Cancel",null);
+
+            builder.create().show();
+
+ 
+            Log.d(MYTAG,"we're returning right now");
+
+            return true;
+        }
+
+    };  // end OnLongClickListener declaration 
 
 
     // onClick for our PLUS button
@@ -228,7 +280,7 @@ public class TagFragment extends Fragment
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
-    public static void goAllCards(View v,Xflash inContext)
+    public static void goStudySetWords(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
 

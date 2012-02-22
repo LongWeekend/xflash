@@ -13,10 +13,9 @@ package com.longweekendmobile.android.xflash;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class CreateTagActivity extends Activity
 {
-    private static final String MYTAG = "XFlash TagActivity";
+    // private static final String MYTAG = "XFlash TagActivity";
    
     private static Group currentGroup;
     private EditText myEdit;
@@ -52,8 +51,11 @@ public class CreateTagActivity extends Activity
                     // when they click 'done' on the keyboard, add the new
                     // group and exit
                     TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
-    
                     finish();
+                    
+                    // TODO - need to refresh whatever fragment we came from
+
+                    return true;
                 }
                 
                 return false;
@@ -101,7 +103,7 @@ public class CreateTagActivity extends Activity
     }
 
 
-}  // end TagActivity class declaration
+}  // end CreateTagActivity class declaration
 
 
 

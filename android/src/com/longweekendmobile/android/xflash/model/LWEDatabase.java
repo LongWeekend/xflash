@@ -49,6 +49,7 @@ public class LWEDatabase extends SQLiteOpenHelper
                         
     // the Android default onboard database location
     private static final String DB_PATH = "/data/data/com.longweekendmobile.android.xflash/databases/";
+    
     // TODO change these from mp3 when files are cut up
     private static final String DB_NAME = "jFlash.mp3";
     private static final String DB_CARD = "jFlash-CARD-1.1.mp3";
@@ -264,12 +265,6 @@ public class LWEDatabase extends SQLiteOpenHelper
                 
                 // isAttached is unmodified 
                 return false;
-
-                // TODO - in the original code an exception is
-                //        thrown here, but NOT if there is a
-                //        failure in attachDatabase()
-                //
-                //        Do we need to throw one?
             }
                 
         }  // end if( database is open and jFlash-CARD is attached)
