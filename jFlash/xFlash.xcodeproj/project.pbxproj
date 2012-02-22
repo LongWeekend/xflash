@@ -497,6 +497,7 @@
 		49B528311276C97500EE64D3 /* practice-btn-showreading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */; };
 		49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
 		49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
+		49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */; };
 		49BBA49A144D4BBF00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA499144D4BBF00E6A9AE /* help */; };
 		49BBA49C144D4BCE00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA49B144D4BCE00E6A9AE /* help */; };
 		49BBA4AF144D571300E6A9AE /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA49E144D570B00E6A9AE /* JRActivityObject.m */; };
@@ -1105,6 +1106,7 @@
 		49B527B4127680D500EE64D3 /* 90-lifebuoy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "90-lifebuoy@2x.png"; path = "Assets/90-lifebuoy@2x.png"; sourceTree = "<group>"; };
 		49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-showreading@2x.png"; path = "Assets/practice-btn-showreading@2x.png"; sourceTree = "<group>"; };
 		49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft@2x.png"; path = "Assets/talkbubble-ft@2x.png"; sourceTree = "<group>"; };
+		49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_161_to_162.sql; path = Migrations/jflash_161_to_162.sql; sourceTree = "<group>"; };
 		49BBA499144D4BBF00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/JFlash/help; sourceTree = "<group>"; };
 		49BBA49B144D4BCE00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/CFlash/help; sourceTree = "<group>"; };
 		49BBA49D144D570B00E6A9AE /* JRActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRActivityObject.h; path = Classes/External/janrain/JREngage/Classes/JRActivityObject.h; sourceTree = SOURCE_ROOT; };
@@ -1778,6 +1780,7 @@
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				49E797FD14A8598F009B505A /* jflash_15_to_16.sql */,
 				4937876014DB8D9700361203 /* jflash_16_to_161.sql */,
+				49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */,
@@ -3047,6 +3050,7 @@
 				49FE8C7714A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7914A9B83200579716 /* CardViewController.xib in Resources */,
 				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
+				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
