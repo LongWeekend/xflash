@@ -691,6 +691,14 @@
 		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		918EEB1F14F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */; };
+		918EEB2014F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */; };
+		918EEB2214F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */; };
+		918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */; };
+		918EEB2614F5DACB00EF044C /* button_iosblue_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */; };
+		918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */; };
+		918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */; };
+		918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */; };
 		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
 		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
@@ -1348,6 +1356,10 @@
 		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_iosblue_135x40@2x.png"; sourceTree = "<group>"; };
+		918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_iosblue_280x40@2x.png"; sourceTree = "<group>"; };
+		918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_iosblue_135x40.png; sourceTree = "<group>"; };
+		918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_iosblue_280x40.png; sourceTree = "<group>"; };
 		91910048148052A1003E9A19 /* JFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashSearchTest.h; path = Tests/jFlashTests/JFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
 		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
@@ -2473,6 +2485,8 @@
 				91CA7257133D216C008A89A8 /* button_facebook_280x40.png */,
 				91CA7258133D216C008A89A8 /* button_google_135x40.png */,
 				91CA7259133D216C008A89A8 /* button_google_280x40.png */,
+				918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */,
+				918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */,
 				91CA725C133D216C008A89A8 /* button_janrain_135x40.png */,
 				91CA725D133D216C008A89A8 /* button_janrain_280x40.png */,
 				91CA725E133D216C008A89A8 /* button_linkedin_135x40.png */,
@@ -2544,6 +2558,8 @@
 				91CA72A0133D216C008A89A8 /* button_facebook_280x40@2x.png */,
 				91CA72A1133D216C008A89A8 /* button_google_135x40@2x.png */,
 				91CA72A2133D216C008A89A8 /* button_google_280x40@2x.png */,
+				918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */,
+				918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */,
 				91CA72A5133D216C008A89A8 /* button_janrain_135x40@2x.png */,
 				91CA72A6133D216C008A89A8 /* button_janrain_280x40@2x.png */,
 				91CA72A7133D216C008A89A8 /* button_linkedin_135x40@2x.png */,
@@ -3057,6 +3073,10 @@
 				49E797FE14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 				49FE8C7714A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7914A9B83200579716 /* CardViewController.xib in Resources */,
+				918EEB1F14F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */,
+				918EEB2214F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
+				918EEB2614F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
+				918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
 				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
 			);
@@ -3278,6 +3298,10 @@
 				4982294C1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
 				49FE8C7114A9B82300579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7314A9B82300579716 /* CardViewController.xib in Resources */,
+				918EEB2014F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */,
+				918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
+				918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
+				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
