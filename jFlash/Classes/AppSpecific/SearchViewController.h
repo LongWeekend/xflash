@@ -13,6 +13,7 @@
 #import "DownloadManager.h"
 #import "PluginManager.h"
 #import "ExternalAppManager.h"
+#import "GradientButton.h"
 
 // MMA: we're not using this yet, as of 1.3.1
 //#import "DisplaySearchedSentenceViewController.h"
@@ -71,10 +72,9 @@ typedef enum searchStates
 
 //! The view to show in the header when the user comes from an external app
 @property (nonatomic, retain) IBOutlet UIView *returnToExternalAppView;
-@property (nonatomic, retain) IBOutlet UIButton *externalAppBtn;
+@property (nonatomic, retain) IBOutlet GradientButton *externalAppBtn;
 
 @property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
-
 @property (nonatomic, retain) IBOutlet ExternalAppManager *externalAppManager;
 
 @end
