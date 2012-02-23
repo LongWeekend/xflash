@@ -72,6 +72,10 @@ const NSInteger KSegmentedTableHeader = 100;
 {
   [super viewDidLoad];
   
+  // Is a little bit ghetto for now.  We could consider updating this class.
+  self.externalAppBtn.layer.borderWidth = 2.0f;
+  self.externalAppBtn.layer.cornerRadius = 9.0f;
+  
   // Set YELLOW, not RED
   NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
   UIColor *color = nil;

@@ -75,7 +75,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Go Back To Rikai Browser</string>
+						<string key="IBUINormalTitle">Return To Rikai Browser</string>
 						<reference key="IBUIHighlightedTitleColor" ref="839327852"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -220,6 +220,7 @@
 					<string>16.IBPluginDependency</string>
 					<string>18.CustomClassName</string>
 					<string>18.IBPluginDependency</string>
+					<string>18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -231,6 +232,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>GradientButton</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -346,7 +348,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIActivityIndicatorView</string>
-							<string>UIButton</string>
+							<string>GradientButton</string>
 							<string>ExternalAppManager</string>
 							<string>PluginManager</string>
 							<string>UIView</string>
@@ -374,7 +376,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">externalAppBtn</string>
-								<string key="candidateClassName">UIButton</string>
+								<string key="candidateClassName">GradientButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">externalAppManager</string>
