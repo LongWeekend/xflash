@@ -1,42 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/table_background" >
     
     <!-- TITLE BAR -->
-    <RelativeLayout style="@style/heading_bar" >
+    <RelativeLayout android:id="@+id/help_page_heading"
+        style="@style/heading_bar" >
 
         <!-- HEADING -->
-        <TextView android:id="@+id/help_title"
+        <TextView android:id="@+id/help_page_title"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
             style="@style/heading_text" />
 
-        <!-- LEFT BUTTON -->
-        <Button android:id="@+id/back_help_button"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:onClick="goBackToHelp"
-            android:text="To Help"
-            style="@style/heading_button" />
-                
         <!-- RIGHT BUTTON -->
-        <Button android:id="@+id/nextbutton"
+        <Button android:id="@+id/help_nextbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:onClick="helpNext"
-            android:text="Next >"
+            android:onClick="HelpPageFragment_helpNext"
+            android:text="@string/helppage_nextbutton"
             style="@style/heading_button" />
 
     </RelativeLayout>
 
-    <WebView android:id="@+id/help_display"
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent"
+    <com.longweekendmobile.android.xflash.NoHorizontalWebView android:id="@+id/help_display"
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent"
     />
 
 </LinearLayout>

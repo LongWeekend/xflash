@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/table_background" >
+  
+    <!-- TITLE BAR -->
+    <RelativeLayout android:id="@+id/edit_user_heading"
+        style="@style/heading_bar" >
+
+        <!-- HEADING -->
+        <TextView android:id="@+id/edit_user_label"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            style="@style/heading_text" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+            style="@style/default_frame_block"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp" >
+
+            <TextView 
+                style="@style/default_normal_text"
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:text="@string/edituser_nickname" />
+
+            <EditText android:id="@+id/edit_user_text"
+                style="@style/default_edittext"
+                android:layout_marginTop="4dp" />
+
+                
+    </LinearLayout>
+            
+    <!-- the select/save button block -->
+    <LinearLayout 
+        style="@style/default_frame_block"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" >
+
+        <Button android:id="@+id/edituser_selectbutton"
+            style="@style/green_button"
+            android:background="@drawable/button_green"
+            android:text="@string/edituser_selectbutton"
+            android:onClick="EditUserFragment_select"
+            android:layout_weight="1" />
+
+        <Button android:id="@+id/edituser_savebutton"
+            style="@style/green_button"
+            android:background="@drawable/button_green"
+            android:text="@string/edituser_savebutton"
+            android:onClick="EditUserFragment_save"
+            android:layout_weight="1" />
+
+    </LinearLayout>  <!-- end button block -->
+
+</LinearLayout>
+

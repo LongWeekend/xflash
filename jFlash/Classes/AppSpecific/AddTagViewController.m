@@ -57,6 +57,17 @@ enum EntrySectionRows
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 
+    // For listening for headword direction changes
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
+
+    // Cache the tag's membership list
+    self.membershipCacheArray = [[[TagPeer faultedTagsForCard:card] mutableCopy] autorelease];
+
+    // Register listener to reload data if modal added a set
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
+    
     // Set nav bar title
     self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
   }
@@ -72,36 +83,17 @@ enum EntrySectionRows
   // Set up the table view background so we're not looking at cat's pajamas
   self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
-
-  // Cache the tag's membership list
-  self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
-  
-  // For listening for headword direction changes
-  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_THEME options:NSKeyValueObservingOptionNew context:NULL];
-
-  // Register listener to reload data if modal added a set
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
-}
-
-- (void) viewDidUnload
-{
-  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
-  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_THEME];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super viewDidUnload];
 }
 
 #pragma mark - KVO
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE] && self.tableView)
   {
     [self.tableView reloadData];
   }
-  else if ([keyPath isEqualToString:APP_THEME])
+  else if ([keyPath isEqualToString:APP_THEME] && self.navigationController.navigationBar)
   {
     self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   }
@@ -150,12 +142,18 @@ enum EntrySectionRows
 
 #pragma mark - Private Methods
 
-//! Recreates tag membership caches and reloads table view
+/**
+ * Recreates tag membership caches and reloads table view, if a table view is loaded.
+ * Otherwise (e.g. if this is called after a low-memory warning purges the table), it is a NOOP.
+ */
 - (void) _reloadTableData
 {
-  self.myTagArray = [TagPeer retrieveUserTagList];
-  self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
-  [self.tableView reloadData];
+  if (self.tableView)
+  {
+    self.myTagArray = [TagPeer retrieveUserTagList];
+    self.membershipCacheArray = [[[TagPeer faultedTagsForCard:self.currentCard] mutableCopy] autorelease];
+    [self.tableView reloadData];
+  }
 }
 
 - (void) _toggleMembershipForTag:(Tag *)tmpTag
@@ -420,6 +418,11 @@ enum EntrySectionRows
 //! Standard dealloc
 - (void)dealloc
 {
+  // Remove all observers
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_THEME];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+
   [myTagArray release];
   [sysTagArray release];
   [currentCard release];

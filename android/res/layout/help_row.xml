@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:background="#FFFFFFFF"
-    android:padding="6dp"
-    >
+    style="@style/default_display_block">
 
     <TextView android:id="@+id/help_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:textColor="#FF000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/default_display_left" />
 
     <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp" 
-        android:text=">"
-        android:textColor="#FF000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="2dp" />
+        style="@style/default_display_right"
+        android:text=">" />
 
 </RelativeLayout>
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block" 
+    android:onClick="StudySetWordsFragment_singleCard" >
+
+    <TextView android:id="@+id/studysetwords_row_click"
+        style="@style/default_display_right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text=">" />
+
+    <LinearLayout android:id="@+id/cardrow_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@id/studysetwords_row_click" >
+
+        <TextView android:id="@+id/studysetwords_word"
+            style="@style/tag_row_toplayout" />
+
+        <TextView android:id="@+id/studysetwords_meaning"
+            style="@style/tag_row_bottomlayout"
+            android:text="or testing" />
+
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/studysetwords_divider"
+        style="@style/generic_divider"
+        android:layout_below="@id/cardrow_block"
+        android:layout_marginTop="10dp" >
+    </LinearLayout>
+
+</RelativeLayout>
+
+

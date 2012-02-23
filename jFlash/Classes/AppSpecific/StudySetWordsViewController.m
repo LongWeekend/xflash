@@ -45,53 +45,41 @@
     UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicator = av;
     [av release];
+
+    // When the headword type changes, reload the table
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+    
+    // Ideally, I could set the object: to self.tag, but there's no guarantee that the MEMORY ADDY of
+    // the self.tag is the same as the memory address of the tag object sending the notification, even
+    // if they have the same tagId ... sadface. (MMA - 18.10.2011) ... Or is this OK?  Think about it.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_tagContentDidChange:)
+                                                 name:LWETagContentDidChange
+                                               object:nil];
   }
   return self;
 }
 
 #pragma mark - UIViewController Methods
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  // When the headword type changes, reload the table
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-  
-  // Ideally, I could set the object: to self.tag, but there's no guarantee that the MEMORY ADDY of
-  // the self.tag is the same as the memory address of the tag object sending the notification, even
-  // if they have the same tagId ... sadface. (MMA - 18.10.2011) ... Or is this OK?  Think about it.
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(_tagContentDidChange:)
-                                               name:LWETagContentDidChange
-                                             object:nil];
-}
-
-/** UIView delegate - sets theme info */
 - (void) viewWillAppear: (BOOL)animated
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   // TODO: iPad customization!
   self.tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:LWETableBackgroundImage]] autorelease];
-  self.navigationItem.title = self.tag.tagName;
-}
-
-- (void)viewDidUnload
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
   
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super viewDidUnload];
+  // We do this on viewWillAppear instead of viewDidLoad because the tagName could change
+  // when the user edits it after tapping "Edit" on this VC
+  self.navigationItem.title = self.tag.tagName;
 }
 
 #pragma mark - KVO
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if ([keyPath isEqualToString:APP_HEADWORD_TYPE])
+  if ([keyPath isEqualToString:APP_HEADWORD_TYPE] && self.tableView)
   {
     [self.tableView reloadData];
   }
@@ -342,6 +330,10 @@
 //! Standard dealloc
 - (void)dealloc
 {
+  // Remove observers for headword & tag content did change
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [tag release]; 
   [cards release];
   [activityIndicator release];

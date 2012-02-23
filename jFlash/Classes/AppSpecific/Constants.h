@@ -102,11 +102,15 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
   extern NSString * const LWE_JF_VERSION_1_4;
   extern NSString * const LWE_JF_VERSION_1_5;
   extern NSString * const LWE_JF_VERSION_1_6;
+  extern NSString * const LWE_JF_VERSION_1_6_1;
+  extern NSString * const LWE_JF_VERSION_1_6_2;
   extern NSString * const LWE_JF_10_USER_DATABASE;
   extern NSString * const LWE_JF_10_TO_11_SQL_FILENAME;
   extern NSString * const LWE_JF_12_TO_13_SQL_FILENAME;
   extern NSString * const LWE_JF_13_TO_14_SQL_FILENAME;
   extern NSString * const LWE_JF_15_TO_16_SQL_FILENAME;
+  extern NSString * const LWE_JF_16_TO_161_SQL_FILENAME;
+  extern NSString * const LWE_JF_161_TO_162_SQL_FILENAME;
 
   // This is here for legacy JFlash reasons - before v1.6 this was used.  Used for upgrade path now.
   extern NSString * const LWE_DOWNLOADED_PLUGIN_PLIST;

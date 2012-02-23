@@ -87,6 +87,9 @@
   UINavigationController *searchNav = [self.tabBarController.viewControllers objectAtIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
   LWE_ASSERT_EXC([searchNav isKindOfClass:[UINavigationController class]],@"Whoa");
   
+  // Reset the search view to the root search view
+  [searchNav popToRootViewControllerAnimated:NO];
+  
   SearchViewController *searchVC = (SearchViewController*)[searchNav topViewController];
   LWE_ASSERT_EXC([searchVC isKindOfClass:[SearchViewController class]], @"Whoa");
   [searchVC runSearchAndSetSearchBarForString:term];

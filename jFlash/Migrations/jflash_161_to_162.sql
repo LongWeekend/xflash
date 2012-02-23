@@ -1,0 +1,14 @@
+DELETE FROM card_tag_link WHERE tag_id = '92' AND card_id = '146563';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (92, 88244);
+DELETE FROM card_tag_link WHERE tag_id = '93' AND card_id = '146563';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (93, 88244);
+DELETE FROM card_tag_link WHERE tag_id = '94' AND card_id = '146563';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (94, 88244);
+DELETE FROM card_tag_link WHERE tag_id = '95' AND card_id = '146563';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (95, 88244);
+DELETE FROM card_tag_link WHERE tag_id = '92' AND card_id = '146713';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (92, 7331);
+DELETE FROM card_tag_link WHERE tag_id = '93' AND card_id = '146713';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (93, 7331);
+DELETE FROM card_tag_link WHERE tag_id = '94' AND card_id = '146713';
+INSERT INTO card_tag_link (tag_id, card_id) VALUES (94, 7331);

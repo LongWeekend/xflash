@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp" >
+
+    <RelativeLayout android:id="@+id/header_block"
+        style="@style/default_display_block" 
+        android:onClick="AllCardsFragment_startStudying" >
+
+        <TextView 
+            style="@style/default_display_left"
+            android:text="@string/allcard_start_studying" />
+        <TextView 
+            style="@style/default_display_right"
+            android:text=">" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -20,6 +20,10 @@ NSInteger const kLWEGroupsSection = 0;
 NSInteger const kLWETagsSection = 1;
 NSInteger const kLWEBackupSection = 2;
 
+@interface StudySetViewController ()
+- (void) _commonInit;
+@end
+
 @implementation StudySetViewController
 @synthesize subgroupArray,tagArray,selectedTagId,group,activityIndicator,searchBar,backupManager,activityView;
 /** 
@@ -35,6 +39,7 @@ NSInteger const kLWEBackupSection = 2;
     self.selectedTagId = kLWEUninitializedTagId;
     // This cast is necessary to prevent a stupid compiler warning about not knowing which -initWithDelegate to call
     self.backupManager = [[(BackupManager*)[BackupManager alloc] initWithDelegate:self] autorelease];
+    [self _commonInit];
   }
   return self;
 }
@@ -47,9 +52,20 @@ NSInteger const kLWEBackupSection = 2;
     self.selectedTagId = kLWEUninitializedTagId;
     self.group = aGroup;
     self.title = aGroup.groupName;
+    [self _commonInit];
   }
   return self;
 }
+
+- (void) _commonInit
+{
+  // Register observers to reload table data on other events
+  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kSetWasAddedOrUpdated object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
+}
+
+#pragma mark - UIViewController Methods
 
 - (void) viewDidLoad
 {
@@ -65,19 +81,13 @@ NSInteger const kLWEBackupSection = 2;
   _addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet:)];
   self.navigationItem.rightBarButtonItem = _addButton;
   
-  // Register observers to reload table data on other events
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kSetWasAddedOrUpdated object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:LWETagContentDidChange object:nil];
   [[NSNotificationCenter defaultCenter] addObserverForName:LWEJanrainLoginManagerUserDidNotAuthenticate object:nil queue:nil usingBlock:^(NSNotification *notif) { [DSBezelActivityView removeView]; }];
 
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-  
   self.tagArray = [[self.group.childTags mutableCopy] autorelease];
   self.activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
 }
 
-- (void) viewWillAppear: (BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBar.tintColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
@@ -122,6 +132,12 @@ NSInteger const kLWEBackupSection = 2;
 
 - (void) reloadTableData
 {
+  // No need to do anything if we don't have a table view (low memory, etc)
+  if (self.tableView == nil)
+  {
+    return;
+  }
+  
 	if (searching)
   {
     self.tagArray = [[[TagPeer retrieveTagListLike:self.searchBar.text] mutableCopy] autorelease];
@@ -766,18 +782,12 @@ NSInteger const kLWEBackupSection = 2;
 	_searchOverlay = nil;
 }
 
-- (void)viewDidUnload
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  [settings removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
-  
-  [[NSNotificationCenter defaultCenter] removeObserver:self];  
-  [super viewDidUnload];
-}
-
 //! Standard dealloc, removes observers
 - (void)dealloc
 {
+  [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [_addButton release];
   [tagArray release];
   [subgroupArray release];
