@@ -12,6 +12,8 @@
 #import "AddTagViewController.h"
 #import "DownloadManager.h"
 #import "PluginManager.h"
+#import "ExternalAppManager.h"
+
 // MMA: we're not using this yet, as of 1.3.1
 //#import "DisplaySearchedSentenceViewController.h"
 
@@ -33,6 +35,8 @@ typedef enum searchStates
   kSearchHasNoResults,          //! Regular search returned nothing
 } LWEFlashSearchStates;
 
+@class ExternalAppManager;
+
 /**
  * Handles dictionary-like search functions inside JFlash
  */
@@ -45,8 +49,16 @@ typedef enum searchStates
 }
 
 - (IBAction) changeSearchTarget:(id)sender;
+
+- (IBAction) returnToExternalApp:(id)sender;
+
+//! Calls "runSearchForString" after programmatically populating the search bar w/ text - used for Rikai
 - (void) runSearchAndSetSearchBarForString:(NSString*)text;
+
+//! Call to search the database & populate the table w/ results
 - (void) runSearchForString:(NSString*)text;
+
+//! Callback from the above runSearchForString: async call
 - (void) receivedSearchResults:(NSArray *)results;
 
 //! Contains the returned search results (array of ExampleSentence objects)
@@ -57,6 +69,12 @@ typedef enum searchStates
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 
+//! The view to show in the header when the user comes from an external app
+@property (nonatomic, retain) IBOutlet UIView *returnToExternalAppView;
+@property (nonatomic, retain) IBOutlet UIButton *externalAppBtn;
+
 @property (nonatomic, retain) IBOutlet PluginManager *pluginManager;
+
+@property (nonatomic, retain) IBOutlet ExternalAppManager *externalAppManager;
 
 @end

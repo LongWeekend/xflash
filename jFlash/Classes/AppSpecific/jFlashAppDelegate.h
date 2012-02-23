@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DownloadManager.h"
 #import "PluginManager.h"
+#import "ExternalAppManager.h"
 
 @interface jFlashAppDelegate : NSObject <UIApplicationDelegate>
-{
-  NSString *_searchedTerm;
-}
 
 void uncaughtExceptionHandler(NSException *exception);
 
@@ -26,5 +24,6 @@ void uncaughtExceptionHandler(NSException *exception);
 
 @property (retain) IBOutlet PluginManager *pluginManager;
 @property (retain) IBOutlet DownloadManager *downloadManager;
+@property (retain) IBOutlet ExternalAppManager *externalAppManager;
 
 @end

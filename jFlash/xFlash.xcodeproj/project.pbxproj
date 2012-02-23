@@ -75,6 +75,10 @@
 		49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
+		491E276E14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E276F14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E277014F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E277114F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -977,6 +981,8 @@
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
+		491E276C14F5DA7B00C5243A /* ExternalAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExternalAppManager.h; path = AppSpecific/ExternalAppManager.h; sourceTree = "<group>"; };
+		491E276D14F5DA7B00C5243A /* ExternalAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalAppManager.m; path = AppSpecific/ExternalAppManager.m; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -2361,6 +2367,8 @@
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
 				4982294F1491D02A009EC2CD /* DownloadManager.h */,
 				498229501491D02A009EC2CD /* DownloadManager.m */,
+				491E276C14F5DA7B00C5243A /* ExternalAppManager.h */,
+				491E276D14F5DA7B00C5243A /* ExternalAppManager.m */,
 				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
 				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
 				498EBDA51488B96800BA6DE7 /* Plugin.h */,
@@ -3458,6 +3466,7 @@
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797F914A8434C009B505A /* GradientButton.m in Sources */,
 				4964E53E14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E276E14F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3537,6 +3546,7 @@
 				4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				4964E54014A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E277014F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3617,6 +3627,7 @@
 				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				4964E54114A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E277114F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3774,6 +3785,7 @@
 				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797FA14A8434C009B505A /* GradientButton.m in Sources */,
 				4964E53F14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E276F14F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
