@@ -6,11 +6,11 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/studysetwords_heading"
+    <RelativeLayout android:id="@+id/tagcards_heading"
         style="@style/heading_bar" >
 
         <!-- HEADING -->
-        <TextView android:id="@+id/studysetwords_heading_text"
+        <TextView android:id="@+id/tagcards_heading_text"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
@@ -21,7 +21,7 @@
 
     <!-- TODO - this ListView is not properly displaying either its 
                 scrollbar, nor its shading on scroll -->
-    <ListView android:id="@+id/studysetwords_list"
+    <ListView android:id="@+id/tagcards_list"
         style="@style/default_list_block" />
         
 </LinearLayout>

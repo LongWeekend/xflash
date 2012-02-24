@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="0dp"
         android:clickable="true"
-        android:onClick="TagFragment_goStudySetWords"
+        android:onClick="TagFragment_goTagCards"
         android:paddingLeft="10dp"
         android:paddingTop="8dp"
         android:paddingRight="10dp"

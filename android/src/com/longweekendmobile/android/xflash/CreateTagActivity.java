@@ -13,6 +13,7 @@ package com.longweekendmobile.android.xflash;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -21,13 +22,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.longweekendmobile.android.xflash.model.Card;
+import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.Group;
+import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class CreateTagActivity extends Activity
 {
-    // private static final String MYTAG = "XFlash TagActivity";
+    private static final String MYTAG = "XFlash TagActivity";
    
+    public static final int TAG_FRAGMENT_CALLING = 0;
+    public static final int SINGLE_CARD_CALLING = 1;
+ 
+    private static int whoIsCalling = -1;
     private static Group currentGroup;
     private EditText myEdit;
  
@@ -50,18 +58,36 @@ public class CreateTagActivity extends Activity
                 {
                     // when they click 'done' on the keyboard, add the new
                     // group and exit
-                    TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+                    Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+                    
+                    // refresh the appropriate tag list
+                    if( whoIsCalling == TAG_FRAGMENT_CALLING )
+                    {
+                        TagFragment.refreshTagList();
+                    }
+                    else if( whoIsCalling == SINGLE_CARD_CALLING )
+                    {
+                        // if called from a specific card, add that card to the new tag
+                        int tempCardId = getIntent().getIntExtra("card_id",-1);
+                        Card tempCard = CardPeer.retrieveCardByPK(tempCardId);
+    
+                        TagPeer.subscribeCard(tempCard,theNewTag);
+                        
+                        AddCardToTagFragment.refreshTagList();
+                    }
+
                     finish();
                     
-                    // TODO - need to refresh whatever fragment we came from
-
                     return true;
-                }
+
+                }  // end if( DONE was clicked )
                 
                 return false;
-            }
 
-        });
+            }  // end onEditorAction()
+
+        });  // end OnEditorActionListener
+
         myEdit.requestFocus();
 
         // launch with the keyboard displayed
@@ -96,6 +122,17 @@ public class CreateTagActivity extends Activity
         
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
     }
+
+    
+    public static void setWhoIsCalling(int inCalling)
+    {
+        if( inCalling < 0 )
+        {
+            Log.d(MYTAG,"ERROR - setWhoIsCalling() called with:  " + inCalling);
+        }
+
+        whoIsCalling = inCalling;
+    } 
 
     public static void setCurrentGroup(Group inGroup)
     {
