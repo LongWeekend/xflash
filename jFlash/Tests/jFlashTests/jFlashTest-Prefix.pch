@@ -20,7 +20,7 @@
 #import "LWEAnalytics.h"
 #import "LWEError.h"
 #import "LWEDatabase.h"
-#import "LWEUILabelUtils.h"
+#import "UILabel+LWEUtilities.h"
 #import "LWEUITableUtils.h"
 #import "LWERetinaUtils.h"
 #import "LWEViewAnimationUtils.h"

@@ -75,6 +75,10 @@
 		49195081144F9E7900DB81F7 /* jFlash-EX-1.2.db in Resources */ = {isa = PBXBuildFile; fileRef = 4919507F144F9E7900DB81F7 /* jFlash-EX-1.2.db */; };
 		491D7B2911C4776C00BF8323 /* UserPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 491D7B2811C4776C00BF8323 /* UserPeer.m */; };
 		491D7D0811C4EFFE00BF8323 /* SentenceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491D7D0611C4EFFE00BF8323 /* SentenceView.xib */; };
+		491E276E14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E276F14F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E277014F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
+		491E277114F5DA7B00C5243A /* ExternalAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E276D14F5DA7B00C5243A /* ExternalAppManager.m */; };
 		4925735311C12619006FA4E1 /* ModalTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925735211C12619006FA4E1 /* ModalTaskViewController.m */; };
 		4926EA02148FADDE00F55D09 /* CardPeerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4926EA01148FADDE00F55D09 /* CardPeerTest.m */; };
 		4927B83D1400A8400076EEED /* ChineseCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4927B83C1400A8400076EEED /* ChineseCard.m */; };
@@ -444,6 +448,7 @@
 		499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
 		499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
 		499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 499E56B514972A7200088BD3 /* TTTAttributedLabel.m */; };
+		49A3EC1514DB99C800621183 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4938F8C214027818001EB473 /* CoreText.framework */; };
 		49A942641263AF4500086F4C /* star-deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942601263AF4500086F4C /* star-deselected.png */; };
 		49A942651263AF4500086F4C /* star-deselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942611263AF4500086F4C /* star-deselected@2x.png */; };
 		49A942661263AF4500086F4C /* star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A942621263AF4500086F4C /* star-selected.png */; };
@@ -496,6 +501,7 @@
 		49B528311276C97500EE64D3 /* practice-btn-showreading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */; };
 		49B528421276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
 		49B528431276CDA000EE64D3 /* talkbubble-ft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */; };
+		49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */; };
 		49BBA49A144D4BBF00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA499144D4BBF00E6A9AE /* help */; };
 		49BBA49C144D4BCE00E6A9AE /* help in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA49B144D4BCE00E6A9AE /* help */; };
 		49BBA4AF144D571300E6A9AE /* JRActivityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BBA49E144D570B00E6A9AE /* JRActivityObject.m */; };
@@ -685,6 +691,14 @@
 		917B2DBC146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		917B2DBD146CC756007C77B1 /* DSActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 917B2DBB146CC756007C77B1 /* DSActivityView.m */; };
 		9181901811D3392300746B09 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9181901711D3392300746B09 /* SettingsViewController.m */; };
+		918EEB1F14F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */; };
+		918EEB2014F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */; };
+		918EEB2214F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */; };
+		918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */; };
+		918EEB2614F5DACB00EF044C /* button_iosblue_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */; };
+		918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */; };
+		918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */; };
+		918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */; };
 		9191004A148052A1003E9A19 /* JFlashSearchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 91910049148052A1003E9A19 /* JFlashSearchTest.m */; };
 		919100F31486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
 		919100F41486A6B2003E9A19 /* JRPreviewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 919100F21486A6B1003E9A19 /* JRPreviewLabel.m */; };
@@ -975,6 +989,8 @@
 		491D7B2711C4776C00BF8323 /* UserPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPeer.h; path = AppSpecific/UserPeer.h; sourceTree = "<group>"; };
 		491D7B2811C4776C00BF8323 /* UserPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPeer.m; path = AppSpecific/UserPeer.m; sourceTree = "<group>"; };
 		491D7D0611C4EFFE00BF8323 /* SentenceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SentenceView.xib; path = XIBs/SentenceView.xib; sourceTree = "<group>"; };
+		491E276C14F5DA7B00C5243A /* ExternalAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExternalAppManager.h; path = AppSpecific/ExternalAppManager.h; sourceTree = "<group>"; };
+		491E276D14F5DA7B00C5243A /* ExternalAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalAppManager.m; path = AppSpecific/ExternalAppManager.m; sourceTree = "<group>"; };
 		4925735111C12619006FA4E1 /* ModalTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalTaskViewController.h; path = AppSpecific/ModalTaskViewController.h; sourceTree = "<group>"; };
 		4925735211C12619006FA4E1 /* ModalTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalTaskViewController.m; path = AppSpecific/ModalTaskViewController.m; sourceTree = "<group>"; };
 		4926EA00148FADDE00F55D09 /* CardPeerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPeerTest.h; path = Tests/cFlashTests/CardPeerTest.h; sourceTree = SOURCE_ROOT; };
@@ -1104,6 +1120,7 @@
 		49B527B4127680D500EE64D3 /* 90-lifebuoy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "90-lifebuoy@2x.png"; path = "Assets/90-lifebuoy@2x.png"; sourceTree = "<group>"; };
 		49B5282F1276C97500EE64D3 /* practice-btn-showreading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "practice-btn-showreading@2x.png"; path = "Assets/practice-btn-showreading@2x.png"; sourceTree = "<group>"; };
 		49B528411276CDA000EE64D3 /* talkbubble-ft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "talkbubble-ft@2x.png"; path = "Assets/talkbubble-ft@2x.png"; sourceTree = "<group>"; };
+		49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = jflash_161_to_162.sql; path = Migrations/jflash_161_to_162.sql; sourceTree = "<group>"; };
 		49BBA499144D4BBF00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/JFlash/help; sourceTree = "<group>"; };
 		49BBA49B144D4BCE00E6A9AE /* help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help; path = Assets/CFlash/help; sourceTree = "<group>"; };
 		49BBA49D144D570B00E6A9AE /* JRActivityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRActivityObject.h; path = Classes/External/janrain/JREngage/Classes/JRActivityObject.h; sourceTree = SOURCE_ROOT; };
@@ -1339,6 +1356,10 @@
 		917B2DBB146CC756007C77B1 /* DSActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityView.m; path = External/DSActivityView/Sources/DSActivityView.m; sourceTree = "<group>"; };
 		9181901611D3392300746B09 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = AppSpecific/SettingsViewController.h; sourceTree = "<group>"; };
 		9181901711D3392300746B09 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = AppSpecific/SettingsViewController.m; sourceTree = "<group>"; };
+		918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_iosblue_135x40@2x.png"; sourceTree = "<group>"; };
+		918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_iosblue_280x40@2x.png"; sourceTree = "<group>"; };
+		918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_iosblue_135x40.png; sourceTree = "<group>"; };
+		918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_iosblue_280x40.png; sourceTree = "<group>"; };
 		91910048148052A1003E9A19 /* JFlashSearchTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JFlashSearchTest.h; path = Tests/jFlashTests/JFlashSearchTest.h; sourceTree = SOURCE_ROOT; };
 		91910049148052A1003E9A19 /* JFlashSearchTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFlashSearchTest.m; path = Tests/jFlashTests/JFlashSearchTest.m; sourceTree = SOURCE_ROOT; };
 		919100F11486A6B0003E9A19 /* JRPreviewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRPreviewLabel.h; path = Classes/External/janrain/JREngage/Classes/JRPreviewLabel.h; sourceTree = SOURCE_ROOT; };
@@ -1494,6 +1515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A3EC1514DB99C800621183 /* CoreText.framework in Frameworks */,
 				496C670314728BE2009F04D4 /* Security.framework in Frameworks */,
 				496C66F814728AD7009F04D4 /* MobileCoreServices.framework in Frameworks */,
 				496C66E514728A6C009F04D4 /* MessageUI.framework in Frameworks */,
@@ -1776,6 +1798,7 @@
 				9175396B1310AA5600B34EDF /* jflash_13_to_14.sql */,
 				49E797FD14A8598F009B505A /* jflash_15_to_16.sql */,
 				4937876014DB8D9700361203 /* jflash_16_to_161.sql */,
+				49BA6DB414F4887500A48A21 /* jflash_161_to_162.sql */,
 				91992E2811D1A2F600CFCACD /* jFlash.db */,
 				91992E3311D1A31B00CFCACD /* jFlash-CARD-1.1.db */,
 				4919507E144F9E7900DB81F7 /* jFlash-FTS-1.1.db */,
@@ -2356,6 +2379,8 @@
 				917A5C7E11AB84EE00016BD2 /* CurrentState.m */,
 				4982294F1491D02A009EC2CD /* DownloadManager.h */,
 				498229501491D02A009EC2CD /* DownloadManager.m */,
+				491E276C14F5DA7B00C5243A /* ExternalAppManager.h */,
+				491E276D14F5DA7B00C5243A /* ExternalAppManager.m */,
 				49AF3D331265EDCD00CEAA52 /* UpdateManager.h */,
 				49AF3D341265EDCD00CEAA52 /* UpdateManager.m */,
 				498EBDA51488B96800BA6DE7 /* Plugin.h */,
@@ -2460,6 +2485,8 @@
 				91CA7257133D216C008A89A8 /* button_facebook_280x40.png */,
 				91CA7258133D216C008A89A8 /* button_google_135x40.png */,
 				91CA7259133D216C008A89A8 /* button_google_280x40.png */,
+				918EEB2414F5DACB00EF044C /* button_iosblue_135x40.png */,
+				918EEB2514F5DACB00EF044C /* button_iosblue_280x40.png */,
 				91CA725C133D216C008A89A8 /* button_janrain_135x40.png */,
 				91CA725D133D216C008A89A8 /* button_janrain_280x40.png */,
 				91CA725E133D216C008A89A8 /* button_linkedin_135x40.png */,
@@ -2531,6 +2558,8 @@
 				91CA72A0133D216C008A89A8 /* button_facebook_280x40@2x.png */,
 				91CA72A1133D216C008A89A8 /* button_google_135x40@2x.png */,
 				91CA72A2133D216C008A89A8 /* button_google_280x40@2x.png */,
+				918EEB1E14F5DAA000EF044C /* button_iosblue_135x40@2x.png */,
+				918EEB2114F5DAB500EF044C /* button_iosblue_280x40@2x.png */,
 				91CA72A5133D216C008A89A8 /* button_janrain_135x40@2x.png */,
 				91CA72A6133D216C008A89A8 /* button_janrain_280x40@2x.png */,
 				91CA72A7133D216C008A89A8 /* button_linkedin_135x40@2x.png */,
@@ -3044,7 +3073,12 @@
 				49E797FE14A8598F009B505A /* jflash_15_to_16.sql in Resources */,
 				49FE8C7714A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7914A9B83200579716 /* CardViewController.xib in Resources */,
+				918EEB1F14F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */,
+				918EEB2214F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
+				918EEB2614F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
+				918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
+				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3264,6 +3298,10 @@
 				4982294C1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
 				49FE8C7114A9B82300579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7314A9B82300579716 /* CardViewController.xib in Resources */,
+				918EEB2014F5DAA000EF044C /* button_iosblue_135x40@2x.png in Resources */,
+				918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
+				918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
+				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3452,6 +3490,7 @@
 				499E56B614972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797F914A8434C009B505A /* GradientButton.m in Sources */,
 				4964E53E14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E276E14F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3531,6 +3570,7 @@
 				4944B1E41495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B814972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				4964E54014A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E277014F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3611,6 +3651,7 @@
 				4944B1E51495D23700AE23BE /* CloseButtonView.m in Sources */,
 				499E56B914972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				4964E54114A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E277114F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3768,6 +3809,7 @@
 				499E56B714972A7200088BD3 /* TTTAttributedLabel.m in Sources */,
 				49E797FA14A8434C009B505A /* GradientButton.m in Sources */,
 				4964E53F14A959EB00683A58 /* PracticeCardSelector.m in Sources */,
+				491E276F14F5DA7B00C5243A /* ExternalAppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

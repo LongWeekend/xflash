@@ -7,7 +7,6 @@
 #import "jFlashAppDelegate.h"
 
 #import "DSActivityView.h"
-#import "NSURL+IFUnicodeURL.h"
 #import "TapjoyConnect.h"
 #import "AudioSessionManager.h"
 #import "Appirater.h"
@@ -20,8 +19,6 @@
 #endif
 
 @interface jFlashAppDelegate ()
-- (NSString*) _getDecodedSearchTerm:(NSURL *)url;
-- (void) _switchToSearchWithTerm:(NSString*)term;
 - (void) _registerObservers;
 - (void) _showModalWithViewController:(UIViewController*)vc useNavController:(BOOL)useNavController;
 - (void) _showModal:(NSNotification *)notification;
@@ -35,7 +32,7 @@
 @synthesize observerArray;
 @synthesize window, tabBarController, splashView;
 @synthesize isFinishedLoading, loadSearchOnBoot;
-@synthesize downloadManager, pluginManager;
+@synthesize downloadManager, pluginManager, externalAppManager;
 
 #pragma mark - URL Handling
 
@@ -48,51 +45,42 @@
 // handles URL openings from other apps
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  NSString *searchTerm = [self _getDecodedSearchTerm:url];
+  [self.externalAppManager configureManagerForURL:url sourceBundleId:sourceApplication];
   if (self.isFinishedLoading)
   {
     // If we have finished loading our database, et al, we can jump straight to search.
-    [self _switchToSearchWithTerm:searchTerm];
+    [self.externalAppManager runSearch];
+
+    // Now set the index so the search shows up
+    self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
   }
   else
   {
     self.loadSearchOnBoot = YES;
-    // This is released in the appDidFinishLaunching: method below.  We want to hold on while booting.
-    _searchedTerm = [searchTerm retain];
   }
   return YES;
 }
 
-- (NSString*) _getDecodedSearchTerm:(NSURL *)url  
-{
-  // Get the PLIST data about the scheme
-  NSArray *urlSchemes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-  NSDictionary *schemeInfo = [urlSchemes objectAtIndex:0];
-  NSString *scheme = [(NSArray*)[schemeInfo objectForKey:@"CFBundleURLSchemes"] objectAtIndex:0];
-  NSString *schemeUri = [NSString stringWithFormat:@"%@://",scheme];
-  
-  NSString *searchTerm = [url unicodeAbsoluteString];
-  if ([searchTerm isEqualToString:@""] || [searchTerm isEqualToString:schemeUri])
-  {
-    searchTerm = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-  }
-  
-  // Replace out the schema name
-  searchTerm = [searchTerm stringByReplacingOccurrencesOfString:schemeUri withString:@""];
-  return searchTerm;
-}
+#pragma mark - UITabBarControllerDelegate
 
-- (void) _switchToSearchWithTerm:(NSString*)term
+/**
+ * Delegate callback from UITabBarController.  We use it to find out when we navigate away from search in the event we 
+ * came via an external app
+ *
+ * The external app manager himself COULD be the delegate of tab bar, thus negating the need for this "forwarding" code,
+ * but it seems silly that the app manager should care entirely about the state of the tab bar across all tabs.
+ */
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-  UINavigationController *searchNav = [self.tabBarController.viewControllers objectAtIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
-  LWE_ASSERT_EXC([searchNav isKindOfClass:[UINavigationController class]],@"Whoa");
-  
-  SearchViewController *searchVC = (SearchViewController*)[searchNav topViewController];
-  LWE_ASSERT_EXC([searchVC isKindOfClass:[SearchViewController class]], @"Whoa");
-  [searchVC runSearchAndSetSearchBarForString:term];
-  
-  // Now set the index so the search shows up
-  self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
+  // If we are an external start, and the user navigates away from the Search tab, we tell the external manager to reset
+  if (self.externalAppManager.appLaunchedFromURL)
+  {
+    UINavigationController *searchNav = [self.tabBarController.viewControllers objectAtIndex:SEARCH_VIEW_CONTROLLER_TAB_INDEX];
+    if (searchNav != viewController)
+    {
+      [self.externalAppManager resetState];
+    }
+  }
 }
 
 #pragma mark - appDidFinishingLaunching
@@ -194,8 +182,8 @@
   // Finally load search if we're supposed to do that.
   if (self.loadSearchOnBoot)
   {
-    [self _switchToSearchWithTerm:_searchedTerm];
-    [_searchedTerm release];
+    [self.externalAppManager runSearch];
+    self.tabBarController.selectedIndex = SEARCH_VIEW_CONTROLLER_TAB_INDEX;
   }
   
   // MMA - 12.10.2011 not ENTIRELY sure this is still necessary.  If this code can enver be executed 
@@ -304,7 +292,9 @@
  */
 - (void) applicationDidEnterBackground:(UIApplication *) application
 {
-  LWE_LOG(@"Application did enter the background now");
+  // We no longer care if we came from another app
+  [self.externalAppManager resetState];
+  
   [self scheduleLocalNotification];
 }
 
@@ -351,6 +341,7 @@
   [tabBarController release];
   [window release];
   
+  [externalAppManager release];
   [downloadManager release];
   [pluginManager release];
   

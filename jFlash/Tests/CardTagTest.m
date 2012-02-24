@@ -8,8 +8,9 @@
 
 #import "CardTagTest.h"
 #import "SetupDatabaseHelper.h"
-
+#import "PracticeModeCardViewDelegate.h"
 #import "TagPeer.h"
+#import "PracticeCardSelector.h"
 
 static NSString * const kTagTestDefaultName             = @"TestTag";
 static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
@@ -25,34 +26,44 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
 
 - (void)testCalculateNextCardLevelWithError
 {
+  // Init a practice mode delegate so we have access to the "random card" logic
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+  PracticeCardSelector *cardSelector = [[PracticeCardSelector alloc] init];
+
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   [longWeekendFavTag populateCardIds];
   NSError *error = nil;
-  NSInteger nextCardLevel = [longWeekendFavTag calculateNextCardLevelWithError:&error];
+  
+  NSInteger nextCardLevel = [cardSelector calculateNextCardLevelForTag:longWeekendFavTag error:&error];
   STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
   STAssertNil(error, @"There should not be an error getting the next level: %@", error);
   
   // Now we cause an error but it's robust enough to work anyway
-  Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
+  Card *card = [practiceMode getNextCard:longWeekendFavTag afterCard:nil direction:nil];
   [longWeekendFavTag moveCard:card toLevel:1];
   [longWeekendFavTag setCardCount:1];
-  nextCardLevel = [longWeekendFavTag calculateNextCardLevelWithError:&error];
+  nextCardLevel = [cardSelector calculateNextCardLevelForTag:longWeekendFavTag error:&error];
   STAssertTrue(nextCardLevel < 6, @"Next card level is outside of possible range");
-  //  STAssertNotNil(error, @"There should be an error getting the next level, but wasn't");
+  
+  [cardSelector release];
+  [practiceMode release];
 }
 
 - (void) testUpdateLevelCounts
 {
+  // Init a practice mode delegate so we have access to the "random card" logic
+  PracticeModeCardViewDelegate *practiceMode = [[PracticeModeCardViewDelegate alloc] init];
+
   Tag *longWeekendFavTag = [TagPeer retrieveTagByName:kLWEFavoriteTagName];
   [longWeekendFavTag populateCardIds];
-  NSError *error = nil;
-  Card *card = [longWeekendFavTag getRandomCard:0 error:&error];
+  Card *card = [practiceMode getNextCard:longWeekendFavTag afterCard:nil direction:nil];
   STAssertNotNil(card,@"Could not get random card");
-  STAssertNil(error, @"Error should be nil, but wasn't: %@",error);
   
   [longWeekendFavTag moveCard:card toLevel:5];
   NSInteger count = [[[longWeekendFavTag cardsByLevel] objectAtIndex:5] count];
   STAssertTrue(count > 0, @"Moved card to level 5 but level 5 is empty");
+  
+  [practiceMode release];
 }
 
 - (void)testAddThenRemoveCardsFromStudySet

@@ -73,7 +73,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_TAPJOY_APP_ID         = @"6f0f78d1-f4bf-437b-befc-977b317f7b04";
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION       = @"1.6.1";
+      NSString * const LWE_CURRENT_VERSION       = @"1.6.2";
       NSString * const LWE_CURRENT_CARD_DATABASE = @"jFlash-CARD-1.1.db";
       NSString * const LWE_CURRENT_USER_DATABASE = @"jFlash.db";
 
@@ -84,6 +84,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_13_TO_14_SQL_FILENAME  = @"jflash_13_to_14.sql";
       NSString * const LWE_JF_15_TO_16_SQL_FILENAME  = @"jflash_15_to_16.sql";
       NSString * const LWE_JF_16_TO_161_SQL_FILENAME = @"jflash_16_to_161.sql";
+      NSString * const LWE_JF_161_TO_162_SQL_FILENAME = @"jflash_161_to_162.sql";
       NSString * const LWE_JF_VERSION_1_0           = @"1.0";
       NSString * const LWE_JF_VERSION_1_1           = @"1.1"; 
       NSString * const LWE_JF_VERSION_1_2           = @"1.2";
@@ -92,6 +93,7 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       NSString * const LWE_JF_VERSION_1_5           = @"1.5";
       NSString * const LWE_JF_VERSION_1_6           = @"1.6";
       NSString * const LWE_JF_VERSION_1_6_1         = @"1.6.1";
+      NSString * const LWE_JF_VERSION_1_6_2         = @"1.6.2";
 
       // This pertains to the plugin manager
       NSString * const LWE_AVAILABLE_PLUGIN_PLIST   = @"jFlash-available.plist";

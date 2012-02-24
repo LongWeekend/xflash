@@ -32,10 +32,11 @@ const NSInteger KSegmentedTableHeader = 100;
 @end
 
 @implementation SearchViewController
-@synthesize pluginManager;
+@synthesize externalAppBtn;
+@synthesize pluginManager, externalAppManager;
 @synthesize activityIndicator, searchingCell;
 @synthesize searchBar, _wordsOrSentencesSegment, cardResultsArray, _sentenceSearchArray;
-@synthesize searchTerm;
+@synthesize searchTerm, returnToExternalAppView;
 
 @synthesize membershipCacheArray;
 
@@ -70,7 +71,35 @@ const NSInteger KSegmentedTableHeader = 100;
 - (void) viewDidLoad
 {
   [super viewDidLoad];
+  
+  // Is a little bit ghetto for now.  We could consider updating this class.
+  self.externalAppBtn.layer.borderWidth = 2.0f;
+  self.externalAppBtn.layer.cornerRadius = 9.0f;
+  
+  // Set YELLOW, not RED
+  NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
+  UIColor *color = nil;
+  //#e4ce9f, 228,206,159 - top of top
+  color = [UIColor colorWithRed:0.891 green:0.805 blue:0.621 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#efcd64, 239,205,100 - bottom of top
+  color = [UIColor colorWithRed:0.933 green:0.8 blue:0.39 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#efbc22, 239,188,34 - top of bottom
+  color = [UIColor colorWithRed:0.933 green:0.734 blue:0.133 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  //#f6dc24, 246,220,36 - bottom of bottom
+  color = [UIColor colorWithRed:0.960 green:0.859 blue:0.141 alpha:1.0];
+  [colors addObject:(id)[color CGColor]];
+  self.externalAppBtn.normalGradientColors = colors;
+  self.externalAppBtn.normalGradientLocations = [NSArray arrayWithObjects:
+                                                 [NSNumber numberWithFloat:1.0f],
+                                                 [NSNumber numberWithFloat:0.5001f],
+                                                 [NSNumber numberWithFloat:0.5f],
+                                                 [NSNumber numberWithFloat:0.0f],
+                                                 nil];
 
+  
   [[NSBundle mainBundle] loadNibNamed:@"SearchingTableCell" owner:self options:nil];
   
   // Programmatically make UISearchBar
@@ -104,12 +133,13 @@ const NSInteger KSegmentedTableHeader = 100;
 
 - (void) viewDidUnload
 {
+  [self setExternalAppBtn:nil];
   [super viewDidUnload];
   self.searchBar = nil;
+  self.returnToExternalAppView = nil;
   self.searchingCell = nil;
   self.activityIndicator = nil;
 }
-
 
 /** 
  * Delegate view method - pops up the keyboard if no search results, also resets the search variables, makes sure title bar theme is correct 
@@ -164,6 +194,12 @@ const NSInteger KSegmentedTableHeader = 100;
 }
 
 #pragma mark - Public Methods
+
+- (IBAction) returnToExternalApp:(id)sender
+{
+  // Since the app manager isn't part of the responder chain, just fwd this for us
+  [self.externalAppManager returnToExternalApp:sender];
+}
 
 /**
  * Reads the value of the "pill" chooser and sets _searchTarget appropriately
@@ -281,13 +317,22 @@ const NSInteger KSegmentedTableHeader = 100;
   [lclSearchBar resignFirstResponder];
 }
 
-/** runs a search and sets the text of the searchBar */
+/**
+ * runs a search and sets the text of the searchBar -- used with external apps (Rikai, etc)
+ */
 - (void) runSearchAndSetSearchBarForString:(NSString*) text
 {
+  // Set up the view as if the user had searched for the term
   [self.searchBar resignFirstResponder];
   self.searchBar.text = text;
   self.searchTerm = text;
-  [self runSearchForString:text];
+  
+  // Now double-check that we actually have the search plugin installed.  If not, don't run the search!
+  if ([self.pluginManager pluginKeyIsLoaded:FTS_DB_KEY])
+  {
+    // Now do the actual search as if the user had done it
+    [self runSearchForString:text];
+  }
 }
 
 /** Execute actual search with \param text */
@@ -440,6 +485,19 @@ const NSInteger KSegmentedTableHeader = 100;
 
 #pragma mark - UITableViewDelegate Methods
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  // Quick return if we are not using the Rikai header
+  if ([self.externalAppManager externalAppWantsReturn])
+  {
+    NSString *appName = [self.externalAppManager nameForBundleId:self.externalAppManager.externalBundleId];
+    self.externalAppBtn.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Return to %@", @"ExternalAppReturnButtonFormat"),appName];
+    return self.returnToExternalAppView;
+  }
+  
+  return nil;
+}
+
 - (CGFloat)tableView:(UITableView *)lclTableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   return 64.0f;
@@ -451,6 +509,10 @@ const NSInteger KSegmentedTableHeader = 100;
   if (_showSearchTargetControl)
   {
     return 75.0f;
+  }
+  else if ([self.externalAppManager externalAppWantsReturn])
+  {
+    return self.returnToExternalAppView.frame.size.height;
   }
   else
   {
@@ -520,7 +582,7 @@ const NSInteger KSegmentedTableHeader = 100;
   tableHeaderView.backgroundColor = [[ThemeManager sharedThemeManager] currentThemeTintColor];
   [tableHeaderView addSubview:[self _wordsOrSentencesSegment]];
   [tableHeaderView setTag: KSegmentedTableHeader];
-  [[self view] addSubview:tableHeaderView];
+  [self.view addSubview:tableHeaderView];
   [tableHeaderView setHidden:YES];
   [tableHeaderView release];
 }
@@ -704,12 +766,15 @@ const NSInteger KSegmentedTableHeader = 100;
   [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_HEADWORD_TYPE];
   
   [pluginManager release];
+  [externalAppManager release];
+  [returnToExternalAppView release];
   [searchTerm release];
   [searchBar release];
   [cardResultsArray release];
   [activityIndicator release];
   [searchingCell release];
   [_wordsOrSentencesSegment release];
+  [externalAppBtn release];
   [super dealloc];
 }
 
