@@ -10,7 +10,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void addToplevelTag(Context  )
 //  public static void openGroup(View  ,Xflash  )
-//  public static void goStudySetWords(View  ,Xflash  )
+//  public static void goTagCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
 //  public static void refreshTagList()
@@ -175,8 +175,7 @@ public class TagFragment extends Fragment
                 public void onClick(DialogInterface dialog,int which)
                 {
                     TagPeer.deleteTag(tempTag);
-
-                    // TODO - need to refresh tag fragment
+                    refreshTagList();
                 }
             });
 
@@ -211,12 +210,12 @@ public class TagFragment extends Fragment
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
-    public static void goStudySetWords(View v,Xflash inContext)
+    public static void goTagCards(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
 
-        StudySetWordsFragment.setIncomingTagId(tempInt); 
-        inContext.onScreenTransition("studyset_words",XflashScreen.DIRECTION_OPEN);
+        TagCardsFragment.setIncomingTagId(tempInt); 
+        inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
     public static void startStudying(View v,Xflash inContext)

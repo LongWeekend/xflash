@@ -73,7 +73,7 @@ public class CreateTagActivity extends Activity
     
                         TagPeer.subscribeCard(tempCard,theNewTag);
                         
-                        SingleCardFragment.refreshTagList();
+                        AddCardToTagFragment.refreshTagList();
                     }
 
                     finish();

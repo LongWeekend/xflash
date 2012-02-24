@@ -19,14 +19,14 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
-//  public void TagFragment_goStudySetWords(View  )
+//  public void TagFragment_goTagCards(View  )
 //  public void TagFragment_startStudying(View  )
 //
-//  public void StudySetWordsFragment_startStudying(View  )
-//  public void StudySetWordsFragment_singleCard(View  )
+//  public void TagCardsFragment_startStudying(View  )
+//  public void TagCardsFragment_addCard(View  )
 //
-//  public void SingleCardFragment_toggleWord(View  )
-//  public void SingleCardFragment_addTag(View  )
+//  public void AddCardToTagFragment_toggleWord(View  )
+//  public void AddCardToTagFragment_addTag(View  )
 //
 //  public void SettingsFragment_switchStudyMode(View  )
 //  public void SettingsFragment_switchStudyLanguage(View  )
@@ -199,31 +199,31 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         TagFragment.openGroup(v,this);
     }
-    public void TagFragment_goStudySetWords(View v)
+    public void TagFragment_goTagCards(View v)
     {
-        TagFragment.goStudySetWords(v,this);
+        TagFragment.goTagCards(v,this);
     }
     public void TagFragment_startStudying(View v)
     {
         TagFragment.startStudying(v,this);
     }
 
-    public void StudySetWordsFragment_startStudying(View v)
+    public void TagCardsFragment_startStudying(View v)
     {
-        StudySetWordsFragment.startStudying(v,this);
+        TagCardsFragment.startStudying(v,this);
     }
-    public void StudySetWordsFragment_singleCard(View v)
+    public void TagCardsFragment_addCard(View v)
     {
-        StudySetWordsFragment.singleCard(v,this);
+        TagCardsFragment.addCard(v,this);
     }
 
-    public void SingleCardFragment_toggleWord(View v)
+    public void AddCardToTagFragment_toggleWord(View v)
     {
-        SingleCardFragment.toggleWord(v);
+        AddCardToTagFragment.toggleWord(v);
     }
-    public void SingleCardFragment_addTag(View v)
+    public void AddCardToTagFragment_addTag(View v)
     {
-        SingleCardFragment.addTag(this);
+        AddCardToTagFragment.addTag(this);
     }
 
     public void SettingsFragment_switchStudyMode(View v)
@@ -455,13 +455,13 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab
-                        if( XflashScreen.getTagStudySetWordsOn() )
+                        if( XflashScreen.getTagCardsOn() )
                         {
-                            switchTab = XflashScreen.getTransitionFragment("studyset_words");
+                            switchTab = XflashScreen.getTransitionFragment("tag_cards");
                         }
-                        else if( XflashScreen.getTagSingleCardOn() )
+                        else if( XflashScreen.getAddCardToTagOn() )
                         {
-                            switchTab = XflashScreen.getTransitionFragment("single_card");
+                            switchTab = XflashScreen.getTransitionFragment("add_card");
                         }
                     }
                     else if( inTabTagname == "settings" )
