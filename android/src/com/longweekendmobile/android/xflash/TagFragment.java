@@ -185,9 +185,6 @@ public class TagFragment extends Fragment
 
             builder.create().show();
 
- 
-            Log.d(MYTAG,"we're returning right now");
-
             return true;
         }
 

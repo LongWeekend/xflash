@@ -159,18 +159,20 @@ public class SingleCardFragment extends Fragment
         CreateTagActivity.setWhoIsCalling(CreateTagActivity.SINGLE_CARD_CALLING);
         CreateTagActivity.setCurrentGroup( GroupPeer.topLevelGroup() );
 
-        inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
+        // tag the Intent with the id of the card we are calling from
+        Intent myIntent = new Intent(inContext,CreateTagActivity.class);
+        myIntent.putExtra("card_id", currentCard.getCardId() );
+ 
+        inContext.startActivity(myIntent);
     }
 
     
     public static void refreshTagList()
     {
-        if( userTagList == null )
-        {
-            Log.d(MYTAG,"ERROR - refreshTagList() called when userTagList is NULL");
-        }
-
         LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        // clear all views on reload
+        userTagList.removeAllViews();
 
         ArrayList<Tag> userTagArray = TagPeer.retrieveUserTagList();
         int rowCount = userTagArray.size();
