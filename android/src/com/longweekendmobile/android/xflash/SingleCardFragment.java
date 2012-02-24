@@ -6,14 +6,21 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/19/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void setIncomingCardId(int  )
+//  public static void toggleWord(View  )
+//  public static void addTag(Xflash  )
+//  public static void refreshTagList()
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +39,22 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SingleCardFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash SingleCardFragment";
+    private static final String MYTAG = "XFlash SingleCardFragment";
    
+    private static FragmentActivity myContext = null;
+    
     private static int incomingCardId; 
     private static Card currentCard = null;
-
     private static LinearLayout userTagList = null;
 
-    
+
     // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        myContext = getActivity();
+
         // inflate our layout for the HelpPage fragment
         LinearLayout singleCardLayout = (LinearLayout)inflater.inflate(R.layout.single_card, container, false);
 
@@ -68,50 +78,16 @@ public class SingleCardFragment extends Fragment
 
         // pull and display any user tags containing currentCard
         userTagList = (LinearLayout)singleCardLayout.findViewById(R.id.singlecard_usertags_list);
-        ArrayList<Tag> tagArray = TagPeer.retrieveUserTagList();
-        int rowCount = tagArray.size();
-
-        for(int i = 0; i < rowCount; i++)
-        {
-            Tag tempTag = tagArray.get(i);
-
-            RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.singlecard_row,null);
-            tempRow.setTag( tempTag.getId() );
-
-            // set the tag title
-            tempView = (TextView)tempRow.findViewById(R.id.singlecard_row_tagname);
-            tempView.setText( tempTag.getName() );
-
-            // set the visibility for our check
-            ImageView tempImage = (ImageView)tempRow.findViewById(R.id.singlecard_row_checked);
-            if( TagPeer.card(currentCard,tempTag) )
-            {
-                tempImage.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                tempImage.setVisibility(View.GONE);
-            }
-
-            // add a divider before all except the first
-            if( i > 0 )
-            {
-                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
-                userTagList.addView(divider);
-            }
-            userTagList.addView(tempRow);
-
-        }  // end for loop
-
+        refreshTagList();
 
         // pull and display any system tags containing currentCard
         LinearLayout tempList = (LinearLayout)singleCardLayout.findViewById(R.id.singlecard_systags_list);
-        tagArray = TagPeer.retrieveSysTagListContainingCard(currentCard);
-        rowCount = tagArray.size();
+        ArrayList<Tag> sysTagArray = TagPeer.retrieveSysTagListContainingCard(currentCard);
+        int rowCount = sysTagArray.size();
 
         for(int i = 0; i < rowCount; i++)
         {
-            Tag tempTag = tagArray.get(i);
+            Tag tempTag = sysTagArray.get(i);
 
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.singlecard_row,null);
             tempRow.setClickable(false);
@@ -134,8 +110,6 @@ public class SingleCardFragment extends Fragment
             tempList.addView(tempRow);
 
         }  // end for loop
-
-
 
         return singleCardLayout;
 
@@ -182,10 +156,58 @@ public class SingleCardFragment extends Fragment
     public static void addTag(Xflash inContext)
     {
         // start the 'add tag' activity as a modal
+        CreateTagActivity.setWhoIsCalling(CreateTagActivity.SINGLE_CARD_CALLING);
         CreateTagActivity.setCurrentGroup( GroupPeer.topLevelGroup() );
 
         inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
     }
+
+    
+    public static void refreshTagList()
+    {
+        if( userTagList == null )
+        {
+            Log.d(MYTAG,"ERROR - refreshTagList() called when userTagList is NULL");
+        }
+
+        LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        ArrayList<Tag> userTagArray = TagPeer.retrieveUserTagList();
+        int rowCount = userTagArray.size();
+
+        for(int i = 0; i < rowCount; i++)
+        {
+            Tag tempTag = userTagArray.get(i);
+
+            RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.singlecard_row,null);
+            tempRow.setTag( tempTag.getId() );
+
+            // set the tag title
+            TextView tempView = (TextView)tempRow.findViewById(R.id.singlecard_row_tagname);
+            tempView.setText( tempTag.getName() );
+
+            // set the visibility for our check
+            ImageView tempImage = (ImageView)tempRow.findViewById(R.id.singlecard_row_checked);
+            if( TagPeer.card(currentCard,tempTag) )
+            {
+                tempImage.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                tempImage.setVisibility(View.GONE);
+            }
+
+            // add a divider before all except the first
+            if( i > 0 )
+            {
+                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+                userTagList.addView(divider);
+            }
+            userTagList.addView(tempRow);
+
+        }  // end for loop
+
+    }  // end refreshTagList()
 
 
 }  // end SingleCardFragment class declaration
