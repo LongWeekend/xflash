@@ -175,6 +175,8 @@ public class TagFragment extends Fragment
                 public void onClick(DialogInterface dialog,int which)
                 {
                     TagPeer.deleteTag(tempTag);
+                    
+                    // TODO - adjust this to just remove the single view
                     refreshTagList();
                 }
             });

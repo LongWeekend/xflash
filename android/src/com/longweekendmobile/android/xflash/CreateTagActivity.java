@@ -78,15 +78,16 @@ public class CreateTagActivity extends Activity
 
                     finish();
                     
-                    // TODO - need to refresh whatever fragment we came from
-
                     return true;
-                }
+
+                }  // end if( DONE was clicked )
                 
                 return false;
-            }
 
-        });
+            }  // end onEditorAction()
+
+        });  // end OnEditorActionListener
+
         myEdit.requestFocus();
 
         // launch with the keyboard displayed
