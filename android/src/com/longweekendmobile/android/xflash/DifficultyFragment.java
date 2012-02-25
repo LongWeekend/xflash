@@ -93,6 +93,9 @@ public class DifficultyFragment extends Fragment
 
         switch( XflashSettings.getDifficultyMode() )
         {
+            // -5 and -1 are adjustments to correct for limitations on SeekBar
+            // SeekBar MUST start at 0, these adjustments translate the progress
+            // of the SeekBar to the values we use internally
             case 0: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_EASY - 5);
                     frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_EASY - 1);
                     barsEnabled = false;
@@ -171,6 +174,9 @@ public class DifficultyFragment extends Fragment
             
             switch( seekBar.getId() )
             {
+                // +5 and +1 are adjustments to correct for limitations on SeekBar
+                // SeekBar MUST start at 0, these adjustments translate the progress
+                // of the SeekBar to the values we use internally
                 case R.id.difficulty_studypool:  XflashSettings.setCustomStudyPool(tempInt + 5);
                                                 break;
                 case R.id.difficulty_frequency: XflashSettings.setCustomFrequency(tempInt + 1);

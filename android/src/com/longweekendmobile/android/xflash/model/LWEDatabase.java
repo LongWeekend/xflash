@@ -43,6 +43,7 @@ public class LWEDatabase extends SQLiteOpenHelper
     // our broadcast intent names
     public static final String COPY_START = "com.longweekendmobile.android.xflash.COPY_START";
     public static final String COPY_START2 = "com.longweekendmobile.android.xflash.COPY_START2";
+    public static final String COPY_START3 = "com.longweekendmobile.android.xflash.COPY_START3";
     public static final String COPY_SUCCESS = "com.longweekendmobile.android.xflash.COPY_SUCCESS";
     public static final String COPY_FAILURE = "com.longweekendmobile.android.xflash.COPY_FAILURE";
     public static final String DATABASE_READY = "com.longweekendmobile.android.xflash.DATABASE_READY";
@@ -53,7 +54,9 @@ public class LWEDatabase extends SQLiteOpenHelper
     // TODO change these from mp3 when files are cut up
     private static final String DB_NAME = "jFlash.mp3";
     private static final String DB_CARD = "jFlash-CARD-1.1.mp3";
-    private static final String ATTACH_NAME = "LWEDATABASETMP";
+    private static final String DB_FTS = "jFlash-FTS-1.1.mp3";
+    private static final String CARD_ATTACH_NAME = "LWEDATABASETMP";
+    private static final String FTS_ATTACH_NAME = "LWEDATABASEFTS"; 
     
     private boolean isAttached;
 
@@ -196,13 +199,15 @@ public class LWEDatabase extends SQLiteOpenHelper
         // if the database is open AND we aren't already attached
         if( tempBool && !isAttached )
         {
-            String query = "ATTACH DATABASE \"" + DB_PATH + DB_CARD + "\" AS " + ATTACH_NAME;
+            String query = "ATTACH DATABASE \"" + DB_PATH + DB_CARD + "\" AS " + CARD_ATTACH_NAME;
+            String query2 = "ATTACH DATABASE \"" + DB_PATH + DB_FTS + "\" AS " + FTS_ATTACH_NAME;
             
             // the cursor is empty, but try and access it anyway
             // to make sure the query was successful
             try
             {
                 tempDao.execSQL(query);
+                tempDao.execSQL(query2);
                 isAttached = true;
 
                 return true;
@@ -247,13 +252,15 @@ public class LWEDatabase extends SQLiteOpenHelper
         // if the database is open AND we're already attached
         if( tempBool && isAttached )
         {
-            String query = "DETACH DATABASE \"" + ATTACH_NAME + "\"";
+            String query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
+            String query2 = "DETACH DATABASE \"" + FTS_ATTACH_NAME + "\"";
 
             // the cursor is empty, but try and access it anyway
             // to make sure the query was successful
             try
             {
                 tempDao.execSQL(query);
+                tempDao.execSQL(query2);
                 isAttached = false;
 
                 return true;
@@ -377,7 +384,7 @@ public class LWEDatabase extends SQLiteOpenHelper
             try
             {
                 // go through twice, once for each database
-                for(int dbCycle = 0; dbCycle < 2; dbCycle++)
+                for(int dbCycle = 0; dbCycle < 3; dbCycle++)
                 {
                     // pick the right filename to open
                     // fire Intent for UI update
@@ -392,12 +399,19 @@ public class LWEDatabase extends SQLiteOpenHelper
                         // Path to the just created empty db
                         outFileName = DB_PATH + DB_NAME;
                     }
-                    else
+                    else if( dbCycle == 1 )
                     {
                         myIntent = new Intent(COPY_START2);
                         myContext.sendBroadcast(myIntent);
                         myInput = myContext.getAssets().open(DB_CARD);
-                            outFileName = DB_PATH + DB_CARD;
+                        outFileName = DB_PATH + DB_CARD;
+                    }
+                    else
+                    {
+                        myIntent = new Intent(COPY_START3);
+                        myContext.sendBroadcast(myIntent);
+                        myInput = myContext.getAssets().open(DB_FTS);
+                        outFileName = DB_PATH + DB_FTS;
                     }
 
                     // open the empty db as the output stream

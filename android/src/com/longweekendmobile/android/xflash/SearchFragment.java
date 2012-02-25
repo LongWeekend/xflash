@@ -8,7 +8,10 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
+import java.util.ArrayList;
+
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,6 +29,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.longweekendmobile.android.xflash.model.Card;
+import com.longweekendmobile.android.xflash.model.CardPeer;
+
 public class SearchFragment extends Fragment
 {
     private static final String MYTAG = "XFlash SearchFragment";
@@ -33,6 +39,8 @@ public class SearchFragment extends Fragment
     private static LinearLayout searchLayout = null;
     private EditText mySearch = null;
     private InputMethodManager imm = null;
+
+    private static ArrayList<Card> searchResults = null;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -103,6 +111,9 @@ public class SearchFragment extends Fragment
                 // search and hide keyboard
                 mySearch.clearFocus();
 
+                AsyncSearch tempSearch = new AsyncSearch();
+                tempSearch.execute();
+
                 return true;
 
             }  // end if( DONE was clicked )
@@ -112,6 +123,58 @@ public class SearchFragment extends Fragment
         }  
 
     };  // end searchActionListener
+
+
+    // our Async class for loading cards from the database
+    private class AsyncSearch extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+/*
+            // if the Tag is larger than an arbitrary size, display
+            // the dialog on the presumption that the load will take
+            // a few seconds while the app just sits there
+            if( currentTag.getCardCount() > 200 &&
+                ( ( needLoad == true ) || ( cardArray == null ) ) )
+            {
+                cardLoadDialog = new ProgressDialog(getActivity());
+                cardLoadDialog.setMessage(" Fetching cards... ");
+                cardLoadDialog.show();
+            }
+*/
+            Log.d(MYTAG,">>> onPreExecute()");
+            Log.d(MYTAG,".");
+        }
+
+        
+        @Override
+        protected Void doInBackground(Void... unused)
+        {
+            String searchString = mySearch.getText().toString();
+
+            Log.d(MYTAG,">>> onPostExecute()");
+            Log.d(MYTAG,"searching for:  " + searchString);
+            Log.d(MYTAG,".");
+            searchResults = CardPeer.searchCardsForKeyword(searchString);            
+            
+            return null;
+
+        }  // end doInBackground()
+
+
+        @Override
+        protected void onPostExecute(Void unused)
+        {
+            Log.d(MYTAG,">>> onPostExecute()");
+            Log.d(MYTAG,"search returned size:  " + searchResults.size() );
+            Log.d(MYTAG,".");
+            Log.d(MYTAG,".");
+
+        }  // end onPostExecute()
+
+    
+    }  // end AsyncSearch declaration
 
 
 }  // end SearchFragment class declaration

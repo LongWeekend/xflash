@@ -9,6 +9,9 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()      @over
 //  public void onResume()      @over
 //  public void onPause()       @over
+//
+//  public static void setWhoIsCalling(int  )
+//  public static void setCurrentGroup(Group  )
 
 import android.app.Activity;
 import android.content.Context;

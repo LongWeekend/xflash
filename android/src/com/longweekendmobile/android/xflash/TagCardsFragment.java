@@ -8,6 +8,13 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//
+//  public static void setIncomingTagId(int  )
+//  public static void startStudying(View  ,Xflash  )
+//  public static void addCard(View  ,Xflash  )
+//
+//  private class CardAdapter extends ArrayAdapter<Card> 
+//  private class AsyncLoadcards extends AsyncTask<Void, Void, Void>
 
 import java.util.ArrayList;
 import java.util.List;

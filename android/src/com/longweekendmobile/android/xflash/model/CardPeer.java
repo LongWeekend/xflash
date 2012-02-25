@@ -154,16 +154,15 @@ public class CardPeer
         // do not hydrate these cards, we will flywheel it on the table view
         if( keywordIsHeadword(inKey) )
         {
-            Log.d(MYTAG,"debug 1");
             column = "headword";
         }
         else if( keywordIsReading(inKey) )
         {
-            Log.d(MYTAG,"debug 2");
             column = "reading";
         }
 
         String query = FTSSQLForKeyword(inKey,column,queryLimit);
+        
         Cursor myCursor = tempDB.rawQuery(query,null);
         myCursor.moveToFirst();
 
