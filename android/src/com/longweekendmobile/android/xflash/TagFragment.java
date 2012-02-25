@@ -48,8 +48,18 @@ public class TagFragment extends Fragment
     private static FragmentActivity myContext = null;
     
     public static Group currentGroup = null;
+    public static boolean needLoad = false;
     private static LinearLayout tagList = null;
    
+    // for display of any groups
+    private static ArrayList<Group> groupArray = null;
+    
+    // for shuffling the tag list
+    private static ArrayList<Tag> rawTagArray = null;
+    private static ArrayList<Tag> userTagArray = null;
+    
+    // for final display of tag list
+    private static ArrayList<Tag> shuffleArray = null;
  
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -78,6 +88,7 @@ public class TagFragment extends Fragment
         if( currentGroup == null )
         {
             currentGroup = GroupPeer.topLevelGroup();
+            needLoad = true;
         }
 
         // set the title bar to the current group/tag
@@ -85,7 +96,10 @@ public class TagFragment extends Fragment
         tempView.setText( currentGroup.getGroupName() );
 
         // pull and display any groups owned by currentGroup
-        ArrayList<Group> groupArray = GroupPeer.retrieveGroupsByOwner( currentGroup.getGroupId() );
+        if( needLoad )
+        {
+            groupArray = GroupPeer.retrieveGroupsByOwner( currentGroup.getGroupId() );
+        }
 
         int rowCount = groupArray.size();
         for(int i = 0; i < rowCount; i++)
@@ -161,9 +175,10 @@ public class TagFragment extends Fragment
         @Override
         public boolean onLongClick(View v) 
         {
-            final int tempInt = (Integer)v.getTag();
+            final View viewToRemove = v;
+            final int tempInt = (Integer)viewToRemove.getTag();
             final Tag tempTag = TagPeer.retrieveTagById(tempInt);
-
+            
             // set and fire our AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
             builder.setTitle("Delete Tag?");
@@ -175,9 +190,7 @@ public class TagFragment extends Fragment
                 public void onClick(DialogInterface dialog,int which)
                 {
                     TagPeer.deleteTag(tempTag);
-                    
-                    // TODO - adjust this to just remove the single view
-                    refreshTagList();
+                    tagList.removeView(viewToRemove);            
                 }
             });
 
@@ -191,6 +204,11 @@ public class TagFragment extends Fragment
 
     };  // end OnLongClickListener declaration 
 
+
+    public static void setNeedLoad()
+    {
+        needLoad = true;
+    }
 
     // onClick for our PLUS button
     public static void addToplevelTag(Context inContext)
@@ -206,7 +224,7 @@ public class TagFragment extends Fragment
     public static void openGroup(View v,Xflash inContext)
     {
         XflashScreen.addTagStack();
-        
+ 
         currentGroup = GroupPeer.retrieveGroupById( (int)(Integer)v.getTag() );
         
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
@@ -262,54 +280,64 @@ public class TagFragment extends Fragment
     {
         LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int icons[] = XflashSettings.getIcons();
-
-        // clear views on reload
-        tagList.removeAllViews();
-
-        // TODO - I feel like there MUST be a better way to do this
-        ArrayList<Tag> rawTagArray = currentGroup.childTags();
-        ArrayList<Tag> userTagArray = new ArrayList<Tag>();
-        
-        // the ArrayList we will actually use to populate the view
-        ArrayList<Tag> shuffleArray = new ArrayList<Tag>();
-        
-        // shuffle 'my starred words' to the top, user tags to the bottom
-        int rowCount = rawTagArray.size();
-        for(int i = 0; i < rowCount; i++)
+        int rowCount;
+     
+        // if we need to refresh our arrays due to a change
+        if( needLoad )
         {
-            Tag shuffleTag = rawTagArray.get(i);
+            // TODO - I feel like there MUST be a better way to do this
+            rawTagArray = currentGroup.childTags();
+            userTagArray = new ArrayList<Tag>();
+        
+            // the ArrayList we will actually use to populate the view
+            shuffleArray = new ArrayList<Tag>();
 
-            // add the starred words tag at the start
-            if( shuffleTag.getId() == Tag.STARRED_TAG_ID )
+        
+            // shuffle 'my starred words' to the top, user tags to the bottom
+            rowCount = rawTagArray.size();
+            for(int i = 0; i < rowCount; i++)
             {
-                shuffleArray.add(0,shuffleTag);
-            }
-            else
-            {
-                // if it is a system tag, add it straight to
-                // the shuffle array, otherwise hold on to it
-                if( shuffleTag.isEditable() )
+                Tag shuffleTag = rawTagArray.get(i);
+
+                // add the starred words tag at the start
+                if( shuffleTag.getId() == Tag.STARRED_TAG_ID )
                 {
-                    userTagArray.add(shuffleTag);
+                    shuffleArray.add(0,shuffleTag);
                 }
                 else
                 {
-                    shuffleArray.add(shuffleTag);
+                    // if it is a system tag, add it straight to
+                    // the shuffle array, otherwise hold on to it
+                    if( shuffleTag.isEditable() )
+                    {
+                        userTagArray.add(shuffleTag);
+                    }
+                    else
+                    {
+                        shuffleArray.add(shuffleTag);
+                    }
                 }
             }
-        }
 
-        // add user tags back in at the bottom
-        rowCount = userTagArray.size();
-        if( rowCount > 0 )
-        {
-            for(int i = 0; i < rowCount; i++)
+            // add user tags back in at the bottom
+            rowCount = userTagArray.size();
+            if( rowCount > 0 )
             {
-                shuffleArray.add( userTagArray.get(i) );
-            } 
-        }
+                for(int i = 0; i < rowCount; i++)
+                {
+                    shuffleArray.add( userTagArray.get(i) );
+                } 
+            }
 
-        // now the ArrayList of tags to views, add to the layout
+            // clear views on reload
+            tagList.removeAllViews();
+
+            // we're done with conditional loading
+            needLoad = false;
+
+        }  // end if( needLoad ) 
+       
+        // now add the final ordered ArrayList of tags to views, add to the layout
         rowCount = shuffleArray.size();
         for(int i = 0; i < rowCount; i++)
         {

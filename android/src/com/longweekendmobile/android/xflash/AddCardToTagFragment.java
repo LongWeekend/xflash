@@ -64,8 +64,12 @@ public class AddCardToTagFragment extends Fragment
         
         XflashSettings.setupColorScheme(titleBar,tempButton); 
 
-        currentCard = CardPeer.retrieveCardByPK(incomingCardId);
-
+        // only call from the database if our card has changed
+        if( ( currentCard == null ) || ( currentCard.getCardId() != incomingCardId ) )
+        {
+            currentCard = CardPeer.retrieveCardByPK(incomingCardId);
+        }
+        
         // set the word block
         TextView tempView = (TextView)addCardLayout.findViewById(R.id.addcard_word);
         tempView.setText( currentCard.getHeadword() );
@@ -147,9 +151,6 @@ public class AddCardToTagFragment extends Fragment
             tempImage.setVisibility(View.VISIBLE);
         }
        
-        // inform the study set words fragment that it may have been changed
-        TagCardsFragment.setNeedLoad();
- 
     }  // end toggleWord()
 
  

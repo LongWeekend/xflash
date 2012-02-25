@@ -373,6 +373,7 @@ public class XflashScreen
         }
         
         tagStack.add( (Group)TagFragment.currentGroup.clone() );
+        TagFragment.setNeedLoad();
     }
 
     public static void popTagStack()
@@ -380,6 +381,7 @@ public class XflashScreen
         int tempInt = ( tagStack.size() - 1 );
 
         TagFragment.currentGroup = (Group)tagStack.get(tempInt).clone();
+        TagFragment.setNeedLoad();
 
         tagStack.remove(tempInt);
     }
@@ -490,6 +492,7 @@ public class XflashScreen
                 if( extraScreensOn[LWE_TAG_TAB] == false )
                 {
                     popTagStack();
+                    TagFragment.setNeedLoad();
                     
                     return "tag";
                 }     

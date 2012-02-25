@@ -40,7 +40,7 @@ public class TagCardsFragment extends Fragment
     private ListView cardList;
     private LayoutInflater myInflater;
 
-    private static boolean needLoad = false;
+    private boolean needLoad = false;
     private static int incomingTagId;
     private static Tag currentTag = null;
 
@@ -62,7 +62,11 @@ public class TagCardsFragment extends Fragment
         XflashSettings.setupColorScheme(titleBar); 
 
         // get the tag we're working with
-        currentTag = TagPeer.retrieveTagById(incomingTagId);
+        if( ( currentTag == null ) || ( currentTag.getId() != incomingTagId ) )
+        {
+            currentTag = TagPeer.retrieveTagById(incomingTagId);
+            needLoad = true;
+        }
 
         // set the title bar to the tag name we're looking at
         TextView tempView = (TextView)tagCardsLayout.findViewById(R.id.tagcards_heading_text);
@@ -87,15 +91,9 @@ public class TagCardsFragment extends Fragment
     }  // end onCreateView
 
     
-    public static void setNeedLoad()
-    {
-        needLoad = true;
-    }
-
     public static void setIncomingTagId(int inId)
     {
         incomingTagId = inId;
-        needLoad = true;
     }
 
     public static void startStudying(View v,Xflash inContext)
@@ -175,10 +173,10 @@ public class TagCardsFragment extends Fragment
         protected Void doInBackground(Void... unused)
         {
             // get a list of faulted cards, reset the load flag
+            // but only if our card is null or has changed
             if( ( needLoad == true ) || ( cardArray == null ) )
             {
                 cardArray = CardPeer.retrieveFaultedCardsForTag(currentTag);
-       
                 needLoad = false;
             }
  

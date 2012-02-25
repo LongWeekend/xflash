@@ -63,6 +63,7 @@ public class CreateTagActivity extends Activity
                     // refresh the appropriate tag list
                     if( whoIsCalling == TAG_FRAGMENT_CALLING )
                     {
+                        TagFragment.setNeedLoad();
                         TagFragment.refreshTagList();
                     }
                     else if( whoIsCalling == SINGLE_CARD_CALLING )
