@@ -104,10 +104,10 @@ public class XflashSettings
     public static final int LWE_STUDYPOOL_HARD = 35;
     private static final int LWE_STUDYPOOL_MAX = 50;
 
-    public static final int LWE_FREQUENCY_EASY = 0;
-    public static final int LWE_FREQUENCY_MEDIUM = 1;
-    public static final int LWE_FREQUENCY_HARD = 2;
-    public static final int LWE_FREQUENCY_MAX = 3;
+    public static final int LWE_FREQUENCY_EASY = 1;
+    public static final int LWE_FREQUENCY_MEDIUM = 2;
+    public static final int LWE_FREQUENCY_HARD = 3;
+    public static final int LWE_FREQUENCY_MAX = 4;
 
     public static final int LWE_DEFAULT_USER = 1;
     
@@ -127,7 +127,8 @@ public class XflashSettings
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
-    }
+    
+    }  // end load()
 
 
 //  *** COLOR SETTINGS ***
@@ -452,7 +453,7 @@ public class XflashSettings
     // sets the custom study pool seek value and saves for persistence
     public static void setCustomStudyPool(int inMode)
     {
-        if( ( customStudyPool < LWE_STUDYPOOL_MIN ) || ( customStudyPool > LWE_STUDYPOOL_MAX ) )
+        if( ( inMode < LWE_STUDYPOOL_MIN ) || ( inMode > LWE_STUDYPOOL_MAX ) )
         {
             throwBadValue("setCustomStudyPool",inMode);
         }
@@ -476,7 +477,7 @@ public class XflashSettings
     // sets the custom card frequency and saves for persistence
     public static void setCustomFrequency(int inFrequency)
     {
-        if( ( customFrequency < LWE_FREQUENCY_EASY ) || ( customFrequency > LWE_FREQUENCY_MAX ) )
+        if( ( inFrequency < LWE_FREQUENCY_EASY ) || ( inFrequency > LWE_FREQUENCY_MAX ) )
         {
             throwBadValue("setCustomFrequency",inFrequency);
         }

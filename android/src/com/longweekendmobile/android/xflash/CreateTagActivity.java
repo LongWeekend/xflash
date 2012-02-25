@@ -46,50 +46,9 @@ public class CreateTagActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_tag);
     
-        // set our click listener for the edit text and request
-        // focus
+        // set our click listener for the edit text and request focus
         myEdit = (EditText)findViewById(R.id.create_tag_text);
-        myEdit.setOnEditorActionListener( new OnEditorActionListener() 
-        {
-            @Override
-            public boolean onEditorAction(TextView v,int actionId,KeyEvent event) 
-            {
-                if( actionId == EditorInfo.IME_ACTION_DONE )
-                {
-                    // when they click 'done' on the keyboard, add the new
-                    // group and exit
-                    Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
-                    
-                    // refresh the appropriate tag list
-                    if( whoIsCalling == TAG_FRAGMENT_CALLING )
-                    {
-                        TagFragment.setNeedLoad();
-                        TagFragment.refreshTagList();
-                    }
-                    else if( whoIsCalling == SINGLE_CARD_CALLING )
-                    {
-                        // if called from a specific card, add that card to the new tag
-                        int tempCardId = getIntent().getIntExtra("card_id",-1);
-                        Card tempCard = CardPeer.retrieveCardByPK(tempCardId);
-    
-                        TagPeer.subscribeCard(tempCard,theNewTag);
-                        
-                        AddCardToTagFragment.refreshTagList();
-                    }
-
-                    finish();
-                    
-                    return true;
-
-                }  // end if( DONE was clicked )
-                
-                return false;
-
-            }  // end onEditorAction()
-
-        });  // end OnEditorActionListener
-
-        myEdit.requestFocus();
+        myEdit.setOnEditorActionListener(createTagActionListener);
 
         // launch with the keyboard displayed
         myEdit.postDelayed( new Runnable() 
@@ -97,6 +56,7 @@ public class CreateTagActivity extends Activity
             @Override
             public void run() 
             {
+                myEdit.requestFocus();
                 InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 keyboard.showSoftInput(myEdit,0);
             }
@@ -123,6 +83,48 @@ public class CreateTagActivity extends Activity
         
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
     }
+
+    
+    // the listener for when 'done' is clicked on the keyboard
+    private TextView.OnEditorActionListener createTagActionListener = new TextView.OnEditorActionListener() 
+    {
+        @Override
+        public boolean onEditorAction(TextView v,int actionId,KeyEvent event) 
+        {
+            if( actionId == EditorInfo.IME_ACTION_DONE )
+            {
+                // when they click 'done' on the keyboard, add the new
+                // group and exit
+                Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+                    
+                // refresh the appropriate tag list
+                if( whoIsCalling == TAG_FRAGMENT_CALLING )
+                {
+                    TagFragment.setNeedLoad();
+                    TagFragment.refreshTagList();
+                }
+                else if( whoIsCalling == SINGLE_CARD_CALLING )
+                {
+                    // if called from a specific card, add that card to the new tag
+                    int tempCardId = getIntent().getIntExtra("card_id",-1);
+                    Card tempCard = CardPeer.retrieveCardByPK(tempCardId);
+    
+                    TagPeer.subscribeCard(tempCard,theNewTag);
+                        
+                    AddCardToTagFragment.refreshTagList();
+                }
+
+                finish();
+                    
+                return true;
+
+            }  // end if( DONE was clicked )
+                
+            // do not consume event if it wasn't 'done'
+            return false;
+        }  
+
+    };  // end createTagActionListener
 
     
     public static void setWhoIsCalling(int inCalling)

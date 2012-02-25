@@ -93,20 +93,20 @@ public class DifficultyFragment extends Fragment
 
         switch( XflashSettings.getDifficultyMode() )
         {
-            case 0: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_EASY);
-                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_EASY);
+            case 0: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_EASY - 5);
+                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_EASY - 1);
                     barsEnabled = false;
                     break;
-            case 1: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_MEDIUM);
-                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_MEDIUM);
+            case 1: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_MEDIUM - 5);
+                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_MEDIUM - 1);
                     barsEnabled = false;
                     break;
-            case 2: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_HARD);
-                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_HARD);
+            case 2: studyPoolBar.setProgress(XflashSettings.LWE_STUDYPOOL_HARD - 5);
+                    frequencyBar.setProgress(XflashSettings.LWE_FREQUENCY_HARD - 1);
                     barsEnabled = false;
                     break;
-            case 3: studyPoolBar.setProgress( XflashSettings.getCustomStudyPool() );
-                    frequencyBar.setProgress( XflashSettings.getCustomFrequency() );
+            case 3: studyPoolBar.setProgress( XflashSettings.getCustomStudyPool() - 5);
+                    frequencyBar.setProgress( XflashSettings.getCustomFrequency() - 1);
                     barsEnabled = true;
                     break;
             default:    Log.d(MYTAG,"Error in setSeekBars()");
@@ -151,7 +151,7 @@ public class DifficultyFragment extends Fragment
 
 
     // When someone moves the volume bar
-    private SeekBar.OnSeekBarChangeListener barChange =new SeekBar.OnSeekBarChangeListener() 
+    private SeekBar.OnSeekBarChangeListener barChange = new SeekBar.OnSeekBarChangeListener() 
     {
         public void onProgressChanged(SeekBar seekBar,int progress,boolean fromUser)
         {
@@ -171,9 +171,9 @@ public class DifficultyFragment extends Fragment
             
             switch( seekBar.getId() )
             {
-                case R.id.difficulty_studypool:  XflashSettings.setCustomStudyPool(tempInt);
+                case R.id.difficulty_studypool:  XflashSettings.setCustomStudyPool(tempInt + 5);
                                                 break;
-                case R.id.difficulty_frequency: XflashSettings.setCustomFrequency(tempInt);
+                case R.id.difficulty_frequency: XflashSettings.setCustomFrequency(tempInt + 1);
                                                 break;
                 default:                        Log.d(MYTAG,"Error in SeekBar listener");
                                                 break;
