@@ -143,7 +143,7 @@ public class TagCardsFragment extends Fragment
 
             // set the word
             TextView tempView = (TextView)row.findViewById(R.id.tagcards_word);
-            tempView.setText( tempCard.getHeadword() );
+            tempView.setText( tempCard.headwordIgnoringMode(true) );
 
             // set the meaning
             tempView = (TextView)row.findViewById(R.id.tagcards_meaning);

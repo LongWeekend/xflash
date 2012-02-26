@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.GroupPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
@@ -44,7 +45,7 @@ public class AddCardToTagFragment extends Fragment
     private static FragmentActivity myContext = null;
     
     private static int incomingCardId; 
-    private static Card currentCard = null;
+    private static JapaneseCard currentCard = null;
     private static LinearLayout userTagList = null;
 
 
@@ -67,15 +68,26 @@ public class AddCardToTagFragment extends Fragment
         // only call from the database if our card has changed
         if( ( currentCard == null ) || ( currentCard.getCardId() != incomingCardId ) )
         {
-            currentCard = CardPeer.retrieveCardByPK(incomingCardId);
+            currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
         }
         
         // set the word block
         TextView tempView = (TextView)addCardLayout.findViewById(R.id.addcard_word);
         tempView.setText( currentCard.getHeadword() );
 
+        // set the reading block
+        String tempString;
+        if( XFApplication.IS_JFLASH )
+        {
+            tempString = currentCard.reading();
+        }
+        else
+        {
+            // for when we implement CFLASH
+        }
+        
         tempView = (TextView)addCardLayout.findViewById(R.id.addcard_reading);
-        tempView.setText( currentCard.getReading() );
+        tempView.setText(tempString);
 
         tempView = (TextView)addCardLayout.findViewById(R.id.addcard_meaning);
         tempView.setText( currentCard.meaningWithoutMarkup() );

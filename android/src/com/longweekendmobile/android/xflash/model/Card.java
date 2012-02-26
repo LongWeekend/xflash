@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public Card()
 //  
 //  public String meaningWithoutMarkup()
-//  public String getMeaning(Context  )
+//  public String getMeaning()
 //  public String getHeadword()
 //  public String headwordIgnoringMode(boolean  ,Context  )
 //  public AttributedString attributedReading()
@@ -47,6 +47,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class Card
 {
@@ -100,18 +101,10 @@ public class Card
         return tempMeaning;
     }
 
-    // returns a String based on...
-    //
-    //  CONTEXT IS ONLY NECESSARY FOR PREFERENCES
-    //  this is a hack until Mark and Co. decide what to do about
-    //  preprocessor directives
-    public String getMeaning(Context inContext)
+    // returns a String based on current language setting I THINK
+    public String getMeaning()
     { 
-        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
-        String tempString = settings.getString("APP_HEADWORD","fail");
-
-        // if no APP_HEADWORD preferences has been set
-        if( tempString.equals("SET_E_TO_J") )
+        if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
         {    
             return headword;
         }
@@ -139,10 +132,8 @@ public class Card
             return headword;
         }
 
-        // TODO - gotta figure out what we want to do with this setting
-/*
         // if no APP_HEADWORD preferences has been set
-        if( tempString.equals("SET_E_TO_J") )
+        if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_ENGLISH )
         { 
             return headword_en;
         }
@@ -150,10 +141,6 @@ public class Card
         {
             return headword;
         }   
-*/
-
-        // temporary
-        return headword;
 
     }  // end headwordIgnoringMode()
 
