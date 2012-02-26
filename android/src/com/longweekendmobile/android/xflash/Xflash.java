@@ -25,6 +25,8 @@ package com.longweekendmobile.android.xflash;
 //  public void TagCardsFragment_startStudying(View  )
 //  public void TagCardsFragment_addCard(View  )
 //
+//  public void SearchFragment_addCard(View  )
+//
 //  public void AddCardToTagFragment_toggleWord(View  )
 //  public void AddCardToTagFragment_addTag(View  )
 //
@@ -215,6 +217,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void TagCardsFragment_addCard(View v)
     {
         TagCardsFragment.addCard(v,this);
+    }
+
+    public void SearchFragment_addCard(View v)
+    {
+        SearchFragment.addCard(v,this);
+    }
+    public void SearchFragment_toggleStar(View v)
+    {
+        SearchFragment.toggleStar(v);
     }
 
     public void AddCardToTagFragment_toggleWord(View v)

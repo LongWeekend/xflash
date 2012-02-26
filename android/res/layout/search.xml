@@ -22,9 +22,15 @@
             style="@style/default_edittext"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/search_cancelbutton"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:imeOptions="actionDone" />
 
     </RelativeLayout>
 
+    <ListView android:id="@+id/search_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:divider="#FFCCCCCC" />
+        
 </LinearLayout>
 

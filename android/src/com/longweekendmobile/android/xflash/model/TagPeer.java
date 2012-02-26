@@ -88,8 +88,6 @@ public class TagPeer
 
             setCardCount(tempInt,tempTag);              
 
-            Log.d(MYTAG,"tag_id: " + tempId + " has " + tempInt + " cards");
-
         }  // end for loop
 
         myCursor.close();
@@ -119,9 +117,6 @@ public class TagPeer
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
         String[] tempArgs = null;
-
-        Log.d(MYTAG,"ALERT - MISSING FUNCTIONALITY");
-        Log.d(MYTAG,"      - IN METHOD TagPeer.cancelMembership()");
 
         // first check whether the removed card is in the active tag
         // if the tagId supplied is the active card, check for last card cause
@@ -220,7 +215,10 @@ public class TagPeer
 
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
 
-        if( myCursor.getCount() > 0)
+        int tempCount = myCursor.getCount();
+        myCursor.close();
+
+        if( tempCount > 0)
         {
             return true;
         }

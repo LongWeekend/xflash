@@ -87,7 +87,7 @@ public class AddCardToTagFragment extends Fragment
         }
         
         tempView = (TextView)addCardLayout.findViewById(R.id.addcard_reading);
-        tempView.setText(tempString);
+        tempView.setText("[" + tempString + "]");
 
         tempView = (TextView)addCardLayout.findViewById(R.id.addcard_meaning);
         tempView.setText( currentCard.meaningWithoutMarkup() );

@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
@@ -47,7 +48,7 @@ public class TagCardsFragment extends Fragment
     private ListView cardList;
     private LayoutInflater myInflater;
 
-    private boolean needLoad = false;
+    private static boolean needLoad = false;
     private static int incomingTagId;
     private static Tag currentTag = null;
 
@@ -98,6 +99,11 @@ public class TagCardsFragment extends Fragment
     }  // end onCreateView
 
     
+    public static void setNeedLoad()
+    {
+        needLoad = true;
+    }
+
     public static void setIncomingTagId(int inId)
     {
         incomingTagId = inId;

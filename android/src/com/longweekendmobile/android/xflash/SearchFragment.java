@@ -9,7 +9,9 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 
 import java.util.ArrayList;
+import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,31 +24,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.Tag;
+import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SearchFragment extends Fragment
 {
     private static final String MYTAG = "XFlash SearchFragment";
     
     private static LinearLayout searchLayout = null;
-    private EditText mySearch = null;
+    private static EditText mySearch = null;
     private InputMethodManager imm = null;
+    private static LayoutInflater myInflater;
 
     private static ArrayList<Card> searchResults = null;
+    private ListView searchList;
+    private static Tag starredTag;
+    private static ProgressDialog searchDialog = null;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        myInflater = inflater;
+        starredTag = Tag.starredWordsTag();
+
         // inflate our layout for the Search activity
         searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
         mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
@@ -64,6 +79,16 @@ public class SearchFragment extends Fragment
         mySearch.setOnFocusChangeListener(searchFocusListener);
         mySearch.setOnEditorActionListener(searchActionListener);
 
+        // get the ListView to display results
+        searchList = (ListView)searchLayout.findViewById(R.id.search_list);
+
+        // if we have existing results from a prior search, display them on load
+        if( searchResults != null )
+        {
+            SearchAdapter theAdapter = new SearchAdapter();
+            searchList.setAdapter(theAdapter);
+        }
+
         // launch with the keyboard displayed
         mySearch.postDelayed( new Runnable()
         {
@@ -79,6 +104,39 @@ public class SearchFragment extends Fragment
     }  // end onCreateView()
 
 
+    public static void addCard(View v,Xflash inContext)
+    {
+        Log.d(MYTAG,">>> card clicked in SearchFragment");
+        int tempInt = (Integer)v.getTag();
+        Log.d(MYTAG,"> card id:  " + tempInt);
+    }
+
+    public static void toggleStar(View v)
+    {
+        int tempInt = (Integer)v.getTag();
+        Card tempCard = CardPeer.retrieveCardByPK(tempInt);
+        ImageView starImage = (ImageView)v;
+
+        // check whether this card is already starred
+        if( TagPeer.card(tempCard,starredTag) )
+        {
+            TagPeer.cancelMembership(tempCard,starredTag);
+            starImage.setImageResource(R.drawable.star_deselected);
+        }
+        else
+        {
+            TagPeer.subscribeCard(tempCard,starredTag);
+            starImage.setImageResource(R.drawable.star_selected);
+        }
+   
+        // inform TagFragment that the starred words tag has changed
+        // TODO - bad solution, temporary
+        TagFragment.setNeedLoad();
+        TagCardsFragment.setNeedLoad();
+     
+    }  // end toggleStar()
+
+    
     // display keyboard on focus, hide when focus leaves
     private EditText.OnFocusChangeListener searchFocusListener = new EditText.OnFocusChangeListener()
     {
@@ -131,20 +189,10 @@ public class SearchFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
-/*
-            // if the Tag is larger than an arbitrary size, display
-            // the dialog on the presumption that the load will take
-            // a few seconds while the app just sits there
-            if( currentTag.getCardCount() > 200 &&
-                ( ( needLoad == true ) || ( cardArray == null ) ) )
-            {
-                cardLoadDialog = new ProgressDialog(getActivity());
-                cardLoadDialog.setMessage(" Fetching cards... ");
-                cardLoadDialog.show();
-            }
-*/
-            Log.d(MYTAG,">>> onPreExecute()");
-            Log.d(MYTAG,".");
+            // display a loading dialog
+            searchDialog = new ProgressDialog(getActivity());
+            searchDialog.setMessage(" Searching... ");
+            searchDialog.show();
         }
 
         
@@ -153,28 +201,92 @@ public class SearchFragment extends Fragment
         {
             String searchString = mySearch.getText().toString();
 
-            Log.d(MYTAG,">>> onPostExecute()");
-            Log.d(MYTAG,"searching for:  " + searchString);
-            Log.d(MYTAG,".");
             searchResults = CardPeer.searchCardsForKeyword(searchString);            
-            
+           
+            // if we got no results and there was no 'deep search,' do
+            // one automatically
+            if( ( searchResults.size() == 0 ) && ( !searchString.endsWith("?") ) )
+            {
+                String newSearch = searchString + "?";
+                searchResults = CardPeer.searchCardsForKeyword(newSearch);
+            }
+
             return null;
-
-        }  // end doInBackground()
-
+        }
 
         @Override
         protected void onPostExecute(Void unused)
         {
-            Log.d(MYTAG,">>> onPostExecute()");
-            Log.d(MYTAG,"search returned size:  " + searchResults.size() );
-            Log.d(MYTAG,".");
-            Log.d(MYTAG,".");
-
-        }  // end onPostExecute()
+            // set our returned card info into the ListView
+            SearchAdapter theAdapter = new SearchAdapter();
+            searchList.setAdapter(theAdapter);
+            
+            // clear the progress dialog
+            searchDialog.dismiss();
+        }  
 
     
     }  // end AsyncSearch declaration
+
+
+    // custom adapter to appropriately fill the view for our ListView
+    private class SearchAdapter extends ArrayAdapter<Card>
+    {
+        SearchAdapter()
+        {
+            super( getActivity(), R.layout.search_row, (List)searchResults);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View row = convertView;
+
+            if( row == null )
+            {
+                row = myInflater.inflate(R.layout.search_row, parent, false);
+            }
+
+            JapaneseCard tempCard = (JapaneseCard)searchResults.get(position);
+            int tempCardId = tempCard.getCardId();
+
+            if( tempCard.isFault )
+            {
+                tempCard.hydrate();
+            }
+
+            // set the star image and tag with the card id for toggle
+            ImageView starImage = (ImageView)row.findViewById(R.id.search_row_image);
+            if( TagPeer.card( tempCard, starredTag) )
+            {
+                starImage.setImageResource(R.drawable.star_selected);
+            }
+            else
+            {
+                starImage.setImageResource(R.drawable.star_deselected);
+            }
+            
+            // tag the star image with our card id for toggling
+            starImage.setTag(tempCardId);
+
+            // set the word
+            TextView tempView = (TextView)row.findViewById(R.id.search_row_top);
+            tempView.setText( tempCard.headwordIgnoringMode(true) );
+
+            // set the meaning
+            tempView = (TextView)row.findViewById(R.id.search_row_middle);
+            tempView.setText( tempCard.reading() );
+            
+            // set the meaning
+            tempView = (TextView)row.findViewById(R.id.search_row_bottom);
+            tempView.setText( tempCard.meaningWithoutMarkup() );
+
+            // tag each row with the card id it represents
+            row.setTag( tempCard.getCardId() );
+
+            return row;
+        }
+
+    }  // end SearchAdapter class declaration
 
 
 }  // end SearchFragment class declaration
