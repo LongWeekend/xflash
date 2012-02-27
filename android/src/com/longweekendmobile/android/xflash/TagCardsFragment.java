@@ -170,16 +170,10 @@ public class TagCardsFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
-            // if the Tag is larger than an arbitrary size, display
-            // the dialog on the presumption that the load will take
-            // a few seconds while the app just sits there
-            if( currentTag.getCardCount() > 200 && 
-                ( ( needLoad == true ) || ( cardArray == null ) ) )
-            {
-                cardLoadDialog = new ProgressDialog(getActivity());
-                cardLoadDialog.setMessage(" Fetching cards... ");
-                cardLoadDialog.show();
-            }
+            // launch a loading dialog
+            cardLoadDialog = new ProgressDialog(getActivity());
+            cardLoadDialog.setMessage(" Fetching cards... ");
+            cardLoadDialog.show();
         }
 
         @Override
@@ -205,10 +199,8 @@ public class TagCardsFragment extends Fragment
             CardAdapter theAdapter = new CardAdapter();
             cardList.setAdapter(theAdapter);
 
-            if( cardLoadDialog != null)
-            {
-                cardLoadDialog.dismiss();
-            }
+            // clear the progress dialog
+            cardLoadDialog.dismiss();
     
         }  // end onPostExecute()
 

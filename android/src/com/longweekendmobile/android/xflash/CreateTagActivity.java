@@ -87,6 +87,31 @@ public class CreateTagActivity extends Activity
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
     }
 
+
+    private void keyboardDone()
+    {
+        // when they click 'done' on the keyboard, add the new group and exit
+        Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
+                    
+        // refresh the appropriate tag list
+        if( whoIsCalling == TAG_FRAGMENT_CALLING )
+        {
+            TagFragment.setNeedLoad();
+            TagFragment.refreshTagList();
+        }
+        else if( whoIsCalling == SINGLE_CARD_CALLING )
+        {
+            // if called from a specific card, add that card to the new tag
+            int tempCardId = getIntent().getIntExtra("card_id",-1);
+            Card tempCard = CardPeer.retrieveCardByPK(tempCardId);
+    
+            TagPeer.subscribeCard(tempCard,theNewTag);
+            
+            AddCardToTagFragment.refreshTagList();
+        }
+
+    }  // end keyboardDone()
+
     
     // the listener for when 'done' is clicked on the keyboard
     private TextView.OnEditorActionListener createTagActionListener = new TextView.OnEditorActionListener() 
@@ -96,27 +121,7 @@ public class CreateTagActivity extends Activity
         {
             if( actionId == EditorInfo.IME_ACTION_DONE )
             {
-                // when they click 'done' on the keyboard, add the new
-                // group and exit
-                Tag theNewTag = TagPeer.createTagNamed( myEdit.getText().toString() , currentGroup);
-                    
-                // refresh the appropriate tag list
-                if( whoIsCalling == TAG_FRAGMENT_CALLING )
-                {
-                    TagFragment.setNeedLoad();
-                    TagFragment.refreshTagList();
-                }
-                else if( whoIsCalling == SINGLE_CARD_CALLING )
-                {
-                    // if called from a specific card, add that card to the new tag
-                    int tempCardId = getIntent().getIntExtra("card_id",-1);
-                    Card tempCard = CardPeer.retrieveCardByPK(tempCardId);
-    
-                    TagPeer.subscribeCard(tempCard,theNewTag);
-                        
-                    AddCardToTagFragment.refreshTagList();
-                }
-
+                keyboardDone();
                 finish();
                     
                 return true;

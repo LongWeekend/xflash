@@ -46,25 +46,27 @@ public class SearchFragment extends Fragment
     
     private static LinearLayout searchLayout = null;
     private static EditText mySearch = null;
-    private InputMethodManager imm = null;
     private static LayoutInflater myInflater;
-
-    private static ArrayList<Card> searchResults = null;
+    private InputMethodManager imm = null;
     private ListView searchList;
+
     private static Tag starredTag;
     private static ProgressDialog searchDialog = null;
+    private static ArrayList<Card> searchResults = null;
+    private static ArrayList<Card> membershipCacheArray = null;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        // save the inflater, input manager, and starred words tag for later use
         myInflater = inflater;
         starredTag = Tag.starredWordsTag();
+        imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         // inflate our layout for the Search activity
         searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
-        mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
@@ -72,10 +74,8 @@ public class SearchFragment extends Fragment
   
         XflashSettings.setupColorScheme(titleBar,tempButton);
         
-        // get input method manager for keyboard transitions
-        imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-
         // set our listeners
+        mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
         mySearch.setOnFocusChangeListener(searchFocusListener);
         mySearch.setOnEditorActionListener(searchActionListener);
 
@@ -88,53 +88,100 @@ public class SearchFragment extends Fragment
             SearchAdapter theAdapter = new SearchAdapter();
             searchList.setAdapter(theAdapter);
         }
-
-        // launch with the keyboard displayed
-        mySearch.postDelayed( new Runnable()
+        else
         {
-            @Override
-            public void run()
+            // launch with the keyboard displayed if there are no
+            // previously existing search results
+            mySearch.postDelayed( new Runnable()
             {
-                mySearch.requestFocus();
-            }
-        },300);
-        
+                @Override
+                public void run()
+                {
+                    mySearch.requestFocus();
+                }
+            },300);
+        }
+     
         return searchLayout;
 
     }  // end onCreateView()
 
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+        // flush the cache array when the search fragment is paused
+        membershipCacheArray = null;
+    }
 
     public static void addCard(View v,Xflash inContext)
     {
-        Log.d(MYTAG,">>> card clicked in SearchFragment");
         int tempInt = (Integer)v.getTag();
+        Log.d(MYTAG,">>> card clicked in SearchFragment");
         Log.d(MYTAG,"> card id:  " + tempInt);
     }
 
+    
+    // modify the 'starred' status of the clicked Card
     public static void toggleStar(View v)
     {
-        int tempInt = (Integer)v.getTag();
-        Card tempCard = CardPeer.retrieveCardByPK(tempInt);
+        Card tempCard = (Card)v.getTag();
         ImageView starImage = (ImageView)v;
 
+        boolean isMember = false;
+
         // check whether this card is already starred
-        if( TagPeer.card(tempCard,starredTag) )
+        if( membershipCacheArray != null )
         {
+            if( membershipCacheArray.size() > 0 )
+            {
+                isMember = checkMembershipCacheForCard(tempCard); 
+            }
+        }
+        else
+        {
+            isMember = TagPeer.card(tempCard,starredTag); 
+        }
+  
+
+        if(isMember)
+        {
+            // if the card is currently starred, remove
             TagPeer.cancelMembership(tempCard,starredTag);
+            membershipCacheArray.remove(tempCard);    
             starImage.setImageResource(R.drawable.star_deselected);
         }
         else
         {
+            // if it is NOT starred, add
             TagPeer.subscribeCard(tempCard,starredTag);
+            membershipCacheArray.add(tempCard);
             starImage.setImageResource(R.drawable.star_selected);
         }
-   
+ 
         // inform TagFragment that the starred words tag has changed
         // TODO - bad solution, temporary
         TagFragment.setNeedLoad();
         TagCardsFragment.setNeedLoad();
      
     }  // end toggleStar()
+
+
+    // checks the local cache for starred status, or creates it
+    private static boolean checkMembershipCacheForCard(Card inCard)
+    {
+        boolean returnVal = false;
+
+        if( membershipCacheArray == null )
+        {
+            // if the cache array hasn't be loaded, do so
+            membershipCacheArray = CardPeer.retrieveFaultedCardsForTag(starredTag);
+        }
+        
+        return membershipCacheArray.contains(inCard);
+
+    }  // end checkMembershipCacheForCard()
 
     
     // display keyboard on focus, hide when focus leaves
@@ -256,7 +303,7 @@ public class SearchFragment extends Fragment
 
             // set the star image and tag with the card id for toggle
             ImageView starImage = (ImageView)row.findViewById(R.id.search_row_image);
-            if( TagPeer.card( tempCard, starredTag) )
+            if( checkMembershipCacheForCard(tempCard) )
             {
                 starImage.setImageResource(R.drawable.star_selected);
             }
@@ -266,7 +313,7 @@ public class SearchFragment extends Fragment
             }
             
             // tag the star image with our card id for toggling
-            starImage.setTag(tempCardId);
+            starImage.setTag(tempCard);
 
             // set the word
             TextView tempView = (TextView)row.findViewById(R.id.search_row_top);

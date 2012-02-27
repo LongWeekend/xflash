@@ -107,7 +107,7 @@ public class AddCardToTagFragment extends Fragment
 
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.addcard_row,null);
             tempRow.setClickable(false);
-            tempRow.setTag( tempTag.getId() );
+            tempRow.setTag(tempTag);
 
             // set the tag title
             tempView = (TextView)tempRow.findViewById(R.id.addcard_row_tagname);
@@ -145,8 +145,7 @@ public class AddCardToTagFragment extends Fragment
         RelativeLayout tempRow = (RelativeLayout)userTagList.findViewWithTag( v.getTag() );
 
         // pull the tag that was clicked on
-        int tempInt = (Integer)v.getTag();
-        Tag tempTag = TagPeer.retrieveTagById(tempInt);
+        Tag tempTag = (Tag)v.getTag();
 
         ImageView tempImage = (ImageView)tempRow.findViewById(R.id.addcard_row_checked);
         
@@ -195,7 +194,7 @@ public class AddCardToTagFragment extends Fragment
             Tag tempTag = userTagArray.get(i);
 
             RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.addcard_row,null);
-            tempRow.setTag( tempTag.getId() );
+            tempRow.setTag(tempTag);
 
             // set the tag title
             TextView tempView = (TextView)tempRow.findViewById(R.id.addcard_row_tagname);

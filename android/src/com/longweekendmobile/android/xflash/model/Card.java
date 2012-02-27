@@ -84,6 +84,42 @@ public class Card
         cardId = kLWEUninitializedCardId;
     }
 
+    // override of equals so this.equals() and ArrayList.contains() will
+    // serve our purposes
+    public boolean equals(Object obj)
+    {
+        // definitely equal if they are the same object
+        if( this == obj )
+        {
+            return true;
+        }
+
+        if( ( obj == null ) || ( obj.getClass() != this.getClass() ) )
+        {
+            return false;
+        }
+
+        // in that case we know we were passed a Card
+        Card tempCard = (Card)obj;
+
+        // judge equality by card id numbers
+        return ( this.cardId == tempCard.cardId ); 
+
+    }  // end equals()
+
+
+    // we must override hashCode() when overriding equals()
+    public int hashCode()
+    {
+        int hash = 7;   // arbitrary
+
+        hash = 31 * hash + cardId;
+
+        return hash;
+    
+    }  // end hashCode()
+
+
     // returns the meaning field withotu any HTML markup... messy!
     public String meaningWithoutMarkup()
     {
