@@ -133,7 +133,7 @@ NSInteger const kLWEBackupSection = 2;
 - (void) reloadTableData
 {
   // No need to do anything if we don't have a table view (low memory, etc)
-  if (self.tableView == nil)
+  if (self.isViewLoaded == NO)
   {
     return;
   }
