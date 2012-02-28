@@ -164,7 +164,7 @@ namespace :ctedi do
     #debugger
     
     ## Last Step would be write all of those result on a file
-    diff_parser.update_data_with (added.count, changed.count + updated_entries.count, removed.count)
+    diff_parser.update_data_with(added.count, (changed.count + updated_entries.count), removed.count)
     diff_parser.dump
 
 

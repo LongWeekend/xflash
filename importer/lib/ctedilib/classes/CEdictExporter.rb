@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 class CEdictExporter
 
   # DESC: Exports contents of staging database to Sqlite file
@@ -29,6 +31,9 @@ class CEdictExporter
     # Create FTS table & generate content
     $cn.execute("CREATE TABLE cards_search_content DEFAULT CHARSET=utf8 SELECT card_id, CONCAT(headword_trad, ' ', headword_simp) as headword, CONCAT(reading, ' ', reading_diacritic) as reading, meaning_fts AS content, priority_word as ptag FROM #{cards_table}")
 
+    # Create Rikai table
+    $cn.execute("CREATE TABLE dict DEFAULT CHARSET=utf8 SELECT card_id, headword_trad, headword_simp, reading, reading_diacritic, meaning, priority_word FROM #{cards_table}")
+
     # Remove non-visible tags - MMA 11.30.2011 -- is this still used? TODO
     $cn.execute("DELETE FROM tags WHERE force_off=1")
     $cn.execute("ALTER TABLE tags DROP force_off")
@@ -44,6 +49,7 @@ class CEdictExporter
     #######################################
 
     sqlite_create_core
+    sqlite_create_rikai
     sqlite_create_cards
     sqlite_create_fts
 
@@ -77,10 +83,10 @@ class CEdictExporter
     \\
     DROP TABLE IF EXISTS users;\\
     CREATE TABLE users (user_id INTEGER PRIMARY KEY ON CONFLICT REPLACE, nickname TEXT NOT NULL , avatar_image_path TEXT NOT NULL , date_created DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP );\\
-    INSERT INTO users VALUES(1,'You','foo','2011-10-19 11:55:36');\\
-    INSERT INTO users VALUES(2,'The Chairman','foo','2011-10-19 11:56:18');\\
-    INSERT INTO users VALUES(3,'My Best Friend','foo','2011-10-19 11:56:28');\\
-    INSERT INTO users VALUES(4,'Mom','foo','2011-10-19 11:56:36');\\
+    INSERT INTO users VALUES(1,\"You\",\"foo\",\"2011-10-19 11:55:36\");\\
+    INSERT INTO users VALUES(2,\"The Chairman\",\"foo\",\"2011-10-19 11:56:18\");\\
+    INSERT INTO users VALUES(3,\"My Best Friend\",\"foo\",\"2011-10-19 11:56:28\");\\
+    INSERT INTO users VALUES(4,\"Mom\",\"foo\",\"2011-10-19 11:56:36\");\\
     \\
     DROP TABLE IF EXISTS user_history;\\
     CREATE TABLE user_history (card_id INTEGER, timestamp TIMESTAMP, user_id INTEGER, right_count INTEGER DEFAULT 0, wrong_count INTEGER DEFAULT 0, created_on TIMESTAMP, card_level INTEGER);\\
@@ -174,6 +180,50 @@ class CEdictExporter
     prt "Done Exporting to Sqlite\n"
   end
 
+  # DESC: PREPARE AND DUMP THE CARDS DATABASE
+  def sqlite_create_rikai
+    sql_tmp_out_fn = "tmp_cflash_cards_rikai_sqlite_dump.sql"
+    File.delete(sql_tmp_out_fn) if File.exist?(sql_tmp_out_fn) # delete old tmp files
+    mysql_dump_tables_via_cli(["dict"], sql_tmp_out_fn, $options[:mysql_name])
+
+    sqlite_prepare_db_statements = "\\
+    PRAGMA synchronous=OFF;\\
+    PRAGMA count_changes=OFF;\\
+    BEGIN TRANSACTION;\\
+    \\
+    DROP TABLE IF EXISTS dict;\\
+    CREATE TABLE dict (card_id INTEGER PRIMARY KEY, headword_trad TEXT, headword_simp TEXT, reading TEXT, reading_diacritic TEXT, meaning TEXT, priority_word INTEGER);\\
+    \\
+    DROP INDEX IF EXISTS cards_card_id;\\
+    CREATE INDEX cards_card_id ON dict (card_id ASC);\\
+    \\
+    DROP INDEX IF EXISTS cards_ptag;\\
+    CREATE INDEX cards_ptag ON dict (priority_word ASC);\\
+    \\
+    DROP INDEX IF EXISTS cards_headwords;\\
+    CREATE INDEX cards_headwords ON dict (headword_trad, headword_simp ASC);\\
+    \\
+    END TRANSACTION;\\
+    BEGIN TRANSACTION;\\
+    \\"
+
+    mysql_to_sqlite_converter(sql_tmp_out_fn)
+    prepend_text_to_file(sqlite_prepare_db_statements, sql_tmp_out_fn)
+    append_text_to_file("END TRANSACTION;", sql_tmp_out_fn)
+    sqlite_run_file_via_cli(sql_tmp_out_fn, $options[:sqlite_file_path][:jflash_rikai])
+
+    # delete tmp files
+    File.delete(sql_tmp_out_fn)
+
+    # Reindex tables in Sqlite
+    prt "Reindexing & Compacting SQLite file"
+    prt_dotted_line
+    sqlite_reindex_tables(["cards_card_id","cards_ptag","cards_headwords"], $options[:sqlite_file_path][:jflash_rikai])
+    sqlite_vacuum($options[:sqlite_file_path][:jflash_rikai])
+
+    prt "Done Exporting to Sqlite\n"
+  end
+
   # DESC: PREPARE AND DUMP THE FTS DATABASE
   def sqlite_create_fts
     # Clean up any old dump files
@@ -217,6 +267,7 @@ class CEdictExporter
     connect_db
     prt "Dropping mySQL interim export tables (cards, cards_html, tags, groups, cards_search_content)\n\n"
     $cn.execute("DROP TABLE IF EXISTS cards")
+    $cn.execute("DROP TABLE IF EXISTS dict")
     $cn.execute("DROP TABLE IF EXISTS cards_html")
     $cn.execute("DROP TABLE IF EXISTS tags")
     $cn.execute("DROP TABLE IF EXISTS groups")

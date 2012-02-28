@@ -124,7 +124,12 @@ extern NSString * const LWE_TWITTER_HASH_TAG;
   extern NSString * const SET_PINYIN_COLOR_ON;
   extern NSString * const SET_PINYIN_COLOR_OFF;
 
+  extern NSString * const APP_PINYIN_CHANGE_TONE;
+  extern NSString * const SET_PINYIN_CHANGE_TONE_ON;
+  extern NSString * const SET_PINYIN_CHANGE_TONE_OFF;
+
   extern NSString * const LWE_CF_VERSION_1_0;
+  extern NSString * const LWE_CF_VERSION_1_1;
 
   // Plugins - CFlash
   extern NSString * const AUDIO_PINYIN_KEY;  //! Key for referring to the Pinyin Audio plugin

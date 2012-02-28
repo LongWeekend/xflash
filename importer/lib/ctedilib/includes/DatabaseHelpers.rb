@@ -15,14 +15,14 @@ module DatabaseHelpers
   # Create connection to DB in instance scope
   def connect_db
     if !$cn
-      ActiveRecord::Base.establish_connection (
-         :adapter  => :mysql2,
+      ActiveRecord::Base.establish_connection ({
+         :adapter  => "mysql",
          :database => $options[:mysql_name],
          :port     => $options[:mysql_port],
          :host     => $options[:mysql_host],
          :encoding => "utf8",
          :username => $options[:mysql_username],
-         :password => $options[:mysql_password]
+         :password => $options[:mysql_password]}
        )
        $cn = ActiveRecord::Base.connection()
     end

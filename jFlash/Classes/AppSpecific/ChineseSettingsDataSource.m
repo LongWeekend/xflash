@@ -60,18 +60,24 @@
   NSArray *hwTypeKeys = [NSArray arrayWithObjects:SET_HEADWORD_TYPE_TRAD,SET_HEADWORD_TYPE_SIMP,nil];
   NSDictionary *hwTypeDict = [NSDictionary dictionaryWithObjects:hwTypeObjects forKeys:hwTypeKeys];
   
+  NSArray *sandhiObjects = [NSArray arrayWithObjects:NSLocalizedString(@"On",@"SettingsViewController.On"),
+                           NSLocalizedString(@"Off",@"SettingsViewController.Off"),nil];
+  NSArray *sandhiKeys = [NSArray arrayWithObjects:SET_PINYIN_CHANGE_TONE_OFF, SET_PINYIN_CHANGE_TONE_ON, nil];
+  NSDictionary *sandhiDict = [NSDictionary dictionaryWithObjects:sandhiObjects forKeys:sandhiKeys];
+                              
   // Create a complete dictionary of all settings display names & their setting constants
-  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,colorDict,hwTypeDict,modeDict,nil];
-  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_PINYIN_COLOR,APP_HEADWORD_TYPE,APP_MODE,nil];
+  NSArray *dictObjects = [NSArray arrayWithObjects:headwordDict,themeDict,colorDict,sandhiDict, hwTypeDict,modeDict,nil];
+  NSArray *dictKeys = [NSArray arrayWithObjects:APP_HEADWORD,APP_THEME,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_MODE,nil];
   self.settingsHash = [NSDictionary dictionaryWithObjects:dictObjects forKeys:dictKeys];
   
   // These are the keys and display names of each row
   NSArray *cardSettingNames = [NSArray arrayWithObjects:NSLocalizedString(@"Study Mode",@"SettingsViewController.SettingNames_StudyMode"),
                                NSLocalizedString(@"Study Language",@"SettingsViewController.SettingNames_StudyLanguage"),
                                NSLocalizedString(@"Pinyin Coloring",@"SettingsViewController.SettingNames_PinyinColoring"),
+                               NSLocalizedString(@"Tone Sandhi",@"SettingsViewController.SettingNames_PinyinSandhi"),
                                NSLocalizedString(@"Character Style",@"SettingsViewController.SettingNames_HW_Type"),
                                NSLocalizedString(@"Difficulty",@"SettingsViewController.SettingNames_ChangeDifficulty"),nil];
-  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_PINYIN_COLOR,APP_HEADWORD_TYPE,APP_ALGORITHM,nil];
+  NSArray *cardSettingKeys = [NSArray arrayWithObjects:APP_MODE,APP_HEADWORD,APP_PINYIN_COLOR,APP_PINYIN_CHANGE_TONE,APP_HEADWORD_TYPE,APP_ALGORITHM,nil];
   NSArray *cardSettingArray = [NSArray arrayWithObjects:cardSettingNames,cardSettingKeys,NSLocalizedString(@"Studying",@"SettingsViewController.TableHeader_Studying"),nil]; // Puts single section together, 3rd index is header name
   
   NSMutableArray *userSettingNames = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Theme",@"SettingsViewController.SettingNames_Theme"),

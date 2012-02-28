@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 # Single entry class from Jun Da's bigram frequency list
 class BigramEntry < Entry
   

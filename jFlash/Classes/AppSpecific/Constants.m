@@ -118,10 +118,15 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
       // Tapjoy
       NSString * const LWE_TAPJOY_APP_ID            = @"d05949e8-ab10-4039-b6f6-51ff3504084a";
 
-      // This setting is CFlash only
+      // These settings are CFlash only - pinyin coloring & tone changes
       NSString * const APP_PINYIN_COLOR             = @"pinyin_color";
       NSString * const SET_PINYIN_COLOR_ON          = @"ON";
       NSString * const SET_PINYIN_COLOR_OFF         = @"OFF";
+
+      NSString * const APP_PINYIN_CHANGE_TONE       = @"pinyin_tone_change";
+      NSString * const SET_PINYIN_CHANGE_TONE_ON    = @"ON";
+      NSString * const SET_PINYIN_CHANGE_TONE_OFF   = @"OFF";
+
 
       // Each flash has its own Tiwtter key
       NSString * const LWE_TWITTER_CONSUMER_KEY = @"2xLbYtl787ShwJBFIC1QaA";
@@ -130,12 +135,13 @@ NSString * const LWE_SUPPORT_EMAIL        = @"support@longweekendmobile.com";
 
 
       // These constants are general to the flashes
-      NSString * const LWE_CURRENT_VERSION          = @"1.0";
+      NSString * const LWE_CURRENT_VERSION          = @"1.1";
       NSString * const LWE_CURRENT_CARD_DATABASE    = @"cFlash-CARD-1.0.db";
       NSString * const LWE_CURRENT_USER_DATABASE    = @"cFlash.db";
 
       // These constants are CF specific
       NSString * const LWE_CF_VERSION_1_0           = @"1.0";
+      NSString * const LWE_CF_VERSION_1_1           = @"1.1";
 
       //CFlash specific plugins
       NSString * const AUDIO_HSK_KEY = @"AUDIO_HSK";

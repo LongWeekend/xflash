@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 class CEdictParser < Parser
 
   @reference_only_entries

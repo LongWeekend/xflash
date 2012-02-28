@@ -258,6 +258,9 @@
   NSMutableArray *audioArray = [NSMutableArray array];
   for (NSString *pinyin in pinyinSegments)
   {
+    // We have a special case for when it is nü(x) tones -- the filenames are "v"
+    pinyin = [pinyin stringByReplacingOccurrencesOfString:@"ü" withString:@"v"]; 
+    
     // Note there is no checking here for whether the file exists
     NSString *filename = [[pinyinPlugin fullPath] stringByAppendingFormat:@"%@.mp3",[pinyin lowercaseString]];
     [audioArray addObject:filename];

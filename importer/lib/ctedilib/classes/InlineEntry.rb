@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 class InlineEntry < Entry
 
   def parse_line(line = "")
