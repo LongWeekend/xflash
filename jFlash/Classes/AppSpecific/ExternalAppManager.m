@@ -44,6 +44,8 @@
   }
   else
   {
+    // If it is unknown, log it so we can find out about it, and maybe even implement it
+    [LWEAnalytics logError:@"Unhandled bundle ID" message:bundleId];
     return nil;
   }
 }
@@ -92,7 +94,7 @@
   // ONLY return if we know where we are going to, we have a xxxx:// handler defined, AND the app can open that handler.
   if (self.externalBundleId && [self handlerForBundleId:self.externalBundleId])
   {
-    NSString *urlString = [NSString stringWithFormat:@"%@://foobar",[self handlerForBundleId:self.externalBundleId]];
+    NSString *urlString = [NSString stringWithFormat:@"%@://",[self handlerForBundleId:self.externalBundleId]];
     wantsReturn = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]];
   }
   return wantsReturn;
