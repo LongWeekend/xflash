@@ -29,6 +29,7 @@ $options[:sqlite_file_path][:jflash_user]  = "./cFlash.db"
 $options[:sqlite_file_path][:jflash_cards] = "./cFlash-CARD-1.0.db"
 $options[:sqlite_file_path][:jflash_ex]    = "./cFlash-EX-1.0.db"
 $options[:sqlite_file_path][:jflash_fts]   = "./cFlash-FTS-1.0.db"
+$options[:sqlite_file_path][:jflash_rikai] = "./cFlash-rikai-1.0.db"
 $options[:data_file_rel_path] = "./data/cedict"
 
 # $options[:card_types] = {
