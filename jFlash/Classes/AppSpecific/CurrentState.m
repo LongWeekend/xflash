@@ -136,6 +136,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CurrentState);
 #elif defined(LWE_CFLASH)
   [settings setValue:SET_HEADWORD_TYPE_SIMP forKey:APP_HEADWORD_TYPE];
   [settings setValue:SET_PINYIN_COLOR_ON forKey:APP_PINYIN_COLOR];
+  [settings setValue:SET_PINYIN_CHANGE_TONE_ON forKey:APP_PINYIN_CHANGE_TONE];
 #endif
     
   [settings setInteger:DEFAULT_REMINDER_DAYS forKey:APP_REMINDER];

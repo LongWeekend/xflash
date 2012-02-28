@@ -10,9 +10,8 @@
 
 // Private methods
 @interface UpdateManager ()
-#if defined(LWE_JFLASH)
 + (void) _upgradeDBtoVersion:(NSString*)newVersionName withSQLStatements:(NSString*)pathToSQL forSettings:(NSUserDefaults *)settings;
-
+#if defined(LWE_JFLASH)
 // JFLASH 1.1 -> 1.2
 + (void) _createDefaultSettingsFor11:(NSUserDefaults *)settings;
 + (void) _updateSettingsFrom11to12:(NSUserDefaults *)settings;
@@ -39,16 +38,19 @@
 + (BOOL) _needs161to162SettingsUpdate:(NSUserDefaults *) settings;
 + (void) _updateSettingsFrom161to162:(NSUserDefaults *)settings;
 
-#else
+#elif defined (LWE_CFLASH)
 
-/**
- * CFLASH Private Helpers Go Here
- */
+// CFLASH 1.0.x -> 1.1
++ (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings;
++ (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings;
 
 #endif
 @end
 
 @implementation UpdateManager
+#pragma mark - JFLASH 
+#pragma mark Version 1.1
+
 #if defined(LWE_JFLASH)
 /** DEBUG ONLY method to simulate settings for JFlash 1.1 **/
 + (void) _createDefaultSettingsFor11:(NSUserDefaults*) settings
@@ -74,8 +76,6 @@
 	[settings setBool:NO forKey:@"db_did_finish_copying"];
 	[settings setBool:YES forKey:@"settings_already_created"];
 }
-
-#pragma mark - Update and Check Settings Region. 
 
 #pragma mark Version 1.2
 
@@ -174,7 +174,7 @@
 }
 
 
-#pragma mark - Version 1.4
+#pragma mark Version 1.4
 
 /** Returns YES if the user needs to update settings from 1.3 to 1.4, otherwise returns NO */
 + (BOOL) _needs13to14SettingsUpdate:(NSUserDefaults*) settings
@@ -184,7 +184,7 @@
           [settings valueForKey:@"settings_already_created"]);
 }
 
-#pragma mark - Version 1.5
+#pragma mark Version 1.5
 
 + (BOOL) _needs14to15SettingsUpdate:(NSUserDefaults*) settings
 {
@@ -201,7 +201,7 @@
   [settings setObject:LWE_JF_VERSION_1_5 forKey:APP_SETTINGS_VERSION];
 }
 
-#pragma mark - Version 1.6
+#pragma mark Version 1.6
 
 + (BOOL) _needs15to16SettingsUpdate:(NSUserDefaults*) settings
 {
@@ -242,7 +242,7 @@
   [LWEFile deleteFile:[LWEFile createDocumentPathWithFilename:LWE_DOWNLOADED_PLUGIN_PLIST]];
 }
 
-#pragma mark - Version 1.6.1
+#pragma mark Version 1.6.1
 
 + (BOOL) _needs16to161SettingsUpdate:(NSUserDefaults*) settings
 {
@@ -261,7 +261,7 @@
   [TagPeer recacheCountsForUserTags];
 }
 
-#pragma mark - Version 1.6.2
+#pragma mark Version 1.6.2
 
 + (BOOL) _needs161to162SettingsUpdate:(NSUserDefaults *) settings
 {
@@ -277,6 +277,26 @@
   [UpdateManager _upgradeDBtoVersion:LWE_JF_VERSION_1_6_2 withSQLStatements:LWE_JF_161_TO_162_SQL_FILENAME forSettings:settings];
   [TagPeer recacheCountsForUserTags];
 }
+#elif defined (LWE_CFLASH)
+#pragma mark - CFLASH
+
+#pragma mark Version 1.1
+
++ (BOOL) _needs10to11SettingsUpdate:(NSUserDefaults *)settings
+{
+  return [[settings objectForKey:APP_SETTINGS_VERSION] isEqualToString:LWE_CF_VERSION_1_0];
+}
+
++ (void) _updateSettingsFrom10to11:(NSUserDefaults *)settings
+{
+  // Install a default setting for the pinyin tone change setting (new in 1.1)
+  [settings setObject:SET_PINYIN_CHANGE_TONE_OFF forKey:APP_PINYIN_CHANGE_TONE];
+  
+  // Now update the version
+  [settings setObject:LWE_CF_VERSION_1_1 forKey:APP_SETTINGS_VERSION];
+}
+
+#endif
 
 #pragma mark - Shared Private Methods
 
@@ -346,7 +366,6 @@
     [db closeDatabase];
   }
 }
-#endif
 
 #pragma mark - Public Methods
 
@@ -412,18 +431,21 @@
     migrated = YES;
   }
   
-#else
-/**
- * FUTURE CFLASH MIGRATIONS HERE
- */
+#elif defined (LWE_CFLASH)
+  if ([UpdateManager _needs10to11SettingsUpdate:settings])
+  {
+    LWE_LOG(@"[Migration Log]YAY! Updating to 1.1 version");
+    [UpdateManager _updateSettingsFrom10to11:settings];
+    migrated = YES;
+  }
 #endif
   return migrated;
 }
 
 + (void) showUpgradeAlertView:(NSUserDefaults *)settings delegate:(id<UIAlertViewDelegate>)alertDelegate
 {
-#if defined (LWE_JFLASH)
   NSString *version = [settings objectForKey:APP_SETTINGS_VERSION];
+#if defined (LWE_JFLASH)
   if ([version isEqualToString:LWE_JF_VERSION_1_6])
   {
     // Show shout-out UI Alert view
@@ -451,7 +473,11 @@
                                       delegate:alertDelegate];
   }
 #elif defined (LWE_CFLASH)
-  // Do nothing for now, we only have 1 CFlash version!
+  if ([version isEqualToString:LWE_CF_VERSION_1_1])
+  {
+    [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Updated to CFlash 1.1",@"CFlash1.1 upgrade alert title")
+                                       message:NSLocalizedString(@"We added Pinyin tone sandhi!  Now, you can also show the pronounciation after taking tone changes into account.  You can turn this feature on in Settings (it's off by default).",@"CFlash1.1 upgrade alert msg")];    
+  }
 #endif
 }
 
