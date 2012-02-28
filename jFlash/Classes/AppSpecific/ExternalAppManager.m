@@ -42,6 +42,10 @@
   {
     return @"rikai";
   }
+  else if ([bundleId isEqualToString:@"com.longweekendmobile.RikaiChinese"])
+  {
+    return @"crikai";
+  }
   else
   {
     // If it is unknown, log it so we can find out about it, and maybe even implement it
@@ -57,6 +61,10 @@
 - (NSString *) nameForBundleId:(NSString *)bundleId
 {
   if ([bundleId isEqualToString:@"com.longweekendmobile.Rikai"])
+  {
+    return NSLocalizedString(@"Rikai Browser",@"Rikai Browser");
+  }
+  else if ([bundleId isEqualToString:@"com.longweekendmobile.RikaiChinese"])
   {
     return NSLocalizedString(@"Rikai Browser",@"Rikai Browser");
   }
