@@ -13,6 +13,7 @@
 
 - (NSArray *) readingComponents;
 - (NSString *) pinyinReading;
+- (NSString *) sandhiReading;
 
 @property (nonatomic, retain) NSString *headword_simp;
 

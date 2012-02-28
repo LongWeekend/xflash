@@ -124,9 +124,20 @@
 {
   NSMutableAttributedString *attrString = [[[[NSAttributedString alloc] init] autorelease] mutableCopy];
   NSArray *readingHashes = [self readingComponents];
-  for (NSDictionary *readingHash in readingHashes)
+  for (NSInteger i = 0; i < [readingHashes count]; i++)
   {
-    NSString *stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
+    NSDictionary *readingHash = [readingHashes objectAtIndex:i];
+    NSString *stringToAppend = nil;
+    if (i == ([readingHashes count] - 1))
+    {
+      // This is the last one, don't append a string
+      stringToAppend = [NSString stringWithFormat:@"%@",[readingHash objectForKey:@"pinyin"]];
+    }
+    else
+    {
+      // We have more pinyin, so append a string
+      stringToAppend = [NSString stringWithFormat:@"%@ ",[readingHash objectForKey:@"pinyin"]];
+    }
     NSMutableAttributedString *tmpAttrString = [[[[NSAttributedString alloc] initWithString:stringToAppend] autorelease] mutableCopy];
     NSRange allRange = NSMakeRange(0, [stringToAppend length]);
     [tmpAttrString addAttribute:(NSString *)kCTForegroundColorAttributeName
@@ -189,6 +200,7 @@
 - (NSString *) pinyinReading
 {
   NSArray *pinyinSegments = [self.reading componentsSeparatedByString:@" "];
+  LWE_ASSERT_EXC([pinyinSegments count] > 0, @"Need at least 1 pinyin segment for this to work");
   NSUInteger resultLength = [self.reading length] - [pinyinSegments count] + 1;
   NSMutableString *result = [NSMutableString stringWithCapacity:resultLength];
                              
@@ -202,6 +214,11 @@
   NSRange lastCharacter = (NSRange){[result length]-1,1};
   [result deleteCharactersInRange:lastCharacter];
   return result;
+}
+
+- (NSString *) sandhiReading
+{
+  return [self pinyinReading];
 }
 
 #pragma mark - Audio Related
