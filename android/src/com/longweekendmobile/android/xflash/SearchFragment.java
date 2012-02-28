@@ -7,6 +7,18 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//  public void onPause()
+//
+//  public static void addCard(View  ,Xflash  )
+//  public static void toggleStar(View  )
+//
+//  private static boolean checkMembershipCacheForCard(Card  )
+//
+//  private EditText.OnFocusChangeListener searchFocusListener
+//  private TextView.OnEditorActionListener searchActionListener
+//
+//  private class AsyncSearch extends AsyncTask<Void, Void, Void>
+//  private class SearchAdapter extends ArrayAdapter<Card>
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +122,12 @@ public class SearchFragment extends Fragment
         super.onPause();
 
         // flush the cache array when the search fragment is paused
+        
+        
+        // TODO - this forces the adapter to reload the starred words tag into
+        //        the cache array when the user returns to this view. Is it 
+        //        necessary/desirable to eliminate this forced refresh and rely 
+        //        on Observer notifications to maintain the cacheArray instead?
         membershipCacheArray = null;
     }
 
@@ -158,11 +176,6 @@ public class SearchFragment extends Fragment
             starImage.setImageResource(R.drawable.star_selected);
         }
  
-        // inform TagFragment that the starred words tag has changed
-        // TODO - bad solution, temporary
-        // TagFragment.setNeedLoad();
-        // TagCardsFragment.setNeedLoad();
-
     }  // end toggleStar()
 
 

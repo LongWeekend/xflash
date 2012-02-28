@@ -14,6 +14,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private static void refreshTagList()
 //  private void setupObservers()
+//  private void updateFromNewTagObserver(Object  )
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -242,24 +243,7 @@ public class AddCardToTagFragment extends Fragment
                     // if we were passed data with our notification
                     if( arg != null )
                     {
-                        // get the Tag that was just added
-                        Tag theNewTag = (Tag)arg;
-                        
-                        // only refresh if new tag was added to top level group
-                        if( theNewTag.groupId() == 0 )
-                        {
-                            int tempInt = XFApplication.getNotifier().getCardIdPassed();
-
-                            // if a card was passesd, that means the Tag was added
-                            // from a visible AddCardToTagFragment, update view
-                            if( tempInt != XflashNotification.NO_CARD_PASSED )
-                            {
-                                Card tempCard = CardPeer.retrieveCardByPK(tempInt);
-                                TagPeer.subscribeCard(tempCard,theNewTag);
-                                
-                                AddCardToTagFragment.refreshTagList();
-                            }
-                        }
+                        updateFromNewTagObserver(arg);
                     } 
 
                 }  // end update()
@@ -267,10 +251,37 @@ public class AddCardToTagFragment extends Fragment
 
         }  // end if( newTagObserver == null )
 
+        // a subscriptionObserver is not necessary for this fragment, as we do not
+        // have a local cache for check marks and the view is redrawn on attachment
+        
         XFApplication.getNotifier().addNewTagObserver(newTagObserver);
 
     }  // end setupObservers()
     
+
+    private void updateFromNewTagObserver(Object passedObject)
+    {
+        // get the Tag that was just added
+        Tag theNewTag = (Tag)passedObject;
+                        
+        // only refresh if new tag was added to top level group
+        if( theNewTag.groupId() == 0 )
+        {
+            int tempInt = XFApplication.getNotifier().getCardIdPassed();
+
+            // if a card was passesd, that means the Tag was added
+            // from a visible AddCardToTagFragment, update view
+            if( tempInt != XflashNotification.NO_CARD_PASSED )
+            {
+                Card tempCard = CardPeer.retrieveCardByPK(tempInt);
+                TagPeer.subscribeCard(tempCard,theNewTag);
+                                
+                AddCardToTagFragment.refreshTagList();
+            }
+        }
+
+    }  // end updateFromNewTagObserver()
+
 
 }  // end AddCardToTagFragment class declaration
 

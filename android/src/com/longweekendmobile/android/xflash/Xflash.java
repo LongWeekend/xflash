@@ -16,6 +16,7 @@ package com.longweekendmobile.android.xflash;
 //  public void PracticeFragment_practiceClick(View  )
 //  public void PracticeFragment_browseClick(View  )
 //  public void PracticeFragment_goRight(View  )
+//  public void PracticeFragment_toggleReading(View  )
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
@@ -186,6 +187,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void PracticeFragment_goRight(View v)
     {
         PracticeFragment.goRight(this);
+    }
+    public void PracticeFragment_toggleReading(View v)
+    {
+        PracticeFragment.toggleReading();
     }
 
     public void ExampleSentenceFragment_exampleClick(View v)

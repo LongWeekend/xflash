@@ -16,6 +16,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  private static void refreshTagList()
 //  private void setupObservers()
+//  private void updateFromNewTagObserver(Object  )
+//  private void udpateFromSubscriptionObserver()
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -415,21 +417,8 @@ public class TagFragment extends Fragment
             {
                 public void update(Observable obj,Object arg)
                 {
-                    // if we were passed data with our notification
-                    if( arg != null )
-                    {
-                        // get the Tag that was just added
-                        Tag theNewTag = (Tag)arg;
-
-                        // only refresh if it was added to the visible group
-                        if( theNewTag.groupId() == currentGroup.getGroupId() )
-                        {
-                            TagFragment.needLoad = true;
-                            TagFragment.refreshTagList();
-                        }
-                    }
-
-                }  // end newTagObserver.update()
+                    updateFromNewTagObserver(arg);
+                }
             };
 
         }  // end if( newTagObserver == null )
@@ -441,15 +430,8 @@ public class TagFragment extends Fragment
             {
                 public void update(Observable obj,Object arg)
                 {
-                    // only refresh if we're on the top level group
-                    // i.e. we need to update the count on 'My Starred Words'
-                    if( currentGroup.getGroupId() == 0 )
-                    {
-                        TagFragment.needLoad = true;
-                        TagFragment.refreshTagList();
-                    }
-
-                }  // end subscriptionObserver.update()
+                    updateFromSubscriptionObserver();
+                }
             };
 
         }  // end if( subscriptionObserver == null )
@@ -459,6 +441,34 @@ public class TagFragment extends Fragment
        theNotifier.addSubscriptionObserver(subscriptionObserver);
 
     }  // end setupObservers()
+
+
+    private void updateFromNewTagObserver(Object passedObject)
+    {
+        // get the Tag that was just added
+        Tag theNewTag = (Tag)passedObject;
+
+        // only refresh if it was added to the visible group
+        if( theNewTag.groupId() == currentGroup.getGroupId() )
+        {
+            TagFragment.needLoad = true;
+            TagFragment.refreshTagList();
+        }
+
+    }  // end updateFromNewTagObserver()
+
+
+    private void updateFromSubscriptionObserver()
+    {
+        // only refresh if we're on the top level group
+        // i.e. we need to update the count on 'My Starred Words'
+        if( currentGroup.getGroupId() == 0 )
+        {
+            TagFragment.needLoad = true;
+            TagFragment.refreshTagList();
+        }
+
+    }  // end updateFromSubscriptionObserver()
 
 
 }  // end TagFragment class declaration

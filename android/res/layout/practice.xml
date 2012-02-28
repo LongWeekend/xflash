@@ -3,7 +3,8 @@
     android:id="@+id/practice_mainlayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:onClick="PracticeFragment_reveal" >
  
     <!-- the five count blocks in the top bar -->
     <LinearLayout android:id="@+id/count_bar"
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#FF000000"
+        android:background="@drawable/progressbar_bg"
         android:padding="2dp" >
 
         <LinearLayout
@@ -83,22 +84,49 @@
     </LinearLayout>
     <!-- end top bar layout -->
 
+    <!-- the 'show reading' button -->
     <ImageButton android:id="@+id/practice_showreadingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/count_bar"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/practice_btn_showreading" />
-    
-    <ImageView
+        android:layout_marginTop="20dp"
+        android:background="@drawable/practice_btn_showreading"
+        android:padding="6dp"
+        android:onClick="PracticeFragment_toggleReading" />
+  
+    <!-- the reading view shown -->
+    <TextView android:id="@+id/practice_readingtext"
+        style="@style/practice_reading_layout"
+        android:layout_below="@id/count_bar"
+        android:layout_marginTop="20dp"
+        android:padding="6dp"
+        android:clickable="true"
+        android:onClick="PracticeFragment_toggleReading" />
+
+  
+    <!-- the golden headword -->
+    <TextView android:id="@+id/practice_headword"
+        style="@style/practice_headword_layout"
+        android:layout_below="@id/count_bar"
+        android:layout_marginTop="64dp" />
+
+
+    <!-- the mini 'tap for answer' view in the middle of the field -->
+    <ImageView android:id="@+id/practice_minianswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/practice_showreadingbutton"
-        android:layout_marginTop="60dp"
+        android:layout_below="@id/count_bar"
+        android:layout_marginTop="150dp"
         android:background="@drawable/practice_btn_unrevealed_mini" />
-    
+
+    <!-- the answer to be revealed on tap -->
+    <TextView android:id="@+id/practice_answertext"
+        style="@style/practice_answer_layout"
+        android:layout_below="@id/count_bar"
+        android:layout_marginTop="150dp" />
+
     <!-- the answer button -->
     <RelativeLayout android:id="@+id/practice_answerbutton_frame"
         android:orientation="vertical"
@@ -219,59 +247,33 @@
         android:onClick="PracticeFragment_goRight" />
     
     <!-- the little fire guy -->
-    <ImageView 
+    <ImageView android:id="@+id/practice_fireguy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_above="@id/practice_answerbutton_frame"
         android:src="@drawable/hh_temp" />
 
-</RelativeLayout>
-
-
-<!-- begin test code layout -->
-
-<!--
-    <LinearLayout android:id="@+id/mainlayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <!-- the fire guy's word bubble -->
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/practice_info_layout"
-        android:textColor="#FF000000"
-        >
-    <TextView  
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:text="Jflash, bitches"
-        android:textColor="#FF000000"
-        android:layout_marginBottom="20dp"
-        />
-    <Button
-        android:id="@+id/testbutton"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:text="test"
-        android:onClick="pop1"
-        android:visibility="invisible"
-    />
-    <TextView  
-        android:id="@+id/tempview"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:text="testing response field"
-        android:textColor="#FF000000"
-    />
-    <TextView  
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:text="bork bork bork"
-        android:textColor="#FF000000"
-    />
+        android:layout_toLeftOf="@id/practice_fireguy"
+        android:layout_above="@id/practice_answerbutton_frame"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="-10dp"
+        android:src="@drawable/talkbubble_ft" />
 
-    </LinearLayout>
+    <!-- the word bubble text -->
+    <TextView android:id="@+id/practice_talkbubble_text"
+        style="@style/practice_talkbubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/practice_fireguy"
+        android:layout_above="@id/practice_answerbutton_frame"
+        android:layout_marginBottom="50dp" />
 
--->
 
-<!-- end test code layout -->
+</RelativeLayout>
 
 

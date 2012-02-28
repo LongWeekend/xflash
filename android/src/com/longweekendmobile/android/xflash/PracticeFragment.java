@@ -8,13 +8,14 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
+//  public static void setupNew()
 //  public static void reveal()
-//  public static void clearAnswerBar()
 //  public static void setAnswerBar(int  )
 //
 //  public static void practiceClick(View  ,Xflash  )
 //  public static void browseClick(View  ,Xflash  )
 //  public static void goRight(Xflash  )
+//  public static void toggleReading()
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,8 +24,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.longweekendmobile.android.xflash.model.Card;
+import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
 
 public class PracticeFragment extends Fragment
 {
@@ -39,7 +46,9 @@ public class PracticeFragment extends Fragment
  
     private static int practiceBarStatus = -1;
     private static boolean countBarVisible = true;
- 
+    private static boolean readingVisible = false; 
+
+    private static JapaneseCard currentCard = null;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -53,9 +62,12 @@ public class PracticeFragment extends Fragment
         RelativeLayout practiceBack = (RelativeLayout)practiceLayout.findViewById(R.id.practice_mainlayout);
         XflashSettings.setupPracticeBack(practiceBack);
         
+        // TODO - debugging
+        currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(112000);
+        
+        // set up view based on current study mode
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
         {
-            // if we're in practice mode and NOT already looking at a shown card
             if( !countBarVisible )
             {
                 LinearLayout countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
@@ -63,9 +75,10 @@ public class PracticeFragment extends Fragment
                 countBarVisible = true;
             }
 
+            // if we're in practice mode and NOT already looking at a shown card
             if( practiceBarStatus != PRACTICE_BAR_SHOW )
             {
-                practiceBarStatus = PRACTICE_BAR_BLANK;
+                setupNew();
             }
         }
         else
@@ -85,21 +98,65 @@ public class PracticeFragment extends Fragment
     }  // end onCreateView()
   
 
+    // set all widgets to the card-hidden state
+    public static void setupNew()
+    {
+        // load the headword
+        TextView tempView = (TextView)practiceLayout.findViewById(R.id.practice_headword);
+        tempView.setText( currentCard.getHeadword() );
+        
+        // load the hot head percentage
+        tempView = (TextView)practiceLayout.findViewById(R.id.practice_talkbubble_text);
+        tempView.setText("100%");
+
+        // load and show the 'show reading' button
+        ImageButton tempImage = (ImageButton)practiceLayout.findViewById(R.id.practice_showreadingbutton);
+        tempImage.setVisibility(View.VISIBLE);
+        readingVisible = false;
+
+        // load and hide the 'show reading' text
+        tempView = (TextView)practiceLayout.findViewById(R.id.practice_readingtext);
+        tempView.setText( currentCard.reading() );
+        tempView.setVisibility(View.GONE);
+
+        // load and hide the answer text
+        tempView = (TextView)practiceLayout.findViewById(R.id.practice_answertext);
+        tempView.setText( currentCard.getJustHeadwordEN() );
+        tempView.setVisibility(View.GONE);
+        
+        practiceBarStatus = PRACTICE_BAR_BLANK;
+        setAnswerBar(practiceBarStatus);
+    
+    }  // end setupNew()
+    
+    
     // when the answer bar is clicked in practice mode
     public static void reveal()
     {
+        // hide the 'show reading' button, show the text
+        ImageButton tempImage = (ImageButton)practiceLayout.findViewById(R.id.practice_showreadingbutton);
+        TextView tempView = (TextView)practiceLayout.findViewById(R.id.practice_readingtext);
+
+        if( !readingVisible )
+        {
+            tempImage.setVisibility(View.GONE);
+            tempView.setVisibility(View.VISIBLE);
+            readingVisible = true;
+        }
+       
+        // hide the mini answer button and show the actual answer
+        ImageView tempImageView = (ImageView)practiceLayout.findViewById(R.id.practice_minianswer);
+        tempView = (TextView)practiceLayout.findViewById(R.id.practice_answertext);
+
+        tempImageView.setVisibility(View.GONE);
+        tempView.setVisibility(View.VISIBLE);
+
         practiceBarStatus = PRACTICE_BAR_SHOW;
         setAnswerBar(practiceBarStatus);
-    }
-
-
-    public static void clearAnswerBar()
-    {
-        practiceBarStatus = PRACTICE_BAR_BLANK;
         
-    }
+    }  // end reveal()
 
-    
+
     // method called when user taps to reveal the answer
     public static void setAnswerBar(int inMode)
     {
@@ -133,13 +190,34 @@ public class PracticeFragment extends Fragment
     }  // end setAnswerBar()
 
     
+    // flip between 'show reading' button and the actual reading value
+    public static void toggleReading()
+    {
+        ImageButton tempImage = (ImageButton)practiceLayout.findViewById(R.id.practice_showreadingbutton);
+        TextView tempView = (TextView)practiceLayout.findViewById(R.id.practice_readingtext);
+
+        if( readingVisible )
+        {
+            tempView.setVisibility(View.GONE);
+            tempImage.setVisibility(View.VISIBLE); 
+            readingVisible = false;
+        }
+        else
+        {
+            tempImage.setVisibility(View.GONE);
+            tempView.setVisibility(View.VISIBLE);
+            readingVisible = true;
+        }
+    
+    }  // end toggleReading()
+
+    
     // method called when any button in the options block is clicked
     public static void practiceClick(View v,Xflash inContext)
     {
-        clearAnswerBar();
-        
         // load the next practice view without adding to the back stack
         XflashScreen.setPracticeOverride();
+        practiceBarStatus = PRACTICE_BAR_BLANK;
         inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 

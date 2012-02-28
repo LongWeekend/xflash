@@ -48,7 +48,6 @@ public class ExampleSentenceFragment extends Fragment
         XflashScreen.popBackPractice();
  
         XflashScreen.setPracticeOverride();
-        PracticeFragment.clearAnswerBar();
         inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 

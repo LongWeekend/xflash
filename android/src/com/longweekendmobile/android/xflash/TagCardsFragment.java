@@ -14,6 +14,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void addCard(View  ,Xflash  )
 //
 //  private void setupObservers()
+//  private void updateFromSubscriptionObserver()
 //
 //  private class CardAdapter extends ArrayAdapter<Card> 
 //  private class AsyncLoadcards extends AsyncTask<Void, Void, Void>
@@ -132,8 +133,6 @@ public class TagCardsFragment extends Fragment
     // method to set all relevant Observers
     private void setupObservers()
     {
-        final XflashNotification theNotifier = XFApplication.getNotifier();
-        
         if( subscriptionObserver == null )
         {
             // create and define behavior for newTagObserver
@@ -141,27 +140,29 @@ public class TagCardsFragment extends Fragment
             {
                 public void update(Observable obj,Object arg)
                 {
-                    // if we were passed data with our notification
-                    if( arg != null )
-                    {
-                        // only refresh if modified card was in the tag we
-                        // are currently displaying
-                        if( currentTag.getId() == theNotifier.getTagIdPassed() )
-                        {
-                            TagCardsFragment.needLoad = true;
-                        }
-                    }
-                
-                }  // end subscriptionObserver.update()
+                    updateFromSubscriptionObserver();
+                }  
             };
 
         }  // end if( subscriptionObserver == null )
 
-       theNotifier.addSubscriptionObserver(subscriptionObserver);
+        XFApplication.getNotifier().addSubscriptionObserver(subscriptionObserver);
 
     }  // end setupObservers()
 
- 
+
+    private void updateFromSubscriptionObserver()
+    {
+        // only refresh if modified card was in the tag we
+        // are currently displaying
+        if( currentTag.getId() == XFApplication.getNotifier().getTagIdPassed() )
+        {
+            TagCardsFragment.needLoad = true;
+        }
+    
+    }  // end updateFromSubscriptionObserver()
+
+
     // custom adapter to appropriately fill the view for our ListView
     private class CardAdapter extends ArrayAdapter<Card> 
     {
@@ -213,7 +214,7 @@ public class TagCardsFragment extends Fragment
             if( ( needLoad == true ) || ( cardArray == null ) )
             {
                 cardLoadDialog = new ProgressDialog(getActivity());
-                cardLoadDialog.setMessage(" Fetching cards... ");
+                cardLoadDialog.setMessage( getResources().getString(R.string.tagcards_fetching) );
                 cardLoadDialog.show();
             }
         }
