@@ -21,10 +21,10 @@
     <string name="group_restore_now">Restore Now</string>
     <string name="emptyset_dialog_title">No Words In Set</string>
     <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
-    <string name="allcard_start_studying">Begin Studying These</string>
-    <string name="singlecard_title">Add Word to Sets</string>
-    <string name="singlecard_mysets">My Sets</string>
-    <string name="singlecard_othersets">Other Sets with this Card</string>
+    <string name="addcard_start_studying">Begin Studying These</string>
+    <string name="addcard_title">Add Word to Sets</string>
+    <string name="addcard_mysets">My Sets</string>
+    <string name="addcard_othersets">Other Sets with this Card</string>
     <string name="create_tag_title">Create Study Set</string>
     <string name="createtag_edit_caption">Name your new study set!</string>
     <string name="settings_title">Settings</string>

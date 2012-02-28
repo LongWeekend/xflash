@@ -44,7 +44,6 @@ public class HelpPageFragment extends Fragment
         // inflate our layout for the HelpPage fragment
         helpPageLayout = (LinearLayout)inflater.inflate(R.layout.help_page, container, false);
 
-        // TODO - this is not loading when the tab is switched to
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
         Button tempButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);

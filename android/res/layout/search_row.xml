@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_display_block"
+    android:onClick="SearchFragment_addCard" >
+
+    <ImageView android:id="@+id/search_row_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:onClick="SearchFragment_toggleStar" />
+
+    <TextView android:id="@+id/search_row_click"
+        style="@style/default_display_right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text=">" />
+
+    <LinearLayout android:id="@+id/search_row_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/search_row_image"
+        android:layout_toLeftOf="@id/search_row_click" >
+
+        <TextView android:id="@+id/search_row_top"
+            style="@style/tag_row_toplayout" />
+
+        <TextView android:id="@+id/search_row_middle"
+            style="@style/tag_row_bottomlayout" />
+
+        <TextView android:id="@+id/search_row_bottom"
+            style="@style/tag_row_bottomlayout"
+            android:textColor="#FF000000" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

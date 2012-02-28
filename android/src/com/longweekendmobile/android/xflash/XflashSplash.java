@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -215,6 +214,9 @@ public class XflashSplash extends Activity
         intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2);
         registerReceiver(myReceiver,intentFilter);
             
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START3);
+        registerReceiver(myReceiver,intentFilter);
+            
         intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS);
         registerReceiver(myReceiver,intentFilter);
             
@@ -228,7 +230,6 @@ public class XflashSplash extends Activity
 
 
     // our receiver class for broadcasts
-    // TODO - database stuff temporary for debugging purposes
     protected class SplashReceiver extends BroadcastReceiver
     {
         @Override
@@ -246,6 +247,11 @@ public class XflashSplash extends Activity
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2))
             {
                 tempView.setText("Copying db 2...");                                
+                DBupdateLayout.addView(tempView);
+            }
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2))
+            {
+                tempView.setText("Copying db 3...");                                
                 DBupdateLayout.addView(tempView);
             }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS))

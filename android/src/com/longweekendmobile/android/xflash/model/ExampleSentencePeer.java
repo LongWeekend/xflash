@@ -29,9 +29,6 @@ import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 
-// TODO - this class has not been properly tested due to lack of
-//        sentence table in database to test on
-
 public class ExampleSentencePeer
 {
     private static final String MYTAG = "XFlash ExampleSentencePeer";

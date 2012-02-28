@@ -110,7 +110,7 @@ public class UserFragment extends Fragment
         String tempName = userList.get(tempIndex).getUserNickname();
         
         // if they clicked to activate the already active user, do nothing
-        if( tempIndex == XflashSettings.getCurrentUserId() )
+        if( ( tempIndex + 1) == XflashSettings.getCurrentUserId() )
         {
             return;
         } 

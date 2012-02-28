@@ -154,16 +154,15 @@ public class CardPeer
         // do not hydrate these cards, we will flywheel it on the table view
         if( keywordIsHeadword(inKey) )
         {
-            Log.d(MYTAG,"debug 1");
             column = "headword";
         }
         else if( keywordIsReading(inKey) )
         {
-            Log.d(MYTAG,"debug 2");
             column = "reading";
         }
 
         String query = FTSSQLForKeyword(inKey,column,queryLimit);
+        
         Cursor myCursor = tempDB.rawQuery(query,null);
         myCursor.moveToFirst();
 
@@ -286,7 +285,6 @@ public class CardPeer
     
     // takes a cardId and returns a hydrated card from the database
     // returns an ArrayList of (int) Card ids for a given tagId
-    // TODO - once again, why pass the entire Tag object when we just want a single int?
     // TODO - cannot test because we have no level_id columns in database
     public static ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag inTag)
     {
@@ -351,6 +349,7 @@ public class CardPeer
         return tempList;
 
     }  // end retrieveFaultedCardsForTag()
+
 
     // returns an ArrayList<Integer> of cardIds that are linked to the sentence
     // 'inId' primary key of the sentence to look up cards for

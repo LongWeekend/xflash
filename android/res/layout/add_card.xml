@@ -6,7 +6,7 @@
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
-    <RelativeLayout android:id="@+id/singlecard_heading"
+    <RelativeLayout android:id="@+id/addcard_heading"
         style="@style/heading_bar" >
 
         <!-- HEADING -->
@@ -15,15 +15,15 @@
             android:layout_height="wrap_content" 
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="@string/singlecard_title"
+            android:text="@string/addcard_title"
             style="@style/heading_text" />
 
         <!-- RIGHT BUTTON -->
-        <ImageButton android:id="@+id/singlecard_addbutton"
+        <ImageButton android:id="@+id/addcard_addbutton"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
-            android:onClick="SingleCardFragment_addTag"
+            android:onClick="AddCardToTagFragment_addTag"
             style="@style/heading_button" />
 
     </RelativeLayout>
@@ -38,22 +38,22 @@
             android:layout_marginTop="10dp" >
 
             <!-- the word block -->
-            <TextView android:id="@+id/singlecard_word"
+            <TextView android:id="@+id/addcard_word"
                 style="@style/default_display_heading_layout"
                 android:textColor="#FF000000" />
 
-            <TextView android:id="@+id/singlecard_reading"
+            <TextView android:id="@+id/addcard_reading"
                 style="@style/default_display_block"
                 android:textColor="#FF000000" />
-            <TextView android:id="@+id/singlecard_meaning"
+            <TextView android:id="@+id/addcard_meaning"
                 style="@style/default_display_block"
                 android:textColor="#FF000000" />
 
             <!-- the 'my sets' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="@string/singlecard_mysets" />
-            <LinearLayout android:id="@+id/singlecard_usertags_list"
+                android:text="@string/addcard_mysets" />
+            <LinearLayout android:id="@+id/addcard_usertags_list"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
@@ -63,8 +63,8 @@
             <!-- the 'other sets' block -->
             <TextView 
                 style="@style/default_display_heading_layout"
-                android:text="@string/singlecard_othersets" />
-            <LinearLayout android:id="@+id/singlecard_systags_list"
+                android:text="@string/addcard_othersets" />
+            <LinearLayout android:id="@+id/addcard_systags_list"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >

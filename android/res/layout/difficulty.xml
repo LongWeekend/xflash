@@ -84,7 +84,7 @@
                     android:layout_toLeftOf="@id/difficulty_upper"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:max="50" />
+                    android:max="45" />
             </RelativeLayout>
  
             <!-- the Backup block -->

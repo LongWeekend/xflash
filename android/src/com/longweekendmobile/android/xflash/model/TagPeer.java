@@ -88,8 +88,6 @@ public class TagPeer
 
             setCardCount(tempInt,tempTag);              
 
-            Log.d(MYTAG,"tag_id: " + tempId + " has " + tempInt + " cards");
-
         }  // end for loop
 
         myCursor.close();
@@ -119,9 +117,6 @@ public class TagPeer
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
         String[] tempArgs = null;
-
-        Log.d(MYTAG,"ALERT - MISSING FUNCTIONALITY");
-        Log.d(MYTAG,"      - IN METHOD TagPeer.cancelMembership()");
 
         // first check whether the removed card is in the active tag
         // if the tagId supplied is the active card, check for last card cause
@@ -191,9 +186,6 @@ public class TagPeer
             tempArgs = new String[] { Integer.toString( inTag.getId() ) };
             String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 
-            // TODO - original TempPeer.m had error correcting code here
-            //        but the query executes normally even if there are
-            //        no tags with the specified ID
             tempDB.execSQL(query,tempArgs);
         } 
 
@@ -223,7 +215,10 @@ public class TagPeer
 
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
 
-        if( myCursor.getCount() > 0)
+        int tempCount = myCursor.getCount();
+        myCursor.close();
+
+        if( tempCount > 0)
         {
             return true;
         }
@@ -282,9 +277,6 @@ public class TagPeer
             return false;
         }
 
-        // TODO - the original code had error checking on whether these     
-        //    queries were successful, but they execute normallly
-        //        no matter the input numbers
         // insert the new Tag into 'tags'
         ContentValues insertValues = new ContentValues();
         insertValues.put("card_id", inCard.getCardId() );
@@ -519,8 +511,9 @@ public class TagPeer
             // drop tag_count for all relevant groups
             for(int i = 0; i < rowCount; i++)
             {
-                query = "UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = " + groupList.get(i);
-                tempDB.execSQL(query);
+                selectionArgs = new String[] { Integer.toString( groupList.get(i) ) };
+                query = "UPDATE groups SET tag_count = (tag_count-1) WHERE group_id = ?";
+                tempDB.execSQL(query,selectionArgs);
             }
 
             tempDB.setTransactionSuccessful();
@@ -538,6 +531,7 @@ public class TagPeer
         return true;
 
     }  // end deleteTag()
+
 
     //  does not close Cursor
     private static ArrayList<Tag> tagListWithCursor(Cursor inCursor)

@@ -13,7 +13,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public void hydrate(Cursor  ,boolean  ) @over 
 //
 //  public boolean hasExampleSentencesWithPluginManager(Context  )
-//  public String reading(Context  )
+//  public String reading()
 //
 //  public void setRomaji(String  )
 //  public String getRomaji()
@@ -23,6 +23,8 @@ package com.longweekendmobile.android.xflash.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class JapaneseCard extends Card
 {
@@ -72,7 +74,6 @@ public class JapaneseCard extends Card
     {
         boolean returnVal = false;
 
-        // TODO
         // we always have a sentence if the plugin is not installed
         // if ([pluginManager pluginKeyIsLoaded:EXAMPLE_DB_KEY])
 /*      
@@ -89,19 +90,18 @@ public class JapaneseCard extends Card
 
     // depending on APP_READING value in SharedPreferences, will
     // return a combined reading
-    public String reading(Context inContext)
+    public String reading()
     {
         String combinedReading;
 
-        SharedPreferences settings = inContext.getSharedPreferences("XFlash",0);
-        String tempString = settings.getString("APP_READING","fail");
+        int tempReadingMode = XflashSettings.getReadingMode();
 
         // mux the readings according to user preferences
-        if( tempString.equals("SET_READING_KANA") )
+        if( tempReadingMode == XflashSettings.LWE_READINGMODE_KANA )
         {
             combinedReading = hw_reading;
         }
-        else if( tempString.equals("SET_READING_ROMAJI") )
+        else if( tempReadingMode == XflashSettings.LWE_READINGMODE_ROMAJI )
         {
             combinedReading = romaji;
         }

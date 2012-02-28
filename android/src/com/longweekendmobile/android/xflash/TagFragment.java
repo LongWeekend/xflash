@@ -10,20 +10,24 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void addToplevelTag(Context  )
 //  public static void openGroup(View  ,Xflash  )
-//  public static void goAllCards(View  ,Xflash  )
+//  public static void goTagCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
+//  public static void refreshTagList()
 
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -41,17 +45,31 @@ public class TagFragment extends Fragment
 {
     private static final String MYTAG = "XFlash TagFragment";
    
-    private LinearLayout tagLayout;
+    private static FragmentActivity myContext = null;
+    
     public static Group currentGroup = null;
+    public static boolean needLoad = false;
+    private static LinearLayout tagList = null;
+   
+    // for display of any groups
+    private static ArrayList<Group> groupArray = null;
     
+    // for shuffling the tag list
+    private static ArrayList<Tag> rawTagArray = null;
+    private static ArrayList<Tag> userTagArray = null;
     
+    // for final display of tag list
+    private static ArrayList<Tag> shuffleArray = null;
+ 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
                              Bundle savedInstanceState) 
     {
+        myContext = getActivity();
+
         // inflate our layout for the Tag fragment and load our icon array
-        tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
+        LinearLayout tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
         int icons[] = XflashSettings.getIcons();
 
         // load the title bar elements and pass them to the color manager
@@ -70,6 +88,7 @@ public class TagFragment extends Fragment
         if( currentGroup == null )
         {
             currentGroup = GroupPeer.topLevelGroup();
+            needLoad = true;
         }
 
         // set the title bar to the current group/tag
@@ -77,7 +96,10 @@ public class TagFragment extends Fragment
         tempView.setText( currentGroup.getGroupName() );
 
         // pull and display any groups owned by currentGroup
-        ArrayList<Group> groupArray = GroupPeer.retrieveGroupsByOwner( currentGroup.getGroupId() );
+        if( needLoad )
+        {
+            groupArray = GroupPeer.retrieveGroupsByOwner( currentGroup.getGroupId() );
+        }
 
         int rowCount = groupArray.size();
         for(int i = 0; i < rowCount; i++)
@@ -124,74 +146,12 @@ public class TagFragment extends Fragment
             }
             tempList.addView(tempRow);
 
-        }  // end for loop
+        }  // end for loop (groups)
 
 
         // pull and display any tags for currentGroup
-        tempList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
-        ArrayList<Tag> tagArray = currentGroup.childTags();
-        rowCount = tagArray.size();
-
-        // shuffle 'my starred words' to the top
-        // TODO - I feel like there must be a better way to do this
-        for(int i = 0; i < rowCount; i++)
-        {
-            Tag shuffleTag = tagArray.get(i);
-
-            if( shuffleTag.getId() != Tag.STARRED_TAG_ID )
-            {
-                tagArray.remove(shuffleTag);
-                tagArray.add(shuffleTag);
-            }
-        }
-
-        for(int i = 0; i < rowCount; i++)
-        {
-            Tag tempTag = tagArray.get(i);
-            
-            tempRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
-            tempRow.setTag( tempTag.getId() );
-      
-            // set the group image
-            tempRowImage = (ImageView)tempRow.findViewById(R.id.tag_row_image);
-
-            if( tempTag.getId() == Tag.STARRED_TAG_ID )
-            {
-                tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_STARRED_TAG] );
-            }
-            else
-            {
-                tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_TAG] );
-            }
-
-            // set the tag title
-            tempView = (TextView)tempRow.findViewById(R.id.tag_row_top);
-            tempView.setText( tempTag.getName() );
-
-            // set the group set count
-            tempView = (TextView)tempRow.findViewById(R.id.tag_row_bottom);
-            tempView.setText( Integer.toString( tempTag.getCardCount() ) + " words");
-
-            // clear the 'view' option if there are no cards in the tag
-            tempView = (TextView)tempRow.findViewById(R.id.tag_row_click);
-            if( tempTag.getCardCount() < 1 )
-            {
-                tempView.setVisibility(View.INVISIBLE);
-            }
-            else
-            {
-                tempView.setTag( tempTag.getId() ); 
-            }
-
-            // add a divider before all except the first
-            if( i > 0 )
-            {
-                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
-                tempList.addView(divider);
-            }
-            tempList.addView(tempRow);
-
-        }  // end for loop
+        tagList = (LinearLayout)tagLayout.findViewById(R.id.main_tag_list);
+        refreshTagList();
 
         // only display backup block on root view
         LinearLayout backupBlock = (LinearLayout)tagLayout.findViewById(R.id.tag_backup_block);
@@ -209,10 +169,52 @@ public class TagFragment extends Fragment
     }  // end onCreateView()
 
 
+    // a long-click listener for deletion of user tags
+    private static OnLongClickListener userTagLongClick = new OnLongClickListener() 
+    {
+        @Override
+        public boolean onLongClick(View v) 
+        {
+            final View viewToRemove = v;
+            final int tempInt = (Integer)viewToRemove.getTag();
+            final Tag tempTag = TagPeer.retrieveTagById(tempInt);
+            
+            // set and fire our AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+            builder.setTitle("Delete Tag?");
+            builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
+
+            // on postive response, set the new active user
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog,int which)
+                {
+                    TagPeer.deleteTag(tempTag);
+                    tagList.removeView(viewToRemove);            
+                }
+            });
+
+            // on negative response, do nothing
+            builder.setNegativeButton("Cancel",null);
+
+            builder.create().show();
+
+            return true;
+        }
+
+    };  // end OnLongClickListener declaration 
+
+
+    public static void setNeedLoad()
+    {
+        needLoad = true;
+    }
+
     // onClick for our PLUS button
     public static void addToplevelTag(Context inContext)
     {
         // start the 'add tag' activity as a modal
+        CreateTagActivity.setWhoIsCalling(CreateTagActivity.TAG_FRAGMENT_CALLING);
         CreateTagActivity.setCurrentGroup(currentGroup);
 
         inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
@@ -222,18 +224,18 @@ public class TagFragment extends Fragment
     public static void openGroup(View v,Xflash inContext)
     {
         XflashScreen.addTagStack();
-        
+ 
         currentGroup = GroupPeer.retrieveGroupById( (int)(Integer)v.getTag() );
         
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
-    public static void goAllCards(View v,Xflash inContext)
+    public static void goTagCards(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
 
-        StudySetWordsFragment.setIncomingTagId(tempInt); 
-        inContext.onScreenTransition("studyset_words",XflashScreen.DIRECTION_OPEN);
+        TagCardsFragment.setIncomingTagId(tempInt); 
+        inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
     public static void startStudying(View v,Xflash inContext)
@@ -271,6 +273,127 @@ public class TagFragment extends Fragment
         builder.create().show();
 
     }  // end fireEmptyTagDialong()
+
+
+    // pull and display any tags for currentGroup
+    public static void refreshTagList()
+    {
+        LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        int icons[] = XflashSettings.getIcons();
+        int rowCount;
+     
+        // if we need to refresh our arrays due to a change
+        if( needLoad )
+        {
+            // TODO - I feel like there MUST be a better way to do this
+            rawTagArray = currentGroup.childTags();
+            userTagArray = new ArrayList<Tag>();
+        
+            // the ArrayList we will actually use to populate the view
+            shuffleArray = new ArrayList<Tag>();
+
+        
+            // shuffle 'my starred words' to the top, user tags to the bottom
+            rowCount = rawTagArray.size();
+            for(int i = 0; i < rowCount; i++)
+            {
+                Tag shuffleTag = rawTagArray.get(i);
+
+                // add the starred words tag at the start
+                if( shuffleTag.getId() == Tag.STARRED_TAG_ID )
+                {
+                    shuffleArray.add(0,shuffleTag);
+                }
+                else
+                {
+                    // if it is a system tag, add it straight to
+                    // the shuffle array, otherwise hold on to it
+                    if( shuffleTag.isEditable() )
+                    {
+                        userTagArray.add(shuffleTag);
+                    }
+                    else
+                    {
+                        shuffleArray.add(shuffleTag);
+                    }
+                }
+            }
+
+            // add user tags back in at the bottom
+            rowCount = userTagArray.size();
+            if( rowCount > 0 )
+            {
+                for(int i = 0; i < rowCount; i++)
+                {
+                    shuffleArray.add( userTagArray.get(i) );
+                } 
+            }
+
+            // clear views on reload
+            tagList.removeAllViews();
+
+            // we're done with conditional loading
+            needLoad = false;
+
+        }  // end if( needLoad ) 
+       
+        // now add the final ordered ArrayList of tags to views, add to the layout
+        rowCount = shuffleArray.size();
+        for(int i = 0; i < rowCount; i++)
+        {
+            Tag tempTag = shuffleArray.get(i);
+            
+            RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
+            tempRow.setTag( tempTag.getId() );
+     
+            // if this is a user tag, set a long-click listener for deletion
+            if( tempTag.isEditable() )
+            {
+                tempRow.setOnLongClickListener(userTagLongClick);
+            }
+ 
+            // set the group image
+            ImageView tempRowImage = (ImageView)tempRow.findViewById(R.id.tag_row_image);
+
+            if( tempTag.getId() == Tag.STARRED_TAG_ID )
+            {
+                tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_STARRED_TAG] );
+            }
+            else
+            {
+                tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_TAG] );
+            }
+
+            // set the tag title
+            TextView tempView = (TextView)tempRow.findViewById(R.id.tag_row_top);
+            tempView.setText( tempTag.getName() );
+
+            // set the group set count
+            tempView = (TextView)tempRow.findViewById(R.id.tag_row_bottom);
+            tempView.setText( Integer.toString( tempTag.getCardCount() ) + " words");
+
+            // clear the 'view' option if there are no cards in the tag
+            tempView = (TextView)tempRow.findViewById(R.id.tag_row_click);
+            if( tempTag.getCardCount() < 1 )
+            {
+                tempView.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                tempView.setTag( tempTag.getId() ); 
+            }
+
+            // add a divider before all except the first
+            if( i > 0 )
+            {
+                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+                tagList.addView(divider);
+            }
+            tagList.addView(tempRow);
+
+        }  // end for loop 
+
+    }  // end refreshTagList()
 
 
 }  // end TagFragment class declaration
