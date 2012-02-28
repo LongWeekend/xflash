@@ -40,6 +40,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashNotification;
 
 public class TagPeer
 {
@@ -189,21 +190,15 @@ public class TagPeer
             tempDB.execSQL(query,tempArgs);
         } 
 
+        // broadcast the card whose subscription status has changed
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setTagIdPassed( inTag.getId() );
+        theNotifier.subscriptionBroadcast(inCard); 
         
-
-        // Finally, send a system-wide notification that this tag changed
-/*
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                            LWETagContentCardRemoved,LWETagContentDidChangeTypeKey,
-                            card,LWETagContentDidChangeCardKey,
-                            nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange
-                                                      object:tag
-                                                    userInfo:userInfo];
-*/
         return true;
 
     }  // end cancelMembership()
+
 
     // checked if a passed tagId/cardId are matched
     public static boolean card(Card inCard,Tag inTag)
@@ -285,20 +280,15 @@ public class TagPeer
 
         String[] updateArgs = { Integer.toString( inTag.getId() ) };
         String query = "UPDATE tags SET count = (count + 1) WHERE tag_id = ?";
+        
         tempDB.execSQL(query,updateArgs);
+        
+        // broadcast the card whose subscription status has changed
+        Log.d(MYTAG,"subscribeCard() broadcasting subscription change");
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setTagIdPassed( inTag.getId() );
+        theNotifier.subscriptionBroadcast(inCard); 
  
-        // TODO - more notifications
-/*      
-  // Finally, send a system-wide notification that this tag changed. Interested objects can listen.
-  NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                            LWETagContentCardAdded,LWETagContentDidChangeTypeKey,
-                            card,LWETagContentDidChangeCardKey,
-                            nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagContentDidChange
-                                                      object:tag
-                                                    userInfo:userInfo];
-
-*/
         return true;
 
     }  // end subscribeCard()

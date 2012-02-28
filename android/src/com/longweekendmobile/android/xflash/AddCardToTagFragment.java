@@ -11,9 +11,13 @@ package com.longweekendmobile.android.xflash;
 //  public static void setIncomingCardId(int  )
 //  public static void toggleWord(View  )
 //  public static void addTag(Xflash  )
-//  public static void refreshTagList()
+//
+//  private static void refreshTagList()
+//  private void setupObservers()
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +38,7 @@ import android.widget.TextView;
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.Group;
 import com.longweekendmobile.android.xflash.model.GroupPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
@@ -44,6 +49,8 @@ public class AddCardToTagFragment extends Fragment
    
     private static FragmentActivity myContext = null;
     
+    private static Observer newTagObserver = null;
+
     private static int incomingCardId; 
     private static JapaneseCard currentCard = null;
     private static LinearLayout userTagList = null;
@@ -55,6 +62,7 @@ public class AddCardToTagFragment extends Fragment
                              Bundle savedInstanceState)
     {
         myContext = getActivity();
+        setupObservers();
 
         // inflate our layout for the HelpPage fragment
         LinearLayout addCardLayout = (LinearLayout)inflater.inflate(R.layout.add_card, container, false);
@@ -131,7 +139,7 @@ public class AddCardToTagFragment extends Fragment
 
     }  // end onCreateView()
 
-
+    
     public static void setIncomingCardId(int inId)
     {
         incomingCardId = inId;
@@ -168,18 +176,16 @@ public class AddCardToTagFragment extends Fragment
     public static void addTag(Xflash inContext)
     {
         // start the 'add tag' activity as a modal
-        CreateTagActivity.setWhoIsCalling(CreateTagActivity.SINGLE_CARD_CALLING);
-        CreateTagActivity.setCurrentGroup( GroupPeer.topLevelGroup() );
-
-        // tag the Intent with the id of the card we are calling from
         Intent myIntent = new Intent(inContext,CreateTagActivity.class);
         myIntent.putExtra("card_id", currentCard.getCardId() );
+        myIntent.putExtra("group_id", GroupPeer.topLevelGroup().getGroupId() );
  
         inContext.startActivity(myIntent);
-    }
-
     
-    public static void refreshTagList()
+    }  // end addTag()
+   
+
+    private static void refreshTagList()
     {
         LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -223,6 +229,50 @@ public class AddCardToTagFragment extends Fragment
 
     }  // end refreshTagList()
 
+
+    // method to set all relevant Observers
+    // I'm uncomfortable with how nested this is
+    private void setupObservers()
+    {
+        if( newTagObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            newTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    // if we were passed data with our notification
+                    if( arg != null )
+                    {
+                        // get the Tag that was just added
+                        Tag theNewTag = (Tag)arg;
+                        
+                        // only refresh if new tag was added to top level group
+                        if( theNewTag.groupId() == 0 )
+                        {
+                            int tempInt = XFApplication.getNotifier().getCardIdPassed();
+
+                            // if a card was passesd, that means the Tag was added
+                            // from a visible AddCardToTagFragment, update view
+                            if( tempInt != XflashNotification.NO_CARD_PASSED )
+                            {
+                                Card tempCard = CardPeer.retrieveCardByPK(tempInt);
+                                TagPeer.subscribeCard(tempCard,theNewTag);
+                                
+                                AddCardToTagFragment.refreshTagList();
+                            }
+                        }
+                    } 
+
+                }  // end update()
+            };
+
+        }  // end if( newTagObserver == null )
+
+        XFApplication.getNotifier().addNewTagObserver(newTagObserver);
+
+    }  // end setupObservers()
+    
 
 }  // end AddCardToTagFragment class declaration
 

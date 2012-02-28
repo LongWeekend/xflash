@@ -162,9 +162,9 @@ public class SearchFragment extends Fragment
  
         // inform TagFragment that the starred words tag has changed
         // TODO - bad solution, temporary
-        TagFragment.setNeedLoad();
-        TagCardsFragment.setNeedLoad();
-     
+        // TagFragment.setNeedLoad();
+        // TagCardsFragment.setNeedLoad();
+
     }  // end toggleStar()
 
 

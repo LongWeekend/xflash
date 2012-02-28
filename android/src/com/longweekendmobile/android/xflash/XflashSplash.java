@@ -249,7 +249,7 @@ public class XflashSplash extends Activity
                 tempView.setText("Copying db 2...");                                
                 DBupdateLayout.addView(tempView);
             }
-            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START2))
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START3))
             {
                 tempView.setText("Copying db 3...");                                
                 DBupdateLayout.addView(tempView);

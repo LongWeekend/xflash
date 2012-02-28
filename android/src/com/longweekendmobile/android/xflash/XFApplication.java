@@ -18,12 +18,13 @@ package com.longweekendmobile.android.xflash;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
 public class XFApplication extends Application
 {
-    // private static final String MYTAG = "XFlash XFApplication";
+    private static final String MYTAG = "XFlash XFApplication";
 
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;
@@ -38,6 +39,9 @@ public class XFApplication extends Application
     private static XFApplication myInstance = null;
     private static LWEDatabase dao = null;
     
+    // our master notification server class
+    private static XflashNotification myNotifier = null;
+
     @Override
     public void onCreate()
     {
@@ -46,7 +50,12 @@ public class XFApplication extends Application
         // set out database to the global app context
         myInstance = this;
         dao = new LWEDatabase(myInstance);
-    }
+
+        // set up the master nofifier
+        myNotifier = new XflashNotification();
+
+    }  // end onCreate()
+
 
     public static XFApplication getInstance()
     {
@@ -85,6 +94,13 @@ public class XFApplication extends Application
 
         return dao.getWritableDatabase();
     } 
+
+
+    // return the global notification system
+    public static XflashNotification getNotifier()
+    {
+        return myNotifier;
+    }
 
 
 }  // end XFApplication class declaration
