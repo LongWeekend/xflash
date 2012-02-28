@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,15 +36,14 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
-import com.longweekendmobile.android.xflash.model.JapaneseCard;
-import com.longweekendmobile.android.xflash.model.Group;
 import com.longweekendmobile.android.xflash.model.GroupPeer;
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class AddCardToTagFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash AddCardToTagFragment";
+    // private static final String MYTAG = "XFlash AddCardToTagFragment";
    
     private static FragmentActivity myContext = null;
     

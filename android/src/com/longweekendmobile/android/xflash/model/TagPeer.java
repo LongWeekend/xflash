@@ -284,7 +284,6 @@ public class TagPeer
         tempDB.execSQL(query,updateArgs);
         
         // broadcast the card whose subscription status has changed
-        Log.d(MYTAG,"subscribeCard() broadcasting subscription change");
         XflashNotification theNotifier = XFApplication.getNotifier();
         theNotifier.setTagIdPassed( inTag.getId() );
         theNotifier.subscriptionBroadcast(inCard); 

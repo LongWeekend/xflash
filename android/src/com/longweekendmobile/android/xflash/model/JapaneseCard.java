@@ -20,8 +20,6 @@ package com.longweekendmobile.android.xflash.model;
 //
 //  + all methods inherited from Card
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.longweekendmobile.android.xflash.XflashSettings;

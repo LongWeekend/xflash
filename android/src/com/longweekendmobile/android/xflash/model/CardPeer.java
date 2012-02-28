@@ -31,14 +31,13 @@ import java.util.ArrayList;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class CardPeer
 {
-    private static final String MYTAG = "XFlash CardPeer";
+    // private static final String MYTAG = "XFlash CardPeer";
 
     
     // factory that cares about what language we are using

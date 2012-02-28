@@ -39,7 +39,6 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
-import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
@@ -168,7 +167,7 @@ public class TagCardsFragment extends Fragment
     {
         CardAdapter() 
         {
-            super( getActivity(), R.layout.tagcards_row, (List)cardArray);
+            super( getActivity(), R.layout.tagcards_row, (List<Card>)cardArray);
         }
         
         public View getView(int position, View convertView, ViewGroup parent) 

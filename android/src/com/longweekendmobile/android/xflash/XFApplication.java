@@ -18,13 +18,12 @@ package com.longweekendmobile.android.xflash;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
 public class XFApplication extends Application
 {
-    private static final String MYTAG = "XFlash XFApplication";
+    // private static final String MYTAG = "XFlash XFApplication";
 
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;

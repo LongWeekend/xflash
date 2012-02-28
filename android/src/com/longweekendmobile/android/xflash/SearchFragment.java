@@ -17,13 +17,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
@@ -171,8 +169,6 @@ public class SearchFragment extends Fragment
     // checks the local cache for starred status, or creates it
     private static boolean checkMembershipCacheForCard(Card inCard)
     {
-        boolean returnVal = false;
-
         if( membershipCacheArray == null )
         {
             // if the cache array hasn't be loaded, do so
@@ -281,7 +277,7 @@ public class SearchFragment extends Fragment
     {
         SearchAdapter()
         {
-            super( getActivity(), R.layout.search_row, (List)searchResults);
+            super( getActivity(), R.layout.search_row, (List<Card>)searchResults);
         }
 
         public View getView(int position, View convertView, ViewGroup parent)
@@ -294,7 +290,6 @@ public class SearchFragment extends Fragment
             }
 
             JapaneseCard tempCard = (JapaneseCard)searchResults.get(position);
-            int tempCardId = tempCard.getCardId();
 
             if( tempCard.isFault )
             {

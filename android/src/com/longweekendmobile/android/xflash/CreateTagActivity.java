@@ -10,7 +10,6 @@ package com.longweekendmobile.android.xflash;
 //  public void onResume()      @over
 //  public void onPause()       @over
 //
-//  public static void setWhoIsCalling(int  )
 //  public static void setCurrentGroup(Group  )
 //
 //  private void keyboardDone()
@@ -26,10 +25,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
-import com.longweekendmobile.android.xflash.model.Card;
-import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.Group;
 import com.longweekendmobile.android.xflash.model.GroupPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
@@ -39,9 +35,6 @@ public class CreateTagActivity extends Activity
 {
     private static final String MYTAG = "XFlash TagActivity";
    
-    public static final int TAG_FRAGMENT_CALLING = 0;
- 
-    private static int whoIsCalling = -1;
     // private static Group currentGroup;
     private EditText myEdit;
  
@@ -90,16 +83,6 @@ public class CreateTagActivity extends Activity
         overridePendingTransition(R.anim.hold,R.anim.slideout_bottom);
     }
 
-
-    public static void setWhoIsCalling(int inCalling)
-    {
-        if( inCalling < 0 )
-        {
-            Log.d(MYTAG,"ERROR - setWhoIsCalling() called with:  " + inCalling);
-        }
-
-        whoIsCalling = inCalling;
-    } 
 
     public static void setCurrentGroup(Group inGroup)
     {
