@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 class WordListParser < Parser
 
   # Alias the base class' method 

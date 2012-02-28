@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby -w
+# encoding: UTF-8
 # Single entry class - based on active record?
 class CEdictEntry < Entry
 
