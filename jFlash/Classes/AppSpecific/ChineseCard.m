@@ -218,6 +218,9 @@
 
 - (NSString *) sandhiReading
 {
+  // First analyze if we need to make any changes
+  
+  // Then update the numbers and run it through the normal processor
   return [self pinyinReading];
 }
 
