@@ -45,12 +45,16 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 public class AddCardToTagFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash AddCardToTagFragment";
-   
+    public static final int TAG_CARDS_CALLING = 0;
+    public static final int SEARCH_CALLING = 1;
+
     private static FragmentActivity myContext = null;
     
     private static Observer newTagObserver = null;
 
     private static int incomingCardId; 
+    private static JapaneseCard tagCard = null;
+    private static JapaneseCard searchCard = null;
     private static JapaneseCard currentCard = null;
     private static LinearLayout userTagList = null;
 
@@ -72,12 +76,18 @@ public class AddCardToTagFragment extends Fragment
         
         XflashSettings.setupColorScheme(titleBar,tempButton); 
 
-        // only call from the database if our card has changed
-        if( ( currentCard == null ) || ( currentCard.getCardId() != incomingCardId ) )
+        // set the currentCard according to which tab we're on
+        String currentTabName = Xflash.getCurrentTabName();
+            
+        if( currentTabName == "tag" )
         {
-            currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
+            currentCard = tagCard;
         }
-        
+        else
+        {
+            currentCard = searchCard;
+        }
+
         // set the word block
         TextView tempView = (TextView)addCardLayout.findViewById(R.id.addcard_word);
         tempView.setText( currentCard.getHeadword() );
@@ -139,10 +149,20 @@ public class AddCardToTagFragment extends Fragment
     }  // end onCreateView()
 
     
-    public static void setIncomingCardId(int inId)
+    public static void setIncomingCardId(int inId,int calling)
     {
         incomingCardId = inId;
-    }
+        
+        if( calling == TAG_CARDS_CALLING )
+        {
+            tagCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
+        }
+        else
+        {
+            searchCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
+        }
+
+    }  // end setIncomingCardId()
    
     
     // method to subscribe/unsubscrible cards in user tags

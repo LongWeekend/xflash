@@ -30,7 +30,6 @@ package com.longweekendmobile.android.xflash;
 //  public static void addTagStack()
 //  public static void popTagStack()
 //  public void detachExtras(FragmentTransaction  )
-//  public void detachSelectExtras(FragmentTransaction  ,String  )
 //  public String goBack(String  )
 //
 //  public int getCurrentSettingsScreen()
@@ -51,7 +50,7 @@ public class XflashScreen
     
     private static final int LWE_PRACTICE_TAB = 0; 
     private static final int LWE_TAG_TAB = 1; 
-    // private static final int LWE_SEARCH_TAB = 2; 
+    private static final int LWE_SEARCH_TAB = 2; 
     private static final int LWE_SETTINGS_TAB = 3; 
     private static final int LWE_HELP_TAB = 4; 
 
@@ -71,6 +70,7 @@ public class XflashScreen
     // properties for how many screens we are away from tab root screen
     private static int currentPracticeScreen = -1;
     private static int currentTagScreen = -1;
+    private static int currentSearchScreen = -1;
     private static int currentHelpScreen = -1;
     private static int currentSettingsScreen = -1;
     
@@ -96,6 +96,7 @@ public class XflashScreen
         // start all tabs at root screen
         currentPracticeScreen = 0;
         currentTagScreen = 0;
+        currentSearchScreen = 0;
         currentHelpScreen = 0;
         currentSettingsScreen = 0;
         
@@ -225,6 +226,16 @@ public class XflashScreen
                 ++currentTagScreen;
             }
         }
+        else if( inTag == "search" )
+        {
+            extraScreensOn[LWE_SEARCH_TAB] = false;
+            currentSearchScreen = 0;
+        }
+        else if( inTag == "search_add_card" )
+        {
+            extraScreensOn[LWE_SEARCH_TAB] = true;
+            currentSearchScreen = 1;
+        }
         else if( inTag == "settings" )
         {
             extraScreensOn[LWE_SETTINGS_TAB] = false;
@@ -289,6 +300,23 @@ public class XflashScreen
             }
 
             return extraFragments[LWE_TAG_TAB];
+        }
+        if( inTag == "search_add_card" )
+        {
+            if( extraFragments[LWE_SEARCH_TAB] == null ) 
+            {    
+                // this will possible wind up with two instantiations of 
+                // AddCardToTabFragment, one in extraFragments[LWE_TAG_TAB}
+                // and the other in extraFragments[LWE_SEARCH_TAB]
+                
+                // this is NOT ideal, but at the moment I'm not thinking of an
+                // easier way to deal with a single instantiation that would
+                // NOT require a heavy reworking of detachExtras() and
+                // setScreenValues("add_card")
+                extraFragments[LWE_SEARCH_TAB] = new TabInfo("search_add_card", AddCardToTagFragment.class, null);
+            }
+
+            return extraFragments[LWE_SEARCH_TAB];
         }
         else if( inTag == "difficulty" )
         {
@@ -401,76 +429,7 @@ public class XflashScreen
         }
     }
 
-    // called by Xflash.onScreenTransition() to detach a specific extra screen
-    public static void detachSelectExtras(FragmentTransaction ft,String inTag)
-    {
-        // when transitioning to a specific screen (inTag) away from a single
-        // extra screen, we already know exactly which fragment to detach
-        if( ( inTag == "practice" ) && ( extraScreensOn[LWE_PRACTICE_TAB] == true ) )
-        {
-            if( extraFragments[LWE_PRACTICE_TAB].fragment != null )
-            {
-                ft.detach(extraFragments[LWE_PRACTICE_TAB].fragment);
-                extraScreensOn[LWE_PRACTICE_TAB] = false;
-            }
-        }
-        else if( inTag == "tag" ) 
-        {
-            if( extraFragments[LWE_TAG_TAB] != null )
-            {
-                if( extraFragments[LWE_TAG_TAB].fragment != null )
-                {
-                    ft.detach(extraFragments[LWE_TAG_TAB].fragment);
-                    extraScreensOn[LWE_TAG_TAB] = false;
-                }
-            }
-        }
-        else if( ( inTag == "add_card" ) || ( inTag == "tag_cards" ) ) 
-        {
-            if( extraFragments[LWE_TAG_TAB] != null )
-            {
-                if( extraFragments[LWE_TAG_TAB].fragment != null )
-                {
-                    ft.detach(extraFragments[LWE_TAG_TAB].fragment);
-                }
-            }
-        }
-        else if( inTag == "settings" ) 
-        {
-            if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
-            {
-                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
-                extraScreensOn[LWE_SETTINGS_TAB] = false;
-            }
-        }
-        else if( inTag == "user" && ( extraScreensOn[LWE_SETTINGS_TAB] == true ) )
-        {
-            if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
-            {
-                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
-                extraScreensOn[LWE_SETTINGS_TAB] = true;
-            }
-        }
-        else if( inTag == "edit_user" ) 
-        {
-            if( extraFragments[LWE_SETTINGS_TAB].fragment != null )
-            {
-                ft.detach(extraFragments[LWE_SETTINGS_TAB].fragment);
-                extraScreensOn[LWE_SETTINGS_TAB] = true;
-            }
-        }
-        else if( inTag == "help" )
-        {
-            if( extraFragments[LWE_HELP_TAB].fragment != null )
-            {
-                ft.detach(extraFragments[LWE_HELP_TAB].fragment);
-                extraScreensOn[LWE_HELP_TAB] = false;
-            }
-        }
-
-    }  // end detachSelectExtras()
-
-
+    
     // return the 'tag' for any eligible fragment when the hardware
     // back button is pressed, or null if we are in root view state
     public static String goBack(String currentTab)
@@ -511,6 +470,13 @@ public class XflashScreen
                 }
             }
         }
+        else if( currentTab == "search" )
+        { 
+            if( currentSearchScreen > 0 )
+            {
+                return "search";
+            }     
+        }
         else if( currentTab == "settings" )
         { 
             if( currentSettingsScreen > 0 )
@@ -547,6 +513,11 @@ public class XflashScreen
     public static int getCurrentTagScreen()
     {
         return currentTagScreen;
+    }
+
+    public static int getCurrentSearchScreen()
+    {
+        return currentSearchScreen;
     }
 
     

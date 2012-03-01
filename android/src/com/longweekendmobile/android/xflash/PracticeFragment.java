@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
 

@@ -113,6 +113,7 @@ public class TagPeer
     // remove that card from the active set card cache
     //
     // note this method DOES update the tag count cache on the tags table
+    @SuppressWarnings("unused")
     public static boolean cancelMembership(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();

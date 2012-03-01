@@ -75,6 +75,7 @@ public class CardPeer
     //
     // TODO - not tested in instances when it would return 'true'
     //        also, do we need a special unicode char variable?
+    @SuppressWarnings("unused")
     public static boolean keywordIsReading(String inKey)
     {
         if( XFApplication.IS_JFLASH )
@@ -112,6 +113,7 @@ public class CardPeer
     }  // end keywordIsReading()
 
     // TODO - see note on keywordIsReading() above
+    @SuppressWarnings("unused")
     public static boolean keywordIsHeadword(String inKey)
     {
         if( XFApplication.IS_JFLASH )

@@ -14,11 +14,11 @@ import android.support.v4.app.Fragment;
 public class TabInfo {
     
     public String tag;
-    public Class clss;
+    public Class<?> clss;
     public Bundle args;
     public Fragment fragment;
     
-    TabInfo(String inTag,Class inClass,Bundle inArgs)
+    TabInfo(String inTag,Class<?> inClass,Bundle inArgs)
     {
         tag = inTag;
         clss = inClass;

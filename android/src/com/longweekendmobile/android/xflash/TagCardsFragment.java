@@ -125,7 +125,7 @@ public class TagCardsFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        AddCardToTagFragment.setIncomingCardId(tempInt);
+        AddCardToTagFragment.setIncomingCardId(tempInt,AddCardToTagFragment.TAG_CARDS_CALLING);
         inContext.onScreenTransition("add_card",XflashScreen.DIRECTION_OPEN);
     }
 

@@ -83,6 +83,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private TabHost myTabHost;
     private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo currentTab = null;
+    private static String currentTabName = null;
 
     private static boolean exitOnce;   
     private static long exitCount;
@@ -480,6 +481,13 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                             switchTab = XflashScreen.getTransitionFragment("add_card");
                         }
                     }
+                    else if( inTabTagname == "search" )
+                    {
+                        if( XflashScreen.getCurrentSearchScreen() > 0 )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("search_add_card");
+                        }
+                    }
                     else if( inTabTagname == "settings" )
                     {
                         // if we are loading a tab currently on an extra screen
@@ -540,13 +548,21 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
             // set the current tab to the one we are switchng to right now
             currentTab = newTab;
-            
+            currentTabName = currentTab.tag;
+
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
         
         }  // end if( we clicked a tab we're NOT already on)
 
     }  // end onTabChanged()
+
+    
+    // return the name of the current tab
+    public static String getCurrentTabName()
+    {
+        return currentTabName;
+    }
 
     
     // fragment handling for loading extra screens inside a tab
@@ -564,7 +580,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
 
         // detach extra screens, if we're transitioning back to a tab root
-        XflashScreen.detachSelectExtras(ft,inTag);
+        XflashScreen.detachExtras(ft);
         
         // pull the fragment TabInfo if we are switching to an extra screen
         TabInfo newTab = XflashScreen.getTransitionFragment(inTag);

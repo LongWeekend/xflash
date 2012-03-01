@@ -28,7 +28,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SearchFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash SearchFragment";
+    // private static final String MYTAG = "XFlash SearchFragment";
     
     private static LinearLayout searchLayout = null;
     private static EditText mySearch = null;
@@ -134,8 +133,9 @@ public class SearchFragment extends Fragment
     public static void addCard(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
-        Log.d(MYTAG,">>> card clicked in SearchFragment");
-        Log.d(MYTAG,"> card id:  " + tempInt);
+
+        AddCardToTagFragment.setIncomingCardId(tempInt,AddCardToTagFragment.SEARCH_CALLING);
+        inContext.onScreenTransition("search_add_card",XflashScreen.DIRECTION_OPEN);
     }
 
     
