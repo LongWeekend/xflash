@@ -246,19 +246,19 @@
         android:background="@drawable/practice_arrow_flip"
         android:onClick="PracticeFragment_goRight" />
     
-    <!-- the little fire guy -->
-    <ImageView android:id="@+id/practice_fireguy"
+    <!-- the hot head -->
+    <ImageView android:id="@+id/practice_hothead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_above="@id/practice_answerbutton_frame"
         android:src="@drawable/hh_temp" />
 
-    <!-- the fire guy's word bubble -->
-    <ImageView
+    <!-- the hot head's word bubble -->
+    <ImageView android:id="@+id/practice_hhbubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/practice_fireguy"
+        android:layout_toLeftOf="@id/practice_hothead"
         android:layout_above="@id/practice_answerbutton_frame"
         android:layout_marginBottom="40dp"
         android:layout_marginRight="-10dp"
@@ -269,7 +269,7 @@
         style="@style/practice_talkbubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/practice_fireguy"
+        android:layout_toLeftOf="@id/practice_hothead"
         android:layout_above="@id/practice_answerbutton_frame"
         android:layout_marginBottom="50dp" />
 

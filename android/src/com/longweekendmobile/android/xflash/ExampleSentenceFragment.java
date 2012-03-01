@@ -46,13 +46,14 @@ public class ExampleSentenceFragment extends Fragment
     {
         // remove the transition to the example sentence fragment
         XflashScreen.popBackPractice();
- 
         XflashScreen.setPracticeOverride();
+        
+        PracticeFragment.setPracticeBlank();
         inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
 
-}  // end PracticeFragment class declaration
+}  // end ExampleSentenceFragment class declaration
 
 
 

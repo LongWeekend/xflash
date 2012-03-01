@@ -47,7 +47,7 @@
     </style>
     <style name="practice_answer_text">
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="practice_talkbubble">
