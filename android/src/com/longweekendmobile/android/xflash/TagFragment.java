@@ -261,7 +261,7 @@ public class TagFragment extends Fragment
         }
         else
         {
-            Log.d(MYTAG,"start studying a tag!");
+            fireStartStudyingDialog(tempTag,inContext);
         }
 
     }  // end startStudying()
@@ -280,6 +280,38 @@ public class TagFragment extends Fragment
 
         // on negative response, do nothing
         builder.setNegativeButton("OK",null);
+        
+        builder.create().show();
+
+    }  // end fireEmptyTagDialong()
+
+
+    public static void fireStartStudyingDialog(Tag inTag,Xflash incoming)
+    {
+        final Tag tagToLaunch = inTag;
+        final Xflash inContext = incoming;
+        
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
+
+        builder.setTitle( tagToLaunch.getName() );
+
+        String tempString = inContext.getResources().getString(R.string.startstudying_dialog_message);
+        builder.setMessage(tempString);
+
+        // on postive response, set the new active user
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+                // set the new user and return to settings
+                PracticeFragment.setIncomingTagId( tagToLaunch.getId() );
+                inContext.getTabHost().setCurrentTabByTag("practice");
+            }
+        });
+
+        // on negative response, do nothing
+        builder.setNegativeButton("Cancel",null);
         
         builder.create().show();
 

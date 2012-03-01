@@ -20,6 +20,7 @@
     <string name="tag_restore_now">Restore Now</string>
     <string name="emptyset_dialog_title">No Words In Set</string>
     <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
+    <string name="startstudying_dialog_message">Do you want to start this set?\nProgress on your last set will be saved.</string>
     <string name="tagcards_fetching"> Fetching cards...</string>
     <string name="addcard_start_studying">Begin Studying These</string>
     <string name="addcard_title">Add Word to Sets</string>

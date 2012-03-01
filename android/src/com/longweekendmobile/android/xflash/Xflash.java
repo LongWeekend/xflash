@@ -80,7 +80,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private static Xflash myContext;
  
     // properties for our fragment tab management
-    private TabHost myTabHost;
+    private static TabHost myTabHost;
     private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo currentTab = null;
     private static String currentTabName = null;
@@ -348,7 +348,12 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
     }
     
-    
+   
+    public static TabHost getTabHost()
+    {
+        return myTabHost;
+    }
+
     // initalize our tab host, which is  Xflash.myTabhost  , a top level class property
     private void initializeTabHost(Bundle args)
     {
@@ -469,6 +474,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // we only need to check for multiple screens here, where the tab
                     // is fully instantiated - as that means we've been here before and
                     // MAY have opened secondary screens 
+
+                    // if there IS a secondary screen, it is loaded into switchTab and
+                    // used.  If not, switchTab remains null and we default back 
+                    // to newTab
                     if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab

@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.Tag;
 
 public class PracticeFragment extends Fragment
 {
@@ -50,6 +51,9 @@ public class PracticeFragment extends Fragment
 
     private static int practiceViewStatus = -1;
 
+    private static Tag currentTag = null;
+    private static int incomingTagId = -1000;
+    
     private static JapaneseCard currentCard = null;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
@@ -84,6 +88,12 @@ public class PracticeFragment extends Fragment
         return practiceLayout;
 
     }  // end onCreateView()
+
+
+    public static void setIncomingTagId(int inId)
+    {
+        incomingTagId = inId;
+    }
 
     
     // called by Xflash when someone clicks 'tap for answer'

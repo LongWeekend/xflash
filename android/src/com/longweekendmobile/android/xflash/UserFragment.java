@@ -132,7 +132,7 @@ public class UserFragment extends Fragment
                 XflashSettings.setCurrentUserId(switchUser);
                 inContext.onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
-       });
+        });
         
         // on negative response, do nothing
         builder.setNegativeButton("Cancel",null);
