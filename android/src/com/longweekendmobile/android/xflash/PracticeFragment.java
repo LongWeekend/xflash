@@ -138,6 +138,7 @@ public class PracticeFragment extends Fragment
     public static void goRight(Xflash inContext)
     {
         // load the ExampleSentenceFragment to the fragment tab manager
+        ExampleSentenceFragment.setIncomingCard(currentCard);
         inContext.onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 

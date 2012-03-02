@@ -15,15 +15,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.longweekendmobile.android.xflash.model.JapaneseCard;
 
 public class ExampleSentenceFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash ExampleSentenceFragment";
     
     // properties for handling color theme transitions
-    private static RelativeLayout exampleSentenceLayout;
-
+    private static RelativeLayout ESlayout;
+    private static JapaneseCard currentCard;
 
     // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
@@ -31,13 +35,27 @@ public class ExampleSentenceFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // inflate the layout for our example sentence activity
-        exampleSentenceLayout = (RelativeLayout)inflater.inflate(R.layout.example_sentence, container, false);
+        ESlayout = (RelativeLayout)inflater.inflate(R.layout.example_sentence, container, false);
 
         // load the title bar elements and pass them to the color manager
-        RelativeLayout exampleBack = (RelativeLayout)exampleSentenceLayout.findViewById(R.id.example_mainlayout);
+        RelativeLayout exampleBack = (RelativeLayout)ESlayout.findViewById(R.id.example_mainlayout);
         XflashSettings.setupPracticeBack(exampleBack);
         
-        return exampleSentenceLayout;
+        TextView tempView = (TextView)ESlayout.findViewById(R.id.es_readingtext);
+        tempView.setText( currentCard.reading() );
+
+        tempView = (TextView)ESlayout.findViewById(R.id.es_headword);
+        tempView.setText( currentCard.getHeadword() );
+        
+        LinearLayout exampleBody = (LinearLayout)ESlayout.findViewById(R.id.es_body);
+        
+        for(int i = 0; i < 5; i++)
+        {
+            RelativeLayout esRow = (RelativeLayout)inflater.inflate(R.layout.es_row, container, false);
+            exampleBody.addView(esRow);
+        }
+        
+        return ESlayout;
     }
   
 
@@ -52,6 +70,11 @@ public class ExampleSentenceFragment extends Fragment
         inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
+
+    public static void setIncomingCard(JapaneseCard inCard)
+    {
+        currentCard = inCard;
+    }
 
 }  // end ExampleSentenceFragment class declaration
 

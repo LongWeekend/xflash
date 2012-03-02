@@ -413,7 +413,17 @@ public class TagFragment extends Fragment
 
             // set the group set count
             tempView = (TextView)tempRow.findViewById(R.id.tag_row_bottom);
-            tempView.setText( Integer.toString( tempTag.getCardCount() ) + " words");
+            int tempInt = tempTag.getCardCount();
+            String tempCountString = Integer.toString(tempInt);
+            if( tempInt == 1 )
+            {
+                tempCountString = tempCountString + " word";
+            }
+            else
+            {
+                tempCountString = tempCountString + " words";
+            }
+            tempView.setText(tempCountString);
 
             // clear the 'view' option if there are no cards in the tag
             tempView = (TextView)tempRow.findViewById(R.id.tag_row_click);

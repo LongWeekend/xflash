@@ -134,7 +134,7 @@ public class SearchFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        AddCardToTagFragment.setIncomingCardId(tempInt,AddCardToTagFragment.SEARCH_CALLING);
+        AddCardToTagFragment.setIncomingCardId(tempInt);
         inContext.onScreenTransition("search_add_card",XflashScreen.DIRECTION_OPEN);
     }
 

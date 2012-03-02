@@ -137,89 +137,27 @@
             android:layout_above="@id/example_sentence_answerbutton_frame" >
 
         <!-- single child of the scroll view -->
-        <LinearLayout
+        <LinearLayout android:id="@+id/es_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <!-- header -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp" >
+            
+                <TextView android:id="@+id/es_readingtext"
+                    style="@style/es_reading_layout" />
 
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
+                <TextView android:id="@+id/es_headword"
+                    style="@style/es_headword_layout"
+                    android:layout_marginBottom="10dp" />
 
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"    
-                android:layout_height="wrap_content"    
-                android:textColor="#FFFFFFFF"
-                android:text="EXAMPLE SENTENCES!"
-                android:layout_marginBottom="20dp" />
-
+            </LinearLayout>  <!-- end header -->
+            
         </LinearLayout>  <!-- end single child of scroll view -->
 
     </ScrollView>

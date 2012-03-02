@@ -45,9 +45,6 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 public class AddCardToTagFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash AddCardToTagFragment";
-    public static final int TAG_CARDS_CALLING = 0;
-    public static final int SEARCH_CALLING = 1;
-
     private static FragmentActivity myContext = null;
     
     private static Observer newTagObserver = null;
@@ -149,11 +146,11 @@ public class AddCardToTagFragment extends Fragment
     }  // end onCreateView()
 
     
-    public static void setIncomingCardId(int inId,int calling)
+    public static void setIncomingCardId(int inId)
     {
         incomingCardId = inId;
         
-        if( calling == TAG_CARDS_CALLING )
+        if( Xflash.getCurrentTabName() == "tag" )
         {
             tagCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
         }
