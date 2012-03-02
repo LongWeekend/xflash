@@ -194,6 +194,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         PracticeFragment.toggleReading();
     }
 
+    public void ExampleSentenceFragment_read(View v)
+    {
+        ExampleSentenceFragment.read(v);
+    }
+
     public void ExampleSentenceFragment_exampleClick(View v)
     {
         ExampleSentenceFragment.exampleClick(v,this);

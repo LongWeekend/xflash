@@ -65,7 +65,7 @@ public class PracticeFragment extends Fragment
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
         // TODO - debugging
-        currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(112000);
+        currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(88020);
         
         // set up view based on current study mode
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    

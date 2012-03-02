@@ -28,6 +28,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,12 +47,13 @@ import android.widget.TextView;
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SearchFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash SearchFragment";
+    private static final String MYTAG = "XFlash SearchFragment";
     
     private static LinearLayout searchLayout = null;
     private static EditText mySearch = null;
@@ -249,7 +251,15 @@ public class SearchFragment extends Fragment
             searchDialog = new ProgressDialog(getActivity());
             searchDialog.setMessage(" Searching... ");
             searchDialog.show();
-        }
+        
+            // attach the search database
+            boolean attachSuccess = XFApplication.getDao().attachDatabase(LWEDatabase.DB_FTS); 
+            if( !attachSuccess )
+            {
+                Log.d(MYTAG,"ERROR in AsyncSearch: database attach failed");
+            }
+
+        }  // end onPreExecute()
 
         
         @Override
@@ -273,6 +283,9 @@ public class SearchFragment extends Fragment
         @Override
         protected void onPostExecute(Void unused)
         {
+            // detach the search database
+            XFApplication.getDao().detachDatabase(LWEDatabase.DB_FTS); 
+            
             // set our returned card info into the ListView
             SearchAdapter theAdapter = new SearchAdapter();
             searchList.setAdapter(theAdapter);

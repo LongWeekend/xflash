@@ -6,8 +6,6 @@ package com.longweekendmobile.android.xflash.model;
 //  Created by Todd Presson 1/14/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public ExampleSentencePeer()
-//
 //      *** ALL METHODS STATIC ***
 //
 //  public boolean isNewVersion()
@@ -16,9 +14,6 @@ package com.longweekendmobile.android.xflash.model;
 //  public ArrayList<ExampleSentence> getExampleSentencesByCardId(int  )
 //  public boolean sentencesExistForCardId(int  )
 //  public ArrayList<ExampleSentence> searchSentencesForKeyword(String  )
-
-// TODO - this has not been tested!  I do not have a database copy
-//        with the ExampleSentence object info in it
 
 import java.util.ArrayList;
 
@@ -32,18 +27,6 @@ import com.longweekendmobile.android.xflash.XFApplication;
 public class ExampleSentencePeer
 {
     private static final String MYTAG = "XFlash ExampleSentencePeer";
-
-    private static SQLiteDatabase tempDB;
-
-    public ExampleSentencePeer()
-    {
-        // we pass a context to the contructor in this case
-        // because we don't know which method we'll be calling,
-        // and don't want to pass contexts along a chain
-        
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
 
     // TODO - really I have no idea what to do with this at this point
     public static boolean isNewVersion()
@@ -68,7 +51,9 @@ public class ExampleSentencePeer
 #endif
 }
 */
-        return false;
+        // TODO - I *think* that this should always return true, or is completely
+        //        unnecessary, given that I'm only working with the 1.2 EX database?
+        return true;
 
     }  // end isNewVersion()
 
@@ -77,6 +62,8 @@ public class ExampleSentencePeer
     // on each ExampleSentence as it is added to the ArrayList
     public static ArrayList<ExampleSentence> retrieveSentencesWithSQL(String sql,boolean willHydrate)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ExampleSentence tempSentence = null;
         ArrayList<ExampleSentence> sentenceList = new ArrayList<ExampleSentence>();
 
@@ -104,6 +91,7 @@ public class ExampleSentencePeer
                 }
       
                 sentenceList.add(tempSentence);
+                myCursor.moveToNext();
 
             } // end for loop
 
@@ -160,6 +148,8 @@ public class ExampleSentencePeer
     // return false even if there is a link
     public static boolean sentencesExistForCardId(int inId)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String[] selectionArgs = new String[] { Integer.toString(inId) };
         String query;
         

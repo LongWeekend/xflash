@@ -217,6 +217,9 @@ public class XflashSplash extends Activity
         intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START3);
         registerReceiver(myReceiver,intentFilter);
             
+        intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START4);
+        registerReceiver(myReceiver,intentFilter);
+            
         intentFilter = new IntentFilter(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS);
         registerReceiver(myReceiver,intentFilter);
             
@@ -254,6 +257,11 @@ public class XflashSplash extends Activity
                 tempView.setText("Copying db 3...");                                
                 DBupdateLayout.addView(tempView);
             }
+            else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_START4))
+            {
+                tempView.setText("Copying db 4...");                                
+                DBupdateLayout.addView(tempView);
+            }
             else if( intent.getAction().equals(com.longweekendmobile.android.xflash.model.LWEDatabase.COPY_SUCCESS))
 
             {
@@ -274,7 +282,7 @@ public class XflashSplash extends Activity
                 try
                 {
                     LWEDatabase tempDB = XFApplication.getDao();
-                    firedUp = tempDB.attachDatabase();
+                    firedUp = tempDB.attachDatabase(LWEDatabase.DB_CARD);
    
                     if( firedUp )
                     {
