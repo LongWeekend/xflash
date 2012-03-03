@@ -36,7 +36,6 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
-import com.longweekendmobile.android.xflash.model.Tag;
 
 public class PracticeFragment extends Fragment
 {
@@ -51,7 +50,7 @@ public class PracticeFragment extends Fragment
 
     private static int practiceViewStatus = -1;
 
-    private static Tag currentTag = null;
+    // private static Tag currentTag = null;
     private static int incomingTagId = -1000;
     
     private static JapaneseCard currentCard = null;
@@ -90,9 +89,10 @@ public class PracticeFragment extends Fragment
     }  // end onCreateView()
 
 
-    public static void setIncomingTagId(int inId)
+    public static void loadTag(int inId)
     {
         incomingTagId = inId;
+        Log.d(MYTAG,"loadTag() called with id: " + incomingTagId);
     }
 
     
@@ -138,7 +138,7 @@ public class PracticeFragment extends Fragment
     public static void goRight(Xflash inContext)
     {
         // load the ExampleSentenceFragment to the fragment tab manager
-        ExampleSentenceFragment.setIncomingCard(currentCard);
+        ExampleSentenceFragment.loadCard(currentCard);
         inContext.onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 

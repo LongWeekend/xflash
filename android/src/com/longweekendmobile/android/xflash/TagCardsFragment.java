@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void setIncomingTagId(int  )
+//  public static void loadTag(int  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void addCard(View  ,Xflash  )
 //
@@ -111,7 +111,7 @@ public class TagCardsFragment extends Fragment
         needLoad = true;
     }
 
-    public static void setIncomingTagId(int inId)
+    public static void loadTag(int inId)
     {
         incomingTagId = inId;
     }
@@ -125,7 +125,7 @@ public class TagCardsFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        AddCardToTagFragment.setIncomingCardId(tempInt);
+        AddCardToTagFragment.loadCard(tempInt);
         inContext.onScreenTransition("add_card",XflashScreen.DIRECTION_OPEN);
     }
 

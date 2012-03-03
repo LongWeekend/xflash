@@ -12,7 +12,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void select(Xflash  )
 //  public static void save(Xflash  )
 //  public static void setNew(boolean  )
-//  public static void setIncomingEditId(int  )
+//  public static void loadUser(int  )
 
 import android.content.Context;
 import android.os.Bundle;
@@ -161,7 +161,7 @@ public class EditUserFragment extends Fragment
         isNew = inNew;
     }
 
-    public static void setIncomingEditId(int inEdit)
+    public static void loadUser(int inEdit)
     {
         incomingEditId = inEdit;
     }

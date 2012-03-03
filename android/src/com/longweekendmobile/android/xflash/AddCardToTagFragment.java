@@ -8,7 +8,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void setIncomingCardId(int  )
+//  public static void loadCard(int  )
 //  public static void toggleWord(View  )
 //  public static void addTag(Xflash  )
 //
@@ -146,7 +146,7 @@ public class AddCardToTagFragment extends Fragment
     }  // end onCreateView()
 
     
-    public static void setIncomingCardId(int inId)
+    public static void loadCard(int inId)
     {
         incomingCardId = inId;
         
@@ -159,7 +159,7 @@ public class AddCardToTagFragment extends Fragment
             searchCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
         }
 
-    }  // end setIncomingCardId()
+    }  // end loadCard()
    
     
     // method to subscribe/unsubscrible cards in user tags

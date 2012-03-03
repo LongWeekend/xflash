@@ -114,6 +114,14 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }  // end onCreate
 
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        XFApplication.getDao().detachAll();
+    }
+
     // see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
     @Override
     protected void onSaveInstanceState(Bundle outState)
@@ -194,11 +202,14 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         PracticeFragment.toggleReading();
     }
 
-    public void ExampleSentenceFragment_read(View v)
+    public void ExampleSentenceFragment_addCard(View v)
     {
-        ExampleSentenceFragment.read(v);
+        ExampleSentenceFragment.addCard(v);
     }
-
+    public void ExampleSentenceFragment_toggleRead(View v)
+    {
+        ExampleSentenceFragment.toggleRead(v);
+    }
     public void ExampleSentenceFragment_exampleClick(View v)
     {
         ExampleSentenceFragment.exampleClick(v,this);
@@ -376,28 +387,28 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // add the new fragment's TabInfo object to our HashMap used for tab navigation 
 
         // add the Practice tab
-        spec = this.myTabHost.newTabSpec("practice").setIndicator("Practice", res.getDrawable(R.drawable.practice_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
+        spec = myTabHost.newTabSpec("practice").setIndicator("Practice", res.getDrawable(R.drawable.practice_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
  
         // add the Study Sets tab
-        spec = this.myTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
+        spec = myTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("search").setIndicator("Search", res.getDrawable(R.drawable.search_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
+        spec = myTabHost.newTabSpec("search").setIndicator("Search", res.getDrawable(R.drawable.search_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("settings").setIndicator("Settings", res.getDrawable(R.drawable.settings_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
+        spec = myTabHost.newTabSpec("settings").setIndicator("Settings", res.getDrawable(R.drawable.settings_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("help").setIndicator("Help", res.getDrawable(R.drawable.help_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
+        spec = myTabHost.newTabSpec("help").setIndicator("Help", res.getDrawable(R.drawable.help_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
 

@@ -153,7 +153,7 @@ public class UserFragment extends Fragment
         {
             // set EditUserFragment.incomingEditId to the user id we tagged to this
             // row's editbutton
-            EditUserFragment.setIncomingEditId( (Integer)v.getTag(R.id.user_idtag) ); 
+            EditUserFragment.loadUser( (Integer)v.getTag(R.id.user_idtag) ); 
             EditUserFragment.setNew(false);
         } 
 

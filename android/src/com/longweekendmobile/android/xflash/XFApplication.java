@@ -55,7 +55,6 @@ public class XFApplication extends Application
 
     }  // end onCreate()
 
-
     public static XFApplication getInstance()
     {
         return myInstance;

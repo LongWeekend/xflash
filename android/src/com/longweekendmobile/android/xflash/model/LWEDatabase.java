@@ -301,6 +301,24 @@ public class LWEDatabase extends SQLiteOpenHelper
 
     }  // end detachDatabase() declaration
 
+    
+    // detach all attached databases
+    public void detachAll()
+    {
+        String query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
+
+        try
+        {
+                this.getWritableDatabase().execSQL(query);
+        } 
+        catch (Throwable t)
+        {
+            Log.d(MYTAG,"ERROR in detachAll()");
+            Log.d(MYTAG,"Exception:  " + t.toString() );    
+        }
+
+    }  // end detachAll()
+
 
     // Checks for the existence of a table name in the sqlite_master table
     // If database is not open, throws an exception

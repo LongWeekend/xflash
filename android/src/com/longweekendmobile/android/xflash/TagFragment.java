@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -49,7 +48,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class TagFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash TagFragment";
+    // private static final String MYTAG = "XFlash TagFragment";
    
     private static FragmentActivity myContext = null;
     
@@ -245,7 +244,7 @@ public class TagFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        TagCardsFragment.setIncomingTagId(tempInt); 
+        TagCardsFragment.loadTag(tempInt); 
         inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
@@ -305,8 +304,8 @@ public class TagFragment extends Fragment
             public void onClick(DialogInterface dialog,int which)
             {
                 // set the new user and return to settings
-                PracticeFragment.setIncomingTagId( tagToLaunch.getId() );
-                inContext.getTabHost().setCurrentTabByTag("practice");
+                PracticeFragment.loadTag( tagToLaunch.getId() );
+                Xflash.getTabHost().setCurrentTabByTag("practice");
             }
         });
 
