@@ -83,6 +83,7 @@ public class XflashScreen
     // practice = 0, tag = 1, search = 2, settings = 3, help = 4
     // used solely to determine what to detach during Xflash.onTabChanged
     private static boolean[] extraScreensOn;
+    private static boolean exampleSentenceOn;
     private static boolean tagCardsOn;
     private static boolean addCardToTagOn;
 
@@ -106,12 +107,18 @@ public class XflashScreen
         
         // initialize extra screens to null
         extraScreensOn = new boolean[] { false, false, false, false, false };
+        exampleSentenceOn = false;
         tagCardsOn = false;
         addCardToTagOn= false;
         
         extraFragments = new TabInfo[] { null, null, null, null, null };
         tagStack = null;
     } 
+
+    public static boolean getExampleSentenceOn()
+    {
+        return exampleSentenceOn;
+    }
 
     public static boolean getTagCardsOn()
     {
@@ -166,10 +173,12 @@ public class XflashScreen
             if( ( currentPracticeScreen != 0 ) && ( inTag == "example_sentence" ) )
             {
                 extraScreensOn[LWE_PRACTICE_TAB] = true;
+                exampleSentenceOn = true;
             }
             else
             {
                 extraScreensOn[LWE_PRACTICE_TAB] = false;
+                exampleSentenceOn = false;
             }
         }
         else if( inTag == "tag" )

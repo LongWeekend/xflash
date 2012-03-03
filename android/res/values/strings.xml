@@ -11,6 +11,7 @@
     <string name="help_name">HelpActivity</string>
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
+    <string name="add_card_name">AddCardActivity</string>
     <string name="copyerror_title">Database copy failed!</string>
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>

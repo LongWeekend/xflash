@@ -13,6 +13,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void goTagCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
+//  public static void searchPressed()
 //
 //  private static void refreshTagList()
 //  private void setupObservers()
@@ -30,6 +31,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -48,7 +50,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class TagFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash TagFragment";
+    private static final String MYTAG = "XFlash TagFragment";
    
     private static FragmentActivity myContext = null;
     
@@ -285,6 +287,15 @@ public class TagFragment extends Fragment
     }  // end fireEmptyTagDialong()
 
 
+    // called by Xflash when onSearchRequested() is called
+    public static void searchPressed()
+    {
+        Log.d(MYTAG,"search pressed in root 'Study Sets' tab");
+
+    }  // end searchPressed()
+
+
+    // launch the dialog to confirm user would like to start studying a tag
     public static void fireStartStudyingDialog(Tag inTag,Xflash incoming)
     {
         final Tag tagToLaunch = inTag;

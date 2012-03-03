@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,12 +45,13 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class AddCardToTagFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash AddCardToTagFragment";
+    private static final String MYTAG = "XFlash AddCardToTagFragment";
     private static FragmentActivity myContext = null;
     
     private static Observer newTagObserver = null;
 
     private static int incomingCardId; 
+    private static JapaneseCard EScard = null;
     private static JapaneseCard tagCard = null;
     private static JapaneseCard searchCard = null;
     private static JapaneseCard currentCard = null;
@@ -76,11 +78,15 @@ public class AddCardToTagFragment extends Fragment
         // set the currentCard according to which tab we're on
         String currentTabName = Xflash.getCurrentTabName();
             
-        if( currentTabName == "tag" )
+        if( currentTabName == "practice" )
+        {
+            currentCard = EScard;
+        }
+        else if( currentTabName == "tag" )
         {
             currentCard = tagCard;
         }
-        else
+        else if( currentTabName == "search" )
         {
             currentCard = searchCard;
         }
@@ -150,13 +156,23 @@ public class AddCardToTagFragment extends Fragment
     {
         incomingCardId = inId;
         
-        if( Xflash.getCurrentTabName() == "tag" )
+        String currentTabName = Xflash.getCurrentTabName();
+        
+        if( currentTabName == "practice" )
+        {
+            EScard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
+        }
+        else if( currentTabName == "tag" )
         {
             tagCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
         }
-        else
+        else if( currentTabName == "search" )
         {
             searchCard = (JapaneseCard)CardPeer.retrieveCardByPK(incomingCardId);
+        }
+        else
+        {
+            Log.d(MYTAG,"ERROR! - got bad tab name from Xflash.getCurrentTabName() :  " + currentTabName);
         }
 
     }  // end loadCard()
@@ -189,7 +205,7 @@ public class AddCardToTagFragment extends Fragment
     }  // end toggleWord()
 
  
-    public static void addTag(Xflash inContext)
+    public static void addTag(Context inContext)
     {
         // start the 'add tag' activity as a modal
         Intent myIntent = new Intent(inContext,CreateTagActivity.class);

@@ -122,6 +122,20 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         XFApplication.getDao().detachAll();
     }
 
+    @Override
+    public boolean onSearchRequested()
+    {
+        // only call search functionality if we are in the root view of the 'Study Sets' tab
+        if( ( currentTab.tag == "tag" ) && ( XflashScreen.getCurrentTagScreen() == 0 ) ) 
+        {
+            TagFragment.searchPressed(); 
+        } 
+        
+        // return false so Android does not attempt to launch the
+        // default search dialog
+        return false;
+    }
+
     // see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
     @Override
     protected void onSaveInstanceState(Bundle outState)
@@ -204,7 +218,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
     public void ExampleSentenceFragment_addCard(View v)
     {
-        ExampleSentenceFragment.addCard(v);
+        ExampleSentenceFragment.addCard(v,this);
     }
     public void ExampleSentenceFragment_toggleRead(View v)
     {
@@ -494,7 +508,14 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // if there IS a secondary screen, it is loaded into switchTab and
                     // used.  If not, switchTab remains null and we default back 
                     // to newTab
-                    if( inTabTagname == "tag" )
+                    if( inTabTagname == "practice" )
+                    {
+                        if( XflashScreen.getExampleSentenceOn() )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("example_sentence");
+                        }
+                    }
+                    else if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab
                         if( XflashScreen.getTagCardsOn() )

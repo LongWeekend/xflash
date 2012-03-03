@@ -35,7 +35,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.CardPeer;
+import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.Tag;
+import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class PracticeFragment extends Fragment
 {
@@ -50,7 +54,6 @@ public class PracticeFragment extends Fragment
 
     private static int practiceViewStatus = -1;
 
-    // private static Tag currentTag = null;
     private static int incomingTagId = -1000;
     
     private static JapaneseCard currentCard = null;
@@ -92,7 +95,6 @@ public class PracticeFragment extends Fragment
     public static void loadTag(int inId)
     {
         incomingTagId = inId;
-        Log.d(MYTAG,"loadTag() called with id: " + incomingTagId);
     }
 
     
@@ -256,10 +258,17 @@ public class PracticeFragment extends Fragment
                 hhView.setVisibility(View.VISIBLE);
                 miniAnswerImage.setVisibility(View.GONE);
                 readingTextVisible = true;
-                rightArrow.setVisibility(View.VISIBLE);
                 showReadingButton.setVisibility(View.GONE);
                 showReadingText.setVisibility(View.VISIBLE);
                 showReadingText.setClickable(false);
+                
+                // only display the arrow if example sentences exist
+                XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+                if( ExampleSentencePeer.sentencesExistForCardId( currentCard.getCardId() ) )
+                {
+                    rightArrow.setVisibility(View.VISIBLE);
+                }
+                XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
 
             }  // end if block for ( inViewMode )
 

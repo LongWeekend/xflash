@@ -8,13 +8,16 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
+//  public static void loadCard(JapaneseCard  )
 //  public static void exampleClick(View  ,Xflash  )
+//  public static void addCard(View  ,Xflash  )
+//  public static void toggleRead(View  )
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,15 +36,15 @@ import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
 public class ExampleSentenceFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash ExampleSentenceFragment";
+    // private static final String MYTAG = "XFlash ExampleSentenceFragment";
     
-    // properties for handling color theme transitions
     private static RelativeLayout ESlayout;
     private static LinearLayout exampleBody;
     private static JapaneseCard currentCard;
 
     private static LayoutInflater myInflater = null;
-
+    private static ArrayList<ExampleSentence> esList = null;
+    private static boolean needLoad = false;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,10 +70,15 @@ public class ExampleSentenceFragment extends Fragment
         // get the view body to add our example sentence rows
         exampleBody = (LinearLayout)ESlayout.findViewById(R.id.es_body);
         
-        // attach the EX database long enough to pull our sentences
-        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-        ArrayList<ExampleSentence> esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
-        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+        // only reload the ArrayList via database if our card has changed
+        if( needLoad )
+        {
+            XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+            esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
+            XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+
+            needLoad = false;
+        }
 
         // load each of the present sentences 
         int numSentences = esList.size();
@@ -107,6 +115,18 @@ public class ExampleSentenceFragment extends Fragment
     }  // end onCreateView()
 
 
+    public static void loadCard(JapaneseCard inCard)
+    {
+        // don't do anything if it's the card we've already loaded
+        if( ( currentCard == null ) || ( !currentCard.isEqual(inCard) ) )
+        {
+            currentCard = inCard;
+            needLoad = true;
+        }
+
+    }  // end loadCard()
+
+    
     // method called when any button in the options block is clicked
     public static void exampleClick(View v,Xflash inContext)
     {
@@ -119,17 +139,23 @@ public class ExampleSentenceFragment extends Fragment
     }
 
 
-    public static void loadCard(JapaneseCard inCard)
+    // launch AddCardToTagFragment as a modal Activity
+    public static void addCard(View v,Xflash inContext)
     {
-        currentCard = inCard;
-    }
+        int tempInt = (Integer)v.getTag();
+        
+        // load the card to AddCardToTagFragment, as it is the layout
+        // and functionality for AddCardActivity
+        AddCardToTagFragment.loadCard(tempInt);
 
-    public static void addCard(View v)
-    {
-        Log.d(MYTAG,"addCard() clicked with id:  " + (Integer)v.getTag() );
-    }
+        Intent myIntent = new Intent(inContext,AddCardActivity.class);
+        inContext.startActivity(myIntent);
+    
+    }  // end addCard()
 
 
+    // open or close the view containing all cards in any
+    // given example sentence
     public static void toggleRead(View v)
     {
         Button tempReadButton = (Button)v;

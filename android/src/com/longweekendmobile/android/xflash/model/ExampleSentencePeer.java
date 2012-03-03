@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 
@@ -150,37 +149,39 @@ public class ExampleSentencePeer
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
-        String[] selectionArgs = new String[] { Integer.toString(inId) };
+        // String[] selectionArgs = new String[] { Integer.toString(inId) };
         String query;
         
 
         if( isNewVersion() )
         {
-            // Version 1.2 example sentences DB
-            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
+            // TODO - for reasons not fully understood, this ALWYAS returns 0 rows when
+            //        used with selectionArgs rather than manually inserting inId
+            // query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
+            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = " + inId + " AND should_show = '1' LIMIT 1";
         }
         else
         {
-                // Version 1.1 example sentences DB
-                query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
+            // Version 1.1 example sentences DB
+            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
         }
 
-        // TODO - waiting for debug
-        Log.d(MYTAG,query);
-        
         try
         {
-            Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+            // Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+            Cursor myCursor = tempDB.rawQuery(query,null);
 
             // just making sure the query was successful
             int rowCount = myCursor.getCount();
 
             if( rowCount > 0 )
             {
+                // we have sentences!
                 return true;
             }
             else
             {
+                // no sentences for this card
                 return false;
             }
         } 
@@ -217,8 +218,6 @@ public class ExampleSentencePeer
             }   
         }
         
-        Log.d(MYTAG,"In Statement:  " + inStatement);
-
         String query;
         query = "SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (" + inStatement + ")";
             
