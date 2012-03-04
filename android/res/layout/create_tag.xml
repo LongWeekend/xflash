@@ -34,7 +34,8 @@
 
             <EditText android:id="@+id/create_tag_text"
                 style="@style/default_edittext"
-                android:layout_marginTop="4dp" />
+                android:layout_marginTop="4dp"
+                android:hint="@string/create_tag_hint" />
      
     </LinearLayout>       
 

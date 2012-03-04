@@ -13,7 +13,11 @@ package com.longweekendmobile.android.xflash;
 //  public static void goTagCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
+//  public static void fireStartStudyingDialog(Tag  ,Xflash  )
+//  public static boolean getSearchOn()
 //  public static void searchPressed()
+//  public static void showSearch()
+//  public static void hideSearch()
 //
 //  private static void refreshTagList()
 //  private void setupObservers()
@@ -31,11 +35,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,7 +54,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class TagFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash TagFragment";
+    // private static final String MYTAG = "XFlash TagFragment";
    
     private static FragmentActivity myContext = null;
     
@@ -59,8 +63,11 @@ public class TagFragment extends Fragment
 
     public static Group currentGroup = null;
     public static boolean needLoad = false;
+    private static RelativeLayout tagLayout = null;
     private static LinearLayout tagList = null;
-   
+
+    private static boolean searchOn = false;
+
     // for display of any groups
     private static ArrayList<Group> groupArray = null;
     
@@ -80,7 +87,7 @@ public class TagFragment extends Fragment
         setupObservers();
 
         // inflate our layout for the Tag fragment and load our icon array
-        LinearLayout tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
+        tagLayout = (RelativeLayout)inflater.inflate(R.layout.tag, container, false);
         int icons[] = XflashSettings.getIcons();
 
         // load the title bar elements and pass them to the color manager
@@ -90,7 +97,7 @@ public class TagFragment extends Fragment
         XflashSettings.setupColorScheme(titleBar,tempButton);
     
         // populate the main list of groups
-        LinearLayout tempList = (LinearLayout)tagLayout.findViewById(R.id.main_group_list);
+        LinearLayout groupList = (LinearLayout)tagLayout.findViewById(R.id.main_group_list);
         RelativeLayout tempRow = null;
         ImageView tempRowImage = null;
         TextView tempView = null;
@@ -153,9 +160,9 @@ public class TagFragment extends Fragment
             if( i > 0 )
             {
                 FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
-                tempList.addView(divider);
+                groupList.addView(divider);
             }
-            tempList.addView(tempRow);
+            groupList.addView(tempRow);
 
         }  // end for loop (groups)
 
@@ -175,6 +182,12 @@ public class TagFragment extends Fragment
             backupBlock.setVisibility(View.GONE);
         }
 
+        // check to see if we tabbed back in to 'Study Sets' with a search open
+        if( searchOn )
+        {
+            showSearch();     
+        }
+        
         return tagLayout;
 
     }  // end onCreateView()
@@ -233,23 +246,27 @@ public class TagFragment extends Fragment
     }
 
 
+    // reload TagFragment with a new group
     public static void openGroup(View v,Xflash inContext)
     {
         XflashScreen.addTagStack();
- 
         currentGroup = GroupPeer.retrieveGroupById( (int)(Integer)v.getTag() );
         
         inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
+    
+    // transition to view all cards in a given Tag
     public static void goTagCards(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
-
         TagCardsFragment.loadTag(tempInt); 
+        
         inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
+    
+    // launch the clicked on Tag in the practice tab
     public static void startStudying(View v,Xflash inContext)
     {
         int incomingTagId = (Integer)v.getTag();
@@ -268,6 +285,7 @@ public class TagFragment extends Fragment
     }  // end startStudying()
 
     
+    // dialog to display on attempt to start studying a tag with no cards
     public static void fireEmptyTagDialog(Xflash inContext)
     {
         // set and fire our AlertDialog
@@ -285,14 +303,6 @@ public class TagFragment extends Fragment
         builder.create().show();
 
     }  // end fireEmptyTagDialong()
-
-
-    // called by Xflash when onSearchRequested() is called
-    public static void searchPressed()
-    {
-        Log.d(MYTAG,"search pressed in root 'Study Sets' tab");
-
-    }  // end searchPressed()
 
 
     // launch the dialog to confirm user would like to start studying a tag
@@ -328,6 +338,67 @@ public class TagFragment extends Fragment
     }  // end fireEmptyTagDialong()
 
 
+    public static boolean getSearchOn()
+    {
+        return searchOn;
+    }
+
+    
+    // called by Xflash when onSearchRequested() is called
+    public static void searchPressed()
+    {
+        if( searchOn )
+        {
+            hideSearch();
+        }
+        else
+        {
+            showSearch();
+        }
+
+    }  // end searchPressed()
+
+
+    public static void showSearch()
+    {
+        TextView tempTitle = (TextView)tagLayout.findViewById(R.id.tag_heading_text);
+        ImageButton tempAddButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
+        EditText searchText = (EditText)tagLayout.findViewById(R.id.tag_search_text);
+        RelativeLayout shade = (RelativeLayout)tagLayout.findViewById(R.id.tag_shade);
+
+        // hide the title
+        tempTitle.setVisibility(View.GONE);
+        tempAddButton.setVisibility(View.GONE);
+
+        // show the search bar and shade
+        searchText.setVisibility(View.VISIBLE);
+        shade.setVisibility(View.VISIBLE);
+
+        searchOn = true;
+
+    }  // end showSearch()
+
+    
+    public static void hideSearch()
+    {
+        TextView tempTitle = (TextView)tagLayout.findViewById(R.id.tag_heading_text);
+        ImageButton tempAddButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
+        EditText searchText = (EditText)tagLayout.findViewById(R.id.tag_search_text);
+        RelativeLayout shade = (RelativeLayout)tagLayout.findViewById(R.id.tag_shade);
+
+        // hide the search bar and shade
+        searchText.setVisibility(View.GONE);
+        shade.setVisibility(View.GONE);
+
+        // show the title
+        tempTitle.setVisibility(View.VISIBLE);
+        tempAddButton.setVisibility(View.VISIBLE);
+
+        searchOn = false;
+
+    }  // end hideSearch()
+
+    
     // pull and display any tags for currentGroup
     private static void refreshTagList()
     {
