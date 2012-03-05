@@ -7,14 +7,13 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onPause()
+//  public void onPause()                                               @over
 //
 //  public static void addCard(View  ,Xflash  )
 //  public static void toggleStar(View  )
 //
 //  private static boolean checkMembershipCacheForCard(Card  )
 //
-//  private EditText.OnFocusChangeListener searchFocusListener
 //  private TextView.OnEditorActionListener searchActionListener
 //
 //  private class AsyncSearch extends AsyncTask<Void, Void, Void>
@@ -87,14 +86,14 @@ public class SearchFragment extends Fragment
         
         // set our listeners
         mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
-        mySearch.setOnFocusChangeListener(searchFocusListener);
+        // mySearch.setOnFocusChangeListener(searchFocusListener);
         mySearch.setOnEditorActionListener(searchActionListener);
 
         // get the ListView to display results
         searchList = (ListView)searchLayout.findViewById(R.id.search_list);
 
         // if we have existing results from a prior search, display them on load
-        if( searchResults != null )
+        if( ( searchResults != null ) && ( searchResults.size() > 0 ) )
         {
             SearchAdapter theAdapter = new SearchAdapter();
             searchList.setAdapter(theAdapter);
@@ -109,6 +108,8 @@ public class SearchFragment extends Fragment
                 public void run()
                 {
                     mySearch.requestFocus();
+                    imm.showSoftInput(mySearch,0);
+                                                     
                 }
             },300);
         }
@@ -132,6 +133,8 @@ public class SearchFragment extends Fragment
         membershipCacheArray = null;
     }
 
+    
+    // launch AddCardToTagFragment
     public static void addCard(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
@@ -195,27 +198,6 @@ public class SearchFragment extends Fragment
     }  // end checkMembershipCacheForCard()
 
     
-    // display keyboard on focus, hide when focus leaves
-    private EditText.OnFocusChangeListener searchFocusListener = new EditText.OnFocusChangeListener()
-    {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus)
-        {
-            if(hasFocus)
-            {
-                // show keyboard
-                imm.showSoftInput(mySearch,0);
-            }
-            else
-            {
-                // hide keyboard
-                imm.hideSoftInputFromWindow(mySearch.getWindowToken(),0);
-            }
-        }
-
-    };  // end searchFocusListener 
-
-
     private TextView.OnEditorActionListener searchActionListener =  new TextView.OnEditorActionListener()
     {
         @Override
@@ -230,6 +212,8 @@ public class SearchFragment extends Fragment
                 AsyncSearch tempSearch = new AsyncSearch();
                 tempSearch.execute();
 
+                imm.hideSoftInputFromWindow(mySearch.getWindowToken(),0);
+                
                 return true;
 
             }  // end if( DONE was clicked )

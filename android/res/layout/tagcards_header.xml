@@ -7,7 +7,7 @@
 
     <RelativeLayout android:id="@+id/header_block"
         style="@style/default_display_block" 
-        android:onClick="TagCardsFragment_startStudying" >
+        android:onClick="TagFragment_startStudying" >
 
         <TextView 
             style="@style/default_display_left"

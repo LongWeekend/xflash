@@ -29,6 +29,7 @@
             style="@style/default_edittext"
             android:layout_centerInParent="true"
             android:visibility="gone"
+            android:drawableRight="@drawable/search_edit_icon"
             android:hint="@string/tag_search_hint" />
 
     </RelativeLayout>
@@ -104,7 +105,24 @@
         android:background="#77000000"
         android:onClick="TagFragment_emptyClick"
         android:visibility="gone">
-     </RelativeLayout>
+
+        <ScrollView android:id="@+id/tag_search_scroll"
+            style="@style/default_scroll_block"
+            android:visibility="gone" >
+
+            <!-- search tag list -->
+            <LinearLayout android:id="@+id/tag_search_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingRight="0dp" >
+            
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>  <!-- end shade -->
 
 </RelativeLayout>
 

@@ -6,8 +6,13 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/3/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//      *** ALL METHODS STATIC ***
+//  public XflashRadio(Context  )
+//  public XflashRadio(Context  ,AttributeSet  )
 //
+//  protected void onDraw(Canvas  )         @over
+//
+//  public void setButtonText(String  )
+//  private void setTextAttrs()
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -29,7 +34,7 @@ public class XflashRadio extends RadioButton
         setTextAttrs();
     }
 
-    public XflashRadio(Context context, AttributeSet attrbs)
+    public XflashRadio(Context context,AttributeSet attrbs)
     { 
         super(context, attrbs);
         setTextAttrs();

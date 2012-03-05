@@ -10,9 +10,8 @@ package com.longweekendmobile.android.xflash;
 //  public void onResume()      @over
 //  public void onPause()       @over
 //
-//  public static void setCurrentGroup(Group  )
-//
-//  private void keyboardDone()
+//  public void AddCardToTagFragment_toggleWord(View  )
+//  public void AddCardToTagFragment_addTag(View  )
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,7 +28,7 @@ public class AddCardActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcard_activity);
     
-    }  // end onCreate()
+    }
 
     @Override
     public void onResume()

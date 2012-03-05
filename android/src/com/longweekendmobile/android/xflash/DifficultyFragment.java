@@ -9,6 +9,9 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  private void setSeekBars()
+//
+//  private RadioGroup.OnCheckedChangeListener radioChange
+//  private SeekBar.OnSeekBarChangeListener barChange
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

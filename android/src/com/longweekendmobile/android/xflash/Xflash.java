@@ -175,7 +175,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         else if( ( currentTab.tag == "tag" ) && ( TagFragment.getSearchOn() ) )
         {
             // if the search dialog on TagFragment is open
-            TagFragment.hideSearch();
+            TagFragment.TagSearch.hideSearch();
         }
         else 
         {
@@ -272,13 +272,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void TagFragment_emptyClick(View v)
     {
         // capture clicks from the ScrollView when the search field is up
-        Log.d(MYTAG,"capture");
+        Log.d(MYTAG,">>> TagFragment_emptyClick()");
     }
 
-    public void TagCardsFragment_startStudying(View v)
-    {
-        TagCardsFragment.startStudying(v,this);
-    }
+//  see comment in TagCardsFragment.java under TagCardsFragment.startStudying()
+//
+//  public void TagCardsFragment_startStudying(View v)
+//  {
+//      TagCardsFragment.startStudying(v,this);
+//  }
     public void TagCardsFragment_addCard(View v)
     {
         TagCardsFragment.addCard(v,this);
