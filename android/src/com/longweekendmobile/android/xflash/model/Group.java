@@ -38,7 +38,7 @@ public class Group implements Cloneable
     private static final String MYTAG = "XFlash Group";
 
     private static final int kLWEUninitializedGroupId = -99;
-    private static final int LWE_TOP_LEVEL_GROUP_ID = -1;
+    public static final int LWE_TOP_LEVEL_GROUP_ID = -1;
 
     int groupId;              // groupId of the parent Group
     int ownerId;

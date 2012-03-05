@@ -7,6 +7,18 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//  public void onPause()
+//
+//  public static void addCard(View  ,Xflash  )
+//  public static void toggleStar(View  )
+//
+//  private static boolean checkMembershipCacheForCard(Card  )
+//
+//  private EditText.OnFocusChangeListener searchFocusListener
+//  private TextView.OnEditorActionListener searchActionListener
+//
+//  private class AsyncSearch extends AsyncTask<Void, Void, Void>
+//  private class SearchAdapter extends ArrayAdapter<Card>
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +29,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +43,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
@@ -112,14 +123,21 @@ public class SearchFragment extends Fragment
         super.onPause();
 
         // flush the cache array when the search fragment is paused
+        
+        
+        // TODO - this forces the adapter to reload the starred words tag into
+        //        the cache array when the user returns to this view. Is it 
+        //        necessary/desirable to eliminate this forced refresh and rely 
+        //        on Observer notifications to maintain the cacheArray instead?
         membershipCacheArray = null;
     }
 
     public static void addCard(View v,Xflash inContext)
     {
         int tempInt = (Integer)v.getTag();
-        Log.d(MYTAG,">>> card clicked in SearchFragment");
-        Log.d(MYTAG,"> card id:  " + tempInt);
+
+        AddCardToTagFragment.loadCard(tempInt);
+        inContext.onScreenTransition("search_add_card",XflashScreen.DIRECTION_OPEN);
     }
 
     
@@ -160,19 +178,12 @@ public class SearchFragment extends Fragment
             starImage.setImageResource(R.drawable.star_selected);
         }
  
-        // inform TagFragment that the starred words tag has changed
-        // TODO - bad solution, temporary
-        TagFragment.setNeedLoad();
-        TagCardsFragment.setNeedLoad();
-     
     }  // end toggleStar()
 
 
     // checks the local cache for starred status, or creates it
     private static boolean checkMembershipCacheForCard(Card inCard)
     {
-        boolean returnVal = false;
-
         if( membershipCacheArray == null )
         {
             // if the cache array hasn't be loaded, do so
@@ -240,7 +251,15 @@ public class SearchFragment extends Fragment
             searchDialog = new ProgressDialog(getActivity());
             searchDialog.setMessage(" Searching... ");
             searchDialog.show();
-        }
+        
+            // attach the search database
+            boolean attachSuccess = XFApplication.getDao().attachDatabase(LWEDatabase.DB_FTS); 
+            if( !attachSuccess )
+            {
+                Log.d(MYTAG,"ERROR in AsyncSearch: database attach failed");
+            }
+
+        }  // end onPreExecute()
 
         
         @Override
@@ -264,6 +283,9 @@ public class SearchFragment extends Fragment
         @Override
         protected void onPostExecute(Void unused)
         {
+            // detach the search database
+            XFApplication.getDao().detachDatabase(LWEDatabase.DB_FTS); 
+            
             // set our returned card info into the ListView
             SearchAdapter theAdapter = new SearchAdapter();
             searchList.setAdapter(theAdapter);
@@ -281,7 +303,7 @@ public class SearchFragment extends Fragment
     {
         SearchAdapter()
         {
-            super( getActivity(), R.layout.search_row, (List)searchResults);
+            super( getActivity(), R.layout.search_row, (List<Card>)searchResults);
         }
 
         public View getView(int position, View convertView, ViewGroup parent)
@@ -294,7 +316,6 @@ public class SearchFragment extends Fragment
             }
 
             JapaneseCard tempCard = (JapaneseCard)searchResults.get(position);
-            int tempCardId = tempCard.getCardId();
 
             if( tempCard.isFault )
             {

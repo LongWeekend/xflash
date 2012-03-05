@@ -9,15 +9,20 @@ package com.longweekendmobile.android.xflash;
 //  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void setIncomingTagId(int  )
+//  public static void loadTag(int  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void addCard(View  ,Xflash  )
+//
+//  private void setupObservers()
+//  private void updateFromSubscriptionObserver()
 //
 //  private class CardAdapter extends ArrayAdapter<Card> 
 //  private class AsyncLoadcards extends AsyncTask<Void, Void, Void>
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -35,7 +40,6 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
-import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
 
@@ -43,7 +47,8 @@ public class TagCardsFragment extends Fragment
 {
     private static final String MYTAG = "XFlash TagCardsFragment";
    
-    // properties for handling color theme transitions
+    private static Observer subscriptionObserver = null;
+    
     private LinearLayout tagCardsLayout;
     private ListView cardList;
     private LayoutInflater myInflater;
@@ -61,6 +66,8 @@ public class TagCardsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        setupObservers();
+
         // inflate our layout for the AllCardsPage fragment
         tagCardsLayout = (LinearLayout)inflater.inflate(R.layout.tag_cards, container, false);
 
@@ -104,7 +111,7 @@ public class TagCardsFragment extends Fragment
         needLoad = true;
     }
 
-    public static void setIncomingTagId(int inId)
+    public static void loadTag(int inId)
     {
         incomingTagId = inId;
     }
@@ -118,17 +125,50 @@ public class TagCardsFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        AddCardToTagFragment.setIncomingCardId(tempInt);
+        AddCardToTagFragment.loadCard(tempInt);
         inContext.onScreenTransition("add_card",XflashScreen.DIRECTION_OPEN);
     }
 
+   
+    // method to set all relevant Observers
+    private void setupObservers()
+    {
+        if( subscriptionObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver();
+                }  
+            };
+
+        }  // end if( subscriptionObserver == null )
+
+        XFApplication.getNotifier().addSubscriptionObserver(subscriptionObserver);
+
+    }  // end setupObservers()
+
+
+    private void updateFromSubscriptionObserver()
+    {
+        // only refresh if modified card was in the tag we
+        // are currently displaying
+        if( currentTag.getId() == XFApplication.getNotifier().getTagIdPassed() )
+        {
+            TagCardsFragment.needLoad = true;
+        }
     
+    }  // end updateFromSubscriptionObserver()
+
+
     // custom adapter to appropriately fill the view for our ListView
     private class CardAdapter extends ArrayAdapter<Card> 
     {
         CardAdapter() 
         {
-            super( getActivity(), R.layout.tagcards_row, (List)cardArray);
+            super( getActivity(), R.layout.tagcards_row, (List<Card>)cardArray);
         }
         
         public View getView(int position, View convertView, ViewGroup parent) 
@@ -170,10 +210,13 @@ public class TagCardsFragment extends Fragment
         @Override
         protected void onPreExecute()
         {
-            // launch a loading dialog
-            cardLoadDialog = new ProgressDialog(getActivity());
-            cardLoadDialog.setMessage(" Fetching cards... ");
-            cardLoadDialog.show();
+            // launch a loading dialog if it is required
+            if( ( needLoad == true ) || ( cardArray == null ) )
+            {
+                cardLoadDialog = new ProgressDialog(getActivity());
+                cardLoadDialog.setMessage( getResources().getString(R.string.tagcards_fetching) );
+                cardLoadDialog.show();
+            }
         }
 
         @Override
@@ -200,8 +243,12 @@ public class TagCardsFragment extends Fragment
             cardList.setAdapter(theAdapter);
 
             // clear the progress dialog
-            cardLoadDialog.dismiss();
-    
+            if( cardLoadDialog != null )
+            {
+                cardLoadDialog.dismiss();
+                cardLoadDialog = null;
+            }
+
         }  // end onPostExecute()
 
   

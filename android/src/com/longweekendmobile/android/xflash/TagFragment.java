@@ -13,9 +13,16 @@ package com.longweekendmobile.android.xflash;
 //  public static void goTagCards(View  ,Xflash  )
 //  public static void startStudying(View  ,Xflash  )
 //  public static void fireEmptyTagDialog(Xflash  )
-//  public static void refreshTagList()
+//  public static void searchPressed()
+//
+//  private static void refreshTagList()
+//  private void setupObservers()
+//  private void updateFromNewTagObserver(Object  )
+//  private void udpateFromSubscriptionObserver()
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -47,6 +54,9 @@ public class TagFragment extends Fragment
    
     private static FragmentActivity myContext = null;
     
+    private static Observer newTagObserver = null; 
+    private static Observer subscriptionObserver = null; 
+
     public static Group currentGroup = null;
     public static boolean needLoad = false;
     private static LinearLayout tagList = null;
@@ -67,6 +77,7 @@ public class TagFragment extends Fragment
                              Bundle savedInstanceState) 
     {
         myContext = getActivity();
+        setupObservers();
 
         // inflate our layout for the Tag fragment and load our icon array
         LinearLayout tagLayout = (LinearLayout)inflater.inflate(R.layout.tag, container, false);
@@ -210,14 +221,15 @@ public class TagFragment extends Fragment
         needLoad = true;
     }
 
+    
     // onClick for our PLUS button
     public static void addToplevelTag(Context inContext)
     {
         // start the 'add tag' activity as a modal
-        CreateTagActivity.setWhoIsCalling(CreateTagActivity.TAG_FRAGMENT_CALLING);
-        CreateTagActivity.setCurrentGroup(currentGroup);
-
-        inContext.startActivity(new Intent(inContext,CreateTagActivity.class));
+        Intent myIntent = new Intent(inContext,CreateTagActivity.class);
+        myIntent.putExtra("group_id", currentGroup.getGroupId() );
+        
+        inContext.startActivity(myIntent);
     }
 
 
@@ -234,7 +246,7 @@ public class TagFragment extends Fragment
     {
         int tempInt = (Integer)v.getTag();
 
-        TagCardsFragment.setIncomingTagId(tempInt); 
+        TagCardsFragment.loadTag(tempInt); 
         inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
@@ -250,7 +262,7 @@ public class TagFragment extends Fragment
         }
         else
         {
-            Log.d(MYTAG,"start studying a tag!");
+            fireStartStudyingDialog(tempTag,inContext);
         }
 
     }  // end startStudying()
@@ -275,8 +287,49 @@ public class TagFragment extends Fragment
     }  // end fireEmptyTagDialong()
 
 
+    // called by Xflash when onSearchRequested() is called
+    public static void searchPressed()
+    {
+        Log.d(MYTAG,"search pressed in root 'Study Sets' tab");
+
+    }  // end searchPressed()
+
+
+    // launch the dialog to confirm user would like to start studying a tag
+    public static void fireStartStudyingDialog(Tag inTag,Xflash incoming)
+    {
+        final Tag tagToLaunch = inTag;
+        final Xflash inContext = incoming;
+        
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
+
+        builder.setTitle( tagToLaunch.getName() );
+
+        String tempString = inContext.getResources().getString(R.string.startstudying_dialog_message);
+        builder.setMessage(tempString);
+
+        // on postive response, set the new active user
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+                // set the new user and return to settings
+                PracticeFragment.loadTag( tagToLaunch.getId() );
+                Xflash.getTabHost().setCurrentTabByTag("practice");
+            }
+        });
+
+        // on negative response, do nothing
+        builder.setNegativeButton("Cancel",null);
+        
+        builder.create().show();
+
+    }  // end fireEmptyTagDialong()
+
+
     // pull and display any tags for currentGroup
-    public static void refreshTagList()
+    private static void refreshTagList()
     {
         LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int icons[] = XflashSettings.getIcons();
@@ -370,7 +423,17 @@ public class TagFragment extends Fragment
 
             // set the group set count
             tempView = (TextView)tempRow.findViewById(R.id.tag_row_bottom);
-            tempView.setText( Integer.toString( tempTag.getCardCount() ) + " words");
+            int tempInt = tempTag.getCardCount();
+            String tempCountString = Integer.toString(tempInt);
+            if( tempInt == 1 )
+            {
+                tempCountString = tempCountString + " word";
+            }
+            else
+            {
+                tempCountString = tempCountString + " words";
+            }
+            tempView.setText(tempCountString);
 
             // clear the 'view' option if there are no cards in the tag
             tempView = (TextView)tempRow.findViewById(R.id.tag_row_click);
@@ -394,6 +457,70 @@ public class TagFragment extends Fragment
         }  // end for loop 
 
     }  // end refreshTagList()
+
+
+    // method to set all relevant Observers
+    private void setupObservers()
+    {
+        if( newTagObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            newTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromNewTagObserver(arg);
+                }
+            };
+
+        }  // end if( newTagObserver == null )
+        
+        if( subscriptionObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver();
+                }
+            };
+
+        }  // end if( subscriptionObserver == null )
+
+       XflashNotification theNotifier = XFApplication.getNotifier();
+       theNotifier.addNewTagObserver(newTagObserver);
+       theNotifier.addSubscriptionObserver(subscriptionObserver);
+
+    }  // end setupObservers()
+
+
+    private void updateFromNewTagObserver(Object passedObject)
+    {
+        // get the Tag that was just added
+        Tag theNewTag = (Tag)passedObject;
+
+        // only refresh if it was added to the visible group
+        if( theNewTag.groupId() == currentGroup.getGroupId() )
+        {
+            TagFragment.needLoad = true;
+            TagFragment.refreshTagList();
+        }
+
+    }  // end updateFromNewTagObserver()
+
+
+    private void updateFromSubscriptionObserver()
+    {
+        // only refresh if we're on the top level group
+        // i.e. we need to update the count on 'My Starred Words'
+        if( currentGroup.getGroupId() == 0 )
+        {
+            TagFragment.needLoad = true;
+            TagFragment.refreshTagList();
+        }
+
+    }  // end updateFromSubscriptionObserver()
 
 
 }  // end TagFragment class declaration

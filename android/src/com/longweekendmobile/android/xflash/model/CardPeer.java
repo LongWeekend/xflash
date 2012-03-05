@@ -31,15 +31,13 @@ import java.util.ArrayList;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class CardPeer
 {
-    private static final String MYTAG = "XFlash CardPeer";
-
+    // private static final String MYTAG = "XFlash CardPeer";
     
     // factory that cares about what language we are using
     public static Card blankCardWithId(int inId)
@@ -76,6 +74,7 @@ public class CardPeer
     //
     // TODO - not tested in instances when it would return 'true'
     //        also, do we need a special unicode char variable?
+    @SuppressWarnings("unused")
     public static boolean keywordIsReading(String inKey)
     {
         if( XFApplication.IS_JFLASH )
@@ -113,6 +112,7 @@ public class CardPeer
     }  // end keywordIsReading()
 
     // TODO - see note on keywordIsReading() above
+    @SuppressWarnings("unused")
     public static boolean keywordIsHeadword(String inKey)
     {
         if( XFApplication.IS_JFLASH )
@@ -353,7 +353,6 @@ public class CardPeer
 
     // returns an ArrayList<Integer> of cardIds that are linked to the sentence
     // 'inId' primary key of the sentence to look up cards for
-    // TODO - cannot be tested without db containing sentence tables
     // TODO - uh... the code actually returns an array of Card objects, not IDs
     //      - as the original comment would imply
     public static ArrayList<Card> retrieveCardSetForExampleSentenceId(int inId)
@@ -366,11 +365,13 @@ public class CardPeer
 
         if( ExampleSentencePeer.isNewVersion() )
         {
-            query = "SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ? AND l.should_show = '1'";
+            // had to add 'meaning' to the query, else the program throws an
+            // exception on Card.hydrate()
+            query = "SELECT c.*, meaning FROM card_sentence_link l, cards c, cards_html WHERE l.card_id = c.card_id AND sentence_id = ? AND l.should_show = '1' AND cards_html.card_id = c.card_id";
         }
         else
         {
-                query = "SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ?";
+            query = "SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ?";
         }
 
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
@@ -380,6 +381,7 @@ public class CardPeer
         for(int i = 0; i < rowCount; i++)
         {
             Card tempCard = blankCard();
+             
             tempCard.hydrate(myCursor,true);
             tempList.add(tempCard);
 

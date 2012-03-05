@@ -6,8 +6,6 @@ package com.longweekendmobile.android.xflash.model;
 //  Created by Todd Presson 1/14/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public ExampleSentencePeer()
-//
 //      *** ALL METHODS STATIC ***
 //
 //  public boolean isNewVersion()
@@ -17,33 +15,17 @@ package com.longweekendmobile.android.xflash.model;
 //  public boolean sentencesExistForCardId(int  )
 //  public ArrayList<ExampleSentence> searchSentencesForKeyword(String  )
 
-// TODO - this has not been tested!  I do not have a database copy
-//        with the ExampleSentence object info in it
-
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 
 public class ExampleSentencePeer
 {
     private static final String MYTAG = "XFlash ExampleSentencePeer";
-
-    private static SQLiteDatabase tempDB;
-
-    public ExampleSentencePeer()
-    {
-        // we pass a context to the contructor in this case
-        // because we don't know which method we'll be calling,
-        // and don't want to pass contexts along a chain
-        
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
 
     // TODO - really I have no idea what to do with this at this point
     public static boolean isNewVersion()
@@ -68,7 +50,9 @@ public class ExampleSentencePeer
 #endif
 }
 */
-        return false;
+        // TODO - I *think* that this should always return true, or is completely
+        //        unnecessary, given that I'm only working with the 1.2 EX database?
+        return true;
 
     }  // end isNewVersion()
 
@@ -77,6 +61,8 @@ public class ExampleSentencePeer
     // on each ExampleSentence as it is added to the ArrayList
     public static ArrayList<ExampleSentence> retrieveSentencesWithSQL(String sql,boolean willHydrate)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         ExampleSentence tempSentence = null;
         ArrayList<ExampleSentence> sentenceList = new ArrayList<ExampleSentence>();
 
@@ -104,6 +90,7 @@ public class ExampleSentencePeer
                 }
       
                 sentenceList.add(tempSentence);
+                myCursor.moveToNext();
 
             } // end for loop
 
@@ -160,37 +147,41 @@ public class ExampleSentencePeer
     // return false even if there is a link
     public static boolean sentencesExistForCardId(int inId)
     {
-        String[] selectionArgs = new String[] { Integer.toString(inId) };
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
+        // String[] selectionArgs = new String[] { Integer.toString(inId) };
         String query;
         
 
         if( isNewVersion() )
         {
-            // Version 1.2 example sentences DB
-            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
+            // TODO - for reasons not fully understood, this ALWYAS returns 0 rows when
+            //        used with selectionArgs rather than manually inserting inId
+            // query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
+            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = " + inId + " AND should_show = '1' LIMIT 1";
         }
         else
         {
-                // Version 1.1 example sentences DB
-                query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
+            // Version 1.1 example sentences DB
+            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
         }
 
-        // TODO - waiting for debug
-        Log.d(MYTAG,query);
-        
         try
         {
-            Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+            // Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
+            Cursor myCursor = tempDB.rawQuery(query,null);
 
             // just making sure the query was successful
             int rowCount = myCursor.getCount();
 
             if( rowCount > 0 )
             {
+                // we have sentences!
                 return true;
             }
             else
             {
+                // no sentences for this card
                 return false;
             }
         } 
@@ -227,8 +218,6 @@ public class ExampleSentencePeer
             }   
         }
         
-        Log.d(MYTAG,"In Statement:  " + inStatement);
-
         String query;
         query = "SELECT DISTINCT(s.sentence_id), s.sentence_ja, s.sentence_en, s.checked FROM sentences s, card_sentence_link c WHERE s.sentence_id = c.sentence_id AND c.card_id IN (" + inStatement + ")";
             

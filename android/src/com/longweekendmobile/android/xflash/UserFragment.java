@@ -132,7 +132,7 @@ public class UserFragment extends Fragment
                 XflashSettings.setCurrentUserId(switchUser);
                 inContext.onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
-       });
+        });
         
         // on negative response, do nothing
         builder.setNegativeButton("Cancel",null);
@@ -153,7 +153,7 @@ public class UserFragment extends Fragment
         {
             // set EditUserFragment.incomingEditId to the user id we tagged to this
             // row's editbutton
-            EditUserFragment.setIncomingEditId( (Integer)v.getTag(R.id.user_idtag) ); 
+            EditUserFragment.loadUser( (Integer)v.getTag(R.id.user_idtag) ); 
             EditUserFragment.setNew(false);
         } 
 

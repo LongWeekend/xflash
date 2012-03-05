@@ -93,7 +93,7 @@ public class ExampleSentence
         sentenceJa = inJa;
     }
 
-    public String getja()
+    public String getJa()
     {
         return sentenceJa;
     }

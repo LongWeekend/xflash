@@ -62,12 +62,12 @@
                 
                 <TextView 
                     style="@style/default_display_heading_layout"
-                    android:text="@string/group_backup_block_title" />
+                    android:text="@string/tag_backupblock_title" />
 
                 <RelativeLayout style="@style/default_display_block">
                     <TextView 
                         style="@style/default_display_left"
-                        android:text="@string/group_backup_now" />
+                        android:text="@string/tag_backup_now" />
                     <TextView
                         style="@style/not_implemented" />
                 </RelativeLayout>
@@ -76,7 +76,7 @@
                     android:layout_marginBottom="10dp" >
                     <TextView 
                         style="@style/default_display_left"
-                        android:text="@string/group_restore_now" />
+                        android:text="@string/tag_restore_now" />
                     <TextView
                         style="@style/not_implemented" />
                 </RelativeLayout>

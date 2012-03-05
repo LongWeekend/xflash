@@ -191,6 +191,7 @@ public class Tag
     // loads a serialized copy of cardIds from a file 'ids.plist'
     // TODO - performance on ObjectInputStream is horrible, hand-code 
     //        a serialization or don't worry about it?
+    @SuppressWarnings("unchecked")
     public ArrayList<ArrayList<Integer>> thawCardIds(Context inContext)
     {
         String cacheFile = "ids.plist";

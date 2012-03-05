@@ -44,6 +44,7 @@ public class LWEDatabase extends SQLiteOpenHelper
     public static final String COPY_START = "com.longweekendmobile.android.xflash.COPY_START";
     public static final String COPY_START2 = "com.longweekendmobile.android.xflash.COPY_START2";
     public static final String COPY_START3 = "com.longweekendmobile.android.xflash.COPY_START3";
+    public static final String COPY_START4 = "com.longweekendmobile.android.xflash.COPY_START4";
     public static final String COPY_SUCCESS = "com.longweekendmobile.android.xflash.COPY_SUCCESS";
     public static final String COPY_FAILURE = "com.longweekendmobile.android.xflash.COPY_FAILURE";
     public static final String DATABASE_READY = "com.longweekendmobile.android.xflash.DATABASE_READY";
@@ -52,14 +53,14 @@ public class LWEDatabase extends SQLiteOpenHelper
     private static final String DB_PATH = "/data/data/com.longweekendmobile.android.xflash/databases/";
     
     // TODO change these from mp3 when files are cut up
-    private static final String DB_NAME = "jFlash.mp3";
-    private static final String DB_CARD = "jFlash-CARD-1.1.mp3";
-    private static final String DB_FTS = "jFlash-FTS-1.1.mp3";
+    public static final String DB_NAME = "jFlash.mp3";
+    public static final String DB_CARD = "jFlash-CARD-1.1.mp3";
+    public static final String DB_FTS = "jFlash-FTS-1.1.mp3";
+    public static final String DB_EX= "jFlash-EX-1.2.mp3";
     private static final String CARD_ATTACH_NAME = "LWEDATABASETMP";
     private static final String FTS_ATTACH_NAME = "LWEDATABASEFTS"; 
+    private static final String EX_ATTACH_NAME = "LWEDATABASEEX"; 
     
-    private boolean isAttached;
-
     // copy of application context necessary for intent broadcasts
     private final Context myContext;
    
@@ -71,7 +72,6 @@ public class LWEDatabase extends SQLiteOpenHelper
         
         // the context passed in the the full Application context
         this.myContext = context;
-        isAttached = false;
     }
 
 
@@ -191,24 +191,37 @@ public class LWEDatabase extends SQLiteOpenHelper
     // Attaches the accessory jFlash-CARD database
     // Returns true on success, false on failure (even if it failed because
     // the database is already attached)
-    public boolean attachDatabase()
+    public boolean attachDatabase(String toAttach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
         boolean tempBool = tempDao.isOpen();
 
-        // if the database is open AND we aren't already attached
-        if( tempBool && !isAttached )
+        // if the database is open
+        if( tempBool )
         {
-            String query = "ATTACH DATABASE \"" + DB_PATH + DB_CARD + "\" AS " + CARD_ATTACH_NAME;
-            String query2 = "ATTACH DATABASE \"" + DB_PATH + DB_FTS + "\" AS " + FTS_ATTACH_NAME;
+            String query = null;
             
-            // the cursor is empty, but try and access it anyway
-            // to make sure the query was successful
+            if( toAttach == DB_CARD )
+            {
+                query = "ATTACH DATABASE \"" + DB_PATH + DB_CARD + "\" AS " + CARD_ATTACH_NAME;
+            }
+            else if( toAttach == DB_FTS )
+            {
+                query = "ATTACH DATABASE \"" + DB_PATH + DB_FTS + "\" AS " + FTS_ATTACH_NAME;
+            }
+            else if( toAttach == DB_EX )
+            {
+                query = "ATTACH DATABASE \"" + DB_PATH + DB_EX + "\" AS " + EX_ATTACH_NAME;
+            }
+            else
+            {
+                Log.d(MYTAG,"ERROR!  Attempted to attach non-existant DB:  " + toAttach);
+            }
+            
+            // do the actual attach
             try
             {
                 tempDao.execSQL(query);
-                tempDao.execSQL(query2);
-                isAttached = true;
 
                 return true;
             } 
@@ -216,27 +229,18 @@ public class LWEDatabase extends SQLiteOpenHelper
             {
                 Log.d(MYTAG,"ERROR in attachDatabase()");
                 Log.d(MYTAG,"      exception:  " + t.toString() );  
-                
-                // isAttached unchanged
+                Log.d(MYTAG,".");
+
                 return false;
             }
         }
         else
         {
             Log.d(MYTAG,"ERROR - attempt to call attachDatabase()");
-
-            if( isAttached )
-            {
-                // return true becaues we're up, attached, and running
-                Log.d(MYTAG,"      - when database is already attached");
-                return true;
-            }
-            else
-            {
-                Log.d(MYTAG,"      - when database is closed");
-                return false;
-            }
-        
+            Log.d(MYTAG,"      - when database is closed");
+            Log.d(MYTAG,".");
+            
+            return false;
         }
 
     }  // end attachDatabase() declaration
@@ -244,24 +248,37 @@ public class LWEDatabase extends SQLiteOpenHelper
 
     // detaches the accessory jFlash-CARD database
     // return true on success, false on failure
-    public boolean detachDatabase()
+    public boolean detachDatabase(String toDetach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
         boolean tempBool = tempDao.isOpen();
 
-        // if the database is open AND we're already attached
-        if( tempBool && isAttached )
+        // if the database is open 
+        if( tempBool )
         {
-            String query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
-            String query2 = "DETACH DATABASE \"" + FTS_ATTACH_NAME + "\"";
+            String query = null;
+            
+            if( toDetach == DB_CARD )
+            {
+                query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
+            }
+            else if( toDetach == DB_FTS )
+            {
+                query = "DETACH DATABASE \"" + FTS_ATTACH_NAME + "\"";
+            }
+            else if( toDetach == DB_EX )
+            {
+                query = "DETACH DATABASE \"" + EX_ATTACH_NAME + "\"";
+            }
+            else
+            {
+                Log.d(MYTAG,"ERROR!  Attempted to detach non-existant DB:  " + toDetach);
+            }
 
-            // the cursor is empty, but try and access it anyway
-            // to make sure the query was successful
+            // do the actual detach
             try
             {
                 tempDao.execSQL(query);
-                tempDao.execSQL(query2);
-                isAttached = false;
 
                 return true;
             } 
@@ -270,7 +287,6 @@ public class LWEDatabase extends SQLiteOpenHelper
                 Log.d(MYTAG,"ERROR in detachDatabase()");
                 Log.d(MYTAG,"Exception:  " + t.toString() );    
                 
-                // isAttached is unmodified 
                 return false;
             }
                 
@@ -278,19 +294,30 @@ public class LWEDatabase extends SQLiteOpenHelper
         else
         {
             Log.d(MYTAG,"ERROR - attempt to call detachDatabase()");
-            if( !isAttached )
-            {
-                Log.d(MYTAG,"ERROR - when database is not attached");
-            }
-            if( !tempBool )
-            {
-                Log.d(MYTAG,"ERROR - when database is closed");
-            }
+            Log.d(MYTAG,"      - when database is closed");
         
             return false;
         }
 
     }  // end detachDatabase() declaration
+
+    
+    // detach all attached databases
+    public void detachAll()
+    {
+        String query = "DETACH DATABASE \"" + CARD_ATTACH_NAME + "\"";
+
+        try
+        {
+                this.getWritableDatabase().execSQL(query);
+        } 
+        catch (Throwable t)
+        {
+            Log.d(MYTAG,"ERROR in detachAll()");
+            Log.d(MYTAG,"Exception:  " + t.toString() );    
+        }
+
+    }  // end detachAll()
 
 
     // Checks for the existence of a table name in the sqlite_master table
@@ -336,8 +363,8 @@ public class LWEDatabase extends SQLiteOpenHelper
         }  // end if( dao.isOpen() )
         else
         {
-            Log.d(MYTAG,"ERROR: tableExists()");
-            Log.d(MYTAG,"ERROR: database is not open");
+            Log.d(MYTAG,"ERROR: - tableExists()");
+            Log.d(MYTAG,"       - database is not open");
 
             return false;
         }
@@ -384,7 +411,7 @@ public class LWEDatabase extends SQLiteOpenHelper
             try
             {
                 // go through twice, once for each database
-                for(int dbCycle = 0; dbCycle < 3; dbCycle++)
+                for(int dbCycle = 0; dbCycle < 4; dbCycle++)
                 {
                     // pick the right filename to open
                     // fire Intent for UI update
@@ -406,12 +433,19 @@ public class LWEDatabase extends SQLiteOpenHelper
                         myInput = myContext.getAssets().open(DB_CARD);
                         outFileName = DB_PATH + DB_CARD;
                     }
-                    else
+                    else if( dbCycle == 2 )
                     {
                         myIntent = new Intent(COPY_START3);
                         myContext.sendBroadcast(myIntent);
                         myInput = myContext.getAssets().open(DB_FTS);
                         outFileName = DB_PATH + DB_FTS;
+                    }
+                    else
+                    {
+                        myIntent = new Intent(COPY_START4);
+                        myContext.sendBroadcast(myIntent);
+                        myInput = myContext.getAssets().open(DB_EX);
+                        outFileName = DB_PATH + DB_EX;
                     }
 
                     // open the empty db as the output stream

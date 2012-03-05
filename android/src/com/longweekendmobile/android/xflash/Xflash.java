@@ -16,6 +16,7 @@ package com.longweekendmobile.android.xflash;
 //  public void PracticeFragment_practiceClick(View  )
 //  public void PracticeFragment_browseClick(View  )
 //  public void PracticeFragment_goRight(View  )
+//  public void PracticeFragment_toggleReading(View  )
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
@@ -79,9 +80,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     private static Xflash myContext;
  
     // properties for our fragment tab management
-    private TabHost myTabHost;
+    private static TabHost myTabHost;
     private static HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
     private TabInfo currentTab = null;
+    private static String currentTabName = null;
 
     private static boolean exitOnce;   
     private static long exitCount;
@@ -111,6 +113,28 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
        
     }  // end onCreate
 
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        XFApplication.getDao().detachAll();
+    }
+
+    @Override
+    public boolean onSearchRequested()
+    {
+        // only call search functionality if we are in the root view of the 'Study Sets' tab
+        if( ( currentTab.tag == "tag" ) && ( XflashScreen.getCurrentTagScreen() == 0 ) ) 
+        {
+            TagFragment.searchPressed(); 
+        } 
+        
+        // return false so Android does not attempt to launch the
+        // default search dialog
+        return false;
+    }
 
     // see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
     @Override
@@ -187,7 +211,19 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         PracticeFragment.goRight(this);
     }
+    public void PracticeFragment_toggleReading(View v)
+    {
+        PracticeFragment.toggleReading();
+    }
 
+    public void ExampleSentenceFragment_addCard(View v)
+    {
+        ExampleSentenceFragment.addCard(v,this);
+    }
+    public void ExampleSentenceFragment_toggleRead(View v)
+    {
+        ExampleSentenceFragment.toggleRead(v);
+    }
     public void ExampleSentenceFragment_exampleClick(View v)
     {
         ExampleSentenceFragment.exampleClick(v,this);
@@ -342,7 +378,12 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
     }
     
-    
+   
+    public static TabHost getTabHost()
+    {
+        return myTabHost;
+    }
+
     // initalize our tab host, which is  Xflash.myTabhost  , a top level class property
     private void initializeTabHost(Bundle args)
     {
@@ -360,28 +401,28 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // add the new fragment's TabInfo object to our HashMap used for tab navigation 
 
         // add the Practice tab
-        spec = this.myTabHost.newTabSpec("practice").setIndicator("Practice", res.getDrawable(R.drawable.practice_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
+        spec = myTabHost.newTabSpec("practice").setIndicator("Practice", res.getDrawable(R.drawable.practice_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("practice", PracticeFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
  
         // add the Study Sets tab
-        spec = this.myTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
+        spec = myTabHost.newTabSpec("tag").setIndicator("Study Sets", res.getDrawable(R.drawable.tags_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("tag", TagFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("search").setIndicator("Search", res.getDrawable(R.drawable.search_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
+        spec = myTabHost.newTabSpec("search").setIndicator("Search", res.getDrawable(R.drawable.search_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("search", SearchFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("settings").setIndicator("Settings", res.getDrawable(R.drawable.settings_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
+        spec = myTabHost.newTabSpec("settings").setIndicator("Settings", res.getDrawable(R.drawable.settings_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("settings", SettingsFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
         // add the Search tab
-        spec = this.myTabHost.newTabSpec("help").setIndicator("Help", res.getDrawable(R.drawable.help_flip));
-        Xflash.addTab(this, this.myTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
+        spec = myTabHost.newTabSpec("help").setIndicator("Help", res.getDrawable(R.drawable.help_flip));
+        Xflash.addTab(this, myTabHost, spec, ( tabInfo = new TabInfo("help", HelpFragment.class, args)));
         Xflash.mapTabInfo.put(tabInfo.tag, tabInfo);
 
 
@@ -463,7 +504,18 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     // we only need to check for multiple screens here, where the tab
                     // is fully instantiated - as that means we've been here before and
                     // MAY have opened secondary screens 
-                    if( inTabTagname == "tag" )
+
+                    // if there IS a secondary screen, it is loaded into switchTab and
+                    // used.  If not, switchTab remains null and we default back 
+                    // to newTab
+                    if( inTabTagname == "practice" )
+                    {
+                        if( XflashScreen.getExampleSentenceOn() )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("example_sentence");
+                        }
+                    }
+                    else if( inTabTagname == "tag" )
                     {
                         // if we are in the card view of the tag tab
                         if( XflashScreen.getTagCardsOn() )
@@ -473,6 +525,13 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                         else if( XflashScreen.getAddCardToTagOn() )
                         {
                             switchTab = XflashScreen.getTransitionFragment("add_card");
+                        }
+                    }
+                    else if( inTabTagname == "search" )
+                    {
+                        if( XflashScreen.getCurrentSearchScreen() > 0 )
+                        {
+                            switchTab = XflashScreen.getTransitionFragment("search_add_card");
                         }
                     }
                     else if( inTabTagname == "settings" )
@@ -535,13 +594,21 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
 
             // set the current tab to the one we are switchng to right now
             currentTab = newTab;
-            
+            currentTabName = currentTab.tag;
+
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
         
         }  // end if( we clicked a tab we're NOT already on)
 
     }  // end onTabChanged()
+
+    
+    // return the name of the current tab
+    public static String getCurrentTabName()
+    {
+        return currentTabName;
+    }
 
     
     // fragment handling for loading extra screens inside a tab
@@ -559,7 +626,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }
 
         // detach extra screens, if we're transitioning back to a tab root
-        XflashScreen.detachSelectExtras(ft,inTag);
+        XflashScreen.detachExtras(ft);
         
         // pull the fragment TabInfo if we are switching to an extra screen
         TabInfo newTab = XflashScreen.getTransitionFragment(inTag);
