@@ -11,6 +11,15 @@
 
 @interface ChineseCard : Card
 
+typedef enum
+{
+  noToneState = 0,
+  toneIsOther = 1,
+  toneIsSecondAfterOther = 2,
+  toneIsThird = 3,
+  toneIsFourth = 4,
+} ToneStates;
+
 - (NSArray *) readingComponents;
 - (NSString *) pinyinReading;
 - (NSString *) sandhiReading;
