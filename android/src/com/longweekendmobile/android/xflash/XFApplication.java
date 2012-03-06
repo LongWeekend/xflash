@@ -12,9 +12,11 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void onCreate()      @over
 //
+//  public static XFApplication getInstance()
 //  public static LWEDatabase getDao()
 //  public static SQLiteDatabase getReadableDao()
 //  public static SQLiteDatabase getWritableDao()
+//  public static XflashNotification getNotifier()
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;

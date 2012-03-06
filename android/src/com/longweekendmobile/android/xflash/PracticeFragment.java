@@ -36,10 +36,8 @@ import android.widget.TextView;
 
 import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
-import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
-import com.longweekendmobile.android.xflash.model.Tag;
-import com.longweekendmobile.android.xflash.model.TagPeer;
+import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
 public class PracticeFragment extends Fragment
 {

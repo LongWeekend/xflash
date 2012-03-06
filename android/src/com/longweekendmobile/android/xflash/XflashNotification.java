@@ -6,6 +6,21 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/3/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
+//  public XflashNotification()
+//
+//  public void addNewTagObserver(Observer  )
+//  public void newTagBroadcast(Tag  )
+//  public void setCardIdPassed(int  )
+//  public int getCardIdPassed()
+//  public void setTagIdPassed(int  )
+//  public int getTagIdPassed()
+//  public void addSubscriptionObserver(Observer  )
+//  public void subscriptionBroadcast(Card  )
+//
+//  public class SubscriptionNotifier extends Observable
+//
+//      public SubscriptionNotifier()
+//      public void broadcastNotification(Card )
 
 import java.util.Observable;
 import java.util.Observer;

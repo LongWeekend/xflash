@@ -116,10 +116,17 @@ public class TagCardsFragment extends Fragment
         incomingTagId = inId;
     }
 
+    // the 'start studying' header of our ListView now directly calls 
+    // TagFragment_startStudying() from Xflash, which calls
+    // TagFragment.startStudying(View  ,Xflash  ) because it has the
+    // exact same functionality.  Would it be better to have the xml
+    // call THIS startStudying() and then call TagFragment from here?
+
+/*
     public static void startStudying(View v,Xflash inContext)
     {
-        Log.d(MYTAG,">>> start studying clicked for Tag: " + (Integer)v.getTag() );
     }
+*/
 
     public static void addCard(View v,Xflash inContext)
     {

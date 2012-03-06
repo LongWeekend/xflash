@@ -7,8 +7,10 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  protected void onCreate(Bundle  )               @over
-//  protected void onSaveInstanceState(Bundle  )    @over
+//  public void destory(Bundle  )                   @over
+//  public boolean onSearchRequested()              @over
 //  public void onBackPressed()                     @over
+//  protected void onSaveInstanceState(Bundle  )    @over
 //
 //  *** METHODS CALLED BY FRAGMENTS ***
 //
@@ -17,6 +19,10 @@ package com.longweekendmobile.android.xflash;
 //  public void PracticeFragment_browseClick(View  )
 //  public void PracticeFragment_goRight(View  )
 //  public void PracticeFragment_toggleReading(View  )
+//
+//  public void ExampleSentenceFragment_addCard(View  )
+//  public void ExampleSentenceFragment_toggleRead(View  )
+//  public void ExampleSentenceFragment_exampleClick(View  )
 //
 //  public void TagFragment_addToplevelTag(View  )
 //  public void TagFragment_openGroup(View  )
@@ -27,6 +33,7 @@ package com.longweekendmobile.android.xflash;
 //  public void TagCardsFragment_addCard(View  )
 //
 //  public void SearchFragment_addCard(View  )
+//  public void SearchFragment_toggleStar(View  )
 //
 //  public void AddCardToTagFragment_toggleWord(View  )
 //  public void AddCardToTagFragment_addTag(View  )
@@ -40,7 +47,15 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_goUpdate(View  )
 //  public void SettingsFragment_launchSettingsWeb(View  )
 //
-//  public void UpdateFragment_check(View v)
+//  public void UserFragment_activateUser(View  )
+//  public void UserFragment_editUser(View  )
+//
+//  public void EditUserFragment_select(View  )
+//  public void EditUserFragment_save(View  )
+//
+//  public void UpdateFragment_check(View  )
+//
+//  public void SettingsWebFragment_reload(View  )
 //
 //  public void HelpFragment_goAskUs(View  )
 //  public static void HelpFragment_pullHelpTopic(int  )
@@ -55,6 +70,7 @@ package com.longweekendmobile.android.xflash;
 //  private void initializeTabHost(Bundle  )
 //  private static void addTab(Xflash  ,TabHost  ,TabHost.TabSpec  ,TabInfo  )
 //
+//  public static String getCurrentTabName()
 //  public void onTabChanged(String  )
 //  public void onScreenTransition(String  ,int  )
 
@@ -122,6 +138,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         XFApplication.getDao().detachAll();
     }
 
+    
     @Override
     public boolean onSearchRequested()
     {
@@ -136,16 +153,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         return false;
     }
 
-    // see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
-    @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
-        // save the currently open tab 
-        outState.putString("tab", myTabHost.getCurrentTabTag());
-        super.onSaveInstanceState(outState);
-    }
 
-    
     @Override
     public void onBackPressed()
     {
@@ -163,6 +171,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                 onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
             }
 
+        }
+        else if( ( currentTab.tag == "tag" ) && ( TagFragment.getSearchOn() ) )
+        {
+            // if the search dialog on TagFragment is open
+            TagFragment.TagSearch.hideSearch();
         }
         else 
         {
@@ -190,8 +203,19 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                 super.onBackPressed();
             }
         }
+
+    }  // end onBackPressed()
+
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        // save the currently open tab 
+        outState.putString("tab", myTabHost.getCurrentTabTag());
+        super.onSaveInstanceState(outState);
     }
 
+    
 
 // passthroughs for methods called by onClick declarations in Fragments
 
@@ -245,11 +269,18 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         TagFragment.startStudying(v,this);
     }
-
-    public void TagCardsFragment_startStudying(View v)
+    public void TagFragment_emptyClick(View v)
     {
-        TagCardsFragment.startStudying(v,this);
+        // capture clicks from the ScrollView when the search field is up
+        Log.d(MYTAG,">>> TagFragment_emptyClick()");
     }
+
+//  see comment in TagCardsFragment.java under TagCardsFragment.startStudying()
+//
+//  public void TagCardsFragment_startStudying(View v)
+//  {
+//      TagCardsFragment.startStudying(v,this);
+//  }
     public void TagCardsFragment_addCard(View v)
     {
         TagCardsFragment.addCard(v,this);
@@ -458,6 +489,13 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     }  // end addTab()
 
     
+    // return the name of the current tab
+    public static String getCurrentTabName()
+    {
+        return currentTabName;
+    }
+
+    
     // fragment handling for changing tabs to the appropriate display
     // called by the tab host whenever a click is registered on the tab widget
     public void onTabChanged(String inTabTagname)
@@ -602,13 +640,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         }  // end if( we clicked a tab we're NOT already on)
 
     }  // end onTabChanged()
-
-    
-    // return the name of the current tab
-    public static String getCurrentTabName()
-    {
-        return currentTabName;
-    }
 
     
     // fragment handling for loading extra screens inside a tab

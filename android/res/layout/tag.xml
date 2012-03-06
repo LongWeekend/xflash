@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/table_background" >
   
     <!-- TITLE BAR -->
     <RelativeLayout android:id="@+id/tag_heading"
-        style="@style/heading_bar">
+        style="@style/heading_bar"
+        android:layout_alignParentTop="true" >
 
         <!-- HEADING -->
         <TextView android:id="@+id/tag_heading_text"
@@ -24,12 +24,22 @@
             android:onClick="TagFragment_addToplevelTag"
             style="@style/heading_button" />
 
+        <!-- SEARCH BAR -->
+        <EditText android:id="@+id/tag_search_text"
+            style="@style/default_edittext"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:drawableRight="@drawable/search_edit_icon"
+            android:hint="@string/tag_search_hint" />
+
     </RelativeLayout>
 
-    <ScrollView style="@style/default_scroll_block">
+    <ScrollView android:id="@+id/tag_scroll"
+        style="@style/default_scroll_block"
+        android:layout_below="@id/tag_heading" >
 
         <!-- single child of scroll view -->
-        <LinearLayout 
+        <LinearLayout android:id="@+id/tag_singlechild"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -87,5 +97,32 @@
 
     </ScrollView>
 
-</LinearLayout>
+    <!-- the shade to draw when a search is open -->
+    <RelativeLayout android:id="@+id/tag_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tag_heading"
+        android:background="#77000000"
+        android:onClick="TagFragment_emptyClick"
+        android:visibility="gone">
+
+        <ScrollView android:id="@+id/tag_search_scroll"
+            style="@style/default_scroll_block"
+            android:visibility="gone" >
+
+            <!-- search tag list -->
+            <LinearLayout android:id="@+id/tag_search_list"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingRight="0dp" >
+            
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>  <!-- end shade -->
+
+</RelativeLayout>
 

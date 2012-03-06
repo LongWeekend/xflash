@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash.model;
 //
 //      *** ALL METHODS STATIC ***
 //
-//  public boolean isNewVersion()
 //  public ArrayList<ExampleSentence> retrieveSentencesWithSQL(String  ,boolean  )
 //  public ExampleSentence getExampleSentenceByPK(int  )
 //  public ArrayList<ExampleSentence> getExampleSentencesByCardId(int  )
@@ -26,35 +25,6 @@ import com.longweekendmobile.android.xflash.XFApplication;
 public class ExampleSentencePeer
 {
     private static final String MYTAG = "XFlash ExampleSentencePeer";
-
-    // TODO - really I have no idea what to do with this at this point
-    public static boolean isNewVersion()
-    {
-
-/*
-+ (BOOL) isNewVersion
-{
-#if defined (LWE_JFLASH)
-  // Get plugin version
-  BOOL isNewVersion = NO;
-  // MMA TODO: 12/11/2011 -- this is a total hack, but it's no better than the [CurrentState..] static code
-  // that was here before.  Point is, we need a way to just stop all this plugin versioning ridiculousness altogether.
-  jFlashAppDelegate *appDelegate = (jFlashAppDelegate*)[[UIApplication sharedApplication] delegate];
-  if ([[appDelegate.pluginManager versionForLoadedPlugin:EXAMPLE_DB_KEY] isEqualToString:@"1.2"])
-  {
-    isNewVersion = YES;
-  }
-  return isNewVersion;
-#else
-  return YES;
-#endif
-}
-*/
-        // TODO - I *think* that this should always return true, or is completely
-        //        unnecessary, given that I'm only working with the 1.2 EX database?
-        return true;
-
-    }  // end isNewVersion()
 
     // returns an ArrayList of ExampleSentence objects based on input 'sql'
     // if willHydrate == true, the hydrate(Cursor  ) method will be called
@@ -129,14 +99,7 @@ public class ExampleSentencePeer
     {
         String query;
 
-        if( isNewVersion() )
-        {
-            query = "SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = " + inId + " AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10";
-        }
-        else
-        {
-            query = "SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = " + inId + " AND s.sentence_id = l.sentence_id LIMIT 10";
-        }
+        query = "SELECT s.* FROM sentences s, card_sentence_link l WHERE l.card_id = " + inId + " AND s.sentence_id = l.sentence_id AND l.should_show = 1 LIMIT 10";
 
         return retrieveSentencesWithSQL(query,true);
 
@@ -153,18 +116,10 @@ public class ExampleSentencePeer
         String query;
         
 
-        if( isNewVersion() )
-        {
-            // TODO - for reasons not fully understood, this ALWYAS returns 0 rows when
-            //        used with selectionArgs rather than manually inserting inId
-            // query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
-            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = " + inId + " AND should_show = '1' LIMIT 1";
-        }
-        else
-        {
-            // Version 1.1 example sentences DB
-            query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? LIMIT 1";
-        }
+        // TODO - for reasons not fully understood, this ALWYAS returns 0 rows when
+        //        used with selectionArgs rather than manually inserting inId
+        // query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = ? AND should_show = '1' LIMIT 1";
+        query = "SELECT sentence_id FROM card_sentence_link WHERE card_id = " + inId + " AND should_show = '1' LIMIT 1";
 
         try
         {

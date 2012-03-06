@@ -12,6 +12,8 @@ package com.longweekendmobile.android.xflash;
 //  public static void exampleClick(View  ,Xflash  )
 //  public static void addCard(View  ,Xflash  )
 //  public static void toggleRead(View  )
+//
+//  private static void loadExampleSentenceBlock(Button  ,int  ,LinearLayout  )
 
 import java.util.ArrayList;
 
@@ -175,53 +177,58 @@ public class ExampleSentenceFragment extends Fragment
         }
         else
         {
-            FrameLayout tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
-            cardBlock.addView(tempDivider);
-            
-            // load our cards
-            XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
-            ArrayList<Card> tempCardArray = CardPeer.retrieveCardSetForExampleSentenceId(tempSentenceId);
-            XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
-            
-            int numCards = tempCardArray.size();
-            for(int i = 0; i < numCards; i++)
-            {
-                JapaneseCard tempCard = (JapaneseCard)tempCardArray.get(i);
-
-                // inflate a new word/card row
-                RelativeLayout tempWordRow = (RelativeLayout)myInflater.inflate(R.layout.es_card_row,null);
-
-                // headword
-                TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
-                tempView.setText( tempCard.headwordIgnoringMode(true) );
-
-                // reading
-                tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
-                tempView.setText( tempCard.reading() );
-
-                // tag the button for addCard() with the card id
-                Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);
-                tempAddButton.setTag( tempCard.getCardId() );
-
-                // add the word/card row
-                cardBlock.addView(tempWordRow); 
-                
-                // add a divider at the end
-                tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
-                cardBlock.addView(tempDivider);
-            }
-
-            // add the bottom margin layout
-            tempDivider = (FrameLayout)myInflater.inflate(R.layout.es_word_margin,null);
-            cardBlock.addView(tempDivider);
-            
-            // change the button and show the cards
-            tempReadButton.setText("Close");
-            cardBlock.setVisibility(View.VISIBLE);
-
-        }  // end else clause for if( cardBlock.isVisible() )
+            loadExampleSentenceBlock(tempReadButton,tempSentenceId,cardBlock);
+        } 
 
     }  // end toggleRead()
+
+    private static void loadExampleSentenceBlock(Button tempReadButton,int tempSentenceId,LinearLayout cardBlock)
+    {
+        FrameLayout tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
+        cardBlock.addView(tempDivider);
+            
+        // load our cards
+        XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
+        ArrayList<Card> tempCardArray = CardPeer.retrieveCardSetForExampleSentenceId(tempSentenceId);
+        XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+            
+        int numCards = tempCardArray.size();
+        for(int i = 0; i < numCards; i++)
+        {
+            JapaneseCard tempCard = (JapaneseCard)tempCardArray.get(i);
+
+            // inflate a new word/card row
+            RelativeLayout tempWordRow = (RelativeLayout)myInflater.inflate(R.layout.es_card_row,null);
+
+            // headword
+            TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
+            tempView.setText( tempCard.headwordIgnoringMode(true) );
+
+            // reading
+            tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
+            tempView.setText( tempCard.reading() );
+
+            // tag the button for addCard() with the card id
+            Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);
+            tempAddButton.setTag( tempCard.getCardId() );
+
+            // add the word/card row
+            cardBlock.addView(tempWordRow); 
+                
+            // add a divider at the end
+            tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
+            cardBlock.addView(tempDivider);
+        }
+
+        // add the bottom margin layout
+        tempDivider = (FrameLayout)myInflater.inflate(R.layout.es_word_margin,null);
+        cardBlock.addView(tempDivider);
+            
+        // change the button and show the cards
+        tempReadButton.setText("Close");
+        cardBlock.setVisibility(View.VISIBLE);
+
+    }  // end loadExampleSentenceBlock()
 
 
 }  // end ExampleSentenceFragment class declaration

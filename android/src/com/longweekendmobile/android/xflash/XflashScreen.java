@@ -22,19 +22,19 @@ package com.longweekendmobile.android.xflash;
 //      *** ALL METHODS STATIC ***
 //
 //  public void fireUpScreenManager()
-//  public static void popBackPractice()
-//  public static void setPracticeOverride()
-//  public static void clearPracticeScreens()
+//  public void popBackPractice()
+//  public void setPracticeOverride()
+//  public void clearPracticeScreens()
 //  public void setScreenValues(String  )
 //  public TabInfo getTransitionFragment(String  )
-//  public static void addTagStack()
-//  public static void popTagStack()
+//  public void addTagStack()
+//  public void popTagStack()
 //  public void detachExtras(FragmentTransaction  )
 //  public String goBack(String  )
 //
 //  public int getCurrentSettingsScreen()
-//  public static void setCurrentSettingsType(int  )
-//  public static int getCurrentSettingsType()
+//  public void setCurrentSettingsType(int  )
+//  public int getCurrentSettingsType()
 //  public int getCurrentHelpScreen()
 
 import java.util.ArrayList;

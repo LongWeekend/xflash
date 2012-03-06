@@ -5,6 +5,17 @@ package com.longweekendmobile.android.xflash;
 //
 //  Created by Todd Presson on 2/4/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
+//
+//  public void onCreate(Bundle  )          @over
+//
+//  private void goSplash2()
+//  private void wrapUp()
+//  private void splashError(boolean  )
+//  private void turnOnReceiver()
+//
+//  protected class SplashReceiver extends BroadcastReceiver
+//
+//      public void onReceive(Context  ,Intent  )
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -110,7 +121,7 @@ public class XflashSplash extends Activity
 
 
     // change splash screens, check the database
-    public void goSplash2()
+    private void goSplash2()
     {
         // reset splash background to splash2 (Xflash label)
         RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.splashback);
@@ -128,7 +139,7 @@ public class XflashSplash extends Activity
 
    
     // clean up splash and exit to Xflash
-    public void wrapUp()
+    private void wrapUp()
     {
         // start a thread to pause the first screen for [splashtime] milliseconds
         Thread splashThread2 = new Thread()
@@ -169,7 +180,7 @@ public class XflashSplash extends Activity
 
 
     // handles informing user of a fatal error relating to database initialization
-    public void splashError(boolean inError)
+    private void splashError(boolean inError)
     {
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
@@ -203,7 +214,7 @@ public class XflashSplash extends Activity
 
  
     // turn on our BroadcastReceiver
-    public void turnOnReceiver()
+    private void turnOnReceiver()
     {
         IntentFilter intentFilter;
         myReceiver = new SplashReceiver();

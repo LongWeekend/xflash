@@ -194,10 +194,10 @@ public class LWEDatabase extends SQLiteOpenHelper
     public boolean attachDatabase(String toAttach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
-        boolean tempBool = tempDao.isOpen();
+        boolean databaseIsOpen = tempDao.isOpen();
 
         // if the database is open
-        if( tempBool )
+        if( databaseIsOpen )
         {
             String query = null;
             
@@ -251,10 +251,10 @@ public class LWEDatabase extends SQLiteOpenHelper
     public boolean detachDatabase(String toDetach)
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
-        boolean tempBool = tempDao.isOpen();
+        boolean databaseIsOpen = tempDao.isOpen();
 
         // if the database is open 
-        if( tempBool )
+        if( databaseIsOpen )
         {
             String query = null;
             
@@ -325,9 +325,9 @@ public class LWEDatabase extends SQLiteOpenHelper
     public boolean tableExists(String tableName) throws Exception
     {
         SQLiteDatabase tempDao = this.getWritableDatabase();
-        boolean tempBool = tempDao.isOpen();
+        boolean databaseIsOpen = tempDao.isOpen();
 
-        if( tempBool )
+        if( databaseIsOpen )
         {
             int i = 0;
             String[] selectionArgs = new String[] { tableName };

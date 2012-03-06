@@ -23,6 +23,8 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/search_cancelbutton"
             android:layout_marginRight="8dp"
+            android:drawableRight="@drawable/search_edit_icon"
+            android:hint="@string/search_hint"
             android:imeOptions="actionDone" />
 
     </RelativeLayout>

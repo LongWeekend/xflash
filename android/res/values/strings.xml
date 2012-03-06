@@ -19,6 +19,7 @@
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
+    <string name="tag_search_hint">Search Sets by Name</string>
     <string name="emptyset_dialog_title">No Words In Set</string>
     <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
     <string name="startstudying_dialog_message">Do you want to start this set?\nProgress on your last set will be saved.</string>
@@ -29,6 +30,8 @@
     <string name="addcard_othersets">Other Sets with this Card</string>
     <string name="create_tag_title">Create Study Set</string>
     <string name="createtag_edit_caption">Name your new study set!</string>
+    <string name="create_tag_hint">e.g. Words I Heard on TV</string>
+    <string name="search_hint">Enter search keyword</string>
     <string name="settings_title">Settings</string>
     <string name="settings_study_block_title">Studying</string>
     <string name="settings_studyblock_studymode">Study Mode</string>

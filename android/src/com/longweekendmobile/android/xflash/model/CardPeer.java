@@ -363,16 +363,9 @@ public class CardPeer
         String[] selectionArgs = new String[] { Integer.toString(inId) };
         ArrayList<Card> tempList = new ArrayList<Card>();
 
-        if( ExampleSentencePeer.isNewVersion() )
-        {
-            // had to add 'meaning' to the query, else the program throws an
-            // exception on Card.hydrate()
-            query = "SELECT c.*, meaning FROM card_sentence_link l, cards c, cards_html WHERE l.card_id = c.card_id AND sentence_id = ? AND l.should_show = '1' AND cards_html.card_id = c.card_id";
-        }
-        else
-        {
-            query = "SELECT c.* FROM card_sentence_link l, cards c WHERE l.card_id = c.card_id AND sentence_id = ?";
-        }
+        // had to add 'meaning' to the query, else the program throws an
+        // exception on Card.hydrate()
+        query = "SELECT c.*, meaning FROM card_sentence_link l, cards c, cards_html WHERE l.card_id = c.card_id AND sentence_id = ? AND l.should_show = '1' AND cards_html.card_id = c.card_id";
 
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
         int rowCount = myCursor.getCount();
