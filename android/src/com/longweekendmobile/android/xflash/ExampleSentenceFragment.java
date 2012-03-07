@@ -8,7 +8,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void loadCard(JapaneseCard  )
+//  public static void loadCard(JapaneseCard  ,int[]  )
+//  public static void refreshCountBar();
 //  public static void exampleClick(View  ,Xflash  )
 //  public static void addCard(View  ,Xflash  )
 //  public static void toggleRead(View  )
@@ -48,6 +49,9 @@ public class ExampleSentenceFragment extends Fragment
     private static ArrayList<ExampleSentence> esList = null;
     private static boolean needLoad = false;
     
+    private static int practiceCardCounts[] = { 0,0,0,0,5 };
+    
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -60,6 +64,9 @@ public class ExampleSentenceFragment extends Fragment
         // load the title bar elements and pass them to the color manager
         RelativeLayout exampleBack = (RelativeLayout)ESlayout.findViewById(R.id.example_mainlayout);
         XflashSettings.setupPracticeBack(exampleBack);
+        
+        // load and set the count bar values
+        refreshCountBar();
         
         // set the reading
         TextView tempView = (TextView)ESlayout.findViewById(R.id.es_readingtext);
@@ -117,13 +124,38 @@ public class ExampleSentenceFragment extends Fragment
     }  // end onCreateView()
 
 
-    public static void loadCard(JapaneseCard inCard)
+    public static void refreshCountBar()
+    {
+        TextView cardCountViews[] = { null, null, null, null, null };
+
+        cardCountViews[0] = (TextView)ESlayout.findViewById(R.id.es_study_num);
+        cardCountViews[1] = (TextView)ESlayout.findViewById(R.id.es_right1_num);
+        cardCountViews[2] = (TextView)ESlayout.findViewById(R.id.es_right2_num);
+        cardCountViews[3] = (TextView)ESlayout.findViewById(R.id.es_right3_num);
+        cardCountViews[4] = (TextView)ESlayout.findViewById(R.id.es_learned_num);
+
+        for(int i = 0; i < 5; i++)
+        {
+            cardCountViews[i].setText( Integer.toString( practiceCardCounts[i] ) );
+        }
+
+    }  // end refreshCountBar()
+
+    
+    // called by PracticeFragment to set new values
+    public static void loadCard(JapaneseCard inCard,int[] inCounts)
     {
         // don't do anything if it's the card we've already loaded
         if( ( currentCard == null ) || ( !currentCard.isEqual(inCard) ) )
         {
             currentCard = inCard;
             needLoad = true;
+            
+            // refresh the local card counts
+            for(int i = 0; i < 5; i++)
+            {
+                practiceCardCounts[i] = inCounts[i];
+            }
         }
 
     }  // end loadCard()

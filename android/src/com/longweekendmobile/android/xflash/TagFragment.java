@@ -7,7 +7,7 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
-//  public void onResume()                                              @over
+//  public void onPause()                                              @over
 //
 //  public static void addToplevelTag(Context  )
 //  public static void openGroup(View  ,Xflash  )
@@ -94,7 +94,7 @@ public class TagFragment extends Fragment
     // for final display of tag list
     private static ArrayList<Tag> shuffleArray = null;
  
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
                              Bundle savedInstanceState) 

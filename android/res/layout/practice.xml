@@ -25,8 +25,7 @@
             <TextView style="@style/count_label"
                 android:text="Studying" />
             <TextView android:id="@+id/study_num"
-                style="@style/count_num"
-                android:text="0" />
+                style="@style/count_num" />
         </LinearLayout> 
         <LinearLayout
             android:orientation="vertical"
@@ -38,8 +37,7 @@
             <TextView style="@style/count_label"
                 android:text="Right 1x" />
             <TextView android:id="@+id/right1_num"
-                style="@style/count_num"
-                android:text="0" />
+                style="@style/count_num" />
         </LinearLayout> 
         <LinearLayout
             android:orientation="vertical"
@@ -51,8 +49,7 @@
             <TextView style="@style/count_label"
                 android:text="Right 2x" />
             <TextView android:id="@+id/right2_num"
-                style="@style/count_num"
-                android:text="0" />
+                style="@style/count_num" />
         </LinearLayout> 
         <LinearLayout
             android:orientation="vertical"
@@ -64,8 +61,7 @@
             <TextView style="@style/count_label"
                 android:text="Right 3x" />
             <TextView android:id="@+id/right3_num"
-                style="@style/count_num"
-                android:text="0" />
+                style="@style/count_num" />
         </LinearLayout> 
         <LinearLayout
             android:orientation="vertical"
@@ -77,8 +73,7 @@
             <TextView style="@style/count_label"
                 android:text="Learned" />
             <TextView android:id="@+id/learned_num"
-                style="@style/count_num"
-                android:text="0" />
+                style="@style/count_num" />
         </LinearLayout> 
 
     </LinearLayout>
@@ -224,13 +219,11 @@
         android:padding="2dp" >
 
         <TextView android:id="@+id/practice_tag_name"
-            android:text="This is Temporary text as a place holder"
             android:singleLine="true"
             android:gravity="center"
             android:layout_weight="1"
             style="@style/practice_info" />
         <TextView android:id="@+id/practice_tag_count"
-            android:text="110/110"
             android:gravity="center"
             android:layout_weight="1"
             style="@style/practice_info" />
