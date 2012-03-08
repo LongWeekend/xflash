@@ -71,17 +71,17 @@ public class Tag
     // private static final int kLWETagUnknownError = 998;
     private static final int kLWEUninitializedTagId = -1;
     private static final int kLWEUninitializedCardCount = -1;
-    private static final int kLWEUnseenCardLevel = 0;
-    // private static final int kLWELearnedCardLevel = 5;
+    public static final int kLWEUnseenCardLevel = 0;
+    public static final int kLWELearnedCardLevel = 5;
     public static final int STARRED_TAG_ID = 0;
 
     private int tagId;
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
-    ArrayList<ArrayList<Integer>> cardIds;          
-    ArrayList<Integer> cardLevelCounts;
-    ArrayList<Integer> flattenedCardIdArray;
+    private ArrayList<ArrayList<Integer>> cardIds;          
+    private ArrayList<Integer> flattenedCardIdArray;
+    public ArrayList<Integer> cardLevelCounts;
     
     private String tagName;
     private String tagDescription;

@@ -79,49 +79,6 @@
     </LinearLayout>
     <!-- end top bar layout -->
 
-    <!-- the 'show reading' button -->
-    <ImageButton android:id="@+id/practice_showreadingbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/count_bar"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/practice_btn_showreading"
-        android:padding="6dp"
-        android:onClick="PracticeFragment_toggleReading" />
-  
-    <!-- the reading view shown -->
-    <TextView android:id="@+id/practice_readingtext"
-        style="@style/practice_reading_layout"
-        android:layout_below="@id/count_bar"
-        android:layout_marginTop="20dp"
-        android:padding="6dp"
-        android:clickable="true"
-        android:onClick="PracticeFragment_toggleReading" />
-
-  
-    <!-- the golden headword -->
-    <TextView android:id="@+id/practice_headword"
-        style="@style/practice_headword_layout"
-        android:layout_below="@id/count_bar"
-        android:layout_marginTop="64dp" />
-
-
-    <!-- the mini 'tap for answer' view in the middle of the field -->
-    <ImageView android:id="@+id/practice_minianswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/count_bar"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/practice_btn_unrevealed_mini" />
-
-    <!-- the answer to be revealed on tap -->
-    <TextView android:id="@+id/practice_answertext"
-        style="@style/practice_answer_layout"
-        android:layout_below="@id/count_bar"
-        android:layout_marginTop="150dp" />
-
     <!-- the answer button -->
     <RelativeLayout android:id="@+id/practice_answerbutton_frame"
         android:orientation="vertical"
@@ -229,6 +186,66 @@
             style="@style/practice_info" />
     </LinearLayout>
 
+    <!-- scroll view to house main content -->
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/count_bar"
+        android:layout_above="@id/practice_info_layout" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- the 'show reading' button -->
+            <ImageButton android:id="@+id/practice_showreadingbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/practice_btn_showreading"
+                android:padding="6dp"
+                android:onClick="PracticeFragment_toggleReading" />
+  
+            <!-- the reading view shown -->
+            <TextView android:id="@+id/practice_readingtext"
+                style="@style/practice_reading_layout"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:padding="6dp"
+                android:clickable="true"
+                android:onClick="PracticeFragment_toggleReading" />
+
+            <!-- the golden headword -->
+            <TextView android:id="@+id/practice_headword"
+                style="@style/practice_headword_layout"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="64dp" />
+    
+            <!-- the mini 'tap for answer' view in the middle of the field -->
+            <ImageView android:id="@+id/practice_minianswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="150dp"
+                android:background="@drawable/practice_btn_unrevealed_mini" />
+
+            <WebView android:id="@+id/practice_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="150dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+        </RelativeLayout>  <!-- end single child of ScrollView -->
+
+    </ScrollView>
+
+    
+    
     <!-- the right arrow button above the info -->
     <ImageButton android:id="@+id/practice_rightbutton"
         android:layout_width="wrap_content"
@@ -265,7 +282,6 @@
         android:layout_toLeftOf="@id/practice_hothead"
         android:layout_above="@id/practice_answerbutton_frame"
         android:layout_marginBottom="50dp" />
-
 
 </RelativeLayout>
 

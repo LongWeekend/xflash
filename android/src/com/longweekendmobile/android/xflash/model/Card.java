@@ -140,11 +140,13 @@ public class Card
     { 
         if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
         {    
-            return headword;
+            Log.d(MYTAG,"getMeaning returning meaning: " + meaning);
+            return meaning;
         }
         else 
         { 
-            return meaning;
+            Log.d(MYTAG,"getMeaning returning headword: " + headword);
+            return headword;
         }
         
     }  // end getMeaning()
@@ -194,7 +196,9 @@ public class Card
         SQLiteDatabase tempDB = XFApplication.getReadableDao();
   
         if( cardId == kLWEUninitializedCardId )
+        {
             Log.d(MYTAG,"ERROR - hydrate() called on uninitialzied card");
+        }
 
         // pull all data for current Card by Id
         // this query pulls the following columns:

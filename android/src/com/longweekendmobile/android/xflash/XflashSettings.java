@@ -11,6 +11,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void load()
 //  public static int getColorScheme()
 //  public static String getColorSchemeName()
+//  public static String getThemeCSS()
 //  public static void setColorScheme(int  )
 //  public static void setupPracticeBack(RelativeLayout  )
 //  public static void setupColorScheme(RelativeLayout  )
@@ -32,8 +33,10 @@ package com.longweekendmobile.android.xflash;
 //  public static void setReadingMode(int  )
 //  public static int getDifficultyMode()
 //  public static void setDifficultyMode(int  )
+//  public static int getStudyPool()
 //  public static int getCustomStudyPool()
 //  public static void setCustomStudyPool(int  )
+//  public static int getFrequency()
 //  public static int getCustomFrequency()
 //  public static void setCustomFrequency(int  )
 //
@@ -153,6 +156,20 @@ public class XflashSettings
     }  // end getColorSchemeName()
    
 
+    //  public static String getThemeCSS()
+    public static String getThemeCSS()
+    {
+        switch(colorScheme)
+        {
+            case LWE_THEME_RED:     return "dfn, button { background-color:orange; border-color:yellow; }";
+            case LWE_THEME_BLUE:    return "dfn { background-color:lightsteelblue; border-color:white; }";
+            case LWE_THEME_TAME:    return "dfn { background-color:silver; border-color:darkslategray; }";
+            default:                return "Error";
+        }
+    
+    }  // end getThemeCSS()
+    
+    
     // sets the color scheme and saves for persistence
     public static void setColorScheme(int inColor)
     {
@@ -445,6 +462,25 @@ public class XflashSettings
     }  // end setDifficultyMode()
 
 
+    // return the study pool
+    public static int getStudyPool()
+    {
+        if( difficultyMode == LWE_DIFFICULTY_CUSTOM )
+        {
+            return customStudyPool;
+        }
+        
+        switch( difficultyMode )
+        {
+            case LWE_DIFFICULTY_EASY:      return LWE_STUDYPOOL_EASY;
+            case LWE_DIFFICULTY_MEDIUM:    return LWE_STUDYPOOL_MEDIUM;
+            case LWE_DIFFICULTY_HARD:      return LWE_STUDYPOOL_HARD;
+            default:                       return -1;  // error
+        }
+
+    }  // end getStudyPool()
+
+    
     public static int getCustomStudyPool()
     {
         return customStudyPool;
@@ -468,6 +504,26 @@ public class XflashSettings
         editor.putInt("customStudyPool",customStudyPool);
         editor.commit();
     }
+    
+    
+    // return the frequency modifier
+    public static int getFrequency()
+    {
+        if( difficultyMode == LWE_DIFFICULTY_CUSTOM )
+        {
+            return customFrequency;
+        }
+        
+        switch( difficultyMode )
+        {
+            case LWE_DIFFICULTY_EASY:      return 1;
+            case LWE_DIFFICULTY_MEDIUM:    return 2;
+            case LWE_DIFFICULTY_HARD:      return 3;
+            default:                       return -1;   // error
+        }
+
+    }  // end getFrequency()
+
     
     public static int getCustomFrequency()
     {

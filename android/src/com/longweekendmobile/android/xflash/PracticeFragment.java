@@ -18,6 +18,7 @@ package com.longweekendmobile.android.xflash;
 //  private static class PracticeScreen
 //
 //      public static void initialize()
+//      public static void refreshCountBar()
 //      public static void setupPracticeView(int  )
 //      public static void setAnswerBar(int  )
 //      public static void toggleReading()
@@ -27,6 +28,8 @@ package com.longweekendmobile.android.xflash;
 //      public static int calculateNextCardLevelForTag(Tag  )
 //      public static float calculateProbabilityOfUnseenWithcardsSeen()
 
+import java.util.Random;
+import java.lang.Math;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -81,7 +85,7 @@ public class PracticeFragment extends Fragment
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
         // TODO - debugging
-        currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(88020);
+        currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(82702);
         
         // set up view based on current study mode
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
@@ -186,7 +190,6 @@ public class PracticeFragment extends Fragment
         private static LinearLayout countBar = null;
         private static RelativeLayout browseFrame = null;
         private static RelativeLayout showFrame = null;
-        private static TextView answerTextView = null;
         private static TextView headwordView = null;
         private static TextView hhView = null;
         private static TextView showReadingText = null;
@@ -215,24 +218,10 @@ public class PracticeFragment extends Fragment
             showReadingText = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_readingtext);
             showReadingText.setText( currentCard.reading() );
 
-            // load the headword view
+            // load the headword view - variable based on study language in Card.java
             headwordView = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_headword);
             headwordView.setText( currentCard.getHeadword() );
             
-            // load the answer view
-            answerTextView = (TextView)practiceLayout.findViewById(R.id.practice_answertext);
-            
-            if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
-            {
-                // in Japanese, the answer is the meaning
-                answerTextView.setText( currentCard.meaningWithoutMarkup() );
-            }
-            else
-            {
-                // in English, the answer is our Japanese headword
-                answerTextView.setText( currentCard.headwordIgnoringMode(true) );
-            }
-
             // load the mini answer button
             miniAnswerImage = (ImageView)practiceLayout.findViewById(R.id.practice_minianswer);
             
@@ -288,43 +277,63 @@ public class PracticeFragment extends Fragment
             if( inViewMode == PRACTICE_VIEW_BLANK )
             {
                 // set up for blank view
-                answerTextView.setVisibility(View.GONE);
                 hhImage.setVisibility(View.VISIBLE);
                 hhBubble.setVisibility(View.VISIBLE);
                 hhView.setText( Integer.toString( PracticeFragment.percentageRight ) + "%" );
                 hhView.setVisibility(View.VISIBLE);
-                readingTextVisible = false;
                 rightArrow.setVisibility(View.GONE);
                 showReadingButton.setVisibility(View.VISIBLE);
-                showReadingText.setVisibility(View.GONE);
+                if( readingTextVisible )
+                {
+                    showReadingButton.setVisibility(View.GONE);
+                    showReadingText.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    showReadingText.setVisibility(View.GONE);
+                    showReadingButton.setVisibility(View.VISIBLE);
+                }
             }
             else if( inViewMode == PRACTICE_VIEW_BROWSE )
             {
                 // set up for browse view
-                answerTextView.setVisibility(View.VISIBLE);
-                countBar.setVisibility(View.GONE);
+                countBar.setVisibility(View.INVISIBLE);
                 hhImage.setVisibility(View.GONE);
                 hhBubble.setVisibility(View.GONE);
                 hhView.setVisibility(View.GONE);
                 miniAnswerImage.setVisibility(View.GONE);
-                readingTextVisible = false;
                 rightArrow.setVisibility(View.GONE);
                 showReadingButton.setVisibility(View.GONE);
-                showReadingText.setVisibility(View.VISIBLE);
+                if( readingTextVisible )
+                {
+                    showReadingButton.setVisibility(View.GONE);
+                    showReadingText.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    showReadingText.setVisibility(View.GONE);
+                    showReadingButton.setVisibility(View.VISIBLE);
+                }
             }   
             else 
             {
                 // set up for reveal
-                answerTextView.setVisibility(View.VISIBLE);
                 hhImage.setVisibility(View.VISIBLE);
                 hhBubble.setVisibility(View.VISIBLE);
                 hhView.setText( Integer.toString( PracticeFragment.percentageRight ) + "%" );
                 hhView.setVisibility(View.VISIBLE);
                 miniAnswerImage.setVisibility(View.GONE);
-                readingTextVisible = true;
-                showReadingButton.setVisibility(View.GONE);
                 showReadingText.setVisibility(View.VISIBLE);
-                showReadingText.setClickable(false);
+                if( readingTextVisible )
+                {
+                    showReadingButton.setVisibility(View.GONE);
+                    showReadingText.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    showReadingText.setVisibility(View.GONE);
+                    showReadingButton.setVisibility(View.VISIBLE);
+                }
                 
                 // only display the arrow if example sentences exist
                 XFApplication.getDao().attachDatabase(LWEDatabase.DB_EX);
@@ -333,6 +342,41 @@ public class PracticeFragment extends Fragment
                     rightArrow.setVisibility(View.VISIBLE);
                 }
                 XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
+
+                // get the WebView for displaying the answer
+                WebView meaningView = (WebView)practiceLayout.findViewById(R.id.practice_webview);
+                meaningView.getSettings().setSupportZoom(false);
+                meaningView.setHorizontalScrollBarEnabled(false);
+                
+                // load the html/css header for the meaning view
+                String header = null;
+                if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
+                {
+                    header = LWECardHtmlHeader;
+                }
+                else
+                {
+                    header = LWECardHtmlHeader_EtoJ;
+                }
+
+                // swap out the dfn declaration based on color scheme
+                header = header.replace("##THEMECSS##", XflashSettings.getThemeCSS() );
+                
+                // set up the full web view data
+                String data = header + currentCard.getMeaning() + LWECardHtmlFooter;
+                
+                // we cannot use WebView.loadData(String,String,String) because for reasons
+                // not well articulated online, though apparently loadData presumes the string
+                // is URI encoded and needs to be changed to URL encoding
+
+                // use loadDataWithBaseURL() with a fake or null URL instead
+                // http://groups.google.com/group/android-developers/browse_thread/thread/f70c3cb62ec2a97b/1d5e0cd326c14e0b 
+                meaningView.loadDataWithBaseURL(null,data,"text/html","utf-8",null);
+
+                // WebView background must be set to transparency
+                // programatically or it won't work (known bug Android 2.2.x and up)
+                // see - http://code.google.com/p/android/issues/detail?id=14749
+                meaningView.setBackgroundColor(0x00000000);
 
             }  // end if block for ( inViewMode )
 
@@ -385,157 +429,186 @@ public class PracticeFragment extends Fragment
         }  // end PracticeScreen.toggleReading()
 
 
+        private static String LWECardHtmlHeader =
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
+"<style>" +
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " +
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} " + 
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} " +
+"##THEMECSS##" +
+"</style></head>" +
+"<body><div id='container'>";
+
+
+        private static String LWECardHtmlHeader_EtoJ =
+"<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
+"<style>" +
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:16px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
+"dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " + 
+"#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;font-size:34px; padding-left:3px; line-height:32px;} " + 
+"ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +
+"li{color:white; text-shadow:darkslategray 0px 1px 0px; margin:0px; margin-bottom:7px; line-height:17px;} " +
+"##THEMECSS##" +
+"</style></head>" +
+"<body><div id='container'>";
+
+        private static String LWECardHtmlFooter = "</div></body></html>";
+
     }  // end PracticeScreen class declaration
 
 
     // class to determine the next cards to load
     private static class CardSelector
     {
+        // TODO - absolutely no idea whether these work yet
 
         // calculates next card level based on current performance and Tag progress
         public static int calculateNextCardLevelForTag(Tag inTag)
         {
+            if( PracticeFragment.currentTag.cardLevelCounts.size() != 6 )
+            {
+                Log.d(MYTAG,"ERROR - in CardSelector.calculateNextCardLevelForTag()");
+                Log.d(MYTAG,"      - currentTag.cardLevelCounts.size() != 6");
+            }
 
-/*
-- (NSInteger)calculateNextCardLevelForTag:(Tag *)tag error:(NSError **)error
-{
-  LWE_ASSERT_EXC(([tag.cardLevelCounts count] == 6),@"There must be 6 card levels (1-5 plus unseen cards)");
+            // control variables
+            int weightingFactor = XflashSettings.getFrequency();
   
-  // control variables
-  // controls how many words to show from new before preferring seen words
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
-  BOOL hideLearnedCards = [settings boolForKey:APP_HIDE_BURIED_CARDS];
-  
-  // Total number of cards in this set and its level
-  NSInteger numLevels = 5;
-  NSInteger unseenCount = [[tag.cardLevelCounts objectAtIndex:kLWEUnseenCardLevel] intValue];
-  NSInteger totalCardsInSet = tag.cardCount;
-  
-  // This is a quick return case; if all cards are unseen, just return that
-  if (unseenCount == totalCardsInSet)
-  {
-    return kLWEUnseenCardLevel;
-  }
+            // TODO - not sure where this settings is coming from
+            // BOOL hideLearnedCards = [settings boolForKey:APP_HIDE_BURIED_CARDS];
+            boolean hideLearnedCards = false;
 
- //if the hide learned cards is set to ON. Try to simulate with the decreased numLevels (hardcoded)
-  //and also tell that the totalCardsInSet is no longer the whole sets but the ones NOT in the buried section.
-  if (hideLearnedCards)
-  {
-    // In this mode, we don't have 5 levels, we have four.
-    numLevels = 4;
+            int numLevels = 5;
+            int unseenCount = currentTag.cardLevelCounts.get(Tag.kLWEUnseenCardLevel);
+            int totalCardsInSet = PracticeFragment.totalCards;
+
+            // this is a quick return case; if all cards are unseen, just return that
+            if( unseenCount == totalCardsInSet )
+            {
+                return Tag.kLWEUnseenCardLevel;
+            }
+
+            // if the hide learned cards is set to ON. Try to simulate with the decreased 
+            // numLevels (hardcoded) and also tell that the totalCardsInSet is no longer 
+            // the whole sets but the ones NOT in the buried section.
+  
+            if (hideLearnedCards)
+            {
+                // In this mode, we don't have 5 levels, we have four.
+                numLevels = 4;
     
-    // If all cards are learned, return "Learned" along with an error
-    NSInteger learnedCount = [[tag.cardLevelCounts objectAtIndex:kLWELearnedCardLevel] intValue];
-    totalCardsInSet = totalCardsInSet - learnedCount;
-    if ((totalCardsInSet == 0) && (learnedCount > 0))
-    {
-      if (error != NULL)
-      {
-        *error = [NSError errorWithDomain:kTagErrorDomain code:kAllBuriedAndHiddenError userInfo:nil];
-      }
-      return kLWELearnedCardLevel;
-    }
-  }
-  
-  LWE_ASSERT_EXC(totalCardsInSet > 0, @"Beyond this point we assume we have some cards!");
-   // Get m cards in n bins, figure out total percentages
-  // Calculate different of weights and percentages and adjust accordingly
-  NSInteger denominatorTotal = 0, weightedTotal = 0, cardsSeenTotal = 0, numeratorTotal = 0;
-  
-  // the guts to get the total of card seen so far
-  NSInteger totalArray[6];
-  for (NSInteger levelId = 1; levelId <= numLevels; levelId++)
-  {
-    // Get denominator values from cache/database
-    NSInteger tmpTotal = [[tag.cardLevelCounts objectAtIndex:levelId] intValue];
-    totalArray[levelId-1] = tmpTotal;   // all the level references (& the math) are 1-indexed, the array is 0 indexed
-    cardsSeenTotal = cardsSeenTotal + tmpTotal;
-    denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - levelId + 1)); 
-    numeratorTotal = numeratorTotal + (tmpTotal * levelId);
-  }
-  
-  CGFloat p_unseen = [self calculateProbabilityOfUnseenWithCardsSeen:cardsSeenTotal 
-                                                          totalCards:totalCardsInSet
-                                                           numerator:numeratorTotal 
-                                                       levelOneCards:totalArray[0]];
-    CGFloat randomNum = ((CGFloat)rand() / (CGFloat)RAND_MAX);
-  CGFloat p = 0, pTotal = 0;
-  //this for works like russian roulette where there is a 'randomNum' 
-  //and each level has its own probability scaled 0-1 and if it sum-ed it would be 1.
-  //this for enumerate through that level, accumulate the probability until it reach the 'randomNum'.
-  for (NSInteger levelId = 1; levelId <= numLevels; levelId++)
-  {
-    // For this array, the levels are 0-indexed, so we have to minus one (see above)
-    weightedTotal = (totalArray[levelId-1] * weightingFactor * (numLevels - levelId + 1));
-    p = ((CGFloat)weightedTotal / (CGFloat)denominatorTotal);
-    p = (1 - p_unseen) * p;
-    pTotal = pTotal + p;
-      if (pTotal > randomNum)
-    {
-          return levelId;
-      }
-  }
-  
-  // If we get here, that would be an error (we should return in the above for loop) -- fail with level unseen
-  if (error != NULL)
-  {
-    *error = [NSError errorWithDomain:kTagErrorDomain code:kLWETagUnknownError userInfo:nil];
-  }
-  return kLWEUnseenCardLevel;
-}
+                // If all cards are learned, return "Learned" along with an error
+                int learnedCount = currentTag.cardLevelCounts.get(Tag.kLWELearnedCardLevel);
+                
+                totalCardsInSet = totalCardsInSet - learnedCount;
+                if( (totalCardsInSet == 0) && (learnedCount > 0) )
+                {
+                    return Tag.kLWELearnedCardLevel;
+                }
 
-*/
-            return 0;
+            }  // end if(hideLearnedCards)
+
+            // past here, we assume we have cards to work with
+            if( totalCardsInSet <= 0 )
+            {
+                Log.d(MYTAG,"ERROR - in CardSelector.calculateNextCardLevelForTag()");
+                Log.d(MYTAG,"      - totalCardsInSet is less than 1");
+            }
+
+            // Get m cards in n bins, figure out total percentages
+            // Calculate different of weights and percentages and adjust accordingly
+            int denominatorTotal = 0;
+            int weightedTotal = 0;
+            int cardsSeenTotal = 0;
+            int numeratorTotal = 0;
+  
+            // the guts to get the total of card seen so far
+            int[] totalArray = { 0,0,0,0,0,0 };
+
+            for(int levelId = 1; levelId <= numLevels; levelId++)
+            {
+                // Get denominator values from cache/database
+                int tmpTotal = currentTag.cardLevelCounts.get(levelId);
+
+                // all the level references (& the math) are 1-indexed, the array is 0 indexed 
+                totalArray[levelId-1] = tmpTotal;   
+                cardsSeenTotal = cardsSeenTotal + tmpTotal;
+                denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - levelId + 1)); 
+                numeratorTotal = numeratorTotal + (tmpTotal * levelId);
+            }
+            float p_unseen = calculateProbabilityOfUnseenWithCardsSeen(cardsSeenTotal,
+                                    totalCardsInSet,numeratorTotal,totalArray[0]);
+            float randomNum = new Random().nextFloat();
+            float p = 0;
+            float pTotal = 0;
+
+            // this for works like russian roulette where there is a 'randomNum' and 
+            // each level has its own probability scaled 0-1 and if it sum-ed it would be 1.
+            // this for enumerate through that level, accumulate the probability 
+            // until it reach the 'randomNum'
+            for (int levelId = 1; levelId <= numLevels; levelId++)
+            {
+                // For this array, the levels are 0-indexed, so we have to minus one (see above)
+                weightedTotal = ( totalArray[levelId-1] * weightingFactor * ( numLevels - levelId + 1) );
+                p = ( (float)weightedTotal / (float)denominatorTotal );
+                p = (1 - p_unseen) * p;
+                pTotal = pTotal + p;
+                if( pTotal > randomNum )
+                {
+                    return levelId;
+                }
+            }
+  
+            // If we get here, that would be an error (we should return in the above for 
+            // loop) -- fail with level unseen
+            return Tag.kLWEUnseenCardLevel;
 
         }  // end calculateNextCardLevelForTag()
 
 
-
-
         // calculate the probability of the unseen cards showing for th next 'round'
         // return the float ranegd 0-1 for the probability of unseen card showing next
-        public static float calculateProbabilityOfUnseenWithcardsSeen()
+        public static float calculateProbabilityOfUnseenWithCardsSeen(int cardsSeenTotal,
+                                int totalCardsInSet,int numeratorTotal,int levelOneTotal)
         {
+            int maxCardsToStudy = XflashSettings.getStudyPool();
+            int weightingFactor = XflashSettings.getFrequency();
+            
+            if( ( maxCardsToStudy < 1 ) || ( weightingFactor < 1 ) )
+            {
+                Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithcardsSeen()");
+                Log.d(MYTAG,"      - bad value for maxCardsToStudy or weightingFactor");
+            }
 
-/*
+            if( ( cardsSeenTotal == totalCardsInSet ) || ( levelOneTotal >= maxCardsToStudy ) )
+            {
+                return 0;
+            }
+            else
+            {
+                if( cardsSeenTotal > totalCardsInSet);
+                {
+                    Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithcardsSeen()");
+                    Log.d(MYTAG,"      - cardsSeenTotal is greater than totalCardsInSet");
+                }
 
-- (CGFloat)calculateProbabilityOfUnseenWithCardsSeen:(NSUInteger)cardsSeenTotal totalCards:(NSUInteger)totalCardsInSet numerator:(NSUInteger)numeratorTotal levelOneCards:(NSUInteger)levelOneTotal
-{
-  NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-  NSInteger maxCardsToStudy = [settings integerForKey:APP_MAX_STUDYING];
-  NSInteger weightingFactor = [settings integerForKey:APP_FREQUENCY_MULTIPLIER];
-  LWE_ASSERT_EXC((maxCardsToStudy > 0), @"This value must be non-zero");
-  LWE_ASSERT_EXC((weightingFactor > 0), @"This value must be non-zero");
-  
-  // Quick return of 0 probability if we've already seen all the cards in a set, or aren't taking any more
-  if ((cardsSeenTotal == totalCardsInSet) || (levelOneTotal >= maxCardsToStudy))
-  {
-    return 0;
-  }
-  else
-  {
-    LWE_ASSERT_EXC((cardsSeenTotal < totalCardsInSet), @"To get to this point, there should be more cards in the set than cards seen");
-    
-    // Sets probability if we have less cards in the study pool than MAX allowed
-    CGFloat p_unseen = 0, mean = 0;
-    mean = (CGFloat)numeratorTotal / (CGFloat)cardsSeenTotal;
-    p_unseen = (mean - 1.0f);
-    p_unseen = pow((p_unseen / 4.0f), weightingFactor);
-    p_unseen = p_unseen + (1.0f - p_unseen)*(pow((maxCardsToStudy - cardsSeenTotal),0.25)/pow(maxCardsToStudy,0.25));
-    return p_unseen;
-  }
-}
-*/
-
-            return (float)0;
+                // Sets probability if we have less cards in the study pool than MAX allowed
+                float p_unseen = 0;
+                float mean = 0;
+                mean = ( (float)numeratorTotal / (float)cardsSeenTotal );
+                p_unseen = (mean - 1.0f);
+                p_unseen = (float)Math.pow( (p_unseen / 4.0f), weightingFactor);
+                p_unseen = p_unseen + (1.0f - p_unseen) * ( (float)Math.pow( (maxCardsToStudy - cardsSeenTotal),0.25) / (float)Math.pow(maxCardsToStudy,0.25) );
+                
+                return p_unseen;
+            }
     
         }  // end calculateProbabilityOfUnseenWithcardsSeen()
 
 
     }  // end CardSelector class declaration
-
-
 
 
 }  // end PracticeFragment class declaration
