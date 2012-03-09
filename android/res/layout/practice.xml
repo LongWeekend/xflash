@@ -3,8 +3,7 @@
     android:id="@+id/practice_mainlayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:onClick="PracticeFragment_reveal" >
+    android:layout_height="match_parent" > 
  
     <!-- the five count blocks in the top bar -->
     <LinearLayout android:id="@+id/count_bar"
@@ -187,15 +186,25 @@
     </LinearLayout>
 
     <!-- scroll view to house main content -->
-    <ScrollView 
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="match_parent" 
         android:layout_below="@id/count_bar"
         android:layout_above="@id/practice_info_layout" >
 
-        <RelativeLayout
+        <!-- TODO - minHeight is a hack to get the view to fill enough of the
+                    background to make the whole thing clickable. I haven't
+                    been able to get the RelativeLayout to fill the content
+                    space, even though the ScrollView above does, and this
+                    is set to match its parent.  ?  -->
+        
+        <!-- single child of scroll view -->
+        <RelativeLayout android:id="@+id/practice_scroll_back"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent"
+            android:minHeight="270dp"
+            android:clickable="false"
+            android:onClick="PracticeFragment_reveal" >
 
             <!-- the 'show reading' button -->
             <ImageButton android:id="@+id/practice_showreadingbutton"
@@ -232,7 +241,7 @@
                 android:layout_marginTop="150dp"
                 android:background="@drawable/practice_btn_unrevealed_mini" />
 
-            <WebView android:id="@+id/practice_webview"
+            <com.longweekendmobile.android.xflash.NoHorizontalWebView android:id="@+id/practice_webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

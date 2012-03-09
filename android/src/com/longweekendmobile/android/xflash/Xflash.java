@@ -7,7 +7,7 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  protected void onCreate(Bundle  )               @over
-//  public void destory(Bundle  )                   @over
+//  public void onDestory(Bundle  )                   @over
 //  public boolean onSearchRequested()              @over
 //  public void onBackPressed()                     @over
 //  protected void onSaveInstanceState(Bundle  )    @over
@@ -135,7 +135,19 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         super.onDestroy();
 
+        // release all databases
         XFApplication.getDao().detachAll();
+
+        // clear the active tag since we're quitting
+        XflashSettings.clearActiveTag();
+
+        // TODO - I don't like this
+        
+        // wipes the currentGroup of the tag tab on app exit, necessary becaus of
+        // static properties: if they exit the app in a group not the topLeveLGroup,
+        // that group will then be reloaded as the root view for the tag tab if
+        // the app is restarted while TagFragment is still loaded to the VM
+        TagFragment.currentGroup = null;
     }
 
     

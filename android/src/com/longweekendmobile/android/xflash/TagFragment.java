@@ -278,13 +278,13 @@ public class TagFragment extends Fragment
     // launch the dialog to confirm user would like to start studying a tag
     public static void fireStartStudyingDialog(Tag inTag,Xflash incoming)
     {
-        final Tag tagToLaunch = inTag;
+        final Tag tagToSet = inTag;
         final Xflash inContext = incoming;
         
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
 
-        builder.setTitle( tagToLaunch.getName() );
+        builder.setTitle( tagToSet.getName() );
 
         String tempString = inContext.getResources().getString(R.string.startstudying_dialog_message);
         builder.setMessage(tempString);
@@ -295,7 +295,7 @@ public class TagFragment extends Fragment
             public void onClick(DialogInterface dialog,int which)
             {
                 // set the new user and return to settings
-                PracticeFragment.loadTag( tagToLaunch.getId() );
+                XflashSettings.setActiveTag(tagToSet);
                 Xflash.getTabHost().setCurrentTabByTag("practice");
             }
         });

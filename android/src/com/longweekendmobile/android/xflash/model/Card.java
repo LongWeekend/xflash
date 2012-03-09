@@ -140,12 +140,10 @@ public class Card
     { 
         if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
         {    
-            Log.d(MYTAG,"getMeaning returning meaning: " + meaning);
             return meaning;
         }
         else 
         { 
-            Log.d(MYTAG,"getMeaning returning headword: " + headword);
             return headword;
         }
         

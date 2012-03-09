@@ -286,7 +286,7 @@ public class CardPeer
     // takes a cardId and returns a hydrated card from the database
     // returns an ArrayList of (int) Card ids for a given tagId
     // TODO - cannot test because we have no level_id columns in database
-    public static ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag inTag)
+    public static ArrayList<ArrayList<Card>> retrieveCardsSortedByLevelForTag(Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
@@ -295,12 +295,12 @@ public class CardPeer
         //        [settings objectForKey:@"user_id"]
         int debughold = 0;
 
-        ArrayList<ArrayList<Integer>> cardIdList = new ArrayList<ArrayList<Integer>>(6);
+        ArrayList<ArrayList<Card>> cardList = new ArrayList<ArrayList<Card>>(6);
 
         for(int i = 0; i < 6; i++)
         {
-            ArrayList<Integer> tempList = new ArrayList<Integer>();
-            cardIdList.add(tempList);
+            ArrayList<Card> tempList = new ArrayList<Card>();
+            cardList.add(tempList);
         }
         
         String[] selectionArgs = new String[] { Integer.toString(debughold), Integer.toString( inTag.getId() ) };
@@ -321,14 +321,16 @@ public class CardPeer
             tempColumn = myCursor.getColumnIndex("card_id");
             int tempCardId = myCursor.getInt(tempColumn);
 
-            cardIdList.get(tempLevelId).add(tempCardId);
+            Card tempCard = blankCardWithId(tempCardId);
+
+            cardList.get(tempLevelId).add(tempCard);
 
             myCursor.moveToNext();
         }
 
         myCursor.close();
 
-        return cardIdList;  
+        return cardList;  
 
     }  // end retrieveCardIdsSortedByLevelForTag()
 

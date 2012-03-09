@@ -11,8 +11,8 @@ package com.longweekendmobile.android.xflash;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-public class TabInfo {
-    
+public class TabInfo
+{
     public String tag;
     public Class<?> clss;
     public Bundle args;

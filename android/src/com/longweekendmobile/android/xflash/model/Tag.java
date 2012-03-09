@@ -18,8 +18,8 @@ package com.longweekendmobile.android.xflash.model;
 //
 //  public void recacheCardCountForEachLevel()
 //  public ArrayList<ArrayList<Integer>> thawCardIds(Context  )
-//  public void freezeCardIds(Context  )
-//  public void populateCardIds(Context  )
+//  public void freezeCardIds()
+//  public void populateCardIds()
 //  public ArrayList<ArrayList<Integer>> combineCardIds()
 //  public void moveCard(Card  ,int  )
 //  public void removeCardFromActiveSet(Card  )
@@ -51,7 +51,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -74,13 +74,14 @@ public class Tag
     public static final int kLWEUnseenCardLevel = 0;
     public static final int kLWELearnedCardLevel = 5;
     public static final int STARRED_TAG_ID = 0;
+    public static final int DEFAULT_TAG_ID = 124;
 
     private int tagId;
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
-    private ArrayList<ArrayList<Integer>> cardIds;          
-    private ArrayList<Integer> flattenedCardIdArray;
+    private ArrayList<ArrayList<Card>> cardsByLevel;          
+    public ArrayList<Card> flattenedCardArray;
     public ArrayList<Integer> cardLevelCounts;
     
     private String tagName;
@@ -90,9 +91,9 @@ public class Tag
 
     public Tag()
     {
-        cardIds = null;
+        cardsByLevel = null;
         cardLevelCounts = null;
-        flattenedCardIdArray = null;
+        flattenedCardArray = null;
         
         isFault = true;
         tagId = kLWEUninitializedTagId;
@@ -147,23 +148,24 @@ public class Tag
         return ( cardCount - cardLevelCounts.get(kLWEUnseenCardLevel) );
     }
 
+
     // create a cache of the number of Card objects in each level
     public void recacheCardCountForEachLevel()
     {
         // if we have no cards to recache
-        if( cardIds == null )
+        if( cardsByLevel == null )
         {
             Log.d(MYTAG,"ERROR - in recacheCardCountForEachLevel()");
-            Log.d(MYTAG,"      - cardIds is null");
+            Log.d(MYTAG,"      - cardsByLevel is null");
         
             return;
         }
         
         // if our array is broken
-        if( cardIds.size() != 6 )
+        if( cardsByLevel.size() != 6 )
         {
             Log.d(MYTAG,"ERROR in recacheCardCountForEachlevel()");
-            Log.d(MYTAG,"cardIds.size() does not equal 6");
+            Log.d(MYTAG,"cardsByLevel.size() does not equal 6");
 
             return;
         }
@@ -176,7 +178,7 @@ public class Tag
         // sort through all six card levels
         for(int i = 0; i < 6; i++)
         {
-            count = cardIds.get(i).size();
+            count = cardsByLevel.get(i).size();
             cardLevelCountsTmp.add(count);
             totalCount = totalCount + count;
         }
@@ -187,51 +189,54 @@ public class Tag
         return;
 
     }  // end recacheCardCountForEachLevel() 
-    
-    // loads a serialized copy of cardIds from a file 'ids.plist'
+   
+
+    // loads a serialized copy of cardsByLevel from a file 'ids.plist'
     // TODO - performance on ObjectInputStream is horrible, hand-code 
     //        a serialization or don't worry about it?
     @SuppressWarnings("unchecked")
-    public ArrayList<ArrayList<Integer>> thawCardIds(Context inContext)
+    public ArrayList<ArrayList<Card>> thawCardIds()
     {
         String cacheFile = "ids.plist";
 
         try
         {
             // open file, open serialized reader, read our list
-            FileInputStream fis = inContext.openFileInput(cacheFile); 
+            FileInputStream fis = XFApplication.getInstance().openFileInput(cacheFile); 
             ObjectInputStream in = new ObjectInputStream(fis); 
             
             // the following line causes the compiler to complain about
             // unsafe operations (i.e. an unspecified List)
             //      - CANNOT BE HELPED, SUPPRESS WARNING
-            cardIds = (ArrayList<ArrayList<Integer>>)in.readObject();
+            cardsByLevel = (ArrayList<ArrayList<Card>>)in.readObject();
             
             in.close(); 
             fis.close();
+        
+            return cardsByLevel;
         } 
         catch(Throwable t)
         {
-            Log.d(MYTAG,"ERROR: caught -- " + t.toString() );
+            // return null if the file doesn't exist
+            return null;
         }
-
-        return cardIds;
 
     }  // end thawCardIds()
 
-    // saves a serialized copy of cardIds to a file 'ids.plist'
+
+    // saves a serialized copy of cardsByLevel to a file 'ids.plist'
     // TODO - performance on ObjectOutputStream is terrible, consider
     //        hand-writing serialization?
-    public void freezeCardIds(Context inContext)
+    public void freezeCardIds()
     {
         String cacheFile = "ids.plist";
 
         try
         {
             // open file, open serialized writer, write our list
-            FileOutputStream fos = inContext.openFileOutput(cacheFile,Context.MODE_PRIVATE); 
+            FileOutputStream fos = XFApplication.getInstance().openFileOutput(cacheFile,Context.MODE_PRIVATE); 
             ObjectOutputStream out = new ObjectOutputStream(fos); 
-            out.writeObject(cardIds);
+            out.writeObject(cardsByLevel);
             out.close(); 
             fos.close();
         } 
@@ -242,69 +247,78 @@ public class Tag
 
     }  // end freezeCardIds()
 
+    
     // executed when loading a new set on app load
-    public void populateCardIds(Context inContext)
+    public void populateCardIds()
     {
-        ArrayList<ArrayList<Integer>> tempCardIdsArray = thawCardIds(inContext);
+        ArrayList<ArrayList<Card>> tempCardsArray = thawCardIds();
 
-        if( tempCardIdsArray != null)
+        if( tempCardsArray != null)
         {
             // delete the PLIST now that we have it in memory
             String tempFile = "ids.plist";
-            inContext.deleteFile(tempFile);         
-
-            Log.d(MYTAG,"load from file successful");
+            XFApplication.getInstance().deleteFile(tempFile);         
         }
         else
         {
-            // no PLIST, generate new cardIds array
-
-            Log.d(MYTAG,"no ids.plist available");
-
-            tempCardIdsArray = CardPeer.retrieveCardIdsSortedByLevelForTag(this);
-
-            Log.d(MYTAG,"initial load successful");
+            // no PLIST, generate new cardsByLevel array
+            tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
         }
 
-        cardIds = tempCardIdsArray;
-        flattenedCardIdArray = combineCardIds();
+
+        cardsByLevel = tempCardsArray;
+        flattenedCardArray = flattenCardArrays();
 
         // populate card level counts
         recacheCardCountForEachLevel();
 
     }  // end populateCardIds
 
+    
     // concatenate cardId arrays for browse mode
-    public ArrayList<Integer> combineCardIds()
+    public ArrayList<Card> flattenCardArrays()
     {
-        ArrayList<Integer> allCardIds = new ArrayList<Integer>(cardCount);
+        ArrayList<Card> allCards = new ArrayList<Card>(cardCount);
 
-        // cycle through all six levels for cardIds
+        // cycle through all six levels for cardsByLevel
         for(int i = 0; i < 6; i++)
         {
-            int temp2 = cardIds.get(i).size();
+            int temp2 = cardsByLevel.get(i).size();
 
-            // run though each cardIds level and add all cards
+            // run though each cardsByLevel level and add all cards
             for(int j = 0; j < temp2; j++)
             {
-                allCardIds.add( cardIds.get(i).get(j) );
+                allCards.add( cardsByLevel.get(i).get(j) );
             }
         }   
 
         // put in numeric order
-        Collections.sort(allCardIds);
+        // asdf
+        // TODO - must find a new way to sort
+        // Collections.sort(allCards, new CardComparator() );
 
-        return allCardIds;
+        return allCards;
 
     }  // end combineCardIds()
+
+    @SuppressWarnings("unused")
+    private class CardComparator implements Comparator<Card>
+    {
+        public int compare(Card card1,Card card2)
+        {
+            return ( card1.getCardId() - card2.getCardId() );
+        }
+    }
+
 
     // update level counts cache - kept in memory how many cards are in each level
     public void moveCard(Card inCard,int nextLevel)
     {
-        if( cardIds.size() != 6 )
+/*
+        if( cardsByLevel.size() != 6 )
         {
-            Log.d(MYTAG,"ERROR in recacheCardCountForEachlevel()");
-            Log.d(MYTAG,"cardIds.size() does not equal 6");
+            Log.d(MYTAG,"ERROR in moveCard()");
+            Log.d(MYTAG,"cardsByLevel.size() does not equal 6");
         }
 
         int countBeforeRemove = 0;
@@ -312,11 +326,11 @@ public class Tag
         ArrayList<Integer> thisLevelCards = null;
         ArrayList<Integer> nextLevelCards = null;
 
-        // update the cardIds if necessary
+        // update the cardsByLevel if necessary
         if( nextLevel != inCard.levelId )
         {
-            thisLevelCards = cardIds.get( inCard.getLevelId() );
-            nextLevelCards = cardIds.get(nextLevel);
+            thisLevelCards = cardsByLevel.get( inCard.getLevelId() );
+            nextLevelCards = cardsByLevel.get(nextLevel);
         
             countBeforeRemove = thisLevelCards.size();
             countBeforeAdd = nextLevelCards.size();
@@ -338,7 +352,7 @@ public class Tag
             nextLevelCards.add( inCard.getCardId() );
 
             // now confirm the add
-            int countAfterAdd = cardIds.get(nextLevel).size();
+            int countAfterAdd = cardsByLevel.get(nextLevel).size();
             if( !((countAfterAdd - 1) == countBeforeAdd) )
             {
                 Log.d(MYTAG,"the number after add (" + countAfterAdd + ") should be 1 more than the count before add (" + countBeforeAdd + ")");
@@ -346,40 +360,50 @@ public class Tag
 
             recacheCardCountForEachLevel();
         }
-        
+*/
+
     }  // end moveCard()
-  
+
+
     // removed card from tag's memory arrays so they are out of the set
     public void removeCardFromActiveSet(Card inCard)
     {
-        int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardIds.get( inCard.getLevelId() );
+/*
 
-        // remove from cardIds
+        int tempId = inCard.getCardId();
+        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
+
+        // remove from cardsByLevel
         int tempIndex = cardLevel.indexOf(tempId);
         cardLevel.remove(tempIndex);        
 
-        // remove from flattenedCardIdArray
-        tempIndex = flattenedCardIdArray.indexOf(tempId);
-        flattenedCardIdArray.remove(tempIndex);
+        // remove from flattenedCardArray
+        tempIndex = flattenedCardArray.indexOf(tempId);
+        flattenedCardArray.remove(tempIndex);
 
         recacheCardCountForEachLevel();
-        
+*/
+
     }  // end removeCardFromActiveSet()
+
 
     // add card to tag's memory arrays
     public void addCardToActiveSet(Card inCard)
     {
+/*        
         int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardIds.get( inCard.getLevelId() );
+        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
 
         cardLevel.add(tempId);
-        flattenedCardIdArray.add(tempId);
+        flattenedCardArray.add(tempId);
         
         recacheCardCountForEachLevel();
+*/
     
     }  // end addCardToActiveSet()
-    
+
+
+
     // saves the tag to the DB.
     //
     //  this only updates the Tag's basic info, creation is handled
@@ -494,7 +518,7 @@ public class Tag
         tempBuilder.append("Description: ").append(tagDescription).append("\n");    
         tempBuilder.append("Tag Id: ").append(tagId).append("\n");  
         tempBuilder.append("Current Index: ").append(currentIndex).append("\n");    
-        tempBuilder.append("CardIds: ").append(cardIds);    
+        tempBuilder.append("CardIds: ").append(cardsByLevel);    
 
         return tempBuilder.toString();
     }
@@ -584,6 +608,16 @@ public class Tag
     public int getCurrentIndex()
     {
         return currentIndex;
+    }
+
+    public void incrementIndex()
+    {
+        ++currentIndex;
+    }
+
+    public void decrementIndex()
+    {
+        --currentIndex;
     }
 
 

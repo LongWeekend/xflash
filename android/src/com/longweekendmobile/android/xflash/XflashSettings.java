@@ -9,6 +9,11 @@ package com.longweekendmobile.android.xflash;
 //  a class to maintain all of the app level settings
 //
 //  public static void load()
+//
+//  public static void setActiveTag(Tag  )
+//  public static Tag getActiveTag()
+//  public static Card getActiveCard()
+//
 //  public static int getColorScheme()
 //  public static String getColorSchemeName()
 //  public static String getThemeCSS()
@@ -47,19 +52,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.longweekendmobile.android.xflash.model.Card;
+import com.longweekendmobile.android.xflash.model.Tag;
+import com.longweekendmobile.android.xflash.model.TagPeer;
+
 public class XflashSettings
 {
     private static final String MYTAG = "XFlash XflashSettings";
 
-    // properties for global app settings
-    private static int colorScheme = -1;
-    private static int studyMode = -1;
-    private static int studyLanguage = -1;
-    private static int readingMode = -1;
-    private static int difficultyMode = -1;
-    private static int customStudyPool = -1;
-    private static int customFrequency = -1;
-    private static int currentUser = -1;
+    // PRACTICE TAB STUFF
+    private static Tag activeTag = null;
+    private static Card activeCard = null;
 
     // COLOR SETTINGS PROPERTIES
     private static final int LWE_THEME_RED = 0;
@@ -81,6 +84,16 @@ public class XflashSettings
                                                R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                                  R.drawable.button_tame };
+
+    // properties for global app settings
+    private static int colorScheme = -1;
+    private static int studyMode = -1;
+    private static int studyLanguage = -1;
+    private static int readingMode = -1;
+    private static int difficultyMode = -1;
+    private static int customStudyPool = -1;
+    private static int customFrequency = -1;
+    private static int currentUser = -1;
 
     // STUDY MODE PROPERTIES
     public static final int LWE_STUDYMODE_PRACTICE = 0;
@@ -121,7 +134,7 @@ public class XflashSettings
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
-        // on error, default to RED scheme
+        // load all settings to user set or default
         colorScheme = settings.getInt("colorScheme",LWE_THEME_RED);
         studyMode = settings.getInt("studyMode",LWE_STUDYMODE_PRACTICE);
         studyLanguage = settings.getInt("studyLanguage",LWE_STUDYLANGUAGE_JAPANESE);
@@ -132,6 +145,88 @@ public class XflashSettings
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
     
     }  // end load()
+
+
+    // called when any Fragment is setting a new Tag to study
+    public static void setActiveTag(Tag inTag)
+    {
+        if( inTag.getCardCount() < 1 )
+        {
+            Log.d(MYTAG,"ERROR - in setActiveTag() : cardCount == 0");
+        }
+            
+        // set the new tag id in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("active_tag", inTag.getId() );
+        editor.commit();
+        
+        // set our actual active tag
+        activeTag = inTag;
+        activeTag.populateCardIds();
+   
+        // when we set the active tag, also set the active card
+        // to the zero-index card of said new tag
+        // MAY BE TEMPORARY
+        activeTag.setCurrentIndex(0);
+        activeCard = activeTag.flattenedCardArray.get(0);
+        
+    }  // end setActiveTag()
+
+
+    // loads and returns XflashSettings.activeTag
+    public static Tag getActiveTag()
+    {
+        // if active tag is null, pull the default (Long Weekend Favorites)
+        if( ( activeTag == null ) || ( activeTag.getCardCount() < 1 ) )
+        {
+            // get a Context, get the SharedPreferences
+            XFApplication tempInstance = XFApplication.getInstance();
+            SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+            
+            // pull the saved tag id, default to 'Long Weekend Favorites'
+            int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
+            activeTag = TagPeer.retrieveTagById(tempTagId);
+            
+            activeTag.populateCardIds();
+        }
+            
+        return activeTag;
+
+    }  // end getActiveTag()
+
+  
+    // called only on app exit, to clear static values
+    public static void clearActiveTag()
+    {
+        activeTag = null;
+    }
+
+    
+    // TODO - this probably will migrate out of XflashSettings shortly
+    public static Card getActiveCard()
+    {
+        // when we get the active card, if it's null, pull the
+        // zero-index card of the active Tag
+        if( activeCard == null )
+        {
+            if( activeTag == null )
+            {
+                activeTag = getActiveTag();
+            }
+
+            activeCard = activeTag.flattenedCardArray.get(0);
+        }
+        
+        if( activeCard.isFault )
+        {
+            activeCard.hydrate();
+        }
+        
+        return activeCard;
+    }
 
 
 //  *** COLOR SETTINGS ***
