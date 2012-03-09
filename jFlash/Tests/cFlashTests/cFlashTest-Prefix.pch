@@ -24,6 +24,7 @@
 #import "LWERetinaUtils.h"
 #import "LWEViewAnimationUtils.h"
 #import "LWENetworkUtils.h"
+#import "UILabel+LWEUtilities.h"
 #import "LWEUIAlertView.h"
 #import "LWEDebug.h"
 #import "LWEMacros.h"

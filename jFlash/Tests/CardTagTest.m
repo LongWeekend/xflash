@@ -85,18 +85,18 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   
   //Remove the card one by one.
   NSUInteger count = [newCardIds count];
-  for (int i=0; i<count; i++)
+  for (NSInteger i = 0; i < count; i++)
   {
     Card *card = [newCardIds objectAtIndex:i];
     NSError *error = nil;
     BOOL success = [TagPeer cancelMembership:card fromTag:newlyCreatedTag error:&error]; 
-    if ((i!=count-1) && (!success)) 
+    if ((i != (count-1)) && (success == NO)) 
     {
       STFail(@"Fail in removing a card from the newly created study set.\nCard with id: %d cannot be removed with error: %@", card.cardId, [error localizedDescription]);
     }
-    else if ((i==count-1) && (!success))
+    else if ((i == (count-1)) && (success == NO))
     {
-      STAssertTrue(((!success) && (error != nil) && ([error code] == kAllBuriedAndHiddenError)), @"Last card also get 'removed' which should not be removed.");
+      STAssertTrue(((success == NO) && error && ([error code] == kAllBuriedAndHiddenError)), @"Last card also get 'removed' which should not be removed.");
       NSLog(@"[TEST LOG]Last card in an active set couldn't be removed. Error from the TagPeer: %@", error);
     }
     else
@@ -106,8 +106,37 @@ static NSString * const kLWEFavoriteTagName = @"Long Weekend Favorites";
   }
 }
 
-#pragma mark -
-#pragma mark Setting up
+#pragma mark - Database Integrity
+
+- (void)testCardTagLinkIntegrity
+{
+  FMResultSet *rs = nil;
+  NSString *testSql = nil;
+  LWEDatabase *db = [LWEDatabase sharedLWEDatabase];
+  STAssertNotNil(db, @"Couldn't get DB");
+  
+  // This will return any card IDs in card_tag_link that are not associated with cards in cards
+  testSql = @"SELECT l.* FROM card_tag_link l LEFT JOIN cards c ON l.card_id = c.card_id WHERE c.card_id IS NULL";
+  rs = [db.dao executeQuery:testSql];
+  NSMutableArray *cardResults = [NSMutableArray array];
+  while ([rs next])
+  {
+    [cardResults addObject:[NSNumber numberWithInt:0]];
+  }
+  STAssertTrue([cardResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",cardResults);
+
+  // This will return any tag IDs in card_tag_link that are not associated with tags in tags
+  testSql = @"SELECT l.* FROM card_tag_link l LEFT JOIN tags t ON l.tag_id = t.tag_id WHERE t.tag_id IS NULL";
+  rs = [db.dao executeQuery:testSql];
+  NSMutableArray *tagResults = [NSMutableArray array];
+  while ([rs next])
+  {
+    [cardResults addObject:[NSNumber numberWithInt:0]];
+  }
+  STAssertTrue([tagResults count] == 0, @"There should not be any unpaired card IDs!  Array: %@",tagResults);
+}
+
+#pragma mark - Setting up
 
 - (void)setUp
 {

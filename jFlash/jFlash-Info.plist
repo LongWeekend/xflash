@@ -35,7 +35,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>13</string>
-	<key>Icon files</key>
+	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
