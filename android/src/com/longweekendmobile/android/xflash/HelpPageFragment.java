@@ -87,6 +87,7 @@ public class HelpPageFragment extends Fragment
         
         // (NoHorizontal)WebView background must be set to transparency
         // programatically or it won't work (known bug Android 2.2.x and up)
+        // see - http://code.google.com/p/android/issues/detail?id=14749
         helpDisplay.setBackgroundColor(0x00000000);
         
         return helpPageLayout;

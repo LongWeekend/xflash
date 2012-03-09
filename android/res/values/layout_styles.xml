@@ -96,6 +96,7 @@
         <item name="android:textColor">#FF000000</item>
         <item name="android:background">@drawable/count_back</item>
         <item name="android:textSize">10dp</item>
+        <item name="android:paddingLeft">2dp</item>
     </style>
     <style name="practice_reading_layout" parent="@style/practice_reading_text">
         <item name="android:layout_width">wrap_content</item>

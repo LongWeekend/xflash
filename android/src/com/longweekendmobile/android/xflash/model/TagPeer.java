@@ -474,8 +474,6 @@ public class TagPeer
         int rowCount = myCursor.getCount();
         myCursor.moveToFirst();
         
-        Log.d(MYTAG,"group_id rows:  " + rowCount);
-
         // make our ArrayList of group_id's to remove inTag from
         for(int i = 0; i < rowCount; i++)
         {
