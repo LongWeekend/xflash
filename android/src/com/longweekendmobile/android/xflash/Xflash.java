@@ -42,10 +42,13 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_switchStudyLanguage(View  )
 //  public void SettingsFragment_switchReadingMode(View  )
 //  public void SettingsFragment_goDifficulty(View  )
+//  public void SettingsFragment_switchAnswerSize(View  )
 //  public void SettingsFragment_advanceColorScheme(View  )
 //  public void SettingsFragment_goUser(View  )
 //  public void SettingsFragment_goUpdate(View  )
 //  public void SettingsFragment_launchSettingsWeb(View  )
+//
+//  public void DifficultyFragment_toggleHideLearned(View  )
 //
 //  public void UserFragment_activateUser(View  )
 //  public void UserFragment_editUser(View  )
@@ -332,6 +335,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.goDifficulty(this);
     }
+    public void SettingsFragment_switchAnswerSize(View v)
+    {
+        SettingsFragment.switchAnswerSize();
+    }
     public void SettingsFragment_advanceColorScheme(View v)
     {
         SettingsFragment.advanceColorScheme();
@@ -347,6 +354,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void SettingsFragment_launchSettingsWeb(View v)
     {
         SettingsFragment.launchSettingsWeb(v,this);
+    }
+
+    public void DifficultyFragment_toggleHideLearned(View v)
+    {
+        DifficultyFragment.toggleHideLearned();
     }
 
     public void UserFragment_activateUser(View v)

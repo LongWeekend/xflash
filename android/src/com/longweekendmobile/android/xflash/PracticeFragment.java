@@ -201,11 +201,11 @@ public class PracticeFragment extends Fragment
             // load the show-reading text
             showReadingText = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_readingtext);
             showReadingText.setText( currentCard.reading() );
-
+            
             // load the headword view - variable based on study language in Card.java
             headwordView = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_headword);
             headwordView.setText( currentCard.getHeadword() );
-            
+           
             // load the mini answer button
             miniAnswerImage = (ImageView)practiceLayout.findViewById(R.id.practice_minianswer);
             
@@ -396,8 +396,9 @@ public class PracticeFragment extends Fragment
             }
 
             // swap out the dfn declaration based on color scheme
+            header = header.replace("##SIZECSS##", XflashSettings.getAnswerSizeCSS() );
             header = header.replace("##THEMECSS##", XflashSettings.getThemeCSS() );
-                
+            
             // set up the full web view data
             String data = header + currentCard.getMeaning() + LWECardHtmlFooter;
                 
@@ -420,7 +421,7 @@ public class PracticeFragment extends Fragment
         private static String LWECardHtmlHeader =
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
 "<style>" +
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:14px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; ##SIZECSS## font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " +
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} " + 
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +

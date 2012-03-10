@@ -38,6 +38,7 @@
     <string name="settings_studyblock_studylanguage">Study Language</string>
     <string name="settings_studyblock_reading">Furigana / Reading</string>
     <string name="settings_studyblock_difficulty">Difficulty</string>
+    <string name="settings_studyblock_answersize">Answer Text</string>
     <string name="settings_app_block_title">Application</string>
     <string name="settings_appblock_theme">Theme</string>
     <string name="settings_appblock_activeuser">Active User</string>
@@ -52,6 +53,9 @@
     <string name="difficulty_studypool_title">Number of Cards in Study Pool</string>
     <string name="difficulty_frequency_title">Frequency of New Cards</string>
     <string name="difficulty_frequency_moreoften">More Often</string>
+    <string name="difficulty_hide_learned">Hide Learned Cards</string>
+    <string name="just_on">On</string>
+    <string name="just_off">Off</string>
     <string name="user_title">Choose User</string>
     <string name="user_edit">edit</string>
     <string name="new_user_title">New User</string>
