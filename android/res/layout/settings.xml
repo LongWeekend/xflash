@@ -68,6 +68,15 @@
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
             <RelativeLayout style="@style/default_display_block"
+                android:onClick="SettingsFragment_switchAnswerSize" >
+                <TextView 
+                    style="@style/default_display_left"
+                    android:text="@string/settings_studyblock_answersize" />
+                <TextView android:id="@+id/settings_answersize"
+                    style="@style/default_display_right" />
+            </RelativeLayout>
+            <LinearLayout style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block"
                 android:onClick="SettingsFragment_goDifficulty" >
                 <TextView 
                     style="@style/default_display_left"

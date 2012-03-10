@@ -36,6 +36,10 @@ package com.longweekendmobile.android.xflash;
 //  public static int getReadingMode()
 //  public static String getReadingModeName()
 //  public static void setReadingMode(int  )
+//  public static int getAnswerTextSize()
+//  public static int getAnswerTextLabel()
+//  public static String getAnswerSizeCSS()
+//  public static void setAnswerText(int  )
 //  public static int getDifficultyMode()
 //  public static void setDifficultyMode(int  )
 //  public static int getStudyPool()
@@ -44,6 +48,8 @@ package com.longweekendmobile.android.xflash;
 //  public static int getFrequency()
 //  public static int getCustomFrequency()
 //  public static void setCustomFrequency(int  )
+//  public static int getHideLearned()
+//  public static int toggleHideLearned()
 //
 //  public static void throwBadValue(String  ,int  )
 
@@ -91,8 +97,10 @@ public class XflashSettings
     private static int studyLanguage = -1;
     private static int readingMode = -1;
     private static int difficultyMode = -1;
+    private static int answerTextSize = -1;
     private static int customStudyPool = -1;
     private static int customFrequency = -1;
+    private static int hideLearnedCards = -1;
     private static int currentUser = -1;
 
     // STUDY MODE PROPERTIES
@@ -107,7 +115,11 @@ public class XflashSettings
     public static final int LWE_READINGMODE_BOTH = 0;
     public static final int LWE_READINGMODE_ROMAJI= 1;
     public static final int LWE_READINGMODE_KANA = 2;
-        
+
+    // ANSWER TEXT PROPERTIES
+    public static final int LWE_ANSWERTEXT_NORMAL = 0;
+    public static final int LWE_ANSWERTEXT_LARGE = 1;
+
     // DIFFICULTY PROPERTIES
     public static final int LWE_DIFFICULTY_EASY = 0;
     public static final int LWE_DIFFICULTY_MEDIUM = 1;
@@ -125,6 +137,9 @@ public class XflashSettings
     public static final int LWE_FREQUENCY_HARD = 3;
     public static final int LWE_FREQUENCY_MAX = 4;
 
+    public static final int HIDE_LEARNED_OFF = 0;
+    public static final int HIDE_LEARNED_ON = 1;
+    
     public static final int LWE_DEFAULT_USER = 1;
     
     // load all settings from Preferences on start
@@ -139,9 +154,11 @@ public class XflashSettings
         studyMode = settings.getInt("studyMode",LWE_STUDYMODE_PRACTICE);
         studyLanguage = settings.getInt("studyLanguage",LWE_STUDYLANGUAGE_JAPANESE);
         readingMode = settings.getInt("readingMode",LWE_STUDYLANGUAGE_JAPANESE);
+        answerTextSize = settings.getInt("answerTextSize",LWE_ANSWERTEXT_NORMAL);
         difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_EASY);
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
+        hideLearnedCards = settings.getInt("hideLearnedCards",HIDE_LEARNED_OFF);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
     
     }  // end load()
@@ -165,7 +182,7 @@ public class XflashSettings
         
         // set our actual active tag
         activeTag = inTag;
-        activeTag.populateCardIds();
+        activeTag.populateCards();
    
         // when we set the active tag, also set the active card
         // to the zero-index card of said new tag
@@ -190,7 +207,7 @@ public class XflashSettings
             int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
             activeTag = TagPeer.retrieveTagById(tempTagId);
             
-            activeTag.populateCardIds();
+            activeTag.populateCards();
         }
             
         return activeTag;
@@ -525,7 +542,62 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("readingMode",readingMode);
         editor.commit();
+
+    }  // end setReadingMode()
+
+
+    public static int getAnswerTextSize()
+    {
+        return answerTextSize;
     }
+
+    public static String getAnswerTextLabel()
+    {
+        if( answerTextSize == LWE_ANSWERTEXT_NORMAL )
+        {
+            return "Normal";
+        }
+        else
+        {
+            return "Large";
+        }
+    
+    }  // end getAnswerTextLabel()
+
+    
+    // get CSS to be injected for displaying the answer in PracticeFragment
+    public static String getAnswerSizeCSS()
+    {
+        // otherwise return size CSS based on size setting
+        switch(answerTextSize)
+        {
+            case LWE_ANSWERTEXT_NORMAL:     return "font-size:14px;";
+            case LWE_ANSWERTEXT_LARGE:      return "font-size:20px;";
+            
+            default: return "error";
+        }
+
+    }  // end getAnswerSizeCSS()
+
+
+    public static void setAnswerText(int inSize)
+    {
+        if( ( inSize < LWE_ANSWERTEXT_NORMAL ) || ( inSize > LWE_ANSWERTEXT_LARGE ) )
+        {
+            throwBadValue("setAnswerText",inSize);
+        }
+        
+        answerTextSize = inSize;
+        
+        // set the new reading mode in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("answerTextSize",answerTextSize);
+        editor.commit();
+
+    }  // end setAnswerText()
 
 
 //  *** DIFFICULTY MODE SETTINGS ***
@@ -642,6 +714,37 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("customFrequency",customFrequency);
         editor.commit();
+    }
+
+
+    // gets the current hide learned cards state
+    public static int getHideLearned()
+    {
+        return hideLearnedCards;
+    }
+
+
+    // toggles the hide learned cards state and returns the new state
+    public static int toggleHideLearned()
+    {
+        if( hideLearnedCards == HIDE_LEARNED_OFF )
+        {
+            hideLearnedCards = HIDE_LEARNED_ON;
+        }
+        else
+        {
+            hideLearnedCards = HIDE_LEARNED_OFF;
+        }
+
+        // set the new state in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("hideLearnedCards",hideLearnedCards);
+        editor.commit();
+        
+        return hideLearnedCards;
     }
 
 
