@@ -168,33 +168,42 @@ public class PracticeCardSelector
     }  // end calculateProbabilityOfUnseenWithcardsSeen()
 
   
-    public static void setNextBrowseCard(Tag currentTag,Card currentCard,int direction)
+    // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
+    public static void setBrowseCardByDirection(int inDirection)
+    {
+        Tag tempTag   = XflashSettings.getActiveTag();
+        Card tempCard = XflashSettings.getActiveCard();
+
+        setNextBrowseCard(tempTag,tempCard,inDirection);
+    }
+
+    
+    // set the active card to the currentCard passed, by direction
+    public static void setNextBrowseCard(Tag currentTag,Card currentCard,int inDirection)
     {
         Card nextCard = null;
+        int cardIndex = currentTag.getCurrentIndex();
 
-        if( ( currentCard == null ) || ( direction == XflashScreen.DIRECTION_NULL ) )
+
+        if( ( currentCard == null ) || ( inDirection == XflashScreen.DIRECTION_NULL ) )
         {
-            // that means we're on the first card, (or haven't changed)
+            // that means we're on the first card, (or haven't moved )
             // use the tag's currentIndex
-            int tempIndex = currentTag.getCurrentIndex();
-
-            if( tempIndex > currentTag.flattenedCardArray.size() )
+            if( cardIndex > currentTag.flattenedCardArray.size() )
             {
                 Log.d(MYTAG,"ERROR - in setNextBrowseCard()");
                 Log.d(MYTAG,"      - currentIndex is out of bounds?");
             }
         
-            nextCard = currentTag.flattenedCardArray.get(tempIndex);
+            nextCard = currentTag.flattenedCardArray.get(cardIndex);
         }
         else
         {
             // We already have a card, so get the next card based on the current index
-            int tempIndex = currentTag.getCurrentIndex();
-
-            if( direction == XflashScreen.DIRECTION_CLOSE )
+            if( inDirection == XflashScreen.DIRECTION_CLOSE )
             {
                 // if we are closing (going back), get the previous card 
-                if( tempIndex == 0 )
+                if( cardIndex == 0 )
                 {
                     currentTag.setCurrentIndex( currentTag.flattenedCardArray.size() - 1 );
                 }
@@ -206,7 +215,7 @@ public class PracticeCardSelector
             else 
             {
                 // if we are opening (going forward), get the next card
-                if( tempIndex >= ( currentTag.flattenedCardArray.size() - 1) )
+                if( cardIndex >= ( currentTag.flattenedCardArray.size() - 1) )
                 {
                     currentTag.setCurrentIndex(0);
                 }

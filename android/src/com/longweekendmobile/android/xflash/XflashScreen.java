@@ -129,6 +129,14 @@ public class XflashScreen
         --currentPracticeScreen;
     }
 
+    
+    // remove an example sentence view from the stack
+    public static void cancelExampleSentence()
+    {
+        popBackPractice();
+        extraScreensOn[LWE_PRACTICE_TAB] = false;
+    }
+
 
     // called after scoring a card - sets flag to open a practice window WITHOUT
     // adding it to the 'backstack'

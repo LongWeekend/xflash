@@ -179,22 +179,20 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         {
             if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
             {
-                // if we're browsing, set the next card
+                // if we're browsing, set the next card ( + )
                 if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
                 {
-                    // TODO - this is some dirty shit, and in a bad place
-                    //      - (but it works)
-                    PracticeCardSelector.setNextBrowseCard(XflashSettings.getActiveTag(),XflashSettings.getActiveCard(),XflashScreen.DIRECTION_OPEN);
+                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_OPEN);
                 }
                 
                 onScreenTransition(newTabTag,XflashScreen.DIRECTION_OPEN); 
             }
             else
             {
-                // if we're browsing, set the next card
+                // if we're browsing, set the next card ( - )
                 if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
                 {
-                    PracticeCardSelector.setNextBrowseCard(XflashSettings.getActiveTag(),XflashSettings.getActiveCard(),XflashScreen.DIRECTION_CLOSE);
+                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_CLOSE );
                 }
                 
                 onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
@@ -588,7 +586,17 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
                     {
                         if( XflashScreen.getExampleSentenceOn() )
                         {
-                            switchTab = XflashScreen.getTransitionFragment("example_sentence");
+                            // only tab into the example sentence view in practice
+                            if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )
+                            {
+                                switchTab = XflashScreen.getTransitionFragment("example_sentence");
+                            }
+                            else
+                            {
+                                // we're bypassing an open example sentence view, so
+                                // remove it from the stack
+                                XflashScreen.cancelExampleSentence();
+                            }
                         }
                     }
                     else if( inTabTagname == "tag" )
