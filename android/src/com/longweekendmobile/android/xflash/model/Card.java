@@ -169,12 +169,10 @@ public class Card
         // if no APP_HEADWORD preferences has been set
         if( XflashSettings.getStudyLanguage() == XflashSettings.LWE_STUDYLANGUAGE_ENGLISH )
         { 
-            Log.d(MYTAG,">>> getHeadword() returning headword_en:  " + headword_en );
             return headword_en;
         }
         else
         {
-            Log.d(MYTAG,">>> getHeadword() returning regular headword:  " + headword );
             return headword;
         }   
 

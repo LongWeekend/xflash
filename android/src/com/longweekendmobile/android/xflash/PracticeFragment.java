@@ -70,12 +70,9 @@ public class PracticeFragment extends Fragment
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
-        // TODO - debugging
-        // if there is no tag loaded, go for Long Weekend Favorites
+        // if there is no tag loaded, default to Long Weekend Favorites
         currentTag = XflashSettings.getActiveTag();           
         currentCard = (JapaneseCard)XflashSettings.getActiveCard();
-        
-        // currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(82702);
         
         // set up view based on current study mode
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
@@ -129,13 +126,20 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_last:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
-                                            break;
+            case R.id.browseblock_last:     // when they push the left/back browse button
+                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_CLOSE);
+                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
+                break;
+            
             case R.id.browseblock_actions:  break;
-            case R.id.browseblock_next:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-                                            break;  
+            
+            case R.id.browseblock_next:    // when they push the right/forward browse button 
+                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_OPEN); 
+                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                break;  
         } 
-    }
+
+    }  // end browseClick()
 
 
     // method called when user click to queue the extra screen
@@ -229,7 +233,7 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo.setText( PracticeFragment.currentTag.getName() );
 
             // load the tag card count
-            String tempString = Integer.toString( PracticeFragment.currentTag.getCardCount() );
+            String tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
             tempString = tempString + " / ";
             tempString = tempString + Integer.toString( PracticeFragment.currentTag.getCardCount() );
 

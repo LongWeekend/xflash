@@ -185,10 +185,13 @@ public class XflashSettings
         activeTag.populateCards();
    
         // when we set the active tag, also set the active card
-        // to the zero-index card of said new tag
-        // MAY BE TEMPORARY
+        // to the zero-index card of said new tag, and reset
+        // the practice screen count
+
+        // TODO - MAY BE TEMPORARY
         activeTag.setCurrentIndex(0);
         activeCard = activeTag.flattenedCardArray.get(0);
+        XflashScreen.resetPracticeScreen();
         
     }  // end setActiveTag()
 
@@ -243,6 +246,11 @@ public class XflashSettings
         }
         
         return activeCard;
+    }
+
+    public static void setActiveCard(Card inCard)
+    {
+        activeCard = inCard;
     }
 
 
