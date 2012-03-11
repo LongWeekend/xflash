@@ -70,12 +70,9 @@ public class PracticeFragment extends Fragment
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
-        // TODO - debugging
-        // if there is no tag loaded, go for Long Weekend Favorites
+        // if there is no tag loaded, default to Long Weekend Favorites
         currentTag = XflashSettings.getActiveTag();           
         currentCard = (JapaneseCard)XflashSettings.getActiveCard();
-        
-        // currentCard = (JapaneseCard)CardPeer.retrieveCardByPK(82702);
         
         // set up view based on current study mode
         if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_PRACTICE )    
@@ -129,13 +126,20 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_last:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
-                                            break;
+            case R.id.browseblock_last:     // when they push the left/back browse button
+                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_CLOSE);
+                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
+                break;
+            
             case R.id.browseblock_actions:  break;
-            case R.id.browseblock_next:     inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-                                            break;  
+            
+            case R.id.browseblock_next:    // when they push the right/forward browse button 
+                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_OPEN); 
+                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                break;  
         } 
-    }
+
+    }  // end browseClick()
 
 
     // method called when user click to queue the extra screen
@@ -201,11 +205,11 @@ public class PracticeFragment extends Fragment
             // load the show-reading text
             showReadingText = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_readingtext);
             showReadingText.setText( currentCard.reading() );
-
+            
             // load the headword view - variable based on study language in Card.java
             headwordView = (TextView)PracticeFragment.practiceLayout.findViewById(R.id.practice_headword);
             headwordView.setText( currentCard.getHeadword() );
-            
+           
             // load the mini answer button
             miniAnswerImage = (ImageView)practiceLayout.findViewById(R.id.practice_minianswer);
             
@@ -229,7 +233,7 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo.setText( PracticeFragment.currentTag.getName() );
 
             // load the tag card count
-            String tempString = Integer.toString( PracticeFragment.currentTag.getCardCount() );
+            String tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
             tempString = tempString + " / ";
             tempString = tempString + Integer.toString( PracticeFragment.currentTag.getCardCount() );
 
@@ -396,8 +400,9 @@ public class PracticeFragment extends Fragment
             }
 
             // swap out the dfn declaration based on color scheme
+            header = header.replace("##SIZECSS##", XflashSettings.getAnswerSizeCSS() );
             header = header.replace("##THEMECSS##", XflashSettings.getThemeCSS() );
-                
+            
             // set up the full web view data
             String data = header + currentCard.getMeaning() + LWECardHtmlFooter;
                 
@@ -420,7 +425,7 @@ public class PracticeFragment extends Fragment
         private static String LWECardHtmlHeader =
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
 "<style>" +
-"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; font-size:14px; font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
+"body{ background-color: transparent; height:72px; display:table; margin:0px; padding:0px; text-align:center; line-height:21px; ##SIZECSS## font-weight:bold; font-family:Helvetica,sanserif; color:#fff; text-shadow:darkslategray 0px 1px 0px; } " +
 "dfn{ text-shadow:none; font-weight:normal; color:#000; position:relative; top:-1px; font-family:verdana; font-size:10.5px; background-color:#C79810; line-height:10.5px; margin:4px 4px 0px 0px; height:14px; padding:2px 3px; -webkit-border-radius:4px; border:1px solid #F9F7ED; display:inline-block;} " +
 "#container{width:300px; display:table-cell; vertical-align:middle;text-align:center;} " + 
 "ol{color:white; text-align:left; width:240px; margin:0px; margin-left:24px; padding-left:10px;} " +

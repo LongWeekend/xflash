@@ -12,6 +12,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void switchStudyLanguage()
 //  public static void switchReadingMode()
 //  public static void goDifficulty(Xflash  )
+//  public static void switchAnswerSize()
 //  public static void advanceColorScheme()
 //  public static void goUser(Xflash  )
 //  public static void goUpdate(Xflash  )
@@ -68,6 +69,10 @@ public class SettingsFragment extends Fragment
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
         tempView.setText( XflashSettings.getReadingModeName() );
         
+        // set the answer text size label in our settings view
+        tempView = (TextView)settingsLayout.findViewById(R.id.settings_answersize);
+        tempView.setText( XflashSettings.getAnswerTextLabel() );
+        
         // set the "Theme" label in our settings view
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
         tempView.setText( XflashSettings.getColorSchemeName() );
@@ -98,8 +103,6 @@ public class SettingsFragment extends Fragment
         // set the "Study Mode" label in our settings view
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
         tempView.setText( XflashSettings.getStudyModeName() );
-
-        XflashScreen.clearPracticeScreens();
 
     }  // end switchStudyMode()
    
@@ -158,6 +161,30 @@ public class SettingsFragment extends Fragment
     }
 
     
+    // changes the answer text size in the PracticeFragment
+    public static void switchAnswerSize()
+    {
+        int oldSize = XflashSettings.getAnswerTextSize();
+        int newSize = -1;
+
+        if( oldSize == XflashSettings.LWE_ANSWERTEXT_NORMAL )
+        {
+            newSize = XflashSettings.LWE_ANSWERTEXT_LARGE;
+        }
+        else
+        {
+            newSize = XflashSettings.LWE_ANSWERTEXT_NORMAL;
+        }
+
+        XflashSettings.setAnswerText(newSize);
+
+        // reset the answer text size label 
+        TextView tempView  = (TextView)settingsLayout.findViewById(R.id.settings_answersize);
+        tempView.setText( XflashSettings.getAnswerTextLabel() );
+
+    }  // end switchAnswerSize()
+
+
     public static void advanceColorScheme()
     {
         int tempScheme = XflashSettings.getColorScheme();

@@ -42,10 +42,13 @@ package com.longweekendmobile.android.xflash;
 //  public void SettingsFragment_switchStudyLanguage(View  )
 //  public void SettingsFragment_switchReadingMode(View  )
 //  public void SettingsFragment_goDifficulty(View  )
+//  public void SettingsFragment_switchAnswerSize(View  )
 //  public void SettingsFragment_advanceColorScheme(View  )
 //  public void SettingsFragment_goUser(View  )
 //  public void SettingsFragment_goUpdate(View  )
 //  public void SettingsFragment_launchSettingsWeb(View  )
+//
+//  public void DifficultyFragment_toggleHideLearned(View  )
 //
 //  public void UserFragment_activateUser(View  )
 //  public void UserFragment_editUser(View  )
@@ -176,10 +179,24 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         {
             if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
             {
+                // if we're browsing, set the next card
+                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
+                {
+                    // TODO - this is some dirty shit, and in a bad place
+                    //      - (but it works)
+                    PracticeCardSelector.setNextBrowseCard(XflashSettings.getActiveTag(),XflashSettings.getActiveCard(),XflashScreen.DIRECTION_OPEN);
+                }
+                
                 onScreenTransition(newTabTag,XflashScreen.DIRECTION_OPEN); 
             }
             else
             {
+                // if we're browsing, set the next card
+                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
+                {
+                    PracticeCardSelector.setNextBrowseCard(XflashSettings.getActiveTag(),XflashSettings.getActiveCard(),XflashScreen.DIRECTION_CLOSE);
+                }
+                
                 onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
             }
 
@@ -332,6 +349,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         SettingsFragment.goDifficulty(this);
     }
+    public void SettingsFragment_switchAnswerSize(View v)
+    {
+        SettingsFragment.switchAnswerSize();
+    }
     public void SettingsFragment_advanceColorScheme(View v)
     {
         SettingsFragment.advanceColorScheme();
@@ -347,6 +368,11 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     public void SettingsFragment_launchSettingsWeb(View v)
     {
         SettingsFragment.launchSettingsWeb(v,this);
+    }
+
+    public void DifficultyFragment_toggleHideLearned(View v)
+    {
+        DifficultyFragment.toggleHideLearned();
     }
 
     public void UserFragment_activateUser(View v)

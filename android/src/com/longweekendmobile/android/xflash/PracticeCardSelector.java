@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public static int calculateNextCardLevelForTag(Tag  )
 //  public static float calculateProbabilityOfUnseenWithcardsSeen()
 //
-//  public static Card getNextBrowseCard(Tag  ,Card,  ,int  )
+//  public static void setNextBrowseCard(Tag  ,Card,  ,int  )
 
 //  TODO - ABSOLUTELY no idea whether these work yet
 
@@ -168,22 +168,23 @@ public class PracticeCardSelector
     }  // end calculateProbabilityOfUnseenWithcardsSeen()
 
   
-    public static Card getNextBrowseCard(Tag currentTag,Card currentCard,int direction)
+    public static void setNextBrowseCard(Tag currentTag,Card currentCard,int direction)
     {
         Card nextCard = null;
 
-        if( currentCard == null )
+        if( ( currentCard == null ) || ( direction == XflashScreen.DIRECTION_NULL ) )
         {
-            // that means we're on the first card, use the tag's currentIndex
+            // that means we're on the first card, (or haven't changed)
+            // use the tag's currentIndex
             int tempIndex = currentTag.getCurrentIndex();
 
             if( tempIndex > currentTag.flattenedCardArray.size() )
             {
-                Log.d(MYTAG,"ERROR - in getNextBrowseCard()");
+                Log.d(MYTAG,"ERROR - in setNextBrowseCard()");
                 Log.d(MYTAG,"      - currentIndex is out of bounds?");
             }
         
-            nextCard = CardPeer.retrieveCardByPK(tempIndex);
+            nextCard = currentTag.flattenedCardArray.get(tempIndex);
         }
         else
         {
@@ -199,12 +200,12 @@ public class PracticeCardSelector
                 }
                 else
                 {
-                    currentTag.incrementIndex();
+                    currentTag.decrementIndex();
                 }
             }
             else 
             {
-                // if we are coming from the right or don't know, get the next card 
+                // if we are opening (going forward), get the next card
                 if( tempIndex >= ( currentTag.flattenedCardArray.size() - 1) )
                 {
                     currentTag.setCurrentIndex(0);
@@ -224,10 +225,10 @@ public class PracticeCardSelector
         {
             nextCard.hydrate();
         }
-        
-        return nextCard;
+       
+        XflashSettings.setActiveCard(nextCard);
 
-    }  // end getNextBrowseCard()
+    }  // end setNextBrowseCard()
 
 
 }  // end PracticeCardSelector class declaration

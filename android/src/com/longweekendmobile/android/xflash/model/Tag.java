@@ -17,9 +17,9 @@ package com.longweekendmobile.android.xflash.model;
 //  public int seenCardCount()
 //
 //  public void recacheCardCountForEachLevel()
-//  public ArrayList<ArrayList<Integer>> thawCardIds(Context  )
-//  public void freezeCardIds()
-//  public void populateCardIds()
+//  public ArrayList<ArrayList<Integer>> thawCards(Context  )
+//  public void freezeCards()
+//  public void populateCards()
 //  public ArrayList<ArrayList<Integer>> combineCardIds()
 //  public void moveCard(Card  ,int  )
 //  public void removeCardFromActiveSet(Card  )
@@ -195,7 +195,7 @@ public class Tag
     // TODO - performance on ObjectInputStream is horrible, hand-code 
     //        a serialization or don't worry about it?
     @SuppressWarnings("unchecked")
-    public ArrayList<ArrayList<Card>> thawCardIds()
+    public ArrayList<ArrayList<Card>> thawCards()
     {
         String cacheFile = "ids.plist";
 
@@ -221,13 +221,13 @@ public class Tag
             return null;
         }
 
-    }  // end thawCardIds()
+    }  // end thawCards()
 
 
     // saves a serialized copy of cardsByLevel to a file 'ids.plist'
     // TODO - performance on ObjectOutputStream is terrible, consider
     //        hand-writing serialization?
-    public void freezeCardIds()
+    public void freezeCards()
     {
         String cacheFile = "ids.plist";
 
@@ -245,13 +245,13 @@ public class Tag
             Log.d(MYTAG,"ERROR: caught -- " + t.toString() );
         }
 
-    }  // end freezeCardIds()
+    }  // end freezeCards()
 
     
     // executed when loading a new set on app load
-    public void populateCardIds()
+    public void populateCards()
     {
-        ArrayList<ArrayList<Card>> tempCardsArray = thawCardIds();
+        ArrayList<ArrayList<Card>> tempCardsArray = thawCards();
 
         if( tempCardsArray != null)
         {
@@ -272,7 +272,7 @@ public class Tag
         // populate card level counts
         recacheCardCountForEachLevel();
 
-    }  // end populateCardIds
+    }  // end populateCards
 
     
     // concatenate cardId arrays for browse mode
@@ -299,7 +299,7 @@ public class Tag
 
         return allCards;
 
-    }  // end combineCardIds()
+    }  // end combineCards()
 
     @SuppressWarnings("unused")
     private class CardComparator implements Comparator<Card>

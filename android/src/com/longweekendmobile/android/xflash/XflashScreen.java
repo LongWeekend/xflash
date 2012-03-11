@@ -24,7 +24,6 @@ package com.longweekendmobile.android.xflash;
 //  public void fireUpScreenManager()
 //  public void popBackPractice()
 //  public void setPracticeOverride()
-//  public void clearPracticeScreens()
 //  public void setScreenValues(String  )
 //  public TabInfo getTransitionFragment(String  )
 //  public void addTagStack()
@@ -32,6 +31,14 @@ package com.longweekendmobile.android.xflash;
 //  public void detachExtras(FragmentTransaction  )
 //  public String goBack(String  )
 //
+//  public static boolean getExampleSentenceOn()
+//  public static boolean getTagCardsOn()
+//  public static boolean getAddCardToTagOn()
+//
+//  public static void resetPracticeScreen()
+//  public static int getCurrentPracticeScreen()
+//  public static int getCurrentTagScreen()
+//  public static int getCurrentSearchScreen()
 //  public int getCurrentSettingsScreen()
 //  public void setCurrentSettingsType(int  )
 //  public int getCurrentSettingsType()
@@ -115,21 +122,7 @@ public class XflashScreen
         tagStack = null;
     } 
 
-    public static boolean getExampleSentenceOn()
-    {
-        return exampleSentenceOn;
-    }
-
-    public static boolean getTagCardsOn()
-    {
-        return tagCardsOn;
-    }
-
-    public static boolean getAddCardToTagOn()
-    {
-        return addCardToTagOn;
-    }
-
+    
     // remove the last transition from the practice back stack
     public static void popBackPractice()
     {
@@ -144,11 +137,6 @@ public class XflashScreen
         overridePracticeCount = true;
     }
 
-    // when switching   practice mode <-> browse mode   clear practice backstack
-    public static void clearPracticeScreens()
-    {
-        currentPracticeScreen = 0;
-    }
 
     // set all necessary internal flags following a view change
     // (called for both  Xflash.onTabChanged()  and  Xflash.onScreenTransition()
@@ -450,7 +438,19 @@ public class XflashScreen
         { 
             if( currentPracticeScreen != 0 )
             {
-                return "practice";
+                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
+                {
+                    // if we're in browse, automatically go back
+                    return "practice";
+                }
+                else
+                {
+                    // if we're in practice, make sure we're on ExampleSentenceFragment
+                    if( exampleSentenceOn )
+                    {
+                        return "practice";
+                    }
+                }
             }     
         }
         else if( currentTab == "tag" )
@@ -513,6 +513,26 @@ public class XflashScreen
 
     }  // end goBack()
 
+
+    public static boolean getExampleSentenceOn()
+    {
+        return exampleSentenceOn;
+    }
+
+    public static boolean getTagCardsOn()
+    {
+        return tagCardsOn;
+    }
+
+    public static boolean getAddCardToTagOn()
+    {
+        return addCardToTagOn;
+    }
+
+    public static void resetPracticeScreen()
+    {
+        currentPracticeScreen = 0;
+    }
 
     public static int getCurrentPracticeScreen()
     {

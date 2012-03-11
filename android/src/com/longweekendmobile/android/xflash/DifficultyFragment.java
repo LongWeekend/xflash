@@ -8,6 +8,9 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
+//  public static void toggleHideLearned()
+//
+//  private static void setHideLearned(int  )
 //  private void setSeekBars()
 //
 //  private RadioGroup.OnCheckedChangeListener radioChange
@@ -23,23 +26,26 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class DifficultyFragment extends Fragment
 {
     private static final String MYTAG = "XFlash DifficultyFragment";
    
+    private static LinearLayout difficultyLayout = null;
+    private static String learnedOff = null;
+    private static String learnedOn = null;
+
     private RadioGroup myGroup;
     private SeekBar studyPoolBar;
     private SeekBar frequencyBar;
 
-
-    // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        LinearLayout difficultyLayout = (LinearLayout)inflater.inflate(R.layout.difficulty, container, false);
+        difficultyLayout = (LinearLayout)inflater.inflate(R.layout.difficulty, container, false);
 
         // set the seek bars so we can change their values
         studyPoolBar = (SeekBar)difficultyLayout.findViewById(R.id.difficulty_studypool);
@@ -83,11 +89,48 @@ public class DifficultyFragment extends Fragment
             default:    Log.d(MYTAG,"Error settings active radio");                             break;    
         }
 
-        // last, set the seek bars to the correct levels
+        // set the seek bars to the correct levels
         setSeekBars();
 
+        // last, set the 'hide learned cards' toggle
+        learnedOff = getResources().getString(R.string.just_off);
+        learnedOn = getResources().getString(R.string.just_on);
+        
+        setHideLearned( XflashSettings.getHideLearned() );
+        
         return difficultyLayout;
-    }
+
+    }  // end onCreateView()
+
+
+    // handles toggling and resetting of the 'hide learned cards' option
+    public static void toggleHideLearned()
+    {
+        // toggle the status
+        int tempStatus = XflashSettings.toggleHideLearned();
+
+        // refresh the view
+        setHideLearned(tempStatus);
+
+    }  // end toggleHideLearned()
+
+
+    // sets the view for the 'hide learned cards' status
+    private static void setHideLearned(int incomingStatus)
+    {
+        TextView hideLearnedStatus = (TextView)difficultyLayout.findViewById(R.id.hide_learned_value);
+
+        if( incomingStatus == XflashSettings.HIDE_LEARNED_OFF )
+        {
+            hideLearnedStatus.setText(learnedOff);
+        }
+        else
+        {
+            hideLearnedStatus.setText(learnedOn);
+        }
+
+    }  // end setHideLearned()
+
 
     // sets the seek bars to the appropriate value depending on difficulty mode
     private void setSeekBars()

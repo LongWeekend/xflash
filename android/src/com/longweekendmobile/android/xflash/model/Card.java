@@ -222,10 +222,6 @@ public class Card
 
     // takes a sqlite Cursor and populates the properties of the card
     // gives the freedom of not including the meaning
-
-    // TODO - above was the original comment, however it appears we're
-    //    ALWAYS including the meaning, and optionally including
-    //    the basic info.  Is that what we want to do?
     public void hydrate(Cursor inCursor,boolean isSimple)
     {
         int tempColumn = inCursor.getColumnIndex("card_id");
@@ -237,11 +233,11 @@ public class Card
         tempColumn = inCursor.getColumnIndex("meaning");
         meaning = inCursor.getString(tempColumn);
 
+        tempColumn = inCursor.getColumnIndex("headword_en");
+        headword_en = inCursor.getString(tempColumn);
+
         if( isSimple == false )
         {
-            tempColumn = inCursor.getColumnIndex("headword_en");
-            headword_en = inCursor.getString(tempColumn);
-
             tempColumn = inCursor.getColumnIndex("card_level");
             levelId = inCursor.getInt(tempColumn);
 
