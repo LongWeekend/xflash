@@ -8,12 +8,13 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void reveal()
-//  public static void toggleReading()
-//  public static void practiceClick(View  ,Xflash  )
-//  public static void browseClick(View  ,Xflash  )
-//  public static void goRight(Xflash  )
 //  public static void setPracticeBlank()
+
+//  private void reveal()
+//  private void toggleReading()
+//  private void practiceClick(View  )
+//  private void browseClick(View  )
+//  private void goRight()
 //
 //  private static class PracticeScreen
 //
@@ -23,6 +24,7 @@ package com.longweekendmobile.android.xflash;
 //      public static void setAnswerBar(int  )
 //      public static void toggleReading()
 //      private static void loadMeaning()
+//      private static void setClickListeners()
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,24 +47,21 @@ public class PracticeFragment extends Fragment
 {
     private static final String MYTAG = "XFlash PracticeFragment";
     
-    // properties for handling color theme transitions
-    private static RelativeLayout practiceLayout;
-
     public static final int PRACTICE_VIEW_BLANK = 0;
     public static final int PRACTICE_VIEW_BROWSE = 1;
     public static final int PRACTICE_VIEW_REVEAL = 2;
 
-    private static int practiceViewStatus = -1;
-
-    // the counts for the count bar at the top
     public static int[] cardCounts = { 1, 2, 3, 4, 5 };
     
     private static int percentageRight = 100;
+    private static int practiceViewStatus = -1;
+
+    private static RelativeLayout practiceLayout;
 
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
 
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -97,45 +96,52 @@ public class PracticeFragment extends Fragment
     }  // end onCreateView()
 
     
+    // called by ExampleSentenceFragment to reset the view
+    public static void setPracticeBlank()
+    {
+        practiceViewStatus = PRACTICE_VIEW_BLANK;
+    }
+
+
     // called by Xflash when someone clicks 'tap for answer'
-    public static void reveal()
+    private static void reveal()
     {
         PracticeScreen.setupPracticeView(PRACTICE_VIEW_REVEAL);
     }
 
-
+/*
     // called by Xflash when the reading is clicked on
-    public static void toggleReading()
+    private void toggleReading()
     {
         PracticeScreen.toggleReading();
     }
-    
+*/    
     
     // method called when any button in the options block is clicked
-    public static void practiceClick(View v,Xflash inContext)
+    private static void practiceClick(View v)
     {
         // load the next practice view without adding to the back stack
         XflashScreen.setPracticeOverride();
         practiceViewStatus = PRACTICE_VIEW_BLANK;
-        inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
 
     // method called when any button in the options block is clicked
-    public static void browseClick(View v,Xflash inContext)
+    private static void browseClick(View v)
     {
         switch( v.getId() )
         {
             case R.id.browseblock_last:     // when they push the left/back browse button
-                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_CLOSE);
-                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
+                PracticeCardSelector.setNextBrowseCard(currentTag,XflashScreen.DIRECTION_CLOSE);
+                Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
                 break;
             
             case R.id.browseblock_actions:  break;
             
             case R.id.browseblock_next:    // when they push the right/forward browse button 
-                PracticeCardSelector.setNextBrowseCard(currentTag,currentCard,XflashScreen.DIRECTION_OPEN); 
-                inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                PracticeCardSelector.setNextBrowseCard(currentTag,XflashScreen.DIRECTION_OPEN); 
+                Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
                 break;  
         } 
 
@@ -143,18 +149,11 @@ public class PracticeFragment extends Fragment
 
 
     // method called when user click to queue the extra screen
-    public static void goRight(Xflash inContext)
+    private static void goRight()
     {
         // load the ExampleSentenceFragment to the fragment tab manager
         ExampleSentenceFragment.loadCard(currentCard,cardCounts);
-        inContext.onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
-    }
-
-
-    // called by ExampleSentenceFragment to reset the view
-    public static void setPracticeBlank()
-    {
-        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 
 
@@ -240,11 +239,14 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo = (TextView)practiceLayout.findViewById(R.id.practice_tag_count);
             tempPracticeInfo.setText(tempString);
 
+            // set all of our click listeners
+            PracticeScreen.setClickListeners();
+            
         }  // end PracticeScreen.initialize()
         
         
         // set all TextView elements of the count bar to the current values
-        public static void refreshCountBar()
+        private static void refreshCountBar()
         {
             for(int i = 0; i < 5; i++)
             {
@@ -422,6 +424,94 @@ public class PracticeFragment extends Fragment
         }  // end loadMeaning()
 
 
+        // set click listeners for all relevant views
+        private static void setClickListeners()
+        {
+            // listener for the 'tap for answer' answer bar
+            blankButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    reveal();
+                }
+            });
+
+            // THE PRACTICE-MODE ANSWER BAR
+            
+            // listener for the 'actions' button
+            ImageView tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_actions);
+            tempImage.setOnClickListener(practiceClickListener);
+
+            // listener for the 'right' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_right);
+            tempImage.setOnClickListener(practiceClickListener);
+
+            // listener for the 'actions' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_wrong);
+            tempImage.setOnClickListener(practiceClickListener);
+
+            // listener for the 'actions' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_goaway);
+            tempImage.setOnClickListener(practiceClickListener);
+
+            // THE BROWSE-MODE ANSWER BAR
+            
+            // listener for the 'actions' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_last);
+            tempImage.setOnClickListener(browseClickListener);
+
+            // listener for the 'right' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_actions);
+            tempImage.setOnClickListener(browseClickListener);
+
+            // listener for the 'actions' button
+            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_next);
+            tempImage.setOnClickListener(browseClickListener);
+
+            // listener for the main scroll view
+            practiceScrollBack.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    reveal();
+                }
+            });
+
+            // listener for 'show reading' button
+            showReadingButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    PracticeScreen.toggleReading();
+                }
+            });
+
+            // listener for reading text 
+            showReadingText.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    PracticeScreen.toggleReading();
+                }
+            });
+
+            // listener for 'go right' button to example sentences
+            rightArrow.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    goRight();
+                }
+            });
+
+        }  // end setClickListeners()
+        
+        
         private static String LWECardHtmlHeader =
 "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />" +
 "<style>" +
@@ -448,6 +538,26 @@ public class PracticeFragment extends Fragment
 "<body><div id='container'>";
 
         private static String LWECardHtmlFooter = "</div></body></html>";
+
+        // click listener for answer bar buttons in practice mode
+        private static View.OnClickListener practiceClickListener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                practiceClick(v);
+            }
+        };
+
+        // click listener for answer bar buttons in browse mode
+        private static View.OnClickListener browseClickListener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                browseClick(v);
+            }
+        };
 
     }  // end PracticeScreen class declaration
 

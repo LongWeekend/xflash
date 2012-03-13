@@ -9,12 +9,11 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //  public void onPause()                                               @over
 //
-//  public static void addCard(View  ,Xflash  )
-//  public static void toggleStar(View  )
+//  private void addCard(View  )
+//  private void toggleStar(View  )
+//  private void performSearch()
 //
-//  private static boolean checkMembershipCacheForCard(Card  )
-//
-//  private TextView.OnEditorActionListener searchActionListener
+//  private boolean checkMembershipCacheForCard(Card  )
 //
 //  private class AsyncSearch extends AsyncTask<Void, Void, Void>
 //  private class SearchAdapter extends ArrayAdapter<Card>
@@ -27,7 +26,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,20 +50,18 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class SearchFragment extends Fragment
 {
-    private static final String MYTAG = "XFlash SearchFragment";
+    // private static final String MYTAG = "XFlash SearchFragment";
     
-    private static LinearLayout searchLayout = null;
-    private static EditText mySearch = null;
-    private static LayoutInflater myInflater;
+    private EditText mySearch = null;
+    private LayoutInflater myInflater;
     private InputMethodManager imm = null;
     private ListView searchList;
 
-    private static Tag starredTag;
-    private static ProgressDialog searchDialog = null;
-    private static ArrayList<Card> searchResults = null;
-    private static ArrayList<Card> membershipCacheArray = null;
+    private Tag starredTag;
+    private ProgressDialog searchDialog = null;
+    private ArrayList<Card> searchResults = null;
+    private ArrayList<Card> membershipCacheArray = null;
 
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -73,20 +69,19 @@ public class SearchFragment extends Fragment
         // save the inflater, input manager, and starred words tag for later use
         myInflater = inflater;
         starredTag = Tag.starredWordsTag();
-        imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager)Xflash.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         // inflate our layout for the Search activity
-        searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
+        LinearLayout searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
-        Button tempButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
+        Button cancelButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
   
-        XflashSettings.setupColorScheme(titleBar,tempButton);
+        XflashSettings.setupColorScheme(titleBar,cancelButton);
         
         // set our listeners
         mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
-        // mySearch.setOnFocusChangeListener(searchFocusListener);
         mySearch.setOnEditorActionListener(searchActionListener);
 
         // get the ListView to display results
@@ -118,6 +113,7 @@ public class SearchFragment extends Fragment
 
     }  // end onCreateView()
 
+    
     @Override
     public void onPause()
     {
@@ -131,21 +127,22 @@ public class SearchFragment extends Fragment
         //        necessary/desirable to eliminate this forced refresh and rely 
         //        on Observer notifications to maintain the cacheArray instead?
         membershipCacheArray = null;
-    }
+
+    }  // end onPause
 
     
     // launch AddCardToTagFragment
-    public static void addCard(View v,Xflash inContext)
+    private void addCard(View v)
     {
         int tempInt = (Integer)v.getTag();
 
         AddCardToTagFragment.loadCard(tempInt);
-        inContext.onScreenTransition("search_add_card",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("search_add_card",XflashScreen.DIRECTION_OPEN);
     }
 
     
     // modify the 'starred' status of the clicked Card
-    public static void toggleStar(View v)
+    private void toggleStar(View v)
     {
         Card tempCard = (Card)v.getTag();
         ImageView starImage = (ImageView)v;
@@ -184,8 +181,23 @@ public class SearchFragment extends Fragment
     }  // end toggleStar()
 
 
+    // performs the actual search
+    private void performSearch()
+    {
+        // when they click 'done' on the keyboard,
+        // search and hide keyboard
+        mySearch.clearFocus();
+
+        AsyncSearch tempSearch = new AsyncSearch();
+        tempSearch.execute();
+
+        imm.hideSoftInputFromWindow(mySearch.getWindowToken(),0);
+
+    }  // end performSearch
+
+
     // checks the local cache for starred status, or creates it
-    private static boolean checkMembershipCacheForCard(Card inCard)
+    private boolean checkMembershipCacheForCard(Card inCard)
     {
         if( membershipCacheArray == null )
         {
@@ -198,33 +210,6 @@ public class SearchFragment extends Fragment
     }  // end checkMembershipCacheForCard()
 
     
-    private TextView.OnEditorActionListener searchActionListener =  new TextView.OnEditorActionListener()
-    {
-        @Override
-        public boolean onEditorAction(TextView v,int actionId,KeyEvent event)
-        {
-            if( actionId == EditorInfo.IME_ACTION_DONE )
-            {
-                // when they click 'done' on the keyboard,
-                // search and hide keyboard
-                mySearch.clearFocus();
-
-                AsyncSearch tempSearch = new AsyncSearch();
-                tempSearch.execute();
-
-                imm.hideSoftInputFromWindow(mySearch.getWindowToken(),0);
-                
-                return true;
-
-            }  // end if( DONE was clicked )
-
-            // do not consume event if it wasn't 'done'
-            return false;
-        }  
-
-    };  // end searchActionListener
-
-
     // our Async class for loading cards from the database
     private class AsyncSearch extends AsyncTask<Void, Void, Void>
     {
@@ -232,7 +217,7 @@ public class SearchFragment extends Fragment
         protected void onPreExecute()
         {
             // display a loading dialog
-            searchDialog = new ProgressDialog(getActivity());
+            searchDialog = new ProgressDialog( Xflash.getActivity() );
             searchDialog.setMessage(" Searching... ");
             searchDialog.show();
         
@@ -240,7 +225,7 @@ public class SearchFragment extends Fragment
             boolean attachSuccess = XFApplication.getDao().attachDatabase(LWEDatabase.DB_FTS); 
             if( !attachSuccess )
             {
-                Log.d(MYTAG,"ERROR in AsyncSearch: database attach failed");
+                throw new RuntimeException(">>> ERROR SearchFragment.AsynchSearch - attach failed");
             }
 
         }  // end onPreExecute()
@@ -287,11 +272,12 @@ public class SearchFragment extends Fragment
     {
         SearchAdapter()
         {
-            super( getActivity(), R.layout.search_row, (List<Card>)searchResults);
+            super( Xflash.getActivity(), R.layout.search_row, (List<Card>)searchResults);
         }
 
         public View getView(int position, View convertView, ViewGroup parent)
         {
+            // try to pull a recycled view
             View row = convertView;
 
             if( row == null )
@@ -335,10 +321,57 @@ public class SearchFragment extends Fragment
             // tag each row with the card id it represents
             row.setTag( tempCard.getCardId() );
 
+            // set click listener for the whole row, and the star
+            row.setOnClickListener(rowListener);
+            starImage.setOnClickListener(starListener);
+            
             return row;
         }
 
     }  // end SearchAdapter class declaration
+
+
+    // when a search-card row is clicked, fire AddCardToTagFragment
+    private View.OnClickListener rowListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            addCard(v);
+        }
+    };
+
+   
+    // when a star is clicked on, toggle 'starred tag' status
+    private View.OnClickListener starListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            toggleStar(v);
+        }
+    };
+
+    
+    // listener to perform a search when 'done' is pressed on the keyboard
+    private TextView.OnEditorActionListener searchActionListener =  new TextView.OnEditorActionListener()
+    {
+        @Override
+        public boolean onEditorAction(TextView v,int actionId,KeyEvent event)
+        {
+            if( actionId == EditorInfo.IME_ACTION_DONE )
+            {
+                performSearch();
+                
+                return true;
+
+            }  // end if( DONE was clicked )
+
+            // do not consume event if it wasn't 'done'
+            return false;
+        }  
+
+    };  // end searchActionListener
 
 
 }  // end SearchFragment class declaration

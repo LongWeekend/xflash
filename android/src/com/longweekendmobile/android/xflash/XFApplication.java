@@ -17,6 +17,7 @@ package com.longweekendmobile.android.xflash;
 //  public static SQLiteDatabase getReadableDao()
 //  public static SQLiteDatabase getWritableDao()
 //  public static XflashNotification getNotifier()
+//  public static void clearNotifier()
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
@@ -102,7 +103,7 @@ public class XFApplication extends Application
         return myNotifier;
     }
 
-
+    
 }  // end XFApplication class declaration
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/default_display_block" 
-    android:onClick="TagCardsFragment_addCard" >
+    style="@style/default_display_block" >
 
     <TextView android:id="@+id/tagcards_row_click"
         style="@style/default_display_right"

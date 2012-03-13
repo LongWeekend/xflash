@@ -91,8 +91,7 @@
             android:layout_height="wrap_content"
             android:scaleType="center"
             android:src="@drawable/practice_btn_unrevealed"
-            android:background="@drawable/practice_btn_bg"
-            android:onClick="PracticeFragment_reveal" />
+            android:background="@drawable/practice_btn_bg" />
 
         <!-- the options button block -->
         <RelativeLayout android:id="@+id/practice_options_block"
@@ -104,29 +103,25 @@
             <ImageButton android:id="@+id/optionblock_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_actions_flip"
-                android:onClick="PracticeFragment_practiceClick" />
+                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/optionblock_actions"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_right_flip"
-                android:onClick="PracticeFragment_practiceClick" />
+                android:background="@drawable/btn_right_flip" />
             <ImageButton android:id="@+id/optionblock_wrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/optionblock_right"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_wrong_flip"
-                android:onClick="PracticeFragment_practiceClick" />
+                android:background="@drawable/btn_wrong_flip" />
             <ImageButton android:id="@+id/optionblock_goaway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/optionblock_wrong"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_goaway_flip"
-                android:onClick="PracticeFragment_practiceClick" />
+                android:background="@drawable/btn_goaway_flip" />
     
         </RelativeLayout>
         <!-- end practice options block -->
@@ -141,22 +136,19 @@
             <ImageButton android:id="@+id/browseblock_last"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_last_flip"
-                android:onClick="PracticeFragment_browseClick" />
+                android:background="@drawable/btn_last_flip" />
             <ImageButton android:id="@+id/browseblock_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/browseblock_last"
                 android:layout_marginLeft="18dp"
-                android:background="@drawable/btn_actions_flip"
-                android:onClick="PracticeFragment_browseClick" />
+                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/browseblock_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/browseblock_actions"
                 android:layout_marginLeft="18dp"
-                android:background="@drawable/btn_next_flip"
-                android:onClick="PracticeFragment_browseClick" />
+                android:background="@drawable/btn_next_flip" />
     
         </RelativeLayout>
         <!-- end browse button block -->
@@ -203,8 +195,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minHeight="270dp"
-            android:clickable="false"
-            android:onClick="PracticeFragment_reveal" >
+            android:clickable="false" >
 
             <!-- the 'show reading' button -->
             <ImageButton android:id="@+id/practice_showreadingbutton"
@@ -214,8 +205,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/practice_btn_showreading"
-                android:padding="6dp"
-                android:onClick="PracticeFragment_toggleReading" />
+                android:padding="6dp" />
   
             <!-- the reading view shown -->
             <TextView android:id="@+id/practice_readingtext"
@@ -223,8 +213,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
                 android:padding="6dp"
-                android:clickable="true"
-                android:onClick="PracticeFragment_toggleReading" />
+                android:clickable="true" />
 
             <!-- the golden headword -->
             <TextView android:id="@+id/practice_headword"
@@ -262,8 +251,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@id/practice_info_layout"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/practice_arrow_flip"
-        android:onClick="PracticeFragment_goRight" />
+        android:background="@drawable/practice_arrow_flip" />
     
     <!-- the hot head -->
     <ImageView android:id="@+id/practice_hothead"

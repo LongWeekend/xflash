@@ -71,10 +71,11 @@ public class XflashSettings
     private static Card activeCard = null;
 
     // COLOR SETTINGS PROPERTIES
-    private static final int LWE_THEME_RED = 0;
-    private static final int LWE_THEME_BLUE = 1;
-    private static final int LWE_THEME_TAME = 2;
+    public static final int LWE_THEME_RED = 0;
+    public static final int LWE_THEME_BLUE = 1;
+    public static final int LWE_THEME_TAME = 2;
    
+    // ICON SELECTION PROPERTIES
     public static final int LWE_ICON_FOLDER = 0;
     public static final int LWE_ICON_SPECIAL_FOLDER = 1;  
     public static final int LWE_ICON_TAG = 2;

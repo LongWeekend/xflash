@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-    <Button android:id="@+id/es_read_button"
+    <Button android:id="@+id/es_readbutton"
         style="@style/es_jp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,15 +21,14 @@
         android:paddingTop="4dp"
         android:paddingRight="8dp"
         android:paddingBottom="4dp"
-        android:text="Read"
-        android:onClick="ExampleSentenceFragment_toggleRead" />
+        android:text="Read" />
 
     <TextView android:id="@+id/es_sentence_jp"
         style="@style/es_jp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/es_row_number"
-        android:layout_toLeftOf="@id/es_read_button"
+        android:layout_toLeftOf="@id/es_readbutton"
         android:layout_marginLeft="10dp" />
 
     <TextView android:id="@+id/es_sentence_en"

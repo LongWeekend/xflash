@@ -13,13 +13,11 @@ package com.longweekendmobile.android.xflash;
 
 //  TODO - ABSOLUTELY no idea whether these work yet
 
-import java.lang.Math;
 import java.util.Random;
 
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.Card;
-import com.longweekendmobile.android.xflash.model.CardPeer;
 import com.longweekendmobile.android.xflash.model.Tag;
 
 public class PracticeCardSelector
@@ -172,20 +170,18 @@ public class PracticeCardSelector
     public static void setBrowseCardByDirection(int inDirection)
     {
         Tag tempTag   = XflashSettings.getActiveTag();
-        Card tempCard = XflashSettings.getActiveCard();
 
-        setNextBrowseCard(tempTag,tempCard,inDirection);
+        setNextBrowseCard(tempTag,inDirection);
     }
 
     
-    // set the active card to the currentCard passed, by direction
-    public static void setNextBrowseCard(Tag currentTag,Card currentCard,int inDirection)
+    // set the active card to the next in currentTag, by direction
+    public static void setNextBrowseCard(Tag currentTag,int inDirection)
     {
         Card nextCard = null;
         int cardIndex = currentTag.getCurrentIndex();
 
-
-        if( ( currentCard == null ) || ( inDirection == XflashScreen.DIRECTION_NULL ) )
+        if( inDirection == XflashScreen.DIRECTION_NULL )
         {
             // that means we're on the first card, (or haven't moved )
             // use the tag's currentIndex

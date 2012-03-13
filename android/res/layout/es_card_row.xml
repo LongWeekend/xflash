@@ -24,8 +24,7 @@
         android:paddingTop="4dp"
         android:paddingRight="8dp"
         android:paddingBottom="4dp"
-        android:text="Add"
-        android:onClick="ExampleSentenceFragment_addCard" />
+        android:text="Add" />
     
     <TextView android:id="@+id/es_cardrow_reading"
         style="@style/es_jp"

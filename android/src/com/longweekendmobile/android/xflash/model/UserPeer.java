@@ -124,6 +124,8 @@ public class UserPeer
             User tempUser = new User();
             tempUser.hydrate(myCursor);
 
+            myCursor.close();
+
             return tempUser;
         } 
         catch (Throwable t)

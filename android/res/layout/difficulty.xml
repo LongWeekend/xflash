@@ -112,8 +112,8 @@
         </RelativeLayout>
 
         <!-- the hide learned cards option -->
-        <RelativeLayout style="@style/default_display_block"
-            android:onClick="DifficultyFragment_toggleHideLearned"
+        <RelativeLayout android:id="@+id/hidelearned_block"
+            style="@style/default_display_block"
             android:layout_marginTop="10dp"
             android:padding="4dp" >
 

@@ -8,19 +8,21 @@ package com.longweekendmobile.android.xflash;
 //
 //  public XflashNotification()
 //
-//  public void addNewTagObserver(Observer  )
-//  public void newTagBroadcast(Tag  )
 //  public void setCardIdPassed(int  )
 //  public int getCardIdPassed()
 //  public void setTagIdPassed(int  )
 //  public int getTagIdPassed()
+//
+//  public void addNewTagObserver(Observer  )
+//  public void newTagBroadcast(Tag  )
 //  public void addSubscriptionObserver(Observer  )
 //  public void subscriptionBroadcast(Card  )
+//  public void addTagSearchObserver(Observer  )
+//  public void tagSearchBroadcast(Integer  )
 //
-//  public class SubscriptionNotifier extends Observable
-//
-//      public SubscriptionNotifier()
-//      public void broadcastNotification(Card )
+//  private class NewTagNotifier extends Observable
+//  private class NewTagNotifier extends Observable
+//  private class TagSearchNotifier extends Observable
 
 import java.util.Observable;
 import java.util.Observer;
@@ -32,29 +34,23 @@ public class XflashNotification
 {
     // private static final String MYTAG = "XFlash XflashNotification";
     
-    public static NewTagNotifier newTagObserver = null;
-    public static SubscriptionNotifier subscriptionObserver = null;
-
     public static final int NO_CARD_PASSED = -1000;
-    private static int cardIdPassed = NO_CARD_PASSED;
-    private static int tagIdPassed = -1000;
+    
+    private int cardIdPassed = NO_CARD_PASSED;
+    private int tagIdPassed = -1000;
+
+    private NewTagNotifier newTagObserver = null;
+    private SubscriptionNotifier subscriptionObserver = null;
+    private TagSearchNotifier tagSearchObserver = null;
 
     public XflashNotification()
     {
         newTagObserver = new NewTagNotifier();
         subscriptionObserver = new SubscriptionNotifier();
+        tagSearchObserver = new TagSearchNotifier();
     }
-
-    public void addNewTagObserver(Observer inObserver)
-    {
-        newTagObserver.addObserver(inObserver);
-    }
-
-    public void newTagBroadcast(Tag inTag)
-    {
-        newTagObserver.broadcastNotification(inTag);
-    }
-
+    
+    // basic getters/setters for broadcasts
     public void setCardIdPassed(int inCardId)
     {
         cardIdPassed = inCardId;
@@ -76,6 +72,17 @@ public class XflashNotification
     }
 
 
+    // add observers and send messages
+    public void addNewTagObserver(Observer inObserver)
+    {
+        newTagObserver.addObserver(inObserver);
+    }
+    
+    public void newTagBroadcast(Tag inTag)
+    {
+        newTagObserver.broadcastNotification(inTag);
+    }
+
     public void addSubscriptionObserver(Observer inObserver)
     {
         subscriptionObserver.addObserver(inObserver);
@@ -86,14 +93,21 @@ public class XflashNotification
         subscriptionObserver.broadcastNotification(inCard);
     }
 
-    
-    // Observable class to handle new tag notifications
-    public class NewTagNotifier extends Observable
+    public void addTagSearchObserver(Observer inObserver)
     {
-        public NewTagNotifier()
-        {
+        tagSearchObserver.addObserver(inObserver);
+    }
 
-        }
+    public void tagSearchBroadcast(Integer inInteger)
+    {
+        tagSearchObserver.broadcastNotification(inInteger);
+    }
+   
+
+    // Observable class to handle new tag notifications
+    private class NewTagNotifier extends Observable
+    {
+        public NewTagNotifier()  { } 
 
         public void broadcastNotification(Tag inTag)
         {
@@ -105,12 +119,9 @@ public class XflashNotification
 
     
     // Observable class to handle subscription status changed notifications
-    public class SubscriptionNotifier extends Observable
+    private class SubscriptionNotifier extends Observable
     {
-        public SubscriptionNotifier()
-        {
-
-        }
+        public SubscriptionNotifier()  { }
 
         public void broadcastNotification(Card inCard)
         {
@@ -119,6 +130,20 @@ public class XflashNotification
         }
 
     }  // end SubscriptionNotifier class declaration
+    
+    
+    // Observable class to handle new tag notifications
+    private class TagSearchNotifier extends Observable
+    {
+        public TagSearchNotifier()  { }
+
+        public void broadcastNotification(Integer inInteger)
+        {
+            setChanged();
+            notifyObservers(inInteger);
+        }
+
+    }  // end TagSearchNotifier class declaration
 
 
 }  // end XflashNotification class declaration

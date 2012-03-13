@@ -6,8 +6,7 @@
     android:paddingBottom="10dp" >
 
     <RelativeLayout android:id="@+id/header_block"
-        style="@style/default_display_block" 
-        android:onClick="TagFragment_startStudying" >
+        style="@style/default_display_block" >
 
         <TextView 
             style="@style/default_display_left"

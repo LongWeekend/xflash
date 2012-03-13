@@ -8,9 +8,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void toggleHideLearned()
-//
-//  private static void setHideLearned(int  )
+//  private void toggleHideLearned()
+//  private void setHideLearned(int  )
 //  private void setSeekBars()
 //
 //  private RadioGroup.OnCheckedChangeListener radioChange
@@ -32,9 +31,7 @@ public class DifficultyFragment extends Fragment
 {
     private static final String MYTAG = "XFlash DifficultyFragment";
    
-    private static LinearLayout difficultyLayout = null;
-    private static String learnedOff = null;
-    private static String learnedOn = null;
+    private LinearLayout difficultyLayout = null;
 
     private RadioGroup myGroup;
     private SeekBar studyPoolBar;
@@ -92,19 +89,26 @@ public class DifficultyFragment extends Fragment
         // set the seek bars to the correct levels
         setSeekBars();
 
-        // last, set the 'hide learned cards' toggle
-        learnedOff = getResources().getString(R.string.just_off);
-        learnedOn = getResources().getString(R.string.just_on);
-        
         setHideLearned( XflashSettings.getHideLearned() );
         
+        // set a click listener for the 'hide learned cards' block
+        RelativeLayout hideLearnedBlock = (RelativeLayout)difficultyLayout.findViewById(R.id.hidelearned_block);
+        hideLearnedBlock.setOnClickListener( new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View v)
+            {
+                toggleHideLearned();
+            }
+        });
+
         return difficultyLayout;
 
     }  // end onCreateView()
 
 
     // handles toggling and resetting of the 'hide learned cards' option
-    public static void toggleHideLearned()
+    private void toggleHideLearned()
     {
         // toggle the status
         int tempStatus = XflashSettings.toggleHideLearned();
@@ -116,17 +120,19 @@ public class DifficultyFragment extends Fragment
 
 
     // sets the view for the 'hide learned cards' status
-    private static void setHideLearned(int incomingStatus)
+    private void setHideLearned(int incomingStatus)
     {
         TextView hideLearnedStatus = (TextView)difficultyLayout.findViewById(R.id.hide_learned_value);
 
         if( incomingStatus == XflashSettings.HIDE_LEARNED_OFF )
         {
-            hideLearnedStatus.setText(learnedOff);
+            String tempString = Xflash.getActivity().getResources().getString(R.string.just_off);
+            hideLearnedStatus.setText(tempString);
         }
         else
         {
-            hideLearnedStatus.setText(learnedOn);
+            String tempString = Xflash.getActivity().getResources().getString(R.string.just_on);
+            hideLearnedStatus.setText(tempString);
         }
 
     }  // end setHideLearned()

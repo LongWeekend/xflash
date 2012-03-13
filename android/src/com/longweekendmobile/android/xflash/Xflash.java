@@ -12,60 +12,6 @@ package com.longweekendmobile.android.xflash;
 //  public void onBackPressed()                     @over
 //  protected void onSaveInstanceState(Bundle  )    @over
 //
-//  *** METHODS CALLED BY FRAGMENTS ***
-//
-//  public void PracticeFragment_reveal(View  )
-//  public void PracticeFragment_practiceClick(View  )
-//  public void PracticeFragment_browseClick(View  )
-//  public void PracticeFragment_goRight(View  )
-//  public void PracticeFragment_toggleReading(View  )
-//
-//  public void ExampleSentenceFragment_addCard(View  )
-//  public void ExampleSentenceFragment_toggleRead(View  )
-//  public void ExampleSentenceFragment_exampleClick(View  )
-//
-//  public void TagFragment_addToplevelTag(View  )
-//  public void TagFragment_openGroup(View  )
-//  public void TagFragment_goTagCards(View  )
-//  public void TagFragment_startStudying(View  )
-//
-//  public void TagCardsFragment_startStudying(View  )
-//  public void TagCardsFragment_addCard(View  )
-//
-//  public void SearchFragment_addCard(View  )
-//  public void SearchFragment_toggleStar(View  )
-//
-//  public void AddCardToTagFragment_toggleWord(View  )
-//  public void AddCardToTagFragment_addTag(View  )
-//
-//  public void SettingsFragment_switchStudyMode(View  )
-//  public void SettingsFragment_switchStudyLanguage(View  )
-//  public void SettingsFragment_switchReadingMode(View  )
-//  public void SettingsFragment_goDifficulty(View  )
-//  public void SettingsFragment_switchAnswerSize(View  )
-//  public void SettingsFragment_advanceColorScheme(View  )
-//  public void SettingsFragment_goUser(View  )
-//  public void SettingsFragment_goUpdate(View  )
-//  public void SettingsFragment_launchSettingsWeb(View  )
-//
-//  public void DifficultyFragment_toggleHideLearned(View  )
-//
-//  public void UserFragment_activateUser(View  )
-//  public void UserFragment_editUser(View  )
-//
-//  public void EditUserFragment_select(View  )
-//  public void EditUserFragment_save(View  )
-//
-//  public void UpdateFragment_check(View  )
-//
-//  public void SettingsWebFragment_reload(View  )
-//
-//  public void HelpFragment_goAskUs(View  )
-//  public static void HelpFragment_pullHelpTopic(int  )
-//
-//  public void HelpPageFragment_goBackToHelp(View  )
-//  public void HelpPageFragment_helpNext(View  )
-//
 //  *** TAB FRAGMENT FUNCTIONALITY ***
 //
 //  class TabFactory implements TabContentFactory
@@ -132,6 +78,10 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
        
     }  // end onCreate
 
+    public static Xflash getActivity()
+    {
+        return myContext;
+    }
 
     @Override
     public void onDestroy()
@@ -151,7 +101,8 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // that group will then be reloaded as the root view for the tag tab if
         // the app is restarted while TagFragment is still loaded to the VM
         TagFragment.currentGroup = null;
-    }
+
+    }  // end onDestroy()
 
     
     @Override
@@ -160,7 +111,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // only call search functionality if we are in the root view of the 'Study Sets' tab
         if( ( currentTab.tag == "tag" ) && ( XflashScreen.getCurrentTagScreen() == 0 ) ) 
         {
-            TagFragment.searchPressed(); 
+            XFApplication.getNotifier().tagSearchBroadcast(TagFragment.SEARCH_PRESSED);
         } 
         
         // return false so Android does not attempt to launch the
@@ -202,7 +153,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         else if( ( currentTab.tag == "tag" ) && ( TagFragment.getSearchOn() ) )
         {
             // if the search dialog on TagFragment is open
-            TagFragment.TagSearch.hideSearch();
+            XFApplication.getNotifier().tagSearchBroadcast(TagFragment.NEED_HIDE_SEARCH);
         }
         else 
         {
@@ -241,184 +192,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         outState.putString("tab", myTabHost.getCurrentTabTag());
         super.onSaveInstanceState(outState);
     }
-
-    
-
-// passthroughs for methods called by onClick declarations in Fragments
-
-    public void PracticeFragment_reveal(View v)
-    {
-        PracticeFragment.reveal();
-    }
-    public void PracticeFragment_practiceClick(View v)
-    {
-        PracticeFragment.practiceClick(v,this);
-    }
-    public void PracticeFragment_browseClick(View v)
-    {
-        PracticeFragment.browseClick(v,this);
-    }
-    public void PracticeFragment_goRight(View v)
-    {
-        PracticeFragment.goRight(this);
-    }
-    public void PracticeFragment_toggleReading(View v)
-    {
-        PracticeFragment.toggleReading();
-    }
-
-    public void ExampleSentenceFragment_addCard(View v)
-    {
-        ExampleSentenceFragment.addCard(v,this);
-    }
-    public void ExampleSentenceFragment_toggleRead(View v)
-    {
-        ExampleSentenceFragment.toggleRead(v);
-    }
-    public void ExampleSentenceFragment_exampleClick(View v)
-    {
-        ExampleSentenceFragment.exampleClick(v,this);
-    }
-
-    public void TagFragment_addToplevelTag(View v)
-    {
-        TagFragment.addToplevelTag(this);
-    }
-    public void TagFragment_openGroup(View v)
-    {
-        TagFragment.openGroup(v,this);
-    }
-    public void TagFragment_goTagCards(View v)
-    {
-        TagFragment.goTagCards(v,this);
-    }
-    public void TagFragment_startStudying(View v)
-    {
-        TagFragment.startStudying(v,this);
-    }
-    public void TagFragment_emptyClick(View v)
-    {
-        // capture clicks from the ScrollView when the search field is up
-        Log.d(MYTAG,">>> TagFragment_emptyClick()");
-    }
-
-//  see comment in TagCardsFragment.java under TagCardsFragment.startStudying()
-//
-//  public void TagCardsFragment_startStudying(View v)
-//  {
-//      TagCardsFragment.startStudying(v,this);
-//  }
-    public void TagCardsFragment_addCard(View v)
-    {
-        TagCardsFragment.addCard(v,this);
-    }
-
-    public void SearchFragment_addCard(View v)
-    {
-        SearchFragment.addCard(v,this);
-    }
-    public void SearchFragment_toggleStar(View v)
-    {
-        SearchFragment.toggleStar(v);
-    }
-
-    public void AddCardToTagFragment_toggleWord(View v)
-    {
-        AddCardToTagFragment.toggleWord(v);
-    }
-    public void AddCardToTagFragment_addTag(View v)
-    {
-        AddCardToTagFragment.addTag(this);
-    }
-
-    public void SettingsFragment_switchStudyMode(View v)
-    {
-        SettingsFragment.switchStudyMode();
-    }
-    public void SettingsFragment_switchStudyLanguage(View v)
-    {
-        SettingsFragment.switchStudyLanguage();
-    }
-    public void SettingsFragment_switchReadingMode(View v)
-    {
-        SettingsFragment.switchReadingMode();
-    }
-    public void SettingsFragment_goDifficulty(View v)
-    {
-        SettingsFragment.goDifficulty(this);
-    }
-    public void SettingsFragment_switchAnswerSize(View v)
-    {
-        SettingsFragment.switchAnswerSize();
-    }
-    public void SettingsFragment_advanceColorScheme(View v)
-    {
-        SettingsFragment.advanceColorScheme();
-    }
-    public void SettingsFragment_goUser(View v)
-    {
-        SettingsFragment.goUser(this);
-    }
-    public void SettingsFragment_goUpdate(View v)
-    {
-        SettingsFragment.goUpdate(this);
-    }
-    public void SettingsFragment_launchSettingsWeb(View v)
-    {
-        SettingsFragment.launchSettingsWeb(v,this);
-    }
-
-    public void DifficultyFragment_toggleHideLearned(View v)
-    {
-        DifficultyFragment.toggleHideLearned();
-    }
-
-    public void UserFragment_activateUser(View v)
-    {
-        UserFragment.activateUser(v,this);
-    }
-    public void UserFragment_editUser(View v)
-    {
-        UserFragment.editUser(v,this);
-    }
-
-    public void EditUserFragment_select(View v)
-    {
-        EditUserFragment.select(this);
-    }
-    public void EditUserFragment_save(View v)
-    {
-        EditUserFragment.save(this);
-    }
-
-    
-    public void UpdateFragment_check(View v)
-    {
-        UpdateFragment.check();
-    }
-    
-    public void SettingsWebFragment_reload(View v)
-    {
-        SettingsWebFragment.reload();
-    }
-
-    public void HelpFragment_goAskUs(View v)
-    {
-        HelpFragment.goAskUs(this);
-    }
-    public static void HelpFragment_pullHelpTopic(int inId)
-    {
-        HelpFragment.pullHelpTopic(inId,myContext);
-    }
-    
-    public void HelpPageFragment_goBackToHelp(View v)
-    {
-        HelpPageFragment.goBackToHelp(myContext);
-    }
-    public void HelpPageFragment_helpNext(View v)
-    {
-        HelpPageFragment.helpNext();
-    } 
 
 // nearly all of the following code is resued or modified from the example 
 // (and associated github project) following:

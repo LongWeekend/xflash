@@ -8,9 +8,9 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static AlertDialog getDialog()
-//  public static void goAskUs(FragmentActivity  )
-//  public static void pullHelpTopic(int  ,Xflash  )
+//  private AlertDialog getDialog()
+//  private void goAskUs()
+//  private void pullHelpTopic(int  )
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +19,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,11 +33,9 @@ public class HelpFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash HelpFragment";
     
-    // properties for handling color theme transition
-    private static AlertDialog askDialog;
+    private AlertDialog askDialog;
 
 
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -52,9 +49,19 @@ public class HelpFragment extends Fragment
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpLayout.findViewById(R.id.help_heading);
         Button tempButton = (Button)helpLayout.findViewById(R.id.help_askusbutton);
-            
+           
         XflashSettings.setupColorScheme(titleBar,tempButton);
         
+        // set a click listener for the 'ask us' button
+        tempButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goAskUs();
+            }
+        });
+
         // Resources object to pull our help topics
         Resources res = getResources();
         String[] topics;
@@ -74,14 +81,12 @@ public class HelpFragment extends Fragment
         LinearLayout myLayout = (LinearLayout)helpLayout.findViewById(R.id.help_list);
         
         int totalTopics = topics.length;
-        int rowCount = 0;
         for(int i = 0; i < totalTopics; i++)
         {
-            // inflate our exiting row resource (which is a RelativeLayout) for each 
+            // inflate our existing row resource (which is a RelativeLayout) for each 
             // row and tag the view with the row number of each particular help topic
             RelativeLayout toInflate = (RelativeLayout)inflater.inflate(R.layout.help_row,null);
-            toInflate.setTag(rowCount);
-            ++rowCount;
+            toInflate.setTag(i);
             
             // set the label
             TextView tempView = (TextView)toInflate.findViewById(R.id.help_label);
@@ -94,7 +99,7 @@ public class HelpFragment extends Fragment
                 {
                     int tempInt = (Integer)v.getTag(); 
                     
-                    Xflash.HelpFragment_pullHelpTopic(tempInt);
+                    pullHelpTopic(tempInt);
                 }
 
             });
@@ -115,16 +120,10 @@ public class HelpFragment extends Fragment
     }  // end onCreateView
 
 
-    public static AlertDialog getDialog()
-    {
-        return askDialog;
-    }
-
-
     // onClick method for the "ask us" button - pops a dialog
-    public static void goAskUs(FragmentActivity incoming)
+    private void goAskUs()
     {
-        final FragmentActivity inContext = incoming;
+        final Xflash inContext = Xflash.getActivity();
 
         AlertDialog.Builder builder;
 
@@ -154,7 +153,8 @@ public class HelpFragment extends Fragment
                 inContext.startActivity(myIntent);
 
                 // dismiss, so we'll return to the overall help screen
-                HelpFragment.getDialog().dismiss();
+                // getDialog().dismiss();
+                askDialog.dismiss();
             }
         });
 
@@ -175,7 +175,8 @@ public class HelpFragment extends Fragment
                 inContext.startActivity(myIntent);
 
                 // dismiss, so we'll return to the overall help screen
-                HelpFragment.getDialog().dismiss();
+                //getDialog().dismiss();
+                askDialog.dismiss();
             }
         });
 
@@ -186,21 +187,22 @@ public class HelpFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                HelpFragment.getDialog().dismiss();
+                //getDialog().dismiss();
+                askDialog.dismiss();
             }
         });
 
-    }  // end HelpFragment_goAskUs()
+    }  // end goAskUs()
 
 
     // calls a new view activity for fragment tab layout 
-    public static void pullHelpTopic(int inId,Xflash inContext)
+    private void pullHelpTopic(int inId)
     {
         // set the help topic we are pulling
         HelpPageFragment.setHelpTopic(inId);
 
         // load the HelpPageFragment to the fragment tab manager
-        inContext.onScreenTransition("help_page",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("help_page",XflashScreen.DIRECTION_OPEN);
     }
 
 

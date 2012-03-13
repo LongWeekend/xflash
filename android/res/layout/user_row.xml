@@ -9,7 +9,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:clickable="true"
-        android:onClick="UserFragment_editUser"
         android:text="@string/user_edit" />
 
     <TextView android:id="@+id/user_label"
@@ -18,8 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/user_editbutton"
         android:layout_marginLeft="10dp"
-        android:clickable="true"
-        android:onClick="UserFragment_activateUser" />
+        android:clickable="true" />
 
 </RelativeLayout>
 

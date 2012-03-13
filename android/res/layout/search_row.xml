@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/default_display_block"
-    android:onClick="SearchFragment_addCard" >
+    style="@style/default_display_block" >
 
     <ImageView android:id="@+id/search_row_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:onClick="SearchFragment_toggleStar" />
+        android:layout_centerVertical="true" />
 
     <TextView android:id="@+id/search_row_click"
         style="@style/default_display_right"
