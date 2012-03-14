@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void setPracticeBlank()
-
+//
 //  private void reveal()
 //  private void toggleReading()
 //  private void practiceClick(View  )
@@ -19,6 +19,7 @@ package com.longweekendmobile.android.xflash;
 //  private static class PracticeScreen
 //
 //      public static void initialize()
+//      public static void dump()
 //      public static void refreshCountBar()
 //      public static void setupPracticeView(int  )
 //      public static void setAnswerBar(int  )
@@ -95,7 +96,21 @@ public class PracticeFragment extends Fragment
 
     }  // end onCreateView()
 
-    
+   
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+
+        // free static layout resources
+        // TODO - temporary fix, would be preferable to refactor 
+        //      - PracticeScreen to use no static layout varables
+        practiceLayout = null;
+        PracticeScreen.dump();
+
+    }  // end onDestroyView()
+
+
     // called by ExampleSentenceFragment to reset the view
     public static void setPracticeBlank()
     {
@@ -243,7 +258,32 @@ public class PracticeFragment extends Fragment
             PracticeScreen.setClickListeners();
             
         }  // end PracticeScreen.initialize()
+       
         
+        // dumps all static variables dealing with layout
+        public static void dump()
+        {
+            blankButton = null;
+            rightArrow = null;
+            showReadingButton = null;
+            hhBubble = null;
+            hhImage = null;
+            miniAnswerImage = null;
+            countBar = null;
+            browseFrame = null;
+            showFrame = null;
+            practiceBack = null;
+            practiceScrollBack = null;
+            headwordView = null;
+            hhView = null;
+            showReadingText = null;
+
+            for(int i = 0; i < 5; i++)
+            {
+                cardCountViews[i] = null;
+            }
+
+        }  // end dump()
         
         // set all TextView elements of the count bar to the current values
         private static void refreshCountBar()

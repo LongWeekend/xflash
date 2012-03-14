@@ -29,9 +29,10 @@ package com.longweekendmobile.android.xflash;
 //  private void updateFromTagSearchObserver(Object  )
 //  private void searchPressed()
 //
-//  public static class TagSearch
+//  private static class TagSearch
 //
 //      public static void loadSearch()
+//      public static void dump()
 //      public static void showSearch()
 //      public static void hideSearch()
 //      public static void closeKeyboard()
@@ -253,6 +254,21 @@ public class TagFragment extends Fragment
     }  // end onPause()
 
 
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+
+        // free static layout resources
+        // TODO - temporary fix, would be perferable to refactor TagSearch
+        //      - to use no static layout variables
+        tagLayout = null;
+        tagList = null;
+        TagSearch.dump();
+
+    }  // end onDestroyView()
+
+    
     public static boolean getSearchOn()
     {
         return TagSearch.searchOn;
@@ -650,7 +666,12 @@ public class TagFragment extends Fragment
         if( theNewTag.groupId() == currentGroup.getGroupId() )
         {
             TagFragment.needLoad = true;
-            refreshTagList();
+                
+            // if our layout is currently active
+            if( tagList != null )
+            {
+                refreshTagList();
+            }
         }
 
     }  // end updateFromNewTagObserver()
@@ -663,7 +684,12 @@ public class TagFragment extends Fragment
         if( currentGroup.getGroupId() == 0 )
         {
             TagFragment.needLoad = true;
-            refreshTagList();
+                
+            // if our layout is currently active
+            if( tagList != null )
+            {
+                refreshTagList();
+            }
         }
 
     }  // end updateFromSubscriptionObserver()
@@ -739,7 +765,21 @@ public class TagFragment extends Fragment
 
         }  // end loadSearch()
        
-       
+      
+        // dumps all static variables dealing with layout
+        public static void dump()
+        {
+            searchText = null;
+            tagSearchList = null;
+            tempTitle = null;
+            tempAddButton = null;
+            shade = null;
+            tagScroll = null;
+            searchScroll = null;
+
+        }  // end dump()
+
+
         // sets all appropriate views when transitioning INTO a search state
         public static void showSearch()
         {

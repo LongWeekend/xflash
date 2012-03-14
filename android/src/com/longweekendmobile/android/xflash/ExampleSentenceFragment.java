@@ -13,7 +13,7 @@ package com.longweekendmobile.android.xflash;
 //  private void setAnswerBarListeners()
 //  private void refreshCountBar();
 //  private void exampleClick(View  )
-//  private static void addCard(View  )
+//  private void addCard(View  )
 //  private void toggleRead(View  )
 //  private void loadExampleSentenceBlock(Button  ,int  ,LinearLayout  )
 
@@ -205,10 +205,8 @@ public class ExampleSentenceFragment extends Fragment
     }
 
 
-    // TODO - compiler is demanding this be static
-    
     // launch AddCardToTagFragment as a modal Activity
-    private static void addCard(View v)
+    private void addCard(View v)
     {
         int tempInt = (Integer)v.getTag();
         
@@ -290,7 +288,6 @@ public class ExampleSentenceFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    // TODO - compiler is claiming this is a static call?
                     addCard(v);
                 }
             });
