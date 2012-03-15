@@ -11,8 +11,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void setNextBrowseCard(Tag  ,Card,  ,int  )
 
-//  TODO - ABSOLUTELY no idea whether these work yet
-
 import java.util.Random;
 
 import android.util.Log;
@@ -179,19 +177,13 @@ public class PracticeCardSelector
     public static void setNextBrowseCard(Tag currentTag,int inDirection)
     {
         Card nextCard = null;
-        int cardIndex = currentTag.getCurrentIndex();
+        int currentIndex = currentTag.getCurrentIndex();
 
         if( inDirection == XflashScreen.DIRECTION_NULL )
         {
             // that means we're on the first card, (or haven't moved )
             // use the tag's currentIndex
-            if( cardIndex > currentTag.flattenedCardArray.size() )
-            {
-                Log.d(MYTAG,"ERROR - in setNextBrowseCard()");
-                Log.d(MYTAG,"      - currentIndex is out of bounds?");
-            }
-        
-            nextCard = currentTag.flattenedCardArray.get(cardIndex);
+            nextCard = currentTag.flattenedCardArray.get(currentIndex);
         }
         else
         {
@@ -199,30 +191,16 @@ public class PracticeCardSelector
             if( inDirection == XflashScreen.DIRECTION_CLOSE )
             {
                 // if we are closing (going back), get the previous card 
-                if( cardIndex == 0 )
-                {
-                    currentTag.setCurrentIndex( currentTag.flattenedCardArray.size() - 1 );
-                }
-                else
-                {
-                    currentTag.decrementIndex();
-                }
+                currentIndex = currentTag.decrementIndex();
             }
             else 
             {
                 // if we are opening (going forward), get the next card
-                if( cardIndex >= ( currentTag.flattenedCardArray.size() - 1) )
-                {
-                    currentTag.setCurrentIndex(0);
-                }
-                else 
-                {
-                    currentTag.incrementIndex();
-                }
+                currentIndex = currentTag.incrementIndex();
             }
     
             // OK, we've updated currentIndex, get the new card
-            nextCard = currentTag.flattenedCardArray.get( currentTag.getCurrentIndex() );
+            nextCard = currentTag.flattenedCardArray.get(currentIndex);
         }
   
         // Now, if we have a faulted card, hydrate it

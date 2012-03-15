@@ -45,6 +45,8 @@ package com.longweekendmobile.android.xflash.model;
 //  public int getCardCount()
 //  public void setCurrentIndex(int  )
 //  public int getCurrentIndex()
+//  public int incrementIndex()
+//  public int decrementIndex()
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -607,18 +609,49 @@ public class Tag
 
     public int getCurrentIndex()
     {
+        if( currentIndex > flattenedCardArray.size() )
+        {
+            Log.d(MYTAG,"ERROR - in getCurrentIndex()");
+            Log.d(MYTAG,"      - index:  " + currentIndex + " > array size:  " + flattenedCardArray.size() );
+        }
+        
         return currentIndex;
-    }
 
-    public void incrementIndex()
-    {
-        ++currentIndex;
-    }
+    }  // end getCurrentIndex()
 
-    public void decrementIndex()
+
+    public int incrementIndex()
     {
-        --currentIndex;
-    }
+        // if we're at the end of the array, wrap around
+        if( currentIndex >= flattenedCardArray.size() - 1 )
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            ++currentIndex;
+        }
+
+        return currentIndex;
+            
+    }  // end incrementIndex()
+
+
+    public int decrementIndex()
+    {
+        // if we're at the beginning of the array, wrap around
+        if( currentIndex == 0 )
+        {
+            currentIndex = flattenedCardArray.size() - 1;
+        }
+        else
+        {
+            --currentIndex;
+        }
+
+        return currentIndex;
+
+    }  // end decrementIndex()
 
 
 }  // end Tag class declaration

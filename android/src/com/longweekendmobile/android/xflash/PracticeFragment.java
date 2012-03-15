@@ -479,35 +479,27 @@ public class PracticeFragment extends Fragment
 
             // THE PRACTICE-MODE ANSWER BAR
             
-            // listener for the 'actions' button
-            ImageView tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_actions);
-            tempImage.setOnClickListener(practiceClickListener);
+            // set listeners for each of the reveal buttons
+            int[] buttonIds = { R.id.optionblock_actions, R.id.optionblock_right,
+                                 R.id.optionblock_wrong, R.id.optionblock_goaway };
 
-            // listener for the 'right' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_right);
-            tempImage.setOnClickListener(practiceClickListener);
-
-            // listener for the 'actions' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_wrong);
-            tempImage.setOnClickListener(practiceClickListener);
-
-            // listener for the 'actions' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.optionblock_goaway);
-            tempImage.setOnClickListener(practiceClickListener);
+            for(int i = 0; i < 4; i++)
+            {
+                ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
+                tempButton.setOnClickListener(practiceClickListener);
+            }
 
             // THE BROWSE-MODE ANSWER BAR
             
-            // listener for the 'actions' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_last);
-            tempImage.setOnClickListener(browseClickListener);
+            // set listeners for each of the browse buttons
+            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_actions,
+                                    R.id.browseblock_next };
 
-            // listener for the 'right' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_actions);
-            tempImage.setOnClickListener(browseClickListener);
-
-            // listener for the 'actions' button
-            tempImage = (ImageView)practiceLayout.findViewById(R.id.browseblock_next);
-            tempImage.setOnClickListener(browseClickListener);
+            for(int i = 0; i < 3; i++)
+            {
+                ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
+                tempButton.setOnClickListener(browseClickListener);
+            }
 
             // listener for the main scroll view
             practiceScrollBack.setOnClickListener( new View.OnClickListener()
