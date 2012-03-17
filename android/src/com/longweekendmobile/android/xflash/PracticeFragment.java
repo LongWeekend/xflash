@@ -23,6 +23,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void toggleCardStarred()
 //  private void launchAddCard()
+//  private void fixCardEmail()
 //
 //  private static class PracticeScreen
 //
@@ -37,6 +38,7 @@ package com.longweekendmobile.android.xflash;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -158,18 +160,17 @@ public class PracticeFragment extends Fragment
     {
         switch( item.getItemId() ) 
         {
-            case R.id.pm_toggle_starred:   
-                                        toggleCardStarred();
-                                        return true;
-            case R.id.pm_add_tag:       launchAddCard();
-                                        return true;
-            case R.id.pm_tweet:         Log.d(MYTAG,"> pm_tweet clicked");
-                                        Log.d(MYTAG,".");
-                                        return true;
-            case R.id.pm_fix:           Log.d(MYTAG,"> pm_fix clicked");
-                                        Log.d(MYTAG,".");
-                                        return true;
-        }
+            case R.id.pm_toggle_starred:    toggleCardStarred();
+                                            return true;
+            case R.id.pm_add_tag:           launchAddCard();
+                                            return true;
+            case R.id.pm_tweet:             Log.d(MYTAG,"> pm_tweet clicked");
+                                            Log.d(MYTAG,".");
+                                            return true;
+            case R.id.pm_fix:               fixCardEmail();
+                                            return true;
+
+        }  // end switch
         
         // if the item clicked does not match our items, pass it up
         return( super.onOptionsItemSelected(item) );
@@ -279,6 +280,43 @@ public class PracticeFragment extends Fragment
         myContext.startActivity(myIntent);
 
     }  // end launchAddCard()
+    
+   
+    // creates an email to notify Long Weekend about an error and 
+    // launches it as a send-email intent
+    private void fixCardEmail()
+    {
+        Resources res = Xflash.getActivity().getResources();
+        
+        Intent myIntent  = new Intent(Intent.ACTION_SEND);
+
+        // set the email target
+        myIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ "fix-card@longweekendmobile.com" });
+        
+        // set the email subject 
+        String emailSubject = res.getString(R.string.fixcard_subject);
+        myIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,emailSubject);
+        
+        // set the email body - this is hard to read
+        String emailBody = res.getString(R.string.fixcard_bodytop) 
+                              + "  " + currentCard.getCardId() + "\n";
+        emailBody = emailBody + res.getString(R.string.fixcard_bodyheadword) 
+                              + "  " + currentCard.getJustHeadword() + "\n";
+        emailBody = emailBody + res.getString(R.string.fixcard_bodymeaning) 
+                              + "  " + currentCard.meaningWithoutMarkup() + "\n";
+        emailBody = emailBody + res.getString(R.string.fixcard_bodytagid) 
+                              + "  " + currentTag.getId() + "\n";
+        emailBody = emailBody + res.getString(R.string.fixcard_bodytagname) 
+                              + "  " + currentTag.getName() + "\n\n";
+
+        myIntent.putExtra(android.content.Intent.EXTRA_TEXT,emailBody);
+
+        // I believe this is the current email MIME?
+        myIntent.setType("message/rfc5322");
+
+        Xflash.getActivity().startActivity(myIntent);
+
+    }  // end fixCardEmail()
     
     
     // class to manage screen setup

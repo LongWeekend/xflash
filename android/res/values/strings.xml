@@ -21,6 +21,12 @@
     <string name="pm_addtotag">Add to Study Set</string>
     <string name="pm_tweetcard">Tweet Card</string>
     <string name="pm_fixcard">Fix Card</string>
+    <string name="fixcard_subject">How can we make this awesome?</string>
+    <string name="fixcard_bodytop">Info For Long Weekend:\n\nCard Id:</string>
+    <string name="fixcard_bodyheadword">Card Headword:</string>
+    <string name="fixcard_bodymeaning">Card Meaning:</string>
+    <string name="fixcard_bodytagid">Active Tag Id:</string>
+    <string name="fixcard_bodytagname">Active Tag Name:</string>
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
