@@ -9,7 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  private void toggleHideLearned()
-//  private void setHideLearned(int  )
+//  private void setHideLearnedView(boolean  )
 //  private void setSeekBars()
 //
 //  private RadioGroup.OnCheckedChangeListener radioChange
@@ -89,7 +89,7 @@ public class DifficultyFragment extends Fragment
         // set the seek bars to the correct levels
         setSeekBars();
 
-        setHideLearned( XflashSettings.getHideLearned() );
+        setHideLearnedView( XflashSettings.getHideLearned() );
         
         // set a click listener for the 'hide learned cards' block
         RelativeLayout hideLearnedBlock = (RelativeLayout)difficultyLayout.findViewById(R.id.hidelearned_block);
@@ -111,20 +111,20 @@ public class DifficultyFragment extends Fragment
     private void toggleHideLearned()
     {
         // toggle the status
-        int tempStatus = XflashSettings.toggleHideLearned();
+        boolean tempStatus = XflashSettings.toggleHideLearned();
 
         // refresh the view
-        setHideLearned(tempStatus);
+        setHideLearnedView(tempStatus);
 
     }  // end toggleHideLearned()
 
 
     // sets the view for the 'hide learned cards' status
-    private void setHideLearned(int incomingStatus)
+    private void setHideLearnedView(boolean incomingStatus)
     {
         TextView hideLearnedStatus = (TextView)difficultyLayout.findViewById(R.id.hide_learned_value);
 
-        if( incomingStatus == XflashSettings.HIDE_LEARNED_OFF )
+        if( incomingStatus == false )
         {
             String tempString = Xflash.getActivity().getResources().getString(R.string.just_off);
             hideLearnedStatus.setText(tempString);
@@ -135,7 +135,7 @@ public class DifficultyFragment extends Fragment
             hideLearnedStatus.setText(tempString);
         }
 
-    }  // end setHideLearned()
+    }  // end setHideLearnedView()
 
 
     // sets the seek bars to the appropriate value depending on difficulty mode

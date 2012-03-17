@@ -16,6 +16,11 @@
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>
     <string name="attacherror_body">Uh oh, something went wrong initializing the databases for Japanese Flash!  Please exit and try again.</string>
+    <string name="pm_starred_yes">Remove from Starred</string>
+    <string name="pm_starred_no">Add to Starred</string>
+    <string name="pm_addtotag">Add to Study Set</string>
+    <string name="pm_tweetcard">Tweet Card</string>
+    <string name="pm_fixcard">Fix Card</string>
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>

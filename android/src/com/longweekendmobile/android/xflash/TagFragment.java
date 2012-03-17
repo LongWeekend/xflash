@@ -454,7 +454,7 @@ public class TagFragment extends Fragment
                 Tag shuffleTag = rawTagArray.get(i);
 
                 // add the starred words tag at the start
-                if( shuffleTag.getId() == Tag.STARRED_TAG_ID )
+                if( shuffleTag.getId() == TagPeer.STARRED_TAG_ID )
                 {
                     shuffleArray.add(0,shuffleTag);
                 }
@@ -522,7 +522,7 @@ public class TagFragment extends Fragment
             // set the group image
             ImageView tempRowImage = (ImageView)tempRow.findViewById(R.id.tag_row_image);
 
-            if( tempTag.getId() == Tag.STARRED_TAG_ID )
+            if( tempTag.getId() == TagPeer.STARRED_TAG_ID )
             {
                 tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_STARRED_TAG] );
             }

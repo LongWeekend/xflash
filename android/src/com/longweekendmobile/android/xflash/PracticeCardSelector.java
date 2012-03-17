@@ -7,7 +7,7 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public static int calculateNextCardLevelForTag(Tag  )
-//  public static float calculateProbabilityOfUnseenWithcardsSeen()
+//  public static float calculateProbabilityOfUnseenWithCardsSeen()
 //
 //  public static void setNextBrowseCard(Tag  ,Card,  ,int  )
 
@@ -134,7 +134,7 @@ public class PracticeCardSelector
 
         if( ( maxCardsToStudy < 1 ) || ( weightingFactor < 1 ) )
         {
-            Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithcardsSeen()");
+            Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithCardsSeen()");
             Log.d(MYTAG,"      - bad value for maxCardsToStudy or weightingFactor");
         }
 
@@ -146,7 +146,7 @@ public class PracticeCardSelector
         {
             if( cardsSeenTotal > totalCardsInSet);
             {
-                Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithcardsSeen()");
+                Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithCardsSeen()");
                 Log.d(MYTAG,"      - cardsSeenTotal is greater than totalCardsInSet");
             }
 
@@ -161,7 +161,7 @@ public class PracticeCardSelector
             return p_unseen;
         }
 
-    }  // end calculateProbabilityOfUnseenWithcardsSeen()
+    }  // end calculateProbabilityOfUnseenWithCardsSeen()
 
   
     // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )

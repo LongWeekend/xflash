@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment
     {
         // save the inflater, input manager, and starred words tag for later use
         myInflater = inflater;
-        starredTag = Tag.starredWordsTag();
+        starredTag = TagPeer.starredWordsTag();
         imm = (InputMethodManager)Xflash.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         // inflate our layout for the Search activity

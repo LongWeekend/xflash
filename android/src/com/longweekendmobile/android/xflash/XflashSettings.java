@@ -101,8 +101,8 @@ public class XflashSettings
     private static int answerTextSize = -1;
     private static int customStudyPool = -1;
     private static int customFrequency = -1;
-    private static int hideLearnedCards = -1;
     private static int currentUser = -1;
+    private static boolean hideLearnedCards = false;
 
     // STUDY MODE PROPERTIES
     public static final int LWE_STUDYMODE_PRACTICE = 0;
@@ -138,9 +138,6 @@ public class XflashSettings
     public static final int LWE_FREQUENCY_HARD = 3;
     public static final int LWE_FREQUENCY_MAX = 4;
 
-    public static final int HIDE_LEARNED_OFF = 0;
-    public static final int HIDE_LEARNED_ON = 1;
-    
     public static final int LWE_DEFAULT_USER = 1;
     
     // load all settings from Preferences on start
@@ -156,12 +153,12 @@ public class XflashSettings
         studyLanguage = settings.getInt("studyLanguage",LWE_STUDYLANGUAGE_JAPANESE);
         readingMode = settings.getInt("readingMode",LWE_STUDYLANGUAGE_JAPANESE);
         answerTextSize = settings.getInt("answerTextSize",LWE_ANSWERTEXT_NORMAL);
-        difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_EASY);
+        difficultyMode = settings.getInt("difficultyMode",LWE_DIFFICULTY_MEDIUM);
         customStudyPool = settings.getInt("customStudyPool",LWE_STUDYPOOL_HARD);
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
-        hideLearnedCards = settings.getInt("hideLearnedCards",HIDE_LEARNED_OFF);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
-    
+        hideLearnedCards = settings.getBoolean("hideLearnedCards",false);
+
     }  // end load()
 
 
@@ -727,22 +724,22 @@ public class XflashSettings
 
 
     // gets the current hide learned cards state
-    public static int getHideLearned()
+    public static boolean getHideLearned()
     {
         return hideLearnedCards;
     }
 
 
     // toggles the hide learned cards state and returns the new state
-    public static int toggleHideLearned()
+    public static boolean toggleHideLearned()
     {
-        if( hideLearnedCards == HIDE_LEARNED_OFF )
+        if( hideLearnedCards == false )
         {
-            hideLearnedCards = HIDE_LEARNED_ON;
+            hideLearnedCards = true;
         }
         else
         {
-            hideLearnedCards = HIDE_LEARNED_OFF;
+            hideLearnedCards = false ;
         }
 
         // set the new state in the Preferences
@@ -750,7 +747,7 @@ public class XflashSettings
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("hideLearnedCards",hideLearnedCards);
+        editor.putBoolean("hideLearnedCards",hideLearnedCards);
         editor.commit();
         
         return hideLearnedCards;

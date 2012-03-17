@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- TODO - temporary placeholder icons -->
+    
+    <item android:id="@+id/pm_toggle_starred"
+        android:icon="@drawable/tag_starred_icon_red" />
+
+    <item android:id="@+id/pm_add_tag"
+        android:title="@string/pm_addtotag"
+        android:icon="@drawable/tag_icon_blue" />
+
+    <item android:id="@+id/pm_tweet"
+        android:title="@string/pm_tweetcard"
+        android:icon="@drawable/twitter_icon" />
+
+    <item android:id="@+id/pm_fix"
+        android:title="@string/pm_fixcard"
+        android:icon="@drawable/star_deselected" />
+
+</menu>
+

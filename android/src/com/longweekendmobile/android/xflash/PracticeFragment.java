@@ -7,14 +7,22 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
+//  public void onDestroyView()                                         @over
+//  public void onCreateOptionsMenu(Menu  ,MenuInflater  )              @over
+//  public void onPrepareOptionsMenu(Menu  )                            @over
+//  public boolean onOptionsItemSelected(MenuItem  )                    @over
 //
 //  public static void setPracticeBlank()
 //
-//  private void reveal()
-//  private void toggleReading()
-//  private void practiceClick(View  )
-//  private void browseClick(View  )
-//  private void goRight()
+//  private static void reveal()
+//  private static void toggleReading()
+//  private static void practiceClick(View  )
+//  private static void browseClick(View  )
+//  private static void launchBrowseCard(int  )
+//  private static void goRight()
+//
+//  private void toggleCardStarred()
+//  private void launchAddCard()
 //
 //  private static class PracticeScreen
 //
@@ -28,9 +36,13 @@ package com.longweekendmobile.android.xflash;
 //      private static void setClickListeners()
 
 import android.os.Bundle;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -43,6 +55,7 @@ import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
+import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class PracticeFragment extends Fragment
 {
@@ -67,6 +80,8 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        setHasOptionsMenu(true);
+        
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
@@ -111,6 +126,57 @@ public class PracticeFragment extends Fragment
     }  // end onDestroyView()
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) 
+    {
+        // inflate our options menu from xml
+        inflater.inflate(R.menu.practice_options, menu);
+    }
+   
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu)
+    {
+        // set the starred menu item based on current card status
+        MenuItem starredItem = (MenuItem)menu.findItem(R.id.pm_toggle_starred);
+        Tag starredTag = TagPeer.starredWordsTag();
+
+        if( TagPeer.card(currentCard,starredTag) )
+        {
+            starredItem.setTitle(R.string.pm_starred_yes);
+        }
+        else
+        {
+            starredItem.setTitle(R.string.pm_starred_no);
+        }
+    
+    }  // end onPrepareOptionsMenu()
+  
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) 
+    {
+        switch( item.getItemId() ) 
+        {
+            case R.id.pm_toggle_starred:   
+                                        toggleCardStarred();
+                                        return true;
+            case R.id.pm_add_tag:       launchAddCard();
+                                        return true;
+            case R.id.pm_tweet:         Log.d(MYTAG,"> pm_tweet clicked");
+                                        Log.d(MYTAG,".");
+                                        return true;
+            case R.id.pm_fix:           Log.d(MYTAG,"> pm_fix clicked");
+                                        Log.d(MYTAG,".");
+                                        return true;
+        }
+        
+        // if the item clicked does not match our items, pass it up
+        return( super.onOptionsItemSelected(item) );
+
+    }  // end onOptionsItemSelected()
+
+
     // called by ExampleSentenceFragment to reset the view
     public static void setPracticeBlank()
     {
@@ -124,22 +190,27 @@ public class PracticeFragment extends Fragment
         PracticeScreen.setupPracticeView(PRACTICE_VIEW_REVEAL);
     }
 
-/*
-    // called by Xflash when the reading is clicked on
-    private void toggleReading()
-    {
-        PracticeScreen.toggleReading();
-    }
-*/    
     
     // method called when any button in the options block is clicked
     private static void practiceClick(View v)
     {
+        // TODO - temporary, evolving as we go
+        if( v.getId() == R.id.optionblock_actions )
+        {
+            Xflash.getActivity().openOptionsMenu();
+        }
+        else
+        {
+
+        
         // load the next practice view without adding to the back stack
         XflashScreen.setPracticeOverride();
         practiceViewStatus = PRACTICE_VIEW_BLANK;
         Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-    }
+
+        }
+
+    }  // end practiceClick()
 
 
     // method called when any button in the options block is clicked
@@ -147,20 +218,25 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_last:     // when they push the left/back browse button
-                PracticeCardSelector.setNextBrowseCard(currentTag,XflashScreen.DIRECTION_CLOSE);
-                Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_CLOSE);
-                break;
+            case R.id.browseblock_actions:  Xflash.getActivity().openOptionsMenu();
+                                            break;
             
-            case R.id.browseblock_actions:  break;
+            case R.id.browseblock_last:     launchBrowseCard(XflashScreen.DIRECTION_CLOSE);
+                                            break;
             
-            case R.id.browseblock_next:    // when they push the right/forward browse button 
-                PracticeCardSelector.setNextBrowseCard(currentTag,XflashScreen.DIRECTION_OPEN); 
-                Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-                break;  
+            case R.id.browseblock_next:     launchBrowseCard(XflashScreen.DIRECTION_OPEN);
+                                            break;
         } 
 
     }  // end browseClick()
+
+    
+    // set the card and screen transition for a browse click
+    private static void launchBrowseCard(int inDirection)
+    {
+        PracticeCardSelector.setNextBrowseCard(currentTag,inDirection);
+        Xflash.getActivity().onScreenTransition("practice",inDirection);
+    } 
 
 
     // method called when user click to queue the extra screen
@@ -172,6 +248,39 @@ public class PracticeFragment extends Fragment
     }
 
 
+    // toggles a card's starred status from the options menu
+    private void toggleCardStarred()
+    {
+        Tag starredTag = TagPeer.starredWordsTag();
+
+        if( TagPeer.card(currentCard,starredTag) )
+        {
+            TagPeer.cancelMembership(currentCard,starredTag);
+        }
+        else
+        {
+            TagPeer.subscribeCard(currentCard,starredTag);
+        }
+
+    }  // end toggleCarddStarred()
+
+    
+    // launches a model AddCardActivty from the options menu
+    private void launchAddCard()
+    {
+        // load the card to AddCardToTagFragment, as it is the layout
+        // and functionality for AddCardActivity
+        AddCardToTagFragment.loadCard( currentCard.getCardId() );
+
+        Xflash myContext = Xflash.getActivity();
+
+        // launch the Activity - modal
+        Intent myIntent = new Intent(myContext,AddCardActivity.class);
+        myContext.startActivity(myIntent);
+
+    }  // end launchAddCard()
+    
+    
     // class to manage screen setup
     private static class PracticeScreen
     {

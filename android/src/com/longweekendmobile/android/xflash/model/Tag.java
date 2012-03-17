@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash.model;
 //
 //  public Tag()
 //  
-//  public static Tag starredWordsTag()
 //  public static boolean isEqual(Tag  )
 //
 //  public Tag blankTagWithId(int  )
@@ -75,7 +74,6 @@ public class Tag
     private static final int kLWEUninitializedCardCount = -1;
     public static final int kLWEUnseenCardLevel = 0;
     public static final int kLWELearnedCardLevel = 5;
-    public static final int STARRED_TAG_ID = 0;
     public static final int DEFAULT_TAG_ID = 124;
 
     private int tagId;
@@ -107,13 +105,6 @@ public class Tag
     public boolean isEqual(Tag inTag)
     {
         return ( tagId == inTag.tagId );        
-    }
-
-    public static Tag starredWordsTag()
-    {
-        Tag tempTag = TagPeer.retrieveTagById(STARRED_TAG_ID);
-        
-        return tempTag;
     }
 
     // this method simply returns a new Tag object with the same tag ID
