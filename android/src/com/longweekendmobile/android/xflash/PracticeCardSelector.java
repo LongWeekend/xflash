@@ -6,10 +6,13 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 3/8/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public static int calculateNextCardLevelForTag(Tag  )
-//  public static float calculateProbabilityOfUnseenWithCardsSeen()
+//      *** ALL METHODS STATIC ***
 //
-//  public static void setNextBrowseCard(Tag  ,Card,  ,int  )
+//  public int calculateNextCardLevelForTag(Tag  )
+//  public float calculateProbabilityOfUnseenWithCardsSeen()
+//
+//  public void setBrowseCardByDirection(int  )
+//  public void setNextBrowseCard(Tag  ,Card,  ,int  )
 
 import java.util.Random;
 
@@ -22,6 +25,7 @@ public class PracticeCardSelector
 {
     private static final String MYTAG = "XFlash PracticeCardSelector";
     
+
     // calculates next card level based on current performance and Tag progress
     public static int calculateNextCardLevelForTag(Tag inTag)
     {
@@ -163,11 +167,47 @@ public class PracticeCardSelector
 
     }  // end calculateProbabilityOfUnseenWithCardsSeen()
 
+ /* 
+    public static void setNextPracticeCard(Tag inTag,Card inCard,int inDirection)
+    {
+
+
+
+    }  // end setNextPracticeCard()
+
+
+- (Card *) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
+{
+  NSError *error = nil;
+  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
   
+  // If necessary, tell the user they've learned this set
+  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
+  {
+    if (self.alreadyShowedLearnedAlert == NO)
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
+                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
+                                        delegate:self];
+      self.alreadyShowedLearnedAlert = YES;
+    }
+  }
+  else if (self.alreadyShowedLearnedAlert)
+  {
+    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
+    self.alreadyShowedLearnedAlert = NO;
+  }
+  return nextCard;
+}
+
+*/
+
+
+
     // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
     public static void setBrowseCardByDirection(int inDirection)
     {
-        Tag tempTag   = XflashSettings.getActiveTag();
+        Tag tempTag = XflashSettings.getActiveTag();
 
         setNextBrowseCard(tempTag,inDirection);
     }

@@ -70,7 +70,9 @@ public class PracticeFragment extends Fragment
     public static int[] cardCounts = { 1, 2, 3, 4, 5 };
     
     private static int percentageRight = 100;
-    private static int practiceViewStatus = -1;
+    
+    // TODO - temporarily public so Xflash has access in onCreatePanelMenu()
+    public static int practiceViewStatus = -1;
 
     private static RelativeLayout practiceLayout;
 
@@ -82,6 +84,9 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        // TODO - we need to manage whether the options menu is available before
+        //      - reveal, however this is a non-static method and all of our layout
+        //      - changes are still static   >:(
         setHasOptionsMenu(true);
         
         // inflate the layout for our practice activity
@@ -128,13 +133,15 @@ public class PracticeFragment extends Fragment
     }  // end onDestroyView()
 
 
+// TODO - temporarily bypassed by use of Xflash.onCreatePanelMenu()
+/*
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) 
     {
         // inflate our options menu from xml
         inflater.inflate(R.menu.practice_options, menu);
     }
-   
+
 
     @Override
     public void onPrepareOptionsMenu(Menu menu)
@@ -153,6 +160,7 @@ public class PracticeFragment extends Fragment
         }
     
     }  // end onPrepareOptionsMenu()
+*/
   
 
     @Override
@@ -517,7 +525,7 @@ public class PracticeFragment extends Fragment
 
                 // set and display the answer
                 loadMeaning();
-
+                
             }  // end if block for ( inViewMode )
 
             practiceViewStatus = inViewMode;
