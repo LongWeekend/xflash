@@ -8,12 +8,15 @@ package com.longweekendmobile.android.xflash;
 //
 //      *** ALL METHODS STATIC ***
 //
-//  public int calculateNextCardLevelForTag(Tag  )
-//  public float calculateProbabilityOfUnseenWithCardsSeen()
+//  public static void setNextPracticeCard(Tag  ,Card  )
+//  public static void setBrowseCardByDirection(int  )
+//  public static void setNextBrowseCard(Tag  ,int  )
 //
-//  public void setBrowseCardByDirection(int  )
-//  public void setNextBrowseCard(Tag  ,Card,  ,int  )
+//  private static Card randomCardInTag(Tag  ,Card  )
+//  private static int calculateNextCardLevelForTag(Tag  )
+//  private static float calculateProbabilityOfUnseenWithCardsSeen(int ,int ,int ,int )
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import android.util.Log;
@@ -24,10 +27,226 @@ import com.longweekendmobile.android.xflash.model.Tag;
 public class PracticeCardSelector
 {
     private static final String MYTAG = "XFlash PracticeCardSelector";
-    
+    private static final int NUM_CARDS_IN_NOT_NEXT_QUEUE = 5;
+    private static final int NONRECENT_CARD_RETRIES = 3;
 
+    private static ArrayList<Card> lastFiveCards = null;
+
+    
+    // sets the active card to the next card in line for practice mode
+    public static void setNextPracticeCard(Tag inTag,Card inCard)
+    {
+        Card nextCard = randomCardInTag(inTag,inCard);
+
+
+        // TODO - insert code below
+
+
+        XflashSettings.setActiveCard(nextCard);
+
+    }  // end setNextPracticeCard()
+
+/*
+
+  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
+  
+  // If necessary, tell the user they've learned this set
+  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
+  {
+    if (self.alreadyShowedLearnedAlert == NO)
+    {
+      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
+                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
+                                        delegate:self];
+      self.alreadyShowedLearnedAlert = YES;
+    }
+  }
+  else if (self.alreadyShowedLearnedAlert)
+  {
+    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
+    self.alreadyShowedLearnedAlert = NO;
+  }
+
+
+*/
+
+
+    // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
+    public static void setBrowseCardByDirection(int inDirection)
+    {
+        Tag tempTag = XflashSettings.getActiveTag();
+
+        setNextBrowseCard(tempTag,inDirection);
+    }
+
+    // TODO - this actually works, the rest of the class is untested
+
+    // set the active card to the next in currentTag, by direction
+    public static void setNextBrowseCard(Tag currentTag,int inDirection)
+    {
+        Card nextCard = null;
+        int currentIndex = currentTag.getCurrentIndex();
+
+        if( inDirection == XflashScreen.DIRECTION_NULL )
+        {
+            // that means we're on the first card, (or haven't moved )
+            // use the tag's currentIndex
+            nextCard = currentTag.flattenedCardArray.get(currentIndex);
+        }
+        else
+        {
+            // We already have a card, so get the next card based on the current index
+            if( inDirection == XflashScreen.DIRECTION_CLOSE )
+            {
+                // if we are closing (going back), get the previous card 
+                currentIndex = currentTag.decrementIndex();
+            }
+            else 
+            {
+                // if we are opening (going forward), get the next card
+                currentIndex = currentTag.incrementIndex();
+            }
+    
+            // OK, we've updated currentIndex, get the new card
+            nextCard = currentTag.flattenedCardArray.get(currentIndex);
+        }
+  
+        // Now, if we have a faulted card, hydrate it
+        if( nextCard.isFault )
+        {
+            nextCard.hydrate();
+        }
+       
+        XflashSettings.setActiveCard(nextCard);
+
+    }  // end setNextBrowseCard()
+
+    
+    // returns a random card (ideally not the last card - passed as argument)
+    private static Card randomCardInTag(Tag inTag,Card inCard)
+    {
+        Random randGenerator = new Random();
+        Card randomCard = null;
+        
+        if( inTag.cardsByLevel.size() != 6 )
+        {
+            Log.d(MYTAG,"ERROR - inRandomCardInTag() for: " + inTag.getName() );
+            Log.d(MYTAG,"      - cardsByLevel.size() MUST be 6, instead is:  " + inTag.cardsByLevel.size() );
+        }
+
+        // make sure our previous card array is initialized
+        if( lastFiveCards == null )
+        {
+            lastFiveCards = new ArrayList<Card>();
+        }
+
+        // get the next card level
+        int nextLevelId = calculateNextCardLevelForTag(inTag);
+
+        // get a random card offset
+        ArrayList<Card> cardArray = inTag.cardsByLevel.get(nextLevelId);
+        
+        // see if calculateNextCardLevelForTag returned an empty level
+        int numCardsAtLevel = cardArray.size();
+        if( numCardsAtLevel < 1 )
+        {
+            Log.d(MYTAG,"ERROR - in randomCardInTag() for: " + inTag.getName() );
+            Log.d(MYTAG,"      - cards at level " + nextLevelId + " don't exist!");
+        }
+
+        // yoink a card
+        int randomOffset = ( randGenerator.nextInt() % numCardsAtLevel );
+        randomCard = cardArray.get(randomOffset);
+
+        // add the card we're leaving to lastFiveCards
+        if( inCard != null )
+        {
+            lastFiveCards.add(inCard);
+        }
+
+        // TODO - wait a minute, wouldn't this technically mean that
+        //      - that the array lastFiveCards is actually only holding
+        //      - on to the last FOUR cards?  
+        if( lastFiveCards.size() == NUM_CARDS_IN_NOT_NEXT_QUEUE )
+        {
+            lastFiveCards.remove(0);
+        }
+
+        // prevent getting the same card twice
+        int whileIterator = 0;      // counts how many times we whiled against the array
+        int duplicateIterator = 0;  // counts tries that return the same card as before
+
+        // immediately bypassed if our randomCard is not in lastFiveCards
+        while( lastFiveCards.contains(randomCard) )
+        {
+            Log.d(MYTAG,"pulled the same card as last time");
+
+            // if there is only one card left in the level, get a new level
+            if( numCardsAtLevel == 1 )
+            {
+                Log.d(MYTAG,"only one card level at this level, getting new level");
+
+                // try up to five times to get a different level
+                int lastNextLevel = nextLevelId;
+                for(int i = 0; i < 5; i++)
+                {
+                    nextLevelId = calculateNextCardLevelForTag(inTag);
+                    
+                    if( nextLevelId != lastNextLevel )
+                    {
+                        // break out of for loop
+                        break;
+                    }
+                }
+
+                // now get a different card randomly
+                cardArray = inTag.cardsByLevel.get(nextLevelId);
+                int numCardsAtLevel2 = cardArray.size();
+
+                // see if calculateNextCardLevelForTag returned an empty level
+                if( numCardsAtLevel2 < 1 )
+                {
+                    Log.d(MYTAG,"ERROR - in randomCardInTag() for: " + inTag.getName() );
+                    Log.d(MYTAG,"      - cards at level2 " + nextLevelId + " don't exist!");
+                }
+
+                // yoink a new card
+                randomOffset = ( randGenerator.nextInt() % numCardsAtLevel2 );
+                randomCard = cardArray.get(randomOffset);
+
+                ++whileIterator;
+                if( whileIterator > NONRECENT_CARD_RETRIES )
+                {
+                    // the same card is worse than a card that was twice ago, 
+                    // so we check again that it's not that
+                    if( ( duplicateIterator == NONRECENT_CARD_RETRIES ) || 
+                        ( inCard.equals(randomCard) == false ) )
+                    {
+                        // we tried 3 times, fuck it
+                        // (breaking out of while loop) 
+                        break;
+                    }
+
+                    ++duplicateIterator;
+
+                }  // end if( whileIterator > nonrecent card limit )
+
+            }  // end if( last card in level)
+
+        }  // end while( lastFiveCards contains randomCard )
+
+        if( randomCard.isFault )
+        {
+            randomCard.hydrate();
+        }
+
+        return randomCard;
+
+    }  // end randomCardInTag()
+    
+    
     // calculates next card level based on current performance and Tag progress
-    public static int calculateNextCardLevelForTag(Tag inTag)
+    private static int calculateNextCardLevelForTag(Tag inTag)
     {
         if( inTag.cardLevelCounts.size() != 6 )
         {
@@ -38,9 +257,7 @@ public class PracticeCardSelector
         // control variables
         int weightingFactor = XflashSettings.getFrequency();
 
-        // TODO - not sure where this settings is coming from
-        // BOOL hideLearnedCards = [settings boolForKey:APP_HIDE_BURIED_CARDS];
-        boolean hideLearnedCards = false;
+        boolean hideLearnedCards = XflashSettings.getHideLearned();
 
         int numLevels = 5;
         int unseenCount = inTag.cardLevelCounts.get(Tag.kLWEUnseenCardLevel);
@@ -130,7 +347,7 @@ public class PracticeCardSelector
 
     // calculate the probability of the unseen cards showing for th next 'round'
     // return the float ranegd 0-1 for the probability of unseen card showing next
-    public static float calculateProbabilityOfUnseenWithCardsSeen(int cardsSeenTotal,
+    private static float calculateProbabilityOfUnseenWithCardsSeen(int cardsSeenTotal,
                                 int totalCardsInSet,int numeratorTotal,int levelOneTotal)
     {
         int maxCardsToStudy = XflashSettings.getStudyPool();
@@ -166,92 +383,6 @@ public class PracticeCardSelector
         }
 
     }  // end calculateProbabilityOfUnseenWithCardsSeen()
-
- /* 
-    public static void setNextPracticeCard(Tag inTag,Card inCard,int inDirection)
-    {
-
-
-
-    }  // end setNextPracticeCard()
-
-
-- (Card *) getNextCard:(Tag*)cardSet afterCard:(Card*)currentCard direction:(NSString*)directionOrNil
-{
-  NSError *error = nil;
-  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
-  
-  // If necessary, tell the user they've learned this set
-  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
-  {
-    if (self.alreadyShowedLearnedAlert == NO)
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
-                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
-                                        delegate:self];
-      self.alreadyShowedLearnedAlert = YES;
-    }
-  }
-  else if (self.alreadyShowedLearnedAlert)
-  {
-    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
-    self.alreadyShowedLearnedAlert = NO;
-  }
-  return nextCard;
-}
-
-*/
-
-
-
-    // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
-    public static void setBrowseCardByDirection(int inDirection)
-    {
-        Tag tempTag = XflashSettings.getActiveTag();
-
-        setNextBrowseCard(tempTag,inDirection);
-    }
-
-    
-    // set the active card to the next in currentTag, by direction
-    public static void setNextBrowseCard(Tag currentTag,int inDirection)
-    {
-        Card nextCard = null;
-        int currentIndex = currentTag.getCurrentIndex();
-
-        if( inDirection == XflashScreen.DIRECTION_NULL )
-        {
-            // that means we're on the first card, (or haven't moved )
-            // use the tag's currentIndex
-            nextCard = currentTag.flattenedCardArray.get(currentIndex);
-        }
-        else
-        {
-            // We already have a card, so get the next card based on the current index
-            if( inDirection == XflashScreen.DIRECTION_CLOSE )
-            {
-                // if we are closing (going back), get the previous card 
-                currentIndex = currentTag.decrementIndex();
-            }
-            else 
-            {
-                // if we are opening (going forward), get the next card
-                currentIndex = currentTag.incrementIndex();
-            }
-    
-            // OK, we've updated currentIndex, get the new card
-            nextCard = currentTag.flattenedCardArray.get(currentIndex);
-        }
-  
-        // Now, if we have a faulted card, hydrate it
-        if( nextCard.isFault )
-        {
-            nextCard.hydrate();
-        }
-       
-        XflashSettings.setActiveCard(nextCard);
-
-    }  // end setNextBrowseCard()
 
 
 }  // end PracticeCardSelector class declaration

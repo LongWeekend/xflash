@@ -48,8 +48,8 @@ package com.longweekendmobile.android.xflash;
 //  public static int getFrequency()
 //  public static int getCustomFrequency()
 //  public static void setCustomFrequency(int  )
-//  public static int getHideLearned()
-//  public static int toggleHideLearned()
+//  public static boolean getHideLearned()
+//  public static boolean toggleHideLearned()
 //
 //  public static void throwBadValue(String  ,int  )
 

@@ -80,7 +80,7 @@ public class Tag
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
-    private ArrayList<ArrayList<Card>> cardsByLevel;          
+    public ArrayList<ArrayList<Card>> cardsByLevel;          
     public ArrayList<Card> flattenedCardArray;
     public ArrayList<Integer> cardLevelCounts;
     
@@ -257,7 +257,6 @@ public class Tag
             // no PLIST, generate new cardsByLevel array
             tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
         }
-
 
         cardsByLevel = tempCardsArray;
         flattenedCardArray = flattenCardArrays();
