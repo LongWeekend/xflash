@@ -7,10 +7,12 @@ package com.longweekendmobile.android.xflash;
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
 //  protected void onCreate(Bundle  )               @over
-//  public void onDestory(Bundle  )                   @over
+//  public void onDestory(Bundle  )                 @over
 //  public boolean onSearchRequested()              @over
 //  public void onBackPressed()                     @over
 //  protected void onSaveInstanceState(Bundle  )    @over
+//
+//  public static Xflash getActivity()
 //
 //  *** TAB FRAGMENT FUNCTIONALITY ***
 //
@@ -82,62 +84,6 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
        
     }  // end onCreate
 
-
-    // TODO - sloppy sloppy sloppy.  Fix PracticeFragment to use
-    //      - non-static layouts, fool
-    @Override
-    public boolean onCreatePanelMenu(int featureId,Menu menu)
-    {
-        // inflate our options menu
-        getMenuInflater().inflate(R.menu.practice_options, menu);
-        
-        // only pass to onPreparePanel if we are in reveal/browse
-        if( PracticeFragment.practiceViewStatus != 0 )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }  // end onCreatePanelMenu()
-
-    // TODO - sloppy sloppy sloppy.  Fix PracticeFragment to use
-    //      - non-static layouts, fool
-    @Override
-    public boolean onPreparePanel(int featureId,View view,Menu menu)
-    {
-        MenuItem starredItem = (MenuItem)menu.findItem(R.id.pm_toggle_starred);
-
-        if( TagPeer.card( XflashSettings.getActiveCard() , TagPeer.starredWordsTag() ) )
-        {
-            starredItem.setTitle(R.string.pm_starred_yes);
-        }
-        else
-        {
-            starredItem.setTitle(R.string.pm_starred_no);
-        }
-        
-        // only show menu if we are in reveal/browse
-        if( PracticeFragment.practiceViewStatus != 0 )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }  // end onPreparePanel()
-
-
-
-
-    public static Xflash getActivity()
-    {
-        return myContext;
-    }
 
     @Override
     public void onDestroy()
@@ -249,7 +195,15 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         super.onSaveInstanceState(outState);
     }
 
-// nearly all of the following code is resued or modified from the example 
+    
+    // return a static FragmentActivity context
+    public static Xflash getActivity()
+    {
+        return myContext;
+    }
+
+
+// the following code is resued and/or heavily modified from the example 
 // (and associated github project) following:
 //
 // http://thepseudocoder.wordpress.com/2011/10/04/android-tabs-the-fragment-way/

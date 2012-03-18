@@ -163,12 +163,20 @@ public class SearchFragment extends Fragment
         }
   
 
+        // if the card is currently starred, remove
         if(isMember)
         {
-            // if the card is currently starred, remove
-            TagPeer.cancelMembership(tempCard,starredTag);
-            membershipCacheArray.remove(tempCard);    
-            starImage.setImageResource(R.drawable.star_deselected);
+            // only remove card if it is NOT the last in the Tag
+            if( starredTag.getCardCount() > 1 )
+            {
+                TagPeer.cancelMembership(tempCard,starredTag);
+                membershipCacheArray.remove(tempCard);    
+                starImage.setImageResource(R.drawable.star_deselected);
+            }
+            else
+            {
+                XflashAlert.fireLastCardDialog(starredTag);
+            }
         }
         else
         {

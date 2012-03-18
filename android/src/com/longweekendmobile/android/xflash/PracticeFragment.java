@@ -27,12 +27,12 @@ package com.longweekendmobile.android.xflash;
 //
 //  private static class PracticeScreen
 //
-//      public static void initialize()
-//      public static void dump()
-//      public static void refreshCountBar()
-//      public static void setupPracticeView(int  )
-//      public static void setAnswerBar(int  )
-//      public static void toggleReading()
+//      public  static void initialize()
+//      public  static void dump()
+//      public  static void refreshCountBar()
+//      public  static void setupPracticeView(int  )
+//      public  static void setAnswerBar(int  )
+//      public  static void toggleReading()
 //      private static void loadMeaning()
 //      private static void setClickListeners()
 
@@ -84,14 +84,19 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // TODO - we need to manage whether the options menu is available before
-        //      - reveal, however this is a non-static method and all of our layout
-        //      - changes are still static   >:(
+        // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
         
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
+        // TODO - we always need to load currentCard, but not currentTag
+        //
+        //      - I could make a new broadcast and listener so PracticeFragment
+        //      - only loads a new Tag when someone calls XflashAlert.startStudying(),
+        //      - but I feel that would more than cancel any optimization gained
+        //      - by not making this call
+        
         // if there is no tag loaded, default to Long Weekend Favorites
         currentTag = XflashSettings.getActiveTag();           
         currentCard = (JapaneseCard)XflashSettings.getActiveCard();
@@ -133,8 +138,6 @@ public class PracticeFragment extends Fragment
     }  // end onDestroyView()
 
 
-// TODO - temporarily bypassed by use of Xflash.onCreatePanelMenu()
-/*
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) 
     {
@@ -160,7 +163,6 @@ public class PracticeFragment extends Fragment
         }
     
     }  // end onPrepareOptionsMenu()
-*/
   
 
     @Override
@@ -203,21 +205,12 @@ public class PracticeFragment extends Fragment
     // method called when any button in the options block is clicked
     private static void practiceClick(View v)
     {
-        // TODO - temporary, evolving as we go
-        if( v.getId() == R.id.optionblock_actions )
-        {
-            Xflash.getActivity().openOptionsMenu();
-        }
-        else
-        {
-
-        
         // load the next practice view without adding to the back stack
-        XflashScreen.setPracticeOverride();
         practiceViewStatus = PRACTICE_VIEW_BLANK;
+        PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+        
+        XflashScreen.setPracticeOverride();
         Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
-
-        }
 
     }  // end practiceClick()
 
@@ -227,9 +220,6 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_actions:  Xflash.getActivity().openOptionsMenu();
-                                            break;
-            
             case R.id.browseblock_last:     launchBrowseCard(XflashScreen.DIRECTION_CLOSE);
                                             break;
             
@@ -264,7 +254,15 @@ public class PracticeFragment extends Fragment
 
         if( TagPeer.card(currentCard,starredTag) )
         {
-            TagPeer.cancelMembership(currentCard,starredTag);
+            // only remove card if it is NOT the last in the Tag
+            if( starredTag.getCardCount() > 1 ) 
+            {
+                TagPeer.cancelMembership(currentCard,starredTag);
+            }
+            else
+            {
+                XflashAlert.fireLastCardDialog(starredTag);
+            }
         }
         else
         {
@@ -635,10 +633,10 @@ public class PracticeFragment extends Fragment
             // THE PRACTICE-MODE ANSWER BAR
             
             // set listeners for each of the reveal buttons
-            int[] buttonIds = { R.id.optionblock_actions, R.id.optionblock_right,
-                                 R.id.optionblock_wrong, R.id.optionblock_goaway };
+            int[] buttonIds = { R.id.optionblock_right, R.id.optionblock_wrong, 
+                                R.id.optionblock_goaway };
 
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < 3; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(practiceClickListener);
@@ -647,10 +645,9 @@ public class PracticeFragment extends Fragment
             // THE BROWSE-MODE ANSWER BAR
             
             // set listeners for each of the browse buttons
-            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_actions,
-                                    R.id.browseblock_next };
+            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_next };
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 2; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(browseClickListener);
