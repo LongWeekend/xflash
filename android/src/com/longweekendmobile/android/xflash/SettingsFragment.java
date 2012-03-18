@@ -8,15 +8,17 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void switchStudyMode()
-//  public static void switchStudyLanguage()
-//  public static void switchReadingMode()
-//  public static void goDifficulty(Xflash  )
-//  public static void switchAnswerSize()
-//  public static void advanceColorScheme()
-//  public static void goUser(Xflash  )
-//  public static void goUpdate(Xflash  )
-//  public static void launchSettingsWeb(View  ,Xflash  )
+//  private void switchStudyMode()
+//  private void switchStudyLanguage()
+//  private void switchReadingMode()
+//  private void goDifficulty()
+//  private void switchAnswerSize()
+//  private void advanceColorScheme()
+//  private void goUser()
+//  private void goUpdate()
+//  private void launchSettingsWeb(View  )
+//
+//  private void setClickListeners()
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,12 +36,12 @@ import com.longweekendmobile.android.xflash.model.UserPeer;
 public class SettingsFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash SettingsFragment";
-    private static LinearLayout settingsLayout;
-
-    public static boolean isTwitter = false;
     
+    private LinearLayout settingsLayout;
 
-    // (non-Javadoc) - see android.support.v4.app.Fragment#onCreateView()
+    public static final int LOAD_TWITTER = 0;
+    public static final int LOAD_FACEBOOK = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -48,14 +50,10 @@ public class SettingsFragment extends Fragment
         settingsLayout = (LinearLayout)inflater.inflate(R.layout.settings, container, false);
 
         // set the title bar to the current color scheme
-        // this Activity does not need the onResume check present in
-        // all other activities, because this Activity will never
-        // start with an unexpected color change
-        // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)settingsLayout.findViewById(R.id.settings_heading);
-        Button tempButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
+        Button rateButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
  
-        XflashSettings.setupColorScheme(titleBar,tempButton);
+        XflashSettings.setupColorScheme(titleBar,rateButton);
  
         // set the "Study Mode" label in our settings view
         TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
@@ -82,16 +80,19 @@ public class SettingsFragment extends Fragment
         tempView = (TextView)settingsLayout.findViewById(R.id.settings_activeuser_label);
         tempView.setText( tempUser.getUserNickname() ); 
      
+        // set click listeners for all of our views
+        setClickListeners();
+        
         return settingsLayout;
 
     }  // end onCreateView()
 
 
-    public static void switchStudyMode()
+    private void switchStudyMode()
     {
-        int tempMode = XflashSettings.getStudyMode();
+        int tempStudyMode = XflashSettings.getStudyMode();
 
-        if( tempMode == XflashSettings.LWE_STUDYMODE_PRACTICE )
+        if( tempStudyMode == XflashSettings.LWE_STUDYMODE_PRACTICE )
         {
             XflashSettings.setStudyMode(XflashSettings.LWE_STUDYMODE_BROWSE);
         }
@@ -101,17 +102,17 @@ public class SettingsFragment extends Fragment
         }
         
         // set the "Study Mode" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
-        tempView.setText( XflashSettings.getStudyModeName() );
+        TextView studyModeLabel = (TextView)settingsLayout.findViewById(R.id.settings_studymode_label);
+        studyModeLabel.setText( XflashSettings.getStudyModeName() );
 
     }  // end switchStudyMode()
    
 
-    public static void switchStudyLanguage()
+    private void switchStudyLanguage()
     {
-        int tempMode = XflashSettings.getStudyLanguage();
+        int tempLanguage = XflashSettings.getStudyLanguage();
 
-        if( tempMode == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
+        if( tempLanguage == XflashSettings.LWE_STUDYLANGUAGE_JAPANESE )
         {
             XflashSettings.setStudyLanguage(XflashSettings.LWE_STUDYLANGUAGE_ENGLISH);
         }
@@ -121,17 +122,17 @@ public class SettingsFragment extends Fragment
         }
         
         // set the "Study Language" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_studylanguage_label);
-        tempView.setText( XflashSettings.getStudyLanguageName() );
+        TextView studyLanguageLabel = (TextView)settingsLayout.findViewById(R.id.settings_studylanguage_label);
+        studyLanguageLabel.setText( XflashSettings.getStudyLanguageName() );
     
     }  // end switchStudyLanguage()
    
 
-    public static void switchReadingMode()
+    private void switchReadingMode()
     {
-        int tempMode = XflashSettings.getReadingMode();
+        int tempReadingMode = XflashSettings.getReadingMode();
 
-        switch(tempMode) 
+        switch(tempReadingMode) 
         {
             case XflashSettings.LWE_READINGMODE_BOTH:   
                                 XflashSettings.setReadingMode(XflashSettings.LWE_READINGMODE_ROMAJI);
@@ -146,23 +147,23 @@ public class SettingsFragment extends Fragment
         }
 
         // set the "Furigana / Reading" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
-        tempView.setText( XflashSettings.getReadingModeName() );
+        TextView furiganaReadingLabel = (TextView)settingsLayout.findViewById(R.id.settings_furigana_label);
+        furiganaReadingLabel.setText( XflashSettings.getReadingModeName() );
     
-    }  // end switchStudyLanguage()
+    }  // end switchReadingMode()
    
 
     // calls a new view activity for fragment tab layout 
-    public static void goDifficulty(Xflash inContext)
+    private void goDifficulty()
     {
         // load the HelpPageFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_DIFFICULTY);
-        inContext.onScreenTransition("difficulty",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("difficulty",XflashScreen.DIRECTION_OPEN);
     }
 
     
     // changes the answer text size in the PracticeFragment
-    public static void switchAnswerSize()
+    private void switchAnswerSize()
     {
         int oldSize = XflashSettings.getAnswerTextSize();
         int newSize = -1;
@@ -179,20 +180,20 @@ public class SettingsFragment extends Fragment
         XflashSettings.setAnswerText(newSize);
 
         // reset the answer text size label 
-        TextView tempView  = (TextView)settingsLayout.findViewById(R.id.settings_answersize);
-        tempView.setText( XflashSettings.getAnswerTextLabel() );
+        TextView answerSize = (TextView)settingsLayout.findViewById(R.id.settings_answersize);
+        answerSize.setText( XflashSettings.getAnswerTextLabel() );
 
     }  // end switchAnswerSize()
 
 
-    public static void advanceColorScheme()
+    private void advanceColorScheme()
     {
         int tempScheme = XflashSettings.getColorScheme();
 
         // set our new color
-        if(tempScheme == 2)
+        if( tempScheme == XflashSettings.LWE_THEME_TAME )
         {
-            tempScheme = 0;
+            tempScheme = XflashSettings.LWE_THEME_RED;
         }
         else
         {
@@ -204,48 +205,164 @@ public class SettingsFragment extends Fragment
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)settingsLayout.findViewById(R.id.settings_heading);
-        Button tempButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
+        Button rateButton = (Button)settingsLayout.findViewById(R.id.settings_ratebutton);
 
-        XflashSettings.setupColorScheme(titleBar,tempButton);
+        XflashSettings.setupColorScheme(titleBar,rateButton);
 
         // and update the "Theme" label in our settings view
-        TextView tempView = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
-        tempView.setText( XflashSettings.getColorSchemeName() );
+        TextView themeLabel = (TextView)settingsLayout.findViewById(R.id.settings_theme_label);
+        themeLabel.setText( XflashSettings.getColorSchemeName() );
 
     }  // end advanceColorScheme()
 
     
     // calls a new view activity for fragment tab layout 
-    public static void goUser(Xflash inContext)
+    private void goUser()
     {
         // load the UserFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
-        inContext.onScreenTransition("user",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("user",XflashScreen.DIRECTION_OPEN);
     }
 
    
-    public static void goUpdate(Xflash inContext)
+    private void goUpdate()
     {
         // load the UpdateFragment to the fragment tab manager
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_UPDATE);
-        inContext.onScreenTransition("update",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("update",XflashScreen.DIRECTION_OPEN);
     }
 
  
-    public static void launchSettingsWeb(View v,Xflash inContext)
+    private void launchSettingsWeb(View v)
     {
-        if( v.getId() == R.id.settings_launch_twitter)
+        if( v.getId() == R.id.settings_launch_twitter )
         {
-            isTwitter = true;
+            SettingsWebFragment.setPage(LOAD_TWITTER);
         }
         else
         {
-            isTwitter = false;
+            SettingsWebFragment.setPage(LOAD_FACEBOOK);
         }
 
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_WEB);
-        inContext.onScreenTransition("settings_web",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("settings_web",XflashScreen.DIRECTION_OPEN);
     }
+
+    
+    // set click listeners for all views
+    private void setClickListeners()
+    {
+        // the study mode bar  ( practice / browse )
+        RelativeLayout tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.studymode_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                switchStudyMode();
+            }
+        });
+
+        // the study language bar  ( japanese / english )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.studylanguage_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                switchStudyLanguage();
+            }
+        });
+
+        // the furigana / reading bar  ( both / romaji / kana )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.furiganareading_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                switchReadingMode();
+            }
+        });
+
+        // the answer size bar  ( normal / large )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.answersize_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                switchAnswerSize();
+            }
+        });
+
+        // the launch DifficultyFragment bar
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.godifficulty_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goDifficulty();
+            }
+        });
+
+        // the color theme bar ( fire / water / tame )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.colortheme_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                advanceColorScheme();
+            }
+        });
+
+        // the active user bar ( various )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.activeuser_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goUser();
+            }
+        });
+
+        // the update bar ( x installed )
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.update_block);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goUpdate();
+            }
+        });
+
+        // the twitter bar 
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.settings_launch_twitter);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                launchSettingsWeb(v);
+            }
+        });
+
+        // the facebook bar 
+        tempLayout = (RelativeLayout)settingsLayout.findViewById(R.id.settings_launch_facebook);
+        tempLayout.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                launchSettingsWeb(v);
+            }
+        });
+
+    }  // end setClickListeners()
 
 
 }  // end SettingsFragment class declaration

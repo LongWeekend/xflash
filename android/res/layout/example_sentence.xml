@@ -96,29 +96,25 @@
             <ImageButton android:id="@+id/es_optionblock_actions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_actions_flip"
-                android:onClick="ExampleSentenceFragment_exampleClick" />
+                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/es_optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/es_optionblock_actions"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_right_flip"
-                android:onClick="ExampleSentenceFragment_exampleClick" />
+                android:background="@drawable/btn_right_flip" />
             <ImageButton android:id="@+id/es_optionblock_wrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/es_optionblock_right"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_wrong_flip"
-                android:onClick="ExampleSentenceFragment_exampleClick" />
+                android:background="@drawable/btn_wrong_flip" />
             <ImageButton android:id="@+id/es_optionblock_goaway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/es_optionblock_wrong"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/btn_goaway_flip"
-                android:onClick="ExampleSentenceFragment_exampleClick" />
+                android:background="@drawable/btn_goaway_flip" />
     
         </RelativeLayout>
         <!-- end options block -->

@@ -16,6 +16,17 @@
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>
     <string name="attacherror_body">Uh oh, something went wrong initializing the databases for Japanese Flash!  Please exit and try again.</string>
+    <string name="pm_starred_yes">Remove from Starred</string>
+    <string name="pm_starred_no">Add to Starred</string>
+    <string name="pm_addtotag">Add to Study Set</string>
+    <string name="pm_tweetcard">Tweet Card</string>
+    <string name="pm_fixcard">Fix Card</string>
+    <string name="fixcard_subject">How can we make this awesome?</string>
+    <string name="fixcard_bodytop">Info For Long Weekend:\n\nCard Id:</string>
+    <string name="fixcard_bodyheadword">Card Headword:</string>
+    <string name="fixcard_bodymeaning">Card Meaning:</string>
+    <string name="fixcard_bodytagid">Active Tag Id:</string>
+    <string name="fixcard_bodytagname">Active Tag Name:</string>
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
@@ -46,6 +57,9 @@
     <string name="settings_follow_block_title">Follow Us</string>
     <string name="settings_followblock_twitter">Follow us on Twitter</string>
     <string name="settings_followblock_facebook">Follow us on Facebook</string>
+    <string name="lwe_twitter_url">http://twitter.com/long_weekend/</string>
+    <string name="lwe_facebook_url">http://m.facebook.com/pages/Japanese-Flash/111141367918</string>
+
     <string name="settings_acknowledgement_title">Acknowledgements</string>
     <string name="settings_acknowledgement_content">Japanese Flash was created on a Long Weekend over a few steaks and a few more Coronas. Special thanks goes to Teja for helping us write an simulate the frequency algorithm. This application also uses data from the EDICT dictionary and Tanaka Corpus. The EDICT files are property of the Electronic Dictionary Research and Development Group, and are used in conformance with the Group\'s liscense. Some icons by Joseph Wain / glyphish.com. The Japanese Flash Logo and Product Name are original creations and any perceived similarities to other trademarks is unintended and purely coincidental.</string>
     <string name="difficulty_title">Change Difficulty</string>
@@ -78,6 +92,7 @@
     <string name="help_dialog_emailbutton">Send an Email</string>
     <string name="help_dialog_closebutton">No Thanks</string>
     <string name="helppage_nextbutton">Next ></string>
+    <string name="help_topics_path">file:///android_asset/JFlash/help/</string>
 </resources>
 
 

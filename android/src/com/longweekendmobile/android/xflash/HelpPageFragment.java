@@ -9,8 +9,9 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void setHelpTopic(int  )
-//  public static void goBackToHelp(Xflash  )
-//  public static void helpNext()
+//
+//  private void goBackToHelp()
+//  private void helpNext()
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -27,28 +28,38 @@ public class HelpPageFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash HelpPageFragment";
    
-    // properties for handling color theme transitions
-    private static LinearLayout helpPageLayout;
+    private Button nextButton = null;
+    private TextView helpPageTitle = null;
 
     private static int helpTopic;
-    private static String[] topics;
-    private static String[] helpFiles;
-    private static NoHorizontalWebView helpDisplay;
+    private String[] topics;
+    private String[] helpFiles;
+    private NoHorizontalWebView helpDisplay;
  
 
-    // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // inflate our layout for the HelpPage fragment
-        helpPageLayout = (LinearLayout)inflater.inflate(R.layout.help_page, container, false);
+        LinearLayout helpPageLayout = (LinearLayout)inflater.inflate(R.layout.help_page, container, false);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)helpPageLayout.findViewById(R.id.help_page_heading);
-        Button tempButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
- 
-        XflashSettings.setupColorScheme(titleBar,tempButton); 
+        nextButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
+
+        XflashSettings.setupColorScheme(titleBar,nextButton); 
+        
+        // set a click listener for the next button
+        nextButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                helpNext();
+            }
+        });
+
         
         // Resources object necessary to pull help topics
         Resources res = getResources();
@@ -69,12 +80,12 @@ public class HelpPageFragment extends Fragment
         // if we're on the last topic, kill the 'next' button
         if( helpTopic == ( topics.length - 1 ) )
         {
-            tempButton.setVisibility(View.INVISIBLE);
+            nextButton.setVisibility(View.INVISIBLE);
         }
 
-        // set the title bar
-        TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
-        tempView.setText( topics[helpTopic] );         
+        // set the title bar text to the current help topic
+        helpPageTitle = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
+        helpPageTitle.setText( topics[helpTopic] );         
     
         // get our (NoHorizontal)WebView and disable pinch zoom
         helpDisplay = (NoHorizontalWebView)helpPageLayout.findViewById(R.id.help_display);
@@ -82,7 +93,7 @@ public class HelpPageFragment extends Fragment
         helpDisplay.setHorizontalScrollBarEnabled(false);
 
         // set the html body
-        String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
+        String localUrl = res.getString(R.string.help_topics_path) + helpFiles[helpTopic];
         helpDisplay.loadUrl(localUrl);
         
         // (NoHorizontal)WebView background must be set to transparency
@@ -101,16 +112,8 @@ public class HelpPageFragment extends Fragment
     }
 
 
-    // reset the content view to the main help screen
-    public static void goBackToHelp(Xflash inContext)
-    {
-        // reload the HelpPage fragment to the fragment tab manager
-        inContext.onScreenTransition("help",XflashScreen.DIRECTION_CLOSE);
-    }
-    
-
     // when the 'next' button is pressed
-    public static void helpNext()
+    private void helpNext()
     {
         // if we're not already at the last page
         if( helpTopic < ( topics.length - 1 ) )
@@ -118,8 +121,7 @@ public class HelpPageFragment extends Fragment
             ++helpTopic;
 
             // change both the title bar and the page content
-            TextView tempView = (TextView)helpPageLayout.findViewById(R.id.help_page_title);
-            tempView.setText( topics[helpTopic] );
+            helpPageTitle.setText( topics[helpTopic] );
 
             String localUrl = "file:///android_asset/JFlash/help/" + helpFiles[helpTopic];
             helpDisplay.loadUrl(localUrl);
@@ -128,11 +130,10 @@ public class HelpPageFragment extends Fragment
         // if we're on the last topic, kill the 'next' button
         if( helpTopic == ( topics.length - 1 ) )
         {
-            Button tempButton = (Button)helpPageLayout.findViewById(R.id.help_nextbutton);
-            tempButton.setVisibility(View.INVISIBLE);
+            nextButton.setVisibility(View.INVISIBLE);
         }
 
-    }  // end HelpPageFragment_helpNext()
+    }  // end helpNext()
 
 
 }  // end HelpPageFragment class declaration

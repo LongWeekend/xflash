@@ -8,15 +8,18 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public void setSaveButton()
-//  public static void select(Xflash  )
-//  public static void save(Xflash  )
 //  public static void setNew(boolean  )
 //  public static void loadUser(int  )
+//
+//  private void setSaveButton()
+//  private void select()
+//  private void save()
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,17 +37,18 @@ public class EditUserFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash EditUserFragment";
    
+    // incoming properties set by UserFragment via static methods
     private static boolean isNew;
-    private static EditText myEdit;
+    private static int incomingEditId = 1;
+    
+    private EditText myEdit;
     private Button saveButton;
     
-    // if we're editing, the user id and previous nickname for the user selected
-    private static int incomingEditId = 1;
-    private static User myUser;
+    // if we're editing, the user and previous nickname for the user selected
+    private User myUser;
     private String oldName;
  
 
-    // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -56,26 +60,53 @@ public class EditUserFragment extends Fragment
         RelativeLayout titleBar = (RelativeLayout)editUserLayout.findViewById(R.id.edit_user_heading);
         XflashSettings.setupColorScheme(titleBar); 
         
-        TextView editLabel = (TextView)editUserLayout.findViewById(R.id.edit_user_label); 
-        myEdit = (EditText)editUserLayout.findViewById(R.id.edit_user_text);
-        Button setButton = (Button)editUserLayout.findViewById(R.id.edituser_selectbutton);
+        // load our save button and add a click listener
         saveButton = (Button)editUserLayout.findViewById(R.id.edituser_savebutton);
+        saveButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                save();
+            }
+        });
         
         // set the fragment label based on whether we're adding or editing
+        TextView editLabel = (TextView)editUserLayout.findViewById(R.id.edit_user_label); 
+        Button setButton = (Button)editUserLayout.findViewById(R.id.edituser_selectbutton);
+        myEdit = (EditText)editUserLayout.findViewById(R.id.edit_user_text);
+        
         if( isNew )
         {
+            // if we're adding a NEW user
             String tempTitle = getActivity().getResources().getString(R.string.new_user_title);
             editLabel.setText(tempTitle);
+            
             setButton.setVisibility(View.INVISIBLE);
         }
         else
         {
-            // grab the user name we are editing
+            // we're editing an EXISTING user, grab the user name
             myUser = UserPeer.getUserByPK(incomingEditId);
  
+            // set a click listener for the select button
+            setButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    select();
+                }
+            });
+
+            // get the name of the user we are modifying
             oldName = myUser.getUserNickname();
+
             editLabel.setText(oldName); 
             myEdit.setText(oldName);
+            
+            // add a text-changed listener to the EditText
+            myEdit.addTextChangedListener(editListener);
         }
 
         setSaveButton();
@@ -97,14 +128,34 @@ public class EditUserFragment extends Fragment
     }  // end onCreateView()
 
     
+    // methods called by UserFragment to set the incoming state
+    // immediately before transitioning to EditUserFragment
+    public static void setNew(boolean inNew)
+    {
+        isNew = inNew;
+    }
+
+    public static void loadUser(int inEdit)
+    {
+        incomingEditId = inEdit;
+        isNew = false;
+    }
+
+
     // sets the save button as visible/invisible depending on whether changes
     // have been made to the name
-    public void setSaveButton()
+    private void setSaveButton()
     {
+        if( isNew )
+        {
+            return;
+        }
+        
         String tempString = myEdit.getText().toString();
-
-        // TODO - this is always coming back false and staying visible
-        if( tempString != oldName )
+        
+        // if the entered content does NOT match the starting
+        // name, display the save button
+        if( tempString.compareTo(oldName) != 0 )
         {
             saveButton.setVisibility(View.VISIBLE);
         }
@@ -117,17 +168,16 @@ public class EditUserFragment extends Fragment
 
 
     // when the user clicks the 'select' button
-    public static void select(Xflash inContext)
+    private void select()
     {
         // set the user and return to the UserFragment
         XflashSettings.setCurrentUserId(incomingEditId);
 
-        // local EditUserFragment.save()
-        save(inContext);
+        save();
     }
 
     // when the user clicks the 'save' button
-    public static void save(Xflash inContext)
+    private void save()
     {
         // pull the content of the EditText
         String tempString = myEdit.getText().toString();
@@ -143,28 +193,38 @@ public class EditUserFragment extends Fragment
             myUser.save();
         } 
 
+        Xflash myContext = Xflash.getActivity();
+        
         // close the soft keyboard
-        InputMethodManager keyboard = (InputMethodManager)inContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager keyboard = (InputMethodManager)myContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.hideSoftInputFromWindow(myEdit.getWindowToken(),0);
 
         // return to UserFragment
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_USER);
-        inContext.onScreenTransition("user",XflashScreen.DIRECTION_CLOSE);
+        myContext.onScreenTransition("user",XflashScreen.DIRECTION_CLOSE);
 
     }  // end save()
 
     
-    // methods called by UserFragment to set the incoming state
-    // immediately before transitioning to EditUserFragment
-    public static void setNew(boolean inNew)
+    // listener for the search bar EditText
+    private TextWatcher editListener = new TextWatcher()
     {
-        isNew = inNew;
-    }
+        public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter)
+        {
+            // necessary stub
+        }
 
-    public static void loadUser(int inEdit)
-    {
-        incomingEditId = inEdit;
-    }
+        public void beforeTextChanged(CharSequence text, int start, int count, int after)
+        {
+            // necessary stub
+        }
+
+        public void afterTextChanged(Editable text)
+        {
+            setSaveButton();
+        }
+
+    };  // end editListener declaration
 
 
 }  // end EditUserFragment class declaration

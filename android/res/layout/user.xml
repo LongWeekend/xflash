@@ -23,7 +23,6 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
-            android:onClick="UserFragment_editUser"
             style="@style/heading_button" />
 
     </RelativeLayout>
@@ -33,21 +32,6 @@
         style="@style/default_frame_block"
         android:orientation="vertical"
         android:layout_marginTop="10dp" >
-<!--
-        <RelativeLayout style="@style/default_display_block">
-            <TextView 
-                style="@style/default_display_left"
-                android:clickable="true"
-                android:onClick="UserFragment_activateUser" 
-                android:text="Dummy User" />
-            <TextView 
-                style="@style/default_display_right"
-                android:clickable="true"
-                android:onClick="UserFragment_editUser"
-                android:text="edit" />
-        </RelativeLayout>
-        <LinearLayout style="@style/generic_divider" />
---> 
     </LinearLayout>
 
 </LinearLayout>

@@ -9,25 +9,30 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //  public void onPause()                                              @over
 //
-//  public static void addToplevelTag(Context  )
-//  public static void openGroup(View  ,Xflash  )
-//  public static void goTagCards(View  ,Xflash  )
-//  public static void startStudying(View  ,Xflash  )
-//  public static void fireStartStudyingDialog(Tag  ,Xflash  )
-//  public static void fireEmptyTagDialog(Xflash  )
+//  public static boolean getSearchOn()
+//  public static void setNeedLoad()
+//
+//  private void addTopLevelTag()
+//  private void openGroup(View  )
+//  private static void goTagCards(View  )
+//  public static void startStudying(View  )
+//  private static void fireStartStudyingDialog(Tag  )
+//  private static void fireEmptyTagDialog()
 //
 //  private static OnLongClickListener userTagLongClick = new OnLongClickListener() 
 //
-//  private static void refreshTagList()
+//  private void refreshTagList()
+//  private static void refreshByTagList(ArrayList<Tag>  ,LinearLayout  )
 //  private void setupObservers()
 //  private void updateFromNewTagObserver(Object  )
 //  private void udpateFromSubscriptionObserver()
-//  public static boolean getSearchOn()
-//  public static void searchPressed()
+//  private void updateFromTagSearchObserver(Object  )
+//  private void searchPressed()
 //
-//  public static class TagSearch
+//  private static class TagSearch
 //
 //      public static void loadSearch()
+//      public static void dump()
 //      public static void showSearch()
 //      public static void hideSearch()
 //      public static void closeKeyboard()
@@ -47,9 +52,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -71,16 +76,18 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class TagFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash TagFragment";
-   
-    private static FragmentActivity myContext = null;
-    private static LayoutInflater myInflater;
+    private static final String MYTAG = "XFlash TagFragment";
 
+    public static final int SEARCH_PRESSED = 0;
+    public static final int NEED_HIDE_SEARCH = 1;
+    
     private static Observer newTagObserver = null; 
     private static Observer subscriptionObserver = null; 
+    private static Observer tagSearchObserver = null; 
 
     public static Group currentGroup = null;
     public static boolean needLoad = false;
+    
     private static RelativeLayout tagLayout = null;
     private static LinearLayout tagList = null;
 
@@ -99,21 +106,31 @@ public class TagFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
                              Bundle savedInstanceState) 
     {
-        myContext = getActivity();
-        myInflater = inflater;
         setupObservers();
 
         // inflate our layout for the Tag fragment and load our icon array
         tagLayout = (RelativeLayout)inflater.inflate(R.layout.tag, container, false);
         int icons[] = XflashSettings.getIcons();
+        
+        // load all necessary tag search views
         TagSearch.loadSearch();
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)tagLayout.findViewById(R.id.tag_heading);
-        ImageButton tempButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
-        
-        XflashSettings.setupColorScheme(titleBar,tempButton);
+        ImageButton addTagButton = (ImageButton)tagLayout.findViewById(R.id.tag_addbutton);
+
+        XflashSettings.setupColorScheme(titleBar,addTagButton);
     
+        // click listener for the add-tag button
+        addTagButton.setOnClickListener( new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View v)
+            {
+                addTopLevelTag();
+            }
+        });
+        
         // populate the main list of groups
         LinearLayout groupList = (LinearLayout)tagLayout.findViewById(R.id.main_group_list);
         RelativeLayout tempRow = null;
@@ -137,6 +154,7 @@ public class TagFragment extends Fragment
             groupArray = GroupPeer.retrieveGroupsByOwner( currentGroup.getGroupId() );
         }
 
+        // add a row for each group
         int rowCount = groupArray.size();
         for(int i = 0; i < rowCount; i++)
         {
@@ -155,7 +173,6 @@ public class TagFragment extends Fragment
             {
                 tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_FOLDER ] ); 
             }
-
 
             // set the group title
             tempView = (TextView)tempRow.findViewById(R.id.group_row_top);
@@ -180,6 +197,17 @@ public class TagFragment extends Fragment
                 FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
                 groupList.addView(divider);
             }
+            
+            // set a click listener for the row to fire openGroup()
+            tempRow.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    openGroup(v);
+                }
+            });
+
             groupList.addView(tempRow);
 
         }  // end for loop (groups)
@@ -222,42 +250,69 @@ public class TagFragment extends Fragment
         {
             TagSearch.closeKeyboard();
         }
+
+    }  // end onPause()
+
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+
+        // free static layout resources
+        // TODO - temporary fix, would be perferable to refactor TagSearch
+        //      - to use no static layout variables
+        tagLayout = null;
+        tagList = null;
+        TagSearch.dump();
+
+    }  // end onDestroyView()
+
+    
+    public static boolean getSearchOn()
+    {
+        return TagSearch.searchOn;
     }
 
-
+    public static void setNeedLoad()
+    {
+        needLoad = true;
+    }
+    
+    
     // onClick for our PLUS button
-    public static void addToplevelTag(Context inContext)
+    private void addTopLevelTag()
     {
         // start the 'add tag' activity as a modal
-        Intent myIntent = new Intent(inContext,CreateTagActivity.class);
+        Intent myIntent = new Intent( Xflash.getActivity() ,CreateTagActivity.class);
         myIntent.putExtra("group_id", currentGroup.getGroupId() );
         
-        inContext.startActivity(myIntent);
+        Xflash.getActivity().startActivity(myIntent);
     }
 
 
     // reload TagFragment with a new group
-    public static void openGroup(View v,Xflash inContext)
+    private void openGroup(View v)
     {
         XflashScreen.addTagStack();
         currentGroup = GroupPeer.retrieveGroupById( (int)(Integer)v.getTag() );
         
-        inContext.onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("tag",XflashScreen.DIRECTION_OPEN);
     }
 
     
     // transition to view all cards in a given Tag
-    public static void goTagCards(View v,Xflash inContext)
+    private static void goTagCards(View v)
     {
         int tempInt = (Integer)v.getTag();
         TagCardsFragment.loadTag(tempInt); 
         
-        inContext.onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("tag_cards",XflashScreen.DIRECTION_OPEN);
     }
     
     
     // launch the clicked on Tag in the practice tab
-    public static void startStudying(View v,Xflash inContext)
+    public static void startStudying(View v)
     {
         int incomingTagId = (Integer)v.getTag();
         Tag tempTag = TagPeer.retrieveTagById(incomingTagId);
@@ -265,21 +320,21 @@ public class TagFragment extends Fragment
         // if user is trying to open an empty tag
         if( tempTag.getCardCount() < 1 )
         {
-            fireEmptyTagDialog(inContext);
+            fireEmptyTagDialog();
         }
         else
         {
-            fireStartStudyingDialog(tempTag,inContext);
+            fireStartStudyingDialog(tempTag);
         }
 
     }  // end startStudying()
 
     
     // launch the dialog to confirm user would like to start studying a tag
-    public static void fireStartStudyingDialog(Tag inTag,Xflash incoming)
+    private static void fireStartStudyingDialog(Tag inTag)
     {
         final Tag tagToSet = inTag;
-        final Xflash inContext = incoming;
+        final Xflash inContext = Xflash.getActivity();
         
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
@@ -309,15 +364,15 @@ public class TagFragment extends Fragment
 
 
     // dialog to display on attempt to start studying a tag with no cards
-    public static void fireEmptyTagDialog(Xflash inContext)
+    private static void fireEmptyTagDialog()
     {
         // set and fire our AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
+        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
-        String tempString = inContext.getResources().getString(R.string.emptyset_dialog_title);
+        String tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_title);
         builder.setTitle(tempString);
 
-        tempString = inContext.getResources().getString(R.string.emptyset_dialog_message);
+        tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_message);
         builder.setMessage(tempString);
 
         // on negative response, do nothing
@@ -339,7 +394,7 @@ public class TagFragment extends Fragment
             final Tag tempTag = TagPeer.retrieveTagById(tempInt);
             
             // set and fire our AlertDialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
             builder.setTitle("Delete Tag?");
             builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
 
@@ -376,16 +431,9 @@ public class TagFragment extends Fragment
     };  // end OnLongClickListener declaration 
 
 
-    public static void setNeedLoad()
-    {
-        needLoad = true;
-    }
-
-    
     // pull and display any tags for currentGroup
-    private static void refreshTagList()
+    private void refreshTagList()
     {
-        // LayoutInflater inflater = (LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int rowCount;
      
         // if we need to refresh our arrays due to a change
@@ -406,7 +454,7 @@ public class TagFragment extends Fragment
                 Tag shuffleTag = rawTagArray.get(i);
 
                 // add the starred words tag at the start
-                if( shuffleTag.getId() == Tag.STARRED_TAG_ID )
+                if( shuffleTag.getId() == TagPeer.STARRED_TAG_ID )
                 {
                     shuffleArray.add(0,shuffleTag);
                 }
@@ -452,6 +500,8 @@ public class TagFragment extends Fragment
     // called by TagFragment.refreshTagList() and TagSearch.refreshTagSearchList()
     private static void refreshByTagList(ArrayList<Tag> inList,LinearLayout inLayout)
     {
+        LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         int icons[] = XflashSettings.getIcons();
         
         // now add the final ordered ArrayList of tags to views, add to the layout
@@ -460,7 +510,7 @@ public class TagFragment extends Fragment
         {
             Tag tempTag = inList.get(i);
             
-            RelativeLayout tempRow = (RelativeLayout)myInflater.inflate(R.layout.tag_row,null);
+            RelativeLayout tempRow = (RelativeLayout)inflater.inflate(R.layout.tag_row,null);
             tempRow.setTag( tempTag.getId() );
      
             // if this is a user tag, set a long-click listener for deletion
@@ -472,7 +522,7 @@ public class TagFragment extends Fragment
             // set the group image
             ImageView tempRowImage = (ImageView)tempRow.findViewById(R.id.tag_row_image);
 
-            if( tempTag.getId() == Tag.STARRED_TAG_ID )
+            if( tempTag.getId() == TagPeer.STARRED_TAG_ID )
             {
                 tempRowImage.setImageResource( icons[XflashSettings.LWE_ICON_STARRED_TAG] );
             }
@@ -500,22 +550,46 @@ public class TagFragment extends Fragment
             tempView.setText(tempCountString);
 
             // clear the 'view' option if there are no cards in the tag
-            tempView = (TextView)tempRow.findViewById(R.id.tag_row_click);
+            TextView viewTagCards = (TextView)tempRow.findViewById(R.id.tag_row_click);
             if( tempTag.getCardCount() < 1 )
             {
-                tempView.setVisibility(View.INVISIBLE);
+                viewTagCards.setVisibility(View.INVISIBLE);
             }
             else
             {
-                tempView.setTag( tempTag.getId() ); 
+                viewTagCards.setTag( tempTag.getId() ); 
             }
 
             // add a divider before all except the first
             if( i > 0 )
             {
-                FrameLayout divider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
+                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
                 inLayout.addView(divider);
             }
+            
+            
+            // set a click listener for the row, to start studying
+            tempRow.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    TagFragment.startStudying(v);
+                }
+            });
+
+            // set a click listener for the 'view' button in each row
+            viewTagCards.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    // TODO - the compiler is claiming this is a static
+                    //      - context, not sure why
+                    goTagCards(v);
+                }
+            });
+            
             inLayout.addView(tempRow);
 
         }  // end for loop 
@@ -526,6 +600,8 @@ public class TagFragment extends Fragment
     // method to set all relevant Observers
     private void setupObservers()
     {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        
         if( newTagObserver == null )
         {
             // create and define behavior for newTagObserver
@@ -537,8 +613,11 @@ public class TagFragment extends Fragment
                 }
             };
 
+            theNotifier.addNewTagObserver(newTagObserver);
+
         }  // end if( newTagObserver == null )
         
+
         if( subscriptionObserver == null )
         {
             // create and define behavior for newTagObserver
@@ -550,11 +629,30 @@ public class TagFragment extends Fragment
                 }
             };
 
+            theNotifier.addSubscriptionObserver(subscriptionObserver);
+
         }  // end if( subscriptionObserver == null )
 
-       XflashNotification theNotifier = XFApplication.getNotifier();
-       theNotifier.addNewTagObserver(newTagObserver);
-       theNotifier.addSubscriptionObserver(subscriptionObserver);
+        if( tagSearchObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            tagSearchObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    // if we were passed data with our notification
+                    if( arg != null )
+                    {
+                        updateFromTagSearchObserver(arg);
+                    }
+
+                }  // end update()
+            };
+
+            theNotifier.addTagSearchObserver(tagSearchObserver);
+
+        }  // end if( newTagObserver == null )
+
 
     }  // end setupObservers()
 
@@ -568,7 +666,12 @@ public class TagFragment extends Fragment
         if( theNewTag.groupId() == currentGroup.getGroupId() )
         {
             TagFragment.needLoad = true;
-            TagFragment.refreshTagList();
+                
+            // if our layout is currently active
+            if( tagList != null )
+            {
+                refreshTagList();
+            }
         }
 
     }  // end updateFromNewTagObserver()
@@ -581,20 +684,36 @@ public class TagFragment extends Fragment
         if( currentGroup.getGroupId() == 0 )
         {
             TagFragment.needLoad = true;
-            TagFragment.refreshTagList();
+                
+            // if our layout is currently active
+            if( tagList != null )
+            {
+                refreshTagList();
+            }
         }
 
     }  // end updateFromSubscriptionObserver()
 
-
-    public static boolean getSearchOn()
+    private void updateFromTagSearchObserver(Object passedObject)
     {
-        return TagSearch.searchOn;
-    }
+        // get the Tag that was just added
+        int messagePassed = (Integer)passedObject;
 
-    
+        switch(messagePassed)
+        {
+            case SEARCH_PRESSED:    searchPressed();            break;
+            case NEED_HIDE_SEARCH:  TagSearch.hideSearch();                 break;
+
+            default:    Log.d(MYTAG,"ERROR - updateFromTagSearchObserver() passed bad value");
+                        Log.d(MYTAG,"      - value:  " + messagePassed);
+                        break;
+        }
+
+    }  // end updateFromNewTagObserver()
+
+
     // called by Xflash when onSearchRequested() is called
-    public static void searchPressed()
+    private void searchPressed()
     {
         if( TagSearch.searchOn )
         {
@@ -609,7 +728,7 @@ public class TagFragment extends Fragment
 
 
     // class for handling tag searches
-    public static class TagSearch
+    private static class TagSearch
     {
         public static boolean searchOn = false;
 
@@ -633,10 +752,34 @@ public class TagFragment extends Fragment
             shade = (RelativeLayout)tagLayout.findViewById(R.id.tag_shade);
             tagScroll = (ScrollView)tagLayout.findViewById(R.id.tag_scroll);
             searchScroll = (ScrollView)tagLayout.findViewById(R.id.tag_search_scroll);
-            
-        }
+           
+            // set a click listener for the shade view
+            shade.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    // do nothing, just here to consume the click
+                }
+            });
+
+        }  // end loadSearch()
        
-       
+      
+        // dumps all static variables dealing with layout
+        public static void dump()
+        {
+            searchText = null;
+            tagSearchList = null;
+            tempTitle = null;
+            tempAddButton = null;
+            shade = null;
+            tagScroll = null;
+            searchScroll = null;
+
+        }  // end dump()
+
+
         // sets all appropriate views when transitioning INTO a search state
         public static void showSearch()
         {
@@ -670,7 +813,7 @@ public class TagFragment extends Fragment
                     if( searchText.length() == 0 )
                     {
                         searchText.requestFocus();
-                        InputMethodManager keyboard = (InputMethodManager)myContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        InputMethodManager keyboard = (InputMethodManager)Xflash.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         keyboard.showSoftInput(searchText,0);
                     }
                 }
@@ -708,7 +851,7 @@ public class TagFragment extends Fragment
         {
             if( searchText != null)
             {
-                InputMethodManager keyboard = (InputMethodManager)myContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager keyboard = (InputMethodManager)Xflash.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 keyboard.hideSoftInputFromWindow(searchText.getWindowToken(),0);
             }
         }

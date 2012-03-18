@@ -29,7 +29,6 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_yellow"
             android:text="@string/update_checkbutton"
-            android:onClick="UpdateFragment_check"
             style="@style/yellow_button" />
 
         <TextView android:id="@+id/last_update"

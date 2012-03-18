@@ -40,8 +40,8 @@
                 style="@style/default_display_heading_layout"
                 android:text="@string/settings_study_block_title" />
 
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_switchStudyMode" >
+            <RelativeLayout android:id="@+id/studymode_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_studyblock_studymode" />
@@ -49,8 +49,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_switchStudyLanguage" >
+            <RelativeLayout android:id="@+id/studylanguage_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_studyblock_studylanguage" />
@@ -58,8 +58,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_switchReadingMode" >
+            <RelativeLayout android:id="@+id/furiganareading_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_studyblock_reading" />
@@ -67,8 +67,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_switchAnswerSize" >
+            <RelativeLayout android:id="@+id/answersize_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_studyblock_answersize" />
@@ -76,8 +76,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_goDifficulty" >
+            <RelativeLayout android:id="@+id/godifficulty_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_studyblock_difficulty" />
@@ -91,8 +91,8 @@
                 style="@style/default_display_heading_layout"
                 android:text="@string/settings_app_block_title" />
 
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_advanceColorScheme" >
+            <RelativeLayout android:id="@+id/colortheme_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_appblock_theme" />
@@ -100,8 +100,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_goUser" >
+            <RelativeLayout android:id="@+id/activeuser_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_appblock_activeuser" />
@@ -109,8 +109,8 @@
                     style="@style/default_display_right" />
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
-            <RelativeLayout style="@style/default_display_block"
-                android:onClick="SettingsFragment_goUpdate" >
+            <RelativeLayout android:id="@+id/update_block"
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:text="@string/settings_appblock_updates" />
@@ -125,8 +125,7 @@
                 android:text="@string/settings_follow_block_title" />
 
             <RelativeLayout android:id="@+id/settings_launch_twitter"
-                style="@style/default_display_block"
-                android:onClick="SettingsFragment_launchSettingsWeb" >
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/twitter_icon"
@@ -138,8 +137,7 @@
             </RelativeLayout>
             <LinearLayout style="@style/generic_divider" />
             <RelativeLayout android:id="@+id/settings_launch_facebook"
-                style="@style/default_display_block"
-                android:onClick="SettingsFragment_launchSettingsWeb" >
+                style="@style/default_display_block" >
                 <TextView 
                     style="@style/default_display_left"
                     android:drawableLeft="@drawable/facebook_icon"

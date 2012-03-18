@@ -8,8 +8,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
-//  public static void activateUser(View  ,Xflash  )
-//  public static void editUser(View  ,Xflash  )
+//  private void activateUser(View  )
+//  private void editUser(View  )
 
 import java.util.ArrayList;
 
@@ -33,14 +33,11 @@ public class UserFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash UserFragment";
    
-    // the view containing users
-    private static LinearLayout userListLayout;
+    private ArrayList<User> userList;
+    private LinearLayout userListLayout;
 
-    private static ArrayList<User> userList;
-    private static int switchUser;
-
+    private int switchUser;
     
-    // see android.support.v4.app.Fragment#onCreateView()
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -50,8 +47,19 @@ public class UserFragment extends Fragment
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)userLayout.findViewById(R.id.user_heading);
-        ImageButton tempButton = (ImageButton)userLayout.findViewById(R.id.user_addbutton);
-        XflashSettings.setupColorScheme(titleBar,tempButton); 
+        ImageButton addUserButton = (ImageButton)userLayout.findViewById(R.id.user_addbutton);
+        
+        XflashSettings.setupColorScheme(titleBar,addUserButton); 
+
+        // set a click listener for the add user button
+        addUserButton.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                editUser(v);
+            }
+        });
 
         // load the users from DB and display
         userList = UserPeer.getUsers();
@@ -65,23 +73,24 @@ public class UserFragment extends Fragment
         {
             int tempId = userList.get(i).getUserId();
 
-            // inflate our exiting row resource and tag the view with the user id
-            RelativeLayout toInflate = (RelativeLayout)inflater.inflate(R.layout.user_row,null);
-            toInflate.setTag(tempId);
+            // inflate our exiting row resource
+            RelativeLayout userRow = (RelativeLayout)inflater.inflate(R.layout.user_row,null);
 
-            // set the label, and tag it with our display row id
-            TextView tempView = (TextView)toInflate.findViewById(R.id.user_label);
+            // set the label, tag it with our display row id, and set a click listener
+            TextView tempView = (TextView)userRow.findViewById(R.id.user_label);
+            tempView.setTag(i);
             tempView.setText( userList.get(i).getUserNickname() );
-            tempView.setTag(R.id.user_rowtag,i);
+            tempView.setOnClickListener(activateListener);
        
-            // tag the edit button with the user id
-            tempView = (TextView)toInflate.findViewById(R.id.user_editbutton);
-            tempView.setTag(R.id.user_idtag,tempId);
- 
+            // tag the edit button with the user id, set a click listener
+            tempView = (TextView)userRow.findViewById(R.id.user_editbutton);
+            tempView.setTag(tempId);
+            tempView.setOnClickListener(editListener); 
+            
             // set the background/edit button based on whether this is our active user
             if( tempId == tempCurrentUser )
             {
-                toInflate.setBackgroundResource(R.color.selected_row);
+                userRow.setBackgroundResource(R.color.selected_row);
                 tempView.setTextColor(0xFFFFFFFF);
             }
             
@@ -93,7 +102,7 @@ public class UserFragment extends Fragment
             }
             
             // add the new label/row to the LinearLayout (inside the ScrollView)
-            userListLayout.addView(toInflate);
+            userListLayout.addView(userRow);
                 
         }  // end for loop
        
@@ -103,10 +112,9 @@ public class UserFragment extends Fragment
 
 
     // fires the alert to change the active user
-    public static void activateUser(View v,Xflash incoming)
+    public void activateUser(View v)
     {
-        final Xflash inContext = incoming;
-        int tempIndex = (Integer)v.getTag(R.id.user_rowtag);
+        int tempIndex = (Integer)v.getTag();
         String tempName = userList.get(tempIndex).getUserNickname();
         
         // if they clicked to activate the already active user, do nothing
@@ -119,7 +127,7 @@ public class UserFragment extends Fragment
         switchUser = userList.get(tempIndex).getUserId();
         
         // set and fire our AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(inContext);
+        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
         builder.setTitle("Activate User");
         builder.setMessage("Set the active user to " + tempName + "?");
         
@@ -130,7 +138,7 @@ public class UserFragment extends Fragment
             {
                 // set the new user and return to settings
                 XflashSettings.setCurrentUserId(switchUser);
-                inContext.onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
+                Xflash.getActivity().onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
         });
         
@@ -142,7 +150,7 @@ public class UserFragment extends Fragment
     }  // end activateUser()
 
 
-    public static void editUser(View v,Xflash inContext)
+    public void editUser(View v)
     {
         // set up EditUserFragment for whether we're editing or adding
         if( v.getId() == R.id.user_addbutton )
@@ -153,14 +161,34 @@ public class UserFragment extends Fragment
         {
             // set EditUserFragment.incomingEditId to the user id we tagged to this
             // row's editbutton
-            EditUserFragment.loadUser( (Integer)v.getTag(R.id.user_idtag) ); 
-            EditUserFragment.setNew(false);
+            EditUserFragment.loadUser( (Integer)v.getTag() ); 
         } 
 
         XflashScreen.setCurrentSettingsType(XflashScreen.LWE_SETTINGS_EDIT_USER);
-        inContext.onScreenTransition("edit_user",XflashScreen.DIRECTION_OPEN); 
+        Xflash.getActivity().onScreenTransition("edit_user",XflashScreen.DIRECTION_OPEN); 
 
     }  // end editUser()
+
+
+    // click listener for the user row edit button
+    private View.OnClickListener editListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            editUser(v);
+        }
+    };
+
+    // click listener for the user row - activates user
+    private View.OnClickListener activateListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            activateUser(v);
+        }
+    };
 
 
 }  // end UserFragment class declaration

@@ -21,7 +21,6 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/plus" 
-            android:onClick="TagFragment_addToplevelTag"
             style="@style/heading_button" />
 
         <!-- SEARCH BAR -->
@@ -103,7 +102,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tag_heading"
         android:background="#77000000"
-        android:onClick="TagFragment_emptyClick"
         android:visibility="gone">
 
         <ScrollView android:id="@+id/tag_search_scroll"

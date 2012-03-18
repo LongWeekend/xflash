@@ -51,14 +51,12 @@
             style="@style/green_button"
             android:background="@drawable/button_green"
             android:text="@string/edituser_selectbutton"
-            android:onClick="EditUserFragment_select"
             android:layout_weight="1" />
 
         <Button android:id="@+id/edituser_savebutton"
             style="@style/green_button"
             android:background="@drawable/button_green"
             android:text="@string/edituser_savebutton"
-            android:onClick="EditUserFragment_save"
             android:layout_weight="1" />
 
     </LinearLayout>  <!-- end button block -->

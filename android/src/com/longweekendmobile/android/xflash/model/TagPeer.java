@@ -6,10 +6,9 @@ package com.longweekendmobile.android.xflash.model;
 //  Created by Todd Presson on 1/15/12.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public TagPeer()
-//
 //      *** ALL METHODS STATIC ***
 //
+//  public Tag starredWordsTag()
 //  public void recacheCountsForUserTags()
 //  public void setCardCount(int  ,Tag  )
 //  public boolean cancelMembership(Card  ,Tag  )
@@ -54,6 +53,15 @@ public class TagPeer
     // private static final String LWETagContentCardRemoved = "LWETagContentCardRemoved";
 
     // private static final int kRemoveLastCardOnATagError = 999;
+
+    public static final int STARRED_TAG_ID = 0;
+    
+    public static Tag starredWordsTag()
+    {
+        Tag tempTag = TagPeer.retrieveTagById(STARRED_TAG_ID);
+        
+        return tempTag;
+    }
 
     // recaches card counts for user tags
     public static void recacheCountsForUserTags()

@@ -6,13 +6,12 @@ package com.longweekendmobile.android.xflash;
 //  Created by Todd Presson on 2/5/2012.
 //  Copyright 2012 Long Weekend LLC. All rights reserved.
 //
-//  public void onCreate()                                              @over
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
+//  public static void setNeedLoad()
 //  public static void loadTag(int  )
-//  public static void startStudying(View  ,Xflash  )
-//  public static void addCard(View  ,Xflash  )
 //
+//  private void addCard(View  )
 //  private void setupObservers()
 //  private void updateFromSubscriptionObserver()
 //
@@ -46,21 +45,21 @@ public class TagCardsFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash TagCardsFragment";
    
-    private static Observer subscriptionObserver = null;
-    
-    private LinearLayout tagCardsLayout;
-    private ListView cardList;
-    private LayoutInflater myInflater;
-
     private static boolean needLoad = false;
     private static int incomingTagId;
-    private static Tag currentTag = null;
-
-    private static ArrayList<Card> cardArray = null;
-    private static ProgressDialog cardLoadDialog = null;
- 
     
-    // see android.support.v4.app.Fragment#onCreateView()
+    private LayoutInflater myInflater;
+    private LinearLayout tagCardsLayout;
+    private ListView cardList;
+
+    // static so we don't unnecessarily make databaase calls
+    private static Tag currentTag = null;
+    private static ArrayList<Card> cardArray = null;
+ 
+    private ProgressDialog cardLoadDialog = null;
+    private static Observer subscriptionObserver = null;
+    
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -86,11 +85,22 @@ public class TagCardsFragment extends Fragment
         TextView tempView = (TextView)tagCardsLayout.findViewById(R.id.tagcards_heading_text);
         tempView.setText( currentTag.getName() );
 
-        // get the header, tag it with the id of the current Tag, and add it to the ListView
+        // get the header, buried in a wrapper
         cardList = (ListView)tagCardsLayout.findViewById(R.id.tagcards_list);
         LinearLayout header = (LinearLayout)inflater.inflate(R.layout.tagcards_header,cardList,false);
         RelativeLayout realHeader = (RelativeLayout)header.findViewById(R.id.header_block);
+        
+        // tag the header with the currentTag id, add a click listener
         realHeader.setTag( currentTag.getId() );
+        realHeader.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                TagFragment.startStudying(v);
+            }
+        });
+
+        // assign the header to our ListView of cards
         cardList.addHeaderView(header);
         
         // save the inflater for use in CardAdapter
@@ -115,24 +125,14 @@ public class TagCardsFragment extends Fragment
         incomingTagId = inId;
     }
 
-    // the 'start studying' header of our ListView now directly calls 
-    // TagFragment_startStudying() from Xflash, which calls
-    // TagFragment.startStudying(View  ,Xflash  ) because it has the
-    // exact same functionality.  Would it be better to have the xml
-    // call THIS startStudying() and then call TagFragment from here?
-
-/*
-    public static void startStudying(View v,Xflash inContext)
-    {
-    }
-*/
-
-    public static void addCard(View v,Xflash inContext)
+    
+    // launches AddCardToTagFragment
+    private void addCard(View v)
     {
         int tempInt = (Integer)v.getTag();
 
         AddCardToTagFragment.loadCard(tempInt);
-        inContext.onScreenTransition("add_card",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("add_card",XflashScreen.DIRECTION_OPEN);
     }
 
    
@@ -150,9 +150,9 @@ public class TagCardsFragment extends Fragment
                 }  
             };
 
+            XFApplication.getNotifier().addSubscriptionObserver(subscriptionObserver);
+        
         }  // end if( subscriptionObserver == null )
-
-        XFApplication.getNotifier().addSubscriptionObserver(subscriptionObserver);
 
     }  // end setupObservers()
 
@@ -179,6 +179,7 @@ public class TagCardsFragment extends Fragment
         
         public View getView(int position, View convertView, ViewGroup parent) 
         {
+            // try for a recycled view
             View row = convertView;
             
             if( row == null ) 
@@ -201,8 +202,16 @@ public class TagCardsFragment extends Fragment
             tempView = (TextView)row.findViewById(R.id.tagcards_meaning);
             tempView.setText( tempCard.meaningWithoutMarkup() );
            
-            // tag each row with the card id it represents
+            // tag each row with the card id it represents and set a click listener
             row.setTag( tempCard.getCardId() );
+            row.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    addCard(v);
+                }
+            });
  
             return row;
         }
@@ -256,7 +265,6 @@ public class TagCardsFragment extends Fragment
             }
 
         }  // end onPostExecute()
-
   
     }  // end AsyncLoadcards declaration
 

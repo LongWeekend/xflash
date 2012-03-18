@@ -22,7 +22,6 @@
             style="@style/heading_button"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:onClick="SettingsWebFragment_reload"
             android:text="Reload" />
 
     </RelativeLayout>

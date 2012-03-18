@@ -8,7 +8,6 @@ package com.longweekendmobile.android.xflash.model;
 //
 //  public Tag()
 //  
-//  public static Tag starredWordsTag()
 //  public static boolean isEqual(Tag  )
 //
 //  public Tag blankTagWithId(int  )
@@ -45,6 +44,8 @@ package com.longweekendmobile.android.xflash.model;
 //  public int getCardCount()
 //  public void setCurrentIndex(int  )
 //  public int getCurrentIndex()
+//  public int incrementIndex()
+//  public int decrementIndex()
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -73,14 +74,13 @@ public class Tag
     private static final int kLWEUninitializedCardCount = -1;
     public static final int kLWEUnseenCardLevel = 0;
     public static final int kLWELearnedCardLevel = 5;
-    public static final int STARRED_TAG_ID = 0;
     public static final int DEFAULT_TAG_ID = 124;
 
     private int tagId;
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
-    private ArrayList<ArrayList<Card>> cardsByLevel;          
+    public ArrayList<ArrayList<Card>> cardsByLevel;          
     public ArrayList<Card> flattenedCardArray;
     public ArrayList<Integer> cardLevelCounts;
     
@@ -105,13 +105,6 @@ public class Tag
     public boolean isEqual(Tag inTag)
     {
         return ( tagId == inTag.tagId );        
-    }
-
-    public static Tag starredWordsTag()
-    {
-        Tag tempTag = TagPeer.retrieveTagById(STARRED_TAG_ID);
-        
-        return tempTag;
     }
 
     // this method simply returns a new Tag object with the same tag ID
@@ -264,7 +257,6 @@ public class Tag
             // no PLIST, generate new cardsByLevel array
             tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
         }
-
 
         cardsByLevel = tempCardsArray;
         flattenedCardArray = flattenCardArrays();
@@ -607,18 +599,49 @@ public class Tag
 
     public int getCurrentIndex()
     {
+        if( currentIndex > flattenedCardArray.size() )
+        {
+            Log.d(MYTAG,"ERROR - in getCurrentIndex()");
+            Log.d(MYTAG,"      - index:  " + currentIndex + " > array size:  " + flattenedCardArray.size() );
+        }
+        
         return currentIndex;
-    }
 
-    public void incrementIndex()
-    {
-        ++currentIndex;
-    }
+    }  // end getCurrentIndex()
 
-    public void decrementIndex()
+
+    public int incrementIndex()
     {
-        --currentIndex;
-    }
+        // if we're at the end of the array, wrap around
+        if( currentIndex >= flattenedCardArray.size() - 1 )
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            ++currentIndex;
+        }
+
+        return currentIndex;
+            
+    }  // end incrementIndex()
+
+
+    public int decrementIndex()
+    {
+        // if we're at the beginning of the array, wrap around
+        if( currentIndex == 0 )
+        {
+            currentIndex = flattenedCardArray.size() - 1;
+        }
+        else
+        {
+            --currentIndex;
+        }
+
+        return currentIndex;
+
+    }  // end decrementIndex()
 
 
 }  // end Tag class declaration

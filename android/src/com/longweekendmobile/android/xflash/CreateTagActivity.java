@@ -33,7 +33,7 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class CreateTagActivity extends Activity
 {
-    private static final String MYTAG = "XFlash TagActivity";
+    private static final String MYTAG = "XFlash CreateTagActivity";
    
     // private static Group currentGroup;
     private EditText myEdit;

@@ -9,15 +9,17 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
 //  public static void loadCard(JapaneseCard  ,int[]  )
-//  public static void refreshCountBar();
-//  public static void exampleClick(View  ,Xflash  )
-//  public static void addCard(View  ,Xflash  )
-//  public static void toggleRead(View  )
 //
-//  private static void loadExampleSentenceBlock(Button  ,int  ,LinearLayout  )
+//  private void setAnswerBarListeners()
+//  private void refreshCountBar();
+//  private void exampleClick(View  )
+//  private void addCard(View  )
+//  private void toggleRead(View  )
+//  private void loadExampleSentenceBlock(Button  ,int  ,LinearLayout  )
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.longweekendmobile.android.xflash.model.Card;
 import com.longweekendmobile.android.xflash.model.CardPeer;
@@ -41,23 +44,20 @@ public class ExampleSentenceFragment extends Fragment
 {
     // private static final String MYTAG = "XFlash ExampleSentenceFragment";
     
-    private static RelativeLayout ESlayout;
-    private static LinearLayout exampleBody;
-    private static JapaneseCard currentCard;
-
-    private static LayoutInflater myInflater = null;
-    private static ArrayList<ExampleSentence> esList = null;
-    private static boolean needLoad = false;
-    
     private static int practiceCardCounts[] = { 0,0,0,0,5 };
+    private static JapaneseCard currentCard;
+    private static ArrayList<ExampleSentence> esList = null;
+    
+    private RelativeLayout ESlayout;
+    private LinearLayout exampleBody;
+
+    private static boolean needLoad = false;
     
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        myInflater = inflater;
-        
         // inflate the layout for our example sentence activity
         ESlayout = (RelativeLayout)inflater.inflate(R.layout.example_sentence, container, false);
 
@@ -113,35 +113,30 @@ public class ExampleSentenceFragment extends Fragment
             tempView.setText( tempSentence.getEn() ); 
 
             // tag the 'read' button with the sentence id
-            Button tempReadButton = (Button)esRow.findViewById(R.id.es_read_button);
+            Button tempReadButton = (Button)esRow.findViewById(R.id.es_readbutton);
             tempReadButton.setTag(tempSentenceId);
 
+            // set a click listener for the read button of each row
+            tempReadButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    toggleRead(v);
+                }
+            });
+
             exampleBody.addView(esRow);
-        }
-        
+
+        }  // end for loop
+       
+        setAnswerBarListeners();
+
         return ESlayout;
 
     }  // end onCreateView()
 
 
-    public static void refreshCountBar()
-    {
-        TextView cardCountViews[] = { null, null, null, null, null };
-
-        cardCountViews[0] = (TextView)ESlayout.findViewById(R.id.es_study_num);
-        cardCountViews[1] = (TextView)ESlayout.findViewById(R.id.es_right1_num);
-        cardCountViews[2] = (TextView)ESlayout.findViewById(R.id.es_right2_num);
-        cardCountViews[3] = (TextView)ESlayout.findViewById(R.id.es_right3_num);
-        cardCountViews[4] = (TextView)ESlayout.findViewById(R.id.es_learned_num);
-
-        for(int i = 0; i < 5; i++)
-        {
-            cardCountViews[i].setText( Integer.toString( practiceCardCounts[i] ) );
-        }
-
-    }  // end refreshCountBar()
-
-    
     // called by PracticeFragment to set new values
     public static void loadCard(JapaneseCard inCard,int[] inCounts)
     {
@@ -161,20 +156,57 @@ public class ExampleSentenceFragment extends Fragment
     }  // end loadCard()
 
     
+    // sets onClick listeners for the three buttons in the answer bar
+    private void setAnswerBarListeners()
+    {
+        ImageButton tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_actions);
+        tempButton.setOnClickListener(exampleClickListener);
+
+        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_right);
+        tempButton.setOnClickListener(exampleClickListener);
+
+        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_wrong);
+        tempButton.setOnClickListener(exampleClickListener);
+
+        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_goaway);
+        tempButton.setOnClickListener(exampleClickListener);
+
+
+    }  // end setAnswerBarListeners()
+
+
+    private void refreshCountBar()
+    {
+        TextView cardCountViews[] = { null, null, null, null, null };
+
+        cardCountViews[0] = (TextView)ESlayout.findViewById(R.id.es_study_num);
+        cardCountViews[1] = (TextView)ESlayout.findViewById(R.id.es_right1_num);
+        cardCountViews[2] = (TextView)ESlayout.findViewById(R.id.es_right2_num);
+        cardCountViews[3] = (TextView)ESlayout.findViewById(R.id.es_right3_num);
+        cardCountViews[4] = (TextView)ESlayout.findViewById(R.id.es_learned_num);
+
+        for(int i = 0; i < 5; i++)
+        {
+            cardCountViews[i].setText( Integer.toString( practiceCardCounts[i] ) );
+        }
+
+    }  // end refreshCountBar()
+
+    
     // method called when any button in the options block is clicked
-    public static void exampleClick(View v,Xflash inContext)
+    private void exampleClick(View v)
     {
         // remove the transition to the example sentence fragment
         XflashScreen.popBackPractice();
         XflashScreen.setPracticeOverride();
         
         PracticeFragment.setPracticeBlank();
-        inContext.onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
     }
 
 
     // launch AddCardToTagFragment as a modal Activity
-    public static void addCard(View v,Xflash inContext)
+    private void addCard(View v)
     {
         int tempInt = (Integer)v.getTag();
         
@@ -182,15 +214,18 @@ public class ExampleSentenceFragment extends Fragment
         // and functionality for AddCardActivity
         AddCardToTagFragment.loadCard(tempInt);
 
-        Intent myIntent = new Intent(inContext,AddCardActivity.class);
-        inContext.startActivity(myIntent);
+        Xflash myContext = Xflash.getActivity();
+        
+        // launch the Activity - modal
+        Intent myIntent = new Intent(myContext,AddCardActivity.class);
+        myContext.startActivity(myIntent);
     
     }  // end addCard()
 
 
     // open or close the view containing all cards in any
     // given example sentence
-    public static void toggleRead(View v)
+    private void toggleRead(View v)
     {
         Button tempReadButton = (Button)v;
         int tempSentenceId = (Integer)v.getTag();
@@ -214,9 +249,12 @@ public class ExampleSentenceFragment extends Fragment
 
     }  // end toggleRead()
 
-    private static void loadExampleSentenceBlock(Button tempReadButton,int tempSentenceId,LinearLayout cardBlock)
+    
+    private void loadExampleSentenceBlock(Button tempReadButton,int tempSentenceId,LinearLayout cardBlock)
     {
-        FrameLayout tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
+        LayoutInflater inflater = (LayoutInflater)Xflash.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        FrameLayout tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
         cardBlock.addView(tempDivider);
             
         // load our cards
@@ -230,7 +268,7 @@ public class ExampleSentenceFragment extends Fragment
             JapaneseCard tempCard = (JapaneseCard)tempCardArray.get(i);
 
             // inflate a new word/card row
-            RelativeLayout tempWordRow = (RelativeLayout)myInflater.inflate(R.layout.es_card_row,null);
+            RelativeLayout tempWordRow = (RelativeLayout)inflater.inflate(R.layout.es_card_row,null);
 
             // headword
             TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
@@ -244,16 +282,26 @@ public class ExampleSentenceFragment extends Fragment
             Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);
             tempAddButton.setTag( tempCard.getCardId() );
 
+            // set a click listener for the 'add card' button for each card/word
+            tempAddButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    addCard(v);
+                }
+            });
+
             // add the word/card row
             cardBlock.addView(tempWordRow); 
                 
             // add a divider at the end
-            tempDivider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
+            tempDivider = (FrameLayout)inflater.inflate(R.layout.divider,null);
             cardBlock.addView(tempDivider);
         }
 
         // add the bottom margin layout
-        tempDivider = (FrameLayout)myInflater.inflate(R.layout.es_word_margin,null);
+        tempDivider = (FrameLayout)inflater.inflate(R.layout.es_word_margin,null);
         cardBlock.addView(tempDivider);
             
         // change the button and show the cards
@@ -261,6 +309,17 @@ public class ExampleSentenceFragment extends Fragment
         cardBlock.setVisibility(View.VISIBLE);
 
     }  // end loadExampleSentenceBlock()
+
+    
+    // click listener for the answer bar buttons
+    private View.OnClickListener exampleClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            exampleClick(v);
+        }
+    };
 
 
 }  // end ExampleSentenceFragment class declaration
