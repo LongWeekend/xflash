@@ -8,13 +8,11 @@
 
 #import "LWEJanrainLoginManager.h"
 #import "SynthesizeSingleton.h"
-#import "FlurryAPI.h"
 
 @implementation LWEJanrainLoginManager
 @synthesize jrEngage, userIdentifier, profile;
 
-#pragma mark -
-#pragma mark Constructors
+#pragma mark - Constructors
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
@@ -32,8 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   return self;
 }
 
-#pragma mark -
-#pragma mark Memory
+#pragma mark - Memory
 
 - (void) dealloc
 {
@@ -43,8 +40,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Authentication
+#pragma mark - Authentication
 
 //! Determines if we already know who the user is
 - (BOOL) isAuthenticated
@@ -113,7 +109,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
   [[NSNotificationCenter defaultCenter] postNotification:aNotification];  
 }
 
-#pragma mark Failure Delegate
+#pragma mark - Failure Delegate
 
 - (void) jrEngageDialogDidFailToShowWithError:(NSError *)error	
 {
@@ -126,15 +122,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LWEJanrainLoginManager);
 
 - (void) jrAuthenticationDidFailWithError:(NSError *)error forProvider:(NSString *)provider
 {
-  #if defined(LWE_RELEASE_AD_HOC) || defined(LWE_RELEASE_APP_STORE)
-  [FlurryAPI logError:[NSString stringWithFormat:@"%i",[error code]] message:@"Error in jrAuthenticationDidFailWithError" error:error];
-  #endif
-  LWE_LOG(@"Got to jrAuthenticationDidFailWithError");
+  [LWEAnalytics logError:[NSString stringWithFormat:@"Error code: %i",error.code] message:@"Error in jrAuthenticationDidFailWithError"];
   [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Login Failed",@"LWEJanrainLoginManager.authfailed") message:[error localizedDescription]];
 }
 
-#pragma mark -
-#pragma mark Sharing
+#pragma mark - Sharing
 
 - (void) share:(NSString*)action andUrl:(NSString*)url
 {
