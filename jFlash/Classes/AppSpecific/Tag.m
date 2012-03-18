@@ -7,17 +7,15 @@
 //
 
 #import "Tag.h"
-#import "FlurryAPI.h"
-#import "LWEDebug.h"
 
-NSString * const kTagErrorDomain          = @"kTagErrorDomain";
-NSString * const LWETagDidSave = @"kTagDidSave";
-NSUInteger const kAllBuriedAndHiddenError = 999;
-NSUInteger const kLWETagUnknownError = 998;
-NSInteger const kLWEUninitializedTagId = -1;
+NSString * const kTagErrorDomain           = @"kTagErrorDomain";
+NSString * const LWETagDidSave             = @"kTagDidSave";
+NSUInteger const kAllBuriedAndHiddenError  = 999;
+NSUInteger const kLWETagUnknownError       = 998;
+NSInteger const kLWEUninitializedTagId     = -1;
 NSInteger const kLWEUninitializedCardCount = -1;
-NSInteger const kLWEUnseenCardLevel = 0;
-NSInteger const kLWELearnedCardLevel = 5;
+NSInteger const kLWEUnseenCardLevel        = 0;
+NSInteger const kLWELearnedCardLevel       = 5;
 
 @implementation Tag
 
