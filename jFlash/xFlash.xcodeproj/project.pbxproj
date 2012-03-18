@@ -143,6 +143,10 @@
 		49668AEC14581D6F005636D0 /* LWEAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 49668AE814581D6F005636D0 /* LWEAnalytics.m */; };
 		49668AED14581D6F005636D0 /* LWEAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 49668AE814581D6F005636D0 /* LWEAnalytics.m */; };
 		4966C30112686DCE00F34E24 /* jflash_12_to_13.sql in Resources */ = {isa = PBXBuildFile; fileRef = 49AF3CF51265E2B900CEAA52 /* jflash_12_to_13.sql */; };
+		49695844150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695846150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
+		49695847150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */; };
 		496BE55211EC5320003AB713 /* ActionBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE54F11EC5320003AB713 /* ActionBarViewController.xib */; };
 		496BE55311EC5320003AB713 /* AlgorithmSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55011EC5320003AB713 /* AlgorithmSettingsView.xib */; };
 		496BE55411EC5320003AB713 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 496BE55111EC5320003AB713 /* SearchView.xib */; };
@@ -589,10 +593,6 @@
 		49BBA4C5144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */; };
 		49BD2AF3138E664100FAC045 /* cFlash-CARD-1.0.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */; };
 		49BD2AF4138E664100FAC045 /* cFlash.db in Resources */ = {isa = PBXBuildFile; fileRef = 49BD2AF2138E664100FAC045 /* cFlash.db */; };
-		49C03B18150B020500A26227 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C03B17150B020500A26227 /* MainWindow-iPad.xib */; };
-		49C03B19150B020500A26227 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C03B17150B020500A26227 /* MainWindow-iPad.xib */; };
-		49C03B1A150B020500A26227 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C03B17150B020500A26227 /* MainWindow-iPad.xib */; };
-		49C03B1B150B020500A26227 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C03B17150B020500A26227 /* MainWindow-iPad.xib */; };
 		49C506251484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506261484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
 		49C506281484966A0094734D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C506241484966A0094734D /* JSONKit.m */; };
@@ -1101,6 +1101,7 @@
 		4965FD83126F7002000AC280 /* redtheme-cookie-cutters */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "redtheme-cookie-cutters"; path = "Assets/redtheme-cookie-cutters"; sourceTree = "<group>"; };
 		49668AE714581D6F005636D0 /* LWEAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWEAnalytics.h; sourceTree = "<group>"; };
 		49668AE814581D6F005636D0 /* LWEAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWEAnalytics.m; sourceTree = "<group>"; };
+		49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "XIBs/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		496BE54B11EC5303003AB713 /* ActionBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBarViewController.h; path = AppSpecific/ActionBarViewController.h; sourceTree = "<group>"; };
 		496BE54C11EC5303003AB713 /* ActionBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionBarViewController.m; path = AppSpecific/ActionBarViewController.m; sourceTree = "<group>"; };
 		496BE54F11EC5320003AB713 /* ActionBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ActionBarViewController.xib; path = XIBs/ActionBarViewController.xib; sourceTree = "<group>"; };
@@ -1214,7 +1215,6 @@
 		49BBA4C4144D5D3D00E6A9AE /* LWEChineseSearchBarInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LWEChineseSearchBarInput.xib; path = AppSpecific/LWEChineseSearchBarInput.xib; sourceTree = "<group>"; };
 		49BD2AF1138E664100FAC045 /* cFlash-CARD-1.0.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = "cFlash-CARD-1.0.db"; path = "sql/cFlash-CARD-1.0.db"; sourceTree = "<group>"; };
 		49BD2AF2138E664100FAC045 /* cFlash.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = cFlash.db; path = sql/cFlash.db; sourceTree = "<group>"; };
-		49C03B17150B020500A26227 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "XIBs/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		49C50623148496640094734D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		49C506241484966A0094734D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Classes/External/janrain/JREngage/JSONKit/JSONKit.m; sourceTree = SOURCE_ROOT; };
 		49C521DE144D2461002011BD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -2767,7 +2767,7 @@
 				49B4ABC311C1D03600CFC308 /* ExamplesUnavailable.xib */,
 				917A5C6811AB844300016BD2 /* HelpView.xib */,
 				917A5C6911AB844300016BD2 /* MainWindow.xib */,
-				49C03B17150B020500A26227 /* MainWindow-iPad.xib */,
+				49695843150C3F8300DCC8F5 /* MainWindow-iPad.xib */,
 				497125231487300A00D4D150 /* MoodIcon.xib */,
 				917A5C6A11AB844300016BD2 /* AddStudySetView.xib */,
 				49377B1E1485259D00BD80C5 /* GroupDescriptionView.xib */,
@@ -3153,7 +3153,7 @@
 				918EEB2814F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
 				4937876114DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
 				49BA6DB514F4887500A48A21 /* jflash_161_to_162.sql in Resources */,
-				49C03B18150B020500A26227 /* MainWindow-iPad.xib in Resources */,
+				49695844150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3182,7 +3182,7 @@
 				49FE8C7814A9B83200579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7A14A9B83200579716 /* CardViewController.xib in Resources */,
 				4937876214DB8D9700361203 /* jflash_16_to_161.sql in Resources */,
-				49C03B1A150B020500A26227 /* MainWindow-iPad.xib in Resources */,
+				49695846150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3206,7 +3206,7 @@
 				4982294E1490F028009EC2CD /* 02-turning-gear@2x.png in Resources */,
 				49FE8C7214A9B82300579716 /* CardViewController-EtoJ.xib in Resources */,
 				49FE8C7414A9B82300579716 /* CardViewController.xib in Resources */,
-				49C03B1B150B020500A26227 /* MainWindow-iPad.xib in Resources */,
+				49695847150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3379,7 +3379,7 @@
 				918EEB2314F5DAB500EF044C /* button_iosblue_280x40@2x.png in Resources */,
 				918EEB2714F5DACB00EF044C /* button_iosblue_135x40.png in Resources */,
 				918EEB2914F5DACB00EF044C /* button_iosblue_280x40.png in Resources */,
-				49C03B19150B020500A26227 /* MainWindow-iPad.xib in Resources */,
+				49695845150C3F8300DCC8F5 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
