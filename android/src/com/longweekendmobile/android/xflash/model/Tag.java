@@ -10,10 +10,9 @@ package com.longweekendmobile.android.xflash.model;
 //  
 //  public static boolean isEqual(Tag  )
 //
-//  public Tag blankTagWithId(int  )
 //  public int groupId()
 //  public boolean isEditable()
-//  public int seenCardCount()
+//  public int getSeenCardCount()
 //
 //  public void recacheCardCountForEachLevel()
 //  public ArrayList<ArrayList<Integer>> thawCards(Context  )
@@ -52,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import android.content.ContentValues;
@@ -107,16 +107,6 @@ public class Tag
         return ( tagId == inTag.tagId );        
     }
 
-    // this method simply returns a new Tag object with the same tag ID
-    // as the Tag from which this method was called
-    public static Tag blankTagWithId(int inId)
-    {
-        Tag newTag = new Tag();
-
-        newTag.tagId = inId;
-
-        return newTag;
-    }
 
     // calls a GroupPeer object to query the database, returns the id
     // of the Group that this Tag belongs to
@@ -136,7 +126,7 @@ public class Tag
     }
 
     // not ENTIRELY sure what's going on here yet
-    public int seenCardCount()
+    public int getSeenCardCount()
     {
         return ( cardCount - cardLevelCounts.get(kLWEUnseenCardLevel) );
     }
@@ -248,6 +238,8 @@ public class Tag
 
         if( tempCardsArray != null)
         {
+            Log.d(MYTAG,">>> it's not null???");
+            
             // delete the PLIST now that we have it in memory
             String tempFile = "ids.plist";
             XFApplication.getInstance().deleteFile(tempFile);         
@@ -257,7 +249,7 @@ public class Tag
             // no PLIST, generate new cardsByLevel array
             tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
         }
-
+        
         cardsByLevel = tempCardsArray;
         flattenedCardArray = flattenCardArrays();
 
@@ -285,15 +277,13 @@ public class Tag
         }   
 
         // put in numeric order
-        // asdf
-        // TODO - must find a new way to sort
-        // Collections.sort(allCards, new CardComparator() );
+        Collections.sort(allCards, new CardComparator() );
 
         return allCards;
 
-    }  // end combineCards()
+    }  // end flattenCardArrays()
 
-    @SuppressWarnings("unused")
+
     private class CardComparator implements Comparator<Card>
     {
         public int compare(Card card1,Card card2)
@@ -306,7 +296,6 @@ public class Tag
     // update level counts cache - kept in memory how many cards are in each level
     public void moveCard(Card inCard,int nextLevel)
     {
-/*
         if( cardsByLevel.size() != 6 )
         {
             Log.d(MYTAG,"ERROR in moveCard()");
@@ -315,8 +304,8 @@ public class Tag
 
         int countBeforeRemove = 0;
         int countBeforeAdd = 0;
-        ArrayList<Integer> thisLevelCards = null;
-        ArrayList<Integer> nextLevelCards = null;
+        ArrayList<Card> thisLevelCards = null;
+        ArrayList<Card> nextLevelCards = null;
 
         // update the cardsByLevel if necessary
         if( nextLevel != inCard.levelId )
@@ -326,33 +315,40 @@ public class Tag
         
             countBeforeRemove = thisLevelCards.size();
             countBeforeAdd = nextLevelCards.size();
-        }
 
-        // now do the remove
-        if( !thisLevelCards.contains( inCard.getCardId() ) )
-        {
-            Log.d(MYTAG,"ERROR in moveCard - card no longer there");
-        }
-    
-        int tempInt = thisLevelCards.indexOf( inCard.getCardId() );
-        thisLevelCards.remove(tempInt);
-        int countAfterRemove = thisLevelCards.size();
-
-        // only do the add if the remove was successful
-        if( countBeforeRemove == (countAfterRemove + 1) )
-        { 
-            nextLevelCards.add( inCard.getCardId() );
-
-            // now confirm the add
-            int countAfterAdd = cardsByLevel.get(nextLevel).size();
-            if( !((countAfterAdd - 1) == countBeforeAdd) )
+            // now do the remove
+            if( !thisLevelCards.contains(inCard) )
             {
-                Log.d(MYTAG,"the number after add (" + countAfterAdd + ") should be 1 more than the count before add (" + countBeforeAdd + ")");
+                // TODO - BUG!
+                //      - this error fires (and causes a crash) if you are studying a 
+                //      - tag, then start a new tag, then come BACK to the
+                //      - original tag.  Project for tomorrow
+                Log.d(MYTAG,"ERROR in moveCard - card no longer there");
+            }
+    
+            int tempInt = thisLevelCards.indexOf(inCard);
+            thisLevelCards.remove(tempInt);
+            int countAfterRemove = thisLevelCards.size();
+
+            // only do the add if the remove was successful
+            if( countBeforeRemove == (countAfterRemove + 1) )
+            { 
+                nextLevelCards.add(inCard);
+
+                // and update the card's level id
+                inCard.setLevelId(nextLevel);
+
+                // now confirm the add
+                int countAfterAdd = cardsByLevel.get(nextLevel).size();
+                if( !((countAfterAdd - 1) == countBeforeAdd) )
+                {
+                    Log.d(MYTAG,"the number after add (" + countAfterAdd + ") should be 1 more than the count before add (" + countBeforeAdd + ")");
+                }
+
+                recacheCardCountForEachLevel();
             }
 
-            recacheCardCountForEachLevel();
-        }
-*/
+        }  // end if( nextLevel != inCard.levelId )
 
     }  // end moveCard()
 
@@ -361,7 +357,6 @@ public class Tag
     public void removeCardFromActiveSet(Card inCard)
     {
 /*
-
         int tempId = inCard.getCardId();
         ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
 

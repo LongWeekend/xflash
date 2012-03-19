@@ -181,8 +181,6 @@ public class PracticeCardSelector
         // immediately bypassed if our randomCard is not in lastFiveCards
         while( lastFiveCards.contains(randomCard) )
         {
-            Log.d(MYTAG,"pulled a card still in lastFiveCards");
-
             // if there is only one card left in the level, get a new level
             if( numCardsAtLevel == 1 )
             {
@@ -315,6 +313,7 @@ public class PracticeCardSelector
             denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - levelId + 1));
             numeratorTotal = numeratorTotal + (tmpTotal * levelId);
         }
+
         float p_unseen = calculateProbabilityOfUnseenWithCardsSeen(cardsSeenTotal,
                                     totalCardsInSet,numeratorTotal,totalArray[0]);
         float randomNum = new Random().nextFloat();
@@ -365,7 +364,7 @@ public class PracticeCardSelector
         }
         else
         {
-            if( cardsSeenTotal > totalCardsInSet);
+            if( cardsSeenTotal > totalCardsInSet )
             {
                 Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithCardsSeen()");
                 Log.d(MYTAG,"      - cardsSeenTotal is greater than totalCardsInSet");

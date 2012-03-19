@@ -36,9 +36,9 @@ package com.longweekendmobile.android.xflash;
 //      private static void loadMeaning()
 //      private static void setClickListeners()
 
-import android.os.Bundle;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +58,7 @@ import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
+import com.longweekendmobile.android.xflash.model.UserHistoryPeer;
 
 public class PracticeFragment extends Fragment
 {
@@ -67,12 +68,22 @@ public class PracticeFragment extends Fragment
     public static final int PRACTICE_VIEW_BROWSE = 1;
     public static final int PRACTICE_VIEW_REVEAL = 2;
 
-    public static int[] cardCounts = { 1, 2, 3, 4, 5 };
+    public static final int STUDYING_INDEX = 0;
+    public static final int RIGHT1_INDEX = 1;
+    public static final int RIGHT2_INDEX = 2;
+    public static final int RIGHT3_INDEX = 3;
+    public static final int LEARNED_INDEX = 4;
+    
+    private static int[] cardCounts = { 1, 2, 3, 4, 5 };
     
     private static int percentageRight = 100;
+    private static int rightStreak = 0;
+    private static int wrongStreak = 0;
+    private static int numRight = 0;
+    private static int numWrong = 0;
+    private static int numViewed = 0;
     
-    // TODO - temporarily public so Xflash has access in onCreatePanelMenu()
-    public static int practiceViewStatus = -1;
+    private static int practiceViewStatus = -1;
 
     private static RelativeLayout practiceLayout;
 
@@ -86,7 +97,7 @@ public class PracticeFragment extends Fragment
     {
         // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
-        
+       
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
@@ -205,6 +216,33 @@ public class PracticeFragment extends Fragment
     // method called when any button in the options block is clicked
     private static void practiceClick(View v)
     {
+        switch( v.getId() )
+        {
+            case R.id.optionblock_right:    ++numRight;
+                                            ++numViewed;
+                                            ++rightStreak;
+                                            wrongStreak = 0;
+                                            UserHistoryPeer.recordCorrectForCard(currentCard,currentTag);
+                                            break;
+            
+            case R.id.optionblock_wrong:    ++numWrong;
+                                            ++numViewed;
+                                            ++wrongStreak;
+                                            rightStreak = 0;
+                                            UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
+                                            break;
+
+            case R.id.optionblock_goaway:   ++numRight;
+                                            ++numViewed;
+                                            ++rightStreak;
+                                            wrongStreak = 0;
+                                            UserHistoryPeer.buryCard(currentCard,currentTag);
+                                            break;
+
+            default:    Log.d(MYTAG,"ERROR - practiceClick() passed invalied button id");
+        
+        }  // end switch( practice button )
+
         // load the next practice view without adding to the back stack
         practiceViewStatus = PRACTICE_VIEW_BLANK;
         PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
@@ -400,7 +438,20 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo.setText( PracticeFragment.currentTag.getName() );
 
             // load the tag card count
-            String tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
+            String tempString = null;
+
+            // asdf
+
+            if( practiceViewStatus != PRACTICE_VIEW_BROWSE )
+            {
+                tempString = Integer.toString( ( currentTag.getCardCount() - 
+                                                 currentTag.getSeenCardCount() ) );
+            }
+            else
+            {
+                tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
+            }
+
             tempString = tempString + " / ";
             tempString = tempString + Integer.toString( PracticeFragment.currentTag.getCardCount() );
 
@@ -437,15 +488,21 @@ public class PracticeFragment extends Fragment
             }
 
         }  // end dump()
-        
+       
+
         // set all TextView elements of the count bar to the current values
         private static void refreshCountBar()
         {
-            for(int i = 0; i < 5; i++)
+            // TODO - insert code to put in fancy fancy colored
+            //      - progress bars here
+            
+            // set the label numbers
+            for(int i = 1; i < 6; i++)
             {
-                cardCountViews[i].setText( Integer.toString( PracticeFragment.cardCounts[i] ) );
+                cardCountViews[i - 1].setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
             }
-        }
+
+        }  // end refreshCountBar()
 
 
         // set all widgets to the card-hidden state

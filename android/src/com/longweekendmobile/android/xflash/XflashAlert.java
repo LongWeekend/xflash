@@ -16,7 +16,6 @@ package com.longweekendmobile.android.xflash;
 //  private void fireEmptyTagDialog()
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 
@@ -123,9 +122,6 @@ public class XflashAlert
         builder.create().show();
 
     }  // end fireEmptyTagDialong()
-
-
- 
 
 
 }  // end XflashAlert class declaration

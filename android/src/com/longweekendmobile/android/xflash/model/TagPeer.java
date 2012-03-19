@@ -8,6 +8,7 @@ package com.longweekendmobile.android.xflash.model;
 //
 //      *** ALL METHODS STATIC ***
 //
+//  public static Tag blankTagWithId(int  )
 //  public Tag starredWordsTag()
 //  public void recacheCountsForUserTags()
 //  public void setCardCount(int  ,Tag  )
@@ -56,6 +57,20 @@ public class TagPeer
 
     public static final int STARRED_TAG_ID = 0;
     
+    
+    // this method simply returns a new Tag object with the same tag ID
+    // as the Tag from which this method was called
+    public static Tag blankTagWithId(int inId)
+    {
+        Tag newTag = new Tag();
+
+        newTag.setId(inId);
+
+        return newTag;
+    }
+
+
+    // returns the starred words Tag
     public static Tag starredWordsTag()
     {
         Tag tempTag = TagPeer.retrieveTagById(STARRED_TAG_ID);
