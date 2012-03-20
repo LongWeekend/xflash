@@ -24,6 +24,8 @@ package com.longweekendmobile.android.xflash;
 //  private void toggleCardStarred()
 //  private void launchAddCard()
 //  private void fixCardEmail()
+//  private void setupObservers()
+//  private void updateFromSubscriptionObserver()
 //
 //  private static class PracticeScreen
 //
@@ -35,6 +37,9 @@ package com.longweekendmobile.android.xflash;
 //      public  static void toggleReading()
 //      private static void loadMeaning()
 //      private static void setClickListeners()
+
+import java.util.Observable;
+import java.util.Observer;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -74,6 +79,8 @@ public class PracticeFragment extends Fragment
     public static final int RIGHT3_INDEX = 3;
     public static final int LEARNED_INDEX = 4;
     
+    private static Observer subscriptionObserver = null;
+    
     private static int[] cardCounts = { 1, 2, 3, 4, 5 };
     
     private static int percentageRight = 100;
@@ -97,6 +104,8 @@ public class PracticeFragment extends Fragment
     {
         // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
+
+        setupObservers();
        
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
@@ -292,15 +301,7 @@ public class PracticeFragment extends Fragment
 
         if( TagPeer.card(currentCard,starredTag) )
         {
-            // only remove card if it is NOT the last in the Tag
-            if( starredTag.getCardCount() > 1 ) 
-            {
-                TagPeer.cancelMembership(currentCard,starredTag);
-            }
-            else
-            {
-                XflashAlert.fireLastCardDialog(starredTag);
-            }
+            TagPeer.cancelMembership(currentCard,starredTag);
         }
         else
         {
@@ -362,6 +363,71 @@ public class PracticeFragment extends Fragment
 
     }  // end fixCardEmail()
     
+   
+    private void setupObservers()
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+
+        if( subscriptionObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver(arg);
+                }
+            };
+
+            theNotifier.addSubscriptionObserver(subscriptionObserver);
+
+        }  // end if( subscriptionObserver == null )
+
+    }  // end setupObservers()
+
+
+    private void updateFromSubscriptionObserver(Object passedObject)
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        
+        // only concern ourselves if the active tag changed
+        if( currentTag.getId() == theNotifier.getTagIdPassed() )
+        {
+            JapaneseCard theCard = (JapaneseCard)passedObject;
+            theCard.hydrate();
+
+            if( theNotifier.getCardWasAdded() )
+            {
+                currentTag.addCardToActiveSet(theCard);
+            }
+            else
+            {
+                // if the card was removed from the active set
+                currentTag.removeCardFromActiveSet(theCard);
+
+                // if they are removing the card we're actually showing,
+                // get a new card
+                if( currentCard.equals(theCard) )
+                {
+                    PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+                    
+                    // if we're actually on the practice tab right now, force
+                    // reload of new card
+                    if( practiceLayout != null )
+                    {
+                        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        
+                        XflashScreen.setPracticeOverride();
+                        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                    }
+                }
+            } 
+
+        }  // end if( card mod to active set ) 
+
+    }  // end updateFromSubscriptionObserver()
+
+
     
     // class to manage screen setup
     private static class PracticeScreen
@@ -693,7 +759,7 @@ public class PracticeFragment extends Fragment
             int[] buttonIds = { R.id.optionblock_right, R.id.optionblock_wrong, 
                                 R.id.optionblock_goaway };
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < buttonIds.length; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(practiceClickListener);

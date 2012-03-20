@@ -162,7 +162,7 @@ public class ExampleSentenceFragment extends Fragment
         int ESbuttons[] = { R.id.es_optionblock_right, R.id.es_optionblock_wrong,
                                        R.id.es_optionblock_goaway };
 
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < ESbuttons.length; i++)
         {
            ImageButton tempButton = (ImageButton)ESlayout.findViewById( ESbuttons[i] );
            tempButton.setOnClickListener(exampleClickListener);

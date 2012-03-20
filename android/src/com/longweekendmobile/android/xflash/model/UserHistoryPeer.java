@@ -18,6 +18,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public void recordWrongForCard(Card  ,Tag  )
 
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
@@ -82,6 +83,7 @@ public class UserHistoryPeer
             selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( (inCard.getRightCount() + 1) ), Integer.toString( inCard.getWrongCount() ), Integer.toString(nextLevel) };
 
             query = "INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES (?,current_timestamp,current_timestamp,?,?,?,?)";
+
         }
         else
         {
@@ -91,6 +93,7 @@ public class UserHistoryPeer
             selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( inCard.getRightCount() ), Integer.toString( ( inCard.getWrongCount() + 1 ) ), Integer.toString(nextLevel) };
             
             query = "INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES (?,current_timestamp,current_timestamp,?,?,?,?)";
+
         }
 
         tempDB.execSQL(query,selectionArgs);

@@ -166,16 +166,11 @@ public class SearchFragment extends Fragment
         // if the card is currently starred, remove
         if(isMember)
         {
-            // only remove card if it is NOT the last in the Tag
-            if( starredTag.getCardCount() > 1 )
+            if( TagPeer.cancelMembership(tempCard,starredTag) ) 
             {
-                TagPeer.cancelMembership(tempCard,starredTag);
+                // only adjust search view if remove is successful
                 membershipCacheArray.remove(tempCard);    
                 starImage.setImageResource(R.drawable.star_deselected);
-            }
-            else
-            {
-                XflashAlert.fireLastCardDialog(starredTag);
             }
         }
         else

@@ -21,7 +21,7 @@ package com.longweekendmobile.android.xflash.model;
 //  private Card retrieveCardWithCursor(Cursor  )
 //  private ArrayList<Card> addCardsToList(ArrayList<Card>  ,Cursor  ,boolean  )
 //
-//  public ArrayList<ArrayList<Integer>> retrieveCardIdsSortedByLevelForTag(Tag  )
+//  public ArrayList<ArrayList<Integer>> retrieveCardsSortedByLevelForTag(Tag  )
 //  public ArrayList<Card> retrieveFaultedCardsForTag(Tag  )
 //  public ArrayList<Card> retrieveCardSetForExampleSentenceId(int  )
 //
@@ -34,10 +34,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
+import android.util.Log;
 
 public class CardPeer
 {
-    // private static final String MYTAG = "XFlash CardPeer";
+    private static final String MYTAG = "XFlash CardPeer";
     
     // factory that cares about what language we are using
     public static Card blankCardWithId(int inId)
@@ -283,18 +284,13 @@ public class CardPeer
     }  // end addCardsToList()
 
     
-    // takes a cardId and returns a hydrated card from the database
-    // returns an ArrayList of (int) Card ids for a given tagId
-    // TODO - cannot test because we have no level_id columns in database
+    // returns an ArrayList of cards for the given Tag
     public static ArrayList<ArrayList<Card>> retrieveCardsSortedByLevelForTag(Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
-        // TODO - temporary in place of the following code
-        //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        //        [settings objectForKey:@"user_id"]
+        // set up our empty array list to return
         ArrayList<ArrayList<Card>> cardList = new ArrayList<ArrayList<Card>>(6);
-
         for(int i = 0; i < 6; i++)
         {
             ArrayList<Card> tempList = new ArrayList<Card>();
@@ -302,10 +298,11 @@ public class CardPeer
         }
         
         String[] selectionArgs = new String[] { Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( inTag.getId() ) };
+        
         String query = "SELECT l.card_id AS card_id,u.card_level as card_level " +
                      "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id " +
                      "AND u.user_id = ? WHERE l.tag_id = ?";
-
+        
         Cursor myCursor = tempDB.rawQuery(query,selectionArgs);
 
         int rowCount = myCursor.getCount();
@@ -320,6 +317,7 @@ public class CardPeer
             int tempCardId = myCursor.getInt(tempColumn);
 
             Card tempCard = blankCardWithId(tempCardId);
+            tempCard.setLevelId(tempLevelId);
 
             cardList.get(tempLevelId).add(tempCard);
 
@@ -330,7 +328,7 @@ public class CardPeer
 
         return cardList;  
 
-    }  // end retrieveCardIdsSortedByLevelForTag()
+    }  // end retrieveCardsSortedByLevelForTag()
 
     // returns an ArrayList of cardId integers contained in the Tag inTag
     public static ArrayList<Card> retrieveFaultedCardsForTag(Tag inTag)

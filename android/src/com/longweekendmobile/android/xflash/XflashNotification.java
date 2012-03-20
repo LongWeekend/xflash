@@ -36,6 +36,7 @@ public class XflashNotification
     
     public static final int NO_CARD_PASSED = -1000;
     
+    private boolean cardWasAdded = false;
     private int cardIdPassed = NO_CARD_PASSED;
     private int tagIdPassed = -1000;
 
@@ -51,6 +52,16 @@ public class XflashNotification
     }
     
     // basic getters/setters for broadcasts
+    public void setCardWasAdded(boolean wasAdded)
+    {
+        cardWasAdded = wasAdded;
+    }
+
+    public boolean getCardWasAdded()
+    {
+        return cardWasAdded;
+    }
+
     public void setCardIdPassed(int inCardId)
     {
         cardIdPassed = inCardId;
