@@ -159,18 +159,14 @@ public class ExampleSentenceFragment extends Fragment
     // sets onClick listeners for the three buttons in the answer bar
     private void setAnswerBarListeners()
     {
-        ImageButton tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_actions);
-        tempButton.setOnClickListener(exampleClickListener);
+        int ESbuttons[] = { R.id.es_optionblock_right, R.id.es_optionblock_wrong,
+                                       R.id.es_optionblock_goaway };
 
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_right);
-        tempButton.setOnClickListener(exampleClickListener);
-
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_wrong);
-        tempButton.setOnClickListener(exampleClickListener);
-
-        tempButton = (ImageButton)ESlayout.findViewById(R.id.es_optionblock_goaway);
-        tempButton.setOnClickListener(exampleClickListener);
-
+        for(int i = 0; i < 3; i++)
+        {
+           ImageButton tempButton = (ImageButton)ESlayout.findViewById( ESbuttons[i] );
+           tempButton.setOnClickListener(exampleClickListener);
+        }
 
     }  // end setAnswerBarListeners()
 

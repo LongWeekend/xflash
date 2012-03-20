@@ -12,6 +12,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void setActiveTag(Tag  )
 //  public static Tag getActiveTag()
+//  private static int checkForBug(int  ) --------- temporary?
 //  public static Card getActiveCard()
 //
 //  public static int getColorScheme()
@@ -54,6 +55,8 @@ package com.longweekendmobile.android.xflash;
 //  public static void throwBadValue(String  ,int  )
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -177,7 +180,7 @@ public class XflashSettings
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("active_tag", inTag.getId() );
         editor.commit();
-        
+    
         // set our actual active tag
         activeTag = inTag;
         activeTag.populateCards();
@@ -190,7 +193,7 @@ public class XflashSettings
         activeTag.setCurrentIndex(0);
         activeCard = activeTag.flattenedCardArray.get(0);
         XflashScreen.resetPracticeScreen();
-        
+       
     }  // end setActiveTag()
 
 
@@ -206,6 +209,10 @@ public class XflashSettings
             
             // pull the saved tag id, default to 'Long Weekend Favorites'
             int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
+           
+            // TODO - bug, pain in the ass
+            tempTagId = checkForBug(tempTagId); 
+            
             activeTag = TagPeer.retrieveTagById(tempTagId);
             
             activeTag.populateCards();
@@ -215,7 +222,58 @@ public class XflashSettings
 
     }  // end getActiveTag()
 
-  
+ 
+/*
+        So, as I mentioned in an email (to Mark) there is a quirk with some
+        Samsung devices in that they override the standard directory that
+        Android uses to save Preferences and SharedPreferences. The consequence
+        of this is that you RETAIN ANY SAVED PREFERENCES WHEN YOU UNINSTALL
+        THE APP.  Why they did this, and then failed to fix their shit so that
+        it also uninstalled properly is unclear.
+        That's not terrible, necessarily, but in cases like this:
+
+        getActiveTag() is supposed to default to "Long Weekend Favorites" if 
+        there is no active tag saved.   However!  While debugging and whatnot,
+        if I make a new tag and EXIT THE APP WHILE STUDYING A USER CREATED TAG, 
+        then uninstall and re-install the app, I will retain a saved Preference 
+        with an active tag_id that is a HIGHER numeric value that any available 
+        in the freshly re-installed database.  That causes an empty query 
+        return when looking for our active tag in the database, and consequently 
+        causes the app to throw an Exception immediatly on load.
+
+        The purpose of this check is to make sure that isn't happening.
+*/
+
+    // TODO - bug, pain in the ass, probably not permanent
+    private static int checkForBug(int inId)
+    {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+
+        Cursor myCursor = tempDB.rawQuery("SELECT MAX(tag_id) FROM tags",null);
+        myCursor.moveToFirst();
+
+        int maxTagId = myCursor.getInt(0);
+        myCursor.close();
+
+        if( inId > maxTagId )
+        {
+            // got a problem! substitute "Long Weekend Favorites"
+            Log.d(MYTAG,">>> checkForBug()");
+            Log.d(MYTAG,">   ID pulled from saved settings: " + inId);
+            Log.d(MYTAG,">   MAX tag_id pulled from db:     " + maxTagId);
+            
+            return Tag.DEFAULT_TAG_ID;
+        }
+        else
+        {
+            // if the id is valid, return it for use
+            return inId;
+        }
+
+    }  // end checkForBug()
+
+
+ 
     // called only on app exit, to clear static values
     public static void clearActiveTag()
     {

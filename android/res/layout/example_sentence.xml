@@ -93,14 +93,9 @@
             android:gravity="center"
             android:background="@drawable/practice_btn_bg" >
 
-            <ImageButton android:id="@+id/es_optionblock_actions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/es_optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/es_optionblock_actions"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_right_flip" />
             <ImageButton android:id="@+id/es_optionblock_wrong"

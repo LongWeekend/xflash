@@ -99,28 +99,22 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:background="@drawable/practice_btn_bg" >
-
-            <ImageButton android:id="@+id/optionblock_actions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_actions_flip" />
+            
             <ImageButton android:id="@+id/optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/optionblock_actions"
-                android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_right_flip" />
             <ImageButton android:id="@+id/optionblock_wrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/optionblock_right"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_wrong_flip" />
             <ImageButton android:id="@+id/optionblock_goaway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/optionblock_wrong"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:background="@drawable/btn_goaway_flip" />
     
         </RelativeLayout>
@@ -137,17 +131,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_last_flip" />
-            <ImageButton android:id="@+id/browseblock_actions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/browseblock_last"
-                android:layout_marginLeft="18dp"
-                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/browseblock_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/browseblock_actions"
-                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@id/browseblock_last"
+                android:layout_marginLeft="40dp"
                 android:background="@drawable/btn_next_flip" />
     
         </RelativeLayout>

@@ -199,9 +199,17 @@ public class AddCardToTagFragment extends Fragment
         
         if( TagPeer.card(currentCard,tempTag) )
         {
-            // if the card is already subscribed, remove it
-            TagPeer.cancelMembership(currentCard,tempTag);
-            tempImage.setVisibility(View.GONE);
+            // only remove the card if it is NOT the last in the set
+            if( tempTag.getCardCount() > 1 )
+            {
+                // if the card is already subscribed, remove it
+                TagPeer.cancelMembership(currentCard,tempTag);
+                tempImage.setVisibility(View.GONE);
+            }
+            else
+            {
+                XflashAlert.fireLastCardDialog(tempTag);
+            }
         }
         else
         {

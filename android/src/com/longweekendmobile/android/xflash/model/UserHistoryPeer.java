@@ -18,21 +18,13 @@ package com.longweekendmobile.android.xflash.model;
 //  public void recordWrongForCard(Card  ,Tag  )
 
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class UserHistoryPeer
 {
     private static final String MYTAG = "XFlash UserHistoryPeer";
-
-    private static SQLiteDatabase tempDB;
-
-    public UserHistoryPeer()
-    {
-        // get the dao
-        tempDB = XFApplication.getWritableDao();
-    }
 
     // returns what the next level should be based on the users's answer
     private static int nextAfterLevel(int level,boolean gotItRight)
@@ -67,14 +59,12 @@ public class UserHistoryPeer
     // updates the database based on the user's answer
     private static void recordResult(Card inCard,Tag inTag,boolean gotItRight,boolean knewIt)
     {
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
+        
         String[] selectionArgs;
         String query;
         int nextLevel = -1;
         
-        // TODO - to be replaced by globalsettings->user_id
-        int debughold = 0;
-
-
         if( knewIt )
         {
             nextLevel = 5;
@@ -89,7 +79,7 @@ public class UserHistoryPeer
             // int oldNextLevel
             
             // args: inCard.cardId, user_id, (inCard.rightCount + 1), inCard.wrongCount, nextLevel
-            selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString(debughold), Integer.toString( (inCard.getRightCount() + 1) ), Integer.toString( inCard.getWrongCount() ), Integer.toString(nextLevel) };
+            selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( (inCard.getRightCount() + 1) ), Integer.toString( inCard.getWrongCount() ), Integer.toString(nextLevel) };
 
             query = "INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES (?,current_timestamp,current_timestamp,?,?,?,?)";
         }
@@ -98,12 +88,11 @@ public class UserHistoryPeer
             // int
 
             // args: inCard.cardId, user_id, inCard.rightCount, (inCard.wrongCount + 1), nextLevel
-            selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString(debughold), Integer.toString( inCard.getRightCount() ), Integer.toString( ( inCard.getWrongCount() + 1 ) ), Integer.toString(nextLevel) };
+            selectionArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( inCard.getRightCount() ), Integer.toString( ( inCard.getWrongCount() + 1 ) ), Integer.toString(nextLevel) };
             
             query = "INSERT OR REPLACE INTO user_history (card_id,timestamp,created_on,user_id,right_count,wrong_count,card_level) VALUES (?,current_timestamp,current_timestamp,?,?,?,?)";
         }
 
-        Log.d(MYTAG,query);
         tempDB.execSQL(query,selectionArgs);
 
         inTag.moveCard(inCard,nextLevel);

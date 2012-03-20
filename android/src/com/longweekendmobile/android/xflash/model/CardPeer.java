@@ -293,8 +293,6 @@ public class CardPeer
         // TODO - temporary in place of the following code
         //        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
         //        [settings objectForKey:@"user_id"]
-        int debughold = 0;
-
         ArrayList<ArrayList<Card>> cardList = new ArrayList<ArrayList<Card>>(6);
 
         for(int i = 0; i < 6; i++)
@@ -303,7 +301,7 @@ public class CardPeer
             cardList.add(tempList);
         }
         
-        String[] selectionArgs = new String[] { Integer.toString(debughold), Integer.toString( inTag.getId() ) };
+        String[] selectionArgs = new String[] { Integer.toString( XflashSettings.getCurrentUserId() ), Integer.toString( inTag.getId() ) };
         String query = "SELECT l.card_id AS card_id,u.card_level as card_level " +
                      "FROM card_tag_link l LEFT OUTER JOIN user_history u ON u.card_id = l.card_id " +
                      "AND u.user_id = ? WHERE l.tag_id = ?";
