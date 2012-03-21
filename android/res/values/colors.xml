@@ -29,4 +29,14 @@
     <color name="button_green_startcolor_up">#FF457338</color>
     <color name="button_green_endcolor_up">#FF094603</color>
     <color name="selected_row">#FF7C95A3</color>
+    <color name="progress_red_start">#FFECC7C9</color>
+    <color name="progress_red_end">#FFB7363C</color>
+    <color name="progress_gray_start">#FFDEE0DE</color>
+    <color name="progress_gray_end">#FFB3B5B3</color>
+    <color name="progress_teal_start">#FFD7FFF9</color>
+    <color name="progress_teal_end">#FF72D9C9</color>
+    <color name="progress_orange_start">#FFE8D6BE</color>
+    <color name="progress_orange_end">#FFCB8C49</color>
+    <color name="progress_green_start">#FFCDF8CB</color>
+    <color name="progress_green_end">#FF60E15A</color>
 </resources>

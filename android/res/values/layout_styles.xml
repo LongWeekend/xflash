@@ -87,16 +87,20 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">11dp</item>
     </style>
     <style name="count_num">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">2dp</item>
         <item name="android:textColor">#FF000000</item>
-        <item name="android:background">@drawable/count_back</item>
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:paddingTop">2dp</item>
         <item name="android:paddingLeft">2dp</item>
+    </style>
+    <style name="count_frame">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
     </style>
     <style name="practice_reading_layout" parent="@style/practice_reading_text">
         <item name="android:layout_width">wrap_content</item>
