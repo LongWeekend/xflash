@@ -94,7 +94,7 @@
     <string name="helppage_nextbutton">Next ></string>
     <string name="help_topics_path">file:///android_asset/JFlash/help/</string>
     <string name="lastcard_alert_title">Last Card in Set</string>
-    <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\"!  To delete a set entirely, long-click on it in the \"Study Sets\" tab.</string>
+    <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\", which you are currently studying!  To delete a set entirely, please change to a different set first.</string>
 
 </resources>
 

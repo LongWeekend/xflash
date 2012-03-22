@@ -161,7 +161,6 @@ public class XflashSettings
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
         hideLearnedCards = settings.getBoolean("hideLearnedCards",false);
-
     }  // end load()
 
 
@@ -200,24 +199,37 @@ public class XflashSettings
     // loads and returns XflashSettings.activeTag
     public static Tag getActiveTag()
     {
+        Log.d(MYTAG,">>> in getActiveTag()");
+        
         // if active tag is null, pull the default (Long Weekend Favorites)
         if( ( activeTag == null ) || ( activeTag.getCardCount() < 1 ) )
         {
+            Log.d(MYTAG,">   loading new Tag");
             // get a Context, get the SharedPreferences
             XFApplication tempInstance = XFApplication.getInstance();
             SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
             
             // pull the saved tag id, default to 'Long Weekend Favorites'
             int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
+            Log.d(MYTAG,">   pulled id: " + tempTagId + " from SharedPreferences");
            
             // TODO - bug, pain in the ass
             tempTagId = checkForBug(tempTagId); 
             
             activeTag = TagPeer.retrieveTagById(tempTagId);
+
+            Log.d(MYTAG,">   returning Tag:  " + activeTag.getName() );
             
             activeTag.populateCards();
         }
+        else
+        {
+            Log.d(MYTAG,">   activeTag NOT NULL, returning Tag: " + activeTag.getName() );
+        }
             
+        Log.d(MYTAG,".");
+        Log.d(MYTAG,".");
+        
         return activeTag;
 
     }  // end getActiveTag()
@@ -258,10 +270,12 @@ public class XflashSettings
         if( inId > maxTagId )
         {
             // got a problem! substitute "Long Weekend Favorites"
+            Log.d(MYTAG,".");
             Log.d(MYTAG,">>> checkForBug()");
             Log.d(MYTAG,">   ID pulled from saved settings: " + inId);
             Log.d(MYTAG,">   MAX tag_id pulled from db:     " + maxTagId);
-            
+            Log.d(MYTAG,".");
+       
             return Tag.DEFAULT_TAG_ID;
         }
         else

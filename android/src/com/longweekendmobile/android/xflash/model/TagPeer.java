@@ -39,6 +39,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.longweekendmobile.android.xflash.XflashAlert;
+import com.longweekendmobile.android.xflash.XflashSettings;
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashNotification;
 
@@ -136,77 +138,52 @@ public class TagPeer
     // remove that card from the active set card cache
     //
     // note this method DOES update the tag count cache on the tags table
-    @SuppressWarnings("unused")
     public static boolean cancelMembership(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
+        boolean tagIsActive = ( inTag.getId() == XflashSettings.getActiveTag().getId() );
         String[] tempArgs = null;
 
         // first check whether the removed card is in the active tag
-        // if the tagId supplied is the active card, check for last card cause
-        // we don't want the last card being removed from a tag. 
-        
-        // TODO - don't know the proper way to implement this yet
-        //      - it will probably require passing Context from the 
-        //      - Activity calling this method?
-        //
-        // CurrentState *currentState = [CurrentState sharedCurrentState];
-        // if ([tag isEqual:currentState.activeTag])
-        if( false )
+        if( tagIsActive )
         {
             Log.d(MYTAG,"editing current set tags");
 
-            // get the total card count of relevant tag
-            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
-            String query = "SELECT count(card_id) AS total_card FROM card_tag_link WHERE tag_id = ?";
-        
-            Cursor myCursor = tempDB.rawQuery(query,tempArgs);
-            myCursor.moveToFirst();
-
-            int tempColumn = myCursor.getColumnIndex("total_card");
-            int totalCard = myCursor.getInt(tempColumn);
-            myCursor.close();
-
+            // TODO - in the Obj C code there is a whole SQL call to get the count
+            //      - for the ID of the inTag passed... why can't we just use
+            //      - inTag.getCardCount() ?  Do we not trust our passed object?
+            
             // if we're downt to the last card
-            if( totalCard <= 1 )
+            if( inTag.getCardCount() <= 1 )
             {
                 Log.d(MYTAG,"last card in set");
 
-                // TODO - NO idea what this is about yet
-
-/* 
                 // this is the last card, abort!
-                // construct the error object to be returned back to its caller.
-      
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                NSLocalizedString(@"This set only contains the card you are currently studying.  To delete a set entirely, please change to a different set first.", @"AddTagViewController.AlertViewLastCardMessage"), NSLocalizedDescriptionKey,nil];
-                    
-                if( theError != NULL )
-                    {
-                        *theError = [NSError errorWithDomain:kTagPeerErrorDomain code:kRemoveLastCardOnATagError userInfo:userInfo];
-                    }
+                XflashAlert.fireLastCardDialog(inTag);
 
-*/      
-        
                 return false;
-            
-            }  // end if( totalCard <= 1 )
+            }
 
-
-        }  // end if(the passed Card is in the active Tag)
-           // initial - to determine if we're' downt to the last card
-
+        }  // end if( removing from active tag )
         
         // now we actually delete from card_tag_link
         tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
-        // only update this stuff if NOT the active set - actual comment
-        // TODO - don't know the proper way to implement this yet
-        //
-        // if ([tag isEqual:currentState.activeTag] == NO)
-        if( true )
+        //      - PLEASE ADVISE
+
+        // TODO - okay, so we're only reducing the count in 'tags' if the 
+        //      - Tag is NOT active...  but I can't find anywhere else in the 
+        //      - code where it's being done when we remove a card in a Tag 
+        //      - that IS active.  And that means our count in the
+        //      - database (tags) is off (different from a total counted 
+        //      - assessment of card_tag_link), causing problems elsewhere.
+       
+        //      - PLEASE ADVISE
+
+        // only update this stuff if NOT the active set
+        if( !tagIsActive )
         {
             tempArgs = new String[] { Integer.toString( inTag.getId() ) };
             String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
@@ -216,6 +193,7 @@ public class TagPeer
 
         // broadcast the card whose subscription status has changed
         XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setCardWasAdded(false);
         theNotifier.setTagIdPassed( inTag.getId() );
         theNotifier.subscriptionBroadcast(inCard); 
         
@@ -309,6 +287,7 @@ public class TagPeer
         
         // broadcast the card whose subscription status has changed
         XflashNotification theNotifier = XFApplication.getNotifier();
+        theNotifier.setCardWasAdded(true);
         theNotifier.setTagIdPassed( inTag.getId() );
         theNotifier.subscriptionBroadcast(inCard); 
  

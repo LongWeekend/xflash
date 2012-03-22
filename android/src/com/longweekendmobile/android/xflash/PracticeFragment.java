@@ -24,6 +24,8 @@ package com.longweekendmobile.android.xflash;
 //  private void toggleCardStarred()
 //  private void launchAddCard()
 //  private void fixCardEmail()
+//  private void setupObservers()
+//  private void updateFromSubscriptionObserver()
 //
 //  private static class PracticeScreen
 //
@@ -35,6 +37,9 @@ package com.longweekendmobile.android.xflash;
 //      public  static void toggleReading()
 //      private static void loadMeaning()
 //      private static void setClickListeners()
+
+import java.util.Observable;
+import java.util.Observer;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -50,6 +55,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -74,6 +80,8 @@ public class PracticeFragment extends Fragment
     public static final int RIGHT3_INDEX = 3;
     public static final int LEARNED_INDEX = 4;
     
+    private static Observer subscriptionObserver = null;
+    
     private static int[] cardCounts = { 1, 2, 3, 4, 5 };
     
     private static int percentageRight = 100;
@@ -97,6 +105,8 @@ public class PracticeFragment extends Fragment
     {
         // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
+
+        setupObservers();
        
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
@@ -292,15 +302,7 @@ public class PracticeFragment extends Fragment
 
         if( TagPeer.card(currentCard,starredTag) )
         {
-            // only remove card if it is NOT the last in the Tag
-            if( starredTag.getCardCount() > 1 ) 
-            {
-                TagPeer.cancelMembership(currentCard,starredTag);
-            }
-            else
-            {
-                XflashAlert.fireLastCardDialog(starredTag);
-            }
+            TagPeer.cancelMembership(currentCard,starredTag);
         }
         else
         {
@@ -362,6 +364,71 @@ public class PracticeFragment extends Fragment
 
     }  // end fixCardEmail()
     
+   
+    private void setupObservers()
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+
+        if( subscriptionObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver(arg);
+                }
+            };
+
+            theNotifier.addSubscriptionObserver(subscriptionObserver);
+
+        }  // end if( subscriptionObserver == null )
+
+    }  // end setupObservers()
+
+
+    private void updateFromSubscriptionObserver(Object passedObject)
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        
+        // only concern ourselves if the active tag changed
+        if( currentTag.getId() == theNotifier.getTagIdPassed() )
+        {
+            JapaneseCard theCard = (JapaneseCard)passedObject;
+            theCard.hydrate();
+
+            if( theNotifier.getCardWasAdded() )
+            {
+                currentTag.addCardToActiveSet(theCard);
+            }
+            else
+            {
+                // if the card was removed from the active set
+                currentTag.removeCardFromActiveSet(theCard);
+
+                // if they are removing the card we're actually showing,
+                // get a new card
+                if( currentCard.equals(theCard) )
+                {
+                    PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+                    
+                    // if we're actually on the practice tab right now, force
+                    // reload of new card
+                    if( practiceLayout != null )
+                    {
+                        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        
+                        XflashScreen.setPracticeOverride();
+                        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                    }
+                }
+            } 
+
+        }  // end if( card mod to active set ) 
+
+    }  // end updateFromSubscriptionObserver()
+
+
     
     // class to manage screen setup
     private static class PracticeScreen
@@ -384,7 +451,6 @@ public class PracticeFragment extends Fragment
         private static TextView headwordView = null;
         private static TextView hhView = null;
         private static TextView showReadingText = null;
-        private static TextView[] cardCountViews = { null, null, null, null, null };
 
         public static void initialize()
         {
@@ -396,14 +462,7 @@ public class PracticeFragment extends Fragment
         
             // load the progress count bar
             countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
-            cardCountViews[0] = (TextView)practiceLayout.findViewById(R.id.study_num);
-            cardCountViews[1] = (TextView)practiceLayout.findViewById(R.id.right1_num);
-            cardCountViews[2] = (TextView)practiceLayout.findViewById(R.id.right2_num);
-            cardCountViews[3] = (TextView)practiceLayout.findViewById(R.id.right3_num);
-            cardCountViews[4] = (TextView)practiceLayout.findViewById(R.id.learned_num);
            
-            refreshCountBar();
-    
             // load the show-reading button
             showReadingButton = (ImageButton)PracticeFragment.practiceLayout.findViewById(R.id.practice_showreadingbutton);
             
@@ -439,9 +498,6 @@ public class PracticeFragment extends Fragment
 
             // load the tag card count
             String tempString = null;
-
-            // asdf
-
             if( practiceViewStatus != PRACTICE_VIEW_BROWSE )
             {
                 tempString = Integer.toString( ( currentTag.getCardCount() - 
@@ -482,24 +538,64 @@ public class PracticeFragment extends Fragment
             hhView = null;
             showReadingText = null;
 
-            for(int i = 0; i < 5; i++)
-            {
-                cardCountViews[i] = null;
-            }
-
         }  // end dump()
        
 
         // set all TextView elements of the count bar to the current values
         private static void refreshCountBar()
         {
-            // TODO - insert code to put in fancy fancy colored
-            //      - progress bars here
+            int seenCardCount = currentTag.getSeenCardCount();
+            int thisLevelCount = seenCardCount;
             
-            // set the label numbers
+            int progressBars[] = { R.id.study_progress, R.id.right1_progress, R.id.right2_progress,
+                                   R.id.right3_progress, R.id.learned_progress };
+
+            int cardCountViews[] = { R.id.study_num, R.id.right1_num, R.id.right2_num,
+                                     R.id.right3_num, R.id.learned_num };
+
+            // I *think* this is operating the way you want it to... though I 
+            // completely fail to understand what we're displaying, so I'm not sure
             for(int i = 1; i < 6; i++)
             {
-                cardCountViews[i - 1].setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
+                if( i > 1 )
+                {
+                    thisLevelCount -= currentTag.cardLevelCounts.get( (i - 1) );
+                }
+
+                // set the progress bar backgrounds
+                // apparently ProgressBar is buggy as shit, and no one knows why. I'd post a link
+                // but there's nothing coherent out there. If you have to work with them, expect
+                // to be pissed off.  You've been warned.
+                
+                // these shouldn't need to be final, but for their use in an inner class
+                // below to set the progress and post a delayed invalidation
+                final ProgressBar tempProgress = (ProgressBar)practiceLayout.findViewById( progressBars[i - 1] );
+                final float progress;
+                
+                if( seenCardCount > 0 )
+                {
+                    progress = (float)thisLevelCount / (float)seenCardCount;
+                }
+                else
+                {
+                    progress = 0.0f;
+                }
+       
+                // this shouldn't be necessary
+                tempProgress.postDelayed( new Runnable()
+                {
+                        @Override
+                        public void run()
+                        {
+                            // this shouldn't be necessary either
+                            tempProgress.setProgress( (int)( 100 * progress ) );
+                            tempProgress.postInvalidate();
+                        }
+                },350);
+               
+                // set the label numbers
+                TextView tempCount = (TextView)practiceLayout.findViewById( cardCountViews[i - 1] );
+                tempCount.setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
             }
 
         }  // end refreshCountBar()
@@ -585,6 +681,7 @@ public class PracticeFragment extends Fragment
 
             practiceViewStatus = inViewMode;
             setAnswerBar(practiceViewStatus);
+            refreshCountBar();
         
         }  // end PracticeScreen.setupPracticeView()
     
@@ -693,7 +790,7 @@ public class PracticeFragment extends Fragment
             int[] buttonIds = { R.id.optionblock_right, R.id.optionblock_wrong, 
                                 R.id.optionblock_goaway };
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < buttonIds.length; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(practiceClickListener);

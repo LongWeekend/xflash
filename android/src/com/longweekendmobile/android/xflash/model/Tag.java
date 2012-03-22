@@ -252,7 +252,7 @@ public class Tag
         
         cardsByLevel = tempCardsArray;
         flattenedCardArray = flattenCardArrays();
-
+        
         // populate card level counts
         recacheCardCountForEachLevel();
 
@@ -312,7 +312,7 @@ public class Tag
         {
             thisLevelCards = cardsByLevel.get( inCard.getLevelId() );
             nextLevelCards = cardsByLevel.get(nextLevel);
-        
+       
             countBeforeRemove = thisLevelCards.size();
             countBeforeAdd = nextLevelCards.size();
 
@@ -356,20 +356,14 @@ public class Tag
     // removed card from tag's memory arrays so they are out of the set
     public void removeCardFromActiveSet(Card inCard)
     {
-/*
-        int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
-
         // remove from cardsByLevel
-        int tempIndex = cardLevel.indexOf(tempId);
-        cardLevel.remove(tempIndex);        
+        ArrayList<Card> cardLevel = cardsByLevel.get( inCard.getLevelId() );
+        cardLevel.remove(inCard);        
 
-        // remove from flattenedCardArray
-        tempIndex = flattenedCardArray.indexOf(tempId);
-        flattenedCardArray.remove(tempIndex);
+        // remove from array of all cards
+        flattenedCardArray.remove(inCard);
 
         recacheCardCountForEachLevel();
-*/
 
     }  // end removeCardFromActiveSet()
 
@@ -377,15 +371,14 @@ public class Tag
     // add card to tag's memory arrays
     public void addCardToActiveSet(Card inCard)
     {
-/*        
-        int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
-
-        cardLevel.add(tempId);
-        flattenedCardArray.add(tempId);
+        // add to card level
+        ArrayList<Card> cardLevel = cardsByLevel.get( inCard.getLevelId() );
+        cardLevel.add(inCard);
+        
+        // add to array of all cards
+        flattenedCardArray.add(inCard);
         
         recacheCardCountForEachLevel();
-*/
     
     }  // end addCardToActiveSet()
 
