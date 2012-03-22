@@ -22,7 +22,7 @@
             android:padding="2dp" >
             
             <TextView style="@style/count_label"
-                android:text="Studying" />
+                android:text="@string/practice_studying" />
             <FrameLayout style="@style/count_frame">
                 <ProgressBar android:id="@+id/study_progress"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -41,7 +41,7 @@
             android:padding="2dp" >
             
             <TextView style="@style/count_label"
-                android:text="Right 1x" />
+                android:text="@string/practice_right1x" />
             <FrameLayout style="@style/count_frame">
                 <ProgressBar android:id="@+id/right1_progress"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -60,7 +60,7 @@
             android:padding="2dp" >
             
             <TextView style="@style/count_label"
-                android:text="Right 2x" />
+                android:text="@string/practice_right2x" />
             <FrameLayout style="@style/count_frame">
                 <ProgressBar android:id="@+id/right2_progress"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -79,7 +79,7 @@
             android:padding="2dp" >
             
             <TextView style="@style/count_label"
-                android:text="Right 3x" />
+                android:text="@string/practice_right3x" />
             <FrameLayout style="@style/count_frame">
                 <ProgressBar android:id="@+id/right3_progress"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -98,7 +98,7 @@
             android:padding="2dp" >
             
             <TextView style="@style/count_label"
-                android:text="Learned" />
+                android:text="@string/practice_learned" />
             <FrameLayout style="@style/count_frame">
                 <ProgressBar android:id="@+id/learned_progress"
                     style="?android:attr/progressBarStyleHorizontal"

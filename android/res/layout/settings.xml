@@ -158,7 +158,7 @@
                 <TextView 
                     style="@style/default_display_left"
                     android:layout_marginRight="6dp"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:text="@string/settings_acknowledgement_content" />
                     <!-- add a right margin to match the
                              marginLeft in the style     -->

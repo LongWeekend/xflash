@@ -35,12 +35,17 @@ package com.longweekendmobile.android.xflash;
 //      public  static void setupPracticeView(int  )
 //      public  static void setAnswerBar(int  )
 //      public  static void toggleReading()
+//      public  static void showSummary()
 //      private static void loadMeaning()
 //      private static void setClickListeners()
 
 import java.util.Observable;
 import java.util.Observer;
 
+import android.text.Spannable;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.text.Html;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -57,7 +62,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
@@ -363,8 +371,8 @@ public class PracticeFragment extends Fragment
         Xflash.getActivity().startActivity(myIntent);
 
     }  // end fixCardEmail()
-    
    
+
     private void setupObservers()
     {
         XflashNotification theNotifier = XFApplication.getNotifier();
@@ -728,6 +736,148 @@ public class PracticeFragment extends Fragment
     
         }  // end PracticeScreen.toggleReading()
 
+        
+        // TODO - keep track of right / wrong/ streak
+        // show the big summary dialog
+        public static void showSummary()
+        {
+            final Xflash inContext = Xflash.getActivity();
+            Resources res = inContext.getResources();
+
+            AlertDialog.Builder builder;
+
+            // inflate the dialog layout into a View object
+            LayoutInflater inflater = (LayoutInflater)inContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.practice_summary, (ViewGroup)inContext.findViewById(R.id.summary_root));
+
+            builder = new AlertDialog.Builder(inContext);
+            builder.setView(layout);
+
+            AlertDialog summaryDialog = builder.create();
+            summaryDialog.show();
+
+            // we cannot reference our buttons until after the dialog.show()
+            // method has been called - otherwise they don't "exist" 
+        
+            // set the title
+            TextView tempView = (TextView)summaryDialog.findViewById(R.id.summary_tag);
+            tempView.setText( currentTag.getName() );
+
+            // set the studying description
+            // it's a damn shame that using HTML in TextViews is a bit iffy
+            String des1 = res.getString(R.string.psummary_des1) + "  ";
+            String des2 = "  " + res.getString(R.string.psummary_des2) + "  ";
+            String des3 = "  " + res.getString(R.string.psummary_des3);
+
+            int totalCards = currentTag.getCardCount();
+            int studyNum = XflashSettings.getStudyPool();
+            if( studyNum > totalCards )
+            {
+                studyNum = totalCards;
+            }
+            
+            String stringStudyNum = Integer.toString(studyNum) + "*";
+            String stringTotalCards = Integer.toString(totalCards);
+
+            int studyNumStart = des1.length();
+            int studyNumEnd = studyNumStart + stringStudyNum.length();
+
+            int totalCardsStart = studyNumEnd + des2.length();
+            int totalCardsEnd = totalCardsStart + stringTotalCards.length();
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_description);
+            tempView.setText( des1 + stringStudyNum + des2 + stringTotalCards + des3, BufferType.SPANNABLE );
+
+            Spannable willThisWork = (Spannable)tempView.getText();
+            willThisWork.setSpan( new RelativeSizeSpan(1.2f), studyNumStart, studyNumEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
+            willThisWork.setSpan( new RelativeSizeSpan(1.2f), totalCardsStart, totalCardsEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
+
+            // set the subtext 
+            String sub1 = res.getString(R.string.psummary_sub1) + " ";
+            String sub2 = res.getString(R.string.psummary_sub2);
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_subtext);
+            tempView.setText( sub1 + sub2, BufferType.SPANNABLE );
+
+            Spannable s = (Spannable)tempView.getText();
+            int start = sub1.length();
+            int end = start + sub2.length();
+            s.setSpan( new ForegroundColorSpan(0xFFEDF68C), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        
+            // set the table view 
+            
+            // set the right count
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_right_count);
+            tempView.setText( Integer.toString( numRight ) );
+
+            // set the wrong count
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_wrong_count);
+            tempView.setText( Integer.toString( numWrong ) );
+
+            // set the streak
+            String streak = null;
+            if( ( rightStreak == 0 ) && ( wrongStreak == 0 ) )
+            {
+                streak = "-";
+            }
+            else if( rightStreak > 0 )
+            {
+                streak = Integer.toString( rightStreak ) + " " + res.getString(R.string.psummary_right);
+            }
+            else
+            {
+                streak = Integer.toString( wrongStreak ) + " " + res.getString(R.string.psummary_wrong);
+            }
+            
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_streak_count);
+            tempView.setText(streak);
+
+            // set the cards seen
+            int seenCount = currentTag.getSeenCardCount();
+
+            String seen = null;
+            if( seenCount > 0 )
+            {
+                seen = Integer.toString(seenCount);
+            }
+            else
+            {
+                seen = "-";
+            }
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_seen_count);
+            tempView.setText(seen);
+
+            // set the progress stuff
+            int progressBars[] = { R.id.summary_untested_progress, R.id.summary_studying_progress,
+                                   R.id.summary_right1x_progress,  R.id.summary_right2x_progress,
+                                   R.id.summary_right3x_progress,  R.id.summary_learned_progress };
+            int valuesViews[] = { R.id.summary_untested_values, R.id.summary_studying_values,
+                                  R.id.summary_right1x_values,  R.id.summary_right2x_values,
+                                  R.id.summary_right3x_values,  R.id.summary_learned_values };
+
+            for(int i = 0; i < valuesViews.length; i++)
+            {
+                int levelCount = currentTag.cardsByLevel.get(i).size();
+                float percentage = ( (float)levelCount / (float)totalCards );
+            
+                String toSet = Integer.toString( (int)( 100 * percentage ) ) +
+                               "% - " + Integer.toString(levelCount);
+
+                // set the progress bar
+                ProgressBar tempProgress = (ProgressBar)summaryDialog.findViewById( progressBars[i] );
+                tempProgress.setProgress( (int)( 100 * percentage ) );
+                
+                // set the level count description
+                tempView = (TextView)summaryDialog.findViewById( valuesViews[i] );
+                tempView.setText(toSet);
+            } 
+            
+            
+            // asdf
+
+        }  // end showSummary()
+  
 
         // load and display HTML for the meaning WebView
         private static void loadMeaning()
@@ -774,6 +924,17 @@ public class PracticeFragment extends Fragment
         // set click listeners for all relevant views
         private static void setClickListeners()
         {
+            // listener for the count bar
+            countBar.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    showSummary();
+                }
+            });
+            
+
             // listener for the 'tap for answer' answer bar
             blankButton.setOnClickListener( new View.OnClickListener()
             {

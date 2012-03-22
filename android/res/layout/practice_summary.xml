@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/summary_root"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center_horizontal" >
+
+    <!-- the tag title -->
+    <TextView android:id="@+id/summary_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- description: studying vs. total -->
+    <TextView android:id="@+id/summary_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center" />
+
+    <TextView android:id="@+id/summary_subtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"
+        android:textSize="12sp"
+        android:gravity="center" />
+
+    <!-- various card counts -->
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF91BAE5"
+                android:textSize="12sp"
+                android:text="@string/psummary_times_right" />
+            <TextView android:id="@+id/summary_right_count"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFEDF68C"
+                android:textSize="12sp"
+                android:text="@string/psummary_streak" />
+            <TextView android:id="@+id/summary_streak_count"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF91BAE5"
+                android:textSize="12sp"
+                android:text="@string/psummary_times_wrong" />
+            <TextView android:id="@+id/summary_wrong_count"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF3FBC2E"
+                android:textSize="12sp"
+                android:text="@string/psummary_seen" />
+            <TextView android:id="@+id/summary_seen_count"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+    
+    </TableLayout>
+
+    <!-- progress bars by card level -->
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stretchColumns="1" >
+
+        <TableRow>
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/psummary_untested" />
+            <ProgressBar android:id="@+id/summary_untested_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_gray" />
+            <TextView android:id="@+id/summary_untested_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow android:layout_marginTop="2dp">
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/practice_studying" />
+            <ProgressBar android:id="@+id/summary_studying_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_red" />
+            <TextView android:id="@+id/summary_studying_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow android:layout_marginTop="2dp">
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/practice_right1x" />
+            <ProgressBar android:id="@+id/summary_right1x_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_gray" />
+            <TextView android:id="@+id/summary_right1x_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow android:layout_marginTop="2dp">
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/practice_right2x" />
+            <ProgressBar android:id="@+id/summary_right2x_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_teal" />
+            <TextView android:id="@+id/summary_right2x_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow android:layout_marginTop="2dp">
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/practice_right3x" />
+            <ProgressBar android:id="@+id/summary_right3x_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_orange" />
+            <TextView android:id="@+id/summary_right3x_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+        <TableRow android:layout_marginTop="2dp">
+            <TextView style="@style/psummary_whitelabel_layout"
+                android:text="@string/practice_learned" />
+            <ProgressBar android:id="@+id/summary_learned_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:progressDrawable="@drawable/progress_green" />
+            <TextView android:id="@+id/summary_learned_values"
+                style="@style/psummary_whitelabel_layout"
+                android:layout_marginLeft="10dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView android:id="@+id/summary_hothead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/hh_big_temp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/summary_hothead"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14sp"
+            android:text="@string/psummary_goodjob" />
+        
+    </RelativeLayout>
+
+</LinearLayout> 
+
+
+

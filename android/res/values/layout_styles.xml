@@ -153,6 +153,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
     </style>
+    <style name="psummary_whitelabel_layout" parent="@style/psummary_white_labels">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <dimen name="default_radio_width">70dp</dimen>
     <dimen name="default_radio_height">34dp</dimen>
     <dimen name="default_radio_corner">6dp</dimen>
