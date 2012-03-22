@@ -18,14 +18,13 @@ package com.longweekendmobile.android.xflash.model;
 //  public void recordWrongForCard(Card  ,Tag  )
 
 import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class UserHistoryPeer
 {
-    private static final String MYTAG = "XFlash UserHistoryPeer";
+    // private static final String MYTAG = "XFlash UserHistoryPeer";
 
     // returns what the next level should be based on the users's answer
     private static int nextAfterLevel(int level,boolean gotItRight)

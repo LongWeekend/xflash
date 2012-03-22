@@ -34,11 +34,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.longweekendmobile.android.xflash.XFApplication;
 import com.longweekendmobile.android.xflash.XflashSettings;
-import android.util.Log;
 
 public class CardPeer
 {
-    private static final String MYTAG = "XFlash CardPeer";
+    // private static final String MYTAG = "XFlash CardPeer";
     
     // factory that cares about what language we are using
     public static Card blankCardWithId(int inId)

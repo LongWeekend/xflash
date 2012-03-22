@@ -138,7 +138,6 @@ public class TagPeer
     // remove that card from the active set card cache
     //
     // note this method DOES update the tag count cache on the tags table
-    @SuppressWarnings("unused")
     public static boolean cancelMembership(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
@@ -172,6 +171,17 @@ public class TagPeer
         tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
+        //      - PLEASE ADVISE
+
+        // TODO - okay, so we're only reducing the count in 'tags' if the 
+        //      - Tag is NOT active...  but I can't find anywhere else in the 
+        //      - code where it's being done when we remove a card in a Tag 
+        //      - that IS active.  And that means our count in the
+        //      - database (tags) is off (different from a total counted 
+        //      - assessment of card_tag_link), causing problems elsewhere.
+       
+        //      - PLEASE ADVISE
+
         // only update this stuff if NOT the active set
         if( !tagIsActive )
         {
