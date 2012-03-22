@@ -18,7 +18,7 @@ package com.longweekendmobile.android.xflash;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.lang.Math;
+
 import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.Card;

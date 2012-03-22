@@ -13,7 +13,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public void recacheCountsForUserTags()
 //  public void setCardCount(int  ,Tag  )
 //  public boolean cancelMembership(Card  ,Tag  )
-//  public boolean card(Card  ,Tag  )
+//  public boolean cardIsInTag(Card  ,Tag  )
 //  public ArrayList<Tag> faultedTagsForCard(Card  )
 //  public boolean subscribeCard(Card  ,Tag  )
 //
@@ -39,10 +39,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.longweekendmobile.android.xflash.XflashAlert;
-import com.longweekendmobile.android.xflash.XflashSettings;
 import com.longweekendmobile.android.xflash.XFApplication;
+import com.longweekendmobile.android.xflash.XflashAlert;
 import com.longweekendmobile.android.xflash.XflashNotification;
+import com.longweekendmobile.android.xflash.XflashSettings;
 
 public class TagPeer
 {
@@ -134,8 +134,8 @@ public class TagPeer
     }
 
     // removes inCard.cardId from the incoming Tag object
-    // this will also check regarding the last card on the active set and automatically
-    // remove that card from the active set card cache
+    // this will also check whether inTag is currently active, and if so,m
+    // will refuse to remove the card (and throw up a dialog)
     //
     // note this method DOES update the tag count cache on the tags table
     public static boolean cancelMembership(Card inCard,Tag inTag)
@@ -150,9 +150,8 @@ public class TagPeer
         {
             Log.d(MYTAG,"editing current set tags");
 
-            // TODO - in the Obj C code there is a whole SQL call to get the count
-            //      - for the ID of the inTag passed... why can't we just use
-            //      - inTag.getCardCount() ?  Do we not trust our passed object?
+            // TODO - keep an eye on this: in Obj C this is an SQL call to
+            //      - get the card count, but I don't think it's required
             
             // if we're downt to the last card
             if( inTag.getCardCount() <= 1 )
@@ -171,25 +170,12 @@ public class TagPeer
         tempArgs = new String[] { Integer.toString( inCard.getCardId() ), Integer.toString( inTag.getId() ) };
         tempDB.delete("card_tag_link","card_id = ? AND tag_id = ?",tempArgs);
         
-        //      - PLEASE ADVISE
+        // TODO - keep an eye on this: used to be conditional on inTag not
+        //      - being active, but doesn't seem to be necessary
+        tempArgs = new String[] { Integer.toString( inTag.getId() ) };
+        String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
 
-        // TODO - okay, so we're only reducing the count in 'tags' if the 
-        //      - Tag is NOT active...  but I can't find anywhere else in the 
-        //      - code where it's being done when we remove a card in a Tag 
-        //      - that IS active.  And that means our count in the
-        //      - database (tags) is off (different from a total counted 
-        //      - assessment of card_tag_link), causing problems elsewhere.
-       
-        //      - PLEASE ADVISE
-
-        // only update this stuff if NOT the active set
-        if( !tagIsActive )
-        {
-            tempArgs = new String[] { Integer.toString( inTag.getId() ) };
-            String query = "UPDATE tags SET count = (count - 1) WHERE tag_id = ?";
-
-            tempDB.execSQL(query,tempArgs);
-        } 
+        tempDB.execSQL(query,tempArgs);
 
         // broadcast the card whose subscription status has changed
         XflashNotification theNotifier = XFApplication.getNotifier();
@@ -203,7 +189,7 @@ public class TagPeer
 
 
     // checked if a passed tagId/cardId are matched
-    public static boolean card(Card inCard,Tag inTag)
+    public static boolean cardIsInTag(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
@@ -224,7 +210,7 @@ public class TagPeer
             return false;
         }   
 
-    }
+    }  // end cardIsInTag()
 
     // returns an ArrayList<int> of Tag objects this card is a member of
     public static ArrayList<Tag> faultedTagsForCard(Card inCard)
@@ -261,6 +247,7 @@ public class TagPeer
 
     }  // end faultedTagsForCard()
 
+    
     // subscribes a Card to a given Tag based on incoming object Id's
     // note that this method DOES NOT update the tag count cache on the tags table
     public static boolean subscribeCard(Card inCard,Tag inTag)
@@ -294,6 +281,7 @@ public class TagPeer
         return true;
 
     }  // end subscribeCard()
+
 
     // gets system Tag objects as an ArrayList
     public static ArrayList<Tag> retrieveSysTagList()

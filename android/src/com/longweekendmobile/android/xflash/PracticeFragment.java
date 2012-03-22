@@ -42,14 +42,15 @@ package com.longweekendmobile.android.xflash;
 import java.util.Observable;
 import java.util.Observer;
 
-import android.text.Spannable;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.text.Html;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,8 +63,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
@@ -182,7 +181,7 @@ public class PracticeFragment extends Fragment
         MenuItem starredItem = (MenuItem)menu.findItem(R.id.pm_toggle_starred);
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsInTag(currentCard,starredTag) )
         {
             starredItem.setTitle(R.string.pm_starred_yes);
         }
@@ -308,7 +307,7 @@ public class PracticeFragment extends Fragment
     {
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsInTag(currentCard,starredTag) )
         {
             TagPeer.cancelMembership(currentCard,starredTag);
         }

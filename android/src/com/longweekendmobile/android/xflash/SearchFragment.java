@@ -159,7 +159,7 @@ public class SearchFragment extends Fragment
         }
         else
         {
-            isMember = TagPeer.card(tempCard,starredTag); 
+            isMember = TagPeer.cardIsInTag(tempCard,starredTag); 
         }
   
 
