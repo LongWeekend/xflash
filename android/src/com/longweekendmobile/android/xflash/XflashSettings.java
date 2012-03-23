@@ -161,6 +161,7 @@ public class XflashSettings
         customFrequency = settings.getInt("customFrequency",LWE_FREQUENCY_HARD);
         currentUser = settings.getInt("currentUser",LWE_DEFAULT_USER);
         hideLearnedCards = settings.getBoolean("hideLearnedCards",false);
+
     }  // end load()
 
 
@@ -187,8 +188,6 @@ public class XflashSettings
         // when we set the active tag, also set the active card
         // to the zero-index card of said new tag, and reset
         // the practice screen count
-
-        // TODO - MAY BE TEMPORARY
         activeTag.setCurrentIndex(0);
         activeCard = activeTag.flattenedCardArray.get(0);
         XflashScreen.resetPracticeScreen();
@@ -227,6 +226,9 @@ public class XflashSettings
             Log.d(MYTAG,">   activeTag NOT NULL, returning Tag: " + activeTag.getName() );
         }
             
+        // TODO - another bug check
+        activeTag = checkForAnotherBug(activeTag);
+        
         Log.d(MYTAG,".");
         Log.d(MYTAG,".");
         
@@ -287,7 +289,30 @@ public class XflashSettings
     }  // end checkForBug()
 
 
+    // TODO - another bug check
+    private static Tag checkForAnotherBug(Tag inTag)
+    {
+        // until I get the bug sorted out in TagPeer.cancelMembership()
+        // it's possible to drop down to zero cards in the active
+        // Tag, causing major problems on load
+
+        if( inTag.getCardCount() < 1 )
+        {
+            Log.d(MYTAG,">   we exited the app with a zero-card tag active");
+            Log.d(MYTAG,">   defaulting to Long Weekend Favorites");
+
+            Tag tempTag = TagPeer.retrieveTagById(Tag.DEFAULT_TAG_ID);
+            
+            return tempTag;
+        }
+        else
+        {
+            return inTag;
+        }
+
+    }  // end checkForAnotherBug()
  
+
     // called only on app exit, to clear static values
     public static void clearActiveTag()
     {
@@ -295,7 +320,7 @@ public class XflashSettings
     }
 
     
-    // TODO - this probably will migrate out of XflashSettings shortly
+    // return the currently active Card
     public static Card getActiveCard()
     {
         // when we get the active card, if it's null, pull the

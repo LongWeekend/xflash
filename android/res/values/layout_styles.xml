@@ -94,7 +94,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#FF000000</item>
         <item name="android:textSize">11dp</item>
-        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingTop">1dp</item>
         <item name="android:paddingLeft">2dp</item>
     </style>
     <style name="count_frame">
@@ -152,6 +152,20 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
+    </style>
+    <style name="default_progressbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:minHeight">18dp</item>
+        <item name="android:maxHeight">18dp</item>
+    </style>
+    <style name="summary_progressbar" parent="@style/default_progressbar">
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+    <style name="psummary_whitelabel_layout" parent="@style/psummary_white_labels">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     <dimen name="default_radio_width">70dp</dimen>
     <dimen name="default_radio_height">34dp</dimen>

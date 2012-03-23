@@ -37,8 +37,6 @@ package com.longweekendmobile.android.xflash.model;
 //  public String getName()
 //  public void setDescription(String  )
 //  public String getDescription()
-//  public void setFault(boolean  )
-//  public boolean getFault()
 //  public void setCardCount(int  )
 //  public int getCardCount()
 //  public void setCurrentIndex(int  )
@@ -87,15 +85,12 @@ public class Tag
     private String tagName;
     private String tagDescription;
 
-    private boolean isFault;
-
     public Tag()
     {
         cardsByLevel = null;
         cardLevelCounts = null;
         flattenedCardArray = null;
         
-        isFault = true;
         tagId = kLWEUninitializedTagId;
         cardCount = kLWEUninitializedCardCount; 
     }
@@ -319,10 +314,6 @@ public class Tag
             // now do the remove
             if( !thisLevelCards.contains(inCard) )
             {
-                // TODO - BUG!
-                //      - this error fires (and causes a crash) if you are studying a 
-                //      - tag, then start a new tag, then come BACK to the
-                //      - original tag.  Project for tomorrow
                 Log.d(MYTAG,"ERROR in moveCard - card no longer there");
             }
     
@@ -407,29 +398,10 @@ public class Tag
 
         tempDB.update("tags",updateValues,"tag_id = ?",whereArgs);
 
-        // TODO - if successful, send a broadcast 
-        //  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
-            
         return;
     
     }  // end save()
 
-
-    // TODO - rework as a receiver when we find out where we're broadcasting from
-    public void tagDidSave()
-    {
-
-/* Refreshes self from the DB if a didSave notification is called
-- (void)tagDidSave:(NSNotification *)notification
-{
-  if ([self isEqual:notification.object] && (self.isFault == NO)) // we only care if it's us & this isn't a faulted entry
-  {
-    [self hydrate];
-  }
-}
-*/
-        return;
-    }
 
     // gets 'this' Tag's info from the db and hydrates
     public void hydrate()
@@ -462,7 +434,6 @@ public class Tag
     }  // end hydrate()
 
     // fills in values from incoming cursor
-    // TODO - unfinished broadcast
     public void hydrateWithCursor(Cursor inCursor)
     {
         int tempColumn = inCursor.getColumnIndex("tag_id");
@@ -480,12 +451,6 @@ public class Tag
         tempColumn = inCursor.getColumnIndex("count");
         cardCount = inCursor.getInt(tempColumn);
 
-/*
-  // TODO We only care about getting new updates on data if we had data to begin with.
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
-  _isFault = NO;
-}
-*/
     }  // end hydrateWithCursor()
 
     public String description()
@@ -542,16 +507,6 @@ public class Tag
     public String getDescription()
     {
         return tagDescription;
-    }
-
-    public void setFault(boolean inFault)
-    {
-        isFault = inFault;
-    }
-
-    public boolean getFault()
-    {
-        return isFault;
     }
 
     public void setCardCount(int inCount)
