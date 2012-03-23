@@ -74,10 +74,13 @@ public class Tag
     public static final int kLWELearnedCardLevel = 5;
     public static final int DEFAULT_TAG_ID = 124;
 
+    private boolean learnedShowedAlready;
+
     private int tagId;
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
+
     public ArrayList<ArrayList<Card>> cardsByLevel;          
     public ArrayList<Card> flattenedCardArray;
     public ArrayList<Integer> cardLevelCounts;
@@ -87,13 +90,53 @@ public class Tag
 
     public Tag()
     {
+        learnedShowedAlready = false;
+
+        tagId = kLWEUninitializedTagId;
+        cardCount = kLWEUninitializedCardCount; 
+        
         cardsByLevel = null;
         cardLevelCounts = null;
         flattenedCardArray = null;
-        
-        tagId = kLWEUninitializedTagId;
-        cardCount = kLWEUninitializedCardCount; 
     }
+
+
+    public boolean needShowAllLearned()
+    {
+        boolean levelsAreZero = true;
+
+        // check whether there are any cards in any non-learned level
+        for(int i = 0; i < 5; i++)
+        {
+            if( cardsByLevel.get(i).size() > 0 )
+            {
+                levelsAreZero = false;
+            }
+        }
+
+        if( levelsAreZero && !learnedShowedAlready )
+        {
+            // if all cards are learned and we haven't told the user yet
+            learnedShowedAlready = true;
+
+            return true;
+        }
+        else
+        {
+            // otherwise, don't show dialog
+            return false;
+        }
+
+    }  // end needShowAllLearned()
+
+    
+    // called by PracticeFragment when user gets a card wrong, to ensure
+    // the learned dialog is re-shown if necessary
+    public void resetAllLearned()
+    {
+        learnedShowedAlready = false;
+    }
+
 
     // isEqual() simply returns a boolean confirming whether the
     // incoming Tag object has the same tagId as the THIS tag object

@@ -37,38 +37,9 @@ public class PracticeCardSelector
     public static void setNextPracticeCard(Tag inTag,Card inCard)
     {
         Card nextCard = randomCardInTag(inTag,inCard);
-
-
-        // TODO - insert code below
-
-
         XflashSettings.setActiveCard(nextCard);
 
     }  // end setNextPracticeCard()
-
-/*
-
-  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
-  
-  // If necessary, tell the user they've learned this set
-  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
-  {
-    if (self.alreadyShowedLearnedAlert == NO)
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
-                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
-                                        delegate:self];
-      self.alreadyShowedLearnedAlert = YES;
-    }
-  }
-  else if (self.alreadyShowedLearnedAlert)
-  {
-    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
-    self.alreadyShowedLearnedAlert = NO;
-  }
-
-
-*/
 
 
     // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
@@ -282,6 +253,7 @@ public class PracticeCardSelector
             {
                 return Tag.kLWELearnedCardLevel;
             }
+
         }  // end if(hideLearnedCards)
 
         // past here, we assume we have cards to work with

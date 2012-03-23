@@ -10,7 +10,8 @@ package com.longweekendmobile.android.xflash;
 //
 //      *** ALL METHODS STATIC ***
 //
-//  public  void fireLastCardDialog()
+//  public  void tagLearned(Tag  )
+//  public  void fireLastCardDialog(Tag  )
 //  public  void startStudying(View  )
 //  private void fireStartStudyingDialog(Tag  )
 //  private void fireEmptyTagDialog()
@@ -24,7 +25,29 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class XflashAlert 
 {
+    // dialog to display (once) when all cards in a Tag are learned
+    public static void tagLearned(Tag inTag)
+    {
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
+        // set the title
+        String tempString = Xflash.getActivity().getResources().getString(R.string.learned_alert_title);
+        builder.setTitle(tempString);
+
+        // set the message
+        tempString = Xflash.getActivity().getResources().getString(R.string.learned_alert_message);
+        tempString = tempString.replace("##TAGNAME##", inTag.getName() );
+        builder.setMessage(tempString);
+
+        // on negative response, do nothing
+        builder.setNegativeButton("OK",null);
+
+        builder.create().show();
+
+    }  // end tagLearned()
+    
+    
     // dialog to display error if user tries to remove the last card in a set
     public static void fireLastCardDialog(Tag inTag)
     {

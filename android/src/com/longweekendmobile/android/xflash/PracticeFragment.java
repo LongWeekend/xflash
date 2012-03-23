@@ -140,6 +140,11 @@ public class PracticeFragment extends Fragment
         PracticeScreen.initialize();
         PracticeScreen.setupPracticeView(practiceViewStatus);
 
+        if( currentTag.needShowAllLearned() )
+        {
+            XflashAlert.tagLearned(currentTag);
+        }
+
         return practiceLayout;
 
     }  // end onCreateView()
@@ -240,6 +245,8 @@ public class PracticeFragment extends Fragment
                                             ++wrongStreak;
                                             rightStreak = 0;
                                             UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
+                                            // reset our all-learned flag
+                                            currentTag.resetAllLearned();
                                             break;
 
             case R.id.optionblock_goaway:   ++numRight;
