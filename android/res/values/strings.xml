@@ -115,6 +115,9 @@
     <string name="learned_alert_message">Congratulations! You\'ve already learned all of the words in \"##TAGNAME##\". We will show cards that would usually be hidden.</string>
     <string name="lastcard_alert_title">Last Card in Set</string>
     <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\", which you are currently studying!  To delete a set entirely, please change to a different set first.</string>
+    <string name="firstrun_alert_title">Welcome to Japanese Flash!</string>
+    <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
+    <!-- NOTE: in Obj C, this alert includes reference to the Rikai Browser -->
 
 </resources>
 

@@ -28,7 +28,8 @@ package com.longweekendmobile.android.xflash;
 //  private void launchAddCard()
 //  private void fixCardEmail()
 //  private void setupObservers()
-//  private void updateFromSubscriptionObserver()
+//  private void updateFromSubscriptionObserver(Object  )
+//  private void updateFromActiveTagObserver()
 //
 //  private static class PracticeScreen
 //
@@ -144,8 +145,11 @@ public class PracticeFragment extends Fragment
 
         if( currentTag.needShowAllLearned() )
         {
-            XflashAlert.tagLearned(currentTag);
+            XflashAlert.fireTagLearned(currentTag);
         }
+
+        // display opening dialog if app was just installed
+        XflashSettings.checkFirstRun();
 
         return practiceLayout;
 
@@ -203,7 +207,6 @@ public class PracticeFragment extends Fragment
             case R.id.pm_add_tag:           launchAddCard();
                                             return true;
             case R.id.pm_tweet:             Log.d(MYTAG,"> pm_tweet clicked");
-                                            Log.d(MYTAG,".");
                                             return true;
             case R.id.pm_fix:               fixCardEmail();
                                             return true;
@@ -222,7 +225,6 @@ public class PracticeFragment extends Fragment
         practiceViewStatus = PRACTICE_VIEW_BLANK;
     }
 
-    // TODO - BUG, these don't always fire
 
     // methods for PracticeFragment and ExampleSentence to respond
     // to user right / wrong/ goaway choices
@@ -478,7 +480,6 @@ public class PracticeFragment extends Fragment
     private void updateFromActiveTagObserver()
     {
         // when a new tag is set to active, reset all relevant values
-        percentageRight = 0;
         rightStreak = 0;
         wrongStreak = 0;
         numRight = 0;

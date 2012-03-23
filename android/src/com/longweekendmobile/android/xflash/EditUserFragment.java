@@ -185,7 +185,7 @@ public class EditUserFragment extends Fragment
         // save the user, depending on whether they're new
         if( isNew )
         {
-            myUser = UserPeer.createUserWithNickname(tempString,null);
+            myUser = UserPeer.createUserWithNickname(tempString);
         }
         else
         {

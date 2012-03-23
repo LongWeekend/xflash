@@ -8,51 +8,54 @@ package com.longweekendmobile.android.xflash;
 //
 //  a class to maintain all of the app level settings
 //
-//  public static void load()
+//      *** ALL METHODS STATIC ***
 //
-//  public static void setActiveTag(Tag  )
-//  public static Tag getActiveTag()
-//  private static int checkForBug(int  ) --------- temporary?
-//  public static Card getActiveCard()
+//  public void load()
 //
-//  public static int getColorScheme()
-//  public static String getColorSchemeName()
-//  public static String getThemeCSS()
-//  public static void setColorScheme(int  )
-//  public static void setupPracticeBack(RelativeLayout  )
-//  public static void setupColorScheme(RelativeLayout  )
-//  public static void setupColorScheme(RelativeLayout  ,View  )
-//  public static void setupColorScheme(RelativeLayout  ,View  )
-//  public static void setRadioColors(XflashRadio[]  )
-//  public static int[] getIcons()
+//  public  void checkFirstRun()
+//  public  void setActiveTag(Tag  )
+//  public  Tag getActiveTag()
+//  private int checkForBug(int  ) --------- temporary?
+//  public  Card getActiveCard()
 //
-//  public static int getStudyMode()
-//  public static String getStudyModeName()
-//  public static void setStudyMode(int  )
-//  public static int getStudyLanguage()
-//  public static String getStudyLanguageName()
-//  public static void setStudyLanguage(int  )
-//  public static int getCurrentUserId()
-//  public static void setCurrentUserId(int  )
-//  public static int getReadingMode()
-//  public static String getReadingModeName()
-//  public static void setReadingMode(int  )
-//  public static int getAnswerTextSize()
-//  public static int getAnswerTextLabel()
-//  public static String getAnswerSizeCSS()
-//  public static void setAnswerText(int  )
-//  public static int getDifficultyMode()
-//  public static void setDifficultyMode(int  )
-//  public static int getStudyPool()
-//  public static int getCustomStudyPool()
-//  public static void setCustomStudyPool(int  )
-//  public static int getFrequency()
-//  public static int getCustomFrequency()
-//  public static void setCustomFrequency(int  )
-//  public static boolean getHideLearned()
-//  public static boolean toggleHideLearned()
+//  public int getColorScheme()
+//  public String getColorSchemeName()
+//  public String getThemeCSS()
+//  public void setColorScheme(int  )
+//  public void setupPracticeBack(RelativeLayout  )
+//  public void setupColorScheme(RelativeLayout  )
+//  public void setupColorScheme(RelativeLayout  ,View  )
+//  public void setupColorScheme(RelativeLayout  ,View  )
+//  public void setRadioColors(XflashRadio[]  )
+//  public int[] getIcons()
 //
-//  public static void throwBadValue(String  ,int  )
+//  public int getStudyMode()
+//  public String getStudyModeName()
+//  public void setStudyMode(int  )
+//  public int getStudyLanguage()
+//  public String getStudyLanguageName()
+//  public void setStudyLanguage(int  )
+//  public int getCurrentUserId()
+//  public void setCurrentUserId(int  )
+//  public int getReadingMode()
+//  public String getReadingModeName()
+//  public void setReadingMode(int  )
+//  public int getAnswerTextSize()
+//  public int getAnswerTextLabel()
+//  public String getAnswerSizeCSS()
+//  public void setAnswerText(int  )
+//  public int getDifficultyMode()
+//  public void setDifficultyMode(int  )
+//  public int getStudyPool()
+//  public int getCustomStudyPool()
+//  public void setCustomStudyPool(int  )
+//  public int getFrequency()
+//  public int getCustomFrequency()
+//  public void setCustomFrequency(int  )
+//  public boolean getHideLearned()
+//  public boolean toggleHideLearned()
+//
+//  private void throwBadValue(String  ,int  )
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -165,6 +168,27 @@ public class XflashSettings
     }  // end load()
 
 
+    // called to display the opening dialog, if necessary
+    public static void checkFirstRun()
+    {
+        // get a Context, get the SharedPreferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        boolean hasRanBefore = settings.contains("has_ran");
+
+        if( !hasRanBefore )
+        {
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("has_ran",true);
+            editor.commit();        
+
+            XflashAlert.fireFirstRun();
+        }
+
+    }  // end checkFirstRun()
+
+ 
     // called when any Fragment is setting a new Tag to study
     public static void setActiveTag(Tag inTag)
     {
@@ -199,39 +223,25 @@ public class XflashSettings
     // loads and returns XflashSettings.activeTag
     public static Tag getActiveTag()
     {
-        Log.d(MYTAG,">>> in getActiveTag()");
-        
         // if active tag is null, pull the default (Long Weekend Favorites)
         if( ( activeTag == null ) || ( activeTag.getCardCount() < 1 ) )
         {
-            Log.d(MYTAG,">   loading new Tag");
             // get a Context, get the SharedPreferences
             XFApplication tempInstance = XFApplication.getInstance();
             SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
             
             // pull the saved tag id, default to 'Long Weekend Favorites'
             int tempTagId = settings.getInt("active_tag",Tag.DEFAULT_TAG_ID);
-            Log.d(MYTAG,">   pulled id: " + tempTagId + " from SharedPreferences");
            
             // TODO - bug, pain in the ass
             tempTagId = checkForBug(tempTagId); 
             
             activeTag = TagPeer.retrieveTagById(tempTagId);
-
-            Log.d(MYTAG,">   returning Tag:  " + activeTag.getName() );
-            
             activeTag.populateCards();
-        }
-        else
-        {
-            Log.d(MYTAG,">   activeTag NOT NULL, returning Tag: " + activeTag.getName() );
         }
             
         // TODO - another bug check
         activeTag = checkForAnotherBug(activeTag);
-        
-        Log.d(MYTAG,".");
-        Log.d(MYTAG,".");
         
         return activeTag;
 
@@ -273,12 +283,6 @@ public class XflashSettings
         if( inId > maxTagId )
         {
             // got a problem! substitute "Long Weekend Favorites"
-            Log.d(MYTAG,".");
-            Log.d(MYTAG,">>> checkForBug()");
-            Log.d(MYTAG,">   ID pulled from saved settings: " + inId);
-            Log.d(MYTAG,">   MAX tag_id pulled from db:     " + maxTagId);
-            Log.d(MYTAG,".");
-       
             return Tag.DEFAULT_TAG_ID;
         }
         else
@@ -854,7 +858,7 @@ public class XflashSettings
 
     // method to throw an exception when attempting to set any of the
     // settings to an invalid value
-    public static void throwBadValue(String method,int value)
+    private static void throwBadValue(String method,int value)
     {
         String error = "invalid value passed to XflashSettings." + method + "(" + value + ")";
         

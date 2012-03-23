@@ -285,8 +285,6 @@ public class Tag
 
         if( tempCardsArray != null)
         {
-            Log.d(MYTAG,">>> it's not null???");
-            
             // delete the PLIST now that we have it in memory
             String tempFile = "ids.plist";
             XFApplication.getInstance().deleteFile(tempFile);         

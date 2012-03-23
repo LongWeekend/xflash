@@ -148,16 +148,12 @@ public class TagPeer
         // first check whether the removed card is in the active tag
         if( tagIsActive )
         {
-            Log.d(MYTAG,"editing current set tags");
-
             // TODO - keep an eye on this: in Obj C this is an SQL call to
             //      - get the card count, but I don't think it's required
             
             // if we're downt to the last card
             if( inTag.getCardCount() <= 1 )
             {
-                Log.d(MYTAG,"last card in set");
-
                 // this is the last card, abort!
                 XflashAlert.fireLastCardDialog(inTag);
 
