@@ -44,11 +44,6 @@ public class ExampleSentence
 
 
     // takes a sqlite Cursor  and populates the properties of the example sentence
-    //
-    //              expect that the incoming Cursor has already been 
-    //              handled appropriately and prepared with moveToFirst()
-
-    // TODO - has not been properly tested yet due to lack of appropriate database
     public void hydrate(Cursor inCursor)
     {
         int tempColumn = inCursor.getColumnIndex("sentence_id");

@@ -69,9 +69,8 @@ public class UserPeer
     public static User createUserWithNickname(String inName,String inPath)
     {
         // TODO - an user name is precisely the kind of scenario when we'd like to
-        //      - use parameter binding, but date is an issue.  Trust in the users,
-        //      - or add a bunch of java code to format a date string locally to
-        //      - allow us to use ContentValues?
+        //      - use parameter binding, but for reasons as yet unknown, it just
+        //      - doesn't work when I use parameter binding
 
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         

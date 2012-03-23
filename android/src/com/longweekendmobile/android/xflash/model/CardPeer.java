@@ -108,7 +108,6 @@ public class CardPeer
 
     }  // end keywordIsReading()
 
-    // TODO - see note on keywordIsReading() above
     @SuppressWarnings("unused")
     public static boolean keywordIsHeadword(String inKey)
     {

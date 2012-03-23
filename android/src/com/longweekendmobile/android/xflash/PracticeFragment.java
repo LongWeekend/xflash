@@ -118,13 +118,6 @@ public class PracticeFragment extends Fragment
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
-        // TODO - we always need to load currentCard, but not currentTag
-        //
-        //      - I could make a new broadcast and listener so PracticeFragment
-        //      - only loads a new Tag when someone calls XflashAlert.startStudying(),
-        //      - but I feel that would more than cancel any optimization gained
-        //      - by not making this call
-        
         // if there is no tag loaded, default to Long Weekend Favorites
         currentTag = XflashSettings.getActiveTag();           
         currentCard = (JapaneseCard)XflashSettings.getActiveCard();
@@ -736,7 +729,6 @@ public class PracticeFragment extends Fragment
         }  // end PracticeScreen.toggleReading()
 
         
-        // TODO - keep track of right / wrong/ streak
         // show the big summary dialog
         public static void showSummary()
         {

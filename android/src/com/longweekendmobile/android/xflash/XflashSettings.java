@@ -226,6 +226,7 @@ public class XflashSettings
             Log.d(MYTAG,">   activeTag NOT NULL, returning Tag: " + activeTag.getName() );
         }
             
+        // TODO - another bug check
         activeTag = checkForAnotherBug(activeTag);
         
         Log.d(MYTAG,".");
@@ -288,7 +289,7 @@ public class XflashSettings
     }  // end checkForBug()
 
 
-    // TODO - another bug
+    // TODO - another bug check
     private static Tag checkForAnotherBug(Tag inTag)
     {
         // until I get the bug sorted out in TagPeer.cancelMembership()
@@ -319,7 +320,7 @@ public class XflashSettings
     }
 
     
-    // TODO - this probably will migrate out of XflashSettings shortly
+    // return the currently active Card
     public static Card getActiveCard()
     {
         // when we get the active card, if it's null, pull the

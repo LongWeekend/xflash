@@ -256,9 +256,10 @@ public class TagFragment extends Fragment
     {
         super.onDestroyView();
 
-        // free static layout resources
         // TODO - temporary fix, would be perferable to refactor TagSearch
         //      - to use no static layout variables
+        
+        // free static layout resources
         tagLayout = null;
         tagList = null;
         TagSearch.dump();
@@ -364,7 +365,6 @@ public class TagFragment extends Fragment
         // if we need to refresh our arrays due to a change
         if( needLoad )
         {
-            // TODO - I feel like there MUST be a better way to do this
             rawTagArray = currentGroup.childTags();
             userTagArray = new ArrayList<Tag>();
         
@@ -509,8 +509,6 @@ public class TagFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    // TODO - the compiler is claiming this is a static
-                    //      - context, not sure why
                     goTagCards(v);
                 }
             });
@@ -732,9 +730,7 @@ public class TagFragment extends Fragment
                 @Override
                 public void run()
                 {
-                    // TODO - move this conditional outside of the post when
-                    //      - we can base it on something not tied to 
-                    //      - view instantiation
+                    // open the keyboard if there is no data
                     if( searchText.length() == 0 )
                     {
                         searchText.requestFocus();

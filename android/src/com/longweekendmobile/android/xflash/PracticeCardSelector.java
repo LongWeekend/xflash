@@ -79,8 +79,7 @@ public class PracticeCardSelector
         setNextBrowseCard(tempTag,inDirection);
     }
 
-    // TODO - this actually works, the rest of the class is untested
-
+    
     // set the active card to the next in currentTag, by direction
     public static void setNextBrowseCard(Tag currentTag,int inDirection)
     {

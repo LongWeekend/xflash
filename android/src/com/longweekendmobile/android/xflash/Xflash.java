@@ -92,9 +92,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // clear the active tag since we're quitting
         XflashSettings.clearActiveTag();
 
-        // TODO - I don't like this
-        
-        // wipes the currentGroup of the tag tab on app exit, necessary becaus of
+        // wipes the currentGroup of the tag tab on app exit, necessary because of
         // static properties: if they exit the app in a group not the topLeveLGroup,
         // that group will then be reloaded as the root view for the tag tab if
         // the app is restarted while TagFragment is still loaded to the VM
