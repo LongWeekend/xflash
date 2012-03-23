@@ -16,6 +16,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void setRight()
 //  public static void setWrong()
 //  public static void setGoAway()
+//  public static void summaryPassThrough()
 //
 //  private static void reveal()
 //  private static void toggleReading()
@@ -262,6 +263,13 @@ public class PracticeFragment extends Fragment
     }  // end setGoAway()
 
 
+    // called when the count bar is pressed in ExampleSentenceFragment
+    public static void summaryPassThrough()
+    {
+        PracticeScreen.showSummary();
+    }
+    
+    
     // called by Xflash when someone clicks 'tap for answer'
     private static void reveal()
     {
@@ -871,7 +879,7 @@ public class PracticeFragment extends Fragment
 
             // set the streak
             String streak = null;
-            if( ( rightStreak < 1 ) && ( wrongStreak < 1 ) )
+            if( ( rightStreak < 2 ) && ( wrongStreak < 2 ) )
             {
                 // don't display a streak unless it's at least 2 in a row
                 streak = "-";

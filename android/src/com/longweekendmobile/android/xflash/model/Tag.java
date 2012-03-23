@@ -221,6 +221,7 @@ public class Tag
     }  // end recacheCardCountForEachLevel() 
    
 
+/*
     // loads a serialized copy of cardsByLevel from a file 'ids.plist'
     // TODO - performance on ObjectInputStream is horrible, hand-code 
     //        a serialization or don't worry about it?
@@ -277,10 +278,12 @@ public class Tag
 
     }  // end freezeCards()
 
+*/
     
     // executed when loading a new set on app load
     public void populateCards()
     {
+/*
         ArrayList<ArrayList<Card>> tempCardsArray = thawCards();
 
         if( tempCardsArray != null)
@@ -296,6 +299,8 @@ public class Tag
         }
         
         cardsByLevel = tempCardsArray;
+*/
+        cardsByLevel = CardPeer.retrieveCardsSortedByLevelForTag(this);
         flattenedCardArray = flattenCardArrays();
         
         // populate card level counts

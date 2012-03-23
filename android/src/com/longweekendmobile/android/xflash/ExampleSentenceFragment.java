@@ -206,6 +206,17 @@ public class ExampleSentenceFragment extends Fragment
 
         }  // end for loop
 
+        // set a click listerer to fire the Practice summary
+        LinearLayout countBar = (LinearLayout)ESlayout.findViewById(R.id.example_sentence_bar);
+        countBar.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                PracticeFragment.summaryPassThrough();
+            }
+        });
+
     }  // end refreshCountBar()
 
     
