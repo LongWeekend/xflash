@@ -13,6 +13,8 @@ package com.longweekendmobile.android.xflash.model;
 //  public int groupId()
 //  public boolean isEditable()
 //  public int getSeenCardCount()
+//  public boolean needShowAllLearned()
+//  public void resetAllLearned()
 //
 //  public void recacheCardCountForEachLevel()
 //  public ArrayList<ArrayList<Integer>> thawCards(Context  )
@@ -101,6 +103,34 @@ public class Tag
     }
 
 
+    // calls a GroupPeer object to query the database, returns the id
+    // of the Group that this Tag belongs to
+    public int groupId()
+    {
+        // TODO: all of this makes the assumption that tags are 
+        // 1-1 with groups.  that was not the original design, 
+        // but are we moving that direction?  MMA - Oct 19 2011
+
+        return GroupPeer.parentGroupIdOfTag(this);
+    }
+
+    
+    // returns a boolean if this object's tagEditable is 1
+    public boolean isEditable()
+    {
+        return ( tagEditable == 1 );
+    }
+
+    
+    // returns how many cards have been seen so far
+    public int getSeenCardCount()
+    {
+        return ( cardCount - cardLevelCounts.get(kLWEUnseenCardLevel) );
+    }
+
+
+    // returns true if we need to show the all-learned alert (i.e. if they
+    // have learned all cards, and it has NOT been shown yet
     public boolean needShowAllLearned()
     {
         boolean levelsAreZero = true;
@@ -132,6 +162,9 @@ public class Tag
     
     // called by PracticeFragment when user gets a card wrong, to ensure
     // the learned dialog is re-shown if necessary
+    //
+    // NOTE: Tags keep track of whether or not they have been shown due
+    // to issues presented with PracticeFragment fully reloading on change
     public void resetAllLearned()
     {
         learnedShowedAlready = false;
@@ -143,30 +176,6 @@ public class Tag
     public boolean isEqual(Tag inTag)
     {
         return ( tagId == inTag.tagId );        
-    }
-
-
-    // calls a GroupPeer object to query the database, returns the id
-    // of the Group that this Tag belongs to
-    public int groupId()
-    {
-        // TODO: all of this makes the assumption that tags are 
-        // 1-1 with groups.  that was not the original design, 
-        // but are we moving that direction?  MMA - Oct 19 2011
-
-        return GroupPeer.parentGroupIdOfTag(this);
-    }
-
-    // returns a boolean if this object's tagEditable is 1
-    public boolean isEditable()
-    {
-        return ( tagEditable == 1 );
-    }
-
-    // not ENTIRELY sure what's going on here yet
-    public int getSeenCardCount()
-    {
-        return ( cardCount - cardLevelCounts.get(kLWEUnseenCardLevel) );
     }
 
 

@@ -13,6 +13,9 @@ package com.longweekendmobile.android.xflash;
 //  public boolean onOptionsItemSelected(MenuItem  )                    @over
 //
 //  public static void setPracticeBlank()
+//  public static void setRight()
+//  public static void setWrong()
+//  public static void setGoAway()
 //
 //  private static void reveal()
 //  private static void toggleReading()
@@ -88,10 +91,9 @@ public class PracticeFragment extends Fragment
     public static final int LEARNED_INDEX = 4;
     
     private static Observer subscriptionObserver = null;
+    private static Observer activeTagObserver = null;
     
-    private static int[] cardCounts = { 1, 2, 3, 4, 5 };
-    
-    private static int percentageRight = 100;
+    private static int percentageRight = 0;
     private static int rightStreak = 0;
     private static int wrongStreak = 0;
     private static int numRight = 0;
@@ -220,6 +222,43 @@ public class PracticeFragment extends Fragment
         practiceViewStatus = PRACTICE_VIEW_BLANK;
     }
 
+    // TODO - BUG, these don't always fire
+
+    // methods for PracticeFragment and ExampleSentence to respond
+    // to user right / wrong/ goaway choices
+    public static void setRight()
+    {
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.recordCorrectForCard(currentCard,currentTag);
+
+    }  // end setRight()
+
+    public static void setWrong()
+    {
+        ++numWrong;
+        ++numViewed;
+        ++wrongStreak;
+        rightStreak = 0;
+        UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
+        
+        // reset our all-learned flag
+        currentTag.resetAllLearned();
+
+    }  // end setWrong()
+
+    public static void setGoAway()
+    {
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.buryCard(currentCard,currentTag);
+
+    }  // end setGoAway()
+
 
     // called by Xflash when someone clicks 'tap for answer'
     private static void reveal()
@@ -233,27 +272,13 @@ public class PracticeFragment extends Fragment
     {
         switch( v.getId() )
         {
-            case R.id.optionblock_right:    ++numRight;
-                                            ++numViewed;
-                                            ++rightStreak;
-                                            wrongStreak = 0;
-                                            UserHistoryPeer.recordCorrectForCard(currentCard,currentTag);
+            case R.id.optionblock_right:    setRight();
                                             break;
             
-            case R.id.optionblock_wrong:    ++numWrong;
-                                            ++numViewed;
-                                            ++wrongStreak;
-                                            rightStreak = 0;
-                                            UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
-                                            // reset our all-learned flag
-                                            currentTag.resetAllLearned();
+            case R.id.optionblock_wrong:    setWrong();
                                             break;
 
-            case R.id.optionblock_goaway:   ++numRight;
-                                            ++numViewed;
-                                            ++rightStreak;
-                                            wrongStreak = 0;
-                                            UserHistoryPeer.buryCard(currentCard,currentTag);
+            case R.id.optionblock_goaway:   setGoAway();
                                             break;
 
             default:    Log.d(MYTAG,"ERROR - practiceClick() passed invalied button id");
@@ -261,15 +286,15 @@ public class PracticeFragment extends Fragment
         }  // end switch( practice button )
 
         // load the next practice view without adding to the back stack
-        practiceViewStatus = PRACTICE_VIEW_BLANK;
         PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
         
+        practiceViewStatus = PRACTICE_VIEW_BLANK;
         XflashScreen.setPracticeOverride();
         Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
 
     }  // end practiceClick()
 
-
+    
     // method called when any button in the options block is clicked
     private static void browseClick(View v)
     {
@@ -297,7 +322,6 @@ public class PracticeFragment extends Fragment
     private static void goRight()
     {
         // load the ExampleSentenceFragment to the fragment tab manager
-        ExampleSentenceFragment.loadCard(currentCard,cardCounts);
         Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 
@@ -390,6 +414,21 @@ public class PracticeFragment extends Fragment
             theNotifier.addSubscriptionObserver(subscriptionObserver);
 
         }  // end if( subscriptionObserver == null )
+    
+        if( activeTagObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            activeTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromActiveTagObserver();
+                }
+            };
+
+            theNotifier.addActiveTagObserver(activeTagObserver);
+
+        }  // end if( activeTagObserver == null )
 
     }  // end setupObservers()
 
@@ -435,6 +474,20 @@ public class PracticeFragment extends Fragment
 
     }  // end updateFromSubscriptionObserver()
 
+
+    private void updateFromActiveTagObserver()
+    {
+        // when a new tag is set to active, reset all relevant values
+        percentageRight = 0;
+        rightStreak = 0;
+        wrongStreak = 0;
+        numRight = 0;
+        numWrong = 0;
+        numViewed = 0;
+    
+        XflashScreen.resetPracticeScreen();
+
+    }  // end updateFromStartStudyingObserver()
 
     
     // class to manage screen setup
@@ -521,6 +574,8 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo = (TextView)practiceLayout.findViewById(R.id.practice_tag_count);
             tempPracticeInfo.setText(tempString);
 
+            percentageRight = (int)( 100 * ( (float)numRight / (float)numViewed ) );
+            
             // set all of our click listeners
             PracticeScreen.setClickListeners();
             
@@ -603,7 +658,8 @@ public class PracticeFragment extends Fragment
                 // set the label numbers
                 TextView tempCount = (TextView)practiceLayout.findViewById( cardCountViews[i - 1] );
                 tempCount.setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
-            }
+
+            }  // end for loop
 
         }  // end refreshCountBar()
 
@@ -751,7 +807,7 @@ public class PracticeFragment extends Fragment
             builder = new AlertDialog.Builder(inContext);
             builder.setView(layout);
 
-            AlertDialog summaryDialog = builder.create();
+            final AlertDialog summaryDialog = builder.create();
             summaryDialog.show();
 
             // we cannot reference our buttons until after the dialog.show()
@@ -814,8 +870,9 @@ public class PracticeFragment extends Fragment
 
             // set the streak
             String streak = null;
-            if( ( rightStreak == 0 ) && ( wrongStreak == 0 ) )
+            if( ( rightStreak < 1 ) && ( wrongStreak < 1 ) )
             {
+                // don't display a streak unless it's at least 2 in a row
                 streak = "-";
             }
             else if( rightStreak > 0 )
@@ -870,10 +927,18 @@ public class PracticeFragment extends Fragment
                 tempView = (TextView)summaryDialog.findViewById( valuesViews[i] );
                 tempView.setText(toSet);
             } 
+           
+            // set the cancel button
+            ImageButton cancelButton = (ImageButton)summaryDialog.findViewById(R.id.summary_cancel);
+            cancelButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    summaryDialog.dismiss();
+                }
+            });
             
-            
-            // asdf
-
         }  // end showSummary()
   
 

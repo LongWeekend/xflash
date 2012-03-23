@@ -89,11 +89,11 @@ public class XflashSettings
     // color scheme, i.e.  { LWE_THEME_RED , LWE_THEME_BLUE , LWE_THEME_TAME }
     // so that we can use colorScheme directly
     private static int[] backgroundIds = { R.drawable.practice_bg_red , R.drawable.practice_bg_blue , 
-                                               R.drawable.practice_bg_tame };
+                                           R.drawable.practice_bg_tame };
     private static int[] viewGradients = { R.drawable.gradient_red , R.drawable.gradient_blue ,
-                                               R.drawable.gradient_tame };
+                                           R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
-                                                 R.drawable.button_tame };
+                                             R.drawable.button_tame };
 
     // properties for global app settings
     private static int colorScheme = -1;
@@ -190,7 +190,8 @@ public class XflashSettings
         // the practice screen count
         activeTag.setCurrentIndex(0);
         activeCard = activeTag.flattenedCardArray.get(0);
-        XflashScreen.resetPracticeScreen();
+
+        XFApplication.getNotifier().activeTagBroadcast();
        
     }  // end setActiveTag()
 
