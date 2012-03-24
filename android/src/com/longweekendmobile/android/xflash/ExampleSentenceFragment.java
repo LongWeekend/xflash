@@ -213,7 +213,7 @@ public class ExampleSentenceFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                PracticeFragment.summaryPassThrough();
+                PracticeScreen.showSummary();
             }
         });
 

@@ -197,7 +197,7 @@ public class AddCardToTagFragment extends Fragment
 
         ImageView tempImage = (ImageView)tempRow.findViewById(R.id.addcard_row_checked);
         
-        if( TagPeer.cardIsInTag(currentCard,tempTag) )
+        if( TagPeer.cardIsMemberOfTag(currentCard,tempTag) )
         {
             // if the card is already subscribed, remove it
             if( TagPeer.cancelMembership(currentCard,tempTag) )
@@ -255,7 +255,7 @@ public class AddCardToTagFragment extends Fragment
 
             // set the visibility for our check
             ImageView tempImage = (ImageView)tempRow.findViewById(R.id.addcard_row_checked);
-            if( TagPeer.cardIsInTag(currentCard,tempTag) )
+            if( TagPeer.cardIsMemberOfTag(currentCard,tempTag) )
             {
                 tempImage.setVisibility(View.VISIBLE);
             }

@@ -57,7 +57,6 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void throwBadValue(String  ,int  )
 
-import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
