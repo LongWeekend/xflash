@@ -21,11 +21,14 @@ package com.longweekendmobile.android.xflash;
 //  public void subscriptionBroadcast(Card  )
 //  public void addTagSearchObserver(Observer  )
 //  public void tagSearchBroadcast(Integer  )
+//  public void addOnStopObserver(Observer  )
+//  public void onStopBroadcast()
 //
 //  private class NewTagNotifier extends Observable
 //  private class ActiveTagNotifier extends Observable
 //  private class SubscriptionNotifier extends Observable
 //  private class TagSearchNotifier extends Observable
+//  private class OnStopNotifier extends Observable
 
 import java.util.Observable;
 import java.util.Observer;
@@ -47,6 +50,7 @@ public class XflashNotification
     private ActiveTagNotifier activeTagObserver = null;
     private SubscriptionNotifier subscriptionObserver = null;
     private TagSearchNotifier tagSearchObserver = null;
+    private OnStopNotifier onStopObserver = null;
     
     public XflashNotification()
     {
@@ -54,6 +58,7 @@ public class XflashNotification
         activeTagObserver = new ActiveTagNotifier();
         subscriptionObserver = new SubscriptionNotifier();
         tagSearchObserver = new TagSearchNotifier();
+        onStopObserver = new OnStopNotifier();
     }
     
     // basic getters/setters for broadcasts
@@ -129,6 +134,16 @@ public class XflashNotification
     }
    
 
+    public void addOnStopObserver(Observer inObserver)
+    {
+        onStopObserver.addObserver(inObserver);
+    }
+    public void onStopBroadcast()
+    {
+        onStopObserver.broadcastNotification();
+    }
+   
+
     // Observable class to handle new tag notifications
     private class NewTagNotifier extends Observable
     {
@@ -180,6 +195,20 @@ public class XflashNotification
         {
             setChanged();
             notifyObservers(inInteger);
+        }
+
+    }  // end TagSearchNotifier class declaration
+
+
+    // Observable class to handle app-wide onStop notifications
+    private class OnStopNotifier extends Observable
+    {
+        public OnStopNotifier()  { }
+
+        public void broadcastNotification()
+        {
+            setChanged();
+            notifyObservers();
         }
 
     }  // end TagSearchNotifier class declaration

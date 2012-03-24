@@ -23,6 +23,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private static void launchBrowseCard(int  )
 //
+//  private void loadSavedPracticeValues()
 //  private void toggleCardStarred()
 //  private void launchAddCard()
 //  private void fixCardEmail()
@@ -35,6 +36,7 @@ import java.util.Observer;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -63,6 +65,7 @@ public class PracticeFragment extends Fragment
     
     private static Observer subscriptionObserver = null;
     private static Observer activeTagObserver = null;
+    private static Observer onStopObserver = null;
     
     // made public for access in PracticeScreen
     public static int rightStreak = 0;
@@ -110,6 +113,7 @@ public class PracticeFragment extends Fragment
         } 
     
         // load all view elements and set up based on view status
+        loadSavedPracticeValues();
         PracticeScreen.initialize(practiceLayout,currentTag,currentCard);
         PracticeScreen.setupPracticeView(practiceViewStatus);
 
@@ -118,25 +122,11 @@ public class PracticeFragment extends Fragment
             XflashAlert.fireTagLearned(currentTag);
         }
 
-        // display dialog on first-run or update
-        XflashSettings.updateCheck();
-        //                   ^^^^ 
-        // TODO - can we put this in Xflash so it isn't called every damn
-        //      - time we load a new Card?  ( Fragments! Grar. )
-        //      -
-        //      - amusingly, this rampant detach/attach every time we swap to
-        //      - a new card (and all associated heavy system/battery demands 
-        //      - for view chnstruction/garbage collection) is wholly unnecessary 
-        //      - for the core functionality of the app; the only purpose it
-        //      - serves is to emulate the iPhone-esque animated transitions 
-        //      - inside a tab. Otherwise we could just reset the views, AND
-        //      - do away with the need to store activeTab/activeCard elsewhere
-        
         return practiceLayout;
 
     }  // end onCreateView()
 
-   
+
     @Override
     public void onDestroyView()
     {
@@ -309,6 +299,42 @@ public class PracticeFragment extends Fragment
     } 
 
 
+    // check/load saved practice counts from previous app exit
+    private void loadSavedPracticeValues()
+    {
+        // check for a saved index
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        // if there was anything index saved
+        if( settings.contains("current_index") )
+        {
+            // set the index left on app exit
+            int tempIndex = settings.getInt("current_index",0);
+            currentTag.setCurrentIndex(tempIndex);
+
+            // load the various card summary/count values
+            rightStreak = settings.getInt("right_streak",0);
+            wrongStreak = settings.getInt("wrong_streak",0);
+            numRight    = settings.getInt("num_right",0);
+            numWrong    = settings.getInt("num_wrong",0);
+            numViewed   = settings.getInt("num_viewed",0);
+            
+            // clear the saved values
+            SharedPreferences.Editor editor = settings.edit();
+            editor.remove("current_index");
+            editor.remove("right_streak");
+            editor.remove("wrong_streak");
+            editor.remove("num_right");
+            editor.remove("num_wrong");
+            editor.remove("num_viewed");
+            
+            editor.commit();
+        }
+
+    }  // end loadSavedPracticeValues()
+
+
     // toggles a card's starred status from the options menu
     private void toggleCardStarred()
     {
@@ -400,7 +426,7 @@ public class PracticeFragment extends Fragment
     
         if( activeTagObserver == null )
         {
-            // create and define behavior for newTagObserver
+            // create and define behavior for activeTagObserver 
             activeTagObserver = new Observer()
             {
                 public void update(Observable obj,Object arg)
@@ -410,6 +436,21 @@ public class PracticeFragment extends Fragment
             };
 
             theNotifier.addActiveTagObserver(activeTagObserver);
+
+        }  // end if( activeTagObserver == null )
+
+        if( onStopObserver == null )
+        {
+            // create and define behavior for onStopObserver
+            onStopObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromOnStopObserver();
+                }
+            };
+
+            theNotifier.addOnStopObserver(onStopObserver);
 
         }  // end if( activeTagObserver == null )
 
@@ -470,6 +511,34 @@ public class PracticeFragment extends Fragment
         XflashScreen.resetPracticeScreen();
 
     }  // end updateFromStartStudyingObserver()
+
+
+    // unfortunately we have to rely on a dispatch from Xflash to determine 
+    // whether the app is paused/stopped due to how frequently we will be
+    // cycling this fragment's lifecycle
+    // otherwise we'd be saving the browse index ever single time the user
+    // navigated to different card
+    private void updateFromOnStopObserver()
+    {
+        // save the current card index
+        // NOTE - current tag index is saved automatically 
+        //      - in XflashSettings.setActiveTag()
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("current_index", currentTag.getCurrentIndex() );
+
+        // save the various card summary/count values
+        editor.putInt("right_streak",rightStreak);
+        editor.putInt("wrong_streak",wrongStreak);
+        editor.putInt("num_right",numRight);
+        editor.putInt("num_wrong",numWrong);
+        editor.putInt("num_viewed",numViewed);
+    
+        editor.commit();
+
+    }  // end updateFromOnStopObserver()
 
 
 }  // end PracticeFragment class declaration

@@ -80,7 +80,26 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
        
     }  // end onCreate
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();
 
+        // display dialog on first-run or update
+        XflashSettings.updateCheck();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        
+        // when the entire app is paused, notify interested fragments
+        XFApplication.getNotifier().onStopBroadcast();
+
+    }  // end onPause()
+
+    
     @Override
     public void onDestroy()
     {
