@@ -12,6 +12,7 @@
 
 #import "SetupDatabaseHelper.h"
 #import "CardPeer.h"
+#import "JapaneseCard.h"
 
 @implementation JFlashSearchTest
 
@@ -28,7 +29,7 @@
 {
   NSArray *results = [CardPeer searchCardsForKeyword:@"日本語"];
   NSInteger resultCount = [results count];
-  STAssertEquals(1, resultCount, @"JFlash database should return 1 results for search keyword '日本語'");
+  STAssertEquals(resultCount, 1, @"JFlash database should return 1 results for search keyword '日本語'");
 }
 
 - (void) testMatchReadingFirst
@@ -52,6 +53,25 @@
   else
   {
     STFail(@"Couldn't get any cards for search: teru");
+  }
+}
+
+- (void) testChokinFix
+{
+  /**
+   * User reported that "ちょきん" (savings) was in the database as "chikin" (it was).  This
+   * test confirms that it is fixed as of Mar 2012 (MMA).  It was actually a duplicate card 
+   * (didn't match the real card because of the different reading in the first versions).
+   *
+   * Since we have trouble " deleting " cards, I just fixed the card.  This test confirms that.
+   */
+  NSArray *results = [CardPeer searchCardsForKeyword:@"貯金"];
+  STAssertTrue([results count] > 0,@"Should have gotten some results for this search");
+  for (JapaneseCard *card in results)
+  {
+    [card hydrate];
+    // This will be "both" because the "reading" returns the romaji + kana in the ddefault setting
+    STAssertEqualObjects(card.reading,@"ちょきん - chokin",@"Both readings should be chokin.");
   }
 }
 
