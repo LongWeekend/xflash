@@ -119,13 +119,12 @@ public class SearchFragment extends Fragment
     {
         super.onPause();
 
-        // flush the cache array when the search fragment is paused
-        
-        
         // TODO - this forces the adapter to reload the starred words tag into
         //        the cache array when the user returns to this view. Is it 
         //        necessary/desirable to eliminate this forced refresh and rely 
         //        on Observer notifications to maintain the cacheArray instead?
+        
+        // flush the cache array when the search fragment is paused
         membershipCacheArray = null;
 
     }  // end onPause
@@ -159,16 +158,19 @@ public class SearchFragment extends Fragment
         }
         else
         {
-            isMember = TagPeer.card(tempCard,starredTag); 
+            isMember = TagPeer.cardIsInTag(tempCard,starredTag); 
         }
   
 
+        // if the card is currently starred, remove
         if(isMember)
         {
-            // if the card is currently starred, remove
-            TagPeer.cancelMembership(tempCard,starredTag);
-            membershipCacheArray.remove(tempCard);    
-            starImage.setImageResource(R.drawable.star_deselected);
+            if( TagPeer.cancelMembership(tempCard,starredTag) ) 
+            {
+                // only adjust search view if remove is successful
+                membershipCacheArray.remove(tempCard);    
+                starImage.setImageResource(R.drawable.star_deselected);
+            }
         }
         else
         {

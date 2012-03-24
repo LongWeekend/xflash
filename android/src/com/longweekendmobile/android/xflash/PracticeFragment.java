@@ -13,6 +13,10 @@ package com.longweekendmobile.android.xflash;
 //  public boolean onOptionsItemSelected(MenuItem  )                    @over
 //
 //  public static void setPracticeBlank()
+//  public static void setRight()
+//  public static void setWrong()
+//  public static void setGoAway()
+//  public static void summaryPassThrough()
 //
 //  private static void reveal()
 //  private static void toggleReading()
@@ -24,22 +28,34 @@ package com.longweekendmobile.android.xflash;
 //  private void toggleCardStarred()
 //  private void launchAddCard()
 //  private void fixCardEmail()
+//  private void setupObservers()
+//  private void updateFromSubscriptionObserver(Object  )
+//  private void updateFromActiveTagObserver()
 //
 //  private static class PracticeScreen
 //
-//      public static void initialize()
-//      public static void dump()
-//      public static void refreshCountBar()
-//      public static void setupPracticeView(int  )
-//      public static void setAnswerBar(int  )
-//      public static void toggleReading()
+//      public  static void initialize()
+//      public  static void dump()
+//      public  static void refreshCountBar()
+//      public  static void setupPracticeView(int  )
+//      public  static void setAnswerBar(int  )
+//      public  static void toggleReading()
+//      public  static void showSummary()
 //      private static void loadMeaning()
 //      private static void setClickListeners()
 
-import android.os.Bundle;
+import java.util.Observable;
+import java.util.Observer;
+
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,14 +66,17 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 import com.longweekendmobile.android.xflash.model.ExampleSentencePeer;
 import com.longweekendmobile.android.xflash.model.JapaneseCard;
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
+import com.longweekendmobile.android.xflash.model.UserHistoryPeer;
 
 public class PracticeFragment extends Fragment
 {
@@ -67,12 +86,23 @@ public class PracticeFragment extends Fragment
     public static final int PRACTICE_VIEW_BROWSE = 1;
     public static final int PRACTICE_VIEW_REVEAL = 2;
 
-    public static int[] cardCounts = { 1, 2, 3, 4, 5 };
+    public static final int STUDYING_INDEX = 0;
+    public static final int RIGHT1_INDEX = 1;
+    public static final int RIGHT2_INDEX = 2;
+    public static final int RIGHT3_INDEX = 3;
+    public static final int LEARNED_INDEX = 4;
     
-    private static int percentageRight = 100;
+    private static Observer subscriptionObserver = null;
+    private static Observer activeTagObserver = null;
     
-    // TODO - temporarily public so Xflash has access in onCreatePanelMenu()
-    public static int practiceViewStatus = -1;
+    private static int percentageRight = 0;
+    private static int rightStreak = 0;
+    private static int wrongStreak = 0;
+    private static int numRight = 0;
+    private static int numWrong = 0;
+    private static int numViewed = 0;
+    
+    private static int practiceViewStatus = -1;
 
     private static RelativeLayout practiceLayout;
 
@@ -84,11 +114,11 @@ public class PracticeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // TODO - we need to manage whether the options menu is available before
-        //      - reveal, however this is a non-static method and all of our layout
-        //      - changes are still static   >:(
+        // allow this fragment to open the options menu via hardware button
         setHasOptionsMenu(true);
-        
+
+        setupObservers();
+       
         // inflate the layout for our practice activity
         practiceLayout = (RelativeLayout)inflater.inflate(R.layout.practice, container, false);
 
@@ -114,6 +144,14 @@ public class PracticeFragment extends Fragment
         PracticeScreen.initialize();
         PracticeScreen.setupPracticeView(practiceViewStatus);
 
+        if( currentTag.needShowAllLearned() )
+        {
+            XflashAlert.fireTagLearned(currentTag);
+        }
+
+        // display opening dialog if app was just installed
+        XflashSettings.checkFirstRun();
+
         return practiceLayout;
 
     }  // end onCreateView()
@@ -133,8 +171,6 @@ public class PracticeFragment extends Fragment
     }  // end onDestroyView()
 
 
-// TODO - temporarily bypassed by use of Xflash.onCreatePanelMenu()
-/*
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) 
     {
@@ -150,7 +186,7 @@ public class PracticeFragment extends Fragment
         MenuItem starredItem = (MenuItem)menu.findItem(R.id.pm_toggle_starred);
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsInTag(currentCard,starredTag) )
         {
             starredItem.setTitle(R.string.pm_starred_yes);
         }
@@ -160,7 +196,6 @@ public class PracticeFragment extends Fragment
         }
     
     }  // end onPrepareOptionsMenu()
-*/
   
 
     @Override
@@ -173,7 +208,6 @@ public class PracticeFragment extends Fragment
             case R.id.pm_add_tag:           launchAddCard();
                                             return true;
             case R.id.pm_tweet:             Log.d(MYTAG,"> pm_tweet clicked");
-                                            Log.d(MYTAG,".");
                                             return true;
             case R.id.pm_fix:               fixCardEmail();
                                             return true;
@@ -193,6 +227,49 @@ public class PracticeFragment extends Fragment
     }
 
 
+    // methods for PracticeFragment and ExampleSentence to respond
+    // to user right / wrong/ goaway choices
+    public static void setRight()
+    {
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.recordCorrectForCard(currentCard,currentTag);
+
+    }  // end setRight()
+
+    public static void setWrong()
+    {
+        ++numWrong;
+        ++numViewed;
+        ++wrongStreak;
+        rightStreak = 0;
+        UserHistoryPeer.recordWrongForCard(currentCard,currentTag);
+        
+        // reset our all-learned flag
+        currentTag.resetAllLearned();
+
+    }  // end setWrong()
+
+    public static void setGoAway()
+    {
+        ++numRight;
+        ++numViewed;
+        ++rightStreak;
+        wrongStreak = 0;
+        UserHistoryPeer.buryCard(currentCard,currentTag);
+
+    }  // end setGoAway()
+
+
+    // called when the count bar is pressed in ExampleSentenceFragment
+    public static void summaryPassThrough()
+    {
+        PracticeScreen.showSummary();
+    }
+    
+    
     // called by Xflash when someone clicks 'tap for answer'
     private static void reveal()
     {
@@ -203,33 +280,36 @@ public class PracticeFragment extends Fragment
     // method called when any button in the options block is clicked
     private static void practiceClick(View v)
     {
-        // TODO - temporary, evolving as we go
-        if( v.getId() == R.id.optionblock_actions )
+        switch( v.getId() )
         {
-            Xflash.getActivity().openOptionsMenu();
-        }
-        else
-        {
+            case R.id.optionblock_right:    setRight();
+                                            break;
+            
+            case R.id.optionblock_wrong:    setWrong();
+                                            break;
 
+            case R.id.optionblock_goaway:   setGoAway();
+                                            break;
+
+            default:    Log.d(MYTAG,"ERROR - practiceClick() passed invalied button id");
         
-        // load the next practice view without adding to the back stack
-        XflashScreen.setPracticeOverride();
-        practiceViewStatus = PRACTICE_VIEW_BLANK;
-        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+        }  // end switch( practice button )
 
-        }
+        // load the next practice view without adding to the back stack
+        PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+        
+        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        XflashScreen.setPracticeOverride();
+        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
 
     }  // end practiceClick()
 
-
+    
     // method called when any button in the options block is clicked
     private static void browseClick(View v)
     {
         switch( v.getId() )
         {
-            case R.id.browseblock_actions:  Xflash.getActivity().openOptionsMenu();
-                                            break;
-            
             case R.id.browseblock_last:     launchBrowseCard(XflashScreen.DIRECTION_CLOSE);
                                             break;
             
@@ -252,7 +332,6 @@ public class PracticeFragment extends Fragment
     private static void goRight()
     {
         // load the ExampleSentenceFragment to the fragment tab manager
-        ExampleSentenceFragment.loadCard(currentCard,cardCounts);
         Xflash.getActivity().onScreenTransition("example_sentence",XflashScreen.DIRECTION_OPEN);
     }
 
@@ -262,7 +341,7 @@ public class PracticeFragment extends Fragment
     {
         Tag starredTag = TagPeer.starredWordsTag();
 
-        if( TagPeer.card(currentCard,starredTag) )
+        if( TagPeer.cardIsInTag(currentCard,starredTag) )
         {
             TagPeer.cancelMembership(currentCard,starredTag);
         }
@@ -325,7 +404,100 @@ public class PracticeFragment extends Fragment
         Xflash.getActivity().startActivity(myIntent);
 
     }  // end fixCardEmail()
+   
+
+    private void setupObservers()
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+
+        if( subscriptionObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            subscriptionObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromSubscriptionObserver(arg);
+                }
+            };
+
+            theNotifier.addSubscriptionObserver(subscriptionObserver);
+
+        }  // end if( subscriptionObserver == null )
     
+        if( activeTagObserver == null )
+        {
+            // create and define behavior for newTagObserver
+            activeTagObserver = new Observer()
+            {
+                public void update(Observable obj,Object arg)
+                {
+                    updateFromActiveTagObserver();
+                }
+            };
+
+            theNotifier.addActiveTagObserver(activeTagObserver);
+
+        }  // end if( activeTagObserver == null )
+
+    }  // end setupObservers()
+
+
+    private void updateFromSubscriptionObserver(Object passedObject)
+    {
+        XflashNotification theNotifier = XFApplication.getNotifier();
+        
+        // only concern ourselves if the active tag changed
+        if( currentTag.getId() == theNotifier.getTagIdPassed() )
+        {
+            JapaneseCard theCard = (JapaneseCard)passedObject;
+            theCard.hydrate();
+
+            if( theNotifier.getCardWasAdded() )
+            {
+                currentTag.addCardToActiveSet(theCard);
+            }
+            else
+            {
+                // if the card was removed from the active set
+                currentTag.removeCardFromActiveSet(theCard);
+
+                // if they are removing the card we're actually showing,
+                // get a new card
+                if( currentCard.equals(theCard) )
+                {
+                    PracticeCardSelector.setNextPracticeCard(currentTag,currentCard);
+                    
+                    // if we're actually on the practice tab right now, force
+                    // reload of new card
+                    if( practiceLayout != null )
+                    {
+                        practiceViewStatus = PRACTICE_VIEW_BLANK;
+        
+                        XflashScreen.setPracticeOverride();
+                        Xflash.getActivity().onScreenTransition("practice",XflashScreen.DIRECTION_OPEN);
+                    }
+                }
+            } 
+
+        }  // end if( card mod to active set ) 
+
+    }  // end updateFromSubscriptionObserver()
+
+
+    private void updateFromActiveTagObserver()
+    {
+        // when a new tag is set to active, reset all relevant values
+        rightStreak = 0;
+        wrongStreak = 0;
+        numRight = 0;
+        numWrong = 0;
+        numViewed = 0;
+    
+        XflashScreen.resetPracticeScreen();
+
+    }  // end updateFromStartStudyingObserver()
+
     
     // class to manage screen setup
     private static class PracticeScreen
@@ -348,7 +520,6 @@ public class PracticeFragment extends Fragment
         private static TextView headwordView = null;
         private static TextView hhView = null;
         private static TextView showReadingText = null;
-        private static TextView[] cardCountViews = { null, null, null, null, null };
 
         public static void initialize()
         {
@@ -360,14 +531,7 @@ public class PracticeFragment extends Fragment
         
             // load the progress count bar
             countBar = (LinearLayout)practiceLayout.findViewById(R.id.count_bar);
-            cardCountViews[0] = (TextView)practiceLayout.findViewById(R.id.study_num);
-            cardCountViews[1] = (TextView)practiceLayout.findViewById(R.id.right1_num);
-            cardCountViews[2] = (TextView)practiceLayout.findViewById(R.id.right2_num);
-            cardCountViews[3] = (TextView)practiceLayout.findViewById(R.id.right3_num);
-            cardCountViews[4] = (TextView)practiceLayout.findViewById(R.id.learned_num);
            
-            refreshCountBar();
-    
             // load the show-reading button
             showReadingButton = (ImageButton)PracticeFragment.practiceLayout.findViewById(R.id.practice_showreadingbutton);
             
@@ -402,13 +566,25 @@ public class PracticeFragment extends Fragment
             tempPracticeInfo.setText( PracticeFragment.currentTag.getName() );
 
             // load the tag card count
-            String tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
+            String tempString = null;
+            if( practiceViewStatus != PRACTICE_VIEW_BROWSE )
+            {
+                tempString = Integer.toString( ( currentTag.getCardCount() - 
+                                                 currentTag.getSeenCardCount() ) );
+            }
+            else
+            {
+                tempString = Integer.toString( PracticeFragment.currentTag.getCurrentIndex() + 1 );
+            }
+
             tempString = tempString + " / ";
             tempString = tempString + Integer.toString( PracticeFragment.currentTag.getCardCount() );
 
             tempPracticeInfo = (TextView)practiceLayout.findViewById(R.id.practice_tag_count);
             tempPracticeInfo.setText(tempString);
 
+            percentageRight = (int)( 100 * ( (float)numRight / (float)numViewed ) );
+            
             // set all of our click listeners
             PracticeScreen.setClickListeners();
             
@@ -433,21 +609,68 @@ public class PracticeFragment extends Fragment
             hhView = null;
             showReadingText = null;
 
-            for(int i = 0; i < 5; i++)
-            {
-                cardCountViews[i] = null;
-            }
-
         }  // end dump()
-        
+       
+
         // set all TextView elements of the count bar to the current values
         private static void refreshCountBar()
         {
-            for(int i = 0; i < 5; i++)
+            int seenCardCount = currentTag.getSeenCardCount();
+            int thisLevelCount = seenCardCount;
+            
+            int progressBars[] = { R.id.study_progress, R.id.right1_progress, R.id.right2_progress,
+                                   R.id.right3_progress, R.id.learned_progress };
+
+            int cardCountViews[] = { R.id.study_num, R.id.right1_num, R.id.right2_num,
+                                     R.id.right3_num, R.id.learned_num };
+
+            // I *think* this is operating the way you want it to... though I 
+            // completely fail to understand what we're displaying, so I'm not sure
+            for(int i = 1; i < 6; i++)
             {
-                cardCountViews[i].setText( Integer.toString( PracticeFragment.cardCounts[i] ) );
-            }
-        }
+                if( i > 1 )
+                {
+                    thisLevelCount -= currentTag.cardLevelCounts.get( (i - 1) );
+                }
+
+                // set the progress bar backgrounds
+                // apparently ProgressBar is buggy as shit, and no one knows why. I'd post a link
+                // but there's nothing coherent out there. If you have to work with them, expect
+                // to be pissed off.  You've been warned.
+                
+                // these shouldn't need to be final, but for their use in an inner class
+                // below to set the progress and post a delayed invalidation
+                final ProgressBar tempProgress = (ProgressBar)practiceLayout.findViewById( progressBars[i - 1] );
+                final float progress;
+                
+                if( seenCardCount > 0 )
+                {
+                    progress = (float)thisLevelCount / (float)seenCardCount;
+                }
+                else
+                {
+                    progress = 0.0f;
+                }
+       
+                // this shouldn't be necessary
+                tempProgress.postDelayed( new Runnable()
+                {
+                        @Override
+                        public void run()
+                        {
+                            // this shouldn't be necessary either
+                            tempProgress.setProgress( (int)( 100 * progress ) );
+                            tempProgress.postInvalidate();
+                        }
+                },350);
+               
+                // set the label numbers
+                TextView tempCount = (TextView)practiceLayout.findViewById( cardCountViews[i - 1] );
+                tempCount.setText( Integer.toString( currentTag.cardLevelCounts.get(i) ) );
+
+            }  // end for loop
+
+        }  // end refreshCountBar()
 
 
         // set all widgets to the card-hidden state
@@ -530,6 +753,7 @@ public class PracticeFragment extends Fragment
 
             practiceViewStatus = inViewMode;
             setAnswerBar(practiceViewStatus);
+            refreshCountBar();
         
         }  // end PracticeScreen.setupPracticeView()
     
@@ -576,6 +800,156 @@ public class PracticeFragment extends Fragment
     
         }  // end PracticeScreen.toggleReading()
 
+        
+        // show the big summary dialog
+        public static void showSummary()
+        {
+            final Xflash inContext = Xflash.getActivity();
+            Resources res = inContext.getResources();
+
+            AlertDialog.Builder builder;
+
+            // inflate the dialog layout into a View object
+            LayoutInflater inflater = (LayoutInflater)inContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.practice_summary, (ViewGroup)inContext.findViewById(R.id.summary_root));
+
+            builder = new AlertDialog.Builder(inContext);
+            builder.setView(layout);
+
+            final AlertDialog summaryDialog = builder.create();
+            summaryDialog.show();
+
+            // we cannot reference our buttons until after the dialog.show()
+            // method has been called - otherwise they don't "exist" 
+        
+            // set the title
+            TextView tempView = (TextView)summaryDialog.findViewById(R.id.summary_tag);
+            tempView.setText( currentTag.getName() );
+
+            // set the studying description
+            // it's a damn shame that using HTML in TextViews is a bit iffy
+            String des1 = res.getString(R.string.psummary_des1) + "  ";
+            String des2 = "  " + res.getString(R.string.psummary_des2) + "  ";
+            String des3 = "  " + res.getString(R.string.psummary_des3);
+
+            int totalCards = currentTag.getCardCount();
+            int studyNum = XflashSettings.getStudyPool();
+            if( studyNum > totalCards )
+            {
+                studyNum = totalCards;
+            }
+            
+            String stringStudyNum = Integer.toString(studyNum) + "*";
+            String stringTotalCards = Integer.toString(totalCards);
+
+            int studyNumStart = des1.length();
+            int studyNumEnd = studyNumStart + stringStudyNum.length();
+
+            int totalCardsStart = studyNumEnd + des2.length();
+            int totalCardsEnd = totalCardsStart + stringTotalCards.length();
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_description);
+            tempView.setText( des1 + stringStudyNum + des2 + stringTotalCards + des3, BufferType.SPANNABLE );
+
+            Spannable willThisWork = (Spannable)tempView.getText();
+            willThisWork.setSpan( new RelativeSizeSpan(1.2f), studyNumStart, studyNumEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
+            willThisWork.setSpan( new RelativeSizeSpan(1.2f), totalCardsStart, totalCardsEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );
+
+            // set the subtext 
+            String sub1 = res.getString(R.string.psummary_sub1) + " ";
+            String sub2 = res.getString(R.string.psummary_sub2);
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_subtext);
+            tempView.setText( sub1 + sub2, BufferType.SPANNABLE );
+
+            Spannable s = (Spannable)tempView.getText();
+            int start = sub1.length();
+            int end = start + sub2.length();
+            s.setSpan( new ForegroundColorSpan(0xFFEDF68C), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        
+            // set the table view 
+            
+            // set the right count
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_right_count);
+            tempView.setText( Integer.toString( numRight ) );
+
+            // set the wrong count
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_wrong_count);
+            tempView.setText( Integer.toString( numWrong ) );
+
+            // set the streak
+            String streak = null;
+            if( ( rightStreak < 2 ) && ( wrongStreak < 2 ) )
+            {
+                // don't display a streak unless it's at least 2 in a row
+                streak = "-";
+            }
+            else if( rightStreak > 0 )
+            {
+                streak = Integer.toString( rightStreak ) + " " + res.getString(R.string.psummary_right);
+            }
+            else
+            {
+                streak = Integer.toString( wrongStreak ) + " " + res.getString(R.string.psummary_wrong);
+            }
+            
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_streak_count);
+            tempView.setText(streak);
+
+            // set the cards seen
+            int seenCount = currentTag.getSeenCardCount();
+
+            String seen = null;
+            if( seenCount > 0 )
+            {
+                seen = Integer.toString(seenCount);
+            }
+            else
+            {
+                seen = "-";
+            }
+
+            tempView = (TextView)summaryDialog.findViewById(R.id.summary_seen_count);
+            tempView.setText(seen);
+
+            // set the progress stuff
+            int progressBars[] = { R.id.summary_untested_progress, R.id.summary_studying_progress,
+                                   R.id.summary_right1x_progress,  R.id.summary_right2x_progress,
+                                   R.id.summary_right3x_progress,  R.id.summary_learned_progress };
+            int valuesViews[] = { R.id.summary_untested_values, R.id.summary_studying_values,
+                                  R.id.summary_right1x_values,  R.id.summary_right2x_values,
+                                  R.id.summary_right3x_values,  R.id.summary_learned_values };
+
+            for(int i = 0; i < valuesViews.length; i++)
+            {
+                int levelCount = currentTag.cardsByLevel.get(i).size();
+                float percentage = ( (float)levelCount / (float)totalCards );
+            
+                String toSet = Integer.toString( (int)( 100 * percentage ) ) +
+                               "% - " + Integer.toString(levelCount);
+
+                // set the progress bar
+                ProgressBar tempProgress = (ProgressBar)summaryDialog.findViewById( progressBars[i] );
+                tempProgress.setProgress( (int)( 100 * percentage ) );
+                
+                // set the level count description
+                tempView = (TextView)summaryDialog.findViewById( valuesViews[i] );
+                tempView.setText(toSet);
+            } 
+           
+            // set the cancel button
+            ImageButton cancelButton = (ImageButton)summaryDialog.findViewById(R.id.summary_cancel);
+            cancelButton.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    summaryDialog.dismiss();
+                }
+            });
+            
+        }  // end showSummary()
+  
 
         // load and display HTML for the meaning WebView
         private static void loadMeaning()
@@ -622,6 +996,17 @@ public class PracticeFragment extends Fragment
         // set click listeners for all relevant views
         private static void setClickListeners()
         {
+            // listener for the count bar
+            countBar.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    showSummary();
+                }
+            });
+            
+
             // listener for the 'tap for answer' answer bar
             blankButton.setOnClickListener( new View.OnClickListener()
             {
@@ -635,10 +1020,10 @@ public class PracticeFragment extends Fragment
             // THE PRACTICE-MODE ANSWER BAR
             
             // set listeners for each of the reveal buttons
-            int[] buttonIds = { R.id.optionblock_actions, R.id.optionblock_right,
-                                 R.id.optionblock_wrong, R.id.optionblock_goaway };
+            int[] buttonIds = { R.id.optionblock_right, R.id.optionblock_wrong, 
+                                R.id.optionblock_goaway };
 
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < buttonIds.length; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(practiceClickListener);
@@ -647,10 +1032,9 @@ public class PracticeFragment extends Fragment
             // THE BROWSE-MODE ANSWER BAR
             
             // set listeners for each of the browse buttons
-            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_actions,
-                                    R.id.browseblock_next };
+            buttonIds = new int[] { R.id.browseblock_last, R.id.browseblock_next };
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 2; i++)
             {
                 ImageButton tempButton = (ImageButton)practiceLayout.findViewById( buttonIds[i] );
                 tempButton.setOnClickListener(browseClickListener);

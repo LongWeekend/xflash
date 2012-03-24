@@ -10,10 +10,11 @@ package com.longweekendmobile.android.xflash.model;
 //  
 //  public static boolean isEqual(Tag  )
 //
-//  public Tag blankTagWithId(int  )
 //  public int groupId()
 //  public boolean isEditable()
-//  public int seenCardCount()
+//  public int getSeenCardCount()
+//  public boolean needShowAllLearned()
+//  public void resetAllLearned()
 //
 //  public void recacheCardCountForEachLevel()
 //  public ArrayList<ArrayList<Integer>> thawCards(Context  )
@@ -38,8 +39,6 @@ package com.longweekendmobile.android.xflash.model;
 //  public String getName()
 //  public void setDescription(String  )
 //  public String getDescription()
-//  public void setFault(boolean  )
-//  public boolean getFault()
 //  public void setCardCount(int  )
 //  public int getCardCount()
 //  public void setCurrentIndex(int  )
@@ -52,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import android.content.ContentValues;
@@ -76,10 +76,13 @@ public class Tag
     public static final int kLWELearnedCardLevel = 5;
     public static final int DEFAULT_TAG_ID = 124;
 
+    private boolean learnedShowedAlready;
+
     private int tagId;
     private int cardCount;
     private int currentIndex;
     private int tagEditable;
+
     public ArrayList<ArrayList<Card>> cardsByLevel;          
     public ArrayList<Card> flattenedCardArray;
     public ArrayList<Integer> cardLevelCounts;
@@ -87,36 +90,18 @@ public class Tag
     private String tagName;
     private String tagDescription;
 
-    private boolean isFault;
-
     public Tag()
     {
+        learnedShowedAlready = false;
+
+        tagId = kLWEUninitializedTagId;
+        cardCount = kLWEUninitializedCardCount; 
+        
         cardsByLevel = null;
         cardLevelCounts = null;
         flattenedCardArray = null;
-        
-        isFault = true;
-        tagId = kLWEUninitializedTagId;
-        cardCount = kLWEUninitializedCardCount; 
     }
 
-    // isEqual() simply returns a boolean confirming whether the
-    // incoming Tag object has the same tagId as the THIS tag object
-    public boolean isEqual(Tag inTag)
-    {
-        return ( tagId == inTag.tagId );        
-    }
-
-    // this method simply returns a new Tag object with the same tag ID
-    // as the Tag from which this method was called
-    public static Tag blankTagWithId(int inId)
-    {
-        Tag newTag = new Tag();
-
-        newTag.tagId = inId;
-
-        return newTag;
-    }
 
     // calls a GroupPeer object to query the database, returns the id
     // of the Group that this Tag belongs to
@@ -129,16 +114,68 @@ public class Tag
         return GroupPeer.parentGroupIdOfTag(this);
     }
 
+    
     // returns a boolean if this object's tagEditable is 1
     public boolean isEditable()
     {
         return ( tagEditable == 1 );
     }
 
-    // not ENTIRELY sure what's going on here yet
-    public int seenCardCount()
+    
+    // returns how many cards have been seen so far
+    public int getSeenCardCount()
     {
         return ( cardCount - cardLevelCounts.get(kLWEUnseenCardLevel) );
+    }
+
+
+    // returns true if we need to show the all-learned alert (i.e. if they
+    // have learned all cards, and it has NOT been shown yet
+    public boolean needShowAllLearned()
+    {
+        boolean levelsAreZero = true;
+
+        // check whether there are any cards in any non-learned level
+        for(int i = 0; i < 5; i++)
+        {
+            if( cardsByLevel.get(i).size() > 0 )
+            {
+                levelsAreZero = false;
+            }
+        }
+
+        if( levelsAreZero && !learnedShowedAlready )
+        {
+            // if all cards are learned and we haven't told the user yet
+            learnedShowedAlready = true;
+
+            return true;
+        }
+        else
+        {
+            // otherwise, don't show dialog
+            return false;
+        }
+
+    }  // end needShowAllLearned()
+
+    
+    // called by PracticeFragment when user gets a card wrong, to ensure
+    // the learned dialog is re-shown if necessary
+    //
+    // NOTE: Tags keep track of whether or not they have been shown due
+    // to issues presented with PracticeFragment fully reloading on change
+    public void resetAllLearned()
+    {
+        learnedShowedAlready = false;
+    }
+
+
+    // isEqual() simply returns a boolean confirming whether the
+    // incoming Tag object has the same tagId as the THIS tag object
+    public boolean isEqual(Tag inTag)
+    {
+        return ( tagId == inTag.tagId );        
     }
 
 
@@ -184,6 +221,7 @@ public class Tag
     }  // end recacheCardCountForEachLevel() 
    
 
+/*
     // loads a serialized copy of cardsByLevel from a file 'ids.plist'
     // TODO - performance on ObjectInputStream is horrible, hand-code 
     //        a serialization or don't worry about it?
@@ -240,10 +278,12 @@ public class Tag
 
     }  // end freezeCards()
 
+*/
     
     // executed when loading a new set on app load
     public void populateCards()
     {
+/*
         ArrayList<ArrayList<Card>> tempCardsArray = thawCards();
 
         if( tempCardsArray != null)
@@ -257,10 +297,12 @@ public class Tag
             // no PLIST, generate new cardsByLevel array
             tempCardsArray = CardPeer.retrieveCardsSortedByLevelForTag(this);
         }
-
+        
         cardsByLevel = tempCardsArray;
+*/
+        cardsByLevel = CardPeer.retrieveCardsSortedByLevelForTag(this);
         flattenedCardArray = flattenCardArrays();
-
+        
         // populate card level counts
         recacheCardCountForEachLevel();
 
@@ -285,15 +327,13 @@ public class Tag
         }   
 
         // put in numeric order
-        // asdf
-        // TODO - must find a new way to sort
-        // Collections.sort(allCards, new CardComparator() );
+        Collections.sort(allCards, new CardComparator() );
 
         return allCards;
 
-    }  // end combineCards()
+    }  // end flattenCardArrays()
 
-    @SuppressWarnings("unused")
+
     private class CardComparator implements Comparator<Card>
     {
         public int compare(Card card1,Card card2)
@@ -306,7 +346,6 @@ public class Tag
     // update level counts cache - kept in memory how many cards are in each level
     public void moveCard(Card inCard,int nextLevel)
     {
-/*
         if( cardsByLevel.size() != 6 )
         {
             Log.d(MYTAG,"ERROR in moveCard()");
@@ -315,44 +354,47 @@ public class Tag
 
         int countBeforeRemove = 0;
         int countBeforeAdd = 0;
-        ArrayList<Integer> thisLevelCards = null;
-        ArrayList<Integer> nextLevelCards = null;
+        ArrayList<Card> thisLevelCards = null;
+        ArrayList<Card> nextLevelCards = null;
 
         // update the cardsByLevel if necessary
         if( nextLevel != inCard.levelId )
         {
             thisLevelCards = cardsByLevel.get( inCard.getLevelId() );
             nextLevelCards = cardsByLevel.get(nextLevel);
-        
+       
             countBeforeRemove = thisLevelCards.size();
             countBeforeAdd = nextLevelCards.size();
-        }
 
-        // now do the remove
-        if( !thisLevelCards.contains( inCard.getCardId() ) )
-        {
-            Log.d(MYTAG,"ERROR in moveCard - card no longer there");
-        }
-    
-        int tempInt = thisLevelCards.indexOf( inCard.getCardId() );
-        thisLevelCards.remove(tempInt);
-        int countAfterRemove = thisLevelCards.size();
-
-        // only do the add if the remove was successful
-        if( countBeforeRemove == (countAfterRemove + 1) )
-        { 
-            nextLevelCards.add( inCard.getCardId() );
-
-            // now confirm the add
-            int countAfterAdd = cardsByLevel.get(nextLevel).size();
-            if( !((countAfterAdd - 1) == countBeforeAdd) )
+            // now do the remove
+            if( !thisLevelCards.contains(inCard) )
             {
-                Log.d(MYTAG,"the number after add (" + countAfterAdd + ") should be 1 more than the count before add (" + countBeforeAdd + ")");
+                Log.d(MYTAG,"ERROR in moveCard - card no longer there");
+            }
+    
+            int tempInt = thisLevelCards.indexOf(inCard);
+            thisLevelCards.remove(tempInt);
+            int countAfterRemove = thisLevelCards.size();
+
+            // only do the add if the remove was successful
+            if( countBeforeRemove == (countAfterRemove + 1) )
+            { 
+                nextLevelCards.add(inCard);
+
+                // and update the card's level id
+                inCard.setLevelId(nextLevel);
+
+                // now confirm the add
+                int countAfterAdd = cardsByLevel.get(nextLevel).size();
+                if( !((countAfterAdd - 1) == countBeforeAdd) )
+                {
+                    Log.d(MYTAG,"the number after add (" + countAfterAdd + ") should be 1 more than the count before add (" + countBeforeAdd + ")");
+                }
+
+                recacheCardCountForEachLevel();
             }
 
-            recacheCardCountForEachLevel();
-        }
-*/
+        }  // end if( nextLevel != inCard.levelId )
 
     }  // end moveCard()
 
@@ -360,21 +402,14 @@ public class Tag
     // removed card from tag's memory arrays so they are out of the set
     public void removeCardFromActiveSet(Card inCard)
     {
-/*
-
-        int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
-
         // remove from cardsByLevel
-        int tempIndex = cardLevel.indexOf(tempId);
-        cardLevel.remove(tempIndex);        
+        ArrayList<Card> cardLevel = cardsByLevel.get( inCard.getLevelId() );
+        cardLevel.remove(inCard);        
 
-        // remove from flattenedCardArray
-        tempIndex = flattenedCardArray.indexOf(tempId);
-        flattenedCardArray.remove(tempIndex);
+        // remove from array of all cards
+        flattenedCardArray.remove(inCard);
 
         recacheCardCountForEachLevel();
-*/
 
     }  // end removeCardFromActiveSet()
 
@@ -382,15 +417,14 @@ public class Tag
     // add card to tag's memory arrays
     public void addCardToActiveSet(Card inCard)
     {
-/*        
-        int tempId = inCard.getCardId();
-        ArrayList<Integer> cardLevel = cardsByLevel.get( inCard.getLevelId() );
-
-        cardLevel.add(tempId);
-        flattenedCardArray.add(tempId);
+        // add to card level
+        ArrayList<Card> cardLevel = cardsByLevel.get( inCard.getLevelId() );
+        cardLevel.add(inCard);
+        
+        // add to array of all cards
+        flattenedCardArray.add(inCard);
         
         recacheCardCountForEachLevel();
-*/
     
     }  // end addCardToActiveSet()
 
@@ -419,29 +453,10 @@ public class Tag
 
         tempDB.update("tags",updateValues,"tag_id = ?",whereArgs);
 
-        // TODO - if successful, send a broadcast 
-        //  [[NSNotificationCenter defaultCenter] postNotificationName:LWETagDidSave object:self];
-            
         return;
     
     }  // end save()
 
-
-    // TODO - rework as a receiver when we find out where we're broadcasting from
-    public void tagDidSave()
-    {
-
-/* Refreshes self from the DB if a didSave notification is called
-- (void)tagDidSave:(NSNotification *)notification
-{
-  if ([self isEqual:notification.object] && (self.isFault == NO)) // we only care if it's us & this isn't a faulted entry
-  {
-    [self hydrate];
-  }
-}
-*/
-        return;
-    }
 
     // gets 'this' Tag's info from the db and hydrates
     public void hydrate()
@@ -474,7 +489,6 @@ public class Tag
     }  // end hydrate()
 
     // fills in values from incoming cursor
-    // TODO - unfinished broadcast
     public void hydrateWithCursor(Cursor inCursor)
     {
         int tempColumn = inCursor.getColumnIndex("tag_id");
@@ -492,12 +506,6 @@ public class Tag
         tempColumn = inCursor.getColumnIndex("count");
         cardCount = inCursor.getInt(tempColumn);
 
-/*
-  // TODO We only care about getting new updates on data if we had data to begin with.
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagDidSave:) name:LWETagDidSave object:nil];
-  _isFault = NO;
-}
-*/
     }  // end hydrateWithCursor()
 
     public String description()
@@ -554,16 +562,6 @@ public class Tag
     public String getDescription()
     {
         return tagDescription;
-    }
-
-    public void setFault(boolean inFault)
-    {
-        isFault = inFault;
-    }
-
-    public boolean getFault()
-    {
-        return isFault;
     }
 
     public void setCardCount(int inCount)

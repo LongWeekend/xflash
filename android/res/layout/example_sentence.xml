@@ -20,60 +20,85 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp" >
-            
+
             <TextView style="@style/count_label"
-                android:text="Studying" />
-            <TextView android:id="@+id/es_study_num"
-                style="@style/count_num" />
-        </LinearLayout> 
+                android:text="@string/practice_studying" />
+            <FrameLayout style="@style/count_frame">
+                <ProgressBar android:id="@+id/es_study_progress"
+                    style="@style/default_progressbar"
+                    android:progressDrawable="@drawable/progress_red" />
+                <TextView android:id="@+id/es_study_num"
+                    style="@style/count_num" />
+            </FrameLayout>
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp" >
-            
+
             <TextView style="@style/count_label"
-                android:text="Right 1x" />
-            <TextView android:id="@+id/es_right1_num"
-                style="@style/count_num" />
-        </LinearLayout> 
+                android:text="@string/practice_right1x" />
+            <FrameLayout style="@style/count_frame">
+                <ProgressBar android:id="@+id/es_right1_progress"
+                    style="@style/default_progressbar"
+                    android:progressDrawable="@drawable/progress_gray" />
+                <TextView android:id="@+id/es_right1_num"
+                    style="@style/count_num" />
+            </FrameLayout>
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp" >
-            
+
             <TextView style="@style/count_label"
-                android:text="Right 2x" />
-            <TextView android:id="@+id/es_right2_num"
-                style="@style/count_num" />
-        </LinearLayout> 
+                android:text="@string/practice_right2x" />
+            <FrameLayout style="@style/count_frame">
+                <ProgressBar android:id="@+id/es_right2_progress"
+                    style="@style/default_progressbar"
+                    android:progressDrawable="@drawable/progress_teal" />
+                <TextView android:id="@+id/es_right2_num"
+                    style="@style/count_num" />
+            </FrameLayout>
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp" >
-            
+
             <TextView style="@style/count_label"
-                android:text="Right 3x" />
-            <TextView android:id="@+id/es_right3_num"
-                style="@style/count_num" />
-        </LinearLayout> 
+                android:text="@string/practice_right3x" />
+            <FrameLayout style="@style/count_frame">
+                <ProgressBar android:id="@+id/es_right3_progress"
+                    style="@style/default_progressbar"
+                    android:progressDrawable="@drawable/progress_orange" />
+                <TextView android:id="@+id/es_right3_num"
+                    style="@style/count_num" />
+            </FrameLayout>
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp" >
-            
+
             <TextView style="@style/count_label"
-                android:text="Learned" />
-            <TextView android:id="@+id/es_learned_num"
-                style="@style/count_num" />
-        </LinearLayout> 
+                android:text="@string/practice_learned" />
+            <FrameLayout style="@style/count_frame">
+                <ProgressBar android:id="@+id/es_learned_progress"
+                    style="@style/default_progressbar"
+                    android:progressDrawable="@drawable/progress_green" />
+                <TextView android:id="@+id/es_learned_num"
+                    style="@style/count_num" />
+            </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
     <!-- end top bar layout -->
@@ -93,14 +118,9 @@
             android:gravity="center"
             android:background="@drawable/practice_btn_bg" >
 
-            <ImageButton android:id="@+id/es_optionblock_actions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_actions_flip" />
             <ImageButton android:id="@+id/es_optionblock_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/es_optionblock_actions"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_right_flip" />
             <ImageButton android:id="@+id/es_optionblock_wrong"

@@ -264,9 +264,10 @@ public class Card
 
     // get the tweet word and try to cut the meaning so that it returns a String
     // that will fit within the allocation of twitter status update (?)
-    // TODO - need LWE_TWITTER_MAX_CHARS
     public String tweetContent()
     {
+        // TODO - not implemented
+        
         return null;
     }
 

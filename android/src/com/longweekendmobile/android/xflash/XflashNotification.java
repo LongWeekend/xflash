@@ -15,13 +15,16 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void addNewTagObserver(Observer  )
 //  public void newTagBroadcast(Tag  )
+//  public void addActiveTagObserver(Observer  )
+//  public void activeTagBroadcast()
 //  public void addSubscriptionObserver(Observer  )
 //  public void subscriptionBroadcast(Card  )
 //  public void addTagSearchObserver(Observer  )
 //  public void tagSearchBroadcast(Integer  )
 //
 //  private class NewTagNotifier extends Observable
-//  private class NewTagNotifier extends Observable
+//  private class ActiveTagNotifier extends Observable
+//  private class SubscriptionNotifier extends Observable
 //  private class TagSearchNotifier extends Observable
 
 import java.util.Observable;
@@ -36,21 +39,34 @@ public class XflashNotification
     
     public static final int NO_CARD_PASSED = -1000;
     
+    private boolean cardWasAdded = false;
     private int cardIdPassed = NO_CARD_PASSED;
     private int tagIdPassed = -1000;
 
     private NewTagNotifier newTagObserver = null;
+    private ActiveTagNotifier activeTagObserver = null;
     private SubscriptionNotifier subscriptionObserver = null;
     private TagSearchNotifier tagSearchObserver = null;
-
+    
     public XflashNotification()
     {
         newTagObserver = new NewTagNotifier();
+        activeTagObserver = new ActiveTagNotifier();
         subscriptionObserver = new SubscriptionNotifier();
         tagSearchObserver = new TagSearchNotifier();
     }
     
     // basic getters/setters for broadcasts
+    public void setCardWasAdded(boolean wasAdded)
+    {
+        cardWasAdded = wasAdded;
+    }
+
+    public boolean getCardWasAdded()
+    {
+        return cardWasAdded;
+    }
+
     public void setCardIdPassed(int inCardId)
     {
         cardIdPassed = inCardId;
@@ -77,27 +93,36 @@ public class XflashNotification
     {
         newTagObserver.addObserver(inObserver);
     }
-    
     public void newTagBroadcast(Tag inTag)
     {
         newTagObserver.broadcastNotification(inTag);
     }
 
+    
+    public void addActiveTagObserver(Observer inObserver)
+    {
+        activeTagObserver.addObserver(inObserver);
+    }
+    public void activeTagBroadcast()
+    {
+        activeTagObserver.broadcastNotification();
+    }
+   
+
     public void addSubscriptionObserver(Observer inObserver)
     {
         subscriptionObserver.addObserver(inObserver);
     }
-
     public void subscriptionBroadcast(Card inCard)
     {
         subscriptionObserver.broadcastNotification(inCard);
     }
 
+    
     public void addTagSearchObserver(Observer inObserver)
     {
         tagSearchObserver.addObserver(inObserver);
     }
-
     public void tagSearchBroadcast(Integer inInteger)
     {
         tagSearchObserver.broadcastNotification(inInteger);
@@ -118,6 +143,20 @@ public class XflashNotification
     }  // end NewTagNotifier class declaration
 
     
+    // Observable class to handle start-studying notifications
+    private class ActiveTagNotifier extends Observable
+    {
+        public ActiveTagNotifier()  { }
+
+        public void broadcastNotification()
+        {
+            setChanged();
+            notifyObservers();
+        }
+
+    }  // end ActiveTagNotifier class declaration
+
+
     // Observable class to handle subscription status changed notifications
     private class SubscriptionNotifier extends Observable
     {

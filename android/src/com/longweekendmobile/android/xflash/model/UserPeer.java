@@ -66,28 +66,19 @@ public class UserPeer
     }  // end getUsers()
 
     // creates a new User in the database
-    public static User createUserWithNickname(String inName,String inPath)
+    public static User createUserWithNickname(String inName)
     {
         // TODO - an user name is precisely the kind of scenario when we'd like to
-        //      - use parameter binding, but date is an issue.  Trust in the users,
-        //      - or add a bunch of java code to format a date string locally to
-        //      - allow us to use ContentValues?
+        //      - use parameter binding, but for reasons as yet unknown, it just
+        //      - doesn't work when I use parameter binding
 
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
         // make our new user, set the incoming info
         User tempUser = new User();
         tempUser.setUserNickname(inName);
-        if( inPath != null )
-        {
-            tempUser.setAvatarImagePath(inPath);
-        }
-        else
-        {
-            tempUser.setAvatarImagePath(User.DEFAULT_USER_AVATAR_PATH);
-        }
 
-        String query = "INSERT INTO users (nickname,avatar_image_path,date_created) VALUES ('" + inName + "','" + inPath + "',date('now'))";
+        String query = "INSERT INTO users (nickname,avatar_image_path,date_created) VALUES ('" + inName + "','" + User.DEFAULT_USER_AVATAR_PATH + "',date('now'))";
 
         try
         {

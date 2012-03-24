@@ -96,7 +96,7 @@ public class TagCardsFragment extends Fragment
         {
             public void onClick(View v)
             {
-                TagFragment.startStudying(v);
+                XflashAlert.startStudying(v);
             }
         });
 

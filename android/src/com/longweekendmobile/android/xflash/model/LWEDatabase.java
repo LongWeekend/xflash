@@ -97,8 +97,6 @@ public class LWEDatabase extends SQLiteOpenHelper
         {
             // do nothing - the database has already been copied over
             // on a previous run
-            Log.d(MYTAG,"in LWEDatabase.asynchCopy() -- database exists");
-            
             Intent myIntent = new Intent(DATABASE_READY);
             myContext.sendBroadcast(myIntent);
         }

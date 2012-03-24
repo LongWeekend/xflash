@@ -27,6 +27,24 @@
     <string name="fixcard_bodymeaning">Card Meaning:</string>
     <string name="fixcard_bodytagid">Active Tag Id:</string>
     <string name="fixcard_bodytagname">Active Tag Name:</string>
+    <string name="practice_studying">Studying</string>
+    <string name="practice_right1x">Right 1x</string>
+    <string name="practice_right2x">Right 2x</string>
+    <string name="practice_right3x">Right 3x</string>
+    <string name="practice_learned">Learned</string>
+    <string name="psummary_des1">You are studying</string>
+    <string name="psummary_des2">cards out of</string>
+    <string name="psummary_des3">in this set.</string>
+    <string name="psummary_sub1">*You can change this in</string>
+    <string name="psummary_sub2">Settings</string>
+    <string name="psummary_times_right">Times Right</string>
+    <string name="psummary_times_wrong">Times Wrong</string>
+    <string name="psummary_streak">Streak!</string>
+    <string name="psummary_right">right</string>
+    <string name="psummary_wrong">wrong</string>
+    <string name="psummary_seen">Cards Seen</string>
+    <string name="psummary_untested">Untested</string>
+    <string name="psummary_goodjob"><i>You\'re doing great, keep going!</i></string>
     <string name="tag_backupblock_title">Backup Custom Sets</string>
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
@@ -93,6 +111,14 @@
     <string name="help_dialog_closebutton">No Thanks</string>
     <string name="helppage_nextbutton">Next ></string>
     <string name="help_topics_path">file:///android_asset/JFlash/help/</string>
+    <string name="learned_alert_title">Study Set Learned</string>
+    <string name="learned_alert_message">Congratulations! You\'ve already learned all of the words in \"##TAGNAME##\". We will show cards that would usually be hidden.</string>
+    <string name="lastcard_alert_title">Last Card in Set</string>
+    <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\", which you are currently studying!  To delete a set entirely, please change to a different set first.</string>
+    <string name="firstrun_alert_title">Welcome to Japanese Flash!</string>
+    <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
+    <!-- NOTE: in Obj C, this alert includes reference to the Rikai Browser -->
+
 </resources>
 
 

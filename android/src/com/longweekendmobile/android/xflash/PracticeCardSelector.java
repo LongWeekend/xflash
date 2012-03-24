@@ -37,38 +37,9 @@ public class PracticeCardSelector
     public static void setNextPracticeCard(Tag inTag,Card inCard)
     {
         Card nextCard = randomCardInTag(inTag,inCard);
-
-
-        // TODO - insert code below
-
-
         XflashSettings.setActiveCard(nextCard);
 
     }  // end setNextPracticeCard()
-
-/*
-
-  Card *nextCard = [self _randomCardInTag:cardSet currentCard:currentCard error:&error];
-  
-  // If necessary, tell the user they've learned this set
-  if ((nextCard.levelId == kLWELearnedCardLevel) && (error.code == kAllBuriedAndHiddenError))
-  {
-    if (self.alreadyShowedLearnedAlert == NO)
-    {
-      [LWEUIAlertView notificationAlertWithTitle:NSLocalizedString(@"Study Set Learned", @"Study Set Learned")
-                                         message:NSLocalizedString(@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.",@"Congratulations! You've already learned this set. We will show cards that would usually be hidden.")
-                                        delegate:self];
-      self.alreadyShowedLearnedAlert = YES;
-    }
-  }
-  else if (self.alreadyShowedLearnedAlert)
-  {
-    // This is used to "reset" the alert in the case that they had them all learned, and then got one wrong.
-    self.alreadyShowedLearnedAlert = NO;
-  }
-
-
-*/
 
 
     // passthrough for setNextBrowseCard(Tag  ,Card  ,int  )
@@ -79,8 +50,7 @@ public class PracticeCardSelector
         setNextBrowseCard(tempTag,inDirection);
     }
 
-    // TODO - this actually works, the rest of the class is untested
-
+    
     // set the active card to the next in currentTag, by direction
     public static void setNextBrowseCard(Tag currentTag,int inDirection)
     {
@@ -148,6 +118,7 @@ public class PracticeCardSelector
         
         // see if calculateNextCardLevelForTag returned an empty level
         int numCardsAtLevel = cardArray.size();
+
         if( numCardsAtLevel < 1 )
         {
             Log.d(MYTAG,"ERROR - in randomCardInTag() for: " + inTag.getName() );
@@ -155,7 +126,8 @@ public class PracticeCardSelector
         }
 
         // yoink a card
-        int randomOffset = ( randGenerator.nextInt() % numCardsAtLevel );
+        int randomOffset = Math.abs( randGenerator.nextInt() ) % numCardsAtLevel;
+        
         randomCard = cardArray.get(randomOffset);
 
         // add the card we're leaving to lastFiveCards
@@ -179,13 +151,9 @@ public class PracticeCardSelector
         // immediately bypassed if our randomCard is not in lastFiveCards
         while( lastFiveCards.contains(randomCard) )
         {
-            Log.d(MYTAG,"pulled the same card as last time");
-
             // if there is only one card left in the level, get a new level
             if( numCardsAtLevel == 1 )
             {
-                Log.d(MYTAG,"only one card level at this level, getting new level");
-
                 // try up to five times to get a different level
                 int lastNextLevel = nextLevelId;
                 for(int i = 0; i < 5; i++)
@@ -199,39 +167,39 @@ public class PracticeCardSelector
                     }
                 }
 
-                // now get a different card randomly
-                cardArray = inTag.cardsByLevel.get(nextLevelId);
-                int numCardsAtLevel2 = cardArray.size();
+            }  // end if( last card in level)
 
-                // see if calculateNextCardLevelForTag returned an empty level
-                if( numCardsAtLevel2 < 1 )
+            // now get a different card randomly
+            cardArray = inTag.cardsByLevel.get(nextLevelId);
+            int numCardsAtLevel2 = cardArray.size();
+
+            // see if calculateNextCardLevelForTag returned an empty level
+            if( numCardsAtLevel2 < 1 )
+            {
+                Log.d(MYTAG,"ERROR - in randomCardInTag() for: " + inTag.getName() );
+                Log.d(MYTAG,"      - cards at level2 " + nextLevelId + " don't exist!");
+            }
+
+            // yoink a new card
+            randomOffset = Math.abs( randGenerator.nextInt() ) % numCardsAtLevel2;
+            randomCard = cardArray.get(randomOffset);
+
+            ++whileIterator;
+            if( whileIterator > NONRECENT_CARD_RETRIES )
+            {
+                // the same card is worse than a card that was twice ago, 
+                // so we check again that it's not that
+                if( ( duplicateIterator == NONRECENT_CARD_RETRIES ) || 
+                    ( inCard.equals(randomCard) == false ) )
                 {
-                    Log.d(MYTAG,"ERROR - in randomCardInTag() for: " + inTag.getName() );
-                    Log.d(MYTAG,"      - cards at level2 " + nextLevelId + " don't exist!");
+                    // we tried 3 times, fuck it
+                    // (breaking out of while loop) 
+                    break;
                 }
 
-                // yoink a new card
-                randomOffset = ( randGenerator.nextInt() % numCardsAtLevel2 );
-                randomCard = cardArray.get(randomOffset);
+                ++duplicateIterator;
 
-                ++whileIterator;
-                if( whileIterator > NONRECENT_CARD_RETRIES )
-                {
-                    // the same card is worse than a card that was twice ago, 
-                    // so we check again that it's not that
-                    if( ( duplicateIterator == NONRECENT_CARD_RETRIES ) || 
-                        ( inCard.equals(randomCard) == false ) )
-                    {
-                        // we tried 3 times, fuck it
-                        // (breaking out of while loop) 
-                        break;
-                    }
-
-                    ++duplicateIterator;
-
-                }  // end if( whileIterator > nonrecent card limit )
-
-            }  // end if( last card in level)
+            }  // end if( whileIterator > nonrecent card limit )
 
         }  // end while( lastFiveCards contains randomCard )
 
@@ -285,6 +253,7 @@ public class PracticeCardSelector
             {
                 return Tag.kLWELearnedCardLevel;
             }
+
         }  // end if(hideLearnedCards)
 
         // past here, we assume we have cards to work with
@@ -315,6 +284,7 @@ public class PracticeCardSelector
             denominatorTotal = denominatorTotal + (tmpTotal * weightingFactor * (numLevels - levelId + 1));
             numeratorTotal = numeratorTotal + (tmpTotal * levelId);
         }
+
         float p_unseen = calculateProbabilityOfUnseenWithCardsSeen(cardsSeenTotal,
                                     totalCardsInSet,numeratorTotal,totalArray[0]);
         float randomNum = new Random().nextFloat();
@@ -365,7 +335,7 @@ public class PracticeCardSelector
         }
         else
         {
-            if( cardsSeenTotal > totalCardsInSet);
+            if( cardsSeenTotal > totalCardsInSet )
             {
                 Log.d(MYTAG,"ERROR - in calculateProbabilityOfUnseenWithCardsSeen()");
                 Log.d(MYTAG,"      - cardsSeenTotal is greater than totalCardsInSet");
