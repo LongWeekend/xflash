@@ -149,9 +149,20 @@ public class PracticeFragment extends Fragment
             XflashAlert.fireTagLearned(currentTag);
         }
 
-        // display opening dialog if app was just installed
-        XflashSettings.checkFirstRun();
-
+        // display dialog on first-run or update
+        XflashSettings.updateCheck();
+        //                   ^^^^ 
+        // TODO - can we put this in Xflash so it isn't called every damn
+        //      - time we load a new Card?  ( Fragments! Grar. )
+        //      -
+        //      - amusingly, this rampant detach/attach every time we swap to
+        //      - a new card (and all associated heavy system/battery demands 
+        //      - for view chnstruction/garbage collection) is wholly unnecessary 
+        //      - for the core functionality of the app; the only purpose it
+        //      - serves is to emulate the iPhone-esque animated transitions 
+        //      - inside a tab. Otherwise we could just reset the views, AND
+        //      - do away with the need to store activeTab/activeCard elsewhere
+        
         return practiceLayout;
 
     }  // end onCreateView()

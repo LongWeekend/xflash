@@ -132,7 +132,8 @@ public class UserFragment extends Fragment
         builder.setMessage("Set the active user to " + tempName + "?");
         
         // on postive response, set the new active user
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        builder.setPositiveButton( Xflash.getActivity().getResources().getString(R.string.just_ok) , 
+                                   new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
             {

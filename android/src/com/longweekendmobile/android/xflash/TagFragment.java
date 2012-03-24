@@ -325,7 +325,8 @@ public class TagFragment extends Fragment
             builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
 
             // on postive response, set the new active user
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            builder.setPositiveButton( Xflash.getActivity().getResources().getString(R.string.just_ok), 
+                                       new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog,int which)
                 {

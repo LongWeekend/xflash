@@ -86,6 +86,7 @@
     <string name="difficulty_frequency_title">Frequency of New Cards</string>
     <string name="difficulty_frequency_moreoften">More Often</string>
     <string name="difficulty_hide_learned">Hide Learned Cards</string>
+    <string name="just_ok">OK</string>
     <string name="just_on">On</string>
     <string name="just_off">Off</string>
     <string name="user_title">Choose User</string>
@@ -115,10 +116,11 @@
     <string name="learned_alert_message">Congratulations! You\'ve already learned all of the words in \"##TAGNAME##\". We will show cards that would usually be hidden.</string>
     <string name="lastcard_alert_title">Last Card in Set</string>
     <string name="lastcard_alert_message">This is the last card in the study set \"##TAGNAME##\", which you are currently studying!  To delete a set entirely, please change to a different set first.</string>
+    <!-- NOTE: in Obj C, this alert includes reference to the Rikai Browser -->
     <string name="firstrun_alert_title">Welcome to Japanese Flash!</string>
     <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
-    <!-- NOTE: in Obj C, this alert includes reference to the Rikai Browser -->
-
+    <string name="update_debug_title">Up\'dizzle?</string>
+    <string name="update_debug_message">Fo\'shizzle!</string>
 </resources>
 
 

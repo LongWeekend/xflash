@@ -12,7 +12,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void load()
 //
-//  public  void checkFirstRun()
+//  public  void updateCheck()
 //  public  void setActiveTag(Tag  )
 //  public  Tag getActiveTag()
 //  private int checkForBug(int  ) --------- temporary?
@@ -57,6 +57,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void throwBadValue(String  ,int  )
 
+import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -168,25 +169,68 @@ public class XflashSettings
     }  // end load()
 
 
-    // called to display the opening dialog, if necessary
-    public static void checkFirstRun()
+    // called to check for first-run or updates, display dialogs as appropriate
+    public static void updateCheck()
     {
         // get a Context, get the SharedPreferences
         XFApplication tempInstance = XFApplication.getInstance();
         SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
-        boolean hasRanBefore = settings.contains("has_ran");
-
+        int manifestVersionCode = 1;
+        
+        // get the current versionCode listed in AndroidManifest.xml
+        try
+        {
+            manifestVersionCode = tempInstance.getPackageManager().getPackageInfo( tempInstance.getPackageName(), 0).versionCode;
+        }
+        catch(android.content.pm.PackageManager.NameNotFoundException e)
+        {
+            // this should not be possible, given we are pulling the
+            // package name directly from the PackageManager we are 
+            // feeding it back to. However, it pleases the compiler gods
+            Log.d(MYTAG,"ERROR - in updateCheck(), bad package name");
+            throw new RuntimeException("Oh well!");
+        }
+        
+        // check if they is the first run of the app
+        boolean hasRanBefore = settings.contains("lwe_jf_version");
+        
         if( !hasRanBefore )
         {
+            // this will save our version for later reference based on the 
+            // versionCode we assign in AndroidManifest.xml 
+            
+            // if preferable we could pull a string value for versonName 
+            // (in this case "1.0") and save it as a float value instead
             SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("has_ran",true);
+            editor.putInt("lwe_jf_version",manifestVersionCode);
             editor.commit();        
 
-            XflashAlert.fireFirstRun();
+            // fire update with first run (versionCode 1)
+            XflashAlert.fireUpdate(manifestVersionCode);
         }
+        else
+        {
+            // check for an update, if for some reason the Preferences broke
+            // between settings.contains() and here, default to the code we 
+            // just pulled from the Manifest so we end up doing nothing and
+            // nothing goes wonky
+            int savedVersionCode = settings.getInt("lwe_jf_version",manifestVersionCode);
 
-    }  // end checkFirstRun()
+            if( savedVersionCode != manifestVersionCode )
+            {
+                // save new version code
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("lwe_jf_version",manifestVersionCode);
+                editor.commit();        
+
+                // on snap, we got ourselves an udpate
+                XflashAlert.fireUpdate(manifestVersionCode);
+            }
+        
+        }  // end check for updates
+    
+    }  // end updateCheck()
 
  
     // called when any Fragment is setting a new Tag to study
