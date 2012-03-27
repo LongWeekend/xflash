@@ -20,7 +20,7 @@
 
     </RelativeLayout>
 
-    <LinearLayout style="@style/default_frame_block"
+    <LinearLayout style="@style/frame_block"
         android:orientation="vertical"
         android:layout_marginTop="10dp" >
 
@@ -41,37 +41,40 @@
 
         <!-- update list -->
         <TextView 
-            style="@style/default_display_heading_layout"
+            style="@style/display_heading_layout"
             android:layout_marginTop="20dp"
             android:text="@string/update_install_block_title" />
 
-         <RelativeLayout style="@style/default_display_block">
-            <TextView 
-                style="@style/default_display_left"
-                android:text="@string/update_awesomesearch" />
-            <TextView 
-                style="@style/default_display_right"
-                android:text="" />
-        </RelativeLayout>
-        <LinearLayout style="@style/generic_divider" />
-        <RelativeLayout style="@style/default_display_block">
-            <TextView 
-                style="@style/default_display_left"
-                android:text="@string/update_jflash_cards" />
-            <TextView 
-                style="@style/default_display_right"
-                android:text="" />
-        </RelativeLayout>
-        <LinearLayout style="@style/generic_divider" />
-        <RelativeLayout style="@style/default_display_block">
-            <TextView 
-                style="@style/default_display_left"
-                android:text="@string/update_thousand_examples" />
-            <TextView 
-                style="@style/default_display_right"
-                android:text="" />
-        </RelativeLayout>
- 
+         <LinearLayout style="@style/background_with_size"
+            android:orientation="vertical" >
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/display_block_left"
+                    android:text="@string/update_awesomesearch" />
+                <TextView 
+                    style="@style/display_block_right"
+                    android:text="" />
+            </RelativeLayout>
+            <View style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/display_block_left"
+                    android:text="@string/update_jflash_cards" />
+                <TextView 
+                    style="@style/display_block_right"
+                    android:text="" />
+            </RelativeLayout>
+            <View style="@style/generic_divider" />
+            <RelativeLayout style="@style/default_display_block">
+                <TextView 
+                    style="@style/display_block_left"
+                    android:text="@string/update_thousand_examples" />
+                <TextView 
+                    style="@style/display_block_right"
+                    android:text="" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

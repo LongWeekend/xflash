@@ -109,6 +109,9 @@ public class SearchFragment extends Fragment
             },300);
         }
      
+        // turn on fading edge on scroll
+        searchList.setVerticalFadingEdgeEnabled(true);
+        
         return searchLayout;
 
     }  // end onCreateView()

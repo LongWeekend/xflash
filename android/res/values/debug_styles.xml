@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="not_implemented" parent="@style/default_display_right">
+    <style name="not_implemented" parent="@style/display_block_right">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">#FFFF0000</item>
         <item name="android:text">not implemented</item>

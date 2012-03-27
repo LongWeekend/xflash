@@ -20,14 +20,14 @@
     </RelativeLayout>
 
     <LinearLayout
-            style="@style/default_frame_block"
+            style="@style/frame_block"
             android:orientation="vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp" >
 
             <TextView 
-                style="@style/default_normal_text"
+                style="@style/normal_display_text"
                 android:layout_width="match_parent" 
                 android:layout_height="wrap_content" 
                 android:text="@string/createtag_edit_caption" />

@@ -34,26 +34,30 @@
     </RelativeLayout>
 
     <ScrollView android:id="@+id/tag_scroll"
-        style="@style/default_scroll_block"
+        style="@style/scroll_block"
         android:layout_below="@id/tag_heading" >
 
         <!-- single child of scroll view -->
         <LinearLayout android:id="@+id/tag_singlechild"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp" >
 
             <!-- main list of groups, populated dynamically -->
             <LinearLayout android:id="@+id/main_group_list"
+                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
     
             </LinearLayout>  
 
 
             <!-- tag list -->
             <LinearLayout android:id="@+id/main_tag_list"
+                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,33 +68,33 @@
 
             
             <!-- the Backup block -->
+            <TextView android:id="@+id/tagbackup_heading"
+                style="@style/display_heading_layout"
+                android:text="@string/tag_backupblock_title" />
+
             <LinearLayout android:id="@+id/tag_backup_block"
+                style="@style/default_block_background"
                 android:orientation="vertical" 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-                
-                <TextView 
-                    style="@style/default_display_heading_layout"
-                    android:text="@string/tag_backupblock_title" />
 
                 <RelativeLayout style="@style/default_display_block">
                     <TextView 
-                        style="@style/default_display_left"
+                        style="@style/display_block_left"
                         android:text="@string/tag_backup_now" />
                     <TextView
                         style="@style/not_implemented" />
                 </RelativeLayout>
-                <LinearLayout style="@style/generic_divider" />
-                <RelativeLayout style="@style/default_display_block"
-                    android:layout_marginBottom="10dp" >
+                <View style="@style/generic_divider" />
+                <RelativeLayout style="@style/default_display_block">
                     <TextView 
-                        style="@style/default_display_left"
+                        style="@style/display_block_left"
                         android:text="@string/tag_restore_now" />
                     <TextView
                         style="@style/not_implemented" />
                 </RelativeLayout>
 
-            </LinearLayout>  <!-- end backup block -->
+            </LinearLayout>
  
         </LinearLayout>  <!-- end single child of scroll view -->
 
@@ -102,14 +106,17 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tag_heading"
         android:background="#77000000"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" >
 
         <ScrollView android:id="@+id/tag_search_scroll"
-            style="@style/default_scroll_block"
+            style="@style/scroll_block"
             android:visibility="gone" >
 
             <!-- search tag list -->
             <LinearLayout android:id="@+id/tag_search_list"
+                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

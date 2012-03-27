@@ -215,13 +215,16 @@ public class TagFragment extends Fragment
         refreshTagList();
 
         // only display backup block on root view
+        TextView backupHeading = (TextView)tagLayout.findViewById(R.id.tagbackup_heading);
         LinearLayout backupBlock = (LinearLayout)tagLayout.findViewById(R.id.tag_backup_block);
         if( ( currentGroup != null ) && currentGroup.isTopLevelGroup() )
         {
+            backupHeading.setVisibility(View.VISIBLE);
             backupBlock.setVisibility(View.VISIBLE);
         }
         else
         {
+            backupHeading.setVisibility(View.GONE);
             backupBlock.setVisibility(View.GONE);
         }
 

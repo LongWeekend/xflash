@@ -9,21 +9,21 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_display_heading">
+    <style name="display_heading_text">
         <item name="android:textColor">#FF828282</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_display_text">
+    <style name="bold_display_text">
         <item name="android:textColor">#FF000000</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="default_normal_text">
+    <style name="normal_display_text">
         <item name="android:textColor">#FF000000</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="default_value_text">
+    <style name="gray_display_text">
         <item name="android:textColor">#FFB0B0B0</item>
         <item name="android:textSize">18sp</item>
     </style>

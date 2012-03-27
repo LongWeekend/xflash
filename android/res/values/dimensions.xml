@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_radio_width">70dp</dimen>
+    <dimen name="default_radio_height">34dp</dimen>
+    <dimen name="default_radio_corner">6dp</dimen>
+    <dimen name="background_corner_radius">8dp</dimen>
+</resources>

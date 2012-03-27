@@ -110,6 +110,9 @@ public class TagCardsFragment extends Fragment
         AsyncLoadcards tempLoad = new AsyncLoadcards();
         tempLoad.execute();
  
+        // turn on fading edges on scroll
+        cardList.setVerticalFadingEdgeEnabled(true);
+        
         return tagCardsLayout;
 
     }  // end onCreateView
@@ -185,6 +188,28 @@ public class TagCardsFragment extends Fragment
             if( row == null ) 
             {
                 row = myInflater.inflate(R.layout.tagcards_row, parent, false);
+            }
+            
+            // set the background according to position
+            if( cardArray.size() == 1 )
+            {
+                // if they're only one card, round all corners
+                row.setBackgroundResource(R.drawable.tagcards_rowback_single);
+            }
+            else if( position == 0 )
+            {
+                // top row, top corners rounded
+                row.setBackgroundResource(R.drawable.tagcards_rowback_top);
+            }
+            else if( position == ( cardArray.size() - 1 ) )
+            {
+                // bottom row, bottom corners rounded
+                row.setBackgroundResource(R.drawable.tagcards_rowback_bottom);
+            }
+            else
+            {
+                // middle row, no corners
+                row.setBackgroundResource(R.drawable.tagcards_rowback);
             }
             
             Card tempCard = cardArray.get(position);

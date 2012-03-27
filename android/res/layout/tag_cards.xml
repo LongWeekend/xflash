@@ -19,10 +19,29 @@
 
     </RelativeLayout>
 
-    <!-- TODO - this ListView is not properly displaying either its 
-                scrollbar, nor its shading on scroll -->
+    <!-- TODO - We MUST disable the cache color hint in this ListView
+              - such that we can have our "Begin Studying These"
+              - header spaced away from the list content, without the
+              - blank spaces above and below being populated with a
+              - solid color.  However, this forces the phone to render the
+              - List backgrounds through transparency against the background
+              - image, WHICH INCLUDES THE DIVIDERS BETWEEN ITEMS AS WELL 
+              - because they are considered empty space.  This can lead to 
+              - a small amount of lag time during scrolling, and also causes
+              - occasional problems with the dividers being hard to see
+              - and/or not rendered
+              -
+              - SOLUTION:
+              - override by setting dividers manually in @style/list_block
+              - BEEF:
+              - this leaves an artifact - a divider appears above the header and
+              - below the bottom list item WHILE SCROLLING, but disappears after
+    -->
+
     <ListView android:id="@+id/tagcards_list"
-        style="@style/default_list_block" />
+        style="@style/list_block"
+        android:layout_marginBottom="10dp" >
+    </ListView>
         
 </LinearLayout>
 
