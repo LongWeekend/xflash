@@ -58,7 +58,7 @@
 
         </RadioGroup> 
 
-        <!-- the rest of the settings -->
+        <!-- the cards-in-study-pool slider -->
         <TextView 
             style="@style/display_heading_layout"
             android:text="@string/difficulty_studypool_title" />
@@ -88,7 +88,7 @@
                 android:max="45" />
         </RelativeLayout>
  
-        <!-- the Backup block -->
+        <!-- the frequency slider -->
         <TextView 
             style="@style/display_heading_layout"
             android:text="@string/difficulty_frequency_title" />

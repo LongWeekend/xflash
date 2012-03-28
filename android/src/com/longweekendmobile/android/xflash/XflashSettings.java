@@ -28,6 +28,7 @@ package com.longweekendmobile.android.xflash;
 //  public void setupColorScheme(RelativeLayout  ,View  )
 //  public void setRadioColors(XflashRadio[]  )
 //  public int[] getIcons()
+//  public int[] getHHArray()
 //
 //  public int getStudyMode()
 //  public String getStudyModeName()
@@ -545,8 +546,43 @@ public class XflashSettings
         }
         
         return tempIcons; 
-    }
+
+    }  // end getIcons()
  
+
+    // returns and int[] of Hot Head image resources based on
+    // current color theme
+    public static int[] getHHArray()
+    {
+        int[] hhArray;
+
+        if( colorScheme == LWE_THEME_BLUE )
+        {
+            hhArray = new int[] { R.drawable.blue_hh_ecstatic, R.drawable.blue_hh_happy,
+                                  R.drawable.blue_hh_jolly, R.drawable.blue_hh_small_smile,
+                                  R.drawable.blue_hh_my_name_is_forest, 
+                                  R.drawable.blue_hh_uncommunicative, 
+                                  R.drawable.blue_hh_wounded, R.drawable.blue_hh_losin_it,
+                                  R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
+                                  R.drawable.blue_hh_wounded };
+        }
+        else
+        {
+            // though there's a separate folder with separate images for red
+            // and tame in the Obj C code, it looks like they're the same
+            hhArray = new int[] { R.drawable.red_hh_ecstatic, R.drawable.red_hh_happy,
+                                  R.drawable.red_hh_jolly, R.drawable.red_hh_small_smile,
+                                  R.drawable.red_hh_my_name_is_forest, 
+                                  R.drawable.red_hh_uncommunicative, 
+                                  R.drawable.red_hh_wounded, R.drawable.red_hh_losin_it,
+                                  R.drawable.red_hh_pissed, R.drawable.red_hh_sea_sick,
+                                  R.drawable.red_hh_wounded };
+        }
+
+        return hhArray;
+
+    }  // end getHHArray()
+
 
 //  *** STUDY MODE SETTINGS ***
 
