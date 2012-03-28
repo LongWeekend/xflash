@@ -215,13 +215,16 @@ public class TagFragment extends Fragment
         refreshTagList();
 
         // only display backup block on root view
+        TextView backupHeading = (TextView)tagLayout.findViewById(R.id.tagbackup_heading);
         LinearLayout backupBlock = (LinearLayout)tagLayout.findViewById(R.id.tag_backup_block);
         if( ( currentGroup != null ) && currentGroup.isTopLevelGroup() )
         {
+            backupHeading.setVisibility(View.VISIBLE);
             backupBlock.setVisibility(View.VISIBLE);
         }
         else
         {
+            backupHeading.setVisibility(View.GONE);
             backupBlock.setVisibility(View.GONE);
         }
 
@@ -325,7 +328,8 @@ public class TagFragment extends Fragment
             builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
 
             // on postive response, set the new active user
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+            builder.setPositiveButton( Xflash.getActivity().getResources().getString(R.string.just_ok), 
+                                       new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog,int which)
                 {

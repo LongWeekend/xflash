@@ -10,7 +10,7 @@ package com.longweekendmobile.android.xflash;
 //
 //      *** ALL METHODS STATIC ***
 //
-//  public  void fireFirstRun(Tag  )
+//  public  void fireUpdate(int  )
 //  public  void fireTagLearned(Tag  )
 //  public  void fireLastCardDialog(Tag  )
 //  public  void startStudying(View  )
@@ -19,6 +19,7 @@ package com.longweekendmobile.android.xflash;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.view.View;
 
 import com.longweekendmobile.android.xflash.model.Tag;
@@ -26,45 +27,67 @@ import com.longweekendmobile.android.xflash.model.TagPeer;
 
 public class XflashAlert 
 {
-    // dialog to be displayed the first time the app is ran after install
-    public static void fireFirstRun()
+    // displays a dialog with various update messages, depending on current
+    // versionCode in AndroidManifest.xml
+    
+    // NOTE - newVersionCode could be a string (i.e. "1.0") if we prefer
+    public static void fireUpdate(int newVersionCode)
     {
+        Resources res = Xflash.getActivity().getResources();
+        
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
-        // set the title
-        String tempString = Xflash.getActivity().getResources().getString(R.string.firstrun_alert_title);
-        builder.setTitle(tempString);
-
-        // set the message
-        tempString = Xflash.getActivity().getResources().getString(R.string.firstrun_alert_message);
-        builder.setMessage(tempString);
+        String title = null;
+        String message = null;
+        
+        if( newVersionCode == 1 )
+        {
+            // first run
+            title = res.getString(R.string.firstrun_alert_title);
+            message = res.getString(R.string.firstrun_alert_message);
+        }
+        else if( newVersionCode == 2 )
+        {
+            title = res.getString(R.string.update_debug_title);
+            message = res.getString(R.string.update_debug_message);
+        }
+        else
+        {
+            throw new RuntimeException("XflashAlert.fireUpdate(" + newVersionCode + 
+                                       ") BAD VERSION CODE!");
+        }
+        
+        builder.setTitle(title);
+        builder.setMessage(message);
 
         // on negative response, do nothing
-        builder.setNegativeButton("OK",null);
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
 
         builder.create().show();
 
-    }  // end fireTagLearned()
+    }  // end fireUpdate()
     
     
     // dialog to display (once) when all cards in a Tag are learned
     public static void fireTagLearned(Tag inTag)
     {
+        Resources res = Xflash.getActivity().getResources();
+        
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
         // set the title
-        String tempString = Xflash.getActivity().getResources().getString(R.string.learned_alert_title);
+        String tempString = res.getString(R.string.learned_alert_title);
         builder.setTitle(tempString);
 
         // set the message
-        tempString = Xflash.getActivity().getResources().getString(R.string.learned_alert_message);
+        tempString = res.getString(R.string.learned_alert_message);
         tempString = tempString.replace("##TAGNAME##", inTag.getName() );
         builder.setMessage(tempString);
 
         // on negative response, do nothing
-        builder.setNegativeButton("OK",null);
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
 
         builder.create().show();
 
@@ -74,20 +97,22 @@ public class XflashAlert
     // dialog to display error if user tries to remove the last card in a set
     public static void fireLastCardDialog(Tag inTag)
     {
+        Resources res = Xflash.getActivity().getResources();
+        
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
         // set the title
-        String tempString = Xflash.getActivity().getResources().getString(R.string.lastcard_alert_title);
+        String tempString = res.getString(R.string.lastcard_alert_title);
         builder.setTitle(tempString);
 
         // set the message
-        tempString = Xflash.getActivity().getResources().getString(R.string.lastcard_alert_message);
+        tempString = res.getString(R.string.lastcard_alert_message);
         tempString = tempString.replace("##TAGNAME##", inTag.getName() );
         builder.setMessage(tempString);
 
         // on negative response, do nothing
-        builder.setNegativeButton("OK",null);
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
 
         builder.create().show();
 
@@ -130,7 +155,8 @@ public class XflashAlert
         builder.setMessage(tempString);
 
         // on postive response, set the new active user
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        builder.setPositiveButton( inContext.getResources().getString(R.string.just_ok) , 
+                                   new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
             {
@@ -151,19 +177,21 @@ public class XflashAlert
     // dialog to display on attempt to start studying a tag with no cards
     private static void fireEmptyTagDialog()
     {
+        Resources res = Xflash.getActivity().getResources();
+        
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
 
         // set the title
-        String tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_title);
+        String tempString = res.getString(R.string.emptyset_dialog_title);
         builder.setTitle(tempString);
 
         // set the message
-        tempString = Xflash.getActivity().getResources().getString(R.string.emptyset_dialog_message);
+        tempString = res.getString(R.string.emptyset_dialog_message);
         builder.setMessage(tempString);
 
         // on negative response, do nothing
-        builder.setNegativeButton("OK",null);
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
 
         builder.create().show();
 

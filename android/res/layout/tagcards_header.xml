@@ -6,13 +6,14 @@
     android:paddingBottom="10dp" >
 
     <RelativeLayout android:id="@+id/header_block"
-        style="@style/default_display_block" >
+        style="@style/default_display_block"
+        android:background="@drawable/default_background" >
 
         <TextView 
-            style="@style/default_display_left"
+            style="@style/display_block_left"
             android:text="@string/addcard_start_studying" />
         <TextView 
-            style="@style/default_display_right"
+            style="@style/display_block_right"
             android:text=">" />
 
     </RelativeLayout>

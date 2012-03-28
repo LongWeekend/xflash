@@ -27,7 +27,7 @@
 
     </RelativeLayout>
 
-    <ScrollView style="@style/default_scroll_block">
+    <ScrollView style="@style/scroll_block">
 
         <!-- single child of the scroll view -->
         <LinearLayout android:id="@+id/settings_page"  
@@ -38,21 +38,26 @@
 
             <!-- the word block -->
             <TextView android:id="@+id/addcard_word"
-                style="@style/default_display_heading_layout"
+                style="@style/display_heading_layout"
                 android:textColor="#FF000000" />
 
-            <TextView android:id="@+id/addcard_reading"
-                style="@style/default_display_block"
-                android:textColor="#FF000000" />
-            <TextView android:id="@+id/addcard_meaning"
-                style="@style/default_display_block"
-                android:textColor="#FF000000" />
+            <LinearLayout style="@style/background_with_size"
+                android:orientation="vertical"
+                android:layout_width="match_parent" >
+                <TextView android:id="@+id/addcard_reading"
+                    style="@style/default_display_block"
+                    android:textColor="#FF000000" />
+                <TextView android:id="@+id/addcard_meaning"
+                    style="@style/default_display_block"
+                    android:textColor="#FF000000" />
+            </LinearLayout>
 
             <!-- the 'my sets' block -->
             <TextView 
-                style="@style/default_display_heading_layout"
+                style="@style/display_heading_layout"
                 android:text="@string/addcard_mysets" />
             <LinearLayout android:id="@+id/addcard_usertags_list"
+                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
@@ -61,9 +66,10 @@
 
             <!-- the 'other sets' block -->
             <TextView 
-                style="@style/default_display_heading_layout"
+                style="@style/display_heading_layout"
                 android:text="@string/addcard_othersets" />
             <LinearLayout android:id="@+id/addcard_systags_list"
+                style="@style/default_block_background"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >

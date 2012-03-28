@@ -90,9 +90,26 @@ public class UserFragment extends Fragment
             // set the background/edit button based on whether this is our active user
             if( tempId == tempCurrentUser )
             {
-                userRow.setBackgroundResource(R.color.selected_row);
                 tempView.setTextColor(0xFFFFFFFF);
-            }
+                
+                // set background based on row
+                if( i == 0 )
+                {
+                    // top row, top corners rounded
+                    userRow.setBackgroundResource(R.drawable.userrow_selected_top);
+                }
+                else if( i == ( numUsers - 1 ) )
+                {
+                    // bottom row, bottom corners rounded
+                    userRow.setBackgroundResource(R.drawable.userrow_selected_bottom);
+                }
+                else
+                {
+                    // middle row, no corners rounded
+                    userRow.setBackgroundResource(R.drawable.userrow_selected);
+                }
+            
+            }  // end if( this is the current user )
             
             // add a divider before all except the first
             if( i > 0 )
@@ -132,7 +149,8 @@ public class UserFragment extends Fragment
         builder.setMessage("Set the active user to " + tempName + "?");
         
         // on postive response, set the new active user
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        builder.setPositiveButton( Xflash.getActivity().getResources().getString(R.string.just_ok) , 
+                                   new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
             {

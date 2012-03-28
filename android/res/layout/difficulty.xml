@@ -21,12 +21,12 @@
     </RelativeLayout>
 
     <LinearLayout 
-        style="@style/default_frame_block"
+        style="@style/frame_block"
         android:orientation="vertical" >
 
-        <!-- the Backup block -->
+        <!-- the radio block -->
         <TextView 
-            style="@style/default_display_heading_layout"
+            style="@style/display_heading_layout"
             android:text="@string/difficulty_radio_title" />
 
         <RadioGroup android:id="@+id/difficulty_group"
@@ -58,22 +58,22 @@
 
         </RadioGroup> 
 
-        <!-- the Backup block -->
+        <!-- the rest of the settings -->
         <TextView 
-            style="@style/default_display_heading_layout"
+            style="@style/display_heading_layout"
             android:text="@string/difficulty_studypool_title" />
 
         <RelativeLayout style="@style/default_display_block"
-            android:padding="4dp" >
+            android:background="@drawable/default_background" >
             
             <TextView android:id="@+id/difficulty_lower"
-                style="@style/default_display_text"
+                style="@style/bold_display_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="5" />
             <TextView android:id="@+id/difficulty_upper"
-                style="@style/default_display_text"
+                style="@style/bold_display_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -90,14 +90,14 @@
  
         <!-- the Backup block -->
         <TextView 
-            style="@style/default_display_heading_layout"
+            style="@style/display_heading_layout"
             android:text="@string/difficulty_frequency_title" />
 
         <RelativeLayout style="@style/default_display_block"
-            android:padding="4dp" >
+            android:background="@drawable/default_background" >
             
             <TextView android:id="@+id/more_often"
-                style="@style/default_display_text"
+                style="@style/bold_display_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -115,13 +115,13 @@
         <RelativeLayout android:id="@+id/hidelearned_block"
             style="@style/default_display_block"
             android:layout_marginTop="10dp"
-            android:padding="4dp" >
+            android:background="@drawable/default_background" >
 
             <TextView
-                style="@style/default_display_left"
+                style="@style/display_block_left"
                 android:text="@string/difficulty_hide_learned" />
             <TextView android:id="@+id/hide_learned_value"
-                style="@style/default_display_right" />
+                style="@style/display_block_right" />
 
         </RelativeLayout>
 

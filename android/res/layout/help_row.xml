@@ -3,10 +3,10 @@
     style="@style/default_display_block">
 
     <TextView android:id="@+id/help_label"
-        style="@style/default_display_left" />
+        style="@style/display_block_left" />
 
     <TextView 
-        style="@style/default_display_right"
+        style="@style/display_block_right"
         android:text=">" />
 
 </RelativeLayout>

@@ -13,7 +13,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public void recacheCountsForUserTags()
 //  public void setCardCount(int  ,Tag  )
 //  public boolean cancelMembership(Card  ,Tag  )
-//  public boolean cardIsInTag(Card  ,Tag  )
+//  public boolean cardIsMemberOfTag(Card  ,Tag  )
 //  public ArrayList<Tag> faultedTagsForCard(Card  )
 //  public boolean subscribeCard(Card  ,Tag  )
 //
@@ -185,7 +185,7 @@ public class TagPeer
 
 
     // checked if a passed tagId/cardId are matched
-    public static boolean cardIsInTag(Card inCard,Tag inTag)
+    public static boolean cardIsMemberOfTag(Card inCard,Tag inTag)
     {
         SQLiteDatabase tempDB = XFApplication.getWritableDao();
         
@@ -206,7 +206,7 @@ public class TagPeer
             return false;
         }   
 
-    }  // end cardIsInTag()
+    }  // end cardIsMemberOfTag()
 
     // returns an ArrayList<int> of Tag objects this card is a member of
     public static ArrayList<Tag> faultedTagsForCard(Card inCard)
