@@ -92,12 +92,31 @@ public class XflashSettings
     // they are loaded such that their index corresponds to the appropriate
     // color scheme, i.e.  { LWE_THEME_RED , LWE_THEME_BLUE , LWE_THEME_TAME }
     // so that we can use colorScheme directly
-    private static int[] backgroundIds = { R.drawable.practice_bg_red , R.drawable.practice_bg_blue , 
+    private static int[] backgroundIds = { R.drawable.practice_bg_red, 
+                                           R.drawable.practice_bg_blue , 
                                            R.drawable.practice_bg_tame };
     private static int[] viewGradients = { R.drawable.gradient_red , R.drawable.gradient_blue ,
                                            R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                              R.drawable.button_tame };
+            
+    // red hot head drawable resources
+    private static int[] redHeads = { R.drawable.red_hh_ecstatic, R.drawable.red_hh_happy,
+                                      R.drawable.red_hh_jolly, R.drawable.red_hh_small_smile,
+                                      R.drawable.red_hh_my_name_is_forest, 
+                                      R.drawable.red_hh_uncommunicative, 
+                                      R.drawable.red_hh_wounded, R.drawable.red_hh_losin_it,
+                                      R.drawable.red_hh_pissed, R.drawable.red_hh_sea_sick,
+                                      R.drawable.red_hh_wounded };
+
+    // blue hot head drawable resources 
+    private static int[] blueHeads = { R.drawable.blue_hh_ecstatic, R.drawable.blue_hh_happy,
+                                       R.drawable.blue_hh_jolly, R.drawable.blue_hh_small_smile,
+                                       R.drawable.blue_hh_my_name_is_forest, 
+                                       R.drawable.blue_hh_uncommunicative, 
+                                       R.drawable.blue_hh_wounded, R.drawable.blue_hh_losin_it,
+                                       R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
+                                       R.drawable.blue_hh_wounded };
 
     // properties for global app settings
     private static int colorScheme = -1;
@@ -558,29 +577,15 @@ public class XflashSettings
 
         if( colorScheme == LWE_THEME_BLUE )
         {
-            hhArray = new int[] { R.drawable.blue_hh_ecstatic, R.drawable.blue_hh_happy,
-                                  R.drawable.blue_hh_jolly, R.drawable.blue_hh_small_smile,
-                                  R.drawable.blue_hh_my_name_is_forest, 
-                                  R.drawable.blue_hh_uncommunicative, 
-                                  R.drawable.blue_hh_wounded, R.drawable.blue_hh_losin_it,
-                                  R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
-                                  R.drawable.blue_hh_wounded };
+            return blueHeads;
         }
         else
         {
             // though there's a separate folder with separate images for red
             // and tame in the Obj C code, it looks like they're the same
-            hhArray = new int[] { R.drawable.red_hh_ecstatic, R.drawable.red_hh_happy,
-                                  R.drawable.red_hh_jolly, R.drawable.red_hh_small_smile,
-                                  R.drawable.red_hh_my_name_is_forest, 
-                                  R.drawable.red_hh_uncommunicative, 
-                                  R.drawable.red_hh_wounded, R.drawable.red_hh_losin_it,
-                                  R.drawable.red_hh_pissed, R.drawable.red_hh_sea_sick,
-                                  R.drawable.red_hh_wounded };
+            return redHeads;
         }
-
-        return hhArray;
-
+    
     }  // end getHHArray()
 
 
