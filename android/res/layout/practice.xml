@@ -271,8 +271,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/practice_answerbutton_frame"
-        android:src="@drawable/hh_temp" />
+        android:layout_above="@id/practice_answerbutton_frame" />
 
     <!-- the hot head's word bubble -->
     <ImageView android:id="@+id/practice_hhbubble"

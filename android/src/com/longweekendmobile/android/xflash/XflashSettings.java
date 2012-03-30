@@ -15,7 +15,8 @@ package com.longweekendmobile.android.xflash;
 //  public  void updateCheck()
 //  public  void setActiveTag(Tag  )
 //  public  Tag getActiveTag()
-//  private int checkForBug(int  ) --------- temporary?
+//  private int checkForBug(int  )                      --------- temporary?
+//  private Tag checkForAnotherBug(Tag inTag)           --------- temporary? 
 //  public  Card getActiveCard()
 //
 //  public int getColorScheme()
@@ -28,6 +29,7 @@ package com.longweekendmobile.android.xflash;
 //  public void setupColorScheme(RelativeLayout  ,View  )
 //  public void setRadioColors(XflashRadio[]  )
 //  public int[] getIcons()
+//  public int[] getHHArray()
 //
 //  public int getStudyMode()
 //  public String getStudyModeName()
@@ -91,12 +93,31 @@ public class XflashSettings
     // they are loaded such that their index corresponds to the appropriate
     // color scheme, i.e.  { LWE_THEME_RED , LWE_THEME_BLUE , LWE_THEME_TAME }
     // so that we can use colorScheme directly
-    private static int[] backgroundIds = { R.drawable.practice_bg_red , R.drawable.practice_bg_blue , 
+    private static int[] backgroundIds = { R.drawable.practice_bg_red, 
+                                           R.drawable.practice_bg_blue , 
                                            R.drawable.practice_bg_tame };
     private static int[] viewGradients = { R.drawable.gradient_red , R.drawable.gradient_blue ,
                                            R.drawable.gradient_tame };
     private static int[] buttonGradients = { R.drawable.button_red , R.drawable.button_blue , 
                                              R.drawable.button_tame };
+            
+    // red hot head drawable resources
+    private static int[] redHeads = { R.drawable.red_hh_ecstatic, R.drawable.red_hh_happy,
+                                      R.drawable.red_hh_jolly, R.drawable.red_hh_small_smile,
+                                      R.drawable.red_hh_my_name_is_forest, 
+                                      R.drawable.red_hh_uncommunicative, 
+                                      R.drawable.red_hh_wounded, R.drawable.red_hh_losin_it,
+                                      R.drawable.red_hh_pissed, R.drawable.red_hh_sea_sick,
+                                      R.drawable.red_hh_wounded };
+
+    // blue hot head drawable resources 
+    private static int[] blueHeads = { R.drawable.blue_hh_ecstatic, R.drawable.blue_hh_happy,
+                                       R.drawable.blue_hh_jolly, R.drawable.blue_hh_small_smile,
+                                       R.drawable.blue_hh_my_name_is_forest, 
+                                       R.drawable.blue_hh_uncommunicative, 
+                                       R.drawable.blue_hh_wounded, R.drawable.blue_hh_losin_it,
+                                       R.drawable.blue_hh_pissed, R.drawable.blue_hh_sea_sick,
+                                       R.drawable.blue_hh_wounded };
 
     // properties for global app settings
     private static int colorScheme = -1;
@@ -545,8 +566,27 @@ public class XflashSettings
         }
         
         return tempIcons; 
-    }
+
+    }  // end getIcons()
  
+
+    // returns and int[] of Hot Head image resources based on
+    // current color theme
+    public static int[] getHHArray()
+    {
+        if( colorScheme == LWE_THEME_BLUE )
+        {
+            return blueHeads;
+        }
+        else
+        {
+            // though there's a separate folder with separate images for red
+            // and tame in the Obj C code, it looks like they're the same
+            return redHeads;
+        }
+    
+    }  // end getHHArray()
+
 
 //  *** STUDY MODE SETTINGS ***
 

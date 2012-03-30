@@ -12,21 +12,24 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void onCreate()      @over
 //
-//  public static XFApplication getInstance()
+//  public static void initializeDaoPhone()
+//  public static void initializeDaoSDcard()
 //  public static LWEDatabase getDao()
-//  public static SQLiteDatabase getReadableDao()
 //  public static SQLiteDatabase getWritableDao()
+//  public static XFApplication getInstance()
 //  public static XflashNotification getNotifier()
-//  public static void clearNotifier()
+
+import java.io.File;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.longweekendmobile.android.xflash.model.LWEDatabase;
 
 public class XFApplication extends Application
 {
-    // private static final String MYTAG = "XFlash XFApplication";
+    private static final String MYTAG = "XFlash XFApplication";
 
     // MASTER CONTROL FOR JFLASH/CFLASH
     public static final boolean IS_JFLASH = true;
@@ -51,52 +54,63 @@ public class XFApplication extends Application
     
         // set out database to the global app context
         myInstance = this;
-        dao = new LWEDatabase(myInstance);
-
+        
         // set up the master nofifier
         myNotifier = new XflashNotification();
 
     }  // end onCreate()
 
-    public static XFApplication getInstance()
+    
+    // set our SQLiteOpenHelper to the local phone space
+    public static void initializeDaoPhone()
     {
-        return myInstance;
+        Log.d(MYTAG,">>> initalizing DAO to local storage");
+        
+        dao = new LWEDatabase(myInstance);
     }
+
+    // set our SQLiteOpenHelper to the SD card
+    public static void initializeDaoSDcard()
+    {
+        Log.d(MYTAG,">>> initalizing DAO to SD card");
+        
+        File root = myInstance.getExternalFilesDir(null);
+        File checkFile = new File(root,"jFlash.mp3");
+
+        dao = new LWEDatabase(myInstance,checkFile.getAbsolutePath(),null,1);
+    } 
 
     // return our entire SQLiteOpenHelper -> LWEDatabase object
     public static LWEDatabase getDao()
     {
         if( dao == null )
         {
-            dao = new LWEDatabase( getInstance() );
+            throw new RuntimeException("DAO not initialized!");
         }
 
         return dao;
     }
 
-    // return just a readable SQLiteDatabase
-    public static SQLiteDatabase getReadableDao()
-    {
-        if( dao == null )
-        {
-            dao = getDao();
-        }
-
-        return dao.getReadableDatabase();
-    } 
-
+    
     // return just a writable SQLiteDatabase
     public static SQLiteDatabase getWritableDao()
     {
         if( dao == null )
         {
-            dao = getDao();
+            throw new RuntimeException("DAO not initialized!");
         }
 
         return dao.getWritableDatabase();
-    } 
+    }   
 
 
+    // return the global context instance
+    public static XFApplication getInstance()
+    {
+        return myInstance;
+    }
+
+    
     // return the global notification system
     public static XflashNotification getNotifier()
     {

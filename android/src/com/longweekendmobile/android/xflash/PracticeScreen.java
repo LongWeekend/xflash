@@ -19,6 +19,7 @@ package com.longweekendmobile.android.xflash;
 //  private void toggleReading()
 //  private void refreshCountBar()
 //  private void loadMeaning()
+//  private int getHHResource(int  )
 //  private void setClickListeners()
 //
 //  TODO - this works, but could probably use some refactoring. Also, it feels
@@ -79,7 +80,7 @@ public class PracticeScreen
     private static TextView hhView = null;
     private static TextView showReadingText = null;
     
-    private static int percentageRight = 0;
+    private static int percentageRight = 100;
         
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
@@ -257,6 +258,9 @@ public class PracticeScreen
             loadMeaning();
                 
         }  // end if block for ( inViewMode )
+
+        // set the hot head resource
+        hhImage.setImageResource( getHHResource(percentageRight) );
 
         PracticeFragment.practiceViewStatus = inViewMode;
         setAnswerBar(PracticeFragment.practiceViewStatus);
@@ -561,6 +565,33 @@ public class PracticeScreen
     }  // end loadMeaning()
 
 
+    // returns the valid Hot Head image resource based on
+    // incoming percentage correct
+    private static int getHHResource(int inPercent)
+    {
+        int hhArray[] = XflashSettings.getHHArray();
+
+        int a = 100; 
+        int iterator = 0;
+        int resourceToReturn = 0;
+
+        while( a >= 0 )
+        {
+            if ( ( inPercent <= a ) && ( inPercent > ( a - 10 ) ) )
+            {
+                resourceToReturn = hhArray[iterator];
+                break;
+            }
+            
+            a -= 10;
+            ++iterator;
+        }
+  
+        return resourceToReturn;
+
+    }  // end getHHResource()
+
+    
     // set click listeners for all relevant views
     private static void setClickListeners()
     {
