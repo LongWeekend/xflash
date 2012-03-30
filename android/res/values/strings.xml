@@ -12,6 +12,16 @@
     <string name="help_page_name">HelpPageActivity</string>
     <string name="create_tag_name">CreateTagActivity</string>
     <string name="add_card_name">AddCardActivity</string>
+    <string name="db_target_title">Database Target</string>
+    <string name="db_target_explain">Japanese Flash uses several different databases, that all together will take up about 120MB of space.\n\nPlease choose whether you would like them to be installed on your phones\'s internal storage space, or in the dedicated app space the SD card.</string>
+    <string name="db_target_nospace">Japanese Flash uses several different databases, that all together will take up about 120MB of space.\n\nYou do not currently have enough free space in either your phone\'s internal storage or your SD card\'s dedicated app space.  Please free up some space and try again.</string>
+    <string name="db_phone_free">Phone space free:</string>
+    <string name="db_sd_free">SD app space:</string>
+
+    <string name="db_phone">Phone</string>
+    <string name="db_sd">SD card</string>
+
+
     <string name="copyerror_title">Database copy failed!</string>
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>

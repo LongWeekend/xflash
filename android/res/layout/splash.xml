@@ -6,6 +6,7 @@
     android:layout_height="match_parent" 
     android:background="@drawable/splash1" >
 
+    <!-- debug database install frame -->
     <LinearLayout android:id="@+id/debug_splash_frame"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -14,7 +15,7 @@
         android:layout_centerInParent="true"
         android:background="#BBFFFFFF"
         android:padding="6dp"
-        android:visibility="invisible" >
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,5 +25,105 @@
             android:text="  --== DEBUG DISPLAY ==--  " />
 
     </LinearLayout>
+        
+    <!-- database phone/SD card selection frame -->
+    <LinearLayout android:id="@+id/select_db_target"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/select_db_background"
+        android:padding="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            style="@style/bold_display_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFFFF"
+            android:text="@string/db_target_title"
+            android:gravity="center" />
+
+        <TextView android:id="@+id/db_target_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14dp" />
+
+        <!-- display the free space -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_horizontal" >
+
+            <TableRow>
+                <TextView
+                    style="@style/db_target_table"
+                    android:text="@string/db_phone_free"
+                    android:gravity="right" />
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="6dp" />
+                <TextView android:id="@+id/db_phonespace"
+                    style="@style/db_target_table"
+                    android:gravity="left" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    style="@style/db_target_table"
+                    android:text="@string/db_sd_free"
+                    android:gravity="right" />
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="6dp" />
+                <TextView android:id="@+id/db_sdspace"
+                    style="@style/db_target_table"
+                    android:gravity="left" />
+            </TableRow>
+
+        </TableLayout>
+
+        <!-- button block to choose where to install -->
+        <LinearLayout android:id="@+id/db_choose_block"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal" >
+            
+            <Button android:id="@+id/dbtarget_phone_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/db_phone"
+                android:onClick="goPhone" />
+
+             <Button android:id="@+id/dbtarget_sd_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/db_sd"
+                android:onClick="goSD" />
+
+        </LinearLayout>  <!-- end install button block -->
+        
+        <!-- button for when there's no space -->
+        <Button android:id="@+id/db_nospace_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/just_ok"
+            android:onClick="exitApp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+    </LinearLayout>  <!-- end database selection frame -->
         
 </RelativeLayout> 

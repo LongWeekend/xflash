@@ -15,7 +15,8 @@ package com.longweekendmobile.android.xflash;
 //  public  void updateCheck()
 //  public  void setActiveTag(Tag  )
 //  public  Tag getActiveTag()
-//  private int checkForBug(int  ) --------- temporary?
+//  private int checkForBug(int  )                      --------- temporary?
+//  private Tag checkForAnotherBug(Tag inTag)           --------- temporary? 
 //  public  Card getActiveCard()
 //
 //  public int getColorScheme()
@@ -573,8 +574,6 @@ public class XflashSettings
     // current color theme
     public static int[] getHHArray()
     {
-        int[] hhArray;
-
         if( colorScheme == LWE_THEME_BLUE )
         {
             return blueHeads;

@@ -191,7 +191,7 @@ public class Card
     public void hydrate()
     {
         // get the dao
-        SQLiteDatabase tempDB = XFApplication.getReadableDao();
+        SQLiteDatabase tempDB = XFApplication.getWritableDao();
   
         if( cardId == kLWEUninitializedCardId )
         {

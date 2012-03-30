@@ -8,7 +8,16 @@ package com.longweekendmobile.android.xflash;
 //
 //  public void onCreate(Bundle  )          @over
 //
-//  private void goSplash2()
+//  private void tossPreferences()          - debugging
+//
+//  public void goPhone(View  )
+//  public void goSD(View  )
+//  public void exitApp(View  )
+//
+//  private void startPhone()
+//  private void startSD()
+//  private int megsFree(File  ) 
+//  private void showSplash2()
 //  private void wrapUp()
 //  private void splashError(boolean  )
 //  private void turnOnReceiver()
@@ -16,6 +25,11 @@ package com.longweekendmobile.android.xflash;
 //  protected class SplashReceiver extends BroadcastReceiver
 //
 //      public void onReceive(Context  ,Intent  )
+//
+//  private Thread splashThread1
+//  private Thread splashThread2
+
+import java.io.File;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,10 +38,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,20 +66,22 @@ public class XflashSplash extends Activity
     // properties for managing the splash delay
     private int splashTime;
     
-    // boolean for checking whether database is already open
-    private boolean firedUp;
-    
     // also for debugging
     private LinearLayout DBupdateLayout; 
+    private LinearLayout DBtargetLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
+        // TODO - debugging, uncomment to wipe preferences after uninstall
+        // tossPreferences();
+
         // set background to splash1 (Long Weekend label)
         setContentView(R.layout.splash);
         
+        // set the splash delay based on whether we're debugging
         if( isDebugging )
         {
             splashTime = 200;
@@ -71,111 +91,195 @@ public class XflashSplash extends Activity
             splashTime = 2000;
         } 
 
-        firedUp = false;
-        DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);
-
         turnOnReceiver();
 
-        // start a thread to pause the first screen for [splashtime] milliseconds
-        // when it terminates, it calls goSplash2()
-        Thread splashThread1 = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    int waited = 0;
-                    while( waited < splashTime )
-                    {
-                        sleep(100);
-                        waited += 100;
-                    }
-                }
-                catch(Exception e)
-                {
-                    Log.d(MYTAG,"Exception in Splash1 pause:  " + e.toString() );
-                }
-                finally
-                {
-                    Runnable newRunnable = new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            goSplash2();
-                        }
-                    };
+        // initialize the dao based on database location
+        int DBstatus = LWEDatabase.getDBStatus(); 
+       
+        Log.d(MYTAG,"pulled DBstatus: " + DBstatus);
 
-                    // run on UI thread to have access to view elements
-                    runOnUiThread(newRunnable);
-                }
+        // if this is their first run, ask where they would
+        // like to copy/install the databases
+        if( DBstatus == LWEDatabase.DATABASE_NO_EXIST )
+        {
+            DBtargetLayout = (LinearLayout)findViewById(R.id.select_db_target);
+            DBtargetLayout.setVisibility(View.VISIBLE);
+
+            // get free space for internal phone storage
+            // File tempFile = new File("/data/data/com.longweekendmobile.android.xflash/databases/");
+            File tempFile = Environment.getDataDirectory();
+            int phoneMegsFree = megsFree(tempFile);
+            
+            // note: this number is NOT the total space free on the SD card,
+            //       rather it is the amount of space free for use in the
+            //       app-specific directories that will also be cleared
+            //       on uninstall.  Will that just confuse users?  Should we 
+            //       check THIS number, but DISPLAY the full SD storage?
+            tempFile = myContext.getExternalFilesDir(null);
+            int sdMegsFree = megsFree(tempFile);
+
+            // show the user how much space they have
+            TextView phoneFreeView = (TextView)findViewById(R.id.db_phonespace);
+            phoneFreeView.setText( Integer.toString(phoneMegsFree) );
+
+            TextView sdFreeView = (TextView)findViewById(R.id.db_sdspace);
+            sdFreeView.setText( Integer.toString(sdMegsFree) );
+
+            // turn off buttons if there isn't enough space to use them
+            if( phoneMegsFree < 130 )
+            {
+                Button phoneButton = (Button)findViewById(R.id.dbtarget_phone_button);
+                phoneButton.setEnabled(false);
+
+                phoneFreeView.setTextColor(0xFFFF5555);
+            }
+            if( sdMegsFree < 130 )
+            {
+                Button sdButton = (Button)findViewById(R.id.dbtarget_sd_button);
+                sdButton.setEnabled(false);
+
+                sdFreeView.setTextColor(0xFFFF5555);
             }
 
-        };  // end Thread declaration
+            // set the body text
+            TextView bodyText = (TextView)findViewById(R.id.db_target_body);
+            if( ( phoneMegsFree < 130 ) && ( sdMegsFree < 130 ) )
+            {
+                // if they're out of space, say so
+                bodyText.setText( getResources().getString(R.string.db_target_nospace) ); 
 
-        // start the thread we just declared
-        splashThread1.start();
+                // hide the target button block
+                LinearLayout chooseBlock = (LinearLayout)findViewById(R.id.db_choose_block);
+                chooseBlock.setVisibility(View.GONE);
+
+                // show the OK button to exit
+                Button noSpaceButton = (Button)findViewById(R.id.db_nospace_button);
+                noSpaceButton.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                // if they DO have adequate space to install
+                bodyText.setText( getResources().getString(R.string.db_target_explain) ); 
+            }
+        }
+        else
+        {
+            // if the databases are installed, initialize
+            if( DBstatus == LWEDatabase.DATABASE_PHONE )
+            {
+                startPhone();
+            }
+            else
+            {
+                startSD();
+            }
+        
+            // and pause the flash screen
+            splashThread1.start();
+        }
 
     }  // end onCreate()
 
+    
+    // TODO - debugging, wipe preferences
+    private void tossPreferences()
+    {
+        // set the new color in the Preferences
+        XFApplication tempInstance = XFApplication.getInstance();
+        SharedPreferences settings = tempInstance.getSharedPreferences(XFApplication.XFLASH_PREFNAME,0);
 
-    // change splash screens, check the database
-    private void goSplash2()
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        editor.commit();
+
+        throw new RuntimeException("tossed");
+
+    }  // end tossPreferences()
+
+    // install the databases on the phone's internal memory
+    public void goPhone(View v)
+    {
+        DBtargetLayout.setVisibility(View.GONE);
+        
+        startPhone();
+        showSplash2();
+
+    }  // end goPhone()
+
+    
+    // install the databases on the SD card internal memory
+    public void goSD(View v)
+    {
+        DBtargetLayout.setVisibility(View.GONE);
+        
+        startSD();
+        showSplash2();
+
+    }  // end goSD()
+
+    
+    // exit the app because something failed
+    public void exitApp(View v)
+    {
+        myContext.unregisterReceiver(myReceiver);
+        finish();
+    }
+
+    
+    // initialize the DAO to the phone's local storage
+    private void startPhone()
+    {
+        XFApplication.initializeDaoPhone();
+        XFApplication.getDao().setLocation(LWEDatabase.DATABASE_PHONE);
+    }
+
+
+    // initialize the DAO to the SD card
+    private void startSD()
+    {
+        XFApplication.initializeDaoSDcard();
+        XFApplication.getDao().setLocation(LWEDatabase.DATABASE_SDCARD);
+    }
+
+
+    // returns the number of MB available in the data storage
+    // unit containing the path pointed to by inFile
+    private int megsFree(File inFile) 
+    {
+        Log.d(MYTAG,"in megsFree, file path: " + inFile.getPath() );
+        
+        StatFs stat = new StatFs( inFile.getPath() );
+
+        long bytesFree = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
+        
+        return (int)( bytesFree / (1024 * 1024) );
+
+    }  // end megsFree()
+
+    
+    // change splash screens, check the database (install if necessary)
+    private void showSplash2()
     {
         // reset splash background to splash2 (Xflash label)
         RelativeLayout myLayout = (RelativeLayout)findViewById(R.id.splashback);
         myLayout.setBackgroundResource(R.drawable.splash2);
        
+        // nab the debuggin view 
+        DBupdateLayout = (LinearLayout)findViewById(R.id.debug_splash_frame);
         DBupdateLayout.setVisibility(View.VISIBLE);
- 
-        // set our master database instance
-        LWEDatabase tempDB = XFApplication.getDao();
             
         // check if our databases have been copied,
         // copy them if they haven't
-        tempDB.asynchCopyDatabaseFromAPK();
-    }
+        XFApplication.getDao().asynchCopyDatabaseFromAPK();
+
+    }  // end showSplash2()
 
    
     // clean up splash and exit to Xflash
     private void wrapUp()
     {
-        // start a thread to pause the first screen for [splashtime] milliseconds
-        Thread splashThread2 = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    int waited = 0;
-                    while( waited < splashTime )
-                    {
-                        sleep(100);
-                        waited += 100;
-                    }
-                }
-                catch(Exception e)
-                {
-                    Log.d(MYTAG,"Exception in spash2 pause:  " + e.toString() );
-                }
-                finally
-                {
-                    // without a specific override, Android chooses the animation
-                    // to use as this activity closese and Xflash.class opens
-                    // may or may not be unpredictable and require manual override
-                    myContext.unregisterReceiver(myReceiver);
-                    finish();
-                    myContext.startActivity(new Intent(myContext,Xflash.class));
-                    // deprecated stop();
-                }
-            }
-
-        };  // end Thread declaration
-
         splashThread2.start();
-
+    
     }  // end wrapUp()
 
 
@@ -203,7 +307,7 @@ public class XflashSplash extends Activity
         {
             public void onClick(DialogInterface dialog,int which)
             {
-                finish();
+                exitApp(null);
             }
         });
 
@@ -293,7 +397,7 @@ public class XflashSplash extends Activity
                 try
                 {
                     LWEDatabase tempDB = XFApplication.getDao();
-                    firedUp = tempDB.attachDatabase(LWEDatabase.DB_CARD);
+                    boolean firedUp = tempDB.attachDatabase(LWEDatabase.DB_CARD);
    
                     if( firedUp )
                     {
@@ -333,6 +437,78 @@ public class XflashSplash extends Activity
         }  // end onReceive()
 
     }  // end PracticeReceiver declaration
+
+
+    // start a thread to pause the first screen for [splashtime] milliseconds
+    // when it terminates, it calls showSplash2()
+    private Thread splashThread1 = new Thread()
+    {
+        @Override
+        public void run()
+        {
+            try
+            {
+                int waited = 0;
+                while( waited < splashTime )
+                {
+                    sleep(100);
+                    waited += 100;
+                }
+            }
+            catch(Exception e)
+            {
+                Log.d(MYTAG,"Exception in Splash1 pause:  " + e.toString() );
+            }
+            finally
+            {
+                Runnable newRunnable = new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        showSplash2();
+                    }
+                };
+
+                // run on UI thread to have access to view elements
+                runOnUiThread(newRunnable);
+            }
+        }
+
+    };  // end splashThread1 declaration
+
+
+    // start a thread to pause the first screen for [splashtime] milliseconds
+    private Thread splashThread2 = new Thread()
+    {
+        @Override
+        public void run()
+        {
+            try
+            {
+                int waited = 0;
+                while( waited < splashTime )
+                {
+                    sleep(100);
+                    waited += 100;
+                }
+            }
+            catch(Exception e)
+            {
+                Log.d(MYTAG,"Exception in spash2 pause:  " + e.toString() );
+            }
+            finally
+            {
+                // without a specific override, Android chooses the animation
+                // to use as this activity closese and Xflash.class opens
+                // may or may not be unpredictable and require manual override
+                myContext.unregisterReceiver(myReceiver);
+                finish();
+                myContext.startActivity(new Intent(myContext,Xflash.class));
+            }
+        }
+
+    };  // end splashThread2 declaration
 
 
 }  // end XflashSplash class declaration

@@ -105,8 +105,8 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
     {
         super.onDestroy();
 
-        // release all databases
-        XFApplication.getDao().detachAll();
+        // close down the database
+        XFApplication.getDao().close();
 
         // clear the active tag since we're quitting
         XflashSettings.clearActiveTag();
