@@ -10,8 +10,8 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void tossPreferences()          - debugging
 //
-//  public void goPhone(View  )
-//  public void goSD(View  )
+//  public void clickPhone(View  )
+//  public void clickSD(View  )
 //  public void exitApp(View  )
 //
 //  private void startPhone()
@@ -57,8 +57,9 @@ public class XflashSplash extends Activity
     private static final String MYTAG = "XFlash XflashSpalsh";
 
     private static final boolean isDebugging = true;
-    private static final boolean XFLASH_COPY_FAIL = false;
-    private static final boolean XFLASH_ATTACH_FAIL = true;
+    private static final int XFLASH_COPY_FAIL = 0;
+    private static final int XFLASH_ATTACH_FAIL = 1;
+    private static final int XFLASH_NO_SDCARD = 2;
 
     private final Activity myContext = this;
     private SplashReceiver myReceiver;
@@ -81,6 +82,8 @@ public class XflashSplash extends Activity
         // set background to splash1 (Long Weekend label)
         setContentView(R.layout.splash);
         
+        boolean noSDproblems = true;
+
         // set the splash delay based on whether we're debugging
         if( isDebugging )
         {
@@ -96,8 +99,6 @@ public class XflashSplash extends Activity
         // initialize the dao based on database location
         int DBstatus = LWEDatabase.getDBStatus(); 
        
-        Log.d(MYTAG,"pulled DBstatus: " + DBstatus);
-
         // if this is their first run, ask where they would
         // like to copy/install the databases
         if( DBstatus == LWEDatabase.DATABASE_NO_EXIST )
@@ -106,24 +107,38 @@ public class XflashSplash extends Activity
             DBtargetLayout.setVisibility(View.VISIBLE);
 
             // get free space for internal phone storage
-            // File tempFile = new File("/data/data/com.longweekendmobile.android.xflash/databases/");
             File tempFile = Environment.getDataDirectory();
             int phoneMegsFree = megsFree(tempFile);
             
+            // show the user how much space they have (phone)
+            TextView phoneFreeView = (TextView)findViewById(R.id.db_phonespace);
+            phoneFreeView.setText( Integer.toString(phoneMegsFree) );
+
+            // get free space for the SD card
+
             // note: this number is NOT the total space free on the SD card,
             //       rather it is the amount of space free for use in the
             //       app-specific directories that will also be cleared
             //       on uninstall.  Will that just confuse users?  Should we 
             //       check THIS number, but DISPLAY the full SD storage?
             tempFile = myContext.getExternalFilesDir(null);
-            int sdMegsFree = megsFree(tempFile);
-
-            // show the user how much space they have
-            TextView phoneFreeView = (TextView)findViewById(R.id.db_phonespace);
-            phoneFreeView.setText( Integer.toString(phoneMegsFree) );
+            int sdMegsFree = 0;
+            
+            // get our external media state
+            boolean sd = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
 
             TextView sdFreeView = (TextView)findViewById(R.id.db_sdspace);
-            sdFreeView.setText( Integer.toString(sdMegsFree) );
+            if( sd )
+            {
+                // show the user how much space they have (SD card)
+                sdMegsFree = megsFree(tempFile);
+                sdFreeView.setText( Integer.toString(sdMegsFree) );
+            }
+            else
+            {
+                // that means the SD card is unavailable
+                sdFreeView.setText("not found");
+            }
 
             // turn off buttons if there isn't enough space to use them
             if( phoneMegsFree < 130 )
@@ -133,6 +148,9 @@ public class XflashSplash extends Activity
 
                 phoneFreeView.setTextColor(0xFFFF5555);
             }
+            
+            // counts for "not found" also, since sdMegsFree was
+            // initialized to 0
             if( sdMegsFree < 130 )
             {
                 Button sdButton = (Button)findViewById(R.id.dbtarget_sd_button);
@@ -171,11 +189,30 @@ public class XflashSplash extends Activity
             }
             else
             {
-                startSD();
+                // if our databases are on the SD card, make sure it's 
+                // available for use
+                noSDproblems = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+
+                if( noSDproblems )
+                {
+                    // if we're good to go, initialize to the SD card
+                    startSD();
+                }
+                else
+                {
+                    // if we can't get the card, alert user and exit
+                    splashError(XFLASH_NO_SDCARD);
+                }
             }
         
-            // and pause the flash screen
-            splashThread1.start();
+            // code catch to stop the app from starting 
+            // LWEDatabase.asynchCopy...() while we're displaying a fatal
+            // error to the user
+            if( noSDproblems )
+            {
+                // and pause the flash screen
+                splashThread1.start();
+            }
         }
 
     }  // end onCreate()
@@ -197,25 +234,25 @@ public class XflashSplash extends Activity
     }  // end tossPreferences()
 
     // install the databases on the phone's internal memory
-    public void goPhone(View v)
+    public void clickPhone(View v)
     {
         DBtargetLayout.setVisibility(View.GONE);
         
         startPhone();
         showSplash2();
 
-    }  // end goPhone()
+    }  // end clickPhone()
 
     
     // install the databases on the SD card internal memory
-    public void goSD(View v)
+    public void clickSD(View v)
     {
         DBtargetLayout.setVisibility(View.GONE);
         
         startSD();
         showSplash2();
 
-    }  // end goSD()
+    }  // end clickSD()
 
     
     // exit the app because something failed
@@ -246,8 +283,6 @@ public class XflashSplash extends Activity
     // unit containing the path pointed to by inFile
     private int megsFree(File inFile) 
     {
-        Log.d(MYTAG,"in megsFree, file path: " + inFile.getPath() );
-        
         StatFs stat = new StatFs( inFile.getPath() );
 
         long bytesFree = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
@@ -284,7 +319,7 @@ public class XflashSplash extends Activity
 
 
     // handles informing user of a fatal error relating to database initialization
-    private void splashError(boolean inError)
+    private void splashError(int inError)
     {
         // set and fire our AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
@@ -301,9 +336,14 @@ public class XflashSplash extends Activity
             builder.setTitle( res.getString(R.string.attacherror_title) );
             builder.setMessage( res.getString(R.string.attacherror_body) );
         }
+        else if( inError == XFLASH_NO_SDCARD )
+        {
+            builder.setTitle( res.getString(R.string.nosd_title) );
+            builder.setMessage( res.getString(R.string.nosd_body) );
+        }
 
         // exit the app when they're done
-        builder.setPositiveButton("bummer", new DialogInterface.OnClickListener()
+        builder.setPositiveButton( res.getString(R.string.just_ok), new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
             {

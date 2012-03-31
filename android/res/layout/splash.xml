@@ -101,14 +101,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/db_phone"
-                android:onClick="goPhone" />
+                android:onClick="clickPhone" />
 
              <Button android:id="@+id/dbtarget_sd_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/db_sd"
-                android:onClick="goSD" />
+                android:onClick="clickSD" />
 
         </LinearLayout>  <!-- end install button block -->
         
