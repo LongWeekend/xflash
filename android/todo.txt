@@ -1,34 +1,55 @@
-Sign form and send to Mark
+- Tweet Card (in Practice, ActionBarViewController.m)
 
+- larger text size for example sentences
 
+- exception adding tags in practice
 
-Card.java
-	- audio and font related methods
+- AddCard -> CreateTag in practice does not update on new tag
 
-ChineseCard.java
-	- audio and font related methods
-	- didn't feel like dealing with any of the pinyin stuff yet
+- Create Tag does not check for zero input in EditText
 
-CardPeer.java
-	- untested methods due to lack of appropriate database tables/columns
+- Cancel button for search?
 
-ExampleSentence/Peer.java
-	- cannot test yet because I don't have a database to test on
-	- isNewVersion()
+- kill backstack for browse mode
 
-LWEDatabase.java
-	- deal with cutting up the databases into small files (UGH)
+- what happens when you click on the hot head?
 
-Tag.java
-	- add Receiver when hydrating
-	- send Broadcast when saving
-	- on receive, re-hydrate
+- tweak practice view clickable background
 
-TagPeer.java
-	- cancelMembership() - is current tag? + notifications
-	- NSDictionary + throw error?
-	- subscribeCard() - notifications
+- zippy example sentences unfolding
 
-Everywhere
-	- implement real-time user settings -> user id
+- link in summary to settings view
 
+- help topics overlapping with next button?
+
+- kill 'no thanks' button on help -> Ask Us
+
+- SQL max attach?
+
+- change yellow button colors
+
+- kill ! for wrong streak in practice summary
+
+- Search - pop keyboard on null results
+         - center_vertical the EditText
+         - kill cancel button
+
+- Settings rate up button?
+
+- Settings footer
+
+- Tag, alerts for backup and restore
+
+- Tag, backup and restore
+
+- Tag Cards, default (no cards) view
+
+- Edit user, hide save button on blank EditText
+
+- Edit user, alert on save with blank EditText
+
+- Edit user, prompt text
+
+- User change, reload Practice values or something?
+
+- Delete users

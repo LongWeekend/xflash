@@ -80,7 +80,7 @@ public class PracticeScreen
     private static TextView hhView = null;
     private static TextView showReadingText = null;
     
-    private static int percentageRight = 100;
+    private static int percentageRight = 0;
         
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
