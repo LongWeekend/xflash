@@ -17,6 +17,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  private void setAnswerBar(int  )
 //  private void toggleReading()
+//  private void toggleHHbubble()
 //  private void refreshCountBar()
 //  private void loadMeaning()
 //  private int getHHResource(int  )
@@ -61,6 +62,7 @@ public class PracticeScreen
 
     // used for toggle of reading view
     private static boolean readingTextVisible = false; 
+    private static boolean hhPercentVisible = true; 
        
     private static RelativeLayout practiceLayout = null;
         
@@ -77,7 +79,7 @@ public class PracticeScreen
     private static RelativeLayout practiceBack = null;
     private static RelativeLayout practiceScrollBack = null;
     private static TextView headwordView = null;
-    private static TextView hhView = null;
+    private static TextView hhPercent = null;
     private static TextView showReadingText = null;
     
     private static int percentageRight = 0;
@@ -121,7 +123,7 @@ public class PracticeScreen
         hhBubble = (ImageView)practiceLayout.findViewById(R.id.practice_hhbubble);
                 
         // load the hot head percentage view
-        hhView = (TextView)practiceLayout.findViewById(R.id.practice_talkbubble_text);
+        hhPercent = (TextView)practiceLayout.findViewById(R.id.practice_talkbubble_text);
     
         // load the resources for the answer bar
         blankButton = (ImageButton)practiceLayout.findViewById(R.id.practice_answerbutton);
@@ -175,7 +177,7 @@ public class PracticeScreen
         practiceBack = null;
         practiceScrollBack = null;
         headwordView = null;
-        hhView = null;
+        hhPercent = null;
         showReadingText = null;
 
     }  // end dump()
@@ -189,8 +191,8 @@ public class PracticeScreen
             // set up for blank view
             hhImage.setVisibility(View.VISIBLE);
             hhBubble.setVisibility(View.VISIBLE);
-            hhView.setText( Integer.toString( percentageRight ) + "%" );
-            hhView.setVisibility(View.VISIBLE);
+            hhPercent.setText( Integer.toString( percentageRight ) + "%" );
+            hhPercent.setVisibility(View.VISIBLE);
             rightArrow.setVisibility(View.GONE);
             showReadingButton.setVisibility(View.VISIBLE);
             if( readingTextVisible )
@@ -206,6 +208,10 @@ public class PracticeScreen
 
             // enable reveal clicks on the body content in blank mode
             practiceScrollBack.setClickable(true);
+
+            // always show hot head speech bubble for new cards
+            hhPercentVisible = true;
+            
         }
         else if( inViewMode == PRACTICE_VIEW_BROWSE )
         {
@@ -213,7 +219,7 @@ public class PracticeScreen
             countBar.setVisibility(View.INVISIBLE);
             hhImage.setVisibility(View.GONE);
             hhBubble.setVisibility(View.GONE);
-            hhView.setVisibility(View.GONE);
+            hhPercent.setVisibility(View.GONE);
             miniAnswerImage.setVisibility(View.GONE);
             rightArrow.setVisibility(View.GONE);
             showReadingButton.setVisibility(View.GONE);
@@ -236,8 +242,8 @@ public class PracticeScreen
             // set up for reveal
             hhImage.setVisibility(View.VISIBLE);
             hhBubble.setVisibility(View.VISIBLE);
-            hhView.setText( Integer.toString( percentageRight ) + "%" );
-            hhView.setVisibility(View.VISIBLE);
+            hhPercent.setText( Integer.toString( percentageRight ) + "%" );
+            hhPercent.setVisibility(View.VISIBLE);
             miniAnswerImage.setVisibility(View.GONE);
             showReadingText.setVisibility(View.VISIBLE);
                 
@@ -256,6 +262,13 @@ public class PracticeScreen
 
             // set and display the answer
             loadMeaning();
+
+            // check if the hot head speech bubble is visible
+            if( !hhPercentVisible )
+            {
+                hhPercent.setVisibility(View.GONE);
+                hhBubble.setVisibility(View.GONE);
+            }
                 
         }  // end if block for ( inViewMode )
 
@@ -473,6 +486,26 @@ public class PracticeScreen
     }  // end PracticeScreen.toggleReading()
 
         
+    private static void toggleHHbubble()
+    {
+        if( hhPercentVisible )
+        {
+            hhPercent.setVisibility(View.GONE);
+            hhBubble.setVisibility(View.GONE);
+
+            hhPercentVisible = false;
+        }
+        else
+        {
+            hhPercent.setVisibility(View.VISIBLE);
+            hhBubble.setVisibility(View.VISIBLE);
+
+            hhPercentVisible = true;
+        }
+
+    }  // end toggleHHbubble()
+
+
     // set all TextView elements of the count bar to the current values
     private static void refreshCountBar()
     {
@@ -677,6 +710,16 @@ public class PracticeScreen
             public void onClick(View v)
             {
                 PracticeScreen.toggleReading();
+            }
+        });
+        
+        // listener for the hot head
+        hhImage.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                PracticeScreen.toggleHHbubble();
             }
         });
 

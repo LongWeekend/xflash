@@ -2,8 +2,6 @@
 
 - kill backstack for browse mode
 
-- what happens when you click on the hot head?
-
 - tweak practice view clickable background
 
 - zippy example sentences unfolding
