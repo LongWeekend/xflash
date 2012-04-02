@@ -8,15 +8,19 @@ package com.longweekendmobile.android.xflash;
 //
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //
+//  private void drawUserList()
 //  private void activateUser(View  )
 //  private void editUser(View  )
+//  private void deleteUser(View  )
 
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +36,11 @@ import com.longweekendmobile.android.xflash.model.UserPeer;
 
 public class UserFragment extends Fragment
 {
-    // private static final String MYTAG = "XFlash UserFragment";
+    private static final String MYTAG = "XFlash UserFragment";
    
     private ArrayList<User> userList;
     private LinearLayout userListLayout;
+    private LayoutInflater myInflater;
 
     private int switchUser;
     
@@ -43,6 +48,8 @@ public class UserFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        myInflater = inflater;
+        
         // inflate our layout for the HelpPage fragment
         LinearLayout userLayout = (LinearLayout)inflater.inflate(R.layout.user, container, false);
 
@@ -62,9 +69,20 @@ public class UserFragment extends Fragment
             }
         });
 
+        // populate the user list
+        userListLayout = (LinearLayout)userLayout.findViewById(R.id.user_list);
+        drawUserList();
+
+        return userLayout;
+
+    }  // end onCreateView()
+
+
+    // draws the user list
+    private void drawUserList()
+    {
         // load the users from DB and display
         userList = UserPeer.getUsers();
-        userListLayout = (LinearLayout)userLayout.findViewById(R.id.user_list);
        
         int numUsers = userList.size();
         int tempCurrentUser = XflashSettings.getCurrentUserId();
@@ -75,13 +93,15 @@ public class UserFragment extends Fragment
             int tempId = userList.get(i).getUserId();
 
             // inflate our exiting row resource
-            RelativeLayout userRow = (RelativeLayout)inflater.inflate(R.layout.user_row,null);
+            RelativeLayout userRow = (RelativeLayout)myInflater.inflate(R.layout.user_row,null);
 
             // set the label, tag it with our display row id, and set a click listener
             TextView tempView = (TextView)userRow.findViewById(R.id.user_label);
             tempView.setTag(i);
             tempView.setText( userList.get(i).getUserNickname() );
+
             tempView.setOnClickListener(activateListener);
+            tempView.setOnLongClickListener(userLongClick);
        
             // tag the edit button with the user id, set a click listener
             tempView = (TextView)userRow.findViewById(R.id.user_editbutton);
@@ -115,7 +135,7 @@ public class UserFragment extends Fragment
             // add a divider before all except the first
             if( i > 0 )
             {
-                FrameLayout divider = (FrameLayout)inflater.inflate(R.layout.divider,null);
+                FrameLayout divider = (FrameLayout)myInflater.inflate(R.layout.divider,null);
                 userListLayout.addView(divider);
             }
             
@@ -123,20 +143,18 @@ public class UserFragment extends Fragment
             userListLayout.addView(userRow);
                 
         }  // end for loop
-       
-        return userLayout;
 
-    }  // end onCreateView()
+    }  // end drawUserList()
 
 
     // fires the alert to change the active user
-    public void activateUser(View v)
+    private void activateUser(View v)
     {
         int tempIndex = (Integer)v.getTag();
         String tempName = userList.get(tempIndex).getUserNickname();
-        
+       
         // if they clicked to activate the already active user, do nothing
-        if( ( tempIndex + 1) == XflashSettings.getCurrentUserId() )
+        if( userList.get(tempIndex).getUserId()  == XflashSettings.getCurrentUserId() )
         {
             return;
         } 
@@ -182,7 +200,7 @@ public class UserFragment extends Fragment
     }  // end activateUser()
 
 
-    public void editUser(View v)
+    private void editUser(View v)
     {
         // set up EditUserFragment for whether we're editing or adding
         if( v.getId() == R.id.user_addbutton )
@@ -202,6 +220,50 @@ public class UserFragment extends Fragment
     }  // end editUser()
 
 
+    private void deleteUser(View v)
+    {
+        final int userRowIndex = (Integer)v.getTag();
+        final User tempUser = userList.get(userRowIndex);
+
+        Resources res = Xflash.getActivity().getResources();
+
+        // quick exit if they are trying to delete the default user
+        // or the active user
+        if( ( tempUser.getUserId() == XflashSettings.LWE_DEFAULT_USER ) ||
+            ( tempUser.getUserId() == XflashSettings.getCurrentUserId() ) )
+        {
+            XflashAlert.deleteUserError(tempUser);
+
+            return;
+        }
+
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
+        builder.setTitle( res.getString(R.string.user_deleteuser_title) );
+        builder.setMessage( res.getString(R.string.user_deleteuser_message) + " \"" + tempUser.getUserNickname() + "\"?");
+
+        // on postive response, delete the user
+        builder.setPositiveButton( res.getString(R.string.just_ok), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+                // remove the user from the database
+                tempUser.deleteUser();
+                
+                // redraw the user list view
+                userListLayout.removeAllViews();
+                    drawUserList();
+            }
+        });
+
+        // on negative response, do nothing
+        builder.setNegativeButton("Cancel",null);
+
+        builder.create().show();
+
+    }  // end deleteUser()
+
+
     // click listener for the user row edit button
     private View.OnClickListener editListener = new View.OnClickListener()
     {
@@ -219,6 +281,19 @@ public class UserFragment extends Fragment
         public void onClick(View v)
         {
             activateUser(v);
+        }
+    };
+
+    // a long-click listener for deletion of user tags
+    private View.OnLongClickListener userLongClick = new View.OnLongClickListener()
+    {
+        @Override
+        public boolean onLongClick(View v)
+        {
+            deleteUser(v);
+
+            // consume the long-click event
+            return true;
         }
     };
 

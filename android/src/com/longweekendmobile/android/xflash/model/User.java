@@ -14,7 +14,7 @@ package com.longweekendmobile.android.xflash.model;
 //  public void deleteUser()
 //  
 //  public void setUserId(int  )
-//  public int getUserid()
+//  public int getUserId()
 //  public void setUserNickname(String  )
 //  public String getUserNickname()
 //  public void setDateCrated(String  )
@@ -96,7 +96,7 @@ public class User
     }  // end save()
 
     // also self explanatory
-    public void deleteUser(Context myContext)
+    public void deleteUser()
     {
         // we can't delete an unitialized user
         if( userId == kLWEUninitializedUserId )
@@ -111,7 +111,9 @@ public class User
 
         tempDB.delete("users","user_id = ?",deleteArgs);
         tempDB.delete("user_history","user_id = ?",deleteArgs);
-    }   
+
+    }  // end deleteUser()
+
 
     // generic getters / setters
     public int getUserId()

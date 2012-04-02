@@ -18,6 +18,4 @@
 
 - Tag, backup and restore
 
-- Delete users?
-
 - AddCard -> CreateTag in practice does not update on new tag

@@ -47,6 +47,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -321,15 +322,16 @@ public class TagFragment extends Fragment
             final View viewToRemove = v;
             final int tempInt = (Integer)viewToRemove.getTag();
             final Tag tempTag = TagPeer.retrieveTagById(tempInt);
+
+            Resources res = Xflash.getActivity().getResources();
             
             // set and fire our AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
-            builder.setTitle("Delete Tag?");
-            builder.setMessage("Are you sure you want to delete the study set \"" + tempTag.getName() + "\"?");
+            builder.setTitle( res.getString(R.string.tag_deletetag_title) );
+            builder.setMessage( res.getString(R.string.tag_deletetag_message) + " \"" + tempTag.getName() + "\"?");
 
             // on postive response, set the new active user
-            builder.setPositiveButton( Xflash.getActivity().getResources().getString(R.string.just_ok), 
-                                       new DialogInterface.OnClickListener()
+            builder.setPositiveButton( res.getString(R.string.just_ok), new DialogInterface.OnClickListener()
             {
                 public void onClick(DialogInterface dialog,int which)
                 {
