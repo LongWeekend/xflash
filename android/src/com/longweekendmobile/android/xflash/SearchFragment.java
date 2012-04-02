@@ -9,6 +9,7 @@ package com.longweekendmobile.android.xflash;
 //  public View onCreateView(LayoutInflater  ,ViewGroup  ,Bundle  )     @over
 //  public void onPause()                                               @over
 //
+//  private void popKeyboard()
 //  private void addCard(View  )
 //  private void toggleStar(View  )
 //  private void performSearch()
@@ -33,7 +34,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,6 +55,7 @@ public class SearchFragment extends Fragment
     private EditText mySearch = null;
     private LayoutInflater myInflater;
     private InputMethodManager imm = null;
+    private TextView noResults = null;
     private ListView searchList;
 
     private Tag starredTag;
@@ -73,12 +74,11 @@ public class SearchFragment extends Fragment
 
         // inflate our layout for the Search activity
         LinearLayout searchLayout = (LinearLayout)inflater.inflate(R.layout.search, container, false);
+        noResults = (TextView)searchLayout.findViewById(R.id.no_searchresults);
 
         // load the title bar elements and pass them to the color manager
         RelativeLayout titleBar = (RelativeLayout)searchLayout.findViewById(R.id.search_heading);
-        Button cancelButton = (Button)searchLayout.findViewById(R.id.search_cancelbutton);
-  
-        XflashSettings.setupColorScheme(titleBar,cancelButton);
+        XflashSettings.setupColorScheme(titleBar);
         
         // set our listeners
         mySearch = (EditText)searchLayout.findViewById(R.id.search_text);
@@ -97,16 +97,7 @@ public class SearchFragment extends Fragment
         {
             // launch with the keyboard displayed if there are no
             // previously existing search results
-            mySearch.postDelayed( new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    mySearch.requestFocus();
-                    imm.showSoftInput(mySearch,0);
-                                                     
-                }
-            },300);
+            popKeyboard();
         }
      
         // turn on fading edge on scroll
@@ -131,6 +122,22 @@ public class SearchFragment extends Fragment
         membershipCacheArray = null;
 
     }  // end onPause
+
+   
+    // show the keyboard
+    private void popKeyboard()
+    {
+        mySearch.postDelayed( new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mySearch.requestFocus();
+                imm.showSoftInput(mySearch,0);
+            }
+        },300);
+
+    }  // end popKeyboard()
 
     
     // launch AddCardToTagFragment
@@ -192,6 +199,7 @@ public class SearchFragment extends Fragment
         // when they click 'done' on the keyboard,
         // search and hide keyboard
         mySearch.clearFocus();
+        noResults.setVisibility(View.GONE);
 
         AsyncSearch tempSearch = new AsyncSearch();
         tempSearch.execute();
@@ -266,8 +274,15 @@ public class SearchFragment extends Fragment
             
             // clear the progress dialog
             searchDialog.dismiss();
-        }  
 
+            // re-show the keyboard if there were no results
+            if( searchResults.size() == 0 )
+            {
+                noResults.setVisibility(View.VISIBLE);
+                popKeyboard();
+            }
+
+        }  // end onPostExecute()
     
     }  // end AsyncSearch declaration
 

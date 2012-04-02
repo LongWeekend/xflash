@@ -335,6 +335,17 @@ public class PracticeScreen
         int end = start + sub2.length();
         s.setSpan( new ForegroundColorSpan(0xFFEDF68C), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         
+        // set a click listener to link to Settings
+        tempView.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                summaryDialog.dismiss();
+                Xflash.getTabHost().setCurrentTabByTag("settings");
+            }
+        });
+        
         // set the table view 
             
         // set the right count

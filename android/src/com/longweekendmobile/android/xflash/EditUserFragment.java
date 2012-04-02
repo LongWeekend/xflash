@@ -11,7 +11,7 @@ package com.longweekendmobile.android.xflash;
 //  public static void setNew(boolean  )
 //  public static void loadUser(int  )
 //
-//  private void setSaveButton()
+//  private void setButtons()
 //  private void select()
 //  private void save()
 
@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.User;
 import com.longweekendmobile.android.xflash.model.UserPeer;
 
@@ -43,6 +44,7 @@ public class EditUserFragment extends Fragment
     
     private EditText myEdit;
     private Button saveButton;
+    private Button selectButton;
     
     // if we're editing, the user and previous nickname for the user selected
     private User myUser;
@@ -73,7 +75,7 @@ public class EditUserFragment extends Fragment
         
         // set the fragment label based on whether we're adding or editing
         TextView editLabel = (TextView)editUserLayout.findViewById(R.id.edit_user_label); 
-        Button setButton = (Button)editUserLayout.findViewById(R.id.edituser_selectbutton);
+        selectButton = (Button)editUserLayout.findViewById(R.id.edituser_selectbutton);
         myEdit = (EditText)editUserLayout.findViewById(R.id.edit_user_text);
         
         if( isNew )
@@ -82,7 +84,9 @@ public class EditUserFragment extends Fragment
             String tempTitle = getActivity().getResources().getString(R.string.new_user_title);
             editLabel.setText(tempTitle);
             
-            setButton.setVisibility(View.INVISIBLE);
+            selectButton.setVisibility(View.INVISIBLE);
+
+            oldName = "";
         }
         else
         {
@@ -90,7 +94,7 @@ public class EditUserFragment extends Fragment
             myUser = UserPeer.getUserByPK(incomingEditId);
  
             // set a click listener for the select button
-            setButton.setOnClickListener( new View.OnClickListener()
+            selectButton.setOnClickListener( new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -104,12 +108,12 @@ public class EditUserFragment extends Fragment
 
             editLabel.setText(oldName); 
             myEdit.setText(oldName);
-            
-            // add a text-changed listener to the EditText
-            myEdit.addTextChangedListener(editListener);
         }
 
-        setSaveButton();
+        // add a text-changed listener to the EditText
+        myEdit.addTextChangedListener(editListener);
+        
+        setButtons();
 
         // launch with the keyboard displayed
         myEdit.postDelayed( new Runnable()
@@ -142,29 +146,40 @@ public class EditUserFragment extends Fragment
     }
 
 
-    // sets the save button as visible/invisible depending on whether changes
+    // sets the buttons as visible/invisible depending on whether changes
     // have been made to the name
-    private void setSaveButton()
+    private void setButtons()
     {
-        if( isNew )
-        {
-            return;
-        }
-        
         String tempString = myEdit.getText().toString();
         
-        // if the entered content does NOT match the starting
-        // name, display the save button
-        if( tempString.compareTo(oldName) != 0 )
+        if( tempString.length() == 0 )
         {
-            saveButton.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+            // if our EditText is empty, no buttons
             saveButton.setVisibility(View.INVISIBLE);
+            selectButton.setVisibility(View.INVISIBLE);
+        }
+        else 
+        {
+            if( !isNew )
+            {
+                // alwasy display 'select' if we have text and it's
+                // NOT a new user
+                selectButton.setVisibility(View.VISIBLE);
+            }
+        
+            // if the entered content does NOT match the starting
+            // name, display the save button
+            if( tempString.compareTo(oldName) != 0 )
+            {
+                saveButton.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                saveButton.setVisibility(View.INVISIBLE);
+            }
         }
 
-    }  // end setSaveButton()
+    }  // end setButtons()
 
 
     // when the user clicks the 'select' button
@@ -173,6 +188,17 @@ public class EditUserFragment extends Fragment
         // set the user and return to the UserFragment
         XflashSettings.setCurrentUserId(incomingEditId);
 
+        // reset the active Tag to the new user
+        Tag activeTag = XflashSettings.getActiveTag();
+        activeTag.populateCards();
+        activeTag.setCurrentIndex(0);
+                
+        // TODO - kind of a hack, we're using an active tag broadcast to
+        //      - get practice to reset its current study counts.  But 
+        //      - that shouldn't be a problem, because no no else is
+        //      - listening for that notification
+        XFApplication.getNotifier().activeTagBroadcast();
+        
         save();
     }
 
@@ -221,7 +247,7 @@ public class EditUserFragment extends Fragment
 
         public void afterTextChanged(Editable text)
         {
-            setSaveButton();
+            setButtons();
         }
 
     };  // end editListener declaration

@@ -1,14 +1,4 @@
-- Tweet Card (in Practice, ActionBarViewController.m)
-
-- larger text size for example sentences
-
-- exception adding tags in practice
-
-- AddCard -> CreateTag in practice does not update on new tag
-
-- Create Tag does not check for zero input in EditText
-
-- Cancel button for search?
+- Tweet Card (in Practice)
 
 - kill backstack for browse mode
 
@@ -18,23 +8,11 @@
 
 - zippy example sentences unfolding
 
-- link in summary to settings view
-
 - help topics overlapping with next button?
-
-- kill 'no thanks' button on help -> Ask Us
 
 - SQL max attach?
 
-- change yellow button colors
-
-- kill ! for wrong streak in practice summary
-
-- Search - pop keyboard on null results
-         - center_vertical the EditText
-         - kill cancel button
-
-- Settings rate up button?
+- Settings rate button? - eventually open webkit to google play?
 
 - Settings footer
 
@@ -42,14 +20,6 @@
 
 - Tag, backup and restore
 
-- Tag Cards, default (no cards) view
+- Delete users?
 
-- Edit user, hide save button on blank EditText
-
-- Edit user, alert on save with blank EditText
-
-- Edit user, prompt text
-
-- User change, reload Practice values or something?
-
-- Delete users
+- AddCard -> CreateTag in practice does not update on new tag

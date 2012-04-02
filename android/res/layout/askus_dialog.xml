@@ -44,16 +44,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/help_dialog_emailbutton"
-        android:layout_marginBottom="16dp"
         android:gravity="center" /> 
     
+    <!-- temporarily set to GONE cause I'm not sure we need it -->
     <Button android:id="@+id/closebutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="@string/help_dialog_closebutton"
-        android:gravity="center" /> 
+        android:gravity="center"
+        android:visibility="gone"/> 
 
 </LinearLayout> 
 

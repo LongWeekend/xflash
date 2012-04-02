@@ -317,6 +317,9 @@ public class AddCardToTagFragment extends Fragment
     }  // end setupObservers()
     
 
+    // TODO - BUG - when this fragment is loaded modally inside of an 
+    //      - AddCardActivity, this code ALL EXECUTES, including the 
+    //      - refreshTagList(), however the view is not updated.
     private void updateFromNewTagObserver(Object passedObject)
     {
         // get the Tag that was just added
