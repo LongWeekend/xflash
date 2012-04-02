@@ -26,6 +26,8 @@
     <string name="copyerror_body">Uh oh, it looks like you don\'t have enough free space on your phone for Japanese Flash!  Please try clearing up some space and try again.</string>
     <string name="attacherror_title">Database attach failed!</string>
     <string name="attacherror_body">Uh oh, something went wrong initializing the databases for Japanese Flash!  Please exit and try again.</string>
+    <string name="nosd_title">SD Card not found!</string>
+    <string name="nosd_body">Uh oh!  You previously decided to install the Japanese Flash databasees on your SD card, but it is not currently available.  Please make sure the card is plugged in, and is not mounted for use by your computer, and try again.</string>
     <string name="pm_starred_yes">Remove from Starred</string>
     <string name="pm_starred_no">Add to Starred</string>
     <string name="pm_addtotag">Add to Study Set</string>
@@ -71,6 +73,7 @@
     <string name="createtag_edit_caption">Name your new study set!</string>
     <string name="create_tag_hint">e.g. Words I Heard on TV</string>
     <string name="search_hint">Enter search keyword</string>
+    <string name="search_no_results">No search results found!</string>
     <string name="settings_title">Settings</string>
     <string name="settings_study_block_title">Studying</string>
     <string name="settings_studyblock_studymode">Study Mode</string>
@@ -131,6 +134,8 @@
     <string name="firstrun_alert_message">We\'ve loaded our favorite word set to get you started.\n\nTo study other sets, tap the \'Study Sets\' tab below.</string>
     <string name="update_debug_title">Up\'dizzle?</string>
     <string name="update_debug_message">Fo\'shizzle!</string>
+    <string name="addtag_needname">Please enter a name!</string>
+    
 </resources>
 
 

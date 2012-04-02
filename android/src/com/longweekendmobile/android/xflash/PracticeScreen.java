@@ -80,7 +80,7 @@ public class PracticeScreen
     private static TextView hhView = null;
     private static TextView showReadingText = null;
     
-    private static int percentageRight = 100;
+    private static int percentageRight = 0;
         
     private static Tag currentTag = null;
     private static JapaneseCard currentCard = null;
@@ -334,6 +334,17 @@ public class PracticeScreen
         int start = sub1.length();
         int end = start + sub2.length();
         s.setSpan( new ForegroundColorSpan(0xFFEDF68C), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        
+        // set a click listener to link to Settings
+        tempView.setOnClickListener( new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                summaryDialog.dismiss();
+                Xflash.getTabHost().setCurrentTabByTag("settings");
+            }
+        });
         
         // set the table view 
             

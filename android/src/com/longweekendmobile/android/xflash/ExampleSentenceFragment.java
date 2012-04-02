@@ -53,6 +53,8 @@ public class ExampleSentenceFragment extends Fragment
     private Tag currentTag;
     private JapaneseCard currentCard;
 
+    private int answerTextSize;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -86,6 +88,8 @@ public class ExampleSentenceFragment extends Fragment
         esList = ExampleSentencePeer.getExampleSentencesByCardId( currentCard.getCardId() );
         XFApplication.getDao().detachDatabase(LWEDatabase.DB_EX);
 
+        answerTextSize = XflashSettings.getAnswerTextSize();
+
         // load each of the present sentences 
         int numSentences = esList.size();
         for(int i = 0; i < numSentences; i++)
@@ -104,10 +108,18 @@ public class ExampleSentenceFragment extends Fragment
             // set the Japanese sentence
             tempView = (TextView)esRow.findViewById(R.id.es_sentence_jp);
             tempView.setText( tempSentence.getJa() ); 
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
 
             // set the English sentence 
             tempView = (TextView)esRow.findViewById(R.id.es_sentence_en);
             tempView.setText( tempSentence.getEn() ); 
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(14.0f);
+            }
 
             // tag the 'read' button with the sentence id
             Button tempReadButton = (Button)esRow.findViewById(R.id.es_readbutton);
@@ -317,10 +329,19 @@ public class ExampleSentenceFragment extends Fragment
             // headword
             TextView tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_headword);
             tempView.setText( tempCard.headwordIgnoringMode(true) );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
+
 
             // reading
             tempView = (TextView)tempWordRow.findViewById(R.id.es_cardrow_reading);
             tempView.setText( tempCard.reading() );
+            if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
+            {
+                tempView.setTextSize(16.0f);
+            }
 
             // tag the button for addCard() with the card id
             Button tempAddButton = (Button)tempWordRow.findViewById(R.id.es_cardrow_button);

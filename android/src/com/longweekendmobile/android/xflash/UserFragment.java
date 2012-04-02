@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.User;
 import com.longweekendmobile.android.xflash.model.UserPeer;
 
@@ -154,8 +155,21 @@ public class UserFragment extends Fragment
         {
             public void onClick(DialogInterface dialog,int which)
             {
-                // set the new user and return to settings
+                // set the new user
                 XflashSettings.setCurrentUserId(switchUser);
+                
+                // reset the active Tag to the new user
+                Tag activeTag = XflashSettings.getActiveTag();
+                activeTag.populateCards();
+                activeTag.setCurrentIndex(0);
+                
+                // TODO - kind of a hack, we're using an active tag broadcast to
+                //      - get practice to reset its current study counts.  But 
+                //      - that shouldn't be a problem, because no no else is
+                //      - listening for that notification
+                XFApplication.getNotifier().activeTagBroadcast();
+                
+                // return to settings
                 Xflash.getActivity().onScreenTransition("settings",XflashScreen.DIRECTION_CLOSE);
             }
         });
