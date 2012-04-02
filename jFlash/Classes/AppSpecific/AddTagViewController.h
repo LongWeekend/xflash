@@ -13,10 +13,13 @@
 @interface AddTagViewController : UITableViewController <LWEAudioQueueDelegate>
 
 - (id) initWithCard:(Card*) card;
+- (id) initForExampleSentencesWithCard:(Card *)card;
 - (IBAction) addStudySet;
 
 @property (retain) NSArray *myTagArray;
 @property (retain) NSArray *sysTagArray;
+@property (retain) NSArray *sentencesArray;
 @property (retain) Card *currentCard;
+@property BOOL showExamplesCell;
 
 @end

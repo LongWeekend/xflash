@@ -11,12 +11,15 @@
 #import "SettingsViewController.h"
 #import "TagPeer.h"
 #import "ChineseCard.h"
+#import "ExampleSentencePeer.h"
+#import "DisplaySearchedSentenceViewController.h"
 
 enum AddTagSections
 {
   kAddTagEntrySection = 0,
-  kAddTagUserSection = 1,
-  kAddTagSystemSection = 2,
+  kAddTagExampleSentenceSection = 1,
+  kAddTagUserSection = 2,
+  kAddTagSystemSection = 3,
   kAddTagSectionCount
 };
 
@@ -33,7 +36,7 @@ enum EntrySectionRows
 @end
 
 @implementation AddTagViewController
-@synthesize myTagArray,sysTagArray,membershipCacheArray,currentCard;
+@synthesize myTagArray,sysTagArray,membershipCacheArray,sentencesArray,currentCard,showExamplesCell;
 
 #pragma mark - Initializer
 
@@ -51,6 +54,7 @@ enum EntrySectionRows
     self.currentCard = card;
     self.myTagArray = [TagPeer retrieveUserTagList];
     self.sysTagArray = [TagPeer retrieveSysTagListContainingCard:card];
+    self.showExamplesCell = NO;
     
     // Add "add" button to nav bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStudySet)];
@@ -69,7 +73,23 @@ enum EntrySectionRows
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadTableData) name:kSetWasAddedOrUpdated object:nil];
     
     // Set nav bar title
-    self.navigationItem.title = NSLocalizedString(@"Add Word To Sets",@"AddTagViewController.NavBarTitle");
+    self.navigationItem.title = NSLocalizedString(@"Add Card To Set",@"AddTagViewController.NavBarTitle");
+  }
+  return self;
+}
+
+- (id) initForExampleSentencesWithCard:(Card *)card
+{
+  if(self = [self initWithCard:card])
+  {
+    // Add the sentences for the card
+    self.sentencesArray = [ExampleSentencePeer getExampleSentencesByCardId:card.cardId];
+    if (self.sentencesArray > 0) 
+    {
+      self.showExamplesCell = YES;
+    }
+    // Set nav bar title
+    self.navigationItem.title = NSLocalizedString(@"Dictionary Entry",@"AddTagViewController.NavBarTitle");
   }
   return self;
 }
@@ -245,6 +265,14 @@ enum EntrySectionRows
   {
     i = kEntrySectionCount;
   }
+  else if (section == kAddTagExampleSentenceSection)
+  {
+    i = 0;
+    if ([self.sentencesArray count] > 0)
+    {
+      i = 1;
+    }
+  }
   return i;
 }
 
@@ -254,6 +282,10 @@ enum EntrySectionRows
   if (indexPath.section == kAddTagEntrySection)
   {
     cell = [LWEUITableUtils reuseCellForIdentifier:@"entry" onTable:tableView usingStyle:UITableViewCellStyleDefault];
+  }
+  else if (indexPath.section == kAddTagExampleSentenceSection)
+  {
+    cell = [LWEUITableUtils reuseCellForIdentifier:@"exampleSentence" onTable:tableView usingStyle:UITableViewCellStyleDefault];
   }
   else 
   {
@@ -289,6 +321,11 @@ enum EntrySectionRows
     [label adjustFrameWithFontSize:FONT_SIZE_ADD_TAG_VC
                          cellWidth:LWE_UITABLE_CELL_CONTENT_WIDTH
                         cellMargin:LWE_UITABLE_CELL_CONTENT_MARGIN];
+  }
+  else if (indexPath.section == kAddTagExampleSentenceSection)
+  {
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = NSLocalizedString(@"Example Sentences", @"Cell that displays example sentences");
   }
   // the cells for either tag type look the same
   else
@@ -355,6 +392,14 @@ enum EntrySectionRows
   {
     return 50.0f;
   }
+  else if (section == kAddTagExampleSentenceSection)
+  {
+    if (self.showExamplesCell == YES)
+    {
+      return 22.0f;
+    }
+    return 0.0f;
+  }
   else
   {
     return 44.0f;
@@ -384,6 +429,10 @@ enum EntrySectionRows
     NSString *text = [NSString stringWithFormat:@"[%@]\n%@", [self.currentCard reading], [self.currentCard meaningWithoutMarkup]];
     return [LWEUITableUtils autosizeHeightForCellWithText:text];
   }
+  else if (self.showExamplesCell == NO && indexPath.section == kAddTagExampleSentenceSection)
+  {
+    return 0.0f;
+  }
   else 
   {
     return 44.0f;
@@ -402,6 +451,14 @@ enum EntrySectionRows
   // do nothing for the entry section or system tags
   if (indexPath.section == kAddTagEntrySection || indexPath.section == kAddTagSystemSection)
   {
+    return;
+  }
+  
+  if (indexPath.section == kAddTagExampleSentenceSection)
+  {
+    DisplaySearchedSentenceViewController* sentenceVC = [[DisplaySearchedSentenceViewController alloc] initWithSentences:self.sentencesArray];
+    [self.navigationController pushViewController:sentenceVC animated:YES];
+    [sentenceVC release];
     return;
   }
 
@@ -423,10 +480,11 @@ enum EntrySectionRows
   [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:APP_THEME];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-  [myTagArray release];
-  [sysTagArray release];
-  [currentCard release];
-  [membershipCacheArray release];
+  self.myTagArray = nil;
+  self.sysTagArray = nil;
+  self.currentCard = nil;
+  self.membershipCacheArray = nil;
+  self.sentencesArray = nil;
   [super dealloc];
 }
 
