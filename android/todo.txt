@@ -1,7 +1,5 @@
 - Tweet Card (in Practice)
 
-- kill backstack for browse mode
-
 - tweak practice view clickable background
 
 - zippy example sentences unfolding

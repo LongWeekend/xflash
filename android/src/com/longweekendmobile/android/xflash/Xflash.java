@@ -143,27 +143,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // if the screen manager returned a fragment to go-back to (or exit)
         if( newTabTag != null )
         {
-            if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
-            {
-                // if we're browsing, set the next card ( + )
-                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
-                {
-                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_OPEN);
-                }
-                
-                onScreenTransition(newTabTag,XflashScreen.DIRECTION_OPEN); 
-            }
-            else
-            {
-                // if we're browsing, set the next card ( - )
-                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
-                {
-                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_CLOSE );
-                }
-                
-                onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
-            }
-
+            onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
         }
         else if( ( currentTab.tag == "tag" ) && ( TagFragment.getSearchOn() ) )
         {
