@@ -10,6 +10,7 @@ package com.longweekendmobile.android.xflash;
 //
 //  public static void setNeedLoad()
 //  public static void loadTag(int  )
+//  public static void dumpObservers()
 //
 //  private void addCard(View  )
 //  private void setupObservers()
@@ -128,7 +129,12 @@ public class TagCardsFragment extends Fragment
         incomingTagId = inId;
     }
 
-    
+    public static void dumpObservers()
+    {
+        subscriptionObserver = null;
+    }
+
+
     // launches AddCardToTagFragment
     private void addCard(View v)
     {

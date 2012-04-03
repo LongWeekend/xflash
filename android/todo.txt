@@ -1,9 +1,5 @@
 - Tweet Card (in Practice)
 
-- kill backstack for browse mode
-
-- what happens when you click on the hot head?
-
 - tweak practice view clickable background
 
 - zippy example sentences unfolding
@@ -19,7 +15,5 @@
 - Tag, alerts for backup and restore
 
 - Tag, backup and restore
-
-- Delete users?
 
 - AddCard -> CreateTag in practice does not update on new tag

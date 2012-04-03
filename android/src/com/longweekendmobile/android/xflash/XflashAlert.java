@@ -14,6 +14,7 @@ package com.longweekendmobile.android.xflash;
 //  public  void fireTagLearned(Tag  )
 //  public  void fireLastCardDialog(Tag  )
 //  public  void startStudying(View  )
+//  public  void deleteUserError(User  )
 //  private void fireStartStudyingDialog(Tag  )
 //  private void fireEmptyTagDialog()
 
@@ -24,6 +25,7 @@ import android.view.View;
 
 import com.longweekendmobile.android.xflash.model.Tag;
 import com.longweekendmobile.android.xflash.model.TagPeer;
+import com.longweekendmobile.android.xflash.model.User;
 
 public class XflashAlert 
 {
@@ -136,6 +138,39 @@ public class XflashAlert
         }
 
     }  // end startStudying()
+
+    public static void deleteUserError(User inUser)
+    {
+        Resources res = Xflash.getActivity().getResources();
+        
+        // set and fire our AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder( Xflash.getActivity() );
+
+        // set the title
+        String tempString = res.getString(R.string.user_deleteerror_title);
+        builder.setTitle(tempString);
+
+        // set the message
+        if( inUser.getUserId() == XflashSettings.LWE_DEFAULT_USER )
+        {
+            // if they are trying to delete the default user
+            tempString = res.getString(R.string.user_deleteerror_default_message);
+        }
+        else
+        {
+            // if they are trying to delete the active user
+            tempString = res.getString(R.string.user_deleteerror_active_message);
+            tempString = tempString.replace("##USERNAME##", inUser.getUserNickname() ); 
+        }
+        
+        builder.setMessage(tempString);
+
+        // on negative response, do nothing
+        builder.setNegativeButton( res.getString(R.string.just_ok) ,null);
+
+        builder.create().show();
+
+    }  // end deleteUserError()
 
 
     // launch the dialog to confirm user would like to start studying a tag

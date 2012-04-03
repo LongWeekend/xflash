@@ -118,7 +118,7 @@ public class ExampleSentenceFragment extends Fragment
             tempView.setText( tempSentence.getEn() ); 
             if( answerTextSize == XflashSettings.LWE_ANSWERTEXT_LARGE )
             {
-                tempView.setTextSize(14.0f);
+                tempView.setTextSize(16.0f);
             }
 
             // tag the 'read' button with the sentence id

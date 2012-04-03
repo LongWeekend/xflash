@@ -119,6 +119,7 @@ public class CreateTagActivity extends Activity
         
             XflashNotification theNotifier = XFApplication.getNotifier();
             theNotifier.setCardIdPassed(tempCardId); 
+            Log.d(MYTAG,">>> CreateTag sending Broadcast");
             theNotifier.newTagBroadcast(theNewTag);
         }
         else

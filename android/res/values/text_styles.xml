@@ -76,7 +76,7 @@
     </style>
     <style name="es_en">
         <item name="android:textColor">#FF111111</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="tag_text_top">
         <item name="android:textColor">#FF000000</item>

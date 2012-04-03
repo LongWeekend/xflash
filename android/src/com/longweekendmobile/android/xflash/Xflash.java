@@ -111,6 +111,9 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // clear the active tag since we're quitting
         XflashSettings.clearActiveTag();
 
+        // kill the observers
+        XflashSettings.dumpObservers();
+
         // wipes the currentGroup of the tag tab on app exit, necessary because of
         // static properties: if they exit the app in a group not the topLeveLGroup,
         // that group will then be reloaded as the root view for the tag tab if
@@ -143,27 +146,7 @@ public class Xflash extends FragmentActivity implements TabHost.OnTabChangeListe
         // if the screen manager returned a fragment to go-back to (or exit)
         if( newTabTag != null )
         {
-            if( ( newTabTag == "practice" ) && ( XflashScreen.getCurrentPracticeScreen() < 0 ) )
-            {
-                // if we're browsing, set the next card ( + )
-                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
-                {
-                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_OPEN);
-                }
-                
-                onScreenTransition(newTabTag,XflashScreen.DIRECTION_OPEN); 
-            }
-            else
-            {
-                // if we're browsing, set the next card ( - )
-                if( XflashSettings.getStudyMode() == XflashSettings.LWE_STUDYMODE_BROWSE )
-                {
-                    PracticeCardSelector.setBrowseCardByDirection(XflashScreen.DIRECTION_CLOSE );
-                }
-                
-                onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
-            }
-
+            onScreenTransition(newTabTag,XflashScreen.DIRECTION_CLOSE); 
         }
         else if( ( currentTab.tag == "tag" ) && ( TagFragment.getSearchOn() ) )
         {

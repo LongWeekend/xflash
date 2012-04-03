@@ -61,6 +61,8 @@
     <string name="tag_backup_now">Backup Now</string>
     <string name="tag_restore_now">Restore Now</string>
     <string name="tag_search_hint">Search Sets by Name</string>
+    <string name="tag_deletetag_title">Delete Study Sets</string>
+    <string name="tag_deletetag_message">Are you sure you want to delete the study set</string>
     <string name="emptyset_dialog_title">No Words In Set</string>
     <string name="emptyset_dialog_message">To add words to this set, you can use Search</string>
     <string name="startstudying_dialog_message">Do you want to start this set?\nProgress on your last set will be saved.</string>
@@ -104,6 +106,11 @@
     <string name="just_off">Off</string>
     <string name="user_title">Choose User</string>
     <string name="user_edit">edit</string>
+    <string name="user_deleteuser_title">Delete Users</string>
+    <string name="user_deleteuser_message">Are you sure you want to delete the user</string>
+    <string name="user_deleteerror_title">Cannot Delete User</string>
+    <string name="user_deleteerror_default_message">The default user can be edited, but not deleted.</string>
+    <string name="user_deleteerror_active_message">The user ##USERNAME## is currently active!  Please switch to a different user before deleting.</string>
     <string name="new_user_title">New User</string>
     <string name="edituser_nickname">Nickname:</string>
     <string name="edituser_selectbutton">Select User</string>
