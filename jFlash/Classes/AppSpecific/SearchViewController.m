@@ -37,19 +37,33 @@ const NSInteger KSegmentedTableHeader = 100;
 
 #pragma mark - Initializer
 
+- (void) _initClass
+{
+  // Default state
+  _searchState = kSearchNoSearch;
+
+  // Notification for when the card headword stlye changes
+  [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
+
+  // Register for notification when tag content changes (might be starred words.. in which case we want to know)
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+  if ((self = [super initWithCoder:aDecoder]))
+  {
+    [self _initClass];
+  }
+  return self;
+}
+
 /** Initializer to set up a table view, sets title & tab bar controller icon to "search" */
 - (id) init
 {
   if ((self = [super init]))
   {
-    // Default state
-    _searchState = kSearchNoSearch;
-    
-    // Notification for when the card headword stlye changes
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:APP_HEADWORD_TYPE options:NSKeyValueObservingOptionNew context:NULL];
-
-    // Register for notification when tag content changes (might be starred words.. in which case we want to know)
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagContentDidChange:) name:LWETagContentDidChange object:nil];
+    [self _initClass];
   }
   return self;
 }
@@ -438,7 +452,7 @@ const NSInteger KSegmentedTableHeader = 100;
 
   if (_searchState == kSearchHasResults)
   {
-    AddTagViewController *tagController = [[AddTagViewController alloc] initWithCard:[self.cardResultsArray objectAtIndex:indexPath.row]];
+    AddTagViewController *tagController = [[AddTagViewController alloc] initForExampleSentencesWithCard:[self.cardResultsArray objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:tagController animated:YES];
     [tagController release];
   }

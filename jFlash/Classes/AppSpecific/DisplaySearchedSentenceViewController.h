@@ -12,18 +12,14 @@
 #import "CardPeer.h"
 #import "AddTagViewController.h"
 
-#define SECTION_SENTENCE 0
+#define SENTENCE_ROW 0
 #define SECTION_CARDS 1
 
-@interface DisplaySearchedSentenceViewController : UITableViewController
-{
-  ExampleSentence *sentence;      //! holds reference to the ExampleSentence shown here
-  NSArray *cards;                 //! holds an array of all cards linked on this example sentence
-}
+@interface DisplaySearchedSentenceViewController : UITableViewController {}
 
-- (id) initWithSentence:(ExampleSentence*) initSentence;
+- (id) initWithSentences:(NSArray*) sentences;
 
-@property (nonatomic, retain) ExampleSentence *sentence;
-@property (nonatomic, retain) NSArray *cards;
+@property (nonatomic, retain) NSArray *sentenceArray;
+@property (nonatomic, retain) NSMutableArray *cards;
 
 @end

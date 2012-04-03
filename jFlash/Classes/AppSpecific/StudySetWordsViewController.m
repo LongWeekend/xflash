@@ -319,7 +319,7 @@
   // If they pressed a card, show the add to set list
   else if (indexPath.section == kWordSetListSections)
   {
-    AddTagViewController *tmpVC = [[AddTagViewController alloc] initWithCard:[self.cards objectAtIndex:indexPath.row]];
+    AddTagViewController *tmpVC = [[AddTagViewController alloc] initForExampleSentencesWithCard:[self.cards objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:tmpVC animated:YES];
     [tmpVC release];
   }

@@ -11,7 +11,6 @@
 #import "Plugin.h"
 #import "NSDate+LWEUtilities.h"
 #import "ASIHTTPRequest.h"
-#import "LWEPackageDownloader.h"
 
 extern NSString * const LWEPluginDidInstall;
 
